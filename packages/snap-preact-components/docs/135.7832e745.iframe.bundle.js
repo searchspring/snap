@@ -1231,7 +1231,7 @@
 						b = rgb[2] / 255,
 						v = Math.max(r, g, b),
 						diff = v - Math.min(r, g, b),
-						diffc = function diffc(c) {
+						diffc = function (c) {
 							return (v - c) / 6 / diff + 0.5;
 						};
 					return (
@@ -1269,7 +1269,7 @@
 					) {
 						var keyword = _Object$keys3[_i3],
 							value = cssKeywords[keyword],
-							distance = ((x = rgb), (y = value), Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2));
+							distance = ((y = value), ((x = rgb)[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2);
 						distance < currentClosestDistance && ((currentClosestDistance = distance), (currentClosestKeyword = keyword));
 					}
 					return currentClosestKeyword;
@@ -1283,9 +1283,9 @@
 						b = rgb[2] / 255;
 					return [
 						100 *
-							(0.4124 * (r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92) +
-								0.3576 * (g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92) +
-								0.1805 * (b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92)),
+							(0.4124 * (r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92) +
+								0.3576 * (g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92) +
+								0.1805 * (b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92)),
 						100 * (0.2126 * r + 0.7152 * g + 0.0722 * b),
 						100 * (0.0193 * r + 0.1192 * g + 0.9505 * b),
 					];
@@ -1295,16 +1295,11 @@
 						x = xyz[0],
 						y = xyz[1],
 						z = xyz[2];
-					return (
-						(y /= 100),
-						(z /= 108.883),
-						(x = (x /= 95.047) > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116),
-						[
-							116 * (y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116) - 16,
-							500 * (x - y),
-							200 * (y - (z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116)),
-						]
-					);
+					return [
+						116 * (y = (y /= 100) > 0.008856 ? y ** (1 / 3) : 7.787 * y + 16 / 116) - 16,
+						500 * ((x = (x /= 95.047) > 0.008856 ? x ** (1 / 3) : 7.787 * x + 16 / 116) - y),
+						200 * (y - (z = (z /= 108.883) > 0.008856 ? z ** (1 / 3) : 7.787 * z + 16 / 116)),
+					];
 				}),
 				(convert.hsl.rgb = function (hsl) {
 					var t2,
@@ -1420,11 +1415,9 @@
 						y = xyz[1] / 100,
 						z = xyz[2] / 100;
 					return (
-						(g = -0.9689 * x + 1.8758 * y + 0.0415 * z),
-						(b = 0.0557 * x + -0.204 * y + 1.057 * z),
-						(r = (r = 3.2406 * x + -1.5372 * y + -0.4986 * z) > 0.0031308 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : 12.92 * r),
-						(g = g > 0.0031308 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : 12.92 * g),
-						(b = b > 0.0031308 ? 1.055 * Math.pow(b, 1 / 2.4) - 0.055 : 12.92 * b),
+						(r = (r = 3.2406 * x + -1.5372 * y + -0.4986 * z) > 0.0031308 ? 1.055 * r ** (1 / 2.4) - 0.055 : 12.92 * r),
+						(g = (g = -0.9689 * x + 1.8758 * y + 0.0415 * z) > 0.0031308 ? 1.055 * g ** (1 / 2.4) - 0.055 : 12.92 * g),
+						(b = (b = 0.0557 * x + -0.204 * y + 1.057 * z) > 0.0031308 ? 1.055 * b ** (1 / 2.4) - 0.055 : 12.92 * b),
 						[255 * (r = Math.min(Math.max(0, r), 1)), 255 * (g = Math.min(Math.max(0, g), 1)), 255 * (b = Math.min(Math.max(0, b), 1))]
 					);
 				}),
@@ -1432,26 +1425,19 @@
 					var x = xyz[0],
 						y = xyz[1],
 						z = xyz[2];
-					return (
-						(y /= 100),
-						(z /= 108.883),
-						(x = (x /= 95.047) > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116),
-						[
-							116 * (y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116) - 16,
-							500 * (x - y),
-							200 * (y - (z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116)),
-						]
-					);
+					return [
+						116 * (y = (y /= 100) > 0.008856 ? y ** (1 / 3) : 7.787 * y + 16 / 116) - 16,
+						500 * ((x = (x /= 95.047) > 0.008856 ? x ** (1 / 3) : 7.787 * x + 16 / 116) - y),
+						200 * (y - (z = (z /= 108.883) > 0.008856 ? z ** (1 / 3) : 7.787 * z + 16 / 116)),
+					];
 				}),
 				(convert.lab.xyz = function (lab) {
 					var x,
 						y,
 						z,
-						l = lab[0];
-					(x = lab[1] / 500 + (y = (l + 16) / 116)), (z = y - lab[2] / 200);
-					var y2 = Math.pow(y, 3),
-						x2 = Math.pow(x, 3),
-						z2 = Math.pow(z, 3);
+						y2 = (y = (lab[0] + 16) / 116) ** 3,
+						x2 = (x = lab[1] / 500 + y) ** 3,
+						z2 = (z = y - lab[2] / 200) ** 3;
 					return (
 						(y = y2 > 0.008856 ? y2 : (y - 16 / 116) / 7.787),
 						(x = x2 > 0.008856 ? x2 : (x - 16 / 116) / 7.787),
@@ -1662,7 +1648,7 @@
 				Object.keys(routes).forEach(function (toModel) {
 					var fn = routes[toModel];
 					(convert[fromModel][toModel] = (function wrapRounded(fn) {
-						var wrappedFn = function wrappedFn() {
+						var wrappedFn = function () {
 							for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) args[_key2] = arguments[_key2];
 							var arg0 = args[0];
 							if (null == arg0) return arg0;
@@ -1674,7 +1660,7 @@
 						return 'conversion' in fn && (wrappedFn.conversion = fn.conversion), wrappedFn;
 					})(fn)),
 						(convert[fromModel][toModel].raw = (function wrapRaw(fn) {
-							var wrappedFn = function wrappedFn() {
+							var wrappedFn = function () {
 								for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
 								var arg0 = args[0];
 								return null == arg0 ? arg0 : (arg0.length > 1 && (args = arg0), fn(args));

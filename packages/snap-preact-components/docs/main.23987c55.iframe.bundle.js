@@ -1,4 +1,4 @@
-/*! For license information please see main.0dc3ed64.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.23987c55.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -49,8 +49,7 @@
 					BadgeWithContent: () => BadgeWithContent,
 					default: () => Badge_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -167,9 +166,9 @@
 					componentArgs.p
 				),
 			};
-			var BadgeWithContent = function Template(args) {
+			var BadgeWithContent = function BadgeWithContent(args) {
 				return (0, preact_module.h)(Badge.C, Object.assign({}, args));
-			}.bind({});
+			};
 			BadgeWithContent.args = { content: 'pink', position: { top: 0, right: 0 } };
 			var BadgeWithChildren = function BadgeWithChildren(args) {
 				return (0, preact_module.h)(
@@ -242,8 +241,7 @@
 					categoryPage: () => categoryPage,
 					default: () => Breadcrumbs_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
@@ -399,15 +397,16 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(Breadcrumbs, Object.assign({}, args));
-				},
-				categoryPage = Template.bind({});
+			var categoryPage = function categoryPage(args) {
+				return (0, preact_module.h)(Breadcrumbs, Object.assign({}, args));
+			};
 			categoryPage.args = {
 				data: [{ url: '/', label: 'Home' }, { url: '/', label: 'Collections' }, { url: '/', label: 'Appliances' }, { label: 'Fridge' }],
 				separator: '/',
 			};
-			var SearchPage = Template.bind({});
+			var SearchPage = function SearchPage(args) {
+				return (0, preact_module.h)(Breadcrumbs, Object.assign({}, args));
+			};
 			SearchPage.args = { data: [{ url: '/', label: 'Home' }, { label: 'Search' }] };
 		},
 		'./src/components/Atoms/Button/Button.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -419,8 +418,7 @@
 					Native: () => Native,
 					default: () => Button_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
@@ -581,28 +579,32 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(Button.z, Object.assign({}, args));
-				},
-				Default = Template.bind({});
+			var Default = function Default(args) {
+				return (0, preact_module.h)(Button.z, Object.assign({}, args));
+			};
 			Default.args = { content: 'Button' };
-			var Disabled = Template.bind({});
+			var Disabled = function Disabled(args) {
+				return (0, preact_module.h)(Button.z, Object.assign({}, args));
+			};
 			Disabled.args = { content: 'Button', disabled: !0 };
-			var Native = Template.bind({});
+			var Native = function Native(args) {
+				return (0, preact_module.h)(Button.z, Object.assign({}, args));
+			};
 			Native.args = { content: 'Button', native: !0 };
 		},
 		'./src/components/Atoms/Button/Button.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { z: () => Button });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_button = function button(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -611,22 +613,23 @@
 						backgroundColor = _ref.backgroundColor,
 						borderColor = _ref.borderColor,
 						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({
 						display: 'inline-flex',
 						padding: '5px 10px',
 						position: 'relative',
-						color: color || (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
+						color: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
 						outline: 0,
 						backgroundColor: backgroundColor || '#fff',
 						border:
 							'1px solid ' +
 							(borderColor ||
 								color ||
-								(null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) ||
+								(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) ||
 								'#333'),
 						'&:hover': {
 							cursor: 'pointer',
-							backgroundColor: (null === (_theme$colors3 = theme.colors) || void 0 === _theme$colors3 ? void 0 : _theme$colors3.hover) || '#f8f8f8',
+							backgroundColor:
+								(null == theme || null === (_theme$colors3 = theme.colors) || void 0 === _theme$colors3 ? void 0 : _theme$colors3.hover) || '#f8f8f8',
 						},
 						'&.ss__button--disabled': {
 							opacity: 0.7,
@@ -637,13 +640,13 @@
 					});
 				},
 				CSS_native = function native() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({});
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({});
 				},
-				Button = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__.Pi)(function (properties) {
+				Button = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -671,22 +674,21 @@
 						style = props.style,
 						elementProps = {
 							css: disableStyles ? [style] : _native ? [CSS_native(), style] : [CSS_button({ color, backgroundColor, borderColor, theme }), style],
-							className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__button', { 'ss__button--disabled': disabled }, className),
+							className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__button', { 'ss__button--disabled': disabled }, className),
 							disabled,
 							onClick: function onClick(e) {
 								return !disabled && _onClick && _onClick(e);
 							},
 						};
-					return (
-						(content || children) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-							null,
-							_native
-								? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('button', Object.assign({}, elementProps), content, children)
-								: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('div', Object.assign({}, elementProps), content, children)
-						)
-					);
+					return content || children
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+								null,
+								_native
+									? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('button', Object.assign({}, elementProps), content, children)
+									: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('div', Object.assign({}, elementProps), content, children)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null);
 				});
 		},
 		'./src/components/Atoms/Dropdown/Dropdown.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -700,8 +702,7 @@
 					StringChildren: () => StringChildren,
 					default: () => Dropdown_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
@@ -936,31 +937,31 @@
 					componentArgs.p
 				),
 			};
-			var Default = function Template(args) {
+			var Default = function Default(args) {
 				return (0, preact_module.h)(Dropdown.L, Object.assign({}, args));
-			}.bind({});
+			};
 			Default.args = { button: 'button text', content: 'content text' };
-			var ExternalState = function Template2(args) {
+			var ExternalState = function ExternalState(args) {
 				return (0, preact_module.h)(Dropdown.L, Object.assign({}, args));
-			}.bind({});
+			};
 			ExternalState.args = { button: 'button text', content: 'content text', open: !0 };
-			var JSXContent = function Template3(args) {
+			var JSXContent = function JSXContent(args) {
 				return (0, preact_module.h)(Dropdown.L, Object.assign({}, args));
-			}.bind({});
+			};
 			JSXContent.args = {
 				button: 'button text',
 				content: (0, preact_module.h)(Badge.C, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
 			};
-			var JSXChildren = function Template4(args) {
+			var JSXChildren = function JSXChildren(args) {
 				return (0, preact_module.h)(Dropdown.L, { button: args.button }, args.content);
-			}.bind({});
+			};
 			JSXChildren.args = {
 				button: 'button text',
 				content: (0, preact_module.h)(Badge.C, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
 			};
-			var StringChildren = function Template5(args) {
+			var StringChildren = function StringChildren(args) {
 				return (0, preact_module.h)(Dropdown.L, { button: args.button }, args.content);
-			}.bind({});
+			};
 			StringChildren.args = { button: 'button text', content: 'string content - (note this component receieved the open state as a prop)' };
 		},
 		'./src/components/Atoms/Dropdown/Dropdown.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -1037,7 +1038,7 @@
 					return (0, emotion_react_browser_esm.iv)({
 						position: 'relative',
 						'&.ss__dropdown--open': {
-							'& .ss__dropdown__content': { position: disableOverlay ? 'relative' : null, visibility: 'visible', opacity: 1 },
+							'& .ss__dropdown__content': { position: disableOverlay ? 'relative' : void 0, visibility: 'visible', opacity: 1 },
 						},
 						'.ss__dropdown__button': { cursor: disableOverlay ? 'default' : 'pointer' },
 						'.ss__dropdown__content': { position: 'absolute', minWidth: '100%', visibility: 'hidden', opacity: 0, top: 'auto', left: 0 },
@@ -1049,6 +1050,7 @@
 						_properties$theme$com,
 						showContent,
 						setShowContent,
+						innerRef,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ startOpen: !1 },
@@ -1081,33 +1083,33 @@
 						var _useState2 = _slicedToArray((0, hooks_module.eJ)(startOpen), 2);
 						(showContent = _useState2[0]), (setShowContent = _useState2[1]);
 					} else showContent = open;
-					var innerRef =
-							!disableClickOutside &&
-							(function useClickOutside(callback) {
-								var callbackRef = (0, hooks_module.sO)(),
-									innerRef = (0, hooks_module.sO)();
-								return (
-									(0, hooks_module.d4)(function () {
-										callbackRef.current = callback;
-									}),
-									(0, hooks_module.d4)(function () {
-										return (
-											document.addEventListener('click', handleClick),
-											function () {
-												return document.removeEventListener('click', handleClick);
-											}
-										);
-										function handleClick(e) {
-											innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
+					disableClickOutside ||
+						(innerRef = (function useClickOutside(callback) {
+							var callbackRef = (0, hooks_module.sO)(),
+								innerRef = (0, hooks_module.sO)();
+							return (
+								(0, hooks_module.d4)(function () {
+									callbackRef.current = callback;
+								}),
+								(0, hooks_module.d4)(function () {
+									return (
+										document.addEventListener('click', handleClick),
+										function () {
+											return document.removeEventListener('click', handleClick);
 										}
-									}, []),
-									innerRef
-								);
-							})(function (e) {
-								showContent && (disabled || (stateful && setShowContent(!1), onToggle && onToggle(e, !1)));
-							}),
-						toggleShowContent = function toggleShowContent(e) {
+									);
+									function handleClick(e) {
+										innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
+									}
+								}, []),
+								innerRef
+							);
+						})(function (e) {
+							showContent && (disabled || (stateful && setShowContent && setShowContent(!1), onToggle && onToggle(e, !1)));
+						}));
+					var toggleShowContent = function toggleShowContent(e) {
 							stateful &&
+								setShowContent &&
 								setShowContent(function (prev) {
 									return onToggle && onToggle(e, !prev), !prev;
 								});
@@ -1154,8 +1156,7 @@
 					Temperature: () => Temperature,
 					default: () => FormattedNumber_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
@@ -1435,14 +1436,17 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(FormattedNumber, Object.assign({}, args));
-				},
-				Default = Template.bind({});
+			var Default = function Default(args) {
+				return (0, preact_module.h)(FormattedNumber, Object.assign({}, args));
+			};
 			Default.args = { value: 1099.99 };
-			var Temperature = Template.bind({});
+			var Temperature = function Temperature(args) {
+				return (0, preact_module.h)(FormattedNumber, Object.assign({}, args));
+			};
 			Temperature.args = { value: 100, symbol: ' °C', decimalPlaces: 2 };
-			var Length = Template.bind({});
+			var Length = function Length(args) {
+				return (0, preact_module.h)(FormattedNumber, Object.assign({}, args));
+			};
 			Length.args = { value: 100, symbol: ' mm', decimalPlaces: 2 };
 		},
 		'./src/components/Atoms/Icon/Icon.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -1457,19 +1461,12 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-start.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
@@ -1482,6 +1479,7 @@
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				shiftColor = __webpack_require__('./src/utilities/shiftColor.ts'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -1655,9 +1653,9 @@
 				return (0, preact_module.h)(Icon.J, Object.assign({}, props));
 			};
 			Custom.args = { color: '#00cee1', icon: 'cog', size: '60px' };
-			var CustomPath = function Template(props) {
+			var CustomPath = function CustomPath(props) {
 				return (0, preact_module.h)(Icon.J, Object.assign({}, props));
-			}.bind({});
+			};
 			CustomPath.args = {
 				path: 'M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z',
 				size: '70px',
@@ -1672,41 +1670,25 @@
 					},
 					Object.keys(paths.N).map(function (icon, index) {
 						return (0,
-						preact_module.h)('div', { style: 'margin-bottom: 40px;' }, (0, preact_module.h)(Icon.J, { icon, color: shiftColor('#3a23ad', (index + '111').padStart(6, '1')), size: '40px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
+						preact_module.h)('div', { style: 'margin-bottom: 40px;' }, (0, preact_module.h)(Icon.J, { icon, color: (0, shiftColor.R)('#3a23ad', (index + '111').padStart(6, '1')), size: '40px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
 					})
 				);
 			};
-			function shiftColor(base, change) {
-				var colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
-				if (!base || !change) return '#000000';
-				if (!base.match(colorRegEx) || !change.match(colorRegEx)) return '#000000';
-				(base = base.replace(/\#/g, '')), (change = change.replace(/\#/g, ''));
-				for (var newColor = '', i = 0; i < 3; i++) {
-					var newPiece = void 0;
-					newColor += newPiece =
-						(newPiece = (newPiece =
-							(newPiece = parseInt(base.substring(2 * i, 2 * i + 2), 16) + parseInt(change.substring(2 * i, 2 * i + 2), 16)) > 255
-								? 255
-								: newPiece).toString(16)).length < 2
-							? '0' + newPiece
-							: newPiece;
-				}
-				return '#' + newColor;
-			}
 			Gallery.parameters = { controls: { expanded: !1, disabled: !0 }, options: { showPanel: !1 } };
 		},
 		'./src/components/Atoms/Icon/Icon.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { J: () => Icon });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
-				_paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				_paths__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				CSS_icon = function icon(_ref) {
 					var _theme$colors,
 						color = _ref.color,
@@ -1714,8 +1696,8 @@
 						width = _ref.width,
 						size = _ref.size,
 						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
-						fill: color || (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+						fill: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
 						width: width || size,
 						height: height || size,
 						position: 'relative',
@@ -1725,7 +1707,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.a)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 					theme = Object.assign({}, globalTheme, properties.theme),
 					props = Object.assign(
 						{ size: '16px', viewBox: '0 0 56 56' },
@@ -1750,26 +1732,27 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
-					iconPath = _paths__WEBPACK_IMPORTED_MODULE_4__.N[icon] || path,
+					iconPath = _paths__WEBPACK_IMPORTED_MODULE_5__.N[icon] || path,
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_icon({ color, width, height, size, theme }), style]),
-					iconPath &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-								'svg',
-								Object.assign({}, styling, {
-									className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
-									viewBox,
-									xmlns: 'http://www.w3.org/2000/svg',
-									width: disableStyles && (width || size),
-									height: disableStyles && (height || size),
-								}),
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)('path', { fill: disableStyles && color, d: iconPath })
-							)
-						)
+					iconPath
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+									'svg',
+									Object.assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
+										viewBox,
+										xmlns: 'http://www.w3.org/2000/svg',
+										width: disableStyles ? width || size : void 0,
+										height: disableStyles ? height || size : void 0,
+									}),
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('path', { fill: disableStyles ? color : void 0, d: iconPath })
+								)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null)
 				);
 			}
 		},
@@ -1864,7 +1847,6 @@
 					onhover: () => onhover,
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
@@ -2113,20 +2095,25 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(Image.E, Object.assign({}, args, { style: { width: '100%' } }));
-				},
-				Default = Template.bind({});
+			var Default = function Default(args) {
+				return (0, preact_module.h)(Image.E, Object.assign({}, args, { style: { width: '100%' } }));
+			};
 			Default.args = { src: searchResponse.kZ.results[6].mappings.core.imageUrl, alt: searchResponse.kZ.results[6].mappings.core.name };
-			var BrokenImg = Template.bind({});
+			var BrokenImg = function BrokenImg(args) {
+				return (0, preact_module.h)(Image.E, Object.assign({}, args, { style: { width: '100%' } }));
+			};
 			BrokenImg.args = { src: 'intentionally_broken_image.jpg', alt: searchResponse.kZ.results[6].mappings.core.name };
-			var ManualFallBack = Template.bind({});
+			var ManualFallBack = function ManualFallBack(args) {
+				return (0, preact_module.h)(Image.E, Object.assign({}, args, { style: { width: '100%' } }));
+			};
 			ManualFallBack.args = {
 				src: 'intentionally_broken_image.jpg',
 				alt: searchResponse.kZ.results[5].mappings.core.name,
 				fallback: searchResponse.kZ.results[5].mappings.core.imageUrl,
 			};
-			var onhover = Template.bind({});
+			var onhover = function onhover(args) {
+				return (0, preact_module.h)(Image.E, Object.assign({}, args, { style: { width: '100%' } }));
+			};
 			onhover.args = {
 				src: searchResponse.kZ.results[6].mappings.core.imageUrl,
 				alt: searchResponse.kZ.results[6].mappings.core.name,
@@ -2276,7 +2263,7 @@
 									return _onClick && _onClick(e);
 								},
 								onError: function onError(e) {
-									(e.target.src = fallback), _onError && _onError(e);
+									(e.target.src = fallback || ''), _onError && _onError(e);
 								},
 								onMouseOver: function onMouseOver(e) {
 									hoverSrc && setHover(!0), _onMouseOver && _onMouseOver(e);
@@ -2294,8 +2281,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Active: () => Active, default: () => LoadingBar_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -2324,7 +2310,7 @@
 							zIndex: '10000',
 							background:
 								backgroundColor ||
-								(null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.secondary) ||
+								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.secondary) ||
 								'#f8f8f8',
 							'& .ss__loading-bar__bar': {
 								position: 'absolute',
@@ -2332,7 +2318,10 @@
 								left: '-200px',
 								height: '100%',
 								background:
-									'' + (color || (null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) || '#ccc'),
+									'' +
+									(color ||
+										(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) ||
+										'#ccc'),
 								animation: animation + ' 2s linear infinite',
 							},
 						});
@@ -2377,16 +2366,17 @@
 					disableStyles
 						? style && (styling.css = [style])
 						: (styling.css = [CSS.loadingBar({ height, color, backgroundColor, theme, animation: CSS.animation }), style]),
-					active &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								Object.assign({}, styling, { className: classnames_default()('ss__loading-bar', className) }),
-								(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__loading-bar__bar' })
-							)
-						)
+					active
+						? (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									Object.assign({}, styling, { className: classnames_default()('ss__loading-bar', className) }),
+									(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__loading-bar__bar' })
+								)
+						  )
+						: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 				);
 			}
 			var componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -2494,9 +2484,9 @@
 					componentArgs.p
 				),
 			};
-			var Active = function Template(args) {
+			var Active = function Active(args) {
 				return (0, preact_module.h)(LoadingBar, Object.assign({}, args));
-			}.bind({});
+			};
 			Active.args = { active: !0 };
 		},
 		'./src/components/Atoms/Merchandising/Banner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -2512,7 +2502,6 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -2534,12 +2523,12 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
-			var preact__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
-				_Banner__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/utilities/componentArgs.ts'),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/utilities/snapify.ts'),
-				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/components/Atoms/Merchandising/readme.md');
+			var preact__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				_Banner__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/utilities/componentArgs.ts'),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/utilities/snapify.ts'),
+				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/readme.md');
 			function _regeneratorRuntime() {
 				_regeneratorRuntime = function _regeneratorRuntime() {
 					return exports;
@@ -2928,16 +2917,16 @@
 			}
 			const __WEBPACK_DEFAULT_EXPORT__ = {
 				title: 'Atoms/Banner',
-				component: _Banner__WEBPACK_IMPORTED_MODULE_27__.j,
+				component: _Banner__WEBPACK_IMPORTED_MODULE_26__.j,
 				parameters: {
 					docs: {
 						page: function page() {
-							return (0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
+							return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
 								'div',
 								null,
-								(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_28__.Z, null),
-								(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__.$4, {
-									story: _storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__.Uh,
+								(0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_27__.Z, null),
+								(0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__.$4, {
+									story: _storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__.Uh,
 								})
 							);
 						},
@@ -2958,19 +2947,19 @@
 							control: { type: 'select', options: ['header', 'footer', 'left', 'inline', 'banner'] },
 						},
 					},
-					_utilities__WEBPACK_IMPORTED_MODULE_29__.p
+					_utilities__WEBPACK_IMPORTED_MODULE_28__.p
 				),
 			};
-			var snapInstance = _utilities_snapify__WEBPACK_IMPORTED_MODULE_30__.K.search({
+			var snapInstance = _utilities_snapify__WEBPACK_IMPORTED_MODULE_29__.K.search({
 					id: 'Banner',
 					globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } },
 				}),
-				Template = function Template(args, _ref) {
+				Header = function Header(args, _ref) {
 					var _controller$store,
 						_controller$store$mer,
 						controller = _ref.loaded.controller;
-					return (0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
-						_Banner__WEBPACK_IMPORTED_MODULE_27__.j,
+					return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
+						_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
 						Object.assign({}, args, {
 							content:
 								null == controller ||
@@ -2982,8 +2971,7 @@
 									: _controller$store$mer.content,
 						})
 					);
-				},
-				Header = Template.bind({});
+				};
 			(Header.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -3003,7 +2991,24 @@
 				),
 			]),
 				(Header.args = { type: 'header' });
-			var Footer = Template.bind({});
+			var Footer = function Footer(args, _ref3) {
+				var _controller$store2,
+					_controller$store2$me,
+					controller = _ref3.loaded.controller;
+				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
+					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+					Object.assign({}, args, {
+						content:
+							null == controller ||
+							null === (_controller$store2 = controller.store) ||
+							void 0 === _controller$store2 ||
+							null === (_controller$store2$me = _controller$store2.merchandising) ||
+							void 0 === _controller$store2$me
+								? void 0
+								: _controller$store2$me.content,
+					})
+				);
+			};
 			(Footer.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -3023,7 +3028,24 @@
 				),
 			]),
 				(Footer.args = { type: 'footer' });
-			var Secondary = Template.bind({});
+			var Secondary = function Secondary(args, _ref5) {
+				var _controller$store3,
+					_controller$store3$me,
+					controller = _ref5.loaded.controller;
+				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
+					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+					Object.assign({}, args, {
+						content:
+							null == controller ||
+							null === (_controller$store3 = controller.store) ||
+							void 0 === _controller$store3 ||
+							null === (_controller$store3$me = _controller$store3.merchandising) ||
+							void 0 === _controller$store3$me
+								? void 0
+								: _controller$store3$me.content,
+					})
+				);
+			};
 			(Secondary.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee3() {
@@ -3043,7 +3065,24 @@
 				),
 			]),
 				(Secondary.args = { type: 'banner' });
-			var Left = Template.bind({});
+			var Left = function Left(args, _ref7) {
+				var _controller$store4,
+					_controller$store4$me,
+					controller = _ref7.loaded.controller;
+				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
+					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+					Object.assign({}, args, {
+						content:
+							null == controller ||
+							null === (_controller$store4 = controller.store) ||
+							void 0 === _controller$store4 ||
+							null === (_controller$store4$me = _controller$store4.merchandising) ||
+							void 0 === _controller$store4$me
+								? void 0
+								: _controller$store4$me.content,
+					})
+				);
+			};
 			(Left.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee4() {
@@ -3069,25 +3108,27 @@
 			__webpack_require__.d(__webpack_exports__, { j: () => Banner });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/types.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/providers/cache.tsx'),
+				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
+				),
 				CSS_banner = function banner() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
 				};
 			function Banner(properties) {
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					_content$type,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
 					props = Object.assign(
-						{ content: [], type: '' },
+						{},
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 							? void 0
 							: _globalTheme$componen.banner,
@@ -3104,27 +3145,33 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style;
-				if (type !== _types__WEBPACK_IMPORTED_MODULE_5__.$.INLINE) {
-					var styling = {};
+				if (type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_6__.z.INLINE)
 					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_banner(), style]),
-						content &&
-							(null === (_content$type = content[type]) || void 0 === _content$type ? void 0 : _content$type.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+						console.warn(
+							"BannerType '" + _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_6__.z.INLINE + "' is not supported in <Banner /> component"
+						),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(preact__WEBPACK_IMPORTED_MODULE_2__.HY, null)
+					);
+				var bannerContent,
+					styling = {};
+				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_banner(), style]),
+					content && content[type] && (bannerContent = content[type]),
+					bannerContent && bannerContent.length
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_7__.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
 									'div',
 									Object.assign(
-										{ className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__banner', 'ss__banner--' + type, className) },
+										{ className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss__banner', 'ss__banner--' + type, className) },
 										styling,
-										{ dangerouslySetInnerHTML: { __html: content[props.type].join('') } }
+										{ dangerouslySetInnerHTML: { __html: bannerContent.join('') } }
 									)
 								)
-							)
-					);
-				}
-				console.warn("BannerType '" + _types__WEBPACK_IMPORTED_MODULE_5__.$.INLINE + "' is not supported in <Banner /> component");
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(preact__WEBPACK_IMPORTED_MODULE_2__.HY, null)
+				);
 			}
 		},
 		'./src/components/Atoms/Merchandising/InlineBanner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -3134,7 +3181,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -3569,9 +3616,9 @@
 				argTypes: Object.assign(
 					{
 						banner: {
-							description: 'InlineBanner content store reference',
+							description: 'Banner object reference',
 							type: { required: !0 },
-							table: { type: { summary: 'inline banner content store object' } },
+							table: { type: { summary: 'inline banner store object' } },
 							control: { type: 'none' },
 						},
 						layout: {
@@ -3599,29 +3646,30 @@
 					id: 'InlineBanner',
 					globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } },
 				}),
-				Default = function Template(args, _ref) {
+				Default = function Default(args, _ref) {
 					var _controller$store,
-						_controller$store$mer,
-						_controller$store$mer2,
+						_controller$store$res,
 						controller = _ref.loaded.controller,
 						inlineBanners =
 							null == controller ||
 							null === (_controller$store = controller.store) ||
 							void 0 === _controller$store ||
-							null === (_controller$store$mer = _controller$store.merchandising) ||
-							void 0 === _controller$store$mer ||
-							null === (_controller$store$mer2 = _controller$store$mer.content) ||
-							void 0 === _controller$store$mer2
+							null === (_controller$store$res = _controller$store.results) ||
+							void 0 === _controller$store$res
 								? void 0
-								: _controller$store$mer2.inline;
+								: _controller$store$res
+										.filter(function (result) {
+											return 'banner' === result.type;
+										})
+										.pop();
 					return (
 						inlineBanners &&
 						(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
 							_InlineBanner__WEBPACK_IMPORTED_MODULE_27__.f,
-							Object.assign({ banner: inlineBanners[0] }, args)
+							Object.assign({}, args, { banner: inlineBanners })
 						)
 					);
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -3645,23 +3693,24 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { f: () => InlineBanner });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
-				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/types.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/types.ts'),
 				CSS_inlineBanner = function inlineBanner(_ref) {
 					var width = _ref.width;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
 						height: '100%',
 						display: 'flex',
 						flexDirection: 'column',
 						justifyContent: 'center',
 						alignItems: 'center',
-						width: width || 'auto',
+						width,
 						'&.ss__inline-banner--grid': { flexDirection: 'column' },
 						'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
 						'& iframe': { maxWidth: '100%' },
@@ -3671,9 +3720,9 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.a)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 					props = Object.assign(
-						{ layout: _types__WEBPACK_IMPORTED_MODULE_4__.Ar.GRID, banner: {} },
+						{ layout: _types__WEBPACK_IMPORTED_MODULE_5__.Ar.GRID, width: 'auto' },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 							? void 0
 							: _globalTheme$componen.inlineBanner,
@@ -3695,25 +3744,25 @@
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_inlineBanner({ width }), style]),
-					banner &&
-						banner.value &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-								'div',
-								Object.assign(
-									{
-										onClick: function onClick(e) {
-											_onClick && _onClick(e);
+					banner && banner.value
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+									'div',
+									Object.assign(
+										{
+											onClick: function onClick(e) {
+												_onClick && _onClick(e);
+											},
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className),
 										},
-										className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className),
-									},
-									styling,
-									{ dangerouslySetInnerHTML: { __html: banner.value } }
+										styling,
+										{ dangerouslySetInnerHTML: { __html: banner.value } }
+									)
 								)
-							)
-						)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null)
 				);
 			}
 		},
@@ -3721,8 +3770,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Overlay_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Overlay = __webpack_require__('./src/components/Atoms/Overlay/Overlay.tsx'),
@@ -3831,9 +3879,9 @@
 					componentArgs.p
 				),
 			};
-			var Default = function Template(args) {
+			var Default = function Default(args) {
 				return (0, preact_module.h)(Overlay.a, Object.assign({}, args));
-			}.bind({});
+			};
 			Default.args = { active: !0 };
 		},
 		'./src/components/Atoms/Overlay/Overlay.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -3917,8 +3965,7 @@
 					default: () => Price_stories,
 					lineThrough: () => lineThrough,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
@@ -4067,14 +4114,17 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(Price.t, Object.assign({}, args));
-				},
-				Default = Template.bind({});
+			var Default = function Default(args) {
+				return (0, preact_module.h)(Price.t, Object.assign({}, args));
+			};
 			Default.args = { value: 1099.99 };
-			var lineThrough = Template.bind({});
+			var lineThrough = function lineThrough(args) {
+				return (0, preact_module.h)(Price.t, Object.assign({}, args));
+			};
 			lineThrough.args = { value: 1199.99, lineThrough: !0 };
-			var CustomCurrency = Template.bind({});
+			var CustomCurrency = function CustomCurrency(args) {
+				return (0, preact_module.h)(Price.t, Object.assign({}, args));
+			};
 			CustomCurrency.args = { value: 999.99, symbol: ' €', thousandsSeparator: '.', decimalSeparator: ',', symbolAfter: !0 };
 		},
 		'./src/components/Atoms/Price/Price.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -4092,7 +4142,7 @@
 					var _theme$colors,
 						theme = _ref.theme;
 					return (0, emotion_react_browser_esm.iv)({
-						color: null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
+						color: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
 						'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
 					});
 				};
@@ -4152,8 +4202,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Circle: () => Circle, Default: () => Default, default: () => Skeleton_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -4389,9 +4438,9 @@
 					componentArgs.p
 				),
 			};
-			var Default = function Template(args) {
+			var Default = function Default(args) {
 				return (0, preact_module.h)(Skeleton, Object.assign({}, args));
-			}.bind({});
+			};
 			Default.args = { width: '100px', height: '100px' };
 			var Circle = function Circle(args) {
 				return (0, preact_module.h)(Skeleton, Object.assign({}, args));
@@ -4410,19 +4459,14 @@
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-start.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js');
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				shiftColor = __webpack_require__('./src/utilities/shiftColor.ts'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -4461,12 +4505,12 @@
 						'Additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
-							'Swiper API parameters'
+							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Component Props'
 						),
-						' can be specified as props, but may need to be camelCased where appropriate.'
+						' can be specified, but may need to be camelCased where appropriate.'
 					),
-					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel>{children}<Carousel/>\n')),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel>{children}</Carousel>\n')),
 					(0, esm.kt)('h3', { id: 'loop' }, 'loop'),
 					(0, esm.kt)(
 						'p',
@@ -4475,7 +4519,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'loop'),
 						" prop enables 'infinite' looping through the result set when swiping or using the arrow buttons."
 					),
-					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel loop>{children}<Carousel/>\n')),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel loop>{children}</Carousel>\n')),
 					(0, esm.kt)('h3', { id: 'pagination' }, 'pagination'),
 					(0, esm.kt)(
 						'p',
@@ -4487,7 +4531,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination>{children}<Carousel/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
 					(0, esm.kt)(
@@ -4500,7 +4544,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel vertical>{children}<Carousel/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel vertical>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidebuttons' }, 'hideButtons'),
 					(0, esm.kt)(
@@ -4513,7 +4557,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel hideButtons>{children}<Carousel/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel hideButtons>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
 					(0, esm.kt)(
@@ -4526,7 +4570,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel prevButton={'<'}>{children}<Carousel/>\n")
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel prevButton={'<'}>{children}</Carousel>\n")
 					),
 					(0, esm.kt)('h3', { id: 'nextbutton' }, 'nextButton'),
 					(0, esm.kt)(
@@ -4539,7 +4583,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel nextButton={'>'}>{children}<Carousel/>\n")
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel nextButton={'>'}>{children}</Carousel>\n")
 					),
 					(0, esm.kt)('h3', { id: 'onprevbuttonclick' }, 'onPrevButtonClick'),
 					(0, esm.kt)(
@@ -4555,7 +4599,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}<Carousel/>\n'
+							'<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}</Carousel>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'onnextbuttonclick' }, 'onNextButtonClick'),
@@ -4572,7 +4616,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel onNextButtonClick={() => { /* do something */ }}>{children}<Carousel/>\n'
+							'<Carousel onNextButtonClick={() => { /* do something */ }}>{children}</Carousel>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'onclick' }, 'onClick'),
@@ -4589,7 +4633,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}<Carousel/>\n'
+							'<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}</Carousel>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'oninit' }, 'onInit'),
@@ -4606,7 +4650,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>\n'
+							'<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}</Carousel>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'autoadjustslides' }, 'autoAdjustSlides'),
@@ -4667,7 +4711,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel breakpoints={defaultCarouselBreakpoints}>{children}<Carousel/>\n'
+							'<Carousel breakpoints={defaultCarouselBreakpoints}>{children}</Carousel>\n'
 						)
 					)
 				);
@@ -4752,7 +4796,7 @@
 						Object.assign({}, props),
 						colors.map(function (number, index) {
 							return (0,
-							preact_module.h)('div', { style: { height: '100px', width: '100px', background: shiftColor('#3a23ad', (index + '111').padStart(6, '0')), margin: '0 auto' } });
+							preact_module.h)('div', { style: { height: '100px', width: '100px', background: (0, shiftColor.R)('#3a23ad', (index + '111').padStart(6, '0')), margin: '0 auto' } });
 						})
 					);
 				};
@@ -4763,27 +4807,10 @@
 					Object.assign({}, props),
 					Object.keys(paths.N).map(function (icon, index) {
 						return (0,
-						preact_module.h)('div', { style: { margin: '0 auto', textAlign: 'center' } }, (0, preact_module.h)(Icon.J, { icon, color: shiftColor('#3a23ad', (index + '111').padStart(6, '1')), size: '80px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
+						preact_module.h)('div', { style: { margin: '0 auto', textAlign: 'center' } }, (0, preact_module.h)(Icon.J, { icon, color: (0, shiftColor.R)('#3a23ad', (index + '111').padStart(6, '1')), size: '80px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
 					})
 				);
 			};
-			function shiftColor(base, change) {
-				var colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
-				if (!base || !change) return '#000000';
-				if (!base.match(colorRegEx) || !change.match(colorRegEx)) return '#000000';
-				(base = base.replace(/\#/g, '')), (change = change.replace(/\#/g, ''));
-				for (var newColor = '', i = 0; i < 3; i++) {
-					var newPiece = void 0;
-					newColor += newPiece =
-						(newPiece = (newPiece =
-							(newPiece = parseInt(base.substring(2 * i, 2 * i + 2), 16) + parseInt(change.substring(2 * i, 2 * i + 2), 16)) > 255
-								? 255
-								: newPiece).toString(16)).length < 2
-							? '0' + newPiece
-							: newPiece;
-				}
-				return '#' + newColor;
-			}
 		},
 		'./src/components/Molecules/Carousel/Carousel.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -4797,25 +4824,26 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_8__),
-				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_9___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_9__),
+				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
 					'breakpoints',
@@ -4860,10 +4888,10 @@
 						_theme$colors2,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
 						display: 'flex',
 						maxWidth: '100%',
-						maxHeight: vertical ? '100%' : null,
+						maxHeight: vertical ? '100%' : void 0,
 						margin: 0,
 						padding: 0,
 						overflow: 'hidden',
@@ -4899,7 +4927,7 @@
 							overflow: 'hidden',
 							listStyle: 'none',
 							padding: 0,
-							zIndex: 1,
+							zIndex: '1',
 						},
 						'.swiper-container-vertical': { '.swiper-wrapper': { flexDirection: 'column' } },
 						'.swiper-wrapper': {
@@ -4907,7 +4935,7 @@
 							position: 'relative',
 							width: '100%',
 							height: '100%',
-							zIndex: 1,
+							zIndex: '1',
 							display: 'flex',
 							transitionProperty: 'transform',
 							boxSizing: 'content-box',
@@ -4949,12 +4977,12 @@
 					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
 				},
 				defaultVerticalCarouselBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
-				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -4976,10 +5004,10 @@
 								? void 0
 								: _properties$theme$com.carousel
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_11__.o)(props.breakpoints);
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__.o)(props.breakpoints);
 					if (displaySettings && Object.keys(displaySettings).length) {
 						var _props,
-							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_8___default()(
+							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_9___default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
 								(null == displaySettings ? void 0 : displaySettings.theme) || {}
 							);
@@ -5012,102 +5040,107 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_13__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						};
-					swiper_core__WEBPACK_IMPORTED_MODULE_13__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z]);
-					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
-						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
-						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
+					swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z]);
+					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
+						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
+						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
-						children &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_16__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-									'div',
-									Object.assign({ ref: rootComponentRef }, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
-									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+						null != children && children.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_17__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 										'div',
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__prev-wrapper', {
-												'ss__carousel__prev-wrapper--hidden': hideButtons,
-											}),
-										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										Object.assign({ ref: rootComponentRef }, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
+												'ss__carousel',
+												vertical ? 'ss__carousel-vertical' : '',
+												className
+											),
+										}),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
 											{
-												className: 'ss__carousel__prev',
-												ref: navigationPrevRef,
-												onClick:
-													onPrevButtonClick &&
-													function (e) {
-														return onPrevButtonClick(e);
-													},
+												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__carousel__prev-wrapper', {
+													'ss__carousel__prev-wrapper--hidden': hideButtons,
+												}),
 											},
-											prevButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__.J,
-													Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
-												)
-										)
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										swiper_react__WEBPACK_IMPORTED_MODULE_18__.t,
-										Object.assign(
-											{
-												centerInsufficientSlides: !0,
-												onInit: function onInit(swiper) {
-													(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
-														(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
-														_onInit && _onInit(swiper);
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+												'div',
+												{
+													className: 'ss__carousel__prev',
+													ref: navigationPrevRef,
+													onClick:
+														onPrevButtonClick &&
+														function (e) {
+															return onPrevButtonClick(e);
+														},
 												},
-												onClick: function onClick(swiper, e) {
-													_onClick && _onClick(swiper, e);
-												},
-												direction: vertical ? 'vertical' : 'horizontal',
-												loop,
-												pagination: !!pagination && { clickable: !0 },
-											},
-											additionalProps,
-											displaySettings
+												prevButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+														Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
+													)
+											)
 										),
-										children.map(function (child) {
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_19__.o, null, child);
-										})
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										'div',
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__next-wrapper', {
-												'ss__carousel__next-wrapper--hidden': hideButtons,
-											}),
-										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+											swiper_react__WEBPACK_IMPORTED_MODULE_19__.t,
+											Object.assign(
+												{
+													centerInsufficientSlides: !0,
+													onInit: function onInit(swiper) {
+														(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
+															(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
+															_onInit && _onInit(swiper);
+													},
+													onClick: function onClick(swiper, e) {
+														_onClick && _onClick(swiper, e);
+													},
+													direction: vertical ? 'vertical' : 'horizontal',
+													loop,
+													pagination: !!pagination && { clickable: !0 },
+												},
+												additionalProps,
+												displaySettings
+											),
+											children.map(function (child) {
+												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_20__.o, null, child);
+											})
+										),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
 											{
-												className: 'ss__carousel__next',
-												ref: navigationNextRef,
-												onClick:
-													onNextButtonClick &&
-													function (e) {
-														return onNextButtonClick(e);
-													},
+												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__carousel__next-wrapper', {
+													'ss__carousel__next-wrapper--hidden': hideButtons,
+												}),
 											},
-											nextButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__.J,
-													Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
-												)
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+												'div',
+												{
+													className: 'ss__carousel__next',
+													ref: navigationNextRef,
+													onClick:
+														onNextButtonClick &&
+														function (e) {
+															return onNextButtonClick(e);
+														},
+												},
+												nextButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+														Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
+													)
+											)
 										)
 									)
-								)
-							)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(preact__WEBPACK_IMPORTED_MODULE_5__.HY, null)
 					);
 				});
 		},
@@ -5122,7 +5155,6 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -5351,13 +5383,16 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
+			var Default = function Default(args) {
 					return (0, preact_module.h)(Checkbox.X, Object.assign({}, args));
 				},
-				Default = Template.bind({}),
-				Disabled = Template.bind({});
+				Disabled = function Disabled(args) {
+					return (0, preact_module.h)(Checkbox.X, Object.assign({}, args));
+				};
 			Disabled.args = { checked: !0, disabled: !0 };
-			var Native = Template.bind({});
+			var Native = function Native(args) {
+				return (0, preact_module.h)(Checkbox.X, Object.assign({}, args));
+			};
 			Native.args = { native: !0 };
 		},
 		'./src/components/Molecules/Checkbox/Checkbox.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -5445,7 +5480,9 @@
 						width: size,
 						border:
 							'1px solid ' +
-							(color || (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333'),
+							(color ||
+								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
+								'#333'),
 						'&.ss__checkbox--disabled': { opacity: 0.7 },
 						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + size + ' - 30%)', height: 'calc(' + size + ' - 30%)' },
 					});
@@ -5496,7 +5533,9 @@
 									: _globalTheme$componen2.icon,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_17__.r)({
 									color:
-										iconColor || color || (null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary),
+										iconColor ||
+										color ||
+										(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary),
 									disableStyles,
 									icon,
 									size: size && 'calc(' + size + ' - 30%)',
@@ -5512,6 +5551,7 @@
 					var clickFunc = function clickFunc(e) {
 							disabled ||
 								(stateful &&
+									setCheckedState &&
 									setCheckedState(function (prev) {
 										return !prev;
 									}),
@@ -5575,8 +5615,7 @@
 					Warning: () => Warning,
 					default: () => ErrorHandler_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
@@ -5646,14 +5685,15 @@
 						'& .ss__error-handler__button': {
 							backgroundColor: 'white',
 							color: 'inherit',
-							borderColor: null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
+							borderColor: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
 							width: ['150px', 'fit-content'],
 							margin: '5px 10px',
 							'.ss__icon': { marginRight: '5px' },
 						},
 						'&.ss__error-handler--error': {
 							backgroundColor: LightenDarkenColor(
-								(null === (_theme$colors2 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors2 = theme.colors) ||
 								void 0 === _theme$colors2 ||
 								null === (_theme$colors2$messag = _theme$colors2.message) ||
 								void 0 === _theme$colors2$messag
@@ -5662,7 +5702,8 @@
 								180
 							),
 							borderLeftColor:
-								(null === (_theme$colors3 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors3 = theme.colors) ||
 								void 0 === _theme$colors3 ||
 								null === (_theme$colors3$messag = _theme$colors3.message) ||
 								void 0 === _theme$colors3$messag
@@ -5671,7 +5712,8 @@
 							'.ss__error-handler__message': {
 								'.ss__icon': {
 									fill:
-										(null === (_theme$colors4 = theme.colors) ||
+										(null == theme ||
+										null === (_theme$colors4 = theme.colors) ||
 										void 0 === _theme$colors4 ||
 										null === (_theme$colors4$messag = _theme$colors4.message) ||
 										void 0 === _theme$colors4$messag
@@ -5682,7 +5724,8 @@
 						},
 						'&.ss__error-handler--warning': {
 							backgroundColor: LightenDarkenColor(
-								(null === (_theme$colors5 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors5 = theme.colors) ||
 								void 0 === _theme$colors5 ||
 								null === (_theme$colors5$messag = _theme$colors5.message) ||
 								void 0 === _theme$colors5$messag
@@ -5691,7 +5734,8 @@
 								180
 							),
 							borderLeftColor:
-								(null === (_theme$colors6 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors6 = theme.colors) ||
 								void 0 === _theme$colors6 ||
 								null === (_theme$colors6$messag = _theme$colors6.message) ||
 								void 0 === _theme$colors6$messag
@@ -5699,7 +5743,8 @@
 									: _theme$colors6$messag.warning) || '#ffff00',
 							'.ss__icon': {
 								fill:
-									(null === (_theme$colors7 = theme.colors) ||
+									(null == theme ||
+									null === (_theme$colors7 = theme.colors) ||
 									void 0 === _theme$colors7 ||
 									null === (_theme$colors7$messag = _theme$colors7.message) ||
 									void 0 === _theme$colors7$messag
@@ -5708,7 +5753,8 @@
 							},
 							'.ss__error-handler__button': {
 								borderColor:
-									(null === (_theme$colors8 = theme.colors) ||
+									(null == theme ||
+									null === (_theme$colors8 = theme.colors) ||
 									void 0 === _theme$colors8 ||
 									null === (_theme$colors8$messag = _theme$colors8.message) ||
 									void 0 === _theme$colors8$messag
@@ -5718,7 +5764,8 @@
 						},
 						'&.ss__error-handler--info': {
 							backgroundColor: LightenDarkenColor(
-								(null === (_theme$colors9 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors9 = theme.colors) ||
 								void 0 === _theme$colors9 ||
 								null === (_theme$colors9$messag = _theme$colors9.message) ||
 								void 0 === _theme$colors9$messag
@@ -5727,7 +5774,8 @@
 								180
 							),
 							borderLeftColor:
-								(null === (_theme$colors10 = theme.colors) ||
+								(null == theme ||
+								null === (_theme$colors10 = theme.colors) ||
 								void 0 === _theme$colors10 ||
 								null === (_theme$colors10$messa = _theme$colors10.message) ||
 								void 0 === _theme$colors10$messa
@@ -5736,7 +5784,8 @@
 							'.ss__error-handler__message': {
 								'.ss__icon': {
 									fill:
-										(null === (_theme$colors11 = theme.colors) ||
+										(null == theme ||
+										null === (_theme$colors11 = theme.colors) ||
 										void 0 === _theme$colors11 ||
 										null === (_theme$colors11$messa = _theme$colors11.message) ||
 										void 0 === _theme$colors11$messa
@@ -5800,63 +5849,63 @@
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_errorHandler({ theme }), style]),
-						Object.values(types.N).includes(null == errorObject ? void 0 : errorObject.type) &&
-							(null == errorObject ? void 0 : errorObject.message) &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									Object.assign(
-										{ className: classnames_default()('ss__error-handler', 'ss__error-handler--' + errorObject.type, className) },
-										styling
-									),
-									(function () {
-										switch (errorObject.type) {
-											case types.N.WARNING:
-												return (0, emotion_react_browser_esm.tZ)(
-													preact_module.HY,
-													null,
-													(0, emotion_react_browser_esm.tZ)(
+						Object.values(types.N).includes(null == errorObject ? void 0 : errorObject.type) && null != errorObject && errorObject.message
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										Object.assign(
+											{ className: classnames_default()('ss__error-handler', 'ss__error-handler--' + errorObject.type, className) },
+											styling
+										),
+										(function () {
+											switch (errorObject.type) {
+												case types.N.WARNING:
+													return (0, emotion_react_browser_esm.tZ)(
+														preact_module.HY,
+														null,
+														(0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: 'ss__error-handler__message' },
+															(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'warn' })),
+															(0, emotion_react_browser_esm.tZ)('b', null, 'Warning: '),
+															errorObject.message
+														),
+														429 == (null == errorObject ? void 0 : errorObject.code)
+															? (0, emotion_react_browser_esm.tZ)(
+																	Button.z,
+																	Object.assign({}, subProps.button, {
+																		onClick: function onClick(e) {
+																			onRetryClick ? onRetryClick(e) : null == controller || controller.search();
+																		},
+																	}),
+																	(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'rotate-right' })),
+																	'Reload'
+															  )
+															: null
+													);
+												case types.N.ERROR:
+													return (0, emotion_react_browser_esm.tZ)(
 														'div',
 														{ className: 'ss__error-handler__message' },
-														(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'warn' })),
-														(0, emotion_react_browser_esm.tZ)('b', null, 'Warning: '),
+														(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'error' })),
+														(0, emotion_react_browser_esm.tZ)('b', null, 'Error: '),
 														errorObject.message
-													),
-													429 == (null == errorObject ? void 0 : errorObject.code)
-														? (0, emotion_react_browser_esm.tZ)(
-																Button.z,
-																Object.assign({}, subProps.button, {
-																	onClick: function onClick(e) {
-																		onRetryClick ? onRetryClick(e) : null == controller || controller.search();
-																	},
-																}),
-																(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'rotate-right' })),
-																'Reload'
-														  )
-														: null
-												);
-											case types.N.ERROR:
-												return (0, emotion_react_browser_esm.tZ)(
-													'div',
-													{ className: 'ss__error-handler__message' },
-													(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'error' })),
-													(0, emotion_react_browser_esm.tZ)('b', null, 'Error: '),
-													errorObject.message
-												);
-											case types.N.INFO:
-												return (0, emotion_react_browser_esm.tZ)(
-													'div',
-													{ className: 'ss__error-handler__message' },
-													(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'info' })),
-													(0, emotion_react_browser_esm.tZ)('b', null, 'Info: '),
-													errorObject.message
-												);
-										}
-									})()
-								)
-							)
+													);
+												case types.N.INFO:
+													return (0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__error-handler__message' },
+														(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'info' })),
+														(0, emotion_react_browser_esm.tZ)('b', null, 'Info: '),
+														errorObject.message
+													);
+											}
+										})()
+									)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -5994,16 +6043,21 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(ErrorHandler, Object.assign({}, args));
-				},
-				Warning = Template.bind({});
+			var Warning = function Warning(args) {
+				return (0, preact_module.h)(ErrorHandler, Object.assign({}, args));
+			};
 			Warning.args = { controller: { store: { error: { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' } } } };
-			var Error = Template.bind({});
+			var Error = function Error(args) {
+				return (0, preact_module.h)(ErrorHandler, Object.assign({}, args));
+			};
 			Error.args = { controller: { store: { error: { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' } } } };
-			var Info = Template.bind({});
+			var Info = function Info(args) {
+				return (0, preact_module.h)(ErrorHandler, Object.assign({}, args));
+			};
 			Info.args = { controller: { store: { error: { code: 200, type: types.N.INFO, message: 'Something important happened' } } } };
-			var CustomError = Template.bind({});
+			var CustomError = function CustomError(args) {
+				return (0, preact_module.h)(ErrorHandler, Object.assign({}, args));
+			};
 			CustomError.args = { error: { type: types.N.INFO, message: 'Custom error using info type' } };
 		},
 		'./src/components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx': (
@@ -6021,7 +6075,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -6629,10 +6682,10 @@
 										.pop();
 					return (0, preact_module.h)(FacetGridOptions.v, Object.assign({}, args, { values: sizeFacet.values }));
 				}),
-				Default = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableFacetGridOptions, { args, controller });
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -6661,14 +6714,15 @@
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.link.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_grid = function grid(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -6679,7 +6733,7 @@
 						columns = _ref.columns,
 						gapSize = _ref.gapSize,
 						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
 						display: 'flex',
 						flexFlow: 'row wrap',
 						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
@@ -6692,7 +6746,8 @@
 								alignItems: 'center',
 								flex: '0 1 auto',
 								border:
-									'1px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333'),
+									'1px solid ' +
+									((null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333'),
 								textAlign: 'center',
 								wordBreak: 'break-all',
 								boxSizing: 'border-box',
@@ -6702,8 +6757,11 @@
 							}),
 							(_ss__facetGridOp[':nth-of-type(' + columns + 'n)'] = { marginRight: '0' }),
 							(_ss__facetGridOp['&.ss__facet-grid-options__option--filtered'] = {
-								background: (null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) || '#ccc',
+								background:
+									(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) ||
+									'#ccc',
 								color:
+									null == theme ||
 									null === (_theme$colors3 = theme.colors) ||
 									void 0 === _theme$colors3 ||
 									null === (_theme$colors3$text = _theme$colors3.text) ||
@@ -6713,7 +6771,9 @@
 							}),
 							(_ss__facetGridOp['&:hover:not(.ss__facet-grid-options__option--filtered)'] = {
 								cursor: 'pointer',
-								background: (null === (_theme$colors4 = theme.colors) || void 0 === _theme$colors4 ? void 0 : _theme$colors4.hover) || '#f8f8f8',
+								background:
+									(null == theme || null === (_theme$colors4 = theme.colors) || void 0 === _theme$colors4 ? void 0 : _theme$colors4.hover) ||
+									'#f8f8f8',
 							}),
 							(_ss__facetGridOp['& .ss__facet-grid-options__option__value'] = {
 								'&.ss__facet-grid-options__option__value--smaller': { fontSize: '70%' },
@@ -6727,11 +6787,11 @@
 						},
 					});
 				},
-				FacetGridOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				FacetGridOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ columns: 4, gapSize: '8px' },
@@ -6758,59 +6818,60 @@
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_grid({ columns, gapSize, theme }), style]),
-						(null == values ? void 0 : values.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-									'div',
-									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options', className) }),
-									values.map(function (value) {
-										var _value$url, _value$url$link;
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'a',
-											Object.assign(
-												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option', {
-														'ss__facet-grid-options__option--filtered': value.filtered,
-													}),
-													onFocus: function onFocus() {
-														return previewOnFocus && value.preview && value.preview();
+						null != values && values.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										'div',
+										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options', className) }),
+										values.map(function (value) {
+											var _value$url, _value$url$link;
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'a',
+												Object.assign(
+													{
+														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option', {
+															'ss__facet-grid-options__option--filtered': value.filtered,
+														}),
+														onFocus: function onFocus() {
+															return previewOnFocus && value.preview && value.preview();
+														},
 													},
-												},
-												valueProps,
-												{
-													href:
-														null === (_value$url = value.url) ||
-														void 0 === _value$url ||
-														null === (_value$url$link = _value$url.link) ||
-														void 0 === _value$url$link
-															? void 0
-															: _value$url$link.href,
-													onClick: function onClick(e) {
-														var _value$url2, _value$url2$link;
-														null === (_value$url2 = value.url) ||
-															void 0 === _value$url2 ||
-															null === (_value$url2$link = _value$url2.link) ||
-															void 0 === _value$url2$link ||
-															_value$url2$link.onClick(e),
-															_onClick && _onClick(e);
+													valueProps,
+													{
+														href:
+															null === (_value$url = value.url) ||
+															void 0 === _value$url ||
+															null === (_value$url$link = _value$url.link) ||
+															void 0 === _value$url$link
+																? void 0
+																: _value$url$link.href,
+														onClick: function onClick(e) {
+															var _value$url2, _value$url2$link;
+															null === (_value$url2 = value.url) ||
+																void 0 === _value$url2 ||
+																null === (_value$url2$link = _value$url2.link) ||
+																void 0 === _value$url2$link ||
+																_value$url2$link.onClick(e),
+																_onClick && _onClick(e);
+														},
+													}
+												),
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+													'span',
+													{
+														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option__value', {
+															'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+														}),
 													},
-												}
-											),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-												'span',
-												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option__value', {
-														'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-													}),
-												},
-												value.label
-											)
-										);
-									})
-								)
-							)
+													value.label
+												)
+											);
+										})
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
 					);
 				});
 		},
@@ -6830,7 +6891,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -7361,10 +7421,10 @@
 										.values.slice(0, 12);
 					return (0, preact_module.h)(FacetHierarchyOptions.j, Object.assign({}, args, { values: hierarchyValues }));
 				}),
-				Default = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableFacetHierarchyOptions, { args, controller });
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -7397,20 +7457,21 @@
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.link.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_hierarchy = function hierarchy(_ref) {
 					var _theme$colors,
 						_theme$colors2,
 						_theme$colors3,
 						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
 						'& .ss__facet-hierarchy-options__option': {
 							display: 'flex',
 							padding: '6px 0',
@@ -7440,11 +7501,11 @@
 						},
 					});
 				},
-				FacetHierarchyOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				FacetHierarchyOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -7470,67 +7531,68 @@
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_hierarchy({ theme }), style]),
-						(null == values ? void 0 : values.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-									'div',
-									Object.assign({}, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-hierarchy-options', className),
-									}),
-									values.map(function (value) {
-										var _value$url, _value$url$link;
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'a',
-											Object.assign(
-												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
-														'ss__facet-hierarchy-options__option',
-														{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-														{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
-													),
-													href:
-														null === (_value$url = value.url) ||
-														void 0 === _value$url ||
-														null === (_value$url$link = _value$url.link) ||
-														void 0 === _value$url$link
-															? void 0
-															: _value$url$link.href,
-													onClick: function onClick(e) {
-														var _value$url2, _value$url2$link;
-														null === (_value$url2 = value.url) ||
-															void 0 === _value$url2 ||
-															null === (_value$url2$link = _value$url2.link) ||
-															void 0 === _value$url2$link ||
-															_value$url2$link.onClick(e),
-															_onClick && _onClick(e);
+						null != values && values.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										'div',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-hierarchy-options', className),
+										}),
+										values.map(function (value) {
+											var _value$url, _value$url$link;
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'a',
+												Object.assign(
+													{
+														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
+															'ss__facet-hierarchy-options__option',
+															{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+															{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+														),
+														href:
+															null === (_value$url = value.url) ||
+															void 0 === _value$url ||
+															null === (_value$url$link = _value$url.link) ||
+															void 0 === _value$url$link
+																? void 0
+																: _value$url$link.href,
+														onClick: function onClick(e) {
+															var _value$url2, _value$url2$link;
+															null === (_value$url2 = value.url) ||
+																void 0 === _value$url2 ||
+																null === (_value$url2$link = _value$url2.link) ||
+																void 0 === _value$url2$link ||
+																_value$url2$link.onClick(e),
+																_onClick && _onClick(e);
+														},
+														onFocus: function onFocus() {
+															return previewOnFocus && value.preview && value.preview();
+														},
 													},
-													onFocus: function onFocus() {
-														return previewOnFocus && value.preview && value.preview();
-													},
-												},
-												valueProps
-											),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-												'span',
-												{ className: 'ss__facet-hierarchy-options__option__value' },
-												value.label,
-												!hideCount &&
-													value.count > 0 &&
-													!value.filtered &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-														'span',
-														{ className: 'ss__facet-hierarchy-options__option__value__count' },
-														'(',
-														value.count,
-														')'
-													)
-											)
-										);
-									})
-								)
-							)
+													valueProps
+												),
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+													'span',
+													{ className: 'ss__facet-hierarchy-options__option__value' },
+													value.label,
+													!hideCount &&
+														(null == value ? void 0 : value.count) > 0 &&
+														!value.filtered &&
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+															'span',
+															{ className: 'ss__facet-hierarchy-options__option__value__count' },
+															'(',
+															value.count,
+															')'
+														)
+												)
+											);
+										})
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
 					);
 				});
 		},
@@ -7549,7 +7611,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -8169,10 +8230,10 @@
 										.pop();
 					return (0, preact_module.h)(FacetListOptions.X, Object.assign({}, args, { values: brandFacet.values }));
 				}),
-				Default = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableFacetListOptions, { args, controller });
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -8201,22 +8262,23 @@
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.link.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/utilities/defined.ts'),
-				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defined.ts'),
+				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
 				CSS_list = function list(_ref) {
 					var _theme$colors,
 						_theme$colors2,
 						theme = _ref.theme,
 						hideCheckbox = _ref.hideCheckbox;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
 						'& .ss__facet-list-options__option': {
 							display: 'flex',
 							padding: '6px',
@@ -8224,11 +8286,11 @@
 							alignItems: 'center',
 							'&:hover': {
 								cursor: 'pointer',
-								background: null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.hover,
+								background: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.hover,
 							},
 							'&.ss__facet-list-options__option--filtered': {
 								fontWeight: 'bold',
-								color: null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary,
+								color: null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary,
 							},
 							'& .ss__facet-list-options__option__value': {
 								marginLeft: hideCheckbox ? '' : '8px',
@@ -8237,12 +8299,12 @@
 						},
 					});
 				},
-				FacetListOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				FacetListOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -8272,76 +8334,77 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.checkbox,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles }),
-								{ theme: props.theme }
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_list({ theme, hideCheckbox }), style]),
-						(null == values ? void 0 : values.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-									'div',
-									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options', className) }),
-									values.map(function (value) {
-										var _value$url, _value$url$link;
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'a',
-											Object.assign(
-												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options__option', {
-														'ss__facet-list-options__option--filtered': value.filtered,
-													}),
-													onFocus: function onFocus() {
-														return previewOnFocus && value.preview && value.preview();
+						null != values && values.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_12__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										'div',
+										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options', className) }),
+										values.map(function (value) {
+											var _value$url, _value$url$link;
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'a',
+												Object.assign(
+													{
+														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options__option', {
+															'ss__facet-list-options__option--filtered': value.filtered,
+														}),
+														onFocus: function onFocus() {
+															return previewOnFocus && value.preview && value.preview();
+														},
 													},
-												},
-												valueProps,
-												{
-													href:
-														null === (_value$url = value.url) ||
-														void 0 === _value$url ||
-														null === (_value$url$link = _value$url.link) ||
-														void 0 === _value$url$link
-															? void 0
-															: _value$url$link.href,
-													onClick: function onClick(e) {
-														var _value$url2, _value$url2$link;
-														null === (_value$url2 = value.url) ||
-															void 0 === _value$url2 ||
-															null === (_value$url2$link = _value$url2.link) ||
-															void 0 === _value$url2$link ||
-															_value$url2$link.onClick(e),
-															_onClick && _onClick(e);
-													},
-												}
-											),
-											!hideCheckbox &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__.X,
-													Object.assign({}, subProps.checkbox, { checked: value.filtered })
+													valueProps,
+													{
+														href:
+															null === (_value$url = value.url) ||
+															void 0 === _value$url ||
+															null === (_value$url$link = _value$url.link) ||
+															void 0 === _value$url$link
+																? void 0
+																: _value$url$link.href,
+														onClick: function onClick(e) {
+															var _value$url2, _value$url2$link;
+															null === (_value$url2 = value.url) ||
+																void 0 === _value$url2 ||
+																null === (_value$url2$link = _value$url2.link) ||
+																void 0 === _value$url2$link ||
+																_value$url2$link.onClick(e),
+																_onClick && _onClick(e);
+														},
+													}
 												),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-												'span',
-												{ className: 'ss__facet-list-options__option__value' },
-												value.label,
-												!hideCount &&
-													value.count > 0 &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-														'span',
-														{ className: 'ss__facet-list-options__option__value__count' },
-														'(',
-														value.count,
-														')'
-													)
-											)
-										);
-									})
-								)
-							)
+												!hideCheckbox &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+														_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__.X,
+														Object.assign({}, subProps.checkbox, { checked: value.filtered })
+													),
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+													'span',
+													{ className: 'ss__facet-list-options__option__value' },
+													value.label,
+													!hideCount &&
+														(null == value ? void 0 : value.count) > 0 &&
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+															'span',
+															{ className: 'ss__facet-list-options__option__value__count' },
+															'(',
+															value.count,
+															')'
+														)
+												)
+											);
+										})
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
 					);
 				});
 		},
@@ -8360,7 +8423,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -9026,10 +9088,10 @@
 										.pop();
 					return (0, preact_module.h)(FacetPaletteOptions.m, Object.assign({}, args, { values: sizeFacet.values }));
 				}),
-				Default = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableFacetPaletteOptions, { args, controller });
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -9058,7 +9120,8 @@
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.link.js');
-			var emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js');
@@ -9104,7 +9167,8 @@
 							}),
 							(_ss__facetPalette['&.ss__facet-palette-options__option--filtered'] = {
 								'& .ss__facet-palette-options__option__wrapper': {
-									borderColor: (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333',
+									borderColor:
+										(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333',
 									padding: '0px',
 									borderWidth: '4px',
 								},
@@ -9147,7 +9211,7 @@
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
-							{ values: [], columns: 4, gapSize: '8px' },
+							{ columns: 4, gapSize: '8px' },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.facetPaletteOptions,
@@ -9177,73 +9241,75 @@
 									? void 0
 									: _globalTheme$componen2.icon,
 								(0, defined.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
-						(null == values ? void 0 : values.length) &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									Object.assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
-									values.map(function (value) {
-										var _value$url, _value$url$link;
-										return (0, emotion_react_browser_esm.tZ)(
-											'a',
-											Object.assign(
-												{
-													className: classnames_default()('ss__facet-palette-options__option', {
-														'ss__facet-palette-options__option--filtered': value.filtered,
-													}),
-													'aria-label': value.value,
-													onFocus: function onFocus() {
-														return previewOnFocus && value.preview && value.preview();
+						null != values && values.length
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										Object.assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
+										values.map(function (value) {
+											var _value$url, _value$url$link;
+											return (0, emotion_react_browser_esm.tZ)(
+												'a',
+												Object.assign(
+													{
+														className: classnames_default()('ss__facet-palette-options__option', {
+															'ss__facet-palette-options__option--filtered': value.filtered,
+														}),
+														'aria-label': value.value,
+														onFocus: function onFocus() {
+															return previewOnFocus && value.preview && value.preview();
+														},
 													},
-												},
-												valueProps,
-												{
-													href:
-														null === (_value$url = value.url) ||
-														void 0 === _value$url ||
-														null === (_value$url$link = _value$url.link) ||
-														void 0 === _value$url$link
-															? void 0
-															: _value$url$link.href,
-													onClick: function onClick(e) {
-														var _value$url2, _value$url2$link;
-														null === (_value$url2 = value.url) ||
-															void 0 === _value$url2 ||
-															null === (_value$url2$link = _value$url2.link) ||
-															void 0 === _value$url2$link ||
-															_value$url2$link.onClick(e),
-															_onClick && _onClick(e);
-													},
-												}
-											),
-											(0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__facet-palette-options__option__wrapper' },
+													valueProps,
+													{
+														href:
+															null === (_value$url = value.url) ||
+															void 0 === _value$url ||
+															null === (_value$url$link = _value$url.link) ||
+															void 0 === _value$url$link
+																? void 0
+																: _value$url$link.href,
+														onClick: function onClick(e) {
+															var _value$url2, _value$url2$link;
+															null === (_value$url2 = value.url) ||
+																void 0 === _value$url2 ||
+																null === (_value$url2$link = _value$url2.link) ||
+																void 0 === _value$url2$link ||
+																_value$url2$link.onClick(e),
+																_onClick && _onClick(e);
+														},
+													}
+												),
 												(0, emotion_react_browser_esm.tZ)(
 													'div',
-													{
-														className: classnames_default()(
-															'ss__facet-palette-options__option__palette',
-															'ss__facet-palette-options__option__palette--' + handleize(value.value)
-														),
-														css: { background: value.value },
-													},
-													!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
-												)
-											),
-											!hideLabel && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
-										);
-									})
-								)
-							)
+													{ className: 'ss__facet-palette-options__option__wrapper' },
+													(0, emotion_react_browser_esm.tZ)(
+														'div',
+														{
+															className: classnames_default()(
+																'ss__facet-palette-options__option__palette',
+																'ss__facet-palette-options__option__palette--' + handleize(value.value)
+															),
+															css: { background: value.value },
+														},
+														!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
+													)
+												),
+												!hideLabel &&
+													(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
+											);
+										})
+									)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				});
 		},
@@ -9251,8 +9317,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => FacetSlider_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetSlider = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
@@ -9560,9 +9625,9 @@
 					componentArgs.p
 				),
 			};
-			var Price = function Template(args) {
+			var Price = function Price(args) {
 				return (0, preact_module.h)(FacetSlider.C, Object.assign({}, args, { facet: searchResponse.v1 }));
-			}.bind({});
+			};
 		},
 		'./src/components/Molecules/FacetSlider/FacetSlider.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -9581,7 +9646,8 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			var hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -9744,12 +9810,16 @@
 						},
 						'& .ss__facet-slider__rail': {
 							background:
-								railColor || (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333',
+								railColor ||
+								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
+								'#333',
 							height: '100%',
 						},
 						'& .ss__facet-slider__segment': {
 							background:
-								trackColor || (null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.secondary) || '#ccc',
+								trackColor ||
+								(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.secondary) ||
+								'#ccc',
 							height: '100%',
 						},
 						'& .ss__facet-slider__handles': {
@@ -9758,7 +9828,7 @@
 								'& .ss__facet-slider__handle': {
 									background:
 										handleColor ||
-										(null === (_theme$colors3 = theme.colors) || void 0 === _theme$colors3 ? void 0 : _theme$colors3.primary) ||
+										(null == theme || null === (_theme$colors3 = theme.colors) || void 0 === _theme$colors3 ? void 0 : _theme$colors3.primary) ||
 										'#333',
 									display: 'flex',
 									alignItems: 'center',
@@ -9792,7 +9862,7 @@
 										background:
 											handleDraggingColor ||
 											handleColor ||
-											(null === (_theme$colors4 = theme.colors) || void 0 === _theme$colors4 ? void 0 : _theme$colors4.primary) ||
+											(null == theme || null === (_theme$colors4 = theme.colors) || void 0 === _theme$colors4 ? void 0 : _theme$colors4.primary) ||
 											'#000',
 										'& label.ss__facet-slider__handle__label': { background: '#fff', padding: '0 5px' },
 									},
@@ -9822,6 +9892,7 @@
 				},
 				FacetSlider = (0, es.Pi)(function (properties) {
 					var _properties$facet,
+						_properties$facet2,
 						_globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -9831,15 +9902,20 @@
 						_facet$active4,
 						_facet$active5,
 						_facet$active6,
+						_facet$active7,
+						_facet$active8,
 						_facet$range,
 						_facet$range2,
-						_properties$facet2,
+						_properties$facet3,
+						_properties$facet4,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
 								tickSize:
-									10 * (null === (_properties$facet = properties.facet) || void 0 === _properties$facet ? void 0 : _properties$facet.step) || 20,
+									null !== (_properties$facet = properties.facet) && void 0 !== _properties$facet && _properties$facet.step
+										? 10 * (null === (_properties$facet2 = properties.facet) || void 0 === _properties$facet2 ? void 0 : _properties$facet2.step)
+										: 20,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
@@ -9869,12 +9945,14 @@
 						tickSize = props.tickSize;
 					isNaN(Number(tickSize)) || Number(tickSize) <= 0
 						? (tickSize =
-								10 * (null === (_properties$facet2 = properties.facet) || void 0 === _properties$facet2 ? void 0 : _properties$facet2.step) || 20)
+								null !== (_properties$facet3 = properties.facet) && void 0 !== _properties$facet3 && _properties$facet3.step
+									? 10 * (null === (_properties$facet4 = properties.facet) || void 0 === _properties$facet4 ? void 0 : _properties$facet4.step)
+									: 20)
 						: (tickSize = Number(tickSize));
-					var _facet$active7,
-						_facet$active8,
-						_facet$active9,
+					var _facet$active9,
 						_facet$active10,
+						_facet$active11,
+						_facet$active12,
 						_useState2 = _slicedToArray(
 							(0, hooks_module.eJ)([
 								null === (_facet$active = facet.active) || void 0 === _facet$active ? void 0 : _facet$active.low,
@@ -9893,15 +9971,21 @@
 						),
 						active = _useState4[0],
 						setActive = _useState4[1];
-					(values[0] == (null === (_facet$active5 = facet.active) || void 0 === _facet$active5 ? void 0 : _facet$active5.low) &&
-						values[1] == (null === (_facet$active6 = facet.active) || void 0 === _facet$active6 ? void 0 : _facet$active6.high)) ||
+					((null !== (_facet$active5 = facet.active) &&
+						void 0 !== _facet$active5 &&
+						_facet$active5.low &&
+						null !== (_facet$active6 = facet.active) &&
+						void 0 !== _facet$active6 &&
+						_facet$active6.high &&
+						values[0] != (null === (_facet$active7 = facet.active) || void 0 === _facet$active7 ? void 0 : _facet$active7.low)) ||
+						values[1] != (null === (_facet$active8 = facet.active) || void 0 === _facet$active8 ? void 0 : _facet$active8.high)) &&
 						(setActive([
-							null === (_facet$active7 = facet.active) || void 0 === _facet$active7 ? void 0 : _facet$active7.low,
-							null === (_facet$active8 = facet.active) || void 0 === _facet$active8 ? void 0 : _facet$active8.high,
-						]),
-						setValues([
 							null === (_facet$active9 = facet.active) || void 0 === _facet$active9 ? void 0 : _facet$active9.low,
 							null === (_facet$active10 = facet.active) || void 0 === _facet$active10 ? void 0 : _facet$active10.high,
+						]),
+						setValues([
+							null === (_facet$active11 = facet.active) || void 0 === _facet$active11 ? void 0 : _facet$active11.low,
+							null === (_facet$active12 = facet.active) || void 0 === _facet$active12 ? void 0 : _facet$active12.high,
 						]));
 					var _useRanger = (0, react_ranger.S)({
 							values: active,
@@ -9953,54 +10037,55 @@
 									}),
 									style,
 							  ]),
-						facet.range &&
-							facet.active &&
-							facet.step &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									Object.assign({ className: classnames_default()('ss__facet-slider', className) }, getTrackProps(), styling),
+						facet.range && facet.active && facet.step
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{ className: 'ss__facet-slider__slider' },
-										showTicks &&
-											ticks.map(function (_ref2) {
-												var value = _ref2.value,
-													getTickProps = _ref2.getTickProps;
+										Object.assign({ className: classnames_default()('ss__facet-slider', className) }, getTrackProps(), styling),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__facet-slider__slider' },
+											showTicks &&
+												ticks.map(function (_ref2) {
+													var value = _ref2.value,
+														getTickProps = _ref2.getTickProps;
+													return (0,
+													emotion_react_browser_esm.tZ)('div', Object.assign({ className: 'ss__facet-slider__tick' }, getTickProps()), (0, emotion_react_browser_esm.tZ)('div', { className: 'ss__facet-slider__tick__label' }, value));
+												}),
+											segments.map(function (_ref3, idx) {
+												var getSegmentProps = _ref3.getSegmentProps;
 												return (0,
-												emotion_react_browser_esm.tZ)('div', Object.assign({ className: 'ss__facet-slider__tick' }, getTickProps()), (0, emotion_react_browser_esm.tZ)('div', { className: 'ss__facet-slider__tick__label' }, value));
+												emotion_react_browser_esm.tZ)('div', Object.assign({ className: 1 === idx ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment' }, getSegmentProps()));
 											}),
-										segments.map(function (_ref3, index) {
-											var getSegmentProps = _ref3.getSegmentProps;
-											return (0,
-											emotion_react_browser_esm.tZ)('div', Object.assign({ className: 1 === index ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment' }, getSegmentProps(), { index }));
-										}),
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__facet-slider__handles' },
-											handles.map(function (_ref4, idx) {
-												var value = _ref4.value,
-													active = _ref4.active,
-													getHandleProps = _ref4.getHandleProps;
-												return (0,
-												emotion_react_browser_esm.tZ)('button', Object.assign({ type: 'button' }, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })), (0, emotion_react_browser_esm.tZ)('div', { className: classnames_default()('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active }) }, stickyHandleLabel && (0, emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky', 'ss__facet-slider__handle__label--' + idx, { 'ss__facet-slider__handle__label--pinleft': 0 == idx && value == facet.range.low }, { 'ss__facet-slider__handle__label--pinright': 1 == idx && value == facet.range.high }) }, sprintf(facet.formatValue, value))));
-											})
-										)
-									),
-									!stickyHandleLabel &&
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__facet-slider__labels' },
-											handles.map(function (_ref5, idx) {
-												var value = _ref5.value;
-												return (0,
-												emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__label', 'ss__facet-slider__label--' + idx) }, sprintf(facet.formatValue, value));
-											})
-										)
-								)
-							)
+											(0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__facet-slider__handles' },
+												handles.map(function (_ref4, idx) {
+													var _facet$range3,
+														_facet$range4,
+														value = _ref4.value,
+														active = _ref4.active,
+														getHandleProps = _ref4.getHandleProps;
+													return (0,
+													emotion_react_browser_esm.tZ)('button', Object.assign({ type: 'button' }, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })), (0, emotion_react_browser_esm.tZ)('div', { className: classnames_default()('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active }) }, stickyHandleLabel && (0, emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky', 'ss__facet-slider__handle__label--' + idx, { 'ss__facet-slider__handle__label--pinleft': 0 == idx && value == (null == facet || null === (_facet$range3 = facet.range) || void 0 === _facet$range3 ? void 0 : _facet$range3.low) }, { 'ss__facet-slider__handle__label--pinright': 1 == idx && value == (null == facet || null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.high) }) }, sprintf(facet.formatValue, value))));
+												})
+											)
+										),
+										!stickyHandleLabel &&
+											(0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__facet-slider__labels' },
+												handles.map(function (_ref5, idx) {
+													var value = _ref5.value;
+													return (0,
+													emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__label', 'ss__facet-slider__label--' + idx) }, sprintf(facet.formatValue, value));
+												})
+											)
+									)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				});
 		},
@@ -10016,7 +10101,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -10574,9 +10658,10 @@
 				},
 				argTypes: Object.assign(
 					{
+						filter: { description: 'Filter store object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 						facetLabel: { description: 'Filter field', table: { type: { summary: 'string' } }, control: { type: 'text' } },
-						valueLabel: { description: 'Filter value', type: { required: !0 }, table: { type: { summary: 'string' } }, control: { type: 'text' } },
-						url: { description: 'URL translator object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
+						valueLabel: { description: 'Filter value', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						url: { description: 'URL manager object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 						hideFacetLabel: {
 							description: 'Hide facet label',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
@@ -10623,7 +10708,7 @@
 					id: 'Filter',
 					globals: { siteId: '8uyt2m', filters: [{ type: 'value', field: 'color_family', value: 'Blue' }] },
 				}),
-				Template = function Template(args, _ref) {
+				Default = function Default(args, _ref) {
 					var _controller$store,
 						_controller$store2,
 						controller = _ref.loaded.controller;
@@ -10649,8 +10734,7 @@
 											.values.shift().value,
 						})
 					);
-				},
-				Default = Template.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -10669,7 +10753,33 @@
 					})
 				),
 			];
-			var NoFacetLabel = Template.bind({});
+			var NoFacetLabel = function NoFacetLabel(args, _ref3) {
+				var _controller$store3,
+					_controller$store4,
+					controller = _ref3.loaded.controller;
+				return (0, preact_module.h)(
+					Filter.w,
+					Object.assign({}, args, {
+						facetLabel:
+							null == controller || null === (_controller$store3 = controller.store) || void 0 === _controller$store3
+								? void 0
+								: _controller$store3.facets
+										.filter(function (facet) {
+											return facet.type === types.Q.VALUE;
+										})
+										.shift().label,
+						valueLabel:
+							null == controller || null === (_controller$store4 = controller.store) || void 0 === _controller$store4
+								? void 0
+								: _controller$store4.facets
+										.filter(function (facet) {
+											return facet.type === types.Q.VALUE;
+										})
+										.shift()
+										.values.shift().value,
+					})
+				);
+			};
 			(NoFacetLabel.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -10696,32 +10806,34 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.link.js');
-			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
-				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
+				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/providers/cache.tsx'),
-				_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/providers/cache.tsx'),
+				_Atoms_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				CSS_filter = function filter() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)({
 						textDecoration: 'none',
 						display: 'inline-flex',
 						'& .ss__filter__button': { alignItems: 'center', '& .ss__filter__button__icon': { marginRight: '5px' } },
 						'& .ss__filter__label': { marginRight: '5px', fontWeight: 'bold' },
 					});
 				},
-				Filter = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
+				Filter = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
+						_filter$url,
 						_globalTheme$componen2,
 						_globalTheme$componen3,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.a)(),
 						props = Object.assign(
 							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -10735,6 +10847,7 @@
 								? void 0
 								: _properties$theme$com.filter
 						),
+						filter = props.filter,
 						facetLabel = props.facetLabel,
 						valueLabel = props.valueLabel,
 						url = props.url,
@@ -10745,13 +10858,18 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
+						link =
+							(null == filter || null === (_filter$url = filter.url) || void 0 === _filter$url ? void 0 : _filter$url.link) ||
+							(null == url ? void 0 : url.link),
+						value = (null == filter ? void 0 : filter.value.label) || valueLabel,
+						label = (null == filter ? void 0 : filter.facet.label) || facetLabel,
 						subProps = {
 							button: Object.assign(
 								{ className: 'ss__filter__button' },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.button,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 							icon: Object.assign(
@@ -10759,49 +10877,46 @@
 								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
 									? void 0
 									: _globalTheme$componen3.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles, icon }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles, icon }),
 								{ theme: props.theme }
 							),
 						},
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_filter(), style]),
-						valueLabel &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_8__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-									'a',
-									Object.assign(
-										{},
-										styling,
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__filter', className),
+						value
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_9__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+										'a',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__filter', className),
 											onClick: function onClick(e) {
-												return _onClick && _onClick(e);
+												(null == link ? void 0 : link.onClick) && link.onClick(e), _onClick && _onClick(e);
 											},
-										},
-										null == url ? void 0 : url.link
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-										_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__.z,
-										Object.assign({}, subProps.button),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-											_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__.J,
-											Object.assign({}, subProps.icon)
-										),
-										!hideFacetLabel &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-												'span',
-												{ className: 'ss__filter__label' },
-												facetLabel,
-												separator &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__label__separator' }, separator)
+											href: null == link ? void 0 : link.href,
+										}),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+											_Atoms_Button__WEBPACK_IMPORTED_MODULE_10__.z,
+											Object.assign({}, subProps.button),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+												_Atoms_Icon__WEBPACK_IMPORTED_MODULE_11__.J,
+												Object.assign({}, subProps.icon)
 											),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__value' }, valueLabel)
+											!hideFacetLabel &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+													'span',
+													{ className: 'ss__filter__label' },
+													label,
+													separator &&
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)('span', { className: 'ss__filter__label__separator' }, separator)
+												),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)('span', { className: 'ss__filter__value' }, value)
+										)
 									)
-								)
-							)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(preact__WEBPACK_IMPORTED_MODULE_3__.HY, null)
 					);
 				});
 		},
@@ -10812,7 +10927,6 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -10864,7 +10978,8 @@
 							textAlign: 'center',
 							'&.ss__pagination__page--active': { fontWeight: 'bold' },
 							'&:hover:not(.ss__pagination__page--active)': {
-								backgroundColor: (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.hover) || '#f8f8f8',
+								backgroundColor:
+									(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.hover) || '#f8f8f8',
 							},
 						},
 					});
@@ -10912,7 +11027,7 @@
 									? void 0
 									: _globalTheme$componen2.icon,
 								(0, defined.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						store = pagination,
@@ -10927,83 +11042,84 @@
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_pagination({ theme }), style]),
-						(null == store ? void 0 : store.totalResults) &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									Object.assign({}, styling, { className: classnames_default()('ss__pagination', className) }),
+						null != store && store.totalResults
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
 									(0, emotion_react_browser_esm.tZ)(
-										preact_module.HY,
-										null,
-										store.previous &&
-											!hidePrev &&
-											(0, emotion_react_browser_esm.tZ)(
-												'a',
-												Object.assign({}, store.previous.url.link, {
-													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
-													'aria-label': 'previous page',
-												}),
-												prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-left' }))
-											),
-										!pageNumbers.includes(store.first.number) &&
-											!hideFirst &&
-											(0, emotion_react_browser_esm.tZ)(
-												preact_module.HY,
-												null,
+										'div',
+										Object.assign({}, styling, { className: classnames_default()('ss__pagination', className) }),
+										(0, emotion_react_browser_esm.tZ)(
+											preact_module.HY,
+											null,
+											store.previous &&
+												!hidePrev &&
 												(0, emotion_react_browser_esm.tZ)(
 													'a',
-													Object.assign({}, store.first.url.link, {
-														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
-														'aria-label': 'first page',
+													Object.assign({}, store.previous.url.link, {
+														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
+														'aria-label': 'previous page',
 													}),
-													firstButton || store.first.number
+													prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-left' }))
 												),
-												!pageNumbers.includes(2) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…')
-											),
-										_pages &&
-											_pages.map(function (page) {
-												return page.active
-													? (0, emotion_react_browser_esm.tZ)(
-															'span',
-															{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
-															page.number
-													  )
-													: (0, emotion_react_browser_esm.tZ)(
-															'a',
-															Object.assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
-															page.number
-													  );
-											}),
-										!pageNumbers.includes(store.last.number) &&
-											!hideLast &&
-											(0, emotion_react_browser_esm.tZ)(
-												preact_module.HY,
-												null,
-												!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
+											!pageNumbers.includes(store.first.number) &&
+												!hideFirst &&
+												(0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													(0, emotion_react_browser_esm.tZ)(
+														'a',
+														Object.assign({}, store.first.url.link, {
+															className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
+															'aria-label': 'first page',
+														}),
+														firstButton || store.first.number
+													),
+													!pageNumbers.includes(2) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…')
+												),
+											_pages &&
+												_pages.map(function (page) {
+													return page.active
+														? (0, emotion_react_browser_esm.tZ)(
+																'span',
+																{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
+																page.number
+														  )
+														: (0, emotion_react_browser_esm.tZ)(
+																'a',
+																Object.assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+																page.number
+														  );
+												}),
+											!pageNumbers.includes(store.last.number) &&
+												!hideLast &&
+												(0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
+													(0, emotion_react_browser_esm.tZ)(
+														'a',
+														Object.assign({}, store.last.url.link, {
+															className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
+															'aria-label': 'last page',
+														}),
+														lastButton || store.last.number
+													)
+												),
+											store.next &&
+												!hideNext &&
 												(0, emotion_react_browser_esm.tZ)(
 													'a',
-													Object.assign({}, store.last.url.link, {
-														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
-														'aria-label': 'last page',
+													Object.assign({}, store.next.url.link, {
+														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
+														'aria-label': 'next page',
 													}),
-													lastButton || store.last.number
+													nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-right' }))
 												)
-											),
-										store.next &&
-											!hideNext &&
-											(0, emotion_react_browser_esm.tZ)(
-												'a',
-												Object.assign({}, store.next.url.link, {
-													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
-													'aria-label': 'next page',
-												}),
-												nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-right' }))
-											)
+										)
 									)
-								)
-							)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -11703,10 +11819,10 @@
 					return (0,
 					preact_module.h)(Pagination, Object.assign({}, args, { pagination: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.pagination }));
 				}),
-				Default = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservablePagination, { args, controller });
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -11738,7 +11854,6 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -12427,23 +12542,19 @@
 				),
 			};
 			var snapInstance = snapify.K.search({ id: 'Result', globals: { siteId: '8uyt2m' } }),
-				Template = function Template(args, _ref) {
+				Default = function Default(args, _ref) {
 					var _controller$store,
 						controller = _ref.loaded.controller;
 					return (0, preact_module.h)(
 						Result.x,
-						Object.assign(
-							{
-								result:
-									null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store
-										? void 0
-										: _controller$store.results[0],
-							},
-							args
-						)
+						Object.assign({}, args, {
+							result:
+								null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store
+									? void 0
+									: _controller$store.results[0],
+						})
 					);
-				},
-				Default = Template.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -12462,7 +12573,19 @@
 					})
 				),
 			];
-			var hideSections = Template.bind({});
+			var hideSections = function hideSections(args, _ref3) {
+				var _controller$store2,
+					controller = _ref3.loaded.controller;
+				return (0, preact_module.h)(
+					Result.x,
+					Object.assign({}, args, {
+						result:
+							null == controller || null === (_controller$store2 = controller.store) || void 0 === _controller$store2
+								? void 0
+								: _controller$store2.results[0],
+					})
+				);
+			};
 			(hideSections.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -12482,7 +12605,19 @@
 				),
 			]),
 				(hideSections.args = { hideBadge: !0, hideTitle: !0, hidePricing: !0 });
-			var truncateTitle = Template.bind({});
+			var truncateTitle = function truncateTitle(args, _ref5) {
+				var _controller$store3,
+					controller = _ref5.loaded.controller;
+				return (0, preact_module.h)(
+					Result.x,
+					Object.assign({}, args, {
+						result:
+							null == controller || null === (_controller$store3 = controller.store) || void 0 === _controller$store3
+								? void 0
+								: _controller$store3.results[0],
+					})
+				);
+			};
 			(truncateTitle.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee3() {
@@ -12612,92 +12747,93 @@
 									? void 0
 									: _globalTheme$componen4.image,
 								(0, defined.r)({ disableStyles, fallback }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						onSale = Boolean(
-							(null == core ? void 0 : core.msrp) && 1 * (null == core ? void 0 : core.msrp) > 1 * (null == core ? void 0 : core.price)
+							(null == core ? void 0 : core.msrp) && core.price && 1 * (null == core ? void 0 : core.msrp) > 1 * (null == core ? void 0 : core.price)
 						),
-						displayName = core.name;
+						displayName = null == core ? void 0 : core.name;
 					props.truncateTitle &&
 						(displayName = (function truncate(input, limit, append) {
 							if ('string' != typeof input || input.length <= limit) return input;
 							var lastSpace = input.lastIndexOf(' ', limit),
 								trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
 							return input.substr(0, trimIndex) + (append || '');
-						})(core.name, props.truncateTitle.limit, props.truncateTitle.append));
+						})((null == core ? void 0 : core.name) || '', props.truncateTitle.limit, props.truncateTitle.append));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_result(), style]),
-						core &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'article',
-									Object.assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
+						core
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
 									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: 'ss__result__image-wrapper' },
+										'article',
+										Object.assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
 										(0, emotion_react_browser_esm.tZ)(
-											'a',
-											{
-												href: core.url,
-												onClick: function onClick(e) {
-													var _controller$track, _controller$track$pro;
-													_onClick && _onClick(e),
-														null == controller ||
-															null === (_controller$track = controller.track) ||
-															void 0 === _controller$track ||
-															null === (_controller$track$pro = _controller$track.product) ||
-															void 0 === _controller$track$pro ||
-															_controller$track$pro.click(e, result);
-												},
-											},
-											!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, Object.assign({}, subProps.badge)),
-											!hideImage && (0, emotion_react_browser_esm.tZ)(Image.E, Object.assign({}, subProps.image))
-										)
-									),
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: 'ss__result__details' },
-										!hideTitle &&
+											'div',
+											{ className: 'ss__result__image-wrapper' },
 											(0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__result__details__title' },
-												(0, emotion_react_browser_esm.tZ)('a', {
+												'a',
+												{
 													href: core.url,
 													onClick: function onClick(e) {
-														var _controller$track2, _controller$track2$pr;
+														var _controller$track, _controller$track$pro;
 														_onClick && _onClick(e),
 															null == controller ||
-																null === (_controller$track2 = controller.track) ||
-																void 0 === _controller$track2 ||
-																null === (_controller$track2$pr = _controller$track2.product) ||
-																void 0 === _controller$track2$pr ||
-																_controller$track2$pr.click(e, result);
+																null === (_controller$track = controller.track) ||
+																void 0 === _controller$track ||
+																null === (_controller$track$pro = _controller$track.product) ||
+																void 0 === _controller$track$pro ||
+																_controller$track$pro.click(e, result);
 													},
-													dangerouslySetInnerHTML: { __html: displayName },
-												})
-											),
-										!hidePricing &&
-											(0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__result__details__pricing' },
-												core.price < core.msrp
-													? (0, emotion_react_browser_esm.tZ)(
-															preact_module.HY,
-															null,
-															(0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })),
-															' ',
-															(0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.price }))
-													  )
-													: (0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.price }))
-											),
-										(0, cloneWithProps.d)(detailSlot, { result })
+												},
+												!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, Object.assign({}, subProps.badge)),
+												!hideImage && (0, emotion_react_browser_esm.tZ)(Image.E, Object.assign({}, subProps.image))
+											)
+										),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__result__details' },
+											!hideTitle &&
+												(0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__result__details__title' },
+													(0, emotion_react_browser_esm.tZ)('a', {
+														href: core.url,
+														onClick: function onClick(e) {
+															var _controller$track2, _controller$track2$pr;
+															_onClick && _onClick(e),
+																null == controller ||
+																	null === (_controller$track2 = controller.track) ||
+																	void 0 === _controller$track2 ||
+																	null === (_controller$track2$pr = _controller$track2.product) ||
+																	void 0 === _controller$track2$pr ||
+																	_controller$track2$pr.click(e, result);
+														},
+														dangerouslySetInnerHTML: { __html: displayName || '' },
+													})
+												),
+											!hidePricing &&
+												(0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__result__details__pricing' },
+													core.msrp && core.price && core.price < core.msrp
+														? (0, emotion_react_browser_esm.tZ)(
+																preact_module.HY,
+																null,
+																(0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })),
+																' ',
+																(0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.price }))
+														  )
+														: (0, emotion_react_browser_esm.tZ)(Price.t, Object.assign({}, subProps.price, { value: core.price }))
+												),
+											(0, cloneWithProps.d)(detailSlot, { result })
+										)
 									)
-								)
-							)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				});
 		},
@@ -12705,8 +12841,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => SearchInput_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				SearchInput = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
@@ -12812,9 +12947,9 @@
 					componentArgs.p
 				),
 			};
-			var Default = function Template(args) {
+			var Default = function Default(args) {
 				return (0, preact_module.h)(SearchInput.M, Object.assign({}, args));
-			}.bind({});
+			};
 		},
 		'./src/components/Molecules/SearchInput/SearchInput.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -12833,12 +12968,13 @@
 				CSS_searchInput = function searchInput(_ref) {
 					var _theme$colors,
 						theme = _ref.theme;
-					_ref.subProps;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						border: '1px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#ccc'),
+						border:
+							'1px solid ' +
+							((null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#ccc'),
 						'& .ss__icon': { padding: '5px' },
 						'& .ss__search-input__input': { width: '100%', outline: 'none', border: '0', boxSizing: 'border-box' },
 					});
@@ -12876,12 +13012,12 @@
 									? void 0
 									: _globalTheme$componen2.icon,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_5__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						styling = {};
 					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_searchInput({ theme, subProps }), style]),
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_searchInput({ theme }), style]),
 						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 							_providers__WEBPACK_IMPORTED_MODULE_6__.n,
 							null,
@@ -12914,7 +13050,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
@@ -13031,7 +13166,7 @@
 						color = _ref.color,
 						backgroundColor = _ref.backgroundColor,
 						borderColor = _ref.borderColor,
-						theme = (_ref.label, _ref.selection, _ref.theme);
+						theme = _ref.theme;
 					return (0, emotion_react_browser_esm.iv)({
 						display: 'inline-flex',
 						color,
@@ -13049,7 +13184,7 @@
 								'1px solid ' +
 								(borderColor ||
 									color ||
-									(null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
+									(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
 									'#333'),
 							'& .ss__select__select__option': {
 								cursor: 'pointer',
@@ -13058,7 +13193,8 @@
 								'&.ss__select__select__option--selected': { fontWeight: 'bold' },
 								'&:hover': {
 									backgroundColor:
-										(null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.hover) || '#f8f8f8',
+										(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.hover) ||
+										'#f8f8f8',
 								},
 							},
 						},
@@ -13119,7 +13255,7 @@
 									? void 0
 									: _globalTheme$componen2.dropdown,
 								(0, defined.r)({ disableStyles, disabled }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 							button: Object.assign(
 								{ className: 'ss__select__dropdown__button' },
@@ -13127,7 +13263,7 @@
 									? void 0
 									: _globalTheme$componen3.button,
 								(0, defined.r)({ disableStyles, disabled, color, backgroundColor, borderColor }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 							icon: Object.assign(
 								{ className: 'ss__select__dropdown__button__icon' },
@@ -13135,11 +13271,11 @@
 									? void 0
 									: _globalTheme$componen4.icon,
 								(0, defined.r)({ disableStyles, color: iconColor || color, size: '14px' }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						selection = selected,
-						_useState2 = _slicedToArray((0, hooks_module.eJ)(startOpen), 2),
+						_useState2 = _slicedToArray((0, hooks_module.eJ)(Boolean(startOpen)), 2),
 						open = _useState2[0],
 						setOpen = _useState2[1],
 						stateful = void 0 === selection;
@@ -13149,7 +13285,10 @@
 					} else selection = Array.isArray(selected) ? selected[0] : selection;
 					selection && clearSelection && (options = [{ label: clearSelection, value: '' }].concat(_toConsumableArray(options)));
 					var makeSelection = function makeSelection(e, option) {
-							(option = option.value ? option : void 0) != selection && onSelect && onSelect(e, option),
+							var _option;
+							(option = null !== (_option = option) && void 0 !== _option && _option.value ? option : void 0) != selection &&
+								onSelect &&
+								onSelect(e, option),
 								stateful && setSelection(option),
 								!stayOpenOnSelection && setOpen(!1);
 						},
@@ -13157,123 +13296,120 @@
 					return (
 						disableStyles
 							? style && (styling.css = [style])
-							: (styling.css = _native
-									? [CSS_native(), style]
-									: [CSS_select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style]),
-						options &&
-							('object' == typeof options || Array.isArray(options)) &&
-							options.length &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									Object.assign({}, styling, { className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className) }),
-									_native
-										? (0, emotion_react_browser_esm.tZ)(
-												preact_module.HY,
-												null,
-												label &&
-													!hideLabelOnSelection &&
-													(0, emotion_react_browser_esm.tZ)(
-														'span',
-														{ className: 'ss__select__label' },
-														label,
-														separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
-													),
-												(0, emotion_react_browser_esm.tZ)(
-													'select',
-													{
-														className: 'ss__select__select',
-														disabled: disabled || void 0,
-														onChange: function onChange(e) {
-															var selectElement = e.target,
-																selectedOptionElement = selectElement.options[selectElement.selectedIndex],
-																selectedOption = options
-																	.filter(function (option, index) {
-																		return (
-																			option.label == selectedOptionElement.text &&
-																			(option.value == selectedOptionElement.value || option.value == index)
-																		);
-																	})
-																	.pop();
-															!disabled && makeSelection(e, selectedOption);
-														},
-													},
-													!selection &&
-														clearSelection &&
+							: (styling.css = _native ? [CSS_native(), style] : [CSS_select({ color, backgroundColor, borderColor, theme }), style]),
+						Array.isArray(options) && options.length
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										Object.assign({}, styling, { className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className) }),
+										_native
+											? (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													label &&
+														!hideLabelOnSelection &&
 														(0, emotion_react_browser_esm.tZ)(
-															'option',
-															{ className: 'ss__select__select__option', selected: !0, value: '' },
-															clearSelection
+															'span',
+															{ className: 'ss__select__label' },
+															label,
+															separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
 														),
-													options.map(function (option, index) {
-														var _selection, _option$value;
-														return (0,
-														emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null === (_selection = selection) || void 0 === _selection ? void 0 : _selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
-													})
-												)
-										  )
-										: (0, emotion_react_browser_esm.tZ)(
-												Dropdown.L,
-												Object.assign({}, subProps.dropdown, {
-													disableClickOutside,
-													open,
-													onToggle: function onToggle(e, state) {
-														return setOpen(function (prev) {
-															return null != state ? state : !prev;
-														});
-													},
-													onClick: function onClick(e) {
-														return setOpen(function (prev) {
-															return !prev;
-														});
-													},
-													button: (0, emotion_react_browser_esm.tZ)(
-														Button.z,
-														Object.assign({}, subProps.button),
-														label &&
-															!hideLabelOnSelection &&
-															(0, emotion_react_browser_esm.tZ)(
-																'span',
-																{ className: 'ss__select__label' },
-																label,
-																separator &&
-																	selection &&
-																	(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
-															),
-														selection &&
-															(0, emotion_react_browser_esm.tZ)(
-																'span',
-																{ className: 'ss__select__selection' },
-																null === (_selection2 = selection) || void 0 === _selection2 ? void 0 : _selection2.label
-															),
-														(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
-													),
-												}),
-												(0, emotion_react_browser_esm.tZ)(
-													'ul',
-													{ className: 'ss__select__select' },
-													options.map(function (option) {
-														var _selection3;
-														return (0, emotion_react_browser_esm.tZ)(
-															'li',
-															{
-																className: classnames_default()('ss__select__select__option', {
-																	'ss__select__select__option--selected':
-																		(null === (_selection3 = selection) || void 0 === _selection3 ? void 0 : _selection3.value) === option.value,
-																}),
-																onClick: function onClick(e) {
-																	return !disabled && makeSelection(e, option);
-																},
+													(0, emotion_react_browser_esm.tZ)(
+														'select',
+														{
+															className: 'ss__select__select',
+															disabled: disabled || void 0,
+															onChange: function onChange(e) {
+																var selectElement = e.target,
+																	selectedOptionElement = selectElement.options[selectElement.selectedIndex],
+																	selectedOption = options
+																		.filter(function (option, index) {
+																			return (
+																				option.label == selectedOptionElement.text &&
+																				(option.value == selectedOptionElement.value || option.value == index)
+																			);
+																		})
+																		.pop();
+																!disabled && makeSelection(e, selectedOption);
 															},
-															(0, emotion_react_browser_esm.tZ)('span', null, option.label)
-														);
-													})
-												)
-										  )
-								)
-							)
+														},
+														!selection &&
+															clearSelection &&
+															(0, emotion_react_browser_esm.tZ)(
+																'option',
+																{ className: 'ss__select__select__option', selected: !0, value: '' },
+																clearSelection
+															),
+														options.map(function (option, index) {
+															var _selection, _option$value;
+															return (0,
+															emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null === (_selection = selection) || void 0 === _selection ? void 0 : _selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
+														})
+													)
+											  )
+											: (0, emotion_react_browser_esm.tZ)(
+													Dropdown.L,
+													Object.assign({}, subProps.dropdown, {
+														disableClickOutside,
+														open,
+														onToggle: function onToggle(e, state) {
+															return setOpen(function (prev) {
+																return null != state ? state : !prev;
+															});
+														},
+														onClick: function onClick(e) {
+															return setOpen(function (prev) {
+																return !prev;
+															});
+														},
+														button: (0, emotion_react_browser_esm.tZ)(
+															Button.z,
+															Object.assign({}, subProps.button),
+															label &&
+																!hideLabelOnSelection &&
+																(0, emotion_react_browser_esm.tZ)(
+																	'span',
+																	{ className: 'ss__select__label' },
+																	label,
+																	separator &&
+																		selection &&
+																		(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
+																),
+															selection &&
+																(0, emotion_react_browser_esm.tZ)(
+																	'span',
+																	{ className: 'ss__select__selection' },
+																	null === (_selection2 = selection) || void 0 === _selection2 ? void 0 : _selection2.label
+																),
+															(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
+														),
+													}),
+													(0, emotion_react_browser_esm.tZ)(
+														'ul',
+														{ className: 'ss__select__select' },
+														options.map(function (option) {
+															var _selection3;
+															return (0, emotion_react_browser_esm.tZ)(
+																'li',
+																{
+																	className: classnames_default()('ss__select__select__option', {
+																		'ss__select__select__option--selected':
+																			(null === (_selection3 = selection) || void 0 === _selection3 ? void 0 : _selection3.value) === option.value,
+																	}),
+																	onClick: function onClick(e) {
+																		return !disabled && makeSelection(e, option);
+																	},
+																},
+																(0, emotion_react_browser_esm.tZ)('span', null, option.label)
+															);
+														})
+													)
+											  )
+									)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -14183,11 +14319,10 @@
 						})
 					);
 				}),
-				Template = function Template(args, _ref2) {
+				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableSelect, { args, controller });
-				},
-				Default = Template.bind({});
+				};
 			(Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -14207,7 +14342,10 @@
 				),
 			]),
 				(Default.args = { label: 'Sort By' });
-			var Native = Template.bind({});
+			var Native = function Native(args, _ref4) {
+				var controller = _ref4.loaded.controller;
+				return (0, preact_module.h)(ObservableSelect, { args, controller });
+			};
 			(Native.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -14232,8 +14370,7 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Slideout_stories });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
@@ -14380,7 +14517,6 @@
 					globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 					props = Object.assign(
 						{
-							active: !1,
 							displayAt: '',
 							slideDirection: 'left',
 							width: '300px',
@@ -14417,7 +14553,7 @@
 								? void 0
 								: _globalTheme$componen2.overlay,
 							(0, defined.r)({ disableStyles, color: overlayColor, transitionSpeed }),
-							{ theme: props.theme }
+							{ theme: null == props ? void 0 : props.theme }
 						),
 					},
 					_useState2 = Slideout_slicedToArray((0, hooks_module.eJ)(active), 2),
@@ -14455,28 +14591,29 @@
 					disableStyles
 						? style && (styling.css = [style])
 						: (styling.css = [CSS_slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
-					isVisible &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							buttonContent &&
+					isVisible
+						? (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								buttonContent &&
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{
+											className: 'ss__slideout__button',
+											onClick: function onClick() {
+												return toggleActive();
+											},
+										},
+										buttonContent
+									),
 								(0, emotion_react_browser_esm.tZ)(
 									'div',
-									{
-										className: 'ss__slideout__button',
-										onClick: function onClick() {
-											return toggleActive();
-										},
-									},
-									buttonContent
+									Object.assign({ className: classnames_default()('ss__slideout', className, { 'ss__slideout--active': isActive }) }, styling),
+									(0, cloneWithProps.d)(children, { toggleActive, active: isActive })
 								),
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								Object.assign({ className: classnames_default()('ss__slideout', className, { 'ss__slideout--active': isActive }) }, styling),
-								(0, cloneWithProps.d)(children, { toggleActive, active: isActive })
-							),
-							(0, emotion_react_browser_esm.tZ)(Overlay.a, Object.assign({}, subProps.overlay, { active: isActive, onClick: toggleActive }))
-						)
+								(0, emotion_react_browser_esm.tZ)(Overlay.a, Object.assign({}, subProps.overlay, { active: isActive, onClick: toggleActive }))
+						  )
+						: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 				);
 			}
 			var componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -14676,9 +14813,9 @@
 					componentArgs.p
 				),
 			};
-			var Default = function _HelloWorld(args) {
+			var Default = function Default(args) {
 				return (0, preact_module.h)(Slideout, Object.assign({}, args), (0, preact_module.h)('div', null, 'props.children will be rendered here'));
-			}.bind({});
+			};
 			Default.args = { active: !0 };
 		},
 		'./src/components/Organisms/Autocomplete/Autocomplete.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -14726,6 +14863,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
 				cjs_default = __webpack_require__.n(cjs),
+				SearchMerchandisingStore = __webpack_require__('../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
 				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
@@ -14747,98 +14885,91 @@
 						viewportMaxHeight = _ref.viewportMaxHeight,
 						vertical = _ref.vertical,
 						width = _ref.width,
-						style = _ref.style,
 						theme = _ref.theme;
-					return (0, emotion_react_browser_esm.iv)(
-						Object.assign(
-							{
-								'&, & *, & *:before, & *:after': { boxSizing: 'border-box' },
-								display: 'flex',
-								flexDirection: vertical ? 'column' : 'row',
-								flexWrap: horizontalTerms && !vertical ? 'wrap' : null,
-								position: 'absolute',
-								zIndex: '10002',
-								border: '1px solid #ebebeb',
-								background: '#ffffff',
-								width,
-								maxWidth: '100vw',
-								maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? 'calc(100vh - ' + (inputViewportOffsetBottom + 10) + 'px)' : null,
-								overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : null,
-								'&.ss__autocomplete--only-terms': { width: '' + (vertical || horizontalTerms || contentSlotExists ? width : '150px') },
-								'.ss__autocomplete__title--trending': {
-									fontWeight: 'normal',
-									margin: 0,
-									color: '#c5c5c5',
-									textTransform: 'uppercase',
-									padding: '10px',
-									'& h5': { fontSize: '.8em', margin: 0 },
-								},
-								'.ss__autocomplete__title--facets': { order: vertical ? 2 : null },
-								'& .ss__autocomplete__terms': {
-									flex: '1 1 auto',
-									maxWidth: vertical || horizontalTerms ? 'auto' : '150px',
-									order: 1,
-									background: '#f8f8f8',
-									'& .ss__autocomplete__terms__options': {
-										display: vertical || horizontalTerms ? 'flex' : null,
-										justifyContent: 'space-evenly',
-										flexWrap: 'wrap',
-										'& .ss__autocomplete__terms__option': {
-											flexGrow: vertical || horizontalTerms ? '1' : null,
-											textAlign: vertical || horizontalTerms ? 'center' : null,
-											wordBreak: 'break-all',
-											'& a': { display: 'block', padding: vertical || horizontalTerms ? '10px 30px' : '10px', '& em': { fontStyle: 'normal' } },
-											'&.ss__autocomplete__terms__option--active': {
-												background: '#fff',
-												'& a': {
-													fontWeight: 'bold',
-													color:
-														null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
-												},
-											},
-										},
-									},
-								},
-								'& .ss__autocomplete__facets': {
-									display: 'flex',
-									flex: '0 0 150px',
-									flexDirection: vertical ? 'row' : 'column',
-									columnGap: '20px',
-									order: 2,
-									padding: vertical ? '10px 20px' : '10px',
-									overflowY: vertical ? null : 'auto',
-									'& .ss__autocomplete__facet': { flex: vertical ? '0 1 150px' : null },
-									'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
-										{ paddingLeft: 0 },
-									'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover': { cursor: 'pointer' },
-									'.ss__facet-palette-options__icon': { display: 'none' },
-								},
-								'& .ss__autocomplete__content': {
-									display: 'flex',
-									flex: '1 1 ' + (hideFacets ? 'auto' : '0%'),
-									flexDirection: 'column',
-									justifyContent: 'space-between',
-									order: 3,
-									overflowY: 'auto',
-									margin: noResults ? '0 auto' : null,
-									padding: vertical ? '10px 20px' : '10px',
-									'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': { marginBottom: '10px' },
-									'& .ss__banner.ss__banner--footer': { margin: '10px 0' },
-									'& .ss__autocomplete__content__results': { minHeight: '0%' },
-									'& .ss__autocomplete__content__info': {
-										padding: '10px',
-										textAlign: noResults ? 'center' : 'right',
+					return (0, emotion_react_browser_esm.iv)({
+						'&, & *, & *:before, & *:after': { boxSizing: 'border-box' },
+						display: 'flex',
+						flexDirection: vertical ? 'column' : 'row',
+						flexWrap: horizontalTerms && !vertical ? 'wrap' : void 0,
+						position: 'absolute',
+						zIndex: '10002',
+						border: '1px solid #ebebeb',
+						background: '#ffffff',
+						width,
+						maxWidth: '100vw',
+						maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? 'calc(100vh - ' + (inputViewportOffsetBottom + 10) + 'px)' : void 0,
+						overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : void 0,
+						'&.ss__autocomplete--only-terms': { width: '' + (vertical || horizontalTerms || contentSlotExists ? width : '150px') },
+						'.ss__autocomplete__title--trending': {
+							fontWeight: 'normal',
+							margin: 0,
+							color: '#c5c5c5',
+							textTransform: 'uppercase',
+							padding: '10px',
+							'& h5': { fontSize: '.8em', margin: 0 },
+						},
+						'.ss__autocomplete__title--facets': { order: vertical ? 2 : void 0 },
+						'& .ss__autocomplete__terms': {
+							flex: '1 1 auto',
+							maxWidth: vertical || horizontalTerms ? 'auto' : '150px',
+							order: 1,
+							background: '#f8f8f8',
+							'& .ss__autocomplete__terms__options': {
+								display: vertical || horizontalTerms ? 'flex' : void 0,
+								justifyContent: 'space-evenly',
+								flexWrap: 'wrap',
+								'& .ss__autocomplete__terms__option': {
+									flexGrow: vertical || horizontalTerms ? '1' : void 0,
+									textAlign: vertical || horizontalTerms ? 'center' : void 0,
+									wordBreak: 'break-all',
+									'& a': { display: 'block', padding: vertical || horizontalTerms ? '10px 30px' : '10px', '& em': { fontStyle: 'normal' } },
+									'&.ss__autocomplete__terms__option--active': {
+										background: '#fff',
 										'& a': {
 											fontWeight: 'bold',
-											color: null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary,
-											'& .ss__icon': { marginLeft: '5px' },
+											color: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
 										},
 									},
 								},
 							},
-							style
-						)
-					);
+						},
+						'& .ss__autocomplete__facets': {
+							display: 'flex',
+							flex: '0 0 150px',
+							flexDirection: vertical ? 'row' : 'column',
+							columnGap: '20px',
+							order: 2,
+							padding: vertical ? '10px 20px' : '10px',
+							overflowY: vertical ? void 0 : 'auto',
+							'& .ss__autocomplete__facet': { flex: vertical ? '0 1 150px' : void 0 },
+							'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
+								{ paddingLeft: 0 },
+							'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover': { cursor: 'pointer' },
+							'.ss__facet-palette-options__icon': { display: 'none' },
+						},
+						'& .ss__autocomplete__content': {
+							display: 'flex',
+							flex: '1 1 ' + (hideFacets ? 'auto' : '0%'),
+							flexDirection: 'column',
+							justifyContent: 'space-between',
+							order: 3,
+							overflowY: 'auto',
+							margin: noResults ? '0 auto' : void 0,
+							padding: vertical ? '10px 20px' : '10px',
+							'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': { marginBottom: '10px' },
+							'& .ss__banner.ss__banner--footer': { margin: '10px 0' },
+							'& .ss__autocomplete__content__results': { minHeight: '0%' },
+							'& .ss__autocomplete__content__info': {
+								padding: '10px',
+								textAlign: noResults ? 'center' : 'right',
+								'& a': {
+									fontWeight: 'bold',
+									color: null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary,
+									'& .ss__icon': { marginLeft: '5px' },
+								},
+							},
+						},
+					});
 				},
 				Autocomplete = (0, es.Pi)(function (properties) {
 					var _globalTheme$componen,
@@ -14852,8 +14983,8 @@
 						_search$query2,
 						_search$originalQuery,
 						_search$query3,
+						_search$query4,
 						delayTimeout,
-						inputViewportOffsetBottom,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ termsTitle: '', trendingTitle: 'Popular Searches', facetsTitle: '', contentTitle: '', width: '100%' },
@@ -14876,7 +15007,7 @@
 						valueProps = {
 							onMouseEnter: function onMouseEnter(e) {
 								clearTimeout(delayTimeout),
-									(delayTimeout = setTimeout(function () {
+									(delayTimeout = window.setTimeout(function () {
 										e.target.focus();
 									}, 333));
 							},
@@ -14902,38 +15033,39 @@
 								(null == displaySettings ? void 0 : displaySettings.theme) || {}
 							)
 						),
-						input = (props = Object.assign({}, props, displaySettings, { theme })).input;
+						input = (props = Object.assign({}, props, displaySettings, { theme })).input,
+						inputViewportOffsetBottom = 0;
 					if (input) {
 						var _input;
 						'string' == typeof input && (input = document.querySelector(input));
 						var rect = null === (_input = input) || void 0 === _input ? void 0 : _input.getBoundingClientRect();
 						inputViewportOffsetBottom = (null == rect ? void 0 : rect.bottom) || 0;
 					}
-					var _props3 = props,
-						hideTerms = _props3.hideTerms,
-						hideFacets = _props3.hideFacets,
-						hideContent = _props3.hideContent,
-						hideBanners = _props3.hideBanners,
-						hideLink = _props3.hideLink,
-						horizontalTerms = _props3.horizontalTerms,
-						vertical = _props3.vertical,
-						termsTitle = _props3.termsTitle,
-						trendingTitle = _props3.trendingTitle,
-						facetsTitle = _props3.facetsTitle,
-						contentTitle = _props3.contentTitle,
-						viewportMaxHeight = _props3.viewportMaxHeight,
-						termsSlot = _props3.termsSlot,
-						facetsSlot = _props3.facetsSlot,
-						contentSlot = _props3.contentSlot,
-						resultsSlot = _props3.resultsSlot,
-						noResultsSlot = _props3.noResultsSlot,
-						linkSlot = _props3.linkSlot,
-						onTermClick = _props3.onTermClick,
-						disableStyles = _props3.disableStyles,
-						className = _props3.className,
-						width = _props3.width,
-						style = _props3.style,
-						controller = _props3.controller,
+					var _props2 = props,
+						hideTerms = _props2.hideTerms,
+						hideFacets = _props2.hideFacets,
+						hideContent = _props2.hideContent,
+						hideBanners = _props2.hideBanners,
+						hideLink = _props2.hideLink,
+						horizontalTerms = _props2.horizontalTerms,
+						vertical = _props2.vertical,
+						termsTitle = _props2.termsTitle,
+						trendingTitle = _props2.trendingTitle,
+						facetsTitle = _props2.facetsTitle,
+						contentTitle = _props2.contentTitle,
+						viewportMaxHeight = _props2.viewportMaxHeight,
+						termsSlot = _props2.termsSlot,
+						facetsSlot = _props2.facetsSlot,
+						contentSlot = _props2.contentSlot,
+						resultsSlot = _props2.resultsSlot,
+						noResultsSlot = _props2.noResultsSlot,
+						linkSlot = _props2.linkSlot,
+						onTermClick = _props2.onTermClick,
+						disableStyles = _props2.disableStyles,
+						className = _props2.className,
+						width = _props2.width,
+						style = _props2.style,
+						controller = _props2.controller,
 						subProps = {
 							facets: Object.assign(
 								{ limit: 3 },
@@ -15002,288 +15134,292 @@
 									inputViewportOffsetBottom,
 									hideFacets,
 									horizontalTerms,
-									noResults:
+									noResults: Boolean(
 										(null == search || null === (_search$query = search.query) || void 0 === _search$query ? void 0 : _search$query.string) &&
-										0 === results.length,
-									contentSlotExists: !!contentSlot,
+											0 === results.length
+									),
+									contentSlotExists: Boolean(contentSlot),
 									viewportMaxHeight,
 									vertical,
 									width,
-									style,
 									theme,
 								}),
 								style,
 						  ]);
-					return (
-						visible &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								Object.assign({}, styling, {
-									className: classnames_default()('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms }),
-									onClick: function onClick(e) {
-										return e.stopPropagation();
-									},
-								}),
-								!hideTerms &&
-									(showTrending || terms.length > 0 || termsSlot) &&
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
-										termsSlot
-											? (0, cloneWithProps.d)(termsSlot, {
-													terms,
-													trending,
-													termsTitle,
-													trendingTitle,
-													showTrending,
-													valueProps,
-													emIfy,
-													onTermClick,
-													controller,
-											  })
-											: (0, emotion_react_browser_esm.tZ)(
-													preact_module.HY,
-													null,
-													terms.length > 0
-														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																termsTitle
-																	? (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{ className: 'ss__autocomplete__title ss__autocomplete__title--terms' },
-																			(0, emotion_react_browser_esm.tZ)('h5', null, termsTitle)
-																	  )
-																	: null,
-																(0, emotion_react_browser_esm.tZ)(
-																	'div',
-																	{ className: 'ss__autocomplete__terms__options' },
-																	terms.map(function (term) {
-																		return (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{
-																				className: classnames_default()('ss__autocomplete__terms__option', {
-																					'ss__autocomplete__terms__option--active': term.active,
-																				}),
-																			},
-																			(0, emotion_react_browser_esm.tZ)(
-																				'a',
-																				Object.assign(
-																					{
-																						onClick: function onClick(e) {
-																							return onTermClick && onTermClick(e);
+					return visible
+						? (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									Object.assign({}, styling, {
+										className: classnames_default()('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms }),
+										onClick: function onClick(e) {
+											return e.stopPropagation();
+										},
+									}),
+									!hideTerms &&
+										(showTrending || terms.length > 0 || termsSlot) &&
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
+											termsSlot
+												? (0, cloneWithProps.d)(termsSlot, {
+														terms,
+														trending,
+														termsTitle,
+														trendingTitle,
+														showTrending,
+														valueProps,
+														emIfy,
+														onTermClick,
+														controller,
+												  })
+												: (0, emotion_react_browser_esm.tZ)(
+														preact_module.HY,
+														null,
+														terms.length > 0
+															? (0, emotion_react_browser_esm.tZ)(
+																	preact_module.HY,
+																	null,
+																	termsTitle
+																		? (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{ className: 'ss__autocomplete__title ss__autocomplete__title--terms' },
+																				(0, emotion_react_browser_esm.tZ)('h5', null, termsTitle)
+																		  )
+																		: null,
+																	(0, emotion_react_browser_esm.tZ)(
+																		'div',
+																		{ className: 'ss__autocomplete__terms__options' },
+																		terms.map(function (term) {
+																			return (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{
+																					className: classnames_default()('ss__autocomplete__terms__option', {
+																						'ss__autocomplete__terms__option--active': term.active,
+																					}),
+																				},
+																				(0, emotion_react_browser_esm.tZ)(
+																					'a',
+																					Object.assign(
+																						{
+																							onClick: function onClick(e) {
+																								return onTermClick && onTermClick(e);
+																							},
+																							href: term.url.href,
 																						},
-																						href: term.url.href,
-																					},
-																					valueProps,
-																					{
-																						onFocus: function onFocus() {
-																							return term.preview();
+																						valueProps,
+																						{
+																							onFocus: function onFocus() {
+																								return term.preview();
+																							},
+																						}
+																					),
+																					emIfy(term.value, state.input || '')
+																				)
+																			);
+																		})
+																	)
+															  )
+															: null,
+														showTrending
+															? (0, emotion_react_browser_esm.tZ)(
+																	preact_module.HY,
+																	null,
+																	trendingTitle
+																		? (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{ className: 'ss__autocomplete__title ss__autocomplete__title--trending' },
+																				(0, emotion_react_browser_esm.tZ)('h5', null, trendingTitle)
+																		  )
+																		: null,
+																	(0, emotion_react_browser_esm.tZ)(
+																		'div',
+																		{ className: 'ss__autocomplete__terms__options' },
+																		trending.map(function (term) {
+																			return (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{
+																					className: classnames_default()('ss__autocomplete__terms__option', {
+																						'ss__autocomplete__terms__option--active': term.active,
+																					}),
+																				},
+																				(0, emotion_react_browser_esm.tZ)(
+																					'a',
+																					Object.assign(
+																						{
+																							onClick: function onClick(e) {
+																								return onTermClick && onTermClick(e);
+																							},
+																							href: term.url.href,
 																						},
-																					}
-																				),
-																				emIfy(term.value, state.input)
-																			)
-																		);
-																	})
-																)
-														  )
-														: null,
-													showTrending
-														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																trendingTitle
-																	? (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{ className: 'ss__autocomplete__title ss__autocomplete__title--trending' },
-																			(0, emotion_react_browser_esm.tZ)('h5', null, trendingTitle)
-																	  )
-																	: null,
-																(0, emotion_react_browser_esm.tZ)(
-																	'div',
-																	{ className: 'ss__autocomplete__terms__options' },
-																	trending.map(function (term) {
-																		return (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{
-																				className: classnames_default()('ss__autocomplete__terms__option', {
-																					'ss__autocomplete__terms__option--active': term.active,
-																				}),
-																			},
-																			(0, emotion_react_browser_esm.tZ)(
-																				'a',
-																				Object.assign(
-																					{
-																						onClick: function onClick(e) {
-																							return onTermClick && onTermClick(e);
-																						},
-																						href: term.url.href,
-																					},
-																					valueProps,
-																					{
-																						onFocus: function onFocus() {
-																							return term.preview();
-																						},
-																					}
-																				),
-																				emIfy(term.value, state.input)
-																			)
-																		);
-																	})
-																)
-														  )
-														: null
-											  )
-									),
-								!hideFacets &&
-									(facetsSlot
-										? (0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__autocomplete__facets' },
-												(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })
-										  )
-										: facetsToShow.length > 0 &&
-										  (0, emotion_react_browser_esm.tZ)(
-												preact_module.HY,
-												null,
-												facetsTitle && vertical
-													? (0, emotion_react_browser_esm.tZ)(
-															'div',
-															{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
-															(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
-													  )
-													: null,
-												(0, emotion_react_browser_esm.tZ)(
+																						valueProps,
+																						{
+																							onFocus: function onFocus() {
+																								return term.preview();
+																							},
+																						}
+																					),
+																					emIfy(term.value, state.input || '')
+																				)
+																			);
+																		})
+																	)
+															  )
+															: null
+												  )
+										),
+									!hideFacets &&
+										(facetsSlot
+											? (0, emotion_react_browser_esm.tZ)(
 													'div',
 													{ className: 'ss__autocomplete__facets' },
-													facetsTitle && !vertical
+													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })
+											  )
+											: facetsToShow.length > 0 &&
+											  (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													facetsTitle && vertical
 														? (0, emotion_react_browser_esm.tZ)(
 																'div',
 																{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
 																(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
 														  )
 														: null,
-													(0, emotion_react_browser_esm.tZ)(Facets.m, Object.assign({}, subProps.facets, { facets: facetsToShow })),
+													(0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__autocomplete__facets' },
+														facetsTitle && !vertical
+															? (0, emotion_react_browser_esm.tZ)(
+																	'div',
+																	{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
+																	(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
+															  )
+															: null,
+														(0, emotion_react_browser_esm.tZ)(Facets.m, Object.assign({}, subProps.facets, { facets: facetsToShow })),
+														hideBanners
+															? null
+															: (0, emotion_react_browser_esm.tZ)(
+																	Banner.j,
+																	Object.assign({}, subProps.banner, { content: merchandising.content, type: SearchMerchandisingStore.z.LEFT })
+															  )
+													)
+											  )),
+									hideContent
+										? null
+										: contentSlot
+										? (0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__autocomplete__content' },
+												(0, cloneWithProps.d)(contentSlot, { results, merchandising, search, pagination, filters, controller })
+										  )
+										: results.length > 0 ||
+										  Object.keys(merchandising.content).length > 0 ||
+										  (null != search && null !== (_search$query2 = search.query) && void 0 !== _search$query2 && _search$query2.string)
+										? (0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__autocomplete__content' },
+												(0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
 													hideBanners
 														? null
 														: (0, emotion_react_browser_esm.tZ)(
 																Banner.j,
-																Object.assign({}, subProps.banner, { content: merchandising.content, type: types.$.LEFT })
+																Object.assign({}, subProps.banner, { content: merchandising.content, type: SearchMerchandisingStore.z.HEADER })
+														  ),
+													hideBanners
+														? null
+														: (0, emotion_react_browser_esm.tZ)(
+																Banner.j,
+																Object.assign({}, subProps.banner, { content: merchandising.content, type: SearchMerchandisingStore.z.BANNER })
+														  ),
+													results.length > 0
+														? (0, emotion_react_browser_esm.tZ)(
+																'div',
+																{ className: 'ss__autocomplete__content__results' },
+																resultsSlot
+																	? (0, cloneWithProps.d)(resultsSlot, { results, contentTitle, controller })
+																	: (0, emotion_react_browser_esm.tZ)(
+																			preact_module.HY,
+																			null,
+																			contentTitle && results.length > 0
+																				? (0, emotion_react_browser_esm.tZ)(
+																						'div',
+																						{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--content') },
+																						(0, emotion_react_browser_esm.tZ)('h5', null, contentTitle)
+																				  )
+																				: null,
+																			(0, emotion_react_browser_esm.tZ)(Results.u, Object.assign({ results }, subProps.results, { controller }))
+																	  )
 														  )
+														: (0, emotion_react_browser_esm.tZ)(
+																'div',
+																{ className: 'ss__autocomplete__content__no-results' },
+																noResultsSlot
+																	? (0, cloneWithProps.d)(noResultsSlot, { search, pagination, controller })
+																	: (0, emotion_react_browser_esm.tZ)(
+																			preact_module.HY,
+																			null,
+																			(0, emotion_react_browser_esm.tZ)(
+																				'p',
+																				null,
+																				'No results found for "',
+																				(null === (_search$originalQuery = search.originalQuery) || void 0 === _search$originalQuery
+																					? void 0
+																					: _search$originalQuery.string) ||
+																					(null === (_search$query3 = search.query) || void 0 === _search$query3 ? void 0 : _search$query3.string),
+																				'".'
+																			),
+																			(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
+																	  )
+														  ),
+													hideBanners
+														? null
+														: (0, emotion_react_browser_esm.tZ)(
+																Banner.j,
+																Object.assign({}, subProps.banner, { content: merchandising.content, type: SearchMerchandisingStore.z.FOOTER })
+														  ),
+													hideLink
+														? null
+														: linkSlot
+														? (0, cloneWithProps.d)(linkSlot, { search, results, pagination, filters, controller })
+														: null != search &&
+														  null !== (_search$query4 = search.query) &&
+														  void 0 !== _search$query4 &&
+														  _search$query4.string &&
+														  results.length > 0
+														? (0, emotion_react_browser_esm.tZ)(
+																'div',
+																{ className: 'ss__autocomplete__content__info' },
+																(0, emotion_react_browser_esm.tZ)(
+																	'a',
+																	{ href: state.url.href },
+																	'See ',
+																	pagination.totalResults,
+																	' ',
+																	filters.length > 0 ? 'filtered' : '',
+																	' result',
+																	1 == pagination.totalResults ? '' : 's',
+																	' for "',
+																	search.query.string,
+																	'"',
+																	(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
+																)
+														  )
+														: null
 												)
-										  )),
-								hideContent
-									? null
-									: contentSlot
-									? (0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__autocomplete__content' },
-											(0, preact_module.Tm)(contentSlot, { results, merchandising, search, pagination, filters, controller })
-									  )
-									: results.length > 0 ||
-									  Object.keys(merchandising.content).length > 0 ||
-									  (null != search && null !== (_search$query2 = search.query) && void 0 !== _search$query2 && _search$query2.string)
-									? (0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__autocomplete__content' },
-											hideBanners
-												? null
-												: (0, emotion_react_browser_esm.tZ)(
-														Banner.j,
-														Object.assign({}, subProps.banner, { content: merchandising.content, type: types.$.HEADER })
-												  ),
-											hideBanners
-												? null
-												: (0, emotion_react_browser_esm.tZ)(
-														Banner.j,
-														Object.assign({}, subProps.banner, { content: merchandising.content, type: types.$.BANNER })
-												  ),
-											results.length > 0
-												? (0, emotion_react_browser_esm.tZ)(
-														'div',
-														{ className: 'ss__autocomplete__content__results' },
-														resultsSlot
-															? (0, preact_module.Tm)(resultsSlot, { results, contentTitle, controller })
-															: (0, emotion_react_browser_esm.tZ)(
-																	preact_module.HY,
-																	null,
-																	contentTitle && results.length > 0
-																		? (0, emotion_react_browser_esm.tZ)(
-																				'div',
-																				{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--content') },
-																				(0, emotion_react_browser_esm.tZ)('h5', null, contentTitle)
-																		  )
-																		: null,
-																	(0, emotion_react_browser_esm.tZ)(Results.u, Object.assign({ results }, subProps.results, { controller }))
-															  )
-												  )
-												: (0, emotion_react_browser_esm.tZ)(
-														'div',
-														{ className: 'ss__autocomplete__content__no-results' },
-														noResultsSlot
-															? (0, preact_module.Tm)(noResultsSlot, { search, pagination, controller })
-															: (0, emotion_react_browser_esm.tZ)(
-																	preact_module.HY,
-																	null,
-																	(0, emotion_react_browser_esm.tZ)(
-																		'p',
-																		null,
-																		'No results found for "',
-																		(null === (_search$originalQuery = search.originalQuery) || void 0 === _search$originalQuery
-																			? void 0
-																			: _search$originalQuery.string) || search.query.string,
-																		'".'
-																	),
-																	(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
-															  )
-												  ),
-											hideBanners
-												? null
-												: (0, emotion_react_browser_esm.tZ)(
-														Banner.j,
-														Object.assign({}, subProps.banner, { content: merchandising.content, type: types.$.FOOTER })
-												  ),
-											hideLink
-												? null
-												: linkSlot
-												? (0, preact_module.Tm)(linkSlot, { search, results, pagination, filters, controller })
-												: null != search &&
-												  null !== (_search$query3 = search.query) &&
-												  void 0 !== _search$query3 &&
-												  _search$query3.string &&
-												  results.length > 0
-												? (0, emotion_react_browser_esm.tZ)(
-														'div',
-														{ className: 'ss__autocomplete__content__info' },
-														(0, emotion_react_browser_esm.tZ)(
-															'a',
-															{ href: state.url.href },
-															'See ',
-															pagination.totalResults,
-															' ',
-															filters.length > 0 ? 'filtered' : '',
-															' result',
-															1 == pagination.totalResults ? '' : 's',
-															' for "',
-															search.query.string,
-															'"',
-															(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
-														)
-												  )
-												: null
-									  )
-									: null
-							)
-						)
-					);
+										  )
+										: null
+								)
+						  )
+						: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null);
 				}),
 				emIfy = function emIfy(term, search) {
 					var match = term.match(escapeRegExp(search));
-					if (search && term && match) {
+					if (search && term && match && match.index) {
 						var beforeMatch = term.slice(0, match.index),
 							afterMatch = term.slice(match.index + search.length, term.length);
 						return (0, emotion_react_browser_esm.tZ)(
@@ -16411,7 +16547,7 @@
 					globals: { siteId: '8uyt2m' },
 					settings: { trending: { limit: 5 } },
 				}),
-				Default = function Template(args, _ref) {
+				Default = function Default(args, _ref) {
 					var controller = _ref.loaded.controller;
 					return (
 						setTimeout(function () {
@@ -16422,7 +16558,7 @@
 							Object.assign({}, args, { controller, input: null == controller ? void 0 : controller.config.selector })
 						)
 					);
-				}.bind({});
+				};
 			(Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -16455,8 +16591,7 @@
 					Light: () => Light,
 					default: () => BranchOverride_stories,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
@@ -16526,24 +16661,24 @@
 				return arr2;
 			}
 			var CSS_override = function override(_ref) {
-					var theme = _ref.theme;
+					var componentTheme = _ref.componentTheme;
 					return (0, emotion_react_browser_esm.iv)({
 						width: '360px',
 						height: '120px',
 						overflow: 'hidden',
 						fontSize: '14px',
 						position: 'fixed',
-						zIndex: 9999,
+						zIndex: '9999',
 						cursor: 'auto',
 						bottom: '50px',
 						right: 0,
-						background: theme.main.background,
-						color: theme.main.color,
-						border: theme.main.border,
+						background: componentTheme.main.background,
+						color: componentTheme.main.color,
+						border: componentTheme.main.border,
 						borderRight: 0,
 						borderTopLeftRadius: '5px',
 						borderBottomLeftRadius: '5px',
-						boxShadow: theme.main.boxShadow,
+						boxShadow: componentTheme.main.boxShadow,
 						transition: 'height ease 0.2s, right ease 0.5s 0.2s',
 						'&.ss__branch-override--collapsed': {
 							transition: 'height ease 0.5s 0.5s, right ease 0.5s',
@@ -16553,8 +16688,8 @@
 						},
 						'.ss__branch-override__top': {
 							padding: '10px',
-							background: theme.top.background,
-							borderBottom: theme.top.border,
+							background: componentTheme.top.background,
+							borderBottom: componentTheme.top.border,
 							'.ss__branch-override__top__logo': { display: 'inline-block', height: '30px', maxHeight: '30px', verticalAlign: 'middle' },
 							'.ss__branch-override__top__collapse': { display: 'inline-block', float: 'right', padding: '5px', cursor: 'pointer' },
 							'.ss__branch-override__top__button': {
@@ -16565,8 +16700,8 @@
 								textAlign: 'center',
 								cursor: 'pointer',
 								fontSize: '10px',
-								border: theme.top.button.border,
-								color: theme.top.button.color,
+								border: componentTheme.top.button.border,
+								color: componentTheme.top.button.color,
 								float: 'right',
 								marginRight: '14px',
 							},
@@ -16576,8 +16711,8 @@
 							fontSize: '12px',
 							'.ss__branch-override__bottom__left': {
 								fontWeight: 'bold',
-								fontStyle: theme.bottom.branch.style,
-								color: theme.bottom.branch.color,
+								fontStyle: componentTheme.bottom.branch.style,
+								color: componentTheme.bottom.branch.color,
 								fontSize: '14px',
 								lineHeight: '20px',
 								display: 'inline-flex',
@@ -16591,7 +16726,7 @@
 							'.ss__branch-override__bottom__right': {
 								float: 'right',
 								fontStyle: 'italic',
-								color: theme.bottom.additional.color,
+								color: componentTheme.bottom.additional.color,
 								fontSize: '12px',
 								lineHeight: '20px',
 							},
@@ -16599,7 +16734,7 @@
 						},
 					});
 				},
-				themes = {
+				componentThemes = {
 					darkTheme: {
 						main: { border: '0', background: 'rgba(59, 35, 173, 0.9)', color: '#fff', boxShadow: '#4c3ce2 1px 1px 3px 0px' },
 						top: {
@@ -16686,7 +16821,7 @@
 									? void 0
 									: _globalTheme$componen2.icon,
 								(0, defined.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
 						prefersDark = 'boolean' == typeof darkMode ? darkMode : !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
@@ -16699,78 +16834,81 @@
 					error && setThemeName('failureTheme');
 					var styling = {};
 					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_override({ theme: themes[themeName] }), style]),
-						(details || error) &&
-							name &&
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								Object.assign(
-									{ className: classnames_default()('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className) },
-									styling,
-									{
-										onClick: function onClick(e) {
-											e.preventDefault(), e.stopPropagation(), setCollapsed(0);
-										},
-									}
-								),
-								(0, emotion_react_browser_esm.tZ)(
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_override({ componentTheme: componentThemes[themeName] }), style]),
+						(details || error) && name
+							? (0, emotion_react_browser_esm.tZ)(
 									'div',
-									{ className: 'ss__branch-override__top' },
-									(0, emotion_react_browser_esm.tZ)('img', { className: 'ss__branch-override__top__logo', src: themes[themeName].top.logo.src }),
+									Object.assign(
+										{ className: classnames_default()('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className) },
+										styling,
+										{
+											onClick: function onClick(e) {
+												e.preventDefault(), e.stopPropagation(), setCollapsed(0);
+											},
+										}
+									),
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{
-											className: 'ss__branch-override__top__collapse',
-											onClick: function onClick(e) {
-												e.preventDefault(), e.stopPropagation(), setCollapsed(1);
-											},
-										},
+										{ className: 'ss__branch-override__top' },
+										(0, emotion_react_browser_esm.tZ)('img', {
+											className: 'ss__branch-override__top__logo',
+											src: componentThemes[themeName].top.logo.src,
+										}),
 										(0, emotion_react_browser_esm.tZ)(
-											Icon.J,
-											Object.assign({ size: '18px', color: themes[themeName].top.close.fill }, subProps.icon, { icon: 'close-thin' })
+											'div',
+											{
+												className: 'ss__branch-override__top__collapse',
+												onClick: function onClick(e) {
+													e.preventDefault(), e.stopPropagation(), setCollapsed(1);
+												},
+											},
+											(0, emotion_react_browser_esm.tZ)(
+												Icon.J,
+												Object.assign({ size: '18px', color: componentThemes[themeName].top.close.fill }, subProps.icon, { icon: 'close-thin' })
+											)
+										),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{
+												className: 'ss__branch-override__top__button',
+												onClick: function onClick(e) {
+													e.preventDefault(), e.stopPropagation(), onRemoveClick && onRemoveClick(e, name);
+												},
+											},
+											componentThemes[themeName].top.button.content
 										)
 									),
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{
-											className: 'ss__branch-override__top__button',
-											onClick: function onClick(e) {
-												e.preventDefault(), e.stopPropagation(), onRemoveClick && onRemoveClick(e, name);
-											},
-										},
-										themes[themeName].top.button.content
+										{ className: 'ss__branch-override__bottom' },
+										(0, emotion_react_browser_esm.tZ)(
+											'span',
+											{ className: 'ss__branch-override__bottom__left' },
+											error
+												? (0, emotion_react_browser_esm.tZ)(
+														preact_module.HY,
+														null,
+														(0, emotion_react_browser_esm.tZ)(
+															Icon.J,
+															Object.assign({ size: '12px', color: componentThemes[themeName].bottom.branch.color }, subProps.icon, { icon: 'warn' })
+														),
+														(0, emotion_react_browser_esm.tZ)('span', null, error.message)
+												  )
+												: name
+										),
+										(0, emotion_react_browser_esm.tZ)(
+											'span',
+											{ className: 'ss__branch-override__bottom__right' },
+											error ? name : null == details ? void 0 : details.lastModified
+										),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__branch-override__bottom__content' },
+											(null == error ? void 0 : error.description) || componentThemes[themeName].bottom.content
+										)
 									)
-								),
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									{ className: 'ss__branch-override__bottom' },
-									(0, emotion_react_browser_esm.tZ)(
-										'span',
-										{ className: 'ss__branch-override__bottom__left' },
-										error
-											? (0, emotion_react_browser_esm.tZ)(
-													preact_module.HY,
-													null,
-													(0, emotion_react_browser_esm.tZ)(
-														Icon.J,
-														Object.assign({ size: '12px', color: themes[themeName].bottom.branch.color }, subProps.icon, { icon: 'warn' })
-													),
-													(0, emotion_react_browser_esm.tZ)('span', null, error.message)
-											  )
-											: name
-									),
-									(0, emotion_react_browser_esm.tZ)(
-										'span',
-										{ className: 'ss__branch-override__bottom__right' },
-										error ? name : null == details ? void 0 : details.lastModified
-									),
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: 'ss__branch-override__bottom__content' },
-										(null == error ? void 0 : error.description) || themes[themeName].bottom.content
-									)
-								)
-							)
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				},
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -16946,20 +17084,25 @@
 					componentArgs.p
 				),
 			};
-			var Template = function Template(args) {
-					return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
-				},
-				Auto = Template.bind({});
+			var Auto = function Auto(args) {
+				return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
+			};
 			Auto.args = { name: 'next', details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' } };
-			var Dark = Template.bind({});
+			var Dark = function Dark(args) {
+				return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
+			};
 			Dark.args = {
 				name: 'next',
 				details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' },
 				darkMode: !0,
 			};
-			var Error = Template.bind({});
+			var Error = function Error(args) {
+				return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
+			};
 			Error.args = { name: 'testing', error: { message: 'Branch not found!', description: 'Incorrect branch name or branch no longer exists.' } };
-			var Light = Template.bind({});
+			var Light = function Light(args) {
+				return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
+			};
 			Light.args = {
 				name: 'next',
 				details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' },
@@ -16982,7 +17125,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
@@ -17878,10 +18020,10 @@
 						})
 					);
 				}),
-				List = function ListTemplate(args, _ref2) {
+				List = function List(args, _ref2) {
 					var controller = _ref2.loaded.controller;
 					return (0, preact_module.h)(ObservableListFacet, { args, controller });
-				}.bind({});
+				};
 			List.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -17918,10 +18060,10 @@
 						})
 					);
 				}),
-				Slider = function SliderTemplate(args, _ref5) {
+				Slider = function Slider(args, _ref5) {
 					var controller = _ref5.loaded.controller;
 					return (0, preact_module.h)(ObservableSliderFacet, { args, controller });
-				}.bind({});
+				};
 			Slider.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -17941,23 +18083,27 @@
 				),
 			];
 			var ObservablePaletteFacet = (0, mobxreact_esm.Pi)(function (_ref7) {
-					var args = _ref7.args,
-						facet = _ref7.facet;
-					return (0, preact_module.h)(Facet.r, Object.assign({}, args, { facet }));
-				}),
-				Palette = function PaletteTemplate(args, _ref8) {
 					var _controller$store3,
-						controller = _ref8.loaded.controller,
-						facet =
-							null == controller || null === (_controller$store3 = controller.store) || void 0 === _controller$store3
-								? void 0
-								: _controller$store3.facets
-										.filter(function (facet) {
-											return facet.display === types.uw.PALETTE;
-										})
-										.shift();
-					return (0, preact_module.h)(ObservablePaletteFacet, { args, facet });
-				}.bind({});
+						args = _ref7.args,
+						controller = _ref7.controller;
+					return (0, preact_module.h)(
+						Facet.r,
+						Object.assign({}, args, {
+							facet:
+								null == controller || null === (_controller$store3 = controller.store) || void 0 === _controller$store3
+									? void 0
+									: _controller$store3.facets
+											.filter(function (facet) {
+												return facet.display === types.uw.PALETTE;
+											})
+											.shift(),
+						})
+					);
+				}),
+				Palette = function Palette(args, _ref8) {
+					var controller = _ref8.loaded.controller;
+					return (0, preact_module.h)(ObservablePaletteFacet, { args, controller });
+				};
 			Palette.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee3() {
@@ -17994,10 +18140,10 @@
 						})
 					);
 				}),
-				Grid = function GridTemplate(args, _ref11) {
+				Grid = function Grid(args, _ref11) {
 					var controller = _ref11.loaded.controller;
 					return (0, preact_module.h)(ObservableGridFacet, { args, controller });
-				}.bind({});
+				};
 			Grid.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee4() {
@@ -18030,10 +18176,10 @@
 										.shift();
 					return (0, preact_module.h)(Facet.r, Object.assign({}, args, { facet }));
 				}),
-				Hierarchy = function HierarchyTemplate(args, _ref14) {
+				Hierarchy = function Hierarchy(args, _ref14) {
 					var controller = _ref14.loaded.controller;
 					return (0, preact_module.h)(ObservableHierarchyFacet, { args, controller });
-				}.bind({});
+				};
 			Hierarchy.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee5() {
@@ -18109,7 +18255,8 @@
 							color,
 							border: 'none',
 							borderBottom:
-								'2px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#ccc'),
+								'2px solid ' +
+								((null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#ccc'),
 							padding: '6px 0',
 						},
 						'& .ss__facet__options': { marginTop: '8px', maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' },
@@ -18123,14 +18270,26 @@
 						_properties$theme$com,
 						_props$facet,
 						_globalTheme$componen2,
+						_props2,
 						_globalTheme$componen3,
+						_props3,
 						_globalTheme$componen4,
+						_props4,
 						_globalTheme$componen5,
+						_props5,
 						_globalTheme$componen6,
+						_props6,
 						_globalTheme$componen7,
+						_props7,
 						_globalTheme$componen8,
+						_props8,
 						_globalTheme$componen9,
+						_props9,
 						_globalTheme$componen10,
+						_props10,
+						_facet$overflow2,
+						_facet$overflow4,
+						_facet$overflow5,
 						_props$facet2,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_15__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
@@ -18165,6 +18324,7 @@
 							props.fields[null === (_props$facet2 = props.facet) || void 0 === _props$facet2 ? void 0 : _props$facet2.field]
 						));
 					var limitedValues,
+						_facet$overflow,
 						_props = props,
 						disableCollapse = _props.disableCollapse,
 						facet = _props.facet,
@@ -18193,7 +18353,7 @@
 									? void 0
 									: _globalTheme$componen2.dropdown,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme }
 							),
 							icon: Object.assign(
 								{ className: 'ss__facet__dropdown__icon', size: '12px', color: iconColor || color },
@@ -18201,7 +18361,7 @@
 									? void 0
 									: _globalTheme$componen3.icon,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null === (_props3 = props) || void 0 === _props3 ? void 0 : _props3.theme }
 							),
 							showMoreLessIcon: Object.assign(
 								{ className: 'ss__facet__show-more-less__icon', size: '10px', color: iconColor || color },
@@ -18209,7 +18369,7 @@
 									? void 0
 									: _globalTheme$componen4.icon,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null === (_props4 = props) || void 0 === _props4 ? void 0 : _props4.theme }
 							),
 							facetHierarchyOptions: Object.assign(
 								{ className: 'ss__facet__facet-hierarchy-options' },
@@ -18217,7 +18377,7 @@
 									? void 0
 									: _globalTheme$componen5.facetHierarchyOptions,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
-								{ theme: props.theme }
+								{ theme: null === (_props5 = props) || void 0 === _props5 ? void 0 : _props5.theme }
 							),
 							facetListOptions: Object.assign(
 								{ className: 'ss__facet__facet-list-options' },
@@ -18225,7 +18385,7 @@
 									? void 0
 									: _globalTheme$componen6.facetListOptions,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
-								{ theme: props.theme }
+								{ theme: null === (_props6 = props) || void 0 === _props6 ? void 0 : _props6.theme }
 							),
 							facetGridOptions: Object.assign(
 								{ className: 'ss__facet__facet-grid-options' },
@@ -18233,7 +18393,7 @@
 									? void 0
 									: _globalTheme$componen7.facetGridOptions,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
-								{ theme: props.theme }
+								{ theme: null === (_props7 = props) || void 0 === _props7 ? void 0 : _props7.theme }
 							),
 							facetPaletteOptions: Object.assign(
 								{ className: 'ss__facet__facet-palette-options' },
@@ -18241,7 +18401,7 @@
 									? void 0
 									: _globalTheme$componen8.facetPaletteOptions,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
-								{ theme: props.theme }
+								{ theme: null === (_props8 = props) || void 0 === _props8 ? void 0 : _props8.theme }
 							),
 							facetSlider: Object.assign(
 								{ className: 'ss__facet__facet-slider' },
@@ -18249,7 +18409,7 @@
 									? void 0
 									: _globalTheme$componen9.facetSlider,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null === (_props9 = props) || void 0 === _props9 ? void 0 : _props9.theme }
 							),
 							searchInput: Object.assign(
 								{ className: 'ss__facet__search-input' },
@@ -18257,11 +18417,12 @@
 									? void 0
 									: _globalTheme$componen10.searchInput,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
-								{ theme: props.theme }
+								{ theme: null === (_props10 = props) || void 0 === _props10 ? void 0 : _props10.theme }
 							),
 						};
-					null != facet && facet.overflow && Number.isInteger(limit) && !disableOverflow
-						? (facet.overflow.setLimit(limit), (limitedValues = null == facet ? void 0 : facet.refinedValues))
+					null != facet && facet.overflow && limit && Number.isInteger(limit) && !disableOverflow
+						? (null === (_facet$overflow = facet.overflow) || void 0 === _facet$overflow || _facet$overflow.setLimit(limit),
+						  (limitedValues = null == facet ? void 0 : facet.refinedValues))
 						: (limitedValues =
 								null != facet && facet.overflow && Number.isInteger(limit)
 									? null == facet
@@ -18298,7 +18459,7 @@
 									Object.assign({}, subProps.dropdown, {
 										open: disableCollapse || !(null != facet && facet.collapsed),
 										onClick: function onClick(e) {
-											return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
+											return !disableCollapse && facet.toggleCollapse && (null == facet ? void 0 : facet.toggleCollapse());
 										},
 										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 											'div',
@@ -18353,14 +18514,16 @@
 										})()
 									),
 									!disableOverflow &&
-										(null == facet ? void 0 : facet.overflow) &&
-										facet.overflow.enabled &&
+										(null == facet || null === (_facet$overflow2 = facet.overflow) || void 0 === _facet$overflow2
+											? void 0
+											: _facet$overflow2.enabled) &&
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 											'div',
 											{
 												className: 'ss__facet__show-more-less',
 												onClick: function onClick() {
-													return facet.overflow.toggle();
+													var _facet$overflow3;
+													return null === (_facet$overflow3 = facet.overflow) || void 0 === _facet$overflow3 ? void 0 : _facet$overflow3.toggle();
 												},
 											},
 											overflowSlot
@@ -18371,13 +18534,22 @@
 														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
 															Object.assign({}, subProps.showMoreLessIcon, {
-																icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess,
+																icon:
+																	((null === (_facet$overflow4 = facet.overflow) || void 0 === _facet$overflow4
+																		? void 0
+																		: _facet$overflow4.remaining) || 0) > 0
+																		? iconOverflowMore
+																		: iconOverflowLess,
 															})
 														),
 														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 															'span',
 															null,
-															facet.overflow.remaining > 0 ? showMoreText : showLessText
+															((null == facet || null === (_facet$overflow5 = facet.overflow) || void 0 === _facet$overflow5
+																? void 0
+																: _facet$overflow5.remaining) || 0) > 0
+																? showMoreText
+																: showLessText
 														)
 												  )
 										)
@@ -18394,7 +18566,6 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -18906,10 +19077,10 @@
 				),
 			};
 			var snapInstance = snapify.K.search({ id: 'Facets', globals: { siteId: '8uyt2m' } }),
-				Default = function Template(args, _ref) {
+				Default = function Default(args, _ref) {
 					var controller = _ref.loaded.controller;
 					return (0, preact_module.h)(Facets.m, Object.assign({}, args, { controller }));
-				}.bind({});
+				};
 			Default.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -18935,20 +19106,21 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_Facet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_Facet__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/providers/cache.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/providers/cache.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/utilities/defined.ts'),
 				CSS_facets = function facets() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({});
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)({});
 				},
-				Facets = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
+				Facets = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__.Pi)(function (properties) {
 					var _properties$controlle,
 						_properties$controlle2,
 						_globalTheme$componen,
@@ -18956,7 +19128,7 @@
 						_properties$theme$com,
 						_globalTheme$componen2,
 						_facets,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.a)(),
 						props = Object.assign(
 							{
 								facets:
@@ -18983,33 +19155,34 @@
 						className = props.className,
 						style = props.style,
 						facets = props.facets;
-					limit > 0 && (facets = facets.slice(0, +limit));
+					limit && facets && limit > 0 && (facets = facets.slice(0, +limit));
 					var subProps = {
 							facet: Object.assign(
 								{ className: 'ss__facets__facet' },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.facet,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						},
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facets(), style]),
-						(null === (_facets = facets) || void 0 === _facets ? void 0 : _facets.length) > 0 &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_8__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-									'div',
-									Object.assign({ className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss__facets', className) }, styling),
-									facets.map(function (facet) {
-										return (0,
-										_emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Facet__WEBPACK_IMPORTED_MODULE_9__.r, Object.assign({}, subProps.facet, { facet }));
-									})
-								)
-							)
+						facets && (null === (_facets = facets) || void 0 === _facets ? void 0 : _facets.length) > 0
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_9__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+										'div',
+										Object.assign({ className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__facets', className) }, styling),
+										facets.map(function (facet) {
+											return (0,
+											_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Facet__WEBPACK_IMPORTED_MODULE_10__.r, Object.assign({}, subProps.facet, { facet }));
+										})
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(preact__WEBPACK_IMPORTED_MODULE_3__.HY, null)
 					);
 				});
 		},
@@ -19026,7 +19199,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
@@ -19126,7 +19298,7 @@
 						style = props.style,
 						subProps = {
 							filter: Object.assign(
-								{ className: 'ss__filter-summary__filter' },
+								{ clearAllLabel: '', className: 'ss__filter-summary__filter' },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.filter,
@@ -19146,15 +19318,10 @@
 										Object.assign({}, styling, { className: classnames_default()('ss__filter-summary', className) }),
 										(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__filter-summary__title' }, title),
 										filters.map(function (filter) {
-											var _filter$facet, _filter$value;
 											return (0, emotion_react_browser_esm.tZ)(
 												Filter.w,
 												Object.assign({}, subProps.filter, {
-													url: null == filter ? void 0 : filter.url,
-													facetLabel:
-														null == filter || null === (_filter$facet = filter.facet) || void 0 === _filter$facet ? void 0 : _filter$facet.label,
-													valueLabel:
-														null == filter || null === (_filter$value = filter.value) || void 0 === _filter$value ? void 0 : _filter$value.label,
+													filter,
 													onClick: function onClick(e) {
 														return _onClick && _onClick(e, filter);
 													},
@@ -19179,7 +19346,7 @@
 											)
 									)
 							  )
-							: null
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -19888,11 +20055,10 @@
 						],
 					},
 				}),
-				Template = function Template(args, _ref) {
+				Regular = function Regular(args, _ref) {
 					var controller = _ref.loaded.controller;
 					return (0, preact_module.h)(FilterSummary, Object.assign({}, args, { controller }));
-				},
-				Regular = Template.bind({});
+				};
 			Regular.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -19911,7 +20077,10 @@
 					})
 				),
 			];
-			var noFacetLabel = Template.bind({});
+			var noFacetLabel = function noFacetLabel(args, _ref3) {
+				var controller = _ref3.loaded.controller;
+				return (0, preact_module.h)(FilterSummary, Object.assign({}, args, { controller }));
+			};
 			(noFacetLabel.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -19931,7 +20100,10 @@
 				),
 			]),
 				(noFacetLabel.args = { hideFacetLabel: !0 });
-			var customTitle = Template.bind({});
+			var customTitle = function customTitle(args, _ref5) {
+				var controller = _ref5.loaded.controller;
+				return (0, preact_module.h)(FilterSummary, Object.assign({}, args, { controller }));
+			};
 			(customTitle.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee3() {
@@ -19984,9 +20156,9 @@
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.number.is-nan.js'),
@@ -20159,8 +20331,8 @@
 			var CSS_recommendation = function recommendation(_ref) {
 					var vertical = _ref.vertical;
 					return (0, emotion_react_browser_esm.iv)({
-						height: vertical ? '100%' : null,
-						'.ss__result__image-wrapper': { height: vertical ? '85%' : null },
+						height: vertical ? '100%' : void 0,
+						'.ss__result__image-wrapper': { height: vertical ? '85%' : void 0 },
 					});
 				},
 				Recommendation = (0, es.Pi)(function (properties) {
@@ -20169,7 +20341,9 @@
 						_properties$theme$com,
 						_controller$store,
 						_globalTheme$componen2,
+						_props3,
 						_globalTheme$componen3,
+						_props4,
 						_controller$track,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
@@ -20218,78 +20392,84 @@
 						throw new Error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
 					var resultsToRender =
 						results || (null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results);
-					if (!children || children.length === resultsToRender.length) {
-						var subProps = {
-								carousel: Object.assign(
-									{ className: 'ss__recommendation__Carousel' },
-									null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
-										? void 0
-										: _globalTheme$componen2.carousel,
-									(0, defined.r)({ disableStyles, vertical }),
-									{ theme: props.theme }
-								),
-								result: Object.assign(
-									{ className: 'ss__recommendation__result' },
-									null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
-										? void 0
-										: _globalTheme$componen3.result,
-									(0, defined.r)({ disableStyles }),
-									{ theme: props.theme }
-								),
-							},
-							rootComponentRef = (0, hooks_module.sO)(null),
-							_useState2 = Recommendation_slicedToArray((0, hooks_module.eJ)([0, 0]), 2),
-							initialIndexes = _useState2[0],
-							setInitialIndexes = _useState2[1],
-							inViewport = (function useIntersection(ref) {
-								var rootMargin = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : '0px',
-									fireOnce = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-									_useState2 = _slicedToArray((0, hooks_module.eJ)(!1), 2),
-									isIntersecting = _useState2[0],
-									setIntersecting = _useState2[1];
-								return (
-									(0, hooks_module.d4)(function () {
-										var observer = new IntersectionObserver(
-											function (_ref) {
-												var entry = _slicedToArray(_ref, 1)[0];
-												setIntersecting(entry.isIntersecting), fireOnce && entry.isIntersecting && observer.unobserve(ref.current);
-											},
-											{ rootMargin }
-										);
-										return (
-											ref.current && observer.observe(ref.current),
-											function () {
-												observer.unobserve(ref.current);
-											}
-										);
-									}, []),
-									isIntersecting
-								);
-							})(rootComponentRef, '0px', !0),
-							sendProductImpression = function sendProductImpression(index, count) {
-								if (inViewport) {
-									var resultLoopOverCount,
-										resultLoopCount = [index, index + count];
-									index + count > resultsToRender.length - 1 &&
-										((resultLoopCount = [index]), (resultLoopOverCount = [0, index + count - resultsToRender.length]));
-									var resultsImpressions = resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopCount));
-									resultLoopOverCount &&
-										(resultsImpressions = resultsImpressions.concat(
-											resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopOverCount))
-										)),
-										resultsImpressions.map(function (result) {
-											controller.track.product.impression(result);
-										});
-								}
-							};
-						inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
-							(children || resultsToRender.length) &&
-								(null == controller || null === (_controller$track = controller.track) || void 0 === _controller$track || _controller$track.render());
-						var styling = {};
+					if (Array.isArray(children) && children.length !== resultsToRender.length)
 						return (
-							disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
-							(children || (null == resultsToRender ? void 0 : resultsToRender.length)) &&
-								(0, emotion_react_browser_esm.tZ)(
+							controller.log.error(
+								"<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'"
+							),
+							(0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
+						);
+					var subProps = {
+							carousel: Object.assign(
+								{ className: 'ss__recommendation__Carousel' },
+								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
+									? void 0
+									: _globalTheme$componen2.carousel,
+								(0, defined.r)({ disableStyles, vertical }),
+								{ theme: null === (_props3 = props) || void 0 === _props3 ? void 0 : _props3.theme }
+							),
+							result: Object.assign(
+								{ className: 'ss__recommendation__result' },
+								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
+									? void 0
+									: _globalTheme$componen3.result,
+								(0, defined.r)({ disableStyles }),
+								{ theme: null === (_props4 = props) || void 0 === _props4 ? void 0 : _props4.theme }
+							),
+						},
+						rootComponentRef = (0, hooks_module.sO)(null),
+						_useState2 = Recommendation_slicedToArray((0, hooks_module.eJ)([0, 0]), 2),
+						initialIndexes = _useState2[0],
+						setInitialIndexes = _useState2[1],
+						inViewport = (function useIntersection(ref) {
+							var rootMargin = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : '0px',
+								fireOnce = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
+								_useState2 = _slicedToArray((0, hooks_module.eJ)(!1), 2),
+								isIntersecting = _useState2[0],
+								setIntersecting = _useState2[1];
+							return (
+								(0, hooks_module.d4)(function () {
+									var observer = new IntersectionObserver(
+										function (_ref) {
+											var entry = _slicedToArray(_ref, 1)[0];
+											setIntersecting(entry.isIntersecting), fireOnce && entry.isIntersecting && observer.unobserve(ref.current);
+										},
+										{ rootMargin }
+									);
+									return (
+										ref.current && observer.observe(ref.current),
+										function () {
+											observer.unobserve(ref.current);
+										}
+									);
+								}, []),
+								isIntersecting
+							);
+						})(rootComponentRef, '0px', !0),
+						sendProductImpression = function sendProductImpression(index, count) {
+							if (inViewport) {
+								var resultLoopOverCount,
+									resultLoopCount = [index, index + count];
+								index + count > resultsToRender.length - 1 &&
+									((resultLoopCount = [index]), (resultLoopOverCount = [0, index + count - resultsToRender.length]));
+								var resultsImpressions = resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopCount));
+								resultLoopOverCount &&
+									(resultsImpressions = resultsImpressions.concat(
+										resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopOverCount))
+									)),
+									resultsImpressions.map(function (result) {
+										controller.track.product.impression(result);
+									});
+							}
+						};
+					inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
+						(children || resultsToRender.length) &&
+							(null == controller || null === (_controller$track = controller.track) || void 0 === _controller$track || _controller$track.render());
+					var styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
+						children || (null != resultsToRender && resultsToRender.length)
+							? (0, emotion_react_browser_esm.tZ)(
 									cache.n,
 									null,
 									(0, emotion_react_browser_esm.tZ)(
@@ -20330,20 +20510,17 @@
 												additionalProps,
 												displaySettings
 											),
-											children
+											Array.isArray(children) && children.length
 												? children.map(function (child) {
 														return child;
 												  })
 												: resultsToRender.map(function (result) {
-														return (0, emotion_react_browser_esm.tZ)(Result.x, Object.assign({ controller, result }, subProps.result));
+														return (0, emotion_react_browser_esm.tZ)(Result.x, Object.assign({}, subProps.result, { controller, result }));
 												  })
 										)
 									)
-								)
-						);
-					}
-					controller.log.error(
-						"<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'"
+							  )
+							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
 					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -20405,10 +20582,10 @@
 						'Additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
-							'Swiper API parameters'
+							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Component Props'
 						),
-						' can be specified as props, but may need to be camelCased where appropriate.'
+						' can be specified, but may need to be camelCased where appropriate.'
 					),
 					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.kt)(
@@ -21100,7 +21277,6 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -21731,7 +21907,7 @@
 				),
 			};
 			var snapInstance = snapify.K.search({ id: 'Results', globals: { siteId: '8uyt2m' } }),
-				Grid = function GridTemplate(args, _ref) {
+				Grid = function Grid(args, _ref) {
 					var _controller$store,
 						controller = _ref.loaded.controller;
 					return (0, preact_module.h)(
@@ -21744,7 +21920,7 @@
 									: _controller$store.results,
 						})
 					);
-				}.bind({});
+				};
 			Grid.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee() {
@@ -21763,7 +21939,7 @@
 					})
 				),
 			];
-			var List = function ListTemplate(args, _ref3) {
+			var List = function List(args, _ref3) {
 				var _controller$store2,
 					controller = _ref3.loaded.controller;
 				return (0, preact_module.h)(
@@ -21777,7 +21953,7 @@
 						layout: types.Ar.LIST,
 					})
 				);
-			}.bind({});
+			};
 			List.loaders = [
 				_asyncToGenerator(
 					_regeneratorRuntime().mark(function _callee2() {
@@ -21804,26 +21980,30 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
-				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
+				),
+				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
 					'./src/components/Atoms/Merchandising/InlineBanner.tsx'
 				),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
-				_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/types.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
+				_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/types.ts'),
+				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				CSS_results = function results(_ref) {
 					var _ss__result,
 						columns = _ref.columns,
 						gapSize = _ref.gapSize;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.iv)({
 						display: 'flex',
 						flexFlow: 'row wrap',
 						gap: gapSize,
@@ -21843,18 +22023,20 @@
 						'@supports (display: grid)': { display: 'grid', '& .ss__result': { width: 'initial', margin: 0 } },
 					});
 				},
-				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
+				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__.Pi)(function (properties) {
 					var _properties$controlle,
 						_properties$controlle2,
 						_globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						_globalTheme$componen3,
 						_props2,
+						_globalTheme$componen3,
 						_props3,
+						_props4,
+						_props5,
 						_results,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.a)(),
 						defaultBreakpointsProps = {
 							0: { columns: properties.columns || 1 },
 							540: { columns: properties.columns || 2 },
@@ -21872,7 +22054,7 @@
 										: _properties$controlle2.results,
 								columns: 4,
 								gapSize: '20px',
-								layout: _types__WEBPACK_IMPORTED_MODULE_8__.Ar.GRID,
+								layout: _types__WEBPACK_IMPORTED_MODULE_9__.Ar.GRID,
 								breakpoints: defaultBreakpointsProps,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -21886,9 +22068,9 @@
 								? void 0
 								: _properties$theme$com.results
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__.o)(props.breakpoints);
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__.o)(props.breakpoints);
 					displaySettings && Object.keys(displaySettings).length && (props = Object.assign({}, props, displaySettings));
-					var results,
+					var _props$results,
 						_props = props,
 						disableStyles = _props.disableStyles,
 						className = _props.className,
@@ -21901,54 +22083,60 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.result,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles }),
-								{ theme: props.theme }
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
+								{ theme: null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme }
 							),
 							inlineBanner: Object.assign(
 								{ className: 'ss__results__inline-banner' },
 								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
 									? void 0
 									: _globalTheme$componen3.inlineBanner,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles }),
-								{ theme: props.theme }
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
+								{ theme: null === (_props3 = props) || void 0 === _props3 ? void 0 : _props3.theme }
 							),
-						};
-					results =
-						(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.columns) > 0 &&
-						(null === (_props3 = props) || void 0 === _props3 ? void 0 : _props3.rows) > 0
-							? props.results.slice(0, props.columns * props.rows)
-							: props.results;
+						},
+						results = props.results;
+					null !== (_props4 = props) &&
+						void 0 !== _props4 &&
+						_props4.columns &&
+						null !== (_props5 = props) &&
+						void 0 !== _props5 &&
+						_props5.rows &&
+						props.columns > 0 &&
+						props.rows > 0 &&
+						(results =
+							null === (_props$results = props.results) || void 0 === _props$results ? void 0 : _props$results.slice(0, props.columns * props.rows));
 					var styling = {};
 					return (
 						disableStyles
 							? style && (styling.css = [style])
 							: (styling.css = [
-									CSS_results({ columns: layout == _types__WEBPACK_IMPORTED_MODULE_8__.Ar.LIST ? 1 : props.columns, gapSize: props.gapSize }),
+									CSS_results({ columns: layout == _types__WEBPACK_IMPORTED_MODULE_9__.Ar.LIST ? 1 : props.columns, gapSize: props.gapSize }),
 									style,
 							  ]),
 						null !== (_results = results) && void 0 !== _results && _results.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_12__.n,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 										'div',
 										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', 'ss__results-' + props.layout, className),
+											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__results', 'ss__results-' + props.layout, className),
 										}),
 										results.map(function (result) {
-											return result.type === _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER
-												? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
-														_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f,
-														Object.assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout })
+											return result.type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_13__.z.BANNER
+												? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+														_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_14__.f,
+														Object.assign({}, subProps.inlineBanner, { key: result.id, banner: result, layout: props.layout })
 												  )
-												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
-														_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x,
-														Object.assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller })
+												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+														_Molecules_Result__WEBPACK_IMPORTED_MODULE_15__.x,
+														Object.assign({ key: result.id }, subProps.result, { result, layout: props.layout, controller })
 												  );
 										})
 									)
 							  )
-							: null
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(preact__WEBPACK_IMPORTED_MODULE_4__.HY, null)
 					);
 				});
 		},
@@ -22042,20 +22230,19 @@
 				}
 			}
 			var getDisplaySettings = function getDisplaySettings(breakpoints) {
-					var _Object$keys,
-						breakpointsSettings,
+					var breakpointsSettings,
 						currentScreenWidth = window.innerWidth,
-						sortedList =
-							null === (_Object$keys = Object.keys(breakpoints)) || void 0 === _Object$keys
-								? void 0
-								: _Object$keys
-										.sort(function (a, b) {
-											return parseInt(a) - parseInt(b);
-										})
-										.map(function (vp) {
-											var _ref;
-											return ((_ref = {})[vp] = breakpoints[vp]), _ref;
-										});
+						sortedList = Object.keys(breakpoints)
+							.map(function (str) {
+								return +str;
+							})
+							.sort(function (a, b) {
+								return a - b;
+							})
+							.map(function (vp) {
+								var _ref;
+								return ((_ref = {})[vp] = breakpoints[vp]), _ref;
+							});
 					if (sortedList.length) {
 						for (var i = 0; i < sortedList.length; i++) {
 							var entry = sortedList[i],
@@ -22072,6 +22259,7 @@
 						}
 						return breakpointsSettings;
 					}
+					return breakpointsSettings;
 				},
 				debounce = function debounce(func) {
 					var timer,
@@ -22079,7 +22267,7 @@
 					return function () {
 						for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
 						clearTimeout(timer),
-							(timer = setTimeout(function () {
+							(timer = window.setTimeout(function () {
 								func.apply(undefined, args);
 							}, timeout));
 					};
@@ -22097,15 +22285,15 @@
 					filtered: !0,
 					collapsed: !1,
 					values: [
-						{ filtered: !1, count: 6, label: '5', type: 'value', value: '5' },
-						{ filtered: !1, count: 6, label: '6', type: 'value', value: '6' },
-						{ filtered: !0, count: 6, label: '7', type: 'value', value: '7' },
-						{ filtered: !1, count: 6, label: '8', type: 'value', value: '8' },
-						{ filtered: !0, count: 6, label: '7.5', type: 'value', value: '7' },
-						{ filtered: !1, count: 6, label: '8.5', type: 'value', value: '8' },
-						{ filtered: !1, count: 6, label: 'L', type: 'value', value: '6' },
-						{ filtered: !1, count: 6, label: 'XL', type: 'value', value: '7' },
-						{ filtered: !1, count: 6, label: 'ONE SIZE', type: 'value', value: '8' },
+						{ filtered: !1, count: 6, label: '5', type: 'value', value: '5', custom: '' },
+						{ filtered: !1, count: 6, label: '6', type: 'value', value: '6', custom: '' },
+						{ filtered: !0, count: 6, label: '7', type: 'value', value: '7', custom: '' },
+						{ filtered: !1, count: 6, label: '8', type: 'value', value: '8', custom: '' },
+						{ filtered: !0, count: 6, label: '7.5', type: 'value', value: '7', custom: '' },
+						{ filtered: !1, count: 6, label: '8.5', type: 'value', value: '8', custom: '' },
+						{ filtered: !1, count: 6, label: 'L', type: 'value', value: '6', custom: '' },
+						{ filtered: !1, count: 6, label: 'XL', type: 'value', value: '7', custom: '' },
+						{ filtered: !1, count: 6, label: 'ONE SIZE', type: 'value', value: '8', custom: '' },
 					],
 				},
 				listFacetMock = {
@@ -22228,6 +22416,8 @@
 								product_type_unigram: 'dress',
 								id: 'd68bd8da07b9e98b3509412d3aa03feb',
 							},
+							type: '',
+							custom: '',
 						},
 						{
 							id: '174328',
@@ -24602,21 +24792,11 @@
 		},
 		'./src/types.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			var BannerType, Layout, FacetMultiple, FacetType, FacetDisplay;
-			__webpack_require__.d(__webpack_exports__, { $: () => BannerType, Ar: () => Layout, Q: () => FacetType, uw: () => FacetDisplay }),
-				(function (BannerType) {
-					(BannerType.HEADER = 'header'),
-						(BannerType.FOOTER = 'footer'),
-						(BannerType.LEFT = 'left'),
-						(BannerType.BANNER = 'banner'),
-						(BannerType.INLINE = 'inline');
-				})(BannerType || (BannerType = {})),
+			var Layout, FacetType, FacetDisplay;
+			__webpack_require__.d(__webpack_exports__, { Ar: () => Layout, Q: () => FacetType, uw: () => FacetDisplay }),
 				(function (Layout) {
 					(Layout.GRID = 'grid'), (Layout.LIST = 'list');
 				})(Layout || (Layout = {})),
-				(function (FacetMultiple) {
-					(FacetMultiple.SINGLE = 'single'), (FacetMultiple.OR = 'or'), (FacetMultiple.AND = 'and');
-				})(FacetMultiple || (FacetMultiple = {})),
 				(function (FacetType) {
 					(FacetType.VALUE = 'value'), (FacetType.RANGE = 'range'), (FacetType.RANGE_BUCKETS = 'range-buckets');
 				})(FacetType || (FacetType = {})),
@@ -24677,6 +24857,34 @@
 					}),
 					definedProps
 				);
+			}
+		},
+		'./src/utilities/shiftColor.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { R: () => shiftColor });
+			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js');
+			function shiftColor(base, change) {
+				var colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
+				if (!base || !change) return '#000000';
+				if (!base.match(colorRegEx) || !change.match(colorRegEx)) return '#000000';
+				(base = base.replace(/\#/g, '')), (change = change.replace(/\#/g, ''));
+				for (var newColor = '', i = 0; i < 3; i++) {
+					var newPiece = void 0;
+					newColor += newPiece =
+						(newPiece = (newPiece =
+							(newPiece = parseInt(base.substring(2 * i, 2 * i + 2), 16) + parseInt(change.substring(2 * i, 2 * i + 2), 16)) > 255
+								? 255
+								: newPiece).toString(16)).length < 2
+							? '0' + newPiece
+							: newPiece;
+				}
+				return '#' + newColor;
 			}
 		},
 		'./src/utilities/snapify.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -25116,16 +25324,25 @@
 							(this.targets = targets),
 							(this.onTarget = onTarget),
 							this.retarget(),
-							/complete|loaded/.test(this.document.readyState)
-								? this.targets.forEach(function (target) {
-										return target.hideTarget && _this.unhideTarget(target.selector);
-								  })
-								: this.document.addEventListener('DOMContentLoaded', function () {
-										_this.retarget(),
-											_this.targets.forEach(function (target) {
-												return target.hideTarget && _this.unhideTarget(target.selector);
-											});
-								  });
+							this.targets.forEach(function (target) {
+								if (target.autoRetarget) {
+									var timeoutTime = 100;
+									!(function checker() {
+										if (timeoutTime < 2e3) {
+											timeoutTime += 200;
+											var elems = _this.domQuery(target.selector);
+											elems && elems.length
+												? (_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector))
+												: setTimeout(checker, timeoutTime);
+										} else target.hideTarget && _this.unhideTarget(target.selector);
+									})();
+								} else
+									/complete|loaded/.test(_this.document.readyState)
+										? target.hideTarget && _this.unhideTarget(target.selector)
+										: _this.document.addEventListener('DOMContentLoaded', function () {
+												_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
+										  });
+							});
 					}
 					return (
 						(function DomTargeter_createClass(Constructor, protoProps, staticProps) {
@@ -27754,6 +27971,7 @@
 					(BeaconType.ORDER = 'transaction'),
 					(BeaconType.LOGIN = 'login'),
 					(BeaconType.CLICK = 'click'),
+					(BeaconType.ERROR = 'error'),
 					(BeaconType.CUSTOM = 'custom'),
 					(BeaconType.PROFILE_RENDER = 'profile.render'),
 					(BeaconType.PROFILE_IMPRESSION = 'profile.impression'),
@@ -27769,6 +27987,7 @@
 						(BeaconCategory.PERSONALIZATION = 'searchspring.personalization'),
 						(BeaconCategory.RECOMMENDATIONS = 'searchspring.recommendations.user-interactions'),
 						(BeaconCategory.INTERACTION = 'searchspring.user-interactions'),
+						(BeaconCategory.RUNTIME = 'searchspring.js.runtime'),
 						(BeaconCategory.CUSTOM = 'custom');
 				})(BeaconCategory || (BeaconCategory = {}));
 			var RecommendationController_defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
@@ -33943,8 +34162,7 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var ContentType,
-				Client_defaultConfig = {
+			var Client_defaultConfig = {
 					meta: { cache: { purgeable: !1 } },
 					search: { api: {} },
 					autocomplete: { api: {} },
@@ -34299,45 +34517,127 @@
 						Client
 					);
 				})(),
-				mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js');
+				mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js'),
+				SearchMerchandisingStore = __webpack_require__('../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js');
+			function SearchQueryStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function SearchQueryStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && SearchQueryStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchQueryStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function SearchQueryStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			var SearchQueryStore = SearchQueryStore_createClass(function SearchQueryStore(services, search) {
+					SearchQueryStore_classCallCheck(this, SearchQueryStore);
+					var observables = {};
+					null != search && search.query && ((this.query = new Query(services, search.query)), (observables.query = mobx_esm.LO)),
+						null != search &&
+							search.didYouMean &&
+							((this.didYouMean = new Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
+						null != search &&
+							search.originalQuery &&
+							((this.originalQuery = new Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
+						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.LO)),
+						(0, mobx_esm.rC)(this, observables);
+				}),
+				Query = SearchQueryStore_createClass(function Query(services, query) {
+					SearchQueryStore_classCallCheck(this, Query),
+						(this.string = query),
+						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
+						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
+				});
 			__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.map.js');
-			function MerchandisingStore_toConsumableArray(arr) {
+			function SearchFacetStore_toConsumableArray(arr) {
 				return (
-					(function MerchandisingStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return MerchandisingStore_arrayLikeToArray(arr);
+					(function SearchFacetStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return SearchFacetStore_arrayLikeToArray(arr);
 					})(arr) ||
-					(function MerchandisingStore_iterableToArray(iter) {
+					(function SearchFacetStore_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					(function MerchandisingStore_unsupportedIterableToArray(o, minLen) {
+					(function SearchFacetStore_unsupportedIterableToArray(o, minLen) {
 						if (!o) return;
-						if ('string' == typeof o) return MerchandisingStore_arrayLikeToArray(o, minLen);
+						if ('string' == typeof o) return SearchFacetStore_arrayLikeToArray(o, minLen);
 						var n = Object.prototype.toString.call(o).slice(8, -1);
 						'Object' === n && o.constructor && (n = o.constructor.name);
 						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return MerchandisingStore_arrayLikeToArray(o, minLen);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return SearchFacetStore_arrayLikeToArray(o, minLen);
 					})(arr) ||
-					(function MerchandisingStore_nonIterableSpread() {
+					(function SearchFacetStore_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function MerchandisingStore_arrayLikeToArray(arr, len) {
+			function SearchFacetStore_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function MerchandisingStore_possibleConstructorReturn(self, call) {
+			function SearchFacetStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function SearchFacetStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function SearchFacetStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && SearchFacetStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchFacetStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function SearchFacetStore_inherits(subClass, superClass) {
+				if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+				(subClass.prototype = Object.create(superClass && superClass.prototype, {
+					constructor: { value: subClass, writable: !0, configurable: !0 },
+				})),
+					Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+					superClass && SearchFacetStore_setPrototypeOf(subClass, superClass);
+			}
+			function SearchFacetStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = SearchFacetStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = SearchFacetStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = SearchFacetStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return SearchFacetStore_possibleConstructorReturn(this, result);
+				};
+			}
+			function SearchFacetStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function MerchandisingStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+				return SearchFacetStore_assertThisInitialized(self);
+			}
+			function SearchFacetStore_assertThisInitialized(self) {
+				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+				return self;
 			}
 			function _wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -34356,13 +34656,13 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return _construct(Class, arguments, MerchandisingStore_getPrototypeOf(this).constructor);
+							return _construct(Class, arguments, SearchFacetStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							MerchandisingStore_setPrototypeOf(Wrapper, Class)
+							SearchFacetStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
 					_wrapNativeSuper(Class)
@@ -34370,18 +34670,18 @@
 			}
 			function _construct(Parent, args, Class) {
 				return (
-					(_construct = MerchandisingStore_isNativeReflectConstruct()
+					(_construct = SearchFacetStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && MerchandisingStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && SearchFacetStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
 					_construct.apply(null, arguments)
 				);
 			}
-			function MerchandisingStore_isNativeReflectConstruct() {
+			function SearchFacetStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -34391,301 +34691,34 @@
 					return !1;
 				}
 			}
-			function MerchandisingStore_setPrototypeOf(o, p) {
+			function SearchFacetStore_setPrototypeOf(o, p) {
 				return (
-					(MerchandisingStore_setPrototypeOf = Object.setPrototypeOf
+					(SearchFacetStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					MerchandisingStore_setPrototypeOf(o, p)
+					SearchFacetStore_setPrototypeOf(o, p)
 				);
 			}
-			function MerchandisingStore_getPrototypeOf(o) {
+			function SearchFacetStore_getPrototypeOf(o) {
 				return (
-					(MerchandisingStore_getPrototypeOf = Object.setPrototypeOf
+					(SearchFacetStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					MerchandisingStore_getPrototypeOf(o)
+					SearchFacetStore_getPrototypeOf(o)
 				);
 			}
-			function MerchandisingStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function MerchandisingStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && MerchandisingStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && MerchandisingStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function MerchandisingStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			!(function (ContentType) {
-				(ContentType.HEADER = 'header'),
-					(ContentType.BANNER = 'banner'),
-					(ContentType.FOOTER = 'footer'),
-					(ContentType.LEFT = 'left'),
-					(ContentType.INLINE = 'inline');
-			})(ContentType || (ContentType = {}));
-			var MerchandisingStore = MerchandisingStore_createClass(function MerchandisingStore(services, merchData) {
-					var _this = this;
-					MerchandisingStore_classCallCheck(this, MerchandisingStore),
-						(this.redirect = ''),
-						(this.content = {}),
-						merchData &&
-							((this.redirect = merchData.redirect || ''),
-							merchData.content &&
-								Object.values(ContentType).forEach(function (type) {
-									merchData.content && merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
-								}));
-				}),
-				Content = (function (_Array, _Symbol$species) {
-					!(function MerchandisingStore_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && MerchandisingStore_setPrototypeOf(subClass, superClass);
-					})(Content, _Array);
-					var _super = (function MerchandisingStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = MerchandisingStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = MerchandisingStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = MerchandisingStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return MerchandisingStore_possibleConstructorReturn(this, result);
-						};
-					})(Content);
-					function Content(content) {
-						return (
-							MerchandisingStore_classCallCheck(this, Content),
-							_super.call.apply(_super, [this].concat(MerchandisingStore_toConsumableArray(content)))
-						);
-					}
-					return (
-						MerchandisingStore_createClass(Content, null, [
-							{
-								key: _Symbol$species,
-								get: function get() {
-									return Array;
-								},
-							},
-						]),
-						Content
-					);
-				})(_wrapNativeSuper(Array), Symbol.species);
-			function QueryStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function QueryStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && QueryStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && QueryStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function QueryStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			var QueryStore = QueryStore_createClass(function QueryStore(services, search) {
-					QueryStore_classCallCheck(this, QueryStore);
-					var observables = {};
-					null != search && search.query && ((this.query = new Query(services, search.query)), (observables.query = mobx_esm.LO)),
-						null != search &&
-							search.didYouMean &&
-							((this.didYouMean = new Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
-						null != search &&
-							search.originalQuery &&
-							((this.originalQuery = new Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
-						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.LO)),
-						(0, mobx_esm.rC)(this, observables);
-				}),
-				Query = QueryStore_createClass(function Query(services, query) {
-					QueryStore_classCallCheck(this, Query),
-						(this.string = query),
-						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
-						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
-				});
-			__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js');
-			function FacetStore_toConsumableArray(arr) {
-				return (
-					(function FacetStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return FacetStore_arrayLikeToArray(arr);
-					})(arr) ||
-					(function FacetStore_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function FacetStore_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return FacetStore_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return FacetStore_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function FacetStore_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function FacetStore_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function FacetStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function FacetStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function FacetStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && FacetStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && FacetStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function FacetStore_inherits(subClass, superClass) {
-				if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-				(subClass.prototype = Object.create(superClass && superClass.prototype, {
-					constructor: { value: subClass, writable: !0, configurable: !0 },
-				})),
-					Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-					superClass && FacetStore_setPrototypeOf(subClass, superClass);
-			}
-			function FacetStore_createSuper(Derived) {
-				var hasNativeReflectConstruct = FacetStore_isNativeReflectConstruct();
-				return function _createSuperInternal() {
-					var result,
-						Super = FacetStore_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = FacetStore_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return FacetStore_possibleConstructorReturn(this, result);
-				};
-			}
-			function FacetStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return FacetStore_assertThisInitialized(self);
-			}
-			function FacetStore_assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			function FacetStore_wrapNativeSuper(Class) {
-				var _cache = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(FacetStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
-						if (
-							null === Class ||
-							!(function FacetStore_isNativeFunction(fn) {
-								return -1 !== Function.toString.call(fn).indexOf('[native code]');
-							})(Class)
-						)
-							return Class;
-						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== _cache) {
-							if (_cache.has(Class)) return _cache.get(Class);
-							_cache.set(Class, Wrapper);
-						}
-						function Wrapper() {
-							return FacetStore_construct(Class, arguments, FacetStore_getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(Class.prototype, {
-								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
-							})),
-							FacetStore_setPrototypeOf(Wrapper, Class)
-						);
-					}),
-					FacetStore_wrapNativeSuper(Class)
-				);
-			}
-			function FacetStore_construct(Parent, args, Class) {
-				return (
-					(FacetStore_construct = FacetStore_isNativeReflectConstruct()
-						? Reflect.construct.bind()
-						: function _construct(Parent, args, Class) {
-								var a = [null];
-								a.push.apply(a, args);
-								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && FacetStore_setPrototypeOf(instance, Class.prototype), instance;
-						  }),
-					FacetStore_construct.apply(null, arguments)
-				);
-			}
-			function FacetStore_isNativeReflectConstruct() {
-				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-				if (Reflect.construct.sham) return !1;
-				if ('function' == typeof Proxy) return !0;
-				try {
-					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-				} catch (e) {
-					return !1;
-				}
-			}
-			function FacetStore_setPrototypeOf(o, p) {
-				return (
-					(FacetStore_setPrototypeOf = Object.setPrototypeOf
-						? Object.setPrototypeOf.bind()
-						: function _setPrototypeOf(o, p) {
-								return (o.__proto__ = p), o;
-						  }),
-					FacetStore_setPrototypeOf(o, p)
-				);
-			}
-			function FacetStore_getPrototypeOf(o) {
-				return (
-					(FacetStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf.bind()
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					FacetStore_getPrototypeOf(o)
-				);
-			}
-			var FacetStore_FacetStore = (function (_Array, _Symbol$species) {
-					FacetStore_inherits(FacetStore, _Array);
-					var _super = FacetStore_createSuper(FacetStore);
-					function FacetStore(config, services, storage) {
+			var SearchFacetStore = (function (_Array, _Symbol$species) {
+					SearchFacetStore_inherits(SearchFacetStore, _Array);
+					var _super = SearchFacetStore_createSuper(SearchFacetStore);
+					function SearchFacetStore(config, services, storage) {
 						var facetsData = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [],
 							pagination = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : {},
 							meta = arguments.length > 5 ? arguments[5] : void 0;
-						FacetStore_classCallCheck(this, FacetStore);
+						SearchFacetStore_classCallCheck(this, SearchFacetStore);
 						var facets = facetsData
 							.filter(function (facet) {
 								var _config$settings,
@@ -34743,10 +34776,10 @@
 									? new RangeFacet(config, services, storage, facet, facetMeta || {})
 									: new ValueFacet(config, services, storage, facet, facetMeta || {});
 							});
-						return _super.call.apply(_super, [this].concat(FacetStore_toConsumableArray(facets)));
+						return _super.call.apply(_super, [this].concat(SearchFacetStore_toConsumableArray(facets)));
 					}
 					return (
-						FacetStore_createClass(FacetStore, null, [
+						SearchFacetStore_createClass(SearchFacetStore, null, [
 							{
 								key: _Symbol$species,
 								get: function get() {
@@ -34754,12 +34787,12 @@
 								},
 							},
 						]),
-						FacetStore
+						SearchFacetStore
 					);
-				})(FacetStore_wrapNativeSuper(Array), Symbol.species),
+				})(_wrapNativeSuper(Array), Symbol.species),
 				Facet = (function () {
 					function Facet(services, storage, facet, facetMeta) {
-						FacetStore_classCallCheck(this, Facet),
+						SearchFacetStore_classCallCheck(this, Facet),
 							(this.filtered = !1),
 							(this.custom = {}),
 							(this.collapsed = !1),
@@ -34784,7 +34817,7 @@
 							this.filtered && this.collapsed && void 0 === collapseData && this.toggleCollapse();
 					}
 					return (
-						FacetStore_createClass(Facet, [
+						SearchFacetStore_createClass(Facet, [
 							{
 								key: 'clear',
 								get: function get() {
@@ -34802,8 +34835,8 @@
 					);
 				})(),
 				RangeFacet = (function (_Facet) {
-					FacetStore_inherits(RangeFacet, _Facet);
-					var _super2 = FacetStore_createSuper(RangeFacet);
+					SearchFacetStore_inherits(RangeFacet, _Facet);
+					var _super2 = SearchFacetStore_createSuper(RangeFacet);
 					function RangeFacet(config, services, storage, facet, facetMeta) {
 						var _config$settings4,
 							_config$settings4$fac,
@@ -34814,7 +34847,7 @@
 							_facet$range3,
 							_facet$range4,
 							_this;
-						FacetStore_classCallCheck(this, RangeFacet),
+						SearchFacetStore_classCallCheck(this, RangeFacet),
 							((_this = _super2.call(this, services, storage, facet, facetMeta)).range = { low: 0, high: 0 }),
 							(_this.active = { low: 0, high: 0 }),
 							(_this.step = null == facet ? void 0 : facet.step);
@@ -34852,7 +34885,7 @@
 							(_this.active = facet.active || facet.range),
 							(_this.formatSeparator = (null == facetMeta ? void 0 : facetMeta.formatSeparator) || '-'),
 							(_this.formatValue = (null == facetMeta ? void 0 : facetMeta.formatValue) || '%01.2f'),
-							(0, mobx_esm.rC)(FacetStore_assertThisInitialized(_this), {
+							(0, mobx_esm.rC)(SearchFacetStore_assertThisInitialized(_this), {
 								step: mobx_esm.LO,
 								range: mobx_esm.LO,
 								active: mobx_esm.LO,
@@ -34862,14 +34895,14 @@
 							_this
 						);
 					}
-					return FacetStore_createClass(RangeFacet);
+					return SearchFacetStore_createClass(RangeFacet);
 				})(Facet),
 				ValueFacet = (function (_Facet2) {
-					FacetStore_inherits(ValueFacet, _Facet2);
-					var _super3 = FacetStore_createSuper(ValueFacet);
+					SearchFacetStore_inherits(ValueFacet, _Facet2);
+					var _super3 = SearchFacetStore_createSuper(ValueFacet);
 					function ValueFacet(config, services, storage, facet, facetMeta) {
 						var _config$settings7, _config$settings7$fac, _config$settings8, _config$settings8$fac, _config$settings9, _config$settings9$fac, _this2;
-						FacetStore_classCallCheck(this, ValueFacet),
+						SearchFacetStore_classCallCheck(this, ValueFacet),
 							((_this2 = _super3.call(this, services, storage, facet, facetMeta)).values = []),
 							(_this2.search = { input: '' }),
 							(_this2.overflow = {
@@ -34909,16 +34942,16 @@
 																: _facet$values3.filter(function (value) {
 																		return value.filtered;
 																  })) || [];
-													return new HierarchyValue(services, FacetStore_assertThisInitialized(_this2), value, filteredValues);
+													return new FacetHierarchyValue(services, SearchFacetStore_assertThisInitialized(_this2), value, filteredValues);
 												}
 												var _value$value;
 												return (
 													(value.value =
 														null == value || null === (_value$value = value.value) || void 0 === _value$value ? void 0 : _value$value.toString()),
-													new Value(services, FacetStore_assertThisInitialized(_this2), value)
+													new FacetValue(services, SearchFacetStore_assertThisInitialized(_this2), value)
 												);
 											case 'range-buckets':
-												return new RangeValue(services, FacetStore_assertThisInitialized(_this2), value);
+												return new FacetRangeValue(services, SearchFacetStore_assertThisInitialized(_this2), value);
 										}
 									})) ||
 								[]);
@@ -34952,7 +34985,7 @@
 						var overflowLimitedState = _this2.storage.get('facets.' + _this2.field + '.overflow.limited');
 						return (
 							void 0 !== overflowLimitedState && _this2.overflow.toggle(overflowLimitedState),
-							(0, mobx_esm.rC)(FacetStore_assertThisInitialized(_this2), {
+							(0, mobx_esm.rC)(SearchFacetStore_assertThisInitialized(_this2), {
 								values: mobx_esm.LO,
 								search: mobx_esm.LO,
 								multiple: mobx_esm.LO,
@@ -34971,7 +35004,7 @@
 						);
 					}
 					return (
-						FacetStore_createClass(ValueFacet, [
+						SearchFacetStore_createClass(ValueFacet, [
 							{
 								key: 'refinedValues',
 								get: function get() {
@@ -34994,8 +35027,8 @@
 						ValueFacet
 					);
 				})(Facet),
-				Value = FacetStore_createClass(function Value(services, facet, value) {
-					if ((FacetStore_classCallCheck(this, Value), Object.assign(this, value), this.filtered))
+				FacetValue = SearchFacetStore_createClass(function FacetValue(services, facet, value) {
+					if ((SearchFacetStore_classCallCheck(this, FacetValue), Object.assign(this, value), this.filtered))
 						this.url = services.urlManager.remove('page').remove('filter.' + facet.field, value.value);
 					else {
 						var _valueUrl2,
@@ -35006,13 +35039,13 @@
 						this.url = null === (_valueUrl2 = valueUrl) || void 0 === _valueUrl2 ? void 0 : _valueUrl2.merge('filter.' + facet.field, value.value);
 					}
 				}),
-				HierarchyValue = (function (_Value) {
-					FacetStore_inherits(HierarchyValue, _Value);
-					var _super4 = FacetStore_createSuper(HierarchyValue);
-					function HierarchyValue(services, facet, value, filteredValues) {
+				FacetHierarchyValue = (function (_FacetValue) {
+					SearchFacetStore_inherits(FacetHierarchyValue, _FacetValue);
+					var _super4 = SearchFacetStore_createSuper(FacetHierarchyValue);
+					function FacetHierarchyValue(services, facet, value, filteredValues) {
 						var _this3;
 						if (
-							(FacetStore_classCallCheck(this, HierarchyValue),
+							(SearchFacetStore_classCallCheck(this, FacetHierarchyValue),
 							((_this3 = _super4.call(this, services, facet, value)).level = 0),
 							(_this3.history = !1),
 							value.value && facet.hierarchyDelimiter && (_this3.level = value.value.split(facet.hierarchyDelimiter).length),
@@ -35033,10 +35066,10 @@
 							_this3
 						);
 					}
-					return FacetStore_createClass(HierarchyValue);
-				})(Value),
-				RangeValue = FacetStore_createClass(function RangeValue(services, facet, value) {
-					if ((FacetStore_classCallCheck(this, RangeValue), Object.assign(this, value), this.filtered))
+					return SearchFacetStore_createClass(FacetHierarchyValue);
+				})(FacetValue),
+				FacetRangeValue = SearchFacetStore_createClass(function FacetRangeValue(services, facet, value) {
+					if ((SearchFacetStore_classCallCheck(this, FacetRangeValue), Object.assign(this, value), this.filtered))
 						this.url = services.urlManager.remove('page').remove('filter.' + facet.field, [{ low: this.low, high: this.high }]);
 					else {
 						var _valueUrl4,
@@ -35050,38 +35083,38 @@
 								: _valueUrl4.merge('filter.' + facet.field, [{ low: this.low, high: this.high }]);
 					}
 				});
-			function FilterStore_toConsumableArray(arr) {
+			function SearchFilterStore_toConsumableArray(arr) {
 				return (
-					(function FilterStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return FilterStore_arrayLikeToArray(arr);
+					(function SearchFilterStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return SearchFilterStore_arrayLikeToArray(arr);
 					})(arr) ||
-					(function FilterStore_iterableToArray(iter) {
+					(function SearchFilterStore_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					(function FilterStore_unsupportedIterableToArray(o, minLen) {
+					(function SearchFilterStore_unsupportedIterableToArray(o, minLen) {
 						if (!o) return;
-						if ('string' == typeof o) return FilterStore_arrayLikeToArray(o, minLen);
+						if ('string' == typeof o) return SearchFilterStore_arrayLikeToArray(o, minLen);
 						var n = Object.prototype.toString.call(o).slice(8, -1);
 						'Object' === n && o.constructor && (n = o.constructor.name);
 						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return FilterStore_arrayLikeToArray(o, minLen);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return SearchFilterStore_arrayLikeToArray(o, minLen);
 					})(arr) ||
-					(function FilterStore_nonIterableSpread() {
+					(function SearchFilterStore_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function FilterStore_arrayLikeToArray(arr, len) {
+			function SearchFilterStore_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function FilterStore_classCallCheck(instance, Constructor) {
+			function SearchFilterStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function FilterStore_defineProperties(target, props) {
+			function SearchFilterStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -35090,29 +35123,29 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function FilterStore_createClass(Constructor, protoProps, staticProps) {
+			function SearchFilterStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && FilterStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && FilterStore_defineProperties(Constructor, staticProps),
+					protoProps && SearchFilterStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchFilterStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			function FilterStore_possibleConstructorReturn(self, call) {
+			function SearchFilterStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function FilterStore_assertThisInitialized(self) {
+				return (function SearchFilterStore_assertThisInitialized(self) {
 					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 					return self;
 				})(self);
 			}
-			function FilterStore_wrapNativeSuper(Class) {
+			function SearchFilterStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(FilterStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(SearchFilterStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function FilterStore_isNativeFunction(fn) {
+							!(function SearchFilterStore_isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -35123,32 +35156,32 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return FilterStore_construct(Class, arguments, FilterStore_getPrototypeOf(this).constructor);
+							return SearchFilterStore_construct(Class, arguments, SearchFilterStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							FilterStore_setPrototypeOf(Wrapper, Class)
+							SearchFilterStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					FilterStore_wrapNativeSuper(Class)
+					SearchFilterStore_wrapNativeSuper(Class)
 				);
 			}
-			function FilterStore_construct(Parent, args, Class) {
+			function SearchFilterStore_construct(Parent, args, Class) {
 				return (
-					(FilterStore_construct = FilterStore_isNativeReflectConstruct()
+					(SearchFilterStore_construct = SearchFilterStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && FilterStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && SearchFilterStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					FilterStore_construct.apply(null, arguments)
+					SearchFilterStore_construct.apply(null, arguments)
 				);
 			}
-			function FilterStore_isNativeReflectConstruct() {
+			function SearchFilterStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -35158,60 +35191,60 @@
 					return !1;
 				}
 			}
-			function FilterStore_setPrototypeOf(o, p) {
+			function SearchFilterStore_setPrototypeOf(o, p) {
 				return (
-					(FilterStore_setPrototypeOf = Object.setPrototypeOf
+					(SearchFilterStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					FilterStore_setPrototypeOf(o, p)
+					SearchFilterStore_setPrototypeOf(o, p)
 				);
 			}
-			function FilterStore_getPrototypeOf(o) {
+			function SearchFilterStore_getPrototypeOf(o) {
 				return (
-					(FilterStore_getPrototypeOf = Object.setPrototypeOf
+					(SearchFilterStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					FilterStore_getPrototypeOf(o)
+					SearchFilterStore_getPrototypeOf(o)
 				);
 			}
-			var FilterStore = (function (_Array, _Symbol$species) {
-					!(function FilterStore_inherits(subClass, superClass) {
+			var SearchFilterStore = (function (_Array, _Symbol$species) {
+					!(function SearchFilterStore_inherits(subClass, superClass) {
 						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 						(subClass.prototype = Object.create(superClass && superClass.prototype, {
 							constructor: { value: subClass, writable: !0, configurable: !0 },
 						})),
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && FilterStore_setPrototypeOf(subClass, superClass);
-					})(FilterStore, _Array);
-					var _super = (function FilterStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = FilterStore_isNativeReflectConstruct();
+							superClass && SearchFilterStore_setPrototypeOf(subClass, superClass);
+					})(SearchFilterStore, _Array);
+					var _super = (function SearchFilterStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = SearchFilterStore_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var result,
-								Super = FilterStore_getPrototypeOf(Derived);
+								Super = SearchFilterStore_getPrototypeOf(Derived);
 							if (hasNativeReflectConstruct) {
-								var NewTarget = FilterStore_getPrototypeOf(this).constructor;
+								var NewTarget = SearchFilterStore_getPrototypeOf(this).constructor;
 								result = Reflect.construct(Super, arguments, NewTarget);
 							} else result = Super.apply(this, arguments);
-							return FilterStore_possibleConstructorReturn(this, result);
+							return SearchFilterStore_possibleConstructorReturn(this, result);
 						};
-					})(FilterStore);
-					function FilterStore(services) {
+					})(SearchFilterStore);
+					function SearchFilterStore(services) {
 						var filtersData = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
 							meta = arguments.length > 2 ? arguments[2] : void 0;
-						FilterStore_classCallCheck(this, FilterStore);
+						SearchFilterStore_classCallCheck(this, SearchFilterStore);
 						var filters = filtersData.map(function (filter) {
 							var field = filter.field,
 								facetMeta = meta.facets && meta.facets[field];
 							return 'range' === filter.type ? new RangeFilter(services, filter, facetMeta) : new Filter(services, filter, facetMeta);
 						});
-						return _super.call.apply(_super, [this].concat(FilterStore_toConsumableArray(filters)));
+						return _super.call.apply(_super, [this].concat(SearchFilterStore_toConsumableArray(filters)));
 					}
 					return (
-						FilterStore_createClass(FilterStore, null, [
+						SearchFilterStore_createClass(SearchFilterStore, null, [
 							{
 								key: _Symbol$species,
 								get: function get() {
@@ -35219,12 +35252,12 @@
 								},
 							},
 						]),
-						FilterStore
+						SearchFilterStore
 					);
-				})(FilterStore_wrapNativeSuper(Array), Symbol.species),
-				Filter = FilterStore_createClass(function Filter(services, filter, meta) {
+				})(SearchFilterStore_wrapNativeSuper(Array), Symbol.species),
+				Filter = SearchFilterStore_createClass(function Filter(services, filter, meta) {
 					var _services$urlManager;
-					FilterStore_classCallCheck(this, Filter),
+					SearchFilterStore_classCallCheck(this, Filter),
 						(this.facet = { field: filter.field, label: (null == meta ? void 0 : meta.label) || filter.field }),
 						(this.value = { value: filter.value, label: filter.label }),
 						(this.label = this.facet.label + ': ' + this.value.label),
@@ -35234,9 +35267,9 @@
 								: _services$urlManager.remove('page').remove('filter.' + this.facet.field, this.value.value)),
 						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
 				}),
-				RangeFilter = FilterStore_createClass(function RangeFilter(services, filter, meta) {
+				RangeFilter = SearchFilterStore_createClass(function RangeFilter(services, filter, meta) {
 					var _filter$value, _filter$value2, _filter$value3, _filter$value4, _services$urlManager2;
-					FilterStore_classCallCheck(this, RangeFilter),
+					SearchFilterStore_classCallCheck(this, RangeFilter),
 						(this.facet = { field: filter.field, label: (null == meta ? void 0 : meta.label) || filter.field }),
 						(this.value = {
 							low: null == filter || null === (_filter$value = filter.value) || void 0 === _filter$value ? void 0 : _filter$value.low,
@@ -35255,38 +35288,38 @@
 						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js');
-			function ResultStore_toConsumableArray(arr) {
+			function SearchResultStore_toConsumableArray(arr) {
 				return (
-					(function ResultStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return ResultStore_arrayLikeToArray(arr);
+					(function SearchResultStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return SearchResultStore_arrayLikeToArray(arr);
 					})(arr) ||
-					(function ResultStore_iterableToArray(iter) {
+					(function SearchResultStore_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					(function ResultStore_unsupportedIterableToArray(o, minLen) {
+					(function SearchResultStore_unsupportedIterableToArray(o, minLen) {
 						if (!o) return;
-						if ('string' == typeof o) return ResultStore_arrayLikeToArray(o, minLen);
+						if ('string' == typeof o) return SearchResultStore_arrayLikeToArray(o, minLen);
 						var n = Object.prototype.toString.call(o).slice(8, -1);
 						'Object' === n && o.constructor && (n = o.constructor.name);
 						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ResultStore_arrayLikeToArray(o, minLen);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return SearchResultStore_arrayLikeToArray(o, minLen);
 					})(arr) ||
-					(function ResultStore_nonIterableSpread() {
+					(function SearchResultStore_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function ResultStore_arrayLikeToArray(arr, len) {
+			function SearchResultStore_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function ResultStore_classCallCheck(instance, Constructor) {
+			function SearchResultStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function ResultStore_defineProperties(target, props) {
+			function SearchResultStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -35295,29 +35328,29 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function ResultStore_createClass(Constructor, protoProps, staticProps) {
+			function SearchResultStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && ResultStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && ResultStore_defineProperties(Constructor, staticProps),
+					protoProps && SearchResultStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchResultStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			function ResultStore_possibleConstructorReturn(self, call) {
+			function SearchResultStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function ResultStore_assertThisInitialized(self) {
+				return (function SearchResultStore_assertThisInitialized(self) {
 					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 					return self;
 				})(self);
 			}
-			function ResultStore_wrapNativeSuper(Class) {
+			function SearchResultStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(ResultStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(SearchResultStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function ResultStore_isNativeFunction(fn) {
+							!(function SearchResultStore_isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -35328,32 +35361,32 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return ResultStore_construct(Class, arguments, ResultStore_getPrototypeOf(this).constructor);
+							return SearchResultStore_construct(Class, arguments, SearchResultStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							ResultStore_setPrototypeOf(Wrapper, Class)
+							SearchResultStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					ResultStore_wrapNativeSuper(Class)
+					SearchResultStore_wrapNativeSuper(Class)
 				);
 			}
-			function ResultStore_construct(Parent, args, Class) {
+			function SearchResultStore_construct(Parent, args, Class) {
 				return (
-					(ResultStore_construct = ResultStore_isNativeReflectConstruct()
+					(SearchResultStore_construct = SearchResultStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && ResultStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && SearchResultStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					ResultStore_construct.apply(null, arguments)
+					SearchResultStore_construct.apply(null, arguments)
 				);
 			}
-			function ResultStore_isNativeReflectConstruct() {
+			function SearchResultStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -35363,50 +35396,50 @@
 					return !1;
 				}
 			}
-			function ResultStore_setPrototypeOf(o, p) {
+			function SearchResultStore_setPrototypeOf(o, p) {
 				return (
-					(ResultStore_setPrototypeOf = Object.setPrototypeOf
+					(SearchResultStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					ResultStore_setPrototypeOf(o, p)
+					SearchResultStore_setPrototypeOf(o, p)
 				);
 			}
-			function ResultStore_getPrototypeOf(o) {
+			function SearchResultStore_getPrototypeOf(o) {
 				return (
-					(ResultStore_getPrototypeOf = Object.setPrototypeOf
+					(SearchResultStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					ResultStore_getPrototypeOf(o)
+					SearchResultStore_getPrototypeOf(o)
 				);
 			}
-			var ResultStore = (function (_Array, _Symbol$species) {
-					!(function ResultStore_inherits(subClass, superClass) {
+			var SearchResultStore = (function (_Array, _Symbol$species) {
+					!(function SearchResultStore_inherits(subClass, superClass) {
 						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 						(subClass.prototype = Object.create(superClass && superClass.prototype, {
 							constructor: { value: subClass, writable: !0, configurable: !0 },
 						})),
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && ResultStore_setPrototypeOf(subClass, superClass);
-					})(ResultStore, _Array);
-					var _super = (function ResultStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = ResultStore_isNativeReflectConstruct();
+							superClass && SearchResultStore_setPrototypeOf(subClass, superClass);
+					})(SearchResultStore, _Array);
+					var _super = (function SearchResultStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = SearchResultStore_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var result,
-								Super = ResultStore_getPrototypeOf(Derived);
+								Super = SearchResultStore_getPrototypeOf(Derived);
 							if (hasNativeReflectConstruct) {
-								var NewTarget = ResultStore_getPrototypeOf(this).constructor;
+								var NewTarget = SearchResultStore_getPrototypeOf(this).constructor;
 								result = Reflect.construct(Super, arguments, NewTarget);
 							} else result = Super.apply(this, arguments);
-							return ResultStore_possibleConstructorReturn(this, result);
+							return SearchResultStore_possibleConstructorReturn(this, result);
 						};
-					})(ResultStore);
-					function ResultStore(config, services, resultData, paginationData, merchData) {
+					})(SearchResultStore);
+					function SearchResultStore(config, services, resultData, paginationData, merchData) {
 						var _merchData$content;
-						ResultStore_classCallCheck(this, ResultStore);
+						SearchResultStore_classCallCheck(this, SearchResultStore);
 						var results = (resultData || []).map(function (result) {
 							return new Product(services, result);
 						});
@@ -35455,10 +35488,10 @@
 									);
 								})(config, results, banners, paginationData));
 						}
-						return _super.call.apply(_super, [this].concat(ResultStore_toConsumableArray(results)));
+						return _super.call.apply(_super, [this].concat(SearchResultStore_toConsumableArray(results)));
 					}
 					return (
-						ResultStore_createClass(ResultStore, null, [
+						SearchResultStore_createClass(SearchResultStore, null, [
 							{
 								key: _Symbol$species,
 								get: function get() {
@@ -35466,11 +35499,11 @@
 								},
 							},
 						]),
-						ResultStore
+						SearchResultStore
 					);
-				})(ResultStore_wrapNativeSuper(Array), Symbol.species),
-				Banner = ResultStore_createClass(function Banner(services, banner) {
-					ResultStore_classCallCheck(this, Banner),
+				})(SearchResultStore_wrapNativeSuper(Array), Symbol.species),
+				Banner = SearchResultStore_createClass(function Banner(services, banner) {
+					SearchResultStore_classCallCheck(this, Banner),
 						(this.type = 'banner'),
 						(this.attributes = {}),
 						(this.mappings = { core: {} }),
@@ -35480,9 +35513,9 @@
 						(this.value = banner.value),
 						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, mappings: mobx_esm.LO, attributes: mobx_esm.LO });
 				}),
-				Product = ResultStore_createClass(function Product(services, result) {
+				Product = SearchResultStore_createClass(function Product(services, result) {
 					var _result$children;
-					ResultStore_classCallCheck(this, Product),
+					SearchResultStore_classCallCheck(this, Product),
 						(this.type = 'product'),
 						(this.attributes = {}),
 						(this.mappings = { core: {} }),
@@ -35505,8 +35538,8 @@
 					}, {});
 					(0, mobx_esm.rC)(this.mappings.core, coreObservables);
 				}),
-				Child = ResultStore_createClass(function Child(services, result) {
-					ResultStore_classCallCheck(this, Child),
+				Child = SearchResultStore_createClass(function Child(services, result) {
+					SearchResultStore_classCallCheck(this, Child),
 						(this.type = 'child'),
 						(this.attributes = {}),
 						(this.custom = {}),
@@ -35515,10 +35548,10 @@
 						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js');
-			function PaginationStore_classCallCheck(instance, Constructor) {
+			function SearchPaginationStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function PaginationStore_defineProperties(target, props) {
+			function SearchPaginationStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -35527,21 +35560,21 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function PaginationStore_createClass(Constructor, protoProps, staticProps) {
+			function SearchPaginationStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && PaginationStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && PaginationStore_defineProperties(Constructor, staticProps),
+					protoProps && SearchPaginationStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchPaginationStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			var PaginationStore = (function () {
-					function PaginationStore(config, services) {
+			var SearchPaginationStore = (function () {
+					function SearchPaginationStore(config, services) {
 						var paginationData =
 							arguments.length > 2 && void 0 !== arguments[2]
 								? arguments[2]
 								: { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24, totalPages: void 0 };
-						PaginationStore_classCallCheck(this, PaginationStore),
+						SearchPaginationStore_classCallCheck(this, SearchPaginationStore),
 							(this.services = services),
 							(this.controllerConfig = config),
 							(this.page = paginationData.page),
@@ -35572,7 +35605,7 @@
 							});
 					}
 					return (
-						PaginationStore_createClass(PaginationStore, [
+						SearchPaginationStore_createClass(SearchPaginationStore, [
 							{
 								key: 'begin',
 								get: function get() {
@@ -35656,12 +35689,12 @@
 								},
 							},
 						]),
-						PaginationStore
+						SearchPaginationStore
 					);
 				})(),
-				Page = PaginationStore_createClass(function Page(services, page) {
+				Page = SearchPaginationStore_createClass(function Page(services, page) {
 					var _this$services, _this$services$urlMan;
-					PaginationStore_classCallCheck(this, Page),
+					SearchPaginationStore_classCallCheck(this, Page),
 						(this.services = services),
 						(this.number = page.number),
 						(this.active = page.active || !1),
@@ -35674,10 +35707,10 @@
 								: _this$services$urlMan.set('page', this.number)),
 						(this.key = this.url.href);
 				});
-			function SortingStore_classCallCheck(instance, Constructor) {
+			function SearchSortingStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function SortingStore_defineProperties(target, props) {
+			function SearchSortingStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -35686,17 +35719,17 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function SortingStore_createClass(Constructor, protoProps, staticProps) {
+			function SearchSortingStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && SortingStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && SortingStore_defineProperties(Constructor, staticProps),
+					protoProps && SearchSortingStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SearchSortingStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			var SortingStore = (function () {
-					function SortingStore(services, sorting, search, meta) {
-						if ((SortingStore_classCallCheck(this, SortingStore), (this.options = []), services && meta.sortOptions)) {
+			var SearchSortingStore = (function () {
+					function SearchSortingStore(services, sorting, search, meta) {
+						if ((SearchSortingStore_classCallCheck(this, SearchSortingStore), (this.options = []), services && meta.sortOptions)) {
 							var activeSort = (null == sorting ? void 0 : sorting.length) && sorting[0],
 								options = (meta.sortOptions || [])
 									.filter(function (option) {
@@ -35717,7 +35750,7 @@
 						}
 					}
 					return (
-						SortingStore_createClass(SortingStore, [
+						SearchSortingStore_createClass(SearchSortingStore, [
 							{
 								key: 'current',
 								get: function get() {
@@ -35729,11 +35762,11 @@
 								},
 							},
 						]),
-						SortingStore
+						SearchSortingStore
 					);
 				})(),
-				Option = SortingStore_createClass(function Option(services, option, index) {
-					SortingStore_classCallCheck(this, Option),
+				Option = SearchSortingStore_createClass(function Option(services, option, index) {
+					SearchSortingStore_classCallCheck(this, Option),
 						(this.active = option.active),
 						(this.default = option.default),
 						(this.field = option.field),
@@ -35915,9 +35948,9 @@
 									(this.data = JSON.parse(JSON.stringify(data))),
 									(this.loaded = !!data.pagination),
 									(this.meta = data.meta || {}),
-									(this.merchandising = new MerchandisingStore(this.services, (null == data ? void 0 : data.merchandising) || {})),
-									(this.search = new QueryStore(this.services, (null == data ? void 0 : data.search) || {})),
-									(this.facets = new FacetStore_FacetStore(
+									(this.merchandising = new SearchMerchandisingStore.A(this.services, (null == data ? void 0 : data.merchandising) || {})),
+									(this.search = new SearchQueryStore(this.services, (null == data ? void 0 : data.search) || {})),
+									(this.facets = new SearchFacetStore(
 										this.config,
 										this.services,
 										this.storage,
@@ -35925,16 +35958,16 @@
 										(null == data ? void 0 : data.pagination) || {},
 										this.meta
 									)),
-									(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-									(this.results = new ResultStore(
+									(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
+									(this.results = new SearchResultStore(
 										this.config,
 										this.services,
 										(null == data ? void 0 : data.results) || [],
 										data.pagination,
 										data.merchandising
 									)),
-									(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-									(this.sorting = new SortingStore(
+									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination)),
+									(this.sorting = new SearchSortingStore(
 										this.services,
 										(null == data ? void 0 : data.sorting) || [],
 										(null == data ? void 0 : data.search) || {},
@@ -35946,7 +35979,7 @@
 					SearchStore
 				);
 			})(AbstractStore);
-			function ProfileStore_defineProperties(target, props) {
+			function RecommendationProfileStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -35955,19 +35988,19 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function ProfileStore_createClass(Constructor, protoProps, staticProps) {
+			function RecommendationProfileStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && ProfileStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && ProfileStore_defineProperties(Constructor, staticProps),
+					protoProps && RecommendationProfileStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && RecommendationProfileStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			var ProfileStore = ProfileStore_createClass(function ProfileStore(services, data) {
+			var RecommendationProfileStore = RecommendationProfileStore_createClass(function RecommendationProfileStore(services, data) {
 				var _data$profile;
-				!(function ProfileStore_classCallCheck(instance, Constructor) {
+				!(function RecommendationProfileStore_classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-				})(this, ProfileStore),
+				})(this, RecommendationProfileStore),
 					(this.display = {}),
 					null != data &&
 						null !== (_data$profile = data.profile) &&
@@ -36088,18 +36121,18 @@
 							value: function update(data) {
 								(this.error = void 0),
 									(this.loaded = !(null == data || !data.profile)),
-									(this.profile = new ProfileStore(this.services, data)),
-									(this.results = new ResultStore(this.config, this.services, null == data ? void 0 : data.results));
+									(this.profile = new RecommendationProfileStore(this.services, data)),
+									(this.results = new SearchResultStore(this.config, this.services, null == data ? void 0 : data.results));
 							},
 						},
 					]),
 					RecommendationStore
 				);
 			})(AbstractStore);
-			function StateStore_classCallCheck(instance, Constructor) {
+			function AutocompleteStateStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function StateStore_defineProperties(target, props) {
+			function AutocompleteStateStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -36108,17 +36141,17 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function StateStore_createClass(Constructor, protoProps, staticProps) {
+			function AutocompleteStateStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && StateStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && StateStore_defineProperties(Constructor, staticProps),
+					protoProps && AutocompleteStateStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && AutocompleteStateStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			var StateStore = (function () {
-					function StateStore(services) {
-						StateStore_classCallCheck(this, StateStore),
+			var AutocompleteStateStore = (function () {
+					function AutocompleteStateStore(services) {
+						AutocompleteStateStore_classCallCheck(this, AutocompleteStateStore),
 							(this.focusedInput = void 0),
 							(this.input = void 0),
 							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
@@ -36126,7 +36159,7 @@
 							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
 					}
 					return (
-						StateStore_createClass(StateStore, [
+						AutocompleteStateStore_createClass(AutocompleteStateStore, [
 							{
 								key: 'reset',
 								value: function reset() {
@@ -36134,16 +36167,16 @@
 								},
 							},
 						]),
-						StateStore
+						AutocompleteStateStore
 					);
 				})(),
 				Lock = (function () {
 					function Lock() {
 						var state = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-						StateStore_classCallCheck(this, Lock), (this.state = this.startState = state);
+						AutocompleteStateStore_classCallCheck(this, Lock), (this.state = this.startState = state);
 					}
 					return (
-						StateStore_createClass(Lock, [
+						AutocompleteStateStore_createClass(Lock, [
 							{
 								key: 'reset',
 								value: function reset() {
@@ -36172,38 +36205,38 @@
 						Lock
 					);
 				})();
-			function TermStore_toConsumableArray(arr) {
+			function AutocompleteTermStore_toConsumableArray(arr) {
 				return (
-					(function TermStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return TermStore_arrayLikeToArray(arr);
+					(function AutocompleteTermStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return AutocompleteTermStore_arrayLikeToArray(arr);
 					})(arr) ||
-					(function TermStore_iterableToArray(iter) {
+					(function AutocompleteTermStore_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					(function TermStore_unsupportedIterableToArray(o, minLen) {
+					(function AutocompleteTermStore_unsupportedIterableToArray(o, minLen) {
 						if (!o) return;
-						if ('string' == typeof o) return TermStore_arrayLikeToArray(o, minLen);
+						if ('string' == typeof o) return AutocompleteTermStore_arrayLikeToArray(o, minLen);
 						var n = Object.prototype.toString.call(o).slice(8, -1);
 						'Object' === n && o.constructor && (n = o.constructor.name);
 						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return TermStore_arrayLikeToArray(o, minLen);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return AutocompleteTermStore_arrayLikeToArray(o, minLen);
 					})(arr) ||
-					(function TermStore_nonIterableSpread() {
+					(function AutocompleteTermStore_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function TermStore_arrayLikeToArray(arr, len) {
+			function AutocompleteTermStore_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function TermStore_classCallCheck(instance, Constructor) {
+			function AutocompleteTermStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			function TermStore_defineProperties(target, props) {
+			function AutocompleteTermStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -36212,29 +36245,29 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function TermStore_createClass(Constructor, protoProps, staticProps) {
+			function AutocompleteTermStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && TermStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && TermStore_defineProperties(Constructor, staticProps),
+					protoProps && AutocompleteTermStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && AutocompleteTermStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			function TermStore_possibleConstructorReturn(self, call) {
+			function AutocompleteTermStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function TermStore_assertThisInitialized(self) {
+				return (function AutocompleteTermStore_assertThisInitialized(self) {
 					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 					return self;
 				})(self);
 			}
-			function TermStore_wrapNativeSuper(Class) {
+			function AutocompleteTermStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(TermStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(AutocompleteTermStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function TermStore_isNativeFunction(fn) {
+							!(function AutocompleteTermStore_isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -36245,32 +36278,32 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return TermStore_construct(Class, arguments, TermStore_getPrototypeOf(this).constructor);
+							return AutocompleteTermStore_construct(Class, arguments, AutocompleteTermStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							TermStore_setPrototypeOf(Wrapper, Class)
+							AutocompleteTermStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					TermStore_wrapNativeSuper(Class)
+					AutocompleteTermStore_wrapNativeSuper(Class)
 				);
 			}
-			function TermStore_construct(Parent, args, Class) {
+			function AutocompleteTermStore_construct(Parent, args, Class) {
 				return (
-					(TermStore_construct = TermStore_isNativeReflectConstruct()
+					(AutocompleteTermStore_construct = AutocompleteTermStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && TermStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && AutocompleteTermStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					TermStore_construct.apply(null, arguments)
+					AutocompleteTermStore_construct.apply(null, arguments)
 				);
 			}
-			function TermStore_isNativeReflectConstruct() {
+			function AutocompleteTermStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -36280,51 +36313,51 @@
 					return !1;
 				}
 			}
-			function TermStore_setPrototypeOf(o, p) {
+			function AutocompleteTermStore_setPrototypeOf(o, p) {
 				return (
-					(TermStore_setPrototypeOf = Object.setPrototypeOf
+					(AutocompleteTermStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					TermStore_setPrototypeOf(o, p)
+					AutocompleteTermStore_setPrototypeOf(o, p)
 				);
 			}
-			function TermStore_getPrototypeOf(o) {
+			function AutocompleteTermStore_getPrototypeOf(o) {
 				return (
-					(TermStore_getPrototypeOf = Object.setPrototypeOf
+					(AutocompleteTermStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					TermStore_getPrototypeOf(o)
+					AutocompleteTermStore_getPrototypeOf(o)
 				);
 			}
-			var TermStore = (function (_Array, _Symbol$species) {
-					!(function TermStore_inherits(subClass, superClass) {
+			var AutocompleteTermStore = (function (_Array, _Symbol$species) {
+					!(function AutocompleteTermStore_inherits(subClass, superClass) {
 						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 						(subClass.prototype = Object.create(superClass && superClass.prototype, {
 							constructor: { value: subClass, writable: !0, configurable: !0 },
 						})),
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && TermStore_setPrototypeOf(subClass, superClass);
-					})(TermStore, _Array);
-					var _super = (function TermStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = TermStore_isNativeReflectConstruct();
+							superClass && AutocompleteTermStore_setPrototypeOf(subClass, superClass);
+					})(AutocompleteTermStore, _Array);
+					var _super = (function AutocompleteTermStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = AutocompleteTermStore_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var result,
-								Super = TermStore_getPrototypeOf(Derived);
+								Super = AutocompleteTermStore_getPrototypeOf(Derived);
 							if (hasNativeReflectConstruct) {
-								var NewTarget = TermStore_getPrototypeOf(this).constructor;
+								var NewTarget = AutocompleteTermStore_getPrototypeOf(this).constructor;
 								result = Reflect.construct(Super, arguments, NewTarget);
 							} else result = Super.apply(this, arguments);
-							return TermStore_possibleConstructorReturn(this, result);
+							return AutocompleteTermStore_possibleConstructorReturn(this, result);
 						};
-					})(TermStore);
-					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
+					})(AutocompleteTermStore);
+					function AutocompleteTermStore(services, autocomplete, paginationData, resetTerms, rootState) {
 						var _autocomplete$suggest;
-						TermStore_classCallCheck(this, TermStore);
-						var suggestions = TermStore_toConsumableArray(
+						AutocompleteTermStore_classCallCheck(this, AutocompleteTermStore);
+						var suggestions = AutocompleteTermStore_toConsumableArray(
 							(null != autocomplete && autocomplete.alternatives ? autocomplete.alternatives : []).map(function (term) {
 								return term.text;
 							})
@@ -36347,7 +36380,7 @@
 						);
 					}
 					return (
-						TermStore_createClass(TermStore, null, [
+						AutocompleteTermStore_createClass(AutocompleteTermStore, null, [
 							{
 								key: _Symbol$species,
 								get: function get() {
@@ -36355,13 +36388,13 @@
 								},
 							},
 						]),
-						TermStore
+						AutocompleteTermStore
 					);
-				})(TermStore_wrapNativeSuper(Array), Symbol.species),
-				Term = TermStore_createClass(function Term(services, term, terms, resetTerms, rootState) {
+				})(AutocompleteTermStore_wrapNativeSuper(Array), Symbol.species),
+				Term = AutocompleteTermStore_createClass(function Term(services, term, terms, resetTerms, rootState) {
 					var _services$urlManager,
 						_this = this;
-					TermStore_classCallCheck(this, Term),
+					AutocompleteTermStore_classCallCheck(this, Term),
 						(this.active = term.active),
 						(this.value = term.value),
 						(this.url =
@@ -36381,7 +36414,7 @@
 						}),
 						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
 				});
-			function TrendingStore_defineProperties(target, props) {
+			function AutocompleteTrendingStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -36390,21 +36423,21 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function TrendingStore_possibleConstructorReturn(self, call) {
+			function AutocompleteTrendingStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function TrendingStore_assertThisInitialized(self) {
+				return (function AutocompleteTrendingStore_assertThisInitialized(self) {
 					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 					return self;
 				})(self);
 			}
-			function TrendingStore_wrapNativeSuper(Class) {
+			function AutocompleteTrendingStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(TrendingStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(AutocompleteTrendingStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function TrendingStore_isNativeFunction(fn) {
+							!(function AutocompleteTrendingStore_isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -36415,32 +36448,32 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return TrendingStore_construct(Class, arguments, TrendingStore_getPrototypeOf(this).constructor);
+							return AutocompleteTrendingStore_construct(Class, arguments, AutocompleteTrendingStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							TrendingStore_setPrototypeOf(Wrapper, Class)
+							AutocompleteTrendingStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					TrendingStore_wrapNativeSuper(Class)
+					AutocompleteTrendingStore_wrapNativeSuper(Class)
 				);
 			}
-			function TrendingStore_construct(Parent, args, Class) {
+			function AutocompleteTrendingStore_construct(Parent, args, Class) {
 				return (
-					(TrendingStore_construct = TrendingStore_isNativeReflectConstruct()
+					(AutocompleteTrendingStore_construct = AutocompleteTrendingStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && TrendingStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && AutocompleteTrendingStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					TrendingStore_construct.apply(null, arguments)
+					AutocompleteTrendingStore_construct.apply(null, arguments)
 				);
 			}
-			function TrendingStore_isNativeReflectConstruct() {
+			function AutocompleteTrendingStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -36450,52 +36483,52 @@
 					return !1;
 				}
 			}
-			function TrendingStore_setPrototypeOf(o, p) {
+			function AutocompleteTrendingStore_setPrototypeOf(o, p) {
 				return (
-					(TrendingStore_setPrototypeOf = Object.setPrototypeOf
+					(AutocompleteTrendingStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					TrendingStore_setPrototypeOf(o, p)
+					AutocompleteTrendingStore_setPrototypeOf(o, p)
 				);
 			}
-			function TrendingStore_getPrototypeOf(o) {
+			function AutocompleteTrendingStore_getPrototypeOf(o) {
 				return (
-					(TrendingStore_getPrototypeOf = Object.setPrototypeOf
+					(AutocompleteTrendingStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					TrendingStore_getPrototypeOf(o)
+					AutocompleteTrendingStore_getPrototypeOf(o)
 				);
 			}
-			var TrendingStore = (function (_Array, _Symbol$species) {
-				!(function TrendingStore_inherits(subClass, superClass) {
+			var AutocompleteTrendingStore = (function (_Array, _Symbol$species) {
+				!(function AutocompleteTrendingStore_inherits(subClass, superClass) {
 					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 					(subClass.prototype = Object.create(superClass && superClass.prototype, {
 						constructor: { value: subClass, writable: !0, configurable: !0 },
 					})),
 						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-						superClass && TrendingStore_setPrototypeOf(subClass, superClass);
-				})(TrendingStore, _Array);
-				var _super = (function TrendingStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = TrendingStore_isNativeReflectConstruct();
+						superClass && AutocompleteTrendingStore_setPrototypeOf(subClass, superClass);
+				})(AutocompleteTrendingStore, _Array);
+				var _super = (function AutocompleteTrendingStore_createSuper(Derived) {
+					var hasNativeReflectConstruct = AutocompleteTrendingStore_isNativeReflectConstruct();
 					return function _createSuperInternal() {
 						var result,
-							Super = TrendingStore_getPrototypeOf(Derived);
+							Super = AutocompleteTrendingStore_getPrototypeOf(Derived);
 						if (hasNativeReflectConstruct) {
-							var NewTarget = TrendingStore_getPrototypeOf(this).constructor;
+							var NewTarget = AutocompleteTrendingStore_getPrototypeOf(this).constructor;
 							result = Reflect.construct(Super, arguments, NewTarget);
 						} else result = Super.apply(this, arguments);
-						return TrendingStore_possibleConstructorReturn(this, result);
+						return AutocompleteTrendingStore_possibleConstructorReturn(this, result);
 					};
-				})(TrendingStore);
-				function TrendingStore(services, trendingData, resetTerms, rootState) {
+				})(AutocompleteTrendingStore);
+				function AutocompleteTrendingStore(services, trendingData, resetTerms, rootState) {
 					var _trendingData$trendin, _trendingData$trendin2;
-					!(function TrendingStore_classCallCheck(instance, Constructor) {
+					!(function AutocompleteTrendingStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, TrendingStore);
+					})(this, AutocompleteTrendingStore);
 					var terms = [];
 					return (
 						null == trendingData ||
@@ -36510,14 +36543,14 @@
 					);
 				}
 				return (
-					(function TrendingStore_createClass(Constructor, protoProps, staticProps) {
+					(function AutocompleteTrendingStore_createClass(Constructor, protoProps, staticProps) {
 						return (
-							protoProps && TrendingStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && TrendingStore_defineProperties(Constructor, staticProps),
+							protoProps && AutocompleteTrendingStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && AutocompleteTrendingStore_defineProperties(Constructor, staticProps),
 							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 							Constructor
 						);
-					})(TrendingStore, null, [
+					})(AutocompleteTrendingStore, null, [
 						{
 							key: _Symbol$species,
 							get: function get() {
@@ -36525,10 +36558,10 @@
 							},
 						},
 					]),
-					TrendingStore
+					AutocompleteTrendingStore
 				);
-			})(TrendingStore_wrapNativeSuper(Array), Symbol.species);
-			function Stores_QueryStore_defineProperties(target, props) {
+			})(AutocompleteTrendingStore_wrapNativeSuper(Array), Symbol.species);
+			function AutocompleteQueryStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -36537,64 +36570,65 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function Stores_QueryStore_createClass(Constructor, protoProps, staticProps) {
+			function AutocompleteQueryStore_createClass(Constructor, protoProps, staticProps) {
 				return (
-					protoProps && Stores_QueryStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && Stores_QueryStore_defineProperties(Constructor, staticProps),
+					protoProps && AutocompleteQueryStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && AutocompleteQueryStore_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			function Stores_QueryStore_classCallCheck(instance, Constructor) {
+			function AutocompleteQueryStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			var QueryStore_QueryStore = Stores_QueryStore_createClass(function QueryStore(services, autocomplete, search) {
-					Stores_QueryStore_classCallCheck(this, QueryStore);
+			var AutocompleteQueryStore = AutocompleteQueryStore_createClass(function AutocompleteQueryStore(services, autocomplete, search) {
+					AutocompleteQueryStore_classCallCheck(this, AutocompleteQueryStore);
 					var observables = {};
 					null != search &&
 						search.query &&
-						((this.query = new QueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
+						((this.query = new AutocompleteQueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
 						null != autocomplete &&
 							autocomplete.correctedQuery &&
 							autocomplete.query &&
-							((this.originalQuery = new QueryStore_Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
+							((this.originalQuery = new AutocompleteQueryStore_Query(services.urlManager, autocomplete.query)),
+							(observables.originalQuery = mobx_esm.LO)),
 						(0, mobx_esm.rC)(this, observables);
 				}),
-				QueryStore_Query = Stores_QueryStore_createClass(function Query(urlManager, query) {
-					Stores_QueryStore_classCallCheck(this, Query),
+				AutocompleteQueryStore_Query = AutocompleteQueryStore_createClass(function Query(urlManager, query) {
+					AutocompleteQueryStore_classCallCheck(this, Query),
 						(this.string = query),
 						(this.url = urlManager.set({ query: this.string })),
 						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
 				});
-			function Stores_FacetStore_toConsumableArray(arr) {
+			function AutocompleteFacetStore_toConsumableArray(arr) {
 				return (
-					(function Stores_FacetStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return Stores_FacetStore_arrayLikeToArray(arr);
+					(function AutocompleteFacetStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return AutocompleteFacetStore_arrayLikeToArray(arr);
 					})(arr) ||
-					(function Stores_FacetStore_iterableToArray(iter) {
+					(function AutocompleteFacetStore_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					(function Stores_FacetStore_unsupportedIterableToArray(o, minLen) {
+					(function AutocompleteFacetStore_unsupportedIterableToArray(o, minLen) {
 						if (!o) return;
-						if ('string' == typeof o) return Stores_FacetStore_arrayLikeToArray(o, minLen);
+						if ('string' == typeof o) return AutocompleteFacetStore_arrayLikeToArray(o, minLen);
 						var n = Object.prototype.toString.call(o).slice(8, -1);
 						'Object' === n && o.constructor && (n = o.constructor.name);
 						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Stores_FacetStore_arrayLikeToArray(o, minLen);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return AutocompleteFacetStore_arrayLikeToArray(o, minLen);
 					})(arr) ||
-					(function Stores_FacetStore_nonIterableSpread() {
+					(function AutocompleteFacetStore_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function Stores_FacetStore_arrayLikeToArray(arr, len) {
+			function AutocompleteFacetStore_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function Stores_FacetStore_defineProperties(target, props) {
+			function AutocompleteFacetStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -36603,21 +36637,21 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function Stores_FacetStore_possibleConstructorReturn(self, call) {
+			function AutocompleteFacetStore_possibleConstructorReturn(self, call) {
 				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
 				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function Stores_FacetStore_assertThisInitialized(self) {
+				return (function AutocompleteFacetStore_assertThisInitialized(self) {
 					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 					return self;
 				})(self);
 			}
-			function Stores_FacetStore_wrapNativeSuper(Class) {
+			function AutocompleteFacetStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(Stores_FacetStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(AutocompleteFacetStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function Stores_FacetStore_isNativeFunction(fn) {
+							!(function AutocompleteFacetStore_isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -36628,32 +36662,32 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return Stores_FacetStore_construct(Class, arguments, Stores_FacetStore_getPrototypeOf(this).constructor);
+							return AutocompleteFacetStore_construct(Class, arguments, AutocompleteFacetStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
 								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
 							})),
-							Stores_FacetStore_setPrototypeOf(Wrapper, Class)
+							AutocompleteFacetStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					Stores_FacetStore_wrapNativeSuper(Class)
+					AutocompleteFacetStore_wrapNativeSuper(Class)
 				);
 			}
-			function Stores_FacetStore_construct(Parent, args, Class) {
+			function AutocompleteFacetStore_construct(Parent, args, Class) {
 				return (
-					(Stores_FacetStore_construct = Stores_FacetStore_isNativeReflectConstruct()
+					(AutocompleteFacetStore_construct = AutocompleteFacetStore_isNativeReflectConstruct()
 						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
 								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && Stores_FacetStore_setPrototypeOf(instance, Class.prototype), instance;
+								return Class && AutocompleteFacetStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					Stores_FacetStore_construct.apply(null, arguments)
+					AutocompleteFacetStore_construct.apply(null, arguments)
 				);
 			}
-			function Stores_FacetStore_isNativeReflectConstruct() {
+			function AutocompleteFacetStore_isNativeReflectConstruct() {
 				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
 				if (Reflect.construct.sham) return !1;
 				if ('function' == typeof Proxy) return !0;
@@ -36663,53 +36697,53 @@
 					return !1;
 				}
 			}
-			function Stores_FacetStore_setPrototypeOf(o, p) {
+			function AutocompleteFacetStore_setPrototypeOf(o, p) {
 				return (
-					(Stores_FacetStore_setPrototypeOf = Object.setPrototypeOf
+					(AutocompleteFacetStore_setPrototypeOf = Object.setPrototypeOf
 						? Object.setPrototypeOf.bind()
 						: function _setPrototypeOf(o, p) {
 								return (o.__proto__ = p), o;
 						  }),
-					Stores_FacetStore_setPrototypeOf(o, p)
+					AutocompleteFacetStore_setPrototypeOf(o, p)
 				);
 			}
-			function Stores_FacetStore_getPrototypeOf(o) {
+			function AutocompleteFacetStore_getPrototypeOf(o) {
 				return (
-					(Stores_FacetStore_getPrototypeOf = Object.setPrototypeOf
+					(AutocompleteFacetStore_getPrototypeOf = Object.setPrototypeOf
 						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
-					Stores_FacetStore_getPrototypeOf(o)
+					AutocompleteFacetStore_getPrototypeOf(o)
 				);
 			}
-			var FacetStore = (function (_Array, _Symbol$species) {
-				!(function Stores_FacetStore_inherits(subClass, superClass) {
+			var AutocompleteFacetStore = (function (_Array, _Symbol$species) {
+				!(function AutocompleteFacetStore_inherits(subClass, superClass) {
 					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 					(subClass.prototype = Object.create(superClass && superClass.prototype, {
 						constructor: { value: subClass, writable: !0, configurable: !0 },
 					})),
 						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-						superClass && Stores_FacetStore_setPrototypeOf(subClass, superClass);
-				})(FacetStore, _Array);
-				var _super = (function Stores_FacetStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = Stores_FacetStore_isNativeReflectConstruct();
+						superClass && AutocompleteFacetStore_setPrototypeOf(subClass, superClass);
+				})(AutocompleteFacetStore, _Array);
+				var _super = (function AutocompleteFacetStore_createSuper(Derived) {
+					var hasNativeReflectConstruct = AutocompleteFacetStore_isNativeReflectConstruct();
 					return function _createSuperInternal() {
 						var result,
-							Super = Stores_FacetStore_getPrototypeOf(Derived);
+							Super = AutocompleteFacetStore_getPrototypeOf(Derived);
 						if (hasNativeReflectConstruct) {
-							var NewTarget = Stores_FacetStore_getPrototypeOf(this).constructor;
+							var NewTarget = AutocompleteFacetStore_getPrototypeOf(this).constructor;
 							result = Reflect.construct(Super, arguments, NewTarget);
 						} else result = Super.apply(this, arguments);
-						return Stores_FacetStore_possibleConstructorReturn(this, result);
+						return AutocompleteFacetStore_possibleConstructorReturn(this, result);
 					};
-				})(FacetStore);
-				function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
-					!(function Stores_FacetStore_classCallCheck(instance, Constructor) {
+				})(AutocompleteFacetStore);
+				function AutocompleteFacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
+					!(function AutocompleteFacetStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, FacetStore);
+					})(this, AutocompleteFacetStore);
 					var alteredServices = Object.assign({}, services, { urlManager: services.urlManager.remove('filter') }),
-						facets = new FacetStore_FacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
+						facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
 					return (
 						facets.forEach(function (facet) {
 							var _facet$values;
@@ -36733,18 +36767,18 @@
 									};
 								});
 						}),
-						_super.call.apply(_super, [this].concat(Stores_FacetStore_toConsumableArray(facets)))
+						_super.call.apply(_super, [this].concat(AutocompleteFacetStore_toConsumableArray(facets)))
 					);
 				}
 				return (
-					(function Stores_FacetStore_createClass(Constructor, protoProps, staticProps) {
+					(function AutocompleteFacetStore_createClass(Constructor, protoProps, staticProps) {
 						return (
-							protoProps && Stores_FacetStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && Stores_FacetStore_defineProperties(Constructor, staticProps),
+							protoProps && AutocompleteFacetStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && AutocompleteFacetStore_defineProperties(Constructor, staticProps),
 							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 							Constructor
 						);
-					})(FacetStore, null, [
+					})(AutocompleteFacetStore, null, [
 						{
 							key: _Symbol$species,
 							get: function get() {
@@ -36752,9 +36786,9 @@
 							},
 						},
 					]),
-					FacetStore
+					AutocompleteFacetStore
 				);
-			})(Stores_FacetStore_wrapNativeSuper(Array), Symbol.species);
+			})(AutocompleteFacetStore_wrapNativeSuper(Array), Symbol.species);
 			function AutocompleteStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -36840,7 +36874,7 @@
 							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
 						return (
 							(_this.services = services),
-							(_this.state = new StateStore(services)),
+							(_this.state = new AutocompleteStateStore(services)),
 							(_this.storage = new StorageStore()),
 							(_this.trending = []),
 							_this.reset(),
@@ -36906,7 +36940,7 @@
 								key: 'updateTrendingTerms',
 								value: function updateTrendingTerms(data) {
 									var _this2 = this;
-									this.trending = new TrendingStore(
+									this.trending = new AutocompleteTrendingStore(
 										this.services,
 										data,
 										function () {
@@ -36928,7 +36962,7 @@
 										(this.meta = data.meta || {}),
 										data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
 										this.state.locks.terms.locked ||
-											((this.terms = new TermStore(
+											((this.terms = new AutocompleteTermStore(
 												this.services,
 												data.autocomplete || {},
 												data.pagination || {},
@@ -36938,10 +36972,10 @@
 												this.state
 											)),
 											data.autocomplete && this.state.locks.terms.lock()),
-										(this.merchandising = new MerchandisingStore(this.services, data.merchandising || {})),
-										(this.search = new QueryStore_QueryStore(this.services, data.autocomplete || {}, data.search || {})),
+										(this.merchandising = new SearchMerchandisingStore.A(this.services, data.merchandising || {})),
+										(this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {})),
 										this.state.locks.facets.locked ||
-											(this.facets = new FacetStore(
+											(this.facets = new AutocompleteFacetStore(
 												this.config,
 												this.services,
 												this.storage,
@@ -36950,8 +36984,8 @@
 												this.meta,
 												this.state
 											)),
-										(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-										(this.results = new ResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising)),
+										(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
+										(this.results = new SearchResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising)),
 										((0 === this.results.length &&
 											!this.trending.filter(function (term) {
 												return term.active;
@@ -36962,8 +36996,8 @@
 													return term.active;
 												}).length)) &&
 											this.resetTrending(),
-										(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-										(this.sorting = new SortingStore(this.services, data.sorting || [], data.search || {}, this.meta)));
+										(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination)),
+										(this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta)));
 								},
 							},
 						]),
@@ -39254,7 +39288,7 @@
 					Constructor
 				);
 			}
-			var BeaconEvent = BeaconEvent_createClass(function BeaconEvent(payload) {
+			var BeaconEvent = BeaconEvent_createClass(function BeaconEvent(payload, config) {
 				!(function BeaconEvent_classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 				})(this, BeaconEvent),
@@ -39265,7 +39299,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.28.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.29.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39305,7 +39339,7 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var Tracker_defaultConfig = { id: 'track' },
+			var Tracker_defaultConfig = { id: 'track', framework: 'snap' },
 				Tracker = (function () {
 					function Tracker(globals, config) {
 						var _window$searchspring,
@@ -39324,8 +39358,29 @@
 											event: payload.event,
 											pid: (null == payload ? void 0 : payload.pid) || void 0,
 										},
-										beaconEvent = new BeaconEvent(event);
+										beaconEvent = new BeaconEvent(event, _this.config);
 									return _this.sendEvents([beaconEvent]), beaconEvent;
+								},
+								error: function error(data, siteId) {
+									if ((null != data && data.stack) || (null != data && data.message)) {
+										var context = _this.context;
+										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+										var userAgent = data.userAgent,
+											href = data.href,
+											filename = data.filename,
+											stack = data.stack,
+											message = data.message,
+											colno = data.colno,
+											lineno = data.lineno,
+											timeStamp = data.timeStamp,
+											payload = {
+												type: BeaconType.ERROR,
+												category: BeaconCategory.RUNTIME,
+												context,
+												event: { userAgent, href, filename, stack, message, colno, lineno, timeStamp },
+											};
+										return _this.track.event(payload);
+									}
 								},
 								shopper: {
 									login: function login(data, siteId) {
@@ -39661,7 +39716,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.28.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.29.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40410,6 +40465,7 @@
 			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
 				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
 				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
 				defaultTheme = {
 					colors: {
 						primary: '#3A23AD',
@@ -40420,7 +40476,6 @@
 					},
 					components: {},
 				},
-				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				injectStylesIntoStyleTag = __webpack_require__(
 					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
 				),
@@ -40433,7 +40488,7 @@
 			styles.Z.locals;
 			var decorators = [
 					function (Story) {
-						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
 					},
 				],
 				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
@@ -40525,6 +40580,221 @@
 		'./storybook-init-framework-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js');
+		},
+		'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { A: () => SearchMerchandisingStore, z: () => ContentType });
+			var ContentType;
+			__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
+			function _toConsumableArray(arr) {
+				return (
+					(function _arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+					})(arr) ||
+					(function _iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function _possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return (function _assertThisInitialized(self) {
+					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+					return self;
+				})(self);
+			}
+			function _wrapNativeSuper(Class) {
+				var _cache = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(_wrapNativeSuper = function _wrapNativeSuper(Class) {
+						if (
+							null === Class ||
+							!(function _isNativeFunction(fn) {
+								return -1 !== Function.toString.call(fn).indexOf('[native code]');
+							})(Class)
+						)
+							return Class;
+						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== _cache) {
+							if (_cache.has(Class)) return _cache.get(Class);
+							_cache.set(Class, Wrapper);
+						}
+						function Wrapper() {
+							return _construct(Class, arguments, _getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(Class.prototype, {
+								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
+							})),
+							_setPrototypeOf(Wrapper, Class)
+						);
+					}),
+					_wrapNativeSuper(Class)
+				);
+			}
+			function _construct(Parent, args, Class) {
+				return (
+					(_construct = _isNativeReflectConstruct()
+						? Reflect.construct.bind()
+						: function _construct(Parent, args, Class) {
+								var a = [null];
+								a.push.apply(a, args);
+								var instance = new (Function.bind.apply(Parent, a))();
+								return Class && _setPrototypeOf(instance, Class.prototype), instance;
+						  }),
+					_construct.apply(null, arguments)
+				);
+			}
+			function _isNativeReflectConstruct() {
+				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+				if (Reflect.construct.sham) return !1;
+				if ('function' == typeof Proxy) return !0;
+				try {
+					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+				} catch (e) {
+					return !1;
+				}
+			}
+			function _setPrototypeOf(o, p) {
+				return (
+					(_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
+					_setPrototypeOf(o, p)
+				);
+			}
+			function _getPrototypeOf(o) {
+				return (
+					(_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf.bind()
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					_getPrototypeOf(o)
+				);
+			}
+			function _defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function _createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && _defineProperties(Constructor.prototype, protoProps),
+					staticProps && _defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function _classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			!(function (ContentType) {
+				(ContentType.HEADER = 'header'),
+					(ContentType.BANNER = 'banner'),
+					(ContentType.FOOTER = 'footer'),
+					(ContentType.LEFT = 'left'),
+					(ContentType.INLINE = 'inline');
+			})(ContentType || (ContentType = {}));
+			var SearchMerchandisingStore = _createClass(function SearchMerchandisingStore(services, merchData) {
+					var _this = this;
+					_classCallCheck(this, SearchMerchandisingStore),
+						(this.redirect = ''),
+						(this.content = {}),
+						merchData &&
+							((this.redirect = merchData.redirect || ''),
+							merchData.content &&
+								Object.values(ContentType).forEach(function (type) {
+									merchData.content && merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
+								}));
+				}),
+				Content = (function (_Array, _Symbol$species) {
+					!(function _inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && _setPrototypeOf(subClass, superClass);
+					})(Content, _Array);
+					var _super = (function _createSuper(Derived) {
+						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						return function _createSuperInternal() {
+							var result,
+								Super = _getPrototypeOf(Derived);
+							if (hasNativeReflectConstruct) {
+								var NewTarget = _getPrototypeOf(this).constructor;
+								result = Reflect.construct(Super, arguments, NewTarget);
+							} else result = Super.apply(this, arguments);
+							return _possibleConstructorReturn(this, result);
+						};
+					})(Content);
+					function Content(content) {
+						return _classCallCheck(this, Content), _super.call.apply(_super, [this].concat(_toConsumableArray(content)));
+					}
+					return (
+						_createClass(Content, null, [
+							{
+								key: _Symbol$species,
+								get: function get() {
+									return Array;
+								},
+							},
+						]),
+						Content
+					);
+				})(_wrapNativeSuper(Array), Symbol.species);
 		},
 		'../snap-store-mobx/dist/esm/types.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
