@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { componentArgs } from '../../../utilities';
-import { Skeleton } from './Skeleton';
+import { Skeleton, SkeletonProps } from './Skeleton';
 import Readme from '../Skeleton/readme.md';
 
 export default {
@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					width: '200px',
@@ -90,15 +90,13 @@ export default {
 	},
 };
 
-const Template = (args) => <Skeleton {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: SkeletonProps) => <Skeleton {...args} />;
 Default.args = {
 	width: '100px',
 	height: '100px',
 };
 
-export const Circle = (args) => <Skeleton {...args} />;
+export const Circle = (args: SkeletonProps) => <Skeleton {...args} />;
 Circle.args = {
 	width: '100px',
 	height: '100px',

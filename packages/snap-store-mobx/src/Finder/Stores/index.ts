@@ -1,1 +1,1 @@
-export { SelectionStore } from './SelectionStore';
+export { FinderSelectionStore } from './FinderSelectionStore';

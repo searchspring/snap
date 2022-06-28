@@ -1,15 +1,15 @@
 import { makeObservable, observable } from 'mobx';
 import { AbstractStore } from '../Abstract/AbstractStore';
-import { ResultStore } from '../Search/Stores';
-import { ProfileStore } from './Stores';
+import { SearchResultStore } from '../Search/Stores';
+import { RecommendationProfileStore } from './Stores';
 import type { RecommendationStoreConfig, StoreServices } from '../types';
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
 
 export class RecommendationStore extends AbstractStore {
 	public services: StoreServices;
 	public loaded = false;
-	public profile!: ProfileStore;
-	public results!: ResultStore;
+	public profile!: RecommendationProfileStore;
+	public results!: SearchResultStore;
 
 	constructor(config: RecommendationStoreConfig, services: StoreServices) {
 		super(config);
@@ -35,7 +35,7 @@ export class RecommendationStore extends AbstractStore {
 	public update(data?: RecommendCombinedResponseModel): void {
 		this.error = undefined;
 		this.loaded = !!data?.profile;
-		this.profile = new ProfileStore(this.services, data);
-		this.results = new ResultStore(this.config, this.services, data?.results);
+		this.profile = new RecommendationProfileStore(this.services, data);
+		this.results = new SearchResultStore(this.config, this.services, data?.results);
 	}
 }

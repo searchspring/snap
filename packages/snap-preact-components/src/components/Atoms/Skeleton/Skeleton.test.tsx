@@ -33,16 +33,16 @@ describe('Skeleton Component', () => {
 	it('renders with classname', () => {
 		const className = 'classy';
 		const rendered = render(<Skeleton className={className} height="300px" width="300px" />);
-		const imageElement = rendered.container.querySelector('.ss__skeleton');
+		const skeleton = rendered.container.querySelector('.ss__skeleton');
 
-		expect(imageElement).toHaveClass(className);
+		expect(skeleton).toHaveClass(className);
 	});
 
 	it('disables styles', () => {
 		const rendered = render(<Skeleton disableStyles height="300px" width="300px" />);
-		const imageElement = rendered.container.querySelector('.ss__skeleton');
+		const skeleton = rendered.container.querySelector('.ss__skeleton');
 
-		expect(imageElement.classList).toHaveLength(1);
+		expect(skeleton?.classList).toHaveLength(1);
 	});
 
 	expect(true).toBe(true);
@@ -62,9 +62,9 @@ describe('Skeleton theming works', () => {
 				<Skeleton height="300px" width="300px" />
 			</ThemeProvider>
 		);
-		const pagination = rendered.container.querySelector('.ss__skeleton');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const skeleton = rendered.container.querySelector('.ss__skeleton');
+		expect(skeleton).toBeInTheDocument();
+		expect(skeleton?.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -76,9 +76,9 @@ describe('Skeleton theming works', () => {
 			},
 		};
 		const rendered = render(<Skeleton height="300px" width="300px" theme={propTheme} />);
-		const pagination = rendered.container.querySelector('.ss__skeleton');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const skeleton = rendered.container.querySelector('.ss__skeleton');
+		expect(skeleton).toBeInTheDocument();
+		expect(skeleton?.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -102,8 +102,8 @@ describe('Skeleton theming works', () => {
 			</ThemeProvider>
 		);
 
-		const pagination = rendered.container.querySelector('.ss__skeleton');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const skeleton = rendered.container.querySelector('.ss__skeleton');
+		expect(skeleton).toBeInTheDocument();
+		expect(skeleton?.classList.length).toBe(1);
 	});
 });

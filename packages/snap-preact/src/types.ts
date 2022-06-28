@@ -71,3 +71,9 @@ export type SnapRecommendationControllerConfig = {
 	controller: RecommendationControllerConfig;
 	context?: ContextVariables;
 };
+
+declare global {
+	interface Window {
+		searchspring?: any;
+	}
+}

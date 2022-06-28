@@ -6,6 +6,7 @@ export type Target = {
 	};
 	emptyTarget?: boolean;
 	hideTarget?: boolean;
+	autoRetarget?: boolean;
 	[any: string]: unknown;
 };
 
@@ -27,17 +28,40 @@ export class DomTargeter {
 
 		this.retarget();
 
-		if (/complete|loaded/.test(this.document.readyState)) {
-			// DOMContent has loaded - unhide targets
-			this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
-		} else {
-			// attempt retarget on DOMContentLoaded
-			this.document.addEventListener('DOMContentLoaded', () => {
-				this.retarget();
-				// unhide targets after re-target attempt in DOMContentLoaded
-				this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
-			});
-		}
+		this.targets.forEach((target) => {
+			if (target.autoRetarget) {
+				let timeoutTime = 100;
+				const checker = () => {
+					//lets not just keep trying forever - this waits roughly 12 seconds before giving up.
+					if (timeoutTime < 2000) {
+						//increase the time till next check
+						timeoutTime = timeoutTime + 200;
+						const elems = this.domQuery(target.selector);
+						//did we find any targets?
+						if (elems && elems.length) {
+							this.retarget();
+							target.hideTarget && this.unhideTarget(target.selector);
+						} else {
+							//try again soon
+							setTimeout(checker, timeoutTime);
+						}
+					} else {
+						//timed out, lets unhide the target
+						target.hideTarget && this.unhideTarget(target.selector);
+					}
+				};
+				checker();
+			} else if (/complete|loaded/.test(this.document.readyState)) {
+				// DOMContent has loaded - unhide targets
+				target.hideTarget && this.unhideTarget(target.selector);
+			} else {
+				// attempt retarget on DOMContentLoaded
+				this.document.addEventListener('DOMContentLoaded', () => {
+					this.retarget();
+					target.hideTarget && this.unhideTarget(target.selector);
+				});
+			}
+		});
 	}
 
 	getTargets(): Array<Target> {

@@ -2,9 +2,9 @@ import { Fragment, h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Carousel } from './Carousel';
+import { Carousel, CarouselProps } from './Carousel';
 import { Icon, iconPaths } from '../../Atoms/Icon';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, shiftColor } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -159,7 +159,8 @@ export default {
 };
 
 const colors = Array.from(Array(9).keys());
-export const Colors = (props) => {
+
+export const Colors = (props: CarouselProps) => {
 	return (
 		<Carousel {...props}>
 			{colors.map((number, index) => (
@@ -174,7 +175,7 @@ Colors.args = {
 	loop: false,
 };
 
-export const Icons = (props) => {
+export const Icons = (props: CarouselProps) => {
 	return (
 		<Carousel {...props}>
 			{Object.keys(iconPaths).map((icon, index) => {
@@ -188,35 +189,3 @@ export const Icons = (props) => {
 		</Carousel>
 	);
 };
-
-function shiftColor(base, change) {
-	const colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
-
-	if (!base || !change) {
-		return '#000000';
-	}
-
-	if (!base.match(colorRegEx) || !change.match(colorRegEx)) {
-		return '#000000';
-	}
-
-	// remove '#'s
-	base = base.replace(/\#/g, '');
-	change = change.replace(/\#/g, '');
-
-	let newColor = '';
-	for (let i = 0; i < 3; i++) {
-		const basePiece = parseInt(base.substring(i * 2, i * 2 + 2), 16);
-		const changePiece = parseInt(change.substring(i * 2, i * 2 + 2), 16);
-		let newPiece: string | number;
-
-		newPiece = basePiece + changePiece;
-		newPiece = newPiece > 255 ? 255 : newPiece;
-
-		newPiece = newPiece.toString(16);
-		newPiece = newPiece.length < 2 ? '0' + newPiece : newPiece;
-		newColor += newPiece;
-	}
-
-	return `#${newColor}`;
-}

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* **preact:** adding condition to branch override to reload the page when URL is unchanged ([4a4df9e](https://github.com/searchspring/snap/commit/4a4df9ed73e77aa26d24619a49e935d66a35e02b))
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 

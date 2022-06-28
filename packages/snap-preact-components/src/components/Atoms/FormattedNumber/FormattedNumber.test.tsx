@@ -18,7 +18,7 @@ describe('FormattedNumber Component', () => {
 		};
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
-		const formattednumber = formattednumberElement.textContent;
+		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099.999mm');
 	});
 
@@ -33,7 +33,7 @@ describe('FormattedNumber Component', () => {
 		};
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
-		const formattednumber = formattednumberElement.textContent;
+		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1.099,99 £');
 	});
 
@@ -43,7 +43,7 @@ describe('FormattedNumber Component', () => {
 		};
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
-		const formattednumber = formattednumberElement.textContent;
+		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099.000');
 	});
 
@@ -54,7 +54,7 @@ describe('FormattedNumber Component', () => {
 		};
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
-		const formattednumber = formattednumberElement.textContent;
+		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099');
 	});
 
@@ -64,7 +64,7 @@ describe('FormattedNumber Component', () => {
 		};
 
 		const rendered = render(<FormattedNumber value={100} style={style} />);
-		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number')!;
 		const styles = getComputedStyle(formattednumberElement);
 
 		expect(styles.padding).toBe(style.padding);
@@ -79,7 +79,7 @@ describe('FormattedNumber Component', () => {
 			},
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number')!;
 		const styles = getComputedStyle(formattednumberElement);
 		expect(styles.background).not.toBe(args.style.padding);
 	});
@@ -91,7 +91,7 @@ describe('FormattedNumber Component', () => {
 		};
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
-		expect(formattednumberElement.classList).toContain(args.className);
+		expect(formattednumberElement?.classList).toContain(args.className);
 	});
 
 	it('is themeable with ThemeProvider', () => {

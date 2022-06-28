@@ -5,11 +5,10 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	overlay: ({ color, transitionSpeed }) =>
-		//@ts-ignore
+	overlay: ({ color, transitionSpeed }: Partial<OverlayProps>) =>
 		css({
 			transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,
 			position: 'fixed',
@@ -42,7 +41,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const { active, color, transitionSpeed, onClick, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.overlay({ color, transitionSpeed }), style];
 	} else if (style) {

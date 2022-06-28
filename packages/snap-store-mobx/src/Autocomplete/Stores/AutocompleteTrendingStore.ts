@@ -2,15 +2,15 @@ import { observable, makeObservable } from 'mobx';
 
 import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { StoreServices } from '../../types';
-import type { StateStore } from './StateStore';
-import { Term } from './TermStore';
+import type { AutocompleteStateStore } from './AutocompleteStateStore';
+import { Term } from './AutocompleteTermStore';
 
-export class TrendingStore extends Array<Term> {
+export class AutocompleteTrendingStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(services: StoreServices, trendingData: TrendingResponseModel, resetTerms: () => void, rootState: StateStore) {
+	constructor(services: StoreServices, trendingData: TrendingResponseModel, resetTerms: () => void, rootState: AutocompleteStateStore) {
 		const terms: Array<Term> = [];
 
 		trendingData?.trending?.queries?.map((term) => {

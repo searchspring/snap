@@ -186,7 +186,7 @@ Each array entry contains an object with the following properties:
 
 `config` - required controller config for the corresponding controller. See Controller specific documentation for all available configuration options.
 
-`targets` - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
+`targets` - optional array of Target objects. Targets that have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
 
 ```typescript
 type ExtendedTarget = {
@@ -196,6 +196,7 @@ type ExtendedTarget = {
 		element: Element | ((target: Target, element: Element) => Element);
 	};
 	hideTarget?: boolean;
+	autoRetarget?: boolean;
 	emptyTarget?: boolean;
 	name?: string;
 	component?: () => Promise<RootComponent> | RootComponent;

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { FormattedNumber } from './FormattedNumber';
+import { FormattedNumber, FormattedNumberProps } from './FormattedNumber';
 import { componentArgs } from '../../../utilities';
 import Readme from '../FormattedNumber/readme.md';
 
@@ -110,21 +110,19 @@ export default {
 	},
 };
 
-const Template = (args) => <FormattedNumber {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: FormattedNumberProps) => <FormattedNumber {...args} />;
 Default.args = {
 	value: 1099.99,
 };
 
-export const Temperature = Template.bind({});
+export const Temperature = (args: FormattedNumberProps) => <FormattedNumber {...args} />;
 Temperature.args = {
 	value: 100,
 	symbol: ' °C',
 	decimalPlaces: 2,
 };
 
-export const Length = Template.bind({});
+export const Length = (args: FormattedNumberProps) => <FormattedNumber {...args} />;
 Length.args = {
 	value: 100,
 	symbol: ' mm',

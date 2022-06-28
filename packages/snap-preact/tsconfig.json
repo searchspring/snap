@@ -7,5 +7,6 @@
 		"outDir": "./dist/esm",
 		"jsx": "react-jsx",
 		"jsxImportSource": "preact",
+		"strict": true,
 	}
 }

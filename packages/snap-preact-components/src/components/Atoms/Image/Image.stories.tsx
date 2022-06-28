@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Image, FALLBACK_IMAGE_URL } from './Image';
+import { Image, FALLBACK_IMAGE_URL, ImageProps } from './Image';
 import { componentArgs } from '../../../utilities';
 import { searchResponse } from '../../../mocks/searchResponse';
 import Readme from '../Image/readme.md';
@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '300px',
@@ -132,28 +132,26 @@ export default {
 	},
 };
 
-const Template = (args) => <Image {...args} style={{ width: '100%' }} />;
-
-export const Default = Template.bind({});
+export const Default = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 Default.args = {
 	src: searchResponse.results[6].mappings.core.imageUrl,
 	alt: searchResponse.results[6].mappings.core.name,
 };
 
-export const BrokenImg = Template.bind({});
+export const BrokenImg = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 BrokenImg.args = {
 	src: 'intentionally_broken_image.jpg',
 	alt: searchResponse.results[6].mappings.core.name,
 };
 
-export const ManualFallBack = Template.bind({});
+export const ManualFallBack = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 ManualFallBack.args = {
 	src: 'intentionally_broken_image.jpg',
 	alt: searchResponse.results[5].mappings.core.name,
 	fallback: searchResponse.results[5].mappings.core.imageUrl,
 };
 
-export const onhover = Template.bind({});
+export const onhover = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 onhover.args = {
 	src: searchResponse.results[6].mappings.core.imageUrl,
 	alt: searchResponse.results[6].mappings.core.name,

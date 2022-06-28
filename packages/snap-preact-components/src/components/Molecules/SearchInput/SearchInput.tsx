@@ -1,25 +1,22 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import deepmerge from 'deepmerge';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps } from '../../../types';
-import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	searchInput: ({ theme, subProps }) =>
+	searchInput: ({ theme }: { theme: Theme }) =>
 		css({
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			border: `1px solid ${theme.colors?.primary || '#ccc'}`,
+			border: `1px solid ${theme?.colors?.primary || '#ccc'}`,
 
 			'& .ss__icon': {
 				padding: '5px',
@@ -62,13 +59,13 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.searchInput({ theme, subProps }), style];
+		styling.css = [CSS.searchInput({ theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
