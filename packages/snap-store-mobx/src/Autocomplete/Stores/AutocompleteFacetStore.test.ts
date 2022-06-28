@@ -1,10 +1,10 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { FacetStore } from './FacetStore';
-import { StateStore } from './StateStore';
+import { AutocompleteFacetStore } from './AutocompleteFacetStore';
+import { AutocompleteStateStore } from './AutocompleteStateStore';
 import { StorageStore } from '../../Storage/StorageStore';
-import { Value } from '../../Search/Stores';
+import { FacetValue } from '../../Search/Stores';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
@@ -23,14 +23,14 @@ const autocompleteConfig = {
 
 describe('Facet store', () => {
 	it('has a symbol species of Array', () => {
-		expect(FacetStore[Symbol.species]).toBe(Array);
+		expect(AutocompleteFacetStore[Symbol.species]).toBe(Array);
 	});
 
 	it('uses the search store FacetStore', () => {
 		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
-		const rootState = new StateStore(services);
-		const facetStore = new FacetStore(
+		const rootState = new AutocompleteStateStore(services);
+		const facetStore = new AutocompleteFacetStore(
 			autocompleteConfig,
 			services,
 			storageStore,
@@ -46,9 +46,9 @@ describe('Facet store', () => {
 	it('adds a preview function to each facet value', () => {
 		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
-		const rootState = new StateStore(services);
+		const rootState = new AutocompleteStateStore(services);
 
-		const facetStore = new FacetStore(
+		const facetStore = new AutocompleteFacetStore(
 			autocompleteConfig,
 			services,
 			storageStore,
@@ -61,7 +61,7 @@ describe('Facet store', () => {
 		expect(rootState.locks.terms.locked).toBe(false);
 
 		facetStore.forEach((facet) => {
-			facet.values?.forEach((value: Value) => {
+			facet.values?.forEach((value: FacetValue) => {
 				expect(value.preview).toBeDefined();
 			});
 		});

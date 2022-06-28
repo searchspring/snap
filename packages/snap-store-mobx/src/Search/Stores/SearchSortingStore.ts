@@ -14,7 +14,7 @@ type MetaResponseModelSortOptionMutated = MetaResponseModelSortOption & {
 	default?: boolean;
 };
 
-export class SortingStore {
+export class SearchSortingStore {
 	public options: Option[] = [];
 
 	constructor(services: StoreServices, sorting: SearchResponseModelSorting[], search: SearchResponseModelSearch, meta: MetaResponseModel) {

@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { SortingStore } from './SortingStore';
+import { SearchSortingStore } from './SearchSortingStore';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -16,21 +16,21 @@ describe('Sorting Store', () => {
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		//  @ts-ignore
-		const sort = new SortingStore(undefined, undefined, undefined, undefined);
+		const sort = new SearchSortingStore(undefined, undefined, undefined, undefined);
 		expect(sort.options.length).toBe(0);
 	});
 
 	it('returns an empty array when nothing is passed as sorting', () => {
 		const searchData = mockData.searchMeta();
 		//  @ts-ignore
-		const sort = new SortingStore(services, undefined, undefined, searchData.meta);
+		const sort = new SearchSortingStore(services, undefined, undefined, searchData.meta);
 		expect(sort.options.length).toBeGreaterThan(0);
 	});
 
 	it('uses the search response sorting data to set the "current" sort', () => {
 		const searchData = mockData.searchMeta('sorting');
 		//  @ts-ignore
-		const sort = new SortingStore(services, searchData.sorting!, undefined, searchData.meta);
+		const sort = new SearchSortingStore(services, searchData.sorting!, undefined, searchData.meta);
 
 		expect(sort.current).toBeDefined();
 		expect(sort.current?.field).toBe(searchData.sorting && searchData.sorting[0].field);
@@ -41,7 +41,7 @@ describe('Sorting Store', () => {
 		it('uses the meta data to construct its options', () => {
 			const searchData = mockData.searchMeta();
 			//  @ts-ignore
-			const sort = new SortingStore(services, undefined, undefined, searchData.meta);
+			const sort = new SearchSortingStore(services, undefined, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions?.filter((option) => option.type == 'field');
 
 			expect(sort.options).toHaveLength(sortingData?.length!);
@@ -60,7 +60,7 @@ describe('Sorting Store', () => {
 		it('uses the first sort option to set "current" when the search response sorting data is empty', () => {
 			const searchData = mockData.searchMeta();
 			// @ts-ignore
-			const sort = new SortingStore(services, undefined, undefined, searchData.meta);
+			const sort = new SearchSortingStore(services, undefined, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions?.filter((option) => option.type == 'field');
 
 			expect(sort.options).toHaveLength(sortingData?.length!);
@@ -73,7 +73,7 @@ describe('Sorting Store', () => {
 		it('uses the first sorting option to set "current" when response sorting data is not empty', () => {
 			const searchData = mockData.searchMeta('sorting');
 			// @ts-ignore
-			const sort = new SortingStore(services, searchData.sorting!, undefined, searchData.meta);
+			const sort = new SearchSortingStore(services, searchData.sorting!, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions?.filter((option) => option.type == 'field');
 
 			expect(sort.options).toHaveLength(sortingData?.length!);
@@ -88,7 +88,7 @@ describe('Sorting Store', () => {
 		it('uses the meta data to construct its options', () => {
 			const searchData = mockData.searchMeta('dress');
 			//  @ts-ignore
-			const sort = new SortingStore(services, undefined, searchData.search, searchData.meta);
+			const sort = new SearchSortingStore(services, undefined, searchData.search, searchData.meta);
 			const sortingData = searchData.meta.sortOptions;
 			const relevanceSorts = searchData.meta.sortOptions?.filter((option) => option.type == 'relevance');
 
@@ -109,7 +109,7 @@ describe('Sorting Store', () => {
 
 		it('uses the first sorting option to set "current" when response sorting data is not empty', () => {
 			const searchData = mockData.searchMeta('dressSorting');
-			const sort = new SortingStore(services, searchData.sorting!, searchData.search!, searchData.meta);
+			const sort = new SearchSortingStore(services, searchData.sorting!, searchData.search!, searchData.meta);
 			const sortingData = searchData.meta.sortOptions;
 
 			expect(sort.options).toHaveLength(sortingData?.length!);

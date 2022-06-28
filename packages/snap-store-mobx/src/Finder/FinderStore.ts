@@ -2,9 +2,9 @@ import { makeObservable, observable } from 'mobx';
 
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import { AbstractStore } from '../Abstract/AbstractStore';
-import { PaginationStore } from '../Search/Stores';
+import { SearchPaginationStore } from '../Search/Stores';
 import { StorageStore, StorageType } from '../Storage/StorageStore';
-import { SelectionStore } from './Stores';
+import { FinderSelectionStore } from './Stores';
 import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
 
@@ -15,8 +15,8 @@ export class FinderStore extends AbstractStore {
 	public meta: MetaResponseModel = {};
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
-	public pagination!: PaginationStore;
-	public selections!: SelectionStore;
+	public pagination!: SearchPaginationStore;
+	public selections!: FinderSelectionStore;
 	public state: FinderStoreState = {
 		persisted: false,
 	};
@@ -109,8 +109,8 @@ export class FinderStore extends AbstractStore {
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
-		this.selections = new SelectionStore(this.config, this.services, {
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
+		this.selections = new FinderSelectionStore(this.config, this.services, {
 			state: this.state,
 			facets: data.facets || [],
 			meta: this.meta,

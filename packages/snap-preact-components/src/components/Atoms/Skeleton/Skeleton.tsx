@@ -1,16 +1,15 @@
 /** @jsx jsx */
 import { h } from 'preact';
 
-import { jsx, css, keyframes } from '@emotion/react';
+import { jsx, css, keyframes, Keyframes } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
-import { CSSProperties } from 'react';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }) =>
+	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }: Partial<SkeletonProps> & { animation: Keyframes }) =>
 		css({
 			width: width,
 			height: height,
@@ -22,7 +21,7 @@ const CSS = {
 
 			position: 'relative',
 			overflow: 'hidden',
-			zIndex: '1' as CSSProperties['zIndex'] /* Necessary for overflow: hidden to work correctly in Safari */,
+			zIndex: '1' /* Necessary for overflow: hidden to work correctly in Safari */,
 
 			'&:after': {
 				content: '""',
@@ -63,7 +62,7 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	};
 	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.skeleton({ width, height, round, backgroundColor, animatedColor, animation: CSS.animation }), style];
 	} else if (style) {

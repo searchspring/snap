@@ -2,7 +2,7 @@ import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types';
 
-import { Banner, ResultStore } from './ResultStore';
+import { Banner, SearchResultStore } from './SearchResultStore';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -14,24 +14,24 @@ const searchConfig = {
 	id: 'search',
 };
 
-describe('ResultStore', () => {
+describe('SearchResultStore', () => {
 	beforeEach(() => {
 		expect.hasAssertions();
 	});
 
 	it('has a symbol species of Array', () => {
-		expect(ResultStore[Symbol.species]).toBe(Array);
+		expect(SearchResultStore[Symbol.species]).toBe(Array);
 	});
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		// @ts-ignore
-		const results = new ResultStore(undefined, undefined, undefined, undefined, undefined);
+		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new ResultStore(searchConfig, services, [], undefined, undefined);
+		const results = new SearchResultStore(searchConfig, services, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
@@ -39,7 +39,7 @@ describe('ResultStore', () => {
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results?.length);
 	});
@@ -47,7 +47,7 @@ describe('ResultStore', () => {
 	it('has result data that matches what was passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -73,7 +73,7 @@ describe('ResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.searchMeta('inlineBanners');
 
-			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
@@ -82,7 +82,7 @@ describe('ResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
 
-			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -95,7 +95,7 @@ describe('ResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page2');
 
-			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -142,7 +142,7 @@ describe('ResultStore', () => {
 					},
 				},
 			};
-			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);

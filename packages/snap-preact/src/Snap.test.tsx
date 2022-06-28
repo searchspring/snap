@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-import { cleanup } from '@testing-library/preact';
+import { cleanup, waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -25,7 +25,7 @@ const baseConfig = {
 	},
 };
 
-const Component = (props) => {
+const Component = (props: any) => {
 	const controller = props.controller;
 	return <div className="injectedComponent">{controller.type}</div>;
 };
@@ -70,6 +70,8 @@ describe('Snap Preact', () => {
 		const spy = jest.spyOn(logger, 'error');
 		const snap = new Snap(baseConfig, { logger });
 		expect(spy).toHaveBeenCalledWith('failed to find global context');
+
+		spy.mockClear();
 	});
 
 	it('creates a proper Snap object with minimal configuration', () => {
@@ -111,19 +113,7 @@ describe('Snap Preact', () => {
 		};
 
 		const snap = new Snap(contextConfig);
-		expect(snap.context.shopper.id).toBe('snapdevscript');
-	});
-
-	it('has branch override functionality', () => {
-		const branchParam = 'override';
-		cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000);
-
-		const logger = new Logger('Snap Preact ');
-		const spy = jest.spyOn(logger, 'warn');
-		const snap = new Snap(baseConfig, { logger });
-		expect(spy).toHaveBeenCalledWith(`...loading build... '${branchParam}'`);
-
-		cookies.unset(BRANCH_COOKIE);
+		expect(snap.context.shopper!.id).toBe('snapdevscript');
 	});
 
 	it('exposes itself globally on the window', () => {
@@ -147,6 +137,8 @@ describe('Snap Preact', () => {
 		const spy = jest.spyOn(tracker.track.shopper, 'login');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith({ id: contextConfig.context.shopper.id });
+
+		spy.mockClear();
 	});
 
 	it('automatically sets the shopper cart when provided', () => {
@@ -164,6 +156,8 @@ describe('Snap Preact', () => {
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
+
+		spy.mockClear();
 	});
 
 	it('automatically picks up the merchandising segments when provided', () => {
@@ -178,6 +172,54 @@ describe('Snap Preact', () => {
 		const snap = new Snap(contextConfig);
 		// @ts-ignore
 		expect(snap.client.globals.merchandising).toEqual(contextConfig.context.merchandising);
+	});
+
+	it('can send beacon error events from error event listener', () => {
+		// Define the addEventListener method with a Jest mock function
+		const events: {
+			[key: string]: EventListenerOrEventListenerObject;
+		} = {};
+		window.addEventListener = jest.fn((event, callback) => {
+			events[event] = callback;
+		});
+		window.removeEventListener = jest.fn((event, callback) => {
+			delete events[event];
+		});
+
+		const tracker = new Tracker(baseConfig.client.globals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(baseConfig, { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		// @ts-ignore - jest event listener mock
+		events.error(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
+	});
+
+	it('can send beacon error events using handlers.error method', () => {
+		const tracker = new Tracker(baseConfig.client.globals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(baseConfig, { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		snap.handlers.error(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
 	});
 
 	describe('creates search controllers via config', () => {
@@ -205,7 +247,7 @@ describe('Snap Preact', () => {
 			expect(search).toBeDefined();
 			expect(search.id).toBe('search');
 			expect(search.type).toBe('search');
-			expect((search.config as SearchControllerConfig).settings.redirects.merchandising).toBe(false);
+			expect((search.config as SearchControllerConfig).settings!.redirects!.merchandising).toBe(false);
 
 			// it has not searched and is not searching
 			expect(search.store.loading).toBe(false);
@@ -271,6 +313,8 @@ describe('Snap Preact', () => {
 			expect(spy).toHaveBeenCalledTimes(0);
 			expect(search.store.loading).toBe(false);
 			expect(search.store.loaded).toBe(false);
+
+			spy.mockClear();
 		});
 
 		it(`logs an error when targeter has invalid configuration`, async () => {
@@ -297,22 +341,30 @@ describe('Snap Preact', () => {
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
+			const client = new MockClient(baseConfig.client.globals, {});
+
 			// valid config - no errors logged
-			new Snap(searchConfig, { logger });
+			new Snap(searchConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(0);
 
 			// invalid config - logs error due to missing selector
+
+			// @ts-ignore - deleting required property
 			delete searchConfig.controllers.search[0].targeters[0].selector;
 			delete window.searchspring.controller.search;
-			new Snap(searchConfig, { logger });
+			new Snap(searchConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(1);
 
 			// invalid config - logs error due to missing component
 			searchConfig.controllers.search[0].targeters[0].selector = '#searchspring-content';
+
+			// @ts-ignore - deleting required property
 			delete searchConfig.controllers.search[0].targeters[0].component;
 			delete window.searchspring.controller.search;
-			new Snap(searchConfig, { logger });
+			new Snap(searchConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(2);
+
+			spy.mockClear();
 		});
 
 		it(`runs the controller 'search' method when a targeter selector is found`, async () => {
@@ -345,11 +397,15 @@ describe('Snap Preact', () => {
 			const search = snap.controllers.search;
 			expect(search).toBeDefined();
 
-			await wait();
+			await waitFor(() => {
+				expect(search.store.loaded).toBe(true);
+			});
 
 			expect(spy).toHaveBeenCalledTimes(1);
 			expect(search.store.loading).toBe(false);
 			expect(search.store.loaded).toBe(true);
+
+			spy.mockClear();
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
@@ -423,6 +479,8 @@ describe('Snap Preact', () => {
 			expect(spy).toHaveBeenCalledTimes(1);
 			expect(search.store.loading).toBe(false);
 			expect(search.store.loaded).toBe(true);
+
+			spy.mockClear();
 		});
 	});
 
@@ -449,7 +507,7 @@ describe('Snap Preact', () => {
 			const autocomplete = await snap.getController('ac');
 			expect(autocomplete.id).toBe('ac');
 			expect(autocomplete.type).toBe('autocomplete');
-			expect((autocomplete.config as AutocompleteControllerConfig).settings.initializeFromUrl).toBe(false);
+			expect((autocomplete.config as AutocompleteControllerConfig).settings!.initializeFromUrl).toBe(false);
 
 			// it has not searched and is not searching
 			expect(autocomplete.store.loading).toBe(false);
@@ -508,21 +566,25 @@ describe('Snap Preact', () => {
 				},
 			};
 
+			const client = new MockClient(baseConfig.client.globals, {});
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
-			new Snap(acConfig, { logger });
+			new Snap(acConfig, { client, logger });
 			await wait();
 			expect(spy).toHaveBeenCalledTimes(0);
-
+			// @ts-ignore - deleting required property
 			delete acConfig.controllers.autocomplete[0].targeters[0].selector;
-			new Snap(acConfig, { logger });
+			new Snap(acConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(1);
 
 			acConfig.controllers.autocomplete[0].targeters[0].selector = '#searchspring-content';
+			// @ts-ignore - deleting required property
 			delete acConfig.controllers.autocomplete[0].targeters[0].component;
-			new Snap(acConfig, { logger });
+			new Snap(acConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(2);
+
+			spy.mockClear();
 		});
 
 		it(`creates targeter provided in config`, async () => {
@@ -549,7 +611,8 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(acConfig);
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
 			expect(ac.id).toBe('ac');
@@ -583,7 +646,8 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(acConfig);
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
@@ -688,21 +752,28 @@ describe('Snap Preact', () => {
 				},
 			};
 
+			const client = new MockClient(baseConfig.client.globals, {});
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
-			new Snap(finderConfig, { logger });
+			new Snap(finderConfig, { client, logger });
 			await wait();
 			expect(spy).toHaveBeenCalledTimes(0);
 
+			// @ts-ignore - deleting required property
 			delete finderConfig.controllers.finder[0].targeters[0].selector;
-			new Snap(finderConfig, { logger });
+			new Snap(finderConfig, { client, logger });
+			await wait();
 			expect(spy).toHaveBeenCalledTimes(1);
 
 			finderConfig.controllers.finder[0].targeters[0].selector = '#searchspring-content';
+			// @ts-ignore - deleting required property
 			delete finderConfig.controllers.finder[0].targeters[0].component;
-			new Snap(finderConfig, { logger });
+			new Snap(finderConfig, { client, logger });
+			await wait();
 			expect(spy).toHaveBeenCalledTimes(2);
+
+			spy.mockClear();
 		});
 
 		it(`creates targeter provided in config`, async () => {
@@ -733,7 +804,9 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(finderConfig);
+
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
 			expect(finder.id).toBe('finder');
@@ -771,7 +844,9 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(finderConfig);
+
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
@@ -856,21 +931,26 @@ describe('Snap Preact', () => {
 				},
 			};
 
+			const client = new MockClient(baseConfig.client.globals, {});
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
-			new Snap(recommendationConfig, { logger });
+			new Snap(recommendationConfig, { client, logger });
 			await wait();
 			expect(spy).toHaveBeenCalledTimes(0);
 
+			// @ts-ignore - deleting required property
 			delete recommendationConfig.controllers.recommendation[0].targeters[0].selector;
-			new Snap(recommendationConfig, { logger });
+			new Snap(recommendationConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(1);
 
 			recommendationConfig.controllers.recommendation[0].targeters[0].selector = '#ss-trending-recs';
+			// @ts-ignore - deleting required property
 			delete recommendationConfig.controllers.recommendation[0].targeters[0].component;
-			new Snap(recommendationConfig, { logger });
+			new Snap(recommendationConfig, { client, logger });
 			expect(spy).toHaveBeenCalledTimes(2);
+
+			spy.mockClear();
 		});
 
 		it(`creates targeter provided in config`, async () => {
@@ -896,7 +976,8 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(recommendationConfig);
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
 			expect(recommendation.id).toBe('trendingRecs');
@@ -929,7 +1010,8 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const snap = new Snap(recommendationConfig);
+			const client = new MockClient(baseConfig.client.globals, {});
+			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);

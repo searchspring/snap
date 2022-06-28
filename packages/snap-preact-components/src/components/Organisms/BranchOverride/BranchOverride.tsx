@@ -6,29 +6,63 @@ import classnames from 'classnames';
 import { useState, useEffect } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
+type componentTheme = {
+	main: {
+		border: string;
+		background: string;
+		color: string;
+		boxShadow: string;
+	};
+	top: {
+		background?: string;
+		border: string;
+		logo: {
+			src: string;
+		};
+		button: {
+			border: string;
+			color: string;
+			content: string;
+		};
+		close: {
+			fill: string;
+		};
+	};
+	bottom: {
+		content: string;
+		branch: {
+			color: string;
+			style: string;
+		};
+		additional: {
+			color: string;
+		};
+	};
+};
+
 const CSS = {
-	override: ({ theme }) =>
+	override: ({ componentTheme }: { componentTheme: componentTheme }) =>
 		css({
 			width: '360px',
 			height: '120px',
 			overflow: 'hidden',
 			fontSize: '14px',
 			position: 'fixed',
-			zIndex: 9999,
+			zIndex: '9999',
 			cursor: 'auto',
 			bottom: '50px',
 			right: 0,
-			background: theme.main.background,
-			color: theme.main.color,
-			border: theme.main.border,
+			background: componentTheme.main.background,
+			color: componentTheme.main.color,
+			border: componentTheme.main.border,
 			borderRight: 0,
 			borderTopLeftRadius: '5px',
 			borderBottomLeftRadius: '5px',
-			boxShadow: theme.main.boxShadow,
+			boxShadow: componentTheme.main.boxShadow,
 			transition: 'height ease 0.2s, right ease 0.5s 0.2s',
 			'&.ss__branch-override--collapsed': {
 				transition: 'height ease 0.5s 0.5s, right ease 0.5s',
@@ -38,8 +72,8 @@ const CSS = {
 			},
 			'.ss__branch-override__top': {
 				padding: '10px',
-				background: theme.top.background,
-				borderBottom: theme.top.border,
+				background: componentTheme.top.background,
+				borderBottom: componentTheme.top.border,
 				'.ss__branch-override__top__logo': {
 					display: 'inline-block',
 					height: '30px',
@@ -60,8 +94,8 @@ const CSS = {
 					textAlign: 'center',
 					cursor: 'pointer',
 					fontSize: '10px',
-					border: theme.top.button.border,
-					color: theme.top.button.color,
+					border: componentTheme.top.button.border,
+					color: componentTheme.top.button.color,
 					float: 'right',
 					marginRight: '14px',
 				},
@@ -71,8 +105,8 @@ const CSS = {
 				fontSize: '12px',
 				'.ss__branch-override__bottom__left': {
 					fontWeight: 'bold',
-					fontStyle: theme.bottom.branch.style,
-					color: theme.bottom.branch.color,
+					fontStyle: componentTheme.bottom.branch.style,
+					color: componentTheme.bottom.branch.color,
 					fontSize: '14px',
 					lineHeight: '20px',
 					display: 'inline-flex',
@@ -88,7 +122,7 @@ const CSS = {
 				'.ss__branch-override__bottom__right': {
 					float: 'right',
 					fontStyle: 'italic',
-					color: theme.bottom.additional.color,
+					color: componentTheme.bottom.additional.color,
 					fontSize: '12px',
 					lineHeight: '20px',
 				},
@@ -99,7 +133,7 @@ const CSS = {
 		}),
 };
 
-const darkTheme = {
+const darkTheme: componentTheme = {
 	main: {
 		border: '0',
 		background: 'rgba(59, 35, 173, 0.9)',
@@ -133,7 +167,7 @@ const darkTheme = {
 	},
 };
 
-const lightTheme = {
+const lightTheme: componentTheme = {
 	main: {
 		border: '1px solid #ccc',
 		background: 'rgba(255, 255, 255, 0.95)',
@@ -166,7 +200,7 @@ const lightTheme = {
 	},
 };
 
-const failureTheme = {
+const failureTheme: componentTheme = {
 	main: {
 		border: '0',
 		background: 'rgba(130, 6, 6, 0.9)',
@@ -200,7 +234,7 @@ const failureTheme = {
 	},
 };
 
-const themes = {
+const componentThemes = {
 	darkTheme,
 	lightTheme,
 	failureTheme,
@@ -232,7 +266,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -244,68 +278,74 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		setThemeName('failureTheme');
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.override({ theme: themes[themeName] }), style];
+		styling.css = [CSS.override({ componentTheme: componentThemes[themeName as keyof typeof componentThemes] }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		(details || error) &&
-		name && (
-			<div
-				className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
-				{...styling}
-				onClick={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					setCollapsed(0);
-				}}
-			>
-				<div className="ss__branch-override__top">
-					<img className="ss__branch-override__top__logo" src={themes[themeName].top.logo.src} />
+	return (details || error) && name ? (
+		<div
+			className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
+			{...styling}
+			onClick={(e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				setCollapsed(0);
+			}}
+		>
+			<div className="ss__branch-override__top">
+				<img className="ss__branch-override__top__logo" src={componentThemes[themeName as keyof typeof componentThemes].top.logo.src} />
 
-					<div
-						className="ss__branch-override__top__collapse"
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							setCollapsed(1);
-						}}
-					>
-						<Icon size="18px" color={themes[themeName].top.close.fill} {...subProps.icon} icon="close-thin" />
-					</div>
-
-					<div
-						className="ss__branch-override__top__button"
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							onRemoveClick && onRemoveClick(e, name);
-						}}
-					>
-						{themes[themeName].top.button.content}
-					</div>
+				<div
+					className="ss__branch-override__top__collapse"
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						setCollapsed(1);
+					}}
+				>
+					<Icon size="18px" color={componentThemes[themeName as keyof typeof componentThemes].top.close.fill} {...subProps.icon} icon="close-thin" />
 				</div>
 
-				<div className="ss__branch-override__bottom">
-					<span className="ss__branch-override__bottom__left">
-						{error ? (
-							<>
-								<Icon size="12px" color={themes[themeName].bottom.branch.color} {...subProps.icon} icon="warn" />
-								<span>{error.message}</span>
-							</>
-						) : (
-							name
-						)}
-					</span>
-
-					<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
-					<div className="ss__branch-override__bottom__content">{error?.description || themes[themeName].bottom.content}</div>
+				<div
+					className="ss__branch-override__top__button"
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						onRemoveClick && onRemoveClick(e, name);
+					}}
+				>
+					{componentThemes[themeName as keyof typeof componentThemes].top.button.content}
 				</div>
 			</div>
-		)
+
+			<div className="ss__branch-override__bottom">
+				<span className="ss__branch-override__bottom__left">
+					{error ? (
+						<>
+							<Icon
+								size="12px"
+								color={componentThemes[themeName as keyof typeof componentThemes].bottom.branch.color}
+								{...subProps.icon}
+								icon="warn"
+							/>
+							<span>{error.message}</span>
+						</>
+					) : (
+						name
+					)}
+				</span>
+
+				<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
+				<div className="ss__branch-override__bottom__content">
+					{error?.description || componentThemes[themeName as keyof typeof componentThemes].bottom.content}
+				</div>
+			</div>
+		</div>
+	) : (
+		<Fragment></Fragment>
 	);
 };
 
@@ -323,6 +363,6 @@ export interface BranchOverrideProps extends ComponentProps {
 		url: string;
 		lastModified: string;
 	};
-	onRemoveClick?: (e, name: string) => void;
+	onRemoveClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, name: string) => void;
 	darkMode?: boolean;
 }

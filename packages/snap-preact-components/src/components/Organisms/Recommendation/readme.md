@@ -14,7 +14,7 @@ Any modification to the results array and data are recommended to be made using 
 
 ## Usage
 
-Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController

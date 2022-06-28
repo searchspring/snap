@@ -22,7 +22,7 @@ import type {
 	ControllerConfigs,
 	ContextVariables,
 } from '@searchspring/snap-controller';
-import type { Product } from '@searchspring/snap-tracker';
+import type { TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -154,7 +154,7 @@ export class Snap {
 	};
 
 	public getControllers = (...controllerIds: string[]): Promise<Controllers[]> => {
-		const getControllerPromises = [];
+		const getControllerPromises: Promise<Controllers>[] = [];
 		controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
 		return Promise.all(getControllerPromises);
 	};
@@ -169,9 +169,6 @@ export class Snap {
 	): Promise<Controllers> => {
 		let importPromise;
 		switch (type) {
-			case ControllerTypes.search:
-				importPromise = import('./create/createSearchController');
-				break;
 			case ControllerTypes.autocomplete:
 				importPromise = import('./create/createAutocompleteController');
 				break;
@@ -181,8 +178,13 @@ export class Snap {
 			case ControllerTypes.recommendation:
 				importPromise = import('./create/createRecommendationController');
 				break;
+			case ControllerTypes.search:
+			default:
+				importPromise = import('./create/createSearchController');
+				break;
 		}
 
+		// @ts-ignore - we know the config is correct, but complicated typing
 		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
 
 		if (!this.controllers[config.id]) {
@@ -211,7 +213,43 @@ export class Snap {
 		return this.controllers[config.id];
 	};
 
+	public handlers = {
+		error: (event: ErrorEvent): void => {
+			try {
+				const { filename } = event;
+				if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
+					const {
+						colno,
+						lineno,
+						error: { stack },
+						message,
+						timeStamp,
+					} = event;
+					const userAgent = navigator.userAgent;
+					const href = window.location.href;
+
+					const beaconPayload: TrackErrorEvent = {
+						userAgent,
+						href,
+						filename,
+						stack,
+						message,
+						colno,
+						lineno,
+						timeStamp,
+					};
+					this.tracker.track.error(beaconPayload);
+				}
+			} catch (e) {
+				// prevent error metrics from breaking the app
+			}
+		},
+	};
+
 	constructor(config: SnapConfig, services?: SnapServices) {
+		window.removeEventListener('error', this.handlers.error);
+		window.addEventListener('error', this.handlers.error);
+
 		this.config = config;
 
 		this.logger = services?.logger || new Logger('Snap Preact ');
@@ -238,20 +276,20 @@ export class Snap {
 		}
 
 		if (this.context.merchandising?.segments) {
-			if (this.config.client.globals.merchandising) {
+			if (this.config.client?.globals.merchandising) {
 				this.config.client.globals.merchandising.segments = deepmerge(
 					this.config.client.globals.merchandising.segments,
 					this.context.merchandising.segments
 				);
 			} else {
-				this.config.client.globals.merchandising = {
+				this.config.client!.globals.merchandising = {
 					segments: this.context.merchandising.segments,
 				};
 			}
 		}
 
-		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
-		this.tracker = services?.tracker || new Tracker(this.config.client.globals);
+		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
+		this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};
@@ -268,7 +306,7 @@ export class Snap {
 
 		try {
 			const urlParams = url(window.location.href);
-			const branchParam = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+			const branchParam = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
 
 			if (branchParam && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
 				// set a cookie or localstorage with branch
@@ -283,11 +321,11 @@ export class Snap {
 				this.logger.warn(`...loading build... '${branchParam}'`);
 
 				// get the path and siteId from the current bundle script in case its not the same as the client config
-				let path = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/`;
-				const script = document.querySelector('script[src*="//snapui.searchspring.io"]');
+				let path = `https://snapui.searchspring.io/${this.config.client!.globals.siteId}/`;
+				const script: HTMLScriptElement | null = document.querySelector('script[src*="//snapui.searchspring.io"]');
 
 				if (script) {
-					const scriptRoot = script.getAttribute('src').match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
+					const scriptRoot = script.getAttribute('src')!.match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
 					if (scriptRoot) {
 						path = scriptRoot.toString();
 					}
@@ -313,13 +351,19 @@ export class Snap {
 							},
 						},
 					],
-					async (target, elem) => {
-						let bundleDetails, error;
+					async (target: Target, elem: Element) => {
+						const error = {
+							message: 'Error',
+							description: '',
+						};
+
+						let bundleDetails;
+
 						try {
 							const getBundleDetails = (await import('./getBundleDetails/getBundleDetails')).getBundleDetails;
 							bundleDetails = await getBundleDetails(src);
 						} catch (err) {
-							error = err;
+							error.description = err as string;
 						}
 
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
@@ -331,8 +375,14 @@ export class Snap {
 								onRemoveClick={() => {
 									cookies.unset(BRANCH_COOKIE);
 									const urlState = url(window.location.href);
-									delete urlState.params.query['branch'];
-									window.location.href = urlState.url();
+									delete urlState?.params.query['branch'];
+
+									const newUrl = urlState?.url();
+									if (newUrl && newUrl != window.location.href) {
+										window.location.href = newUrl;
+									} else {
+										window.location.reload();
+									}
 								}}
 							/>,
 							elem
@@ -364,7 +414,7 @@ export class Snap {
 		if (this.context?.shopper?.cart) {
 			const cart = this.context.shopper.cart;
 			if (Array.isArray(cart)) {
-				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
+				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku || '').trim());
 				this.tracker.cookies.cart.set(cartItems);
 			}
 		}
@@ -372,7 +422,7 @@ export class Snap {
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'search': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						try {
 							const cntrlr = createSearchController(
 								{
@@ -402,13 +452,13 @@ export class Snap {
 								}
 							};
 
-							const targetFunction = async (target, elem, originalElem) => {
+							const targetFunction = async (target: Target, elem: Element, originalElem: Element) => {
 								runSearch();
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const Component = await (target as ExtendedTarget).component();
+									const Component = await (target as ExtendedTarget).component!();
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
@@ -429,14 +479,14 @@ export class Snap {
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
-									if (target.skeleton) {
-										const Skeleton = await (target as ExtendedTarget).skeleton();
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target: Target, elem: Element, originalElem?: Element) => {
+									if (target && target.skeleton && elem) {
+										const Skeleton = await (target as ExtendedTarget).skeleton!();
 										setTimeout(() => {
 											render(<Skeleton />, elem);
 										});
 									}
-									targetFunction(target, elem, originalElem);
+									targetFunction(target, elem, originalElem!);
 								});
 							});
 						} catch (err) {
@@ -447,7 +497,7 @@ export class Snap {
 				}
 
 				case 'autocomplete': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let bound = false;
@@ -460,18 +510,25 @@ export class Snap {
 									}
 								};
 
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: Target, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
+										const Component = (await (target as ExtendedTarget).component!()) as React.ElementType<{
 											controller: AutocompleteController;
 											input: HTMLInputElement | string | Element;
 										}>;
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} input={originalElem} {...target.props} />, elem);
+											render(
+												<Component
+													controller={this.controllers[controller.config.id] as AutocompleteController}
+													input={originalElem}
+													{...target.props}
+												/>,
+												elem
+											);
 										});
 									} catch (err) {
 										this.logger.error(COMPONENT_ERROR, target);
@@ -486,7 +543,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -516,7 +573,7 @@ export class Snap {
 												...target,
 											},
 										],
-										async (target, elem, originalElem) => {
+										async (target: Target, elem: Element, originalElem?: Element) => {
 											const cntrlr = await this.createController(
 												ControllerTypes.autocomplete,
 												controller.config,
@@ -524,11 +581,11 @@ export class Snap {
 												controller.url,
 												controller.context,
 												(cntrlr) => {
-													resolve(cntrlr);
+													if (cntrlr) resolve(cntrlr);
 												}
 											);
 											runBind();
-											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+											targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 											cntrlr.addTargeter(targeter);
 										}
 									);
@@ -542,7 +599,7 @@ export class Snap {
 				}
 
 				case 'finder': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -552,12 +609,12 @@ export class Snap {
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: Target, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = await (target as ExtendedTarget).component();
+										const Component = await (target as ExtendedTarget).component!();
 
 										setTimeout(() => {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
@@ -575,7 +632,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -587,7 +644,7 @@ export class Snap {
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
 										const cntrlr = await this.createController(
 											ControllerTypes.finder,
 											controller.config,
@@ -595,11 +652,11 @@ export class Snap {
 											controller.url,
 											controller.context,
 											(cntrlr) => {
-												resolve(cntrlr);
+												if (cntrlr) resolve(cntrlr);
 											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -612,7 +669,7 @@ export class Snap {
 				}
 
 				case 'recommendation': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -622,12 +679,12 @@ export class Snap {
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: Target, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = await (target as ExtendedTarget).component();
+										const Component = await (target as ExtendedTarget).component!();
 
 										setTimeout(() => {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
@@ -645,7 +702,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -657,7 +714,7 @@ export class Snap {
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
 										const cntrlr = await this.createController(
 											ControllerTypes.recommendation,
 											controller.config,
@@ -665,11 +722,11 @@ export class Snap {
 											controller.url,
 											controller.context,
 											(cntrlr) => {
-												resolve(cntrlr);
+												if (cntrlr) resolve(cntrlr);
 											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -687,7 +744,7 @@ export class Snap {
 			try {
 				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
 					return new RecommendationInstantiator(
-						this.config.instantiators.recommendation,
+						this.config.instantiators!.recommendation!,
 						{
 							client: this.client,
 							tracker: this.tracker,

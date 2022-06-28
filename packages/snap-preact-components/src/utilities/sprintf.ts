@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * sprintf() for JavaScript v.0.4
  *
@@ -21,7 +22,7 @@
 
 /*eslint-disable */
 
-function str_repeat(i, m) {
+function str_repeat(i: any, m: any) {
 	for (var o = []; m > 0; o[--m] = i);
 	return o.join('');
 }

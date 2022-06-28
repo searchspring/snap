@@ -2,7 +2,7 @@ import { observable, makeObservable } from 'mobx';
 import type { StoreServices } from '../../types';
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
 
-export class ProfileStore {
+export class RecommendationProfileStore {
 	public tag!: string;
 	public placement!: string;
 	public display: Record<string, any> = {};

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,8 +8,10 @@ import { observer } from 'mobx-react-lite';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
+
+import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	facets: () => css({}),
@@ -30,7 +32,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	const { limit, disableStyles, className, style } = props;
 	let { facets } = props;
-	if (limit > 0) {
+	if (limit && facets && limit > 0) {
 		facets = facets.slice(0, +limit);
 	}
 
@@ -49,22 +51,22 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.facets(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		facets?.length > 0 && (
-			<CacheProvider>
-				<div className={classnames('ss__facets', className)} {...styling}>
-					{facets.map((facet) => (
-						<Facet {...subProps.facet} facet={facet} />
-					))}
-				</div>
-			</CacheProvider>
-		)
+	return facets && facets?.length > 0 ? (
+		<CacheProvider>
+			<div className={classnames('ss__facets', className)} {...styling}>
+				{facets.map((facet) => (
+					<Facet {...subProps.facet} facet={facet} />
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -72,8 +74,10 @@ interface FacetsSubProps {
 	facet: FacetProps;
 }
 
+export type IndividualFacetType = ValueFacet | RangeFacet;
+
 export interface FacetsProps extends ComponentProps {
-	facets?: any;
+	facets?: IndividualFacetType[];
 	limit?: number;
 	controller?: SearchController | AutocompleteController;
 }

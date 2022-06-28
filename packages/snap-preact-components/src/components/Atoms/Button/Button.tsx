@@ -1,26 +1,26 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }) =>
+	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
-			color: color || theme.colors?.primary,
+			color: color || theme?.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
+			border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
 			'&:hover': {
 				cursor: 'pointer',
-				backgroundColor: theme.colors?.hover || '#f8f8f8',
+				backgroundColor: theme?.colors?.hover || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.7,
@@ -65,24 +65,25 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			  ],
 		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 		disabled,
-		onClick: (e) => !disabled && onClick && onClick(e),
+		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
-	return (
-		(content || children) && (
-			<CacheProvider>
-				{native ? (
-					<button {...elementProps}>
-						{content}
-						{children}
-					</button>
-				) : (
-					<div {...elementProps}>
-						{content}
-						{children}
-					</div>
-				)}
-			</CacheProvider>
-		)
+
+	return content || children ? (
+		<CacheProvider>
+			{native ? (
+				<button {...elementProps}>
+					{content}
+					{children}
+				</button>
+			) : (
+				<div {...elementProps}>
+					{content}
+					{children}
+				</div>
+			)}
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -91,8 +92,8 @@ export interface ButtonProps extends ComponentProps {
 	borderColor?: string;
 	color?: string;
 	content?: string | JSX.Element;
-	children?: any;
+	children?: ComponentChildren;
 	disabled?: boolean;
 	native?: boolean;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

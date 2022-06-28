@@ -1,8 +1,8 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { TermStore } from './TermStore';
-import { StateStore } from './StateStore';
+import { AutocompleteTermStore } from './AutocompleteTermStore';
+import { AutocompleteStateStore } from './AutocompleteStateStore';
 
 const mockResetTrending = jest.fn();
 
@@ -12,22 +12,22 @@ const services = {
 
 const mockData = new MockData();
 
-const rootState = new StateStore(services);
+const rootState = new AutocompleteStateStore(services);
 
 describe('Term Store', () => {
 	it('has a symbol species of Array', () => {
-		expect(TermStore[Symbol.species]).toBe(Array);
+		expect(AutocompleteTermStore[Symbol.species]).toBe(Array);
 	});
 
 	it('is empty when it is passed undefined', () => {
 		// @ts-ignore
-		const termStore = new TermStore(services, undefined, undefined, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, undefined, undefined, mockResetTrending, rootState);
 
 		expect(termStore).toEqual([]);
 	});
 
 	it('is empty when it is passed no data', () => {
-		const termStore = new TermStore(services, {}, {}, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, {}, {}, mockResetTrending, rootState);
 
 		expect(termStore).toEqual([]);
 	});
@@ -35,7 +35,7 @@ describe('Term Store', () => {
 	it('contains the correct terms', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete!;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		const expected = [autocomplete.suggested?.text, ...autocomplete.alternatives?.map((alt) => alt.text)!];
 
@@ -46,7 +46,7 @@ describe('Term Store', () => {
 		const fn = jest.spyOn(services.urlManager, 'set');
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete!;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
 			expect(term).toHaveProperty('value');
@@ -63,7 +63,7 @@ describe('Term Store', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
 		// @ts-ignore
-		const termStore = new TermStore(undefined, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(undefined, autocomplete, searchData.pagination, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -76,7 +76,7 @@ describe('Term Store', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
 		// @ts-ignore
-		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -86,7 +86,7 @@ describe('Term Store', () => {
 	it('sets the correct active term', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete!;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		expect(termStore.filter((term) => term.active).map((term) => term.value)).toStrictEqual([autocomplete.query]);
 	});
@@ -94,7 +94,7 @@ describe('Term Store', () => {
 	it('has a preview function on terms', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete!;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
+		const termStore = new AutocompleteTermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		expect(rootState.locks.terms.locked).toBe(false);
 

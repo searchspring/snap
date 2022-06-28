@@ -2,12 +2,20 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
-
 import { FilterSummary } from './FilterSummary';
-import { filters } from '../../../mocks/store';
 import userEvent from '@testing-library/user-event';
 
+import { MockData } from '@searchspring/snap-shared';
+import { SearchFilterStore } from '@searchspring/snap-store-mobx';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 describe('FilterSummary Component', () => {
+	const services = {
+		urlManager: new UrlManager(new UrlTranslator()),
+	};
+	const mockData = new MockData().searchMeta('filtered');
+	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
 		const FilterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
@@ -100,7 +108,7 @@ describe('FilterSummary Component', () => {
 		const FilterSumElement = rendered.container.querySelector('.ss__filter-summary');
 
 		expect(FilterSumElement).toBeInTheDocument();
-		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter');
+		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter')!;
 
 		expect(filter).toBeInTheDocument();
 
@@ -116,7 +124,7 @@ describe('FilterSummary Component', () => {
 		const FilterSumElement = rendered.container.querySelector('.ss__filter-summary');
 
 		expect(FilterSumElement).toBeInTheDocument();
-		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter-summary__clear-all');
+		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter-summary__clear-all')!;
 
 		expect(filter).toBeInTheDocument();
 
@@ -144,11 +152,17 @@ describe('FilterSummary Component', () => {
 		const rendered = render(<FilterSummary filters={filters} {...args} />);
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
-		expect(facetsElement.classList).toHaveLength(1);
+		expect(facetsElement?.classList).toHaveLength(1);
 	});
 });
 
 describe('FilterSummary theming works', () => {
+	const services = {
+		urlManager: new UrlManager(new UrlTranslator()),
+	};
+	const mockData = new MockData().searchMeta('filtered');
+	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {

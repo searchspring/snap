@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { ComponentChildren, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	badge: ({ position }) =>
+	badge: ({ position }: BadgeProps) =>
 		css({
 			display: 'inline-block',
 			position: 'absolute',
@@ -34,12 +34,14 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	};
 	const { content, children, position, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
+
 	if (!disableStyles) {
 		styling.css = [CSS.badge({ position }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__badge', className)}>
@@ -51,7 +53,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 
 export interface BadgeProps extends ComponentProps {
 	content?: any;
-	children?: any;
+	children?: ComponentChildren;
 	position?: {
 		top?: string | number;
 		right?: string | number;

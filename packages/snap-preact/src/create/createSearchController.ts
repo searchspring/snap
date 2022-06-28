@@ -18,13 +18,13 @@ export default (config: SnapSearchControllerConfig, services?: SnapControllerSer
 	const cntrlr = new SearchController(
 		config.controller,
 		{
-			client: services?.client || new Client(config.client.globals, config.client.config),
+			client: services?.client || new Client(config.client!.globals, config.client!.config),
 			store: services?.store || new SearchStore(config.controller, { urlManager }),
 			urlManager,
 			eventManager: services?.eventManager || new EventManager(),
 			profiler: services?.profiler || new Profiler(),
 			logger: services?.logger || new Logger(),
-			tracker: services?.tracker || new Tracker(config.client.globals),
+			tracker: services?.tracker || new Tracker(config.client!.globals),
 		},
 		config.context
 	);

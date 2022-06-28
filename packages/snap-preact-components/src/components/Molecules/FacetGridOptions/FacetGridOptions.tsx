@@ -1,15 +1,16 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, ValueFacetValue } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
+import { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	grid: ({ columns, gapSize, theme }) =>
+	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -22,24 +23,24 @@ const CSS = {
 				justifyContent: 'center',
 				alignItems: 'center',
 				flex: '0 1 auto',
-				border: `1px solid ${theme.colors?.primary || '#333'}`,
+				border: `1px solid ${theme?.colors?.primary || '#333'}`,
 				textAlign: 'center',
 				wordBreak: 'break-all',
 				boxSizing: 'border-box',
 				padding: '1em 0',
-				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px)`,
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 				margin: `0 ${gapSize} ${gapSize} 0`,
 
 				[`:nth-of-type(${columns}n)`]: {
 					marginRight: '0',
 				},
 				'&.ss__facet-grid-options__option--filtered': {
-					background: theme.colors?.primary || '#ccc',
-					color: theme.colors?.text?.secondary,
+					background: theme?.colors?.primary || '#ccc',
+					color: theme?.colors?.text?.secondary,
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme.colors?.hover || '#f8f8f8',
+					background: theme?.colors?.hover || '#f8f8f8',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {
@@ -88,45 +89,45 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.grid({ columns, gapSize, theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						<span
+							className={classnames('ss__facet-grid-options__option__value', {
+								'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+							})}
 						>
-							<span
-								className={classnames('ss__facet-grid-options__option__value', {
-									'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-								})}
-							>
-								{value.label}
-							</span>
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+							{value.label}
+						</span>
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface FacetGridOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;
