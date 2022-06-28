@@ -7,7 +7,6 @@ import { Tracker, BeaconType, BeaconCategory, BeaconEvent } from '@searchspring/
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
-import { AppMode } from '@searchspring/snap-toolbox';
 import { MockClient } from '@searchspring/snap-shared';
 
 import { RecommendationController } from './RecommendationController';

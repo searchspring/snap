@@ -48,6 +48,8 @@ describe('Snap Client', () => {
 		for (const [name, requester] of Object.entries(client.requesters)) {
 			// @ts-ignore - verifying private property
 			expect(requester.mode).toBe(AppMode.production);
+			// @ts-ignore - verifying private property
+			expect(requester.cache.config.enabled).toBe(true);
 		}
 	});
 
@@ -114,6 +116,8 @@ describe('Snap Client', () => {
 		for (const [name, requester] of Object.entries(client.requesters)) {
 			// @ts-ignore - verifying private property
 			expect(requester.mode).toBe(AppMode.development);
+			// @ts-ignore - verifying private property
+			expect(requester.cache.config.enabled).toBe(false);
 		}
 	});
 

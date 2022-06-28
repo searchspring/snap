@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { BeaconType, BeaconCategory, BeaconPayload } from '@searchspring/snap-tracker';
-import { AppMode } from '@searchspring/snap-toolbox';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';

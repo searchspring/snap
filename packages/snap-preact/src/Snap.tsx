@@ -161,6 +161,7 @@ export class Snap {
 		return Promise.all(getControllerPromises);
 	};
 
+	// exposed method used for creating controllers dynamically - calls _createController()
 	public createController = async (
 		type: keyof typeof ControllerTypes,
 		config: ControllerConfigs,
@@ -183,6 +184,7 @@ export class Snap {
 		return this._controllerPromises[config.id];
 	};
 
+	// internal use method that creates controllers without verifying if id is in use first
 	private _createController = async (
 		type: keyof typeof ControllerTypes,
 		config: ControllerConfigs,
@@ -438,9 +440,10 @@ export class Snap {
 							elem
 						);
 
-						document.head.appendChild(branchScript);
 						// reset the global searchspring object
 						delete window.searchspring;
+
+						document.head.appendChild(branchScript);
 					}
 				);
 
@@ -486,7 +489,7 @@ export class Snap {
 								{
 									mode: this.mode,
 									url: deepmerge(this.config.url || {}, controller.url || {}),
-									controller: { mode: this.mode, ...controller.config },
+									controller: controller.config,
 									context: deepmerge(this.context || {}, controller.context || {}),
 								},
 								{

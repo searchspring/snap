@@ -16,7 +16,7 @@ export default (config: SnapSearchControllerConfig, services?: SnapControllerSer
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
 
 	// set client mode
-	if (config.mode && config.client?.globals) {
+	if (config.mode && config.client) {
 		config.client.config = config.client.config || {};
 		config.client.config.mode = config.mode;
 	}

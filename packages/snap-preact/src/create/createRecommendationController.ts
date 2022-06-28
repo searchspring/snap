@@ -17,7 +17,7 @@ export default (config: SnapRecommendationControllerConfig, services?: SnapContr
 	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
 
 	// set client mode
-	if (config.mode && config.client?.globals) {
+	if (config.mode && config.client) {
 		config.client.config = config.client.config || {};
 		config.client.config.mode = config.mode;
 	}
