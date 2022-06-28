@@ -76,7 +76,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY));
 
-		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
@@ -106,7 +106,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 		expect(results[0]).toBeInTheDocument();
@@ -129,7 +129,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 500));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		//first test the terms.
 		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
@@ -221,7 +221,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let renderedWithout = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let renderedWithout = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		let terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
 		expect(terms).not.toBeInTheDocument();
@@ -235,7 +235,7 @@ describe('Autocomplete Component', () => {
 		let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
 		expect(link).not.toBeInTheDocument();
 
-		let renderedWith = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target') });
+		let renderedWith = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target')! });
 
 		let terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
 		expect(terms2).toBeInTheDocument();
@@ -276,11 +276,11 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 		let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
 		expect(banners).not.toBeInTheDocument();
 
-		let renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target') });
+		let renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target')! });
 		let banners2 = renderedWithBanners.container.querySelector('.ss__banner');
 		expect(banners2).toBeInTheDocument();
 	});
@@ -304,7 +304,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		let termTitle = rendered.container.querySelector('.ss__autocomplete__title');
 		expect(termTitle).toHaveTextContent(args.termsTitle);
@@ -334,7 +334,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 		let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 		expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 	});
@@ -359,7 +359,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		let termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
 		expect(termsSlot).toHaveTextContent('custom termsSlot');
@@ -397,7 +397,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 		let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
 		expect(contentSlot).toHaveTextContent('Lorem Ipsum');
 	});
@@ -423,7 +423,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 		let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
 		expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
 	});
@@ -454,7 +454,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
@@ -493,13 +493,13 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-		let ac = rendered.container.querySelector('.ss__autocomplete');
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
+		let ac = rendered.container.querySelector('.ss__autocomplete')!;
 		const styles = getComputedStyle(ac);
 		expect(styles['width']).toBe(args.width);
 
-		let rendered2 = render(<Autocomplete {...args2} />, { container: document.getElementById('target') });
-		let ac2 = rendered2.container.querySelector('.ss__autocomplete');
+		let rendered2 = render(<Autocomplete {...args2} />, { container: document.getElementById('target')! });
+		let ac2 = rendered2.container.querySelector('.ss__autocomplete')!;
 		const styles2 = getComputedStyle(ac2);
 		expect(styles2['width']).toBe(args2.width);
 	});
@@ -530,7 +530,7 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
 		let acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
 
 		expect(acFacets).toBeInTheDocument();
@@ -591,7 +591,7 @@ describe('AutoComplete theming works', () => {
 			<ThemeProvider theme={globalTheme}>
 				<Autocomplete {...args} />
 			</ThemeProvider>,
-			{ container: document.getElementById('target') }
+			{ container: document.getElementById('target')! }
 		);
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
@@ -622,7 +622,7 @@ describe('AutoComplete theming works', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container: document.getElementById('target') });
+		const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container: document.getElementById('target')! });
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
 		expect(element).toBeInTheDocument();
@@ -663,7 +663,7 @@ describe('AutoComplete theming works', () => {
 			<ThemeProvider theme={globalTheme}>
 				<Autocomplete {...args} theme={propTheme} />
 			</ThemeProvider>,
-			{ container: document.getElementById('target') }
+			{ container: document.getElementById('target')! }
 		);
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
@@ -717,8 +717,8 @@ describe('AutoComplete theming works', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-		let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target')! });
+		let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet')!;
 
 		let options = acFacet.querySelectorAll('.ss__facet__options a');
 

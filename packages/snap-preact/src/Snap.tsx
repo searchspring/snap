@@ -404,26 +404,23 @@ export class Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const error = {
-							message: 'Error',
-							description: '',
-						};
-
-						let bundleDetails;
+						const props: {
+							details?: any;
+							error?: any;
+						} = {};
 
 						try {
 							const getBundleDetails = (await import('./getBundleDetails/getBundleDetails')).getBundleDetails;
-							bundleDetails = await getBundleDetails(src);
+							props.details = await getBundleDetails(src);
 						} catch (err) {
-							error.description = err as string;
+							props.error = err;
 						}
 
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
 						render(
 							<BranchOverride
+								{...props}
 								name={branchOverride}
-								details={bundleDetails}
-								error={error}
 								onRemoveClick={() => {
 									cookies.unset(BRANCH_COOKIE);
 									const urlState = url(window.location.href);

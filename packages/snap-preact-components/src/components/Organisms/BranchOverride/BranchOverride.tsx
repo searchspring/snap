@@ -100,6 +100,7 @@ const CSS = {
 };
 
 const darkTheme = {
+	class: 'ss__branch-override--dark',
 	main: {
 		border: '0',
 		background: 'rgba(59, 35, 173, 0.9)',
@@ -134,6 +135,7 @@ const darkTheme = {
 };
 
 const lightTheme = {
+	class: 'ss__branch-override--light',
 	main: {
 		border: '1px solid #ccc',
 		background: 'rgba(255, 255, 255, 0.95)',
@@ -167,6 +169,7 @@ const lightTheme = {
 };
 
 const failureTheme = {
+	class: 'ss__branch-override--error',
 	main: {
 		border: '0',
 		background: 'rgba(130, 6, 6, 0.9)',
@@ -255,7 +258,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		(details || error) &&
 		name && (
 			<div
-				className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
+				className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, themes[themeName].class, className)}
 				{...styling}
 				onClick={(e) => {
 					e.preventDefault();

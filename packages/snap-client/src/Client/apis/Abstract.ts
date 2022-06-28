@@ -48,7 +48,7 @@ export class API {
 		}
 
 		const response = await this.fetchApi(url, init);
-		const responseJSON = await response.json();
+		const responseJSON = await response?.json();
 		if (response.status >= 200 && response.status < 300) {
 			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 			this.retryDelay = 1000;
