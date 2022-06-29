@@ -95,6 +95,8 @@ type SnapServices = {
 
 type Controllers = SearchController | AutocompleteController | FinderController | RecommendationController;
 
+const SESSION_ATTRIBUTION = 'ssAttribution';
+
 const COMPONENT_ERROR = `Uncaught Error - Invalid value passed as the component.
 This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
 		
@@ -354,6 +356,23 @@ export class Snap {
 			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
 			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
+
+			// check for tracking attribution in URL ?ss_attribution=type:id
+			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
+			if (urlParams?.params?.query?.ss_attribution) {
+				const attribution = urlParams.params.query.ss_attribution.split(':');
+				const [type, id] = attribution;
+				if (type && id) {
+					this.tracker.updateContext('attribution', { type, id });
+				}
+				// save to session storage
+				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
+			} else if (sessionAttribution) {
+				const [type, id] = sessionAttribution.split(':');
+				if (type && id) {
+					this.tracker.updateContext('attribution', { type, id });
+				}
+			}
 
 			// log version
 			this.logger.imageText({
