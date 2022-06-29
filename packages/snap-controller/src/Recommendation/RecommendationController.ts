@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { BeaconType, BeaconCategory, BeaconPayload } from '@searchspring/snap-tracker';
-import { LogMode } from '@searchspring/snap-logger';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
@@ -278,10 +277,6 @@ export class RecommendationController extends AbstractController {
 		}
 		if (lastViewed?.length) {
 			params.lastViewed = lastViewed;
-		}
-
-		if (this.environment == LogMode.DEVELOPMENT) {
-			params.test = true;
 		}
 
 		return params;

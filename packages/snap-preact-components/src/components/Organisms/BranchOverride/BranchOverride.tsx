@@ -11,6 +11,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
 type componentTheme = {
+	class: string;
 	main: {
 		border: string;
 		background: string;
@@ -134,6 +135,7 @@ const CSS = {
 };
 
 const darkTheme: componentTheme = {
+	class: 'ss__branch-override--dark',
 	main: {
 		border: '0',
 		background: 'rgba(59, 35, 173, 0.9)',
@@ -168,6 +170,7 @@ const darkTheme: componentTheme = {
 };
 
 const lightTheme: componentTheme = {
+	class: 'ss__branch-override--light',
 	main: {
 		border: '1px solid #ccc',
 		background: 'rgba(255, 255, 255, 0.95)',
@@ -201,6 +204,7 @@ const lightTheme: componentTheme = {
 };
 
 const failureTheme: componentTheme = {
+	class: 'ss__branch-override--error',
 	main: {
 		border: '0',
 		background: 'rgba(130, 6, 6, 0.9)',
@@ -287,7 +291,12 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	return (details || error) && name ? (
 		<div
-			className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
+			className={classnames(
+				'ss__branch-override',
+				componentThemes[themeName as keyof typeof componentThemes].class,
+				{ 'ss__branch-override--collapsed': collapsed },
+				className
+			)}
 			{...styling}
 			onClick={(e) => {
 				e.preventDefault();

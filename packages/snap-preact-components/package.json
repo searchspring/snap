@@ -59,6 +59,7 @@
 		"@testing-library/preact": "2.0.1",
 		"@testing-library/user-event": "13.5.0",
 		"@types/react-ranger": "2.0.1",
+		"@types/react": "16.14.0",
 		"mobx-react": "7.5.0",
 		"preact": "10.7.3",
 		"react": "16.14.0",

@@ -1,6 +1,6 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
-import { charsParams } from '@searchspring/snap-toolbox';
+import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
 
@@ -109,6 +109,10 @@ export class RecommendAPI extends API {
 			});
 
 			try {
+				if (this.configuration.mode == AppMode.development) {
+					batch.request.test = true;
+				}
+
 				let response: RecommendResponseModel;
 				if (charsParams(batch.request) > 1024) {
 					if (batch.request['product']) {

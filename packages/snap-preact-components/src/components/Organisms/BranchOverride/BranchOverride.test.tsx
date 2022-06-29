@@ -26,19 +26,19 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override')!;
 			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement?.classList).toHaveLength(2);
+			expect(overrideElement.classList).toHaveLength(3);
 
 			const styles = getComputedStyle(overrideElement);
 			expect(styles.background).toBe('rgba(255, 255, 255, 0.95)');
 		});
 
 		// branch name
-		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
+		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left')!;
 		expect(bottomLeftElement).toBeInTheDocument();
 		expect(bottomLeftElement?.innerHTML).toContain(branch);
 
 		// branch modified date
-		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
+		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right')!;
 		expect(bottomRightElement).toBeInTheDocument();
 		expect(bottomRightElement?.innerHTML).toContain(lastModified);
 	});
@@ -164,7 +164,7 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement?.classList).toHaveLength(1);
+			expect(overrideElement?.classList).toHaveLength(2);
 		});
 	});
 
