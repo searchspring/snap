@@ -2,7 +2,7 @@ import { observable, action, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 
-export class StateStore {
+export class AutocompleteStateStore {
 	public locks: {
 		terms: Lock;
 		facets: Lock;

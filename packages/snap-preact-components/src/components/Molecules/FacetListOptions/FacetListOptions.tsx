@@ -1,17 +1,18 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, ValueFacetValue } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	list: ({ theme, hideCheckbox }) =>
+	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
 		css({
 			'& .ss__facet-list-options__option': {
 				display: 'flex',
@@ -20,11 +21,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme.colors?.hover,
+					background: theme?.colors?.hover,
 				},
 				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme.colors?.primary,
+					color: theme?.colors?.primary,
 				},
 				'& .ss__facet-list-options__option__value': {
 					marginLeft: hideCheckbox ? '' : '8px',
@@ -63,47 +64,47 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.list({ theme, hideCheckbox }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-list-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
-						>
-							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-							<span className="ss__facet-list-options__option__value">
-								{value.label}
-								{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
-							</span>
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-list-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
+						<span className="ss__facet-list-options__option__value">
+							{value.label}
+							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+						</span>
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface FacetListOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
 	onClick?: (e: React.MouseEvent) => void;

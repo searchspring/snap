@@ -14,7 +14,7 @@ import type {
 	SearchResponseModelFacetValueAllOfValues,
 } from '@searchspring/snapi-types';
 
-export type SelectionStoreData = {
+export type FinderSelectionStoreData = {
 	state: FinderStoreState;
 	facets: SearchResponseModelFacet[];
 	meta: MetaResponseModel;
@@ -32,12 +32,12 @@ type FacetWithMeta = MetaResponseModelFacetGrid &
 	SearchResponseModelFacetRange &
 	SearchResponseModelFacetRangeBuckets;
 
-export class SelectionStore extends Array<Selection | SelectionHierarchy> {
+export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(config: FinderStoreConfig, services: StoreServices, { state, facets, meta, loading, storage, selections }: SelectionStoreData) {
+	constructor(config: FinderStoreConfig, services: StoreServices, { state, facets, meta, loading, storage, selections }: FinderSelectionStoreData) {
 		const selectedSelections: Array<Selection | SelectionHierarchy> = [];
 
 		if (selections?.length) {

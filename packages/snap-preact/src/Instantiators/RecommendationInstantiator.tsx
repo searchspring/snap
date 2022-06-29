@@ -100,6 +100,7 @@ export class RecommendationInstantiator {
 					selector: `script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]${
 						this.config.selector ? ` , ${this.config.selector}` : ''
 					}`,
+					autoRetarget: true,
 					inject: {
 						action: 'before',
 						element: (target: Target, origElement: Element) => {

@@ -32,7 +32,6 @@
 		"@searchspring/snapi-types": "0.1.25",
 		"@types/jest": "27.5.1",
 		"@types/jsdom": "16.2.14",
-		"@types/seamless-immutable": "7.1.16",
 		"@typescript-eslint/eslint-plugin": "5.25.0",
 		"@typescript-eslint/parser": "5.25.0",
 		"cz-conventional-changelog": "3.3.0",

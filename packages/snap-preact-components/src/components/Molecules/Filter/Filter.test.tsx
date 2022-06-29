@@ -6,12 +6,20 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Filter } from './Filter';
+import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
+import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 
 describe('Filter Component', () => {
 	const args = {
 		facetLabel: 'facet',
 		valueLabel: 'value',
 	};
+
+	const services = {
+		urlManager: new UrlManager(new UrlTranslator()),
+	};
+	const mockData = new MockData().searchMeta('filtered');
 
 	it('renders', () => {
 		const rendered = render(<Filter {...args} />);
@@ -24,7 +32,7 @@ describe('Filter Component', () => {
 		const valueTextElement = rendered.getByText(args.valueLabel);
 		const iconElement = rendered.container.querySelector('.ss__icon');
 
-		expect(filterElement.classList).toHaveLength(2);
+		expect(filterElement?.classList).toHaveLength(2);
 
 		expect(facetTextElement).toBeInTheDocument();
 		expect(facetTextElement).toHaveClass('ss__filter__label');
@@ -33,6 +41,22 @@ describe('Filter Component', () => {
 		expect(valueTextElement).toHaveClass('ss__filter__value');
 
 		expect(iconElement).toBeInTheDocument();
+	});
+
+	it('renders with Filter prop data', () => {
+		const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+		const filter = filters[0];
+		const rendered = render(<Filter filter={filter} />);
+
+		const filterElement = rendered.container.querySelector('.ss__filter');
+
+		expect(filterElement).toBeInTheDocument();
+
+		const facetTextElement = rendered.getByText(filter.facet.label!);
+		const valueTextElement = rendered.getByText(filter.value.label!);
+
+		expect(facetTextElement).toBeInTheDocument();
+		expect(valueTextElement).toBeInTheDocument();
 	});
 
 	it('renders with specified icon', () => {
@@ -50,8 +74,9 @@ describe('Filter Component', () => {
 
 	it('has a url value when passed one', () => {
 		const url = 'www.searchspring.com';
+		const urlManager = new UrlManager(new UrlTranslator({ urlRoot: url }), reactLinker);
 
-		const rendered = render(<Filter {...args} url={{ link: { href: url } }} />);
+		const rendered = render(<Filter {...args} url={urlManager} />);
 
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
@@ -91,7 +116,7 @@ describe('Filter Component', () => {
 
 		const rendered = render(<Filter {...args} onClick={clickFn} />);
 
-		const filterElement = rendered.container.querySelector('.ss__filter');
+		const filterElement = rendered.container.querySelector('.ss__filter')!;
 
 		userEvent.click(filterElement);
 		expect(clickFn).toHaveBeenCalled();
@@ -111,7 +136,7 @@ describe('Filter Component', () => {
 
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
-		expect(filterElement.classList).toHaveLength(1);
+		expect(filterElement?.classList).toHaveLength(1);
 	});
 });
 

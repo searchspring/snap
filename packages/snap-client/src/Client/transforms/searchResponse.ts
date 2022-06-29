@@ -287,6 +287,7 @@ transformSearchResponse.facets = (response: searchResponseType, request: SearchR
 						type: 'range',
 						step: facet.step,
 						range: {
+							// TODO: change to null
 							low: facet.range[0] == '*' ? undefined : +facet.range[0],
 							high: facet.range[1] == '*' ? undefined : +facet.range[1],
 						},
@@ -294,6 +295,7 @@ transformSearchResponse.facets = (response: searchResponseType, request: SearchR
 				}
 				if (facet.active && typeof facet.active != 'boolean' && facet.active.length > 1) {
 					transformedFacet.active = {
+						// TODO: change to null
 						low: facet.active[0] == '*' ? undefined : +facet.active[0],
 						high: facet.active[1] == '*' ? undefined : +facet.active[1],
 					};

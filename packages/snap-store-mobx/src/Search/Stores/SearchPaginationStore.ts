@@ -4,7 +4,7 @@ import type { SearchStoreConfig, StoreServices } from '../../types';
 import type { SearchResponseModelPagination } from '@searchspring/snapi-types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
-export class PaginationStore {
+export class SearchPaginationStore {
 	public services: StoreServices;
 	public page: number;
 	public pageSize: number;

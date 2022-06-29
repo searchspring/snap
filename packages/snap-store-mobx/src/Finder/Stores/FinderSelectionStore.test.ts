@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { SelectionStore, SelectionStoreData } from './SelectionStore';
+import { FinderSelectionStore, FinderSelectionStoreData } from './FinderSelectionStore';
 import { StorageStore } from '../../Storage/StorageStore';
 import { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 
@@ -11,9 +11,9 @@ const services = {
 
 const mockData = new MockData({ siteId: 'ga9kq2', search: 'hierarchy' });
 
-describe('SelectionStore', () => {
+describe('FinderSelectionStore', () => {
 	it('has a symbol species of Array', () => {
-		expect(SelectionStore[Symbol.species]).toBe(Array);
+		expect(FinderSelectionStore[Symbol.species]).toBe(Array);
 	});
 
 	describe('Hierarchy with levels', () => {
@@ -32,9 +32,9 @@ describe('SelectionStore', () => {
 		const storage = new StorageStore();
 
 		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: SelectionStore,
+			store: FinderSelectionStore,
 			selectionValue: string | undefined,
-			selectionStoreData: SelectionStoreData;
+			selectionStoreData: FinderSelectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta();
@@ -46,7 +46,7 @@ describe('SelectionStore', () => {
 				storage: storage,
 				selections: [],
 			};
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 		});
 
 		it('has correct number of selections', () => {
@@ -79,7 +79,7 @@ describe('SelectionStore', () => {
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
 
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 
 			store.forEach((selection, index) => {
 				switch (index) {
@@ -154,10 +154,10 @@ describe('SelectionStore', () => {
 		};
 
 		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: SelectionStore,
+			store: FinderSelectionStore,
 			storage: StorageStore,
 			selectionValue: string | undefined,
-			selectionStoreData: SelectionStoreData;
+			selectionStoreData: FinderSelectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta('hierarchy');
@@ -170,7 +170,7 @@ describe('SelectionStore', () => {
 				storage: storage,
 				selections: [],
 			};
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 		});
 
 		it('is not using levels for this test', () => {
@@ -203,7 +203,7 @@ describe('SelectionStore', () => {
 				selections: [],
 			};
 
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 
 			expect(store.length).toBe(config.fields.length + 1); // 1 -> 2 selections after selection
 
@@ -215,10 +215,10 @@ describe('SelectionStore', () => {
 
 	describe('Non-hierarchy', () => {
 		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: SelectionStore,
+			store: FinderSelectionStore,
 			storage: StorageStore,
 			selectionValue: string | undefined,
-			selectionStoreData: SelectionStoreData;
+			selectionStoreData: FinderSelectionStoreData;
 
 		const config = {
 			id: 'finder2',
@@ -254,7 +254,7 @@ describe('SelectionStore', () => {
 				storage: storage,
 				selections: [],
 			};
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 		});
 
 		it('has correct number of selections', () => {
@@ -291,7 +291,7 @@ describe('SelectionStore', () => {
 
 			data = mockData.searchMeta('non_hierarchy_selected');
 
-			store = new SelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore(config, services, selectionStoreData);
 
 			expect(store[0].selected).toBe(selectionValue);
 

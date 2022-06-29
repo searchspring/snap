@@ -35,12 +35,12 @@ describe('BranchOverride Component', () => {
 		// branch name
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left')!;
 		expect(bottomLeftElement).toBeInTheDocument();
-		expect(bottomLeftElement.innerHTML).toContain(branch);
+		expect(bottomLeftElement?.innerHTML).toContain(branch);
 
 		// branch modified date
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right')!;
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement.innerHTML).toContain(lastModified);
+		expect(bottomRightElement?.innerHTML).toContain(lastModified);
 	});
 
 	it('can set dark mode', async () => {
@@ -59,7 +59,7 @@ describe('BranchOverride Component', () => {
 		const rendered = render(<BranchOverride {...props} />);
 
 		// wait for rendering of component
-		let overrideElement;
+		let overrideElement: any;
 		await waitFor(() => {
 			overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe('BranchOverride Component', () => {
 		const rendered = render(<BranchOverride {...props} onRemoveClick={removeFn} />);
 
 		// wait for rendering of component
-		let overrideElement;
+		let overrideElement: any;
 		await waitFor(() => {
 			overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
