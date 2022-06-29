@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
