@@ -1,7 +1,8 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { SearchStore } from './SearchStore';
-import { SearchData } from '../__mocks__/SearchData';
+import { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -11,10 +12,13 @@ const searchConfig = {
 	id: 'search',
 };
 
+const mockData = new MockData();
+
 describe('Search Store', () => {
-	let searchData;
+	let searchData: SearchResponseModel & { meta: MetaResponseModel };
+
 	beforeEach(() => {
-		searchData = new SearchData();
+		searchData = mockData.searchMeta();
 	});
 
 	it('returns correct initial state', () => {
@@ -41,10 +45,10 @@ describe('Search Store', () => {
 		expect(searchStore.results).toHaveLength(0);
 
 		expect(searchStore.pagination).toBeDefined();
-		expect(searchStore.pagination.totalResults).toBeUndefined();
+		expect(searchStore.pagination?.totalResults).toBeUndefined();
 
 		expect(searchStore.sorting).toBeDefined();
-		expect(searchStore.sorting.options).toHaveLength(0);
+		expect(searchStore.sorting?.options).toHaveLength(0);
 	});
 
 	it('update function updates all of the stores', () => {
@@ -55,19 +59,19 @@ describe('Search Store', () => {
 		expect(searchStore.meta).toStrictEqual(searchData.meta);
 
 		expect(searchStore.search).toBeDefined();
-		expect(searchStore.search.query).toStrictEqual(searchData.search.query);
+		expect(searchStore.search?.query).toStrictEqual(searchData.search?.query);
 
 		expect(searchStore.merchandising).toBeDefined();
 		expect(searchStore.merchandising).toEqual(searchData.merchandising);
 
-		expect(searchStore.facets).toHaveLength(searchData.facets.length);
+		expect(searchStore.facets).toHaveLength(searchData.facets?.length!);
 
 		expect(searchStore.filters).toHaveLength(0);
 
-		expect(searchStore.results).toHaveLength(searchData.results.length);
+		expect(searchStore.results).toHaveLength(searchData.results?.length!);
 
-		expect(searchStore.pagination.totalResults).toBe(searchData.pagination.totalResults);
+		expect(searchStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
 
-		expect(searchStore.sorting.options).toHaveLength(searchData.meta.sortOptions.filter((option) => option.type == 'field').length);
+		expect(searchStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.filter((option) => option.type == 'field').length!);
 	});
 });

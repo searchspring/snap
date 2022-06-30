@@ -3,6 +3,288 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.7](https://github.com/searchspring/snap/compare/v0.27.6...v0.27.7) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.6](https://github.com/searchspring/snap/compare/v0.27.5...v0.27.6) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.5](https://github.com/searchspring/snap/compare/v0.27.4...v0.27.5) (2022-05-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.4](https://github.com/searchspring/snap/compare/v0.27.3...v0.27.4) (2022-05-09)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.3](https://github.com/searchspring/snap/compare/v0.27.2...v0.27.3) (2022-05-09)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.2](https://github.com/searchspring/snap/compare/v0.27.1...v0.27.2) (2022-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Features
+
+* **controller-finder:** adding persistence configuration and functionality ([eac3ef4](https://github.com/searchspring/snap/commit/eac3ef40fc19c08a4cede96923efe861ffded8d6))
+* **wip:** finder persisting ([3a87f9a](https://github.com/searchspring/snap/commit/3a87f9ad73518ad52f2d6b07443226a5a9c1ffd8))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.22.0](https://github.com/searchspring/snap/compare/v0.21.1...v0.22.0) (2022-03-09)
+
+
+### Features
+
+* **autocomplete:** ac showResults config prop for showing trending term results ([7a1d71e](https://github.com/searchspring/snap/commit/7a1d71e2f15c2beff4c9403cb348a017d41f64a3))
+
+
+
+
+
+## [0.21.1](https://github.com/searchspring/snap/compare/v0.21.0...v0.21.1) (2022-03-01)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.20.4](https://github.com/searchspring/snap/compare/v0.20.3...v0.20.4) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Features
+
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **tracker:** wip: add initial cart attribute tracking ([5036896](https://github.com/searchspring/snap/commit/5036896f1022ccd9801946559e0762de36668363))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+
+### Bug Fixes
+
+* **autocomplete-controller:** when spell correction is used the controller will wait for response ([0d65093](https://github.com/searchspring/snap/commit/0d650935ac0c310595fcb6d8e1843cb703afbd25))
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Features
+
+* **snap.tsx:** adding Skeleton template support and examples ([ac426bc](https://github.com/searchspring/snap/commit/ac426bcc7ef2794a747183a21e8e89d70bcf40e1))
+* **tracker:** adding ability to track using script tags ([b655062](https://github.com/searchspring/snap/commit/b65506258ebc8845af0fb5c19efbf159e045e60d))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 

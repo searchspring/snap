@@ -13,6 +13,7 @@ export const gridFacetMock = {
 			label: '5',
 			type: 'value',
 			value: '5',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -20,6 +21,7 @@ export const gridFacetMock = {
 			label: '6',
 			type: 'value',
 			value: '6',
+			custom: '',
 		},
 		{
 			filtered: true,
@@ -27,6 +29,7 @@ export const gridFacetMock = {
 			label: '7',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -34,6 +37,7 @@ export const gridFacetMock = {
 			label: '8',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 		{
 			filtered: true,
@@ -41,6 +45,7 @@ export const gridFacetMock = {
 			label: '7.5',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -48,6 +53,7 @@ export const gridFacetMock = {
 			label: '8.5',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -55,6 +61,7 @@ export const gridFacetMock = {
 			label: 'L',
 			type: 'value',
 			value: '6',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -62,6 +69,7 @@ export const gridFacetMock = {
 			label: 'XL',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -69,6 +77,7 @@ export const gridFacetMock = {
 			label: 'ONE SIZE',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 	],
 };
@@ -626,6 +635,8 @@ export const searchResponse = {
 				product_type_unigram: 'dress',
 				id: 'd68bd8da07b9e98b3509412d3aa03feb',
 			},
+			type: '',
+			custom: '',
 		},
 		{
 			id: '174328',
@@ -3060,5 +3071,111 @@ export const badSearchResponse = {
 	merchandising: {
 		redirect: '',
 		content: {},
+	},
+};
+
+export const facetOverflowMock = {
+	type: 'value',
+	field: 'color_family',
+	filtered: false,
+	custom: {},
+	collapsed: false,
+	display: 'palette',
+	label: 'Color',
+	values: [
+		{
+			filtered: false,
+			value: 'Blue',
+			label: 'Blue',
+			count: 755,
+		},
+		{
+			filtered: false,
+			value: 'White',
+			label: 'White',
+			count: 673,
+		},
+		{
+			filtered: false,
+			value: 'Pink',
+			label: 'Pink',
+			count: 530,
+		},
+		{
+			filtered: false,
+			value: 'Beige',
+			label: 'Beige',
+			count: 316,
+		},
+		{
+			filtered: false,
+			value: 'Black',
+			label: 'Black',
+			count: 366,
+		},
+		{
+			filtered: false,
+			value: 'Gray',
+			label: 'Gray',
+			count: 303,
+		},
+		{
+			filtered: false,
+			value: 'Brown',
+			label: 'Brown',
+			count: 174,
+		},
+		{
+			filtered: false,
+			value: 'Red',
+			label: 'Red',
+			count: 261,
+		},
+		{
+			filtered: false,
+			value: 'Green',
+			label: 'Green',
+			count: 237,
+		},
+		{
+			filtered: false,
+			value: 'Yellow',
+			label: 'Yellow',
+			count: 202,
+		},
+		{
+			filtered: false,
+			value: 'Orange',
+			label: 'Orange',
+			count: 97,
+		},
+		{
+			filtered: false,
+			value: 'Purple',
+			label: 'Purple',
+			count: 79,
+		},
+		{
+			filtered: false,
+			value: 'Black, Grey',
+			label: 'Black, Grey',
+			count: 2,
+		},
+		{
+			filtered: false,
+			value: 'Black, Orange',
+			label: 'Black, Orange',
+			count: 2,
+		},
+	],
+	multiple: 'or',
+	overflow: {
+		enabled: true,
+		limited: true,
+		limit: 12,
+		remaining: 2,
+		setLimit: () => {},
+		toggle: () => {},
+		calculate: () => {},
 	},
 };

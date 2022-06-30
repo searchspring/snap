@@ -26,11 +26,13 @@ const config = {
 					{
 						selector: '#searchspring-content',
 						component: () => Content,
+						skeleton: () => ContentSkel,
 						hideTarget: true,
 					},
 					{
 						selector: '#searchspring-sidebar',
 						component: () => Sidebar,
+						skeleton: () => SidebarSkel,
 						hideTarget: true,
 					},
 				],
@@ -101,6 +103,10 @@ We also have a `targeters` array of DomTargeter `targeter` configuration objects
 `targeter.component` specifies a function that returns a reference to the component to render at the target selector. 
 
 `targeter.hideTarget` boolean that specifies if the target node should be hidden before the component is mounted and rendered. It is recommended to enable this to prevent flashy behaviour. 
+
+`targeter.autoRetarget` (optional) boolean that specificies if the targeter should continuously query for the selector in the DOM until it finds it and triggers a retarget. This is useful for dynamically generated selectors that might not exist at dom ready.
+
+`targeter.skeleton` (optional) meant to be used as a "loading" component. This specifies a function that returns a reference to the component to render immediately at the target selector to show briefly while the data is returning and the real component is rendering. You can use any component you want for this, although `snap-preact-components` provides a `skeleton` component for you to use if preferred.
 
 `targeter.props` (optional) convenient way of passing additional props to the component, by default we pass `controller`
 

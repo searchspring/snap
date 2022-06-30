@@ -1,0 +1,4227 @@
+{
+  "search": {},
+  "pagination": {
+    "totalResults": 4460,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30,
+    "totalPages":149
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "172772",
+      "mappings": {
+        "core": {
+          "uid": "172772",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/C-LTO-R6-L5316",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_10_christmas_part_deux_168_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg",
+          "name": "Play For Keeps Burgundy Velvet Bralette",
+          "sku": "C-LTO-R6-L5316",
+          "brand": "Leto"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vUJ8dcNMtP1MTU2NGMwBEJjAwYTEzMDhvSizBQAwGUI7w",
+        "intellisuggestSignature": "9fc17435b36fd69a83850931b3a2f98cc513f354ca0cf48c5f8c930adc31e78b",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "50",
+        "ss_product_type": "Bralette",
+        "keywords": [
+          "velvet bralette",
+          "velvet",
+          "bralette",
+          "velvet bralette",
+          "burgundy bralette"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Model is wearing an xs/s. • 97% Polyester, 3% Spandex • Hand Wash Cold • Fully Lined • Imported",
+        "title": "Play For Keeps Burgundy Velvet Bralette",
+        "ss_clicks": "3311",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "4461",
+        "ss_sale_price": "26",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "13",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "58",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "31",
+        "popularity": "4461",
+        "product_type_unigram": "play",
+        "id": "c1cf679d32fb4d03bfbb0bd06c347fcd"
+      }
+    },
+    {
+      "id": "171591",
+      "mappings": {
+        "core": {
+          "uid": "171591",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-MAK-T1-K8028",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/110_lcp_9262_copyright_loganpotterf_2016_large.jpg",
+          "name": "Freezing Point Cream Turtleneck Sweater",
+          "sku": "C-MAK-T1-K8028",
+          "brand": "Mak"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vV19NYNMdT1tjAwsmAwZDBiMDZgMDExM2BIL8pMAQC97gjZ",
+        "intellisuggestSignature": "d1347e0028fb8c5c49f97b12eae922cbb7c2be90a6641edb30e00dba32146d7a",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "69",
+        "ss_product_type": "Cream",
+        "keywords": [
+          "turtle neck",
+          "turtleneck",
+          "cable knit",
+          "chunky turtleneck",
+          "long sleeve",
+          "sweater",
+          "comfy sweater",
+          "cream",
+          "off white",
+          "ivory",
+          "cream sweater"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "You’ve about reached your Freezing Point, and you need some cute and cozy clothes to keep you from turning into a popsicle, and this pretty Cream Turtleneck Sweater is a prime candidate! You’ll melt for this beauty! This cable knit turtleneck sweater features long sleeves and ribbed neck, hem, and cuffs. Model is wearing a small. • 80% Acrylic, 18% Nylon, 2% Spandex • Hand Wash Cold • Unlined • Imported",
+        "title": "Freezing Point Cream Turtleneck Sweater",
+        "ss_clicks": "4044",
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4445",
+        "ss_sale_price": "39",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "19.5",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "20",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "10",
+        "popularity": "4445",
+        "product_type_unigram": "sweater",
+        "id": "b9868ea9a34107ef51e061f73a2a1162"
+      }
+    },
+    {
+      "id": "166753",
+      "mappings": {
+        "core": {
+          "uid": "166753",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/F-QPD-G7-BIN36",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3650_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3650_large.jpg",
+          "name": "New Direction Black Knee High Boots",
+          "sku": "F-QPD-G7-BIN36",
+          "brand": "Qupid"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0w0McNF1N9d18vQzNmMwZDBmMDZgMDExM2BIL8pMAQDB5QkH",
+        "intellisuggestSignature": "2e317509155d1bbdce2c0ba2dc344b98d3d347358b5d29bf451a0a4294d92266",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "70",
+        "ss_product_type": "Boots",
+        "keywords": [
+          "Knee High Black Boots",
+          "Knee High Boots",
+          "Boots",
+          "Tall Boots",
+          "Thigh High Boots",
+          "Black",
+          "Black Boots",
+          "Fall Boots",
+          "Shoes",
+          "Riding Boots"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": "no",
+        "description": "Whether traveling a New Direction or down the same old road, these Black Knee High Boots will make it a fashionable journey! Go ahead and get your strut on! These knee high faux suede boots feature an almond toe, stacked heel, rounded top with buckle detail, and zipper on the instep. • Heel measures 3.75&quot; • Shaft measures 14&quot; • Circumference measures 15&quot; • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "New Direction Black Knee High Boots",
+        "ss_clicks": "2971",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": "4432",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "All Sale&gt;20% off",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "33.6",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 20% off",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "170",
+        "quantity_available": "2",
+        "popularity": "4432",
+        "product_type_unigram": "boots",
+        "id": "3719511a03faf9347152de3d0b6a6036"
+      }
+    },
+    {
+      "id": "168580",
+      "mappings": {
+        "core": {
+          "uid": "168580",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/F-BRK-T4-DIA12",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_323_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_323_large.jpg",
+          "name": "Basically Perfect Nude Pointed Pumps",
+          "sku": "F-BRK-T4-DIA12",
+          "brand": "Breckelle's"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw03UK8tYNMdF18XQ0NGIwZDBhMDZgMDExM2BIL8pMAQDA7Aj7",
+        "intellisuggestSignature": "557b1b5b5cd15a5290bb48f2ea146f2c12168840017aaf3587bfcca2729612b7",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "45",
+        "ss_product_type": "Pumps",
+        "keywords": [
+          "heels",
+          "nude heels",
+          "high heel shoes",
+          "high heels",
+          "pointed toe",
+          "nude heel"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "Whoever said that perfection rested in anything other than these Basically Perfect Natural Pointed Pumps hasn’t had a pair for herself! Whether making your legs look longer or giving a casual look a touch of sophistication and glam, these heels are perfect in every way possible!! These faux leather pumps feature a pointed toe and stiletto heel. • Heel measures 4.25&quot; • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Basically Perfect Nude Pointed Pumps",
+        "ss_clicks": "1055",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4429",
+        "ss_sale_price": "30",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "collection": "Basically Perfect",
+        "sale_price": "15",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "material": "Faux Leather",
+        "days_since_published": "21",
+        "quantity_available": "13",
+        "popularity": "4429",
+        "product_type_unigram": "pumps",
+        "id": "bb8388557b67dbac8ab7e546fff72351"
+      }
+    },
+    {
+      "id": "149220",
+      "mappings": {
+        "core": {
+          "uid": "149220",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/J-RDB-E9-WMBT",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a9588_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a9588_1_large.jpg",
+          "name": "It's Simple Neon Green Tassel Necklace",
+          "sku": "J-RDB-E9-WMBT",
+          "brand": "RDB"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0g1ycdJ1tdQN93UKYTBkMGUwNmAwMTEzYEgvykwBALswCPg",
+        "intellisuggestSignature": "f794e6bb646fba6ac04d6422b8d607cc9851d30954d790ec523288e9911ca8b2",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "68",
+        "ss_product_type": "Necklace",
+        "keywords": [
+          "Green Tassel Necklace",
+          "Green",
+          "Neon Green",
+          "Lime Green",
+          "Tassel Necklace",
+          "Tassel",
+          "Necklace",
+          "Beads",
+          "Beaded",
+          "White",
+          "White Beads"
+        ],
+        "color": [
+          "Green"
+        ],
+        "multi_colors": "no",
+        "description": "It's Simple, accessories make the outfit, and this Neon Green Tassel Necklace will make it all kinds of good! This gold chain necklace features white and grey marbled beads and a neon green tassel. Necklace measures 30&quot; around. • Handmade locally in Athens, GA",
+        "title": "It's Simple Neon Green Tassel Necklace",
+        "sale_price": "10",
+        "ss_clicks": "1815",
+        "color_family": [
+          "Green"
+        ],
+        "condition": "New",
+        "sales_rank": "4428",
+        "ss_sale_price": "48",
+        "product_type": [
+          "All Sale &gt; Jewelry on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "122",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Jewelry on Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "quantity_available": "6",
+        "popularity": "4428",
+        "product_type_unigram": "necklace",
+        "id": "a096d8e1acec887232e344b954bd83e9"
+      }
+    },
+    {
+      "id": "175968",
+      "mappings": {
+        "core": {
+          "uid": "175968",
+          "price": 72,
+          "msrp": 75,
+          "url": "/product/C-BB-E6-12134",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_3370_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_3370_large.jpg",
+          "name": "Not Too Hot Not Too Cold Fern Green Jacket",
+          "sku": "C-BB-E6-12134",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVy0nU10zU0MjQ2YTBkMGMwNmAwMTEzYEgvykwBAK3yCFw",
+        "intellisuggestSignature": "a5e39e38b55645b32fe1db3d3d25733b7a917d0584f3983f083f5983c67c6307",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "50",
+        "ss_product_type": "Jacket",
+        "keywords": [
+          "bb",
+          "bbd",
+          "bbdakota",
+          "bb jacket",
+          "dakota",
+          "jacket",
+          "coat",
+          "cute",
+          "blogger",
+          "edgy",
+          "green jacket",
+          "green",
+          "sage",
+          "sage green",
+          "fern",
+          "dark green"
+        ],
+        "color": [
+          "Green"
+        ],
+        "multi_colors": "no",
+        "description": "We've already got a jacket, your inner self says. You almost click off the page, but something stops you and you linger a bit longer on the picture. But it's so pretty. It's everything you've always wanted in a jacket. It's perfect. &quot;But I just pointed out that we've already got a jacket and we don't--&quot; Oh shut up self, you're the one who convinced me that guy really was Luke Wilson a few years ago. That was a terrible walk of shame. We're so getting the jacket. You owe me. Model is wearing an x-small. • 100% Cotton • Hand Wash Cold • Unlined • Imported",
+        "title": "Not Too Hot Not Too Cold Fern Green Jacket",
+        "ss_clicks": "3949",
+        "color_family": [
+          "Green"
+        ],
+        "sales_rank": "4421",
+        "ss_sale_price": "72",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "36",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "Brands We Love &gt; BB Dakota",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "15",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "9",
+        "popularity": "4421",
+        "product_type_unigram": "jacket",
+        "id": "e001641e75de290439fe92072811b246"
+      }
+    },
+    {
+      "id": "175856",
+      "mappings": {
+        "core": {
+          "uid": "175856",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-LIN-W1-10049",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/12_14_reddress11531_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/12_14_reddress11531_large.jpg",
+          "name": "Elevated Classic White Shirt Dress",
+          "sku": "C-LIN-W1-10049",
+          "brand": "Love In"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vXx9NMNN9Q1NDAwsWQwZDBnMDZgMDExM2BIL8pMAQC85wjM",
+        "intellisuggestSignature": "732070adcf5435ed0cba23023dbda328ef8fb7e6a6fa87120a2e7811de9b8094",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "75",
+        "ss_product_type": "Shirt",
+        "keywords": [
+          "white Shirt Dress",
+          "white Dress",
+          "White",
+          "Shirt Dress",
+          "Dress",
+          "Collared Dress",
+          "Classic",
+          "Business Casual",
+          "Button Down"
+        ],
+        "color": [
+          "White"
+        ],
+        "multi_colors": "no",
+        "description": "Classic styles often get relegated to historic figures and classy functions. But, much like art, classic fashion comes in varying degrees of beauty. So steer clear of the avante garde, and deck yourself in the elevated classic style embodied by this lovely skirt dress. On you, it’s simultaneously cutting edge, and elegant, transcending the lower art forms to become something akin to a true masterpiece. But the dress can only take some of the credit; after all, it’s what’s inside that counts. Model is wearing a small. • 95% Cotton 5% Spandex • Hand Wash Cold • Unlined • Imported",
+        "title": "Elevated Classic White Shirt Dress",
+        "ss_clicks": "3718",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": "4374",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "21",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "11",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "21",
+        "popularity": "4374",
+        "product_type_unigram": "dress",
+        "id": "d68bd8da07b9e98b3509412d3aa03feb"
+      }
+    },
+    {
+      "id": "171184",
+      "mappings": {
+        "core": {
+          "uid": "171184",
+          "price": 32,
+          "msrp": 50,
+          "url": "/product/F-WDL-G7-RIS01",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/524_lcp_4986_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/524_lcp_4986_copyright_loganpotterf_2016_large.jpg",
+          "name": "Night Vision Black Ankle-Strap Heels",
+          "sku": "F-WDL-G7-RIS01",
+          "brand": "Wild Diva Lounge"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0w138dF1N9cN8gw2MGQwZLBgMDZgMDExM2BIL8pMAQDDkgkb",
+        "intellisuggestSignature": "78da0d1ea9bab90c697b8793e06230ae7e3882f062a54aa731117df0ad6384ef",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "68",
+        "ss_product_type": "Heels",
+        "keywords": [
+          "black",
+          "black heels",
+          "black high heels",
+          "high heels",
+          "high heel",
+          "ankle strap heels",
+          "ankle strap",
+          "ankle strap heel",
+          "gno",
+          "date night",
+          "event",
+          "occasional",
+          "occasion"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": "no",
+        "description": "You'll be the number one stunner and quite the Night Vision in these updated classic Black Ankle Strap Heels!! Featuring an ankle strap and chunky heel, they'll be the perfect compliment to any outfit! • Padded Insole • Non-Skid Sole • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Night Vision Black Ankle-Strap Heels",
+        "ss_clicks": "3845",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": "4369",
+        "ss_sale_price": "32",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;30% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "22.4",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 30% off",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "41",
+        "quantity_available": "1",
+        "popularity": "4369",
+        "product_type_unigram": "heels",
+        "id": "0d98fe7e73ecc0e8e8f0a5625d99c474"
+      }
+    },
+    {
+      "id": "176767",
+      "mappings": {
+        "core": {
+          "uid": "176767",
+          "price": 52,
+          "msrp": 75,
+          "url": "/product/C-EL-B4-13836",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/319_lcp_8021_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/319_lcp_8021_reddressboutique_large.jpg",
+          "name": "City Inspired Camel Bomber Jacket",
+          "sku": "C-EL-B4-13836",
+          "brand": "Ellison"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nX10XUy0TU0tjA2YzBksGQwNmAwMTEzYEgvykwBAK_ICHE",
+        "intellisuggestSignature": "6392a428d3e7599df6ab0cf339844f8e43f149322730fb7a12995dd3a2cc9e8d",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "43",
+        "ss_product_type": "Jacket",
+        "keywords": [
+          "bomber",
+          "jacket",
+          "camel",
+          "cognac",
+          "brown",
+          "trendy",
+          "outerwear",
+          "coat"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "There's nothing about a Bomber Jacket that we don't love. They're classic staples that have proven their worth time and again in every scenario imaginable. Plus, if you take care of yours, it will last forever (we'd know, we still have a few from years gone by). They are fantastic for a night out on the town (hence the name) or a day out wherever. They pair nicely with jeans, skirts, jumpers, and red, rose, or white wine ... and particularly well with whiskey. Model is wearing a small. • 90% Polyester 10% Elastance • Hand Wash Cold • Lined • Imported",
+        "title": "City Inspired Camel Bomber Jacket",
+        "ss_clicks": "2322",
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4350",
+        "ss_sale_price": "52",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "26",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "14",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "15",
+        "popularity": "4350",
+        "product_type_unigram": "jacket",
+        "id": "417fde3c582f93a9c39a955f28b6a3b2"
+      }
+    },
+    {
+      "id": "106779",
+      "mappings": {
+        "core": {
+          "uid": "106779",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-SB-I6-S708",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7106_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7106_1_large.jpg",
+          "name": "Gossip Girl Ultra Dark Wash Skinny Jeans",
+          "sku": "C-SB-I6-S708",
+          "brand": "Scarlet Boulevard"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g120vU00w02N7BgMGQwNGAwNmAwMTEzYEgvykwBALLmCJM",
+        "intellisuggestSignature": "f37f7f8dc7759ef312f9121495d424b9706eb7aab071160026ebefad34e4e534",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "69",
+        "ss_product_type": "Jeans",
+        "keywords": [
+          "jeans",
+          "pants",
+          "skinny jeans",
+          "skinnies",
+          "denim",
+          "denim pants",
+          "dark jeans",
+          "dark wash"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Can you keep a secret or are you a Gossip Girl, looking fashionably chatty in these Ultra Dark Wash Skinny Jeans? You’re always in the know of the current news, and you’re always willing to dish out on the latest scoop. So let’s cut to the chase and face the facts already: you’re a Gossip Girl. So Miss Chatter-Box, won’t you tell us the tall tale of where you got your perfect jeans? We’re all dying to know, and we all need to have a pair now. Denim pants feature 5-pocket styling, zipper/button-fly. • 92% Cotton, 6% Polyester, 2% Spandex • Machine Wash Cold • Unlined • Imported",
+        "title": "Gossip Girl Ultra Dark Wash Skinny Jeans",
+        "ss_clicks": "466",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "4333",
+        "ss_sale_price": "39",
+        "ss_category_hierarchy": [
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "collection": "Gossip Girl",
+        "sale_price": "15",
+        "condition": "New",
+        "product_type": [
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30"
+        ],
+        "material": "Denim",
+        "days_since_published": "83",
+        "size_pants": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30"
+        ],
+        "quantity_available": "1",
+        "popularity": "4333",
+        "product_type_unigram": "jeans",
+        "id": "1b0f88f594fd3e810192efe32abc288b"
+      }
+    },
+    {
+      "id": "174650",
+      "mappings": {
+        "core": {
+          "uid": "174650",
+          "price": 38,
+          "msrp": 50,
+          "url": "/product/C-MCY-W2-M881",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_pre_spring_1202_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_pre_spring_1202_large.jpg",
+          "name": "Fresh Feeling White Cold Shoulder Sweater",
+          "sku": "C-MCY-W2-M881",
+          "brand": "Miracle City"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vV1jtQNN9L1tbAwZABCQwZjAwYTEzMDhvSizBQAv84I7g",
+        "intellisuggestSignature": "737f238c96aadd3cf5c6813f6d8491976f2db7ec6e0843ee384f538e9a36693e",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "48",
+        "ss_product_type": "Sweater",
+        "keywords": [
+          "cold shoulder",
+          "open shoulder",
+          "long sleeve",
+          "sweater",
+          "long sleeve sweater",
+          "trendy",
+          "cool",
+          "blogger",
+          "knit",
+          "white",
+          "ivory"
+        ],
+        "color": [
+          "White"
+        ],
+        "multi_colors": "no",
+        "description": "There’s no denying the invigorating feeling in the air that comes at the advent of Spring, but there’s just something magical about the crisp Winter air. It brings a warm feeling, despite the cold, that nips at your cheeks like an exuberant puppy, eager for kisses. Okay, that might not have been the greatest simile ever, but, damp neck aside, the feelings Winter elicits are nonetheless similar. And what better way to embrace that Fresh Feeling Winter brings, than to dress in tribute to this glorious season? Model is wearing a S/M. • 55% Cotton 45% Acrylic • Hand Wash Cold • Unlined",
+        "title": "Fresh Feeling White Cold Shoulder Sweater",
+        "ss_clicks": "4426",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": "4328",
+        "ss_sale_price": "38",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "19",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "160",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "9",
+        "popularity": "4328",
+        "product_type_unigram": "sweater",
+        "id": "8d02337bd76c93938e12bed6461ae1dd"
+      }
+    },
+    {
+      "id": "174701",
+      "mappings": {
+        "core": {
+          "uid": "174701",
+          "price": 38,
+          "msrp": 50,
+          "url": "/product/C-VJ-G4-31745",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/522_lcp_5908_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/522_lcp_5908_reddressboutique_large.jpg",
+          "name": "Weekend On Repeat Gray Sweatshirt Dress",
+          "sku": "C-VJ-G4-31745",
+          "brand": "Very J"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g3z0nU30TU2NDcxZTBkMDRiMDZgMDExM2BIL8pMAQC5ywiu",
+        "intellisuggestSignature": "a946250bd1b7544fdd6c08d57ca67d7475c80d6da2769a621ca1ed48774da982",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "74",
+        "ss_product_type": "Sweatshirt",
+        "keywords": [
+          "grey",
+          "grey dress",
+          "sweatshirt dress",
+          "fun dress",
+          "casual",
+          "comfy casual",
+          "long sleeves",
+          "casual dress"
+        ],
+        "color": [
+          "Gray"
+        ],
+        "multi_colors": "no",
+        "description": "Ever had one of those weekends that you just want to go on and on and on and on ... well, you get the picture. Everything just seems to go right. Your breakfast came out perfect. Your morning workout was the best workout ever. The sky was the prettiest blue you've ever seen, and your neighbors didn't bother you when you went out to get the mail (what, isn't everyone antisocial?) and waiting for you was the package you'd ordered from Red Dress. Best Day Ever. Yup, Weekend On Repeat. • 95% Cotton, 5% Spandex • Hand Wash Cold • Unlined • Imported",
+        "title": "Weekend On Repeat Gray Sweatshirt Dress",
+        "ss_clicks": "3070",
+        "color_family": [
+          "Gray"
+        ],
+        "sales_rank": "4319",
+        "ss_sale_price": "38",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "19",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "99",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "41",
+        "popularity": "4319",
+        "product_type_unigram": "dress",
+        "id": "83e6adba0d4ce2e9d8218f3779a545a3"
+      }
+    },
+    {
+      "id": "172843",
+      "mappings": {
+        "core": {
+          "uid": "172843",
+          "price": 56,
+          "msrp": 75,
+          "url": "/product/B-UE-G7-2181B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_180_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_180_large.jpg",
+          "name": "On A Mission Black Handbag",
+          "sku": "B-UE-G7-2181B",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0g111XU31zUytDB0YjBkMDRmMDZgMDExM2BIL8pMAQC6FQi1",
+        "intellisuggestSignature": "4065cd1739daea72fd71f9dccd24f329b4783b5e0fead45df9bfe98a3da54e74",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "52",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "black",
+          "black handbag",
+          "leather",
+          "vegan leather",
+          "faux leather",
+          "fake leather",
+          "hand bag",
+          "purse",
+          "basic",
+          "preppy",
+          "fall"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": "no",
+        "description": "Oh girl, we've found the perfect adventure loving sidekick with this gorgeous Black Handbag! Who's up for the journey with our On A Mission Red Handbag? Handbag features front envelope pocket, zipper detail, and double strap. Peta approved Vegan. • Purse measures 12&quot; High, 15&quot; Wide, 5.5&quot; Deep • Handle Drop: 9&quot; - 13&quot; • Additional Shoulder Strap Drop: 16&quot; - 21&quot; • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "On A Mission Black Handbag",
+        "ss_clicks": "3138",
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": "4319",
+        "ss_sale_price": "56",
+        "size_universal": "One Size",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "28",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "164",
+        "quantity_available": "19",
+        "popularity": "4319",
+        "product_type_unigram": "handbag",
+        "id": "b027dd4fbb4e7aee53b5c81adaec4b85"
+      }
+    },
+    {
+      "id": "173749",
+      "mappings": {
+        "core": {
+          "uid": "173749",
+          "price": 62,
+          "msrp": 75,
+          "url": "/product/C-BB-B4-41552",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_4_studio__723-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_4_studio__723-2_large.jpg",
+          "name": "Jack By Julius Faux Fur Vest",
+          "sku": "C-BB-B4-41552",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVy0nUy0TUxNDU1YjBkMDRhMDZgMDExM2BIL8pMAQC2CQiM",
+        "intellisuggestSignature": "296f04818845ff935a4201df44036dcbaf837e7e4e934f852dbfc1a5798d8b8d",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "50",
+        "ss_product_type": "Vest",
+        "keywords": [
+          "jack by bb dakota",
+          "bb dakota",
+          "bb",
+          "bb dakota vest",
+          "agneta vest",
+          "faux fur vest",
+          "fur vest",
+          "tan",
+          "light tan",
+          "light brown",
+          "brown vest",
+          "fur vest",
+          "tan vest",
+          "outwear",
+          "winter"
+        ],
+        "color": [
+          "Brown"
+        ],
+        "multi_colors": "no",
+        "description": "What does one do with a faux fur vest? What makes it better than any ordinary vest? Let us tell you. Faux fur vests, for those who aren't educated on these matters, have been known to induce feelings of intense jealousy in others, the likes of which are hard to replicate. One might wear a faux fur vest when out with say, that one friend who has a bad habit of always trying to out-dress you, or perhaps when one might run into an ex, or even while hanging out with a soon-to-be-ex (you know, because he can't get his act together). It's also great for wearing just for yourself! Model is wearing an x-small. • 75% Acrylic 1825 Polyester, Lining 100% Polyester • Hand Wash Cold • Imported",
+        "title": "Jack By Julius Faux Fur Vest",
+        "ss_clicks": "618",
+        "color_family": [
+          "Brown"
+        ],
+        "sales_rank": "4284",
+        "ss_sale_price": "62",
+        "season": "Winter",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "31",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "Brands We Love &gt; BB Dakota",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "90",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "7",
+        "popularity": "4284",
+        "product_type_unigram": "vest",
+        "id": "a52a38dfe3e7238611b58d1e4ae1dafb"
+      }
+    },
+    {
+      "id": "171393",
+      "mappings": {
+        "core": {
+          "uid": "171393",
+          "price": 44,
+          "msrp": 50,
+          "url": "/product/C-DB-B3-12636",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/140_lcp_4130_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/140_lcp_4130_copyright_loganpotterf_2016_large.jpg",
+          "name": "I Got The Glam Camel Suede Top",
+          "sku": "C-DB-B3-12636",
+          "brand": "Do+Be"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVx0nUy1jU0MjM2YzBkMDRlMDZgMDExM2BIL8pMAQC2QgiP",
+        "intellisuggestSignature": "dca30bb24f3c5d128430f91e9284c31ced22dea17279eb586360b004c40854db",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "74",
+        "ss_product_type": "Top",
+        "keywords": [
+          "camel",
+          "brown",
+          "camel brown",
+          "light brown",
+          "suede",
+          "faux suede",
+          "fake suede",
+          "vegan suede",
+          "long sleeve",
+          "long sleeves",
+          "long sleeve top",
+          "bell sleeve",
+          "bell sleeves",
+          "belle sleeve",
+          "bell sleeve top",
+          "cute",
+          "trendy",
+          "blogger",
+          "preppy"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "I Got The Glam, I got the goods, I got it all in this fine Camel Suede Top! This soft and trendy top will have you looking and feeling amazing! This faux suede top features a round neck, panel front, long circular flounce sleeves, and partial hidden zipper on the back. Model is wearing a small. • 90% Polyester, 10% Spandex • Hand Wash Cold • Lined • Imported",
+        "title": "I Got The Glam Camel Suede Top",
+        "ss_clicks": "4346",
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4236",
+        "ss_sale_price": "44",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "All Sale&gt;Going Fast on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "22",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Going Fast on Sale",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "162",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "4236",
+        "product_type_unigram": "top",
+        "id": "1edd85770d09b444e25b4264444bcd32"
+      }
+    },
+    {
+      "id": "175809",
+      "mappings": {
+        "core": {
+          "uid": "175809",
+          "price": 20,
+          "msrp": 25,
+          "url": "/product/F-QPD-T1-IKE04",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_1_13_accessories_2459_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_1_13_accessories_2459_large.jpg",
+          "name": "Get Inspired Nude Flats",
+          "sku": "F-QPD-T1-IKE04",
+          "brand": "Qupid"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0w0McNENMdT19HY1MGEwZDA0YzA2YDAxMTNgSC_KTAEAy1UJPQ",
+        "intellisuggestSignature": "bbec2fb4bbff8f2e932839b8accbdc6a7aaca7c80aec2b6da3b460f912b9ab9a",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "49",
+        "ss_product_type": "Flats",
+        "keywords": [
+          "nude",
+          "neutra",
+          "suede",
+          "faux suede",
+          "suede leather",
+          "suede flats",
+          "prim",
+          "proper",
+          "cute",
+          "preppy",
+          "work",
+          "professional",
+          "pretty",
+          "cut",
+          "cut out",
+          "laser cut",
+          "dye cut",
+          "die cut",
+          "scallop"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "• Non-Skid Sole • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Get Inspired Nude Flats",
+        "ss_clicks": "2185",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4233",
+        "ss_sale_price": "20",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "Gifts for Her&gt;Gifts Under $25",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "15",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "159",
+        "quantity_available": "10",
+        "popularity": "4233",
+        "product_type_unigram": "flats",
+        "id": "05f3a303a3fd0f8f05201709dde4eca2"
+      }
+    },
+    {
+      "id": "171475",
+      "mappings": {
+        "core": {
+          "uid": "171475",
+          "price": 49,
+          "msrp": 50,
+          "url": "/product/C-LIN-V4-10026",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/518_lcp_4976_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/518_lcp_4976_copyright_loganpotterf_2016_large.jpg",
+          "name": "Another Story Dark Mauve Top",
+          "sku": "C-LIN-V4-10026",
+          "brand": "Love In"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vXx9NMNM9E1NDAwMmMwZDA0ZzA2YDAxMTNgSC_KTAEAxVQI-g",
+        "intellisuggestSignature": "a5c1a575fb8d26a7e20882a896e15f1f5686d90f89f5a52cef8259abe75ddeb5",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "45",
+        "ss_product_type": "Top",
+        "keywords": [
+          "Dark Mauve Top",
+          "Dark Mauve",
+          "Mauve",
+          "Purple",
+          "Top",
+          "Oversized Top",
+          "Henley",
+          "Henley Top",
+          "Shirt",
+          "Half Button Top",
+          "Collared Top",
+          "Blouse",
+          "Oversized Blouse"
+        ],
+        "color": [
+          "Purple"
+        ],
+        "multi_colors": "no",
+        "description": "Tell everyone Another Story when you walk by in this so chic Dark Mauve Top! They won’t believe their eyes at you in this perfect piece! This top features a double placket, a spread collar, henley buttons, dolman sleeves, and a high-low hemline. Model is wearing a small. Please note this a top that has an oversized fit!! • 100% Lyocell • Hand Wash Cold • Unlined • Imported",
+        "title": "Another Story Dark Mauve Top",
+        "sale_price": "14.7",
+        "ss_clicks": "167",
+        "color_family": [
+          "Purple"
+        ],
+        "condition": "New",
+        "sales_rank": "4202",
+        "ss_sale_price": "49",
+        "product_type": [
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": "111",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "4202",
+        "product_type_unigram": "top",
+        "id": "6a6709857454df580fafdbd16868d877"
+      }
+    },
+    {
+      "id": "141654",
+      "mappings": {
+        "core": {
+          "uid": "141654",
+          "price": 34,
+          "msrp": 50,
+          "url": "/product/F-MDS-I5-UMMYS",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/33_2383_copyright_reddressboutique_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/33_2383_copyright_reddressboutique_2016_large.jpg",
+          "name": "Set The Mood Denim Caged Heels",
+          "sku": "F-MDS-I5-UMMYS",
+          "brand": "My Delicious"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0_V1Cdb1NNUN9fWNDGYwZDC0YDA2YDAxMTNgSC_KTAEA0fAJlQ",
+        "intellisuggestSignature": "cbae9ed765ded3058dcd1ad1d77b4d5e40502bf7f835dafd78cfaac5b52ce48b",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "54",
+        "ss_product_type": "Set",
+        "keywords": [
+          "caged heel",
+          "neutral",
+          "denim",
+          "blue",
+          "buckle",
+          "stacked heel",
+          "heal",
+          "stack",
+          "open toe",
+          "peep toe",
+          "cage"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "If the mood you’re looking for is daring and divine, then these Denim Caged Heels will definitely Set The Mood! These caged peep toe heels with an adjustable buckle on the side and a stacked heel, will be serving style wherever you go. • Heel measures 4&quot; • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Set The Mood Denim Caged Heels",
+        "ss_clicks": "4265",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "4199",
+        "ss_sale_price": "34",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "All Sale&gt;Going Fast on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "17",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Going Fast on Sale",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "material": "Denim",
+        "days_since_published": "135",
+        "quantity_available": "1",
+        "popularity": "4199",
+        "product_type_unigram": "heels",
+        "id": "8247f251693fddd8322b00f9942dba59"
+      }
+    },
+    {
+      "id": "170691",
+      "mappings": {
+        "core": {
+          "uid": "170691",
+          "price": 36,
+          "msrp": 50,
+          "url": "/product/F-LNA-T4-ANE21",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/250_lcp_1712_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/250_lcp_1712_copyright_loganpotterf_2016_large.jpg",
+          "name": "Strut Around Taupe Lace-Up Ankle Boots",
+          "sku": "F-LNA-T4-ANE21",
+          "brand": "Liliana"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0_Xxc9QNMdF19HM1MmQAQksGYwMGExMzA4b0oswUAMofCTM",
+        "intellisuggestSignature": "683824f81b933cf9bbe139e753d8adb6bcf7515bc1fd8047f120f0b59f9f83bf",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "61",
+        "ss_product_type": "Boots",
+        "keywords": [
+          "lace up booties",
+          "lace-up boots",
+          "ankle boots",
+          "booties",
+          "taupe booties",
+          "taupe",
+          "grey",
+          "gray",
+          "stacked heels",
+          "heeled boots",
+          "stack heel booties",
+          "fall",
+          "winter"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "Get ready to Strut Around in stunning style in these awesome Taupe Lace Up Ankle Boots! You’ll have your model walk perfected in no time! These faux suede ankle boots feature a pointed round toe, lace up closure, and chunky stacked heel. •Heel measures 3.5&quot; • Padded Insole • Non-Skid Sole • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Strut Around Taupe Lace-Up Ankle Boots",
+        "ss_clicks": "1661",
+        "size_footwear": [
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": "4162",
+        "ss_sale_price": "36",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "All Sale&gt;40% off",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "21.6",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 40% off",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "days_since_published": "163",
+        "quantity_available": "3",
+        "popularity": "4162",
+        "product_type_unigram": "boots",
+        "id": "499f101577d380a291333c008db6fd4e"
+      }
+    },
+    {
+      "id": "176409",
+      "mappings": {
+        "core": {
+          "uid": "176409",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-SHE-P3-L3507",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_4329_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4329_large.jpg",
+          "name": "On Your Side Pink Striped Sweater",
+          "sku": "C-SHE-P3-L3507",
+          "brand": "She + Sky"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g32cNUNMNb1MTY1MGcwZDAyYDA2YDAxMTNgSC_KTAEAxwgJDA",
+        "intellisuggestSignature": "eb28f3556c8f517957e2a46a252e6f02652d672344b27d2b984c28023831acb9",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "48",
+        "ss_product_type": "Sweater",
+        "keywords": [
+          "pink",
+          "pink and white",
+          "pink and ivory",
+          "ivory",
+          "white",
+          "off white",
+          "cream",
+          "ivory sweater",
+          "stripe sweater",
+          "ivory stripe sweater",
+          "stripe top",
+          "comfy cozy",
+          "preppy",
+          "long sleeves",
+          "thick sweater",
+          "navy blue",
+          "navy",
+          "fall",
+          "winter"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "multi_colors": "no",
+        "pattern": "Stripe",
+        "description": "Ever have one of those arguments where you can never get the other side to just shut up and listen? Especially when it's your husband or boyfriend? Ugh, it's so frustrating. Well, we've finally figured out how to fix this problem the second it shows its ugly face. You walk in the door, fight breaks out, he doesn't seem to be able to work the hinge to his jaw, drop your jacket and show that you're wearing this sweater. Boom ... he'll instantly be 'On Your Side.' Works every time. **Maybe not every time, and we're not going to guarantee that it actually does anything but sit there and be a sweater. But you never know. It could work. Model is wearing a small. • 65% Cotton, 35% Acrylic • Hand Wash Cold • Unlined • Imported",
+        "title": "On Your Side Pink Striped Sweater",
+        "ss_clicks": "1195",
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": "4152",
+        "ss_sale_price": "46",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "23",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "75",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "22",
+        "popularity": "4152",
+        "product_type_unigram": "sweater",
+        "id": "64441b27d62b1863338d645e4a403319"
+      }
+    },
+    {
+      "id": "172003",
+      "mappings": {
+        "core": {
+          "uid": "172003",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-CIS-G7-800JQ",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/367_lcp_1931_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/367_lcp_1931_copyright_loganpotterf_2016_large.jpg",
+          "name": "Chic And Sleek Black Herringbone Print Leggings",
+          "sku": "C-CIS-G7-800JQ",
+          "brand": "Ci Sono"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nX2DNZ1N9e1MDDwCmQwZDAyZDA2YDAxMTNgSC_KTAEAx9QJHw",
+        "intellisuggestSignature": "15cfb151addf81c36fcbd912aaab978e4d190709de783c2208363ed53c947feb",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "54",
+        "ss_product_type": "Leggings",
+        "keywords": [
+          "black leggings",
+          "legging",
+          "leggings",
+          "legings",
+          "pants",
+          "spandex",
+          "tight pants",
+          "herringbone pattern",
+          "herringbone",
+          "printed leggings",
+          "print",
+          "print leggings"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": "no",
+        "pattern": "Herringbone",
+        "description": "While some are going for volume and roll-out-of-bed sweats, you’re pledging to keep it Chic and Sleek in these Black Leggings! When you're looking for the chic look of jeans and the sleek look of leggings, it’s obvious this is the only choice to go with!! These leggings feature elastic panels on the sides and seams down the front and back of the legs. Model is wearing a small. • 65.5% Rayon, 30.5% Nylon, 4% Spandex • Machine Wash Cold • Unlined • Imported",
+        "title": "Chic And Sleek Black Herringbone Print Leggings",
+        "ss_clicks": "524",
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": "4147",
+        "ss_sale_price": "29",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;Bottoms on Sale"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "14.5",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Bottoms on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "73",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "2",
+        "popularity": "4147",
+        "product_type_unigram": "leggings",
+        "id": "a62ef9591b674579ba9ccc74a7cc937c"
+      }
+    },
+    {
+      "id": "173278",
+      "mappings": {
+        "core": {
+          "uid": "173278",
+          "price": 34,
+          "msrp": 50,
+          "url": "/product/C-AD-I7-804MD",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_4_studio__1220_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_4_studio__1220_large.jpg",
+          "name": "Look At Me Now Navy Cold Shoulder Top",
+          "sku": "C-AD-I7-804MD",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nV00fU017UwMPF1YTBkMDJiMDZgMDExM2BIL8pMAQC6fwjC",
+        "intellisuggestSignature": "db3a7cd9a757944d11a4752f02616c6ccbbc09ca346475de2a74afd076799482",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "71",
+        "ss_product_type": "Top",
+        "keywords": [
+          "navy blue",
+          "navy",
+          "navy top",
+          "navy cold shoulder top",
+          "top",
+          "cold shoulder",
+          "cold-shoulder",
+          "open shoulder top",
+          "long sleeves",
+          "long sleeve top",
+          "basics",
+          "casual",
+          "layering"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Stop and Look At Me Now in my chic and comfy cold shoulder top! All heads will be turning to get a better look at your stylish figure when you wear this top to your next casual coffee date. This top features a round neck and long sleeves with cut-out shoulder detailing. Model is wearing a small. • 95% Rayon Modal, 5% Spandex • Hand Wash Cold • Made in the USA",
+        "title": "Look At Me Now Navy Cold Shoulder Top",
+        "ss_clicks": "3181",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "4098",
+        "ss_sale_price": "34",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "17",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "65",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "8",
+        "popularity": "4098",
+        "product_type_unigram": "top",
+        "id": "2c5ec8564326c2ab2b27ef3b5956dab2"
+      }
+    },
+    {
+      "id": "175863",
+      "mappings": {
+        "core": {
+          "uid": "175863",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-MCY-V4-FB007",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_pastel_842_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_pastel_842_large.jpg",
+          "name": "Rainy Day Romance Dusty Purple Sweater",
+          "sku": "C-MCY-V4-FB007",
+          "brand": "Miracle City"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vV1jtQNM9F1czIwMGcwZDAyZjA2YDAxMTNgSC_KTAEAySkJIw",
+        "intellisuggestSignature": "74b8e81fec0ee16703c73dea5621f2263e8fbd04bc9fb00c61f65ae2c033127c",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "58",
+        "ss_product_type": "Sweater",
+        "keywords": [
+          "purple",
+          "dusty purple",
+          "purple sweater",
+          "knit",
+          "knit sweater",
+          "chunky knits",
+          "comfy cozy",
+          "casual",
+          "winter",
+          "sweater weather",
+          "cream sweater"
+        ],
+        "color": [
+          "Purple"
+        ],
+        "multi_colors": "no",
+        "description": "There’s a bright side to rainy days. Instead of moping at the window pane, you get to revel in staying in, because you won’t be cooped up all alone. Feel the romance permeate the room, as you snuggle up in your Rainy Day Romance Sweater, and thank your lucky stars that the weather kept you in. Model is wearing a S/M. • 55% Cotton, 45% Acrylic • Hand Wash Cold • Unlined • Imported",
+        "title": "Rainy Day Romance Dusty Purple Sweater",
+        "ss_clicks": "1646",
+        "color_family": [
+          "Purple"
+        ],
+        "sales_rank": "4054",
+        "ss_sale_price": "46",
+        "season": "Winter",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "23",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "27",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "21",
+        "popularity": "4054",
+        "product_type_unigram": "sweater",
+        "id": "b043f2728667982e9af864233e6b626f"
+      }
+    },
+    {
+      "id": "179450",
+      "mappings": {
+        "core": {
+          "uid": "179450",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-AD-I1-1889P",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_02_22_studio_set_02_8870622_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_02_22_studio_set_02_8870622_large.jpg",
+          "name": "Worth Celebrating Blue Open Shoulder Top",
+          "sku": "C-AD-I1-1889P",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nV00fU01DW0sLAMYDBkMDJhMDZgMDExM2BIL8pMAQC5vAi7",
+        "intellisuggestSignature": "fceb598b7e48b8354f23222ad3704dd8c0f99cdb4604eb5b29cf436780c064bb",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "61",
+        "ss_product_type": "Top",
+        "keywords": [
+          "blue",
+          "top",
+          "spring",
+          "summer",
+          "open shoulder",
+          "cold shoulder",
+          "trendy",
+          "blouse"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "What qualifies as Worth Celebrating these days? A promotion? An engagement? Buying your first house? Well, for people who have all their junk together, that might be the case. And it technically is true for all of us, but for some of us, just making it through the day and not strangling one of our neighbors is worth a beer. Seeing the end of an entire hour and not being just as surprised as everyone else about what comes out of your mouth, totally worthy of at least a bottle of champagne. But making it a whole week and not going Def-Con 4 on anyone who annoys you randomly on the internet ... that deserves the purchasing of this gorgeous Open Shoulder Top. Go on girl, you know you've earned this. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Unlined • Imported",
+        "title": "Worth Celebrating Blue Open Shoulder Top",
+        "ss_clicks": "4347",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "4039",
+        "ss_sale_price": "42",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "All Sale&gt;40% off",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "25.2",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 40% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "44",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "47",
+        "popularity": "4039",
+        "product_type_unigram": "top",
+        "id": "01940ffb426447f3a0a623800df55cda"
+      }
+    },
+    {
+      "id": "174216",
+      "mappings": {
+        "core": {
+          "uid": "174216",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/F-BRK-G7-ANA13",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/298_lcp_5363_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/298_lcp_5363_reddressboutique_large.jpg",
+          "name": "Street Style Black Over-The-Knee Boots",
+          "sku": "F-BRK-G7-ANA13",
+          "brand": "Breckelle's"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw03UK8tZ1N9d19HM0NGYwZDAyZTA2YDAxMTNgSC_KTAEAyQ0JJw",
+        "intellisuggestSignature": "74e18eebc65bc9bfa65ea0c983957d118af42bfb90c1aab0b47bc0a5b624d7ab",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "72",
+        "ss_product_type": "Boots",
+        "keywords": [
+          "boot",
+          "boots",
+          "tall boots",
+          "otk",
+          "over the knee boots",
+          "fancy boots",
+          "dressy",
+          "suede",
+          "faux suede",
+          "black",
+          "black boots",
+          "neutral",
+          "heeled boot",
+          "heel boot"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": "no",
+        "description": "With these boots, you’ll be more than ready to work the streets. No, not like that; get your mind out of the gutter. We meant that these boots are made for more than just walking, they’re made for making you look like a model as you stroll down the avenues like you just walked out of a fashion magazine. • Heel measures 3&quot; • Shaft measures 22&quot; • Opening measures 19&quot; around • Calf measures 14&quot; around • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Street Style Black Over-The-Knee Boots",
+        "ss_clicks": "3144",
+        "size_footwear": [
+          "11",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": "4003",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;30% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "29.4",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 30% off",
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "11",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "67",
+        "quantity_available": "13",
+        "popularity": "4003",
+        "product_type_unigram": "boots",
+        "id": "65a4a21a0f8f96084a6457ed1e2db858"
+      }
+    },
+    {
+      "id": "168102",
+      "mappings": {
+        "core": {
+          "uid": "168102",
+          "price": 82,
+          "msrp": 100,
+          "url": "/product/B-UE-G3-12324",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_2_268_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_268_large.jpg",
+          "name": "Little Lady Gray Handbag",
+          "sku": "B-UE-G3-12324",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0g111XU31jU0MjYyYTBkMDJjMDZgMDExM2BIL8pMAQC4igij",
+        "intellisuggestSignature": "d57ba927064acde4eed71ca0fd11d43577678a3c1ff601b3c1b16964738c5209",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "67",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "Grey Handbag",
+          "Grey",
+          "Gray",
+          "Handbag",
+          "Gray Handbag",
+          "Purse",
+          "Tote",
+          "Bag",
+          "Vegan",
+          "Accessory"
+        ],
+        "color": [
+          "Gray"
+        ],
+        "multi_colors": "no",
+        "description": "Little Lady, you’re looking awfully fine with this Grey Handbag by your side! Where do you find pieces that are so big on style?! This bag features a gold zipper closure, 2 handles, removable strap, exterior zipper pockets, floral print lining, interior zipper pocket, and 2 interior open pockets. Peta approved Vegan. • Purse measures 10&quot; High, 16&quot; Wide, 5&quot; Deep • Handle Drop: 5&quot; • Additional Shoulder Strap Drop: 19&quot;- 22&quot; • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Little Lady Gray Handbag",
+        "ss_clicks": "351",
+        "color_family": [
+          "Gray"
+        ],
+        "sales_rank": "3992",
+        "ss_sale_price": "82",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "40",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "48",
+        "quantity_available": "3",
+        "popularity": "3992",
+        "product_type_unigram": "handbag",
+        "id": "f44f1741ba8196b0ab197a851ba6637b"
+      }
+    },
+    {
+      "id": "170600",
+      "mappings": {
+        "core": {
+          "uid": "170600",
+          "price": 36,
+          "msrp": 50,
+          "url": "/product/C-STC-T2-51514",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/39_lcp_7280_copyright_loganpotterf_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/39_lcp_7280_copyright_loganpotterf_2016_large.jpg",
+          "name": "Wind Me Up Beige Sweater",
+          "sku": "C-STC-T2-51514",
+          "brand": "Staccato"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g0OcdYNMdI1NTQ1NGEwZDAyZzA2YDAxMTNgSC_KTAEAxnsJBQ",
+        "intellisuggestSignature": "d787b593bb07d56bbbf7232fd50c368a94cceb70c2c1ed76ee80c3b115fea436",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "70",
+        "ss_product_type": "Sweater",
+        "keywords": [
+          "sweater",
+          "top",
+          "shirt",
+          "long sleeve",
+          "long sleeve sweater",
+          "laceup sweater",
+          "lace up sweater",
+          "beige",
+          "nude",
+          "cream",
+          "pretty",
+          "trendy",
+          "comfy",
+          "cool",
+          "casual"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": "no",
+        "description": "Wind Me Up and prepare for never-ending style with this beautiful Beige Sweater! It just keeps going and going! This knit sweater features a scoop neck, long sleeves, ribbed hem and cuffs, shirttail hem, and split lace up back with gold metal grommets. Model is wearing a small. • 100% Acrylic • Dry Clean Only • Unlined • Faintly Sheer • Imported",
+        "title": "Wind Me Up Beige Sweater",
+        "sale_price": "10.8",
+        "ss_clicks": "2829",
+        "color_family": [
+          "Beige"
+        ],
+        "condition": "New",
+        "sales_rank": "3980",
+        "ss_sale_price": "36",
+        "product_type": [
+          "All Sale &gt; 70% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": "160",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;70% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "3980",
+        "product_type_unigram": "sweater",
+        "id": "b6ad4446912ac63fcf2255a7866df023"
+      }
+    },
+    {
+      "id": "175907",
+      "mappings": {
+        "core": {
+          "uid": "175907",
+          "price": 22,
+          "msrp": 25,
+          "url": "/product/F-BRK-P2-LEY52",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_3489_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_3489_large.jpg",
+          "name": "Pointe Taken Pink Suede Flats",
+          "sku": "F-BRK-P2-LEY52",
+          "brand": "Breckelle's"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw03UK8tYNMNL1cY00NWIwZDCyYDA2YDAxMTNgSC_KTAEAzBAJSw",
+        "intellisuggestSignature": "aa823dd52e5c83bdeb7ea7986e3251aab857571d5d6662bbbcdd661694e6586d",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "67",
+        "ss_product_type": "Flats",
+        "keywords": [
+          "flat",
+          "pointed flats",
+          "basic flats",
+          "ballet flats",
+          "leather",
+          "leather",
+          "pink",
+          "suede",
+          "basic",
+          "standard",
+          "cute"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "multi_colors": "no",
+        "description": "We love heels as much as the next gal, we really do. But lord do they hurt your feet after wearing them long enough. Give those puppies a break and get yourself a great pair of flats, a stylish pair that you love and that go with a ton of your outfits. And wouldn’t you know … we happen to have just such a pair right here. It’s almost like we read your mind or something! We didn’t, because that would just be creepy, but kismet anyway! • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Pointe Taken Pink Suede Flats",
+        "ss_clicks": "3681",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": "3964",
+        "ss_sale_price": "22",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her&gt;Gifts Under $25",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "11",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "79",
+        "quantity_available": "15",
+        "popularity": "3964",
+        "product_type_unigram": "flats",
+        "id": "c29483336119a6a2a9d3979e39c36bc6"
+      }
+    },
+    {
+      "id": "164606",
+      "mappings": {
+        "core": {
+          "uid": "164606",
+          "price": 40,
+          "msrp": 50,
+          "url": "/product/F-WDL-B3-MIE31",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6483_2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6483_2_large.jpg",
+          "name": "Take Charge Cognac Lace-Up Heels",
+          "sku": "F-WDL-B3-MIE31",
+          "brand": "Wild Diva Lounge"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0w138dF1Mtb19XQ1NmQwZDCyZDA2YDAxMTNgSC_KTAEAylcJNQ",
+        "intellisuggestSignature": "09fb24e253538aa24f36ce5b65d83d5ce6fe456c63c6fa3e5596f1de887761a2",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "65",
+        "ss_product_type": "Heels",
+        "keywords": [
+          "Cognac Lace Up Heels",
+          "Cognac",
+          "Tan",
+          "Chestnut",
+          "Light Brown",
+          "Lace Up",
+          "Lace Up Heels",
+          "Heels",
+          "Cut Outs",
+          "Cut Out Heels",
+          "Stilettos",
+          "Bootie Heels",
+          "Peep Toe"
+        ],
+        "color": [
+          "Brown"
+        ],
+        "multi_colors": "no",
+        "description": "Take Charge of your life in style with these fine Cognac Lace-Up Heels. You’re no longer staying on the sidelines and just letting whatever happens happen. You’re in control and you’ll look the part in these bold heels! These peep toe ankle cage heels feature a lace-up front, a stacked heel, and a zipper at the heel. • Heel measures 3&quot; • Non-Skid Sole • Padded Insole • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Take Charge Cognac Lace-Up Heels",
+        "ss_clicks": "2498",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Brown"
+        ],
+        "sales_rank": "3961",
+        "ss_sale_price": "40",
+        "ss_category_hierarchy": [
+          "All Sale&gt;Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "15",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; Shoes on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "117",
+        "quantity_available": "3",
+        "popularity": "3961",
+        "product_type_unigram": "heels",
+        "id": "190c7603428c501a528fdfabec5000d6"
+      }
+    },
+    {
+      "id": "172998",
+      "mappings": {
+        "core": {
+          "uid": "172998",
+          "price": 44,
+          "msrp": 50,
+          "url": "/product/C-CQ-I7-065SW",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a1369_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a1369_large.jpg",
+          "name": "Ladies Who Brunch Navy Skirt",
+          "sku": "C-CQ-I7-065SW",
+          "brand": "Caribbean Queen"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nUO1PU01zUwMw0OZzBkMDYAIRMTMwOG9KLMFAC92gjo",
+        "intellisuggestSignature": "2ebaa830819b2755f36c6a84ed9d52fb8c4b997f77b731171a2d526f9368f1e7",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "72",
+        "ss_product_type": "Skirt",
+        "keywords": [
+          "skirt",
+          "tweed skirt",
+          "ruffle skirt",
+          "navy",
+          "navy skirt",
+          "skirts"
+        ],
+        "color": [
+          "Navy"
+        ],
+        "multi_colors": "no",
+        "description": "Breakfast won’t do; you’re still in your pajamas, and the waffles are microwaved. And lunch at the burrito place definitely won’t cut it. If you’re looking for a sophisticated meal, brunch is the only way to go. It’s the perfect excuse to sip tea, and look elegant, without missing out on your strawberry-covered french toast. Model is wearing a small. • 80% Polyester, 20% Wool • Dry Clean Only • Imported",
+        "title": "Ladies Who Brunch Navy Skirt",
+        "ss_clicks": "1190",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "3957",
+        "ss_sale_price": "44",
+        "ss_category_hierarchy": [
+          "All Bottoms&gt;Skirts",
+          "All Sale",
+          "All Bottoms",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;Bottoms on Sale"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "22",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Bottoms &gt; Skirts",
+          "All Sale &gt; Bottoms on Sale",
+          "All Sale",
+          "All Bottoms",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "52",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "8",
+        "popularity": "3957",
+        "product_type_unigram": "skirt",
+        "id": "9f9632b3eb6c70324a7754fbdcc61804"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "field": "price",
+      "type": "range",
+      "filtered": false,
+      "step": 5,
+      "range": {
+        "low": 0,
+        "high": 280
+      },
+      "active": {
+        "low": 0,
+        "high": 280
+      }
+    },
+    {
+      "type": "value",
+      "field": "color_family",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 758
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 673
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 532
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 369
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 316
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 303
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 261
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 237
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 202
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 174
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 99
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 79
+        },
+        {
+          "filtered": false,
+          "value": "Grey",
+          "label": "Grey",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "brand",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2B Clothing",
+          "label": "2B Clothing",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "2Hearts",
+          "label": "2Hearts",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4 Sienna",
+          "label": "4 Sienna",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 34
+        },
+        {
+          "filtered": false,
+          "value": "12 PM by Mon Ami",
+          "label": "12 PM by Mon Ami",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "36point5",
+          "label": "36point5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "143 Story",
+          "label": "143 Story",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Aakaa",
+          "label": "Aakaa",
+          "count": 25
+        },
+        {
+          "filtered": false,
+          "value": "Activusa",
+          "label": "Activusa",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Adriana",
+          "label": "Adriana",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 156
+        },
+        {
+          "filtered": false,
+          "value": "After Market",
+          "label": "After Market",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "Amazing Grace",
+          "label": "Amazing Grace",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Amazing Spirit",
+          "label": "Amazing Spirit",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Amazing Sport",
+          "label": "Amazing Sport",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "American Bazi",
+          "label": "American Bazi",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Amor Us",
+          "label": "Amor Us",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Anama",
+          "label": "Anama",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Andrea Bijoux",
+          "label": "Andrea Bijoux",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "ANM",
+          "label": "ANM",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Anne Michelle",
+          "label": "Anne Michelle",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Anzell",
+          "label": "Anzell",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Ark & Co",
+          "label": "Ark & Co",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Aryeh",
+          "label": "Aryeh",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Audrey 3+1",
+          "label": "Audrey 3+1",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "Audry 3+1",
+          "label": "Audry 3+1",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 49
+        },
+        {
+          "filtered": false,
+          "value": "Ayepeach",
+          "label": "Ayepeach",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "B. Sharp",
+          "label": "B. Sharp",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Bamboo",
+          "label": "Bamboo",
+          "count": 71
+        },
+        {
+          "filtered": false,
+          "value": "Ban.do",
+          "label": "Ban.do",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "ban.do",
+          "label": "ban.do",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Banana",
+          "label": "Banana",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "BB Dakota",
+          "label": "BB Dakota",
+          "count": 21
+        },
+        {
+          "filtered": false,
+          "value": "BB Daktota",
+          "label": "BB Daktota",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Beach Joy",
+          "label": "Beach Joy",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Beautifully",
+          "label": "Beautifully",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Beauty Creations",
+          "label": "Beauty Creations",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Bella Marie",
+          "label": "Bella Marie",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Bien Bien",
+          "label": "Bien Bien",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Blu Pepper",
+          "label": "Blu Pepper",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "Blushing Heart",
+          "label": "Blushing Heart",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "BLVD",
+          "label": "BLVD",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Bo Bel/Hello Miss",
+          "label": "Bo Bel/Hello Miss",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Bozzolo",
+          "label": "Bozzolo",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Breckelle's",
+          "label": "Breckelle's",
+          "count": 91
+        },
+        {
+          "filtered": false,
+          "value": "Brekelle's",
+          "label": "Brekelle's",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "BSharp",
+          "label": "BSharp",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Buddy Love",
+          "label": "Buddy Love",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Cals Collection",
+          "label": "Cals Collection",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "ss_category_hierarchy",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 4460
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 1240
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 573
+        },
+        {
+          "filtered": false,
+          "value": "All Accessories",
+          "label": "All Accessories",
+          "count": 473
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 400
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 365
+        },
+        {
+          "filtered": false,
+          "value": "All Jewelry",
+          "label": "All Jewelry",
+          "count": 342
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 322
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 274
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 239
+        },
+        {
+          "filtered": false,
+          "value": "Home & Office Decor",
+          "label": "Home & Office Decor",
+          "count": 220
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 213
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 169
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 157
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 140
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 139
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 125
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 119
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 112
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 112
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 103
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 55
+        },
+        {
+          "filtered": false,
+          "value": "Shop Lookbook",
+          "label": "Shop Lookbook",
+          "count": 30
+        },
+        {
+          "filtered": false,
+          "value": "All Intimates",
+          "label": "All Intimates",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "All Pajamas",
+          "label": "All Pajamas",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "White & Blue Looks",
+          "label": "White & Blue Looks",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Top Rated",
+          "label": "Top Rated",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Outfit",
+          "label": "Shop By Outfit",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 1504
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 2956
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1",
+          "label": "1",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "3",
+          "label": "3",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 46
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 497
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 521
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 509
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 519
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 504
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 109
+        },
+        {
+          "filtered": false,
+          "value": "13",
+          "label": "13",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "15",
+          "label": "15",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "24",
+          "label": "24",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 69
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 58
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 178
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 2802
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 2802
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 2790
+        },
+        {
+          "filtered": false,
+          "value": "L/XL",
+          "label": "L/XL",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 67
+        },
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 351
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 477
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 488
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 488
+        },
+        {
+          "filtered": false,
+          "value": "ONE SIZE",
+          "label": "ONE SIZE",
+          "count": 432
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_dress",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "L/XL",
+          "label": "L/XL",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 2790
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 2802
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 2802
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 67
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 178
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "material",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Vegan Leather",
+          "label": "Vegan Leather",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 386
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "Rubber",
+          "label": "Rubber",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 1353
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 65
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 47
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 67
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 661
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "season",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 577
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 444
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 252
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 39
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "pattern",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 353
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 146
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 128
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 89
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Paisley",
+          "label": "Paisley",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Polka Dot",
+          "label": "Polka Dot",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Camo",
+          "label": "Camo",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Dot",
+          "label": "Dot",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Herringbone",
+          "label": "Herringbone",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "dress_length_name",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 192
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 50
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Below knee",
+          "label": "Below knee",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 109
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 55
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_footwear",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 27
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 351
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 488
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 477
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 498
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 488
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 498
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 488
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 498
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 497
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 92
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "collection",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Above The Fray",
+          "label": "Above The Fray",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Addicted To Love",
+          "label": "Addicted To Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Addicted To Sun",
+          "label": "Addicted To Sun",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Adore Me",
+          "label": "Adore Me",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adventure Ready",
+          "label": "Adventure Ready",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "After Midnight",
+          "label": "After Midnight",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ahead Of The Curve",
+          "label": "Ahead Of The Curve",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "All Day Fun",
+          "label": "All Day Fun",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All In Favor",
+          "label": "All In Favor",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "All Purpose",
+          "label": "All Purpose",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "All The Stripe",
+          "label": "All The Stripe",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All To Myself",
+          "label": "All To Myself",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Almost Famous",
+          "label": "Almost Famous",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Answer To Your Layers",
+          "label": "Answer To Your Layers",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Around The Track",
+          "label": "Around The Track",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "At My Best",
+          "label": "At My Best",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Back To The Basics",
+          "label": "Back To The Basics",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Balancing Act",
+          "label": "Balancing Act",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Basic Instincts",
+          "label": "Basic Instincts",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Basically Perfect",
+          "label": "Basically Perfect",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Basics Of Love",
+          "label": "Basics Of Love",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Bazaar Beauty",
+          "label": "Bazaar Beauty",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Beach Please",
+          "label": "Beach Please",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Beauty In Believing",
+          "label": "Beauty In Believing",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Because Summer",
+          "label": "Because Summer",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Best Of Basics",
+          "label": "Best Of Basics",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Better Than Basic",
+          "label": "Better Than Basic",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Better Than Flowers",
+          "label": "Better Than Flowers",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Bloom Or Bust",
+          "label": "Bloom Or Bust",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Bold Streak",
+          "label": "Bold Streak",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Breaking Rules",
+          "label": "Breaking Rules",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Bright This Way",
+          "label": "Bright This Way",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Bronzed Beauty",
+          "label": "Bronzed Beauty",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "C'est Chic",
+          "label": "C'est Chic",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "California Roots",
+          "label": "California Roots",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Can't Be Tamed",
+          "label": "Can't Be Tamed",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Can't Miss Me",
+          "label": "Can't Miss Me",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Can't Stop The Feeling",
+          "label": "Can't Stop The Feeling",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chart Topping",
+          "label": "Chart Topping",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Chasing Daydreams",
+          "label": "Chasing Daydreams",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chic And Easy",
+          "label": "Chic And Easy",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chic Cityscape",
+          "label": "Chic Cityscape",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Chill Girl",
+          "label": "Chill Girl",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "City Of Stars",
+          "label": "City Of Stars",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Downtown Chic",
+          "label": "Downtown Chic",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dream On",
+          "label": "Dream On",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Dream Street",
+          "label": "Dream Street",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Feeling Accomplished",
+          "label": "Feeling Accomplished",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Gossip Girl",
+          "label": "Gossip Girl",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Got it Bad",
+          "label": "Got it Bad",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "saturation",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 56
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_pants",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1",
+          "label": "1",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "3",
+          "label": "3",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "13",
+          "label": "13",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "24",
+          "label": "24",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 69
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 72
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 58
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {}
+  }
+}

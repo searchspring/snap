@@ -4,9 +4,15 @@ import { DomTargeter } from './DomTargeter';
 import { TextEncoder, TextDecoder } from 'util';
 
 global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+(global as any).TextDecoder = TextDecoder;
 
 import { JSDOM } from 'jsdom';
+
+const wait = (time?: number) => {
+	return new Promise((resolve) => {
+		setTimeout(resolve, time);
+	});
+};
 
 let document: Document;
 
@@ -231,5 +237,107 @@ describe('DomTargeter', () => {
 		expect(document.querySelector('.replaced')).not.toBeNull();
 		expect(document.querySelector('.h')).toBeNull();
 		expect(classNames).toEqual(['before-1', 'after-2', 'prepend-3', 'append-4', 'prepend-5', 'append-6', 'replaced']);
+	});
+
+	it('injects into dynamically added elements with autoRetarget', async () => {
+		document = createDocument(`
+			<div id="content"></div>
+		`);
+
+		const selector: Target = {
+			selector: '.classToLookFor',
+			inject: {
+				action: 'append',
+				element: (target, element) => {
+					const div = document.createElement('div');
+
+					div.className = 'newThing';
+
+					expect(element.className).toBe('classToLookFor');
+
+					div.innerHTML = 'blah';
+
+					return div;
+				},
+			},
+			autoRetarget: true,
+		};
+
+		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+
+		expect(document.querySelector('.classToLookFor')).toBe(null);
+
+		await wait(200);
+
+		document.getElementById('content')?.classList.add('classToLookFor');
+
+		await wait(200);
+
+		expect(document.querySelector('.classToLookFor')).not.toBe(null);
+		expect(document.querySelector('.newThing')?.innerHTML).toBe('blah');
+	});
+
+	it('injects into dynamically added elements with autoRetarget at different times.', async () => {
+		document = createDocument(`
+			<div id="content"></div>
+		`);
+
+		const selectors: Target[] = [
+			{
+				selector: '.classToLookFor',
+				inject: {
+					action: 'append',
+					element: (target, element) => {
+						const div = document.createElement('div');
+
+						div.id = 'newThing';
+
+						expect(element.className).toBe('classToLookFor');
+
+						div.innerHTML = 'blah';
+
+						return div;
+					},
+				},
+				autoRetarget: true,
+			},
+			{
+				selector: '.classToLookFor2',
+				inject: {
+					action: 'append',
+					element: (target, element) => {
+						const div = document.createElement('div');
+
+						expect(element.className).toBe('classToLookFor2');
+
+						div.innerHTML = 'tada';
+
+						return div;
+					},
+				},
+				autoRetarget: true,
+			},
+		];
+
+		new DomTargeter(selectors, (target: Target, elem: Element) => {}, document);
+
+		expect(document.querySelector('.classToLookFor')).toBe(null);
+
+		await wait(100);
+		document.getElementById('content')?.classList.add('classToLookFor');
+
+		await wait(200);
+		expect(document.querySelector('.classToLookFor')).not.toBe(null);
+		expect(document.querySelector('#newThing')?.innerHTML).toBe('blah');
+
+		await wait(100);
+		document.getElementById('newThing')?.classList.add('classToLookFor2');
+
+		await wait(100);
+		expect(document.querySelector('#newThing')?.innerHTML).toBe('blah');
+
+		await wait(300);
+		expect(document.querySelector('.classToLookFor2')).not.toBe(null);
+		expect(document.querySelector('#newThing')?.innerHTML).toBe('blah<div>tada</div>');
 	});
 });

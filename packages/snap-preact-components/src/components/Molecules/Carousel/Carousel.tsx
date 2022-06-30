@@ -5,21 +5,22 @@ import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-import 'swiper/swiper.min.css';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	carousel: ({ theme, vertical }) =>
+	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
-			maxHeight: vertical ? '100%' : null,
+			maxHeight: vertical ? '100%' : undefined,
 			margin: 0,
 			padding: 0,
 			overflow: 'hidden',
@@ -56,6 +57,9 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': {
+					display: 'none',
+				},
 			},
 			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
@@ -70,9 +74,35 @@ const CSS = {
 			'.swiper-container': {
 				display: 'flex',
 				flexDirection: 'column',
+				marginLeft: 'auto',
+				marginRight: 'auto',
+				position: 'relative',
+				overflow: 'hidden',
+				listStyle: 'none',
+				padding: 0,
+				zIndex: '1',
+			},
+			'.swiper-container-vertical': {
+				'.swiper-wrapper': {
+					flexDirection: 'column',
+				},
 			},
 			'.swiper-wrapper': {
 				order: 0,
+				position: 'relative',
+				width: '100%',
+				height: '100%',
+				zIndex: '1',
+				display: 'flex',
+				transitionProperty: 'transform',
+				boxSizing: 'content-box',
+			},
+			'.swiper-slide': {
+				flexShrink: 0,
+				width: '100%',
+				height: '100%',
+				position: 'relative',
+				transitionProperty: 'transform',
 			},
 			'.swiper-pagination': {
 				display: 'flex',
@@ -96,10 +126,19 @@ const CSS = {
 					background: theme?.colors?.primary || '#000',
 				},
 			},
+			'.swiper-container-pointer-events': {
+				touchAction: 'pan-y',
+				'&.swiper-container-vertical': {
+					touchAction: 'pan-x',
+				},
+			},
+			'.swiper-slide-invisible-blank': {
+				visibility: 'hidden',
+			},
 		}),
 };
 
-const defaultCarouselBreakpoints = {
+export const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -127,7 +166,7 @@ const defaultCarouselBreakpoints = {
 	},
 };
 
-const defaultVerticalCarouselBreakpoints = {
+export const defaultVerticalCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -139,17 +178,36 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: CarouselProps = {
+	let props: CarouselProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical
+			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
+		autoAdjustSlides: true,
 		// global theme
 		...globalTheme?.components?.carousel,
 		//props
 		...properties,
 		...properties.theme?.components?.carousel,
 	};
+
+	const displaySettings = useDisplaySettings(props.breakpoints!);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+
+		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
+			displaySettings.slidesPerView = props.children.length;
+			displaySettings.slidesPerGroup = props.children.length;
+			displaySettings.loop = false;
+		}
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
 	const {
 		children,
@@ -160,6 +218,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		prevButton,
 		hideButtons,
 		vertical,
+		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -191,93 +250,90 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.carousel({ theme, vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		children && (
-			<CacheProvider>
-				<div
-					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					{...styling}
-					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
-				>
-					{!hideButtons && (
-						<div className="ss__carousel__prev-wrapper">
-							<div
-								className="ss__carousel__prev"
-								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
-							>
-								{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
-							</div>
-						</div>
-					)}
-
-					<Swiper
-						centerInsufficientSlides={true}
-						onInit={(swiper) => {
-							//@ts-ignore
-							swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-							//@ts-ignore
-							swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
-							if (onInit) {
-								onInit(swiper);
-							}
-						}}
-						onClick={(swiper, e) => {
-							onClick && onClick(swiper, e);
-						}}
-						direction={vertical ? 'vertical' : 'horizontal'}
-						loop={loop}
-						breakpoints={breakpoints}
-						pagination={
-							pagination
-								? {
-										clickable: true,
-								  }
-								: false
-						}
-						{...additionalProps}
+	return children?.length ? (
+		<CacheProvider>
+			<div
+				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+				{...styling}
+				className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
+			>
+				<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
+					<div
+						className="ss__carousel__prev"
+						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 					>
-						{children.map((child) => {
-							return <SwiperSlide>{child}</SwiperSlide>;
-						})}
-					</Swiper>
-
-					{!hideButtons && (
-						<div className="ss__carousel__next-wrapper">
-							<div
-								className="ss__carousel__next"
-								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
-								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
-							>
-								{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
-							</div>
-						</div>
-					)}
+						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
+					</div>
 				</div>
-			</CacheProvider>
-		)
+
+				<Swiper
+					centerInsufficientSlides={true}
+					onInit={(swiper) => {
+						//@ts-ignore
+						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
+						//@ts-ignore
+						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+						if (onInit) {
+							onInit(swiper);
+						}
+					}}
+					onClick={(swiper, e) => {
+						onClick && onClick(swiper, e);
+					}}
+					direction={vertical ? 'vertical' : 'horizontal'}
+					loop={loop}
+					pagination={
+						pagination
+							? {
+									clickable: true,
+							  }
+							: false
+					}
+					{...additionalProps}
+					{...displaySettings}
+				>
+					{children.map((child) => {
+						return <SwiperSlide>{child}</SwiperSlide>;
+					})}
+				</Swiper>
+
+				<div className={classnames('ss__carousel__next-wrapper', { 'ss__carousel__next-wrapper--hidden': hideButtons })}>
+					<div
+						className="ss__carousel__next"
+						ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+						onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
+					>
+						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
+					</div>
+				</div>
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface CarouselProps extends ComponentProps {
-	breakpoints?: any;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
 	vertical?: boolean;
 	pagination?: boolean;
-	onClick?: (swiper, e) => void;
-	onNextButtonClick?: (e) => void;
-	onPrevButtonClick?: (e) => void;
-	onInit?: (swiper) => void;
-	children?: JSX.Element[];
+	autoAdjustSlides?: boolean;
+	onClick?: (swiper: SwiperCore, e: MouseEvent | TouchEvent | PointerEvent) => void;
+	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	onPrevButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	onInit?: (swiper: SwiperCore) => void;
+	children: JSX.Element[];
 }
 
 interface CarouselSubProps {

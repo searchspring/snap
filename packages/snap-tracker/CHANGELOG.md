@@ -3,6 +3,299 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.7](https://github.com/searchspring/snap/compare/v0.27.6...v0.27.7) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.6](https://github.com/searchspring/snap/compare/v0.27.5...v0.27.6) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.5](https://github.com/searchspring/snap/compare/v0.27.4...v0.27.5) (2022-05-19)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.4](https://github.com/searchspring/snap/compare/v0.27.3...v0.27.4) (2022-05-09)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.3](https://github.com/searchspring/snap/compare/v0.27.2...v0.27.3) (2022-05-09)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.2](https://github.com/searchspring/snap/compare/v0.27.1...v0.27.2) (2022-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* add parent traversal for attribute tracking, refactor instantiator services ([dc61f52](https://github.com/searchspring/snap/commit/dc61f5212185b814ba5f8f02840a79d7831062e7))
+* **tracker:** add href attribute to attributeList ([1fec898](https://github.com/searchspring/snap/commit/1fec8986843afbddbd466c91191176924114fd11))
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.22.0](https://github.com/searchspring/snap/compare/v0.21.1...v0.22.0) (2022-03-09)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.21.1](https://github.com/searchspring/snap/compare/v0.21.0...v0.21.1) (2022-03-01)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.20.4](https://github.com/searchspring/snap/compare/v0.20.3...v0.20.4) (2022-02-02)
+
+
+### Bug Fixes
+
+* **tracker:** remove preventDefault from attribute click event listener ([09734c9](https://github.com/searchspring/snap/commit/09734c9252dbaed8d9a453e8de7ed1c0f55accce))
+
+
+
+
+
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **tracker.ts:** added config for tracker namespace, force all controllers to use same namespace ([6f8bd2f](https://github.com/searchspring/snap/commit/6f8bd2ff6ca04dabff5aa70f363452f0b287fc07))
+
+
+### Features
+
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **tracker:** finalize attribute tracking for add to cart, remove, clear ([b5bf033](https://github.com/searchspring/snap/commit/b5bf033d6ccf171980bafa1cd9b4b7ba93015ac0))
+* **tracker:** wip: add initial cart attribute tracking ([5036896](https://github.com/searchspring/snap/commit/5036896f1022ccd9801946559e0762de36668363))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** use native localStorage for getUserId ([782a285](https://github.com/searchspring/snap/commit/782a285748e8ae7272f1462cfd2ca3f339ea7d0f))
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** refactor getSessionId to match is.js native interface instead of StorageStore ([b5224de](https://github.com/searchspring/snap/commit/b5224de77eedc45c204af3e0bf64159c0b7891c6))
+
+
+
+
+
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Features
+
+* **tracker:** adding ability to track using script tags ([b655062](https://github.com/searchspring/snap/commit/b65506258ebc8845af0fb5c19efbf159e045e60d))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Breadcrumbs } from './Breadcrumbs';
+import { BreadcrumbProps, Breadcrumbs } from './Breadcrumbs';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Breadcrumbs/readme.md';
 
@@ -44,9 +44,7 @@ export default {
 	},
 };
 
-const Template = (args) => <Breadcrumbs {...args} />;
-
-export const categoryPage = Template.bind({});
+export const categoryPage = (args: BreadcrumbProps) => <Breadcrumbs {...args} />;
 categoryPage.args = {
 	data: [
 		{
@@ -68,7 +66,7 @@ categoryPage.args = {
 	separator: '/',
 };
 
-export const SearchPage = Template.bind({});
+export const SearchPage = (args: BreadcrumbProps) => <Breadcrumbs {...args} />;
 SearchPage.args = {
 	data: [
 		{

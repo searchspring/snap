@@ -12,7 +12,7 @@
         integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <link rel="stylesheet" href="website.css">
 
-    <script id="searchspring-context" src="dist/bundle.js">
+    <script id="searchspring-context" src="bundle.js">
 		shopper = {
 			id: 'snapdev'
 		};
@@ -209,25 +209,20 @@
             </div>
         </div>
     </footer>
-    <script>
-        try {
-            window.searchspring.track.order.transaction({
-                data: {
-                    items: [
-                    {
-                        sku: "C-BP-G7-B1469",
-                        qty: "1",
-                        price: "22"
-                    },
-                    {
-                        sku: "C-VJ-P2-32007",
-                        qty: "1",
-                        price: "39"
-                    },
-                ]
-                }
-            })
-        } catch (e){}
+
+    <script type="searchspring/track/order/transaction">
+        items = [
+            {
+                sku: "C-BP-G7-B1469",
+                qty: "1",
+                price: "22"
+            },
+            {
+                sku: "C-VJ-P2-32007",
+                qty: "1",
+                price: "39"
+            },
+        ];
     </script>
 </body>
 

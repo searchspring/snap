@@ -6,7 +6,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
 	formattedNumber: () => css({}),
@@ -42,12 +42,13 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		symbolAfter,
 	});
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.formattedNumber(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return raw ? (
 		<>{formattedNumber}</>
 	) : (

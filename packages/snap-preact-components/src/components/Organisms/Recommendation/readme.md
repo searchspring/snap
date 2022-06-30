@@ -2,7 +2,7 @@
 
 Renders a carousel of product recommendations, built using the Carousel Component.
 
-If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
+If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` (or `results` prop) to avoid unexpected tracking behaviour.
 
 Any modification to the results array and data are recommended to be made using an `afterSearch` and/or `afterStore` event via the Controller instead of making modifications in the component.
 
@@ -14,7 +14,7 @@ Any modification to the results array and data are recommended to be made using 
 
 ## Usage
 
-Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -27,6 +27,15 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 
 ```jsx
 <Recommendation controller={controller} loop={true} />
+```
+
+### results
+The `results` prop specifies a reference to the results store array to use instead of the default `controller.store.results`
+
+If using children, the provided children elements array length and order must match the results stored in the `results` prop to avoid unexpected tracking behaviour.
+
+```jsx
+<Recommendation controller={controller} results={controller.store.results} />
 ```
 
 ### title
@@ -76,7 +85,7 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however any [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can also be specified. 
+The default configuration contains the following properties, however **`any Recommendation props`**, or [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can also be specified. 
 
 `slidesPerView` - number of products to display per page
 
@@ -110,6 +119,14 @@ const defaultRecommendationBreakpoints = {
 		slidesPerView: 5,
 		slidesPerGroup: 5,
 		spaceBetween: 10,
+	},
+};
+
+const defaultVerticalRecommendationBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
 	},
 };
 ```

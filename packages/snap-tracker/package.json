@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-tracker",
-	"version": "0.12.0",
+	"version": "0.29.0",
 	"description": "Snap Tracker",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"repository": "https://github.com/searchspring/snap",
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/searchspring"
+		"access": "public"
 	},
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
@@ -20,10 +20,11 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-store-mobx": "^0.12.0",
-		"@searchspring/snap-toolbox": "^0.12.0",
-		"deepmerge": "^4.2.2",
-		"uuid": "^8.3.2"
+		"@searchspring/snap-store-mobx": "^0.29.0",
+		"@searchspring/snap-toolbox": "^0.29.0",
+		"@types/uuid": "8.3.4",
+		"deepmerge": "4.2.2",
+		"uuid": "8.3.2"
 	},
 	"sideEffects": false,
 	"files": [

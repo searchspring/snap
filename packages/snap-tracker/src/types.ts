@@ -4,7 +4,12 @@ export type TrackerGlobals = {
 	siteId: string;
 };
 
-export interface BeaconPayload {
+export type TrackerConfig = {
+	id?: string;
+	framework?: string;
+};
+
+export type BeaconPayload = {
 	type: BeaconType;
 	category: BeaconCategory;
 	context?: BeaconContext;
@@ -19,7 +24,7 @@ export interface BeaconPayload {
 		| Record<string, never>;
 	id?: string;
 	pid?: string | null;
-}
+};
 
 export enum BeaconType {
 	PRODUCT = 'product',
@@ -27,6 +32,7 @@ export enum BeaconType {
 	ORDER = 'transaction',
 	LOGIN = 'login',
 	CLICK = 'click',
+	ERROR = 'error',
 	CUSTOM = 'custom',
 
 	/** For Profiles Recommendations */
@@ -47,6 +53,7 @@ export enum BeaconCategory {
 	PERSONALIZATION = 'searchspring.personalization',
 	RECOMMENDATIONS = 'searchspring.recommendations.user-interactions',
 	INTERACTION = 'searchspring.user-interactions',
+	RUNTIME = 'searchspring.js.runtime',
 	CUSTOM = 'custom',
 }
 
@@ -58,17 +65,32 @@ export interface BeaconContext {
 	website: {
 		trackingCode: string;
 	};
+	attribution?: {
+		type?: string;
+		id?: string;
+	};
 }
 
 export interface BeaconMeta {
 	initiator: {
 		lib: string;
 		'lib.version': string;
+		'lib.framework': string;
 	};
 }
 
 export interface ShopperLoginEvent {
 	id: string;
+}
+export interface TrackErrorEvent {
+	userAgent?: string;
+	href?: string;
+	filename?: string;
+	stack?: string;
+	message?: string;
+	colno?: number;
+	lineno?: number;
+	timeStamp?: number;
 }
 export interface ProductViewEvent {
 	sku?: string;
@@ -78,9 +100,7 @@ export interface CartViewEvent {
 	items: Product[];
 }
 
-export interface Product {
-	sku?: string;
-	childSku?: string;
+export interface Product extends ProductViewEvent {
 	qty: string | number;
 	price: string | number;
 }
@@ -91,7 +111,17 @@ export interface OrderTransactionEvent {
 	city?: string;
 	state?: string;
 	country?: string;
+	items: Product[];
+}
 
+export interface OrderTransactionData {
+	order?: {
+		id?: string | number;
+		total?: string | number;
+		city?: string;
+		state?: string;
+		country?: string;
+	};
 	items: Product[];
 }
 
@@ -131,20 +161,29 @@ export interface CustomBeaconEvent {
 	[key: string]: any;
 }
 
+export type PreflightRequestModel = {
+	userId: string;
+	siteId: string;
+	shopper?: string;
+	cart?: string[];
+	lastViewed?: string[];
+};
+
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
+	error: (data: TrackErrorEvent) => BeaconEvent | undefined;
 	shopper: {
-		login: (details: { data: ShopperLoginEvent; siteId?: string }) => BeaconEvent;
+		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	product: {
-		view: (details: { data: ProductViewEvent; siteId?: string }) => BeaconEvent;
-		click: (details: { data: ProductClickEvent; siteId?: string }) => BeaconEvent;
+		view: (data: ProductViewEvent, siteId?: string) => BeaconEvent | undefined;
+		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (details: { data: CartViewEvent; siteId?: string }) => BeaconEvent;
+		view: (data: CartViewEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	order: {
-		transaction: (details: { data: OrderTransactionEvent; siteId?: string }) => BeaconEvent;
+		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent | undefined;
 	};
 }
 

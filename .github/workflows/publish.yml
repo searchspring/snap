@@ -22,9 +22,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 15
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@searchspring'
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -41,17 +40,31 @@ jobs:
 
       - name: Install packages
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
       - name: Build
         run: | 
           npm run build
 
       - name: Tests
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run test
 
       - name: Publish packages
         run: npm run publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SNAPFU_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Generate Metrics Files
+        run: npm run build:metrics
+
+      - name: Upload Metrics Files to S3
+        run: aws s3 sync --region us-east-1 ./metrics/data s3://datawarehouse-stage/team-metrics-import/

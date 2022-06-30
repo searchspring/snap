@@ -3,6 +3,308 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **client:** fixing deferred resolve ordering when using `options.order` ([d74df0a](https://github.com/searchspring/snap/commit/d74df0a09b51095887460bdf934cce33afa1a3d7))
+
+
+
+
+
+## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
+
+
+### Bug Fixes
+
+* **client:** deleting the batch as soon as it begins execution so that new requests don't attach ([35ebeb5](https://github.com/searchspring/snap/commit/35ebeb535e2aba6d4f0bd8cb71e2b5473b2a9dd9))
+
+
+
+
+
+## [0.27.7](https://github.com/searchspring/snap/compare/v0.27.6...v0.27.7) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.27.6](https://github.com/searchspring/snap/compare/v0.27.5...v0.27.6) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.27.5](https://github.com/searchspring/snap/compare/v0.27.4...v0.27.5) (2022-05-19)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.27.4](https://github.com/searchspring/snap/compare/v0.27.3...v0.27.4) (2022-05-09)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.27.3](https://github.com/searchspring/snap/compare/v0.27.2...v0.27.3) (2022-05-09)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batchRecommendations function duplicating params ([f13640c](https://github.com/searchspring/snap/commit/f13640c456d378d30b33843dab66d12611137f6c))
+
+
+
+
+
+## [0.27.2](https://github.com/searchspring/snap/compare/v0.27.1...v0.27.2) (2022-05-05)
+
+
+### Bug Fixes
+
+* **searchrequest:** allow queries with leading and trailing spaces ([3cac19d](https://github.com/searchspring/snap/commit/3cac19d8667ff6b1126be6676d10eb4e648c7572))
+
+
+
+
+
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batched recommendations not spreading all params ([7b59ad8](https://github.com/searchspring/snap/commit/7b59ad85c0a7b5721e66e76c4dac4f981c50507f))
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Features
+
+* add matchType to QueryStore and supporting client transform ([2f01e81](https://github.com/searchspring/snap/commit/2f01e81c0fdf9a1f6cef7203f07d536ae91c8412))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.22.0](https://github.com/searchspring/snap/compare/v0.21.1...v0.22.0) (2022-03-09)
+
+
+### Features
+
+* **client:** adding 'facets.autoDrillDown' request parameter to transformer ([1726235](https://github.com/searchspring/snap/commit/1726235c56ceef0b3bdaa28efe0a0e1fa5229241))
+
+
+
+
+
+## [0.21.1](https://github.com/searchspring/snap/compare/v0.21.0...v0.21.1) (2022-03-01)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.20.4](https://github.com/searchspring/snap/compare/v0.20.3...v0.20.4) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **client:** batch recommendations by siteId instead of params ([36d7f84](https://github.com/searchspring/snap/commit/36d7f84f5162b4b9eaade51be92e18d3134dbb9f))
+
+
+### Features
+
+* add batched config and context setting to disable batching ([d4c0ac2](https://github.com/searchspring/snap/commit/d4c0ac28d1bd220df0fac948dbb77b4dc5c4504e))
+* **networkcache.ts:** added network request caching and support to config ([bc11c14](https://github.com/searchspring/snap/commit/bc11c14e92119f204bbbd1c27f51709e8d49fe92))
+* **networkcache:** added memory caching ability to networkcache, removed meta getter, refactoring ([e70744d](https://github.com/searchspring/snap/commit/e70744d4a8749435cff1e0fcc599e5a2d5c30c6c))
+* **resultstore:** add children variant support to resultStore ([a911b6f](https://github.com/searchspring/snap/commit/a911b6fe12ef1b2d036b1198aecb502887b54be8))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **hybrid.ts:** use suggested query before spell corrected query ([a8792ce](https://github.com/searchspring/snap/commit/a8792cea26b3659654792d19541405e652a7e0e5))
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **searchrequest:** add missing tracking.domain search request param ([45afe2d](https://github.com/searchspring/snap/commit/45afe2d089b0d172290e36854a89998bb607c019))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 **Note:** Version bump only for package @searchspring/snap-client

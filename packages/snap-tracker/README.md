@@ -8,13 +8,6 @@ The Snap Tracker service is responsible for sending beacon events.
 
 Snap Tracker is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
-<details>
-	<summary>Package dependencies hierarchy</summary>
-	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true"/>
-</details>
-<br>
-
 ## Installation
 
 ```bash
@@ -38,7 +31,7 @@ const controller = new SearchController(config, {
 });
 
 console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
-console.log(tracker.track.product.click === window.searchspring.track.product.click) // true
+console.log(tracker.track.product.click === window.searchspring.tracker.track.product.click) // true
 ```
 
 ## Standalone usage
@@ -55,37 +48,108 @@ const payload = {
         href: '/product123'
     }
 };
-window.searchspring.track.event(payload)
+tracker.track.event(payload)
+```
+
+## Tracking Events with DomTargeter
+As an alternative method for tracking events, the Tracker utilizes the `DomTargeter` to look for script tags on the current page. These script tags must have a specific `type` attribute and data contents for the tracking to be used. These tracking script blocks ensure tracking events are sent when using asynchronous script execution and must be on the page prior to the `DOMContentLoaded` event to be picked up by initial targeting. If the script blocks are added after this event, the `retarget` method must be invoked.
+
+### `retarget` method
+This method will call the `retarget` method on all `DomTargeters` set in the Tracker. Typically this would be used when new tracking script blocks have been added to the page after initial targeting.
+
+### Shopper Login Script Block
+
+```html
+<script type="searchspring/track/shopper/login">
+    shopper = {
+		id: 'snapdev',
+	};
+</script>
+```
+
+### Product View Script Block
+
+```html
+<script type="searchspring/track/product/view">
+    item = {
+        sku: 'product123',
+        childSku: 'product123_a',
+    };
+</script>
+```
+
+### Cart View Script Block
+
+```html
+<script type="searchspring/track/cart/view">
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ];
+</script>
+```
+
+### Order Transaction Script Block
+
+```html
+<script type="searchspring/track/order/transaction">
+    order = {
+        id: '123456',
+        total: '31.97',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'US',
+    };
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ];
+</script>
 ```
 
 ## `track` methods
-The Tracker contains various tracking methods available on the `track` object. This object is exposed to the browser's `window` via the first Snap Controller that has been instantiated. This will use the `siteId` that has been provided to the Snap Tracker instance of the respective Controller Services.
+The Tracker object is exposed to the browser's `window` via the first Snap Controller that has been instantiated. This will use the `siteId` that has been provided to the Snap Tracker instance of the respective Controller Services. The Tracker contains various tracking methods available on the `track` object within it. 
 
 ```typescript
-window.searchspring.track
+window.searchspring.tracker.track
 ```
 
-Each tracking method expects an object. This object must contain a `data` key and an object containing the tracking data. 
+Each tracking method expects a data object which contains different attributes depending on the method.
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    }
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+});
 ```
 
 If a bundle is using multiple Snap Controllers with different `siteId`, an optional `siteId` parameter can be specified to overwrite any event `siteId`
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    },
-    siteId: 'abc123'
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+}, 'abc123');
 ```
 
 ### Generic Event `track.event`
@@ -102,7 +166,7 @@ const payload = {
         href: '/product123'
     }
 };
-window.searchspring.track.event(payload)
+tracker.track.event(payload)
 ```
 
 #### Event Payload
@@ -135,12 +199,37 @@ const payload = {
 
 ```
 
+### Error Event `track.error`
+Tracks error events. Parameter expects a payload with various properties derived from an `ErrorEvent` object.
+Requires at least a `stack` or `message` to be provided.
+
+```typescript
+const handleErrorTracking = (event: ErrorEvent) :void => {
+    const { filename, colno, lineno, error: { stack }, message, timeStamp } = event;
+    const userAgent = navigator.userAgent;
+    const href = window.location.href;
+
+    const beaconPayload: TrackErrorEvent = {
+        userAgent,
+        href,
+        filename,
+        stack,
+        message,
+        colno,
+        lineno,
+        timeStamp,
+    };
+
+    tracker.track.error(beaconPayload);
+}
+```
+
 ### Product Click `track.product.click`
 Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method. Various Snap controllers will expose these tracking events differently, see the controller documentation for details. 
 
 ```jsx
 searchController.store.results.map(result)=>{(
-    <a href={core.url} onMouseDown={(e)=>{result.track.click(e)}}>
+    <a href={core.url} onMouseDown={(e)=>{searchController.track.product.click(e, result)}}>
 )}
 ```
 
@@ -155,25 +244,21 @@ const searchController = new SearchController({
     ...
 }):
 
-window.searchspring.track.product.click({
-    data: {
-        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
-        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
-        href: '/product123',
-    }
-})
+tracker.track.product.click({
+    intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+    intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+    href: '/product123',
+});
 ```
 
 ### Product View `track.product.view`
 Tracks product page views. Should be invoked from a product detail page. A `sku` and/or `childSku` are required.
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    }
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+});
 ```
 
 ### Shopper Login `track.shopper.login`
@@ -181,76 +266,74 @@ Tracks user login and sets `context.shopperId` value. Should be invoked when a u
 
 ```typescript
 const shopperId = "snapdev"
-window.searchspring.track.shopper.login({
-    data: {
-        id: shopperId
-    }
-})
+tracker.track.shopper.login({
+    id: shopperId
+});
 ```
 
 ### Cart View `track.cart.view`
 Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
 
 ```typescript
-window.searchspring.track.cart.view({
-    data: {
-        items: [
-            {
-                sku: 'product123',
-                childSku: 'product123_a',
-                qty: '1',
-                price: '9.99',
-            },
-            {
-                sku: 'product456',
-                childSku: 'product456_a',
-                qty: '2',
-                price: '10.99',
-            },
-        ]
-    }
-})
+tracker.track.cart.view({
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ]
+});
 ```
 
 ### Order Transaction `track.order.transaction`
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
-`orderId` - (optional) order id
+`order` - (optional) object containing the following
 
-`total` - (optional) sub total of all items
+`order.id` - (optional) order id
 
-`city` - (optional) city name
+`order.otal` - (optional) sub total of all items
 
-`state` - (optional) 2 digit state abbreviation (US only)
+`order.city` - (optional) city name
 
-`country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
+`order.state` - (optional) 2 digit state abbreviation (US only)
 
-`items` - required array of items - same object provided to `track.cart.view` event
+`order.country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
+
+`order.items` - required array of items - same object provided to `track.cart.view` event
 
 ```typescript
-window.searchspring.track.order.transaction({
-    data: {
-        orderId: '123456',
+tracker.track.order.transaction({
+    order: {
+        id: '123456',
         total: '31.97',
         city: 'Los Angeles',
         state: 'CA',
         country: 'US',
-        items: [
-            {
-                sku: 'product123',
-                childSku: 'product123_a',
-                qty: '1',
-                price: '9.99'
-            },
-            {
-                sku: 'product456',
-                childSku: 'product456_a',
-                qty: '2',
-                price: '10.99'
-            },
-        ]
-    }
-})
+    },
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ]
+});
 ```
 
 ## Tracker properties
@@ -273,14 +356,6 @@ tracker.localStorage.set('key', 'value')
 tracker.localStorage.get('key') // 'value'
 ```
 
-### `sessionStorage` property
-A reference to the StorageStore object for accessing Tracker session storage.
-
-```typescript
-const tracker = new Tracker();
-tracker.sessionStorage.set('key', 'value')
-tracker.sessionStorage.get('key') // 'value'
-```
 
 ### `context` property
 The `context` property is generated at the time of instantiating Tracker. It is part of each event payload and provides context of the event.
@@ -314,7 +389,7 @@ The `isSending` property contains the return value from `setTimeout` and when de
 The `namespace` property contains the Tracker namespace. Invoking this method is only required if a bundle contains multiple Tracker instances. 
 
 ### `track` property
-The `track` property contains various tracking events. See `track` methods section above. 
+The `track` property contains various tracking events. See `track` methods section above.
 
 ### `getUserId` method
 Returns an object containing the `userId` stored in the `ssUserId` cookie (with a fallback to localstorage.) If key doesn't exist, a new ID will be generated, saved to cookie/localstorage, and returned. 
@@ -346,24 +421,71 @@ console.log(tracker.getShopperId())
 // { shopperId: 'shopper0001' }
 ```
 
-### `getLastViewedItems` method
-Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+### `cookies` property
+The `cookies` property provides access to the `cart` and `viewed` tracking cookies.
 
-```typescript
-const tracker = new Tracker();
-
-console.log(tracker.getViewedItems()) 
-// ['sku1', 'sku2']
-```
-
-
-### `getCartItems` method
+#### `cookies.cart.get` method
 Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
 
 ```typescript
 const tracker = new Tracker();
 
-console.log(tracker.getCartItems()) 
+console.log(tracker.cookies.cart.get()) 
+// ['sku1', 'sku2']
+```
+
+#### `cookies.cart.add` method
+Provides a means of adding cart products to the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.cart.get());
+// ['sku1', 'sku2']
+
+console.log(tracker.cookies.cart.add(['sku3']));
+// ['sku1', 'sku2', 'sku3']
+```
+
+#### `cookies.cart.remove` method
+Provides a means for removing `skus` from the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.cart.get());
+// ['sku1', 'sku2']
+
+tracker.cookies.cart.remove(['sku1']);
+// ['sku2']
+```
+
+#### `cookies.cart.set` method
+Provides a means of setting the `ssCartProducts` cookie via an array of product `skus`.
+
+```typescript
+const tracker = new Tracker();
+
+tracker.cookies.cart.set(['sku1', 'sku2']);
+// ['sku1', 'sku2']
+```
+
+#### `cookies.cart.clear` method
+Empties the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+tracker.cookies.cart.clear();
+```
+
+#### `cookies.viewed.get` method
+Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.viewed.get());
 // ['sku1', 'sku2']
 ```
 

@@ -14,15 +14,6 @@ Snap Store MobX requires the following dependencies as services:
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)
 
-<details>
-	<summary>Package dependencies hierarchy</summary>
-	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true" />
-</details>
-<br>
-
-
-
 ## Installation
 
 ```bash

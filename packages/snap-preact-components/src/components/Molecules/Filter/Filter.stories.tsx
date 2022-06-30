@@ -9,6 +9,9 @@ import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
 import Readme from '../Filter/readme.md';
 
+import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import type { SearchController } from '@searchspring/snap-controller';
+
 export default {
 	title: `Molecules/Filter`,
 	component: Filter,
@@ -23,6 +26,15 @@ export default {
 		},
 	},
 	argTypes: {
+		filter: {
+			description: 'Filter store object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: { type: 'object' },
+		},
 		facetLabel: {
 			description: 'Filter field',
 			table: {
@@ -34,7 +46,6 @@ export default {
 		},
 		valueLabel: {
 			description: 'Filter value',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'string',
@@ -43,7 +54,7 @@ export default {
 			control: { type: 'text' },
 		},
 		url: {
-			description: 'URL translator object',
+			description: 'URL manager object',
 			table: {
 				type: {
 					summary: 'object',
@@ -107,11 +118,12 @@ const snapInstance = Snapify.search({
 				type: 'value',
 				field: 'color_family',
 				value: 'Blue',
-			},
+			} as SearchRequestModelFilterValue,
 		],
 	},
 });
-const Template = (args: FilterProps, { loaded: { controller } }) => (
+
+export const Default = (args: FilterProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
 	<Filter
 		{...args}
 		facetLabel={controller?.store?.facets.filter((facet) => facet.type === FacetType.VALUE).shift().label}
@@ -124,7 +136,6 @@ const Template = (args: FilterProps, { loaded: { controller } }) => (
 	/>
 );
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -134,7 +145,19 @@ Default.loaders = [
 	},
 ];
 
-export const NoFacetLabel = Template.bind({});
+export const NoFacetLabel = (args: FilterProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Filter
+		{...args}
+		facetLabel={controller?.store?.facets.filter((facet) => facet.type === FacetType.VALUE).shift().label}
+		valueLabel={
+			controller?.store?.facets
+				.filter((facet) => facet.type === FacetType.VALUE)
+				.shift()
+				.values.shift().value
+		}
+	/>
+);
+
 NoFacetLabel.loaders = [
 	async () => {
 		await snapInstance.search();

@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, featureFlags, version } from '@searchspring/snap-toolbox';
+import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -18,8 +18,11 @@ import {
 	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
-	OrderTransactionEvent,
+	TrackErrorEvent,
+	OrderTransactionData,
 	Product,
+	TrackerConfig,
+	PreflightRequestModel,
 } from './types';
 
 const BATCH_TIMEOUT = 150;
@@ -30,64 +33,169 @@ const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
-const VIEWED_PRODUCTS = 'ssViewedProducts';
-const MAX_VIEWED_COUNT = 15;
 const CART_PRODUCTS = 'ssCartProducts';
+const VIEWED_PRODUCTS = 'ssViewedProducts';
+const MAX_VIEWED_COUNT = 20;
+const MAX_PARENT_LEVELS = 3;
+
+const defaultConfig: TrackerConfig = {
+	id: 'track',
+	framework: 'snap',
+};
 
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
-	sessionStorage: StorageStore;
 	context: BeaconContext;
-	isSending: number;
-	namespace = '';
+	isSending: number | undefined;
 
-	constructor(globals: TrackerGlobals) {
+	private config: TrackerConfig;
+	private targeters: DomTargeter[] = [];
+
+	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
+		this.config = deepmerge(defaultConfig, config || {});
+
 		this.globals = globals;
-		this.setNamespace();
+
+		this.localStorage = new StorageStore({
+			type: StorageType.LOCAL,
+			key: `ss-${this.config.id}-${this.globals.siteId}-local`,
+		});
 
 		this.context = {
-			...this.getUserId(),
-			...this.getSessionId(),
-			...this.getShopperId(),
+			userId: this.getUserId() || '',
+			sessionId: this.getSessionId(),
+			shopperId: this.getShopperId(),
 			pageLoadId: uuidv4(),
 			website: {
 				trackingCode: this.globals.siteId,
 			},
 		};
 
-		if (!window.searchspring?.track) {
-			this.setGlobal();
+		if (!window.searchspring?.tracker) {
+			window.searchspring = window.searchspring || {};
+			window.searchspring.tracker = this;
+			window.searchspring.version = version;
 		}
+
+		// since this is in the constructor, setTimeout is required for jest.spyOn
+		setTimeout(() => {
+			this.targeters.push(
+				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
+					const { item, items, siteId, shopper, order, type } = getContext(
+						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+						elem as HTMLScriptElement
+					);
+
+					switch (type) {
+						case 'searchspring/track/shopper/login':
+							this.track.shopper.login(shopper, siteId);
+							break;
+						case 'searchspring/track/product/view':
+							this.track.product.view(item, siteId);
+							break;
+						case 'searchspring/track/cart/view':
+							this.track.cart.view({ items }, siteId);
+							break;
+						case 'searchspring/track/order/transaction':
+							this.track.order.transaction({ order, items }, siteId);
+							break;
+						default:
+							console.error(`event '${type}' is not supported`);
+							break;
+					}
+				})
+			);
+		});
+
+		document.addEventListener('click', (event: Event) => {
+			const updateRecsControllers = (): void => {
+				if (window.searchspring.controller) {
+					Object.keys(window.searchspring.controller).forEach((name) => {
+						const controller = window.searchspring.controller[name];
+						if (controller.type === 'recommendation' && controller.config?.realtime) {
+							controller.search();
+						}
+					});
+				}
+			};
+
+			const getClickAttributes = (event: Event): Record<string, any> => {
+				const attributeList = [
+					`ss-${this.config.id}-cart-add`,
+					`ss-${this.config.id}-cart-remove`,
+					`ss-${this.config.id}-cart-clear`,
+					`ss-${this.config.id}-cart-view`,
+					`ss-${this.config.id}-intellisuggest`,
+					`ss-${this.config.id}-intellisuggest-signature`,
+					`href`,
+				];
+				const attributes: { [key: string]: any } = {};
+				let levels = 0;
+
+				let elem: HTMLElement | null = null;
+				elem = event && (event.target as HTMLElement);
+
+				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
+					Object.values(elem.attributes).forEach((attr: Attr) => {
+						var attrName = attr.nodeName;
+
+						if (attributeList.indexOf(attrName) != -1) {
+							attributes[attrName] = elem && elem.getAttribute(attrName);
+						}
+					});
+
+					elem = elem.parentElement;
+					levels++;
+				}
+
+				return attributes;
+			};
+
+			const attributes = getClickAttributes(event);
+
+			if (attributes[`ss-${this.config.id}-cart-add`]) {
+				// add skus to cart
+				const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
+				this.cookies.cart.add(skus);
+				updateRecsControllers();
+			} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
+				// remove skus from cart
+				const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
+				this.cookies.cart.remove(skus);
+				updateRecsControllers();
+			} else if (`ss-${this.config.id}-cart-clear` in attributes) {
+				// clear all from cart
+				this.cookies.cart.clear();
+				updateRecsControllers();
+			} else if (`ss-${this.config.id}-cart-view` in attributes) {
+				// update recs
+				updateRecsControllers();
+			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
+				// product click
+				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
+				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
+				const href = attributes['href'];
+				this.track.product.click({
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
+				});
+			}
+		});
 
 		this.sendEvents();
 	}
 
-	setNamespace = (namespace?: string): void => {
-		let prefix = 'tracker';
-		if (namespace) {
-			this.namespace = `${namespace}`;
-			prefix = namespace;
-		}
-		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
-			key: `ss-${prefix}-${this.globals.siteId}-local`,
+	public retarget(): void {
+		this.targeters.forEach((target) => {
+			target.retarget();
 		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${prefix}-${this.globals.siteId}-session`,
-		});
-	};
-
-	setGlobal = (): void => {
-		window.searchspring = window.searchspring || {};
-		window.searchspring.track = this.track;
-		window.searchspring.version = version;
-	};
+	}
 
 	track: TrackMethods = {
 		event: (payload: BeaconPayload): BeaconEvent => {
@@ -99,39 +207,78 @@ export class Tracker {
 				pid: payload?.pid || undefined,
 			};
 
-			const beaconEvent = new BeaconEvent(event);
+			const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
 		},
 
+		error: (data: TrackErrorEvent, siteId?: string): BeaconEvent | undefined => {
+			if (!data?.stack && !data?.message) {
+				// no console log
+				return;
+			}
+			let context = this.context;
+			if (siteId) {
+				context = deepmerge(context, {
+					context: {
+						website: {
+							trackingCode: siteId,
+						},
+					},
+				});
+			}
+
+			const { userAgent, href, filename, stack, message, colno, lineno, timeStamp } = data;
+
+			const payload = {
+				type: BeaconType.ERROR,
+				category: BeaconCategory.RUNTIME,
+				context,
+				event: {
+					userAgent,
+					href,
+					filename,
+					stack,
+					message,
+					colno,
+					lineno,
+					timeStamp,
+				},
+			};
+
+			return this.track.event(payload);
+		},
+
 		shopper: {
-			login: (details: { data: ShopperLoginEvent; siteId?: string }): BeaconEvent => {
+			login: (data: ShopperLoginEvent, siteId?: string): BeaconEvent | undefined => {
 				// sets shopperid if logged in
-				if (!featureFlags.cookies) {
+				if (!getFlags().cookies()) {
 					return;
 				}
-				if (!details.data.id) {
-					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login("1234")');
+				if (!data.id) {
+					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })');
 					return;
 				}
+				data.id = `${data.id}`;
+
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
+					context.shopperId = data.id;
 				}
-				const storedShopperId = this.getShopperId()?.shopperId;
-				details.data.id = `${details.data.id}`;
-				if (storedShopperId != details.data.id) {
+				const storedShopperId = this.getShopperId();
+				if (storedShopperId != data.id) {
 					// user's logged in id has changed, update shopperId cookie send login event
-					cookies.set(SHOPPERID_COOKIE_NAME, details.data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-					this.context.shopperId = details.data.id;
-
+					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+					this.context.shopperId = data.id;
+					this.sendPreflight();
 					const payload = {
 						type: BeaconType.LOGIN,
 						category: BeaconCategory.PERSONALIZATION,
@@ -143,19 +290,19 @@ export class Tracker {
 			},
 		},
 		product: {
-			view: (details: { data: ProductViewEvent; siteId: string }): BeaconEvent => {
-				if (!details?.data?.sku && !details?.data?.childSku) {
+			view: (data: ProductViewEvent, siteId?: string): BeaconEvent | undefined => {
+				if (!data?.sku && !data?.childSku) {
 					console.error(
 						'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
@@ -165,45 +312,48 @@ export class Tracker {
 					category: BeaconCategory.PAGEVIEW,
 					context,
 					event: {
-						sku: details.data?.sku ? `${details.data.sku}` : undefined,
-						childSku: details.data?.childSku ? `${details.data.childSku}` : undefined,
+						sku: data?.sku ? `${data.sku}` : undefined,
+						childSku: data?.childSku ? `${data.childSku}` : undefined,
 					},
 				};
 
 				// save recently viewed products to cookie
-				if (details.data?.sku || details.data?.childSku) {
-					const viewedProducts = cookies.get(VIEWED_PRODUCTS);
-					const products = viewedProducts ? new Set(viewedProducts.split(',')) : new Set();
-					products.add(details.data?.sku || details.data.childSku);
-					cookies.set(VIEWED_PRODUCTS, Array.from(products).slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+				const sku = data?.sku || data?.childSku;
+				if (sku) {
+					const lastViewedProducts = this.cookies.viewed.get();
+					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
+					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+					if (!lastViewedProducts.includes(sku)) {
+						this.sendPreflight();
+					}
 				}
 
 				// legacy tracking
-				if (details.data?.sku) {
+				if (data?.sku) {
 					// only send sku to pixel tracker if present (don't send childSku)
 					new PixelEvent({
 						...payload,
 						event: {
-							sku: details.data.sku,
+							sku: data.sku,
 						},
 					});
 				}
 
 				return this.track.event(payload);
 			},
-			click: (details: { data: ProductClickEvent; siteId?: string }): BeaconEvent => {
-				if (!details.data?.intellisuggestData || !details.data?.intellisuggestSignature) {
+			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
+				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
 					console.error(
-						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
+						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })`
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
@@ -213,9 +363,9 @@ export class Tracker {
 					category: BeaconCategory.INTERACTION,
 					context,
 					event: {
-						intellisuggestData: details.data.intellisuggestData,
-						intellisuggestSignature: details.data.intellisuggestSignature,
-						href: details.data?.href ? `${details.data.href}` : undefined,
+						intellisuggestData: data.intellisuggestData,
+						intellisuggestSignature: data.intellisuggestSignature,
+						href: data?.href ? `${data.href}` : undefined,
 					},
 				};
 
@@ -226,27 +376,27 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: (details: { data: CartViewEvent; siteId?: string }): BeaconEvent => {
-				if (!Array.isArray(details?.data?.items) || !details?.data?.items.length) {
+			view: (data: CartViewEvent, siteId?: string): BeaconEvent | undefined => {
+				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
-						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])'
+						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
 				}
-				const items = details.data.items.map((item, index) => {
+				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
-							`track.view.cart event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							`track.view.cart event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
@@ -271,9 +421,8 @@ export class Tracker {
 
 				// save cart items to cookie
 				if (items.length) {
-					const products = [];
-					items.map((item) => products.push(item.sku || item.childSku));
-					cookies.set(CART_PRODUCTS, products.join(','), COOKIE_SAMESITE, 0);
+					const products = items.map((item) => item?.sku || item?.childSku || '').filter((sku) => sku);
+					this.cookies.cart.add(products);
 				}
 
 				// legacy tracking
@@ -283,27 +432,27 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: (details: { data: OrderTransactionEvent; siteId?: string }): BeaconEvent => {
-				if (!details.data?.items || !Array.isArray(details.data.items) || !details.data.items.length) {
+			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
+				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], orderId: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
 				}
-				const items = details.data.items.map((item, index) => {
+				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
-							`track.order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							`track.order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
@@ -320,12 +469,12 @@ export class Tracker {
 					return product;
 				});
 				const eventPayload = {
+					orderId: data?.order?.id ? `${data.order.id}` : undefined,
+					total: data?.order?.total ? `${data.order.total}` : undefined,
+					city: data?.order?.city ? `${data.order.city}` : undefined,
+					state: data?.order?.state ? `${data.order.state}` : undefined,
+					country: data?.order?.country ? `${data.order.country}` : undefined,
 					items,
-					orderId: details.data?.orderId ? `${details.data.orderId}` : undefined,
-					total: details.data?.total ? `${details.data.total}` : undefined,
-					city: details.data?.city ? `${details.data.city}` : undefined,
-					state: details.data?.state ? `${details.data.state}` : undefined,
-					country: details.data?.country ? `${details.data.country}` : undefined,
 				};
 				const payload = {
 					type: BeaconType.ORDER,
@@ -333,6 +482,9 @@ export class Tracker {
 					context,
 					event: eventPayload,
 				};
+
+				// clear cart items from cookie when order is placed
+				this.cookies.cart.clear();
 
 				// legacy tracking
 				new PixelEvent(payload);
@@ -342,35 +494,42 @@ export class Tracker {
 		},
 	};
 
-	getUserId = (): Record<string, string> => {
+	updateContext = (key: keyof BeaconContext, value: any) => {
+		if (value) {
+			this.context[key] = value;
+		}
+	};
+
+	getUserId = (): string | undefined | null => {
 		let userId;
 		try {
-			userId = featureFlags.storage && this.localStorage.get(USERID_COOKIE_NAME);
-			if (featureFlags.cookies) {
+			if (getFlags().storage()) userId = window.localStorage.getItem(USERID_COOKIE_NAME);
+			if (getFlags().cookies()) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-			} else if (!userId && featureFlags.storage) {
+			} else if (!userId && getFlags().storage()) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
-				this.localStorage.set(USERID_COOKIE_NAME, userId);
+				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
 		}
-		return { userId };
+
+		return userId;
 	};
 
-	getSessionId = (): Record<string, string> => {
+	getSessionId = (): string | undefined => {
 		let sessionId;
-		if (featureFlags.storage) {
+		if (getFlags().storage()) {
 			try {
-				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
-				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
-				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
+				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
 			}
-		} else if (featureFlags.cookies) {
+		} else if (getFlags().cookies()) {
 			// use cookies if sessionStorage is not enabled and only reset cookie if new session to keep expiration
 			sessionId = cookies.get(SESSIONID_STORAGE_NAME);
 			if (!sessionId) {
@@ -378,36 +537,127 @@ export class Tracker {
 				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
 			}
 		}
-		return { sessionId };
+
+		return sessionId;
 	};
 
-	getShopperId = (): Record<string, string> => {
+	getShopperId = (): string | undefined => {
 		const shopperId = cookies.get(SHOPPERID_COOKIE_NAME);
 		if (!shopperId) {
 			return;
 		}
-		return { shopperId };
+
+		return shopperId;
 	};
 
-	getCartItems = (): string[] => {
-		const items = cookies.get(CART_PRODUCTS);
-		if (!items) {
-			return [];
+	sendPreflight = (): void => {
+		const userId = this.getUserId();
+		const siteId = this.context.website.trackingCode;
+		const shopper = this.getShopperId();
+		const cart = this.cookies.cart.get();
+		const lastViewed = this.cookies.viewed.get();
+
+		if (userId && typeof userId == 'string' && siteId && (shopper || cart.length || lastViewed.length)) {
+			const preflightParams: PreflightRequestModel = {
+				userId,
+				siteId,
+			};
+
+			let queryStringParams = `?userId=${encodeURIComponent(userId)}&siteId=${encodeURIComponent(siteId)}`;
+			if (shopper) {
+				preflightParams.shopper = shopper;
+				queryStringParams += `&shopper=${encodeURIComponent(shopper)}`;
+			}
+			if (cart.length) {
+				preflightParams.cart = cart;
+				queryStringParams += cart.map((item) => `&cart=${encodeURIComponent(item)}`).join('');
+			}
+			if (lastViewed.length) {
+				preflightParams.lastViewed = lastViewed;
+				queryStringParams += lastViewed.map((item) => `&lastViewed=${encodeURIComponent(item)}`).join('');
+			}
+
+			const endpoint = `https://${siteId}.a.searchspring.io/api/personalization/preflightCache`;
+			const xhr = new XMLHttpRequest();
+
+			if (charsParams(preflightParams) > 1024) {
+				xhr.open('POST', endpoint);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.send(JSON.stringify(preflightParams));
+			} else {
+				xhr.open('GET', endpoint + queryStringParams);
+				xhr.send();
+			}
 		}
-		return items.split(',');
 	};
 
-	getLastViewedItems = (): string[] => {
-		const items = cookies.get(VIEWED_PRODUCTS);
-		if (!items) {
-			return [];
-		}
-		return items.split(',');
+	cookies = {
+		cart: {
+			get: (): string[] => {
+				const items = cookies.get(CART_PRODUCTS);
+				if (!items) {
+					return [];
+				}
+				return items.split(',');
+			},
+			set: (items: string[]): void => {
+				if (items.length) {
+					const cartItems = items.map((item) => item.trim());
+					const uniqueCartItems = Array.from(new Set(cartItems));
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = cartItems.filter((item) => items.includes(item)).length !== items.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
+				}
+			},
+			add: (items: string[]): void => {
+				if (items.length) {
+					const currentCartItems = this.cookies.cart.get();
+					const itemsToAdd = items.map((item) => item.trim());
+					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = currentCartItems.filter((item) => itemsToAdd.includes(item)).length !== itemsToAdd.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
+				}
+			},
+			remove: (items: string[]): void => {
+				if (items.length) {
+					const currentCartItems = this.cookies.cart.get();
+					const itemsToRemove = items.map((item) => item.trim());
+					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
+					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = currentCartItems.length !== updatedItems.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
+				}
+			},
+			clear: () => {
+				if (this.cookies.cart.get().length) {
+					cookies.unset(CART_PRODUCTS);
+					this.sendPreflight();
+				}
+			},
+		},
+		viewed: {
+			get: (): string[] => {
+				const items = cookies.get(VIEWED_PRODUCTS);
+				if (!items) {
+					return [];
+				}
+				return items.split(',');
+			},
+		},
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
 		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
-
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {
 				events.push({ ...event });

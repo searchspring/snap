@@ -1,47 +1,61 @@
 import { render } from 'preact';
+import deepmerge from 'deepmerge';
 
-import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { AppMode, DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { Client } from '@searchspring/snap-client';
+import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
 
-import type { Logger } from '@searchspring/snap-logger';
+import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { Client } from '@searchspring/snap-client';
-import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, RecommendationController, Attachments } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
-import type { SnapControllerServices, RootComponent } from '../types';
+import type { RootComponent } from '../types';
+import type { Target } from '@searchspring/snap-toolbox';
 
 export type RecommendationInstantiatorConfig = {
+	mode?: keyof typeof AppMode | AppMode;
+	client?: {
+		globals: ClientGlobals;
+		config?: ClientConfig;
+	};
 	components: {
 		[name: string]: () => Promise<RootComponent> | RootComponent;
 	};
 	config: {
 		branch: string;
+		realtime?: boolean;
+		batched?: boolean;
+		limit?: number;
 	} & Attachments;
 	selector?: string;
-	services?: SnapControllerServices;
 	url?: UrlTranslatorConfig;
+	context?: ContextVariables;
 };
 
 export type RecommendationInstantiatorServices = {
-	client: Client;
-	logger: Logger;
-	tracker: Tracker;
+	client?: Client;
+	logger?: Logger;
+	tracker?: Tracker;
 };
 
 export class RecommendationInstantiator {
-	controllers: {
+	private mode = AppMode.production;
+	public client: Client;
+	public tracker: Tracker;
+	public logger: Logger;
+	public controller: {
 		[key: string]: RecommendationController;
 	} = {};
-	client: Client;
-	tracker: Tracker;
-	logger: Logger;
-	config: RecommendationInstantiatorConfig;
-	uses: Attachments[] = [];
-	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
-	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
+	public config: RecommendationInstantiatorConfig;
+	public context: ContextVariables;
 	public targeter: DomTargeter;
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
+	private uses: Attachments[] = [];
+	private plugins: { func: (cntrlr: AbstractController, ...args: any) => Promise<void>; args: unknown[] }[] = [];
+	private middleware: { event: string; func: Middleware<unknown>[] }[] = [];
+
+	constructor(config: RecommendationInstantiatorConfig, services?: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
 
 		if (!this.config) {
@@ -52,123 +66,199 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
 		}
 
-		if (!this.config.components || typeof this.config.components != 'object') {
+		if (!this.config.components || typeof this.config.components != 'object' || !Object.keys(this.config.components).length) {
 			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
 
-		this.client = client;
-		this.tracker = tracker;
-		this.logger = logger;
+		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
+			throw new Error(`Recommendation Instantiator config must contain a valid config.client.globals.siteId value`);
+		}
 
-		const profileCount = {};
+		if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode as AppMode;
+
+			if (this.config?.client?.globals?.siteId) {
+				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			}
+		}
+
+		window.searchspring = window.searchspring || {};
+
+		this.context = deepmerge(context || {}, config.context || {});
+		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
+		this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
+		this.logger = services?.logger || new Logger({ prefix: 'RecommendationInstantiator ', mode: this.mode });
+
+		const profileCount: {
+			[key: string]: number;
+		} = {};
+
 		this.targeter = new DomTargeter(
 			[
 				{
 					selector: `script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]${
 						this.config.selector ? ` , ${this.config.selector}` : ''
 					}`,
+					autoRetarget: true,
 					inject: {
 						action: 'before',
-						element: (target, origElement) => {
-							const profile = origElement.getAttribute('profile');
+						element: (target: Target, origElement: Element) => {
+							const profile = origElement.getAttribute('profile') || '';
 
-							if (profile) {
-								const recsContainer = document.createElement('div');
-								recsContainer.setAttribute('searchspring-recommend', profile);
-								return recsContainer;
-							} else {
-								this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, origElement);
-							}
+							const recsContainer = document.createElement('div');
+							recsContainer.setAttribute('searchspring-recommend', profile);
+							return recsContainer;
 						},
 					},
 				},
 			],
-			async (target, injectedElem, elem) => {
-				const globals: any = {};
+			async (target: Target, injectedElem: Element | undefined, elem: Element | undefined) => {
+				const tag = injectedElem?.getAttribute('searchspring-recommend');
 
-				const { shopper, shopperId, product, seed, branch, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'],
+				if (!tag) {
+					this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, elem);
+					return;
+				}
+
+				const contextGlobals: any = {};
+
+				const elemContext = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'cart', 'options', 'profile', 'custom'],
 					elem as HTMLScriptElement
 				);
+				const context: ContextVariables = deepmerge(this.context, elemContext);
+
+				const { shopper, shopperId, product, seed, cart, options } = context;
+
+				/*
+					type instantiatorContext = {
+						shopper?: {
+							id: string;
+						};
+						shopperId?: string;
+						product?: string;
+						seed?: string;
+						cart?: string[] | () => string[];
+						options?: {
+							siteId?: string;
+							branch?: string;
+							batched?: boolean;
+							realtime?: boolean;
+							categories?: any;
+							limit?: number;
+						}
+					}
+				*/
 
 				if (shopper || shopperId) {
-					globals.shopper = shopper || shopperId;
+					contextGlobals.shopper = shopper?.id || shopperId;
 				}
 				if (product || seed) {
-					globals.product = product || seed;
+					contextGlobals.product = product || seed;
 				}
-				if (branch) {
-					globals.branch = branch;
+				if (options?.branch) {
+					contextGlobals.branch = options.branch;
 				}
-				if (options && options.siteId) {
-					globals.siteId = options.siteId;
+				if (options?.siteId) {
+					contextGlobals.siteId = options.siteId;
 				}
-				if (options && options.categories) {
-					globals.categories = options.categories;
+				if (options?.categories) {
+					contextGlobals.categories = options.categories;
+				}
+				if (options?.limit && Number.isInteger(Number(options?.limit))) {
+					contextGlobals.limits = Number(options?.limit);
+				}
+				let cartContents;
+				if (typeof cart === 'function') {
+					try {
+						const cartFuncContents = cart();
+						if (Array.isArray(cartFuncContents)) {
+							cartContents = cartFuncContents;
+						}
+					} catch (e) {
+						this.logger.warn(`Error getting cart contents from function`, e);
+					}
+				} else if (Array.isArray(cart)) {
+					cartContents = cart;
+				}
+				if (Array.isArray(cartContents)) {
+					this.tracker.cookies.cart.set(cartContents);
+					contextGlobals.cart = this.tracker.cookies.cart.get();
 				}
 
-				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
-				const controllerConfig = {
-					id: `recommend_${tag + (profileCount[tag] - 1)}`,
-					tag,
-					globals,
-					...this.config.config,
+				const defaultGlobals = {
+					limits: 20,
 				};
+				const globals = deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals);
+
+				const controllerConfig = {
+					id: `recommend_${tag}_${profileCount[tag] - 1}`,
+					tag,
+					batched: options?.batched ?? true,
+					realtime: Boolean(options?.realtime),
+					...this.config.config,
+					globals,
+				};
+
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const client = this.config.services?.client || this.client;
-				const tracker = this.config.services?.tracker || this.tracker;
-				const recs = createRecommendationController(
+				const controller = createRecommendationController(
 					{
-						url: this.config.url || {},
+						url: this.config.url,
 						controller: controllerConfig,
+						context,
 					},
-					{ client, tracker }
+					{ client: this.client, tracker: this.tracker }
 				);
 
-				this.uses.forEach((attachements) => recs.use(attachements));
-				this.plugins.forEach((plugin) => recs.plugin(plugin));
-				this.middleware.forEach((middleware) => recs.on(middleware.event, ...middleware.func));
+				this.uses.forEach((attachements) => controller.use(attachements));
+				this.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
+				this.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 
-				await recs.search();
+				await controller.search();
 
-				recs.addTargeter(this.targeter);
+				controller.addTargeter(this.targeter);
 
-				this.controllers[recs.config.id] = recs;
+				this.controller[controller.config.id] = controller;
+				window.searchspring.controller = window.searchspring.controller || {};
+				window.searchspring.controller[controller.config.id] = controller;
 
-				const profileVars = recs.store.profile.display.templateParameters;
-				const component = recs.store.profile.display.template?.component;
+				const profileVars = controller.store.profile.display.templateParameters;
+				const component = controller.store.profile.display.template?.component;
 
 				if (!profileVars) {
-					recs.log.error(`profile failed to load!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is missing templateParameters!`);
 					return;
 				}
 
 				if (!component) {
-					recs.log.error(`template does not support components!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is missing component!`);
 					return;
 				}
 
-				const RecommendationsComponent = this.config.components && (await this.config.components[component]());
+				const RecommendationsComponent = this.config.components[component] && (await this.config.components[component]());
 
 				if (!RecommendationsComponent) {
-					recs.log.error(`component '${profileVars.component}' not found!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);
 					return;
 				}
 
 				setTimeout(() => {
-					render(<RecommendationsComponent controller={recs} />, injectedElem);
+					if (injectedElem) {
+						render(<RecommendationsComponent controller={controller} />, injectedElem);
+					}
 				});
 			}
 		);
 	}
 
-	public plugin(func: (cntrlr: AbstractController) => Promise<void>): void {
-		this.plugins.push(func);
+	public plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): void {
+		this.plugins.push({ func, args });
 	}
 
-	public on<T>(event: string, ...func: Middleware<T>[]): void {
+	public on<T>(event: string, ...func: Middleware<unknown>[]): void {
 		this.middleware.push({ event, func });
 	}
 

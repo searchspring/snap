@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -9,6 +8,7 @@ import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
 
 import Readme from './readme.md';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Results`,
@@ -24,7 +24,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -89,7 +89,20 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: {},
+			defaultValue: {
+				0: {
+					columns: 1,
+				},
+				540: {
+					columns: 2,
+				},
+				768: {
+					columns: 3,
+				},
+				991: {
+					columns: 4,
+				},
+			},
 			description: 'Breakpoints options object',
 			table: {
 				type: {
@@ -115,15 +128,10 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
 
-const ObservableGridResults = observer(({ args, controller }) => {
+export const Grid = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} />;
-});
-
-const GridTemplate = (args: ResultsProp, { loaded: { controller } }) => {
-	return <ObservableGridResults args={args} controller={controller} />;
 };
 
-export const Grid = GridTemplate.bind({});
 Grid.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -133,15 +141,10 @@ Grid.loaders = [
 	},
 ];
 
-const ObservableListResults = observer(({ args, controller }) => {
+export const List = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
-});
-
-const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
-	return <ObservableListResults args={args} controller={controller} />;
 };
 
-export const List = ListTemplate.bind({});
 List.loaders = [
 	async () => {
 		await snapInstance.search();

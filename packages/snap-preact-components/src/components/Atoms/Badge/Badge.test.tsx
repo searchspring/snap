@@ -9,14 +9,12 @@ const CONTENT = 'sale';
 const CLASSNAME = 'sale-badge';
 const CHILDREN = <div>{CONTENT}</div>;
 
-// TODO: Add test to fully cover position prop
-
 describe('Badge Component', () => {
 	it('positions badge based on prop', () => {
 		const position = { right: 0 };
 		const rendered = render(<Badge position={position}>{CHILDREN}</Badge>);
-		const badge = rendered.container.querySelector('.ss__badge');
-		let styles = getComputedStyle(badge);
+		const badge = rendered.container.querySelector('.ss__badge')!;
+		let styles = getComputedStyle(badge)!;
 
 		expect(styles.right).toEqual('0px');
 
@@ -25,10 +23,22 @@ describe('Badge Component', () => {
 		styles = getComputedStyle(badge);
 
 		expect(styles.left).toEqual('0px');
+
+		const bottomPosition = { bottom: 0 };
+		rendered.rerender(<Badge position={bottomPosition}>{CHILDREN}</Badge>);
+		styles = getComputedStyle(badge);
+
+		expect(styles.bottom).toEqual('0px');
+
+		const topPosition = { top: 0 };
+		rendered.rerender(<Badge position={topPosition}>{CHILDREN}</Badge>);
+		styles = getComputedStyle(badge);
+
+		expect(styles.top).toEqual('0px');
 	});
 
 	describe('Badge with content', () => {
-		let rendered;
+		let rendered: any;
 		beforeEach(() => {
 			rendered = render(<Badge className={CLASSNAME} content={CONTENT} />);
 		});
@@ -49,7 +59,7 @@ describe('Badge Component', () => {
 	});
 
 	describe('Badge with children', () => {
-		let badge;
+		let badge: any;
 		beforeEach(() => {
 			const position = { right: 0 };
 			badge = render(<Badge position={position}>{CHILDREN}</Badge>);
@@ -70,7 +80,7 @@ describe('Badge Component', () => {
 	});
 
 	describe('Badge with disableStyles', () => {
-		let badge;
+		let badge: any;
 		beforeEach(() => {
 			badge = render(<Badge content={CONTENT} disableStyles />);
 		});
@@ -84,7 +94,7 @@ describe('Badge Component', () => {
 		it('Badge has correct number of classes', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
-			expect(BadgeElement.classList.length).toBe(1);
+			expect(BadgeElement?.classList.length).toBe(1);
 		});
 	});
 

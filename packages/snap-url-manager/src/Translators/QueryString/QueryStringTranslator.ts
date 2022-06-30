@@ -14,13 +14,13 @@ type Config = {
 };
 
 export class QueryStringTranslator implements Translator {
-	private config: ImmutableObject<Config>;
+	protected config: ImmutableObject<Config>;
 
 	constructor(config: TranslatorConfig = {}) {
 		this.config = Immutable({
+			...config,
 			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
-			...config,
 		});
 	}
 

@@ -1,3 +1,5 @@
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import {
 	AutocompleteRequestModel,
 	AutocompleteResponseModel,
@@ -7,26 +9,50 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
+import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
+import type { SuggestRequestModel } from '../../types';
 
 export class HybridAPI extends API {
+	private requesters: {
+		legacy: LegacyAPI;
+		suggest: SuggestAPI;
+	};
+
+	constructor(configuration: ApiConfiguration) {
+		super(configuration);
+
+		const legacyConfig: ApiConfigurationParameters = { mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache };
+		if (configuration.mode == AppMode.development) {
+			legacyConfig.headers = { 'searchspring-no-beacon': '' };
+		}
+
+		const legacyConfiguration = new ApiConfiguration(legacyConfig);
+		const suggestConfiguration = new ApiConfiguration({ mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache });
+
+		this.requesters = {
+			legacy: new LegacyAPI(legacyConfiguration),
+			suggest: new SuggestAPI(suggestConfiguration),
+		};
+	}
+
 	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const legacyRequestParameters = requestParameters;
-
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
-
-		return legacyRequester.getMeta(legacyRequestParameters);
+		return this.requesters.legacy.getMeta(legacyRequestParameters);
 	}
 
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
+		const legacyData = await this.requesters.legacy.getSearch(legacyRequestParameters);
 
-		const legacyData = await legacyRequester.getSearch(legacyRequestParameters);
+		return transformSearchResponse(legacyData, requestParameters);
+	}
+
+	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
+
+		const legacyData = await this.requesters.legacy.getFinder(legacyRequestParameters);
 
 		return transformSearchResponse(legacyData, requestParameters);
 	}
@@ -45,14 +71,10 @@ export class HybridAPI extends API {
 			suggestParams.disableSpellCorrect = true;
 		}
 
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const suggestRequester = new SuggestAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
-
-		const suggestResults = await suggestRequester.getSuggest(suggestParams);
+		const suggestResults = await this.requesters.suggest.getSuggest(suggestParams);
 		const transformedSuggestResults = transformSuggestResponse(suggestResults);
 
-		const q = transformedSuggestResults.correctedQuery || (suggestResults.suggested || {}).text || suggestResults.query;
+		const q = (suggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || suggestResults.query;
 
 		const queryParameters = {
 			...legacyRequestParameters,
@@ -60,7 +82,7 @@ export class HybridAPI extends API {
 			q,
 		};
 
-		const legacyResults = await legacyRequester.getAutocomplete(queryParameters);
+		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);
 		const searchResults = transformSearchResponse(legacyResults, requestParameters);
 
 		return {

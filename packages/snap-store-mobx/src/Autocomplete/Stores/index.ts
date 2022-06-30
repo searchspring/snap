@@ -1,5 +1,5 @@
-export { FacetStore } from './FacetStore';
-export { QueryStore } from './QueryStore';
-export { StateStore } from './StateStore';
-export { TermStore } from './TermStore';
-export { TrendingStore } from './TrendingStore';
+export { AutocompleteFacetStore } from './AutocompleteFacetStore';
+export { AutocompleteQueryStore } from './AutocompleteQueryStore';
+export { AutocompleteStateStore } from './AutocompleteStateStore';
+export { AutocompleteTermStore } from './AutocompleteTermStore';
+export { AutocompleteTrendingStore } from './AutocompleteTrendingStore';

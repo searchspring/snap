@@ -101,13 +101,12 @@ export default {
 	},
 };
 
-const _HelloWorld = (args: SlideoutProps) => (
+export const Default = (args: SlideoutProps) => (
 	<Slideout {...args}>
 		<div>props.children will be rendered here</div>
 	</Slideout>
 );
 
-export const Default = _HelloWorld.bind({});
 Default.args = {
 	active: true,
 };

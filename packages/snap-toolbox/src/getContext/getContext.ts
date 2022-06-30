@@ -2,7 +2,7 @@ type ContextVariables = {
 	[variable: string]: any;
 };
 
-export function getContext(evaluate: string[], script?: HTMLScriptElement | string): ContextVariables {
+export function getContext(evaluate: string[] = [], script?: HTMLScriptElement | string): ContextVariables {
 	if (!script || typeof script === 'string') {
 		const scripts = Array.from(document.querySelectorAll((script as string) || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
 
@@ -33,28 +33,31 @@ export function getContext(evaluate: string[], script?: HTMLScriptElement | stri
 		throw new Error('getContext: first parameter must be an array of strings');
 	}
 
-	const variables: Record<string, unknown> = {};
+	const variables: ContextVariables = {};
 
-	// grab all element attributes and put into variables
-	Object.values(scriptElem.attributes).map((attr) => {
-		variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
+	// evaluate text and put into variables
+	evaluate?.forEach((name) => {
+		const fn = new Function(`
+			var ${evaluate.join(', ')};
+			${scriptElem.innerHTML}
+			return ${name};
+		`);
+
+		variables[name] = fn();
 	});
 
-	try {
-		// evaluate text and put into variables
-		evaluate?.forEach((name) => {
-			const fn = new Function(`
-				var ${evaluate.join(', ')};
-				${scriptElem.innerHTML}
-				return ${name};
-			`);
+	// grab element attributes and put into variables
+	Object.values(scriptElem.attributes).map((attr) => {
+		const name = attr.nodeName;
+		if (evaluate.includes(name)) {
+			variables[name] = scriptElem.getAttribute(name);
+		}
+	});
 
-			variables[name] = fn();
-		});
-	} catch (err) {
-		console.error('getContext: failed to parse variables - error in context');
-		throw err;
-	}
+	// remove undefined entries
+	Object.keys(variables).forEach((key) => {
+		if (typeof variables[key] === 'undefined') delete variables[key];
+	});
 
 	return variables;
 }

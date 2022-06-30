@@ -8,6 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
 import { Layout } from '../../../types';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Result`,
@@ -23,7 +24,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '250px' }}>
 				<Story />
 			</div>
@@ -125,6 +126,15 @@ export default {
 				options: [Layout.GRID, Layout.LIST],
 			},
 		},
+		onClick: {
+			description: 'Custom onClick event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
 		controller: {
 			description: 'Controller reference',
 			table: {
@@ -139,9 +149,11 @@ export default {
 };
 
 const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
-const Template = (args: ResultProps, { loaded: { controller } }) => <Result result={controller?.store?.results[0]} {...args} />;
 
-export const Default = Template.bind({});
+export const Default = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Result {...args} result={controller?.store?.results[0]} />
+);
+
 Default.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -151,7 +163,10 @@ Default.loaders = [
 	},
 ];
 
-export const hideSections = Template.bind({});
+export const hideSections = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Result {...args} result={controller?.store?.results[0]} />
+);
+
 hideSections.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -166,7 +181,10 @@ hideSections.args = {
 	hidePricing: true,
 };
 
-export const truncateTitle = Template.bind({});
+export const truncateTitle = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Result {...args} result={controller?.store?.results[0]} />
+);
+
 truncateTitle.loaders = [
 	async () => {
 		await snapInstance.search();

@@ -3,8 +3,9 @@ yarn-error.log
 .DS_Store
 dist
 coverage
+metrics/data
 packages/snap-preact-demo/tests/cypress/videos
 packages/snap-preact-demo/tests/cypress/screenshots
 packages/snap-preact-demo/.lighthouseci
-packages/snap-preact-demo/lighthouse
+packages/snap-preact-demo/tests/lighthouse/runs
 packages/snapps/*/

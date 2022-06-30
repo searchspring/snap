@@ -19,9 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 15
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@searchspring'
+          node-version: 16
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -38,11 +36,11 @@ jobs:
 
       - name: Install packages
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
       - name: Build
         run: npm run build
 
       - name: Tests
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run test

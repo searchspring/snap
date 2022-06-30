@@ -6,7 +6,7 @@ on:
     types: [completed]
 
 jobs:
-  on-success:
+  Zendesk:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 15
+          node-version: 16
 
       - name: Publish README.md to ZenDesk
         run: |

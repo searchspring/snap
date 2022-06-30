@@ -7,6 +7,8 @@ import { FilterSummary, FilterSummaryProps } from './FilterSummary';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FilterSummary/readme.md';
+import type { SearchController } from '@searchspring/snap-controller';
+import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
 	title: `Organisms/FilterSummary`,
@@ -143,18 +145,20 @@ const snapInstance = Snapify.search({
 				type: 'value',
 				field: 'color_family',
 				value: 'Blue',
-			},
+			} as SearchRequestModelFilterValue,
 			{
 				type: 'value',
 				field: 'size',
 				value: 'Small',
-			},
+			} as SearchRequestModelFilterValue,
 		],
 	},
 });
-const Template = (args: FilterSummaryProps, { loaded: { controller } }) => <FilterSummary {...args} controller={controller} />;
 
-export const Regular = Template.bind({});
+export const Regular = (args: FilterSummaryProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<FilterSummary {...args} controller={controller} />
+);
+
 Regular.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -164,7 +168,10 @@ Regular.loaders = [
 	},
 ];
 
-export const noFacetLabel = Template.bind({});
+export const noFacetLabel = (args: FilterSummaryProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<FilterSummary {...args} controller={controller} />
+);
+
 noFacetLabel.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -177,7 +184,10 @@ noFacetLabel.args = {
 	hideFacetLabel: true,
 };
 
-export const customTitle = Template.bind({});
+export const customTitle = (args: FilterSummaryProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<FilterSummary {...args} controller={controller} />
+);
+
 customTitle.loaders = [
 	async () => {
 		await snapInstance.search();

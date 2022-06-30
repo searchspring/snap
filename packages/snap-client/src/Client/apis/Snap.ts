@@ -14,41 +14,50 @@ export class SnapAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request({
-			path: '/api/v1/meta',
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/v1/meta',
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			'/api/v1/meta' + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as MetaResponseModel;
 	}
 
 	async postSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request({
-			path: '/api/v1/search',
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/v1/search',
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			'/api/v1/search' + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as SearchResponseModel;
 	}
 
 	async postAutocomplete(requestParameters: AutocompleteRequestModel): Promise<AutocompleteResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request({
-			path: '/api/v1/autocomplete',
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/v1/autocomplete',
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			'/api/v1/autocomplete' + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as AutocompleteResponseModel;
 	}
 }

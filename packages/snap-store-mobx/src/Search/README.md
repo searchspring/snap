@@ -31,6 +31,8 @@ Contains information about the query that was requested from the Search API.
 
 `search.originalQuery` - Query object - original query if spell correction occurred
 
+`search.matchType` - string - Indicates the type of search matching that was required for this search. Will return `expanded` when an Expanded Search is applied after finding zero results for the initial strict search. 
+
 ### Query object
 An Query object contains the respective query `string` and generated query `url`.
 
@@ -358,7 +360,7 @@ Internal product id.
 If `type` is `banner`, id will be set to `` `ssid-${banner.config.position.index}` ``
 
 ### `attributes` property
-Only applicable to results with `type` of `product`
+Only applicable to results with `type` of `product` or `child`
 Product attributes object. Will contain all attributes that have been indexed and enabled in the Searchspring Management Console
 
 ```json
@@ -466,6 +468,18 @@ Core product attributes object
 	}
 },
 ```
+
+
+### `children` property
+Only applicable to results with `type` of `product`
+
+Array of product variants. Each variant contains the same properties as the parent object with the following differences:
+
+`type` will be `child`
+
+`id` will contain the id of the parent with a suffix of the variant index.
+
+`mappings` is not present. All attributes can be found in `attributes`
 
 
 ### `custom` property

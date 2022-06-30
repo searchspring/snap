@@ -24,38 +24,102 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('snapStore', (controller = 'search') => {
+import packageJSON from '../../../package.json';
+
+Cypress.Commands.add('addScript', (script) => {
+	cy.document().then((doc) => {
+		const scriptElem = document.createElement('script');
+		scriptElem.type = 'text/javascript';
+		scriptElem.src = script;
+		doc.head.appendChild(scriptElem);
+	});
+});
+
+Cypress.Commands.add('addScripts', (scripts = []) => {
+	scripts = typeof scripts === 'string' ? [scripts] : scripts;
+
+	if (!scripts.length) return;
+
+	scripts.forEach((script) => {
+		cy.addScript(script);
+	});
+});
+
+Cypress.Commands.add('addLocalSnap', () => {
 	cy.window().then((window) => {
+		if (!window?.searchspring) {
+			cy.addScript('https://localhost:3333/bundle.js');
+		}
+	});
+});
+
+Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
+	cy.intercept(/.*snapui.searchspring.io\/.*\/bundle.js$/).as('script');
+	cy.addScript(`https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branch}/bundle.js`);
+});
+
+Cypress.Commands.add('snapController', (controllerId = 'search') => {
+	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve, reject) => {
-			const cntrlr = getByPath(window.searchspring.controller, controller);
+			const checkTimeout = 200;
+			let interval = setInterval(() => {
+				const cntrlr = window?.searchspring?.controller[controllerId];
 
-			const after = function afterLoad({ controller }) {
-				controller.eventManager.events.afterStore.remove(afterLoad);
-				resolve(cntrlr.store);
-			};
+				if (cntrlr) {
+					clearInterval(interval);
 
-			if (cntrlr.store.loading) {
-				cntrlr.on('afterStore', after);
-			} else {
-				resolve(cntrlr.store);
-			}
+					const after = function afterLoad({ controller }) {
+						controller.eventManager.events.afterStore.remove(afterLoad);
+						resolve(cntrlr);
+					};
+
+					if (cntrlr.store.loading) {
+						cntrlr.on('afterStore', after);
+					} else {
+						resolve(cntrlr);
+					}
+				}
+			}, checkTimeout);
 		});
 	});
 });
 
-function getByPath(obj, path) {
-	path = path.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-	path = path.replace(/^\./, ''); // strip a leading dot
+Cypress.Commands.add('waitForBundle', () => {
+	return cy.window().then((window) => {
+		return new Cypress.Promise((resolve) => {
+			const checkTimeout = 100;
+			let interval = setInterval(() => {
+				if (window.searchspring) {
+					clearInterval(interval);
+					resolve(window.searchspring);
+				}
+			}, checkTimeout);
+		});
+	});
+});
 
-	const split = path.split('.');
-	for (let i = 0, n = split.length; i < n; ++i) {
-		const p = split[i];
-		if (p in obj) {
-			obj = obj[p];
-		} else {
-			return;
-		}
-	}
+Cypress.Commands.add('waitForIdle', (options) => {
+	options = { timeout: 200, ...options };
 
-	return obj;
-}
+	return cy.window().then((window) => {
+		return new Cypress.Promise((resolve) => {
+			let timeout = setTimeout(resolve, options.timeout);
+
+			const observer = new window.PerformanceObserver(() => {
+				clearTimeout(timeout);
+				timeout = setTimeout(resolve, options.timeout);
+			});
+
+			observer.observe({ entryTypes: ['resource'] });
+		});
+	});
+});
+
+Cypress.Commands.add('waitForRecsReady', () => {
+	return cy.document().then((doc) => {
+		return new Cypress.Promise((resolve) => {
+			let timeout = setTimeout(resolve, 5000);
+			doc.addEventListener('RecsReady', resolve);
+		});
+	});
+});

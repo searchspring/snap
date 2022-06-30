@@ -6,19 +6,21 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
+import { CSSProperties } from 'react';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility }) =>
+	image: ({ visibility }: { visibility: string }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
-			height: '100%',
+			height: 'auto',
 			'& img': {
-				visibility,
+				visibility: visibility as React.CSSProperties['visibility'],
+				flexShrink: '0',
 				objectFit: 'contain',
 				maxWidth: '100%',
 				maxHeight: '100%',
@@ -32,6 +34,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	const props: ImageProps = {
 		// default props
 		fallback: FALLBACK_IMAGE_URL,
+		lazy: true,
 		// global theme
 		...globalTheme?.components?.image,
 		// props
@@ -39,7 +42,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, fallback, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
@@ -52,7 +55,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		setVisibility('hidden');
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.image({ visibility }), style];
 	} else if (style) {
@@ -65,20 +68,23 @@ export function Image(properties: ImageProps): JSX.Element {
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}
 					title={alt}
-					loading="lazy"
-					onLoad={() => {
+					loading={lazy ? 'lazy' : undefined}
+					onLoad={(e: React.MouseEvent<HTMLImageElement>) => {
 						setVisibility('visible');
-						onLoad && onLoad();
+						onLoad && onLoad(e);
 					}}
-					onClick={(e) => onClick && onClick(e as any)}
-					onError={(e) => ((e.target as HTMLImageElement).src = fallback)}
-					onMouseOver={(e) => {
+					onClick={(e: React.MouseEvent<HTMLImageElement>) => onClick && onClick(e)}
+					onError={(e: React.MouseEvent<HTMLImageElement>) => {
+						(e.target as HTMLImageElement).src = fallback || '';
+						onError && onError(e);
+					}}
+					onMouseOver={(e: React.MouseEvent<HTMLImageElement>) => {
 						hoverSrc && setHover(true);
-						onMouseOver && onMouseOver(e as any);
+						onMouseOver && onMouseOver(e);
 					}}
-					onMouseOut={(e) => {
+					onMouseOut={(e: React.MouseEvent<HTMLImageElement>) => {
 						hoverSrc && setHover(false);
-						onMouseOut && onMouseOut(e as any);
+						onMouseOut && onMouseOut(e);
 					}}
 				/>
 			</div>
@@ -91,8 +97,10 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	onMouseOver?: (e: MouseEvent) => void;
-	onMouseOut?: (e: MouseEvent) => void;
-	onLoad?: () => void;
-	onClick?: (e: MouseEvent) => void;
+	onMouseOver?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onMouseOut?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onError?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onLoad?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	lazy?: boolean;
 }

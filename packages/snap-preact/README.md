@@ -22,12 +22,13 @@ const snap = new Snap(config);
 ```
 
 ## Configuration
-A configuration object provided to Snap will determin the services that will be created. 
+A configuration object provided to Snap will determine the services that will be created. 
 
 Full example:
 
 ```typescript
 const config = {
+	context: globalContext,
 	url: {
 		parameters: {
 			core: {
@@ -89,6 +90,8 @@ const config = {
 };
 ```
 
+### `config.context` - optional `Context` object to be used to set the global context. If no context is provided, a default context taken from the integration script (`shopper` variable) will be used, otherwise the provided `config.context` is merged with the script context. This context becomes the `globalContext` that is passed to all controllers that are created.
+
 ### config.client
 A single client instance will be created and shared across all services using the provided config. 
 
@@ -111,11 +114,12 @@ The `instantiators` object must be defined if any Recommendation controllers hav
 const config = {
 	instantiators: {
 		recommendation: {
+			context: recommendationContext,
 			components: {
 				Standard: () => Standard
 			},
 			config: {
-				branch: BRANCHNAME
+				batched: true
 			},
 			selector: '',
 			services: {}
@@ -129,21 +133,11 @@ const config = {
 
 `recommendation.components` - required mapping of recommendation components.
 
-`recommendation.config.branch` - required current git branch name. Defined via webpack during bundle build:
+`recommendation.context` - optional `Context` object to be used to set controller specific context. Defaults to the global context if no context prop is provided, or if one is provided, it is merged into the global context.
 
-```typescript
-const webpack = require('webpack');
-const childProcess = require('child_process');
-const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+`recommendation.config.branch` - optional current git branch name - defaults to 'production'
 
-module.exports = {
-	plugins: [
-		new webpack.DefinePlugin({
-			BRANCHNAME: `"${branchName}"`,
-		}),
-	],
-}
-```
+`recommendation.config.batched` - optional boolean (default: `true`) to batch multiple recommendations into a single network request
 
 `recommendation.selector` - optional selector to target recommendation instances if using a non-standard installation. Default selector: `script[type="searchspring/recommend"]`
 
@@ -192,7 +186,7 @@ Each array entry contains an object with the following properties:
 
 `config` - required controller config for the corresponding controller. See Controller specific documentation for all available configuration options.
 
-`targets` - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
+`targets` - optional array of Target objects. Targets that have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
 
 ```typescript
 type ExtendedTarget = {
@@ -202,6 +196,7 @@ type ExtendedTarget = {
 		element: Element | ((target: Target, element: Element) => Element);
 	};
 	hideTarget?: boolean;
+	autoRetarget?: boolean;
 	emptyTarget?: boolean;
 	name?: string;
 	component?: () => Promise<RootComponent> | RootComponent;
@@ -215,6 +210,7 @@ type ExtendedTarget = {
 
 `url` - optional `UrlTranslator` config object to be used with the `UrlManager` for this controller
 
+`context` - optional `Context` object to be used to set controller specific context. Defaults to the global context if no context prop is provided, or if one is provided, it is merged into the global context.
 
 An example creating a SearchController:
 
@@ -223,6 +219,7 @@ const config = {
 	controllers: {
 		search: [
 			{
+				context: searchContext,
 				config: {
 					id: 'search',
 				},
@@ -276,3 +273,15 @@ An object containing all controllers that have been created.
 ### recommendations
 A reference to `RecommendationInstantiator` instance if creating recommendation instances.
 
+
+## polyfills
+
+Snap Preact provides various polyfills to ensure legacy browser support.
+
+```typescript
+import { polyfills } from '@searchspring/snap-preact';
+
+polyfills.then(() => {
+	import('./index');
+})
+```

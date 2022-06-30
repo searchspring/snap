@@ -1,32 +1,25 @@
 import type { AbstractController } from './Abstract/AbstractController';
-import type { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
+import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
 import type {
-	AbstractStore,
+	SearchStore,
+	AutocompleteStore,
+	FinderStore,
+	RecommendationStore,
 	StoreConfig,
 	SearchStoreConfig,
 	FinderStoreConfig,
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
 } from '@searchspring/snap-store-mobx';
-import type { Tracker } from '@searchspring/snap-tracker';
+import type { Tracker, ProductViewEvent } from '@searchspring/snap-tracker';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
 
-// Global
-declare global {
-	interface Window {
-		searchspring?: any;
-	}
-}
-
 // Middleware
-
-export type NextEvent = Next;
-
-export type PluginFunction = (cntrlr: AbstractController, ...args) => Promise<void>;
+export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void>;
 export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
 
 export type BeforeSearchObj = {
@@ -45,9 +38,16 @@ export type AfterStoreObj = {
 	response: any;
 };
 
+export enum ControllerTypes {
+	search = 'search',
+	autocomplete = 'autocomplete',
+	finder = 'finder',
+	recommendation = 'recommendation',
+}
+
 export type ControllerServices = {
 	client: Client;
-	store: AbstractStore;
+	store: SearchStore | AutocompleteStore | FinderStore | RecommendationStore;
 	urlManager: UrlManager;
 	eventManager: EventManager;
 	profiler: Profiler;
@@ -57,10 +57,19 @@ export type ControllerServices = {
 
 export type Attachments = {
 	middleware?: {
-		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+		[eventName: string]: Middleware<any> | Middleware<any>[];
 	};
 	plugins?: PluginGrouping[];
 	[any: string]: unknown;
+};
+
+export type ContextVariables = {
+	shopper?: {
+		id: string;
+		cart?: ProductViewEvent[];
+		[variable: string]: any;
+	};
+	[variable: string]: any;
 };
 
 export type ControllerConfig = StoreConfig & Attachments;

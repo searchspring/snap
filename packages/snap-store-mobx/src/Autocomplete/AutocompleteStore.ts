@@ -1,28 +1,29 @@
 import { makeObservable, observable } from 'mobx';
 
-import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
+import { UrlManager } from '@searchspring/snap-url-manager';
 import { AbstractStore } from '../Abstract/AbstractStore';
-import { FilterStore, ResultStore, MerchandisingStore, PaginationStore, SortingStore } from '../Search/Stores';
+import { SearchFilterStore, SearchResultStore, SearchMerchandisingStore, SearchPaginationStore, SearchSortingStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
+import { AutocompleteStateStore, AutocompleteTermStore, AutocompleteQueryStore, AutocompleteFacetStore, AutocompleteTrendingStore } from './Stores';
+
+import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
+import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { AutocompleteStoreConfig, StoreServices } from '../types';
 
-import { StateStore, TermStore, QueryStore, FacetStore, TrendingStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
-	config: AutocompleteStoreConfig;
-	services: StoreServices;
-	meta: MetaResponseModel = {};
-
-	merchandising: MerchandisingStore;
-	search: QueryStore;
-	terms: TermStore;
-	facets: FacetStore;
-	filters: FilterStore;
-	results: ResultStore;
-	pagination: PaginationStore;
-	sorting: SortingStore;
-	state: StateStore;
-	storage: StorageStore;
-	trending: TrendingStore;
+	public services: StoreServices;
+	public meta!: MetaResponseModel;
+	public merchandising!: SearchMerchandisingStore;
+	public search!: AutocompleteQueryStore;
+	public terms!: AutocompleteTermStore;
+	public facets!: AutocompleteFacetStore;
+	public filters!: SearchFilterStore;
+	public results!: SearchResultStore;
+	public pagination!: SearchPaginationStore;
+	public sorting!: SearchSortingStore;
+	public state: AutocompleteStateStore;
+	public storage: StorageStore;
+	public trending: AutocompleteTrendingStore;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
 		super(config);
@@ -33,7 +34,7 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.services = services;
 
-		this.state = new StateStore(services);
+		this.state = new AutocompleteStateStore(services);
 		this.storage = new StorageStore();
 		this.trending = [];
 
@@ -52,13 +53,13 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
-	reset(): void {
+	public reset(): void {
 		this.state.reset();
-		this.update({ meta: this.meta });
+		this.update();
 		this.resetTrending();
 	}
 
-	resetTrending(): void {
+	public resetTrending(): void {
 		if (this.trending?.length) {
 			this.trending.forEach((term) => {
 				term.active = false;
@@ -66,15 +67,13 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	resetTerms(): void {
-		if (this.terms?.length > 0) {
-			this.terms.forEach((term) => {
-				term.active = false;
-			});
-		}
+	public resetTerms(): void {
+		this.terms?.forEach((term) => {
+			term.active = false;
+		});
 	}
 
-	setService(name, service): void {
+	public setService(name: keyof StoreServices, service: UrlManager): void {
 		if (this.services[name] && service) {
 			this.services[name] = service;
 			if (name === 'urlManager') {
@@ -83,10 +82,10 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	updateTrendingTerms(data): void {
-		this.trending = new TrendingStore(
+	public updateTrendingTerms(data: TrendingResponseModel): void {
+		this.trending = new AutocompleteTrendingStore(
 			this.services,
-			data.trending,
+			data,
 			() => {
 				this.resetTerms();
 			},
@@ -94,10 +93,11 @@ export class AutocompleteStore extends AbstractStore {
 		);
 	}
 
-	update(data: AutocompleteResponseModel & { meta: MetaResponseModel }): void {
+	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
+		if (!data) return;
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = data.meta;
+		this.meta = data.meta || {};
 
 		// set the query to match the actual queried term and not the input query
 		if (data.search) {
@@ -106,10 +106,10 @@ export class AutocompleteStore extends AbstractStore {
 
 		// only run if we want to update the terms (not locked)
 		if (!this.state.locks.terms.locked) {
-			this.terms = new TermStore(
+			this.terms = new AutocompleteTermStore(
 				this.services,
-				data.autocomplete,
-				data.pagination,
+				data.autocomplete || {},
+				data.pagination || {},
 				() => {
 					this.resetTrending();
 				},
@@ -120,24 +120,32 @@ export class AutocompleteStore extends AbstractStore {
 			data.autocomplete && this.state.locks.terms.lock();
 		}
 
-		this.merchandising = new MerchandisingStore(this.services, data.merchandising);
-		this.search = new QueryStore(this.services, data.autocomplete, data.search);
+		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {});
+		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {});
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {
-			this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state);
+			this.facets = new AutocompleteFacetStore(
+				this.config,
+				this.services,
+				this.storage,
+				data.facets || [],
+				data.pagination || {},
+				this.meta,
+				this.state
+			);
 		}
 
-		this.filters = new FilterStore(this.services, data.filters, this.meta);
-		this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising);
+		this.filters = new SearchFilterStore(this.services, data.filters, this.meta);
+		this.results = new SearchResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising);
 
-		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms.filter((term) => term.active).length) {
+		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms?.filter((term) => term.active).length) {
 			// if a trending term was selected and then a subsequent search yields no results, reset trending terms to remove active state
 			// OR if any terms are active, also reset to ensure only a single term or trending term is active
 			this.resetTrending();
 		}
 
-		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
-		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
+		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta);
 	}
 }

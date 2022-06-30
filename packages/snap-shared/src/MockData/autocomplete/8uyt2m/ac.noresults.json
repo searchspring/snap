@@ -1,0 +1,32 @@
+{
+    "pagination": {
+      "totalResults": 0,
+      "page": 1,
+      "pageSize": 30,
+      "defaultPageSize": 24,
+      "totalPages": 0
+    },
+    "results": [],
+    "filters": [],
+    "facets": [],
+    "sorting": [],
+    "merchandising": {
+      "redirect": "",
+      "is_elevated": [],
+      "elevated": [],
+      "removed": [],
+      "content": {},
+      "facets": [],
+      "facetsHide": [],
+      "experiments": [],
+      "variants": [],
+      "personalized": false
+    },
+    "search": {
+      "query": "efjii4iieiiedid"
+    },
+    "autocomplete": {
+      "query": "efjii4iieiiedid",
+      "alternatives": []
+    }
+  }

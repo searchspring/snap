@@ -4,16 +4,16 @@ import { ProductViewEvent, OrderTransactionEvent, BeaconPayload, CartViewEvent, 
 export class PixelEvent {
 	endpoint: string;
 	src: string;
-	img: HTMLImageElement;
-	event: ProductViewEvent | CartViewEvent | OrderTransactionEvent;
+	img: HTMLImageElement | undefined;
+	event: ProductViewEvent | CartViewEvent | OrderTransactionEvent | undefined;
 
 	constructor(payload: BeaconPayload) {
 		this.endpoint = `https://d3cgm8py10hi0z.cloudfront.net/is.gif`;
 
 		this.src =
 			this.endpoint +
-			`?s=${encodeURIComponent(payload.context.website.trackingCode)}` +
-			`&u=${encodeURIComponent(payload.context.userId)}` +
+			`?s=${encodeURIComponent(payload?.context?.website?.trackingCode || '')}` +
+			`&u=${encodeURIComponent(payload?.context?.userId || '')}` +
 			`&ce=${featureFlags.cookies ? '1' : '0'}` +
 			`&pt=${encodeURIComponent(document.title)}` +
 			`&v=1` + // version always '1'? or set to snap package version?
@@ -32,7 +32,7 @@ export class PixelEvent {
 				this.event = payload.event as CartViewEvent;
 				this.src += '&a=basket';
 				this.event.items.forEach((item) => {
-					if (item.sku) {
+					if (item?.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}
 				});
@@ -46,7 +46,7 @@ export class PixelEvent {
 				if (state) this.src += `&state=${encodeURIComponent(state)}`;
 				if (country) this.src += `&country=${encodeURIComponent(country)}`;
 				items.forEach((item) => {
-					if (item.sku) {
+					if (item?.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}
 				});

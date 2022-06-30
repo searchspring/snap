@@ -1,7 +1,7 @@
-import { LogMode } from '@searchspring/snap-logger';
-import { DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
+import { DomTargeter } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
+import type { MockClient } from '@searchspring/snap-shared';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
@@ -10,32 +10,36 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
-import type { ControllerServices, ControllerConfig, Attachments } from '../types';
+import type { ControllerServices, ControllerConfig, Attachments, ContextVariables } from '../types';
 
-const SS_DEV_COOKIE = 'ssDev';
 export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
-	public client; //todo: add typing
+	public client: Client;
 	public store: AbstractStore;
 	public urlManager: UrlManager;
 	public eventManager: EventManager;
 	public profiler: Profiler;
 	public log: Logger;
 	public tracker: Tracker;
+	public context: ContextVariables;
+
 	public targeters: {
 		[key: string]: DomTargeter;
 	} = {};
 
-	private _initialized = false;
-	private _environment = LogMode.PRODUCTION;
+	protected _initialized = false;
 
 	get initialized(): boolean {
 		return this._initialized;
 	}
 
-	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+	constructor(
+		config: ControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context: ContextVariables = {}
+	) {
 		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_-]*$/)) {
 			throw new Error(`Invalid config passed to controller. The "id" attribute must be an alphanumeric string.`);
 		}
@@ -75,15 +79,6 @@ export abstract class AbstractController {
 			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
 		}
 
-		window.searchspring = window.searchspring || {};
-		window.searchspring.controller = window.searchspring.controller || {};
-
-		if (window.searchspring.controller[config.id]) {
-			throw new Error(`Controller with id '${config.id}' is already defined`);
-		}
-
-		window.searchspring.controller[config.id] = this;
-
 		this.id = config.id;
 		this.config = config;
 		this.client = client;
@@ -93,46 +88,26 @@ export abstract class AbstractController {
 		this.profiler = profiler;
 		this.log = logger;
 		this.tracker = tracker;
+		this.context = context;
 
 		// configure the logger
 		this.log.setNamespace(this.config.id);
 
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);
-
-		if (!this.tracker.namespace) {
-			this.tracker.setNamespace(this.config.id);
-		}
-		// set environment
-		if (url(window.location.href)?.params?.query?.dev) {
-			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
-		}
-		const dev = cookies.get(SS_DEV_COOKIE);
-		this.environment = (dev === '1' ? 'development' : process.env.NODE_ENV) as LogMode;
 	}
 
-	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
+	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter | undefined {
 		return this.addTargeter(new DomTargeter([target], onTarget, document));
 	}
 
-	public addTargeter(target: DomTargeter): DomTargeter {
+	public addTargeter(target: DomTargeter): DomTargeter | undefined {
 		const firstTarget = target.getTargets()[0];
 		const targetName: string = (firstTarget?.name as string) ?? firstTarget?.selector;
 		if (targetName && !this.targeters[targetName]) {
 			this.targeters[targetName] = target;
 			return target;
 		}
-	}
-
-	public set environment(env: LogMode) {
-		if (Object.values(LogMode).includes(env)) {
-			this._environment = env;
-			this.log.setMode(env);
-		}
-	}
-
-	public get environment(): LogMode {
-		return this._environment;
 	}
 
 	public async init(): Promise<void> {
@@ -146,7 +121,7 @@ export abstract class AbstractController {
 				await this.eventManager.fire('init', {
 					controller: this,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'init' middleware cancelled`);
 				} else {
@@ -190,7 +165,7 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): Promise<void> {
+	public async plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): Promise<void> {
 		await func(this, ...args);
 	}
 
@@ -221,7 +196,7 @@ export abstract class AbstractController {
 		// attach event middleware
 		if (attachments?.middleware) {
 			Object.keys(attachments.middleware).forEach((eventName) => {
-				const eventMiddleware = attachments.middleware[eventName];
+				const eventMiddleware = attachments.middleware![eventName];
 				let middlewareArray;
 				if (Array.isArray(eventMiddleware)) {
 					middlewareArray = eventMiddleware;

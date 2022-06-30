@@ -8,18 +8,27 @@ import { observer } from 'mobx-react-lite';
 import { filters } from '@searchspring/snap-toolbox';
 
 import { defined } from '../../../utilities';
-import { ValueFacetValue, ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	palette: ({ columns, gapSize, theme }) =>
+	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
 		css({
-			display: 'grid',
-			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
+			display: 'flex',
+			flexFlow: 'row wrap',
+			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
+
 			'& .ss__facet-palette-options__option': {
-				position: 'relative',
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
+				marginRight: gapSize,
+				marginBottom: gapSize,
+				[`:nth-of-type(${columns}n)`]: {
+					marginRight: '0',
+				},
+
 				'&:hover': {
 					cursor: 'pointer',
 					'.ss__facet-palette-options__option__wrapper': {
@@ -38,7 +47,7 @@ const CSS = {
 				},
 				'&.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme.colors?.primary || '#333',
+						borderColor: theme?.colors?.primary || '#333',
 						padding: '0px',
 						borderWidth: '4px',
 					},
@@ -48,9 +57,6 @@ const CSS = {
 					border: '1px solid #EBEBEB',
 					borderRadius: '100%',
 					position: 'relative',
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
 					'& .ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
@@ -73,6 +79,14 @@ const CSS = {
 					whiteSpace: 'nowrap',
 				},
 			},
+			'@supports (display: grid)': {
+				display: 'grid',
+
+				'& .ss__facet-palette-options__option': {
+					margin: '0',
+					width: 'initial',
+				},
+			},
 		}),
 };
 
@@ -82,7 +96,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	const props: FacetPaletteOptionsProps = {
 		// default props
-		values: [],
 		columns: 4,
 		gapSize: '8px',
 		// global theme
@@ -108,57 +121,60 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 				size: '40%',
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.palette({ columns, gapSize, theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-palette-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-							onClick={onClick}
-							aria-label={value.value}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							{...value.url?.link}
-						>
-							<div className="ss__facet-palette-options__option__wrapper">
-								<div
-									className={classnames(
-										'ss__facet-palette-options__option__palette',
-										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
-									)}
-									css={{ background: value.value }}
-								>
-									{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
-								</div>
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-palette-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+						aria-label={value.value}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						<div className="ss__facet-palette-options__option__wrapper">
+							<div
+								className={classnames(
+									'ss__facet-palette-options__option__palette',
+									`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
+								)}
+								css={{ background: value.value }}
+							>
+								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
 							</div>
-							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+						</div>
+						{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface FacetPaletteOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	hideLabel?: boolean;
 	columns?: number;
 	gapSize?: string;
 	hideIcon?: boolean;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

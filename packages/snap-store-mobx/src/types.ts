@@ -1,5 +1,5 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-
+import type { SearchResponseModelFacetValueAllOfValues, AutocompleteRequestModel, SearchRequestModel } from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -8,20 +8,16 @@ export type StoreConfig = {
 
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
-	globals?: {
-		personalization?: {
-			disabled: boolean;
-		};
-		[any: string]: unknown;
-	};
+	globals?: Partial<SearchRequestModel>;
 	settings?: {
 		redirects?: {
 			merchandising?: boolean;
 			singleResult?: boolean;
 		};
-		facets?: {
-			trim?: boolean;
-			pinFiltered?: boolean;
+		facets?: FacetStoreConfig & {
+			fields?: {
+				[field: string]: FacetStoreConfig;
+			};
 		};
 		infinite?: {
 			backfill?: number;
@@ -29,11 +25,22 @@ export type SearchStoreConfig = StoreConfig & {
 	};
 };
 
+export type FacetStoreConfig = {
+	trim?: boolean;
+	pinFiltered?: boolean;
+	storeRange?: boolean;
+};
+
 // Finder Config
 export type FinderStoreConfig = StoreConfig & {
 	globals?: any;
 	url?: string;
 	fields: FinderFieldConfig[];
+	persist?: {
+		enabled: boolean;
+		lockSelections?: boolean;
+		expiration?: number;
+	};
 };
 
 export type FinderFieldConfig = {
@@ -44,23 +51,20 @@ export type FinderFieldConfig = {
 
 // Autocomplete config
 export type AutocompleteStoreConfig = StoreConfig & {
-	globals?: {
-		personalization?: {
-			disabled: boolean;
-		};
-		[any: string]: unknown;
-	};
+	globals?: Partial<AutocompleteRequestModel>;
 	selector: string;
 	action?: string;
 	settings?: {
 		initializeFromUrl?: boolean;
 		syncInputs?: boolean;
-		facets?: {
-			trim?: boolean;
-			pinFiltered?: boolean;
+		facets?: FacetStoreConfig & {
+			fields?: {
+				[field: string]: FacetStoreConfig;
+			};
 		};
 		trending?: {
 			limit: number;
+			showResults?: boolean;
 		};
 	};
 };
@@ -70,12 +74,15 @@ export type RecommendationStoreConfig = StoreConfig & {
 	globals?: any;
 	tag: string;
 	branch?: string;
+	realtime?: boolean;
+	batched?: boolean;
+	order?: number;
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;
 
 export type StoreServices = {
-	urlManager?: UrlManager;
+	urlManager: UrlManager;
 };
 
 export enum ErrorType {
@@ -83,3 +90,13 @@ export enum ErrorType {
 	INFO = 'info',
 	ERROR = 'error',
 }
+
+export type SelectedSelection = {
+	selected: string;
+	data: SearchResponseModelFacetValueAllOfValues[];
+	facet: any;
+};
+
+export type FinderStoreState = {
+	persisted: boolean;
+};

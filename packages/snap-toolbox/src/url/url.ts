@@ -1,10 +1,16 @@
-export const url = (href: string): URLParserResponse => {
+type paramsObject = {
+	query: { [key: string]: any };
+	hash: string;
+};
+
+export const url = (href: string): URLParserResponse | undefined => {
 	if (!href) {
 		return;
 	}
 	const [urlWithoutHash, hash] = href.split('#');
 	const [base, queryParams] = urlWithoutHash.split('?');
-	const params = {
+
+	const params: paramsObject = {
 		query: {},
 		hash,
 	};

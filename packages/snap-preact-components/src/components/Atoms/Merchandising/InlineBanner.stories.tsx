@@ -8,6 +8,9 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Merchandising/readme.md';
 import { Layout } from '../../../types';
 
+import type { Banner } from '@searchspring/snap-store-mobx';
+import type { SearchController } from '@searchspring/snap-controller';
+
 export default {
 	title: `Atoms/InlineBanner`,
 	component: InlineBanner,
@@ -23,11 +26,11 @@ export default {
 	},
 	argTypes: {
 		banner: {
-			description: 'InlineBanner content store reference',
+			description: 'Banner object reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'inline banner content store object',
+					summary: 'inline banner store object',
 				},
 			},
 			control: { type: 'none' },
@@ -54,10 +57,19 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		onClick: {
+			description: 'Custom onClick event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
 		...componentArgs,
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					width: '220px',
@@ -73,12 +85,12 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'InlineBanner', globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
-const Template = (args: InlineBannerProps, { loaded: { controller } }) => {
-	const inlineBanners = controller?.store?.merchandising?.content?.inline;
-	return inlineBanners && <InlineBanner banner={inlineBanners[0]} {...args} />;
+export const Default = (args: InlineBannerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	const inlineBanners = controller?.store?.results?.filter((result) => result.type === 'banner').pop() as Banner;
+
+	return inlineBanners && <InlineBanner {...args} banner={inlineBanners} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

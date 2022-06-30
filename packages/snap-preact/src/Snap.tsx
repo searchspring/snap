@@ -1,9 +1,11 @@
 import deepmerge from 'deepmerge';
+import { isPlainObject } from 'is-plain-object';
 import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
-import { Logger, LogMode } from '@searchspring/snap-logger';
+import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { ControllerTypes } from '@searchspring/snap-controller';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -17,39 +19,36 @@ import type {
 	FinderControllerConfig,
 	RecommendationControllerConfig,
 	ControllerConfigs,
+	ContextVariables,
 } from '@searchspring/snap-controller';
+import type { TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, RootComponent } from './types';
+import type { SnapControllerServices, SnapControllerConfigs, RootComponent } from './types';
 
-const BRANCH_COOKIE = 'ssBranch';
-const SS_DEV_COOKIE = 'ssDev';
+export const BRANCH_COOKIE = 'ssBranch';
+export const DEV_COOKIE = 'ssDev';
 
 type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<RootComponent> | RootComponent;
 	skeleton?: () => Promise<any>;
-	props?: unknown;
+	props?: {
+		[propName: string]: any;
+	};
 	onTarget?: OnTarget;
 	prefetch?: boolean;
 };
 
-type ContextVariables = {
-	shopper?: {
-		id: string;
-		[variable: string]: any;
-	};
-	[variable: string]: any;
-};
-
 export type SnapConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
-	client: {
+	client?: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
 	};
@@ -62,159 +61,352 @@ export type SnapConfig = {
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
-			targeters: ExtendedTarget[];
+			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 	};
 };
 
-type ControllerTypes = SearchController | AutocompleteController | FinderController | RecommendationController;
-enum DynamicImportNames {
-	SEARCH = 'searchController',
-	AUTOCOMPLETE = 'autocompleteController',
-	FINDER = 'finderController',
-	RECOMMENDATION = 'recommendationController',
-}
+type SnapServices = {
+	client?: Client;
+	tracker?: Tracker;
+	logger?: Logger;
+};
 
+type Controllers = SearchController | AutocompleteController | FinderController | RecommendationController;
+
+const SESSION_ATTRIBUTION = 'ssAttribution';
+
+const COMPONENT_ERROR = `Uncaught Error - Invalid value passed as the component.
+This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
+		
+		instead of - 
+
+	targeters: [
+		{
+			selector: '#searchspring-content',
+			hideTarget: true,
+			component: <Content/>,
+		},
+	]
+
+		or - 
+
+	targeters: [
+		{
+			selector: '#searchspring-content',
+			hideTarget: true,
+			component: Content,
+		},
+	]
+
+		please try - 
+
+	targeters: [
+		{
+			selector: '#searchspring-content',
+			hideTarget: true,
+			component: () => Content
+		},
+	]
+
+The error above happened in the following targeter in the Snap Config`;
 export class Snap {
-	config: SnapConfig;
-	logger: Logger;
-	client: Client;
-	tracker: Tracker;
-	_controllerPromises: {
-		[controllerConfigId: string]: Promise<ControllerTypes>;
-	};
-
-	controllers: {
-		[controllerConfigId: string]: ControllerTypes;
-	};
-
-	_instantiatorPromises: {
+	private mode = AppMode.production;
+	private config: SnapConfig;
+	private _instantiatorPromises: {
 		[instantiatorId: string]: Promise<RecommendationInstantiator>;
-	};
+	} = {};
+	private _controllerPromises: {
+		[controllerConfigId: string]: Promise<Controllers>;
+	} = {};
+
+	public logger!: Logger;
+	public client!: Client;
+	public tracker!: Tracker;
+	public context: ContextVariables;
+	public controllers: {
+		[controllerConfigId: string]: Controllers;
+	} = {};
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
 	};
 
-	public getController = (id: string): Promise<ControllerTypes> => {
+	public getController = (id: string): Promise<Controllers> => {
 		return this._controllerPromises[id] || Promise.reject(`getController could not find controller with id: ${id}`);
 	};
 
-	public getControllers = (...controllerIds: string[]): Promise<ControllerTypes[]> => {
-		const getControllerPromises = [];
+	public getControllers = (...controllerIds: string[]): Promise<Controllers[]> => {
+		const getControllerPromises: Promise<Controllers>[] = [];
 		controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
 		return Promise.all(getControllerPromises);
 	};
 
-	public createController = (
-		type: DynamicImportNames,
+	// exposed method used for creating controllers dynamically - calls _createController()
+	public createController = async (
+		type: keyof typeof ControllerTypes,
 		config: ControllerConfigs,
-		services: SnapControllerServices,
-		urlConfig: UrlTranslatorConfig,
-		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void
-	): Promise<ControllerTypes> => {
-		let importPromise;
-		switch (type) {
-			case DynamicImportNames.SEARCH:
-				importPromise = import('./create/createSearchController');
-				break;
-			case DynamicImportNames.AUTOCOMPLETE:
-				importPromise = import('./create/createAutocompleteController');
-				break;
-			case DynamicImportNames.FINDER:
-				importPromise = import('./create/createFinderController');
-				break;
-			case DynamicImportNames.RECOMMENDATION:
-				importPromise = import('./create/createRecommendationController');
-				break;
+		services?: SnapControllerServices,
+		urlConfig?: UrlTranslatorConfig,
+		context?: ContextVariables,
+		callback?: (value?: Controllers | PromiseLike<Controllers>) => void | Promise<void>
+	): Promise<Controllers> => {
+		if (typeof this._controllerPromises[config.id] != 'undefined') {
+			throw new Error(`Controller with id '${config.id}' is already defined`);
 		}
 
-		return importPromise.then((_) => {
-			if (!this.controllers[config.id]) {
-				this.controllers[config.id] = _.default(
-					{
-						url: deepmerge(this.config.url || {}, urlConfig || {}),
-						controller: config,
-					},
-					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
-				);
-				resolve(this.controllers[config.id]);
-			}
+		this._controllerPromises[config.id] = new Promise((resolve) =>
+			this._createController(type, config, services, urlConfig, context, async (cntrlr) => {
+				if (typeof callback == 'function') await callback(cntrlr);
+				resolve(cntrlr);
+			})
+		);
 
-			return this.controllers[config.id];
-		});
+		return this._controllerPromises[config.id];
 	};
 
-	constructor(config: SnapConfig) {
+	// internal use method that creates controllers without verifying if id is in use first
+	private _createController = async (
+		type: keyof typeof ControllerTypes,
+		config: ControllerConfigs,
+		services?: SnapControllerServices,
+		urlConfig?: UrlTranslatorConfig,
+		context?: ContextVariables,
+		callback?: (cntrlr: Controllers) => void | Promise<void>
+	): Promise<Controllers> => {
+		let importPromise;
+		switch (type) {
+			case ControllerTypes.autocomplete:
+				importPromise = import('./create/createAutocompleteController');
+				break;
+			case ControllerTypes.finder:
+				importPromise = import('./create/createFinderController');
+				break;
+			case ControllerTypes.recommendation:
+				importPromise = import('./create/createRecommendationController');
+				break;
+			case ControllerTypes.search:
+			default:
+				importPromise = import('./create/createSearchController');
+				break;
+		}
+
+		// @ts-ignore - we know the config is correct, but complicated typing
+		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
+
+		if (!this.controllers[config.id]) {
+			window.searchspring.controller = window.searchspring.controller || {};
+			window.searchspring.controller[config.id] = this.controllers[config.id] = creationFunc(
+				{
+					mode: this.mode,
+					url: deepmerge(this.config.url || {}, urlConfig || {}),
+					controller: config,
+					context: deepmerge(this.context || {}, context || {}),
+				},
+				{
+					client: services?.client || this.client,
+					store: services?.store,
+					urlManager: services?.urlManager,
+					eventManager: services?.eventManager,
+					profiler: services?.profiler,
+					logger: services?.logger,
+					tracker: services?.tracker || this.tracker,
+				}
+			);
+		}
+
+		if (callback) {
+			await callback(this.controllers[config.id]);
+		}
+
+		return this.controllers[config.id];
+	};
+
+	public handlers = {
+		error: (event: ErrorEvent): void => {
+			try {
+				const { filename } = event;
+				if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
+					const {
+						colno,
+						lineno,
+						error: { stack },
+						message,
+						timeStamp,
+					} = event;
+					const userAgent = navigator.userAgent;
+					const href = window.location.href;
+
+					const beaconPayload: TrackErrorEvent = {
+						userAgent,
+						href,
+						filename,
+						stack,
+						message,
+						colno,
+						lineno,
+						timeStamp,
+					};
+					this.tracker.track.error(beaconPayload);
+				}
+			} catch (e) {
+				// prevent error metrics from breaking the app
+			}
+		},
+	};
+
+	constructor(config: SnapConfig, services?: SnapServices) {
+		window.removeEventListener('error', this.handlers.error);
+		window.addEventListener('error', this.handlers.error);
+
 		this.config = config;
-		this.logger = new Logger('Snap Preact ');
-		if (!this.config?.client?.globals?.siteId) {
+
+		let globalContext: ContextVariables = {};
+		try {
+			// get global context
+			globalContext = getContext(['shopper', 'config', 'merchandising']);
+		} catch (err) {
+			console.error('Snap failed to find global context');
+		}
+
+		// merge configs - but only merge plain objects
+		this.config = deepmerge(this.config || {}, (globalContext.config as SnapConfig) || {}, {
+			isMergeableObject: isPlainObject,
+		});
+
+		this.context = deepmerge(this.config.context || {}, globalContext || {}, {
+			isMergeableObject: isPlainObject,
+		});
+
+		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
-		this.client = new Client(this.config.client.globals, this.config.client.config);
-		this.tracker = new Tracker(this.config.client.globals);
-		this._controllerPromises = {};
-		this._instantiatorPromises = {};
-		this.controllers = {};
 
-		// autotrack shopper id from the context
-		if (this.config.context && this.config.context.shopper?.id) {
-			this.tracker.track.shopper.login({
-				data: {
-					id: this.config.context.shopper.id,
-				},
-			});
+		// segmented merchandising context -> client globals
+		if (this.config.client?.globals && this.context.merchandising?.segments) {
+			if (this.config.client.globals?.merchandising) {
+				this.config.client.globals.merchandising.segments = deepmerge(
+					this.config.client.globals.merchandising.segments,
+					this.context.merchandising.segments
+				);
+			} else {
+				this.config.client.globals.merchandising = {
+					segments: this.context.merchandising.segments,
+				};
+			}
 		}
-
-		// TODO environment switch using URL?
-		this.logger.setMode(process.env.NODE_ENV as LogMode);
-
-		// log version
-		this.logger.imageText({
-			url: 'https://snapui.searchspring.io/favicon.svg',
-			text: `[${version}]`,
-			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
-		});
 
 		try {
 			const urlParams = url(window.location.href);
-			const branchParam = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
 
-			if (branchParam && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
-				// set a cookie or localstorage with branch
+			/* app mode priority:
+				1. node env
+				2. config
+				3. override via query param / cookie
+			*/
+
+			// node env
+			if (process.env.NODE_ENV && Object.values(AppMode).includes(process.env.NODE_ENV as AppMode)) {
+				this.mode = process.env.NODE_ENV as AppMode;
+			}
+
+			// config
+			if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
+				this.mode = this.config.mode as AppMode;
+			}
+
+			// query param / cookiev override
+			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
+				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
+					cookies.unset(DEV_COOKIE);
+					this.mode = AppMode.production;
+				} else {
+					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
+					this.mode = AppMode.development;
+				}
+			}
+
+			// client mode uses client config over snap config
+			if (this.config.client) {
+				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			}
+			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
+			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
+
+			// check for tracking attribution in URL ?ss_attribution=type:id
+			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
+			if (urlParams?.params?.query?.ss_attribution) {
+				const attribution = urlParams.params.query.ss_attribution.split(':');
+				const [type, id] = attribution;
+				if (type && id) {
+					this.tracker.updateContext('attribution', { type, id });
+				}
+				// save to session storage
+				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
+			} else if (sessionAttribution) {
+				const [type, id] = sessionAttribution.split(':');
+				if (type && id) {
+					this.tracker.updateContext('attribution', { type, id });
+				}
+			}
+
+			// log version
+			this.logger.imageText({
+				url: 'https://snapui.searchspring.io/favicon.svg',
+				text: `[${version}]`,
+				style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
+			});
+
+			if (branchOverride && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
+				this.logger.warn(`...loading build... '${branchOverride}'`);
+
+				// set a cookie with branch
 				if (featureFlags.cookies) {
-					cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000); // 1 hour
-					cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
+					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000); // 1 hour
 				} else {
 					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
 				}
 
-				this.logger.setMode(LogMode.DEVELOPMENT);
-				this.logger.warn(`...loading '${branchParam}' build...`);
+				// get the path and siteId from the current bundle script in case its not the same as the client config
+				let path = `https://snapui.searchspring.io/${this.config.client!.globals.siteId}/`;
+				const script: HTMLScriptElement | null = document.querySelector('script[src*="//snapui.searchspring.io"]');
+
+				if (script) {
+					const scriptRoot = script.getAttribute('src')!.match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
+					if (scriptRoot) {
+						path = scriptRoot.toString();
+					}
+				}
 
 				// append script with new branch in path
-				const script = document.createElement('script');
-				const src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
-				script.src = src;
-				script.setAttribute(BRANCH_COOKIE, '');
-				document.head.appendChild(script);
+				const branchScript = document.createElement('script');
+				const src = `${path}${branchOverride}/bundle.js`;
+				branchScript.src = src;
+				branchScript.setAttribute(BRANCH_COOKIE, branchOverride);
 
 				new DomTargeter(
 					[
@@ -224,37 +416,111 @@ export class Snap {
 								action: 'append', // before, after, append, prepend
 								element: () => {
 									const branchContainer = document.createElement('div');
-									branchContainer.className = 'ss__branch--target';
+									branchContainer.id = 'searchspring-branch-override';
 									return branchContainer;
 								},
 							},
 						},
 					],
-					async (target, elem) => {
+					async (target: Target, elem: Element) => {
+						const props: {
+							details?: any;
+							error?: any;
+						} = {};
+
+						try {
+							const getBundleDetails = (await import('./getBundleDetails/getBundleDetails')).getBundleDetails;
+							props.details = await getBundleDetails(src);
+						} catch (err) {
+							props.error = err;
+						}
+
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
-						render(<BranchOverride branch={branchParam} cookieName={BRANCH_COOKIE} bundleUrl={src} />, elem);
+						render(
+							<BranchOverride
+								{...props}
+								name={branchOverride}
+								onRemoveClick={() => {
+									cookies.unset(BRANCH_COOKIE);
+									const urlState = url(window.location.href);
+									delete urlState?.params.query['branch'];
+
+									const newUrl = urlState?.url();
+									if (newUrl && newUrl != window.location.href) {
+										window.location.href = newUrl;
+									} else {
+										window.location.reload();
+									}
+								}}
+							/>,
+							elem
+						);
+
+						// reset the global searchspring object
+						delete window.searchspring;
+
+						document.head.appendChild(branchScript);
 					}
 				);
 
-				// prevent instantiation of config
+				// prevent further instantiation of config
 				return;
 			}
-		} catch (e) {}
+		} catch (e) {
+			this.logger.error(e);
+		}
+
+		// bind to window global
+		window.searchspring = window.searchspring || {};
+		window.searchspring.context = this.context;
+		if (this.client) window.searchspring.client = this.client;
+
+		// autotrack shopper id from the context
+		if (this.context?.shopper?.id) {
+			this.tracker.track.shopper.login({
+				id: this.context.shopper.id,
+			});
+		}
+
+		// auto populate cart cookie from the context
+		if (this.context?.shopper?.cart) {
+			const cart = this.context.shopper.cart;
+			if (Array.isArray(cart)) {
+				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku || '').trim());
+				this.tracker.cookies.cart.set(cartItems);
+			}
+		}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'search': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						try {
+							if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
+								this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+								return;
+							}
+
 							const cntrlr = createSearchController(
 								{
+									mode: this.mode,
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
+									context: deepmerge(this.context || {}, controller.context || {}),
 								},
-								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+								{
+									client: controller.services?.client || this.client,
+									store: controller.services?.store,
+									urlManager: controller.services?.urlManager,
+									eventManager: controller.services?.eventManager,
+									profiler: controller.services?.profiler,
+									logger: controller.services?.logger,
+									tracker: controller.services?.tracker || this.tracker,
+								}
 							);
 
-							this.controllers[cntrlr.config.id] = cntrlr;
+							window.searchspring.controller = window.searchspring.controller || {};
+							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
 							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
 							let searched = false;
@@ -265,59 +531,22 @@ export class Snap {
 								}
 							};
 
-							const targetFunction = async (target, elem, originalElem) => {
+							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 								runSearch();
 								const onTarget = target.onTarget as OnTarget;
-								onTarget && onTarget(target, elem, originalElem);
+								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const Component = await (target as ExtendedTarget).component();
+									const Component = await target.component!();
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
 								} catch (err) {
-									this.logger.error(
-										`Uncaught Error - Invalid value passed as the component.
-	This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
-			
-				instead of - 
-
-			targeters: [
-				{
-					selector: '#searchspring-content',
-					hideTarget: true,
-					component: <Content/>,
-				},
-			]
-
-				or - 
-
-			targeters: [
-				{
-					selector: '#searchspring-content',
-					hideTarget: true,
-					component: Content,
-				},
-			]
-
-				please try - 
-
-			targeters: [
-				{
-					selector: '#searchspring-content',
-					hideTarget: true,
-					component: () => Content
-				},
-			]
-
-			
-The error above happened in the following targeter in the Snap Config`,
-										target
-									);
+									this.logger.error(COMPONENT_ERROR, target);
 								}
 							};
 
-							controller?.targeters?.forEach(async (target, target_index) => {
+							controller?.targeters?.forEach((target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
@@ -329,14 +558,14 @@ The error above happened in the following targeter in the Snap Config`,
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
-									if (target.skeleton) {
-										const Skeleton = await (target as ExtendedTarget).skeleton();
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target: ExtendedTarget, elem: Element, originalElem?: Element) => {
+									if (target && target.skeleton && elem) {
+										const Skeleton = await target.skeleton!();
 										setTimeout(() => {
 											render(<Skeleton />, elem);
 										});
 									}
-									targetFunction(target, elem, originalElem);
+									targetFunction(target, elem, originalElem!);
 								});
 							});
 						} catch (err) {
@@ -347,7 +576,12 @@ The error above happened in the following targeter in the Snap Config`,
 				}
 
 				case 'autocomplete': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let bound = false;
@@ -360,31 +594,52 @@ The error above happened in the following targeter in the Snap Config`,
 									}
 								};
 
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
-									onTarget && onTarget(target, elem, originalElem);
+									onTarget && (await onTarget(target, elem, originalElem));
 
-									const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
-										controller: AutocompleteController;
-										input: HTMLInputElement | string | Element;
-									}>;
+									try {
+										const Component = (await target.component!()) as React.ElementType<{
+											controller: AutocompleteController;
+											input: HTMLInputElement | string | Element;
+										}>;
 
-									setTimeout(() => {
-										render(<Component controller={this.controllers[controller.config.id]} input={originalElem} {...target.props} />, elem);
-									});
+										setTimeout(() => {
+											render(
+												<Component
+													controller={this.controllers[controller.config.id] as AutocompleteController}
+													input={originalElem}
+													{...target.props}
+												/>,
+												elem
+											);
+										});
+									} catch (err) {
+										this.logger.error(COMPONENT_ERROR, target);
+									}
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, controller.url, resolve);
+									this._createController(
+										ControllerTypes.autocomplete,
+										controller.config,
+										controller.services,
+										controller.url,
+										controller.context,
+										(cntrlr) => {
+											if (cntrlr) resolve(cntrlr);
+										}
+									);
 								}
 
-								controller?.targeters?.forEach(async (target, target_index) => {
+								controller?.targeters?.forEach((target, target_index) => {
 									if (!target.selector) {
 										throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 									}
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
+
 									const targeter = new DomTargeter(
 										[
 											{
@@ -402,16 +657,19 @@ The error above happened in the following targeter in the Snap Config`,
 												...target,
 											},
 										],
-										async (target, elem, originalElem) => {
-											const cntrlr = await this.createController(
-												DynamicImportNames.AUTOCOMPLETE,
+										async (target: Target, elem: Element, originalElem?: Element) => {
+											const cntrlr = await this._createController(
+												ControllerTypes.autocomplete,
 												controller.config,
 												controller.services,
 												controller.url,
-												resolve
+												controller.context,
+												(cntrlr) => {
+													if (cntrlr) resolve(cntrlr);
+												}
 											);
 											runBind();
-											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+											targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 											cntrlr.addTargeter(targeter);
 										}
 									);
@@ -425,7 +683,12 @@ The error above happened in the following targeter in the Snap Config`,
 				}
 
 				case 'finder': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -435,38 +698,54 @@ The error above happened in the following targeter in the Snap Config`,
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
-									onTarget && onTarget(target, elem, originalElem);
+									onTarget && (await onTarget(target, elem, originalElem));
 
-									const Component = await (target as ExtendedTarget).component();
+									try {
+										const Component = await target.component!();
 
-									setTimeout(() => {
-										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
-									});
+										setTimeout(() => {
+											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+										});
+									} catch (err) {
+										this.logger.error(COMPONENT_ERROR, target);
+									}
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.FINDER, controller.config, controller.services, controller.url, resolve);
+									this._createController(
+										ControllerTypes.finder,
+										controller.config,
+										controller.services,
+										controller.url,
+										controller.context,
+										(cntrlr) => {
+											if (cntrlr) resolve(cntrlr);
+										}
+									);
 								}
 
-								controller?.targeters?.forEach(async (target, target_index) => {
+								controller?.targeters?.forEach((target, target_index) => {
 									if (!target.selector) {
 										throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 									}
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(
-											DynamicImportNames.FINDER,
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
+										const cntrlr = await this._createController(
+											ControllerTypes.finder,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											controller.context,
+											(cntrlr) => {
+												if (cntrlr) resolve(cntrlr);
+											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -479,7 +758,12 @@ The error above happened in the following targeter in the Snap Config`,
 				}
 
 				case 'recommendation': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -489,38 +773,54 @@ The error above happened in the following targeter in the Snap Config`,
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
-									onTarget && onTarget(target, elem, originalElem);
+									onTarget && (await onTarget(target, elem, originalElem));
 
-									const Component = await (target as ExtendedTarget).component();
+									try {
+										const Component = await target.component!();
 
-									setTimeout(() => {
-										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
-									});
+										setTimeout(() => {
+											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+										});
+									} catch (err) {
+										this.logger.error(COMPONENT_ERROR, target);
+									}
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, controller.url, resolve);
+									this._createController(
+										ControllerTypes.recommendation,
+										controller.config,
+										controller.services,
+										controller.url,
+										controller.context,
+										(cntrlr) => {
+											if (cntrlr) resolve(cntrlr);
+										}
+									);
 								}
 
-								controller?.targeters?.forEach(async (target, target_index) => {
+								controller?.targeters?.forEach((target, target_index) => {
 									if (!target.selector) {
 										throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 									}
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(
-											DynamicImportNames.RECOMMENDATION,
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
+										const cntrlr = await this._createController(
+											ControllerTypes.recommendation,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											controller.context,
+											(cntrlr) => {
+												if (cntrlr) resolve(cntrlr);
+											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -534,14 +834,19 @@ The error above happened in the following targeter in the Snap Config`,
 			}
 		});
 
-		if (config?.instantiators?.recommendation) {
+		if (this.config?.instantiators?.recommendation) {
 			try {
-				this._instantiatorPromises.recommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
-					return new RecommendationInstantiator(config.instantiators.recommendation, {
-						client: config.instantiators.recommendation?.services?.client || this.client,
-						tracker: config.instantiators.recommendation?.services?.tracker || this.tracker,
-						logger: config.instantiators.recommendation?.services?.logger || this.logger,
-					});
+				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
+					this.config.instantiators!.recommendation!.mode = this.config.instantiators!.recommendation!.mode || this.mode;
+					return new RecommendationInstantiator(
+						this.config.instantiators!.recommendation!,
+						{
+							client: this.client,
+							tracker: this.tracker,
+							logger: this.logger,
+						},
+						this.context
+					);
 				});
 			} catch (err) {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);

@@ -21,14 +21,6 @@ Snap Controller is a top-level package that requires the following dependencies 
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger)
 
-<details>
-	<summary>Package dependencies hierarchy</summary>
-	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true"/>
-</details>
-
-<br>
-
 ## Installation
 
 To install the `snap-controller` package and it's services:
@@ -96,6 +88,16 @@ Controllers may need to know how long a certain event took, the `profiler` servi
 
 ### logger
 The `logger` service provides logging functionality to a controller. Each controller logs when errors in middleware and when controller events occur. The logger is responsible for sending this information to the developer console. In addition the logger may provide additional emoji or colors to use. This service is exposed as `controller.log`.
+
+
+## Context
+Each Controller can optionally take a 3rd parameter for `Context`. This is to allow each individual controller to have its own individual context if so desired.
+
+The context is exposed as `controller.context`
+```typescript
+controller.context;
+```
+
 
 ## Initialization
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. It also fires the `init` event which executes attached middleware. This can be fired manually as needed; if it was not manually fired it will happen automatically on the first call to the controller `search` method.
