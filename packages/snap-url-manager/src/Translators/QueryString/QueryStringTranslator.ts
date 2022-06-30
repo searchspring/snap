@@ -49,7 +49,8 @@ export class QueryStringTranslator implements Translator {
 	}
 
 	protected generateQueryString(params: Array<QueryParameter>): string {
-		const paramString = params.length
+		const root = this.config.urlRoot || window.location.pathname;
+		const queryParamString = params.length
 			? '?' +
 			  params
 					.map((param) => {
@@ -58,7 +59,7 @@ export class QueryStringTranslator implements Translator {
 					.join('&')
 			: '';
 
-		return `${this.config.urlRoot || window.location.pathname}${paramString}`;
+		return `${root}${queryParamString}`;
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
