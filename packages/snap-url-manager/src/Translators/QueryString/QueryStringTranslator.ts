@@ -49,7 +49,12 @@ export class QueryStringTranslator implements Translator {
 	}
 
 	protected generateQueryString(params: Array<QueryParameter>): string {
-		const root = this.config.urlRoot || window.location.pathname;
+		const root = this.config.urlRoot.includes('?')
+			? this.config.urlRoot.split('?')[0]
+			: this.config.urlRoot.includes('#')
+			? this.config.urlRoot.split('#')[0]
+			: this.config.urlRoot || window.location.pathname;
+
 		const queryParamString = params.length
 			? '?' +
 			  params
