@@ -15,7 +15,7 @@
 		"README.md"
 	],
 	"scripts": {
-		"build": "rm -rf ./dist && tsc --skipLibCheck && tsc --skipLibCheck -p tsconfig.cjs.json",
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"build:docs": "build-storybook -o ./docs",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
@@ -37,7 +37,6 @@
 		"preact": "10.7.3"
 	},
 	"devDependencies": {
-		"@mdx-js/loader": "1.6.22",
 		"@searchspring/snap-client": "^0.29.0",
 		"@searchspring/snap-controller": "^0.29.0",
 		"@searchspring/snap-event-manager": "^0.29.0",
@@ -59,12 +58,11 @@
 		"@testing-library/preact": "2.0.1",
 		"@testing-library/user-event": "13.5.0",
 		"@types/react-ranger": "2.0.1",
-		"@types/react": "16.14.0",
+		"@types/react": "16.14.28",
 		"mobx-react": "7.5.0",
 		"preact": "10.7.3",
 		"react": "16.14.0",
-		"react-dom": "16.14.0",
-		"ts-loader": "9.3.0"
+		"react-dom": "16.14.0"
 	},
 	"sideEffects": false
 }
