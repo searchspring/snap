@@ -20,7 +20,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.28.0"
+		"@searchspring/snap-toolbox": "^0.29.0"
 	},
 	"sideEffects": false,
 	"files": [
