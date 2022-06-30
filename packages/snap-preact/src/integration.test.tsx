@@ -164,4 +164,57 @@ describe('Snap Preact Integration', () => {
 		expect(devCookie).toBeFalsy();
 		cookies.unset(DEV_COOKIE);
 	});
+
+	it(`takes the ss_attribution param from the URL and sets the sessionStorage`, async () => {
+		// set up
+		const key = 'ssAttribution';
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		// end set up
+
+		// nothing in storage initially
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com',
+		};
+		let snap = new Snap(baseConfig);
+		expect(mockStorage[key]).toBeUndefined();
+
+		// should add attribution to storage from url
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com?ss_attribution=email:emailTag',
+		};
+		snap = new Snap(baseConfig);
+		expect(mockStorage[key]).toBe('email:emailTag');
+
+		// remove attribution query param, but ensure that sessionStorage value still set
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com',
+		};
+		snap = new Snap(baseConfig);
+		expect(mockStorage[key]).toBe('email:emailTag');
+
+		// change attribution to email:differentEmailTag
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com?ss_attribution=email:differentEmailTag',
+		};
+		snap = new Snap(baseConfig);
+		expect(mockStorage[key]).toBe('email:differentEmailTag');
+
+		// clean up
+		// return our mocks to their original values
+		// 🚨 THIS IS VERY IMPORTANT to avoid polluting future tests!
+		// @ts-ignore
+		global.Storage.prototype.setItem.mockRestore();
+		// @ts-ignore
+		global.Storage.prototype.getItem.mockRestore();
+	});
 });
