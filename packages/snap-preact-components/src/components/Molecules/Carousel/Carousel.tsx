@@ -296,6 +296,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 							  }
 							: false
 					}
+					threshold={7}
 					{...additionalProps}
 					{...displaySettings}
 				>
