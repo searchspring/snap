@@ -3,8 +3,12 @@ import { observer } from 'mobx-react';
 
 import { Result } from '@searchspring/snap-preact-components';
 
+type EmailProps = {
+	controller?: RecommendationController;
+};
+
 @observer
-export class Email extends Component {
+export class Email extends Component<EmailProps> {
 	render() {
 		const controller = this.props.controller;
 		const store = controller?.store;

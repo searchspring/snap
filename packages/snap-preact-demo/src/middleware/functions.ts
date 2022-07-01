@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-export async function timeout(microSeconds) {
+export async function timeout(microSeconds: number) {
 	console.log(`...waiting ${microSeconds} μsecs...`);
 
 	return new Promise((resolve, reject) => {
@@ -8,8 +8,15 @@ export async function timeout(microSeconds) {
 	});
 }
 
-export function ensure(func, callback, customOptions) {
-	const options = {
+type EnsureOptions = {
+	checkMax: number;
+	checkCount: number;
+	checkTime: number;
+	defer: boolean;
+};
+
+export function ensure(func: () => any, callback: () => any, customOptions?: Partial<EnsureOptions>) {
+	const options: EnsureOptions = {
 		checkMax: 600,
 		checkCount: 0,
 		checkTime: 50,
@@ -34,8 +41,16 @@ export function ensure(func, callback, customOptions) {
 	}
 }
 
-export async function until(thing, customOptions) {
-	const options = {
+type UntilOptions = {
+	checkMax: number;
+	checkCount: number;
+	checkTime: number;
+	exponential: number;
+	defer: boolean;
+};
+
+export async function until(thing: any, customOptions?: Partial<UntilOptions>) {
+	const options: UntilOptions = {
 		checkMax: 20,
 		checkCount: 0,
 		checkTime: 50,
@@ -70,7 +85,7 @@ export async function until(thing, customOptions) {
 			}, options.checkTime);
 		}
 
-		function checkForThing(thing) {
+		function checkForThing(thing: any) {
 			switch (typeof thing) {
 				case 'function': {
 					return thing();
@@ -84,10 +99,10 @@ export async function until(thing, customOptions) {
 	});
 }
 
-export function combineMerge(target, source, options) {
+export function combineMerge(target: any, source: any, options: any) {
 	const destination = target.slice();
 
-	source.forEach((item, index) => {
+	source.forEach((item: any, index: number) => {
 		if (typeof destination[index] === 'undefined') {
 			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
 		} else if (options.isMergeableObject(item)) {

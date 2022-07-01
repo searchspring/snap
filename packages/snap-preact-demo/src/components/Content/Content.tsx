@@ -4,8 +4,13 @@ import { observer } from 'mobx-react';
 import { ThemeProvider, LoadingBar, defaultTheme, StoreProvider, ControllerProvider } from '@searchspring/snap-preact-components';
 import { Header } from '../Header/Header';
 import { Results, NoResults } from '../Results/Results';
+
+type ContentProps = {
+	controller?: SearchController;
+};
+
 @observer
-export class Content extends Component {
+export class Content extends Component<ContentProps> {
 	render() {
 		const store = this.props.controller.store;
 

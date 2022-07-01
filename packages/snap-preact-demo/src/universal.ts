@@ -1,10 +1,12 @@
 import 'core-js/features/promise';
 const promises = [];
 if (!('fetch' in window)) {
-	promises.push(import('whatwg-fetch'));
+	// @ts-ignore - types not important
+	promises.push(import('whatwg-fetch') as any);
 }
 if (!('Symbol' in window) || !('flatMap' in Array.prototype) || !('includes' in Array.prototype)) {
-	promises.push(import('core-js/stable'));
+	// @ts-ignore - types not important
+	promises.push(import('core-js/stable') as any);
 }
 Promise.all(promises).then(() => {
 	import('./index');

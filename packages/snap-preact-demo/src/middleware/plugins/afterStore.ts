@@ -1,5 +1,5 @@
-export function afterStore(controller) {
-	controller.on('init', async ({ controller }, next) => {
+export function afterStore(controller: AbstractController) {
+	controller.on('init', async ({ controller: AbstractController }, next) => {
 		controller.log.debug('initialization...');
 		await next();
 	});
@@ -19,7 +19,7 @@ export function afterStore(controller) {
 	controller.on('afterStore', scrollToTop);
 }
 
-function mutateFacets(facets) {
+function mutateFacets(facets: SearchFacetsStore) {
 	for (let facet of facets) {
 		let limit = 12;
 		if (facet.display == 'palette' || facet.display == 'grid') {
@@ -30,13 +30,13 @@ function mutateFacets(facets) {
 	}
 }
 
-function mutateResults(results) {
+function mutateResults(results: SearchResultsStore) {
 	for (let result of results) {
 		result.mappings.core.name += '++';
 	}
 }
 
-export async function scrollToTop(search, next) {
+export async function scrollToTop({ controller }: { controller: SearchController }, next: Next) {
 	window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	await next();
 }
