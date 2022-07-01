@@ -1,3 +1,5 @@
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import {
 	AutocompleteRequestModel,
 	AutocompleteResponseModel,
@@ -7,7 +9,7 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
+import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 import type { SuggestRequestModel } from '../../types';
 
@@ -20,9 +22,17 @@ export class HybridAPI extends API {
 	constructor(configuration: ApiConfiguration) {
 		super(configuration);
 
+		const legacyConfig: ApiConfigurationParameters = { mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache };
+		if (configuration.mode == AppMode.development) {
+			legacyConfig.headers = { 'searchspring-no-beacon': '' };
+		}
+
+		const legacyConfiguration = new ApiConfiguration(legacyConfig);
+		const suggestConfiguration = new ApiConfiguration({ mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache });
+
 		this.requesters = {
-			legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
-			suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
+			legacy: new LegacyAPI(legacyConfiguration),
+			suggest: new SuggestAPI(suggestConfiguration),
 		};
 	}
 

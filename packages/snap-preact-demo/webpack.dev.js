@@ -4,7 +4,7 @@ const path = require('path');
 
 const universal = merge(common, {
 	mode: 'development',
-	entry: './src/universal.js',
+	entry: './src/universal.ts',
 	output: {
 		filename: 'universal.bundle.js',
 		chunkFilename: 'universal.bundle.chunk.[fullhash:8].[id].js',
@@ -23,6 +23,38 @@ const universal = merge(common, {
 								'@babel/preset-env',
 								{
 									browserslistEnv: 'universal',
+								},
+							],
+						],
+					},
+				},
+			},
+		],
+	},
+	devtool: 'source-map',
+});
+
+const modern = merge(common, {
+	mode: 'development',
+	entry: './src/index.ts',
+	output: {
+		filename: 'bundle.js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
+	},
+	target: 'browserslist:modern',
+	module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									browserslistEnv: 'modern',
 								},
 							],
 						],
@@ -55,39 +87,6 @@ const universal = merge(common, {
 			},
 		},
 	},
-	devtool: 'source-map',
-});
-
-const modern = merge(common, {
-	mode: 'development',
-	entry: './src/index.js',
-	output: {
-		filename: 'bundle.js',
-		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
-	},
-	target: 'browserslist:modern',
-	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							[
-								'@babel/preset-env',
-								{
-									browserslistEnv: 'modern',
-								},
-							],
-						],
-					},
-				},
-			},
-		],
-	},
-	devtool: 'source-map',
 });
 
 module.exports = [universal, modern];

@@ -6,7 +6,7 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { Tracker, BeaconType, BeaconCategory, BeaconEvent } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
-import { Logger, LogMode } from '@searchspring/snap-logger';
+import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 
 import { RecommendationController } from './RecommendationController';
@@ -46,24 +46,6 @@ describe('Recommendation Controller', () => {
 				tracker: new Tracker(globals),
 			});
 		}).toThrow();
-	});
-
-	it(`adds a test param when in development environment`, async function () {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		controller.environment = LogMode.DEVELOPMENT;
-		expect(controller.environment).toBe('development');
-
-		const params = controller.params;
-		expect(params.test).toBeTruthy();
 	});
 
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];

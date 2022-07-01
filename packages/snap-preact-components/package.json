@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-preact-components",
-	"version": "0.29.0",
+	"version": "0.30.0",
 	"description": "Snap Preact Component Library",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -15,7 +15,7 @@
 		"README.md"
 	],
 	"scripts": {
-		"build": "rm -rf ./dist && tsc --skipLibCheck && tsc --skipLibCheck -p tsconfig.cjs.json",
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"build:docs": "build-storybook -o ./docs",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"@emotion/react": "11.9.0",
-		"@searchspring/snap-toolbox": "^0.29.0",
+		"@searchspring/snap-toolbox": "^0.30.0",
 		"classnames": "2.3.1",
 		"deepmerge": "4.2.2",
 		"mobx-react-lite": "3.4.0",
@@ -37,15 +37,14 @@
 		"preact": "10.7.3"
 	},
 	"devDependencies": {
-		"@mdx-js/loader": "1.6.22",
-		"@searchspring/snap-client": "^0.29.0",
-		"@searchspring/snap-controller": "^0.29.0",
-		"@searchspring/snap-event-manager": "^0.29.0",
-		"@searchspring/snap-logger": "^0.29.0",
-		"@searchspring/snap-profiler": "^0.29.0",
-		"@searchspring/snap-store-mobx": "^0.29.0",
-		"@searchspring/snap-tracker": "^0.29.0",
-		"@searchspring/snap-url-manager": "^0.29.0",
+		"@searchspring/snap-client": "^0.30.0",
+		"@searchspring/snap-controller": "^0.30.0",
+		"@searchspring/snap-event-manager": "^0.30.0",
+		"@searchspring/snap-logger": "^0.30.0",
+		"@searchspring/snap-profiler": "^0.30.0",
+		"@searchspring/snap-store-mobx": "^0.30.0",
+		"@searchspring/snap-tracker": "^0.30.0",
+		"@searchspring/snap-url-manager": "^0.30.0",
 		"@storybook/addon-actions": "6.4.22",
 		"@storybook/addon-controls": "6.4.22",
 		"@storybook/addon-docs": "6.4.22",
@@ -58,12 +57,12 @@
 		"@testing-library/jest-dom": "5.16.4",
 		"@testing-library/preact": "2.0.1",
 		"@testing-library/user-event": "13.5.0",
+		"@types/react": "16.14.28",
 		"@types/react-ranger": "2.0.1",
 		"mobx-react": "7.5.0",
 		"preact": "10.7.3",
 		"react": "16.14.0",
-		"react-dom": "16.14.0",
-		"ts-loader": "9.3.0"
+		"react-dom": "16.14.0"
 	},
 	"sideEffects": false
 }

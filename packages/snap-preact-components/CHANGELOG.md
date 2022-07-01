@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* **preact-components-carousel:** adding a `threshold` prop to prevent clicks from dragging swiper ([ff0b4ab](https://github.com/searchspring/snap/commit/ff0b4abc95d59ffc2f7e04d1eccd00de29c7abb4))
+
+
+
+
+
 # [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

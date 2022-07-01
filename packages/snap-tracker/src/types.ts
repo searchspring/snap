@@ -65,6 +65,10 @@ export interface BeaconContext {
 	website: {
 		trackingCode: string;
 	};
+	attribution?: {
+		type?: string;
+		id?: string;
+	};
 }
 
 export interface BeaconMeta {

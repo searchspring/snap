@@ -7,14 +7,18 @@ import { SidebarContents } from '../Sidebar/Sidebar';
 
 import { Button, Pagination, Slideout, withStore } from '@searchspring/snap-preact-components';
 
+type ToolBarProps = {
+	store?: SearchStore;
+};
+
 @withStore
 @observer
-export class Toolbar extends Component {
+export class Toolbar extends Component<ToolBarProps> {
 	render() {
 		const { pagination } = this.props.store;
 
 		return (
-			<div class="ss-toolbar ss-toolbar-top">
+			<div className="ss-toolbar ss-toolbar-top">
 				<Slideout displayAt={'(max-width: 991px)'} buttonContent={slideoutButton()}>
 					<Fragment>
 						<h3>Filters</h3>
@@ -23,14 +27,14 @@ export class Toolbar extends Component {
 				</Slideout>
 
 				<div class="ss-toolbar-row">
-					<div class="ss-toolbar-col">
+					<div className="ss-toolbar-col">
 						<SortBy />
 					</div>
 
-					<div class="ss-toolbar-col">
+					<div className="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div class="ss-toolbar-col pagination">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
+					<div className="ss-toolbar-col pagination">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
 				</div>
 			</div>
 		);

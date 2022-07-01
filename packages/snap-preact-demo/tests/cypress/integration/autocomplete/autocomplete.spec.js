@@ -62,6 +62,31 @@ describe('Autocomplete', () => {
 			});
 		});
 
+		it('has trending results when focused', function () {
+			cy.snapController('autocomplete').then(({ store }) => {
+				if (store.config.settings.trending?.showResults) {
+					if (config.selectors.website.openInputButton) {
+						cy.get(config.selectors.website.openInputButton).first().click({ force: true });
+					}
+
+					cy.get(config.selectors.website.input).first().should('exist').focus();
+
+					cy.wait('@autocomplete').should('exist');
+					cy.snapController('autocomplete').then(({ store }) => {
+						expect(store.trending.length).to.greaterThan(0);
+						expect(store.results.length).to.greaterThan(0);
+
+						// close the search input
+						if (config.selectors.website.openInputButton) {
+							cy.get(config.selectors.website.openInputButton).first().click({ force: true });
+						}
+					});
+				} else {
+					this.skip();
+				}
+			});
+		});
+
 		it('can make single letter query', function () {
 			if (!config.startingQuery || !config?.selectors?.website?.input) this.skip();
 
@@ -96,7 +121,7 @@ describe('Autocomplete', () => {
 			if (!config?.selectors?.autocomplete?.term) this.skip();
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (!store.terms.length > 1) this.skip();
+				if (store.terms.length <= 1) this.skip();
 				cy.get('body').then((body) => {
 					if (!body.find(`${config.selectors.autocomplete.term}`).length) {
 						this.skip(); // skip if no terms in DOM
@@ -122,7 +147,7 @@ describe('Autocomplete', () => {
 			cy.wait('@autocomplete').should('exist');
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (!store.facets.length > 0) this.skip(); //skip if this term has no facets
+				if (store.facets.length == 0) this.skip(); //skip if this term has no facets
 				cy.get('body').then((body) => {
 					if (!body.find(`${config.selectors.autocomplete.facet} a`).length) {
 						this.skip(); // skip if no facets in DOM
@@ -138,7 +163,7 @@ describe('Autocomplete', () => {
 					cy.wait('@autocomplete').should('exist');
 
 					cy.snapController('autocomplete').then(({ store }) => {
-						cy.wrap(store.services.urlManager).its('state.filter').should('exist');
+						cy.wrap(store.services.urlManager.state.filter).should('exist');
 						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
 					});
 				});

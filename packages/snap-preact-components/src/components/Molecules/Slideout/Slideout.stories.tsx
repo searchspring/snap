@@ -21,8 +21,7 @@ export default {
 	},
 	argTypes: {
 		active: {
-			description: 'Slideout is active',
-			type: { required: true },
+			description: 'Initial state of the slideout.',
 			table: {
 				type: {
 					summary: 'boolean',

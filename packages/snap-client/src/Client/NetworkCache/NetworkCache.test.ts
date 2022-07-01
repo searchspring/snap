@@ -98,6 +98,17 @@ describe('Network Cache', () => {
 
 			expect(getterResponse).toEqual(undefined);
 		});
+
+		it('will not get an entry that is expired', async () => {
+			// setting expiration to zero
+			const cache = new NetworkCache({
+				ttl: 0,
+			});
+
+			cache.set('expiredKey', typedResponse);
+			const getterResponse = cache.get('expiredKey');
+			expect(getterResponse).toEqual(undefined);
+		});
 	});
 
 	describe('can set custom config settings', () => {

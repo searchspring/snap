@@ -494,6 +494,12 @@ export class Tracker {
 		},
 	};
 
+	updateContext = (key: keyof BeaconContext, value: any) => {
+		if (value) {
+			this.context[key] = value;
+		}
+	};
+
 	getUserId = (): string | undefined | null => {
 		let userId;
 		try {

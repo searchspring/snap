@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Features
+
+* **snap:** adding `AppMode` to toolbox and utilizing it to disable caching and add header in client ([48cc911](https://github.com/searchspring/snap/commit/48cc9119a2da9c73de7ceb6b772378aa351ee413))
+
+
+
+
+
 # [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
 
 **Note:** Version bump only for package @searchspring/snap-client

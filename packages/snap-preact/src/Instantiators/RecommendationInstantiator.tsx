@@ -1,25 +1,26 @@
 import { render } from 'preact';
 import deepmerge from 'deepmerge';
 
-import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { AppMode, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
-import type { RootComponent } from '../types';
 import type { Target } from '@searchspring/snap-toolbox';
 
 export type RecommendationInstantiatorConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	client?: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
 	};
 	components: {
-		[name: string]: () => Promise<RootComponent> | RootComponent;
+		[name: string]: () => Promise<any> | any;
 	};
 	config: {
 		branch: string;
@@ -39,6 +40,7 @@ export type RecommendationInstantiatorServices = {
 };
 
 export class RecommendationInstantiator {
+	private mode = AppMode.production;
 	public client: Client;
 	public tracker: Tracker;
 	public logger: Logger;
@@ -72,10 +74,21 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain a valid config.client.globals.siteId value`);
 		}
 
+		if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode as AppMode;
+
+			if (this.config?.client?.globals?.siteId) {
+				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			}
+		}
+
+		window.searchspring = window.searchspring || {};
+
 		this.context = deepmerge(context || {}, config.context || {});
 		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
 		this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
-		this.logger = services?.logger || new Logger('RecommendationInstantiator ');
+		this.logger = services?.logger || new Logger({ prefix: 'RecommendationInstantiator ', mode: this.mode });
 
 		const profileCount: {
 			[key: string]: number;
@@ -209,6 +222,8 @@ export class RecommendationInstantiator {
 				controller.addTargeter(this.targeter);
 
 				this.controller[controller.config.id] = controller;
+				window.searchspring.controller = window.searchspring.controller || {};
+				window.searchspring.controller[controller.config.id] = controller;
 
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;
@@ -223,7 +238,11 @@ export class RecommendationInstantiator {
 					return;
 				}
 
-				const RecommendationsComponent = this.config.components[component] && (await this.config.components[component]());
+				const RecommendationsComponent =
+					this.config.components[component] &&
+					((await this.config.components[component]()) as React.ElementType<{
+						controller: RecommendationController;
+					}>);
 
 				if (!RecommendationsComponent) {
 					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);

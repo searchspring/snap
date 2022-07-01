@@ -13,6 +13,7 @@ import type { EventManager } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
+import { AppMode } from '@searchspring/snap-toolbox';
 
 export type SnapControllerServices = {
 	client?: Client;
@@ -30,9 +31,8 @@ export type SnapControllerConfigs =
 	| SnapFinderControllerConfig
 	| SnapRecommendationControllerConfig;
 
-export type RootComponent = React.ElementType<{ controller: AbstractController }>;
-
 export type SnapSearchControllerConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
 	client?: {
 		globals: ClientGlobals;
@@ -43,6 +43,7 @@ export type SnapSearchControllerConfig = {
 };
 
 export type SnapAutocompleteControllerConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
 	client?: {
 		globals: ClientGlobals;
@@ -53,6 +54,7 @@ export type SnapAutocompleteControllerConfig = {
 };
 
 export type SnapFinderControllerConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
 	client?: {
 		globals: ClientGlobals;
@@ -63,6 +65,7 @@ export type SnapFinderControllerConfig = {
 };
 
 export type SnapRecommendationControllerConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
 	client?: {
 		globals: ClientGlobals;
