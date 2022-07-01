@@ -204,7 +204,7 @@ describe('createRecommendationController', () => {
 		});
 
 		it('creates an recommendation controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createRecommendationController(createConfig, { logger: customLogger });
 

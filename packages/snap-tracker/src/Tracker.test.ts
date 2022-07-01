@@ -1157,4 +1157,19 @@ describe('Tracker', () => {
 
 		trackEvent.mockRestore();
 	});
+
+	it('can use updateContext to add attribution to context', async () => {
+		const tracker = new Tracker(globals);
+
+		expect(tracker.context).not.toHaveProperty('attribution');
+
+		const attribution = {
+			type: 'email',
+			id: 'emailTag',
+		};
+
+		tracker.updateContext('attribution', attribution);
+
+		expect(tracker.context).toHaveProperty('attribution', attribution);
+	});
 });

@@ -1,3 +1,4 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { HybridAPI, SuggestAPI, RecommendAPI, ApiConfiguration } from './apis';
 
 import type {
@@ -23,6 +24,7 @@ import type {
 import deepmerge from 'deepmerge';
 
 const defaultConfig: ClientConfig = {
+	mode: AppMode.production,
 	meta: {
 		cache: {
 			purgeable: false,
@@ -56,6 +58,7 @@ const defaultConfig: ClientConfig = {
 };
 
 export class Client {
+	private mode = AppMode.production;
 	private globals: ClientGlobals;
 	private config: ClientConfig;
 	private requesters: {
@@ -75,39 +78,49 @@ export class Client {
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
 
+		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode! as AppMode;
+		}
+
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.autocomplete?.api?.origin,
 					cache: this.config.autocomplete?.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.meta?.api?.origin,
 					cache: this.config.meta?.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.recommend?.api?.origin,
 					cache: this.config.recommend?.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.search?.api?.origin,
 					cache: this.config.search?.cache,
 				})
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.finder?.api?.origin,
 					cache: this.config.finder?.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.suggest?.api?.origin,
 					cache: this.config.suggest?.cache,
 				})

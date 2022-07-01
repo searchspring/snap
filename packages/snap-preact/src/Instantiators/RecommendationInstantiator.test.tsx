@@ -129,7 +129,7 @@ describe('RecommendationInstantiator', () => {
 	it('logs an error when the profile response does not contain templateParameters', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingParameters' } });
@@ -146,7 +146,7 @@ describe('RecommendationInstantiator', () => {
 	it('logs an error when the profile response does not contain a component', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingComponent' } });
@@ -163,7 +163,7 @@ describe('RecommendationInstantiator', () => {
 	it('logs an error when the profile response does not find a mapped component', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');

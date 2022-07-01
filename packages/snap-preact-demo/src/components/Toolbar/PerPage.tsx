@@ -3,10 +3,14 @@ import { observer } from 'mobx-react';
 
 import { Select, withStore } from '@searchspring/snap-preact-components';
 
+type PerPageProps = {
+	store?: SearchStore;
+};
+
 @withStore
 @observer
-export class PerPage extends Component {
-	constructor(props) {
+export class PerPage extends Component<PerPageProps> {
+	constructor(props: PerPageProps) {
 		super(props);
 	}
 
@@ -20,7 +24,7 @@ export class PerPage extends Component {
 					options={pagination.pageSizeOptions}
 					selected={{ label: `Show ${pagination.pageSize}`, value: pagination.pageSize }}
 					onSelect={(e, option) => {
-						pagination.setPageSize(option.value);
+						pagination.setPageSize(+option.value);
 					}}
 				/>
 			</div>

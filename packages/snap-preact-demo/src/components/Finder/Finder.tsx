@@ -1,8 +1,12 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
+type FinderProps = {
+	controller?: FinderController;
+};
+
 @observer
-export class Finder extends Component {
+export class Finder extends Component<FinderProps> {
 	render() {
 		const controller = this.props.controller;
 		const store = controller.store;
@@ -52,8 +56,15 @@ export class Finder extends Component {
 	}
 }
 
+type DropdownProps = {
+	store: FinderController['store'];
+	selection: FinderController['store']['selections'][0];
+	loading: boolean;
+};
+
+//@ts-ignore
 @observer
-class Dropdown extends Component {
+class Dropdown extends Component<DropdownProps> {
 	render() {
 		const selection = this.props.selection;
 		const loading = this.props.loading;
@@ -61,7 +72,7 @@ class Dropdown extends Component {
 		return (
 			<select
 				class="form-input form-select form-input-short searchspring-finder_field"
-				onChange={(e) => {
+				onChange={(e: any) => {
 					selection.select(e.target.value);
 				}}
 				disabled={loading || selection.disabled}

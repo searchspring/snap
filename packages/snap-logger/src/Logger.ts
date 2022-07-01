@@ -1,24 +1,25 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { colors } from './colors';
 import { emoji } from './emoji';
 
+export type LoggerConfig = {
+	prefix?: string;
+	mode?: keyof typeof AppMode | AppMode;
+};
+
 export class Logger {
-	private mode = LogMode.PRODUCTION;
+	private mode = AppMode.production;
 	public emoji = emoji;
 	public colors = colors;
 	private prefix = '';
 
-	constructor(prefix?: string) {
-		this.prefix = prefix || '';
+	constructor(config?: LoggerConfig) {
+		this.prefix = config?.prefix || '';
+		this.mode = (config?.mode || AppMode.production) as AppMode;
 	}
 
 	public setNamespace(group: string): void {
 		this.prefix = ` [${group}] :: `;
-	}
-
-	public setMode(mode: LogMode): void {
-		if (Object.values(LogMode).includes(mode)) {
-			this.mode = mode;
-		}
 	}
 
 	public error(...params: any[]): void {
@@ -107,13 +108,8 @@ export class Logger {
 	}
 
 	public dev(...params: any[]): void {
-		if (this.mode === LogMode.DEVELOPMENT) {
+		if (this.mode === AppMode.development) {
 			console.log(...params);
 		}
 	}
-}
-
-export enum LogMode {
-	PRODUCTION = 'production',
-	DEVELOPMENT = 'development',
 }

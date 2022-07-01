@@ -3,10 +3,14 @@ import { observer } from 'mobx-react';
 
 import { Select, withStore } from '@searchspring/snap-preact-components';
 
+type SortByProps = {
+	store?: SearchStore;
+};
+
 @withStore
 @observer
-export class SortBy extends Component {
-	constructor(props) {
+export class SortBy extends Component<SortByProps> {
+	constructor(props: SortByProps) {
 		super(props);
 	}
 

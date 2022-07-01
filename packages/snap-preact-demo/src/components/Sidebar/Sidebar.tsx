@@ -13,8 +13,12 @@ import {
 	ControllerProvider,
 } from '@searchspring/snap-preact-components';
 
+type SidebarProps = {
+	controller?: SearchController;
+};
+
 @observer
-export class Sidebar extends Component {
+export class Sidebar extends Component<SidebarProps> {
 	render() {
 		const store = this.props.controller.store;
 
@@ -30,43 +34,22 @@ export class Sidebar extends Component {
 	}
 }
 
+type SidebarContentsProps = {
+	controller?: SearchController;
+	store?: SearchStore;
+};
+
 @withController
 @withStore
+//@ts-ignore
 @observer
-export class SidebarContents extends Component {
+export class SidebarContents extends Component<SidebarContentsProps> {
 	render() {
-		const {
-			filters,
-			custom: { onSaleFacet },
-			facets,
-		} = this.props.store;
+		const { filters, facets } = this.props.store;
 
 		return (
 			<div class="ss-sidebar-container">
 				<FilterSummary filters={filters} controller={this.props.controller} />
-
-				{onSaleFacet && (
-					<Select
-						className="ss-facet-onsale"
-						disableClickOutside
-						style={{ width: '100%', margin: '10px 0' }}
-						label={`${onSaleFacet.label}`}
-						options={onSaleFacet?.values.map((value) => {
-							value.label = `${value.label} (${value.count})`;
-							return value;
-						})}
-						selected={onSaleFacet?.values?.filter((value) => value.filtered)}
-						clearSelection="clear"
-						onSelect={(e, option) => {
-							if (option) {
-								option.url.go();
-							} else {
-								onSaleFacet?.controller.urlManager.remove('page').remove('filter.on_sale').go();
-							}
-						}}
-					/>
-				)}
-
 				<Facets facets={facets} />
 			</div>
 		);

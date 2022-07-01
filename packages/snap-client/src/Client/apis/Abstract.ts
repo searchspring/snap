@@ -1,3 +1,6 @@
+import deepmerge from 'deepmerge';
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import { fibonacci } from '../utils/fibonacci';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
 import { CacheConfig } from '../../types';
@@ -25,7 +28,11 @@ export class API {
 	public cache: NetworkCache;
 
 	constructor(protected configuration: ApiConfiguration) {
-		this.cache = new NetworkCache(configuration.cache);
+		this.cache = new NetworkCache(this.configuration.cache);
+	}
+
+	protected get mode(): AppMode {
+		return this.configuration.mode;
 	}
 
 	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
@@ -41,7 +48,7 @@ export class API {
 		}
 
 		const response = await this.fetchApi(url, init);
-		const responseJSON = await response.json();
+		const responseJSON = await response?.json();
 		if (response.status >= 200 && response.status < 300) {
 			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 			this.retryDelay = 1000;
@@ -85,25 +92,28 @@ export class API {
 				? context.body
 				: JSON.stringify(context.body);
 
-		const headers = Object.assign({}, this.configuration.headers, context.headers);
+		const headers = { ...this.configuration.headers, ...context.headers };
+
 		const init = {
 			method: context.method,
 			headers: headers,
 			body,
 		};
+
 		return { url, init };
 	}
 
-	private fetchApi = async (url: RequestInfo, init?: RequestInit) => {
+	private async fetchApi(url: RequestInfo, init?: RequestInit): Promise<Response> {
 		const response = await this.configuration.fetchApi(url, init);
 
 		return response;
-	};
+	}
 }
 
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
+	mode?: keyof typeof AppMode | AppMode;
 	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
@@ -113,9 +123,16 @@ export interface ApiConfigurationParameters {
 }
 
 export class ApiConfiguration {
-	constructor(private configuration: ApiConfigurationParameters) {
+	constructor(private configuration: ApiConfigurationParameters = {}) {
 		if (!configuration.maxRetry) {
 			this.configuration.maxRetry = 8;
+		}
+
+		this.configuration.cache = this.configuration.cache || {};
+		this.configuration.mode = this.configuration.mode || AppMode.production;
+
+		if (this.configuration.mode == AppMode.development) {
+			this.configuration.cache.enabled = false;
 		}
 	}
 
@@ -139,8 +156,12 @@ export class ApiConfiguration {
 		return this.configuration.queryParamsStringify || querystring;
 	}
 
-	get headers(): HTTPHeaders | undefined {
-		return this.configuration.headers;
+	get headers(): HTTPHeaders {
+		return this.configuration.headers || {};
+	}
+
+	get mode(): AppMode {
+		return this.configuration.mode! as AppMode;
 	}
 }
 

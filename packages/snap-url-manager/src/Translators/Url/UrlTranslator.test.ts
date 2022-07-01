@@ -11,7 +11,7 @@ describe('UrlTranslator', () => {
 			foo: ['bar'],
 		};
 
-		expect(queryString.serialize(params)).toBe('?bar=baz#/foo:bar');
+		expect(queryString.serialize(params)).toBe('/?bar=baz#/foo:bar');
 
 		expect(queryString.serialize({})).toBe('/');
 	});
@@ -628,7 +628,7 @@ describe('UrlTranslator', () => {
 				query: 'the query',
 			});
 
-			expect(query).toBe('?search=the%20query');
+			expect(query).toBe('/?search=the%20query');
 		});
 
 		it('serializes core state correctly', () => {
@@ -657,7 +657,7 @@ describe('UrlTranslator', () => {
 			const query = translator.serialize(params);
 
 			expect(query).toBe(
-				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7#/pageSize:40/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc'
+				'/?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7#/pageSize:40/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc'
 			);
 		});
 
@@ -725,7 +725,7 @@ describe('UrlTranslator', () => {
 			const query = translator.serialize(params);
 
 			expect(query).toBe(
-				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
+				'/?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
 			);
 		});
 
@@ -768,7 +768,7 @@ describe('UrlTranslator', () => {
 			const query = translator.serialize(params);
 
 			expect(query).toBe(
-				'?size=40&facet.color=red&facet.color=orange&facet.brand=adidas&facet.price.low=99.99&facet.price.high=299.99&order.name=desc#/query:shoes/originalQuery:shoez/refinedQuery:shiny/landingPage:taggy/p:7'
+				'/?size=40&facet.color=red&facet.color=orange&facet.brand=adidas&facet.price.low=99.99&facet.price.high=299.99&order.name=desc#/query:shoes/originalQuery:shoez/refinedQuery:shiny/landingPage:taggy/p:7'
 			);
 		});
 
@@ -798,7 +798,7 @@ describe('UrlTranslator', () => {
 			const query = translator.serialize(params);
 
 			expect(query).toBe(
-				`?${corePrefix}q=foo&${corePrefix}page=2#/${corePrefix}filter:brand:nike/${corePrefix}filter:color:blue/${corePrefix}filter:color:green$2520striped/${corePrefix}sort:price:asc`
+				`/?${corePrefix}q=foo&${corePrefix}page=2#/${corePrefix}filter:brand:nike/${corePrefix}filter:color:blue/${corePrefix}filter:color:green$2520striped/${corePrefix}sort:price:asc`
 			);
 		});
 
@@ -867,7 +867,7 @@ describe('UrlTranslator', () => {
 
 			const pageOneUrl = translator.serialize(pageOneParams);
 
-			expect(pageOneUrl).toBe('?q=shoes');
+			expect(pageOneUrl).toBe('/?q=shoes');
 
 			const pageTwoParams = {
 				page: 2,
@@ -876,7 +876,7 @@ describe('UrlTranslator', () => {
 
 			const pageTwoUrl = translator.serialize(pageTwoParams);
 
-			expect(pageTwoUrl).toBe('?q=shoes&page=2');
+			expect(pageTwoUrl).toBe('/?q=shoes&page=2');
 		});
 	});
 

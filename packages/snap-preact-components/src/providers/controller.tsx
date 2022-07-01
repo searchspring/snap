@@ -1,5 +1,4 @@
-import { jsx } from '@emotion/react';
-import preact, { h, createContext, ComponentChildren, ComponentType } from 'preact';
+import { h, createContext, ComponentChildren, ComponentType } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { AbstractController } from '@searchspring/snap-controller';
 
@@ -11,6 +10,8 @@ export const ControllerProvider = ({ children, controller }: { children: Compone
 
 export const useController = () => useContext(ControllerContext);
 
-export const withController = (Component: ComponentType) => (props: any) => {
-	return <Component controller={useController()} {...props} />;
-};
+export function withController<C extends ComponentType>(Component: C): C {
+	return ((props: any) => (
+		<ControllerContext.Consumer>{(controller) => <Component {...props} controller={controller} />}</ControllerContext.Consumer>
+	)) as C;
+}

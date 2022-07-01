@@ -14,7 +14,7 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
-let config = {
+let config: SnapConfig = {
 	url: {
 		settings: {
 			coreType: 'query',
@@ -36,10 +36,10 @@ let config = {
 		recommendation: {
 			components: {
 				Recs: async () => {
-					return (await import('./components/Recommendations/')).Recs;
+					return (await import('./components/Recommendations/Recs/Recs')).Recs;
 				},
 				Email: async () => {
-					return (await import('./components/Recommendations/')).Email;
+					return (await import('./components/Recommendations/Email/Email')).Email;
 				},
 			},
 
@@ -64,7 +64,6 @@ let config = {
 					{
 						selector: '#searchspring-content',
 						hideTarget: true,
-						// prefetch: true,
 						skeleton: () => ContentSkel,
 						component: async () => {
 							return (await import('./components/Content/Content')).Content;
@@ -73,7 +72,6 @@ let config = {
 					{
 						selector: '#searchspring-sidebar',
 						hideTarget: true,
-						// prefetch: true,
 						skeleton: () => SidebarSkel,
 						component: async () => {
 							return (await import('./components/Sidebar/Sidebar')).Sidebar;
@@ -166,7 +164,7 @@ let config = {
 };
 
 // used to add config settings from cypress e2e tests
-if (window?.mergeSnapConfig) {
+if (window.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 

@@ -6,3 +6,4 @@ export * from './getContext/getContext';
 export * from './url/url';
 export * from './version/version';
 export * from './charsParams/charsParams';
+export * from './types';

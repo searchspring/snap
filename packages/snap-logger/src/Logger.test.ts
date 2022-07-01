@@ -1,4 +1,5 @@
-import { Logger, LogMode } from './Logger';
+import { Logger } from './Logger';
+import { AppMode } from '@searchspring/snap-toolbox';
 import { colors } from './colors';
 import { emoji } from './emoji';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -33,7 +34,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger(customPrefix);
+			const logger = new Logger({ prefix: customPrefix });
 			const text = 'this is a error';
 			logger.error(text);
 
@@ -51,7 +52,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			const text = 'this is a error log on production mode';
 			logger.error(text);
@@ -89,7 +89,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger(customPrefix);
+			const logger = new Logger({ prefix: customPrefix });
 			const text = 'this is a warning';
 			logger.warn(text);
 
@@ -108,7 +108,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			const text = 'this is a warn log on production mode';
 			logger.warn(text);
@@ -129,8 +128,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger();
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ mode: AppMode.development });
 
 			const text = 'this is a dev log';
 			logger.dev(text);
@@ -145,7 +143,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			const text = 'this is a dev log on production mode';
 			logger.dev(text);
@@ -161,8 +158,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger();
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ mode: AppMode.development });
 
 			const text = 'this is a debug log';
 			logger.debug(text);
@@ -181,7 +177,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			const text = 'this is a debug log';
 			logger.debug(text);
@@ -195,8 +190,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger(customPrefix);
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ prefix: customPrefix, mode: AppMode.development });
 
 			const text = 'this is a debug log with custom namespace';
 			logger.debug(text);
@@ -216,8 +210,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger();
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ mode: AppMode.development });
 
 			logger.image({
 				url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
@@ -238,7 +231,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			logger.image({
 				url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
@@ -257,8 +249,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger();
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ mode: AppMode.development });
 
 			logger.imageText({
 				url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
@@ -279,7 +270,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 
 			logger.imageText({
 				url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
@@ -296,8 +286,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger(customPrefix);
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ prefix: customPrefix, mode: AppMode.development });
 
 			logger.imageText({
 				url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
@@ -319,8 +308,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger();
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ mode: AppMode.development });
 
 			const profiler = new Profiler();
 
@@ -353,7 +341,6 @@ describe('Logger', () => {
 			consoleLogMock = jest.spyOn(console, 'log');
 
 			const logger = new Logger();
-			logger.setMode(LogMode.PRODUCTION);
 			const profiler = new Profiler();
 
 			const searchProfile = profiler.create({
@@ -376,8 +363,7 @@ describe('Logger', () => {
 			let consoleLogMock: any = jest.fn();
 			consoleLogMock = jest.spyOn(console, 'log');
 
-			const logger = new Logger(customPrefix);
-			logger.setMode(LogMode.DEVELOPMENT);
+			const logger = new Logger({ prefix: customPrefix, mode: AppMode.development });
 
 			const profiler = new Profiler();
 

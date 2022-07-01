@@ -5,6 +5,5 @@
 	],
 	"compilerOptions": {
 		"outDir": "./dist/esm",
-		"strict": true,
 	}
 }
