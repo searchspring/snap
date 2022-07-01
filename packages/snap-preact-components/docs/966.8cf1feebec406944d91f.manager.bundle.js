@@ -1,6 +1,6 @@
-/*! For license information please see 691.1b590a059f253e5bf527.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 966.8cf1feebec406944d91f.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[691],
+	[966],
 	{
 		67718: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -4555,6 +4555,35 @@
 					},
 				});
 			});
+		},
+		53243: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__(18178);
+			var SourceType,
+				esm = __webpack_require__(21872),
+				types = __webpack_require__(31665),
+				PANEL_ID = ''.concat('storybook/docs', '/panel');
+			''.concat('storybook/docs', '/snippet-rendered');
+			!(function (SourceType) {
+				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
+			})(SourceType || (SourceType = {})),
+				esm.KP.register('storybook/docs', function () {
+					esm.KP.add(PANEL_ID, {
+						type: types.V.TAB,
+						title: 'Docs',
+						route: function route(_ref) {
+							var storyId = _ref.storyId,
+								refId = _ref.refId;
+							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
+						},
+						match: function match(_ref2) {
+							return 'docs' === _ref2.viewMode;
+						},
+						render: function render() {
+							return null;
+						},
+					});
+				});
 		},
 		98429: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -16722,7 +16751,7 @@
 			'use strict';
 			__webpack_require__(25047), __webpack_require__(83206), __webpack_require__(57406);
 		},
-		26253: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		57802: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var Action,
 				global_window = __webpack_require__(35048),
@@ -41175,14 +41204,6 @@
 				return !1;
 			};
 		},
-		22128: (module) => {
-			var toString = {}.toString;
-			module.exports =
-				Array.isArray ||
-				function (arr) {
-					return '[object Array]' == toString.call(arr);
-				};
-		},
 		22365: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var has = __webpack_require__(23198),
@@ -47290,6 +47311,14 @@
 				var o = Object(obj);
 				return o === o.window;
 			};
+		},
+		77906: (module) => {
+			var toString = {}.toString;
+			module.exports =
+				Array.isArray ||
+				function (arr) {
+					return '[object Array]' == toString.call(arr);
+				};
 		},
 		46130: (module) => {
 			'use strict';
@@ -53754,6 +53783,7 @@
 					object,
 					prefix,
 					generateArrayPrefix,
+					commaRoundTrip,
 					strictNullHandling,
 					skipNulls,
 					encoder,
@@ -53801,7 +53831,7 @@
 							if ('comma' === generateArrayPrefix && encodeValuesOnly) {
 								for (var valuesArray = split.call(String(obj), ','), valuesJoined = '', i = 0; i < valuesArray.length; ++i)
 									valuesJoined += (0 === i ? '' : ',') + formatter(encoder(valuesArray[i], defaults.encoder, charset, 'value', format));
-								return [formatter(keyValue) + (isArray(obj) && 1 === valuesArray.length ? '[]' : '') + '=' + valuesJoined];
+								return [formatter(keyValue) + (commaRoundTrip && isArray(obj) && 1 === valuesArray.length ? '[]' : '') + '=' + valuesJoined];
 							}
 							return [formatter(keyValue) + '=' + formatter(encoder(obj, defaults.encoder, charset, 'value', format))];
 						}
@@ -53816,11 +53846,7 @@
 						var keys = Object.keys(obj);
 						objKeys = sort ? keys.sort(sort) : keys;
 					}
-					for (
-						var adjustedPrefix = 'comma' === generateArrayPrefix && isArray(obj) && 1 === obj.length ? prefix + '[]' : prefix, j = 0;
-						j < objKeys.length;
-						++j
-					) {
+					for (var adjustedPrefix = commaRoundTrip && isArray(obj) && 1 === obj.length ? prefix + '[]' : prefix, j = 0; j < objKeys.length; ++j) {
 						var key = objKeys[j],
 							value = 'object' == typeof key && void 0 !== key.value ? key.value : obj[key];
 						if (!skipNulls || null !== value) {
@@ -53838,6 +53864,7 @@
 										value,
 										keyPrefix,
 										generateArrayPrefix,
+										commaRoundTrip,
 										strictNullHandling,
 										skipNulls,
 										encoder,
@@ -53907,6 +53934,9 @@
 							: 'repeat'
 						: 'indices';
 				var generateArrayPrefix = arrayPrefixGenerators[arrayFormat];
+				if (opts && 'commaRoundTrip' in opts && 'boolean' != typeof opts.commaRoundTrip)
+					throw new TypeError('`commaRoundTrip` must be a boolean, or absent');
+				var commaRoundTrip = 'comma' === generateArrayPrefix && opts && opts.commaRoundTrip;
 				objKeys || (objKeys = Object.keys(obj)), options.sort && objKeys.sort(options.sort);
 				for (var sideChannel = getSideChannel(), i = 0; i < objKeys.length; ++i) {
 					var key = objKeys[i];
@@ -53917,6 +53947,7 @@
 								obj[key],
 								key,
 								generateArrayPrefix,
+								commaRoundTrip,
 								options.strictNullHandling,
 								options.skipNulls,
 								options.encode ? options.encoder : null,
@@ -63855,35 +63886,6 @@
 				return buf || bytesToUuid(rnds);
 			};
 		},
-		58300: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__(18178);
-			var SourceType,
-				esm = __webpack_require__(21872),
-				types = __webpack_require__(31665),
-				PANEL_ID = ''.concat('storybook/docs', '/panel');
-			''.concat('storybook/docs', '/snippet-rendered');
-			!(function (SourceType) {
-				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
-			})(SourceType || (SourceType = {})),
-				esm.KP.register('storybook/docs', function () {
-					esm.KP.add(PANEL_ID, {
-						type: types.V.TAB,
-						title: 'Docs',
-						route: function route(_ref) {
-							var storyId = _ref.storyId,
-								refId = _ref.refId;
-							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
-						},
-						match: function match(_ref2) {
-							return 'docs' === _ref2.viewMode;
-						},
-						render: function render() {
-							return null;
-						},
-					});
-				});
-		},
 		46620: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var inspect = __webpack_require__(99500),
@@ -65084,7 +65086,7 @@
 						: void 0;
 				};
 			} else {
-				var isArray = __webpack_require__(22128),
+				var isArray = __webpack_require__(77906),
 					isString = __webpack_require__(26302),
 					GetIntrinsic = __webpack_require__(67286),
 					$Map = GetIntrinsic('%Map%', !0),
