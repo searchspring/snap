@@ -7,6 +7,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
+import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	AbstractController,
@@ -27,7 +28,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfigs, RootComponent } from './types';
+import type { SnapControllerServices, SnapControllerConfigs } from './types';
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
@@ -35,8 +36,8 @@ export const DEV_COOKIE = 'ssDev';
 type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
-	component?: () => Promise<RootComponent> | RootComponent;
-	skeleton?: () => Promise<any>;
+	component?: () => Promise<any> | any;
+	skeleton?: () => Promise<any> | any;
 	props?: {
 		[propName: string]: any;
 	};
