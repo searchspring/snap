@@ -1,9 +1,21 @@
 // TODO move to components library
-
 import { h, Component } from 'preact';
-export class Profile extends Component {
+
+type ProfileProps = {
+	name: string;
+	controller: SearchController;
+	context?: any;
+};
+
+export class Profile extends Component<ProfileProps> {
+	name;
+	controller;
+	log;
+	profiler;
+	profile;
+
 	logComponent = {
-		creation: ({ name }) => {
+		creation: ({ name }: { name: string }) => {
 			this.log.dev(
 				`%c +  %c<${name}/>  %c::  %cCREATED`,
 				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
@@ -12,7 +24,7 @@ export class Profile extends Component {
 				`color: ${this.log.colors.orange}; font-weight: bold;`
 			);
 		},
-		change: ({ name, info = 'changed' }) => {
+		change: ({ name, info = 'changed' }: { name: string; info: string }) => {
 			this.log.dev(
 				`%c ${this.log.emoji.lightning}  %c<${name}/>  %c::  %c${info.toUpperCase()}`,
 				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
@@ -21,7 +33,7 @@ export class Profile extends Component {
 				`color: ${this.log.colors.orangedark}; font-weight: bold;`
 			);
 		},
-		error: ({ name, error = 'component crash' }) => {
+		error: ({ name, error = 'component crash' }: { name: string; error: string }) => {
 			this.log.dev(
 				`%c ${this.log.emoji.bang}  %c<${name}/>  %c::  %cERROR  %c::  %c${error}`,
 				`color: ${this.log.colors.red}`,
@@ -32,7 +44,7 @@ export class Profile extends Component {
 				`color: ${this.log.colors.redlight};`
 			);
 		},
-		render: ({ name, time }) => {
+		render: ({ name, time }: { name: string; time: number }) => {
 			this.log.dev(
 				`%c ${this.log.emoji.magic}  %c<${name}/>  %c::  %cRENDERED  %c::  %c${time}ms`,
 				`color: ${this.log.colors.orange};`,
@@ -43,7 +55,7 @@ export class Profile extends Component {
 				`color: ${this.log.colors.grey};`
 			);
 		},
-		removal: ({ name }) => {
+		removal: ({ name }: { name: string }) => {
 			this.log.dev(
 				`%c -  %c<${name}/>  %c::  %cREMOVED`,
 				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
@@ -54,7 +66,7 @@ export class Profile extends Component {
 		},
 	};
 
-	constructor(props) {
+	constructor(props: ProfileProps) {
 		super(props);
 
 		this.name = props.name;
@@ -68,6 +80,7 @@ export class Profile extends Component {
 	shouldComponentUpdate() {
 		this.profile = this.createProfile();
 		this.logComponent.change({ name: this.name, info: 'update triggered' });
+		return true;
 	}
 
 	componentDidMount() {
@@ -81,7 +94,7 @@ export class Profile extends Component {
 		this.logComponent.change({ name: this.name, info: 'updated' });
 	}
 
-	componentDidCatch(error) {
+	componentDidCatch(error: string) {
 		this.logComponent.error({ name: this.name, error });
 	}
 

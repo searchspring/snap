@@ -6,11 +6,11 @@ import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
-import type { RootComponent } from '../types';
 import type { Target } from '@searchspring/snap-toolbox';
 
 export type RecommendationInstantiatorConfig = {
@@ -20,7 +20,7 @@ export type RecommendationInstantiatorConfig = {
 		config?: ClientConfig;
 	};
 	components: {
-		[name: string]: () => Promise<RootComponent> | RootComponent;
+		[name: string]: () => Promise<any> | any;
 	};
 	config: {
 		branch: string;
@@ -238,7 +238,11 @@ export class RecommendationInstantiator {
 					return;
 				}
 
-				const RecommendationsComponent = this.config.components[component] && (await this.config.components[component]());
+				const RecommendationsComponent =
+					this.config.components[component] &&
+					((await this.config.components[component]()) as React.ElementType<{
+						controller: RecommendationController;
+					}>);
 
 				if (!RecommendationsComponent) {
 					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);

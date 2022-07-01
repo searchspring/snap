@@ -3,9 +3,13 @@ import { observer } from 'mobx-react';
 
 import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
 
+type RecsProps = {
+	controller?: RecommendationController;
+};
+
 @observer
-export class Recs extends Component {
-	constructor(props) {
+export class Recs extends Component<RecsProps> {
+	constructor(props: RecsProps) {
 		super();
 
 		const controller = props.controller;
@@ -18,7 +22,7 @@ export class Recs extends Component {
 	render() {
 		const controller = this.props.controller;
 		const store = controller?.store;
-		const arr = [...Array(9).keys()];
+		const arr = Array.from(Array(9).keys());
 
 		return (
 			<div>

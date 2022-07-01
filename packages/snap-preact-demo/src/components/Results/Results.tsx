@@ -6,10 +6,15 @@ import { Pagination, Results as ResultsComponent, withStore, withController } fr
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
 
+type ResultsProps = {
+	store?: SearchStore;
+	controller?: SearchController;
+};
+
 @withStore
 @withController
 @observer
-export class Results extends Component {
+export class Results extends Component<ResultsProps> {
 	render() {
 		const results = this.props.store.results;
 		const pagination = this.props.store.pagination;
@@ -33,10 +38,16 @@ export class Results extends Component {
 	}
 }
 
+type NoResultsProps = {
+	store?: SearchStore;
+	controller?: SearchController;
+};
+
 @withController
 @withStore
+//@ts-ignore
 @observer
-export class NoResults extends Component {
+export class NoResults extends Component<NoResultsProps> {
 	render() {
 		const store = this.props.store;
 		const dym = store.search.didYouMean;

@@ -10,7 +10,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
-import type { ControllerServices, ControllerConfig, Attachments, ContextVariables } from '../types';
+import type { ControllerServices, ControllerConfig, Attachments, ContextVariables, PluginFunction } from '../types';
 
 export abstract class AbstractController {
 	public id: string;
@@ -165,7 +165,7 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): Promise<void> {
+	public async plugin(func: PluginFunction, ...args: unknown[]): Promise<void> {
 		await func(this, ...args);
 	}
 

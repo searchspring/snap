@@ -31,8 +31,6 @@ export type SnapControllerConfigs =
 	| SnapFinderControllerConfig
 	| SnapRecommendationControllerConfig;
 
-export type RootComponent = React.ElementType<{ controller: AbstractController }>;
-
 export type SnapSearchControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
