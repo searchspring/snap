@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* **url-manager:** updating translators to use window.location.pathname when there is no urlRoot ([cbf6997](https://github.com/searchspring/snap/commit/cbf6997d7031c83f2d67bbce5ec4059142bb2c66))
+
+
+
+
+
 # [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Features
+
+* **snap:** adding mode switching to snap-preact and controller - removing controller window access ([99a8f21](https://github.com/searchspring/snap/commit/99a8f2176ad803af451e4317e5d98f38303cef1e))
+* **tracker.ts:** adding attribution values to tracker context and saving to storage ([1a2c936](https://github.com/searchspring/snap/commit/1a2c93670a2c00ec3c6039a22b8d8e9316b7bfe5))
+
+
+
+
+
 # [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
 
 
