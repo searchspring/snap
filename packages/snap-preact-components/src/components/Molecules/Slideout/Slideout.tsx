@@ -37,6 +37,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	const props: SlideoutProps = {
 		// default props
+		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
@@ -70,7 +71,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	};
 
 	// state
-	const [isActive, setActive] = useState(active);
+	const [isActive, setActive] = useState(Boolean(active));
 	const toggleActive = () => {
 		setActive(!isActive);
 		document.body.style.overflow = isActive ? 'hidden' : '';
@@ -109,7 +110,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;
-	active: boolean;
+	active?: boolean;
 	buttonContent?: string | JSX.Element;
 	width?: string;
 	displayAt?: string;
