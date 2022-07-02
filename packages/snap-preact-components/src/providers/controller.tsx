@@ -12,6 +12,7 @@ export const useController = () => useContext(ControllerContext);
 
 export function withController<C extends ComponentType>(Component: C): C {
 	return ((props: any) => (
-		<ControllerContext.Consumer>{(controller) => <Component {...props} controller={controller} />}</ControllerContext.Consumer>
+		// additional props must come after controller prop
+		<Component controller={useController()} {...props} />
 	)) as C;
 }

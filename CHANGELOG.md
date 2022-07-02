@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+
+### Bug Fixes
+
+* **preact-components:** withStore and withController prop order reversion ([36ba37b](https://github.com/searchspring/snap/commit/36ba37bb8ad9aaa0d8ed7d41aec75c2425a2a881))
+
+
+
+
+
 # [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
 
 
