@@ -16,7 +16,6 @@ import { StorageStore } from '../Storage/StorageStore';
 
 export class SearchStore extends AbstractStore {
 	public services: StoreServices;
-	public data!: SearchResponseModel & { meta: MetaResponseModel };
 	public meta!: MetaResponseModel;
 	public merchandising!: SearchMerchandisingStore;
 	public search!: SearchQueryStore;
@@ -70,7 +69,6 @@ export class SearchStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta || {};
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});

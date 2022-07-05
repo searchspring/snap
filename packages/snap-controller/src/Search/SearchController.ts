@@ -9,7 +9,7 @@ import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
+import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
 
@@ -254,7 +254,7 @@ export class SearchController extends AbstractController {
 			// if params.page > 1 and infinite setting exists we should append results
 			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
-				let previousResults = this.store.data?.results || [];
+				let previousResults = (JSON.parse(JSON.stringify(this.store.results)) as SearchResponseModelResult[]) || [];
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];

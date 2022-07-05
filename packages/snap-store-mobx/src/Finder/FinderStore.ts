@@ -11,7 +11,6 @@ import { UrlManager } from '@searchspring/snap-url-manager';
 export class FinderStore extends AbstractStore {
 	public services: StoreServices;
 	public config!: FinderStoreConfig;
-	public data!: SearchResponseModel & { meta: MetaResponseModel };
 	public meta: MetaResponseModel = {};
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
@@ -20,6 +19,7 @@ export class FinderStore extends AbstractStore {
 	public state: FinderStoreState = {
 		persisted: false,
 	};
+	private data!: SearchResponseModel & { meta: MetaResponseModel };
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
