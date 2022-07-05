@@ -19,7 +19,6 @@ export class FinderStore extends AbstractStore {
 	public state: FinderStoreState = {
 		persisted: false,
 	};
-	private data!: SearchResponseModel & { meta: MetaResponseModel };
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
@@ -53,23 +52,7 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	public save(): void {
-		if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
-			this.persistedStorage.set('config', this.config);
-			this.persistedStorage.set('data', this.data);
-			this.persistedStorage.set('date', Date.now());
-			this.persistedStorage.set(
-				'selections',
-				this.selections.map((selection) => {
-					return {
-						selected: selection.selected,
-						data: selection.data,
-						facet: selection.facet,
-					} as SelectedSelection;
-				})
-			);
-		}
-	}
+	public save: () => void = () => {};
 
 	public reset = (): void => {
 		if (this.config.persist?.enabled) {
@@ -106,7 +89,6 @@ export class FinderStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
-		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
@@ -118,5 +100,24 @@ export class FinderStore extends AbstractStore {
 			storage: this.storage,
 			selections: selectedSelections || [],
 		});
+
+		// providing access to response data without exposing it
+		this.save = () => {
+			if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
+				this.persistedStorage.set('config', this.config);
+				this.persistedStorage.set('data', data);
+				this.persistedStorage.set('date', Date.now());
+				this.persistedStorage.set(
+					'selections',
+					this.selections.map((selection) => {
+						return {
+							selected: selection.selected,
+							data: selection.data,
+							facet: selection.facet,
+						} as SelectedSelection;
+					})
+				);
+			}
+		};
 	}
 }
