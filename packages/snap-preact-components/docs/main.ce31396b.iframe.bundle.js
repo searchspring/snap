@@ -1,4 +1,4 @@
-/*! For license information please see main.a78199f2.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.ce31396b.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -26667,8 +26667,23 @@
 											void 0 !== _this$config$settings &&
 											_this$config$settings.infinite
 										) {
+											var _paramsObj$search,
+												_paramsObj$search2,
+												stringyParams = _this.storage.get('lastStringyParams'),
+												paramsObj = JSON.parse(stringyParams);
+											if (
+												null != paramsObj &&
+												null !== (_paramsObj$search = paramsObj.search) &&
+												void 0 !== _paramsObj$search &&
+												_paramsObj$search.redirectResponse
+											)
+												null == paramsObj ||
+													null === (_paramsObj$search2 = paramsObj.search) ||
+													void 0 === _paramsObj$search2 ||
+													delete _paramsObj$search2.redirectResponse;
+											null != paramsObj && paramsObj.personalization && (null == paramsObj || delete paramsObj.personalization);
 											var scrollMap = {};
-											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
+											(scrollMap[(stringyParams = JSON.stringify(paramsObj))] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
 										}
 										var _result$attributes = result.attributes,
 											intellisuggestData = _result$attributes.intellisuggestData,
@@ -26712,7 +26727,6 @@
 										_yield$_this$client$s2,
 										meta,
 										response,
-										_this$store$data,
 										_this$config$settings6,
 										previousResults,
 										backfills,
@@ -26823,9 +26837,7 @@
 															break;
 														}
 														if (
-															((previousResults =
-																(null === (_this$store$data = _this.store.data) || void 0 === _this$store$data ? void 0 : _this$store$data.results) ||
-																[]),
+															((previousResults = JSON.parse(JSON.stringify(_this.store.results)) || []),
 															null === (_this$config$settings6 = _this.config.settings) ||
 																void 0 === _this$config$settings6 ||
 																!_this$config$settings6.infinite.backfill ||
@@ -27083,7 +27095,14 @@
 								(function () {
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-											var _this$config$settings7, stringyParams, scrollMap, scrollToPosition, checkCount, heightCheck;
+											var _requestParams$search,
+												_this$config$settings7,
+												requestParams,
+												stringyParams,
+												scrollMap,
+												scrollToPosition,
+												checkCount,
+												heightCheck;
 											return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
 												for (;;)
 													switch ((_context4.prev = _context4.next)) {
@@ -27091,8 +27110,14 @@
 															return (_context4.next = 2), next();
 														case 2:
 															(search.controller.store.loading = !1),
-																(stringyParams = JSON.stringify(search.request)),
-																_this.storage.set('lastStringyParams', stringyParams),
+																_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
+																(requestParams = Object.assign({}, search.request)).personalization && delete requestParams.personalization,
+																null != requestParams &&
+																	null !== (_requestParams$search = requestParams.search) &&
+																	void 0 !== _requestParams$search &&
+																	_requestParams$search.redirectResponse &&
+																	delete requestParams.search.redirectResponse,
+																(stringyParams = JSON.stringify(requestParams)),
 																null !== (_this$config$settings7 = _this.config.settings) &&
 																	void 0 !== _this$config$settings7 &&
 																	_this$config$settings7.infinite &&
@@ -27108,7 +27133,7 @@
 																				checkCount > 40 && window.clearInterval(heightCheck),
 																				checkCount++;
 																		}, 50))));
-														case 6:
+														case 9:
 														case 'end':
 															return _context4.stop();
 													}
@@ -35635,7 +35660,6 @@
 							value: function update() {
 								var data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
 								(this.error = void 0),
-									(this.data = JSON.parse(JSON.stringify(data))),
 									(this.loaded = !!data.pagination),
 									(this.meta = data.meta || {}),
 									(this.merchandising = new SearchMerchandisingStore.A(this.services, (null == data ? void 0 : data.merchandising) || {})),
@@ -39227,7 +39251,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.30.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.30.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39647,7 +39671,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.30.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.30.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
