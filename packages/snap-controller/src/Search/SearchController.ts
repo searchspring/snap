@@ -110,12 +110,6 @@ export class SearchController extends AbstractController {
 			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
 				const scrollMap = this.storage.get('scrollMap') || {};
-				if (scrollMap.personalization) {
-					delete scrollMap.personalization;
-				}
-				if (scrollMap?.search?.redirectResponse) {
-					delete scrollMap.search.redirectResponse;
-				}
 
 				// interval we ony need to keep checking until the page height > than our stored value
 				const scrollToPosition = scrollMap[stringyParams];
@@ -145,7 +139,17 @@ export class SearchController extends AbstractController {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				// store scroll position
 				if (this.config.settings?.infinite) {
-					const stringyParams = this.storage.get('lastStringyParams');
+					let stringyParams = this.storage.get('lastStringyParams');
+
+					const paramsObj = JSON.parse(stringyParams);
+					if (paramsObj?.search?.redirectResponse) {
+						delete paramsObj?.search?.redirectResponse;
+					}
+					if (paramsObj?.personalization) {
+						delete paramsObj?.personalization;
+					}
+					stringyParams = JSON.stringify(paramsObj);
+
 					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
 					this.storage.set('scrollMap', scrollMap);
