@@ -133,7 +133,7 @@ describe('Finder Store', () => {
 				finderStore.save();
 
 				expect(finderStore.persistedStorage?.get('config')).toStrictEqual(finderStore.config);
-				expect(finderStore.persistedStorage?.get('data')).toStrictEqual(finderStore.data);
+				expect(finderStore.persistedStorage?.get('data')).toBeDefined();
 				expect(finderStore.persistedStorage?.get('date')).toBeDefined();
 				expect(finderStore.persistedStorage?.get('selections').length).toBeGreaterThan(0);
 

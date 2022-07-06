@@ -9,7 +9,7 @@ import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
+import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
 
@@ -96,8 +96,16 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = false;
 
 			// save last params
-			const stringyParams = JSON.stringify(search.request);
-			this.storage.set('lastStringyParams', stringyParams);
+			this.storage.set('lastStringyParams', JSON.stringify(search.request));
+
+			const requestParams = { ...search.request };
+			if (requestParams.personalization) {
+				delete requestParams.personalization;
+			}
+			if (requestParams?.search?.redirectResponse) {
+				delete requestParams.search.redirectResponse;
+			}
+			const stringyParams = JSON.stringify(requestParams);
 
 			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
@@ -131,7 +139,17 @@ export class SearchController extends AbstractController {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				// store scroll position
 				if (this.config.settings?.infinite) {
-					const stringyParams = this.storage.get('lastStringyParams');
+					let stringyParams = this.storage.get('lastStringyParams');
+
+					const paramsObj = JSON.parse(stringyParams);
+					if (paramsObj?.search?.redirectResponse) {
+						delete paramsObj?.search?.redirectResponse;
+					}
+					if (paramsObj?.personalization) {
+						delete paramsObj?.personalization;
+					}
+					stringyParams = JSON.stringify(paramsObj);
+
 					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
 					this.storage.set('scrollMap', scrollMap);
@@ -254,7 +272,7 @@ export class SearchController extends AbstractController {
 			// if params.page > 1 and infinite setting exists we should append results
 			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
-				let previousResults = this.store.data?.results || [];
+				let previousResults = (JSON.parse(JSON.stringify(this.store.results)) as SearchResponseModelResult[]) || [];
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];
