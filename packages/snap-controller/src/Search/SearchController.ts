@@ -96,8 +96,16 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = false;
 
 			// save last params
-			const stringyParams = JSON.stringify(search.request);
-			this.storage.set('lastStringyParams', stringyParams);
+			this.storage.set('lastStringyParams', JSON.stringify(search.request));
+
+			const requestParams = { ...search.request };
+			if (requestParams.personalization) {
+				delete requestParams.personalization;
+			}
+			if (requestParams?.search?.redirectResponse) {
+				delete requestParams.search.redirectResponse;
+			}
+			const stringyParams = JSON.stringify(requestParams);
 
 			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
@@ -131,7 +139,17 @@ export class SearchController extends AbstractController {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				// store scroll position
 				if (this.config.settings?.infinite) {
-					const stringyParams = this.storage.get('lastStringyParams');
+					let stringyParams = this.storage.get('lastStringyParams');
+
+					const paramsObj = JSON.parse(stringyParams);
+					if (paramsObj?.search?.redirectResponse) {
+						delete paramsObj?.search?.redirectResponse;
+					}
+					if (paramsObj?.personalization) {
+						delete paramsObj?.personalization;
+					}
+					stringyParams = JSON.stringify(paramsObj);
+
 					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
 					this.storage.set('scrollMap', scrollMap);
