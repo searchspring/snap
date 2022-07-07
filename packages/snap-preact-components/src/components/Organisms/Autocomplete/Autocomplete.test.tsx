@@ -7,8 +7,9 @@ import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 import { Autocomplete } from '../../Organisms/Autocomplete/Autocomplete';
 import { MockClient } from '@searchspring/snap-shared';
-import { INPUT_DELAY, AutocompleteControllerConfig } from '@searchspring/snap-controller';
+import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '@searchspring/snap-preact';
+import { waitFor } from '@testing-library/preact';
 
 describe('Autocomplete Component', () => {
 	const globals = { siteId: '8uyt2m' };
@@ -74,13 +75,12 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY));
-
 		const rendered = render(<Autocomplete {...args} />, { container });
 
-		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
-		expect(autocomplete).toBeInTheDocument();
+		await waitFor(() => {
+			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+			expect(autocomplete).toBeInTheDocument();
+		});
 	});
 
 	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
@@ -104,14 +104,13 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
 
-		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
-		expect(results[0]).toBeInTheDocument();
-		expect(results.length).toEqual(9);
+		await waitFor(() => {
+			let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			expect(results[0]).toBeInTheDocument();
+			expect(results.length).toEqual(9);
+		});
 	});
 
 	it('can hover over terms, & facets', async () => {
@@ -127,70 +126,70 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 10));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
+		let termLinks: any;
+		let firstResult: any;
+		let terms: any;
+		let facetOptions: any;
+		let newFirstResult: any;
 
-		//first test the terms.
-		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
-		let terms = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option');
-		const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+		await waitFor(() => {
+			//first test the terms.
+			termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
+			terms = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option');
+			const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 
-		//there should be results
-		expect(results[0]).toBeInTheDocument();
-		//we need to save this for later
-		const firstResult = results[0].innerHTML;
-		//there should be terms
-		expect(termLinks[0]).toBeInTheDocument();
-		//first term should be auto selected
-		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
+			//there should be results
+			expect(results[0]).toBeInTheDocument();
+			//we need to save this for later
+			firstResult = results[0].innerHTML;
+			//there should be terms
+			expect(termLinks[0]).toBeInTheDocument();
+			//first term should be auto selected
+			expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
 
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
-
+			(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
+		});
 		//now lets hover over the next term
-		userEvent.hover(termLinks[1]);
+		userEvent.hover(termLinks![1]);
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY * 2));
+		await waitFor(() => {
+			//now lets check for the new results
+			let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			//there should be new results available
+			expect(newResults[0]).toBeInTheDocument();
+			// we will need to save this for later
+			newFirstResult = newResults[0].innerHTML;
+			//new result should be different from the previous result
+			expect(newFirstResult).not.toEqual(firstResult);
 
-		//now lets check for the new results
-		let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
-		//there should be new results available
-		expect(newResults[0]).toBeInTheDocument();
-		// we will need to save this for later
-		const newFirstResult = newResults[0].innerHTML;
-		//new result should be different from the previous result
-		expect(newFirstResult).not.toEqual(firstResult);
+			//first term should no longer be active, and hover term should be.
+			expect(terms[1]).toHaveClass('ss__autocomplete__terms__option--active');
+			expect(terms[0]).not.toHaveClass('ss__autocomplete__terms__option--active');
 
-		//first term should no longer be active, and hover term should be.
-		expect(terms[1]).toHaveClass('ss__autocomplete__terms__option--active');
-		expect(terms[0]).not.toHaveClass('ss__autocomplete__terms__option--active');
+			//now lets test the facets
+			facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 
-		//now lets test the facets
-		const facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
-
-		//there should be facets
-		expect(facetOptions[0]).toBeInTheDocument();
-		//shouldnt be active
-		expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
-
+			//there should be facets
+			expect(facetOptions[0]).toBeInTheDocument();
+			//shouldnt be active
+			expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
+		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.facet' });
 
 		//now lets hover over one
-		userEvent.hover(facetOptions[0]);
+		userEvent.hover(facetOptions![0]);
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY * 2));
+		await waitFor(() => {
+			//check for the new results
+			let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			expect(newNewResults[0]).toBeInTheDocument();
+			//new results should again be different from previous results
+			expect(newNewResults[0].innerHTML).not.toEqual(newFirstResult);
 
-		//check for the new results
-		let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
-		expect(newNewResults[0]).toBeInTheDocument();
-		//new results should again be different from previous results
-		expect(newNewResults[0].innerHTML).not.toEqual(newFirstResult);
-
-		//hover facet should have now be active.
-		expect(facetOptions[0]).toHaveClass('ss__facet-list-options__option--filtered');
+			//hover facet should have now be active.
+			expect(facetOptions![0]).toHaveClass('ss__facet-list-options__option--filtered');
+		});
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
@@ -219,36 +218,37 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let renderedWithout = render(<Autocomplete {...args} />, { container });
 
-		let terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
-		expect(terms).not.toBeInTheDocument();
+		await waitFor(() => {
+			let terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
+			expect(terms).not.toBeInTheDocument();
 
-		let facets = renderedWithout.container.querySelector('.ss__autocomplete__facets');
-		expect(facets).not.toBeInTheDocument();
+			let facets = renderedWithout.container.querySelector('.ss__autocomplete__facets');
+			expect(facets).not.toBeInTheDocument();
 
-		let content = renderedWithout.container.querySelector('.ss__autocomplete__content');
-		expect(content).not.toBeInTheDocument();
+			let content = renderedWithout.container.querySelector('.ss__autocomplete__content');
+			expect(content).not.toBeInTheDocument();
 
-		let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
-		expect(link).not.toBeInTheDocument();
+			let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
+			expect(link).not.toBeInTheDocument();
+		});
 
 		let renderedWith = render(<Autocomplete {...otherArgs} />, { container });
 
-		let terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
-		expect(terms2).toBeInTheDocument();
+		await waitFor(() => {
+			let terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
+			expect(terms2).toBeInTheDocument();
 
-		let facets2 = renderedWith.container.querySelector('.ss__autocomplete__facets');
-		expect(facets2).toBeInTheDocument();
+			let facets2 = renderedWith.container.querySelector('.ss__autocomplete__facets');
+			expect(facets2).toBeInTheDocument();
 
-		let content2 = renderedWith.container.querySelector('.ss__autocomplete__content');
-		expect(content2).toBeInTheDocument();
+			let content2 = renderedWith.container.querySelector('.ss__autocomplete__content');
+			expect(content2).toBeInTheDocument();
 
-		let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
-		expect(link2).toBeInTheDocument();
+			let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
+			expect(link2).toBeInTheDocument();
+		});
 	});
 
 	it('can hideBanners', async () => {
@@ -274,16 +274,18 @@ describe('Autocomplete Component', () => {
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container });
-		let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
-		expect(banners).not.toBeInTheDocument();
+		await waitFor(() => {
+			let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
+			expect(banners).not.toBeInTheDocument();
+		});
 
 		let renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container });
-		let banners2 = renderedWithBanners.container.querySelector('.ss__banner');
-		expect(banners2).toBeInTheDocument();
+
+		await waitFor(() => {
+			let banners2 = renderedWithBanners.container.querySelector('.ss__banner');
+			expect(banners2).toBeInTheDocument();
+		});
 	});
 
 	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle', async () => {
@@ -302,19 +304,18 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
 
-		let termTitle = rendered.container.querySelector('.ss__autocomplete__title');
-		expect(termTitle).toHaveTextContent(args.termsTitle);
+		await waitFor(() => {
+			let termTitle = rendered.container.querySelector('.ss__autocomplete__title');
+			expect(termTitle).toHaveTextContent(args.termsTitle);
 
-		let facetsTitle = rendered.container.querySelector('.ss__autocomplete__title--facets');
-		expect(facetsTitle).toHaveTextContent(args.facetsTitle);
+			let facetsTitle = rendered.container.querySelector('.ss__autocomplete__title--facets');
+			expect(facetsTitle).toHaveTextContent(args.facetsTitle);
 
-		let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
-		expect(contentTitle).toHaveTextContent(args.contentTitle);
+			let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+			expect(contentTitle).toHaveTextContent(args.contentTitle);
+		});
 	});
 
 	it('can set a custom trending title', async () => {
@@ -332,12 +333,12 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
-		let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
-		expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+
+		await waitFor(() => {
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
 	});
 
 	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
@@ -357,27 +358,26 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
 
-		let termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
-		expect(termsSlot).toHaveTextContent('custom termsSlot');
+		await waitFor(() => {
+			let termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
+			expect(termsSlot).toHaveTextContent('custom termsSlot');
 
-		let facetSlot = rendered.container.querySelector('.ss__autocomplete__facets');
-		expect(facetSlot).toHaveTextContent('custom facetsSlot');
+			let facetSlot = rendered.container.querySelector('.ss__autocomplete__facets');
+			expect(facetSlot).toHaveTextContent('custom facetsSlot');
 
-		let resultsSlot = rendered.container.querySelector('.ss__autocomplete__content__results');
-		let defaultTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
-		expect(defaultTitle).not.toBeInTheDocument();
-		expect(resultsSlot).toHaveTextContent('custom resultsSlot');
+			let resultsSlot = rendered.container.querySelector('.ss__autocomplete__content__results');
+			let defaultTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+			expect(defaultTitle).not.toBeInTheDocument();
+			expect(resultsSlot).toHaveTextContent('custom resultsSlot');
 
-		let defaultLink = rendered.container.querySelector('.ss__autocomplete__content__info');
-		let linkSlot = rendered.container.querySelector('.ss__autocomplete__content #findMe');
+			let defaultLink = rendered.container.querySelector('.ss__autocomplete__content__info');
+			let linkSlot = rendered.container.querySelector('.ss__autocomplete__content #findMe');
 
-		expect(defaultLink).not.toBeInTheDocument();
-		expect(linkSlot).toHaveTextContent('custom linkSlot');
+			expect(defaultLink).not.toBeInTheDocument();
+			expect(linkSlot).toHaveTextContent('custom linkSlot');
+		});
 	});
 
 	//cant render both content slot and results slot at the same time.
@@ -395,12 +395,12 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
-		let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
-		expect(contentSlot).toHaveTextContent('Lorem Ipsum');
+
+		await waitFor(() => {
+			let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
+			expect(contentSlot).toHaveTextContent('Lorem Ipsum');
+		});
 	});
 
 	// needs own term
@@ -421,12 +421,12 @@ describe('Autocomplete Component', () => {
 
 		input.focus();
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
-		let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
-		expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
+
+		await waitFor(() => {
+			let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
+			expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
+		});
 	});
 
 	it('auto selects first trending term', async () => {
@@ -452,23 +452,21 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		const rendered = render(<Autocomplete {...args} />, { container });
+		await waitFor(() => {
+			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+			expect(autocomplete).toBeInTheDocument();
 
-		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
-		expect(autocomplete).toBeInTheDocument();
+			const terms = rendered.container.querySelectorAll('.ss__autocomplete__terms__option');
+			expect(terms.length).toBe(controller.store.trending.length);
 
-		const terms = rendered.container.querySelectorAll('.ss__autocomplete__terms__option');
-		expect(terms.length).toBe(controller.store.trending.length);
+			expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
 
-		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
+			expect(controller.store.trending[0].active).toBeTruthy();
 
-		expect(controller.store.trending[0].active).toBeTruthy();
-
-		let results = rendered.container.querySelectorAll('.ss__result');
-		expect(results[0]).toBeInTheDocument();
+			let results = rendered.container.querySelectorAll('.ss__result');
+			expect(results[0]).toBeInTheDocument();
+		});
 	});
 
 	it('can set a custom css width', async () => {
@@ -491,18 +489,20 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
-		let ac = rendered.container.querySelector('.ss__autocomplete')!;
-		const styles = getComputedStyle(ac);
-		expect(styles['width']).toBe(args.width);
+
+		await waitFor(() => {
+			let ac = rendered.container.querySelector('.ss__autocomplete')!;
+			const styles = getComputedStyle(ac);
+			expect(styles['width']).toBe(args.width);
+		});
 
 		let rendered2 = render(<Autocomplete {...args2} />, { container });
-		let ac2 = rendered2.container.querySelector('.ss__autocomplete')!;
-		const styles2 = getComputedStyle(ac2);
-		expect(styles2['width']).toBe(args2.width);
+		await waitFor(() => {
+			let ac2 = rendered2.container.querySelector('.ss__autocomplete')!;
+			const styles2 = getComputedStyle(ac2);
+			expect(styles2['width']).toBe(args2.width);
+		});
 	});
 
 	it('can use breakpoints', async () => {
@@ -528,25 +528,21 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 		let rendered = render(<Autocomplete {...args} />, { container });
-		let acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
-
-		expect(acFacets).toBeInTheDocument();
+		let acFacets: any;
+		await waitFor(() => {
+			acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
+			expect(acFacets).toBeInTheDocument();
+		});
 
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
-
 		// Trigger the window resize event.
 		global.dispatchEvent(new Event('resize'));
 
-		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
-		// acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
-		expect(acFacets).not.toBeInTheDocument();
+		await waitFor(() => {
+			expect(acFacets).not.toBeInTheDocument();
+		});
 	});
 
 	describe('AutoComplete theming works', () => {
@@ -570,19 +566,17 @@ describe('Autocomplete Component', () => {
 			const input = document.querySelector('.searchspring-ac');
 			(input as HTMLInputElement).focus();
 
-			// to deal with timeoutDelay setTimeout used in focus event
-			await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
 					<Autocomplete {...args} />
 				</ThemeProvider>,
 				{ container }
 			);
-
-			const element = rendered.container.querySelector('.ss__autocomplete__title h5');
-			expect(element).toBeInTheDocument();
-			expect(element).toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+			await waitFor(() => {
+				const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+				expect(element).toBeInTheDocument();
+				expect(element).toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+			});
 		});
 
 		it('is themeable with theme prop', async () => {
@@ -605,14 +599,12 @@ describe('Autocomplete Component', () => {
 			const input = document.querySelector('.searchspring-ac');
 			(input as HTMLInputElement).focus();
 
-			// to deal with timeoutDelay setTimeout used in focus event
-			await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 			const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container });
-
-			const element = rendered.container.querySelector('.ss__autocomplete__title h5');
-			expect(element).toBeInTheDocument();
-			expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+			await waitFor(() => {
+				const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+				expect(element).toBeInTheDocument();
+				expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+			});
 		});
 
 		it('is theme prop overrides ThemeProvider', async () => {
@@ -642,9 +634,6 @@ describe('Autocomplete Component', () => {
 			const input = document.querySelector('.searchspring-ac');
 			(input as HTMLInputElement).focus();
 
-			// to deal with timeoutDelay setTimeout used in focus event
-			await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
 					<Autocomplete {...args} theme={propTheme} />
@@ -652,10 +641,12 @@ describe('Autocomplete Component', () => {
 				{ container }
 			);
 
-			const element = rendered.container.querySelector('.ss__autocomplete__title h5');
-			expect(element).toBeInTheDocument();
-			expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
-			expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+			await waitFor(() => {
+				const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+				expect(element).toBeInTheDocument();
+				expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+				expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+			});
 		});
 
 		it('breakpoints override theme prop', async () => {
@@ -700,15 +691,15 @@ describe('Autocomplete Component', () => {
 			input.focus();
 			input.value = 'dress';
 
-			// to deal with timeoutDelay setTimeout used in focus event
-			await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
 			let rendered = render(<Autocomplete {...args} />, { container });
-			let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet')!;
+			let acFacet: any;
+			let options: any;
 
-			let options = acFacet.querySelectorAll('.ss__facet__options a');
-
-			expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
+			await waitFor(() => {
+				acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet')!;
+				options = acFacet.querySelectorAll('.ss__facet__options a');
+				expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
+			});
 
 			// Change the viewport to 500px.
 			global.innerWidth = 500;
@@ -716,12 +707,10 @@ describe('Autocomplete Component', () => {
 			// Trigger the window resize event.
 			global.dispatchEvent(new Event('resize'));
 
-			// to deal with timeoutDelay setTimeout used in focus event
-			await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
-			options = acFacet.querySelectorAll('.ss__facet__options a');
-
-			expect(options?.length).toEqual(theme.components.facet.limit);
+			await waitFor(() => {
+				options = acFacet.querySelectorAll('.ss__facet__options a');
+				expect(options?.length).toEqual(theme.components.facet.limit);
+			});
 		});
 	});
 });

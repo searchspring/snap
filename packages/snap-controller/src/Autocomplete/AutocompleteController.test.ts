@@ -8,6 +8,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { AutocompleteController, INPUT_DELAY as _INPUT_DELAY } from './AutocompleteController';
+import { waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
 
@@ -142,6 +143,49 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it('can submit with form with original query when corrected query', async () => {
+		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
+
+		controller.bind();
+		let inputEl: HTMLInputElement | null;
+		let form: HTMLFormElement | null;
+		let query = 'dresss';
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+		});
+
+		form = inputEl!.form;
+
+		inputEl!.value = query;
+		inputEl!.focus();
+		inputEl!.dispatchEvent(new Event('keyup'));
+
+		await waitFor(() => {
+			controller.search();
+		});
+		let beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		form?.dispatchEvent(new Event('submit', { bubbles: true }));
+
+		await waitFor(() => {
+			let oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
+			expect(oqInputEl!).toBeDefined();
+			expect(oqInputEl!.value).toBe(query);
+		});
+
+		beforeSubmitfn!.mockClear();
+	});
+
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -160,10 +204,13 @@ describe('Autocomplete Controller', () => {
 		expect(controller.urlManager.state.query).toBe(query);
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
-		await controller.search();
-		expect(controller.store.results.length).toBeGreaterThan(0);
-		expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
-		expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
+		controller.search();
+
+		await waitFor(() => {
+			expect(controller.store.results.length).toBeGreaterThan(0);
+			expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
+			expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
+		});
 	});
 
 	it('has no results if query is blank', async () => {
@@ -183,8 +230,11 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.blank' });
-		await controller.search();
-		expect(controller.store.results.length).toBe(0);
+		controller.search();
+
+		await waitFor(() => {
+			expect(controller.store.results.length).toBe(0);
+		});
 	});
 
 	it('unbinds inputs', async () => {
@@ -200,14 +250,18 @@ describe('Autocomplete Controller', () => {
 
 		await controller.bind();
 
-		await controller.unbind();
+		controller.unbind();
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		let inputEl: HTMLInputElement | null;
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+		});
+
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();
 		inputEl!.dispatchEvent(new Event('keyup'));
-
 		expect(controller.urlManager.state.query).toBe(undefined);
 	});
 
@@ -221,21 +275,26 @@ describe('Autocomplete Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		await controller.init();
-		const setFocusedfn = jest.spyOn(controller, 'setFocused');
+		let setFocusedfn: any;
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-		const query = 'bumpers';
-		inputEl!.value = query;
-		inputEl!.focus();
+		await waitFor(() => {
+			controller.init();
+			setFocusedfn = jest.spyOn(controller, 'setFocused');
 
-		expect(controller.urlManager.state.query).toBe(undefined);
-		expect(setFocusedfn).toHaveBeenCalledTimes(0);
+			const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+			const query = 'bumpers';
+			inputEl!.value = query;
+			inputEl!.focus();
 
-		await controller.bind();
-		expect(setFocusedfn).toHaveBeenCalledTimes(1);
+			expect(controller.urlManager.state.query).toBe(undefined);
+			expect(setFocusedfn).toHaveBeenCalledTimes(0);
+		});
 
-		setFocusedfn.mockClear();
+		await waitFor(() => {
+			controller.bind();
+			expect(setFocusedfn).toHaveBeenCalledTimes(1);
+			setFocusedfn.mockClear();
+		});
 	});
 
 	it('trims facets (settings.facets.trim)', async () => {
@@ -258,10 +317,13 @@ describe('Autocomplete Controller', () => {
 		expect(controller.urlManager.state.query).toBe(query);
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
-		expect(controller.store.results.length).toBeGreaterThan(0);
-		const facetsWithValues = controller.store.facets.filter((facet) => facet.values?.length != 0);
-		expect(facetsWithValues.length).toBe(controller.store.facets.length);
+		controller.search();
+
+		await waitFor(() => {
+			expect(controller.store.results.length).toBeGreaterThan(0);
+			const facetsWithValues = controller.store.facets.filter((facet) => facet.values?.length != 0);
+			expect(facetsWithValues.length).toBe(controller.store.facets.length);
+		});
 	});
 
 	it('syncs inputs (settings.syncInputs)', async () => {
@@ -282,16 +344,18 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
 
-		const query = 'bumpers';
+		await waitFor(() => {
+			const query = 'bumpers';
 
-		inputEl1.value = query;
-		inputEl1.focus();
-		inputEl1.dispatchEvent(new Event('keyup'));
+			inputEl1.value = query;
+			inputEl1.focus();
+			inputEl1.dispatchEvent(new Event('keyup'));
 
-		expect(inputEl1.value).toBe(query);
-		expect(inputEl2.value).toBe(query);
+			expect(inputEl1.value).toBe(query);
+			expect(inputEl2.value).toBe(query);
+		});
 	});
 
 	it('can invoke controller track.product.click', async () => {
@@ -307,19 +371,21 @@ describe('Autocomplete Controller', () => {
 		const clickfn = jest.spyOn(controller.track.product, 'click');
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
+		controller.search();
 
-		const event = new Event('click');
+		await waitFor(() => {
+			const event = new Event('click');
 
-		const logWarnfn = jest.spyOn(controller.log, 'warn');
+			const logWarnfn = jest.spyOn(controller.log, 'warn');
 
-		controller.track.product.click(event as any, {});
+			controller.track.product.click(event as any, {});
 
-		expect(clickfn).toHaveBeenCalledWith(event, {});
-		expect(logWarnfn).toHaveBeenCalledWith('product.click tracking is not currently supported in this controller type');
+			expect(clickfn).toHaveBeenCalledWith(event, {});
+			expect(logWarnfn).toHaveBeenCalledWith('product.click tracking is not currently supported in this controller type');
 
-		clickfn.mockClear();
-		logWarnfn.mockClear();
+			clickfn.mockClear();
+			logWarnfn.mockClear();
+		});
 	});
 
 	it('can set personalization cart param', async () => {
@@ -383,25 +449,32 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		let inputEl: HTMLInputElement | null;
+		let query: string;
+		controller.bind();
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-		const query = 'bumpers';
-		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			query = 'bumpers';
+			inputEl!.value = query;
+			inputEl!.focus();
+			inputEl!.dispatchEvent(new Event('keyup'));
+		});
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
-
-		expect(inputEl!.value).toBe(query);
-
+		controller.search();
 		const storeResetfn = jest.spyOn(controller.store, 'reset');
 
-		await controller.reset();
+		await waitFor(() => {
+			expect(inputEl!.value).toBe(query);
+		});
 
-		expect(storeResetfn).toHaveBeenCalledTimes(1);
-		expect(inputEl!.value).toBe('');
+		controller.reset();
+
+		await waitFor(() => {
+			expect(storeResetfn).toHaveBeenCalledTimes(1);
+			expect(inputEl!.value).toBe('');
+		});
 
 		storeResetfn.mockClear();
 	});
@@ -417,20 +490,22 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
+		let inputEl: HTMLInputElement | null;
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+		});
 		inputEl!.focus();
 
-		expect(document.activeElement).toBe(inputEl);
+		expect(document.activeElement).toBe(inputEl!);
 
 		const setFocusedfn = jest.spyOn(controller, 'setFocused');
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ESCAPE }));
 
 		expect(setFocusedfn).toHaveBeenCalledTimes(1);
 
-		expect(document.activeElement).not.toBe(inputEl);
+		expect(document.activeElement).not.toBe(inputEl!);
 		expect(document.activeElement).toBe(document.body);
 
 		setFocusedfn.mockClear();
@@ -447,22 +522,25 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		let inputEl: HTMLInputElement | null;
+		controller.bind();
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			inputEl!.focus();
+		});
 
-		inputEl!.focus();
-		await new Promise((resolve) => setTimeout(resolve));
-
-		expect(document.activeElement).toBe(inputEl);
+		await waitFor(() => {
+			expect(document.activeElement).toBe(inputEl);
+		});
 
 		const setFocusedfn = jest.spyOn(controller, 'setFocused');
 
 		inputEl!.dispatchEvent(new Event('click', { bubbles: true })); // should not loose focus
 
 		expect(setFocusedfn).not.toHaveBeenCalled();
-		expect(controller.store.state.focusedInput).toBe(inputEl);
-		expect(document.activeElement).toBe(inputEl);
+		expect(controller.store.state.focusedInput).toBe(inputEl!);
+		expect(document.activeElement).toBe(inputEl!);
 
 		const divEl = document.querySelector('div');
 		divEl!.dispatchEvent(new Event('click', { bubbles: true }));
@@ -472,7 +550,6 @@ describe('Autocomplete Controller', () => {
 
 		setFocusedfn.mockClear();
 	});
-
 	it('can submit with form', async () => {
 		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
 		const controller = new AutocompleteController(acConfig, {
@@ -485,10 +562,14 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		let inputEl: HTMLInputElement | null;
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+		});
+
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();
@@ -498,50 +579,13 @@ describe('Autocomplete Controller', () => {
 		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
 
 		form?.dispatchEvent(new Event('submit', { bubbles: true }));
+		//this timeout seems to be needed. Cant replace with waitFor
 		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
 
 		expect(beforeSubmitfn).toHaveBeenCalledWith('beforeSubmit', {
 			controller,
-			input: inputEl,
+			input: inputEl!,
 		});
-
-		beforeSubmitfn.mockClear();
-	});
-
-	it('can submit with form with original query when corrected query', async () => {
-		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
-
-		await controller.bind();
-
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-		const form = inputEl!.form;
-
-		const query = 'dresss';
-		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
-		await new Promise((resolve) => setTimeout(resolve));
-
-		await controller.search();
-
-		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
-
-		form?.dispatchEvent(new Event('submit', { bubbles: true }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
-
-		const oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
-		expect(oqInputEl).toBeDefined();
-		expect(oqInputEl!.value).toBe(query);
 
 		beforeSubmitfn.mockClear();
 	});
@@ -561,9 +605,12 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
 
-		await controller.bind();
+		controller.bind();
+		let inputEl: HTMLInputElement | null;
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+		});
 
 		const query = 'dresss';
 		inputEl!.value = query;
@@ -571,9 +618,10 @@ describe('Autocomplete Controller', () => {
 		inputEl!.dispatchEvent(new Event('keyup'));
 
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY + 100));
-		expect(controller.store.search.originalQuery).toBeDefined();
 
+		await waitFor(() => {
+			expect(controller.store.search.originalQuery).toBeDefined();
+		});
 		//@ts-ignore
 		delete window.location;
 		window.location = {
@@ -582,10 +630,11 @@ describe('Autocomplete Controller', () => {
 		};
 
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
 
-		expect(window.location.href).toContain(`oq=${query}`);
-		expect(window.location.href).toContain(acConfig.action);
+		await waitFor(() => {
+			expect(window.location.href).toContain(`oq=${query}`);
+			expect(window.location.href).toContain(acConfig.action);
+		});
 	});
 
 	it('tests bind method without form (using config.action)', async () => {
@@ -608,49 +657,56 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
 		const setFocusedfn = jest.spyOn(controller, 'setFocused');
 		const storeResetfn = jest.spyOn(controller.store, 'reset');
 		const urlManagerResetfn = jest.spyOn(controller.urlManager, 'reset');
 
-		// reset() should not be called input exists
-		inputEl!.value = 'wh';
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
-		await new Promise((resolve) => setTimeout(resolve));
+		await waitFor(() => {
+			// reset() should not be called input exists
+			inputEl!.value = 'wh';
+			inputEl!.focus();
+			inputEl!.dispatchEvent(new Event('keyup'));
+		});
 
-		expect(storeResetfn).not.toHaveBeenCalled();
-		expect(urlManagerResetfn).not.toHaveBeenCalled();
-		expect(setFocusedfn).toHaveBeenCalledTimes(1);
+		await waitFor(() => {
+			expect(storeResetfn).not.toHaveBeenCalled();
+			expect(urlManagerResetfn).not.toHaveBeenCalled();
+			expect(setFocusedfn).toHaveBeenCalledTimes(1);
 
-		// reset() to be called when input is blank
-		inputEl!.value = '';
-		inputEl!.dispatchEvent(new Event('focus'));
-		inputEl!.dispatchEvent(new Event('keyup'));
-		await new Promise((resolve) => setTimeout(resolve));
+			// reset() to be called when input is blank
+			inputEl!.value = '';
+			inputEl!.dispatchEvent(new Event('focus'));
+			inputEl!.dispatchEvent(new Event('keyup'));
+		});
 
-		expect(storeResetfn).toHaveBeenCalled();
-		expect(urlManagerResetfn).toHaveBeenCalled();
-		expect(setFocusedfn).toHaveBeenCalledTimes(2);
+		await waitFor(() => {
+			expect(storeResetfn).toHaveBeenCalled();
+			expect(urlManagerResetfn).toHaveBeenCalled();
+			expect(setFocusedfn).toHaveBeenCalledTimes(2);
 
-		// setFocused to be called if body clicked
-		document.querySelector('body')!.dispatchEvent(new Event('click', { bubbles: true }));
-		expect(setFocusedfn).toHaveBeenCalledTimes(3);
+			// setFocused to be called if body clicked
+			document.querySelector('body')!.dispatchEvent(new Event('click', { bubbles: true }));
+		});
 
-		//@ts-ignore
-		delete window.location;
-		window.location = {
-			...window.location,
-			href: '', // jest does not support window location changes
-		};
+		await waitFor(() => {
+			expect(setFocusedfn).toHaveBeenCalledTimes(3);
 
-		inputEl!.value = 'wh';
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+			//@ts-ignore
+			delete window.location;
+			window.location = {
+				...window.location,
+				href: '', // jest does not support window location changes
+			};
 
-		// timeout needed due to beforeSubmit event and awaiting further input
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
-		expect(window.location.href).toBe(`${acConfig.action}?search_query=${inputEl!.value}`);
+			inputEl!.value = 'wh';
+			inputEl!.focus();
+			inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+		});
+
+		await waitFor(() => {
+			expect(window.location.href).toBe(`${acConfig.action}?search_query=${inputEl!.value}`);
+		});
 
 		setFocusedfn.mockClear();
 		storeResetfn.mockClear();
@@ -683,12 +739,14 @@ describe('Autocomplete Controller', () => {
 		const logErrorfn = jest.spyOn(controller.log, 'error');
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
+		controller.search();
 
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
 
-		logErrorfn.mockClear();
+			logErrorfn.mockClear();
+		});
 	});
 
 	it('logs error if middleware throws in afterSearch', async () => {
@@ -717,12 +775,13 @@ describe('Autocomplete Controller', () => {
 		const logErrorfn = jest.spyOn(controller.log, 'error');
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
+		controller.search();
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
 
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
-
-		logErrorfn.mockClear();
+			logErrorfn.mockClear();
+		});
 	});
 
 	it('logs error if middleware throws in afterStore', async () => {
@@ -751,12 +810,13 @@ describe('Autocomplete Controller', () => {
 		const logErrorfn = jest.spyOn(controller.log, 'error');
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-		await controller.search();
+		controller.search();
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
 
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
-
-		logErrorfn.mockClear();
+			logErrorfn.mockClear();
+		});
 	});
 
 	it('logs error if middleware throws in focusChange', async () => {
@@ -785,13 +845,13 @@ describe('Autocomplete Controller', () => {
 		inputEl!.value = query;
 		inputEl!.focus();
 
-		await controller.bind();
-		await new Promise((resolve) => setTimeout(resolve));
+		controller.bind();
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
 
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
-
-		logErrorfn.mockClear();
+			logErrorfn.mockClear();
+		});
 	});
 
 	it(`tests focusChange middleware err handled`, async function () {
@@ -820,14 +880,12 @@ describe('Autocomplete Controller', () => {
 		inputEl!.value = query;
 		inputEl!.focus();
 
-		await controller.bind();
-		await new Promise((resolve) => setTimeout(resolve));
-
-		expect(middleware).toHaveBeenCalledTimes(1);
-
-		expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
-
-		spy.mockClear();
+		controller.bind();
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+			spy.mockClear();
+		});
 	});
 
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
@@ -857,12 +915,13 @@ describe('Autocomplete Controller', () => {
 			const spy = jest.spyOn(controller.log, 'warn');
 
 			(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-			await controller.search();
+			controller.search();
+			await waitFor(() => {
+				expect(middleware).toHaveBeenCalledTimes(1);
+				expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
 
-			expect(middleware).toHaveBeenCalledTimes(1);
-			expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
-
-			spy.mockClear();
+				spy.mockClear();
+			});
 		});
 	});
 
@@ -878,31 +937,33 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-
+		controller.bind();
+		let inputEl: HTMLInputElement | null;
+		const query = 'bumpers';
 		const middleware = jest.fn(() => {
 			throw new Error('middleware error');
 		});
 		const event = 'beforeSubmit';
-		controller.on(event, middleware);
+		await waitFor(() => {
+			(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+			controller.on(event, middleware);
+		});
 
 		expect(middleware).not.toHaveBeenCalled();
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-		const query = 'bumpers';
+		inputEl = document.querySelector(controller.config.selector);
 		inputEl!.value = query;
 		inputEl!.focus();
 		inputEl!.dispatchEvent(new Event('keyup'));
 
 		const logErrorfn = jest.spyOn(controller.log, 'error');
-
 		const form = inputEl!.form;
 		form?.dispatchEvent(new Event('submit', { bubbles: true }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
 
-		expect(middleware).toHaveBeenCalled();
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalled();
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+		});
 
 		logErrorfn.mockClear();
 	});
@@ -919,18 +980,20 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-
+		controller.bind();
 		const middleware = jest.fn(() => {
 			return false; // return false to stop middleware
 		});
+		let inputEl: HTMLInputElement | null;
 		const event = 'beforeSubmit';
-		controller.on(event, middleware);
+		await waitFor(() => {
+			(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+			controller.on(event, middleware);
+		});
 
 		expect(middleware).not.toHaveBeenCalled();
 
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		inputEl = document.querySelector(controller.config.selector);
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();
@@ -940,11 +1003,11 @@ describe('Autocomplete Controller', () => {
 
 		const form = inputEl!.form;
 		form?.dispatchEvent(new Event('submit', { bubbles: true }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
 
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
-
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+		});
 		spy.mockClear();
 	});
 
@@ -961,29 +1024,27 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
 
 		const middleware = jest.fn(() => {
 			throw new Error('middleware error');
 		});
 		const event = 'beforeSubmit';
-		controller.on(event, middleware);
-
-		expect(middleware).not.toHaveBeenCalled();
-
 		const logErrorfn = jest.spyOn(controller.log, 'error');
+		await waitFor(() => {
+			controller.on(event, middleware);
+		});
+		expect(middleware).not.toHaveBeenCalled();
 
 		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
-
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
-
-		expect(middleware).toHaveBeenCalled();
-		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
-
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalled();
+			expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+		});
 		logErrorfn.mockClear();
 	});
 
@@ -1000,17 +1061,18 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		await controller.bind();
+		controller.bind();
 
 		const middleware = jest.fn(() => {
 			return false; // return false to stop middleware
 		});
 		const event = 'beforeSubmit';
-		controller.on(event, middleware);
+		const spy = jest.spyOn(controller.log, 'warn');
+		await waitFor(() => {
+			controller.on(event, middleware);
+		});
 
 		expect(middleware).not.toHaveBeenCalled();
-
-		const spy = jest.spyOn(controller.log, 'warn');
 
 		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
 		const query = 'bumpers';
@@ -1018,11 +1080,10 @@ describe('Autocomplete Controller', () => {
 		inputEl!.focus();
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
-
-		expect(middleware).toHaveBeenCalledTimes(1);
-		expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
-
+		await waitFor(() => {
+			expect(middleware).toHaveBeenCalledTimes(1);
+			expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+		});
 		spy.mockClear();
 	});
 
@@ -1045,12 +1106,14 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
-		await controller.search();
+		controller.search();
 
-		expect(controller.store.error).toStrictEqual({
-			code: 429,
-			type: 'warning',
-			message: 'Too many requests try again later',
+		await waitFor(() => {
+			expect(controller.store.error).toStrictEqual({
+				code: 429,
+				type: 'warning',
+				message: 'Too many requests try again later',
+			});
 		});
 	});
 
@@ -1073,12 +1136,13 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
-		await controller.search();
-
-		expect(controller.store.error).toStrictEqual({
-			code: 500,
-			type: 'error',
-			message: 'Invalid Search Request or Service Unavailable',
+		controller.search();
+		await waitFor(() => {
+			expect(controller.store.error).toStrictEqual({
+				code: 500,
+				type: 'error',
+				message: 'Invalid Search Request or Service Unavailable',
+			});
 		});
 	});
 
@@ -1102,27 +1166,30 @@ describe('Autocomplete Controller', () => {
 		const searchTrendingfn = jest.spyOn(controller, 'searchTrending');
 		const trendingfn = jest.spyOn(controller.client, 'trending');
 
-		await controller.bind();
+		controller.bind();
+		await waitFor(() => {
+			expect(searchTrendingfn).toHaveBeenCalledTimes(1);
+			expect(trendingfn).toHaveBeenCalledTimes(1);
 
-		expect(searchTrendingfn).toHaveBeenCalledTimes(1);
-		expect(trendingfn).toHaveBeenCalledTimes(1);
+			expect(controller.store.trending.length).toBeGreaterThan(0);
 
-		expect(controller.store.trending.length).toBeGreaterThan(0);
+			// first trending term should be active upon focus
+			expect(controller.store.trending[0].active).toBe(false);
+			const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+			inputEl!.focus();
+		});
 
-		// first trending term should be active upon focus
-		expect(controller.store.trending[0].active).toBe(false);
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
-		inputEl!.focus();
-		await new Promise((resolve) => setTimeout(resolve));
+		await waitFor(() => {
+			expect(controller.store.trending[0].active).toBe(true);
+			// test retrieving trending terms from storage
+			controller.searchTrending();
+		});
 
-		expect(controller.store.trending[0].active).toBe(true);
-
-		// test retrieving trending terms from storage
-		await controller.searchTrending();
-		expect(searchTrendingfn).toHaveBeenCalledTimes(2);
-		expect(trendingfn).toHaveBeenCalledTimes(1); // should not have been called again
-
-		searchTrendingfn.mockClear();
-		trendingfn.mockClear();
+		await waitFor(() => {
+			expect(searchTrendingfn).toHaveBeenCalledTimes(2);
+			expect(trendingfn).toHaveBeenCalledTimes(1); // should not have been called again
+			searchTrendingfn.mockClear();
+			trendingfn.mockClear();
+		});
 	});
 });
