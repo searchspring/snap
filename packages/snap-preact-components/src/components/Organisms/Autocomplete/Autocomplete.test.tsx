@@ -147,9 +147,10 @@ describe('Autocomplete Component', () => {
 			expect(termLinks[0]).toBeInTheDocument();
 			//first term should be auto selected
 			expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
-
-			(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
 		});
+
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
+
 		//now lets hover over the next term
 		userEvent.hover(termLinks![1]);
 
@@ -175,6 +176,7 @@ describe('Autocomplete Component', () => {
 			//shouldnt be active
 			expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
 		});
+
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.facet' });
 
 		//now lets hover over one
