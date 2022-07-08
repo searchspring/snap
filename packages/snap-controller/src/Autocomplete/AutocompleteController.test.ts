@@ -143,50 +143,6 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
-	it('can submit with form with original query when corrected query', async () => {
-		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
-
-		await controller.bind();
-
-		let form: HTMLFormElement | null;
-		let query = 'dresss';
-		let inputEl: HTMLInputElement | null;
-
-		await waitFor(() => {
-			inputEl = document.querySelector(controller.config.selector);
-			expect(inputEl).toBeDefined();
-		});
-
-		form = inputEl!.form;
-
-		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
-
-		await controller.search();
-
-		let beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
-		form?.dispatchEvent(new Event('submit', { bubbles: true }));
-
-		await waitFor(() => {
-			let oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
-			expect(oqInputEl!).toBeDefined();
-			expect(oqInputEl!.value).toBe(query);
-		});
-
-		beforeSubmitfn!.mockClear();
-	});
-
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -572,6 +528,50 @@ describe('Autocomplete Controller', () => {
 		});
 
 		beforeSubmitfn.mockClear();
+	});
+
+	it('can submit with form with original query when corrected query', async () => {
+		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
+
+		await controller.bind();
+
+		let form: HTMLFormElement | null;
+		let query = 'dresss';
+		let inputEl: HTMLInputElement | null;
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			expect(inputEl).toBeDefined();
+		});
+
+		form = inputEl!.form;
+
+		inputEl!.value = query;
+		inputEl!.focus();
+		inputEl!.dispatchEvent(new Event('keyup'));
+
+		await controller.search();
+
+		let beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		form?.dispatchEvent(new Event('submit', { bubbles: true }));
+
+		await waitFor(() => {
+			let oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
+			expect(oqInputEl!).toBeDefined();
+			expect(oqInputEl!.value).toBe(query);
+		});
+
+		beforeSubmitfn!.mockClear();
 	});
 
 	it('can submit without form and config.action with original query', async () => {
