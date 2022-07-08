@@ -386,13 +386,17 @@ transformSearchResponse.sorting = (response: searchResponseType) => {
 
 transformSearchResponse.merchandising = (response: searchResponseType) => {
 	const merchandising = response?.merchandising;
-
+	const transformedMerchandising: any = merchandising;
 	if (merchandising.content && Array.isArray(merchandising.content) && !merchandising.content.length) {
-		merchandising.content = {};
+		transformedMerchandising.content = {};
 	}
 
+	if (merchandising.triggeredCampaigns) {
+		transformedMerchandising.campaigns = merchandising.triggeredCampaigns;
+	}
+	delete transformedMerchandising.triggeredCampaigns;
 	return {
-		merchandising,
+		merchandising: transformedMerchandising,
 	};
 };
 

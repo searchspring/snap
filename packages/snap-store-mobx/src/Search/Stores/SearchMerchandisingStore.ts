@@ -16,6 +16,11 @@ export type BannerContent = Partial<Record<ContentType, Content>>;
 export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
+	public campaigns: {
+		id?: string;
+		title?: string;
+		type?: string;
+	}[] = [];
 
 	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
@@ -27,6 +32,9 @@ export class SearchMerchandisingStore {
 						this.content[type] = new Content(merchData.content[type]!);
 					}
 				});
+			}
+			if (merchData.campaigns) {
+				this.campaigns = merchData.campaigns;
 			}
 		}
 	}

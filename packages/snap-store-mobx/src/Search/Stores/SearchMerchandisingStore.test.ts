@@ -10,7 +10,7 @@ const services = {
 const mockData = new MockData();
 
 describe('Merchandising Store', () => {
-	const emptyMerchStore = { redirect: '', content: {} };
+	const emptyMerchStore = { redirect: '', content: {}, campaigns: [] };
 
 	it('is empty when not passed valid params', () => {
 		// @ts-ignore
@@ -47,5 +47,11 @@ describe('Merchandising Store', () => {
 		const data = mockData.resetConfig().searchMeta('redirect');
 		const merchStore = new SearchMerchandisingStore(services, data.merchandising!);
 		expect(merchStore.redirect).toEqual(data.merchandising?.redirect);
+	});
+
+	it('has campaigns', () => {
+		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!);
+		expect(merchStore.campaigns).toEqual(data.merchandising?.campaigns);
 	});
 });
