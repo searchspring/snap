@@ -225,6 +225,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		onClick,
 		disableStyles,
 		style,
+		modules,
 		className,
 		...additionalProps
 	} = props;
@@ -243,8 +244,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			theme: props.theme,
 		},
 	};
+	const swiperModules = modules ? [Navigation, Pagination].concat(modules!) : [Navigation, Pagination];
 
-	SwiperCore.use([Pagination, Navigation]);
+	SwiperCore.use(swiperModules);
 
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
@@ -334,6 +336,7 @@ export interface CarouselProps extends ComponentProps {
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onPrevButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onInit?: (swiper: SwiperCore) => void;
+	modules?: any[];
 	children: JSX.Element[];
 }
 
