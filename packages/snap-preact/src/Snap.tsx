@@ -267,7 +267,7 @@ export class Snap {
 						message,
 						colno,
 						lineno,
-						timeStamp,
+						errortimestamp: timeStamp,
 					};
 					this.tracker.track.error(beaconPayload);
 				}

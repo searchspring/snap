@@ -1125,7 +1125,7 @@ describe('Tracker', () => {
 			message: 'something went wrong!',
 			colno: 1,
 			lineno: 1,
-			timeStamp: 1,
+			errortimestamp: 1,
 		};
 		const beaconEvent = await tracker.track.error(payload);
 
