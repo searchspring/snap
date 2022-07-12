@@ -2406,7 +2406,8 @@
     }
   ],
   "sorting": [],
-  "merchandising": {
+  "merchandising": { 
+    "campaigns": [],
     "redirect": "",
     "content": {}
   },
