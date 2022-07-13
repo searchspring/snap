@@ -8,7 +8,7 @@ Renders a carousel of slides using children, built with [Swiper](https://swiperj
 ## Usage
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
-
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ```jsx
 <Carousel>{children}</Carousel>
@@ -81,6 +81,14 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 
 ```jsx
 <Carousel onInit={(swiper, e) => { /* do something */ }}>{children}</Carousel>
+```
+
+### modules
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+
+```jsx
+import { Scrollbar } from 'swiper';
+<Carousel modules={[Scrollbar]} scrollbar>{children}</Carousel>
 ```
 
 ### autoAdjustSlides
