@@ -523,7 +523,7 @@ describe('search response merch transformer', () => {
 			merchandising: mockMerchandising,
 		});
 
-		expect(response.merchandising).toEqual(mockMerchandising);
+		expect(response.merchandising).toEqual({ redirect: mockMerchandising.redirect, content: mockMerchandising.content, campaigns: [] });
 	});
 
 	it('ensures content is always an object', () => {

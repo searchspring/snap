@@ -1,7 +1,11 @@
 import { observable, makeObservable } from 'mobx';
 
 import type { StoreServices } from '../../types';
-import type { SearchResponseModelMerchandising, SearchResponseModelMerchandisingContentInline } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModelMerchandising,
+	SearchResponseModelMerchandisingContentInline,
+	SearchResponseModelMerchandisingCampaigns,
+} from '@searchspring/snapi-types';
 
 export enum ContentType {
 	HEADER = 'header',
@@ -16,11 +20,7 @@ export type BannerContent = Partial<Record<ContentType, Content>>;
 export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
-	public campaigns: {
-		id?: string;
-		title?: string;
-		type?: string;
-	}[] = [];
+	public campaigns: SearchResponseModelMerchandisingCampaigns[] = [];
 
 	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
