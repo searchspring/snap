@@ -244,7 +244,10 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			theme: props.theme,
 		},
 	};
-	const swiperModules = modules ? [Navigation, Pagination].concat(modules!) : [Navigation, Pagination];
+
+	const swiperModulesUnfiltered = modules ? [Navigation, Pagination].concat(modules!) : [Navigation, Pagination];
+	//remove any duplicates, in case user passes in Navigation or Pagination
+	const swiperModules = swiperModulesUnfiltered.filter((module, pos) => swiperModulesUnfiltered.indexOf(module) === pos);
 
 	SwiperCore.use(swiperModules);
 
