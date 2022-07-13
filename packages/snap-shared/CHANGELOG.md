@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* **searchmerchandisingstore:** transform merch.triggerCampaigns - campaigns & add to store ([e13986f](https://github.com/searchspring/snap/commit/e13986fc239bee7857ffee98dc0c3c602a859d69))
+
+
+
+
+
 ## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
 
 **Note:** Version bump only for package @searchspring/snap-shared

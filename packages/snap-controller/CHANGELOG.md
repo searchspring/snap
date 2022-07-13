@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* add restorePosition to infinite config ([4e822cc](https://github.com/searchspring/snap/commit/4e822cce5e164faddb0f283f345e50b20fcfb9ac))
+
+
+
+
+
 ## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
 
 

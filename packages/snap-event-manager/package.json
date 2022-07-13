@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-event-manager",
-	"version": "0.30.2",
+	"version": "0.31.0",
 	"description": "Snap Event Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
