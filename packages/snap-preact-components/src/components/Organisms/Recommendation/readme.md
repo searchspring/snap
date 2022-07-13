@@ -15,6 +15,7 @@ Any modification to the results array and data are recommended to be made using 
 ## Usage
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -78,6 +79,14 @@ The `nextButton` prop specifies the next button element of the carousel. This ca
 
 ```jsx
 <Recommendation controller={controller} nextButton={'>'} />
+```
+
+### modules
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+
+```jsx
+import { Scrollbar } from 'swiper';
+<Recommendation controller={controller} modules={[Scrollbar]} scrollbar />
 ```
 
 ### breakpoints

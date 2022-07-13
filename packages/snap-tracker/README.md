@@ -217,7 +217,7 @@ const handleErrorTracking = (event: ErrorEvent) :void => {
         message,
         colno,
         lineno,
-        timeStamp,
+        errortimestamp: timeStamp,
     };
 
     tracker.track.error(beaconPayload);

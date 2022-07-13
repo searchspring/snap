@@ -229,7 +229,7 @@ export class Tracker {
 				});
 			}
 
-			const { userAgent, href, filename, stack, message, colno, lineno, timeStamp } = data;
+			const { userAgent, href, filename, stack, message, colno, lineno, errortimestamp } = data;
 
 			const payload = {
 				type: BeaconType.ERROR,
@@ -243,7 +243,7 @@ export class Tracker {
 					message,
 					colno,
 					lineno,
-					timeStamp,
+					errortimestamp,
 				},
 			};
 

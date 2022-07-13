@@ -50,6 +50,15 @@ export class SearchController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+
+		if (this.config.settings?.infinite && typeof this.config.settings.infinite.restorePosition == 'undefined') {
+			this.config.settings.infinite.restorePosition = true;
+		}
+
+		if (window?.history && this.config.settings?.infinite?.restorePosition) {
+			window.history.scrollRestoration = 'manual';
+		}
+
 		this.store.setConfig(this.config);
 
 		this.storage = new StorageStore({
@@ -107,8 +116,8 @@ export class SearchController extends AbstractController {
 			}
 			const stringyParams = JSON.stringify(requestParams);
 
-			if (this.config.settings?.infinite && window.scrollY === 0) {
-				// browser didn't jump
+			if (this.config.settings?.infinite?.restorePosition) {
+				// restore the scroll position saved previously
 				const scrollMap = this.storage.get('scrollMap') || {};
 
 				// interval we ony need to keep checking until the page height > than our stored value

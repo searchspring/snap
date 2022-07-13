@@ -7,6 +7,7 @@ import {
 	SearchResponseModelResultCoreMappings,
 	SearchResponseModelPagination,
 	SearchResponseModelSearchMatchTypeEnum,
+	SearchResponseModelMerchandising,
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
@@ -391,8 +392,14 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 		merchandising.content = {};
 	}
 
+	const transformedMerchandising: SearchResponseModelMerchandising = {
+		redirect: merchandising?.redirect || '',
+		content: merchandising.content || {},
+		campaigns: merchandising?.triggeredCampaigns || [],
+	};
+
 	return {
-		merchandising,
+		merchandising: transformedMerchandising,
 	};
 };
 
