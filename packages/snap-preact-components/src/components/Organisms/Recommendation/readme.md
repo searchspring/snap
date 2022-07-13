@@ -82,7 +82,7 @@ The `nextButton` prop specifies the next button element of the carousel. This ca
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';

@@ -84,7 +84,7 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
