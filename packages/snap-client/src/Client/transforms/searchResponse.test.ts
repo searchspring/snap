@@ -198,6 +198,7 @@ const mockMerchandising = {
 		'4e42bfbd32823c6eff8be9bad70f681e',
 	],
 	content: [],
+	campaigns: [],
 	facets: [],
 	facetsHide: [],
 };
@@ -523,7 +524,11 @@ describe('search response merch transformer', () => {
 			merchandising: mockMerchandising,
 		});
 
-		expect(response.merchandising).toEqual({ redirect: mockMerchandising.redirect, content: mockMerchandising.content, campaigns: [] });
+		expect(response.merchandising).toEqual({
+			redirect: mockMerchandising.redirect,
+			content: mockMerchandising.content,
+			campaigns: mockMerchandising.campaigns,
+		});
 	});
 
 	it('ensures content is always an object', () => {
