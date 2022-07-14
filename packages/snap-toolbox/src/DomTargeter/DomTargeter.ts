@@ -84,7 +84,9 @@ export class DomTargeter {
 				}
 			});
 
-			targetedElems = targetedElems.concat(elems);
+			if (!target.inject?.element || target.inject.action == 'replace') {
+				targetedElems = targetedElems.concat(elems);
+			}
 
 			return elems.map((elem) => ({ target, elem }));
 		});
@@ -95,6 +97,11 @@ export class DomTargeter {
 			if (target.inject) {
 				try {
 					const injectedElem = this.inject(elem, target);
+
+					if (target.inject.action !== 'replace') {
+						targetedElems = targetedElems.concat(elem);
+					}
+
 					this.onTarget(target, injectedElem, elem);
 				} catch (e) {
 					errors.push(String(e));

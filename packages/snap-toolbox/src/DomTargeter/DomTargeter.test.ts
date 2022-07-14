@@ -338,6 +338,44 @@ describe('DomTargeter', () => {
 
 		await wait(300);
 		expect(document.querySelector('.classToLookFor2')).not.toBe(null);
-		expect(document.querySelector('#newThing')?.innerHTML).toBe('blah<div>tada</div>');
+		expect(document.querySelector('#content')?.innerHTML).toBe('<div id="newThing" class="classToLookFor2">blah<div>tada</div></div>');
+	});
+
+	it('injects into same elements from multiple targets', async () => {
+		document = createDocument(`
+			<div id="content"></div>
+		`);
+
+		const selectors: Target[] = [
+			{
+				selector: '#content',
+				inject: {
+					action: 'append',
+					element: (target, element) => {
+						const div = document.createElement('div');
+						div.id = 'newThing';
+						div.innerHTML = 'blah';
+						return div;
+					},
+				},
+			},
+			{
+				selector: '#content',
+				inject: {
+					action: 'append',
+					element: (target, element) => {
+						const div = document.createElement('div');
+						div.id = 'newThing2';
+						div.innerHTML = 'tada';
+						return div;
+					},
+				},
+			},
+		];
+
+		new DomTargeter(selectors, (target: Target, elem: Element) => {}, document);
+
+		await wait(200);
+		expect(document.querySelector('#content')?.innerHTML).toBe('<div id="newThing">blah</div><div id="newThing2">tada</div>');
 	});
 });
