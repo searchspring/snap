@@ -153,6 +153,10 @@ export class SearchController extends AbstractController {
 					const paramsObj = JSON.parse(stringyParams);
 					if (paramsObj?.search?.redirectResponse) {
 						delete paramsObj?.search?.redirectResponse;
+						if (paramsObj?.search && Object.keys(paramsObj?.search).length === 0) {
+							// if redirectResponse was the only key, also delete the empty search object
+							delete paramsObj.search;
+						}
 					}
 					if (paramsObj?.personalization) {
 						delete paramsObj?.personalization;
