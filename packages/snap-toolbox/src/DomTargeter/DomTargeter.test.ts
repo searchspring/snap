@@ -346,36 +346,174 @@ describe('DomTargeter', () => {
 			<div id="content"></div>
 		`);
 
-		const selectors: Target[] = [
-			{
-				selector: '#content',
-				inject: {
-					action: 'append',
-					element: (target, element) => {
-						const div = document.createElement('div');
-						div.id = 'newThing';
-						div.innerHTML = 'blah';
-						return div;
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'append',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing';
+							div.innerHTML = 'blah';
+							return div;
+						},
 					},
 				},
-			},
-			{
-				selector: '#content',
-				inject: {
-					action: 'append',
-					element: (target, element) => {
-						const div = document.createElement('div');
-						div.id = 'newThing2';
-						div.innerHTML = 'tada';
-						return div;
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'append',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing2';
+							div.innerHTML = 'tada';
+							return div;
+						},
 					},
 				},
-			},
-		];
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
 
-		new DomTargeter(selectors, (target: Target, elem: Element) => {}, document);
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'prepend',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing0';
+							div.innerHTML = 'first';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
 
-		await wait(200);
-		expect(document.querySelector('#content')?.innerHTML).toBe('<div id="newThing">blah</div><div id="newThing2">tada</div>');
+		expect(document.querySelector('#content')?.innerHTML).toBe(
+			'<div id="newThing0">first</div><div id="newThing">blah</div><div id="newThing2">tada</div>'
+		);
+	});
+
+	it('injects elements before and after the same selector', async () => {
+		document = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'before',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing';
+							div.innerHTML = 'blah';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'after',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing2';
+							div.innerHTML = 'tada';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		expect(document.querySelector('#findMe')?.innerHTML).toBe('<div id="newThing">blah</div><div id="content"></div><div id="newThing2">tada</div>');
+	});
+
+	it('replaces content using inject, but does not allow retargeting of that element', async () => {
+		document = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'replace',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'content';
+							div.innerHTML = 'blah';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'after',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing';
+							div.innerHTML = 'tada';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		expect(document.querySelector('#findMe')?.innerHTML).toBe('<div id="content">blah</div><div id="newThing">tada</div>');
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'replace',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'lastThing';
+							div.innerHTML = 'tada';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		expect(document.querySelector('#findMe')?.innerHTML).toBe('<div id="lastThing">tada</div><div id="newThing">tada</div>');
 	});
 });
