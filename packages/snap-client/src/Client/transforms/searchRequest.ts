@@ -113,6 +113,7 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		disableMerchandising?: boolean;
 		tag?: string[];
 		'landing-page'?: string;
+		intellisuggest?: boolean;
 	} = reqMerch.disabled ? { disableMerchandising: true } : {};
 
 	if (reqMerch.landingPage) {
@@ -123,6 +124,10 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		merch['tag'] = reqMerch.segments.map((segment) => {
 			return `merch.segment/${segment}`;
 		});
+	}
+
+	if (typeof reqMerch.intellisuggest == 'boolean') {
+		merch['intellisuggest'] = reqMerch.intellisuggest;
 	}
 
 	return merch;
