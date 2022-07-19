@@ -360,6 +360,59 @@ describe('DomTargeter', () => {
 						},
 					},
 				},
+				{
+					selector: '#content',
+					inject: {
+						action: 'append',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing2';
+							div.innerHTML = 'tada';
+							return div;
+						},
+					},
+				},
+				{
+					selector: '#content',
+					inject: {
+						action: 'prepend',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing0';
+							div.innerHTML = 'first';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element) => {},
+			document
+		);
+
+		expect(document.querySelector('#content')?.innerHTML).toBe(
+			'<div id="newThing0">first</div><div id="newThing">blah</div><div id="newThing2">tada</div>'
+		);
+	});
+
+	it('injects into same elements with multiple targeters', async () => {
+		document = createDocument(`
+			<div id="content"></div>
+		`);
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+					inject: {
+						action: 'append',
+						element: (target, element) => {
+							const div = document.createElement('div');
+							div.id = 'newThing';
+							div.innerHTML = 'blah';
+							return div;
+						},
+					},
+				},
 			],
 			(target: Target, elem: Element) => {},
 			document
