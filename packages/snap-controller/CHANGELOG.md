@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* remove empty search object from stringyParams key ([439d7ff](https://github.com/searchspring/snap/commit/439d7ffa0fb0c18658b467cf1eaf19e60c671212))
+
+
+
+
+
 # [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
 
 
