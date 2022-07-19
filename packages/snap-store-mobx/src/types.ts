@@ -21,6 +21,7 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
+			restorePosition?: boolean;
 		};
 	};
 };

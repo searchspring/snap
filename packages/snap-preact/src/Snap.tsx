@@ -267,7 +267,7 @@ export class Snap {
 						message,
 						colno,
 						lineno,
-						timeStamp,
+						errortimestamp: timeStamp,
 					};
 					this.tracker.track.error(beaconPayload);
 				}
@@ -583,7 +583,7 @@ export class Snap {
 							return;
 						}
 
-						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
+						this._controllerPromises[controller.config.id] = new Promise(async (resolve) => {
 							try {
 								let bound = false;
 								const runBind = () => {
@@ -621,7 +621,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this._createController(
+									await this._createController(
 										ControllerTypes.autocomplete,
 										controller.config,
 										controller.services,
@@ -631,6 +631,8 @@ export class Snap {
 											if (cntrlr) resolve(cntrlr);
 										}
 									);
+
+									runBind();
 								}
 
 								controller?.targeters?.forEach((target, target_index) => {

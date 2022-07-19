@@ -90,7 +90,7 @@ export interface TrackErrorEvent {
 	message?: string;
 	colno?: number;
 	lineno?: number;
-	timeStamp?: number;
+	errortimestamp?: number;
 }
 export interface ProductViewEvent {
 	sku?: string;

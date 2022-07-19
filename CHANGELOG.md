@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* remove empty search object from stringyParams key ([439d7ff](https://github.com/searchspring/snap/commit/439d7ffa0fb0c18658b467cf1eaf19e60c671212))
+
+
+### Features
+
+* **client:** adding `merchandising.intellisuggest` as a request option ([e809114](https://github.com/searchspring/snap/commit/e8091147ac2fbbd00f828336844f0d0e8bd421df))
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* add restorePosition to infinite config ([4e822cc](https://github.com/searchspring/snap/commit/4e822cce5e164faddb0f283f345e50b20fcfb9ac))
+* **searchmerchandisingstore:** transform merch.triggerCampaigns - campaigns & add to store ([e13986f](https://github.com/searchspring/snap/commit/e13986fc239bee7857ffee98dc0c3c602a859d69))
+
+
+
+
+
 ## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
 
 

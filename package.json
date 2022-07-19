@@ -29,7 +29,7 @@
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
 		"@searchspring/prettier": "1.0.2",
-		"@searchspring/snapi-types": "0.1.25",
+		"@searchspring/snapi-types": "0.1.27",
 		"@types/jest": "27.5.1",
 		"@types/jsdom": "16.2.14",
 		"@typescript-eslint/eslint-plugin": "5.25.0",

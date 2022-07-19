@@ -6,6 +6,7 @@ import { searchResponse } from '../../../mocks/searchResponse';
 import { Carousel } from './Carousel';
 import { Result } from '../../Molecules/Result';
 import userEvent from '@testing-library/user-event';
+import { Scrollbar } from 'swiper';
 import type { Product } from '@searchspring/snap-store-mobx';
 
 describe('Carousel Component', () => {
@@ -177,6 +178,18 @@ describe('Carousel Component', () => {
 			const paginationBullets = rendered.container.querySelector('.swiper-pagination-bullets');
 			return expect(paginationBullets).toBeInTheDocument();
 		});
+	});
+
+	it('can add additional modules', () => {
+		const rendered = render(
+			<Carousel modules={[Scrollbar]} scrollbar>
+				{searchResponse.results.map((result, idx) => (
+					<Result result={result as unknown as Product} />
+				))}
+			</Carousel>
+		);
+		const scrollbar = rendered.container.querySelector('.ss__carousel .swiper-scrollbar');
+		expect(scrollbar).toBeInTheDocument();
 	});
 
 	it('can use breakpoints', async () => {

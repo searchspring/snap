@@ -2094,6 +2094,18 @@
   ],
   "merchandising": {
     "redirect": "",
+    "campaigns": [
+      {
+        "id": "144744",
+        "title": "Global Campaign (In stock, new, season, best selling)",
+        "type": "global"
+      },
+      {
+        "id": "119988",
+        "title": "DND: Location and Inline: United States - Free Shipping ",
+        "type": "location"
+      }
+    ],
     "content": {
       "header": [
         "<script data-banner-type=\"html\" data-banner-html=\"Prime\" type=\"text/widget\"></script>Prime"

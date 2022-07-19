@@ -16,7 +16,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
-
+| settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
 <br>
 
 ```typescript
@@ -108,6 +108,25 @@ const searchConfig = {
 
 For example, if `config.settings.infinite.backfill` contains a value of `5` and the user has paginated to page `4` and reloads the page, `4` pages of results will be shown. However, if the user has paginated to page `6` or above and reloads the page, only page `1` results will be shown. 
 
+### Restore Position
+If `config.settings.infinite.backfill` is specified, any time you navigate back to a previous page, the controller will scroll to the pages previous position. This can be disabled and left entirely up to the browser by setting `restorePosition` to `false`.
+
+```typescript
+const searchConfig = {
+	id: 'search',
+	globals: {
+		pagination: {
+			pageSize: 12
+		}
+	},
+	settings: {
+		infinite: {
+			backfill: 5,
+			restorePosition: false,
+		}
+	}
+};
+```
 
 ### Infinite Scrolling
 By default when using the infinite configuration, additional pages are appended when `store.pagination.next()` is invoked. To automatically request the next page when the user has scrolled to the bottom, an `useIntersection` hook along with a `useRef` attached to an element below the results can be used to invoke `pagination.next.url.go({ history: 'replace' })` when the element comes into the viewport. 

@@ -78,6 +78,15 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		modules: {
+			description: 'Additional Swiper modules',
+			table: {
+				type: {
+					summary: 'SwiperModule[]',
+				},
+				defaultValue: { summary: '[Navigation, Pagination]' },
+			},
+		},
 		pagination: {
 			defaultValue: false,
 			description: 'Display pagination dots',

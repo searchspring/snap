@@ -21,7 +21,7 @@ describe('Infinite Setting Test', () => {
 		cy.visit('https://localhost:2222/');
 
 		cy.snapController().then(({ store }) => {
-			expect(store.config.settings.infinite).to.deep.equal({ backfill });
+			expect(store.config.settings.infinite).to.deep.equal({ backfill: 0, restorePosition: true });
 
 			// initial page
 			const resultsPerPage = store.results.length;
@@ -65,7 +65,7 @@ describe('Infinite Setting Test', () => {
 		});
 		cy.visit('https://localhost:2222/');
 		cy.snapController().then(({ store }) => {
-			expect(store.config.settings.infinite).to.deep.equal({ backfill });
+			expect(store.config.settings.infinite).to.deep.equal({ backfill, restorePosition: true });
 
 			// initial page
 			const resultsPerPage = store.results.length;

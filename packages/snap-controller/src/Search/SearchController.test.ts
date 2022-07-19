@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
+import { waitFor } from '@testing-library/preact';
 
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
@@ -596,5 +597,50 @@ describe('Search Controller', () => {
 			type: 'error',
 			message: 'Invalid Search Request or Service Unavailable',
 		});
+	});
+
+	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {
+		searchConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {
+					backfill: 5,
+				},
+			},
+		};
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
+		const userId = controller.tracker.getUserId();
+		const stringyParams = JSON.stringify({
+			filters: [],
+			tracking: {
+				userId: userId,
+			},
+		});
+
+		// set a scrollMap for testing
+		const scrollMap: { [key: string]: any } = {};
+		scrollMap[stringyParams] = 777;
+		controller.storage.set('scrollMap', scrollMap);
+
+		await controller.search();
+
+		const scrollSpy = jest.spyOn(window, 'scrollTo');
+
+		await waitFor(() => {
+			// expect window.scrollTo to have been called with our set value
+			expect(scrollSpy).toHaveBeenCalledWith(0, 777);
+		});
+
+		scrollHeightSpy.mockClear();
 	});
 });
