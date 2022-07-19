@@ -62,17 +62,17 @@ const newManager = urlManager.remove('page');
 Setting a value in a longer, nested path would look like this:
 
 ```js
-const newManager = urlManager.set('facets.color', 'blue');
+const newManager = urlManager.set('filter.color', 'blue');
 ```
 
-This will produce 1 value for `facets.color` and remove any others.
+This will produce 1 value for `filter.color` and remove any others.
 
 For multiple values:
 
 ```js
 const newManager = urlManager
-	.merge('facets.color', 'blue')
-	.merge('facets.color', 'red');
+	.merge('filter.color', 'blue')
+	.merge('filter.color', 'red');
 ```
 
 ## `href` property
@@ -93,7 +93,7 @@ const facetValuesWithUrls = (facet, facetValues) => {
 	return facetValues.map((facetValue) => {
 		return {
 			...facetValue,
-			url: urlManager.merge(['facet', facet.field], facetValue.value),
+			url: urlManager.merge(['filter', facet.field], facetValue.value),
 		};
 	});
 };
