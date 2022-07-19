@@ -1,4 +1,4 @@
-/*! For license information please see 966.8cf1feebec406944d91f.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 966.1623727df38b56679425.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[966],
 	{
@@ -33195,21 +33195,23 @@
 		},
 		6277: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			function toVal(mix) {
-				var k,
-					y,
-					str = '';
-				if ('string' == typeof mix || 'number' == typeof mix) str += mix;
-				else if ('object' == typeof mix)
-					if (Array.isArray(mix)) for (k = 0; k < mix.length; k++) mix[k] && (y = toVal(mix[k])) && (str && (str += ' '), (str += y));
-					else for (k in mix) mix[k] && (str && (str += ' '), (str += k));
-				return str;
+			function r(e) {
+				var t,
+					f,
+					n = '';
+				if ('string' == typeof e || 'number' == typeof e) n += e;
+				else if ('object' == typeof e)
+					if (Array.isArray(e)) for (t = 0; t < e.length; t++) e[t] && (f = r(e[t])) && (n && (n += ' '), (n += f));
+					else for (t in e) e[t] && (n && (n += ' '), (n += t));
+				return n;
 			}
-			function __WEBPACK_DEFAULT_EXPORT__() {
-				for (var tmp, x, i = 0, str = ''; i < arguments.length; ) (tmp = arguments[i++]) && (x = toVal(tmp)) && (str && (str += ' '), (str += x));
-				return str;
+			function clsx() {
+				for (var e, t, f = 0, n = ''; f < arguments.length; ) (e = arguments[f++]) && (t = r(e)) && (n && (n += ' '), (n += t));
+				return n;
 			}
-			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { clsx: () => clsx, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			const __WEBPACK_DEFAULT_EXPORT__ = clsx;
 		},
 		50381: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
@@ -62792,9 +62794,10 @@
 		59042: function (module) {
 			!(function (window, define) {
 				var _ = {
-						version: '2.13.2',
+						version: '2.14.2',
 						areas: {},
 						apis: {},
+						nsdelim: '.',
 						inherit: function (api, o) {
 							for (var p in api) o.hasOwnProperty(p) || Object.defineProperty(o, p, Object.getOwnPropertyDescriptor(api, p));
 							return o;
@@ -62864,14 +62867,15 @@
 								var store = this[id];
 								return (store && store.area) || ((store = _.Store(id, area, this._ns)), this[id] || (this[id] = store)), store;
 							},
-							namespace: function (namespace, singleArea) {
-								if (!namespace) return this._ns ? this._ns.substring(0, this._ns.length - 1) : '';
+							namespace: function (namespace, singleArea, delim) {
+								if (((delim = delim || this._delim || _.nsdelim), !namespace))
+									return this._ns ? this._ns.substring(0, this._ns.length - delim.length) : '';
 								var ns = namespace,
 									store = this[ns];
 								if (
 									!(
 										(store && store.namespace) ||
-										((store = _.Store(this._id, this._area, this._ns + ns + '.')), this[ns] || (this[ns] = store), singleArea)
+										(((store = _.Store(this._id, this._area, this._ns + ns + delim))._delim = delim), this[ns] || (this[ns] = store), singleArea)
 									)
 								)
 									for (var name in _.areas) store.area(name, _.areas[name]);
@@ -62925,7 +62929,8 @@
 									d = this.get(key);
 								return null != d && !1 === overwrite
 									? data
-									: ('boolean' != typeof overwrite && (replacer = overwrite), _.set(this._area, this._in(key), _.stringify(data, replacer)) || d);
+									: ('function' == typeof overwrite && ((replacer = overwrite), (overwrite = void 0)),
+									  _.set(this._area, this._in(key), _.stringify(data, replacer), overwrite) || d);
 							},
 							setAll: function (data, overwrite) {
 								var changed, val;

@@ -1,4 +1,4 @@
-/*! For license information please see main.ce31396b.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.d99836fe.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -4508,7 +4508,15 @@
 							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Component Props'
 						),
-						' can be specified, but may need to be camelCased where appropriate.'
+						' can be specified, but may need to be camelCased where appropriate.\nAdditional ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Modules'
+						),
+						' can be provided via the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'modules'),
+						' prop; these may need additional props and or stylesheets.'
 					),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel>{children}</Carousel>\n')),
 					(0, esm.kt)('h3', { id: 'loop' }, 'loop'),
@@ -4653,6 +4661,33 @@
 							'<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}</Carousel>\n'
 						)
 					),
+					(0, esm.kt)('h3', { id: 'modules' }, 'modules'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'modules'),
+						' prop accepts additional ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Modules'
+						),
+						' - these may need additional props and or stylesheets to function. We include ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'Navigation'),
+						' and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'Pagination'),
+						' modules by default.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Scrollbar } from 'swiper';\n<Carousel modules={[Scrollbar]} scrollbar>{children}</Carousel>\n"
+						)
+					),
 					(0, esm.kt)('h3', { id: 'autoadjustslides' }, 'autoAdjustSlides'),
 					(0, esm.kt)(
 						'p',
@@ -4752,6 +4787,10 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						modules: {
+							description: 'Additional Swiper modules',
+							table: { type: { summary: 'SwiperModule[]' }, defaultValue: { summary: '[Navigation, Pagination]' } },
+						},
 						hideButtons: {
 							defaultValue: !1,
 							description: 'Hide prev/next buttons',
@@ -4819,31 +4858,33 @@
 				iZ: () => defaultCarouselBreakpoints,
 				lr: () => Carousel,
 			});
-			__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var preact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				preact_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_9___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_9__),
-				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
+			var preact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_9___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_9__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_11___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_11__),
 				swiper_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+				swiper_core__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
 					'breakpoints',
@@ -4860,6 +4901,7 @@
 					'onClick',
 					'disableStyles',
 					'style',
+					'modules',
 					'className',
 				];
 			function _objectWithoutProperties(source, excluded) {
@@ -4888,7 +4930,7 @@
 						_theme$colors2,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.iv)({
 						display: 'flex',
 						maxWidth: '100%',
 						maxHeight: vertical ? '100%' : void 0,
@@ -4977,12 +5019,12 @@
 					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
 				},
 				defaultVerticalCarouselBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
-				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
+				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_10__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_13__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -5004,10 +5046,10 @@
 								? void 0
 								: _properties$theme$com.carousel
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__.o)(props.breakpoints);
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_14__.o)(props.breakpoints);
 					if (displaySettings && Object.keys(displaySettings).length) {
 						var _props,
-							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_9___default()(
+							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_11___default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
 								(null == displaySettings ? void 0 : displaySettings.theme) || {}
 							);
@@ -5032,6 +5074,7 @@
 						_onClick = _props2.onClick,
 						disableStyles = _props2.disableStyles,
 						style = _props2.style,
+						modules = _props2.modules,
 						className = _props2.className,
 						additionalProps = _objectWithoutProperties(_props2, _excluded),
 						subProps = {
@@ -5040,38 +5083,44 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_13__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_15__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
-						};
-					swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z]);
-					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
-						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
-						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.sO)(null),
+						},
+						swiperModulesUnfiltered = modules
+							? [swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z].concat(modules)
+							: [swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z],
+						swiperModules = swiperModulesUnfiltered.filter(function (module, pos) {
+							return swiperModulesUnfiltered.indexOf(module) === pos;
+						});
+					swiper_core__WEBPACK_IMPORTED_MODULE_18__.Z.use(swiperModules);
+					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
+						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
+						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
 						null != children && children.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_17__.n,
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_19__.n,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 										'div',
 										Object.assign({ ref: rootComponentRef }, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
+											className: classnames__WEBPACK_IMPORTED_MODULE_9___default()(
 												'ss__carousel',
 												vertical ? 'ss__carousel-vertical' : '',
 												className
 											),
 										}),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 											'div',
 											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__carousel__prev-wrapper', {
+												className: classnames__WEBPACK_IMPORTED_MODULE_9___default()('ss__carousel__prev-wrapper', {
 													'ss__carousel__prev-wrapper--hidden': hideButtons,
 												}),
 											},
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 												'div',
 												{
 													className: 'ss__carousel__prev',
@@ -5083,14 +5132,14 @@
 														},
 												},
 												prevButton ||
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
 														Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
 													)
 											)
 										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-											swiper_react__WEBPACK_IMPORTED_MODULE_19__.t,
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
+											swiper_react__WEBPACK_IMPORTED_MODULE_21__.t,
 											Object.assign(
 												{
 													centerInsufficientSlides: !0,
@@ -5111,17 +5160,17 @@
 												displaySettings
 											),
 											children.map(function (child) {
-												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_20__.o, null, child);
+												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_22__.o, null, child);
 											})
 										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 											'div',
 											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__carousel__next-wrapper', {
+												className: classnames__WEBPACK_IMPORTED_MODULE_9___default()('ss__carousel__next-wrapper', {
 													'ss__carousel__next-wrapper--hidden': hideButtons,
 												}),
 											},
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 												'div',
 												{
 													className: 'ss__carousel__next',
@@ -5133,15 +5182,15 @@
 														},
 												},
 												nextButton ||
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
 														Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
 													)
 											)
 										)
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(preact__WEBPACK_IMPORTED_MODULE_5__.HY, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(preact__WEBPACK_IMPORTED_MODULE_7__.HY, null)
 					);
 				});
 		},
@@ -20596,7 +20645,15 @@
 							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Component Props'
 						),
-						' can be specified, but may need to be camelCased where appropriate.'
+						' can be specified, but may need to be camelCased where appropriate.\nAdditional ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Modules'
+						),
+						' can be provided via the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'modules'),
+						' prop; these may need additional props and or stylesheets.'
 					),
 					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.kt)(
@@ -20724,6 +20781,33 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Recommendation controller={controller} nextButton={'>'} />\n")
+					),
+					(0, esm.kt)('h3', { id: 'modules' }, 'modules'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'modules'),
+						' prop accepts additional ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper Modules'
+						),
+						' - these may need additional props and or stylesheets to function. We include ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'Navigation'),
+						' and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'Pagination'),
+						' modules by default.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Scrollbar } from 'swiper';\n<Recommendation controller={controller} modules={[Scrollbar]} scrollbar />\n"
+						)
 					),
 					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)('p', null, 'An object that modifies the responsive behavior of the carousel at various viewports. '),
@@ -21195,6 +21279,10 @@
 							type: { required: !1 },
 							table: { type: { summary: 'Results store object' } },
 							control: { type: 'none' },
+						},
+						modules: {
+							description: 'Additional Swiper modules',
+							table: { type: { summary: 'SwiperModule[]' }, defaultValue: { summary: '[Navigation, Pagination]' } },
 						},
 						pagination: {
 							defaultValue: !1,
@@ -24926,6 +25014,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
@@ -24939,7 +25028,6 @@
 			var cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
 				cjs_default = __webpack_require__.n(cjs);
 			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.unscopables.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -24954,7 +25042,7 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var targetedElems = [],
+			var globallyTargetedElems = [],
 				DomTargeter = (function () {
 					function DomTargeter(targets, onTarget, document) {
 						var _this = this;
@@ -24963,6 +25051,7 @@
 						})(this, DomTargeter),
 							(this.targets = []),
 							(this.styleBlockRefs = {}),
+							(this.targetedElems = []),
 							(this.unhideTarget = function (selector) {
 								if (_this.styleBlockRefs[selector])
 									try {
@@ -25023,10 +25112,14 @@
 								value: function retarget() {
 									var _this2 = this,
 										targetElemPairs = this.targets.flatMap(function (target) {
+											var _target$inject;
 											target.hideTarget && _this2.hideTarget(target.selector);
 											var elems = _this2.domQuery(target.selector).filter(function (elem) {
 												if (
-													!targetedElems.find(function (e) {
+													!globallyTargetedElems.find(function (e) {
+														return e == elem;
+													}) &&
+													!_this2.targetedElems.find(function (e) {
 														return e == elem;
 													})
 												)
@@ -25034,7 +25127,8 @@
 												_this2.unhideTarget(target.selector);
 											});
 											return (
-												(targetedElems = targetedElems.concat(elems)),
+												(null !== (_target$inject = target.inject) && void 0 !== _target$inject && _target$inject.element) ||
+													(globallyTargetedElems = globallyTargetedElems.concat(elems)),
 												elems.map(function (elem) {
 													return { target, elem };
 												})
@@ -25048,7 +25142,7 @@
 											if (target.inject)
 												try {
 													var injectedElem = _this2.inject(elem, target);
-													_this2.onTarget(target, injectedElem, elem);
+													(_this2.targetedElems = _this2.targetedElems.concat(elem)), _this2.onTarget(target, injectedElem, elem);
 												} catch (e) {
 													errors.push(String(e));
 												}
@@ -25082,12 +25176,14 @@
 							{
 								key: 'inject',
 								value: function inject(elem, target) {
-									var _target$inject;
+									var _target$inject2;
 									if (!target || !target.inject) throw new Error('DomTargeter::inject: Injected element unspecified');
 									var injectedElem = target.inject.element instanceof Function ? target.inject.element(target, elem) : target.inject.element;
 									if (!injectedElem) throw new Error('DomTargeter::inject: Injected element unspecified');
 									if (!elem.parentNode) throw new Error('DomTargeter::inject: Provided element has no parent element');
-									switch (null == target || null === (_target$inject = target.inject) || void 0 === _target$inject ? void 0 : _target$inject.action) {
+									switch (
+										null == target || null === (_target$inject2 = target.inject) || void 0 === _target$inject2 ? void 0 : _target$inject2.action
+									) {
 										case 'before':
 											elem.parentNode.insertBefore(injectedElem, elem);
 											break;
@@ -26644,7 +26740,11 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this,
+						var _this$config$settings7,
+							_window,
+							_this$config$settings8,
+							_this$config$settings9,
+							_this,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -26680,7 +26780,11 @@
 												null == paramsObj ||
 													null === (_paramsObj$search2 = paramsObj.search) ||
 													void 0 === _paramsObj$search2 ||
-													delete _paramsObj$search2.redirectResponse;
+													delete _paramsObj$search2.redirectResponse,
+													null != paramsObj &&
+														paramsObj.search &&
+														0 === Object.keys(null == paramsObj ? void 0 : paramsObj.search).length &&
+														delete paramsObj.search;
 											null != paramsObj && paramsObj.personalization && (null == paramsObj || delete paramsObj.personalization);
 											var scrollMap = {};
 											(scrollMap[(stringyParams = JSON.stringify(paramsObj))] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
@@ -26960,6 +27064,20 @@
 								})
 							)),
 							(_this.config = cjs_default()(defaultConfig, _this.config)),
+							null !== (_this$config$settings7 = _this.config.settings) &&
+								void 0 !== _this$config$settings7 &&
+								_this$config$settings7.infinite &&
+								void 0 === _this.config.settings.infinite.restorePosition &&
+								(_this.config.settings.infinite.restorePosition = !0),
+							null !== (_window = window) &&
+								void 0 !== _window &&
+								_window.history &&
+								null !== (_this$config$settings8 = _this.config.settings) &&
+								void 0 !== _this$config$settings8 &&
+								null !== (_this$config$settings9 = _this$config$settings8.infinite) &&
+								void 0 !== _this$config$settings9 &&
+								_this$config$settings9.restorePosition &&
+								(window.history.scrollRestoration = 'manual'),
 							_this.store.setConfig(_this.config),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 							_this.storage.set('lastStringyParams', void 0),
@@ -27096,7 +27214,8 @@
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
 											var _requestParams$search,
-												_this$config$settings7,
+												_this$config$settings10,
+												_this$config$settings11,
 												requestParams,
 												stringyParams,
 												scrollMap,
@@ -27118,10 +27237,11 @@
 																	_requestParams$search.redirectResponse &&
 																	delete requestParams.search.redirectResponse,
 																(stringyParams = JSON.stringify(requestParams)),
-																null !== (_this$config$settings7 = _this.config.settings) &&
-																	void 0 !== _this$config$settings7 &&
-																	_this$config$settings7.infinite &&
-																	0 === window.scrollY &&
+																null !== (_this$config$settings10 = _this.config.settings) &&
+																	void 0 !== _this$config$settings10 &&
+																	null !== (_this$config$settings11 = _this$config$settings10.infinite) &&
+																	void 0 !== _this$config$settings11 &&
+																	_this$config$settings11.restorePosition &&
 																	((scrollMap = _this.storage.get('scrollMap') || {}),
 																	(scrollToPosition = scrollMap[stringyParams]) &&
 																		((checkCount = 0),
@@ -27161,16 +27281,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings8,
-										_this$config$settings9,
+									var _this$config$settings12,
+										_this$config$settings13,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings8 = this.config.settings) &&
-										void 0 !== _this$config$settings8 &&
-										null !== (_this$config$settings9 = _this$config$settings8.redirects) &&
-										void 0 !== _this$config$settings9 &&
-										_this$config$settings9.merchandising &&
+									(null !== (_this$config$settings12 = this.config.settings) &&
+										void 0 !== _this$config$settings12 &&
+										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
+										void 0 !== _this$config$settings13 &&
+										_this$config$settings13.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -31615,6 +31735,7 @@
 							(merch.tag = reqMerch.segments.map(function (segment) {
 								return 'merch.segment/' + segment;
 							})),
+						'boolean' == typeof reqMerch.intellisuggest && (merch.intellisuggest = reqMerch.intellisuggest),
 						merch
 					);
 				}),
@@ -32322,7 +32443,13 @@
 					var merchandising = null == response ? void 0 : response.merchandising;
 					return (
 						merchandising.content && Array.isArray(merchandising.content) && !merchandising.content.length && (merchandising.content = {}),
-						{ merchandising }
+						{
+							merchandising: {
+								redirect: (null == merchandising ? void 0 : merchandising.redirect) || '',
+								content: merchandising.content || {},
+								campaigns: (null == merchandising ? void 0 : merchandising.triggeredCampaigns) || [],
+							},
+						}
 					);
 				}),
 				(transformSearchResponse.search = function (response, request) {
@@ -39251,7 +39378,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.30.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.32.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39324,12 +39451,12 @@
 											message = data.message,
 											colno = data.colno,
 											lineno = data.lineno,
-											timeStamp = data.timeStamp,
+											errortimestamp = data.errortimestamp,
 											payload = {
 												type: BeaconType.ERROR,
 												category: BeaconCategory.RUNTIME,
 												context,
-												event: { userAgent, href, filename, stack, message, colno, lineno, timeStamp },
+												event: { userAgent, href, filename, stack, message, colno, lineno, errortimestamp },
 											};
 										return _this.track.event(payload);
 									}
@@ -39671,7 +39798,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.30.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.32.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40707,12 +40834,14 @@
 					_classCallCheck(this, SearchMerchandisingStore),
 						(this.redirect = ''),
 						(this.content = {}),
+						(this.campaigns = []),
 						merchData &&
 							((this.redirect = merchData.redirect || ''),
 							merchData.content &&
 								Object.values(ContentType).forEach(function (type) {
 									merchData.content && merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
-								}));
+								}),
+							merchData.campaigns && (this.campaigns = merchData.campaigns));
 				}),
 				Content = (function (_Array, _Symbol$species) {
 					!(function _inherits(subClass, superClass) {
