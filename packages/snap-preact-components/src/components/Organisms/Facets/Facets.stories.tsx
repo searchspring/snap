@@ -50,6 +50,16 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		controller: {
+			description: 'Search controller reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Autocomplete controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };

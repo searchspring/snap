@@ -57,7 +57,7 @@ export default {
 			action: 'onClick',
 		},
 		color: {
-			description: 'Button color',
+			description: 'Button text color',
 			table: {
 				type: {
 					summary: 'string',

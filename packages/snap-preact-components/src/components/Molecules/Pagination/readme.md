@@ -22,14 +22,14 @@ The `pages` prop specifies the number of pages to retrieve. This value is passed
 ```
 
 ### pagesLeft
-The `pagesLeft` prop specifies the number of pages to retrieve before the current page. This value is passed to the `store.pagination.getPages()` method along with `pagesRight`.
+The `pagesLeft` prop specifies the number of pages to retrieve before the current page. This value is passed to the `store.pagination.getPages()` method along with `pagesRight`. Must be used with `pagesRight` prop.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} pagesLeft={2} />
 ```
 
 ### pagesRight
-The `pagesLeft` prop specifies the number of pages to retrieve after the current page. This value is passed to the `store.pagination.getPages()` method along with `pagesLeft`.
+The `pagesLeft` prop specifies the number of pages to retrieve after the current page. This value is passed to the `store.pagination.getPages()` method along with `pagesLeft`. Must be used with `pagesLeft` prop.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} pagesRight={2} />

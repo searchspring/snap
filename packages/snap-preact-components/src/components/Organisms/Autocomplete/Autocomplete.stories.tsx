@@ -56,6 +56,16 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		input: {
+			description: 'input element reference',
+			type: { required: true },
+			table: {
+				type: {
+					summary: 'Element or String as CSS Selector',
+				},
+			},
+			control: { type: 'none' },
+		},
 		width: {
 			defaultValue: '100%',
 			description: 'Change width of the component',
@@ -225,6 +235,22 @@ export default {
 		},
 		linkSlot: {
 			description: 'Slot for custom "see n results for keyword" link component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		resultsSlot: {
+			description: 'Slot for custom results component & title.',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		noResultsSlot: {
+			description: 'Slot for custom no-results component.',
 			table: {
 				type: {
 					summary: 'component',

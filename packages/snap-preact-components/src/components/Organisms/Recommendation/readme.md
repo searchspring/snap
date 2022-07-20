@@ -10,7 +10,6 @@ Any modification to the results array and data are recommended to be made using 
 ## Sub-components
 - Carousel
 - Result (default)
-- Icon
 
 ## Usage
 
@@ -57,14 +56,14 @@ The `pagination` prop specifies if the carousel should display pagination dots.
 The `vertical` prop sets the carousel scroll direction to vertical.
 
 ```jsx
-<Recommendation vertical>{children}<Recommendation/>
+<Recommendation vertical={true}>{children}<Recommendation/>
 ```
 
 ### hideButtons
 The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
 
 ```jsx
-<Recommendation hideButtons>{children}<Recommendation/>
+<Recommendation hideButtons={true}>{children}<Recommendation/>
 ```
 
 ### prevButton

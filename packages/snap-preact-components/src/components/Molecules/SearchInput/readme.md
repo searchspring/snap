@@ -8,14 +8,14 @@ Renders an input element
 ## Usage
 
 ```jsx
-<SearchInput onChange={handleChange} placeholder={placeholder}/>
+<SearchInput onChange={handleChange} placeholder={"placeholder text"}/>
 ```
 
 ### placeholder
 The `placeholder` prop sets the input placeholder text. 
 
 ```jsx
-<SearchInput placeholder={placeholder} />
+<SearchInput placeholder={"placeholder text"} />
 ```
 
 ### onChange

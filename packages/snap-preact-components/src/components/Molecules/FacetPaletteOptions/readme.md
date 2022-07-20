@@ -8,7 +8,7 @@ Renders a grid of facet palette options.
 ## Usage
 
 ### values
-The required `values` prop specifiesall facet values where the facet type is 'palette'.
+The required `values` prop specifies all facet values where the facet type is 'palette'.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} />
@@ -47,9 +47,9 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 
 ```jsx
 <Autocomplete>
-	...
+	
 	<FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />
-	...
+	
 </Autocomplete>
 ```
 

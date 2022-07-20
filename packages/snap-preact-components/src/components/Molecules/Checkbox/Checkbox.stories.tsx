@@ -22,7 +22,7 @@ export default {
 	},
 	argTypes: {
 		checked: {
-			description: 'Checkbox is checked (managed state)',
+			description: 'Checkbox is checked (externally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -87,7 +87,7 @@ export default {
 			control: { type: 'color' },
 		},
 		startChecked: {
-			description: 'Checkbox is checked initially(managed state)',
+			description: 'Checkbox is checked initially (internally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',

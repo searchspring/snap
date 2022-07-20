@@ -132,6 +132,15 @@ export default {
 			},
 			action: 'onClearAllClick',
 		},
+		controller: {
+			description: 'Search controller reference',
+			table: {
+				type: {
+					summary: 'Autocomplete controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };

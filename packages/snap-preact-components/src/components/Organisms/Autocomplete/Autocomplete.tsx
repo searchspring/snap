@@ -577,6 +577,7 @@ interface AutocompleteSubProps {
 
 export interface AutocompleteProps extends ComponentProps {
 	input: Element | string;
+	controller: AutocompleteController;
 	hideTerms?: boolean;
 	hideFacets?: boolean;
 	hideContent?: boolean;
@@ -596,7 +597,6 @@ export interface AutocompleteProps extends ComponentProps {
 	noResultsSlot?: JSX.Element;
 	linkSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
-	controller: AutocompleteController;
 	width?: string;
 	onFacetOptionClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
