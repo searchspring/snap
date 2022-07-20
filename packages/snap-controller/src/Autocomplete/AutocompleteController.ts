@@ -552,6 +552,7 @@ export class AutocompleteController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
 	};
