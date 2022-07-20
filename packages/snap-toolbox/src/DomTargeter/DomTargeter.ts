@@ -12,12 +12,13 @@ export type Target = {
 
 export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void;
 
-let targetedElems: Array<Element> = [];
+let globallyTargetedElems: Array<Element> = [];
 export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
 	private styleBlockRefs: Record<string, Node> = {};
+	private targetedElems: Array<Element> = [];
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -76,7 +77,7 @@ export class DomTargeter {
 			}
 
 			const elems = this.domQuery(target.selector).filter((elem) => {
-				if (!targetedElems.find((e) => e == elem)) {
+				if (!globallyTargetedElems.find((e) => e == elem) && !this.targetedElems.find((e) => e == elem)) {
 					return true;
 				} else {
 					// unhide retarget attempts
@@ -84,7 +85,9 @@ export class DomTargeter {
 				}
 			});
 
-			targetedElems = targetedElems.concat(elems);
+			if (!target.inject?.element) {
+				globallyTargetedElems = globallyTargetedElems.concat(elems);
+			}
 
 			return elems.map((elem) => ({ target, elem }));
 		});
@@ -95,6 +98,8 @@ export class DomTargeter {
 			if (target.inject) {
 				try {
 					const injectedElem = this.inject(elem, target);
+					this.targetedElems = this.targetedElems.concat(elem);
+
 					this.onTarget(target, injectedElem, elem);
 				} catch (e) {
 					errors.push(String(e));
