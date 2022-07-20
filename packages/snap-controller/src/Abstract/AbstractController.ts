@@ -66,7 +66,7 @@ export abstract class AbstractController {
 			} = event;
 
 			const beaconPayload: TrackErrorEvent = {
-				filename: filename || `${this.type.charAt(0).toUpperCase() + this.type.slice(1)}Controller`,
+				filename: filename || `${this.id} (${this.type.charAt(0).toUpperCase() + this.type.slice(1)}Controller)`,
 				stack,
 				message,
 				colno,
