@@ -383,6 +383,8 @@ describe('Recommendation Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.recommend = jest.fn(() => {
 			throw 429;
 		});
@@ -394,6 +396,9 @@ describe('Recommendation Controller', () => {
 			type: 'warning',
 			message: 'Too many requests try again later',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(429);
+		handleError.mockClear();
 	});
 
 	it('logs error if 500', async () => {
@@ -407,6 +412,8 @@ describe('Recommendation Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.recommend = jest.fn(() => {
 			throw 500;
 		});
@@ -418,5 +425,8 @@ describe('Recommendation Controller', () => {
 			type: 'error',
 			message: 'Invalid Search Request or Service Unavailable',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(500);
+		handleError.mockClear();
 	});
 });

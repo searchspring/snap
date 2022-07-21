@@ -562,6 +562,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.search = jest.fn(() => {
 			throw 429;
 		});
@@ -573,6 +575,9 @@ describe('Search Controller', () => {
 			type: 'warning',
 			message: 'Too many requests try again later',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(429);
+		handleError.mockClear();
 	});
 
 	it('logs error if 500', async () => {
@@ -586,6 +591,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.search = jest.fn(() => {
 			throw 500;
 		});
@@ -597,6 +604,97 @@ describe('Search Controller', () => {
 			type: 'error',
 			message: 'Invalid Search Request or Service Unavailable',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(500);
+		handleError.mockClear();
+	});
+
+	it('invokes handleError if string is thrown', async () => {
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = 'string error';
+		controller.client.search = jest.fn(() => {
+			throw error;
+		});
+
+		const handleError = jest.spyOn(controller, 'handleError');
+		const errorLogger = jest.spyOn(controller.log, 'error');
+
+		await controller.search();
+
+		expect(handleError).toHaveBeenCalledWith(error);
+		expect(errorLogger).toHaveBeenCalledWith(error);
+		handleError.mockClear();
+		errorLogger.mockClear();
+	});
+
+	it('invokes handleError if object is thrown', async () => {
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = {
+			error: 'object error',
+		};
+		controller.client.search = jest.fn(() => {
+			throw error;
+		});
+
+		const handleError = jest.spyOn(controller, 'handleError');
+		const errorLogger = jest.spyOn(controller.log, 'error');
+
+		await controller.search();
+
+		expect(handleError).toHaveBeenCalledWith(error);
+		expect(errorLogger).toHaveBeenCalledWith(error);
+		handleError.mockClear();
+		errorLogger.mockClear();
+	});
+
+	it('invokes handleError if ErrorEvent is thrown', async () => {
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+		controller.client.search = jest.fn(() => {
+			throw error;
+		});
+
+		const handleError = jest.spyOn(controller, 'handleError');
+		const errorLogger = jest.spyOn(controller.log, 'error');
+
+		await controller.search();
+
+		expect(handleError).toHaveBeenCalledWith(error);
+		expect(errorLogger).toHaveBeenCalledWith(error);
+		handleError.mockClear();
+		errorLogger.mockClear();
 	});
 
 	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {

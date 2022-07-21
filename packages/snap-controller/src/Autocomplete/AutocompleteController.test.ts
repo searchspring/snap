@@ -1069,6 +1069,8 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.autocomplete = jest.fn(() => {
 			throw 429;
 		});
@@ -1085,6 +1087,8 @@ describe('Autocomplete Controller', () => {
 				type: 'warning',
 				message: 'Too many requests try again later',
 			});
+			expect(handleError).toHaveBeenCalledWith(429);
+			handleError.mockClear();
 		});
 	});
 
@@ -1098,6 +1102,8 @@ describe('Autocomplete Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
+
+		const handleError = jest.spyOn(controller, 'handleError');
 
 		controller.client.autocomplete = jest.fn(() => {
 			throw 500;
@@ -1115,6 +1121,8 @@ describe('Autocomplete Controller', () => {
 				type: 'error',
 				message: 'Invalid Search Request or Service Unavailable',
 			});
+			expect(handleError).toHaveBeenCalledWith(500);
+			handleError.mockClear();
 		});
 	});
 
