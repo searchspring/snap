@@ -73,7 +73,6 @@ export default {
 			control: 'boolean',
 		},
 		separator: {
-			defaultValue: ':',
 			description: 'Filter delimiter',
 			table: {
 				type: {

@@ -132,6 +132,15 @@ export default {
 			},
 			action: 'onClearAllClick',
 		},
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };

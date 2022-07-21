@@ -32,11 +32,11 @@ export default {
 	],
 	argTypes: {
 		result: {
-			description: 'Result store reference',
+			description: 'Result store Product reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'result store object',
+					summary: 'result store Product object',
 				},
 			},
 			control: { type: 'none' },
