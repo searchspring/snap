@@ -356,7 +356,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || state.input);
-	const showTrending = !state.input && trending?.length && terms.length === 0;
+
+	let showTrending = false;
+	if (!results.length && !state.input && trending?.length) {
+		showTrending = true;
+	} else if (trending?.length && !terms.length) {
+		// has results and trending -> show trending terms while term load
+		showTrending = true;
+	}
+
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
 
