@@ -30,9 +30,9 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 
 ```jsx
 <Autocomplete>
-	
+	...
 	<FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />
-	
+	...
 </Autocomplete>
 ```
 

@@ -133,10 +133,10 @@ export default {
 			action: 'onClearAllClick',
 		},
 		controller: {
-			description: 'Search controller reference',
+			description: 'Controller reference',
 			table: {
 				type: {
-					summary: 'Autocomplete controller object',
+					summary: 'Controller object',
 				},
 			},
 			control: { type: 'none' },

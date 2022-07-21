@@ -47,9 +47,9 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 
 ```jsx
 <Autocomplete>
-	
+	...
 	<FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />
-	
+	...
 </Autocomplete>
 ```
 

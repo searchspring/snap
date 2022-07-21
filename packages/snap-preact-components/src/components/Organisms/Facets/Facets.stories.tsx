@@ -51,11 +51,11 @@ export default {
 			control: { type: 'number' },
 		},
 		controller: {
-			description: 'Search controller reference',
+			description: 'Controller reference',
 			type: { required: false },
 			table: {
 				type: {
-					summary: 'Autocomplete controller object',
+					summary: 'Controller object',
 				},
 			},
 			control: { type: 'none' },
