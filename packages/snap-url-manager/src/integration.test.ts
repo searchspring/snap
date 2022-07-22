@@ -69,7 +69,7 @@ describe('UrlManager Integration Tests', () => {
 				sort: [{ field: 'name', direction: 'desc' }],
 				other: ['thing'],
 			});
-			expect(urlManager.href).toBe('/?q=test&page=3&filter.color=red&filter.price.low=*&filter.price.high=5&sort.name=desc&other=thing');
+			expect(urlManager.href).toBe('/?other=thing&q=test&page=3&filter.color=red&filter.price.low=*&filter.price.high=5&sort.name=desc');
 
 			const overwrite = urlManager
 				.set('query', 'overwritten')
@@ -188,6 +188,34 @@ describe('UrlManager Integration Tests', () => {
 			expect(removeSorts.href).toBe('/');
 		});
 
+		it('serializes urlRoot parameters by default', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(new MockQueryStringTranslator({ urlRoot: 'https://somesite.com/search?view=shop', queryParameter: 'query' }));
+			expect(urlManager.href).toBe('https://somesite.com/search?view=shop');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?view=shop&query=the%20thing');
+		});
+
+		it('does not serialize urlRoot parameters when setting is disalbed', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(
+				new MockQueryStringTranslator({
+					urlRoot: 'https://somesite.com/search?view=shop',
+					queryParameter: 'query',
+					settings: {
+						serializeUrlRoot: false,
+					},
+				})
+			);
+			expect(urlManager.href).toBe('https://somesite.com/search');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
+		});
+
 		it('can be extended as mockTranslator', () => {
 			let url = '';
 			class MockTranslator extends QueryStringTranslator {
@@ -294,7 +322,7 @@ describe('UrlManager Integration Tests', () => {
 				sort: [{ field: 'name', direction: 'desc' }],
 				other: ['thing'],
 			});
-			expect(urlManager.href).toBe('/?q=test&page=3#/filter:color:red/filter:price:*:5/sort:name:desc/other:thing');
+			expect(urlManager.href).toBe('/?q=test&page=3#/other:thing/filter:color:red/filter:price:*:5/sort:name:desc');
 
 			const overwrite = urlManager
 				.set('query', 'overwritten')
@@ -345,18 +373,60 @@ describe('UrlManager Integration Tests', () => {
 			expect(urlManager.href).toBe('https://somesite.com/search?dev#/development');
 
 			const search = urlManager.set('query', 'the thing');
-			expect(search.href).toBe('https://somesite.com/search?query=the%20thing&dev#/development');
+			expect(search.href).toBe('https://somesite.com/search?dev&query=the%20thing#/development');
+		});
+
+		it('serializes urlRoot parameters by default', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(
+				new MockUrlTranslator({
+					urlRoot: 'https://somesite.com/search?view=shop',
+					parameters: {
+						core: {
+							query: { name: 'query' },
+						},
+					},
+				})
+			);
+			expect(urlManager.href).toBe('https://somesite.com/search?view=shop');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?view=shop&query=the%20thing');
+		});
+
+		it('does not serialize urlRoot parameters when setting is disalbed', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(
+				new MockUrlTranslator({
+					urlRoot: 'https://somesite.com/search?view=shop',
+					parameters: {
+						core: {
+							query: { name: 'query' },
+						},
+					},
+					settings: {
+						serializeUrlRoot: false,
+					},
+				})
+			);
+
+			expect(urlManager.href).toBe('https://somesite.com/search');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
 		});
 
 		it('supports setting and merging params with no value', () => {
 			const devMode = new UrlManager(new MockUrlTranslator()).set('dev');
-			expect(devMode.href).toBe('/#/dev');
+			expect(devMode.href).toBe('/?dev');
 
 			const noDevMode = devMode.remove('dev');
 			expect(noDevMode.href).toBe('/');
 
 			const infiniteMode = noDevMode.merge('infinite');
-			expect(infiniteMode.href).toBe('/#/infinite');
+			expect(infiniteMode.href).toBe('/?infinite');
 		});
 
 		it('supports typical value filter usage', () => {
@@ -471,12 +541,12 @@ describe('UrlManager Integration Tests', () => {
 				view: ['search'],
 			});
 
-			expect(hashAndQuery.href).toBe(translatorConfig.urlRoot + '?search=the%20query&view=search#/sort:price:asc/store:products');
+			expect(hashAndQuery.href).toBe(translatorConfig.urlRoot + '?view=search&search=the%20query#/store:products/sort:price:asc');
 
 			const hashAndQueryModifications = hashAndQuery.merge('store', 'articles').set('view', 'spring');
 
 			expect(hashAndQueryModifications.href).toBe(
-				translatorConfig.urlRoot + '?search=the%20query&view=spring#/sort:price:asc/store:products/store:articles'
+				translatorConfig.urlRoot + '?view=spring&search=the%20query#/store:products/store:articles/sort:price:asc'
 			);
 		});
 
@@ -502,7 +572,7 @@ describe('UrlManager Integration Tests', () => {
 			expect(addParamsBack.href).toBe('/?view=spring&finder=wheels#/size:front:225/size:back:230');
 		});
 
-		it('implicitly sets unknown params as hash', () => {
+		it('implicitly sets unknown params as query parameters', () => {
 			url = 'https://somesite.com/';
 			const emptyState = new UrlManager(new MockUrlTranslator());
 
@@ -510,11 +580,11 @@ describe('UrlManager Integration Tests', () => {
 
 			const unknownParams = emptyState.merge('view', 'search');
 			expect(unknownParams.state).toStrictEqual({ view: 'search' });
-			expect(unknownParams.href).toBe('/#/view:search');
+			expect(unknownParams.href).toBe('/?view=search');
 
 			const moreUnknownParams = unknownParams.merge('view', 'spring');
 			expect(moreUnknownParams.state).toStrictEqual({ view: ['search', 'spring'] });
-			expect(moreUnknownParams.href).toBe('/#/view:search/view:spring');
+			expect(moreUnknownParams.href).toBe('/?view=search&view=spring');
 		});
 	});
 });

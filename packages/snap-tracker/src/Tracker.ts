@@ -236,8 +236,8 @@ export class Tracker {
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					userAgent,
-					href,
+					userAgent: userAgent || navigator.userAgent,
+					href: href || window.location.href,
 					filename,
 					stack,
 					message,

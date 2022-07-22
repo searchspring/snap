@@ -52,6 +52,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		previewOnFocus: {
+			description: 'Invoke facet value preview upon focus',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		valueProps: {
+			description: 'Object of facet value props',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '{}' },
+			},
+			control: { type: 'object' },
+		},
 		onClick: {
 			description: 'Facet option click event handler',
 			table: {

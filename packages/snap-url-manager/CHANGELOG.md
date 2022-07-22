@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Features
+
+* **url-manager:** serializeUrlRoot now a required in config; change to order of params and defaults ([feaea8f](https://github.com/searchspring/snap/commit/feaea8f14892411b83625ec8ef82242bc38e4942))
+* **url-manager:** using serializeUrlRoot when enabled to set global state ([d828522](https://github.com/searchspring/snap/commit/d8285221144db70c05297a7a433da28b0d0d5278))
+
+
+
+
+
 # [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

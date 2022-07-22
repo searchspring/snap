@@ -1,13 +1,12 @@
 import { DomTargeter } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
-import type { MockClient } from '@searchspring/snap-shared';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
-import type { Tracker } from '@searchspring/snap-tracker';
+import type { Tracker, TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
 import type { ControllerServices, ControllerConfig, Attachments, ContextVariables, PluginFunction } from '../types';
@@ -34,6 +33,50 @@ export abstract class AbstractController {
 	get initialized(): boolean {
 		return this._initialized;
 	}
+
+	public handleError = (err: unknown): void => {
+		let event: ErrorEvent | undefined;
+
+		if (err instanceof ErrorEvent) {
+			event = err;
+		} else if (err instanceof Error) {
+			event = new ErrorEvent('error', {
+				error: err,
+			});
+		} else if (typeof err === 'string') {
+			event = new ErrorEvent('error', {
+				error: new Error(err),
+			});
+		} else if (typeof err === 'object' && Object.keys(err as object).length) {
+			try {
+				event = new ErrorEvent('error', {
+					error: new Error(JSON.stringify(err)),
+				});
+			} catch (e) {}
+		}
+
+		if (event) {
+			const {
+				filename,
+				colno,
+				lineno,
+				error: { stack },
+				message,
+				timeStamp,
+			} = event;
+
+			const beaconPayload: TrackErrorEvent = {
+				filename: filename || `${this.id} (${this.type.charAt(0).toUpperCase() + this.type.slice(1)}Controller)`,
+				stack,
+				message,
+				colno,
+				lineno,
+				errortimestamp: timeStamp,
+			};
+
+			this.tracker.track.error(beaconPayload);
+		}
+	};
 
 	constructor(
 		config: ControllerConfig,
@@ -132,6 +175,7 @@ export abstract class AbstractController {
 		} catch (err) {
 			if (err) {
 				console.error(err);
+				this.handleError(err);
 			}
 		}
 

@@ -50,6 +50,16 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		controller: {
+			description: 'Controller reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };

@@ -71,3 +71,14 @@ The `overlayColor` prop sets the overlay color.
 	<div>slideout content</div>
 </Slideout>
 ```
+
+
+### slideDirection
+The `slideDirection` prop sets the direction that the overlay slides in. Defaults to `left`. Available values are `left`, `right`, `top`, & `bottom`.
+
+```jsx
+<Slideout slideDirection={'right'}>
+	<div>slideout content</div>
+</Slideout>
+```
+

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact:** create function should have been resetting URL on detach for controller ([41797cf](https://github.com/searchspring/snap/commit/41797cf1aa7771130b0f7f45ee5ddf7cbd90acdf))
+
+
+
+
+
 # [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
 
 **Note:** Version bump only for package @searchspring/snap-preact

@@ -61,6 +61,7 @@ The `serialize` and `deserialize` methods are abstracted away by the `UrlManager
 |---|---|:---:|
 | queryParameter | used to specify a different query parameter for 'query' | 'q' |
 | urlRoot | used to redirect to other URLs | ➖ |
+| settings.serializeUrlRoot | sets parameters found within urlRoot to global state in UrlManager | true |
 
 <br>
 
@@ -88,4 +89,24 @@ urlManager.set({ query: 'green shirt' }).go();
 
 console.log(urlManager.state.query); // green shirt
 console.log(urlManager.href); // /search?search=green%20shirt
+```
+
+### urlRoot Configuration
+
+`urlRoot` specifies a root URL to use when URLs are created in the `serialize` method. By default any parameters in the `urlRoot` will be preserved and added to the final serialized URL; this can be disabled by setting the `settings.serializeUrlRoot` configuration to `false`.
+
+```js
+import { UrlManager, QueryStringTranslator } from '@searchspring/snap-url-manager';
+
+const urlManager = new UrlManager(
+	new QueryStringTranslator({
+		urlRoot: '/search?view=shop',
+		queryParameter: 'search'
+	});
+);
+
+const queriedUrlManager = urlManager.set({ query: 'green shirt', filter: { color: ['green'] } });
+
+console.log(queriedUrlManager.state.query); // green shirt
+console.log(queriedUrlManager.href); // /search?view=shop&search=green%20shirt&filter.color=green
 ```

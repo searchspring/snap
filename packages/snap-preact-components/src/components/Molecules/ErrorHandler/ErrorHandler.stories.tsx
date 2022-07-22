@@ -35,7 +35,6 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'Controller reference',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'Controller object',
@@ -45,7 +44,6 @@ export default {
 		},
 		error: {
 			description: 'Error object containing message and type',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'Error object',

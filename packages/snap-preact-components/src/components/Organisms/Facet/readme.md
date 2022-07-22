@@ -10,6 +10,7 @@ Renders a single complete facet. This includes determining the correct options t
 - FacetPaletteOptions
 - Slider
 - Icon
+- SearchInput
 
 ## Usage
 

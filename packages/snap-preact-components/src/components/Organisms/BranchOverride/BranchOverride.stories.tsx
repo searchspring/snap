@@ -72,7 +72,7 @@ export default {
 			action: 'onRemoveClick',
 		},
 		darkMode: {
-			description: 'force dark darkMode',
+			description: 'enable darkMode',
 			type: { required: false },
 			table: {
 				type: {
