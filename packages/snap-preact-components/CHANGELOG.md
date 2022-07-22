@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact-components-select:** improving logic for select component and fixing bug preventing render ([64f3a2a](https://github.com/searchspring/snap/commit/64f3a2a6b9d672292f24004a78563acce31715e0))
+
+
+
+
+
 # [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

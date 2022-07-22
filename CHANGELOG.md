@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact-components-select:** fixing logic with rendering Observables and improving state functions ([38fb7c8](https://github.com/searchspring/snap/commit/38fb7c881446554ba0809a4d86a10d9a849d0df4))
+* **preact-components-select:** improving logic for select component and fixing bug preventing render ([64f3a2a](https://github.com/searchspring/snap/commit/64f3a2a6b9d672292f24004a78563acce31715e0))
+* **preact:** create function should have been resetting URL on detach for controller ([41797cf](https://github.com/searchspring/snap/commit/41797cf1aa7771130b0f7f45ee5ddf7cbd90acdf))
+* **searchcontroller:** use previous response over store.results to not overwrite inline banners ([00cc651](https://github.com/searchspring/snap/commit/00cc651af9434781cb8bcf984a91d344fd572e18))
+
+
+### Features
+
+* **controller-autocomplete:** adding `serializeForm` setting for picking up additional form params ([3095bb9](https://github.com/searchspring/snap/commit/3095bb939758a97d79457e69741d3a3c1b80458e))
+* send beacon error events from middleware errors ([daeba21](https://github.com/searchspring/snap/commit/daeba214facd250505c1bf89ae18588a709244b7))
+* **url-manager:** serializeUrlRoot now a required in config; change to order of params and defaults ([feaea8f](https://github.com/searchspring/snap/commit/feaea8f14892411b83625ec8ef82242bc38e4942))
+* **url-manager:** using serializeUrlRoot when enabled to set global state ([d828522](https://github.com/searchspring/snap/commit/d8285221144db70c05297a7a433da28b0d0d5278))
+
+
+
+
+
 # [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
 
 

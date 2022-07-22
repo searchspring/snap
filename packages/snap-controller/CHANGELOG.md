@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **searchcontroller:** use previous response over store.results to not overwrite inline banners ([00cc651](https://github.com/searchspring/snap/commit/00cc651af9434781cb8bcf984a91d344fd572e18))
+
+
+### Features
+
+* **controller-autocomplete:** adding `serializeForm` setting for picking up additional form params ([3095bb9](https://github.com/searchspring/snap/commit/3095bb939758a97d79457e69741d3a3c1b80458e))
+* send beacon error events from middleware errors ([daeba21](https://github.com/searchspring/snap/commit/daeba214facd250505c1bf89ae18588a709244b7))
+
+
+
+
+
 # [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
 
 
