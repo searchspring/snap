@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { UrlState, Translator, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
+import { UrlState, Translator, TranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
 
 type UrlParameter = {
 	key: Array<string>;
@@ -37,7 +37,7 @@ export type UrlTranslatorParametersConfig = {
 	custom: CustomMap;
 };
 
-type UrlTranslatorConfigFull = {
+type UrlTranslatorConfigFull = TranslatorConfig & {
 	urlRoot: string;
 	settings: UrlTranslatorSettingsConfig;
 	parameters: UrlTranslatorParametersConfig;
@@ -49,7 +49,7 @@ export type UrlTranslatorSettingsConfig = {
 	corePrefix: string;
 	coreType?: keyof typeof ParamLocationType;
 	customType: keyof typeof ParamLocationType;
-	rootParams: boolean;
+	serializeUrlRoot: boolean;
 };
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
@@ -58,8 +58,8 @@ const defaultConfig: UrlTranslatorConfigFull = {
 	urlRoot: '',
 	settings: {
 		corePrefix: '',
-		customType: ParamLocationType.hash,
-		rootParams: true,
+		customType: ParamLocationType.query,
+		serializeUrlRoot: true,
 	},
 	parameters: {
 		core: {
@@ -82,7 +82,7 @@ export class UrlTranslator implements Translator {
 	protected config: UrlTranslatorConfigFull;
 	protected reverseMapping: Record<string, string> = {};
 
-	constructor(config?: DeepPartial<UrlTranslatorConfigFull>) {
+	constructor(config?: UrlTranslatorConfig) {
 		this.config = deepmerge(defaultConfig, (config as UrlTranslatorConfigFull) || {});
 
 		Object.keys(this.config.parameters.core).forEach((param: string) => {
@@ -365,9 +365,7 @@ export class UrlTranslator implements Translator {
 			? this.config.urlRoot.split('#')[0]
 			: this.config.urlRoot || window.location.pathname;
 
-		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
-		const stateParams = this.stateToParams(state);
-		const params = [...rootUrlParams, ...stateParams];
+		const params = this.stateToParams(state);
 		const queryParams = params.filter((p) => p.type == ParamLocationType.query);
 		const hashParams = params.filter((p) => p.type == ParamLocationType.hash);
 
@@ -400,10 +398,10 @@ export class UrlTranslator implements Translator {
 
 	protected stateToParams(state: UrlState): Array<UrlParameter> {
 		return [
+			...this.encodeOther(state),
 			...this.encodeCoreOther(state, ['filter', 'sort']),
 			...this.encodeCoreFilters(state),
 			...this.encodeCoreSorts(state),
-			...this.encodeOther(state),
 		];
 	}
 

@@ -2,6 +2,19 @@ import { QueryStringTranslator } from './QueryStringTranslator';
 import { UrlState } from '../../types';
 
 describe('QueryStringTranslator', () => {
+	it('has default configuration', () => {
+		const queryString = new QueryStringTranslator();
+		const defaultConfig = queryString.getConfig();
+
+		expect(defaultConfig.urlRoot).toEqual('');
+
+		expect(defaultConfig.settings).toEqual({
+			serializeUrlRoot: true,
+		});
+
+		expect(defaultConfig.queryParameter).toEqual('q');
+	});
+
 	it('generates relative URL by default', () => {
 		const url = 'http://example.com?bar=baz';
 		const queryString = new QueryStringTranslator();

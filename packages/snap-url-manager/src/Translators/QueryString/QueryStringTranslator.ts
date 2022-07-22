@@ -1,27 +1,37 @@
-import { UrlState, Translator, TranslatorConfig, RangeValueProperties, UrlStateFilterType } from '../../types';
-
+import deepmerge from 'deepmerge';
 import Immutable from 'seamless-immutable';
+
+import { RangeValueProperties } from '../../types';
+
 import type { ImmutableObject } from 'seamless-immutable';
+
+import type { UrlState, Translator, TranslatorConfig, UrlStateFilterType } from '../../types';
 
 type QueryParameter = {
 	key: Array<string>;
 	value: string;
 };
 
-type Config = {
-	queryParameter: string;
+export type QueryStringTranslatorConfig = Partial<QueryStringTranslatorConfigFull>;
+
+type QueryStringTranslatorConfigFull = TranslatorConfig & {
 	urlRoot: string;
+	queryParameter: string;
+};
+
+const defaultConfig: QueryStringTranslatorConfigFull = {
+	urlRoot: '',
+	queryParameter: 'q',
+	settings: {
+		serializeUrlRoot: true,
+	},
 };
 
 export class QueryStringTranslator implements Translator {
-	protected config: ImmutableObject<Config>;
+	protected config: ImmutableObject<QueryStringTranslatorConfigFull>;
 
 	constructor(config: TranslatorConfig = {}) {
-		this.config = Immutable({
-			...config,
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
-			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
-		});
+		this.config = Immutable(deepmerge(defaultConfig, config) as QueryStringTranslatorConfigFull);
 	}
 
 	bindExternalEvents(update: () => void): void {
@@ -32,7 +42,7 @@ export class QueryStringTranslator implements Translator {
 		return location.search || '';
 	}
 
-	getConfig(): Config {
+	getConfig(): QueryStringTranslatorConfigFull {
 		return this.config.asMutable();
 	}
 
@@ -307,11 +317,11 @@ export class QueryStringTranslator implements Translator {
 
 	protected stateToQueryParams(state: UrlState = {}): Array<QueryParameter> {
 		return [
+			...this.encodeOther(state, ['page', 'query', 'filter', 'sort', this.getConfig().queryParameter]),
 			...this.encodeQuery(state),
 			...this.encodePage(state),
 			...this.encodeFilter(state),
 			...this.encodeSort(state),
-			...this.encodeOther(state, ['page', 'query', 'filter', 'sort', this.getConfig().queryParameter]),
 		];
 	}
 
