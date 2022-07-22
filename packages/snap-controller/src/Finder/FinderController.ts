@@ -228,6 +228,7 @@ export class FinderController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
 	};
