@@ -24,6 +24,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 	settings: {
 		initializeFromUrl: true,
 		syncInputs: true,
+		serializeForm: false,
 		facets: {
 			trim: true,
 			pinFiltered: true,
@@ -290,6 +291,27 @@ export class AutocompleteController extends AbstractController {
 
 				form.submit();
 			},
+			formElementChange: (e: React.ChangeEvent<HTMLInputElement>): void => {
+				const input = e.target as HTMLInputElement;
+				const form = input?.form;
+				const searchInput = form?.querySelector(`input[${INPUT_ATTRIBUTE}]`);
+
+				if (form && searchInput && this.config.settings?.serializeForm) {
+					// get other form parameters (except the input)
+					const formParameters = getFormParameters(form, function (elem: HTMLInputElement) {
+						return elem != searchInput;
+					});
+
+					// set parameters as globals
+					this.store.setService('urlManager', this.store.services.urlManager.reset().withGlobals(formParameters));
+					this.store.reset();
+
+					// rebuild trending terms with new UrlManager settings
+					if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0) {
+						this.searchTrending();
+					}
+				}
+			},
 			keyUp: (e: KeyboardEvent): void => {
 				// ignore enter and escape keys
 				if (e?.keyCode == KEY_ENTER || e?.keyCode == KEY_ESCAPE) return;
@@ -354,7 +376,11 @@ export class AutocompleteController extends AbstractController {
 			input.removeEventListener('keydown', this.handlers.input.enterKey);
 			input.removeEventListener('keydown', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
-			input.form?.removeEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+
+			if (input.form) {
+				input.form.removeEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				unbindFormParameters(input.form, this.handlers.input.formElementChange);
+			}
 		});
 		document.removeEventListener('click', this.handlers.document.click);
 	}
@@ -386,18 +412,31 @@ export class AutocompleteController extends AbstractController {
 			let formActionUrl: string | undefined;
 
 			if (this.config.action) {
-				formActionUrl = this.config.action;
 				input.addEventListener('keydown', this.handlers.input.enterKey);
+				formActionUrl = this.config.action;
 			} else if (form) {
-				formActionUrl = form.action;
 				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				formActionUrl = form.action || '';
+
+				if (this.config.settings?.serializeForm) {
+					bindFormParameters(form, this.handlers.input.formElementChange, function (elem: HTMLInputElement) {
+						return elem != input;
+					});
+
+					const formParameters = getFormParameters(form, function (elem: HTMLInputElement) {
+						return elem != input;
+					});
+
+					// set parameters as globals
+					this.store.setService('urlManager', this.urlManager.reset().withGlobals(formParameters));
+				}
 			}
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
 				this.store.setService(
 					'urlManager',
-					this.urlManager.withConfig((translatorConfig: any) => {
+					this.store.services.urlManager.withConfig((translatorConfig: any) => {
 						return {
 							...translatorConfig,
 							urlRoot: formActionUrl,
@@ -439,6 +478,7 @@ export class AutocompleteController extends AbstractController {
 
 			this.storage.set('terms', JSON.stringify(terms));
 		}
+
 		this.store.updateTrendingTerms(terms);
 	};
 
@@ -569,4 +609,61 @@ async function timeout(time: number): Promise<void> {
 	return new Promise((resolve) => {
 		window.setTimeout(resolve, time);
 	});
+}
+
+// for grabbing other parameters from the form and using them in UrlManager
+
+const INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+
+function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: string]: string | undefined } {
+	const parameters: { [formName: string]: string | undefined } = {};
+
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (typeof filterFn == 'function' && !filterFn(elem)) {
+				continue;
+			}
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				// parameters[elem.name] = elem.value;
+
+				if ((elem.type != 'checkbox' && elem.type != 'radio') || elem.checked) {
+					// parameters[elem.name] = undefined;
+					parameters[elem.name] = elem.value;
+				}
+			}
+		}
+	}
+
+	return parameters;
+}
+
+function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void {
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (typeof filterFn == 'function' && !filterFn(elem)) {
+				continue;
+			}
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				elem.addEventListener('change', fn);
+			}
+		}
+	}
+}
+
+function unbindFormParameters(form: HTMLFormElement, fn: any): void {
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				elem.removeEventListener('change', fn);
+			}
+		}
+	}
 }

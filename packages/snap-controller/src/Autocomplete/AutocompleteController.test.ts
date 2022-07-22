@@ -39,8 +39,8 @@ let acConfig: AutocompleteStoreConfig = {
 	selector: '',
 };
 
-const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
-const services = { urlManager };
+let urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
+let services = { urlManager };
 const globals = { siteId: 'ga9kq2' };
 const badArgs = [
 	{
@@ -133,6 +133,9 @@ describe('Autocomplete Controller', () => {
 		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
 		acConfig = Object.assign({}, acConfigBase); // reset config
 		acConfig.id = uuidv4().split('-').join('');
+
+		urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
+		services = { urlManager };
 	});
 	badArgs.forEach((args, index) => {
 		it(`fails with bad constructor args ${index}`, () => {
@@ -307,6 +310,87 @@ describe('Autocomplete Controller', () => {
 			expect(inputEl1.value).toBe(query);
 			expect(inputEl2.value).toBe(query);
 		});
+	});
+
+	it('does not serialize other form input elements normally (settings.serializeForm)', async () => {
+		document.body.innerHTML =
+			'<div><form action="/search.html"><input type="hidden" name="view" value="shop"/><input type="text" id="search_query"/></form></div>';
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		// set mockClient data
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
+
+		await controller.bind();
+
+		const inputElem: HTMLInputElement = document.getElementById('search_query') as HTMLInputElement;
+
+		const query = 'wh';
+
+		inputElem.focus();
+		inputElem.value = query;
+		inputElem.dispatchEvent(new Event('keyup'));
+
+		await waitFor(() => {
+			expect(controller.store.loaded).toBe(true);
+			expect(controller.store.loading).toBe(false);
+		});
+
+		expect(controller.urlManager.state.query).toBe(query);
+		expect(controller.store.state.input).toBe(query);
+		expect(controller.store.state.url.href).toBe('http://localhost/search.html?search_query=white');
+	});
+
+	it('serializes other form input elements (settings.serializeForm)', async () => {
+		document.body.innerHTML =
+			'<div><form action="/search.html"><input type="hidden" name="view" value="shop"/><input type="text" id="search_query"/></form></div>';
+
+		const serializeConfig = {
+			...acConfig,
+			settings: {
+				serializeForm: true,
+			},
+		};
+
+		const controller = new AutocompleteController(serializeConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(serializeConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		// set mockClient data
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
+
+		await controller.bind();
+
+		const inputElem: HTMLInputElement = document.getElementById('search_query') as HTMLInputElement;
+
+		const query = 'wh';
+
+		inputElem.focus();
+		inputElem.value = query;
+		inputElem.dispatchEvent(new Event('keyup'));
+
+		await waitFor(() => {
+			expect(controller.store.loaded).toBe(true);
+			expect(controller.store.loading).toBe(false);
+		});
+
+		expect(controller.urlManager.state.query).toBe(query);
+		expect(controller.store.state.input).toBe(query);
+		expect(controller.store.state.url.href).toBe('http://localhost/search.html?view=shop&search_query=white');
 	});
 
 	it('can invoke controller track.product.click', async () => {
@@ -623,10 +707,6 @@ describe('Autocomplete Controller', () => {
 			...acConfig,
 			action: '/search',
 		};
-		const inputEl = document.createElement('input');
-		inputEl!.setAttribute('type', 'text');
-		inputEl!.setAttribute('id', 'search_query');
-		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -639,6 +719,13 @@ describe('Autocomplete Controller', () => {
 		});
 
 		await controller.bind();
+		let inputEl: HTMLInputElement | null;
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			expect(inputEl!).toBeDefined();
+		});
+
 		const setFocusedfn = jest.spyOn(controller, 'setFocused');
 		const storeResetfn = jest.spyOn(controller.store, 'reset');
 		const urlManagerResetfn = jest.spyOn(controller.urlManager, 'reset');
