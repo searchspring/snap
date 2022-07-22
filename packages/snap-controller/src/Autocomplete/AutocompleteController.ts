@@ -627,10 +627,7 @@ function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: s
 			}
 
 			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
-				// parameters[elem.name] = elem.value;
-
 				if ((elem.type != 'checkbox' && elem.type != 'radio') || elem.checked) {
-					// parameters[elem.name] = undefined;
 					parameters[elem.name] = elem.value;
 				}
 			}

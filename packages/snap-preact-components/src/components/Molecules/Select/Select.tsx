@@ -137,11 +137,20 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		},
 	};
 
+	// only single selection support for now
+	let selection: Option | undefined = selected;
+	let setSelection: StateUpdater<Option | undefined>;
+
 	// open state
 	const [open, setOpen] = useState<boolean>(Boolean(startOpen));
 
 	// selection state
-	const [selection, setSelection] = useState<Option | undefined>(selected);
+	const stateful = selection === undefined;
+	if (stateful) {
+		[selection, setSelection] = useState<Option | undefined>(undefined);
+	} else {
+		selection = Array.isArray(selected) ? selected[0] : selection;
+	}
 
 	if (selection && clearSelection) {
 		options = [
@@ -154,11 +163,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	}
 
 	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
+		option = option?.value ? option : undefined;
+
 		if (option != selection) {
 			onSelect && onSelect(e, option);
 		}
 
-		setSelection(option);
+		if (stateful) {
+			setSelection(option);
+		}
 
 		!stayOpenOnSelection && setOpen(false);
 	};
@@ -174,8 +187,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	// options can be an Array or ObservableArray - but should have length
-	return typeof options == 'object' && options?.length ? (
+	return Array.isArray(options) && options.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
