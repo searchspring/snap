@@ -1,6 +1,6 @@
-/*! For license information please see 963.6c37c37a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 415.fa6606e1.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[963],
+	[415],
 	{
 		'../../node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -3282,3515 +3282,6 @@
 						return console.log(key + ' was not supported :( !');
 				}
 			});
-		},
-		'../../node_modules/@storybook/addon-docs/blocks.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, {
-				$4: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.ArgsTable,
-				Uh: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.PRIMARY_STORY,
-				h_: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.Meta,
-			});
-			var util_deprecate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/util-deprecate/browser.js'),
-				util_deprecate__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(util_deprecate__WEBPACK_IMPORTED_MODULE_0__),
-				ts_dedent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/ts-dedent/esm/index.js'),
-				_dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/blocks/index.js');
-			util_deprecate__WEBPACK_IMPORTED_MODULE_0___default()(
-				() => {},
-				ts_dedent__WEBPACK_IMPORTED_MODULE_1__.C`
-    Importing from '@storybook/addon-docs/blocks' is deprecated, import directly from '@storybook/addon-docs' instead:
-    
-    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-scoped-blocks-imports
-`
-			)();
-		},
-		'../../node_modules/@storybook/addon-docs/dist/esm/blocks/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, {
-					AddContext: () => AddContext,
-					Anchor: () => Anchor,
-					AnchorMdx: () => AnchorMdx,
-					ArgsTable: () => ArgsTable,
-					CURRENT_SELECTION: () => CURRENT_SELECTION,
-					Canvas: () => Canvas,
-					CodeOrSourceMdx: () => CodeOrSourceMdx,
-					ColorItem: () => ColorItem,
-					ColorPalette: () => ColorPalette,
-					ComponentsTable: () => ComponentsTable,
-					Description: () => DescriptionContainer,
-					DescriptionType: () => DescriptionType,
-					DocsContainer: () => DocsContainer,
-					DocsContext: () => DocsContext,
-					DocsPage: () => DocsPage,
-					DocsStory: () => DocsStory,
-					HeaderMdx: () => HeaderMdx,
-					HeadersMdx: () => HeadersMdx,
-					Heading: () => Heading,
-					IconGallery: () => IconGallery,
-					IconItem: () => IconItem,
-					Meta: () => Meta,
-					PRIMARY_STORY: () => PRIMARY_STORY,
-					Preview: () => Preview_Preview,
-					Primary: () => Primary,
-					Props: () => Props,
-					Source: () => Source,
-					SourceContainer: () => SourceContainer,
-					SourceContext: () => SourceContext,
-					SourceState: () => SourceState,
-					Stories: () => Stories,
-					Story: () => Story,
-					StoryTable: () => StoryTable,
-					Subheading: () => Subheading,
-					Subtitle: () => Subtitle,
-					Title: () => Title,
-					Typeset: () => Typeset,
-					Wrapper: () => Wrapper_Wrapper,
-					anchorBlockIdFromId: () => anchorBlockIdFromId,
-					assertIsFn: () => assertIsFn,
-					extractComponentArgTypes: () => extractComponentArgTypes,
-					extractTitle: () => extractTitle,
-					getComponent: () => getComponent,
-					getDescriptionProps: () => getDescriptionProps,
-					getSourceProps: () => getSourceProps,
-					getStoryId: () => getStoryId,
-					getStoryProps: () => getStoryProps,
-					lookupStoryId: () => lookupStoryId,
-					storyBlockIdFromId: () => storyBlockIdFromId,
-				});
-			__webpack_require__('../../node_modules/core-js/modules/es.string.bold.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js');
-			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js'),
-				polished_esm = __webpack_require__('../../node_modules/polished/dist/polished.esm.js'),
-				getBlockBackgroundStyle = function getBlockBackgroundStyle(theme) {
-					return {
-						borderRadius: theme.appBorderRadius,
-						background: theme.background.content,
-						boxShadow: 'light' === theme.base ? 'rgba(0, 0, 0, 0.10) 0 1px 3px 0' : 'rgba(0, 0, 0, 0.20) 0 2px 5px 0',
-						border: '1px solid '.concat(theme.appBorderColor),
-					};
-				},
-				DocumentFormatting = __webpack_require__('../../node_modules/@storybook/components/dist/esm/typography/DocumentFormatting.js');
-			function _extends() {
-				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					_extends.apply(this, arguments)
-				);
-			}
-			function _objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function _objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var ItemTitle = esm.styled.div(function (_ref) {
-					var theme = _ref.theme;
-					return { fontWeight: theme.typography.weight.bold, color: theme.color.defaultText };
-				}),
-				ItemSubtitle = esm.styled.div(function (_ref2) {
-					var theme = _ref2.theme;
-					return {
-						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.2, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
-					};
-				}),
-				ItemDescription = esm.styled.div({ flex: '0 0 30%', lineHeight: '20px', marginTop: 5 }),
-				SwatchLabel = esm.styled.div(function (_ref3) {
-					var theme = _ref3.theme;
-					return {
-						flex: 1,
-						textAlign: 'center',
-						fontFamily: theme.typography.fonts.mono,
-						fontSize: theme.typography.size.s1,
-						lineHeight: 1,
-						overflow: 'hidden',
-						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
-						'> div': { display: 'inline-block', overflow: 'hidden', maxWidth: '100%', textOverflow: 'ellipsis' },
-						span: { display: 'block', marginTop: 2 },
-					};
-				}),
-				SwatchLabels = esm.styled.div({ display: 'flex', flexDirection: 'row' }),
-				Swatch = esm.styled.div(function (_ref4) {
-					return {
-						position: 'relative',
-						flex: 1,
-						'&::before': { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: _ref4.background, content: '""' },
-					};
-				}),
-				SwatchColors = esm.styled.div(function (_ref5) {
-					var theme = _ref5.theme;
-					return Object.assign({}, getBlockBackgroundStyle(theme), {
-						display: 'flex',
-						flexDirection: 'row',
-						height: 50,
-						marginBottom: 5,
-						overflow: 'hidden',
-						backgroundColor: 'white',
-						backgroundImage: 'repeating-linear-gradient(-45deg, #ccc, #ccc 1px, #fff 1px, #fff 16px)',
-						backgroundClip: 'padding-box',
-					});
-				}),
-				SwatchSpecimen = esm.styled.div({ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative', marginBottom: 30 }),
-				Swatches = esm.styled.div({ flex: 1, display: 'flex', flexDirection: 'row' }),
-				Item = esm.styled.div({ display: 'flex', alignItems: 'flex-start' }),
-				ListName = esm.styled.div({ flex: '0 0 30%' }),
-				ListSwatches = esm.styled.div({ flex: 1 }),
-				ListHeading = esm.styled.div(function (_ref6) {
-					var theme = _ref6.theme;
-					return {
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: 'center',
-						paddingBottom: 20,
-						fontWeight: theme.typography.weight.bold,
-						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
-					};
-				}),
-				List = esm.styled.div(function (_ref7) {
-					return { fontSize: _ref7.theme.typography.size.s2, lineHeight: '20px', display: 'flex', flexDirection: 'column' };
-				});
-			function renderSwatch(color, index) {
-				return compat_module.default.createElement(Swatch, { key: ''.concat(color, '-').concat(index), title: color, background: color });
-			}
-			function renderSwatchLabel(color, index, colorDescription) {
-				return compat_module.default.createElement(
-					SwatchLabel,
-					{ key: ''.concat(color, '-').concat(index), title: color },
-					compat_module.default.createElement(
-						'div',
-						null,
-						color,
-						colorDescription && compat_module.default.createElement('span', null, colorDescription)
-					)
-				);
-			}
-			function renderSwatchSpecimen(colors) {
-				return Array.isArray(colors)
-					? compat_module.default.createElement(
-							SwatchSpecimen,
-							null,
-							compat_module.default.createElement(
-								SwatchColors,
-								null,
-								colors.map(function (color, index) {
-									return renderSwatch(color, index);
-								})
-							),
-							compat_module.default.createElement(
-								SwatchLabels,
-								null,
-								colors.map(function (color, index) {
-									return renderSwatchLabel(color, index);
-								})
-							)
-					  )
-					: compat_module.default.createElement(
-							SwatchSpecimen,
-							null,
-							compat_module.default.createElement(
-								SwatchColors,
-								null,
-								Object.values(colors).map(function (color, index) {
-									return renderSwatch(color, index);
-								})
-							),
-							compat_module.default.createElement(
-								SwatchLabels,
-								null,
-								Object.keys(colors).map(function (color, index) {
-									return renderSwatchLabel(color, index, colors[color]);
-								})
-							)
-					  );
-			}
-			(renderSwatch.displayName = 'renderSwatch'),
-				(renderSwatchLabel.displayName = 'renderSwatchLabel'),
-				(renderSwatchSpecimen.displayName = 'renderSwatchSpecimen');
-			var ColorItem = function ColorItem(_ref8) {
-				var title = _ref8.title,
-					subtitle = _ref8.subtitle,
-					colors = _ref8.colors;
-				return compat_module.default.createElement(
-					Item,
-					null,
-					compat_module.default.createElement(
-						ItemDescription,
-						null,
-						compat_module.default.createElement(ItemTitle, null, title),
-						compat_module.default.createElement(ItemSubtitle, null, subtitle)
-					),
-					compat_module.default.createElement(Swatches, null, renderSwatchSpecimen(colors))
-				);
-			};
-			ColorItem.displayName = 'ColorItem';
-			var ColorPalette = function ColorPalette(_ref9) {
-				var children = _ref9.children,
-					props = _objectWithoutProperties(_ref9, ['children']);
-				return compat_module.default.createElement(
-					DocumentFormatting.i9,
-					null,
-					compat_module.default.createElement(
-						List,
-						_extends({}, props, { className: 'docblock-colorpalette' }),
-						compat_module.default.createElement(
-							ListHeading,
-							null,
-							compat_module.default.createElement(ListName, null, 'Name'),
-							compat_module.default.createElement(ListSwatches, null, 'Swatches')
-						),
-						children
-					)
-				);
-			};
-			ColorPalette.displayName = 'ColorPalette';
-			__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
-			function IconGallery_extends() {
-				return (
-					(IconGallery_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					IconGallery_extends.apply(this, arguments)
-				);
-			}
-			function IconGallery_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function IconGallery_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var ItemLabel = esm.styled.div(function (_ref) {
-					var theme = _ref.theme;
-					return {
-						fontFamily: theme.typography.fonts.base,
-						fontSize: theme.typography.size.s2,
-						color: theme.color.defaultText,
-						marginLeft: 10,
-						lineHeight: 1.2,
-					};
-				}),
-				ItemSpecimen = esm.styled.div(function (_ref2) {
-					var theme = _ref2.theme;
-					return Object.assign({}, getBlockBackgroundStyle(theme), {
-						overflow: 'hidden',
-						height: 40,
-						width: 40,
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						flex: 'none',
-						'> img, > svg': { width: 20, height: 20 },
-					});
-				}),
-				IconGallery_Item = esm.styled.div({
-					display: 'inline-flex',
-					flexDirection: 'row',
-					alignItems: 'center',
-					flex: '0 1 calc(20% - 10px)',
-					minWidth: 120,
-					margin: '0px 10px 30px 0',
-				}),
-				IconGallery_List = esm.styled.div({ display: 'flex', flexFlow: 'row wrap' }),
-				IconItem = function IconItem(_ref3) {
-					var name = _ref3.name,
-						children = _ref3.children;
-					return compat_module.default.createElement(
-						IconGallery_Item,
-						null,
-						compat_module.default.createElement(ItemSpecimen, null, children),
-						compat_module.default.createElement(ItemLabel, null, name)
-					);
-				};
-			IconItem.displayName = 'IconItem';
-			var IconGallery = function IconGallery(_ref4) {
-				var children = _ref4.children,
-					props = IconGallery_objectWithoutProperties(_ref4, ['children']);
-				return compat_module.default.createElement(
-					DocumentFormatting.i9,
-					null,
-					compat_module.default.createElement(IconGallery_List, IconGallery_extends({}, props, { className: 'docblock-icongallery' }), children)
-				);
-			};
-			IconGallery.displayName = 'IconGallery';
-			var shared = __webpack_require__('../../node_modules/@storybook/components/dist/esm/typography/shared.js');
-			function Typeset_extends() {
-				return (
-					(Typeset_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					Typeset_extends.apply(this, arguments)
-				);
-			}
-			function Typeset_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Typeset_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var Label = esm.styled.div(function (_ref) {
-					var theme = _ref.theme;
-					return {
-						marginRight: 30,
-						fontSize: ''.concat(theme.typography.size.s1, 'px'),
-						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
-					};
-				}),
-				Sample = esm.styled.div({ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }),
-				TypeSpecimen = esm.styled.div({
-					display: 'flex',
-					flexDirection: 'row',
-					alignItems: 'baseline',
-					'&:not(:last-child)': { marginBottom: '1rem' },
-				}),
-				Wrapper = esm.styled.div(shared.YX, function (_ref2) {
-					var theme = _ref2.theme;
-					return Object.assign({}, getBlockBackgroundStyle(theme), { margin: '25px 0 40px', padding: '30px 20px' });
-				}),
-				Typeset = function Typeset(_ref3) {
-					var fontFamily = _ref3.fontFamily,
-						fontSizes = _ref3.fontSizes,
-						fontWeight = _ref3.fontWeight,
-						sampleText = _ref3.sampleText,
-						props = Typeset_objectWithoutProperties(_ref3, ['fontFamily', 'fontSizes', 'fontWeight', 'sampleText']);
-					return compat_module.default.createElement(
-						Wrapper,
-						Typeset_extends({}, props, { className: 'docblock-typeset' }),
-						fontSizes.map(function (size) {
-							return compat_module.default.createElement(
-								TypeSpecimen,
-								{ key: size },
-								compat_module.default.createElement(Label, null, size),
-								compat_module.default.createElement(
-									Sample,
-									{ style: { fontFamily, fontSize: size, fontWeight, lineHeight: 1.2 } },
-									sampleText || 'Was he a beast if music could move him so?'
-								)
-							);
-						})
-					);
-				};
-			Typeset.displayName = 'Typeset';
-			var anchorBlockIdFromId = function anchorBlockIdFromId(storyId) {
-					return 'anchor--'.concat(storyId);
-				},
-				Anchor = function Anchor(_ref) {
-					var storyId = _ref.storyId,
-						children = _ref.children;
-					return compat_module.default.createElement('div', { id: anchorBlockIdFromId(storyId) }, children);
-				},
-				lodash_mapValues =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.find.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
-					__webpack_require__('../../node_modules/lodash/mapValues.js')),
-				mapValues_default = __webpack_require__.n(lodash_mapValues),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/components/dist/esm/index.js'),
-				addons_dist_esm = __webpack_require__('../../node_modules/@storybook/addons/dist/esm/index.js'),
-				filterArgTypes = __webpack_require__('../../node_modules/@storybook/store/dist/esm/filterArgTypes.js'),
-				core_events_dist_esm = __webpack_require__('../../node_modules/@storybook/core-events/dist/esm/index.js'),
-				global_window = __webpack_require__('../../node_modules/global/window.js'),
-				window_default = __webpack_require__.n(global_window);
-			void 0 === global_window.window.__DOCS_CONTEXT__ &&
-				((global_window.window.__DOCS_CONTEXT__ = (0, compat_module.createContext)({})),
-				(global_window.window.__DOCS_CONTEXT__.displayName = 'DocsContext'));
-			var DocsContext = global_window.window.__DOCS_CONTEXT__,
-				CURRENT_SELECTION = '.',
-				PRIMARY_STORY = '^',
-				getComponentName =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-					function getComponentName(component) {
-						if (component)
-							return 'string' == typeof component
-								? component.includes('-')
-									? (function titleCase(str) {
-											return str
-												.split('-')
-												.map(function (part) {
-													return part.charAt(0).toUpperCase() + part.slice(1);
-												})
-												.join('');
-									  })(component)
-									: component
-								: component.__docgenInfo && component.__docgenInfo.displayName
-								? component.__docgenInfo.displayName
-								: component.name;
-					});
-			function scrollToElement(element) {
-				var block = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 'start';
-				element.scrollIntoView({ behavior: 'smooth', block, inline: 'nearest' });
-			}
-			__webpack_require__('../../node_modules/core-js/modules/es.promise.js');
-			var react_dist_esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
-			__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js');
-			function _typeof(obj) {
-				return (
-					(_typeof =
-						'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
-							? function _typeof(obj) {
-									return typeof obj;
-							  }
-							: function _typeof(obj) {
-									return obj && 'function' == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
-							  }),
-					_typeof(obj)
-				);
-			}
-			function IFrame_extends() {
-				return (
-					(IFrame_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					IFrame_extends.apply(this, arguments)
-				);
-			}
-			function IFrame_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function IFrame_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function _defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function _setPrototypeOf(o, p) {
-				return (
-					(_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					_setPrototypeOf(o, p)
-				);
-			}
-			function _createSuper(Derived) {
-				var hasNativeReflectConstruct = (function _isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = _getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = _getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return _possibleConstructorReturn(this, result);
-				};
-			}
-			function _possibleConstructorReturn(self, call) {
-				return !call || ('object' !== _typeof(call) && 'function' != typeof call)
-					? (function _assertThisInitialized(self) {
-							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-							return self;
-					  })(self)
-					: call;
-			}
-			function _getPrototypeOf(o) {
-				return (
-					(_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					_getPrototypeOf(o)
-				);
-			}
-			var globalWindow = window_default().window,
-				IFrame = (function (_Component) {
-					!(function _inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							superClass && _setPrototypeOf(subClass, superClass);
-					})(IFrame, _Component);
-					var _super = _createSuper(IFrame);
-					function IFrame() {
-						var _this;
-						_classCallCheck(this, IFrame);
-						for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-						return ((_this = _super.call.apply(_super, [this].concat(args))).iframe = null), _this;
-					}
-					return (
-						(function _createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && _defineProperties(Constructor.prototype, protoProps),
-								staticProps && _defineProperties(Constructor, staticProps),
-								Constructor
-							);
-						})(IFrame, [
-							{
-								key: 'componentDidMount',
-								value: function componentDidMount() {
-									var id = this.props.id;
-									this.iframe = globalWindow.document.getElementById(id);
-								},
-							},
-							{
-								key: 'shouldComponentUpdate',
-								value: function shouldComponentUpdate(nextProps) {
-									var scale = nextProps.scale;
-									return (
-										scale !== this.props.scale &&
-											this.setIframeBodyStyle({
-												width: ''.concat(100 * scale, '%'),
-												height: ''.concat(100 * scale, '%'),
-												transform: 'scale('.concat(1 / scale, ')'),
-												transformOrigin: 'top left',
-											}),
-										!1
-									);
-								},
-							},
-							{
-								key: 'setIframeBodyStyle',
-								value: function setIframeBodyStyle(style) {
-									return Object.assign(this.iframe.contentDocument.body.style, style);
-								},
-							},
-							{
-								key: 'render',
-								value: function render() {
-									var _this$props = this.props,
-										id = _this$props.id,
-										title = _this$props.title,
-										src = _this$props.src,
-										allowFullScreen = _this$props.allowFullScreen,
-										rest = (_this$props.scale, IFrame_objectWithoutProperties(_this$props, ['id', 'title', 'src', 'allowFullScreen', 'scale']));
-									return compat_module.default.createElement('iframe', IFrame_extends({ id, title, src, allowFullScreen, loading: 'lazy' }, rest));
-								},
-							},
-						]),
-						IFrame
-					);
-				})(compat_module.Component);
-			IFrame.displayName = 'IFrame';
-			var _templateObject,
-				EmptyBlock = __webpack_require__('../../node_modules/@storybook/components/dist/esm/blocks/EmptyBlock.js'),
-				ZoomContext = (0, compat_module.createContext)({ scale: 1 }),
-				core_browser_esm =
-					(__webpack_require__('../../node_modules/core-js/modules/es.object.freeze.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-					__webpack_require__('../../node_modules/@emotion/core/dist/core.browser.esm.js')),
-				icon = __webpack_require__('../../node_modules/@storybook/components/dist/esm/icon/icon.js');
-			var Loader_templateObject,
-				rotate360 = (0, core_browser_esm.F4)(
-					_templateObject ||
-						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {
-							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-						})(['\n\tfrom {\n\t\ttransform: rotate(0deg);\n\t}\n\tto {\n\t\ttransform: rotate(360deg);\n\t}\n']))
-				);
-			function _slicedToArray(arr, i) {
-				return (
-					(function _arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function _iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function _unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function _nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function Loader_extends() {
-				return (
-					(Loader_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					Loader_extends.apply(this, arguments)
-				);
-			}
-			function Loader_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Loader_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var EventSource = window_default().EventSource,
-				CONFIG_TYPE = window_default().CONFIG_TYPE,
-				LoaderWrapper = esm.styled.div(function (_ref) {
-					var _ref$size = _ref.size,
-						size = void 0 === _ref$size ? 32 : _ref$size;
-					return {
-						borderRadius: '50%',
-						cursor: 'progress',
-						display: 'inline-block',
-						overflow: 'hidden',
-						position: 'absolute',
-						transition: 'all 200ms ease-out',
-						verticalAlign: 'top',
-						top: '50%',
-						left: '50%',
-						marginTop: -size / 2,
-						marginLeft: -size / 2,
-						height: size,
-						width: size,
-						zIndex: 4,
-						borderWidth: 2,
-						borderStyle: 'solid',
-						borderColor: 'rgba(97, 97, 97, 0.29)',
-						borderTopColor: 'rgb(100,100,100)',
-						animation: ''.concat(rotate360, ' 0.7s linear infinite'),
-						mixBlendMode: 'difference',
-					};
-				}),
-				ProgressWrapper = esm.styled.div({
-					position: 'absolute',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-					width: '100%',
-					height: '100%',
-				}),
-				ProgressTrack = esm.styled.div(function (_ref2) {
-					var theme = _ref2.theme;
-					return {
-						position: 'relative',
-						width: '80%',
-						marginBottom: '0.75rem',
-						maxWidth: 300,
-						height: 5,
-						borderRadius: 5,
-						background: (0, polished_esm.DZ)(0.8, theme.color.secondary),
-						overflow: 'hidden',
-						cursor: 'progress',
-					};
-				}),
-				ProgressBar = esm.styled.div(function (_ref3) {
-					return { position: 'absolute', top: 0, left: 0, height: '100%', background: _ref3.theme.color.secondary };
-				}),
-				ProgressMessage = esm.styled.div(function (_ref4) {
-					var theme = _ref4.theme;
-					return { minHeight: '2em', fontSize: ''.concat(theme.typography.size.s1, 'px'), color: theme.barTextColor };
-				}),
-				ErrorIcon = (0, esm.styled)(icon.P)(function (_ref5) {
-					return { width: 20, height: 20, marginBottom: '0.5rem', color: _ref5.theme.color.mediumdark };
-				}),
-				ellipsis = (0, core_browser_esm.F4)(
-					Loader_templateObject ||
-						(Loader_templateObject = (function Loader_taggedTemplateLiteral(strings, raw) {
-							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-						})(['\n  from { content: "..." }\n  33% { content: "." }\n  66% { content: ".." }\n  to { content: "..." }\n']))
-				),
-				Ellipsis = esm.styled.span({
-					'&::after': {
-						content: "'...'",
-						animation: ''.concat(ellipsis, ' 1s linear infinite'),
-						animationDelay: '1s',
-						display: 'inline-block',
-						width: '1em',
-						height: 'auto',
-					},
-				}),
-				PureLoader = function PureLoader(_ref6) {
-					var progress = _ref6.progress,
-						error = _ref6.error,
-						size = _ref6.size,
-						props = Loader_objectWithoutProperties(_ref6, ['progress', 'error', 'size']);
-					if (error)
-						return compat_module.default.createElement(
-							ProgressWrapper,
-							Loader_extends({ 'aria-label': error.toString(), 'aria-live': 'polite', role: 'status' }, props),
-							compat_module.default.createElement(ErrorIcon, { icon: 'lightningoff' }),
-							compat_module.default.createElement(ProgressMessage, null, error.message)
-						);
-					if (progress) {
-						var value = progress.value,
-							modules = progress.modules,
-							message = progress.message;
-						return (
-							modules && (message += ' '.concat(modules.complete, ' / ').concat(modules.total, ' modules')),
-							compat_module.default.createElement(
-								ProgressWrapper,
-								Loader_extends(
-									{
-										'aria-label': 'Content is loading...',
-										'aria-live': 'polite',
-										'aria-valuemin': 0,
-										'aria-valuemax': 100,
-										'aria-valuenow': 100 * value,
-										'aria-valuetext': message,
-										role: 'progressbar',
-									},
-									props
-								),
-								compat_module.default.createElement(
-									ProgressTrack,
-									null,
-									compat_module.default.createElement(ProgressBar, { style: { width: ''.concat(100 * value, '%') } })
-								),
-								compat_module.default.createElement(
-									ProgressMessage,
-									null,
-									message,
-									value < 1 && compat_module.default.createElement(Ellipsis, { key: message })
-								)
-							)
-						);
-					}
-					return compat_module.default.createElement(
-						LoaderWrapper,
-						Loader_extends({ 'aria-label': 'Content is loading...', 'aria-live': 'polite', role: 'status', size }, props)
-					);
-				};
-			PureLoader.displayName = 'PureLoader';
-			var Loader = function Loader(props) {
-				var _useState2 = _slicedToArray((0, compat_module.useState)(void 0), 2),
-					progress = _useState2[0],
-					setProgress = _useState2[1],
-					_useState4 = _slicedToArray((0, compat_module.useState)(void 0), 2),
-					error = _useState4[0],
-					setError = _useState4[1];
-				return (
-					(0, compat_module.useEffect)(function () {
-						if ('DEVELOPMENT' === CONFIG_TYPE && EventSource) {
-							var lastProgress,
-								eventSource = new EventSource('/progress');
-							return (
-								(eventSource.onmessage = function (event) {
-									try {
-										(lastProgress = JSON.parse(event.data)), setProgress(lastProgress);
-									} catch (e) {
-										setError(e), eventSource.close();
-									}
-								}),
-								(eventSource.onerror = function () {
-									lastProgress && 1 !== lastProgress.value && setError(new Error('Connection closed')), eventSource.close();
-								}),
-								function () {
-									return eventSource.close();
-								}
-							);
-						}
-					}, []),
-					compat_module.default.createElement(PureLoader, Loader_extends({ progress, error }, props))
-				);
-			};
-			function Story_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Story_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			Loader.displayName = 'Loader';
-			var StoryError;
-			!(function (StoryError) {
-				StoryError.NO_STORY = 'No component or story to display';
-			})(StoryError || (StoryError = {}));
-			var InlineStory = function InlineStory(_ref) {
-				var storyFn = _ref.storyFn,
-					height = _ref.height,
-					id = _ref.id;
-				return compat_module.default.createElement(
-					compat_module.Fragment,
-					null,
-					height
-						? compat_module.default.createElement(
-								'style',
-								null,
-								'#story--'.concat(id, ' { min-height: ').concat(height, '; transform: translateZ(0); overflow: auto }')
-						  )
-						: null,
-					compat_module.default.createElement(
-						compat_module.Fragment,
-						null,
-						storyFn
-							? (0, compat_module.createElement)(storyFn)
-							: compat_module.default.createElement(
-									EmptyBlock.V,
-									null,
-									(function MISSING_STORY(id) {
-										return id ? 'Story "'.concat(id, '" doesn\'t exist.') : StoryError.NO_STORY;
-									})(id)
-							  )
-					)
-				);
-			};
-			InlineStory.displayName = 'InlineStory';
-			var IFrameStory = function IFrameStory(_ref2) {
-				var id = _ref2.id,
-					title = _ref2.title,
-					_ref2$height = _ref2.height,
-					height = void 0 === _ref2$height ? '500px' : _ref2$height;
-				return compat_module.default.createElement(
-					'div',
-					{ style: { width: '100%', height } },
-					compat_module.default.createElement(ZoomContext.Consumer, null, function (_ref3) {
-						var scale = _ref3.scale;
-						return compat_module.default.createElement(IFrame, {
-							key: 'iframe',
-							id: 'iframe--'.concat(id),
-							title,
-							src: ''.concat('iframe.html', '?id=').concat(id, '&viewMode=story'),
-							allowFullScreen: !0,
-							scale,
-							style: { width: '100%', height: '100%', border: '0 none' },
-						});
-					})
-				);
-			};
-			IFrameStory.displayName = 'IFrameStory';
-			var Story_Story = function Story(_ref4) {
-					_ref4.children;
-					var error = _ref4.error,
-						inline = _ref4.inline,
-						props = Story_objectWithoutProperties(_ref4, ['children', 'error', 'inline']),
-						id = props.id,
-						title = props.title,
-						height = props.height;
-					return error
-						? compat_module.default.createElement(EmptyBlock.V, null, error)
-						: inline
-						? compat_module.default.createElement(InlineStory, props)
-						: compat_module.default.createElement(IFrameStory, { id, title, height });
-				},
-				StorySkeleton = function StorySkeleton() {
-					return compat_module.default.createElement(Loader, null);
-				};
-			StorySkeleton.displayName = 'StorySkeleton';
-			var dist = __webpack_require__('../../node_modules/@storybook/csf/dist/index.js');
-			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js');
-			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function useStory_slicedToArray(arr, i) {
-				return (
-					(function useStory_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function useStory_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function useStory_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return useStory_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return useStory_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function useStory_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function useStory_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function useStory(storyId, context) {
-				var stories = useStories([storyId], context);
-				return stories && stories[0];
-			}
-			function useStories(storyIds, context) {
-				var initialStoriesById = context.componentStories().reduce(function (acc, story) {
-						return (acc[story.id] = story), acc;
-					}, {}),
-					_useState2 = useStory_slicedToArray((0, compat_module.useState)(initialStoriesById), 2),
-					storiesById = _useState2[0],
-					setStories = _useState2[1];
-				return (
-					(0, compat_module.useEffect)(function () {
-						Promise.all(
-							storyIds.map(
-								(function () {
-									var _ref = (function _asyncToGenerator(fn) {
-										return function () {
-											var self = this,
-												args = arguments;
-											return new Promise(function (resolve, reject) {
-												var gen = fn.apply(self, args);
-												function _next(value) {
-													asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-												}
-												function _throw(err) {
-													asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-												}
-												_next(void 0);
-											});
-										};
-									})(
-										regeneratorRuntime.mark(function _callee(storyId) {
-											var story;
-											return regeneratorRuntime.wrap(function _callee$(_context) {
-												for (;;)
-													switch ((_context.prev = _context.next)) {
-														case 0:
-															return (_context.next = 2), context.loadStory(storyId);
-														case 2:
-															(story = _context.sent),
-																setStories(function (current) {
-																	return current[storyId] === story
-																		? current
-																		: Object.assign(
-																				{},
-																				current,
-																				((value = story),
-																				(key = storyId) in (obj = {})
-																					? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 })
-																					: (obj[key] = value),
-																				obj)
-																		  );
-																	var obj, key, value;
-																});
-														case 4:
-														case 'end':
-															return _context.stop();
-													}
-											}, _callee);
-										})
-									);
-									return function (_x) {
-										return _ref.apply(this, arguments);
-									};
-								})()
-							)
-						);
-					}),
-					storyIds.map(function (storyId) {
-						return storiesById[storyId];
-					})
-				);
-			}
-			function Story_slicedToArray(arr, i) {
-				return (
-					(function Story_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function Story_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function Story_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return Story_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Story_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function Story_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Story_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			var storyBlockIdFromId = function storyBlockIdFromId(storyId) {
-					return 'story--'.concat(storyId);
-				},
-				lookupStoryId = function lookupStoryId(storyName, _ref) {
-					var mdxStoryNameToKey = _ref.mdxStoryNameToKey,
-						mdxComponentAnnotations = _ref.mdxComponentAnnotations;
-					return (0, dist.toId)(
-						mdxComponentAnnotations.id || mdxComponentAnnotations.title,
-						(0, dist.storyNameFromExport)(mdxStoryNameToKey[storyName])
-					);
-				},
-				getStoryId = function getStoryId(props, context) {
-					var id = props.id,
-						name = props.name;
-					return (id === CURRENT_SELECTION ? context.id : id) || lookupStoryId(name, context);
-				},
-				getStoryProps = function getStoryProps(_ref4, story, context, onStoryFnCalled) {
-					var height = _ref4.height,
-						inline = _ref4.inline,
-						storyName = story.name,
-						parameters = story.parameters,
-						_parameters$docs = parameters.docs,
-						docs = void 0 === _parameters$docs ? {} : _parameters$docs;
-					if (docs.disable) return null;
-					var _docs$inlineStories = docs.inlineStories,
-						inlineStories = void 0 !== _docs$inlineStories && _docs$inlineStories,
-						_docs$iframeHeight = docs.iframeHeight,
-						iframeHeight = void 0 === _docs$iframeHeight ? 100 : _docs$iframeHeight,
-						prepareForInline = docs.prepareForInline,
-						storyIsInline = 'boolean' == typeof inline ? inline : inlineStories;
-					if (storyIsInline && !prepareForInline)
-						throw new Error(
-							"Story '".concat(storyName, "' is set to render inline, but no 'prepareForInline' function is implemented in your docs configuration!")
-						);
-					var boundStoryFn = function boundStoryFn() {
-						var storyResult = story.unboundStoryFn(
-							Object.assign({}, context.getStoryContext(story), { loaded: {}, abortSignal: void 0, canvasElement: void 0 })
-						);
-						return onStoryFnCalled(), storyResult;
-					};
-					return Object.assign(
-						{ inline: storyIsInline, id: story.id, height: height || (storyIsInline ? void 0 : iframeHeight), title: storyName },
-						storyIsInline && {
-							parameters,
-							storyFn: function storyFn() {
-								return prepareForInline(boundStoryFn, context.getStoryContext(story));
-							},
-						}
-					);
-				};
-			function makeGate() {
-				var open;
-				return [
-					new Promise(function (r) {
-						open = r;
-					}),
-					open,
-				];
-			}
-			var Story = function Story(props) {
-				var context = (0, compat_module.useContext)(DocsContext),
-					channel = addons_dist_esm.KP.getChannel(),
-					storyRef = (0, compat_module.useRef)(),
-					storyId = getStoryId(props, context),
-					story = useStory(storyId, context),
-					_useState2 = Story_slicedToArray((0, compat_module.useState)(!0), 2),
-					showLoader = _useState2[0],
-					setShowLoader = _useState2[1];
-				(0, compat_module.useEffect)(
-					function () {
-						var cleanup;
-						if (story && storyRef.current) {
-							var componentId = story.componentId,
-								id = story.id,
-								title = story.title,
-								name = story.name,
-								renderContext = {
-									componentId,
-									title,
-									kind: title,
-									id,
-									name,
-									story: name,
-									showMain: function showMain() {},
-									showError: function showError() {},
-									showException: function showException() {},
-								};
-							(cleanup = context.renderStoryToElement({ story, renderContext, element: storyRef.current, viewMode: 'docs' })), setShowLoader(!1);
-						}
-						return function () {
-							return cleanup && cleanup();
-						};
-					},
-					[story]
-				);
-				var _makeGate2 = Story_slicedToArray(makeGate(), 2),
-					storyFnRan = _makeGate2[0],
-					onStoryFnRan = _makeGate2[1],
-					_makeGate4 = Story_slicedToArray(makeGate(), 2),
-					rendered = _makeGate4[0],
-					onRendered = _makeGate4[1];
-				if (((0, compat_module.useEffect)(onRendered), !story)) return compat_module.default.createElement(StorySkeleton, null);
-				var storyProps = getStoryProps(props, story, context, onStoryFnRan);
-				if (!storyProps) return null;
-				if (storyProps.inline) {
-					var _global$FEATURES;
-					if (
-						null !== window_default() &&
-						void 0 !== window_default() &&
-						null !== (_global$FEATURES = window_default().FEATURES) &&
-						void 0 !== _global$FEATURES &&
-						_global$FEATURES.modernInlineRender
-					) {
-						var height = storyProps.height;
-						return compat_module.default.createElement(
-							'div',
-							{ id: storyBlockIdFromId(story.id) },
-							compat_module.default.createElement(
-								react_dist_esm.Zo,
-								{ components: dist_esm.resetComponents },
-								height
-									? compat_module.default.createElement(
-											'style',
-											null,
-											'#story--'.concat(story.id, ' { min-height: ').concat(height, '; transform: translateZ(0); overflow: auto }')
-									  )
-									: null,
-								showLoader && compat_module.default.createElement(StorySkeleton, null),
-								compat_module.default.createElement('div', {
-									ref: storyRef,
-									'data-name': story.name,
-									dangerouslySetInnerHTML: { __html: '<span></span>' },
-								})
-							)
-						);
-					}
-					Promise.all([storyFnRan, rendered]).then(function () {
-						channel.emit(core_events_dist_esm.default.STORY_RENDERED, storyId);
-					});
-				}
-				return compat_module.default.createElement(
-					'div',
-					{ id: storyBlockIdFromId(story.id) },
-					compat_module.default.createElement(
-						react_dist_esm.Zo,
-						{ components: dist_esm.resetComponents },
-						compat_module.default.createElement(Story_Story, storyProps)
-					)
-				);
-			};
-			function ArgsTable_extends() {
-				return (
-					(ArgsTable_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					ArgsTable_extends.apply(this, arguments)
-				);
-			}
-			function ArgsTable_defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			function ArgsTable_slicedToArray(arr, i) {
-				return (
-					(function ArgsTable_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function ArgsTable_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function ArgsTable_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return ArgsTable_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ArgsTable_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function ArgsTable_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function ArgsTable_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			Story.defaultProps = { children: null, name: null };
-			var extractComponentArgTypes = function extractComponentArgTypes(component, _ref, include, exclude) {
-					var id = _ref.id,
-						extractArgTypes = ((0, _ref.storyById)(id).parameters.docs || {}).extractArgTypes;
-					if (!extractArgTypes) throw new Error(dist_esm.ArgsTableError.ARGS_UNSUPPORTED);
-					var argTypes = extractArgTypes(component);
-					return (argTypes = (0, filterArgTypes.h)(argTypes, include, exclude));
-				},
-				isShortcut = function isShortcut(value) {
-					return value && [CURRENT_SELECTION, PRIMARY_STORY].includes(value);
-				},
-				getComponent = function getComponent() {
-					var props = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						_ref3 = arguments.length > 1 ? arguments[1] : void 0,
-						id = _ref3.id,
-						storyById = _ref3.storyById,
-						_ref4 = props,
-						of = _ref4.of,
-						_ref5 = props,
-						story = _ref5.story,
-						_storyById2 = storyById(id),
-						component = _storyById2.component;
-					if (isShortcut(of) || isShortcut(story)) return component || null;
-					if (!of) throw new Error(dist_esm.ArgsTableError.NO_COMPONENT);
-					return of;
-				},
-				addComponentTabs = function addComponentTabs(tabs, components, context, include, exclude, sort) {
-					return Object.assign(
-						{},
-						tabs,
-						mapValues_default()(components, function (comp) {
-							return { rows: extractComponentArgTypes(comp, context, include, exclude), sort };
-						})
-					);
-				},
-				StoryTable = function StoryTable(props) {
-					var context = (0, compat_module.useContext)(DocsContext),
-						currentId = context.id,
-						componentStories = context.componentStories,
-						storyName = props.story,
-						component = props.component,
-						subcomponents = props.subcomponents,
-						showComponent = props.showComponent,
-						include = props.include,
-						exclude = props.exclude,
-						sort = props.sort;
-					try {
-						var storyId;
-						switch (storyName) {
-							case CURRENT_SELECTION:
-								storyId = currentId;
-								break;
-							case PRIMARY_STORY:
-								storyId = componentStories()[0].id;
-								break;
-							default:
-								storyId = lookupStoryId(storyName, context);
-						}
-						var story = useStory(storyId, context),
-							_useArgs = (function useArgs(storyId, context) {
-								var channel = addons_dist_esm.KP.getChannel(),
-									story = context.storyById(storyId);
-								if (!story) throw new Error('Unknown story: '.concat(storyId));
-								var storyContext = context.getStoryContext(story),
-									_useState2 = ArgsTable_slicedToArray((0, compat_module.useState)(storyContext.args), 2),
-									args = _useState2[0],
-									setArgs = _useState2[1];
-								return (
-									(0, compat_module.useEffect)(
-										function () {
-											var cb = function cb(changed) {
-												changed.storyId === storyId && setArgs(changed.args);
-											};
-											return (
-												channel.on(core_events_dist_esm.default.STORY_ARGS_UPDATED, cb),
-												function () {
-													return channel.off(core_events_dist_esm.default.STORY_ARGS_UPDATED, cb);
-												}
-											);
-										},
-										[storyId]
-									),
-									[
-										args,
-										(0, compat_module.useCallback)(
-											function (updatedArgs) {
-												return channel.emit(core_events_dist_esm.default.UPDATE_STORY_ARGS, { storyId, updatedArgs });
-											},
-											[storyId]
-										),
-										(0, compat_module.useCallback)(
-											function (argNames) {
-												return channel.emit(core_events_dist_esm.default.RESET_STORY_ARGS, { storyId, argNames });
-											},
-											[storyId]
-										),
-									]
-								);
-							})(storyId, context),
-							_useArgs2 = ArgsTable_slicedToArray(_useArgs, 3),
-							args = _useArgs2[0],
-							updateArgs = _useArgs2[1],
-							resetArgs = _useArgs2[2];
-						if (!story) return compat_module.default.createElement(dist_esm.ArgsTable, { isLoading: !0, updateArgs, resetArgs });
-						var argTypes = (0, filterArgTypes.h)(story.argTypes, include, exclude),
-							mainLabel = getComponentName(component) || 'Story',
-							tabs = ArgsTable_defineProperty({}, mainLabel, { rows: argTypes, args, updateArgs, resetArgs }),
-							storyHasArgsWithControls =
-								argTypes &&
-								Object.values(argTypes).find(function (v) {
-									return !(null == v || !v.control);
-								});
-						if (
-							(storyHasArgsWithControls || ((updateArgs = null), (resetArgs = null), (tabs = {})),
-							!component ||
-								(storyHasArgsWithControls && !showComponent) ||
-								(tabs = addComponentTabs(tabs, ArgsTable_defineProperty({}, mainLabel, component), context, include, exclude)),
-							subcomponents)
-						) {
-							if (Array.isArray(subcomponents))
-								throw new Error('Unexpected subcomponents array. Expected an object whose keys are tab labels and whose values are components.');
-							tabs = addComponentTabs(tabs, subcomponents, context, include, exclude);
-						}
-						return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
-					} catch (err) {
-						return compat_module.default.createElement(dist_esm.ArgsTable, { error: err.message });
-					}
-				},
-				ComponentsTable = function ComponentsTable(props) {
-					var context = (0, compat_module.useContext)(DocsContext),
-						components = props.components,
-						include = props.include,
-						exclude = props.exclude,
-						sort = props.sort,
-						tabs = addComponentTabs({}, components, context, include, exclude);
-					return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
-				},
-				ArgsTable = function ArgsTable(props) {
-					var context = (0, compat_module.useContext)(DocsContext),
-						id = context.id,
-						_storyById3 = (0, context.storyById)(id),
-						controls = _storyById3.parameters.controls,
-						subcomponents = _storyById3.subcomponents,
-						_ref6 = props,
-						include = _ref6.include,
-						exclude = _ref6.exclude,
-						components = _ref6.components,
-						sortProp = _ref6.sort,
-						storyName = props.story,
-						sort = sortProp || (null == controls ? void 0 : controls.sort),
-						main = getComponent(props, context);
-					if (storyName)
-						return compat_module.default.createElement(StoryTable, ArgsTable_extends({}, props, { component: main, subcomponents, sort }));
-					if (!components && !subcomponents) {
-						var mainProps;
-						try {
-							mainProps = { rows: extractComponentArgTypes(main, context, include, exclude) };
-						} catch (err) {
-							mainProps = { error: err.message };
-						}
-						return compat_module.default.createElement(dist_esm.ArgsTable, ArgsTable_extends({}, mainProps, { sort }));
-					}
-					if (components) return compat_module.default.createElement(ComponentsTable, ArgsTable_extends({}, props, { components, sort }));
-					var mainLabel = getComponentName(main);
-					return compat_module.default.createElement(
-						ComponentsTable,
-						ArgsTable_extends({}, props, { components: Object.assign(ArgsTable_defineProperty({}, mainLabel, main), subcomponents), sort })
-					);
-				};
-			ArgsTable.defaultProps = { of: CURRENT_SELECTION };
-			__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js');
-			var blocks_Source = __webpack_require__('../../node_modules/@storybook/components/dist/esm/blocks/Source.js'),
-				ActionBar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ActionBar/ActionBar.js'),
-				bar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/bar/bar.js'),
-				bar_button = __webpack_require__('../../node_modules/@storybook/components/dist/esm/bar/button.js');
-			function Toolbar_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Toolbar_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var Zoom = function Zoom(_ref) {
-					var zoom = _ref.zoom,
-						resetZoom = _ref.resetZoom;
-					return compat_module.default.createElement(
-						compat_module.default.Fragment,
-						null,
-						compat_module.default.createElement(
-							bar_button.hU,
-							{
-								key: 'zoomin',
-								onClick: function onClick(e) {
-									e.preventDefault(), zoom(0.8);
-								},
-								title: 'Zoom in',
-							},
-							compat_module.default.createElement(icon.P, { icon: 'zoom' })
-						),
-						compat_module.default.createElement(
-							bar_button.hU,
-							{
-								key: 'zoomout',
-								onClick: function onClick(e) {
-									e.preventDefault(), zoom(1.25);
-								},
-								title: 'Zoom out',
-							},
-							compat_module.default.createElement(icon.P, { icon: 'zoomout' })
-						),
-						compat_module.default.createElement(
-							bar_button.hU,
-							{
-								key: 'zoomreset',
-								onClick: function onClick(e) {
-									e.preventDefault(), resetZoom();
-								},
-								title: 'Reset zoom',
-							},
-							compat_module.default.createElement(icon.P, { icon: 'zoomreset' })
-						)
-					);
-				},
-				Eject = function Eject(_ref2) {
-					var baseUrl = _ref2.baseUrl,
-						storyId = _ref2.storyId;
-					return compat_module.default.createElement(
-						bar_button.hU,
-						{ key: 'opener', href: ''.concat(baseUrl, '?id=').concat(storyId), target: '_blank', title: 'Open canvas in new tab' },
-						compat_module.default.createElement(icon.P, { icon: 'share' })
-					);
-				};
-			Eject.displayName = 'Eject';
-			var Bar = (0, esm.styled)(bar.j)({ position: 'absolute', left: 0, right: 0, top: 0, transition: 'transform .2s linear' }),
-				Toolbar = function Toolbar(_ref3) {
-					var isLoading = _ref3.isLoading,
-						storyId = _ref3.storyId,
-						baseUrl = _ref3.baseUrl,
-						zoom = _ref3.zoom,
-						resetZoom = _ref3.resetZoom,
-						rest = Toolbar_objectWithoutProperties(_ref3, ['isLoading', 'storyId', 'baseUrl', 'zoom', 'resetZoom']);
-					return compat_module.default.createElement(
-						Bar,
-						rest,
-						compat_module.default.createElement(
-							compat_module.Fragment,
-							{ key: 'left' },
-							isLoading
-								? [1, 2, 3].map(function (key) {
-										return compat_module.default.createElement(bar_button.Z$, { key });
-								  })
-								: compat_module.default.createElement(Zoom, { zoom, resetZoom })
-						),
-						compat_module.default.createElement(
-							compat_module.Fragment,
-							{ key: 'right' },
-							storyId &&
-								(isLoading
-									? compat_module.default.createElement(bar_button.Z$, null)
-									: compat_module.default.createElement(Eject, { storyId, baseUrl }))
-						)
-					);
-				};
-			Toolbar.displayName = 'Toolbar';
-			var browserSupportsCssZoom_globalWindow = window_default().window;
-			function browserSupportsCssZoom() {
-				try {
-					return void 0 !== browserSupportsCssZoom_globalWindow.document.implementation.createHTMLDocument('').body.style.zoom;
-				} catch (error) {
-					return !1;
-				}
-			}
-			function ZoomElement_slicedToArray(arr, i) {
-				return (
-					(function ZoomElement_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function ZoomElement_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function ZoomElement_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return ZoomElement_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ZoomElement_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function ZoomElement_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function ZoomElement_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			var ZoomElementWrapper = esm.styled.div(function (_ref) {
-				var _ref$scale = _ref.scale,
-					scale = void 0 === _ref$scale ? 1 : _ref$scale,
-					height = _ref.height;
-				return browserSupportsCssZoom()
-					? { '> *': { zoom: 1 / scale } }
-					: { height: height + 50, transformOrigin: 'top left', transform: 'scale('.concat(1 / scale, ')') };
-			});
-			function ZoomElement(_ref2) {
-				var scale = _ref2.scale,
-					children = _ref2.children,
-					componentWrapperRef = compat_module.default.useRef(null),
-					_useState2 = ZoomElement_slicedToArray((0, compat_module.useState)(0), 2),
-					height = _useState2[0],
-					setHeight = _useState2[1];
-				return (
-					(0, compat_module.useEffect)(
-						function () {
-							componentWrapperRef.current && setHeight(componentWrapperRef.current.getBoundingClientRect().height);
-						},
-						[scale, componentWrapperRef.current]
-					),
-					compat_module.default.createElement(
-						ZoomElementWrapper,
-						{ scale, height },
-						compat_module.default.createElement('div', { ref: componentWrapperRef, className: 'innerZoomElementWrapper' }, children)
-					)
-				);
-			}
-			function ZoomIFrame_typeof(obj) {
-				return (
-					(ZoomIFrame_typeof =
-						'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
-							? function _typeof(obj) {
-									return typeof obj;
-							  }
-							: function _typeof(obj) {
-									return obj && 'function' == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
-							  }),
-					ZoomIFrame_typeof(obj)
-				);
-			}
-			function ZoomIFrame_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function ZoomIFrame_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function ZoomIFrame_setPrototypeOf(o, p) {
-				return (
-					(ZoomIFrame_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					ZoomIFrame_setPrototypeOf(o, p)
-				);
-			}
-			function ZoomIFrame_createSuper(Derived) {
-				var hasNativeReflectConstruct = (function ZoomIFrame_isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = ZoomIFrame_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = ZoomIFrame_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return ZoomIFrame_possibleConstructorReturn(this, result);
-				};
-			}
-			function ZoomIFrame_possibleConstructorReturn(self, call) {
-				return !call || ('object' !== ZoomIFrame_typeof(call) && 'function' != typeof call)
-					? (function ZoomIFrame_assertThisInitialized(self) {
-							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-							return self;
-					  })(self)
-					: call;
-			}
-			function ZoomIFrame_getPrototypeOf(o) {
-				return (
-					(ZoomIFrame_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					ZoomIFrame_getPrototypeOf(o)
-				);
-			}
-			ZoomElement.displayName = 'ZoomElement';
-			var ZoomIFrame = (function (_Component) {
-				!(function ZoomIFrame_inherits(subClass, superClass) {
-					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-					(subClass.prototype = Object.create(superClass && superClass.prototype, {
-						constructor: { value: subClass, writable: !0, configurable: !0 },
-					})),
-						superClass && ZoomIFrame_setPrototypeOf(subClass, superClass);
-				})(ZoomIFrame, _Component);
-				var _super = ZoomIFrame_createSuper(ZoomIFrame);
-				function ZoomIFrame() {
-					var _this;
-					ZoomIFrame_classCallCheck(this, ZoomIFrame);
-					for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-					return ((_this = _super.call.apply(_super, [this].concat(args))).iframe = null), _this;
-				}
-				return (
-					(function ZoomIFrame_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && ZoomIFrame_defineProperties(Constructor.prototype, protoProps),
-							staticProps && ZoomIFrame_defineProperties(Constructor, staticProps),
-							Constructor
-						);
-					})(ZoomIFrame, [
-						{
-							key: 'componentDidMount',
-							value: function componentDidMount() {
-								var iFrameRef = this.props.iFrameRef;
-								this.iframe = iFrameRef.current;
-							},
-						},
-						{
-							key: 'shouldComponentUpdate',
-							value: function shouldComponentUpdate(nextProps) {
-								var _this$props = this.props,
-									scale = _this$props.scale,
-									active = _this$props.active;
-								return (
-									scale !== nextProps.scale && this.setIframeInnerZoom(nextProps.scale),
-									active !== nextProps.active && this.iframe.setAttribute('data-is-storybook', nextProps.active ? 'true' : 'false'),
-									!1
-								);
-							},
-						},
-						{
-							key: 'setIframeInnerZoom',
-							value: function setIframeInnerZoom(scale) {
-								try {
-									browserSupportsCssZoom()
-										? Object.assign(this.iframe.contentDocument.body.style, { zoom: 1 / scale })
-										: Object.assign(this.iframe.contentDocument.body.style, {
-												width: ''.concat(100 * scale, '%'),
-												height: ''.concat(100 * scale, '%'),
-												transform: 'scale('.concat(1 / scale, ')'),
-												transformOrigin: 'top left',
-										  });
-								} catch (e) {
-									this.setIframeZoom(scale);
-								}
-							},
-						},
-						{
-							key: 'setIframeZoom',
-							value: function setIframeZoom(scale) {
-								Object.assign(this.iframe.style, {
-									width: ''.concat(100 * scale, '%'),
-									height: ''.concat(100 * scale, '%'),
-									transform: 'scale('.concat(1 / scale, ')'),
-									transformOrigin: 'top left',
-								});
-							},
-						},
-						{
-							key: 'render',
-							value: function render() {
-								return this.props.children;
-							},
-						},
-					]),
-					ZoomIFrame
-				);
-			})(compat_module.Component);
-			ZoomIFrame.displayName = 'ZoomIFrame';
-			window_default().window;
-			var Zoom_Zoom_Element = ZoomElement;
-			function Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function _toConsumableArray(arr) {
-				return (
-					(function _arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return Preview_arrayLikeToArray(arr);
-					})(arr) ||
-					(function _iterableToArray(iter) {
-						if ('undefined' != typeof Symbol && Symbol.iterator in Object(iter)) return Array.from(iter);
-					})(arr) ||
-					Preview_unsupportedIterableToArray(arr) ||
-					(function _nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Preview_slicedToArray(arr, i) {
-				return (
-					(function Preview_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function Preview_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					Preview_unsupportedIterableToArray(arr, i) ||
-					(function Preview_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Preview_unsupportedIterableToArray(o, minLen) {
-				if (o) {
-					if ('string' == typeof o) return Preview_arrayLikeToArray(o, minLen);
-					var n = Object.prototype.toString.call(o).slice(8, -1);
-					return (
-						'Object' === n && o.constructor && (n = o.constructor.name),
-						'Map' === n || 'Set' === n
-							? Array.from(o)
-							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-							? Preview_arrayLikeToArray(o, minLen)
-							: void 0
-					);
-				}
-			}
-			function Preview_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function Preview_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Preview_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			function Preview_extends() {
-				return (
-					(Preview_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					Preview_extends.apply(this, arguments)
-				);
-			}
-			var ChildrenContainer = esm.styled.div(
-					function (_ref) {
-						var isColumn = _ref.isColumn,
-							columns = _ref.columns,
-							layout = _ref.layout;
-						return {
-							display: isColumn || !columns ? 'block' : 'flex',
-							position: 'relative',
-							flexWrap: 'wrap',
-							overflow: 'auto',
-							flexDirection: isColumn ? 'column' : 'row',
-							'& .innerZoomElementWrapper > *': isColumn
-								? { width: 'fullscreen' !== layout ? 'calc(100% - 20px)' : '100%', display: 'block' }
-								: { maxWidth: 'fullscreen' !== layout ? 'calc(100% - 20px)' : '100%', display: 'inline-block' },
-						};
-					},
-					function (_ref2) {
-						var _ref2$layout = _ref2.layout,
-							layout = void 0 === _ref2$layout ? 'padded' : _ref2$layout;
-						return 'centered' === layout || 'padded' === layout
-							? { padding: '30px 20px', margin: -10, '& .innerZoomElementWrapper > *': { width: 'auto', border: '10px solid transparent!important' } }
-							: {};
-					},
-					function (_ref3) {
-						var _ref3$layout = _ref3.layout;
-						return 'centered' === (void 0 === _ref3$layout ? 'padded' : _ref3$layout)
-							? { display: 'flex', justifyContent: 'center', justifyItems: 'center', alignContent: 'center', alignItems: 'center' }
-							: {};
-					},
-					function (_ref4) {
-						var columns = _ref4.columns;
-						return columns && columns > 1 ? { '.innerZoomElementWrapper > *': { minWidth: 'calc(100% / '.concat(columns, ' - 20px)') } } : {};
-					}
-				),
-				StyledSource = (0, esm.styled)(blocks_Source.Hw)(function (_ref5) {
-					var theme = _ref5.theme;
-					return {
-						margin: 0,
-						borderTopLeftRadius: 0,
-						borderTopRightRadius: 0,
-						borderBottomLeftRadius: theme.appBorderRadius,
-						borderBottomRightRadius: theme.appBorderRadius,
-						border: 'none',
-						background: 'light' === theme.base ? 'rgba(0, 0, 0, 0.85)' : (0, polished_esm._j)(0.05, theme.background.content),
-						color: theme.color.lightest,
-						button: { background: 'light' === theme.base ? 'rgba(0, 0, 0, 0.85)' : (0, polished_esm._j)(0.05, theme.background.content) },
-					};
-				}),
-				PreviewContainer = esm.styled.div(
-					function (_ref6) {
-						var theme = _ref6.theme,
-							withSource = _ref6.withSource,
-							isExpanded = _ref6.isExpanded;
-						return Object.assign({ position: 'relative', overflow: 'hidden', margin: '25px 0 40px' }, getBlockBackgroundStyle(theme), {
-							borderBottomLeftRadius: withSource && isExpanded && 0,
-							borderBottomRightRadius: withSource && isExpanded && 0,
-							borderBottomWidth: isExpanded && 0,
-						});
-					},
-					function (_ref7) {
-						return _ref7.withToolbar && { paddingTop: 40 };
-					}
-				);
-			function Preview_getStoryId(children) {
-				if (1 === compat_module.Children.count(children)) {
-					var elt = children;
-					if (elt.props) return elt.props.id;
-				}
-				return null;
-			}
-			var PositionedToolbar = (0, esm.styled)(Toolbar)({ position: 'absolute', top: 0, left: 0, right: 0, height: 40 }),
-				Relative = esm.styled.div({ overflow: 'hidden', position: 'relative' }),
-				Preview = function Preview(_ref8) {
-					var isLoading = _ref8.isLoading,
-						isColumn = _ref8.isColumn,
-						columns = _ref8.columns,
-						children = _ref8.children,
-						withSource = _ref8.withSource,
-						_ref8$withToolbar = _ref8.withToolbar,
-						withToolbar = void 0 !== _ref8$withToolbar && _ref8$withToolbar,
-						_ref8$isExpanded = _ref8.isExpanded,
-						isExpanded = void 0 !== _ref8$isExpanded && _ref8$isExpanded,
-						additionalActions = _ref8.additionalActions,
-						className = _ref8.className,
-						props = Preview_objectWithoutProperties(_ref8, [
-							'isLoading',
-							'isColumn',
-							'columns',
-							'children',
-							'withSource',
-							'withToolbar',
-							'isExpanded',
-							'additionalActions',
-							'className',
-						]),
-						_useState2 = Preview_slicedToArray((0, compat_module.useState)(isExpanded), 2),
-						expanded = _useState2[0],
-						_getSource = (function getSource(withSource, expanded, setExpanded) {
-							switch (!0) {
-								case !(!withSource || !withSource.error):
-									return {
-										source: null,
-										actionItem: {
-											title: 'No code available',
-											className: 'docblock-code-toggle docblock-code-toggle--disabled',
-											disabled: !0,
-											onClick: function onClick() {
-												return setExpanded(!1);
-											},
-										},
-									};
-								case expanded:
-									return {
-										source: compat_module.default.createElement(StyledSource, Preview_extends({}, withSource, { dark: !0 })),
-										actionItem: {
-											title: 'Hide code',
-											className: 'docblock-code-toggle docblock-code-toggle--expanded',
-											onClick: function onClick() {
-												return setExpanded(!1);
-											},
-										},
-									};
-								default:
-									return {
-										source: compat_module.default.createElement(StyledSource, Preview_extends({}, withSource, { dark: !0 })),
-										actionItem: {
-											title: 'Show code',
-											className: 'docblock-code-toggle',
-											onClick: function onClick() {
-												return setExpanded(!0);
-											},
-										},
-									};
-							}
-						})(withSource, expanded, _useState2[1]),
-						source = _getSource.source,
-						actionItem = _getSource.actionItem,
-						_useState4 = Preview_slicedToArray((0, compat_module.useState)(1), 2),
-						scale = _useState4[0],
-						setScale = _useState4[1],
-						previewClasses = [className].concat(['sbdocs', 'sbdocs-preview']),
-						defaultActionItems = withSource ? [actionItem] : [],
-						_useState6 = Preview_slicedToArray((0, compat_module.useState)(additionalActions ? _toConsumableArray(additionalActions) : []), 2),
-						additionalActionItems = _useState6[0],
-						setAdditionalActionItems = _useState6[1],
-						actionItems = [].concat(defaultActionItems, _toConsumableArray(additionalActionItems)),
-						layout = (function getLayout(children) {
-							return children.reduce(function (result, c) {
-								return (
-									result ||
-									('string' == typeof c || 'number' == typeof c ? 'padded' : (c.props && c.props.parameters && c.props.parameters.layout) || 'padded')
-								);
-							}, void 0);
-						})(1 === compat_module.Children.count(children) ? [children] : children),
-						globalWindow = window_default().window,
-						copyToClipboard = (0, compat_module.useCallback)(
-							(function () {
-								var _ref9 = (function Preview_asyncToGenerator(fn) {
-									return function () {
-										var self = this,
-											args = arguments;
-										return new Promise(function (resolve, reject) {
-											var gen = fn.apply(self, args);
-											function _next(value) {
-												Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-											}
-											function _throw(err) {
-												Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-											}
-											_next(void 0);
-										});
-									};
-								})(
-									regeneratorRuntime.mark(function _callee(text) {
-										var _yield$import;
-										return regeneratorRuntime.wrap(function _callee$(_context) {
-											for (;;)
-												switch ((_context.prev = _context.next)) {
-													case 0:
-														return (
-															(_context.next = 2),
-															__webpack_require__
-																.e(172)
-																.then(
-																	__webpack_require__.bind(
-																		__webpack_require__,
-																		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js'
-																	)
-																)
-														);
-													case 2:
-														(_yield$import = _context.sent), (0, _yield$import.createCopyToClipboardFunction)();
-													case 5:
-													case 'end':
-														return _context.stop();
-												}
-										}, _callee);
-									})
-								);
-								return function (_x) {
-									return _ref9.apply(this, arguments);
-								};
-							})(),
-							[]
-						);
-					return compat_module.default.createElement(
-						PreviewContainer,
-						Preview_extends({ withSource, withToolbar }, props, { className: previewClasses.join(' ') }),
-						withToolbar &&
-							compat_module.default.createElement(PositionedToolbar, {
-								isLoading,
-								border: !0,
-								zoom: function zoom(z) {
-									return setScale(scale * z);
-								},
-								resetZoom: function resetZoom() {
-									return setScale(1);
-								},
-								storyId: Preview_getStoryId(children),
-								baseUrl: './iframe.html',
-							}),
-						compat_module.default.createElement(
-							ZoomContext.Provider,
-							{ value: { scale } },
-							compat_module.default.createElement(
-								Relative,
-								{
-									className: 'docs-story',
-									onCopyCapture:
-										withSource &&
-										function onCopyCapture(e) {
-											e.preventDefault(),
-												0 ===
-													additionalActionItems.filter(function (item) {
-														return 'Copied' === item.title;
-													}).length &&
-													copyToClipboard(source.props.code).then(function () {
-														setAdditionalActionItems(
-															[].concat(_toConsumableArray(additionalActionItems), [{ title: 'Copied', onClick: function onClick() {} }])
-														),
-															globalWindow.setTimeout(function () {
-																return setAdditionalActionItems(
-																	additionalActionItems.filter(function (item) {
-																		return 'Copied' !== item.title;
-																	})
-																);
-															}, 1500);
-													});
-										},
-								},
-								compat_module.default.createElement(
-									ChildrenContainer,
-									{ isColumn: isColumn || !Array.isArray(children), columns, layout },
-									compat_module.default.createElement(
-										Zoom_Zoom_Element,
-										{ scale },
-										Array.isArray(children)
-											? children.map(function (child, i) {
-													return compat_module.default.createElement('div', { key: i }, child);
-											  })
-											: compat_module.default.createElement('div', null, children)
-									)
-								),
-								compat_module.default.createElement(ActionBar.o, { actionItems })
-							)
-						),
-						withSource && expanded && source
-					);
-				};
-			Preview.displayName = 'Preview';
-			var StyledPreview = (0, esm.styled)(Preview)(function () {
-					return { '.docs-story': { paddingTop: 32, paddingBottom: 40 } };
-				}),
-				PreviewSkeleton = function PreviewSkeleton() {
-					return compat_module.default.createElement(
-						StyledPreview,
-						{ isLoading: !0, withToolbar: !0 },
-						compat_module.default.createElement(StorySkeleton, null)
-					);
-				};
-			PreviewSkeleton.displayName = 'PreviewSkeleton';
-			var SourceType,
-				fast_deep_equal = __webpack_require__('../../node_modules/fast-deep-equal/index.js'),
-				fast_deep_equal_default = __webpack_require__.n(fast_deep_equal),
-				SNIPPET_RENDERED = (''.concat('storybook/docs', '/panel'), ''.concat('storybook/docs', '/snippet-rendered'));
-			function SourceContainer_slicedToArray(arr, i) {
-				return (
-					(function SourceContainer_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function SourceContainer_iterableToArrayLimit(arr, i) {
-						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
-						var _arr = [],
-							_n = !0,
-							_d = !1,
-							_e = void 0;
-						try {
-							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function SourceContainer_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return SourceContainer_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return SourceContainer_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function SourceContainer_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function SourceContainer_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			!(function (SourceType) {
-				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
-			})(SourceType || (SourceType = {}));
-			var SourceContext = (0, compat_module.createContext)({ sources: {} }),
-				SourceContainer = function SourceContainer(_ref) {
-					var children = _ref.children,
-						_useState2 = SourceContainer_slicedToArray((0, compat_module.useState)({}), 2),
-						sources = _useState2[0],
-						setSources = _useState2[1],
-						channel = addons_dist_esm.KP.getChannel();
-					return (
-						(0, compat_module.useEffect)(function () {
-							var handleSnippetRendered = function handleSnippetRendered(id, newItem) {
-								newItem !== sources[id] &&
-									setSources(function (current) {
-										var newSources = Object.assign(
-											{},
-											current,
-											(function SourceContainer_defineProperty(obj, key, value) {
-												return (
-													key in obj
-														? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 })
-														: (obj[key] = value),
-													obj
-												);
-											})({}, id, newItem)
-										);
-										return fast_deep_equal_default()(current, newSources) ? current : newSources;
-									});
-							};
-							return (
-								channel.on(SNIPPET_RENDERED, handleSnippetRendered),
-								function () {
-									return channel.off(SNIPPET_RENDERED, handleSnippetRendered);
-								}
-							);
-						}),
-						compat_module.default.createElement(SourceContext.Provider, { value: { sources } }, children)
-					);
-				},
-				esm_parameters =
-					(__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-					__webpack_require__('../../node_modules/@storybook/store/dist/esm/parameters.js'));
-			function enhanceSource_toConsumableArray(arr) {
-				return (
-					(function enhanceSource_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return enhanceSource_arrayLikeToArray(arr);
-					})(arr) ||
-					(function enhanceSource_iterableToArray(iter) {
-						if ('undefined' != typeof Symbol && Symbol.iterator in Object(iter)) return Array.from(iter);
-					})(arr) ||
-					(function enhanceSource_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return enhanceSource_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return enhanceSource_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function enhanceSource_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function enhanceSource_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			var SourceState,
-				extract = function extract(targetId, _ref) {
-					var source = _ref.source,
-						locationsMap = _ref.locationsMap;
-					if (!locationsMap) return source;
-					var location =
-						locationsMap[
-							(function storyIdToSanitizedStoryName(id) {
-								return id.replace(/^.*?--/, '');
-							})(targetId)
-						];
-					return location
-						? (function extractSource(location, lines) {
-								var start = location.startBody,
-									end = location.endBody;
-								if (start.line === end.line && void 0 !== lines[start.line - 1]) return lines[start.line - 1].substring(start.col, end.col);
-								var startLine = lines[start.line - 1],
-									endLine = lines[end.line - 1];
-								return void 0 === startLine || void 0 === endLine
-									? null
-									: [startLine.substring(start.col)]
-											.concat(enhanceSource_toConsumableArray(lines.slice(start.line, end.line - 1)), [endLine.substring(0, end.col)])
-											.join('\n');
-						  })(location, source.split('\n'))
-						: source;
-				};
-			!(function (SourceState) {
-				(SourceState.OPEN = 'open'), (SourceState.CLOSED = 'closed'), (SourceState.NONE = 'none');
-			})(SourceState || (SourceState = {}));
-			var getSnippet = function getSnippet(snippet, story) {
-					var _parameters$docs, _parameters$docs$sour, _parameters$docs2, _parameters$docs2$sou, _enhanced$docs, _enhanced$docs$source;
-					if (!story) return snippet;
-					var _parameters$docs3,
-						_parameters$docs3$tra,
-						_parameters$docs4,
-						_parameters$docs4$tra,
-						parameters = story.parameters,
-						isArgsStory = parameters.__isArgsStory,
-						type =
-							(null === (_parameters$docs = parameters.docs) ||
-							void 0 === _parameters$docs ||
-							null === (_parameters$docs$sour = _parameters$docs.source) ||
-							void 0 === _parameters$docs$sour
-								? void 0
-								: _parameters$docs$sour.type) || SourceType.AUTO,
-						userCode =
-							null === (_parameters$docs2 = parameters.docs) ||
-							void 0 === _parameters$docs2 ||
-							null === (_parameters$docs2$sou = _parameters$docs2.source) ||
-							void 0 === _parameters$docs2$sou
-								? void 0
-								: _parameters$docs2$sou.code;
-					if (void 0 !== userCode) return userCode;
-					if (type === SourceType.DYNAMIC)
-						return (
-							(null === (_parameters$docs3 = parameters.docs) ||
-							void 0 === _parameters$docs3 ||
-							null === (_parameters$docs3$tra = _parameters$docs3.transformSource) ||
-							void 0 === _parameters$docs3$tra
-								? void 0
-								: _parameters$docs3$tra.call(_parameters$docs3, snippet, story)) || snippet
-						);
-					if (type === SourceType.AUTO && snippet && isArgsStory)
-						return (
-							(null === (_parameters$docs4 = parameters.docs) ||
-							void 0 === _parameters$docs4 ||
-							null === (_parameters$docs4$tra = _parameters$docs4.transformSource) ||
-							void 0 === _parameters$docs4$tra
-								? void 0
-								: _parameters$docs4$tra.call(_parameters$docs4, snippet, story)) || snippet
-						);
-					var enhanced =
-						(function enhanceSource(story) {
-							var _docs$source,
-								id = story.id,
-								parameters = story.parameters,
-								storySource = parameters.storySource,
-								_parameters$docs = parameters.docs,
-								docs = void 0 === _parameters$docs ? {} : _parameters$docs,
-								transformSource = docs.transformSource;
-							if (
-								null == storySource ||
-								!storySource.source ||
-								(null !== (_docs$source = docs.source) && void 0 !== _docs$source && _docs$source.code)
-							)
-								return null;
-							var input = extract(id, storySource),
-								code = transformSource ? transformSource(input, story) : input;
-							return { docs: (0, esm_parameters.f)(docs, { source: { code } }) };
-						})(story) || parameters;
-					return (
-						(null == enhanced ||
-						null === (_enhanced$docs = enhanced.docs) ||
-						void 0 === _enhanced$docs ||
-						null === (_enhanced$docs$source = _enhanced$docs.source) ||
-						void 0 === _enhanced$docs$source
-							? void 0
-							: _enhanced$docs$source.code) || ''
-					);
-				},
-				getSourceProps = function getSourceProps(props, docsContext, sourceContext) {
-					var currentId = docsContext.id,
-						parameters = (0, docsContext.storyById)(currentId).parameters,
-						singleProps = props,
-						multiProps = props,
-						source = props.code,
-						storyIds = (multiProps.ids || [singleProps.id || currentId]).map(function (targetId) {
-							return targetId === CURRENT_SELECTION ? currentId : targetId;
-						}),
-						stories = useStories(storyIds, docsContext);
-					if (!stories.every(Boolean)) return { error: blocks_Source.ui.SOURCE_UNAVAILABLE, state: SourceState.NONE };
-					source ||
-						(source = storyIds
-							.map(function (storyId, idx) {
-								var storySource = (function getStorySource(storyId, sourceContext) {
-										var sources = sourceContext.sources;
-										return (null == sources ? void 0 : sources[storyId]) || '';
-									})(storyId, sourceContext),
-									storyObj = stories[idx];
-								return getSnippet(storySource, storyObj);
-							})
-							.join('\n\n'));
-					var state = (function getSourceState(stories) {
-							var states = stories
-								.map(function (story) {
-									var _story$parameters$doc, _story$parameters$doc2;
-									return null === (_story$parameters$doc = story.parameters.docs) ||
-										void 0 === _story$parameters$doc ||
-										null === (_story$parameters$doc2 = _story$parameters$doc.source) ||
-										void 0 === _story$parameters$doc2
-										? void 0
-										: _story$parameters$doc2.state;
-								})
-								.filter(Boolean);
-							return 0 === states.length ? SourceState.CLOSED : states[0];
-						})(stories),
-						_parameters$docs5 = parameters.docs,
-						_docsParameters$sourc = (void 0 === _parameters$docs5 ? {} : _parameters$docs5).source,
-						_sourceParameters$lan = (void 0 === _docsParameters$sourc ? {} : _docsParameters$sourc).language,
-						docsLanguage = void 0 === _sourceParameters$lan ? null : _sourceParameters$lan;
-					return source
-						? { code: source, state, language: props.language || docsLanguage || 'jsx', dark: props.dark || !1 }
-						: { error: blocks_Source.ui.SOURCE_UNAVAILABLE, state };
-				},
-				Source = function Source(props) {
-					var sourceContext = (0, compat_module.useContext)(SourceContext),
-						docsContext = (0, compat_module.useContext)(DocsContext),
-						sourceProps = getSourceProps(props, docsContext, sourceContext);
-					return compat_module.default.createElement(blocks_Source.Hw, sourceProps);
-				};
-			function Canvas_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function Canvas_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var types_TypeSystem,
-				Canvas = function Canvas(props) {
-					var _getPreviewProps = (function getPreviewProps(_ref, docsContext, sourceContext) {
-							var withSource = _ref.withSource,
-								mdxSource = _ref.mdxSource,
-								children = _ref.children,
-								props = Canvas_objectWithoutProperties(_ref, ['withSource', 'mdxSource', 'children']),
-								mdxComponentAnnotations = docsContext.mdxComponentAnnotations,
-								mdxStoryNameToKey = docsContext.mdxStoryNameToKey,
-								sourceState = withSource,
-								isLoading = !1;
-							if (sourceState === SourceState.NONE) return { isLoading, previewProps: props };
-							if (mdxSource)
-								return {
-									isLoading,
-									previewProps: Object.assign({}, props, { withSource: getSourceProps({ code: decodeURI(mdxSource) }, docsContext, sourceContext) }),
-								};
-							var targetIds = (Array.isArray(children) ? children : [children])
-									.filter(function (c) {
-										return c.props && (c.props.id || c.props.name);
-									})
-									.map(function (s) {
-										return (
-											s.props.id ||
-											(0, dist.toId)(
-												mdxComponentAnnotations.id || mdxComponentAnnotations.title,
-												(0, dist.storyNameFromExport)(mdxStoryNameToKey[s.props.name])
-											)
-										);
-									}),
-								sourceProps = getSourceProps({ ids: targetIds }, docsContext, sourceContext);
-							return (
-								sourceState || (sourceState = sourceProps.state),
-								{
-									isLoading: (isLoading = useStories(targetIds, docsContext).some(function (s) {
-										return !s;
-									})),
-									previewProps: Object.assign({}, props, { withSource: sourceProps, isExpanded: sourceState === SourceState.OPEN }),
-								}
-							);
-						})(props, (0, compat_module.useContext)(DocsContext), (0, compat_module.useContext)(SourceContext)),
-						isLoading = _getPreviewProps.isLoading,
-						previewProps = _getPreviewProps.previewProps,
-						children = props.children;
-					return isLoading
-						? compat_module.default.createElement(PreviewSkeleton, null)
-						: compat_module.default.createElement(
-								react_dist_esm.Zo,
-								{ components: dist_esm.resetComponents },
-								compat_module.default.createElement(Preview, previewProps, children)
-						  );
-				},
-				index_modern =
-					(__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
-					__webpack_require__('../../node_modules/markdown-to-jsx/dist/index.modern.js')),
-				Description = function Description(_ref) {
-					var markdown = _ref.markdown;
-					return compat_module.default.createElement(
-						DocumentFormatting.i9,
-						null,
-						compat_module.default.createElement(index_modern.Z, { options: { forceBlock: !0, overrides: DocumentFormatting.wx } }, markdown)
-					);
-				};
-			(Description.displayName = 'Description'),
-				(function (TypeSystem) {
-					(TypeSystem.JAVASCRIPT = 'JavaScript'),
-						(TypeSystem.FLOW = 'Flow'),
-						(TypeSystem.TYPESCRIPT = 'TypeScript'),
-						(TypeSystem.UNKNOWN = 'Unknown');
-				})(types_TypeSystem || (types_TypeSystem = {}));
-			var string_str = function str(obj) {
-				if (!obj) return '';
-				if ('string' == typeof obj) return obj;
-				throw new Error('Description: expected string, got: '.concat(JSON.stringify(obj)));
-			};
-			__webpack_require__('../../node_modules/doctrine/lib/doctrine.js');
-			var FlowTypesType;
-			!(function (FlowTypesType) {
-				(FlowTypesType.UNION = 'union'), (FlowTypesType.SIGNATURE = 'signature');
-			})(FlowTypesType || (FlowTypesType = {}));
-			__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js');
-			var DescriptionType;
-			!(function (DescriptionType) {
-				(DescriptionType.INFO = 'info'),
-					(DescriptionType.NOTES = 'notes'),
-					(DescriptionType.DOCGEN = 'docgen'),
-					(DescriptionType.LEGACY_5_2 = 'legacy-5.2'),
-					(DescriptionType.AUTO = 'auto');
-			})(DescriptionType || (DescriptionType = {}));
-			var getNotes = function getNotes(notes) {
-					return notes && ('string' == typeof notes ? notes : string_str(notes.markdown) || string_str(notes.text));
-				},
-				getInfo = function getInfo(info) {
-					return info && ('string' == typeof info ? info : string_str(info.text));
-				},
-				noDescription = function noDescription(component) {
-					return null;
-				},
-				getDescriptionProps = function getDescriptionProps(_ref, _ref2) {
-					var of = _ref.of,
-						type = _ref.type,
-						markdown = _ref.markdown,
-						children = _ref.children,
-						id = _ref2.id,
-						_storyById = (0, _ref2.storyById)(id),
-						component = _storyById.component,
-						parameters = _storyById.parameters;
-					if (children || markdown) return { markdown: children || markdown };
-					var notes = parameters.notes,
-						info = parameters.info,
-						_ref3 = parameters.docs || {},
-						_ref3$extractComponen = _ref3.extractComponentDescription,
-						extractComponentDescription = void 0 === _ref3$extractComponen ? noDescription : _ref3$extractComponen,
-						description = _ref3.description,
-						target = of === CURRENT_SELECTION ? component : of,
-						componentDescriptionParameter = null == description ? void 0 : description.component;
-					if (componentDescriptionParameter) return { markdown: componentDescriptionParameter };
-					switch (type) {
-						case DescriptionType.INFO:
-							return { markdown: getInfo(info) };
-						case DescriptionType.NOTES:
-							return { markdown: getNotes(notes) };
-						case DescriptionType.LEGACY_5_2:
-							return {
-								markdown: '\n'
-									.concat(getNotes(notes) || getInfo(info) || '', '\n\n')
-									.concat(extractComponentDescription(target) || '', '\n')
-									.trim(),
-							};
-						case DescriptionType.DOCGEN:
-						case DescriptionType.AUTO:
-						default:
-							return { markdown: extractComponentDescription(target, Object.assign({ component }, parameters)) };
-					}
-				},
-				DescriptionContainer = function DescriptionContainer(props) {
-					var context = (0, compat_module.useContext)(DocsContext),
-						markdown = getDescriptionProps(props, context).markdown;
-					return markdown ? compat_module.default.createElement(Description, { markdown }) : null;
-				};
-			function DocsPage_defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			DescriptionContainer.defaultProps = { of: '.' };
-			var DocsPage_Title = esm.styled.h1(shared.YX, function (_ref) {
-					var theme = _ref.theme;
-					return DocsPage_defineProperty(
-						{ color: theme.color.defaultText, fontSize: theme.typography.size.m3, fontWeight: theme.typography.weight.black, lineHeight: '32px' },
-						'@media (min-width: '.concat(600, 'px)'),
-						{ fontSize: theme.typography.size.l1, lineHeight: '36px', marginBottom: '.5rem' }
-					);
-				}),
-				DocsPage_Subtitle = esm.styled.h2(shared.YX, function (_ref3) {
-					var _ref4,
-						theme = _ref3.theme;
-					return (
-						DocsPage_defineProperty(
-							(_ref4 = {
-								fontWeight: theme.typography.weight.regular,
-								fontSize: theme.typography.size.s3,
-								lineHeight: '20px',
-								borderBottom: 'none',
-								marginBottom: 15,
-							}),
-							'@media (min-width: '.concat(600, 'px)'),
-							{ fontSize: theme.typography.size.m1, lineHeight: '28px', marginBottom: 24 }
-						),
-						DocsPage_defineProperty(_ref4, 'color', (0, polished_esm.DZ)(0.25, theme.color.defaultText)),
-						_ref4
-					);
-				}),
-				DocsContent = esm.styled.div({ maxWidth: 1e3, width: '100%' }),
-				DocsWrapper = esm.styled.div(function (_ref5) {
-					return DocsPage_defineProperty(
-						{
-							background: _ref5.theme.background.content,
-							display: 'flex',
-							justifyContent: 'center',
-							padding: '4rem 20px',
-							minHeight: '100vh',
-							boxSizing: 'border-box',
-						},
-						'@media (min-width: '.concat(600, 'px)'),
-						{}
-					);
-				}),
-				STORY_KIND_PATH_SEPARATOR = /\s*\/\s*/,
-				extractTitle = function extractTitle(_ref) {
-					var title = _ref.title,
-						groups = title.trim().split(STORY_KIND_PATH_SEPARATOR);
-					return (groups && groups[groups.length - 1]) || title;
-				},
-				Title = function Title(_ref2) {
-					var children = _ref2.children,
-						context = (0, compat_module.useContext)(DocsContext),
-						text = children;
-					return (
-						text || (text = extractTitle(context)),
-						text ? compat_module.default.createElement(DocsPage_Title, { className: 'sbdocs-title' }, text) : null
-					);
-				},
-				Subtitle = function Subtitle(_ref) {
-					var children = _ref.children,
-						_useContext = (0, compat_module.useContext)(DocsContext),
-						id = _useContext.id,
-						parameters = (0, _useContext.storyById)(id).parameters,
-						text = children;
-					return (
-						text || (text = null == parameters ? void 0 : parameters.componentSubtitle),
-						text ? compat_module.default.createElement(DocsPage_Subtitle, { className: 'sbdocs-subtitle' }, text) : null
-					);
-				},
-				browser = __webpack_require__('../../node_modules/util-deprecate/browser.js'),
-				browser_default = __webpack_require__.n(browser),
-				ts_dedent_esm = __webpack_require__('../../node_modules/ts-dedent/esm/index.js');
-			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.starts-with.js');
-			function mdx_defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			function mdx_extends() {
-				return (
-					(mdx_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					mdx_extends.apply(this, arguments)
-				);
-			}
-			function mdx_objectWithoutProperties(source, excluded) {
-				if (null == source) return {};
-				var key,
-					i,
-					target = (function mdx_objectWithoutPropertiesLoose(source, excluded) {
-						if (null == source) return {};
-						var key,
-							i,
-							target = {},
-							sourceKeys = Object.keys(source);
-						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
-						return target;
-					})(source, excluded);
-				if (Object.getOwnPropertySymbols) {
-					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-					for (i = 0; i < sourceSymbolKeys.length; i++)
-						(key = sourceSymbolKeys[i]),
-							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
-				}
-				return target;
-			}
-			var mdx_document = window_default().document,
-				assertIsFn = function assertIsFn(val) {
-					if ('function' != typeof val) throw new Error('Expected story function, got: '.concat(val));
-					return val;
-				},
-				AddContext = function AddContext(props) {
-					var children = props.children,
-						rest = mdx_objectWithoutProperties(props, ['children']),
-						parentContext = compat_module.default.useContext(DocsContext);
-					return compat_module.default.createElement(DocsContext.Provider, { value: Object.assign({}, parentContext, rest) }, children);
-				},
-				CodeOrSourceMdx = function CodeOrSourceMdx(_ref) {
-					var className = _ref.className,
-						children = _ref.children,
-						rest = mdx_objectWithoutProperties(_ref, ['className', 'children']);
-					if ('string' != typeof className && ('string' != typeof children || !children.match(/[\n\r]/g)))
-						return compat_module.default.createElement(DocumentFormatting.EK, null, children);
-					var language = className && className.split('-');
-					return compat_module.default.createElement(
-						blocks_Source.Hw,
-						mdx_extends({ language: (language && language[1]) || 'plaintext', format: !1, code: children }, rest)
-					);
-				};
-			function mdx_navigate(url) {
-				addons_dist_esm.KP.getChannel().emit(core_events_dist_esm.NAVIGATE_URL, url);
-			}
-			var DocsStory_templateObject,
-				A = DocumentFormatting.wx.a,
-				AnchorInPage = function AnchorInPage(_ref2) {
-					var hash = _ref2.hash,
-						children = _ref2.children;
-					return compat_module.default.createElement(
-						A,
-						{
-							href: hash,
-							target: '_self',
-							onClick: function onClick(event) {
-								var id = hash.substring(1);
-								mdx_document.getElementById(id) && mdx_navigate(hash);
-							},
-						},
-						children
-					);
-				},
-				AnchorMdx = function AnchorMdx(props) {
-					var href = props.href,
-						target = props.target,
-						children = props.children,
-						rest = mdx_objectWithoutProperties(props, ['href', 'target', 'children']);
-					if (href) {
-						if (href.startsWith('#')) return compat_module.default.createElement(AnchorInPage, { hash: href }, children);
-						if ('_blank' !== target)
-							return compat_module.default.createElement(
-								A,
-								mdx_extends(
-									{
-										href,
-										onClick: function onClick(event) {
-											event.preventDefault(), mdx_navigate(event.currentTarget.getAttribute('href'));
-										},
-										target,
-									},
-									rest
-								),
-								children
-							);
-					}
-					return compat_module.default.createElement(A, props);
-				},
-				SUPPORTED_MDX_HEADERS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-				OcticonHeaders = SUPPORTED_MDX_HEADERS.reduce(function (acc, headerType) {
-					return Object.assign(
-						{},
-						acc,
-						mdx_defineProperty(
-							{},
-							headerType,
-							(0, esm.styled)(DocumentFormatting.wx[headerType])({ '& svg': { visibility: 'hidden' }, '&:hover svg': { visibility: 'visible' } })
-						)
-					);
-				}, {}),
-				OcticonAnchor = esm.styled.a(function () {
-					return { float: 'left', paddingRight: '4px', marginLeft: '-20px', color: 'inherit' };
-				}),
-				HeaderWithOcticonAnchor = function HeaderWithOcticonAnchor(_ref3) {
-					var as = _ref3.as,
-						id = _ref3.id,
-						children = _ref3.children,
-						rest = mdx_objectWithoutProperties(_ref3, ['as', 'id', 'children']),
-						OcticonHeader = OcticonHeaders[as],
-						hash = '#'.concat(id);
-					return compat_module.default.createElement(
-						OcticonHeader,
-						mdx_extends({ id }, rest),
-						compat_module.default.createElement(
-							OcticonAnchor,
-							{
-								'aria-hidden': 'true',
-								href: hash,
-								tabIndex: -1,
-								target: '_self',
-								onClick: function onClick(event) {
-									mdx_document.getElementById(id) && mdx_navigate(hash);
-								},
-							},
-							compat_module.default.createElement(
-								'svg',
-								{ viewBox: '0 0 16 16', version: '1.1', width: '16', height: '16', 'aria-hidden': 'true', fill: 'currentColor' },
-								compat_module.default.createElement('path', {
-									fillRule: 'evenodd',
-									d: 'M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z',
-								})
-							)
-						),
-						children
-					);
-				},
-				HeaderMdx = function HeaderMdx(props) {
-					var as = props.as,
-						id = props.id,
-						children = props.children,
-						rest = mdx_objectWithoutProperties(props, ['as', 'id', 'children']);
-					if (id) return compat_module.default.createElement(HeaderWithOcticonAnchor, mdx_extends({ as, id }, rest), children);
-					var Header = DocumentFormatting.wx[as];
-					return compat_module.default.createElement(Header, props);
-				},
-				HeadersMdx = SUPPORTED_MDX_HEADERS.reduce(function (acc, headerType) {
-					return Object.assign(
-						{},
-						acc,
-						mdx_defineProperty({}, headerType, function (props) {
-							return compat_module.default.createElement(HeaderMdx, mdx_extends({ as: headerType }, props));
-						})
-					);
-				}, {}),
-				Subheading = function Subheading(_ref) {
-					var children = _ref.children;
-					if (_ref.disableAnchor || 'string' != typeof children) return compat_module.default.createElement(DocumentFormatting.H3, null, children);
-					var tagID = children.toLowerCase().replace(/[^a-z0-9]/gi, '-');
-					return compat_module.default.createElement(HeaderMdx, { as: 'h3', id: tagID }, children);
-				};
-			var warnStoryDescription = browser_default()(
-					function () {},
-					(0, ts_dedent_esm.C)(
-						DocsStory_templateObject ||
-							(DocsStory_templateObject = (function DocsStory_taggedTemplateLiteral(strings, raw) {
-								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-							})([
-								'\n    Deprecated parameter: docs.storyDescription => docs.description.story\n      \n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#docs-description-parameter\n  ',
-							]))
-					)
-				),
-				DocsStory = function DocsStory(_ref) {
-					var description,
-						_docs$description,
-						id = _ref.id,
-						name = _ref.name,
-						_ref$expanded = _ref.expanded,
-						expanded = void 0 === _ref$expanded || _ref$expanded,
-						_ref$withToolbar = _ref.withToolbar,
-						withToolbar = void 0 !== _ref$withToolbar && _ref$withToolbar,
-						_ref$parameters = _ref.parameters,
-						parameters = void 0 === _ref$parameters ? {} : _ref$parameters,
-						docs = parameters.docs;
-					expanded &&
-						docs &&
-						((description = null === (_docs$description = docs.description) || void 0 === _docs$description ? void 0 : _docs$description.story) ||
-							((description = docs.storyDescription) && warnStoryDescription()));
-					var subheading = expanded && name;
-					return compat_module.default.createElement(
-						Anchor,
-						{ storyId: id },
-						subheading && compat_module.default.createElement(Subheading, null, subheading),
-						description && compat_module.default.createElement(DescriptionContainer, { markdown: description }),
-						compat_module.default.createElement(Canvas, { withToolbar }, compat_module.default.createElement(Story, { id, parameters }))
-					);
-				};
-			function Primary_extends() {
-				return (
-					(Primary_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					Primary_extends.apply(this, arguments)
-				);
-			}
-			var Primary = function Primary(_ref) {
-					var story,
-						name = _ref.name,
-						componentStories = (0, (0, compat_module.useContext)(DocsContext).componentStories)();
-					return (
-						componentStories &&
-							(story = name
-								? componentStories.find(function (s) {
-										return s.name === name;
-								  })
-								: componentStories[0]),
-						story ? compat_module.default.createElement(DocsStory, Primary_extends({}, story, { expanded: !1, withToolbar: !0 })) : null
-					);
-				},
-				Heading = function Heading(_ref) {
-					var children = _ref.children;
-					if (_ref.disableAnchor || 'string' != typeof children) return compat_module.default.createElement(DocumentFormatting.H2, null, children);
-					var tagID = children.toLowerCase().replace(/[^a-z0-9]/gi, '-');
-					return compat_module.default.createElement(HeaderMdx, { as: 'h2', id: tagID }, children);
-				};
-			function Stories_extends() {
-				return (
-					(Stories_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					Stories_extends.apply(this, arguments)
-				);
-			}
-			var Stories = function Stories(_ref) {
-				var title = _ref.title,
-					_ref$includePrimary = _ref.includePrimary,
-					includePrimary = void 0 !== _ref$includePrimary && _ref$includePrimary,
-					stories = (0, (0, compat_module.useContext)(DocsContext).componentStories)();
-				return (
-					(stories = stories.filter(function (story) {
-						var _story$parameters, _story$parameters$doc;
-						return !(
-							null !== (_story$parameters = story.parameters) &&
-							void 0 !== _story$parameters &&
-							null !== (_story$parameters$doc = _story$parameters.docs) &&
-							void 0 !== _story$parameters$doc &&
-							_story$parameters$doc.disable
-						);
-					})),
-					includePrimary || (stories = stories.slice(1)),
-					stories && 0 !== stories.length
-						? compat_module.default.createElement(
-								compat_module.default.Fragment,
-								null,
-								compat_module.default.createElement(Heading, null, title),
-								stories.map(function (story) {
-									return story && compat_module.default.createElement(DocsStory, Stories_extends({ key: story.id }, story, { expanded: !0 }));
-								})
-						  )
-						: null
-				);
-			};
-			Stories.defaultProps = { title: 'Stories' };
-			var DocsPage = function DocsPage() {
-					return compat_module.default.createElement(
-						compat_module.default.Fragment,
-						null,
-						compat_module.default.createElement(Title, null),
-						compat_module.default.createElement(Subtitle, null),
-						compat_module.default.createElement(DescriptionContainer, null),
-						compat_module.default.createElement(Primary, null),
-						compat_module.default.createElement(ArgsTable, { story: PRIMARY_STORY }),
-						compat_module.default.createElement(Stories, null)
-					);
-				},
-				client_logger_dist_esm =
-					(__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
-					__webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'));
-			const isEmpty = (o) => 0 === Object.keys(o).length,
-				isObject = (o) => null != o && 'object' == typeof o,
-				deletedDiff = (lhs, rhs) => {
-					if (lhs === rhs || !isObject(lhs) || !isObject(rhs)) return {};
-					const l = lhs,
-						r = rhs;
-					return Object.keys(l).reduce((acc, key) => {
-						if (((o, ...args) => Object.prototype.hasOwnProperty.call(o, ...args))(r, key)) {
-							const difference = deletedDiff(l[key], r[key]);
-							return (isObject(difference) && isEmpty(difference)) || (acc[key] = difference), acc;
-						}
-						return (acc[key] = void 0), acc;
-					}, {});
-				},
-				deleted = deletedDiff;
-			var ensure_templateObject,
-				light = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/themes/light.js'),
-				esm_convert = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/convert.js');
-			var DocsContainer_templateObject,
-				ensure = function ensure(input) {
-					if (!input) return (0, esm_convert.O)(light.Z);
-					var missing = deleted(light.Z, input);
-					return (
-						Object.keys(missing).length &&
-							client_logger_dist_esm.kg.warn(
-								(0, ts_dedent_esm.C)(
-									ensure_templateObject ||
-										(ensure_templateObject = (function ensure_taggedTemplateLiteral(strings, raw) {
-											return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-										})(['\n          Your theme is missing properties, you should update your theme!\n\n          theme-data missing:\n        ']))
-								),
-								missing
-							),
-						(0, esm_convert.O)(input)
-					);
-				},
-				emotion_theming_browser_esm = __webpack_require__('../../node_modules/emotion-theming/dist/emotion-theming.browser.esm.js');
-			var DocsContainer_document = window_default().document,
-				DocsContainer_globalWindow = window_default().window,
-				defaultComponents = Object.assign({}, DocumentFormatting.wx, { code: CodeOrSourceMdx, a: AnchorMdx }, HeadersMdx),
-				warnOptionsTheme = browser_default()(
-					function () {},
-					(0, ts_dedent_esm.C)(
-						DocsContainer_templateObject ||
-							(DocsContainer_templateObject = (function DocsContainer_taggedTemplateLiteral(strings, raw) {
-								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-							})([
-								'\n    Deprecated parameter: options.theme => docs.theme\n\n    https://github.com/storybookjs/storybook/blob/next/addons/docs/docs/theming.md#storybook-theming\n',
-							]))
-					)
-				),
-				DocsContainer = function DocsContainer(_ref) {
-					var context = _ref.context,
-						children = _ref.children,
-						storyId = context.id,
-						_storyById$parameters = (0, context.storyById)(storyId).parameters,
-						_storyById$parameters2 = _storyById$parameters.options,
-						options = void 0 === _storyById$parameters2 ? {} : _storyById$parameters2,
-						_storyById$parameters3 = _storyById$parameters.docs,
-						docs = void 0 === _storyById$parameters3 ? {} : _storyById$parameters3,
-						themeVars = docs.theme;
-					!themeVars && options.theme && (warnOptionsTheme(), (themeVars = options.theme));
-					var theme = ensure(themeVars),
-						allComponents = Object.assign({}, defaultComponents, docs.components);
-					return (
-						(0, compat_module.useEffect)(
-							function () {
-								var url;
-								try {
-									url = new URL(DocsContainer_globalWindow.parent.location);
-								} catch (err) {
-									return;
-								}
-								if (url.hash) {
-									var element = DocsContainer_document.getElementById(url.hash.substring(1));
-									element &&
-										setTimeout(function () {
-											scrollToElement(element);
-										}, 200);
-								} else {
-									var _element =
-										DocsContainer_document.getElementById(anchorBlockIdFromId(storyId)) ||
-										DocsContainer_document.getElementById(storyBlockIdFromId(storyId));
-									if (_element) {
-										var allStories = _element.parentElement.querySelectorAll('[id|="anchor-"]'),
-											scrollTarget = _element;
-										allStories && allStories[0] === _element && (scrollTarget = DocsContainer_document.getElementById('docs-root')),
-											setTimeout(function () {
-												scrollToElement(scrollTarget, 'start');
-											}, 200);
-									}
-								}
-							},
-							[storyId]
-						),
-						compat_module.default.createElement(
-							DocsContext.Provider,
-							{ value: context },
-							compat_module.default.createElement(
-								SourceContainer,
-								null,
-								compat_module.default.createElement(
-									emotion_theming_browser_esm.f6,
-									{ theme },
-									compat_module.default.createElement(
-										react_dist_esm.Zo,
-										{ components: allComponents },
-										compat_module.default.createElement(
-											DocsWrapper,
-											{ className: 'sbdocs sbdocs-wrapper' },
-											compat_module.default.createElement(DocsContent, { className: 'sbdocs sbdocs-content' }, children)
-										)
-									)
-								)
-							)
-						)
-					);
-				},
-				Meta_document = window_default().document;
-			var Preview_templateObject,
-				Meta = function Meta() {
-					return 'docs' === new URL(Meta_document.location).searchParams.get('viewMode')
-						? (function renderAnchor() {
-								var context = (0, compat_module.useContext)(DocsContext),
-									anchorId =
-										(function getFirstStoryId(docsContext) {
-											var stories = docsContext.componentStories();
-											return stories.length > 0 ? stories[0].id : null;
-										})(context) || context.id;
-								return compat_module.default.createElement(Anchor, { storyId: anchorId });
-						  })()
-						: null;
-				};
-			var Props_templateObject,
-				Preview_Preview = browser_default()(
-					function (props) {
-						return compat_module.default.createElement(Canvas, props);
-					},
-					(0, ts_dedent_esm.C)(
-						Preview_templateObject ||
-							(Preview_templateObject = (function Preview_taggedTemplateLiteral(strings, raw) {
-								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-							})([
-								'\n    Preview doc block has been renamed to Canvas.\n\n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#previewprops-renamed\n  ',
-							]))
-					)
-				);
-			var Props = browser_default()(
-				function (props) {
-					return compat_module.default.createElement(ArgsTable, props);
-				},
-				(0, ts_dedent_esm.C)(
-					Props_templateObject ||
-						(Props_templateObject = (function Props_taggedTemplateLiteral(strings, raw) {
-							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-						})([
-							'\n    Props doc block has been renamed to ArgsTable.\n\n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#previewprops-renamed\n  ',
-						]))
-				)
-			);
-			Props.defaultProps = { of: CURRENT_SELECTION };
-			var Wrapper_Wrapper = function Wrapper(_ref) {
-				var children = _ref.children;
-				return compat_module.default.createElement('div', { style: { fontFamily: 'sans-serif' } }, children);
-			};
-		},
-		'../../node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js': (
-			__unused_webpack_module,
-			__unused_webpack___webpack_exports__,
-			__webpack_require__
-		) => {
-			'use strict';
-			var config_namespaceObject = {};
-			__webpack_require__.r(config_namespaceObject),
-				__webpack_require__.d(config_namespaceObject, { argTypesEnhancers: () => argTypesEnhancers, parameters: () => config_parameters });
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				parameters =
-					(__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-					__webpack_require__('../../node_modules/@storybook/store/dist/esm/parameters.js'));
-			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function _asyncToGenerator(fn) {
-				return function () {
-					var self = this,
-						args = arguments;
-					return new Promise(function (resolve, reject) {
-						var gen = fn.apply(self, args);
-						function _next(value) {
-							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-						}
-						function _throw(err) {
-							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-						}
-						_next(void 0);
-					});
-				};
-			}
-			var _getPage,
-				_getContainer,
-				config_parameters = {
-					docs: {
-						inlineStories: !1,
-						getContainer:
-							((_getContainer = _asyncToGenerator(
-								regeneratorRuntime.mark(function _callee() {
-									return regeneratorRuntime.wrap(function _callee$(_context) {
-										for (;;)
-											switch ((_context.prev = _context.next)) {
-												case 0:
-													return (
-														(_context.next = 2),
-														Promise.resolve().then(
-															__webpack_require__.bind(__webpack_require__, '../../node_modules/@storybook/addon-docs/dist/esm/blocks/index.js')
-														)
-													);
-												case 2:
-													return _context.abrupt('return', _context.sent.DocsContainer);
-												case 3:
-												case 'end':
-													return _context.stop();
-											}
-									}, _callee);
-								})
-							)),
-							function getContainer() {
-								return _getContainer.apply(this, arguments);
-							}),
-						getPage:
-							((_getPage = _asyncToGenerator(
-								regeneratorRuntime.mark(function _callee2() {
-									return regeneratorRuntime.wrap(function _callee2$(_context2) {
-										for (;;)
-											switch ((_context2.prev = _context2.next)) {
-												case 0:
-													return (
-														(_context2.next = 2),
-														Promise.resolve().then(
-															__webpack_require__.bind(__webpack_require__, '../../node_modules/@storybook/addon-docs/dist/esm/blocks/index.js')
-														)
-													);
-												case 2:
-													return _context2.abrupt('return', _context2.sent.DocsPage);
-												case 3:
-												case 'end':
-													return _context2.stop();
-											}
-									}, _callee2);
-								})
-							)),
-							function getPage() {
-								return _getPage.apply(this, arguments);
-							}),
-						iframeHeight: 100,
-					},
-				},
-				argTypesEnhancers = [
-					function enhanceArgTypes(context) {
-						var component = context.component,
-							userArgTypes = context.argTypes,
-							_context$parameters$d = context.parameters.docs,
-							extractArgTypes = (void 0 === _context$parameters$d ? {} : _context$parameters$d).extractArgTypes,
-							extractedArgTypes = extractArgTypes && component ? extractArgTypes(component) : {};
-						return extractedArgTypes ? (0, parameters.f)(extractedArgTypes, userArgTypes) : userArgTypes;
-					},
-				];
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(config_namespaceObject).forEach(function (key) {
-				var value = config_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.$9)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.HZ)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.h1)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.My)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi._C)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.$P)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.h1)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'../../node_modules/@storybook/addon-docs/dist/esm/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { aT: () => _blocks__WEBPACK_IMPORTED_MODULE_0__.AddContext });
-			var _blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/blocks/index.js');
 		},
 		'../../node_modules/@storybook/addon-links/dist/esm/index.js': (module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -56372,6 +52863,3515 @@
 				return esm_browser_stringify(rnds);
 			};
 		},
+		'./node_modules/@storybook/addon-docs/blocks.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, {
+				$4: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.ArgsTable,
+				Uh: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.PRIMARY_STORY,
+				h_: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.Meta,
+			});
+			var util_deprecate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/util-deprecate/browser.js'),
+				util_deprecate__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(util_deprecate__WEBPACK_IMPORTED_MODULE_0__),
+				ts_dedent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/ts-dedent/esm/index.js'),
+				_dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/blocks/index.js');
+			util_deprecate__WEBPACK_IMPORTED_MODULE_0___default()(
+				() => {},
+				ts_dedent__WEBPACK_IMPORTED_MODULE_1__.C`
+    Importing from '@storybook/addon-docs/blocks' is deprecated, import directly from '@storybook/addon-docs' instead:
+    
+    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-scoped-blocks-imports
+`
+			)();
+		},
+		'./node_modules/@storybook/addon-docs/dist/esm/blocks/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, {
+					AddContext: () => AddContext,
+					Anchor: () => Anchor,
+					AnchorMdx: () => AnchorMdx,
+					ArgsTable: () => ArgsTable,
+					CURRENT_SELECTION: () => CURRENT_SELECTION,
+					Canvas: () => Canvas,
+					CodeOrSourceMdx: () => CodeOrSourceMdx,
+					ColorItem: () => ColorItem,
+					ColorPalette: () => ColorPalette,
+					ComponentsTable: () => ComponentsTable,
+					Description: () => DescriptionContainer,
+					DescriptionType: () => DescriptionType,
+					DocsContainer: () => DocsContainer,
+					DocsContext: () => DocsContext,
+					DocsPage: () => DocsPage,
+					DocsStory: () => DocsStory,
+					HeaderMdx: () => HeaderMdx,
+					HeadersMdx: () => HeadersMdx,
+					Heading: () => Heading,
+					IconGallery: () => IconGallery,
+					IconItem: () => IconItem,
+					Meta: () => Meta,
+					PRIMARY_STORY: () => PRIMARY_STORY,
+					Preview: () => Preview_Preview,
+					Primary: () => Primary,
+					Props: () => Props,
+					Source: () => Source,
+					SourceContainer: () => SourceContainer,
+					SourceContext: () => SourceContext,
+					SourceState: () => SourceState,
+					Stories: () => Stories,
+					Story: () => Story,
+					StoryTable: () => StoryTable,
+					Subheading: () => Subheading,
+					Subtitle: () => Subtitle,
+					Title: () => Title,
+					Typeset: () => Typeset,
+					Wrapper: () => Wrapper_Wrapper,
+					anchorBlockIdFromId: () => anchorBlockIdFromId,
+					assertIsFn: () => assertIsFn,
+					extractComponentArgTypes: () => extractComponentArgTypes,
+					extractTitle: () => extractTitle,
+					getComponent: () => getComponent,
+					getDescriptionProps: () => getDescriptionProps,
+					getSourceProps: () => getSourceProps,
+					getStoryId: () => getStoryId,
+					getStoryProps: () => getStoryProps,
+					lookupStoryId: () => lookupStoryId,
+					storyBlockIdFromId: () => storyBlockIdFromId,
+				});
+			__webpack_require__('../../node_modules/core-js/modules/es.string.bold.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js');
+			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js'),
+				polished_esm = __webpack_require__('../../node_modules/polished/dist/polished.esm.js'),
+				getBlockBackgroundStyle = function getBlockBackgroundStyle(theme) {
+					return {
+						borderRadius: theme.appBorderRadius,
+						background: theme.background.content,
+						boxShadow: 'light' === theme.base ? 'rgba(0, 0, 0, 0.10) 0 1px 3px 0' : 'rgba(0, 0, 0, 0.20) 0 2px 5px 0',
+						border: '1px solid '.concat(theme.appBorderColor),
+					};
+				},
+				DocumentFormatting = __webpack_require__('../../node_modules/@storybook/components/dist/esm/typography/DocumentFormatting.js');
+			function _extends() {
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
+			}
+			function _objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function _objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var ItemTitle = esm.styled.div(function (_ref) {
+					var theme = _ref.theme;
+					return { fontWeight: theme.typography.weight.bold, color: theme.color.defaultText };
+				}),
+				ItemSubtitle = esm.styled.div(function (_ref2) {
+					var theme = _ref2.theme;
+					return {
+						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.2, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
+					};
+				}),
+				ItemDescription = esm.styled.div({ flex: '0 0 30%', lineHeight: '20px', marginTop: 5 }),
+				SwatchLabel = esm.styled.div(function (_ref3) {
+					var theme = _ref3.theme;
+					return {
+						flex: 1,
+						textAlign: 'center',
+						fontFamily: theme.typography.fonts.mono,
+						fontSize: theme.typography.size.s1,
+						lineHeight: 1,
+						overflow: 'hidden',
+						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
+						'> div': { display: 'inline-block', overflow: 'hidden', maxWidth: '100%', textOverflow: 'ellipsis' },
+						span: { display: 'block', marginTop: 2 },
+					};
+				}),
+				SwatchLabels = esm.styled.div({ display: 'flex', flexDirection: 'row' }),
+				Swatch = esm.styled.div(function (_ref4) {
+					return {
+						position: 'relative',
+						flex: 1,
+						'&::before': { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: _ref4.background, content: '""' },
+					};
+				}),
+				SwatchColors = esm.styled.div(function (_ref5) {
+					var theme = _ref5.theme;
+					return Object.assign({}, getBlockBackgroundStyle(theme), {
+						display: 'flex',
+						flexDirection: 'row',
+						height: 50,
+						marginBottom: 5,
+						overflow: 'hidden',
+						backgroundColor: 'white',
+						backgroundImage: 'repeating-linear-gradient(-45deg, #ccc, #ccc 1px, #fff 1px, #fff 16px)',
+						backgroundClip: 'padding-box',
+					});
+				}),
+				SwatchSpecimen = esm.styled.div({ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative', marginBottom: 30 }),
+				Swatches = esm.styled.div({ flex: 1, display: 'flex', flexDirection: 'row' }),
+				Item = esm.styled.div({ display: 'flex', alignItems: 'flex-start' }),
+				ListName = esm.styled.div({ flex: '0 0 30%' }),
+				ListSwatches = esm.styled.div({ flex: 1 }),
+				ListHeading = esm.styled.div(function (_ref6) {
+					var theme = _ref6.theme;
+					return {
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+						paddingBottom: 20,
+						fontWeight: theme.typography.weight.bold,
+						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
+					};
+				}),
+				List = esm.styled.div(function (_ref7) {
+					return { fontSize: _ref7.theme.typography.size.s2, lineHeight: '20px', display: 'flex', flexDirection: 'column' };
+				});
+			function renderSwatch(color, index) {
+				return compat_module.default.createElement(Swatch, { key: ''.concat(color, '-').concat(index), title: color, background: color });
+			}
+			function renderSwatchLabel(color, index, colorDescription) {
+				return compat_module.default.createElement(
+					SwatchLabel,
+					{ key: ''.concat(color, '-').concat(index), title: color },
+					compat_module.default.createElement(
+						'div',
+						null,
+						color,
+						colorDescription && compat_module.default.createElement('span', null, colorDescription)
+					)
+				);
+			}
+			function renderSwatchSpecimen(colors) {
+				return Array.isArray(colors)
+					? compat_module.default.createElement(
+							SwatchSpecimen,
+							null,
+							compat_module.default.createElement(
+								SwatchColors,
+								null,
+								colors.map(function (color, index) {
+									return renderSwatch(color, index);
+								})
+							),
+							compat_module.default.createElement(
+								SwatchLabels,
+								null,
+								colors.map(function (color, index) {
+									return renderSwatchLabel(color, index);
+								})
+							)
+					  )
+					: compat_module.default.createElement(
+							SwatchSpecimen,
+							null,
+							compat_module.default.createElement(
+								SwatchColors,
+								null,
+								Object.values(colors).map(function (color, index) {
+									return renderSwatch(color, index);
+								})
+							),
+							compat_module.default.createElement(
+								SwatchLabels,
+								null,
+								Object.keys(colors).map(function (color, index) {
+									return renderSwatchLabel(color, index, colors[color]);
+								})
+							)
+					  );
+			}
+			(renderSwatch.displayName = 'renderSwatch'),
+				(renderSwatchLabel.displayName = 'renderSwatchLabel'),
+				(renderSwatchSpecimen.displayName = 'renderSwatchSpecimen');
+			var ColorItem = function ColorItem(_ref8) {
+				var title = _ref8.title,
+					subtitle = _ref8.subtitle,
+					colors = _ref8.colors;
+				return compat_module.default.createElement(
+					Item,
+					null,
+					compat_module.default.createElement(
+						ItemDescription,
+						null,
+						compat_module.default.createElement(ItemTitle, null, title),
+						compat_module.default.createElement(ItemSubtitle, null, subtitle)
+					),
+					compat_module.default.createElement(Swatches, null, renderSwatchSpecimen(colors))
+				);
+			};
+			ColorItem.displayName = 'ColorItem';
+			var ColorPalette = function ColorPalette(_ref9) {
+				var children = _ref9.children,
+					props = _objectWithoutProperties(_ref9, ['children']);
+				return compat_module.default.createElement(
+					DocumentFormatting.i9,
+					null,
+					compat_module.default.createElement(
+						List,
+						_extends({}, props, { className: 'docblock-colorpalette' }),
+						compat_module.default.createElement(
+							ListHeading,
+							null,
+							compat_module.default.createElement(ListName, null, 'Name'),
+							compat_module.default.createElement(ListSwatches, null, 'Swatches')
+						),
+						children
+					)
+				);
+			};
+			ColorPalette.displayName = 'ColorPalette';
+			__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
+			function IconGallery_extends() {
+				return (
+					(IconGallery_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					IconGallery_extends.apply(this, arguments)
+				);
+			}
+			function IconGallery_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function IconGallery_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var ItemLabel = esm.styled.div(function (_ref) {
+					var theme = _ref.theme;
+					return {
+						fontFamily: theme.typography.fonts.base,
+						fontSize: theme.typography.size.s2,
+						color: theme.color.defaultText,
+						marginLeft: 10,
+						lineHeight: 1.2,
+					};
+				}),
+				ItemSpecimen = esm.styled.div(function (_ref2) {
+					var theme = _ref2.theme;
+					return Object.assign({}, getBlockBackgroundStyle(theme), {
+						overflow: 'hidden',
+						height: 40,
+						width: 40,
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						flex: 'none',
+						'> img, > svg': { width: 20, height: 20 },
+					});
+				}),
+				IconGallery_Item = esm.styled.div({
+					display: 'inline-flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					flex: '0 1 calc(20% - 10px)',
+					minWidth: 120,
+					margin: '0px 10px 30px 0',
+				}),
+				IconGallery_List = esm.styled.div({ display: 'flex', flexFlow: 'row wrap' }),
+				IconItem = function IconItem(_ref3) {
+					var name = _ref3.name,
+						children = _ref3.children;
+					return compat_module.default.createElement(
+						IconGallery_Item,
+						null,
+						compat_module.default.createElement(ItemSpecimen, null, children),
+						compat_module.default.createElement(ItemLabel, null, name)
+					);
+				};
+			IconItem.displayName = 'IconItem';
+			var IconGallery = function IconGallery(_ref4) {
+				var children = _ref4.children,
+					props = IconGallery_objectWithoutProperties(_ref4, ['children']);
+				return compat_module.default.createElement(
+					DocumentFormatting.i9,
+					null,
+					compat_module.default.createElement(IconGallery_List, IconGallery_extends({}, props, { className: 'docblock-icongallery' }), children)
+				);
+			};
+			IconGallery.displayName = 'IconGallery';
+			var shared = __webpack_require__('../../node_modules/@storybook/components/dist/esm/typography/shared.js');
+			function Typeset_extends() {
+				return (
+					(Typeset_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Typeset_extends.apply(this, arguments)
+				);
+			}
+			function Typeset_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Typeset_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var Label = esm.styled.div(function (_ref) {
+					var theme = _ref.theme;
+					return {
+						marginRight: 30,
+						fontSize: ''.concat(theme.typography.size.s1, 'px'),
+						color: 'light' === theme.base ? (0, polished_esm.DZ)(0.4, theme.color.defaultText) : (0, polished_esm.DZ)(0.6, theme.color.defaultText),
+					};
+				}),
+				Sample = esm.styled.div({ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }),
+				TypeSpecimen = esm.styled.div({
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'baseline',
+					'&:not(:last-child)': { marginBottom: '1rem' },
+				}),
+				Wrapper = esm.styled.div(shared.YX, function (_ref2) {
+					var theme = _ref2.theme;
+					return Object.assign({}, getBlockBackgroundStyle(theme), { margin: '25px 0 40px', padding: '30px 20px' });
+				}),
+				Typeset = function Typeset(_ref3) {
+					var fontFamily = _ref3.fontFamily,
+						fontSizes = _ref3.fontSizes,
+						fontWeight = _ref3.fontWeight,
+						sampleText = _ref3.sampleText,
+						props = Typeset_objectWithoutProperties(_ref3, ['fontFamily', 'fontSizes', 'fontWeight', 'sampleText']);
+					return compat_module.default.createElement(
+						Wrapper,
+						Typeset_extends({}, props, { className: 'docblock-typeset' }),
+						fontSizes.map(function (size) {
+							return compat_module.default.createElement(
+								TypeSpecimen,
+								{ key: size },
+								compat_module.default.createElement(Label, null, size),
+								compat_module.default.createElement(
+									Sample,
+									{ style: { fontFamily, fontSize: size, fontWeight, lineHeight: 1.2 } },
+									sampleText || 'Was he a beast if music could move him so?'
+								)
+							);
+						})
+					);
+				};
+			Typeset.displayName = 'Typeset';
+			var anchorBlockIdFromId = function anchorBlockIdFromId(storyId) {
+					return 'anchor--'.concat(storyId);
+				},
+				Anchor = function Anchor(_ref) {
+					var storyId = _ref.storyId,
+						children = _ref.children;
+					return compat_module.default.createElement('div', { id: anchorBlockIdFromId(storyId) }, children);
+				},
+				lodash_mapValues =
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.find.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+					__webpack_require__('../../node_modules/lodash/mapValues.js')),
+				mapValues_default = __webpack_require__.n(lodash_mapValues),
+				dist_esm = __webpack_require__('../../node_modules/@storybook/components/dist/esm/index.js'),
+				addons_dist_esm = __webpack_require__('../../node_modules/@storybook/addons/dist/esm/index.js'),
+				filterArgTypes = __webpack_require__('../../node_modules/@storybook/store/dist/esm/filterArgTypes.js'),
+				core_events_dist_esm = __webpack_require__('../../node_modules/@storybook/core-events/dist/esm/index.js'),
+				global_window = __webpack_require__('../../node_modules/global/window.js'),
+				window_default = __webpack_require__.n(global_window);
+			void 0 === global_window.window.__DOCS_CONTEXT__ &&
+				((global_window.window.__DOCS_CONTEXT__ = (0, compat_module.createContext)({})),
+				(global_window.window.__DOCS_CONTEXT__.displayName = 'DocsContext'));
+			var DocsContext = global_window.window.__DOCS_CONTEXT__,
+				CURRENT_SELECTION = '.',
+				PRIMARY_STORY = '^',
+				getComponentName =
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+					function getComponentName(component) {
+						if (component)
+							return 'string' == typeof component
+								? component.includes('-')
+									? (function titleCase(str) {
+											return str
+												.split('-')
+												.map(function (part) {
+													return part.charAt(0).toUpperCase() + part.slice(1);
+												})
+												.join('');
+									  })(component)
+									: component
+								: component.__docgenInfo && component.__docgenInfo.displayName
+								? component.__docgenInfo.displayName
+								: component.name;
+					});
+			function scrollToElement(element) {
+				var block = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 'start';
+				element.scrollIntoView({ behavior: 'smooth', block, inline: 'nearest' });
+			}
+			__webpack_require__('../../node_modules/core-js/modules/es.promise.js');
+			var react_dist_esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js');
+			function _typeof(obj) {
+				return (
+					(_typeof =
+						'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
+							? function _typeof(obj) {
+									return typeof obj;
+							  }
+							: function _typeof(obj) {
+									return obj && 'function' == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
+							  }),
+					_typeof(obj)
+				);
+			}
+			function IFrame_extends() {
+				return (
+					(IFrame_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					IFrame_extends.apply(this, arguments)
+				);
+			}
+			function IFrame_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function IFrame_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			function _classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function _defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function _setPrototypeOf(o, p) {
+				return (
+					(_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					_setPrototypeOf(o, p)
+				);
+			}
+			function _createSuper(Derived) {
+				var hasNativeReflectConstruct = (function _isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = _getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = _getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return _possibleConstructorReturn(this, result);
+				};
+			}
+			function _possibleConstructorReturn(self, call) {
+				return !call || ('object' !== _typeof(call) && 'function' != typeof call)
+					? (function _assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+					  })(self)
+					: call;
+			}
+			function _getPrototypeOf(o) {
+				return (
+					(_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					_getPrototypeOf(o)
+				);
+			}
+			var globalWindow = window_default().window,
+				IFrame = (function (_Component) {
+					!(function _inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							superClass && _setPrototypeOf(subClass, superClass);
+					})(IFrame, _Component);
+					var _super = _createSuper(IFrame);
+					function IFrame() {
+						var _this;
+						_classCallCheck(this, IFrame);
+						for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
+						return ((_this = _super.call.apply(_super, [this].concat(args))).iframe = null), _this;
+					}
+					return (
+						(function _createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && _defineProperties(Constructor.prototype, protoProps),
+								staticProps && _defineProperties(Constructor, staticProps),
+								Constructor
+							);
+						})(IFrame, [
+							{
+								key: 'componentDidMount',
+								value: function componentDidMount() {
+									var id = this.props.id;
+									this.iframe = globalWindow.document.getElementById(id);
+								},
+							},
+							{
+								key: 'shouldComponentUpdate',
+								value: function shouldComponentUpdate(nextProps) {
+									var scale = nextProps.scale;
+									return (
+										scale !== this.props.scale &&
+											this.setIframeBodyStyle({
+												width: ''.concat(100 * scale, '%'),
+												height: ''.concat(100 * scale, '%'),
+												transform: 'scale('.concat(1 / scale, ')'),
+												transformOrigin: 'top left',
+											}),
+										!1
+									);
+								},
+							},
+							{
+								key: 'setIframeBodyStyle',
+								value: function setIframeBodyStyle(style) {
+									return Object.assign(this.iframe.contentDocument.body.style, style);
+								},
+							},
+							{
+								key: 'render',
+								value: function render() {
+									var _this$props = this.props,
+										id = _this$props.id,
+										title = _this$props.title,
+										src = _this$props.src,
+										allowFullScreen = _this$props.allowFullScreen,
+										rest = (_this$props.scale, IFrame_objectWithoutProperties(_this$props, ['id', 'title', 'src', 'allowFullScreen', 'scale']));
+									return compat_module.default.createElement('iframe', IFrame_extends({ id, title, src, allowFullScreen, loading: 'lazy' }, rest));
+								},
+							},
+						]),
+						IFrame
+					);
+				})(compat_module.Component);
+			IFrame.displayName = 'IFrame';
+			var _templateObject,
+				EmptyBlock = __webpack_require__('../../node_modules/@storybook/components/dist/esm/blocks/EmptyBlock.js'),
+				ZoomContext = (0, compat_module.createContext)({ scale: 1 }),
+				core_browser_esm =
+					(__webpack_require__('../../node_modules/core-js/modules/es.object.freeze.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+					__webpack_require__('../../node_modules/@emotion/core/dist/core.browser.esm.js')),
+				icon = __webpack_require__('../../node_modules/@storybook/components/dist/esm/icon/icon.js');
+			var Loader_templateObject,
+				rotate360 = (0, core_browser_esm.F4)(
+					_templateObject ||
+						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {
+							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+						})(['\n\tfrom {\n\t\ttransform: rotate(0deg);\n\t}\n\tto {\n\t\ttransform: rotate(360deg);\n\t}\n']))
+				);
+			function _slicedToArray(arr, i) {
+				return (
+					(function _arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function _iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function Loader_extends() {
+				return (
+					(Loader_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Loader_extends.apply(this, arguments)
+				);
+			}
+			function Loader_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Loader_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var EventSource = window_default().EventSource,
+				CONFIG_TYPE = window_default().CONFIG_TYPE,
+				LoaderWrapper = esm.styled.div(function (_ref) {
+					var _ref$size = _ref.size,
+						size = void 0 === _ref$size ? 32 : _ref$size;
+					return {
+						borderRadius: '50%',
+						cursor: 'progress',
+						display: 'inline-block',
+						overflow: 'hidden',
+						position: 'absolute',
+						transition: 'all 200ms ease-out',
+						verticalAlign: 'top',
+						top: '50%',
+						left: '50%',
+						marginTop: -size / 2,
+						marginLeft: -size / 2,
+						height: size,
+						width: size,
+						zIndex: 4,
+						borderWidth: 2,
+						borderStyle: 'solid',
+						borderColor: 'rgba(97, 97, 97, 0.29)',
+						borderTopColor: 'rgb(100,100,100)',
+						animation: ''.concat(rotate360, ' 0.7s linear infinite'),
+						mixBlendMode: 'difference',
+					};
+				}),
+				ProgressWrapper = esm.styled.div({
+					position: 'absolute',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}),
+				ProgressTrack = esm.styled.div(function (_ref2) {
+					var theme = _ref2.theme;
+					return {
+						position: 'relative',
+						width: '80%',
+						marginBottom: '0.75rem',
+						maxWidth: 300,
+						height: 5,
+						borderRadius: 5,
+						background: (0, polished_esm.DZ)(0.8, theme.color.secondary),
+						overflow: 'hidden',
+						cursor: 'progress',
+					};
+				}),
+				ProgressBar = esm.styled.div(function (_ref3) {
+					return { position: 'absolute', top: 0, left: 0, height: '100%', background: _ref3.theme.color.secondary };
+				}),
+				ProgressMessage = esm.styled.div(function (_ref4) {
+					var theme = _ref4.theme;
+					return { minHeight: '2em', fontSize: ''.concat(theme.typography.size.s1, 'px'), color: theme.barTextColor };
+				}),
+				ErrorIcon = (0, esm.styled)(icon.P)(function (_ref5) {
+					return { width: 20, height: 20, marginBottom: '0.5rem', color: _ref5.theme.color.mediumdark };
+				}),
+				ellipsis = (0, core_browser_esm.F4)(
+					Loader_templateObject ||
+						(Loader_templateObject = (function Loader_taggedTemplateLiteral(strings, raw) {
+							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+						})(['\n  from { content: "..." }\n  33% { content: "." }\n  66% { content: ".." }\n  to { content: "..." }\n']))
+				),
+				Ellipsis = esm.styled.span({
+					'&::after': {
+						content: "'...'",
+						animation: ''.concat(ellipsis, ' 1s linear infinite'),
+						animationDelay: '1s',
+						display: 'inline-block',
+						width: '1em',
+						height: 'auto',
+					},
+				}),
+				PureLoader = function PureLoader(_ref6) {
+					var progress = _ref6.progress,
+						error = _ref6.error,
+						size = _ref6.size,
+						props = Loader_objectWithoutProperties(_ref6, ['progress', 'error', 'size']);
+					if (error)
+						return compat_module.default.createElement(
+							ProgressWrapper,
+							Loader_extends({ 'aria-label': error.toString(), 'aria-live': 'polite', role: 'status' }, props),
+							compat_module.default.createElement(ErrorIcon, { icon: 'lightningoff' }),
+							compat_module.default.createElement(ProgressMessage, null, error.message)
+						);
+					if (progress) {
+						var value = progress.value,
+							modules = progress.modules,
+							message = progress.message;
+						return (
+							modules && (message += ' '.concat(modules.complete, ' / ').concat(modules.total, ' modules')),
+							compat_module.default.createElement(
+								ProgressWrapper,
+								Loader_extends(
+									{
+										'aria-label': 'Content is loading...',
+										'aria-live': 'polite',
+										'aria-valuemin': 0,
+										'aria-valuemax': 100,
+										'aria-valuenow': 100 * value,
+										'aria-valuetext': message,
+										role: 'progressbar',
+									},
+									props
+								),
+								compat_module.default.createElement(
+									ProgressTrack,
+									null,
+									compat_module.default.createElement(ProgressBar, { style: { width: ''.concat(100 * value, '%') } })
+								),
+								compat_module.default.createElement(
+									ProgressMessage,
+									null,
+									message,
+									value < 1 && compat_module.default.createElement(Ellipsis, { key: message })
+								)
+							)
+						);
+					}
+					return compat_module.default.createElement(
+						LoaderWrapper,
+						Loader_extends({ 'aria-label': 'Content is loading...', 'aria-live': 'polite', role: 'status', size }, props)
+					);
+				};
+			PureLoader.displayName = 'PureLoader';
+			var Loader = function Loader(props) {
+				var _useState2 = _slicedToArray((0, compat_module.useState)(void 0), 2),
+					progress = _useState2[0],
+					setProgress = _useState2[1],
+					_useState4 = _slicedToArray((0, compat_module.useState)(void 0), 2),
+					error = _useState4[0],
+					setError = _useState4[1];
+				return (
+					(0, compat_module.useEffect)(function () {
+						if ('DEVELOPMENT' === CONFIG_TYPE && EventSource) {
+							var lastProgress,
+								eventSource = new EventSource('/progress');
+							return (
+								(eventSource.onmessage = function (event) {
+									try {
+										(lastProgress = JSON.parse(event.data)), setProgress(lastProgress);
+									} catch (e) {
+										setError(e), eventSource.close();
+									}
+								}),
+								(eventSource.onerror = function () {
+									lastProgress && 1 !== lastProgress.value && setError(new Error('Connection closed')), eventSource.close();
+								}),
+								function () {
+									return eventSource.close();
+								}
+							);
+						}
+					}, []),
+					compat_module.default.createElement(PureLoader, Loader_extends({ progress, error }, props))
+				);
+			};
+			function Story_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Story_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			Loader.displayName = 'Loader';
+			var StoryError;
+			!(function (StoryError) {
+				StoryError.NO_STORY = 'No component or story to display';
+			})(StoryError || (StoryError = {}));
+			var InlineStory = function InlineStory(_ref) {
+				var storyFn = _ref.storyFn,
+					height = _ref.height,
+					id = _ref.id;
+				return compat_module.default.createElement(
+					compat_module.Fragment,
+					null,
+					height
+						? compat_module.default.createElement(
+								'style',
+								null,
+								'#story--'.concat(id, ' { min-height: ').concat(height, '; transform: translateZ(0); overflow: auto }')
+						  )
+						: null,
+					compat_module.default.createElement(
+						compat_module.Fragment,
+						null,
+						storyFn
+							? (0, compat_module.createElement)(storyFn)
+							: compat_module.default.createElement(
+									EmptyBlock.V,
+									null,
+									(function MISSING_STORY(id) {
+										return id ? 'Story "'.concat(id, '" doesn\'t exist.') : StoryError.NO_STORY;
+									})(id)
+							  )
+					)
+				);
+			};
+			InlineStory.displayName = 'InlineStory';
+			var IFrameStory = function IFrameStory(_ref2) {
+				var id = _ref2.id,
+					title = _ref2.title,
+					_ref2$height = _ref2.height,
+					height = void 0 === _ref2$height ? '500px' : _ref2$height;
+				return compat_module.default.createElement(
+					'div',
+					{ style: { width: '100%', height } },
+					compat_module.default.createElement(ZoomContext.Consumer, null, function (_ref3) {
+						var scale = _ref3.scale;
+						return compat_module.default.createElement(IFrame, {
+							key: 'iframe',
+							id: 'iframe--'.concat(id),
+							title,
+							src: ''.concat('iframe.html', '?id=').concat(id, '&viewMode=story'),
+							allowFullScreen: !0,
+							scale,
+							style: { width: '100%', height: '100%', border: '0 none' },
+						});
+					})
+				);
+			};
+			IFrameStory.displayName = 'IFrameStory';
+			var Story_Story = function Story(_ref4) {
+					_ref4.children;
+					var error = _ref4.error,
+						inline = _ref4.inline,
+						props = Story_objectWithoutProperties(_ref4, ['children', 'error', 'inline']),
+						id = props.id,
+						title = props.title,
+						height = props.height;
+					return error
+						? compat_module.default.createElement(EmptyBlock.V, null, error)
+						: inline
+						? compat_module.default.createElement(InlineStory, props)
+						: compat_module.default.createElement(IFrameStory, { id, title, height });
+				},
+				StorySkeleton = function StorySkeleton() {
+					return compat_module.default.createElement(Loader, null);
+				};
+			StorySkeleton.displayName = 'StorySkeleton';
+			var dist = __webpack_require__('../../node_modules/@storybook/csf/dist/index.js');
+			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js');
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function useStory_slicedToArray(arr, i) {
+				return (
+					(function useStory_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function useStory_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function useStory_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return useStory_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return useStory_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function useStory_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function useStory_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function useStory(storyId, context) {
+				var stories = useStories([storyId], context);
+				return stories && stories[0];
+			}
+			function useStories(storyIds, context) {
+				var initialStoriesById = context.componentStories().reduce(function (acc, story) {
+						return (acc[story.id] = story), acc;
+					}, {}),
+					_useState2 = useStory_slicedToArray((0, compat_module.useState)(initialStoriesById), 2),
+					storiesById = _useState2[0],
+					setStories = _useState2[1];
+				return (
+					(0, compat_module.useEffect)(function () {
+						Promise.all(
+							storyIds.map(
+								(function () {
+									var _ref = (function _asyncToGenerator(fn) {
+										return function () {
+											var self = this,
+												args = arguments;
+											return new Promise(function (resolve, reject) {
+												var gen = fn.apply(self, args);
+												function _next(value) {
+													asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+												}
+												function _throw(err) {
+													asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+												}
+												_next(void 0);
+											});
+										};
+									})(
+										regeneratorRuntime.mark(function _callee(storyId) {
+											var story;
+											return regeneratorRuntime.wrap(function _callee$(_context) {
+												for (;;)
+													switch ((_context.prev = _context.next)) {
+														case 0:
+															return (_context.next = 2), context.loadStory(storyId);
+														case 2:
+															(story = _context.sent),
+																setStories(function (current) {
+																	return current[storyId] === story
+																		? current
+																		: Object.assign(
+																				{},
+																				current,
+																				((value = story),
+																				(key = storyId) in (obj = {})
+																					? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 })
+																					: (obj[key] = value),
+																				obj)
+																		  );
+																	var obj, key, value;
+																});
+														case 4:
+														case 'end':
+															return _context.stop();
+													}
+											}, _callee);
+										})
+									);
+									return function (_x) {
+										return _ref.apply(this, arguments);
+									};
+								})()
+							)
+						);
+					}),
+					storyIds.map(function (storyId) {
+						return storiesById[storyId];
+					})
+				);
+			}
+			function Story_slicedToArray(arr, i) {
+				return (
+					(function Story_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function Story_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function Story_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return Story_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Story_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function Story_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function Story_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var storyBlockIdFromId = function storyBlockIdFromId(storyId) {
+					return 'story--'.concat(storyId);
+				},
+				lookupStoryId = function lookupStoryId(storyName, _ref) {
+					var mdxStoryNameToKey = _ref.mdxStoryNameToKey,
+						mdxComponentAnnotations = _ref.mdxComponentAnnotations;
+					return (0, dist.toId)(
+						mdxComponentAnnotations.id || mdxComponentAnnotations.title,
+						(0, dist.storyNameFromExport)(mdxStoryNameToKey[storyName])
+					);
+				},
+				getStoryId = function getStoryId(props, context) {
+					var id = props.id,
+						name = props.name;
+					return (id === CURRENT_SELECTION ? context.id : id) || lookupStoryId(name, context);
+				},
+				getStoryProps = function getStoryProps(_ref4, story, context, onStoryFnCalled) {
+					var height = _ref4.height,
+						inline = _ref4.inline,
+						storyName = story.name,
+						parameters = story.parameters,
+						_parameters$docs = parameters.docs,
+						docs = void 0 === _parameters$docs ? {} : _parameters$docs;
+					if (docs.disable) return null;
+					var _docs$inlineStories = docs.inlineStories,
+						inlineStories = void 0 !== _docs$inlineStories && _docs$inlineStories,
+						_docs$iframeHeight = docs.iframeHeight,
+						iframeHeight = void 0 === _docs$iframeHeight ? 100 : _docs$iframeHeight,
+						prepareForInline = docs.prepareForInline,
+						storyIsInline = 'boolean' == typeof inline ? inline : inlineStories;
+					if (storyIsInline && !prepareForInline)
+						throw new Error(
+							"Story '".concat(storyName, "' is set to render inline, but no 'prepareForInline' function is implemented in your docs configuration!")
+						);
+					var boundStoryFn = function boundStoryFn() {
+						var storyResult = story.unboundStoryFn(
+							Object.assign({}, context.getStoryContext(story), { loaded: {}, abortSignal: void 0, canvasElement: void 0 })
+						);
+						return onStoryFnCalled(), storyResult;
+					};
+					return Object.assign(
+						{ inline: storyIsInline, id: story.id, height: height || (storyIsInline ? void 0 : iframeHeight), title: storyName },
+						storyIsInline && {
+							parameters,
+							storyFn: function storyFn() {
+								return prepareForInline(boundStoryFn, context.getStoryContext(story));
+							},
+						}
+					);
+				};
+			function makeGate() {
+				var open;
+				return [
+					new Promise(function (r) {
+						open = r;
+					}),
+					open,
+				];
+			}
+			var Story = function Story(props) {
+				var context = (0, compat_module.useContext)(DocsContext),
+					channel = addons_dist_esm.KP.getChannel(),
+					storyRef = (0, compat_module.useRef)(),
+					storyId = getStoryId(props, context),
+					story = useStory(storyId, context),
+					_useState2 = Story_slicedToArray((0, compat_module.useState)(!0), 2),
+					showLoader = _useState2[0],
+					setShowLoader = _useState2[1];
+				(0, compat_module.useEffect)(
+					function () {
+						var cleanup;
+						if (story && storyRef.current) {
+							var componentId = story.componentId,
+								id = story.id,
+								title = story.title,
+								name = story.name,
+								renderContext = {
+									componentId,
+									title,
+									kind: title,
+									id,
+									name,
+									story: name,
+									showMain: function showMain() {},
+									showError: function showError() {},
+									showException: function showException() {},
+								};
+							(cleanup = context.renderStoryToElement({ story, renderContext, element: storyRef.current, viewMode: 'docs' })), setShowLoader(!1);
+						}
+						return function () {
+							return cleanup && cleanup();
+						};
+					},
+					[story]
+				);
+				var _makeGate2 = Story_slicedToArray(makeGate(), 2),
+					storyFnRan = _makeGate2[0],
+					onStoryFnRan = _makeGate2[1],
+					_makeGate4 = Story_slicedToArray(makeGate(), 2),
+					rendered = _makeGate4[0],
+					onRendered = _makeGate4[1];
+				if (((0, compat_module.useEffect)(onRendered), !story)) return compat_module.default.createElement(StorySkeleton, null);
+				var storyProps = getStoryProps(props, story, context, onStoryFnRan);
+				if (!storyProps) return null;
+				if (storyProps.inline) {
+					var _global$FEATURES;
+					if (
+						null !== window_default() &&
+						void 0 !== window_default() &&
+						null !== (_global$FEATURES = window_default().FEATURES) &&
+						void 0 !== _global$FEATURES &&
+						_global$FEATURES.modernInlineRender
+					) {
+						var height = storyProps.height;
+						return compat_module.default.createElement(
+							'div',
+							{ id: storyBlockIdFromId(story.id) },
+							compat_module.default.createElement(
+								react_dist_esm.Zo,
+								{ components: dist_esm.resetComponents },
+								height
+									? compat_module.default.createElement(
+											'style',
+											null,
+											'#story--'.concat(story.id, ' { min-height: ').concat(height, '; transform: translateZ(0); overflow: auto }')
+									  )
+									: null,
+								showLoader && compat_module.default.createElement(StorySkeleton, null),
+								compat_module.default.createElement('div', {
+									ref: storyRef,
+									'data-name': story.name,
+									dangerouslySetInnerHTML: { __html: '<span></span>' },
+								})
+							)
+						);
+					}
+					Promise.all([storyFnRan, rendered]).then(function () {
+						channel.emit(core_events_dist_esm.default.STORY_RENDERED, storyId);
+					});
+				}
+				return compat_module.default.createElement(
+					'div',
+					{ id: storyBlockIdFromId(story.id) },
+					compat_module.default.createElement(
+						react_dist_esm.Zo,
+						{ components: dist_esm.resetComponents },
+						compat_module.default.createElement(Story_Story, storyProps)
+					)
+				);
+			};
+			function ArgsTable_extends() {
+				return (
+					(ArgsTable_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					ArgsTable_extends.apply(this, arguments)
+				);
+			}
+			function ArgsTable_defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			function ArgsTable_slicedToArray(arr, i) {
+				return (
+					(function ArgsTable_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function ArgsTable_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function ArgsTable_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return ArgsTable_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ArgsTable_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function ArgsTable_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function ArgsTable_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			Story.defaultProps = { children: null, name: null };
+			var extractComponentArgTypes = function extractComponentArgTypes(component, _ref, include, exclude) {
+					var id = _ref.id,
+						extractArgTypes = ((0, _ref.storyById)(id).parameters.docs || {}).extractArgTypes;
+					if (!extractArgTypes) throw new Error(dist_esm.ArgsTableError.ARGS_UNSUPPORTED);
+					var argTypes = extractArgTypes(component);
+					return (argTypes = (0, filterArgTypes.h)(argTypes, include, exclude));
+				},
+				isShortcut = function isShortcut(value) {
+					return value && [CURRENT_SELECTION, PRIMARY_STORY].includes(value);
+				},
+				getComponent = function getComponent() {
+					var props = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
+						_ref3 = arguments.length > 1 ? arguments[1] : void 0,
+						id = _ref3.id,
+						storyById = _ref3.storyById,
+						_ref4 = props,
+						of = _ref4.of,
+						_ref5 = props,
+						story = _ref5.story,
+						_storyById2 = storyById(id),
+						component = _storyById2.component;
+					if (isShortcut(of) || isShortcut(story)) return component || null;
+					if (!of) throw new Error(dist_esm.ArgsTableError.NO_COMPONENT);
+					return of;
+				},
+				addComponentTabs = function addComponentTabs(tabs, components, context, include, exclude, sort) {
+					return Object.assign(
+						{},
+						tabs,
+						mapValues_default()(components, function (comp) {
+							return { rows: extractComponentArgTypes(comp, context, include, exclude), sort };
+						})
+					);
+				},
+				StoryTable = function StoryTable(props) {
+					var context = (0, compat_module.useContext)(DocsContext),
+						currentId = context.id,
+						componentStories = context.componentStories,
+						storyName = props.story,
+						component = props.component,
+						subcomponents = props.subcomponents,
+						showComponent = props.showComponent,
+						include = props.include,
+						exclude = props.exclude,
+						sort = props.sort;
+					try {
+						var storyId;
+						switch (storyName) {
+							case CURRENT_SELECTION:
+								storyId = currentId;
+								break;
+							case PRIMARY_STORY:
+								storyId = componentStories()[0].id;
+								break;
+							default:
+								storyId = lookupStoryId(storyName, context);
+						}
+						var story = useStory(storyId, context),
+							_useArgs = (function useArgs(storyId, context) {
+								var channel = addons_dist_esm.KP.getChannel(),
+									story = context.storyById(storyId);
+								if (!story) throw new Error('Unknown story: '.concat(storyId));
+								var storyContext = context.getStoryContext(story),
+									_useState2 = ArgsTable_slicedToArray((0, compat_module.useState)(storyContext.args), 2),
+									args = _useState2[0],
+									setArgs = _useState2[1];
+								return (
+									(0, compat_module.useEffect)(
+										function () {
+											var cb = function cb(changed) {
+												changed.storyId === storyId && setArgs(changed.args);
+											};
+											return (
+												channel.on(core_events_dist_esm.default.STORY_ARGS_UPDATED, cb),
+												function () {
+													return channel.off(core_events_dist_esm.default.STORY_ARGS_UPDATED, cb);
+												}
+											);
+										},
+										[storyId]
+									),
+									[
+										args,
+										(0, compat_module.useCallback)(
+											function (updatedArgs) {
+												return channel.emit(core_events_dist_esm.default.UPDATE_STORY_ARGS, { storyId, updatedArgs });
+											},
+											[storyId]
+										),
+										(0, compat_module.useCallback)(
+											function (argNames) {
+												return channel.emit(core_events_dist_esm.default.RESET_STORY_ARGS, { storyId, argNames });
+											},
+											[storyId]
+										),
+									]
+								);
+							})(storyId, context),
+							_useArgs2 = ArgsTable_slicedToArray(_useArgs, 3),
+							args = _useArgs2[0],
+							updateArgs = _useArgs2[1],
+							resetArgs = _useArgs2[2];
+						if (!story) return compat_module.default.createElement(dist_esm.ArgsTable, { isLoading: !0, updateArgs, resetArgs });
+						var argTypes = (0, filterArgTypes.h)(story.argTypes, include, exclude),
+							mainLabel = getComponentName(component) || 'Story',
+							tabs = ArgsTable_defineProperty({}, mainLabel, { rows: argTypes, args, updateArgs, resetArgs }),
+							storyHasArgsWithControls =
+								argTypes &&
+								Object.values(argTypes).find(function (v) {
+									return !(null == v || !v.control);
+								});
+						if (
+							(storyHasArgsWithControls || ((updateArgs = null), (resetArgs = null), (tabs = {})),
+							!component ||
+								(storyHasArgsWithControls && !showComponent) ||
+								(tabs = addComponentTabs(tabs, ArgsTable_defineProperty({}, mainLabel, component), context, include, exclude)),
+							subcomponents)
+						) {
+							if (Array.isArray(subcomponents))
+								throw new Error('Unexpected subcomponents array. Expected an object whose keys are tab labels and whose values are components.');
+							tabs = addComponentTabs(tabs, subcomponents, context, include, exclude);
+						}
+						return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
+					} catch (err) {
+						return compat_module.default.createElement(dist_esm.ArgsTable, { error: err.message });
+					}
+				},
+				ComponentsTable = function ComponentsTable(props) {
+					var context = (0, compat_module.useContext)(DocsContext),
+						components = props.components,
+						include = props.include,
+						exclude = props.exclude,
+						sort = props.sort,
+						tabs = addComponentTabs({}, components, context, include, exclude);
+					return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
+				},
+				ArgsTable = function ArgsTable(props) {
+					var context = (0, compat_module.useContext)(DocsContext),
+						id = context.id,
+						_storyById3 = (0, context.storyById)(id),
+						controls = _storyById3.parameters.controls,
+						subcomponents = _storyById3.subcomponents,
+						_ref6 = props,
+						include = _ref6.include,
+						exclude = _ref6.exclude,
+						components = _ref6.components,
+						sortProp = _ref6.sort,
+						storyName = props.story,
+						sort = sortProp || (null == controls ? void 0 : controls.sort),
+						main = getComponent(props, context);
+					if (storyName)
+						return compat_module.default.createElement(StoryTable, ArgsTable_extends({}, props, { component: main, subcomponents, sort }));
+					if (!components && !subcomponents) {
+						var mainProps;
+						try {
+							mainProps = { rows: extractComponentArgTypes(main, context, include, exclude) };
+						} catch (err) {
+							mainProps = { error: err.message };
+						}
+						return compat_module.default.createElement(dist_esm.ArgsTable, ArgsTable_extends({}, mainProps, { sort }));
+					}
+					if (components) return compat_module.default.createElement(ComponentsTable, ArgsTable_extends({}, props, { components, sort }));
+					var mainLabel = getComponentName(main);
+					return compat_module.default.createElement(
+						ComponentsTable,
+						ArgsTable_extends({}, props, { components: Object.assign(ArgsTable_defineProperty({}, mainLabel, main), subcomponents), sort })
+					);
+				};
+			ArgsTable.defaultProps = { of: CURRENT_SELECTION };
+			__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js');
+			var blocks_Source = __webpack_require__('../../node_modules/@storybook/components/dist/esm/blocks/Source.js'),
+				ActionBar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ActionBar/ActionBar.js'),
+				bar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/bar/bar.js'),
+				bar_button = __webpack_require__('../../node_modules/@storybook/components/dist/esm/bar/button.js');
+			function Toolbar_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Toolbar_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var Zoom = function Zoom(_ref) {
+					var zoom = _ref.zoom,
+						resetZoom = _ref.resetZoom;
+					return compat_module.default.createElement(
+						compat_module.default.Fragment,
+						null,
+						compat_module.default.createElement(
+							bar_button.hU,
+							{
+								key: 'zoomin',
+								onClick: function onClick(e) {
+									e.preventDefault(), zoom(0.8);
+								},
+								title: 'Zoom in',
+							},
+							compat_module.default.createElement(icon.P, { icon: 'zoom' })
+						),
+						compat_module.default.createElement(
+							bar_button.hU,
+							{
+								key: 'zoomout',
+								onClick: function onClick(e) {
+									e.preventDefault(), zoom(1.25);
+								},
+								title: 'Zoom out',
+							},
+							compat_module.default.createElement(icon.P, { icon: 'zoomout' })
+						),
+						compat_module.default.createElement(
+							bar_button.hU,
+							{
+								key: 'zoomreset',
+								onClick: function onClick(e) {
+									e.preventDefault(), resetZoom();
+								},
+								title: 'Reset zoom',
+							},
+							compat_module.default.createElement(icon.P, { icon: 'zoomreset' })
+						)
+					);
+				},
+				Eject = function Eject(_ref2) {
+					var baseUrl = _ref2.baseUrl,
+						storyId = _ref2.storyId;
+					return compat_module.default.createElement(
+						bar_button.hU,
+						{ key: 'opener', href: ''.concat(baseUrl, '?id=').concat(storyId), target: '_blank', title: 'Open canvas in new tab' },
+						compat_module.default.createElement(icon.P, { icon: 'share' })
+					);
+				};
+			Eject.displayName = 'Eject';
+			var Bar = (0, esm.styled)(bar.j)({ position: 'absolute', left: 0, right: 0, top: 0, transition: 'transform .2s linear' }),
+				Toolbar = function Toolbar(_ref3) {
+					var isLoading = _ref3.isLoading,
+						storyId = _ref3.storyId,
+						baseUrl = _ref3.baseUrl,
+						zoom = _ref3.zoom,
+						resetZoom = _ref3.resetZoom,
+						rest = Toolbar_objectWithoutProperties(_ref3, ['isLoading', 'storyId', 'baseUrl', 'zoom', 'resetZoom']);
+					return compat_module.default.createElement(
+						Bar,
+						rest,
+						compat_module.default.createElement(
+							compat_module.Fragment,
+							{ key: 'left' },
+							isLoading
+								? [1, 2, 3].map(function (key) {
+										return compat_module.default.createElement(bar_button.Z$, { key });
+								  })
+								: compat_module.default.createElement(Zoom, { zoom, resetZoom })
+						),
+						compat_module.default.createElement(
+							compat_module.Fragment,
+							{ key: 'right' },
+							storyId &&
+								(isLoading
+									? compat_module.default.createElement(bar_button.Z$, null)
+									: compat_module.default.createElement(Eject, { storyId, baseUrl }))
+						)
+					);
+				};
+			Toolbar.displayName = 'Toolbar';
+			var browserSupportsCssZoom_globalWindow = window_default().window;
+			function browserSupportsCssZoom() {
+				try {
+					return void 0 !== browserSupportsCssZoom_globalWindow.document.implementation.createHTMLDocument('').body.style.zoom;
+				} catch (error) {
+					return !1;
+				}
+			}
+			function ZoomElement_slicedToArray(arr, i) {
+				return (
+					(function ZoomElement_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function ZoomElement_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function ZoomElement_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return ZoomElement_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ZoomElement_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function ZoomElement_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function ZoomElement_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var ZoomElementWrapper = esm.styled.div(function (_ref) {
+				var _ref$scale = _ref.scale,
+					scale = void 0 === _ref$scale ? 1 : _ref$scale,
+					height = _ref.height;
+				return browserSupportsCssZoom()
+					? { '> *': { zoom: 1 / scale } }
+					: { height: height + 50, transformOrigin: 'top left', transform: 'scale('.concat(1 / scale, ')') };
+			});
+			function ZoomElement(_ref2) {
+				var scale = _ref2.scale,
+					children = _ref2.children,
+					componentWrapperRef = compat_module.default.useRef(null),
+					_useState2 = ZoomElement_slicedToArray((0, compat_module.useState)(0), 2),
+					height = _useState2[0],
+					setHeight = _useState2[1];
+				return (
+					(0, compat_module.useEffect)(
+						function () {
+							componentWrapperRef.current && setHeight(componentWrapperRef.current.getBoundingClientRect().height);
+						},
+						[scale, componentWrapperRef.current]
+					),
+					compat_module.default.createElement(
+						ZoomElementWrapper,
+						{ scale, height },
+						compat_module.default.createElement('div', { ref: componentWrapperRef, className: 'innerZoomElementWrapper' }, children)
+					)
+				);
+			}
+			function ZoomIFrame_typeof(obj) {
+				return (
+					(ZoomIFrame_typeof =
+						'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
+							? function _typeof(obj) {
+									return typeof obj;
+							  }
+							: function _typeof(obj) {
+									return obj && 'function' == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
+							  }),
+					ZoomIFrame_typeof(obj)
+				);
+			}
+			function ZoomIFrame_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function ZoomIFrame_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function ZoomIFrame_setPrototypeOf(o, p) {
+				return (
+					(ZoomIFrame_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					ZoomIFrame_setPrototypeOf(o, p)
+				);
+			}
+			function ZoomIFrame_createSuper(Derived) {
+				var hasNativeReflectConstruct = (function ZoomIFrame_isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = ZoomIFrame_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = ZoomIFrame_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return ZoomIFrame_possibleConstructorReturn(this, result);
+				};
+			}
+			function ZoomIFrame_possibleConstructorReturn(self, call) {
+				return !call || ('object' !== ZoomIFrame_typeof(call) && 'function' != typeof call)
+					? (function ZoomIFrame_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+					  })(self)
+					: call;
+			}
+			function ZoomIFrame_getPrototypeOf(o) {
+				return (
+					(ZoomIFrame_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					ZoomIFrame_getPrototypeOf(o)
+				);
+			}
+			ZoomElement.displayName = 'ZoomElement';
+			var ZoomIFrame = (function (_Component) {
+				!(function ZoomIFrame_inherits(subClass, superClass) {
+					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+					(subClass.prototype = Object.create(superClass && superClass.prototype, {
+						constructor: { value: subClass, writable: !0, configurable: !0 },
+					})),
+						superClass && ZoomIFrame_setPrototypeOf(subClass, superClass);
+				})(ZoomIFrame, _Component);
+				var _super = ZoomIFrame_createSuper(ZoomIFrame);
+				function ZoomIFrame() {
+					var _this;
+					ZoomIFrame_classCallCheck(this, ZoomIFrame);
+					for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
+					return ((_this = _super.call.apply(_super, [this].concat(args))).iframe = null), _this;
+				}
+				return (
+					(function ZoomIFrame_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && ZoomIFrame_defineProperties(Constructor.prototype, protoProps),
+							staticProps && ZoomIFrame_defineProperties(Constructor, staticProps),
+							Constructor
+						);
+					})(ZoomIFrame, [
+						{
+							key: 'componentDidMount',
+							value: function componentDidMount() {
+								var iFrameRef = this.props.iFrameRef;
+								this.iframe = iFrameRef.current;
+							},
+						},
+						{
+							key: 'shouldComponentUpdate',
+							value: function shouldComponentUpdate(nextProps) {
+								var _this$props = this.props,
+									scale = _this$props.scale,
+									active = _this$props.active;
+								return (
+									scale !== nextProps.scale && this.setIframeInnerZoom(nextProps.scale),
+									active !== nextProps.active && this.iframe.setAttribute('data-is-storybook', nextProps.active ? 'true' : 'false'),
+									!1
+								);
+							},
+						},
+						{
+							key: 'setIframeInnerZoom',
+							value: function setIframeInnerZoom(scale) {
+								try {
+									browserSupportsCssZoom()
+										? Object.assign(this.iframe.contentDocument.body.style, { zoom: 1 / scale })
+										: Object.assign(this.iframe.contentDocument.body.style, {
+												width: ''.concat(100 * scale, '%'),
+												height: ''.concat(100 * scale, '%'),
+												transform: 'scale('.concat(1 / scale, ')'),
+												transformOrigin: 'top left',
+										  });
+								} catch (e) {
+									this.setIframeZoom(scale);
+								}
+							},
+						},
+						{
+							key: 'setIframeZoom',
+							value: function setIframeZoom(scale) {
+								Object.assign(this.iframe.style, {
+									width: ''.concat(100 * scale, '%'),
+									height: ''.concat(100 * scale, '%'),
+									transform: 'scale('.concat(1 / scale, ')'),
+									transformOrigin: 'top left',
+								});
+							},
+						},
+						{
+							key: 'render',
+							value: function render() {
+								return this.props.children;
+							},
+						},
+					]),
+					ZoomIFrame
+				);
+			})(compat_module.Component);
+			ZoomIFrame.displayName = 'ZoomIFrame';
+			window_default().window;
+			var Zoom_Zoom_Element = ZoomElement;
+			function Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _toConsumableArray(arr) {
+				return (
+					(function _arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return Preview_arrayLikeToArray(arr);
+					})(arr) ||
+					(function _iterableToArray(iter) {
+						if ('undefined' != typeof Symbol && Symbol.iterator in Object(iter)) return Array.from(iter);
+					})(arr) ||
+					Preview_unsupportedIterableToArray(arr) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function Preview_slicedToArray(arr, i) {
+				return (
+					(function Preview_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function Preview_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					Preview_unsupportedIterableToArray(arr, i) ||
+					(function Preview_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function Preview_unsupportedIterableToArray(o, minLen) {
+				if (o) {
+					if ('string' == typeof o) return Preview_arrayLikeToArray(o, minLen);
+					var n = Object.prototype.toString.call(o).slice(8, -1);
+					return (
+						'Object' === n && o.constructor && (n = o.constructor.name),
+						'Map' === n || 'Set' === n
+							? Array.from(o)
+							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
+							? Preview_arrayLikeToArray(o, minLen)
+							: void 0
+					);
+				}
+			}
+			function Preview_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function Preview_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Preview_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			function Preview_extends() {
+				return (
+					(Preview_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Preview_extends.apply(this, arguments)
+				);
+			}
+			var ChildrenContainer = esm.styled.div(
+					function (_ref) {
+						var isColumn = _ref.isColumn,
+							columns = _ref.columns,
+							layout = _ref.layout;
+						return {
+							display: isColumn || !columns ? 'block' : 'flex',
+							position: 'relative',
+							flexWrap: 'wrap',
+							overflow: 'auto',
+							flexDirection: isColumn ? 'column' : 'row',
+							'& .innerZoomElementWrapper > *': isColumn
+								? { width: 'fullscreen' !== layout ? 'calc(100% - 20px)' : '100%', display: 'block' }
+								: { maxWidth: 'fullscreen' !== layout ? 'calc(100% - 20px)' : '100%', display: 'inline-block' },
+						};
+					},
+					function (_ref2) {
+						var _ref2$layout = _ref2.layout,
+							layout = void 0 === _ref2$layout ? 'padded' : _ref2$layout;
+						return 'centered' === layout || 'padded' === layout
+							? { padding: '30px 20px', margin: -10, '& .innerZoomElementWrapper > *': { width: 'auto', border: '10px solid transparent!important' } }
+							: {};
+					},
+					function (_ref3) {
+						var _ref3$layout = _ref3.layout;
+						return 'centered' === (void 0 === _ref3$layout ? 'padded' : _ref3$layout)
+							? { display: 'flex', justifyContent: 'center', justifyItems: 'center', alignContent: 'center', alignItems: 'center' }
+							: {};
+					},
+					function (_ref4) {
+						var columns = _ref4.columns;
+						return columns && columns > 1 ? { '.innerZoomElementWrapper > *': { minWidth: 'calc(100% / '.concat(columns, ' - 20px)') } } : {};
+					}
+				),
+				StyledSource = (0, esm.styled)(blocks_Source.Hw)(function (_ref5) {
+					var theme = _ref5.theme;
+					return {
+						margin: 0,
+						borderTopLeftRadius: 0,
+						borderTopRightRadius: 0,
+						borderBottomLeftRadius: theme.appBorderRadius,
+						borderBottomRightRadius: theme.appBorderRadius,
+						border: 'none',
+						background: 'light' === theme.base ? 'rgba(0, 0, 0, 0.85)' : (0, polished_esm._j)(0.05, theme.background.content),
+						color: theme.color.lightest,
+						button: { background: 'light' === theme.base ? 'rgba(0, 0, 0, 0.85)' : (0, polished_esm._j)(0.05, theme.background.content) },
+					};
+				}),
+				PreviewContainer = esm.styled.div(
+					function (_ref6) {
+						var theme = _ref6.theme,
+							withSource = _ref6.withSource,
+							isExpanded = _ref6.isExpanded;
+						return Object.assign({ position: 'relative', overflow: 'hidden', margin: '25px 0 40px' }, getBlockBackgroundStyle(theme), {
+							borderBottomLeftRadius: withSource && isExpanded && 0,
+							borderBottomRightRadius: withSource && isExpanded && 0,
+							borderBottomWidth: isExpanded && 0,
+						});
+					},
+					function (_ref7) {
+						return _ref7.withToolbar && { paddingTop: 40 };
+					}
+				);
+			function Preview_getStoryId(children) {
+				if (1 === compat_module.Children.count(children)) {
+					var elt = children;
+					if (elt.props) return elt.props.id;
+				}
+				return null;
+			}
+			var PositionedToolbar = (0, esm.styled)(Toolbar)({ position: 'absolute', top: 0, left: 0, right: 0, height: 40 }),
+				Relative = esm.styled.div({ overflow: 'hidden', position: 'relative' }),
+				Preview = function Preview(_ref8) {
+					var isLoading = _ref8.isLoading,
+						isColumn = _ref8.isColumn,
+						columns = _ref8.columns,
+						children = _ref8.children,
+						withSource = _ref8.withSource,
+						_ref8$withToolbar = _ref8.withToolbar,
+						withToolbar = void 0 !== _ref8$withToolbar && _ref8$withToolbar,
+						_ref8$isExpanded = _ref8.isExpanded,
+						isExpanded = void 0 !== _ref8$isExpanded && _ref8$isExpanded,
+						additionalActions = _ref8.additionalActions,
+						className = _ref8.className,
+						props = Preview_objectWithoutProperties(_ref8, [
+							'isLoading',
+							'isColumn',
+							'columns',
+							'children',
+							'withSource',
+							'withToolbar',
+							'isExpanded',
+							'additionalActions',
+							'className',
+						]),
+						_useState2 = Preview_slicedToArray((0, compat_module.useState)(isExpanded), 2),
+						expanded = _useState2[0],
+						_getSource = (function getSource(withSource, expanded, setExpanded) {
+							switch (!0) {
+								case !(!withSource || !withSource.error):
+									return {
+										source: null,
+										actionItem: {
+											title: 'No code available',
+											className: 'docblock-code-toggle docblock-code-toggle--disabled',
+											disabled: !0,
+											onClick: function onClick() {
+												return setExpanded(!1);
+											},
+										},
+									};
+								case expanded:
+									return {
+										source: compat_module.default.createElement(StyledSource, Preview_extends({}, withSource, { dark: !0 })),
+										actionItem: {
+											title: 'Hide code',
+											className: 'docblock-code-toggle docblock-code-toggle--expanded',
+											onClick: function onClick() {
+												return setExpanded(!1);
+											},
+										},
+									};
+								default:
+									return {
+										source: compat_module.default.createElement(StyledSource, Preview_extends({}, withSource, { dark: !0 })),
+										actionItem: {
+											title: 'Show code',
+											className: 'docblock-code-toggle',
+											onClick: function onClick() {
+												return setExpanded(!0);
+											},
+										},
+									};
+							}
+						})(withSource, expanded, _useState2[1]),
+						source = _getSource.source,
+						actionItem = _getSource.actionItem,
+						_useState4 = Preview_slicedToArray((0, compat_module.useState)(1), 2),
+						scale = _useState4[0],
+						setScale = _useState4[1],
+						previewClasses = [className].concat(['sbdocs', 'sbdocs-preview']),
+						defaultActionItems = withSource ? [actionItem] : [],
+						_useState6 = Preview_slicedToArray((0, compat_module.useState)(additionalActions ? _toConsumableArray(additionalActions) : []), 2),
+						additionalActionItems = _useState6[0],
+						setAdditionalActionItems = _useState6[1],
+						actionItems = [].concat(defaultActionItems, _toConsumableArray(additionalActionItems)),
+						layout = (function getLayout(children) {
+							return children.reduce(function (result, c) {
+								return (
+									result ||
+									('string' == typeof c || 'number' == typeof c ? 'padded' : (c.props && c.props.parameters && c.props.parameters.layout) || 'padded')
+								);
+							}, void 0);
+						})(1 === compat_module.Children.count(children) ? [children] : children),
+						globalWindow = window_default().window,
+						copyToClipboard = (0, compat_module.useCallback)(
+							(function () {
+								var _ref9 = (function Preview_asyncToGenerator(fn) {
+									return function () {
+										var self = this,
+											args = arguments;
+										return new Promise(function (resolve, reject) {
+											var gen = fn.apply(self, args);
+											function _next(value) {
+												Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+											}
+											function _throw(err) {
+												Preview_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+											}
+											_next(void 0);
+										});
+									};
+								})(
+									regeneratorRuntime.mark(function _callee(text) {
+										var _yield$import;
+										return regeneratorRuntime.wrap(function _callee$(_context) {
+											for (;;)
+												switch ((_context.prev = _context.next)) {
+													case 0:
+														return (
+															(_context.next = 2),
+															__webpack_require__
+																.e(172)
+																.then(
+																	__webpack_require__.bind(
+																		__webpack_require__,
+																		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js'
+																	)
+																)
+														);
+													case 2:
+														(_yield$import = _context.sent), (0, _yield$import.createCopyToClipboardFunction)();
+													case 5:
+													case 'end':
+														return _context.stop();
+												}
+										}, _callee);
+									})
+								);
+								return function (_x) {
+									return _ref9.apply(this, arguments);
+								};
+							})(),
+							[]
+						);
+					return compat_module.default.createElement(
+						PreviewContainer,
+						Preview_extends({ withSource, withToolbar }, props, { className: previewClasses.join(' ') }),
+						withToolbar &&
+							compat_module.default.createElement(PositionedToolbar, {
+								isLoading,
+								border: !0,
+								zoom: function zoom(z) {
+									return setScale(scale * z);
+								},
+								resetZoom: function resetZoom() {
+									return setScale(1);
+								},
+								storyId: Preview_getStoryId(children),
+								baseUrl: './iframe.html',
+							}),
+						compat_module.default.createElement(
+							ZoomContext.Provider,
+							{ value: { scale } },
+							compat_module.default.createElement(
+								Relative,
+								{
+									className: 'docs-story',
+									onCopyCapture:
+										withSource &&
+										function onCopyCapture(e) {
+											e.preventDefault(),
+												0 ===
+													additionalActionItems.filter(function (item) {
+														return 'Copied' === item.title;
+													}).length &&
+													copyToClipboard(source.props.code).then(function () {
+														setAdditionalActionItems(
+															[].concat(_toConsumableArray(additionalActionItems), [{ title: 'Copied', onClick: function onClick() {} }])
+														),
+															globalWindow.setTimeout(function () {
+																return setAdditionalActionItems(
+																	additionalActionItems.filter(function (item) {
+																		return 'Copied' !== item.title;
+																	})
+																);
+															}, 1500);
+													});
+										},
+								},
+								compat_module.default.createElement(
+									ChildrenContainer,
+									{ isColumn: isColumn || !Array.isArray(children), columns, layout },
+									compat_module.default.createElement(
+										Zoom_Zoom_Element,
+										{ scale },
+										Array.isArray(children)
+											? children.map(function (child, i) {
+													return compat_module.default.createElement('div', { key: i }, child);
+											  })
+											: compat_module.default.createElement('div', null, children)
+									)
+								),
+								compat_module.default.createElement(ActionBar.o, { actionItems })
+							)
+						),
+						withSource && expanded && source
+					);
+				};
+			Preview.displayName = 'Preview';
+			var StyledPreview = (0, esm.styled)(Preview)(function () {
+					return { '.docs-story': { paddingTop: 32, paddingBottom: 40 } };
+				}),
+				PreviewSkeleton = function PreviewSkeleton() {
+					return compat_module.default.createElement(
+						StyledPreview,
+						{ isLoading: !0, withToolbar: !0 },
+						compat_module.default.createElement(StorySkeleton, null)
+					);
+				};
+			PreviewSkeleton.displayName = 'PreviewSkeleton';
+			var SourceType,
+				fast_deep_equal = __webpack_require__('../../node_modules/fast-deep-equal/index.js'),
+				fast_deep_equal_default = __webpack_require__.n(fast_deep_equal),
+				SNIPPET_RENDERED = (''.concat('storybook/docs', '/panel'), ''.concat('storybook/docs', '/snippet-rendered'));
+			function SourceContainer_slicedToArray(arr, i) {
+				return (
+					(function SourceContainer_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function SourceContainer_iterableToArrayLimit(arr, i) {
+						if ('undefined' == typeof Symbol || !(Symbol.iterator in Object(arr))) return;
+						var _arr = [],
+							_n = !0,
+							_d = !1,
+							_e = void 0;
+						try {
+							for (var _s, _i = arr[Symbol.iterator](); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function SourceContainer_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return SourceContainer_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return SourceContainer_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function SourceContainer_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function SourceContainer_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			!(function (SourceType) {
+				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
+			})(SourceType || (SourceType = {}));
+			var SourceContext = (0, compat_module.createContext)({ sources: {} }),
+				SourceContainer = function SourceContainer(_ref) {
+					var children = _ref.children,
+						_useState2 = SourceContainer_slicedToArray((0, compat_module.useState)({}), 2),
+						sources = _useState2[0],
+						setSources = _useState2[1],
+						channel = addons_dist_esm.KP.getChannel();
+					return (
+						(0, compat_module.useEffect)(function () {
+							var handleSnippetRendered = function handleSnippetRendered(id, newItem) {
+								newItem !== sources[id] &&
+									setSources(function (current) {
+										var newSources = Object.assign(
+											{},
+											current,
+											(function SourceContainer_defineProperty(obj, key, value) {
+												return (
+													key in obj
+														? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 })
+														: (obj[key] = value),
+													obj
+												);
+											})({}, id, newItem)
+										);
+										return fast_deep_equal_default()(current, newSources) ? current : newSources;
+									});
+							};
+							return (
+								channel.on(SNIPPET_RENDERED, handleSnippetRendered),
+								function () {
+									return channel.off(SNIPPET_RENDERED, handleSnippetRendered);
+								}
+							);
+						}),
+						compat_module.default.createElement(SourceContext.Provider, { value: { sources } }, children)
+					);
+				},
+				esm_parameters =
+					(__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+					__webpack_require__('../../node_modules/@storybook/store/dist/esm/parameters.js'));
+			function enhanceSource_toConsumableArray(arr) {
+				return (
+					(function enhanceSource_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return enhanceSource_arrayLikeToArray(arr);
+					})(arr) ||
+					(function enhanceSource_iterableToArray(iter) {
+						if ('undefined' != typeof Symbol && Symbol.iterator in Object(iter)) return Array.from(iter);
+					})(arr) ||
+					(function enhanceSource_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return enhanceSource_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return enhanceSource_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function enhanceSource_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function enhanceSource_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var SourceState,
+				extract = function extract(targetId, _ref) {
+					var source = _ref.source,
+						locationsMap = _ref.locationsMap;
+					if (!locationsMap) return source;
+					var location =
+						locationsMap[
+							(function storyIdToSanitizedStoryName(id) {
+								return id.replace(/^.*?--/, '');
+							})(targetId)
+						];
+					return location
+						? (function extractSource(location, lines) {
+								var start = location.startBody,
+									end = location.endBody;
+								if (start.line === end.line && void 0 !== lines[start.line - 1]) return lines[start.line - 1].substring(start.col, end.col);
+								var startLine = lines[start.line - 1],
+									endLine = lines[end.line - 1];
+								return void 0 === startLine || void 0 === endLine
+									? null
+									: [startLine.substring(start.col)]
+											.concat(enhanceSource_toConsumableArray(lines.slice(start.line, end.line - 1)), [endLine.substring(0, end.col)])
+											.join('\n');
+						  })(location, source.split('\n'))
+						: source;
+				};
+			!(function (SourceState) {
+				(SourceState.OPEN = 'open'), (SourceState.CLOSED = 'closed'), (SourceState.NONE = 'none');
+			})(SourceState || (SourceState = {}));
+			var getSnippet = function getSnippet(snippet, story) {
+					var _parameters$docs, _parameters$docs$sour, _parameters$docs2, _parameters$docs2$sou, _enhanced$docs, _enhanced$docs$source;
+					if (!story) return snippet;
+					var _parameters$docs3,
+						_parameters$docs3$tra,
+						_parameters$docs4,
+						_parameters$docs4$tra,
+						parameters = story.parameters,
+						isArgsStory = parameters.__isArgsStory,
+						type =
+							(null === (_parameters$docs = parameters.docs) ||
+							void 0 === _parameters$docs ||
+							null === (_parameters$docs$sour = _parameters$docs.source) ||
+							void 0 === _parameters$docs$sour
+								? void 0
+								: _parameters$docs$sour.type) || SourceType.AUTO,
+						userCode =
+							null === (_parameters$docs2 = parameters.docs) ||
+							void 0 === _parameters$docs2 ||
+							null === (_parameters$docs2$sou = _parameters$docs2.source) ||
+							void 0 === _parameters$docs2$sou
+								? void 0
+								: _parameters$docs2$sou.code;
+					if (void 0 !== userCode) return userCode;
+					if (type === SourceType.DYNAMIC)
+						return (
+							(null === (_parameters$docs3 = parameters.docs) ||
+							void 0 === _parameters$docs3 ||
+							null === (_parameters$docs3$tra = _parameters$docs3.transformSource) ||
+							void 0 === _parameters$docs3$tra
+								? void 0
+								: _parameters$docs3$tra.call(_parameters$docs3, snippet, story)) || snippet
+						);
+					if (type === SourceType.AUTO && snippet && isArgsStory)
+						return (
+							(null === (_parameters$docs4 = parameters.docs) ||
+							void 0 === _parameters$docs4 ||
+							null === (_parameters$docs4$tra = _parameters$docs4.transformSource) ||
+							void 0 === _parameters$docs4$tra
+								? void 0
+								: _parameters$docs4$tra.call(_parameters$docs4, snippet, story)) || snippet
+						);
+					var enhanced =
+						(function enhanceSource(story) {
+							var _docs$source,
+								id = story.id,
+								parameters = story.parameters,
+								storySource = parameters.storySource,
+								_parameters$docs = parameters.docs,
+								docs = void 0 === _parameters$docs ? {} : _parameters$docs,
+								transformSource = docs.transformSource;
+							if (
+								null == storySource ||
+								!storySource.source ||
+								(null !== (_docs$source = docs.source) && void 0 !== _docs$source && _docs$source.code)
+							)
+								return null;
+							var input = extract(id, storySource),
+								code = transformSource ? transformSource(input, story) : input;
+							return { docs: (0, esm_parameters.f)(docs, { source: { code } }) };
+						})(story) || parameters;
+					return (
+						(null == enhanced ||
+						null === (_enhanced$docs = enhanced.docs) ||
+						void 0 === _enhanced$docs ||
+						null === (_enhanced$docs$source = _enhanced$docs.source) ||
+						void 0 === _enhanced$docs$source
+							? void 0
+							: _enhanced$docs$source.code) || ''
+					);
+				},
+				getSourceProps = function getSourceProps(props, docsContext, sourceContext) {
+					var currentId = docsContext.id,
+						parameters = (0, docsContext.storyById)(currentId).parameters,
+						singleProps = props,
+						multiProps = props,
+						source = props.code,
+						storyIds = (multiProps.ids || [singleProps.id || currentId]).map(function (targetId) {
+							return targetId === CURRENT_SELECTION ? currentId : targetId;
+						}),
+						stories = useStories(storyIds, docsContext);
+					if (!stories.every(Boolean)) return { error: blocks_Source.ui.SOURCE_UNAVAILABLE, state: SourceState.NONE };
+					source ||
+						(source = storyIds
+							.map(function (storyId, idx) {
+								var storySource = (function getStorySource(storyId, sourceContext) {
+										var sources = sourceContext.sources;
+										return (null == sources ? void 0 : sources[storyId]) || '';
+									})(storyId, sourceContext),
+									storyObj = stories[idx];
+								return getSnippet(storySource, storyObj);
+							})
+							.join('\n\n'));
+					var state = (function getSourceState(stories) {
+							var states = stories
+								.map(function (story) {
+									var _story$parameters$doc, _story$parameters$doc2;
+									return null === (_story$parameters$doc = story.parameters.docs) ||
+										void 0 === _story$parameters$doc ||
+										null === (_story$parameters$doc2 = _story$parameters$doc.source) ||
+										void 0 === _story$parameters$doc2
+										? void 0
+										: _story$parameters$doc2.state;
+								})
+								.filter(Boolean);
+							return 0 === states.length ? SourceState.CLOSED : states[0];
+						})(stories),
+						_parameters$docs5 = parameters.docs,
+						_docsParameters$sourc = (void 0 === _parameters$docs5 ? {} : _parameters$docs5).source,
+						_sourceParameters$lan = (void 0 === _docsParameters$sourc ? {} : _docsParameters$sourc).language,
+						docsLanguage = void 0 === _sourceParameters$lan ? null : _sourceParameters$lan;
+					return source
+						? { code: source, state, language: props.language || docsLanguage || 'jsx', dark: props.dark || !1 }
+						: { error: blocks_Source.ui.SOURCE_UNAVAILABLE, state };
+				},
+				Source = function Source(props) {
+					var sourceContext = (0, compat_module.useContext)(SourceContext),
+						docsContext = (0, compat_module.useContext)(DocsContext),
+						sourceProps = getSourceProps(props, docsContext, sourceContext);
+					return compat_module.default.createElement(blocks_Source.Hw, sourceProps);
+				};
+			function Canvas_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function Canvas_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var types_TypeSystem,
+				Canvas = function Canvas(props) {
+					var _getPreviewProps = (function getPreviewProps(_ref, docsContext, sourceContext) {
+							var withSource = _ref.withSource,
+								mdxSource = _ref.mdxSource,
+								children = _ref.children,
+								props = Canvas_objectWithoutProperties(_ref, ['withSource', 'mdxSource', 'children']),
+								mdxComponentAnnotations = docsContext.mdxComponentAnnotations,
+								mdxStoryNameToKey = docsContext.mdxStoryNameToKey,
+								sourceState = withSource,
+								isLoading = !1;
+							if (sourceState === SourceState.NONE) return { isLoading, previewProps: props };
+							if (mdxSource)
+								return {
+									isLoading,
+									previewProps: Object.assign({}, props, { withSource: getSourceProps({ code: decodeURI(mdxSource) }, docsContext, sourceContext) }),
+								};
+							var targetIds = (Array.isArray(children) ? children : [children])
+									.filter(function (c) {
+										return c.props && (c.props.id || c.props.name);
+									})
+									.map(function (s) {
+										return (
+											s.props.id ||
+											(0, dist.toId)(
+												mdxComponentAnnotations.id || mdxComponentAnnotations.title,
+												(0, dist.storyNameFromExport)(mdxStoryNameToKey[s.props.name])
+											)
+										);
+									}),
+								sourceProps = getSourceProps({ ids: targetIds }, docsContext, sourceContext);
+							return (
+								sourceState || (sourceState = sourceProps.state),
+								{
+									isLoading: (isLoading = useStories(targetIds, docsContext).some(function (s) {
+										return !s;
+									})),
+									previewProps: Object.assign({}, props, { withSource: sourceProps, isExpanded: sourceState === SourceState.OPEN }),
+								}
+							);
+						})(props, (0, compat_module.useContext)(DocsContext), (0, compat_module.useContext)(SourceContext)),
+						isLoading = _getPreviewProps.isLoading,
+						previewProps = _getPreviewProps.previewProps,
+						children = props.children;
+					return isLoading
+						? compat_module.default.createElement(PreviewSkeleton, null)
+						: compat_module.default.createElement(
+								react_dist_esm.Zo,
+								{ components: dist_esm.resetComponents },
+								compat_module.default.createElement(Preview, previewProps, children)
+						  );
+				},
+				index_modern =
+					(__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+					__webpack_require__('../../node_modules/markdown-to-jsx/dist/index.modern.js')),
+				Description = function Description(_ref) {
+					var markdown = _ref.markdown;
+					return compat_module.default.createElement(
+						DocumentFormatting.i9,
+						null,
+						compat_module.default.createElement(index_modern.Z, { options: { forceBlock: !0, overrides: DocumentFormatting.wx } }, markdown)
+					);
+				};
+			(Description.displayName = 'Description'),
+				(function (TypeSystem) {
+					(TypeSystem.JAVASCRIPT = 'JavaScript'),
+						(TypeSystem.FLOW = 'Flow'),
+						(TypeSystem.TYPESCRIPT = 'TypeScript'),
+						(TypeSystem.UNKNOWN = 'Unknown');
+				})(types_TypeSystem || (types_TypeSystem = {}));
+			var string_str = function str(obj) {
+				if (!obj) return '';
+				if ('string' == typeof obj) return obj;
+				throw new Error('Description: expected string, got: '.concat(JSON.stringify(obj)));
+			};
+			__webpack_require__('../../node_modules/doctrine/lib/doctrine.js');
+			var FlowTypesType;
+			!(function (FlowTypesType) {
+				(FlowTypesType.UNION = 'union'), (FlowTypesType.SIGNATURE = 'signature');
+			})(FlowTypesType || (FlowTypesType = {}));
+			__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js');
+			var DescriptionType;
+			!(function (DescriptionType) {
+				(DescriptionType.INFO = 'info'),
+					(DescriptionType.NOTES = 'notes'),
+					(DescriptionType.DOCGEN = 'docgen'),
+					(DescriptionType.LEGACY_5_2 = 'legacy-5.2'),
+					(DescriptionType.AUTO = 'auto');
+			})(DescriptionType || (DescriptionType = {}));
+			var getNotes = function getNotes(notes) {
+					return notes && ('string' == typeof notes ? notes : string_str(notes.markdown) || string_str(notes.text));
+				},
+				getInfo = function getInfo(info) {
+					return info && ('string' == typeof info ? info : string_str(info.text));
+				},
+				noDescription = function noDescription(component) {
+					return null;
+				},
+				getDescriptionProps = function getDescriptionProps(_ref, _ref2) {
+					var of = _ref.of,
+						type = _ref.type,
+						markdown = _ref.markdown,
+						children = _ref.children,
+						id = _ref2.id,
+						_storyById = (0, _ref2.storyById)(id),
+						component = _storyById.component,
+						parameters = _storyById.parameters;
+					if (children || markdown) return { markdown: children || markdown };
+					var notes = parameters.notes,
+						info = parameters.info,
+						_ref3 = parameters.docs || {},
+						_ref3$extractComponen = _ref3.extractComponentDescription,
+						extractComponentDescription = void 0 === _ref3$extractComponen ? noDescription : _ref3$extractComponen,
+						description = _ref3.description,
+						target = of === CURRENT_SELECTION ? component : of,
+						componentDescriptionParameter = null == description ? void 0 : description.component;
+					if (componentDescriptionParameter) return { markdown: componentDescriptionParameter };
+					switch (type) {
+						case DescriptionType.INFO:
+							return { markdown: getInfo(info) };
+						case DescriptionType.NOTES:
+							return { markdown: getNotes(notes) };
+						case DescriptionType.LEGACY_5_2:
+							return {
+								markdown: '\n'
+									.concat(getNotes(notes) || getInfo(info) || '', '\n\n')
+									.concat(extractComponentDescription(target) || '', '\n')
+									.trim(),
+							};
+						case DescriptionType.DOCGEN:
+						case DescriptionType.AUTO:
+						default:
+							return { markdown: extractComponentDescription(target, Object.assign({ component }, parameters)) };
+					}
+				},
+				DescriptionContainer = function DescriptionContainer(props) {
+					var context = (0, compat_module.useContext)(DocsContext),
+						markdown = getDescriptionProps(props, context).markdown;
+					return markdown ? compat_module.default.createElement(Description, { markdown }) : null;
+				};
+			function DocsPage_defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			DescriptionContainer.defaultProps = { of: '.' };
+			var DocsPage_Title = esm.styled.h1(shared.YX, function (_ref) {
+					var theme = _ref.theme;
+					return DocsPage_defineProperty(
+						{ color: theme.color.defaultText, fontSize: theme.typography.size.m3, fontWeight: theme.typography.weight.black, lineHeight: '32px' },
+						'@media (min-width: '.concat(600, 'px)'),
+						{ fontSize: theme.typography.size.l1, lineHeight: '36px', marginBottom: '.5rem' }
+					);
+				}),
+				DocsPage_Subtitle = esm.styled.h2(shared.YX, function (_ref3) {
+					var _ref4,
+						theme = _ref3.theme;
+					return (
+						DocsPage_defineProperty(
+							(_ref4 = {
+								fontWeight: theme.typography.weight.regular,
+								fontSize: theme.typography.size.s3,
+								lineHeight: '20px',
+								borderBottom: 'none',
+								marginBottom: 15,
+							}),
+							'@media (min-width: '.concat(600, 'px)'),
+							{ fontSize: theme.typography.size.m1, lineHeight: '28px', marginBottom: 24 }
+						),
+						DocsPage_defineProperty(_ref4, 'color', (0, polished_esm.DZ)(0.25, theme.color.defaultText)),
+						_ref4
+					);
+				}),
+				DocsContent = esm.styled.div({ maxWidth: 1e3, width: '100%' }),
+				DocsWrapper = esm.styled.div(function (_ref5) {
+					return DocsPage_defineProperty(
+						{
+							background: _ref5.theme.background.content,
+							display: 'flex',
+							justifyContent: 'center',
+							padding: '4rem 20px',
+							minHeight: '100vh',
+							boxSizing: 'border-box',
+						},
+						'@media (min-width: '.concat(600, 'px)'),
+						{}
+					);
+				}),
+				STORY_KIND_PATH_SEPARATOR = /\s*\/\s*/,
+				extractTitle = function extractTitle(_ref) {
+					var title = _ref.title,
+						groups = title.trim().split(STORY_KIND_PATH_SEPARATOR);
+					return (groups && groups[groups.length - 1]) || title;
+				},
+				Title = function Title(_ref2) {
+					var children = _ref2.children,
+						context = (0, compat_module.useContext)(DocsContext),
+						text = children;
+					return (
+						text || (text = extractTitle(context)),
+						text ? compat_module.default.createElement(DocsPage_Title, { className: 'sbdocs-title' }, text) : null
+					);
+				},
+				Subtitle = function Subtitle(_ref) {
+					var children = _ref.children,
+						_useContext = (0, compat_module.useContext)(DocsContext),
+						id = _useContext.id,
+						parameters = (0, _useContext.storyById)(id).parameters,
+						text = children;
+					return (
+						text || (text = null == parameters ? void 0 : parameters.componentSubtitle),
+						text ? compat_module.default.createElement(DocsPage_Subtitle, { className: 'sbdocs-subtitle' }, text) : null
+					);
+				},
+				browser = __webpack_require__('../../node_modules/util-deprecate/browser.js'),
+				browser_default = __webpack_require__.n(browser),
+				ts_dedent_esm = __webpack_require__('../../node_modules/ts-dedent/esm/index.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.starts-with.js');
+			function mdx_defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			function mdx_extends() {
+				return (
+					(mdx_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					mdx_extends.apply(this, arguments)
+				);
+			}
+			function mdx_objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function mdx_objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var mdx_document = window_default().document,
+				assertIsFn = function assertIsFn(val) {
+					if ('function' != typeof val) throw new Error('Expected story function, got: '.concat(val));
+					return val;
+				},
+				AddContext = function AddContext(props) {
+					var children = props.children,
+						rest = mdx_objectWithoutProperties(props, ['children']),
+						parentContext = compat_module.default.useContext(DocsContext);
+					return compat_module.default.createElement(DocsContext.Provider, { value: Object.assign({}, parentContext, rest) }, children);
+				},
+				CodeOrSourceMdx = function CodeOrSourceMdx(_ref) {
+					var className = _ref.className,
+						children = _ref.children,
+						rest = mdx_objectWithoutProperties(_ref, ['className', 'children']);
+					if ('string' != typeof className && ('string' != typeof children || !children.match(/[\n\r]/g)))
+						return compat_module.default.createElement(DocumentFormatting.EK, null, children);
+					var language = className && className.split('-');
+					return compat_module.default.createElement(
+						blocks_Source.Hw,
+						mdx_extends({ language: (language && language[1]) || 'plaintext', format: !1, code: children }, rest)
+					);
+				};
+			function mdx_navigate(url) {
+				addons_dist_esm.KP.getChannel().emit(core_events_dist_esm.NAVIGATE_URL, url);
+			}
+			var DocsStory_templateObject,
+				A = DocumentFormatting.wx.a,
+				AnchorInPage = function AnchorInPage(_ref2) {
+					var hash = _ref2.hash,
+						children = _ref2.children;
+					return compat_module.default.createElement(
+						A,
+						{
+							href: hash,
+							target: '_self',
+							onClick: function onClick(event) {
+								var id = hash.substring(1);
+								mdx_document.getElementById(id) && mdx_navigate(hash);
+							},
+						},
+						children
+					);
+				},
+				AnchorMdx = function AnchorMdx(props) {
+					var href = props.href,
+						target = props.target,
+						children = props.children,
+						rest = mdx_objectWithoutProperties(props, ['href', 'target', 'children']);
+					if (href) {
+						if (href.startsWith('#')) return compat_module.default.createElement(AnchorInPage, { hash: href }, children);
+						if ('_blank' !== target)
+							return compat_module.default.createElement(
+								A,
+								mdx_extends(
+									{
+										href,
+										onClick: function onClick(event) {
+											event.preventDefault(), mdx_navigate(event.currentTarget.getAttribute('href'));
+										},
+										target,
+									},
+									rest
+								),
+								children
+							);
+					}
+					return compat_module.default.createElement(A, props);
+				},
+				SUPPORTED_MDX_HEADERS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+				OcticonHeaders = SUPPORTED_MDX_HEADERS.reduce(function (acc, headerType) {
+					return Object.assign(
+						{},
+						acc,
+						mdx_defineProperty(
+							{},
+							headerType,
+							(0, esm.styled)(DocumentFormatting.wx[headerType])({ '& svg': { visibility: 'hidden' }, '&:hover svg': { visibility: 'visible' } })
+						)
+					);
+				}, {}),
+				OcticonAnchor = esm.styled.a(function () {
+					return { float: 'left', paddingRight: '4px', marginLeft: '-20px', color: 'inherit' };
+				}),
+				HeaderWithOcticonAnchor = function HeaderWithOcticonAnchor(_ref3) {
+					var as = _ref3.as,
+						id = _ref3.id,
+						children = _ref3.children,
+						rest = mdx_objectWithoutProperties(_ref3, ['as', 'id', 'children']),
+						OcticonHeader = OcticonHeaders[as],
+						hash = '#'.concat(id);
+					return compat_module.default.createElement(
+						OcticonHeader,
+						mdx_extends({ id }, rest),
+						compat_module.default.createElement(
+							OcticonAnchor,
+							{
+								'aria-hidden': 'true',
+								href: hash,
+								tabIndex: -1,
+								target: '_self',
+								onClick: function onClick(event) {
+									mdx_document.getElementById(id) && mdx_navigate(hash);
+								},
+							},
+							compat_module.default.createElement(
+								'svg',
+								{ viewBox: '0 0 16 16', version: '1.1', width: '16', height: '16', 'aria-hidden': 'true', fill: 'currentColor' },
+								compat_module.default.createElement('path', {
+									fillRule: 'evenodd',
+									d: 'M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z',
+								})
+							)
+						),
+						children
+					);
+				},
+				HeaderMdx = function HeaderMdx(props) {
+					var as = props.as,
+						id = props.id,
+						children = props.children,
+						rest = mdx_objectWithoutProperties(props, ['as', 'id', 'children']);
+					if (id) return compat_module.default.createElement(HeaderWithOcticonAnchor, mdx_extends({ as, id }, rest), children);
+					var Header = DocumentFormatting.wx[as];
+					return compat_module.default.createElement(Header, props);
+				},
+				HeadersMdx = SUPPORTED_MDX_HEADERS.reduce(function (acc, headerType) {
+					return Object.assign(
+						{},
+						acc,
+						mdx_defineProperty({}, headerType, function (props) {
+							return compat_module.default.createElement(HeaderMdx, mdx_extends({ as: headerType }, props));
+						})
+					);
+				}, {}),
+				Subheading = function Subheading(_ref) {
+					var children = _ref.children;
+					if (_ref.disableAnchor || 'string' != typeof children) return compat_module.default.createElement(DocumentFormatting.H3, null, children);
+					var tagID = children.toLowerCase().replace(/[^a-z0-9]/gi, '-');
+					return compat_module.default.createElement(HeaderMdx, { as: 'h3', id: tagID }, children);
+				};
+			var warnStoryDescription = browser_default()(
+					function () {},
+					(0, ts_dedent_esm.C)(
+						DocsStory_templateObject ||
+							(DocsStory_templateObject = (function DocsStory_taggedTemplateLiteral(strings, raw) {
+								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+							})([
+								'\n    Deprecated parameter: docs.storyDescription => docs.description.story\n      \n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#docs-description-parameter\n  ',
+							]))
+					)
+				),
+				DocsStory = function DocsStory(_ref) {
+					var description,
+						_docs$description,
+						id = _ref.id,
+						name = _ref.name,
+						_ref$expanded = _ref.expanded,
+						expanded = void 0 === _ref$expanded || _ref$expanded,
+						_ref$withToolbar = _ref.withToolbar,
+						withToolbar = void 0 !== _ref$withToolbar && _ref$withToolbar,
+						_ref$parameters = _ref.parameters,
+						parameters = void 0 === _ref$parameters ? {} : _ref$parameters,
+						docs = parameters.docs;
+					expanded &&
+						docs &&
+						((description = null === (_docs$description = docs.description) || void 0 === _docs$description ? void 0 : _docs$description.story) ||
+							((description = docs.storyDescription) && warnStoryDescription()));
+					var subheading = expanded && name;
+					return compat_module.default.createElement(
+						Anchor,
+						{ storyId: id },
+						subheading && compat_module.default.createElement(Subheading, null, subheading),
+						description && compat_module.default.createElement(DescriptionContainer, { markdown: description }),
+						compat_module.default.createElement(Canvas, { withToolbar }, compat_module.default.createElement(Story, { id, parameters }))
+					);
+				};
+			function Primary_extends() {
+				return (
+					(Primary_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Primary_extends.apply(this, arguments)
+				);
+			}
+			var Primary = function Primary(_ref) {
+					var story,
+						name = _ref.name,
+						componentStories = (0, (0, compat_module.useContext)(DocsContext).componentStories)();
+					return (
+						componentStories &&
+							(story = name
+								? componentStories.find(function (s) {
+										return s.name === name;
+								  })
+								: componentStories[0]),
+						story ? compat_module.default.createElement(DocsStory, Primary_extends({}, story, { expanded: !1, withToolbar: !0 })) : null
+					);
+				},
+				Heading = function Heading(_ref) {
+					var children = _ref.children;
+					if (_ref.disableAnchor || 'string' != typeof children) return compat_module.default.createElement(DocumentFormatting.H2, null, children);
+					var tagID = children.toLowerCase().replace(/[^a-z0-9]/gi, '-');
+					return compat_module.default.createElement(HeaderMdx, { as: 'h2', id: tagID }, children);
+				};
+			function Stories_extends() {
+				return (
+					(Stories_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Stories_extends.apply(this, arguments)
+				);
+			}
+			var Stories = function Stories(_ref) {
+				var title = _ref.title,
+					_ref$includePrimary = _ref.includePrimary,
+					includePrimary = void 0 !== _ref$includePrimary && _ref$includePrimary,
+					stories = (0, (0, compat_module.useContext)(DocsContext).componentStories)();
+				return (
+					(stories = stories.filter(function (story) {
+						var _story$parameters, _story$parameters$doc;
+						return !(
+							null !== (_story$parameters = story.parameters) &&
+							void 0 !== _story$parameters &&
+							null !== (_story$parameters$doc = _story$parameters.docs) &&
+							void 0 !== _story$parameters$doc &&
+							_story$parameters$doc.disable
+						);
+					})),
+					includePrimary || (stories = stories.slice(1)),
+					stories && 0 !== stories.length
+						? compat_module.default.createElement(
+								compat_module.default.Fragment,
+								null,
+								compat_module.default.createElement(Heading, null, title),
+								stories.map(function (story) {
+									return story && compat_module.default.createElement(DocsStory, Stories_extends({ key: story.id }, story, { expanded: !0 }));
+								})
+						  )
+						: null
+				);
+			};
+			Stories.defaultProps = { title: 'Stories' };
+			var DocsPage = function DocsPage() {
+					return compat_module.default.createElement(
+						compat_module.default.Fragment,
+						null,
+						compat_module.default.createElement(Title, null),
+						compat_module.default.createElement(Subtitle, null),
+						compat_module.default.createElement(DescriptionContainer, null),
+						compat_module.default.createElement(Primary, null),
+						compat_module.default.createElement(ArgsTable, { story: PRIMARY_STORY }),
+						compat_module.default.createElement(Stories, null)
+					);
+				},
+				client_logger_dist_esm =
+					(__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
+					__webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'));
+			const isEmpty = (o) => 0 === Object.keys(o).length,
+				isObject = (o) => null != o && 'object' == typeof o,
+				deletedDiff = (lhs, rhs) => {
+					if (lhs === rhs || !isObject(lhs) || !isObject(rhs)) return {};
+					const l = lhs,
+						r = rhs;
+					return Object.keys(l).reduce((acc, key) => {
+						if (((o, ...args) => Object.prototype.hasOwnProperty.call(o, ...args))(r, key)) {
+							const difference = deletedDiff(l[key], r[key]);
+							return (isObject(difference) && isEmpty(difference)) || (acc[key] = difference), acc;
+						}
+						return (acc[key] = void 0), acc;
+					}, {});
+				},
+				deleted = deletedDiff;
+			var ensure_templateObject,
+				light = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/themes/light.js'),
+				esm_convert = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/convert.js');
+			var DocsContainer_templateObject,
+				ensure = function ensure(input) {
+					if (!input) return (0, esm_convert.O)(light.Z);
+					var missing = deleted(light.Z, input);
+					return (
+						Object.keys(missing).length &&
+							client_logger_dist_esm.kg.warn(
+								(0, ts_dedent_esm.C)(
+									ensure_templateObject ||
+										(ensure_templateObject = (function ensure_taggedTemplateLiteral(strings, raw) {
+											return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+										})(['\n          Your theme is missing properties, you should update your theme!\n\n          theme-data missing:\n        ']))
+								),
+								missing
+							),
+						(0, esm_convert.O)(input)
+					);
+				},
+				emotion_theming_browser_esm = __webpack_require__('../../node_modules/emotion-theming/dist/emotion-theming.browser.esm.js');
+			var DocsContainer_document = window_default().document,
+				DocsContainer_globalWindow = window_default().window,
+				defaultComponents = Object.assign({}, DocumentFormatting.wx, { code: CodeOrSourceMdx, a: AnchorMdx }, HeadersMdx),
+				warnOptionsTheme = browser_default()(
+					function () {},
+					(0, ts_dedent_esm.C)(
+						DocsContainer_templateObject ||
+							(DocsContainer_templateObject = (function DocsContainer_taggedTemplateLiteral(strings, raw) {
+								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+							})([
+								'\n    Deprecated parameter: options.theme => docs.theme\n\n    https://github.com/storybookjs/storybook/blob/next/addons/docs/docs/theming.md#storybook-theming\n',
+							]))
+					)
+				),
+				DocsContainer = function DocsContainer(_ref) {
+					var context = _ref.context,
+						children = _ref.children,
+						storyId = context.id,
+						_storyById$parameters = (0, context.storyById)(storyId).parameters,
+						_storyById$parameters2 = _storyById$parameters.options,
+						options = void 0 === _storyById$parameters2 ? {} : _storyById$parameters2,
+						_storyById$parameters3 = _storyById$parameters.docs,
+						docs = void 0 === _storyById$parameters3 ? {} : _storyById$parameters3,
+						themeVars = docs.theme;
+					!themeVars && options.theme && (warnOptionsTheme(), (themeVars = options.theme));
+					var theme = ensure(themeVars),
+						allComponents = Object.assign({}, defaultComponents, docs.components);
+					return (
+						(0, compat_module.useEffect)(
+							function () {
+								var url;
+								try {
+									url = new URL(DocsContainer_globalWindow.parent.location);
+								} catch (err) {
+									return;
+								}
+								if (url.hash) {
+									var element = DocsContainer_document.getElementById(url.hash.substring(1));
+									element &&
+										setTimeout(function () {
+											scrollToElement(element);
+										}, 200);
+								} else {
+									var _element =
+										DocsContainer_document.getElementById(anchorBlockIdFromId(storyId)) ||
+										DocsContainer_document.getElementById(storyBlockIdFromId(storyId));
+									if (_element) {
+										var allStories = _element.parentElement.querySelectorAll('[id|="anchor-"]'),
+											scrollTarget = _element;
+										allStories && allStories[0] === _element && (scrollTarget = DocsContainer_document.getElementById('docs-root')),
+											setTimeout(function () {
+												scrollToElement(scrollTarget, 'start');
+											}, 200);
+									}
+								}
+							},
+							[storyId]
+						),
+						compat_module.default.createElement(
+							DocsContext.Provider,
+							{ value: context },
+							compat_module.default.createElement(
+								SourceContainer,
+								null,
+								compat_module.default.createElement(
+									emotion_theming_browser_esm.f6,
+									{ theme },
+									compat_module.default.createElement(
+										react_dist_esm.Zo,
+										{ components: allComponents },
+										compat_module.default.createElement(
+											DocsWrapper,
+											{ className: 'sbdocs sbdocs-wrapper' },
+											compat_module.default.createElement(DocsContent, { className: 'sbdocs sbdocs-content' }, children)
+										)
+									)
+								)
+							)
+						)
+					);
+				},
+				Meta_document = window_default().document;
+			var Preview_templateObject,
+				Meta = function Meta() {
+					return 'docs' === new URL(Meta_document.location).searchParams.get('viewMode')
+						? (function renderAnchor() {
+								var context = (0, compat_module.useContext)(DocsContext),
+									anchorId =
+										(function getFirstStoryId(docsContext) {
+											var stories = docsContext.componentStories();
+											return stories.length > 0 ? stories[0].id : null;
+										})(context) || context.id;
+								return compat_module.default.createElement(Anchor, { storyId: anchorId });
+						  })()
+						: null;
+				};
+			var Props_templateObject,
+				Preview_Preview = browser_default()(
+					function (props) {
+						return compat_module.default.createElement(Canvas, props);
+					},
+					(0, ts_dedent_esm.C)(
+						Preview_templateObject ||
+							(Preview_templateObject = (function Preview_taggedTemplateLiteral(strings, raw) {
+								return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+							})([
+								'\n    Preview doc block has been renamed to Canvas.\n\n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#previewprops-renamed\n  ',
+							]))
+					)
+				);
+			var Props = browser_default()(
+				function (props) {
+					return compat_module.default.createElement(ArgsTable, props);
+				},
+				(0, ts_dedent_esm.C)(
+					Props_templateObject ||
+						(Props_templateObject = (function Props_taggedTemplateLiteral(strings, raw) {
+							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+						})([
+							'\n    Props doc block has been renamed to ArgsTable.\n\n    https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#previewprops-renamed\n  ',
+						]))
+				)
+			);
+			Props.defaultProps = { of: CURRENT_SELECTION };
+			var Wrapper_Wrapper = function Wrapper(_ref) {
+				var children = _ref.children;
+				return compat_module.default.createElement('div', { style: { fontFamily: 'sans-serif' } }, children);
+			};
+		},
+		'./node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js': (
+			__unused_webpack_module,
+			__unused_webpack___webpack_exports__,
+			__webpack_require__
+		) => {
+			'use strict';
+			var config_namespaceObject = {};
+			__webpack_require__.r(config_namespaceObject),
+				__webpack_require__.d(config_namespaceObject, { argTypesEnhancers: () => argTypesEnhancers, parameters: () => config_parameters });
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				parameters =
+					(__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+					__webpack_require__('../../node_modules/@storybook/store/dist/esm/parameters.js'));
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			var _getPage,
+				_getContainer,
+				config_parameters = {
+					docs: {
+						inlineStories: !1,
+						getContainer:
+							((_getContainer = _asyncToGenerator(
+								regeneratorRuntime.mark(function _callee() {
+									return regeneratorRuntime.wrap(function _callee$(_context) {
+										for (;;)
+											switch ((_context.prev = _context.next)) {
+												case 0:
+													return (
+														(_context.next = 2),
+														Promise.resolve().then(
+															__webpack_require__.bind(__webpack_require__, './node_modules/@storybook/addon-docs/dist/esm/blocks/index.js')
+														)
+													);
+												case 2:
+													return _context.abrupt('return', _context.sent.DocsContainer);
+												case 3:
+												case 'end':
+													return _context.stop();
+											}
+									}, _callee);
+								})
+							)),
+							function getContainer() {
+								return _getContainer.apply(this, arguments);
+							}),
+						getPage:
+							((_getPage = _asyncToGenerator(
+								regeneratorRuntime.mark(function _callee2() {
+									return regeneratorRuntime.wrap(function _callee2$(_context2) {
+										for (;;)
+											switch ((_context2.prev = _context2.next)) {
+												case 0:
+													return (
+														(_context2.next = 2),
+														Promise.resolve().then(
+															__webpack_require__.bind(__webpack_require__, './node_modules/@storybook/addon-docs/dist/esm/blocks/index.js')
+														)
+													);
+												case 2:
+													return _context2.abrupt('return', _context2.sent.DocsPage);
+												case 3:
+												case 'end':
+													return _context2.stop();
+											}
+									}, _callee2);
+								})
+							)),
+							function getPage() {
+								return _getPage.apply(this, arguments);
+							}),
+						iframeHeight: 100,
+					},
+				},
+				argTypesEnhancers = [
+					function enhanceArgTypes(context) {
+						var component = context.component,
+							userArgTypes = context.argTypes,
+							_context$parameters$d = context.parameters.docs,
+							extractArgTypes = (void 0 === _context$parameters$d ? {} : _context$parameters$d).extractArgTypes,
+							extractedArgTypes = extractArgTypes && component ? extractArgTypes(component) : {};
+						return extractedArgTypes ? (0, parameters.f)(extractedArgTypes, userArgTypes) : userArgTypes;
+					},
+				];
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(config_namespaceObject).forEach(function (key) {
+				var value = config_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.$9)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.HZ)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.h1)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.My)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi._C)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.$P)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./node_modules/@storybook/addon-docs/dist/esm/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { aT: () => _blocks__WEBPACK_IMPORTED_MODULE_0__.AddContext });
+			var _blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/blocks/index.js');
+		},
 		'../../node_modules/es-abstract/2021/AddEntriesFromIterable.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var inspect = __webpack_require__('../../node_modules/object-inspect/index.js'),
@@ -58086,4 +58086,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=963.6c37c37a.iframe.bundle.js.map
+//# sourceMappingURL=415.fa6606e1.iframe.bundle.js.map

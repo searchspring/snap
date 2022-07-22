@@ -1,4 +1,4 @@
-/*! For license information please see main.d99836fe.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.bb3050e0.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -41,6 +41,135 @@
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
 		},
+		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			var preview_namespaceObject = {};
+			__webpack_require__.r(preview_namespaceObject),
+				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
+				injectStylesIntoStyleTag = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
+				),
+				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
+				styles = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
+				),
+				options = { insert: 'head', singleton: !1 };
+			injectStylesIntoStyleTag_default()(styles.Z, options);
+			styles.Z.locals;
+			var decorators = [
+					function (Story) {
+						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+					},
+				],
+				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(preview_namespaceObject).forEach(function (key) {
+				var value = preview_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.$9)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.HZ)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.h1)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.My)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi._C)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.$P)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			(module = __webpack_require__.nmd(module)),
+				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
+					[
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__(
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
+						),
+					],
+					module,
+					!1
+				);
+		},
 		'./src/components/Atoms/Badge/Badge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -51,7 +180,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
 				esm =
@@ -243,7 +372,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
@@ -420,7 +549,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -556,7 +685,7 @@
 						},
 						onClick: { description: 'Button click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 						color: {
-							description: 'Button color',
+							description: 'Button text color',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'theme.colors.primary' } },
 							control: { type: 'color' },
 						},
@@ -704,7 +833,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -1158,7 +1287,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				formatNumber = __webpack_require__('../snap-toolbox/dist/esm/filters/formatNumber.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -1475,7 +1604,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -1849,7 +1978,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				searchResponse = __webpack_require__('./src/mocks/searchResponse.ts'),
@@ -2380,7 +2509,7 @@
 				);
 			}
 			var componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -2524,7 +2653,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				_Banner__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/utilities/componentArgs.ts'),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/utilities/snapify.ts'),
@@ -3204,7 +3333,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/utilities/componentArgs.ts'),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__('./src/utilities/snapify.ts'),
@@ -3772,7 +3901,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Overlay_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Overlay = __webpack_require__('./src/components/Atoms/Overlay/Overlay.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -3967,7 +4096,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -4204,7 +4333,7 @@
 				__webpack_require__.d(__webpack_exports__, { Circle: () => Circle, Default: () => Default, default: () => Skeleton_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -4461,7 +4590,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-start.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
@@ -4527,7 +4656,11 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'loop'),
 						" prop enables 'infinite' looping through the result set when swiping or using the arrow buttons."
 					),
-					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel loop>{children}</Carousel>\n')),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel loop={true}>{children}</Carousel>\n')
+					),
 					(0, esm.kt)('h3', { id: 'pagination' }, 'pagination'),
 					(0, esm.kt)(
 						'p',
@@ -4539,7 +4672,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination>{children}</Carousel>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination={true}>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
 					(0, esm.kt)(
@@ -4552,7 +4685,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel vertical>{children}</Carousel>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel vertical={true}>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidebuttons' }, 'hideButtons'),
 					(0, esm.kt)(
@@ -4565,7 +4698,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel hideButtons>{children}</Carousel>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel hideButtons={true}>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
 					(0, esm.kt)(
@@ -5217,7 +5350,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Checkbox = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -5289,7 +5422,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onClick'),
 						' callback.'
 					),
-					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox disabled />\n')),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox disabled={true} />\n')),
 					(0, esm.kt)('h3', { id: 'size' }, 'size'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'size'), ' prop will set the custom checkbox size.'),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Checkbox size={'16px'} />\n")),
@@ -5362,7 +5495,7 @@
 				argTypes: Object.assign(
 					{
 						checked: {
-							description: 'Checkbox is checked (managed state)',
+							description: 'Checkbox is checked (externally managed state)',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
@@ -5419,7 +5552,7 @@
 							control: { type: 'color' },
 						},
 						startChecked: {
-							description: 'Checkbox is checked initially(managed state)',
+							description: 'Checkbox is checked initially (internally managed state)',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
@@ -5667,7 +5800,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
@@ -6076,15 +6209,9 @@
 				],
 				argTypes: Object.assign(
 					{
-						controller: {
-							description: 'Controller reference',
-							type: { required: !1 },
-							table: { type: { summary: 'Controller object' } },
-							control: { type: 'none' },
-						},
+						controller: { description: 'Controller reference', table: { type: { summary: 'Controller object' } }, control: { type: 'none' } },
 						error: {
 							description: 'Error object containing message and type',
-							type: { required: !1 },
 							table: { type: { summary: 'Error object' } },
 							control: { type: 'object' },
 						},
@@ -6145,7 +6272,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetGridOptions = __webpack_require__('./src/components/Molecules/FacetGridOptions/FacetGridOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -6960,7 +7087,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetHierarchyOptions = __webpack_require__('./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -7012,6 +7139,53 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							'<FacetHierarchyOptions values={hierarchyFacet.values} hideCount={true} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'previewonfocus' }, 'previewOnFocus'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'If using within Autocomplete, the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
+						' prop will invoke the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
+						' method when the value is focused. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Autocomplete>\n    ...\n    <FacetHierarchyOptions values={hierarchyFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'valueprops' }, 'valueProps'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'valueProps'),
+						" prop will be spread onto each value's ",
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<a>'),
+						' element. Typical usage would be to provide custom callback functions when used within Autocomplete.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const valueProps = {\n    onMouseEnter: (e) => {\n        clearTimeout(delayTimeout);\n        delayTimeout = setTimeout(() => {\n            e.target.focus();\n        }, delayTime);\n    },\n    onMouseLeave: () => {\n        clearTimeout(delayTimeout);\n    },\n}\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetHierarchyOptions values={hierarchyFacet.values} valueProps={valueProps} />\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'events' }, 'Events'),
@@ -7450,6 +7624,16 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						previewOnFocus: {
+							description: 'Invoke facet value preview upon focus',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						valueProps: {
+							description: 'Object of facet value props',
+							table: { type: { summary: 'object' }, defaultValue: { summary: '{}' } },
+							control: { type: 'object' },
+						},
 						onClick: { description: 'Facet option click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 					},
 					componentArgs.p
@@ -7681,7 +7865,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetListOptions = __webpack_require__('./src/components/Molecules/FacetListOptions/FacetListOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -7765,7 +7949,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Autocomplete>\n    ...\n    <FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
+							'<Autocomplete>\n    ...\n    <FacetListOptions values={listFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'valueprops' }, 'valueProps'),
@@ -8493,7 +8677,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetPaletteOptions = __webpack_require__('./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -8530,7 +8714,7 @@
 						null,
 						'The required ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'values'),
-						" prop specifiesall facet values where the facet type is 'palette'."
+						" prop specifies all facet values where the facet type is 'palette'."
 					),
 					(0, esm.kt)(
 						'pre',
@@ -9369,7 +9553,7 @@
 				__webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => FacetSlider_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetSlider = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				searchResponse = __webpack_require__('./src/mocks/searchResponse.ts'),
@@ -10172,7 +10356,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Filter = __webpack_require__('./src/components/Molecules/Filter/Filter.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -10717,7 +10901,7 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: 'boolean',
 						},
-						separator: { defaultValue: ':', description: 'Filter delimiter', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						separator: { description: 'Filter delimiter', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 						icon: {
 							defaultValue: 'close-thin',
 							description: 'Icon name',
@@ -11000,7 +11184,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				es =
 					(__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
@@ -11243,7 +11427,9 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'store.pagination.getPages()'),
 						' method along with ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagesRight'),
-						'.'
+						'. Must be used with ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagesRight'),
+						' prop.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -11264,7 +11450,9 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'store.pagination.getPages()'),
 						' method along with ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagesLeft'),
-						'.'
+						'. Must be used with ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagesLeft'),
+						' prop.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -11926,7 +12114,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -12537,9 +12725,9 @@
 				argTypes: Object.assign(
 					{
 						result: {
-							description: 'Result store reference',
+							description: 'Result store Product reference',
 							type: { required: !0 },
-							table: { type: { summary: 'result store object' } },
+							table: { type: { summary: 'result store Product object' } },
 							control: { type: 'none' },
 						},
 						hideBadge: {
@@ -12893,7 +13081,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => SearchInput_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				SearchInput = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -12929,7 +13117,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<SearchInput onChange={handleChange} placeholder={placeholder}/>\n'
+							'<SearchInput onChange={handleChange} placeholder={"placeholder text"}/>\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'placeholder' }, 'placeholder'),
@@ -12937,7 +13125,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<SearchInput placeholder={placeholder} />\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<SearchInput placeholder={"placeholder text"} />\n')
 					),
 					(0, esm.kt)('h3', { id: 'onchange' }, 'onChange'),
 					(0, esm.kt)(
@@ -13125,7 +13313,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -13260,8 +13448,7 @@
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_globalTheme$componen4,
-						_selection2,
-						setSelection,
+						_options,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
@@ -13324,30 +13511,22 @@
 								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
-						selection = selected,
 						_useState2 = _slicedToArray((0, hooks_module.eJ)(Boolean(startOpen)), 2),
 						open = _useState2[0],
 						setOpen = _useState2[1],
-						stateful = void 0 === selection;
-					if (stateful) {
-						var _useState4 = _slicedToArray((0, hooks_module.eJ)(void 0), 2);
-						(selection = _useState4[0]), (setSelection = _useState4[1]);
-					} else selection = Array.isArray(selected) ? selected[0] : selection;
+						_useState4 = _slicedToArray((0, hooks_module.eJ)(selected), 2),
+						selection = _useState4[0],
+						setSelection = _useState4[1];
 					selection && clearSelection && (options = [{ label: clearSelection, value: '' }].concat(_toConsumableArray(options)));
 					var makeSelection = function makeSelection(e, option) {
-							var _option;
-							(option = null !== (_option = option) && void 0 !== _option && _option.value ? option : void 0) != selection &&
-								onSelect &&
-								onSelect(e, option),
-								stateful && setSelection(option),
-								!stayOpenOnSelection && setOpen(!1);
+							option != selection && onSelect && onSelect(e, option), setSelection(option), !stayOpenOnSelection && setOpen(!1);
 						},
 						styling = {};
 					return (
 						disableStyles
 							? style && (styling.css = [style])
 							: (styling.css = _native ? [CSS_native(), style] : [CSS_select({ color, backgroundColor, borderColor, theme }), style]),
-						Array.isArray(options) && options.length
+						'object' == typeof options && null !== (_options = options) && void 0 !== _options && _options.length
 							? (0, emotion_react_browser_esm.tZ)(
 									cache.n,
 									null,
@@ -13393,9 +13572,9 @@
 																clearSelection
 															),
 														options.map(function (option, index) {
-															var _selection, _option$value;
+															var _option$value;
 															return (0,
-															emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null === (_selection = selection) || void 0 === _selection ? void 0 : _selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
+															emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null == selection ? void 0 : selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
 														})
 													)
 											  )
@@ -13431,7 +13610,7 @@
 																(0, emotion_react_browser_esm.tZ)(
 																	'span',
 																	{ className: 'ss__select__selection' },
-																	null === (_selection2 = selection) || void 0 === _selection2 ? void 0 : _selection2.label
+																	null == selection ? void 0 : selection.label
 																),
 															(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
 														),
@@ -13440,13 +13619,11 @@
 														'ul',
 														{ className: 'ss__select__select' },
 														options.map(function (option) {
-															var _selection3;
 															return (0, emotion_react_browser_esm.tZ)(
 																'li',
 																{
 																	className: classnames_default()('ss__select__select__option', {
-																		'ss__select__select__option--selected':
-																			(null === (_selection3 = selection) || void 0 === _selection3 ? void 0 : _selection3.value) === option.value,
+																		'ss__select__select__option--selected': (null == selection ? void 0 : selection.value) === option.value,
 																	}),
 																	onClick: function onClick(e) {
 																		return !disabled && makeSelection(e, option);
@@ -13509,11 +13686,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<Select options={controller.store.sorting.options} native={true} />\n'
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Select options={controller.store.sorting.options} />\n')
 					),
 					(0, esm.kt)('h4', { id: 'option-object' }, 'Option Object'),
 					(0, esm.kt)(
@@ -13534,7 +13707,11 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Select options={controller.store.sorting.options} native />\n')
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} native={true} />\n'
+						)
 					),
 					(0, esm.kt)('h3', { id: 'disabled' }, 'disabled'),
 					(0, esm.kt)(
@@ -13549,7 +13726,11 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Select options={controller.store.sorting.options} disabled />\n')
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} disabled={true} />\n'
+						)
 					),
 					(0, esm.kt)('h3', { id: 'label' }, 'label'),
 					(0, esm.kt)(
@@ -14422,7 +14603,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Slideout_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -14802,6 +14983,33 @@
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<Slideout overlayColor={'rgba(0,0,0,0.7)'}>\n    <div>slideout content</div>\n</Slideout>\n"
 						)
+					),
+					(0, esm.kt)('h3', { id: 'slidedirection' }, 'slideDirection'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'slideDirection'),
+						' prop sets the direction that the overlay slides in. Defaults to ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'left'),
+						'. Available values are ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'left'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'right'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'top'),
+						', & ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'bottom'),
+						'.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slideout slideDirection={'right'}>\n    <div>slideout content</div>\n</Slideout>\n"
+						)
 					)
 				);
 			}
@@ -14897,7 +15105,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -15167,9 +15375,13 @@
 						(0, hooks_module.d4)(function () {
 							controller.bind();
 						}, []));
+					var visible =
+							Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0 || state.input),
+						showTrending = !1;
+					results.length || state.input || null == trending || !trending.length
+						? null != trending && trending.length && !terms.length && (showTrending = !0)
+						: (showTrending = !0);
 					var _search$query,
-						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0 || state.input),
-						showTrending = !state.input && (null == trending ? void 0 : trending.length) && 0 === terms.length,
 						facetsToShow = facets.length
 							? facets.filter(function (facet) {
 									return facet.display !== types.uw.SLIDER;
@@ -16494,6 +16706,12 @@
 							table: { type: { summary: 'Autocomplete controller object' } },
 							control: { type: 'none' },
 						},
+						input: {
+							description: 'input element reference',
+							type: { required: !0 },
+							table: { type: { summary: 'Element or String as CSS Selector' } },
+							control: { type: 'none' },
+						},
 						width: {
 							defaultValue: '100%',
 							description: 'Change width of the component',
@@ -16576,6 +16794,8 @@
 						facetsSlot: { description: 'Slot for custom facets component', table: { type: { summary: 'component' } } },
 						contentSlot: { description: 'Slot for custom content component', table: { type: { summary: 'component' } } },
 						linkSlot: { description: 'Slot for custom "see n results for keyword" link component', table: { type: { summary: 'component' } } },
+						resultsSlot: { description: 'Slot for custom results component & title.', table: { type: { summary: 'component' } } },
+						noResultsSlot: { description: 'Slot for custom no-results component.', table: { type: { summary: 'component' } } },
 						breakpoints: { description: 'Breakpoints options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 						onFacetOptionClick: {
 							description: 'Custom onClick event handler for facet options.',
@@ -16643,7 +16863,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
@@ -17135,7 +17355,7 @@
 							action: 'onRemoveClick',
 						},
 						darkMode: {
-							description: 'force dark darkMode',
+							description: 'enable darkMode',
 							type: { required: !1 },
 							table: { type: { summary: 'boolean' } },
 							control: { type: 'boolean' },
@@ -17210,7 +17430,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facet = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				types = __webpack_require__('./src/types.ts'),
@@ -17254,7 +17474,8 @@
 						(0, esm.kt)('li', { parentName: 'ul' }, 'FacetListOptions'),
 						(0, esm.kt)('li', { parentName: 'ul' }, 'FacetPaletteOptions'),
 						(0, esm.kt)('li', { parentName: 'ul' }, 'Slider'),
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Icon')
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Icon'),
+						(0, esm.kt)('li', { parentName: 'ul' }, 'SearchInput')
 					),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
 					(0, esm.kt)('h3', { id: 'facet-1' }, 'facet'),
@@ -18056,6 +18277,16 @@
 						},
 						overflowSlot: { description: 'Slot for custom overflow (show more/less) button', table: { type: { summary: 'component' } } },
 						optionsSlot: { description: 'Slot for custom facet option components', table: { type: { summary: 'component' } } },
+						previewOnFocus: {
+							description: 'Invoke facet value preview upon focus',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						valueProps: {
+							description: 'Object of facet value props',
+							table: { type: { summary: 'object' }, defaultValue: { summary: '{}' } },
+							control: { type: 'object' },
+						},
 						fields: { defaultValue: {}, description: 'Change props per facet', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 					},
 					componentArgs.p
@@ -18648,7 +18879,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -19132,6 +19363,12 @@
 							table: { type: { summary: 'number' } },
 							control: { type: 'number' },
 						},
+						controller: {
+							description: 'Controller reference',
+							type: { required: !1 },
+							table: { type: { summary: 'Controller object' } },
+							control: { type: 'none' },
+						},
 					},
 					componentArgs.p
 				),
@@ -19283,7 +19520,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -20101,6 +20338,7 @@
 						},
 						onClick: { description: 'Filter click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 						onClearAllClick: { description: 'Filter clear click event handler', table: { type: { summary: 'function' } }, action: 'onClearAllClick' },
+						controller: { description: 'Controller reference', table: { type: { summary: 'Controller object' } }, control: { type: 'none' } },
 					},
 					componentArgs.p
 				),
@@ -20213,7 +20451,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
@@ -20628,13 +20866,7 @@
 						' event via the Controller instead of making modifications in the component.'
 					),
 					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
-					(0, esm.kt)(
-						'ul',
-						null,
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Carousel'),
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Result (default)'),
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Icon')
-					),
+					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Carousel'), (0, esm.kt)('li', { parentName: 'ul' }, 'Result (default)')),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
 					(0, esm.kt)(
 						'p',
@@ -20741,7 +20973,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation vertical>{children}<Recommendation/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation vertical={true}>{children}<Recommendation/>\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidebuttons' }, 'hideButtons'),
 					(0, esm.kt)(
@@ -20754,7 +20986,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation hideButtons>{children}<Recommendation/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation hideButtons={true}>{children}<Recommendation/>\n')
 					),
 					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
 					(0, esm.kt)(
@@ -21398,7 +21630,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -25656,7 +25888,8 @@
 			}
 			var AbstractController = (function () {
 					function AbstractController(config, _ref) {
-						var client = _ref.client,
+						var _this = this,
+							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
 							eventManager = _ref.eventManager,
@@ -25669,6 +25902,34 @@
 							(this.type = 'abstract'),
 							(this.targeters = {}),
 							(this._initialized = !1),
+							(this.handleError = function (err) {
+								var event;
+								if (err instanceof ErrorEvent) event = err;
+								else if (err instanceof Error) event = new ErrorEvent('error', { error: err });
+								else if ('string' == typeof err) event = new ErrorEvent('error', { error: new Error(err) });
+								else if ('object' == typeof err && Object.keys(err).length)
+									try {
+										event = new ErrorEvent('error', { error: new Error(JSON.stringify(err)) });
+									} catch (e) {}
+								if (event) {
+									var _event = event,
+										filename = _event.filename,
+										colno = _event.colno,
+										lineno = _event.lineno,
+										stack = _event.error.stack,
+										message = _event.message,
+										timeStamp = _event.timeStamp,
+										beaconPayload = {
+											filename: filename || _this.id + ' (' + (_this.type.charAt(0).toUpperCase() + _this.type.slice(1)) + 'Controller)',
+											stack,
+											message,
+											colno,
+											lineno,
+											errortimestamp: timeStamp,
+										};
+									_this.tracker.track.error(beaconPayload);
+								}
+							}),
 							'object' != typeof config || 'string' != typeof config.id || !config.id.match(/^[a-zA-Z0-9_-]*$/))
 						)
 							throw new Error('Invalid config passed to controller. The "id" attribute must be an alphanumeric string.');
@@ -25745,7 +26006,7 @@
 									((_init = _asyncToGenerator(
 										_regeneratorRuntime().mark(function _callee() {
 											var initProfile,
-												_this = this;
+												_this2 = this;
 											return _regeneratorRuntime().wrap(
 												function _callee$(_context) {
 													for (;;)
@@ -25779,14 +26040,16 @@
 																_context.next = 21;
 																break;
 															case 18:
-																(_context.prev = 18), (_context.t1 = _context.catch(2)), _context.t1 && console.error(_context.t1);
+																(_context.prev = 18),
+																	(_context.t1 = _context.catch(2)),
+																	_context.t1 && (console.error(_context.t1), this.handleError(_context.t1));
 															case 21:
 																this._initialized ||
 																	(this.urlManager.subscribe(function (prev, next) {
 																		try {
-																			JSON.stringify(prev) !== JSON.stringify(next) && _this.search();
+																			JSON.stringify(prev) !== JSON.stringify(next) && _this2.search();
 																		} catch (err) {
-																			_this.log.error('URL state is invalid', err);
+																			_this2.log.error('URL state is invalid', err);
 																		}
 																	}),
 																	(this._initialized = !0)),
@@ -25813,9 +26076,9 @@
 							{
 								key: 'retarget',
 								value: function retarget() {
-									var _this2 = this;
+									var _this3 = this;
 									Object.keys(this.targeters).forEach(function (target) {
-										_this2.targeters[target].retarget();
+										_this3.targeters[target].retarget();
 									});
 								},
 							},
@@ -25865,7 +26128,7 @@
 							{
 								key: 'use',
 								value: function use(attachments) {
-									var _this3 = this;
+									var _this4 = this;
 									if (null != attachments && attachments.plugins)
 										try {
 											if (!Array.isArray(null == attachments ? void 0 : attachments.plugins)) throw 'invalid format';
@@ -25875,7 +26138,7 @@
 													var _plugin2 = _toArray(plugin),
 														func = _plugin2[0],
 														args = _plugin2.slice(1);
-													_this3.plugin.apply(_this3, [func].concat(_toConsumableArray(args)));
+													_this4.plugin.apply(_this4, [func].concat(_toConsumableArray(args)));
 												});
 										} catch (err) {
 											this.log.warn('plugins not attached - use format [func, ...args?][]');
@@ -25885,7 +26148,7 @@
 										Object.keys(attachments.middleware).forEach(function (eventName) {
 											var eventMiddleware = attachments.middleware[eventName];
 											(Array.isArray(eventMiddleware) ? eventMiddleware : [eventMiddleware]).forEach(function (middleware) {
-												_this3.on(eventName, middleware);
+												_this4.on(eventName, middleware);
 											});
 										});
 								},
@@ -26740,10 +27003,10 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this$config$settings7,
+						var _this$config$settings8,
 							_window,
-							_this$config$settings8,
 							_this$config$settings9,
+							_this$config$settings10,
 							_this,
 							client = _ref.client,
 							store = _ref.store,
@@ -26758,6 +27021,7 @@
 							})(this, SearchController),
 							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
 								ControllerTypes.search),
+							(_this.previousResults = []),
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
@@ -26818,6 +27082,7 @@
 										_this$config$settings2,
 										_this$config$settings5,
 										_params$pagination3,
+										_this$config$settings7,
 										stringyParams,
 										prevStringyParams,
 										_this$config$settings3,
@@ -26941,7 +27206,7 @@
 															break;
 														}
 														if (
-															((previousResults = JSON.parse(JSON.stringify(_this.store.results)) || []),
+															((previousResults = _this.previousResults),
 															null === (_this$config$settings6 = _this.config.settings) ||
 																void 0 === _this$config$settings6 ||
 																!_this$config$settings6.infinite.backfill ||
@@ -27000,54 +27265,58 @@
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
+															null !== (_this$config$settings7 = _this.config.settings) &&
+																void 0 !== _this$config$settings7 &&
+																_this$config$settings7.infinite &&
+																(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context.prev = 70),
-															(_context.next = 73),
+															(_context.prev = 71),
+															(_context.next = 74),
 															_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
 														);
-													case 73:
-														_context.next = 85;
+													case 74:
+														_context.next = 86;
 														break;
-													case 75:
+													case 76:
 														if (
-															((_context.prev = 75),
-															(_context.t2 = _context.catch(70)),
+															((_context.prev = 76),
+															(_context.t2 = _context.catch(71)),
 															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 														) {
-															_context.next = 83;
+															_context.next = 84;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-													case 83:
+													case 84:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-													case 85:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 104);
+													case 86:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 106);
 														break;
-													case 89:
-														if (((_context.prev = 89), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 104;
+													case 90:
+														if (((_context.prev = 90), (_context.t3 = _context.catch(4)), !_context.t3)) {
+															_context.next = 106;
 															break;
 														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 95 : 500 === _context.t4 ? 98 : 101);
+														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 96 : 500 === _context.t4 ? 99 : 102);
 														break;
-													case 95:
+													case 96:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
 															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 103)
+															_context.abrupt('break', 104)
 														);
-													case 98:
+													case 99:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
 															_this.log.error(_this.store.error),
-															_context.abrupt('break', 103)
+															_context.abrupt('break', 104)
 														);
-													case 101:
-														return _this.log.error(_context.t3), _context.abrupt('break', 103);
-													case 103:
-														_this.store.loading = !1;
+													case 102:
+														return _this.log.error(_context.t3), _context.abrupt('break', 104);
 													case 104:
+														(_this.store.loading = !1), _this.handleError(_context.t3);
+													case 106:
 													case 'end':
 														return _context.stop();
 												}
@@ -27055,28 +27324,28 @@
 										_callee,
 										null,
 										[
-											[4, 89],
+											[4, 90],
 											[5, 10],
 											[51, 56],
-											[70, 75],
+											[71, 76],
 										]
 									);
 								})
 							)),
 							(_this.config = cjs_default()(defaultConfig, _this.config)),
-							null !== (_this$config$settings7 = _this.config.settings) &&
-								void 0 !== _this$config$settings7 &&
-								_this$config$settings7.infinite &&
+							null !== (_this$config$settings8 = _this.config.settings) &&
+								void 0 !== _this$config$settings8 &&
+								_this$config$settings8.infinite &&
 								void 0 === _this.config.settings.infinite.restorePosition &&
 								(_this.config.settings.infinite.restorePosition = !0),
 							null !== (_window = window) &&
 								void 0 !== _window &&
 								_window.history &&
-								null !== (_this$config$settings8 = _this.config.settings) &&
-								void 0 !== _this$config$settings8 &&
-								null !== (_this$config$settings9 = _this$config$settings8.infinite) &&
+								null !== (_this$config$settings9 = _this.config.settings) &&
 								void 0 !== _this$config$settings9 &&
-								_this$config$settings9.restorePosition &&
+								null !== (_this$config$settings10 = _this$config$settings9.infinite) &&
+								void 0 !== _this$config$settings10 &&
+								_this$config$settings10.restorePosition &&
 								(window.history.scrollRestoration = 'manual'),
 							_this.store.setConfig(_this.config),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
@@ -27214,8 +27483,8 @@
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
 											var _requestParams$search,
-												_this$config$settings10,
 												_this$config$settings11,
+												_this$config$settings12,
 												requestParams,
 												stringyParams,
 												scrollMap,
@@ -27237,11 +27506,11 @@
 																	_requestParams$search.redirectResponse &&
 																	delete requestParams.search.redirectResponse,
 																(stringyParams = JSON.stringify(requestParams)),
-																null !== (_this$config$settings10 = _this.config.settings) &&
-																	void 0 !== _this$config$settings10 &&
-																	null !== (_this$config$settings11 = _this$config$settings10.infinite) &&
+																null !== (_this$config$settings11 = _this.config.settings) &&
 																	void 0 !== _this$config$settings11 &&
-																	_this$config$settings11.restorePosition &&
+																	null !== (_this$config$settings12 = _this$config$settings11.infinite) &&
+																	void 0 !== _this$config$settings12 &&
+																	_this$config$settings12.restorePosition &&
 																	((scrollMap = _this.storage.get('scrollMap') || {}),
 																	(scrollToPosition = scrollMap[stringyParams]) &&
 																		((checkCount = 0),
@@ -27281,16 +27550,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings12,
-										_this$config$settings13,
+									var _this$config$settings13,
+										_this$config$settings14,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings12 = this.config.settings) &&
-										void 0 !== _this$config$settings12 &&
-										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
+									(null !== (_this$config$settings13 = this.config.settings) &&
 										void 0 !== _this$config$settings13 &&
-										_this$config$settings13.merchandising &&
+										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
+										void 0 !== _this$config$settings14 &&
+										_this$config$settings14.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -28106,11 +28375,11 @@
 													case 58:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
 													case 60:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 79);
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 80);
 														break;
 													case 64:
 														if (((_context.prev = 64), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 79;
+															_context.next = 80;
 															break;
 														}
 														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 70 : 500 === _context.t4 ? 73 : 76);
@@ -28130,8 +28399,8 @@
 													case 76:
 														return _this.log.error(_context.t3), _context.abrupt('break', 78);
 													case 78:
-														_this.store.loading = !1;
-													case 79:
+														(_this.store.loading = !1), _this.handleError(_context.t3);
+													case 80:
 													case 'end':
 														return _context.stop();
 												}
@@ -28745,7 +29014,7 @@
 					selector: '',
 					action: '',
 					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
+					settings: { initializeFromUrl: !0, syncInputs: !0, serializeForm: !1, facets: { trim: !0, pinFiltered: !0 } },
 				},
 				AutocompleteController = (function (_AbstractController) {
 					!(function AutocompleteController_inherits(subClass, superClass) {
@@ -28975,20 +29244,55 @@
 										function formSubmit(_x2) {
 											return _formSubmit.apply(this, arguments);
 										}),
+									formElementChange: function formElementChange(e) {
+										var _this$config$settings,
+											input = e.target,
+											form = null == input ? void 0 : input.form,
+											searchInput = null == form ? void 0 : form.querySelector('input[ss-autocomplete-input]');
+										if (
+											form &&
+											searchInput &&
+											null !== (_this$config$settings = _this.config.settings) &&
+											void 0 !== _this$config$settings &&
+											_this$config$settings.serializeForm
+										) {
+											var _this$config$settings2,
+												_this$config$settings3,
+												_this$config$settings4,
+												_this$config$settings5,
+												formParameters = getFormParameters(form, function (elem) {
+													return elem != searchInput;
+												});
+											_this.store.setService('urlManager', _this.store.services.urlManager.reset().withGlobals(formParameters)),
+												_this.store.reset(),
+												null !== (_this$config$settings2 = _this.config.settings) &&
+													void 0 !== _this$config$settings2 &&
+													null !== (_this$config$settings3 = _this$config$settings2.trending) &&
+													void 0 !== _this$config$settings3 &&
+													_this$config$settings3.limit &&
+													(null === (_this$config$settings4 = _this.config.settings) ||
+													void 0 === _this$config$settings4 ||
+													null === (_this$config$settings5 = _this$config$settings4.trending) ||
+													void 0 === _this$config$settings5
+														? void 0
+														: _this$config$settings5.limit) > 0 &&
+													_this.searchTrending();
+										}
+									},
 									keyUp: function keyUp(e) {
-										var _this$config, _this$config$settings;
+										var _this$config, _this$config$settings6;
 										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
 											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
 											var value = e.target.value;
 											if (_this.store.state.input != value || !_this.store.loaded) {
-												var _this$store$trending, _this$config$settings2, _this$config$settings3;
+												var _this$store$trending, _this$config$settings7, _this$config$settings8;
 												if (
 													((_this.store.state.input = value),
 													null !== (_this$config = _this.config) &&
 														void 0 !== _this$config &&
-														null !== (_this$config$settings = _this$config.settings) &&
-														void 0 !== _this$config$settings &&
-														_this$config$settings.syncInputs)
+														null !== (_this$config$settings6 = _this$config.settings) &&
+														void 0 !== _this$config$settings6 &&
+														_this$config$settings6.syncInputs)
 												)
 													document.querySelectorAll(_this.config.selector).forEach(function (input) {
 														input.value = value;
@@ -29005,11 +29309,11 @@
 														null !== (_this$store$trending = _this.store.trending) &&
 															void 0 !== _this$store$trending &&
 															_this$store$trending.length &&
-															null !== (_this$config$settings2 = _this.config.settings) &&
-															void 0 !== _this$config$settings2 &&
-															null !== (_this$config$settings3 = _this$config$settings2.trending) &&
-															void 0 !== _this$config$settings3 &&
-															_this$config$settings3.showResults &&
+															null !== (_this$config$settings7 = _this.config.settings) &&
+															void 0 !== _this$config$settings7 &&
+															null !== (_this$config$settings8 = _this$config$settings7.trending) &&
+															void 0 !== _this$config$settings8 &&
+															_this$config$settings8.showResults &&
 															_this.store.trending[0].preview();
 											}
 										}
@@ -29025,7 +29329,7 @@
 							}),
 							(_this.searchTrending = AutocompleteController_asyncToGenerator(
 								AutocompleteController_regeneratorRuntime().mark(function _callee3() {
-									var terms, storedTerms, _this$config$settings4, _this$config$settings5, trendingParams, trendingProfile;
+									var terms, storedTerms, _this$config$settings9, _this$config$settings10, trendingParams, trendingProfile;
 									return AutocompleteController_regeneratorRuntime().wrap(function _callee3$(_context3) {
 										for (;;)
 											switch ((_context3.prev = _context3.next)) {
@@ -29040,12 +29344,12 @@
 													return (
 														(trendingParams = {
 															limit:
-																(null === (_this$config$settings4 = _this.config.settings) ||
-																void 0 === _this$config$settings4 ||
-																null === (_this$config$settings5 = _this$config$settings4.trending) ||
-																void 0 === _this$config$settings5
+																(null === (_this$config$settings9 = _this.config.settings) ||
+																void 0 === _this$config$settings9 ||
+																null === (_this$config$settings10 = _this$config$settings9.trending) ||
+																void 0 === _this$config$settings10
 																	? void 0
-																	: _this$config$settings5.limit) || 5,
+																	: _this$config$settings10.limit) || 5,
 														}),
 														(trendingProfile = _this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
 														(_context3.next = 9),
@@ -29187,11 +29491,11 @@
 													case 61:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
 													case 63:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 82);
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 83);
 														break;
 													case 67:
 														if (((_context4.prev = 67), (_context4.t3 = _context4.catch(3)), !_context4.t3)) {
-															_context4.next = 82;
+															_context4.next = 83;
 															break;
 														}
 														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 73 : 500 === _context4.t4 ? 76 : 79);
@@ -29211,8 +29515,8 @@
 													case 79:
 														return _this.log.error(_context4.t3), _context4.abrupt('break', 81);
 													case 81:
-														_this.store.loading = !1;
-													case 82:
+														(_this.store.loading = !1), _this.handleError(_context4.t3);
+													case 83:
 													case 'end':
 														return _context4.stop();
 												}
@@ -29352,7 +29656,7 @@
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee8(inputElement) {
-											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings6, _this$config$settings7;
+											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings11, _this$config$settings12;
 											return AutocompleteController_regeneratorRuntime().wrap(
 												function _callee8$(_context8) {
 													for (;;)
@@ -29397,11 +29701,11 @@
 																void 0 === _this$store$trending2 ||
 																!_this$store$trending2.length ||
 																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
-																null === (_this$config$settings6 = this.config.settings) ||
-																void 0 === _this$config$settings6 ||
-																null === (_this$config$settings7 = _this$config$settings6.trending) ||
-																void 0 === _this$config$settings7 ||
-																!_this$config$settings7.showResults
+																null === (_this$config$settings11 = this.config.settings) ||
+																void 0 === _this$config$settings11 ||
+																null === (_this$config$settings12 = _this$config$settings11.trending) ||
+																void 0 === _this$config$settings12 ||
+																!_this$config$settings12.showResults
 																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
 																	: this.store.trending[0].preview();
 															case 22:
@@ -29438,14 +29742,19 @@
 										inputs = document.querySelectorAll('input[ss-autocomplete-input]');
 									null == inputs ||
 										inputs.forEach(function (input) {
-											var _input$form;
 											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
 												input.removeEventListener('keydown', _this2.handlers.input.enterKey),
 												input.removeEventListener('keydown', _this2.handlers.input.escKey),
 												input.removeEventListener('focus', _this2.handlers.input.focus),
-												null === (_input$form = input.form) ||
-													void 0 === _input$form ||
-													_input$form.removeEventListener('submit', _this2.handlers.input.formSubmit);
+												input.form &&
+													(input.form.removeEventListener('submit', _this2.handlers.input.formSubmit),
+													(function unbindFormParameters(form, fn) {
+														if ('object' == typeof form && 'FORM' == form.nodeName)
+															for (var i = form.elements.length - 1; i >= 0; i--) {
+																var elem = form.elements[i];
+																elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type) && elem.removeEventListener('change', fn);
+															}
+													})(input.form, _this2.handlers.input.formElementChange));
 										}),
 										document.removeEventListener('click', this.handlers.document.click);
 								},
@@ -29455,10 +29764,10 @@
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee9() {
-											var _this$config$settings8,
-												_this$config$settings9,
-												_this$config$settings10,
-												_this$config$settings11,
+											var _this$config$settings13,
+												_this$config$settings14,
+												_this$config$settings15,
+												_this$config$settings16,
 												_this$store$trending3,
 												_this3 = this;
 											return AutocompleteController_regeneratorRuntime().wrap(
@@ -29491,29 +29800,46 @@
 																			input.addEventListener('keydown', _this3.handlers.input.escKey);
 																		var formActionUrl,
 																			form = input.form;
-																		_this3.config.action
-																			? ((formActionUrl = _this3.config.action), input.addEventListener('keydown', _this3.handlers.input.enterKey))
-																			: form && ((formActionUrl = form.action), form.addEventListener('submit', _this3.handlers.input.formSubmit)),
-																			formActionUrl &&
-																				_this3.store.setService(
-																					'urlManager',
-																					_this3.urlManager.withConfig(function (translatorConfig) {
-																						return Object.assign({}, translatorConfig, { urlRoot: formActionUrl });
-																					})
-																				),
+																		if (_this3.config.action)
+																			input.addEventListener('keydown', _this3.handlers.input.enterKey), (formActionUrl = _this3.config.action);
+																		else if (form) {
+																			var _this3$config$setting2;
+																			if (
+																				(form.addEventListener('submit', _this3.handlers.input.formSubmit),
+																				(formActionUrl = form.action || ''),
+																				null !== (_this3$config$setting2 = _this3.config.settings) &&
+																					void 0 !== _this3$config$setting2 &&
+																					_this3$config$setting2.serializeForm)
+																			) {
+																				bindFormParameters(form, _this3.handlers.input.formElementChange, function (elem) {
+																					return elem != input;
+																				});
+																				var formParameters = getFormParameters(form, function (elem) {
+																					return elem != input;
+																				});
+																				_this3.store.setService('urlManager', _this3.urlManager.reset().withGlobals(formParameters));
+																			}
+																		}
+																		formActionUrl &&
+																			_this3.store.setService(
+																				'urlManager',
+																				_this3.store.services.urlManager.withConfig(function (translatorConfig) {
+																					return Object.assign({}, translatorConfig, { urlRoot: formActionUrl });
+																				})
+																			),
 																			document.activeElement === input && _this3.setFocused(input);
 																	}),
-																	null !== (_this$config$settings8 = this.config.settings) &&
-																		void 0 !== _this$config$settings8 &&
-																		null !== (_this$config$settings9 = _this$config$settings8.trending) &&
-																		void 0 !== _this$config$settings9 &&
-																		_this$config$settings9.limit &&
-																		(null === (_this$config$settings10 = this.config.settings) ||
-																		void 0 === _this$config$settings10 ||
-																		null === (_this$config$settings11 = _this$config$settings10.trending) ||
-																		void 0 === _this$config$settings11
+																	null !== (_this$config$settings13 = this.config.settings) &&
+																		void 0 !== _this$config$settings13 &&
+																		null !== (_this$config$settings14 = _this$config$settings13.trending) &&
+																		void 0 !== _this$config$settings14 &&
+																		_this$config$settings14.limit &&
+																		(null === (_this$config$settings15 = this.config.settings) ||
+																		void 0 === _this$config$settings15 ||
+																		null === (_this$config$settings16 = _this$config$settings15.trending) ||
+																		void 0 === _this$config$settings16
 																			? void 0
-																			: _this$config$settings11.limit) > 0 &&
+																			: _this$config$settings16.limit) > 0 &&
 																		(null === (_this$store$trending3 = this.store.trending) ||
 																			void 0 === _this$store$trending3 ||
 																			!_this$store$trending3.length) &&
@@ -29564,6 +29890,30 @@
 						}, _callee10);
 					})
 				)).apply(this, arguments);
+			}
+			var INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+			function getFormParameters(form, filterFn) {
+				var parameters = {};
+				if ('object' == typeof form && 'FORM' == form.nodeName)
+					for (var i = form.elements.length - 1; i >= 0; i--) {
+						var elem = form.elements[i];
+						('function' != typeof filterFn || filterFn(elem)) &&
+							elem.name &&
+							!INPUT_TYPE_BLACKLIST.includes(elem.type) &&
+							(('checkbox' != elem.type && 'radio' != elem.type) || elem.checked) &&
+							(parameters[elem.name] = elem.value);
+					}
+				return parameters;
+			}
+			function bindFormParameters(form, fn, filterFn) {
+				if ('object' == typeof form && 'FORM' == form.nodeName)
+					for (var i = form.elements.length - 1; i >= 0; i--) {
+						var elem = form.elements[i];
+						('function' != typeof filterFn || filterFn(elem)) &&
+							elem.name &&
+							!INPUT_TYPE_BLACKLIST.includes(elem.type) &&
+							elem.addEventListener('change', fn);
+					}
 			}
 			var AppMode;
 			__webpack_require__('../../node_modules/core-js/modules/es.object.values.js');
@@ -36933,7 +37283,8 @@
 				})(),
 				UrlManager = (function () {
 					function UrlManager(translator, linker, globalState, localState, watcherPool) {
-						var _this2 = this,
+						var _translatorConfig$set,
+							_this2 = this,
 							omissions = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : [],
 							detached = arguments.length > 6 ? arguments[6] : void 0;
 						UrlManager_classCallCheck(this, UrlManager),
@@ -36946,7 +37297,16 @@
 							(this.mergedState = seamless_immutable_development_default()({})),
 							(this.localState = seamless_immutable_development_default()(localState || {})),
 							(this.globalState = seamless_immutable_development_default()(globalState || {})),
-							(this.translator = translator),
+							(this.translator = translator);
+						var translatorConfig = this.getTranslatorConfig();
+						translatorConfig.urlRoot &&
+							null !== (_translatorConfig$set = translatorConfig.settings) &&
+							void 0 !== _translatorConfig$set &&
+							_translatorConfig$set.serializeUrlRoot &&
+							(this.globalState = this.globalState.merge(
+								seamless_immutable_development_default()(this.translator.deserialize(translatorConfig.urlRoot)),
+								{ deep: !0, merger: arrayConcatMerger }
+							)),
 							watcherPool
 								? (this.watcherPool = watcherPool)
 								: ((this.watcherPool = new WatcherPool()),
@@ -37097,16 +37457,19 @@
 							{
 								key: 'reset',
 								value: function reset() {
-									return new UrlManager(
-										this.translator,
-										this.linker,
-										this.globalState,
-										{},
-										this.watcherPool,
-										Object.keys(this.urlState).map(function (k) {
-											return { path: [k] };
-										}),
-										this.detached
+									return (
+										this.detached && (this.detached.url = ''),
+										new UrlManager(
+											this.translator,
+											this.linker,
+											this.globalState,
+											{},
+											this.watcherPool,
+											Object.keys(this.urlState).map(function (k) {
+												return { path: [k] };
+											}),
+											this.detached
+										)
 									);
 								},
 							},
@@ -37130,7 +37493,13 @@
 							{
 								key: 'withGlobals',
 								value: function withGlobals(globals) {
-									return new UrlManager(this.translator, this.linker, globals, this.localState, this.watcherPool, this.omissions, this.detached);
+									return (
+										(this.globalState = this.globalState.merge(seamless_immutable_development_default()(globals), {
+											deep: !0,
+											merger: arrayConcatMerger,
+										})),
+										new UrlManager(this.translator, this.linker, this.globalState, this.localState, this.watcherPool, this.omissions, this.detached)
+									);
 								},
 							},
 							{
@@ -37311,7 +37680,7 @@
 				})(ParamLocationType || (ParamLocationType = {}));
 			var UrlTranslator_defaultConfig = {
 					urlRoot: '',
-					settings: { corePrefix: '', customType: ParamLocationType.hash, rootParams: !0 },
+					settings: { corePrefix: '', customType: ParamLocationType.query, serializeUrlRoot: !0 },
 					parameters: {
 						core: {
 							query: { name: 'q', type: ParamLocationType.query },
@@ -37662,9 +38031,7 @@
 											: this.config.urlRoot.includes('#')
 											? this.config.urlRoot.split('#')[0]
 											: this.config.urlRoot || window.location.pathname,
-										rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [],
-										stateParams = this.stateToParams(state),
-										params = [].concat(UrlTranslator_toConsumableArray(rootUrlParams), UrlTranslator_toConsumableArray(stateParams)),
+										params = this.stateToParams(state),
 										queryParams = params.filter(function (p) {
 											return p.type == ParamLocationType.query;
 										}),
@@ -37703,10 +38070,10 @@
 								key: 'stateToParams',
 								value: function stateToParams(state) {
 									return [].concat(
+										UrlTranslator_toConsumableArray(this.encodeOther(state)),
 										UrlTranslator_toConsumableArray(this.encodeCoreOther(state, ['filter', 'sort'])),
 										UrlTranslator_toConsumableArray(this.encodeCoreFilters(state)),
-										UrlTranslator_toConsumableArray(this.encodeCoreSorts(state)),
-										UrlTranslator_toConsumableArray(this.encodeOther(state))
+										UrlTranslator_toConsumableArray(this.encodeCoreSorts(state))
 									);
 								},
 							},
@@ -39378,7 +39745,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.32.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.33.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39456,7 +39823,16 @@
 												type: BeaconType.ERROR,
 												category: BeaconCategory.RUNTIME,
 												context,
-												event: { userAgent, href, filename, stack, message, colno, lineno, errortimestamp },
+												event: {
+													userAgent: userAgent || navigator.userAgent,
+													href: href || window.location.href,
+													filename,
+													stack,
+													message,
+													colno,
+													lineno,
+													errortimestamp,
+												},
 											};
 										return _this.track.event(payload);
 									}
@@ -39798,7 +40174,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.32.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.33.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40530,135 +40906,6 @@
 					);
 				})();
 		},
-		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			var preview_namespaceObject = {};
-			__webpack_require__.r(preview_namespaceObject),
-				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
-				defaultTheme = {
-					colors: {
-						primary: '#3A23AD',
-						secondary: '#00cee1',
-						hover: '#f8f6fd',
-						text: { secondary: '#ffffff' },
-						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
-					},
-					components: {},
-				},
-				injectStylesIntoStyleTag = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
-				),
-				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
-				),
-				options = { insert: 'head', singleton: !1 };
-			injectStylesIntoStyleTag_default()(styles.Z, options);
-			styles.Z.locals;
-			var decorators = [
-					function (Story) {
-						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
-					},
-				],
-				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(preview_namespaceObject).forEach(function (key) {
-				var value = preview_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.$9)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.HZ)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.h1)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.My)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi._C)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.$P)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.h1)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			(module = __webpack_require__.nmd(module)),
-				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
-					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
-						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
-						),
-					],
-					module,
-					!1
-				);
-		},
 		'./storybook-init-framework-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js');
@@ -41140,8 +41387,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -41260,8 +41507,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -41621,8 +41868,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -41851,12 +42098,12 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[963],
+			[415],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
 				__webpack_exec__('./storybook-init-framework-entry.js'),
-				__webpack_exec__('../../node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
+				__webpack_exec__('./node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/preact/dist/esm/client/preview/config-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-links/dist/esm/preset/addDecorator.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-actions/dist/esm/preset/addDecorator.js-generated-config-entry.js'),
