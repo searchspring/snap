@@ -1,3 +1,4 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
 
 export type TrackerGlobals = {
@@ -7,6 +8,7 @@ export type TrackerGlobals = {
 export type TrackerConfig = {
 	id?: string;
 	framework?: string;
+	mode?: keyof typeof AppMode | AppMode;
 };
 
 export type BeaconPayload = {
