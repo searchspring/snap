@@ -48,8 +48,12 @@ export interface Translator {
 }
 
 export interface TranslatorConfig {
-	queryParameter?: string;
 	urlRoot?: string;
+	settings?: {
+		serializeUrlRoot?: boolean;
+		[any: string]: unknown;
+	};
+	[any: string]: unknown;
 }
 
 export enum ParamLocationType {

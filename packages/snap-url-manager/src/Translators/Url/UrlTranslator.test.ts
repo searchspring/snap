@@ -4,16 +4,16 @@ import { UrlState, ParamLocationType } from '../../types';
 describe('UrlTranslator', () => {
 	it('generates relative URL by default', () => {
 		const url = 'http://example.com?bar=baz';
-		const queryString = new UrlTranslator();
+		const urlTranslator = new UrlTranslator();
 
 		const params = {
-			...queryString.deserialize(url),
+			...urlTranslator.deserialize(url),
 			foo: ['bar'],
 		};
 
-		expect(queryString.serialize(params)).toBe('/?bar=baz#/foo:bar');
+		expect(urlTranslator.serialize(params)).toBe('/?bar=baz&foo=bar');
 
-		expect(queryString.serialize({})).toBe('/');
+		expect(urlTranslator.serialize({})).toBe('/');
 	});
 
 	it('prepends urlRoot when provided', () => {
@@ -24,111 +24,28 @@ describe('UrlTranslator', () => {
 			}
 		}
 
-		const queryString = new customTranslator({ urlRoot: '//example2.com' });
+		const urlTranslator = new customTranslator({ urlRoot: '//example2.com' });
 
 		const params = {
-			...queryString.deserialize(url),
+			...urlTranslator.deserialize(url),
 			query: 'foo bar',
 		};
 
-		expect(queryString.serialize(params)).toBe('//example2.com?q=foo%20bar&bar=baz');
-		expect(queryString.serialize({})).toBe('//example2.com');
-	});
-
-	it('prepends urlRoot when provided and adds query params', () => {
-		const url = 'http://example.com';
-		class customTranslator extends UrlTranslator {
-			getCurrentUrl() {
-				return url;
-			}
-		}
-
-		const queryString = new customTranslator({
-			urlRoot: '/search?user=kevin',
-			parameters: { core: { query: { name: 'search' } } },
-		});
-
-		const params = {
-			...queryString.deserialize(url),
-			page: 3,
-			query: 'string',
-		};
-
-		expect(queryString.serialize(params)).toBe('/search?user=kevin&search=string&page=3');
-		expect(queryString.serialize({})).toBe('/search?user=kevin');
-	});
-
-	it('prepends urlRoot when provided and adds hash params', () => {
-		const url = 'http://example.com';
-		class customTranslator extends UrlTranslator {
-			getCurrentUrl() {
-				return url;
-			}
-		}
-
-		const queryString = new customTranslator({
-			urlRoot: '/search#view:grid',
-			parameters: { core: { page: { type: 'hash' } } },
-		});
-
-		const params = {
-			...queryString.deserialize(url),
-			page: 3,
-		};
-
-		expect(queryString.serialize(params)).toBe('/search#/view:grid/page:3');
-		expect(queryString.serialize({})).toBe('/search#/view:grid');
-	});
-
-	it('prepends urlRoot when provided and adds hash and query params', () => {
-		const url = 'http://example.com?bar=baz&dev#/testing';
-		class customTranslator extends UrlTranslator {
-			getCurrentUrl() {
-				return url;
-			}
-		}
-
-		const queryString = new customTranslator({ urlRoot: '//example2.com?goo=ga#/notsureif' });
-
-		const params = {
-			...queryString.deserialize(url),
-			foo: 'bar',
-		};
-
-		expect(queryString.serialize(params)).toBe('//example2.com?goo=ga&bar=baz&dev#/notsureif/testing/foo:bar');
-		expect(queryString.serialize({})).toBe('//example2.com?goo=ga#/notsureif');
-	});
-
-	it('prepends urlRoot when provided and does NOT add hash and query params when setting is disabled', () => {
-		const url = 'http://example.com?bar=baz&dev#/testing';
-		class customTranslator extends UrlTranslator {
-			getCurrentUrl() {
-				return url;
-			}
-		}
-
-		const queryString = new customTranslator({ urlRoot: '//example2.com?goo=ga#/notsureif', settings: { rootParams: false } });
-
-		const params = {
-			...queryString.deserialize(url),
-			foo: 'bar',
-		};
-
-		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz&dev#/testing/foo:bar');
-		expect(queryString.serialize({})).toBe('//example2.com');
+		expect(urlTranslator.serialize(params)).toBe('//example2.com?bar=baz&q=foo%20bar');
+		expect(urlTranslator.serialize({})).toBe('//example2.com');
 	});
 
 	describe('config', () => {
 		it('has default configuration', () => {
-			const queryString = new UrlTranslator();
-			const defaultConfig = queryString.getConfig();
+			const urlTranslator = new UrlTranslator();
+			const defaultConfig = urlTranslator.getConfig();
 
 			expect(defaultConfig.urlRoot).toEqual('');
 
 			expect(defaultConfig.settings).toEqual({
 				corePrefix: '',
-				customType: ParamLocationType.hash,
-				rootParams: true,
+				customType: ParamLocationType.query,
+				serializeUrlRoot: true,
 			});
 
 			expect(defaultConfig.parameters.core).toEqual({
@@ -146,23 +63,23 @@ describe('UrlTranslator', () => {
 		});
 
 		it('falls back to default customType when invalid type is provided', () => {
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					customType: 'invalid' as ParamLocationType,
 				},
 			});
-			const config = queryString.getConfig();
+			const config = urlTranslator.getConfig();
 
 			expect(config.settings.customType).toEqual(ParamLocationType.hash);
 		});
 
 		it('can set the type of all core params with one setting', () => {
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					coreType: ParamLocationType.hash,
 				},
 			});
-			const config = queryString.getConfig();
+			const config = urlTranslator.getConfig();
 
 			Object.keys(config.parameters.core).forEach((coreKey) => {
 				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
@@ -182,8 +99,8 @@ describe('UrlTranslator', () => {
 				},
 			};
 
-			const queryString = new UrlTranslator(urlConfig);
-			const config = queryString.getConfig();
+			const urlTranslator = new UrlTranslator(urlConfig);
+			const config = urlTranslator.getConfig();
 
 			Object.keys(config.parameters.core).forEach((coreKey) => {
 				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
@@ -207,8 +124,8 @@ describe('UrlTranslator', () => {
 				},
 			};
 
-			const queryString = new UrlTranslator(urlConfig);
-			const config = queryString.getConfig();
+			const urlTranslator = new UrlTranslator(urlConfig);
+			const config = urlTranslator.getConfig();
 
 			Object.keys(config.parameters.core).forEach((coreKey) => {
 				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
@@ -221,12 +138,12 @@ describe('UrlTranslator', () => {
 		});
 
 		it('will ignore core param type setting when it is invalid', () => {
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					coreType: 'invalid' as ParamLocationType,
 				},
 			});
-			const config = queryString.getConfig();
+			const config = urlTranslator.getConfig();
 
 			expect(config.parameters.core).toEqual({
 				query: { name: 'q', type: ParamLocationType.query },
@@ -243,8 +160,8 @@ describe('UrlTranslator', () => {
 
 	describe('deserialize', () => {
 		it('deserializes empty string correctly', () => {
-			const queryString = new UrlTranslator();
-			const emptyParams: UrlState = queryString.deserialize('');
+			const urlTranslator = new UrlTranslator();
+			const emptyParams: UrlState = urlTranslator.deserialize('');
 
 			expect(emptyParams).toEqual({});
 		});
@@ -273,8 +190,8 @@ describe('UrlTranslator', () => {
 		it('deserializes core state correctly', () => {
 			const url =
 				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7#/pageSize:40/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc';
-			const queryString = new UrlTranslator();
-			const params: UrlState = queryString.deserialize(url);
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe('shoes');
 			expect(params.oq).toBe('shoez');
@@ -305,12 +222,12 @@ describe('UrlTranslator', () => {
 		it('deserializes core state as hash params correctly', () => {
 			const url =
 				'/#/q:shoes/oq:shoez/rq:shiny/tag:taggy/page:7/pageSize:40/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc';
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					coreType: ParamLocationType.hash,
 				},
 			});
-			const params: UrlState = queryString.deserialize(url);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe('shoes');
 			expect(params.oq).toBe('shoez');
@@ -341,12 +258,12 @@ describe('UrlTranslator', () => {
 		it('deserializes core state as query params correctly', () => {
 			const url =
 				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc';
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					coreType: ParamLocationType.query,
 				},
 			});
-			const params: UrlState = queryString.deserialize(url);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe('shoes');
 			expect(params.oq).toBe('shoez');
@@ -377,12 +294,12 @@ describe('UrlTranslator', () => {
 		it('deserializes core state with type misconfiguration correctly', () => {
 			const url =
 				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc';
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					coreType: ParamLocationType.hash,
 				},
 			});
-			const params: UrlState = queryString.deserialize(url);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe(undefined);
 			expect(params.oq).toBe(undefined);
@@ -397,7 +314,7 @@ describe('UrlTranslator', () => {
 		it('deserializes core state with name and type changes correctly', () => {
 			const url =
 				'?size=40&facet.color=red&facet.color=orange&facet.brand=adidas&facet.price.low=99.99&facet.price.high=299.99&order.name=desc#/query:shoes/originalQuery:shoez/refinedQuery:shiny/landingPage:taggy/p:7';
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				parameters: {
 					core: {
 						query: { name: 'query', type: ParamLocationType.hash },
@@ -411,7 +328,7 @@ describe('UrlTranslator', () => {
 					},
 				},
 			});
-			const params: UrlState = queryString.deserialize(url);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe('shoes');
 			expect(params.oq).toBe('shoez');
@@ -443,12 +360,12 @@ describe('UrlTranslator', () => {
 			const corePrefix = 'p-';
 			const url = `http://somesite.com?${corePrefix}q=foo&${corePrefix}page=2#/${corePrefix}filter:brand:nike/${corePrefix}filter:color:blue/${corePrefix}filter:color:green$2520striped/${corePrefix}sort:price:asc`;
 
-			const queryString = new UrlTranslator({
+			const urlTranslator = new UrlTranslator({
 				settings: {
 					corePrefix,
 				},
 			});
-			const params: UrlState = queryString.deserialize(url);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.query).toBe('foo');
 
@@ -469,8 +386,8 @@ describe('UrlTranslator', () => {
 
 		it('deserializes hash range filters correctly', () => {
 			const url = 'http://somesite.com#/filter:price:*:10/filter:price:10:100/filter:price:100:*';
-			const queryString = new UrlTranslator();
-			const params: UrlState = queryString.deserialize(url);
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.filter).toEqual({
 				price: [
@@ -489,8 +406,8 @@ describe('UrlTranslator', () => {
 			const url =
 				'http://somesite.com?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100&filter.price.low=100&filter.price.high=*';
 
-			const queryString = new UrlTranslator();
-			const params: UrlState = queryString.deserialize(url);
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.filter).toEqual(undefined);
 		});
@@ -507,8 +424,8 @@ describe('UrlTranslator', () => {
 					},
 				},
 			};
-			const queryString = new UrlTranslator(config);
-			const params: UrlState = queryString.deserialize(url);
+			const urlTranslator = new UrlTranslator(config);
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.filter).toEqual({
 				price: [
@@ -525,8 +442,8 @@ describe('UrlTranslator', () => {
 
 		it('deserializes with invalid range filters correctly', () => {
 			const url = 'http://somesite.com#/filter:price:nope:nah/filter:price:nope:9000';
-			const queryString = new UrlTranslator();
-			const params: UrlState = queryString.deserialize(url);
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
 
 			expect(params.filter).toEqual({
 				price: [
@@ -608,9 +525,9 @@ describe('UrlTranslator', () => {
 
 	describe('serialize', () => {
 		it('serializes empty params correctly', () => {
-			const queryString = new UrlTranslator();
+			const urlTranslator = new UrlTranslator();
 			const params: UrlState = {};
-			const query = queryString.serialize(params);
+			const query = urlTranslator.serialize(params);
 
 			expect(query).toBe('/');
 		});
@@ -802,7 +719,7 @@ describe('UrlTranslator', () => {
 			);
 		});
 
-		it('serializes other state correctly (as hash params)', () => {
+		it('serializes other state correctly (as query params)', () => {
 			const translator = new UrlTranslator({
 				parameters: {
 					core: {
@@ -822,11 +739,11 @@ describe('UrlTranslator', () => {
 				array: ['uno', 'dos', 'tres'],
 			};
 
-			expect(translator.serialize(params)).toBe('/#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
+			expect(translator.serialize(params)).toBe('/?roots.trunk.branch.leaf=thing&array=uno&array=dos&array=tres');
 		});
 
 		it('serializes range filters correctly', () => {
-			const queryString = new UrlTranslator();
+			const urlTranslator = new UrlTranslator();
 
 			const params: UrlState = {
 				filter: {
@@ -838,13 +755,13 @@ describe('UrlTranslator', () => {
 				},
 			};
 
-			const query = queryString.serialize(params);
+			const query = urlTranslator.serialize(params);
 
 			expect(query).toBe('/#/filter:price:*:10/filter:price:10:100/filter:price:100:*');
 		});
 
 		it('serializes with invalid range filters correctly', () => {
-			const queryString = new UrlTranslator();
+			const urlTranslator = new UrlTranslator();
 
 			const params = {
 				filter: {
@@ -852,7 +769,7 @@ describe('UrlTranslator', () => {
 				},
 			};
 
-			const query = queryString.serialize(params as UrlState);
+			const query = urlTranslator.serialize(params as UrlState);
 
 			expect(query).toBe('/#/filter:price:10:100');
 		});
@@ -904,7 +821,7 @@ describe('UrlTranslator', () => {
 				googs: ['ga'],
 			});
 
-			expect(query).toBe(config.urlRoot + '?search=the%20query&order.price=asc&googs=ga#/ga:googs');
+			expect(query).toBe(config.urlRoot + '?googs=ga&search=the%20query&order.price=asc#/ga:googs');
 		});
 
 		it('handles customType hash custom params correctly', () => {
@@ -923,7 +840,7 @@ describe('UrlTranslator', () => {
 				googs: ['ga'],
 			});
 
-			expect(query).toBe(config.urlRoot + '?q=the%20query#/sort:price:asc/ga:googs/googs:ga');
+			expect(query).toBe(config.urlRoot + '?q=the%20query#/ga:googs/googs:ga/sort:price:asc');
 		});
 
 		it('handles customType query custom params correctly', () => {
@@ -942,7 +859,7 @@ describe('UrlTranslator', () => {
 				googs: ['ga'],
 			});
 
-			expect(query).toBe(config.urlRoot + '?q=the%20query&ga=googs&googs=ga#/sort:price:asc');
+			expect(query).toBe(config.urlRoot + '?ga=googs&googs=ga&q=the%20query#/sort:price:asc');
 		});
 	});
 });

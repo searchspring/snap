@@ -32,7 +32,7 @@ The `startChecked` prop sets the checkbox to be checked on the initial render. M
 The `disabled` prop disables the checkbox from being toggled or invoking the `onClick` callback.
 
 ```jsx
-<Checkbox disabled />
+<Checkbox disabled={true} />
 ```
 
 ### size

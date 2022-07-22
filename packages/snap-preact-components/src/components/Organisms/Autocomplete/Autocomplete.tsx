@@ -356,7 +356,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || state.input);
-	const showTrending = !state.input && trending?.length && terms.length === 0;
+
+	let showTrending = false;
+	if (!results.length && !state.input && trending?.length) {
+		showTrending = true;
+	} else if (trending?.length && !terms.length) {
+		// has results and trending -> show trending terms while term load
+		showTrending = true;
+	}
+
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
 
@@ -577,6 +585,7 @@ interface AutocompleteSubProps {
 
 export interface AutocompleteProps extends ComponentProps {
 	input: Element | string;
+	controller: AutocompleteController;
 	hideTerms?: boolean;
 	hideFacets?: boolean;
 	hideContent?: boolean;
@@ -596,7 +605,6 @@ export interface AutocompleteProps extends ComponentProps {
 	noResultsSlot?: JSX.Element;
 	linkSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
-	controller: AutocompleteController;
 	width?: string;
 	onFacetOptionClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;

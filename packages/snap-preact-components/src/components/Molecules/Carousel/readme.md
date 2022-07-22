@@ -17,28 +17,28 @@ Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be prov
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Carousel loop>{children}</Carousel>
+<Carousel loop={true}>{children}</Carousel>
 ```
 
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 
 ```jsx
-<Carousel pagination>{children}</Carousel>
+<Carousel pagination={true}>{children}</Carousel>
 ```
 
 ### vertical 
 The `vertical` prop changes the carousel slide direction from horizontal, to vertical. 
 
 ```jsx
-<Carousel vertical>{children}</Carousel>
+<Carousel vertical={true}>{children}</Carousel>
 ```
 
 ### hideButtons
 The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
 
 ```jsx
-<Carousel hideButtons>{children}</Carousel>
+<Carousel hideButtons={true}>{children}</Carousel>
 ```
 
 ### prevButton

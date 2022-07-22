@@ -435,4 +435,84 @@ describe('Search Controller', () => {
 
 		expect(retargetFn).toHaveBeenCalledTimes(2);
 	});
+
+	it('invokes handleError if string is thrown', async () => {
+		const controller = new TestController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = 'string error';
+
+		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
+
+		controller.handleError(error);
+
+		expect(trackerTrackError).toHaveBeenCalled();
+
+		trackerTrackError.mockClear();
+	});
+
+	it('invokes handleError if object is thrown', async () => {
+		const controller = new TestController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = {
+			error: 'object error',
+		};
+
+		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
+
+		controller.handleError(error);
+
+		expect(trackerTrackError).toHaveBeenCalled();
+
+		trackerTrackError.mockClear();
+	});
+
+	it('invokes handleError if ErrorEvent is thrown', async () => {
+		const controller = new TestController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
+
+		controller.handleError(error);
+
+		expect(trackerTrackError).toHaveBeenCalledWith({
+			filename: error.filename,
+			stack: error.error.stack,
+			message: error.message,
+			colno: error.colno,
+			lineno: error.lineno,
+			errortimestamp: error.timeStamp,
+		});
+
+		trackerTrackError.mockClear();
+	});
 });

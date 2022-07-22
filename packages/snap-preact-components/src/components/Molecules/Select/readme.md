@@ -13,7 +13,7 @@ Renders a native or custom select dropdown.
 The required `options` prop specifies an array of Option Objects to be rendered.
 
 ```jsx
-<Select options={controller.store.sorting.options} native={true} />
+<Select options={controller.store.sorting.options} />
 ```
 
 #### Option Object
@@ -29,14 +29,14 @@ The required `options` prop specifies an array of Option Objects to be rendered.
 The `native` prop will use a native html `<select>` element.
 
 ```jsx
-<Select options={controller.store.sorting.options} native />
+<Select options={controller.store.sorting.options} native={true} />
 ```
 
 ### disabled
 The `disabled` prop will disable the select from being toggled or invoking the `onSelect` callback.
 
 ```jsx
-<Select options={controller.store.sorting.options} disabled />
+<Select options={controller.store.sorting.options} disabled={true} />
 ```
 
 ### label

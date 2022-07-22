@@ -179,7 +179,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 export interface ErrorHandlerProps extends ComponentProps {
 	controller?: AbstractController;
-	error: {
+	error?: {
 		code?: number;
 		type: ErrorType;
 		message: string;

@@ -58,6 +58,7 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	settings?: {
 		initializeFromUrl?: boolean;
 		syncInputs?: boolean;
+		serializeForm?: boolean;
 		facets?: FacetStoreConfig & {
 			fields?: {
 				[field: string]: FacetStoreConfig;

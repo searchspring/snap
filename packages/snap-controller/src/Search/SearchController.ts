@@ -40,6 +40,7 @@ export class SearchController extends AbstractController {
 	declare store: SearchStore;
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
+	private previousResults: Array<SearchResponseModelResult> = [];
 
 	constructor(
 		config: SearchControllerConfig,
@@ -285,7 +286,7 @@ export class SearchController extends AbstractController {
 			// if params.page > 1 and infinite setting exists we should append results
 			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
-				let previousResults = (JSON.parse(JSON.stringify(this.store.results)) as SearchResponseModelResult[]) || [];
+				let previousResults = this.previousResults;
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];
@@ -328,8 +329,11 @@ export class SearchController extends AbstractController {
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
 
+			if (this.config.settings?.infinite) {
+				this.previousResults = JSON.parse(JSON.stringify(response.results));
+			}
+
 			// update the store
-			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -377,6 +381,7 @@ export class SearchController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
 	};

@@ -1,4 +1,4 @@
-import { Translator, UrlState } from '../types';
+import { Translator, TranslatorConfig, UrlState } from '../types';
 
 import Immutable from 'seamless-immutable';
 import type { ImmutableObject } from 'seamless-immutable';
@@ -51,6 +51,15 @@ export class UrlManager {
 		this.globalState = Immutable(globalState || {});
 
 		this.translator = translator;
+
+		// set globals based on urlRoot of translator config when serializeUrlRoot is set
+		const translatorConfig = this.getTranslatorConfig();
+		if (translatorConfig.urlRoot && translatorConfig.settings?.serializeUrlRoot) {
+			this.globalState = this.globalState.merge(Immutable(this.translator.deserialize(translatorConfig.urlRoot as string)), {
+				deep: true,
+				merger: arrayConcatMerger,
+			});
+		}
 
 		if (watcherPool) {
 			this.watcherPool = watcherPool;
@@ -210,6 +219,11 @@ export class UrlManager {
 	}
 
 	reset(): UrlManager {
+		// reset detached url
+		if (this.detached) {
+			this.detached.url = '';
+		}
+
 		return new UrlManager(
 			this.translator,
 			this.linker,
@@ -237,11 +251,16 @@ export class UrlManager {
 		);
 	}
 
-	withGlobals(globals: UrlState | ImmutableObject<UrlState>): UrlManager {
-		return new UrlManager(this.translator, this.linker, globals, this.localState, this.watcherPool, this.omissions, this.detached);
+	withGlobals(globals: UrlState): UrlManager {
+		this.globalState = this.globalState.merge(Immutable(globals), {
+			deep: true,
+			merger: arrayConcatMerger,
+		});
+
+		return new UrlManager(this.translator, this.linker, this.globalState, this.localState, this.watcherPool, this.omissions, this.detached);
 	}
 
-	getTranslatorConfig(): Record<string, unknown> {
+	getTranslatorConfig(): TranslatorConfig {
 		return this.translator.getConfig();
 	}
 
