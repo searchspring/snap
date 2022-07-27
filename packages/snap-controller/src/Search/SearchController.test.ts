@@ -10,7 +10,6 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
-import { getSessionId } from '@searchspring/snap-toolbox';
 
 import { SearchController } from './SearchController';
 import type { SearchControllerConfig } from '../types';
@@ -631,7 +630,7 @@ describe('Search Controller', () => {
 
 		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
 		const userId = controller.tracker.getUserId();
-		const sessionId = getSessionId();
+		const sessionId = controller.tracker.context.sessionId;
 		const stringyParams = JSON.stringify({
 			filters: [],
 			tracking: {

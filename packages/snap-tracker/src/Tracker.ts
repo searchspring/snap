@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, getFlags, version, DomTargeter, getContext, charsParams, getSessionId, PAGELOADID_STORAGE_NAME } from '@searchspring/snap-toolbox';
+import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -31,6 +31,7 @@ const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
 const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
+const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
@@ -67,9 +68,9 @@ export class Tracker {
 
 		this.context = {
 			userId: this.getUserId() || '',
-			sessionId: getSessionId(),
+			sessionId: this.getSessionId(),
 			shopperId: this.getShopperId(),
-			pageLoadId: getSessionId(PAGELOADID_STORAGE_NAME),
+			pageLoadId: uuidv4(),
 			website: {
 				trackingCode: this.globals.siteId,
 			},
@@ -516,6 +517,28 @@ export class Tracker {
 		}
 
 		return userId;
+	};
+
+	getSessionId = (): string | undefined => {
+		let sessionId;
+		if (getFlags().storage()) {
+			try {
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
+				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
+			} catch (e) {
+				console.error('Failed to persist session id to session storage:', e);
+			}
+		} else if (getFlags().cookies()) {
+			// use cookies if sessionStorage is not enabled and only reset cookie if new session to keep expiration
+			sessionId = cookies.get(SESSIONID_STORAGE_NAME);
+			if (!sessionId) {
+				sessionId = uuidv4();
+				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
+			}
+		}
+
+		return sessionId;
 	};
 
 	getShopperId = (): string | undefined => {

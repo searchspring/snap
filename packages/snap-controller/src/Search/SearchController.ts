@@ -4,7 +4,6 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
-import { getSessionId, PAGELOADID_STORAGE_NAME } from '@searchspring/snap-toolbox';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
@@ -208,12 +207,12 @@ export class SearchController extends AbstractController {
 			params.tracking.userId = userId;
 		}
 
-		const sessionId = getSessionId();
+		const sessionId = this.tracker.context.sessionId;
 		if (sessionId) {
 			params.tracking.sessionId = sessionId;
 		}
 
-		const pageId = getSessionId(PAGELOADID_STORAGE_NAME);
+		const pageId = this.tracker.context.pageLoadId;
 		if (pageId) {
 			params.tracking.pageLoadId = pageId;
 		}
