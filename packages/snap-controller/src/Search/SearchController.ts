@@ -115,6 +115,10 @@ export class SearchController extends AbstractController {
 			if (requestParams?.search?.redirectResponse) {
 				delete requestParams.search.redirectResponse;
 			}
+			if (requestParams.tracking.pageLoadId) {
+				delete requestParams.tracking.pageLoadId;
+			}
+
 			const stringyParams = JSON.stringify(requestParams);
 
 			if (this.config.settings?.infinite?.restorePosition) {
@@ -201,6 +205,16 @@ export class SearchController extends AbstractController {
 		const userId = this.tracker.getUserId();
 		if (userId) {
 			params.tracking.userId = userId;
+		}
+
+		const sessionId = this.tracker.getContext().sessionId;
+		if (sessionId) {
+			params.tracking.sessionId = sessionId;
+		}
+
+		const pageId = this.tracker.getContext().pageLoadId;
+		if (pageId) {
+			params.tracking.pageLoadId = pageId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
