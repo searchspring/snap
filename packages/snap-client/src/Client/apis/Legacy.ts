@@ -7,6 +7,10 @@ export class LegacyAPI extends API {
 		queryParameters.resultsFormat = 'native';
 		const headerParameters: HTTPHeaders = {};
 
+		//remove pageLoadId from cache key query params
+		let cacheParameters = { ...queryParameters };
+		delete cacheParameters.pageLoadId;
+
 		const legacyResponse = await this.request(
 			{
 				path,
@@ -14,7 +18,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			path + JSON.stringify({ ...queryParameters, pageLoadId: ''})
+			path + JSON.stringify(cacheParameters)
 		);
 
 		return legacyResponse;
