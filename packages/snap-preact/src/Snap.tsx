@@ -4,7 +4,17 @@ import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import {
+	AppMode,
+	version,
+	getContext,
+	DomTargeter,
+	url,
+	cookies,
+	featureFlags,
+	getSessionId,
+	PAGELOADID_STORAGE_NAME,
+} from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
 import type { FunctionComponent } from 'preact';
@@ -348,6 +358,9 @@ export class Snap {
 					this.mode = AppMode.development;
 				}
 			}
+
+			//initialize pageLoadId
+			getSessionId(PAGELOADID_STORAGE_NAME, true);
 
 			// client mode uses client config over snap config
 			if (this.config.client) {

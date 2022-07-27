@@ -4,6 +4,7 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
+import { getSessionId, PAGELOADID_STORAGE_NAME } from '@searchspring/snap-toolbox';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
@@ -115,6 +116,10 @@ export class SearchController extends AbstractController {
 			if (requestParams?.search?.redirectResponse) {
 				delete requestParams.search.redirectResponse;
 			}
+			if (requestParams.tracking.pageLoadId) {
+				delete requestParams.tracking.pageLoadId;
+			}
+
 			const stringyParams = JSON.stringify(requestParams);
 
 			if (this.config.settings?.infinite?.restorePosition) {
@@ -201,6 +206,16 @@ export class SearchController extends AbstractController {
 		const userId = this.tracker.getUserId();
 		if (userId) {
 			params.tracking.userId = userId;
+		}
+
+		const sessionId = getSessionId();
+		if (sessionId) {
+			params.tracking.sessionId = sessionId;
+		}
+
+		const pageId = getSessionId(PAGELOADID_STORAGE_NAME);
+		if (pageId) {
+			params.tracking.pageLoadId = pageId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
