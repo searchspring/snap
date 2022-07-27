@@ -207,12 +207,12 @@ export class SearchController extends AbstractController {
 			params.tracking.userId = userId;
 		}
 
-		const sessionId = this.tracker.context.sessionId;
+		const sessionId = this.tracker.getContext().sessionId;
 		if (sessionId) {
 			params.tracking.sessionId = sessionId;
 		}
 
-		const pageId = this.tracker.context.pageLoadId;
+		const pageId = this.tracker.getContext().pageLoadId;
 		if (pageId) {
 			params.tracking.pageLoadId = pageId;
 		}

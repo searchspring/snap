@@ -78,8 +78,8 @@ export class FinderController extends AbstractController {
 	get params(): Record<string, any> {
 		const urlState = this.urlManager.state;
 		const userId = this.tracker.getUserId();
-		const sessionId = this.tracker.context.sessionId;
-		const pageLoadId = this.tracker.context.pageLoadId;
+		const sessionId = this.tracker.getContext().sessionId;
+		const pageLoadId = this.tracker.getContext().pageLoadId;
 
 		let tracking: any = {};
 
@@ -92,6 +92,8 @@ export class FinderController extends AbstractController {
 		if (pageLoadId) {
 			tracking!.pageLoadId = pageLoadId;
 		}
+		tracking.domain = window.location.href;
+
 		// get only the finder fields and disable auto drill down
 		const defaultParams = {
 			facets: {
