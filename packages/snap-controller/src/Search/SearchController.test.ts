@@ -630,7 +630,7 @@ describe('Search Controller', () => {
 
 		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
 		const userId = controller.tracker.getUserId();
-		const sessionId = controller.tracker.context.sessionId;
+		const sessionId = controller.tracker.getContext().sessionId;
 		const stringyParams = JSON.stringify({
 			filters: [],
 			tracking: {
