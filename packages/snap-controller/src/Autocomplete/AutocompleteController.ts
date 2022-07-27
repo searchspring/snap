@@ -113,9 +113,18 @@ export class AutocompleteController extends AbstractController {
 		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals!);
 
 		const userId = this.tracker.getUserId();
+		const sessionId = this.tracker.context.sessionId;
+		const pageLoadId = this.tracker.context.pageLoadId;
+		params.tracking = params.tracking || {};
+
 		if (userId) {
-			params.tracking = params.tracking || {};
 			params.tracking.userId = userId;
+		}
+		if (sessionId) {
+			params.tracking.sessionId = sessionId;
+		}
+		if (pageLoadId) {
+			params.tracking!.pageLoadId = pageLoadId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {

@@ -14,7 +14,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			path + JSON.stringify(queryParameters)
+			path + JSON.stringify({ ...queryParameters, pageLoadId: ''})
 		);
 
 		return legacyResponse;

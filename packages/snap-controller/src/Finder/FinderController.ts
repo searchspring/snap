@@ -77,13 +77,28 @@ export class FinderController extends AbstractController {
 
 	get params(): Record<string, any> {
 		const urlState = this.urlManager.state;
+		const userId = this.tracker.getUserId();
+		const sessionId = this.tracker.context.sessionId;
+		const pageLoadId = this.tracker.context.pageLoadId;
 
+		let tracking: any = {};
+
+		if (userId) {
+			tracking.userId = userId;
+		}
+		if (sessionId) {
+			tracking.sessionId = sessionId;
+		}
+		if (pageLoadId) {
+			tracking!.pageLoadId = pageLoadId;
+		}
 		// get only the finder fields and disable auto drill down
 		const defaultParams = {
 			facets: {
 				include: this.config.fields.map((fieldConfig) => fieldConfig.field),
 				autoDrillDown: false,
 			},
+			tracking: tracking,
 		};
 
 		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, deepmerge(defaultParams, this.config.globals));
