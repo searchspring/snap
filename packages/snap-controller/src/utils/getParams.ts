@@ -41,6 +41,11 @@ export function getSearchParams(state: ImmutableUrlState): Record<string, any> {
 	if (state.tag) {
 		params.merchandising = params.merchandising || {};
 		params.merchandising.landingPage = state.tag;
+
+		//need to set the query to empty string on landing pages.
+		params.search = params.search || {};
+		params.search.query = params.search.query || {};
+		params.search.query.string = '';
 	}
 
 	if (state.query) {

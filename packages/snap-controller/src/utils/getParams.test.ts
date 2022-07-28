@@ -59,13 +59,18 @@ describe('getParams', () => {
 		});
 	});
 
-	it('uses "tag" from UrlManager state', () => {
+	it('uses "tag" from UrlManager state & auto sets empty query string for landing pages', () => {
 		const landingPageName = 'landing';
 		const params = getSearchParams(urlManager.merge('tag', landingPageName).state);
 
 		expect(params).toStrictEqual({
 			merchandising: {
 				landingPage: landingPageName,
+			},
+			search: {
+				query: {
+					string: '',
+				},
 			},
 		});
 	});

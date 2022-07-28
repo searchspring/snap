@@ -51,8 +51,7 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 		originalQuery?: string;
 		redirectResponse?: string;
 	} = {};
-
-	if (reqSearch.query && reqSearch.query.string) {
+	if (reqSearch.query && (reqSearch.query.string || reqSearch.query.string == '')) {
 		search.q = reqSearch.query.string;
 	}
 
