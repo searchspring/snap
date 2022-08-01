@@ -57,7 +57,7 @@ export class SearchFacetStore extends Array {
 					} else if (facet.values?.length == 0) {
 						return false;
 					} else if (!facet.filtered && facet.values?.length == 1) {
-						if (merchandising && merchandising.content?.inline) {
+						if (merchandising?.content?.inline) {
 							return facet.values[0].count! + merchandising.content?.inline.length != pagination.totalResults;
 						} else {
 							return facet.values[0].count != pagination.totalResults;
