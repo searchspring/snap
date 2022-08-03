@@ -1,9 +1,13 @@
 import deepmerge from 'deepmerge';
 import { Tracker } from './Tracker';
-import { BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
+import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
 
 const globals = {
 	siteId: 'xxxzzz',
+};
+
+const config: TrackerConfig = {
+	mode: 'development',
 };
 
 const resetAllCookies = () => {
@@ -38,7 +42,7 @@ describe('Script Block Tracking', () => {
 			</script>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.shopper, 'login');
 
 		await new Promise((r) => setTimeout(r));
@@ -55,7 +59,7 @@ describe('Script Block Tracking', () => {
 			</script>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.product, 'view');
 
 		await new Promise((r) => setTimeout(r));
@@ -72,7 +76,7 @@ describe('Script Block Tracking', () => {
 			</script>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
 
 		await new Promise((r) => setTimeout(r));
@@ -104,7 +108,7 @@ describe('Script Block Tracking', () => {
 			</script>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.order, 'transaction');
 
 		await new Promise((r) => setTimeout(r));
@@ -118,7 +122,7 @@ describe('Script Block Tracking', () => {
 			<script type="searchspring/track/dne"></script>
 		</div>`;
 
-		new Tracker(globals);
+		new Tracker(globals, config);
 		const consoleError = jest.spyOn(console, 'error');
 
 		await new Promise((r) => setTimeout(r));
@@ -145,7 +149,7 @@ describe('Attribute Click Tracking', () => {
 			<button ${attribute}='${skus.join(',')}'></button>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.cookies.cart, 'add');
 
 		const clickEvent = new Event('click', {
@@ -169,7 +173,7 @@ describe('Attribute Click Tracking', () => {
 			<button ${attribute}='${skus.join(',')}'></button>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.cookies.cart, 'remove');
 
 		const clickEvent = new Event('click', {
@@ -192,7 +196,7 @@ describe('Attribute Click Tracking', () => {
 			<button ${attribute}></button>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.cookies.cart, 'clear');
 
 		// first add products to cart
@@ -227,7 +231,7 @@ describe('Attribute Click Tracking', () => {
 			</a>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.product, 'click');
 
 		const clickEvent = new Event('click', {
@@ -256,7 +260,7 @@ describe('Attribute Click Tracking', () => {
 			</button>
 		</div>`;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.cookies.cart, 'add');
 
 		const clickEvent = new Event('click', {
@@ -284,15 +288,27 @@ describe('Tracker', () => {
 	it('can create instance', async () => {
 		const tracker = new Tracker(globals);
 
+		// @ts-ignore - private property access
+		expect(tracker.mode).toStrictEqual('production');
+		// @ts-ignore - private property access
 		expect(tracker.globals).toStrictEqual(globals);
+		// @ts-ignore - private property access
 		expect(tracker.localStorage).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.userId).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.sessionId).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.shopperId).not.toBeDefined(); // should not be defined
+		// @ts-ignore - private property access
 		expect(tracker.context.pageLoadId).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.website).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.website.trackingCode).toBeDefined();
+		// @ts-ignore - private property access
 		expect(tracker.context.website.trackingCode).toStrictEqual(globals.siteId);
 		expect(tracker.track).toBeDefined();
 		expect(tracker.track.event).toBeDefined();
@@ -311,8 +327,147 @@ describe('Tracker', () => {
 		}).toThrow();
 	});
 
+	it('has a method for getting the context', async () => {
+		const tracker = new Tracker(globals);
+
+		const context = tracker.getContext();
+
+		expect(context).toBeDefined();
+		expect(context.userId).toBeDefined();
+		expect(context.sessionId).toBeDefined();
+		expect(context.shopperId).not.toBeDefined(); // should not be defined
+		expect(context.pageLoadId).toBeDefined();
+		expect(context.website).toBeDefined();
+		expect(context.website.trackingCode).toBeDefined();
+	});
+
+	it('can pass config to set the AppMode', async () => {
+		const customConfig: TrackerConfig = {
+			mode: 'production',
+		};
+
+		const tracker = new Tracker(globals, customConfig);
+
+		// @ts-ignore - private property
+		expect(tracker.mode).toBe('production');
+
+		const devTracker = new Tracker(globals, config);
+
+		// @ts-ignore - private property
+		expect(devTracker.mode).toBe('development');
+	});
+
+	it('does not send error events when payloads are from blacklisted URLs (localhost, snapui)', async () => {
+		const tracker = new Tracker(globals);
+
+		const payload: TrackErrorEvent = {
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://localhost/',
+			filename: 'https://snapui.searchspring.io/mockup.html',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			errortimestamp: 1,
+		};
+		const beaconEvent = await tracker.track.error(payload);
+
+		expect(beaconEvent).toBe(undefined);
+
+		const anotherPayload: TrackErrorEvent = {
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://snapui.searchspring.io/mockup.html?q=red',
+			filename: 'https://snapui.searchspring.io/bundle.js',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			errortimestamp: 1,
+		};
+		const anotherBeaconEvent = await tracker.track.error(anotherPayload);
+
+		expect(anotherBeaconEvent).toBe(undefined);
+	});
+
+	it('sends events when AppMode is production', async () => {
+		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
+
+		const xhrMock: Partial<XMLHttpRequest> = {
+			open: jest.fn(),
+			send: jest.fn(),
+			setRequestHeader: jest.fn(),
+			readyState: 4,
+			status: 200,
+			response: 'Hello World!',
+		};
+
+		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
+
+		const sendEvents = jest.spyOn(tracker, 'sendEvents');
+
+		const payload: TrackErrorEvent = {
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://www.test.com/',
+			filename: 'https://snapui.searchspring.io/mockup.html',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			errortimestamp: 1,
+		};
+
+		const beaconEvent = await tracker.track.error(payload);
+
+		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+
+		expect(sendEvents).toHaveBeenCalledTimes(1);
+		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
+
+		sendEvents.mockRestore();
+		request.mockRestore();
+	});
+
+	it('does NOT send events when AppMode is NOT production', async () => {
+		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}`, mode: 'development' }); // custom id to create separate localStorage pool
+
+		const xhrMock: Partial<XMLHttpRequest> = {
+			open: jest.fn(),
+			send: jest.fn(),
+			setRequestHeader: jest.fn(),
+			readyState: 4,
+			status: 200,
+			response: 'Hello World!',
+		};
+
+		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
+
+		const sendEvents = jest.spyOn(tracker, 'sendEvents');
+
+		const payload: TrackErrorEvent = {
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://www.test.com/',
+			filename: 'https://snapui.searchspring.io/mockup.html',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			errortimestamp: 1,
+		};
+
+		const beaconEvent = await tracker.track.error(payload);
+
+		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+
+		expect(sendEvents).toHaveBeenCalledTimes(1);
+		expect(xhrMock.open).not.toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
+
+		sendEvents.mockRestore();
+		request.mockRestore();
+	});
+
 	it('can pass config and use custom namespace', async () => {
-		const config = {
+		const customConfig = {
+			...config,
 			id: 'customTracker',
 			framework: 'test',
 		};
@@ -328,16 +483,16 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.config.framework).toStrictEqual('snap');
 
-		const tracker2 = new Tracker(globals, config);
+		const tracker2 = new Tracker(globals, customConfig);
 
 		// @ts-ignore - private property
-		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
+		expect(tracker2.localStorage.key).toStrictEqual(`ss-${customConfig.id}-${globals.siteId}-local`);
 
 		// @ts-ignore - private property
-		expect(tracker2.config.id).toBe(config.id);
+		expect(tracker2.config.id).toBe(customConfig.id);
 
 		// @ts-ignore - private property
-		expect(tracker2.config.framework).toBe(config.framework);
+		expect(tracker2.config.framework).toBe(customConfig.framework);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -345,16 +500,19 @@ describe('Tracker', () => {
 		// @ts-ignore
 		global.window.navigator.cookieEnabled = false;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
+		// @ts-ignore - private property access
 		expect(tracker.context.userId).toBeDefined();
 
 		expect(global.document.cookie).not.toContain(`ssUserId`);
+
+		// @ts-ignore - private property access
 		expect(tracker.context.userId).toStrictEqual(global.window.localStorage.getItem('ssUserId'));
 	});
 
 	it('can invoke sendPreflight GET', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		// only add 1 product to be under threshold and still generate request
 		const items = ['abc123'];
@@ -375,11 +533,14 @@ describe('Tracker', () => {
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
 
+		// @ts-ignore - private property access
 		const querystring = `?userId=${encodeURIComponent(tracker.context.userId || '')}&siteId=${encodeURIComponent(
+			// @ts-ignore - private property access
 			tracker.globals.siteId
 		)}&cart=${encodeURIComponent(items[0])}`;
 		expect(xhrMock.open).toBeCalledWith(
 			'GET',
+			// @ts-ignore - private property access
 			`https://${tracker.globals.siteId}.a.searchspring.io/api/personalization/preflightCache${querystring}`
 		);
 
@@ -388,10 +549,10 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke sendPreflight POST', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		// populate cart cookie so charsParams threshold is met for GET request
-		const items = [];
+		const items: string[] = [];
 		const minBytesThreshold = 1024;
 		const skuPrefix = 'a_very_long_product_sku_to_fill_charsParams_bytes_'; // 50 chars
 		for (let i = 0; i < Math.ceil(minBytesThreshold / skuPrefix.length); i++) {
@@ -416,6 +577,7 @@ describe('Tracker', () => {
 		await tracker.sendPreflight();
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
+		// @ts-ignore - private property access
 		expect(xhrMock.open).toBeCalledWith('POST', `https://${tracker.globals.siteId}.a.searchspring.io/api/personalization/preflightCache`);
 
 		sendPreflight.mockRestore();
@@ -481,7 +643,7 @@ describe('Tracker', () => {
 		// @ts-ignore
 		global.window.navigator.cookieEnabled = false;
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 
 		const shopperId = Date.now().toString();
@@ -497,13 +659,14 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.shopper.login', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 
 		const shopperId = Date.now().toString();
 		const payload = { id: shopperId };
 		await tracker.track.shopper.login(payload);
 
+		// @ts-ignore - private property access
 		expect(tracker.context.shopperId).toStrictEqual(shopperId);
 		expect(shopperLogin).toHaveBeenCalledWith(payload);
 
@@ -511,7 +674,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.shopper.login with siteId override', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 
@@ -523,6 +686,7 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.LOGIN,
 			category: BeaconCategory.PERSONALIZATION,
+			// @ts-ignore - private property access
 			context: deepmerge(tracker.context, {
 				context: {
 					website: {
@@ -539,7 +703,7 @@ describe('Tracker', () => {
 	});
 
 	it('logs console error if no id provided to track.shopper.login', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 		const consoleError = jest.spyOn(console, 'error');
 
@@ -555,7 +719,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.view event method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 
 		const payload = {
@@ -575,7 +739,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.view with siteId override', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const productView = jest.spyOn(tracker.track.product, 'view');
 
@@ -589,6 +753,7 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.PRODUCT,
 			category: BeaconCategory.PAGEVIEW,
+			// @ts-ignore - private property access
 			context: deepmerge(tracker.context, {
 				context: {
 					website: {
@@ -605,7 +770,7 @@ describe('Tracker', () => {
 	});
 
 	it('logs console error if no sku or childSku is provided to track.product.view', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 		const consoleError = jest.spyOn(console, 'error');
 
@@ -620,7 +785,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.click event method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.product, 'click');
 
@@ -641,7 +806,7 @@ describe('Tracker', () => {
 	});
 
 	it('logs console error if no intellisuggestData or intellisuggestSignature is provided to track.product.click', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const productClick = jest.spyOn(tracker.track.product, 'click');
 		const consoleError = jest.spyOn(console, 'error');
 
@@ -680,7 +845,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.click with siteId override', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const productClick = jest.spyOn(tracker.track.product, 'click');
 
@@ -694,6 +859,7 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.CLICK,
 			category: BeaconCategory.INTERACTION,
+			// @ts-ignore - private property access
 			context: deepmerge(tracker.context, {
 				context: {
 					website: {
@@ -709,7 +875,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view event method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
@@ -742,7 +908,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view event method without item skus', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
@@ -773,7 +939,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view event method without childSku', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
@@ -804,7 +970,7 @@ describe('Tracker', () => {
 	});
 
 	it('logs console error if no items is provided to track.cart.view', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 		const consoleError = jest.spyOn(console, 'error');
 
@@ -851,7 +1017,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view with siteId override', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const cartView = jest.spyOn(tracker.track.cart, 'view');
 
@@ -875,6 +1041,7 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.CART,
 			category: BeaconCategory.CARTVIEW,
+			// @ts-ignore - private property access
 			context: deepmerge(tracker.context, {
 				context: {
 					website: {
@@ -891,7 +1058,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.order.transaction event method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
@@ -932,7 +1099,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.order.transaction event method without item skus', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
@@ -973,7 +1140,7 @@ describe('Tracker', () => {
 	});
 
 	it('logs console error if no items is provided to track.order.transaction', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 		const consoleError = jest.spyOn(console, 'error');
 
@@ -1039,7 +1206,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.order.transaction with siteId override', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const orderTransaction = jest.spyOn(tracker.track.order, 'transaction');
 
@@ -1066,6 +1233,7 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.ORDER,
 			category: BeaconCategory.ORDERVIEW,
+			// @ts-ignore - private property access
 			context: deepmerge(tracker.context, {
 				context: {
 					website: {
@@ -1089,7 +1257,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke generic track.event method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track, 'event');
 
@@ -1113,13 +1281,13 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.error method', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track, 'error');
 
 		const payload: TrackErrorEvent = {
 			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
-			href: 'https://localhost/',
+			href: 'https://www.test.com/',
 			filename: 'https://snapui.searchspring.io/test.js',
 			stack: '',
 			message: 'something went wrong!',
@@ -1142,7 +1310,7 @@ describe('Tracker', () => {
 	it('can invoke cookies.cart.set', async () => {
 		// Tracker.ts itself does not use cookies.cart.set however Snap.tsx does
 
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.cookies.cart, 'set');
 
 		// first add products to cart
@@ -1159,8 +1327,9 @@ describe('Tracker', () => {
 	});
 
 	it('can use updateContext to add attribution to context', async () => {
-		const tracker = new Tracker(globals);
+		const tracker = new Tracker(globals, config);
 
+		// @ts-ignore - private property access
 		expect(tracker.context).not.toHaveProperty('attribution');
 
 		const attribution = {
@@ -1170,6 +1339,7 @@ describe('Tracker', () => {
 
 		tracker.updateContext('attribution', attribution);
 
+		// @ts-ignore - private property access
 		expect(tracker.context).toHaveProperty('attribution', attribution);
 	});
 });

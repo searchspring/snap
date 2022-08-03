@@ -1,6 +1,13 @@
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 describe('Tracking', () => {
+	beforeEach(() => {
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				mode: 'production',
+			};
+		});
+	});
 	it('tracked shopper login', () => {
 		cy.visit('https://localhost:2222');
 

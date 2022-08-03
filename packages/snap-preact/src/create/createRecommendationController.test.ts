@@ -219,6 +219,7 @@ describe('createRecommendationController', () => {
 
 			expect(controller).toBeDefined();
 			expect(controller.tracker).toBe(customTracker);
+			// @ts-ignore - private property access
 			expect(controller.tracker.globals.siteId).toBe('custom');
 		});
 	});

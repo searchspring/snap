@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Bug Fixes
+
+* **searchfacetstore.ts:** account for inline merchandising content when trimming facets ([441fcfe](https://github.com/searchspring/snap/commit/441fcfe748fbef992e8e7391dbe9ac59a73ddd2c))
+
+
+
+
+
 # [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Features
+
+* **tracking:** adding sessionId and pageLoadId to search request params ([e380f27](https://github.com/searchspring/snap/commit/e380f2768ac1071b510ea4a24335b2acd96cb8c4))
+
+
+
+
+
 # [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
 
 **Note:** Version bump only for package @searchspring/snap-client
