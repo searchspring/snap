@@ -1,4 +1,4 @@
-/*! For license information please see main.bb3050e0.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.fe67c2c8.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -27505,6 +27505,7 @@
 																	void 0 !== _requestParams$search &&
 																	_requestParams$search.redirectResponse &&
 																	delete requestParams.search.redirectResponse,
+																requestParams.tracking.pageLoadId && delete requestParams.tracking.pageLoadId,
 																(stringyParams = JSON.stringify(requestParams)),
 																null !== (_this$config$settings11 = _this.config.settings) &&
 																	void 0 !== _this$config$settings11 &&
@@ -27522,7 +27523,7 @@
 																				checkCount > 40 && window.clearInterval(heightCheck),
 																				checkCount++;
 																		}, 50))));
-														case 9:
+														case 10:
 														case 'end':
 															return _context4.stop();
 													}
@@ -27565,8 +27566,12 @@
 										(params.tracking = params.tracking || {}),
 										(params.tracking.domain = window.location.href);
 									var userId = this.tracker.getUserId();
+									userId && (params.tracking.userId = userId);
+									var sessionId = this.tracker.getContext().sessionId;
+									sessionId && (params.tracking.sessionId = sessionId);
+									var pageId = this.tracker.getContext().pageLoadId;
 									if (
-										(userId && (params.tracking.userId = userId),
+										(pageId && (params.tracking.pageLoadId = pageId),
 										null === (_this$config$globals = this.config.globals) ||
 											void 0 === _this$config$globals ||
 											null === (_this$config$globals$ = _this$config$globals.personalization) ||
@@ -28501,7 +28506,7 @@
 											},
 											this.config.globals
 										),
-										shopperId = this.tracker.context.shopperId,
+										shopperId = this.tracker.getContext().shopperId,
 										cart = this.tracker.cookies.cart.get(),
 										lastViewed = this.tracker.cookies.viewed.get();
 									return (
@@ -29630,9 +29635,15 @@
 										_this$config$globals6,
 										urlState = this.urlManager.state,
 										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
-										userId = this.tracker.getUserId();
+										userId = this.tracker.getUserId(),
+										sessionId = this.tracker.getContext().sessionId,
+										pageLoadId = this.tracker.getContext().pageLoadId;
 									if (
-										(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
+										((params.tracking = params.tracking || {}),
+										(params.tracking.domain = window.location.href),
+										userId && (params.tracking.userId = userId),
+										sessionId && (params.tracking.sessionId = sessionId),
+										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
 										null === (_this$config$globals5 = this.config.globals) ||
 											void 0 === _this$config$globals5 ||
 											null === (_this$config$globals6 = _this$config$globals5.personalization) ||
@@ -31158,6 +31169,7 @@
 									Legacy_regeneratorRuntime().mark(function _callee(queryParameters) {
 										var path,
 											headerParameters,
+											cacheParameters,
 											legacyResponse,
 											_args = arguments;
 										return Legacy_regeneratorRuntime().wrap(
@@ -31169,15 +31181,16 @@
 																(path = _args.length > 1 && void 0 !== _args[1] ? _args[1] : '/api/search/search.json'),
 																(queryParameters.resultsFormat = 'native'),
 																(headerParameters = {}),
-																(_context.next = 5),
+																delete (cacheParameters = Object.assign({}, queryParameters)).pageLoadId,
+																(_context.next = 7),
 																this.request(
 																	{ path, method: 'GET', headers: headerParameters, query: queryParameters },
-																	path + JSON.stringify(queryParameters)
+																	path + JSON.stringify(cacheParameters)
 																)
 															);
-														case 5:
-															return (legacyResponse = _context.sent), _context.abrupt('return', legacyResponse);
 														case 7:
+															return (legacyResponse = _context.sent), _context.abrupt('return', legacyResponse);
+														case 9:
 														case 'end':
 															return _context.stop();
 													}
@@ -32128,7 +32141,13 @@
 					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
 						reqTracking = request.tracking || {},
 						params = {};
-					return reqTracking.userId && (params.userId = reqTracking.userId), reqTracking.domain && (params.domain = reqTracking.domain), params;
+					return (
+						reqTracking.userId && (params.userId = reqTracking.userId),
+						reqTracking.domain && (params.domain = reqTracking.domain),
+						reqTracking.sessionId && (params.sessionId = reqTracking.sessionId),
+						reqTracking.pageLoadId && (params.pageLoadId = reqTracking.pageLoadId),
+						params
+					);
 				}),
 				(transformSearchRequest.personalization = function () {
 					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
@@ -34909,7 +34928,8 @@
 					function SearchFacetStore(config, services, storage) {
 						var facetsData = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [],
 							pagination = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : {},
-							meta = arguments.length > 5 ? arguments[5] : void 0;
+							meta = arguments.length > 5 ? arguments[5] : void 0,
+							merchandising = arguments.length > 6 ? arguments[6] : void 0;
 						SearchFacetStore_classCallCheck(this, SearchFacetStore);
 						var facets = facetsData
 							.filter(function (facet) {
@@ -34946,7 +34966,7 @@
 										? void 0
 										: _config$settings3$fac.trim
 								) {
-									var _facet$range, _facet$range2, _facet$values, _facet$values2;
+									var _facet$range, _facet$range2, _facet$values, _facet$values2, _merchandising$conten, _merchandising$conten2;
 									if (
 										'range' === facet.type &&
 										(null == facet || null === (_facet$range = facet.range) || void 0 === _facet$range ? void 0 : _facet$range.low) ==
@@ -34958,7 +34978,16 @@
 										!facet.filtered &&
 										1 == (null === (_facet$values2 = facet.values) || void 0 === _facet$values2 ? void 0 : _facet$values2.length)
 									)
-										return facet.values[0].count != pagination.totalResults;
+										return null != merchandising &&
+											null !== (_merchandising$conten = merchandising.content) &&
+											void 0 !== _merchandising$conten &&
+											_merchandising$conten.inline
+											? facet.values[0].count +
+													(null === (_merchandising$conten2 = merchandising.content) || void 0 === _merchandising$conten2
+														? void 0
+														: _merchandising$conten2.inline.length) !=
+													pagination.totalResults
+											: facet.values[0].count != pagination.totalResults;
 								}
 								return !0;
 							})
@@ -36147,7 +36176,8 @@
 										this.storage,
 										data.facets,
 										(null == data ? void 0 : data.pagination) || {},
-										this.meta
+										this.meta,
+										(null == data ? void 0 : data.merchandising) || {}
 									)),
 									(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
 									(this.results = new SearchResultStore(
@@ -36929,12 +36959,12 @@
 						return AutocompleteFacetStore_possibleConstructorReturn(this, result);
 					};
 				})(AutocompleteFacetStore);
-				function AutocompleteFacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
+				function AutocompleteFacetStore(config, services, storage, facetsData, paginationData, meta, rootState, merchandising) {
 					!(function AutocompleteFacetStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 					})(this, AutocompleteFacetStore);
 					var alteredServices = Object.assign({}, services, { urlManager: services.urlManager.remove('filter') }),
-						facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
+						facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta, merchandising);
 					return (
 						facets.forEach(function (facet) {
 							var _facet$values;
@@ -37173,7 +37203,8 @@
 												data.facets || [],
 												data.pagination || {},
 												this.meta,
-												this.state
+												this.state,
+												data.merchandising || {}
 											)),
 										(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
 										(this.results = new SearchResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising)),
@@ -39745,7 +39776,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.33.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39785,7 +39816,7 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var Tracker_defaultConfig = { id: 'track', framework: 'snap' },
+			var Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
 				Tracker = (function () {
 					function Tracker(globals, config) {
 						var _window$searchspring,
@@ -39794,6 +39825,7 @@
 							((function Tracker_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
+							(this.mode = AppMode.production),
 							(this.targeters = []),
 							(this.track = {
 								event: function event(payload) {
@@ -39834,7 +39866,12 @@
 													errortimestamp,
 												},
 											};
-										return _this.track.event(payload);
+										if (
+											payload.event.href &&
+											!payload.event.href.includes('//localhost') &&
+											!payload.event.href.includes('//snapui.searchspring.io/')
+										)
+											return _this.track.event(payload);
 									}
 								},
 								shopper: {
@@ -40143,27 +40180,30 @@
 								},
 							}),
 							(this.sendEvents = function (eventsToSend) {
-								var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
-								eventsToSend &&
-									(eventsToSend.forEach(function (event) {
-										events.push(Object.assign({}, event));
-									}),
-									_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
-									clearTimeout(_this.isSending),
-									(_this.isSending = window.setTimeout(function () {
-										if (events.length) {
-											var xhr = new XMLHttpRequest();
-											xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
-												xhr.setRequestHeader('Content-Type', 'application/json'),
-												xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
-										}
-										_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
-									}, 150));
+								if (_this.mode === AppMode.production) {
+									var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
+									eventsToSend &&
+										(eventsToSend.forEach(function (event) {
+											events.push(Object.assign({}, event));
+										}),
+										_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
+										clearTimeout(_this.isSending),
+										(_this.isSending = window.setTimeout(function () {
+											if (events.length) {
+												var xhr = new XMLHttpRequest();
+												xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
+													xhr.setRequestHeader('Content-Type', 'application/json'),
+													xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
+											}
+											_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
+										}, 150));
+								}
 							}),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
 						(this.config = cjs_default()(Tracker_defaultConfig, config || {})),
+							Object.values(AppMode).includes(this.config.mode) && (this.mode = this.config.mode),
 							(this.globals = globals),
 							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
 							(this.context = {
@@ -40174,7 +40214,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.33.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40324,6 +40364,12 @@
 								Constructor
 							);
 						})(Tracker, [
+							{
+								key: 'getContext',
+								value: function getContext() {
+									return JSON.parse(JSON.stringify(this.context));
+								},
+							},
 							{
 								key: 'retarget',
 								value: function retarget() {
