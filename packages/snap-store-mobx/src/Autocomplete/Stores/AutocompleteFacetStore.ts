@@ -2,7 +2,12 @@ import { SearchFacetStore, FacetValue } from '../../Search/Stores';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
-import type { SearchResponseModelFacet, SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModelFacet,
+	SearchResponseModelPagination,
+	MetaResponseModel,
+	SearchResponseModelMerchandising,
+} from '@searchspring/snapi-types';
 
 export class AutocompleteFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
@@ -16,11 +21,12 @@ export class AutocompleteFacetStore extends Array {
 		facetsData: SearchResponseModelFacet[],
 		paginationData: SearchResponseModelPagination,
 		meta: MetaResponseModel,
-		rootState: AutocompleteStateStore
+		rootState: AutocompleteStateStore,
+		merchandising: SearchResponseModelMerchandising
 	) {
 		// allow for only a singular facet option selection at a time
 		const alteredServices = { ...services, urlManager: services.urlManager.remove('filter') };
-		const facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
+		const facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta, merchandising);
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {

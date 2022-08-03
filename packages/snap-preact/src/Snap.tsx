@@ -248,7 +248,7 @@ export class Snap {
 		error: (event: ErrorEvent): void => {
 			try {
 				const { filename } = event;
-				if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
+				if (filename.includes('snapui.searchspring.io') && filename.endsWith('.js') && this.tracker.track.error) {
 					const {
 						colno,
 						lineno,
@@ -355,7 +355,7 @@ export class Snap {
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
 			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact', mode: this.mode });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// check for tracking attribution in URL ?ss_attribution=type:id

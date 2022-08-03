@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
+import { AppMode } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -41,13 +42,15 @@ const MAX_PARENT_LEVELS = 3;
 const defaultConfig: TrackerConfig = {
 	id: 'track',
 	framework: 'snap',
+	mode: AppMode.production,
 };
 
 export class Tracker {
-	globals: TrackerGlobals;
-	localStorage: StorageStore;
-	context: BeaconContext;
-	isSending: number | undefined;
+	private mode = AppMode.production;
+	private globals: TrackerGlobals;
+	private localStorage: StorageStore;
+	private context: BeaconContext;
+	private isSending: number | undefined;
 
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
@@ -58,6 +61,10 @@ export class Tracker {
 		}
 
 		this.config = deepmerge(defaultConfig, config || {});
+
+		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode as AppMode;
+		}
 
 		this.globals = globals;
 
@@ -191,6 +198,10 @@ export class Tracker {
 		this.sendEvents();
 	}
 
+	public getContext(): BeaconContext {
+		return JSON.parse(JSON.stringify(this.context));
+	}
+
 	public retarget(): void {
 		this.targeters.forEach((target) => {
 			target.retarget();
@@ -218,6 +229,7 @@ export class Tracker {
 				// no console log
 				return;
 			}
+
 			let context = this.context;
 			if (siteId) {
 				context = deepmerge(context, {
@@ -246,6 +258,11 @@ export class Tracker {
 					errortimestamp,
 				},
 			};
+
+			// prevent sending of errors when on localhost or CDN
+			if (!payload.event.href || payload.event.href.includes('//localhost') || payload.event.href.includes('//snapui.searchspring.io/')) {
+				return;
+			}
 
 			return this.track.event(payload);
 		},
@@ -657,6 +674,10 @@ export class Tracker {
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
+		if (this.mode !== AppMode.production) {
+			return;
+		}
+
 		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {

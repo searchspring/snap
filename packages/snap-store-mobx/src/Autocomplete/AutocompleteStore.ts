@@ -132,7 +132,8 @@ export class AutocompleteStore extends AbstractStore {
 				data.facets || [],
 				data.pagination || {},
 				this.meta,
-				this.state
+				this.state,
+				data.merchandising || {}
 			);
 		}
 

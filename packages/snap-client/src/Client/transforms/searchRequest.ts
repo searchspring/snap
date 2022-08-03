@@ -191,6 +191,8 @@ transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	const params: {
 		userId?: string;
 		domain?: string;
+		sessionId?: string;
+		pageLoadId?: string;
 	} = {};
 
 	if (reqTracking.userId) {
@@ -198,6 +200,12 @@ transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	}
 	if (reqTracking.domain) {
 		params.domain = reqTracking.domain;
+	}
+	if (reqTracking.sessionId) {
+		params.sessionId = reqTracking.sessionId;
+	}
+	if (reqTracking.pageLoadId) {
+		params.pageLoadId = reqTracking.pageLoadId;
 	}
 
 	return params;

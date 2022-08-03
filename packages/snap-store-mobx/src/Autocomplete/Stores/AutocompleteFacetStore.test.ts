@@ -37,7 +37,8 @@ describe('Facet store', () => {
 			searchData.facets!,
 			searchData.pagination!,
 			searchData.meta,
-			rootState
+			rootState,
+			searchData.merchandising || {}
 		);
 
 		expect(facetStore).toHaveLength(searchData.facets?.length!);
@@ -55,7 +56,8 @@ describe('Facet store', () => {
 			searchData.facets!,
 			searchData.pagination!,
 			searchData.meta,
-			rootState
+			rootState,
+			searchData.merchandising || {}
 		);
 
 		expect(rootState.locks.terms.locked).toBe(false);
