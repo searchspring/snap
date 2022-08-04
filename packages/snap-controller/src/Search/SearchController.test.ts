@@ -11,8 +11,9 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
-import { SearchController } from './SearchController';
-import type { SearchControllerConfig } from '../types';
+import { SearchController, getStorableRequestParams } from './SearchController';
+import type { SearchControllerConfig, BeforeSearchObj } from '../types';
+import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
 
@@ -610,17 +611,41 @@ describe('Search Controller', () => {
 	});
 
 	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {
-		searchConfig = {
+		const scrollConfig: SearchStoreConfig = {
 			...searchConfig,
+			// add some filters, sorts, and pagination
+			globals: {
+				filters: [
+					{
+						// @ts-ignore
+						type: 'value',
+						field: 'color',
+						value: 'green',
+						background: false,
+					},
+				],
+				sorts: [
+					{
+						field: 'price',
+						// @ts-ignore
+						direction: 'asc',
+					},
+				],
+				pagination: {
+					page: 3,
+					pageSize: 30,
+				},
+			},
 			settings: {
 				infinite: {
 					backfill: 5,
 				},
 			},
 		};
-		const controller = new SearchController(searchConfig, {
+
+		const controller = new SearchController(scrollConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
+			store: new SearchStore(scrollConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
@@ -629,20 +654,19 @@ describe('Search Controller', () => {
 		});
 
 		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
-		const userId = controller.tracker.getUserId();
-		const sessionId = controller.tracker.getContext().sessionId;
-		const stringyParams = JSON.stringify({
-			filters: [],
-			tracking: {
-				userId: userId,
-				sessionId: sessionId,
-			},
-		});
 
-		// set a scrollMap for testing
-		const scrollMap: { [key: string]: any } = {};
-		scrollMap[stringyParams] = 777;
-		controller.storage.set('scrollMap', scrollMap);
+		controller.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
+			const stringyParams = getStorableRequestParams(search.request as SearchRequestModel);
+
+			// set a scrollMap for testing
+			const scrollMap: { [key: string]: any } = {};
+
+			scrollMap[JSON.stringify(stringyParams)] = 777;
+
+			(search.controller as SearchController).storage.set('scrollMap', scrollMap);
+
+			await next();
+		});
 
 		await controller.search();
 

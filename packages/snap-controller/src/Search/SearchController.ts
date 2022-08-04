@@ -108,18 +108,9 @@ export class SearchController extends AbstractController {
 			// save last params
 			this.storage.set('lastStringyParams', JSON.stringify(search.request));
 
-			const requestParams = { ...search.request };
-			if (requestParams.personalization) {
-				delete requestParams.personalization;
-			}
-			if (requestParams?.search?.redirectResponse) {
-				delete requestParams.search.redirectResponse;
-			}
-			if (requestParams.tracking.pageLoadId) {
-				delete requestParams.tracking.pageLoadId;
-			}
+			const storableRequestParams = getStorableRequestParams(search.request);
 
-			const stringyParams = JSON.stringify(requestParams);
+			const stringyParams = JSON.stringify(storableRequestParams);
 
 			if (this.config.settings?.infinite?.restorePosition) {
 				// restore the scroll position saved previously
@@ -127,6 +118,7 @@ export class SearchController extends AbstractController {
 
 				// interval we ony need to keep checking until the page height > than our stored value
 				const scrollToPosition = scrollMap[stringyParams];
+
 				if (scrollToPosition) {
 					let checkCount = 0;
 					const heightCheck = window.setInterval(() => {
@@ -154,19 +146,10 @@ export class SearchController extends AbstractController {
 				// store scroll position
 				if (this.config.settings?.infinite) {
 					let stringyParams = this.storage.get('lastStringyParams');
+					stringyParams = JSON.parse(stringyParams);
 
-					const paramsObj = JSON.parse(stringyParams);
-					if (paramsObj?.search?.redirectResponse) {
-						delete paramsObj?.search?.redirectResponse;
-						if (paramsObj?.search && Object.keys(paramsObj?.search).length === 0) {
-							// if redirectResponse was the only key, also delete the empty search object
-							delete paramsObj.search;
-						}
-					}
-					if (paramsObj?.personalization) {
-						delete paramsObj?.personalization;
-					}
-					stringyParams = JSON.stringify(paramsObj);
+					const storableRequestParams = getStorableRequestParams(stringyParams);
+					stringyParams = JSON.stringify(storableRequestParams);
 
 					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
@@ -398,5 +381,24 @@ export class SearchController extends AbstractController {
 				this.handleError(err);
 			}
 		}
+	};
+}
+
+export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
+	return {
+		siteId: request.siteId,
+		sorts: request.sorts,
+		search: {
+			query: {
+				string: request?.search?.query?.string || '',
+			},
+			subQuery: request?.search?.subQuery || '',
+		},
+		filters: request.filters,
+		pagination: request.pagination,
+		facets: request.facets,
+		merchandising: {
+			landingPage: request.merchandising?.landingPage || '',
+		},
 	};
 }

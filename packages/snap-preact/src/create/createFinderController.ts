@@ -11,7 +11,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 
 import type { SnapControllerServices, SnapFinderControllerConfig } from '../types';
 
-configureMobx({ useProxies: 'never' });
+configureMobx({ useProxies: 'never', isolateGlobalState: true });
 
 export default (config: SnapFinderControllerConfig, services?: SnapControllerServices): FinderController => {
 	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
