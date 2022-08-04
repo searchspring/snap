@@ -1,4 +1,4 @@
-/*! For license information please see main.fe67c2c8.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.f6cfaa9b.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -25246,7 +25246,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
@@ -25259,7 +25258,8 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
 			var cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
 				cjs_default = __webpack_require__.n(cjs);
-			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.unscopables.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -27031,27 +27031,11 @@
 											void 0 !== _this$config$settings &&
 											_this$config$settings.infinite
 										) {
-											var _paramsObj$search,
-												_paramsObj$search2,
-												stringyParams = _this.storage.get('lastStringyParams'),
-												paramsObj = JSON.parse(stringyParams);
-											if (
-												null != paramsObj &&
-												null !== (_paramsObj$search = paramsObj.search) &&
-												void 0 !== _paramsObj$search &&
-												_paramsObj$search.redirectResponse
-											)
-												null == paramsObj ||
-													null === (_paramsObj$search2 = paramsObj.search) ||
-													void 0 === _paramsObj$search2 ||
-													delete _paramsObj$search2.redirectResponse,
-													null != paramsObj &&
-														paramsObj.search &&
-														0 === Object.keys(null == paramsObj ? void 0 : paramsObj.search).length &&
-														delete paramsObj.search;
-											null != paramsObj && paramsObj.personalization && (null == paramsObj || delete paramsObj.personalization);
-											var scrollMap = {};
-											(scrollMap[(stringyParams = JSON.stringify(paramsObj))] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
+											var stringyParams = _this.storage.get('lastStringyParams'),
+												storableRequestParams = getStorableRequestParams((stringyParams = JSON.parse(stringyParams))),
+												scrollMap = {};
+											(scrollMap[(stringyParams = JSON.stringify(storableRequestParams))] = window.scrollY),
+												_this.storage.set('scrollMap', scrollMap);
 										}
 										var _result$attributes = result.attributes,
 											intellisuggestData = _result$attributes.intellisuggestData,
@@ -27482,10 +27466,9 @@
 								(function () {
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-											var _requestParams$search,
-												_this$config$settings11,
+											var _this$config$settings11,
 												_this$config$settings12,
-												requestParams,
+												storableRequestParams,
 												stringyParams,
 												scrollMap,
 												scrollToPosition,
@@ -27499,14 +27482,8 @@
 														case 2:
 															(search.controller.store.loading = !1),
 																_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
-																(requestParams = Object.assign({}, search.request)).personalization && delete requestParams.personalization,
-																null != requestParams &&
-																	null !== (_requestParams$search = requestParams.search) &&
-																	void 0 !== _requestParams$search &&
-																	_requestParams$search.redirectResponse &&
-																	delete requestParams.search.redirectResponse,
-																requestParams.tracking.pageLoadId && delete requestParams.tracking.pageLoadId,
-																(stringyParams = JSON.stringify(requestParams)),
+																(storableRequestParams = getStorableRequestParams(search.request)),
+																(stringyParams = JSON.stringify(storableRequestParams)),
 																null !== (_this$config$settings11 = _this.config.settings) &&
 																	void 0 !== _this$config$settings11 &&
 																	null !== (_this$config$settings12 = _this$config$settings11.infinite) &&
@@ -27523,7 +27500,7 @@
 																				checkCount > 40 && window.clearInterval(heightCheck),
 																				checkCount++;
 																		}, 50))));
-														case 10:
+														case 7:
 														case 'end':
 															return _context4.stop();
 													}
@@ -27594,6 +27571,37 @@
 						SearchController
 					);
 				})(AbstractController);
+			function getStorableRequestParams(request) {
+				var _request$search, _request$search$query, _request$search2, _request$merchandisin;
+				return {
+					siteId: request.siteId,
+					sorts: request.sorts,
+					search: {
+						query: {
+							string:
+								(null == request ||
+								null === (_request$search = request.search) ||
+								void 0 === _request$search ||
+								null === (_request$search$query = _request$search.query) ||
+								void 0 === _request$search$query
+									? void 0
+									: _request$search$query.string) || '',
+						},
+						subQuery:
+							(null == request || null === (_request$search2 = request.search) || void 0 === _request$search2 ? void 0 : _request$search2.subQuery) ||
+							'',
+					},
+					filters: request.filters,
+					pagination: request.pagination,
+					facets: request.facets,
+					merchandising: {
+						landingPage:
+							(null === (_request$merchandisin = request.merchandising) || void 0 === _request$merchandisin
+								? void 0
+								: _request$merchandisin.landingPage) || '',
+					},
+				};
+			}
 			function RecommendationController_regeneratorRuntime() {
 				RecommendationController_regeneratorRuntime = function _regeneratorRuntime() {
 					return exports;
@@ -39776,7 +39784,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40214,7 +40222,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
