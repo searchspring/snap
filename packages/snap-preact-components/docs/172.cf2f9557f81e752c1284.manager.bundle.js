@@ -1,4 +1,4 @@
-/*! For license information please see 172.eb19d0d4062e9ec177ea.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 172.cf2f9557f81e752c1284.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -29,7 +29,7 @@
 				__webpack_require__(34769);
 			var react = __webpack_require__(2784),
 				esm = __webpack_require__(87537),
-				dist_esm = __webpack_require__(28493),
+				dist_esm = __webpack_require__(31848),
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				memoizerific = __webpack_require__(49224),

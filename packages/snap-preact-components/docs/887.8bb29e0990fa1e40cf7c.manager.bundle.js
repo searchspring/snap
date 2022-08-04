@@ -1,32 +1,28 @@
-/*! For license information please see 887.2e247855.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 887.8bb29e0990fa1e40cf7c.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[887],
 	{
-		'../../node_modules/@storybook/components/dist/esm/ScrollArea/OverlayScrollbars.js': (
-			__unused_webpack_module,
-			__webpack_exports__,
-			__webpack_require__
-		) => {
+		24887: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
 					OverlayScrollbarsComponent: () => OverlayScrollbarsComponent,
 					default: () => __WEBPACK_DEFAULT_EXPORT__,
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
-				overlayscrollbars__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/overlayscrollbars/js/OverlayScrollbars.js'),
+			__webpack_require__(17368),
+				__webpack_require__(77950),
+				__webpack_require__(88233),
+				__webpack_require__(85940),
+				__webpack_require__(16781),
+				__webpack_require__(95342),
+				__webpack_require__(48319),
+				__webpack_require__(74069),
+				__webpack_require__(18178),
+				__webpack_require__(34769),
+				__webpack_require__(34115),
+				__webpack_require__(43105);
+			var react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2784),
+				overlayscrollbars__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(88269),
 				overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default = __webpack_require__.n(overlayscrollbars__WEBPACK_IMPORTED_MODULE_13__);
 			function _extends() {
 				return (
@@ -70,10 +66,10 @@
 					className = _ref.className,
 					children = _ref.children,
 					rest = _objectWithoutProperties(_ref, ['options', 'extensions', 'className', 'children']),
-					osTargetRef = react__WEBPACK_IMPORTED_MODULE_12__.default.useRef(),
-					osInstance = react__WEBPACK_IMPORTED_MODULE_12__.default.useRef();
+					osTargetRef = react__WEBPACK_IMPORTED_MODULE_12__.useRef(),
+					osInstance = react__WEBPACK_IMPORTED_MODULE_12__.useRef();
 				return (
-					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(function () {
+					react__WEBPACK_IMPORTED_MODULE_12__.useEffect(function () {
 						return (
 							(osInstance.current = overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default()(osTargetRef.current, options, extensions)),
 							mergeHostClassNames(osInstance.current, className),
@@ -83,51 +79,51 @@
 							}
 						);
 					}, []),
-					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(
+					react__WEBPACK_IMPORTED_MODULE_12__.useEffect(
 						function () {
 							overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default().valid(osInstance.current) && osInstance.current.options(options);
 						},
 						[options]
 					),
-					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(
+					react__WEBPACK_IMPORTED_MODULE_12__.useEffect(
 						function () {
 							overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default().valid(osInstance.current) &&
 								mergeHostClassNames(osInstance.current, className);
 						},
 						[className]
 					),
-					react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+					react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 						'div',
 						_extends({ className: 'os-host' }, rest, { ref: osTargetRef }),
-						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-resize-observer-host' }),
-						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.createElement('div', { className: 'os-resize-observer-host' }),
+						react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 							'div',
 							{ className: 'os-padding' },
-							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 								'div',
 								{ className: 'os-viewport' },
-								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-content' }, children)
+								react__WEBPACK_IMPORTED_MODULE_12__.createElement('div', { className: 'os-content' }, children)
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 							'div',
 							{ className: 'os-scrollbar os-scrollbar-horizontal ' },
-							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 								'div',
 								{ className: 'os-scrollbar-track' },
-								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-handle' })
+								react__WEBPACK_IMPORTED_MODULE_12__.createElement('div', { className: 'os-scrollbar-handle' })
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 							'div',
 							{ className: 'os-scrollbar os-scrollbar-vertical' },
-							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.createElement(
 								'div',
 								{ className: 'os-scrollbar-track' },
-								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-handle' })
+								react__WEBPACK_IMPORTED_MODULE_12__.createElement('div', { className: 'os-scrollbar-handle' })
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-corner' })
+						react__WEBPACK_IMPORTED_MODULE_12__.createElement('div', { className: 'os-scrollbar-corner' })
 					)
 				);
 			};
@@ -147,7 +143,7 @@
 			OverlayScrollbarsComponent.displayName = 'OverlayScrollbarsComponent';
 			const __WEBPACK_DEFAULT_EXPORT__ = OverlayScrollbarsComponent;
 		},
-		'../../node_modules/overlayscrollbars/js/OverlayScrollbars.js': function (module, exports, __webpack_require__) {
+		88269: function (module, exports, __webpack_require__) {
 			var __WEBPACK_AMD_DEFINE_RESULT__, global;
 			(global = 'undefined' != typeof window ? window : this),
 				(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
@@ -2491,13 +2487,15 @@
 										return COMPATIBILITY.prvD(event), !1;
 									}
 									function updateOnLoadCallback(event) {
-										var target = event.target,
-											elm = FRAMEWORK(event.target),
-											index = FRAMEWORK.inArray(target, _updateOnLoadElms);
-										index > -1 && _updateOnLoadElms.splice(index, 1),
-											eachUpdateOnLoad(function (i, updateOnLoadSelector) {
-												elm.is(updateOnLoadSelector) && update({ _contentSizeChanged: !0 });
-											});
+										if (!_destroyed) {
+											var target = event.target,
+												elm = FRAMEWORK(event.target),
+												index = FRAMEWORK.inArray(target, _updateOnLoadElms);
+											index > -1 && _updateOnLoadElms.splice(index, 1),
+												eachUpdateOnLoad(function (i, updateOnLoadSelector) {
+													elm.is(updateOnLoadSelector) && update({ _contentSizeChanged: !0 });
+												});
+										}
 									}
 									function setupHostMouseTouchEvents(destroy) {
 										destroy || setupHostMouseTouchEvents(!0),

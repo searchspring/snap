@@ -8,7 +8,7 @@
 			__webpack_require__(32501), __webpack_require__(22144);
 			var _templateObject,
 				react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2784),
-				_storybook_theming__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(67718);
+				_storybook_theming__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14724);
 			var hsResizeObserverDummyAnimation = (0, _storybook_theming__WEBPACK_IMPORTED_MODULE_3__.F4)(
 					_templateObject ||
 						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {

@@ -24,7 +24,7 @@
 				__webpack_require__(28673),
 				__webpack_require__(1939);
 			var react = __webpack_require__(2784),
-				esm = __webpack_require__(28493),
+				esm = __webpack_require__(31848),
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				objectWithoutPropertiesLoose = __webpack_require__(31461),
