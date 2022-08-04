@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **controllers-search:** combining logic for scroll position storage and restoration ([ec2eb23](https://github.com/searchspring/snap/commit/ec2eb238e98caf0b49bef57c8df56e5e838499b4))
+
+
+
+
+
 # [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
 
 
