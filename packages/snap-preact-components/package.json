@@ -34,7 +34,7 @@
 		"swiper": "6.8.4"
 	},
 	"peerDependencies": {
-		"preact": "10.7.3"
+		"preact": "^10.7.3"
 	},
 	"devDependencies": {
 		"@searchspring/snap-client": "^0.34.1",
