@@ -56,10 +56,6 @@ export class SearchController extends AbstractController {
 			this.config.settings.infinite.restorePosition = true;
 		}
 
-		if (window?.history && this.config.settings?.infinite?.restorePosition) {
-			window.history.scrollRestoration = 'manual';
-		}
-
 		this.store.setConfig(this.config);
 
 		this.storage = new StorageStore({
