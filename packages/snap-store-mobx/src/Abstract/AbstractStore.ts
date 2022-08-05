@@ -1,10 +1,5 @@
 import { makeObservable, observable, toJS, configure } from 'mobx';
 import type { StoreConfigs, ErrorType } from '../types';
-
-configure({
-	enforceActions: 'never',
-});
-
 export abstract class AbstractStore {
 	public custom = {};
 	public loading = false;
