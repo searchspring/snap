@@ -1,6 +1,8 @@
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { h, render } from 'preact';
+import { configure as configureMobx } from 'mobx';
+
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -29,6 +31,9 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, SnapControllerConfigs } from './types';
+
+// configure MobX
+configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';

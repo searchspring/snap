@@ -1,5 +1,3 @@
-import { configure as configureMobx, extendObservable } from 'mobx';
-
 import { SearchController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
@@ -9,8 +7,6 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import type { SnapControllerServices, SnapSearchControllerConfig } from '../types';
-
-configureMobx({ useProxies: 'never', isolateGlobalState: true });
 
 export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
