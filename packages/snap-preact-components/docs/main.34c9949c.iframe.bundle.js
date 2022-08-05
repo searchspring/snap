@@ -1,4 +1,4 @@
-/*! For license information please see main.0c54c269.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.34c9949c.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -26875,9 +26875,6 @@
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
 						var _this$config$settings8,
-							_window,
-							_this$config$settings9,
-							_this$config$settings10,
 							_this,
 							client = _ref.client,
 							store = _ref.store,
@@ -27193,15 +27190,6 @@
 								_this$config$settings8.infinite &&
 								void 0 === _this.config.settings.infinite.restorePosition &&
 								(_this.config.settings.infinite.restorePosition = !0),
-							null !== (_window = window) &&
-								void 0 !== _window &&
-								_window.history &&
-								null !== (_this$config$settings9 = _this.config.settings) &&
-								void 0 !== _this$config$settings9 &&
-								null !== (_this$config$settings10 = _this$config$settings9.infinite) &&
-								void 0 !== _this$config$settings10 &&
-								_this$config$settings10.restorePosition &&
-								(window.history.scrollRestoration = 'manual'),
 							_this.store.setConfig(_this.config),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 							_this.storage.set('lastStringyParams', void 0),
@@ -27337,8 +27325,8 @@
 								(function () {
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-											var _this$config$settings11,
-												_this$config$settings12,
+											var _this$config$settings9,
+												_this$config$settings10,
 												storableRequestParams,
 												stringyParams,
 												scrollMap,
@@ -27355,11 +27343,11 @@
 																_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
 																(storableRequestParams = getStorableRequestParams(search.request)),
 																(stringyParams = JSON.stringify(storableRequestParams)),
-																null !== (_this$config$settings11 = _this.config.settings) &&
-																	void 0 !== _this$config$settings11 &&
-																	null !== (_this$config$settings12 = _this$config$settings11.infinite) &&
-																	void 0 !== _this$config$settings12 &&
-																	_this$config$settings12.restorePosition &&
+																null !== (_this$config$settings9 = _this.config.settings) &&
+																	void 0 !== _this$config$settings9 &&
+																	null !== (_this$config$settings10 = _this$config$settings9.infinite) &&
+																	void 0 !== _this$config$settings10 &&
+																	_this$config$settings10.restorePosition &&
 																	((scrollMap = _this.storage.get('scrollMap') || {}),
 																	(scrollToPosition = scrollMap[stringyParams]) &&
 																		((checkCount = 0),
@@ -27399,16 +27387,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings13,
-										_this$config$settings14,
+									var _this$config$settings11,
+										_this$config$settings12,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings13 = this.config.settings) &&
-										void 0 !== _this$config$settings13 &&
-										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
-										void 0 !== _this$config$settings14 &&
-										_this$config$settings14.merchandising &&
+									(null !== (_this$config$settings11 = this.config.settings) &&
+										void 0 !== _this$config$settings11 &&
+										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
+										void 0 !== _this$config$settings12 &&
+										_this$config$settings12.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -35888,7 +35876,6 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			(0, mobx_esm.jQ)({ enforceActions: 'never' });
 			var AbstractStore = (function () {
 				function AbstractStore(config) {
 					!(function AbstractStore_classCallCheck(instance, Constructor) {
@@ -39655,7 +39642,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.3', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40093,7 +40080,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
