@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+
+### Bug Fixes
+
+* **controller-search:** removing scrollRestoration='manual' for better cross browser support ([4f4aab6](https://github.com/searchspring/snap/commit/4f4aab635a882c8c22e83ad59cb5c5d0b1b2cc9d))
+
+
+
+
+
 ## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
 
 **Note:** Version bump only for package @searchspring/snap-controller
