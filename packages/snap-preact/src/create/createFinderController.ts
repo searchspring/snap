@@ -1,5 +1,3 @@
-import { configure as configureMobx, extendObservable } from 'mobx';
-
 import { FinderController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { FinderStore } from '@searchspring/snap-store-mobx';
@@ -10,8 +8,6 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import type { SnapControllerServices, SnapFinderControllerConfig } from '../types';
-
-configureMobx({ useProxies: 'never', isolateGlobalState: true });
 
 export default (config: SnapFinderControllerConfig, services?: SnapControllerServices): FinderController => {
 	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);

@@ -1,5 +1,3 @@
-import { configure as configureMobx, extendObservable } from 'mobx';
-
 import { RecommendationController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
@@ -10,8 +8,6 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import type { SnapControllerServices, SnapRecommendationControllerConfig } from '../types';
-
-configureMobx({ useProxies: 'never', isolateGlobalState: true });
 
 export default (config: SnapRecommendationControllerConfig, services?: SnapControllerServices): RecommendationController => {
 	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
