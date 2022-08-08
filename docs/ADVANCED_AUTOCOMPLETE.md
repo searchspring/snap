@@ -2,7 +2,7 @@
 To set up Autocomplete using Snap, we'll need to create a `AutocompleteController` instance, which requires `AutocompleteControllerConfig` and `ControllerServices` objects to instantiate. For more details see the [`AutocompleteController docs`](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete).
 
 ### Config (AutocompleteControllerConfig)
-Lets define an `AutocompleteControllerConfig` object:
+Let's define an `AutocompleteControllerConfig` object:
 
 ```typescript
 const autocompleteConfig = {
