@@ -3,7 +3,7 @@
 To set up Search using Snap, we'll need to create a `SearchController` instance, which requires `SearchControllerConfig` and `ControllerServices` objects to instantiate. For more details see the [`SearchController docs`](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search).
 
 ### Config (SearchControllerConfig)
-Lets define a `SearchControllerConfig` object:
+Let's define a `SearchControllerConfig` object:
 ```typescript
 const searchConfig = {
 	id: 'search',
