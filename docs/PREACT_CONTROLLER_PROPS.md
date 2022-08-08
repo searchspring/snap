@@ -2,7 +2,7 @@
 
 For each targeted element, the corresponding controller that created it will be passed along to the component via the `controller` prop.
 
-Lets go over our `Content` component. This is considered a root level component since it is being rendered onto the page using a targeter.
+Let's go over our `Content` component. This is considered a root level component since it is being rendered onto the page using a targeter.
 
 We'll want to create a `ControllerProvider` such that any subcomponents can have a reference to the controller via its props (as long as it is using the cooresponding `withController` consumer). The [@searchspring/snap-preact-components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components) package contains a `ControllerProvider` that we can utilize.
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
 ## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
