@@ -34,7 +34,7 @@
 		"swiper": "6.8.4"
 	},
 	"peerDependencies": {
-		"preact": "^10.7.3"
+		"preact": "10.9.0"
 	},
 	"devDependencies": {
 		"@searchspring/snap-client": "^0.34.3",
@@ -60,7 +60,7 @@
 		"@types/react": "16.14.28",
 		"@types/react-ranger": "2.0.1",
 		"mobx-react": "7.5.0",
-		"preact": "10.7.3",
+		"preact": "10.9.0",
 		"react": "16.14.0",
 		"react-dom": "16.14.0",
 		"ts-loader": "9.3.0"
