@@ -23,7 +23,7 @@
 		"@searchspring/snap-preact-components": "^0.34.3",
 		"deepmerge": "4.2.2",
 		"mobx-react": "7.5.0",
-		"preact": "10.7.3"
+		"preact": "10.10.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.2",
