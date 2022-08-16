@@ -159,15 +159,15 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				<Carousel
 					onInit={(swiper) => {
 						//@ts-ignore
-						setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+						setInitialIndexes([swiper.realIndex, displaySettings.slidesPerView]);
 					}}
 					onBreakpoint={(swiper: SwiperCore) => {
 						//@ts-ignore
-						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						sendProductImpression(swiper.realIndex, displaySettings.slidesPerView);
 					}}
 					onSlideChange={(swiper: SwiperCore) => {
 						//@ts-ignore
-						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						sendProductImpression(swiper.realIndex, displaySettings.slidesPerView);
 					}}
 					prevButton={prevButton}
 					nextButton={nextButton}
