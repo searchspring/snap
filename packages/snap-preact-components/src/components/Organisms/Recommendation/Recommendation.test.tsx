@@ -38,13 +38,11 @@ const theme = {
 
 describe('Recommendation Component', () => {
 	beforeAll(() => {
-		const mock = function () {
-			return {
-				observe: jest.fn(),
-				unobserve: jest.fn(),
-				disconnect: jest.fn(),
-			};
-		};
+		const mock = jest.fn(() => ({
+			observe: jest.fn(),
+			unobserve: jest.fn(),
+			disconnect: jest.fn(),
+		}));
 
 		//@ts-ignore
 		window.IntersectionObserver = mock;
@@ -58,7 +56,8 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			// tracker: new Tracker(globals, { mode: 'development'}),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
@@ -76,15 +75,18 @@ describe('Recommendation Component', () => {
 		const recommendationWrapper = rendered.container.querySelector('.ss__recommendation');
 		const prevButton = rendered.container.querySelector('.ss__carousel__prev');
 		const nextButton = rendered.container.querySelector('.ss__carousel__next');
-		const results = rendered.container.querySelectorAll('.result');
+		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .result'); // exclude duplicates
 
 		expect(recommendationWrapper).toBeInTheDocument();
 		expect(prevButton).toBeInTheDocument();
 		expect(nextButton).toBeInTheDocument();
-		expect(results).toHaveLength(28);
+		expect(results).toHaveLength(20);
+
+		// @ts-ignore
+		window.IntersectionObserver.mockClear();
 	});
 
-	it('tracks as expected with loop false', async () => {
+	it('tracks as expected', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
@@ -92,7 +94,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		const trackfn = jest.spyOn(controller.tracker.track, 'event');
@@ -100,7 +102,7 @@ describe('Recommendation Component', () => {
 		await controller.search();
 
 		const rendered = render(
-			<Recommendation controller={controller} loop={false}>
+			<Recommendation controller={controller}>
 				{controller.store.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<div className="result">{result.mappings.core?.name}</div>
@@ -110,6 +112,8 @@ describe('Recommendation Component', () => {
 		);
 
 		const next = rendered.container.querySelector('.ss__carousel__next')!;
+
+		expect(trackfn).toHaveBeenCalledTimes(21);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
@@ -130,7 +134,29 @@ describe('Recommendation Component', () => {
 			},
 		});
 
-		expect(trackfn).toHaveBeenCalledTimes(21);
+		// other 20 calls are for product render
+		controller.store.results.map((result) => {
+			expect(trackfn).toHaveBeenCalledWith({
+				type: BeaconType.PROFILE_PRODUCT_RENDER,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				pid: controller.events.render!.id,
+				event: {
+					context: {
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: result.id,
+						seed: undefined,
+						mappings: {
+							core: result.mappings.core,
+						},
+					},
+				},
+			});
+		});
 
 		trackfn.mockClear();
 
@@ -160,6 +186,65 @@ describe('Recommendation Component', () => {
 		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		trackfn.mockClear();
+
+		// @ts-ignore
+		let [callback] = window.IntersectionObserver.mock.calls[0];
+		callback([
+			{
+				isIntersecting: true,
+				intersectionRatio: 10,
+			},
+		]);
+
+		await waitFor(() => {
+			expect(trackfn).toHaveBeenCalledTimes(5);
+		});
+
+		// profile impression
+		expect(trackfn).toHaveBeenCalledWith({
+			type: BeaconType.PROFILE_IMPRESSION,
+			category: BeaconCategory.RECOMMENDATIONS,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			event: {
+				context: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					type: 'product-recommendation',
+				},
+				profile: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
+					threshold: 4,
+				},
+			},
+		});
+
+		// first 4 results should have done impression tracking
+		// controller.store.results.slice(0, 3).map((result) => {
+		// 	expect(trackfn).toHaveBeenCalledWith({
+		// 		type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
+		// 		category: BeaconCategory.RECOMMENDATIONS,
+		// 		context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+		// 		// pid: controller.events.render!.id,
+		// 		event: {
+		// 			context: {
+		// 				placement: controller.store.profile.placement,
+		// 				tag: controller.store.profile.tag,
+		// 				type: 'product-recommendation',
+		// 			},
+		// 			product: {
+		// 				id: result.id,
+		// 				seed: undefined,
+		// 				mappings: {
+		// 					core: result.mappings.core,
+		// 				},
+		// 			},
+		// 		},
+		// 	});
+		// });
+
+		trackfn.mockClear();
 	});
 
 	it('can disable styling', async () => {
@@ -170,7 +255,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
@@ -198,7 +283,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
@@ -225,7 +310,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
@@ -261,7 +346,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
@@ -305,7 +390,7 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
 		await controller.search();
