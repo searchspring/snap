@@ -48,6 +48,10 @@ describe('Recommendation Component', () => {
 		window.IntersectionObserver = mock;
 	});
 
+	afterAll(() => {
+		// @ts-ignore
+		window.IntersectionObserver.mockReset();
+	});
 	it('renders with results', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
@@ -220,7 +224,7 @@ describe('Recommendation Component', () => {
 			},
 		});
 
-		// // first 4 results should have done impression tracking
+		// next 4 results should have done impression tracking
 		controller.store.results.slice(4, 7).map((result, idx) => {
 			expect(trackfn).toHaveBeenNthCalledWith(idx + 2, {
 				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
