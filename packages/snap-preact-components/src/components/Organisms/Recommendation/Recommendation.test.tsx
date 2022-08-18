@@ -201,7 +201,7 @@ describe('Recommendation Component', () => {
 		});
 
 		// profile impression
-		expect(trackfn).toHaveBeenCalledWith({
+		expect(trackfn).toHaveBeenNthCalledWith(1, {
 			type: BeaconType.PROFILE_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
 			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
@@ -220,29 +220,29 @@ describe('Recommendation Component', () => {
 			},
 		});
 
-		// first 4 results should have done impression tracking
-		// controller.store.results.slice(0, 3).map((result) => {
-		// 	expect(trackfn).toHaveBeenCalledWith({
-		// 		type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-		// 		category: BeaconCategory.RECOMMENDATIONS,
-		// 		context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-		// 		// pid: controller.events.render!.id,
-		// 		event: {
-		// 			context: {
-		// 				placement: controller.store.profile.placement,
-		// 				tag: controller.store.profile.tag,
-		// 				type: 'product-recommendation',
-		// 			},
-		// 			product: {
-		// 				id: result.id,
-		// 				seed: undefined,
-		// 				mappings: {
-		// 					core: result.mappings.core,
-		// 				},
-		// 			},
-		// 		},
-		// 	});
-		// });
+		// // first 4 results should have done impression tracking
+		controller.store.results.slice(4, 7).map((result, idx) => {
+			expect(trackfn).toHaveBeenNthCalledWith(idx + 2, {
+				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				pid: controller.events.impression?.id,
+				event: {
+					context: {
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: result.id,
+						seed: undefined,
+						mappings: {
+							core: result.mappings.core,
+						},
+					},
+				},
+			});
+		});
 
 		trackfn.mockClear();
 	});
