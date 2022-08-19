@@ -463,7 +463,11 @@ export class Snap {
 						);
 
 						// reset the global searchspring object
-						delete window.searchspring;
+						try {
+							delete window.searchspring;
+						} catch (e) {
+							window.searchspring = undefined;
+						}
 
 						document.head.appendChild(branchScript);
 					}
