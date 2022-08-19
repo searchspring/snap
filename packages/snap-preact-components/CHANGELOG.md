@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+
+### Bug Fixes
+
+* **recommendation.tsx:** bugfix for impression tracking when loop = false ([618357c](https://github.com/searchspring/snap/commit/618357cd7fc7a9b786d3c00aaf56b0a6cd6ec80c))
+
+
+
+
+
 ## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
