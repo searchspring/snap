@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+
+### Bug Fixes
+
+* **preact:** fixing an error preventing branch override from functioning ([cdecc76](https://github.com/searchspring/snap/commit/cdecc76fc63ea887f7167cef119a412917802f7c))
+
+
+
+
+
 ## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
 
 **Note:** Version bump only for package @searchspring/snap-preact
