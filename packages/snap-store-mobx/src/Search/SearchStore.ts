@@ -1,6 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 
-import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
+import type { SearchResponseModel, MetaResponseModel, SearchResponseModelMerchandisingCampaigns } from '@searchspring/snapi-types';
 import type { SearchStoreConfig, StoreServices } from '../types';
 import {
 	SearchMerchandisingStore,
@@ -25,6 +25,7 @@ export class SearchStore extends AbstractStore {
 	public pagination!: SearchPaginationStore;
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
+	public landingPage!: SearchResponseModelMerchandisingCampaigns;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -86,5 +87,14 @@ export class SearchStore extends AbstractStore {
 		this.results = new SearchResultStore(this.config, this.services, data?.results || [], data.pagination, data.merchandising);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
+
+		if (data.merchandising?.campaigns) {
+			// if we find a 'landing-page', get landingPage details from merchandising.campaigns
+			data.merchandising?.campaigns.forEach((campaign) => {
+				if (campaign.type == 'landing-page') {
+					this.landingPage = campaign;
+				}
+			});
+		}
 	}
 }
