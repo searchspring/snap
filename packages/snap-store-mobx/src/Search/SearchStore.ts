@@ -25,7 +25,7 @@ export class SearchStore extends AbstractStore {
 	public pagination!: SearchPaginationStore;
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
-	public landingPage!: SearchResponseModelMerchandisingCampaigns;
+	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -70,6 +70,7 @@ export class SearchStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
+		delete this.landingPage;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta || {};
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
