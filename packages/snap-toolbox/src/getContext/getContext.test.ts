@@ -67,16 +67,17 @@ describe('getContext', () => {
 		}).not.toThrow();
 	});
 
-	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io"`, () => {
+	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io" & returns the siteID from the src.`, () => {
+		const siteId = 'y56s6x';
 		expect(() => {
-			const src = 'https://snapui.searchspring.io/y56s6x/test/bundle.js';
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
 			const scriptTag = document.createElement('script');
 			scriptTag.src = src;
 
 			document.body.appendChild(scriptTag);
 
 			const context = getContext();
-			expect(context).toStrictEqual({});
+			expect(context).toStrictEqual({ siteId: siteId });
 		}).not.toThrow();
 	});
 

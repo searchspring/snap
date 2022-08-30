@@ -305,6 +305,16 @@ export class Snap {
 			isMergeableObject: isPlainObject,
 		});
 
+		if (!this.config?.client?.globals?.siteId && this.context.siteId) {
+			const defaultClientConfig = {
+				globals: {
+					siteId: this.context.siteId,
+				},
+			};
+
+			this.config.client = deepmerge(this.config.client || {}, defaultClientConfig);
+		}
+
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}

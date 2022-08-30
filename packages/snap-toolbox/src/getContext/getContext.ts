@@ -33,7 +33,14 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		throw new Error('getContext: first parameter must be an array of strings');
 	}
 
+	let siteIdString = 'siteId';
+
 	const variables: ContextVariables = {};
+
+	//add siteId to list if its not already in there
+	if (evaluate.indexOf(siteIdString) == -1) {
+		evaluate.push(siteIdString);
+	}
 
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
@@ -58,6 +65,15 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	Object.keys(variables).forEach((key) => {
 		if (typeof variables[key] === 'undefined') delete variables[key];
 	});
+
+	// if we didnt find a siteId in the context, lets grab the id from the src url.
+	if (!variables[siteIdString]) {
+		const siteIdFromSrc = script.getAttribute('src')?.match(/\/[a-zA-Z0-9]{6}\//);
+
+		if (siteIdFromSrc) {
+			variables.siteId = siteIdFromSrc.toString().replace(/\//g, '');
+		}
+	}
 
 	return variables;
 }

@@ -14,6 +14,8 @@ The innerHTML of the script MUST only contain variable assignments without `var`
 
 Typical usage would be getting integration context variables from a script tag and passing them off to a controller instantiation.
 
+By default, the function will return the siteId. If set, it will grab it out of the context variables, otherwise it will attempt to grab it out of the script src. 
+
 ### Example Integration Context
 
 ```html
