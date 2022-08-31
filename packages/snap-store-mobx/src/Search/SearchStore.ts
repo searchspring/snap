@@ -1,6 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 
-import type { SearchResponseModel, MetaResponseModel, SearchResponseModelMerchandisingCampaigns } from '@searchspring/snapi-types';
+import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { SearchStoreConfig, StoreServices } from '../types';
 import {
 	SearchMerchandisingStore,
