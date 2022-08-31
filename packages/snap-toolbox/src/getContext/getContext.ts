@@ -64,12 +64,9 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	if (evaluate.includes(siteIdString)) {
 		// if we didnt find a siteId in the context, lets grab the id from the src url.
 		if (!variables[siteIdString]) {
-			const root = script.getAttribute('src')?.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
-			if (root && root.length) {
-				const siteId = root![0].replace(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\/.*/, '$1');
-				if (siteId) {
-					variables.siteId = siteId;
-				}
+			const siteId = script.getAttribute('src')?.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
+			if (siteId && siteId.length > 1) {
+				variables.siteId = siteId[1];
 			}
 		}
 	}
