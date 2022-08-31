@@ -67,7 +67,7 @@ describe('getContext', () => {
 		}).not.toThrow();
 	});
 
-	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io" & returns the siteID from the src.`, () => {
+	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io"`, () => {
 		const siteId = 'y56s6x';
 		expect(() => {
 			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
@@ -77,6 +77,20 @@ describe('getContext', () => {
 			document.body.appendChild(scriptTag);
 
 			const context = getContext();
+			expect(context).toStrictEqual({});
+		}).not.toThrow();
+	});
+
+	it(`returns src siteId over if siteID is not set as a context variable`, () => {
+		const siteId = 'y56s6x';
+		expect(() => {
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+
+			document.body.appendChild(scriptTag);
+
+			const context = getContext(['siteId']);
 			expect(context).toStrictEqual({ siteId: siteId });
 		}).not.toThrow();
 	});
@@ -95,23 +109,6 @@ describe('getContext', () => {
 
 			const context = getContext(['siteId']);
 			expect(context).toStrictEqual({ siteId: otherSiteId });
-		}).not.toThrow();
-	});
-
-	it(`returns src siteId over context siteID if siteID is not passed as variable`, () => {
-		const siteId = 'y56s6x';
-		const otherSiteId = 'test12';
-		expect(() => {
-			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
-			const scriptTag = document.createElement('script');
-			scriptTag.src = src;
-			scriptTag.innerHTML = `
-				siteId = ${JSON.stringify(otherSiteId)};
-			`;
-			document.body.appendChild(scriptTag);
-
-			const context = getContext();
-			expect(context).toStrictEqual({ siteId: siteId });
 		}).not.toThrow();
 	});
 
