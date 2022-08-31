@@ -54,4 +54,15 @@ describe('Merchandising Store', () => {
 		const merchStore = new SearchMerchandisingStore(services, data.merchandising!);
 		expect(merchStore.campaigns).toEqual(data.merchandising?.campaigns);
 	});
+
+	it('updates landingPage when landing page is found', () => {
+		const data = mockData.updateConfig({ siteId: 'ga9kq2', search: 'landingPage' }).searchMeta();
+
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!);
+
+		expect(merchStore.campaigns).toBeDefined();
+		expect(merchStore.campaigns).toEqual(data.merchandising?.campaigns);
+
+		expect(merchStore.landingPage).toEqual(data?.merchandising?.campaigns![0]);
+	});
 });

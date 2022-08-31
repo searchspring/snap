@@ -25,7 +25,6 @@ export class SearchStore extends AbstractStore {
 	public pagination!: SearchPaginationStore;
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
-	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -70,7 +69,6 @@ export class SearchStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		delete this.landingPage;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta || {};
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
@@ -88,14 +86,5 @@ export class SearchStore extends AbstractStore {
 		this.results = new SearchResultStore(this.config, this.services, data?.results || [], data.pagination, data.merchandising);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
-
-		if (data.merchandising?.campaigns) {
-			// if we find a 'landing-page', get landingPage details from merchandising.campaigns
-			data.merchandising?.campaigns.forEach((campaign) => {
-				if (campaign.type == 'landing-page') {
-					this.landingPage = campaign;
-				}
-			});
-		}
 	}
 }

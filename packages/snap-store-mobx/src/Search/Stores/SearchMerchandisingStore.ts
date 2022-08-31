@@ -21,6 +21,7 @@ export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
 	public campaigns: SearchResponseModelMerchandisingCampaigns[] = [];
+	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 
 	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
@@ -35,6 +36,12 @@ export class SearchMerchandisingStore {
 			}
 			if (merchData.campaigns) {
 				this.campaigns = merchData.campaigns;
+				// if we find a 'landing-page', get landingPage details from merchandising.campaigns
+				merchData.campaigns.forEach((campaign) => {
+					if (campaign.type == 'landing-page') {
+						this.landingPage = campaign;
+					}
+				});
 			}
 		}
 	}

@@ -74,23 +74,4 @@ describe('Search Store', () => {
 
 		expect(searchStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.filter((option) => option.type == 'field').length!);
 	});
-
-	it('updates landingPage when merchandising landing page is found', () => {
-		const searchStore = new SearchStore(searchConfig, services);
-
-		mockData.updateConfig({ search: 'landingPage' });
-		searchData = mockData.searchMeta();
-
-		searchStore.update(searchData);
-
-		expect(searchStore.meta).toBeDefined();
-		expect(searchStore.meta).toStrictEqual(searchData.meta);
-
-		expect(searchStore.search).toBeDefined();
-
-		expect(searchStore.merchandising).toBeDefined();
-		expect(searchStore.merchandising).toEqual(searchData.merchandising);
-
-		expect(searchStore.landingPage).toEqual(searchData.merchandising?.campaigns![0]);
-	});
 });
