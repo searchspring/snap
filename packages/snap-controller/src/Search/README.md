@@ -69,7 +69,7 @@ searchController.search();
 ```
 
 ## Infinite
-When `config.settings.infinite` is defined and `store.pagination.next()` is invoked, the next page will be fetched and its result set will be appended to the existing result set. 
+When `config.settings.infinite` is defined and `store.pagination.next.url.go({ history: 'replace' })` is invoked, the next page will be fetched and its result set will be appended to the existing result set.
 
 If the page has been reloaded, the results will be reset to page 1.
 
