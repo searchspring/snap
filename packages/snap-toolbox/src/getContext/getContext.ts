@@ -37,11 +37,6 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 
 	const variables: ContextVariables = {};
 
-	//add siteId to list if its not already in there
-	if (evaluate.indexOf(siteIdString) == -1) {
-		evaluate.push(siteIdString);
-	}
-
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
 		const fn = new Function(`
@@ -68,10 +63,12 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 
 	// if we didnt find a siteId in the context, lets grab the id from the src url.
 	if (!variables[siteIdString]) {
-		const siteIdFromSrc = script.getAttribute('src')?.match(/\/[a-zA-Z0-9]{6}\//);
-
-		if (siteIdFromSrc) {
-			variables.siteId = siteIdFromSrc.toString().replace(/\//g, '');
+		const root = script.getAttribute('src')?.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
+		if (root && root.length) {
+			const siteId = root![0].replace(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\/.*/, '$1');
+			if (siteId) {
+				variables.siteId = siteId;
+			}
 		}
 	}
 

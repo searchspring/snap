@@ -81,6 +81,40 @@ describe('getContext', () => {
 		}).not.toThrow();
 	});
 
+	it(`returns context siteId over src siteID`, () => {
+		const siteId = 'y56s6x';
+		const otherSiteId = 'test12';
+		expect(() => {
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+			scriptTag.innerHTML = `
+				siteId = ${JSON.stringify(otherSiteId)};
+			`;
+			document.body.appendChild(scriptTag);
+
+			const context = getContext(['siteId']);
+			expect(context).toStrictEqual({ siteId: otherSiteId });
+		}).not.toThrow();
+	});
+
+	it(`returns src siteId over context siteID if siteID is not passed as variable`, () => {
+		const siteId = 'y56s6x';
+		const otherSiteId = 'test12';
+		expect(() => {
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+			scriptTag.innerHTML = `
+				siteId = ${JSON.stringify(otherSiteId)};
+			`;
+			document.body.appendChild(scriptTag);
+
+			const context = getContext();
+			expect(context).toStrictEqual({ siteId: siteId });
+		}).not.toThrow();
+	});
+
 	it('when multiple possible context scripts are found automatically, it uses the one with innerHTML', () => {
 		const id = 'searchspring-context';
 		const shopperObject = {

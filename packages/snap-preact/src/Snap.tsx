@@ -291,7 +291,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
