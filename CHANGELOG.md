@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **getcontext.ts:** grab and return the siteId from the script context or src ([4830560](https://github.com/searchspring/snap/commit/4830560d1522b035d62ab5d4e3534e0371b30ac9))
+* **preact-components:** adding new hook 'useConstructor' for easy constructor like behavior ([a249f6a](https://github.com/searchspring/snap/commit/a249f6abb6c0ebca730563af05d9c344e1ae1071))
+* **searchstore:** add landingPage to the searchstore ([a7d2c4f](https://github.com/searchspring/snap/commit/a7d2c4fe2740168e436ed865e1a8b85120154691))
+
+
+
+
+
 ## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
 
 **Note:** Version bump only for package @searchspring/snap
