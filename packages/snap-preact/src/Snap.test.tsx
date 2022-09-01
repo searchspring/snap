@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import { cleanup, waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
-import { Tracker } from '@searchspring/snap-tracker';
+import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
 import { cookies } from '@searchspring/snap-toolbox';
 
@@ -178,7 +178,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(contextConfig.client!.globals as ClientGlobals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track.shopper, 'login');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith({ id: contextConfig.context.shopper.id });
@@ -198,7 +198,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(contextConfig.client!.globals as ClientGlobals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
@@ -233,7 +233,7 @@ describe('Snap Preact', () => {
 			delete events[event];
 		});
 
-		const tracker = new Tracker(generateBaseConfig().client!.globals as ClientGlobals);
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track, 'error');
 		const snap = new Snap(generateBaseConfig(), { tracker });
 
@@ -252,7 +252,7 @@ describe('Snap Preact', () => {
 	});
 
 	it('can send beacon error events using handlers.error method', () => {
-		const tracker = new Tracker(generateBaseConfig().client!.globals as ClientGlobals);
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track, 'error');
 		const snap = new Snap(generateBaseConfig(), { tracker });
 
