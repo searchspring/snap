@@ -55,7 +55,7 @@ export type SnapConfig = {
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
-		globals: ClientGlobals;
+		globals: Partial<ClientGlobals>;
 		config?: ClientConfig;
 	};
 	instantiators?: {
@@ -291,7 +291,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -304,6 +304,16 @@ export class Snap {
 		this.context = deepmerge(this.config.context || {}, globalContext || {}, {
 			isMergeableObject: isPlainObject,
 		});
+
+		if (!this.config?.client?.globals?.siteId && this.context.siteId) {
+			const defaultClientConfig = {
+				globals: {
+					siteId: this.context.siteId,
+				},
+			};
+
+			this.config.client = deepmerge(this.config.client || {}, defaultClientConfig);
+		}
 
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
@@ -359,8 +369,8 @@ export class Snap {
 				this.config.client.config = this.config.client.config || {};
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
-			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact', mode: this.mode });
+			this.client = services?.client || new Client(this.config.client!.globals as ClientGlobals, this.config.client!.config);
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals as ClientGlobals, { framework: 'preact', mode: this.mode });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// check for tracking attribution in URL ?ss_attribution=type:id
