@@ -249,52 +249,120 @@ export class SearchController extends AbstractController {
 				return;
 			}
 
-			if (this.config.settings?.infinite) {
-				// TODO: refactor this
-				const preventBackfill =
-					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
-				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
+			//do we still need this??
+			// if (this.config.settings?.infinite) {
+			// 	// TODO: refactor this
+			// 	const preventBackfill =
+			// 		this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
+			// 	const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
 
-				if (preventBackfill || dontBackfill) {
-					this.storage.set('scrollMap', {});
-					this.urlManager.set('page', 1).go();
-					return;
-				}
-			}
+			// 	if (preventBackfill || dontBackfill) {
+			// 		this.storage.set('scrollMap', {});
+			// 		this.urlManager.set('page', 1).go();
+			// 		return;
+			// 	}
+			// }
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.search(params);
-			// @ts-ignore
-			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				// @ts-ignore
-				response.meta = meta;
-			}
+			let meta: any;
+			let response: any;
 
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
 			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
 				let previousResults = this.previousResults;
+				const backfills = [];
+
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
-					const backfills = [];
-					for (let page = 1; page < params.pagination?.page!; page++) {
-						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
-						backfills.push(this.client.search(backfillParams));
-					}
 
-					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([meta, data]) => {
-						previousResults = previousResults.concat(data.results!);
-					});
+					const pageSize = this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+					let pagesNeeded =
+						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
+							? this.config.settings?.infinite.backfill
+							: params.pagination?.page;
+					let totalResultsNeeded = pageSize * (pagesNeeded || 1);
+
+					//500 our search api is limited to 500.
+					//so we will need to make more than one request if totalresultsneeded is greater.
+					if (totalResultsNeeded < 500) {
+						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: totalResultsNeeded, page: 1 } });
+						backfills.push(this.client.search(backfillParams));
+					} else {
+						//how many pages are needed?
+						let pagesNeeded = Math.ceil(totalResultsNeeded / 500);
+						// we dont want to get 500 results on the last page, so lets find out how many are left.
+						let lastPageCount = pagesNeeded * 500 - totalResultsNeeded;
+
+						for (let i = 1; i <= pagesNeeded; i++) {
+							const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: i < pagesNeeded ? 500 : lastPageCount, page: i } });
+							backfills.push(this.client.search(backfillParams));
+						}
+					}
 				}
 
-				response.results = [...previousResults, ...(response.results || [])];
+				//infinite backfill and prev results
+				// use the previous results and only make request for new result
+				if (backfills && backfills.length) {
+					let backfillResults: any = [];
+					const backfillResponses = await Promise.all(backfills);
+					backfillResponses.map(([Bmeta, Bresponse]) => {
+						if (!meta) {
+							meta = Bmeta;
+						}
+						if (!response) {
+							response = Bresponse;
+						}
+
+						backfillResults = backfillResults.concat(response.results!);
+					});
+
+					if (!response.meta) {
+						/**
+						 * MockClient will overwrite the client search() method and use
+						 * SearchData to return mock data which already contains meta data
+						 */
+						// @ts-ignore
+						response.meta = meta;
+					}
+
+					debugger;
+					//we need to overwrite the pagination params so the ui doesnt get confused.
+					response.pagination.pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+					response.pagination.page = params.pagination?.page;
+
+					//set the response results after all backfill promises are resolved.
+					response.results = backfillResults;
+				} else {
+					// infinite with no backfills.
+
+					[meta, response] = await this.client.search(params);
+					// @ts-ignore
+					if (!response.meta) {
+						/**
+						 * MockClient will overwrite the client search() method and use
+						 * SearchData to return mock data which already contains meta data
+						 */
+						// @ts-ignore
+						response.meta = meta;
+					}
+					//append new results to previous results
+					response.results = [...previousResults, ...(response.results || [])];
+				}
+			} else {
+				//standard.
+				[meta, response] = await this.client.search(params);
+				// @ts-ignore
+				if (!response.meta) {
+					/**
+					 * MockClient will overwrite the client search() method and use
+					 * SearchData to return mock data which already contains meta data
+					 */
+					// @ts-ignore
+					response.meta = meta;
+				}
 			}
 
 			searchProfile.stop();
