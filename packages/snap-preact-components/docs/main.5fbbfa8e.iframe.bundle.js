@@ -1,4 +1,4 @@
-/*! For license information please see main.2a5fb65b.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.5fbbfa8e.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -39642,7 +39642,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.34.7', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.35.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40080,7 +40080,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.34.7')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.35.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40122,9 +40122,10 @@
 														}, !0))
 												)
 													throw new Error('getContext: first parameter must be an array of strings');
-												var variables = {};
-												return (
-													null == evaluate ||
+												var siteIdString = 'siteId',
+													variables = {};
+												if (
+													(null == evaluate ||
 														evaluate.forEach(function (name) {
 															var fn = new Function(
 																'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
@@ -40138,8 +40139,16 @@
 													Object.keys(variables).forEach(function (key) {
 														void 0 === variables[key] && delete variables[key];
 													}),
-													variables
-												);
+													evaluate.includes(siteIdString) && !variables[siteIdString])
+												) {
+													var _script$getAttribute,
+														siteId =
+															null === (_script$getAttribute = script.getAttribute('src')) || void 0 === _script$getAttribute
+																? void 0
+																: _script$getAttribute.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
+													siteId && siteId.length > 1 && (variables.siteId = siteId[1]);
+												}
+												return variables;
 											})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
 											item = _getContext.item,
 											items = _getContext.items,
@@ -41129,7 +41138,11 @@
 								Object.values(ContentType).forEach(function (type) {
 									merchData.content && merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
 								}),
-							merchData.campaigns && (this.campaigns = merchData.campaigns));
+							merchData.campaigns &&
+								((this.campaigns = merchData.campaigns),
+								merchData.campaigns.forEach(function (campaign) {
+									'landing-page' == campaign.type && (_this.landingPage = campaign);
+								})));
 				}),
 				Content = (function (_Array, _Symbol$species) {
 					!(function _inherits(subClass, superClass) {
