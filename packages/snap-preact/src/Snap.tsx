@@ -55,7 +55,7 @@ export type SnapConfig = {
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
-		globals: ClientGlobals;
+		globals: Partial<ClientGlobals>;
 		config?: ClientConfig;
 	};
 	instantiators?: {
@@ -369,8 +369,8 @@ export class Snap {
 				this.config.client.config = this.config.client.config || {};
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
-			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact', mode: this.mode });
+			this.client = services?.client || new Client(this.config.client!.globals as ClientGlobals, this.config.client!.config);
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals as ClientGlobals, { framework: 'preact', mode: this.mode });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// check for tracking attribution in URL ?ss_attribution=type:id
