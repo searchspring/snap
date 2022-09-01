@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import { cleanup, waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
-import { Tracker } from '@searchspring/snap-tracker';
+import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
 import { cookies } from '@searchspring/snap-toolbox';
 
@@ -177,7 +177,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(contextConfig.client!.globals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track.shopper, 'login');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith({ id: contextConfig.context.shopper.id });
@@ -197,7 +197,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(contextConfig.client!.globals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
@@ -232,7 +232,7 @@ describe('Snap Preact', () => {
 			delete events[event];
 		});
 
-		const tracker = new Tracker(generateBaseConfig().client!.globals);
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track, 'error');
 		const snap = new Snap(generateBaseConfig(), { tracker });
 
@@ -251,7 +251,7 @@ describe('Snap Preact', () => {
 	});
 
 	it('can send beacon error events using handlers.error method', () => {
-		const tracker = new Tracker(generateBaseConfig().client!.globals);
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track, 'error');
 		const snap = new Snap(generateBaseConfig(), { tracker });
 
@@ -383,7 +383,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(searchConfig.client!.globals);
+			const client = new MockClient(searchConfig.client!.globals as TrackerGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -424,7 +424,7 @@ describe('Snap Preact', () => {
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
-			const client = new MockClient(searchConfig.client!.globals);
+			const client = new MockClient(searchConfig.client!.globals as TrackerGlobals);
 
 			// valid config - no errors logged
 			new Snap(searchConfig, { client, logger });
@@ -474,7 +474,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(searchConfig.client!.globals);
+			const client = new MockClient(searchConfig.client!.globals as TrackerGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -517,7 +517,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(searchConfig.client!.globals);
+			const client = new MockClient(searchConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(searchConfig, { client });
 
 			const search = snap.controllers.search;
@@ -553,7 +553,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(searchConfig.client!.globals);
+			const client = new MockClient(searchConfig.client!.globals as TrackerGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -655,7 +655,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(acConfig.client!.globals);
+			const client = new MockClient(acConfig.client!.globals as TrackerGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -701,7 +701,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(acConfig.client!.globals);
+			const client = new MockClient(acConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
@@ -737,7 +737,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(acConfig.client!.globals);
+			const client = new MockClient(acConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
@@ -846,7 +846,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(finderConfig.client!.globals);
+			const client = new MockClient(finderConfig.client!.globals as TrackerGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -900,7 +900,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(finderConfig.client!.globals);
+			const client = new MockClient(finderConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
@@ -941,7 +941,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(finderConfig.client!.globals);
+			const client = new MockClient(finderConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
@@ -1030,7 +1030,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(recommendationConfig.client!.globals);
+			const client = new MockClient(recommendationConfig.client!.globals as TrackerGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -1076,7 +1076,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(recommendationConfig.client!.globals);
+			const client = new MockClient(recommendationConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
@@ -1111,7 +1111,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(recommendationConfig.client!.globals);
+			const client = new MockClient(recommendationConfig.client!.globals as TrackerGlobals);
 			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
