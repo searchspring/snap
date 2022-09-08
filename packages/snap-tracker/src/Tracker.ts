@@ -198,6 +198,10 @@ export class Tracker {
 		this.sendEvents();
 	}
 
+	public getGlobals(): TrackerGlobals {
+		return JSON.parse(JSON.stringify(this.globals));
+	}
+
 	public getContext(): BeaconContext {
 		return JSON.parse(JSON.stringify(this.context));
 	}
