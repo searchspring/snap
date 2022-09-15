@@ -27,6 +27,7 @@ import {
 } from './types';
 
 const BATCH_TIMEOUT = 150;
+const LEGACY_USERID_COOKIE_NAME = '_isuid';
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
@@ -524,14 +525,16 @@ export class Tracker {
 	getUserId = (): string | undefined | null => {
 		let userId;
 		try {
-			if (getFlags().storage()) userId = window.localStorage.getItem(USERID_COOKIE_NAME);
+			// use cookies if available, fallback to localstorage
 			if (getFlags().cookies()) {
-				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
+				userId = cookies.get(LEGACY_USERID_COOKIE_NAME) || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-			} else if (!userId && getFlags().storage()) {
-				// if cookies are disabled, use localStorage instead
-				userId = uuidv4();
+				cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+			} else if (getFlags().storage()) {
+				userId = window.localStorage.getItem(USERID_COOKIE_NAME) || uuidv4();
 				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
+			} else {
+				throw 'unsupported features';
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
