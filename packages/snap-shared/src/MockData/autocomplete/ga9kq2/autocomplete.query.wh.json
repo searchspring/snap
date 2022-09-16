@@ -24,7 +24,6 @@
     "pagination": {
       "totalResults": 550,
       "page": 1,
-      "defaultPageSize": 30,
       "pageSize": 6
     },
     "sorting": [],

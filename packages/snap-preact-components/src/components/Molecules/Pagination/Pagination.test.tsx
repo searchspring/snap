@@ -19,9 +19,9 @@ describe('Pagination Component', () => {
 		id: 'search',
 	};
 
-	const data = new MockData().search();
+	const data = new MockData().searchMeta();
 
-	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
 
 	beforeEach(() => {
 		rendered = render(<Pagination pagination={paginationStore} />);
@@ -74,9 +74,9 @@ describe('Lets test the Pagination Component optional props', () => {
 		id: 'search',
 	};
 
-	const data = new MockData().search('page10');
+	const data = new MockData().searchMeta('page10');
 
-	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
 
 	it('shows all the optional buttons', () => {
 		const rendered = render(<Pagination pagination={paginationStore} />);
@@ -181,9 +181,9 @@ describe('Pagination theming works', () => {
 		id: 'search',
 	};
 
-	const data = new MockData().search();
+	const data = new MockData().searchMeta();
 
-	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
