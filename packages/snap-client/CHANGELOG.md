@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+
+### Features
+
+* **searchrequest.ts:** adding the ability to disableInlineBanners ([5868195](https://github.com/searchspring/snap/commit/586819543455f384af0fb32b3a8765cf8ba2355e))
+
+
+
+
+
 # [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
 
 **Note:** Version bump only for package @searchspring/snap-client
