@@ -148,5 +148,8 @@
         "direction": "desc",
         "label": "Total Sold"
       }
-    ]
+    ],
+    "pagination": {
+      "defaultPageSize": 24
+    }
   }

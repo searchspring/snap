@@ -58,7 +58,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		<CacheProvider>
 			<div
 				onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-					onClick && onClick(e);
+					onClick && onClick(e, banner);
 				}}
 				className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
 				{...styling}
@@ -76,5 +76,5 @@ export interface InlineBannerProps extends ComponentProps {
 	banner: Banner;
 	width?: string;
 	layout?: LayoutType;
-	onClick?: (e: React.MouseEvent) => void;
+	onClick?: (e: React.MouseEvent, banner: Banner) => void;
 }

@@ -146,7 +146,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.resetTrending();
 		}
 
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta);
 	}
 }

@@ -61,10 +61,10 @@ The `layout` prop specifies if this banner will be rendered in a `grid` or `list
 
 
 ### onClick
-The `onClick` prop contains a custom onClick event handler. Function is passed the click event. 
+The `onClick` prop contains a custom onClick event handler. Function is passed the click event as first parameter, Banner object is passed as the second.
 
 ```typescript
-const CustomBannerClick = (e) => {
+const CustomBannerClick = (e, banner) => {
     console.log('You Clicked a banner!' , e)
 };
 ```

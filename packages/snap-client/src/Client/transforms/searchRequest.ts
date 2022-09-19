@@ -114,6 +114,7 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		tag?: string[];
 		'landing-page'?: string;
 		intellisuggest?: boolean;
+		disableInlineBanners?: boolean;
 	} = reqMerch.disabled ? { disableMerchandising: true } : {};
 
 	if (reqMerch.landingPage) {
@@ -128,6 +129,10 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 
 	if (typeof reqMerch.intellisuggest == 'boolean') {
 		merch['intellisuggest'] = reqMerch.intellisuggest;
+	}
+
+	if (reqMerch.disableInlineBanners) {
+		merch['disableInlineBanners'] = reqMerch.disableInlineBanners;
 	}
 
 	return merch;
