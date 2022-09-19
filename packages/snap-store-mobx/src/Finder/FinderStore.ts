@@ -91,7 +91,7 @@ export class FinderStore extends AbstractStore {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.selections = new FinderSelectionStore(this.config, this.services, {
 			state: this.state,
 			facets: data.facets || [],

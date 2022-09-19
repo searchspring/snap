@@ -168,5 +168,8 @@
       "multiple": "single",
       "hierarchyDelimiter": ">"
     }
+  },
+  "pagination": {
+    "defaultPageSize": 30
   }
 }

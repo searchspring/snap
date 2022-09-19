@@ -6,7 +6,6 @@
   "pagination": {
     "totalResults": 31,
     "page": 1,
-    "defaultPageSize": 30,
     "pageSize": 30,
     "totalPages":2
   },
