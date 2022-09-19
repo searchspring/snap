@@ -1,5 +1,5 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[994],
+	[169],
 	{
 		'../../node_modules/@storybook/components/dist/esm/tooltip/WithTooltip.js': (
 			__unused_webpack_module,
@@ -99,26 +99,35 @@
 			var math_max = Math.max,
 				math_min = Math.min,
 				round = Math.round;
-			function getBoundingClientRect(element, includeScale) {
-				void 0 === includeScale && (includeScale = !1);
-				var rect = element.getBoundingClientRect(),
+			function getUAString() {
+				var uaData = navigator.userAgentData;
+				return null != uaData && uaData.brands
+					? uaData.brands
+							.map(function (item) {
+								return item.brand + '/' + item.version;
+							})
+							.join(' ')
+					: navigator.userAgent;
+			}
+			function isLayoutViewport() {
+				return !/^((?!chrome|android).)*safari/i.test(getUAString());
+			}
+			function getBoundingClientRect(element, includeScale, isFixedStrategy) {
+				void 0 === includeScale && (includeScale = !1), void 0 === isFixedStrategy && (isFixedStrategy = !1);
+				var clientRect = element.getBoundingClientRect(),
 					scaleX = 1,
 					scaleY = 1;
-				if (isHTMLElement(element) && includeScale) {
-					var offsetHeight = element.offsetHeight,
-						offsetWidth = element.offsetWidth;
-					offsetWidth > 0 && (scaleX = round(rect.width) / offsetWidth || 1), offsetHeight > 0 && (scaleY = round(rect.height) / offsetHeight || 1);
-				}
-				return {
-					width: rect.width / scaleX,
-					height: rect.height / scaleY,
-					top: rect.top / scaleY,
-					right: rect.right / scaleX,
-					bottom: rect.bottom / scaleY,
-					left: rect.left / scaleX,
-					x: rect.left / scaleX,
-					y: rect.top / scaleY,
-				};
+				includeScale &&
+					isHTMLElement(element) &&
+					((scaleX = (element.offsetWidth > 0 && round(clientRect.width) / element.offsetWidth) || 1),
+					(scaleY = (element.offsetHeight > 0 && round(clientRect.height) / element.offsetHeight) || 1));
+				var visualViewport = (isElement(element) ? getWindow(element) : window).visualViewport,
+					addVisualOffsets = !isLayoutViewport() && isFixedStrategy,
+					x = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX,
+					y = (clientRect.top + (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) / scaleY,
+					width = clientRect.width / scaleX,
+					height = clientRect.height / scaleY;
+				return { width, height, top: y, right: x + width, bottom: y + height, left: x, x, y };
 			}
 			function getWindowScroll(node) {
 				var win = getWindow(node);
@@ -155,7 +164,7 @@
 							return 1 !== scaleX || 1 !== scaleY;
 						})(offsetParent),
 					documentElement = getDocumentElement(offsetParent),
-					rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled),
+					rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled, isFixed),
 					scroll = { scrollLeft: 0, scrollTop: 0 },
 					offsets = { x: 0, y: 0 };
 				return (
@@ -224,9 +233,8 @@
 					? window
 					: offsetParent ||
 							(function getContainingBlock(element) {
-								var isFirefox = -1 !== navigator.userAgent.toLowerCase().indexOf('firefox');
-								if (-1 !== navigator.userAgent.indexOf('Trident') && isHTMLElement(element) && 'fixed' === getComputedStyle(element).position)
-									return null;
+								var isFirefox = /firefox/i.test(getUAString());
+								if (/Trident/i.test(getUAString()) && isHTMLElement(element) && 'fixed' === getComputedStyle(element).position) return null;
 								var currentNode = getParentNode(element);
 								for (
 									isShadowRoot(currentNode) && (currentNode = currentNode.host);
@@ -616,10 +624,10 @@
 			function rectToClientRect(rect) {
 				return Object.assign({}, rect, { left: rect.x, top: rect.y, right: rect.x + rect.width, bottom: rect.y + rect.height });
 			}
-			function getClientRectFromMixedType(element, clippingParent) {
+			function getClientRectFromMixedType(element, clippingParent, strategy) {
 				return clippingParent === enums.Pj
 					? rectToClientRect(
-							(function getViewportRect(element) {
+							(function getViewportRect(element, strategy) {
 								var win = getWindow(element),
 									html = getDocumentElement(element),
 									visualViewport = win.visualViewport,
@@ -627,18 +635,17 @@
 									height = html.clientHeight,
 									x = 0,
 									y = 0;
-								return (
-									visualViewport &&
-										((width = visualViewport.width),
-										(height = visualViewport.height),
-										/^((?!chrome|android).)*safari/i.test(navigator.userAgent) || ((x = visualViewport.offsetLeft), (y = visualViewport.offsetTop))),
-									{ width, height, x: x + getWindowScrollBarX(element), y }
-								);
-							})(element)
+								if (visualViewport) {
+									(width = visualViewport.width), (height = visualViewport.height);
+									var layoutViewport = isLayoutViewport();
+									(layoutViewport || (!layoutViewport && 'fixed' === strategy)) && ((x = visualViewport.offsetLeft), (y = visualViewport.offsetTop));
+								}
+								return { width, height, x: x + getWindowScrollBarX(element), y };
+							})(element, strategy)
 					  )
 					: isElement(clippingParent)
-					? (function getInnerBoundingClientRect(element) {
-							var rect = getBoundingClientRect(element);
+					? (function getInnerBoundingClientRect(element, strategy) {
+							var rect = getBoundingClientRect(element, !1, 'fixed' === strategy);
 							return (
 								(rect.top = rect.top + element.clientTop),
 								(rect.left = rect.left + element.clientLeft),
@@ -650,7 +657,7 @@
 								(rect.y = rect.top),
 								rect
 							);
-					  })(clippingParent)
+					  })(clippingParent, strategy)
 					: rectToClientRect(
 							(function getDocumentRect(element) {
 								var _element$ownerDocumen,
@@ -668,7 +675,7 @@
 							})(getDocumentElement(element))
 					  );
 			}
-			function getClippingRect(element, boundary, rootBoundary) {
+			function getClippingRect(element, boundary, rootBoundary, strategy) {
 				var mainClippingParents =
 						'clippingParents' === boundary
 							? (function getClippingParents(element) {
@@ -687,7 +694,7 @@
 					clippingParents = [].concat(mainClippingParents, [rootBoundary]),
 					firstClippingParent = clippingParents[0],
 					clippingRect = clippingParents.reduce(function (accRect, clippingParent) {
-						var rect = getClientRectFromMixedType(element, clippingParent);
+						var rect = getClientRectFromMixedType(element, clippingParent, strategy);
 						return (
 							(accRect.top = math_max(rect.top, accRect.top)),
 							(accRect.right = math_min(rect.right, accRect.right)),
@@ -695,7 +702,7 @@
 							(accRect.left = math_max(rect.left, accRect.left)),
 							accRect
 						);
-					}, getClientRectFromMixedType(element, firstClippingParent));
+					}, getClientRectFromMixedType(element, firstClippingParent, strategy));
 				return (
 					(clippingRect.width = clippingRect.right - clippingRect.left),
 					(clippingRect.height = clippingRect.bottom - clippingRect.top),
@@ -717,6 +724,8 @@
 				var _options = options,
 					_options$placement = _options.placement,
 					placement = void 0 === _options$placement ? state.placement : _options$placement,
+					_options$strategy = _options.strategy,
+					strategy = void 0 === _options$strategy ? state.strategy : _options$strategy,
 					_options$boundary = _options.boundary,
 					boundary = void 0 === _options$boundary ? enums.zV : _options$boundary,
 					_options$rootBoundary = _options.rootBoundary,
@@ -734,7 +743,8 @@
 					clippingClientRect = getClippingRect(
 						isElement(element) ? element : element.contextElement || getDocumentElement(state.elements.popper),
 						boundary,
-						rootBoundary
+						rootBoundary,
+						strategy
 					),
 					referenceClientRect = getBoundingClientRect(state.elements.reference),
 					popperOffsets = computeOffsets({ reference: referenceClientRect, element: popperRect, strategy: 'absolute', placement }),

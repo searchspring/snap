@@ -1,5 +1,5 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[135],
+	[464],
 	{
 		'../../node_modules/@storybook/components/dist/esm/controls/Color.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -174,45 +174,61 @@
 				},
 				_ = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) },
 				x = function (e) {
+					return L(C(e));
+				},
+				C = function (e) {
 					return (
-						'#' === e[0] && (e = e.substr(1)),
+						'#' === e[0] && (e = e.substring(1)),
 						e.length < 6
-							? { r: parseInt(e[0] + e[0], 16), g: parseInt(e[1] + e[1], 16), b: parseInt(e[2] + e[2], 16), a: 1 }
-							: { r: parseInt(e.substr(0, 2), 16), g: parseInt(e.substr(2, 2), 16), b: parseInt(e.substr(4, 2), 16), a: 1 }
+							? {
+									r: parseInt(e[0] + e[0], 16),
+									g: parseInt(e[1] + e[1], 16),
+									b: parseInt(e[2] + e[2], 16),
+									a: 4 === e.length ? b(parseInt(e[3] + e[3], 16) / 255, 2) : 1,
+							  }
+							: {
+									r: parseInt(e.substring(0, 2), 16),
+									g: parseInt(e.substring(2, 4), 16),
+									b: parseInt(e.substring(4, 6), 16),
+									a: 8 === e.length ? b(parseInt(e.substring(6, 8), 16) / 255, 2) : 1,
+							  }
 					);
 				},
-				C = function (e, r) {
+				E = function (e, r) {
 					return void 0 === r && (r = 'deg'), Number(e) * (_[r] || 1);
 				},
-				E = function (e) {
+				H = function (e) {
 					var r = /hsla?\(?\s*(-?\d*\.?\d+)(deg|rad|grad|turn)?[,\s]+(-?\d*\.?\d+)%?[,\s]+(-?\d*\.?\d+)%?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(
 						e
 					);
 					return r
-						? M({ h: C(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
+						? N({ h: E(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
 						: { h: 0, s: 0, v: 0, a: 1 };
 				},
-				M = function (e) {
+				N = function (e) {
 					var r = e.s,
 						t = e.l;
 					return { h: e.h, s: (r *= (t < 50 ? t : 100 - t) / 100) > 0 ? ((2 * r) / (t + r)) * 100 : 0, v: t + r, a: e.a };
 				},
-				N = function (e) {
+				w = function (e) {
+					return K(I(e));
+				},
+				y = function (e) {
 					var r = e.s,
 						t = e.v,
 						n = e.a,
 						o = ((200 - r) * t) / 100;
 					return { h: b(e.h), s: b(o > 0 && o < 200 ? ((r * t) / 100 / (o <= 100 ? o : 200 - o)) * 100 : 0), l: b(o / 2), a: b(n, 2) };
 				},
-				w = function (e) {
-					var r = N(e);
+				q = function (e) {
+					var r = y(e);
 					return 'hsl(' + r.h + ', ' + r.s + '%, ' + r.l + '%)';
 				},
-				y = function (e) {
-					var r = N(e);
+				k = function (e) {
+					var r = y(e);
 					return 'hsla(' + r.h + ', ' + r.s + '%, ' + r.l + '%, ' + r.a + ')';
 				},
-				q = function (e) {
+				I = function (e) {
 					var r = e.h,
 						t = e.s,
 						n = e.v,
@@ -225,10 +241,10 @@
 						i = a % 6;
 					return { r: b(255 * [n, u, l, l, c, n][i]), g: b(255 * [c, n, n, u, l, l][i]), b: b(255 * [l, l, c, n, n, u][i]), a: b(o, 2) };
 				},
-				I = function (e) {
+				z = function (e) {
 					var r = /rgba?\(?\s*(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(e);
 					return r
-						? B({
+						? L({
 								r: Number(r[1]) / (r[2] ? 100 / 255 : 1),
 								g: Number(r[3]) / (r[4] ? 100 / 255 : 1),
 								b: Number(r[5]) / (r[6] ? 100 / 255 : 1),
@@ -236,11 +252,19 @@
 						  })
 						: { h: 0, s: 0, v: 0, a: 1 };
 				},
-				z = function (e) {
+				D = function (e) {
 					var r = e.toString(16);
 					return r.length < 2 ? '0' + r : r;
 				},
-				B = function (e) {
+				K = function (e) {
+					var r = e.r,
+						t = e.g,
+						n = e.b,
+						o = e.a,
+						a = o < 1 ? D(b(255 * o)) : '';
+					return '#' + D(r) + D(t) + D(n) + a;
+				},
+				L = function (e) {
 					var r = e.r,
 						t = e.g,
 						n = e.b,
@@ -250,7 +274,7 @@
 						u = l ? (a === r ? (t - n) / l : a === t ? 2 + (n - r) / l : 4 + (r - t) / l) : 0;
 					return { h: b(60 * (u < 0 ? u + 6 : u)), s: b(a ? (l / a) * 100 : 0), v: b((a / 255) * 100), a: o };
 				},
-				K = compat_module.default.memo(function (r) {
+				S = compat_module.default.memo(function (r) {
 					var t = r.hue,
 						n = r.onChange,
 						o = g(['react-colorful__hue', r.className]);
@@ -267,20 +291,22 @@
 									n({ h: s(t + 360 * e.left, 0, 360) });
 								},
 								'aria-label': 'Hue',
-								'aria-valuetext': b(t),
+								'aria-valuenow': b(t),
+								'aria-valuemax': '360',
+								'aria-valuemin': '0',
 							},
 							compat_module.default.createElement(p, {
 								className: 'react-colorful__hue-pointer',
 								left: t / 360,
-								color: w({ h: t, s: 100, v: 100, a: 1 }),
+								color: q({ h: t, s: 100, v: 100, a: 1 }),
 							})
 						)
 					);
 				}),
-				L = compat_module.default.memo(function (r) {
+				T = compat_module.default.memo(function (r) {
 					var t = r.hsva,
 						n = r.onChange,
-						o = { backgroundColor: w({ h: t.h, s: 100, v: 100, a: 1 }) };
+						o = { backgroundColor: q({ h: t.h, s: 100, v: 100, a: 1 }) };
 					return compat_module.default.createElement(
 						'div',
 						{ className: 'react-colorful__saturation', style: o },
@@ -300,20 +326,23 @@
 								className: 'react-colorful__saturation-pointer',
 								top: 1 - t.v / 100,
 								left: t.s / 100,
-								color: w(t),
+								color: q(t),
 							})
 						)
 					);
 				}),
-				A = function (e, r) {
+				F = function (e, r) {
 					if (e === r) return !0;
 					for (var t in e) if (e[t] !== r[t]) return !1;
 					return !0;
 				},
-				S = function (e, r) {
+				P = function (e, r) {
 					return e.replace(/\s/g, '') === r.replace(/\s/g, '');
+				},
+				X = function (e, r) {
+					return e.toLowerCase() === r.toLowerCase() || F(C(e), C(r));
 				};
-			function T(e, t, l) {
+			function Y(e, t, l) {
 				var u = i(l),
 					c = (0, compat_module.useState)(function () {
 						return e.toHsva(t);
@@ -333,7 +362,7 @@
 					(0, compat_module.useEffect)(
 						function () {
 							var r;
-							A(s, v.current.hsva) || e.equal((r = e.fromHsva(s)), v.current.color) || ((v.current = { hsva: s, color: r }), u(r));
+							F(s, v.current.hsva) || e.equal((r = e.fromHsva(s)), v.current.color) || ((v.current = { hsva: s, color: r }), u(r));
 						},
 						[s, e, u]
 					);
@@ -344,23 +373,23 @@
 				}, []);
 				return [s, d];
 			}
-			var F,
-				P = 'undefined' != typeof window ? compat_module.useLayoutEffect : compat_module.useEffect,
-				R = new Map(),
-				V = function (e) {
-					P(function () {
+			var R,
+				V = 'undefined' != typeof window ? compat_module.useLayoutEffect : compat_module.useEffect,
+				J = new Map(),
+				Q = function (e) {
+					V(function () {
 						var r = e.current ? e.current.ownerDocument : document;
-						if (void 0 !== r && !R.has(r)) {
+						if (void 0 !== r && !J.has(r)) {
 							var t = r.createElement('style');
 							(t.innerHTML =
 								'.react-colorful{position:relative;display:flex;flex-direction:column;width:200px;height:200px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.react-colorful__saturation{position:relative;flex-grow:1;border-color:transparent;border-bottom:12px solid #000;border-radius:8px 8px 0 0;background-image:linear-gradient(0deg,#000,transparent),linear-gradient(90deg,#fff,hsla(0,0%,100%,0))}.react-colorful__alpha-gradient,.react-colorful__pointer-fill{content:"";position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;border-radius:inherit}.react-colorful__alpha-gradient,.react-colorful__saturation{box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}.react-colorful__alpha,.react-colorful__hue{position:relative;height:24px}.react-colorful__hue{background:linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red)}.react-colorful__last-control{border-radius:0 0 8px 8px}.react-colorful__interactive{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:inherit;outline:none;touch-action:none}.react-colorful__pointer{position:absolute;z-index:1;box-sizing:border-box;width:28px;height:28px;transform:translate(-50%,-50%);background-color:#fff;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}.react-colorful__interactive:focus .react-colorful__pointer{transform:translate(-50%,-50%) scale(1.1)}.react-colorful__alpha,.react-colorful__alpha-pointer{background-color:#fff;background-image:url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>\')}.react-colorful__saturation-pointer{z-index:3}.react-colorful__hue-pointer{z-index:2}'),
-								R.set(r, t);
-							var n = F || __webpack_require__.nc;
+								J.set(r, t);
+							var n = R || __webpack_require__.nc;
 							n && t.setAttribute('nonce', n), r.head.appendChild(t);
 						}
 					}, []);
 				},
-				$ = function (t) {
+				U = function (t) {
 					var n = t.className,
 						o = t.colorModel,
 						a = t.color,
@@ -368,37 +397,33 @@
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
 						f = (0, compat_module.useRef)(null);
-					V(f);
-					var v = T(o, l, i),
+					Q(f);
+					var v = Y(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
 					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						compat_module.default.createElement(L, { hsva: d, onChange: h }),
-						compat_module.default.createElement(K, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(T, { hsva: d, onChange: h }),
+						compat_module.default.createElement(S, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
-				G = {
+				W = {
 					defaultColor: '000',
-					toHsva: function (e) {
-						return B(x(e));
-					},
+					toHsva: x,
 					fromHsva: function (e) {
-						return (t = (r = q(e)).g), (n = r.b), '#' + z(r.r) + z(t) + z(n);
-						var r, t, n;
+						return w({ h: e.h, s: e.s, v: e.v, a: 1 });
 					},
-					equal: function (e, r) {
-						return e.toLowerCase() === r.toLowerCase() || A(x(e), x(r));
-					},
+					equal: X,
 				},
-				Q = function (r) {
+				ee = function (r) {
 					var t = r.className,
 						n = r.hsva,
 						o = r.onChange,
-						a = { backgroundImage: 'linear-gradient(90deg, ' + y(Object.assign({}, n, { a: 0 })) + ', ' + y(Object.assign({}, n, { a: 1 })) + ')' },
-						l = g(['react-colorful__alpha', t]);
+						a = { backgroundImage: 'linear-gradient(90deg, ' + k(Object.assign({}, n, { a: 0 })) + ', ' + k(Object.assign({}, n, { a: 1 })) + ')' },
+						l = g(['react-colorful__alpha', t]),
+						u = b(100 * n.a);
 					return compat_module.default.createElement(
 						'div',
 						{ className: l },
@@ -413,13 +438,16 @@
 									o({ a: s(n.a + e.left) });
 								},
 								'aria-label': 'Alpha',
-								'aria-valuetext': b(100 * n.a) + '%',
+								'aria-valuetext': u + '%',
+								'aria-valuenow': u,
+								'aria-valuemin': '0',
+								'aria-valuemax': '100',
 							},
-							compat_module.default.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: y(n) })
+							compat_module.default.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: k(n) })
 						)
 					);
 				},
-				U = function (t) {
+				re = function (t) {
 					var n = t.className,
 						o = t.colorModel,
 						a = t.color,
@@ -427,28 +455,28 @@
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
 						f = (0, compat_module.useRef)(null);
-					V(f);
-					var v = T(o, l, i),
+					Q(f);
+					var v = Y(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
 					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						compat_module.default.createElement(L, { hsva: d, onChange: h }),
-						compat_module.default.createElement(K, { hue: d.h, onChange: h }),
-						compat_module.default.createElement(Q, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(T, { hsva: d, onChange: h }),
+						compat_module.default.createElement(S, { hue: d.h, onChange: h }),
+						compat_module.default.createElement(ee, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
-				ee = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: E, fromHsva: y, equal: S },
-				ge = {
+				le = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: H, fromHsva: k, equal: P },
+				Ee = {
 					defaultColor: 'rgba(0, 0, 0, 1)',
-					toHsva: I,
+					toHsva: z,
 					fromHsva: function (e) {
-						var r = q(e);
+						var r = I(e);
 						return 'rgba(' + r.r + ', ' + r.g + ', ' + r.b + ', ' + r.a + ')';
 					},
-					equal: S,
+					equal: P,
 				},
 				color_convert = __webpack_require__('../../node_modules/@storybook/components/node_modules/color-convert/index.js'),
 				color_convert_default = __webpack_require__.n(color_convert),
@@ -660,13 +688,13 @@
 				SHORTHEX_REGEXP = /^\s*#?([0-9a-f]{3})\s*$/i,
 				ColorPicker =
 					(_defineProperty((_ColorPicker = {}), ColorSpace.HEX, function (r) {
-						return compat_module.default.createElement($, u({}, r, { colorModel: G }));
+						return compat_module.default.createElement(U, u({}, r, { colorModel: W }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.RGB, function (r) {
-						return compat_module.default.createElement(U, u({}, r, { colorModel: ge }));
+						return compat_module.default.createElement(re, u({}, r, { colorModel: Ee }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.HSL, function (r) {
-						return compat_module.default.createElement(U, u({}, r, { colorModel: ee }));
+						return compat_module.default.createElement(re, u({}, r, { colorModel: le }));
 					}),
 					_ColorPicker),
 				fallbackColor =

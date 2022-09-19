@@ -1,4 +1,4 @@
-/*! For license information please see main.5fbbfa8e.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.404fc270.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -3753,7 +3753,7 @@
 									Object.assign(
 										{
 											onClick: function onClick(e) {
-												_onClick && _onClick(e);
+												_onClick && _onClick(e, banner);
 											},
 											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className),
 										},
@@ -28378,8 +28378,9 @@
 										lastViewed = this.tracker.cookies.viewed.get();
 									return (
 										shopperId && (params.shopper = shopperId),
-										null != cart && cart.length && (params.cart = cart),
-										null != lastViewed && lastViewed.length && (params.lastViewed = lastViewed),
+										(params.siteId && params.siteId != this.tracker.getGlobals().siteId) ||
+											(null != cart && cart.length && (params.cart = cart),
+											null != lastViewed && lastViewed.length && (params.lastViewed = lastViewed)),
 										params
 									);
 								},
@@ -31966,6 +31967,7 @@
 								return 'merch.segment/' + segment;
 							})),
 						'boolean' == typeof reqMerch.intellisuggest && (merch.intellisuggest = reqMerch.intellisuggest),
+						reqMerch.disableInlineBanners && (merch.disableInlineBanners = reqMerch.disableInlineBanners),
 						merch
 					);
 				}),
@@ -32533,7 +32535,6 @@
 						totalResults: null == pagination ? void 0 : pagination.totalResults,
 						page: null == pagination ? void 0 : pagination.currentPage,
 						pageSize: null == pagination ? void 0 : pagination.perPage,
-						defaultPageSize: null == pagination ? void 0 : pagination.defaultPerPage,
 						totalPages: null == pagination ? void 0 : pagination.totalPages,
 					},
 				};
@@ -35658,17 +35659,22 @@
 			}
 			var SearchPaginationStore = (function () {
 					function SearchPaginationStore(config, services) {
-						var paginationData =
-							arguments.length > 2 && void 0 !== arguments[2]
-								? arguments[2]
-								: { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24, totalPages: void 0 };
+						var _meta$pagination,
+							paginationData =
+								arguments.length > 2 && void 0 !== arguments[2]
+									? arguments[2]
+									: { page: void 0, pageSize: void 0, totalResults: void 0, totalPages: void 0 },
+							meta = arguments.length > 3 ? arguments[3] : void 0;
 						SearchPaginationStore_classCallCheck(this, SearchPaginationStore),
 							(this.services = services),
 							(this.controllerConfig = config),
 							(this.page = paginationData.page),
 							(this.pageSize = paginationData.pageSize),
 							(this.totalResults = paginationData.totalResults),
-							(this.defaultPageSize = paginationData.defaultPageSize),
+							(this.defaultPageSize =
+								(null == meta || null === (_meta$pagination = meta.pagination) || void 0 === _meta$pagination
+									? void 0
+									: _meta$pagination.defaultPageSize) || 24),
 							(this.totalPages = paginationData.totalPages),
 							(this.pageSizeOptions = [
 								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
@@ -36053,7 +36059,7 @@
 										data.pagination,
 										data.merchandising
 									)),
-									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination)),
+									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta)),
 									(this.sorting = new SearchSortingStore(
 										this.services,
 										(null == data ? void 0 : data.sorting) || [],
@@ -37084,7 +37090,7 @@
 													return term.active;
 												}).length)) &&
 											this.resetTrending(),
-										(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination)),
+										(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta)),
 										(this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta)));
 								},
 							},
@@ -39642,7 +39648,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.35.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.36.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39926,10 +39932,14 @@
 							(this.getUserId = function () {
 								var userId;
 								try {
-									getFlags().storage() && (userId = window.localStorage.getItem('ssUserId')),
-										getFlags().cookies()
-											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
-											: !userId && getFlags().storage() && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
+									if (getFlags().cookies())
+										(userId = cookies.get('_isuid') || cookies.get('ssUserId') || (0, v4.Z)()),
+											cookies.set('ssUserId', userId, 'Lax', 31536e6),
+											cookies.set('_isuid', userId, 'Lax', 31536e6);
+									else {
+										if (!getFlags().storage()) throw 'unsupported features';
+										(userId = window.localStorage.getItem('ssUserId') || (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId);
+									}
 								} catch (e) {
 									console.error('Failed to persist user id to cookie or local storage:', e);
 								}
@@ -40080,7 +40090,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.35.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.36.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40239,6 +40249,12 @@
 								Constructor
 							);
 						})(Tracker, [
+							{
+								key: 'getGlobals',
+								value: function getGlobals() {
+									return JSON.parse(JSON.stringify(this.globals));
+								},
+							},
 							{
 								key: 'getContext',
 								value: function getContext() {
@@ -41412,7 +41428,7 @@
 						null,
 						'The ',
 						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'onClick'),
-						' prop contains a custom onClick event handler. Function is passed the click event. '
+						' prop contains a custom onClick event handler. Function is passed the click event as first parameter, Banner object is passed as the second.'
 					),
 					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
 						'pre',
@@ -41420,7 +41436,7 @@
 						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							"const CustomBannerClick = (e) => {\n    console.log('You Clicked a banner!' , e)\n};\n"
+							"const CustomBannerClick = (e, banner) => {\n    console.log('You Clicked a banner!' , e)\n};\n"
 						)
 					),
 					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(

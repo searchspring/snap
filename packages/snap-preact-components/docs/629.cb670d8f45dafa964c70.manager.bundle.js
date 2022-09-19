@@ -1,6 +1,6 @@
-/*! For license information please see 966.78148322cc8f11e7b2ee.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 629.cb670d8f45dafa964c70.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[966],
+	[629],
 	{
 		14724: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -3775,7 +3775,7 @@
 			const react_inspector = Inspector;
 			var ScrollArea = __webpack_require__(54214),
 				ActionBar = __webpack_require__(97408),
-				polished_esm = (__webpack_require__(35744), __webpack_require__(11682)),
+				polished_esm = (__webpack_require__(35744), __webpack_require__(54246)),
 				Action = theming_dist_esm.styled.div({
 					display: 'flex',
 					padding: 0,
@@ -9416,7 +9416,7 @@
 				__webpack_require__(34115);
 			var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2784),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(31848),
-				polished__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11682);
+				polished__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(54246);
 			function _extends() {
 				return (
 					(_extends =
@@ -9716,7 +9716,7 @@
 			var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2784),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(31848),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(47229),
-				polished__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11682),
+				polished__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(54246),
 				_popperjs_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(26166);
 			function _extends() {
 				return (
@@ -9894,7 +9894,7 @@
 				pickBy = __webpack_require__(42208),
 				pickBy_default = __webpack_require__.n(pickBy),
 				esm = __webpack_require__(31848),
-				polished_esm = __webpack_require__(11682),
+				polished_esm = __webpack_require__(54246),
 				icon = __webpack_require__(35016),
 				index_modern = __webpack_require__(38228),
 				shared = (__webpack_require__(95342), __webpack_require__(29660)),
@@ -14926,7 +14926,7 @@
 			__webpack_require__(43105);
 			var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2784),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31848),
-				polished__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11682),
+				polished__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(54246),
 				_typography_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(29660);
 			function _extends() {
 				return (
@@ -15000,7 +15000,7 @@
 						},
 					});
 			var LazyColorControl = react__WEBPACK_IMPORTED_MODULE_2__.lazy(function () {
-					return __webpack_require__.e(135).then(__webpack_require__.bind(__webpack_require__, 45135));
+					return __webpack_require__.e(464).then(__webpack_require__.bind(__webpack_require__, 78464));
 				}),
 				ColorControl = function ColorControl(props) {
 					return react__WEBPACK_IMPORTED_MODULE_2__.createElement(
@@ -15852,7 +15852,7 @@
 				esm = __webpack_require__(31848),
 				memoizerific = (__webpack_require__(35744), __webpack_require__(49224)),
 				memoizerific_default = __webpack_require__.n(memoizerific),
-				polished_esm = __webpack_require__(11682);
+				polished_esm = __webpack_require__(54246);
 			function _extends() {
 				return (
 					(_extends =
@@ -16108,8 +16108,8 @@
 			var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2784),
 				LazyWithTooltip = react__WEBPACK_IMPORTED_MODULE_2__.lazy(function () {
 					return __webpack_require__
-						.e(994)
-						.then(__webpack_require__.bind(__webpack_require__, 19994))
+						.e(169)
+						.then(__webpack_require__.bind(__webpack_require__, 38169))
 						.then(function (mod) {
 							return { default: mod.WithTooltip };
 						});
@@ -16124,8 +16124,8 @@
 			WithTooltip.displayName = 'WithTooltip';
 			var LazyWithTooltipPure = react__WEBPACK_IMPORTED_MODULE_2__.lazy(function () {
 					return __webpack_require__
-						.e(994)
-						.then(__webpack_require__.bind(__webpack_require__, 19994))
+						.e(169)
+						.then(__webpack_require__.bind(__webpack_require__, 38169))
 						.then(function (mod) {
 							return { default: mod.WithTooltipPure };
 						});
@@ -16602,7 +16602,7 @@
 			__webpack_require__(34769), __webpack_require__(34115), __webpack_require__(43105);
 			var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2784),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(31848),
-				polished__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11682),
+				polished__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(54246),
 				_icon_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(35016);
 			function _extends() {
 				return (
@@ -16762,7 +16762,7 @@
 		29660: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { CI: () => codeCommon, YX: () => withReset, g$: () => headerCommon, vl: () => withMargin });
-			var polished__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11682),
+			var polished__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54246),
 				headerCommon = function headerCommon(_ref) {
 					return {
 						margin: '20px 0 8px',
@@ -16810,112 +16810,136 @@
 			'use strict';
 			__webpack_require__(25047), __webpack_require__(83206), __webpack_require__(57406);
 		},
-		57802: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		10100: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
-			var Action,
+			var router_Action,
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				react = (__webpack_require__(34769), __webpack_require__(43105), __webpack_require__(2784)),
-				react_dom = __webpack_require__(28316),
-				esm_extends = __webpack_require__(7896);
+				react_namespaceObject = __webpack_require__.t(react, 2),
+				react_dom = __webpack_require__(28316);
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
 			!(function (Action) {
 				(Action.Pop = 'POP'), (Action.Push = 'PUSH'), (Action.Replace = 'REPLACE');
-			})(Action || (Action = {}));
-			var readOnly = function (obj) {
-				return obj;
-			};
-			var history_Action;
-			function promptBeforeUnload(event) {
-				event.preventDefault(), (event.returnValue = '');
+			})(router_Action || (router_Action = {}));
+			function getHistoryState(location) {
+				return { usr: location.state, key: location.key };
 			}
-			function createEvents() {
-				var handlers = [];
-				return {
-					get length() {
-						return handlers.length;
+			function createLocation(current, to, state, key) {
+				return (
+					void 0 === state && (state = null),
+					_extends(
+						{ pathname: 'string' == typeof current ? current : current.pathname, search: '', hash: '' },
+						'string' == typeof to ? router_parsePath(to) : to,
+						{ state, key: (null == to ? void 0 : to.key) || key || Math.random().toString(36).substr(2, 8) }
+					)
+				);
+			}
+			function router_createPath(_ref) {
+				let { pathname = '/', search = '', hash = '' } = _ref;
+				return (
+					search && '?' !== search && (pathname += '?' === search.charAt(0) ? search : '?' + search),
+					hash && '#' !== hash && (pathname += '#' === hash.charAt(0) ? hash : '#' + hash),
+					pathname
+				);
+			}
+			function router_parsePath(path) {
+				let parsedPath = {};
+				if (path) {
+					let hashIndex = path.indexOf('#');
+					hashIndex >= 0 && ((parsedPath.hash = path.substr(hashIndex)), (path = path.substr(0, hashIndex)));
+					let searchIndex = path.indexOf('?');
+					searchIndex >= 0 && ((parsedPath.search = path.substr(searchIndex)), (path = path.substr(0, searchIndex))),
+						path && (parsedPath.pathname = path);
+				}
+				return parsedPath;
+			}
+			function getUrlBasedHistory(getLocation, createHref, validateLocation, options) {
+				void 0 === options && (options = {});
+				let { window = document.defaultView, v5Compat = !1 } = options,
+					globalHistory = window.history,
+					action = router_Action.Pop,
+					listener = null;
+				function handlePop() {
+					(action = router_Action.Pop), listener && listener({ action, location: history.location });
+				}
+				let history = {
+					get action() {
+						return action;
 					},
-					push: function push(fn) {
+					get location() {
+						return getLocation(window, globalHistory);
+					},
+					listen(fn) {
+						if (listener) throw new Error('A history only accepts one active listener');
 						return (
-							handlers.push(fn),
-							function () {
-								handlers = handlers.filter(function (handler) {
-									return handler !== fn;
-								});
+							window.addEventListener('popstate', handlePop),
+							(listener = fn),
+							() => {
+								window.removeEventListener('popstate', handlePop), (listener = null);
 							}
 						);
 					},
-					call: function call(arg) {
-						handlers.forEach(function (fn) {
-							return fn && fn(arg);
-						});
+					createHref: (to) => createHref(window, to),
+					push: function push(to, state) {
+						action = router_Action.Push;
+						let location = createLocation(history.location, to, state);
+						null == validateLocation || validateLocation(location, to);
+						let historyState = getHistoryState(location),
+							url = history.createHref(location);
+						try {
+							globalHistory.pushState(historyState, '', url);
+						} catch (error) {
+							window.location.assign(url);
+						}
+						v5Compat && listener && listener({ action, location });
 					},
+					replace: function replace(to, state) {
+						action = router_Action.Replace;
+						let location = createLocation(history.location, to, state);
+						null == validateLocation || validateLocation(location, to);
+						let historyState = getHistoryState(location),
+							url = history.createHref(location);
+						globalHistory.replaceState(historyState, '', url), v5Compat && listener && listener({ action, location });
+					},
+					go: (n) => globalHistory.go(n),
 				};
+				return history;
 			}
-			function createKey() {
-				return Math.random().toString(36).substr(2, 8);
+			var ResultType;
+			!(function (ResultType) {
+				(ResultType.data = 'data'), (ResultType.deferred = 'deferred'), (ResultType.redirect = 'redirect'), (ResultType.error = 'error');
+			})(ResultType || (ResultType = {}));
+			function stripBasename(pathname, basename) {
+				if ('/' === basename) return pathname;
+				if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) return null;
+				let startIndex = basename.endsWith('/') ? basename.length - 1 : basename.length,
+					nextChar = pathname.charAt(startIndex);
+				return nextChar && '/' !== nextChar ? null : pathname.slice(startIndex) || '/';
 			}
-			function createPath(_ref) {
-				var _ref$pathname = _ref.pathname,
-					pathname = void 0 === _ref$pathname ? '/' : _ref$pathname,
-					_ref$search = _ref.search,
-					search = void 0 === _ref$search ? '' : _ref$search,
-					_ref$hash = _ref.hash,
-					hash = void 0 === _ref$hash ? '' : _ref$hash;
-				return (
-					search && '?' !== search && (pathname += '?' === search.charAt(0) ? search : '?' + search),
-					hash && '#' !== hash && (pathname += '#' === hash.charAt(0) ? hash : '#' + hash),
-					pathname
-				);
+			function router_invariant(value, message) {
+				if (!1 === value || null == value) throw new Error(message);
 			}
-			function history_parsePath(path) {
-				var parsedPath = {};
-				if (path) {
-					var hashIndex = path.indexOf('#');
-					hashIndex >= 0 && ((parsedPath.hash = path.substr(hashIndex)), (path = path.substr(0, hashIndex)));
-					var searchIndex = path.indexOf('?');
-					searchIndex >= 0 && ((parsedPath.search = path.substr(searchIndex)), (path = path.substr(0, searchIndex))),
-						path && (parsedPath.pathname = path);
-				}
-				return parsedPath;
-			}
-			!(function (Action) {
-				(Action.Pop = 'POP'), (Action.Push = 'PUSH'), (Action.Replace = 'REPLACE');
-			})(history_Action || (history_Action = {}));
-			function history_createPath(_ref) {
-				var _ref$pathname = _ref.pathname,
-					pathname = void 0 === _ref$pathname ? '/' : _ref$pathname,
-					_ref$search = _ref.search,
-					search = void 0 === _ref$search ? '' : _ref$search,
-					_ref$hash = _ref.hash,
-					hash = void 0 === _ref$hash ? '' : _ref$hash;
-				return (
-					search && '?' !== search && (pathname += '?' === search.charAt(0) ? search : '?' + search),
-					hash && '#' !== hash && (pathname += '#' === hash.charAt(0) ? hash : '#' + hash),
-					pathname
-				);
-			}
-			function node_modules_history_parsePath(path) {
-				var parsedPath = {};
-				if (path) {
-					var hashIndex = path.indexOf('#');
-					hashIndex >= 0 && ((parsedPath.hash = path.substr(hashIndex)), (path = path.substr(0, hashIndex)));
-					var searchIndex = path.indexOf('?');
-					searchIndex >= 0 && ((parsedPath.search = path.substr(searchIndex)), (path = path.substr(0, searchIndex))),
-						path && (parsedPath.pathname = path);
-				}
-				return parsedPath;
-			}
-			const NavigationContext = (0, react.createContext)(null);
-			const LocationContext = (0, react.createContext)(null);
-			const RouteContext = (0, react.createContext)({ outlet: null, matches: [] });
-			function invariant(cond, message) {
-				if (!cond) throw new Error(message);
-			}
-			function resolveTo(toArg, routePathnames, locationPathname) {
+			function resolveTo(toArg, routePathnames, locationPathname, isPathRelative) {
+				void 0 === isPathRelative && (isPathRelative = !1);
 				let from,
-					to = 'string' == typeof toArg ? node_modules_history_parsePath(toArg) : toArg,
-					toPathname = '' === toArg || '' === to.pathname ? '/' : to.pathname;
-				if (null == toPathname) from = locationPathname;
+					to = 'string' == typeof toArg ? router_parsePath(toArg) : _extends({}, toArg),
+					isEmptyPath = '' === toArg || '' === to.pathname,
+					toPathname = isEmptyPath ? '/' : to.pathname;
+				if (isPathRelative || null == toPathname) from = locationPathname;
 				else {
 					let routePathnameIndex = routePathnames.length - 1;
 					if (toPathname.startsWith('..')) {
@@ -16926,121 +16950,216 @@
 					from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : '/';
 				}
 				let path = (function resolvePath(to, fromPathname) {
-					void 0 === fromPathname && (fromPathname = '/');
-					let { pathname: toPathname, search = '', hash = '' } = 'string' == typeof to ? node_modules_history_parsePath(to) : to,
-						pathname = toPathname
-							? toPathname.startsWith('/')
-								? toPathname
-								: (function resolvePathname(relativePath, fromPathname) {
-										let segments = fromPathname.replace(/\/+$/, '').split('/');
-										return (
-											relativePath.split('/').forEach((segment) => {
-												'..' === segment ? segments.length > 1 && segments.pop() : '.' !== segment && segments.push(segment);
-											}),
-											segments.length > 1 ? segments.join('/') : '/'
-										);
-								  })(toPathname, fromPathname)
-							: fromPathname;
-					return { pathname, search: normalizeSearch(search), hash: normalizeHash(hash) };
-				})(to, from);
-				return toPathname && '/' !== toPathname && toPathname.endsWith('/') && !path.pathname.endsWith('/') && (path.pathname += '/'), path;
+						void 0 === fromPathname && (fromPathname = '/');
+						let { pathname: toPathname, search = '', hash = '' } = 'string' == typeof to ? router_parsePath(to) : to,
+							pathname = toPathname
+								? toPathname.startsWith('/')
+									? toPathname
+									: (function resolvePathname(relativePath, fromPathname) {
+											let segments = fromPathname.replace(/\/+$/, '').split('/');
+											return (
+												relativePath.split('/').forEach((segment) => {
+													'..' === segment ? segments.length > 1 && segments.pop() : '.' !== segment && segments.push(segment);
+												}),
+												segments.length > 1 ? segments.join('/') : '/'
+											);
+									  })(toPathname, fromPathname)
+								: fromPathname;
+						return { pathname, search: normalizeSearch(search), hash: normalizeHash(hash) };
+					})(to, from),
+					hasExplicitTrailingSlash = toPathname && '/' !== toPathname && toPathname.endsWith('/'),
+					hasCurrentTrailingSlash = (isEmptyPath || '.' === toPathname) && locationPathname.endsWith('/');
+				return path.pathname.endsWith('/') || (!hasExplicitTrailingSlash && !hasCurrentTrailingSlash) || (path.pathname += '/'), path;
 			}
-			function stripBasename(pathname, basename) {
-				if ('/' === basename) return pathname;
-				if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) return null;
-				let nextChar = pathname.charAt(basename.length);
-				return nextChar && '/' !== nextChar ? null : pathname.slice(basename.length) || '/';
-			}
-			const joinPaths = (paths) => paths.join('/').replace(/\/\/+/g, '/'),
-				normalizePathname = (pathname) => pathname.replace(/\/+$/, '').replace(/^\/*/, '/'),
+			const router_joinPaths = (paths) => paths.join('/').replace(/\/\/+/g, '/'),
 				normalizeSearch = (search) => (search && '?' !== search ? (search.startsWith('?') ? search : '?' + search) : ''),
 				normalizeHash = (hash) => (hash && '#' !== hash ? (hash.startsWith('#') ? hash : '#' + hash) : '');
-			function useHref(to) {
-				useInRouterContext() || invariant(!1);
-				let { basename, navigator } = (0, react.useContext)(NavigationContext),
-					{ hash, pathname, search } = react_router_useResolvedPath(to),
-					joinedPathname = pathname;
-				if ('/' !== basename) {
-					let toPathname = (function getToPathname(to) {
-							return '' === to || '' === to.pathname ? '/' : 'string' == typeof to ? node_modules_history_parsePath(to).pathname : to.pathname;
-						})(to),
-						endsWithSlash = null != toPathname && toPathname.endsWith('/');
-					joinedPathname = '/' === pathname ? basename + (endsWithSlash ? '/' : '') : joinPaths([basename, pathname]);
+			class router_AbortedDeferredError extends Error {}
+			const is =
+					'function' == typeof Object.is
+						? Object.is
+						: function isPolyfill(x, y) {
+								return (x === y && (0 !== x || 1 / x == 1 / y)) || (x != x && y != y);
+						  },
+				{ useState, useEffect, useLayoutEffect, useDebugValue } = react_namespaceObject;
+			function checkIfSnapshotChanged(inst) {
+				const latestGetSnapshot = inst.getSnapshot,
+					prevValue = inst.value;
+				try {
+					const nextValue = latestGetSnapshot();
+					return !is(prevValue, nextValue);
+				} catch (error) {
+					return !0;
 				}
-				return navigator.createHref({ pathname: joinedPathname, search, hash });
 			}
+			'undefined' == typeof window || void 0 === window.document || window.document.createElement;
+			const NavigationContext = react.createContext(null);
+			const LocationContext = react.createContext(null);
+			const RouteContext = react.createContext({ outlet: null, matches: [] });
 			function useInRouterContext() {
-				return null != (0, react.useContext)(LocationContext);
+				return null != react.useContext(LocationContext);
 			}
-			function react_router_useLocation() {
-				return useInRouterContext() || invariant(!1), (0, react.useContext)(LocationContext).location;
+			function dist_useLocation() {
+				return useInRouterContext() || router_invariant(!1), react.useContext(LocationContext).location;
 			}
-			function react_router_useNavigate() {
-				useInRouterContext() || invariant(!1);
-				let { basename, navigator } = (0, react.useContext)(NavigationContext),
-					{ matches } = (0, react.useContext)(RouteContext),
-					{ pathname: locationPathname } = react_router_useLocation(),
-					routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase)),
-					activeRef = (0, react.useRef)(!1);
-				(0, react.useEffect)(() => {
+			function getPathContributingMatches(matches) {
+				return matches.filter((match, index) => 0 === index || (!match.route.index && match.pathnameBase !== matches[index - 1].pathnameBase));
+			}
+			function dist_useNavigate() {
+				useInRouterContext() || router_invariant(!1);
+				let { basename, navigator } = react.useContext(NavigationContext),
+					{ matches } = react.useContext(RouteContext),
+					{ pathname: locationPathname } = dist_useLocation(),
+					routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase)),
+					activeRef = react.useRef(!1);
+				react.useEffect(() => {
 					activeRef.current = !0;
 				});
-				let navigate = (0, react.useCallback)(
+				let navigate = react.useCallback(
 					function (to, options) {
 						if ((void 0 === options && (options = {}), !activeRef.current)) return;
 						if ('number' == typeof to) return void navigator.go(to);
-						let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
-						'/' !== basename && (path.pathname = joinPaths([basename, path.pathname])),
-							(options.replace ? navigator.replace : navigator.push)(path, options.state);
+						let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, 'path' === options.relative);
+						'/' !== basename && (path.pathname = '/' === path.pathname ? basename : router_joinPaths([basename, path.pathname])),
+							(options.replace ? navigator.replace : navigator.push)(path, options.state, options);
 					},
 					[basename, navigator, routePathnamesJson, locationPathname]
 				);
 				return navigate;
 			}
-			function react_router_useResolvedPath(to) {
-				let { matches } = (0, react.useContext)(RouteContext),
-					{ pathname: locationPathname } = react_router_useLocation(),
-					routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
-				return (0, react.useMemo)(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+			function dist_useResolvedPath(to, _temp2) {
+				let { relative } = void 0 === _temp2 ? {} : _temp2,
+					{ matches } = react.useContext(RouteContext),
+					{ pathname: locationPathname } = dist_useLocation(),
+					routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase));
+				return react.useMemo(
+					() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, 'path' === relative),
+					[to, routePathnamesJson, locationPathname, relative]
+				);
 			}
-			function react_router_Router(_ref3) {
+			class RenderErrorBoundary extends react.Component {
+				constructor(props) {
+					super(props), (this.state = { location: props.location, error: props.error });
+				}
+				static getDerivedStateFromError(error) {
+					return { error };
+				}
+				static getDerivedStateFromProps(props, state) {
+					return state.location !== props.location
+						? { error: props.error, location: props.location }
+						: { error: props.error || state.error, location: state.location };
+				}
+				componentDidCatch(error, errorInfo) {
+					console.error('React Router caught the following error during render', error, errorInfo);
+				}
+				render() {
+					return this.state.error
+						? React.createElement(null.Provider, { value: this.state.error, children: this.props.component })
+						: this.props.children;
+				}
+			}
+			var DataRouterHook;
+			!(function (DataRouterHook) {
+				(DataRouterHook.UseLoaderData = 'useLoaderData'),
+					(DataRouterHook.UseActionData = 'useActionData'),
+					(DataRouterHook.UseRouteError = 'useRouteError'),
+					(DataRouterHook.UseNavigation = 'useNavigation'),
+					(DataRouterHook.UseRouteLoaderData = 'useRouteLoaderData'),
+					(DataRouterHook.UseMatches = 'useMatches'),
+					(DataRouterHook.UseRevalidator = 'useRevalidator');
+			})(DataRouterHook || (DataRouterHook = {}));
+			function dist_Router(_ref4) {
 				let {
 					basename: basenameProp = '/',
 					children = null,
 					location: locationProp,
-					navigationType = history_Action.Pop,
+					navigationType = router_Action.Pop,
 					navigator,
 					static: staticProp = !1,
-				} = _ref3;
-				useInRouterContext() && invariant(!1);
-				let basename = normalizePathname(basenameProp),
-					navigationContext = (0, react.useMemo)(() => ({ basename, navigator, static: staticProp }), [basename, navigator, staticProp]);
-				'string' == typeof locationProp && (locationProp = node_modules_history_parsePath(locationProp));
+				} = _ref4;
+				useInRouterContext() && router_invariant(!1);
+				let basename = basenameProp.replace(/^\/*/, '/'),
+					navigationContext = react.useMemo(() => ({ basename, navigator, static: staticProp }), [basename, navigator, staticProp]);
+				'string' == typeof locationProp && (locationProp = router_parsePath(locationProp));
 				let { pathname = '/', search = '', hash = '', state = null, key = 'default' } = locationProp,
-					location = (0, react.useMemo)(() => {
+					location = react.useMemo(() => {
 						let trailingPathname = stripBasename(pathname, basename);
 						return null == trailingPathname ? null : { pathname: trailingPathname, search, hash, state, key };
 					}, [basename, pathname, search, hash, state, key]);
 				return null == location
 					? null
-					: (0, react.createElement)(
+					: react.createElement(
 							NavigationContext.Provider,
 							{ value: navigationContext },
-							(0, react.createElement)(LocationContext.Provider, { children, value: { location, navigationType } })
+							react.createElement(LocationContext.Provider, { children, value: { location, navigationType } })
 					  );
 			}
-			function react_router_dom_extends() {
+			var AwaitRenderStatus;
+			!(function (AwaitRenderStatus) {
+				(AwaitRenderStatus[(AwaitRenderStatus.pending = 0)] = 'pending'),
+					(AwaitRenderStatus[(AwaitRenderStatus.success = 1)] = 'success'),
+					(AwaitRenderStatus[(AwaitRenderStatus.error = 2)] = 'error');
+			})(AwaitRenderStatus || (AwaitRenderStatus = {}));
+			new Promise(() => {});
+			class AwaitErrorBoundary extends react.Component {
+				constructor(props) {
+					super(props), (this.state = { error: null });
+				}
+				static getDerivedStateFromError(error) {
+					return { error };
+				}
+				componentDidCatch(error, errorInfo) {
+					console.error('<Await> caught the following error during render', error, errorInfo);
+				}
+				render() {
+					let { children, errorElement, resolve } = this.props,
+						promise = null,
+						status = AwaitRenderStatus.pending;
+					if (resolve instanceof Promise)
+						if (this.state.error) {
+							AwaitRenderStatus.error;
+							let renderError = this.state.error;
+							Promise.reject().catch(() => {}),
+								Object.defineProperty(promise, '_tracked', { get: () => !0 }),
+								Object.defineProperty(promise, '_error', { get: () => renderError });
+						} else
+							resolve._tracked
+								? (resolve,
+								  void 0 !== promise._error
+										? AwaitRenderStatus.error
+										: void 0 !== promise._data
+										? AwaitRenderStatus.success
+										: AwaitRenderStatus.pending)
+								: (AwaitRenderStatus.pending,
+								  Object.defineProperty(resolve, '_tracked', { get: () => !0 }),
+								  resolve.then(
+										(data) => Object.defineProperty(resolve, '_data', { get: () => data }),
+										(error) => Object.defineProperty(resolve, '_error', { get: () => error })
+								  ));
+					else
+						AwaitRenderStatus.success,
+							Promise.resolve(),
+							Object.defineProperty(promise, '_tracked', { get: () => !0 }),
+							Object.defineProperty(promise, '_data', { get: () => resolve });
+					if (status === AwaitRenderStatus.error && promise._error instanceof AbortedDeferredError) throw neverSettledPromise;
+					if (status === AwaitRenderStatus.error && !errorElement) throw promise._error;
+					if (status === AwaitRenderStatus.error) return React.createElement(null.Provider, { value: promise, children: errorElement });
+					if (status === AwaitRenderStatus.success) return React.createElement(null.Provider, { value: promise, children });
+					throw promise;
+				}
+			}
+			function react_router_dom_dist_extends() {
 				return (
-					(react_router_dom_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					react_router_dom_extends.apply(this, arguments)
+					(react_router_dom_dist_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					react_router_dom_dist_extends.apply(this, arguments)
 				);
 			}
 			function _objectWithoutPropertiesLoose(source, excluded) {
@@ -17052,194 +17171,89 @@
 				for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
 				return target;
 			}
-			const _excluded = ['onClick', 'reloadDocument', 'replace', 'state', 'target', 'to'];
+			const _excluded = ['onClick', 'relative', 'reloadDocument', 'replace', 'state', 'target', 'to', 'preventScrollReset'];
 			function BrowserRouter(_ref) {
 				let { basename, children, window } = _ref,
-					historyRef = (0, react.useRef)();
+					historyRef = react.useRef();
 				null == historyRef.current &&
-					(historyRef.current = (function createBrowserHistory(options) {
-						void 0 === options && (options = {});
-						var _options$window = options.window,
-							window = void 0 === _options$window ? document.defaultView : _options$window,
-							globalHistory = window.history;
-						function getIndexAndLocation() {
-							var _window$location = window.location,
-								pathname = _window$location.pathname,
-								search = _window$location.search,
-								hash = _window$location.hash,
-								state = globalHistory.state || {};
-							return [state.idx, readOnly({ pathname, search, hash, state: state.usr || null, key: state.key || 'default' })];
-						}
-						var blockedPopTx = null;
-						window.addEventListener('popstate', function handlePop() {
-							if (blockedPopTx) blockers.call(blockedPopTx), (blockedPopTx = null);
-							else {
-								var nextAction = Action.Pop,
-									_getIndexAndLocation = getIndexAndLocation(),
-									nextIndex = _getIndexAndLocation[0],
-									nextLocation = _getIndexAndLocation[1];
-								if (blockers.length) {
-									if (null != nextIndex) {
-										var delta = index - nextIndex;
-										delta &&
-											((blockedPopTx = {
-												action: nextAction,
-												location: nextLocation,
-												retry: function retry() {
-													go(-1 * delta);
-												},
-											}),
-											go(delta));
-									}
-								} else applyTx(nextAction);
-							}
-						});
-						var action = Action.Pop,
-							_getIndexAndLocation2 = getIndexAndLocation(),
-							index = _getIndexAndLocation2[0],
-							location = _getIndexAndLocation2[1],
-							listeners = createEvents(),
-							blockers = createEvents();
-						function createHref(to) {
-							return 'string' == typeof to ? to : createPath(to);
-						}
-						function getNextLocation(to, state) {
-							return (
-								void 0 === state && (state = null),
-								readOnly(
-									(0, esm_extends.Z)({ pathname: location.pathname, hash: '', search: '' }, 'string' == typeof to ? history_parsePath(to) : to, {
-										state,
-										key: createKey(),
-									})
-								)
-							);
-						}
-						function getHistoryStateAndUrl(nextLocation, index) {
-							return [{ usr: nextLocation.state, key: nextLocation.key, idx: index }, createHref(nextLocation)];
-						}
-						function allowTx(action, location, retry) {
-							return !blockers.length || (blockers.call({ action, location, retry }), !1);
-						}
-						function applyTx(nextAction) {
-							action = nextAction;
-							var _getIndexAndLocation3 = getIndexAndLocation();
-							(index = _getIndexAndLocation3[0]), (location = _getIndexAndLocation3[1]), listeners.call({ action, location });
-						}
-						function go(delta) {
-							globalHistory.go(delta);
-						}
-						null == index && ((index = 0), globalHistory.replaceState((0, esm_extends.Z)({}, globalHistory.state, { idx: index }), ''));
-						var history = {
-							get action() {
-								return action;
-							},
-							get location() {
-								return location;
-							},
-							createHref,
-							push: function push(to, state) {
-								var nextAction = Action.Push,
-									nextLocation = getNextLocation(to, state);
-								if (
-									allowTx(nextAction, nextLocation, function retry() {
-										push(to, state);
-									})
-								) {
-									var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1),
-										historyState = _getHistoryStateAndUr[0],
-										url = _getHistoryStateAndUr[1];
-									try {
-										globalHistory.pushState(historyState, '', url);
-									} catch (error) {
-										window.location.assign(url);
-									}
-									applyTx(nextAction);
-								}
-							},
-							replace: function replace(to, state) {
-								var nextAction = Action.Replace,
-									nextLocation = getNextLocation(to, state);
-								if (
-									allowTx(nextAction, nextLocation, function retry() {
-										replace(to, state);
-									})
-								) {
-									var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index),
-										historyState = _getHistoryStateAndUr2[0],
-										url = _getHistoryStateAndUr2[1];
-									globalHistory.replaceState(historyState, '', url), applyTx(nextAction);
-								}
-							},
-							go,
-							back: function back() {
-								go(-1);
-							},
-							forward: function forward() {
-								go(1);
-							},
-							listen: function listen(listener) {
-								return listeners.push(listener);
-							},
-							block: function block(blocker) {
-								var unblock = blockers.push(blocker);
-								return (
-									1 === blockers.length && window.addEventListener('beforeunload', promptBeforeUnload),
-									function () {
-										unblock(), blockers.length || window.removeEventListener('beforeunload', promptBeforeUnload);
-									}
-								);
-							},
-						};
-						return history;
-					})({ window }));
+					(historyRef.current = (function router_createBrowserHistory(options) {
+						return (
+							void 0 === options && (options = {}),
+							getUrlBasedHistory(
+								function createBrowserLocation(window, globalHistory) {
+									var _globalHistory$state, _globalHistory$state2;
+									let { pathname, search, hash } = window.location;
+									return createLocation(
+										'',
+										{ pathname, search, hash },
+										(null == (_globalHistory$state = globalHistory.state) ? void 0 : _globalHistory$state.usr) || null,
+										(null == (_globalHistory$state2 = globalHistory.state) ? void 0 : _globalHistory$state2.key) || 'default'
+									);
+								},
+								function createBrowserHref(window, to) {
+									return 'string' == typeof to ? to : router_createPath(to);
+								},
+								null,
+								options
+							)
+						);
+					})({ window, v5Compat: !0 }));
 				let history = historyRef.current,
-					[state, setState] = (0, react.useState)({ action: history.action, location: history.location });
+					[state, setState] = react.useState({ action: history.action, location: history.location });
 				return (
-					(0, react.useLayoutEffect)(() => history.listen(setState), [history]),
-					(0, react.createElement)(react_router_Router, {
-						basename,
-						children,
-						location: state.location,
-						navigationType: state.action,
-						navigator: history,
-					})
+					react.useLayoutEffect(() => history.listen(setState), [history]),
+					react.createElement(dist_Router, { basename, children, location: state.location, navigationType: state.action, navigator: history })
 				);
 			}
-			const Link = (0, react.forwardRef)(function LinkWithRef(_ref4, ref) {
-				let { onClick, reloadDocument, replace = !1, state, target, to } = _ref4,
+			const Link = react.forwardRef(function LinkWithRef(_ref4, ref) {
+				let { onClick, relative, reloadDocument, replace, state, target, to, preventScrollReset } = _ref4,
 					rest = _objectWithoutPropertiesLoose(_ref4, _excluded),
-					href = useHref(to),
+					href = (function useHref(to, _temp) {
+						let { relative } = void 0 === _temp ? {} : _temp;
+						useInRouterContext() || router_invariant(!1);
+						let { basename, navigator } = react.useContext(NavigationContext),
+							{ hash, pathname, search } = dist_useResolvedPath(to, { relative }),
+							joinedPathname = pathname;
+						return (
+							'/' !== basename && (joinedPathname = '/' === pathname ? basename : router_joinPaths([basename, pathname])),
+							navigator.createHref({ pathname: joinedPathname, search, hash })
+						);
+					})(to, { relative }),
 					internalOnClick = (function useLinkClickHandler(to, _temp) {
-						let { target, replace: replaceProp, state } = void 0 === _temp ? {} : _temp,
-							navigate = react_router_useNavigate(),
-							location = react_router_useLocation(),
-							path = react_router_useResolvedPath(to);
-						return (0, react.useCallback)(
+						let { target, replace: replaceProp, state, preventScrollReset, relative } = void 0 === _temp ? {} : _temp,
+							navigate = dist_useNavigate(),
+							location = dist_useLocation(),
+							path = dist_useResolvedPath(to, { relative });
+						return react.useCallback(
 							(event) => {
 								if (
-									!(
-										0 !== event.button ||
-										(target && '_self' !== target) ||
-										(function isModifiedEvent(event) {
-											return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-										})(event)
-									)
+									(function shouldProcessLinkClick(event, target) {
+										return !(
+											0 !== event.button ||
+											(target && '_self' !== target) ||
+											(function isModifiedEvent(event) {
+												return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+											})(event)
+										);
+									})(event, target)
 								) {
 									event.preventDefault();
-									let replace = !!replaceProp || history_createPath(location) === history_createPath(path);
-									navigate(to, { replace, state });
+									let replace = void 0 !== replaceProp ? replaceProp : router_createPath(location) === router_createPath(path);
+									navigate(to, { replace, state, preventScrollReset, relative });
 								}
 							},
-							[location, navigate, path, replaceProp, state, target, to]
+							[location, navigate, path, replaceProp, state, target, to, preventScrollReset, relative]
 						);
-					})(to, { replace, state, target });
-				return (0, react.createElement)(
+					})(to, { replace, state, target, preventScrollReset, relative });
+				return react.createElement(
 					'a',
-					react_router_dom_extends({}, rest, {
+					react_router_dom_dist_extends({}, rest, {
 						href,
-						onClick: function handleClick(event) {
-							onClick && onClick(event), event.defaultPrevented || reloadDocument || internalOnClick(event);
-						},
+						onClick: reloadDocument
+							? onClick
+							: function handleClick(event) {
+									onClick && onClick(event), event.defaultPrevented || internalOnClick(event);
+							  },
 						ref,
 						target,
 					})
@@ -17306,7 +17320,7 @@
 			(QueryLink.displayName = 'QueryLink'), (QueryLink.displayName = 'QueryLink');
 			var QueryLocation = function QueryLocation(_ref2) {
 				var children = _ref2.children,
-					location = react_router_useLocation(),
+					location = dist_useLocation(),
 					_queryFromString = (0, utils.Ff)(location.search),
 					path = _queryFromString.path,
 					singleStory = _queryFromString.singleStory,
@@ -19561,7 +19575,7 @@
 						result
 					);
 				},
-				polished_esm = __webpack_require__(11682),
+				polished_esm = __webpack_require__(54246),
 				link_link = (__webpack_require__(88233), __webpack_require__(48319), __webpack_require__(85940), __webpack_require__(13609)),
 				LOADER_SEQUENCE = (__webpack_require__(92656), [0, 0, 1, 1, 2, 3, 3, 3, 1, 1, 1, 2, 2, 2, 3]),
 				Loadingitem = theming_dist_esm.styled.div(
@@ -21614,144 +21628,141 @@
 			}
 			HighlightStyles.displayName = 'HighlightStyles';
 			var Explorer = react.memo(function (_ref) {
-					var isLoading = _ref.isLoading,
-						isBrowsing = _ref.isBrowsing,
-						dataset = _ref.dataset,
-						selected = _ref.selected,
-						containerRef = (0, react.useRef)(null),
-						_useHighlighted = (function useHighlighted(_ref) {
-							var containerRef = _ref.containerRef,
-								isLoading = _ref.isLoading,
-								isBrowsing = _ref.isBrowsing,
-								dataset = _ref.dataset,
-								selected = _ref.selected,
-								initialHighlight = fromSelection(selected),
-								highlightedRef = (0, react.useRef)(initialHighlight),
-								_useState2 = useHighlighted_slicedToArray((0, react.useState)(initialHighlight), 2),
-								highlighted = _useState2[0],
-								setHighlighted = _useState2[1],
-								updateHighlighted = (0, react.useCallback)(
-									function (highlight) {
-										(highlightedRef.current = highlight), setHighlighted(highlight);
-									},
-									[highlightedRef]
-								),
-								highlightElement = (0, react.useCallback)(
-									function (element) {
-										var center = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-											itemId = element.getAttribute('data-item-id'),
-											refId = element.getAttribute('data-ref-id');
-										itemId && refId && (updateHighlighted({ itemId, refId }), scrollIntoView(element, center));
-									},
-									[updateHighlighted]
-								);
-							return (
-								(0, react.useEffect)(
-									function () {
-										var highlight = fromSelection(selected);
-										if ((updateHighlighted(highlight), highlight)) {
-											var itemId = highlight.itemId,
-												refId = highlight.refId;
-											setTimeout(function () {
-												var _containerRef$current;
-												scrollIntoView(
-													null === (_containerRef$current = containerRef.current) || void 0 === _containerRef$current
-														? void 0
-														: _containerRef$current.querySelector('[data-item-id="'.concat(itemId, '"][data-ref-id="').concat(refId, '"]')),
-													!0
-												);
-											}, 0);
-										}
-									},
-									[dataset, highlightedRef, containerRef, selected]
-								),
-								(0, react.useEffect)(
-									function () {
-										var lastRequestId,
-											menuElement = useHighlighted_document.getElementById('storybook-explorer-menu'),
-											navigateTree = function navigateTree(event) {
-												if (!isLoading && isBrowsing && containerRef.current && matchesModifiers(!1, event)) {
-													var isArrowUp = matchesKeyCode('ArrowUp', event),
-														isArrowDown = matchesKeyCode('ArrowDown', event);
-													if (isArrowUp || isArrowDown) {
-														event.preventDefault();
-														var requestId = useHighlighted_globalWindow.requestAnimationFrame(function () {
-															useHighlighted_globalWindow.cancelAnimationFrame(lastRequestId), (lastRequestId = requestId);
-															var target = event.target;
-															if (isAncestor(menuElement, target) || isAncestor(target, menuElement)) {
-																target.hasAttribute('data-action') && target.blur();
-																var highlightable = Array.from(containerRef.current.querySelectorAll('[data-highlightable=true]')),
-																	currentIndex = highlightable.findIndex(function (el) {
-																		var _highlightedRef$curre, _highlightedRef$curre2;
-																		return (
-																			el.getAttribute('data-item-id') ===
-																				(null === (_highlightedRef$curre = highlightedRef.current) || void 0 === _highlightedRef$curre
-																					? void 0
-																					: _highlightedRef$curre.itemId) &&
-																			el.getAttribute('data-ref-id') ===
-																				(null === (_highlightedRef$curre2 = highlightedRef.current) || void 0 === _highlightedRef$curre2
-																					? void 0
-																					: _highlightedRef$curre2.refId)
-																		);
-																	}),
-																	nextIndex = (function cycle(array, index, delta) {
-																		var next = index + (delta % array.length);
-																		return next < 0 && (next = array.length + next), next >= array.length && (next -= array.length), next;
-																	})(highlightable, currentIndex, isArrowUp ? -1 : 1),
-																	didRunAround = isArrowUp ? nextIndex === highlightable.length - 1 : 0 === nextIndex;
-																highlightElement(highlightable[nextIndex], didRunAround);
-															}
-														});
-													}
+				var isLoading = _ref.isLoading,
+					isBrowsing = _ref.isBrowsing,
+					dataset = _ref.dataset,
+					selected = _ref.selected,
+					containerRef = (0, react.useRef)(null),
+					_useHighlighted = (function useHighlighted(_ref) {
+						var containerRef = _ref.containerRef,
+							isLoading = _ref.isLoading,
+							isBrowsing = _ref.isBrowsing,
+							dataset = _ref.dataset,
+							selected = _ref.selected,
+							initialHighlight = fromSelection(selected),
+							highlightedRef = (0, react.useRef)(initialHighlight),
+							_useState2 = useHighlighted_slicedToArray((0, react.useState)(initialHighlight), 2),
+							highlighted = _useState2[0],
+							setHighlighted = _useState2[1],
+							updateHighlighted = (0, react.useCallback)(
+								function (highlight) {
+									(highlightedRef.current = highlight), setHighlighted(highlight);
+								},
+								[highlightedRef]
+							),
+							highlightElement = (0, react.useCallback)(
+								function (element) {
+									var center = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
+										itemId = element.getAttribute('data-item-id'),
+										refId = element.getAttribute('data-ref-id');
+									itemId && refId && (updateHighlighted({ itemId, refId }), scrollIntoView(element, center));
+								},
+								[updateHighlighted]
+							);
+						return (
+							(0, react.useEffect)(
+								function () {
+									var highlight = fromSelection(selected);
+									if ((updateHighlighted(highlight), highlight)) {
+										var itemId = highlight.itemId,
+											refId = highlight.refId;
+										setTimeout(function () {
+											var _containerRef$current;
+											scrollIntoView(
+												null === (_containerRef$current = containerRef.current) || void 0 === _containerRef$current
+													? void 0
+													: _containerRef$current.querySelector('[data-item-id="'.concat(itemId, '"][data-ref-id="').concat(refId, '"]')),
+												!0
+											);
+										}, 0);
+									}
+								},
+								[dataset, highlightedRef, containerRef, selected]
+							),
+							(0, react.useEffect)(
+								function () {
+									var lastRequestId,
+										menuElement = useHighlighted_document.getElementById('storybook-explorer-menu'),
+										navigateTree = function navigateTree(event) {
+											if (!isLoading && isBrowsing && containerRef.current && matchesModifiers(!1, event)) {
+												var isArrowUp = matchesKeyCode('ArrowUp', event),
+													isArrowDown = matchesKeyCode('ArrowDown', event);
+												if (isArrowUp || isArrowDown) {
+													event.preventDefault();
+													var requestId = useHighlighted_globalWindow.requestAnimationFrame(function () {
+														useHighlighted_globalWindow.cancelAnimationFrame(lastRequestId), (lastRequestId = requestId);
+														var target = event.target;
+														if (isAncestor(menuElement, target) || isAncestor(target, menuElement)) {
+															target.hasAttribute('data-action') && target.blur();
+															var highlightable = Array.from(containerRef.current.querySelectorAll('[data-highlightable=true]')),
+																currentIndex = highlightable.findIndex(function (el) {
+																	var _highlightedRef$curre, _highlightedRef$curre2;
+																	return (
+																		el.getAttribute('data-item-id') ===
+																			(null === (_highlightedRef$curre = highlightedRef.current) || void 0 === _highlightedRef$curre
+																				? void 0
+																				: _highlightedRef$curre.itemId) &&
+																		el.getAttribute('data-ref-id') ===
+																			(null === (_highlightedRef$curre2 = highlightedRef.current) || void 0 === _highlightedRef$curre2
+																				? void 0
+																				: _highlightedRef$curre2.refId)
+																	);
+																}),
+																nextIndex = (function cycle(array, index, delta) {
+																	var next = index + (delta % array.length);
+																	return next < 0 && (next = array.length + next), next >= array.length && (next -= array.length), next;
+																})(highlightable, currentIndex, isArrowUp ? -1 : 1),
+																didRunAround = isArrowUp ? nextIndex === highlightable.length - 1 : 0 === nextIndex;
+															highlightElement(highlightable[nextIndex], didRunAround);
+														}
+													});
 												}
-											};
-										return (
-											useHighlighted_document.addEventListener('keydown', navigateTree),
-											function () {
-												return useHighlighted_document.removeEventListener('keydown', navigateTree);
 											}
-										);
-									},
-									[isLoading, isBrowsing, highlightedRef, highlightElement]
-								),
-								[highlighted, updateHighlighted, highlightedRef]
-							);
-						})({ containerRef, isLoading, isBrowsing, dataset, selected }),
-						_useHighlighted2 = Explorer_slicedToArray(_useHighlighted, 3),
-						highlighted = _useHighlighted2[0],
-						setHighlighted = _useHighlighted2[1],
-						highlightedRef = _useHighlighted2[2];
-					return react.createElement(
-						'div',
-						{
-							ref: containerRef,
-							id: 'storybook-explorer-tree',
-							'data-highlighted-ref-id': null == highlighted ? void 0 : highlighted.refId,
-							'data-highlighted-item-id': null == highlighted ? void 0 : highlighted.itemId,
-						},
-						highlighted && react.createElement(HighlightStyles, highlighted),
-						dataset.entries.map(function (_ref2) {
-							var _ref3 = Explorer_slicedToArray(_ref2, 2),
-								refId = _ref3[0],
-								ref = _ref3[1];
-							return react.createElement(
-								Ref,
-								Explorer_extends({}, ref, {
-									key: refId,
-									isLoading,
-									isBrowsing,
-									selectedStoryId: (null == selected ? void 0 : selected.refId) === ref.id ? selected.storyId : null,
-									highlightedRef,
-									setHighlighted,
-								})
-							);
-						})
-					);
-				}),
-				objectWithoutPropertiesLoose = (__webpack_require__(93244), __webpack_require__(45794), __webpack_require__(31461)),
-				assertThisInitialized = __webpack_require__(80753),
-				inheritsLoose = __webpack_require__(81665);
-			__webpack_require__(48570);
+										};
+									return (
+										useHighlighted_document.addEventListener('keydown', navigateTree),
+										function () {
+											return useHighlighted_document.removeEventListener('keydown', navigateTree);
+										}
+									);
+								},
+								[isLoading, isBrowsing, highlightedRef, highlightElement]
+							),
+							[highlighted, updateHighlighted, highlightedRef]
+						);
+					})({ containerRef, isLoading, isBrowsing, dataset, selected }),
+					_useHighlighted2 = Explorer_slicedToArray(_useHighlighted, 3),
+					highlighted = _useHighlighted2[0],
+					setHighlighted = _useHighlighted2[1],
+					highlightedRef = _useHighlighted2[2];
+				return react.createElement(
+					'div',
+					{
+						ref: containerRef,
+						id: 'storybook-explorer-tree',
+						'data-highlighted-ref-id': null == highlighted ? void 0 : highlighted.refId,
+						'data-highlighted-item-id': null == highlighted ? void 0 : highlighted.itemId,
+					},
+					highlighted && react.createElement(HighlightStyles, highlighted),
+					dataset.entries.map(function (_ref2) {
+						var _ref3 = Explorer_slicedToArray(_ref2, 2),
+							refId = _ref3[0],
+							ref = _ref3[1];
+						return react.createElement(
+							Ref,
+							Explorer_extends({}, ref, {
+								key: refId,
+								isLoading,
+								isBrowsing,
+								selectedStoryId: (null == selected ? void 0 : selected.refId) === ref.id ? selected.storyId : null,
+								highlightedRef,
+								setHighlighted,
+							})
+						);
+					})
+				);
+			});
+			__webpack_require__(93244), __webpack_require__(45794), __webpack_require__(48570);
 			function t(t) {
 				return 'object' == typeof t && null != t && 1 === t.nodeType;
 			}
@@ -21802,123 +21813,120 @@
 			};
 			Object.create;
 			Object.create;
-			var idCounter = 0;
+			let idCounter = 0;
 			function cbToCb(cb) {
 				return 'function' == typeof cb ? cb : downshift_esm_noop;
 			}
 			function downshift_esm_noop() {}
 			function downshift_esm_scrollIntoView(node, menuNode) {
-				if (node) {
-					var actions = (function index_module(e, i) {
-						var o = window,
-							l = i.scrollMode,
-							d = i.block,
-							u = i.inline,
-							h = i.boundary,
-							a = i.skipOverflowHiddenElements,
-							c =
-								'function' == typeof h
-									? h
-									: function (t) {
-											return t !== h;
-									  };
-						if (!t(e)) throw new TypeError('Invalid target');
-						for (var f = document.scrollingElement || document.documentElement, s = [], p = e; t(p) && c(p); ) {
-							if ((p = p.parentElement) === f) {
-								s.push(p);
-								break;
-							}
-							(null != p && p === document.body && n(p) && !n(document.documentElement)) || (null != p && n(p, a) && s.push(p));
+				if (!node) return;
+				const actions = (function index_module(e, i) {
+					var o = window,
+						l = i.scrollMode,
+						d = i.block,
+						u = i.inline,
+						h = i.boundary,
+						a = i.skipOverflowHiddenElements,
+						c =
+							'function' == typeof h
+								? h
+								: function (t) {
+										return t !== h;
+								  };
+					if (!t(e)) throw new TypeError('Invalid target');
+					for (var f = document.scrollingElement || document.documentElement, s = [], p = e; t(p) && c(p); ) {
+						if ((p = p.parentElement) === f) {
+							s.push(p);
+							break;
 						}
-						for (
-							var m = o.visualViewport ? o.visualViewport.width : innerWidth,
-								g = o.visualViewport ? o.visualViewport.height : innerHeight,
-								w = window.scrollX || pageXOffset,
-								v = window.scrollY || pageYOffset,
-								W = e.getBoundingClientRect(),
-								b = W.height,
-								H = W.width,
-								y = W.top,
-								E = W.right,
-								M = W.bottom,
-								V = W.left,
-								x = 'start' === d || 'nearest' === d ? y : 'end' === d ? M : y + b / 2,
-								I = 'center' === u ? V + H / 2 : 'end' === u ? E : V,
-								C = [],
-								T = 0;
-							T < s.length;
-							T++
-						) {
-							var k = s[T],
-								B = k.getBoundingClientRect(),
-								D = B.height,
-								O = B.width,
-								R = B.top,
-								X = B.right,
-								Y = B.bottom,
-								L = B.left;
-							if ('if-needed' === l && y >= 0 && V >= 0 && M <= g && E <= m && y >= R && M <= Y && V >= L && E <= X) return C;
-							var S = getComputedStyle(k),
-								j = parseInt(S.borderLeftWidth, 10),
-								q = parseInt(S.borderTopWidth, 10),
-								z = parseInt(S.borderRightWidth, 10),
-								A = parseInt(S.borderBottomWidth, 10),
-								F = 0,
-								G = 0,
-								J = 'offsetWidth' in k ? k.offsetWidth - k.clientWidth - j - z : 0,
-								K = 'offsetHeight' in k ? k.offsetHeight - k.clientHeight - q - A : 0;
-							if (f === k)
-								(F = 'start' === d ? x : 'end' === d ? x - g : 'nearest' === d ? r(v, v + g, g, q, A, v + x, v + x + b, b) : x - g / 2),
-									(G = 'start' === u ? I : 'center' === u ? I - m / 2 : 'end' === u ? I - m : r(w, w + m, m, j, z, w + I, w + I + H, H)),
-									(F = Math.max(0, F + v)),
-									(G = Math.max(0, G + w));
-							else {
-								(F =
-									'start' === d
-										? x - R - q
-										: 'end' === d
-										? x - Y + A + K
-										: 'nearest' === d
-										? r(R, Y, D, q, A + K, x, x + b, b)
-										: x - (R + D / 2) + K / 2),
-									(G =
-										'start' === u
-											? I - L - j
-											: 'center' === u
-											? I - (L + O / 2) + J / 2
-											: 'end' === u
-											? I - X + z + J
-											: r(L, X, O, j, z + J, I, I + H, H));
-								var N = k.scrollLeft,
-									P = k.scrollTop;
-								(x += P - (F = Math.max(0, Math.min(P + F, k.scrollHeight - D + K)))),
-									(I += N - (G = Math.max(0, Math.min(N + G, k.scrollWidth - O + J))));
-							}
-							C.push({ el: k, top: F, left: G });
+						(null != p && p === document.body && n(p) && !n(document.documentElement)) || (null != p && n(p, a) && s.push(p));
+					}
+					for (
+						var m = o.visualViewport ? o.visualViewport.width : innerWidth,
+							g = o.visualViewport ? o.visualViewport.height : innerHeight,
+							w = window.scrollX || pageXOffset,
+							v = window.scrollY || pageYOffset,
+							W = e.getBoundingClientRect(),
+							b = W.height,
+							H = W.width,
+							y = W.top,
+							E = W.right,
+							M = W.bottom,
+							V = W.left,
+							x = 'start' === d || 'nearest' === d ? y : 'end' === d ? M : y + b / 2,
+							I = 'center' === u ? V + H / 2 : 'end' === u ? E : V,
+							C = [],
+							T = 0;
+						T < s.length;
+						T++
+					) {
+						var k = s[T],
+							B = k.getBoundingClientRect(),
+							D = B.height,
+							O = B.width,
+							R = B.top,
+							X = B.right,
+							Y = B.bottom,
+							L = B.left;
+						if ('if-needed' === l && y >= 0 && V >= 0 && M <= g && E <= m && y >= R && M <= Y && V >= L && E <= X) return C;
+						var S = getComputedStyle(k),
+							j = parseInt(S.borderLeftWidth, 10),
+							q = parseInt(S.borderTopWidth, 10),
+							z = parseInt(S.borderRightWidth, 10),
+							A = parseInt(S.borderBottomWidth, 10),
+							F = 0,
+							G = 0,
+							J = 'offsetWidth' in k ? k.offsetWidth - k.clientWidth - j - z : 0,
+							K = 'offsetHeight' in k ? k.offsetHeight - k.clientHeight - q - A : 0;
+						if (f === k)
+							(F = 'start' === d ? x : 'end' === d ? x - g : 'nearest' === d ? r(v, v + g, g, q, A, v + x, v + x + b, b) : x - g / 2),
+								(G = 'start' === u ? I : 'center' === u ? I - m / 2 : 'end' === u ? I - m : r(w, w + m, m, j, z, w + I, w + I + H, H)),
+								(F = Math.max(0, F + v)),
+								(G = Math.max(0, G + w));
+						else {
+							(F =
+								'start' === d
+									? x - R - q
+									: 'end' === d
+									? x - Y + A + K
+									: 'nearest' === d
+									? r(R, Y, D, q, A + K, x, x + b, b)
+									: x - (R + D / 2) + K / 2),
+								(G =
+									'start' === u
+										? I - L - j
+										: 'center' === u
+										? I - (L + O / 2) + J / 2
+										: 'end' === u
+										? I - X + z + J
+										: r(L, X, O, j, z + J, I, I + H, H));
+							var N = k.scrollLeft,
+								P = k.scrollTop;
+							(x += P - (F = Math.max(0, Math.min(P + F, k.scrollHeight - D + K)))),
+								(I += N - (G = Math.max(0, Math.min(N + G, k.scrollWidth - O + J))));
 						}
-						return C;
-					})(node, { boundary: menuNode, block: 'nearest', scrollMode: 'if-needed' });
-					actions.forEach(function (_ref) {
-						var el = _ref.el,
-							top = _ref.top,
-							left = _ref.left;
-						(el.scrollTop = top), (el.scrollLeft = left);
-					});
-				}
+						C.push({ el: k, top: F, left: G });
+					}
+					return C;
+				})(node, { boundary: menuNode, block: 'nearest', scrollMode: 'if-needed' });
+				actions.forEach((_ref) => {
+					let { el, top, left } = _ref;
+					(el.scrollTop = top), (el.scrollLeft = left);
+				});
 			}
 			function isOrContainsNode(parent, child, environment) {
 				return parent === child || (child instanceof environment.Node && parent.contains && parent.contains(child));
 			}
 			function downshift_esm_debounce(fn, time) {
-				var timeoutId;
+				let timeoutId;
 				function cancel() {
 					timeoutId && clearTimeout(timeoutId);
 				}
 				function wrapper() {
 					for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
 					cancel(),
-						(timeoutId = setTimeout(function () {
-							(timeoutId = null), fn.apply(void 0, args);
+						(timeoutId = setTimeout(() => {
+							(timeoutId = null), fn(...args);
 						}, time));
 				}
 				return (wrapper.cancel = cancel), wrapper;
@@ -21928,18 +21936,18 @@
 				return function (event) {
 					for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++)
 						args[_key3 - 1] = arguments[_key3];
-					return fns.some(function (fn) {
-						return (
-							fn && fn.apply(void 0, [event].concat(args)),
+					return fns.some(
+						(fn) => (
+							fn && fn(event, ...args),
 							event.preventDownshiftDefault || (event.hasOwnProperty('nativeEvent') && event.nativeEvent.preventDownshiftDefault)
-						);
-					});
+						)
+					);
 				};
 			}
 			function handleRefs() {
 				for (var _len4 = arguments.length, refs = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) refs[_key4] = arguments[_key4];
-				return function (node) {
-					refs.forEach(function (ref) {
+				return (node) => {
+					refs.forEach((ref) => {
 						'function' == typeof ref ? ref(node) : ref && (ref.current = node);
 					});
 				};
@@ -21948,16 +21956,13 @@
 				return String(idCounter++);
 			}
 			function getA11yStatusMessage$1(_ref2) {
-				var isOpen = _ref2.isOpen,
-					resultCount = _ref2.resultCount,
-					previousResultCount = _ref2.previousResultCount;
+				let { isOpen, resultCount, previousResultCount } = _ref2;
 				return isOpen
 					? resultCount
 						? resultCount !== previousResultCount
-							? resultCount +
-							  ' result' +
-							  (1 === resultCount ? ' is' : 's are') +
-							  ' available, use up and down arrow keys to navigate. Press Enter key to select.'
+							? `${resultCount} result${
+									1 === resultCount ? ' is' : 's are'
+							  } available, use up and down arrow keys to navigate. Press Enter key to select.`
 							: ''
 						: 'No results are available.'
 					: '';
@@ -21971,45 +21976,45 @@
 			function getElementProps(element) {
 				return element.props;
 			}
-			var stateKeys = ['highlightedIndex', 'inputValue', 'isOpen', 'selectedItem', 'type'];
+			const stateKeys = ['highlightedIndex', 'inputValue', 'isOpen', 'selectedItem', 'type'];
 			function pickState(state) {
 				void 0 === state && (state = {});
-				var result = {};
+				const result = {};
 				return (
-					stateKeys.forEach(function (k) {
+					stateKeys.forEach((k) => {
 						state.hasOwnProperty(k) && (result[k] = state[k]);
 					}),
 					result
 				);
 			}
 			function getState(state, props) {
-				return Object.keys(state).reduce(function (prevState, key) {
-					return (prevState[key] = isControlledProp(props, key) ? props[key] : state[key]), prevState;
-				}, {});
+				return Object.keys(state).reduce(
+					(prevState, key) => ((prevState[key] = isControlledProp(props, key) ? props[key] : state[key]), prevState),
+					{}
+				);
 			}
 			function isControlledProp(props, key) {
 				return void 0 !== props[key];
 			}
 			function normalizeArrowKey(event) {
-				var key = event.key,
-					keyCode = event.keyCode;
-				return keyCode >= 37 && keyCode <= 40 && 0 !== key.indexOf('Arrow') ? 'Arrow' + key : key;
+				const { key, keyCode } = event;
+				return keyCode >= 37 && keyCode <= 40 && 0 !== key.indexOf('Arrow') ? `Arrow${key}` : key;
 			}
 			function getNextWrappingIndex(moveAmount, baseIndex, itemCount, getItemNodeFromIndex, circular) {
 				if ((void 0 === circular && (circular = !0), 0 === itemCount)) return -1;
-				var itemsLastIndex = itemCount - 1;
+				const itemsLastIndex = itemCount - 1;
 				('number' != typeof baseIndex || baseIndex < 0 || baseIndex >= itemCount) && (baseIndex = moveAmount > 0 ? -1 : itemsLastIndex + 1);
-				var newIndex = baseIndex + moveAmount;
+				let newIndex = baseIndex + moveAmount;
 				newIndex < 0 ? (newIndex = circular ? itemsLastIndex : 0) : newIndex > itemsLastIndex && (newIndex = circular ? 0 : itemsLastIndex);
-				var nonDisabledNewIndex = getNextNonDisabledIndex(moveAmount, newIndex, itemCount, getItemNodeFromIndex, circular);
+				const nonDisabledNewIndex = getNextNonDisabledIndex(moveAmount, newIndex, itemCount, getItemNodeFromIndex, circular);
 				return -1 === nonDisabledNewIndex ? (baseIndex >= itemCount ? -1 : baseIndex) : nonDisabledNewIndex;
 			}
 			function getNextNonDisabledIndex(moveAmount, baseIndex, itemCount, getItemNodeFromIndex, circular) {
-				var currentElementNode = getItemNodeFromIndex(baseIndex);
+				const currentElementNode = getItemNodeFromIndex(baseIndex);
 				if (!currentElementNode || !currentElementNode.hasAttribute('disabled')) return baseIndex;
 				if (moveAmount > 0) {
-					for (var index = baseIndex + 1; index < itemCount; index++) if (!getItemNodeFromIndex(index).hasAttribute('disabled')) return index;
-				} else for (var _index = baseIndex - 1; _index >= 0; _index--) if (!getItemNodeFromIndex(_index).hasAttribute('disabled')) return _index;
+					for (let index = baseIndex + 1; index < itemCount; index++) if (!getItemNodeFromIndex(index).hasAttribute('disabled')) return index;
+				} else for (let index = baseIndex - 1; index >= 0; index--) if (!getItemNodeFromIndex(index).hasAttribute('disabled')) return index;
 				return circular
 					? moveAmount > 0
 						? getNextNonDisabledIndex(1, 0, itemCount, getItemNodeFromIndex, !1)
@@ -22019,28 +22024,28 @@
 			function targetWithinDownshift(target, downshiftElements, environment, checkActiveElement) {
 				return (
 					void 0 === checkActiveElement && (checkActiveElement = !0),
-					downshiftElements.some(function (contextNode) {
-						return (
+					downshiftElements.some(
+						(contextNode) =>
 							contextNode &&
 							(isOrContainsNode(contextNode, target, environment) ||
 								(checkActiveElement && isOrContainsNode(contextNode, environment.document.activeElement, environment)))
-						);
-					})
+					)
 				);
 			}
-			var cleanupStatus = downshift_esm_debounce(function (documentProp) {
+			const cleanupStatus = downshift_esm_debounce((documentProp) => {
 				getStatusDiv(documentProp).textContent = '';
 			}, 500);
 			function setStatus(status, documentProp) {
-				var div = getStatusDiv(documentProp);
+				const div = getStatusDiv(documentProp);
 				status && ((div.textContent = status), cleanupStatus(documentProp));
 			}
 			function getStatusDiv(documentProp) {
 				void 0 === documentProp && (documentProp = document);
-				var statusDiv = documentProp.getElementById('a11y-status-message');
+				let statusDiv = documentProp.getElementById('a11y-status-message');
 				return (
 					statusDiv ||
-					((statusDiv = documentProp.createElement('div')).setAttribute('id', 'a11y-status-message'),
+					((statusDiv = documentProp.createElement('div')),
+					statusDiv.setAttribute('id', 'a11y-status-message'),
 					statusDiv.setAttribute('role', 'status'),
 					statusDiv.setAttribute('aria-live', 'polite'),
 					statusDiv.setAttribute('aria-relevant', 'additions text'),
@@ -22059,730 +22064,600 @@
 				);
 			}
 			var stateChangeTypes$3 = Object.freeze({
-					__proto__: null,
-					unknown: 0,
-					mouseUp: 1,
-					itemMouseEnter: 2,
-					keyDownArrowUp: 3,
-					keyDownArrowDown: 4,
-					keyDownEscape: 5,
-					keyDownEnter: 6,
-					keyDownHome: 7,
-					keyDownEnd: 8,
-					clickItem: 9,
-					blurInput: 10,
-					changeInput: 11,
-					keyDownSpaceButton: 12,
-					clickButton: 13,
-					blurButton: 14,
-					controlledPropUpdatedSelectedItem: 15,
-					touchEnd: 16,
-				}),
-				_excluded$4 = ['refKey', 'ref'],
-				_excluded2$3 = ['onClick', 'onPress', 'onKeyDown', 'onKeyUp', 'onBlur'],
-				_excluded3$2 = ['onKeyDown', 'onBlur', 'onChange', 'onInput', 'onChangeText'],
-				_excluded4$1 = ['refKey', 'ref'],
-				_excluded5$1 = ['onMouseMove', 'onMouseDown', 'onClick', 'onPress', 'index', 'item'],
-				Downshift = (function () {
-					var Downshift = (function (_Component) {
-						function Downshift(_props) {
-							var _this;
-							((_this = _Component.call(this, _props) || this).id = _this.props.id || 'downshift-' + generateId()),
-								(_this.menuId = _this.props.menuId || _this.id + '-menu'),
-								(_this.labelId = _this.props.labelId || _this.id + '-label'),
-								(_this.inputId = _this.props.inputId || _this.id + '-input'),
-								(_this.getItemId =
-									_this.props.getItemId ||
-									function (index) {
-										return _this.id + '-item-' + index;
-									}),
-								(_this.input = null),
-								(_this.items = []),
-								(_this.itemCount = null),
-								(_this.previousResultCount = 0),
-								(_this.timeoutIds = []),
-								(_this.internalSetTimeout = function (fn, time) {
-									var id = setTimeout(function () {
-										(_this.timeoutIds = _this.timeoutIds.filter(function (i) {
-											return i !== id;
-										})),
-											fn();
-									}, time);
-									_this.timeoutIds.push(id);
-								}),
-								(_this.setItemCount = function (count) {
-									_this.itemCount = count;
-								}),
-								(_this.unsetItemCount = function () {
-									_this.itemCount = null;
-								}),
-								(_this.setHighlightedIndex = function (highlightedIndex, otherStateToSet) {
-									void 0 === highlightedIndex && (highlightedIndex = _this.props.defaultHighlightedIndex),
-										void 0 === otherStateToSet && (otherStateToSet = {}),
-										(otherStateToSet = pickState(otherStateToSet)),
-										_this.internalSetState((0, esm_extends.Z)({ highlightedIndex }, otherStateToSet));
-								}),
-								(_this.clearSelection = function (cb) {
-									_this.internalSetState(
-										{ selectedItem: null, inputValue: '', highlightedIndex: _this.props.defaultHighlightedIndex, isOpen: _this.props.defaultIsOpen },
-										cb
-									);
-								}),
-								(_this.selectItem = function (item, otherStateToSet, cb) {
+				__proto__: null,
+				unknown: 0,
+				mouseUp: 1,
+				itemMouseEnter: 2,
+				keyDownArrowUp: 3,
+				keyDownArrowDown: 4,
+				keyDownEscape: 5,
+				keyDownEnter: 6,
+				keyDownHome: 7,
+				keyDownEnd: 8,
+				clickItem: 9,
+				blurInput: 10,
+				changeInput: 11,
+				keyDownSpaceButton: 12,
+				clickButton: 13,
+				blurButton: 14,
+				controlledPropUpdatedSelectedItem: 15,
+				touchEnd: 16,
+			});
+			const Downshift = (() => {
+				class Downshift extends react.Component {
+					constructor(_props) {
+						var _this;
+						super(_props),
+							(_this = this),
+							(this.id = this.props.id || `downshift-${generateId()}`),
+							(this.menuId = this.props.menuId || `${this.id}-menu`),
+							(this.labelId = this.props.labelId || `${this.id}-label`),
+							(this.inputId = this.props.inputId || `${this.id}-input`),
+							(this.getItemId = this.props.getItemId || ((index) => `${this.id}-item-${index}`)),
+							(this.input = null),
+							(this.items = []),
+							(this.itemCount = null),
+							(this.previousResultCount = 0),
+							(this.timeoutIds = []),
+							(this.internalSetTimeout = (fn, time) => {
+								const id = setTimeout(() => {
+									(this.timeoutIds = this.timeoutIds.filter((i) => i !== id)), fn();
+								}, time);
+								this.timeoutIds.push(id);
+							}),
+							(this.setItemCount = (count) => {
+								this.itemCount = count;
+							}),
+							(this.unsetItemCount = () => {
+								this.itemCount = null;
+							}),
+							(this.setHighlightedIndex = function (highlightedIndex, otherStateToSet) {
+								void 0 === highlightedIndex && (highlightedIndex = _this.props.defaultHighlightedIndex),
+									void 0 === otherStateToSet && (otherStateToSet = {}),
 									(otherStateToSet = pickState(otherStateToSet)),
-										_this.internalSetState(
-											(0, esm_extends.Z)(
-												{
-													isOpen: _this.props.defaultIsOpen,
-													highlightedIndex: _this.props.defaultHighlightedIndex,
-													selectedItem: item,
-													inputValue: _this.props.itemToString(item),
-												},
-												otherStateToSet
-											),
-											cb
-										);
-								}),
-								(_this.selectItemAtIndex = function (itemIndex, otherStateToSet, cb) {
-									var item = _this.items[itemIndex];
-									null != item && _this.selectItem(item, otherStateToSet, cb);
-								}),
-								(_this.selectHighlightedItem = function (otherStateToSet, cb) {
-									return _this.selectItemAtIndex(_this.getState().highlightedIndex, otherStateToSet, cb);
-								}),
-								(_this.internalSetState = function (stateToSet, cb) {
-									var isItemSelected,
-										onChangeArg,
-										onStateChangeArg = {},
-										isStateToSetFunction = 'function' == typeof stateToSet;
-									return (
-										!isStateToSetFunction &&
-											stateToSet.hasOwnProperty('inputValue') &&
-											_this.props.onInputValueChange(stateToSet.inputValue, (0, esm_extends.Z)({}, _this.getStateAndHelpers(), stateToSet)),
-										_this.setState(
-											function (state) {
-												state = _this.getState(state);
-												var newStateToSet = isStateToSetFunction ? stateToSet(state) : stateToSet;
-												(newStateToSet = _this.props.stateReducer(state, newStateToSet)),
-													(isItemSelected = newStateToSet.hasOwnProperty('selectedItem'));
-												var nextState = {},
-													nextFullState = {};
-												return (
-													isItemSelected && newStateToSet.selectedItem !== state.selectedItem && (onChangeArg = newStateToSet.selectedItem),
-													(newStateToSet.type = newStateToSet.type || 0),
-													Object.keys(newStateToSet).forEach(function (key) {
-														state[key] !== newStateToSet[key] && (onStateChangeArg[key] = newStateToSet[key]),
-															'type' !== key &&
-																((nextFullState[key] = newStateToSet[key]),
-																isControlledProp(_this.props, key) || (nextState[key] = newStateToSet[key]));
-													}),
-													isStateToSetFunction &&
-														newStateToSet.hasOwnProperty('inputValue') &&
-														_this.props.onInputValueChange(
-															newStateToSet.inputValue,
-															(0, esm_extends.Z)({}, _this.getStateAndHelpers(), newStateToSet)
-														),
-													nextState
-												);
-											},
-											function () {
-												cbToCb(cb)(),
-													Object.keys(onStateChangeArg).length > 1 && _this.props.onStateChange(onStateChangeArg, _this.getStateAndHelpers()),
-													isItemSelected && _this.props.onSelect(stateToSet.selectedItem, _this.getStateAndHelpers()),
-													void 0 !== onChangeArg && _this.props.onChange(onChangeArg, _this.getStateAndHelpers()),
-													_this.props.onUserAction(onStateChangeArg, _this.getStateAndHelpers());
-											}
-										)
-									);
-								}),
-								(_this.rootRef = function (node) {
-									return (_this._rootNode = node);
-								}),
-								(_this.getRootProps = function (_temp, _temp2) {
-									var _extends2,
-										_ref = void 0 === _temp ? {} : _temp,
-										_ref$refKey = _ref.refKey,
-										refKey = void 0 === _ref$refKey ? 'ref' : _ref$refKey,
-										ref = _ref.ref,
-										rest = (0, objectWithoutPropertiesLoose.Z)(_ref, _excluded$4),
-										_ref2$suppressRefErro = (void 0 === _temp2 ? {} : _temp2).suppressRefError,
-										suppressRefError = void 0 !== _ref2$suppressRefErro && _ref2$suppressRefErro;
-									(_this.getRootProps.called = !0), (_this.getRootProps.refKey = refKey), (_this.getRootProps.suppressRefError = suppressRefError);
-									var isOpen = _this.getState().isOpen;
-									return (0, esm_extends.Z)(
-										(((_extends2 = {})[refKey] = handleRefs(ref, _this.rootRef)),
-										(_extends2.role = 'combobox'),
-										(_extends2['aria-expanded'] = isOpen),
-										(_extends2['aria-haspopup'] = 'listbox'),
-										(_extends2['aria-owns'] = isOpen ? _this.menuId : null),
-										(_extends2['aria-labelledby'] = _this.labelId),
-										_extends2),
-										rest
-									);
-								}),
-								(_this.keyDownHandlers = {
-									ArrowDown: function ArrowDown(event) {
-										var _this2 = this;
-										if ((event.preventDefault(), this.getState().isOpen)) {
-											var amount = event.shiftKey ? 5 : 1;
-											this.moveHighlightedIndex(amount, { type: 4 });
-										} else
-											this.internalSetState({ isOpen: !0, type: 4 }, function () {
-												var itemCount = _this2.getItemCount();
-												if (itemCount > 0) {
-													var nextHighlightedIndex = getNextWrappingIndex(1, _this2.getState().highlightedIndex, itemCount, function (index) {
-														return _this2.getItemNodeFromIndex(index);
-													});
-													_this2.setHighlightedIndex(nextHighlightedIndex, { type: 4 });
-												}
-											});
-									},
-									ArrowUp: function ArrowUp(event) {
-										var _this3 = this;
-										if ((event.preventDefault(), this.getState().isOpen)) {
-											var amount = event.shiftKey ? -5 : -1;
-											this.moveHighlightedIndex(amount, { type: 3 });
-										} else
-											this.internalSetState({ isOpen: !0, type: 3 }, function () {
-												var itemCount = _this3.getItemCount();
-												if (itemCount > 0) {
-													var nextHighlightedIndex = getNextWrappingIndex(-1, _this3.getState().highlightedIndex, itemCount, function (index) {
-														return _this3.getItemNodeFromIndex(index);
-													});
-													_this3.setHighlightedIndex(nextHighlightedIndex, { type: 3 });
-												}
-											});
-									},
-									Enter: function Enter(event) {
-										if (229 !== event.which) {
-											var _this$getState2 = this.getState(),
-												isOpen = _this$getState2.isOpen,
-												highlightedIndex = _this$getState2.highlightedIndex;
-											if (isOpen && null != highlightedIndex) {
-												event.preventDefault();
-												var item = this.items[highlightedIndex],
-													itemNode = this.getItemNodeFromIndex(highlightedIndex);
-												if (null == item || (itemNode && itemNode.hasAttribute('disabled'))) return;
-												this.selectHighlightedItem({ type: 6 });
-											}
-										}
-									},
-									Escape: function Escape(event) {
-										event.preventDefault(), this.reset((0, esm_extends.Z)({ type: 5 }, !this.state.isOpen && { selectedItem: null, inputValue: '' }));
-									},
-								}),
-								(_this.buttonKeyDownHandlers = (0, esm_extends.Z)({}, _this.keyDownHandlers, {
-									' ': function _(event) {
-										event.preventDefault(), this.toggleMenu({ type: 12 });
-									},
-								})),
-								(_this.inputKeyDownHandlers = (0, esm_extends.Z)({}, _this.keyDownHandlers, {
-									Home: function Home(event) {
-										var _this4 = this,
-											isOpen = this.getState().isOpen;
-										if (isOpen) {
-											event.preventDefault();
-											var itemCount = this.getItemCount();
-											if (!(itemCount <= 0) && isOpen) {
-												var newHighlightedIndex = getNextNonDisabledIndex(
-													1,
-													0,
-													itemCount,
-													function (index) {
-														return _this4.getItemNodeFromIndex(index);
-													},
-													!1
-												);
-												this.setHighlightedIndex(newHighlightedIndex, { type: 7 });
-											}
-										}
-									},
-									End: function End(event) {
-										var _this5 = this,
-											isOpen = this.getState().isOpen;
-										if (isOpen) {
-											event.preventDefault();
-											var itemCount = this.getItemCount();
-											if (!(itemCount <= 0) && isOpen) {
-												var newHighlightedIndex = getNextNonDisabledIndex(
-													-1,
-													itemCount - 1,
-													itemCount,
-													function (index) {
-														return _this5.getItemNodeFromIndex(index);
-													},
-													!1
-												);
-												this.setHighlightedIndex(newHighlightedIndex, { type: 8 });
-											}
-										}
-									},
-								})),
-								(_this.getToggleButtonProps = function (_temp3) {
-									var _ref3 = void 0 === _temp3 ? {} : _temp3,
-										onClick = _ref3.onClick;
-									_ref3.onPress;
-									var onKeyDown = _ref3.onKeyDown,
-										onKeyUp = _ref3.onKeyUp,
-										onBlur = _ref3.onBlur,
-										rest = (0, objectWithoutPropertiesLoose.Z)(_ref3, _excluded2$3),
-										isOpen = _this.getState().isOpen,
-										enabledEventHandlers = {
-											onClick: callAllEventHandlers(onClick, _this.buttonHandleClick),
-											onKeyDown: callAllEventHandlers(onKeyDown, _this.buttonHandleKeyDown),
-											onKeyUp: callAllEventHandlers(onKeyUp, _this.buttonHandleKeyUp),
-											onBlur: callAllEventHandlers(onBlur, _this.buttonHandleBlur),
-										},
-										eventHandlers = rest.disabled ? {} : enabledEventHandlers;
-									return (0, esm_extends.Z)(
-										{ type: 'button', role: 'button', 'aria-label': isOpen ? 'close menu' : 'open menu', 'aria-haspopup': !0, 'data-toggle': !0 },
-										eventHandlers,
-										rest
-									);
-								}),
-								(_this.buttonHandleKeyUp = function (event) {
-									event.preventDefault();
-								}),
-								(_this.buttonHandleKeyDown = function (event) {
-									var key = normalizeArrowKey(event);
-									_this.buttonKeyDownHandlers[key] && _this.buttonKeyDownHandlers[key].call((0, assertThisInitialized.Z)(_this), event);
-								}),
-								(_this.buttonHandleClick = function (event) {
-									event.preventDefault(),
-										_this.props.environment.document.activeElement === _this.props.environment.document.body && event.target.focus(),
-										_this.internalSetTimeout(function () {
-											return _this.toggleMenu({ type: 13 });
-										});
-								}),
-								(_this.buttonHandleBlur = function (event) {
-									var blurTarget = event.target;
-									_this.internalSetTimeout(function () {
-										_this.isMouseDown ||
-											(null != _this.props.environment.document.activeElement &&
-												_this.props.environment.document.activeElement.id === _this.inputId) ||
-											_this.props.environment.document.activeElement === blurTarget ||
-											_this.reset({ type: 14 });
-									});
-								}),
-								(_this.getLabelProps = function (props) {
-									return (0, esm_extends.Z)({ htmlFor: _this.inputId, id: _this.labelId }, props);
-								}),
-								(_this.getInputProps = function (_temp4) {
-									var _ref4 = void 0 === _temp4 ? {} : _temp4,
-										onKeyDown = _ref4.onKeyDown,
-										onBlur = _ref4.onBlur,
-										onChange = _ref4.onChange,
-										onInput = _ref4.onInput;
-									_ref4.onChangeText;
-									var rest = (0, objectWithoutPropertiesLoose.Z)(_ref4, _excluded3$2),
-										eventHandlers = {};
-									var _eventHandlers,
-										_this$getState6 = _this.getState(),
-										inputValue = _this$getState6.inputValue,
-										isOpen = _this$getState6.isOpen,
-										highlightedIndex = _this$getState6.highlightedIndex;
-									rest.disabled ||
-										(((_eventHandlers = {}).onChange = callAllEventHandlers(onChange, onInput, _this.inputHandleChange)),
-										(_eventHandlers.onKeyDown = callAllEventHandlers(onKeyDown, _this.inputHandleKeyDown)),
-										(_eventHandlers.onBlur = callAllEventHandlers(onBlur, _this.inputHandleBlur)),
-										(eventHandlers = _eventHandlers));
-									return (0, esm_extends.Z)(
-										{
-											'aria-autocomplete': 'list',
-											'aria-activedescendant':
-												isOpen && 'number' == typeof highlightedIndex && highlightedIndex >= 0 ? _this.getItemId(highlightedIndex) : null,
-											'aria-controls': isOpen ? _this.menuId : null,
-											'aria-labelledby': _this.labelId,
-											autoComplete: 'off',
-											value: inputValue,
-											id: _this.inputId,
-										},
-										eventHandlers,
-										rest
-									);
-								}),
-								(_this.inputHandleKeyDown = function (event) {
-									var key = normalizeArrowKey(event);
-									key && _this.inputKeyDownHandlers[key] && _this.inputKeyDownHandlers[key].call((0, assertThisInitialized.Z)(_this), event);
-								}),
-								(_this.inputHandleChange = function (event) {
-									_this.internalSetState({
-										type: 11,
-										isOpen: !0,
-										inputValue: event.target.value,
-										highlightedIndex: _this.props.defaultHighlightedIndex,
-									});
-								}),
-								(_this.inputHandleBlur = function () {
-									_this.internalSetTimeout(function () {
-										var downshiftButtonIsActive =
-											_this.props.environment.document &&
-											!!_this.props.environment.document.activeElement &&
-											!!_this.props.environment.document.activeElement.dataset &&
-											_this.props.environment.document.activeElement.dataset.toggle &&
-											_this._rootNode &&
-											_this._rootNode.contains(_this.props.environment.document.activeElement);
-										_this.isMouseDown || downshiftButtonIsActive || _this.reset({ type: 10 });
-									});
-								}),
-								(_this.menuRef = function (node) {
-									_this._menuNode = node;
-								}),
-								(_this.getMenuProps = function (_temp5, _temp6) {
-									var _extends3,
-										_ref5 = void 0 === _temp5 ? {} : _temp5,
-										_ref5$refKey = _ref5.refKey,
-										refKey = void 0 === _ref5$refKey ? 'ref' : _ref5$refKey,
-										ref = _ref5.ref,
-										props = (0, objectWithoutPropertiesLoose.Z)(_ref5, _excluded4$1),
-										_ref6$suppressRefErro = (void 0 === _temp6 ? {} : _temp6).suppressRefError,
-										suppressRefError = void 0 !== _ref6$suppressRefErro && _ref6$suppressRefErro;
-									return (
-										(_this.getMenuProps.called = !0),
-										(_this.getMenuProps.refKey = refKey),
-										(_this.getMenuProps.suppressRefError = suppressRefError),
-										(0, esm_extends.Z)(
-											(((_extends3 = {})[refKey] = handleRefs(ref, _this.menuRef)),
-											(_extends3.role = 'listbox'),
-											(_extends3['aria-labelledby'] = props && props['aria-label'] ? null : _this.labelId),
-											(_extends3.id = _this.menuId),
-											_extends3),
-											props
-										)
-									);
-								}),
-								(_this.getItemProps = function (_temp7) {
-									var _enabledEventHandlers,
-										_ref7 = void 0 === _temp7 ? {} : _temp7,
-										onMouseMove = _ref7.onMouseMove,
-										onMouseDown = _ref7.onMouseDown,
-										onClick = _ref7.onClick;
-									_ref7.onPress;
-									var index = _ref7.index,
-										_ref7$item = _ref7.item,
-										item = void 0 === _ref7$item ? void 0 : _ref7$item,
-										rest = (0, objectWithoutPropertiesLoose.Z)(_ref7, _excluded5$1);
-									void 0 === index ? (_this.items.push(item), (index = _this.items.indexOf(item))) : (_this.items[index] = item);
-									var customClickHandler = onClick,
-										enabledEventHandlers =
-											(((_enabledEventHandlers = {
-												onMouseMove: callAllEventHandlers(onMouseMove, function () {
-													index !== _this.getState().highlightedIndex &&
-														(_this.setHighlightedIndex(index, { type: 2 }),
-														(_this.avoidScrolling = !0),
-														_this.internalSetTimeout(function () {
-															return (_this.avoidScrolling = !1);
-														}, 250));
-												}),
-												onMouseDown: callAllEventHandlers(onMouseDown, function (event) {
-													event.preventDefault();
-												}),
-											}).onClick = callAllEventHandlers(customClickHandler, function () {
-												_this.selectItemAtIndex(index, { type: 9 });
-											})),
-											_enabledEventHandlers),
-										eventHandlers = rest.disabled ? { onMouseDown: enabledEventHandlers.onMouseDown } : enabledEventHandlers;
-									return (0, esm_extends.Z)(
-										{ id: _this.getItemId(index), role: 'option', 'aria-selected': _this.getState().highlightedIndex === index },
-										eventHandlers,
-										rest
-									);
-								}),
-								(_this.clearItems = function () {
-									_this.items = [];
-								}),
-								(_this.reset = function (otherStateToSet, cb) {
-									void 0 === otherStateToSet && (otherStateToSet = {}),
-										(otherStateToSet = pickState(otherStateToSet)),
-										_this.internalSetState(function (_ref8) {
-											var selectedItem = _ref8.selectedItem;
-											return (0,
-											esm_extends.Z)({ isOpen: _this.props.defaultIsOpen, highlightedIndex: _this.props.defaultHighlightedIndex, inputValue: _this.props.itemToString(selectedItem) }, otherStateToSet);
-										}, cb);
-								}),
-								(_this.toggleMenu = function (otherStateToSet, cb) {
-									void 0 === otherStateToSet && (otherStateToSet = {}),
-										(otherStateToSet = pickState(otherStateToSet)),
-										_this.internalSetState(
-											function (_ref9) {
-												var isOpen = _ref9.isOpen;
-												return (0, esm_extends.Z)(
-													{ isOpen: !isOpen },
-													isOpen && { highlightedIndex: _this.props.defaultHighlightedIndex },
-													otherStateToSet
-												);
-											},
-											function () {
-												var _this$getState7 = _this.getState(),
-													isOpen = _this$getState7.isOpen,
-													highlightedIndex = _this$getState7.highlightedIndex;
-												isOpen &&
-													_this.getItemCount() > 0 &&
-													'number' == typeof highlightedIndex &&
-													_this.setHighlightedIndex(highlightedIndex, otherStateToSet),
-													cbToCb(cb)();
-											}
-										);
-								}),
-								(_this.openMenu = function (cb) {
-									_this.internalSetState({ isOpen: !0 }, cb);
-								}),
-								(_this.closeMenu = function (cb) {
-									_this.internalSetState({ isOpen: !1 }, cb);
-								}),
-								(_this.updateStatus = downshift_esm_debounce(function () {
-									var state = _this.getState(),
-										item = _this.items[state.highlightedIndex],
-										resultCount = _this.getItemCount(),
-										status = _this.props.getA11yStatusMessage(
-											(0, esm_extends.Z)(
-												{
-													itemToString: _this.props.itemToString,
-													previousResultCount: _this.previousResultCount,
-													resultCount,
-													highlightedItem: item,
-												},
-												state
-											)
-										);
-									(_this.previousResultCount = resultCount), setStatus(status, _this.props.environment.document);
-								}, 200));
-							var _this$props = _this.props,
-								defaultHighlightedIndex = _this$props.defaultHighlightedIndex,
-								_this$props$initialHi = _this$props.initialHighlightedIndex,
-								_highlightedIndex = void 0 === _this$props$initialHi ? defaultHighlightedIndex : _this$props$initialHi,
-								defaultIsOpen = _this$props.defaultIsOpen,
-								_this$props$initialIs = _this$props.initialIsOpen,
-								_isOpen = void 0 === _this$props$initialIs ? defaultIsOpen : _this$props$initialIs,
-								_this$props$initialIn = _this$props.initialInputValue,
-								_inputValue = void 0 === _this$props$initialIn ? '' : _this$props$initialIn,
-								_this$props$initialSe = _this$props.initialSelectedItem,
-								_selectedItem = void 0 === _this$props$initialSe ? null : _this$props$initialSe,
-								_state = _this.getState({
-									highlightedIndex: _highlightedIndex,
-									isOpen: _isOpen,
-									inputValue: _inputValue,
-									selectedItem: _selectedItem,
-								});
-							return (
-								null != _state.selectedItem &&
-									void 0 === _this.props.initialInputValue &&
-									(_state.inputValue = _this.props.itemToString(_state.selectedItem)),
-								(_this.state = _state),
-								_this
-							);
-						}
-						(0, inheritsLoose.Z)(Downshift, _Component);
-						var _proto = Downshift.prototype;
-						return (
-							(_proto.internalClearTimeouts = function internalClearTimeouts() {
-								this.timeoutIds.forEach(function (id) {
-									clearTimeout(id);
-								}),
-									(this.timeoutIds = []);
+									_this.internalSetState({ highlightedIndex, ...otherStateToSet });
 							}),
-							(_proto.getState = function getState$1(stateToMerge) {
-								return void 0 === stateToMerge && (stateToMerge = this.state), getState(stateToMerge, this.props);
-							}),
-							(_proto.getItemCount = function getItemCount() {
-								var itemCount = this.items.length;
-								return (
-									null != this.itemCount ? (itemCount = this.itemCount) : void 0 !== this.props.itemCount && (itemCount = this.props.itemCount),
-									itemCount
+							(this.clearSelection = (cb) => {
+								this.internalSetState(
+									{ selectedItem: null, inputValue: '', highlightedIndex: this.props.defaultHighlightedIndex, isOpen: this.props.defaultIsOpen },
+									cb
 								);
 							}),
-							(_proto.getItemNodeFromIndex = function getItemNodeFromIndex(index) {
-								return this.props.environment.document.getElementById(this.getItemId(index));
+							(this.selectItem = (item, otherStateToSet, cb) => {
+								(otherStateToSet = pickState(otherStateToSet)),
+									this.internalSetState(
+										{
+											isOpen: this.props.defaultIsOpen,
+											highlightedIndex: this.props.defaultHighlightedIndex,
+											selectedItem: item,
+											inputValue: this.props.itemToString(item),
+											...otherStateToSet,
+										},
+										cb
+									);
 							}),
-							(_proto.scrollHighlightedItemIntoView = function scrollHighlightedItemIntoView() {
-								var node = this.getItemNodeFromIndex(this.getState().highlightedIndex);
-								this.props.scrollIntoView(node, this._menuNode);
+							(this.selectItemAtIndex = (itemIndex, otherStateToSet, cb) => {
+								const item = this.items[itemIndex];
+								null != item && this.selectItem(item, otherStateToSet, cb);
 							}),
-							(_proto.moveHighlightedIndex = function moveHighlightedIndex(amount, otherStateToSet) {
-								var _this6 = this,
-									itemCount = this.getItemCount(),
-									highlightedIndex = this.getState().highlightedIndex;
-								if (itemCount > 0) {
-									var nextHighlightedIndex = getNextWrappingIndex(amount, highlightedIndex, itemCount, function (index) {
-										return _this6.getItemNodeFromIndex(index);
-									});
-									this.setHighlightedIndex(nextHighlightedIndex, otherStateToSet);
-								}
+							(this.selectHighlightedItem = (otherStateToSet, cb) => this.selectItemAtIndex(this.getState().highlightedIndex, otherStateToSet, cb)),
+							(this.internalSetState = (stateToSet, cb) => {
+								let isItemSelected, onChangeArg;
+								const onStateChangeArg = {},
+									isStateToSetFunction = 'function' == typeof stateToSet;
+								return (
+									!isStateToSetFunction &&
+										stateToSet.hasOwnProperty('inputValue') &&
+										this.props.onInputValueChange(stateToSet.inputValue, { ...this.getStateAndHelpers(), ...stateToSet }),
+									this.setState(
+										(state) => {
+											state = this.getState(state);
+											let newStateToSet = isStateToSetFunction ? stateToSet(state) : stateToSet;
+											(newStateToSet = this.props.stateReducer(state, newStateToSet)),
+												(isItemSelected = newStateToSet.hasOwnProperty('selectedItem'));
+											const nextState = {};
+											return (
+												isItemSelected && newStateToSet.selectedItem !== state.selectedItem && (onChangeArg = newStateToSet.selectedItem),
+												(newStateToSet.type = newStateToSet.type || 0),
+												Object.keys(newStateToSet).forEach((key) => {
+													state[key] !== newStateToSet[key] && (onStateChangeArg[key] = newStateToSet[key]),
+														'type' !== key && (newStateToSet[key], isControlledProp(this.props, key) || (nextState[key] = newStateToSet[key]));
+												}),
+												isStateToSetFunction &&
+													newStateToSet.hasOwnProperty('inputValue') &&
+													this.props.onInputValueChange(newStateToSet.inputValue, { ...this.getStateAndHelpers(), ...newStateToSet }),
+												nextState
+											);
+										},
+										() => {
+											cbToCb(cb)();
+											Object.keys(onStateChangeArg).length > 1 && this.props.onStateChange(onStateChangeArg, this.getStateAndHelpers()),
+												isItemSelected && this.props.onSelect(stateToSet.selectedItem, this.getStateAndHelpers()),
+												void 0 !== onChangeArg && this.props.onChange(onChangeArg, this.getStateAndHelpers()),
+												this.props.onUserAction(onStateChangeArg, this.getStateAndHelpers());
+										}
+									)
+								);
 							}),
-							(_proto.getStateAndHelpers = function getStateAndHelpers() {
-								var _this$getState9 = this.getState(),
-									highlightedIndex = _this$getState9.highlightedIndex,
-									inputValue = _this$getState9.inputValue,
-									selectedItem = _this$getState9.selectedItem,
-									isOpen = _this$getState9.isOpen,
-									itemToString = this.props.itemToString,
-									id = this.id,
-									getRootProps = this.getRootProps,
-									getToggleButtonProps = this.getToggleButtonProps,
-									getLabelProps = this.getLabelProps,
-									getMenuProps = this.getMenuProps,
-									getInputProps = this.getInputProps,
-									getItemProps = this.getItemProps,
-									openMenu = this.openMenu,
-									closeMenu = this.closeMenu,
-									toggleMenu = this.toggleMenu,
-									selectItem = this.selectItem,
-									selectItemAtIndex = this.selectItemAtIndex,
-									selectHighlightedItem = this.selectHighlightedItem,
-									setHighlightedIndex = this.setHighlightedIndex,
-									clearSelection = this.clearSelection,
-									clearItems = this.clearItems;
+							(this.rootRef = (node) => (this._rootNode = node)),
+							(this.getRootProps = function (_temp, _temp2) {
+								let { refKey = 'ref', ref, ...rest } = void 0 === _temp ? {} : _temp,
+									{ suppressRefError = !1 } = void 0 === _temp2 ? {} : _temp2;
+								(_this.getRootProps.called = !0), (_this.getRootProps.refKey = refKey), (_this.getRootProps.suppressRefError = suppressRefError);
+								const { isOpen } = _this.getState();
 								return {
-									getRootProps,
-									getToggleButtonProps,
-									getLabelProps,
-									getMenuProps,
-									getInputProps,
-									getItemProps,
-									reset: this.reset,
-									openMenu,
-									closeMenu,
-									toggleMenu,
-									selectItem,
-									selectItemAtIndex,
-									selectHighlightedItem,
-									setHighlightedIndex,
-									clearSelection,
-									clearItems,
-									setItemCount: this.setItemCount,
-									unsetItemCount: this.unsetItemCount,
-									setState: this.internalSetState,
-									itemToString,
-									id,
-									highlightedIndex,
-									inputValue,
-									isOpen,
-									selectedItem,
+									[refKey]: handleRefs(ref, _this.rootRef),
+									role: 'combobox',
+									'aria-expanded': isOpen,
+									'aria-haspopup': 'listbox',
+									'aria-owns': isOpen ? _this.menuId : null,
+									'aria-labelledby': _this.labelId,
+									...rest,
 								};
 							}),
-							(_proto.componentDidMount = function componentDidMount() {
-								var _this7 = this;
-								var onMouseDown = function onMouseDown() {
-										_this7.isMouseDown = !0;
+							(this.keyDownHandlers = {
+								ArrowDown(event) {
+									if ((event.preventDefault(), this.getState().isOpen)) {
+										const amount = event.shiftKey ? 5 : 1;
+										this.moveHighlightedIndex(amount, { type: 4 });
+									} else
+										this.internalSetState({ isOpen: !0, type: 4 }, () => {
+											const itemCount = this.getItemCount();
+											if (itemCount > 0) {
+												const { highlightedIndex } = this.getState(),
+													nextHighlightedIndex = getNextWrappingIndex(1, highlightedIndex, itemCount, (index) => this.getItemNodeFromIndex(index));
+												this.setHighlightedIndex(nextHighlightedIndex, { type: 4 });
+											}
+										});
+								},
+								ArrowUp(event) {
+									if ((event.preventDefault(), this.getState().isOpen)) {
+										const amount = event.shiftKey ? -5 : -1;
+										this.moveHighlightedIndex(amount, { type: 3 });
+									} else
+										this.internalSetState({ isOpen: !0, type: 3 }, () => {
+											const itemCount = this.getItemCount();
+											if (itemCount > 0) {
+												const { highlightedIndex } = this.getState(),
+													nextHighlightedIndex = getNextWrappingIndex(-1, highlightedIndex, itemCount, (index) => this.getItemNodeFromIndex(index));
+												this.setHighlightedIndex(nextHighlightedIndex, { type: 3 });
+											}
+										});
+								},
+								Enter(event) {
+									if (229 === event.which) return;
+									const { isOpen, highlightedIndex } = this.getState();
+									if (isOpen && null != highlightedIndex) {
+										event.preventDefault();
+										const item = this.items[highlightedIndex],
+											itemNode = this.getItemNodeFromIndex(highlightedIndex);
+										if (null == item || (itemNode && itemNode.hasAttribute('disabled'))) return;
+										this.selectHighlightedItem({ type: 6 });
+									}
+								},
+								Escape(event) {
+									event.preventDefault(), this.reset({ type: 5, ...(!this.state.isOpen && { selectedItem: null, inputValue: '' }) });
+								},
+							}),
+							(this.buttonKeyDownHandlers = {
+								...this.keyDownHandlers,
+								' '(event) {
+									event.preventDefault(), this.toggleMenu({ type: 12 });
+								},
+							}),
+							(this.inputKeyDownHandlers = {
+								...this.keyDownHandlers,
+								Home(event) {
+									const { isOpen } = this.getState();
+									if (!isOpen) return;
+									event.preventDefault();
+									const itemCount = this.getItemCount();
+									if (itemCount <= 0 || !isOpen) return;
+									const newHighlightedIndex = getNextNonDisabledIndex(1, 0, itemCount, (index) => this.getItemNodeFromIndex(index), !1);
+									this.setHighlightedIndex(newHighlightedIndex, { type: 7 });
+								},
+								End(event) {
+									const { isOpen } = this.getState();
+									if (!isOpen) return;
+									event.preventDefault();
+									const itemCount = this.getItemCount();
+									if (itemCount <= 0 || !isOpen) return;
+									const newHighlightedIndex = getNextNonDisabledIndex(-1, itemCount - 1, itemCount, (index) => this.getItemNodeFromIndex(index), !1);
+									this.setHighlightedIndex(newHighlightedIndex, { type: 8 });
+								},
+							}),
+							(this.getToggleButtonProps = function (_temp3) {
+								let { onClick, onPress, onKeyDown, onKeyUp, onBlur, ...rest } = void 0 === _temp3 ? {} : _temp3;
+								const { isOpen } = _this.getState(),
+									enabledEventHandlers = {
+										onClick: callAllEventHandlers(onClick, _this.buttonHandleClick),
+										onKeyDown: callAllEventHandlers(onKeyDown, _this.buttonHandleKeyDown),
+										onKeyUp: callAllEventHandlers(onKeyUp, _this.buttonHandleKeyUp),
+										onBlur: callAllEventHandlers(onBlur, _this.buttonHandleBlur),
+									};
+								return {
+									type: 'button',
+									role: 'button',
+									'aria-label': isOpen ? 'close menu' : 'open menu',
+									'aria-haspopup': !0,
+									'data-toggle': !0,
+									...(rest.disabled ? {} : enabledEventHandlers),
+									...rest,
+								};
+							}),
+							(this.buttonHandleKeyUp = (event) => {
+								event.preventDefault();
+							}),
+							(this.buttonHandleKeyDown = (event) => {
+								const key = normalizeArrowKey(event);
+								this.buttonKeyDownHandlers[key] && this.buttonKeyDownHandlers[key].call(this, event);
+							}),
+							(this.buttonHandleClick = (event) => {
+								event.preventDefault(),
+									this.props.environment.document.activeElement === this.props.environment.document.body && event.target.focus(),
+									this.internalSetTimeout(() => this.toggleMenu({ type: 13 }));
+							}),
+							(this.buttonHandleBlur = (event) => {
+								const blurTarget = event.target;
+								this.internalSetTimeout(() => {
+									this.isMouseDown ||
+										(null != this.props.environment.document.activeElement && this.props.environment.document.activeElement.id === this.inputId) ||
+										this.props.environment.document.activeElement === blurTarget ||
+										this.reset({ type: 14 });
+								});
+							}),
+							(this.getLabelProps = (props) => ({ htmlFor: this.inputId, id: this.labelId, ...props })),
+							(this.getInputProps = function (_temp4) {
+								let onChangeKey,
+									{ onKeyDown, onBlur, onChange, onInput, onChangeText, ...rest } = void 0 === _temp4 ? {} : _temp4,
+									eventHandlers = {};
+								onChangeKey = 'onChange';
+								const { inputValue, isOpen, highlightedIndex } = _this.getState();
+								return (
+									rest.disabled ||
+										(eventHandlers = {
+											onChange: callAllEventHandlers(onChange, onInput, _this.inputHandleChange),
+											onKeyDown: callAllEventHandlers(onKeyDown, _this.inputHandleKeyDown),
+											onBlur: callAllEventHandlers(onBlur, _this.inputHandleBlur),
+										}),
+									{
+										'aria-autocomplete': 'list',
+										'aria-activedescendant':
+											isOpen && 'number' == typeof highlightedIndex && highlightedIndex >= 0 ? _this.getItemId(highlightedIndex) : null,
+										'aria-controls': isOpen ? _this.menuId : null,
+										'aria-labelledby': _this.labelId,
+										autoComplete: 'off',
+										value: inputValue,
+										id: _this.inputId,
+										...eventHandlers,
+										...rest,
+									}
+								);
+							}),
+							(this.inputHandleKeyDown = (event) => {
+								const key = normalizeArrowKey(event);
+								key && this.inputKeyDownHandlers[key] && this.inputKeyDownHandlers[key].call(this, event);
+							}),
+							(this.inputHandleChange = (event) => {
+								this.internalSetState({ type: 11, isOpen: !0, inputValue: event.target.value, highlightedIndex: this.props.defaultHighlightedIndex });
+							}),
+							(this.inputHandleBlur = () => {
+								this.internalSetTimeout(() => {
+									const downshiftButtonIsActive =
+										this.props.environment.document &&
+										!!this.props.environment.document.activeElement &&
+										!!this.props.environment.document.activeElement.dataset &&
+										this.props.environment.document.activeElement.dataset.toggle &&
+										this._rootNode &&
+										this._rootNode.contains(this.props.environment.document.activeElement);
+									this.isMouseDown || downshiftButtonIsActive || this.reset({ type: 10 });
+								});
+							}),
+							(this.menuRef = (node) => {
+								this._menuNode = node;
+							}),
+							(this.getMenuProps = function (_temp5, _temp6) {
+								let { refKey = 'ref', ref, ...props } = void 0 === _temp5 ? {} : _temp5,
+									{ suppressRefError = !1 } = void 0 === _temp6 ? {} : _temp6;
+								return (
+									(_this.getMenuProps.called = !0),
+									(_this.getMenuProps.refKey = refKey),
+									(_this.getMenuProps.suppressRefError = suppressRefError),
+									{
+										[refKey]: handleRefs(ref, _this.menuRef),
+										role: 'listbox',
+										'aria-labelledby': props && props['aria-label'] ? null : _this.labelId,
+										id: _this.menuId,
+										...props,
+									}
+								);
+							}),
+							(this.getItemProps = function (_temp7) {
+								let { onMouseMove, onMouseDown, onClick, onPress, index, item, ...rest } = void 0 === _temp7 ? {} : _temp7;
+								void 0 === index ? (_this.items.push(item), (index = _this.items.indexOf(item))) : (_this.items[index] = item);
+								const customClickHandler = onClick,
+									enabledEventHandlers = {
+										onMouseMove: callAllEventHandlers(onMouseMove, () => {
+											index !== _this.getState().highlightedIndex &&
+												(_this.setHighlightedIndex(index, { type: 2 }),
+												(_this.avoidScrolling = !0),
+												_this.internalSetTimeout(() => (_this.avoidScrolling = !1), 250));
+										}),
+										onMouseDown: callAllEventHandlers(onMouseDown, (event) => {
+											event.preventDefault();
+										}),
+										onClick: callAllEventHandlers(customClickHandler, () => {
+											_this.selectItemAtIndex(index, { type: 9 });
+										}),
 									},
-									onMouseUp = function onMouseUp(event) {
-										(_this7.isMouseDown = !1),
-											!targetWithinDownshift(event.target, [_this7._rootNode, _this7._menuNode], _this7.props.environment) &&
-												_this7.getState().isOpen &&
-												_this7.reset({ type: 1 }, function () {
-													return _this7.props.onOuterClick(_this7.getStateAndHelpers());
-												});
-									},
-									onTouchStart = function onTouchStart() {
-										_this7.isTouchMove = !1;
-									},
-									onTouchMove = function onTouchMove() {
-										_this7.isTouchMove = !0;
-									},
-									onTouchEnd = function onTouchEnd(event) {
-										var contextWithinDownshift = targetWithinDownshift(
-											event.target,
-											[_this7._rootNode, _this7._menuNode],
-											_this7.props.environment,
-											!1
-										);
-										_this7.isTouchMove ||
-											contextWithinDownshift ||
-											!_this7.getState().isOpen ||
-											_this7.reset({ type: 16 }, function () {
-												return _this7.props.onOuterClick(_this7.getStateAndHelpers());
-											});
-									},
-									environment = this.props.environment;
-								environment.addEventListener('mousedown', onMouseDown),
-									environment.addEventListener('mouseup', onMouseUp),
-									environment.addEventListener('touchstart', onTouchStart),
-									environment.addEventListener('touchmove', onTouchMove),
-									environment.addEventListener('touchend', onTouchEnd),
-									(this.cleanup = function () {
-										_this7.internalClearTimeouts(),
-											_this7.updateStatus.cancel(),
-											environment.removeEventListener('mousedown', onMouseDown),
-											environment.removeEventListener('mouseup', onMouseUp),
-											environment.removeEventListener('touchstart', onTouchStart),
-											environment.removeEventListener('touchmove', onTouchMove),
-											environment.removeEventListener('touchend', onTouchEnd);
+									eventHandlers = rest.disabled ? { onMouseDown: enabledEventHandlers.onMouseDown } : enabledEventHandlers;
+								return {
+									id: _this.getItemId(index),
+									role: 'option',
+									'aria-selected': _this.getState().highlightedIndex === index,
+									...eventHandlers,
+									...rest,
+								};
+							}),
+							(this.clearItems = () => {
+								this.items = [];
+							}),
+							(this.reset = function (otherStateToSet, cb) {
+								void 0 === otherStateToSet && (otherStateToSet = {}),
+									(otherStateToSet = pickState(otherStateToSet)),
+									_this.internalSetState((_ref) => {
+										let { selectedItem } = _ref;
+										return {
+											isOpen: _this.props.defaultIsOpen,
+											highlightedIndex: _this.props.defaultHighlightedIndex,
+											inputValue: _this.props.itemToString(selectedItem),
+											...otherStateToSet,
+										};
+									}, cb);
+							}),
+							(this.toggleMenu = function (otherStateToSet, cb) {
+								void 0 === otherStateToSet && (otherStateToSet = {}),
+									(otherStateToSet = pickState(otherStateToSet)),
+									_this.internalSetState(
+										(_ref2) => {
+											let { isOpen } = _ref2;
+											return { isOpen: !isOpen, ...(isOpen && { highlightedIndex: _this.props.defaultHighlightedIndex }), ...otherStateToSet };
+										},
+										() => {
+											const { isOpen, highlightedIndex } = _this.getState();
+											isOpen &&
+												_this.getItemCount() > 0 &&
+												'number' == typeof highlightedIndex &&
+												_this.setHighlightedIndex(highlightedIndex, otherStateToSet),
+												cbToCb(cb)();
+										}
+									);
+							}),
+							(this.openMenu = (cb) => {
+								this.internalSetState({ isOpen: !0 }, cb);
+							}),
+							(this.closeMenu = (cb) => {
+								this.internalSetState({ isOpen: !1 }, cb);
+							}),
+							(this.updateStatus = downshift_esm_debounce(() => {
+								const state = this.getState(),
+									item = this.items[state.highlightedIndex],
+									resultCount = this.getItemCount(),
+									status = this.props.getA11yStatusMessage({
+										itemToString: this.props.itemToString,
+										previousResultCount: this.previousResultCount,
+										resultCount,
+										highlightedItem: item,
+										...state,
 									});
-							}),
-							(_proto.shouldScroll = function shouldScroll(prevState, prevProps) {
-								var currentHighlightedIndex = (void 0 === this.props.highlightedIndex ? this.getState() : this.props).highlightedIndex,
-									prevHighlightedIndex = (void 0 === prevProps.highlightedIndex ? prevState : prevProps).highlightedIndex;
-								return (currentHighlightedIndex && this.getState().isOpen && !prevState.isOpen) || currentHighlightedIndex !== prevHighlightedIndex;
-							}),
-							(_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-								isControlledProp(this.props, 'selectedItem') &&
-									this.props.selectedItemChanged(prevProps.selectedItem, this.props.selectedItem) &&
-									this.internalSetState({ type: 15, inputValue: this.props.itemToString(this.props.selectedItem) }),
-									!this.avoidScrolling && this.shouldScroll(prevState, prevProps) && this.scrollHighlightedItemIntoView(),
-									this.updateStatus();
-							}),
-							(_proto.componentWillUnmount = function componentWillUnmount() {
-								this.cleanup();
-							}),
-							(_proto.render = function render() {
-								var children = unwrapArray(this.props.children, downshift_esm_noop);
-								this.clearItems(),
-									(this.getRootProps.called = !1),
-									(this.getRootProps.refKey = void 0),
-									(this.getRootProps.suppressRefError = void 0),
-									(this.getMenuProps.called = !1),
-									(this.getMenuProps.refKey = void 0),
-									(this.getMenuProps.suppressRefError = void 0),
-									(this.getLabelProps.called = !1),
-									(this.getInputProps.called = !1);
-								var element = unwrapArray(children(this.getStateAndHelpers()));
-								return element
-									? this.getRootProps.called || this.props.suppressRefError
-										? element
-										: isDOMElement(element)
-										? (0, react.cloneElement)(element, this.getRootProps(getElementProps(element)))
-										: void 0
-									: null;
-							}),
-							Downshift
-						);
-					})(react.Component);
-					return (
-						(Downshift.defaultProps = {
-							defaultHighlightedIndex: null,
-							defaultIsOpen: !1,
-							getA11yStatusMessage: getA11yStatusMessage$1,
-							itemToString: function itemToString(i) {
-								return null == i ? '' : String(i);
-							},
-							onStateChange: downshift_esm_noop,
-							onInputValueChange: downshift_esm_noop,
-							onUserAction: downshift_esm_noop,
-							onChange: downshift_esm_noop,
-							onSelect: downshift_esm_noop,
-							onOuterClick: downshift_esm_noop,
-							selectedItemChanged: function selectedItemChanged(prevItem, item) {
-								return prevItem !== item;
-							},
-							environment: 'undefined' == typeof window ? {} : window,
-							stateReducer: function stateReducer(state, stateToSet) {
-								return stateToSet;
-							},
-							suppressRefError: !1,
-							scrollIntoView: downshift_esm_scrollIntoView,
+								(this.previousResultCount = resultCount), setStatus(status, this.props.environment.document);
+							}, 200));
+						const {
+								defaultHighlightedIndex,
+								initialHighlightedIndex: _highlightedIndex = defaultHighlightedIndex,
+								defaultIsOpen,
+								initialIsOpen: _isOpen = defaultIsOpen,
+								initialInputValue: _inputValue = '',
+								initialSelectedItem: _selectedItem = null,
+							} = this.props,
+							_state = this.getState({ highlightedIndex: _highlightedIndex, isOpen: _isOpen, inputValue: _inputValue, selectedItem: _selectedItem });
+						null != _state.selectedItem &&
+							void 0 === this.props.initialInputValue &&
+							(_state.inputValue = this.props.itemToString(_state.selectedItem)),
+							(this.state = _state);
+					}
+					internalClearTimeouts() {
+						this.timeoutIds.forEach((id) => {
+							clearTimeout(id);
 						}),
-						(Downshift.stateChangeTypes = stateChangeTypes$3),
-						Downshift
-					);
-				})(),
-				Downshift$1 = Downshift;
-			downshift_esm_debounce(function (getA11yMessage, document) {
+							(this.timeoutIds = []);
+					}
+					getState(stateToMerge) {
+						return void 0 === stateToMerge && (stateToMerge = this.state), getState(stateToMerge, this.props);
+					}
+					getItemCount() {
+						let itemCount = this.items.length;
+						return (
+							null != this.itemCount ? (itemCount = this.itemCount) : void 0 !== this.props.itemCount && (itemCount = this.props.itemCount), itemCount
+						);
+					}
+					getItemNodeFromIndex(index) {
+						return this.props.environment.document.getElementById(this.getItemId(index));
+					}
+					scrollHighlightedItemIntoView() {
+						{
+							const node = this.getItemNodeFromIndex(this.getState().highlightedIndex);
+							this.props.scrollIntoView(node, this._menuNode);
+						}
+					}
+					moveHighlightedIndex(amount, otherStateToSet) {
+						const itemCount = this.getItemCount(),
+							{ highlightedIndex } = this.getState();
+						if (itemCount > 0) {
+							const nextHighlightedIndex = getNextWrappingIndex(amount, highlightedIndex, itemCount, (index) => this.getItemNodeFromIndex(index));
+							this.setHighlightedIndex(nextHighlightedIndex, otherStateToSet);
+						}
+					}
+					getStateAndHelpers() {
+						const { highlightedIndex, inputValue, selectedItem, isOpen } = this.getState(),
+							{ itemToString } = this.props,
+							{ id } = this,
+							{
+								getRootProps,
+								getToggleButtonProps,
+								getLabelProps,
+								getMenuProps,
+								getInputProps,
+								getItemProps,
+								openMenu,
+								closeMenu,
+								toggleMenu,
+								selectItem,
+								selectItemAtIndex,
+								selectHighlightedItem,
+								setHighlightedIndex,
+								clearSelection,
+								clearItems,
+								reset,
+								setItemCount,
+								unsetItemCount,
+								internalSetState: setState,
+							} = this;
+						return {
+							getRootProps,
+							getToggleButtonProps,
+							getLabelProps,
+							getMenuProps,
+							getInputProps,
+							getItemProps,
+							reset,
+							openMenu,
+							closeMenu,
+							toggleMenu,
+							selectItem,
+							selectItemAtIndex,
+							selectHighlightedItem,
+							setHighlightedIndex,
+							clearSelection,
+							clearItems,
+							setItemCount,
+							unsetItemCount,
+							setState,
+							itemToString,
+							id,
+							highlightedIndex,
+							inputValue,
+							isOpen,
+							selectedItem,
+						};
+					}
+					componentDidMount() {
+						{
+							const onMouseDown = () => {
+									this.isMouseDown = !0;
+								},
+								onMouseUp = (event) => {
+									this.isMouseDown = !1;
+									!targetWithinDownshift(event.target, [this._rootNode, this._menuNode], this.props.environment) &&
+										this.getState().isOpen &&
+										this.reset({ type: 1 }, () => this.props.onOuterClick(this.getStateAndHelpers()));
+								},
+								onTouchStart = () => {
+									this.isTouchMove = !1;
+								},
+								onTouchMove = () => {
+									this.isTouchMove = !0;
+								},
+								onTouchEnd = (event) => {
+									const contextWithinDownshift = targetWithinDownshift(event.target, [this._rootNode, this._menuNode], this.props.environment, !1);
+									this.isTouchMove ||
+										contextWithinDownshift ||
+										!this.getState().isOpen ||
+										this.reset({ type: 16 }, () => this.props.onOuterClick(this.getStateAndHelpers()));
+								},
+								{ environment } = this.props;
+							environment.addEventListener('mousedown', onMouseDown),
+								environment.addEventListener('mouseup', onMouseUp),
+								environment.addEventListener('touchstart', onTouchStart),
+								environment.addEventListener('touchmove', onTouchMove),
+								environment.addEventListener('touchend', onTouchEnd),
+								(this.cleanup = () => {
+									this.internalClearTimeouts(),
+										this.updateStatus.cancel(),
+										environment.removeEventListener('mousedown', onMouseDown),
+										environment.removeEventListener('mouseup', onMouseUp),
+										environment.removeEventListener('touchstart', onTouchStart),
+										environment.removeEventListener('touchmove', onTouchMove),
+										environment.removeEventListener('touchend', onTouchEnd);
+								});
+						}
+					}
+					shouldScroll(prevState, prevProps) {
+						const { highlightedIndex: currentHighlightedIndex } = void 0 === this.props.highlightedIndex ? this.getState() : this.props,
+							{ highlightedIndex: prevHighlightedIndex } = void 0 === prevProps.highlightedIndex ? prevState : prevProps;
+						return (currentHighlightedIndex && this.getState().isOpen && !prevState.isOpen) || currentHighlightedIndex !== prevHighlightedIndex;
+					}
+					componentDidUpdate(prevProps, prevState) {
+						isControlledProp(this.props, 'selectedItem') &&
+							this.props.selectedItemChanged(prevProps.selectedItem, this.props.selectedItem) &&
+							this.internalSetState({ type: 15, inputValue: this.props.itemToString(this.props.selectedItem) }),
+							!this.avoidScrolling && this.shouldScroll(prevState, prevProps) && this.scrollHighlightedItemIntoView(),
+							this.updateStatus();
+					}
+					componentWillUnmount() {
+						this.cleanup();
+					}
+					render() {
+						const children = unwrapArray(this.props.children, downshift_esm_noop);
+						this.clearItems(),
+							(this.getRootProps.called = !1),
+							(this.getRootProps.refKey = void 0),
+							(this.getRootProps.suppressRefError = void 0),
+							(this.getMenuProps.called = !1),
+							(this.getMenuProps.refKey = void 0),
+							(this.getMenuProps.suppressRefError = void 0),
+							(this.getLabelProps.called = !1),
+							(this.getInputProps.called = !1);
+						const element = unwrapArray(children(this.getStateAndHelpers()));
+						return element
+							? this.getRootProps.called || this.props.suppressRefError
+								? element
+								: isDOMElement(element)
+								? (0, react.cloneElement)(element, this.getRootProps(getElementProps(element)))
+								: void 0
+							: null;
+					}
+				}
+				return (
+					(Downshift.defaultProps = {
+						defaultHighlightedIndex: null,
+						defaultIsOpen: !1,
+						getA11yStatusMessage: getA11yStatusMessage$1,
+						itemToString: (i) => (null == i ? '' : String(i)),
+						onStateChange: downshift_esm_noop,
+						onInputValueChange: downshift_esm_noop,
+						onUserAction: downshift_esm_noop,
+						onChange: downshift_esm_noop,
+						onSelect: downshift_esm_noop,
+						onOuterClick: downshift_esm_noop,
+						selectedItemChanged: (prevItem, item) => prevItem !== item,
+						environment: 'undefined' == typeof window ? {} : window,
+						stateReducer: (state, stateToSet) => stateToSet,
+						suppressRefError: !1,
+						scrollIntoView: downshift_esm_scrollIntoView,
+					}),
+					(Downshift.stateChangeTypes = stateChangeTypes$3),
+					Downshift
+				);
+			})();
+			var Downshift$1 = Downshift;
+			downshift_esm_debounce((getA11yMessage, document) => {
 				setStatus(getA11yMessage(), document);
 			}, 200),
 				'undefined' != typeof window && void 0 !== window.document && void 0 !== window.document.createElement
 					? react.useLayoutEffect
 					: react.useEffect;
-			var defaultProps$3 = {
+			const defaultProps$3 = {
 				itemToString: function itemToString(item) {
 					return item ? String(item) : '';
 				},
@@ -22790,9 +22665,8 @@
 					return a.changes;
 				},
 				getA11ySelectionMessage: function getA11ySelectionMessage(selectionParameters) {
-					var selectedItem = selectionParameters.selectedItem,
-						itemToStringLocal = selectionParameters.itemToString;
-					return selectedItem ? itemToStringLocal(selectedItem) + ' has been selected.' : '';
+					const { selectedItem, itemToString: itemToStringLocal } = selectionParameters;
+					return selectedItem ? `${itemToStringLocal(selectedItem)} has been selected.` : '';
 				},
 				scrollIntoView: downshift_esm_scrollIntoView,
 				circularNavigation: !1,
@@ -22839,10 +22713,12 @@
 					return isOpen
 						? resultCount
 							? resultCount !== previousResultCount
-								? resultCount +
-								  ' result' +
-								  (1 === resultCount ? ' is' : 's are') +
-								  ' available, use up and down arrow keys to navigate. Press Enter or Space Bar keys to select.'
+								? ''
+										.concat(resultCount, ' result')
+										.concat(
+											1 === resultCount ? ' is' : 's are',
+											' available, use up and down arrow keys to navigate. Press Enter or Space Bar keys to select.'
+										)
 								: ''
 							: 'No results are available.'
 						: '';
@@ -22886,7 +22762,6 @@
 						body: prop_types_default().any,
 					}),
 				});
-			(0, esm_extends.Z)({}, defaultProps$3, { getA11yStatusMessage: getA11yStatusMessage$1, circularNavigation: !0 });
 			prop_types_default().array,
 				prop_types_default().array,
 				prop_types_default().array,
@@ -28257,9 +28132,9 @@
 					Provider
 				);
 			})();
-			function dist_esm_extends() {
+			function esm_extends() {
 				return (
-					(dist_esm_extends =
+					(esm_extends =
 						Object.assign ||
 						function (target) {
 							for (var i = 1; i < arguments.length; i++) {
@@ -28268,7 +28143,7 @@
 							}
 							return target;
 						}),
-					dist_esm_extends.apply(this, arguments)
+					esm_extends.apply(this, arguments)
 				);
 			}
 			var esm_DOCS_MODE = window_default().DOCS_MODE;
@@ -28297,7 +28172,7 @@
 			var esm_Main = function Main(_ref2) {
 				var provider = _ref2.provider,
 					navigate = (function useQueryNavigate() {
-						var navigate = react_router_useNavigate();
+						var navigate = dist_useNavigate();
 						return (0, react.useCallback)(function (to, options) {
 							if ('string' != typeof to || !to.startsWith('#')) {
 								if ('string' == typeof to) {
@@ -28312,7 +28187,7 @@
 				return react.createElement(QueryLocation, { key: 'location.consumer' }, function (locationData) {
 					return react.createElement(
 						esm.zt,
-						dist_esm_extends({ key: 'manager', provider }, locationData, { navigate, docsMode: getDocsMode() }),
+						esm_extends({ key: 'manager', provider }, locationData, { navigate, docsMode: getDocsMode() }),
 						function (_ref3) {
 							var state = _ref3.state,
 								api = _ref3.api,
@@ -31560,7 +31435,7 @@
 			Object.defineProperty(exports, '__esModule', { value: !0 }),
 				(exports.typography = exports.background = exports.color = void 0),
 				__webpack_require__(16781);
-			var _polished = __webpack_require__(11682),
+			var _polished = __webpack_require__(54246),
 				color = {
 					primary: '#FF4785',
 					secondary: '#1EA7FD',
@@ -31720,7 +31595,7 @@
 				Object.defineProperty(exports, '__esModule', { value: !0 }),
 				(exports.getPreferredColorScheme = exports.darkenColor = exports.lightenColor = exports.mkColor = void 0),
 				__webpack_require__(18178);
-			var _polished = __webpack_require__(11682),
+			var _polished = __webpack_require__(54246),
 				_global = (function _interopRequireDefault(obj) {
 					return obj && obj.__esModule ? obj : { default: obj };
 				})(__webpack_require__(35048)),
@@ -31787,7 +31662,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { $_: () => color, Oq: () => background, cp: () => typography });
 			__webpack_require__(16781);
-			var polished__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11682),
+			var polished__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(54246),
 				color = {
 					primary: '#FF4785',
 					secondary: '#1EA7FD',
@@ -31866,7 +31741,7 @@
 				_templateObject2,
 				_templateObject3,
 				_templateObject4,
-				polished_esm = __webpack_require__(11682),
+				polished_esm = __webpack_require__(54246),
 				esm_base = __webpack_require__(15867),
 				core_browser_esm = (__webpack_require__(32501), __webpack_require__(22144), __webpack_require__(14724));
 			function _taggedTemplateLiteral(strings, raw) {
@@ -32788,7 +32663,7 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886);
-			var polished__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11682),
+			var polished__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(54246),
 				global__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(35048),
 				global__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(global__WEBPACK_IMPORTED_MODULE_8__),
 				_storybook_client_logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(87537);
@@ -46725,7 +46600,7 @@
 			module.exports = function GetIntrinsic(name, allowMissing) {
 				if ('string' != typeof name || 0 === name.length) throw new $TypeError('intrinsic name must be a non-empty string');
 				if (arguments.length > 1 && 'boolean' != typeof allowMissing) throw new $TypeError('"allowMissing" argument must be a boolean');
-				if (null === $exec(/^%?[^%]*%?$/g, name))
+				if (null === $exec(/^%?[^%]*%?$/, name))
 					throw new $SyntaxError('`%` may not be present anywhere but at the beginning and end of the intrinsic name');
 				var parts = stringToPath(name),
 					intrinsicBaseName = parts.length > 0 ? parts[0] : '',
@@ -47209,12 +47084,34 @@
 						return !1;
 					}
 				},
+				tryFunctionObject = function tryFunctionToStr(value) {
+					try {
+						return !isES6ClassFn(value) && (fnToStr.call(value), !0);
+					} catch (e) {
+						return !1;
+					}
+				},
 				toStr = Object.prototype.toString,
 				hasToStringTag = 'function' == typeof Symbol && !!Symbol.toStringTag,
-				documentDotAll = 'object' == typeof document && void 0 === document.all && void 0 !== document.all ? document.all : {};
+				isIE68 = !(0 in [,]),
+				isDDA = function isDocumentDotAll() {
+					return !1;
+				};
+			if ('object' == typeof document) {
+				var all = document.all;
+				toStr.call(all) === toStr.call(document.all) &&
+					(isDDA = function isDocumentDotAll(value) {
+						if ((isIE68 || !value) && (void 0 === value || 'object' == typeof value))
+							try {
+								var str = toStr.call(value);
+								return ('[object HTMLAllCollection]' === str || '[object Object]' === str) && null == value('');
+							} catch (e) {}
+						return !1;
+					});
+			}
 			module.exports = reflectApply
 				? function isCallable(value) {
-						if (value === documentDotAll) return !0;
+						if (isDDA(value)) return !0;
 						if (!value) return !1;
 						if ('function' != typeof value && 'object' != typeof value) return !1;
 						if ('function' == typeof value && !value.prototype) return !0;
@@ -47226,21 +47123,13 @@
 						return !isES6ClassFn(value);
 				  }
 				: function isCallable(value) {
-						if (value === documentDotAll) return !0;
+						if (isDDA(value)) return !0;
 						if (!value) return !1;
 						if ('function' != typeof value && 'object' != typeof value) return !1;
-						if ('function' == typeof value && !value.prototype) return !0;
-						if (hasToStringTag)
-							return (function tryFunctionToStr(value) {
-								try {
-									return !isES6ClassFn(value) && (fnToStr.call(value), !0);
-								} catch (e) {
-									return !1;
-								}
-							})(value);
+						if (hasToStringTag) return tryFunctionObject(value);
 						if (isES6ClassFn(value)) return !1;
 						var strClass = toStr.call(value);
-						return '[object Function]' === strClass || '[object GeneratorFunction]' === strClass;
+						return '[object Function]' === strClass || '[object GeneratorFunction]' === strClass || tryFunctionObject(value);
 				  };
 		},
 		54277: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -51680,7 +51569,7 @@
 				);
 			};
 		},
-		11682: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		54246: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -51758,9 +51647,8 @@
 					triangle: () => triangle,
 					wordWrap: () => wordWrap,
 				});
-			var esm_extends = __webpack_require__(7896),
-				assertThisInitialized = __webpack_require__(80753),
-				inheritsLoose = __webpack_require__(81665);
+			var esm_extends = __webpack_require__(7896);
+			var inheritsLoose = __webpack_require__(81665);
 			function _getPrototypeOf(o) {
 				return (
 					(_getPrototypeOf = Object.setPrototypeOf
@@ -51952,16 +51840,16 @@
 			};
 			var PolishedError = (function (_Error) {
 					function PolishedError(code) {
-						var _this;
-						return (
-							(_this =
-								_Error.call(
-									this,
-									'An error occurred. See https://github.com/styled-components/polished/blob/main/src/internalHelpers/errors.md#' +
-										code +
-										' for more information.'
-								) || this),
-							(0, assertThisInitialized.Z)(_this)
+						return (function _assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(
+							_Error.call(
+								this,
+								'An error occurred. See https://github.com/styled-components/polished/blob/main/src/internalHelpers/errors.md#' +
+									code +
+									' for more information.'
+							) || this
 						);
 					}
 					return (0, inheritsLoose.Z)(PolishedError, _Error), PolishedError;
@@ -65367,14 +65255,6 @@
 					return void 0 === callback ? throttle(delay, atBegin, !1) : throttle(delay, callback, !1 !== atBegin);
 				}),
 				(exports.throttle = throttle);
-		},
-		80753: (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			function _assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			__webpack_require__.d(__webpack_exports__, { Z: () => _assertThisInitialized });
 		},
 		56666: (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 			'use strict';
