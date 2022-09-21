@@ -29,6 +29,7 @@ export type UrlState = {
 	query?: string;
 	rq?: string;
 	oq?: string;
+	fallbackQuery?: string;
 	filter?: UrlStateFilter;
 	sort?: UrlStateSort | Array<UrlStateSort>;
 	tag?: string;

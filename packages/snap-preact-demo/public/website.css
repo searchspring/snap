@@ -705,6 +705,16 @@ input[type='text'] {
   .ss-lite-footer .ss-lite-col, .ss-lite-footer .ss-lite-footer-information {
     width: auto; } }
 
+.ss-results-title .ss-oq {
+  font-size: 14px;
+  color: #3b23ad;
+  font-weight: normal;
+}
+
+.ss-results-title .ss-oq em {
+  font-weight: bold;
+}
+
 .ss-toolbar-col {
   display: inline-block;
   margin: 10px;
