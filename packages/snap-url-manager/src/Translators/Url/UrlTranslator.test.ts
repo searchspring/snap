@@ -57,6 +57,7 @@ describe('UrlTranslator', () => {
 				pageSize: { name: 'pageSize', type: ParamLocationType.hash },
 				sort: { name: 'sort', type: ParamLocationType.hash },
 				filter: { name: 'filter', type: ParamLocationType.hash },
+				fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 			});
 
 			expect(defaultConfig.parameters.custom).toEqual({});
@@ -154,6 +155,7 @@ describe('UrlTranslator', () => {
 				pageSize: { name: 'pageSize', type: ParamLocationType.hash },
 				sort: { name: 'sort', type: ParamLocationType.hash },
 				filter: { name: 'filter', type: ParamLocationType.hash },
+				fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 			});
 		});
 	});

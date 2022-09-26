@@ -49,6 +49,7 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 		q?: string;
 		rq?: string;
 		originalQuery?: string;
+		fallbackQuery?: string;
 		redirectResponse?: string;
 	} = {};
 
@@ -62,6 +63,10 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 
 	if (reqSearch.originalQuery) {
 		search.originalQuery = reqSearch.originalQuery.trim();
+	}
+
+	if (reqSearch.fallbackQuery) {
+		search.fallbackQuery = reqSearch.fallbackQuery.trim();
 	}
 
 	if (reqSearch.redirectResponse) {

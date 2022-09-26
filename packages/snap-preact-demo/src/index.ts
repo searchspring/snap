@@ -15,6 +15,11 @@ import './styles/custom.scss';
  */
 
 let config: SnapConfig = {
+	features: {
+		integratedSpellCorrection: {
+			enabled: true,
+		},
+	},
 	url: {
 		settings: {
 			coreType: 'query',

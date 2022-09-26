@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import { AppMode } from '@searchspring/snap-toolbox';
 
 import {
@@ -11,7 +12,7 @@ import {
 
 import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
-import type { SuggestRequestModel } from '../../types';
+import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
 
 export class HybridAPI extends API {
 	private requesters: {
@@ -19,16 +20,33 @@ export class HybridAPI extends API {
 		suggest: SuggestAPI;
 	};
 
-	constructor(configuration: ApiConfiguration) {
+	constructor(configuration: ApiConfiguration, requesterConfigurations?: HybridRequesterConfig) {
 		super(configuration);
 
-		const legacyConfig: ApiConfigurationParameters = { mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache };
+		const legacyConfig: ApiConfigurationParameters = deepmerge(
+			{
+				mode: configuration.mode,
+				origin: configuration.origin,
+				cache: this.configuration.cache,
+			},
+			requesterConfigurations?.legacy || {}
+		);
+
 		if (configuration.mode == AppMode.development) {
-			legacyConfig.headers = { 'searchspring-no-beacon': '' };
+			legacyConfig.headers = { ...legacyConfig.headers, 'searchspring-no-beacon': '' };
 		}
 
+		const suggestConfig = deepmerge(
+			{
+				mode: configuration.mode,
+				origin: configuration.origin,
+				cache: this.configuration.cache,
+			},
+			requesterConfigurations?.suggest || {}
+		);
+
 		const legacyConfiguration = new ApiConfiguration(legacyConfig);
-		const suggestConfiguration = new ApiConfiguration({ mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache });
+		const suggestConfiguration = new ApiConfiguration(suggestConfig);
 
 		this.requesters = {
 			legacy: new LegacyAPI(legacyConfiguration),
