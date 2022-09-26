@@ -10,6 +10,7 @@ import type {
 	RecommendRequestModel,
 	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
+	GenericGlobals,
 } from '../types';
 
 import type {
@@ -87,42 +88,56 @@ export class Client {
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.autocomplete?.api?.origin,
+					headers: this.config.autocomplete?.api?.headers,
 					cache: this.config.autocomplete?.cache,
-				})
+					globals: this.config.autocomplete?.globals,
+				}),
+				this.config.autocomplete?.requesters
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.meta?.api?.origin,
+					headers: this.config.meta?.api?.headers,
 					cache: this.config.meta?.cache,
+					globals: this.config.meta?.globals,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.recommend?.api?.origin,
+					headers: this.config.recommend?.api?.headers,
 					cache: this.config.recommend?.cache,
+					globals: this.config.recommend?.globals,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.search?.api?.origin,
+					headers: this.config.search?.api?.headers,
 					cache: this.config.search?.cache,
+					globals: this.config.search?.globals,
 				})
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.finder?.api?.origin,
+					headers: this.config.finder?.api?.headers,
 					cache: this.config.finder?.cache,
+					globals: this.config.finder?.globals,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					mode: this.mode,
 					origin: this.config.suggest?.api?.origin,
+					headers: this.config.suggest?.api?.headers,
 					cache: this.config.suggest?.cache,
+					// either of these could work
+					globals: this.config.suggest?.globals,
 				})
 			),
 		};

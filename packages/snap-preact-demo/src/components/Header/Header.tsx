@@ -32,6 +32,11 @@ export class Header extends Component<HeaderProps> {
 										<span class="ss-results-query">"{search.query.string}"</span>
 									</span>
 								)}
+								{search?.originalQuery && (
+									<div class="ss-oq">
+										No results found for <em>"{search.originalQuery.string}"</em>, showing results for <em>"{search.query.string}"</em> instead.
+									</div>
+								)}
 							</h3>
 						) : (
 							pagination.totalResults === 0 && (

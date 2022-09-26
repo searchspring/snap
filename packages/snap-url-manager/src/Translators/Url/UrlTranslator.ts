@@ -26,6 +26,7 @@ export type CoreMap = {
 	pageSize: MapOptions;
 	sort: MapOptions;
 	filter: MapOptions;
+	fallbackQuery: MapOptions;
 };
 
 type CustomMap = {
@@ -71,12 +72,13 @@ const defaultConfig: UrlTranslatorConfigFull = {
 			pageSize: { name: 'pageSize', type: ParamLocationType.hash },
 			sort: { name: 'sort', type: ParamLocationType.hash },
 			filter: { name: 'filter', type: ParamLocationType.hash },
+			fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 		},
 		custom: {},
 	},
 };
 
-const CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
+const CORE_FIELDS = ['query', 'oq', 'fallbackQuery', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
 
 export class UrlTranslator implements Translator {
 	protected config: UrlTranslatorConfigFull;

@@ -15,6 +15,7 @@ export const INPUT_DELAY = 200;
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const PARAM_ORIGINAL_QUERY = 'oq';
+const PARAM_FALLBACK_QUERY = 'fallbackQuery';
 
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -22,6 +23,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 	action: '',
 	globals: {},
 	settings: {
+		integratedSpellCorrection: false,
 		initializeFromUrl: true,
 		syncInputs: true,
 		serializeForm: false,
@@ -217,8 +219,13 @@ export class AutocompleteController extends AbstractController {
 							await timeout(INPUT_DELAY);
 						}
 
-						// use corrected query and originalQuery
-						if (this.store.search.originalQuery) {
+						if (this.config.settings!.integratedSpellCorrection) {
+							// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
+							if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
+								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+							}
+						} else if (this.store.search.originalQuery) {
+							// use corrected query and originalQuery
 							input.value = this.store.search.query?.string!;
 							actionUrl = actionUrl?.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 						}
@@ -275,7 +282,13 @@ export class AutocompleteController extends AbstractController {
 						await timeout(INPUT_DELAY);
 					}
 
-					if (this.store.search.originalQuery) {
+					if (this.config.settings!.integratedSpellCorrection) {
+						// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
+						if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
+							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+						}
+					} else if (this.store.search.originalQuery) {
+						// use corrected query and originalQuery
 						if (input) {
 							input.value = this.store.search.query?.string!;
 						}

@@ -1,42 +1,13 @@
+import {
+	SearchRequestModel,
+	SearchRequestModelFilterTypeEnum,
+	SearchRequestModelFilterRange,
+	SearchRequestModelFilterValue,
+} from '@searchspring/snapi-types';
 import type { ImmutableUrlState } from '@searchspring/snap-url-manager';
 
-// translate state to snAPI params
-type searchParams = {
-	search?: {
-		query?: {
-			string?: string;
-		};
-		subQuery?: string;
-		originalQuery?: string;
-	};
-	pagination?: {
-		pageSize?: number;
-		page?: number;
-	};
-	sorts?: {
-		field: string;
-		direction: string;
-	}[];
-	filters?: {
-		type: string;
-		field: string;
-		value:
-			| string
-			| number
-			| boolean
-			| {
-					low: number;
-					high: number;
-			  };
-		background?: boolean;
-	}[];
-	merchandising?: {
-		landingPage?: string;
-	};
-};
-
 export function getSearchParams(state: ImmutableUrlState): Record<string, any> {
-	const params: searchParams = {};
+	const params: SearchRequestModel = {};
 
 	if (state.tag) {
 		params.merchandising = params.merchandising || {};
@@ -57,6 +28,11 @@ export function getSearchParams(state: ImmutableUrlState): Record<string, any> {
 	if (state.oq) {
 		params.search = params.search || {};
 		params.search.originalQuery = state.oq;
+	}
+
+	if (state.fallbackQuery) {
+		params.search = params.search || {};
+		params.search.fallbackQuery = state.fallbackQuery;
 	}
 
 	if (state.page) {
@@ -99,16 +75,16 @@ export function getSearchParams(state: ImmutableUrlState): Record<string, any> {
 			values.forEach((value) => {
 				if (typeof value != 'object') {
 					params.filters!.push({
-						type: 'value',
+						type: 'value' as SearchRequestModelFilterTypeEnum,
 						field: field,
 						value,
-					});
+					} as SearchRequestModelFilterRange);
 				} else if (typeof value.low != 'undefined' && typeof value.high != 'undefined') {
 					params.filters!.push({
-						type: 'range',
+						type: 'range' as SearchRequestModelFilterTypeEnum,
 						field: field,
 						value,
-					});
+					} as SearchRequestModelFilterValue);
 				}
 			});
 		});

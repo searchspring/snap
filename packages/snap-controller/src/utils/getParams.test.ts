@@ -108,6 +108,25 @@ describe('getParams', () => {
 		});
 	});
 
+	it('uses "fallbackQuery" from UrlManager state', () => {
+		const searchQuery = 'red drezz';
+		const fallbackQuery = 'red dress';
+
+		urlManager = urlManager.merge('query', searchQuery);
+		urlManager = urlManager.merge('fallbackQuery', fallbackQuery);
+
+		const params = getSearchParams(urlManager.state);
+
+		expect(params).toStrictEqual({
+			search: {
+				query: {
+					string: searchQuery,
+				},
+				fallbackQuery,
+			},
+		});
+	});
+
 	it('uses "page" from UrlManager state', () => {
 		const page = 3;
 

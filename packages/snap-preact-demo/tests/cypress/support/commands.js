@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import packageJSON from '../../../package.json';
+import 'cypress-wait-until';
 
 Cypress.Commands.add('addScript', (script) => {
 	cy.document().then((doc) => {

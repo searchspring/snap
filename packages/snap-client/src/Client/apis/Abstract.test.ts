@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
-import { API, ApiConfiguration, ApiConfigurationParameters, HTTPHeaders, HTTPQuery } from './Abstract';
+import { API, ApiConfiguration, ApiConfigurationParameters, HTTPQuery } from './Abstract';
+import { HTTPHeaders } from '../../types';
 
 describe('ApiConfiguration', () => {
 	it('has default configurations', () => {

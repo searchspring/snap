@@ -40,6 +40,7 @@
 		"core-js": "3.22.8",
 		"css-loader": "6.7.1",
 		"cypress": "8.5.0",
+		"cypress-wait-until": "^1.7.2",
 		"file-loader": "6.2.0",
 		"sass": "1.52.2",
 		"sass-loader": "12.6.0",
