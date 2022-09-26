@@ -56,6 +56,7 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	selector: string;
 	action?: string;
 	settings?: {
+		integratedSpellCorrection?: boolean;
 		initializeFromUrl?: boolean;
 		syncInputs?: boolean;
 		serializeForm?: boolean;
