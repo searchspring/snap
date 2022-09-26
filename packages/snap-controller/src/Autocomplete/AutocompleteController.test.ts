@@ -698,6 +698,57 @@ describe('Autocomplete Controller', () => {
 
 		await waitFor(() => {
 			expect(window.location.href).toContain(`oq=${query}`);
+			expect(window.location.href).not.toContain(`fallbackQuery=`);
+			expect(window.location.href).toContain(acConfig.action);
+		});
+	});
+
+	it('can submit without form and config.action with original query', async () => {
+		acConfig = {
+			...acConfig,
+			settings: {
+				integratedSpellCorrection: true,
+			},
+		};
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
+		acConfig.action = '/search.html';
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'correctedIntegratedSpellCorrection', siteId: '8uyt2m' });
+
+		expect(controller.config.settings!.integratedSpellCorrection).toBe(true);
+
+		await controller.bind();
+		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+
+		const query = 'dresss';
+		inputEl!.value = query;
+		inputEl!.focus();
+		inputEl!.dispatchEvent(new Event('keyup'));
+
+		// inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		//@ts-ignore
+		delete window.location;
+		window.location = {
+			...window.location,
+			href: '', // jest does not support window location changes
+		};
+
+		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		await waitFor(() => {
+			// expect(window.location.href).toContain(`search_query=${query}`);
+			expect(JSON.stringify(controller.store.terms)).toBe('asdf');
+			expect(window.location.href).toContain(`fallbackQuery=test`);
 			expect(window.location.href).toContain(acConfig.action);
 		});
 	});
