@@ -1,4 +1,4 @@
-/*! For license information please see main.404fc270.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.9b3f1ceb.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -41,6 +41,135 @@
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
 		},
+		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			var preview_namespaceObject = {};
+			__webpack_require__.r(preview_namespaceObject),
+				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
+				injectStylesIntoStyleTag = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
+				),
+				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
+				styles = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
+				),
+				options = { insert: 'head', singleton: !1 };
+			injectStylesIntoStyleTag_default()(styles.Z, options);
+			styles.Z.locals;
+			var decorators = [
+					function (Story) {
+						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+					},
+				],
+				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(preview_namespaceObject).forEach(function (key) {
+				var value = preview_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.$9)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.HZ)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.h1)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.My)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi._C)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.$P)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			(module = __webpack_require__.nmd(module)),
+				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
+					[
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__(
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
+						),
+					],
+					module,
+					!1
+				);
+		},
 		'./src/components/Atoms/Badge/Badge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -51,7 +180,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
 				esm =
@@ -243,7 +372,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
@@ -420,7 +549,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -704,7 +833,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -1158,7 +1287,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				formatNumber = __webpack_require__('../snap-toolbox/dist/esm/filters/formatNumber.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -1475,7 +1604,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -1849,7 +1978,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				searchResponse = __webpack_require__('./src/mocks/searchResponse.ts'),
@@ -2380,7 +2509,7 @@
 				);
 			}
 			var componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -2524,7 +2653,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				_Banner__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/utilities/componentArgs.ts'),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/utilities/snapify.ts'),
@@ -3204,7 +3333,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/utilities/componentArgs.ts'),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__('./src/utilities/snapify.ts'),
@@ -3772,7 +3901,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Overlay_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Overlay = __webpack_require__('./src/components/Atoms/Overlay/Overlay.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -3967,7 +4096,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -4204,7 +4333,7 @@
 				__webpack_require__.d(__webpack_exports__, { Circle: () => Circle, Default: () => Default, default: () => Skeleton_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -4461,7 +4590,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-start.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
@@ -5221,7 +5350,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Checkbox = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -5671,7 +5800,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
@@ -6143,7 +6272,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetGridOptions = __webpack_require__('./src/components/Molecules/FacetGridOptions/FacetGridOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -6958,7 +7087,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetHierarchyOptions = __webpack_require__('./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -7736,7 +7865,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetListOptions = __webpack_require__('./src/components/Molecules/FacetListOptions/FacetListOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -8548,7 +8677,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetPaletteOptions = __webpack_require__('./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -9424,7 +9553,7 @@
 				__webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => FacetSlider_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetSlider = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				searchResponse = __webpack_require__('./src/mocks/searchResponse.ts'),
@@ -10227,7 +10356,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Filter = __webpack_require__('./src/components/Molecules/Filter/Filter.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -11055,7 +11184,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				es =
 					(__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
@@ -11985,7 +12114,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -12952,7 +13081,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => SearchInput_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				SearchInput = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -13184,7 +13313,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -14474,7 +14603,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Slideout_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -14976,7 +15105,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -16734,7 +16863,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
@@ -17301,7 +17430,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facet = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				types = __webpack_require__('./src/types.ts'),
@@ -18750,7 +18879,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -19391,7 +19520,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -20322,7 +20451,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
@@ -21501,7 +21630,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -26312,6 +26441,7 @@
 						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
 					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq)),
 					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq)),
+					state.fallbackQuery && ((params.search = params.search || {}), (params.search.fallbackQuery = state.fallbackQuery)),
 					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
 					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
 					state.sort)
@@ -28887,7 +29017,13 @@
 					selector: '',
 					action: '',
 					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !0, serializeForm: !1, facets: { trim: !0, pinFiltered: !0 } },
+					settings: {
+						integratedSpellCorrection: !1,
+						initializeFromUrl: !0,
+						syncInputs: !0,
+						serializeForm: !1,
+						facets: { trim: !0, pinFiltered: !0 },
+					},
 				},
 				AutocompleteController = (function (_AbstractController) {
 					!(function AutocompleteController_inherits(subClass, superClass) {
@@ -28933,12 +29069,13 @@
 												var _this$config$globals,
 													_this$config$globals$,
 													_this$config$globals$2,
-													_actionUrl2,
 													_actionUrl3,
+													_actionUrl4,
 													input,
 													actionUrl,
+													_actionUrl,
 													_this$store$search$qu,
-													_actionUrl;
+													_actionUrl2;
 												return AutocompleteController_regeneratorRuntime().wrap(
 													function _callee$(_context) {
 														for (;;)
@@ -28974,19 +29111,27 @@
 																	_context.next = 7;
 																	break;
 																case 12:
-																	_this.store.search.originalQuery &&
-																		((input.value =
-																			null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
-																				? void 0
-																				: _this$store$search$qu.string),
-																		(actionUrl =
-																			null === (_actionUrl = actionUrl) || void 0 === _actionUrl
-																				? void 0
-																				: _actionUrl.set('oq', _this.store.search.originalQuery.string)));
+																	_this.config.settings.integratedSpellCorrection
+																		? input &&
+																		  _this.store.terms.length &&
+																		  _this.store.terms[0].value != input.value &&
+																		  (actionUrl =
+																				null === (_actionUrl = actionUrl) || void 0 === _actionUrl
+																					? void 0
+																					: _actionUrl.set('fallbackQuery', _this.store.terms[0].value))
+																		: _this.store.search.originalQuery &&
+																		  ((input.value =
+																				null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
+																					? void 0
+																					: _this$store$search$qu.string),
+																		  (actionUrl =
+																				null === (_actionUrl2 = actionUrl) || void 0 === _actionUrl2
+																					? void 0
+																					: _actionUrl2.set('oq', _this.store.search.originalQuery.string)));
 																case 13:
 																	return (
 																		(actionUrl =
-																			null === (_actionUrl2 = actionUrl) || void 0 === _actionUrl2 ? void 0 : _actionUrl2.set('query', input.value)),
+																			null === (_actionUrl3 = actionUrl) || void 0 === _actionUrl3 ? void 0 : _actionUrl3.set('query', input.value)),
 																		(_context.prev = 14),
 																		(_context.next = 17),
 																		_this.eventManager.fire('beforeSubmit', {
@@ -29011,7 +29156,7 @@
 																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context.t0);
 																case 28:
 																	window.location.href =
-																		(null === (_actionUrl3 = actionUrl) || void 0 === _actionUrl3 ? void 0 : _actionUrl3.href) || '';
+																		(null === (_actionUrl4 = actionUrl) || void 0 === _actionUrl4 ? void 0 : _actionUrl4.href) || '';
 																case 29:
 																case 'end':
 																	return _context.stop();
@@ -29070,13 +29215,18 @@
 																	_context2.next = 6;
 																	break;
 																case 11:
-																	_this.store.search.originalQuery &&
-																		(input &&
-																			(input.value =
-																				null === (_this$store$search$qu2 = _this.store.search.query) || void 0 === _this$store$search$qu2
-																					? void 0
-																					: _this$store$search$qu2.string),
-																		addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
+																	_this.config.settings.integratedSpellCorrection
+																		? input &&
+																		  _this.store.terms.length &&
+																		  _this.store.terms[0].value != input.value &&
+																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.terms[0].value)
+																		: _this.store.search.originalQuery &&
+																		  (input &&
+																				(input.value =
+																					null === (_this$store$search$qu2 = _this.store.search.query) || void 0 === _this$store$search$qu2
+																						? void 0
+																						: _this$store$search$qu2.string),
+																		  addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
 																case 12:
 																	return (
 																		(_context2.prev = 12),
@@ -30421,10 +30571,9 @@
 											(null == context || null === (_context$query = context.query) || void 0 === _context$query ? void 0 : _context$query.siteId);
 									if (!siteId) throw new Error('Request failed. Missing "siteId" parameter.');
 									var siteIdHost = 'https://' + siteId + '.a.searchspring.io',
-										url = (this.configuration.origin || siteIdHost).replace(/\/$/, '') + '/' + context.path.replace(/^\//, '');
-									void 0 !== context.query &&
-										0 !== Object.keys(context.query).length &&
-										(url += '?' + this.configuration.queryParamsStringify(context.query));
+										url = (this.configuration.origin || siteIdHost).replace(/\/$/, '') + '/' + context.path.replace(/^\//, ''),
+										combinedQuery = cjs_default()(context.query || {}, this.configuration.globals);
+									0 !== Object.keys(combinedQuery).length && (url += '?' + this.configuration.queryParamsStringify(combinedQuery));
 									var body =
 											('undefined' != typeof FormData && context.body instanceof FormData) ||
 											context.body instanceof URLSearchParams ||
@@ -30432,7 +30581,7 @@
 												return 'undefined' != typeof Blob && value instanceof Blob;
 											})(context.body)
 												? context.body
-												: JSON.stringify(context.body),
+												: JSON.stringify(context.body ? cjs_default()(context.body, this.configuration.globals) : context.body),
 										headers = Object.assign({}, this.configuration.headers, context.headers);
 									return { url, init: { method: context.method, headers, body } };
 								},
@@ -30518,6 +30667,18 @@
 								key: 'headers',
 								get: function get() {
 									return this.configuration.headers || {};
+								},
+								set: function set(newHeaders) {
+									this.configuration.headers = newHeaders;
+								},
+							},
+							{
+								key: 'globals',
+								get: function get() {
+									return this.configuration.globals || {};
+								},
+								set: function set(newGlobals) {
+									this.configuration.globals = newGlobals;
 								},
 							},
 							{
@@ -31909,6 +32070,7 @@
 						reqSearch.query && reqSearch.query.string && (search.q = reqSearch.query.string),
 						reqSearch.subQuery && (search.rq = reqSearch.subQuery.trim()),
 						reqSearch.originalQuery && (search.originalQuery = reqSearch.originalQuery.trim()),
+						reqSearch.fallbackQuery && (search.fallbackQuery = reqSearch.fallbackQuery.trim()),
 						reqSearch.redirectResponse && (search.redirectResponse = reqSearch.redirectResponse),
 						search
 					);
@@ -32690,34 +32852,52 @@
 					);
 				}),
 				(transformSearchResponse.search = function (response, request) {
-					var _response$didYouMean,
-						_request$search,
+					var _request$search,
+						_request$search$query,
+						_response$didYouMean,
 						_response$query,
+						_response$query2,
 						_request$search2,
-						_request$search2$quer,
-						didYouMean =
-							null == response || null === (_response$didYouMean = response.didYouMean) || void 0 === _response$didYouMean
+						_response$query3,
+						_response$query4,
+						searchObj = {
+							search: {
+								query:
+									null == request ||
+									null === (_request$search = request.search) ||
+									void 0 === _request$search ||
+									null === (_request$search$query = _request$search.query) ||
+									void 0 === _request$search$query
+										? void 0
+										: _request$search$query.string,
+								didYouMean:
+									null == response || null === (_response$didYouMean = response.didYouMean) || void 0 === _response$didYouMean
+										? void 0
+										: _response$didYouMean.query,
+								matchType:
+									null == response || null === (_response$query = response.query) || void 0 === _response$query ? void 0 : _response$query.matchType,
+							},
+						};
+					if (
+						null != response &&
+						null !== (_response$query2 = response.query) &&
+						void 0 !== _response$query2 &&
+						_response$query2.corrected &&
+						null != response &&
+						response.query.original
+					)
+						(searchObj.search.query =
+							null == response || null === (_response$query3 = response.query) || void 0 === _response$query3 ? void 0 : _response$query3.corrected),
+							(searchObj.search.originalQuery =
+								null == response || null === (_response$query4 = response.query) || void 0 === _response$query4 ? void 0 : _response$query4.original);
+					else if (null != request && null !== (_request$search2 = request.search) && void 0 !== _request$search2 && _request$search2.originalQuery) {
+						var _request$search3;
+						searchObj.search.originalQuery =
+							null == request || null === (_request$search3 = request.search) || void 0 === _request$search3
 								? void 0
-								: _response$didYouMean.query,
-						originalQuery =
-							null == request || null === (_request$search = request.search) || void 0 === _request$search ? void 0 : _request$search.originalQuery,
-						matchType =
-							null == response || null === (_response$query = response.query) || void 0 === _response$query ? void 0 : _response$query.matchType;
-					return {
-						search: {
-							query:
-								null == request ||
-								null === (_request$search2 = request.search) ||
-								void 0 === _request$search2 ||
-								null === (_request$search2$quer = _request$search2.query) ||
-								void 0 === _request$search2$quer
-									? void 0
-									: _request$search2$quer.string,
-							didYouMean,
-							originalQuery,
-							matchType,
-						},
-					};
+								: _request$search3.originalQuery;
+					}
+					return searchObj;
 				}),
 				(transformSuggestResponse.query = function (response) {
 					return null != response && response.query ? { query: response.query } : {};
@@ -32759,16 +32939,24 @@
 					_getSearch,
 					_getMeta,
 					_super = Hybrid_createSuper(HybridAPI);
-				function HybridAPI(configuration) {
+				function HybridAPI(configuration, requesterConfigurations) {
 					var _this;
 					!(function Hybrid_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 					})(this, HybridAPI),
 						(_this = _super.call(this, configuration));
-					var legacyConfig = { mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache };
-					configuration.mode == AppMode.development && (legacyConfig.headers = { 'searchspring-no-beacon': '' });
-					var legacyConfiguration = new ApiConfiguration(legacyConfig),
-						suggestConfiguration = new ApiConfiguration({ mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache });
+					var legacyConfig = cjs_default()(
+						{ mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache },
+						(null == requesterConfigurations ? void 0 : requesterConfigurations.legacy) || {}
+					);
+					configuration.mode == AppMode.development &&
+						(legacyConfig.headers = Object.assign({}, legacyConfig.headers, { 'searchspring-no-beacon': '' }));
+					var suggestConfig = cjs_default()(
+							{ mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache },
+							(null == requesterConfigurations ? void 0 : requesterConfigurations.suggest) || {}
+						),
+						legacyConfiguration = new ApiConfiguration(legacyConfig),
+						suggestConfiguration = new ApiConfiguration(suggestConfig);
 					return (_this.requesters = { legacy: new LegacyAPI(legacyConfiguration), suggest: new SuggestAPI(suggestConfiguration) }), _this;
 				}
 				return (
@@ -34246,21 +34434,40 @@
 						var _this$config$autocomp,
 							_this$config$autocomp2,
 							_this$config$autocomp3,
+							_this$config$autocomp4,
+							_this$config$autocomp5,
+							_this$config$autocomp6,
+							_this$config$autocomp7,
 							_this$config$meta,
 							_this$config$meta$api,
 							_this$config$meta2,
+							_this$config$meta2$ap,
+							_this$config$meta3,
+							_this$config$meta4,
 							_this$config$recommen,
 							_this$config$recommen2,
 							_this$config$recommen3,
+							_this$config$recommen4,
+							_this$config$recommen5,
+							_this$config$recommen6,
 							_this$config$search,
 							_this$config$search$a,
 							_this$config$search2,
+							_this$config$search2$,
+							_this$config$search3,
+							_this$config$search4,
 							_this$config$finder,
 							_this$config$finder$a,
 							_this$config$finder2,
+							_this$config$finder2$,
+							_this$config$finder3,
+							_this$config$finder4,
 							_this$config$suggest,
 							_this$config$suggest$,
 							_this$config$suggest2,
+							_this$config$suggest3,
+							_this$config$suggest4,
+							_this$config$suggest5,
 							config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
 						if ((Client_classCallCheck(this, Client), (this.mode = AppMode.production), null == globals || !globals.siteId))
 							throw 'no siteId specified!';
@@ -34278,11 +34485,25 @@
 											void 0 === _this$config$autocomp2
 												? void 0
 												: _this$config$autocomp2.origin,
-										cache:
-											null === (_this$config$autocomp3 = this.config.autocomplete) || void 0 === _this$config$autocomp3
+										headers:
+											null === (_this$config$autocomp3 = this.config.autocomplete) ||
+											void 0 === _this$config$autocomp3 ||
+											null === (_this$config$autocomp4 = _this$config$autocomp3.api) ||
+											void 0 === _this$config$autocomp4
 												? void 0
-												: _this$config$autocomp3.cache,
-									})
+												: _this$config$autocomp4.headers,
+										cache:
+											null === (_this$config$autocomp5 = this.config.autocomplete) || void 0 === _this$config$autocomp5
+												? void 0
+												: _this$config$autocomp5.cache,
+										globals:
+											null === (_this$config$autocomp6 = this.config.autocomplete) || void 0 === _this$config$autocomp6
+												? void 0
+												: _this$config$autocomp6.globals,
+									}),
+									null === (_this$config$autocomp7 = this.config.autocomplete) || void 0 === _this$config$autocomp7
+										? void 0
+										: _this$config$autocomp7.requesters
 								),
 								meta: new HybridAPI(
 									new ApiConfiguration({
@@ -34294,7 +34515,15 @@
 											void 0 === _this$config$meta$api
 												? void 0
 												: _this$config$meta$api.origin,
-										cache: null === (_this$config$meta2 = this.config.meta) || void 0 === _this$config$meta2 ? void 0 : _this$config$meta2.cache,
+										headers:
+											null === (_this$config$meta2 = this.config.meta) ||
+											void 0 === _this$config$meta2 ||
+											null === (_this$config$meta2$ap = _this$config$meta2.api) ||
+											void 0 === _this$config$meta2$ap
+												? void 0
+												: _this$config$meta2$ap.headers,
+										cache: null === (_this$config$meta3 = this.config.meta) || void 0 === _this$config$meta3 ? void 0 : _this$config$meta3.cache,
+										globals: null === (_this$config$meta4 = this.config.meta) || void 0 === _this$config$meta4 ? void 0 : _this$config$meta4.globals,
 									})
 								),
 								recommend: new RecommendAPI(
@@ -34307,10 +34536,21 @@
 											void 0 === _this$config$recommen2
 												? void 0
 												: _this$config$recommen2.origin,
-										cache:
-											null === (_this$config$recommen3 = this.config.recommend) || void 0 === _this$config$recommen3
+										headers:
+											null === (_this$config$recommen3 = this.config.recommend) ||
+											void 0 === _this$config$recommen3 ||
+											null === (_this$config$recommen4 = _this$config$recommen3.api) ||
+											void 0 === _this$config$recommen4
 												? void 0
-												: _this$config$recommen3.cache,
+												: _this$config$recommen4.headers,
+										cache:
+											null === (_this$config$recommen5 = this.config.recommend) || void 0 === _this$config$recommen5
+												? void 0
+												: _this$config$recommen5.cache,
+										globals:
+											null === (_this$config$recommen6 = this.config.recommend) || void 0 === _this$config$recommen6
+												? void 0
+												: _this$config$recommen6.globals,
 									})
 								),
 								search: new HybridAPI(
@@ -34323,8 +34563,17 @@
 											void 0 === _this$config$search$a
 												? void 0
 												: _this$config$search$a.origin,
+										headers:
+											null === (_this$config$search2 = this.config.search) ||
+											void 0 === _this$config$search2 ||
+											null === (_this$config$search2$ = _this$config$search2.api) ||
+											void 0 === _this$config$search2$
+												? void 0
+												: _this$config$search2$.headers,
 										cache:
-											null === (_this$config$search2 = this.config.search) || void 0 === _this$config$search2 ? void 0 : _this$config$search2.cache,
+											null === (_this$config$search3 = this.config.search) || void 0 === _this$config$search3 ? void 0 : _this$config$search3.cache,
+										globals:
+											null === (_this$config$search4 = this.config.search) || void 0 === _this$config$search4 ? void 0 : _this$config$search4.globals,
 									})
 								),
 								finder: new HybridAPI(
@@ -34337,8 +34586,17 @@
 											void 0 === _this$config$finder$a
 												? void 0
 												: _this$config$finder$a.origin,
+										headers:
+											null === (_this$config$finder2 = this.config.finder) ||
+											void 0 === _this$config$finder2 ||
+											null === (_this$config$finder2$ = _this$config$finder2.api) ||
+											void 0 === _this$config$finder2$
+												? void 0
+												: _this$config$finder2$.headers,
 										cache:
-											null === (_this$config$finder2 = this.config.finder) || void 0 === _this$config$finder2 ? void 0 : _this$config$finder2.cache,
+											null === (_this$config$finder3 = this.config.finder) || void 0 === _this$config$finder3 ? void 0 : _this$config$finder3.cache,
+										globals:
+											null === (_this$config$finder4 = this.config.finder) || void 0 === _this$config$finder4 ? void 0 : _this$config$finder4.globals,
 									})
 								),
 								suggest: new SuggestAPI(
@@ -34351,10 +34609,21 @@
 											void 0 === _this$config$suggest$
 												? void 0
 												: _this$config$suggest$.origin,
-										cache:
-											null === (_this$config$suggest2 = this.config.suggest) || void 0 === _this$config$suggest2
+										headers:
+											null === (_this$config$suggest2 = this.config.suggest) ||
+											void 0 === _this$config$suggest2 ||
+											null === (_this$config$suggest3 = _this$config$suggest2.api) ||
+											void 0 === _this$config$suggest3
 												? void 0
-												: _this$config$suggest2.cache,
+												: _this$config$suggest3.headers,
+										cache:
+											null === (_this$config$suggest4 = this.config.suggest) || void 0 === _this$config$suggest4
+												? void 0
+												: _this$config$suggest4.cache,
+										globals:
+											null === (_this$config$suggest5 = this.config.suggest) || void 0 === _this$config$suggest5
+												? void 0
+												: _this$config$suggest5.globals,
 									})
 								),
 							});
@@ -37594,11 +37863,12 @@
 							pageSize: { name: 'pageSize', type: ParamLocationType.hash },
 							sort: { name: 'sort', type: ParamLocationType.hash },
 							filter: { name: 'filter', type: ParamLocationType.hash },
+							fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 						},
 						custom: {},
 					},
 				},
-				UrlTranslator_CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'],
+				UrlTranslator_CORE_FIELDS = ['query', 'oq', 'fallbackQuery', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'],
 				UrlTranslator = (function () {
 					function UrlTranslator(config) {
 						var _this$config$settings2,
@@ -39648,7 +39918,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.36.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.37.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40090,7 +40360,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.36.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.37.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40843,135 +41113,6 @@
 					);
 				})();
 		},
-		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			var preview_namespaceObject = {};
-			__webpack_require__.r(preview_namespaceObject),
-				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
-				defaultTheme = {
-					colors: {
-						primary: '#3A23AD',
-						secondary: '#00cee1',
-						hover: '#f8f6fd',
-						text: { secondary: '#ffffff' },
-						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
-					},
-					components: {},
-				},
-				injectStylesIntoStyleTag = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
-				),
-				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
-				),
-				options = { insert: 'head', singleton: !1 };
-			injectStylesIntoStyleTag_default()(styles.Z, options);
-			styles.Z.locals;
-			var decorators = [
-					function (Story) {
-						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
-					},
-				],
-				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(preview_namespaceObject).forEach(function (key) {
-				var value = preview_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.$9)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.HZ)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.h1)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.My)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi._C)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.$P)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.h1)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			(module = __webpack_require__.nmd(module)),
-				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
-					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
-						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
-						),
-					],
-					module,
-					!1
-				);
-		},
 		'./storybook-init-framework-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js');
@@ -41457,8 +41598,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -41577,8 +41718,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -41938,8 +42079,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -42168,12 +42309,12 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[963],
+			[415],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
 				__webpack_exec__('./storybook-init-framework-entry.js'),
-				__webpack_exec__('../../node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
+				__webpack_exec__('./node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/preact/dist/esm/client/preview/config-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-links/dist/esm/preset/addDecorator.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-actions/dist/esm/preset/addDecorator.js-generated-config-entry.js'),

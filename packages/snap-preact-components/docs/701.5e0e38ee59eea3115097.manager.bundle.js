@@ -1,6 +1,6 @@
-/*! For license information please see 629.cb670d8f45dafa964c70.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 701.5e0e38ee59eea3115097.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[629],
+	[701],
 	{
 		14724: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -4614,35 +4614,6 @@
 					},
 				});
 			});
-		},
-		53243: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__(18178);
-			var SourceType,
-				esm = __webpack_require__(21872),
-				types = __webpack_require__(31665),
-				PANEL_ID = ''.concat('storybook/docs', '/panel');
-			''.concat('storybook/docs', '/snippet-rendered');
-			!(function (SourceType) {
-				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
-			})(SourceType || (SourceType = {})),
-				esm.KP.register('storybook/docs', function () {
-					esm.KP.add(PANEL_ID, {
-						type: types.V.TAB,
-						title: 'Docs',
-						route: function route(_ref) {
-							var storyId = _ref.storyId,
-								refId = _ref.refId;
-							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
-						},
-						match: function match(_ref2) {
-							return 'docs' === _ref2.viewMode;
-						},
-						render: function render() {
-							return null;
-						},
-					});
-				});
 		},
 		98429: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -16844,7 +16815,7 @@
 					_extends(
 						{ pathname: 'string' == typeof current ? current : current.pathname, search: '', hash: '' },
 						'string' == typeof to ? router_parsePath(to) : to,
-						{ state, key: (null == to ? void 0 : to.key) || key || Math.random().toString(36).substr(2, 8) }
+						{ state, key: (to && to.key) || key || Math.random().toString(36).substr(2, 8) }
 					)
 				);
 			}
@@ -16897,7 +16868,7 @@
 					push: function push(to, state) {
 						action = router_Action.Push;
 						let location = createLocation(history.location, to, state);
-						null == validateLocation || validateLocation(location, to);
+						validateLocation && validateLocation(location, to);
 						let historyState = getHistoryState(location),
 							url = history.createHref(location);
 						try {
@@ -16910,7 +16881,7 @@
 					replace: function replace(to, state) {
 						action = router_Action.Replace;
 						let location = createLocation(history.location, to, state);
-						null == validateLocation || validateLocation(location, to);
+						validateLocation && validateLocation(location, to);
 						let historyState = getHistoryState(location),
 							url = history.createHref(location);
 						globalHistory.replaceState(historyState, '', url), v5Compat && listener && listener({ action, location });
@@ -17181,13 +17152,12 @@
 							void 0 === options && (options = {}),
 							getUrlBasedHistory(
 								function createBrowserLocation(window, globalHistory) {
-									var _globalHistory$state, _globalHistory$state2;
 									let { pathname, search, hash } = window.location;
 									return createLocation(
 										'',
 										{ pathname, search, hash },
-										(null == (_globalHistory$state = globalHistory.state) ? void 0 : _globalHistory$state.usr) || null,
-										(null == (_globalHistory$state2 = globalHistory.state) ? void 0 : _globalHistory$state2.key) || 'default'
+										(globalHistory.state && globalHistory.state.usr) || null,
+										(globalHistory.state && globalHistory.state.key) || 'default'
 									);
 								},
 								function createBrowserHref(window, to) {
@@ -47104,7 +47074,13 @@
 						if ((isIE68 || !value) && (void 0 === value || 'object' == typeof value))
 							try {
 								var str = toStr.call(value);
-								return ('[object HTMLAllCollection]' === str || '[object Object]' === str) && null == value('');
+								return (
+									('[object HTMLAllCollection]' === str ||
+										'[object HTML document.all class]' === str ||
+										'[object HTMLCollection]' === str ||
+										'[object Object]' === str) &&
+									null == value('')
+								);
 							} catch (e) {}
 						return !1;
 					});
@@ -47114,13 +47090,12 @@
 						if (isDDA(value)) return !0;
 						if (!value) return !1;
 						if ('function' != typeof value && 'object' != typeof value) return !1;
-						if ('function' == typeof value && !value.prototype) return !0;
 						try {
 							reflectApply(value, null, badArrayLike);
 						} catch (e) {
 							if (e !== isCallableMarker) return !1;
 						}
-						return !isES6ClassFn(value);
+						return !isES6ClassFn(value) && tryFunctionObject(value);
 				  }
 				: function isCallable(value) {
 						if (isDDA(value)) return !0;
@@ -47129,7 +47104,10 @@
 						if (hasToStringTag) return tryFunctionObject(value);
 						if (isES6ClassFn(value)) return !1;
 						var strClass = toStr.call(value);
-						return '[object Function]' === strClass || '[object GeneratorFunction]' === strClass || tryFunctionObject(value);
+						return (
+							!('[object Function]' !== strClass && '[object GeneratorFunction]' !== strClass && !/^\[object HTML/.test(strClass)) &&
+							tryFunctionObject(value)
+						);
 				  };
 		},
 		54277: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -62430,6 +62408,20 @@
 				);
 			};
 		},
+		63671: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var callBound = __webpack_require__(62680),
+				GetIntrinsic = __webpack_require__(67286),
+				isRegex = __webpack_require__(58786),
+				$exec = callBound('RegExp.prototype.exec'),
+				$TypeError = GetIntrinsic('%TypeError%');
+			module.exports = function regexTester(regex) {
+				if (!isRegex(regex)) throw new $TypeError('`regex` must be a RegExp');
+				return function test(s) {
+					return null !== $exec(regex, s);
+				};
+			};
+		},
 		46475: (__unused_webpack_module, exports) => {
 			'use strict';
 			var f, g, h, k, l;
@@ -63906,6 +63898,35 @@
 				return buf || bytesToUuid(rnds);
 			};
 		},
+		58300: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__(18178);
+			var SourceType,
+				esm = __webpack_require__(21872),
+				types = __webpack_require__(31665),
+				PANEL_ID = ''.concat('storybook/docs', '/panel');
+			''.concat('storybook/docs', '/snippet-rendered');
+			!(function (SourceType) {
+				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
+			})(SourceType || (SourceType = {})),
+				esm.KP.register('storybook/docs', function () {
+					esm.KP.add(PANEL_ID, {
+						type: types.V.TAB,
+						title: 'Docs',
+						route: function route(_ref) {
+							var storyId = _ref.storyId,
+								refId = _ref.refId;
+							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
+						},
+						match: function match(_ref2) {
+							return 'docs' === _ref2.viewMode;
+						},
+						render: function render() {
+							return null;
+						},
+					});
+				});
+		},
 		46620: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var inspect = __webpack_require__(99500),
@@ -64719,7 +64740,7 @@
 				$RegExp = GetIntrinsic('%RegExp%'),
 				$parseInteger = GetIntrinsic('%parseInt%'),
 				callBound = __webpack_require__(62680),
-				regexTester = __webpack_require__(22376),
+				regexTester = __webpack_require__(63671),
 				isPrimitive = __webpack_require__(45819),
 				$strSlice = callBound('String.prototype.slice'),
 				isBinary = regexTester(/^0b[01]+$/i),
@@ -65076,15 +65097,6 @@
 				$Math = GetIntrinsic('%Math%'),
 				$Number = GetIntrinsic('%Number%');
 			module.exports = $Number.MAX_SAFE_INTEGER || $Math.pow(2, 53) - 1;
-		},
-		22376: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var $exec = __webpack_require__(62680)('RegExp.prototype.exec');
-			module.exports = function regexTester(regex) {
-				return function test(s) {
-					return null !== $exec(regex, s);
-				};
-			};
 		},
 		79747: (module) => {
 			'use strict';
