@@ -249,20 +249,6 @@ export class SearchController extends AbstractController {
 				return;
 			}
 
-			//do we still need this??
-			// if (this.config.settings?.infinite) {
-			// 	// TODO: refactor this
-			// 	const preventBackfill =
-			// 		this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
-			// 	const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
-
-			// 	if (preventBackfill || dontBackfill) {
-			// 		this.storage.set('scrollMap', {});
-			// 		this.urlManager.set('page', 1).go();
-			// 		return;
-			// 	}
-			// }
-
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			let meta: any;
@@ -277,27 +263,27 @@ export class SearchController extends AbstractController {
 
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
-
-					const pageSize = this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
-					let pagesNeeded =
+					const pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+					let pagesNeeded1 =
 						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
 							? this.config.settings?.infinite.backfill
 							: params.pagination?.page;
-					let totalResultsNeeded = pageSize * (pagesNeeded || 1);
+					let totalResultsNeeded = pageSize * (pagesNeeded1 || 1);
 
-					//500 our search api is limited to 500.
+					const apiLimit = 500;
+					// our search api is limited to a certain amount per request.
 					//so we will need to make more than one request if totalresultsneeded is greater.
-					if (totalResultsNeeded < 500) {
+					if (totalResultsNeeded < apiLimit) {
 						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: totalResultsNeeded, page: 1 } });
 						backfills.push(this.client.search(backfillParams));
 					} else {
 						//how many pages are needed?
-						let pagesNeeded = Math.ceil(totalResultsNeeded / 500);
-						// we dont want to get 500 results on the last page, so lets find out how many are left.
-						let lastPageCount = pagesNeeded * 500 - totalResultsNeeded;
+						let pagesNeeded = Math.ceil(totalResultsNeeded / apiLimit);
+						// we dont want to get the full apiLimit # of results on the last page, so lets find out how many are left.
+						let lastPageCount = apiLimit - (pagesNeeded * apiLimit - totalResultsNeeded);
 
 						for (let i = 1; i <= pagesNeeded; i++) {
-							const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: i < pagesNeeded ? 500 : lastPageCount, page: i } });
+							const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: i < pagesNeeded ? apiLimit : lastPageCount, page: i } });
 							backfills.push(this.client.search(backfillParams));
 						}
 					}
@@ -314,9 +300,10 @@ export class SearchController extends AbstractController {
 						}
 						if (!response) {
 							response = Bresponse;
+							backfillResults = response.results;
+						} else {
+							backfillResults = backfillResults.concat(Bresponse.results!);
 						}
-
-						backfillResults = backfillResults.concat(response.results!);
 					});
 
 					if (!response.meta) {
@@ -328,7 +315,6 @@ export class SearchController extends AbstractController {
 						response.meta = meta;
 					}
 
-					debugger;
 					//we need to overwrite the pagination params so the ui doesnt get confused.
 					response.pagination.pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
 					response.pagination.page = params.pagination?.page;
@@ -337,7 +323,6 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 				} else {
 					// infinite with no backfills.
-
 					[meta, response] = await this.client.search(params);
 					// @ts-ignore
 					if (!response.meta) {

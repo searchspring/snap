@@ -6,17 +6,32 @@ import { PerPage } from './PerPage';
 import { SidebarContents } from '../Sidebar/Sidebar';
 
 import { Button, Pagination, Slideout, withStore } from '@searchspring/snap-preact-components';
+import { withController } from '@searchspring/snap-preact-components';
 
 type ToolBarProps = {
 	store?: SearchStore;
+	controller?: SearchController;
 };
 
+@withController
 @withStore
 @observer
 export class Toolbar extends Component<ToolBarProps> {
 	render() {
 		const { pagination } = this.props.store;
 
+		const infinite = this.props.controller.config.settings.infinite;
+		let paginationProps = {};
+		if (infinite) {
+			paginationProps = {
+				pages: 0,
+				hideFirst: true,
+				hideLast: true,
+				hideEllipsis: true,
+				hidePrev: true,
+				nextButton: 'Load More',
+			};
+		}
 		return (
 			<div className="ss-toolbar ss-toolbar-top">
 				<Slideout displayAt={'(max-width: 991px)'} buttonContent={slideoutButton()}>
@@ -34,7 +49,9 @@ export class Toolbar extends Component<ToolBarProps> {
 					<div className="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div className="ss-toolbar-col pagination">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
+					<div className="ss-toolbar-col pagination">
+						{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} {...paginationProps} />}
+					</div>
 				</div>
 			</div>
 		);
