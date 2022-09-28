@@ -601,6 +601,7 @@ export class Snap {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
 								} catch (err) {
+									this.logger.error(err);
 									this.logger.error(COMPONENT_ERROR, target);
 								}
 							};
@@ -674,6 +675,7 @@ export class Snap {
 											);
 										});
 									} catch (err) {
+										this.logger.error(err);
 										this.logger.error(COMPONENT_ERROR, target);
 									}
 								};
@@ -770,6 +772,7 @@ export class Snap {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 										});
 									} catch (err) {
+										this.logger.error(err);
 										this.logger.error(COMPONENT_ERROR, target);
 									}
 								};
@@ -845,6 +848,7 @@ export class Snap {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 										});
 									} catch (err) {
+										this.logger.error(err);
 										this.logger.error(COMPONENT_ERROR, target);
 									}
 								};
