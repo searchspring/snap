@@ -703,15 +703,17 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
-	it('can submit without form and config.action with original query', async () => {
+	it('can submit with setting.integratedSpellCorrection and have fallbackQuery query', async () => {
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
 		acConfig = {
 			...acConfig,
+			selector: '#search_query',
+			action: '/search',
 			settings: {
+				initializeFromUrl: true,
 				integratedSpellCorrection: true,
 			},
 		};
-		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
-		acConfig.action = '/search.html';
 
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -724,32 +726,31 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'correctedIntegratedSpellCorrection', siteId: '8uyt2m' });
 
-		expect(controller.config.settings!.integratedSpellCorrection).toBe(true);
+		const query = 'rumper';
+		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
-		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+		let inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		expect(inputEl).toBeDefined();
 
-		const query = 'dresss';
-		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl.value = query;
 
-		// inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+		await controller.search();
+		expect(controller.store.terms.length).toBeGreaterThan(0);
 
-		//@ts-ignore
+		// @ts-ignore
 		delete window.location;
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
 		};
 
-		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+		inputEl.focus();
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
 		await waitFor(() => {
-			// expect(window.location.href).toContain(`search_query=${query}`);
-			expect(JSON.stringify(controller.store.terms)).toBe('asdf');
-			expect(window.location.href).toContain(`fallbackQuery=test`);
-			expect(window.location.href).toContain(acConfig.action);
+			expect(window.location.href).toContain(`search_query=${query}`);
+			expect(window.location.href).toContain(`fallbackQuery=${controller.store.terms[0].value}`);
 		});
 	});
 
