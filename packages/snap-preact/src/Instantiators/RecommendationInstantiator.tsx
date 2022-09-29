@@ -250,7 +250,9 @@ export class RecommendationInstantiator {
 					}>);
 
 				if (!RecommendationsComponent) {
-					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);
+					this.logger.error(
+						`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`
+					);
 					return;
 				}
 
