@@ -228,13 +228,18 @@ export class RecommendationInstantiator {
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;
 
+				if (!controller.store.profile.display.template) {
+					this.logger.error(`profile '${tag}' found on the following element is missing a template!\n${elem?.outerHTML}`);
+					return;
+				}
+
 				if (!profileVars) {
-					this.logger.error(`profile '${tag}' found on ${elem} is missing templateParameters!`);
+					this.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${elem?.outerHTML}`);
 					return;
 				}
 
 				if (!component) {
-					this.logger.error(`profile '${tag}' found on ${elem} is missing component!`);
+					this.logger.error(`profile '${tag}' found on the following element is missing a component!\n${elem?.outerHTML}`);
 					return;
 				}
 
@@ -245,7 +250,9 @@ export class RecommendationInstantiator {
 					}>);
 
 				if (!RecommendationsComponent) {
-					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);
+					this.logger.error(
+						`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`
+					);
 					return;
 				}
 
