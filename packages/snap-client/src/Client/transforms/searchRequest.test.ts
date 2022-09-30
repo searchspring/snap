@@ -110,6 +110,16 @@ describe('search request search transform', () => {
 
 		expect(params.redirectResponse).toEqual('full');
 	});
+
+	it('generates trimmed fallbackQuery parameter', () => {
+		const params = transformSearchRequest.search({
+			search: {
+				fallbackQuery: ' a fallback query ',
+			},
+		});
+
+		expect(params.fallbackQuery).toEqual('a fallback query');
+	});
 });
 
 describe('search request filter transform', () => {
