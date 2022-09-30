@@ -402,6 +402,9 @@ describe('Search Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
+
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinitePage3', siteId: '8uyt2m' });
+
 		const searchfn = jest.spyOn(controller.client, 'search');
 
 		const page = 3;
@@ -411,9 +414,8 @@ describe('Search Controller', () => {
 		await controller.search();
 
 		const { pageSize } = controller.store.pagination;
-
+		expect(searchfn).toHaveBeenCalledTimes(1);
 		expect(controller.store.results.length).toBe(pageSize * page);
-		expect(searchfn).toHaveBeenCalledTimes(page);
 
 		searchfn.mockClear();
 	});
