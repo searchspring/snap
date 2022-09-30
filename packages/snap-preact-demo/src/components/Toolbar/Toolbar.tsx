@@ -6,14 +6,11 @@ import { PerPage } from './PerPage';
 import { SidebarContents } from '../Sidebar/Sidebar';
 
 import { Button, Pagination, Slideout, withStore } from '@searchspring/snap-preact-components';
-import { withController } from '@searchspring/snap-preact-components';
 
 type ToolBarProps = {
 	store?: SearchStore;
-	controller?: SearchController;
 };
 
-@withController
 @withStore
 @observer
 export class Toolbar extends Component<ToolBarProps> {
