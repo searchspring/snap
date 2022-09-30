@@ -1,4 +1,4 @@
-/*! For license information please see main.9b3f1ceb.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.2ae5df34.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -15376,7 +15376,8 @@
 							controller.bind();
 						}, []));
 					var visible =
-							Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0 || state.input),
+							Boolean(input === state.focusedInput) &&
+							(terms.length > 0 || (null == trending ? void 0 : trending.length) > 0 || (state.input && controller.store.loaded)),
 						showTrending = !1;
 					results.length || state.input || null == trending || !trending.length
 						? null != trending && trending.length && !terms.length && (showTrending = !0)
@@ -27004,7 +27005,7 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this$config$settings8,
+						var _this$config$settings9,
 							_this,
 							client = _ref.client,
 							store = _ref.store,
@@ -27062,28 +27063,43 @@
 								SearchController_regeneratorRuntime().mark(function _callee() {
 									var params,
 										_this$config$settings2,
-										_this$config$settings5,
-										_params$pagination3,
-										_this$config$settings7,
+										_params$pagination,
+										_this$config$settings8,
 										stringyParams,
 										prevStringyParams,
-										_this$config$settings3,
-										_params$pagination,
-										_this$config$settings4,
-										_params$pagination2,
-										preventBackfill,
-										dontBackfill,
 										searchProfile,
-										_yield$_this$client$s,
-										_yield$_this$client$s2,
 										meta,
 										response,
-										_this$config$settings6,
+										_this$config$settings3,
+										_params$pagination2,
+										_this$config$settings4,
+										_params$pagination3,
+										_this$config$settings5,
+										preventBackfill,
+										dontBackfill,
 										previousResults,
 										backfills,
-										page,
 										_params$pagination4,
+										_params$pagination5,
+										_params$pagination6,
+										_this$config$settings6,
+										_this$config$settings7,
+										_params$pagination7,
+										pageSize,
+										pagesNeeded1,
+										totalResultsNeeded,
 										backfillParams,
+										pagesNeeded,
+										lastPageCount,
+										i,
+										_backfillParams,
+										_params$pagination8,
+										_params$pagination9,
+										backfillResults,
+										_yield$_this$client$s,
+										_yield$_this$client$s2,
+										_yield$_this$client$s3,
+										_yield$_this$client$s4,
 										afterSearchProfile,
 										afterStoreProfile;
 									return SearchController_regeneratorRuntime().wrap(
@@ -27131,11 +27147,17 @@
 														return _context.abrupt('return');
 													case 23:
 														if (
-															null === (_this$config$settings2 = _this.config.settings) ||
-															void 0 === _this$config$settings2 ||
-															!_this$config$settings2.infinite
+															((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+															!(
+																null !== (_this$config$settings2 = _this.config.settings) &&
+																void 0 !== _this$config$settings2 &&
+																_this$config$settings2.infinite &&
+																(null === (_params$pagination = params.pagination) || void 0 === _params$pagination
+																	? void 0
+																	: _params$pagination.page) > 1
+															))
 														) {
-															_context.next = 30;
+															_context.next = 56;
 															break;
 														}
 														if (
@@ -27144,9 +27166,9 @@
 																	? void 0
 																	: _this$config$settings3.backfill) &&
 																!_this.store.results.length &&
-																(null === (_params$pagination = params.pagination) || void 0 === _params$pagination
+																(null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
 																	? void 0
-																	: _params$pagination.page) > _this.config.settings.infinite.backfill),
+																	: _params$pagination2.page) > _this.config.settings.infinite.backfill),
 															(dontBackfill =
 																!(
 																	null !== (_this$config$settings4 = _this.config.settings.infinite) &&
@@ -27154,151 +27176,194 @@
 																	_this$config$settings4.backfill
 																) &&
 																!_this.store.results.length &&
-																(null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
+																(null === (_params$pagination3 = params.pagination) || void 0 === _params$pagination3
 																	? void 0
-																	: _params$pagination2.page) > 1),
+																	: _params$pagination3.page) > 1),
 															!preventBackfill && !dontBackfill)
 														) {
-															_context.next = 30;
+															_context.next = 31;
 															break;
 														}
 														return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-													case 30:
-														return (
-															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context.next = 33),
-															_this.client.search(params)
-														);
-													case 33:
+													case 31:
 														if (
-															((_yield$_this$client$s = _context.sent),
+															((previousResults = _this.previousResults),
+															(backfills = []),
+															null !== (_this$config$settings5 = _this.config.settings) &&
+																void 0 !== _this$config$settings5 &&
+																_this$config$settings5.infinite.backfill &&
+																!previousResults.length)
+														)
+															if (
+																((pageSize =
+																	(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
+																		? void 0
+																		: _params$pagination4.pageSize) ||
+																	_this.store.pagination.pageSize ||
+																	_this.store.pagination.defaultPageSize),
+																(pagesNeeded1 =
+																	null !== (_params$pagination5 = params.pagination) &&
+																	void 0 !== _params$pagination5 &&
+																	_params$pagination5.page &&
+																	(null === (_params$pagination6 = params.pagination) || void 0 === _params$pagination6
+																		? void 0
+																		: _params$pagination6.page) >
+																		(null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
+																			? void 0
+																			: _this$config$settings6.infinite.backfill)
+																		? null === (_this$config$settings7 = _this.config.settings) || void 0 === _this$config$settings7
+																			? void 0
+																			: _this$config$settings7.infinite.backfill
+																		: null === (_params$pagination7 = params.pagination) || void 0 === _params$pagination7
+																		? void 0
+																		: _params$pagination7.page),
+																500,
+																(totalResultsNeeded = pageSize * (pagesNeeded1 || 1)) < 500)
+															)
+																(backfillParams = cjs_default()(Object.assign({}, params), {
+																	pagination: { pageSize: totalResultsNeeded, page: 1 },
+																})),
+																	backfills.push(_this.client.search(backfillParams));
+															else
+																for (
+																	pagesNeeded = Math.ceil(totalResultsNeeded / 500),
+																		lastPageCount = 500 - (500 * pagesNeeded - totalResultsNeeded),
+																		i = 1;
+																	i <= pagesNeeded;
+																	i++
+																)
+																	(_backfillParams = cjs_default()(Object.assign({}, params), {
+																		pagination: { pageSize: i < pagesNeeded ? 500 : lastPageCount, page: i },
+																	})),
+																		backfills.push(_this.client.search(_backfillParams));
+														if (!backfills || !backfills.length) {
+															_context.next = 46;
+															break;
+														}
+														return (backfillResults = []), (_context.next = 38), Promise.all(backfills);
+													case 38:
+														_context.sent.map(function (_ref3) {
+															var _ref4 = _slicedToArray(_ref3, 2),
+																Bmeta = _ref4[0],
+																Bresponse = _ref4[1];
+															meta || (meta = Bmeta),
+																(backfillResults = response ? backfillResults.concat(Bresponse.results) : (response = Bresponse).results);
+														}),
+															response.meta || (response.meta = meta),
+															(response.pagination.pageSize =
+																(null === (_params$pagination8 = params.pagination) || void 0 === _params$pagination8
+																	? void 0
+																	: _params$pagination8.pageSize) ||
+																_this.store.pagination.pageSize ||
+																_this.store.pagination.defaultPageSize),
+															(response.pagination.page =
+																null === (_params$pagination9 = params.pagination) || void 0 === _params$pagination9
+																	? void 0
+																	: _params$pagination9.page),
+															(response.results = backfillResults),
+															(_context.next = 54);
+														break;
+													case 46:
+														return (_context.next = 48), _this.client.search(params);
+													case 48:
+														(_yield$_this$client$s = _context.sent),
 															(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 															(meta = _yield$_this$client$s2[0]),
 															(response = _yield$_this$client$s2[1]).meta || (response.meta = meta),
-															!(
-																null !== (_this$config$settings5 = _this.config.settings) &&
-																void 0 !== _this$config$settings5 &&
-																_this$config$settings5.infinite &&
-																(null === (_params$pagination3 = params.pagination) || void 0 === _params$pagination3
-																	? void 0
-																	: _params$pagination3.page) > 1
-															))
-														) {
-															_context.next = 48;
-															break;
-														}
-														if (
-															((previousResults = _this.previousResults),
-															null === (_this$config$settings6 = _this.config.settings) ||
-																void 0 === _this$config$settings6 ||
-																!_this$config$settings6.infinite.backfill ||
-																previousResults.length)
-														) {
-															_context.next = 47;
-															break;
-														}
-														for (
-															backfills = [], page = 1;
-															page <
-															(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
-																? void 0
-																: _params$pagination4.page);
-															page++
-														)
-															(backfillParams = cjs_default()(Object.assign({}, params), { pagination: { page } })),
-																backfills.push(_this.client.search(backfillParams));
-														return (_context.next = 45), Promise.all(backfills);
-													case 45:
-														_context.sent.map(function (_ref3) {
-															var _ref4 = _slicedToArray(_ref3, 2),
-																data = (_ref4[0], _ref4[1]);
-															previousResults = previousResults.concat(data.results);
-														});
-													case 47:
-														response.results = [].concat(
-															SearchController_toConsumableArray(previousResults),
-															SearchController_toConsumableArray(response.results || [])
-														);
-													case 48:
+															(response.results = [].concat(
+																SearchController_toConsumableArray(previousResults),
+																SearchController_toConsumableArray(response.results || [])
+															));
+													case 54:
+														_context.next = 63;
+														break;
+													case 56:
+														return (_context.next = 58), _this.client.search(params);
+													case 58:
+														(_yield$_this$client$s3 = _context.sent),
+															(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
+															(meta = _yield$_this$client$s4[0]),
+															(response = _yield$_this$client$s4[1]).meta || (response.meta = meta);
+													case 63:
 														return (
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context.prev = 51),
-															(_context.next = 54),
+															(_context.prev = 66),
+															(_context.next = 69),
 															_this.eventManager.fire('afterSearch', { controller: _assertThisInitialized(_this), request: params, response })
 														);
-													case 54:
-														_context.next = 66;
+													case 69:
+														_context.next = 81;
 														break;
-													case 56:
+													case 71:
 														if (
-															((_context.prev = 56),
-															(_context.t1 = _context.catch(51)),
+															((_context.prev = 71),
+															(_context.t1 = _context.catch(66)),
 															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 														) {
-															_context.next = 64;
+															_context.next = 79;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-													case 64:
+													case 79:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-													case 66:
+													case 81:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
-															null !== (_this$config$settings7 = _this.config.settings) &&
-																void 0 !== _this$config$settings7 &&
-																_this$config$settings7.infinite &&
+															null !== (_this$config$settings8 = _this.config.settings) &&
+																void 0 !== _this$config$settings8 &&
+																_this$config$settings8.infinite &&
 																(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context.prev = 71),
-															(_context.next = 74),
+															(_context.prev = 86),
+															(_context.next = 89),
 															_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
 														);
-													case 74:
-														_context.next = 86;
+													case 89:
+														_context.next = 101;
 														break;
-													case 76:
+													case 91:
 														if (
-															((_context.prev = 76),
-															(_context.t2 = _context.catch(71)),
+															((_context.prev = 91),
+															(_context.t2 = _context.catch(86)),
 															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 														) {
-															_context.next = 84;
+															_context.next = 99;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-													case 84:
+													case 99:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-													case 86:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 106);
+													case 101:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 121);
 														break;
-													case 90:
-														if (((_context.prev = 90), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 106;
+													case 105:
+														if (((_context.prev = 105), (_context.t3 = _context.catch(4)), !_context.t3)) {
+															_context.next = 121;
 															break;
 														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 96 : 500 === _context.t4 ? 99 : 102);
+														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 111 : 500 === _context.t4 ? 114 : 117);
 														break;
-													case 96:
+													case 111:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
 															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 104)
+															_context.abrupt('break', 119)
 														);
-													case 99:
+													case 114:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
 															_this.log.error(_this.store.error),
-															_context.abrupt('break', 104)
+															_context.abrupt('break', 119)
 														);
-													case 102:
-														return _this.log.error(_context.t3), _context.abrupt('break', 104);
-													case 104:
+													case 117:
+														return _this.log.error(_context.t3), _context.abrupt('break', 119);
+													case 119:
 														(_this.store.loading = !1), _this.handleError(_context.t3);
-													case 106:
+													case 121:
 													case 'end':
 														return _context.stop();
 												}
@@ -27306,18 +27371,18 @@
 										_callee,
 										null,
 										[
-											[4, 90],
+											[4, 105],
 											[5, 10],
-											[51, 56],
-											[71, 76],
+											[66, 71],
+											[86, 91],
 										]
 									);
 								})
 							)),
 							(_this.config = cjs_default()(defaultConfig, _this.config)),
-							null !== (_this$config$settings8 = _this.config.settings) &&
-								void 0 !== _this$config$settings8 &&
-								_this$config$settings8.infinite &&
+							null !== (_this$config$settings9 = _this.config.settings) &&
+								void 0 !== _this$config$settings9 &&
+								_this$config$settings9.infinite &&
 								void 0 === _this.config.settings.infinite.restorePosition &&
 								(_this.config.settings.infinite.restorePosition = !0),
 							_this.store.setConfig(_this.config),
@@ -27455,8 +27520,8 @@
 								(function () {
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-											var _this$config$settings9,
-												_this$config$settings10,
+											var _this$config$settings10,
+												_this$config$settings11,
 												storableRequestParams,
 												stringyParams,
 												scrollMap,
@@ -27473,11 +27538,11 @@
 																_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
 																(storableRequestParams = getStorableRequestParams(search.request)),
 																(stringyParams = JSON.stringify(storableRequestParams)),
-																null !== (_this$config$settings9 = _this.config.settings) &&
-																	void 0 !== _this$config$settings9 &&
-																	null !== (_this$config$settings10 = _this$config$settings9.infinite) &&
+																null !== (_this$config$settings10 = _this.config.settings) &&
 																	void 0 !== _this$config$settings10 &&
-																	_this$config$settings10.restorePosition &&
+																	null !== (_this$config$settings11 = _this$config$settings10.infinite) &&
+																	void 0 !== _this$config$settings11 &&
+																	_this$config$settings11.restorePosition &&
 																	((scrollMap = _this.storage.get('scrollMap') || {}),
 																	(scrollToPosition = scrollMap[stringyParams]) &&
 																		((checkCount = 0),
@@ -27517,16 +27582,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings11,
-										_this$config$settings12,
+									var _this$config$settings12,
+										_this$config$settings13,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings11 = this.config.settings) &&
-										void 0 !== _this$config$settings11 &&
-										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
+									(null !== (_this$config$settings12 = this.config.settings) &&
 										void 0 !== _this$config$settings12 &&
-										_this$config$settings12.merchandising &&
+										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
+										void 0 !== _this$config$settings13 &&
+										_this$config$settings13.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -39918,7 +39983,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.37.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.37.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40360,7 +40425,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.37.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.37.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
