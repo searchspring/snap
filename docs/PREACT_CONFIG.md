@@ -4,6 +4,11 @@ Let's define our config. The config that is provided to Snap will create and ret
 
 ```typescript
 const config = {
+	features: {
+        integratedSpellCorrection: {
+            enabled: true,
+        },
+    },
 	url: {
 		parameters: {
 			core: {
@@ -130,3 +135,15 @@ The `targeter.selector` specifies the DOM node where the `targeter.component` wi
 
 However in our example, since they are both the same value, the Autocomplete component will rendered as a child DOM node below the `<input/>` element that is currently focused. 
 
+
+### Feature Flags
+
+`config.features` is optional and defines features to enable.
+
+#### Integrated Spell Correction
+
+Integrated spell correction is disabled by default. When disabled and a query is typed into autocomplete, a request is made to the suggest API to retrieve a list of terms. The highest scoring term is then used to query the search API for results.
+
+Enabling integrated spell correction `config.features.integratedSpellCorrection.enabled = true` will still retrieve terms from the suggest API to display, however the query that was entered will be used as the term sent to the search API. Spell correction will occur within the search API. The correction and original query is returned in the response and available to be render. Upon submitting the autocomplete form, a `fallbackQuery` parameter is also submitted. This contains a value of the highest scoring suggested term and will be searched for if the initial query yields 0 results.
+
+Note: Enabling integrated spell correction modifies [AutocompleteController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete)'s config by setting `config.settings.integratedSpellCorrection = true`

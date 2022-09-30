@@ -355,7 +355,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}, []);
 	}
 
-	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || state.input);
+	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || (state.input && controller.store.loaded));
 
 	let showTrending = false;
 	if (!results.length && !state.input && trending?.length) {

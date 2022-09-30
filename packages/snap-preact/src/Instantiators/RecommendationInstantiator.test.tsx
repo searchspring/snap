@@ -140,7 +140,9 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
-		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing templateParameters!`);
+		expect(loggerSpy).toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on the following element is missing templateParameters!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
+		);
 	});
 
 	it('logs an error when the profile response does not contain a component', async () => {
@@ -157,7 +159,9 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
-		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing component!`);
+		expect(loggerSpy).toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on the following element is missing a component!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
+		);
 	});
 
 	it('logs an error when the profile response does not find a mapped component', async () => {
@@ -181,7 +185,7 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledWith(
-			`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is expecting component mapping for 'Default' - verify instantiator config.`
+			`profile '${DEFAULT_PROFILE}' found on the following element is expecting component mapping for 'Default' - verify instantiator config.\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
 		);
 	});
 

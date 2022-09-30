@@ -136,7 +136,6 @@ export class Client {
 					origin: this.config.suggest?.api?.origin,
 					headers: this.config.suggest?.api?.headers,
 					cache: this.config.suggest?.cache,
-					// either of these could work
 					globals: this.config.suggest?.globals,
 				})
 			),
