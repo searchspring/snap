@@ -273,11 +273,14 @@ export class RecommendationController extends AbstractController {
 		if (shopperId) {
 			params.shopper = shopperId;
 		}
-		if (cart?.length) {
-			params.cart = cart;
-		}
-		if (lastViewed?.length) {
-			params.lastViewed = lastViewed;
+
+		if (!params.siteId || params.siteId == this.tracker.getGlobals().siteId) {
+			if (cart?.length) {
+				params.cart = cart;
+			}
+			if (lastViewed?.length) {
+				params.lastViewed = lastViewed;
+			}
 		}
 
 		return params;

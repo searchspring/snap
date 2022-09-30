@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **preact-components:** adding new hook 'useConstructor' for easy constructor like behavior ([a249f6a](https://github.com/searchspring/snap/commit/a249f6abb6c0ebca730563af05d9c344e1ae1071))
+
+
+
+
+
 ## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

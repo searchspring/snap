@@ -7,7 +7,8 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders } from '.';
+import { API } from '.';
+import { HTTPHeaders } from '../../types';
 
 export class SnapAPI extends API {
 	async postMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {

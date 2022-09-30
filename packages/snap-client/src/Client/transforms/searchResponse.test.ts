@@ -320,7 +320,6 @@ describe('search response transformer pagination', () => {
 		} as searchResponseType);
 
 		expect(response.pagination.totalResults).toEqual(mockPagination.totalResults);
-		expect(response.pagination.defaultPageSize).toEqual(mockPagination.defaultPerPage);
 		expect(response.pagination.pageSize).toEqual(mockPagination.perPage);
 		expect(response.pagination.totalPages).toEqual(mockPagination.totalPages);
 		expect(response.pagination.page).toEqual(mockPagination.currentPage);

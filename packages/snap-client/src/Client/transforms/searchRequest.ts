@@ -49,6 +49,7 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 		q?: string;
 		rq?: string;
 		originalQuery?: string;
+		fallbackQuery?: string;
 		redirectResponse?: string;
 	} = {};
 
@@ -62,6 +63,10 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 
 	if (reqSearch.originalQuery) {
 		search.originalQuery = reqSearch.originalQuery.trim();
+	}
+
+	if (reqSearch.fallbackQuery) {
+		search.fallbackQuery = reqSearch.fallbackQuery.trim();
 	}
 
 	if (reqSearch.redirectResponse) {
@@ -114,6 +119,7 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		tag?: string[];
 		'landing-page'?: string;
 		intellisuggest?: boolean;
+		disableInlineBanners?: boolean;
 	} = reqMerch.disabled ? { disableMerchandising: true } : {};
 
 	if (reqMerch.landingPage) {
@@ -128,6 +134,10 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 
 	if (typeof reqMerch.intellisuggest == 'boolean') {
 		merch['intellisuggest'] = reqMerch.intellisuggest;
+	}
+
+	if (reqMerch.disableInlineBanners) {
+		merch['disableInlineBanners'] = reqMerch.disableInlineBanners;
 	}
 
 	return merch;

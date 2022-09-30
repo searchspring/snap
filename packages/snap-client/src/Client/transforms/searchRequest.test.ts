@@ -293,6 +293,16 @@ describe('search request merchandising transform', () => {
 
 		expect(params).toEqual({ disableMerchandising: true, intellisuggest: false });
 	});
+
+	it('can disable inlineBanners', () => {
+		const params = transformSearchRequest.merchandising({
+			merchandising: {
+				disableInlineBanners: true,
+			},
+		});
+
+		expect(params).toEqual({ disableInlineBanners: true });
+	});
 });
 
 describe('search request pagination transform', () => {

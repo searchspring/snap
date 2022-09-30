@@ -1,5 +1,6 @@
-import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
+import { API, ApiConfiguration } from './Abstract';
 import { hashParams } from '../utils/hashParams';
+import { HTTPHeaders } from '../../types';
 import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';

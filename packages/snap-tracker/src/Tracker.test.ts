@@ -341,6 +341,15 @@ describe('Tracker', () => {
 		expect(context.website.trackingCode).toBeDefined();
 	});
 
+	it('has a method for getting the globals', async () => {
+		const tracker = new Tracker(globals);
+
+		const trackerGlobals = tracker.getGlobals();
+
+		expect(trackerGlobals).toBeDefined();
+		expect(trackerGlobals.siteId).toBe(globals.siteId);
+	});
+
 	it('can pass config to set the AppMode', async () => {
 		const customConfig: TrackerConfig = {
 			mode: 'production',

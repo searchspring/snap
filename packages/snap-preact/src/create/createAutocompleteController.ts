@@ -10,7 +10,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 import type { SnapControllerServices, SnapAutocompleteControllerConfig } from '../types';
 
 export default (config: SnapAutocompleteControllerConfig, services?: SnapControllerServices): AutocompleteController => {
-	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
+	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach();
 
 	// set client mode
 	if (config.mode && config.client) {
