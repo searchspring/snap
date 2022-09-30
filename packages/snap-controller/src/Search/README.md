@@ -88,7 +88,7 @@ const searchConfig = {
 ```
 
 ### Backfill
-If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill. Note that each page that is backfilled will invoke a request to the search API and your billing quota will reflect this. It is not recommended to set this value above `5`
+If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill.
 
 ```typescript
 const searchConfig = {

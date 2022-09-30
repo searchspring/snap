@@ -257,6 +257,16 @@ export class SearchController extends AbstractController {
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
 			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
+				const preventBackfill =
+					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
+				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
+				//if the page is higher than the backfill setting redirect back to page 1
+				if (preventBackfill || dontBackfill) {
+					this.storage.set('scrollMap', {});
+					this.urlManager.set('page', 1).go();
+					return;
+				}
+
 				// if no results fetch results...
 				let previousResults = this.previousResults;
 				const backfills = [];
