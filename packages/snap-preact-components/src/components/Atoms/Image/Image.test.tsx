@@ -4,7 +4,6 @@ import { ThemeProvider } from '../../../providers';
 import { render, waitFor } from '@testing-library/preact';
 
 import { Image, FALLBACK_IMAGE_URL } from './Image';
-import { badSearchResponse } from '../../../mocks/searchResponse';
 import userEvent from '@testing-library/user-event';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -15,7 +14,9 @@ let searchResponse: SearchResponseModel = mockData.search();
 
 describe('image Component', () => {
 	const result = searchResponse.results![0].mappings?.core;
-	const badResult = badSearchResponse.results![0].mappings?.core;
+	let badResult = searchResponse.results![0].mappings?.core;
+	badResult!.imageUrl = '';
+	badResult!.thumbnailImageUrl = '';
 	const rolloverImage = searchResponse.results![2].mappings?.core?.thumbnailImageUrl;
 
 	it('renders', () => {
