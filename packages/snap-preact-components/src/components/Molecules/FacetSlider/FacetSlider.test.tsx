@@ -3,10 +3,19 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
-import { sliderFacetMock } from '../../../mocks/searchResponse';
+
 import { FacetSlider } from './FacetSlider';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelFacet, SearchResponseModelFacetRangeAllOf } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetRangeAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.type == 'range')!
+	.pop()!;
 
 describe('Slider Component', () => {
 	const theme = {

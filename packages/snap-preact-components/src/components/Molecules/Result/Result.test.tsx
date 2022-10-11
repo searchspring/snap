@@ -1,15 +1,20 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { Result } from './Result';
-import { searchResponse } from '../../../mocks/searchResponse';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
 import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
 
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
+
 // TODO: refactor to use mock store data
-const mockResults = searchResponse.results as unknown as SearchResultStore;
+const mockResults = searchResponse.results as SearchResultStore;
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -31,9 +36,9 @@ describe('Result Component', () => {
 	});
 
 	it('renders title', () => {
-		const rendered = render(<Result result={searchResponse.results[0] as Product} />);
+		const rendered = render(<Result result={searchResponse.results![0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
-		expect(title?.textContent).toBe(searchResponse.results[0].mappings.core.name);
+		expect(title?.textContent).toBe(searchResponse.results![0].mappings?.core?.name);
 	});
 
 	it('renders pricing', () => {
@@ -81,6 +86,7 @@ describe('Result Component', () => {
 	});
 
 	it('should display a fallback image', () => {
+		mockResults[1].mappings!.core!.imageUrl = '';
 		const rendered = render(<Result result={mockResults[1]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
