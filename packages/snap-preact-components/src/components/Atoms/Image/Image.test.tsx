@@ -13,7 +13,7 @@ const mockData = new MockData();
 let searchResponse: SearchResponseModel = mockData.search();
 
 describe('image Component', () => {
-	const result = searchResponse.results![0].mappings?.core;
+	const result = searchResponse.results![1].mappings?.core;
 	let badResult = searchResponse.results![0].mappings?.core;
 	badResult!.imageUrl = '';
 	badResult!.thumbnailImageUrl = '';
