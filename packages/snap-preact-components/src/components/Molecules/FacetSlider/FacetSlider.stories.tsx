@@ -4,7 +4,6 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
-// import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
