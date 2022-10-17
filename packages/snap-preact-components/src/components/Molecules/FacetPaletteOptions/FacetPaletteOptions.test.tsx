@@ -3,9 +3,17 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { FacetPaletteOptions } from './FacetPaletteOptions';
-import { paletteFacetMock } from '../../../mocks/searchResponse';
 import { ThemeProvider } from '../../../providers';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.field == 'pattern')!
+	.pop()!;
 
 describe('FacetPaletteOptions Component', () => {
 	const theme = {
@@ -21,7 +29,7 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 
 		expect(paletteElement).toBeInTheDocument();
-		expect(paletteElement).toHaveTextContent(paletteFacetMock.values[0].label);
+		expect(paletteElement).toHaveTextContent(paletteFacetMock.values![0].label!);
 	});
 
 	it('Palette container element has correct number of classes', () => {
@@ -34,10 +42,12 @@ describe('FacetPaletteOptions Component', () => {
 	it('maps through and renders the correct number of options', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} />);
 		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
-		expect(options).toHaveLength(paletteFacetMock.values.length);
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
 	});
 
 	it('Palette option label element has correct number of classes', () => {
+		paletteFacetMock.filtered = true;
+		paletteFacetMock.values![0].filtered = true;
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} />);
 		const paletteOptionsElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option__value');
 		const inactivePaletteOption = paletteOptionsElement[1];

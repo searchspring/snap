@@ -4,9 +4,17 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
-import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.field == 'price')!
+	.pop()!;
 
 export default {
 	title: `Molecules/FacetSlider`,
