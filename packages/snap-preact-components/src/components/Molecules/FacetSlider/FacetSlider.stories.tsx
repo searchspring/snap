@@ -7,14 +7,24 @@ import { componentArgs } from '../../../utilities';
 import Readme from '../FacetSlider/readme.md';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
-import { MockData } from '@searchspring/snap-shared';
-import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
-
-const mockData = new MockData();
-let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
-	.search()
-	.facets!.filter((facet) => facet.field == 'price')!
-	.pop()!;
+const sliderFacetMock = {
+	field: 'price',
+	label: 'Price',
+	type: 'range',
+	display: 'slider',
+	filtered: false,
+	collapsed: false,
+	range: {
+		low: 0,
+		high: 120,
+	},
+	active: {
+		low: 0,
+		high: 120,
+	},
+	step: 1,
+	formatValue: '$%01.2f',
+};
 
 export default {
 	title: `Molecules/FacetSlider`,
