@@ -149,14 +149,35 @@ describe('Slideout Component', () => {
 	});
 
 	it('renders with classname', () => {
+		let textContent = 'click me';
 		const args = {
 			active: true,
-			buttonContent: 'click me',
+			buttonContent: `<span class='ss__slideout__button'>${textContent}</span>`,
 		};
 		const rendered = render(<Slideout {...args} />);
-
 		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
-		expect(buttonElement).toHaveTextContent(args.buttonContent);
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span className="ss__slideout__button">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders default button when no button is passed', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
 	});
 
 	it('can disable styles', () => {

@@ -64,13 +64,13 @@ export default {
 			control: { type: 'text' },
 		},
 		buttonContent: {
-			defaultValue: 'click me',
+			defaultValue: '<div className="ss__slideout__button">click me</div>',
 			description: 'Slideout button content (children), appended to buttonText',
 			table: {
 				type: {
 					summary: 'string, jsx',
 				},
-				defaultValue: { summary: 'click me' },
+				defaultValue: { summary: '<div className="ss__slideout__button">click me</div>' },
 			},
 			control: { type: 'text' },
 		},

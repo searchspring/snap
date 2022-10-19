@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment, ComponentChildren } from 'preact';
+import { h, Fragment, ComponentChildren, cloneElement } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -41,7 +41,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: 'click me',
+		buttonContent: <div className="ss__slideout__button">click me</div>,
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme
@@ -51,7 +51,8 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
+	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
+	let buttonContent = props.buttonContent;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -92,11 +93,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	return isVisible ? (
 		<CacheProvider>
-			{buttonContent && (
-				<div className="ss__slideout__button" onClick={() => toggleActive()}>
-					{buttonContent}
-				</div>
-			)}
+			<ButtonContent content={buttonContent} toggleActive={toggleActive} />
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
 				{cloneWithProps(children, { toggleActive, active: isActive })}
@@ -107,6 +104,29 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		<Fragment></Fragment>
 	);
 }
+
+const ButtonContent = (props: { content: string | JSX.Element | undefined; toggleActive: () => void }): JSX.Element => {
+	const { content, toggleActive } = props;
+
+	if (content && typeof content == 'string') {
+		return (
+			<div
+				onClick={() => toggleActive()}
+				dangerouslySetInnerHTML={{
+					__html: content,
+				}}
+			/>
+		);
+	} else if (content && typeof content == 'object') {
+		let elem = () => {
+			let elemm: JSX.Element = cloneElement(content, {
+				onClick: () => toggleActive(),
+			});
+			return elemm;
+		};
+		return elem();
+	} else return <></>;
+};
 
 export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;
