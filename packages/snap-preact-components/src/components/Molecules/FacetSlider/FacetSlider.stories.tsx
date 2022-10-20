@@ -7,6 +7,8 @@ import { componentArgs } from '../../../utilities';
 import Readme from '../FacetSlider/readme.md';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
+// unfortunatley we have to hardcode the searchresponse data here rather than use the Snap-Shared
+// mockdata due to issues with storybook being unable to bundle MockData due to it using fs
 const sliderFacetMock = {
 	field: 'price',
 	label: 'Price',

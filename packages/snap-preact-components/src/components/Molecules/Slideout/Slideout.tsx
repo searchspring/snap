@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment, ComponentChildren, cloneElement } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -119,7 +119,7 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 		);
 	} else if (content && typeof content == 'object') {
 		let elem = () => {
-			let elemm: JSX.Element = cloneElement(content, {
+			let elemm: JSX.Element = cloneWithProps(content, {
 				onClick: () => toggleActive(),
 			});
 			return elemm;
