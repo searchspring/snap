@@ -2,10 +2,6 @@
 
 Let's look at how to setup recommendations using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/#/start-setup) for installing Snapfu.
 
-There are two types of recommendations:
-- Default: Standard: TODO
-- Email Recommendations: TODO
-
 There are three steps required for adding recommendations:
 - Creating the local template files
 - Uploading the newly created template to the Searchspring Management Console
@@ -13,13 +9,13 @@ There are three steps required for adding recommendations:
 
 
 ### Creating a new recommendation template
-To generate a new template, run the following at the root of the project. This command will prompt you to provide various inputs such as the template name, an optional description, the path to the component, and the type of recommendations.
+To generate a new template, run the following at the root of the project. This command will prompt you to provide various inputs such as the template name, an optional description, and the path to the component.
 
 ```bash
 snapfu recs init
 ```
 
-In this example, we'll create a new template with a name of "DefaultRecommendations" and a type of "default"
+In this example, we'll create a new template with a name of "DefaultRecommendations"
 
 This will generate three files which should be commited to your repository: 
 - The `.json` file (/src/components/Recommendations/DefaultRecommendations.json) contains various meta data for this template and is used when running `snapfu recs sync` to sync this template to Searchspring's Management Console API. See syncing documentation below. 
