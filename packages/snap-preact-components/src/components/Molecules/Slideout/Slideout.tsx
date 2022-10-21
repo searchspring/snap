@@ -51,8 +51,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
-	let buttonContent = props.buttonContent;
+	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, buttonContent, disableStyles, className, style } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -118,13 +117,9 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 			/>
 		);
 	} else if (content && typeof content == 'object') {
-		let elem = () => {
-			let elemm: JSX.Element = cloneWithProps(content, {
-				onClick: () => toggleActive(),
-			});
-			return elemm;
-		};
-		return elem();
+		return cloneWithProps(content, {
+			onClick: () => toggleActive(),
+		});
 	} else return <></>;
 };
 
