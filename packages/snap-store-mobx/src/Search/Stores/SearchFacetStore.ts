@@ -71,11 +71,11 @@ export class SearchFacetStore extends Array {
 				const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
 				switch (facet.type) {
 					case 'range':
-						return new RangeFacet(config, services, storage, facet, facetMeta || {});
+						return new RangeFacet(services, storage, facet, facetMeta || {}, config);
 					case 'value':
 					case 'range-buckets':
 					default:
-						return new ValueFacet(config, services, storage, facet, facetMeta || {});
+						return new ValueFacet(services, storage, facet, facetMeta || {}, config);
 				}
 			});
 
@@ -100,7 +100,8 @@ export class Facet {
 		services: StoreServices,
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue | SearchResponseModelFacetRange,
-		facetMeta: MetaResponseModelFacet
+		facetMeta: MetaResponseModelFacet,
+		config: SearchStoreConfig | AutocompleteStoreConfig
 	) {
 		this.services = services;
 		this.storage = storage;
@@ -119,9 +120,21 @@ export class Facet {
 			toggleCollapse: action,
 		});
 
+		const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
+		const facetCollapsedSetting = (facetConfig as FacetStoreConfig)?.disableAutoCollapsedHandling;
+		const globalFacetCollapsedSetting = config.settings?.facets?.disableAutoCollapsedHandling;
+
+		let disableAutoCollapsedHandling = false;
+		//if either setting is set we may need to do something
+		if (globalFacetCollapsedSetting != undefined || facetCollapsedSetting != undefined) {
+			if (facetCollapsedSetting === true || (facetCollapsedSetting == undefined && globalFacetCollapsedSetting == true)) {
+				disableAutoCollapsedHandling = true;
+			}
+		}
+
 		const collapseData = this.storage.get(`facets.${this.field}.collapsed`);
 		this.collapsed = collapseData ?? this.collapsed;
-		if (this.filtered && this.collapsed && typeof collapseData == 'undefined') {
+		if (this.filtered && this.collapsed && typeof collapseData == 'undefined' && !disableAutoCollapsedHandling) {
 			this.toggleCollapse();
 		}
 	}
@@ -153,13 +166,13 @@ export class RangeFacet extends Facet {
 	public formatValue: string;
 
 	constructor(
-		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
 		storage: StorageStore,
 		facet: SearchResponseModelFacetRange,
-		facetMeta: MetaResponseModelFacetSlider
+		facetMeta: MetaResponseModelFacetSlider,
+		config: SearchStoreConfig | AutocompleteStoreConfig
 	) {
-		super(services, storage, facet, facetMeta);
+		super(services, storage, facet, facetMeta, config);
 
 		this.step = facet?.step;
 
@@ -251,13 +264,14 @@ export class ValueFacet extends Facet {
 	};
 
 	constructor(
-		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue,
-		facetMeta: MetaResponseModelFacet
+		facetMeta: MetaResponseModelFacet,
+		config: SearchStoreConfig | AutocompleteStoreConfig
 	) {
-		super(services, storage, facet, facetMeta);
+		super(services, storage, facet, facetMeta, config);
+		this.multiple = this.multiple;
 
 		this.multiple = this.multiple;
 
