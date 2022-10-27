@@ -32,16 +32,17 @@ const CSS = {
 		}),
 };
 
+const buttonClass = 'ss__slideout__button';
+
 export function Slideout(properties: SlideoutProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
 	const props: SlideoutProps = {
 		// default props
 		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: <div className="ss__slideout__button">click me</div>,
+		buttonContent: <div className={buttonClass}>click me</div>,
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme
@@ -109,17 +110,18 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 
 	if (content && typeof content == 'string') {
 		return (
-			<div
-				onClick={() => toggleActive()}
-				dangerouslySetInnerHTML={{
-					__html: content,
-				}}
-			/>
+			<div className={buttonClass} onClick={() => toggleActive()}>
+				{content}
+			</div>
 		);
 	} else if (content && typeof content == 'object') {
-		return cloneWithProps(content, {
+		let clone = cloneWithProps(content, {
 			onClick: () => toggleActive(),
 		});
+		if (!clone.props.class || clone.props.class.indexOf(buttonClass) < 0) {
+			clone.props.class = clone.props.class ? `${clone.props.class} ${buttonClass}` : buttonClass;
+		}
+		return clone;
 	} else return <></>;
 };
 
