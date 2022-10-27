@@ -14,12 +14,7 @@ export type SearchStoreConfig = StoreConfig & {
 			merchandising?: boolean;
 			singleResult?: boolean;
 		};
-		facets?: FacetStoreConfig & {
-			disableAutoCollapsedHandling?: boolean;
-			fields?: {
-				[field: string]: FacetStoreConfig;
-			};
-		};
+		facets?: FacetStoreFacetConfig;
 		infinite?: {
 			backfill?: number;
 			restorePosition?: boolean;
@@ -27,11 +22,17 @@ export type SearchStoreConfig = StoreConfig & {
 	};
 };
 
+export type FacetStoreFacetConfig = FacetStoreConfig & {
+	fields?: {
+		[field: string]: FacetStoreConfig;
+	};
+};
+
 export type FacetStoreConfig = {
 	trim?: boolean;
 	pinFiltered?: boolean;
 	storeRange?: boolean;
-	disableAutoCollapsedHandling?: boolean;
+	autoOpenActive?: boolean;
 };
 
 // Finder Config

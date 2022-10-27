@@ -2,7 +2,7 @@ import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig, FacetStoreFacetConfig } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelFacet,
@@ -101,7 +101,7 @@ export class Facet {
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue | SearchResponseModelFacetRange,
 		facetMeta: MetaResponseModelFacet,
-		config: SearchStoreConfig | AutocompleteStoreConfig
+		config: FacetStoreFacetConfig
 	) {
 		this.services = services;
 		this.storage = storage;
@@ -120,21 +120,21 @@ export class Facet {
 			toggleCollapse: action,
 		});
 
-		const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
-		const facetCollapsedSetting = (facetConfig as FacetStoreConfig)?.disableAutoCollapsedHandling;
-		const globalFacetCollapsedSetting = config.settings?.facets?.disableAutoCollapsedHandling;
+		const facetConfig = config && facet.field && config.fields && config.fields[facet.field];
+		const facetCollapsedSetting = (facetConfig as FacetStoreConfig)?.autoOpenActive;
+		const globalFacetCollapsedSetting = config.autoOpenActive;
 
-		let disableAutoCollapsedHandling = false;
+		let autoOpenActive = true;
 		//if either setting is set we may need to do something
 		if (globalFacetCollapsedSetting != undefined || facetCollapsedSetting != undefined) {
-			if (facetCollapsedSetting === true || (facetCollapsedSetting == undefined && globalFacetCollapsedSetting == true)) {
-				disableAutoCollapsedHandling = true;
+			if (facetCollapsedSetting === false || (facetCollapsedSetting == undefined && globalFacetCollapsedSetting == false)) {
+				autoOpenActive = false;
 			}
 		}
 
 		const collapseData = this.storage.get(`facets.${this.field}.collapsed`);
 		this.collapsed = collapseData ?? this.collapsed;
-		if (this.filtered && this.collapsed && typeof collapseData == 'undefined' && !disableAutoCollapsedHandling) {
+		if (this.filtered && this.collapsed && typeof collapseData == 'undefined' && autoOpenActive) {
 			this.toggleCollapse();
 		}
 	}
@@ -172,7 +172,7 @@ export class RangeFacet extends Facet {
 		facetMeta: MetaResponseModelFacetSlider,
 		config: SearchStoreConfig | AutocompleteStoreConfig
 	) {
-		super(services, storage, facet, facetMeta, config);
+		super(services, storage, facet, facetMeta, config.settings?.facets!);
 
 		this.step = facet?.step;
 
@@ -270,8 +270,7 @@ export class ValueFacet extends Facet {
 		facetMeta: MetaResponseModelFacet,
 		config: SearchStoreConfig | AutocompleteStoreConfig
 	) {
-		super(services, storage, facet, facetMeta, config);
-		this.multiple = this.multiple;
+		super(services, storage, facet, facetMeta, config.settings?.facets!);
 
 		this.multiple = this.multiple;
 
