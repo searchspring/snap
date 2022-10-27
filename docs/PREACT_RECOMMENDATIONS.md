@@ -78,7 +78,7 @@ export const Recs = observer((props) => {
 
 	const parameters = store?.profile?.display?.templateParameters;
 
-	return store.results.length > 0 && <Recommendation controller={controller} />;
+	return store.results.length > 0 && <Recommendation controller={controller} title={parameters?.title}/>;
 });
 ```
 
@@ -87,7 +87,7 @@ Let's look at how to setup a custom recommendation template using the Snapfu CLI
 
 There are three steps required for adding recommendations:
 - Creating the local template files
-- Uploading the newly created template to the Searchspring Management Console
+- Syncing the template to the Searchspring Management Console
 - Updating our Snap config (see instantiator config above)
 
 ### Creating a new recommendation template
