@@ -122,7 +122,7 @@ export class Facet {
 
 		const facetConfig = config && facet.field && config.fields && config.fields[facet.field];
 		const facetCollapsedSetting = (facetConfig as FacetStoreConfig)?.autoOpenActive;
-		const globalFacetCollapsedSetting = config.autoOpenActive;
+		const globalFacetCollapsedSetting = config?.autoOpenActive;
 
 		let autoOpenActive = true;
 		//if either setting is set we may need to do something
