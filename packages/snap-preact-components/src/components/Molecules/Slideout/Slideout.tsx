@@ -118,9 +118,22 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 		let clone = cloneWithProps(content, {
 			onClick: () => toggleActive(),
 		});
-		if (!clone.props.class || clone.props.class.indexOf(buttonClass) < 0) {
-			clone.props.class = clone.props.class ? `${clone.props.class} ${buttonClass}` : buttonClass;
+
+		//this is a bit messy but depending what content is, we need to check for class and classname
+		if (clone.props.class || clone.props.className) {
+			if (clone.props.class && clone.props.class.indexOf(buttonClass) < 0) {
+				clone.props.class = clone.props.class ? `${clone.props.class} ${buttonClass}` : buttonClass;
+			} else if (clone.props.className && clone.props.className.indexOf(buttonClass) < 0) {
+				clone.props.className = clone.props.className ? `${clone.props.className} ${buttonClass}` : buttonClass;
+			}
+		} else {
+			try {
+				clone.props.className = buttonClass;
+			} catch (er) {
+				clone.props.class = buttonClass;
+			}
 		}
+
 		return clone;
 	} else return <></>;
 };
