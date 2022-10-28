@@ -209,6 +209,7 @@ export class RecommendationInstantiator {
 						url: this.config.url,
 						controller: controllerConfig,
 						context,
+						mode: this.config.mode,
 					},
 					{ client: this.client, tracker: this.tracker }
 				);
