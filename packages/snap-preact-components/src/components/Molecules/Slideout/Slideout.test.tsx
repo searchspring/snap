@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { Slideout, SlideDirectionType } from './Slideout';
+import { Button } from '../../Atoms/Button';
 import { ThemeProvider } from '../../../providers';
 
 describe('Slideout Component', () => {
@@ -152,7 +153,7 @@ describe('Slideout Component', () => {
 		let textContent = 'click me';
 		const args = {
 			active: true,
-			buttonContent: `<span class='ss__slideout__button'>${textContent}</span>`,
+			buttonContent: <span class="ss__slideout__button">${textContent}</span>,
 		};
 		const rendered = render(<Slideout {...args} />);
 		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
@@ -164,6 +165,50 @@ describe('Slideout Component', () => {
 		const args = {
 			active: true,
 			buttonContent: <span className="ss__slideout__button">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with class instead of className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span class="ss__slideout__button">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with existing alternate class', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span class="findMe">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with existing alternate className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span className="findMe">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with Button component from library and adds default className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <Button>{textContent}</Button>,
 		};
 		const rendered = render(<Slideout {...args} />);
 		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
