@@ -69,7 +69,6 @@ export class AutocompleteController extends AbstractController {
 		// persist trending terms in local storage
 		this.storage = new StorageStore({
 			type: StorageType.SESSION,
-			//@ts-ignore
 			key: `ss-controller-${this.config.id}`,
 		});
 
