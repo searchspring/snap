@@ -32,16 +32,17 @@ const CSS = {
 		}),
 };
 
+const buttonClass = 'ss__slideout__button';
+
 export function Slideout(properties: SlideoutProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
 	const props: SlideoutProps = {
 		// default props
 		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: 'click me',
+		buttonContent: <div className={buttonClass}>click me</div>,
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme
@@ -51,7 +52,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
+	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, buttonContent, disableStyles, className, style } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -92,11 +93,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	return isVisible ? (
 		<CacheProvider>
-			{buttonContent && (
-				<div className="ss__slideout__button" onClick={() => toggleActive()}>
-					{buttonContent}
-				</div>
-			)}
+			<ButtonContent content={buttonContent} toggleActive={toggleActive} />
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
 				{cloneWithProps(children, { toggleActive, active: isActive })}
@@ -107,6 +104,37 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		<Fragment></Fragment>
 	);
 }
+
+const ButtonContent = (props: { content: string | JSX.Element | undefined; toggleActive: () => void }): JSX.Element => {
+	const { content, toggleActive } = props;
+
+	if (content && typeof content == 'string') {
+		return (
+			<div className={buttonClass} onClick={() => toggleActive()}>
+				{content}
+			</div>
+		);
+	} else if (content && typeof content == 'object') {
+		let clone = cloneWithProps(content, {
+			onClick: () => toggleActive(),
+		});
+
+		if (clone.props.class || clone.props.className) {
+			// check if class
+			if (clone.props.class && clone.props.class.indexOf(buttonClass) < 0) {
+				clone.props.class = `${clone.props.class} ${buttonClass}`;
+			}
+			// check if classname
+			if (clone.props.className && clone.props.className.indexOf(buttonClass) < 0) {
+				clone.props.className = `${clone.props.className} ${buttonClass}`;
+			}
+		} else {
+			clone.props.className = clone.props.class = buttonClass;
+		}
+
+		return clone;
+	} else return <></>;
+};
 
 export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;

@@ -1,13 +1,18 @@
 import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { Results } from './Results';
-import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import type { SearchResultStore } from '@searchspring/snap-store-mobx';
 
-const mockResults = searchResponse.results as unknown as SearchResultStore;
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
+
+const mockResults = searchResponse.results as SearchResultStore;
 
 describe('Results Component', () => {
 	const theme = {

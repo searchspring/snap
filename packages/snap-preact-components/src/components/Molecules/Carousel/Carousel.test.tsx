@@ -2,12 +2,17 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers/theme';
-import { searchResponse } from '../../../mocks/searchResponse';
 import { Carousel } from './Carousel';
 import { Result } from '../../Molecules/Result';
 import userEvent from '@testing-library/user-event';
 import { Scrollbar } from 'swiper';
 import type { Product } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
 
 describe('Carousel Component', () => {
 	const theme = {
@@ -23,9 +28,9 @@ describe('Carousel Component', () => {
 	it('renders', () => {
 		const rendered = render(
 			<Carousel>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -37,39 +42,39 @@ describe('Carousel Component', () => {
 	it('able to render child jsx', () => {
 		const rendered = render(
 			<Carousel>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
 		);
 
 		const results = rendered.container.querySelector('.swiper-slide[data-swiper-slide-index="0"]');
-		expect(results?.textContent).toContain(searchResponse.results[0].mappings.core.name);
+		expect(results?.textContent).toContain(searchResponse.results![0].mappings?.core?.name);
 	});
 
 	it('renders the correct amount of children', () => {
 		const rendered = render(
 			<Carousel>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
 		);
 
 		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .findMe');
-		expect(results?.length).toBe(searchResponse.results.length);
+		expect(results?.length).toBe(searchResponse.results!.length);
 	});
 
 	it('renders next & prev buttons', () => {
 		const rendered = render(
 			<Carousel>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -83,9 +88,9 @@ describe('Carousel Component', () => {
 	it('vertical prop works', () => {
 		const rendered = render(
 			<Carousel vertical={true}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -99,9 +104,9 @@ describe('Carousel Component', () => {
 		const nextButtonText = 'Next Button Yo';
 		const rendered = render(
 			<Carousel prevButton={prevButtonText} nextButton={nextButtonText}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -118,8 +123,8 @@ describe('Carousel Component', () => {
 	it('can disable next & prev buttons', () => {
 		const rendered = render(
 			<Carousel hideButtons={true}>
-				{searchResponse.results.map((result, idx) => (
-					<Result result={result as unknown as Product} key={idx} />
+				{searchResponse.results!.map((result, idx) => (
+					<Result result={result as Product} key={idx} />
 				))}
 			</Carousel>
 		);
@@ -138,9 +143,9 @@ describe('Carousel Component', () => {
 
 		const rendered = render(
 			<Carousel pagination onNextButtonClick={onNextFunc} onPrevButtonClick={onPrevFunc} onClick={onClickFunc}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -164,9 +169,9 @@ describe('Carousel Component', () => {
 	it('can enable pagination dots', async () => {
 		const rendered = render(
 			<Carousel pagination={true}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -183,8 +188,8 @@ describe('Carousel Component', () => {
 	it('can add additional modules', () => {
 		const rendered = render(
 			<Carousel modules={[Scrollbar]} scrollbar>
-				{searchResponse.results.map((result, idx) => (
-					<Result result={result as unknown as Product} />
+				{searchResponse.results!.map((result, idx) => (
+					<Result result={result as Product} />
 				))}
 			</Carousel>
 		);
@@ -208,8 +213,8 @@ describe('Carousel Component', () => {
 
 		const rendered = render(
 			<Carousel breakpoints={customBreakpoints}>
-				{searchResponse.results.map((result, idx) => (
-					<Result result={result as unknown as Product} key={idx} />
+				{searchResponse.results!.map((result, idx) => (
+					<Result result={result as Product} key={idx} />
 				))}
 			</Carousel>
 		);
@@ -238,9 +243,9 @@ describe('Carousel Component', () => {
 	it('can disable styling', () => {
 		const rendered = render(
 			<Carousel pagination disableStyles={true}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -254,9 +259,9 @@ describe('Carousel Component', () => {
 		const className = 'classy';
 		const rendered = render(
 			<Carousel pagination className={className}>
-				{searchResponse.results.map((result, idx) => (
+				{searchResponse.results!.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result as unknown as Product} />
+						<Result result={result as Product} />
 					</div>
 				))}
 			</Carousel>

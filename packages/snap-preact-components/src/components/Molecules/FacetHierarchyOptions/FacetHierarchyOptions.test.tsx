@@ -4,8 +4,21 @@ import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
-import { hierarchyFacetMock, hierarchyFacetFilteredMock } from '../../../mocks/searchResponse';
 import type { FacetHierarchyValue } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.field == 'ss_category_hierarchy')!
+	.pop()!;
+mockData.updateConfig({ search: 'filteredHierarchy' });
+let hierarchyFacetFilteredMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.field == 'ss_category_hierarchy')!
+	.pop()!;
 
 describe('hierarchyValue Component', () => {
 	let hierarchyValueComponent: RenderResult;
@@ -21,13 +34,14 @@ describe('hierarchyValue Component', () => {
 	it('renders label and count', () => {
 		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
-		expect(hierarchyOption).toHaveLength(hierarchyFacetFilteredMock.values.length);
+		expect(hierarchyOption).toHaveLength(hierarchyFacetFilteredMock.values!.length);
 
 		hierarchyOption.forEach((option: Element, index: number) => {
-			expect(option).toHaveTextContent(hierarchyFacetFilteredMock.values[index].label);
+			expect(option).toHaveTextContent(hierarchyFacetFilteredMock.values![index].label!);
 
-			if (hierarchyFacetFilteredMock.values[index].history) {
-				if (hierarchyFacetFilteredMock.values[index].filtered) {
+			//@ts-ignore
+			if (hierarchyFacetFilteredMock.values![index].history) {
+				if (hierarchyFacetFilteredMock.values![index].filtered) {
 					expect(option).toHaveClass('ss__facet-hierarchy-options__option--filtered');
 				} else {
 					expect(option).toHaveClass('ss__facet-hierarchy-options__option--return');
@@ -56,10 +70,10 @@ describe('hierarchyValue Component hiding count', () => {
 	it('renders label but not count', () => {
 		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
-		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
+		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values!.length);
 
-		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values[0].label);
-		expect(hierarchyOption[0]).not.toHaveTextContent(hierarchyFacetMock.values[0].count.toString());
+		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values![0].label!);
+		expect(hierarchyOption[0]).not.toHaveTextContent(hierarchyFacetMock.values![0].count!.toString());
 	});
 });
 

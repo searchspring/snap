@@ -203,21 +203,50 @@ export class RecommendationInstantiator {
 					globals,
 				};
 
-				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const controller = createRecommendationController(
-					{
-						url: this.config.url,
-						controller: controllerConfig,
-						context,
-					},
-					{ client: this.client, tracker: this.tracker }
-				);
+				// try to find an existing controller by similar configuration
+				let controller = Object.keys(this.controller)
+					.map((id) => this.controller[id])
+					.filter((controller) => {
+						return (
+							JSON.stringify({
+								batched: controller.config.batched,
+								branch: controller.config.branch,
+								globals: controller.config.globals,
+								tag: controller.config.tag,
+								realtime: controller.config.realtime,
+							}) ==
+							JSON.stringify({
+								batched: controllerConfig.batched,
+								branch: controllerConfig.branch,
+								globals: controllerConfig.globals,
+								tag: controllerConfig.tag,
+								realtime: controllerConfig.realtime,
+							})
+						);
+					})[0];
+
+				if (!controller) {
+					// no existing controller found of same configuration - creating a new controller
+					const createRecommendationController = (await import('../create/createRecommendationController')).default;
+					controller = createRecommendationController(
+						{
+							url: this.config.url,
+							controller: controllerConfig,
+							context,
+							mode: this.config.mode,
+						},
+						{ client: this.client, tracker: this.tracker }
+					);
+				}
 
 				this.uses.forEach((attachements) => controller.use(attachements));
 				this.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
 				this.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 
-				await controller.search();
+				// run a search on the controller if it has not yet and it is not currently
+				if (!controller.store.loaded && !controller.store.loading) {
+					await controller.search();
+				}
 
 				controller.addTargeter(this.targeter);
 

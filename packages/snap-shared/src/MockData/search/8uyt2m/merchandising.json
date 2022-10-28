@@ -254,6 +254,10 @@
         "<script data-banner-type=\"html\" data-banner-html=\"Primary banner.\" type=\"text/widget\"></script>Primary banner.",
         "<script data-banner-type=\"html\" data-banner-html=\"Primary banner.\" type=\"text/widget\"></script>Primary banner again."
       ],
+      "footer": [
+        "<script data-banner-type=\"html\" data-banner-html=\"footer banner.\" type=\"text/widget\"></script>footer banner.",
+        "<script data-banner-type=\"html\" data-banner-html=\"footer banner.\" type=\"text/widget\"></script>footer banner again."
+      ],
       "banner": [
         "<script data-banner-type=\"html\" data-banner-html=\"Secondary banner.\" type=\"text/widget\"></script>Secondary banner.",
         "<script data-banner-type=\"html\" data-banner-html=\"Secondary banner.\" type=\"text/widget\"></script>Secondary banner again.",

@@ -4,8 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
-import { listFacetMock } from '../../../mocks/searchResponse';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let listFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+	.search()
+	.facets!.filter((facet) => facet.type == 'value')!
+	.pop()!;
 
 describe('ListValue Component', () => {
 	let listValueComponent: RenderResult;
@@ -21,12 +29,12 @@ describe('ListValue Component', () => {
 	it('renders label and count', () => {
 		const listOption = listValueComponent.container.querySelectorAll('.ss__facet-list-options__option');
 
-		expect(listOption).toHaveLength(listFacetMock.values.length);
+		expect(listOption).toHaveLength(listFacetMock.values!.length);
 
-		expect(listOption[0]).toHaveTextContent(listFacetMock.values[0].label);
+		expect(listOption[0]).toHaveTextContent(listFacetMock.values![0].label!);
 
 		const optionCount = listOption[0].querySelector('.ss__facet-list-options__option__value__count');
-		expect(optionCount).toHaveTextContent(listFacetMock.values[0].count.toString());
+		expect(optionCount).toHaveTextContent(listFacetMock.values![0].count!.toString());
 	});
 
 	it('renders checkboxs', () => {
@@ -54,10 +62,10 @@ describe('ListValue Component hiding checkbox and count', () => {
 	it('renders label but not count', () => {
 		const listOption = listValueComponent.container.querySelectorAll('.ss__facet-list-options__option');
 
-		expect(listOption).toHaveLength(listFacetMock.values.length);
+		expect(listOption).toHaveLength(listFacetMock.values!.length);
 
-		expect(listOption[0]).toHaveTextContent(listFacetMock.values[0].label);
-		expect(listOption[0]).not.toHaveTextContent(listFacetMock.values[0].count.toString());
+		expect(listOption[0]).toHaveTextContent(listFacetMock.values![0].label!);
+		expect(listOption[0]).not.toHaveTextContent(listFacetMock.values![0].count!.toString());
 	});
 });
 

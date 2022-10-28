@@ -22,6 +22,13 @@ var documents = [
 				searchable: true,
 			},
 			{
+				label: 'Github Setup',
+				route: '/start-github',
+				type: 'markdown',
+				url: './docs/GITHUB.md',
+				searchable: true,
+			},
+			{
 				label: 'Preact',
 				route: '/start-preact',
 				type: 'markdown',
@@ -54,6 +61,13 @@ var documents = [
 						route: '/start-preact-events',
 						type: 'markdown',
 						url: './docs/PREACT_EVENTS.md',
+						searchable: true,
+					},
+					{
+						label: 'Recommendations',
+						route: '/start-preact-recommendations',
+						type: 'markdown',
+						url: './docs/PREACT_RECOMMENDATIONS.md',
 						searchable: true,
 					},
 				],

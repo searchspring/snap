@@ -2,10 +2,46 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { Facet } from './Facet';
 import { ThemeProvider } from '../../../providers';
-import { searchResponse, listFacetMock, paletteFacetMock, gridFacetMock, hierarchyFacetMock, facetOverflowMock } from '../../../mocks/searchResponse';
+
 import { FacetDisplay } from '../../../types';
 import userEvent from '@testing-library/user-event';
 import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import { SearchResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+import { MockData } from '@searchspring/snap-shared';
+
+const mockData = new MockData();
+let searchResponseFacets = mockData.search().facets!;
+
+let hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'ss_category_hierarchy')!
+	.pop()!;
+let gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'size_dress')!
+	.pop()!;
+let paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'color_family')!
+	.pop()!;
+let listFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'season')!
+	.pop()!;
+let facetOverflowMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'brand')!
+	.pop()!;
+let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+	.filter((facet) => facet.field == 'price')
+	.pop()!;
+
+//@ts-ignore
+facetOverflowMock.overflow = {
+	enabled: true,
+	limited: true,
+	limit: 12,
+	remaining: 2,
+	setLimit: () => {},
+	toggle: () => {},
+	calculate: () => {},
+};
+
 describe('Facet Component', () => {
 	//TODO: type: FacetType and display: FacetDisplay in interface BaseFacet not compatible with searchResponse mock data!
 
@@ -27,7 +63,7 @@ describe('Facet Component', () => {
 	describe('Grid Facet Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: gridFacetMock as unknown as ValueFacet,
+				facet: { ...gridFacetMock, display: 'grid' } as ValueFacet,
 			};
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
@@ -42,11 +78,12 @@ describe('Facet Component', () => {
 	describe('Palette Facet Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: paletteFacetMock as ValueFacet,
+				facet: { ...paletteFacetMock, display: 'palette' } as ValueFacet,
 			};
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet facet={args.facet} />);
+			rendered.debug();
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
 			const count = facetElement?.querySelectorAll('.ss__facet-palette-options__option').length;
@@ -57,7 +94,8 @@ describe('Facet Component', () => {
 	describe('Slider Facet Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: searchResponse.facets.filter((facet) => facet.display === FacetDisplay.SLIDER).pop() as RangeFacet,
+				//@ts-ignore
+				facet: { ...sliderFacetMock, display: 'slider' } as RangeFacet,
 			};
 			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
@@ -68,13 +106,14 @@ describe('Facet Component', () => {
 		});
 	});
 
-	describe('Slider hierarchy Display', () => {
+	describe('Hierarchy Facet Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: hierarchyFacetMock as unknown as ValueFacet,
+				facet: { ...hierarchyFacetMock, display: 'hierarchy' } as ValueFacet,
 			};
 			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
+			rendered.debug();
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
 			const hierarchyElement = facetElement?.querySelector('.ss__facet-hierarchy-options');
@@ -99,7 +138,7 @@ describe('Facet Component', () => {
 
 		it('show more/less text prop', async () => {
 			const args = {
-				facet: facetOverflowMock as unknown as ValueFacet,
+				facet: facetOverflowMock as ValueFacet,
 				showMoreText: 'Show More please',
 				showLessText: 'Show Less please',
 			};
@@ -117,7 +156,7 @@ describe('Facet Component', () => {
 
 		it('renders with specified icons', async () => {
 			const args = {
-				facet: facetOverflowMock as unknown as ValueFacet,
+				facet: facetOverflowMock as ValueFacet,
 				iconCollapse: 'angle-down',
 				iconExpand: 'angle-up',
 				iconOverflowMore: 'check',
@@ -147,7 +186,7 @@ describe('Facet Component', () => {
 		it('set custom overflow slot', async () => {
 			const elem = <span className="findMe">Show More please</span>;
 			const args = {
-				facet: facetOverflowMock as unknown as ValueFacet,
+				facet: facetOverflowMock as ValueFacet,
 				overflowSlot: elem,
 			};
 			// @ts-ignore - readonly
@@ -163,7 +202,7 @@ describe('Facet Component', () => {
 		it('set custom options slot', async () => {
 			const option = <span className="findMe">stuff and things</span>;
 			const args = {
-				facet: facetOverflowMock as unknown as ValueFacet,
+				facet: facetOverflowMock as ValueFacet,
 				optionsSlot: option,
 			};
 			// @ts-ignore - readonly
@@ -179,25 +218,25 @@ describe('Facet Component', () => {
 
 		it('can use limit prop', async () => {
 			const args = {
-				facet: facetOverflowMock as unknown as ValueFacet,
+				facet: facetOverflowMock as ValueFacet,
 				limit: 3,
 				disableOverflow: true,
 			};
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+			const facetElement = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 
 			expect(facetElement.length).toBe(args.limit);
 		});
 
 		it('can use searchable prop', async () => {
 			const args = {
-				facet: listFacetMock as ValueFacet,
+				facet: { ...listFacetMock, display: 'list' } as ValueFacet,
 				searchable: true,
 			};
-
 			const rendered = render(<Facet {...args} />);
+
 			const searchInputElement = rendered.container.querySelector('.ss__search-input input')!;
 			expect(searchInputElement).toBeInTheDocument();
 			userEvent.type(searchInputElement, 'su');

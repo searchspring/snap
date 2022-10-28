@@ -499,8 +499,9 @@ export class AutocompleteController extends AbstractController {
 
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
-
-			this.storage.set('terms', JSON.stringify(terms));
+			if (terms?.trending?.queries?.length) {
+				this.storage.set('terms', JSON.stringify(terms));
+			}
 		}
 
 		this.store.updateTrendingTerms(terms);
