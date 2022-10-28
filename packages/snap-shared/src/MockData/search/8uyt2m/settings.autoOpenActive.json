@@ -1,0 +1,650 @@
+{
+  "pagination": {
+    "totalResults": 8,
+    "page": 1,
+    "pageSize": 30,
+    "defaultPageSize": 24,
+    "totalPages": 1
+  },
+  "results": [
+    {
+      "id": "144975",
+      "mappings": {
+        "core": {
+          "uid": "144975",
+          "sku": "D-FAC-SPRINKLE",
+          "name": "Donut Mousepad",
+          "url": "/product/D-FAC-SPRINKLE",
+          "addToCartUrl": "/product/D-FAC-SPRINKLE",
+          "price": 13,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a2819_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a2819_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a2819_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Bring your sweet tooth to your desk without the calories with our adorable Donut Mousepad. Adding a cute touch that’s just as sweet as you, this mousepad is deliciously adorable! It’ll add the cutest pop of color. Fabric donut mousepad with a rubber backing. • 7.5\\\" diameter • 1/4\\\" thick",
+          "stockMessage": "In stock",
+          "brand": "Fox And Clover",
+          "popularity": "3931",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "9d8b9c72ce577b9bc4435624cc6419e8",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0XVzdNYNDgjy9PP2cWUwZDBkMGCwYEgvykwBBAAA__-imAh6",
+        "intellisuggestSignature": "caed88c6dd4f8e1c6f71d164a7ec31529c51f867ada0b2a97676bd3519a2da91",
+        "product_type_unigram": "mousepad"
+      },
+      "children": []
+    },
+    {
+      "id": "130589",
+      "mappings": {
+        "core": {
+          "uid": "130589",
+          "sku": "F-BAM-B3-ICE87",
+          "name": "Get Going Cognac Lace-Up Gladiator Sandals",
+          "url": "/product/F-BAM-B3-ICE87",
+          "addToCartUrl": "/product/F-BAM-B3-ICE87",
+          "price": 21,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a8580_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a8580_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a8580_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "With the weather heating up and fun events on the rise, it's time to Get Going in these Cognac Lace Up Gladiator Sandals. Once you start moving about in these, there's a chance that you will not stop. Lace up gladiator sandals. *0.5\\\" rubber heel. *Cushioned insole. *Nonskid rubber sole. *All vegan friendly, man made materials. *Imported.",
+          "stockMessage": "In stock",
+          "brand": "Bamboo",
+          "popularity": "3540",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "27a256a6dffe3485d8aaf72f5a71f507",
+        "intellisuggestData": "eJyyKK0sMcplYGBw03Vy9NV1Mtb1dHa1MGcwZDBiMGCwYEgvykwBBAAA__-Z5wf9",
+        "intellisuggestSignature": "6c821c45ea6bfe586e9f5e1653a9a1e8a6ad272c021c64f5c0e25adf2debb9e7",
+        "product_type_unigram": "sandals"
+      },
+      "children": []
+    },
+    {
+      "id": "176797",
+      "mappings": {
+        "core": {
+          "uid": "176797",
+          "sku": "F-QPD-W1-ESS02",
+          "name": "Kicking It White Knit Sneakers",
+          "url": "/product/F-QPD-W1-ESS02",
+          "addToCartUrl": "/product/F-QPD-W1-ESS02",
+          "price": 22,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_3_5159_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_3_5159_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_3_5159_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Get to Kickin' It like the cool kids in these White Knit Sneakers! You don’t have to break the bank to look this fly! These sneakers feature an open mesh fabrication with lace up closure, round toe, heel loop, cushioned insole, and flexible rubber outsole. • Cushioned insole • Flexible rubber outsole • Imported ***Sole inserts are recommended for those with arch support issues***",
+          "stockMessage": "In stock",
+          "brand": "Qupid",
+          "popularity": "2810",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "311cfa7154cbbf20e66d9fa20fe99b65",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0w0McNENN9R1DQ42MGIwZDBmMGCwYEgvykwBBAAA__-efAgz",
+        "intellisuggestSignature": "4c9ed7dc369d3ea6bcd17524f2cc624f395787e3067969fa0a116f83aa6a4eb3",
+        "product_type_unigram": "sneakers"
+      },
+      "children": []
+    },
+    {
+      "id": "167852",
+      "mappings": {
+        "core": {
+          "uid": "167852",
+          "sku": "F-QPD-G3-ESS02",
+          "name": "Kicking It Gray Knit Sneakers",
+          "url": "/product/F-QPD-G3-ESS02",
+          "addToCartUrl": "/product/F-QPD-G3-ESS02",
+          "price": 22,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4588_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4588_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_4588_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Get to Kickin' It like the cool kids in these Grey Knit Sneakers! You don’t have to break the bank to look this fly! These sneakers feature an open mesh fabrication with lace up closure, round toe, heel loop, cushioned insole, and flexible rubber outsole. • Cushioned insole • Flexible rubber outsole • Imported ***Sole inserts are recommended for those with arch support issues***",
+          "stockMessage": "In stock",
+          "brand": "Qupid",
+          "popularity": "2663",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "3b2ce389ce9a5b6ea6a1f530654b812d",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0w0McNF1N9Z1DQ42MGIwZDBhMGCwYEgvykwBBAAA__-dXggm",
+        "intellisuggestSignature": "531106f0e1e802ff80e6afe1cb6490dd5f3a1726f635baa48135b4913ea8df92",
+        "product_type_unigram": "sneakers"
+      },
+      "children": []
+    },
+    {
+      "id": "169921",
+      "mappings": {
+        "core": {
+          "uid": "169921",
+          "sku": "F-WDL-W4-LIA01",
+          "name": "Casual Update Natural Knit Sneakers",
+          "url": "/product/F-WDL-W4-LIA01",
+          "addToCartUrl": "/product/F-WDL-W4-LIA01",
+          "price": 22,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3735_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3735_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3735_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Time for a Casual Update to your footwear with these Natural Knit Sneakers! You’ll really be kicking it up a notch with these cool kicks! These sneakers feature a knit fabrication with lace-up closure, round toe, heel loop, cushioned insole, and flexible rubber outsole. • Padded Insole • Non-Skid Sole",
+          "stockMessage": "In stock",
+          "brand": "Wild Diva Lounge",
+          "popularity": "2197",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "032455d7dbee75c0da14449cd78bef83",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0w138dENN9H18XQ0MGQwZDBlMGCwYEgvykwBBAAA__-doAgk",
+        "intellisuggestSignature": "4467341a87f1ad8d573131a2af803508aa21790ddb463cdce0a62cb1c6aa2e13",
+        "product_type_unigram": "sneakers"
+      },
+      "children": []
+    },
+    {
+      "id": "158741",
+      "mappings": {
+        "core": {
+          "uid": "158741",
+          "sku": "F-BAM-G7-ARK23",
+          "name": "Headliner Black Peep-Toe Booties",
+          "url": "/product/F-BAM-G7-ARK23",
+          "addToCartUrl": "/product/F-BAM-G7-ARK23",
+          "price": 36,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/387_9275_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/387_9275_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/387_9275_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Forget supporting act, because with these Black Peep-Toe Booties, you’ll be the Headliner! They’re all lined up to see you in these stunners! Get ready to put on a killer show! These suede ankle booties feature a peep toe, a gold buckle on the side with small cutouts beneath, and a buckle strap on the back of the ankle. • 4\\\" block heel. • Cushioned insole. • Felted, nonskid rubber sole. • All vegan friendly, man made materials. • Imported",
+          "stockMessage": "In stock",
+          "brand": "Bamboo",
+          "popularity": "721",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "e02c62a5120b6ba2204b22bafaa3fb08",
+        "intellisuggestData": "eJyyKK0sMcplYGBw03Vy9NV1N9d1DPI2MmYwZDBjMGCwYEgvykwBBAAA__-bBQgN",
+        "intellisuggestSignature": "f360feb8ab2c3a207c268633ce42818de6a4dabcda465a31aeab8dd00b0f9e5c",
+        "product_type_unigram": "booties"
+      },
+      "children": []
+    },
+    {
+      "id": "176357",
+      "mappings": {
+        "core": {
+          "uid": "176357",
+          "sku": "F-QPD-P1-ESS02",
+          "name": "Kicking It Pink Knit Sneakers",
+          "url": "/product/F-QPD-P1-ESS02",
+          "addToCartUrl": "/product/F-QPD-P1-ESS02",
+          "price": 22,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4585_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4585_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_4585_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Get to Kickin' It like the cool kids in these Pink Knit Sneakers! You don’t have to break the bank to look this fly! These sneakers feature an open mesh fabrication with lace up closure, round toe, heel loop, cushioned insole, and flexible rubber outsole. • Cushioned insole • Flexible rubber outsole • Imported ***Sole inserts are recommended for those with arch support issues***",
+          "stockMessage": "In stock",
+          "brand": "Qupid",
+          "popularity": "706",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "9a56d4968f29a9545c880425d8cb332c",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0w0McNENMNR1DQ42MGIwZDBnMGCwYEgvykwBBAAA__-eEQgw",
+        "intellisuggestSignature": "0fbb37bff44aca42306e2d7068b49a938b89d1c3b6bf09a83f2af46826fcc3f1",
+        "product_type_unigram": "sneakers"
+      },
+      "children": []
+    },
+    {
+      "id": "144972",
+      "mappings": {
+        "core": {
+          "uid": "144972",
+          "sku": "D-FAC-FOXTODAY",
+          "name": "Zero Fox Given Mousepad",
+          "url": "/product/D-FAC-FOXTODAY",
+          "addToCartUrl": "/product/D-FAC-FOXTODAY",
+          "price": 13,
+          "msrp": 25,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a2860_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a2860_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a2860_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Let them know about your carefree attitude with our Zero Fox Given Today Mousepad. Because you can’t be bothered with unnecessary stuff today, tomorrow, or any day! Fabric fox mousepad with a rubber backing. • 7.5\\\" diameter • 1/4\\\" thick",
+          "stockMessage": "In stock",
+          "brand": "Fox And Clover",
+          "popularity": "329",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "1b67c21def0fd5a8db402a89393ab4dc",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0XVzdNZ1848I8XdxjGQwZLBgMGCwYEgvykwBBAAA__-jBQiH",
+        "intellisuggestSignature": "cad731ce38a6864b5cd3c05e75f556ff1d3653e096c203a593f192eb44961537",
+        "product_type_unigram": "mousepad"
+      },
+      "children": []
+    }
+  ],
+  "filters": [
+    {
+      "type": "value",
+      "field": "material",
+      "label": "Rubber",
+      "value": "Rubber"
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "label": "No",
+      "value": "No"
+    }
+  ],
+  "facets": [
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range",
+      "filtered": false,
+      "step": 1,
+      "range": {
+        "low": 13,
+        "high": 36
+      },
+      "active": {
+        "low": 13,
+        "high": 36
+      }
+    },
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Bamboo",
+          "label": "Bamboo",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Fox And Clover",
+          "label": "Fox And Clover",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Qupid",
+          "label": "Qupid",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Wild Diva Lounge",
+          "label": "Wild Diva Lounge",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Vegan Leather",
+          "label": "Vegan Leather",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 251
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 14
+        },
+        {
+          "filtered": true,
+          "value": "Rubber",
+          "label": "Rubber",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 844
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 27
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 21
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 35
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 380
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 1327
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 12
+        },
+        {
+          "filtered": true,
+          "value": "No",
+          "label": "No",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size_footwear",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 6
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "is_elevated": [],
+    "elevated": [],
+    "removed": [],
+    "content": {},
+    "facets": [],
+    "facetsHide": [],
+    "experiments": [],
+    "variants": [],
+    "personalized": false,
+    "triggeredCampaigns": null
+  },
+  "search": {
+    "query": ""
+  }
+}

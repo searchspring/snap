@@ -1,9 +1,14 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { Facets, IndividualFacetType } from './Facets';
-import { searchResponse } from '../../../mocks/searchResponse';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
 
 describe('Facets Component', () => {
 	it('renders', () => {

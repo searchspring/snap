@@ -824,6 +824,128 @@ describe('Facet Store', () => {
 				expect(updatedFacets[0].active.high).toBe(filteredSearchDataFacet?.range?.high);
 			});
 		});
+
+		describe('Auto Open Active Facets', () => {
+			it('can be set to automatically open normally closed facets when they are active', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							autoOpenActive: true,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.autoOpenActive');
+
+				const facets = new SearchFacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					searchData.facets,
+					searchData.pagination,
+					searchData.meta,
+					searchData.merchandising || {}
+				);
+
+				const materialFacet = facets.filter((facet) => facet.field == 'material').pop();
+				expect(materialFacet).toHaveProperty('collapsed', false);
+			});
+
+			it('can be set to NOT automatically open normally closed facets when they are active', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							autoOpenActive: false,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.autoOpenActive');
+
+				const facets = new SearchFacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					searchData.facets,
+					searchData.pagination,
+					searchData.meta,
+					searchData.merchandising || {}
+				);
+
+				const materialFacet = facets.filter((facet) => facet.field == 'material').pop();
+				expect(materialFacet).toHaveProperty('collapsed', true);
+			});
+
+			it('can be set to NOT automatically open normally closed facets when they are active for a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							autoOpenActive: true,
+							fields: {
+								material: {
+									autoOpenActive: false,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.autoOpenActive');
+
+				const facets = new SearchFacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					searchData.facets,
+					searchData.pagination,
+					searchData.meta,
+					searchData.merchandising || {}
+				);
+
+				const materialFacet = facets.filter((facet) => facet.field == 'material').pop();
+				expect(materialFacet).toHaveProperty('collapsed', true);
+
+				const saleFacet = facets.filter((facet) => facet.field == 'on_sale').pop();
+				expect(saleFacet).toHaveProperty('collapsed', false);
+			});
+
+			it('can be set to automatically open normally closed facets when they are active for a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							autoOpenActive: false,
+							fields: {
+								material: {
+									autoOpenActive: true,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.autoOpenActive');
+
+				const facets = new SearchFacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					searchData.facets,
+					searchData.pagination,
+					searchData.meta,
+					searchData.merchandising || {}
+				);
+
+				const materialFacet = facets.filter((facet) => facet.field == 'material').pop();
+				expect(materialFacet).toHaveProperty('collapsed', false);
+
+				const saleFacet = facets.filter((facet) => facet.field == 'on_sale').pop();
+				expect(saleFacet).toHaveProperty('collapsed', true);
+			});
+		});
 	});
 
 	describe('ValueFacet', () => {

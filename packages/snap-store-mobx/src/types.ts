@@ -30,6 +30,7 @@ export type FacetStoreConfig = {
 	trim?: boolean;
 	pinFiltered?: boolean;
 	storeRange?: boolean;
+	autoOpenActive?: boolean;
 };
 
 // Finder Config
