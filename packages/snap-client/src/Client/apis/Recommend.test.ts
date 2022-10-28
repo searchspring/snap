@@ -398,6 +398,7 @@ describe('Recommend Api', () => {
 			api.batchRecommendations({
 				tags: [i.toString()],
 				...batchParams,
+				batched: true,
 			});
 		}
 
