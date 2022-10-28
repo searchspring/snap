@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **storybook:** stories cant use shared mock data ([0e39f69](https://github.com/searchspring/snap/commit/0e39f696fef6b42511f48e019485ff84097c2f2e))
+
+
+
+
+
 ## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
 
 

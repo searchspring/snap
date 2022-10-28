@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **client:** recommendation batching was using param hash forcing batching of unbatched same recs ([39a4754](https://github.com/searchspring/snap/commit/39a47545fa1caee8d82eb20bd3611725390ed6b2))
+* **instantiator:** fixing log mode for instantiator created controllers ([d1fe780](https://github.com/searchspring/snap/commit/d1fe780d268e0febc3a4257675e5139c924f5e55))
+* **instantiator:** preventing re-instantiation of identically configured controllers when targeting ([7cd9363](https://github.com/searchspring/snap/commit/7cd936397591535cee980ec27afd35c72fbc8b5c))
+* **storybook:** stories cant use shared mock data ([0e39f69](https://github.com/searchspring/snap/commit/0e39f696fef6b42511f48e019485ff84097c2f2e))
+
+
+### Features
+
+* **searchfacetstore:** adding a new config param to disable auto facet collapse handling ([697dd9f](https://github.com/searchspring/snap/commit/697dd9f7ae5a93e261380864e083f96b5e2e583e))
+
+
+
+
+
 ## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
 
 

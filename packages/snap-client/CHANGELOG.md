@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **client:** recommendation batching was using param hash forcing batching of unbatched same recs ([39a4754](https://github.com/searchspring/snap/commit/39a47545fa1caee8d82eb20bd3611725390ed6b2))
+
+
+
+
+
 ## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
 
 **Note:** Version bump only for package @searchspring/snap-client
