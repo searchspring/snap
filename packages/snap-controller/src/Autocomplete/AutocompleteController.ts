@@ -69,7 +69,8 @@ export class AutocompleteController extends AbstractController {
 		// persist trending terms in local storage
 		this.storage = new StorageStore({
 			type: StorageType.SESSION,
-			key: `ss-controller-${this.config.id}`,
+			//@ts-ignore
+			key: `ss-controller-${this.config.id}-${this.client.globals?.siteId}`,
 		});
 
 		// add 'beforeSearch' middleware
@@ -499,8 +500,9 @@ export class AutocompleteController extends AbstractController {
 
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
-
-			this.storage.set('terms', JSON.stringify(terms));
+			if (terms?.trending?.queries?.length) {
+				this.storage.set('terms', JSON.stringify(terms));
+			}
 		}
 
 		this.store.updateTrendingTerms(terms);
