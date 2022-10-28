@@ -25,6 +25,7 @@ const defaultConfig: SearchControllerConfig = {
 			trim: true,
 			pinFiltered: true,
 			storeRange: true,
+			autoOpenActive: true,
 		},
 	},
 };
