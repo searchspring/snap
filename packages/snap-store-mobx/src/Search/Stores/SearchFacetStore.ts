@@ -1,8 +1,9 @@
+import deepmerge from 'deepmerge';
 import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig, FacetStoreFacetConfig } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelFacet,
@@ -69,13 +70,19 @@ export class SearchFacetStore extends Array {
 			})
 			.map((facet) => {
 				const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
+				const facetConfig = deepmerge(
+					{ ...config.settings?.facets, fields: undefined },
+					(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
+				);
+				delete facetConfig.fields;
+
 				switch (facet.type) {
 					case 'range':
-						return new RangeFacet(services, storage, facet, facetMeta || {}, config);
+						return new RangeFacet(services, storage, facet, facetMeta || {}, facetConfig);
 					case 'value':
 					case 'range-buckets':
 					default:
-						return new ValueFacet(services, storage, facet, facetMeta || {}, config);
+						return new ValueFacet(services, storage, facet, facetMeta || {}, facetConfig);
 				}
 			});
 
@@ -101,7 +108,7 @@ export class Facet {
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue | SearchResponseModelFacetRange,
 		facetMeta: MetaResponseModelFacet,
-		config: FacetStoreFacetConfig
+		config: FacetStoreConfig
 	) {
 		this.services = services;
 		this.storage = storage;
@@ -120,21 +127,9 @@ export class Facet {
 			toggleCollapse: action,
 		});
 
-		const facetConfig = config && facet.field && config.fields && config.fields[facet.field];
-		const facetCollapsedSetting = (facetConfig as FacetStoreConfig)?.autoOpenActive;
-		const globalFacetCollapsedSetting = config?.autoOpenActive;
-
-		let autoOpenActive = true;
-		//if either setting is set we may need to do something
-		if (globalFacetCollapsedSetting != undefined || facetCollapsedSetting != undefined) {
-			if (facetCollapsedSetting === false || (facetCollapsedSetting == undefined && globalFacetCollapsedSetting == false)) {
-				autoOpenActive = false;
-			}
-		}
-
 		const collapseData = this.storage.get(`facets.${this.field}.collapsed`);
 		this.collapsed = collapseData ?? this.collapsed;
-		if (this.filtered && this.collapsed && typeof collapseData == 'undefined' && autoOpenActive) {
+		if (this.filtered && this.collapsed && typeof collapseData == 'undefined' && config.autoOpenActive) {
 			this.toggleCollapse();
 		}
 	}
@@ -170,15 +165,13 @@ export class RangeFacet extends Facet {
 		storage: StorageStore,
 		facet: SearchResponseModelFacetRange,
 		facetMeta: MetaResponseModelFacetSlider,
-		config: SearchStoreConfig | AutocompleteStoreConfig
+		config: FacetStoreConfig
 	) {
-		super(services, storage, facet, facetMeta, config.settings?.facets!);
+		super(services, storage, facet, facetMeta, config);
 
 		this.step = facet?.step;
 
-		const facetConfig = (config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {};
-		const shouldStore = typeof facetConfig?.storeRange == 'boolean' ? facetConfig.storeRange : config.settings?.facets?.storeRange;
-		const storedRange = shouldStore && this.storage.get(`facets.${this.field}.range`);
+		const storedRange = config.storeRange && this.storage.get(`facets.${this.field}.range`);
 		if (storedRange && facet.filtered && (facet.range?.low! > storedRange.low || facet.range?.high! < storedRange.high)) {
 			// range from API has shrunk
 			this.range = this.storage.get(`facets.${this.field}.range`);
@@ -268,9 +261,9 @@ export class ValueFacet extends Facet {
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue,
 		facetMeta: MetaResponseModelFacet,
-		config: SearchStoreConfig | AutocompleteStoreConfig
+		config: FacetStoreConfig
 	) {
-		super(services, storage, facet, facetMeta, config.settings?.facets!);
+		super(services, storage, facet, facetMeta, config);
 
 		this.multiple = this.multiple;
 
@@ -293,9 +286,7 @@ export class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		const facetConfig: FacetStoreConfig = (config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {};
-		const shouldPin = typeof facetConfig?.pinFiltered == 'boolean' ? facetConfig.pinFiltered : config.settings?.facets?.pinFiltered;
-		if (shouldPin && facetMeta.display !== 'hierarchy') {
+		if (config.pinFiltered && facetMeta.display !== 'hierarchy') {
 			this.values.sort((a, b) => Number(b!.filtered) - Number(a!.filtered));
 		}
 

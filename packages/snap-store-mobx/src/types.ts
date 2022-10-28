@@ -14,17 +14,15 @@ export type SearchStoreConfig = StoreConfig & {
 			merchandising?: boolean;
 			singleResult?: boolean;
 		};
-		facets?: FacetStoreFacetConfig;
+		facets?: FacetStoreConfig & {
+			fields?: {
+				[field: string]: FacetStoreConfig;
+			};
+		};
 		infinite?: {
 			backfill?: number;
 			restorePosition?: boolean;
 		};
-	};
-};
-
-export type FacetStoreFacetConfig = FacetStoreConfig & {
-	fields?: {
-		[field: string]: FacetStoreConfig;
 	};
 };
 
