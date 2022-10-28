@@ -70,7 +70,7 @@ export class AutocompleteController extends AbstractController {
 		this.storage = new StorageStore({
 			type: StorageType.SESSION,
 			//@ts-ignore
-			key: `ss-controller-${this.config.id}-${this.client.globals?.siteId}`,
+			key: `ss-controller-${this.config.id}`,
 		});
 
 		// add 'beforeSearch' middleware
