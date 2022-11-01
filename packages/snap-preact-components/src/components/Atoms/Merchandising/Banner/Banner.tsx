@@ -4,8 +4,8 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { ComponentProps, StylingCSS } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { ComponentProps, StylingCSS } from '../../../../types';
+import { Theme, useTheme, CacheProvider } from '../../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 
 const CSS = {
