@@ -305,7 +305,10 @@ export class Tracker {
 						type: BeaconType.LOGIN,
 						category: BeaconCategory.PERSONALIZATION,
 						context,
-						event: {},
+						event: {
+							userId: this.context.userId,
+							shopperId: data.id,
+						},
 					};
 					return this.track.event(payload);
 				}
