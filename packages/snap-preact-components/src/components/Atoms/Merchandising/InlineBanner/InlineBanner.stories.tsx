@@ -5,7 +5,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { InlineBanner, InlineBannerProps } from './InlineBanner';
 import { componentArgs } from '../../../../utilities';
 import { Snapify } from '../../../../utilities/snapify';
-import Readme from '../readme.md';
+import Readme from './readme.md';
 import { Layout } from '../../../../types';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
