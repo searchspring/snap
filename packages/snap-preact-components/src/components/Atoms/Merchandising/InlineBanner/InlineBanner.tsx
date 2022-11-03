@@ -3,8 +3,8 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, Layout, LayoutType, StylingCSS } from '../../../types';
+import { Theme, useTheme, CacheProvider } from '../../../../providers';
+import { ComponentProps, Layout, LayoutType, StylingCSS } from '../../../../types';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
 

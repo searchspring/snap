@@ -3,9 +3,9 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Banner, BannerProps } from './Banner';
-import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
-import Readme from '../Merchandising/readme.md';
+import { componentArgs } from '../../../../utilities';
+import { Snapify } from '../../../../utilities/snapify';
+import Readme from './readme.md';
 import { SearchController } from '@searchspring/snap-controller';
 
 export default {
