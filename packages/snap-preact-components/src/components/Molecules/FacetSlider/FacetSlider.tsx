@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useRef, useEffect, useCallback } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -142,6 +142,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	const props: FacetSliderProps = {
 		// default props
 		tickSize: properties.facet?.step * 10 || 20,
+		stickyHandleLabel: true,
 		// global theme
 		...globalTheme?.components?.facetSlider,
 		// props
@@ -175,6 +176,89 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize = Number(tickSize);
 	}
 
+	const ref = useRef([]);
+	const overlapRef = useRef(null);
+	const facetRef = useRef(null);
+	const facetEl = facetRef?.current?.getBoundingClientRect() || {};
+	const overlapEl = overlapRef?.current?.getBoundingClientRect() || {};
+
+	const [labelDOMRect, setLabelDOMRect] = useState({
+		min: new DOMRect(),
+		max: new DOMRect(),
+	});
+	const [isOverlapped, setOverlapped] = useState(false);
+	const onIntersection = (labels) => {
+		setLabelDOMRect({
+			min: labels[0].getBoundingClientRect(),
+			max: labels[1].getBoundingClientRect(),
+		}),
+			!(labelDOMRect.min.right < labelDOMRect.max.left || labelDOMRect.min.left > labelDOMRect.max.right)
+				? setOverlapped(true)
+				: setOverlapped(false);
+	};
+
+	const [overlapPosition, setOverlapPosition] = useState({
+		left: '',
+		right: '',
+	});
+
+	const debounce = (func, timeout = 200) => {
+		let timer;
+
+		return ((...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => {
+				func.apply(this, args);
+			}, timeout);
+		})();
+	};
+
+	const calculate = (isOverlapped, handles) => {
+		const handleLeft = handles[0];
+		const handleLeftX = ((facet.range.high - (facet.range.high - handleLeft.value)) / facet.range.high) * 100;
+
+		const handleRight = handles[1];
+		const handleRightX = ((facet.range.high - (facet.range.high - handleRight.value)) / facet.range.high) * 100;
+
+		const center = ((handleRightX - (handleRightX - handleLeftX) / 2) / 100) * 100;
+
+		let isOutOfBoundsRight = overlapEl.right >= facetEl.right;
+		let isOutOfBoundsLeft = overlapEl.left <= facetEl.left;
+
+		console.log('overlapEl.right', overlapEl.right);
+		console.log('facetEl.right', facetEl.right);
+		console.log('isOutOfBoundsRight', isOutOfBoundsRight);
+		console.log('isOverlapped', isOverlapped);
+
+		if (isOverlapped) {
+			if (isOutOfBoundsRight) {
+				setOverlapPosition({
+					left: '',
+					right: '0px',
+				});
+			} else if (isOutOfBoundsLeft) {
+				setOverlapPosition({
+					left: '0px',
+					right: '',
+				});
+			} else {
+				setOverlapPosition({
+					...overlapPosition,
+					left: `calc(${center}% - (${overlapEl.width}px / 2))`,
+				});
+			}
+		}
+		// console.log("overlapEl.left", overlapEl.left);
+		// console.log("overlapEl.right", overlapEl.right);
+		// console.log("facetEl.left", facetEl.left);
+		// console.log("facetEl.right", facetEl.right);
+
+		// console.log("isOutOfBoundsRight", isOutOfBoundsRight);
+		// console.log("isOutOfBoundsLeft", isOutOfBoundsLeft);
+
+		// console.log("overlapPosition", overlapPosition)
+	};
+
 	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
 
 	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
@@ -199,6 +283,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		onDrag: (val) => {
 			setActive(val);
 			onDrag && onDrag(val);
+			debounce(() => calculate(isOverlapped, handles));
+			stickyHandleLabel && onIntersection(ref.current);
 		},
 		min: facet.range?.low,
 		max: facet.range?.high,
@@ -231,47 +317,72 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		facet.step && (
 			<CacheProvider>
 				<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
-					<div className="ss__facet-slider__slider">
-						{showTicks &&
-							ticks.map(({ value, getTickProps }) => (
-								<div className="ss__facet-slider__tick" {...getTickProps()}>
-									<div className="ss__facet-slider__tick__label">{value}</div>
-								</div>
+					<div ref={facetRef} style={{ border: '1px solid' }}>
+						<div className="ss__facet-slider__slider">
+							{showTicks &&
+								ticks.map(({ value, getTickProps }) => (
+									<div className="ss__facet-slider__tick" {...getTickProps()}>
+										<div className="ss__facet-slider__tick__label">{value}</div>
+									</div>
+								))}
+
+							{segments.map(({ getSegmentProps }, index) => (
+								<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
 							))}
 
-						{segments.map(({ getSegmentProps }, index) => (
-							<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
-						))}
-						<div className={'ss__facet-slider__handles'}>
-							{handles.map(({ value, active, getHandleProps }, idx) => (
-								<button
-									type="button"
-									{...getHandleProps({
-										style: {
-											appearance: 'none',
-											border: 'none',
-											background: 'transparent',
-											outline: 'none',
-										},
-									})}
+							{isOverlapped && (
+								<label
+									className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
+									ref={overlapRef}
+									style={{
+										border: '1px solid',
+										position: 'absolute',
+										top: '-29px',
+										fontSize: '13px',
+										width: '100px',
+										color: 'initial',
+										...overlapPosition,
+									}}
 								>
-									<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
-										{stickyHandleLabel && (
-											<label
-												className={classnames(
-													'ss__facet-slider__handle__label',
-													'ss__facet-slider__handle__label--sticky',
-													`ss__facet-slider__handle__label--${idx}`,
-													{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
-													{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
-												)}
-											>
-												{sprintf(facet.formatValue, value)}
-											</label>
-										)}
-									</div>
-								</button>
-							))}
+									{handles.map(({ value, active, getHandleProps }, idx) => sprintf(facet.formatValue, value)).join(`${facet.formatSeparator}`)}
+								</label>
+							)}
+
+							<div className={'ss__facet-slider__handles'}>
+								{handles.map(({ value, active, getHandleProps }, idx) => (
+									<button
+										type="button"
+										{...getHandleProps({
+											style: {
+												appearance: 'none',
+												border: 'none',
+												background: 'transparent',
+												outline: 'none',
+											},
+										})}
+									>
+										<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
+											{stickyHandleLabel && (
+												<label
+													className={classnames(
+														'ss__facet-slider__handle__label',
+														'ss__facet-slider__handle__label--sticky',
+														`ss__facet-slider__handle__label--${idx}`,
+														{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
+														{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
+													)}
+													ref={(el) => (ref.current[idx] = el)}
+													style={{
+														opacity: isOverlapped ? '0' : '1',
+													}}
+												>
+													{sprintf(facet.formatValue, value)}
+												</label>
+											)}
+										</div>
+									</button>
+								))}
+							</div>
 						</div>
 					</div>
 					{!stickyHandleLabel && (
