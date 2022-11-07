@@ -38,6 +38,9 @@ describe('Autocomplete Component', () => {
 				trending: {
 					limit: 5,
 				},
+				history: {
+					limit: 5,
+				},
 			},
 		};
 		container = document.getElementById('target')!;
@@ -195,7 +198,17 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
+	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink & hideHistory', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-controller-${acConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
@@ -299,7 +312,17 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle', async () => {
+	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-controller-${acConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
