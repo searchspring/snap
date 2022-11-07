@@ -65,6 +65,13 @@ The `trendingTitle` prop will display the given text above the autocomplete term
 <Autocomplete controller={controller} input={'#searchInput'} trendingTitle={'Trending'} />
 ```
 
+### historyTitle
+The `historyTitle` prop will display the given text above the autocomplete historical terms area when historical terms are displayed. The default value is 'Previously Searched' and does not affect trending/non-trending terms title `termsTitle` & `trendingTitle`. Also requires `controller.config.settings.history.limit` to be configured, as well as historicaly terms to be enabled with `hideHistory`)
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideHistory={false} historyTitle={'History'} />
+```
+
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the autocomplete facets area. (default is blank)
 
@@ -137,6 +144,13 @@ The following props are available to be used within your custom component: `sear
 
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} linkSlot={<CustomLinkComponent />} />
+```
+
+### hideHistory
+The `hideHistory` prop specifies if the historical terms within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideHistory={false} />
 ```
 
 ### hideFacets

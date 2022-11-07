@@ -52,7 +52,7 @@ const CSS = {
 				width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
 			},
 
-			'.ss__autocomplete__title--trending': {
+			'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
 				fontWeight: 'normal',
 				margin: 0,
 				color: '#c5c5c5',
@@ -170,6 +170,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		// default props
 		termsTitle: '',
 		trendingTitle: 'Popular Searches',
+		historyTitle: 'Previously Searched',
 		facetsTitle: '',
 		contentTitle: '',
 		width: '100%',
@@ -269,10 +270,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideContent,
 		hideBanners,
 		hideLink,
+		hideHistory,
 		horizontalTerms,
 		vertical,
 		termsTitle,
 		trendingTitle,
+		historyTitle,
 		facetsTitle,
 		contentTitle,
 		viewportMaxHeight,
@@ -343,7 +346,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state } = controller.store;
+	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state, history } = controller.store;
 
 	// you can pass in a selector or the actual input element,
 	// if its the selector, we need to bind it to the controller here.
@@ -355,7 +358,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}, []);
 	}
 
-	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || (state.input && controller.store.loaded));
+	const visible =
+		Boolean(input === state.focusedInput) &&
+		(terms.length > 0 || trending?.length > 0 || history.length > 0 || (state.input && controller.store.loaded));
 
 	let showTrending = false;
 	if (!results.length && !state.input && trending?.length) {
@@ -395,14 +400,25 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 				onClick={(e) => e.stopPropagation()}
 			>
-				{!hideTerms && (showTrending || terms.length > 0 || termsSlot) && (
+				{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
 					<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 						{termsSlot ? (
-							cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
+							cloneWithProps(termsSlot, {
+								terms,
+								trending,
+								termsTitle,
+								trendingTitle,
+								showTrending,
+								history,
+								valueProps,
+								emIfy,
+								onTermClick,
+								controller,
+							})
 						) : (
 							<>
 								{terms.length > 0 ? (
-									<>
+									<div className="ss__autocomplete__terms__suggestions">
 										{termsTitle ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--terms">
 												<h5>{termsTitle}</h5>
@@ -426,11 +442,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												</div>
 											))}
 										</div>
-									</>
+									</div>
 								) : null}
 
 								{showTrending ? (
-									<>
+									<div className="ss__autocomplete__terms__trending">
 										{trendingTitle ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
 												<h5>{trendingTitle}</h5>
@@ -454,7 +470,33 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												</div>
 											))}
 										</div>
-									</>
+									</div>
+								) : null}
+
+								{history.length && !hideHistory ? (
+									<div className="ss__autocomplete__terms__history">
+										<div className="ss__autocomplete__title ss__autocomplete__title--history">
+											<h5>{historyTitle}</h5>
+										</div>
+										<div className="ss__autocomplete__terms__options ss__autocomplete__history__options">
+											{history.map((term: any) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option ss__autocomplete__history__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														href={term.url.href}
+														{...valueProps}
+														onFocus={() => term.preview()}
+													>
+														{emIfy(term.value, state.input || '')}
+													</a>
+												</div>
+											))}
+										</div>
+									</div>
 								) : null}
 							</>
 						)}
@@ -591,10 +633,12 @@ export interface AutocompleteProps extends ComponentProps {
 	hideContent?: boolean;
 	hideBanners?: boolean;
 	hideLink?: boolean;
+	hideHistory?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
 	termsTitle?: string;
 	trendingTitle?: string;
+	historyTitle?: string;
 	facetsTitle?: string;
 	contentTitle?: string;
 	viewportMaxHeight?: boolean;

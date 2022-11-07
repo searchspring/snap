@@ -121,6 +121,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideHistory: {
+			defaultValue: true,
+			description: 'prevent historical terms from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
 		hideLink: {
 			defaultValue: false,
 			description: 'prevent the "see n results for keyword" link from rendering (hideContent will also hide this)',
@@ -173,6 +184,17 @@ export default {
 					summary: 'string',
 				},
 				defaultValue: { summary: 'Popular Searches' },
+			},
+			control: { type: 'text' },
+		},
+		historyTitle: {
+			defaultValue: 'Previously Searched',
+			description: 'Change historical terms header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Previously Searched' },
 			},
 			control: { type: 'text' },
 		},

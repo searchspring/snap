@@ -70,6 +70,10 @@ export type AutocompleteStoreConfig = StoreConfig & {
 			limit: number;
 			showResults?: boolean;
 		};
+		history?: {
+			limit: number;
+			showResults?: boolean;
+		};
 	};
 };
 

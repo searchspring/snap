@@ -16,6 +16,9 @@ const autocompleteConfig = {
 	settings: {
 		initializeFromUrl: false,
 		syncInputs: false,
+		history: {
+			limit: 5,
+		},
 	},
 };
 
@@ -65,6 +68,9 @@ describe('Autocomplete Store', () => {
 
 		expect(autocompleteStore.sorting).toBeDefined();
 		expect(autocompleteStore.sorting?.options).toHaveLength(0);
+
+		expect(autocompleteStore.history).toBeDefined();
+		expect(autocompleteStore.history).toHaveLength(0);
 	});
 
 	it('update function updates all of the stores', () => {
@@ -92,5 +98,78 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
 
 		expect(autocompleteStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.length!);
+
+		expect(autocompleteStore.history).toHaveLength(0);
+	});
+
+	it('reset functions are defined', () => {
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
+
+		autocompleteStore.update(searchData);
+
+		expect(autocompleteStore.reset).toBeDefined();
+		expect(autocompleteStore.resetTrending).toBeDefined();
+		expect(autocompleteStore.resetHistory).toBeDefined();
+		expect(autocompleteStore.resetTerms).toBeDefined();
+	});
+
+	it('reset function calls sub-reset functions', () => {
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
+
+		autocompleteStore.update(searchData);
+
+		const resetTrendingSpy = jest.spyOn(autocompleteStore, 'resetTrending');
+		const resetHistorySpy = jest.spyOn(autocompleteStore, 'resetHistory');
+		const resetTermsSpy = jest.spyOn(autocompleteStore, 'resetTerms');
+
+		autocompleteStore.reset();
+
+		expect(resetTrendingSpy).toHaveBeenCalled();
+		expect(resetHistorySpy).toHaveBeenCalled();
+		expect(resetTermsSpy).toHaveBeenCalled();
+
+		resetTrendingSpy.mockClear();
+		resetHistorySpy.mockClear();
+		resetTermsSpy.mockClear();
+	});
+
+	it('reset functions actually reset data', () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+
+		global.localStorage.setItem(`ss-controller-${autocompleteConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
+
+		autocompleteStore.update(searchData);
+		autocompleteStore.updateTrendingTerms(mockData.trending());
+
+		expect(autocompleteStore.terms.length).toBeGreaterThan(0);
+		expect(autocompleteStore.history.length).toBe(historyData.length);
+		expect(autocompleteStore.trending.length).toBeGreaterThan(0);
+
+		//can reset trending
+		autocompleteStore.trending[0].preview();
+		expect(autocompleteStore.trending[0].active).toBeTruthy();
+		autocompleteStore.resetTrending();
+		expect(autocompleteStore.trending[0].active).toBeFalsy();
+
+		//can reset terms
+		autocompleteStore.terms[0].preview();
+		expect(autocompleteStore.terms[0].active).toBeTruthy();
+		autocompleteStore.resetTerms();
+		expect(autocompleteStore.terms[0].active).toBeFalsy();
+
+		//can reset history
+		autocompleteStore.history[0].preview();
+		expect(autocompleteStore.history[0].active).toBeTruthy();
+		autocompleteStore.resetHistory();
+		expect(autocompleteStore.history[0].active).toBeFalsy();
 	});
 });

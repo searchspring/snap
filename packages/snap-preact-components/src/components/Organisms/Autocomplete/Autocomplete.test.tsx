@@ -206,6 +206,7 @@ describe('Autocomplete Component', () => {
 			hideFacets: true,
 			hideContent: true,
 			hideLink: true,
+			hideHistory: true,
 		};
 
 		const otherArgs = {
@@ -215,6 +216,7 @@ describe('Autocomplete Component', () => {
 			hideFacets: false,
 			hideContent: false,
 			hideLink: false,
+			hideHistory: false,
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -235,6 +237,9 @@ describe('Autocomplete Component', () => {
 
 			let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
 			expect(link).not.toBeInTheDocument();
+
+			let history = renderedWithout.container.querySelector('.ss__autocomplete__history__options');
+			expect(history).not.toBeInTheDocument();
 		});
 
 		let renderedWith = render(<Autocomplete {...otherArgs} />, { container });
@@ -251,6 +256,9 @@ describe('Autocomplete Component', () => {
 
 			let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
 			expect(link2).toBeInTheDocument();
+
+			let history2 = renderedWith.container.querySelector('.ss__autocomplete__history__options');
+			expect(history2).toBeInTheDocument();
 		});
 	});
 
@@ -301,6 +309,8 @@ describe('Autocomplete Component', () => {
 			termsTitle: 'custom termsTitle',
 			facetsTitle: 'custom facetsTitle',
 			contentTitle: 'custom contentTitle',
+			historyTitle: 'custom histoyTitle',
+			hideHistory: false,
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -318,6 +328,9 @@ describe('Autocomplete Component', () => {
 
 			let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
 			expect(contentTitle).toHaveTextContent(args.contentTitle);
+
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
 		});
 	});
 
