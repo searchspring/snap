@@ -475,11 +475,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{history.length && !hideHistory ? (
 									<div className="ss__autocomplete__terms__history">
-										<div className="ss__autocomplete__title ss__autocomplete__title--history">
-											<h5>{historyTitle}</h5>
-										</div>
+										{historyTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--history">
+												<h5>{historyTitle}</h5>
+											</div>
+										) : null}
 										<div className="ss__autocomplete__terms__options ss__autocomplete__history__options">
-											{history.map((term: any) => (
+											{history.map((term) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option ss__autocomplete__history__option', {
 														'ss__autocomplete__terms__option--active': term.active,

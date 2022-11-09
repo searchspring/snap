@@ -122,13 +122,13 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideHistory: {
-			defaultValue: true,
+			defaultValue: false,
 			description: 'prevent historical terms from rendering',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
