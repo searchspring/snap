@@ -34,7 +34,7 @@ export class SearchPaginationStore {
 		this.page = paginationData.page!;
 		this.pageSize = paginationData.pageSize!;
 		this.totalResults = paginationData.totalResults!;
-		this.defaultPageSize = meta?.pagination?.defaultPageSize! || 24;
+		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
 		this.totalPages = paginationData.totalPages!;
 
 		this.pageSizeOptions = [

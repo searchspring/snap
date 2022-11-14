@@ -274,7 +274,14 @@ export class SearchController extends AbstractController {
 
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
-					const pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+					let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+
+					if (!pageSize) {
+						//unfortunatly we need to fetch meta to know the default pagesize before we can continue.
+						const meta = await this.client.meta();
+						pageSize = meta.pagination.defaultPageSize;
+					}
+
 					let pagesNeeded1 =
 						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
 							? this.config.settings?.infinite.backfill
