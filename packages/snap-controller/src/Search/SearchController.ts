@@ -227,6 +227,11 @@ export class SearchController extends AbstractController {
 
 		const params = this.params;
 
+		if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
+			// save it to the history store
+			this.store.history.saveToHistory(this.params.search.query.string);
+		}
+
 		try {
 			try {
 				await this.eventManager.fire('beforeSearch', {

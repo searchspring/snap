@@ -70,7 +70,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.sorting?.options).toHaveLength(0);
 
 		expect(autocompleteStore.history).toBeDefined();
-		expect(autocompleteStore.history).toHaveLength(0);
+		expect(autocompleteStore.history?.terms).toHaveLength(0);
 	});
 
 	it('update function updates all of the stores', () => {
@@ -99,7 +99,7 @@ describe('Autocomplete Store', () => {
 
 		expect(autocompleteStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.length!);
 
-		expect(autocompleteStore.history).toHaveLength(0);
+		expect(autocompleteStore.history?.terms).toHaveLength(0);
 	});
 
 	it('reset functions are defined', () => {
@@ -144,14 +144,14 @@ describe('Autocomplete Store', () => {
 		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
 		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
 
-		global.localStorage.setItem(`ss-controller-${autocompleteConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
 		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
 
 		autocompleteStore.update(searchData);
 		autocompleteStore.updateTrendingTerms(mockData.trending());
 
 		expect(autocompleteStore.terms.length).toBeGreaterThan(0);
-		expect(autocompleteStore.history.length).toBe(historyData.length);
+		expect(autocompleteStore.history?.terms.length).toBe(historyData.length);
 		expect(autocompleteStore.trending.length).toBeGreaterThan(0);
 
 		//can reset trending
@@ -167,9 +167,9 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.terms[0].active).toBeFalsy();
 
 		//can reset history
-		autocompleteStore.history[0].preview();
-		expect(autocompleteStore.history[0].active).toBeTruthy();
+		autocompleteStore.history?.terms[0].preview();
+		expect(autocompleteStore.history?.terms[0].active).toBeTruthy();
 		autocompleteStore.resetHistory();
-		expect(autocompleteStore.history[0].active).toBeFalsy();
+		expect(autocompleteStore.history?.terms[0].active).toBeFalsy();
 	});
 });

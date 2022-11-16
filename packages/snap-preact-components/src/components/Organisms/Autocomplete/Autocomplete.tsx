@@ -346,7 +346,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state, history } = controller.store;
+	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state } = controller.store;
+	const history = controller.store.history?.terms || [];
 
 	// you can pass in a selector or the actual input element,
 	// if its the selector, we need to bind it to the controller here.
@@ -360,7 +361,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const visible =
 		Boolean(input === state.focusedInput) &&
-		(terms.length > 0 || trending?.length > 0 || history.length > 0 || (state.input && controller.store.loaded));
+		(terms.length > 0 || trending?.length > 0 || history?.length > 0 || (state.input && controller.store.loaded));
 
 	let showTrending = false;
 	if (!results.length && !state.input && trending?.length) {
@@ -596,17 +597,19 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 });
 
 const emIfy = (term: string, search: string) => {
-	const match = term.match(escapeRegExp(search));
-	if (search && term && match && match.index) {
-		const beforeMatch = term.slice(0, match.index);
-		const afterMatch = term.slice(match.index + search.length, term.length);
-		return (
-			<>
-				{beforeMatch ? <em>{beforeMatch}</em> : ''}
-				{search}
-				{afterMatch ? <em>{afterMatch}</em> : ''}
-			</>
-		);
+	if (term && search) {
+		const match = term.match(escapeRegExp(search));
+		if (search && term && match && match.index) {
+			const beforeMatch = term.slice(0, match.index);
+			const afterMatch = term.slice(match.index + search.length, term.length);
+			return (
+				<>
+					{beforeMatch ? <em>{beforeMatch}</em> : ''}
+					{search}
+					{afterMatch ? <em>{afterMatch}</em> : ''}
+				</>
+			);
+		}
 	}
 
 	return (

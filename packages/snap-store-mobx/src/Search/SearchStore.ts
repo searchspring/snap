@@ -10,6 +10,7 @@ import {
 	SearchPaginationStore,
 	SearchSortingStore,
 	SearchQueryStore,
+	SearchHistoryStore,
 } from './Stores';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
@@ -25,6 +26,7 @@ export class SearchStore extends AbstractStore {
 	public pagination!: SearchPaginationStore;
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
+	public history: SearchHistoryStore;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -36,6 +38,8 @@ export class SearchStore extends AbstractStore {
 		this.services = services;
 
 		this.storage = new StorageStore();
+
+		this.history = new SearchHistoryStore(services);
 		this.update();
 
 		makeObservable(this, {

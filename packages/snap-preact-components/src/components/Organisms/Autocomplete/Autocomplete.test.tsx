@@ -207,7 +207,7 @@ describe('Autocomplete Component', () => {
 		});
 		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
 		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
-		global.localStorage.setItem(`ss-controller-${acConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
 
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
@@ -321,7 +321,7 @@ describe('Autocomplete Component', () => {
 		});
 		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
 		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
-		global.localStorage.setItem(`ss-controller-${acConfig.id}`, JSON.stringify({ history: JSON.stringify(historyData) }));
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
 
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();

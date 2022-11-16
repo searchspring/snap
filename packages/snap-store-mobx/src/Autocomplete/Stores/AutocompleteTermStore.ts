@@ -56,7 +56,7 @@ export class Term {
 		term: { active: boolean; value: string },
 		terms: Term[],
 		resetTerms: () => void,
-		rootState: AutocompleteStateStore
+		rootState?: AutocompleteStateStore
 	) {
 		this.active = term.active;
 		this.value = term.value;
@@ -70,9 +70,10 @@ export class Term {
 			});
 
 			this.active = true;
-			rootState.locks.terms.lock();
-			rootState.locks.facets.unlock();
-
+			if (rootState) {
+				rootState.locks.terms.lock();
+				rootState.locks.facets.unlock();
+			}
 			this.url?.set({ query: this.value }).go();
 		};
 

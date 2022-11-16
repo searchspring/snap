@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType, SearchHistoryStore } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -338,13 +338,6 @@ export class AutocompleteController extends AbstractController {
 			},
 			keyUp: (e: KeyboardEvent): void => {
 				// ignore enter and escape keys
-				if (e?.keyCode == KEY_ENTER || e?.keyCode == KEY_ESCAPE) {
-					if (e.keyCode == KEY_ENTER) {
-						const input = e.target as HTMLInputElement;
-						this.store.saveToHistory(input.value, this.config.settings?.history?.limit || 5);
-					}
-					return;
-				}
 				// return focus on keyup if it was lost
 				if (e.isTrusted && this.store.state.focusedInput !== (e.target as HTMLInputElement)) {
 					this.setFocused(e.target as HTMLInputElement);
@@ -375,8 +368,8 @@ export class AutocompleteController extends AbstractController {
 
 					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
 						this.store.trending[0].preview();
-					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
-						this.store.history[0].preview();
+					} else if (this.store.history?.terms?.length && this.config.settings?.history?.showResults) {
+						this.store.history?.terms[0].preview();
 					}
 				} else {
 					this.handlers.input.timeoutDelay = setTimeout(() => {
