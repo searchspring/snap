@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { InlineBanner } from './InlineBanner';
-import { ThemeProvider } from '../../../providers';
+import { ThemeProvider } from '../../../../providers';
 import type { Banner } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';

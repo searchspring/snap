@@ -3,10 +3,10 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { InlineBanner, InlineBannerProps } from './InlineBanner';
-import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
-import Readme from '../Merchandising/readme.md';
-import { Layout } from '../../../types';
+import { componentArgs } from '../../../../utilities';
+import { Snapify } from '../../../../utilities/snapify';
+import Readme from './readme.md';
+import { Layout } from '../../../../types';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';

@@ -692,18 +692,23 @@ describe('Tracker', () => {
 		const payload = { id: shopperId };
 		await tracker.track.shopper.login(payload, siteId);
 
+		const trackerContext = tracker.getContext();
+
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.LOGIN,
 			category: BeaconCategory.PERSONALIZATION,
-			// @ts-ignore - private property access
-			context: deepmerge(tracker.context, {
+
+			context: deepmerge(trackerContext, {
 				context: {
 					website: {
 						trackingCode: siteId,
 					},
 				},
 			}),
-			event: {},
+			event: {
+				shopperId,
+				userId: trackerContext.userId,
+			},
 		});
 		expect(shopperLogin).toHaveBeenCalledWith(payload, siteId);
 
