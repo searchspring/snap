@@ -272,14 +272,13 @@ export class SearchController extends AbstractController {
 				let previousResults = this.previousResults;
 				const backfills = [];
 
+				let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
-					let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
-
 					if (!pageSize) {
 						//unfortunatly we need to fetch meta to know the default pagesize before we can continue.
 						const meta = await this.client.meta();
-						pageSize = meta.pagination.defaultPageSize;
+						pageSize = meta.pagination?.defaultPageSize!;
 					}
 
 					let pagesNeeded1 =
@@ -334,7 +333,8 @@ export class SearchController extends AbstractController {
 					}
 
 					//we need to overwrite the pagination params so the ui doesnt get confused.
-					response.pagination.pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
+					response.pagination.pageSize = pageSize;
+					response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize);
 					response.pagination.page = params.pagination?.page;
 
 					//set the response results after all backfill promises are resolved.
@@ -393,6 +393,7 @@ export class SearchController extends AbstractController {
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
 
+			// store previous results for infinite usage
 			if (this.config.settings?.infinite) {
 				this.previousResults = JSON.parse(JSON.stringify(response.results));
 			}
