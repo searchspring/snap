@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **tracker:** altering beacon login event to send shopperId and userId in event payload ([2ead2bc](https://github.com/searchspring/snap/commit/2ead2bcf6ba9463e78f057b2524eae6d83a9404c))
+
+
+
+
+
 # [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
 
 **Note:** Version bump only for package @searchspring/snap-tracker

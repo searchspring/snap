@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **merchandising-docs:** refactoring merchandising component structure to fix docs search 4 readme ([d828100](https://github.com/searchspring/snap/commit/d8281008675370b7a6c40e3e7194c0eee76b9a05))
+
+
+
+
+
 # [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
 
 

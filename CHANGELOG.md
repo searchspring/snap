@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **merchandising-docs:** refactoring merchandising component structure to fix docs search 4 readme ([d828100](https://github.com/searchspring/snap/commit/d8281008675370b7a6c40e3e7194c0eee76b9a05))
+* **searchcontroller:** backfill page size bugfix ([17fa02a](https://github.com/searchspring/snap/commit/17fa02a7f43b0d83b8dabf403248688088e2be05))
+* **searchcontroller:** pre-fetch meta if backfill is set and we dont have the defaultpagesize ([01f8ff4](https://github.com/searchspring/snap/commit/01f8ff4b7c6f36f6869297ae1df678fc1c3e15b9))
+* **tracker:** altering beacon login event to send shopperId and userId in event payload ([2ead2bc](https://github.com/searchspring/snap/commit/2ead2bcf6ba9463e78f057b2524eae6d83a9404c))
+
+
+
+
+
 # [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
 
 
