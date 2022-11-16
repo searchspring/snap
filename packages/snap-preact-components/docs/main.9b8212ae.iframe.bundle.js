@@ -1,4 +1,4 @@
-/*! For license information please see main.bfd2839b.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.9b8212ae.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -2618,7 +2618,7 @@
 			};
 			Active.args = { active: !0 };
 		},
-		'./src/components/Atoms/Merchandising/Banner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/Merchandising/Banner/Banner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -2626,7 +2626,7 @@
 					Header: () => Header,
 					Left: () => Left,
 					Secondary: () => Secondary,
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
+					default: () => Banner_stories,
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
@@ -2652,12 +2652,135 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
-			var preact__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
-				_Banner__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/utilities/componentArgs.ts'),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/utilities/snapify.ts'),
-				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/readme.md');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner/Banner.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'banner' }, 'Banner'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Renders a merchandising banner. Banner Types include ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'header'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'footer'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'banner'),
+						'. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'This ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'Banner'),
+						' component does not support inline banners. See ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'InlineBanner'),
+						' component below.'
+					),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'content' }, 'content'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'content'),
+						' prop specifies an object of banners returned from the Searchspring API.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'type' }, 'type'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'type'),
+						' prop specifies the banner type to render from the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'content'),
+						' object.'
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Banner Types include ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'header'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'footer'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'banner'),
+						'. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'footer'} />\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'left'} />\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'banner'} />\n"
+						)
+					)
+				);
+			}
 			function _regeneratorRuntime() {
 				_regeneratorRuntime = function _regeneratorRuntime() {
 					return exports;
@@ -3044,20 +3167,14 @@
 					});
 				};
 			}
-			const __WEBPACK_DEFAULT_EXPORT__ = {
+			MDXContent.isMDXComponent = !0;
+			const Banner_stories = {
 				title: 'Atoms/Banner',
-				component: _Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+				component: Banner.j,
 				parameters: {
 					docs: {
 						page: function page() {
-							return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
-								'div',
-								null,
-								(0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_27__.Z, null),
-								(0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__.$4, {
-									story: _storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_25__.Uh,
-								})
-							);
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
 						},
 					},
 				},
@@ -3076,19 +3193,16 @@
 							control: { type: 'select', options: ['header', 'footer', 'left', 'inline', 'banner'] },
 						},
 					},
-					_utilities__WEBPACK_IMPORTED_MODULE_28__.p
+					componentArgs.p
 				),
 			};
-			var snapInstance = _utilities_snapify__WEBPACK_IMPORTED_MODULE_29__.K.search({
-					id: 'Banner',
-					globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } },
-				}),
+			var snapInstance = snapify.K.search({ id: 'Banner', globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } }),
 				Header = function Header(args, _ref) {
 					var _controller$store,
 						_controller$store$mer,
 						controller = _ref.loaded.controller;
-					return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
-						_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+					return (0, preact_module.h)(
+						Banner.j,
 						Object.assign({}, args, {
 							content:
 								null == controller ||
@@ -3124,8 +3238,8 @@
 				var _controller$store2,
 					_controller$store2$me,
 					controller = _ref3.loaded.controller;
-				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
-					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+				return (0, preact_module.h)(
+					Banner.j,
 					Object.assign({}, args, {
 						content:
 							null == controller ||
@@ -3161,8 +3275,8 @@
 				var _controller$store3,
 					_controller$store3$me,
 					controller = _ref5.loaded.controller;
-				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
-					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+				return (0, preact_module.h)(
+					Banner.j,
 					Object.assign({}, args, {
 						content:
 							null == controller ||
@@ -3198,8 +3312,8 @@
 				var _controller$store4,
 					_controller$store4$me,
 					controller = _ref7.loaded.controller;
-				return (0, preact__WEBPACK_IMPORTED_MODULE_24__.h)(
-					_Banner__WEBPACK_IMPORTED_MODULE_26__.j,
+				return (0, preact_module.h)(
+					Banner.j,
 					Object.assign({}, args, {
 						content:
 							null == controller ||
@@ -3232,7 +3346,7 @@
 			]),
 				(Left.args = { type: 'left' });
 		},
-		'./src/components/Atoms/Merchandising/Banner.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/Merchandising/Banner/Banner.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { j: () => Banner });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
@@ -3303,10 +3417,14 @@
 				);
 			}
 		},
-		'./src/components/Atoms/Merchandising/InlineBanner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => InlineBanner_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -3332,13 +3450,116 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
-			var preact__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
-				_InlineBanner__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/utilities/componentArgs.ts'),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__('./src/utilities/snapify.ts'),
-				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/components/Atoms/Merchandising/readme.md'),
-				_types__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/types.ts');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				InlineBanner = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'inline-banner' }, 'Inline Banner'),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'banner' }, 'banner'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'banner'),
+						' prop specifies a reference to an inline banner object from the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'content'),
+						' object.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'width' }, 'width'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'width'), ' prop specifies the width of the inline banner.'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} width={'300px'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'layout' }, 'layout'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'layout'),
+						' prop specifies if this banner will be rendered in a ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'grid'),
+						' or ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'list'),
+						' layout.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'onclick' }, 'onClick'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop contains a custom onClick event handler. Function is passed the click event as first parameter, Banner object is passed as the second.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const CustomBannerClick = (e, banner) => {\n    console.log('You Clicked a banner!' , e)\n};\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} onClick={CustomBannerClick} />\n'
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var types = __webpack_require__('./src/types.ts');
 			function _regeneratorRuntime() {
 				_regeneratorRuntime = function _regeneratorRuntime() {
 					return exports;
@@ -3725,20 +3946,13 @@
 					});
 				};
 			}
-			const __WEBPACK_DEFAULT_EXPORT__ = {
+			const InlineBanner_stories = {
 				title: 'Atoms/InlineBanner',
-				component: _InlineBanner__WEBPACK_IMPORTED_MODULE_27__.f,
+				component: InlineBanner.f,
 				parameters: {
 					docs: {
 						page: function page() {
-							return (0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
-								'div',
-								null,
-								(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_28__.Z, null),
-								(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__.$4, {
-									story: _storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_26__.Uh,
-								})
-							);
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
 						},
 					},
 				},
@@ -3752,29 +3966,26 @@
 						},
 						layout: {
 							description: 'Banner layout',
-							defaultValue: _types__WEBPACK_IMPORTED_MODULE_29__.Ar.GRID,
+							defaultValue: types.Ar.GRID,
 							table: { type: { summary: 'string' } },
-							control: { type: 'select', options: [_types__WEBPACK_IMPORTED_MODULE_29__.Ar.GRID, _types__WEBPACK_IMPORTED_MODULE_29__.Ar.LIST] },
+							control: { type: 'select', options: [types.Ar.GRID, types.Ar.LIST] },
 						},
 						width: { description: 'InlineBanner width', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 						onClick: { description: 'Custom onClick event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 					},
-					_utilities__WEBPACK_IMPORTED_MODULE_30__.p
+					componentArgs.p
 				),
 				decorators: [
 					function (Story) {
-						return (0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
+						return (0, preact_module.h)(
 							'div',
 							{ style: { width: '220px', height: '300px', position: 'relative' } },
-							(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(Story, { height: '200px' })
+							(0, preact_module.h)(Story, { height: '200px' })
 						);
 					},
 				],
 			};
-			var snapInstance = _utilities_snapify__WEBPACK_IMPORTED_MODULE_31__.K.search({
-					id: 'InlineBanner',
-					globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } },
-				}),
+			var snapInstance = snapify.K.search({ id: 'InlineBanner', globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } }),
 				Default = function Default(args, _ref) {
 					var _controller$store,
 						_controller$store$res,
@@ -3791,13 +4002,7 @@
 											return 'banner' === result.type;
 										})
 										.pop();
-					return (
-						inlineBanners &&
-						(0, preact__WEBPACK_IMPORTED_MODULE_25__.h)(
-							_InlineBanner__WEBPACK_IMPORTED_MODULE_27__.f,
-							Object.assign({}, args, { banner: inlineBanners })
-						)
-					);
+					return inlineBanners && (0, preact_module.h)(InlineBanner.f, Object.assign({}, args, { banner: inlineBanners }));
 				};
 			Default.loaders = [
 				_asyncToGenerator(
@@ -3818,7 +4023,7 @@
 				),
 			];
 		},
-		'./src/components/Atoms/Merchandising/InlineBanner.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { f: () => InlineBanner });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
@@ -15159,7 +15364,7 @@
 				SearchMerchandisingStore = __webpack_require__('../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
-				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner.tsx'),
+				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner/Banner.tsx'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
@@ -22356,7 +22561,7 @@
 					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
 				),
 				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
-					'./src/components/Atoms/Merchandising/InlineBanner.tsx'
+					'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx'
 				),
 				_Molecules_Result__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/types.ts'),
@@ -24608,18 +24813,20 @@
 										_params$pagination2,
 										_this$config$settings4,
 										_params$pagination3,
+										_params$pagination4,
 										_this$config$settings5,
 										preventBackfill,
 										dontBackfill,
 										previousResults,
 										backfills,
-										_params$pagination4,
+										pageSize,
 										_params$pagination5,
 										_params$pagination6,
 										_this$config$settings6,
 										_this$config$settings7,
 										_params$pagination7,
-										pageSize,
+										_meta$pagination,
+										_meta,
 										pagesNeeded1,
 										totalResultsNeeded,
 										backfillParams,
@@ -24628,7 +24835,6 @@
 										i,
 										_backfillParams,
 										_params$pagination8,
-										_params$pagination9,
 										backfillResults,
 										_yield$_this$client$s,
 										_yield$_this$client$s2,
@@ -24691,7 +24897,7 @@
 																	: _params$pagination.page) > 1
 															))
 														) {
-															_context.next = 56;
+															_context.next = 67;
 															break;
 														}
 														if (
@@ -24723,59 +24929,73 @@
 														if (
 															((previousResults = _this.previousResults),
 															(backfills = []),
-															null !== (_this$config$settings5 = _this.config.settings) &&
-																void 0 !== _this$config$settings5 &&
-																_this$config$settings5.infinite.backfill &&
-																!previousResults.length)
-														)
-															if (
-																((pageSize =
-																	(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
-																		? void 0
-																		: _params$pagination4.pageSize) ||
-																	_this.store.pagination.pageSize ||
-																	_this.store.pagination.defaultPageSize),
-																(pagesNeeded1 =
-																	null !== (_params$pagination5 = params.pagination) &&
-																	void 0 !== _params$pagination5 &&
-																	_params$pagination5.page &&
-																	(null === (_params$pagination6 = params.pagination) || void 0 === _params$pagination6
-																		? void 0
-																		: _params$pagination6.page) >
-																		(null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
-																			? void 0
-																			: _this$config$settings6.infinite.backfill)
-																		? null === (_this$config$settings7 = _this.config.settings) || void 0 === _this$config$settings7
-																			? void 0
-																			: _this$config$settings7.infinite.backfill
-																		: null === (_params$pagination7 = params.pagination) || void 0 === _params$pagination7
-																		? void 0
-																		: _params$pagination7.page),
-																500,
-																(totalResultsNeeded = pageSize * (pagesNeeded1 || 1)) < 500)
-															)
-																(backfillParams = cjs_default()(Object.assign({}, params), {
-																	pagination: { pageSize: totalResultsNeeded, page: 1 },
-																})),
-																	backfills.push(_this.client.search(backfillParams));
-															else
-																for (
-																	pagesNeeded = Math.ceil(totalResultsNeeded / 500),
-																		lastPageCount = 500 - (500 * pagesNeeded - totalResultsNeeded),
-																		i = 1;
-																	i <= pagesNeeded;
-																	i++
-																)
-																	(_backfillParams = cjs_default()(Object.assign({}, params), {
-																		pagination: { pageSize: i < pagesNeeded ? 500 : lastPageCount, page: i },
-																	})),
-																		backfills.push(_this.client.search(_backfillParams));
-														if (!backfills || !backfills.length) {
-															_context.next = 46;
+															(pageSize =
+																(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
+																	? void 0
+																	: _params$pagination4.pageSize) ||
+																_this.store.pagination.pageSize ||
+																_this.store.pagination.defaultPageSize),
+															null === (_this$config$settings5 = _this.config.settings) ||
+																void 0 === _this$config$settings5 ||
+																!_this$config$settings5.infinite.backfill ||
+																previousResults.length)
+														) {
+															_context.next = 44;
 															break;
 														}
-														return (backfillResults = []), (_context.next = 38), Promise.all(backfills);
+														if (pageSize) {
+															_context.next = 40;
+															break;
+														}
+														return (_context.next = 38), _this.client.meta();
 													case 38:
+														(_meta = _context.sent),
+															(pageSize =
+																null === (_meta$pagination = _meta.pagination) || void 0 === _meta$pagination
+																	? void 0
+																	: _meta$pagination.defaultPageSize);
+													case 40:
+														if (
+															((pagesNeeded1 =
+																null !== (_params$pagination5 = params.pagination) &&
+																void 0 !== _params$pagination5 &&
+																_params$pagination5.page &&
+																(null === (_params$pagination6 = params.pagination) || void 0 === _params$pagination6
+																	? void 0
+																	: _params$pagination6.page) >
+																	(null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
+																		? void 0
+																		: _this$config$settings6.infinite.backfill)
+																	? null === (_this$config$settings7 = _this.config.settings) || void 0 === _this$config$settings7
+																		? void 0
+																		: _this$config$settings7.infinite.backfill
+																	: null === (_params$pagination7 = params.pagination) || void 0 === _params$pagination7
+																	? void 0
+																	: _params$pagination7.page),
+															500,
+															(totalResultsNeeded = pageSize * (pagesNeeded1 || 1)) < 500)
+														)
+															(backfillParams = cjs_default()(Object.assign({}, params), { pagination: { pageSize: totalResultsNeeded, page: 1 } })),
+																backfills.push(_this.client.search(backfillParams));
+														else
+															for (
+																pagesNeeded = Math.ceil(totalResultsNeeded / 500),
+																	lastPageCount = 500 - (500 * pagesNeeded - totalResultsNeeded),
+																	i = 1;
+																i <= pagesNeeded;
+																i++
+															)
+																(_backfillParams = cjs_default()(Object.assign({}, params), {
+																	pagination: { pageSize: i < pagesNeeded ? 500 : lastPageCount, page: i },
+																})),
+																	backfills.push(_this.client.search(_backfillParams));
+													case 44:
+														if (!backfills || !backfills.length) {
+															_context.next = 57;
+															break;
+														}
+														return (backfillResults = []), (_context.next = 48), Promise.all(backfills);
+													case 48:
 														_context.sent.map(function (_ref3) {
 															var _ref4 = _slicedToArray(_ref3, 2),
 																Bmeta = _ref4[0],
@@ -24784,22 +25004,18 @@
 																(backfillResults = response ? backfillResults.concat(Bresponse.results) : (response = Bresponse).results);
 														}),
 															response.meta || (response.meta = meta),
-															(response.pagination.pageSize =
-																(null === (_params$pagination8 = params.pagination) || void 0 === _params$pagination8
-																	? void 0
-																	: _params$pagination8.pageSize) ||
-																_this.store.pagination.pageSize ||
-																_this.store.pagination.defaultPageSize),
+															(response.pagination.pageSize = pageSize),
+															(response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize)),
 															(response.pagination.page =
-																null === (_params$pagination9 = params.pagination) || void 0 === _params$pagination9
+																null === (_params$pagination8 = params.pagination) || void 0 === _params$pagination8
 																	? void 0
-																	: _params$pagination9.page),
+																	: _params$pagination8.page),
 															(response.results = backfillResults),
-															(_context.next = 54);
+															(_context.next = 65);
 														break;
-													case 46:
-														return (_context.next = 48), _this.client.search(params);
-													case 48:
+													case 57:
+														return (_context.next = 59), _this.client.search(params);
+													case 59:
 														(_yield$_this$client$s = _context.sent),
 															(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 															(meta = _yield$_this$client$s2[0]),
@@ -24808,41 +25024,41 @@
 																SearchController_toConsumableArray(previousResults),
 																SearchController_toConsumableArray(response.results || [])
 															));
-													case 54:
-														_context.next = 63;
+													case 65:
+														_context.next = 74;
 														break;
-													case 56:
-														return (_context.next = 58), _this.client.search(params);
-													case 58:
+													case 67:
+														return (_context.next = 69), _this.client.search(params);
+													case 69:
 														(_yield$_this$client$s3 = _context.sent),
 															(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
 															(meta = _yield$_this$client$s4[0]),
 															(response = _yield$_this$client$s4[1]).meta || (response.meta = meta);
-													case 63:
+													case 74:
 														return (
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context.prev = 66),
-															(_context.next = 69),
+															(_context.prev = 77),
+															(_context.next = 80),
 															_this.eventManager.fire('afterSearch', { controller: _assertThisInitialized(_this), request: params, response })
 														);
-													case 69:
-														_context.next = 81;
+													case 80:
+														_context.next = 92;
 														break;
-													case 71:
+													case 82:
 														if (
-															((_context.prev = 71),
-															(_context.t1 = _context.catch(66)),
+															((_context.prev = 82),
+															(_context.t1 = _context.catch(77)),
 															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 														) {
-															_context.next = 79;
+															_context.next = 90;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-													case 79:
+													case 90:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-													case 81:
+													case 92:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
@@ -24852,52 +25068,52 @@
 																(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context.prev = 86),
-															(_context.next = 89),
+															(_context.prev = 97),
+															(_context.next = 100),
 															_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
 														);
-													case 89:
-														_context.next = 101;
+													case 100:
+														_context.next = 112;
 														break;
-													case 91:
+													case 102:
 														if (
-															((_context.prev = 91),
-															(_context.t2 = _context.catch(86)),
+															((_context.prev = 102),
+															(_context.t2 = _context.catch(97)),
 															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 														) {
-															_context.next = 99;
+															_context.next = 110;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-													case 99:
+													case 110:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-													case 101:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 121);
+													case 112:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 132);
 														break;
-													case 105:
-														if (((_context.prev = 105), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 121;
+													case 116:
+														if (((_context.prev = 116), (_context.t3 = _context.catch(4)), !_context.t3)) {
+															_context.next = 132;
 															break;
 														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 111 : 500 === _context.t4 ? 114 : 117);
+														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 122 : 500 === _context.t4 ? 125 : 128);
 														break;
-													case 111:
+													case 122:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
 															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 119)
+															_context.abrupt('break', 130)
 														);
-													case 114:
+													case 125:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
 															_this.log.error(_this.store.error),
-															_context.abrupt('break', 119)
+															_context.abrupt('break', 130)
 														);
-													case 117:
-														return _this.log.error(_context.t3), _context.abrupt('break', 119);
-													case 119:
+													case 128:
+														return _this.log.error(_context.t3), _context.abrupt('break', 130);
+													case 130:
 														(_this.store.loading = !1), _this.handleError(_context.t3);
-													case 121:
+													case 132:
 													case 'end':
 														return _context.stop();
 												}
@@ -24905,10 +25121,10 @@
 										_callee,
 										null,
 										[
-											[4, 105],
+											[4, 116],
 											[5, 10],
-											[66, 71],
-											[86, 91],
+											[77, 82],
+											[97, 102],
 										]
 									);
 								})
@@ -33521,9 +33737,9 @@
 							(this.pageSize = paginationData.pageSize),
 							(this.totalResults = paginationData.totalResults),
 							(this.defaultPageSize =
-								(null == meta || null === (_meta$pagination = meta.pagination) || void 0 === _meta$pagination
+								null == meta || null === (_meta$pagination = meta.pagination) || void 0 === _meta$pagination
 									? void 0
-									: _meta$pagination.defaultPageSize) || 24),
+									: _meta$pagination.defaultPageSize),
 							(this.totalPages = paginationData.totalPages),
 							(this.pageSizeOptions = [
 								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
@@ -37498,7 +37714,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.38.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.38.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -37607,7 +37823,12 @@
 													_this.getShopperId() != data.id)
 												) {
 													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
-													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
+													var payload = {
+														type: BeaconType.LOGIN,
+														category: BeaconCategory.PERSONALIZATION,
+														context,
+														event: { userId: _this.context.userId, shopperId: data.id },
+													};
 													return _this.track.event(payload);
 												}
 											} else
@@ -37940,7 +38161,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.38.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.38.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -38960,219 +39181,6 @@
 				}
 			}
 		},
-		'./src/components/Atoms/Merchandising/readme.md': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Z: () => MDXContent });
-			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
-			function _extends() {
-				return (
-					(_extends = Object.assign
-						? Object.assign.bind()
-						: function (target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = arguments[i];
-									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-								}
-								return target;
-						  }),
-					_extends.apply(this, arguments)
-				);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h1', { id: 'banner' }, 'Banner'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Renders a merchandising banner. Banner Types include ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'header'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'footer'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'left'),
-						', and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'banner'),
-						'. '
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'This ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'Banner'),
-						' component does not support inline banners. See ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'InlineBanner'),
-						' component below.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h2', { id: 'usage' }, 'Usage'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'content' }, 'content'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The required ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'content'),
-						' prop specifies an object of banners returned from the Searchspring API.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'type' }, 'type'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The required ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'type'),
-						' prop specifies the banner type to render from the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'content'),
-						' object.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Banner Types include ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'header'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'footer'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'left'),
-						', and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'banner'),
-						'. '
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Banner content={controller?.store?.merchandising?.content} type={'footer'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Banner content={controller?.store?.merchandising?.content} type={'left'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Banner content={controller?.store?.merchandising?.content} type={'banner'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h1', { id: 'inline-banner' }, 'Inline Banner'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h2', { id: 'usage-1' }, 'Usage'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'banner-1' }, 'banner'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'banner'),
-						' prop specifies a reference to an inline banner object from the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'content'),
-						' object.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} />\n'
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'width' }, 'width'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'width'),
-						' prop specifies the width of the inline banner.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} width={'300px'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'layout' }, 'layout'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'layout'),
-						' prop specifies if this banner will be rendered in a ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'grid'),
-						' or ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'list'),
-						' layout.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'onclick' }, 'onClick'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'onClick'),
-						' prop contains a custom onClick event handler. Function is passed the click event as first parameter, Banner object is passed as the second.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-typescript' },
-							"const CustomBannerClick = (e, banner) => {\n    console.log('You Clicked a banner!' , e)\n};\n"
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} onClick={CustomBannerClick} />\n'
-						)
-					)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-		},
 		'./src/documentation/About/About.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
@@ -39805,8 +39813,9 @@
 				'./components/Atoms/Icon/Icon.stories.tsx': './src/components/Atoms/Icon/Icon.stories.tsx',
 				'./components/Atoms/Image/Image.stories.tsx': './src/components/Atoms/Image/Image.stories.tsx',
 				'./components/Atoms/Loading/LoadingBar.stories.tsx': './src/components/Atoms/Loading/LoadingBar.stories.tsx',
-				'./components/Atoms/Merchandising/Banner.stories.tsx': './src/components/Atoms/Merchandising/Banner.stories.tsx',
-				'./components/Atoms/Merchandising/InlineBanner.stories.tsx': './src/components/Atoms/Merchandising/InlineBanner.stories.tsx',
+				'./components/Atoms/Merchandising/Banner/Banner.stories.tsx': './src/components/Atoms/Merchandising/Banner/Banner.stories.tsx',
+				'./components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx':
+					'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx',
 				'./components/Atoms/Overlay/Overlay.stories.tsx': './src/components/Atoms/Overlay/Overlay.stories.tsx',
 				'./components/Atoms/Price/Price.stories.tsx': './src/components/Atoms/Price/Price.stories.tsx',
 				'./components/Atoms/Skeleton/Skeleton.stories.tsx': './src/components/Atoms/Skeleton/Skeleton.stories.tsx',
