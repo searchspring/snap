@@ -122,11 +122,17 @@ const OUTPUT_FILE = 'snap-docs.json';
 		const links = paths.map((path) => {
 			const packagePath = path.split('/snap/packages/')[1];
 			// const [libraryDir, _, directory, type, componentName, markdownFile] = packagePath.split('/');
-
 			const [libraryDir, _, grouping, ...remainingPaths] = packagePath.split('/');
-			const [markdownFile, componentName, type] = remainingPaths.reverse();
+			const [markdownFile, componentName, next, extra] = remainingPaths.reverse();
 			// grouping = components / documentation / hooks
 			// type = atom / molecule / organism or About / Theme / Usage
+			let type;
+			//if a component is nested inside an additional directory we need to grab the type from extra
+			if (extra) {
+				type = extra;
+			} else {
+				type = next;
+			}
 
 			const lang = libraryDir.split('-')[1];
 			const route = libraryDir.split('-').reverse().slice(0, 2).join('-'); //.includes('snap-preact-components') ? 'components-preact' : ''; // TODO: refactor once more options
