@@ -1,9 +1,14 @@
 ## Configuration
 
-Lets define our config. The config that is provided to Snap will create and return controllers that are specified in the config. In this example, we will be creating a Search and Autocomplete controller.
+Let's define our config. The config that is provided to Snap will create and return controllers that are specified in the config. In this example, we will be creating a Search and Autocomplete controller.
 
 ```typescript
 const config = {
+	features: {
+        integratedSpellCorrection: {
+            enabled: true,
+        },
+    },
 	url: {
 		parameters: {
 			core: {
@@ -62,7 +67,7 @@ const config = {
 };
 ```
 
-Lets go over a few things.
+Let's go over a few things.
 
 `config.url` is optional and contains a [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) object that is passed to the core [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
 
@@ -104,6 +109,8 @@ We also have a `targeters` array of DomTargeter `targeter` configuration objects
 
 `targeter.hideTarget` boolean that specifies if the target node should be hidden before the component is mounted and rendered. It is recommended to enable this to prevent flashy behaviour. 
 
+`targeter.autoRetarget` (optional) boolean that specificies if the targeter should continuously query for the selector in the DOM until it finds it and triggers a retarget. This is useful for dynamically generated selectors that might not exist at dom ready.
+
 `targeter.skeleton` (optional) meant to be used as a "loading" component. This specifies a function that returns a reference to the component to render immediately at the target selector to show briefly while the data is returning and the real component is rendering. You can use any component you want for this, although `snap-preact-components` provides a `skeleton` component for you to use if preferred.
 
 `targeter.props` (optional) convenient way of passing additional props to the component, by default we pass `controller`
@@ -128,3 +135,15 @@ The `targeter.selector` specifies the DOM node where the `targeter.component` wi
 
 However in our example, since they are both the same value, the Autocomplete component will rendered as a child DOM node below the `<input/>` element that is currently focused. 
 
+
+### Feature Flags
+
+`config.features` is optional and defines features to enable.
+
+#### Integrated Spell Correction
+
+Integrated spell correction is disabled by default. When disabled and a query is typed into autocomplete, a request is made to the suggest API to retrieve a list of terms. The highest scoring term is then used to query the search API for results.
+
+Enabling integrated spell correction `config.features.integratedSpellCorrection.enabled = true` will still retrieve terms from the suggest API to display, however the query that was entered will be used as the term sent to the search API. Spell correction will occur within the search API. The correction and original query is returned in the response and available to be render. Upon submitting the autocomplete form, a `fallbackQuery` parameter is also submitted. This contains a value of the highest scoring suggested term and will be searched for if the initial query yields 0 results.
+
+Note: Enabling integrated spell correction modifies [AutocompleteController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete)'s config by setting `config.settings.integratedSpellCorrection = true`

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState } from 'preact/hooks';
+import { StateUpdater, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -8,14 +8,13 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, theme }) =>
-		//@ts-ignore
+	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -35,7 +34,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
+				border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
@@ -44,7 +43,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme.colors?.hover || '#f8f8f8',
+						backgroundColor: theme?.colors?.hover || '#f8f8f8',
 					},
 				},
 			},
@@ -104,7 +103,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				disabled,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		button: {
 			// default props
@@ -120,7 +119,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				borderColor,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		icon: {
 			// default props
@@ -134,24 +133,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				size: '14px',
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	// only single selection support for now
-	let selection = selected;
-	let setSelection;
-
 	// open state
-	const [open, setOpen] = useState(startOpen);
+	const [open, setOpen] = useState<boolean>(Boolean(startOpen));
 
 	// selection state
-	const stateful = selection === undefined;
-	if (stateful) {
-		[selection, setSelection] = useState(undefined);
-	} else {
-		selection = Array.isArray(selected) ? selected[0] : selection;
-	}
+	const [selection, setSelection] = useState<Option | undefined>(selected);
 
 	if (selection && clearSelection) {
 		options = [
@@ -163,109 +153,104 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		];
 	}
 
-	const makeSelection = (e: Event, option?: Option) => {
-		option = option.value ? option : undefined;
-
+	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
 		if (option != selection) {
 			onSelect && onSelect(e, option);
 		}
 
-		if (stateful) {
-			setSelection(option);
-		}
+		setSelection(option);
 
 		!stayOpenOnSelection && setOpen(false);
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
-			styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+			styling.css = [CSS.select({ color, backgroundColor, borderColor, theme }), style];
 		}
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		options &&
-		(typeof options == 'object' || Array.isArray(options)) &&
-		options.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
-					{native ? (
-						<>
-							{label && !hideLabelOnSelection && (
-								<span className="ss__select__label">
-									{label}
-									{separator && <span className="ss__select__label__separator">{separator}</span>}
-								</span>
-							)}
+	// options can be an Array or ObservableArray - but should have length
+	return typeof options == 'object' && options?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
+				{native ? (
+					<>
+						{label && !hideLabelOnSelection && (
+							<span className="ss__select__label">
+								{label}
+								{separator && <span className="ss__select__label__separator">{separator}</span>}
+							</span>
+						)}
 
-							<select
-								className="ss__select__select"
-								disabled={disabled || undefined}
-								onChange={(e) => {
-									const selectElement = e.target;
-									const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
-									const selectedOption = options
-										.filter((option, index) => {
-											return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
-										})
-										.pop();
-									!disabled && makeSelection(e as any, selectedOption);
-								}}
-							>
-								{!selection && clearSelection && (
-									<option className="ss__select__select__option" selected value="">
-										{clearSelection}
-									</option>
-								)}
-								{options.map((option, index) => (
-									<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
-										{option.label}
-									</option>
-								))}
-							</select>
-						</>
-					) : (
-						<Dropdown
-							{...subProps.dropdown}
-							disableClickOutside={disableClickOutside}
-							open={open}
-							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-							onClick={(e) => setOpen((prev) => !prev)}
-							button={
-								<Button {...subProps.button}>
-									{label && !hideLabelOnSelection && (
-										<span className="ss__select__label">
-											{label}
-											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
-										</span>
-									)}
-									{selection && <span className="ss__select__selection">{selection?.label}</span>}
-									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
-								</Button>
-							}
+						<select
+							className="ss__select__select"
+							disabled={disabled || undefined}
+							onChange={(e) => {
+								const selectElement = e.target;
+								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
+								const selectedOption = options
+									.filter((option, index) => {
+										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
+									})
+									.pop();
+								!disabled && makeSelection(e, selectedOption);
+							}}
 						>
-							<ul className="ss__select__select">
-								{options.map((option) => (
-									<li
-										className={classnames('ss__select__select__option', {
-											'ss__select__select__option--selected': selection?.value === option.value,
-										})}
-										onClick={(e) => !disabled && makeSelection(e as any, option)}
-									>
-										<span>{option.label}</span>
-									</li>
-								))}
-							</ul>
-						</Dropdown>
-					)}
-				</div>
-			</CacheProvider>
-		)
+							{!selection && clearSelection && (
+								<option className="ss__select__select__option" selected value="">
+									{clearSelection}
+								</option>
+							)}
+							{options.map((option, index) => (
+								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</>
+				) : (
+					<Dropdown
+						{...subProps.dropdown}
+						disableClickOutside={disableClickOutside}
+						open={open}
+						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+						onClick={(e) => setOpen((prev) => !prev)}
+						button={
+							<Button {...subProps.button}>
+								{label && !hideLabelOnSelection && (
+									<span className="ss__select__label">
+										{label}
+										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+									</span>
+								)}
+								{selection && <span className="ss__select__selection">{selection?.label}</span>}
+								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+							</Button>
+						}
+					>
+						<ul className="ss__select__select">
+							{options.map((option) => (
+								<li
+									className={classnames('ss__select__select__option', {
+										'ss__select__select__option--selected': selection?.value === option.value,
+									})}
+									onClick={(e) => !disabled && makeSelection(e as any, option)}
+								>
+									<span>{option.label}</span>
+								</li>
+							))}
+						</ul>
+					</Dropdown>
+				)}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -294,7 +279,7 @@ export interface SelectProps extends ComponentProps {
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
 	native?: boolean;
-	onSelect?: (e: Event, option: Option) => void;
+	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: Option | undefined) => void;
 	selected?: Option;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;

@@ -3,6 +3,192 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **tracker:** altering beacon login event to send shopperId and userId in event payload ([2ead2bc](https://github.com/searchspring/snap/commit/2ead2bcf6ba9463e78f057b2524eae6d83a9404c))
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+
+### Bug Fixes
+
+* **recommendationcontroller.ts:** recommendations personalization for other siteIds ([c6be636](https://github.com/searchspring/snap/commit/c6be6367dc2e76b9fddfa86bda8040f8eb72e5e1))
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Features
+
+* **tracker:** preventing error beacon events in development mode and in certain cases ([51049a9](https://github.com/searchspring/snap/commit/51049a958833caea90d81794af677862c8377a37))
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Features
+
+* send beacon error events from middleware errors ([daeba21](https://github.com/searchspring/snap/commit/daeba214facd250505c1bf89ae18588a709244b7))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Features
+
+* **tracker.ts:** adding attribution values to tracker context and saving to storage ([1a2c936](https://github.com/searchspring/snap/commit/1a2c93670a2c00ec3c6039a22b8d8e9316b7bfe5))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 **Note:** Version bump only for package @searchspring/snap-tracker

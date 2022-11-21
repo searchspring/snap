@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BranchOverride } from './BranchOverride';
+import { BranchOverride, BranchOverrideProps } from './BranchOverride';
 import { componentArgs } from '../../../utilities';
 import Readme from '../BranchOverride/readme.md';
 
@@ -20,7 +20,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -72,7 +72,7 @@ export default {
 			action: 'onRemoveClick',
 		},
 		darkMode: {
-			description: 'force dark darkMode',
+			description: 'enable darkMode',
 			type: { required: false },
 			table: {
 				type: {
@@ -85,9 +85,7 @@ export default {
 	},
 };
 
-const Template = (args) => <BranchOverride {...args} />;
-
-export const Auto = Template.bind({});
+export const Auto = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Auto.args = {
 	name: 'next',
 	details: {
@@ -96,7 +94,7 @@ Auto.args = {
 	},
 };
 
-export const Dark = Template.bind({});
+export const Dark = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Dark.args = {
 	name: 'next',
 	details: {
@@ -106,7 +104,7 @@ Dark.args = {
 	darkMode: true,
 };
 
-export const Error = Template.bind({});
+export const Error = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Error.args = {
 	name: 'testing',
 	error: {
@@ -115,7 +113,7 @@ Error.args = {
 	},
 };
 
-export const Light = Template.bind({});
+export const Light = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Light.args = {
 	name: 'next',
 	details: {

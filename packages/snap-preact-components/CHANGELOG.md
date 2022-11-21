@@ -3,6 +3,198 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **merchandising-docs:** refactoring merchandising component structure to fix docs search 4 readme ([d828100](https://github.com/searchspring/snap/commit/d8281008675370b7a6c40e3e7194c0eee76b9a05))
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **storybook:** stories cant use shared mock data ([0e39f69](https://github.com/searchspring/snap/commit/0e39f696fef6b42511f48e019485ff84097c2f2e))
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+
+### Bug Fixes
+
+* **autocomplete.tsx:** bugfix for autocomplete border showing before it was done loading ([a5bd682](https://github.com/searchspring/snap/commit/a5bd682d333971d8edc7be099614ef536cbec512))
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **preact-components:** adding new hook 'useConstructor' for easy constructor like behavior ([a249f6a](https://github.com/searchspring/snap/commit/a249f6abb6c0ebca730563af05d9c344e1ae1071))
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+
+### Bug Fixes
+
+* **recommendation.tsx:** bugfix for impression tracking when loop = false ([618357c](https://github.com/searchspring/snap/commit/618357cd7fc7a9b786d3c00aaf56b0a6cd6ec80c))
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact-components-select:** improving logic for select component and fixing bug preventing render ([64f3a2a](https://github.com/searchspring/snap/commit/64f3a2a6b9d672292f24004a78563acce31715e0))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+
+### Bug Fixes
+
+* **preact-components:** withStore and withController prop order reversion ([36ba37b](https://github.com/searchspring/snap/commit/36ba37bb8ad9aaa0d8ed7d41aec75c2425a2a881))
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* **preact-components-carousel:** adding a `threshold` prop to prevent clicks from dragging swiper ([ff0b4ab](https://github.com/searchspring/snap/commit/ff0b4abc95d59ffc2f7e04d1eccd00de29c7abb4))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 

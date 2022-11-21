@@ -4,57 +4,64 @@ import { ThemeProvider } from '../../../providers';
 import { render, waitFor } from '@testing-library/preact';
 
 import { Image, FALLBACK_IMAGE_URL } from './Image';
-import { searchResponse, badSearchResponse } from '../../../mocks/searchResponse';
 import userEvent from '@testing-library/user-event';
 
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
+
 describe('image Component', () => {
-	const result = searchResponse.results[0].mappings.core;
-	const badResult = badSearchResponse.results[0].mappings.core;
-	const rolloverImage = searchResponse.results[2].mappings.core.thumbnailImageUrl;
+	const result = searchResponse.results![1].mappings?.core;
+	let badResult = searchResponse.results![0].mappings?.core;
+	badResult!.imageUrl = '';
+	badResult!.thumbnailImageUrl = '';
+	const rolloverImage = searchResponse.results![2].mappings?.core?.thumbnailImageUrl;
 
 	it('renders', () => {
-		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} />);
+		const rendered = render(<Image alt={result?.name!} src={result?.thumbnailImageUrl!} />);
 		const imageElement = rendered.container.querySelector('.ss__image img');
 		expect(imageElement).toBeInTheDocument();
-		expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
-		expect(imageElement).toHaveAttribute('alt', result.name);
-		expect(imageElement).toHaveAttribute('title', result.name);
+		expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
+		expect(imageElement).toHaveAttribute('alt', result?.name);
+		expect(imageElement).toHaveAttribute('title', result?.name);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Image className={className} alt={result.name} src={result.thumbnailImageUrl} />);
+		const rendered = render(<Image className={className} alt={result?.name!} src={result?.thumbnailImageUrl!} />);
 		const imageElement = rendered.container.querySelector('.ss__image');
 
 		expect(imageElement).toHaveClass(className);
 	});
 
 	it('disables styles', () => {
-		const rendered = render(<Image disableStyles alt={result.name} src={result.thumbnailImageUrl} />);
+		const rendered = render(<Image disableStyles alt={result?.name!} src={result?.thumbnailImageUrl!} />);
 		const imageElement = rendered.container.querySelector('.ss__image');
 
-		expect(imageElement.classList).toHaveLength(1);
+		expect(imageElement?.classList).toHaveLength(1);
 	});
 
 	describe('Working Image', () => {
 		it('renders image', () => {
-			const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} />);
+			const rendered = render(<Image alt={result?.name!} src={result?.thumbnailImageUrl!} />);
 			const imageElement = rendered.container.querySelector('.ss__image img');
 			expect(imageElement).toBeInTheDocument();
-			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+			expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
 		});
 	});
 
 	describe('Broken Image', () => {
 		it('should display default fallback image', () => {
-			const rendered = render(<Image alt={badResult.name} src={badResult.thumbnailImageUrl} />);
+			const rendered = render(<Image alt={badResult?.name!} src={badResult?.thumbnailImageUrl!} />);
 			const imageElement = rendered.container.querySelector('.ss__image img');
 			expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 		});
 
 		it('should display custom fallback image', () => {
 			const fallbackImage = 'https://www.telegraph.co.uk/content/dam/Pets/spark/royal-canin/happy-puppy-xlarge.jpg?imwidth=1200';
-			const rendered = render(<Image alt={badResult.name} src={badResult.thumbnailImageUrl} fallback={fallbackImage} />);
+			const rendered = render(<Image alt={badResult?.name!} src={badResult?.thumbnailImageUrl!} fallback={fallbackImage} />);
 			const imageElement = rendered.container.querySelector('.ss__image img');
 			expect(imageElement).toHaveAttribute('src', fallbackImage);
 		});
@@ -63,10 +70,10 @@ describe('image Component', () => {
 	describe('hover src', () => {
 		it('should change src on hover & run a custom onhoverfunc prop', async () => {
 			const onHoverFunc = jest.fn();
-			const rendered = render(<Image alt={badResult.name} onMouseOver={onHoverFunc} src={result.thumbnailImageUrl} hoverSrc={rolloverImage} />);
-			const imageElement = rendered.container.querySelector('.ss__image img');
+			const rendered = render(<Image alt={badResult?.name!} onMouseOver={onHoverFunc} src={result?.thumbnailImageUrl!} hoverSrc={rolloverImage} />);
+			const imageElement = rendered.container.querySelector('.ss__image img')!;
 
-			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+			expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
 			userEvent.hover(imageElement);
 			await waitFor(() => expect(onHoverFunc).toHaveBeenCalled());
 			expect(imageElement).toHaveAttribute('src', rolloverImage);
@@ -77,10 +84,10 @@ describe('image Component', () => {
 		it('custom onclick src on hover', () => {
 			const clickfunc = jest.fn();
 
-			const rendered = render(<Image alt={badResult.name} src={result.thumbnailImageUrl} onClick={clickfunc} />);
-			const imageElement = rendered.container.querySelector('.ss__image img');
+			const rendered = render(<Image alt={badResult?.name!} src={result?.thumbnailImageUrl!} onClick={clickfunc} />);
+			const imageElement = rendered.container.querySelector('.ss__image img')!;
 
-			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+			expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
 			userEvent.click(imageElement);
 			expect(clickfunc).toHaveBeenCalled();
 		});
@@ -88,7 +95,7 @@ describe('image Component', () => {
 });
 
 describe('Image theming works', () => {
-	const result = searchResponse.results[0].mappings.core;
+	const result = searchResponse.results![0].mappings?.core;
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
@@ -100,12 +107,12 @@ describe('Image theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Image alt={result.name} src={result.thumbnailImageUrl} />
+				<Image alt={result?.name!} src={result?.thumbnailImageUrl!} />
 			</ThemeProvider>
 		);
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -116,10 +123,10 @@ describe('Image theming works', () => {
 				},
 			},
 		};
-		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} theme={propTheme} />);
+		const rendered = render(<Image alt={result?.name!} src={result?.thumbnailImageUrl!} theme={propTheme} />);
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -139,12 +146,12 @@ describe('Image theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Image alt={result.name} src={result.thumbnailImageUrl} theme={propTheme} />
+				<Image alt={result?.name!} src={result?.thumbnailImageUrl!} theme={propTheme} />
 			</ThemeProvider>
 		);
 
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 });

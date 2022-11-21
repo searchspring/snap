@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-logger",
-	"version": "0.28.0",
+	"version": "0.38.1",
 	"description": "Snap Logger",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -18,6 +18,9 @@
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest --passWithNoTests",
 		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"@searchspring/snap-toolbox": "^0.38.1"
 	},
 	"sideEffects": false,
 	"files": [

@@ -10,7 +10,7 @@
 			"dom"
 		],
 		"resolveJsonModule": true,
-		"strict": false
+		"strict": true
 	},
 	"exclude": [
 		"**/node_modules/*",

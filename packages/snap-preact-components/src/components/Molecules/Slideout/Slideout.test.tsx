@@ -3,8 +3,8 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { Slideout, SlideDirectionType } from './Slideout';
+import { Button } from '../../Atoms/Button';
 import { ThemeProvider } from '../../../providers';
-import { iconPaths } from '../../Atoms/Icon';
 
 describe('Slideout Component', () => {
 	beforeEach(() => {
@@ -36,7 +36,7 @@ describe('Slideout Component', () => {
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(slideoutElement).toBeInTheDocument();
 		expect(styles.left).toBe('0px');
@@ -47,7 +47,7 @@ describe('Slideout Component', () => {
 			active: false,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.left).toBe('-300px');
 		expect(styles.left).not.toBe('0px');
@@ -59,7 +59,7 @@ describe('Slideout Component', () => {
 			width: '400px',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(args.width);
 	});
@@ -121,7 +121,7 @@ describe('Slideout Component', () => {
 			overlayColor: 'rgba(0, 0, 0, 0.1)',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
+		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active')!;
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.background).toBe(args.overlayColor);
 	});
@@ -132,7 +132,7 @@ describe('Slideout Component', () => {
 			slideDirection: 'right' as SlideDirectionType,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
+		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active')!;
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.right).toBe('0px');
 		expect(styles.left).toBe('');
@@ -144,20 +144,85 @@ describe('Slideout Component', () => {
 			transitionSpeed: '0.55s',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
+		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active')!;
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.transition).toBe(`left ${args.transitionSpeed}`);
 	});
 
 	it('renders with classname', () => {
+		let textContent = 'click me';
 		const args = {
 			active: true,
-			buttonContent: 'click me',
+			buttonContent: <span class="ss__slideout__button">${textContent}</span>,
 		};
 		const rendered = render(<Slideout {...args} />);
-
 		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
-		expect(buttonElement).toHaveTextContent(args.buttonContent);
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span className="ss__slideout__button">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with class instead of className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span class="ss__slideout__button">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with existing alternate class', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span class="findMe">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with JSX button content with existing alternate className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <span className="findMe">{textContent}</span>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders with Button component from library and adds default className', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+			buttonContent: <Button>{textContent}</Button>,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
+	});
+
+	it('renders default button when no button is passed', () => {
+		let textContent = 'click me';
+		const args = {
+			active: true,
+		};
+		const rendered = render(<Slideout {...args} />);
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		expect(buttonElement).toHaveTextContent(textContent);
 	});
 
 	it('can disable styles', () => {
@@ -169,7 +234,7 @@ describe('Slideout Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__slideout');
 
-		expect(resultElement.classList).toHaveLength(2);
+		expect(resultElement?.classList).toHaveLength(2);
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -181,7 +246,7 @@ describe('Slideout Component', () => {
 				<Slideout {...args} />
 			</ThemeProvider>
 		);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
@@ -191,7 +256,7 @@ describe('Slideout Component', () => {
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} theme={theme} />);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
@@ -212,7 +277,7 @@ describe('Slideout Component', () => {
 				<Slideout {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const slideoutElement = rendered.container.querySelector('.ss__slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(themeOverride.components.slideout.width);
 	});

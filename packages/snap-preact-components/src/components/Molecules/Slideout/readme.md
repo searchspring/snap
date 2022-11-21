@@ -11,12 +11,12 @@ Renders a slideout with a background overlay. Typically used for a mobile menu s
 The children provided to the component will be displayed within the slideout. 
 
 ```jsx
-<Slideout active={true}>
+<Slideout>
 	<span>slideout content (children)</span>
 </Slideout>
 ```
 ### active
-The required `active` prop specifies the state of when the slideout is rendered.
+The `active` prop specifies the initial state of the slideout when rendered.
 
 ```jsx
 <Slideout active={true}>
@@ -30,7 +30,7 @@ The `buttonContent` prop accepts a string or JSX element to render a clickable b
 When using the custom `buttonContent` prop, render the component where you want the button to render. The slideout menu's position is fixed, therefore the location of the component is only for the render location of the button. 
 
 ```jsx
-<Slideout active={true} buttonContent={'Show Filters'}>
+<Slideout buttonContent={'Show Filters'}>
 	<div>slideout content</div>
 </Slideout>
 ```
@@ -39,7 +39,7 @@ When using the custom `buttonContent` prop, render the component where you want 
 The `width` prop is the width of the slideout.
 
 ```jsx
-<Slideout active={true} width={'300px'}>
+<Slideout width={'300px'}>
 	<div>slideout content</div>
 </Slideout>
 ```
@@ -48,7 +48,7 @@ The `width` prop is the width of the slideout.
 The `displayAt` prop specifies a CSS media query for when the component will render. By default, the component will always render. 
 
 ```jsx
-<Slideout active={true} displayAt={'(max-width: 600px)'}>
+<Slideout displayAt={'(max-width: 600px)'}>
 	<div>slideout content</div>
 </Slideout>
 ```
@@ -57,7 +57,7 @@ The `displayAt` prop specifies a CSS media query for when the component will ren
 The `transitionSpeed` prop changes the CSS transition speed animation for the slideout and overlay.
 
 ```jsx
-<Slideout active={true} transitionSpeed={'0.5s'}>
+<Slideout transitionSpeed={'0.5s'}>
 	<div>slideout content</div>
 </Slideout>
 ```
@@ -67,7 +67,18 @@ The `transitionSpeed` prop changes the CSS transition speed animation for the sl
 The `overlayColor` prop sets the overlay color.
 
 ```jsx
-<Slideout active={true} overlayColor={'rgba(0,0,0,0.7)'}>
+<Slideout overlayColor={'rgba(0,0,0,0.7)'}>
 	<div>slideout content</div>
 </Slideout>
 ```
+
+
+### slideDirection
+The `slideDirection` prop sets the direction that the overlay slides in. Defaults to `left`. Available values are `left`, `right`, `top`, & `bottom`.
+
+```jsx
+<Slideout slideDirection={'right'}>
+	<div>slideout content</div>
+</Slideout>
+```
+

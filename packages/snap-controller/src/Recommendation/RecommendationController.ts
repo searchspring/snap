@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { BeaconType, BeaconCategory, BeaconPayload } from '@searchspring/snap-tracker';
-import { LogMode } from '@searchspring/snap-logger';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
@@ -267,21 +266,21 @@ export class RecommendationController extends AbstractController {
 			order: this.context?.options?.order,
 			...this.config.globals,
 		};
-		const shopperId = this.tracker.context.shopperId;
+
+		const shopperId = this.tracker.getContext().shopperId;
 		const cart = this.tracker.cookies.cart.get();
 		const lastViewed = this.tracker.cookies.viewed.get();
 		if (shopperId) {
 			params.shopper = shopperId;
 		}
-		if (cart?.length) {
-			params.cart = cart;
-		}
-		if (lastViewed?.length) {
-			params.lastViewed = lastViewed;
-		}
 
-		if (this.environment == LogMode.DEVELOPMENT) {
-			params.test = true;
+		if (!params.siteId || params.siteId == this.tracker.getGlobals().siteId) {
+			if (cart?.length) {
+				params.cart = cart;
+			}
+			if (lastViewed?.length) {
+				params.lastViewed = lastViewed;
+			}
 		}
 
 		return params;
@@ -386,6 +385,7 @@ export class RecommendationController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
 	};

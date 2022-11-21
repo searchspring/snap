@@ -21,8 +21,7 @@ export default {
 	},
 	argTypes: {
 		active: {
-			description: 'Slideout is active',
-			type: { required: true },
+			description: 'Initial state of the slideout.',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -101,13 +100,12 @@ export default {
 	},
 };
 
-const _HelloWorld = (args: SlideoutProps) => (
+export const Default = (args: SlideoutProps) => (
 	<Slideout {...args}>
 		<div>props.children will be rendered here</div>
 	</Slideout>
 );
 
-export const Default = _HelloWorld.bind({});
 Default.args = {
 	active: true,
 };

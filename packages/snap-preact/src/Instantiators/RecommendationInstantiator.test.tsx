@@ -129,7 +129,7 @@ describe('RecommendationInstantiator', () => {
 	it('logs an error when the profile response does not contain templateParameters', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingParameters' } });
@@ -140,13 +140,15 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
-		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing templateParameters!`);
+		expect(loggerSpy).toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on the following element is missing templateParameters!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
+		);
 	});
 
 	it('logs an error when the profile response does not contain a component', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingComponent' } });
@@ -157,13 +159,15 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
-		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing component!`);
+		expect(loggerSpy).toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on the following element is missing a component!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
+		);
 	});
 
 	it('logs an error when the profile response does not find a mapped component', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const logger = new Logger('RecommendationInstantiator ');
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
@@ -181,7 +185,7 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledWith(
-			`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is expecting component mapping for 'Default' - verify instantiator config.`
+			`profile '${DEFAULT_PROFILE}' found on the following element is expecting component mapping for 'Default' - verify instantiator config.\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
 		);
 	});
 
@@ -195,10 +199,33 @@ describe('RecommendationInstantiator', () => {
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
 		});
 		expect(clientSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('reuses a controller when it finds the same configuration during re-target', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
+		});
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+
+		// reset document body to allow for retargeting
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+		recommendationInstantiator.targeter.retarget();
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
+		});
 	});
 
 	it('creates a controller for each target it finds', async () => {

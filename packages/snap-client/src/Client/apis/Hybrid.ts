@@ -1,3 +1,6 @@
+import deepmerge from 'deepmerge';
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import {
 	AutocompleteRequestModel,
 	AutocompleteResponseModel,
@@ -7,9 +10,9 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
+import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
-import type { SuggestRequestModel } from '../../types';
+import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
 
 export class HybridAPI extends API {
 	private requesters: {
@@ -17,12 +20,37 @@ export class HybridAPI extends API {
 		suggest: SuggestAPI;
 	};
 
-	constructor(configuration: ApiConfiguration) {
+	constructor(configuration: ApiConfiguration, requesterConfigurations?: HybridRequesterConfig) {
 		super(configuration);
 
+		const legacyConfig: ApiConfigurationParameters = deepmerge(
+			{
+				mode: configuration.mode,
+				origin: configuration.origin,
+				cache: this.configuration.cache,
+			},
+			requesterConfigurations?.legacy || {}
+		);
+
+		if (configuration.mode == AppMode.development) {
+			legacyConfig.headers = { ...legacyConfig.headers, 'searchspring-no-beacon': '' };
+		}
+
+		const suggestConfig = deepmerge(
+			{
+				mode: configuration.mode,
+				origin: configuration.origin,
+				cache: this.configuration.cache,
+			},
+			requesterConfigurations?.suggest || {}
+		);
+
+		const legacyConfiguration = new ApiConfiguration(legacyConfig);
+		const suggestConfiguration = new ApiConfiguration(suggestConfig);
+
 		this.requesters = {
-			legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
-			suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
+			legacy: new LegacyAPI(legacyConfiguration),
+			suggest: new SuggestAPI(suggestConfiguration),
 		};
 	}
 

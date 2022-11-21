@@ -198,6 +198,7 @@ const mockMerchandising = {
 		'4e42bfbd32823c6eff8be9bad70f681e',
 	],
 	content: [],
+	campaigns: [],
 	facets: [],
 	facetsHide: [],
 };
@@ -271,6 +272,17 @@ const mockRequest = {
 	filters: [],
 };
 
+const mockRequestOQ = {
+	siteId: 'ga9kq2',
+	search: {
+		originalQuery: 'redd',
+		query: {
+			string: 'red',
+		},
+	},
+	filters: [],
+};
+
 describe('search response transformer', () => {
 	it('calls all relevant transforms', () => {
 		const results = jest.spyOn(transformSearchResponse, 'results');
@@ -319,7 +331,6 @@ describe('search response transformer pagination', () => {
 		} as searchResponseType);
 
 		expect(response.pagination.totalResults).toEqual(mockPagination.totalResults);
-		expect(response.pagination.defaultPageSize).toEqual(mockPagination.defaultPerPage);
 		expect(response.pagination.pageSize).toEqual(mockPagination.perPage);
 		expect(response.pagination.totalPages).toEqual(mockPagination.totalPages);
 		expect(response.pagination.page).toEqual(mockPagination.currentPage);
@@ -523,7 +534,11 @@ describe('search response merch transformer', () => {
 			merchandising: mockMerchandising,
 		});
 
-		expect(response.merchandising).toEqual(mockMerchandising);
+		expect(response.merchandising).toEqual({
+			redirect: mockMerchandising.redirect,
+			content: mockMerchandising.content,
+			campaigns: mockMerchandising.campaigns,
+		});
 	});
 
 	it('ensures content is always an object', () => {
@@ -555,6 +570,31 @@ describe('search response search transformer facets', () => {
 		const response = transformSearchResponse.search(mockResponse, mockRequest);
 
 		expect(response.search.matchType).toEqual(mockMatchType.query.matchType);
+	});
+
+	it('has query and originalQuery', () => {
+		const mockSpellCorrectedQuery = {
+			query: {
+				corrected: 'term',
+				original: 'term2',
+			},
+		};
+		const response = transformSearchResponse.search(
+			{
+				...mockResponse,
+				...mockSpellCorrectedQuery,
+			},
+			mockRequest
+		);
+
+		expect(response.search.query).toEqual(mockSpellCorrectedQuery.query.corrected);
+		expect(response.search.originalQuery).toEqual(mockSpellCorrectedQuery.query.original);
+	});
+
+	it('uses original query when oq', () => {
+		const response = transformSearchResponse.search(mockResponse, mockRequestOQ);
+
+		expect(response.search.originalQuery).toEqual(mockRequestOQ.search.originalQuery);
 	});
 });
 

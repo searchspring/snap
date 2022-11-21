@@ -5,7 +5,6 @@
     "pagination": {
       "totalResults": 69637,
       "page": 1,
-      "defaultPageSize": 30,
       "pageSize": 30
     },
     "sorting": [],

@@ -1,6 +1,6 @@
 ## Snap Events
 
-Lets look at how to tie into various Snap events by utilizing middleware and plugins. To learn more details about middleware, and execution order of it, checkout the core [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) package.
+Let's look at how to tie into various Snap events by utilizing middleware and plugins. To learn more details about middleware, and execution order of it, checkout the core [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) package.
 
 The Snap instance that we create will return a `controllers` object with all of the requested controllers specified in the config. 
 
@@ -106,7 +106,7 @@ On the controller we can attach middleware via `on` or `plugin` methods.
 
 We can attach events to our controllers after they have been created by a Snap instance via the `getController` method. This method returns a promise that resolves to the requested controller object.
 
-Lets use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
+Let's use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
 
 ```typescript
 const snap = new Snap(config);

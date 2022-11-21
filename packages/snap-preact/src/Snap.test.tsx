@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import { cleanup, waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
-import { Tracker } from '@searchspring/snap-tracker';
+import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
 import { cookies } from '@searchspring/snap-toolbox';
 
@@ -14,15 +14,18 @@ import type {
 	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
 
-import { Snap, BRANCH_COOKIE } from './Snap';
+import { Snap, SnapConfig, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
+import { ClientGlobals } from '@searchspring/snap-client';
 
-const baseConfig = {
-	client: {
-		globals: {
-			siteId: '8uyt2m',
+const generateBaseConfig = (): SnapConfig => {
+	return {
+		client: {
+			globals: {
+				siteId: '8uyt2m',
+			},
 		},
-	},
+	};
 };
 
 const Component = (props: any) => {
@@ -64,17 +67,19 @@ describe('Snap Preact', () => {
 	});
 
 	it('uses the logger to log an error when no context is found', () => {
+		const baseConfig = generateBaseConfig();
 		document.body.innerHTML = '';
 
-		const logger = new Logger('Snap Preact ');
-		const spy = jest.spyOn(logger, 'error');
+		const logger = new Logger({ prefix: 'Snap Preact ' });
+		const spy = jest.spyOn(console, 'error');
 		const snap = new Snap(baseConfig, { logger });
-		expect(spy).toHaveBeenCalledWith('failed to find global context');
+		expect(spy).toHaveBeenCalledWith('Snap failed to find global context');
 
 		spy.mockClear();
 	});
 
 	it('creates a proper Snap object with minimal configuration', () => {
+		const baseConfig = generateBaseConfig();
 		const snap = new Snap(baseConfig);
 
 		// services are defined
@@ -82,10 +87,23 @@ describe('Snap Preact', () => {
 		expect(snap.client).toBeDefined();
 		expect(snap.tracker).toBeDefined();
 
+		// snap passes the app mode down to the client config
+		const extendedBaseConfig = { ...baseConfig };
+		extendedBaseConfig.client!.config = {
+			mode: 'production',
+		};
+
 		// properties are defined
-		expect(snap.config).toStrictEqual(baseConfig);
+		// @ts-ignore - accessing private property
+		expect(snap.config).toStrictEqual(extendedBaseConfig);
 		expect(snap.context).toStrictEqual({});
 		expect(snap.controllers).toStrictEqual({});
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('production');
+		// @ts-ignore - accessing private property
+		expect(snap.logger.mode).toBe('production');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('production');
 
 		// @ts-ignore - checking private property
 		expect(snap.client.globals.siteId).toBe(baseConfig.client.globals.siteId);
@@ -93,7 +111,7 @@ describe('Snap Preact', () => {
 
 	it('merges config found in context and prioritizes the config found in the context', () => {
 		document.body.innerHTML = `<script id="searchspring-context">config = { client: { globals: { siteId: 'yyyyyy' } } };</script>`;
-
+		const baseConfig = generateBaseConfig();
 		const snap = new Snap(baseConfig);
 
 		// @ts-ignore - checking private property
@@ -102,7 +120,7 @@ describe('Snap Preact', () => {
 
 	it('merges contexts and prioritizes the context found in the script', () => {
 		document.body.innerHTML = `<script id="searchspring-context">shopper = { id: 'snapdevscript' };</script>`;
-
+		const baseConfig = generateBaseConfig();
 		const contextConfig = {
 			...baseConfig,
 			context: {
@@ -116,7 +134,33 @@ describe('Snap Preact', () => {
 		expect(snap.context.shopper!.id).toBe('snapdevscript');
 	});
 
+	it('has mode setting functionality via cookie', () => {
+		cookies.set(DEV_COOKIE, '1', 'Lax', 3600000);
+		const baseConfig = generateBaseConfig();
+		const snap = new Snap(baseConfig);
+
+		// snap passes the app mode down to the client config
+		const extendedBaseConfig = { ...baseConfig };
+		extendedBaseConfig.client!.config = {
+			mode: 'development',
+		};
+
+		// properties are defined
+		// @ts-ignore - accessing private property
+		expect(snap.config).toStrictEqual(baseConfig);
+
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('development');
+		// @ts-ignore - accessing private property
+		expect(snap.logger.mode).toBe('development');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('development');
+
+		cookies.unset(DEV_COOKIE);
+	});
+
 	it('exposes itself globally on the window', () => {
+		const baseConfig = generateBaseConfig();
 		const snap = new Snap(baseConfig);
 		expect(window.searchspring).toBeDefined();
 		expect(window.searchspring.context).toBe(snap.context);
@@ -124,6 +168,7 @@ describe('Snap Preact', () => {
 	});
 
 	it('automatically tracks the shopper id when provided', () => {
+		const baseConfig = generateBaseConfig();
 		const contextConfig = {
 			...baseConfig,
 			context: {
@@ -133,7 +178,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(baseConfig.client.globals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track.shopper, 'login');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith({ id: contextConfig.context.shopper.id });
@@ -142,6 +187,7 @@ describe('Snap Preact', () => {
 	});
 
 	it('automatically sets the shopper cart when provided', () => {
+		const baseConfig = generateBaseConfig();
 		const contextConfig = {
 			...baseConfig,
 			context: {
@@ -152,7 +198,7 @@ describe('Snap Preact', () => {
 			},
 		};
 
-		const tracker = new Tracker(baseConfig.client.globals);
+		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
@@ -161,6 +207,7 @@ describe('Snap Preact', () => {
 	});
 
 	it('automatically picks up the merchandising segments when provided', () => {
+		const baseConfig = generateBaseConfig();
 		const contextConfig = {
 			...baseConfig,
 			context: {
@@ -174,8 +221,57 @@ describe('Snap Preact', () => {
 		expect(snap.client.globals.merchandising).toEqual(contextConfig.context.merchandising);
 	});
 
+	it('can send beacon error events from error event listener', () => {
+		// Define the addEventListener method with a Jest mock function
+		const events: {
+			[key: string]: EventListenerOrEventListenerObject;
+		} = {};
+		window.addEventListener = jest.fn((event, callback) => {
+			events[event] = callback;
+		});
+		window.removeEventListener = jest.fn((event, callback) => {
+			delete events[event];
+		});
+
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(generateBaseConfig(), { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		// @ts-ignore - jest event listener mock
+		events.error(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
+	});
+
+	it('can send beacon error events using handlers.error method', () => {
+		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(generateBaseConfig(), { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		snap.handlers.error(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
+	});
+
 	describe('creates search controllers via config', () => {
 		it(`can create a search controller`, () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -207,6 +303,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`can create multiple search controllers`, () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -230,7 +327,41 @@ describe('Snap Preact', () => {
 			expect(snap.controllers.searchTwo).toBeDefined();
 		});
 
+		it(`logs an error when attempting to create search controller with the same id`, () => {
+			const baseConfig = generateBaseConfig();
+			const searchConfig = {
+				...baseConfig,
+				controllers: {
+					search: [
+						{
+							config: {
+								id: 'search',
+							},
+						},
+						{
+							config: {
+								id: 'search',
+							},
+						},
+					],
+				},
+			};
+
+			const logger = new Logger();
+			const spy = jest.spyOn(logger, 'error');
+
+			// valid config - no errors logged
+			new Snap(searchConfig, { logger });
+
+			expect(spy).toHaveBeenCalledWith(`Controller with id 'search' is already defined`);
+
+			const snap = new Snap(searchConfig);
+
+			expect(snap.controllers.search).toBeDefined();
+		});
+
 		it(`does not run the controller 'search' method when a targeter is NOT found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -253,7 +384,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -270,6 +401,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`logs an error when targeter has invalid configuration`, async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -293,7 +425,7 @@ describe('Snap Preact', () => {
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
 
 			// valid config - no errors logged
 			new Snap(searchConfig, { client, logger });
@@ -320,6 +452,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the controller 'search' method when a targeter selector is found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -342,7 +475,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -361,6 +494,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const onTarget = jest.fn();
 
 			const searchConfig = {
@@ -384,7 +518,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(searchConfig, { client });
 
 			const search = snap.controllers.search;
@@ -396,6 +530,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the controller 'search' method when prefetch is set when selector not found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -419,7 +554,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
 			const spy = jest.spyOn(client, 'search');
 			const snap = new Snap(searchConfig, { client });
 
@@ -438,6 +573,7 @@ describe('Snap Preact', () => {
 
 	describe('creates autocomplete controllers via config', () => {
 		it(`can create an autocomplete controller`, async () => {
+			const baseConfig = generateBaseConfig();
 			const acConfig = {
 				...baseConfig,
 				controllers: {
@@ -467,6 +603,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`can create multiple autocomplete controllers`, async () => {
+			const baseConfig = generateBaseConfig();
 			const acConfig = {
 				...baseConfig,
 				controllers: {
@@ -495,6 +632,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`logs an error when targeter has invalid configuration`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><input type="text" class="ss-ac-input"/>`;
 
 			const acConfig = {
@@ -518,7 +656,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -540,6 +678,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`creates targeter provided in config`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><input type="text" class="ss-ac-input"/>`;
 
 			const acConfig = {
@@ -563,7 +702,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
@@ -573,6 +712,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const onTarget = jest.fn();
 
 			document.body.innerHTML = `<script id="searchspring-context"></script><input type="text" class="ss-ac-input"/>`;
@@ -598,16 +738,57 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(acConfig, { client });
 			const ac = await snap.getController('ac');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
 		});
+
+		it(`sets integratedSpellCorrection feature flag`, async () => {
+			const baseConfig = generateBaseConfig();
+
+			document.body.innerHTML = `<script id="searchspring-context"></script><input type="text" class="ss-ac-input"/>`;
+
+			const acConfig = {
+				...baseConfig,
+				features: {
+					integratedSpellCorrection: {
+						enabled: true,
+					},
+				},
+				controllers: {
+					autocomplete: [
+						{
+							config: {
+								selector: '.ss-ac-input',
+								id: 'ac',
+							},
+							targeters: [
+								{
+									selector: '.ss-ac-input',
+									hideTarget: true,
+									component: async () => Component,
+								},
+							],
+						},
+					],
+				},
+			};
+			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
+			const snap = new Snap(acConfig, { client });
+			const ac = await snap.getController('ac');
+			await wait();
+
+			// @ts-ignore - private class variable
+			expect(snap.config.client.config?.autocomplete?.requesters?.suggest?.globals?.integratedSpellCorrection).toBe(true);
+			expect((ac.config as AutocompleteControllerConfig).settings!.integratedSpellCorrection).toBe(true);
+		});
 	});
 
 	describe('creates finder controllers via config', () => {
 		it(`can create a finder controller`, async () => {
+			const baseConfig = generateBaseConfig();
 			const finderConfig = {
 				...baseConfig,
 				controllers: {
@@ -638,6 +819,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`can create multiple finder controllers`, async () => {
+			const baseConfig = generateBaseConfig();
 			const finderConfig = {
 				...baseConfig,
 				controllers: {
@@ -676,6 +858,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`logs an error when targeter has invalid configuration`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-finder-hierarchy"></div>`;
 
 			const finderConfig = {
@@ -704,7 +887,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(finderConfig.client!.globals as ClientGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -729,6 +912,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`creates targeter provided in config`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-finder-hierarchy"></div>`;
 
 			const finderConfig = {
@@ -757,7 +941,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(finderConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
@@ -766,6 +950,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const onTarget = jest.fn();
 
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-finder-hierarchy"></div>`;
@@ -797,7 +982,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(finderConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(finderConfig, { client });
 			const finder = await snap.getController('finder');
 			await wait();
@@ -807,6 +992,7 @@ describe('Snap Preact', () => {
 
 	describe('creates recommendation controllers via config', () => {
 		it(`can create a recommendation controller`, async () => {
+			const baseConfig = generateBaseConfig();
 			const recommendationConfig = {
 				...baseConfig,
 				controllers: {
@@ -832,6 +1018,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`can create multiple recommendation controllers`, async () => {
+			const baseConfig = generateBaseConfig();
 			const recommendationConfig = {
 				...baseConfig,
 				controllers: {
@@ -860,6 +1047,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`logs an error when targeter has invalid configuration`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="ss-trending-recs"></div>`;
 
 			const recommendationConfig = {
@@ -883,7 +1071,7 @@ describe('Snap Preact', () => {
 				},
 			};
 
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(recommendationConfig.client!.globals as ClientGlobals);
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
@@ -906,6 +1094,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`creates targeter provided in config`, async () => {
+			const baseConfig = generateBaseConfig();
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="ss-trending-recs"></div>`;
 
 			const recommendationConfig = {
@@ -928,7 +1117,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(recommendationConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
@@ -937,6 +1126,7 @@ describe('Snap Preact', () => {
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
+			const baseConfig = generateBaseConfig();
 			const onTarget = jest.fn();
 
 			document.body.innerHTML = `<script id="searchspring-context"></script><div id="ss-trending-recs"></div>`;
@@ -962,7 +1152,7 @@ describe('Snap Preact', () => {
 					],
 				},
 			};
-			const client = new MockClient(baseConfig.client.globals, {});
+			const client = new MockClient(recommendationConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(recommendationConfig, { client });
 			const recommendation = await snap.getController('trendingRecs');
 			await wait();
@@ -972,6 +1162,7 @@ describe('Snap Preact', () => {
 
 	describe(`the 'getInstantiator' method`, () => {
 		it('rejects if requested instantiator does not exist', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 
 			await expect(async () => {
@@ -980,6 +1171,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('returns an instantiator when the requested id exists', async () => {
+			const baseConfig = generateBaseConfig();
 			const instantiatorConfig = {
 				...baseConfig,
 				instantiators: {
@@ -1004,6 +1196,7 @@ describe('Snap Preact', () => {
 
 	describe(`the 'getController(s)' method`, () => {
 		it('rejects if requested controller does not exist', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 
 			await expect(async () => {
@@ -1012,6 +1205,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('returns a controller with the requested id when it exists', async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -1032,6 +1226,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('rejects if requested controller does not exist', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 
 			await expect(async () => {
@@ -1040,6 +1235,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('rejects if requested controller does not exist', async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -1060,6 +1256,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('returns controllers with the requested ids when they exists', async () => {
+			const baseConfig = generateBaseConfig();
 			const searchConfig = {
 				...baseConfig,
 				controllers: {
@@ -1089,6 +1286,7 @@ describe('Snap Preact', () => {
 
 	describe(`the 'createController' method`, () => {
 		it('can create a search controller', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 			const searchConfig = {
 				id: 's',
@@ -1100,6 +1298,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('can create an autocomplete controller', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 			const autocompleteConfig = {
 				id: 'ac',
@@ -1111,6 +1310,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('can create a finder controller', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 			const finderConfig = {
 				id: 'f',
@@ -1122,6 +1322,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('can create a recommendation controller', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 			const recommendationConfig = {
 				tag: 'profile',
@@ -1134,6 +1335,7 @@ describe('Snap Preact', () => {
 		});
 
 		it('executes an optional callback function when creating a controller', async () => {
+			const baseConfig = generateBaseConfig();
 			const snap = new Snap(baseConfig);
 			const searchConfig = {
 				id: 's',

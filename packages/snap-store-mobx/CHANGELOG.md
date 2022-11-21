@@ -3,6 +3,199 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **searchcontroller:** pre-fetch meta if backfill is set and we dont have the defaultpagesize ([01f8ff4](https://github.com/searchspring/snap/commit/01f8ff4b7c6f36f6869297ae1df678fc1c3e15b9))
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Features
+
+* **searchfacetstore:** adding a new config param to disable auto facet collapse handling ([697dd9f](https://github.com/searchspring/snap/commit/697dd9f7ae5a93e261380864e083f96b5e2e583e))
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+
+### Features
+
+* **spell-correct:** initial commit of integrated spell correct feature (missing some testing) ([b4b265f](https://github.com/searchspring/snap/commit/b4b265f31728ca90bc26048b2ba8d458b5a85660))
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **searchstore:** add landingPage to the searchstore ([a7d2c4f](https://github.com/searchspring/snap/commit/a7d2c4fe2740168e436ed865e1a8b85120154691))
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Bug Fixes
+
+* **searchfacetstore.ts:** account for inline merchandising content when trimming facets ([441fcfe](https://github.com/searchspring/snap/commit/441fcfe748fbef992e8e7391dbe9ac59a73ddd2c))
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Features
+
+* **controller-autocomplete:** adding `serializeForm` setting for picking up additional form params ([3095bb9](https://github.com/searchspring/snap/commit/3095bb939758a97d79457e69741d3a3c1b80458e))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* add restorePosition to infinite config ([4e822cc](https://github.com/searchspring/snap/commit/4e822cce5e164faddb0f283f345e50b20fcfb9ac))
+* **searchmerchandisingstore:** transform merch.triggerCampaigns - campaigns & add to store ([e13986f](https://github.com/searchspring/snap/commit/e13986fc239bee7857ffee98dc0c3c602a859d69))
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+
+### Bug Fixes
+
+* **mobx-store-finder:** removing the `data` property to prevent future access problems ([b523369](https://github.com/searchspring/snap/commit/b52336973614c07a28a93b1fcf5ce465689c0cb2))
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

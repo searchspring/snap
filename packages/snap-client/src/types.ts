@@ -1,29 +1,53 @@
-import { SearchResponseModelResult } from '@searchspring/snapi-types';
+import { AppMode } from '@searchspring/snap-toolbox';
+import type { MetaRequestModel, SearchResponseModelResult, SearchRequestModel, AutocompleteRequestModel } from '@searchspring/snapi-types';
+
+export type HTTPHeaders = { [key: string]: string };
 
 export type ClientConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	meta?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<MetaRequestModel>;
 	};
 	search?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<SearchRequestModel>;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<AutocompleteRequestModel>;
+		requesters?: HybridRequesterConfig;
 	};
 	finder?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<SearchRequestModel>;
 	};
 	recommend?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<RecommendRequestModel>;
 	};
 	suggest?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
+		globals?: Partial<SuggestRequestModel>;
+	};
+};
+
+export type HybridRequesterConfig = {
+	suggest?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+		globals?: Partial<SuggestRequestModel>;
+	};
+	legacy?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+		globals?: Partial<AutocompleteRequestModel>;
 	};
 };
 
@@ -48,11 +72,15 @@ export type Cache = {
 
 export type SnapApiConfig = {
 	origin?: string;
+	headers?: HTTPHeaders;
 };
 
-export type ClientGlobals = {
-	siteId: string;
+export type GenericGlobals = {
 	[configurationPath: string]: any;
+};
+
+export type ClientGlobals = GenericGlobals & {
+	siteId: string;
 };
 
 export type SuggestRequestModel = {
@@ -62,6 +90,7 @@ export type SuggestRequestModel = {
 	suggestionCount?: number;
 	productCount?: number;
 	disableSpellCorrect?: boolean;
+	integratedSpellCorrection?: boolean;
 };
 
 export type SuggestResponseModelSuggestion = {

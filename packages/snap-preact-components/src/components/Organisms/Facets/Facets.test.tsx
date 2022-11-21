@@ -1,14 +1,19 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
-import { Facets } from './Facets';
-import { searchResponse } from '../../../mocks/searchResponse';
+import { Facets, IndividualFacetType } from './Facets';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
+
+import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModel } from '@searchspring/snapi-types';
+
+const mockData = new MockData();
+let searchResponse: SearchResponseModel = mockData.search();
 
 describe('Facets Component', () => {
 	it('renders', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as IndividualFacetType[],
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
@@ -17,29 +22,29 @@ describe('Facets Component', () => {
 
 	it('has all facets', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as IndividualFacetType[],
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		const count = facetsElement.querySelectorAll('.ss__facet').length;
+		const count = facetsElement?.querySelectorAll('.ss__facet').length;
 		expect(count).toBe(args.facets.length);
 	});
 
 	it('has limited facets with limit prop', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as IndividualFacetType[],
 			limit: 2,
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		const count = facetsElement.querySelectorAll('.ss__facet').length;
+		const count = facetsElement?.querySelectorAll('.ss__facet').length;
 		expect(count).toBeLessThanOrEqual(args.facets.length);
 		expect(count).toBe(args.limit);
 	});
 
 	it('renders with classname', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as IndividualFacetType[],
 			className: 'classy',
 		};
 
@@ -51,14 +56,14 @@ describe('Facets Component', () => {
 
 	it('disables styles', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as IndividualFacetType[],
 			disableStyles: true,
 		};
 
 		const rendered = render(<Facets {...args} />);
 
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		expect(facetsElement.classList).toHaveLength(1);
+		expect(facetsElement?.classList).toHaveLength(1);
 	});
 });
 
@@ -72,7 +77,7 @@ describe('Facets Component is themeable', () => {
 	};
 
 	const args = {
-		facets: searchResponse.facets,
+		facets: searchResponse.facets as IndividualFacetType[],
 		limit: 2,
 	};
 
@@ -124,7 +129,7 @@ describe('Facets Component is themeable', () => {
 
 		expect(clickFunc).not.toHaveBeenCalled();
 
-		const resultElement = rendered.container.querySelector('.ss__facet-list-options__option');
+		const resultElement = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		userEvent.click(resultElement);
 
 		expect(clickFunc).toHaveBeenCalled();

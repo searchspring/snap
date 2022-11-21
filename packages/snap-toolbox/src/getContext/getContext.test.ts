@@ -68,8 +68,9 @@ describe('getContext', () => {
 	});
 
 	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io"`, () => {
+		const siteId = 'y56s6x';
 		expect(() => {
-			const src = 'https://snapui.searchspring.io/y56s6x/test/bundle.js';
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
 			const scriptTag = document.createElement('script');
 			scriptTag.src = src;
 
@@ -77,6 +78,37 @@ describe('getContext', () => {
 
 			const context = getContext();
 			expect(context).toStrictEqual({});
+		}).not.toThrow();
+	});
+
+	it(`returns src siteId over if siteID is not set as a context variable`, () => {
+		const siteId = 'y56s6x';
+		expect(() => {
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+
+			document.body.appendChild(scriptTag);
+
+			const context = getContext(['siteId']);
+			expect(context).toStrictEqual({ siteId: siteId });
+		}).not.toThrow();
+	});
+
+	it(`returns context siteId over src siteID`, () => {
+		const siteId = 'y56s6x';
+		const otherSiteId = 'test12';
+		expect(() => {
+			const src = `https://snapui.searchspring.io/${siteId}/test/bundle.js`;
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+			scriptTag.innerHTML = `
+				siteId = ${JSON.stringify(otherSiteId)};
+			`;
+			document.body.appendChild(scriptTag);
+
+			const context = getContext(['siteId']);
+			expect(context).toStrictEqual({ siteId: otherSiteId });
 		}).not.toThrow();
 	});
 

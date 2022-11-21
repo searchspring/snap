@@ -3,6 +3,195 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **client:** recommendation batching was using param hash forcing batching of unbatched same recs ([39a4754](https://github.com/searchspring/snap/commit/39a47545fa1caee8d82eb20bd3611725390ed6b2))
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+
+### Features
+
+* **spell-correct:** initial commit of integrated spell correct feature (missing some testing) ([b4b265f](https://github.com/searchspring/snap/commit/b4b265f31728ca90bc26048b2ba8d458b5a85660))
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+
+### Features
+
+* **searchrequest.ts:** adding the ability to disableInlineBanners ([5868195](https://github.com/searchspring/snap/commit/586819543455f384af0fb32b3a8765cf8ba2355e))
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Features
+
+* **tracking:** adding sessionId and pageLoadId to search request params ([e380f27](https://github.com/searchspring/snap/commit/e380f2768ac1071b510ea4a24335b2acd96cb8c4))
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+
+### Features
+
+* **client:** adding `merchandising.intellisuggest` as a request option ([e809114](https://github.com/searchspring/snap/commit/e8091147ac2fbbd00f828336844f0d0e8bd421df))
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* **searchmerchandisingstore:** transform merch.triggerCampaigns - campaigns & add to store ([e13986f](https://github.com/searchspring/snap/commit/e13986fc239bee7857ffee98dc0c3c602a859d69))
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Features
+
+* **snap:** adding `AppMode` to toolbox and utilizing it to disable caching and add header in client ([48cc911](https://github.com/searchspring/snap/commit/48cc9119a2da9c73de7ceb6b772378aa351ee413))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 

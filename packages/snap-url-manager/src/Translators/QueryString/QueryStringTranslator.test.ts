@@ -2,6 +2,19 @@ import { QueryStringTranslator } from './QueryStringTranslator';
 import { UrlState } from '../../types';
 
 describe('QueryStringTranslator', () => {
+	it('has default configuration', () => {
+		const queryString = new QueryStringTranslator();
+		const defaultConfig = queryString.getConfig();
+
+		expect(defaultConfig.urlRoot).toEqual('');
+
+		expect(defaultConfig.settings).toEqual({
+			serializeUrlRoot: true,
+		});
+
+		expect(defaultConfig.queryParameter).toEqual('q');
+	});
+
 	it('generates relative URL by default', () => {
 		const url = 'http://example.com?bar=baz';
 		const queryString = new QueryStringTranslator();
@@ -11,7 +24,7 @@ describe('QueryStringTranslator', () => {
 			foo: ['bar'],
 		};
 
-		expect(queryString.serialize(params)).toBe('?bar=baz&foo=bar');
+		expect(queryString.serialize(params)).toBe('/?bar=baz&foo=bar');
 
 		expect(queryString.serialize({})).toBe('/');
 	});
@@ -155,7 +168,7 @@ describe('QueryStringTranslator', () => {
 
 			const query = queryString.serialize(params);
 
-			expect(query).toBe('?search=the%20query');
+			expect(query).toBe('/?search=the%20query');
 		});
 
 		it('serializes core state correctly', () => {
@@ -180,7 +193,7 @@ describe('QueryStringTranslator', () => {
 			const query = queryString.serialize(params);
 
 			expect(query).toBe(
-				'?q=shoes&page=7&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
+				'/?q=shoes&page=7&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
 			);
 		});
 
@@ -200,7 +213,7 @@ describe('QueryStringTranslator', () => {
 
 			const query = queryString.serialize(params);
 
-			expect(query).toBe('?roots.trunk.branch.leaf=thing&array=uno&array=dos&array=tres');
+			expect(query).toBe('/?roots.trunk.branch.leaf=thing&array=uno&array=dos&array=tres');
 		});
 
 		it('serializes range filters correctly', () => {
@@ -219,7 +232,7 @@ describe('QueryStringTranslator', () => {
 			const query = queryString.serialize(params);
 
 			expect(query).toBe(
-				'?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100&filter.price.low=100&filter.price.high=*'
+				'/?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100&filter.price.low=100&filter.price.high=*'
 			);
 		});
 
@@ -234,7 +247,7 @@ describe('QueryStringTranslator', () => {
 
 			const query = queryString.serialize(params as UrlState);
 
-			expect(query).toBe('?filter.price.low=10&filter.price.high=100');
+			expect(query).toBe('/?filter.price.low=10&filter.price.high=100');
 		});
 	});
 });

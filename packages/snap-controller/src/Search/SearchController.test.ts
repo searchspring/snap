@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
+import { waitFor } from '@testing-library/preact';
 
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
@@ -10,8 +11,9 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
-import { SearchController } from './SearchController';
-import type { SearchControllerConfig } from '../types';
+import { SearchController, getStorableRequestParams } from './SearchController';
+import type { SearchControllerConfig, BeforeSearchObj } from '../types';
+import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
 
@@ -30,230 +32,6 @@ describe('Search Controller', () => {
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
 		searchConfig.id = uuidv4().split('-').join('');
-	});
-
-	it('throws if invalid config', async () => {
-		expect(() => {
-			// @ts-ignore
-			const controller = new SearchController(
-				// @ts-ignore
-				{ id: 123 },
-				{
-					client: new MockClient(globals, {}),
-					store: new SearchStore(searchConfig, services),
-					urlManager,
-					eventManager: new EventManager(),
-					profiler: new Profiler(),
-					logger: new Logger(),
-					tracker: new Tracker(globals),
-				}
-			);
-		}).toThrow();
-	});
-
-	it('throws if invalid services', async () => {
-		expect(() => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockClient(globals, {}),
-				store: new SearchStore(searchConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				// @ts-ignore
-				tracker: 'invalid', // invalid tracker
-			});
-		}).toThrow();
-	});
-
-	it('throws if controller with existing id exists', async () => {
-		expect(() => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockClient(globals, {}),
-				store: new SearchStore(searchConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const controller2 = new SearchController(searchConfig, {
-				client: new MockClient(globals, {}),
-				store: new SearchStore(searchConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-		}).toThrow();
-	});
-
-	it('can enable dev mode', async () => {
-		//@ts-ignore
-		delete window.location;
-		window.location = {
-			...window.location,
-			href: 'https://www.example.com/?dev=1',
-		};
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		expect(controller.environment).toBe('development');
-	});
-
-	it('warns if init is recalled', async () => {
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const spy = jest.spyOn(controller.log, 'warn');
-
-		await controller.init();
-		expect(spy).toHaveBeenCalledTimes(0);
-		await controller.init();
-		expect(spy).toHaveBeenCalledWith(`'init' middleware recalled`);
-	});
-
-	it('can attach middleware via controller.plugin', async () => {
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const initfn = jest.fn();
-		const paramPlugin = (controller: SearchController, ...params: any) => {
-			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
-				initfn();
-				await next();
-			});
-		};
-
-		// @ts-ignore
-		controller.plugin(paramPlugin);
-
-		expect(initfn).not.toHaveBeenCalled();
-
-		await controller.init();
-
-		expect(initfn).toHaveBeenCalled();
-	});
-
-	it('can attach middleware via controller.use', async () => {
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const initfn = jest.fn();
-
-		const initMiddleware = async (eventData: any, next: Next) => {
-			initfn();
-			await next();
-		};
-
-		const plugin = (controller: SearchController) => {
-			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
-				initfn();
-				await next();
-			});
-		};
-
-		const paramPlugin = (controller: SearchController, ...params: any) => {
-			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
-				initfn();
-				await next();
-			});
-		};
-
-		controller.use({
-			middleware: {
-				init: [initMiddleware],
-			},
-			plugins: [
-				// @ts-ignore
-				[plugin],
-				// @ts-ignore
-				[paramPlugin, 'param1', 'param2'],
-			],
-		});
-
-		expect(initfn).not.toHaveBeenCalled();
-
-		await controller.init();
-
-		expect(initfn).toHaveBeenCalledTimes(3);
-	});
-
-	it('throws if controller.use is invalid format', async () => {
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const initfn = jest.fn();
-		const spy = jest.spyOn(controller.log, 'warn');
-
-		const plugin = (controller: any) => {
-			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
-				initfn();
-				await next();
-			});
-		};
-
-		// test if plugins is not an array
-		controller.use({
-			// @ts-ignore
-			plugins: plugin,
-		});
-		expect(spy).toHaveBeenCalledWith('plugins not attached - use format [func, ...args?][]');
-		spy.mockClear();
-
-		// test if plugins is not an array of arrays
-		controller.use({
-			plugins: [
-				// @ts-ignore
-				plugin,
-			],
-		});
-		expect(spy).toHaveBeenCalledWith('plugins not attached - use format [func, ...args?][]');
-		spy.mockClear();
-
-		// test if middleware is not an array (should be converted to an array internally)
-		const initMiddleware = async (eventData: any, next: Next) => {
-			initfn();
-			await next();
-		};
-		controller.use({
-			middleware: {
-				init: initMiddleware,
-			},
-		});
-		await controller.init();
-		expect(initfn).toBeCalledTimes(1);
 	});
 
 	it('has results after search method called', async () => {
@@ -624,6 +402,9 @@ describe('Search Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
+
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinitePage3', siteId: '8uyt2m' });
+
 		const searchfn = jest.spyOn(controller.client, 'search');
 
 		const page = 3;
@@ -632,10 +413,9 @@ describe('Search Controller', () => {
 
 		await controller.search();
 
-		const { defaultPageSize } = controller.store.pagination;
-
-		expect(controller.store.results.length).toBe(defaultPageSize * page);
-		expect(searchfn).toHaveBeenCalledTimes(page);
+		const { pageSize } = controller.store.pagination;
+		expect(searchfn).toHaveBeenCalledTimes(1);
+		expect(controller.store.results.length).toBe(pageSize * page);
 
 		searchfn.mockClear();
 	});
@@ -785,6 +565,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.search = jest.fn(() => {
 			throw 429;
 		});
@@ -796,6 +578,9 @@ describe('Search Controller', () => {
 			type: 'warning',
 			message: 'Too many requests try again later',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(429);
+		handleError.mockClear();
 	});
 
 	it('logs error if 500', async () => {
@@ -809,6 +594,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const handleError = jest.spyOn(controller, 'handleError');
+
 		controller.client.search = jest.fn(() => {
 			throw 500;
 		});
@@ -820,5 +607,78 @@ describe('Search Controller', () => {
 			type: 'error',
 			message: 'Invalid Search Request or Service Unavailable',
 		});
+
+		expect(handleError).toHaveBeenCalledWith(500);
+		handleError.mockClear();
+	});
+
+	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {
+		const scrollConfig: SearchStoreConfig = {
+			...searchConfig,
+			// add some filters, sorts, and pagination
+			globals: {
+				filters: [
+					{
+						// @ts-ignore
+						type: 'value',
+						field: 'color',
+						value: 'green',
+						background: false,
+					},
+				],
+				sorts: [
+					{
+						field: 'price',
+						// @ts-ignore
+						direction: 'asc',
+					},
+				],
+				pagination: {
+					page: 3,
+					pageSize: 30,
+				},
+			},
+			settings: {
+				infinite: {
+					backfill: 5,
+				},
+			},
+		};
+
+		const controller = new SearchController(scrollConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(scrollConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
+
+		controller.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
+			const stringyParams = getStorableRequestParams(search.request as SearchRequestModel);
+
+			// set a scrollMap for testing
+			const scrollMap: { [key: string]: any } = {};
+
+			scrollMap[JSON.stringify(stringyParams)] = 777;
+
+			(search.controller as SearchController).storage.set('scrollMap', scrollMap);
+
+			await next();
+		});
+
+		await controller.search();
+
+		const scrollSpy = jest.spyOn(window, 'scrollTo');
+
+		await waitFor(() => {
+			// expect window.scrollTo to have been called with our set value
+			expect(scrollSpy).toHaveBeenCalledWith(0, 777);
+		});
+
+		scrollHeightSpy.mockClear();
 	});
 });

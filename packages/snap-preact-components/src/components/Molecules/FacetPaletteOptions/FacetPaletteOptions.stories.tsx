@@ -7,6 +7,7 @@ import { FacetPaletteOptions, FacetPaletteOptionsProps } from './FacetPaletteOpt
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetPaletteOptions/readme.md';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetPaletteOptions`,
@@ -22,7 +23,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -116,17 +117,16 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'FacetPaletteOptions', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacetPaletteOptions = observer(({ args, controller }) => {
+const ObservableFacetPaletteOptions = observer(({ args, controller }: { args: FacetPaletteOptionsProps; controller: SearchController }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'color_family').pop();
 
 	return <FacetPaletteOptions {...args} values={sizeFacet.values} />;
 });
 
-const Template = (args: FacetPaletteOptionsProps, { loaded: { controller } }) => {
+export const Default = (args: FacetPaletteOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservableFacetPaletteOptions args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

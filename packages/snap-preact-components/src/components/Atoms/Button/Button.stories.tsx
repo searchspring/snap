@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Button } from './Button';
+import { Button, ButtonProps } from './Button';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Button/readme.md';
 
@@ -57,7 +57,7 @@ export default {
 			action: 'onClick',
 		},
 		color: {
-			description: 'Button color',
+			description: 'Button text color',
 			table: {
 				type: {
 					summary: 'string',
@@ -100,20 +100,18 @@ export default {
 	},
 };
 
-const Template = (args) => <Button {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: ButtonProps) => <Button {...args} />;
 Default.args = {
 	content: 'Button',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = (args: ButtonProps) => <Button {...args} />;
 Disabled.args = {
 	content: 'Button',
 	disabled: true,
 };
 
-export const Native = Template.bind({});
+export const Native = (args: ButtonProps) => <Button {...args} />;
 Native.args = {
 	content: 'Button',
 	native: true,

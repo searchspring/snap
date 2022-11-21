@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
-import { ErrorHandler } from './ErrorHandler';
+import { ErrorHandler, ErrorHandlerProps } from './ErrorHandler';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -35,7 +35,6 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'Controller reference',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'Controller object',
@@ -45,7 +44,6 @@ export default {
 		},
 		error: {
 			description: 'Error object containing message and type',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'Error object',
@@ -66,9 +64,7 @@ export default {
 	},
 };
 
-const Template = (args) => <ErrorHandler {...args} />;
-
-export const Warning = Template.bind({});
+export const Warning = (args: ErrorHandlerProps) => <ErrorHandler {...args} />;
 Warning.args = {
 	controller: {
 		store: {
@@ -81,7 +77,7 @@ Warning.args = {
 	},
 };
 
-export const Error = Template.bind({});
+export const Error = (args: ErrorHandlerProps) => <ErrorHandler {...args} />;
 Error.args = {
 	controller: {
 		store: {
@@ -94,7 +90,7 @@ Error.args = {
 	},
 };
 
-export const Info = Template.bind({});
+export const Info = (args: ErrorHandlerProps) => <ErrorHandler {...args} />;
 Info.args = {
 	controller: {
 		store: {
@@ -107,7 +103,7 @@ Info.args = {
 	},
 };
 
-export const CustomError = Template.bind({});
+export const CustomError = (args: ErrorHandlerProps) => <ErrorHandler {...args} />;
 CustomError.args = {
 	error: {
 		type: ErrorType.INFO,

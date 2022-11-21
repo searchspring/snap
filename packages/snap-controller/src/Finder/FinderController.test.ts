@@ -81,7 +81,6 @@ describe('Finder Controller', () => {
 				/**
 				 * Create a new controller with the same id to simulate a new page load
 				 */
-				delete window.searchspring.controller[config.id];
 
 				const controller2 = new FinderController(config, {
 					client: new MockClient(globals, {}),
@@ -419,6 +418,8 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
+				const handleError = jest.spyOn(controller, 'handleError');
+
 				controller.client.finder = jest.fn(() => {
 					throw 429;
 				});
@@ -430,6 +431,9 @@ describe('Finder Controller', () => {
 					type: 'warning',
 					message: 'Too many requests try again later',
 				});
+
+				expect(handleError).toHaveBeenCalledWith(429);
+				handleError.mockClear();
 			});
 
 			it('logs error if 500', async () => {
@@ -443,6 +447,8 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
+				const handleError = jest.spyOn(controller, 'handleError');
+
 				controller.client.finder = jest.fn(() => {
 					throw 500;
 				});
@@ -454,6 +460,9 @@ describe('Finder Controller', () => {
 					type: 'error',
 					message: 'Invalid Search Request or Service Unavailable',
 				});
+
+				expect(handleError).toHaveBeenCalledWith(500);
+				handleError.mockClear();
 			});
 		});
 	});

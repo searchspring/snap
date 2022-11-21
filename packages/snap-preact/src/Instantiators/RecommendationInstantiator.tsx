@@ -1,25 +1,26 @@
 import { render } from 'preact';
 import deepmerge from 'deepmerge';
 
-import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { AppMode, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
-import type { RootComponent } from '../types';
 import type { Target } from '@searchspring/snap-toolbox';
 
 export type RecommendationInstantiatorConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	client?: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
 	};
 	components: {
-		[name: string]: () => Promise<RootComponent> | RootComponent;
+		[name: string]: () => Promise<any> | any;
 	};
 	config: {
 		branch: string;
@@ -39,6 +40,7 @@ export type RecommendationInstantiatorServices = {
 };
 
 export class RecommendationInstantiator {
+	private mode = AppMode.production;
 	public client: Client;
 	public tracker: Tracker;
 	public logger: Logger;
@@ -72,10 +74,21 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain a valid config.client.globals.siteId value`);
 		}
 
+		if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode as AppMode;
+
+			if (this.config?.client?.globals?.siteId) {
+				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			}
+		}
+
+		window.searchspring = window.searchspring || {};
+
 		this.context = deepmerge(context || {}, config.context || {});
 		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
 		this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
-		this.logger = services?.logger || new Logger('RecommendationInstantiator ');
+		this.logger = services?.logger || new Logger({ prefix: 'RecommendationInstantiator ', mode: this.mode });
 
 		const profileCount: {
 			[key: string]: number;
@@ -87,6 +100,7 @@ export class RecommendationInstantiator {
 					selector: `script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]${
 						this.config.selector ? ` , ${this.config.selector}` : ''
 					}`,
+					autoRetarget: true,
 					inject: {
 						action: 'before',
 						element: (target: Target, origElement: Element) => {
@@ -189,43 +203,85 @@ export class RecommendationInstantiator {
 					globals,
 				};
 
-				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const controller = createRecommendationController(
-					{
-						url: this.config.url,
-						controller: controllerConfig,
-						context,
-					},
-					{ client: this.client, tracker: this.tracker }
-				);
+				// try to find an existing controller by similar configuration
+				let controller = Object.keys(this.controller)
+					.map((id) => this.controller[id])
+					.filter((controller) => {
+						return (
+							JSON.stringify({
+								batched: controller.config.batched,
+								branch: controller.config.branch,
+								globals: controller.config.globals,
+								tag: controller.config.tag,
+								realtime: controller.config.realtime,
+							}) ==
+							JSON.stringify({
+								batched: controllerConfig.batched,
+								branch: controllerConfig.branch,
+								globals: controllerConfig.globals,
+								tag: controllerConfig.tag,
+								realtime: controllerConfig.realtime,
+							})
+						);
+					})[0];
+
+				if (!controller) {
+					// no existing controller found of same configuration - creating a new controller
+					const createRecommendationController = (await import('../create/createRecommendationController')).default;
+					controller = createRecommendationController(
+						{
+							url: this.config.url,
+							controller: controllerConfig,
+							context,
+							mode: this.config.mode,
+						},
+						{ client: this.client, tracker: this.tracker }
+					);
+				}
 
 				this.uses.forEach((attachements) => controller.use(attachements));
 				this.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
 				this.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 
-				await controller.search();
+				// run a search on the controller if it has not yet and it is not currently
+				if (!controller.store.loaded && !controller.store.loading) {
+					await controller.search();
+				}
 
 				controller.addTargeter(this.targeter);
 
 				this.controller[controller.config.id] = controller;
+				window.searchspring.controller = window.searchspring.controller || {};
+				window.searchspring.controller[controller.config.id] = controller;
 
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;
 
+				if (!controller.store.profile.display.template) {
+					this.logger.error(`profile '${tag}' found on the following element is missing a template!\n${elem?.outerHTML}`);
+					return;
+				}
+
 				if (!profileVars) {
-					this.logger.error(`profile '${tag}' found on ${elem} is missing templateParameters!`);
+					this.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${elem?.outerHTML}`);
 					return;
 				}
 
 				if (!component) {
-					this.logger.error(`profile '${tag}' found on ${elem} is missing component!`);
+					this.logger.error(`profile '${tag}' found on the following element is missing a component!\n${elem?.outerHTML}`);
 					return;
 				}
 
-				const RecommendationsComponent = this.config.components[component] && (await this.config.components[component]());
+				const RecommendationsComponent =
+					this.config.components[component] &&
+					((await this.config.components[component]()) as React.ElementType<{
+						controller: RecommendationController;
+					}>);
 
 				if (!RecommendationsComponent) {
-					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);
+					this.logger.error(
+						`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`
+					);
 					return;
 				}
 

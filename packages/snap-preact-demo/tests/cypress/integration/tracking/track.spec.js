@@ -1,6 +1,13 @@
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 describe('Tracking', () => {
+	beforeEach(() => {
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				mode: 'production',
+			};
+		});
+	});
 	it('tracked shopper login', () => {
 		cy.visit('https://localhost:2222');
 
@@ -21,7 +28,7 @@ describe('Tracking', () => {
 			const beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
 			expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
 			expect(beacon.type).to.equal(BeaconType.LOGIN);
-			expect(beacon.event).to.be.an('object');
+			expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
 			expect(beacon.context).to.be.an('object').include.key('shopperId');
 
 			cy.window().then((window) => {
@@ -37,7 +44,7 @@ describe('Tracking', () => {
 			const beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
 			expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
 			expect(beacon.type).to.equal(BeaconType.LOGIN);
-			expect(beacon.event).to.be.an('object');
+			expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
 			expect(beacon.context).to.be.an('object').include.key('shopperId');
 			expect(beacon.context.shopperId).to.equal(shopperId);
 		});

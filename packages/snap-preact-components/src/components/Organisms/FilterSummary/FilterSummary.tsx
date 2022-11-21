@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,8 +8,9 @@ import { observer } from 'mobx-react-lite';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, Filter as FilterType } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
+import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	filterSummary: () =>
@@ -61,6 +62,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	const subProps: FilterSummarySubProps = {
 		filter: {
 			// default props
+			clearAllLabel: '',
 			className: 'ss__filter-summary__filter',
 			// global theme
 			...globalTheme?.components?.filter,
@@ -76,7 +78,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.filterSummary(), style];
 	} else if (style) {
@@ -89,13 +91,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				<div className="ss__filter-summary__title">{title}</div>
 
 				{filters.map((filter) => (
-					<Filter
-						{...subProps.filter}
-						url={filter?.url}
-						facetLabel={filter?.facet?.label}
-						valueLabel={filter?.value?.label}
-						onClick={(e) => onClick && onClick(e, filter)}
-					/>
+					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
 				))}
 
 				{!hideClearAll && (
@@ -110,7 +106,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				)}
 			</div>
 		</CacheProvider>
-	) : null;
+	) : (
+		<Fragment></Fragment>
+	);
 });
 
 export interface FilterSummaryProps extends ComponentProps {
@@ -122,8 +120,8 @@ export interface FilterSummaryProps extends ComponentProps {
 	hideFacetLabel?: boolean;
 	clearAllLabel?: string;
 	hideClearAll?: boolean;
-	onClick?: (e: Event, filterFilter) => void;
-	onClearAllClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, filterFilter: FilterType) => void;
+	onClearAllClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	controller?: SearchController | AutocompleteController;
 }
 

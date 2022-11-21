@@ -203,7 +203,7 @@ describe('createSearchController', () => {
 		});
 
 		it('creates an search controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createSearchController(createConfig, { logger: customLogger });
 
@@ -218,6 +218,7 @@ describe('createSearchController', () => {
 
 			expect(controller).toBeDefined();
 			expect(controller.tracker).toBe(customTracker);
+			// @ts-ignore - private property access
 			expect(controller.tracker.globals.siteId).toBe('custom');
 		});
 	});

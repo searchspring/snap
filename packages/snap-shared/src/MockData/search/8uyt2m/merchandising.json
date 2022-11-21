@@ -5,7 +5,6 @@
   "pagination": {
     "totalResults": 58,
     "page": 10,
-    "defaultPageSize": 24,
     "pageSize": 24,
     "totalPages":3
   },
@@ -248,11 +247,16 @@
     }
   ],
   "merchandising": {
+    "campaigns": [],
     "redirect": "",
     "content": {
       "header": [
         "<script data-banner-type=\"html\" data-banner-html=\"Primary banner.\" type=\"text/widget\"></script>Primary banner.",
         "<script data-banner-type=\"html\" data-banner-html=\"Primary banner.\" type=\"text/widget\"></script>Primary banner again."
+      ],
+      "footer": [
+        "<script data-banner-type=\"html\" data-banner-html=\"footer banner.\" type=\"text/widget\"></script>footer banner.",
+        "<script data-banner-type=\"html\" data-banner-html=\"footer banner.\" type=\"text/widget\"></script>footer banner again."
       ],
       "banner": [
         "<script data-banner-type=\"html\" data-banner-html=\"Secondary banner.\" type=\"text/widget\"></script>Secondary banner.",

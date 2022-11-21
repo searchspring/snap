@@ -7,6 +7,7 @@ import {
 	SearchResponseModelResultCoreMappings,
 	SearchResponseModelPagination,
 	SearchResponseModelSearchMatchTypeEnum,
+	SearchResponseModelMerchandising,
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
@@ -151,7 +152,9 @@ export type searchResponseType = {
 		query: string;
 	};
 	query?: {
-		matchType: SearchResponseModelSearchMatchTypeEnum | undefined;
+		matchType?: SearchResponseModelSearchMatchTypeEnum;
+		corrected?: string;
+		original?: string;
 	};
 };
 
@@ -181,7 +184,6 @@ transformSearchResponse.pagination = (response: searchResponseType): { paginatio
 			totalResults: pagination?.totalResults,
 			page: pagination?.currentPage,
 			pageSize: pagination?.perPage,
-			defaultPageSize: pagination?.defaultPerPage,
 			totalPages: pagination?.totalPages,
 		},
 	};
@@ -287,6 +289,7 @@ transformSearchResponse.facets = (response: searchResponseType, request: SearchR
 						type: 'range',
 						step: facet.step,
 						range: {
+							// TODO: change to null
 							low: facet.range[0] == '*' ? undefined : +facet.range[0],
 							high: facet.range[1] == '*' ? undefined : +facet.range[1],
 						},
@@ -294,6 +297,7 @@ transformSearchResponse.facets = (response: searchResponseType, request: SearchR
 				}
 				if (facet.active && typeof facet.active != 'boolean' && facet.active.length > 1) {
 					transformedFacet.active = {
+						// TODO: change to null
 						low: facet.active[0] == '*' ? undefined : +facet.active[0],
 						high: facet.active[1] == '*' ? undefined : +facet.active[1],
 					};
@@ -389,24 +393,43 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 		merchandising.content = {};
 	}
 
+	const transformedMerchandising: SearchResponseModelMerchandising = {
+		redirect: merchandising?.redirect || '',
+		content: merchandising.content || {},
+		campaigns: merchandising?.triggeredCampaigns || [],
+	};
+
 	return {
-		merchandising,
+		merchandising: transformedMerchandising,
 	};
 };
 
 transformSearchResponse.search = (response: searchResponseType, request: SearchRequestModel) => {
-	const didYouMean = response?.didYouMean?.query;
-	const originalQuery = request?.search?.originalQuery;
-	const matchType = response?.query?.matchType;
-
-	return {
+	let searchObj: {
+		search: {
+			query?: string;
+			didYouMean?: string;
+			matchType?: string;
+			originalQuery?: string;
+		};
+	} = {
 		search: {
 			query: request?.search?.query?.string,
-			didYouMean,
-			originalQuery,
-			matchType,
+			didYouMean: response?.didYouMean?.query,
+			matchType: response?.query?.matchType,
 		},
 	};
+
+	if (response?.query?.corrected && response?.query.original) {
+		// integrated spell correction is enabled
+		searchObj.search.query = response?.query?.corrected;
+		searchObj.search.originalQuery = response?.query?.original;
+	} else if (request?.search?.originalQuery) {
+		// using 'oq'
+		searchObj.search.originalQuery = request?.search?.originalQuery;
+	}
+
+	return searchObj;
 };
 
 // used for HTML entities decoding

@@ -6,9 +6,26 @@ The meta property is an object containing the meta data retrieved from the Searc
 
 ## `merchandising` property
 
-Contains redirect and banner merchandising data returned by the Search API.
+Contains redirect, banner, and campaigns merchandising data returned by the Search API.
 
 `merchandising.redirect` - merchandising redirect URL
+
+`merchandising.campaigns` - Shows what merchandising campaigns were applied to the search. Has array of campaign objects containing `id`, `title`, and `type`. Campaigns are listed in order, where index 0 will be the "highest scoring" of the campaigns.
+
+```typescript
+[
+	{
+		id: "144744",
+		title: "Global Campaign (In stock, new, season, best selling)",
+		type: "global"
+	},
+	{
+		id: "119988",
+		title: "DND: Location and Inline: United States - Free Shipping ",
+		type: "location"
+	}
+]
+```
 
 `merchandising.content` - merchandising banner object that has `ContentType` key and value containing an array of single or more banners.
 

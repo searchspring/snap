@@ -3,6 +3,184 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+
+### Features
+
+* **spell-correct:** initial commit of integrated spell correct feature (missing some testing) ([b4b265f](https://github.com/searchspring/snap/commit/b4b265f31728ca90bc26048b2ba8d458b5a85660))
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Features
+
+* **url-manager:** serializeUrlRoot now a required in config; change to order of params and defaults ([feaea8f](https://github.com/searchspring/snap/commit/feaea8f14892411b83625ec8ef82242bc38e4942))
+* **url-manager:** using serializeUrlRoot when enabled to set global state ([d828522](https://github.com/searchspring/snap/commit/d8285221144db70c05297a7a433da28b0d0d5278))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* **url-manager:** updating translators to use window.location.pathname when there is no urlRoot ([cbf6997](https://github.com/searchspring/snap/commit/cbf6997d7031c83f2d67bbce5ec4059142bb2c66))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

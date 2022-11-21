@@ -1,12 +1,14 @@
+import deepmerge from 'deepmerge';
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import { fibonacci } from '../utils/fibonacci';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
-import { CacheConfig } from '../../types';
+import { CacheConfig, HTTPHeaders, GenericGlobals } from '../../types';
 
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
 export type Json = any;
 export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD';
-export type HTTPHeaders = { [key: string]: string };
 export type HTTPQuery = { [key: string]: string | number | null | boolean | Array<string | number | null | boolean> | HTTPQuery };
 export type HTTPBody = Json | FormData | URLSearchParams;
 
@@ -24,8 +26,12 @@ export class API {
 
 	public cache: NetworkCache;
 
-	constructor(protected configuration: ApiConfiguration) {
-		this.cache = new NetworkCache(configuration.cache);
+	constructor(public configuration: ApiConfiguration) {
+		this.cache = new NetworkCache(this.configuration.cache);
+	}
+
+	protected get mode(): AppMode {
+		return this.configuration.mode;
 	}
 
 	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
@@ -41,7 +47,7 @@ export class API {
 		}
 
 		const response = await this.fetchApi(url, init);
-		const responseJSON = await response.json();
+		const responseJSON = await response?.json();
 		if (response.status >= 200 && response.status < 300) {
 			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 			this.retryDelay = 1000;
@@ -75,47 +81,61 @@ export class API {
 
 		let url = `${origin}/${context.path.replace(/^\//, '')}`;
 
-		if (context.query !== undefined && Object.keys(context.query).length !== 0) {
+		// merging globals to request query
+		const combinedQuery = deepmerge(context.query || {}, this.configuration.globals);
+		if (Object.keys(combinedQuery).length !== 0) {
 			// only add the querystring to the URL if there are query parameters.
-			url += '?' + this.configuration.queryParamsStringify(context.query);
+			url += '?' + this.configuration.queryParamsStringify(combinedQuery);
 		}
 
+		// merging globals to request body
 		const body =
 			(typeof FormData !== 'undefined' && context.body instanceof FormData) || context.body instanceof URLSearchParams || isBlob(context.body)
 				? context.body
-				: JSON.stringify(context.body);
+				: JSON.stringify(context.body ? deepmerge(context.body, this.configuration.globals) : context.body);
 
-		const headers = Object.assign({}, this.configuration.headers, context.headers);
+		const headers = { ...this.configuration.headers, ...context.headers };
+
 		const init = {
 			method: context.method,
 			headers: headers,
 			body,
 		};
+
 		return { url, init };
 	}
 
-	private fetchApi = async (url: RequestInfo, init?: RequestInit) => {
+	private async fetchApi(url: RequestInfo, init?: RequestInit): Promise<Response> {
 		const response = await this.configuration.fetchApi(url, init);
 
 		return response;
-	};
+	}
 }
 
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
+	mode?: keyof typeof AppMode | AppMode;
 	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 	maxRetry?: number;
 	cache?: CacheConfig;
+	globals?: GenericGlobals;
 }
 
 export class ApiConfiguration {
-	constructor(private configuration: ApiConfigurationParameters) {
+	constructor(private configuration: ApiConfigurationParameters = {}) {
 		if (!configuration.maxRetry) {
 			this.configuration.maxRetry = 8;
+		}
+
+		this.configuration.cache = this.configuration.cache || {};
+		this.configuration.mode = this.configuration.mode || AppMode.production;
+
+		if (this.configuration.mode == AppMode.development) {
+			this.configuration.cache.enabled = false;
 		}
 	}
 
@@ -139,8 +159,24 @@ export class ApiConfiguration {
 		return this.configuration.queryParamsStringify || querystring;
 	}
 
-	get headers(): HTTPHeaders | undefined {
-		return this.configuration.headers;
+	get headers(): HTTPHeaders {
+		return this.configuration.headers || {};
+	}
+
+	set headers(newHeaders: HTTPHeaders) {
+		this.configuration.headers = newHeaders;
+	}
+
+	get globals(): GenericGlobals {
+		return this.configuration.globals || {};
+	}
+
+	set globals(newGlobals: GenericGlobals) {
+		this.configuration.globals = newGlobals;
+	}
+
+	get mode(): AppMode {
+		return this.configuration.mode! as AppMode;
 	}
 }
 

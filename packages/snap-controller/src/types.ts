@@ -19,7 +19,7 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
 
 // Middleware
-export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void>;
+export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void> | void;
 export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
 
 export type BeforeSearchObj = {
@@ -57,7 +57,7 @@ export type ControllerServices = {
 
 export type Attachments = {
 	middleware?: {
-		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+		[eventName: string]: Middleware<any> | Middleware<any>[];
 	};
 	plugins?: PluginGrouping[];
 	[any: string]: unknown;

@@ -3,6 +3,283 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **merchandising-docs:** refactoring merchandising component structure to fix docs search 4 readme ([d828100](https://github.com/searchspring/snap/commit/d8281008675370b7a6c40e3e7194c0eee76b9a05))
+* **searchcontroller:** backfill page size bugfix ([17fa02a](https://github.com/searchspring/snap/commit/17fa02a7f43b0d83b8dabf403248688088e2be05))
+* **searchcontroller:** pre-fetch meta if backfill is set and we dont have the defaultpagesize ([01f8ff4](https://github.com/searchspring/snap/commit/01f8ff4b7c6f36f6869297ae1df678fc1c3e15b9))
+* **tracker:** altering beacon login event to send shopperId and userId in event payload ([2ead2bc](https://github.com/searchspring/snap/commit/2ead2bcf6ba9463e78f057b2524eae6d83a9404c))
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **client:** recommendation batching was using param hash forcing batching of unbatched same recs ([39a4754](https://github.com/searchspring/snap/commit/39a47545fa1caee8d82eb20bd3611725390ed6b2))
+* **instantiator:** fixing log mode for instantiator created controllers ([d1fe780](https://github.com/searchspring/snap/commit/d1fe780d268e0febc3a4257675e5139c924f5e55))
+* **instantiator:** preventing re-instantiation of identically configured controllers when targeting ([7cd9363](https://github.com/searchspring/snap/commit/7cd936397591535cee980ec27afd35c72fbc8b5c))
+* **storybook:** stories cant use shared mock data ([0e39f69](https://github.com/searchspring/snap/commit/0e39f696fef6b42511f48e019485ff84097c2f2e))
+
+
+### Features
+
+* **searchfacetstore:** adding a new config param to disable auto facet collapse handling ([697dd9f](https://github.com/searchspring/snap/commit/697dd9f7ae5a93e261380864e083f96b5e2e583e))
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+
+### Bug Fixes
+
+* **autocomplete.tsx:** bugfix for autocomplete border showing before it was done loading ([a5bd682](https://github.com/searchspring/snap/commit/a5bd682d333971d8edc7be099614ef536cbec512))
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+
+### Features
+
+* **spell-correct:** initial commit of integrated spell correct feature (missing some testing) ([b4b265f](https://github.com/searchspring/snap/commit/b4b265f31728ca90bc26048b2ba8d458b5a85660))
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+
+### Bug Fixes
+
+* **preact-create-autocomplete:** fixing reversion bug that broke initializeFromUrl setting ([fda9884](https://github.com/searchspring/snap/commit/fda98842ff8b3ccde9318f26d4623abf77a0da49))
+* **recommendationcontroller.ts:** recommendations personalization for other siteIds ([c6be636](https://github.com/searchspring/snap/commit/c6be6367dc2e76b9fddfa86bda8040f8eb72e5e1))
+
+
+### Features
+
+* **searchrequest.ts:** adding the ability to disableInlineBanners ([5868195](https://github.com/searchspring/snap/commit/586819543455f384af0fb32b3a8765cf8ba2355e))
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **getcontext.ts:** grab and return the siteId from the script context or src ([4830560](https://github.com/searchspring/snap/commit/4830560d1522b035d62ab5d4e3534e0371b30ac9))
+* **preact-components:** adding new hook 'useConstructor' for easy constructor like behavior ([a249f6a](https://github.com/searchspring/snap/commit/a249f6abb6c0ebca730563af05d9c344e1ae1071))
+* **searchstore:** add landingPage to the searchstore ([a7d2c4f](https://github.com/searchspring/snap/commit/a7d2c4fe2740168e436ed865e1a8b85120154691))
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+
+### Bug Fixes
+
+* **preact:** fixing an error preventing branch override from functioning ([cdecc76](https://github.com/searchspring/snap/commit/cdecc76fc63ea887f7167cef119a412917802f7c))
+* **recommendation.tsx:** bugfix for impression tracking when loop = false ([618357c](https://github.com/searchspring/snap/commit/618357cd7fc7a9b786d3c00aaf56b0a6cd6ec80c))
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+
+### Bug Fixes
+
+* **controller-search:** removing scrollRestoration='manual' for better cross browser support ([4f4aab6](https://github.com/searchspring/snap/commit/4f4aab635a882c8c22e83ad59cb5c5d0b1b2cc9d))
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **controllers-search:** combining logic for scroll position storage and restoration ([ec2eb23](https://github.com/searchspring/snap/commit/ec2eb238e98caf0b49bef57c8df56e5e838499b4))
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Bug Fixes
+
+* **searchfacetstore.ts:** account for inline merchandising content when trimming facets ([441fcfe](https://github.com/searchspring/snap/commit/441fcfe748fbef992e8e7391dbe9ac59a73ddd2c))
+
+
+### Features
+
+* **tracker:** preventing error beacon events in development mode and in certain cases ([51049a9](https://github.com/searchspring/snap/commit/51049a958833caea90d81794af677862c8377a37))
+* **tracking:** adding sessionId and pageLoadId to search request params ([e380f27](https://github.com/searchspring/snap/commit/e380f2768ac1071b510ea4a24335b2acd96cb8c4))
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact-components-select:** fixing logic with rendering Observables and improving state functions ([38fb7c8](https://github.com/searchspring/snap/commit/38fb7c881446554ba0809a4d86a10d9a849d0df4))
+* **preact-components-select:** improving logic for select component and fixing bug preventing render ([64f3a2a](https://github.com/searchspring/snap/commit/64f3a2a6b9d672292f24004a78563acce31715e0))
+* **preact:** create function should have been resetting URL on detach for controller ([41797cf](https://github.com/searchspring/snap/commit/41797cf1aa7771130b0f7f45ee5ddf7cbd90acdf))
+* **searchcontroller:** use previous response over store.results to not overwrite inline banners ([00cc651](https://github.com/searchspring/snap/commit/00cc651af9434781cb8bcf984a91d344fd572e18))
+
+
+### Features
+
+* **controller-autocomplete:** adding `serializeForm` setting for picking up additional form params ([3095bb9](https://github.com/searchspring/snap/commit/3095bb939758a97d79457e69741d3a3c1b80458e))
+* send beacon error events from middleware errors ([daeba21](https://github.com/searchspring/snap/commit/daeba214facd250505c1bf89ae18588a709244b7))
+* **url-manager:** serializeUrlRoot now a required in config; change to order of params and defaults ([feaea8f](https://github.com/searchspring/snap/commit/feaea8f14892411b83625ec8ef82242bc38e4942))
+* **url-manager:** using serializeUrlRoot when enabled to set global state ([d828522](https://github.com/searchspring/snap/commit/d8285221144db70c05297a7a433da28b0d0d5278))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* remove empty search object from stringyParams key ([439d7ff](https://github.com/searchspring/snap/commit/439d7ffa0fb0c18658b467cf1eaf19e60c671212))
+
+
+### Features
+
+* **client:** adding `merchandising.intellisuggest` as a request option ([e809114](https://github.com/searchspring/snap/commit/e8091147ac2fbbd00f828336844f0d0e8bd421df))
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+
+### Features
+
+* add restorePosition to infinite config ([4e822cc](https://github.com/searchspring/snap/commit/4e822cce5e164faddb0f283f345e50b20fcfb9ac))
+* **searchmerchandisingstore:** transform merch.triggerCampaigns - campaigns & add to store ([e13986f](https://github.com/searchspring/snap/commit/e13986fc239bee7857ffee98dc0c3c602a859d69))
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+
+### Bug Fixes
+
+* fix lastStringyParams logic ([9cab5cb](https://github.com/searchspring/snap/commit/9cab5cbbc16529928ae6f55e80a315ad82bbe04d))
+* **mobx-store-finder:** removing the `data` property to prevent future access problems ([b523369](https://github.com/searchspring/snap/commit/b52336973614c07a28a93b1fcf5ce465689c0cb2))
+* **searchcontroller:** remove search.redirectResponse and personalization when comparing params ([93b40a2](https://github.com/searchspring/snap/commit/93b40a2f9b0c43fe4aefb6ccb5a9cb9c74b76d9d))
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+
+### Bug Fixes
+
+* **preact-components:** withStore and withController prop order reversion ([36ba37b](https://github.com/searchspring/snap/commit/36ba37bb8ad9aaa0d8ed7d41aec75c2425a2a881))
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* **preact-components-carousel:** adding a `threshold` prop to prevent clicks from dragging swiper ([ff0b4ab](https://github.com/searchspring/snap/commit/ff0b4abc95d59ffc2f7e04d1eccd00de29c7abb4))
+* **url-manager:** updating translators to use window.location.pathname when there is no urlRoot ([cbf6997](https://github.com/searchspring/snap/commit/cbf6997d7031c83f2d67bbce5ec4059142bb2c66))
+
+
+### Features
+
+* **snap:** adding `AppMode` to toolbox and utilizing it to disable caching and add header in client ([48cc911](https://github.com/searchspring/snap/commit/48cc9119a2da9c73de7ceb6b772378aa351ee413))
+* **snap:** adding mode switching to snap-preact and controller - removing controller window access ([99a8f21](https://github.com/searchspring/snap/commit/99a8f2176ad803af451e4317e5d98f38303cef1e))
+* **tracker.ts:** adding attribution values to tracker context and saving to storage ([1a2c936](https://github.com/searchspring/snap/commit/1a2c93670a2c00ec3c6039a22b8d8e9316b7bfe5))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* **preact:** adding condition to branch override to reload the page when URL is unchanged ([4a4df9e](https://github.com/searchspring/snap/commit/4a4df9ed73e77aa26d24619a49e935d66a35e02b))
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 

@@ -8,6 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetDisplay } from '../../../types';
 import Readme from '../FacetHierarchyOptions/readme.md';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetHierarchyOptions`,
@@ -23,7 +24,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -51,6 +52,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		previewOnFocus: {
+			description: 'Invoke facet value preview upon focus',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		valueProps: {
+			description: 'Object of facet value props',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '{}' },
+			},
+			control: { type: 'object' },
+		},
 		onClick: {
 			description: 'Facet option click event handler',
 			table: {
@@ -66,7 +87,7 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'FacetHierarchyOptions', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacetHierarchyOptions = observer(({ args, controller }) => {
+const ObservableFacetHierarchyOptions = observer(({ args, controller }: { args: FacetHierarchyOptionsProps; controller: SearchController }) => {
 	const hierarchyValues = controller?.store?.facets
 		.filter((facet) => facet.display === FacetDisplay.HIERARCHY)
 		.shift()
@@ -75,11 +96,10 @@ const ObservableFacetHierarchyOptions = observer(({ args, controller }) => {
 	return <FacetHierarchyOptions {...args} values={hierarchyValues} />;
 });
 
-const Template = (args: FacetHierarchyOptionsProps, { loaded: { controller } }) => {
+export const Default = (args: FacetHierarchyOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservableFacetHierarchyOptions args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

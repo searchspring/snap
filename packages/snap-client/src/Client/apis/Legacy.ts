@@ -1,11 +1,16 @@
 import { MetaRequestModel, MetaResponseModel } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, HTTPQuery } from '.';
+import { API, HTTPQuery } from '.';
+import { HTTPHeaders } from '../../types';
 
 export class LegacyAPI extends API {
 	private async getEndpoint(queryParameters: any, path = '/api/search/search.json') {
 		queryParameters.resultsFormat = 'native';
 		const headerParameters: HTTPHeaders = {};
+
+		//remove pageLoadId from cache key query params
+		let cacheParameters = { ...queryParameters };
+		delete cacheParameters.pageLoadId;
 
 		const legacyResponse = await this.request(
 			{
@@ -14,7 +19,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			path + JSON.stringify(queryParameters)
+			path + JSON.stringify(cacheParameters)
 		);
 
 		return legacyResponse;

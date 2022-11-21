@@ -9,7 +9,7 @@ import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
+import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
 
@@ -25,6 +25,7 @@ const defaultConfig: SearchControllerConfig = {
 			trim: true,
 			pinFiltered: true,
 			storeRange: true,
+			autoOpenActive: true,
 		},
 	},
 };
@@ -40,6 +41,7 @@ export class SearchController extends AbstractController {
 	declare store: SearchStore;
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
+	private previousResults: Array<SearchResponseModelResult> = [];
 
 	constructor(
 		config: SearchControllerConfig,
@@ -50,6 +52,11 @@ export class SearchController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+
+		if (this.config.settings?.infinite && typeof this.config.settings.infinite.restorePosition == 'undefined') {
+			this.config.settings.infinite.restorePosition = true;
+		}
+
 		this.store.setConfig(this.config);
 
 		this.storage = new StorageStore({
@@ -96,15 +103,19 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = false;
 
 			// save last params
-			const stringyParams = JSON.stringify(search.request);
-			this.storage.set('lastStringyParams', stringyParams);
+			this.storage.set('lastStringyParams', JSON.stringify(search.request));
 
-			if (this.config.settings?.infinite && window.scrollY === 0) {
-				// browser didn't jump
+			const storableRequestParams = getStorableRequestParams(search.request);
+
+			const stringyParams = JSON.stringify(storableRequestParams);
+
+			if (this.config.settings?.infinite?.restorePosition) {
+				// restore the scroll position saved previously
 				const scrollMap = this.storage.get('scrollMap') || {};
 
 				// interval we ony need to keep checking until the page height > than our stored value
 				const scrollToPosition = scrollMap[stringyParams];
+
 				if (scrollToPosition) {
 					let checkCount = 0;
 					const heightCheck = window.setInterval(() => {
@@ -131,7 +142,12 @@ export class SearchController extends AbstractController {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				// store scroll position
 				if (this.config.settings?.infinite) {
-					const stringyParams = this.storage.get('lastStringyParams');
+					let stringyParams = this.storage.get('lastStringyParams');
+					stringyParams = JSON.parse(stringyParams);
+
+					const storableRequestParams = getStorableRequestParams(stringyParams);
+					stringyParams = JSON.stringify(storableRequestParams);
+
 					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
 					this.storage.set('scrollMap', scrollMap);
@@ -169,6 +185,16 @@ export class SearchController extends AbstractController {
 		const userId = this.tracker.getUserId();
 		if (userId) {
 			params.tracking.userId = userId;
+		}
+
+		const sessionId = this.tracker.getContext().sessionId;
+		if (sessionId) {
+			params.tracking.sessionId = sessionId;
+		}
+
+		const pageId = this.tracker.getContext().pageLoadId;
+		if (pageId) {
+			params.tracking.pageLoadId = pageId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
@@ -224,52 +250,122 @@ export class SearchController extends AbstractController {
 				return;
 			}
 
-			if (this.config.settings?.infinite) {
-				// TODO: refactor this
+			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
+
+			let meta: any;
+			let response: any;
+
+			// infinite functionality
+			// if params.page > 1 and infinite setting exists we should append results
+			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				const preventBackfill =
 					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
 				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
-
+				//if the page is higher than the backfill setting redirect back to page 1
 				if (preventBackfill || dontBackfill) {
 					this.storage.set('scrollMap', {});
 					this.urlManager.set('page', 1).go();
 					return;
 				}
-			}
 
-			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
-
-			const [meta, response] = await this.client.search(params);
-			// @ts-ignore
-			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				// @ts-ignore
-				response.meta = meta;
-			}
-
-			// infinite functionality
-			// if params.page > 1 and infinite setting exists we should append results
-			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
-				let previousResults = this.store.data?.results || [];
+				let previousResults = this.previousResults;
+				const backfills = [];
+
+				let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
-					const backfills = [];
-					for (let page = 1; page < params.pagination?.page!; page++) {
-						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
-						backfills.push(this.client.search(backfillParams));
+					if (!pageSize) {
+						//unfortunatly we need to fetch meta to know the default pagesize before we can continue.
+						const meta = await this.client.meta();
+						pageSize = meta.pagination?.defaultPageSize!;
 					}
 
-					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([meta, data]) => {
-						previousResults = previousResults.concat(data.results!);
-					});
+					let pagesNeeded1 =
+						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
+							? this.config.settings?.infinite.backfill
+							: params.pagination?.page;
+					let totalResultsNeeded = pageSize * (pagesNeeded1 || 1);
+
+					const apiLimit = 500;
+					// our search api is limited to a certain amount per request.
+					//so we will need to make more than one request if totalresultsneeded is greater.
+					if (totalResultsNeeded < apiLimit) {
+						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: totalResultsNeeded, page: 1 } });
+						backfills.push(this.client.search(backfillParams));
+					} else {
+						//how many pages are needed?
+						let pagesNeeded = Math.ceil(totalResultsNeeded / apiLimit);
+						// we dont want to get the full apiLimit # of results on the last page, so lets find out how many are left.
+						let lastPageCount = apiLimit - (pagesNeeded * apiLimit - totalResultsNeeded);
+
+						for (let i = 1; i <= pagesNeeded; i++) {
+							const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: i < pagesNeeded ? apiLimit : lastPageCount, page: i } });
+							backfills.push(this.client.search(backfillParams));
+						}
+					}
 				}
 
-				response.results = [...previousResults, ...(response.results || [])];
+				//infinite backfill and prev results
+				// use the previous results and only make request for new result
+				if (backfills && backfills.length) {
+					let backfillResults: any = [];
+					const backfillResponses = await Promise.all(backfills);
+					backfillResponses.map(([Bmeta, Bresponse]) => {
+						if (!meta) {
+							meta = Bmeta;
+						}
+						if (!response) {
+							response = Bresponse;
+							backfillResults = response.results;
+						} else {
+							backfillResults = backfillResults.concat(Bresponse.results!);
+						}
+					});
+
+					if (!response.meta) {
+						/**
+						 * MockClient will overwrite the client search() method and use
+						 * SearchData to return mock data which already contains meta data
+						 */
+						// @ts-ignore
+						response.meta = meta;
+					}
+
+					//we need to overwrite the pagination params so the ui doesnt get confused.
+					response.pagination.pageSize = pageSize;
+					response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize);
+					response.pagination.page = params.pagination?.page;
+
+					//set the response results after all backfill promises are resolved.
+					response.results = backfillResults;
+				} else {
+					// infinite with no backfills.
+					[meta, response] = await this.client.search(params);
+					// @ts-ignore
+					if (!response.meta) {
+						/**
+						 * MockClient will overwrite the client search() method and use
+						 * SearchData to return mock data which already contains meta data
+						 */
+						// @ts-ignore
+						response.meta = meta;
+					}
+					//append new results to previous results
+					response.results = [...previousResults, ...(response.results || [])];
+				}
+			} else {
+				//standard.
+				[meta, response] = await this.client.search(params);
+				// @ts-ignore
+				if (!response.meta) {
+					/**
+					 * MockClient will overwrite the client search() method and use
+					 * SearchData to return mock data which already contains meta data
+					 */
+					// @ts-ignore
+					response.meta = meta;
+				}
 			}
 
 			searchProfile.stop();
@@ -297,8 +393,12 @@ export class SearchController extends AbstractController {
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
 
+			// store previous results for infinite usage
+			if (this.config.settings?.infinite) {
+				this.previousResults = JSON.parse(JSON.stringify(response.results));
+			}
+
 			// update the store
-			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -346,7 +446,27 @@ export class SearchController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
+	};
+}
+
+export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
+	return {
+		siteId: request.siteId,
+		sorts: request.sorts,
+		search: {
+			query: {
+				string: request?.search?.query?.string || '',
+			},
+			subQuery: request?.search?.subQuery || '',
+		},
+		filters: request.filters,
+		pagination: request.pagination,
+		facets: request.facets,
+		merchandising: {
+			landingPage: request.merchandising?.landingPage || '',
+		},
 	};
 }

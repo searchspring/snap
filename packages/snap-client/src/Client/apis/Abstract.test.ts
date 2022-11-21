@@ -1,9 +1,54 @@
 import 'whatwg-fetch';
-import { API, ApiConfiguration, ApiConfigurationParameters, HTTPHeaders } from './Abstract';
+import { API, ApiConfiguration, ApiConfigurationParameters, HTTPQuery } from './Abstract';
+import { HTTPHeaders } from '../../types';
+
+describe('ApiConfiguration', () => {
+	it('has default configurations', () => {
+		const configuration = new ApiConfiguration();
+		expect(configuration.maxRetry).toBe(8);
+		expect(configuration.mode).toBe('production');
+	});
+
+	it('can be set with other configurations', () => {
+		const customHeaders: HTTPHeaders = {
+			customheader: 'customkey',
+		};
+
+		const customCacheConfig = {
+			ttl: 2222,
+			enabled: false,
+			maxSize: 4, // KB
+			purgeable: false,
+		};
+
+		const customQueryParamsStringify = (params: HTTPQuery) => {
+			return 'custom';
+		};
+
+		const config: ApiConfigurationParameters = {
+			mode: 'development',
+			origin: 'https://searchspring.com',
+			fetchApi: global.window.fetch,
+			queryParamsStringify: customQueryParamsStringify,
+			headers: customHeaders,
+			maxRetry: 2,
+			cache: customCacheConfig,
+		};
+
+		const configuration = new ApiConfiguration(config);
+		expect(configuration.mode).toBe('development');
+		expect(configuration.origin).toBe(config.origin);
+		expect(configuration.fetchApi).toBe(config.fetchApi);
+		expect(configuration.queryParamsStringify).toBe(config.queryParamsStringify);
+		expect(configuration.headers).toBe(config.headers);
+		expect(configuration.maxRetry).toBe(config.maxRetry);
+		expect(configuration.cache).toBe(config.cache);
+	});
+});
 
 describe('Abstract Api', () => {
 	it('has expected default values', () => {
-		const api = new API(new ApiConfiguration({}));
+		const api = new API(new ApiConfiguration());
 
 		expect(api.cache).toEqual({
 			config: {

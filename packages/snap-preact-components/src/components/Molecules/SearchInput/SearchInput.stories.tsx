@@ -1,9 +1,8 @@
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { SearchInput, SearchInputProps } from './SearchInput';
-import { Icon, iconPaths } from '../../Atoms/Icon';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
@@ -21,7 +20,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -66,7 +65,4 @@ export default {
 		...componentArgs,
 	},
 };
-
-const Template = (args: SearchInputProps) => <SearchInput {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: SearchInputProps) => <SearchInput {...args} />;

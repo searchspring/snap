@@ -2,9 +2,21 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Image, FALLBACK_IMAGE_URL } from './Image';
+import { Image, FALLBACK_IMAGE_URL, ImageProps } from './Image';
 import { componentArgs } from '../../../utilities';
-import { searchResponse } from '../../../mocks/searchResponse';
+
+const searchResponse = {
+	product1: {
+		image: 'https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/12_14_reddress11531_thumb_med.jpg',
+		name: 'Elevated Classic White Shirt Dress',
+	},
+	product2: {
+		image:
+			'https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg',
+		name: 'Cambridge Classic White Shirt Dress',
+	},
+};
+
 import Readme from '../Image/readme.md';
 
 export default {
@@ -21,7 +33,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '300px',
@@ -132,30 +144,28 @@ export default {
 	},
 };
 
-const Template = (args) => <Image {...args} style={{ width: '100%' }} />;
-
-export const Default = Template.bind({});
+export const Default = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 Default.args = {
-	src: searchResponse.results[6].mappings.core.imageUrl,
-	alt: searchResponse.results[6].mappings.core.name,
+	src: searchResponse.product1.image,
+	alt: searchResponse.product1.name,
 };
 
-export const BrokenImg = Template.bind({});
+export const BrokenImg = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 BrokenImg.args = {
 	src: 'intentionally_broken_image.jpg',
-	alt: searchResponse.results[6].mappings.core.name,
+	alt: searchResponse.product1.name,
 };
 
-export const ManualFallBack = Template.bind({});
+export const ManualFallBack = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 ManualFallBack.args = {
 	src: 'intentionally_broken_image.jpg',
-	alt: searchResponse.results[5].mappings.core.name,
-	fallback: searchResponse.results[5].mappings.core.imageUrl,
+	alt: searchResponse.product1.name,
+	fallback: searchResponse.product1.image,
 };
 
-export const onhover = Template.bind({});
+export const onhover = (args: ImageProps) => <Image {...args} style={{ width: '100%' }} />;
 onhover.args = {
-	src: searchResponse.results[6].mappings.core.imageUrl,
-	alt: searchResponse.results[6].mappings.core.name,
-	hoverSrc: searchResponse.results[7].mappings.core.imageUrl,
+	src: searchResponse.product1.image,
+	alt: searchResponse.product1.name,
+	hoverSrc: searchResponse.product2.image,
 };

@@ -3,6 +3,208 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.38.0](https://github.com/searchspring/snap/compare/v0.37.1...v0.38.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **instantiator:** fixing log mode for instantiator created controllers ([d1fe780](https://github.com/searchspring/snap/commit/d1fe780d268e0febc3a4257675e5139c924f5e55))
+* **instantiator:** preventing re-instantiation of identically configured controllers when targeting ([7cd9363](https://github.com/searchspring/snap/commit/7cd936397591535cee980ec27afd35c72fbc8b5c))
+
+
+
+
+
+## [0.37.1](https://github.com/searchspring/snap/compare/v0.37.0...v0.37.1) (2022-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.37.0](https://github.com/searchspring/snap/compare/v0.36.0...v0.37.0) (2022-09-26)
+
+
+### Features
+
+* **spell-correct:** initial commit of integrated spell correct feature (missing some testing) ([b4b265f](https://github.com/searchspring/snap/commit/b4b265f31728ca90bc26048b2ba8d458b5a85660))
+
+
+
+
+
+# [0.36.0](https://github.com/searchspring/snap/compare/v0.35.0...v0.36.0) (2022-09-19)
+
+
+### Bug Fixes
+
+* **preact-create-autocomplete:** fixing reversion bug that broke initializeFromUrl setting ([fda9884](https://github.com/searchspring/snap/commit/fda98842ff8b3ccde9318f26d4623abf77a0da49))
+
+
+
+
+
+# [0.35.0](https://github.com/searchspring/snap/compare/v0.34.7...v0.35.0) (2022-09-01)
+
+
+### Features
+
+* **getcontext.ts:** grab and return the siteId from the script context or src ([4830560](https://github.com/searchspring/snap/commit/4830560d1522b035d62ab5d4e3534e0371b30ac9))
+
+
+
+
+
+## [0.34.7](https://github.com/searchspring/snap/compare/v0.34.6...v0.34.7) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.34.6](https://github.com/searchspring/snap/compare/v0.34.5...v0.34.6) (2022-08-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.34.5](https://github.com/searchspring/snap/compare/v0.34.4...v0.34.5) (2022-08-19)
+
+
+### Bug Fixes
+
+* **preact:** fixing an error preventing branch override from functioning ([cdecc76](https://github.com/searchspring/snap/commit/cdecc76fc63ea887f7167cef119a412917802f7c))
+
+
+
+
+
+## [0.34.4](https://github.com/searchspring/snap/compare/v0.34.3...v0.34.4) (2022-08-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.34.3](https://github.com/searchspring/snap/compare/v0.34.2...v0.34.3) (2022-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.34.2](https://github.com/searchspring/snap/compare/v0.34.1...v0.34.2) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.34.1](https://github.com/searchspring/snap/compare/v0.34.0...v0.34.1) (2022-08-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.34.0](https://github.com/searchspring/snap/compare/v0.33.0...v0.34.0) (2022-08-03)
+
+
+### Features
+
+* **tracker:** preventing error beacon events in development mode and in certain cases ([51049a9](https://github.com/searchspring/snap/commit/51049a958833caea90d81794af677862c8377a37))
+
+
+
+
+
+# [0.33.0](https://github.com/searchspring/snap/compare/v0.32.0...v0.33.0) (2022-07-22)
+
+
+### Bug Fixes
+
+* **preact:** create function should have been resetting URL on detach for controller ([41797cf](https://github.com/searchspring/snap/commit/41797cf1aa7771130b0f7f45ee5ddf7cbd90acdf))
+
+
+
+
+
+# [0.32.0](https://github.com/searchspring/snap/compare/v0.31.0...v0.32.0) (2022-07-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.31.0](https://github.com/searchspring/snap/compare/v0.30.2...v0.31.0) (2022-07-13)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.30.2](https://github.com/searchspring/snap/compare/v0.30.1...v0.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+## [0.30.1](https://github.com/searchspring/snap/compare/v0.30.0...v0.30.1) (2022-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.30.0](https://github.com/searchspring/snap/compare/v0.29.0...v0.30.0) (2022-07-01)
+
+
+### Features
+
+* **snap:** adding mode switching to snap-preact and controller - removing controller window access ([99a8f21](https://github.com/searchspring/snap/commit/99a8f2176ad803af451e4317e5d98f38303cef1e))
+* **tracker.ts:** adding attribution values to tracker context and saving to storage ([1a2c936](https://github.com/searchspring/snap/commit/1a2c93670a2c00ec3c6039a22b8d8e9316b7bfe5))
+
+
+
+
+
+# [0.29.0](https://github.com/searchspring/snap/compare/v0.28.0...v0.29.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* **preact:** adding condition to branch override to reload the page when URL is unchanged ([4a4df9e](https://github.com/searchspring/snap/commit/4a4df9ed73e77aa26d24619a49e935d66a35e02b))
+
+
+### Features
+
+* **tracker:** add error beaconing ([8e687a9](https://github.com/searchspring/snap/commit/8e687a9c5ca16c0f71a55986580ab88190cc9993))
+
+
+
+
+
 # [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
 
 

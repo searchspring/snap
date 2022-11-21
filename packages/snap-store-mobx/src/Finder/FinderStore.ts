@@ -2,21 +2,20 @@ import { makeObservable, observable } from 'mobx';
 
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import { AbstractStore } from '../Abstract/AbstractStore';
-import { PaginationStore } from '../Search/Stores';
+import { SearchPaginationStore } from '../Search/Stores';
 import { StorageStore, StorageType } from '../Storage/StorageStore';
-import { SelectionStore } from './Stores';
+import { FinderSelectionStore } from './Stores';
 import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
 
 export class FinderStore extends AbstractStore {
 	public services: StoreServices;
 	public config!: FinderStoreConfig;
-	public data!: SearchResponseModel & { meta: MetaResponseModel };
 	public meta: MetaResponseModel = {};
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
-	public pagination!: PaginationStore;
-	public selections!: SelectionStore;
+	public pagination!: SearchPaginationStore;
+	public selections!: FinderSelectionStore;
 	public state: FinderStoreState = {
 		persisted: false,
 	};
@@ -53,23 +52,7 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	public save(): void {
-		if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
-			this.persistedStorage.set('config', this.config);
-			this.persistedStorage.set('data', this.data);
-			this.persistedStorage.set('date', Date.now());
-			this.persistedStorage.set(
-				'selections',
-				this.selections.map((selection) => {
-					return {
-						selected: selection.selected,
-						data: selection.data,
-						facet: selection.facet,
-					} as SelectedSelection;
-				})
-			);
-		}
-	}
+	public save: () => void = () => {};
 
 	public reset = (): void => {
 		if (this.config.persist?.enabled) {
@@ -106,11 +89,10 @@ export class FinderStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
-		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
-		this.selections = new SelectionStore(this.config, this.services, {
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
+		this.selections = new FinderSelectionStore(this.config, this.services, {
 			state: this.state,
 			facets: data.facets || [],
 			meta: this.meta,
@@ -118,5 +100,24 @@ export class FinderStore extends AbstractStore {
 			storage: this.storage,
 			selections: selectedSelections || [],
 		});
+
+		// providing access to response data without exposing it
+		this.save = () => {
+			if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
+				this.persistedStorage.set('config', this.config);
+				this.persistedStorage.set('data', data);
+				this.persistedStorage.set('date', Date.now());
+				this.persistedStorage.set(
+					'selections',
+					this.selections.map((selection) => {
+						return {
+							selected: selection.selected,
+							data: selection.data,
+							facet: selection.facet,
+						} as SelectedSelection;
+					})
+				);
+			}
+		};
 	}
 }

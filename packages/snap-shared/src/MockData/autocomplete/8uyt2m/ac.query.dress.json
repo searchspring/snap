@@ -3,7 +3,6 @@
     "totalResults": 113,
     "page": 1,
     "pageSize": 30,
-    "defaultPageSize": 24,
     "totalPages": 4
   },
   "results": [
@@ -4079,6 +4078,7 @@
   ],
   "sorting": [],
   "merchandising": {
+    "campaigns": [],
     "redirect": "",
     "is_elevated": [],
     "elevated": [],

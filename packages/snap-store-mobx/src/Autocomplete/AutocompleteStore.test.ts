@@ -46,7 +46,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.terms).toStrictEqual([]);
 
 		expect(autocompleteStore.merchandising).toBeDefined();
-		expect(autocompleteStore.merchandising).toEqual({ redirect: '', content: {} });
+		expect(autocompleteStore.merchandising).toEqual({ redirect: '', content: {}, campaigns: [] });
 
 		expect(autocompleteStore.search).toBeDefined();
 		expect(autocompleteStore.search?.query).toBeUndefined();

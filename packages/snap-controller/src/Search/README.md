@@ -13,10 +13,11 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.pinFiltered | selected facet options move to the top of the options array | true |   |
 | settings.facets.storeRange | range facets keep their initial boundary ranges from first load | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
+| settings.facets.autoOpenActive | setting for "auto open" functionality for facets that are filtered (active), collapsed, and have no stored data | true |   |
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
-
+| settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
 <br>
 
 ```typescript
@@ -69,7 +70,7 @@ searchController.search();
 ```
 
 ## Infinite
-When `config.settings.infinite` is defined and `store.pagination.next()` is invoked, the next page will be fetched and its result set will be appended to the existing result set. 
+When `config.settings.infinite` is defined and `store.pagination.next.url.go({ history: 'replace' })` is invoked, the next page will be fetched and its result set will be appended to the existing result set.
 
 If the page has been reloaded, the results will be reset to page 1.
 
@@ -88,7 +89,7 @@ const searchConfig = {
 ```
 
 ### Backfill
-If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill. Note that each page that is backfilled will invoke a request to the search API and your billing quota will reflect this. It is not recommended to set this value above `5`
+If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill.
 
 ```typescript
 const searchConfig = {
@@ -108,6 +109,25 @@ const searchConfig = {
 
 For example, if `config.settings.infinite.backfill` contains a value of `5` and the user has paginated to page `4` and reloads the page, `4` pages of results will be shown. However, if the user has paginated to page `6` or above and reloads the page, only page `1` results will be shown. 
 
+### Restore Position
+If `config.settings.infinite.backfill` is specified, any time you navigate back to a previous page, the controller will scroll to the pages previous position. This can be disabled and left entirely up to the browser by setting `restorePosition` to `false`.
+
+```typescript
+const searchConfig = {
+	id: 'search',
+	globals: {
+		pagination: {
+			pageSize: 12
+		}
+	},
+	settings: {
+		infinite: {
+			backfill: 5,
+			restorePosition: false,
+		}
+	}
+};
+```
 
 ### Infinite Scrolling
 By default when using the infinite configuration, additional pages are appended when `store.pagination.next()` is invoked. To automatically request the next page when the user has scrolled to the bottom, an `useIntersection` hook along with a `useRef` attached to an element below the results can be used to invoke `pagination.next.url.go({ history: 'replace' })` when the element comes into the viewport. 

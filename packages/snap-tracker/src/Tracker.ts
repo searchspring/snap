@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
+import { AppMode } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -18,6 +19,7 @@ import {
 	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
+	TrackErrorEvent,
 	OrderTransactionData,
 	Product,
 	TrackerConfig,
@@ -25,6 +27,7 @@ import {
 } from './types';
 
 const BATCH_TIMEOUT = 150;
+const LEGACY_USERID_COOKIE_NAME = '_isuid';
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
@@ -39,13 +42,16 @@ const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
+	framework: 'snap',
+	mode: AppMode.production,
 };
 
 export class Tracker {
-	globals: TrackerGlobals;
-	localStorage: StorageStore;
-	context: BeaconContext;
-	isSending: number | undefined;
+	private mode = AppMode.production;
+	private globals: TrackerGlobals;
+	private localStorage: StorageStore;
+	private context: BeaconContext;
+	private isSending: number | undefined;
 
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
@@ -56,6 +62,10 @@ export class Tracker {
 		}
 
 		this.config = deepmerge(defaultConfig, config || {});
+
+		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode as AppMode;
+		}
 
 		this.globals = globals;
 
@@ -189,6 +199,14 @@ export class Tracker {
 		this.sendEvents();
 	}
 
+	public getGlobals(): TrackerGlobals {
+		return JSON.parse(JSON.stringify(this.globals));
+	}
+
+	public getContext(): BeaconContext {
+		return JSON.parse(JSON.stringify(this.context));
+	}
+
 	public retarget(): void {
 		this.targeters.forEach((target) => {
 			target.retarget();
@@ -205,10 +223,53 @@ export class Tracker {
 				pid: payload?.pid || undefined,
 			};
 
-			const beaconEvent = new BeaconEvent(event as BeaconPayload);
+			const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
+		},
+
+		error: (data: TrackErrorEvent, siteId?: string): BeaconEvent | undefined => {
+			if (!data?.stack && !data?.message) {
+				// no console log
+				return;
+			}
+
+			let context = this.context;
+			if (siteId) {
+				context = deepmerge(context, {
+					context: {
+						website: {
+							trackingCode: siteId,
+						},
+					},
+				});
+			}
+
+			const { userAgent, href, filename, stack, message, colno, lineno, errortimestamp } = data;
+
+			const payload = {
+				type: BeaconType.ERROR,
+				category: BeaconCategory.RUNTIME,
+				context,
+				event: {
+					userAgent: userAgent || navigator.userAgent,
+					href: href || window.location.href,
+					filename,
+					stack,
+					message,
+					colno,
+					lineno,
+					errortimestamp,
+				},
+			};
+
+			// prevent sending of errors when on localhost or CDN
+			if (!payload.event.href || payload.event.href.includes('//localhost') || payload.event.href.includes('//snapui.searchspring.io/')) {
+				return;
+			}
+
+			return this.track.event(payload);
 		},
 
 		shopper: {
@@ -244,7 +305,10 @@ export class Tracker {
 						type: BeaconType.LOGIN,
 						category: BeaconCategory.PERSONALIZATION,
 						context,
-						event: {},
+						event: {
+							userId: this.context.userId,
+							shopperId: data.id,
+						},
 					};
 					return this.track.event(payload);
 				}
@@ -455,17 +519,25 @@ export class Tracker {
 		},
 	};
 
+	updateContext = (key: keyof BeaconContext, value: any) => {
+		if (value) {
+			this.context[key] = value;
+		}
+	};
+
 	getUserId = (): string | undefined | null => {
 		let userId;
 		try {
-			if (getFlags().storage()) userId = window.localStorage.getItem(USERID_COOKIE_NAME);
+			// use cookies if available, fallback to localstorage
 			if (getFlags().cookies()) {
-				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
+				userId = cookies.get(LEGACY_USERID_COOKIE_NAME) || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-			} else if (!userId && getFlags().storage()) {
-				// if cookies are disabled, use localStorage instead
-				userId = uuidv4();
+				cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+			} else if (getFlags().storage()) {
+				userId = window.localStorage.getItem(USERID_COOKIE_NAME) || uuidv4();
 				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
+			} else {
+				throw 'unsupported features';
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
@@ -612,6 +684,10 @@ export class Tracker {
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
+		if (this.mode !== AppMode.production) {
+			return;
+		}
+
 		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {

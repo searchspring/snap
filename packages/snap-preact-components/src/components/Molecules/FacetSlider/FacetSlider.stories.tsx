@@ -4,8 +4,29 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
-import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
+import type { RangeFacet } from '@searchspring/snap-store-mobx';
+
+// unfortunatley we have to hardcode the searchresponse data here rather than use the Snap-Shared
+// mockdata due to issues with storybook being unable to bundle MockData due to it using fs
+const sliderFacetMock = {
+	field: 'price',
+	label: 'Price',
+	type: 'range',
+	display: 'slider',
+	filtered: false,
+	collapsed: false,
+	range: {
+		low: 0,
+		high: 120,
+	},
+	active: {
+		low: 0,
+		high: 120,
+	},
+	step: 1,
+	formatValue: '$%01.2f',
+};
 
 export default {
 	title: `Molecules/FacetSlider`,
@@ -21,7 +42,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -145,6 +166,4 @@ export default {
 	},
 };
 
-const Template = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
-
-export const Price = Template.bind({});
+export const Price = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock as RangeFacet} />;

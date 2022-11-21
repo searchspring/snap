@@ -110,6 +110,16 @@ describe('search request search transform', () => {
 
 		expect(params.redirectResponse).toEqual('full');
 	});
+
+	it('generates trimmed fallbackQuery parameter', () => {
+		const params = transformSearchRequest.search({
+			search: {
+				fallbackQuery: ' a fallback query ',
+			},
+		});
+
+		expect(params.fallbackQuery).toEqual('a fallback query');
+	});
 });
 
 describe('search request filter transform', () => {
@@ -271,6 +281,37 @@ describe('search request merchandising transform', () => {
 		});
 
 		expect(params).toEqual({ tag: ['merch.segment/some-segment'], disableMerchandising: true });
+	});
+
+	it('can disable intellisuggest elevations', () => {
+		const params = transformSearchRequest.merchandising({
+			merchandising: {
+				intellisuggest: false,
+			},
+		});
+
+		expect(params).toEqual({ intellisuggest: false });
+	});
+
+	it('can disable intellisuggest elevations even if merchandising is disabled', () => {
+		const params = transformSearchRequest.merchandising({
+			merchandising: {
+				disabled: true,
+				intellisuggest: false,
+			},
+		});
+
+		expect(params).toEqual({ disableMerchandising: true, intellisuggest: false });
+	});
+
+	it('can disable inlineBanners', () => {
+		const params = transformSearchRequest.merchandising({
+			merchandising: {
+				disableInlineBanners: true,
+			},
+		});
+
+		expect(params).toEqual({ disableInlineBanners: true });
 	});
 });
 

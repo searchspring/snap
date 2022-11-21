@@ -1,6 +1,6 @@
-import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
-import { hashParams } from '../utils/hashParams';
-import { charsParams } from '@searchspring/snap-toolbox';
+import { API, ApiConfiguration } from './Abstract';
+import { HTTPHeaders } from '../../types';
+import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
 
@@ -56,18 +56,8 @@ export class RecommendAPI extends API {
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		let { tags, limits, categories, ...otherParams } = parameters;
 
-		const getKey = (parameters: RecommendRequestModel) => {
-			let key = hashParams(parameters as RecommendRequestModel);
-			if ('batched' in parameters) {
-				if (parameters.batched) {
-					key = parameters.siteId;
-				}
-			}
-			return key;
-		};
-
-		// set up batch keys and deferred promises
-		const key = getKey(otherParams as RecommendRequestModel);
+		// set up batch key and deferred promises
+		const key = parameters.batched ? parameters.siteId : `${Math.random()}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
 		const deferred = new Deferred();
 
@@ -109,6 +99,10 @@ export class RecommendAPI extends API {
 			});
 
 			try {
+				if (this.configuration.mode == AppMode.development) {
+					batch.request.test = true;
+				}
+
 				let response: RecommendResponseModel;
 				if (charsParams(batch.request) > 1024) {
 					if (batch.request['product']) {

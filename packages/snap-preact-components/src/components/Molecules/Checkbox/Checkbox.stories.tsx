@@ -22,7 +22,7 @@ export default {
 	},
 	argTypes: {
 		checked: {
-			description: 'Checkbox is checked (managed state)',
+			description: 'Checkbox is checked (externally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -87,7 +87,7 @@ export default {
 			control: { type: 'color' },
 		},
 		startChecked: {
-			description: 'Checkbox is checked initially(managed state)',
+			description: 'Checkbox is checked initially (internally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -119,17 +119,15 @@ export default {
 	},
 };
 
-const Template = (args: CheckboxProps) => <Checkbox {...args} />;
+export const Default = (args: CheckboxProps) => <Checkbox {...args} />;
 
-export const Default = Template.bind({});
-
-export const Disabled = Template.bind({});
+export const Disabled = (args: CheckboxProps) => <Checkbox {...args} />;
 Disabled.args = {
 	checked: true,
 	disabled: true,
 };
 
-export const Native = Template.bind({});
+export const Native = (args: CheckboxProps) => <Checkbox {...args} />;
 Native.args = {
 	native: true,
 };

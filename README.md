@@ -76,7 +76,7 @@ npm run cypress
 ```
 
 ## Clean
-Removes all package and root `node_modules` directories and package-lock.json
+Removes all package and root `node_modules` directories and package-lock.json; additionally removes generated documentation and test coverage data.
 ```shell
 npm run clean
 ```

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -7,12 +7,12 @@ import classnames from 'classnames';
 
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -32,16 +32,17 @@ const CSS = {
 		}),
 };
 
+const buttonClass = 'ss__slideout__button';
+
 export function Slideout(properties: SlideoutProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
 	const props: SlideoutProps = {
 		// default props
 		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: 'click me',
+		buttonContent: <div className={buttonClass}>click me</div>,
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme
@@ -51,7 +52,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
+	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, buttonContent, disableStyles, className, style } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -66,48 +67,78 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				transitionSpeed,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
 	// state
-	const [isActive, setActive] = useState(active);
+	const [isActive, setActive] = useState(Boolean(active));
 	const toggleActive = () => {
 		setActive(!isActive);
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
-	const isVisible = useMediaQuery(displayAt, () => {
+
+	let isVisible = useMediaQuery(displayAt!, () => {
 		document.body.style.overflow = '';
 	});
+
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		isVisible && (
-			<CacheProvider>
-				{buttonContent && (
-					<div className="ss__slideout__button" onClick={() => toggleActive()}>
-						{buttonContent}
-					</div>
-				)}
 
-				<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-					{cloneWithProps(children, { toggleActive, active: isActive })}
-				</div>
-				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
-			</CacheProvider>
-		)
+	return isVisible ? (
+		<CacheProvider>
+			<ButtonContent content={buttonContent} toggleActive={toggleActive} />
+
+			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
+				{cloneWithProps(children, { toggleActive, active: isActive })}
+			</div>
+			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 
+const ButtonContent = (props: { content: string | JSX.Element | undefined; toggleActive: () => void }): JSX.Element => {
+	const { content, toggleActive } = props;
+
+	if (content && typeof content == 'string') {
+		return (
+			<div className={buttonClass} onClick={() => toggleActive()}>
+				{content}
+			</div>
+		);
+	} else if (content && typeof content == 'object') {
+		let clone = cloneWithProps(content, {
+			onClick: () => toggleActive(),
+		});
+
+		if (clone.props.class || clone.props.className) {
+			// check if class
+			if (clone.props.class && clone.props.class.indexOf(buttonClass) < 0) {
+				clone.props.class = `${clone.props.class} ${buttonClass}`;
+			}
+			// check if classname
+			if (clone.props.className && clone.props.className.indexOf(buttonClass) < 0) {
+				clone.props.className = `${clone.props.className} ${buttonClass}`;
+			}
+		} else {
+			clone.props.className = clone.props.class = buttonClass;
+		}
+
+		return clone;
+	} else return <></>;
+};
+
 export interface SlideoutProps extends ComponentProps {
-	children?: JSX.Element;
-	active: boolean;
+	children?: ComponentChildren;
+	active?: boolean;
 	buttonContent?: string | JSX.Element;
 	width?: string;
 	displayAt?: string;

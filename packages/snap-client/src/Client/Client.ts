@@ -1,3 +1,4 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { HybridAPI, SuggestAPI, RecommendAPI, ApiConfiguration } from './apis';
 
 import type {
@@ -9,6 +10,7 @@ import type {
 	RecommendRequestModel,
 	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
+	GenericGlobals,
 } from '../types';
 
 import type {
@@ -23,6 +25,7 @@ import type {
 import deepmerge from 'deepmerge';
 
 const defaultConfig: ClientConfig = {
+	mode: AppMode.production,
 	meta: {
 		cache: {
 			purgeable: false,
@@ -56,6 +59,7 @@ const defaultConfig: ClientConfig = {
 };
 
 export class Client {
+	private mode = AppMode.production;
 	private globals: ClientGlobals;
 	private config: ClientConfig;
 	private requesters: {
@@ -75,41 +79,64 @@ export class Client {
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
 
+		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
+			this.mode = this.config.mode! as AppMode;
+		}
+
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.autocomplete?.api?.origin,
+					headers: this.config.autocomplete?.api?.headers,
 					cache: this.config.autocomplete?.cache,
-				})
+					globals: this.config.autocomplete?.globals,
+				}),
+				this.config.autocomplete?.requesters
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.meta?.api?.origin,
+					headers: this.config.meta?.api?.headers,
 					cache: this.config.meta?.cache,
+					globals: this.config.meta?.globals,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.recommend?.api?.origin,
+					headers: this.config.recommend?.api?.headers,
 					cache: this.config.recommend?.cache,
+					globals: this.config.recommend?.globals,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.search?.api?.origin,
+					headers: this.config.search?.api?.headers,
 					cache: this.config.search?.cache,
+					globals: this.config.search?.globals,
 				})
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.finder?.api?.origin,
+					headers: this.config.finder?.api?.headers,
 					cache: this.config.finder?.cache,
+					globals: this.config.finder?.globals,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.suggest?.api?.origin,
+					headers: this.config.suggest?.api?.headers,
 					cache: this.config.suggest?.cache,
+					globals: this.config.suggest?.globals,
 				})
 			),
 		};

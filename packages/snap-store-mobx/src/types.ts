@@ -21,6 +21,7 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
+			restorePosition?: boolean;
 		};
 	};
 };
@@ -29,6 +30,7 @@ export type FacetStoreConfig = {
 	trim?: boolean;
 	pinFiltered?: boolean;
 	storeRange?: boolean;
+	autoOpenActive?: boolean;
 };
 
 // Finder Config
@@ -55,8 +57,10 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	selector: string;
 	action?: string;
 	settings?: {
+		integratedSpellCorrection?: boolean;
 		initializeFromUrl?: boolean;
 		syncInputs?: boolean;
+		serializeForm?: boolean;
 		facets?: FacetStoreConfig & {
 			fields?: {
 				[field: string]: FacetStoreConfig;

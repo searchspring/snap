@@ -1,3 +1,4 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
 
 export type TrackerGlobals = {
@@ -5,7 +6,9 @@ export type TrackerGlobals = {
 };
 
 export type TrackerConfig = {
-	id: string;
+	id?: string;
+	framework?: string;
+	mode?: keyof typeof AppMode | AppMode;
 };
 
 export type BeaconPayload = {
@@ -31,6 +34,7 @@ export enum BeaconType {
 	ORDER = 'transaction',
 	LOGIN = 'login',
 	CLICK = 'click',
+	ERROR = 'error',
 	CUSTOM = 'custom',
 
 	/** For Profiles Recommendations */
@@ -51,6 +55,7 @@ export enum BeaconCategory {
 	PERSONALIZATION = 'searchspring.personalization',
 	RECOMMENDATIONS = 'searchspring.recommendations.user-interactions',
 	INTERACTION = 'searchspring.user-interactions',
+	RUNTIME = 'searchspring.js.runtime',
 	CUSTOM = 'custom',
 }
 
@@ -62,17 +67,32 @@ export interface BeaconContext {
 	website: {
 		trackingCode: string;
 	};
+	attribution?: {
+		type?: string;
+		id?: string;
+	};
 }
 
 export interface BeaconMeta {
 	initiator: {
 		lib: string;
 		'lib.version': string;
+		'lib.framework': string;
 	};
 }
 
 export interface ShopperLoginEvent {
 	id: string;
+}
+export interface TrackErrorEvent {
+	userAgent?: string;
+	href?: string;
+	filename?: string;
+	stack?: string;
+	message?: string;
+	colno?: number;
+	lineno?: number;
+	errortimestamp?: number;
 }
 export interface ProductViewEvent {
 	sku?: string;
@@ -153,6 +173,7 @@ export type PreflightRequestModel = {
 
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
+	error: (data: TrackErrorEvent) => BeaconEvent | undefined;
 	shopper: {
 		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;
 	};

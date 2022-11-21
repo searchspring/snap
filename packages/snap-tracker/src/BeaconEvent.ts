@@ -3,11 +3,9 @@ import { version } from '@searchspring/snap-toolbox';
 
 import * as Types from './types';
 
-import { BeaconPayload } from './types';
-
 export class BeaconEvent {
-	type: any;
-	category: any;
+	type: Types.BeaconType;
+	category: Types.BeaconCategory;
 	context?: Types.BeaconContext;
 	meta?: Types.BeaconMeta;
 	event?:
@@ -21,7 +19,7 @@ export class BeaconEvent {
 	id?: string;
 	pid?: string | null;
 
-	constructor(payload: BeaconPayload) {
+	constructor(payload: Types.BeaconPayload, config: Types.TrackerConfig) {
 		this.type = payload.type;
 		this.category = payload.category;
 		this.context = payload.context;
@@ -34,6 +32,7 @@ export class BeaconEvent {
 			initiator: {
 				lib: 'searchspring/snap',
 				'lib.version': version,
+				'lib.framework': config.framework!,
 			},
 		};
 		this.id = uuidv4();

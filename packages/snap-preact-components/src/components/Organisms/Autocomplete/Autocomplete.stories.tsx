@@ -6,6 +6,7 @@ import { Autocomplete, AutocompleteProps } from './Autocomplete';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Autocomplete/readme.md';
+import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Autocomplete`,
@@ -21,7 +22,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -51,6 +52,16 @@ export default {
 			table: {
 				type: {
 					summary: 'Autocomplete controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
+		input: {
+			description: 'input element reference',
+			type: { required: true },
+			table: {
+				type: {
+					summary: 'Element or String as CSS Selector',
 				},
 			},
 			control: { type: 'none' },
@@ -230,6 +241,22 @@ export default {
 				},
 			},
 		},
+		resultsSlot: {
+			description: 'Slot for custom results component & title.',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		noResultsSlot: {
+			description: 'Slot for custom no-results component.',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		breakpoints: {
 			description: 'Breakpoints options object',
 			table: {
@@ -276,7 +303,7 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
+export const Default = (args: AutocompleteProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
@@ -284,7 +311,6 @@ const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
 	return <Autocomplete {...args} controller={controller} input={controller?.config.selector} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => ({
 		controller: await snapInstance,

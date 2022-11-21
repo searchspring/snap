@@ -49,6 +49,7 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 		q?: string;
 		rq?: string;
 		originalQuery?: string;
+		fallbackQuery?: string;
 		redirectResponse?: string;
 	} = {};
 
@@ -62,6 +63,10 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 
 	if (reqSearch.originalQuery) {
 		search.originalQuery = reqSearch.originalQuery.trim();
+	}
+
+	if (reqSearch.fallbackQuery) {
+		search.fallbackQuery = reqSearch.fallbackQuery.trim();
 	}
 
 	if (reqSearch.redirectResponse) {
@@ -113,6 +118,8 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		disableMerchandising?: boolean;
 		tag?: string[];
 		'landing-page'?: string;
+		intellisuggest?: boolean;
+		disableInlineBanners?: boolean;
 	} = reqMerch.disabled ? { disableMerchandising: true } : {};
 
 	if (reqMerch.landingPage) {
@@ -123,6 +130,14 @@ transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 		merch['tag'] = reqMerch.segments.map((segment) => {
 			return `merch.segment/${segment}`;
 		});
+	}
+
+	if (typeof reqMerch.intellisuggest == 'boolean') {
+		merch['intellisuggest'] = reqMerch.intellisuggest;
+	}
+
+	if (reqMerch.disableInlineBanners) {
+		merch['disableInlineBanners'] = reqMerch.disableInlineBanners;
 	}
 
 	return merch;
@@ -186,6 +201,8 @@ transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	const params: {
 		userId?: string;
 		domain?: string;
+		sessionId?: string;
+		pageLoadId?: string;
 	} = {};
 
 	if (reqTracking.userId) {
@@ -193,6 +210,12 @@ transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	}
 	if (reqTracking.domain) {
 		params.domain = reqTracking.domain;
+	}
+	if (reqTracking.sessionId) {
+		params.sessionId = reqTracking.sessionId;
+	}
+	if (reqTracking.pageLoadId) {
+		params.pageLoadId = reqTracking.pageLoadId;
 	}
 
 	return params;

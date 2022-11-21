@@ -29,6 +29,7 @@ export type UrlState = {
 	query?: string;
 	rq?: string;
 	oq?: string;
+	fallbackQuery?: string;
 	filter?: UrlStateFilter;
 	sort?: UrlStateSort | Array<UrlStateSort>;
 	tag?: string;
@@ -48,8 +49,12 @@ export interface Translator {
 }
 
 export interface TranslatorConfig {
-	queryParameter?: string;
 	urlRoot?: string;
+	settings?: {
+		serializeUrlRoot?: boolean;
+		[any: string]: unknown;
+	};
+	[any: string]: unknown;
 }
 
 export enum ParamLocationType {

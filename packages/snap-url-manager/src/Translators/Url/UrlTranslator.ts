@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { UrlState, Translator, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
+import { UrlState, Translator, TranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
 
 type UrlParameter = {
 	key: Array<string>;
@@ -26,6 +26,7 @@ export type CoreMap = {
 	pageSize: MapOptions;
 	sort: MapOptions;
 	filter: MapOptions;
+	fallbackQuery: MapOptions;
 };
 
 type CustomMap = {
@@ -37,7 +38,7 @@ export type UrlTranslatorParametersConfig = {
 	custom: CustomMap;
 };
 
-type UrlTranslatorConfigFull = {
+type UrlTranslatorConfigFull = TranslatorConfig & {
 	urlRoot: string;
 	settings: UrlTranslatorSettingsConfig;
 	parameters: UrlTranslatorParametersConfig;
@@ -49,7 +50,7 @@ export type UrlTranslatorSettingsConfig = {
 	corePrefix: string;
 	coreType?: keyof typeof ParamLocationType;
 	customType: keyof typeof ParamLocationType;
-	rootParams: boolean;
+	serializeUrlRoot: boolean;
 };
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
@@ -58,8 +59,8 @@ const defaultConfig: UrlTranslatorConfigFull = {
 	urlRoot: '',
 	settings: {
 		corePrefix: '',
-		customType: ParamLocationType.hash,
-		rootParams: true,
+		customType: ParamLocationType.query,
+		serializeUrlRoot: true,
 	},
 	parameters: {
 		core: {
@@ -71,18 +72,19 @@ const defaultConfig: UrlTranslatorConfigFull = {
 			pageSize: { name: 'pageSize', type: ParamLocationType.hash },
 			sort: { name: 'sort', type: ParamLocationType.hash },
 			filter: { name: 'filter', type: ParamLocationType.hash },
+			fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 		},
 		custom: {},
 	},
 };
 
-const CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
+const CORE_FIELDS = ['query', 'oq', 'fallbackQuery', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
 
 export class UrlTranslator implements Translator {
 	protected config: UrlTranslatorConfigFull;
 	protected reverseMapping: Record<string, string> = {};
 
-	constructor(config?: DeepPartial<UrlTranslatorConfigFull>) {
+	constructor(config?: UrlTranslatorConfig) {
 		this.config = deepmerge(defaultConfig, (config as UrlTranslatorConfigFull) || {});
 
 		Object.keys(this.config.parameters.core).forEach((param: string) => {
@@ -363,49 +365,45 @@ export class UrlTranslator implements Translator {
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
 			? this.config.urlRoot.split('#')[0]
-			: this.config.urlRoot;
+			: this.config.urlRoot || window.location.pathname;
 
-		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
-		const stateParams = this.stateToParams(state);
-		const params = [...rootUrlParams, ...stateParams];
+		const params = this.stateToParams(state);
 		const queryParams = params.filter((p) => p.type == ParamLocationType.query);
 		const hashParams = params.filter((p) => p.type == ParamLocationType.hash);
 
-		const paramString =
-			(queryParams.length
-				? '?' +
-				  queryParams
-						.map((param) => {
-							const keyString = encodeURIComponent(param.key.join('.'));
-							const valueString = param.value ? '=' + encodeURIComponent(param.value) : '';
-							return keyString + valueString;
-						})
-						.join('&')
-				: this.config.urlRoot
-				? ''
-				: window.location.pathname) +
-			(hashParams.length
-				? '#/' +
-				  hashParams
-						.map((param) => {
-							const keyString = param.key.map((k) => encodeHashComponent(k)).join(':');
-							const valueString = param.value ? ':' + encodeHashComponent(param.value) : '';
-							return keyString + valueString;
-						})
-						.join('/')
-				: '');
+		const queryParamString = queryParams.length
+			? '?' +
+			  queryParams
+					.map((param) => {
+						const keyString = encodeURIComponent(param.key.join('.'));
+						const valueString = param.value ? '=' + encodeURIComponent(param.value) : '';
+						return keyString + valueString;
+					})
+					.join('&')
+			: '';
 
-		return `${root}${paramString}`;
+		const hashParamString = hashParams.length
+			? '#/' +
+			  hashParams
+					.map((param) => {
+						const keyString = param.key.map((k) => encodeHashComponent(k)).join(':');
+						const valueString = param.value ? ':' + encodeHashComponent(param.value) : '';
+						return keyString + valueString;
+					})
+					.join('/')
+			: '';
+
+		return `${root}${queryParamString}${hashParamString}`;
 	}
 
 	// encode state into params
 
 	protected stateToParams(state: UrlState): Array<UrlParameter> {
 		return [
+			...this.encodeOther(state),
 			...this.encodeCoreOther(state, ['filter', 'sort']),
 			...this.encodeCoreFilters(state),
 			...this.encodeCoreSorts(state),
-			...this.encodeOther(state),
 		];
 	}
 

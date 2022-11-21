@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { Client } from './Client';
 import type { ClientConfig } from '../types';
 import { MockData } from '@searchspring/snap-shared';
+import { AppMode } from '@searchspring/snap-toolbox';
 
 const mockData = new MockData();
 
@@ -30,6 +31,26 @@ describe('Snap Client', () => {
 		expect(() => {
 			new Client({ siteId: '8uyt2m' });
 		}).not.toThrow();
+	});
+
+	it('instantiates with a default config', () => {
+		const client = new Client({ siteId: '8uyt2m' });
+
+		// @ts-ignore - verifying private property
+		expect(client.config.mode).toBe(AppMode.production);
+		// @ts-ignore - verifying private property
+		expect(client.config.meta!.cache!.purgeable!).toBe(false);
+		// @ts-ignore - verifying private property
+		expect(client.mode).toBe(AppMode.production);
+
+		// checking requesters mode
+		// @ts-ignore - verifying private property
+		for (const [name, requester] of Object.entries(client.requesters)) {
+			// @ts-ignore - verifying private property
+			expect(requester.mode).toBe(AppMode.production);
+			// @ts-ignore - verifying private property
+			expect(requester.cache.config.enabled).toBe(true);
+		}
 	});
 
 	it('can pass in a client config', () => {
@@ -75,6 +96,29 @@ describe('Snap Client', () => {
 		expect(clientConfig?.autocomplete?.api?.origin).toBe(config?.autocomplete?.api?.origin);
 		expect(clientConfig?.recommend?.api?.origin).toBe(config?.recommend?.api?.origin);
 		expect(clientConfig?.suggest?.api?.origin).toBe(config?.suggest?.api?.origin);
+	});
+
+	it('can set mode via client config', () => {
+		const config: ClientConfig = {
+			mode: 'development',
+		};
+
+		const client = new Client({ siteId: '8uyt2m' }, config);
+
+		// @ts-ignore - verifying private property
+		expect(client.config.mode).toBe(AppMode.development);
+
+		// @ts-ignore - verifying private property
+		expect(client.mode).toBe(AppMode.development);
+
+		// checking requesters mode
+		// @ts-ignore - verifying private property
+		for (const [name, requester] of Object.entries(client.requesters)) {
+			// @ts-ignore - verifying private property
+			expect(requester.mode).toBe(AppMode.development);
+			// @ts-ignore - verifying private property
+			expect(requester.cache.config.enabled).toBe(false);
+		}
 	});
 
 	it('has all the fetch functions defined', () => {

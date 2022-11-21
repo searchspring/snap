@@ -1,5 +1,12 @@
-import { API, HTTPHeaders } from './Abstract';
-import { SuggestRequestModel, SuggestResponseModelSuggestion, SuggestResponseModel, TrendingRequestModel, TrendingResponseModel } from '../../types';
+import { API } from './Abstract';
+import {
+	HTTPHeaders,
+	SuggestRequestModel,
+	SuggestResponseModelSuggestion,
+	SuggestResponseModel,
+	TrendingRequestModel,
+	TrendingResponseModel,
+} from '../../types';
 
 export class SuggestAPI extends API {
 	async getSuggest(queryParameters: SuggestRequestModel): Promise<SuggestResponseModel> {

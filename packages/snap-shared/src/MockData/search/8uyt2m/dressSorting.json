@@ -6,7 +6,6 @@
   "pagination": {
     "totalResults": 1298,
     "page": 1,
-    "defaultPageSize": 24,
     "pageSize": 30,
     "totalPages":44
   },
@@ -4122,6 +4121,7 @@
     }
   ],
   "merchandising": {
+    "campaigns": [],
     "redirect": "",
     "content": {
       "inline": [

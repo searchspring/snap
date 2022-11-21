@@ -15,6 +15,7 @@ export const INPUT_DELAY = 200;
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const PARAM_ORIGINAL_QUERY = 'oq';
+const PARAM_FALLBACK_QUERY = 'fallbackQuery';
 
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -22,8 +23,10 @@ const defaultConfig: AutocompleteControllerConfig = {
 	action: '',
 	globals: {},
 	settings: {
+		integratedSpellCorrection: false,
 		initializeFromUrl: true,
 		syncInputs: true,
+		serializeForm: false,
 		facets: {
 			trim: true,
 			pinFiltered: true,
@@ -112,9 +115,20 @@ export class AutocompleteController extends AbstractController {
 		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals!);
 
 		const userId = this.tracker.getUserId();
+		const sessionId = this.tracker.getContext().sessionId;
+		const pageLoadId = this.tracker.getContext().pageLoadId;
+		params.tracking = params.tracking || {};
+
+		params.tracking.domain = window.location.href;
+
 		if (userId) {
-			params.tracking = params.tracking || {};
 			params.tracking.userId = userId;
+		}
+		if (sessionId) {
+			params.tracking.sessionId = sessionId;
+		}
+		if (pageLoadId) {
+			params.tracking!.pageLoadId = pageLoadId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
@@ -205,8 +219,13 @@ export class AutocompleteController extends AbstractController {
 							await timeout(INPUT_DELAY);
 						}
 
-						// use corrected query and originalQuery
-						if (this.store.search.originalQuery) {
+						if (this.config.settings!.integratedSpellCorrection) {
+							// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
+							if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
+								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+							}
+						} else if (this.store.search.originalQuery) {
+							// use corrected query and originalQuery
 							input.value = this.store.search.query?.string!;
 							actionUrl = actionUrl?.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 						}
@@ -263,7 +282,13 @@ export class AutocompleteController extends AbstractController {
 						await timeout(INPUT_DELAY);
 					}
 
-					if (this.store.search.originalQuery) {
+					if (this.config.settings!.integratedSpellCorrection) {
+						// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
+						if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
+							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+						}
+					} else if (this.store.search.originalQuery) {
+						// use corrected query and originalQuery
 						if (input) {
 							input.value = this.store.search.query?.string!;
 						}
@@ -289,6 +314,27 @@ export class AutocompleteController extends AbstractController {
 				}
 
 				form.submit();
+			},
+			formElementChange: (e: React.ChangeEvent<HTMLInputElement>): void => {
+				const input = e.target as HTMLInputElement;
+				const form = input?.form;
+				const searchInput = form?.querySelector(`input[${INPUT_ATTRIBUTE}]`);
+
+				if (form && searchInput && this.config.settings?.serializeForm) {
+					// get other form parameters (except the input)
+					const formParameters = getFormParameters(form, function (elem: HTMLInputElement) {
+						return elem != searchInput;
+					});
+
+					// set parameters as globals
+					this.store.setService('urlManager', this.store.services.urlManager.reset().withGlobals(formParameters));
+					this.store.reset();
+
+					// rebuild trending terms with new UrlManager settings
+					if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0) {
+						this.searchTrending();
+					}
+				}
 			},
 			keyUp: (e: KeyboardEvent): void => {
 				// ignore enter and escape keys
@@ -354,7 +400,11 @@ export class AutocompleteController extends AbstractController {
 			input.removeEventListener('keydown', this.handlers.input.enterKey);
 			input.removeEventListener('keydown', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
-			input.form?.removeEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+
+			if (input.form) {
+				input.form.removeEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				unbindFormParameters(input.form, this.handlers.input.formElementChange);
+			}
 		});
 		document.removeEventListener('click', this.handlers.document.click);
 	}
@@ -386,18 +436,31 @@ export class AutocompleteController extends AbstractController {
 			let formActionUrl: string | undefined;
 
 			if (this.config.action) {
-				formActionUrl = this.config.action;
 				input.addEventListener('keydown', this.handlers.input.enterKey);
+				formActionUrl = this.config.action;
 			} else if (form) {
-				formActionUrl = form.action;
 				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				formActionUrl = form.action || '';
+
+				if (this.config.settings?.serializeForm) {
+					bindFormParameters(form, this.handlers.input.formElementChange, function (elem: HTMLInputElement) {
+						return elem != input;
+					});
+
+					const formParameters = getFormParameters(form, function (elem: HTMLInputElement) {
+						return elem != input;
+					});
+
+					// set parameters as globals
+					this.store.setService('urlManager', this.urlManager.reset().withGlobals(formParameters));
+				}
 			}
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
 				this.store.setService(
 					'urlManager',
-					this.urlManager.withConfig((translatorConfig: any) => {
+					this.store.services.urlManager.withConfig((translatorConfig: any) => {
 						return {
 							...translatorConfig,
 							urlRoot: formActionUrl,
@@ -436,9 +499,11 @@ export class AutocompleteController extends AbstractController {
 
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
-
-			this.storage.set('terms', JSON.stringify(terms));
+			if (terms?.trending?.queries?.length) {
+				this.storage.set('terms', JSON.stringify(terms));
+			}
 		}
+
 		this.store.updateTrendingTerms(terms);
 	};
 
@@ -552,6 +617,7 @@ export class AutocompleteController extends AbstractController {
 						break;
 				}
 				this.store.loading = false;
+				this.handleError(err);
 			}
 		}
 	};
@@ -569,4 +635,58 @@ async function timeout(time: number): Promise<void> {
 	return new Promise((resolve) => {
 		window.setTimeout(resolve, time);
 	});
+}
+
+// for grabbing other parameters from the form and using them in UrlManager
+
+const INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+
+function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: string]: string | undefined } {
+	const parameters: { [formName: string]: string | undefined } = {};
+
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (typeof filterFn == 'function' && !filterFn(elem)) {
+				continue;
+			}
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				if ((elem.type != 'checkbox' && elem.type != 'radio') || elem.checked) {
+					parameters[elem.name] = elem.value;
+				}
+			}
+		}
+	}
+
+	return parameters;
+}
+
+function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void {
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (typeof filterFn == 'function' && !filterFn(elem)) {
+				continue;
+			}
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				elem.addEventListener('change', fn);
+			}
+		}
+	}
+}
+
+function unbindFormParameters(form: HTMLFormElement, fn: any): void {
+	if (typeof form == 'object' && form.nodeName == 'FORM') {
+		for (let i = form.elements.length - 1; i >= 0; i--) {
+			const elem = form.elements[i] as HTMLInputElement;
+
+			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+				elem.removeEventListener('change', fn);
+			}
+		}
+	}
 }

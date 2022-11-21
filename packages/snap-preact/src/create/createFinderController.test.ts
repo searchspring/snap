@@ -219,7 +219,7 @@ describe('createFinderController', () => {
 		});
 
 		it('creates an finder controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createFinderController(createConfig, { logger: customLogger });
 
@@ -234,6 +234,7 @@ describe('createFinderController', () => {
 
 			expect(controller).toBeDefined();
 			expect(controller.tracker).toBe(customTracker);
+			// @ts-ignore - private property access
 			expect(controller.tracker.globals.siteId).toBe('custom');
 		});
 	});

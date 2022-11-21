@@ -7,7 +7,6 @@
   "pagination": {
     "totalResults": 0,
     "page": 1,
-    "defaultPageSize": 24,
     "pageSize": 30,
     "totalPages":0
   },
@@ -15,6 +14,7 @@
   "results": [],
   "facets": [],
   "merchandising": {
+    "campaigns": [],
     "redirect": "",
     "content": {}
   }
