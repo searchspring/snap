@@ -108,26 +108,26 @@ const CSS = {
 								padding: '0 5px',
 							},
 						},
-
-						'& label.ss__facet-slider__handle__label': {
-							display: 'inline-block',
-							marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
-
-							'&.ss__facet-slider__handle__label--pinleft': {
-								left: '0px',
-							},
-							'&.ss__facet-slider__handle__label--pinright': {
-								right: '0px',
-							},
-							'&.ss__facet-slider__handle__label--sticky': {
-								position: 'absolute',
-								top: '-20px',
-								fontFamily: 'Roboto, Helvetica, Arial',
-								fontSize: '14px',
-								marginTop: '0px',
-							},
-						},
 					},
+				},
+			},
+
+			'& .ss__facet-slider__handle__label': {
+				display: 'inline-block',
+				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
+
+				'&.ss__facet-slider__handle__label--pinleft': {
+					left: '0px',
+				},
+				'&.ss__facet-slider__handle__label--pinright': {
+					right: '0px',
+				},
+				'&.ss__facet-slider__handle__label--sticky': {
+					position: 'absolute',
+					top: '-18px',
+					fontFamily: 'Roboto, Helvetica, Arial',
+					fontSize: '14px',
+					marginTop: '0px',
 				},
 			},
 
@@ -152,7 +152,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	const props: FacetSliderProps = {
 		// default props
-		tickSize: properties.facet?.step * 10 || 20,
+		tickSize: properties?.facet?.step ? properties.facet.step * 10 : 20,
 		stickyHandleLabel: true,
 		// global theme
 		...globalTheme?.components?.facetSlider,
@@ -187,33 +187,25 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize = Number(tickSize);
 	}
 
-	const ref = useRef([]);
-	const overlapRef = useRef(null);
-	const facetRef = useRef(null);
-	const facetEl = facetRef?.current?.getBoundingClientRect() || {};
-	const overlapEl = overlapRef?.current?.getBoundingClientRect() || {};
+	const ref = useRef<HTMLLabelElement[]>([]);
+	const overlapRef = useRef<HTMLLabelElement>(null);
+	const facetRef = useRef<HTMLDivElement>(null);
+	// const facetEl = facetRef?.current?.getBoundingClientRect();
+	// const overlapEl = overlapRef?.current?.getBoundingClientRect();
 
 	const [labelDOMRect, setLabelDOMRect] = useState({
 		min: new DOMRect(),
 		max: new DOMRect(),
 	});
 	const [isOverlapped, setOverlapped] = useState(false);
-	const onIntersection = (labels) => {
-		setLabelDOMRect({
-			min: labels[0].getBoundingClientRect(),
-			max: labels[1].getBoundingClientRect(),
-		}),
-			!(labelDOMRect.min.right < labelDOMRect.max.left || labelDOMRect.min.left > labelDOMRect.max.right)
-				? setOverlapped(true)
-				: setOverlapped(false);
-	};
+	const [isPinned, setPinned] = useState('');
 
 	const [overlapPosition, setOverlapPosition] = useState({
 		left: '',
 		right: '',
 	});
 
-	const debounce = (func, timeout = 200) => {
+	const debounce = (func: () => void, timeout = 200) => {
 		let timer;
 
 		return ((...args) => {
@@ -224,41 +216,91 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		})();
 	};
 
-	const calculate = (isOverlapped, handles) => {
-		const handleLeft = handles[0];
-		const handleLeftX = ((facet.range.high - (facet.range.high - handleLeft.value)) / facet.range.high) * 100;
+	const calculate = (handles: { value: number }[]) => {
+		const labels = ref.current;
 
-		const handleRight = handles[1];
-		const handleRightX = ((facet.range.high - (facet.range.high - handleRight.value)) / facet.range.high) * 100;
+		if (labels?.length > 1) {
+			// labels[0] and labels[1] can flip
+			// TOOD: need to add logic to determine which one is left and right based on left and right
 
-		const center = ((handleRightX - (handleRightX - handleLeftX) / 2) / 100) * 100;
+			const label0 = labels[0].getBoundingClientRect();
+			const label1 = labels[1].getBoundingClientRect();
 
-		let isOutOfBoundsRight = overlapEl.right >= facetEl.right;
-		let isOutOfBoundsLeft = overlapEl.left <= facetEl.left;
+			let minDomRect = label0;
+			let maxDomRect = label1;
+			if (label0.left > label1.left) {
+				minDomRect = label1;
+				maxDomRect = label0;
+				console.log('handles swapped...');
+			}
+			const facetEl = facetRef?.current?.getBoundingClientRect();
+			const overlapEl = overlapRef?.current?.getBoundingClientRect();
 
-		console.log('overlapEl.right', overlapEl.right);
-		console.log('facetEl.right', facetEl.right);
-		console.log('isOutOfBoundsRight', isOutOfBoundsRight);
-		console.log('isOverlapped', isOverlapped);
+			let overlap = false;
+			const overlapMin = minDomRect.right > maxDomRect.left;
+			const overlapMax = maxDomRect.left < minDomRect.right;
+			if (overlapMin || overlapMax) {
+				overlap = true;
+			}
 
-		if (isOverlapped) {
-			if (isOutOfBoundsRight) {
-				setOverlapPosition({
-					left: '',
-					right: '0px',
-				});
-			} else if (isOutOfBoundsLeft) {
-				setOverlapPosition({
-					left: '0px',
-					right: '',
-				});
-			} else {
-				setOverlapPosition({
-					...overlapPosition,
-					left: `calc(${center}% - (${overlapEl.width}px / 2))`,
-				});
+			console.log(minDomRect);
+			console.log(maxDomRect);
+			setOverlapped(overlap);
+			console.log('recalculated overlap', overlap);
+
+			if (facet?.range?.high && handles?.length > 1 && overlapEl && facetEl) {
+				console.log('overlapEl', overlapEl);
+				console.log('facetEl', facetEl);
+				const isOutOfBoundsRight = overlapEl.right > facetEl.right;
+				const isOutOfBoundsLeft = overlapEl.left < facetEl.left;
+
+				const handleLeft = handles[0];
+				const handleLeftX = ((facet.range.high - (facet.range.high - handleLeft.value)) / facet.range.high) * 100;
+
+				const handleRight = handles[1];
+				const handleRightX = ((facet.range.high - (facet.range.high - handleRight.value)) / facet.range.high) * 100;
+
+				const center = ((handleRightX - (handleRightX - handleLeftX) / 2) / 100) * 100;
+
+				// let isOutOfBoundsRight = overlapEl.right - 2 >= facetEl.right;
+				// let isOutOfBoundsLeft = overlapEl.left + 2 <= facetEl.left;
+
+				console.log('overlapEl.right', overlapEl.right);
+
+				// console.log('facetEl.right', facetEl.right);
+				console.log('isOutOfBoundsRight', isOutOfBoundsRight);
+				console.log('isOverlapped', isOverlapped);
+
+				if (overlap) {
+					if (isOutOfBoundsRight) {
+						// setOverlapPosition({
+						// 	left: '',
+						// 	right: '0px',
+						// });
+
+						setPinned('right');
+
+						// set opacaity to 0 on min-max label
+						// show new min-max label (width: 100%, text-justify left/right)
+					} else if (isOutOfBoundsLeft) {
+						setPinned('left');
+
+						// setOverlapPosition({
+						// 	left: '0px',
+						// 	right: '',
+						// });
+					} else {
+						setPinned('');
+					}
+					setOverlapPosition({
+						// ...overlapPosition,
+						right: '',
+						left: `calc(${center}% - (${overlapEl.width}px / 2))`,
+					});
+				}
 			}
 		}
+
 		// console.log("overlapEl.left", overlapEl.left);
 		// console.log("overlapEl.right", overlapEl.right);
 		// console.log("facetEl.left", facetEl.left);
@@ -278,7 +320,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		setValues([facet.active?.low, facet.active?.high]);
 	}
 
-	const { getTrackProps, ticks, segments, handles } = useRanger({
+	const {
+		getTrackProps,
+		ticks,
+		segments,
+		handles: unsortedHandles,
+	} = useRanger({
 		values: active as number[],
 		onChange: (val: number[]) => {
 			setActive(val);
@@ -294,13 +341,18 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		onDrag: (val: number[]) => {
 			setActive(val);
 			onDrag && onDrag(val);
-			debounce(() => calculate(isOverlapped, handles));
-			stickyHandleLabel && onIntersection(ref.current);
+			// stickyHandleLabel && onIntersection(ref.current);
+			stickyHandleLabel && calculate(handles);
+			// debounce(() => calculate(isOverlapped, handles));
 		},
 		min: facet.range?.low!,
 		max: facet.range?.high!,
 		stepSize: facet.step!,
 		tickSize: tickSize,
+	});
+
+	const handles = unsortedHandles.sort((handleA, handleB) => {
+		return handleA.value - handleB.value;
 	});
 
 	const styling: { css?: StylingCSS } = {};
@@ -322,6 +374,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	// do initial calculation
+	// calculate(isOverlapped, handles);
+	console.log('render isOverlapped', isOverlapped);
+	console.log('render operlapPos', overlapPosition);
+
 	return facet.range && facet.active && facet.step ? (
 		<CacheProvider>
 			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
@@ -335,7 +393,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 							))}
 
 						{segments.map(({ getSegmentProps }, index: number) => (
-							<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
+							<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} key={index} />
 						))}
 
 						{isOverlapped && (
@@ -343,13 +401,35 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 								className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
 								ref={overlapRef}
 								style={{
-									border: '1px solid',
+									// border: '1px solid',
 									position: 'absolute',
 									top: '-29px',
-									fontSize: '13px',
+									// fontFamily: 'Roboto, Helvetica, Arial',
+									// fontSize: '14px',
 									width: '100px',
-									color: 'initial',
+									// color: 'initial',
 									...overlapPosition,
+									opacity: isPinned ? '0' : '1',
+								}}
+							>
+								{handles.map(({ value, active, getHandleProps }, idx) => sprintf(facet.formatValue, value)).join(`${facet.formatSeparator}`)}
+							</label>
+						)}
+
+						{isOverlapped && isPinned && (
+							<label
+								className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
+								style={{
+									display: 'block',
+									// border: '1px solid blue',
+									width: 'calc(100% + 2rem)',
+									left: '-1rem',
+									position: 'absolute',
+									top: '-29px',
+									// fontFamily: 'Roboto, Helvetica, Arial',
+									// fontSize: '14px',
+									// @ts-ignore
+									textAlign: `${['left', 'right'].includes(isPinned) ? isPinned : ''}`,
 								}}
 							>
 								{handles.map(({ value, active, getHandleProps }, idx) => sprintf(facet.formatValue, value)).join(`${facet.formatSeparator}`)}
@@ -379,7 +459,9 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 													{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet?.range?.low },
 													{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high }
 												)}
-												ref={(el) => (ref.current[idx] = el)}
+												ref={(el) => {
+													if (el) return (ref.current[idx] = el);
+												}}
 												style={{
 													opacity: isOverlapped ? '0' : '1',
 												}}
