@@ -81,7 +81,7 @@ const CSS = {
 						whiteSpace: 'nowrap',
 						color: valueTextColor || 'initial',
 						fontWeight: 'normal',
-						transform: 'translateY(0) scale(0.9)',
+						transform: 'translateY(0)',
 						transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
 						position: 'relative',
 						cursor: 'pointer',
@@ -114,6 +114,10 @@ const CSS = {
 
 			'& .ss__facet-slider__handle__label': {
 				display: 'inline-block',
+				fontFamily: 'Roboto, Helvetica, Arial',
+				fontSize: '14px',
+				fontWeight: 400,
+				color: 'black',
 				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 
 				'&.ss__facet-slider__handle__label--pinleft': {
@@ -124,9 +128,7 @@ const CSS = {
 				},
 				'&.ss__facet-slider__handle__label--sticky': {
 					position: 'absolute',
-					top: '-18px',
-					fontFamily: 'Roboto, Helvetica, Arial',
-					fontSize: '14px',
+					top: '-17px',
 					marginTop: '0px',
 				},
 			},
@@ -401,13 +403,9 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 								className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
 								ref={overlapRef}
 								style={{
-									// border: '1px solid',
 									position: 'absolute',
 									top: '-29px',
-									// fontFamily: 'Roboto, Helvetica, Arial',
-									// fontSize: '14px',
 									width: '100px',
-									// color: 'initial',
 									...overlapPosition,
 									opacity: isPinned ? '0' : '1',
 								}}
@@ -421,13 +419,10 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 								className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
 								style={{
 									display: 'block',
-									// border: '1px solid blue',
 									width: 'calc(100% + 2rem)',
 									left: '-1rem',
 									position: 'absolute',
 									top: '-29px',
-									// fontFamily: 'Roboto, Helvetica, Arial',
-									// fontSize: '14px',
 									// @ts-ignore
 									textAlign: `${['left', 'right'].includes(isPinned) ? isPinned : ''}`,
 								}}
