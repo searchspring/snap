@@ -154,6 +154,7 @@ export class Snap {
 		[controllerConfigId: string]: Promise<Controllers>;
 	} = {};
 
+	public kill!: boolean;
 	public logger!: Logger;
 	public client!: Client;
 	public tracker!: Tracker;
@@ -163,17 +164,29 @@ export class Snap {
 	} = {};
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
-		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
+		if (!this.kill) {
+			return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
+		} else {
+			return Promise.reject(`Cannot getInstantiator ${id} - This is expected if using a branch param`);
+		}
 	};
 
 	public getController = (id: string): Promise<Controllers> => {
-		return this._controllerPromises[id] || Promise.reject(`getController could not find controller with id: ${id}`);
+		if (!this.kill) {
+			return this._controllerPromises[id] || Promise.reject(`getController could not find controller with id: ${id}`);
+		} else {
+			return Promise.reject(`Cannot getController ${id} - This is expected if using a branch param`);
+		}
 	};
 
 	public getControllers = (...controllerIds: string[]): Promise<Controllers[]> => {
-		const getControllerPromises: Promise<Controllers>[] = [];
-		controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
-		return Promise.all(getControllerPromises);
+		if (!this.kill) {
+			const getControllerPromises: Promise<Controllers>[] = [];
+			controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
+			return Promise.all(getControllerPromises);
+		} else {
+			return Promise.reject(`Cannot getControllers ${controllerIds} - This is expected if using a branch param`);
+		}
 	};
 
 	// exposed method used for creating controllers dynamically - calls _createController()
@@ -523,6 +536,7 @@ export class Snap {
 				);
 
 				// prevent further instantiation of config
+				this.kill = true;
 				return;
 			}
 		} catch (e) {
