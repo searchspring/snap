@@ -195,10 +195,10 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	// const facetEl = facetRef?.current?.getBoundingClientRect();
 	// const overlapEl = overlapRef?.current?.getBoundingClientRect();
 
-	const [labelDOMRect, setLabelDOMRect] = useState({
-		min: new DOMRect(),
-		max: new DOMRect(),
-	});
+	// const [labelDOMRect, setLabelDOMRect] = useState({
+	// 	min: new DOMRect(),
+	// 	max: new DOMRect(),
+	// });
 	const [isOverlapped, setOverlapped] = useState(false);
 	const [isPinned, setPinned] = useState('');
 
@@ -233,7 +233,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			if (label0.left > label1.left) {
 				minDomRect = label1;
 				maxDomRect = label0;
-				console.log('handles swapped...');
+				// console.log('handles swapped...');
 			}
 			const facetEl = facetRef?.current?.getBoundingClientRect();
 			const overlapEl = overlapRef?.current?.getBoundingClientRect();
@@ -242,19 +242,24 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			const overlapMin = minDomRect.right > maxDomRect.left;
 			const overlapMax = maxDomRect.left < minDomRect.right;
 			if (overlapMin || overlapMax) {
+				console.log('overlapMax', overlapMax);
+				console.log('overlapMin', overlapMin);
+
 				overlap = true;
 			}
 
-			console.log(minDomRect);
-			console.log(maxDomRect);
+			// console.log(minDomRect);
+			// console.log(maxDomRect);
 			setOverlapped(overlap);
-			console.log('recalculated overlap', overlap);
+			// console.log('recalculated overlap', overlap);
 
 			if (facet?.range?.high && handles?.length > 1 && overlapEl && facetEl) {
-				console.log('overlapEl', overlapEl);
-				console.log('facetEl', facetEl);
-				const isOutOfBoundsRight = overlapEl.right > facetEl.right;
-				const isOutOfBoundsLeft = overlapEl.left < facetEl.left;
+				// console.log('overlapEl right', overlapEl.right);
+				// console.log('facetEl right', facetEl.right);
+				// console.log('overlapEl left', overlapEl.left);
+				// console.log('facetEl left', facetEl.left);
+				const isOutOfBoundsRight = parseInt(`${overlapEl.right}`) > parseInt(`${facetEl.right}`);
+				const isOutOfBoundsLeft = parseInt(`${overlapEl.left}`) < parseInt(`${facetEl.left}`);
 
 				const handleLeft = handles[0];
 				const handleLeftX = ((facet.range.high - (facet.range.high - handleLeft.value)) / facet.range.high) * 100;
@@ -267,13 +272,15 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 				// let isOutOfBoundsRight = overlapEl.right - 2 >= facetEl.right;
 				// let isOutOfBoundsLeft = overlapEl.left + 2 <= facetEl.left;
 
-				console.log('overlapEl.right', overlapEl.right);
+				// console.log('overlapEl.right', overlapEl.right);
 
 				// console.log('facetEl.right', facetEl.right);
-				console.log('isOutOfBoundsRight', isOutOfBoundsRight);
+				// console.log('isOutOfBoundsRight', isOutOfBoundsRight);
+				// console.log('isOutOfBoundsleft', isOutOfBoundsLeft);
+
 				console.log('isOverlapped', isOverlapped);
 
-				if (overlap) {
+				if (isOverlapped) {
 					if (isOutOfBoundsRight) {
 						// setOverlapPosition({
 						// 	left: '',
@@ -281,11 +288,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 						// });
 
 						setPinned('right');
-
+						console.log('pinned right');
 						// set opacaity to 0 on min-max label
 						// show new min-max label (width: 100%, text-justify left/right)
 					} else if (isOutOfBoundsLeft) {
 						setPinned('left');
+						console.log('pinned left');
 
 						// setOverlapPosition({
 						// 	left: '0px',
@@ -293,13 +301,26 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 						// });
 					} else {
 						setPinned('');
+						console.log('pinned none');
 					}
 					setOverlapPosition({
 						// ...overlapPosition,
 						right: '',
 						left: `calc(${center}% - (${overlapEl.width}px / 2))`,
 					});
+				} else {
+					setPinned('');
+					console.log('pinned none');
 				}
+
+				console.log('x');
+				console.log('x');
+				console.log('x');
+				console.log('x');
+				console.log('x');
+				console.log('x');
+				console.log('x');
+				console.log('x');
 			}
 		}
 
@@ -341,11 +362,11 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			onChange && onChange(val);
 		},
 		onDrag: (val: number[]) => {
-			setActive(val);
 			onDrag && onDrag(val);
 			// stickyHandleLabel && onIntersection(ref.current);
 			stickyHandleLabel && calculate(handles);
-			// debounce(() => calculate(isOverlapped, handles));
+			// stickyHandleLabel && debounce(() => calculate(unsortedHandles), 50);
+			setActive(val);
 		},
 		min: facet.range?.low!,
 		max: facet.range?.high!,
@@ -379,13 +400,14 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	// do initial calculation
 	// calculate(isOverlapped, handles);
-	console.log('render isOverlapped', isOverlapped);
-	console.log('render operlapPos', overlapPosition);
+	// console.log('render isOverlapped', isOverlapped);
+	// console.log('render operlapPos', overlapPosition);
 
+	// calculate(handles);
 	return facet.range && facet.active && facet.step ? (
 		<CacheProvider>
 			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
-				<div ref={facetRef} style={{ border: '1px solid' }}>
+				<div ref={facetRef}>
 					<div className="ss__facet-slider__slider">
 						{showTicks &&
 							ticks.map(({ value, getTickProps }) => (
@@ -398,21 +420,19 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 							<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} key={index} />
 						))}
 
-						{isOverlapped && (
-							<label
-								className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
-								ref={overlapRef}
-								style={{
-									position: 'absolute',
-									top: '-29px',
-									width: '100px',
-									...overlapPosition,
-									opacity: isPinned ? '0' : '1',
-								}}
-							>
-								{handles.map(({ value, active, getHandleProps }, idx) => sprintf(facet.formatValue, value)).join(`${facet.formatSeparator}`)}
-							</label>
-						)}
+						<label
+							className={classnames('ss__facet-slider__overlap', 'ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky')}
+							ref={overlapRef}
+							style={{
+								position: 'absolute',
+								top: '-29px',
+								width: '100px',
+								...overlapPosition,
+								opacity: !isOverlapped || isPinned ? '0' : '1',
+							}}
+						>
+							{handles.map(({ value, active, getHandleProps }, idx) => sprintf(facet.formatValue, value)).join(`${facet.formatSeparator}`)}
+						</label>
 
 						{isOverlapped && isPinned && (
 							<label
