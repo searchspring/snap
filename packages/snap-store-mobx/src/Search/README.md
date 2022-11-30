@@ -186,6 +186,9 @@ Contains the facet label as configured in the Searchspring Management Console.
 ### `storage` property
 This is a reference to the `StorageStore` instance that is used to store the current facet state for `collapse` and `overflow`; this preserves these states as additional API queries are made (think faceting, pagination, etc...). The `SearchStore` automatically manages this stored state.
 
+### `history` property
+This is a reference to the `HistoryStore` instance that is used to store the previously searched terms. 
+
 ### `step` property
 Only applicable to facets where `type` is `range`.
 

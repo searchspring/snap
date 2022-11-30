@@ -143,6 +143,39 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideTrending: {
+			defaultValue: false,
+			description: 'prevent trending terms from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		retainHistory: {
+			defaultValue: false,
+			description: 'allow history terms to render even when there is a query in the input',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		retainTrending: {
+			defaultValue: false,
+			description: 'allow trending terms to render even when there is a query in the input',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		horizontalTerms: {
 			defaultValue: false,
 			description: 'display terms horizontally, (not required if vertical prop is true)',

@@ -409,10 +409,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	console.log('historyTitle', historyTitle);
-	console.log('showhistory', showHistory);
-	console.log('hidehistory', hideHistory);
-
 	return visible ? (
 		<CacheProvider>
 			<div

@@ -153,6 +153,13 @@ The `hideHistory` prop specifies if the historical terms within autocomplete sho
 <Autocomplete controller={controller} input={'#searchInput'} hideHistory={true} />
 ```
 
+### hideTrending
+The `hideTrending` prop specifies if the trending terms within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideTrending={true} />
+```
+
 ### hideFacets
 The `hideFacets` prop specifies if the facets within autocomplete should be rendered.
 
@@ -186,6 +193,20 @@ The `hideLink` prop specifies if the "see n results for keyword" text within aut
 
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} hideLink={true} />
+```
+
+### retainTrending
+The `retainTrending` prop specifies if the trending terms within autocomplete should be rendered when there is a query.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} retainTrending={true} />
+```
+
+### retainHistory
+The `retainHistory` prop specifies if the trending terms within autocomplete should be rendered when there is a query. 
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} retainHistory={true} />
 ```
 
 ### breakpoints
