@@ -371,7 +371,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		(terms.length > 0 || trending?.length > 0 || history?.length > 0 || (state.input && controller.store.loaded));
 
 	let showTrending = false;
-	if (retainTrending || (!results.length && !state.input && trending?.length)) {
+	if (trending?.length && (retainTrending || (!results.length && !state.input))) {
 		showTrending = true;
 	} else if (trending?.length && !terms.length) {
 		// has results and trending -> show trending terms while term load
@@ -379,7 +379,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	let showHistory = false;
-	if (retainHistory || (!results.length && !state.input && history?.length)) {
+	if (history?.length && (retainHistory || (!results.length && !state.input))) {
 		showHistory = true;
 	} else if (history?.length && !terms.length) {
 		// has results and trending -> show trending terms while term load
@@ -437,7 +437,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								{terms.length > 0 ? (
 									<div className="ss__autocomplete__terms__suggestions">
 										{termsTitle ? (
-											<div className="ss__autocomplete__title ss__autocomplete__title--terms">
+											<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
 												<h5>{termsTitle}</h5>
 											</div>
 										) : null}
@@ -497,10 +497,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{historyTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options ss__autocomplete__history__options">
+										<div className="ss__autocomplete__terms__options">
 											{history.map((term) => (
 												<div
-													className={classnames('ss__autocomplete__terms__option ss__autocomplete__history__option', {
+													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
 													})}
 												>

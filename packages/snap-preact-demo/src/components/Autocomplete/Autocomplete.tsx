@@ -47,15 +47,6 @@ export class Autocomplete extends Component<AutocompleteProps> {
 			},
 		};
 
-		return (
-			<LibraryAutocomplete
-				controller={controller}
-				input={controller.config.selector}
-				breakpoints={breakpoints}
-				theme={theme}
-				retainHistory
-				retainTrending
-			/>
-		);
+		return <LibraryAutocomplete controller={controller} input={controller.config.selector} breakpoints={breakpoints} theme={theme} />;
 	}
 }

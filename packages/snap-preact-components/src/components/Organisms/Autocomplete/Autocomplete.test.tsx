@@ -217,19 +217,25 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			hideTerms: true,
 			hideFacets: true,
+			hideTrending: true,
 			hideContent: true,
 			hideLink: true,
 			hideHistory: true,
+			retainHistory: true,
+			retainTrending: true,
 		};
 
 		const otherArgs = {
 			controller,
 			input: controller.config.selector,
 			hideTerms: false,
+			hideTrending: false,
 			hideFacets: false,
 			hideContent: false,
 			hideLink: false,
 			hideHistory: false,
+			retainHistory: true,
+			retainTrending: true,
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -251,8 +257,11 @@ describe('Autocomplete Component', () => {
 			let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
 			expect(link).not.toBeInTheDocument();
 
-			let history = renderedWithout.container.querySelector('.ss__autocomplete__history__options');
+			let history = renderedWithout.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
 			expect(history).not.toBeInTheDocument();
+
+			let trending = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			expect(trending).not.toBeInTheDocument();
 		});
 
 		let renderedWith = render(<Autocomplete {...otherArgs} />, { container });
@@ -270,8 +279,11 @@ describe('Autocomplete Component', () => {
 			let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
 			expect(link2).toBeInTheDocument();
 
-			let history2 = renderedWith.container.querySelector('.ss__autocomplete__history__options');
+			let history2 = renderedWith.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
 			expect(history2).toBeInTheDocument();
+
+			let trending2 = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			expect(trending2).toBeInTheDocument();
 		});
 	});
 
@@ -312,7 +324,7 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it.only('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
+	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
 		let mockStorage: {
 			[key: string]: string;
 		} = {};
@@ -358,6 +370,87 @@ describe('Autocomplete Component', () => {
 			expect(historyTitle).toHaveTextContent(args.historyTitle);
 
 			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+	});
+
+	it('can use retainhistory && retaintrending false', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+
+		const args = {
+			controller,
+			retainHistory: false,
+			retainTrending: false,
+			historyTitle: 'custom histoy Title',
+			trendingTitle: 'custom trending Title',
+		};
+
+		input.focus();
+
+		let rendered = render(<Autocomplete input={input} {...args} />, { container });
+
+		await waitFor(() => {
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+
+		input.focus();
+		userEvent.keyboard('dress');
+
+		await waitFor(() => {
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).not.toBeInTheDocument();
+
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).not.toBeInTheDocument();
+		});
+
+		const args2 = {
+			controller,
+			input: controller.config.selector,
+			retainHistory: true,
+			retainTrending: true,
+			historyTitle: 'custom histoy Title',
+			trendingTitle: 'custom trending Title',
+		};
+
+		input.value = '';
+		input.focus();
+		let rendered2 = render(<Autocomplete {...args2} />, { container });
+
+		await waitFor(() => {
+			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+
+		input.focus();
+		userEvent.keyboard('dress');
+
+		rendered2 = render(<Autocomplete {...args2} />, { container });
+		await waitFor(() => {
+			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 	});
