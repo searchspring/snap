@@ -98,6 +98,9 @@ let config: SnapConfig = {
 						trending: {
 							limit: 5,
 						},
+						history: {
+							limit: 5,
+						},
 					},
 					globals: {
 						search: {

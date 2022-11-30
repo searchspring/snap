@@ -11,7 +11,14 @@ import {
 	SearchHistoryStore,
 } from '../Search/Stores';
 import { StorageStore, StorageType } from '../Storage/StorageStore';
-import { AutocompleteStateStore, AutocompleteTermStore, AutocompleteQueryStore, AutocompleteFacetStore, AutocompleteTrendingStore } from './Stores';
+import {
+	AutocompleteStateStore,
+	AutocompleteTermStore,
+	AutocompleteQueryStore,
+	AutocompleteFacetStore,
+	AutocompleteTrendingStore,
+	AutocompleteHistoryStore,
+} from './Stores';
 
 import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { TrendingResponseModel } from '@searchspring/snap-client';
@@ -30,9 +37,8 @@ export class AutocompleteStore extends AbstractStore {
 	public sorting!: SearchSortingStore;
 	public state: AutocompleteStateStore;
 	public storage: StorageStore;
-	public localStorage: StorageStore;
 	public trending: AutocompleteTrendingStore;
-	public history?: SearchHistoryStore;
+	public history: AutocompleteHistoryStore;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
 		super(config);
@@ -47,21 +53,10 @@ export class AutocompleteStore extends AbstractStore {
 
 		//note we want facets stored in memory (default storageStore type)
 		this.storage = new StorageStore();
-		//but we want history stored in local storage
-		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
-			key: `ss-controller-${this.config.id}`,
-		});
 
 		this.trending = [];
-		if (config.settings?.history?.limit) {
-			this.history = new SearchHistoryStore(this.services, { siteId: config.globals?.siteId! }, this.state);
-
-			//todo maybe this limit could be passing in above? ^
-			if (this.history.terms.length > config.settings.history.limit) {
-				this.history.terms = this.history.terms.slice(0, config.settings.history.limit);
-			}
-		}
+		this.history = [];
+		this.initHistory();
 
 		this.reset();
 
@@ -81,9 +76,23 @@ export class AutocompleteStore extends AbstractStore {
 	public reset(): void {
 		this.state.reset();
 		this.update();
-		this.resetTrending();
-		this.resetHistory();
 		this.resetTerms();
+	}
+
+	public initHistory(): void {
+		const limit = (this.config as AutocompleteStoreConfig).settings?.history?.limit;
+		if (limit) {
+			const historyStore = new SearchHistoryStore({ siteId: this.config.globals?.siteId! }, this.services);
+
+			this.history = new AutocompleteHistoryStore(
+				this.services,
+				historyStore.getStoredData(limit),
+				() => {
+					this.resetTerms();
+				},
+				this.state
+			);
+		}
 	}
 
 	public resetTrending(): void {
@@ -95,12 +104,18 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	public resetHistory(): void {
-		if (this.history && this.history.terms.length) {
-			this.history.resetHistory();
-		}
+		this.history.forEach((term) => {
+			term.active = false;
+		});
 	}
 
 	public resetTerms(): void {
+		this.resetSuggestions();
+		this.resetTrending();
+		this.resetHistory();
+	}
+
+	public resetSuggestions(): void {
 		this.terms?.forEach((term) => {
 			term.active = false;
 		});
@@ -144,7 +159,7 @@ export class AutocompleteStore extends AbstractStore {
 				data.autocomplete || {},
 				data.pagination || {},
 				() => {
-					this.resetTrending();
+					this.resetTerms();
 				},
 				this.state
 			);

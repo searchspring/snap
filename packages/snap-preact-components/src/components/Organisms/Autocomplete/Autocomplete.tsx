@@ -188,11 +188,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			rows: 1,
 			hideFacets: props.hideFacets || true,
 			vertical: props.vertical || true,
+			hideHistory: props.hideHistory || true,
+			hideTrending: props.hideTrending || true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
 			vertical: props.vertical || true,
+			hideHistory: props.hideHistory || true,
+			hideTrending: props.hideTrending || true,
 		},
 		768: {
 			columns: 2,
@@ -271,6 +275,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideBanners,
 		hideLink,
 		hideHistory,
+		hideTrending,
+		retainTrending,
+		retainHistory,
 		horizontalTerms,
 		vertical,
 		termsTitle,
@@ -347,7 +354,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state } = controller.store;
-	const history = controller.store.history?.terms || [];
+	const history = controller.store.history || [];
 
 	// you can pass in a selector or the actual input element,
 	// if its the selector, we need to bind it to the controller here.
@@ -364,11 +371,19 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		(terms.length > 0 || trending?.length > 0 || history?.length > 0 || (state.input && controller.store.loaded));
 
 	let showTrending = false;
-	if (!results.length && !state.input && trending?.length) {
+	if (retainTrending || (!results.length && !state.input && trending?.length)) {
 		showTrending = true;
 	} else if (trending?.length && !terms.length) {
 		// has results and trending -> show trending terms while term load
 		showTrending = true;
+	}
+
+	let showHistory = false;
+	if (retainHistory || (!results.length && !state.input && history?.length)) {
+		showHistory = true;
+	} else if (history?.length && !terms.length) {
+		// has results and trending -> show trending terms while term load
+		showHistory = true;
 	}
 
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
@@ -394,6 +409,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		styling.css = [style];
 	}
 
+	console.log('historyTitle', historyTitle);
+	console.log('showhistory', showHistory);
+	console.log('hidehistory', hideHistory);
+
 	return visible ? (
 		<CacheProvider>
 			<div
@@ -411,6 +430,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								trendingTitle,
 								showTrending,
 								history,
+								historyTitle,
 								valueProps,
 								emIfy,
 								onTermClick,
@@ -446,7 +466,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									</div>
 								) : null}
 
-								{showTrending ? (
+								{showTrending && !hideTrending ? (
 									<div className="ss__autocomplete__terms__trending">
 										{trendingTitle ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
@@ -474,7 +494,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									</div>
 								) : null}
 
-								{history.length && !hideHistory ? (
+								{showHistory && !hideHistory ? (
 									<div className="ss__autocomplete__terms__history">
 										{historyTitle ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--history">
@@ -639,6 +659,9 @@ export interface AutocompleteProps extends ComponentProps {
 	hideBanners?: boolean;
 	hideLink?: boolean;
 	hideHistory?: boolean;
+	hideTrending?: boolean;
+	retainHistory?: boolean;
+	retainTrending?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
 	termsTitle?: string;

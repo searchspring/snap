@@ -229,7 +229,7 @@ export class SearchController extends AbstractController {
 
 		if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
 			// save it to the history store
-			this.store.history.saveToHistory(this.params.search.query.string);
+			this.store.history.save(this.params.search.query.string);
 		}
 
 		try {

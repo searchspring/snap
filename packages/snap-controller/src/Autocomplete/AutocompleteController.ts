@@ -368,8 +368,8 @@ export class AutocompleteController extends AbstractController {
 
 					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
 						this.store.trending[0].preview();
-					} else if (this.store.history?.terms?.length && this.config.settings?.history?.showResults) {
-						this.store.history?.terms[0].preview();
+					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
+						this.store.history[0].preview();
 					}
 				} else {
 					this.handlers.input.timeoutDelay = setTimeout(() => {

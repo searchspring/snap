@@ -70,7 +70,11 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.sorting?.options).toHaveLength(0);
 
 		expect(autocompleteStore.history).toBeDefined();
-		expect(autocompleteStore.history?.terms).toHaveLength(0);
+		expect(autocompleteStore.history).toHaveLength(0);
+
+		expect(autocompleteStore.initHistory).toBeDefined();
+		expect(autocompleteStore.history).toBeDefined();
+		expect(autocompleteStore.resetHistory).toBeDefined();
 	});
 
 	it('update function updates all of the stores', () => {
@@ -99,7 +103,7 @@ describe('Autocomplete Store', () => {
 
 		expect(autocompleteStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.length!);
 
-		expect(autocompleteStore.history?.terms).toHaveLength(0);
+		expect(autocompleteStore.history).toHaveLength(0);
 	});
 
 	it('reset functions are defined', () => {
@@ -111,6 +115,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.resetTrending).toBeDefined();
 		expect(autocompleteStore.resetHistory).toBeDefined();
 		expect(autocompleteStore.resetTerms).toBeDefined();
+		expect(autocompleteStore.resetSuggestions).toBeDefined();
 	});
 
 	it('reset function calls sub-reset functions', () => {
@@ -120,17 +125,17 @@ describe('Autocomplete Store', () => {
 
 		const resetTrendingSpy = jest.spyOn(autocompleteStore, 'resetTrending');
 		const resetHistorySpy = jest.spyOn(autocompleteStore, 'resetHistory');
-		const resetTermsSpy = jest.spyOn(autocompleteStore, 'resetTerms');
+		const resetSuggestionsSpy = jest.spyOn(autocompleteStore, 'resetSuggestions');
 
 		autocompleteStore.reset();
 
 		expect(resetTrendingSpy).toHaveBeenCalled();
 		expect(resetHistorySpy).toHaveBeenCalled();
-		expect(resetTermsSpy).toHaveBeenCalled();
+		expect(resetSuggestionsSpy).toHaveBeenCalled();
 
 		resetTrendingSpy.mockClear();
 		resetHistorySpy.mockClear();
-		resetTermsSpy.mockClear();
+		resetSuggestionsSpy.mockClear();
 	});
 
 	it('reset functions actually reset data', () => {
@@ -151,7 +156,7 @@ describe('Autocomplete Store', () => {
 		autocompleteStore.updateTrendingTerms(mockData.trending());
 
 		expect(autocompleteStore.terms.length).toBeGreaterThan(0);
-		expect(autocompleteStore.history?.terms.length).toBe(historyData.length);
+		expect(autocompleteStore.history.length).toBe(historyData.length);
 		expect(autocompleteStore.trending.length).toBeGreaterThan(0);
 
 		//can reset trending
@@ -160,16 +165,16 @@ describe('Autocomplete Store', () => {
 		autocompleteStore.resetTrending();
 		expect(autocompleteStore.trending[0].active).toBeFalsy();
 
-		//can reset terms
+		//can reset suggestions
 		autocompleteStore.terms[0].preview();
 		expect(autocompleteStore.terms[0].active).toBeTruthy();
-		autocompleteStore.resetTerms();
+		autocompleteStore.resetSuggestions();
 		expect(autocompleteStore.terms[0].active).toBeFalsy();
 
 		//can reset history
-		autocompleteStore.history?.terms[0].preview();
-		expect(autocompleteStore.history?.terms[0].active).toBeTruthy();
+		autocompleteStore.history[0].preview();
+		expect(autocompleteStore.history[0].active).toBeTruthy();
 		autocompleteStore.resetHistory();
-		expect(autocompleteStore.history?.terms[0].active).toBeFalsy();
+		expect(autocompleteStore.history[0].active).toBeFalsy();
 	});
 });

@@ -39,7 +39,8 @@ export class SearchStore extends AbstractStore {
 
 		this.storage = new StorageStore();
 
-		this.history = new SearchHistoryStore(services);
+		this.history = new SearchHistoryStore({ siteId: this.config.globals?.siteId! }, this.services);
+
 		this.update();
 
 		makeObservable(this, {
