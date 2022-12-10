@@ -52,7 +52,7 @@ export class DomTargeter {
 					}
 				};
 				checker();
-			} else if (/complete|loaded/.test(this.document.readyState)) {
+			} else if (/complete|interactive|loaded/.test(this.document.readyState)) {
 				// DOMContent has loaded - unhide targets
 				target.hideTarget && this.unhideTarget(target.selector);
 			} else {
