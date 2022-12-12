@@ -16,7 +16,7 @@ export const getBundleDetails = async (url: string): Promise<BundleDetails> => {
 				if ((lastModified && status === 0) || (status >= 200 && status < 400)) {
 					resolve({
 						url,
-						lastModified: lastModified?.split(',')[1].trim() || '',
+						lastModified: lastModified?.split(',')[1]?.trim() || '',
 					});
 				} else {
 					reject({ message: 'Branch not found!', description: 'Incorrect branch name or branch no longer exists.' });
