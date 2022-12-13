@@ -31,25 +31,16 @@ const xhrMock: Partial<XMLHttpRequest> = {
 	readyState: 4,
 };
 
-const modifiedDate = '07 Jan 2022 22:42:39 GMT';
-
 jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
 
 describe('Snap Preact Integration', () => {
-	beforeAll(() => {
-		xhrMock.getResponseHeader = jest.fn(() => {
-			// return "Last-Modified" date
-			return `Fri, ${modifiedDate}`;
-		});
-	});
-
 	beforeEach(() => {
 		// @ts-ignore - modifying window
 		delete window.location;
 
 		// @ts-ignore - modifying window
 		window.location = {
-			href: 'https://www.merch.com?branch=branch',
+			href: 'https://www.merch.com',
 		};
 
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
