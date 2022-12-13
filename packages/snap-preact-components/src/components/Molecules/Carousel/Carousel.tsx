@@ -294,16 +294,10 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					}}
 					direction={vertical ? 'vertical' : 'horizontal'}
 					loop={loop}
-					pagination={
-						pagination
-							? {
-									clickable: true,
-							  }
-							: false
-					}
 					threshold={7}
 					{...additionalProps}
 					{...displaySettings}
+					pagination={pagination ? { clickable: true } : false}
 				>
 					{children.map((child) => {
 						return <SwiperSlide>{child}</SwiperSlide>;
