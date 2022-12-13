@@ -436,8 +436,9 @@ export class Snap {
 				style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 			});
 
+			// handle branch override
 			if (branchOverride && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
-				this.logger.warn(`...loading build... '${branchOverride}'`);
+				this.logger.warn(`:: loading branch override ~ '${branchOverride}' ...`);
 
 				// set a cookie with branch
 				if (featureFlags.cookies) {
@@ -523,9 +524,13 @@ export class Snap {
 				);
 
 				// prevent further instantiation of config
-				return;
+				throw 'branch override';
 			}
 		} catch (e) {
+			if (e == 'branch override') {
+				throw `${this.logger.emoji.bang} Snap instantiation halted - using branch override.`;
+			}
+
 			this.logger.error(e);
 		}
 
@@ -550,6 +555,7 @@ export class Snap {
 			}
 		}
 
+		// create controllers
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'search': {
@@ -899,6 +905,7 @@ export class Snap {
 			}
 		});
 
+		// create instantiators
 		if (this.config?.instantiators?.recommendation) {
 			try {
 				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
