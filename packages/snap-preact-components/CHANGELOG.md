@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/searchspring/snap/compare/v0.38.1...v0.39.0) (2022-12-14)
+
+
+### Bug Fixes
+
+* **carousel.tsx:** bugfix for carousel when passing pagination prop via breakpoints ([4651269](https://github.com/searchspring/snap/commit/46512695a25774da3f1a9bd9e1d26f22f0e130ff))
+
+
+
+
+
 ## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
 
 

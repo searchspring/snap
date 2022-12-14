@@ -2,6 +2,11 @@ describe('Branch Override Functionality', () => {
 	it('adds snap bundle to search page', () => {
 		cy.visit('https://localhost:2222/?branch=override');
 
+		cy.on('uncaught:exception', (err, runnable) => {
+			// expected error due to branch override throwing
+			return false;
+		});
+
 		// expect injected div from 'override' branch to be on the page
 		cy.get('#override').should('exist');
 
@@ -31,6 +36,11 @@ describe('Branch Override Functionality', () => {
 	});
 
 	it('breaks when using a non existant branch', () => {
+		cy.on('uncaught:exception', (err, runnable) => {
+			// expected error due to branch override throwing
+			return false;
+		});
+
 		// cy.on('uncaught:exception', (err, runnable) => false);
 		cy.visit('https://localhost:2222/?branch=nope');
 

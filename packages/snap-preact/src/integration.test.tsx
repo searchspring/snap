@@ -31,7 +31,7 @@ const xhrMock: Partial<XMLHttpRequest> = {
 	readyState: 4,
 };
 
-const modifiedDate = '07 Jan 2022 22:42:39 GMT';
+const MODIFIED_DATE = '07 Jan 2022 22:42:39 GMT';
 
 jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
 
@@ -39,7 +39,7 @@ describe('Snap Preact Integration', () => {
 	beforeAll(() => {
 		xhrMock.getResponseHeader = jest.fn(() => {
 			// return "Last-Modified" date
-			return `Fri, ${modifiedDate}`;
+			return `Fri, ${MODIFIED_DATE}`;
 		});
 	});
 
@@ -49,7 +49,7 @@ describe('Snap Preact Integration', () => {
 
 		// @ts-ignore - modifying window
 		window.location = {
-			href: 'https://www.merch.com?branch=branch',
+			href: 'https://www.merch.com',
 		};
 
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
@@ -216,5 +216,24 @@ describe('Snap Preact Integration', () => {
 		global.Storage.prototype.setItem.mockRestore();
 		// @ts-ignore
 		global.Storage.prototype.getItem.mockRestore();
+	});
+
+	it(`will throw an error when a branch override is in found`, async () => {
+		const branchName = 'branch';
+
+		// @ts-ignore
+		window.location = {
+			href: `https://www.merch.com?branch=${branchName}`,
+		};
+
+		expect(() => {
+			const snap = new Snap(baseConfig);
+		}).toThrow();
+
+		// wait for rendering of BranchOverride component
+		await waitFor(() => {
+			const overrideElement = document.querySelector('.ss__branch-override')!;
+			expect(overrideElement).toBeDefined();
+		});
 	});
 });

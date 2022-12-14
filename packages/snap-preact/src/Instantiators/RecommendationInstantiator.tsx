@@ -101,6 +101,7 @@ export class RecommendationInstantiator {
 						this.config.selector ? ` , ${this.config.selector}` : ''
 					}`,
 					autoRetarget: true,
+					clickRetarget: true,
 					inject: {
 						action: 'before',
 						element: (target: Target, origElement: Element) => {

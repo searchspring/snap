@@ -14,8 +14,6 @@ const wait = (time?: number) => {
 	});
 };
 
-let document: Document;
-
 const createDocument = (contents: string) =>
 	new JSDOM(`
 		<!DOCTYPE html>
@@ -23,11 +21,11 @@ const createDocument = (contents: string) =>
 			<head></head>
 			<body>${contents}</body>
 		</html>
-`).window.document;
+`);
 
 describe('DomTargeter', () => {
 	it('calls render function with each selected', () => {
-		document = createDocument(`
+		const dom = createDocument(`
 			<div id="content">
 				<div class="a">
 				</div>
@@ -39,6 +37,8 @@ describe('DomTargeter', () => {
 				</div>
 			</div>
 		`);
+
+		const document = dom.window.document;
 
 		type CalledTarget = {
 			target: Target;
@@ -85,7 +85,7 @@ describe('DomTargeter', () => {
 	});
 
 	it('injects elements', () => {
-		document = createDocument(`
+		const dom = createDocument(`
 			<div id="content">
 				<div class="a">
 				</div>
@@ -109,6 +109,8 @@ describe('DomTargeter', () => {
 				</div>
 			</div>
 		`);
+
+		const document = dom.window.document;
 
 		const staticElem = document.createElement('input');
 		staticElem.className = 'after-2';
@@ -240,9 +242,11 @@ describe('DomTargeter', () => {
 	});
 
 	it('injects into dynamically added elements with autoRetarget', async () => {
-		document = createDocument(`
+		const dom = createDocument(`
 			<div id="content"></div>
 		`);
+
+		const document = dom.window.document;
 
 		const selector: Target = {
 			selector: '.classToLookFor',
@@ -278,9 +282,11 @@ describe('DomTargeter', () => {
 	});
 
 	it('injects into dynamically added elements with autoRetarget at different times.', async () => {
-		document = createDocument(`
+		const dom = createDocument(`
 			<div id="content"></div>
 		`);
+
+		const document = dom.window.document;
 
 		const selectors: Target[] = [
 			{
@@ -341,10 +347,98 @@ describe('DomTargeter', () => {
 		expect(document.querySelector('#content')?.innerHTML).toBe('<div id="newThing" class="classToLookFor2">blah<div>tada</div></div>');
 	});
 
-	it('injects into same elements from multiple targets', async () => {
-		document = createDocument(`
+	it('injects into dynamically added elements when using clickRetarget', async () => {
+		const dom = createDocument(`
 			<div id="content"></div>
 		`);
+
+		const document = dom.window.document;
+
+		const selector: Target = {
+			selector: '.classToLookFor',
+			inject: {
+				action: 'append',
+				element: (target, element) => {
+					const div = document.createElement('div');
+
+					div.className = 'newThing';
+
+					expect(element.className).toBe('classToLookFor');
+
+					div.innerHTML = 'blah';
+
+					return div;
+				},
+			},
+			clickRetarget: true,
+		};
+
+		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+
+		expect(document.querySelector('.classToLookFor')).toBe(null);
+
+		await wait(200);
+
+		const contentElem: HTMLDivElement = document.querySelector('#content')!;
+		contentElem?.classList.add('classToLookFor');
+		contentElem?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+		await wait(200);
+
+		expect(document.querySelector('.classToLookFor')).not.toBe(null);
+
+		expect(document.querySelector('.newThing')?.innerHTML).toBe('blah');
+	});
+
+	it('injects into dynamically added elements when using clickRetarget selector', async () => {
+		const dom = createDocument(`
+			<div id="content"></div>
+		`);
+
+		const document = dom.window.document;
+
+		const selector: Target = {
+			selector: '.classToLookFor',
+			inject: {
+				action: 'append',
+				element: (target, element) => {
+					const div = document.createElement('div');
+
+					div.className = 'newThing';
+
+					expect(element.className).toBe('classToLookFor');
+
+					div.innerHTML = 'blah';
+
+					return div;
+				},
+			},
+			clickRetarget: '#content',
+		};
+
+		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+
+		expect(document.querySelector('.classToLookFor')).toBe(null);
+
+		await wait(200);
+
+		const contentElem: HTMLDivElement = document.querySelector('#content')!;
+		contentElem?.classList.add('classToLookFor');
+		contentElem?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+		await wait(200);
+
+		expect(document.querySelector('.classToLookFor')).not.toBe(null);
+
+		expect(document.querySelector('.newThing')?.innerHTML).toBe('blah');
+	});
+
+	it('injects into same elements from multiple targets', async () => {
+		const dom = createDocument(`
+			<div id="content"></div>
+		`);
+
+		const document = dom.window.document;
 
 		new DomTargeter(
 			[
@@ -395,9 +489,11 @@ describe('DomTargeter', () => {
 	});
 
 	it('injects into same elements with multiple targeters', async () => {
-		document = createDocument(`
+		const dom = createDocument(`
 			<div id="content"></div>
 		`);
+
+		const document = dom.window.document;
 
 		new DomTargeter(
 			[
@@ -462,7 +558,9 @@ describe('DomTargeter', () => {
 	});
 
 	it('injects elements before and after the same selector', async () => {
-		document = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+		const dom = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+
+		const document = dom.window.document;
 
 		new DomTargeter(
 			[
@@ -506,7 +604,9 @@ describe('DomTargeter', () => {
 	});
 
 	it('replaces content using inject, but does not allow retargeting of that element', async () => {
-		document = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+		const dom = createDocument(`<div id="findMe"><div id="content"></div></div>`);
+
+		const document = dom.window.document;
 
 		new DomTargeter(
 			[
