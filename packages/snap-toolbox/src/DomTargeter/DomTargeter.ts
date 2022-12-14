@@ -7,6 +7,7 @@ export type Target = {
 	emptyTarget?: boolean;
 	hideTarget?: boolean;
 	autoRetarget?: boolean;
+	clickRetarget?: boolean | string;
 	[any: string]: unknown;
 };
 
@@ -30,27 +31,40 @@ export class DomTargeter {
 		this.retarget();
 
 		this.targets.forEach((target) => {
+			let timeoutTime = 100;
+			const checker = () => {
+				// lets not just keep trying forever - this waits roughly 12 seconds before giving up.
+				if (timeoutTime < 2000) {
+					// increase the time till next check
+					timeoutTime = timeoutTime + 200;
+					this.retarget();
+					setTimeout(checker, timeoutTime);
+				} else {
+					// timed out, lets unhide the target
+					target.hideTarget && this.unhideTarget(target.selector);
+				}
+			};
+
+			// add click event to restart retargeting check
+			if (target.clickRetarget) {
+				let clickElems: (Element | Document)[] = [];
+
+				if (typeof target.clickRetarget == 'boolean') {
+					clickElems.push(this.document);
+				} else {
+					clickElems = Array.from(this.document.querySelectorAll(target.clickRetarget));
+				}
+
+				clickElems.map((elem) => {
+					elem.addEventListener('click', () => {
+						timeoutTime = 100;
+						checker();
+					});
+				});
+			}
+
 			if (target.autoRetarget) {
-				let timeoutTime = 100;
-				const checker = () => {
-					// lets not just keep trying forever - this waits roughly 12 seconds before giving up.
-					if (timeoutTime < 2000) {
-						// increase the time till next check
-						timeoutTime = timeoutTime + 200;
-						const elems = this.domQuery(target.selector);
-						// did we find any targets?
-						if (elems && elems.length) {
-							this.retarget();
-							target.hideTarget && this.unhideTarget(target.selector);
-						} else {
-							// try again soon
-							setTimeout(checker, timeoutTime);
-						}
-					} else {
-						// timed out, lets unhide the target
-						target.hideTarget && this.unhideTarget(target.selector);
-					}
-				};
+				// do initial retargeting check
 				checker();
 			} else if (/complete|interactive|loaded/.test(this.document.readyState)) {
 				// DOMContent has loaded - unhide targets

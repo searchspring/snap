@@ -197,6 +197,7 @@ type ExtendedTarget = {
 	};
 	hideTarget?: boolean;
 	autoRetarget?: boolean;
+	clickRetarget?: boolean | string;
 	emptyTarget?: boolean;
 	name?: string;
 	component?: () => Promise<RootComponent> | RootComponent;
