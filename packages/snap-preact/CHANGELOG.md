@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/searchspring/snap/compare/v0.38.1...v0.39.0) (2022-12-14)
+
+
+### Bug Fixes
+
+* **snap-preact:** adjusting getBundleDetails to allow for local testing of branch override function ([e3d9840](https://github.com/searchspring/snap/commit/e3d9840a53de94619fdc09c3f066044cf4b2362c))
+* **snap-preact:** now throwing an error when branch override occurs to prevent instantiation of Snap ([33477fc](https://github.com/searchspring/snap/commit/33477fcbcdd10c933179282f897588595bead8ad))
+
+
+### Features
+
+* **domtargeter:** adding `clickRetarget` option to allow for automatic retargeting on click event ([c43b966](https://github.com/searchspring/snap/commit/c43b966c6b1240253ec6558b7f2c74b89be98fef))
+
+
+
+
+
 ## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
 
 **Note:** Version bump only for package @searchspring/snap-preact

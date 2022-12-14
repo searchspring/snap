@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/searchspring/snap/compare/v0.38.1...v0.39.0) (2022-12-14)
+
+
+### Bug Fixes
+
+* **domtargeter:** adding 'interactive' to document.readyState check ([2826872](https://github.com/searchspring/snap/commit/2826872dbd33249f4a289cfceb7d8f40dc421eac))
+
+
+### Features
+
+* **domtargeter:** adding `clickRetarget` option to allow for automatic retargeting on click event ([c43b966](https://github.com/searchspring/snap/commit/c43b966c6b1240253ec6558b7f2c74b89be98fef))
+
+
+
+
+
 ## [0.38.1](https://github.com/searchspring/snap/compare/v0.38.0...v0.38.1) (2022-11-16)
 
 **Note:** Version bump only for package @searchspring/snap-toolbox
