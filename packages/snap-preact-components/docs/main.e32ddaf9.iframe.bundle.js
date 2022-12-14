@@ -1,4 +1,4 @@
-/*! For license information please see main.9b8212ae.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.e32ddaf9.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -5491,11 +5491,11 @@
 													},
 													direction: vertical ? 'vertical' : 'horizontal',
 													loop,
-													pagination: !!pagination && { clickable: !0 },
 													threshold: 7,
 												},
 												additionalProps,
-												displaySettings
+												displaySettings,
+												{ pagination: !!pagination && { clickable: !0 } }
 											),
 											children.map(function (child) {
 												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_22__.o, null, child);
@@ -23045,23 +23045,30 @@
 							(this.onTarget = onTarget),
 							this.retarget(),
 							this.targets.forEach(function (target) {
-								if (target.autoRetarget) {
-									var timeoutTime = 100;
-									!(function checker() {
-										if (timeoutTime < 2e3) {
-											timeoutTime += 200;
-											var elems = _this.domQuery(target.selector);
-											elems && elems.length
-												? (_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector))
-												: setTimeout(checker, timeoutTime);
-										} else target.hideTarget && _this.unhideTarget(target.selector);
-									})();
-								} else
-									/complete|loaded/.test(_this.document.readyState)
-										? target.hideTarget && _this.unhideTarget(target.selector)
-										: _this.document.addEventListener('DOMContentLoaded', function () {
-												_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
-										  });
+								var timeoutTime = 100,
+									checker = function checker() {
+										timeoutTime < 2e3
+											? ((timeoutTime += 200), _this.retarget(), setTimeout(checker, timeoutTime))
+											: target.hideTarget && _this.unhideTarget(target.selector);
+									};
+								if (target.clickRetarget) {
+									var clickElems = [];
+									'boolean' == typeof target.clickRetarget
+										? clickElems.push(_this.document)
+										: (clickElems = Array.from(_this.document.querySelectorAll(target.clickRetarget))),
+										clickElems.map(function (elem) {
+											elem.addEventListener('click', function () {
+												(timeoutTime = 100), checker();
+											});
+										});
+								}
+								target.autoRetarget
+									? checker()
+									: /complete|interactive|loaded/.test(_this.document.readyState)
+									? target.hideTarget && _this.unhideTarget(target.selector)
+									: _this.document.addEventListener('DOMContentLoaded', function () {
+											_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
+									  });
 							});
 					}
 					return (
@@ -23096,7 +23103,7 @@
 													})
 												)
 													return !0;
-												_this2.unhideTarget(target.selector);
+												target.hideTarget && _this2.unhideTarget(target.selector);
 											});
 											return (
 												(null !== (_target$inject = target.inject) && void 0 !== _target$inject && _target$inject.element) ||
@@ -23128,7 +23135,7 @@
 													for (; elem.firstChild && elem.removeChild(elem.firstChild); );
 												_this2.onTarget(target, elem);
 											}
-											_this2.unhideTarget(target.selector);
+											target.hideTarget && _this2.unhideTarget(target.selector);
 										}),
 										errors.length)
 									)
@@ -37714,7 +37721,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.38.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.39.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -38161,7 +38168,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.38.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.39.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
