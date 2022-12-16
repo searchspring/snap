@@ -7,7 +7,7 @@ import { configurable } from './middleware/plugins/configurable';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
 import { SidebarSkel } from './components/Sidebar/Skel';
-
+import { bpk } from '@searchspring/snap-plugin';
 import './styles/custom.scss';
 
 /*
@@ -58,7 +58,7 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[afterStore], [configurable, 'thing1', 'thing2']],
+					plugins: [[afterStore], [configurable, 'thing1', 'thing2'], [bpk]],
 					settings: {
 						infinite: {
 							backfill: 5,

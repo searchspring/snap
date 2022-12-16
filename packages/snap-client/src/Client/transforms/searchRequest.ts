@@ -18,7 +18,8 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 		transformSearchRequest.siteId(request),
 		transformSearchRequest.facets(request),
 		transformSearchRequest.tracking(request),
-		transformSearchRequest.personalization(request)
+		transformSearchRequest.personalization(request),
+		transformSearchRequest.bpk(request)
 	);
 }
 
@@ -247,4 +248,14 @@ transformSearchRequest.personalization = (request: SearchRequestModel = {}) => {
 	}
 
 	return params;
+};
+
+transformSearchRequest.bpk = (request: SearchRequestModel = {}) => {
+	// @ts-ignore
+	if (request.bpk) {
+		// @ts-ignore
+		return { bpk: request.bpk };
+	}
+
+	return {};
 };
