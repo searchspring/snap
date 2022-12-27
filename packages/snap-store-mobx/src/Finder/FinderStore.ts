@@ -76,7 +76,12 @@ export class FinderStore extends AbstractStore {
 			const isExpired = this.config.persist.expiration && Date.now() - date > this.config.persist.expiration;
 
 			if (data && selections.filter((selection: SelectedSelection) => selection.selected).length) {
-				if (JSON.stringify(config) === JSON.stringify(this.config) && !isExpired) {
+				// stringify config without middleware and plugins (they may be using variable data)
+				const stringifiedPersistedConfig = JSON.stringify({ ...config, plugins: [], middleware: {} });
+				const stringifiedConfig = JSON.stringify({ ...this.config, plugins: [], middleware: {} });
+
+				// if the config has not changed and the data is not expired then persist
+				if (stringifiedPersistedConfig === stringifiedConfig && !isExpired) {
 					this.update(data, selections);
 					this.state.persisted = true;
 					this.services.urlManager.go();
