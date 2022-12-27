@@ -257,6 +257,84 @@ describe('Finder Store', () => {
 				expect(finderStore2.state.persisted).toBe(false);
 				expect(finderStore2.selections?.length).toBe(0);
 			});
+
+			it('it will NOT reset persisted selections if something in the config plugins has changed', () => {
+				const testPlugin = (controller: any, ...additionalParams: any[]) => {};
+
+				config = {
+					...config,
+					plugins: [[testPlugin, Math.random()]],
+					persist: {
+						enabled: true,
+						lockSelections: true,
+						expiration: 0,
+					},
+				};
+				const finderStore = new FinderStore(config, services);
+				finderStore.update(searchData);
+
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
+
+				finderStore.save();
+
+				config = {
+					...config,
+					plugins: [[testPlugin, Math.random()]],
+					persist: {
+						enabled: true,
+						lockSelections: true,
+						expiration: 0,
+					},
+				};
+
+				// should not persist due to config mismatch
+				const finderStore2 = new FinderStore(config, services);
+				finderStore2.loadPersisted();
+				expect(finderStore2.state.persisted).toBe(true);
+			});
+
+			it('it will NOT reset persisted selections if something in the config middleware has changed', () => {
+				config = {
+					...config,
+					middleware: {
+						onInit: (controller: any) => {},
+					},
+					persist: {
+						enabled: true,
+						lockSelections: true,
+						expiration: 0,
+					},
+				};
+				const finderStore = new FinderStore(config, services);
+				finderStore.update(searchData);
+
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
+
+				finderStore.save();
+
+				config = {
+					...config,
+					middleware: {
+						afterSearch: (controller: any) => {},
+					},
+					persist: {
+						enabled: true,
+						lockSelections: true,
+						expiration: 0,
+					},
+				};
+
+				// should not persist due to config mismatch
+				const finderStore2 = new FinderStore(config, services);
+				finderStore2.loadPersisted();
+				expect(finderStore2.state.persisted).toBe(true);
+			});
 		});
 	});
 });
