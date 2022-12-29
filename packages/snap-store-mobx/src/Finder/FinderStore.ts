@@ -68,7 +68,7 @@ export class FinderStore extends AbstractStore {
 	};
 
 	public loadPersisted(): void {
-		if (this.config.persist?.enabled && this.persistedStorage && !this.loaded) {
+		if (this.config.persist?.enabled && this.persistedStorage) {
 			const date = this.persistedStorage.get('date');
 			const data = this.persistedStorage.get('data');
 			const config = this.persistedStorage.get('config');
