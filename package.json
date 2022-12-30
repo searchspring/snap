@@ -8,7 +8,7 @@
 	],
 	"scripts": {
 		"commit": "cz",
-		"build": "lerna exec --stream 'npm run build'",
+		"build": "lerna run build",
 		"build:docs": "lerna exec --stream --parallel 'npm run build:docs' && npm run build:feed",
 		"build:feed": "node ./docs/generateFeed.js",
 		"build:metrics": "node ./metrics/generate",
@@ -42,7 +42,7 @@
 		"husky": "7.0.4",
 		"jest": "27.5.1",
 		"jsdom": "20.0.0",
-		"lerna": "4.0.0",
+		"lerna": "^6.3.0",
 		"lint-staged": "12.4.1",
 		"prettier": "2.6.2",
 		"standard-version": "9.5.0",
