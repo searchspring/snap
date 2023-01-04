@@ -152,8 +152,8 @@ describe('Tracking', () => {
 				expect(a).to.equal('basket');
 				const items = urlParams.filter((param) => param.key === 'item');
 				expect(items).to.have.length(2);
-				expect(items[0].value).to.equal('C-BP-G7-B1469;1;22;');
-				expect(items[1].value).to.equal('C-VJ-P2-32007;1;39;');
+				expect(items[0].value).to.equal('C-AD-W1-1869P;1;48;');
+				expect(items[1].value).to.equal('C-AD-Y5-814MD;1;36;');
 			});
 		});
 	});
@@ -212,7 +212,7 @@ describe('Tracking', () => {
 				expect(profileRenderBeacon.event).to.have.property('context');
 				expect(profileRenderBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 				expect(profileRenderBeacon.event).to.have.property('profile');
-				expect(profileRenderBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold']);
+				expect(profileRenderBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
 				expect(profileRenderBeacon.id).to.be.an('string');
 
 				const productRenderBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_RENDER);
@@ -225,7 +225,7 @@ describe('Tracking', () => {
 					expect(productRenderBeacon.event).to.have.property('context');
 					expect(productRenderBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 					expect(productRenderBeacon.event).to.have.property('product');
-					expect(productRenderBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings']);
+					expect(productRenderBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
 					expect(productRenderBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
 					expect(productRenderBeacon.event.product.mappings.core)
 						.to.be.an('object')
@@ -249,7 +249,7 @@ describe('Tracking', () => {
 				expect(profileImpressionBeacon.event).to.have.property('context');
 				expect(profileImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 				expect(profileImpressionBeacon.event).to.have.property('profile');
-				expect(profileImpressionBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold']);
+				expect(profileImpressionBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
 				expect(profileImpressionBeacon.id).to.be.an('string');
 
 				const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
@@ -270,7 +270,7 @@ describe('Tracking', () => {
 					expect(productImpressionBeacon.event).to.have.property('context');
 					expect(productImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 					expect(productImpressionBeacon.event).to.have.property('product');
-					expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings']);
+					expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
 					expect(productImpressionBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
 					expect(productImpressionBeacon.event.product.mappings.core)
 						.to.be.an('object')
@@ -291,7 +291,7 @@ describe('Tracking', () => {
 					expect(profileClickBeacon.event).to.have.property('context');
 					expect(profileClickBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 					expect(profileClickBeacon.event).to.have.property('profile');
-					expect(profileClickBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold']);
+					expect(profileClickBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
 					expect(profileClickBeacon.id).to.be.an('string');
 
 					const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
@@ -304,7 +304,7 @@ describe('Tracking', () => {
 						expect(productImpressionBeacon.event).to.have.property('context');
 						expect(productImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 						expect(productImpressionBeacon.event).to.have.property('product');
-						expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings']);
+						expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
 						expect(productImpressionBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
 						expect(productImpressionBeacon.event.product.mappings.core)
 							.to.be.an('object')
@@ -336,7 +336,7 @@ describe('Tracking', () => {
 					expect(profileProductClickBeacons.event).to.have.property('context');
 					expect(profileProductClickBeacons.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
 					expect(profileProductClickBeacons.event).to.have.property('product');
-					expect(profileProductClickBeacons.event.product).to.be.an('object').include.all.keys(['id', 'mappings']);
+					expect(profileProductClickBeacons.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
 					expect(profileProductClickBeacons.event.product.mappings).to.be.an('object').include.all.keys(['core']);
 					expect(profileProductClickBeacons.event.product.mappings.core)
 						.to.be.an('object')
