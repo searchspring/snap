@@ -10,5 +10,7 @@ module.exports = {
 	],
 	rules: {
 		// add rules... or dont...
+		'no-debugger': 'error',
+		'@typescript-eslint/ban-ts-comment': 'off'
 	},
 };
