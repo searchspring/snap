@@ -94,10 +94,12 @@ export class RecommendationController extends AbstractController {
 
 	track: RecommendationTrackMethods = (() => {
 		const getSeed = (): Array<ProductViewEvent> | undefined => {
-			let skus = [];
+			let skus: Array<string> = [];
 			switch (this.store.profile.placement) {
 				case ProfilePlacement.PRODUCTPAGE:
-					skus = [this.config.globals.product];
+					if (this.config.globals.product) {
+						skus = [this.config.globals.product];
+					}
 					break;
 				case ProfilePlacement.BASKETPAGE:
 					skus = this.tracker.cookies.cart.get(); // this is an array
