@@ -338,6 +338,8 @@ export class AutocompleteController extends AbstractController {
 			},
 			keyUp: (e: KeyboardEvent): void => {
 				// ignore enter and escape keys
+				if (e?.keyCode == KEY_ENTER || e?.keyCode == KEY_ESCAPE) return;
+
 				// return focus on keyup if it was lost
 				if (e.isTrusted && this.store.state.focusedInput !== (e.target as HTMLInputElement)) {
 					this.setFocused(e.target as HTMLInputElement);
@@ -372,6 +374,7 @@ export class AutocompleteController extends AbstractController {
 						this.store.history[0].preview();
 					}
 				} else {
+					this.store.resetTerms();
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();

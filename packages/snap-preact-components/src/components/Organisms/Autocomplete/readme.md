@@ -146,20 +146,6 @@ The following props are available to be used within your custom component: `sear
 <Autocomplete controller={controller} input={'#searchInput'} linkSlot={<CustomLinkComponent />} />
 ```
 
-### hideHistory
-The `hideHistory` prop specifies if the historical terms within autocomplete should be rendered.
-
-```jsx
-<Autocomplete controller={controller} input={'#searchInput'} hideHistory={true} />
-```
-
-### hideTrending
-The `hideTrending` prop specifies if the trending terms within autocomplete should be rendered.
-
-```jsx
-<Autocomplete controller={controller} input={'#searchInput'} hideTrending={true} />
-```
-
 ### hideFacets
 The `hideFacets` prop specifies if the facets within autocomplete should be rendered.
 
@@ -168,10 +154,24 @@ The `hideFacets` prop specifies if the facets within autocomplete should be rend
 ```
 
 ### hideTerms
-The `hideTerms` prop specifies if the terms within autocomplete should be rendered.
+The `hideTerms` prop specifies if the terms section within autocomplete should be rendered.
 
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />
+```
+
+### hideHistory
+The `hideHistory` prop specifies if the historical terms and results within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideHistory={true} />
+```
+
+### hideTrending
+The `hideTrending` prop specifies if the trending terms and results within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideTrending={true} />
 ```
 
 ### hideContent

@@ -128,7 +128,7 @@ An array of `Term` objects.
 An array of trending `Term` objects.
 
 ## `history` property
-An array of previosly searched `Term` objects.
+An array of previously searched `Term` objects.
 
 ## `Term` object
 Each `Term` object corresponds to a term returned from the Autocomplete API and/or Suggest API

@@ -51,7 +51,6 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.state = new AutocompleteStateStore(services);
 
-		//note we want facets stored in memory (default storageStore type)
 		this.storage = new StorageStore();
 
 		this.trending = [];

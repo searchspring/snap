@@ -69,6 +69,8 @@ const CSS = {
 			},
 
 			'& .ss__autocomplete__terms': {
+				display: 'flex',
+				flexDirection: 'column',
 				flex: `1 1 auto`,
 				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
 				order: 1,
@@ -389,6 +391,14 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
 
+	// results logic
+	let showResults = Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string);
+	const trendingActive = trending?.filter((term) => term.active).pop();
+	const historyActive = history?.filter((term) => term.active).pop();
+	if ((hideTrending && trendingActive) || (hideHistory && historyActive)) {
+		showResults = false;
+	}
+
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [
@@ -553,7 +563,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						<div className="ss__autocomplete__content">
 							{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller })}
 						</div>
-					) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+					) : showResults ? (
 						<div className="ss__autocomplete__content">
 							<>
 								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} /> : null}

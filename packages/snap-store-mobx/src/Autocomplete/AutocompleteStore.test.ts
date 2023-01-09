@@ -73,7 +73,6 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.history).toHaveLength(0);
 
 		expect(autocompleteStore.initHistory).toBeDefined();
-		expect(autocompleteStore.history).toBeDefined();
 		expect(autocompleteStore.resetHistory).toBeDefined();
 	});
 
