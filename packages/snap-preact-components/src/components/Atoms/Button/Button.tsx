@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
@@ -76,7 +77,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{children}
 				</button>
 			) : (
-				<div {...elementProps}>
+				<div ref={(e) => useA11y(e)} {...elementProps}>
 					{content}
 					{children}
 				</div>

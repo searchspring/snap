@@ -18,6 +18,7 @@ import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRang
 
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	facet: ({ color, theme }: OptionalFacetProps) =>
@@ -266,7 +267,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						open={disableCollapse || !facet?.collapsed}
 						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 						button={
-							<div className="ss__facet__header">
+							<div className="ss__facet__header" ref={(e) => useA11y(e)} role="heading" aria-level={3}>
 								{facet?.label}
 								{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 							</div>

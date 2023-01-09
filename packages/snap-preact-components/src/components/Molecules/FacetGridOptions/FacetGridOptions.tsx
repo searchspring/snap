@@ -102,7 +102,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 				{values.map((value) => (
 					<a
 						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
 						{...valueProps}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {

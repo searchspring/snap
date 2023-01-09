@@ -12,6 +12,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
@@ -236,6 +237,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						<ul className="ss__select__select">
 							{options.map((option) => (
 								<li
+									ref={(e) => useA11y(e)}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}

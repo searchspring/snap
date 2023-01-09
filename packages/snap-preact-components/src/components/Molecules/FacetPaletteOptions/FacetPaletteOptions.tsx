@@ -139,7 +139,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 					<a
 						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
 						aria-label={value.value}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
 						{...valueProps}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
