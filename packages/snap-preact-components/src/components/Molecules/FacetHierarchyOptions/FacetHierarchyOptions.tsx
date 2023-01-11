@@ -63,7 +63,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		...properties.theme?.components?.facetHierarchyOptions,
 	};
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facetLabel, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -82,6 +82,13 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
 							{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
 						)}
+						aria-label={
+							value.filtered
+								? `remove selected filter ${facetLabel} - ${value.label}`
+								: facetLabel
+								? `filter by ${facetLabel} - ${value.label}`
+								: `filter by ${value.label}`
+						}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
@@ -107,6 +114,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 export interface FacetHierarchyOptionsProps extends ComponentProps {
 	values: FacetHierarchyValue[];
 	hideCount?: boolean;
+	facetLabel?: string;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

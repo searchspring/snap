@@ -87,7 +87,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		...properties.theme?.components?.facetGridOptions,
 	};
 
-	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facetLabel, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -103,6 +103,13 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 					<a
 						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
 						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
+						aria-label={
+							value.filtered
+								? `remove selected filter ${facetLabel} - ${value.label}`
+								: facetLabel
+								? `filter by ${facetLabel} - ${value.label}`
+								: `filter by ${value.label}`
+						}
 						{...valueProps}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
@@ -131,6 +138,7 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;
+	facetLabel?: string;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

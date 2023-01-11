@@ -132,7 +132,11 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 						<>
 							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} aria-label={'last page'}>
+							<a
+								{...store.last.url.link}
+								className={classnames('ss__pagination__page', 'ss__pagination__page--last')}
+								aria-label={`last page ${store.last.number}`}
+							>
 								{lastButton ? lastButton : store.last.number}
 							</a>
 						</>

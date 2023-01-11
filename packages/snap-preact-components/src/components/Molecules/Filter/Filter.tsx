@@ -91,6 +91,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			<a
 				{...styling}
 				className={classnames('ss__filter', className)}
+				aria-label={`remove selected ${label} filter ${value}`}
 				onClick={(e) => {
 					link?.onClick && link.onClick(e);
 					onClick && onClick(e);
