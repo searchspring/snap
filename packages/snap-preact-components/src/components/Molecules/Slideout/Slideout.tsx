@@ -10,6 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
@@ -110,13 +111,14 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 
 	if (content && typeof content == 'string') {
 		return (
-			<div className={buttonClass} onClick={() => toggleActive()}>
+			<div className={buttonClass} onClick={() => toggleActive()} ref={(e) => useA11y(e)}>
 				{content}
 			</div>
 		);
 	} else if (content && typeof content == 'object') {
 		let clone = cloneWithProps(content, {
 			onClick: () => toggleActive(),
+			ref: (e: any) => useA11y(e),
 		});
 
 		if (clone.props.class || clone.props.className) {

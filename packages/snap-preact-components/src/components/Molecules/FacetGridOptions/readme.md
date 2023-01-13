@@ -5,10 +5,17 @@ Renders a grid of facet options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'grid'.
+The `values` prop specifies all facet values where the facet type is 'grid'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetGridOptions facet={sizeFacet} />
 ```
 
 ### columns

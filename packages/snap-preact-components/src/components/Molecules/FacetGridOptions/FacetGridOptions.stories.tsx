@@ -8,6 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetGridOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
+import { ValueFacet } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/FacetGridOptions`,
@@ -32,10 +33,20 @@ export default {
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'facet values store array',
+				},
+			},
+			control: { type: 'none' },
+		},
+		facet: {
+			description: 'Facet store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'facet store object',
 				},
 			},
 			control: { type: 'none' },
@@ -100,7 +111,7 @@ const snapInstance = Snapify.search({ id: 'FacetGridOptions', globals: { siteId:
 const ObservableFacetGridOptions = observer(({ args, controller }: { args: FacetGridOptionsProps; controller: SearchController }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'size_dress').pop();
 
-	return <FacetGridOptions {...args} values={sizeFacet.values} />;
+	return <FacetGridOptions {...args} values={sizeFacet.values} facet={sizeFacet} />;
 });
 
 export const Default = (args: FacetGridOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

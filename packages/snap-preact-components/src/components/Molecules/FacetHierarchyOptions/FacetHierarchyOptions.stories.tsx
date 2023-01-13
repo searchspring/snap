@@ -33,13 +33,23 @@ export default {
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'object',
 				},
 			},
 			control: { type: 'object' },
+		},
+		facet: {
+			description: 'Facet store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'facet store object',
+				},
+			},
+			control: { type: 'none' },
 		},
 		hideCount: {
 			defaultValue: false,
@@ -93,7 +103,7 @@ const ObservableFacetHierarchyOptions = observer(({ args, controller }: { args: 
 		.shift()
 		.values.slice(0, 12);
 
-	return <FacetHierarchyOptions {...args} values={hierarchyValues} />;
+	return <FacetHierarchyOptions {...args} values={hierarchyValues} facet={hierarchyValues} />;
 });
 
 export const Default = (args: FacetHierarchyOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

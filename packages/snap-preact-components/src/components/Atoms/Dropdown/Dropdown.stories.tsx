@@ -117,6 +117,16 @@ export default {
 			},
 			action: 'onToggle',
 		},
+		disableAlly: {
+			description: 'boolean to disable autoset ally properties',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

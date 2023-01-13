@@ -10,6 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>
@@ -42,6 +43,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	const props: DropdownProps = {
 		// default props
 		startOpen: false,
+		disableAlly: false,
 		// global theme
 		...globalTheme?.components?.dropdown,
 		// props
@@ -60,6 +62,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		onToggle,
 		startOpen,
 		disableClickOutside,
+		disableAlly,
 		disableStyles,
 		className,
 		style,
@@ -111,6 +114,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 			>
 				<div
 					className="ss__dropdown__button"
+					ref={(e) => (!disableAlly ? useA11y(e) : null)}
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
@@ -141,4 +145,5 @@ export interface DropdownProps extends ComponentProps {
 	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
+	disableAlly?: boolean;
 }

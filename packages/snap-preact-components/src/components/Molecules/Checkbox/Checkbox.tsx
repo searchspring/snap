@@ -10,6 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	checkbox: ({ size, color, theme }: CheckboxProps) =>
@@ -40,6 +41,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		// default props
 		size: '12px',
 		startChecked: false,
+		disableAlly: false,
 		// global theme
 		...globalTheme?.components?.checkbox,
 		// props
@@ -47,7 +49,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		...properties.theme?.components?.checkbox,
 	};
 
-	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableStyles, className, style } = props;
+	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableAlly, disableStyles, className, style } = props;
 
 	const subProps: CheckboxSubProps = {
 		icon: {
@@ -113,7 +115,13 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					checked={checkedState}
 				/>
 			) : (
-				<span {...styling} className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)} onClick={(e) => clickFunc(e)}>
+				<span
+					{...styling}
+					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
+					onClick={(e) => clickFunc(e)}
+					ref={(e) => (!disableAlly ? useA11y(e) : null)}
+					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
+				>
 					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
 				</span>
 			)}
@@ -134,4 +142,5 @@ export interface CheckboxProps extends ComponentProps {
 	size?: string;
 	startChecked?: boolean;
 	native?: boolean;
+	disableAlly?: boolean;
 }

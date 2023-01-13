@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import type { FacetHierarchyValue } from '@searchspring/snap-store-mobx';
+import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	hierarchy: ({ theme }: { theme: Theme }) =>
@@ -63,7 +63,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		...properties.theme?.components?.facetHierarchyOptions,
 	};
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facetLabel, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -72,10 +72,12 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		styling.css = [style];
 	}
 
-	return values?.length ? (
+	let facetValues = values || facet?.values;
+
+	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
-				{values.map((value) => (
+				{facetValues.map((value) => (
 					<a
 						className={classnames(
 							'ss__facet-hierarchy-options__option',
@@ -84,9 +86,9 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 						)}
 						aria-label={
 							value.filtered
-								? `remove selected filter ${facetLabel} - ${value.label}`
-								: facetLabel
-								? `filter by ${facetLabel} - ${value.label}`
+								? `remove selected filter ${facet?.label || ''} - ${value.label}`
+								: facet?.label
+								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
@@ -114,7 +116,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 export interface FacetHierarchyOptionsProps extends ComponentProps {
 	values: FacetHierarchyValue[];
 	hideCount?: boolean;
-	facetLabel?: string;
+	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

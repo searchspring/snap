@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { FacetValue } from '@searchspring/snap-store-mobx';
+import { FacetValue, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
@@ -87,7 +87,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		...properties.theme?.components?.facetGridOptions,
 	};
 
-	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facetLabel, disableStyles, className, style } = props;
+	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -96,18 +96,20 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		styling.css = [style];
 	}
 
-	return values?.length ? (
+	let facetValues = values || facet?.values;
+
+	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-				{values.map((value) => (
+				{facetValues.map((value) => (
 					<a
 						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
 						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
 						aria-label={
 							value.filtered
-								? `remove selected filter ${facetLabel} - ${value.label}`
-								: facetLabel
-								? `filter by ${facetLabel} - ${value.label}`
+								? `remove selected filter ${facet?.label || ''} - ${value.label}`
+								: facet?.label
+								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
 						{...valueProps}
@@ -138,7 +140,7 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;
-	facetLabel?: string;
+	facet?: ValueFacet;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

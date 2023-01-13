@@ -266,6 +266,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						{...subProps.dropdown}
 						open={disableCollapse || !facet?.collapsed}
 						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
+						disableAlly={true}
 						button={
 							<div className="ss__facet__header" ref={(e) => useA11y(e, disableCollapse ? -1 : 0)} role="heading" aria-level={3}>
 								{facet?.label}
@@ -286,21 +287,21 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										case FacetDisplay.SLIDER:
 											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 										case FacetDisplay.GRID:
-											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facetLabel={facet.label} />;
+											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
 										case FacetDisplay.PALETTE:
 											return (
-												<FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facetLabel={facet.label} />
+												<FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />
 											);
 										case FacetDisplay.HIERARCHY:
 											return (
 												<FacetHierarchyOptions
 													{...subProps.facetHierarchyOptions}
 													values={limitedValues as FacetHierarchyValue[]}
-													facetLabel={facet.label}
+													facet={facet as ValueFacet}
 												/>
 											);
 										default:
-											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facetLabel={facet.label} />;
+											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
 									}
 								}
 							})()}
