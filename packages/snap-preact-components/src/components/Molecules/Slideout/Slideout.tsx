@@ -118,7 +118,6 @@ const ButtonContent = (props: { content: string | JSX.Element | undefined; toggl
 	} else if (content && typeof content == 'object') {
 		let clone = cloneWithProps(content, {
 			onClick: () => toggleActive(),
-			ref: (e: any) => useA11y(e),
 		});
 
 		if (clone.props.class || clone.props.className) {

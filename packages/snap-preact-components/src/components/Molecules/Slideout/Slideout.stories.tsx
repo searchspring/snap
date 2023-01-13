@@ -101,7 +101,7 @@ export default {
 };
 
 export const Default = (args: SlideoutProps) => (
-	<Slideout {...args} buttonContent={'divc'}>
+	<Slideout {...args}>
 		<div>props.children will be rendered here</div>
 	</Slideout>
 );
