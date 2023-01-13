@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 export function useA11y(elem: any, tabIndex?: number, focusRingColor?: string) {
-	if (elem && !elem.attributes.ssA11y) {
+	if (elem && !elem.attributes?.ssA11y) {
 		//A11y attribute is for debouncing on rerenders
 		elem.setAttribute('ssA11y', true);
 
