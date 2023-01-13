@@ -49,15 +49,6 @@ export class SidebarContents extends Component<SidebarContentsProps> {
 
 		return (
 			<div class="ss-sidebar-container">
-				<Select
-					label={'Sort By'}
-					options={this.props.controller?.store?.sorting?.options}
-					selected={this.props.controller?.store?.sorting?.current}
-					onSelect={(e, selectedOption) => {
-						selectedOption && selectedOption.url.go();
-					}}
-				/>
-
 				<FilterSummary filters={filters} controller={this.props.controller} />
 				<Facets facets={facets} />
 			</div>
