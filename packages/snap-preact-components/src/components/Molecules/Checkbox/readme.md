@@ -35,6 +35,13 @@ The `disabled` prop disables the checkbox from being toggled or invoking the `on
 <Checkbox disabled={true} />
 ```
 
+### disableAlly
+The `disableAlly` prop specifies a boolean to disable the autoset ally properties.
+
+```jsx
+<Checkbox disableAlly={true} />
+```
+
 ### size
 The `size` prop will set the custom checkbox size.
 
