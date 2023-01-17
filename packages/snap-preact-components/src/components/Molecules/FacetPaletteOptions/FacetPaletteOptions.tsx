@@ -132,12 +132,12 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		styling.css = [style];
 	}
 
-	let facetValues = values || facet?.values;
+	const facetValues = values || facet?.values;
 
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-palette-options', className)}>
-				{facetValues.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
 						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
@@ -177,7 +177,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 });
 
 export interface FacetPaletteOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	hideLabel?: boolean;
 	columns?: number;
 	gapSize?: string;

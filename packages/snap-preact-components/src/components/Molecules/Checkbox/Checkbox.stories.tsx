@@ -115,7 +115,7 @@ export default {
 			},
 			action: 'onClick',
 		},
-		disableAlly: {
+		disableA11y: {
 			description: 'boolean to disable autoset ally properties',
 			table: {
 				type: {

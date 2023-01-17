@@ -72,12 +72,12 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		styling.css = [style];
 	}
 
-	let facetValues = values || facet?.values;
+	const facetValues = values || facet?.values;
 
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
-				{facetValues.map((value) => (
+				{(facetValues as FacetHierarchyValue[]).map((value) => (
 					<a
 						className={classnames(
 							'ss__facet-hierarchy-options__option',
@@ -114,7 +114,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	);
 });
 export interface FacetHierarchyOptionsProps extends ComponentProps {
-	values: FacetHierarchyValue[];
+	values?: FacetHierarchyValue[];
 	hideCount?: boolean;
 	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;

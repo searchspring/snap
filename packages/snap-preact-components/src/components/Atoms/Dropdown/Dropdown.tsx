@@ -43,7 +43,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	const props: DropdownProps = {
 		// default props
 		startOpen: false,
-		disableAlly: false,
+		disableA11y: false,
 		// global theme
 		...globalTheme?.components?.dropdown,
 		// props
@@ -62,7 +62,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		onToggle,
 		startOpen,
 		disableClickOutside,
-		disableAlly,
+		disableA11y,
 		disableStyles,
 		className,
 		style,
@@ -114,7 +114,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 			>
 				<div
 					className="ss__dropdown__button"
-					ref={(e) => (!disableAlly ? useA11y(e) : null)}
+					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
@@ -145,5 +145,5 @@ export interface DropdownProps extends ComponentProps {
 	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
-	disableAlly?: boolean;
+	disableA11y?: boolean;
 }

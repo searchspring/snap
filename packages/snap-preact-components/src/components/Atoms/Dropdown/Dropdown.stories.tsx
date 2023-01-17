@@ -117,7 +117,7 @@ export default {
 			},
 			action: 'onToggle',
 		},
-		disableAlly: {
+		disableA11y: {
 			description: 'boolean to disable autoset ally properties',
 			table: {
 				type: {

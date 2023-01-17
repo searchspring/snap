@@ -266,7 +266,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						{...subProps.dropdown}
 						open={disableCollapse || !facet?.collapsed}
 						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
-						disableAlly={true}
+						disableA11y={true}
 						button={
 							<div className="ss__facet__header" ref={(e) => useA11y(e, disableCollapse ? -1 : 0)} role="heading" aria-level={3}>
 								{facet?.label}

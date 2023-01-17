@@ -60,7 +60,7 @@ describe('Dropdown Component', () => {
 		expect(childElement).toBeInTheDocument();
 	});
 
-	it('Can enable/disable useAlly with disableAlly prop', () => {
+	it('Can enable/disable useAlly with disableA11y prop', () => {
 		const child = 'this is the child';
 		const rendered = render(<Dropdown button={'open me'}>{child}</Dropdown>);
 
@@ -71,7 +71,7 @@ describe('Dropdown Component', () => {
 		expect(buttonElement).toHaveAttribute('ssA11y');
 
 		const rendered2 = render(
-			<Dropdown button={'open me'} disableAlly>
+			<Dropdown button={'open me'} disableA11y>
 				{child}
 			</Dropdown>
 		);

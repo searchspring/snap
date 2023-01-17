@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { FacetValue, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
@@ -96,12 +96,12 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		styling.css = [style];
 	}
 
-	let facetValues = values || facet?.values;
+	const facetValues = values || facet?.values;
 
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-				{facetValues.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
 						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
@@ -136,7 +136,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 });
 
 export interface FacetGridOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;

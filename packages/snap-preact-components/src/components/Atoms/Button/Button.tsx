@@ -41,7 +41,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props: ButtonProps = {
 		// default props
-		disableAlly: false,
+		disableA11y: false,
 		// global theme
 		...globalTheme?.components?.button,
 		// props
@@ -49,7 +49,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		...properties.theme?.components?.button,
 	};
 
-	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableAlly, disableStyles, className, style } = props;
+	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableA11y, disableStyles, className, style } = props;
 
 	const elementProps = {
 		css: disableStyles
@@ -70,7 +70,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
 
-	let allyProps = {
+	let a11yProps = {
 		role: 'button',
 		ref: (e: any) => useA11y(e),
 	};
@@ -83,7 +83,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{children}
 				</button>
 			) : (
-				<div {...(!disableAlly ? allyProps : {})} {...elementProps} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} aria-disabled={disabled}>
 					{content}
 					{children}
 				</div>
@@ -103,5 +103,5 @@ export interface ButtonProps extends ComponentProps {
 	disabled?: boolean;
 	native?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	disableAlly?: boolean;
+	disableA11y?: boolean;
 }

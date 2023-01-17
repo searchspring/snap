@@ -75,12 +75,12 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		styling.css = [style];
 	}
 
-	let facetValues = values || facet?.values;
+	const facetValues = values || facet?.values;
 
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-list-options', className)}>
-				{facetValues.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
 						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
@@ -98,7 +98,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							onClick && onClick(e);
 						}}
 					>
-						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableAlly={true} />}
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 						<span className="ss__facet-list-options__option__value">
 							{value.label}
 							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
@@ -113,7 +113,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 });
 
 export interface FacetListOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
 	facet?: ValueFacet;

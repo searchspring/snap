@@ -8,7 +8,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetGridOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
-import { ValueFacet } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/FacetGridOptions`,

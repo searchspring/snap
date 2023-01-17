@@ -98,7 +98,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				}}
 				href={link?.href}
 			>
-				<Button {...subProps.button} disableAlly={true}>
+				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} />
 					{!hideFacetLabel && (
 						<span className="ss__filter__label">

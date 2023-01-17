@@ -50,11 +50,11 @@ The `disabled` prop will disable the button from toggling the visibility of the 
 <Dropdown disabled>Hello World!</Dropdown>
 ```
 
-### disableAlly
-The `disableAlly` prop specifies a boolean to disable the autoset ally properties.
+### disableA11y
+The `disableA11y` prop specifies a boolean to disable the autoset ally properties.
 
 ```jsx
-<Dropdown disableAlly>Hello World!</Dropdown>
+<Dropdown disableA11y>Hello World!</Dropdown>
 ```
 
 ### disableOverlay

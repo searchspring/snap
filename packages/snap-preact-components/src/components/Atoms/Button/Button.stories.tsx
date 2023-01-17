@@ -96,7 +96,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		disableAlly: {
+		disableA11y: {
 			description: 'boolean to disable autoset ally properties',
 			table: {
 				type: {

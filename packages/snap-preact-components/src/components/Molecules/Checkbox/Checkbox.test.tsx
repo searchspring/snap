@@ -84,7 +84,7 @@ describe('Checkbox Component', () => {
 			expect(styles.padding).toBe(style.padding);
 		});
 
-		it('Can enable/disable useAlly with disableAlly prop', () => {
+		it('Can enable/disable useAlly with disableA11y prop', () => {
 			const rendered = render(<Checkbox checked />);
 
 			const checkbox = rendered.container.querySelector('.ss__checkbox');
@@ -93,7 +93,7 @@ describe('Checkbox Component', () => {
 
 			expect(checkbox).toHaveAttribute('ssA11y');
 
-			const rendered2 = render(<Checkbox checked disableAlly />);
+			const rendered2 = render(<Checkbox checked disableA11y />);
 
 			const checkbox2 = rendered2.container.querySelector('.ss__checkbox');
 			expect(checkbox2).not.toHaveAttribute('ssA11y');
