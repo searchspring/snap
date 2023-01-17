@@ -110,7 +110,7 @@ const snapInstance = Snapify.search({ id: 'FacetGridOptions', globals: { siteId:
 const ObservableFacetGridOptions = observer(({ args, controller }: { args: FacetGridOptionsProps; controller: SearchController }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'size_dress').pop();
 
-	return <FacetGridOptions {...args} values={sizeFacet.values} facet={sizeFacet} />;
+	return <FacetGridOptions {...args} values={sizeFacet.values} />;
 });
 
 export const Default = (args: FacetGridOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

@@ -130,7 +130,7 @@ const snapInstance = Snapify.search({ id: 'FacetPaletteOptions', globals: { site
 const ObservableFacetPaletteOptions = observer(({ args, controller }: { args: FacetPaletteOptionsProps; controller: SearchController }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'color_family').pop();
 
-	return <FacetPaletteOptions {...args} values={sizeFacet.values} facet={sizeFacet} />;
+	return <FacetPaletteOptions {...args} values={sizeFacet.values} />;
 });
 
 export const Default = (args: FacetPaletteOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

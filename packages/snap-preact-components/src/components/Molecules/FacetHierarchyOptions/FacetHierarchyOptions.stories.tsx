@@ -103,7 +103,7 @@ const ObservableFacetHierarchyOptions = observer(({ args, controller }: { args: 
 		.shift()
 		.values.slice(0, 12);
 
-	return <FacetHierarchyOptions {...args} values={hierarchyValues} facet={hierarchyValues} />;
+	return <FacetHierarchyOptions {...args} values={hierarchyValues} />;
 });
 
 export const Default = (args: FacetHierarchyOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
