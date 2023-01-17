@@ -83,7 +83,6 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
 						aria-label={
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
@@ -92,6 +91,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 								: `filter by ${value.label}`
 						}
 						{...valueProps}
+						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);

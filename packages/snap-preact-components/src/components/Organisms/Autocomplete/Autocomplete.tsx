@@ -201,10 +201,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let delayTimeout: number;
 	const delayTime = 333;
-	let activeTerm: any = undefined;
 
 	const valueProps = {
-		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) => {
+		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>, activeTerm: any) => {
 			clearTimeout(delayTimeout);
 			delayTimeout = window.setTimeout(() => {
 				(e.target as HTMLAnchorElement).focus();
@@ -215,7 +214,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		onMouseLeave: () => {
 			clearTimeout(delayTimeout);
-			activeTerm = undefined;
 		},
 	};
 
@@ -425,10 +423,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
 														href={term.url.href}
 														{...valueProps}
-														onMouseEnter={(e) => {
-															activeTerm = term;
-															valueProps.onMouseEnter(e);
-														}}
+														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -456,10 +451,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
 														href={term.url.href}
 														{...valueProps}
-														onMouseEnter={(e) => {
-															activeTerm = term;
-															valueProps.onMouseEnter(e);
-														}}
+														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>

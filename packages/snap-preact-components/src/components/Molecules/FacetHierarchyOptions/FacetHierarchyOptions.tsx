@@ -96,8 +96,8 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
-						onMouseOver={() => previewOnFocus && value.preview && value.preview()}
 						{...valueProps}
+						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 					>
 						<span className="ss__facet-hierarchy-options__option__value">
 							{value.label}

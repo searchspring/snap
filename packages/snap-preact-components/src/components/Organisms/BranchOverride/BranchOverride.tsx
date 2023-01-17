@@ -299,8 +299,6 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 				className
 			)}
 			{...styling}
-			ref={(e) => useA11y(e)}
-			role={'button'}
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
@@ -312,9 +310,6 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 				<div
 					className="ss__branch-override__top__collapse"
-					ref={(e) => useA11y(e)}
-					role={'button'}
-					aria-label={'stop searchspring preview'}
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
@@ -326,8 +321,6 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 				<div
 					className="ss__branch-override__top__button"
-					ref={(e) => useA11y(e)}
-					role={'button'}
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
