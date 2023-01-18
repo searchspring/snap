@@ -30,6 +30,7 @@ export type BeforeSearchObj = {
 export type AfterSearchObj = {
 	controller: AbstractController;
 	response: any;
+	request: any;
 };
 
 export type AfterStoreObj = {
