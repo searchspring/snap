@@ -89,8 +89,7 @@ export class SearchController extends AbstractController {
 				config?.settings?.redirects?.singleResult &&
 				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
-				!search?.response?.filters?.length &&
-				!nonBackgroundFilters.length &&
+				!nonBackgroundFilters?.length &&
 				!(search.controller as SearchController).previousResults.length
 			) {
 				window.location.replace(search?.response.results[0].mappings.core.url);
