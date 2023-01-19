@@ -84,7 +84,7 @@ export class SearchController extends AbstractController {
 				return false;
 			}
 
-			let nonBackgroundFilters = search?.request?.filters?.filter((filter: any) => !filter.background);
+			let nonBackgroundFilters = search?.request?.filters?.filter((filter) => !filter.background);
 			if (
 				config?.settings?.redirects?.singleResult &&
 				search?.response?.search?.query &&
