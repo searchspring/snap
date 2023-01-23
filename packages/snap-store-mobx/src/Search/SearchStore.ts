@@ -12,6 +12,7 @@ import {
 	SearchQueryStore,
 	SearchHistoryStore,
 } from './Stores';
+import type { HistoryStoreConfig } from './Stores/SearchHistoryStore';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 
@@ -39,7 +40,16 @@ export class SearchStore extends AbstractStore {
 
 		this.storage = new StorageStore();
 
-		this.history = new SearchHistoryStore({ siteId: this.config.globals?.siteId! }, this.services);
+		const historyConfig: HistoryStoreConfig = {
+			url: (this.config as SearchStoreConfig).settings?.history?.url,
+			max: (this.config as SearchStoreConfig).settings?.history?.max,
+		};
+
+		if (this.config.globals?.siteId) {
+			historyConfig.siteId = this.config.globals?.siteId;
+		}
+
+		this.history = new SearchHistoryStore(historyConfig, this.services);
 
 		this.update();
 

@@ -4,7 +4,8 @@ import { Query } from './SearchQueryStore';
 
 export type HistoryStoreConfig = {
 	siteId?: string;
-	limit?: number;
+	max?: number;
+	url?: string;
 };
 export class SearchHistoryStore {
 	private config: HistoryStoreConfig;
@@ -15,8 +16,17 @@ export class SearchHistoryStore {
 		this.config = config;
 		this.services = services;
 
-		if (!Number.isInteger(this.config.limit)) {
-			this.config.limit = 25;
+		if (this.config.url) {
+			this.services.urlManager = this.services.urlManager.withConfig((translatorConfig: any) => {
+				return {
+					...translatorConfig,
+					urlRoot: this.config.url,
+				};
+			});
+		}
+
+		if (!Number.isInteger(this.config.max)) {
+			this.config.max = 25;
 		}
 
 		this.storage = new StorageStore({
@@ -41,7 +51,7 @@ export class SearchHistoryStore {
 
 		// adding term to array
 		history.unshift(term);
-		if (history.length > this.config.limit!) {
+		if (history.length > this.config.max!) {
 			history.pop();
 		}
 

@@ -23,6 +23,10 @@ export type SearchStoreConfig = StoreConfig & {
 			backfill?: number;
 			restorePosition?: boolean;
 		};
+		history?: {
+			url?: string;
+			max?: number;
+		};
 	};
 };
 

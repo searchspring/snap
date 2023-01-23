@@ -30,6 +30,26 @@ describe('History Store', () => {
 			expect(query.url).toBeInstanceOf(UrlManager);
 			expect(query).toHaveProperty('string');
 			expect(query.string).toBe(reversedHistoryData[index]);
+			expect(query.url.href).toEqual(`/?q=${query.string}`);
+		});
+	});
+
+	it('can be configured with a new urlRoot', () => {
+		const rootUrl = '/collection/shop';
+		const historyData = ['dressred', 'dress', 'glasses'];
+		const historyStore = new SearchHistoryStore({ url: rootUrl }, services);
+
+		historyData.map((term) => historyStore.save(term));
+
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		const reversedHistoryData = historyData.reverse();
+
+		historyStore.queries.forEach((query, index) => {
+			expect(query).toHaveProperty('url');
+			expect(query.url).toBeInstanceOf(UrlManager);
+			expect(query).toHaveProperty('string');
+			expect(query.string).toBe(reversedHistoryData[index]);
+			expect(query.url.href).toEqual(`${rootUrl}?q=${query.string}`);
 		});
 	});
 
@@ -50,7 +70,6 @@ describe('History Store', () => {
 		expect(historyStore.queries).toHaveLength(alteredHistoryData.length);
 
 		historyStore.queries.forEach((query, index) => {
-			console.log('string', query.string);
 			expect(query).toHaveProperty('url');
 			expect(query.url).toBeInstanceOf(UrlManager);
 			expect(query).toHaveProperty('string');
@@ -115,13 +134,13 @@ describe('History Store', () => {
 	it('listens to limit when config is passed', async () => {
 		const historyData = ['dressred', 'dress', 'glasses', 'term', 'term2', 'term3', 'term4', 'term5'];
 		const config = {
-			limit: 5,
+			max: 5,
 		};
 		const historyStore = new SearchHistoryStore(config, services);
 		historyData.map((term) => historyStore.save(term));
 
-		expect(historyStore.queries).toHaveLength(config.limit);
-		let trimmedData = historyData.slice(historyData.length - config.limit).reverse();
+		expect(historyStore.queries).toHaveLength(config.max);
+		let trimmedData = historyData.slice(historyData.length - config.max).reverse();
 		historyStore.queries.map((term, idx) => {
 			expect(term.string).toBe(trimmedData[idx]);
 		});

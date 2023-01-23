@@ -1,6 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 
-import type { SearchStoreConfig, AutocompleteStoreConfig, StoreServices } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -16,7 +16,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 	}
 
 	constructor(
-		config: SearchStoreConfig | AutocompleteStoreConfig,
+		config: StoreConfigs,
 		services: StoreServices,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
@@ -127,12 +127,12 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: SearchStoreConfig, results: Product[], banners: Banner[], paginationData: SearchResponseModelPagination) {
+function addBannersToResults(config: StoreConfigs, results: Product[], banners: Banner[], paginationData: SearchResponseModelPagination) {
 	const productCount = results.length;
 	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
 	const maxIndex = minIndex + paginationData.pageSize!;
 
-	if (config?.settings?.infinite) {
+	if ((config as SearchStoreConfig)?.settings?.infinite) {
 		minIndex = 0;
 	}
 
