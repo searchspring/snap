@@ -17,7 +17,7 @@ import type { Tracker, ProductViewEvent } from '@searchspring/snap-tracker';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
-
+import type { SearchRequestModel } from '@searchspring/snapi-types';
 // Middleware
 export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void> | void;
 export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
@@ -30,6 +30,7 @@ export type BeforeSearchObj = {
 export type AfterSearchObj = {
 	controller: AbstractController;
 	response: any;
+	request: SearchRequestModel;
 };
 
 export type AfterStoreObj = {
