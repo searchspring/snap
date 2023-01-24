@@ -522,7 +522,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
 														href={term.url.href}
 														{...valueProps}
-														onFocus={() => term.preview()}
+														onMouseEnter={() => term.preview()}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
