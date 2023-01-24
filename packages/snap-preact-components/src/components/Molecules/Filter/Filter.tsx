@@ -91,12 +91,12 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			<a
 				{...styling}
 				className={classnames('ss__filter', className)}
-				aria-label={`remove selected ${label} filter ${value}`}
+				aria-label={!label ? value : `remove selected ${label} filter ${value}`}
 				onClick={(e) => {
 					link?.onClick && link.onClick(e);
 					onClick && onClick(e);
 				}}
-				href={link?.href}
+				href={link?.href || '#'}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} />

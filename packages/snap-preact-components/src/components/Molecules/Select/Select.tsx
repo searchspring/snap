@@ -222,7 +222,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
 						onClick={(e) => setOpen((prev) => !prev)}
 						button={
-							<Button {...subProps.button}>
+							<Button {...subProps.button} disableA11y={true}>
 								{label && !hideLabelOnSelection && (
 									<span className="ss__select__label">
 										{label}
