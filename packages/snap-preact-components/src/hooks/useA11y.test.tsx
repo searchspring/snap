@@ -22,7 +22,6 @@ describe('useA11y hook', () => {
 		userEvent.tab();
 
 		expect(Element).toHaveFocus();
-		expect(Element).toHaveStyle('outline: -webkit-focus-ring-color auto 1px');
 
 		userEvent.keyboard('{Enter}');
 		expect(clickFunc).toHaveBeenCalled();
@@ -32,15 +31,13 @@ describe('useA11y hook', () => {
 
 		userEvent.tab();
 		expect(Element).not.toHaveFocus();
-		expect(Element).not.toHaveStyle('outline: -webkit-focus-ring-color auto 1px');
 	});
 
-	it('can pass tab index and focus ring color ', () => {
+	it('can pass tab index', () => {
 		let clickFunc = jest.fn();
 		let tabindex = 1;
-		let focusRingColor = 'red';
 		const rendered = render(
-			<div onClick={clickFunc} id="findMe" ref={(e) => useA11y(e, tabindex, focusRingColor)}>
+			<div onClick={clickFunc} id="findMe" ref={(e) => useA11y(e, tabindex)}>
 				test
 			</div>
 		);
@@ -55,6 +52,5 @@ describe('useA11y hook', () => {
 		userEvent.tab();
 
 		expect(Element).toHaveFocus();
-		expect(Element).toHaveStyle(`outline: ${focusRingColor} auto 1px`);
 	});
 });
