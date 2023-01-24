@@ -23,6 +23,10 @@ export type SearchStoreConfig = StoreConfig & {
 			backfill?: number;
 			restorePosition?: boolean;
 		};
+		history?: {
+			url?: string;
+			max?: number;
+		};
 	};
 };
 
@@ -67,6 +71,10 @@ export type AutocompleteStoreConfig = StoreConfig & {
 			};
 		};
 		trending?: {
+			limit: number;
+			showResults?: boolean;
+		};
+		history?: {
 			limit: number;
 			showResults?: boolean;
 		};

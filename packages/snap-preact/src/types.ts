@@ -1,6 +1,7 @@
 import type { Client, ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	AbstractController,
+	ControllerConfig,
 	SearchControllerConfig,
 	AutocompleteControllerConfig,
 	FinderControllerConfig,
@@ -25,11 +26,16 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
-export type SnapControllerConfigs =
-	| SnapSearchControllerConfig
-	| SnapAutocompleteControllerConfig
-	| SnapFinderControllerConfig
-	| SnapRecommendationControllerConfig;
+export type SnapControllerConfig = {
+	mode?: keyof typeof AppMode | AppMode;
+	url?: UrlTranslatorConfig;
+	client?: {
+		globals: ClientGlobals;
+		config?: ClientConfig;
+	};
+	controller: ControllerConfig;
+	context?: ContextVariables;
+};
 
 export type SnapSearchControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;

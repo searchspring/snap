@@ -84,11 +84,13 @@ export class SearchController extends AbstractController {
 				return false;
 			}
 
+			const nonBackgroundFilters = search?.request?.filters?.filter((filter) => !filter.background);
 			if (
 				config?.settings?.redirects?.singleResult &&
 				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
-				!search?.response?.filters?.length
+				!nonBackgroundFilters?.length &&
+				!(search.controller as SearchController).previousResults.length
 			) {
 				window.location.replace(search?.response.results[0].mappings.core.url);
 				return false;
@@ -226,6 +228,11 @@ export class SearchController extends AbstractController {
 		}
 
 		const params = this.params;
+
+		if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
+			// save it to the history store
+			this.store.history.save(this.params.search.query.string);
+		}
 
 		try {
 			try {
