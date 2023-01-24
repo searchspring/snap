@@ -79,7 +79,51 @@ export default {
 		},
 		hideTerms: {
 			defaultValue: false,
-			description: 'prevent terms from rendering (also applicable to trending terms)',
+			description: 'prevent all terms from rendering (also applicable to trending and history terms)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideHistory: {
+			defaultValue: false,
+			description: 'prevent historical terms and results from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideTrending: {
+			defaultValue: false,
+			description: 'prevent trending terms and results from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		retainHistory: {
+			defaultValue: false,
+			description: 'allow history terms to render even when there is a query in the input',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		retainTrending: {
+			defaultValue: false,
+			description: 'allow trending terms to render even when there is a query in the input',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -173,6 +217,17 @@ export default {
 					summary: 'string',
 				},
 				defaultValue: { summary: 'Popular Searches' },
+			},
+			control: { type: 'text' },
+		},
+		historyTitle: {
+			defaultValue: 'Previously Searched',
+			description: 'Change historical terms header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Previously Searched' },
 			},
 			control: { type: 'text' },
 		},

@@ -44,14 +44,14 @@ type Observables = {
 	matchType?: typeof observable;
 };
 
-class Query {
+export class Query {
 	public string: string;
 	public url: UrlManager;
 
 	constructor(services: StoreServices, query: string) {
 		this.string = query;
 
-		this.url = services.urlManager.remove('page').remove('filter').set('query', this.string);
+		this.url = services?.urlManager?.remove('page').remove('filter').set('query', this.string);
 
 		makeObservable(this, {
 			string: observable,

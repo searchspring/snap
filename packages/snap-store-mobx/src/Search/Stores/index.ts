@@ -5,3 +5,4 @@ export { SearchPaginationStore } from './SearchPaginationStore';
 export { SearchResultStore, Product, Banner } from './SearchResultStore';
 export { SearchSortingStore } from './SearchSortingStore';
 export { SearchQueryStore } from './SearchQueryStore';
+export { SearchHistoryStore } from './SearchHistoryStore';

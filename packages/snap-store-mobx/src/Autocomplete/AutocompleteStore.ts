@@ -2,9 +2,23 @@ import { makeObservable, observable } from 'mobx';
 
 import { UrlManager } from '@searchspring/snap-url-manager';
 import { AbstractStore } from '../Abstract/AbstractStore';
-import { SearchFilterStore, SearchResultStore, SearchMerchandisingStore, SearchPaginationStore, SearchSortingStore } from '../Search/Stores';
-import { StorageStore } from '../Storage/StorageStore';
-import { AutocompleteStateStore, AutocompleteTermStore, AutocompleteQueryStore, AutocompleteFacetStore, AutocompleteTrendingStore } from './Stores';
+import {
+	SearchFilterStore,
+	SearchResultStore,
+	SearchMerchandisingStore,
+	SearchPaginationStore,
+	SearchSortingStore,
+	SearchHistoryStore,
+} from '../Search/Stores';
+import { StorageStore, StorageType } from '../Storage/StorageStore';
+import {
+	AutocompleteStateStore,
+	AutocompleteTermStore,
+	AutocompleteQueryStore,
+	AutocompleteFacetStore,
+	AutocompleteTrendingStore,
+	AutocompleteHistoryStore,
+} from './Stores';
 
 import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { TrendingResponseModel } from '@searchspring/snap-client';
@@ -24,6 +38,7 @@ export class AutocompleteStore extends AbstractStore {
 	public state: AutocompleteStateStore;
 	public storage: StorageStore;
 	public trending: AutocompleteTrendingStore;
+	public history: AutocompleteHistoryStore;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
 		super(config);
@@ -35,8 +50,12 @@ export class AutocompleteStore extends AbstractStore {
 		this.services = services;
 
 		this.state = new AutocompleteStateStore(services);
+
 		this.storage = new StorageStore();
+
 		this.trending = [];
+		this.history = [];
+		this.initHistory();
 
 		this.reset();
 
@@ -56,7 +75,23 @@ export class AutocompleteStore extends AbstractStore {
 	public reset(): void {
 		this.state.reset();
 		this.update();
-		this.resetTrending();
+		this.resetTerms();
+	}
+
+	public initHistory(): void {
+		const limit = (this.config as AutocompleteStoreConfig).settings?.history?.limit;
+		if (limit) {
+			const historyStore = new SearchHistoryStore({ siteId: this.config.globals?.siteId! }, this.services);
+
+			this.history = new AutocompleteHistoryStore(
+				this.services,
+				historyStore.getStoredData(limit),
+				() => {
+					this.resetTerms();
+				},
+				this.state
+			);
+		}
 	}
 
 	public resetTrending(): void {
@@ -67,7 +102,19 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
+	public resetHistory(): void {
+		this.history.forEach((term) => {
+			term.active = false;
+		});
+	}
+
 	public resetTerms(): void {
+		this.resetSuggestions();
+		this.resetTrending();
+		this.resetHistory();
+	}
+
+	public resetSuggestions(): void {
 		this.terms?.forEach((term) => {
 			term.active = false;
 		});
@@ -111,7 +158,7 @@ export class AutocompleteStore extends AbstractStore {
 				data.autocomplete || {},
 				data.pagination || {},
 				() => {
-					this.resetTrending();
+					this.resetTerms();
 				},
 				this.state
 			);

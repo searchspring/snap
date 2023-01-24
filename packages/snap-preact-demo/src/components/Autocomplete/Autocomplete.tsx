@@ -24,12 +24,16 @@ export class Autocomplete extends Component<AutocompleteProps> {
 			0: {
 				columns: 1,
 				rows: 1,
+				hideHistory: true,
+				hideTrending: true,
 			},
 			320: {
 				columns: 2,
 				rows: 1,
 				hideFacets: true,
 				vertical: true,
+				hideHistory: true,
+				hideTrending: true,
 			},
 			768: {
 				columns: 3,
