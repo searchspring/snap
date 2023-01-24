@@ -1,12 +1,12 @@
 import { h } from 'preact';
 
-export function useA11y(elem: any, tabIndex?: number, focusRingColor?: string) {
+export function useA11y(elem: any, tabIndex?: number) {
 	const styleId = 'ssA11yFocusStyle';
 	if (!document.querySelector(`#${styleId}`)) {
 		var style = document.createElement('style');
 		style.type = 'text/css';
 		style.id = styleId;
-		style.innerHTML = `[ssA11y]:focus-visible { outline: ${focusRingColor || '-webkit-focus-ring-color'} auto 1px !important; }`;
+		style.innerHTML = `[ssA11y]:focus-visible { outline: -webkit-focus-ring-color auto 1px !important; }`;
 		document.getElementsByTagName('head')[0].appendChild(style);
 	}
 
