@@ -108,51 +108,63 @@ export class SearchController extends AbstractController {
 			const storableRequestParams = getStorableRequestParams(search.request);
 
 			const stringyParams = JSON.stringify(storableRequestParams);
+			const infiniteSettings = this.config.settings?.infinite;
+			if (infiniteSettings?.restorePosition) {
+				const scrollMap = this.storage.get('scrollMap') || {};
+				// interval we ony need to keep checking until the page height > than our stored value
+				const scrollToPosition = scrollMap[stringyParams];
 
-			if (this.config.settings?.infinite?.restorePosition) {
-				if (this.config.settings?.infinite.selector) {
-					const scrollMap = this.storage.get('scrollMap') || {};
-
-					// interval we ony need to keep checking until the page height > than our stored value
-					const scrollToElemLink = scrollMap[stringyParams];
-
-					if (scrollToElemLink) {
-						const elem = document.querySelector(`${this.config.settings?.infinite.selector} a[href="${scrollToElemLink}"]`);
-
-						let checkCount = 0;
-						const elemCheck = window.setInterval(() => {
+				if (scrollToPosition) {
+					let checkCount = 0;
+					const offset = () => {
+						window.scrollBy(0, infiniteSettings?.restorePositionOffset!);
+					};
+					const checker = window.setInterval(() => {
+						//selector or coordinates?
+						if (infiniteSettings?.restorePositionSelector) {
+							const elem = document.querySelector(`${infiniteSettings?.restorePositionSelector} a[href="${scrollToPosition}"]`);
 							if (elem) {
-								elem.scrollIntoView();
+								//delayed?
+								if (infiniteSettings?.restorePositionDelay) {
+									setTimeout(() => {
+										elem.scrollIntoView();
+										if (infiniteSettings?.restorePositionOffset) {
+											offset();
+										}
+									}, infiniteSettings?.restorePositionDelay);
+								} else {
+									elem.scrollIntoView();
+								}
 								this.log.debug('scrolling to: ', elem);
-								window.clearInterval(elemCheck);
+								window.clearInterval(checker);
 							}
-							if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
-								window.clearInterval(elemCheck);
-							}
-							checkCount++;
-						}, HEIGHT_CHECK_INTERVAL);
-					}
-				} else {
-					// restore the scroll position saved previously
-					const scrollMap = this.storage.get('scrollMap') || {};
-
-					// interval we ony need to keep checking until the page height > than our stored value
-					const scrollToPosition = scrollMap[stringyParams];
-
-					if (scrollToPosition) {
-						let checkCount = 0;
-						const heightCheck = window.setInterval(() => {
+						} else {
 							if (document.documentElement.scrollHeight >= scrollToPosition) {
-								window.scrollTo(0, scrollToPosition);
+								if (infiniteSettings?.restorePositionDelay) {
+									setTimeout(() => {
+										window.scrollTo(0, scrollToPosition);
+										if (infiniteSettings?.restorePositionOffset) {
+											offset();
+										}
+									}, infiniteSettings?.restorePositionDelay);
+								} else {
+									window.scrollTo(0, scrollToPosition);
+								}
+
 								this.log.debug('scrolling to: ', scrollMap[stringyParams]);
-								window.clearInterval(heightCheck);
+								window.clearInterval(checker);
 							}
-							if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
-								window.clearInterval(heightCheck);
-							}
-							checkCount++;
-						}, HEIGHT_CHECK_INTERVAL);
-					}
+						}
+
+						if (infiniteSettings?.restorePositionOffset && !infiniteSettings.restorePositionDelay) {
+							offset();
+						}
+
+						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
+							window.clearInterval(checker);
+						}
+						checkCount++;
+					}, HEIGHT_CHECK_INTERVAL);
 				}
 			}
 		});
@@ -173,7 +185,7 @@ export class SearchController extends AbstractController {
 					stringyParams = JSON.stringify(storableRequestParams);
 
 					const scrollMap: any = {};
-					if (this.config.settings.infinite.selector) {
+					if (this.config.settings?.infinite?.restorePositionSelector) {
 						//lets check for the href in the target first.
 						if ((e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value) {
 							scrollMap[stringyParams] = (e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value;

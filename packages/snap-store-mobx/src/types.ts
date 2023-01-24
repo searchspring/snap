@@ -22,7 +22,9 @@ export type SearchStoreConfig = StoreConfig & {
 		infinite?: {
 			backfill?: number;
 			restorePosition?: boolean;
-			selector?: string;
+			restorePositionSelector?: string;
+			restorePositionOffset?: number;
+			restorePositionDelay?: number;
 		};
 	};
 };
