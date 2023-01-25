@@ -175,7 +175,7 @@ export class SearchController extends AbstractController {
 
 					const scrollMap: any = {};
 
-					if (this.config.settings?.infinite?.restorePosition?.selector) {
+					if ((this.config.settings?.infinite?.restorePosition as RestorePositionConfig)?.selector) {
 						//lets check for the href in the target first.
 						if ((e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value) {
 							scrollMap[stringyParams] = (e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value;
