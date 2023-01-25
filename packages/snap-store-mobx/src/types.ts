@@ -21,12 +21,14 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
-			restorePosition?: boolean;
-			restorePositionSelector?: string;
-			restorePositionOffset?: number;
-			restorePositionDelay?: number;
+			restorePosition?: boolean | RestorePositionConfig;
 		};
 	};
+};
+
+export type RestorePositionConfig = {
+	selector?: string;
+	offset?: number;
 };
 
 export type FacetStoreConfig = {

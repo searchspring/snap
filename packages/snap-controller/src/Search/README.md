@@ -17,8 +17,9 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
-| settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
-| settings.infinite.selector | setting for passing a result css selector for restoring scroll position rather than the default x / y coordinates | ➖ |   |
+| settings.infinite.restorePosition | object to enable and configure restore position settings | true |   |
+| settings.infinite.restorePosition.selector | setting for passing a result css selector for restoring scroll position rather than the default x / y coordinates | ➖ |   |
+| settings.infinite.restorePosition.offset | setting for adjusting the y scroll position after restoring scroll position | ➖ |   |
 
 <br>
 

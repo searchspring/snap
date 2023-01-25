@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType, RestorePositionConfig } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
@@ -110,54 +110,43 @@ export class SearchController extends AbstractController {
 			const stringyParams = JSON.stringify(storableRequestParams);
 			const infiniteSettings = this.config.settings?.infinite;
 			if (infiniteSettings?.restorePosition) {
+				const { offset, selector } = infiniteSettings?.restorePosition as RestorePositionConfig;
+
 				const scrollMap = this.storage.get('scrollMap') || {};
 				// interval we ony need to keep checking until the page height > than our stored value
 				const scrollToPosition = scrollMap[stringyParams];
 
 				if (scrollToPosition) {
 					let checkCount = 0;
-					const offset = () => {
-						window.scrollBy(0, infiniteSettings?.restorePositionOffset!);
+
+					const offsetFunc = () => {
+						window.scrollBy(0, offset!);
 					};
 					const checker = window.setInterval(() => {
 						//selector or coordinates?
-						if (infiniteSettings?.restorePositionSelector) {
-							const elem = document.querySelector(`${infiniteSettings?.restorePositionSelector} a[href="${scrollToPosition}"]`);
-							if (elem) {
-								//delayed?
-								if (infiniteSettings?.restorePositionDelay) {
-									setTimeout(() => {
-										elem.scrollIntoView();
-										if (infiniteSettings?.restorePositionOffset) {
-											offset();
-										}
-									}, infiniteSettings?.restorePositionDelay);
-								} else {
-									elem.scrollIntoView();
+						if (selector) {
+							const elem = document.querySelector(`${selector} a[href="${scrollToPosition}"] img`);
+							//is the image loaded? if not wait for lazy
+							if (elem && (elem as HTMLImageElement).naturalHeight > 0) {
+								elem.scrollIntoView();
+								if (offset) {
+									offsetFunc();
 								}
 								this.log.debug('scrolling to: ', elem);
 								window.clearInterval(checker);
+							} else if (elem && (elem as HTMLImageElement).naturalHeight == 0) {
+								//scroll to initialize lazy load
+								elem.scrollIntoView();
 							}
 						} else {
 							if (document.documentElement.scrollHeight >= scrollToPosition) {
-								if (infiniteSettings?.restorePositionDelay) {
-									setTimeout(() => {
-										window.scrollTo(0, scrollToPosition);
-										if (infiniteSettings?.restorePositionOffset) {
-											offset();
-										}
-									}, infiniteSettings?.restorePositionDelay);
-								} else {
-									window.scrollTo(0, scrollToPosition);
+								window.scrollTo(0, scrollToPosition);
+								if (offset) {
+									offsetFunc();
 								}
-
 								this.log.debug('scrolling to: ', scrollMap[stringyParams]);
 								window.clearInterval(checker);
 							}
-						}
-
-						if (infiniteSettings?.restorePositionOffset && !infiniteSettings.restorePositionDelay) {
-							offset();
 						}
 
 						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
@@ -185,7 +174,8 @@ export class SearchController extends AbstractController {
 					stringyParams = JSON.stringify(storableRequestParams);
 
 					const scrollMap: any = {};
-					if (this.config.settings?.infinite?.restorePositionSelector) {
+
+					if (this.config.settings?.infinite?.restorePosition?.selector) {
 						//lets check for the href in the target first.
 						if ((e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value) {
 							scrollMap[stringyParams] = (e.currentTarget as HTMLAnchorElement)?.attributes['href' as any]?.value;
