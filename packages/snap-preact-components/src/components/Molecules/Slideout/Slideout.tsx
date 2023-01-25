@@ -33,17 +33,16 @@ const CSS = {
 		}),
 };
 
-const buttonClass = 'ss__slideout__button';
-
 export function Slideout(properties: SlideoutProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+
 	const props: SlideoutProps = {
 		// default props
 		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: <div className={buttonClass}>click me</div>,
+		buttonContent: 'click me',
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme
@@ -53,7 +52,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, width, displayAt, transitionSpeed, overlayColor, slideDirection, buttonContent, disableStyles, className, style } = props;
+	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -74,8 +73,18 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	// state
 	const [isActive, setActive] = useState(Boolean(active));
+	const [renderContent, setRenderContent] = useState(Boolean(active));
 	const toggleActive = () => {
+		if (isActive) {
+			setTimeout(() => {
+				setRenderContent(!renderContent);
+			}, 250);
+		} else {
+			setRenderContent(!isActive);
+		}
+
 		setActive(!isActive);
+
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
 
@@ -94,10 +103,14 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	return isVisible ? (
 		<CacheProvider>
-			<ButtonContent content={buttonContent} toggleActive={toggleActive} />
+			{buttonContent && (
+				<div className="ss__slideout__button" onClick={() => toggleActive()}>
+					{buttonContent}
+				</div>
+			)}
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-				{cloneWithProps(children, { toggleActive, active: isActive })}
+				{renderContent && cloneWithProps(children, { toggleActive, active: isActive })}
 			</div>
 			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
 		</CacheProvider>
@@ -105,37 +118,6 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		<Fragment></Fragment>
 	);
 }
-
-const ButtonContent = (props: { content: string | JSX.Element | undefined; toggleActive: () => void }): JSX.Element => {
-	const { content, toggleActive } = props;
-
-	if (content && typeof content == 'string') {
-		return (
-			<div className={buttonClass} onClick={() => toggleActive()} ref={(e) => useA11y(e)}>
-				{content}
-			</div>
-		);
-	} else if (content && typeof content == 'object') {
-		let clone = cloneWithProps(content, {
-			onClick: () => toggleActive(),
-		});
-
-		if (clone.props.class || clone.props.className) {
-			// check if class
-			if (clone.props.class && clone.props.class.indexOf(buttonClass) < 0) {
-				clone.props.class = `${clone.props.class} ${buttonClass}`;
-			}
-			// check if classname
-			if (clone.props.className && clone.props.className.indexOf(buttonClass) < 0) {
-				clone.props.className = `${clone.props.className} ${buttonClass}`;
-			}
-		} else {
-			clone.props.className = clone.props.class = buttonClass;
-		}
-
-		return clone;
-	} else return <></>;
-};
 
 export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;
