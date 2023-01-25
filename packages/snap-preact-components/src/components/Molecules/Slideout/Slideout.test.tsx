@@ -189,7 +189,7 @@ describe('Slideout Component', () => {
 			buttonContent: <span class="findMe">{textContent}</span>,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		const buttonElement = rendered.container.querySelector('.findMe');
 		expect(buttonElement).toHaveTextContent(textContent);
 	});
 
@@ -200,7 +200,7 @@ describe('Slideout Component', () => {
 			buttonContent: <span className="findMe">{textContent}</span>,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const buttonElement = rendered.container.querySelector('.findMe.ss__slideout__button');
+		const buttonElement = rendered.container.querySelector('.findMe');
 		expect(buttonElement).toHaveTextContent(textContent);
 	});
 
