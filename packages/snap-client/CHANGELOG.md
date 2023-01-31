@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.3](https://github.com/searchspring/snap/compare/v0.39.2...v0.39.3) (2023-01-31)
+
+
+### Bug Fixes
+
+* **client:** dereferencing the memory cache so that the cache is not modified by mobx ([4a08102](https://github.com/searchspring/snap/commit/4a08102c76665630656f1024458a0b7f7b6da96a))
+
+
+
+
+
 ## [0.39.2](https://github.com/searchspring/snap/compare/v0.39.1...v0.39.2) (2022-12-29)
 
 **Note:** Version bump only for package @searchspring/snap-client
