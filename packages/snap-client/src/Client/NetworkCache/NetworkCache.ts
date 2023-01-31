@@ -31,7 +31,7 @@ export class NetworkCache {
 			try {
 				if (this.memoryCache[key]) {
 					if (Date.now() < this.memoryCache[key].expires) {
-						return this.memoryCache[key].value;
+						return deepmerge({}, this.memoryCache[key].value);
 					}
 				}
 
