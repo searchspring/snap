@@ -11,6 +11,7 @@ import { ControllerTypes } from '@searchspring/snap-controller';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
+	Controllers,
 	AbstractController,
 	SearchController,
 	AutocompleteController,
@@ -104,8 +105,6 @@ type SnapServices = {
 	tracker?: Tracker;
 	logger?: Logger;
 };
-
-type Controllers = SearchController | AutocompleteController | FinderController | RecommendationController;
 
 const SESSION_ATTRIBUTION = 'ssAttribution';
 

@@ -61,7 +61,7 @@ let config: SnapConfig = {
 					plugins: [[afterStore], [configurable, 'thing1', 'thing2']],
 					settings: {
 						infinite: {
-							backfill: 5,
+							backfill: 15,
 							// restorePosition: false,
 						},
 						redirects: {

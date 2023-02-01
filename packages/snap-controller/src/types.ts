@@ -1,4 +1,4 @@
-import type { AbstractController } from './Abstract/AbstractController';
+import type { AbstractController, AutocompleteController, SearchController, FinderController, RecommendationController } from './index';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
@@ -39,12 +39,23 @@ export type AfterStoreObj = {
 	response: any;
 };
 
+export type RestorePositionObj = {
+	controller: AbstractController;
+	position: {
+		selector?: string;
+		x?: number;
+		y?: number;
+	};
+};
+
 export enum ControllerTypes {
 	search = 'search',
 	autocomplete = 'autocomplete',
 	finder = 'finder',
 	recommendation = 'recommendation',
 }
+
+export type Controllers = SearchController | AutocompleteController | FinderController | RecommendationController;
 
 export type ControllerServices = {
 	client: Client;
