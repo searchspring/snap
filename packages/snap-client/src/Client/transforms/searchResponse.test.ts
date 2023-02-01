@@ -201,6 +201,19 @@ const mockMerchandising = {
 	campaigns: [],
 	facets: [],
 	facetsHide: [],
+	personalized: false,
+};
+
+const mockPersonalizedMerchandising = {
+	redirect: '',
+	is_elevated: [],
+	elevated: [],
+	removed: [],
+	content: [],
+	campaigns: [],
+	facets: [],
+	facetsHide: [],
+	personalized: true,
 };
 
 const mockPagination = {
@@ -537,6 +550,7 @@ describe('search response merch transformer', () => {
 		expect(response.merchandising).toEqual({
 			redirect: mockMerchandising.redirect,
 			content: mockMerchandising.content,
+			personalized: mockMerchandising.personalized,
 			campaigns: mockMerchandising.campaigns,
 		});
 	});
@@ -549,6 +563,16 @@ describe('search response merch transformer', () => {
 
 		expect(typeof response.merchandising.content).toEqual('object');
 		expect(Array.isArray(response.merchandising.content)).toBe(false);
+	});
+
+	it('ensures personalization exists', () => {
+		const response = transformSearchResponse.merchandising({
+			...mockResponse,
+			merchandising: mockPersonalizedMerchandising,
+		});
+
+		expect(typeof response.merchandising.content).toEqual('object');
+		expect(response.merchandising.personalized).toBe(true);
 	});
 });
 
