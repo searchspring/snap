@@ -460,3 +460,8 @@ See `SearchController.store.pagination` section above.
 ### AutocompleteController.store.sorting
 
 See `SearchController.store.sorting` section above.
+
+### AutocompleteController.store.history
+
+The `history` property contains an array of previously searched `terms`. Historical terms are not relevant to the current query and are stored in localstorage. Historical terms can be displayed in the Autocomplete component in place of or in addition to trending and suggested terms. Historical terms must be enabled via settings in the AutocompleteController config.
+

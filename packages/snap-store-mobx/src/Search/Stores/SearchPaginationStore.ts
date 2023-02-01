@@ -1,6 +1,6 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
-import type { SearchStoreConfig, StoreServices } from '../../types';
+import type { StoreConfigs, StoreServices, SearchStoreConfig } from '../../types';
 import type { SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
@@ -15,10 +15,10 @@ export class SearchPaginationStore {
 	public defaultPageSize: number;
 	public totalResults: number;
 	public totalPages: number;
-	public controllerConfig: SearchStoreConfig;
+	public controllerConfig: StoreConfigs;
 
 	constructor(
-		config: SearchStoreConfig,
+		config: StoreConfigs,
 		services: StoreServices,
 		paginationData: SearchResponseModelPagination = {
 			page: undefined,
@@ -71,7 +71,7 @@ export class SearchPaginationStore {
 	}
 
 	public get begin(): number {
-		if (this.controllerConfig.settings?.infinite) {
+		if ((this.controllerConfig as SearchStoreConfig).settings?.infinite) {
 			return 1;
 		}
 		return this.pageSize * (this.page - 1) + 1;

@@ -1,6 +1,8 @@
 import { observable, makeObservable } from 'mobx';
-import type { StoreServices } from '../../types';
+
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
+
+import type { StoreServices } from '../../types';
 
 export class RecommendationProfileStore {
 	public tag!: string;

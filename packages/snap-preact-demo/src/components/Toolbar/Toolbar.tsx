@@ -19,7 +19,7 @@ export class Toolbar extends Component<ToolBarProps> {
 
 		return (
 			<div className="ss-toolbar ss-toolbar-top">
-				<Slideout displayAt={'(max-width: 991px)'} buttonContent={slideoutButton()}>
+				<Slideout displayAt={'(max-width: 991px)'} buttonContent={<SlideoutButton />}>
 					<Fragment>
 						<h3>Filters</h3>
 						<SidebarContents />
@@ -41,18 +41,20 @@ export class Toolbar extends Component<ToolBarProps> {
 	}
 }
 
-const slideoutButton = () => {
+const SlideoutButton = () => {
 	return (
-		<Button
-			style={{
-				margin: '0 10px',
-				display: 'block',
-				width: '100%',
-				boxSizing: 'border-box',
-				textAlign: 'center',
-			}}
-		>
-			Show Filters
-		</Button>
+		<>
+			<Button
+				style={{
+					margin: '10px 0',
+					display: 'block',
+					width: '100%',
+					boxSizing: 'border-box',
+					textAlign: 'center',
+				}}
+			>
+				Show Filters
+			</Button>
+		</>
 	);
 };

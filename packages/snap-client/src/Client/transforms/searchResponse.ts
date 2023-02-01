@@ -397,6 +397,7 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 		redirect: merchandising?.redirect || '',
 		content: merchandising.content || {},
 		campaigns: merchandising?.triggeredCampaigns || [],
+		personalized: merchandising?.personalized,
 	};
 
 	return {

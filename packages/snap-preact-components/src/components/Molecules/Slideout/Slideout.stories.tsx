@@ -96,6 +96,16 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		noButtonWrapper: {
+			description: 'Prevent the wrapper element from rendering (this element has the onClick handler to toggle the state)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
