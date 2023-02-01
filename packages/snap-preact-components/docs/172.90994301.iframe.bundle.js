@@ -1,8 +1,12 @@
-/*! For license information please see 172.cf2f9557f81e752c1284.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 172.90994301.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
-		68172: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -10,54 +14,54 @@
 					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
-			__webpack_require__(25047),
-				__webpack_require__(35883),
-				__webpack_require__(43105),
-				__webpack_require__(45794),
-				__webpack_require__(58188),
-				__webpack_require__(88233),
-				__webpack_require__(34115),
-				__webpack_require__(634),
-				__webpack_require__(20796),
-				__webpack_require__(28673),
-				__webpack_require__(15735),
-				__webpack_require__(6886),
-				__webpack_require__(32501),
-				__webpack_require__(26936),
-				__webpack_require__(27233),
-				__webpack_require__(73439),
-				__webpack_require__(34769);
-			var react = __webpack_require__(2784),
-				esm = __webpack_require__(87537),
-				dist_esm = __webpack_require__(31848),
-				global_window = __webpack_require__(35048),
+			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
+			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				dist_esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js'),
+				global_window = __webpack_require__('../../node_modules/global/window.js'),
 				window_default = __webpack_require__.n(global_window),
-				memoizerific = __webpack_require__(49224),
+				memoizerific = __webpack_require__('../../node_modules/memoizerific/memoizerific.js'),
 				memoizerific_default = __webpack_require__.n(memoizerific),
-				jsx = __webpack_require__(38367);
+				jsx = __webpack_require__('../../node_modules/refractor/lang/jsx.js');
 			const prism_jsx = __webpack_require__.n(jsx)();
-			var bash = __webpack_require__(49839);
+			var bash = __webpack_require__('../../node_modules/refractor/lang/bash.js');
 			const prism_bash = __webpack_require__.n(bash)();
-			var css = __webpack_require__(40614);
+			var css = __webpack_require__('../../node_modules/refractor/lang/css.js');
 			const prism_css = __webpack_require__.n(css)();
-			var js_extras = __webpack_require__(23692);
+			var js_extras = __webpack_require__('../../node_modules/refractor/lang/js-extras.js');
 			const prism_js_extras = __webpack_require__.n(js_extras)();
-			var json = __webpack_require__(16275);
+			var json = __webpack_require__('../../node_modules/refractor/lang/json.js');
 			const prism_json = __webpack_require__.n(json)();
-			var graphql = __webpack_require__(35785);
+			var graphql = __webpack_require__('../../node_modules/refractor/lang/graphql.js');
 			const prism_graphql = __webpack_require__.n(graphql)();
-			var markup = __webpack_require__(26495);
+			var markup = __webpack_require__('../../node_modules/refractor/lang/markup.js');
 			const prism_markup = __webpack_require__.n(markup)();
-			var markdown = __webpack_require__(75369);
+			var markdown = __webpack_require__('../../node_modules/refractor/lang/markdown.js');
 			const prism_markdown = __webpack_require__.n(markdown)();
-			var yaml = __webpack_require__(28919);
+			var yaml = __webpack_require__('../../node_modules/refractor/lang/yaml.js');
 			const prism_yaml = __webpack_require__.n(yaml)();
-			var tsx = __webpack_require__(43343);
+			var tsx = __webpack_require__('../../node_modules/refractor/lang/tsx.js');
 			const prism_tsx = __webpack_require__.n(tsx)();
-			var typescript = __webpack_require__(97288);
+			var typescript = __webpack_require__('../../node_modules/refractor/lang/typescript.js');
 			const prism_typescript = __webpack_require__.n(typescript)();
-			var objectWithoutPropertiesLoose = __webpack_require__(31461);
-			var defineProperty = __webpack_require__(56666);
+			var objectWithoutPropertiesLoose = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js');
+			var defineProperty = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/defineProperty.js');
 			function _objectSpread(target) {
 				for (var i = 1; i < arguments.length; i++) {
 					var source = null != arguments[i] ? Object(arguments[i]) : {},
@@ -75,7 +79,7 @@
 				}
 				return target;
 			}
-			var esm_extends = __webpack_require__(7896);
+			var esm_extends = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/extends.js');
 			function createStyleObject(classNames) {
 				var elementStyle = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
 					stylesheet = arguments.length > 2 ? arguments[2] : void 0;
@@ -126,7 +130,7 @@
 							  )
 							: _objectSpread({}, properties, { className: createClassNameString(properties.className) }),
 						children = childrenCreator(node.children);
-					return react.createElement(TagName, (0, esm_extends.Z)({ key }, props), children);
+					return compat_module.default.createElement(TagName, (0, esm_extends.Z)({ key }, props), children);
 				}
 			}
 			var newLineRegex = /\n/g;
@@ -138,7 +142,7 @@
 					_ref2$numberStyle = _ref2.numberStyle,
 					numberStyle = void 0 === _ref2$numberStyle ? {} : _ref2$numberStyle,
 					startingLineNumber = _ref2.startingLineNumber;
-				return react.createElement(
+				return compat_module.default.createElement(
 					'code',
 					{ style: Object.assign({}, codeStyle, containerStyle) },
 					(function getAllLineNumbers(_ref) {
@@ -147,7 +151,7 @@
 							style = _ref.style;
 						return lines.map(function (_, i) {
 							var number = i + startingLineNumber;
-							return react.createElement(
+							return compat_module.default.createElement(
 								'span',
 								{
 									key: 'line-'.concat(i),
@@ -312,7 +316,7 @@
 			function isHighlightJs(astGenerator) {
 				return astGenerator && void 0 !== astGenerator.highlightAuto;
 			}
-			var core = __webpack_require__(92037),
+			var core = __webpack_require__('../../node_modules/refractor/core.js'),
 				core_default = __webpack_require__.n(core),
 				SyntaxHighlighter = (function highlight(defaultAstGenerator, defaultStyle) {
 					return function SyntaxHighlighter(_ref7) {
@@ -383,7 +387,7 @@
 							]);
 						astGenerator = astGenerator || defaultAstGenerator;
 						var allLineNumbers = showLineNumbers
-								? react.createElement(AllLineNumbers, {
+								? compat_module.default.createElement(AllLineNumbers, {
 										containerStyle: lineNumberContainerStyle,
 										codeStyle: codeTagProps.style || {},
 										numberStyle: lineNumberStyle,
@@ -399,7 +403,13 @@
 										className: rest.className ? ''.concat(generatorClassName, ' ').concat(rest.className) : generatorClassName,
 										style: Object.assign({}, customStyle),
 								  });
-						if (!astGenerator) return react.createElement(PreTag, preProps, allLineNumbers, react.createElement(CodeTag, codeTagProps, code));
+						if (!astGenerator)
+							return compat_module.default.createElement(
+								PreTag,
+								preProps,
+								allLineNumbers,
+								compat_module.default.createElement(CodeTag, codeTagProps, code)
+							);
 						(wrapLines = !(!renderer || void 0 !== wrapLines) || wrapLines), (renderer = renderer || defaultRenderer);
 						var defaultCodeValue = [{ type: 'text', value: code }],
 							codeTree = (function getCodeTree(_ref6) {
@@ -434,10 +444,10 @@
 							codeTree.value.length + startingLineNumber,
 							lineNumberStyle
 						);
-						return react.createElement(
+						return compat_module.default.createElement(
 							PreTag,
 							preProps,
-							react.createElement(
+							compat_module.default.createElement(
 								CodeTag,
 								codeTagProps,
 								!showInlineLineNumbers && allLineNumbers,
@@ -450,9 +460,9 @@
 				return core_default().register(language);
 			};
 			const prism_light = SyntaxHighlighter;
-			var ActionBar = __webpack_require__(97408),
-				ScrollArea = __webpack_require__(54214),
-				ts_dedent_esm = __webpack_require__(51893),
+			var ActionBar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ActionBar/ActionBar.js'),
+				ScrollArea = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ScrollArea/ScrollArea.js'),
+				ts_dedent_esm = __webpack_require__('../../node_modules/ts-dedent/esm/index.js'),
 				formatter = memoizerific_default()(2)(function (code) {
 					return (0, ts_dedent_esm.C)(code);
 				});
@@ -637,7 +647,7 @@
 				Scroller = (0, dist_esm.styled)(function (_ref6) {
 					var children = _ref6.children,
 						className = _ref6.className;
-					return react.createElement(ScrollArea.x, { horizontal: !0, vertical: !0, className }, children);
+					return compat_module.default.createElement(ScrollArea.x, { horizontal: !0, vertical: !0, className }, children);
 				})(
 					{ position: 'relative' },
 					function (_ref7) {
@@ -681,7 +691,7 @@
 						]);
 					if ('string' != typeof children || !children.trim()) return null;
 					var highlightableCode = format ? formatter(children) : children.trim(),
-						_useState2 = _slicedToArray((0, react.useState)(!1), 2),
+						_useState2 = _slicedToArray((0, compat_module.useState)(!1), 2),
 						copied = _useState2[0],
 						setCopied = _useState2[1],
 						onClick = function onClick(e) {
@@ -695,15 +705,15 @@
 											return setCopied(!1);
 										}, 1500);
 								})
-								.catch(esm.logger.error);
+								.catch(esm.kg.error);
 						};
-					return react.createElement(
+					return compat_module.default.createElement(
 						Wrapper,
 						{ bordered, padded, className, onCopyCapture: onClick },
-						react.createElement(
+						compat_module.default.createElement(
 							Scroller,
 							null,
-							react.createElement(
+							compat_module.default.createElement(
 								prism_light,
 								_extends(
 									{
@@ -721,13 +731,13 @@
 								highlightableCode
 							)
 						),
-						copyable ? react.createElement(ActionBar.o, { actionItems: [{ title: copied ? 'Copied' : 'Copy', onClick }] }) : null
+						copyable ? compat_module.default.createElement(ActionBar.o, { actionItems: [{ title: copied ? 'Copied' : 'Copy', onClick }] }) : null
 					);
 				};
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';
 			const syntaxhighlighter = syntaxhighlighter_SyntaxHighlighter;
 		},
-		97327: (__unused_webpack_module, exports) => {
+		'../../node_modules/comma-separated-tokens/index.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			exports.Q = function parse(value) {
 				var val,
@@ -744,7 +754,7 @@
 				return values;
 			};
 		},
-		74163: (module) => {
+		'../../node_modules/hast-util-parse-selector/index.js': (module) => {
 			'use strict';
 			module.exports = function parse(selector, defaultTagName) {
 				var subvalue,
@@ -771,13 +781,13 @@
 			};
 			var search = /[#.]/g;
 		},
-		68924: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/factory.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var find = __webpack_require__(70521),
-				normalize = __webpack_require__(2939),
-				parseSelector = __webpack_require__(74163),
-				spaces = __webpack_require__(93113).Q,
-				commas = __webpack_require__(97327).Q;
+			var find = __webpack_require__('../../node_modules/property-information/find.js'),
+				normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				parseSelector = __webpack_require__('../../node_modules/hast-util-parse-selector/index.js'),
+				spaces = __webpack_require__('../../node_modules/space-separated-tokens/index.js').Q,
+				commas = __webpack_require__('../../node_modules/comma-separated-tokens/index.js').Q;
 			module.exports = function factory(schema, defaultTagName, caseSensitive) {
 				var adjust = caseSensitive
 					? (function createAdjustMap(values) {
@@ -867,46 +877,46 @@
 				);
 			}
 		},
-		88977: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var schema = __webpack_require__(59209),
-				html = __webpack_require__(68924)(schema, 'div');
+			var schema = __webpack_require__('../../node_modules/property-information/html.js'),
+				html = __webpack_require__('../../node_modules/hastscript/factory.js')(schema, 'div');
 			(html.displayName = 'html'), (module.exports = html);
 		},
-		22896: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			module.exports = __webpack_require__(88977);
+			module.exports = __webpack_require__('../../node_modules/hastscript/html.js');
 		},
-		73756: (module) => {
+		'../../node_modules/is-alphabetical/index.js': (module) => {
 			'use strict';
 			module.exports = function alphabetical(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 122) || (code >= 65 && code <= 90);
 			};
 		},
-		65279: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/is-alphanumerical/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var alphabetical = __webpack_require__(73756),
-				decimal = __webpack_require__(61278);
+			var alphabetical = __webpack_require__('../../node_modules/is-alphabetical/index.js'),
+				decimal = __webpack_require__('../../node_modules/is-decimal/index.js');
 			module.exports = function alphanumerical(character) {
 				return alphabetical(character) || decimal(character);
 			};
 		},
-		61278: (module) => {
+		'../../node_modules/is-decimal/index.js': (module) => {
 			'use strict';
 			module.exports = function decimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return code >= 48 && code <= 57;
 			};
 		},
-		48833: (module) => {
+		'../../node_modules/is-hexadecimal/index.js': (module) => {
 			'use strict';
 			module.exports = function hexadecimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 102) || (code >= 65 && code <= 70) || (code >= 48 && code <= 57);
 			};
 		},
-		68108: (module) => {
+		'../../node_modules/parse-entities/decode-entity.browser.js': (module) => {
 			'use strict';
 			var el;
 			module.exports = function decodeEntity(characters) {
@@ -920,14 +930,14 @@
 				return char !== entity && char;
 			};
 		},
-		18309: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/parse-entities/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var legacy = __webpack_require__(93562),
-				invalid = __webpack_require__(71216),
-				decimal = __webpack_require__(61278),
-				hexadecimal = __webpack_require__(48833),
-				alphanumerical = __webpack_require__(65279),
-				decodeEntity = __webpack_require__(68108);
+			var legacy = __webpack_require__('../../node_modules/character-entities-legacy/index.json'),
+				invalid = __webpack_require__('../../node_modules/character-reference-invalid/index.json'),
+				decimal = __webpack_require__('../../node_modules/is-decimal/index.js'),
+				hexadecimal = __webpack_require__('../../node_modules/is-hexadecimal/index.js'),
+				alphanumerical = __webpack_require__('../../node_modules/is-alphanumerical/index.js'),
+				decodeEntity = __webpack_require__('../../node_modules/parse-entities/decode-entity.browser.js');
 			module.exports = function parseEntities(value, options) {
 				var option,
 					key,
@@ -1080,9 +1090,10 @@
 				name = 'named',
 				hexa = 'hexadecimal',
 				deci = 'decimal',
-				bases = { hexadecimal: 16, decimal: 10 },
-				tests = {};
-			(tests.named = alphanumerical), (tests[deci] = decimal), (tests[hexa] = hexadecimal);
+				bases = {};
+			(bases[hexa] = 16), (bases[deci] = 10);
+			var tests = {};
+			(tests[name] = alphanumerical), (tests[deci] = decimal), (tests[hexa] = hexadecimal);
 			var messages = {};
 			function prohibited(code) {
 				return (code >= 55296 && code <= 57343) || code > 1114111;
@@ -1106,11 +1117,11 @@
 				(messages[6] = 'Numeric character references cannot be disallowed'),
 				(messages[7] = 'Numeric character references cannot be outside the permissible Unicode range');
 		},
-		70521: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/find.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var normalize = __webpack_require__(2939),
-				DefinedInfo = __webpack_require__(80441),
-				Info = __webpack_require__(9975);
+			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				DefinedInfo = __webpack_require__('../../node_modules/property-information/lib/util/defined-info.js'),
+				Info = __webpack_require__('../../node_modules/property-information/lib/util/info.js');
 			module.exports = function find(schema, value) {
 				var normal = normalize(value),
 					prop = value,
@@ -1127,7 +1138,7 @@
 						: (value = (function datasetToAttribute(property) {
 								var value = property.slice(4);
 								if (dash.test(value)) return property;
-								'-' !== (value = value.replace(cap, kebab)).charAt(0) && (value = '-' + value);
+								(value = value.replace(cap, kebab)), '-' !== value.charAt(0) && (value = '-' + value);
 								return 'data' + value;
 						  })(value)),
 					(Type = DefinedInfo));
@@ -1143,20 +1154,20 @@
 				return $0.charAt(1).toUpperCase();
 			}
 		},
-		59209: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var merge = __webpack_require__(2706),
-				xlink = __webpack_require__(62322),
-				xml = __webpack_require__(87361),
-				xmlns = __webpack_require__(45367),
-				aria = __webpack_require__(12024),
-				html = __webpack_require__(61921);
+			var merge = __webpack_require__('../../node_modules/property-information/lib/util/merge.js'),
+				xlink = __webpack_require__('../../node_modules/property-information/lib/xlink.js'),
+				xml = __webpack_require__('../../node_modules/property-information/lib/xml.js'),
+				xmlns = __webpack_require__('../../node_modules/property-information/lib/xmlns.js'),
+				aria = __webpack_require__('../../node_modules/property-information/lib/aria.js'),
+				html = __webpack_require__('../../node_modules/property-information/lib/html.js');
 			module.exports = merge([xml, xlink, xmlns, aria, html]);
 		},
-		12024: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/aria.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var types = __webpack_require__(87311),
-				create = __webpack_require__(96486),
+			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
+				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
 				booleanish = types.booleanish,
 				number = types.number,
 				spaceSeparated = types.spaceSeparated;
@@ -1217,11 +1228,11 @@
 				},
 			});
 		},
-		61921: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var types = __webpack_require__(87311),
-				create = __webpack_require__(96486),
-				caseInsensitiveTransform = __webpack_require__(12660),
+			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
+				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
+				caseInsensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-insensitive-transform.js'),
 				boolean = types.boolean,
 				overloadedBoolean = types.overloadedBoolean,
 				booleanish = types.booleanish,
@@ -1514,24 +1525,24 @@
 				},
 			});
 		},
-		12660: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/case-insensitive-transform.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var caseSensitiveTransform = __webpack_require__(72003);
+			var caseSensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-sensitive-transform.js');
 			module.exports = function caseInsensitiveTransform(attributes, property) {
 				return caseSensitiveTransform(attributes, property.toLowerCase());
 			};
 		},
-		72003: (module) => {
+		'../../node_modules/property-information/lib/util/case-sensitive-transform.js': (module) => {
 			'use strict';
 			module.exports = function caseSensitiveTransform(attributes, attribute) {
 				return attribute in attributes ? attributes[attribute] : attribute;
 			};
 		},
-		96486: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/create.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var normalize = __webpack_require__(2939),
-				Schema = __webpack_require__(74362),
-				DefinedInfo = __webpack_require__(80441);
+			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js'),
+				DefinedInfo = __webpack_require__('../../node_modules/property-information/lib/util/defined-info.js');
 			module.exports = function create(definition) {
 				var prop,
 					info,
@@ -1551,10 +1562,10 @@
 				return new Schema(property, normal, space);
 			};
 		},
-		80441: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/defined-info.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var Info = __webpack_require__(9975),
-				types = __webpack_require__(87311);
+			var Info = __webpack_require__('../../node_modules/property-information/lib/util/info.js'),
+				types = __webpack_require__('../../node_modules/property-information/lib/util/types.js');
 			(module.exports = DefinedInfo), (DefinedInfo.prototype = new Info()), (DefinedInfo.prototype.defined = !0);
 			var checks = ['boolean', 'booleanish', 'overloadedBoolean', 'number', 'commaSeparated', 'spaceSeparated', 'commaOrSpaceSeparated'],
 				checksLength = checks.length;
@@ -1568,7 +1579,7 @@
 				value && (values[key] = value);
 			}
 		},
-		9975: (module) => {
+		'../../node_modules/property-information/lib/util/info.js': (module) => {
 			'use strict';
 			module.exports = Info;
 			var proto = Info.prototype;
@@ -1588,10 +1599,10 @@
 				(proto.mustUseProperty = !1),
 				(proto.defined = !1);
 		},
-		2706: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/merge.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var xtend = __webpack_require__(51960),
-				Schema = __webpack_require__(74362);
+			var xtend = __webpack_require__('../../node_modules/xtend/immutable.js'),
+				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js');
 			module.exports = function merge(definitions) {
 				var info,
 					space,
@@ -1603,7 +1614,7 @@
 				return new Schema(xtend.apply(null, property), xtend.apply(null, normal), space);
 			};
 		},
-		74362: (module) => {
+		'../../node_modules/property-information/lib/util/schema.js': (module) => {
 			'use strict';
 			module.exports = Schema;
 			var proto = Schema.prototype;
@@ -1612,7 +1623,7 @@
 			}
 			(proto.space = null), (proto.normal = {}), (proto.property = {});
 		},
-		87311: (__unused_webpack_module, exports) => {
+		'../../node_modules/property-information/lib/util/types.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			var powers = 0;
 			function increment() {
@@ -1626,9 +1637,9 @@
 				(exports.commaSeparated = increment()),
 				(exports.commaOrSpaceSeparated = increment());
 		},
-		62322: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xlink.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(96486);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
 				space: 'xlink',
 				transform: function xlinkTransform(_, prop) {
@@ -1637,9 +1648,9 @@
 				properties: { xLinkActuate: null, xLinkArcRole: null, xLinkHref: null, xLinkRole: null, xLinkShow: null, xLinkTitle: null, xLinkType: null },
 			});
 		},
-		87361: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xml.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(96486);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
 				space: 'xml',
 				transform: function xmlTransform(_, prop) {
@@ -1648,10 +1659,10 @@
 				properties: { xmlLang: null, xmlBase: null, xmlSpace: null },
 			});
 		},
-		45367: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xmlns.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(96486),
-				caseInsensitiveTransform = __webpack_require__(12660);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
+				caseInsensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-insensitive-transform.js');
 			module.exports = create({
 				space: 'xmlns',
 				attributes: { xmlnsxlink: 'xmlns:xlink' },
@@ -1659,13 +1670,13 @@
 				properties: { xmlns: null, xmlnsXLink: null },
 			});
 		},
-		2939: (module) => {
+		'../../node_modules/property-information/normalize.js': (module) => {
 			'use strict';
 			module.exports = function normalize(value) {
 				return value.toLowerCase();
 			};
 		},
-		92037: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/core.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var ctx =
 					'object' == typeof globalThis
@@ -1686,13 +1697,13 @@
 					};
 				})();
 			ctx.Prism = { manual: !0, disableWorkerMessageHandler: !0 };
-			var h = __webpack_require__(22896),
-				decode = __webpack_require__(18309),
-				Prism = __webpack_require__(39399),
-				markup = __webpack_require__(26495),
-				css = __webpack_require__(40614),
-				clike = __webpack_require__(42449),
-				js = __webpack_require__(28473);
+			var h = __webpack_require__('../../node_modules/hastscript/index.js'),
+				decode = __webpack_require__('../../node_modules/parse-entities/index.js'),
+				Prism = __webpack_require__('../../node_modules/refractor/node_modules/prismjs/components/prism-core.js'),
+				markup = __webpack_require__('../../node_modules/refractor/lang/markup.js'),
+				css = __webpack_require__('../../node_modules/refractor/lang/css.js'),
+				clike = __webpack_require__('../../node_modules/refractor/lang/clike.js'),
+				js = __webpack_require__('../../node_modules/refractor/lang/javascript.js');
 			restore();
 			var own = {}.hasOwnProperty;
 			function Refractor() {}
@@ -1725,7 +1736,7 @@
 						map = name;
 					alias && ((map = {})[name] = alias);
 					for (key in map)
-						for (list = map[key], length = (list = 'string' == typeof list ? [list] : list).length, index = -1; ++index < length; )
+						for (length = (list = 'string' == typeof (list = map[key]) ? [list] : list).length, index = -1; ++index < length; )
 							languages[list[index]] = languages[key];
 				}),
 				(refract.registered = function registered(language) {
@@ -1784,7 +1795,7 @@
 					);
 				});
 		},
-		49839: (module) => {
+		'../../node_modules/refractor/lang/bash.js': (module) => {
 			'use strict';
 			function bash(Prism) {
 				!(function (Prism) {
@@ -1905,7 +1916,7 @@
 			}
 			(module.exports = bash), (bash.displayName = 'bash'), (bash.aliases = ['shell']);
 		},
-		42449: (module) => {
+		'../../node_modules/refractor/lang/clike.js': (module) => {
 			'use strict';
 			function clike(Prism) {
 				Prism.languages.clike = {
@@ -1929,7 +1940,7 @@
 			}
 			(module.exports = clike), (clike.displayName = 'clike'), (clike.aliases = []);
 		},
-		40614: (module) => {
+		'../../node_modules/refractor/lang/css.js': (module) => {
 			'use strict';
 			function css(Prism) {
 				!(function (Prism) {
@@ -1967,7 +1978,7 @@
 			}
 			(module.exports = css), (css.displayName = 'css'), (css.aliases = []);
 		},
-		35785: (module) => {
+		'../../node_modules/refractor/lang/graphql.js': (module) => {
 			'use strict';
 			function graphql(Prism) {
 				(Prism.languages.graphql = {
@@ -2065,7 +2076,7 @@
 			}
 			(module.exports = graphql), (graphql.displayName = 'graphql'), (graphql.aliases = []);
 		},
-		28473: (module) => {
+		'../../node_modules/refractor/lang/javascript.js': (module) => {
 			'use strict';
 			function javascript(Prism) {
 				(Prism.languages.javascript = Prism.languages.extend('clike', {
@@ -2184,7 +2195,7 @@
 			}
 			(module.exports = javascript), (javascript.displayName = 'javascript'), (javascript.aliases = ['js']);
 		},
-		23692: (module) => {
+		'../../node_modules/refractor/lang/js-extras.js': (module) => {
 			'use strict';
 			function jsExtras(Prism) {
 				!(function (Prism) {
@@ -2263,7 +2274,7 @@
 			}
 			(module.exports = jsExtras), (jsExtras.displayName = 'jsExtras'), (jsExtras.aliases = []);
 		},
-		16275: (module) => {
+		'../../node_modules/refractor/lang/json.js': (module) => {
 			'use strict';
 			function json(Prism) {
 				(Prism.languages.json = {
@@ -2280,7 +2291,7 @@
 			}
 			(module.exports = json), (json.displayName = 'json'), (json.aliases = ['webmanifest']);
 		},
-		38367: (module) => {
+		'../../node_modules/refractor/lang/jsx.js': (module) => {
 			'use strict';
 			function jsx(Prism) {
 				!(function (Prism) {
@@ -2382,7 +2393,7 @@
 			}
 			(module.exports = jsx), (jsx.displayName = 'jsx'), (jsx.aliases = []);
 		},
-		75369: (module) => {
+		'../../node_modules/refractor/lang/markdown.js': (module) => {
 			'use strict';
 			function markdown(Prism) {
 				!(function (Prism) {
@@ -2571,7 +2582,7 @@
 			}
 			(module.exports = markdown), (markdown.displayName = 'markdown'), (markdown.aliases = ['md']);
 		},
-		26495: (module) => {
+		'../../node_modules/refractor/lang/markup.js': (module) => {
 			'use strict';
 			function markup(Prism) {
 				(Prism.languages.markup = {
@@ -2669,10 +2680,10 @@
 			}
 			(module.exports = markup), (markup.displayName = 'markup'), (markup.aliases = ['html', 'mathml', 'svg', 'xml', 'ssml', 'atom', 'rss']);
 		},
-		43343: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/lang/tsx.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var refractorJsx = __webpack_require__(38367),
-				refractorTypescript = __webpack_require__(97288);
+			var refractorJsx = __webpack_require__('../../node_modules/refractor/lang/jsx.js'),
+				refractorTypescript = __webpack_require__('../../node_modules/refractor/lang/typescript.js');
 			function tsx(Prism) {
 				Prism.register(refractorJsx),
 					Prism.register(refractorTypescript),
@@ -2687,7 +2698,7 @@
 			}
 			(module.exports = tsx), (tsx.displayName = 'tsx'), (tsx.aliases = []);
 		},
-		97288: (module) => {
+		'../../node_modules/refractor/lang/typescript.js': (module) => {
 			'use strict';
 			function typescript(Prism) {
 				!(function (Prism) {
@@ -2727,7 +2738,7 @@
 			}
 			(module.exports = typescript), (typescript.displayName = 'typescript'), (typescript.aliases = ['ts']);
 		},
-		28919: (module) => {
+		'../../node_modules/refractor/lang/yaml.js': (module) => {
 			'use strict';
 			function yaml(Prism) {
 				!(function (Prism) {
@@ -2803,7 +2814,7 @@
 			}
 			(module.exports = yaml), (yaml.displayName = 'yaml'), (yaml.aliases = ['yml']);
 		},
-		39399: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/node_modules/prismjs/components/prism-core.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			var Prism = (function (_self) {
 				var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i,
 					uniqueId = 0,
@@ -3160,7 +3171,7 @@
 			})('undefined' != typeof window ? window : 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {});
 			module.exports && (module.exports = Prism), void 0 !== __webpack_require__.g && (__webpack_require__.g.Prism = Prism);
 		},
-		93113: (__unused_webpack_module, exports) => {
+		'../../node_modules/space-separated-tokens/index.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			exports.Q = function parse(value) {
 				var input = String(value || '').trim();
@@ -3168,7 +3179,7 @@
 			};
 			var whiteSpace = /[ \t\n\r\f]+/g;
 		},
-		51960: (module) => {
+		'../../node_modules/xtend/immutable.js': (module) => {
 			module.exports = function extend() {
 				for (var target = {}, i = 0; i < arguments.length; i++) {
 					var source = arguments[i];
@@ -3178,13 +3189,13 @@
 			};
 			var hasOwnProperty = Object.prototype.hasOwnProperty;
 		},
-		93562: (module) => {
+		'../../node_modules/character-entities-legacy/index.json': (module) => {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
 			);
 		},
-		71216: (module) => {
+		'../../node_modules/character-reference-invalid/index.json': (module) => {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
