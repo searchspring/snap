@@ -287,6 +287,9 @@ export class SearchController extends AbstractController {
 						pageSize = meta.pagination?.defaultPageSize!;
 					}
 
+					// restricting pageSize to the limit
+					pageSize = pageSize > API_LIMIT ? API_LIMIT : pageSize;
+
 					const pagesNeeded =
 						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
 							? this.config.settings?.infinite.backfill
