@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType, SearchHistoryStore } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -370,8 +370,11 @@ export class AutocompleteController extends AbstractController {
 
 					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
 						this.store.trending[0].preview();
+					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
+						this.store.history[0].preview();
 					}
 				} else {
+					this.store.resetTerms();
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();

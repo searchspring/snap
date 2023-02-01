@@ -65,6 +65,13 @@ The `trendingTitle` prop will display the given text above the autocomplete term
 <Autocomplete controller={controller} input={'#searchInput'} trendingTitle={'Trending'} />
 ```
 
+### historyTitle
+The `historyTitle` prop will display the given text above the autocomplete historical terms area when historical terms are displayed. The default value is 'Previously Searched' and does not affect trending/non-trending terms title `termsTitle` & `trendingTitle`. Also requires `controller.config.settings.history.limit` to be configured.)
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} historyTitle={'History'} />
+```
+
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the autocomplete facets area. (default is blank)
 
@@ -147,10 +154,24 @@ The `hideFacets` prop specifies if the facets within autocomplete should be rend
 ```
 
 ### hideTerms
-The `hideTerms` prop specifies if the terms within autocomplete should be rendered.
+The `hideTerms` prop specifies if the terms section within autocomplete should be rendered.
 
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />
+```
+
+### hideHistory
+The `hideHistory` prop specifies if the historical terms and results within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideHistory={true} />
+```
+
+### hideTrending
+The `hideTrending` prop specifies if the trending terms and results within autocomplete should be rendered.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} hideTrending={true} />
 ```
 
 ### hideContent
@@ -172,6 +193,20 @@ The `hideLink` prop specifies if the "see n results for keyword" text within aut
 
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} hideLink={true} />
+```
+
+### retainTrending
+The `retainTrending` prop specifies if the trending terms within autocomplete should be rendered when there is a query.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} retainTrending={true} />
+```
+
+### retainHistory
+The `retainHistory` prop specifies if the trending terms within autocomplete should be rendered when there is a query. 
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} retainHistory={true} />
 ```
 
 ### breakpoints

@@ -18,7 +18,7 @@ describe('Autocomplete Component', () => {
 	let acConfig: AutocompleteControllerConfig;
 	let controllerConfigId: string;
 	let container: Element;
-	const config = {
+	const clientConfig = {
 		globals: {
 			siteId: '8uyt2m',
 		},
@@ -38,6 +38,9 @@ describe('Autocomplete Component', () => {
 				trending: {
 					limit: 5,
 				},
+				history: {
+					limit: 5,
+				},
 			},
 		};
 		container = document.getElementById('target')!;
@@ -51,7 +54,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('does not render if input have not been focused', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -65,7 +68,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('renders after input has been focused', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -85,7 +88,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const breakpoints = {
@@ -115,7 +118,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can hover over terms, & facets', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -195,8 +198,18 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink & hideHistory', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -204,17 +217,25 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			hideTerms: true,
 			hideFacets: true,
+			hideTrending: true,
 			hideContent: true,
 			hideLink: true,
+			hideHistory: true,
+			retainHistory: true,
+			retainTrending: true,
 		};
 
 		const otherArgs = {
 			controller,
 			input: controller.config.selector,
 			hideTerms: false,
+			hideTrending: false,
 			hideFacets: false,
 			hideContent: false,
 			hideLink: false,
+			hideHistory: false,
+			retainHistory: true,
+			retainTrending: true,
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -235,6 +256,12 @@ describe('Autocomplete Component', () => {
 
 			let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
 			expect(link).not.toBeInTheDocument();
+
+			let history = renderedWithout.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
+			expect(history).not.toBeInTheDocument();
+
+			let trending = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			expect(trending).not.toBeInTheDocument();
 		});
 
 		let renderedWith = render(<Autocomplete {...otherArgs} />, { container });
@@ -251,11 +278,17 @@ describe('Autocomplete Component', () => {
 
 			let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
 			expect(link2).toBeInTheDocument();
+
+			let history2 = renderedWith.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
+			expect(history2).toBeInTheDocument();
+
+			let trending2 = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			expect(trending2).toBeInTheDocument();
 		});
 	});
 
 	it('can hideBanners', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -291,16 +324,30 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
 			controller,
 			input: controller.config.selector,
 			termsTitle: 'custom termsTitle',
+			trendingTitle: 'custom TrendingTitle',
 			facetsTitle: 'custom facetsTitle',
 			contentTitle: 'custom contentTitle',
+			historyTitle: 'custom histoyTitle',
+			retainHistory: true,
+			retainTrending: true,
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -318,11 +365,98 @@ describe('Autocomplete Component', () => {
 
 			let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
 			expect(contentTitle).toHaveTextContent(args.contentTitle);
+
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+	});
+
+	it('can use retainhistory && retaintrending false', async () => {
+		let mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+
+		const args = {
+			controller,
+			retainHistory: false,
+			retainTrending: false,
+			historyTitle: 'custom histoy Title',
+			trendingTitle: 'custom trending Title',
+		};
+
+		input.focus();
+
+		let rendered = render(<Autocomplete input={input} {...args} />, { container });
+
+		await waitFor(() => {
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+
+		input.focus();
+		userEvent.keyboard('dress');
+
+		await waitFor(() => {
+			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).not.toBeInTheDocument();
+
+			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).not.toBeInTheDocument();
+		});
+
+		const args2 = {
+			controller,
+			input: controller.config.selector,
+			retainHistory: true,
+			retainTrending: true,
+			historyTitle: 'custom histoy Title',
+			trendingTitle: 'custom trending Title',
+		};
+
+		input.value = '';
+		input.focus();
+		let rendered2 = render(<Autocomplete {...args2} />, { container });
+
+		await waitFor(() => {
+			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+		});
+
+		input.focus();
+		userEvent.keyboard('dress');
+
+		rendered2 = render(<Autocomplete {...args2} />, { container });
+		await waitFor(() => {
+			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			expect(historyTitle).toHaveTextContent(args.historyTitle);
+
+			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
+			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 	});
 
 	it('can set a custom trending title', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -345,7 +479,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -385,7 +519,7 @@ describe('Autocomplete Component', () => {
 
 	//cant render both content slot and results slot at the same time.
 	it('can set a custom content slot', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -408,7 +542,7 @@ describe('Autocomplete Component', () => {
 
 	// needs own term
 	it('can set a custom noResults slot', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -444,7 +578,7 @@ describe('Autocomplete Component', () => {
 			},
 		};
 
-		const controller = createAutocompleteController({ client: config, controller: trendingACConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: trendingACConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -473,7 +607,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can set a custom css width', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const args = {
@@ -509,7 +643,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can use breakpoints', async () => {
-		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
 		const customBreakpoints = {
@@ -546,6 +680,9 @@ describe('Autocomplete Component', () => {
 		await waitFor(() => {
 			expect(acFacets).not.toBeInTheDocument();
 		});
+
+		// Change the viewport back to desktop.
+		global.innerWidth = 1500;
 	});
 
 	describe('AutoComplete theming works', () => {
@@ -558,7 +695,7 @@ describe('Autocomplete Component', () => {
 				},
 			};
 
-			const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 			await controller.bind();
 
 			const args = {
@@ -591,7 +728,7 @@ describe('Autocomplete Component', () => {
 				},
 			};
 
-			const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 			await controller.bind();
 
 			const args = {
@@ -626,7 +763,7 @@ describe('Autocomplete Component', () => {
 				},
 			};
 
-			const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 			await controller.bind();
 
 			const args = {
@@ -653,13 +790,13 @@ describe('Autocomplete Component', () => {
 		});
 
 		it('breakpoints override theme prop', async () => {
-			// Change the viewport to 500px.
+			// Change the viewport to 1200px.
 			global.innerWidth = 1200;
 
 			// Trigger the window resize event.
 			global.dispatchEvent(new Event('resize'));
 
-			const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 			await controller.bind();
 
 			const theme = {

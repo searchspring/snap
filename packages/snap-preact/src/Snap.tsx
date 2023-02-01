@@ -9,7 +9,6 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
-import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	AbstractController,
@@ -30,7 +29,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfigs } from './types';
+import type { SnapControllerServices, SnapControllerConfig } from './types';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -226,7 +225,7 @@ export class Snap {
 		}
 
 		// @ts-ignore - we know the config is correct, but complicated typing
-		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
+		const creationFunc: (config: SnapControllerConfig, services: SnapControllerServices) => Controllers = (await importPromise).default;
 
 		if (!this.controllers[config.id]) {
 			window.searchspring.controller = window.searchspring.controller || {};

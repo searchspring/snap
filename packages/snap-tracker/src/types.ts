@@ -59,6 +59,15 @@ export enum BeaconCategory {
 	CUSTOM = 'custom',
 }
 
+export enum ProfilePlacement {
+	BASKETPAGE = 'basket-page',
+	CONFIRMATIONPAGE = 'confirmation-page',
+	PRODUCTPAGE = 'product-page',
+	NORESULTSPAGE = 'no-results-page',
+	HOMEPAGE = 'home-page',
+	OTHER = 'other',
+}
+
 export interface BeaconContext {
 	userId?: string;
 	pageLoadId?: string;
@@ -130,7 +139,7 @@ export interface OrderTransactionData {
 export interface RecommendationsEvent {
 	profile?: {
 		tag?: string;
-		placement?: string;
+		placement?: ProfilePlacement;
 		seed?: ProductViewEvent[];
 	};
 	product?: {
@@ -150,7 +159,7 @@ export interface RecommendationsEvent {
 	context?: {
 		type?: string;
 		tag?: string;
-		placement?: string;
+		placement?: ProfilePlacement;
 	};
 }
 export interface ProductClickEvent {
