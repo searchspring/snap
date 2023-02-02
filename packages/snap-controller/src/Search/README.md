@@ -15,6 +15,8 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.trim | facets that do not change results will be removed | true |   |
 | settings.facets.autoOpenActive | setting for "auto open" functionality for facets that are filtered (active), collapsed, and have no stored data | true |   |
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
+| settings.history.max | how many search terms should be kept in the history store | 25 |   | 
+| settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 | settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
@@ -68,6 +70,9 @@ This will invoke a search request to Searchspring's search API and populate the 
 ```typescript
 searchController.search();
 ```
+
+## Search History
+Search queries made by the controller are stored for later usage. This is enabled by default without providing any settings, to disable set the `max` to zero. The `config.settings.history.url` setting should be set when utilizing the history store outside of the search page in order for the URLs to direct users to the correct location. Common usage of the historical terms are on the search listing page or within autocomplete.
 
 ## Infinite
 When `config.settings.infinite` is defined and `store.pagination.next.url.go({ history: 'replace' })` is invoked, the next page will be fetched and its result set will be appended to the existing result set.
