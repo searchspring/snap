@@ -99,3 +99,4 @@ recommendationController.init();
 ### track.render
 - Called with `eventData` = { controller, trackEvent } 
 - Always invoked after `track.render()` method has been invoked
+- Can take optional `results` for use when not using the full result set in the store. `track.render(results)`

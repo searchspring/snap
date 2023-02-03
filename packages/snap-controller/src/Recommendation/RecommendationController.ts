@@ -18,7 +18,7 @@ type RecommendationTrackMethods = {
 	};
 	click: (e: MouseEvent) => BeaconEvent | undefined;
 	impression: () => BeaconEvent | undefined;
-	render: (results:Product[]) => BeaconEvent | undefined;
+	render: (results?: Product[]) => BeaconEvent | undefined;
 };
 
 type RecommendCombinedRequestModel = {
@@ -283,7 +283,7 @@ export class RecommendationController extends AbstractController {
 				// track results render
 				if (results) {
 					results.forEach((result) => this.track.product.render(result));
-				}else {
+				} else {
 					this.store.results.forEach((result) => this.track.product.render(result));
 				}
 				this.eventManager.fire('track.render', { controller: this, trackEvent: event });
