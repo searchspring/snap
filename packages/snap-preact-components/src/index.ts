@@ -11,6 +11,8 @@ export * from './components/Atoms/Merchandising';
 export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/Skeleton';
+export * from './components/Atoms/RecommendationResultTracker';
+export * from './components/Atoms/RecommendationProfileTracker';
 
 // MOLECULES
 export * from './components/Molecules/Carousel';
