@@ -7,6 +7,13 @@ const services = {
 };
 
 describe('History Store', () => {
+	beforeEach(() => {
+		// stores will share saved data unless config contains different siteId
+		// this will reset that data for each test
+		const historyStore = new SearchHistoryStore({}, services);
+		historyStore.reset();
+	});
+
 	it('has all functions we expect and terms are empty intially and works with empty config', () => {
 		const historyStore = new SearchHistoryStore({}, services);
 
@@ -23,14 +30,57 @@ describe('History Store', () => {
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
-		const reversedHistoryData = historyData.reverse();
 
+		historyData.reverse();
 		historyStore.queries.forEach((query, index) => {
 			expect(query).toHaveProperty('url');
 			expect(query.url).toBeInstanceOf(UrlManager);
 			expect(query).toHaveProperty('string');
-			expect(query.string).toBe(reversedHistoryData[index]);
+			expect(query.string).toBe(historyData[index]);
 			expect(query.url.href).toEqual(`/?q=${query.string}`);
+		});
+	});
+
+	it('uses the same storage for other history stores when no siteId is provided', () => {
+		const historyData = ['one', 'two', 'three'];
+		const historyStore = new SearchHistoryStore({}, services);
+		historyData.map((term) => historyStore.save(term));
+
+		historyData.reverse();
+
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+
+		const historyStoreAgain = new SearchHistoryStore({}, services);
+		expect(historyStoreAgain.queries).toHaveLength(historyData.length);
+		historyStoreAgain.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+	});
+
+	it('uses the different storage for other history stores different siteIds are used', () => {
+		const historyData = ['one', 'two', 'three'];
+		const historyStore = new SearchHistoryStore({ siteId: '123123' }, services);
+		historyData.map((term) => historyStore.save(term));
+
+		historyData.reverse();
+
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+
+		const historyDataAgain = ['a', 'b', 'c'];
+		const historyStoreAgain = new SearchHistoryStore({ siteId: 'abcabc' }, services);
+		historyDataAgain.map((term) => historyStoreAgain.save(term));
+
+		historyDataAgain.reverse();
+
+		expect(historyStoreAgain.queries).toHaveLength(historyDataAgain.length);
+		historyStoreAgain.queries.map((term, idx) => {
+			expect(term.string).toBe(historyDataAgain[idx]);
 		});
 	});
 
@@ -42,14 +92,34 @@ describe('History Store', () => {
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
-		const reversedHistoryData = historyData.reverse();
 
+		historyData.reverse();
 		historyStore.queries.forEach((query, index) => {
 			expect(query).toHaveProperty('url');
 			expect(query.url).toBeInstanceOf(UrlManager);
 			expect(query).toHaveProperty('string');
-			expect(query.string).toBe(reversedHistoryData[index]);
+			expect(query.string).toBe(historyData[index]);
 			expect(query.url.href).toEqual(`${rootUrl}?q=${query.string}`);
+		});
+	});
+
+	it('will push duplicated term to the beginning of the array when they are re-saved', () => {
+		const historyData = ['one', 'two', 'three'];
+		const historyStore = new SearchHistoryStore({ siteId: '123123' }, services);
+		historyData.map((term) => historyStore.save(term));
+
+		historyData.reverse();
+
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+
+		historyStore.save('one');
+		const duplicatedHistoryData = ['one', 'three', 'two'];
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(duplicatedHistoryData[idx]);
 		});
 	});
 
@@ -65,7 +135,7 @@ describe('History Store', () => {
 		const removeQuery = 'dress';
 		historyStore.remove(removeQuery);
 		const alteredHistoryData = initialHistoryData.filter((query) => query != removeQuery);
-		const reversedAlteredHistoryData = alteredHistoryData.reverse();
+		alteredHistoryData.reverse();
 
 		expect(historyStore.queries).toHaveLength(alteredHistoryData.length);
 
@@ -73,7 +143,7 @@ describe('History Store', () => {
 			expect(query).toHaveProperty('url');
 			expect(query.url).toBeInstanceOf(UrlManager);
 			expect(query).toHaveProperty('string');
-			expect(query.string).toBe(reversedAlteredHistoryData[index]);
+			expect(query.string).toBe(alteredHistoryData[index]);
 		});
 	});
 
@@ -98,12 +168,12 @@ describe('History Store', () => {
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
 
-		const reversedHistoryData = historyData.reverse();
+		historyData.reverse();
 		const storedData = historyStore.getStoredData();
-		expect(storedData).toStrictEqual(reversedHistoryData);
+		expect(storedData).toStrictEqual(historyData);
 
 		const limit = 2;
-		const limitedReversedHistoryData = reversedHistoryData.slice(0, limit);
+		const limitedReversedHistoryData = historyData.slice(0, limit);
 		const limitedStoredData = historyStore.getStoredData(limit);
 		expect(limitedStoredData).toStrictEqual(limitedReversedHistoryData);
 	});
@@ -144,5 +214,58 @@ describe('History Store', () => {
 		historyStore.queries.map((term, idx) => {
 			expect(term.string).toBe(trimmedData[idx]);
 		});
+	});
+
+	it('trims terms when a different max configuration is provided', async () => {
+		const historyData = ['dress', 'glasses', 'term', 'term2', 'term3', 'term4', 'term5'];
+
+		const config = {
+			max: 20,
+		};
+		const historyStore = new SearchHistoryStore(config, services);
+		historyData.map((term) => historyStore.save(term));
+
+		historyData.reverse();
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+
+		// new store uses same data as previous store so will trim the terms on construction
+		new SearchHistoryStore({ ...config, max: 3 }, services);
+		expect(historyStore.queries).toHaveLength(3);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+	});
+
+	it('empties history when max is changed to zero', async () => {
+		const historyData = ['dressred', 'dress', 'glasses'];
+
+		const config = {
+			max: 5,
+		};
+		const historyStore = new SearchHistoryStore(config, services);
+		historyData.map((term) => historyStore.save(term));
+
+		historyData.reverse();
+		expect(historyStore.queries).toHaveLength(historyData.length);
+		historyStore.queries.map((term, idx) => {
+			expect(term.string).toBe(historyData[idx]);
+		});
+
+		// new store uses same data as previous store so will empty the terms on construction
+		new SearchHistoryStore({ ...config, max: 0 }, services);
+		expect(historyStore.queries).toHaveLength(0);
+	});
+
+	it('does not save when config max is zero', async () => {
+		const config = {
+			max: 0,
+		};
+		const historyStore = new SearchHistoryStore(config, services);
+		historyStore.save('dont save');
+
+		expect(historyStore.queries).toHaveLength(config.max);
 	});
 });
