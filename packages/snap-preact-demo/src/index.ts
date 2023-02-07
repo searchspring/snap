@@ -21,14 +21,9 @@ let config: SnapConfig = {
 		},
 	},
 	url: {
-		settings: {
-			coreType: 'query',
-			customType: 'query',
-		},
 		parameters: {
 			core: {
 				query: { name: 'q' },
-				page: { name: 'p' },
 			},
 		},
 	},
