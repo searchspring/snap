@@ -1,6 +1,6 @@
 # RecommendationProfileTracker
 
-Adds impression, render and click beacon tracking to the profile. 
+Adds impression, render and click beacon tracking to the profile. NOTE this is intended to be used with the RecommendationProfileTracker. See examples below. 
 
 ## Usage
 

@@ -1,13 +1,20 @@
-import { Fragment, h } from 'preact';
+/** @jsx jsx */
+import { Fragment, h, toChildArray } from 'preact';
+import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { Theme, useTheme } from '../../../providers';
 import { useIntersection } from '../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
+import classnames from 'classnames';
 
-export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps) => {
+const CSS = {
+	RecommendationProfileTracker: () => css({}),
+};
+
+export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const props: RecommendationProfileTrackerProps = {
@@ -19,7 +26,9 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 		...properties.theme?.components?.RecommendationProfileTracker,
 	};
 
-	const { children, controller, results } = props;
+	const { children, controller, results, className, style, disableStyles } = props;
+
+	const childs = toChildArray(children);
 
 	// do impression tracking for "profile"
 	const componentRef = useRef(null);
@@ -31,10 +40,22 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 	}
 
 	// takes care of rendering for results and profile
-	controller.track.render(results);
+	childs.length && controller.track.render(results);
 
-	return children.length ? (
-		<div onClick={(e) => controller.track.click(e)} ref={componentRef}>
+	const styling: { css?: StylingCSS } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.RecommendationProfileTracker(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
+	return childs.length ? (
+		<div
+			className={classnames('ss__recommendation-profile-tracker', className)}
+			onClick={(e: any) => controller.track.click(e)}
+			ref={componentRef}
+			{...styling}
+		>
 			{children}
 		</div>
 	) : (

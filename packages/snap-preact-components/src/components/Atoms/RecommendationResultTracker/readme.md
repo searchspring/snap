@@ -1,6 +1,6 @@
 # RecommendationResultTracker
 
-Adds impression, render and click beacon tracking to an individual result. 
+Adds impression, render and click beacon tracking to an individual result.  NOTE this is intended to be used with the RecommendationProfileTracker. See examples below. 
 
 ## Usage
 
@@ -8,27 +8,31 @@ Adds impression, render and click beacon tracking to an individual result.
 The required `controller` prop specifies a reference to a Recommendation Controller object.
 
 ```jsx
-<RecommendationResultTracker controller={controller} result={result}>
-	<Result result={result}></Result>
-</RecommendationResultTracker>
+<RecommendationProfileTracker controller={controller}>
+	<RecommendationResultTracker controller={controller} result={result}>
+		<Result result={result}></Result>
+	</RecommendationResultTracker>
+</RecommendationProfileTracker>
 ```
 
 ### children
 The required `children` prop specifies the contents of the result component. 
 
 ```jsx
-
-<RecommendationResultTracker controller={controller} result={result}>
-	<Result result={result}></Result>
-</RecommendationResultTracker>
+<RecommendationProfileTracker controller={controller}>
+	<RecommendationResultTracker controller={controller} result={result}>
+		<Result result={result}></Result>
+	</RecommendationResultTracker>
+</RecommendationProfileTracker>
 ```
 
 ### result
 The required `result` prop specifies a reference to a product object from the `results` store array.
 
 ```jsx
-<RecommendationResultTracker controller={controller} result={result}>
-	<Result result={result}></Result>
-</RecommendationResultTracker>
-
+<RecommendationProfileTracker controller={controller}>
+	<RecommendationResultTracker controller={controller} result={result}>
+		<Result result={result}></Result>
+	</RecommendationResultTracker>
+</RecommendationProfileTracker>
 ```

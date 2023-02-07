@@ -688,23 +688,29 @@ export class Tracker {
 			return;
 		}
 
-		let savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
+		let savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]') as BeaconEvent[];
 		if (eventsToSend) {
-			let eventsClone: any = [];
-			savedEvents.forEach((_event: any, idx: number) => {
-				eventsClone.push(deepmerge(_event, {}));
+			let eventsClone: BeaconEvent[] = [];
+			savedEvents.forEach((_event: BeaconEvent, idx: number) => {
+				// using Object.assign since we are not modifying nested properties
+				eventsClone.push(Object.assign({}, _event));
 				delete eventsClone[idx].id;
 				delete eventsClone[idx].pid;
 			});
 
+			const stringyEventsClone = JSON.stringify(eventsClone);
+
+			// de-dupe events
 			eventsToSend.forEach((event, idx) => {
-				let newEvent: any = deepmerge(event, {});
+				let newEvent: BeaconEvent = Object.assign({}, event);
 				delete newEvent.id;
 				delete newEvent.pid;
-				if (JSON.stringify(eventsClone).indexOf(JSON.stringify(newEvent)) == -1) {
+				if (stringyEventsClone.indexOf(JSON.stringify(newEvent)) == -1) {
 					savedEvents.push({ ...eventsToSend[idx] });
 				}
 			});
+
+			// save the beacon pool with de-duped events
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(savedEvents));
 		}
 
