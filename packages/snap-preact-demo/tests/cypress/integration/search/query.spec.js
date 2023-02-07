@@ -13,14 +13,12 @@ describe('Query', () => {
 	});
 
 	it('synchronizes the query with the input by default', () => {
-		cy.snapController().then((searchController) => {
-			cy.snapController('autocomplete').then((acController) => {
-				if (acController.config.settings.initializeFromUrl) {
-					expect(acController.store.state.input).to.equal(query);
-				} else {
-					expect(acController.store.state.input).to.equal('');
-				}
-			});
+		cy.snapController('autocomplete').then((acController) => {
+			if (acController.config.settings.initializeFromUrl) {
+				expect(acController.store.state.input).to.equal(query);
+			} else {
+				expect(acController.store.state.input).to.equal('');
+			}
 		});
 	});
 
@@ -43,14 +41,12 @@ describe('Query', () => {
 
 		cy.visit(`https://localhost:2222/?q=${query}`);
 
-		cy.snapController().then((searchController) => {
-			cy.snapController('autocomplete').then((acController) => {
-				if (acController.config.settings.initializeFromUrl) {
-					expect(acController.store.state.input).to.equal(query);
-				} else {
-					expect(acController.store.state.input).to.equal(undefined);
-				}
-			});
+		cy.snapController('autocomplete').then((acController) => {
+			if (acController.config.settings.initializeFromUrl) {
+				expect(acController.store.state.input).to.equal(query);
+			} else {
+				expect(acController.store.state.input).to.equal(undefined);
+			}
 		});
 	});
 });
