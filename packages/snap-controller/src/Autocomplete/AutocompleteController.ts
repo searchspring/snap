@@ -178,18 +178,7 @@ export class AutocompleteController extends AbstractController {
 			}
 		}
 
-		// auto select first trending term?
-		if (
-			inputElement &&
-			!this.store.state?.input &&
-			this.store.trending?.length &&
-			!this.store.terms?.length &&
-			this.config.settings?.trending?.showResults
-		) {
-			this.store.trending[0].preview();
-		} else {
-			inputElement?.dispatchEvent(new Event('keyup'));
-		}
+		inputElement?.dispatchEvent(new Event('keyup'));
 	}
 
 	reset(): void {
