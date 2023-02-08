@@ -22,6 +22,7 @@ beforeEach(() => {
 	// make references to requests available
 
 	cy.intercept(/.*searchspring.io\/api\/search\/autocomplete.json/).as('autocomplete');
+	cy.intercept(/.*searchspring.io\/api\/search\/search.json/).as('search');
 	cy.intercept(/.*a.searchspring.io\/api\/track\/track.json/).as('track');
 	cy.intercept(/.*d3cgm8py10hi0z.cloudfront.net\/is.gif/).as('pixel');
 	Object.keys(BeaconType).forEach((type) => {

@@ -27,6 +27,7 @@ const config = {
 		},
 	},
 	startingQuery: 't', // initial query (displays terms, facets, and results)
+	query: 'dress',
 };
 
 describe('Autocomplete', () => {
@@ -63,6 +64,27 @@ describe('Autocomplete', () => {
 		});
 
 		it('has trending results when focused', function () {
+			cy.on('window:before:load', (win) => {
+				// ensuring trending.showResults is set
+				win.mergeSnapConfig = {
+					controllers: {
+						autocomplete: [
+							{
+								config: {
+									settings: {
+										trending: {
+											showResults: true,
+										},
+									},
+								},
+							},
+						],
+					},
+				};
+			});
+
+			cy.visit(config.url);
+
 			cy.snapController('autocomplete').then(({ store }) => {
 				if (store.config.settings.trending?.showResults) {
 					if (config.selectors.website.openInputButton) {
@@ -200,6 +222,62 @@ describe('Autocomplete', () => {
 				.should('have.value', config.startingQuery)
 				.clear({ force: true })
 				.should('have.value', '');
+		});
+
+		it('closes the autocomplete when clicking a filter', () => {
+			cy.on('window:before:load', (win) => {
+				// ensuring URL configuration is standard (filter is hash parameter which does not cause page reload)
+				win.mergeSnapConfig = {
+					url: {
+						parameters: {
+							core: {
+								query: { name: 'q' },
+							},
+						},
+					},
+				};
+			});
+
+			cy.visit(`${config.url}/?q=${config.query}`);
+
+			// set flag on window to ensure page doesn't reload
+			cy.window().then((win) => (win.ssFirstLoad = true));
+
+			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).focus({ force: true });
+			cy.wait('@autocomplete').should('exist');
+
+			// autocomplete should be open
+			cy.get(config.selectors.autocomplete.main).should('exist');
+
+			// select a facet
+			cy.snapController('autocomplete').then(({ store }) => {
+				if (store.facets.length == 0) this.skip(); //skip if this term has no facets
+				cy.get('body').then((body) => {
+					if (!body.find(`${config.selectors.autocomplete.facet} a`).length) {
+						this.skip(); // skip if no facets in DOM
+					}
+				});
+
+				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
+					const firstOption = facetOptions[0];
+					const optionURL = firstOption.href.split('?')[1];
+
+					cy.get(firstOption).click({ force: true }); // trigger onFocus event
+
+					cy.wait('@search').should('exist');
+
+					cy.snapController().then(({ store }) => {
+						cy.wrap(store.services.urlManager.state.filter).should('exist');
+						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
+
+						// autocomplete should be closed
+						cy.get(config.selectors.autocomplete.main).should('not.exist');
+
+						// ensure page did not releoad
+						cy.window().should('have.prop', 'ssFirstLoad');
+					});
+				});
+			});
 		});
 	});
 });
