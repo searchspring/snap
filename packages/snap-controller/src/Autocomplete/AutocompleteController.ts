@@ -31,6 +31,9 @@ const defaultConfig: AutocompleteControllerConfig = {
 			trim: true,
 			pinFiltered: true,
 		},
+		redirects: {
+			merchandising: true,
+		},
 	},
 };
 
@@ -97,6 +100,15 @@ export class AutocompleteController extends AbstractController {
 			ac.controller.store.loading = false;
 		});
 
+		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
+			await next();
+
+			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
+			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
+				window.location.href = redirectURL;
+				return false;
+			}
+		});
 		// attach config plugins and event middleware
 		this.use(this.config);
 	}
