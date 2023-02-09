@@ -416,6 +416,8 @@ describe('Recommendation Controller', () => {
 		expect(controller.events.render).toBeDefined();
 		expect(controller.events.render).toBe(eventReturn);
 
+		controller.store.results.map((result) => controller.track.product.render(result));
+
 		expect(eventfn).toHaveBeenCalledTimes(controller.store.results.length + 1); // products + initial profile render
 		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length + 1);
 		expect(productTrackfn).toHaveBeenCalledTimes(controller.store.results.length);
@@ -471,6 +473,8 @@ describe('Recommendation Controller', () => {
 
 		expect(controller.events.render).toBeDefined();
 		expect(controller.events.render).toBe(eventReturn);
+
+		reducedResults.map((result) => controller.track.product.render(result));
 
 		expect(eventfn).toHaveBeenCalledTimes(reducedResults.length + 1); // products + initial profile render
 		expect(trackfn).toHaveBeenCalledTimes(reducedResults.length + 1);

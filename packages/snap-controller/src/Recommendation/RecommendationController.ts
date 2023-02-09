@@ -280,11 +280,7 @@ export class RecommendationController extends AbstractController {
 
 				this.events.render = event;
 
-				// track results render
-				let resultsToTrack = results || this.store.results;
-				resultsToTrack.forEach((result: any) => this.track.product.render(result));
-
-				this.eventManager.fire('track.render', { controller: this, results: resultsToTrack, trackEvent: event });
+				this.eventManager.fire('track.render', { controller: this, trackEvent: event });
 				return event;
 			},
 		};

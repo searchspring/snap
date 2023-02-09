@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../../providers/theme';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -12,7 +12,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { RecommendationController } from '@searchspring/snap-controller';
 import { RecommendationResultTracker } from './RecommendationResultTracker';
-import { RecommendationProfileTracker } from '../RecommendationProfileTracker';
+import { RecommendationProfileTracker } from '../ProfileTracker/RecommendationProfileTracker';
 
 const globals = { siteId: '8uyt2m' };
 

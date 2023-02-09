@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../../providers/theme';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -80,7 +80,7 @@ describe('RecommendationProfileTracker Component', () => {
 
 		const title = rendered.container.querySelector('.title')!;
 
-		expect(trackfn).toHaveBeenCalledTimes(21);
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
@@ -199,7 +199,7 @@ describe('RecommendationProfileTracker Component', () => {
 
 		const title = rendered.container.querySelector('.title')!;
 
-		expect(trackfn).toHaveBeenCalledTimes(21);
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,

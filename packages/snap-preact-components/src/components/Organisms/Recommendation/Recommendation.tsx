@@ -113,8 +113,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		},
 	};
 
-	(children || resultsToRender.length) && (controller as RecommendationController)?.track?.render();
-
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.recommendation({ vertical }), style];
