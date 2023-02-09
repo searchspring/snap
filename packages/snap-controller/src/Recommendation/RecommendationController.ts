@@ -140,7 +140,7 @@ export class RecommendationController extends AbstractController {
 								seed: getSeed(),
 							},
 						},
-						pid: this.events.click!.id,
+						pid: this.events.click?.id,
 					};
 
 					const event = this.tracker.track.event(payload);
@@ -281,12 +281,10 @@ export class RecommendationController extends AbstractController {
 				this.events.render = event;
 
 				// track results render
-				if (results) {
-					results.forEach((result) => this.track.product.render(result));
-				} else {
-					this.store.results.forEach((result) => this.track.product.render(result));
-				}
-				this.eventManager.fire('track.render', { controller: this, trackEvent: event });
+				let resultsToTrack = results || this.store.results;
+				resultsToTrack.forEach((result: any) => this.track.product.render(result));
+
+				this.eventManager.fire('track.render', { controller: this, results: resultsToTrack, trackEvent: event });
 				return event;
 			},
 		};

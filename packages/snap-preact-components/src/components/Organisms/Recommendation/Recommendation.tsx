@@ -1,12 +1,10 @@
 /** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
-import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
-import type SwiperCore from 'swiper/core';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
 
@@ -16,8 +14,8 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { RecommendationProfileTracker } from '../../Atoms/RecommendationProfileTracker';
-import { RecommendationResultTracker } from '../../Atoms/RecommendationResultTracker';
+import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
+import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>

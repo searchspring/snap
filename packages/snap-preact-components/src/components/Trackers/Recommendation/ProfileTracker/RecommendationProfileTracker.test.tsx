@@ -35,7 +35,7 @@ const theme = {
 	},
 };
 
-describe('Recommendation Component', () => {
+describe('RecommendationProfileTracker Component', () => {
 	beforeAll(() => {
 		const mock = jest.fn(() => ({
 			observe: jest.fn(),

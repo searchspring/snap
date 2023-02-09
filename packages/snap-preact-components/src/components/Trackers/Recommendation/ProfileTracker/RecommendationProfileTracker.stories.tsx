@@ -3,14 +3,15 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { RecommendationProfileTracker, RecommendationProfileTrackerProps } from './RecommendationProfileTracker';
-import { componentArgs } from '../../../utilities';
-import Readme from '../RecommendationProfileTracker/readme.md';
-import { Snapify } from '../../../utilities/snapify';
+import { componentArgs } from '../../../../utilities';
+import Readme from '../ProfileTracker/readme.md';
+import { Snapify } from '../../../../utilities/snapify';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { Carousel } from '../../Molecules/Carousel';
-import { Result } from '../../Molecules/Result';
+import { Carousel } from '../../../Molecules/Carousel';
+import { Result } from '../../../Molecules/Result';
+
 export default {
-	title: `Atoms/RecommendationProfileTracker`,
+	title: `Trackers/Recommendation/ProfileTracker`,
 	component: RecommendationProfileTracker,
 	parameters: {
 		docs: {
@@ -24,7 +25,7 @@ export default {
 	},
 	argTypes: {
 		controller: {
-			description: 'Controller reference',
+			description: 'Recommendation Controller reference',
 			type: { required: true },
 			table: {
 				type: {

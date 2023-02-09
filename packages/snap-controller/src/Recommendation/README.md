@@ -97,6 +97,8 @@ recommendationController.init();
 - Always invoked after `track.impression()` method has been invoked
 
 ### track.render
-- Called with `eventData` = { controller, trackEvent } 
+- Called with `eventData` = { controller, results, trackEvent } 
 - Always invoked after `track.render()` method has been invoked
+
+//where does this go?
 - Can take optional `results` for use when not using the full result set in the store. `track.render(results)`

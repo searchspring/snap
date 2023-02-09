@@ -34,7 +34,7 @@ const theme = {
 	},
 };
 
-describe('Recommendation Component', () => {
+describe('RecommendationResultTracker Component', () => {
 	beforeAll(() => {
 		const mock = jest.fn(() => ({
 			observe: jest.fn(),
@@ -152,9 +152,32 @@ describe('Recommendation Component', () => {
 
 		const resultElem = rendered.container.querySelector('.findMe');
 
-		userEvent.click(resultElem!);
+		await userEvent.click(resultElem!);
 
-		expect(trackfn).toHaveBeenCalled();
+		expect(trackfn).toHaveBeenNthCalledWith(
+			2,
+			expect.objectContaining({
+				type: BeaconType.PROFILE_PRODUCT_CLICK,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				// pid: controller.events.click?.id,
+				event: {
+					context: {
+						action: 'navigate',
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: controller.store.results[0].id,
+						seed: undefined,
+						mappings: {
+							core: controller.store.results[0].mappings.core,
+						},
+					},
+				},
+			})
+		);
 
 		trackfn.mockClear();
 	});

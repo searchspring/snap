@@ -18,7 +18,7 @@ The required `children` prop specifies the contents of the Recommendation profil
 <RecommendationProfileTracker controller={controller}>
 	<h2>title</h2>
 	<div>
-		{controller.store.map((result) => (
+		{controller.store.results.map((result) => (
 			<RecommendationResultTracker controller={controller} result={result}>
 				<Result result={result}></Result>
 			</RecommendationResultTracker>

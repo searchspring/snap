@@ -3,10 +3,10 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
-import { Theme, useTheme } from '../../../providers';
-import { useIntersection } from '../../../hooks';
+import { Theme, useTheme } from '../../../../providers';
+import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 

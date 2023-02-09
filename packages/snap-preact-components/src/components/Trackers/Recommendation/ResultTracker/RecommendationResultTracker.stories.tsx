@@ -3,14 +3,14 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { RecommendationResultTracker, RecommendationResultTrackerProps } from './RecommendationResultTracker';
-import { componentArgs } from '../../../utilities';
-import Readme from '../RecommendationResultTracker/readme.md';
-import { Snapify } from '../../../utilities/snapify';
+import { componentArgs } from '../../../../utilities';
+import Readme from '../ResultTracker/readme.md';
+import { Snapify } from '../../../../utilities/snapify';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { Result } from '../../Molecules/Result';
+import { Result } from '../../../Molecules/Result';
 
 export default {
-	title: `Atoms/RecommendationResultTracker`,
+	title: `Trackers/Recommendation/ResultTracker`,
 	component: RecommendationResultTracker,
 	parameters: {
 		docs: {
@@ -31,7 +31,7 @@ export default {
 	],
 	argTypes: {
 		controller: {
-			description: 'Controller reference',
+			description: 'Recommendation Controller reference',
 			type: { required: true },
 			table: {
 				type: {
