@@ -101,13 +101,13 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
+			await next();
+
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
 			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
 				window.location.href = redirectURL;
 				return false;
 			}
-
-			await next();
 		});
 		// attach config plugins and event middleware
 		this.use(this.config);
