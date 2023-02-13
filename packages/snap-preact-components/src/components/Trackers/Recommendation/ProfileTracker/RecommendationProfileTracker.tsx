@@ -7,7 +7,6 @@ import { Theme, useTheme } from '../../../../providers';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../../types';
-import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 
 const CSS = {
@@ -26,7 +25,7 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 		...properties.theme?.components?.RecommendationProfileTracker,
 	};
 
-	const { children, controller, results, className, style, disableStyles } = props;
+	const { children, controller, className, style, disableStyles } = props;
 
 	const childs = toChildArray(children);
 
@@ -39,8 +38,8 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 		controller.track.impression();
 	}
 
-	// takes care of rendering for results and profile
-	childs.length && controller.track.render(results);
+	// takes care of rendering profile
+	childs.length && controller.track.render();
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -66,5 +65,4 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 export interface RecommendationProfileTrackerProps extends ComponentProps {
 	children: any;
 	controller: RecommendationController;
-	results?: Product[];
 }

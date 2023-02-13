@@ -1,6 +1,8 @@
 # RecommendationProfileTracker
 
-Adds impression, render and click beacon tracking to the profile. NOTE this is intended to be used with the RecommendationProfileTracker. See examples below. 
+Adds impression, render and click beacon tracking to the profile.
+
+NOTE: This is intended to be used with the RecommendationResultTracker. See examples below. 
 
 ## Usage
 
@@ -25,18 +27,4 @@ The required `children` prop specifies the contents of the Recommendation profil
 		))} 
 	</div>
 </RecommendationProfileTracker>
-```
-
-### results
-The optional `results` prop is used when using a result set that differs from the entire result set in the store. results prop is passed to the track.render function for tracking product renders. 
-
-```jsx
-<RecommendationProfileTracker controller={recommendationController} results={trimmedResults}>
-	{trimmedResults.map((result) => (
-		<RecommendationResultTracker controller={controller} result={result}>
-			<Result result={result}></Result>
-		</RecommendationResultTracker>
-	))} 
-</RecommendationProfileTracker>
-
 ```

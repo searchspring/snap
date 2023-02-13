@@ -34,16 +34,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		results: {
-			description: 'Results store reference, overrides controller.store.results',
-			type: { required: false },
-			table: {
-				type: {
-					summary: 'Results store object',
-				},
-			},
-			control: { type: 'none' },
-		},
 
 		...componentArgs,
 	},

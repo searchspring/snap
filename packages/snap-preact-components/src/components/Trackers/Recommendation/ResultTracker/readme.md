@@ -1,6 +1,8 @@
 # RecommendationResultTracker
 
-Adds impression, render and click beacon tracking to an individual result.  NOTE this is intended to be used with the RecommendationProfileTracker. See examples below. 
+Adds impression, render and click beacon tracking to an individual result within a profile.
+
+NOTE: This is intended to be used with the RecommendationProfileTracker. See examples below. 
 
 ## Usage
 

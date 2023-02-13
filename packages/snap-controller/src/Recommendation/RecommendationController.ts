@@ -256,7 +256,7 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.impression', { controller: this, trackEvent: event });
 				return event;
 			},
-			render: (results?: Product[]): BeaconEvent | undefined => {
+			render: (): BeaconEvent | undefined => {
 				if (!this.store.profile.tag || this.events.render) return;
 				const event: BeaconEvent = this.tracker.track.event({
 					type: BeaconType.PROFILE_RENDER,
