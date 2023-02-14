@@ -1,9 +1,9 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
+import { url } from '@searchspring/snap-toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
-import { configurable } from './middleware/plugins/configurable';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
 import { SidebarSkel } from './components/Sidebar/Skel';
@@ -14,7 +14,16 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
+let siteId = '8uyt2m';
+// grab siteId out of the URL
+const urlObj = url(window.location.href);
+const urlSiteIdParam = urlObj.params.query.siteId;
+if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {
+	siteId = urlSiteIdParam;
+}
+
 let config: SnapConfig = {
+	mode: 'development', // should be removed for 'production' usage
 	features: {
 		integratedSpellCorrection: {
 			enabled: true,
@@ -29,7 +38,7 @@ let config: SnapConfig = {
 	},
 	client: {
 		globals: {
-			siteId: '8uyt2m',
+			siteId,
 		},
 	},
 	instantiators: {
@@ -53,12 +62,13 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[afterStore], [configurable, 'thing1', 'thing2']],
-					settings: {
-						infinite: {
-							backfill: 5,
-							// restorePosition: false,
+					plugins: [[afterStore]],
+					globals: {
+						pagination: {
+							pageSize: 36,
 						},
+					},
+					settings: {
 						redirects: {
 							merchandising: false,
 						},

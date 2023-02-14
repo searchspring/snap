@@ -5,7 +5,6 @@ export function afterStore(controller: AbstractController) {
 	});
 	controller.on('afterStore', async ({ controller: { store } }, next) => {
 		mutateFacets(store.facets);
-		mutateResults(store.results);
 
 		await next();
 	});
@@ -27,12 +26,6 @@ function mutateFacets(facets: SearchFacetsStore) {
 		}
 
 		facet.overflow?.setLimit(limit);
-	}
-}
-
-function mutateResults(results: SearchResultsStore) {
-	for (let result of results) {
-		result.mappings.core.name += '++';
 	}
 }
 
