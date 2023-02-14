@@ -123,7 +123,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)}>
-				<RecommendationProfileTracker controller={controller} results={resultsToRender}>
+				<RecommendationProfileTracker controller={controller}>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
 					<Carousel
 						prevButton={prevButton}
