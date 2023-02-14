@@ -60,7 +60,6 @@ describe('Recommendation Component', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			// tracker: new Tracker(globals, { mode: 'development'}),
 			tracker: new Tracker(globals, { mode: 'development' }),
 		});
 
@@ -191,17 +190,20 @@ describe('Recommendation Component', () => {
 
 		trackfn.mockClear();
 
-		// @ts-ignore
-		let [callback] = window.IntersectionObserver.mock.calls[0];
-		callback([
-			{
-				isIntersecting: true,
-				intersectionRatio: 10,
-			},
-		]);
+		for (let i = 0; i < 21; i++) {
+			// @ts-ignore
+			let [callback] = window.IntersectionObserver.mock.calls[i];
+
+			callback([
+				{
+					isIntersecting: true,
+					intersectionRatio: 10,
+				},
+			]);
+		}
 
 		await waitFor(() => {
-			expect(trackfn).toHaveBeenCalledTimes(5);
+			expect(trackfn).toHaveBeenCalledTimes(21);
 		});
 
 		// profile impression
@@ -225,8 +227,8 @@ describe('Recommendation Component', () => {
 		});
 
 		// next 4 results should have done impression tracking
-		controller.store.results.slice(4, 7).map((result, idx) => {
-			expect(trackfn).toHaveBeenNthCalledWith(idx + 2, {
+		controller.store.results.map((result) => {
+			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 				category: BeaconCategory.RECOMMENDATIONS,
 				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,

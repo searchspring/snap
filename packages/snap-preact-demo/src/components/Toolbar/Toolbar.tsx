@@ -5,21 +5,24 @@ import { SortBy } from './SortBy';
 import { PerPage } from './PerPage';
 import { SidebarContents } from '../Sidebar/Sidebar';
 
-import { Button, Pagination, Slideout, withStore } from '@searchspring/snap-preact-components';
+import { Button, Pagination, Slideout, withStore, useMediaQuery } from '@searchspring/snap-preact-components';
 
 type ToolBarProps = {
 	store?: SearchStore;
 };
+
+const mobileMediaQuery = '(max-width: 991px)';
 
 @withStore
 @observer
 export class Toolbar extends Component<ToolBarProps> {
 	render() {
 		const { pagination } = this.props.store;
+		const isMobile = useMediaQuery(mobileMediaQuery);
 
 		return (
 			<div className="ss-toolbar ss-toolbar-top">
-				<Slideout displayAt={'(max-width: 991px)'} buttonContent={slideoutButton()}>
+				<Slideout displayAt={mobileMediaQuery} buttonContent={<SlideoutButton />}>
 					<Fragment>
 						<h3>Filters</h3>
 						<SidebarContents />
@@ -34,25 +37,29 @@ export class Toolbar extends Component<ToolBarProps> {
 					<div className="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div className="ss-toolbar-col pagination">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
+					<div className="ss-toolbar-col pagination">
+						{pagination.totalPages > 1 && !isMobile && <Pagination pagination={pagination} spread={3} />}
+					</div>
 				</div>
 			</div>
 		);
 	}
 }
 
-const slideoutButton = () => {
+const SlideoutButton = () => {
 	return (
-		<Button
-			style={{
-				margin: '0 10px',
-				display: 'block',
-				width: '100%',
-				boxSizing: 'border-box',
-				textAlign: 'center',
-			}}
-		>
-			Show Filters
-		</Button>
+		<>
+			<Button
+				style={{
+					margin: '10px 0',
+					display: 'block',
+					width: '100%',
+					boxSizing: 'border-box',
+					textAlign: 'center',
+				}}
+			>
+				Show Filters
+			</Button>
+		</>
 	);
 };

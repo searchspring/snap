@@ -647,6 +647,43 @@ describe('Tracker', () => {
 		request.mockRestore();
 	});
 
+	it('sendEvents will automatically de-duplicate events', async () => {
+		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
+
+		const xhrMock: Partial<XMLHttpRequest> = {
+			open: jest.fn(),
+			send: jest.fn(),
+			setRequestHeader: jest.fn(),
+			readyState: 4,
+			status: 200,
+			response: 'Hello World!',
+		};
+		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
+
+		const sendEvents = jest.spyOn(tracker, 'sendEvents');
+
+		const events = [{ hello: 'world' }];
+		// @ts-ignore
+		await tracker.sendEvents(events);
+		// @ts-ignore
+		await tracker.sendEvents(events);
+		// @ts-ignore
+		await tracker.sendEvents(events);
+		// @ts-ignore
+		await tracker.sendEvents(events);
+		// @ts-ignore
+		await tracker.sendEvents(events);
+
+		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+
+		expect(sendEvents).toHaveBeenCalledTimes(5);
+		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
+		expect(xhrMock.send).toBeCalledWith(JSON.stringify(events[0]));
+
+		sendEvents.mockRestore();
+		request.mockRestore();
+	});
+
 	it('tests track.shopper.login with cookies disabled', async () => {
 		resetAllCookies();
 		// @ts-ignore

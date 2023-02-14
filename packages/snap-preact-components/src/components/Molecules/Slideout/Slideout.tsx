@@ -52,7 +52,20 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
+	const {
+		children,
+		active,
+		buttonContent,
+		noButtonWrapper,
+		width,
+		displayAt,
+		transitionSpeed,
+		overlayColor,
+		slideDirection,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -103,11 +116,14 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	return isVisible ? (
 		<CacheProvider>
-			{buttonContent && (
-				<div className="ss__slideout__button" onClick={() => toggleActive()}>
-					{buttonContent}
-				</div>
-			)}
+			{buttonContent &&
+				(noButtonWrapper ? (
+					cloneWithProps(buttonContent, { toggleActive, active: isActive })
+				) : (
+					<div className="ss__slideout__button" onClick={() => toggleActive()}>
+						{cloneWithProps(buttonContent, { active: isActive })}
+					</div>
+				))}
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
 				{renderContent && cloneWithProps(children, { toggleActive, active: isActive })}
@@ -123,6 +139,7 @@ export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;
 	active?: boolean;
 	buttonContent?: string | JSX.Element;
+	noButtonWrapper?: boolean;
 	width?: string;
 	displayAt?: string;
 	transitionSpeed?: string;

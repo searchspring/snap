@@ -36,6 +36,7 @@ configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: '
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
+export const STYLESHEET_CLASSNAME = 'ss-snap-bundle-styles';
 
 type ExtendedTarget = Target & {
 	name?: string;
@@ -521,6 +522,9 @@ export class Snap {
 						document.head.appendChild(branchScript);
 					}
 				);
+
+				// remove snap bundle styles
+				document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`).forEach((el) => el.remove());
 
 				// prevent further instantiation of config
 				throw 'branch override';
