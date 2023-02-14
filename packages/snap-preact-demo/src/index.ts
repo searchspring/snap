@@ -97,13 +97,6 @@ let config: SnapConfig = {
 							limit: 5,
 						},
 					},
-					globals: {
-						search: {
-							query: {
-								spellCorrection: true,
-							},
-						},
-					},
 				},
 				targeters: [
 					{
