@@ -10,7 +10,7 @@
  */
 
 const config = {
-	url: 'https://localhost:2222', // page containing autocomplete (recommended: home/about/contact page)
+	url: 'https://localhost:2222/index.html', // page containing autocomplete (recommended: home/about/contact page)
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		website: {
@@ -238,7 +238,7 @@ describe('Autocomplete', () => {
 				};
 			});
 
-			cy.visit(`${config.url}/?q=${config.query}`);
+			cy.visit(`${config.url}?q=${config.query}`);
 
 			// set flag on window to ensure page doesn't reload
 			cy.window().then((win) => (win.ssFirstLoad = true));

@@ -8,7 +8,7 @@
 	"scripts": {
 		"analyze": "webpack --config webpack.modern.js --analyze",
 		"analyze:universal": "webpack --config webpack.universal.js --analyze",
-		"build": "echo 'not building demo store'",
+		"build": "rm -rf ./dist && webpack --config webpack.modern.js && webpack --config webpack.universal.js",
 		"build:bundle": "rm -rf ./dist && webpack --config webpack.modern.js && webpack --config webpack.universal.js",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
 		"cypress": "cypress open --project tests",
