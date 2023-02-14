@@ -11,7 +11,7 @@ import { Carousel } from '../../../Molecules/Carousel';
 import { Result } from '../../../Molecules/Result';
 
 export default {
-	title: `Trackers/Recommendation/ProfileTracker`,
+	title: `Trackers/Recommendation/Profile`,
 	component: RecommendationProfileTracker,
 	parameters: {
 		docs: {
