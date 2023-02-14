@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../../providers/theme';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -13,7 +13,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { RecommendationController } from '@searchspring/snap-controller';
 
-import { Recommendation } from './Recommendation';
+import { RecommendationProfileTracker } from './RecommendationProfileTracker';
 
 const globals = { siteId: '8uyt2m' };
 
@@ -29,14 +29,13 @@ const services = {
 
 const theme = {
 	components: {
-		recommendation: {
-			prevButton: 'Global Theme Prev',
-			nextButton: 'Global Theme Next',
+		RecommendationProfileTracker: {
+			className: 'themeClass',
 		},
 	},
 };
 
-describe('Recommendation Component', () => {
+describe('RecommendationProfileTracker Component', () => {
 	beforeAll(() => {
 		const mock = jest.fn(() => ({
 			observe: jest.fn(),
@@ -51,42 +50,6 @@ describe('Recommendation Component', () => {
 	afterAll(() => {
 		// @ts-ignore
 		window.IntersectionObserver.mockReset();
-	});
-	it('renders with results', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals, { mode: 'development' }),
-		});
-
-		await controller.search();
-
-		const rendered = render(
-			<Recommendation controller={controller}>
-				{controller.store.results.map((result, idx) => (
-					<div className="result" key={idx}>
-						{result.mappings.core?.name}
-					</div>
-				))}
-			</Recommendation>
-		);
-
-		const recommendationWrapper = rendered.container.querySelector('.ss__recommendation');
-		const prevButton = rendered.container.querySelector('.ss__carousel__prev');
-		const nextButton = rendered.container.querySelector('.ss__carousel__next');
-		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .result'); // exclude duplicates
-
-		expect(recommendationWrapper).toBeInTheDocument();
-		expect(prevButton).toBeInTheDocument();
-		expect(nextButton).toBeInTheDocument();
-		expect(results).toHaveLength(20);
-
-		// @ts-ignore
-		window.IntersectionObserver.mockClear();
 	});
 
 	it('tracks as expected', async () => {
@@ -105,18 +68,19 @@ describe('Recommendation Component', () => {
 		await controller.search();
 
 		const rendered = render(
-			<Recommendation controller={controller}>
+			<RecommendationProfileTracker controller={controller}>
+				<div className="title">some title</div>
 				{controller.store.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<div className="result">{result.mappings.core?.name}</div>
 					</div>
 				))}
-			</Recommendation>
+			</RecommendationProfileTracker>
 		);
 
-		const next = rendered.container.querySelector('.ss__carousel__next')!;
+		const title = rendered.container.querySelector('.title')!;
 
-		expect(trackfn).toHaveBeenCalledTimes(21);
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
@@ -137,34 +101,10 @@ describe('Recommendation Component', () => {
 			},
 		});
 
-		// other 20 calls are for product render
-		controller.store.results.map((result) => {
-			expect(trackfn).toHaveBeenCalledWith({
-				type: BeaconType.PROFILE_PRODUCT_RENDER,
-				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-				pid: controller.events.render!.id,
-				event: {
-					context: {
-						placement: controller.store.profile.placement,
-						tag: controller.store.profile.tag,
-						type: 'product-recommendation',
-					},
-					product: {
-						id: result.id,
-						seed: undefined,
-						mappings: {
-							core: result.mappings.core,
-						},
-					},
-				},
-			});
-		});
-
 		trackfn.mockClear();
 
-		//click the next button
-		userEvent.click(next);
+		//click the title
+		userEvent.click(title);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
@@ -190,20 +130,17 @@ describe('Recommendation Component', () => {
 
 		trackfn.mockClear();
 
-		for (let i = 0; i < 21; i++) {
-			// @ts-ignore
-			let [callback] = window.IntersectionObserver.mock.calls[i];
-
-			callback([
-				{
-					isIntersecting: true,
-					intersectionRatio: 10,
-				},
-			]);
-		}
+		// @ts-ignore
+		let [callback] = window.IntersectionObserver.mock.calls[0];
+		callback([
+			{
+				isIntersecting: true,
+				intersectionRatio: 10,
+			},
+		]);
 
 		await waitFor(() => {
-			expect(trackfn).toHaveBeenCalledTimes(21);
+			expect(trackfn).toHaveBeenCalledTimes(1);
 		});
 
 		// profile impression
@@ -225,30 +162,90 @@ describe('Recommendation Component', () => {
 				},
 			},
 		});
+		trackfn.mockClear();
+	});
 
-		// next 4 results should have done impression tracking
-		controller.store.results.map((result) => {
-			expect(trackfn).toHaveBeenCalledWith({
-				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-				pid: controller.events.impression?.id,
-				event: {
-					context: {
-						placement: controller.store.profile.placement,
-						tag: controller.store.profile.tag,
-						type: 'product-recommendation',
-					},
-					product: {
-						id: result.id,
-						seed: undefined,
-						mappings: {
-							core: result.mappings.core,
-						},
-					},
-				},
-			});
+	it('can use a component as a child. ', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
 		});
+
+		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+		const ChildComponent = ({ controller }: { controller: RecommendationController }) => {
+			return (
+				<div>
+					<div className="title">some title</div>
+					{controller.store.results.map((result: any, idx: number) => (
+						<div className={'findMe'} key={idx}>
+							<div className="result">{result.mappings.core?.name}</div>
+						</div>
+					))}
+				</div>
+			);
+		};
+		await controller.search();
+
+		const rendered = render(
+			<RecommendationProfileTracker controller={controller}>
+				<ChildComponent controller={controller} />
+			</RecommendationProfileTracker>
+		);
+
+		const title = rendered.container.querySelector('.title')!;
+
+		expect(trackfn).toHaveBeenCalledTimes(1);
+
+		expect(trackfn).toHaveBeenCalledWith({
+			type: BeaconType.PROFILE_RENDER,
+			category: BeaconCategory.RECOMMENDATIONS,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			event: {
+				context: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					type: 'product-recommendation',
+				},
+				profile: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
+					threshold: 4,
+				},
+			},
+		});
+
+		trackfn.mockClear();
+
+		//click the title
+		userEvent.click(title);
+
+		expect(trackfn).toHaveBeenCalledWith({
+			type: BeaconType.PROFILE_CLICK,
+			category: BeaconCategory.RECOMMENDATIONS,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			event: {
+				context: {
+					action: 'navigate',
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					type: 'product-recommendation',
+				},
+				profile: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
+					threshold: 4,
+				},
+			},
+		});
+
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		trackfn.mockClear();
 	});
@@ -267,16 +264,17 @@ describe('Recommendation Component', () => {
 		await controller.search();
 
 		const rendered = render(
-			<Recommendation controller={controller} disableStyles>
+			<RecommendationProfileTracker controller={controller} disableStyles>
+				<div className="title">some title</div>
 				{controller.store.results.map((result, idx) => (
-					<div className="result" key={idx}>
-						{result.mappings.core?.name}
+					<div className={'findMe'} key={idx}>
+						<div className="result">{result.mappings.core?.name}</div>
 					</div>
 				))}
-			</Recommendation>
+			</RecommendationProfileTracker>
 		);
 
-		const CarouselElement = rendered.container.querySelector('.ss__recommendation');
+		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
 		expect(CarouselElement?.classList.length).toBe(1);
 	});
 
@@ -295,15 +293,16 @@ describe('Recommendation Component', () => {
 		await controller.search();
 
 		const rendered = render(
-			<Recommendation controller={controller} className={className}>
+			<RecommendationProfileTracker controller={controller} className={className}>
+				<div className="title">some title</div>
 				{controller.store.results.map((result, idx) => (
-					<div className="result" key={idx}>
-						{result.mappings.core?.name}
+					<div className={'findMe'} key={idx}>
+						<div className="result">{result.mappings.core?.name}</div>
 					</div>
 				))}
-			</Recommendation>
+			</RecommendationProfileTracker>
 		);
-		const CarouselElement = rendered.container.querySelector('.ss__recommendation');
+		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
 	});
@@ -323,25 +322,22 @@ describe('Recommendation Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<Recommendation controller={controller}>
+				<RecommendationProfileTracker controller={controller}>
+					<div className="title">some title</div>
 					{controller.store.results.map((result, idx) => (
-						<div className="findMe" key={idx}>
-							{result.mappings.core?.name}
+						<div className={'findMe'} key={idx}>
+							<div className="result">{result.mappings.core?.name}</div>
 						</div>
 					))}
-				</Recommendation>
+				</RecommendationProfileTracker>
 			</ThemeProvider>
 		);
 		const ChildElement = rendered.container.querySelector('.findMe');
 		expect(ChildElement).toBeInTheDocument();
 
-		const prev = rendered.container.querySelector('.ss__carousel__prev');
-		const next = rendered.container.querySelector('.ss__carousel__next');
-		expect(prev).toBeInTheDocument();
-		expect(next).toBeInTheDocument();
-
-		expect(prev).toHaveTextContent(theme.components.recommendation.prevButton);
-		expect(next).toHaveTextContent(theme.components.recommendation.nextButton);
+		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
+		expect(CarouselElement).toBeInTheDocument();
+		expect(CarouselElement).toHaveClass(theme.components.RecommendationProfileTracker.className);
 	});
 
 	it('is themeable with theme prop', async () => {
@@ -358,33 +354,29 @@ describe('Recommendation Component', () => {
 		await controller.search();
 
 		const rendered = render(
-			<Recommendation controller={controller} theme={theme}>
+			<RecommendationProfileTracker controller={controller} theme={theme}>
+				<div className="title">some title</div>
 				{controller.store.results.map((result, idx) => (
-					<div className="findMe" key={idx}>
-						{result.mappings.core?.name}
+					<div className={'findMe'} key={idx}>
+						<div className="result">{result.mappings.core?.name}</div>
 					</div>
 				))}
-			</Recommendation>
+			</RecommendationProfileTracker>
 		);
 
 		const ChildElement = rendered.container.querySelector('.findMe');
 		expect(ChildElement).toBeInTheDocument();
 
-		const prev = rendered.container.querySelector('.ss__carousel__prev');
-		const next = rendered.container.querySelector('.ss__carousel__next');
-		expect(prev).toBeInTheDocument();
-		expect(next).toBeInTheDocument();
-
-		expect(prev).toHaveTextContent(theme.components.recommendation.prevButton);
-		expect(next).toHaveTextContent(theme.components.recommendation.nextButton);
+		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
+		expect(CarouselElement).toBeInTheDocument();
+		expect(CarouselElement).toHaveClass(theme.components.RecommendationProfileTracker.className);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', async () => {
 		const themeOverride = {
 			components: {
-				recommendation: {
-					prevButton: 'Prev Button Yo',
-					nextButton: 'Next Button Yo',
+				RecommendationProfileTracker: {
+					className: 'newTheme',
 				},
 			},
 		};
@@ -403,27 +395,22 @@ describe('Recommendation Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<Recommendation controller={controller} theme={themeOverride}>
+				<RecommendationProfileTracker controller={controller} theme={themeOverride}>
+					<div className="title">some title</div>
 					{controller.store.results.map((result, idx) => (
-						<div className="findMe" key={idx}>
-							{result.mappings.core?.name}
+						<div className={'findMe'} key={idx}>
+							<div className="result">{result.mappings.core?.name}</div>
 						</div>
 					))}
-				</Recommendation>
+				</RecommendationProfileTracker>
 			</ThemeProvider>
 		);
 		const ChildElement = rendered.container.querySelector('.findMe');
 		expect(ChildElement).toBeInTheDocument();
 
-		const prev = rendered.container.querySelector('.ss__carousel__prev');
-		const next = rendered.container.querySelector('.ss__carousel__next');
-		expect(prev).toBeInTheDocument();
-		expect(next).toBeInTheDocument();
-
-		expect(prev).not.toHaveTextContent(theme.components.recommendation.prevButton);
-		expect(next).not.toHaveTextContent(theme.components.recommendation.nextButton);
-
-		expect(prev).toHaveTextContent(themeOverride.components.recommendation.prevButton);
-		expect(next).toHaveTextContent(themeOverride.components.recommendation.nextButton);
+		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
+		expect(CarouselElement).toBeInTheDocument();
+		expect(CarouselElement).not.toHaveClass(theme.components.RecommendationProfileTracker.className);
+		expect(CarouselElement).toHaveClass(themeOverride.components.RecommendationProfileTracker.className);
 	});
 });

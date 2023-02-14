@@ -194,7 +194,7 @@ describe('Recommendation Controller', () => {
 			},
 			pid: controller.events.click!.id,
 		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
+		expect(eventfn).toHaveBeenCalledTimes(2);
 
 		trackfn.mockClear();
 		eventfn.mockClear();
@@ -281,7 +281,7 @@ describe('Recommendation Controller', () => {
 			},
 			pid: controller.events.click!.id,
 		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
+		expect(eventfn).toHaveBeenCalledTimes(2);
 
 		trackfn.mockClear();
 		eventfn.mockClear();
@@ -368,7 +368,7 @@ describe('Recommendation Controller', () => {
 			},
 			pid: controller.events.click!.id,
 		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
+		expect(eventfn).toHaveBeenCalledTimes(2);
 
 		trackfn.mockClear();
 		eventfn.mockClear();
@@ -416,6 +416,8 @@ describe('Recommendation Controller', () => {
 		expect(controller.events.render).toBeDefined();
 		expect(controller.events.render).toBe(eventReturn);
 
+		controller.store.results.map((result) => controller.track.product.render(result));
+
 		expect(eventfn).toHaveBeenCalledTimes(controller.store.results.length + 1); // products + initial profile render
 		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length + 1);
 		expect(productTrackfn).toHaveBeenCalledTimes(controller.store.results.length);
@@ -423,6 +425,64 @@ describe('Recommendation Controller', () => {
 		expect(Object.keys(controller.events.product || {})).toHaveLength(controller.store.results.length);
 		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent]).toBeDefined();
 		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent].render).toBeDefined();
+
+		productTrackfn.mockClear();
+		trackfn.mockClear();
+		eventfn.mockClear();
+	});
+
+	it('can invoke controller track.render and track.product.render with custom result set', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+		const productTrackfn = jest.spyOn(controller.track.product, 'render');
+
+		await controller.search();
+
+		const reducedResults = controller.store.results.slice(0, 5);
+		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+
+		const eventReturn = controller.track.render(reducedResults);
+
+		expect(trackfn).toHaveBeenCalledWith({
+			type: BeaconType.PROFILE_RENDER,
+			category: BeaconCategory.RECOMMENDATIONS,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			event: {
+				context: {
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					type: 'product-recommendation',
+				},
+				profile: {
+					tag: controller.store.profile.tag,
+					placement: controller.store.profile.placement,
+					threshold: controller.store.profile.display.threshold,
+					templateId: controller.store.profile.display.template.uuid,
+					seed: [{ sku: recommendConfig.globals.product }],
+				},
+			},
+		});
+
+		expect(controller.events.render).toBeDefined();
+		expect(controller.events.render).toBe(eventReturn);
+
+		reducedResults.map((result) => controller.track.product.render(result));
+
+		expect(eventfn).toHaveBeenCalledTimes(reducedResults.length + 1); // products + initial profile render
+		expect(trackfn).toHaveBeenCalledTimes(reducedResults.length + 1);
+		expect(productTrackfn).toHaveBeenCalledTimes(reducedResults.length);
+
+		expect(Object.keys(controller.events.product || {})).toHaveLength(reducedResults.length);
+		expect(controller.events.product![reducedResults[0].id as keyof BeaconEvent]).toBeDefined();
+		expect(controller.events.product![reducedResults[0].id as keyof BeaconEvent].render).toBeDefined();
 
 		productTrackfn.mockClear();
 		trackfn.mockClear();
