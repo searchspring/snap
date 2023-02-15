@@ -783,6 +783,51 @@ describe('Snap Preact', () => {
 			// @ts-ignore - private class variable
 			expect(snap.config.client.config?.autocomplete?.requesters?.suggest?.globals?.integratedSpellCorrection).toBe(true);
 			expect((ac.config as AutocompleteControllerConfig).settings!.integratedSpellCorrection).toBe(true);
+			expect((ac.config as AutocompleteControllerConfig).globals!.search?.query?.spellCorrection).toBe(true);
+		});
+
+		it(`preserves controller integratedSpellCorrection setting when feature flag is set`, async () => {
+			const baseConfig = generateBaseConfig();
+
+			document.body.innerHTML = `<script id="searchspring-context"></script><input type="text" class="ss-ac-input"/>`;
+
+			const acConfig = {
+				...baseConfig,
+				features: {
+					integratedSpellCorrection: {
+						enabled: true,
+					},
+				},
+				controllers: {
+					autocomplete: [
+						{
+							config: {
+								selector: '.ss-ac-input',
+								id: 'ac',
+								settings: {
+									integratedSpellCorrection: false,
+								},
+							},
+							targeters: [
+								{
+									selector: '.ss-ac-input',
+									hideTarget: true,
+									component: async () => Component,
+								},
+							],
+						},
+					],
+				},
+			};
+			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
+			const snap = new Snap(acConfig, { client });
+			const ac = await snap.getController('ac');
+			await wait();
+
+			// @ts-ignore - private class variable
+			expect(snap.config.client.config?.autocomplete?.requesters?.suggest?.globals?.integratedSpellCorrection).toBe(true);
+			expect((ac.config as AutocompleteControllerConfig).settings!.integratedSpellCorrection).toBe(false);
+			expect((ac.config as AutocompleteControllerConfig).globals!.search?.query?.spellCorrection).toBe(undefined);
 		});
 	});
 
