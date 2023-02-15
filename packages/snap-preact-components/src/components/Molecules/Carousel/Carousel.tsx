@@ -1,15 +1,14 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { useState, useRef, useEffect } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-
-import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y } from 'swiper';
+import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
@@ -200,7 +199,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
 			displaySettings.slidesPerView = props.children.length;
 			displaySettings.slidesPerGroup = props.children.length;
-			displaySettings.loop = false;
+			// displaySettings.loop = false;
 		}
 		props = {
 			...props,
@@ -245,11 +244,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		},
 	};
 
-	const swiperModulesUnfiltered = modules ? [Navigation, Pagination].concat(modules!) : [Navigation, Pagination];
+	const swiperModulesUnfiltered = modules ? [Navigation, Pagination, A11y].concat(modules!) : [Navigation, Pagination, A11y];
 	//remove any duplicates, in case user passes in Navigation or Pagination
 	const swiperModules = swiperModulesUnfiltered.filter((module, pos) => swiperModulesUnfiltered.indexOf(module) === pos);
-
-	SwiperCore.use(swiperModules);
 
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
@@ -261,6 +258,15 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	//backwards compatability for legacy styles
+	useEffect(() => {
+		const swipers = document.querySelectorAll('.swiper');
+		swipers.forEach((elem: any) => {
+			elem.classList.add('swiper-container');
+		});
+	}, []);
+
 	return children?.length ? (
 		<CacheProvider>
 			<div
@@ -272,7 +278,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					<div
 						className="ss__carousel__prev"
 						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
+						onClick={() => {
+							onPrevButtonClick && ((e: any) => onPrevButtonClick(e));
+						}}
 					>
 						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
 					</div>
@@ -280,7 +288,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 				<Swiper
 					centerInsufficientSlides={true}
-					onInit={(swiper) => {
+					onBeforeInit={(swiper: any) => {
 						//@ts-ignore
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore
@@ -295,6 +303,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					direction={vertical ? 'vertical' : 'horizontal'}
 					loop={loop}
 					threshold={7}
+					modules={swiperModules}
+					navigation
 					{...additionalProps}
 					{...displaySettings}
 					pagination={pagination ? { clickable: true } : false}
@@ -329,10 +339,10 @@ export interface CarouselProps extends ComponentProps {
 	vertical?: boolean;
 	pagination?: boolean;
 	autoAdjustSlides?: boolean;
-	onClick?: (swiper: SwiperCore, e: MouseEvent | TouchEvent | PointerEvent) => void;
+	onClick?: (swiper: any, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onPrevButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	onInit?: (swiper: SwiperCore) => void;
+	onInit?: (swiper: any) => void;
 	modules?: any[];
 	children: JSX.Element[];
 }
