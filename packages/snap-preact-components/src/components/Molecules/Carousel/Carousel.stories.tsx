@@ -46,14 +46,14 @@ export default {
 		},
 		pagination: {
 			defaultValue: false,
-			description: 'Display pagination dots',
+			description: 'Configuration for pagination dots',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'boolean | SwiperOptions.pagination',
 				},
 				defaultValue: { summary: false },
 			},
-			control: { type: 'boolean' },
+			control: { type: 'boolean | SwiperOptions.pagination' },
 		},
 		vertical: {
 			defaultValue: false,
