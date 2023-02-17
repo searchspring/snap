@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.41.0](https://github.com/searchspring/snap/compare/v0.40.0...v0.41.0) (2023-02-17)
+
+### Bug Fixes
+
+- **preact-components-autocomplete:** adding logic to close ac when clicking terms, facets, see more ([41d32ac](https://github.com/searchspring/snap/commit/41d32ac54cc07f78d776f53110192d7931e593af))
+
 # [0.40.0](https://github.com/searchspring/snap/compare/v0.39.3...v0.40.0) (2023-02-01)
 
 ### Bug Fixes

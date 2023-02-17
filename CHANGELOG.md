@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.41.0](https://github.com/searchspring/snap/compare/v0.40.0...v0.41.0) (2023-02-17)
+
+### Bug Fixes
+
+- **autocomplete.tsx:** bugfix for ac history only terms display ([cba01a2](https://github.com/searchspring/snap/commit/cba01a2f1749a4d51cca62efad5d1fc136f156eb))
+- **preact-components-autocomplete:** adding logic to close ac when clicking terms, facets, see more ([41d32ac](https://github.com/searchspring/snap/commit/41d32ac54cc07f78d776f53110192d7931e593af))
+- **store-mobx-history:** fixing max configuration so that it disables when zero / trims when lowered ([32f8428](https://github.com/searchspring/snap/commit/32f84281710ee0239b73158178c8e879ca7410aa))
+
+### Features
+
+- **recommendationtracking:** components for recommendation beacon tracking profile and results ([9fc8d18](https://github.com/searchspring/snap/commit/9fc8d18a6d0baad6f918bcf4f145b94d507b2617))
+- **snap-preact:** adding support for stylesheet removal on branch override ([778f0b6](https://github.com/searchspring/snap/commit/778f0b6d5fcdfd77beba5b668cb3f43d44fa205e))
+
 # [0.40.0](https://github.com/searchspring/snap/compare/v0.39.3...v0.40.0) (2023-02-01)
 
 ### Bug Fixes
