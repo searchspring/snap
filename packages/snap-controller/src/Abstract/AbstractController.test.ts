@@ -469,10 +469,11 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		let bool = false;
+		let err;
 
-		controller.on('error', async (eventData, next) => {
-			bool = true;
+		controller.on('error', async (eventData: any, next) => {
+			const { error } = eventData;
+			err = error;
 			await next();
 		});
 
@@ -481,13 +482,13 @@ describe('Search Controller', () => {
 		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
 		const eventManagerSpy = jest.spyOn(controller.eventManager, 'fire');
 
-		expect(bool).toBe(false);
+		expect(err).toBe(undefined);
 
 		controller.handleError(error);
 
 		expect(trackerTrackError).toHaveBeenCalled();
 		expect(eventManagerSpy).toHaveBeenCalled();
-		expect(bool).toBe(true);
+		expect(err).toBe(error);
 
 		trackerTrackError.mockClear();
 	});
