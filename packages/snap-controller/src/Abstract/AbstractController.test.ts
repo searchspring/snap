@@ -458,6 +458,40 @@ describe('Search Controller', () => {
 		trackerTrackError.mockClear();
 	});
 
+	it('handleError fires error eventManager event', async () => {
+		const controller = new TestController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		let bool = false;
+
+		controller.on('error', async (eventData, next) => {
+			bool = true;
+			await next();
+		});
+
+		const error = 'string error';
+
+		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
+		const eventManagerSpy = jest.spyOn(controller.eventManager, 'fire');
+
+		expect(bool).toBe(false);
+
+		controller.handleError(error);
+
+		expect(trackerTrackError).toHaveBeenCalled();
+		expect(eventManagerSpy).toHaveBeenCalled();
+		expect(bool).toBe(true);
+
+		trackerTrackError.mockClear();
+	});
+
 	it('invokes handleError if object is thrown', async () => {
 		const controller = new TestController(searchConfig, {
 			client: new MockClient(globals, {}),

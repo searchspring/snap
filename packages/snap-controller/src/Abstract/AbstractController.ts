@@ -75,6 +75,8 @@ export abstract class AbstractController {
 			};
 
 			this.tracker.track.error(beaconPayload);
+
+			this.eventManager.fire('error', { controller: this, error: err });
 		}
 	};
 
