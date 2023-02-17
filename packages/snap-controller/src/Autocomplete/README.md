@@ -94,6 +94,10 @@ autocompleteController.search();
 - Called with `eventData` = { controller }
 - Done once automatically before the first search - or manually invoked by calling `init`
 
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
+
 ### beforeSearch
 - Called with `eventData` = { controller, request }
 - Always invoked before an API request is made 
