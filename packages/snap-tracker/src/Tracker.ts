@@ -26,7 +26,7 @@ import {
 	PreflightRequestModel,
 } from './types';
 
-const BATCH_TIMEOUT = 200;
+export const BATCH_TIMEOUT = 200;
 const LEGACY_USERID_COOKIE_NAME = '_isuid';
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
