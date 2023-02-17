@@ -86,32 +86,26 @@ describe('Autocomplete', () => {
 			cy.visit(config.url);
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (store.config.settings.trending?.showResults) {
+				if (config.selectors.website.openInputButton) {
+					cy.get(config.selectors.website.openInputButton).first().click({ force: true });
+				}
+
+				cy.get(config.selectors.website.input).first().should('exist').focus();
+
+				cy.wait('@autocomplete').should('exist');
+				cy.snapController('autocomplete').then(({ store }) => {
+					expect(store.trending.length).to.greaterThan(0);
+					expect(store.results.length).to.greaterThan(0);
+
+					// close the search input
 					if (config.selectors.website.openInputButton) {
 						cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 					}
-
-					cy.get(config.selectors.website.input).first().should('exist').focus();
-
-					cy.wait('@autocomplete').should('exist');
-					cy.snapController('autocomplete').then(({ store }) => {
-						expect(store.trending.length).to.greaterThan(0);
-						expect(store.results.length).to.greaterThan(0);
-
-						// close the search input
-						if (config.selectors.website.openInputButton) {
-							cy.get(config.selectors.website.openInputButton).first().click({ force: true });
-						}
-					});
-				} else {
-					this.skip();
-				}
+				});
 			});
 		});
 
 		it('can make single letter query', function () {
-			if (!config.startingQuery || !config?.selectors?.website?.input) this.skip();
-
 			if (config.selectors.website.openInputButton) {
 				cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 			}
@@ -127,8 +121,6 @@ describe('Autocomplete', () => {
 		});
 
 		it('has correct count and term in see more link', () => {
-			if (!config?.selectors?.autocomplete?.seeMore) this.skip();
-
 			cy.snapController('autocomplete').then(({ store }) => {
 				const term = store.terms[0].value;
 
@@ -140,15 +132,11 @@ describe('Autocomplete', () => {
 		});
 
 		it('can hover over term', function () {
-			if (!config?.selectors?.autocomplete?.term) this.skip();
-
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (store.terms.length <= 1) this.skip();
-				cy.get('body').then((body) => {
-					if (!body.find(`${config.selectors.autocomplete.term}`).length) {
-						this.skip(); // skip if no terms in DOM
-					}
-				});
+				if (store.terms.length <= 1) {
+					cy.get(config.selectors.website.input).first().should('exist').focus().type(config.query, { force: true });
+					cy.wait('@autocomplete').should('exist');
+				}
 
 				cy.get(`${config.selectors.autocomplete.term}`).last().find('a').should('exist').rightclick({ force: true }); // trigger onFocus event
 
@@ -163,27 +151,20 @@ describe('Autocomplete', () => {
 		});
 
 		it('can hover over facet', function () {
-			if (!config?.selectors?.input && !config?.selectors?.autocomplete?.facet) this.skip();
-
 			cy.get(config.selectors.website.input).first().should('exist').clear({ force: true }).type(config.startingQuery, { force: true });
 			cy.wait('@autocomplete').should('exist');
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (store.facets.length == 0) this.skip(); //skip if this term has no facets
-				cy.get('body').then((body) => {
-					if (!body.find(`${config.selectors.autocomplete.facet} a`).length) {
-						this.skip(); // skip if no facets in DOM
-					}
-				});
+				if (store.facets.length == 0) {
+					//if this term has no facets lets try another
+					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.query, { force: true });
+					cy.wait('@autocomplete').should('exist');
+				}
 
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
 					const optionURL = firstOption.href;
-
 					cy.get(firstOption).rightclick({ force: true }); // trigger onFocus event
-
-					cy.wait('@autocomplete').should('exist');
-
 					cy.snapController('autocomplete').then(({ store }) => {
 						cy.wrap(store.services.urlManager.state.filter).should('exist');
 						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
@@ -193,10 +174,8 @@ describe('Autocomplete', () => {
 		});
 
 		it('has results', function () {
-			if (!config?.selectors?.autocomplete?.result) this.skip();
-
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (!store.results.length) this.skip(); //skip if this term has no results
+				cy.get(store.results);
 				cy.get(`${config.selectors.autocomplete.result} a:first`)
 					.should('have.length.greaterThan', 0)
 					.each((result, index) => {
@@ -206,20 +185,16 @@ describe('Autocomplete', () => {
 		});
 
 		it('has see more link with correct URL', function () {
-			if (!config?.selectors?.autocomplete?.seeMore) this.skip();
-
 			cy.snapController('autocomplete').then(({ store }) => {
 				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`).should('exist');
 			});
 		});
 
 		it('can clear input', function () {
-			if (!config?.selectors?.website?.input && !config?.startingQuery) this.skip();
-
 			cy.get(config.selectors.website.input)
 				.first()
 				.should('exist')
-				.should('have.value', config.startingQuery)
+				.should('have.value', config.startingQuery || config.query)
 				.clear({ force: true })
 				.should('have.value', '');
 		});
@@ -251,12 +226,10 @@ describe('Autocomplete', () => {
 
 			// select a facet
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (store.facets.length == 0) this.skip(); //skip if this term has no facets
-				cy.get('body').then((body) => {
-					if (!body.find(`${config.selectors.autocomplete.facet} a`).length) {
-						this.skip(); // skip if no facets in DOM
-					}
-				});
+				if (store.facets.length == 0) {
+					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.startingQuery, { force: true });
+					cy.wait('@autocomplete').should('exist');
+				}
 
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
