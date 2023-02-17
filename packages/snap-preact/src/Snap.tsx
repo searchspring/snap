@@ -28,6 +28,7 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
+import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, SnapControllerConfig } from './types';
 
@@ -36,6 +37,7 @@ configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: '
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
+export const STYLESHEET_CLASSNAME = 'ss-snap-bundle-styles';
 
 type ExtendedTarget = Target & {
 	name?: string;
@@ -377,35 +379,7 @@ export class Snap {
 			}
 
 			// feature check block
-			// TODO: move to function
-			if (this.config.client && this.config.features?.integratedSpellCorrection?.enabled) {
-				this.config.client.config = deepmerge(this.config.client.config || {}, {
-					autocomplete: {
-						requesters: {
-							suggest: {
-								globals: {
-									integratedSpellCorrection: true,
-								},
-							},
-						},
-					},
-				});
-
-				// loop through controllers config and toggle integratedSpellCorrection setting
-				Object.keys(this.config?.controllers || {}).forEach((type) => {
-					switch (type) {
-						case 'autocomplete': {
-							this.config.controllers![type]!.forEach((controller, index) => {
-								if (typeof controller.config?.settings?.integratedSpellCorrection == 'undefined') {
-									controller.config.settings = controller.config.settings || {};
-									controller.config.settings.integratedSpellCorrection = true;
-								}
-							});
-							break;
-						}
-					}
-				});
-			}
+			configureSnapFeatures(this.config);
 
 			this.client = services?.client || new Client(this.config.client!.globals as ClientGlobals, this.config.client!.config);
 			this.tracker = services?.tracker || new Tracker(this.config.client!.globals as ClientGlobals, { framework: 'preact', mode: this.mode });
@@ -521,6 +495,9 @@ export class Snap {
 						document.head.appendChild(branchScript);
 					}
 				);
+
+				// remove snap bundle styles
+				document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`).forEach((el) => el.remove());
 
 				// prevent further instantiation of config
 				throw 'branch override';

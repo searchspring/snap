@@ -754,6 +754,57 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it('can redirect url when redirect is included in merchandising response', async () => {
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
+		acConfig = {
+			...acConfig,
+			selector: '#search_query',
+			action: '/search',
+			settings: {
+				redirects: {
+					merchandising: true,
+				},
+			},
+		};
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
+
+		const query = 'rumper';
+		controller.urlManager = controller.urlManager.set('query', query);
+
+		await controller.bind();
+		let inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		expect(inputEl).toBeDefined();
+
+		inputEl.value = query;
+
+		await controller.search();
+		expect(controller.store.terms.length).toBeGreaterThan(0);
+
+		// @ts-ignore
+		delete window.location;
+		window.location = {
+			...window.location,
+			href: '', // jest does not support window location changes
+		};
+
+		inputEl.focus();
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		await waitFor(() => {
+			expect(window.location.href).toContain('https://searchspring.com/?redirect');
+		});
+	});
+
 	it('tests bind method without form (using config.action)', async () => {
 		acConfig = {
 			...acConfig,

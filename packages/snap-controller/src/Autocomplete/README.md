@@ -19,6 +19,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.trending.showResults | if trending limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.history.limit | when set, historical (previously searched) queries will be fetched and made available in the history store | ➖ |   | 
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
+| settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
 
 <br>
 
@@ -92,6 +93,10 @@ autocompleteController.search();
 ### init
 - Called with `eventData` = { controller }
 - Done once automatically before the first search - or manually invoked by calling `init`
+
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }

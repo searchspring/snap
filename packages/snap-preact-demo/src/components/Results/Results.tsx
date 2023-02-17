@@ -11,6 +11,18 @@ type ResultsProps = {
 	controller?: SearchController;
 };
 
+const resultsBreakpoints = {
+	0: {
+		columns: 2,
+	},
+	768: {
+		columns: 3,
+	},
+	991: {
+		columns: 4,
+	},
+};
+
 @withStore
 @withController
 @observer
@@ -27,12 +39,14 @@ export class Results extends Component<ResultsProps> {
 				<div class="clear"></div>
 
 				<Profile name="results" controller={controller}>
-					<ResultsComponent controller={controller} results={results} />
+					<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
 				</Profile>
 
 				<div class="clear"></div>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
+
+				<div class="clear"></div>
 			</div>
 		);
 	}
