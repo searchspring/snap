@@ -1,4 +1,4 @@
-/*! For license information please see main.1499958a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.64d19559.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -4767,12 +4767,38 @@
 						null,
 						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
-						' prop specifies if the carousel should display pagination dots. '
+						' prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in ',
+						(0, esm.kt)(
+							'a',
+							{
+								parentName: 'p',
+								href: 'https://swiperjs.com/swiper-api#param-pagination-dynamicBullets',
+								target: '_blank',
+								rel: 'nofollow noopener noreferrer',
+							},
+							'swiper docs'
+						),
+						'. '
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination={true}>{children}</Carousel>\n')
+					),
+					(0, esm.kt)('p', null, 'or'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const paginationConfig = {\n    bulletActiveClass: "active",\n    bulletClass: \'bullet\',\n    clickable: false\n};\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination={paginationConfig}>{children}</Carousel>\n')
 					),
 					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
 					(0, esm.kt)(
@@ -5010,9 +5036,9 @@
 						},
 						pagination: {
 							defaultValue: !1,
-							description: 'Display pagination dots',
-							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-							control: { type: 'boolean' },
+							description: 'Configuration for pagination dots',
+							table: { type: { summary: 'boolean | SwiperOptions.pagination' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean | SwiperOptions.pagination' },
 						},
 						vertical: {
 							defaultValue: !1,
@@ -5122,7 +5148,6 @@
 					'children',
 					'breakpoints',
 					'loop',
-					'pagination',
 					'nextButton',
 					'prevButton',
 					'hideButtons',
@@ -5296,7 +5321,6 @@
 					var _props2 = props,
 						children = _props2.children,
 						loop = (_props2.breakpoints, _props2.loop),
-						pagination = _props2.pagination,
 						nextButton = _props2.nextButton,
 						prevButton = _props2.prevButton,
 						hideButtons = _props2.hideButtons,
@@ -5310,6 +5334,7 @@
 						modules = _props2.modules,
 						className = _props2.className,
 						additionalProps = _objectWithoutProperties(_props2, _excluded),
+						pagination = props.pagination,
 						subProps = {
 							icon: Object.assign(
 								{ className: 'ss__carousel__icon' },
@@ -5333,6 +5358,7 @@
 						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
+						pagination && (pagination = 'object' == typeof pagination ? Object.assign({ clickable: !0 }, pagination) : { clickable: !0 }),
 						null != children && children.length
 							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 									_providers__WEBPACK_IMPORTED_MODULE_19__.n,
@@ -5390,7 +5416,7 @@
 												},
 												additionalProps,
 												displaySettings,
-												{ pagination: !!pagination && { clickable: !0 } }
+												{ pagination }
 											),
 											children.map(function (child) {
 												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_22__.o, null, child);
@@ -15546,13 +15572,21 @@
 								clearTimeout(delayTimeout);
 							},
 						},
+						facetClickEvent = function facetClickEvent(e) {
+							properties.onFacetOptionClick && properties.onFacetOptionClick(e),
+								(null == controller ? void 0 : controller.setFocused) && (null == controller || controller.setFocused());
+						},
+						termClickEvent = function termClickEvent(e) {
+							properties.onTermClick && properties.onTermClick(e),
+								(null == controller ? void 0 : controller.setFocused) && (null == controller || controller.setFocused());
+						},
 						themeOverride = {
 							components: {
 								facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
-								facetGridOptions: { columns: 3, onClick: properties.onFacetOptionClick },
-								facetHierarchyOptions: { hideCount: !0, onClick: properties.onFacetOptionClick },
-								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: properties.onFacetOptionClick },
-								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: properties.onFacetOptionClick },
+								facetGridOptions: { columns: 3, onClick: facetClickEvent },
+								facetHierarchyOptions: { hideCount: !0, onClick: facetClickEvent },
+								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: facetClickEvent },
+								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: facetClickEvent },
 								result: { hideBadge: !0 },
 							},
 						},
@@ -15673,7 +15707,7 @@
 									return facet.display !== types.uw.SLIDER;
 							  })
 							: [],
-						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded,
+						onlyTerms = ((null == trending ? void 0 : trending.length) || history.length) && !loaded,
 						showResults = Boolean(
 							results.length > 0 ||
 								Object.keys(merchandising.content).length > 0 ||
@@ -15778,7 +15812,7 @@
 																					Object.assign(
 																						{
 																							onClick: function onClick(e) {
-																								return onTermClick && onTermClick(e);
+																								return termClickEvent(e);
 																							},
 																							href: term.url.href,
 																						},
@@ -15823,7 +15857,7 @@
 																					Object.assign(
 																						{
 																							onClick: function onClick(e) {
-																								return onTermClick && onTermClick(e);
+																								return termClickEvent(e);
 																							},
 																							href: term.url.href,
 																						},
@@ -15868,7 +15902,7 @@
 																					Object.assign(
 																						{
 																							onClick: function onClick(e) {
-																								return onTermClick && onTermClick(e);
+																								return termClickEvent(e);
 																							},
 																							href: term.url.href,
 																						},
@@ -16012,7 +16046,12 @@
 																{ className: 'ss__autocomplete__content__info' },
 																(0, emotion_react_browser_esm.tZ)(
 																	'a',
-																	{ href: state.url.href },
+																	{
+																		href: state.url.href,
+																		onClick: function onClick() {
+																			return (null == controller ? void 0 : controller.setFocused) && controller.setFocused();
+																		},
+																	},
 																	'See ',
 																	pagination.totalResults,
 																	' ',
@@ -20959,17 +20998,12 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
-				hooks_module =
+				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.number.is-nan.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
-					__webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js')),
-				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+					__webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js')),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
@@ -20979,60 +21013,12 @@
 				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
-				cache = __webpack_require__('./src/providers/cache.tsx');
-			function _slicedToArray(arr, i) {
-				return (
-					(function _arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function _iterableToArrayLimit(arr, i) {
-						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-						if (null != _i) {
-							var _s,
-								_e,
-								_x,
-								_r,
-								_arr = [],
-								_n = !0,
-								_d = !1;
-							try {
-								if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
-									if (Object(_i) !== _i) return;
-									_n = !1;
-								} else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-							} catch (err) {
-								(_d = !0), (_e = err);
-							} finally {
-								try {
-									if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
-								} finally {
-									if (_d) throw _e;
-								}
-							}
-							return _arr;
-						}
-					})(arr, i) ||
-					(function _unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function _nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			var useDisplaySettings = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				cache = __webpack_require__('./src/providers/cache.tsx'),
+				useDisplaySettings = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				RecommendationProfileTracker = __webpack_require__(
+					'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.tsx'
+				),
+				RecommendationResultTracker = __webpack_require__('./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.tsx'),
 				_excluded = [
 					'title',
 					'controller',
@@ -21049,81 +21035,6 @@
 					'className',
 					'vertical',
 				];
-			function _toConsumableArray(arr) {
-				return (
-					(function _arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return Recommendation_arrayLikeToArray(arr);
-					})(arr) ||
-					(function _iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					Recommendation_unsupportedIterableToArray(arr) ||
-					(function _nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Recommendation_slicedToArray(arr, i) {
-				return (
-					(function Recommendation_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function Recommendation_iterableToArrayLimit(arr, i) {
-						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-						if (null != _i) {
-							var _s,
-								_e,
-								_x,
-								_r,
-								_arr = [],
-								_n = !0,
-								_d = !1;
-							try {
-								if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
-									if (Object(_i) !== _i) return;
-									_n = !1;
-								} else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-							} catch (err) {
-								(_d = !0), (_e = err);
-							} finally {
-								try {
-									if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
-								} finally {
-									if (_d) throw _e;
-								}
-							}
-							return _arr;
-						}
-					})(arr, i) ||
-					Recommendation_unsupportedIterableToArray(arr, i) ||
-					(function Recommendation_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Recommendation_unsupportedIterableToArray(o, minLen) {
-				if (o) {
-					if ('string' == typeof o) return Recommendation_arrayLikeToArray(o, minLen);
-					var n = Object.prototype.toString.call(o).slice(8, -1);
-					return (
-						'Object' === n && o.constructor && (n = o.constructor.name),
-						'Map' === n || 'Set' === n
-							? Array.from(o)
-							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-							? Recommendation_arrayLikeToArray(o, minLen)
-							: void 0
-					);
-				}
-			}
-			function Recommendation_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
 			function _objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
 				var key,
@@ -21161,7 +21072,6 @@
 						_props3,
 						_globalTheme$componen3,
 						_props4,
-						_controller$track,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{
@@ -21234,56 +21144,7 @@
 								{ theme: null === (_props4 = props) || void 0 === _props4 ? void 0 : _props4.theme }
 							),
 						},
-						rootComponentRef = (0, hooks_module.sO)(null),
-						_useState2 = Recommendation_slicedToArray((0, hooks_module.eJ)([0, 0]), 2),
-						initialIndexes = _useState2[0],
-						setInitialIndexes = _useState2[1],
-						inViewport = (function useIntersection(ref) {
-							var rootMargin = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : '0px',
-								fireOnce = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-								_useState = (0, hooks_module.eJ)(!1),
-								_useState2 = _slicedToArray(_useState, 2),
-								isIntersecting = _useState2[0],
-								setIntersecting = _useState2[1];
-							return (
-								(0, hooks_module.d4)(function () {
-									var observer = new IntersectionObserver(
-										function (_ref) {
-											var entry = _slicedToArray(_ref, 1)[0];
-											setIntersecting(entry.isIntersecting), fireOnce && entry.isIntersecting && observer.unobserve(ref.current);
-										},
-										{ rootMargin }
-									);
-									return (
-										ref.current && observer.observe(ref.current),
-										function () {
-											observer.unobserve(ref.current);
-										}
-									);
-								}, []),
-								isIntersecting
-							);
-						})(rootComponentRef, '0px', !0),
-						sendProductImpression = function sendProductImpression(index, count) {
-							if (inViewport) {
-								var resultLoopOverCount,
-									resultLoopCount = [index, index + count];
-								index + count > resultsToRender.length - 1 &&
-									((resultLoopCount = [index]), (resultLoopOverCount = [0, index + count - resultsToRender.length]));
-								var resultsImpressions = resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopCount));
-								resultLoopOverCount &&
-									(resultsImpressions = resultsImpressions.concat(
-										resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopOverCount))
-									)),
-									resultsImpressions.map(function (result) {
-										controller.track.product.impression(result);
-									});
-							}
-						};
-					inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
-						(children || resultsToRender.length) &&
-							(null == controller || null === (_controller$track = controller.track) || void 0 === _controller$track || _controller$track.render());
-					var styling = {};
+						styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
 						children || (null != resultsToRender && resultsToRender.length)
@@ -21292,49 +21153,29 @@
 									null,
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										Object.assign({ ref: rootComponentRef }, styling, { className: classnames_default()('ss__recommendation', className) }),
-										title && (0, emotion_react_browser_esm.tZ)('h3', { className: 'ss__recommendation__title' }, title),
+										Object.assign({}, styling, { className: classnames_default()('ss__recommendation', className) }),
 										(0, emotion_react_browser_esm.tZ)(
-											Carousel.lr,
-											Object.assign(
-												{
-													onInit: function onInit(swiper) {
-														setInitialIndexes([swiper.realIndex, swiper.passedParams.slidesPerView]);
-													},
-													onBreakpoint: function onBreakpoint(swiper) {
-														sendProductImpression(swiper.realIndex, swiper.passedParams.slidesPerView);
-													},
-													onSlideChange: function onSlideChange(swiper) {
-														sendProductImpression(swiper.realIndex, swiper.passedParams.slidesPerView);
-													},
-													prevButton,
-													nextButton,
-													hideButtons,
-													onNextButtonClick: function onNextButtonClick(e) {
-														return controller.track.click(e);
-													},
-													onPrevButtonClick: function onPrevButtonClick(e) {
-														return controller.track.click(e);
-													},
-													onClick: function onClick(swiper, e) {
-														var clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-														controller.track.click(e), Number.isNaN(clickedIndex) || controller.track.product.click(e, resultsToRender[clickedIndex]);
-													},
-													loop,
-													pagination,
-													breakpoints,
-												},
-												subProps.carousel,
-												additionalProps,
-												displaySettings
-											),
-											Array.isArray(children) && children.length
-												? children.map(function (child) {
-														return child;
-												  })
-												: resultsToRender.map(function (result) {
-														return (0, emotion_react_browser_esm.tZ)(Result.x, Object.assign({}, subProps.result, { controller, result }));
-												  })
+											RecommendationProfileTracker.t,
+											{ controller },
+											title && (0, emotion_react_browser_esm.tZ)('h3', { className: 'ss__recommendation__title' }, title),
+											(0, emotion_react_browser_esm.tZ)(
+												Carousel.lr,
+												Object.assign(
+													{ prevButton, nextButton, hideButtons, loop, pagination, breakpoints },
+													subProps.carousel,
+													additionalProps,
+													displaySettings
+												),
+												Array.isArray(children) && children.length
+													? children.map(function (child, idx) {
+															return (0,
+															emotion_react_browser_esm.tZ)(RecommendationResultTracker.N, { controller, result: resultsToRender[idx] }, child);
+													  })
+													: resultsToRender.map(function (result) {
+															return (0,
+															emotion_react_browser_esm.tZ)(RecommendationResultTracker.N, { controller, result }, (0, emotion_react_browser_esm.tZ)(Result.x, Object.assign({}, subProps.result, { controller, result })));
+													  })
+											)
 										)
 									)
 							  )
@@ -23003,6 +22844,1285 @@
 					);
 				});
 		},
+		'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.stories.tsx': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => RecommendationProfileTracker_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.async-iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.math.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.json.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				RecommendationProfileTracker = __webpack_require__(
+					'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.tsx'
+				),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'recommendationprofiletracker' }, 'RecommendationProfileTracker'),
+					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to the profile.'),
+					(0, esm.kt)('p', null, 'NOTE: This is intended to be used with the RecommendationResultTracker. See examples below. '),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to a Recommendation Controller object.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationProfileTracker controller={recommendationController} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'children' }, 'children'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'children'),
+						' prop specifies the contents of the Recommendation profile. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationProfileTracker controller={controller}>\n    <h2>title</h2>\n    <div>\n        {controller.store.results.map((result) => (\n            <RecommendationResultTracker controller={controller} result={result}>\n                <Result result={result}></Result>\n            </RecommendationResultTracker>\n        ))} \n    </div>\n</RecommendationProfileTracker>\n'
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
+				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx');
+			function _regeneratorRuntime() {
+				_regeneratorRuntime = function _regeneratorRuntime() {
+					return exports;
+				};
+				var exports = {},
+					Op = Object.prototype,
+					hasOwn = Op.hasOwnProperty,
+					defineProperty =
+						Object.defineProperty ||
+						function (obj, key, desc) {
+							obj[key] = desc.value;
+						},
+					$Symbol = 'function' == typeof Symbol ? Symbol : {},
+					iteratorSymbol = $Symbol.iterator || '@@iterator',
+					asyncIteratorSymbol = $Symbol.asyncIterator || '@@asyncIterator',
+					toStringTagSymbol = $Symbol.toStringTag || '@@toStringTag';
+				function define(obj, key, value) {
+					return Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }), obj[key];
+				}
+				try {
+					define({}, '');
+				} catch (err) {
+					define = function define(obj, key, value) {
+						return (obj[key] = value);
+					};
+				}
+				function wrap(innerFn, outerFn, self, tryLocsList) {
+					var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+						generator = Object.create(protoGenerator.prototype),
+						context = new Context(tryLocsList || []);
+					return defineProperty(generator, '_invoke', { value: makeInvokeMethod(innerFn, self, context) }), generator;
+				}
+				function tryCatch(fn, obj, arg) {
+					try {
+						return { type: 'normal', arg: fn.call(obj, arg) };
+					} catch (err) {
+						return { type: 'throw', arg: err };
+					}
+				}
+				exports.wrap = wrap;
+				var ContinueSentinel = {};
+				function Generator() {}
+				function GeneratorFunction() {}
+				function GeneratorFunctionPrototype() {}
+				var IteratorPrototype = {};
+				define(IteratorPrototype, iteratorSymbol, function () {
+					return this;
+				});
+				var getProto = Object.getPrototypeOf,
+					NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+				NativeIteratorPrototype &&
+					NativeIteratorPrototype !== Op &&
+					hasOwn.call(NativeIteratorPrototype, iteratorSymbol) &&
+					(IteratorPrototype = NativeIteratorPrototype);
+				var Gp = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype));
+				function defineIteratorMethods(prototype) {
+					['next', 'throw', 'return'].forEach(function (method) {
+						define(prototype, method, function (arg) {
+							return this._invoke(method, arg);
+						});
+					});
+				}
+				function AsyncIterator(generator, PromiseImpl) {
+					function invoke(method, arg, resolve, reject) {
+						var record = tryCatch(generator[method], generator, arg);
+						if ('throw' !== record.type) {
+							var result = record.arg,
+								value = result.value;
+							return value && 'object' == typeof value && hasOwn.call(value, '__await')
+								? PromiseImpl.resolve(value.__await).then(
+										function (value) {
+											invoke('next', value, resolve, reject);
+										},
+										function (err) {
+											invoke('throw', err, resolve, reject);
+										}
+								  )
+								: PromiseImpl.resolve(value).then(
+										function (unwrapped) {
+											(result.value = unwrapped), resolve(result);
+										},
+										function (error) {
+											return invoke('throw', error, resolve, reject);
+										}
+								  );
+						}
+						reject(record.arg);
+					}
+					var previousPromise;
+					defineProperty(this, '_invoke', {
+						value: function value(method, arg) {
+							function callInvokeWithMethodAndArg() {
+								return new PromiseImpl(function (resolve, reject) {
+									invoke(method, arg, resolve, reject);
+								});
+							}
+							return (previousPromise = previousPromise
+								? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
+								: callInvokeWithMethodAndArg());
+						},
+					});
+				}
+				function makeInvokeMethod(innerFn, self, context) {
+					var state = 'suspendedStart';
+					return function (method, arg) {
+						if ('executing' === state) throw new Error('Generator is already running');
+						if ('completed' === state) {
+							if ('throw' === method) throw arg;
+							return doneResult();
+						}
+						for (context.method = method, context.arg = arg; ; ) {
+							var delegate = context.delegate;
+							if (delegate) {
+								var delegateResult = maybeInvokeDelegate(delegate, context);
+								if (delegateResult) {
+									if (delegateResult === ContinueSentinel) continue;
+									return delegateResult;
+								}
+							}
+							if ('next' === context.method) context.sent = context._sent = context.arg;
+							else if ('throw' === context.method) {
+								if ('suspendedStart' === state) throw ((state = 'completed'), context.arg);
+								context.dispatchException(context.arg);
+							} else 'return' === context.method && context.abrupt('return', context.arg);
+							state = 'executing';
+							var record = tryCatch(innerFn, self, context);
+							if ('normal' === record.type) {
+								if (((state = context.done ? 'completed' : 'suspendedYield'), record.arg === ContinueSentinel)) continue;
+								return { value: record.arg, done: context.done };
+							}
+							'throw' === record.type && ((state = 'completed'), (context.method = 'throw'), (context.arg = record.arg));
+						}
+					};
+				}
+				function maybeInvokeDelegate(delegate, context) {
+					var methodName = context.method,
+						method = delegate.iterator[methodName];
+					if (void 0 === method)
+						return (
+							(context.delegate = null),
+							('throw' === methodName &&
+								delegate.iterator.return &&
+								((context.method = 'return'), (context.arg = void 0), maybeInvokeDelegate(delegate, context), 'throw' === context.method)) ||
+								('return' !== methodName &&
+									((context.method = 'throw'), (context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")))),
+							ContinueSentinel
+						);
+					var record = tryCatch(method, delegate.iterator, context.arg);
+					if ('throw' === record.type) return (context.method = 'throw'), (context.arg = record.arg), (context.delegate = null), ContinueSentinel;
+					var info = record.arg;
+					return info
+						? info.done
+							? ((context[delegate.resultName] = info.value),
+							  (context.next = delegate.nextLoc),
+							  'return' !== context.method && ((context.method = 'next'), (context.arg = void 0)),
+							  (context.delegate = null),
+							  ContinueSentinel)
+							: info
+						: ((context.method = 'throw'),
+						  (context.arg = new TypeError('iterator result is not an object')),
+						  (context.delegate = null),
+						  ContinueSentinel);
+				}
+				function pushTryEntry(locs) {
+					var entry = { tryLoc: locs[0] };
+					1 in locs && (entry.catchLoc = locs[1]),
+						2 in locs && ((entry.finallyLoc = locs[2]), (entry.afterLoc = locs[3])),
+						this.tryEntries.push(entry);
+				}
+				function resetTryEntry(entry) {
+					var record = entry.completion || {};
+					(record.type = 'normal'), delete record.arg, (entry.completion = record);
+				}
+				function Context(tryLocsList) {
+					(this.tryEntries = [{ tryLoc: 'root' }]), tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+				}
+				function values(iterable) {
+					if (iterable) {
+						var iteratorMethod = iterable[iteratorSymbol];
+						if (iteratorMethod) return iteratorMethod.call(iterable);
+						if ('function' == typeof iterable.next) return iterable;
+						if (!isNaN(iterable.length)) {
+							var i = -1,
+								next = function next() {
+									for (; ++i < iterable.length; ) if (hasOwn.call(iterable, i)) return (next.value = iterable[i]), (next.done = !1), next;
+									return (next.value = void 0), (next.done = !0), next;
+								};
+							return (next.next = next);
+						}
+					}
+					return { next: doneResult };
+				}
+				function doneResult() {
+					return { value: void 0, done: !0 };
+				}
+				return (
+					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
+					defineProperty(Gp, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
+					defineProperty(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
+					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, 'GeneratorFunction')),
+					(exports.isGeneratorFunction = function (genFun) {
+						var ctor = 'function' == typeof genFun && genFun.constructor;
+						return !!ctor && (ctor === GeneratorFunction || 'GeneratorFunction' === (ctor.displayName || ctor.name));
+					}),
+					(exports.mark = function (genFun) {
+						return (
+							Object.setPrototypeOf
+								? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype)
+								: ((genFun.__proto__ = GeneratorFunctionPrototype), define(genFun, toStringTagSymbol, 'GeneratorFunction')),
+							(genFun.prototype = Object.create(Gp)),
+							genFun
+						);
+					}),
+					(exports.awrap = function (arg) {
+						return { __await: arg };
+					}),
+					defineIteratorMethods(AsyncIterator.prototype),
+					define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+						return this;
+					}),
+					(exports.AsyncIterator = AsyncIterator),
+					(exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+						void 0 === PromiseImpl && (PromiseImpl = Promise);
+						var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+						return exports.isGeneratorFunction(outerFn)
+							? iter
+							: iter.next().then(function (result) {
+									return result.done ? result.value : iter.next();
+							  });
+					}),
+					defineIteratorMethods(Gp),
+					define(Gp, toStringTagSymbol, 'Generator'),
+					define(Gp, iteratorSymbol, function () {
+						return this;
+					}),
+					define(Gp, 'toString', function () {
+						return '[object Generator]';
+					}),
+					(exports.keys = function (val) {
+						var object = Object(val),
+							keys = [];
+						for (var key in object) keys.push(key);
+						return (
+							keys.reverse(),
+							function next() {
+								for (; keys.length; ) {
+									var key = keys.pop();
+									if (key in object) return (next.value = key), (next.done = !1), next;
+								}
+								return (next.done = !0), next;
+							}
+						);
+					}),
+					(exports.values = values),
+					(Context.prototype = {
+						constructor: Context,
+						reset: function reset(skipTempReset) {
+							if (
+								((this.prev = 0),
+								(this.next = 0),
+								(this.sent = this._sent = void 0),
+								(this.done = !1),
+								(this.delegate = null),
+								(this.method = 'next'),
+								(this.arg = void 0),
+								this.tryEntries.forEach(resetTryEntry),
+								!skipTempReset)
+							)
+								for (var name in this) 't' === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = void 0);
+						},
+						stop: function stop() {
+							this.done = !0;
+							var rootRecord = this.tryEntries[0].completion;
+							if ('throw' === rootRecord.type) throw rootRecord.arg;
+							return this.rval;
+						},
+						dispatchException: function dispatchException(exception) {
+							if (this.done) throw exception;
+							var context = this;
+							function handle(loc, caught) {
+								return (
+									(record.type = 'throw'),
+									(record.arg = exception),
+									(context.next = loc),
+									caught && ((context.method = 'next'), (context.arg = void 0)),
+									!!caught
+								);
+							}
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i],
+									record = entry.completion;
+								if ('root' === entry.tryLoc) return handle('end');
+								if (entry.tryLoc <= this.prev) {
+									var hasCatch = hasOwn.call(entry, 'catchLoc'),
+										hasFinally = hasOwn.call(entry, 'finallyLoc');
+									if (hasCatch && hasFinally) {
+										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+									} else if (hasCatch) {
+										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+									} else {
+										if (!hasFinally) throw new Error('try statement without catch or finally');
+										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+									}
+								}
+							}
+						},
+						abrupt: function abrupt(type, arg) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.tryLoc <= this.prev && hasOwn.call(entry, 'finallyLoc') && this.prev < entry.finallyLoc) {
+									var finallyEntry = entry;
+									break;
+								}
+							}
+							finallyEntry &&
+								('break' === type || 'continue' === type) &&
+								finallyEntry.tryLoc <= arg &&
+								arg <= finallyEntry.finallyLoc &&
+								(finallyEntry = null);
+							var record = finallyEntry ? finallyEntry.completion : {};
+							return (
+								(record.type = type),
+								(record.arg = arg),
+								finallyEntry ? ((this.method = 'next'), (this.next = finallyEntry.finallyLoc), ContinueSentinel) : this.complete(record)
+							);
+						},
+						complete: function complete(record, afterLoc) {
+							if ('throw' === record.type) throw record.arg;
+							return (
+								'break' === record.type || 'continue' === record.type
+									? (this.next = record.arg)
+									: 'return' === record.type
+									? ((this.rval = this.arg = record.arg), (this.method = 'return'), (this.next = 'end'))
+									: 'normal' === record.type && afterLoc && (this.next = afterLoc),
+								ContinueSentinel
+							);
+						},
+						finish: function finish(finallyLoc) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+							}
+						},
+						catch: function _catch(tryLoc) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.tryLoc === tryLoc) {
+									var record = entry.completion;
+									if ('throw' === record.type) {
+										var thrown = record.arg;
+										resetTryEntry(entry);
+									}
+									return thrown;
+								}
+							}
+							throw new Error('illegal catch attempt');
+						},
+						delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+							return (
+								(this.delegate = { iterator: values(iterable), resultName, nextLoc }), 'next' === this.method && (this.arg = void 0), ContinueSentinel
+							);
+						},
+					}),
+					exports
+				);
+			}
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			const RecommendationProfileTracker_stories = {
+				title: 'Trackers/Recommendation/Profile',
+				component: RecommendationProfileTracker.t,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				argTypes: Object.assign(
+					{
+						controller: {
+							description: 'Recommendation Controller reference',
+							type: { required: !0 },
+							table: { type: { summary: 'Controller' } },
+							control: { type: 'none' },
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var snapInstance = snapify.K.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } }),
+				Default = function Default(props, _ref) {
+					var controller = _ref.loaded.controller;
+					return (0, preact_module.h)(
+						RecommendationProfileTracker.t,
+						Object.assign({}, props, { controller }),
+						(0, preact_module.h)('h2', null, 'Recommended for You'),
+						(0, preact_module.h)(
+							Carousel.lr,
+							null,
+							controller.store.results.map(function (result, idx) {
+								return (0, preact_module.h)(Result.x, { result, key: idx });
+							})
+						)
+					);
+				};
+			Default.loaders = [
+				_asyncToGenerator(
+					_regeneratorRuntime().mark(function _callee() {
+						return _regeneratorRuntime().wrap(function _callee$(_context) {
+							for (;;)
+								switch ((_context.prev = _context.next)) {
+									case 0:
+										return (_context.next = 2), snapInstance.search();
+									case 2:
+										return _context.abrupt('return', { controller: snapInstance });
+									case 3:
+									case 'end':
+										return _context.stop();
+								}
+						}, _callee);
+					})
+				),
+			];
+		},
+		'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.tsx': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { t: () => RecommendationProfileTracker });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_hooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/hooks/useIntersection.tsx'),
+				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
+				CSS_RecommendationProfileTracker = function RecommendationProfileTracker() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({});
+				},
+				RecommendationProfileTracker = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.a)(),
+						props = Object.assign(
+							{},
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.RecommendationProfileTracker,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.RecommendationProfileTracker
+						),
+						children = props.children,
+						controller = props.controller,
+						className = props.className,
+						style = props.style,
+						disableStyles = props.disableStyles,
+						childs = (0, preact__WEBPACK_IMPORTED_MODULE_1__.bR)(children),
+						componentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_2__.sO)(null);
+					(0, _hooks__WEBPACK_IMPORTED_MODULE_7__.s)(componentRef, '0px') && controller.track.impression(),
+						childs.length && controller.track.render();
+					var styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_RecommendationProfileTracker(), style]),
+						childs.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+									'div',
+									Object.assign(
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__recommendation-profile-tracker', className),
+											onClick: function onClick(e) {
+												return controller.track.click(e);
+											},
+											ref: componentRef,
+										},
+										styling
+									),
+									children
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null)
+					);
+				});
+		},
+		'./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.stories.tsx': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => RecommendationResultTracker_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.async-iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.math.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.json.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				RecommendationResultTracker = __webpack_require__('./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'recommendationresulttracker' }, 'RecommendationResultTracker'),
+					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to an individual result within a profile.'),
+					(0, esm.kt)('p', null, 'NOTE: This is intended to be used with the RecommendationProfileTracker. See examples below. '),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to a Recommendation Controller object.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationProfileTracker controller={controller}>\n    <RecommendationResultTracker controller={controller} result={result}>\n        <Result result={result}></Result>\n    </RecommendationResultTracker>\n</RecommendationProfileTracker>\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'children' }, 'children'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'children'),
+						' prop specifies the contents of the result component. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationProfileTracker controller={controller}>\n    <RecommendationResultTracker controller={controller} result={result}>\n        <Result result={result}></Result>\n    </RecommendationResultTracker>\n</RecommendationProfileTracker>\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'result' }, 'result'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'result'),
+						' prop specifies a reference to a product object from the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						' store array.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationProfileTracker controller={controller}>\n    <RecommendationResultTracker controller={controller} result={result}>\n        <Result result={result}></Result>\n    </RecommendationResultTracker>\n</RecommendationProfileTracker>\n'
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx');
+			function _regeneratorRuntime() {
+				_regeneratorRuntime = function _regeneratorRuntime() {
+					return exports;
+				};
+				var exports = {},
+					Op = Object.prototype,
+					hasOwn = Op.hasOwnProperty,
+					defineProperty =
+						Object.defineProperty ||
+						function (obj, key, desc) {
+							obj[key] = desc.value;
+						},
+					$Symbol = 'function' == typeof Symbol ? Symbol : {},
+					iteratorSymbol = $Symbol.iterator || '@@iterator',
+					asyncIteratorSymbol = $Symbol.asyncIterator || '@@asyncIterator',
+					toStringTagSymbol = $Symbol.toStringTag || '@@toStringTag';
+				function define(obj, key, value) {
+					return Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }), obj[key];
+				}
+				try {
+					define({}, '');
+				} catch (err) {
+					define = function define(obj, key, value) {
+						return (obj[key] = value);
+					};
+				}
+				function wrap(innerFn, outerFn, self, tryLocsList) {
+					var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+						generator = Object.create(protoGenerator.prototype),
+						context = new Context(tryLocsList || []);
+					return defineProperty(generator, '_invoke', { value: makeInvokeMethod(innerFn, self, context) }), generator;
+				}
+				function tryCatch(fn, obj, arg) {
+					try {
+						return { type: 'normal', arg: fn.call(obj, arg) };
+					} catch (err) {
+						return { type: 'throw', arg: err };
+					}
+				}
+				exports.wrap = wrap;
+				var ContinueSentinel = {};
+				function Generator() {}
+				function GeneratorFunction() {}
+				function GeneratorFunctionPrototype() {}
+				var IteratorPrototype = {};
+				define(IteratorPrototype, iteratorSymbol, function () {
+					return this;
+				});
+				var getProto = Object.getPrototypeOf,
+					NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+				NativeIteratorPrototype &&
+					NativeIteratorPrototype !== Op &&
+					hasOwn.call(NativeIteratorPrototype, iteratorSymbol) &&
+					(IteratorPrototype = NativeIteratorPrototype);
+				var Gp = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype));
+				function defineIteratorMethods(prototype) {
+					['next', 'throw', 'return'].forEach(function (method) {
+						define(prototype, method, function (arg) {
+							return this._invoke(method, arg);
+						});
+					});
+				}
+				function AsyncIterator(generator, PromiseImpl) {
+					function invoke(method, arg, resolve, reject) {
+						var record = tryCatch(generator[method], generator, arg);
+						if ('throw' !== record.type) {
+							var result = record.arg,
+								value = result.value;
+							return value && 'object' == typeof value && hasOwn.call(value, '__await')
+								? PromiseImpl.resolve(value.__await).then(
+										function (value) {
+											invoke('next', value, resolve, reject);
+										},
+										function (err) {
+											invoke('throw', err, resolve, reject);
+										}
+								  )
+								: PromiseImpl.resolve(value).then(
+										function (unwrapped) {
+											(result.value = unwrapped), resolve(result);
+										},
+										function (error) {
+											return invoke('throw', error, resolve, reject);
+										}
+								  );
+						}
+						reject(record.arg);
+					}
+					var previousPromise;
+					defineProperty(this, '_invoke', {
+						value: function value(method, arg) {
+							function callInvokeWithMethodAndArg() {
+								return new PromiseImpl(function (resolve, reject) {
+									invoke(method, arg, resolve, reject);
+								});
+							}
+							return (previousPromise = previousPromise
+								? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
+								: callInvokeWithMethodAndArg());
+						},
+					});
+				}
+				function makeInvokeMethod(innerFn, self, context) {
+					var state = 'suspendedStart';
+					return function (method, arg) {
+						if ('executing' === state) throw new Error('Generator is already running');
+						if ('completed' === state) {
+							if ('throw' === method) throw arg;
+							return doneResult();
+						}
+						for (context.method = method, context.arg = arg; ; ) {
+							var delegate = context.delegate;
+							if (delegate) {
+								var delegateResult = maybeInvokeDelegate(delegate, context);
+								if (delegateResult) {
+									if (delegateResult === ContinueSentinel) continue;
+									return delegateResult;
+								}
+							}
+							if ('next' === context.method) context.sent = context._sent = context.arg;
+							else if ('throw' === context.method) {
+								if ('suspendedStart' === state) throw ((state = 'completed'), context.arg);
+								context.dispatchException(context.arg);
+							} else 'return' === context.method && context.abrupt('return', context.arg);
+							state = 'executing';
+							var record = tryCatch(innerFn, self, context);
+							if ('normal' === record.type) {
+								if (((state = context.done ? 'completed' : 'suspendedYield'), record.arg === ContinueSentinel)) continue;
+								return { value: record.arg, done: context.done };
+							}
+							'throw' === record.type && ((state = 'completed'), (context.method = 'throw'), (context.arg = record.arg));
+						}
+					};
+				}
+				function maybeInvokeDelegate(delegate, context) {
+					var methodName = context.method,
+						method = delegate.iterator[methodName];
+					if (void 0 === method)
+						return (
+							(context.delegate = null),
+							('throw' === methodName &&
+								delegate.iterator.return &&
+								((context.method = 'return'), (context.arg = void 0), maybeInvokeDelegate(delegate, context), 'throw' === context.method)) ||
+								('return' !== methodName &&
+									((context.method = 'throw'), (context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")))),
+							ContinueSentinel
+						);
+					var record = tryCatch(method, delegate.iterator, context.arg);
+					if ('throw' === record.type) return (context.method = 'throw'), (context.arg = record.arg), (context.delegate = null), ContinueSentinel;
+					var info = record.arg;
+					return info
+						? info.done
+							? ((context[delegate.resultName] = info.value),
+							  (context.next = delegate.nextLoc),
+							  'return' !== context.method && ((context.method = 'next'), (context.arg = void 0)),
+							  (context.delegate = null),
+							  ContinueSentinel)
+							: info
+						: ((context.method = 'throw'),
+						  (context.arg = new TypeError('iterator result is not an object')),
+						  (context.delegate = null),
+						  ContinueSentinel);
+				}
+				function pushTryEntry(locs) {
+					var entry = { tryLoc: locs[0] };
+					1 in locs && (entry.catchLoc = locs[1]),
+						2 in locs && ((entry.finallyLoc = locs[2]), (entry.afterLoc = locs[3])),
+						this.tryEntries.push(entry);
+				}
+				function resetTryEntry(entry) {
+					var record = entry.completion || {};
+					(record.type = 'normal'), delete record.arg, (entry.completion = record);
+				}
+				function Context(tryLocsList) {
+					(this.tryEntries = [{ tryLoc: 'root' }]), tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+				}
+				function values(iterable) {
+					if (iterable) {
+						var iteratorMethod = iterable[iteratorSymbol];
+						if (iteratorMethod) return iteratorMethod.call(iterable);
+						if ('function' == typeof iterable.next) return iterable;
+						if (!isNaN(iterable.length)) {
+							var i = -1,
+								next = function next() {
+									for (; ++i < iterable.length; ) if (hasOwn.call(iterable, i)) return (next.value = iterable[i]), (next.done = !1), next;
+									return (next.value = void 0), (next.done = !0), next;
+								};
+							return (next.next = next);
+						}
+					}
+					return { next: doneResult };
+				}
+				function doneResult() {
+					return { value: void 0, done: !0 };
+				}
+				return (
+					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
+					defineProperty(Gp, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
+					defineProperty(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
+					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, 'GeneratorFunction')),
+					(exports.isGeneratorFunction = function (genFun) {
+						var ctor = 'function' == typeof genFun && genFun.constructor;
+						return !!ctor && (ctor === GeneratorFunction || 'GeneratorFunction' === (ctor.displayName || ctor.name));
+					}),
+					(exports.mark = function (genFun) {
+						return (
+							Object.setPrototypeOf
+								? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype)
+								: ((genFun.__proto__ = GeneratorFunctionPrototype), define(genFun, toStringTagSymbol, 'GeneratorFunction')),
+							(genFun.prototype = Object.create(Gp)),
+							genFun
+						);
+					}),
+					(exports.awrap = function (arg) {
+						return { __await: arg };
+					}),
+					defineIteratorMethods(AsyncIterator.prototype),
+					define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+						return this;
+					}),
+					(exports.AsyncIterator = AsyncIterator),
+					(exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+						void 0 === PromiseImpl && (PromiseImpl = Promise);
+						var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+						return exports.isGeneratorFunction(outerFn)
+							? iter
+							: iter.next().then(function (result) {
+									return result.done ? result.value : iter.next();
+							  });
+					}),
+					defineIteratorMethods(Gp),
+					define(Gp, toStringTagSymbol, 'Generator'),
+					define(Gp, iteratorSymbol, function () {
+						return this;
+					}),
+					define(Gp, 'toString', function () {
+						return '[object Generator]';
+					}),
+					(exports.keys = function (val) {
+						var object = Object(val),
+							keys = [];
+						for (var key in object) keys.push(key);
+						return (
+							keys.reverse(),
+							function next() {
+								for (; keys.length; ) {
+									var key = keys.pop();
+									if (key in object) return (next.value = key), (next.done = !1), next;
+								}
+								return (next.done = !0), next;
+							}
+						);
+					}),
+					(exports.values = values),
+					(Context.prototype = {
+						constructor: Context,
+						reset: function reset(skipTempReset) {
+							if (
+								((this.prev = 0),
+								(this.next = 0),
+								(this.sent = this._sent = void 0),
+								(this.done = !1),
+								(this.delegate = null),
+								(this.method = 'next'),
+								(this.arg = void 0),
+								this.tryEntries.forEach(resetTryEntry),
+								!skipTempReset)
+							)
+								for (var name in this) 't' === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = void 0);
+						},
+						stop: function stop() {
+							this.done = !0;
+							var rootRecord = this.tryEntries[0].completion;
+							if ('throw' === rootRecord.type) throw rootRecord.arg;
+							return this.rval;
+						},
+						dispatchException: function dispatchException(exception) {
+							if (this.done) throw exception;
+							var context = this;
+							function handle(loc, caught) {
+								return (
+									(record.type = 'throw'),
+									(record.arg = exception),
+									(context.next = loc),
+									caught && ((context.method = 'next'), (context.arg = void 0)),
+									!!caught
+								);
+							}
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i],
+									record = entry.completion;
+								if ('root' === entry.tryLoc) return handle('end');
+								if (entry.tryLoc <= this.prev) {
+									var hasCatch = hasOwn.call(entry, 'catchLoc'),
+										hasFinally = hasOwn.call(entry, 'finallyLoc');
+									if (hasCatch && hasFinally) {
+										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+									} else if (hasCatch) {
+										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+									} else {
+										if (!hasFinally) throw new Error('try statement without catch or finally');
+										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+									}
+								}
+							}
+						},
+						abrupt: function abrupt(type, arg) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.tryLoc <= this.prev && hasOwn.call(entry, 'finallyLoc') && this.prev < entry.finallyLoc) {
+									var finallyEntry = entry;
+									break;
+								}
+							}
+							finallyEntry &&
+								('break' === type || 'continue' === type) &&
+								finallyEntry.tryLoc <= arg &&
+								arg <= finallyEntry.finallyLoc &&
+								(finallyEntry = null);
+							var record = finallyEntry ? finallyEntry.completion : {};
+							return (
+								(record.type = type),
+								(record.arg = arg),
+								finallyEntry ? ((this.method = 'next'), (this.next = finallyEntry.finallyLoc), ContinueSentinel) : this.complete(record)
+							);
+						},
+						complete: function complete(record, afterLoc) {
+							if ('throw' === record.type) throw record.arg;
+							return (
+								'break' === record.type || 'continue' === record.type
+									? (this.next = record.arg)
+									: 'return' === record.type
+									? ((this.rval = this.arg = record.arg), (this.method = 'return'), (this.next = 'end'))
+									: 'normal' === record.type && afterLoc && (this.next = afterLoc),
+								ContinueSentinel
+							);
+						},
+						finish: function finish(finallyLoc) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+							}
+						},
+						catch: function _catch(tryLoc) {
+							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+								var entry = this.tryEntries[i];
+								if (entry.tryLoc === tryLoc) {
+									var record = entry.completion;
+									if ('throw' === record.type) {
+										var thrown = record.arg;
+										resetTryEntry(entry);
+									}
+									return thrown;
+								}
+							}
+							throw new Error('illegal catch attempt');
+						},
+						delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+							return (
+								(this.delegate = { iterator: values(iterable), resultName, nextLoc }), 'next' === this.method && (this.arg = void 0), ContinueSentinel
+							);
+						},
+					}),
+					exports
+				);
+			}
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			const RecommendationResultTracker_stories = {
+				title: 'Trackers/Recommendation/Result',
+				component: RecommendationResultTracker.N,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '250px' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: Object.assign(
+					{
+						controller: {
+							description: 'Recommendation Controller reference',
+							type: { required: !0 },
+							table: { type: { summary: 'Controller' } },
+							control: { type: 'none' },
+						},
+						result: {
+							description: 'Result store Product reference',
+							type: { required: !0 },
+							table: { type: { summary: 'result store Product object' } },
+							control: { type: 'none' },
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var snapInstance = snapify.K.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } }),
+				Default = function Default(props, _ref) {
+					var _controller$store,
+						_controller$store2,
+						controller = _ref.loaded.controller;
+					return (0, preact_module.h)(
+						RecommendationResultTracker.N,
+						Object.assign({}, props, {
+							controller,
+							result:
+								null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store
+									? void 0
+									: _controller$store.results[0],
+						}),
+						(0, preact_module.h)(Result.x, {
+							result:
+								null == controller || null === (_controller$store2 = controller.store) || void 0 === _controller$store2
+									? void 0
+									: _controller$store2.results[0],
+						})
+					);
+				};
+			Default.loaders = [
+				_asyncToGenerator(
+					_regeneratorRuntime().mark(function _callee() {
+						return _regeneratorRuntime().wrap(function _callee$(_context) {
+							for (;;)
+								switch ((_context.prev = _context.next)) {
+									case 0:
+										return (_context.next = 2), snapInstance.search();
+									case 2:
+										return _context.abrupt('return', { controller: snapInstance });
+									case 3:
+									case 'end':
+										return _context.stop();
+								}
+						}, _callee);
+					})
+				),
+			];
+		},
+		'./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.tsx': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { N: () => RecommendationResultTracker });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/hooks/useIntersection.tsx'),
+				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
+				CSS_RecommendationResultTracker = function RecommendationResultTracker() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({});
+				},
+				RecommendationResultTracker = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__.Pi)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
+						props = Object.assign(
+							{},
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.RecommendationResultTracker,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.RecommendationResultTracker
+						),
+						children = props.children,
+						result = props.result,
+						controller = props.controller,
+						className = props.className,
+						disableStyles = props.disableStyles,
+						style = props.style,
+						resultRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.sO)(null),
+						resultInViewport = (0, _hooks__WEBPACK_IMPORTED_MODULE_6__.s)(resultRef, '0px');
+					controller.events.render || controller.log.warn('<RecommendationResultTracker> used without <RecommendationProfileTracker>'),
+						controller.track.product.render(result),
+						resultInViewport && (controller.events.impression || controller.track.impression(), controller.track.product.impression(result));
+					var styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_RecommendationResultTracker(), style]),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+							'div',
+							Object.assign(
+								{
+									className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss__recommendation-result-tracker', className),
+									onClick: function onClick(e) {
+										return controller.track.product.click(e, result);
+									},
+									ref: resultRef,
+								},
+								styling
+							),
+							children
+						)
+					);
+				});
+		},
 		'./src/hooks/useDisplaySettings.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { o: () => useDisplaySettings });
@@ -23141,6 +24261,100 @@
 							}, timeout));
 					};
 				};
+		},
+		'./src/hooks/useIntersection.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { s: () => useIntersection });
+			__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js');
+			function _slicedToArray(arr, i) {
+				return (
+					(function _arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function _iterableToArrayLimit(arr, i) {
+						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
+						if (null != _i) {
+							var _s,
+								_e,
+								_x,
+								_r,
+								_arr = [],
+								_n = !0,
+								_d = !1;
+							try {
+								if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
+									if (Object(_i) !== _i) return;
+									_n = !1;
+								} else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+							} catch (err) {
+								(_d = !0), (_e = err);
+							} finally {
+								try {
+									if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
+								} finally {
+									if (_d) throw _e;
+								}
+							}
+							return _arr;
+						}
+					})(arr, i) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var useIntersection = function useIntersection(ref) {
+				var rootMargin = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : '0px',
+					fireOnce = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
+					_useState = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.eJ)(!1),
+					_useState2 = _slicedToArray(_useState, 2),
+					isIntersecting = _useState2[0],
+					setIntersecting = _useState2[1];
+				return (
+					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.d4)(function () {
+						var observer = new IntersectionObserver(
+							function (_ref) {
+								var entry = _slicedToArray(_ref, 1)[0];
+								setIntersecting(entry.isIntersecting), fireOnce && entry.isIntersecting && observer.unobserve(ref.current);
+							},
+							{ rootMargin }
+						);
+						return (
+							ref.current && observer.observe(ref.current),
+							function () {
+								observer.unobserve(ref.current);
+							}
+						);
+					}, []),
+					isIntersecting
+				);
+			};
 		},
 		'./src/providers/cache.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -24018,7 +25232,7 @@
 											lineno,
 											errortimestamp: timeStamp,
 										};
-									_this.tracker.track.error(beaconPayload);
+									_this.tracker.track.error(beaconPayload), _this.eventManager.fire('error', { controller: _this, error: err });
 								}
 							}),
 							'object' != typeof config || 'string' != typeof config.id || !config.id.match(/^[a-zA-Z0-9_-]*$/))
@@ -26370,7 +27584,9 @@
 								{
 									product: {
 										click: function click(e, result) {
-											if (_this.store.profile.tag && result && _this.events.click) {
+											var _this$events$click;
+											if (_this.store.profile.tag && result) {
+												_this.track.click(e);
 												var payload = {
 														type: BeaconType.PROFILE_PRODUCT_CLICK,
 														category: BeaconCategory.RECOMMENDATIONS,
@@ -26384,7 +27600,7 @@
 															},
 															product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 														},
-														pid: _this.events.click.id,
+														pid: null === (_this$events$click = _this.events.click) || void 0 === _this$events$click ? void 0 : _this$events$click.id,
 													},
 													event = _this.tracker.track.event(payload);
 												return (
@@ -26543,9 +27759,6 @@
 											});
 											return (
 												(_this.events.render = event),
-												_this.store.results.forEach(function (result) {
-													return _this.track.product.render(result);
-												}),
 												_this.eventManager.fire('track.render', {
 													controller: RecommendationController_assertThisInitialized(_this),
 													trackEvent: event,
@@ -27336,6 +28549,7 @@
 						syncInputs: !0,
 						serializeForm: !1,
 						facets: { trim: !0, pinFiltered: !0 },
+						redirects: { merchandising: !0 },
 					},
 				},
 				AutocompleteController = (function (_AbstractController) {
@@ -27976,6 +29190,47 @@
 									};
 								})()
 							),
+							_this.eventManager.on(
+								'beforeSubmit',
+								(function () {
+									var _ref7 = AutocompleteController_asyncToGenerator(
+										AutocompleteController_regeneratorRuntime().mark(function _callee8(ac, next) {
+											var _ac$controller$store$, _this$config2, _this$config2$setting, _this$config2$setting2, redirectURL;
+											return AutocompleteController_regeneratorRuntime().wrap(function _callee8$(_context8) {
+												for (;;)
+													switch ((_context8.prev = _context8.next)) {
+														case 0:
+															return (_context8.next = 2), next();
+														case 2:
+															if (
+																!(redirectURL =
+																	null === (_ac$controller$store$ = ac.controller.store.merchandising) || void 0 === _ac$controller$store$
+																		? void 0
+																		: _ac$controller$store$.redirect) ||
+																null === (_this$config2 = _this.config) ||
+																void 0 === _this$config2 ||
+																null === (_this$config2$setting = _this$config2.settings) ||
+																void 0 === _this$config2$setting ||
+																null === (_this$config2$setting2 = _this$config2$setting.redirects) ||
+																void 0 === _this$config2$setting2 ||
+																!_this$config2$setting2.merchandising
+															) {
+																_context8.next = 6;
+																break;
+															}
+															return (window.location.href = redirectURL), _context8.abrupt('return', !1);
+														case 6:
+														case 'end':
+															return _context8.stop();
+													}
+											}, _callee8);
+										})
+									);
+									return function (_x9, _x10) {
+										return _ref7.apply(this, arguments);
+									};
+								})()
+							),
 							_this.use(_this.config),
 							_this
 						);
@@ -28027,65 +29282,52 @@
 								key: 'setFocused',
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee8(inputElement) {
-											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings13, _this$config$settings14;
+										AutocompleteController_regeneratorRuntime().mark(function _callee9(inputElement) {
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee8$(_context8) {
+												function _callee9$(_context9) {
 													for (;;)
-														switch ((_context8.prev = _context8.next)) {
+														switch ((_context9.prev = _context9.next)) {
 															case 0:
 																if (this.store.state.focusedInput === inputElement) {
-																	_context8.next = 21;
+																	_context9.next = 21;
 																	break;
 																}
 																return (
 																	(this.store.state.focusedInput = inputElement),
-																	(_context8.prev = 2),
-																	(_context8.prev = 3),
-																	(_context8.next = 6),
+																	(_context9.prev = 2),
+																	(_context9.prev = 3),
+																	(_context9.next = 6),
 																	this.eventManager.fire('focusChange', { controller: this })
 																);
 															case 6:
-																_context8.next = 16;
+																_context9.next = 16;
 																break;
 															case 8:
 																if (
-																	((_context8.prev = 8),
-																	(_context8.t0 = _context8.catch(3)),
-																	'cancelled' != (null === _context8.t0 || void 0 === _context8.t0 ? void 0 : _context8.t0.message))
+																	((_context9.prev = 8),
+																	(_context9.t0 = _context9.catch(3)),
+																	'cancelled' != (null === _context9.t0 || void 0 === _context9.t0 ? void 0 : _context9.t0.message))
 																) {
-																	_context8.next = 14;
+																	_context9.next = 14;
 																	break;
 																}
-																this.log.warn("'focusChange' middleware cancelled"), (_context8.next = 16);
+																this.log.warn("'focusChange' middleware cancelled"), (_context9.next = 16);
 																break;
 															case 14:
-																throw (this.log.error("error in 'focusChange' middleware"), _context8.t0);
+																throw (this.log.error("error in 'focusChange' middleware"), _context9.t0);
 															case 16:
-																_context8.next = 21;
+																_context9.next = 21;
 																break;
 															case 18:
-																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
+																(_context9.prev = 18), (_context9.t1 = _context9.catch(2)), _context9.t1 && console.error(_context9.t1);
 															case 21:
-																!inputElement ||
-																(null !== (_this$store$state = this.store.state) && void 0 !== _this$store$state && _this$store$state.input) ||
-																null === (_this$store$trending2 = this.store.trending) ||
-																void 0 === _this$store$trending2 ||
-																!_this$store$trending2.length ||
-																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
-																null === (_this$config$settings13 = this.config.settings) ||
-																void 0 === _this$config$settings13 ||
-																null === (_this$config$settings14 = _this$config$settings13.trending) ||
-																void 0 === _this$config$settings14 ||
-																!_this$config$settings14.showResults
-																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
-																	: this.store.trending[0].preview();
+																null == inputElement || inputElement.dispatchEvent(new Event('keyup'));
 															case 22:
 															case 'end':
-																return _context8.stop();
+																return _context9.stop();
 														}
 												},
-												_callee8,
+												_callee9,
 												this,
 												[
 													[2, 18],
@@ -28094,7 +29336,7 @@
 											);
 										})
 									)),
-									function setFocused(_x9) {
+									function setFocused(_x11) {
 										return _setFocused.apply(this, arguments);
 									}),
 							},
@@ -28135,23 +29377,23 @@
 								key: 'bind',
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee9() {
-											var _this$config$settings15,
+										AutocompleteController_regeneratorRuntime().mark(function _callee10() {
+											var _this$config$settings13,
+												_this$config$settings14,
+												_this$config$settings15,
 												_this$config$settings16,
-												_this$config$settings17,
-												_this$config$settings18,
-												_this$store$trending3,
+												_this$store$trending2,
 												_this3 = this;
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee9$(_context9) {
+												function _callee10$(_context10) {
 													for (;;)
-														switch ((_context9.prev = _context9.next)) {
+														switch ((_context10.prev = _context10.next)) {
 															case 0:
 																if (this.initialized) {
-																	_context9.next = 3;
+																	_context10.next = 3;
 																	break;
 																}
-																return (_context9.next = 3), this.init();
+																return (_context10.next = 3), this.init();
 															case 3:
 																this.unbind(),
 																	document.querySelectorAll(this.config.selector).forEach(function (input) {
@@ -28201,28 +29443,28 @@
 																			),
 																			document.activeElement === input && _this3.setFocused(input);
 																	}),
-																	null !== (_this$config$settings15 = this.config.settings) &&
-																		void 0 !== _this$config$settings15 &&
-																		null !== (_this$config$settings16 = _this$config$settings15.trending) &&
-																		void 0 !== _this$config$settings16 &&
-																		_this$config$settings16.limit &&
-																		(null === (_this$config$settings17 = this.config.settings) ||
-																		void 0 === _this$config$settings17 ||
-																		null === (_this$config$settings18 = _this$config$settings17.trending) ||
-																		void 0 === _this$config$settings18
+																	null !== (_this$config$settings13 = this.config.settings) &&
+																		void 0 !== _this$config$settings13 &&
+																		null !== (_this$config$settings14 = _this$config$settings13.trending) &&
+																		void 0 !== _this$config$settings14 &&
+																		_this$config$settings14.limit &&
+																		(null === (_this$config$settings15 = this.config.settings) ||
+																		void 0 === _this$config$settings15 ||
+																		null === (_this$config$settings16 = _this$config$settings15.trending) ||
+																		void 0 === _this$config$settings16
 																			? void 0
-																			: _this$config$settings18.limit) > 0 &&
-																		(null === (_this$store$trending3 = this.store.trending) ||
-																			void 0 === _this$store$trending3 ||
-																			!_this$store$trending3.length) &&
+																			: _this$config$settings16.limit) > 0 &&
+																		(null === (_this$store$trending2 = this.store.trending) ||
+																			void 0 === _this$store$trending2 ||
+																			!_this$store$trending2.length) &&
 																		this.searchTrending(),
 																	document.addEventListener('click', this.handlers.document.click);
 															case 8:
 															case 'end':
-																return _context9.stop();
+																return _context10.stop();
 														}
 												},
-												_callee9,
+												_callee10,
 												this
 											);
 										})
@@ -28239,17 +29481,17 @@
 				var inputElem = document.createElement('input');
 				(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
 			}
-			function timeout(_x10) {
+			function timeout(_x12) {
 				return _timeout.apply(this, arguments);
 			}
 			function _timeout() {
 				return (_timeout = AutocompleteController_asyncToGenerator(
-					AutocompleteController_regeneratorRuntime().mark(function _callee10(time) {
-						return AutocompleteController_regeneratorRuntime().wrap(function _callee10$(_context10) {
+					AutocompleteController_regeneratorRuntime().mark(function _callee11(time) {
+						return AutocompleteController_regeneratorRuntime().wrap(function _callee11$(_context11) {
 							for (;;)
-								switch ((_context10.prev = _context10.next)) {
+								switch ((_context11.prev = _context11.next)) {
 									case 0:
-										return _context10.abrupt(
+										return _context11.abrupt(
 											'return',
 											new Promise(function (resolve) {
 												window.setTimeout(resolve, time);
@@ -28257,9 +29499,9 @@
 										);
 									case 1:
 									case 'end':
-										return _context10.stop();
+										return _context11.stop();
 								}
-						}, _callee10);
+						}, _callee11);
 					})
 				)).apply(this, arguments);
 			}
@@ -33505,7 +34747,12 @@
 							(this.storage = new StorageStore({
 								type: StorageType.LOCAL,
 								key: 'ss-history' + (this.config.siteId ? '-' + this.config.siteId : ''),
-							}));
+							})),
+							0 === this.config.max && this.reset(),
+							this.queries.length > this.config.max &&
+								this.getStoredData().forEach(function (term, index) {
+									index > _this.config.max - 1 && _this.remove(term);
+								});
 					}
 					return (
 						(function SearchHistoryStore_createClass(Constructor, protoProps, staticProps) {
@@ -33528,12 +34775,14 @@
 							{
 								key: 'save',
 								value: function save(term) {
-									var history = this.getStoredData(),
-										index = history.indexOf(term);
-									-1 != index && history.splice(index, 1),
-										history.unshift(term),
-										history.length > this.config.max && history.pop(),
-										this.storage.set('history', JSON.stringify(history));
+									if (this.config.max) {
+										var history = this.getStoredData(),
+											index = history.indexOf(term);
+										-1 != index && history.splice(index, 1),
+											history.unshift(term),
+											history.length > this.config.max && history.pop(),
+											this.storage.set('history', JSON.stringify(history));
+									}
 								},
 							},
 							{
@@ -39269,7 +40518,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.40.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.41.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39702,22 +40951,31 @@
 							}),
 							(this.sendEvents = function (eventsToSend) {
 								if (_this.mode === AppMode.production) {
-									var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
-									eventsToSend &&
-										(eventsToSend.forEach(function (event) {
-											events.push(Object.assign({}, event));
+									var savedEvents = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
+									if (eventsToSend) {
+										var eventsClone = [];
+										savedEvents.forEach(function (_event, idx) {
+											eventsClone.push(Object.assign({}, _event)), delete eventsClone[idx].id, delete eventsClone[idx].pid;
+										});
+										var stringyEventsClone = JSON.stringify(eventsClone);
+										eventsToSend.forEach(function (event, idx) {
+											var newEvent = Object.assign({}, event);
+											delete newEvent.id,
+												delete newEvent.pid,
+												-1 == stringyEventsClone.indexOf(JSON.stringify(newEvent)) && savedEvents.push(Object.assign({}, eventsToSend[idx]));
 										}),
-										_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
-										clearTimeout(_this.isSending),
+											_this.localStorage.set('ssBeaconPool', JSON.stringify(savedEvents));
+									}
+									clearTimeout(_this.isSending),
 										(_this.isSending = window.setTimeout(function () {
-											if (events.length) {
+											if (savedEvents.length) {
 												var xhr = new XMLHttpRequest();
 												xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
 													xhr.setRequestHeader('Content-Type', 'application/json'),
-													xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
+													xhr.send(JSON.stringify(1 == savedEvents.length ? savedEvents[0] : savedEvents));
 											}
 											_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
-										}, 150));
+										}, 200));
 								}
 							}),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
@@ -39735,7 +40993,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.40.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.41.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -41598,6 +42856,10 @@
 				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': './src/components/Organisms/FilterSummary/FilterSummary.stories.tsx',
 				'./components/Organisms/Recommendation/Recommendation.stories.tsx': './src/components/Organisms/Recommendation/Recommendation.stories.tsx',
 				'./components/Organisms/Results/Results.stories.tsx': './src/components/Organisms/Results/Results.stories.tsx',
+				'./components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.stories.tsx':
+					'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.stories.tsx',
+				'./components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.stories.tsx':
+					'./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.stories.tsx',
 			};
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
