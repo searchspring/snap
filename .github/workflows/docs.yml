@@ -1,8 +1,9 @@
 name: Docs
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ["Publish"]
+    types: [completed]
 
 jobs:
   Docs:
@@ -71,15 +72,16 @@ jobs:
       - name: Copy Files to S3
         shell: bash
         run: |
-          aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.ref_name }}
-          aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.ref_name }}
+          echo "current_tag=$(node ./scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
+          aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
 
       - name: Invalidate CDN Files
         shell: bash
         env:
           AWS_MAX_ATTEMPTS: 9
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.SNAPFU_AWS_DISTRIBUTION_ID }} --paths "/snap/${{ github.ref_name }}/*"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.SNAPFU_AWS_DISTRIBUTION_ID }} --paths "/snap/${{ env.current_tag }}/*"
 
       - name: Request Re-index of Feed
         run: |
