@@ -78,6 +78,9 @@ export type AutocompleteStoreConfig = StoreConfig & {
 			limit: number;
 			showResults?: boolean;
 		};
+		redirects?: {
+			merchandising?: boolean;
+		};
 	};
 };
 

@@ -60,6 +60,10 @@ recommendationController.init();
 - Called with `eventData` = { controller }
 - Done once automatically before the first search - or manually invoked by calling `init`
 
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
+
 ### beforeSearch
 - Called with `eventData` = { controller, request }
 - Always invoked before an API request is made 
@@ -97,5 +101,8 @@ recommendationController.init();
 - Always invoked after `track.impression()` method has been invoked
 
 ### track.render
-- Called with `eventData` = { controller, trackEvent } 
+- Called with `eventData` = { controller, results, trackEvent } 
 - Always invoked after `track.render()` method has been invoked
+
+//where does this go?
+- Can take optional `results` for use when not using the full result set in the store. `track.render(results)`

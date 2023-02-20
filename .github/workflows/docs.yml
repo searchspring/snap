@@ -62,6 +62,27 @@ jobs:
           git commit -m "chore(docs): generation"
           git push
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SNAPFU_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Copy Files to S3
+        shell: bash
+        run: |
+          echo "current_tag=$(node ./scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
+          aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
+
+      - name: Invalidate CDN Files
+        shell: bash
+        env:
+          AWS_MAX_ATTEMPTS: 9
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.SNAPFU_AWS_DISTRIBUTION_ID }} --paths "/snap/${{ env.current_tag }}/*"
+
       - name: Request Re-index of Feed
         run: |
           sleep 3

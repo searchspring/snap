@@ -220,6 +220,20 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
+	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
+		properties.onFacetOptionClick && properties.onFacetOptionClick(e);
+
+		// remove focus from input (close the autocomplete)
+		controller?.setFocused && controller?.setFocused();
+	};
+
+	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
+		properties.onTermClick && properties.onTermClick(e);
+
+		// remove focus from input (close the autocomplete)
+		controller?.setFocused && controller?.setFocused();
+	};
+
 	const themeOverride: Theme = {
 		components: {
 			facet: {
@@ -231,21 +245,21 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			},
 			facetGridOptions: {
 				columns: 3,
-				onClick: properties.onFacetOptionClick,
+				onClick: facetClickEvent,
 			},
 			facetHierarchyOptions: {
 				hideCount: true,
-				onClick: properties.onFacetOptionClick,
+				onClick: facetClickEvent,
 			},
 			facetListOptions: {
 				hideCheckbox: true,
 				hideCount: true,
-				onClick: properties.onFacetOptionClick,
+				onClick: facetClickEvent,
 			},
 			facetPaletteOptions: {
 				hideLabel: true,
 				columns: 3,
-				onClick: properties.onFacetOptionClick,
+				onClick: facetClickEvent,
 			},
 			result: {
 				hideBadge: true,
@@ -389,7 +403,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
-	const onlyTerms = trending?.length && !loaded;
+	const onlyTerms = (trending?.length || history.length) && !loaded;
 
 	// results logic
 	let showResults = Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string);
@@ -459,7 +473,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													})}
 												>
 													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
 														{...valueProps}
 														onFocus={() => term.preview()}
@@ -487,7 +501,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													})}
 												>
 													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
 														{...valueProps}
 														onFocus={() => term.preview()}
@@ -515,7 +529,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													})}
 												>
 													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
 														{...valueProps}
 														onFocus={() => term.preview()}
@@ -603,7 +617,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
 									) : search?.query?.string && results.length > 0 ? (
 										<div className="ss__autocomplete__content__info">
-											<a href={state.url.href}>
+											<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
 												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
 												{search.query.string}"
 												<Icon {...subProps.icon} />
@@ -684,6 +698,6 @@ export interface AutocompleteProps extends ComponentProps {
 	linkSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
 	width?: string;
-	onFacetOptionClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-	onTermClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }

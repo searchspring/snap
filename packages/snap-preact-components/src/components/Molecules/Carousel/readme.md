@@ -21,10 +21,23 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 ```
 
 ### pagination
-The `pagination` prop specifies if the carousel should display pagination dots. 
+The `pagination` prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in [swiper docs](https://swiperjs.com/swiper-api#param-pagination-dynamicBullets). 
 
 ```jsx
 <Carousel pagination={true}>{children}</Carousel>
+```
+
+or
+
+```typescript
+const paginationConfig = {
+	bulletActiveClass: "active",
+	bulletClass: 'bullet',
+	clickable: false
+};
+```
+```jsx
+<Carousel pagination={paginationConfig}>{children}</Carousel>
 ```
 
 ### vertical 

@@ -111,3 +111,7 @@ controller.use({
 ### init
 - Called with `eventData` = { controller }
 - Always invoked by a call to the `init` controller method
+
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller

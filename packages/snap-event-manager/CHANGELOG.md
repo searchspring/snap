@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+## [0.41.1](https://github.com/searchspring/snap/compare/v0.41.0...v0.41.1) (2023-02-18)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+# [0.41.0](https://github.com/searchspring/snap/compare/v0.40.0...v0.41.0) (2023-02-17)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
 # [0.40.0](https://github.com/searchspring/snap/compare/v0.39.3...v0.40.0) (2023-02-01)
 
 **Note:** Version bump only for package @searchspring/snap-event-manager
