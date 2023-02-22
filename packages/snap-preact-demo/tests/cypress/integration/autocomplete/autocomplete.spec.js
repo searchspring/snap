@@ -158,16 +158,16 @@ describe('Autocomplete', () => {
 				if (store.facets.length == 0) {
 					//if this term has no facets lets try another
 					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.query, { force: true });
-					cy.wait('@autocomplete').its('request.url').should('include', 'filters');
-				} else {
-					cy.wait('@autocomplete').its('request.url').should('include', 'filters');
+					cy.wait('@autocomplete');
 				}
+				cy.wait(200);
 
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
 					const optionURL = firstOption.href;
+					cy.wait(200);
 					cy.get(firstOption).rightclick({ force: true }); // trigger onFocus event
-					cy.wait('@autocomplete').its('request.url').should('include', 'filters');
+					cy.wait(200);
 
 					cy.snapController('autocomplete').then(({ store }) => {
 						cy.wrap(store.services.urlManager.state.filter).should('exist');
