@@ -158,7 +158,7 @@ describe('Autocomplete', () => {
 				if (store.facets.length == 0) {
 					//if this term has no facets lets try another
 					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.query, { force: true });
-					cy.wait('@autocomplete');
+					cy.wait('@autocomplete').should('exist');
 				}
 				cy.wait(200);
 
