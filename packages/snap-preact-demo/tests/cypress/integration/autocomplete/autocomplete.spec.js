@@ -164,8 +164,10 @@ describe('Autocomplete', () => {
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
 					const optionURL = firstOption.href;
-					cy.get(firstOption).rightclick({ force: true }); // trigger onFocus event
-					cy.wait(200);
+					cy.intercept(/.*searchspring.io\/api\/search\/autocomplete.json?.*&filter.*/).as('autocompletefiltered');
+					cy.get(firstOption).mouse({ force: true }); // trigger onFocus event
+					cy.wait('@autocompletefiltered');
+
 					cy.snapController('autocomplete').then(({ store }) => {
 						cy.wrap(store.services.urlManager.state.filter).should('exist');
 						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
