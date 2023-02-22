@@ -279,7 +279,6 @@ describe('Tracking', () => {
 					expect(productImpressionBeacon.pid).to.equal(profileImpressionBeacon.id);
 				});
 
-				// let productImpressionCount = 0;
 				// click next button and assert new profile product impressions
 				cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
 
@@ -299,7 +298,6 @@ describe('Tracking', () => {
 					const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
 					expect(productImpressionBeacons).to.have.length(visibleSlides);
 					productImpressionBeacons.forEach((productImpressionBeacon) => {
-						// productImpressionCount++;
 						expect(productImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
 						expect(productImpressionBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_IMPRESSION);
 
@@ -315,33 +313,6 @@ describe('Tracking', () => {
 							.include.all.keys(['uid']);
 						expect(productImpressionBeacon.pid).to.equal(profileImpressionBeacon.id);
 					});
-
-					// if (productImpressionCount !== visibleSlides) {
-					// 	cy.wait(`@${BeaconType.PROFILE_PRODUCT_IMPRESSION}`).should((interception) => {
-					// 		expect(interception.state).to.equal('Complete');
-					// 		expect(interception.response.body).to.have.property('success').to.equal(true);
-					// 		const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
-					// 		productImpressionBeacons.forEach((productImpressionBeacon) => {
-					// 			productImpressionCount++;
-					// 			expect(productImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
-					// 			expect(productImpressionBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_IMPRESSION);
-
-					// 			expect(productImpressionBeacon.id).to.be.an('string');
-					// 			expect(productImpressionBeacon.event).to.have.property('context');
-					// 			expect(productImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
-					// 			expect(productImpressionBeacon.event).to.have.property('product');
-					// 			expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
-					// 			expect(productImpressionBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
-					// 			expect(productImpressionBeacon.event.product.mappings.core)
-					// 				.to.be.an('object')
-					// 				// .include.all.keys(['brand', 'imageUrl', 'msrp', 'name', 'popularity', 'price', 'sku', 'thumbnailImageUrl', 'uid', 'url']);
-					// 				.include.all.keys(['uid']);
-					// 			expect(productImpressionBeacon.pid).to.equal(profileImpressionBeacon.id);
-					// 		});
-					// 	});
-					// }
-
-					// expect(productImpressionCount).to.equal(visibleSlides);
 				});
 
 				// click on result
