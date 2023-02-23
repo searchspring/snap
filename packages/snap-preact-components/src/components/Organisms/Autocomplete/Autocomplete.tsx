@@ -469,8 +469,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{termsTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{terms.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
+											{terms.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -481,6 +481,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														href={term.url.href}
 														{...valueProps}
 														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -497,8 +499,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{trendingTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{trending.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
+											{trending.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -509,6 +511,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														href={term.url.href}
 														{...valueProps}
 														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -525,8 +529,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{historyTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{history.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
+											{history.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -537,6 +541,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														href={term.url.href}
 														{...valueProps}
 														onMouseEnter={() => term.preview()}
+														role="link"
+														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
