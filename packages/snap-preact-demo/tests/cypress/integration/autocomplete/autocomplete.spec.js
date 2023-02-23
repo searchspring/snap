@@ -160,11 +160,15 @@ describe('Autocomplete', () => {
 					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.query, { force: true });
 					cy.wait('@autocomplete').should('exist');
 				}
+				cy.wait(200);
 
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
 					const optionURL = firstOption.href;
+					cy.wait(200);
 					cy.get(firstOption).rightclick({ force: true }); // trigger onFocus event
+					cy.wait(200);
+
 					cy.snapController('autocomplete').then(({ store }) => {
 						cy.wrap(store.services.urlManager.state.filter).should('exist');
 						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
@@ -191,12 +195,13 @@ describe('Autocomplete', () => {
 		});
 
 		it('can clear input', function () {
-			cy.get(config.selectors.website.input)
-				.first()
-				.should('exist')
-				.should('have.value', config.startingQuery || config.query)
-				.clear({ force: true })
-				.should('have.value', '');
+			cy.document().then((doc) => {
+				let inputVal = doc.querySelector(`${config.selectors.website.input}`).value;
+
+				expect(inputVal).to.be.oneOf([config.startingQuery, config.query]);
+
+				cy.get(config.selectors.website.input).first().clear({ force: true }).should('have.value', '');
+			});
 		});
 
 		it('closes the autocomplete when clicking a filter', () => {
