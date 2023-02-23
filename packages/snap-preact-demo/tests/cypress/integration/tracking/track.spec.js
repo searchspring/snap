@@ -281,6 +281,7 @@ describe('Tracking', () => {
 
 				// click next button and assert new profile product impressions
 				cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
+
 				cy.wait(`@${BeaconType.PROFILE_CLICK}`).should((interception) => {
 					expect(interception.state).to.equal('Complete');
 					expect(interception.response.body).to.have.property('success').to.equal(true);

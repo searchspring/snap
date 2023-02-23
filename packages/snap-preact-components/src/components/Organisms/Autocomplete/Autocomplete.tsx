@@ -407,7 +407,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
-	const onlyTerms = trending?.length && !loaded;
+	const onlyTerms = (trending?.length || history.length) && !loaded;
 
 	// results logic
 	let showResults = Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string);

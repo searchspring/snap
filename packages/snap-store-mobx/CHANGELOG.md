@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.41.1](https://github.com/searchspring/snap/compare/v0.41.0...v0.41.1) (2023-02-18)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.41.0](https://github.com/searchspring/snap/compare/v0.40.0...v0.41.0) (2023-02-17)
+
+### Bug Fixes
+
+- **store-mobx-history:** fixing max configuration so that it disables when zero / trims when lowered ([32f8428](https://github.com/searchspring/snap/commit/32f84281710ee0239b73158178c8e879ca7410aa))
+
 # [0.40.0](https://github.com/searchspring/snap/compare/v0.39.3...v0.40.0) (2023-02-01)
 
 ### Bug Fixes

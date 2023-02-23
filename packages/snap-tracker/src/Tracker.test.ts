@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { Tracker } from './Tracker';
+import { Tracker, BATCH_TIMEOUT } from './Tracker';
 import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
 
 const globals = {
@@ -427,7 +427,7 @@ describe('Tracker', () => {
 
 		const beaconEvent = await tracker.track.error(payload);
 
-		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
 		expect(sendEvents).toHaveBeenCalledTimes(1);
 		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
@@ -465,7 +465,7 @@ describe('Tracker', () => {
 
 		const beaconEvent = await tracker.track.error(payload);
 
-		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
 		expect(sendEvents).toHaveBeenCalledTimes(1);
 		expect(xhrMock.open).not.toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
@@ -610,7 +610,7 @@ describe('Tracker', () => {
 		const sendEvents = jest.spyOn(tracker, 'sendEvents');
 
 		await tracker.sendEvents();
-		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
 		expect(sendEvents).toHaveBeenCalledTimes(1);
 		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
@@ -637,7 +637,7 @@ describe('Tracker', () => {
 		const events = [{ hello: 'world' }];
 		// @ts-ignore
 		await tracker.sendEvents(events);
-		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
 		expect(sendEvents).toHaveBeenCalledTimes(1);
 		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
@@ -674,7 +674,7 @@ describe('Tracker', () => {
 		// @ts-ignore
 		await tracker.sendEvents(events);
 
-		await new Promise((r) => setTimeout(r, 150 + 1)); // BATCH_TIMEOUT + 1
+		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
 		expect(sendEvents).toHaveBeenCalledTimes(5);
 		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
