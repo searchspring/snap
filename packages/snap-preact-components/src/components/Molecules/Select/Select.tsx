@@ -221,10 +221,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						open={open}
 						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
 						onClick={(e) => setOpen((prev) => !prev)}
+						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>
 								{label && !hideLabelOnSelection && (
-									<span className="ss__select__label">
+									<span
+										className="ss__select__label"
+										ref={(e) => useA11y(e)}
+										aria-label={`${label} dropdown button ${open ? 'open' : 'collapsed'} ${options.length} options`}
+									>
 										{label}
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
@@ -235,9 +240,13 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						}
 					>
 						<ul className="ss__select__select">
-							{options.map((option) => (
+							{options.map((option, idx) => (
 								<li
 									ref={(e) => useA11y(e)}
+									role={'link'}
+									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
+										option.label
+									}`}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}

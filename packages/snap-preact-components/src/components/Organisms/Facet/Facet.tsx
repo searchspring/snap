@@ -268,7 +268,15 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 						disableA11y={true}
 						button={
-							<div className="ss__facet__header" ref={(e) => useA11y(e, disableCollapse ? -1 : 0)} role="heading" aria-level={3}>
+							<div
+								className="ss__facet__header"
+								ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+								role="heading"
+								aria-level={3}
+								aria-label={`currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
+									(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
+								}`}
+							>
 								{facet?.label}
 								{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 							</div>
