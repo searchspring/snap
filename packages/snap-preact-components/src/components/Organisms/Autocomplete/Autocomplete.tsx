@@ -390,12 +390,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const historyActive = history?.filter((term) => term.active).pop();
 
 	let showTrending = false;
-	if (trending?.length && (retainTrending || (!results.length && !state.input))) {
+	if (trending?.length && ((retainTrending && controller.store.loaded) || (!results.length && !state.input))) {
 		showTrending = true;
 	}
 
 	let showHistory = false;
-	if (history?.length && (retainHistory || (!results.length && !state.input))) {
+	if (history?.length && ((retainHistory && controller.store.loaded) || (!results.length && !state.input))) {
 		showHistory = true;
 	}
 
