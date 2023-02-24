@@ -369,7 +369,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state } = controller.store;
+	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state, loading } = controller.store;
 	const history = controller.store.history || [];
 
 	// you can pass in a selector or the actual input element,
@@ -386,29 +386,30 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		Boolean(input === state.focusedInput) &&
 		(terms.length > 0 || trending?.length > 0 || history?.length > 0 || (state.input && controller.store.loaded));
 
+	const trendingActive = trending?.filter((term) => term.active).pop();
+	const historyActive = history?.filter((term) => term.active).pop();
+
 	let showTrending = false;
-	if (trending?.length && (retainTrending || (!results.length && !state.input))) {
-		showTrending = true;
-	} else if (trending?.length && !terms.length) {
-		// has results and trending -> show trending terms while term load
+	if (trending?.length && ((retainTrending && controller.store.loaded) || (!results.length && !state.input))) {
 		showTrending = true;
 	}
 
 	let showHistory = false;
-	if (history?.length && (retainHistory || (!results.length && !state.input))) {
-		showHistory = true;
-	} else if (history?.length && !terms.length) {
-		// has results and trending -> show trending terms while term load
+	if (history?.length && ((retainHistory && controller.store.loaded) || (!results.length && !state.input))) {
 		showHistory = true;
 	}
 
+	if (!state.input && (historyActive || trendingActive)) {
+		showHistory = true;
+		showTrending = true;
+	}
+
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
-	const onlyTerms = (trending?.length || history.length) && !loaded;
+	const onlyTerms = (trending?.length || history.length) && !loaded && !loading;
 
 	// results logic
 	let showResults = Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string);
-	const trendingActive = trending?.filter((term) => term.active).pop();
-	const historyActive = history?.filter((term) => term.active).pop();
+
 	if ((hideTrending && trendingActive) || (hideHistory && historyActive)) {
 		showResults = false;
 	}
