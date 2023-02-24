@@ -175,6 +175,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	const selectedOptions = options.filter((option) => selection?.value === option.value);
+
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
@@ -228,7 +230,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									<span
 										className="ss__select__label"
 										ref={(e) => useA11y(e)}
-										aria-label={`${label} dropdown button ${open ? 'open' : 'collapsed'} ${options.length} options`}
+										aria-label={`${label} dropdown button ${open ? 'open' : 'collapsed'} ${options.length} options ${
+											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+										}`}
 									>
 										{label}
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
