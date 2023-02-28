@@ -12,6 +12,7 @@ import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
+const API_LIMIT = 500;
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -246,71 +247,72 @@ export class SearchController extends AbstractController {
 
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
-			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
+			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
 				const preventBackfill =
-					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
-				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
-				//if the page is higher than the backfill setting redirect back to page 1
+					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination.page > this.config.settings.infinite.backfill;
+				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length;
+				// if the page is higher than the backfill setting redirect back to page 1
 				if (preventBackfill || dontBackfill) {
 					this.storage.set('scrollMap', {});
 					this.urlManager.set('page', 1).go();
 					return;
 				}
 
-				// if no results fetch results...
-				let previousResults = this.previousResults;
 				const backfills = [];
-
 				let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
-				if (this.config.settings?.infinite.backfill && !previousResults.length) {
-					// figure out how many pages of results to backfill and wait on all responses
+
+				// if no results fetch results...
+				if (this.config.settings?.infinite.backfill && !this.previousResults.length) {
 					if (!pageSize) {
-						//unfortunatly we need to fetch meta to know the default pagesize before we can continue.
+						// pageSize is unknown - need to fetch meta to know defaultPageSize before we can continue
 						const meta = await this.client.meta();
 						pageSize = meta.pagination?.defaultPageSize!;
 					}
 
-					let pagesNeeded1 =
+					// restricting pageSize to the limit
+					pageSize = pageSize > API_LIMIT ? API_LIMIT : pageSize;
+
+					const pagesNeeded =
 						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
 							? this.config.settings?.infinite.backfill
 							: params.pagination?.page;
-					let totalResultsNeeded = pageSize * (pagesNeeded1 || 1);
 
-					const apiLimit = 500;
-					// our search api is limited to a certain amount per request.
-					//so we will need to make more than one request if totalresultsneeded is greater.
-					if (totalResultsNeeded < apiLimit) {
-						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: totalResultsNeeded, page: 1 } });
+					// figure out how many pages of results to backfill and wait on all responses
+					const { size: backFillPageSize, pages: backFillPages } = backFillSize(pagesNeeded, pageSize);
+
+					for (let i = 1; i <= backFillPages; i++) {
+						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: backFillPageSize, page: i } });
 						backfills.push(this.client.search(backfillParams));
-					} else {
-						//how many pages are needed?
-						let pagesNeeded = Math.ceil(totalResultsNeeded / apiLimit);
-						// we dont want to get the full apiLimit # of results on the last page, so lets find out how many are left.
-						let lastPageCount = apiLimit - (pagesNeeded * apiLimit - totalResultsNeeded);
-
-						for (let i = 1; i <= pagesNeeded; i++) {
-							const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: i < pagesNeeded ? apiLimit : lastPageCount, page: i } });
-							backfills.push(this.client.search(backfillParams));
-						}
 					}
 				}
 
-				//infinite backfill and prev results
-				// use the previous results and only make request for new result
+				// infinite backfill results
 				if (backfills && backfills.length) {
-					let backfillResults: any = [];
+					// array to hold all results from backfill responses
+					let backfillResults: SearchResponseModelResult[] = [];
+
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([Bmeta, Bresponse]) => {
+					backfillResponses.map(([metaBackfill, responseBackfill]) => {
 						if (!meta) {
-							meta = Bmeta;
+							meta = metaBackfill;
 						}
 						if (!response) {
-							response = Bresponse;
-							backfillResults = response.results;
-						} else {
-							backfillResults = backfillResults.concat(Bresponse.results!);
+							response = responseBackfill;
+						}
+
+						// push results to array
+						if (responseBackfill.results) {
+							backfillResults.push(...responseBackfill.results);
 						}
 					});
+
+					// overwrite pagination params to expected state
+					response.pagination.pageSize = pageSize;
+					response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize);
+					response.pagination.page = params.pagination?.page;
+
+					// set the response results with results from backfill responses
+					response.results = backfillResults;
 
 					if (!response.meta) {
 						/**
@@ -320,14 +322,6 @@ export class SearchController extends AbstractController {
 						// @ts-ignore
 						response.meta = meta;
 					}
-
-					//we need to overwrite the pagination params so the ui doesnt get confused.
-					response.pagination.pageSize = pageSize;
-					response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize);
-					response.pagination.page = params.pagination?.page;
-
-					//set the response results after all backfill promises are resolved.
-					response.results = backfillResults;
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
@@ -341,7 +335,7 @@ export class SearchController extends AbstractController {
 						response.meta = meta;
 					}
 					//append new results to previous results
-					response.results = [...previousResults, ...(response.results || [])];
+					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
 				//standard.
@@ -476,4 +470,13 @@ function generateHrefSelector(element: HTMLElement, href: string, levels = 6): s
 	}
 
 	return '';
+}
+
+function backFillSize(pages: number, pageSize: number) {
+	const totalResults = pages * pageSize;
+	let numPages = Math.ceil(totalResults / API_LIMIT);
+
+	while (totalResults % numPages) numPages++;
+
+	return { size: totalResults / numPages, pages: numPages };
 }

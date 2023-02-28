@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-toolbox",
-	"version": "0.39.3",
+	"version": "0.41.2",
 	"description": "Snap Toolbox",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",

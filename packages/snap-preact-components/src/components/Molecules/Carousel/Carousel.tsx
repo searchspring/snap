@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-
+import { SwiperOptions } from 'swiper';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
@@ -213,7 +213,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		children,
 		breakpoints,
 		loop,
-		pagination,
 		nextButton,
 		prevButton,
 		hideButtons,
@@ -229,6 +228,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		className,
 		...additionalProps
 	} = props;
+
+	let pagination = props.pagination;
 
 	const subProps: CarouselSubProps = {
 		icon: {
@@ -261,6 +262,20 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	if (pagination) {
+		if (typeof pagination == 'object') {
+			pagination = {
+				clickable: true,
+				...pagination,
+			};
+		} else {
+			pagination = {
+				clickable: true,
+			};
+		}
+	}
+
 	return children?.length ? (
 		<CacheProvider>
 			<div
@@ -297,7 +312,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					threshold={7}
 					{...additionalProps}
 					{...displaySettings}
-					pagination={pagination ? { clickable: true } : false}
+					pagination={pagination}
 				>
 					{children.map((child) => {
 						return <SwiperSlide>{child}</SwiperSlide>;
@@ -327,7 +342,7 @@ export interface CarouselProps extends ComponentProps {
 	hideButtons?: boolean;
 	loop?: boolean;
 	vertical?: boolean;
-	pagination?: boolean;
+	pagination?: boolean | SwiperOptions['pagination'];
 	autoAdjustSlides?: boolean;
 	onClick?: (swiper: SwiperCore, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;

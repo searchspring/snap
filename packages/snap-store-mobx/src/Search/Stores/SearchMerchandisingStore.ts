@@ -22,6 +22,7 @@ export class SearchMerchandisingStore {
 	public content: BannerContent = {};
 	public campaigns: SearchResponseModelMerchandisingCampaigns[] = [];
 	public landingPage?: SearchResponseModelMerchandisingCampaigns;
+	public personalized?: boolean;
 
 	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
@@ -43,6 +44,8 @@ export class SearchMerchandisingStore {
 					}
 				});
 			}
+
+			if (merchData.personalized) this.personalized = merchData.personalized;
 		}
 	}
 }

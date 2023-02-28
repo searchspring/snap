@@ -10,14 +10,14 @@ export class ContentSkel extends Component {
 				</div>
 				<div className="ss-results">
 					<div className="toolbar">
-						<div style={{ display: 'inline-block', margin: '10px' }}>
+						<div style={{ display: 'inline-block', margin: '10px 20px 10px 0' }}>
 							<Skeleton height="33px" width="180px" />
 						</div>
-						<div style={{ display: 'inline-block', margin: '10px' }}>
+						<div style={{ display: 'inline-block', margin: '10px 20px 10px 0' }}>
 							<Skeleton height="33px" width="180px" />
 						</div>
 						<div style={{ float: 'right' }}>
-							<Skeleton height="30px" width="300px" />
+							<Skeleton height="30px" width="150px" />
 						</div>
 					</div>
 					<div className="ss__results" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gridTemplateRows: 'auto', gap: '20px' }}>

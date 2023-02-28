@@ -26,7 +26,7 @@ import {
 	PreflightRequestModel,
 } from './types';
 
-const BATCH_TIMEOUT = 150;
+export const BATCH_TIMEOUT = 200;
 const LEGACY_USERID_COOKIE_NAME = '_isuid';
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
@@ -688,21 +688,39 @@ export class Tracker {
 			return;
 		}
 
-		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
+		let savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]') as BeaconEvent[];
 		if (eventsToSend) {
-			eventsToSend.forEach((event) => {
-				events.push({ ...event });
+			let eventsClone: BeaconEvent[] = [];
+			savedEvents.forEach((_event: BeaconEvent, idx: number) => {
+				// using Object.assign since we are not modifying nested properties
+				eventsClone.push(Object.assign({}, _event));
+				delete eventsClone[idx].id;
+				delete eventsClone[idx].pid;
 			});
-			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(events));
+
+			const stringyEventsClone = JSON.stringify(eventsClone);
+
+			// de-dupe events
+			eventsToSend.forEach((event, idx) => {
+				let newEvent: BeaconEvent = Object.assign({}, event);
+				delete newEvent.id;
+				delete newEvent.pid;
+				if (stringyEventsClone.indexOf(JSON.stringify(newEvent)) == -1) {
+					savedEvents.push({ ...eventsToSend[idx] });
+				}
+			});
+
+			// save the beacon pool with de-duped events
+			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(savedEvents));
 		}
 
 		clearTimeout(this.isSending);
 		this.isSending = window.setTimeout(() => {
-			if (events.length) {
+			if (savedEvents.length) {
 				const xhr = new XMLHttpRequest();
 				xhr.open('POST', 'https://beacon.searchspring.io/beacon');
 				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.send(JSON.stringify(events.length == 1 ? events[0] : events));
+				xhr.send(JSON.stringify(savedEvents.length == 1 ? savedEvents[0] : savedEvents));
 			}
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
 		}, BATCH_TIMEOUT);
