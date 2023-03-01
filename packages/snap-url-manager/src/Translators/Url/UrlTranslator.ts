@@ -364,7 +364,6 @@ export class UrlTranslator implements Translator {
 	}
 
 	serialize(state: UrlState): string {
-		// debugger
 		const root = this.config.urlRoot.includes('?')
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
