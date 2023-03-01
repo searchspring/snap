@@ -17,10 +17,6 @@ export default (config: SnapSearchControllerConfig, services?: SnapControllerSer
 		config.client.config.mode = config.mode;
 	}
 
-	// attach creation plugin
-	config.controller.plugins = config.controller.plugins || [];
-	config.controller.plugins.unshift([creationPlugin as PluginFunction]);
-
 	const cntrlr = new SearchController(
 		config.controller,
 		{
@@ -36,56 +32,4 @@ export default (config: SnapSearchControllerConfig, services?: SnapControllerSer
 	);
 
 	return cntrlr;
-};
-
-const creationPlugin = (controller: SearchController) => {
-	// if infinite setting add a restorePosition handler
-	if (controller.config.settings?.infinite?.restorePosition) {
-		controller.on('restorePosition', async ({ controller, position }: RestorePositionObj, next: Next) => {
-			const scrollToPosition = () => {
-				return new Promise<void>((resolve) => {
-					const checkTime = 50;
-					const maxScrolls = 3;
-
-					let checkCount = 0;
-					let scrollBackCount = 0;
-
-					const completeCheck = () => {
-						window.clearInterval(checkInterval);
-
-						resolve();
-					};
-
-					const checkInterval = window.setInterval(async () => {
-						const elem = document.querySelector(position.selector!);
-
-						if (elem) {
-							const { y } = elem.getBoundingClientRect();
-
-							if (y > 1 || y < -1) {
-								elem.scrollIntoView();
-								if (!scrollBackCount) controller.log.debug('restored position to: ', elem);
-								scrollBackCount++;
-							}
-
-							// stop scrolling back after max
-							if (scrollBackCount > maxScrolls) {
-								completeCheck();
-							}
-						}
-
-						if (checkCount > 900 / checkTime) {
-							if (!elem) controller.log.debug('could not locate element with selector: ', position.selector);
-							completeCheck();
-						}
-
-						checkCount++;
-					}, checkTime);
-				});
-			};
-
-			if (position.selector) await scrollToPosition();
-			await next();
-		});
-	}
 };

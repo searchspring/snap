@@ -67,9 +67,9 @@ let config: SnapConfig = {
 						redirects: {
 							merchandising: false,
 						},
-						infinite: {
-							backfill: 15,
-							// restorePosition: false,
+						restorePosition: {
+							enabled: true,
+							offset: 15,
 						},
 					},
 				},

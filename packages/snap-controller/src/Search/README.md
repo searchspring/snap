@@ -19,7 +19,8 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
-| settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
+| settings.restorePosition.enabled | boolean to enable/disable restoring window scroll position when navigating back to previous page (when using infinite this is set to true) | false |   |
+| settings.restorePosition.offset | number of pixels to offset when scrolling back | ➖ |   |
 <br>
 
 ```typescript

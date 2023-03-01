@@ -14,6 +14,7 @@ import type {
 	AfterStoreObj,
 	ControllerServices,
 	ContextVariables,
+	RestorePositionObj,
 	PositionObj,
 } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
@@ -62,9 +63,9 @@ export class SearchController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
-		// set infinite restorePosition to be enabled by default (if not provided)
-		if (this.config.settings?.infinite && typeof this.config.settings.infinite.restorePosition == 'undefined') {
-			this.config.settings.infinite.restorePosition = true;
+		// set restorePosition to be enabled by default when using infinite (if not provided)
+		if (this.config.settings?.infinite && typeof this.config.settings.restorePosition == 'undefined') {
+			this.config.settings.restorePosition = { enabled: true };
 		}
 
 		this.store.setConfig(this.config);
@@ -124,6 +125,59 @@ export class SearchController extends AbstractController {
 
 			search.controller.store.loading = false;
 		});
+
+		// restore position
+		if (this.config.settings?.restorePosition?.enabled) {
+			this.eventManager.on('restorePosition', async ({ controller, position }: RestorePositionObj, next: Next) => {
+				const scrollToPosition = () => {
+					return new Promise<void>((resolve) => {
+						const checkTime = 70;
+						const maxScrolls = 7;
+
+						let checkCount = 0;
+						let scrollBackCount = 0;
+
+						const completeCheck = () => {
+							window.clearInterval(checkInterval);
+
+							resolve();
+						};
+
+						const checkInterval = window.setInterval(async () => {
+							const elem = document.querySelector(position.selector!);
+
+							if (elem) {
+								const { y } = elem.getBoundingClientRect();
+
+								if (y > 1 || y < -1) {
+									elem.scrollIntoView();
+									if (this.config.settings?.restorePosition.offset) {
+										window.scrollBy(0, this.config.settings?.restorePosition.offset);
+									}
+									if (!scrollBackCount) controller.log.debug('restored position to: ', elem);
+									scrollBackCount++;
+								}
+
+								// stop scrolling back after max
+								if (scrollBackCount > maxScrolls) {
+									completeCheck();
+								}
+							}
+
+							if (checkCount > 700 / checkTime) {
+								if (!elem) controller.log.debug('could not locate element with selector: ', position.selector);
+								completeCheck();
+							}
+
+							checkCount++;
+						}, checkTime);
+					});
+				};
+
+				if (position.selector) await scrollToPosition();
+				await next();
+			});
+		}
 
 		// attach config plugins and event middleware
 		this.use(this.config);
