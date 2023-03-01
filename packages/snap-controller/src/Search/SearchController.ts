@@ -151,7 +151,7 @@ export class SearchController extends AbstractController {
 
 								if (y > 1 || y < -1) {
 									elem.scrollIntoView();
-									if (this.config.settings?.restorePosition.offset) {
+									if (this.config.settings?.restorePosition?.offset) {
 										window.scrollBy(0, this.config.settings?.restorePosition.offset);
 									}
 									if (!scrollBackCount) controller.log.debug('restored position to: ', elem);
