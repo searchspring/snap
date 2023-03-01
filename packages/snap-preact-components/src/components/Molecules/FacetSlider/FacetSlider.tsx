@@ -263,6 +263,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 										outline: 'none',
 									},
 								})}
+								aria-label={`${facet.label} slider button`}
+								aria-valuetext={`${facet.label} slider button, current value ${value}, min value ${facet.range.low}, max value ${facet.range.high}`}
 								ref={(e) => useA11y(e)}
 							>
 								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>

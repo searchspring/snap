@@ -121,6 +121,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
+					role="checkbox"
 				>
 					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
 				</span>
