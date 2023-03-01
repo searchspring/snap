@@ -7,7 +7,15 @@ import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type {
+	SearchControllerConfig,
+	BeforeSearchObj,
+	AfterSearchObj,
+	AfterStoreObj,
+	ControllerServices,
+	ContextVariables,
+	PositionObj,
+} from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
@@ -107,10 +115,10 @@ export class SearchController extends AbstractController {
 			// save last params
 			this.storage.set('lastStringyParams', JSON.stringify(search.request));
 
-			// get scrollTo selector and send it to 'restorePosition' event
+			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
 			const stringyParams = JSON.stringify(storableRequestParams);
-			const scrollMap = this.storage.get('scrollMap') || {};
+			const scrollMap: { [key: string]: PositionObj } = this.storage.get('scrollMap') || {};
 			const position = scrollMap[stringyParams];
 			if (position) await this.eventManager.fire('restorePosition', { controller: this, position });
 
@@ -131,14 +139,14 @@ export class SearchController extends AbstractController {
 				const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
 				const storableRequestParams = getStorableRequestParams(stringyParams);
 				const storableStringyParams = JSON.stringify(storableRequestParams);
-				const scrollMap: any = {};
+				const scrollMap: { [key: string]: PositionObj } = {};
 
 				// generate the selector using element class and parent classes
 				const selector = generateHrefSelector(target, href);
-				if (selector) {
-					scrollMap[storableStringyParams] = { selector, href, x: window?.scrollX, y: window?.scrollY };
-					this.storage.set('scrollMap', scrollMap);
-				}
+
+				// store position data to scrollMap
+				scrollMap[storableStringyParams] = { selector, href, x: window?.scrollX, y: window?.scrollY };
+				this.storage.set('scrollMap', scrollMap);
 
 				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
@@ -454,7 +462,7 @@ export function getStorableRequestParams(request: SearchRequestModel): SearchReq
 	};
 }
 
-function generateHrefSelector(element: HTMLElement, href: string, levels = 6): string {
+function generateHrefSelector(element: HTMLElement, href: string, levels = 6): string | undefined {
 	let level = 0;
 	let elem: HTMLElement | null = element;
 
@@ -469,7 +477,7 @@ function generateHrefSelector(element: HTMLElement, href: string, levels = 6): s
 		level++;
 	}
 
-	return '';
+	return;
 }
 
 function backFillSize(pages: number, pageSize: number) {
