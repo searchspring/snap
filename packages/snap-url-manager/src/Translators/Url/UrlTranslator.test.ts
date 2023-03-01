@@ -404,6 +404,72 @@ describe('UrlTranslator', () => {
 			expect(params.query).toBe(undefined);
 		});
 
+		it('deserializes lengthy filters correctly', () => {
+			const url = 'http://somesite.com#/some:very:long:hash:param:thing';
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
+
+			expect(params.filter).toBeUndefined();
+
+			expect(params.some).toEqual({
+				very: {
+					long: {
+						hash: {
+							param: ['thing'],
+						},
+					},
+				},
+			});
+
+			expect(params.page).toBe(undefined);
+
+			expect(params.query).toBe(undefined);
+		});
+
+		it('deserializes lengthy filters that look like range filters correctly', () => {
+			const url = 'http://somesite.com#/afilter:price:*:500';
+			const urlTranslator = new UrlTranslator();
+			const params: UrlState = urlTranslator.deserialize(url);
+
+			expect(params.filter).toBeUndefined();
+
+			expect(params.afilter).toEqual({
+				price: {
+					'*': ['500'],
+				},
+			});
+
+			expect(params.page).toBe(undefined);
+
+			expect(params.query).toBe(undefined);
+		});
+
+		it(`deserializes a custom named core 'filter' parameter correctly`, () => {
+			const url = 'http://somesite.com#/afilter:price:*:500';
+			const config = {
+				parameters: {
+					core: {
+						filter: {
+							name: 'afilter',
+						},
+					},
+				},
+			};
+
+			const urlTranslator = new UrlTranslator(config);
+			const params: UrlState = urlTranslator.deserialize(url);
+
+			expect(params.filter).toEqual({
+				price: [{ low: null, high: 500 }],
+			});
+
+			expect(params.afilter).toBeUndefined();
+
+			expect(params.page).toBe(undefined);
+
+			expect(params.query).toBe(undefined);
+		});
+
 		it('ignores range filters of the wrong type when not configured correctly', () => {
 			const url =
 				'http://somesite.com?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100&filter.price.low=100&filter.price.high=*';

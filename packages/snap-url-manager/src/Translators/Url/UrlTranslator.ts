@@ -176,14 +176,11 @@ export class UrlTranslator implements Translator {
 			.forEach((decodedHashEntries) => {
 				if (decodedHashEntries.length == 1) {
 					params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
-				} else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
-					const [value, ...keys] = decodedHashEntries.reverse();
-					params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
-				} else if (decodedHashEntries.length && decodedHashEntries.length <= 4) {
-					const [path0, path1, low, high] = decodedHashEntries;
-					const isCoreField = this.reverseMapping[path0];
-					if (isCoreField && isCoreField == 'filter') {
+				} else if (decodedHashEntries.length && decodedHashEntries.length >= 2) {
+					const isCoreField = this.reverseMapping[decodedHashEntries[0]];
+					if (isCoreField && isCoreField == 'filter' && decodedHashEntries.length == 4) {
 						// range filter
+						const [path0, path1, low, high] = decodedHashEntries;
 						params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash });
 						params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
 					} else {
