@@ -179,11 +179,17 @@ export class UrlTranslator implements Translator {
 				} else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
 					const [value, ...keys] = decodedHashEntries.reverse();
 					params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
-				} else if (decodedHashEntries.length && decodedHashEntries.length == 4) {
-					// range filter
+				} else if (decodedHashEntries.length && decodedHashEntries.length <= 4) {
 					const [path0, path1, low, high] = decodedHashEntries;
-					params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash });
-					params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+					const isCoreField = this.reverseMapping[path0];
+					if (isCoreField && isCoreField == 'filter') {
+						// range filter
+						params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash });
+						params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+					} else {
+						const [value, ...keys] = decodedHashEntries.reverse();
+						params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
+					}
 				}
 			});
 
@@ -361,6 +367,7 @@ export class UrlTranslator implements Translator {
 	}
 
 	serialize(state: UrlState): string {
+		// debugger
 		const root = this.config.urlRoot.includes('?')
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
