@@ -195,6 +195,11 @@ export class Content extends Component {
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
 
+### restorePosition
+- Called with `eventData` = { controller, position }
+- Position data includes `href`, `selector`, `x` and `y`
+- Invoked when position data exists during final stages of `afterStore`
+
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 
 - Always invoked after `track.product.click()` method has been invoked
