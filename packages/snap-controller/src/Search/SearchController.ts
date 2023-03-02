@@ -321,6 +321,7 @@ export class SearchController extends AbstractController {
 				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length;
 				// if the page is higher than the backfill setting redirect back to page 1
 				if (preventBackfill || dontBackfill) {
+					this.storage.set('scrollMap', {});
 					this.urlManager.set('page', 1).go();
 					return;
 				}
