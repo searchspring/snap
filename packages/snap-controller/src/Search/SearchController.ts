@@ -121,7 +121,13 @@ export class SearchController extends AbstractController {
 			const stringyParams = JSON.stringify(storableRequestParams);
 			const scrollMap: { [key: string]: PositionObj } = this.storage.get('scrollMap') || {};
 			const position = scrollMap[stringyParams];
-			if (position) await this.eventManager.fire('restorePosition', { controller: this, position });
+			if (position) {
+				// found a position, fire event with details
+				await this.eventManager.fire('restorePosition', { controller: this, position });
+			} else {
+				// search params have changed - empty the scrollMap
+				this.storage.set('scrollMap', {});
+			}
 
 			search.controller.store.loading = false;
 		});
@@ -315,7 +321,6 @@ export class SearchController extends AbstractController {
 				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length;
 				// if the page is higher than the backfill setting redirect back to page 1
 				if (preventBackfill || dontBackfill) {
-					this.storage.set('scrollMap', {});
 					this.urlManager.set('page', 1).go();
 					return;
 				}
