@@ -21,7 +21,12 @@ export class Header extends Component<HeaderProps> {
 				) : (
 					<>
 						{pagination.totalResults ? (
-							<h3 class="ss-title ss-results-title">
+							<h3
+								class="ss-title ss-results-title"
+								aria-atomic="true"
+								aria-live="polite"
+								aria-label={`Now showing ${pagination.totalResults} items in the product grid`}
+							>
 								{`Showing `}
 								{pagination.multiplePages && <span class="ss-results-count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
 								<span class="ss-results-count-total">{pagination.totalResults}</span>
