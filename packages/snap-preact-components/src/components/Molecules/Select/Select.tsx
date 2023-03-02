@@ -233,6 +233,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										aria-label={`${label} dropdown button ${open ? 'open' : 'collapsed'} ${options.length} options ${
 											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
 										}`}
+										aria-expanded={open}
+										role="button"
 									>
 										{label}
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}

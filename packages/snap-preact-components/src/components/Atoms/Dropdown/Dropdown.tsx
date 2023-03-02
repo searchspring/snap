@@ -115,6 +115,8 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				<div
 					className="ss__dropdown__button"
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
+					aria-expanded={showContent}
+					role="button"
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
