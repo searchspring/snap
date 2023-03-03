@@ -93,13 +93,13 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	return store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
-				<>
+				<nav role="navigation" aria-label="Pagination">
 					{/* Prev */}
 					{store.previous && !hidePrev && (
 						<a
 							{...store.previous.url.link}
 							className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
-							aria-label={'previous page'}
+							aria-label={'go to previous page'}
 						>
 							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
 						</a>
@@ -108,7 +108,11 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					{/* first */}
 					{!pageNumbers.includes(store.first.number) && !hideFirst && (
 						<>
-							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} aria-label={'first page'}>
+							<a
+								{...store.first.url.link}
+								className={classnames('ss__pagination__page', 'ss__pagination__page--first')}
+								aria-label={'go to first page'}
+							>
 								{firstButton ? firstButton : store.first.number}
 							</a>
 							{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
@@ -119,9 +123,15 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					{_pages &&
 						_pages.map((page) =>
 							page.active ? (
-								<span className={classnames('ss__pagination__page', 'ss__pagination__page--active')}>{page.number}</span>
+								<span
+									className={classnames('ss__pagination__page', 'ss__pagination__page--active')}
+									aria-label={`go to page ${page.number}`}
+									aria-current="true"
+								>
+									{page.number}
+								</span>
 							) : (
-								<a {...page.url.link} className="ss__pagination__page" aria-label={`page ${page.number}`}>
+								<a {...page.url.link} className="ss__pagination__page" aria-label={`go to page ${page.number}`}>
 									{page.number}
 								</a>
 							)
@@ -132,7 +142,11 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 						<>
 							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} aria-label={'last page'}>
+							<a
+								{...store.last.url.link}
+								className={classnames('ss__pagination__page', 'ss__pagination__page--last')}
+								aria-label={`go to last page ${store.last.number}`}
+							>
 								{lastButton ? lastButton : store.last.number}
 							</a>
 						</>
@@ -140,11 +154,11 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 					{/* next */}
 					{store.next && !hideNext && (
-						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'next page'}>
+						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'go to next page'}>
 							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
 						</a>
 					)}
-				</>
+				</nav>
 			</div>
 		</CacheProvider>
 	) : (

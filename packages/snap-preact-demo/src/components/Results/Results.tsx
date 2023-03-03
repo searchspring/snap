@@ -39,7 +39,9 @@ export class Results extends Component<ResultsProps> {
 				<div class="clear"></div>
 
 				<Profile name="results" controller={controller}>
-					<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
+					<div id="ss_results">
+						<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
+					</div>
 				</Profile>
 
 				<div class="clear"></div>

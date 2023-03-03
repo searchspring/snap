@@ -50,6 +50,13 @@ The `disabled` prop will disable the button from toggling the visibility of the 
 <Dropdown disabled>Hello World!</Dropdown>
 ```
 
+### disableA11y
+The `disableA11y` prop specifies a boolean to disable the autoset ally properties.
+
+```jsx
+<Dropdown disableA11y>Hello World!</Dropdown>
+```
+
 ### disableOverlay
 The `disableOverlay` prop will disable the dropdown contents from being rendered as an overlay. If set to `true`, dropdown contents will instead be rendered as a block and affect the height of its parent element. Typically used if Dropdown is intended to act as a header (ie. Facet)
 

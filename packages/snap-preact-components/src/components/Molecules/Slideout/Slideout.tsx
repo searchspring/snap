@@ -10,6 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
@@ -85,8 +86,18 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	// state
 	const [isActive, setActive] = useState(Boolean(active));
+	const [renderContent, setRenderContent] = useState(Boolean(active));
 	const toggleActive = () => {
+		if (isActive) {
+			setTimeout(() => {
+				setRenderContent(!renderContent);
+			}, 250);
+		} else {
+			setRenderContent(!isActive);
+		}
+
 		setActive(!isActive);
+
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
 
@@ -115,7 +126,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				))}
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-				{cloneWithProps(children, { toggleActive, active: isActive })}
+				{renderContent && cloneWithProps(children, { toggleActive, active: isActive })}
 			</div>
 			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
 		</CacheProvider>
