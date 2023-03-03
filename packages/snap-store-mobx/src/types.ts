@@ -24,7 +24,6 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		restorePosition?: {
 			enabled: boolean;
-			offset?: number;
 		};
 		history?: {
 			url?: string;

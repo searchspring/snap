@@ -69,7 +69,6 @@ let config: SnapConfig = {
 						},
 						restorePosition: {
 							enabled: true,
-							offset: 15,
 						},
 					},
 				},

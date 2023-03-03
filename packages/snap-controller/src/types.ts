@@ -41,14 +41,13 @@ export type AfterStoreObj = {
 
 export type RestorePositionObj = {
 	controller: AbstractController;
-	position: PositionObj;
+	element?: ElementPositionObj;
 };
 
-export type PositionObj = {
-	href?: string;
-	selector?: string;
-	x?: number;
-	y?: number;
+export type ElementPositionObj = {
+	href: string;
+	selector: string;
+	domRect: DOMRect;
 };
 
 export enum ControllerTypes {

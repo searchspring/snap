@@ -15,7 +15,7 @@ import type {
 	ControllerServices,
 	ContextVariables,
 	RestorePositionObj,
-	PositionObj,
+	ElementPositionObj,
 } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
@@ -119,68 +119,68 @@ export class SearchController extends AbstractController {
 			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
 			const stringyParams = JSON.stringify(storableRequestParams);
-			const scrollMap: { [key: string]: PositionObj } = this.storage.get('scrollMap') || {};
-			const position = scrollMap[stringyParams];
-			if (position) {
-				// found a position, fire event with details
-				await this.eventManager.fire('restorePosition', { controller: this, position });
-			} else {
+			const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
+			const elementPosition = scrollMap[stringyParams];
+			if (!elementPosition) {
 				// search params have changed - empty the scrollMap
 				this.storage.set('scrollMap', {});
 			}
+
+			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 
 			search.controller.store.loading = false;
 		});
 
 		// restore position
 		if (this.config.settings?.restorePosition?.enabled) {
-			this.eventManager.on('restorePosition', async ({ controller, position }: RestorePositionObj, next: Next) => {
+			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
 				const scrollToPosition = () => {
-					return new Promise<void>((resolve) => {
-						const checkTime = 70;
-						const maxScrolls = 7;
+					return new Promise<void>(async (resolve) => {
+						const offset = element?.domRect?.top || 0;
+						const maxCheckTime = 500;
+						const checkTime = 50;
+						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
+						const maxCheckCount = maxScrolls + 1;
 
-						let checkCount = 0;
 						let scrollBackCount = 0;
+						let scrolledElem: Element | undefined = undefined;
 
-						const completeCheck = () => {
-							window.clearInterval(checkInterval);
+						const checkAndScroll = () => {
+							const elem = document.querySelector(element?.selector!);
+							if (elem) scrollBackCount++;
 
-							resolve();
-						};
-
-						const checkInterval = window.setInterval(async () => {
-							const elem = document.querySelector(position.selector!);
-
-							if (elem) {
+							if (elem && scrollBackCount < maxCheckCount) {
 								const { y } = elem.getBoundingClientRect();
 
-								if (y > 1 || y < -1) {
+								if (y > offset + 1 || y < offset - 1) {
 									elem.scrollIntoView();
-									if (this.config.settings?.restorePosition?.offset) {
-										window.scrollBy(0, this.config.settings?.restorePosition.offset);
-									}
-									if (!scrollBackCount) controller.log.debug('restored position to: ', elem);
-									scrollBackCount++;
-								}
+									// after scrolling into view, use top value with offset (for when element at bottom)
+									const { top } = elem.getBoundingClientRect();
+									window.scrollBy(0, -(offset - top));
+									scrolledElem = elem;
 
-								// stop scrolling back after max
-								if (scrollBackCount > maxScrolls) {
-									completeCheck();
+									return true;
 								}
 							}
 
-							if (checkCount > 700 / checkTime) {
-								if (!elem) controller.log.debug('could not locate element with selector: ', position.selector);
-								completeCheck();
-							}
+							return false;
+						};
 
-							checkCount++;
-						}, checkTime);
+						while (checkAndScroll() || scrollBackCount <= maxScrolls) {
+							await new Promise((resolve) => setTimeout(resolve, checkTime));
+						}
+
+						if (scrolledElem) {
+							controller.log.debug('restored position to: ', scrolledElem);
+						} else {
+							controller.log.debug('could not locate element with selector: ', element?.selector);
+						}
+
+						resolve();
 					});
 				};
 
-				if (position.selector) await scrollToPosition();
+				if (element) await scrollToPosition();
 				await next();
 			});
 		}
@@ -193,19 +193,23 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				const target = e.target as HTMLAnchorElement;
-				const href = target?.href || result.mappings.core?.url;
-
-				// store scroll position
-				const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
-				const storableRequestParams = getStorableRequestParams(stringyParams);
-				const storableStringyParams = JSON.stringify(storableRequestParams);
-				const scrollMap: { [key: string]: PositionObj } = {};
+				const href = target?.getAttribute('href') || result.mappings.core?.url;
+				const scrollMap: { [key: string]: ElementPositionObj } = {};
 
 				// generate the selector using element class and parent classes
 				const selector = generateHrefSelector(target, href);
+				const domRect = selector ? document?.querySelector(selector)?.getBoundingClientRect() : undefined;
 
-				// store position data to scrollMap
-				scrollMap[storableStringyParams] = { selector, href, x: window?.scrollX, y: window?.scrollY };
+				// store element position data to scrollMap
+				if (selector && href && domRect) {
+					const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
+					const storableRequestParams = getStorableRequestParams(stringyParams);
+					const storableStringyParams = JSON.stringify(storableRequestParams);
+
+					scrollMap[storableStringyParams] = { domRect, href, selector };
+				}
+
+				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
 
 				// track
@@ -522,15 +526,15 @@ export function getStorableRequestParams(request: SearchRequestModel): SearchReq
 	};
 }
 
-function generateHrefSelector(element: HTMLElement, href: string, levels = 6): string | undefined {
+function generateHrefSelector(element: HTMLElement, href: string, levels = 7): string | undefined {
 	let level = 0;
 	let elem: HTMLElement | null = element;
 
 	while (elem && level < levels) {
 		// check within
-		const innerElemHref = elem.querySelector(`[href="${href}"]`) as HTMLElement;
+		const innerElemHref = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
 		if (innerElemHref) {
-			return `${elem.tagName}.${elem.classList.value.replace(/\s/g, '.')} [href="${href}"]`;
+			return `${elem.tagName}.${elem.classList.value.replace(/\s/g, '.')} [href*="${href}"]`;
 		}
 
 		elem = elem.parentElement;
