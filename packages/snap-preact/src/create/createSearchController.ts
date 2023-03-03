@@ -1,8 +1,8 @@
-import { PluginFunction, SearchController, RestorePositionObj } from '@searchspring/snap-controller';
+import { SearchController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager, Next } from '@searchspring/snap-event-manager';
+import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';

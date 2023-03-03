@@ -115,7 +115,7 @@ const searchConfig = {
 For example, if `config.settings.infinite.backfill` contains a value of `5` and the user has paginated to page `4` and reloads the page, `4` pages of results will be shown. However, if the user has paginated to page `6` or above and reloads the page, only page `1` results will be shown. 
 
 ### Restore Position
-If `config.settings.infinite.backfill` is specified, any time you navigate back to a previous page, the controller will scroll to the pages previous position. This can be disabled and left entirely up to the browser by setting `restorePosition` to `false`.
+If `config.settings.infinite.backfill` is specified, any time you navigate back to a previous page, the controller will scroll to the pages previous position. This can be disabled and left entirely up to the browser by setting `restorePosition.enabled` to `false`.
 
 ```typescript
 const searchConfig = {
@@ -128,7 +128,9 @@ const searchConfig = {
 	settings: {
 		infinite: {
 			backfill: 5,
-			restorePosition: false,
+		}
+		restorePosition: {
+			enabled: false,
 		}
 	}
 };
@@ -197,7 +199,7 @@ export class Content extends Component {
 
 ### restorePosition
 - Called with `eventData` = { controller, element }
-- If an element position data exists, `element` data will include `domRect` (of the element with selector), `href`, `selector`, `window` (x, y)
+- If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
 - Invoked during final stages of `afterStore` just prior to setting loading state to false
 
 ### track.product.click
