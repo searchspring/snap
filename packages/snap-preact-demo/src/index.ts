@@ -63,14 +63,12 @@ let config: SnapConfig = {
 				config: {
 					id: 'search',
 					plugins: [[afterStore]],
-					globals: {
-						pagination: {
-							pageSize: 36,
-						},
-					},
 					settings: {
 						redirects: {
 							merchandising: false,
+						},
+						restorePosition: {
+							enabled: true,
 						},
 					},
 				},

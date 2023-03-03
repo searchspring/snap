@@ -21,7 +21,9 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
-			restorePosition?: boolean;
+		};
+		restorePosition?: {
+			enabled: boolean;
 		};
 		history?: {
 			url?: string;
