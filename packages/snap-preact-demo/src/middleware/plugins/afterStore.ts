@@ -15,7 +15,7 @@ export function afterStore(controller: AbstractController) {
 		await next();
 	});
 
-	controller.on('afterStore', scrollToTop);
+	controller.on('restorePosition', restorePosition);
 }
 
 function mutateFacets(facets: SearchFacetsStore) {
@@ -29,7 +29,13 @@ function mutateFacets(facets: SearchFacetsStore) {
 	}
 }
 
-export async function scrollToTop({ controller }: { controller: SearchController }, next: Next) {
-	window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+async function restorePosition({ controller, element }, next: Next) {
+	// scroll to top only if we are not going to be scrolling to stored element
+	if (!element) {
+		setTimeout(() => {
+			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+		});
+	}
+
 	await next();
 }

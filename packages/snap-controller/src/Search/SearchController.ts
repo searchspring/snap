@@ -7,7 +7,16 @@ import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type {
+	SearchControllerConfig,
+	BeforeSearchObj,
+	AfterSearchObj,
+	AfterStoreObj,
+	ControllerServices,
+	ContextVariables,
+	RestorePositionObj,
+	ElementPositionObj,
+} from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
@@ -54,8 +63,9 @@ export class SearchController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
-		if (this.config.settings?.infinite && typeof this.config.settings.infinite.restorePosition == 'undefined') {
-			this.config.settings.infinite.restorePosition = true;
+		// set restorePosition to be enabled by default when using infinite (if not provided)
+		if (this.config.settings?.infinite && typeof this.config.settings.restorePosition == 'undefined') {
+			this.config.settings.restorePosition = { enabled: true };
 		}
 
 		this.store.setConfig(this.config);
@@ -103,38 +113,77 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
-			search.controller.store.loading = false;
-
 			// save last params
 			this.storage.set('lastStringyParams', JSON.stringify(search.request));
 
+			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
-
 			const stringyParams = JSON.stringify(storableRequestParams);
-
-			if (this.config.settings?.infinite?.restorePosition) {
-				// restore the scroll position saved previously
-				const scrollMap = this.storage.get('scrollMap') || {};
-
-				// interval we ony need to keep checking until the page height > than our stored value
-				const scrollToPosition = scrollMap[stringyParams];
-
-				if (scrollToPosition) {
-					let checkCount = 0;
-					const heightCheck = window.setInterval(() => {
-						if (document.documentElement.scrollHeight >= scrollToPosition) {
-							window.scrollTo(0, scrollToPosition);
-							this.log.debug('scrolling to: ', scrollMap[stringyParams]);
-							window.clearInterval(heightCheck);
-						}
-						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
-							window.clearInterval(heightCheck);
-						}
-						checkCount++;
-					}, HEIGHT_CHECK_INTERVAL);
-				}
+			const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
+			const elementPosition = scrollMap[stringyParams];
+			if (!elementPosition) {
+				// search params have changed - empty the scrollMap
+				this.storage.set('scrollMap', {});
 			}
+
+			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
+
+			search.controller.store.loading = false;
 		});
+
+		// restore position
+		if (this.config.settings?.restorePosition?.enabled) {
+			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
+				const scrollToPosition = () => {
+					return new Promise<void>(async (resolve) => {
+						const offset = element?.domRect?.top || 0;
+						const maxCheckTime = 500;
+						const checkTime = 50;
+						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
+						const maxCheckCount = maxScrolls + 1;
+
+						let scrollBackCount = 0;
+						let scrolledElem: Element | undefined = undefined;
+
+						const checkAndScroll = () => {
+							const elem = document.querySelector(element?.selector!);
+							if (elem) scrollBackCount++;
+
+							if (elem && scrollBackCount < maxCheckCount) {
+								const { y } = elem.getBoundingClientRect();
+
+								if (y > offset + 1 || y < offset - 1) {
+									elem.scrollIntoView();
+									// after scrolling into view, use top value with offset (for when element at bottom)
+									const { top } = elem.getBoundingClientRect();
+									window.scrollBy(0, -(offset - top));
+									scrolledElem = elem;
+
+									return true;
+								}
+							}
+
+							return false;
+						};
+
+						while (checkAndScroll() || scrollBackCount <= maxScrolls) {
+							await new Promise((resolve) => setTimeout(resolve, checkTime));
+						}
+
+						if (scrolledElem) {
+							controller.log.debug('restored position to: ', scrolledElem);
+						} else {
+							controller.log.debug('could not locate element with selector: ', element?.selector);
+						}
+
+						resolve();
+					});
+				};
+
+				if (element) await scrollToPosition();
+				await next();
+			});
+		}
 
 		// attach config plugins and event middleware
 		this.use(this.config);
@@ -143,23 +192,28 @@ export class SearchController extends AbstractController {
 	track: SearchTrackMethods = {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
-				// store scroll position
-				if (this.config.settings?.infinite) {
-					let stringyParams = this.storage.get('lastStringyParams');
-					stringyParams = JSON.parse(stringyParams);
+				const target = e.target as HTMLAnchorElement;
+				const href = target?.getAttribute('href') || result.mappings.core?.url;
+				const scrollMap: { [key: string]: ElementPositionObj } = {};
 
+				// generate the selector using element class and parent classes
+				const selector = generateHrefSelector(target, href);
+				const domRect = selector ? document?.querySelector(selector)?.getBoundingClientRect() : undefined;
+
+				// store element position data to scrollMap
+				if (selector && href && domRect) {
+					const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
 					const storableRequestParams = getStorableRequestParams(stringyParams);
-					stringyParams = JSON.stringify(storableRequestParams);
+					const storableStringyParams = JSON.stringify(storableRequestParams);
 
-					const scrollMap: any = {};
-					scrollMap[stringyParams] = window.scrollY;
-					this.storage.set('scrollMap', scrollMap);
+					scrollMap[storableStringyParams] = { domRect, href, selector };
 				}
+
+				// store position data or empty object
+				this.storage.set('scrollMap', scrollMap);
 
 				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
-				const target = e.target as HTMLAnchorElement;
-				const href = target?.href || result.mappings.core?.url || undefined;
 
 				const event = this.tracker.track.product.click({
 					intellisuggestData,
@@ -470,6 +524,24 @@ export function getStorableRequestParams(request: SearchRequestModel): SearchReq
 			landingPage: request.merchandising?.landingPage || '',
 		},
 	};
+}
+
+function generateHrefSelector(element: HTMLElement, href: string, levels = 7): string | undefined {
+	let level = 0;
+	let elem: HTMLElement | null = element;
+
+	while (elem && level < levels) {
+		// check within
+		const innerElemHref = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
+		if (innerElemHref) {
+			return `${elem.tagName}.${elem.classList.value.replace(/\s/g, '.')} [href*="${href}"]`;
+		}
+
+		elem = elem.parentElement;
+		level++;
+	}
+
+	return;
 }
 
 function backFillSize(pages: number, pageSize: number) {

@@ -5,10 +5,17 @@ Renders a list of hierarchy options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'hierarchy'.
+The `values` prop specifies all facet values where the facet type is 'hierarchy'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetHierarchyOptions facet={hierarchyFacet} />
 ```
 
 ### hideCount

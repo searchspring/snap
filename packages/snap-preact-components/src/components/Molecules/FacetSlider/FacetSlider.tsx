@@ -11,6 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	facetSlider: ({
@@ -262,6 +263,11 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 										outline: 'none',
 									},
 								})}
+								aria-label={`${facet.label} slider button`}
+								aria-valuetext={`${facet.label} slider button, current value ${value}, ${facet.range?.low ? `min value ${facet.range?.low},` : ``} ${
+									facet.range?.high ? `max value ${facet.range?.high}` : ``
+								}`}
+								ref={(e) => useA11y(e)}
 							>
 								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
 									{stickyHandleLabel && (

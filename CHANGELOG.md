@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Bug Fixes
+
+- **controller-search:** fixing issue where 'restorePosition' would fire returning to previous search ([86a5ca7](https://github.com/searchspring/snap/commit/86a5ca787788c480d649eef6037e52304d2eee50))
+- **urltranslator:** url range filters bug fix when using tab manager ([4194261](https://github.com/searchspring/snap/commit/41942616f59428c5935f45175ac048a6244413ca))
+
+### Features
+
+- **a11y hook:** adding new a11y hook to easily add requirements for keyboard nav for ada on element ([9f21708](https://github.com/searchspring/snap/commit/9f21708f8ec7fdb4aca484ba8e9dbffe39e83a94))
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+- **controller-search:** adding `restorePosition` event and refactoring restoration code ([cf57606](https://github.com/searchspring/snap/commit/cf57606322103cdf7d3884127ea272111c8a1644))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap

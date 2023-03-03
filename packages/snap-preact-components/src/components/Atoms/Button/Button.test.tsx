@@ -231,6 +231,21 @@ describe('Button Component', () => {
 			expect(buttonElementByContent).toBeInTheDocument();
 		});
 
+		it('Can enable/disable useAlly with disableA11y prop', () => {
+			const content = 'button1';
+			const rendered = render(<Button content={content} />);
+
+			const buttonElement = rendered.container.querySelector('.ss__button');
+			expect(buttonElement).toBeInTheDocument();
+
+			expect(buttonElement).toHaveAttribute('ssA11y');
+
+			const rendered2 = render(<Button content={content} disableA11y />);
+
+			const buttonElement2 = rendered2.container.querySelector('.ss__button');
+			expect(buttonElement2).not.toHaveAttribute('ssA11y');
+		});
+
 		it('renders with children prop', () => {
 			const content = <h1 className="child">childbutton</h1>;
 			const rendered = render(<Button native>{content}</Button>);

@@ -8,10 +8,17 @@ Renders a grid of facet palette options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'palette'.
+The `values` prop specifies all facet values where the facet type is 'palette'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetPaletteOptions facet={paletteFacet} />
 ```
 
 ### hideLabel

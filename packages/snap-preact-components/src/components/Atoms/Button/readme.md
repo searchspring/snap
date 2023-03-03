@@ -51,6 +51,13 @@ The `color` prop specifies the button text color.
 <Button content={"click me!"} color={'#222222'} />
 ```
 
+### disableA11y
+The `disableA11y` prop specifies a boolean to disable the autoset ally properties.
+
+```jsx
+<Button content={"click me!"} disableA11y />
+```
+
 ### Events
 
 #### onClick

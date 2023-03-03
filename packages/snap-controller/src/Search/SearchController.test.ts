@@ -12,7 +12,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
 import { SearchController, getStorableRequestParams } from './SearchController';
-import type { SearchControllerConfig, BeforeSearchObj } from '../types';
+import type { SearchControllerConfig, BeforeSearchObj, RestorePositionObj, ElementPositionObj } from '../types';
 import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
@@ -378,6 +378,7 @@ describe('Search Controller', () => {
 			intellisuggestSignature,
 			href,
 		});
+
 		expect(storagefn).toHaveBeenCalledTimes(1);
 
 		clickfn.mockClear();
@@ -612,7 +613,7 @@ describe('Search Controller', () => {
 		handleError.mockClear();
 	});
 
-	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {
+	it(`fires 'restorePosition' event and passes a position when one has been stored to a recent query`, async () => {
 		const scrollConfig: SearchStoreConfig = {
 			...searchConfig,
 			// add some filters, sorts, and pagination
@@ -638,11 +639,22 @@ describe('Search Controller', () => {
 					pageSize: 30,
 				},
 			},
-			settings: {
-				infinite: {
-					backfill: 5,
-				},
-			},
+		};
+
+		const scrollPosition = {
+			selector: '.ss__results .ss__result',
+			href: 'https://localhost:2222/product.html',
+			// can't use real DOMRect...
+			domRect: {
+				bottom: 0,
+				height: 0,
+				left: 0,
+				right: 0,
+				top: 0,
+				width: 0,
+				x: 0,
+				y: 0,
+			} as DOMRect,
 		};
 
 		const controller = new SearchController(scrollConfig, {
@@ -655,30 +667,32 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
-
 		controller.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			const stringyParams = getStorableRequestParams(search.request as SearchRequestModel);
 
 			// set a scrollMap for testing
-			const scrollMap: { [key: string]: any } = {};
+			const scrollMap: { [key: string]: ElementPositionObj } = {};
 
-			scrollMap[JSON.stringify(stringyParams)] = 777;
+			scrollMap[JSON.stringify(stringyParams)] = scrollPosition;
 
 			(search.controller as SearchController).storage.set('scrollMap', scrollMap);
 
 			await next();
 		});
 
-		await controller.search();
+		const restorePositionFunc = jest.fn((element?: ElementPositionObj) => {});
 
-		const scrollSpy = jest.spyOn(window, 'scrollTo');
+		controller.on('restorePosition', async (search: RestorePositionObj, next: Next) => {
+			restorePositionFunc(search.element);
+
+			await next();
+		});
+
+		await controller.search();
 
 		await waitFor(() => {
 			// expect window.scrollTo to have been called with our set value
-			expect(scrollSpy).toHaveBeenCalledWith(0, 777);
+			expect(restorePositionFunc).toHaveBeenCalledWith(scrollPosition);
 		});
-
-		scrollHeightSpy.mockClear();
 	});
 });

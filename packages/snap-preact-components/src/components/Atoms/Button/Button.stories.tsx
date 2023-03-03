@@ -96,6 +96,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		disableA11y: {
+			description: 'boolean to disable autoset ally properties',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

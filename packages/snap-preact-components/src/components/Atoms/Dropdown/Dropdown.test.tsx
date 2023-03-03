@@ -60,6 +60,26 @@ describe('Dropdown Component', () => {
 		expect(childElement).toBeInTheDocument();
 	});
 
+	it('Can enable/disable useAlly with disableA11y prop', () => {
+		const child = 'this is the child';
+		const rendered = render(<Dropdown button={'open me'}>{child}</Dropdown>);
+
+		const buttonElement = rendered.container.querySelector('.ss__dropdown__button');
+
+		expect(buttonElement).toBeInTheDocument();
+
+		expect(buttonElement).toHaveAttribute('ssA11y');
+
+		const rendered2 = render(
+			<Dropdown button={'open me'} disableA11y>
+				{child}
+			</Dropdown>
+		);
+
+		const buttonElement2 = rendered2.container.querySelector('.ss__dropdown__button');
+		expect(buttonElement2).not.toHaveAttribute('ssA11y');
+	});
+
 	it('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
