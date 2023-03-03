@@ -71,7 +71,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	};
 
 	let a11yProps = {
-		role: 'button',
 		ref: (e: any) => useA11y(e),
 	};
 
@@ -83,7 +82,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{children}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					{content}
 					{children}
 				</div>

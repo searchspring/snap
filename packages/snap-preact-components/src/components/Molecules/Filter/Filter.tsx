@@ -96,7 +96,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					link?.onClick && link.onClick(e);
 					onClick && onClick(e);
 				}}
-				href={link?.href || '#'}
+				href={link?.href}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} />

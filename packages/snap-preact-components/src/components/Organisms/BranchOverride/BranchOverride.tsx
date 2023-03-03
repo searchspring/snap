@@ -9,7 +9,6 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
-import { useA11y } from '../../../hooks/useA11y';
 
 type componentTheme = {
 	class: string;

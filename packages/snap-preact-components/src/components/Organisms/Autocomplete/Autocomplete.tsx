@@ -214,7 +214,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			clearTimeout(delayTimeout);
 			delayTimeout = window.setTimeout(() => {
 				(e.target as HTMLAnchorElement).focus();
-				if (activeTerm) {
+				if (activeTerm && activeTerm.preview) {
 					activeTerm.preview();
 				}
 			}, delayTime);
