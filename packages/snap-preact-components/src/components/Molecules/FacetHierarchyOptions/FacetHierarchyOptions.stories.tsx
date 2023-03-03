@@ -33,13 +33,23 @@ export default {
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'object',
 				},
 			},
 			control: { type: 'object' },
+		},
+		facet: {
+			description: 'Facet store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'facet store object',
+				},
+			},
+			control: { type: 'none' },
 		},
 		hideCount: {
 			defaultValue: false,

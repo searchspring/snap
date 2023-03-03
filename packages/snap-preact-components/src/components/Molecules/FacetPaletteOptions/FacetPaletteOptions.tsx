@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import type { FacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
@@ -105,7 +105,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		...properties.theme?.components?.facetPaletteOptions,
 	};
 
-	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -132,15 +132,23 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		styling.css = [style];
 	}
 
-	return values?.length ? (
+	const facetValues = values || facet?.values;
+
+	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-palette-options', className)}>
-				{values.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-						aria-label={value.value}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						aria-label={
+							value.filtered
+								? `remove selected filter ${facet?.label || ''} - ${value.label}`
+								: facet?.label
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
+						}
 						{...valueProps}
+						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
@@ -169,11 +177,12 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 });
 
 export interface FacetPaletteOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	hideLabel?: boolean;
 	columns?: number;
 	gapSize?: string;
 	hideIcon?: boolean;
+	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

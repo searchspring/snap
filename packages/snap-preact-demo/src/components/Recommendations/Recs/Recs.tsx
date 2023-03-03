@@ -34,7 +34,7 @@ export class Recs extends Component<RecsProps> {
 
 				<hr style={{ margin: '20px 0' }} />
 
-				<Recommendation controller={controller} speed={0}>
+				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
 					{store.results.map((result) => (
 						<Result result={result}></Result>
 					))}

@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
-import type { FacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
@@ -51,7 +51,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		...properties.theme?.components?.facetListOptions,
 	};
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -75,21 +75,30 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		styling.css = [style];
 	}
 
-	return values?.length ? (
+	const facetValues = values || facet?.values;
+
+	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-list-options', className)}>
-				{values.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						aria-label={
+							value.filtered
+								? `remove selected filter ${facet?.label || ''} - ${value.label}`
+								: facet?.label
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
+						}
 						{...valueProps}
+						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
 					>
-						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 						<span className="ss__facet-list-options__option__value">
 							{value.label}
 							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
@@ -104,9 +113,10 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 });
 
 export interface FacetListOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
+	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

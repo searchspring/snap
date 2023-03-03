@@ -8,10 +8,17 @@ Renders a list of facet options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'list'.
+The `values` prop specifies all facet values where the facet type is 'list'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetListOptions values={listFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetListOptions facet={listFacet} />
 ```
 
 ### hideCheckbox
