@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Features
+
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+- **controller-search:** adding `restorePosition` event and refactoring restoration code ([cf57606](https://github.com/searchspring/snap/commit/cf57606322103cdf7d3884127ea272111c8a1644))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

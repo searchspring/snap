@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Features
+
+- **a11y hook:** adding new a11y hook to easily add requirements for keyboard nav for ada on element ([9f21708](https://github.com/searchspring/snap/commit/9f21708f8ec7fdb4aca484ba8e9dbffe39e83a94))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
