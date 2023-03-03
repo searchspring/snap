@@ -1,4 +1,4 @@
-/*! For license information please see main.64d19559.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.d69f298c.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -71,10 +71,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'badge' }, 'Badge'),
 					(0, esm.kt)(
@@ -325,10 +326,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'breadcrumbs' }, 'Breadcrumbs'),
 					(0, esm.kt)('p', null, 'Renders a list of breadcrumbs. '),
@@ -440,10 +442,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'button' }, 'Button'),
 					(0, esm.kt)('p', null, 'Renders a native or custom button.'),
@@ -514,6 +517,19 @@
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} color={\'#222222\'} />\n')
 					),
+					(0, esm.kt)('h3', { id: 'disablea11y' }, 'disableA11y'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'disableA11y'),
+						' prop specifies a boolean to disable the autoset ally properties.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} disableA11y />\n')
+					),
 					(0, esm.kt)('h3', { id: 'events' }, 'Events'),
 					(0, esm.kt)('h4', { id: 'onclick' }, 'onClick'),
 					(0, esm.kt)(
@@ -575,6 +591,11 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						disableA11y: {
+							description: 'boolean to disable autoset ally properties',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 					},
 					componentArgs.p
 				),
@@ -604,7 +625,8 @@
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useA11y__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/hooks/useA11y.tsx'),
 				CSS_button = function button(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -649,7 +671,7 @@
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
-							{},
+							{ disableA11y: !1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.button,
@@ -669,6 +691,7 @@
 						disabled = props.disabled,
 						_native = props.native,
 						_onClick = props.onClick,
+						disableA11y = props.disableA11y,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -679,14 +702,24 @@
 							onClick: function onClick(e) {
 								return !disabled && _onClick && _onClick(e);
 							},
+						},
+						a11yProps = {
+							ref: function ref(e) {
+								return (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_6__.H)(e);
+							},
 						};
 					return content || children
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+								_providers__WEBPACK_IMPORTED_MODULE_7__.n,
 								null,
 								_native
 									? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('button', Object.assign({}, elementProps), content, children)
-									: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('div', Object.assign({}, elementProps), content, children)
+									: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+											'div',
+											Object.assign({}, disableA11y ? {} : a11yProps, elementProps, { role: 'button', 'aria-disabled': disabled }),
+											content,
+											children
+									  )
 						  )
 						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null);
 				});
@@ -724,10 +757,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'dropdown' }, 'Dropdown'),
 					(0, esm.kt)(
@@ -808,6 +842,19 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disabled>Hello World!</Dropdown>\n')
+					),
+					(0, esm.kt)('h3', { id: 'disablea11y' }, 'disableA11y'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'disableA11y'),
+						' prop specifies a boolean to disable the autoset ally properties.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disableA11y>Hello World!</Dropdown>\n')
 					),
 					(0, esm.kt)('h3', { id: 'disableoverlay' }, 'disableOverlay'),
 					(0, esm.kt)(
@@ -933,6 +980,11 @@
 							table: { type: { summary: 'function(e: Event, open: boolean)', detail: 'e is the click event' } },
 							action: 'onToggle',
 						},
+						disableA11y: {
+							description: 'boolean to disable autoset ally properties',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 					},
 					componentArgs.p
 				),
@@ -986,7 +1038,8 @@
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
-			var cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts');
+			var cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				useA11y = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -1059,7 +1112,7 @@
 						innerRef,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
-							{ startOpen: !1 },
+							{ startOpen: !1, disableA11y: !1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.dropdown,
@@ -1081,6 +1134,7 @@
 						onToggle = props.onToggle,
 						startOpen = props.startOpen,
 						disableClickOutside = props.disableClickOutside,
+						disableA11y = props.disableA11y,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -1136,6 +1190,11 @@
 									'div',
 									{
 										className: 'ss__dropdown__button',
+										ref: function ref(e) {
+											return disableA11y ? null : (0, useA11y.H)(e);
+										},
+										'aria-expanded': showContent,
+										role: 'button',
 										onClick: function onClick(e) {
 											disabled || (toggleShowContent(e), _onClick && _onClick(e));
 										},
@@ -1171,8 +1230,10 @@
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
-				CSS_formattedNumber = function formattedNumber() {
-					return (0, emotion_react_browser_esm.iv)({});
+				CSS = {
+					formattedNumber: function formattedNumber() {
+						return (0, emotion_react_browser_esm.iv)({});
+					},
 				};
 			function FormattedNumber(properties) {
 				var _globalTheme$componen,
@@ -1206,7 +1267,7 @@
 					formattedNumber = formatNumber.u(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_formattedNumber(), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.formattedNumber(), style]),
 					raw
 						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedNumber)
 						: (0, emotion_react_browser_esm.tZ)(
@@ -1238,10 +1299,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'formatted-number' }, 'Formatted Number'),
 					(0, esm.kt)(
@@ -1503,10 +1565,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'icon' }, 'Icon'),
 					(0, esm.kt)('p', null, 'Renders an Icon either from our list of available icons or from a custom path. '),
@@ -1695,19 +1758,21 @@
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				_paths__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
-				CSS_icon = function icon(_ref) {
-					var _theme$colors,
-						color = _ref.color,
-						height = _ref.height,
-						width = _ref.width,
-						size = _ref.size,
-						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
-						fill: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
-						width: width || size,
-						height: height || size,
-						position: 'relative',
-					});
+				CSS = {
+					icon: function icon(_ref) {
+						var _theme$colors,
+							color = _ref.color,
+							height = _ref.height,
+							width = _ref.width,
+							size = _ref.size,
+							theme = _ref.theme;
+						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+							fill: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
+							width: width || size,
+							height: height || size,
+							position: 'relative',
+						});
+					},
 				};
 			function Icon(properties) {
 				var _globalTheme$componen,
@@ -1741,7 +1806,7 @@
 					iconPath = _paths__WEBPACK_IMPORTED_MODULE_5__.N[icon] || path,
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_icon({ color, width, height, size, theme }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.icon({ color, width, height, size, theme }), style]),
 					iconPath
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
@@ -1875,10 +1940,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'image' }, 'Image'),
 					(0, esm.kt)('p', null, 'Renders an Image with fallback and rollover functionality. '),
@@ -2202,15 +2268,17 @@
 				return arr2;
 			}
 			var FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png',
-				CSS_image = function image(_ref) {
-					var visibility = _ref.visibility;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.iv)({
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						height: 'auto',
-						'& img': { visibility, flexShrink: '0', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
-					});
+				CSS = {
+					image: function image(_ref) {
+						var visibility = _ref.visibility;
+						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.iv)({
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+							height: 'auto',
+							'& img': { visibility, flexShrink: '0', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
+						});
+					},
 				};
 			function Image(properties) {
 				var _globalTheme$componen,
@@ -2256,7 +2324,7 @@
 					prevSrcRef.current && prevSrcRef.current != src && setVisibility('hidden');
 				var styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_image({ visibility }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.image({ visibility }), style]),
 					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 						_providers__WEBPACK_IMPORTED_MODULE_16__.n,
 						null,
@@ -2410,10 +2478,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'loading-bar' }, 'Loading Bar'),
 					(0, esm.kt)('p', null, 'Renders a Loading Bar.'),
@@ -2557,10 +2626,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'banner' }, 'Banner'),
 					(0, esm.kt)(
@@ -3251,8 +3321,10 @@
 				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
 					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
 				),
-				CSS_banner = function banner() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
+				CSS = {
+					banner: function banner() {
+						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
+					},
 				};
 			function Banner(properties) {
 				var _globalTheme$componen,
@@ -3287,7 +3359,7 @@
 				var bannerContent,
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_banner(), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.banner(), style]),
 					content && content[type] && (bannerContent = content[type]),
 					bannerContent && bannerContent.length
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
@@ -3361,10 +3433,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'inline-banner' }, 'Inline Banner'),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
@@ -3931,19 +4004,21 @@
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/types.ts'),
-				CSS_inlineBanner = function inlineBanner(_ref) {
-					var width = _ref.width;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
-						height: '100%',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width,
-						'&.ss__inline-banner--grid': { flexDirection: 'column' },
-						'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
-						'& iframe': { maxWidth: '100%' },
-					});
+				CSS = {
+					inlineBanner: function inlineBanner(_ref) {
+						var width = _ref.width;
+						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+							height: '100%',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width,
+							'&.ss__inline-banner--grid': { flexDirection: 'column' },
+							'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
+							'& iframe': { maxWidth: '100%' },
+						});
+					},
 				};
 			function InlineBanner(properties) {
 				var _globalTheme$componen,
@@ -3972,7 +4047,7 @@
 					style = props.style,
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_inlineBanner({ width }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.inlineBanner({ width }), style]),
 					banner && banner.value
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
@@ -4021,10 +4096,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'overlay' }, 'Overlay'),
 					(0, esm.kt)(
@@ -4124,19 +4200,21 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/providers/cache.tsx'),
-				CSS_overlay = function overlay(_ref) {
-					var color = _ref.color,
-						transitionSpeed = _ref.transitionSpeed;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
-						transition: 'background ' + transitionSpeed + ' ease 0s, left 0s ease ' + transitionSpeed,
-						position: 'fixed',
-						zIndex: '10003',
-						height: '100%',
-						width: '100%',
-						top: '0',
-						left: '-100%',
-						'&.ss__overlay--active': { transition: 'background ' + transitionSpeed + ' ease, left 0s ease', background: color, left: '0' },
-					});
+				CSS = {
+					overlay: function overlay(_ref) {
+						var color = _ref.color,
+							transitionSpeed = _ref.transitionSpeed;
+						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
+							transition: 'background ' + transitionSpeed + ' ease 0s, left 0s ease ' + transitionSpeed,
+							position: 'fixed',
+							zIndex: '10003',
+							height: '100%',
+							width: '100%',
+							top: '0',
+							left: '-100%',
+							'&.ss__overlay--active': { transition: 'background ' + transitionSpeed + ' ease, left 0s ease', background: color, left: '0' },
+						});
+					},
 				};
 			function Overlay(properties) {
 				var _globalTheme$componen,
@@ -4165,7 +4243,7 @@
 					style = props.style,
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_overlay({ color, transitionSpeed }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.overlay({ color, transitionSpeed }), style]),
 					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
 						_providers__WEBPACK_IMPORTED_MODULE_4__.n,
 						null,
@@ -4216,10 +4294,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'price' }, 'Price'),
 					(0, esm.kt)(
@@ -4367,13 +4446,15 @@
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
-				CSS_price = function price(_ref) {
-					var _theme$colors,
-						theme = _ref.theme;
-					return (0, emotion_react_browser_esm.iv)({
-						color: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
-						'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
-					});
+				CSS = {
+					price: function price(_ref) {
+						var _theme$colors,
+							theme = _ref.theme;
+						return (0, emotion_react_browser_esm.iv)({
+							color: null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary,
+							'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
+						});
+					},
 				};
 			function Price(properties) {
 				var _globalTheme$componen,
@@ -4412,7 +4493,7 @@
 					})(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_price({ theme }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.price({ theme }), style]),
 					raw
 						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedPrice)
 						: (0, emotion_react_browser_esm.tZ)(
@@ -4531,10 +4612,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'skeleton' }, 'Skeleton'),
 					(0, esm.kt)('p', null, 'Renders a div with a animation for use when building loading skeletons. '),
@@ -4713,10 +4795,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'carousel' }, 'Carousel'),
 					(0, esm.kt)(
@@ -5134,15 +5217,16 @@
 				deepmerge__WEBPACK_IMPORTED_MODULE_11___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_11__),
 				swiper_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
 				swiper_core__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/components/a11y/a11y.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
 				_utilities__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/utilities/defined.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/providers/cache.tsx'),
 				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
@@ -5195,6 +5279,7 @@
 						margin: 0,
 						padding: 0,
 						overflow: 'hidden',
+						'.swiper-notification': { position: 'absolute', left: '100000000000000px' },
 						'&.ss__carousel-vertical': {
 							flexDirection: 'column',
 							'.swiper-slide': { display: 'flex', justifyContent: 'center', alignItems: 'center' },
@@ -5346,12 +5431,20 @@
 							),
 						},
 						swiperModulesUnfiltered = modules
-							? [swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z].concat(modules)
-							: [swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z],
+							? [
+									swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z,
+									swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z,
+									swiper_core__WEBPACK_IMPORTED_MODULE_18__.Z,
+							  ].concat(modules)
+							: [
+									swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z,
+									swiper_core__WEBPACK_IMPORTED_MODULE_17__.Z,
+									swiper_core__WEBPACK_IMPORTED_MODULE_18__.Z,
+							  ],
 						swiperModules = swiperModulesUnfiltered.filter(function (module, pos) {
 							return swiperModulesUnfiltered.indexOf(module) === pos;
 						});
-					swiper_core__WEBPACK_IMPORTED_MODULE_18__.Z.use(swiperModules);
+					swiper_core__WEBPACK_IMPORTED_MODULE_19__.Z.use(swiperModules);
 					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
 						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
 						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_8__.sO)(null),
@@ -5361,7 +5454,7 @@
 						pagination && (pagination = 'object' == typeof pagination ? Object.assign({ clickable: !0 }, pagination) : { clickable: !0 }),
 						null != children && children.length
 							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_19__.n,
+									_providers__WEBPACK_IMPORTED_MODULE_20__.n,
 									null,
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
 										'div',
@@ -5392,13 +5485,13 @@
 												},
 												prevButton ||
 													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_21__.J,
 														Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
 													)
 											)
 										),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
-											swiper_react__WEBPACK_IMPORTED_MODULE_21__.t,
+											swiper_react__WEBPACK_IMPORTED_MODULE_22__.t,
 											Object.assign(
 												{
 													centerInsufficientSlides: !0,
@@ -5419,7 +5512,7 @@
 												{ pagination }
 											),
 											children.map(function (child) {
-												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_22__.o, null, child);
+												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_23__.o, null, child);
 											})
 										),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
@@ -5442,7 +5535,7 @@
 												},
 												nextButton ||
 													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_12__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_21__.J,
 														Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
 													)
 											)
@@ -5497,10 +5590,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'checkbox' }, 'Checkbox'),
 					(0, esm.kt)('p', null, 'Renders a native or custom checkbox.'),
@@ -5549,6 +5643,15 @@
 						' callback.'
 					),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox disabled={true} />\n')),
+					(0, esm.kt)('h3', { id: 'disablea11y' }, 'disableA11y'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'disableA11y'),
+						' prop specifies a boolean to disable the autoset ally properties.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox disableA11y={true} />\n')),
 					(0, esm.kt)('h3', { id: 'size' }, 'size'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'size'), ' prop will set the custom checkbox size.'),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Checkbox size={'16px'} />\n")),
@@ -5688,6 +5791,11 @@
 							control: { type: 'boolean' },
 						},
 						onClick: { description: 'Checkbox click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
+						disableA11y: {
+							description: 'boolean to disable autoset ally properties',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 					},
 					componentArgs.p
 				),
@@ -5729,7 +5837,8 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/providers/cache.tsx'),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx');
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -5816,7 +5925,7 @@
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_16__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
-							{ size: '12px', startChecked: !1 },
+							{ size: '12px', startChecked: !1, disableA11y: !1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.checkbox,
@@ -5837,6 +5946,7 @@
 						size = props.size,
 						startChecked = props.startChecked,
 						_native = props.native,
+						disableA11y = props.disableA11y,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -5908,10 +6018,15 @@
 											onClick: function onClick(e) {
 												return clickFunc(e);
 											},
+											ref: function ref(e) {
+												return disableA11y ? null : (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__.H)(e);
+											},
+											'aria-label': (disabled ? 'disabled' : '') + ' ' + (checkedState ? 'checked' : 'unchecked') + ' checkbox',
+											role: 'checkbox',
 										}),
 										checkedState
 											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.tZ)(
-													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
+													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
 													Object.assign({}, subProps.icon)
 											  )
 											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.tZ)('span', { className: 'ss__checkbox__empty' })
@@ -6241,10 +6356,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'errorhandler' }, 'ErrorHandler'),
 					(0, esm.kt)('p', null, 'Renders error messages.'),
@@ -6425,10 +6541,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-grid-options' }, 'Facet Grid Options'),
 					(0, esm.kt)('p', null, 'Renders a grid of facet options.'),
@@ -6437,15 +6554,24 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'values'),
-						" prop specifies all facet values where the facet type is 'grid'."
+						" prop specifies all facet values where the facet type is 'grid'. Overrides values passed via the facet prop. "
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetGridOptions values={sizeFacet.values} />\n')
 					),
+					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies the reference to the facet object in the store.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetGridOptions facet={sizeFacet} />\n')),
 					(0, esm.kt)('h3', { id: 'columns' }, 'columns'),
 					(0, esm.kt)(
 						'p',
@@ -6951,8 +7077,14 @@
 					{
 						values: {
 							description: 'Facet.values store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'facet values store array' } },
+							control: { type: 'none' },
+						},
+						facet: {
+							description: 'Facet store reference',
+							type: { required: !1 },
+							table: { type: { summary: 'facet store object' } },
 							control: { type: 'none' },
 						},
 						columns: {
@@ -7127,67 +7259,72 @@
 						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
+						facet = props.facet,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
 						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_grid({ columns, gapSize, theme }), style]),
-						null != values && values.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										'div',
-										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options', className) }),
-										values.map(function (value) {
-											var _value$url, _value$url$link;
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-												'a',
-												Object.assign(
-													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option', {
-															'ss__facet-grid-options__option--filtered': value.filtered,
-														}),
-														onFocus: function onFocus() {
-															return previewOnFocus && value.preview && value.preview();
-														},
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_grid({ columns, gapSize, theme }), style]);
+					var facetValues = values || (null == facet ? void 0 : facet.values);
+					return null != facetValues && facetValues.length
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									'div',
+									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options', className) }),
+									facetValues.map(function (value) {
+										var _value$url, _value$url$link;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+											'a',
+											Object.assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option', {
+														'ss__facet-grid-options__option--filtered': value.filtered,
+													}),
+													'aria-label': value.filtered
+														? 'remove selected filter ' + ((null == facet ? void 0 : facet.label) || '') + ' - ' + value.label
+														: null != facet && facet.label
+														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
+														: 'filter by ' + value.label,
+												},
+												valueProps,
+												{
+													onMouseEnter: function onMouseEnter(e) {
+														return previewOnFocus && valueProps.onMouseEnter(e, value);
 													},
-													valueProps,
-													{
-														href:
-															null === (_value$url = value.url) ||
-															void 0 === _value$url ||
-															null === (_value$url$link = _value$url.link) ||
-															void 0 === _value$url$link
-																? void 0
-																: _value$url$link.href,
-														onClick: function onClick(e) {
-															var _value$url2, _value$url2$link;
-															null === (_value$url2 = value.url) ||
-																void 0 === _value$url2 ||
-																null === (_value$url2$link = _value$url2.link) ||
-																void 0 === _value$url2$link ||
-																_value$url2$link.onClick(e),
-																_onClick && _onClick(e);
-														},
-													}
-												),
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													'span',
-													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option__value', {
-															'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-														}),
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
 													},
-													value.label
-												)
-											);
-										})
-									)
-							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
-					);
+												}
+											),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'span',
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-grid-options__option__value', {
+														'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+													}),
+												},
+												value.label
+											)
+										);
+									})
+								)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null);
 				});
 		},
 		'./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': (
@@ -7247,10 +7384,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
 					(0, esm.kt)('p', null, 'Renders a list of hierarchy options.'),
@@ -7259,14 +7397,27 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'values'),
-						" prop specifies all facet values where the facet type is 'hierarchy'."
+						" prop specifies all facet values where the facet type is 'hierarchy'. Overrides values passed via the facet prop. "
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetHierarchyOptions values={hierarchyFacet.values} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies the reference to the facet object in the store.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetHierarchyOptions facet={hierarchyFacet} />\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidecount' }, 'hideCount'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideCount'), ' prop will disable the facet count values.'),
@@ -7758,9 +7909,15 @@
 					{
 						values: {
 							description: 'Facet.values store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'object' } },
 							control: { type: 'object' },
+						},
+						facet: {
+							description: 'Facet store reference',
+							type: { required: !1 },
+							table: { type: { summary: 'facet store object' } },
+							control: { type: 'none' },
 						},
 						hideCount: {
 							defaultValue: !1,
@@ -7904,74 +8061,81 @@
 						disableStyles = props.disableStyles,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
+						facet = props.facet,
 						className = props.className,
 						style = props.style,
 						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_hierarchy({ theme }), style]),
-						null != values && values.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										'div',
-										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-hierarchy-options', className),
-										}),
-										values.map(function (value) {
-											var _value$url, _value$url$link;
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-												'a',
-												Object.assign(
-													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
-															'ss__facet-hierarchy-options__option',
-															{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-															{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
-														),
-														href:
-															null === (_value$url = value.url) ||
-															void 0 === _value$url ||
-															null === (_value$url$link = _value$url.link) ||
-															void 0 === _value$url$link
-																? void 0
-																: _value$url$link.href,
-														onClick: function onClick(e) {
-															var _value$url2, _value$url2$link;
-															null === (_value$url2 = value.url) ||
-																void 0 === _value$url2 ||
-																null === (_value$url2$link = _value$url2.link) ||
-																void 0 === _value$url2$link ||
-																_value$url2$link.onClick(e),
-																_onClick && _onClick(e);
-														},
-														onFocus: function onFocus() {
-															return previewOnFocus && value.preview && value.preview();
-														},
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_hierarchy({ theme }), style]);
+					var facetValues = values || (null == facet ? void 0 : facet.values);
+					return null != facetValues && facetValues.length
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									'div',
+									Object.assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-hierarchy-options', className),
+									}),
+									facetValues.map(function (value) {
+										var _value$url, _value$url$link;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+											'a',
+											Object.assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
+														'ss__facet-hierarchy-options__option',
+														{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+														{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+													),
+													'aria-label': value.filtered
+														? 'remove selected filter ' + ((null == facet ? void 0 : facet.label) || '') + ' - ' + value.label
+														: null != facet && facet.label
+														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
+														: 'filter by ' + value.label,
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
 													},
-													valueProps
-												),
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													'span',
-													{ className: 'ss__facet-hierarchy-options__option__value' },
-													value.label,
-													!hideCount &&
-														(null == value ? void 0 : value.count) > 0 &&
-														!value.filtered &&
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-															'span',
-															{ className: 'ss__facet-hierarchy-options__option__value__count' },
-															'(',
-															value.count,
-															')'
-														)
-												)
-											);
-										})
-									)
-							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
-					);
+												},
+												valueProps,
+												{
+													onMouseEnter: function onMouseEnter(e) {
+														return previewOnFocus && valueProps.onMouseEnter(e, value);
+													},
+												}
+											),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'span',
+												{ className: 'ss__facet-hierarchy-options__option__value' },
+												value.label,
+												!hideCount &&
+													(null == value ? void 0 : value.count) > 0 &&
+													!value.filtered &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+														'span',
+														{ className: 'ss__facet-hierarchy-options__option__value__count' },
+														'(',
+														value.count,
+														')'
+													)
+											)
+										);
+									})
+								)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null);
 				});
 		},
 		'./src/components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': (
@@ -8030,10 +8194,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-list-options' }, 'Facet List Options'),
 					(0, esm.kt)('p', null, 'Renders a list of facet options.'),
@@ -8044,15 +8209,24 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'values'),
-						" prop specifies all facet values where the facet type is 'list'."
+						" prop specifies all facet values where the facet type is 'list'. Overrides values passed via the facet prop. "
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetListOptions values={listFacet.values} />\n')
 					),
+					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies the reference to the facet object in the store.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetListOptions facet={listFacet} />\n')),
 					(0, esm.kt)('h3', { id: 'hidecheckbox' }, 'hideCheckbox'),
 					(0, esm.kt)(
 						'p',
@@ -8568,8 +8742,14 @@
 					{
 						values: {
 							description: 'Facet.values store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'facet values store array' } },
+							control: { type: 'none' },
+						},
+						facet: {
+							description: 'Facet store reference',
+							type: { required: !1 },
+							table: { type: { summary: 'facet store object' } },
 							control: { type: 'none' },
 						},
 						hideCheckbox: {
@@ -8709,6 +8889,7 @@
 						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
+						facet = props.facet,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -8723,73 +8904,77 @@
 							),
 						},
 						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_list({ theme, hideCheckbox }), style]),
-						null != values && values.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-									_providers__WEBPACK_IMPORTED_MODULE_12__.n,
-									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										'div',
-										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options', className) }),
-										values.map(function (value) {
-											var _value$url, _value$url$link;
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-												'a',
-												Object.assign(
-													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options__option', {
-															'ss__facet-list-options__option--filtered': value.filtered,
-														}),
-														onFocus: function onFocus() {
-															return previewOnFocus && value.preview && value.preview();
-														},
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_list({ theme, hideCheckbox }), style]);
+					var facetValues = values || (null == facet ? void 0 : facet.values);
+					return null != facetValues && facetValues.length
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_12__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									'div',
+									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options', className) }),
+									facetValues.map(function (value) {
+										var _value$url, _value$url$link;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+											'a',
+											Object.assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-list-options__option', {
+														'ss__facet-list-options__option--filtered': value.filtered,
+													}),
+													'aria-label': value.filtered
+														? 'remove selected filter ' + ((null == facet ? void 0 : facet.label) || '') + ' - ' + value.label
+														: null != facet && facet.label
+														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
+														: 'filter by ' + value.label,
+												},
+												valueProps,
+												{
+													onMouseEnter: function onMouseEnter(e) {
+														return previewOnFocus && valueProps.onMouseEnter(e, value);
 													},
-													valueProps,
-													{
-														href:
-															null === (_value$url = value.url) ||
-															void 0 === _value$url ||
-															null === (_value$url$link = _value$url.link) ||
-															void 0 === _value$url$link
-																? void 0
-																: _value$url$link.href,
-														onClick: function onClick(e) {
-															var _value$url2, _value$url2$link;
-															null === (_value$url2 = value.url) ||
-																void 0 === _value$url2 ||
-																null === (_value$url2$link = _value$url2.link) ||
-																void 0 === _value$url2$link ||
-																_value$url2$link.onClick(e),
-																_onClick && _onClick(e);
-														},
-													}
-												),
-												!hideCheckbox &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__.X,
-														Object.assign({}, subProps.checkbox, { checked: value.filtered })
-													),
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
+												}
+											),
+											!hideCheckbox &&
 												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													'span',
-													{ className: 'ss__facet-list-options__option__value' },
-													value.label,
-													!hideCount &&
-														(null == value ? void 0 : value.count) > 0 &&
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-															'span',
-															{ className: 'ss__facet-list-options__option__value__count' },
-															'(',
-															value.count,
-															')'
-														)
-												)
-											);
-										})
-									)
-							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null)
-					);
+													_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__.X,
+													Object.assign({}, subProps.checkbox, { checked: value.filtered, disableA11y: !0 })
+												),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+												'span',
+												{ className: 'ss__facet-list-options__option__value' },
+												value.label,
+												!hideCount &&
+													(null == value ? void 0 : value.count) > 0 &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+														'span',
+														{ className: 'ss__facet-list-options__option__value__count' },
+														'(',
+														value.count,
+														')'
+													)
+											)
+										);
+									})
+								)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_6__.HY, null);
 				});
 		},
 		'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': (
@@ -8848,10 +9033,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-palette-options' }, 'Facet Palette Options'),
 					(0, esm.kt)('p', null, 'Renders a grid of facet palette options. '),
@@ -8862,14 +9048,27 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'values'),
-						" prop specifies all facet values where the facet type is 'palette'."
+						" prop specifies all facet values where the facet type is 'palette'. Overrides values passed via the facet prop. "
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetPaletteOptions values={paletteFacet.values} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies the reference to the facet object in the store.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetPaletteOptions facet={paletteFacet} />\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidelabel' }, 'hideLabel'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideLabel'), ' prop will disable the facet label.'),
@@ -9422,8 +9621,14 @@
 					{
 						values: {
 							description: 'Facet.values store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'facet values store array' } },
+							control: { type: 'none' },
+						},
+						facet: {
+							description: 'Facet store reference',
+							type: { required: !1 },
+							table: { type: { summary: 'facet store object' } },
 							control: { type: 'none' },
 						},
 						columns: {
@@ -9621,6 +9826,7 @@
 						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
+						facet = props.facet,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -9635,72 +9841,74 @@
 							),
 						},
 						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
-						null != values && values.length
-							? (0, emotion_react_browser_esm.tZ)(
-									cache.n,
-									null,
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										Object.assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
-										values.map(function (value) {
-											var _value$url, _value$url$link;
-											return (0, emotion_react_browser_esm.tZ)(
-												'a',
-												Object.assign(
-													{
-														className: classnames_default()('ss__facet-palette-options__option', {
-															'ss__facet-palette-options__option--filtered': value.filtered,
-														}),
-														'aria-label': value.value,
-														onFocus: function onFocus() {
-															return previewOnFocus && value.preview && value.preview();
-														},
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]);
+					var facetValues = values || (null == facet ? void 0 : facet.values);
+					return null != facetValues && facetValues.length
+						? (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									Object.assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
+									facetValues.map(function (value) {
+										var _value$url, _value$url$link;
+										return (0, emotion_react_browser_esm.tZ)(
+											'a',
+											Object.assign(
+												{
+													className: classnames_default()('ss__facet-palette-options__option', {
+														'ss__facet-palette-options__option--filtered': value.filtered,
+													}),
+													'aria-label': value.filtered
+														? 'remove selected filter ' + ((null == facet ? void 0 : facet.label) || '') + ' - ' + value.label
+														: null != facet && facet.label
+														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
+														: 'filter by ' + value.label,
+												},
+												valueProps,
+												{
+													onMouseEnter: function onMouseEnter(e) {
+														return previewOnFocus && valueProps.onMouseEnter(e, value);
 													},
-													valueProps,
-													{
-														href:
-															null === (_value$url = value.url) ||
-															void 0 === _value$url ||
-															null === (_value$url$link = _value$url.link) ||
-															void 0 === _value$url$link
-																? void 0
-																: _value$url$link.href,
-														onClick: function onClick(e) {
-															var _value$url2, _value$url2$link;
-															null === (_value$url2 = value.url) ||
-																void 0 === _value$url2 ||
-																null === (_value$url2$link = _value$url2.link) ||
-																void 0 === _value$url2$link ||
-																_value$url2$link.onClick(e),
-																_onClick && _onClick(e);
-														},
-													}
-												),
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
+												}
+											),
+											(0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__facet-palette-options__option__wrapper' },
 												(0, emotion_react_browser_esm.tZ)(
 													'div',
-													{ className: 'ss__facet-palette-options__option__wrapper' },
-													(0, emotion_react_browser_esm.tZ)(
-														'div',
-														{
-															className: classnames_default()(
-																'ss__facet-palette-options__option__palette',
-																'ss__facet-palette-options__option__palette--' + handleize(value.value)
-															),
-															css: { background: value.value },
-														},
-														!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
-													)
-												),
-												!hideLabel &&
-													(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
-											);
-										})
-									)
-							  )
-							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
-					);
+													{
+														className: classnames_default()(
+															'ss__facet-palette-options__option__palette',
+															'ss__facet-palette-options__option__palette--' + handleize(value.value)
+														),
+														css: { background: value.value },
+													},
+													!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon))
+												)
+											),
+											!hideLabel && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
+										);
+									})
+								)
+						  )
+						: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null);
 				});
 		},
 		'./src/components/Molecules/FacetSlider/FacetSlider.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -9729,10 +9937,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-slider' }, 'Facet Slider'),
 					(0, esm.kt)(
@@ -10117,6 +10326,7 @@
 				}
 				return o.join('');
 			}
+			var useA11y = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -10472,11 +10682,73 @@
 												handles.map(function (_ref4, idx) {
 													var _facet$range3,
 														_facet$range4,
+														_facet$range5,
+														_facet$range6,
+														_facet$range7,
+														_facet$range8,
 														value = _ref4.value,
 														active = _ref4.active,
 														getHandleProps = _ref4.getHandleProps;
-													return (0,
-													emotion_react_browser_esm.tZ)('button', Object.assign({ type: 'button' }, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })), (0, emotion_react_browser_esm.tZ)('div', { className: classnames_default()('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active }) }, stickyHandleLabel && (0, emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky', 'ss__facet-slider__handle__label--' + idx, { 'ss__facet-slider__handle__label--pinleft': 0 == idx && value == (null == facet || null === (_facet$range3 = facet.range) || void 0 === _facet$range3 ? void 0 : _facet$range3.low) }, { 'ss__facet-slider__handle__label--pinright': 1 == idx && value == (null == facet || null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.high) }) }, sprintf(facet.formatValue, value))));
+													return (0, emotion_react_browser_esm.tZ)(
+														'button',
+														Object.assign(
+															{ type: 'button' },
+															getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } }),
+															{
+																'aria-label': facet.label + ' slider button',
+																'aria-valuetext':
+																	facet.label +
+																	' slider button, current value ' +
+																	value +
+																	', ' +
+																	(null !== (_facet$range3 = facet.range) && void 0 !== _facet$range3 && _facet$range3.low
+																		? 'min value ' +
+																		  (null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.low) +
+																		  ','
+																		: '') +
+																	' ' +
+																	(null !== (_facet$range5 = facet.range) && void 0 !== _facet$range5 && _facet$range5.high
+																		? 'max value ' +
+																		  (null === (_facet$range6 = facet.range) || void 0 === _facet$range6 ? void 0 : _facet$range6.high)
+																		: ''),
+																ref: function ref(e) {
+																	return (0, useA11y.H)(e);
+																},
+															}
+														),
+														(0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: classnames_default()('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active }) },
+															stickyHandleLabel &&
+																(0, emotion_react_browser_esm.tZ)(
+																	'label',
+																	{
+																		className: classnames_default()(
+																			'ss__facet-slider__handle__label',
+																			'ss__facet-slider__handle__label--sticky',
+																			'ss__facet-slider__handle__label--' + idx,
+																			{
+																				'ss__facet-slider__handle__label--pinleft':
+																					0 == idx &&
+																					value ==
+																						(null == facet || null === (_facet$range7 = facet.range) || void 0 === _facet$range7
+																							? void 0
+																							: _facet$range7.low),
+																			},
+																			{
+																				'ss__facet-slider__handle__label--pinright':
+																					1 == idx &&
+																					value ==
+																						(null == facet || null === (_facet$range8 = facet.range) || void 0 === _facet$range8
+																							? void 0
+																							: _facet$range8.high),
+																			}
+																		),
+																	},
+																	sprintf(facet.formatValue, value)
+																)
+														)
+													);
 												})
 											)
 										),
@@ -10552,10 +10824,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'filter' }, 'Filter'),
 					(0, esm.kt)('p', null, 'Renders a facet filter.'),
@@ -11305,6 +11578,7 @@
 										'a',
 										Object.assign({}, styling, {
 											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__filter', className),
+											'aria-label': label ? 'remove selected ' + label + ' filter ' + value : value,
 											onClick: function onClick(e) {
 												(null == link ? void 0 : link.onClick) && link.onClick(e), _onClick && _onClick(e);
 											},
@@ -11312,7 +11586,7 @@
 										}),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
 											_Atoms_Button__WEBPACK_IMPORTED_MODULE_10__.z,
-											Object.assign({}, subProps.button),
+											Object.assign({}, subProps.button, { disableA11y: !0 }),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
 												_Atoms_Icon__WEBPACK_IMPORTED_MODULE_11__.J,
 												Object.assign({}, subProps.icon)
@@ -11463,15 +11737,15 @@
 										'div',
 										Object.assign({}, styling, { className: classnames_default()('ss__pagination', className) }),
 										(0, emotion_react_browser_esm.tZ)(
-											preact_module.HY,
-											null,
+											'nav',
+											{ role: 'navigation', 'aria-label': 'Pagination' },
 											store.previous &&
 												!hidePrev &&
 												(0, emotion_react_browser_esm.tZ)(
 													'a',
 													Object.assign({}, store.previous.url.link, {
 														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
-														'aria-label': 'previous page',
+														'aria-label': 'go to previous page',
 													}),
 													prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-left' }))
 												),
@@ -11484,7 +11758,7 @@
 														'a',
 														Object.assign({}, store.first.url.link, {
 															className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
-															'aria-label': 'first page',
+															'aria-label': 'go to first page',
 														}),
 														firstButton || store.first.number
 													),
@@ -11495,12 +11769,16 @@
 													return page.active
 														? (0, emotion_react_browser_esm.tZ)(
 																'span',
-																{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
+																{
+																	className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active'),
+																	'aria-label': 'go to page ' + page.number,
+																	'aria-current': 'true',
+																},
 																page.number
 														  )
 														: (0, emotion_react_browser_esm.tZ)(
 																'a',
-																Object.assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+																Object.assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'go to page ' + page.number }),
 																page.number
 														  );
 												}),
@@ -11514,7 +11792,7 @@
 														'a',
 														Object.assign({}, store.last.url.link, {
 															className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
-															'aria-label': 'last page',
+															'aria-label': 'go to last page ' + store.last.number,
 														}),
 														lastButton || store.last.number
 													)
@@ -11525,7 +11803,7 @@
 													'a',
 													Object.assign({}, store.next.url.link, {
 														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
-														'aria-label': 'next page',
+														'aria-label': 'go to next page',
 													}),
 													nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: 'angle-right' }))
 												)
@@ -11554,10 +11832,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'pagination' }, 'Pagination'),
 					(0, esm.kt)('p', null, 'Renders pagination page links for the given search response. '),
@@ -12321,10 +12600,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'result' }, 'Result'),
 					(0, esm.kt)('p', null, 'Renders a single product card. '),
@@ -13292,10 +13572,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'searchinput' }, 'SearchInput'),
 					(0, esm.kt)('p', null, 'Renders an input element'),
@@ -13519,7 +13800,8 @@
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
 				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
-				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx');
+				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				useA11y = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _toConsumableArray(arr) {
 				return (
 					(function _arrayWithoutHoles(arr) {
@@ -13719,122 +14001,149 @@
 							option != selection && onSelect && onSelect(e, option), setSelection(option), !stayOpenOnSelection && setOpen(!1);
 						},
 						styling = {};
-					return (
-						disableStyles
-							? style && (styling.css = [style])
-							: (styling.css = _native ? [CSS_native(), style] : [CSS_select({ color, backgroundColor, borderColor, theme }), style]),
-						'object' == typeof options && null !== (_options = options) && void 0 !== _options && _options.length
-							? (0, emotion_react_browser_esm.tZ)(
-									cache.n,
-									null,
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										Object.assign({}, styling, { className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className) }),
-										_native
-											? (0, emotion_react_browser_esm.tZ)(
-													preact_module.HY,
-													null,
-													label &&
-														!hideLabelOnSelection &&
+					disableStyles
+						? style && (styling.css = [style])
+						: (styling.css = _native ? [CSS_native(), style] : [CSS_select({ color, backgroundColor, borderColor, theme }), style]);
+					var selectedOptions = options.filter(function (option) {
+						return (null == selection ? void 0 : selection.value) === option.value;
+					});
+					return 'object' == typeof options && null !== (_options = options) && void 0 !== _options && _options.length
+						? (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									Object.assign({}, styling, { className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className) }),
+									_native
+										? (0, emotion_react_browser_esm.tZ)(
+												preact_module.HY,
+												null,
+												label &&
+													!hideLabelOnSelection &&
+													(0, emotion_react_browser_esm.tZ)(
+														'span',
+														{ className: 'ss__select__label' },
+														label,
+														separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
+													),
+												(0, emotion_react_browser_esm.tZ)(
+													'select',
+													{
+														className: 'ss__select__select',
+														disabled: disabled || void 0,
+														onChange: function onChange(e) {
+															var selectElement = e.target,
+																selectedOptionElement = selectElement.options[selectElement.selectedIndex],
+																selectedOption = options
+																	.filter(function (option, index) {
+																		return (
+																			option.label == selectedOptionElement.text &&
+																			(option.value == selectedOptionElement.value || option.value == index)
+																		);
+																	})
+																	.pop();
+															!disabled && makeSelection(e, selectedOption);
+														},
+													},
+													!selection &&
+														clearSelection &&
 														(0, emotion_react_browser_esm.tZ)(
-															'span',
-															{ className: 'ss__select__label' },
-															label,
-															separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
+															'option',
+															{ className: 'ss__select__select__option', selected: !0, value: '' },
+															clearSelection
 														),
-													(0, emotion_react_browser_esm.tZ)(
-														'select',
-														{
-															className: 'ss__select__select',
-															disabled: disabled || void 0,
-															onChange: function onChange(e) {
-																var selectElement = e.target,
-																	selectedOptionElement = selectElement.options[selectElement.selectedIndex],
-																	selectedOption = options
-																		.filter(function (option, index) {
-																			return (
-																				option.label == selectedOptionElement.text &&
-																				(option.value == selectedOptionElement.value || option.value == index)
-																			);
-																		})
-																		.pop();
-																!disabled && makeSelection(e, selectedOption);
-															},
-														},
-														!selection &&
-															clearSelection &&
+													options.map(function (option, index) {
+														var _option$value;
+														return (0,
+														emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null == selection ? void 0 : selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
+													})
+												)
+										  )
+										: (0, emotion_react_browser_esm.tZ)(
+												Dropdown.L,
+												Object.assign({}, subProps.dropdown, {
+													disableClickOutside,
+													open,
+													onToggle: function onToggle(e, state) {
+														return setOpen(function (prev) {
+															return null != state ? state : !prev;
+														});
+													},
+													onClick: function onClick(e) {
+														return setOpen(function (prev) {
+															return !prev;
+														});
+													},
+													disableA11y: !0,
+													button: (0, emotion_react_browser_esm.tZ)(
+														Button.z,
+														Object.assign({}, subProps.button, { disableA11y: !0 }),
+														label &&
+															!hideLabelOnSelection &&
 															(0, emotion_react_browser_esm.tZ)(
-																'option',
-																{ className: 'ss__select__select__option', selected: !0, value: '' },
-																clearSelection
-															),
-														options.map(function (option, index) {
-															var _option$value;
-															return (0,
-															emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null == selection ? void 0 : selection.value) === option.value, value: null !== (_option$value = option.value) && void 0 !== _option$value ? _option$value : index }, option.label);
-														})
-													)
-											  )
-											: (0, emotion_react_browser_esm.tZ)(
-													Dropdown.L,
-													Object.assign({}, subProps.dropdown, {
-														disableClickOutside,
-														open,
-														onToggle: function onToggle(e, state) {
-															return setOpen(function (prev) {
-																return null != state ? state : !prev;
-															});
-														},
-														onClick: function onClick(e) {
-															return setOpen(function (prev) {
-																return !prev;
-															});
-														},
-														button: (0, emotion_react_browser_esm.tZ)(
-															Button.z,
-															Object.assign({}, subProps.button),
-															label &&
-																!hideLabelOnSelection &&
-																(0, emotion_react_browser_esm.tZ)(
-																	'span',
-																	{ className: 'ss__select__label' },
-																	label,
-																	separator &&
-																		selection &&
-																		(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
-																),
-															selection &&
-																(0, emotion_react_browser_esm.tZ)(
-																	'span',
-																	{ className: 'ss__select__selection' },
-																	null == selection ? void 0 : selection.label
-																),
-															(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
-														),
-													}),
-													(0, emotion_react_browser_esm.tZ)(
-														'ul',
-														{ className: 'ss__select__select' },
-														options.map(function (option) {
-															return (0, emotion_react_browser_esm.tZ)(
-																'li',
+																'span',
 																{
-																	className: classnames_default()('ss__select__select__option', {
-																		'ss__select__select__option--selected': (null == selection ? void 0 : selection.value) === option.value,
-																	}),
-																	onClick: function onClick(e) {
-																		return !disabled && makeSelection(e, option);
+																	className: 'ss__select__label',
+																	ref: function ref(e) {
+																		return (0, useA11y.H)(e);
 																	},
+																	'aria-label':
+																		label +
+																		' dropdown, ' +
+																		options.length +
+																		' options ' +
+																		(selectedOptions.length ? ', Currently selected option is ' + selectedOptions[0].label : ''),
+																	'aria-expanded': open,
+																	role: 'button',
 																},
-																(0, emotion_react_browser_esm.tZ)('span', null, option.label)
-															);
-														})
-													)
-											  )
-									)
-							  )
-							: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null)
-					);
+																label,
+																separator &&
+																	selection &&
+																	(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
+															),
+														selection &&
+															(0, emotion_react_browser_esm.tZ)(
+																'span',
+																{ className: 'ss__select__selection' },
+																null == selection ? void 0 : selection.label
+															),
+														(0, emotion_react_browser_esm.tZ)(Icon.J, Object.assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
+													),
+												}),
+												(0, emotion_react_browser_esm.tZ)(
+													'ul',
+													{ className: 'ss__select__select' },
+													options.map(function (option, idx) {
+														return (0, emotion_react_browser_esm.tZ)(
+															'li',
+															{
+																ref: function ref(e) {
+																	return (0, useA11y.H)(e);
+																},
+																role: 'link',
+																'aria-label':
+																	((null == selection ? void 0 : selection.value) === option.value ? 'selected option,' : '') +
+																	' option ' +
+																	(idx + 1) +
+																	' of ' +
+																	options.length +
+																	', ' +
+																	option.label,
+																className: classnames_default()('ss__select__select__option', {
+																	'ss__select__select__option--selected': (null == selection ? void 0 : selection.value) === option.value,
+																}),
+																onClick: function onClick(e) {
+																	return !disabled && makeSelection(e, option);
+																},
+															},
+															(0, emotion_react_browser_esm.tZ)('span', null, option.label)
+														);
+													})
+												)
+										  )
+								)
+						  )
+						: (0, emotion_react_browser_esm.tZ)(preact_module.HY, null);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -13856,10 +14165,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'select' }, 'Select'),
 					(0, esm.kt)('p', null, 'Renders a native or custom select dropdown.'),
@@ -14808,7 +15118,8 @@
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
@@ -14932,28 +15243,30 @@
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			var CSS_slideout = function slideout(_ref) {
-				var isActive = _ref.isActive,
-					width = _ref.width,
-					transitionSpeed = _ref.transitionSpeed,
-					slideDirection = _ref.slideDirection;
-				return (0, emotion_react_browser_esm.iv)({
-					display: 'block',
-					position: 'fixed',
-					transition: (slideDirection || 'left') + ' ' + transitionSpeed,
-					left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
-					right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
-					bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
-					top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
-					height: '100%',
-					zIndex: '10004',
-					width: '90%',
-					maxWidth: width,
-					padding: '10px',
-					background: '#fff',
-					boxSizing: 'border-box',
-					overflowY: 'auto',
-				});
+			var CSS = {
+				slideout: function slideout(_ref) {
+					var isActive = _ref.isActive,
+						width = _ref.width,
+						transitionSpeed = _ref.transitionSpeed,
+						slideDirection = _ref.slideDirection;
+					return (0, emotion_react_browser_esm.iv)({
+						display: 'block',
+						position: 'fixed',
+						transition: (slideDirection || 'left') + ' ' + transitionSpeed,
+						left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
+						right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
+						bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
+						top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
+						height: '100%',
+						zIndex: '10004',
+						width: '90%',
+						maxWidth: width,
+						padding: '10px',
+						background: '#fff',
+						boxSizing: 'border-box',
+						overflowY: 'auto',
+					});
+				},
 			};
 			function Slideout(properties) {
 				var _globalTheme$componen,
@@ -15007,8 +15320,17 @@
 					_useState2 = Slideout_slicedToArray((0, hooks_module.eJ)(Boolean(active)), 2),
 					isActive = _useState2[0],
 					setActive = _useState2[1],
+					_useState4 = Slideout_slicedToArray((0, hooks_module.eJ)(Boolean(active)), 2),
+					renderContent = _useState4[0],
+					setRenderContent = _useState4[1],
 					toggleActive = function toggleActive() {
-						setActive(!isActive), (document.body.style.overflow = isActive ? 'hidden' : '');
+						isActive
+							? setTimeout(function () {
+									setRenderContent(!renderContent);
+							  }, 250)
+							: setRenderContent(!isActive),
+							setActive(!isActive),
+							(document.body.style.overflow = isActive ? 'hidden' : '');
 					},
 					isVisible = (function useMediaQuery(query, runOnCleanup) {
 						if ('undefined' == typeof window || void 0 === window.matchMedia) return !1;
@@ -15038,7 +15360,7 @@
 				return (
 					disableStyles
 						? style && (styling.css = [style])
-						: (styling.css = [CSS_slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
+						: (styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
 					isVisible
 						? (0, emotion_react_browser_esm.tZ)(
 								cache.n,
@@ -15059,7 +15381,7 @@
 								(0, emotion_react_browser_esm.tZ)(
 									'div',
 									Object.assign({ className: classnames_default()('ss__slideout', className, { 'ss__slideout--active': isActive }) }, styling),
-									(0, cloneWithProps.d)(children, { toggleActive, active: isActive })
+									renderContent && (0, cloneWithProps.d)(children, { toggleActive, active: isActive })
 								),
 								(0, emotion_react_browser_esm.tZ)(Overlay.a, Object.assign({}, subProps.overlay, { active: isActive, onClick: toggleActive }))
 						  )
@@ -15084,10 +15406,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'slideout' }, 'Slideout'),
 					(0, esm.kt)('p', null, 'Renders a slideout with a background overlay. Typically used for a mobile menu slideout. '),
@@ -15562,10 +15885,10 @@
 							768: { columns: 2, rows: 3 },
 						},
 						valueProps = {
-							onMouseEnter: function onMouseEnter(e) {
+							onMouseEnter: function onMouseEnter(e, activeTerm) {
 								clearTimeout(delayTimeout),
 									(delayTimeout = window.setTimeout(function () {
-										e.target.focus();
+										e.target.focus(), activeTerm && activeTerm.preview && activeTerm.preview();
 									}, 333));
 							},
 							onMouseLeave: function onMouseLeave() {
@@ -15681,6 +16004,7 @@
 						filters = _controller$store.filters,
 						facets = _controller$store.facets,
 						state = _controller$store.state,
+						loading = _controller$store.loading,
 						history = controller.store.history || [];
 					controller &&
 						'string' == typeof input &&
@@ -15694,25 +16018,6 @@
 								(null == trending ? void 0 : trending.length) > 0 ||
 								(null == history ? void 0 : history.length) > 0 ||
 								(state.input && controller.store.loaded)),
-						showTrending = !1;
-					((null != trending && trending.length && (retainTrending || (!results.length && !state.input))) ||
-						(null != trending && trending.length && !terms.length)) &&
-						(showTrending = !0);
-					var showHistory = !1;
-					((null != history && history.length && (retainHistory || (!results.length && !state.input))) ||
-						(null != history && history.length && !terms.length)) &&
-						(showHistory = !0);
-					var facetsToShow = facets.length
-							? facets.filter(function (facet) {
-									return facet.display !== types.uw.SLIDER;
-							  })
-							: [],
-						onlyTerms = ((null == trending ? void 0 : trending.length) || history.length) && !loaded,
-						showResults = Boolean(
-							results.length > 0 ||
-								Object.keys(merchandising.content).length > 0 ||
-								(null == search || null === (_search$query = search.query) || void 0 === _search$query ? void 0 : _search$query.string)
-						),
 						trendingActive =
 							null == trending
 								? void 0
@@ -15728,7 +16033,29 @@
 										.filter(function (term) {
 											return term.active;
 										})
-										.pop();
+										.pop(),
+						showTrending = !1;
+					null != trending &&
+						trending.length &&
+						((retainTrending && controller.store.loaded) || (!results.length && !state.input)) &&
+						(showTrending = !0);
+					var showHistory = !1;
+					null != history &&
+						history.length &&
+						((retainHistory && controller.store.loaded) || (!results.length && !state.input)) &&
+						(showHistory = !0),
+						state.input || (!historyActive && !trendingActive) || ((showHistory = !0), (showTrending = !0));
+					var facetsToShow = facets.length
+							? facets.filter(function (facet) {
+									return facet.display !== types.uw.SLIDER;
+							  })
+							: [],
+						onlyTerms = ((null == trending ? void 0 : trending.length) || history.length) && !loaded && !loading,
+						showResults = Boolean(
+							results.length > 0 ||
+								Object.keys(merchandising.content).length > 0 ||
+								(null == search || null === (_search$query = search.query) || void 0 === _search$query ? void 0 : _search$query.string)
+						);
 					((hideTrending && trendingActive) || (hideHistory && historyActive)) && (showResults = !1);
 					var _search$query2,
 						styling = {};
@@ -15798,8 +16125,8 @@
 																		: null,
 																	(0, emotion_react_browser_esm.tZ)(
 																		'div',
-																		{ className: 'ss__autocomplete__terms__options' },
-																		terms.map(function (term) {
+																		{ className: 'ss__autocomplete__terms__options', role: 'list', 'aria-label': termsTitle },
+																		terms.map(function (term, idx) {
 																			return (0, emotion_react_browser_esm.tZ)(
 																				'div',
 																				{
@@ -15818,9 +16145,11 @@
 																						},
 																						valueProps,
 																						{
-																							onFocus: function onFocus() {
-																								return term.preview();
+																							onMouseEnter: function onMouseEnter(e) {
+																								return valueProps.onMouseEnter(e, term);
 																							},
+																							role: 'link',
+																							'aria-label': 'item ' + (idx + 1) + ' of ' + terms.length + ', ' + term.value,
 																						}
 																					),
 																					emIfy(term.value, state.input || '')
@@ -15843,8 +16172,8 @@
 																		: null,
 																	(0, emotion_react_browser_esm.tZ)(
 																		'div',
-																		{ className: 'ss__autocomplete__terms__options' },
-																		trending.map(function (term) {
+																		{ className: 'ss__autocomplete__terms__options', role: 'list', 'aria-label': trendingTitle },
+																		trending.map(function (term, idx) {
 																			return (0, emotion_react_browser_esm.tZ)(
 																				'div',
 																				{
@@ -15863,9 +16192,11 @@
 																						},
 																						valueProps,
 																						{
-																							onFocus: function onFocus() {
-																								return term.preview();
+																							onMouseEnter: function onMouseEnter(e) {
+																								return valueProps.onMouseEnter(e, term);
 																							},
+																							role: 'link',
+																							'aria-label': 'item ' + (idx + 1) + ' of ' + trending.length + ', ' + term.value,
 																						}
 																					),
 																					emIfy(term.value, state.input || '')
@@ -15888,8 +16219,8 @@
 																		: null,
 																	(0, emotion_react_browser_esm.tZ)(
 																		'div',
-																		{ className: 'ss__autocomplete__terms__options' },
-																		history.map(function (term) {
+																		{ className: 'ss__autocomplete__terms__options', role: 'list', 'aria-label': historyTitle },
+																		history.map(function (term, idx) {
 																			return (0, emotion_react_browser_esm.tZ)(
 																				'div',
 																				{
@@ -15908,9 +16239,11 @@
 																						},
 																						valueProps,
 																						{
-																							onFocus: function onFocus() {
+																							onMouseEnter: function onMouseEnter() {
 																								return term.preview();
 																							},
+																							role: 'link',
+																							'aria-label': 'item ' + (idx + 1) + ' of ' + history.length + ', ' + term.value,
 																						}
 																					),
 																					emIfy(term.value, state.input || '')
@@ -16111,10 +16444,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'autocomplete' }, 'Autocomplete'),
 					(0, esm.kt)(
@@ -17737,10 +18071,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'branchoverride' }, 'BranchOverride'),
 					(0, esm.kt)(
@@ -17981,10 +18316,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet' }, 'Facet'),
 					(0, esm.kt)(
@@ -19043,29 +19379,30 @@
 				classnames__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_12___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_12__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
 					'./src/components/Molecules/FacetListOptions/FacetListOptions.tsx'
 				),
-				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
+				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
 					'./src/components/Molecules/FacetGridOptions/FacetGridOptions.tsx'
 				),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
 					'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.tsx'
 				),
-				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
 					'./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.tsx'
 				),
-				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
-				_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
+				_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
-				_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/types.ts'),
+				_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/types.ts'),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/utilities/defined.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				_utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/hooks/useA11y.tsx'),
 				CSS_facet = function facet(_ref) {
 					var _theme$colors,
 						color = _ref.color,
@@ -19112,6 +19449,8 @@
 						_props9,
 						_globalTheme$componen10,
 						_props10,
+						_facet$values,
+						_facet$values2,
 						_facet$overflow2,
 						_facet$overflow4,
 						_facet$overflow5,
@@ -19286,13 +19625,30 @@
 										onClick: function onClick(e) {
 											return !disableCollapse && facet.toggleCollapse && (null == facet ? void 0 : facet.toggleCollapse());
 										},
+										disableA11y: !0,
 										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 											'div',
-											{ className: 'ss__facet__header' },
+											{
+												className: 'ss__facet__header',
+												ref: function ref(e) {
+													return (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__.H)(e, disableCollapse ? -1 : 0);
+												},
+												role: 'heading',
+												'aria-level': 3,
+												'aria-label':
+													'currently ' +
+													(null != facet && facet.collapsed ? 'collapsed' : 'open') +
+													' ' +
+													facet.label +
+													' facet dropdown ' +
+													(null !== (_facet$values = facet.values) && void 0 !== _facet$values && _facet$values.length
+														? (null === (_facet$values2 = facet.values) || void 0 === _facet$values2 ? void 0 : _facet$values2.length) + ' options'
+														: ''),
+											},
 											null == facet ? void 0 : facet.label,
 											!disableCollapse &&
 												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
+													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
 													Object.assign({}, subProps.icon, { icon: null != facet && facet.collapsed ? iconExpand : iconCollapse })
 												)
 										),
@@ -19300,7 +19656,7 @@
 									searchable &&
 										searchableFacet.allowableTypes.includes(facet.display) &&
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-											_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_20__.M,
+											_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_21__.M,
 											Object.assign({}, subProps.searchInput, { onChange: searchableFacet.searchFilter, placeholder: 'Search ' + facet.label })
 										),
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
@@ -19308,32 +19664,32 @@
 										{ className: classnames__WEBPACK_IMPORTED_MODULE_12___default()('ss__facet__options', className) },
 										(function () {
 											if (optionsSlot)
-												return (0, _utilities__WEBPACK_IMPORTED_MODULE_21__.d)(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+												return (0, _utilities__WEBPACK_IMPORTED_MODULE_22__.d)(optionsSlot, { facet, valueProps, limit, previewOnFocus });
 											switch (null == facet ? void 0 : facet.display) {
-												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.SLIDER:
+												case _types__WEBPACK_IMPORTED_MODULE_23__.uw.SLIDER:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_23__.C,
+														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_24__.C,
 														Object.assign({}, subProps.facetSlider, { facet })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.GRID:
+												case _types__WEBPACK_IMPORTED_MODULE_23__.uw.GRID:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_24__.v,
-														Object.assign({}, subProps.facetGridOptions, { values: limitedValues })
+														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_25__.v,
+														Object.assign({}, subProps.facetGridOptions, { values: limitedValues, facet })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.PALETTE:
+												case _types__WEBPACK_IMPORTED_MODULE_23__.uw.PALETTE:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_25__.m,
-														Object.assign({}, subProps.facetPaletteOptions, { values: limitedValues })
+														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_26__.m,
+														Object.assign({}, subProps.facetPaletteOptions, { values: limitedValues, facet })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.HIERARCHY:
+												case _types__WEBPACK_IMPORTED_MODULE_23__.uw.HIERARCHY:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_26__.j,
-														Object.assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
+														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_27__.j,
+														Object.assign({}, subProps.facetHierarchyOptions, { values: limitedValues, facet })
 													);
 												default:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_27__.X,
-														Object.assign({}, subProps.facetListOptions, { values: limitedValues })
+														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_28__.X,
+														Object.assign({}, subProps.facetListOptions, { values: limitedValues, facet })
 													);
 											}
 										})()
@@ -19350,14 +19706,17 @@
 													var _facet$overflow3;
 													return null === (_facet$overflow3 = facet.overflow) || void 0 === _facet$overflow3 ? void 0 : _facet$overflow3.toggle();
 												},
+												ref: function ref(e) {
+													return (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__.H)(e);
+												},
 											},
 											overflowSlot
-												? (0, _utilities__WEBPACK_IMPORTED_MODULE_21__.d)(overflowSlot, { facet })
+												? (0, _utilities__WEBPACK_IMPORTED_MODULE_22__.d)(overflowSlot, { facet })
 												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
 														preact__WEBPACK_IMPORTED_MODULE_11__.HY,
 														null,
 														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
-															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
+															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__.J,
 															Object.assign({}, subProps.showMoreLessIcon, {
 																icon:
 																	((null === (_facet$overflow4 = facet.overflow) || void 0 === _facet$overflow4
@@ -19434,10 +19793,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facets' }, 'Facets'),
 					(0, esm.kt)('p', null, 'Renders all facets utilizing the ', (0, esm.kt)('inlineCode', { parentName: 'p' }, '<Facet />'), ' component.'),
@@ -20205,10 +20565,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'filter-summary' }, 'Filter Summary'),
 					(0, esm.kt)('p', null, "Renders all selected filters including a wrapper with a title and a 'clear all' button. "),
@@ -21201,10 +21562,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendation' }, 'Recommendation'),
 					(0, esm.kt)('p', null, 'Renders a carousel of product recommendations, built using the Carousel Component.'),
@@ -22019,10 +22381,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'results' }, 'Results'),
 					(0, esm.kt)(
@@ -22900,10 +23263,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendationprofiletracker' }, 'RecommendationProfileTracker'),
 					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to the profile.'),
@@ -23521,10 +23885,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendationresulttracker' }, 'RecommendationResultTracker'),
 					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to an individual result within a profile.'),
@@ -24123,6 +24488,27 @@
 					);
 				});
 		},
+		'./src/hooks/useA11y.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			function useA11y(elem, tabIndex) {
+				var _elem$attributes;
+				if (!document.querySelector('#ssA11yFocusStyle')) {
+					var style = document.createElement('style');
+					(style.type = 'text/css'),
+						(style.id = 'ssA11yFocusStyle'),
+						(style.innerHTML = '[ssA11y]:focus-visible { outline: -webkit-focus-ring-color auto 1px !important; }'),
+						document.getElementsByTagName('head')[0].appendChild(style);
+				}
+				!elem ||
+					(null !== (_elem$attributes = elem.attributes) && void 0 !== _elem$attributes && _elem$attributes.ssA11y) ||
+					(elem.setAttribute('ssA11y', !0),
+					elem.setAttribute('tabIndex', '' + (tabIndex || 0)),
+					elem.addEventListener('keydown', function (event) {
+						('Space' !== event.code && 'Enter' !== event.code) || elem.click();
+					}));
+			}
+			__webpack_require__.d(__webpack_exports__, { H: () => useA11y });
+		},
 		'./src/hooks/useDisplaySettings.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { o: () => useDisplaySettings });
@@ -24142,7 +24528,8 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			var preact_hooks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js');
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_this = void 0;
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -24257,7 +24644,7 @@
 						for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
 						clearTimeout(timer),
 							(timer = window.setTimeout(function () {
-								func.apply(undefined, args);
+								func.apply(_this, args);
 							}, timeout));
 					};
 				};
@@ -24332,8 +24719,7 @@
 			var useIntersection = function useIntersection(ref) {
 				var rootMargin = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : '0px',
 					fireOnce = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-					_useState = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.eJ)(!1),
-					_useState2 = _slicedToArray(_useState, 2),
+					_useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.eJ)(!1), 2),
 					isIntersecting = _useState2[0],
 					setIntersecting = _useState2[1];
 				return (
@@ -25160,9 +25546,6 @@
 					});
 				};
 			}
-			function AbstractController_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
 			function AbstractController_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -25203,7 +25586,9 @@
 							tracker = _ref.tracker,
 							context = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
 						if (
-							(AbstractController_classCallCheck(this, AbstractController),
+							((function AbstractController_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, AbstractController),
 							(this.type = 'abstract'),
 							(this.targeters = {}),
 							(this._initialized = !1),
@@ -25518,8 +25903,7 @@
 				};
 			}
 			var flags = getFlags(),
-				featureFlags_cookies = (flags.cors(), flags.cookies()),
-				featureFlags_storage = flags.storage();
+				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() };
 			function _createForOfIteratorHelper(o, allowArrayLike) {
 				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
 				if (!it) {
@@ -25610,7 +25994,7 @@
 				var arg, key;
 			}
 			var StorageType,
-				utils_cookies = cookies,
+				utils = { cookies },
 				StorageStore = (function () {
 					function StorageStore(config) {
 						var _config$cookie, _config$cookie2;
@@ -25640,22 +26024,22 @@
 								config.type)
 							) {
 								case StorageType.SESSION:
-									(this.type = featureFlags_storage ? config.type : null),
+									(this.type = featureFlags.storage ? config.type : null),
 										this.type &&
 											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
 											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.LOCAL:
-									(this.type = featureFlags_storage ? config.type : null),
+									(this.type = featureFlags.storage ? config.type : null),
 										this.type &&
 											!window.localStorage.getItem(this.key) &&
 											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
 											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.COOKIE:
-									if (featureFlags_cookies) {
+									if (featureFlags.cookies) {
 										this.type = config.type;
-										var data = utils_cookies.get(this.key);
+										var data = utils.cookies.get(this.key);
 										data && (this.state = JSON.parse(data));
 									}
 									break;
@@ -25691,7 +26075,7 @@
 											window.localStorage.setItem(this.key, JSON.stringify(this.state));
 											break;
 										case StorageType.COOKIE:
-											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+											utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
 									}
 								},
 							},
@@ -25708,7 +26092,7 @@
 											this.state = localData ? JSON.parse(localData) : {};
 											break;
 										case StorageType.COOKIE:
-											var data = utils_cookies.get(this.key);
+											var data = utils.cookies.get(this.key);
 											data && (this.state = JSON.parse(data) || {});
 									}
 									var paths = null == path ? void 0 : path.split('.');
@@ -25742,7 +26126,7 @@
 											window.localStorage.removeItem(this.key);
 											break;
 										case StorageType.COOKIE:
-											utils_cookies.unset(this.key);
+											utils.cookies.unset(this.key);
 									}
 									this.state = {};
 								},
@@ -26312,13 +26696,12 @@
 						var NewTarget = _getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return _possibleConstructorReturn(this, result);
+					return (function _possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return _assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function _possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return _assertThisInitialized(self);
 			}
 			function _assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -26343,6 +26726,7 @@
 			var BeaconType,
 				BeaconCategory,
 				ProfilePlacement,
+				API_LIMIT = 500,
 				defaultConfig = {
 					id: 'search',
 					globals: {},
@@ -26359,7 +26743,9 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this$config$settings9,
+						var _this$config$settings8,
+							_this$config$settings9,
+							_this$config$settings10,
 							_this,
 							client = _ref.client,
 							store = _ref.store,
@@ -26378,28 +26764,43 @@
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
-										var _this$config$settings, _result$mappings$core;
-										if (
-											null !== (_this$config$settings = _this.config.settings) &&
-											void 0 !== _this$config$settings &&
-											_this$config$settings.infinite
-										) {
-											var stringyParams = _this.storage.get('lastStringyParams'),
-												storableRequestParams = getStorableRequestParams((stringyParams = JSON.parse(stringyParams))),
-												scrollMap = {};
-											(scrollMap[(stringyParams = JSON.stringify(storableRequestParams))] = window.scrollY),
-												_this.storage.set('scrollMap', scrollMap);
+										var _result$mappings$core,
+											_document,
+											_document$querySelect,
+											target = e.target,
+											href =
+												(null == target ? void 0 : target.getAttribute('href')) ||
+												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+													? void 0
+													: _result$mappings$core.url),
+											scrollMap = {},
+											selector = (function generateHrefSelector(element, href) {
+												var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
+													level = 0,
+													elem = element;
+												for (; elem && level < levels; ) {
+													if (elem.querySelector('[href*="' + href + '"]'))
+														return elem.tagName + '.' + elem.classList.value.replace(/\s/g, '.') + ' [href*="' + href + '"]';
+													(elem = elem.parentElement), level++;
+												}
+												return;
+											})(target, href),
+											domRect = selector
+												? null === (_document = document) ||
+												  void 0 === _document ||
+												  null === (_document$querySelect = _document.querySelector(selector)) ||
+												  void 0 === _document$querySelect
+													? void 0
+													: _document$querySelect.getBoundingClientRect()
+												: void 0;
+										if (selector && href && domRect) {
+											var storableRequestParams = getStorableRequestParams(JSON.parse(_this.storage.get('lastStringyParams')));
+											scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href, selector };
 										}
+										_this.storage.set('scrollMap', scrollMap);
 										var _result$attributes = result.attributes,
 											intellisuggestData = _result$attributes.intellisuggestData,
 											intellisuggestSignature = _result$attributes.intellisuggestSignature,
-											target = e.target,
-											href =
-												(null == target ? void 0 : target.href) ||
-												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-													? void 0
-													: _result$mappings$core.url) ||
-												void 0,
 											event = _this.tracker.track.product.click({ intellisuggestData, intellisuggestSignature, href });
 										return (
 											_this.eventManager.fire('track.product.click', {
@@ -26420,26 +26821,26 @@
 										_this$params$search2,
 										_this$params$search2$,
 										params,
-										_this$config$settings2,
+										_this$config$settings,
 										_params$pagination,
-										_this$config$settings8,
+										_this$config$settings7,
 										stringyParams,
 										prevStringyParams,
 										searchProfile,
 										meta,
 										response,
+										_this$config$settings2,
 										_this$config$settings3,
-										_this$config$settings4,
 										_params$pagination2,
-										_this$config$settings5,
+										_this$config$settings4,
 										preventBackfill,
 										dontBackfill,
 										backfills,
 										pageSize,
 										_params$pagination3,
 										_params$pagination4,
+										_this$config$settings5,
 										_this$config$settings6,
-										_this$config$settings7,
 										_params$pagination5,
 										_meta$pagination,
 										_meta,
@@ -26515,9 +26916,9 @@
 														if (
 															((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 															!(
-																null !== (_this$config$settings2 = _this.config.settings) &&
-																void 0 !== _this$config$settings2 &&
-																_this$config$settings2.infinite &&
+																null !== (_this$config$settings = _this.config.settings) &&
+																void 0 !== _this$config$settings &&
+																_this$config$settings.infinite &&
 																null !== (_params$pagination = params.pagination) &&
 																void 0 !== _params$pagination &&
 																_params$pagination.page &&
@@ -26529,15 +26930,15 @@
 														}
 														if (
 															((preventBackfill =
-																(null === (_this$config$settings3 = _this.config.settings.infinite) || void 0 === _this$config$settings3
+																(null === (_this$config$settings2 = _this.config.settings.infinite) || void 0 === _this$config$settings2
 																	? void 0
-																	: _this$config$settings3.backfill) &&
+																	: _this$config$settings2.backfill) &&
 																!_this.store.results.length &&
 																params.pagination.page > _this.config.settings.infinite.backfill),
 															(dontBackfill = !(
-																(null !== (_this$config$settings4 = _this.config.settings.infinite) &&
-																	void 0 !== _this$config$settings4 &&
-																	_this$config$settings4.backfill) ||
+																(null !== (_this$config$settings3 = _this.config.settings.infinite) &&
+																	void 0 !== _this$config$settings3 &&
+																	_this$config$settings3.backfill) ||
 																_this.store.results.length
 															)),
 															!preventBackfill && !dontBackfill)
@@ -26555,9 +26956,9 @@
 																	: _params$pagination2.pageSize) ||
 																_this.store.pagination.pageSize ||
 																_this.store.pagination.defaultPageSize),
-															null === (_this$config$settings5 = _this.config.settings) ||
-																void 0 === _this$config$settings5 ||
-																!_this$config$settings5.infinite.backfill ||
+															null === (_this$config$settings4 = _this.config.settings) ||
+																void 0 === _this$config$settings4 ||
+																!_this$config$settings4.infinite.backfill ||
 																_this.previousResults.length)
 														) {
 															_context.next = 44;
@@ -26576,7 +26977,7 @@
 																	: _meta$pagination.defaultPageSize);
 													case 40:
 														for (
-															pageSize = pageSize > 500 ? 500 : pageSize,
+															pageSize = pageSize > API_LIMIT ? API_LIMIT : pageSize,
 																pagesNeeded =
 																	null !== (_params$pagination3 = params.pagination) &&
 																	void 0 !== _params$pagination3 &&
@@ -26584,12 +26985,12 @@
 																	(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
 																		? void 0
 																		: _params$pagination4.page) >
-																		(null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
+																		(null === (_this$config$settings5 = _this.config.settings) || void 0 === _this$config$settings5
 																			? void 0
-																			: _this$config$settings6.infinite.backfill)
-																		? null === (_this$config$settings7 = _this.config.settings) || void 0 === _this$config$settings7
+																			: _this$config$settings5.infinite.backfill)
+																		? null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
 																			? void 0
-																			: _this$config$settings7.infinite.backfill
+																			: _this$config$settings6.infinite.backfill
 																		: null === (_params$pagination5 = params.pagination) || void 0 === _params$pagination5
 																		? void 0
 																		: _params$pagination5.page,
@@ -26677,9 +27078,9 @@
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
-															null !== (_this$config$settings8 = _this.config.settings) &&
-																void 0 !== _this$config$settings8 &&
-																_this$config$settings8.infinite &&
+															null !== (_this$config$settings7 = _this.config.settings) &&
+																void 0 !== _this$config$settings7 &&
+																_this$config$settings7.infinite &&
 																(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
@@ -26745,11 +27146,11 @@
 								})
 							)),
 							(_this.config = cjs_default()(defaultConfig, _this.config)),
-							null !== (_this$config$settings9 = _this.config.settings) &&
-								void 0 !== _this$config$settings9 &&
-								_this$config$settings9.infinite &&
-								void 0 === _this.config.settings.infinite.restorePosition &&
-								(_this.config.settings.infinite.restorePosition = !0),
+							null !== (_this$config$settings8 = _this.config.settings) &&
+								void 0 !== _this$config$settings8 &&
+								_this$config$settings8.infinite &&
+								void 0 === _this.config.settings.restorePosition &&
+								(_this.config.settings.restorePosition = { enabled: !0 }),
 							_this.store.setConfig(_this.config),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 							_this.storage.set('lastStringyParams', void 0),
@@ -26892,41 +27293,25 @@
 								(function () {
 									var _ref7 = SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-											var _this$config$settings10,
-												_this$config$settings11,
-												storableRequestParams,
-												stringyParams,
-												scrollMap,
-												scrollToPosition,
-												checkCount,
-												heightCheck;
+											var storableRequestParams, stringyParams, scrollMap, elementPosition;
 											return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
 												for (;;)
 													switch ((_context4.prev = _context4.next)) {
 														case 0:
 															return (_context4.next = 2), next();
 														case 2:
-															(search.controller.store.loading = !1),
+															return (
 																_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
 																(storableRequestParams = getStorableRequestParams(search.request)),
 																(stringyParams = JSON.stringify(storableRequestParams)),
-																null !== (_this$config$settings10 = _this.config.settings) &&
-																	void 0 !== _this$config$settings10 &&
-																	null !== (_this$config$settings11 = _this$config$settings10.infinite) &&
-																	void 0 !== _this$config$settings11 &&
-																	_this$config$settings11.restorePosition &&
-																	((scrollMap = _this.storage.get('scrollMap') || {}),
-																	(scrollToPosition = scrollMap[stringyParams]) &&
-																		((checkCount = 0),
-																		(heightCheck = window.setInterval(function () {
-																			document.documentElement.scrollHeight >= scrollToPosition &&
-																				(window.scrollTo(0, scrollToPosition),
-																				_this.log.debug('scrolling to: ', scrollMap[stringyParams]),
-																				window.clearInterval(heightCheck)),
-																				checkCount > 40 && window.clearInterval(heightCheck),
-																				checkCount++;
-																		}, 50))));
-														case 7:
+																(scrollMap = _this.storage.get('scrollMap') || {}),
+																(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
+																(_context4.next = 10),
+																_this.eventManager.fire('restorePosition', { controller: _assertThisInitialized(_this), element: elementPosition })
+															);
+														case 10:
+															search.controller.store.loading = !1;
+														case 11:
 														case 'end':
 															return _context4.stop();
 													}
@@ -26938,6 +27323,118 @@
 									};
 								})()
 							),
+							null !== (_this$config$settings9 = _this.config.settings) &&
+								void 0 !== _this$config$settings9 &&
+								null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
+								void 0 !== _this$config$settings10 &&
+								_this$config$settings10.enabled &&
+								_this.eventManager.on(
+									'restorePosition',
+									(function () {
+										var _ref9 = SearchController_asyncToGenerator(
+											SearchController_regeneratorRuntime().mark(function _callee6(_ref8, next) {
+												var controller, element, scrollToPosition;
+												return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+													for (;;)
+														switch ((_context6.prev = _context6.next)) {
+															case 0:
+																if (
+																	((controller = _ref8.controller),
+																	(element = _ref8.element),
+																	(scrollToPosition = function scrollToPosition() {
+																		return new Promise(
+																			(function () {
+																				var _ref10 = SearchController_asyncToGenerator(
+																					SearchController_regeneratorRuntime().mark(function _callee5(resolve) {
+																						var _element$domRect,
+																							offset,
+																							checkTime,
+																							maxScrolls,
+																							maxCheckCount,
+																							scrollBackCount,
+																							scrolledElem,
+																							checkAndScroll;
+																						return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
+																							for (;;)
+																								switch ((_context5.prev = _context5.next)) {
+																									case 0:
+																										(offset =
+																											(null == element || null === (_element$domRect = element.domRect) || void 0 === _element$domRect
+																												? void 0
+																												: _element$domRect.top) || 0),
+																											500,
+																											(checkTime = 50),
+																											(maxScrolls = Math.ceil(500 / checkTime)),
+																											(maxCheckCount = maxScrolls + 1),
+																											(scrollBackCount = 0),
+																											(scrolledElem = void 0),
+																											(checkAndScroll = function checkAndScroll() {
+																												var elem = document.querySelector(null == element ? void 0 : element.selector);
+																												if ((elem && scrollBackCount++, elem && scrollBackCount < maxCheckCount)) {
+																													var y = elem.getBoundingClientRect().y;
+																													if (y > offset + 1 || y < offset - 1) {
+																														elem.scrollIntoView();
+																														var top = elem.getBoundingClientRect().top;
+																														return window.scrollBy(0, -(offset - top)), (scrolledElem = elem), !0;
+																													}
+																												}
+																												return !1;
+																											});
+																									case 8:
+																										if (!(checkAndScroll() || scrollBackCount <= maxScrolls)) {
+																											_context5.next = 13;
+																											break;
+																										}
+																										return (
+																											(_context5.next = 11),
+																											new Promise(function (resolve) {
+																												return setTimeout(resolve, checkTime);
+																											})
+																										);
+																									case 11:
+																										_context5.next = 8;
+																										break;
+																									case 13:
+																										scrolledElem
+																											? controller.log.debug('restored position to: ', scrolledElem)
+																											: controller.log.debug(
+																													'could not locate element with selector: ',
+																													null == element ? void 0 : element.selector
+																											  ),
+																											resolve();
+																									case 15:
+																									case 'end':
+																										return _context5.stop();
+																								}
+																						}, _callee5);
+																					})
+																				);
+																				return function (_x10) {
+																					return _ref10.apply(this, arguments);
+																				};
+																			})()
+																		);
+																	}),
+																	!element)
+																) {
+																	_context6.next = 5;
+																	break;
+																}
+																return (_context6.next = 5), scrollToPosition();
+															case 5:
+																return (_context6.next = 7), next();
+															case 7:
+															case 'end':
+																return _context6.stop();
+														}
+												}, _callee6);
+											})
+										);
+										return function (_x8, _x9) {
+											return _ref9.apply(this, arguments);
+										};
+									})()
+								),
 							_this.use(_this.config),
 							_this
 						);
@@ -26954,16 +27451,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings12,
-										_this$config$settings13,
+									var _this$config$settings11,
+										_this$config$settings12,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings12 = this.config.settings) &&
+									(null !== (_this$config$settings11 = this.config.settings) &&
+										void 0 !== _this$config$settings11 &&
+										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
 										void 0 !== _this$config$settings12 &&
-										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
-										void 0 !== _this$config$settings13 &&
-										_this$config$settings13.merchandising &&
+										_this$config$settings12.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -27029,7 +27526,7 @@
 				};
 			}
 			function backFillSize(pages, pageSize) {
-				for (var totalResults = pages * pageSize, numPages = Math.ceil(totalResults / 500); totalResults % numPages; ) numPages++;
+				for (var totalResults = pages * pageSize, numPages = Math.ceil(totalResults / API_LIMIT); totalResults % numPages; ) numPages++;
 				return { size: totalResults / numPages, pages: numPages };
 			}
 			function RecommendationController_regeneratorRuntime() {
@@ -27480,13 +27977,12 @@
 						var NewTarget = RecommendationController_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return RecommendationController_possibleConstructorReturn(this, result);
+					return (function RecommendationController_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return RecommendationController_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function RecommendationController_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return RecommendationController_assertThisInitialized(self);
 			}
 			function RecommendationController_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -28516,13 +29012,12 @@
 						var NewTarget = AutocompleteController_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return AutocompleteController_possibleConstructorReturn(this, result);
+					return (function AutocompleteController_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return AutocompleteController_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function AutocompleteController_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return AutocompleteController_assertThisInitialized(self);
 			}
 			function AutocompleteController_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -28538,7 +29033,13 @@
 					AutocompleteController_getPrototypeOf(o)
 				);
 			}
-			var AutocompleteController_defaultConfig = {
+			var INPUT_ATTRIBUTE = 'ss-autocomplete-input',
+				INPUT_DELAY = 200,
+				KEY_ENTER = 13,
+				KEY_ESCAPE = 27,
+				PARAM_ORIGINAL_QUERY = 'oq',
+				PARAM_FALLBACK_QUERY = 'fallbackQuery',
+				AutocompleteController_defaultConfig = {
 					id: 'autocomplete',
 					selector: '',
 					action: '',
@@ -28608,7 +29109,7 @@
 														for (;;)
 															switch ((_context.prev = _context.next)) {
 																case 0:
-																	if (13 != e.keyCode) {
+																	if (e.keyCode != KEY_ENTER) {
 																		_context.next = 29;
 																		break;
 																	}
@@ -28627,13 +29128,13 @@
 																		_context.next = 13;
 																		break;
 																	}
-																	return (_context.next = 7), timeout(201);
+																	return (_context.next = 7), timeout(INPUT_DELAY + 1);
 																case 7:
 																	if (!_this.store.loading) {
 																		_context.next = 12;
 																		break;
 																	}
-																	return (_context.next = 10), timeout(200);
+																	return (_context.next = 10), timeout(INPUT_DELAY);
 																case 10:
 																	_context.next = 7;
 																	break;
@@ -28645,7 +29146,7 @@
 																		  (actionUrl =
 																				null === (_actionUrl = actionUrl) || void 0 === _actionUrl
 																					? void 0
-																					: _actionUrl.set('fallbackQuery', _this.store.terms[0].value))
+																					: _actionUrl.set(PARAM_FALLBACK_QUERY, _this.store.terms[0].value))
 																		: _this.store.search.originalQuery &&
 																		  ((input.value =
 																				null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
@@ -28654,7 +29155,7 @@
 																		  (actionUrl =
 																				null === (_actionUrl2 = actionUrl) || void 0 === _actionUrl2
 																					? void 0
-																					: _actionUrl2.set('oq', _this.store.search.originalQuery.string)));
+																					: _actionUrl2.set(PARAM_ORIGINAL_QUERY, _this.store.search.originalQuery.string)));
 																case 13:
 																	return (
 																		(actionUrl =
@@ -28699,7 +29200,7 @@
 											return _enterKey.apply(this, arguments);
 										}),
 									escKey: function escKey(e) {
-										27 == e.keyCode && (e.target.blur(), _this.setFocused());
+										e.keyCode == KEY_ESCAPE && (e.target.blur(), _this.setFocused());
 									},
 									focus: function focus(e) {
 										e.stopPropagation(),
@@ -28718,7 +29219,7 @@
 																case 0:
 																	if (
 																		((form = e.target),
-																		(input = form.querySelector('input[ss-autocomplete-input]')),
+																		(input = form.querySelector('input[' + INPUT_ATTRIBUTE + ']')),
 																		e.preventDefault(),
 																		null === (_this$config$globals2 = _this.config.globals) ||
 																			void 0 === _this$config$globals2 ||
@@ -28731,13 +29232,13 @@
 																		_context2.next = 12;
 																		break;
 																	}
-																	return (_context2.next = 6), timeout(201);
+																	return (_context2.next = 6), timeout(INPUT_DELAY + 1);
 																case 6:
 																	if (!_this.store.loading) {
 																		_context2.next = 11;
 																		break;
 																	}
-																	return (_context2.next = 9), timeout(200);
+																	return (_context2.next = 9), timeout(INPUT_DELAY);
 																case 9:
 																	_context2.next = 6;
 																	break;
@@ -28746,14 +29247,14 @@
 																		? input &&
 																		  _this.store.terms.length &&
 																		  _this.store.terms[0].value != input.value &&
-																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.terms[0].value)
+																		  addHiddenFormInput(form, PARAM_FALLBACK_QUERY, _this.store.terms[0].value)
 																		: _this.store.search.originalQuery &&
 																		  (input &&
 																				(input.value =
 																					null === (_this$store$search$qu2 = _this.store.search.query) || void 0 === _this$store$search$qu2
 																						? void 0
 																						: _this$store$search$qu2.string),
-																		  addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
+																		  addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, _this.store.search.originalQuery.string));
 																case 12:
 																	return (
 																		(_context2.prev = 12),
@@ -28798,7 +29299,7 @@
 										var _this$config$settings,
 											input = e.target,
 											form = null == input ? void 0 : input.form,
-											searchInput = null == form ? void 0 : form.querySelector('input[ss-autocomplete-input]');
+											searchInput = null == form ? void 0 : form.querySelector('input[' + INPUT_ATTRIBUTE + ']');
 										if (
 											form &&
 											searchInput &&
@@ -28831,7 +29332,7 @@
 									},
 									keyUp: function keyUp(e) {
 										var _this$config, _this$config$settings6;
-										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
+										if ((null == e ? void 0 : e.keyCode) != KEY_ENTER && (null == e ? void 0 : e.keyCode) != KEY_ESCAPE) {
 											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
 											var value = e.target.value;
 											if (_this.store.state.input != value || !_this.store.loaded) {
@@ -28858,7 +29359,7 @@
 															_this.store.state.locks.terms.unlock(),
 																_this.store.state.locks.facets.unlock(),
 																_this.urlManager.set({ query: _this.store.state.input }).go();
-														}, 200));
+														}, INPUT_DELAY));
 												else
 													_this.store.reset(),
 														_this.urlManager.reset().go(),
@@ -29353,7 +29854,7 @@
 								key: 'unbind',
 								value: function unbind() {
 									var _this2 = this,
-										inputs = document.querySelectorAll('input[ss-autocomplete-input]');
+										inputs = document.querySelectorAll('input[' + INPUT_ATTRIBUTE + ']');
 									null == inputs ||
 										inputs.forEach(function (input) {
 											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
@@ -29400,7 +29901,7 @@
 																		var _this3$config, _this3$config$setting;
 																		input.setAttribute('spellcheck', 'false'),
 																			input.setAttribute('autocomplete', 'off'),
-																			input.setAttribute('ss-autocomplete-input', ''),
+																			input.setAttribute(INPUT_ATTRIBUTE, ''),
 																			input.addEventListener('keyup', _this3.handlers.input.keyUp),
 																			null !== (_this3$config = _this3.config) &&
 																				void 0 !== _this3$config &&
@@ -30734,9 +31235,6 @@
 					});
 				};
 			}
-			function Legacy_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
 			function Legacy_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -30793,16 +31291,15 @@
 						var NewTarget = Legacy_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return Legacy_possibleConstructorReturn(this, result);
+					return (function Legacy_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function Legacy_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
 				};
-			}
-			function Legacy_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function Legacy_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
 			}
 			function Legacy_getPrototypeOf(o) {
 				return (
@@ -30831,7 +31328,12 @@
 					_getEndpoint,
 					_super = Legacy_createSuper(LegacyAPI);
 				function LegacyAPI() {
-					return Legacy_classCallCheck(this, LegacyAPI), _super.apply(this, arguments);
+					return (
+						(function Legacy_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, LegacyAPI),
+						_super.apply(this, arguments)
+					);
 				}
 				return (
 					(function Legacy_createClass(Constructor, protoProps, staticProps) {
@@ -31425,9 +31927,6 @@
 					});
 				};
 			}
-			function Suggest_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
 			function Suggest_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -31484,16 +31983,15 @@
 						var NewTarget = Suggest_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return Suggest_possibleConstructorReturn(this, result);
+					return (function Suggest_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function Suggest_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
 				};
-			}
-			function Suggest_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function Suggest_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
 			}
 			function Suggest_getPrototypeOf(o) {
 				return (
@@ -31520,7 +32018,12 @@
 					_getSuggest,
 					_super = Suggest_createSuper(SuggestAPI);
 				function SuggestAPI() {
-					return Suggest_classCallCheck(this, SuggestAPI), _super.apply(this, arguments);
+					return (
+						(function Suggest_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, SuggestAPI),
+						_super.apply(this, arguments)
+					);
 				}
 				return (
 					(function Suggest_createClass(Constructor, protoProps, staticProps) {
@@ -31744,8 +32247,7 @@
 				);
 			}
 			(transformSearchRequest.sorts = function () {
-				var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-				return (request.sorts || []).reduce(function (acc, sort) {
+				return ((arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).sorts || []).reduce(function (acc, sort) {
 					var _Object$assign;
 					if (!sort.field && !sort.direction) return acc;
 					if (!sort.field || !sort.direction) throw 'valid sort requires field and direction';
@@ -31758,8 +32260,7 @@
 				}, {});
 			}),
 				(transformSearchRequest.search = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						reqSearch = request.search || {},
+					var reqSearch = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).search || {},
 						search = {};
 					return (
 						reqSearch.query && reqSearch.query.string && (search.q = reqSearch.query.string),
@@ -31771,8 +32272,7 @@
 					);
 				}),
 				(transformSearchRequest.filters = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-					return (request.filters || []).reduce(function (acc, filter) {
+					return ((arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).filters || []).reduce(function (acc, filter) {
 						var baseKey = filter.background ? 'bgfilter' : 'filter';
 						if ('value' == filter.type) {
 							var _Object$assign2,
@@ -31813,8 +32313,7 @@
 					}, {});
 				}),
 				(transformSearchRequest.merchandising = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						reqMerch = request.merchandising || {},
+					var reqMerch = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).merchandising || {},
 						merch = reqMerch.disabled ? { disableMerchandising: !0 } : {};
 					return (
 						reqMerch.landingPage && (merch['landing-page'] = reqMerch.landingPage),
@@ -31829,8 +32328,7 @@
 					);
 				}),
 				(transformSearchRequest.pagination = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						pagination = request.pagination || {},
+					var pagination = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).pagination || {},
 						params = {};
 					return (
 						pagination.page && (params.page = pagination.page),
@@ -31845,8 +32343,7 @@
 				(transformSearchRequest.facets = function () {
 					var _facets$include,
 						_facets$exclude,
-						request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						facets = request.facets || {},
+						facets = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).facets || {},
 						params = {};
 					if (facets.include && facets.include.length && facets.exclude && facets.exclude.length)
 						throw 'cannot use facet include and exclude at the same time';
@@ -31864,8 +32361,7 @@
 					);
 				}),
 				(transformSearchRequest.tracking = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						reqTracking = request.tracking || {},
+					var reqTracking = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).tracking || {},
 						params = {};
 					return (
 						reqTracking.userId && (params.userId = reqTracking.userId),
@@ -31876,8 +32372,7 @@
 					);
 				}),
 				(transformSearchRequest.personalization = function () {
-					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						personalization = request.personalization || {},
+					var personalization = (arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).personalization || {},
 						params = {};
 					return (
 						personalization.disabled && (params.skipPersonalization = personalization.disabled),
@@ -32389,16 +32884,15 @@
 						var NewTarget = Hybrid_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return Hybrid_possibleConstructorReturn(this, result);
+					return (function Hybrid_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function Hybrid_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
 				};
-			}
-			function Hybrid_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function Hybrid_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
 			}
 			function Hybrid_getPrototypeOf(o) {
 				return (
@@ -32476,11 +32970,9 @@
 					};
 				}),
 				(transformSearchResponse.facets = function (response) {
-					var request = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-						filters = request.filters || [],
-						facets = (null == response ? void 0 : response.facets) || [];
+					var filters = (arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}).filters || [];
 					return {
-						facets: facets.map(function (facet) {
+						facets: ((null == response ? void 0 : response.facets) || []).map(function (facet) {
 							var transformedFacet = { field: facet.field, type: 'value', filtered: Boolean(facet.facet_active) };
 							if (facet.step)
 								facet.range &&
@@ -33361,16 +33853,15 @@
 						var NewTarget = Recommend_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return Recommend_possibleConstructorReturn(this, result);
+					return (function Recommend_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function Recommend_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
 				};
-			}
-			function Recommend_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function Recommend_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
 			}
 			function Recommend_getPrototypeOf(o) {
 				return (
@@ -34162,9 +34653,6 @@
 					});
 				};
 			}
-			function Client_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
 			function Client_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -34242,7 +34730,13 @@
 							_this$config$suggest4,
 							_this$config$suggest5,
 							config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-						if ((Client_classCallCheck(this, Client), (this.mode = AppMode.production), null == globals || !globals.siteId))
+						if (
+							((function Client_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, Client),
+							(this.mode = AppMode.production),
+							null == globals || !globals.siteId)
+						)
 							throw 'no siteId specified!';
 						(this.globals = globals),
 							(this.config = cjs_default()(Client_defaultConfig, config)),
@@ -34456,12 +34950,11 @@
 														switch ((_context2.prev = _context2.next)) {
 															case 0:
 																if (
-																	((params = _args2.length > 0 && void 0 !== _args2[0] ? _args2[0] : {}),
-																	null !== (_params$search = params.search) &&
-																		void 0 !== _params$search &&
-																		null !== (_params$search$query = _params$search.query) &&
-																		void 0 !== _params$search$query &&
-																		_params$search$query.string)
+																	null !== (_params$search = (params = _args2.length > 0 && void 0 !== _args2[0] ? _args2[0] : {}).search) &&
+																	void 0 !== _params$search &&
+																	null !== (_params$search$query = _params$search.query) &&
+																	void 0 !== _params$search$query &&
+																	_params$search$query.string
 																) {
 																	_context2.next = 3;
 																	break;
@@ -34906,13 +35399,12 @@
 						var NewTarget = SearchFacetStore_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return SearchFacetStore_possibleConstructorReturn(this, result);
+					return (function SearchFacetStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return SearchFacetStore_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function SearchFacetStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return SearchFacetStore_assertThisInitialized(self);
 			}
 			function SearchFacetStore_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -35415,13 +35907,24 @@
 					Constructor
 				);
 			}
-			function SearchFilterStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function SearchFilterStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function SearchFilterStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = SearchFilterStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = SearchFilterStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = SearchFilterStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function SearchFilterStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function SearchFilterStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function SearchFilterStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -35504,18 +36007,7 @@
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 							superClass && SearchFilterStore_setPrototypeOf(subClass, superClass);
 					})(SearchFilterStore, _Array);
-					var _super = (function SearchFilterStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = SearchFilterStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = SearchFilterStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = SearchFilterStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return SearchFilterStore_possibleConstructorReturn(this, result);
-						};
-					})(SearchFilterStore);
+					var _super = SearchFilterStore_createSuper(SearchFilterStore);
 					function SearchFilterStore(services) {
 						var filtersData = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
 							meta = arguments.length > 2 ? arguments[2] : void 0;
@@ -35638,13 +36130,24 @@
 					Constructor
 				);
 			}
-			function SearchResultStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function SearchResultStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function SearchResultStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = SearchResultStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = SearchResultStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = SearchResultStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function SearchResultStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function SearchResultStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function SearchResultStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -35727,18 +36230,7 @@
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 							superClass && SearchResultStore_setPrototypeOf(subClass, superClass);
 					})(SearchResultStore, _Array);
-					var _super = (function SearchResultStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = SearchResultStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = SearchResultStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = SearchResultStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return SearchResultStore_possibleConstructorReturn(this, result);
-						};
-					})(SearchResultStore);
+					var _super = SearchResultStore_createSuper(SearchResultStore);
 					function SearchResultStore(config, services, resultData, paginationData, merchData) {
 						var _merchData$content;
 						SearchResultStore_classCallCheck(this, SearchResultStore);
@@ -36244,13 +36736,12 @@
 						var NewTarget = SearchStore_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return SearchStore_possibleConstructorReturn(this, result);
+					return (function SearchStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return SearchStore_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function SearchStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return SearchStore_assertThisInitialized(self);
 			}
 			function SearchStore_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -36495,13 +36986,12 @@
 						var NewTarget = RecommendationStore_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return RecommendationStore_possibleConstructorReturn(this, result);
+					return (function RecommendationStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return RecommendationStore_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function RecommendationStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return RecommendationStore_assertThisInitialized(self);
 			}
 			function RecommendationStore_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -36738,13 +37228,24 @@
 					Constructor
 				);
 			}
-			function AutocompleteTermStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function AutocompleteTermStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function AutocompleteTermStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = AutocompleteTermStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = AutocompleteTermStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = AutocompleteTermStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function AutocompleteTermStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function AutocompleteTermStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function AutocompleteTermStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -36827,18 +37328,7 @@
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 							superClass && AutocompleteTermStore_setPrototypeOf(subClass, superClass);
 					})(AutocompleteTermStore, _Array);
-					var _super = (function AutocompleteTermStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = AutocompleteTermStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = AutocompleteTermStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = AutocompleteTermStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return AutocompleteTermStore_possibleConstructorReturn(this, result);
-						};
-					})(AutocompleteTermStore);
+					var _super = AutocompleteTermStore_createSuper(AutocompleteTermStore);
 					function AutocompleteTermStore(services, autocomplete, paginationData, resetTerms, rootState) {
 						var _autocomplete$suggest;
 						AutocompleteTermStore_classCallCheck(this, AutocompleteTermStore);
@@ -36927,13 +37417,24 @@
 				}
 				var arg, key;
 			}
-			function AutocompleteHistoryStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function AutocompleteHistoryStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function AutocompleteHistoryStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = AutocompleteHistoryStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = AutocompleteHistoryStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = AutocompleteHistoryStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function AutocompleteHistoryStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function AutocompleteHistoryStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function AutocompleteHistoryStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -37016,18 +37517,7 @@
 						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 						superClass && AutocompleteHistoryStore_setPrototypeOf(subClass, superClass);
 				})(AutocompleteHistoryStore, _Array);
-				var _super = (function AutocompleteHistoryStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = AutocompleteHistoryStore_isNativeReflectConstruct();
-					return function _createSuperInternal() {
-						var result,
-							Super = AutocompleteHistoryStore_getPrototypeOf(Derived);
-						if (hasNativeReflectConstruct) {
-							var NewTarget = AutocompleteHistoryStore_getPrototypeOf(this).constructor;
-							result = Reflect.construct(Super, arguments, NewTarget);
-						} else result = Super.apply(this, arguments);
-						return AutocompleteHistoryStore_possibleConstructorReturn(this, result);
-					};
-				})(AutocompleteHistoryStore);
+				var _super = AutocompleteHistoryStore_createSuper(AutocompleteHistoryStore);
 				function AutocompleteHistoryStore(services, queries, resetTerms, rootState) {
 					!(function AutocompleteHistoryStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
@@ -37088,13 +37578,24 @@
 				}
 				var arg, key;
 			}
-			function AutocompleteTrendingStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function AutocompleteTrendingStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function AutocompleteTrendingStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = AutocompleteTrendingStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = AutocompleteTrendingStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = AutocompleteTrendingStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function AutocompleteTrendingStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function AutocompleteTrendingStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function AutocompleteTrendingStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -37177,18 +37678,7 @@
 						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 						superClass && AutocompleteTrendingStore_setPrototypeOf(subClass, superClass);
 				})(AutocompleteTrendingStore, _Array);
-				var _super = (function AutocompleteTrendingStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = AutocompleteTrendingStore_isNativeReflectConstruct();
-					return function _createSuperInternal() {
-						var result,
-							Super = AutocompleteTrendingStore_getPrototypeOf(Derived);
-						if (hasNativeReflectConstruct) {
-							var NewTarget = AutocompleteTrendingStore_getPrototypeOf(this).constructor;
-							result = Reflect.construct(Super, arguments, NewTarget);
-						} else result = Super.apply(this, arguments);
-						return AutocompleteTrendingStore_possibleConstructorReturn(this, result);
-					};
-				})(AutocompleteTrendingStore);
+				var _super = AutocompleteTrendingStore_createSuper(AutocompleteTrendingStore);
 				function AutocompleteTrendingStore(services, trendingData, resetTerms, rootState) {
 					var _trendingData$trendin, _trendingData$trendin2;
 					!(function AutocompleteTrendingStore_classCallCheck(instance, Constructor) {
@@ -37340,13 +37830,24 @@
 				}
 				var arg, key;
 			}
-			function AutocompleteFacetStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function AutocompleteFacetStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function AutocompleteFacetStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = AutocompleteFacetStore_isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = AutocompleteFacetStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = AutocompleteFacetStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function AutocompleteFacetStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function AutocompleteFacetStore_assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function AutocompleteFacetStore_wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -37429,18 +37930,7 @@
 						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 						superClass && AutocompleteFacetStore_setPrototypeOf(subClass, superClass);
 				})(AutocompleteFacetStore, _Array);
-				var _super = (function AutocompleteFacetStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = AutocompleteFacetStore_isNativeReflectConstruct();
-					return function _createSuperInternal() {
-						var result,
-							Super = AutocompleteFacetStore_getPrototypeOf(Derived);
-						if (hasNativeReflectConstruct) {
-							var NewTarget = AutocompleteFacetStore_getPrototypeOf(this).constructor;
-							result = Reflect.construct(Super, arguments, NewTarget);
-						} else result = Super.apply(this, arguments);
-						return AutocompleteFacetStore_possibleConstructorReturn(this, result);
-					};
-				})(AutocompleteFacetStore);
+				var _super = AutocompleteFacetStore_createSuper(AutocompleteFacetStore);
 				function AutocompleteFacetStore(config, services, storage, facetsData, paginationData, meta, rootState, merchandising) {
 					!(function AutocompleteFacetStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
@@ -37548,13 +38038,12 @@
 						var NewTarget = AutocompleteStore_getPrototypeOf(this).constructor;
 						result = Reflect.construct(Super, arguments, NewTarget);
 					} else result = Super.apply(this, arguments);
-					return AutocompleteStore_possibleConstructorReturn(this, result);
+					return (function AutocompleteStore_possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return AutocompleteStore_assertThisInitialized(self);
+					})(this, result);
 				};
-			}
-			function AutocompleteStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return AutocompleteStore_assertThisInitialized(self);
 			}
 			function AutocompleteStore_assertThisInitialized(self) {
 				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -38473,26 +38962,29 @@
 											})
 											.forEach(function (decodedHashEntries) {
 												if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
-												else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
-													var _decodedHashEntries$r2 = (function UrlTranslator_toArray(arr) {
-															return (
-																UrlTranslator_arrayWithHoles(arr) ||
-																UrlTranslator_iterableToArray(arr) ||
-																UrlTranslator_unsupportedIterableToArray(arr) ||
-																UrlTranslator_nonIterableRest()
-															);
-														})(decodedHashEntries.reverse()),
-														value = _decodedHashEntries$r2[0],
-														keys = _decodedHashEntries$r2.slice(1);
-													params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
-												} else if (decodedHashEntries.length && 4 == decodedHashEntries.length) {
-													var _decodedHashEntries = UrlTranslator_slicedToArray(decodedHashEntries, 4),
-														path0 = _decodedHashEntries[0],
-														path1 = _decodedHashEntries[1],
-														low = _decodedHashEntries[2],
-														high = _decodedHashEntries[3];
-													params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash }),
-														params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+												else if (decodedHashEntries.length && decodedHashEntries.length >= 2) {
+													var isCoreField = _this3.reverseMapping[decodedHashEntries[0]];
+													if (isCoreField && 'filter' == isCoreField && 4 == decodedHashEntries.length) {
+														var _decodedHashEntries = UrlTranslator_slicedToArray(decodedHashEntries, 4),
+															path0 = _decodedHashEntries[0],
+															path1 = _decodedHashEntries[1],
+															low = _decodedHashEntries[2],
+															high = _decodedHashEntries[3];
+														params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash }),
+															params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+													} else {
+														var _decodedHashEntries$r2 = (function UrlTranslator_toArray(arr) {
+																return (
+																	UrlTranslator_arrayWithHoles(arr) ||
+																	UrlTranslator_iterableToArray(arr) ||
+																	UrlTranslator_unsupportedIterableToArray(arr) ||
+																	UrlTranslator_nonIterableRest()
+																);
+															})(decodedHashEntries.reverse()),
+															value = _decodedHashEntries$r2[0],
+															keys = _decodedHashEntries$r2.slice(1);
+														params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
+													}
 												}
 											}),
 										params
@@ -40180,10 +40672,8 @@
 										var url = _ref.url,
 											width = _ref.width,
 											height = _ref.height,
-											styles = {
-												size: 'font-size: 1px; padding: ' + (height || width) + ' ' + (width || height) + ';',
-												background: 'background: url("' + url + '") no-repeat; background-size: contain;',
-											},
+											styles_size = 'font-size: 1px; padding: ' + (height || width) + ' ' + (width || height) + ';',
+											styles_background = 'background: url("' + url + '") no-repeat; background-size: contain;',
 											_len3 = arguments.length,
 											params = new Array(_len3 > 1 ? _len3 - 1 : 0),
 											_key3 = 1;
@@ -40191,7 +40681,7 @@
 										_key3++
 									)
 										params[_key3 - 1] = arguments[_key3];
-									this.dev.apply(this, ['%c...', styles.size + ' ' + styles.background].concat(params));
+									this.dev.apply(this, ['%c...', styles_size + ' ' + styles_background].concat(params));
 								},
 							},
 							{
@@ -40201,8 +40691,8 @@
 										var url = _ref2.url,
 											_ref2$text = _ref2.text,
 											text = void 0 === _ref2$text ? '' : _ref2$text,
-											style = _ref2.style,
-											styles = { background: 'margin-left: 6px; background: url("' + url + '") no-repeat; background-size: contain;', custom: style },
+											styles_background = 'margin-left: 6px; background: url("' + url + '") no-repeat; background-size: contain;',
+											styles_custom = _ref2.style,
 											imgText = text,
 											_len4 = arguments.length,
 											params = new Array(_len4 > 1 ? _len4 - 1 : 0),
@@ -40215,7 +40705,7 @@
 									!imgText && null != params && params.length && ((imgText = params[0]), (rest = params.slice(1))),
 										this.dev.apply(
 											this,
-											['%c   ' + this.prefix + imgText, styles.background + ' ' + styles.custom].concat(Logger_toConsumableArray(rest))
+											['%c   ' + this.prefix + imgText, styles_background + ' ' + styles_custom].concat(Logger_toConsumableArray(rest))
 										);
 								},
 							},
@@ -40279,6 +40769,7 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
+			var version = '0.42.0';
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -40415,7 +40906,7 @@
 								: _payload$context2.userId) || ''
 						) +
 						'&ce=' +
-						(featureFlags_cookies ? '1' : '0') +
+						(featureFlags.cookies ? '1' : '0') +
 						'&pt=' +
 						encodeURIComponent(document.title) +
 						'&v=1&x=' +
@@ -40518,7 +41009,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.41.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': version, 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40577,7 +41068,20 @@
 				}
 				var arg, key;
 			}
-			var Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
+			var Tracker_BATCH_TIMEOUT = 200,
+				LEGACY_USERID_COOKIE_NAME = '_isuid',
+				USERID_COOKIE_NAME = 'ssUserId',
+				SHOPPERID_COOKIE_NAME = 'ssShopperId',
+				COOKIE_EXPIRATION = 31536e6,
+				VIEWED_COOKIE_EXPIRATION = 220752e6,
+				COOKIE_SAMESITE = 'Lax',
+				SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace',
+				LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool',
+				CART_PRODUCTS = 'ssCartProducts',
+				VIEWED_PRODUCTS = 'ssViewedProducts',
+				MAX_VIEWED_COUNT = 20,
+				MAX_PARENT_LEVELS = 3,
+				Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
 				Tracker = (function () {
 					function Tracker(globals, config) {
 						var _window$searchspring,
@@ -40645,7 +41149,9 @@
 													(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
 													_this.getShopperId() != data.id)
 												) {
-													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
+													cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION),
+														(_this.context.shopperId = data.id),
+														_this.sendPreflight();
 													var payload = {
 														type: BeaconType.LOGIN,
 														category: BeaconCategory.PERSONALIZATION,
@@ -40680,7 +41186,7 @@
 													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
 														return item.trim();
 													});
-												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
+												cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION),
 													lastViewedProducts.includes(sku) || _this.sendPreflight();
 											}
 											return (
@@ -40827,12 +41333,13 @@
 								var userId;
 								try {
 									if (getFlags().cookies())
-										(userId = cookies.get('_isuid') || cookies.get('ssUserId') || (0, v4.Z)()),
-											cookies.set('ssUserId', userId, 'Lax', 31536e6),
-											cookies.set('_isuid', userId, 'Lax', 31536e6);
+										(userId = cookies.get(LEGACY_USERID_COOKIE_NAME) || cookies.get(USERID_COOKIE_NAME) || (0, v4.Z)()),
+											cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION),
+											cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 									else {
 										if (!getFlags().storage()) throw 'unsupported features';
-										(userId = window.localStorage.getItem('ssUserId') || (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId);
+										(userId = window.localStorage.getItem(USERID_COOKIE_NAME) || (0, v4.Z)()),
+											window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 									}
 								} catch (e) {
 									console.error('Failed to persist user id to cookie or local storage:', e);
@@ -40843,20 +41350,20 @@
 								var sessionId;
 								if (getFlags().storage())
 									try {
-										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
-											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
-											getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
+										(sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || (0, v4.Z)()),
+											window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId),
+											getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
 									} catch (e) {
 										console.error('Failed to persist session id to session storage:', e);
 									}
 								else
 									getFlags().cookies() &&
-										((sessionId = cookies.get('ssSessionIdNamespace')) ||
-											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
+										((sessionId = cookies.get(SESSIONID_STORAGE_NAME)) ||
+											((sessionId = (0, v4.Z)()), cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0)));
 								return sessionId;
 							}),
 							(this.getShopperId = function () {
-								var shopperId = cookies.get('ssShopperId');
+								var shopperId = cookies.get(SHOPPERID_COOKIE_NAME);
 								if (shopperId) return shopperId;
 							}),
 							(this.sendPreflight = function () {
@@ -40895,7 +41402,7 @@
 							(this.cookies = {
 								cart: {
 									get: function get() {
-										var items = cookies.get('ssCartProducts');
+										var items = cookies.get(CART_PRODUCTS);
 										return items ? items.split(',') : [];
 									},
 									set: function set(items) {
@@ -40904,7 +41411,7 @@
 													return item.trim();
 												}),
 												uniqueCartItems = Array.from(new Set(cartItems));
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+											cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0),
 												cartItems.filter(function (item) {
 													return items.includes(item);
 												}).length !== items.length && _this.sendPreflight();
@@ -40919,7 +41426,7 @@
 												uniqueCartItems = Array.from(
 													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
 												);
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+											cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0),
 												currentCartItems.filter(function (item) {
 													return itemsToAdd.includes(item);
 												}).length !== itemsToAdd.length && _this.sendPreflight();
@@ -40934,24 +41441,24 @@
 												updatedItems = currentCartItems.filter(function (item) {
 													return !itemsToRemove.includes(item);
 												});
-											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
+											cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0),
 												currentCartItems.length !== updatedItems.length && _this.sendPreflight();
 										}
 									},
 									clear: function clear() {
-										_this.cookies.cart.get().length && (cookies.unset('ssCartProducts'), _this.sendPreflight());
+										_this.cookies.cart.get().length && (cookies.unset(CART_PRODUCTS), _this.sendPreflight());
 									},
 								},
 								viewed: {
 									get: function get() {
-										var items = cookies.get('ssViewedProducts');
+										var items = cookies.get(VIEWED_PRODUCTS);
 										return items ? items.split(',') : [];
 									},
 								},
 							}),
 							(this.sendEvents = function (eventsToSend) {
 								if (_this.mode === AppMode.production) {
-									var savedEvents = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
+									var savedEvents = JSON.parse(_this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
 									if (eventsToSend) {
 										var eventsClone = [];
 										savedEvents.forEach(function (_event, idx) {
@@ -40964,7 +41471,7 @@
 												delete newEvent.pid,
 												-1 == stringyEventsClone.indexOf(JSON.stringify(newEvent)) && savedEvents.push(Object.assign({}, eventsToSend[idx]));
 										}),
-											_this.localStorage.set('ssBeaconPool', JSON.stringify(savedEvents));
+											_this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(savedEvents));
 									}
 									clearTimeout(_this.isSending),
 										(_this.isSending = window.setTimeout(function () {
@@ -40974,8 +41481,8 @@
 													xhr.setRequestHeader('Content-Type', 'application/json'),
 													xhr.send(JSON.stringify(1 == savedEvents.length ? savedEvents[0] : savedEvents));
 											}
-											_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
-										}, 200));
+											_this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
+										}, Tracker_BATCH_TIMEOUT));
 								}
 							}),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
@@ -40993,7 +41500,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.41.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = version)),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -41003,14 +41510,17 @@
 													_scriptElem$src,
 													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
 													script = arguments.length > 1 ? arguments[1] : void 0;
-												if (!script || 'string' == typeof script) {
-													script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
-														.sort(function (a, b) {
-															return a.innerHTML.length - b.innerHTML.length;
-														})
-														.pop();
-												}
-												if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
+												if (
+													((script && 'string' != typeof script) ||
+														(script = Array.from(
+															document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]')
+														)
+															.sort(function (a, b) {
+																return a.innerHTML.length - b.innerHTML.length;
+															})
+															.pop()),
+													!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
+												)
 													throw new Error('getContext: did not find a script tag');
 												var scriptElem = script;
 												if (
@@ -41035,8 +41545,7 @@
 														}, !0))
 												)
 													throw new Error('getContext: first parameter must be an array of strings');
-												var siteIdString = 'siteId',
-													variables = {};
+												var variables = {};
 												if (
 													(null == evaluate ||
 														evaluate.forEach(function (name) {
@@ -41052,7 +41561,7 @@
 													Object.keys(variables).forEach(function (key) {
 														void 0 === variables[key] && delete variables[key];
 													}),
-													evaluate.includes(siteIdString) && !variables[siteIdString])
+													evaluate.includes('siteId') && !variables.siteId)
 												) {
 													var _script$getAttribute,
 														siteId =
@@ -41114,7 +41623,7 @@
 											attributes = {},
 											levels = 0,
 											elem = null;
-										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
+										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= MAX_PARENT_LEVELS; )
 											Object.values(elem.attributes).forEach(function (attr) {
 												var attrName = attr.nodeName;
 												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
@@ -41969,13 +42478,24 @@
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function _possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function _assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
+			function _createSuper(Derived) {
+				var hasNativeReflectConstruct = _isNativeReflectConstruct();
+				return function _createSuperInternal() {
+					var result,
+						Super = _getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = _getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return (function _possibleConstructorReturn(self, call) {
+						if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+						if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function _assertThisInitialized(self) {
+							if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return self;
+						})(self);
+					})(this, result);
+				};
 			}
 			function _wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
@@ -42123,18 +42643,7 @@
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 							superClass && _setPrototypeOf(subClass, superClass);
 					})(Content, _Array);
-					var _super = (function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = _getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return _possibleConstructorReturn(this, result);
-						};
-					})(Content);
+					var _super = _createSuper(Content);
 					function Content(content) {
 						return _classCallCheck(this, Content), _super.call.apply(_super, [this].concat(_toConsumableArray(content)));
 					}
@@ -42214,10 +42723,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(
 						'p',
@@ -42282,10 +42792,11 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const About_stories_layoutProps = {};
+			const About_stories_layoutProps = {},
+				About_stories_MDXLayout = 'wrapper';
 			function About_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					About_stories_MDXLayout,
 					About_stories_extends({}, About_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/About', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -42334,10 +42845,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('p', null, 'Snap components allows for theming at both the global and component level.'),
 					(0, esm.kt)('h3', { id: 'theme-object' }, 'Theme object'),
@@ -42643,10 +43155,11 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const Theme_stories_layoutProps = {};
+			const Theme_stories_layoutProps = {},
+				Theme_stories_MDXLayout = 'wrapper';
 			function Theme_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					Theme_stories_MDXLayout,
 					Theme_stories_extends({}, Theme_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/Theme', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -42695,10 +43208,11 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {};
+			const layoutProps = {},
+				MDXLayout = 'wrapper';
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					MDXLayout,
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(
 						'p',
@@ -42780,10 +43294,11 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const Usage_stories_layoutProps = {};
+			const Usage_stories_layoutProps = {},
+				Usage_stories_MDXLayout = 'wrapper';
 			function Usage_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					'wrapper',
+					Usage_stories_MDXLayout,
 					Usage_stories_extends({}, Usage_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/Usage', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -42914,7 +43429,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[677],
+			[149],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),

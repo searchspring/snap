@@ -1763,6 +1763,7 @@
 			var isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
 				now = __webpack_require__('../../node_modules/lodash/now.js'),
 				toNumber = __webpack_require__('../../node_modules/lodash/toNumber.js'),
+				FUNC_ERROR_TEXT = 'Expected a function',
 				nativeMax = Math.max,
 				nativeMin = Math.min;
 			module.exports = function debounce(func, wait, options) {
@@ -1776,14 +1777,11 @@
 					leading = !1,
 					maxing = !1,
 					trailing = !0;
-				if ('function' != typeof func) throw new TypeError('Expected a function');
+				if ('function' != typeof func) throw new TypeError(FUNC_ERROR_TEXT);
 				function invokeFunc(time) {
 					var args = lastArgs,
 						thisArg = lastThis;
 					return (lastArgs = lastThis = void 0), (lastInvokeTime = time), (result = func.apply(thisArg, args));
-				}
-				function leadingEdge(time) {
-					return (lastInvokeTime = time), (timerId = setTimeout(timerExpired, wait)), leading ? invokeFunc(time) : result;
 				}
 				function shouldInvoke(time) {
 					var timeSinceLastCall = time - lastCallTime;
@@ -1807,7 +1805,10 @@
 					var time = now(),
 						isInvoking = shouldInvoke(time);
 					if (((lastArgs = arguments), (lastThis = this), (lastCallTime = time), isInvoking)) {
-						if (void 0 === timerId) return leadingEdge(lastCallTime);
+						if (void 0 === timerId)
+							return (function leadingEdge(time) {
+								return (lastInvokeTime = time), (timerId = setTimeout(timerExpired, wait)), leading ? invokeFunc(time) : result;
+							})(lastCallTime);
 						if (maxing) return clearTimeout(timerId), (timerId = setTimeout(timerExpired, wait)), invokeFunc(lastCallTime);
 					}
 					return void 0 === timerId && (timerId = setTimeout(timerExpired, wait)), result;
@@ -1836,11 +1837,12 @@
 		},
 		'../../node_modules/lodash/throttle.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			var debounce = __webpack_require__('../../node_modules/lodash/debounce.js'),
-				isObject = __webpack_require__('../../node_modules/lodash/isObject.js');
+				isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
+				FUNC_ERROR_TEXT = 'Expected a function';
 			module.exports = function throttle(func, wait, options) {
 				var leading = !0,
 					trailing = !0;
-				if ('function' != typeof func) throw new TypeError('Expected a function');
+				if ('function' != typeof func) throw new TypeError(FUNC_ERROR_TEXT);
 				return (
 					isObject(options) &&
 						((leading = 'leading' in options ? !!options.leading : leading), (trailing = 'trailing' in options ? !!options.trailing : trailing)),
@@ -1852,13 +1854,14 @@
 			var baseTrim = __webpack_require__('../../node_modules/lodash/_baseTrim.js'),
 				isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
 				isSymbol = __webpack_require__('../../node_modules/lodash/isSymbol.js'),
+				NAN = NaN,
 				reIsBadHex = /^[-+]0x[0-9a-f]+$/i,
 				reIsBinary = /^0b[01]+$/i,
 				reIsOctal = /^0o[0-7]+$/i,
 				freeParseInt = parseInt;
 			module.exports = function toNumber(value) {
 				if ('number' == typeof value) return value;
-				if (isSymbol(value)) return NaN;
+				if (isSymbol(value)) return NAN;
 				if (isObject(value)) {
 					var other = 'function' == typeof value.valueOf ? value.valueOf() : value;
 					value = isObject(other) ? other + '' : other;
@@ -1866,7 +1869,7 @@
 				if ('string' != typeof value) return 0 === value ? value : +value;
 				value = baseTrim(value);
 				var isBinary = reIsBinary.test(value);
-				return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
+				return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 			};
 		},
 	},
