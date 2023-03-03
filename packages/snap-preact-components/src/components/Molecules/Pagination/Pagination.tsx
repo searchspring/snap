@@ -93,7 +93,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	return store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
-				<nav role="navigation" aria-label="Pagination Navigation">
+				<nav role="navigation" aria-label="Pagination">
 					{/* Prev */}
 					{store.previous && !hidePrev && (
 						<a
