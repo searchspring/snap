@@ -75,7 +75,6 @@ jobs:
 
       - name: Copy Files to S3
         run: |
-          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
           aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
