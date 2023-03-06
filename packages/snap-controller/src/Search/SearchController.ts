@@ -533,7 +533,7 @@ function generateHrefSelector(element: HTMLElement, href: string, levels = 7): s
 	while (elem && level < levels) {
 		// check within
 		const innerElemHref = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
-		if (innerElemHref) {
+		if (innerElemHref && elem.classList.value) {
 			return `${elem.tagName}.${elem.classList.value.replace(/\s/g, '.')} [href*="${href}"]`;
 		}
 
