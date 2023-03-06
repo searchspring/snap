@@ -16,10 +16,6 @@ jobs:
           fetch-depth: "0"
           ref: "docs"
 
-      - name: Configure Variables
-        run: |
-          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
-
       - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
@@ -33,6 +29,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
+
+      - name: Configure Variables
+        run: |
+          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
 
       - name: Cache node modules
         uses: actions/cache@v2
