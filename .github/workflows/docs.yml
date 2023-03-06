@@ -30,6 +30,10 @@ jobs:
         with:
           node-version: 16
 
+      - name: Configure Variables
+        run: |
+          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -70,16 +74,13 @@ jobs:
           aws-region: us-east-1
 
       - name: Copy Files to S3
-        shell: bash
         run: |
-          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
           aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
           aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
 
       - name: Invalidate CDN Files
-        shell: bash
         env:
           AWS_MAX_ATTEMPTS: 9
         run: |
