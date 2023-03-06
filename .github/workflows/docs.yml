@@ -16,6 +16,10 @@ jobs:
           fetch-depth: "0"
           ref: "docs"
 
+      - name: Configure Variables
+        run: |
+          echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
+
       - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
@@ -70,7 +74,6 @@ jobs:
           aws-region: us-east-1
 
       - name: Copy Files to S3
-        shell: bash
         run: |
           echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
@@ -79,7 +82,6 @@ jobs:
           aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
 
       - name: Invalidate CDN Files
-        shell: bash
         env:
           AWS_MAX_ATTEMPTS: 9
         run: |
