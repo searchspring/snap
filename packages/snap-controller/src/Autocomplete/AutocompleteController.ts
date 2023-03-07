@@ -424,6 +424,8 @@ export class AutocompleteController extends AbstractController {
 		inputs.forEach((input) => {
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
+			input.setAttribute('autocorrect', 'off');
+			input.setAttribute('autocapitalize', 'none');
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
