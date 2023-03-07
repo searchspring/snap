@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+### Bug Fixes
+
+- **controller-autocomplete:** adding input attributes to disable 'autocorrect' and 'autocapitalize' ([eaef3cc](https://github.com/searchspring/snap/commit/eaef3ccadf9bc7c6f2fce5842f76bb541663d7eb))
+- **controller-autocomplete:** preventing duplicate hidden form fields from being created ([cfd5e68](https://github.com/searchspring/snap/commit/cfd5e688ed8f2c64f63d368444153d9c7d38c9b0))
+- **controller-search:** adjusting generateHrefSelector logic to ensure classList value ([3ed5890](https://github.com/searchspring/snap/commit/3ed58903ad6119a64e72d52d964e956c8aed822e))
+
 # [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
 
 ### Bug Fixes
