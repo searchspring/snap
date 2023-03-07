@@ -632,6 +632,11 @@ function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) 
 	inputElem.type = 'hidden';
 	inputElem.name = name;
 	inputElem.value = value;
+
+	// remove existing form element if it exists (prevent duplicates)
+	form.querySelector(`[type="hidden"][name="${name}"]`)?.remove();
+
+	// append form element
 	form.append(inputElem);
 }
 
