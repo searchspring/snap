@@ -1,4 +1,4 @@
-/*! For license information please see main.d69f298c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.bb0e0cde.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -26779,7 +26779,7 @@
 													level = 0,
 													elem = element;
 												for (; elem && level < levels; ) {
-													if (elem.querySelector('[href*="' + href + '"]'))
+													if (elem.querySelector('[href*="' + href + '"]') && elem.classList.value)
 														return elem.tagName + '.' + elem.classList.value.replace(/\s/g, '.') + ' [href*="' + href + '"]';
 													(elem = elem.parentElement), level++;
 												}
@@ -29901,6 +29901,8 @@
 																		var _this3$config, _this3$config$setting;
 																		input.setAttribute('spellcheck', 'false'),
 																			input.setAttribute('autocomplete', 'off'),
+																			input.setAttribute('autocorrect', 'off'),
+																			input.setAttribute('autocapitalize', 'none'),
 																			input.setAttribute(INPUT_ATTRIBUTE, ''),
 																			input.addEventListener('keyup', _this3.handlers.input.keyUp),
 																			null !== (_this3$config = _this3.config) &&
@@ -29979,8 +29981,15 @@
 					);
 				})(AbstractController);
 			function addHiddenFormInput(form, name, value) {
-				var inputElem = document.createElement('input');
-				(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
+				var _form$querySelector,
+					inputElem = document.createElement('input');
+				(inputElem.type = 'hidden'),
+					(inputElem.name = name),
+					(inputElem.value = value),
+					null === (_form$querySelector = form.querySelector('[type="hidden"][name="' + name + '"]')) ||
+						void 0 === _form$querySelector ||
+						_form$querySelector.remove(),
+					form.append(inputElem);
 			}
 			function timeout(_x12) {
 				return _timeout.apply(this, arguments);
@@ -40769,7 +40778,7 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
-			var version = '0.42.0';
+			var version = '0.42.1';
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
