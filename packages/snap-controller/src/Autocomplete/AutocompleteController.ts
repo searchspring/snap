@@ -424,6 +424,8 @@ export class AutocompleteController extends AbstractController {
 		inputs.forEach((input) => {
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
+			input.setAttribute('autocorrect', 'off');
+			input.setAttribute('autocapitalize', 'none');
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
@@ -632,6 +634,11 @@ function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) 
 	inputElem.type = 'hidden';
 	inputElem.name = name;
 	inputElem.value = value;
+
+	// remove existing form element if it exists (prevent duplicates)
+	form.querySelector(`[type="hidden"][name="${name}"]`)?.remove();
+
+	// append form element
 	form.append(inputElem);
 }
 
