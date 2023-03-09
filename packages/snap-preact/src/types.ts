@@ -26,6 +26,11 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
+type initialUrlConfig = {
+	[any: string]: any;
+	ignoreList?: string[];
+};
+
 export type SnapControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
@@ -39,7 +44,9 @@ export type SnapControllerConfig = {
 
 export type SnapSearchControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
-	url?: UrlTranslatorConfig;
+	url?: UrlTranslatorConfig & {
+		initial?: initialUrlConfig;
+	};
 	client?: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
