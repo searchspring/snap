@@ -1,4 +1,4 @@
-import type { UrlState } from '@searchspring/snap-url-manager';
+import type { UrlState, UrlStateFilter } from '@searchspring/snap-url-manager';
 import { SearchRequestModelFilterRange } from '@searchspring/snapi-types';
 import deepmerge from 'deepmerge';
 
@@ -40,12 +40,10 @@ export const setInitialUrlState = (intitialStateConfig: any, _initialUrlState: U
 			filters.map((filter: any) => {
 				const baseKey = filter.background ? 'bgfilter' : 'filter';
 				if (filter.type == 'value') {
-					// @ts-ignore
-					initialUrlState[baseKey] = deepmerge(initialUrlState[baseKey], {
-						[filter.field]: (initialUrlState[baseKey] && initialUrlState[baseKey][filter.field]
-							? [initialUrlState[baseKey][filter.field]]
-							: []
-						).concat([filter.value]),
+					const initFilterState = initialUrlState[baseKey] as UrlStateFilter;
+
+					initialUrlState[baseKey] = deepmerge(initFilterState, {
+						[filter.field]: (initialUrlState[baseKey] && initFilterState[filter.field] ? [initFilterState[filter.field]] : []).concat([filter.value]),
 					});
 				} else if (filter.type == 'range') {
 					const keyLow = baseKey + '.' + filter.field + '.low';
