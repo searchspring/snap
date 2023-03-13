@@ -446,7 +446,7 @@ export class AutocompleteController extends AbstractController {
 				formActionUrl = this.config.action;
 			} else if (form) {
 				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
-				formActionUrl = form.action || '';
+				formActionUrl = form.getAttribute('action') || '';
 
 				if (this.config.settings?.serializeForm) {
 					bindFormParameters(form, this.handlers.input.formElementChange, function (elem: HTMLInputElement) {
