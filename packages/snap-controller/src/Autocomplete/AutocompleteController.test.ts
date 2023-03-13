@@ -346,7 +346,7 @@ describe('Autocomplete Controller', () => {
 
 		expect(controller.urlManager.state.query).toBe(query);
 		expect(controller.store.state.input).toBe(query);
-		expect(controller.store.state.url.href).toBe('http://localhost/search.html?search_query=white');
+		expect(controller.store.state.url.href).toBe('/search.html?search_query=white');
 	});
 
 	it('serializes other form input elements (settings.serializeForm)', async () => {
@@ -390,7 +390,7 @@ describe('Autocomplete Controller', () => {
 
 		expect(controller.urlManager.state.query).toBe(query);
 		expect(controller.store.state.input).toBe(query);
-		expect(controller.store.state.url.href).toBe('http://localhost/search.html?view=shop&search_query=white');
+		expect(controller.store.state.url.href).toBe('/search.html?view=shop&search_query=white');
 	});
 
 	it('can invoke controller track.product.click', async () => {
