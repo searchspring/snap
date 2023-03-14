@@ -250,20 +250,24 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			facetGridOptions: {
 				columns: 3,
 				onClick: facetClickEvent,
+				someOtherProp: true,
 			},
 			facetHierarchyOptions: {
 				hideCount: true,
 				onClick: facetClickEvent,
+				someOtherProp: true,
 			},
 			facetListOptions: {
 				hideCheckbox: true,
 				hideCount: true,
 				onClick: facetClickEvent,
+				someOtherProp: true,
 			},
 			facetPaletteOptions: {
 				hideLabel: true,
 				columns: 3,
 				onClick: facetClickEvent,
+				someOtherProp: true,
 			},
 			result: {
 				hideBadge: true,

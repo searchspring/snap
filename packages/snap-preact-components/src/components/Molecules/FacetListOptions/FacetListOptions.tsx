@@ -51,7 +51,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		...properties.theme?.components?.facetListOptions,
 	};
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, someOtherProp, valueProps, facet, disableStyles, className, style } = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -90,6 +90,11 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
+						onFocus={() => {
+							if (!someOtherProp && previewOnFocus && value.preview) {
+								value.preview();
+							}
+						}}
 						{...valueProps}
 						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
@@ -119,6 +124,9 @@ export interface FacetListOptionsProps extends ComponentProps {
 	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
+
+	someOtherProp?: boolean;
+
 	valueProps?: any;
 }
 

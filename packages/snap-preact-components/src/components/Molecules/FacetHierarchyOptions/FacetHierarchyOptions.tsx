@@ -63,7 +63,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		...properties.theme?.components?.facetHierarchyOptions,
 	};
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, someOtherProp, valueProps, facet, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -73,7 +73,6 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	}
 
 	const facetValues = values || facet?.values;
-
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
@@ -95,6 +94,11 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
+						}}
+						onFocus={() => {
+							if (!someOtherProp && previewOnFocus && value.preview) {
+								value.preview();
+							}
 						}}
 						{...valueProps}
 						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
@@ -120,4 +124,5 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	someOtherProp?: boolean;
 }

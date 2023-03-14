@@ -105,7 +105,21 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		...properties.theme?.components?.facetPaletteOptions,
 	};
 
-	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const {
+		values,
+		hideLabel,
+		columns,
+		gapSize,
+		hideIcon,
+		onClick,
+		previewOnFocus,
+		someOtherProp,
+		valueProps,
+		facet,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -147,6 +161,11 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
+						onFocus={() => {
+							if (!someOtherProp && previewOnFocus && value.preview) {
+								value.preview();
+							}
+						}}
 						{...valueProps}
 						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
@@ -186,6 +205,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	someOtherProp?: boolean;
 }
 
 interface FacetPaletteOptionsSubProps {
