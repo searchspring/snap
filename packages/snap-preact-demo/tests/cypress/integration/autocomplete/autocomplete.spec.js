@@ -171,7 +171,7 @@ describe('Autocomplete', () => {
 
 					cy.snapController('autocomplete').then(({ store }) => {
 						cy.wrap(store.services.urlManager.state.filter).should('exist');
-						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
+						cy.wrap(optionURL).should('contain', store.services.urlManager.href);
 					});
 				});
 			});
