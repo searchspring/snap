@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useRef } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -24,6 +24,7 @@ const CSS = {
 		stickyHandleLabel,
 		tickTextColor,
 		theme,
+		overlapLabelOffset,
 	}: Partial<FacetSliderProps>) =>
 		css({
 			display: 'flex',
@@ -115,10 +116,10 @@ const CSS = {
 							marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 
 							'&.ss__facet-slider__handle__label--pinleft': {
-								left: '0px',
+								left: '0px !important',
 							},
 							'&.ss__facet-slider__handle__label--pinright': {
-								right: '0px',
+								right: '0px !important',
 							},
 							'&.ss__facet-slider__handle__label--sticky': {
 								position: 'absolute',
@@ -126,6 +127,18 @@ const CSS = {
 								fontFamily: 'Roboto, Helvetica, Arial',
 								fontSize: '14px',
 								marginTop: '0px',
+							},
+
+							'&.ss__facet-slider__handle__label--overlapleft': {
+								right: `${overlapLabelOffset}px`,
+							},
+
+							'&.ss__facet-slider__handle__label--overlapright': {
+								left: `${overlapLabelOffset}px`,
+							},
+
+							'&.ss_handle_hidden': {
+								visibility: 'hidden',
 							},
 						},
 					},
@@ -187,6 +200,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize = Number(tickSize);
 	}
 
+	const ref = useRef<HTMLLabelElement[]>([]);
+	const buttonRefs = useRef<HTMLButtonElement[]>([]);
+	const overlapLabelOffset = 15;
+	const [pinnedOverlap, setPinnedOverlap] = useState('');
+	const [isOverlapped, setOverlapped] = useState(false);
+
 	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
 	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
 
@@ -211,6 +230,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		onDrag: (val: number[]) => {
 			setActive(val);
 			onDrag && onDrag(val);
+			stickyHandleLabel && calculate();
 		},
 		min: facet.range?.low!,
 		max: facet.range?.high!,
@@ -231,12 +251,67 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 				stickyHandleLabel,
 				tickTextColor,
 				theme,
+				overlapLabelOffset,
 			}),
 			style,
 		];
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	const calculate = () => {
+		const labels = ref.current;
+		const buttons = buttonRefs.current;
+		const buttonOffset = buttons[0].getBoundingClientRect().width / 2;
+
+		if (labels?.length > 1) {
+			const label0 = labels[0].getBoundingClientRect();
+			const label1 = labels[1].getBoundingClientRect();
+
+			let leftLabel = label0;
+			let leftLabelElem = labels[0];
+
+			let rightLabel = label1;
+			let rightLabelElem = labels[1];
+
+			if (label0.left > label1.left || label0.right > label1.right) {
+				leftLabel = label1;
+				rightLabel = label0;
+				rightLabelElem = labels[0];
+				leftLabelElem = labels[1];
+			}
+
+			let pinnedOverlapVal = '';
+			let overlap = false;
+			let overlapMin;
+			let overlapMax;
+
+			const leftLabelisAdjusted = Boolean(leftLabelElem.classList.contains('ss__facet-slider__handle__label--overlapleft'));
+			const rightLabelisAdjusted = Boolean(rightLabelElem.classList.contains('ss__facet-slider__handle__label--overlapright'));
+
+			const rightLabelisPinned = Boolean(rightLabelElem.classList.contains('ss__facet-slider__handle__label--pinright'));
+			const leftLabelisPinned = Boolean(leftLabelElem.classList.contains('ss__facet-slider__handle__label--pinleft'));
+
+			overlapMin =
+				(leftLabelisAdjusted ? leftLabel.right + overlapLabelOffset + buttonOffset : leftLabel.right) >
+				(rightLabelisAdjusted ? rightLabel.left + overlapLabelOffset - buttonOffset : rightLabel.left);
+			overlapMax =
+				(rightLabelisAdjusted ? rightLabel.left + overlapLabelOffset - buttonOffset : rightLabel.left) <
+				(leftLabelisAdjusted ? leftLabel.right + overlapLabelOffset + buttonOffset : leftLabel.right);
+
+			if (overlapMin || overlapMax) {
+				if (rightLabelisPinned) {
+					pinnedOverlapVal = 'right';
+				} else if (leftLabelisPinned) {
+					pinnedOverlapVal = 'left';
+				}
+				overlap = true;
+			}
+
+			setPinnedOverlap(pinnedOverlapVal);
+			setOverlapped(overlap);
+		}
+	};
 	return facet.range && facet.active && facet.step ? (
 		<CacheProvider>
 			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
@@ -267,7 +342,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 								aria-valuetext={`${facet.label} slider button, current value ${value}, ${facet.range?.low ? `min value ${facet.range?.low},` : ``} ${
 									facet.range?.high ? `max value ${facet.range?.high}` : ``
 								}`}
-								ref={(e) => useA11y(e)}
+								ref={(e) => {
+									useA11y(e);
+									if (e) {
+										return (buttonRefs.current[idx] = e);
+									}
+								}}
 							>
 								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
 									{stickyHandleLabel && (
@@ -277,10 +357,18 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 												'ss__facet-slider__handle__label--sticky',
 												`ss__facet-slider__handle__label--${idx}`,
 												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet?.range?.low },
-												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high }
+												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high },
+												{ 'ss__facet-slider__handle__label--overlapleft': idx == 0 && isOverlapped && idx == 0 && value !== facet?.range?.low },
+												{ 'ss__facet-slider__handle__label--overlapright': idx == 1 && isOverlapped && idx == 1 && value !== facet?.range?.high },
+												{ ss_handle_hidden: (idx == 0 && pinnedOverlap == 'right') || (idx == 1 && pinnedOverlap == 'left') }
 											)}
+											ref={(el) => {
+												if (el) return (ref.current[idx] = el);
+											}}
 										>
-											{sprintf(facet.formatValue, value)}
+											{pinnedOverlap !== ''
+												? `${sprintf(facet.formatValue, handles[0].value)} - ${sprintf(facet.formatValue, handles[1].value)}`
+												: sprintf(facet.formatValue, value)}
 										</label>
 									)}
 								</div>
