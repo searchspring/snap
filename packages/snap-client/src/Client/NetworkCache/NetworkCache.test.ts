@@ -9,7 +9,7 @@ const CACHE_STORAGE_KEY = 'ss-networkcache';
 
 const typedResponse = mockData.meta() as Response;
 
-let searchConfig: SearchControllerConfig = {
+const searchConfig: SearchControllerConfig = {
 	id: 'search',
 	globals: {
 		filters: [],
@@ -55,7 +55,7 @@ describe('Network Cache', () => {
 		const cache = new NetworkCache();
 
 		// @ts-ignore
-		let memoryCache = cache.memoryCache;
+		const memoryCache = cache.memoryCache;
 
 		it('can use the set function', async () => {
 			expect(memoryCache).toBeDefined();
@@ -67,7 +67,7 @@ describe('Network Cache', () => {
 			cache.set('key', typedResponse);
 
 			// @ts-ignore
-			let UpdatedMemoryCache = cache.memoryCache;
+			const UpdatedMemoryCache = cache.memoryCache;
 
 			expect(UpdatedMemoryCache).not.toEqual({});
 
@@ -89,7 +89,7 @@ describe('Network Cache', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toEqual('');
 
 			// @ts-ignore
-			let NewmemoryCache = cache.memoryCache;
+			const NewmemoryCache = cache.memoryCache;
 			expect(NewmemoryCache).toEqual({});
 		});
 
@@ -112,7 +112,7 @@ describe('Network Cache', () => {
 	});
 
 	describe('can set custom config settings', () => {
-		let cacheConfig = {
+		const cacheConfig = {
 			ttl: 1000,
 			enabled: true,
 			maxSize: 2, // KB
@@ -166,14 +166,14 @@ describe('Network Cache', () => {
 		});
 
 		it('can disable purging max size for local storage', async () => {
-			let cacheConfig = {
+			const cacheConfig = {
 				ttl: 1000,
 				enabled: true,
 				maxSize: 2, // KB
 				purgeable: false,
 			};
 
-			let cacheConfig2 = {
+			const cacheConfig2 = {
 				...cacheConfig,
 				purgeable: true,
 			};
@@ -201,14 +201,14 @@ describe('Network Cache', () => {
 
 		it('can pass in cache to set', async () => {
 			const key = 'key';
-			let cacheConfig = {
+			const cacheConfig = {
 				entries: {
 					[key]: typedResponse,
 				},
 			};
 			const cache = new NetworkCache(cacheConfig);
 			// @ts-ignore
-			let memoryCache = cache.memoryCache;
+			const memoryCache = cache.memoryCache;
 			expect(memoryCache[key].value).toEqual(typedResponse);
 			expect(cache.get(key)).toEqual(typedResponse);
 		});

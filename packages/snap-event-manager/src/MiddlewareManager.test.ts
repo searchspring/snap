@@ -114,7 +114,7 @@ describe('Middleware Manager', () => {
 		const middlewareManager = new MiddlewareManager();
 		const testFunc = jest.fn();
 
-		const fn1 = (_context: any, next: any) => {
+		const fn1 = () => {
 			testFunc();
 			// next();
 			testFunc();

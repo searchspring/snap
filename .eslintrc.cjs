@@ -11,6 +11,18 @@ module.exports = {
 	rules: {
 		// add rules... or dont...
 		'no-debugger': 'error',
-		'@typescript-eslint/ban-ts-comment': 'off'
+		'@typescript-eslint/ban-ts-comment': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/no-non-null-assertion': 'off',
+		'@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+		'@typescript-eslint/no-empty-function': 'off'
 	},
+	settings: {
+		"preact": {
+			"pragma": "h"
+		}
+	}
+	
+
 };
+

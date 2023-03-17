@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';

@@ -9,7 +9,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+const gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
 	.search()
 	.facets!.filter((facet) => facet.field == 'size_dress')!
 	.pop()!;

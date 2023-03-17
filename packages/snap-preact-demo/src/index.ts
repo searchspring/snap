@@ -176,4 +176,4 @@ if (window.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-const snap = new Snap(config);
+new Snap(config);

@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType, ErrorType, SearchHistoryStore } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -116,7 +116,7 @@ export class AutocompleteController extends AbstractController {
 	track: AutocompleteTrackMethods = {
 		// TODO: add in future when autocomplete supports result click tracking
 		product: {
-			click: (e: MouseEvent, result): void => {
+			click: (): void => {
 				this.log.warn('product.click tracking is not currently supported in this controller type');
 			},
 		},

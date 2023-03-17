@@ -4,7 +4,7 @@ import { SuggestAPI } from './Suggest';
 
 describe('Suggest Api', () => {
 	it('has expected default functions', () => {
-		let api = new SuggestAPI(new ApiConfiguration({}));
+		const api = new SuggestAPI(new ApiConfiguration({}));
 
 		expect(api?.getSuggest).toBeDefined();
 
@@ -16,9 +16,9 @@ describe('Suggest Api', () => {
 	});
 
 	it('can call getSuggest', async () => {
-		let api = new SuggestAPI(new ApiConfiguration({}));
+		const api = new SuggestAPI(new ApiConfiguration({}));
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -40,7 +40,7 @@ describe('Suggest Api', () => {
 	});
 
 	it('can call postSuggest', async () => {
-		let api = new SuggestAPI(new ApiConfiguration({}));
+		const api = new SuggestAPI(new ApiConfiguration({}));
 
 		const params = {
 			body: '{"siteId":"88uyt2m","query":"dress"}',
@@ -51,7 +51,7 @@ describe('Suggest Api', () => {
 		};
 		const requestUrl = 'https://88uyt2m.a.searchspring.io/api/suggest/query';
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -66,8 +66,8 @@ describe('Suggest Api', () => {
 	});
 
 	it('can call getTrending', async () => {
-		let api = new SuggestAPI(new ApiConfiguration({}));
-		let requestMock = jest
+		const api = new SuggestAPI(new ApiConfiguration({}));
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -90,8 +90,8 @@ describe('Suggest Api', () => {
 	});
 
 	it('can call postTrending', async () => {
-		let api = new SuggestAPI(new ApiConfiguration({}));
-		let requestMock = jest
+		const api = new SuggestAPI(new ApiConfiguration({}));
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 

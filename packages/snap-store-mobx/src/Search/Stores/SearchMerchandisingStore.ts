@@ -1,5 +1,3 @@
-import { observable, makeObservable } from 'mobx';
-
 import type { StoreServices } from '../../types';
 import type {
 	SearchResponseModelMerchandising,

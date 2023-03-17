@@ -4,7 +4,7 @@ import { SnapAPI } from './Snap';
 
 describe('Snap Api', () => {
 	it('has expected default functions', () => {
-		let api = new SnapAPI(new ApiConfiguration({}));
+		const api = new SnapAPI(new ApiConfiguration({}));
 
 		expect(api?.postMeta).toBeDefined();
 
@@ -14,8 +14,8 @@ describe('Snap Api', () => {
 	});
 
 	it('can call postMeta', async () => {
-		let api = new SnapAPI(new ApiConfiguration({}));
-		let requestMock = jest
+		const api = new SnapAPI(new ApiConfiguration({}));
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -39,8 +39,8 @@ describe('Snap Api', () => {
 	});
 
 	it('can call postSearch', async () => {
-		let api = new SnapAPI(new ApiConfiguration({}));
-		let requestMock = jest
+		const api = new SnapAPI(new ApiConfiguration({}));
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -61,8 +61,8 @@ describe('Snap Api', () => {
 	});
 
 	it('can call postAutocomplete', async () => {
-		let api = new SnapAPI(new ApiConfiguration({}));
-		let requestMock = jest
+		const api = new SnapAPI(new ApiConfiguration({}));
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 

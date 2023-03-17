@@ -10,7 +10,7 @@ import {
 	SearchSortingStore,
 	SearchHistoryStore,
 } from '../Search/Stores';
-import { StorageStore, StorageType } from '../Storage/StorageStore';
+import { StorageStore } from '../Storage/StorageStore';
 import {
 	AutocompleteStateStore,
 	AutocompleteTermStore,

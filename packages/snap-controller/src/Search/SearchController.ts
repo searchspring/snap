@@ -20,7 +20,6 @@ import type {
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
-const HEIGHT_CHECK_INTERVAL = 50;
 const API_LIMIT = 500;
 
 const defaultConfig: SearchControllerConfig = {
@@ -361,7 +360,7 @@ export class SearchController extends AbstractController {
 				// infinite backfill results
 				if (backfills && backfills.length) {
 					// array to hold all results from backfill responses
-					let backfillResults: SearchResponseModelResult[] = [];
+					const backfillResults: SearchResponseModelResult[] = [];
 
 					const backfillResponses = await Promise.all(backfills);
 					backfillResponses.map(([metaBackfill, responseBackfill]) => {

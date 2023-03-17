@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -216,13 +216,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const {
 		children,
-		breakpoints,
 		loop,
 		nextButton,
 		prevButton,
 		hideButtons,
 		vertical,
-		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,

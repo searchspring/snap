@@ -12,16 +12,8 @@ import type {
 	MetaResponseModel,
 	MetaResponseModelFacet,
 	MetaResponseModelFacetDefaults,
-	MetaResponseModelFacetGrid,
-	MetaResponseModelFacetHierarchy,
-	MetaResponseModelFacetList,
-	MetaResponseModelFacetPalette,
 	MetaResponseModelFacetSlider,
-	SearchRequestModelFilterRangeAllOfValue,
-	SearchResponseModelFilterRange,
-	SearchResponseModelFacetRangeBucketsAllOfValues,
 	SearchResponseModelFacetRangeBuckets,
-	SearchResponseModelFacetValueAllOfValues,
 } from '@searchspring/snapi-types';
 
 const services = {
@@ -228,9 +220,6 @@ describe('Facet Store', () => {
 
 		expect(facet.overflow.limited).toBe(false);
 
-		// new store to ensure storage does not bleed
-
-		const newStorageStore = new StorageStore();
 		facets = new SearchFacetStore(
 			searchConfig,
 			services,

@@ -9,7 +9,7 @@ export class LegacyAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 
 		//remove pageLoadId from cache key query params
-		let cacheParameters = { ...queryParameters };
+		const cacheParameters = { ...queryParameters };
 		delete cacheParameters.pageLoadId;
 
 		const legacyResponse = await this.request(

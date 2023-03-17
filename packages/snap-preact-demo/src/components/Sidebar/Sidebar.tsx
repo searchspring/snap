@@ -1,11 +1,10 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import {
 	ThemeProvider,
 	defaultTheme,
 	FilterSummary,
-	Select,
 	Facets,
 	StoreProvider,
 	withStore,

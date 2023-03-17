@@ -86,7 +86,7 @@ describe('Snap Client', () => {
 
 		expect(client.meta).toBeDefined();
 		// @ts-ignore
-		let clientConfig = client.config;
+		const clientConfig = client.config;
 
 		expect(clientConfig?.meta?.api?.origin).toBe(config?.meta?.api?.origin);
 

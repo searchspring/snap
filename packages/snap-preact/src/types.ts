@@ -1,6 +1,5 @@
 import type { Client, ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
-	AbstractController,
 	ControllerConfig,
 	SearchControllerConfig,
 	AutocompleteControllerConfig,

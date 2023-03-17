@@ -46,7 +46,7 @@ describe('createRecommendationController', () => {
 	it('throws when incomplete configuration is used', () => {
 		expect(() => {
 			// @ts-ignore - testing invalid config passed
-			const controller = createRecommendationController({});
+			createRecommendationController({});
 		}).toThrow();
 
 		expect(() => {
@@ -57,7 +57,7 @@ describe('createRecommendationController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createRecommendationController(bareConfig);
+			createRecommendationController(bareConfig);
 		}).toThrow();
 
 		expect(() => {
@@ -70,7 +70,7 @@ describe('createRecommendationController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createRecommendationController(bareConfig);
+			createRecommendationController(bareConfig);
 		}).toThrow();
 	});
 

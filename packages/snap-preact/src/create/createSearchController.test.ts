@@ -45,7 +45,7 @@ describe('createSearchController', () => {
 	it('throws when incomplete configuration is used', () => {
 		expect(() => {
 			// @ts-ignore - testing invalid config passed
-			const controller = createSearchController({});
+			createSearchController({});
 		}).toThrow();
 
 		expect(() => {
@@ -56,7 +56,7 @@ describe('createSearchController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createSearchController(bareConfig);
+			createSearchController(bareConfig);
 		}).toThrow();
 
 		expect(() => {
@@ -69,7 +69,7 @@ describe('createSearchController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createSearchController(bareConfig);
+			createSearchController(bareConfig);
 		}).toThrow();
 	});
 

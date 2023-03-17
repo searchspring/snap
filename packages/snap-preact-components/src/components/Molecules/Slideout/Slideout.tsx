@@ -10,7 +10,6 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
-import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
@@ -101,7 +100,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
 
-	let isVisible = useMediaQuery(displayAt!, () => {
+	const isVisible = useMediaQuery(displayAt!, () => {
 		document.body.style.overflow = '';
 	});
 

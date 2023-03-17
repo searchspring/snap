@@ -50,7 +50,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	}
 
 	return raw ? (
-		<>{formattedNumber}</>
+		<Fragment>{formattedNumber}</Fragment>
 	) : (
 		<CacheProvider>
 			<span className={classnames('ss__formatted-number', className)} {...styling}>

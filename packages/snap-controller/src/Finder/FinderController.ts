@@ -81,7 +81,7 @@ export class FinderController extends AbstractController {
 		const sessionId = this.tracker.getContext().sessionId;
 		const pageLoadId = this.tracker.getContext().pageLoadId;
 
-		let tracking: any = {};
+		const tracking: any = {};
 
 		if (userId) {
 			tracking.userId = userId;
