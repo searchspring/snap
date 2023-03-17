@@ -54,8 +54,7 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		let { tags, limits, categories, ...otherParams } = parameters;
-
+		let { tags, limits, categories, ...otherParams } = parameters; // eslint-disable-line
 		// set up batch key and deferred promises
 		const key = parameters.batched ? parameters.siteId : `${Math.random()}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
@@ -76,7 +75,7 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				let { tags, limits, categories, ...otherParams } = entry.request;
+				let { tags, limits, categories, ...otherParams } = entry.request; // eslint-disable-line
 
 				if (!limits) limits = 20;
 				const [tag] = tags || [];

@@ -46,6 +46,7 @@ describe('Snap Client', () => {
 		// checking requesters mode
 		// @ts-ignore - verifying private property
 		for (const [name, requester] of Object.entries(client.requesters)) {
+			expect(name).toBe(name);
 			// @ts-ignore - verifying private property
 			expect(requester.mode).toBe(AppMode.production);
 			// @ts-ignore - verifying private property
@@ -114,6 +115,8 @@ describe('Snap Client', () => {
 		// checking requesters mode
 		// @ts-ignore - verifying private property
 		for (const [name, requester] of Object.entries(client.requesters)) {
+			expect(name).toBe(name);
+
 			// @ts-ignore - verifying private property
 			expect(requester.mode).toBe(AppMode.development);
 			// @ts-ignore - verifying private property
