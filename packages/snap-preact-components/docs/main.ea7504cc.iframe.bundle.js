@@ -1,4 +1,4 @@
-/*! For license information please see main.bb0e0cde.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.ea7504cc.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -40778,7 +40778,7 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
-			var version = '0.42.1';
+			var version = '0.42.2';
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
