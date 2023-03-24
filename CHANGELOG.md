@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+### Bug Fixes
+
+- **store-mobx-finder:** fixing issue where selected persisted data was not being stored properly ([f05730a](https://github.com/searchspring/snap/commit/f05730ac5279050ec8fa236fa364c6ab5e04c878))
+
 ## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
 
 ### Bug Fixes
