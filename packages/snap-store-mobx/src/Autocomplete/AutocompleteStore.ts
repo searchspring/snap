@@ -69,6 +69,7 @@ export class AutocompleteStore extends AbstractStore {
 			results: observable,
 			pagination: observable,
 			sorting: observable,
+			history: observable,
 		});
 	}
 
@@ -125,6 +126,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.services[name] = service;
 			if (name === 'urlManager') {
 				this.state.url = service;
+				this.initHistory();
 			}
 		}
 	}
