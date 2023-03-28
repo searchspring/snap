@@ -5,7 +5,7 @@ export function reactLinker(urlManager: UrlManager): linkObject {
 		href: urlManager.href,
 		onClick: (ev: Event) => {
 			if (!urlManager?.detached) {
-				ev.preventDefault();
+				ev?.preventDefault();
 			}
 			urlManager.go();
 		},

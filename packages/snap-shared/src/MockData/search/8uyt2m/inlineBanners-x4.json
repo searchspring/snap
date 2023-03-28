@@ -1,0 +1,524 @@
+{
+  "pagination": {
+    "totalResults": 11,
+    "page": 1,
+    "pageSize": 30,
+    "totalPages": 1
+  },
+  "results": [
+    {
+      "id": "181258",
+      "mappings": {
+        "core": {
+          "uid": "181258",
+          "sku": "D-BAN-71390",
+          "name": "Beach Please Beige Cooler Bag",
+          "url": "/product/D-BAN-71390",
+          "addToCartUrl": "/product/D-BAN-71390",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2873_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2873_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2873_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Beach Please, get your own Tote Bag. This one’s mine and even if I did leave it here longer than ten minutes while I went to the snack bar at the pool, you can just waltz your thieving self right back through that sand to your towel before I whip out some pepper spray (which came in a pink case, and may or may not have a fuzzy key chain attached to it). If you had asked nicely, I would have told you where it came from, BTW.",
+          "stockMessage": "In stock",
+          "brand": "ban.do",
+          "popularity": "4057",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "9d61f818ada103b2e91e697e83acfa72",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0XVy9NM1NzS2NGAwZDBkMGAwZ0gvykwBBAAA__9-Fwcc",
+        "intellisuggestSignature": "029b9d209e8d18556f1c4d6214e9d24fa9016ceb9903ade6fa33100399dbab81",
+        "product_type_unigram": "bag"
+      },
+      "children": []
+    },
+    {
+      "id": "174462",
+      "mappings": {
+        "core": {
+          "uid": "174462",
+          "sku": "B-GNR-V1-20611",
+          "name": "Roll Along Purple Saddle Bag",
+          "url": "/product/B-GNR-V1-20611",
+          "addToCartUrl": "/product/B-GNR-V1-20611",
+          "price": 52,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_207_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_207_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_2_207_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Roll Along with the punches and keep your style in tact with this pretty Pink Saddle Bag. Nothing’s gonna knock you down! This saddle bag features gold hardware with a zipper closure and one open interior pocket. • Height measures 8\\\" • Width measures 9\\\" • Depth measures 3.5\\\"",
+          "stockMessage": "In stock",
+          "brand": "Giovanni & Rucci",
+          "popularity": "3382",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "e1d7410d03f49f35eee4095362fab21b",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0nX3C9INM9Q1MjAzNGQwZDBiMGAwZ0gvykwBBAAA__-Yiwfb",
+        "intellisuggestSignature": "81b8c7f1dda43e0bd786ef65a17e9fea19187bf8688a88f13cd600bdd310ef30",
+        "product_type_unigram": "bag"
+      },
+      "children": []
+    },
+    {
+      "id": "174466",
+      "mappings": {
+        "core": {
+          "uid": "174466",
+          "sku": "B-UE-B3-12225",
+          "name": "Around The Track Tan Saddle Bag",
+          "url": "/product/B-UE-B3-12225",
+          "addToCartUrl": "/product/B-UE-B3-12225",
+          "price": 38,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_23_accessories_015_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_23_accessories_015_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_23_accessories_015_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "• Purse measures 7\\\" High, 8\\\" Wide, 3\\\" Deep • Shoulder Strap Drop measures 22\\\" • Shell: 100% Polyurethane • Lining: 100% Polyester",
+          "stockMessage": "In stock",
+          "brand": "Urban Expressions",
+          "popularity": "3793",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "c2244bc85b069e724f383f87f75d2812",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0g111XUy1jU0MjIyZTBkMGYwYDBnSC_KTAEEAAD__40VB38",
+        "intellisuggestSignature": "12be850cb012eec980628e0e0d3308cc81cf117793b5353ff4aba19bff5304cd",
+        "product_type_unigram": "bag"
+      },
+      "children": []
+    },
+    {
+      "id": "181767",
+      "mappings": {
+        "core": {
+          "uid": "181767",
+          "sku": "D-BAN-72490",
+          "name": "Super Chill Lemon Cooler Bag",
+          "url": "/product/D-BAN-72490",
+          "addToCartUrl": "/product/D-BAN-72490",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2924_copyright_reddressboutique_2017_-2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2924_copyright_reddressboutique_2017_-2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2924_copyright_reddressboutique_2017_-2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Looking to juice up your summer? Take this lemon cooler bag and make lemonade! our watermelon bag became a national obsession, so we can only imagine what’s gonna happen with this slice of sunshine. pro tip: our cooler bag not only keeps your drinks cool, it also doubles as an insanely cute purse. Your beach game just keeps on getting more and more epic. Water resistant matte leatherette bag and handles 21.5 in. x 10 in. with 24 in. handles Gold hardware Gold foil ban.do logo or ban.do metal emblem",
+          "stockMessage": "In stock",
+          "brand": "ban.do",
+          "popularity": "1469",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "e78c55cb5824dae43eaefb1b4a330f0c",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0XVy9NM1NzKxNGAwZDBhMGAwZ0gvykwBBAAA__9-Vgch",
+        "intellisuggestSignature": "ff9811ca78c0d146bdb6febff8ebf871eeecc1463123994a5fd3423673831501",
+        "product_type_unigram": "bag"
+      },
+      "children": []
+    },
+    {
+      "id": "172021",
+      "mappings": {
+        "core": {
+          "uid": "172021",
+          "sku": "B-UE-R6-12177",
+          "name": "I've Got Plans Brick Red Handbag",
+          "url": "/product/B-UE-R6-12177",
+          "addToCartUrl": "/product/B-UE-R6-12177",
+          "price": 56,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_295_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_295_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_295_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "I've Got Plans to look pretty and polished, and this Brick Red Handbag will help bring those goals to fruition! You really know how to make things happen! This faux leather top handle handbag features a removable adjustable strap, zipper closure, gold hardware, 2 exterior zipper pockets, interior zipper pocket, 2 interior open pockets, printed lining, and a removable coin pouch. Peta approved vegan. • Purse measures 11\\\" High, 12\\\" Wide, 8\\\" Deep • Additional Shoulder Strap Drop: 18.5\\\" - 23.5\\\" • Handle Drop: 6\\\" • Shell: 100% Polyurethane • Lining: 100% Polyester",
+          "stockMessage": "In stock",
+          "brand": "Urban Expressions",
+          "popularity": "4455",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "4126b6fbfdf633a969aa65ecc403a23c",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0g111Q0y0zU0MjQ3ZzBkMGUwYDBnSC_KTAEEAAD__48MB5o",
+        "intellisuggestSignature": "e2a003cde3d88b1793d2dd6033e547f5c98f0a7d0455a3678cbce1051d045b52",
+        "product_type_unigram": "handbag"
+      },
+      "children": []
+    },
+    {
+      "id": "182200",
+      "mappings": {
+        "core": {
+          "uid": "182200",
+          "sku": "B-HDA-P7-C5479",
+          "name": "Wonderfully Whimsical Ivory Embroidered Clutch",
+          "url": "/product/B-HDA-P7-C5479",
+          "addToCartUrl": "/product/B-HDA-P7-C5479",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5141_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5141_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5141_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Carry as a clutch with detachable wristlet strap or wear as a purse with removable gold chain strap. Clutch has a gold zipper closures, two open interior pockets and one interior zipper pocket. • Clutch measures 9\\\" tall, 12\\\" wide and .25\\\" deep • Detachable chain measures 53\\\" • Detachable wristlet measures 7.5\\\" • 100% Polyurethane • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "HDA",
+          "popularity": "4328",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "e3e6b05645da96589be8489a242428f2",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0vVwcdQNMNd1NjUxt2QwZDBjMGAwZ0gvykwBBAAA__-YgAfn",
+        "intellisuggestSignature": "d0f22e32d585c1c83bf34694c917aa40e05667fa403d5de45f38e62ad5a70169",
+        "product_type_unigram": "clutch"
+      },
+      "children": []
+    },
+    {
+      "id": "181769",
+      "mappings": {
+        "core": {
+          "uid": "181769",
+          "sku": "D-LP-164219",
+          "name": "Lilly Pulitzer Exotic Garden Insulated Cooler",
+          "url": "/product/D-LP-164219",
+          "addToCartUrl": "/product/D-LP-164219",
+          "price": 34,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3747_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3747_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3747_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Insulated Beach Coolers are just common sense for a girl who's constantly at the beach. Fill your printed cooler with all of your snacks, drinks and sunscreen for a day spent by the sea - no trips home necessary. • Measures 15.5\\\" x 10\\\" x 12\\\" • Handles with snap closure • Adjustable shoulder strap • Water-resistant • Micro-fiber exterior with EVA lining • Zipper closure • BPA-, Phthalate-, and Lead-Free",
+          "stockMessage": "In stock",
+          "brand": "Lilly Pulitzer",
+          "popularity": "4429",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "841b1dbf3022e8a54d78b77d8a92ec91",
+        "intellisuggestData": "eJyyKK0sMcplYGBw0fUJ0DU0MzEytGQwZDBnMGAwZ0gvykwBBAAA__9-OQcg",
+        "intellisuggestSignature": "cb36e7b389bddcceae1fb9b835566a0f82c378d51c6cce7eb93449f01ea64b50",
+        "product_type_unigram": "cooler"
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range",
+      "filtered": false,
+      "step": 1,
+      "range": {
+        "low": 32,
+        "high": 56
+      },
+      "active": {
+        "low": 32,
+        "high": 56
+      }
+    },
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "ban.do",
+          "label": "ban.do",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Giovanni & Rucci",
+          "label": "Giovanni & Rucci",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "HDA",
+          "label": "HDA",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Lilly Pulitzer",
+          "label": "Lilly Pulitzer",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Urban Expressions",
+          "label": "Urban Expressions",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "All Accessories",
+          "label": "All Accessories",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Home & Office Decor",
+          "label": "Home & Office Decor",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "collection",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Around The Track",
+          "label": "Around The Track",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Beach Please",
+          "label": "Beach Please",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "pattern",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"one\" type=\"text/widget\"></script>one",
+          "config": {
+            "position": {
+              "index": 0
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"\" type=\"text/widget\"></script>",
+          "config": {
+            "position": {
+              "index": 4
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"three\" type=\"text/widget\"></script>three",
+          "config": {
+            "position": {
+              "index": 7
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"four\" type=\"text/widget\"></script>four",
+          "config": {
+            "position": {
+              "index": 8
+            }
+          }
+        }
+      ]
+    },
+    "campaigns": [
+      {
+        "id": "269890",
+        "title": "inline banners",
+        "type": "landing-page"
+      }
+    ]
+  },
+  "search": {
+    "query": ""
+  }
+}
