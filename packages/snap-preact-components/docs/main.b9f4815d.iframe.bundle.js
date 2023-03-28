@@ -1,4 +1,4 @@
-/*! For license information please see main.ea7504cc.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.b9f4815d.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -36285,7 +36285,7 @@
 											}, [])
 											.forEach(function (banner, index) {
 												var adjustedIndex = banner.config.position.index - minIndex;
-												adjustedIndex > productCount - 1 && (adjustedIndex = productCount + index), results.splice(adjustedIndex, 0, banner);
+												results.splice(adjustedIndex, 0, banner);
 											}),
 										results
 									);
@@ -38110,6 +38110,7 @@
 								results: mobx_esm.LO,
 								pagination: mobx_esm.LO,
 								sorting: mobx_esm.LO,
+								history: mobx_esm.LO,
 							}),
 							_this
 						);
@@ -38204,7 +38205,9 @@
 							{
 								key: 'setService',
 								value: function setService(name, service) {
-									this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
+									this.services[name] &&
+										service &&
+										((this.services[name] = service), 'urlManager' === name && ((this.state.url = service), this.initHistory()));
 								},
 							},
 							{
@@ -39355,7 +39358,7 @@
 				return {
 					href: urlManager.href,
 					onClick: function onClick(ev) {
-						(null != urlManager && urlManager.detached) || ev.preventDefault(), urlManager.go();
+						(null != urlManager && urlManager.detached) || null == ev || ev.preventDefault(), urlManager.go();
 					},
 				};
 			}
@@ -40778,7 +40781,7 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
-			var version = '0.42.2';
+			var version = '0.42.3';
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
