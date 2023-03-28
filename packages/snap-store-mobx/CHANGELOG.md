@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+### Bug Fixes
+
+- **autocompletestore:** re-init ac history when setService urlManager is called ([0ff3114](https://github.com/searchspring/snap/commit/0ff311447f13b75240ca3d7e34e616c4eba52b00))
+- **store-search-result-store:** adjusting logic for inline banner injection and adding a test ([4ebd069](https://github.com/searchspring/snap/commit/4ebd069198f00059dfc834fef0a5a440f470ca9c))
+
 ## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
 
 ### Bug Fixes
