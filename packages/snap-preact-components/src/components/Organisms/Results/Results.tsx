@@ -4,6 +4,7 @@ import { Fragment, h } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
 
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { SearchResultStore, Product, Banner } from '@searchspring/snap-store-mobx';
@@ -81,13 +82,14 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints!);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		props = {
-			...props,
-			...displaySettings,
-		};
-	}
+	const displaySettings = useDisplaySettings(props?.breakpoints || {});
+	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+
+	props = {
+		...props,
+		...displaySettings,
+		theme,
+	};
 
 	const { disableStyles, className, layout, style, controller } = props;
 
