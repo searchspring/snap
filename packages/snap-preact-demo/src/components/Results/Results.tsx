@@ -61,7 +61,6 @@ type NoResultsProps = {
 
 @withController
 @withStore
-//@ts-ignore
 @observer
 export class NoResults extends Component<NoResultsProps> {
 	render() {

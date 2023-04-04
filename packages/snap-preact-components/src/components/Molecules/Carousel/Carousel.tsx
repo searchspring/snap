@@ -299,9 +299,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				<Swiper
 					centerInsufficientSlides={true}
 					onInit={(swiper) => {
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
 						if (onInit) {
 							onInit(swiper);

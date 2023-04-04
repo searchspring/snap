@@ -386,23 +386,15 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 					//append new results to previous results
@@ -411,13 +403,9 @@ export class SearchController extends AbstractController {
 			} else {
 				//standard.
 				[meta, response] = await this.client.search(params);
-				// @ts-ignore
+				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 				if (!response.meta) {
-					/**
-					 * MockClient will overwrite the client search() method and use
-					 * SearchData to return mock data which already contains meta data
-					 */
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					response.meta = meta;
 				}
 			}

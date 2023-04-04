@@ -40,7 +40,6 @@ type SidebarContentsProps = {
 
 @withController
 @withStore
-//@ts-ignore
 @observer
 export class SidebarContents extends Component<SidebarContentsProps> {
 	render() {
