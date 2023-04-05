@@ -16,7 +16,7 @@ import type { ControllerConfig } from '../types';
 describe('Search Controller', () => {
 	const globals = { siteId: 'ga9kq2' };
 
-	let controllerConfigDefault: ControllerConfig = {
+	const controllerConfigDefault: ControllerConfig = {
 		id: 'abstract',
 	};
 
@@ -38,7 +38,7 @@ describe('Search Controller', () => {
 	it('throws if invalid config', async () => {
 		expect(() => {
 			// @ts-ignore
-			const controller = new TestController(
+			new TestController(
 				// @ts-ignore
 				{ id: 123 },
 				{
@@ -56,7 +56,7 @@ describe('Search Controller', () => {
 
 	it('throws if invalid services', async () => {
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				// @ts-ignore
 				client: 'invalid',
 				store: new SearchStore(searchConfig, services),
@@ -69,7 +69,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				// @ts-ignore
 				store: 'invalid',
@@ -82,7 +82,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				store: new SearchStore(searchConfig, services),
 				// @ts-ignore
@@ -95,7 +95,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				store: new SearchStore(searchConfig, services),
 				urlManager,
@@ -108,7 +108,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				store: new SearchStore(searchConfig, services),
 				urlManager,
@@ -121,7 +121,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				store: new SearchStore(searchConfig, services),
 				urlManager,
@@ -134,7 +134,7 @@ describe('Search Controller', () => {
 		}).toThrow();
 
 		expect(() => {
-			const controller = new TestController(searchConfig, {
+			new TestController(searchConfig, {
 				client: new MockClient(globals, {}),
 				store: new SearchStore(searchConfig, services),
 				urlManager,
@@ -191,7 +191,7 @@ describe('Search Controller', () => {
 		});
 		const initfn = jest.fn();
 		const paramPlugin = (controller: AbstractController) => {
-			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
+			controller.on('init', async ({}: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -219,20 +219,20 @@ describe('Search Controller', () => {
 		});
 		const initfn = jest.fn();
 
-		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({ controller }: { controller: AbstractController }, next: Next) => {
+		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({}: { controller: AbstractController }, next: Next) => {
 			initfn();
 			await next();
 		};
 
 		const plugin = (controller: AbstractController) => {
-			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
+			controller.on('init', async ({}: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
 		};
 
-		const paramPlugin = (controller: AbstractController, ...params: any[]) => {
-			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
+		const paramPlugin = (controller: AbstractController) => {
+			controller.on('init', async ({}: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -271,7 +271,7 @@ describe('Search Controller', () => {
 		const spy = jest.spyOn(controller.log, 'warn');
 
 		const plugin = (controller: AbstractController) => {
-			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
+			controller.on('init', async ({}: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -296,7 +296,7 @@ describe('Search Controller', () => {
 		spy.mockClear();
 
 		// test if middleware is not an array (should be converted to an array internally)
-		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({ controller }: { controller: AbstractController }, next: Next) => {
+		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({}: { controller: AbstractController }, next: Next) => {
 			initfn();
 			await next();
 		};

@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Pagination, Results as ResultsComponent, withStore, withController } from '@searchspring/snap-preact-components';
@@ -61,7 +61,6 @@ type NoResultsProps = {
 
 @withController
 @withStore
-//@ts-ignore
 @observer
 export class NoResults extends Component<NoResultsProps> {
 	render() {

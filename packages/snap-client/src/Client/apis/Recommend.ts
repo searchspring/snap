@@ -54,8 +54,6 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		let { tags, limits, categories, ...otherParams } = parameters;
-
 		// set up batch key and deferred promises
 		const key = parameters.batched ? parameters.siteId : `${Math.random()}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
@@ -76,13 +74,17 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				let { tags, limits, categories, ...otherParams } = entry.request;
+				const { tags, categories, ...otherParams } = entry.request;
+				let limits = entry.request.limits;
 
-				if (!limits) limits = 20;
+				if (!limits) {
+					limits = 20;
+				}
 				const [tag] = tags || [];
 
 				delete otherParams.batched; // remove from request parameters
 				delete otherParams.order; // remove from request parameters
+				delete otherParams.limits;
 
 				batch.request.tags!.push(tag);
 

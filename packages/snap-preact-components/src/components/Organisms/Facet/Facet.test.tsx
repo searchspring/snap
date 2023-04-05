@@ -3,31 +3,30 @@ import { render, waitFor } from '@testing-library/preact';
 import { Facet } from './Facet';
 import { ThemeProvider } from '../../../providers';
 
-import { FacetDisplay } from '../../../types';
 import userEvent from '@testing-library/user-event';
 import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
-import { SearchResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
 
 const mockData = new MockData();
-let searchResponseFacets = mockData.search().facets!;
+const searchResponseFacets = mockData.search().facets!;
 
-let hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'ss_category_hierarchy')!
 	.pop()!;
-let gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'size_dress')!
 	.pop()!;
-let paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'color_family')!
 	.pop()!;
-let listFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const listFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'season')!
 	.pop()!;
-let facetOverflowMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const facetOverflowMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'brand')!
 	.pop()!;
-let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
+const sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = searchResponseFacets
 	.filter((facet) => facet.field == 'price')
 	.pop()!;
 

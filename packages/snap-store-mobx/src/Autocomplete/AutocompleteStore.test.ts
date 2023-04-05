@@ -138,7 +138,7 @@ describe('Autocomplete Store', () => {
 	});
 
 	it('reset functions actually reset data', () => {
-		let mockStorage: {
+		const mockStorage: {
 			[key: string]: string;
 		} = {};
 

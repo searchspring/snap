@@ -1,7 +1,6 @@
 import type * as SnapPreactTypes from '@searchspring/snap-preact';
 import type * as ControllerTypes from '@searchspring/snap-controller';
 import type * as StoreTypes from '@searchspring/snap-store-mobx';
-import type * as UrlManagerTypes from '@searchspring/snap-url-manager';
 import type * as EventManagerTypes from '@searchspring/snap-event-manager';
 
 declare global {

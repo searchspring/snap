@@ -113,7 +113,7 @@ describe('Event Manager', () => {
 		const testFunc1 = jest.fn();
 		const testFunc2 = jest.fn();
 
-		eventManager.on('testEvent', (context, next) => {
+		eventManager.on('testEvent', () => {
 			testFunc1();
 			expect(testFunc2).not.toHaveBeenCalled();
 

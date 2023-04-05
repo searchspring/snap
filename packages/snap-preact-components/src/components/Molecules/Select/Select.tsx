@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { StateUpdater, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -222,7 +222,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableClickOutside={disableClickOutside}
 						open={open}
 						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-						onClick={(e) => setOpen((prev) => !prev)}
+						onClick={() => setOpen((prev) => !prev)}
 						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>

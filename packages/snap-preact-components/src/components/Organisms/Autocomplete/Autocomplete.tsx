@@ -278,7 +278,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		...displaySettings,
 		theme,
 	};
-	let input: String | Element | null = props.input;
+	let input: string | Element | null = props.input;
 	let inputViewportOffsetBottom = 0;
 	if (input) {
 		if (typeof input === 'string') {

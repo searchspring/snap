@@ -1,4 +1,4 @@
-import { makeObservable, observable, toJS, configure } from 'mobx';
+import { makeObservable, observable, toJS } from 'mobx';
 import type { StoreConfigs, ErrorType } from '../types';
 export abstract class AbstractStore {
 	public custom = {};

@@ -52,7 +52,7 @@ describe('Recommendation Controller', () => {
 			};
 
 			// @ts-ignore
-			const controller = new RecommendationController(configWithoutTag, {
+			new RecommendationController(configWithoutTag, {
 				client: new MockClient(globals, {}),
 				store: new RecommendationStore(configWithoutTag, services),
 				urlManager,

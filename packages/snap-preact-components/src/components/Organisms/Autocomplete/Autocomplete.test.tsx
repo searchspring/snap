@@ -108,10 +108,10 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 			expect(results[0]).toBeInTheDocument();
 			expect(results.length).toEqual(9);
 		});
@@ -130,7 +130,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 		let termLinks: any;
 		let firstResult: any;
 		let terms: any;
@@ -160,7 +160,7 @@ describe('Autocomplete Component', () => {
 
 		await waitFor(() => {
 			//now lets check for the new results
-			let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			const newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 			//there should be new results available
 			expect(newResults[0]).toBeInTheDocument();
 			// we will need to save this for later
@@ -188,7 +188,7 @@ describe('Autocomplete Component', () => {
 
 		await waitFor(() => {
 			//check for the new results
-			let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			const newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 			expect(newNewResults[0]).toBeInTheDocument();
 			//new results should again be different from previous results
 			expect(newNewResults[0].innerHTML).not.toEqual(newFirstResult);
@@ -199,7 +199,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink & hideHistory', async () => {
-		let mockStorage: {
+		const mockStorage: {
 			[key: string]: string;
 		} = {};
 		global.Storage.prototype.setItem = jest.fn((key, value) => {
@@ -242,47 +242,47 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let renderedWithout = render(<Autocomplete {...args} />, { container });
+		const renderedWithout = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
+			const terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
 			expect(terms).not.toBeInTheDocument();
 
-			let facets = renderedWithout.container.querySelector('.ss__autocomplete__facets');
+			const facets = renderedWithout.container.querySelector('.ss__autocomplete__facets');
 			expect(facets).not.toBeInTheDocument();
 
-			let content = renderedWithout.container.querySelector('.ss__autocomplete__content');
+			const content = renderedWithout.container.querySelector('.ss__autocomplete__content');
 			expect(content).not.toBeInTheDocument();
 
-			let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
+			const link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
 			expect(link).not.toBeInTheDocument();
 
-			let history = renderedWithout.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
+			const history = renderedWithout.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
 			expect(history).not.toBeInTheDocument();
 
-			let trending = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			const trending = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
 			expect(trending).not.toBeInTheDocument();
 		});
 
-		let renderedWith = render(<Autocomplete {...otherArgs} />, { container });
+		const renderedWith = render(<Autocomplete {...otherArgs} />, { container });
 
 		await waitFor(() => {
-			let terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
+			const terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
 			expect(terms2).toBeInTheDocument();
 
-			let facets2 = renderedWith.container.querySelector('.ss__autocomplete__facets');
+			const facets2 = renderedWith.container.querySelector('.ss__autocomplete__facets');
 			expect(facets2).toBeInTheDocument();
 
-			let content2 = renderedWith.container.querySelector('.ss__autocomplete__content');
+			const content2 = renderedWith.container.querySelector('.ss__autocomplete__content');
 			expect(content2).toBeInTheDocument();
 
-			let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
+			const link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
 			expect(link2).toBeInTheDocument();
 
-			let history2 = renderedWith.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
+			const history2 = renderedWith.container.querySelector('.ss__autocomplete__terms__history .ss__autocomplete__terms__options');
 			expect(history2).toBeInTheDocument();
 
-			let trending2 = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
+			const trending2 = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
 			expect(trending2).toBeInTheDocument();
 		});
 	});
@@ -310,22 +310,22 @@ describe('Autocomplete Component', () => {
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container });
+		const renderedWithoutBanners = render(<Autocomplete {...args} />, { container });
 		await waitFor(() => {
-			let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
+			const banners = renderedWithoutBanners.container.querySelector('.ss__banner');
 			expect(banners).not.toBeInTheDocument();
 		});
 
-		let renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container });
+		const renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container });
 
 		await waitFor(() => {
-			let banners2 = renderedWithBanners.container.querySelector('.ss__banner');
+			const banners2 = renderedWithBanners.container.querySelector('.ss__banner');
 			expect(banners2).toBeInTheDocument();
 		});
 	});
 
 	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
-		let mockStorage: {
+		const mockStorage: {
 			[key: string]: string;
 		} = {};
 		global.Storage.prototype.setItem = jest.fn((key, value) => {
@@ -354,28 +354,28 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let termTitle = rendered.container.querySelector('.ss__autocomplete__title');
+			const termTitle = rendered.container.querySelector('.ss__autocomplete__title');
 			expect(termTitle).toHaveTextContent(args.termsTitle);
 
-			let facetsTitle = rendered.container.querySelector('.ss__autocomplete__title--facets');
+			const facetsTitle = rendered.container.querySelector('.ss__autocomplete__title--facets');
 			expect(facetsTitle).toHaveTextContent(args.facetsTitle);
 
-			let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+			const contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
 			expect(contentTitle).toHaveTextContent(args.contentTitle);
 
-			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			const historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
 			expect(historyTitle).toHaveTextContent(args.historyTitle);
 
-			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 	});
 
 	it('can use retainhistory && retaintrending false', async () => {
-		let mockStorage: {
+		const mockStorage: {
 			[key: string]: string;
 		} = {};
 		global.Storage.prototype.setItem = jest.fn((key, value) => {
@@ -400,13 +400,13 @@ describe('Autocomplete Component', () => {
 
 		input.focus();
 
-		let rendered = render(<Autocomplete input={input} {...args} />, { container });
+		const rendered = render(<Autocomplete input={input} {...args} />, { container });
 
 		await waitFor(() => {
-			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			const historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
 			expect(historyTitle).toHaveTextContent(args.historyTitle);
 
-			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 
@@ -414,10 +414,10 @@ describe('Autocomplete Component', () => {
 		userEvent.keyboard('dress');
 
 		await waitFor(() => {
-			let historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
+			const historyTitle = rendered.container.querySelector('.ss__autocomplete__title--history');
 			expect(historyTitle).not.toBeInTheDocument();
 
-			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).not.toBeInTheDocument();
 		});
 
@@ -435,10 +435,10 @@ describe('Autocomplete Component', () => {
 		let rendered2 = render(<Autocomplete {...args2} />, { container });
 
 		await waitFor(() => {
-			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			const historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
 			expect(historyTitle).toHaveTextContent(args.historyTitle);
 
-			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 
@@ -447,10 +447,10 @@ describe('Autocomplete Component', () => {
 
 		rendered2 = render(<Autocomplete {...args2} />, { container });
 		await waitFor(() => {
-			let historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
+			const historyTitle = rendered2.container.querySelector('.ss__autocomplete__title--history');
 			expect(historyTitle).toHaveTextContent(args.historyTitle);
 
-			let trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 	});
@@ -470,10 +470,10 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
 	});
@@ -495,22 +495,22 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
+			const termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
 			expect(termsSlot).toHaveTextContent('custom termsSlot');
 
-			let facetSlot = rendered.container.querySelector('.ss__autocomplete__facets');
+			const facetSlot = rendered.container.querySelector('.ss__autocomplete__facets');
 			expect(facetSlot).toHaveTextContent('custom facetsSlot');
 
-			let resultsSlot = rendered.container.querySelector('.ss__autocomplete__content__results');
-			let defaultTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+			const resultsSlot = rendered.container.querySelector('.ss__autocomplete__content__results');
+			const defaultTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
 			expect(defaultTitle).not.toBeInTheDocument();
 			expect(resultsSlot).toHaveTextContent('custom resultsSlot');
 
-			let defaultLink = rendered.container.querySelector('.ss__autocomplete__content__info');
-			let linkSlot = rendered.container.querySelector('.ss__autocomplete__content #findMe');
+			const defaultLink = rendered.container.querySelector('.ss__autocomplete__content__info');
+			const linkSlot = rendered.container.querySelector('.ss__autocomplete__content #findMe');
 
 			expect(defaultLink).not.toBeInTheDocument();
 			expect(linkSlot).toHaveTextContent('custom linkSlot');
@@ -532,10 +532,10 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
+			const contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
 			expect(contentSlot).toHaveTextContent('Lorem Ipsum');
 		});
 	});
@@ -558,10 +558,10 @@ describe('Autocomplete Component', () => {
 
 		input.focus();
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
+			const noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
 			expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
 		});
 	});
@@ -601,7 +601,7 @@ describe('Autocomplete Component', () => {
 
 			expect(controller.store.trending[0].active).toBeTruthy();
 
-			let results = rendered.container.querySelectorAll('.ss__result');
+			const results = rendered.container.querySelectorAll('.ss__result');
 			expect(results[0]).toBeInTheDocument();
 		});
 	});
@@ -626,17 +626,17 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 
 		await waitFor(() => {
-			let ac = rendered.container.querySelector('.ss__autocomplete')!;
+			const ac = rendered.container.querySelector('.ss__autocomplete')!;
 			const styles = getComputedStyle(ac);
 			expect(styles['width']).toBe(args.width);
 		});
 
-		let rendered2 = render(<Autocomplete {...args2} />, { container });
+		const rendered2 = render(<Autocomplete {...args2} />, { container });
 		await waitFor(() => {
-			let ac2 = rendered2.container.querySelector('.ss__autocomplete')!;
+			const ac2 = rendered2.container.querySelector('.ss__autocomplete')!;
 			const styles2 = getComputedStyle(ac2);
 			expect(styles2['width']).toBe(args2.width);
 		});
@@ -665,7 +665,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		let rendered = render(<Autocomplete {...args} />, { container });
+		const rendered = render(<Autocomplete {...args} />, { container });
 		let acFacets: any;
 		await waitFor(() => {
 			acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
@@ -831,7 +831,7 @@ describe('Autocomplete Component', () => {
 			input.focus();
 			input.value = 'dress';
 
-			let rendered = render(<Autocomplete {...args} />, { container });
+			const rendered = render(<Autocomplete {...args} />, { container });
 			let acFacet: any;
 			let options: any;
 

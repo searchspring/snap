@@ -35,7 +35,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	let props: SearchInputProps = {
+	const props: SearchInputProps = {
 		// default props
 		placeholder: 'Search',
 		hideIcon: false,

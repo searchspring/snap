@@ -4,7 +4,7 @@ import { LegacyAPI } from './Legacy';
 
 describe('Legacy Api', () => {
 	it('has expected default functions', () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 
 		// @ts-ignore
 		expect(api?.getEndpoint).toBeDefined();
@@ -19,7 +19,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getMeta', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -38,7 +38,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getSearch', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -58,7 +58,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call postMeta', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -80,7 +80,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getAutocomplete', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -100,7 +100,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getFinder', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -120,7 +120,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getEndpoint', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')

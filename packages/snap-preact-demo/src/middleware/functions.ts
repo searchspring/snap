@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge';
 export async function timeout(microSeconds: number) {
 	console.log(`...waiting ${microSeconds} μsecs...`);
 
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(resolve, microSeconds);
 	});
 }

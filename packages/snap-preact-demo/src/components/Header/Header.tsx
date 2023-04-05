@@ -11,7 +11,7 @@ type HeaderProps = {
 @observer
 export class Header extends Component<HeaderProps> {
 	render() {
-		const { pagination, search, custom } = this.props.controller.store;
+		const { pagination, search } = this.props.controller.store;
 
 		const landingPage = this.props.controller.store.merchandising.landingPage;
 		return (
@@ -19,7 +19,7 @@ export class Header extends Component<HeaderProps> {
 				{landingPage ? (
 					<h3 className="ss__search-header--landingPageTitle">{landingPage.title}</h3>
 				) : (
-					<>
+					<Fragment>
 						{pagination.totalResults ? (
 							<h3
 								class="ss-title ss-results-title"
@@ -56,7 +56,7 @@ export class Header extends Component<HeaderProps> {
 								</h3>
 							)
 						)}
-					</>
+					</Fragment>
 				)}
 			</header>
 		);

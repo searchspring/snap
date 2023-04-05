@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { withStore, withController, useA11y } from '@searchspring/snap-preact-components';
@@ -14,7 +14,7 @@ type FilterSummaryProps = {
 @observer
 export class FilterSummary extends Component<FilterSummaryProps> {
 	render() {
-		const { facets, filters } = this.props.store;
+		const { filters } = this.props.store;
 		const controller = this.props.controller;
 		const removeAll = controller?.urlManager.remove('filter');
 

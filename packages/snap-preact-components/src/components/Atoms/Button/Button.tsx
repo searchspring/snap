@@ -1,11 +1,13 @@
 /** @jsx jsx */
+/** @jsx h */
+
 import { h, Fragment, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 
@@ -70,7 +72,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
 
-	let a11yProps = {
+	const a11yProps = {
 		ref: (e: any) => useA11y(e),
 	};
 

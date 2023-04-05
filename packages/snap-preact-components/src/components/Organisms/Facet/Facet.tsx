@@ -265,7 +265,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					<Dropdown
 						{...subProps.dropdown}
 						open={disableCollapse || !facet?.collapsed}
-						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
+						onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 						disableA11y={true}
 						button={
 							<div
@@ -320,13 +320,13 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 								{overflowSlot ? (
 									cloneWithProps(overflowSlot, { facet })
 								) : (
-									<>
+									<Fragment>
 										<Icon
 											{...subProps.showMoreLessIcon}
 											icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
 										/>
 										<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
-									</>
+									</Fragment>
 								)}
 							</div>
 						)}

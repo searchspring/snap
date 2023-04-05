@@ -6,7 +6,6 @@ import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
-import type { FunctionComponent } from 'preact';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
@@ -299,7 +298,7 @@ export class RecommendationInstantiator {
 		this.plugins.push({ func, args });
 	}
 
-	public on<T>(event: string, ...func: Middleware<unknown>[]): void {
+	public on(event: string, ...func: Middleware<unknown>[]): void {
 		this.middleware.push({ event, func });
 	}
 
