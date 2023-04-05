@@ -18,17 +18,15 @@ module.exports = {
 		  ],		
 		'@typescript-eslint/no-explicit-any': 'off',
 
-		//todo turn these on
+		// todo turn these on
 		'@typescript-eslint/no-non-null-assertion': 'off',
 		'@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
 		
 		'@typescript-eslint/no-empty-function': 'error',
 		"@typescript-eslint/no-unused-vars": [
-			"warn", // or "error"
+			"error",
 			{ 
-				"argsIgnorePattern": "h|jsx",
-				"varsIgnorePattern": "h|jsx",
-				"caughtErrorsIgnorePattern": "h|jsx"
+				"varsIgnorePattern": "^(h|jsx)$"
 			}
 		],
 	},
