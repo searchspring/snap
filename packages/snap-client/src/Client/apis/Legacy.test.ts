@@ -47,7 +47,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getSearch({
 			siteId: '8uyt2m',
@@ -89,7 +89,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/autocomplete.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getAutocomplete({
 			siteId: '8uyt2m',
@@ -109,7 +109,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/finder.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getFinder({
 			siteId: '8uyt2m',

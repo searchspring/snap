@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+### Bug Fixes
+
+- **urlmanager-linker-react:** adjusting code so that if an event is not passed it will not error out ([e4a4b62](https://github.com/searchspring/snap/commit/e4a4b6235d5f6b4719b3bddf0a57e1bea118fc0d))
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
 ## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

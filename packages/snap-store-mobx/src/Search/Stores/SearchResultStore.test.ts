@@ -103,7 +103,27 @@ describe('SearchResultStore', () => {
 			expect((results[0] as Banner).value).toBe(inlineData[2].value);
 		});
 
-		it('splices inline banners into the results array', () => {
+		it('correctly splices four inline banners into the results array with low numbers of results', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners-x4');
+
+			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+
+			expect(results.length).toBe(11);
+			const inlineData = searchData.merchandising?.content?.inline!;
+			expect(results[0].id).toBe(`ss-ib-${inlineData[0].config?.position?.index}`);
+			expect((results[0] as Banner).value).toBe(inlineData[0].value);
+
+			expect(results[4].id).toBe(`ss-ib-${inlineData[1].config?.position?.index}`);
+			expect((results[4] as Banner).value).toBe(inlineData[1].value);
+
+			expect(results[7].id).toBe(`ss-ib-${inlineData[2].config?.position?.index}`);
+			expect((results[7] as Banner).value).toBe(inlineData[2].value);
+
+			expect(results[8].id).toBe(`ss-ib-${inlineData[3].config?.position?.index}`);
+			expect((results[8] as Banner).value).toBe(inlineData[3].value);
+		});
+
+		it('splices inline banners that are beyond the response index to the end of the results array', () => {
 			const searchData = {
 				results: [],
 				pagination: {
