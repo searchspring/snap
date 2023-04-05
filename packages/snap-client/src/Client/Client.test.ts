@@ -208,11 +208,11 @@ describe('Snap Client', () => {
 					siteId: ['8uyt2m'],
 				},
 			};
-			const acCacheKey = '/api/search/autocomplete.json{"siteId":["8uyt2m"],"redirectResponse":"full","resultsFormat":"native"}';
+			const acCacheKey = '/api/search/autocomplete.json{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(acRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(acRequesterSpy.mock.calls).toEqual([
-				[acRequest, acCacheKey], // first call
+				[{ ...acRequest, query: { ajaxCatalog: 'Snap', ...acRequest.query } }, acCacheKey], // first call
 			]);
 
 			expect(fetchApiMock).toHaveBeenCalledTimes(3);
@@ -278,9 +278,14 @@ describe('Snap Client', () => {
 
 			await wait();
 
-			const searchparams = { headers: {}, method: 'GET', path: '/api/search/search.json', query: { resultsFormat: 'native', siteId: ['8uyt2m'] } };
+			const searchparams = {
+				headers: {},
+				method: 'GET',
+				path: '/api/search/search.json',
+				query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
+			};
 
-			const searchcacheKey = '/api/search/search.json{"siteId":["8uyt2m"],"resultsFormat":"native"}';
+			const searchcacheKey = '/api/search/search.json{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
