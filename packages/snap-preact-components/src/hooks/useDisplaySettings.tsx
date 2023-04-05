@@ -21,6 +21,11 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
 
+	// when breakpointsObj changes (due to computed values)
+	useEffect(() => {
+		setDisplaySettings(getDisplaySettings(breakpointsObj));
+	}, [breakpointsObj]);
+
 	return displaySettings;
 }
 
