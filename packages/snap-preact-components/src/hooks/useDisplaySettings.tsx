@@ -24,7 +24,7 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	// when breakpointsObj changes (due to computed values)
 	useEffect(() => {
 		setDisplaySettings(getDisplaySettings(breakpointsObj));
-	}, [breakpointsObj]);
+	}, [JSON.stringify(breakpointsObj)]);
 
 	return displaySettings;
 }
