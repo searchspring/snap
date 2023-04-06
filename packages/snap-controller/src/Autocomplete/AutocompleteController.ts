@@ -364,15 +364,20 @@ export class AutocompleteController extends AbstractController {
 
 				clearTimeout(this.handlers.input.timeoutDelay);
 
+				// input is empty
 				if (!value) {
 					// TODO cancel any current requests?
+
+					// reset the store (in case input was just cleared)
 					this.store.reset();
-					this.urlManager.reset().go();
 
 					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
 						this.store.trending[0].preview();
 					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
 						this.store.history[0].preview();
+					} else {
+						// reset urlManager when a preview is not available to do so
+						this.urlManager.reset().go();
 					}
 				} else {
 					this.store.resetTerms();
