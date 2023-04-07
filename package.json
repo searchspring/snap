@@ -1,65 +1,65 @@
 {
-	"name": "@searchspring/snap",
-	"private": true,
-	"type": "module",
-	"workspaces": [
-		"packages/*",
-		"packages/snapps/*"
-	],
-	"scripts": {
-		"commit": "cz",
-		"build": "lerna run build",
-		"build:docs": "lerna exec --stream --parallel 'npm run build:docs' && npm run build:feed",
-		"build:feed": "node ./docs/generateFeed.js",
-		"build:metrics": "node ./metrics/generate",
-		"test": "jest",
-		"posttest": "npm run test --workspace=@searchspring/snap-preact-demo",
-		"dev": "lerna exec --parallel --stream 'npm run dev'",
-		"dev:docs": "http-server ./ -p 1111",
-		"lint": "lerna exec --parallel --stream 'npm run lint'",
-		"clean": "npm run clean:coverage && npm run clean:docs && npm run clean:packages && npm run clean:cache",
-		"clean:cache": "rm -rf ./node_modules/.cache/nx",
-		"clean:coverage": "lerna exec --parallel --stream 'rm -rf ./coverage'",
-		"clean:docs": "lerna exec --parallel --stream 'rm -rf ./docs'",
-		"clean:packages": "lerna exec --parallel --stream 'rm -rf ./node_modules package-lock.json' && rm -rf ./node_modules package-lock.json",
-		"format": "lerna exec --parallel --stream 'npm run format'",
-		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
-		"prepare": "husky install"
-	},
-	"prettier": "@searchspring/prettier",
-	"devDependencies": {
-		"@searchspring/prettier": "1.0.2",
-		"@searchspring/snapi-types": "^0.1.32",
-		"@types/jest": "27.5.1",
-		"@types/jsdom": "20.0.0",
-		"@typescript-eslint/eslint-plugin": "5.48.0",
-		"@typescript-eslint/parser": "5.48.0",
-		"cz-conventional-changelog": "3.3.0",
-		"eslint": "8.31.0",
-		"eslint-config-prettier": "8.6.0",
-		"http-server": "14.1.0",
-		"husky": "7.0.4",
-		"jest": "27.5.1",
-		"nx": "^15.4.4",
-		"jsdom": "20.0.0",
-		"lerna": "^6.3.0",
-		"lint-staged": "12.4.1",
-		"prettier": "2.6.2",
-		"standard-version": "9.5.0",
-		"ts-jest": "27.1.5",
-		"typedoc": "0.22.15",
-		"typescript": "4.6.4",
-		"whatwg-fetch": "3.6.2"
-	},
-	"lint-staged": {
-		"*.{js,ts,tsx}": [
-			"prettier --write"
-		]
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	}
+  "name": "@searchspring/snap",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "packages/snapps/*"
+  ],
+  "scripts": {
+    "commit": "cz",
+    "build": "lerna run build",
+    "build:docs": "lerna exec --stream --parallel 'npm run build:docs' && npm run build:feed",
+    "build:feed": "node ./docs/generateFeed.js",
+    "build:metrics": "node ./metrics/generate",
+    "test": "jest",
+    "posttest": "npm run test --workspace=@searchspring/snap-preact-demo",
+    "dev": "lerna exec --parallel --stream 'npm run dev'",
+    "dev:docs": "http-server ./ -p 1111",
+    "lint": "lerna run lint",
+    "clean": "npm run clean:coverage && npm run clean:docs && npm run clean:packages && npm run clean:cache",
+    "clean:cache": "rm -rf ./node_modules/.cache/nx",
+    "clean:coverage": "lerna exec --parallel --stream 'rm -rf ./coverage'",
+    "clean:docs": "lerna exec --parallel --stream 'rm -rf ./docs'",
+    "clean:packages": "lerna exec --parallel --stream 'rm -rf ./node_modules package-lock.json' && rm -rf ./node_modules package-lock.json",
+    "format": "lerna exec --parallel --stream 'npm run format'",
+    "storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
+    "publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
+    "prepare": "husky install"
+  },
+  "prettier": "@searchspring/prettier",
+  "devDependencies": {
+    "@searchspring/prettier": "1.0.2",
+    "@searchspring/snapi-types": "^0.1.32",
+    "@types/jest": "27.5.1",
+    "@types/jsdom": "20.0.0",
+    "@typescript-eslint/eslint-plugin": "5.48.0",
+    "@typescript-eslint/parser": "5.48.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.31.0",
+    "eslint-config-prettier": "8.6.0",
+    "http-server": "14.1.0",
+    "husky": "7.0.4",
+    "jest": "27.5.1",
+    "jsdom": "20.0.0",
+    "lerna": "6.6.1",
+    "lint-staged": "12.4.1",
+    "nx": "15.8.9",
+    "prettier": "2.6.2",
+    "standard-version": "9.5.0",
+    "ts-jest": "27.1.5",
+    "typedoc": "0.22.15",
+    "typescript": "4.6.4",
+    "whatwg-fetch": "3.6.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
