@@ -162,13 +162,13 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
+						{...valueProps}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
 						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
 						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
-						{...valueProps}
 					>
 						<div className="ss__facet-palette-options__option__wrapper">
 							<div

@@ -1,4 +1,4 @@
-export const createHoverTimeoutProps = (callback: () => void | undefined, options: { delay: number } = { delay: 333 }) => {
+export const createHoverTimeoutProps = (callback?: () => void, options: { delay: number } = { delay: 333 }) => {
 	let delayTimeout: number;
 
 	return {

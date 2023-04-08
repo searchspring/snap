@@ -206,6 +206,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
+	const valueProps = createHoverTimeoutProps();
+
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		properties.onFacetOptionClick && properties.onFacetOptionClick(e);
 
@@ -227,6 +229,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableOverflow: true,
 				disableCollapse: true,
 				previewOnHover: true,
+				valueProps,
 			},
 			facetGridOptions: {
 				columns: 3,
@@ -437,6 +440,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								showTrending,
 								history,
 								historyTitle,
+								valueProps,
 								emIfy,
 								onTermClick,
 								controller,
@@ -537,7 +541,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideFacets &&
 					(facetsSlot ? (
 						<div className="ss__autocomplete__facets">
-							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller })}
+							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
 						</div>
 					) : (
 						facetsToShow.length > 0 && (

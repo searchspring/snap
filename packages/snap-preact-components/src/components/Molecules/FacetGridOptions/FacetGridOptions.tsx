@@ -113,13 +113,13 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
+						{...valueProps}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
 						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
 						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
-						{...valueProps}
 					>
 						<span
 							className={classnames('ss__facet-grid-options__option__value', {
