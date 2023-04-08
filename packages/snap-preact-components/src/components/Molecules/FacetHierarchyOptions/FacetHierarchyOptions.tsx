@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { createHoverTimeoutProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
@@ -63,7 +64,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		...properties.theme?.components?.facetHierarchyOptions,
 	};
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, previewOnHover, valueProps, facet, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -96,8 +97,9 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
+						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
+						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
 						{...valueProps}
-						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 					>
 						<span className="ss__facet-hierarchy-options__option__value">
 							{value.label}
@@ -120,4 +122,5 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	previewOnHover?: boolean;
 }

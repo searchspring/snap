@@ -1,4 +1,5 @@
 export * from './cloneWithProps';
+export * from './createHoverTimeoutProps';
 export * from './defined';
 export * from './componentArgs';
 export * from './sprintf';

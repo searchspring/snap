@@ -93,6 +93,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconColor,
 		color,
 		previewOnFocus,
+		previewOnHover,
 		valueProps,
 		showMoreText,
 		showLessText,
@@ -158,6 +159,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				previewOnFocus,
+				previewOnHover,
 				valueProps,
 			}),
 			// component theme overrides
@@ -172,6 +174,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				previewOnFocus,
+				previewOnHover,
 				valueProps,
 			}),
 			// component theme overrides
@@ -186,6 +189,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				previewOnFocus,
+				previewOnHover,
 				valueProps,
 			}),
 			// component theme overrides
@@ -200,6 +204,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				previewOnFocus,
+				previewOnHover,
 				valueProps,
 			}),
 			// component theme overrides
@@ -289,7 +294,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							{(() => {
 								//manual options component
 								if (optionsSlot) {
-									return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+									return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus, previewOnHover });
 								} else {
 									switch (facet?.display) {
 										case FacetDisplay.SLIDER:
@@ -364,6 +369,7 @@ interface OptionalFacetProps extends ComponentProps {
 	optionsSlot?: JSX.Element;
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
+	previewOnHover?: boolean;
 	valueProps?: any;
 	showMoreText?: string;
 	showLessText?: string;

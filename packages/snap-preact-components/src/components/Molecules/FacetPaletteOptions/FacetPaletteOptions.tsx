@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { filters } from '@searchspring/snap-toolbox';
 
-import { defined } from '../../../utilities';
+import { defined, createHoverTimeoutProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -105,7 +105,21 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		...properties.theme?.components?.facetPaletteOptions,
 	};
 
-	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const {
+		values,
+		hideLabel,
+		columns,
+		gapSize,
+		hideIcon,
+		onClick,
+		previewOnFocus,
+		previewOnHover,
+		valueProps,
+		facet,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -147,13 +161,14 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
-						{...valueProps}
-						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
+						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
+						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
+						{...valueProps}
 					>
 						<div className="ss__facet-palette-options__option__wrapper">
 							<div
@@ -186,6 +201,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	previewOnHover?: boolean;
 }
 
 interface FacetPaletteOptionsSubProps {

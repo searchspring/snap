@@ -14,7 +14,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProp } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps } from '../../../utilities';
+import { defined, cloneWithProps, createHoverTimeoutProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -206,24 +206,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	let delayTimeout: number;
-	const delayTime = 333;
-
-	const valueProps = {
-		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>, activeTerm: any) => {
-			clearTimeout(delayTimeout);
-			delayTimeout = window.setTimeout(() => {
-				(e.target as HTMLAnchorElement).focus();
-				if (activeTerm && activeTerm.preview) {
-					activeTerm.preview();
-				}
-			}, delayTime);
-		},
-		onMouseLeave: () => {
-			clearTimeout(delayTimeout);
-		},
-	};
-
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		properties.onFacetOptionClick && properties.onFacetOptionClick(e);
 
@@ -244,8 +226,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				limit: 6,
 				disableOverflow: true,
 				disableCollapse: true,
-				previewOnFocus: true,
-				valueProps,
+				previewOnHover: true,
 			},
 			facetGridOptions: {
 				columns: 3,
@@ -456,7 +437,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								showTrending,
 								history,
 								historyTitle,
-								valueProps,
 								emIfy,
 								onTermClick,
 								controller,
@@ -480,8 +460,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
+														{...createHoverTimeoutProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
 													>
@@ -510,8 +489,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onMouseEnter={(e) => valueProps.onMouseEnter(e, term)}
+														{...createHoverTimeoutProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
 													>
@@ -540,8 +518,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onMouseEnter={() => term.preview()}
+														{...createHoverTimeoutProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
 													>
@@ -560,7 +537,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideFacets &&
 					(facetsSlot ? (
 						<div className="ss__autocomplete__facets">
-							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
+							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller })}
 						</div>
 					) : (
 						facetsToShow.length > 0 && (
