@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
+import { useDeepCompareEffect } from './useDeepCompareEffect';
 
 export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
 	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
@@ -22,9 +23,9 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	}, []);
 
 	// when breakpointsObj changes (due to computed values)
-	useEffect(() => {
+	useDeepCompareEffect(() => {
 		setDisplaySettings(getDisplaySettings(breakpointsObj));
-	}, [JSON.stringify(breakpointsObj)]);
+	}, [breakpointsObj]);
 
 	return displaySettings;
 }
