@@ -28,7 +28,7 @@
 		"@emotion/react": "11.9.0",
 		"@searchspring/snap-toolbox": "^0.42.3",
 		"classnames": "^2.3.2",
-		"deepmerge": "4.2.2",
+		"deepmerge": "4.3.1",
 		"dequal": "2.0.3",
 		"mobx-react-lite": "3.4.0",
 		"react-ranger": "2.1.0",
