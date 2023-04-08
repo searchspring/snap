@@ -46,6 +46,17 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 </Autocomplete>
 ```
 
+### previewOnHover
+If using within Autocomplete, the `previewOnHover` prop will invoke the `value.preview()` method when the value has been hovered over. 
+
+```jsx
+<Autocomplete>
+	...
+	<FacetListOptions values={listFacet.values} previewOnHover={true} />
+	...
+</Autocomplete>
+```
+
 ### valueProps
 The `valueProps` prop will be spread onto each value's `<a>` element. Typical usage would be to provide custom callback functions when used within Autocomplete.
 
