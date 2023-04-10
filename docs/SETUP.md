@@ -101,6 +101,8 @@ git commit -am "Hello, snapfu"
 git push
 ```
 
+### Searchspring Integration
+
 The bundle will automatically be built from the `production` branch and deployed to this URL:
 
 `https://snapui.searchspring.io/[your_site_id]/bundle.js`
@@ -110,3 +112,16 @@ Builds on different branch names will be deployed to:
 `https://snapui.searchspring.io/[your_site_id]/[branch]/bundle.js`
 
 You can now view this integration on your site from any Chrome browser using the SearchSpring extension.
+
+### Self Integration (self-snap)
+
+If you have opted to self integrate and use snap you will need to host the bundle yourself. If the URL above is used it will result in a 403 Error.
+
+To host your own bundle follow the below steps in your project.
+
+1. Ensure you have changed directories so that you are in the parent directory of the project in your terminal
+2. In your terminal run the command `npm run build`, will output bundle files to `./dist` 
+3. Navigate to `./dist` and copy the generated bundle files 
+4. Go to the codebase of your E-commerce platform (Shopify, Bigcommerce, Magento, etc.) and copy/paste the generated bundle files in a directory. Most platforms have an ***assets*** directory. 
+5. On the frontend of the site, call the bundle files via a script. It is best practice to call these files in the `<head>` element to ensure the files load early in the overall page load
+
