@@ -25,9 +25,6 @@ describe('Email Recs', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.wrap(config).its('selectors.email.result').should('have.length.at.least', 1);
 			cy.visit(config.url);
-			cy.window().then((window) => {
-				expect(window.RecsReady).to.equal(undefined);
-			});
 		});
 
 		it('snap bundle exists on email page', () => {

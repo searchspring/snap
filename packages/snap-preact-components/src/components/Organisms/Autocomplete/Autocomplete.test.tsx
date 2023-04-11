@@ -194,6 +194,7 @@ describe('Autocomplete Component', () => {
 			expect(newNewResults[0].innerHTML).not.toEqual(newFirstResult);
 
 			//hover facet should have now be active.
+			facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 			expect(facetOptions![0]).toHaveClass('ss__facet-list-options__option--filtered');
 		});
 	});

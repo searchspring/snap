@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -92,12 +93,12 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
+						{...valueProps}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
-						{...valueProps}
-						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
+						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
 						<span className="ss__facet-hierarchy-options__option__value">
 							{value.label}

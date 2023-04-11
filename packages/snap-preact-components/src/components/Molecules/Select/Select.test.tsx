@@ -133,12 +133,13 @@ describe('Select Component', () => {
 
 			const selectElement = rendered.container.querySelector('.ss__select')!;
 			const dropdownButton = selectElement.querySelector('.ss__dropdown__button')!;
-			const iconElement = selectElement.querySelector('.ss__icon')!;
+			let iconElement = selectElement.querySelector('.ss__icon')!;
 			const iconStyles = getComputedStyle(iconElement);
 
 			expect(iconStyles!.fill).toBe(props.iconColor);
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconOpen}`);
 			await userEvent.click(dropdownButton);
+			iconElement = selectElement.querySelector('.ss__icon')!;
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconClose}`);
 		});
 
@@ -176,12 +177,13 @@ describe('Select Component', () => {
 			const rendered = render(<Select options={options} onSelect={selectFn} />);
 
 			const selectElement = rendered.container.querySelector('.ss__select')!;
-			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
+			let optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 			const dropdownButton = selectElement.querySelector('.ss__dropdown__button')!;
 
 			await userEvent.click(dropdownButton);
 			await userEvent.click(optionElements[selectIndex]);
 
+			optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex]);
