@@ -6,7 +6,6 @@ export const createHoverProps = (callback?: () => void, options: { delay?: numbe
 			clearTimeout(delayTimeout);
 			delayTimeout = window.setTimeout(() => {
 				options.focusElem && (e.target as HTMLElement).focus();
-				console.log('focusing?', e.target);
 				callback && callback();
 			}, options.delay || 333);
 		},
