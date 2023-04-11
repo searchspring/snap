@@ -4,7 +4,7 @@ import { LegacyAPI } from './Legacy';
 
 describe('Legacy Api', () => {
 	it('has expected default functions', () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 
 		// @ts-ignore
 		expect(api?.getEndpoint).toBeDefined();
@@ -19,7 +19,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getMeta', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -38,7 +38,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getSearch', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -47,7 +47,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getSearch({
 			siteId: '8uyt2m',
@@ -58,7 +58,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call postMeta', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -80,7 +80,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getAutocomplete', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -89,7 +89,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/autocomplete.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getAutocomplete({
 			siteId: '8uyt2m',
@@ -100,7 +100,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getFinder', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -109,7 +109,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/finder.json?siteId=8uyt2m&q=dress&resultsFormat=native';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getFinder({
 			siteId: '8uyt2m',
@@ -120,7 +120,7 @@ describe('Legacy Api', () => {
 	});
 
 	it('can call getEndpoint', async () => {
-		let api = new LegacyAPI(new ApiConfiguration({}));
+		const api = new LegacyAPI(new ApiConfiguration({}));
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')

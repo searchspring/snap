@@ -91,7 +91,7 @@ describe('Breadcrumbs Component', () => {
 
 		const rendered = render(<Breadcrumbs {...args} style={style} />);
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs')!;
-		let styles = getComputedStyle(breadcrumbElement);
+		const styles = getComputedStyle(breadcrumbElement);
 
 		expect(styles.padding).toBe(style.padding);
 	});

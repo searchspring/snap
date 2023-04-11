@@ -3,7 +3,7 @@ import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { useState, useEffect } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
 import { ComponentProps, StylingCSS } from '../../../types';
@@ -246,9 +246,8 @@ const componentThemes = {
 
 export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
-	let props: BranchOverrideProps = {
+	const props: BranchOverrideProps = {
 		// global theme
 		...globalTheme?.components?.branchOverride,
 		// props

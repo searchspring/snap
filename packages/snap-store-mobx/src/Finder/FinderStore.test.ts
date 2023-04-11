@@ -57,7 +57,7 @@ describe('Finder Store', () => {
 	it('throws if invalid services object', () => {
 		expect(() => {
 			// @ts-ignore
-			const finderStore = new FinderStore(config, {});
+			new FinderStore(config, {});
 		}).toThrow();
 	});
 
@@ -259,7 +259,7 @@ describe('Finder Store', () => {
 			});
 
 			it('it will NOT reset persisted selections if something in the config plugins has changed', () => {
-				const testPlugin = (controller: any, ...additionalParams: any[]) => {};
+				const testPlugin = () => {};
 
 				config = {
 					...config,
@@ -300,7 +300,7 @@ describe('Finder Store', () => {
 				config = {
 					...config,
 					middleware: {
-						onInit: (controller: any) => {},
+						onInit: () => {},
 					},
 					persist: {
 						enabled: true,
@@ -321,7 +321,7 @@ describe('Finder Store', () => {
 				config = {
 					...config,
 					middleware: {
-						afterSearch: (controller: any) => {},
+						afterSearch: () => {},
 					},
 					persist: {
 						enabled: true,

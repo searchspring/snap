@@ -12,7 +12,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetRangeAllOf } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetRangeAllOf = mockData
+const sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetRangeAllOf = mockData
 	.search()
 	.facets!.filter((facet) => facet.type == 'range')!
 	.pop()!;

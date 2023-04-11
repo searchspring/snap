@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@searchspring/snap-toolbox": "^0.42.3",
-		"deepmerge": "4.2.2"
+		"deepmerge": "4.3.1"
 	},
 	"sideEffects": false,
 	"files": [

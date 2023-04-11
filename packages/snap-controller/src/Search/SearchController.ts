@@ -20,7 +20,6 @@ import type {
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
-const HEIGHT_CHECK_INTERVAL = 50;
 const API_LIMIT = 500;
 
 const defaultConfig: SearchControllerConfig = {
@@ -361,7 +360,7 @@ export class SearchController extends AbstractController {
 				// infinite backfill results
 				if (backfills && backfills.length) {
 					// array to hold all results from backfill responses
-					let backfillResults: SearchResponseModelResult[] = [];
+					const backfillResults: SearchResponseModelResult[] = [];
 
 					const backfillResponses = await Promise.all(backfills);
 					backfillResponses.map(([metaBackfill, responseBackfill]) => {
@@ -387,23 +386,15 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 					//append new results to previous results
@@ -412,13 +403,9 @@ export class SearchController extends AbstractController {
 			} else {
 				//standard.
 				[meta, response] = await this.client.search(params);
-				// @ts-ignore
+				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 				if (!response.meta) {
-					/**
-					 * MockClient will overwrite the client search() method and use
-					 * SearchData to return mock data which already contains meta data
-					 */
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					response.meta = meta;
 				}
 			}

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -216,13 +216,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const {
 		children,
-		breakpoints,
 		loop,
 		nextButton,
 		prevButton,
 		hideButtons,
 		vertical,
-		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -301,9 +299,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				<Swiper
 					centerInsufficientSlides={true}
 					onInit={(swiper) => {
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
 						if (onInit) {
 							onInit(swiper);

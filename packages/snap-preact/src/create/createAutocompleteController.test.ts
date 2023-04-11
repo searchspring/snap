@@ -46,7 +46,7 @@ describe('createAutocompleteController', () => {
 	it('throws when incomplete configuration is used', () => {
 		expect(() => {
 			// @ts-ignore - testing invalid config passed
-			const controller = createAutocompleteController({});
+			createAutocompleteController({});
 		}).toThrow();
 
 		expect(() => {
@@ -57,7 +57,7 @@ describe('createAutocompleteController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createAutocompleteController(bareConfig);
+			createAutocompleteController(bareConfig);
 		}).toThrow();
 
 		expect(() => {
@@ -70,7 +70,7 @@ describe('createAutocompleteController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createAutocompleteController(bareConfig);
+			createAutocompleteController(bareConfig);
 		}).toThrow();
 	});
 

@@ -425,7 +425,7 @@ describe('Tracker', () => {
 			errortimestamp: 1,
 		};
 
-		const beaconEvent = await tracker.track.error(payload);
+		await tracker.track.error(payload);
 
 		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 
@@ -463,7 +463,7 @@ describe('Tracker', () => {
 			errortimestamp: 1,
 		};
 
-		const beaconEvent = await tracker.track.error(payload);
+		await tracker.track.error(payload);
 
 		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
 

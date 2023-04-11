@@ -11,7 +11,7 @@ import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
 mockData.updateConfig({ search: 'merchandising' });
-let searchResponse: SearchResponseModel = mockData.search();
+const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Merchandising Banner Component', () => {
 	const theme = {

@@ -1,5 +1,5 @@
 export function afterStore(controller: AbstractController) {
-	controller.on('init', async ({ controller: AbstractController }, next) => {
+	controller.on('init', async ({}, next) => {
 		controller.log.debug('initialization...');
 		await next();
 	});
@@ -19,7 +19,7 @@ export function afterStore(controller: AbstractController) {
 }
 
 function mutateFacets(facets: SearchFacetsStore) {
-	for (let facet of facets) {
+	for (const facet of facets) {
 		let limit = 12;
 		if (facet.display == 'palette' || facet.display == 'grid') {
 			limit = 16;
@@ -29,7 +29,7 @@ function mutateFacets(facets: SearchFacetsStore) {
 	}
 }
 
-async function restorePosition({ controller, element }, next: Next) {
+async function restorePosition({ element }, next: Next) {
 	// scroll to top only if we are not going to be scrolling to stored element
 	if (!element) {
 		setTimeout(() => {

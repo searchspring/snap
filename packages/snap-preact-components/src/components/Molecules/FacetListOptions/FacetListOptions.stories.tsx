@@ -82,6 +82,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+
 		valueProps: {
 			description: 'Object of facet value props',
 			table: {

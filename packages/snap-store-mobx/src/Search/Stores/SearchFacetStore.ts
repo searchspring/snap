@@ -333,7 +333,7 @@ export class FacetValue {
 	public count!: number;
 	public filtered!: boolean;
 	public value!: string;
-	public custom!: {};
+	public custom!: object;
 	public url: UrlManager;
 	public preview?: () => void;
 
@@ -389,7 +389,7 @@ export class FacetRangeValue {
 	public filtered!: boolean;
 	public low!: number;
 	public high!: number;
-	public custom!: {};
+	public custom!: object;
 	public url: UrlManager;
 
 	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {

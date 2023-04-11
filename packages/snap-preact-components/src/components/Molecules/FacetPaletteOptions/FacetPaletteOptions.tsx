@@ -11,6 +11,7 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -147,13 +148,13 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								? `filter by ${facet?.label} - ${value.label}`
 								: `filter by ${value.label}`
 						}
-						{...valueProps}
-						onMouseEnter={(e) => previewOnFocus && valueProps.onMouseEnter(e, value)}
 						href={value.url?.link?.href}
+						{...valueProps}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
+						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
 						<div className="ss__facet-palette-options__option__wrapper">
 							<div

@@ -44,6 +44,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Eslint
+        run: npm run lint
+
       - name: Tests
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"

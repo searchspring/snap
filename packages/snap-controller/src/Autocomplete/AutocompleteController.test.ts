@@ -16,7 +16,7 @@ const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const INPUT_DELAY = _INPUT_DELAY + 10;
 
-let acConfigBase = {
+const acConfigBase = {
 	id: 'ac',
 	selector: '#search_query',
 	action: '',
@@ -629,8 +629,7 @@ describe('Autocomplete Controller', () => {
 
 		await controller.bind();
 
-		let form: HTMLFormElement | null;
-		let query = 'dresss';
+		const query = 'dresss';
 		let inputEl: HTMLInputElement | null;
 
 		await waitFor(() => {
@@ -638,7 +637,7 @@ describe('Autocomplete Controller', () => {
 			expect(inputEl).toBeDefined();
 		});
 
-		form = inputEl!.form;
+		const form = inputEl!.form;
 
 		inputEl!.value = query;
 		inputEl!.focus();
@@ -646,11 +645,11 @@ describe('Autocomplete Controller', () => {
 
 		await controller.search();
 
-		let beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
 		form?.dispatchEvent(new Event('submit', { bubbles: true }));
 
 		await waitFor(() => {
-			let oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
+			const oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
 			expect(oqInputEl!).toBeDefined();
 			expect(oqInputEl!.value).toBe(query);
 		});
@@ -730,7 +729,7 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
-		let inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
 		expect(inputEl).toBeDefined();
 
 		inputEl.value = query;
@@ -782,7 +781,7 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
-		let inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
 		expect(inputEl).toBeDefined();
 
 		inputEl.value = query;
@@ -1106,7 +1105,7 @@ describe('Autocomplete Controller', () => {
 		});
 
 		await controller.bind();
-		let inputEl: HTMLInputElement | null;
+		// let inputEl: HTMLInputElement | null;
 		const query = 'bumpers';
 		const middleware = jest.fn(() => {
 			throw new Error('middleware error');
@@ -1117,7 +1116,7 @@ describe('Autocomplete Controller', () => {
 
 		expect(middleware).not.toHaveBeenCalled();
 
-		inputEl = document.querySelector(controller.config.selector);
+		const inputEl = document.querySelector(controller.config.selector) as HTMLInputElement | null;
 		inputEl!.value = query;
 		inputEl!.focus();
 		inputEl!.dispatchEvent(new Event('keyup'));
@@ -1150,14 +1149,13 @@ describe('Autocomplete Controller', () => {
 		const middleware = jest.fn(() => {
 			return false; // return false to stop middleware
 		});
-		let inputEl: HTMLInputElement | null;
 		const event = 'beforeSubmit';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 		controller.on(event, middleware);
 
 		expect(middleware).not.toHaveBeenCalled();
 
-		inputEl = document.querySelector(controller.config.selector);
+		const inputEl = document.querySelector(controller.config.selector) as HTMLInputElement | null;
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();

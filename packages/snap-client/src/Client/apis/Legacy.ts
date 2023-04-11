@@ -9,7 +9,7 @@ export class LegacyAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 
 		//remove pageLoadId from cache key query params
-		let cacheParameters = { ...queryParameters };
+		const cacheParameters = { ...queryParameters };
 		delete cacheParameters.pageLoadId;
 
 		const legacyResponse = await this.request(
@@ -60,14 +60,17 @@ export class LegacyAPI extends API {
 	}
 
 	async getSearch(queryParameters: any): Promise<any> {
+		queryParameters.ajaxCatalog = 'Snap';
 		return this.getEndpoint(queryParameters, '/api/search/search.json');
 	}
 
 	async getAutocomplete(queryParameters: any): Promise<any> {
+		queryParameters.ajaxCatalog = 'Snap';
 		return this.getEndpoint(queryParameters, '/api/search/autocomplete.json');
 	}
 
 	async getFinder(queryParameters: any): Promise<any> {
+		queryParameters.ajaxCatalog = 'Snap';
 		return this.getEndpoint(queryParameters, '/api/search/finder.json');
 	}
 }

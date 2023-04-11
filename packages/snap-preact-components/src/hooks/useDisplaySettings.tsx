@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
+import { useDeepCompareEffect } from './useDeepCompareEffect';
 
 export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
 	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
@@ -20,6 +21,11 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 		// Remove event listener on cleanup
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
+
+	// when breakpointsObj changes (due to computed values)
+	useDeepCompareEffect(() => {
+		setDisplaySettings(getDisplaySettings(breakpointsObj));
+	}, [breakpointsObj]);
 
 	return displaySettings;
 }

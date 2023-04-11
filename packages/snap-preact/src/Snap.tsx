@@ -1,6 +1,7 @@
+/** @jsx h */
+import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import { h, render } from 'preact';
 import { configure as configureMobx } from 'mobx';
 
 import { Client } from '@searchspring/snap-client';
@@ -13,10 +14,7 @@ import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	Controllers,
 	AbstractController,
-	SearchController,
 	AutocompleteController,
-	FinderController,
-	RecommendationController,
 	SearchControllerConfig,
 	AutocompleteControllerConfig,
 	FinderControllerConfig,

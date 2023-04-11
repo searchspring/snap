@@ -40,7 +40,7 @@ describe('RecommendationInstantiator', () => {
 	it('throws if configuration is not provided', () => {
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator();
+			new RecommendationInstantiator();
 		}).toThrow();
 	});
 
@@ -59,7 +59,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -75,7 +75,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -94,7 +94,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -245,7 +245,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(4);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			profileCount[controller.context.profile] = profileCount[controller.context.profile] + 1 || 0;
 			expect(controllerId).toBe(`recommend_${controller.context.profile}_${profileCount[controller.context.profile]}`);
@@ -271,7 +271,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controller.context).toStrictEqual({
 				profile: 'trending',
@@ -333,7 +333,7 @@ describe('RecommendationInstantiator', () => {
 		});
 		await wait();
 
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(6);
@@ -378,7 +378,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });
 		await wait();
 
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(3);

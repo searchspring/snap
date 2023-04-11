@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { UrlState, Translator, TranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
+import { UrlState, Translator, TranslatorConfig, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
 
 type UrlParameter = {
 	key: Array<string>;

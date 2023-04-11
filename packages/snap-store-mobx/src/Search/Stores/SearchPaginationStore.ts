@@ -126,7 +126,7 @@ export class SearchPaginationStore {
 		}
 	}
 
-	public getPages(min: number = 5, max?: number): Page[] {
+	public getPages(min = 5, max?: number): Page[] {
 		if (!Number.isInteger(min)) {
 			return [];
 		}
