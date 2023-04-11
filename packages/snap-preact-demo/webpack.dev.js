@@ -84,6 +84,7 @@ const modern = merge(common, {
 			overlay: {
 				errors: true,
 				warnings: false,
+				runtimeErrors: false,
 			},
 		},
 	},

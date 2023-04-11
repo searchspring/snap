@@ -7,7 +7,7 @@ const mockData = new MockData();
 
 describe('Hybrid Api', () => {
 	it('has expected default functions', () => {
-		let api = new HybridAPI(new ApiConfiguration({}));
+		const api = new HybridAPI(new ApiConfiguration({}));
 
 		//@ts-ignore
 		expect(api?.requesters).toBeDefined();
@@ -26,7 +26,7 @@ describe('Hybrid Api', () => {
 	});
 
 	it('can call getMeta', async () => {
-		let api = new HybridAPI(new ApiConfiguration({}));
+		const api = new HybridAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
@@ -43,7 +43,7 @@ describe('Hybrid Api', () => {
 	});
 
 	it('can call getSearch', async () => {
-		let api = new HybridAPI(new ApiConfiguration({}));
+		const api = new HybridAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
@@ -53,7 +53,7 @@ describe('Hybrid Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const cacheKey = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&resultsFormat=native';
+		const cacheKey = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getSearch({
 			siteId: '8uyt2m',
@@ -65,7 +65,7 @@ describe('Hybrid Api', () => {
 	});
 
 	it('can call getAutcomplete', async () => {
-		let api = new HybridAPI(new ApiConfiguration({}));
+		const api = new HybridAPI(new ApiConfiguration({}));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')

@@ -12,7 +12,7 @@ import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
 mockData.updateConfig({ search: 'inlineBanners' });
-let searchResponse: SearchResponseModel = mockData.search();
+const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Merchandising Inline Banner Component', () => {
 	it('renders type:inline banner', () => {

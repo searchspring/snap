@@ -10,7 +10,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+const paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
 	.search()
 	.facets!.filter((facet) => facet.field == 'pattern')!
 	.pop()!;

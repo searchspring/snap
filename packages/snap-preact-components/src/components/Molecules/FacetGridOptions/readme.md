@@ -33,7 +33,7 @@ The `gapSize` prop is the gap size between rows and columns.
 ```
 
 ### previewOnFocus
-If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value is focused. 
+If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over. 
 
 ```jsx
 <Autocomplete>

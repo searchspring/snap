@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+### Bug Fixes
+
+- **autcompletecontroller:** cant call go and preview at the same time ([841db30](https://github.com/searchspring/snap/commit/841db3097c1aeee12ee73e36fcf2628696038fee))
+
 ## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
 
 **Note:** Version bump only for package @searchspring/snap-controller

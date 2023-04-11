@@ -131,7 +131,7 @@ describe('RecommendationProfileTracker Component', () => {
 		trackfn.mockClear();
 
 		// @ts-ignore
-		let [callback] = window.IntersectionObserver.mock.calls[0];
+		const [callback] = window.IntersectionObserver.mock.calls[0];
 		callback([
 			{
 				isIntersecting: true,

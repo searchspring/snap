@@ -12,7 +12,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let searchResponse: SearchResponseModel = mockData.search();
+const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Carousel Component', () => {
 	const theme = {
@@ -188,7 +188,7 @@ describe('Carousel Component', () => {
 	it('can add additional modules', () => {
 		const rendered = render(
 			<Carousel modules={[Scrollbar]} scrollbar>
-				{searchResponse.results!.map((result, idx) => (
+				{searchResponse.results!.map((result) => (
 					<Result result={result as Product} />
 				))}
 			</Carousel>
@@ -205,10 +205,6 @@ describe('Carousel Component', () => {
 			700: {
 				hideButtons: false,
 			},
-		};
-
-		const args = {
-			breakpoints: customBreakpoints,
 		};
 
 		const rendered = render(

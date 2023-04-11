@@ -146,7 +146,7 @@ function addBannersToResults(config: StoreConfigs, results: Product[], banners: 
 
 			return adding;
 		}, [] as Banner[])
-		.forEach((banner, index) => {
+		.forEach((banner) => {
 			const adjustedIndex = banner.config.position!.index! - minIndex;
 
 			results.splice(adjustedIndex, 0, banner);

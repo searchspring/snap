@@ -1,6 +1,3 @@
-import { observable, makeObservable } from 'mobx';
-
-import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { StoreServices } from '../../types';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import { Term } from './AutocompleteTermStore';

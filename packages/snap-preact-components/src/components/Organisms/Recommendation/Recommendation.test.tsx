@@ -192,7 +192,7 @@ describe('Recommendation Component', () => {
 
 		for (let i = 0; i < 21; i++) {
 			// @ts-ignore
-			let [callback] = window.IntersectionObserver.mock.calls[i];
+			const [callback] = window.IntersectionObserver.mock.calls[i];
 
 			callback([
 				{

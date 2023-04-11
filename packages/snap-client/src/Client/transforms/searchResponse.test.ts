@@ -305,7 +305,7 @@ describe('search response transformer', () => {
 		const merchandising = jest.spyOn(transformSearchResponse, 'merchandising');
 		const search = jest.spyOn(transformSearchResponse, 'search');
 
-		const searchResponse = transformSearchResponse(mockResponse, mockRequest);
+		transformSearchResponse(mockResponse, mockRequest);
 
 		expect(results).toHaveBeenCalled();
 		expect(filters).toHaveBeenCalled();

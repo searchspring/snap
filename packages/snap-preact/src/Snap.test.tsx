@@ -7,14 +7,9 @@ import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
 import { cookies } from '@searchspring/snap-toolbox';
 
-import type {
-	SearchControllerConfig,
-	AutocompleteControllerConfig,
-	FinderControllerConfig,
-	RecommendationControllerConfig,
-} from '@searchspring/snap-controller';
+import type { SearchControllerConfig, AutocompleteControllerConfig } from '@searchspring/snap-controller';
 
-import { Snap, SnapConfig, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
+import { Snap, SnapConfig, DEV_COOKIE } from './Snap';
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { ClientGlobals } from '@searchspring/snap-client';
 
@@ -51,7 +46,7 @@ describe('Snap Preact', () => {
 	it('throws if configuration is not provided', () => {
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const snap = new Snap();
+			new Snap();
 		}).toThrow();
 	});
 
@@ -62,7 +57,7 @@ describe('Snap Preact', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const snap = new Snap(config);
+			new Snap(config);
 		}).toThrow();
 	});
 
@@ -72,7 +67,7 @@ describe('Snap Preact', () => {
 
 		const logger = new Logger({ prefix: 'Snap Preact ' });
 		const spy = jest.spyOn(console, 'error');
-		const snap = new Snap(baseConfig, { logger });
+		new Snap(baseConfig, { logger });
 		expect(spy).toHaveBeenCalledWith('Snap failed to find global context');
 
 		spy.mockClear();
@@ -180,7 +175,7 @@ describe('Snap Preact', () => {
 
 		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track.shopper, 'login');
-		const snap = new Snap(contextConfig, { tracker });
+		new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith({ id: contextConfig.context.shopper.id });
 
 		spy.mockClear();
@@ -200,7 +195,7 @@ describe('Snap Preact', () => {
 
 		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
-		const snap = new Snap(contextConfig, { tracker });
+		new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
 
 		spy.mockClear();
@@ -229,13 +224,13 @@ describe('Snap Preact', () => {
 		window.addEventListener = jest.fn((event, callback) => {
 			events[event] = callback;
 		});
-		window.removeEventListener = jest.fn((event, callback) => {
+		window.removeEventListener = jest.fn((event) => {
 			delete events[event];
 		});
 
 		const tracker = new Tracker(generateBaseConfig().client!.globals as TrackerGlobals);
 		const spy = jest.spyOn(tracker.track, 'error');
-		const snap = new Snap(generateBaseConfig(), { tracker });
+		new Snap(generateBaseConfig(), { tracker });
 
 		const error = new ErrorEvent('error', {
 			error: new Error('test error'),
@@ -740,7 +735,7 @@ describe('Snap Preact', () => {
 			};
 			const client = new MockClient(acConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(acConfig, { client });
-			const ac = await snap.getController('ac');
+			await snap.getController('ac');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
 		});
@@ -1029,7 +1024,7 @@ describe('Snap Preact', () => {
 
 			const client = new MockClient(finderConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(finderConfig, { client });
-			const finder = await snap.getController('finder');
+			await snap.getController('finder');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
 		});
@@ -1199,7 +1194,7 @@ describe('Snap Preact', () => {
 			};
 			const client = new MockClient(recommendationConfig.client!.globals as ClientGlobals);
 			const snap = new Snap(recommendationConfig, { client });
-			const recommendation = await snap.getController('trendingRecs');
+			await snap.getController('trendingRecs');
 			await wait();
 			expect(onTarget).toHaveBeenCalledTimes(1);
 		});
@@ -1275,7 +1270,7 @@ describe('Snap Preact', () => {
 			const snap = new Snap(baseConfig);
 
 			await expect(async () => {
-				const [searchOne, searchTwo] = await snap.getControllers('searchOne', 'searchTwo');
+				await snap.getControllers('searchOne', 'searchTwo');
 			}).rejects.toBe(`getController could not find controller with id: searchOne`);
 		});
 
@@ -1296,7 +1291,7 @@ describe('Snap Preact', () => {
 			const snap = new Snap(searchConfig);
 
 			await expect(async () => {
-				const [searchOne, searchTwo] = await snap.getControllers('searchOne', 'searchTwo');
+				await snap.getControllers('searchOne', 'searchTwo');
 			}).rejects.toBe(`getController could not find controller with id: searchTwo`);
 		});
 

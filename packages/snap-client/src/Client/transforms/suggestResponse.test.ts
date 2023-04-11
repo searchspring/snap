@@ -45,7 +45,7 @@ describe('suggest response transformer', () => {
 		const suggested = jest.spyOn(transformSuggestResponse, 'suggested');
 		const alternatives = jest.spyOn(transformSuggestResponse, 'alternatives');
 
-		const suggestResponse = transformSuggestResponse(mockResponse);
+		transformSuggestResponse(mockResponse);
 
 		expect(query).toHaveBeenCalled();
 		expect(correctedQuery).toHaveBeenCalled();

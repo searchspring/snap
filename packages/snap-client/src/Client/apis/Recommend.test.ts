@@ -13,7 +13,7 @@ const wait = (time?: number) => {
 
 describe('Recommend Api', () => {
 	it('has expected default functions', () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
 		// @ts-ignore - accessing private property
 		expect(api?.batches).toBeDefined();
@@ -28,7 +28,7 @@ describe('Recommend Api', () => {
 	});
 
 	it('can call getProfile', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
 		const params = {
 			body: undefined,
@@ -38,7 +38,7 @@ describe('Recommend Api', () => {
 
 		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/personalized-recommendations/profile.json?siteId=8uyt2m&tag=dress';
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -53,7 +53,7 @@ describe('Recommend Api', () => {
 	});
 
 	it('can call getRecommendations', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
 		const params = {
 			method: 'GET',
@@ -62,7 +62,7 @@ describe('Recommend Api', () => {
 
 		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?siteId=8uyt2m&tags=dress';
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -77,7 +77,7 @@ describe('Recommend Api', () => {
 	});
 
 	it('can call postRecommendations', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
 		const params = {
 			method: 'POST',
@@ -89,7 +89,7 @@ describe('Recommend Api', () => {
 
 		const requestUrl = 'https://88uyt2m.a.searchspring.io/boost/88uyt2m/recommend';
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
@@ -104,7 +104,7 @@ describe('Recommend Api', () => {
 	});
 
 	it('can call batchRecommendations', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
 		const params = {
 			method: 'GET',
@@ -113,7 +113,7 @@ describe('Recommend Api', () => {
 
 		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&limits=20&siteId=8uyt2m';
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
@@ -157,9 +157,9 @@ describe('Recommend Api', () => {
 	};
 
 	it('batchRecommendations batches as expected', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
@@ -190,9 +190,9 @@ describe('Recommend Api', () => {
 	});
 
 	it('batchRecommendations handles multiple categories as expected', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
@@ -234,9 +234,9 @@ describe('Recommend Api', () => {
 	});
 
 	it('batchRecommendations handles order prop as expected', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
@@ -280,17 +280,17 @@ describe('Recommend Api', () => {
 
 		//add delay for paramBatch.timeout
 		await wait(250);
-		let reorderedGetURL =
+		const reorderedGetURL =
 			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&tags=crossSell&tags=similar&tags=crossSell&limits=10&limits=10&limits=14&limits=10&categories=pants&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
 		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations resolves in right order with order prop', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 		const response = mockData.file('recommend/results/8uyt2m/ordered.json');
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as Response));
 
@@ -316,7 +316,7 @@ describe('Recommend Api', () => {
 
 		//add delay for paramBatch.timeout
 		await wait(250);
-		let reorderedGetURL =
+		const reorderedGetURL =
 			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crosssell&tags=similar&limits=20&limits=10&categories=dress&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
 
 		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
@@ -330,16 +330,16 @@ describe('Recommend Api', () => {
 	});
 
 	it('batchRecommendations handles undefined limits', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
-		let requestMock = jest
+		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
 		const requestURL =
 			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
 
-		//now lets try with no limits
+		//now consts try with no limits
 		// @ts-ignore
 		api.batchRecommendations({
 			tags: ['crossSell'],
@@ -355,9 +355,9 @@ describe('Recommend Api', () => {
 	});
 
 	it('batchRecommendations handles POST requests', async () => {
-		let api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration({}));
 
-		//now lets try a post
+		//now consts try a post
 		const POSTParams = {
 			method: 'POST',
 			headers: {
@@ -389,7 +389,7 @@ describe('Recommend Api', () => {
 		};
 		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
-		let POSTRequestMock = jest
+		const POSTRequestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 

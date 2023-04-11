@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+### Bug Fixes
+
+- **autcompletecontroller:** cant call go and preview at the same time ([841db30](https://github.com/searchspring/snap/commit/841db3097c1aeee12ee73e36fcf2628696038fee))
+- **preact-components-hook-usedisplaysettings:** allow for computed values in origBreakpoints ([fb03dd3](https://github.com/searchspring/snap/commit/fb03dd327eba03658286208d23467e0e49c2f160))
+- **preact-components-results:** fixing theme usage to allow merging theme with breakpoints ([74e6a4a](https://github.com/searchspring/snap/commit/74e6a4ae0f64cb7a3da3299b02b753d0a6c79e17))
+- **preact-components:** removing console.log from createHoverProps ([cb56776](https://github.com/searchspring/snap/commit/cb5677698a449b0e46b1ed2674cf7e4f62d2be92))
+- **preact-components:** updating cloneWithProps to use observer for reactivity ([d7bb56d](https://github.com/searchspring/snap/commit/d7bb56dd4ac32df92ad0bd413941607ccbc0a746))
+
+### Features
+
+- **preact-components-hooks:** adding new hook 'useDeepCompareEffect' - using in useDisplaySettings ([0eba325](https://github.com/searchspring/snap/commit/0eba325286fc87f154ae05018a71aae416fd9a6a))
+- **preact-components-toolbox:** adding 'createHoverProps' a helper function for delayed hover props ([0243e7e](https://github.com/searchspring/snap/commit/0243e7eb64b4dcfa9e11d6f4208e6ef38c0cec35))
+- **preact-components:** refactoring to use `previwOnHover` in facet option components and ac ([c82664d](https://github.com/searchspring/snap/commit/c82664d09053e7ad29086c84cae7f9579418c531))
+
 ## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
 
 ### Bug Fixes

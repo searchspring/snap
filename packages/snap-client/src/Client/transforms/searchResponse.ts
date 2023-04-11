@@ -136,7 +136,7 @@ export type searchResponseType = {
 		is_elevated: string[];
 		elevated: any[];
 		removed: string[];
-		content: {};
+		content: object;
 		facets: any[];
 		facetsHide: any[];
 		experiments?: [];
@@ -406,7 +406,7 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 };
 
 transformSearchResponse.search = (response: searchResponseType, request: SearchRequestModel) => {
-	let searchObj: {
+	const searchObj: {
 		search: {
 			query?: string;
 			didYouMean?: string;

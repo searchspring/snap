@@ -33,7 +33,7 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		throw new Error('getContext: first parameter must be an array of strings');
 	}
 
-	let siteIdString = 'siteId';
+	const siteIdString = 'siteId';
 
 	const variables: ContextVariables = {};
 

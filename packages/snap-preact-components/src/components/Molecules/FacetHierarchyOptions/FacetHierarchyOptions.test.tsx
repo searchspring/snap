@@ -10,12 +10,12 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+const hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
 	.search()
 	.facets!.filter((facet) => facet.field == 'ss_category_hierarchy')!
 	.pop()!;
 mockData.updateConfig({ search: 'filteredHierarchy' });
-let hierarchyFacetFilteredMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
+const hierarchyFacetFilteredMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
 	.search()
 	.facets!.filter((facet) => facet.field == 'ss_category_hierarchy')!
 	.pop()!;

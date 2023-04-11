@@ -60,7 +60,7 @@ describe('createFinderController', () => {
 	it('throws when incomplete configuration is used', () => {
 		expect(() => {
 			// @ts-ignore - testing invalid config passed
-			const controller = createFinderController({});
+			createFinderController({});
 		}).toThrow();
 
 		expect(() => {
@@ -71,7 +71,7 @@ describe('createFinderController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createFinderController(bareConfig);
+			createFinderController(bareConfig);
 		}).toThrow();
 
 		expect(() => {
@@ -84,7 +84,7 @@ describe('createFinderController', () => {
 			};
 
 			// @ts-ignore - testing invalid config passed
-			const controller = createFinderController(bareConfig);
+			createFinderController(bareConfig);
 		}).toThrow();
 	});
 

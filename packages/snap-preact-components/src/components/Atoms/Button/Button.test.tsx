@@ -117,7 +117,7 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button style={style} content={content} />);
 			const buttonElement = rendered.container.querySelector('.ss__button')!;
-			let styles = getComputedStyle(buttonElement);
+			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.padding).toBe(style.padding);
 		});
@@ -150,7 +150,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button')!;
 
-			let styles = getComputedStyle(buttonElement);
+			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.color).toBe(globalTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
@@ -170,7 +170,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button')!;
 
-			let styles = getComputedStyle(buttonElement);
+			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
@@ -202,7 +202,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button')!;
 
-			let styles = getComputedStyle(buttonElement);
+			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();

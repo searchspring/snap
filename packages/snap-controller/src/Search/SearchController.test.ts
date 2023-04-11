@@ -17,7 +17,7 @@ import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
 
-let searchConfigDefault: SearchControllerConfig = {
+const searchConfigDefault: SearchControllerConfig = {
 	id: 'search',
 	globals: {
 		filters: [],
@@ -680,7 +680,9 @@ describe('Search Controller', () => {
 			await next();
 		});
 
-		const restorePositionFunc = jest.fn((element?: ElementPositionObj) => {});
+		const restorePositionFunc = jest.fn((element?: ElementPositionObj) => {
+			console.log(element);
+		});
 
 		controller.on('restorePosition', async (search: RestorePositionObj, next: Next) => {
 			restorePositionFunc(search.element);

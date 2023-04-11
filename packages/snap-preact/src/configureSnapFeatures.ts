@@ -30,7 +30,7 @@ function configureIntegratedSpellCorrection(config: SnapConfig) {
 		Object.keys(config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'autocomplete': {
-					config.controllers![type]!.forEach((controller, index) => {
+					config.controllers![type]!.forEach((controller) => {
 						if (typeof controller.config?.settings?.integratedSpellCorrection == 'undefined') {
 							// enable integratedSpellCorrection controller setting
 							controller.config.settings = deepmerge({ integratedSpellCorrection: true }, controller.config.settings || {});

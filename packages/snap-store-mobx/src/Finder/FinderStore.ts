@@ -52,6 +52,8 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
+	// providing access to response data without exposing it
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public save: () => void = () => {};
 
 	public reset = (): void => {

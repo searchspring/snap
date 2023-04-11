@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { ComponentChildren, h, RefObject } from 'preact';
-import { useState, StateUpdater, MutableRef, useRef } from 'preact/hooks';
+import { ComponentChildren, h } from 'preact';
+import { useState, StateUpdater, MutableRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
