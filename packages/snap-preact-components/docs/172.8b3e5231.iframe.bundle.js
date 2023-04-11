@@ -1,4 +1,4 @@
-/*! For license information please see 172.20daa089.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 172.8b3e5231.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -930,14 +930,13 @@
 		},
 		'../../node_modules/parse-entities/decode-entity.browser.js': (module) => {
 			'use strict';
-			var el,
-				semicolon = 59;
+			var el;
 			module.exports = function decodeEntity(characters) {
 				var char,
 					entity = '&' + characters + ';';
 				if (
 					(((el = el || document.createElement('i')).innerHTML = entity),
-					(char = el.textContent).charCodeAt(char.length - 1) === semicolon && 'semi' !== characters)
+					59 === (char = el.textContent).charCodeAt(char.length - 1) && 'semi' !== characters)
 				)
 					return !1;
 				return char !== entity && char;

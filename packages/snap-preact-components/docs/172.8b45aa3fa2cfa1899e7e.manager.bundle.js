@@ -1,4 +1,4 @@
-/*! For license information please see 172.1724db5768c54b09f555.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 172.8b45aa3fa2cfa1899e7e.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -57,7 +57,7 @@
 			var typescript = __webpack_require__(97288);
 			const prism_typescript = __webpack_require__.n(typescript)();
 			var objectWithoutPropertiesLoose = __webpack_require__(31461);
-			var defineProperty = __webpack_require__(56666);
+			var defineProperty = __webpack_require__(82601);
 			function _objectSpread(target) {
 				for (var i = 1; i < arguments.length; i++) {
 					var source = null != arguments[i] ? Object(arguments[i]) : {},
@@ -920,14 +920,13 @@
 		},
 		68108: (module) => {
 			'use strict';
-			var el,
-				semicolon = 59;
+			var el;
 			module.exports = function decodeEntity(characters) {
 				var char,
 					entity = '&' + characters + ';';
 				if (
 					(((el = el || document.createElement('i')).innerHTML = entity),
-					(char = el.textContent).charCodeAt(char.length - 1) === semicolon && 'semi' !== characters)
+					59 === (char = el.textContent).charCodeAt(char.length - 1) && 'semi' !== characters)
 				)
 					return !1;
 				return char !== entity && char;

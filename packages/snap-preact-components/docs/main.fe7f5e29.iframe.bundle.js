@@ -1,4 +1,4 @@
-/*! For license information please see main.b9f4815d.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.fe7f5e29.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -71,11 +71,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'badge' }, 'Badge'),
 					(0, esm.kt)(
@@ -326,11 +325,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'breadcrumbs' }, 'Breadcrumbs'),
 					(0, esm.kt)('p', null, 'Renders a list of breadcrumbs. '),
@@ -442,11 +440,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'button' }, 'Button'),
 					(0, esm.kt)('p', null, 'Renders a native or custom button.'),
@@ -757,11 +754,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'dropdown' }, 'Dropdown'),
 					(0, esm.kt)(
@@ -1038,7 +1034,7 @@
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
-			var cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+			var cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.tsx'),
 				useA11y = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _slicedToArray(arr, i) {
 				return (
@@ -1230,10 +1226,8 @@
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
-				CSS = {
-					formattedNumber: function formattedNumber() {
-						return (0, emotion_react_browser_esm.iv)({});
-					},
+				CSS_formattedNumber = function formattedNumber() {
+					return (0, emotion_react_browser_esm.iv)({});
 				};
 			function FormattedNumber(properties) {
 				var _globalTheme$componen,
@@ -1267,7 +1261,7 @@
 					formattedNumber = formatNumber.u(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
 					styling = {};
 				return (
-					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.formattedNumber(), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_formattedNumber(), style]),
 					raw
 						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedNumber)
 						: (0, emotion_react_browser_esm.tZ)(
@@ -1299,11 +1293,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'formatted-number' }, 'Formatted Number'),
 					(0, esm.kt)(
@@ -1565,11 +1558,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'icon' }, 'Icon'),
 					(0, esm.kt)('p', null, 'Renders an Icon either from our list of available icons or from a custom path. '),
@@ -1940,11 +1932,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'image' }, 'Image'),
 					(0, esm.kt)('p', null, 'Renders an Image with fallback and rollover functionality. '),
@@ -2478,11 +2469,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'loading-bar' }, 'Loading Bar'),
 					(0, esm.kt)('p', null, 'Renders a Loading Bar.'),
@@ -2626,11 +2616,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'banner' }, 'Banner'),
 					(0, esm.kt)(
@@ -3433,11 +3422,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'inline-banner' }, 'Inline Banner'),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
@@ -4096,11 +4084,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'overlay' }, 'Overlay'),
 					(0, esm.kt)(
@@ -4294,11 +4281,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'price' }, 'Price'),
 					(0, esm.kt)(
@@ -4612,11 +4598,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'skeleton' }, 'Skeleton'),
 					(0, esm.kt)('p', null, 'Renders a div with a animation for use when building loading skeletons. '),
@@ -4795,11 +4780,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'carousel' }, 'Carousel'),
 					(0, esm.kt)(
@@ -5230,13 +5214,11 @@
 				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
-					'breakpoints',
 					'loop',
 					'nextButton',
 					'prevButton',
 					'hideButtons',
 					'vertical',
-					'autoAdjustSlides',
 					'onInit',
 					'onNextButtonClick',
 					'onPrevButtonClick',
@@ -5405,12 +5387,12 @@
 					}
 					var _props2 = props,
 						children = _props2.children,
-						loop = (_props2.breakpoints, _props2.loop),
+						loop = _props2.loop,
 						nextButton = _props2.nextButton,
 						prevButton = _props2.prevButton,
 						hideButtons = _props2.hideButtons,
 						vertical = _props2.vertical,
-						_onInit = (_props2.autoAdjustSlides, _props2.onInit),
+						_onInit = _props2.onInit,
 						onNextButtonClick = _props2.onNextButtonClick,
 						onPrevButtonClick = _props2.onPrevButtonClick,
 						_onClick = _props2.onClick,
@@ -5590,11 +5572,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'checkbox' }, 'Checkbox'),
 					(0, esm.kt)('p', null, 'Renders a native or custom checkbox.'),
@@ -6356,11 +6337,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'errorhandler' }, 'ErrorHandler'),
 					(0, esm.kt)('p', null, 'Renders error messages.'),
@@ -6541,11 +6521,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-grid-options' }, 'Facet Grid Options'),
 					(0, esm.kt)('p', null, 'Renders a grid of facet options.'),
@@ -6606,7 +6585,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
 						' prop will invoke the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
-						' method when the value is focused. '
+						' method when the value has been hovered over. '
 					),
 					(0, esm.kt)(
 						'pre',
@@ -7170,6 +7149,7 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
+				_toolbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/toolbox/createHoverProps/createHoverProps.ts'),
 				CSS_grid = function grid(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -7287,12 +7267,6 @@
 														: null != facet && facet.label
 														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
 														: 'filter by ' + value.label,
-												},
-												valueProps,
-												{
-													onMouseEnter: function onMouseEnter(e) {
-														return previewOnFocus && valueProps.onMouseEnter(e, value);
-													},
 													href:
 														null === (_value$url = value.url) ||
 														void 0 === _value$url ||
@@ -7300,6 +7274,9 @@
 														void 0 === _value$url$link
 															? void 0
 															: _value$url$link.href,
+												},
+												valueProps,
+												{
 													onClick: function onClick(e) {
 														var _value$url2, _value$url2$link;
 														null === (_value$url2 = value.url) ||
@@ -7309,7 +7286,12 @@
 															_value$url2$link.onClick(e),
 															_onClick && _onClick(e);
 													},
-												}
+												},
+												previewOnFocus
+													? (0, _toolbox__WEBPACK_IMPORTED_MODULE_12__.K)(function () {
+															return (null == value ? void 0 : value.preview) && value.preview();
+													  })
+													: {}
 											),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 												'span',
@@ -7384,11 +7366,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
 					(0, esm.kt)('p', null, 'Renders a list of hierarchy options.'),
@@ -7438,7 +7419,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
 						' prop will invoke the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
-						' method when the value is focused. '
+						' method when the value has been hovered over.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -8001,6 +7982,7 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
+				_toolbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/toolbox/createHoverProps/createHoverProps.ts'),
 				CSS_hierarchy = function hierarchy(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -8099,6 +8081,9 @@
 														void 0 === _value$url$link
 															? void 0
 															: _value$url$link.href,
+												},
+												valueProps,
+												{
 													onClick: function onClick(e) {
 														var _value$url2, _value$url2$link;
 														null === (_value$url2 = value.url) ||
@@ -8109,12 +8094,11 @@
 															_onClick && _onClick(e);
 													},
 												},
-												valueProps,
-												{
-													onMouseEnter: function onMouseEnter(e) {
-														return previewOnFocus && valueProps.onMouseEnter(e, value);
-													},
-												}
+												previewOnFocus
+													? (0, _toolbox__WEBPACK_IMPORTED_MODULE_12__.K)(function () {
+															return (null == value ? void 0 : value.preview) && value.preview();
+													  })
+													: {}
 											),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 												'span',
@@ -8194,11 +8178,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-list-options' }, 'Facet List Options'),
 					(0, esm.kt)('p', null, 'Renders a list of facet options.'),
@@ -8259,7 +8242,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
 						' prop will invoke the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
-						' method when the value is focused. '
+						' method when the value has been hovered over.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -8836,7 +8819,8 @@
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defined.ts'),
-				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
+				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
+				_toolbox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/toolbox/createHoverProps/createHoverProps.ts'),
 				CSS_list = function list(_ref) {
 					var _theme$colors,
 						_theme$colors2,
@@ -8927,12 +8911,6 @@
 														: null != facet && facet.label
 														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
 														: 'filter by ' + value.label,
-												},
-												valueProps,
-												{
-													onMouseEnter: function onMouseEnter(e) {
-														return previewOnFocus && valueProps.onMouseEnter(e, value);
-													},
 													href:
 														null === (_value$url = value.url) ||
 														void 0 === _value$url ||
@@ -8940,6 +8918,9 @@
 														void 0 === _value$url$link
 															? void 0
 															: _value$url$link.href,
+												},
+												valueProps,
+												{
 													onClick: function onClick(e) {
 														var _value$url2, _value$url2$link;
 														null === (_value$url2 = value.url) ||
@@ -8949,11 +8930,16 @@
 															_value$url2$link.onClick(e),
 															_onClick && _onClick(e);
 													},
-												}
+												},
+												previewOnFocus
+													? (0, _toolbox__WEBPACK_IMPORTED_MODULE_13__.K)(function () {
+															return (null == value ? void 0 : value.preview) && value.preview();
+													  })
+													: {}
 											),
 											!hideCheckbox &&
 												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_13__.X,
+													_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_14__.X,
 													Object.assign({}, subProps.checkbox, { checked: value.filtered, disableA11y: !0 })
 												),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
@@ -9033,11 +9019,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-palette-options' }, 'Facet Palette Options'),
 					(0, esm.kt)('p', null, 'Renders a grid of facet palette options. '),
@@ -9140,7 +9125,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
 						' prop will invoke the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
-						' method when the value is focused. '
+						' method when the value has been hovered over.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -9732,6 +9717,7 @@
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
+				createHoverProps = __webpack_require__('./src/toolbox/createHoverProps/createHoverProps.ts'),
 				CSS_palette = function palette(_ref) {
 					var _theme$colors,
 						_ss__facetPalette,
@@ -9864,12 +9850,6 @@
 														: null != facet && facet.label
 														? 'filter by ' + (null == facet ? void 0 : facet.label) + ' - ' + value.label
 														: 'filter by ' + value.label,
-												},
-												valueProps,
-												{
-													onMouseEnter: function onMouseEnter(e) {
-														return previewOnFocus && valueProps.onMouseEnter(e, value);
-													},
 													href:
 														null === (_value$url = value.url) ||
 														void 0 === _value$url ||
@@ -9877,6 +9857,9 @@
 														void 0 === _value$url$link
 															? void 0
 															: _value$url$link.href,
+												},
+												valueProps,
+												{
 													onClick: function onClick(e) {
 														var _value$url2, _value$url2$link;
 														null === (_value$url2 = value.url) ||
@@ -9886,7 +9869,12 @@
 															_value$url2$link.onClick(e),
 															_onClick && _onClick(e);
 													},
-												}
+												},
+												previewOnFocus
+													? (0, createHoverProps.K)(function () {
+															return (null == value ? void 0 : value.preview) && value.preview();
+													  })
+													: {}
 											),
 											(0, emotion_react_browser_esm.tZ)(
 												'div',
@@ -9937,11 +9925,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet-slider' }, 'Facet Slider'),
 					(0, esm.kt)(
@@ -10824,11 +10811,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'filter' }, 'Filter'),
 					(0, esm.kt)('p', null, 'Renders a facet filter.'),
@@ -11832,11 +11818,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'pagination' }, 'Pagination'),
 					(0, esm.kt)('p', null, 'Renders pagination page links for the given search response. '),
@@ -12600,11 +12585,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'result' }, 'Result'),
 					(0, esm.kt)('p', null, 'Renders a single product card. '),
@@ -13363,7 +13347,7 @@
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts');
+				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.tsx');
 			__webpack_require__('../../node_modules/core-js/modules/es.array.last-index-of.js');
 			var types = __webpack_require__('./src/types.ts'),
 				CSS_result = function result() {
@@ -13572,11 +13556,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'searchinput' }, 'SearchInput'),
 					(0, esm.kt)('p', null, 'Renders an input element'),
@@ -14069,7 +14052,7 @@
 															return null != state ? state : !prev;
 														});
 													},
-													onClick: function onClick(e) {
+													onClick: function onClick() {
 														return setOpen(function (prev) {
 															return !prev;
 														});
@@ -14165,11 +14148,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'select' }, 'Select'),
 					(0, esm.kt)('p', null, 'Renders a native or custom select dropdown.'),
@@ -15135,7 +15117,7 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.tsx'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
 			function _slicedToArray(arr, i) {
@@ -15243,30 +15225,28 @@
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			var CSS = {
-				slideout: function slideout(_ref) {
-					var isActive = _ref.isActive,
-						width = _ref.width,
-						transitionSpeed = _ref.transitionSpeed,
-						slideDirection = _ref.slideDirection;
-					return (0, emotion_react_browser_esm.iv)({
-						display: 'block',
-						position: 'fixed',
-						transition: (slideDirection || 'left') + ' ' + transitionSpeed,
-						left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
-						right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
-						bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
-						top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
-						height: '100%',
-						zIndex: '10004',
-						width: '90%',
-						maxWidth: width,
-						padding: '10px',
-						background: '#fff',
-						boxSizing: 'border-box',
-						overflowY: 'auto',
-					});
-				},
+			var CSS_slideout = function slideout(_ref) {
+				var isActive = _ref.isActive,
+					width = _ref.width,
+					transitionSpeed = _ref.transitionSpeed,
+					slideDirection = _ref.slideDirection;
+				return (0, emotion_react_browser_esm.iv)({
+					display: 'block',
+					position: 'fixed',
+					transition: (slideDirection || 'left') + ' ' + transitionSpeed,
+					left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
+					right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
+					bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
+					top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
+					height: '100%',
+					zIndex: '10004',
+					width: '90%',
+					maxWidth: width,
+					padding: '10px',
+					background: '#fff',
+					boxSizing: 'border-box',
+					overflowY: 'auto',
+				});
 			};
 			function Slideout(properties) {
 				var _globalTheme$componen,
@@ -15360,7 +15340,7 @@
 				return (
 					disableStyles
 						? style && (styling.css = [style])
-						: (styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
+						: (styling.css = [CSS_slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
 					isVisible
 						? (0, emotion_react_browser_esm.tZ)(
 								cache.n,
@@ -15406,11 +15386,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'slideout' }, 'Slideout'),
 					(0, esm.kt)('p', null, 'Renders a slideout with a background overlay. Typically used for a mobile menu slideout. '),
@@ -15727,7 +15706,8 @@
 				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner/Banner.tsx'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.tsx'),
+				createHoverProps = __webpack_require__('./src/toolbox/createHoverProps/createHoverProps.ts'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				types = __webpack_require__('./src/types.ts'),
@@ -15844,7 +15824,6 @@
 						_search$originalQuery,
 						_search$query3,
 						_search$query4,
-						delayTimeout,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{
@@ -15884,17 +15863,7 @@
 							},
 							768: { columns: 2, rows: 3 },
 						},
-						valueProps = {
-							onMouseEnter: function onMouseEnter(e, activeTerm) {
-								clearTimeout(delayTimeout),
-									(delayTimeout = window.setTimeout(function () {
-										e.target.focus(), activeTerm && activeTerm.preview && activeTerm.preview();
-									}, 333));
-							},
-							onMouseLeave: function onMouseLeave() {
-								clearTimeout(delayTimeout);
-							},
-						},
+						valueProps = (0, createHoverProps.K)(),
 						facetClickEvent = function facetClickEvent(e) {
 							properties.onFacetOptionClick && properties.onFacetOptionClick(e),
 								(null == controller ? void 0 : controller.setFocused) && (null == controller || controller.setFocused());
@@ -16143,14 +16112,8 @@
 																							},
 																							href: term.url.href,
 																						},
-																						valueProps,
-																						{
-																							onMouseEnter: function onMouseEnter(e) {
-																								return valueProps.onMouseEnter(e, term);
-																							},
-																							role: 'link',
-																							'aria-label': 'item ' + (idx + 1) + ' of ' + terms.length + ', ' + term.value,
-																						}
+																						(0, createHoverProps.K)(term.preview),
+																						{ role: 'link', 'aria-label': 'item ' + (idx + 1) + ' of ' + terms.length + ', ' + term.value }
 																					),
 																					emIfy(term.value, state.input || '')
 																				)
@@ -16190,14 +16153,8 @@
 																							},
 																							href: term.url.href,
 																						},
-																						valueProps,
-																						{
-																							onMouseEnter: function onMouseEnter(e) {
-																								return valueProps.onMouseEnter(e, term);
-																							},
-																							role: 'link',
-																							'aria-label': 'item ' + (idx + 1) + ' of ' + trending.length + ', ' + term.value,
-																						}
+																						(0, createHoverProps.K)(term.preview),
+																						{ role: 'link', 'aria-label': 'item ' + (idx + 1) + ' of ' + trending.length + ', ' + term.value }
 																					),
 																					emIfy(term.value, state.input || '')
 																				)
@@ -16237,14 +16194,8 @@
 																							},
 																							href: term.url.href,
 																						},
-																						valueProps,
-																						{
-																							onMouseEnter: function onMouseEnter() {
-																								return term.preview();
-																							},
-																							role: 'link',
-																							'aria-label': 'item ' + (idx + 1) + ' of ' + history.length + ', ' + term.value,
-																						}
+																						(0, createHoverProps.K)(term.preview),
+																						{ role: 'link', 'aria-label': 'item ' + (idx + 1) + ' of ' + history.length + ', ' + term.value }
 																					),
 																					emIfy(term.value, state.input || '')
 																				)
@@ -16444,11 +16395,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'autocomplete' }, 'Autocomplete'),
 					(0, esm.kt)(
@@ -17926,21 +17876,19 @@
 						_properties$theme$com,
 						_globalTheme$componen2,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
-						props =
-							(Object.assign({}, globalTheme, properties.theme),
-							Object.assign(
-								{},
-								null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
-									? void 0
-									: _globalTheme$componen.branchOverride,
-								properties,
-								null === (_properties$theme = properties.theme) ||
-									void 0 === _properties$theme ||
-									null === (_properties$theme$com = _properties$theme.components) ||
-									void 0 === _properties$theme$com
-									? void 0
-									: _properties$theme$com.branchOverride
-							)),
+						props = Object.assign(
+							{},
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.branchOverride,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.branchOverride
+						),
 						name = props.name,
 						details = props.details,
 						error = props.error,
@@ -18071,11 +18019,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'branchoverride' }, 'BranchOverride'),
 					(0, esm.kt)(
@@ -18316,11 +18263,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facet' }, 'Facet'),
 					(0, esm.kt)(
@@ -18400,7 +18346,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
 						' prop will invoke the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'value.preview()'),
-						' method when the value is focused. '
+						' method when the value has been hovered over. '
 					),
 					(0, esm.kt)(
 						'pre',
@@ -19397,7 +19343,7 @@
 				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
 				_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/types.ts'),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/utilities/defined.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				_utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/utilities/cloneWithProps.tsx'),
 				_providers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
@@ -19622,7 +19568,7 @@
 									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_18__.L,
 									Object.assign({}, subProps.dropdown, {
 										open: disableCollapse || !(null != facet && facet.collapsed),
-										onClick: function onClick(e) {
+										onClick: function onClick() {
 											return !disableCollapse && facet.toggleCollapse && (null == facet ? void 0 : facet.toggleCollapse());
 										},
 										disableA11y: !0,
@@ -19793,11 +19739,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'facets' }, 'Facets'),
 					(0, esm.kt)('p', null, 'Renders all facets utilizing the ', (0, esm.kt)('inlineCode', { parentName: 'p' }, '<Facet />'), ' component.'),
@@ -20565,11 +20510,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'filter-summary' }, 'Filter Summary'),
 					(0, esm.kt)('p', null, "Renders all selected filters including a wrapper with a title and a 'clear all' button. "),
@@ -21562,11 +21506,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendation' }, 'Recommendation'),
 					(0, esm.kt)('p', null, 'Renders a carousel of product recommendations, built using the Carousel Component.'),
@@ -22381,11 +22324,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'results' }, 'Results'),
 					(0, esm.kt)(
@@ -23044,14 +22986,15 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { u: () => Results });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var preact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
+				deepmerge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_6__),
 				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
 					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
 				),
@@ -23090,19 +23033,22 @@
 						'@supports (display: grid)': { display: 'grid', '& .ss__result': { width: 'initial', margin: 0 } },
 					});
 				},
-				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_5__.Pi)(function (properties) {
+				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
 					var _properties$controlle,
 						_properties$controlle2,
 						_globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						_globalTheme$componen2,
+						_props,
 						_props2,
-						_globalTheme$componen3,
-						_props3,
+						_globalTheme$componen2,
 						_props4,
+						_globalTheme$componen3,
 						_props5,
+						_props6,
+						_props7,
 						_results,
+						_props$results,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.a)(),
 						defaultBreakpointsProps = {
 							0: { columns: properties.columns || 1 },
@@ -23135,15 +23081,19 @@
 								? void 0
 								: _properties$theme$com.results
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__.o)(props.breakpoints);
-					displaySettings && Object.keys(displaySettings).length && (props = Object.assign({}, props, displaySettings));
-					var _props$results,
-						_props = props,
-						disableStyles = _props.disableStyles,
-						className = _props.className,
-						layout = _props.layout,
-						style = _props.style,
-						controller = _props.controller,
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__.o)(
+							(null === (_props = props) || void 0 === _props ? void 0 : _props.breakpoints) || {}
+						),
+						theme = deepmerge__WEBPACK_IMPORTED_MODULE_6___default()(
+							(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme) || {},
+							(null == displaySettings ? void 0 : displaySettings.theme) || {}
+						),
+						_props3 = (props = Object.assign({}, props, displaySettings, { theme })),
+						disableStyles = _props3.disableStyles,
+						className = _props3.className,
+						layout = _props3.layout,
+						style = _props3.style,
+						controller = _props3.controller,
 						subProps = {
 							result: Object.assign(
 								{ className: 'ss__results__result' },
@@ -23151,7 +23101,7 @@
 									? void 0
 									: _globalTheme$componen2.result,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
-								{ theme: null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme }
+								{ theme: null === (_props4 = props) || void 0 === _props4 ? void 0 : _props4.theme }
 							),
 							inlineBanner: Object.assign(
 								{ className: 'ss__results__inline-banner' },
@@ -23159,16 +23109,16 @@
 									? void 0
 									: _globalTheme$componen3.inlineBanner,
 								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
-								{ theme: null === (_props3 = props) || void 0 === _props3 ? void 0 : _props3.theme }
+								{ theme: null === (_props5 = props) || void 0 === _props5 ? void 0 : _props5.theme }
 							),
 						},
 						results = props.results;
-					null !== (_props4 = props) &&
-						void 0 !== _props4 &&
-						_props4.columns &&
-						null !== (_props5 = props) &&
-						void 0 !== _props5 &&
-						_props5.rows &&
+					null !== (_props6 = props) &&
+						void 0 !== _props6 &&
+						_props6.columns &&
+						null !== (_props7 = props) &&
+						void 0 !== _props7 &&
+						_props7.rows &&
 						props.columns > 0 &&
 						props.rows > 0 &&
 						(results =
@@ -23188,7 +23138,7 @@
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 										'div',
 										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__results', 'ss__results-' + props.layout, className),
+											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', 'ss__results-' + props.layout, className),
 										}),
 										results.map(function (result) {
 											return result.type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_13__.z.BANNER
@@ -23203,7 +23153,7 @@
 										})
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(preact__WEBPACK_IMPORTED_MODULE_4__.HY, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(preact__WEBPACK_IMPORTED_MODULE_3__.HY, null)
 					);
 				});
 		},
@@ -23263,11 +23213,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendationprofiletracker' }, 'RecommendationProfileTracker'),
 					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to the profile.'),
@@ -23885,11 +23834,10 @@
 					_extends.apply(this, arguments)
 				);
 			}
-			const layoutProps = {},
-				MDXLayout = 'wrapper';
+			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					MDXLayout,
+					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendationresulttracker' }, 'RecommendationResultTracker'),
 					(0, esm.kt)('p', null, 'Adds impression, render and click beacon tracking to an individual result within a profile.'),
@@ -24528,8 +24476,26 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			var preact_hooks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_this = void 0;
+			var hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				dist = __webpack_require__('../../node_modules/dequal/dist/index.mjs');
+			function useDeepCompareEffect(callback, dependencies) {
+				return (0, hooks_module.d4)(
+					callback,
+					(function useDeepCompareMemoize(value) {
+						var ref = (0, hooks_module.sO)(value),
+							signalRef = (0, hooks_module.sO)(0);
+						return (
+							(0, dist.J)(value, ref.current) || ((ref.current = value), (signalRef.current += 1)),
+							(0, hooks_module.Ye)(
+								function () {
+									return ref.current;
+								},
+								[signalRef.current]
+							)
+						);
+					})(dependencies)
+				);
+			}
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -24584,11 +24550,11 @@
 			}
 			function useDisplaySettings(breakpointsObj) {
 				if (breakpointsObj && Object.keys(breakpointsObj).length) {
-					var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_16__.eJ)(getDisplaySettings(breakpointsObj)), 2),
+					var _useState2 = _slicedToArray((0, hooks_module.eJ)(getDisplaySettings(breakpointsObj)), 2),
 						displaySettings = _useState2[0],
 						setDisplaySettings = _useState2[1];
 					return (
-						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_16__.d4)(function () {
+						(0, hooks_module.d4)(function () {
 							var debouncedHandleResize = debounce(function () {
 								return (function handleResize() {
 									setDisplaySettings(getDisplaySettings(breakpointsObj));
@@ -24601,6 +24567,12 @@
 								}
 							);
 						}, []),
+						useDeepCompareEffect(
+							function () {
+								setDisplaySettings(getDisplaySettings(breakpointsObj));
+							},
+							[breakpointsObj]
+						),
 						displaySettings
 					);
 				}
@@ -24644,7 +24616,7 @@
 						for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
 						clearTimeout(timer),
 							(timer = window.setTimeout(function () {
-								func.apply(_this, args);
+								func.apply(undefined, args);
 							}, timeout));
 					};
 				};
@@ -24758,6 +24730,26 @@
 					);
 				};
 		},
+		'./src/toolbox/createHoverProps/createHoverProps.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { K: () => createHoverProps });
+			__webpack_require__('../../node_modules/core-js/modules/web.timers.js');
+			var createHoverProps = function createHoverProps(callback) {
+				var delayTimeout,
+					options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : { delay: 333, focusElem: !0 };
+				return {
+					onMouseEnter: function onMouseEnter(e) {
+						clearTimeout(delayTimeout),
+							(delayTimeout = window.setTimeout(function () {
+								options.focusElem && e.target.focus(), callback && callback();
+							}, options.delay || 333));
+					},
+					onMouseLeave: function onMouseLeave() {
+						clearTimeout(delayTimeout);
+					},
+				};
+			};
+		},
 		'./src/types.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var Layout, FacetType, FacetDisplay;
@@ -24776,21 +24768,26 @@
 						(FacetDisplay.HIERARCHY = 'hierarchy');
 				})(FacetDisplay || (FacetDisplay = {}));
 		},
-		'./src/utilities/cloneWithProps.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/utilities/cloneWithProps.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { d: () => cloneWithProps });
 			__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				cloneWithProps = function cloneWithProps(input, props) {
-					if (input)
-						return 'string' == typeof input || 'number' == typeof input || 'boolean' == typeof input
-							? input
-							: Array.isArray(input)
-							? input.map(function (entry) {
-									return cloneWithProps(entry, props);
-							  })
-							: (0, preact__WEBPACK_IMPORTED_MODULE_2__.Tm)(input, props);
+					if (input) {
+						if ('string' == typeof input || 'number' == typeof input || 'boolean' == typeof input) return input;
+						if (Array.isArray(input))
+							return input.map(function (entry) {
+								return cloneWithProps(entry, props);
+							});
+						var ObservableClone = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
+							return (0, preact__WEBPACK_IMPORTED_MODULE_3__.Tm)(input, properties);
+						});
+						return (0, preact__WEBPACK_IMPORTED_MODULE_3__.h)(ObservableClone, Object.assign({}, props));
+					}
 				};
 		},
 		'./src/utilities/componentArgs.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -25903,7 +25900,8 @@
 				};
 			}
 			var flags = getFlags(),
-				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() };
+				featureFlags_cookies = (flags.cors(), flags.cookies()),
+				featureFlags_storage = flags.storage();
 			function _createForOfIteratorHelper(o, allowArrayLike) {
 				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
 				if (!it) {
@@ -25994,7 +25992,7 @@
 				var arg, key;
 			}
 			var StorageType,
-				utils = { cookies },
+				utils_cookies = cookies,
 				StorageStore = (function () {
 					function StorageStore(config) {
 						var _config$cookie, _config$cookie2;
@@ -26024,22 +26022,22 @@
 								config.type)
 							) {
 								case StorageType.SESSION:
-									(this.type = featureFlags.storage ? config.type : null),
+									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
 											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.LOCAL:
-									(this.type = featureFlags.storage ? config.type : null),
+									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											!window.localStorage.getItem(this.key) &&
 											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
 											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.COOKIE:
-									if (featureFlags.cookies) {
+									if (featureFlags_cookies) {
 										this.type = config.type;
-										var data = utils.cookies.get(this.key);
+										var data = utils_cookies.get(this.key);
 										data && (this.state = JSON.parse(data));
 									}
 									break;
@@ -26075,7 +26073,7 @@
 											window.localStorage.setItem(this.key, JSON.stringify(this.state));
 											break;
 										case StorageType.COOKIE:
-											utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
 									}
 								},
 							},
@@ -26092,7 +26090,7 @@
 											this.state = localData ? JSON.parse(localData) : {};
 											break;
 										case StorageType.COOKIE:
-											var data = utils.cookies.get(this.key);
+											var data = utils_cookies.get(this.key);
 											data && (this.state = JSON.parse(data) || {});
 									}
 									var paths = null == path ? void 0 : path.split('.');
@@ -26126,7 +26124,7 @@
 											window.localStorage.removeItem(this.key);
 											break;
 										case StorageType.COOKIE:
-											utils.cookies.unset(this.key);
+											utils_cookies.unset(this.key);
 									}
 									this.state = {};
 								},
@@ -26726,7 +26724,6 @@
 			var BeaconType,
 				BeaconCategory,
 				ProfilePlacement,
-				API_LIMIT = 500,
 				defaultConfig = {
 					id: 'search',
 					globals: {},
@@ -26977,7 +26974,7 @@
 																	: _meta$pagination.defaultPageSize);
 													case 40:
 														for (
-															pageSize = pageSize > API_LIMIT ? API_LIMIT : pageSize,
+															pageSize = pageSize > 500 ? 500 : pageSize,
 																pagesNeeded =
 																	null !== (_params$pagination3 = params.pagination) &&
 																	void 0 !== _params$pagination3 &&
@@ -27526,7 +27523,7 @@
 				};
 			}
 			function backFillSize(pages, pageSize) {
-				for (var totalResults = pages * pageSize, numPages = Math.ceil(totalResults / API_LIMIT); totalResults % numPages; ) numPages++;
+				for (var totalResults = pages * pageSize, numPages = Math.ceil(totalResults / 500); totalResults % numPages; ) numPages++;
 				return { size: totalResults / numPages, pages: numPages };
 			}
 			function RecommendationController_regeneratorRuntime() {
@@ -29033,13 +29030,7 @@
 					AutocompleteController_getPrototypeOf(o)
 				);
 			}
-			var INPUT_ATTRIBUTE = 'ss-autocomplete-input',
-				INPUT_DELAY = 200,
-				KEY_ENTER = 13,
-				KEY_ESCAPE = 27,
-				PARAM_ORIGINAL_QUERY = 'oq',
-				PARAM_FALLBACK_QUERY = 'fallbackQuery',
-				AutocompleteController_defaultConfig = {
+			var AutocompleteController_defaultConfig = {
 					id: 'autocomplete',
 					selector: '',
 					action: '',
@@ -29084,7 +29075,7 @@
 								ControllerTypes.autocomplete),
 							(_this.track = {
 								product: {
-									click: function click(e, result) {
+									click: function click() {
 										_this.log.warn('product.click tracking is not currently supported in this controller type');
 									},
 								},
@@ -29109,7 +29100,7 @@
 														for (;;)
 															switch ((_context.prev = _context.next)) {
 																case 0:
-																	if (e.keyCode != KEY_ENTER) {
+																	if (13 != e.keyCode) {
 																		_context.next = 29;
 																		break;
 																	}
@@ -29128,13 +29119,13 @@
 																		_context.next = 13;
 																		break;
 																	}
-																	return (_context.next = 7), timeout(INPUT_DELAY + 1);
+																	return (_context.next = 7), timeout(201);
 																case 7:
 																	if (!_this.store.loading) {
 																		_context.next = 12;
 																		break;
 																	}
-																	return (_context.next = 10), timeout(INPUT_DELAY);
+																	return (_context.next = 10), timeout(200);
 																case 10:
 																	_context.next = 7;
 																	break;
@@ -29146,7 +29137,7 @@
 																		  (actionUrl =
 																				null === (_actionUrl = actionUrl) || void 0 === _actionUrl
 																					? void 0
-																					: _actionUrl.set(PARAM_FALLBACK_QUERY, _this.store.terms[0].value))
+																					: _actionUrl.set('fallbackQuery', _this.store.terms[0].value))
 																		: _this.store.search.originalQuery &&
 																		  ((input.value =
 																				null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
@@ -29155,7 +29146,7 @@
 																		  (actionUrl =
 																				null === (_actionUrl2 = actionUrl) || void 0 === _actionUrl2
 																					? void 0
-																					: _actionUrl2.set(PARAM_ORIGINAL_QUERY, _this.store.search.originalQuery.string)));
+																					: _actionUrl2.set('oq', _this.store.search.originalQuery.string)));
 																case 13:
 																	return (
 																		(actionUrl =
@@ -29200,7 +29191,7 @@
 											return _enterKey.apply(this, arguments);
 										}),
 									escKey: function escKey(e) {
-										e.keyCode == KEY_ESCAPE && (e.target.blur(), _this.setFocused());
+										27 == e.keyCode && (e.target.blur(), _this.setFocused());
 									},
 									focus: function focus(e) {
 										e.stopPropagation(),
@@ -29219,7 +29210,7 @@
 																case 0:
 																	if (
 																		((form = e.target),
-																		(input = form.querySelector('input[' + INPUT_ATTRIBUTE + ']')),
+																		(input = form.querySelector('input[ss-autocomplete-input]')),
 																		e.preventDefault(),
 																		null === (_this$config$globals2 = _this.config.globals) ||
 																			void 0 === _this$config$globals2 ||
@@ -29232,13 +29223,13 @@
 																		_context2.next = 12;
 																		break;
 																	}
-																	return (_context2.next = 6), timeout(INPUT_DELAY + 1);
+																	return (_context2.next = 6), timeout(201);
 																case 6:
 																	if (!_this.store.loading) {
 																		_context2.next = 11;
 																		break;
 																	}
-																	return (_context2.next = 9), timeout(INPUT_DELAY);
+																	return (_context2.next = 9), timeout(200);
 																case 9:
 																	_context2.next = 6;
 																	break;
@@ -29247,14 +29238,14 @@
 																		? input &&
 																		  _this.store.terms.length &&
 																		  _this.store.terms[0].value != input.value &&
-																		  addHiddenFormInput(form, PARAM_FALLBACK_QUERY, _this.store.terms[0].value)
+																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.terms[0].value)
 																		: _this.store.search.originalQuery &&
 																		  (input &&
 																				(input.value =
 																					null === (_this$store$search$qu2 = _this.store.search.query) || void 0 === _this$store$search$qu2
 																						? void 0
 																						: _this$store$search$qu2.string),
-																		  addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, _this.store.search.originalQuery.string));
+																		  addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
 																case 12:
 																	return (
 																		(_context2.prev = 12),
@@ -29299,7 +29290,7 @@
 										var _this$config$settings,
 											input = e.target,
 											form = null == input ? void 0 : input.form,
-											searchInput = null == form ? void 0 : form.querySelector('input[' + INPUT_ATTRIBUTE + ']');
+											searchInput = null == form ? void 0 : form.querySelector('input[ss-autocomplete-input]');
 										if (
 											form &&
 											searchInput &&
@@ -29332,7 +29323,7 @@
 									},
 									keyUp: function keyUp(e) {
 										var _this$config, _this$config$settings6;
-										if ((null == e ? void 0 : e.keyCode) != KEY_ENTER && (null == e ? void 0 : e.keyCode) != KEY_ESCAPE) {
+										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
 											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
 											var value = e.target.value;
 											if (_this.store.state.input != value || !_this.store.loaded) {
@@ -29359,10 +29350,9 @@
 															_this.store.state.locks.terms.unlock(),
 																_this.store.state.locks.facets.unlock(),
 																_this.urlManager.set({ query: _this.store.state.input }).go();
-														}, INPUT_DELAY));
+														}, 200));
 												else
 													_this.store.reset(),
-														_this.urlManager.reset().go(),
 														null !== (_this$store$trending = _this.store.trending) &&
 														void 0 !== _this$store$trending &&
 														_this$store$trending.length &&
@@ -29379,8 +29369,9 @@
 															  void 0 !== _this$config$settings9 &&
 															  null !== (_this$config$settings10 = _this$config$settings9.history) &&
 															  void 0 !== _this$config$settings10 &&
-															  _this$config$settings10.showResults &&
-															  _this.store.history[0].preview();
+															  _this$config$settings10.showResults
+															? _this.store.history[0].preview()
+															: _this.urlManager.reset().go();
 											}
 										}
 									},
@@ -29854,7 +29845,7 @@
 								key: 'unbind',
 								value: function unbind() {
 									var _this2 = this,
-										inputs = document.querySelectorAll('input[' + INPUT_ATTRIBUTE + ']');
+										inputs = document.querySelectorAll('input[ss-autocomplete-input]');
 									null == inputs ||
 										inputs.forEach(function (input) {
 											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
@@ -29903,7 +29894,7 @@
 																			input.setAttribute('autocomplete', 'off'),
 																			input.setAttribute('autocorrect', 'off'),
 																			input.setAttribute('autocapitalize', 'none'),
-																			input.setAttribute(INPUT_ATTRIBUTE, ''),
+																			input.setAttribute('ss-autocomplete-input', ''),
 																			input.addEventListener('keyup', _this3.handlers.input.keyUp),
 																			null !== (_this3$config = _this3.config) &&
 																				void 0 !== _this3$config &&
@@ -31475,8 +31466,11 @@
 												for (;;)
 													switch ((_context4.prev = _context4.next)) {
 														case 0:
-															return _context4.abrupt('return', this.getEndpoint(queryParameters, '/api/search/search.json'));
-														case 1:
+															return (
+																(queryParameters.ajaxCatalog = 'Snap'),
+																_context4.abrupt('return', this.getEndpoint(queryParameters, '/api/search/search.json'))
+															);
+														case 2:
 														case 'end':
 															return _context4.stop();
 													}
@@ -31500,8 +31494,11 @@
 												for (;;)
 													switch ((_context5.prev = _context5.next)) {
 														case 0:
-															return _context5.abrupt('return', this.getEndpoint(queryParameters, '/api/search/autocomplete.json'));
-														case 1:
+															return (
+																(queryParameters.ajaxCatalog = 'Snap'),
+																_context5.abrupt('return', this.getEndpoint(queryParameters, '/api/search/autocomplete.json'))
+															);
+														case 2:
 														case 'end':
 															return _context5.stop();
 													}
@@ -31525,8 +31522,11 @@
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
 														case 0:
-															return _context6.abrupt('return', this.getEndpoint(queryParameters, '/api/search/finder.json'));
-														case 1:
+															return (
+																(queryParameters.ajaxCatalog = 'Snap'),
+																_context6.abrupt('return', this.getEndpoint(queryParameters, '/api/search/finder.json'))
+															);
+														case 2:
 														case 'end':
 															return _context6.stop();
 													}
@@ -33367,8 +33367,7 @@
 						: count + keyLength + 1 + ('' + value).length;
 				}, 1);
 			}
-			var _excluded = ['tags', 'limits', 'categories'],
-				_excluded2 = ['tags', 'limits', 'categories'];
+			var _excluded = ['tags', 'categories'];
 			function Recommend_slicedToArray(arr, i) {
 				return (
 					(function Recommend_arrayWithHoles(arr) {
@@ -34003,10 +34002,6 @@
 														switch ((_context3.prev = _context3.next)) {
 															case 0:
 																return (
-																	parameters.tags,
-																	parameters.limits,
-																	parameters.categories,
-																	_objectWithoutProperties(parameters, _excluded),
 																	(key = parameters.batched ? parameters.siteId : '' + Math.random()),
 																	(batch = this.batches[key] =
 																		this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] }),
@@ -34028,13 +34023,14 @@
 																										batch.entries.map(function (entry) {
 																											var _entry$request = entry.request,
 																												tags = _entry$request.tags,
-																												limits = _entry$request.limits,
 																												categories = _entry$request.categories,
-																												otherParams = _objectWithoutProperties(_entry$request, _excluded2);
+																												otherParams = _objectWithoutProperties(_entry$request, _excluded),
+																												limits = entry.request.limits;
 																											limits || (limits = 20);
 																											var tag = Recommend_slicedToArray(tags || [], 1)[0];
 																											delete otherParams.batched,
 																												delete otherParams.order,
+																												delete otherParams.limits,
 																												batch.request.tags.push(tag),
 																												categories &&
 																													(batch.request.categories
@@ -34093,7 +34089,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 8:
+															case 7:
 															case 'end':
 																return _context3.stop();
 														}
@@ -36283,7 +36279,7 @@
 													adding
 												);
 											}, [])
-											.forEach(function (banner, index) {
+											.forEach(function (banner) {
 												var adjustedIndex = banner.config.position.index - minIndex;
 												results.splice(adjustedIndex, 0, banner);
 											}),
@@ -40781,7 +40777,6 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
-			var version = '0.42.3';
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -40918,7 +40913,7 @@
 								: _payload$context2.userId) || ''
 						) +
 						'&ce=' +
-						(featureFlags.cookies ? '1' : '0') +
+						(featureFlags_cookies ? '1' : '0') +
 						'&pt=' +
 						encodeURIComponent(document.title) +
 						'&v=1&x=' +
@@ -41021,7 +41016,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': version, 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.43.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41080,20 +41075,7 @@
 				}
 				var arg, key;
 			}
-			var Tracker_BATCH_TIMEOUT = 200,
-				LEGACY_USERID_COOKIE_NAME = '_isuid',
-				USERID_COOKIE_NAME = 'ssUserId',
-				SHOPPERID_COOKIE_NAME = 'ssShopperId',
-				COOKIE_EXPIRATION = 31536e6,
-				VIEWED_COOKIE_EXPIRATION = 220752e6,
-				COOKIE_SAMESITE = 'Lax',
-				SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace',
-				LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool',
-				CART_PRODUCTS = 'ssCartProducts',
-				VIEWED_PRODUCTS = 'ssViewedProducts',
-				MAX_VIEWED_COUNT = 20,
-				MAX_PARENT_LEVELS = 3,
-				Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
+			var Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
 				Tracker = (function () {
 					function Tracker(globals, config) {
 						var _window$searchspring,
@@ -41161,9 +41143,7 @@
 													(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
 													_this.getShopperId() != data.id)
 												) {
-													cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION),
-														(_this.context.shopperId = data.id),
-														_this.sendPreflight();
+													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
 													var payload = {
 														type: BeaconType.LOGIN,
 														category: BeaconCategory.PERSONALIZATION,
@@ -41198,7 +41178,7 @@
 													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
 														return item.trim();
 													});
-												cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION),
+												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
 													lastViewedProducts.includes(sku) || _this.sendPreflight();
 											}
 											return (
@@ -41345,13 +41325,12 @@
 								var userId;
 								try {
 									if (getFlags().cookies())
-										(userId = cookies.get(LEGACY_USERID_COOKIE_NAME) || cookies.get(USERID_COOKIE_NAME) || (0, v4.Z)()),
-											cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION),
-											cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+										(userId = cookies.get('_isuid') || cookies.get('ssUserId') || (0, v4.Z)()),
+											cookies.set('ssUserId', userId, 'Lax', 31536e6),
+											cookies.set('_isuid', userId, 'Lax', 31536e6);
 									else {
 										if (!getFlags().storage()) throw 'unsupported features';
-										(userId = window.localStorage.getItem(USERID_COOKIE_NAME) || (0, v4.Z)()),
-											window.localStorage.setItem(USERID_COOKIE_NAME, userId);
+										(userId = window.localStorage.getItem('ssUserId') || (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId);
 									}
 								} catch (e) {
 									console.error('Failed to persist user id to cookie or local storage:', e);
@@ -41362,20 +41341,20 @@
 								var sessionId;
 								if (getFlags().storage())
 									try {
-										(sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || (0, v4.Z)()),
-											window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId),
-											getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
+										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
+											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
+											getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
 									} catch (e) {
 										console.error('Failed to persist session id to session storage:', e);
 									}
 								else
 									getFlags().cookies() &&
-										((sessionId = cookies.get(SESSIONID_STORAGE_NAME)) ||
-											((sessionId = (0, v4.Z)()), cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0)));
+										((sessionId = cookies.get('ssSessionIdNamespace')) ||
+											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
 								return sessionId;
 							}),
 							(this.getShopperId = function () {
-								var shopperId = cookies.get(SHOPPERID_COOKIE_NAME);
+								var shopperId = cookies.get('ssShopperId');
 								if (shopperId) return shopperId;
 							}),
 							(this.sendPreflight = function () {
@@ -41414,7 +41393,7 @@
 							(this.cookies = {
 								cart: {
 									get: function get() {
-										var items = cookies.get(CART_PRODUCTS);
+										var items = cookies.get('ssCartProducts');
 										return items ? items.split(',') : [];
 									},
 									set: function set(items) {
@@ -41423,7 +41402,7 @@
 													return item.trim();
 												}),
 												uniqueCartItems = Array.from(new Set(cartItems));
-											cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0),
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
 												cartItems.filter(function (item) {
 													return items.includes(item);
 												}).length !== items.length && _this.sendPreflight();
@@ -41438,7 +41417,7 @@
 												uniqueCartItems = Array.from(
 													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
 												);
-											cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0),
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
 												currentCartItems.filter(function (item) {
 													return itemsToAdd.includes(item);
 												}).length !== itemsToAdd.length && _this.sendPreflight();
@@ -41453,24 +41432,24 @@
 												updatedItems = currentCartItems.filter(function (item) {
 													return !itemsToRemove.includes(item);
 												});
-											cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0),
+											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
 												currentCartItems.length !== updatedItems.length && _this.sendPreflight();
 										}
 									},
 									clear: function clear() {
-										_this.cookies.cart.get().length && (cookies.unset(CART_PRODUCTS), _this.sendPreflight());
+										_this.cookies.cart.get().length && (cookies.unset('ssCartProducts'), _this.sendPreflight());
 									},
 								},
 								viewed: {
 									get: function get() {
-										var items = cookies.get(VIEWED_PRODUCTS);
+										var items = cookies.get('ssViewedProducts');
 										return items ? items.split(',') : [];
 									},
 								},
 							}),
 							(this.sendEvents = function (eventsToSend) {
 								if (_this.mode === AppMode.production) {
-									var savedEvents = JSON.parse(_this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
+									var savedEvents = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
 									if (eventsToSend) {
 										var eventsClone = [];
 										savedEvents.forEach(function (_event, idx) {
@@ -41483,7 +41462,7 @@
 												delete newEvent.pid,
 												-1 == stringyEventsClone.indexOf(JSON.stringify(newEvent)) && savedEvents.push(Object.assign({}, eventsToSend[idx]));
 										}),
-											_this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(savedEvents));
+											_this.localStorage.set('ssBeaconPool', JSON.stringify(savedEvents));
 									}
 									clearTimeout(_this.isSending),
 										(_this.isSending = window.setTimeout(function () {
@@ -41493,8 +41472,8 @@
 													xhr.setRequestHeader('Content-Type', 'application/json'),
 													xhr.send(JSON.stringify(1 == savedEvents.length ? savedEvents[0] : savedEvents));
 											}
-											_this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
-										}, Tracker_BATCH_TIMEOUT));
+											_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
+										}, 200));
 								}
 							}),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
@@ -41512,7 +41491,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = version)),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.43.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -41635,7 +41614,7 @@
 											attributes = {},
 											levels = 0,
 											elem = null;
-										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= MAX_PARENT_LEVELS; )
+										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
 											Object.values(elem.attributes).forEach(function (attr) {
 												var attrName = attr.nodeName;
 												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
@@ -42804,11 +42783,10 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const About_stories_layoutProps = {},
-				About_stories_MDXLayout = 'wrapper';
+			const About_stories_layoutProps = {};
 			function About_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					About_stories_MDXLayout,
+					'wrapper',
 					About_stories_extends({}, About_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/About', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -43167,11 +43145,10 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const Theme_stories_layoutProps = {},
-				Theme_stories_MDXLayout = 'wrapper';
+			const Theme_stories_layoutProps = {};
 			function Theme_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					Theme_stories_MDXLayout,
+					'wrapper',
 					Theme_stories_extends({}, Theme_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/Theme', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -43306,11 +43283,10 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const Usage_stories_layoutProps = {},
-				Usage_stories_MDXLayout = 'wrapper';
+			const Usage_stories_layoutProps = {};
 			function Usage_stories_MDXContent({ components, ...props }) {
 				return (0, esm.kt)(
-					Usage_stories_MDXLayout,
+					'wrapper',
 					Usage_stories_extends({}, Usage_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)(blocks.h_, { title: 'Documentation/Usage', mdxType: 'Meta' }),
 					(0, esm.kt)(
@@ -43441,7 +43417,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[149],
+			[431],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
