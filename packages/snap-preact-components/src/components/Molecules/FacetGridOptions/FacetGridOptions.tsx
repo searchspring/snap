@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { createHoverTimeoutProps } from '../../../utilities';
+import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
@@ -88,7 +88,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		...properties.theme?.components?.facetGridOptions,
 	};
 
-	const { values, columns, gapSize, onClick, previewOnFocus, previewOnHover, valueProps, facet, disableStyles, className, style } = props;
+	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -118,8 +118,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
-						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
-						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
+						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
 						<span
 							className={classnames('ss__facet-grid-options__option__value', {
@@ -145,5 +144,4 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	facet?: ValueFacet;
 	previewOnFocus?: boolean;
 	valueProps?: any;
-	previewOnHover?: boolean;
 }

@@ -14,7 +14,8 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProp } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps, createHoverTimeoutProps } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
+import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -206,7 +207,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const valueProps = createHoverTimeoutProps();
+	const valueProps = createHoverProps();
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		properties.onFacetOptionClick && properties.onFacetOptionClick(e);
@@ -228,7 +229,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				limit: 6,
 				disableOverflow: true,
 				disableCollapse: true,
-				previewOnHover: true,
+				previewOnFocus: true,
 				valueProps,
 			},
 			facetGridOptions: {
@@ -464,7 +465,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...createHoverTimeoutProps(term.preview)}
+														{...createHoverProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
 													>
@@ -493,7 +494,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...createHoverTimeoutProps(term.preview)}
+														{...createHoverProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
 													>
@@ -522,7 +523,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...createHoverTimeoutProps(term.preview)}
+														{...createHoverProps(term.preview)}
 														role="link"
 														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
 													>

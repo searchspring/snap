@@ -7,8 +7,9 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { defined, createHoverTimeoutProps } from '../../../utilities';
+import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
+import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -51,7 +52,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		...properties.theme?.components?.facetListOptions,
 	};
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, previewOnHover, valueProps, facet, disableStyles, className, style } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -96,8 +97,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
-						onFocus={() => !previewOnHover && previewOnFocus && value.preview && value.preview()}
-						{...(previewOnHover ? createHoverTimeoutProps(() => value?.preview && value.preview()) : {})}
+						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
 						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 						<span className="ss__facet-list-options__option__value">
@@ -120,7 +120,6 @@ export interface FacetListOptionsProps extends ComponentProps {
 	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
-	previewOnHover?: boolean;
 	valueProps?: any;
 }
 

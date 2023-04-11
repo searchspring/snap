@@ -50,23 +50,12 @@ The `hideIcon` prop will disable the facet icon from being rendered.
 ```
 
 ### previewOnFocus
-If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value is focused. 
+If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 
 ```jsx
 <Autocomplete>
 	...
 	<FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />
-	...
-</Autocomplete>
-```
-
-### previewOnHover
-If using within Autocomplete, the `previewOnHover` prop will invoke the `value.preview()` method when the value has been hovered over. 
-
-```jsx
-<Autocomplete>
-	...
-	<FacetPaletteOptions values={paletteFacet.values} previewOnHover={true} />
 	...
 </Autocomplete>
 ```

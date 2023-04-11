@@ -82,16 +82,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		previewOnHover: {
-			description: 'Invoke facet value preview upon hover',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
+
 		valueProps: {
 			description: 'Object of facet value props',
 			table: {
