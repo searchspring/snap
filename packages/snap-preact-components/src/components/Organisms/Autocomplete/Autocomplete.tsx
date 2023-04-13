@@ -389,8 +389,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	if (!state.input && (historyActive || trendingActive)) {
-		showHistory = true;
-		showTrending = true;
+		if (history?.length) showHistory = true;
+		if (trending?.length) showTrending = true;
 	}
 
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
