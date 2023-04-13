@@ -1,4 +1,4 @@
-/*! For license information please see main.fe7f5e29.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.a82e5555.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -16013,7 +16013,9 @@
 						history.length &&
 						((retainHistory && controller.store.loaded) || (!results.length && !state.input)) &&
 						(showHistory = !0),
-						state.input || (!historyActive && !trendingActive) || ((showHistory = !0), (showTrending = !0));
+						state.input ||
+							(!historyActive && !trendingActive) ||
+							(null != history && history.length && (showHistory = !0), null != trending && trending.length && (showTrending = !0));
 					var facetsToShow = facets.length
 							? facets.filter(function (facet) {
 									return facet.display !== types.uw.SLIDER;
@@ -29322,17 +29324,18 @@
 										}
 									},
 									keyUp: function keyUp(e) {
-										var _this$config, _this$config$settings6;
+										var _this$config,
+											_this$config$settings6,
+											_this$store$trending,
+											_this$config$settings7,
+											_this$config$settings8,
+											_this$store$history,
+											_this$config$settings9,
+											_this$config$settings10;
 										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
 											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
 											var value = e.target.value;
-											if (_this.store.state.input != value || !_this.store.loaded) {
-												var _this$store$trending,
-													_this$config$settings7,
-													_this$config$settings8,
-													_this$store$history,
-													_this$config$settings9,
-													_this$config$settings10;
+											if (((_this.store.state.input || value) && _this.store.state.input != value) || !_this.store.loaded) {
 												if (
 													((_this.store.state.input = value),
 													null !== (_this$config = _this.config) &&
@@ -29344,34 +29347,38 @@
 													document.querySelectorAll(_this.config.selector).forEach(function (input) {
 														input.value = value;
 													});
-												if ((clearTimeout(_this.handlers.input.timeoutDelay), value))
-													_this.store.resetTerms(),
-														(_this.handlers.input.timeoutDelay = setTimeout(function () {
+												clearTimeout(_this.handlers.input.timeoutDelay);
+												var trendingResultsEnabled =
+														(null === (_this$store$trending = _this.store.trending) || void 0 === _this$store$trending
+															? void 0
+															: _this$store$trending.length) &&
+														(null === (_this$config$settings7 = _this.config.settings) ||
+														void 0 === _this$config$settings7 ||
+														null === (_this$config$settings8 = _this$config$settings7.trending) ||
+														void 0 === _this$config$settings8
+															? void 0
+															: _this$config$settings8.showResults),
+													historyResultsEnabled =
+														(null === (_this$store$history = _this.store.history) || void 0 === _this$store$history
+															? void 0
+															: _this$store$history.length) &&
+														(null === (_this$config$settings9 = _this.config.settings) ||
+														void 0 === _this$config$settings9 ||
+														null === (_this$config$settings10 = _this$config$settings9.history) ||
+														void 0 === _this$config$settings10
+															? void 0
+															: _this$config$settings10.showResults);
+												value
+													? (_this.store.resetTerms(),
+													  (_this.handlers.input.timeoutDelay = setTimeout(function () {
 															_this.store.state.locks.terms.unlock(),
 																_this.store.state.locks.facets.unlock(),
+																(trendingResultsEnabled || historyResultsEnabled) && _this.urlManager.set({ query: '' }).go(),
 																_this.urlManager.set({ query: _this.store.state.input }).go();
-														}, 200));
-												else
-													_this.store.reset(),
-														null !== (_this$store$trending = _this.store.trending) &&
-														void 0 !== _this$store$trending &&
-														_this$store$trending.length &&
-														null !== (_this$config$settings7 = _this.config.settings) &&
-														void 0 !== _this$config$settings7 &&
-														null !== (_this$config$settings8 = _this$config$settings7.trending) &&
-														void 0 !== _this$config$settings8 &&
-														_this$config$settings8.showResults
-															? _this.store.trending[0].preview()
-															: null !== (_this$store$history = _this.store.history) &&
-															  void 0 !== _this$store$history &&
-															  _this$store$history.length &&
-															  null !== (_this$config$settings9 = _this.config.settings) &&
-															  void 0 !== _this$config$settings9 &&
-															  null !== (_this$config$settings10 = _this$config$settings9.history) &&
-															  void 0 !== _this$config$settings10 &&
-															  _this$config$settings10.showResults
-															? _this.store.history[0].preview()
-															: _this.urlManager.reset().go();
+													  }, 200)))
+													: (_this.store.reset(),
+													  _this.urlManager.reset().go(),
+													  trendingResultsEnabled ? _this.store.trending[0].preview() : historyResultsEnabled && _this.store.history[0].preview());
 											}
 										}
 									},
@@ -29458,6 +29465,12 @@
 											for (;;)
 												switch ((_context4.prev = _context4.next)) {
 													case 0:
+														if (_this.urlManager.state.query) {
+															_context4.next = 2;
+															break;
+														}
+														return _context4.abrupt('return');
+													case 2:
 														if (
 															null != (params = _this.params) &&
 															null !== (_params$search = params.search) &&
@@ -29466,42 +29479,42 @@
 															void 0 !== _params$search$query &&
 															_params$search$query.string
 														) {
-															_context4.next = 3;
+															_context4.next = 5;
 															break;
 														}
 														return _context4.abrupt('return');
-													case 3:
+													case 5:
 														return (
-															(_context4.prev = 3),
-															(_context4.prev = 4),
-															(_context4.next = 7),
+															(_context4.prev = 5),
+															(_context4.prev = 6),
+															(_context4.next = 9),
 															_this.eventManager.fire('beforeSearch', {
 																controller: AutocompleteController_assertThisInitialized(_this),
 																request: params,
 															})
 														);
-													case 7:
-														_context4.next = 18;
-														break;
 													case 9:
+														_context4.next = 20;
+														break;
+													case 11:
 														if (
-															((_context4.prev = 9),
-															(_context4.t0 = _context4.catch(4)),
+															((_context4.prev = 11),
+															(_context4.t0 = _context4.catch(6)),
 															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
 														) {
-															_context4.next = 16;
+															_context4.next = 18;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
-													case 16:
-														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
 													case 18:
+														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
+													case 20:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context4.next = 21),
+															(_context4.next = 23),
 															_this.client.autocomplete(params)
 														);
-													case 21:
+													case 23:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -29510,85 +29523,85 @@
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 29),
-															(_context4.next = 32),
+															(_context4.prev = 31),
+															(_context4.next = 34),
 															_this.eventManager.fire('afterSearch', {
 																controller: AutocompleteController_assertThisInitialized(_this),
 																request: params,
 																response,
 															})
 														);
-													case 32:
-														_context4.next = 44;
-														break;
 													case 34:
+														_context4.next = 46;
+														break;
+													case 36:
 														if (
-															((_context4.prev = 34),
-															(_context4.t1 = _context4.catch(29)),
+															((_context4.prev = 36),
+															(_context4.t1 = _context4.catch(31)),
 															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
 														) {
-															_context4.next = 42;
+															_context4.next = 44;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 42:
-														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
 													case 44:
+														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
+													case 46:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 48),
-															(_context4.next = 51),
+															(_context4.prev = 50),
+															(_context4.next = 53),
 															_this.eventManager.fire('afterStore', {
 																controller: AutocompleteController_assertThisInitialized(_this),
 																request: params,
 																response,
 															})
 														);
-													case 51:
-														_context4.next = 63;
-														break;
 													case 53:
+														_context4.next = 65;
+														break;
+													case 55:
 														if (
-															((_context4.prev = 53),
-															(_context4.t2 = _context4.catch(48)),
+															((_context4.prev = 55),
+															(_context4.t2 = _context4.catch(50)),
 															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
 														) {
-															_context4.next = 61;
+															_context4.next = 63;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 61:
-														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
 													case 63:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 83);
+														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
+													case 65:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 85);
 														break;
-													case 67:
-														if (((_context4.prev = 67), (_context4.t3 = _context4.catch(3)), !_context4.t3)) {
-															_context4.next = 83;
+													case 69:
+														if (((_context4.prev = 69), (_context4.t3 = _context4.catch(5)), !_context4.t3)) {
+															_context4.next = 85;
 															break;
 														}
-														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 73 : 500 === _context4.t4 ? 76 : 79);
+														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 75 : 500 === _context4.t4 ? 78 : 81);
 														break;
-													case 73:
+													case 75:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
 															_this.log.warn(_this.store.error),
-															_context4.abrupt('break', 81)
+															_context4.abrupt('break', 83)
 														);
-													case 76:
+													case 78:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
 															_this.log.error(_this.store.error),
-															_context4.abrupt('break', 81)
+															_context4.abrupt('break', 83)
 														);
-													case 79:
-														return _this.log.error(_context4.t3), _context4.abrupt('break', 81);
 													case 81:
-														(_this.store.loading = !1), _this.handleError(_context4.t3);
+														return _this.log.error(_context4.t3), _context4.abrupt('break', 83);
 													case 83:
+														(_this.store.loading = !1), _this.handleError(_context4.t3);
+													case 85:
 													case 'end':
 														return _context4.stop();
 												}
@@ -29596,10 +29609,10 @@
 										_callee4,
 										null,
 										[
-											[3, 67],
-											[4, 9],
-											[29, 34],
-											[48, 53],
+											[5, 69],
+											[6, 11],
+											[31, 36],
+											[50, 55],
 										]
 									);
 								})
@@ -29858,7 +29871,7 @@
 														if ('object' == typeof form && 'FORM' == form.nodeName)
 															for (var i = form.elements.length - 1; i >= 0; i--) {
 																var elem = form.elements[i];
-																elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type) && elem.removeEventListener('change', fn);
+																elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type) && elem.removeEventListener('change', fn);
 															}
 													})(input.form, _this2.handlers.input.formElementChange));
 										}),
@@ -29935,7 +29948,7 @@
 																					return Object.assign({}, translatorConfig, { urlRoot: formActionUrl });
 																				})
 																			),
-																			document.activeElement === input && _this3.setFocused(input);
+																			document.activeElement !== input || _this3.store.loading || _this3.setFocused(input);
 																	}),
 																	null !== (_this$config$settings13 = this.config.settings) &&
 																		void 0 !== _this$config$settings13 &&
@@ -30006,7 +30019,7 @@
 					})
 				)).apply(this, arguments);
 			}
-			var INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+			var INPUT_TYPE_BLOCKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
 			function getFormParameters(form, filterFn) {
 				var parameters = {};
 				if ('object' == typeof form && 'FORM' == form.nodeName)
@@ -30014,7 +30027,7 @@
 						var elem = form.elements[i];
 						('function' != typeof filterFn || filterFn(elem)) &&
 							elem.name &&
-							!INPUT_TYPE_BLACKLIST.includes(elem.type) &&
+							!INPUT_TYPE_BLOCKLIST.includes(elem.type) &&
 							(('checkbox' != elem.type && 'radio' != elem.type) || elem.checked) &&
 							(parameters[elem.name] = elem.value);
 					}
@@ -30026,7 +30039,7 @@
 						var elem = form.elements[i];
 						('function' != typeof filterFn || filterFn(elem)) &&
 							elem.name &&
-							!INPUT_TYPE_BLACKLIST.includes(elem.type) &&
+							!INPUT_TYPE_BLOCKLIST.includes(elem.type) &&
 							elem.addEventListener('change', fn);
 					}
 			}
@@ -37347,6 +37360,8 @@
 						void 0 !== _autocomplete$suggest &&
 						_autocomplete$suggest.text
 							? suggestions.unshift(autocomplete.suggested.text)
+							: null != autocomplete && autocomplete.correctedQuery && paginationData.totalResults
+							? suggestions.unshift(autocomplete.correctedQuery)
 							: null != autocomplete &&
 							  autocomplete.query &&
 							  paginationData.totalResults &&
@@ -38162,26 +38177,6 @@
 								},
 							},
 							{
-								key: 'resetTrending',
-								value: function resetTrending() {
-									var _this$trending;
-									null !== (_this$trending = this.trending) &&
-										void 0 !== _this$trending &&
-										_this$trending.length &&
-										this.trending.forEach(function (term) {
-											term.active = !1;
-										});
-								},
-							},
-							{
-								key: 'resetHistory',
-								value: function resetHistory() {
-									this.history.forEach(function (term) {
-										term.active = !1;
-									});
-								},
-							},
-							{
 								key: 'resetTerms',
 								value: function resetTerms() {
 									this.resetSuggestions(), this.resetTrending(), this.resetHistory();
@@ -38194,7 +38189,29 @@
 									null === (_this$terms = this.terms) ||
 										void 0 === _this$terms ||
 										_this$terms.forEach(function (term) {
-											term.active = !1;
+											return (term.active = !1);
+										});
+								},
+							},
+							{
+								key: 'resetTrending',
+								value: function resetTrending() {
+									var _this$trending;
+									null === (_this$trending = this.trending) ||
+										void 0 === _this$trending ||
+										_this$trending.forEach(function (term) {
+											return (term.active = !1);
+										});
+								},
+							},
+							{
+								key: 'resetHistory',
+								value: function resetHistory() {
+									var _this$history;
+									null === (_this$history = this.history) ||
+										void 0 === _this$history ||
+										_this$history.forEach(function (term) {
+											return (term.active = !1);
 										});
 								},
 							},
@@ -41016,7 +41033,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.43.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.43.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41491,7 +41508,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.43.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.43.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
