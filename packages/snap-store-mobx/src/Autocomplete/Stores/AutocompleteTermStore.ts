@@ -19,8 +19,13 @@ export class AutocompleteTermStore extends Array<Term> {
 		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
 
 		if (autocomplete?.suggested?.text) {
+			// a suggestion for query
 			suggestions.unshift(autocomplete.suggested.text);
+		} else if (autocomplete?.correctedQuery && paginationData.totalResults) {
+			// the query was corrected
+			suggestions.unshift(autocomplete.correctedQuery);
 		} else if (autocomplete?.query && paginationData.totalResults) {
+			// there were no suggestions or corrections,
 			suggestions.unshift(autocomplete?.query);
 		}
 
