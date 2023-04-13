@@ -348,8 +348,8 @@ export class AutocompleteController extends AbstractController {
 
 				const value = (e.target as HTMLInputElement).value;
 
-				// prevent search when value is unchanged
-				if (this.store.state.input == value && this.store.loaded) {
+				// prevent search when value is unchanged or empty
+				if (((!this.store.state.input && !value) || this.store.state.input == value) && this.store.loaded) {
 					return;
 				}
 
@@ -362,28 +362,36 @@ export class AutocompleteController extends AbstractController {
 					});
 				}
 
+				// TODO cancel any current requests?
+
 				clearTimeout(this.handlers.input.timeoutDelay);
 
-				// input is empty
+				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
+				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
+
 				if (!value) {
-					// TODO cancel any current requests?
-
-					// reset the store (in case input was just cleared)
+					// there is no input value - reset state of store and UrlManager
 					this.store.reset();
+					this.urlManager.reset().go();
 
-					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
+					// show results for trending or history (if configured) - trending has priority
+					if (trendingResultsEnabled) {
 						this.store.trending[0].preview();
-					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
+					} else if (historyResultsEnabled) {
 						this.store.history[0].preview();
-					} else {
-						// reset urlManager when a preview is not available to do so
-						this.urlManager.reset().go();
 					}
 				} else {
+					// new query in the input - trigger a new search via UrlManager
 					this.store.resetTerms();
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();
+
+						// must reset query to ensure funcitonality when trending/history term is equal to the typed term
+						if (trendingResultsEnabled || historyResultsEnabled) {
+							this.urlManager.set({ query: '' }).go();
+						}
+
 						this.urlManager.set({ query: this.store.state.input }).go();
 					}, INPUT_DELAY);
 				}
@@ -453,6 +461,7 @@ export class AutocompleteController extends AbstractController {
 				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 				formActionUrl = form.action || '';
 
+				// serializeForm will include additional form element in our urlManager as globals
 				if (this.config.settings?.serializeForm) {
 					bindFormParameters(form, this.handlers.input.formElementChange, function (elem: HTMLInputElement) {
 						return elem != input;
@@ -480,11 +489,13 @@ export class AutocompleteController extends AbstractController {
 				);
 			}
 
-			if (document.activeElement === input) {
+			// if the input is currently focused, trigger setFocues which will eventually trigger keyup - but not if loading
+			if (document.activeElement === input && !this.store.loading) {
 				this.setFocused(input);
 			}
 		});
 
+		// get trending terms - this is at the bottom because urlManager changes need to be in place before creating the store
 		if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
 			this.searchTrending();
 		}
@@ -519,8 +530,14 @@ export class AutocompleteController extends AbstractController {
 	};
 
 	search = async (): Promise<void> => {
+		// if urlManager has no query, there will be no need to get params and no query
+		if (!this.urlManager.state.query) {
+			return;
+		}
+
 		const params = this.params;
 
+		// if params have no query do not search
 		if (!params?.search?.query?.string) {
 			return;
 		}
@@ -650,7 +667,7 @@ async function timeout(time: number): Promise<void> {
 
 // for grabbing other parameters from the form and using them in UrlManager
 
-const INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+const INPUT_TYPE_BLOCKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
 
 function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: string]: string | undefined } {
 	const parameters: { [formName: string]: string | undefined } = {};
@@ -663,7 +680,7 @@ function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: s
 				continue;
 			}
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				if ((elem.type != 'checkbox' && elem.type != 'radio') || elem.checked) {
 					parameters[elem.name] = elem.value;
 				}
@@ -674,6 +691,7 @@ function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: s
 	return parameters;
 }
 
+// this picks up changes to the form
 function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void {
 	if (typeof form == 'object' && form.nodeName == 'FORM') {
 		for (let i = form.elements.length - 1; i >= 0; i--) {
@@ -683,7 +701,7 @@ function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void
 				continue;
 			}
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				elem.addEventListener('change', fn);
 			}
 		}
@@ -695,7 +713,7 @@ function unbindFormParameters(form: HTMLFormElement, fn: any): void {
 		for (let i = form.elements.length - 1; i >= 0; i--) {
 			const elem = form.elements[i] as HTMLInputElement;
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				elem.removeEventListener('change', fn);
 			}
 		}
