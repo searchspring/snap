@@ -95,20 +95,6 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	public resetTrending(): void {
-		if (this.trending?.length) {
-			this.trending.forEach((term) => {
-				term.active = false;
-			});
-		}
-	}
-
-	public resetHistory(): void {
-		this.history.forEach((term) => {
-			term.active = false;
-		});
-	}
-
 	public resetTerms(): void {
 		this.resetSuggestions();
 		this.resetTrending();
@@ -116,9 +102,15 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	public resetSuggestions(): void {
-		this.terms?.forEach((term) => {
-			term.active = false;
-		});
+		this.terms?.forEach((term) => (term.active = false));
+	}
+
+	public resetTrending(): void {
+		this.trending?.forEach((term) => (term.active = false));
+	}
+
+	public resetHistory(): void {
+		this.history?.forEach((term) => (term.active = false));
 	}
 
 	public setService(name: keyof StoreServices, service: UrlManager): void {
