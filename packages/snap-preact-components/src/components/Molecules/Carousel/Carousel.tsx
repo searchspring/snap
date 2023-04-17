@@ -200,7 +200,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
 		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
 			displaySettings.slidesPerView = props.children.length;

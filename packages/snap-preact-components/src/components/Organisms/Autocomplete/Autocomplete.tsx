@@ -257,7 +257,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	const displaySettings = useDisplaySettings(breakpoints) || {};
-	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 	props = {
 		...props,
 		...displaySettings,

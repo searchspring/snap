@@ -46,7 +46,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 		props = {
 			...props,
 			...displaySettings,
