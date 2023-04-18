@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState, useRef } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
 import { useDeepCompareEffect } from './useDeepCompareEffect';
 
@@ -22,10 +22,17 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
 
-	// when breakpointsObj changes (due to computed values)
-	useDeepCompareEffect(() => {
-		setDisplaySettings(getDisplaySettings(breakpointsObj));
-	}, [breakpointsObj]);
+	//this breaks tests..
+	setDisplaySettings(getDisplaySettings(breakpointsObj));
+
+	// console.log('here?')
+
+	// //extract the 'current' property and assign it a value
+	// const { current: myObj } = useRef(breakpointsObj);
+	// useEffect(() => {
+	// 	console.log('here?2')
+	// 	setDisplaySettings(getDisplaySettings(breakpointsObj));
+	// }, [myObj]); //the reference value is stable, so no infinite loop
 
 	return displaySettings;
 }
