@@ -1,10 +1,15 @@
 import { h } from 'preact';
-import { useEffect, useState, useRef } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
-import { useDeepCompareEffect } from './useDeepCompareEffect';
 
-export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
-	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
+export function useDisplaySettings(_breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
+	if (!_breakpointsObj || !Object.keys(_breakpointsObj).length) return;
+
+	const [breakpointsObj, setBreakpointsObj] = useState(_breakpointsObj);
+
+	if (_breakpointsObj && breakpointsObj !== _breakpointsObj) {
+		setBreakpointsObj(_breakpointsObj!);
+	}
 
 	// Call getDisplaySettings right away to prevent flashing
 	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
@@ -21,18 +26,6 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 		// Remove event listener on cleanup
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
-
-	//this breaks tests..
-	setDisplaySettings(getDisplaySettings(breakpointsObj));
-
-	// console.log('here?')
-
-	// //extract the 'current' property and assign it a value
-	// const { current: myObj } = useRef(breakpointsObj);
-	// useEffect(() => {
-	// 	console.log('here?2')
-	// 	setDisplaySettings(getDisplaySettings(breakpointsObj));
-	// }, [myObj]); //the reference value is stable, so no infinite loop
 
 	return displaySettings;
 }
