@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -186,29 +186,27 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	//passed in or default breakpoints result props
-	const [breakpoints] = useState(
-		props.breakpoints || {
-			0: {
-				columns: 2,
-				rows: 1,
-				hideFacets: props.hideFacets ?? true,
-				vertical: props.vertical ?? true,
-				hideHistory: props.hideHistory ?? true,
-				hideTrending: props.hideTrending ?? true,
-			},
-			540: {
-				columns: 3,
-				rows: 1,
-				vertical: props.vertical ?? true,
-				hideHistory: props.hideHistory ?? true,
-				hideTrending: props.hideTrending ?? true,
-			},
-			768: {
-				columns: 2,
-				rows: 3,
-			},
-		}
-	);
+	const breakpoints = props.breakpoints || {
+		0: {
+			columns: 2,
+			rows: 1,
+			hideFacets: props.hideFacets ?? true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
+		},
+		540: {
+			columns: 3,
+			rows: 1,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
+		},
+		768: {
+			columns: 2,
+			rows: 3,
+		},
+	};
 
 	const valueProps = createHoverProps();
 

@@ -5,14 +5,17 @@ import { BreakpointsProps, BreakpointsEntry } from '../types';
 export function useDisplaySettings(_breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
 	if (!_breakpointsObj || !Object.keys(_breakpointsObj).length) return;
 
-	const [breakpointsObj, setBreakpointsObj] = useState(_breakpointsObj);
-
-	if (_breakpointsObj && breakpointsObj !== _breakpointsObj) {
-		setBreakpointsObj(_breakpointsObj!);
-	}
+	//this is just used to know when to update displaysettings on rerenders
+	const [breakpointsObj, setBreakpointsObj] = useState({});
 
 	// Call getDisplaySettings right away to prevent flashing
 	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
+
+	//check if breakpoints obj changed from last render, & if it did, update both our stored breakpoints obj for the next check, & update display settings.
+	if ((_breakpointsObj && JSON.stringify(breakpointsObj) !== JSON.stringify(_breakpointsObj)) || !Object.keys(_breakpointsObj).length) {
+		setBreakpointsObj(_breakpointsObj!);
+		setDisplaySettings(getDisplaySettings(_breakpointsObj));
+	}
 
 	useEffect(() => {
 		function handleResize() {
