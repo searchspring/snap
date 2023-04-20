@@ -4,6 +4,10 @@ on:
       - main
       - develop
 
+default:
+  run:
+    timeout-minutes: 4
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
