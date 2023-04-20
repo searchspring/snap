@@ -11,6 +11,7 @@ concurrency:
 jobs:
   Tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
