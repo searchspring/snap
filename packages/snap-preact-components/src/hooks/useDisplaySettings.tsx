@@ -1,34 +1,41 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
+import { useDeepCompareEffect } from './useDeepCompareEffect';
 
-export function useDisplaySettings(_breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
-	if (!_breakpointsObj || !Object.keys(_breakpointsObj).length) return;
-
-	//this is just used to know when to update displaysettings on rerenders
-	const [breakpointsObj, setBreakpointsObj] = useState({});
+export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
+	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
 
 	// Call getDisplaySettings right away to prevent flashing
 	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
 
-	//check if breakpoints obj changed from last render, & if it did, update both our stored breakpoints obj for the next check, & update display settings.
-	if ((_breakpointsObj && JSON.stringify(breakpointsObj) !== JSON.stringify(_breakpointsObj)) || !Object.keys(_breakpointsObj).length) {
-		setBreakpointsObj(_breakpointsObj!);
-		setDisplaySettings(getDisplaySettings(_breakpointsObj));
-	}
-
-	useEffect(() => {
+	let debouncedHandleResize: any;
+	const resetResizeListener = () => {
 		function handleResize() {
 			// Set display settings to state
 			setDisplaySettings(getDisplaySettings(breakpointsObj));
 		}
-		// Add event listener
-		const debouncedHandleResize = debounce(() => handleResize());
-		window.addEventListener('resize', debouncedHandleResize);
 
+		// Add event listener
+		debouncedHandleResize = debounce(() => {
+			handleResize();
+		}, 50);
+
+		window.addEventListener('resize', debouncedHandleResize);
+	};
+
+	useEffect(() => {
+		resetResizeListener();
 		// Remove event listener on cleanup
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
+
+	// when breakpointsObj changes (due to computed values)
+	useDeepCompareEffect(() => {
+		setDisplaySettings(getDisplaySettings(breakpointsObj));
+		resetResizeListener();
+		// rebind resize?
+	}, [breakpointsObj]);
 
 	return displaySettings;
 }
