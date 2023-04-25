@@ -94,7 +94,7 @@ export interface ShopperLoginEvent {
 	id: string;
 }
 export interface TrackErrorEvent {
-	userAgent?: string;
+	useragent?: string;
 	href?: string;
 	filename?: string;
 	stack?: string;

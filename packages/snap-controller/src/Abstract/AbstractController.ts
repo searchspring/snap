@@ -34,7 +34,7 @@ export abstract class AbstractController {
 		return this._initialized;
 	}
 
-	public handleError = (err: unknown): void => {
+	public handleError = (err: unknown, additionalDetails?: any): void => {
 		let event: ErrorEvent | undefined;
 
 		if (err instanceof ErrorEvent) {
@@ -43,9 +43,9 @@ export abstract class AbstractController {
 			event = new ErrorEvent('error', {
 				error: err,
 			});
-		} else if (typeof err === 'string') {
+		} else if (typeof err === 'string' || typeof err == 'number') {
 			event = new ErrorEvent('error', {
-				error: new Error(err),
+				error: new Error(err.toString()),
 			});
 		} else if (typeof err === 'object' && Object.keys(err as object).length) {
 			try {
@@ -68,7 +68,7 @@ export abstract class AbstractController {
 			const beaconPayload: TrackErrorEvent = {
 				filename: filename || `${this.id} (${this.type.charAt(0).toUpperCase() + this.type.slice(1)}Controller)`,
 				stack,
-				message,
+				message: additionalDetails ? JSON.stringify(additionalDetails) : message,
 				colno,
 				lineno,
 				errortimestamp: timeStamp,
