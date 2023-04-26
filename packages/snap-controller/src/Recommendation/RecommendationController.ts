@@ -416,6 +416,11 @@ export class RecommendationController extends AbstractController {
 
 					this.handleError(err.status, err);
 				} else {
+					this.store.error = {
+						code: undefined,
+						type: ErrorType.ERROR,
+						message: `Something went wrong... - ${err}`,
+					};
 					this.log.error(err);
 					this.handleError(err);
 				}
