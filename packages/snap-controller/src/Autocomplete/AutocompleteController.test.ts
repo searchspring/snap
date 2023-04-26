@@ -614,50 +614,7 @@ describe('Autocomplete Controller', () => {
 		beforeSubmitfn.mockClear();
 	});
 
-	it('can submit with form with original query when corrected query', async () => {
-		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'corrected', siteId: '8uyt2m' });
-
-		await controller.bind();
-
-		const query = 'dresss';
-		let inputEl: HTMLInputElement | null;
-
-		await waitFor(() => {
-			inputEl = document.querySelector(controller.config.selector);
-			expect(inputEl).toBeDefined();
-		});
-
-		const form = inputEl!.form;
-
-		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
-
-		await controller.search();
-
-		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
-		form?.dispatchEvent(new Event('submit', { bubbles: true }));
-
-		await waitFor(() => {
-			const oqInputEl: HTMLInputElement | null = form!.querySelector('input[name="oq"]');
-			expect(oqInputEl!).toBeDefined();
-			expect(oqInputEl!.value).toBe(query);
-		});
-
-		beforeSubmitfn!.mockClear();
-	});
-
-	it('can submit without form and config.action with original query', async () => {
+	it('can submit without form and config.action with fallback query', async () => {
 		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
 		acConfig.action = '/search.html';
 
@@ -683,7 +640,7 @@ describe('Autocomplete Controller', () => {
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
 		await waitFor(() => {
-			expect(controller.store.search.originalQuery).toBeDefined();
+			expect(controller.store.search.correctedQuery).toBeDefined();
 		});
 
 		//@ts-ignore
@@ -696,7 +653,6 @@ describe('Autocomplete Controller', () => {
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
 		await waitFor(() => {
-			expect(window.location.href).toContain(`oq=${query}`);
 			expect(window.location.href).not.toContain(`fallbackQuery=`);
 			expect(window.location.href).toContain(acConfig.action);
 		});
@@ -749,7 +705,7 @@ describe('Autocomplete Controller', () => {
 
 		await waitFor(() => {
 			expect(window.location.href).toContain(`search_query=${query}`);
-			expect(window.location.href).toContain(`fallbackQuery=${controller.store.terms[0].value}`);
+			expect(window.location.href).toContain(`fallbackQuery=${controller.store.search.correctedQuery?.string}`);
 		});
 	});
 

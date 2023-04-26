@@ -6,6 +6,7 @@ import type { StoreServices } from '../../types';
 export class AutocompleteQueryStore {
 	public query?: Query;
 	public originalQuery?: Query;
+	public correctedQuery?: Query;
 
 	constructor(services: StoreServices, autocomplete: AutocompleteResponseModelAllOfAutocomplete, search: SearchResponseModelSearch) {
 		const observables: Observables = {};
@@ -15,9 +16,9 @@ export class AutocompleteQueryStore {
 			observables.query = observable;
 		}
 
-		if (autocomplete?.correctedQuery && autocomplete.query) {
-			this.originalQuery = new Query(services.urlManager, autocomplete.query);
-			observables.originalQuery = observable;
+		if (autocomplete.correctedQuery) {
+			this.correctedQuery = new Query(services.urlManager, autocomplete.correctedQuery);
+			observables.correctedQuery = observable;
 		}
 
 		makeObservable(this, observables);
@@ -27,6 +28,7 @@ export class AutocompleteQueryStore {
 type Observables = {
 	originalQuery?: typeof observable;
 	query?: typeof observable;
+	correctedQuery?: typeof observable;
 };
 
 class Query {
