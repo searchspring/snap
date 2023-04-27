@@ -884,7 +884,7 @@ describe('Autocomplete Controller', () => {
 
 		await waitFor(() => {
 			expect(storeResetfn).not.toHaveBeenCalled();
-			expect(urlManagerResetfn).not.toHaveBeenCalled();
+			expect(urlManagerResetfn).toHaveBeenCalled();
 			expect(setFocusedfn).toHaveBeenCalledTimes(1);
 		});
 

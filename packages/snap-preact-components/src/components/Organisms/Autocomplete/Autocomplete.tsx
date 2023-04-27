@@ -74,6 +74,7 @@ const CSS = {
 				flexDirection: 'column',
 				flex: `1 1 auto`,
 				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
+				minWidth: '150px',
 				order: 1,
 				background: '#f8f8f8',
 
@@ -189,17 +190,17 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		0: {
 			columns: 2,
 			rows: 1,
-			hideFacets: props.hideFacets || true,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			hideFacets: props.hideFacets ?? true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		768: {
 			columns: 2,

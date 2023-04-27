@@ -368,11 +368,11 @@ export class AutocompleteController extends AbstractController {
 
 				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
 				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
+				this.urlManager.reset().go();
 
 				if (!value) {
-					// there is no input value - reset state of store and UrlManager
+					// there is no input value - reset state of store
 					this.store.reset();
-					this.urlManager.reset().go();
 
 					// show results for trending or history (if configured) - trending has priority
 					if (trendingResultsEnabled) {
@@ -382,15 +382,9 @@ export class AutocompleteController extends AbstractController {
 					}
 				} else {
 					// new query in the input - trigger a new search via UrlManager
-					this.store.resetTerms();
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();
-
-						// must reset query to ensure funcitonality when trending/history term is equal to the typed term
-						if (trendingResultsEnabled || historyResultsEnabled) {
-							this.urlManager.set({ query: '' }).go();
-						}
 
 						this.urlManager.set({ query: this.store.state.input }).go();
 					}, INPUT_DELAY);
