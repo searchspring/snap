@@ -221,9 +221,9 @@ export class AutocompleteController extends AbstractController {
 						}
 
 						if (this.config.settings!.integratedSpellCorrection) {
-							// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-							if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+							//set fallbackQuery to the correctedQuery
+							if (this.store.search.correctedQuery) {
+								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 							}
 						} else if (this.store.search.originalQuery) {
 							// use corrected query and originalQuery
@@ -284,9 +284,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					if (this.config.settings!.integratedSpellCorrection) {
-						// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-						if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+						//set fallbackQuery to the correctedQuery
+						if (this.store.search.correctedQuery) {
+							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 						}
 					} else if (this.store.search.originalQuery) {
 						// use corrected query and originalQuery
