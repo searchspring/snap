@@ -7,13 +7,21 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
+const config = {
+	id: 'autocomplete',
+	selector: 'input.searchspring-ac',
+	settings: {
+		integratedSpellCorrection: true,
+	},
+};
+
 const mockData = new MockData();
 
 describe('AutocompleteQueryStore store', () => {
 	it('contains search', () => {
 		const searchData = mockData.autocompleteMeta();
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!);
+		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
 		expect(queryStore.query?.string).toEqual(searchData.autocomplete?.query);
@@ -23,7 +31,7 @@ describe('AutocompleteQueryStore store', () => {
 	it('contains correctedQuery in search when corrected', () => {
 		const searchData = mockData.autocompleteMeta('corrected');
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!);
+		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
 		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
