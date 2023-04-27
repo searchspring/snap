@@ -703,7 +703,7 @@ describe('Autocomplete Controller', () => {
 		beforeSubmitfn!.mockClear();
 	});
 
-	it('can submit without form and config.action with fallback query', async () => {
+	it('can submit without form and config.action with original query', async () => {
 		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
 		acConfig.action = '/search.html';
 
