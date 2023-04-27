@@ -371,7 +371,7 @@ export class AutocompleteController extends AbstractController {
 				this.urlManager.reset().go();
 
 				if (!value) {
-					// there is no input value - reset state of store and UrlManager
+					// there is no input value - reset state of store
 					this.store.reset();
 
 					// show results for trending or history (if configured) - trending has priority

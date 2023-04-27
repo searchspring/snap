@@ -9,7 +9,7 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	// Call getDisplaySettings right away to prevent flashing
 	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
 
-	let debouncedHandleResize: any;
+	let debouncedHandleResize: () => void;
 	const resetResizeListener = () => {
 		function handleResize() {
 			// Set display settings to state
@@ -34,7 +34,6 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	useDeepCompareEffect(() => {
 		setDisplaySettings(getDisplaySettings(breakpointsObj));
 		resetResizeListener();
-		// rebind resize?
 	}, [breakpointsObj]);
 
 	return displaySettings;
