@@ -7,7 +7,7 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
-const config = {
+let config = {
 	id: 'autocomplete',
 	selector: 'input.searchspring-ac',
 	settings: {
@@ -37,5 +37,18 @@ describe('AutocompleteQueryStore store', () => {
 		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
 		expect(queryStore.correctedQuery).toBeDefined();
 		expect(queryStore.correctedQuery?.string).toStrictEqual(searchData.autocomplete?.correctedQuery);
+	});
+
+	it('contains originalQuery in search when corrected without integratedSpellCorrection', () => {
+		const searchData = mockData.autocompleteMeta('corrected');
+
+		config.settings.integratedSpellCorrection = false;
+
+		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		expect(queryStore).toBeDefined();
+		expect(queryStore.query).toBeDefined();
+		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
+		expect(queryStore.originalQuery).toBeDefined();
+		expect(queryStore.originalQuery?.string).toStrictEqual(searchData.autocomplete?.query);
 	});
 });
