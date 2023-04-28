@@ -140,7 +140,7 @@ const searchConfig = {
 ### Pagination Settings 
 
 #### `pageSizeOptions` property
-The optional `pageSizeOptions` property gives the ability to overright the default pageSizeOptions in the searchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
+The optional `pageSizeOptions` property gives the ability to overright the default pageSizeOptions in the SearchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
 
 `label` - label text to display
 
@@ -154,11 +154,6 @@ The optional `pageSizeOptions` property gives the ability to overright the defau
 ```typescript
 const searchConfig = {
 	id: 'search',
-	globals: {
-		pagination: {
-			pageSize: 12
-		}
-	},
 	settings: {
 		pagination: {
 			pageSizeOptions: [
