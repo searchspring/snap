@@ -11,6 +11,8 @@ export class SearchPaginationStore {
 	public pageSizeOptions: {
 		label: string;
 		value: number;
+		active?: boolean;
+		url?: UrlManager;
 	}[];
 	public defaultPageSize: number;
 	public totalResults: number;
@@ -28,6 +30,8 @@ export class SearchPaginationStore {
 		},
 		meta: MetaResponseModel
 	) {
+		const paginationSettings = (config as SearchStoreConfig)?.settings?.pagination;
+
 		this.services = services;
 		this.controllerConfig = config;
 
@@ -37,22 +41,45 @@ export class SearchPaginationStore {
 		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
 		this.totalPages = paginationData.totalPages!;
 
-		this.pageSizeOptions = [
-			{
-				label: `Show ${this.defaultPageSize}`,
-				value: this.defaultPageSize,
-			},
-			{
-				label: `Show ${this.defaultPageSize * 2}`,
-				value: this.defaultPageSize * 2,
-			},
-			{
-				label: `Show ${this.defaultPageSize * 3}`,
-				value: this.defaultPageSize * 3,
-			},
-		];
+		let optionArr: PageSizeOption[] = [];
+
+		if (paginationSettings?.pageSizeOptions) {
+			optionArr = paginationSettings?.pageSizeOptions.map(
+				(pageOption: any) =>
+					new PageSizeOption(this.services, this.pageSize, {
+						label: pageOption.label,
+						value: pageOption.value,
+					})
+			);
+		} else {
+			const defaultPageSizeOptions = [
+				{
+					label: `Show ${this.defaultPageSize}`,
+					value: this.defaultPageSize,
+				},
+				{
+					label: `Show ${this.defaultPageSize * 2}`,
+					value: this.defaultPageSize * 2,
+				},
+				{
+					label: `Show ${this.defaultPageSize * 3}`,
+					value: this.defaultPageSize * 3,
+				},
+			];
+
+			optionArr = defaultPageSizeOptions.map(
+				(pageOption: any) =>
+					new PageSizeOption(this.services, this.pageSize, {
+						label: pageOption.label,
+						value: pageOption.value,
+					})
+			);
+		}
+
+		this.pageSizeOptions = optionArr;
 
 		makeObservable(this, {
+			pageSizeOptions: observable,
 			page: observable,
 			pageSize: observable,
 			totalResults: observable,
@@ -181,6 +208,29 @@ export class SearchPaginationStore {
 		if (num) {
 			this.services.urlManager.remove('page').set('pageSize', num).go();
 		}
+	}
+}
+
+export class PageSizeOption {
+	public services: StoreServices;
+	public value: number;
+	public label: string;
+	public url: UrlManager;
+	public active: boolean;
+
+	constructor(
+		services: StoreServices,
+		currentPageSize: number,
+		option: {
+			value: number;
+			label: string;
+		}
+	) {
+		this.services = services;
+		this.value = option.value;
+		this.label = option.label;
+		this.url = this.services?.urlManager.remove('page').set('pageSize', option.value);
+		this.active = Boolean(currentPageSize == option.value);
 	}
 }
 

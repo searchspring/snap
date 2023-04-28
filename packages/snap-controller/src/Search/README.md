@@ -136,6 +136,51 @@ const searchConfig = {
 };
 ```
 
+
+### Pagination Settings 
+
+#### `pageSizeOptions` property
+The optional `pageSizeOptions` property gives the ability to overright the default pageSizeOptions in the searchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
+
+`label` - label text to display
+
+`value` - number of results for this selection
+
+`url` - reference to the URLManager containing href and onclick values
+
+`active` - boolean stating if current page size matches the value of this option
+
+
+```typescript
+const searchConfig = {
+	id: 'search',
+	globals: {
+		pagination: {
+			pageSize: 12
+		}
+	},
+	settings: {
+		pagination: {
+			pageSizeOptions: [
+				{
+					label: `show 30`,
+					value: 30,
+				},
+				{
+					label: `show 40`,
+					value: 40,
+				},
+				{
+					label: `show 50`,
+					value: 50,
+				},
+			]
+		},
+	}
+};
+```
+
+
 ### Infinite Scrolling
 By default when using the infinite configuration, additional pages are appended when `store.pagination.next()` is invoked. To automatically request the next page when the user has scrolled to the bottom, an `useIntersection` hook along with a `useRef` attached to an element below the results can be used to invoke `pagination.next.url.go({ history: 'replace' })` when the element comes into the viewport. 
 
