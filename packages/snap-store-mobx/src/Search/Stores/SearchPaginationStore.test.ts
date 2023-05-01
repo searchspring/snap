@@ -3,6 +3,7 @@ import { MockData } from '@searchspring/snap-shared';
 
 import { SearchPaginationStore } from './SearchPaginationStore';
 import { SearchResponseModel, MetaResponseModel, MetaResponseModelFacetDefaults } from '@searchspring/snapi-types';
+import { SearchStoreConfig } from '../../types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -62,6 +63,36 @@ describe('Pagination Store', () => {
 		expect(pagination.pageSizeOptions).toBeDefined;
 		expect(pagination.pageSizeOptions[0].label).toBeDefined;
 		expect(pagination.pageSizeOptions[0].value).toBeGreaterThan(0);
+		expect(pagination.pageSizeOptions[0].active).toBeDefined();
+		expect(pagination.pageSizeOptions[0].url).toBeDefined();
+	});
+
+	it('can pass in custom pageSizeOptions', () => {
+		let customPageSizeOptions = [
+			{
+				label: `show 30`,
+				value: 30,
+			},
+			{
+				label: `show 40`,
+				value: 40,
+			},
+			{
+				label: `show 50`,
+				value: 50,
+			},
+		];
+
+		let tempConfig = { ...searchConfig, settings: { pagination: { pageSizeOptions: customPageSizeOptions } } };
+		const paginationData = searchData.pagination;
+		const pagination = new SearchPaginationStore(tempConfig as SearchStoreConfig, services, paginationData, searchData.meta);
+
+		for (let i = 0; i < pagination.pageSizeOptions.length; i++) {
+			expect(pagination.pageSizeOptions[i].label).toBe(customPageSizeOptions[i].label);
+			expect(pagination.pageSizeOptions[i].value).toBe(customPageSizeOptions[i].value);
+			expect(pagination.pageSizeOptions[i].active).toBeDefined();
+			expect(pagination.pageSizeOptions[i].url).toBeDefined();
+		}
 	});
 
 	it('knows the begin number', () => {
