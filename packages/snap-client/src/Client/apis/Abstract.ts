@@ -66,7 +66,7 @@ export class API {
 				throw response.status;
 			}
 		}
-		throw response.status;
+		throw { status: response.status, message: response.statusText, url, ...init };
 	}
 
 	private createFetchParams(context: RequestOpts) {

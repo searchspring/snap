@@ -245,15 +245,13 @@ export class Tracker {
 					},
 				});
 			}
-
-			const { userAgent, href, filename, stack, message, colno, lineno, errortimestamp } = data;
+			const { href, filename, stack, message, colno, lineno, errortimestamp, details } = data;
 
 			const payload = {
 				type: BeaconType.ERROR,
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					userAgent: userAgent || navigator.userAgent,
 					href: href || window.location.href,
 					filename,
 					stack,
@@ -261,6 +259,8 @@ export class Tracker {
 					colno,
 					lineno,
 					errortimestamp,
+					details,
+					context: data.context,
 				},
 			};
 

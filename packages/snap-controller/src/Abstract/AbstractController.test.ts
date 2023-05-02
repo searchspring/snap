@@ -535,11 +535,22 @@ describe('Search Controller', () => {
 			filename: 'https://snapui.searchspring.io/test.js',
 		});
 
+		const addedDetails = {
+			stuff: 'and things',
+		};
+
 		const trackerTrackError = jest.spyOn(controller.tracker.track, 'error');
 
-		controller.handleError(error);
+		controller.handleError(error, addedDetails);
 
 		expect(trackerTrackError).toHaveBeenCalledWith({
+			context: {
+				controller: {
+					type: 'abstract',
+					id: searchConfig.id,
+				},
+			},
+			details: addedDetails,
 			filename: error.filename,
 			stack: error.error.stack,
 			message: error.message,

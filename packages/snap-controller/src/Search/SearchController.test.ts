@@ -569,7 +569,7 @@ describe('Search Controller', () => {
 		const handleError = jest.spyOn(controller, 'handleError');
 
 		controller.client.search = jest.fn(() => {
-			throw 429;
+			throw { status: 429, url: 'test.com' };
 		});
 
 		await controller.search();
@@ -580,7 +580,7 @@ describe('Search Controller', () => {
 			message: 'Too many requests try again later',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(429);
+		expect(handleError).toHaveBeenCalledWith(429, { status: 429, url: 'test.com' });
 		handleError.mockClear();
 	});
 
@@ -598,7 +598,7 @@ describe('Search Controller', () => {
 		const handleError = jest.spyOn(controller, 'handleError');
 
 		controller.client.search = jest.fn(() => {
-			throw 500;
+			throw { status: 500, url: 'test.com' };
 		});
 
 		await controller.search();
@@ -609,7 +609,7 @@ describe('Search Controller', () => {
 			message: 'Invalid Search Request or Service Unavailable',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(500);
+		expect(handleError).toHaveBeenCalledWith(500, { status: 500, url: 'test.com' });
 		handleError.mockClear();
 	});
 

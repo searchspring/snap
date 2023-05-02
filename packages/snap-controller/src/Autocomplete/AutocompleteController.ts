@@ -610,31 +610,37 @@ export class AutocompleteController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-		} catch (err) {
+		} catch (err: any) {
 			if (err) {
-				switch (err) {
-					case 429:
-						this.store.error = {
-							code: 429,
-							type: ErrorType.WARNING,
-							message: 'Too many requests try again later',
-						};
-						this.log.warn(this.store.error);
-						break;
-					case 500:
-						this.store.error = {
-							code: 500,
-							type: ErrorType.ERROR,
-							message: 'Invalid Search Request or Service Unavailable',
-						};
-						this.log.error(this.store.error);
-						break;
-					default:
-						this.log.error(err);
-						break;
+				if (err?.url && err?.status) {
+					switch (err.status) {
+						case 429:
+							this.store.error = {
+								code: 429,
+								type: ErrorType.WARNING,
+								message: 'Too many requests try again later',
+							};
+							this.log.warn(this.store.error);
+							break;
+						case 500:
+							this.store.error = {
+								code: 500,
+								type: ErrorType.ERROR,
+								message: 'Invalid Search Request or Service Unavailable',
+							};
+							this.log.error(this.store.error);
+							break;
+						default:
+							this.log.error(err.status);
+							break;
+					}
+
+					this.handleError(err.status, err);
+				} else {
+					this.log.error(err);
+					this.handleError(err);
 				}
 				this.store.loading = false;
-				this.handleError(err);
 			}
 		}
 	};
