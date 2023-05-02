@@ -550,7 +550,7 @@ describe('Search Controller', () => {
 					id: searchConfig.id,
 				},
 			},
-			details: JSON.stringify(addedDetails),
+			details: addedDetails,
 			filename: error.filename,
 			stack: error.error.stack,
 			message: error.message,

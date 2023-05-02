@@ -34,7 +34,7 @@ export abstract class AbstractController {
 		return this._initialized;
 	}
 
-	public handleError = (err: unknown, additionalDetails?: any): void => {
+	public handleError = (err: unknown, details?: any): void => {
 		let event: ErrorEvent | undefined;
 
 		if (err instanceof ErrorEvent) {
@@ -72,7 +72,7 @@ export abstract class AbstractController {
 				colno,
 				lineno,
 				errortimestamp: timeStamp,
-				details: additionalDetails ? JSON.stringify(additionalDetails) : undefined,
+				details,
 				context: {
 					controller: {
 						id: this.id,

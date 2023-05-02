@@ -245,14 +245,13 @@ export class Tracker {
 					},
 				});
 			}
-			const { useragent, href, filename, stack, message, colno, lineno, errortimestamp, details } = data;
+			const { href, filename, stack, message, colno, lineno, errortimestamp, details } = data;
 
 			const payload = {
 				type: BeaconType.ERROR,
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					useragent: useragent || window?.navigator?.userAgent,
 					href: href || window.location.href,
 					filename,
 					stack,

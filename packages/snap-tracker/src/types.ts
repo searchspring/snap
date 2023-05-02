@@ -80,10 +80,6 @@ export interface BeaconContext {
 		type?: string;
 		id?: string;
 	};
-	controller?: {
-		type: string;
-		id: string;
-	};
 }
 
 export interface BeaconMeta {
@@ -98,7 +94,6 @@ export interface ShopperLoginEvent {
 	id: string;
 }
 export interface TrackErrorEvent {
-	useragent?: string;
 	href?: string;
 	filename?: string;
 	stack?: string;
@@ -112,7 +107,7 @@ export interface TrackErrorEvent {
 			id: string;
 		};
 	};
-	details?: any;
+	details?: { [any: string]: unknown };
 }
 export interface ProductViewEvent {
 	sku?: string;
