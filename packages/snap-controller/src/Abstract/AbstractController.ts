@@ -34,7 +34,7 @@ export abstract class AbstractController {
 		return this._initialized;
 	}
 
-	public handleError = (err: unknown, details?: any): void => {
+	public handleError = (err: unknown, details?: { [any: string]: unknown }): void => {
 		let event: ErrorEvent | undefined;
 
 		if (err instanceof ErrorEvent) {
