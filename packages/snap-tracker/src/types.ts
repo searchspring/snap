@@ -80,6 +80,10 @@ export interface BeaconContext {
 		type?: string;
 		id?: string;
 	};
+	controller?: {
+		type: string;
+		id: string;
+	};
 }
 
 export interface BeaconMeta {
@@ -102,6 +106,13 @@ export interface TrackErrorEvent {
 	colno?: number;
 	lineno?: number;
 	errortimestamp?: number;
+	context?: {
+		controller?: {
+			type: string;
+			id: string;
+		};
+	};
+	details?: any;
 }
 export interface ProductViewEvent {
 	sku?: string;

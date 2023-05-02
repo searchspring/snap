@@ -66,12 +66,19 @@ export abstract class AbstractController {
 			} = event;
 
 			const beaconPayload: TrackErrorEvent = {
-				filename: filename || `${this.id} (${this.type.charAt(0).toUpperCase() + this.type.slice(1)}Controller)`,
+				filename,
 				stack,
-				message: additionalDetails ? JSON.stringify(additionalDetails) : message,
+				message,
 				colno,
 				lineno,
 				errortimestamp: timeStamp,
+				details: additionalDetails ? JSON.stringify(additionalDetails) : undefined,
+				context: {
+					controller: {
+						id: this.id,
+						type: this.type,
+					},
+				},
 			};
 
 			this.tracker.track.error(beaconPayload);
