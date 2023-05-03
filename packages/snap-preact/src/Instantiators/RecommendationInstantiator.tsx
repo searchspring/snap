@@ -257,7 +257,7 @@ export class RecommendationInstantiator {
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;
 
-				if (!controller.store.results.length && controller.store.error) {
+				if (controller.store.error) {
 					//something went wrong
 					//err was already logged - nothing to do.
 					return;
