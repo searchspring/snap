@@ -137,7 +137,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { logger, client });
 		await wait();
 
-		expect(Object.keys(recommendationInstantiator.controller).length).toBe(0);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(logSpy).not.toHaveBeenCalledWith(
 			`profile '${DEFAULT_PROFILE}' found on the following element is missing a component!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
