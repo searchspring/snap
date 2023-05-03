@@ -633,7 +633,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 const emIfy = (term: string, search: string) => {
 	if (term && search) {
 		const match = term.match(escapeRegExp(search));
-		if (search && term && match && match.index) {
+		if (search && term && match && typeof match.index == 'number') {
 			const beforeMatch = term.slice(0, match.index);
 			const afterMatch = term.slice(match.index + search.length, term.length);
 			return (
