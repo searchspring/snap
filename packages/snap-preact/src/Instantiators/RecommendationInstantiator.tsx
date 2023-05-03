@@ -248,6 +248,12 @@ export class RecommendationInstantiator {
 					await controller.search();
 				}
 
+				if (!controller.store.results.length && controller.store.error) {
+					//something went wrong
+					//err was already logged - nothing to do.
+					return;
+				}
+
 				controller.addTargeter(this.targeter);
 
 				this.controller[controller.config.id] = controller;
