@@ -117,6 +117,31 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
+	it('terms are emified as exected', async () => {
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+		const rendered = render(<Autocomplete {...args} />, { container });
+
+		await waitFor(() => {
+			let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
+
+			expect(termLinks[0]).toBeInTheDocument();
+			expect(termLinks[0].innerHTML).toEqual('dress');
+
+			expect(termLinks[1]).toBeInTheDocument();
+			expect(termLinks[1].innerHTML).toEqual('<em>red </em>dress');
+		});
+	});
+
 	it('can hover over terms, & facets', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
