@@ -220,7 +220,8 @@ export class SearchController extends AbstractController {
 
 						scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
 					} catch (err) {
-						// failed to ge lastStringParams
+						// failed to get lastStringParams
+						this.log.warn('Failed to save scollMap!', err);
 					}
 				}
 
