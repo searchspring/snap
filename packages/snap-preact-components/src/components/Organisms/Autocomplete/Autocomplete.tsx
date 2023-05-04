@@ -224,7 +224,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller?.setFocused && controller?.setFocused();
 	};
 
-	const themeOverride: Theme = {
+	const themeDefaults: Theme = {
 		components: {
 			facet: {
 				limit: 6,
@@ -258,7 +258,14 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	const displaySettings = useDisplaySettings(breakpoints) || {};
-	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+
+	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+	const theme = deepmerge(
+		themeDefaults,
+		deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
+		{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
+	);
+
 	props = {
 		...props,
 		...displaySettings,

@@ -746,10 +746,15 @@ describe('Autocomplete Component', () => {
 		});
 
 		it('is themeable with theme prop', async () => {
+			const ContentSlot = () => {
+				return <div className="content-slot">the contents...</div>;
+			};
+
 			const propTheme = {
 				components: {
 					autocomplete: {
 						trendingTitle: 'Lorem Ipsum',
+						contentSlot: [<ContentSlot />],
 					},
 				},
 			};
@@ -767,17 +772,32 @@ describe('Autocomplete Component', () => {
 
 			const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container });
 			await waitFor(() => {
-				const element = rendered.container.querySelector('.ss__autocomplete__title h5');
-				expect(element).toBeInTheDocument();
-				expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+				const trendingTitleElem = rendered.container.querySelector('.ss__autocomplete__title h5');
+				expect(trendingTitleElem).toBeInTheDocument();
+				expect(trendingTitleElem).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+
+				const contentElems = rendered.container.querySelectorAll('.content-slot');
+				expect(contentElems).toHaveLength(1);
+				const contentElem = contentElems[0];
+				expect(contentElem).toBeInTheDocument();
+				expect(contentElem).toHaveTextContent('the contents...');
 			});
 		});
 
 		it('is theme prop overrides ThemeProvider', async () => {
+			const ContentSlot = () => {
+				return <div className="content-slot">contents...</div>;
+			};
+
+			const GlobalContentSlot = () => {
+				return <div className="content-slot">global contents...</div>;
+			};
+
 			const globalTheme = {
 				components: {
 					autocomplete: {
 						trendingTitle: 'shouldnt find this',
+						contentSlot: [<GlobalContentSlot />],
 					},
 				},
 			};
@@ -785,6 +805,7 @@ describe('Autocomplete Component', () => {
 				components: {
 					autocomplete: {
 						trendingTitle: 'should find this',
+						contentSlot: [<ContentSlot />],
 					},
 				},
 			};
@@ -812,6 +833,12 @@ describe('Autocomplete Component', () => {
 				expect(element).toBeInTheDocument();
 				expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
 				expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+
+				const contentElems = rendered.container.querySelectorAll('.content-slot');
+				expect(contentElems).toHaveLength(1);
+				const contentElem = contentElems[0];
+				expect(contentElem).toBeInTheDocument();
+				expect(contentElem).toHaveTextContent('contents...');
 			});
 		});
 
@@ -822,24 +849,50 @@ describe('Autocomplete Component', () => {
 			// Trigger the window resize event.
 			global.dispatchEvent(new Event('resize'));
 
+			const TermsSlot = () => {
+				return <div className="terms-slot">terms...</div>;
+			};
+
+			const DetailSlot = () => {
+				return <div className="detail-slot">details...</div>;
+			};
+
 			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 			await controller.bind();
 
 			const theme = {
 				components: {
+					autocomplete: {
+						termsSlot: [<TermsSlot />],
+					},
 					facet: {
 						limit: 9,
+					},
+					result: {
+						detailSlot: [<DetailSlot />],
 					},
 				},
 			};
 
 			const customBreakpoints = {
-				0: {},
+				0: {
+					columns: 3,
+					rows: 1,
+				},
 				700: {
+					columns: 3,
+					rows: 1,
+					termsSlot: [<TermsSlot />],
 					theme: {
 						components: {
+							autocomplete: {
+								termsSlot: [<TermsSlot />],
+							},
 							facet: {
 								limit: 4,
+							},
+							result: {
+								detailSlot: [<DetailSlot />],
 							},
 						},
 					},
@@ -859,12 +912,19 @@ describe('Autocomplete Component', () => {
 
 			const rendered = render(<Autocomplete {...args} />, { container });
 			let acFacet: any;
+			let termsSlots: any;
+			let detailSlots: any;
 			let options: any;
 
 			await waitFor(() => {
-				acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet')!;
+				acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
 				options = acFacet.querySelectorAll('.ss__facet__options a');
+				termsSlots = rendered.container.querySelectorAll('.terms-slot');
+				detailSlots = rendered.container.querySelectorAll('.detail-slot');
+
 				expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
+				expect(termsSlots).toHaveLength(1);
+				expect(detailSlots).toHaveLength(3);
 			});
 
 			// Change the viewport to 500px.
@@ -874,8 +934,14 @@ describe('Autocomplete Component', () => {
 			global.dispatchEvent(new Event('resize'));
 
 			await waitFor(() => {
+				acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
 				options = acFacet.querySelectorAll('.ss__facet__options a');
+				termsSlots = rendered.container.querySelectorAll('.terms-slot');
+				detailSlots = rendered.container.querySelectorAll('.detail-slot');
+
 				expect(options?.length).toEqual(theme.components.facet.limit);
+				expect(termsSlots).toHaveLength(1);
+				expect(detailSlots).toHaveLength(3);
 			});
 		});
 	});
