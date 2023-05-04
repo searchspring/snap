@@ -1304,9 +1304,9 @@ describe('Autocomplete Controller', () => {
 		});
 
 		const handleError = jest.spyOn(controller, 'handleError');
-
+		const error = new Error('Too many requests try again later');
 		controller.client.autocomplete = jest.fn(() => {
-			throw { status: 429, url: 'test.com' };
+			throw { err: error, fetchDetails: { status: 429, url: 'test.com' } };
 		});
 
 		const query = 'bumpers';
@@ -1321,7 +1321,7 @@ describe('Autocomplete Controller', () => {
 				type: 'warning',
 				message: 'Too many requests try again later',
 			});
-			expect(handleError).toHaveBeenCalledWith(429, { status: 429, url: 'test.com' });
+			expect(handleError).toHaveBeenCalledWith(error, { status: 429, url: 'test.com' });
 			handleError.mockClear();
 		});
 	});
@@ -1339,8 +1339,9 @@ describe('Autocomplete Controller', () => {
 
 		const handleError = jest.spyOn(controller, 'handleError');
 
+		const error = new Error('Invalid Search Request or Service Unavailable');
 		controller.client.autocomplete = jest.fn(() => {
-			throw { status: 500, url: 'test.com' };
+			throw { err: error, fetchDetails: { status: 500, url: 'test.com' } };
 		});
 
 		const query = 'bumpers';
@@ -1355,7 +1356,7 @@ describe('Autocomplete Controller', () => {
 				type: 'error',
 				message: 'Invalid Search Request or Service Unavailable',
 			});
-			expect(handleError).toHaveBeenCalledWith(500, { status: 500, url: 'test.com' });
+			expect(handleError).toHaveBeenCalledWith(error, { status: 500, url: 'test.com' });
 			handleError.mockClear();
 		});
 	});

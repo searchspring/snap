@@ -42,6 +42,7 @@ export abstract class AbstractController {
 		} else if (err instanceof Error) {
 			event = new ErrorEvent('error', {
 				error: err,
+				message: err.message,
 			});
 		} else if (typeof err === 'string' || typeof err == 'number') {
 			event = new ErrorEvent('error', {

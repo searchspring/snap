@@ -65,15 +65,20 @@ export class API {
 					await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
 					this.retryDelay = fibonacci(this.retryCount) * 1000;
 					this.retryCount++;
-					return await this.request(context, cacheKey);
+					throw new Error('Rate limited.');
 				} else {
-					throw response.status;
+					throw new Error('Retry rate limit exceeded.');
 				}
 			}
 
-			throw 'Unexpected Response';
-		} catch (err) {
-			throw { status: response?.status, message: response?.statusText, url, ...init };
+			throw new Error('Unexpected Response Status.');
+		} catch (err: any) {
+			if (err.message == 'Rate limited.') {
+				return await this.request(context, cacheKey);
+			}
+
+			// throw an object with fetch details
+			throw { err, fetchDetails: { status: response?.status, message: response?.statusText || 'FAILED', url, ...init } };
 		}
 	}
 

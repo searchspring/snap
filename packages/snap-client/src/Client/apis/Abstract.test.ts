@@ -292,7 +292,17 @@ describe('Abstract Api', () => {
 		await expect(async () => {
 			//@ts-ignore
 			await api.request(context);
-		}).rejects.toBe(429);
+		}).rejects.toStrictEqual({
+			err: new Error('Retry rate limit exceeded.'),
+			fetchDetails: {
+				body: '{"siteId":"8uyt2m"}',
+				headers: { customheader: 'customkey' },
+				message: 'FAILED',
+				method: 'POST',
+				status: 429,
+				url: 'https://searchspring.com/api/v1/autocomplete',
+			},
+		});
 
 		expect(fetchfn429).toHaveBeenCalledTimes((config.maxRetry || 0) + 1);
 	});

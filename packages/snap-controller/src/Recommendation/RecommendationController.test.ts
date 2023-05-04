@@ -638,8 +638,9 @@ describe('Recommendation Controller', () => {
 
 		const handleError = jest.spyOn(controller, 'handleError');
 
+		const error = new Error('Retry rate limit exceeded.');
 		controller.client.recommend = jest.fn(() => {
-			throw { status: 429, url: 'test.com' };
+			throw { err: error, fetchDetails: { status: 429, url: 'test.com' } };
 		});
 
 		await controller.search();
@@ -650,7 +651,7 @@ describe('Recommendation Controller', () => {
 			message: 'Too many requests try again later',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(429, { status: 429, url: 'test.com' });
+		expect(handleError).toHaveBeenCalledWith(error, { status: 429, url: 'test.com' });
 		handleError.mockClear();
 	});
 
@@ -667,8 +668,9 @@ describe('Recommendation Controller', () => {
 
 		const handleError = jest.spyOn(controller, 'handleError');
 
+		const error = new Error('Invalid Search Request or Service Unavailable');
 		controller.client.recommend = jest.fn(() => {
-			throw { status: 500, url: 'test.com' };
+			throw { err: error, fetchDetails: { status: 500, url: 'test.com' } };
 		});
 
 		await controller.search();
@@ -679,7 +681,7 @@ describe('Recommendation Controller', () => {
 			message: 'Invalid Search Request or Service Unavailable',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(500, { status: 500, url: 'test.com' });
+		expect(handleError).toHaveBeenCalledWith(error, { status: 500, url: 'test.com' });
 		handleError.mockClear();
 	});
 });
