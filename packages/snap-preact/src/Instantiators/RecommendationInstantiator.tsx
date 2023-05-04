@@ -257,6 +257,12 @@ export class RecommendationInstantiator {
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;
 
+				if (controller.store.error) {
+					//something went wrong
+					//err was already logged - nothing to do.
+					return;
+				}
+
 				if (!controller.store.profile.display.template) {
 					this.logger.error(`profile '${tag}' found on the following element is missing a template!\n${elem?.outerHTML}`);
 					return;
