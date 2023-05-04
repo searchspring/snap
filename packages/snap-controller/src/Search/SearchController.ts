@@ -489,13 +489,13 @@ export class SearchController extends AbstractController {
 						default: {
 							this.store.error = {
 								type: ErrorType.ERROR,
-								message: err.message,
+								message: err.err.message,
 							};
 							break;
 						}
 					}
 
-					this.log.warn(this.store.error);
+					this.log.error(this.store.error);
 					this.handleError(err.err, err.fetchDetails);
 				} else {
 					this.store.error = {
