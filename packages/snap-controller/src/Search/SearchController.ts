@@ -1,4 +1,5 @@
 import deepmerge from 'deepmerge';
+import cssEscape from 'css.escape';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
@@ -139,18 +140,24 @@ export class SearchController extends AbstractController {
 						const maxCheckTime = 500;
 						const checkTime = 50;
 						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
-						const maxCheckCount = maxScrolls + 1;
+						const maxCheckCount = maxScrolls + 2;
 
 						let scrollBackCount = 0;
+						let checkCount = 0;
 						let scrolledElem: Element | undefined = undefined;
 
 						const checkAndScroll = () => {
 							const elem = document.querySelector(element?.selector!);
-							if (elem) scrollBackCount++;
+							if (elem) {
+								scrollBackCount++;
+							} else {
+								checkCount++;
+							}
 
-							if (elem && scrollBackCount < maxCheckCount) {
+							if (elem) {
 								const { y } = elem.getBoundingClientRect();
 
+								// if the offset is off, we need to scroll into position (can be caused by lazy loaded images)
 								if (y > offset + 1 || y < offset - 1) {
 									elem.scrollIntoView();
 									// after scrolling into view, use top value with offset (for when element at bottom)
@@ -165,7 +172,7 @@ export class SearchController extends AbstractController {
 							return false;
 						};
 
-						while (checkAndScroll() || scrollBackCount <= maxScrolls) {
+						while (checkAndScroll() || (scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
 							await new Promise((resolve) => setTimeout(resolve, checkTime));
 						}
 
@@ -192,20 +199,29 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				const target = e.target as HTMLAnchorElement;
-				const href = target?.getAttribute('href') || result.mappings.core?.url;
+				const resultHref = result.mappings.core?.url;
+				const elemHref = target?.getAttribute('href');
+
+				// the href that should be used for restoration - if the elemHref contains the resultHref - use resultHref
+				const storedHref = elemHref?.indexOf(resultHref) != -1 ? resultHref : elemHref || resultHref;
+
 				const scrollMap: { [key: string]: ElementPositionObj } = {};
 
 				// generate the selector using element class and parent classes
-				const selector = generateHrefSelector(target, href);
+				const selector = generateHrefSelector(target, storedHref);
 				const domRect = selector ? document?.querySelector(selector)?.getBoundingClientRect() : undefined;
 
 				// store element position data to scrollMap
-				if (selector && href && domRect) {
-					const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
-					const storableRequestParams = getStorableRequestParams(stringyParams);
-					const storableStringyParams = JSON.stringify(storableRequestParams);
+				if (selector || storedHref || domRect) {
+					try {
+						const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
+						const storableRequestParams = getStorableRequestParams(stringyParams);
+						const storableStringyParams = JSON.stringify(storableRequestParams);
 
-					scrollMap[storableStringyParams] = { domRect, href, selector };
+						scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+					} catch (err) {
+						// failed to ge lastStringParams
+					}
 				}
 
 				// store position data or empty object
@@ -217,7 +233,7 @@ export class SearchController extends AbstractController {
 				const event = this.tracker.track.product.click({
 					intellisuggestData,
 					intellisuggestSignature,
-					href,
+					href: elemHref || resultHref,
 				});
 
 				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
@@ -518,15 +534,31 @@ export function getStorableRequestParams(request: SearchRequestModel): SearchReq
 	};
 }
 
-function generateHrefSelector(element: HTMLElement, href: string, levels = 7): string | undefined {
+export function generateHrefSelector(element: HTMLElement, href: string, levels = 7): string | undefined {
 	let level = 0;
 	let elem: HTMLElement | null = element;
 
-	while (elem && level < levels) {
+	while (elem && level <= levels) {
 		// check within
-		const innerElemHref = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
-		if (innerElemHref && elem.classList.value) {
-			return `${elem.tagName}.${elem.classList.value.trim().replace(/\s+/g, '.').replace(/\:/g, '\\:')} [href*="${href}"]`;
+		const innerHrefElem = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
+		if (innerHrefElem) {
+			// innerHrefElem was found! now get selectors up to elem that contained it
+			let selector = '';
+			let parentElem: HTMLElement | null = innerHrefElem;
+
+			while (parentElem && parentElem != elem.parentElement) {
+				const classNames = parentElem.classList.value.trim().split(' ');
+				// document.querySelector does not appreciate special characters - must escape them
+				const escapedClassSelector = classNames.reduce(
+					(classes, classname) => (classname.trim() ? `${classes}.${cssEscape(classname.trim())}` : classes),
+					''
+				);
+				selector = `${parentElem.tagName}${escapedClassSelector}${selector ? ` ${selector}` : ''}`;
+
+				parentElem = parentElem.parentElement;
+			}
+
+			return `${selector}[href*="${href}"]`;
 		}
 
 		elem = elem.parentElement;
