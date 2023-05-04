@@ -348,4 +348,87 @@ describe('Carousel Component', () => {
 		expect(prev).toHaveTextContent(themeOverride.components.carousel.prevButton);
 		expect(next).toHaveTextContent(themeOverride.components.carousel.nextButton);
 	});
+
+	it('can add additional modules', () => {
+		const rendered = render(
+			<Carousel modules={[Scrollbar]} scrollbar>
+				{searchResponse.results!.map((result) => (
+					<Result result={result as Product} />
+				))}
+			</Carousel>
+		);
+		const scrollbar = rendered.container.querySelector('.ss__carousel .swiper-scrollbar');
+		expect(scrollbar).toBeInTheDocument();
+	});
+
+	it('breakpoints override theme prop', async () => {
+		// Change the viewport to 1200px.
+		global.innerWidth = 1200;
+
+		const componentTheme = {
+			components: {
+				icon: {
+					icon: 'ban',
+				},
+			},
+		};
+
+		const customBreakpoints = {
+			0: {
+				theme: {
+					components: {
+						icon: {
+							icon: 'eye',
+						},
+					},
+				},
+			},
+			700: {
+				hideButtons: false,
+				theme: {
+					components: {
+						icon: {
+							icon: 'check',
+						},
+					},
+				},
+			},
+		};
+
+		const rendered = render(
+			<Carousel breakpoints={customBreakpoints} theme={componentTheme}>
+				{searchResponse.results!.map((result, idx) => (
+					<Result result={result as Product} key={idx} />
+				))}
+			</Carousel>
+		);
+
+		await waitFor(() => {
+			const themeIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--ban');
+			expect(themeIconElements).toHaveLength(0);
+
+			const firstBreakpointIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--check');
+			expect(firstBreakpointIconElements).toHaveLength(2);
+
+			const secondBreakpointIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--eye');
+			expect(secondBreakpointIconElements).toHaveLength(0);
+		});
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		await waitFor(() => {
+			const themeIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--ban');
+			expect(themeIconElements).toHaveLength(0);
+
+			const firstBreakpointIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--check');
+			expect(firstBreakpointIconElements).toHaveLength(0);
+
+			const secondBreakpointIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--eye');
+			expect(secondBreakpointIconElements).toHaveLength(2);
+		});
+	});
 });
