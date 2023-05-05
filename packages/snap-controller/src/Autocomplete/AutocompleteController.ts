@@ -221,9 +221,9 @@ export class AutocompleteController extends AbstractController {
 						}
 
 						if (this.config.settings!.integratedSpellCorrection) {
-							// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-							if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+							//set fallbackQuery to the correctedQuery
+							if (this.store.search.correctedQuery) {
+								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 							}
 						} else if (this.store.search.originalQuery) {
 							// use corrected query and originalQuery
@@ -284,9 +284,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					if (this.config.settings!.integratedSpellCorrection) {
-						// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-						if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+						//set fallbackQuery to the correctedQuery
+						if (this.store.search.correctedQuery) {
+							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 						}
 					} else if (this.store.search.originalQuery) {
 						// use corrected query and originalQuery
@@ -368,11 +368,11 @@ export class AutocompleteController extends AbstractController {
 
 				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
 				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
+				this.urlManager.reset().go();
 
 				if (!value) {
-					// there is no input value - reset state of store and UrlManager
+					// there is no input value - reset state of store
 					this.store.reset();
-					this.urlManager.reset().go();
 
 					// show results for trending or history (if configured) - trending has priority
 					if (trendingResultsEnabled) {
@@ -382,15 +382,9 @@ export class AutocompleteController extends AbstractController {
 					}
 				} else {
 					// new query in the input - trigger a new search via UrlManager
-					this.store.resetTerms();
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();
-
-						// must reset query to ensure funcitonality when trending/history term is equal to the typed term
-						if (trendingResultsEnabled || historyResultsEnabled) {
-							this.urlManager.set({ query: '' }).go();
-						}
 
 						this.urlManager.set({ query: this.store.state.input }).go();
 					}, INPUT_DELAY);
@@ -616,31 +610,48 @@ export class AutocompleteController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-		} catch (err) {
+		} catch (err: any) {
 			if (err) {
-				switch (err) {
-					case 429:
-						this.store.error = {
-							code: 429,
-							type: ErrorType.WARNING,
-							message: 'Too many requests try again later',
-						};
-						this.log.warn(this.store.error);
-						break;
-					case 500:
-						this.store.error = {
-							code: 500,
-							type: ErrorType.ERROR,
-							message: 'Invalid Search Request or Service Unavailable',
-						};
-						this.log.error(this.store.error);
-						break;
-					default:
-						this.log.error(err);
-						break;
+				if (err.err && err.fetchDetails) {
+					switch (err.fetchDetails.status) {
+						case 429: {
+							this.store.error = {
+								code: 429,
+								type: ErrorType.WARNING,
+								message: 'Too many requests try again later',
+							};
+							break;
+						}
+
+						case 500: {
+							this.store.error = {
+								code: 500,
+								type: ErrorType.ERROR,
+								message: 'Invalid Search Request or Service Unavailable',
+							};
+							break;
+						}
+
+						default: {
+							this.store.error = {
+								type: ErrorType.ERROR,
+								message: err.err.message,
+							};
+							break;
+						}
+					}
+
+					this.log.error(this.store.error);
+					this.handleError(err.err, err.fetchDetails);
+				} else {
+					this.store.error = {
+						type: ErrorType.ERROR,
+						message: `Something went wrong... - ${err}`,
+					};
+					this.log.error(err);
+					this.handleError(err);
 				}
 				this.store.loading = false;
-				this.handleError(err);
 			}
 		}
 	};

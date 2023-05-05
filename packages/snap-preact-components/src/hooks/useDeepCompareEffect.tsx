@@ -16,5 +16,5 @@ export function useDeepCompareMemoize<T>(value: T) {
 }
 
 export function useDeepCompareEffect(callback: EffectCallback, dependencies: Inputs | undefined) {
-	return useEffect(callback, useDeepCompareMemoize(dependencies));
+	return useEffect(callback, [useDeepCompareMemoize(dependencies)]);
 }

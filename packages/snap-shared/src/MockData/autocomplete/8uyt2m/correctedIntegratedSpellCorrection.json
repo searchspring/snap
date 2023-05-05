@@ -10,7 +10,7 @@
         "alternatives": [{
             "text": "rumper"
         }],
-        "corrected-query": "romper"
+        "correctedQuery": "romper"
     },
     "pagination": {
         "totalResults": 202,

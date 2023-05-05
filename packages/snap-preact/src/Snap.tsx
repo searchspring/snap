@@ -266,11 +266,9 @@ export class Snap {
 						message,
 						timeStamp,
 					} = event;
-					const userAgent = navigator.userAgent;
 					const href = window.location.href;
 
 					const beaconPayload: TrackErrorEvent = {
-						userAgent,
 						href,
 						filename,
 						stack,

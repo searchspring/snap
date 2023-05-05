@@ -370,7 +370,6 @@ describe('Tracker', () => {
 		const tracker = new Tracker(globals);
 
 		const payload: TrackErrorEvent = {
-			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://localhost/',
 			filename: 'https://snapui.searchspring.io/mockup.html',
 			stack: '',
@@ -384,7 +383,6 @@ describe('Tracker', () => {
 		expect(beaconEvent).toBe(undefined);
 
 		const anotherPayload: TrackErrorEvent = {
-			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://snapui.searchspring.io/mockup.html?q=red',
 			filename: 'https://snapui.searchspring.io/bundle.js',
 			stack: '',
@@ -415,7 +413,6 @@ describe('Tracker', () => {
 		const sendEvents = jest.spyOn(tracker, 'sendEvents');
 
 		const payload: TrackErrorEvent = {
-			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://www.test.com/',
 			filename: 'https://snapui.searchspring.io/mockup.html',
 			stack: '',
@@ -453,7 +450,6 @@ describe('Tracker', () => {
 		const sendEvents = jest.spyOn(tracker, 'sendEvents');
 
 		const payload: TrackErrorEvent = {
-			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://www.test.com/',
 			filename: 'https://snapui.searchspring.io/mockup.html',
 			stack: '',
@@ -1337,7 +1333,6 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track, 'error');
 
 		const payload: TrackErrorEvent = {
-			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://www.test.com/',
 			filename: 'https://snapui.searchspring.io/test.js',
 			stack: '',

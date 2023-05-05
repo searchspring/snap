@@ -29,6 +29,12 @@ export type SearchStoreConfig = StoreConfig & {
 			url?: string;
 			max?: number;
 		};
+		pagination?: {
+			pageSizeOptions?: {
+				label: string;
+				value: number;
+			}[];
+		};
 	};
 };
 

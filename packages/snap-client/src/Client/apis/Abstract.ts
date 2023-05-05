@@ -45,28 +45,41 @@ export class API {
 				return cachedResponse;
 			}
 		}
+		let response;
+		let responseJSON;
 
-		const response = await this.fetchApi(url, init);
-		const responseJSON = await response?.json();
-		if (response.status >= 200 && response.status < 300) {
-			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
-			this.retryDelay = 1000;
-			if (cacheKey) {
-				// save in the cache before returning
-				this.cache.set(cacheKey, responseJSON);
+		try {
+			response = await this.fetchApi(url, init);
+			responseJSON = await response?.json();
+
+			if (response.status >= 200 && response.status < 300) {
+				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+				this.retryDelay = 1000;
+				if (cacheKey) {
+					// save in the cache before returning
+					this.cache.set(cacheKey, responseJSON);
+				}
+				return responseJSON;
+			} else if (response.status == 429) {
+				if (this.retryCount < this.configuration.maxRetry) {
+					await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
+					this.retryDelay = fibonacci(this.retryCount) * 1000;
+					this.retryCount++;
+					throw new Error('Rate limited.');
+				} else {
+					throw new Error('Retry rate limit exceeded.');
+				}
 			}
-			return responseJSON;
-		} else if (response.status == 429) {
-			if (this.retryCount < this.configuration.maxRetry) {
-				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
-				this.retryDelay = fibonacci(this.retryCount) * 1000;
-				this.retryCount++;
+
+			throw new Error('Unexpected Response Status.');
+		} catch (err: any) {
+			if (err.message == 'Rate limited.') {
 				return await this.request(context, cacheKey);
-			} else {
-				throw response.status;
 			}
+
+			// throw an object with fetch details
+			throw { err, fetchDetails: { status: response?.status, message: response?.statusText || 'FAILED', url, ...init } };
 		}
-		throw response.status;
 	}
 
 	private createFetchParams(context: RequestOpts) {

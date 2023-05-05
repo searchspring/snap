@@ -420,8 +420,9 @@ describe('Finder Controller', () => {
 
 				const handleError = jest.spyOn(controller, 'handleError');
 
+				const error = new Error('Too many requests try again later');
 				controller.client.finder = jest.fn(() => {
-					throw 429;
+					throw { err: error, fetchDetails: { status: 429, url: 'test.com' } };
 				});
 
 				await controller.search();
@@ -432,7 +433,8 @@ describe('Finder Controller', () => {
 					message: 'Too many requests try again later',
 				});
 
-				expect(handleError).toHaveBeenCalledWith(429);
+				expect(handleError).toHaveBeenCalledWith(error, { status: 429, url: 'test.com' });
+
 				handleError.mockClear();
 			});
 
@@ -449,8 +451,9 @@ describe('Finder Controller', () => {
 
 				const handleError = jest.spyOn(controller, 'handleError');
 
+				const error = new Error('Invalid Search Request or Service Unavailable');
 				controller.client.finder = jest.fn(() => {
-					throw 500;
+					throw { err: error, fetchDetails: { status: 500, url: 'test.com' } };
 				});
 
 				await controller.search();
@@ -461,7 +464,8 @@ describe('Finder Controller', () => {
 					message: 'Invalid Search Request or Service Unavailable',
 				});
 
-				expect(handleError).toHaveBeenCalledWith(500);
+				expect(handleError).toHaveBeenCalledWith(error, { status: 500, url: 'test.com' });
+
 				handleError.mockClear();
 			});
 		});

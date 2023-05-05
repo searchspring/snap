@@ -83,7 +83,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	};
 
 	const displaySettings = useDisplaySettings(props?.breakpoints || {});
-	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
 	props = {
 		...props,

@@ -74,6 +74,7 @@ const CSS = {
 				flexDirection: 'column',
 				flex: `1 1 auto`,
 				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
+				minWidth: '150px',
 				order: 1,
 				background: '#f8f8f8',
 
@@ -189,17 +190,17 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		0: {
 			columns: 2,
 			rows: 1,
-			hideFacets: props.hideFacets || true,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			hideFacets: props.hideFacets ?? true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		768: {
 			columns: 2,
@@ -223,7 +224,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller?.setFocused && controller?.setFocused();
 	};
 
-	const themeOverride: Theme = {
+	const themeDefaults: Theme = {
 		components: {
 			facet: {
 				limit: 6,
@@ -257,7 +258,14 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	const displaySettings = useDisplaySettings(breakpoints) || {};
-	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+
+	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+	const theme = deepmerge(
+		themeDefaults,
+		deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
+		{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
+	);
+
 	props = {
 		...props,
 		...displaySettings,
@@ -632,7 +640,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 const emIfy = (term: string, search: string) => {
 	if (term && search) {
 		const match = term.match(escapeRegExp(search));
-		if (search && term && match && match.index) {
+		if (search && term && match && typeof match.index == 'number') {
 			const beforeMatch = term.slice(0, match.index);
 			const afterMatch = term.slice(match.index + search.length, term.length);
 			return (

@@ -9,15 +9,23 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	// Call getDisplaySettings right away to prevent flashing
 	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
 
-	useEffect(() => {
+	let debouncedHandleResize: () => void;
+	const resetResizeListener = () => {
 		function handleResize() {
 			// Set display settings to state
 			setDisplaySettings(getDisplaySettings(breakpointsObj));
 		}
-		// Add event listener
-		const debouncedHandleResize = debounce(() => handleResize());
-		window.addEventListener('resize', debouncedHandleResize);
 
+		// Add event listener
+		debouncedHandleResize = debounce(() => {
+			handleResize();
+		}, 50);
+
+		window.addEventListener('resize', debouncedHandleResize);
+	};
+
+	useEffect(() => {
+		resetResizeListener();
 		// Remove event listener on cleanup
 		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
@@ -25,6 +33,7 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	// when breakpointsObj changes (due to computed values)
 	useDeepCompareEffect(() => {
 		setDisplaySettings(getDisplaySettings(breakpointsObj));
+		resetResizeListener();
 	}, [breakpointsObj]);
 
 	return displaySettings;

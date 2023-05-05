@@ -8,10 +8,7 @@ export class SearchPaginationStore {
 	public services: StoreServices;
 	public page: number;
 	public pageSize: number;
-	public pageSizeOptions: {
-		label: string;
-		value: number;
-	}[];
+	public pageSizeOptions: PageSizeOption[];
 	public defaultPageSize: number;
 	public totalResults: number;
 	public totalPages: number;
@@ -28,6 +25,8 @@ export class SearchPaginationStore {
 		},
 		meta: MetaResponseModel
 	) {
+		const paginationSettings = (config as SearchStoreConfig)?.settings?.pagination;
+
 		this.services = services;
 		this.controllerConfig = config;
 
@@ -37,7 +36,7 @@ export class SearchPaginationStore {
 		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
 		this.totalPages = paginationData.totalPages!;
 
-		this.pageSizeOptions = [
+		const pageSizeOptions = paginationSettings?.pageSizeOptions || [
 			{
 				label: `Show ${this.defaultPageSize}`,
 				value: this.defaultPageSize,
@@ -52,7 +51,16 @@ export class SearchPaginationStore {
 			},
 		];
 
+		this.pageSizeOptions = pageSizeOptions.map(
+			(pageOption: any) =>
+				new PageSizeOption(this.services, this.pageSize, {
+					label: pageOption.label,
+					value: pageOption.value,
+				})
+		);
+
 		makeObservable(this, {
+			pageSizeOptions: observable,
 			page: observable,
 			pageSize: observable,
 			totalResults: observable,
@@ -184,8 +192,31 @@ export class SearchPaginationStore {
 	}
 }
 
+export class PageSizeOption {
+	private services: StoreServices;
+	public value: number;
+	public label: string;
+	public url: UrlManager;
+	public active: boolean;
+
+	constructor(
+		services: StoreServices,
+		currentPageSize: number,
+		option: {
+			value: number;
+			label: string;
+		}
+	) {
+		this.services = services;
+		this.value = option.value;
+		this.label = option.label;
+		this.url = this.services?.urlManager.remove('page').set('pageSize', option.value);
+		this.active = Boolean(currentPageSize == option.value);
+	}
+}
+
 export class Page {
-	public services: StoreServices;
+	private services: StoreServices;
 	public number: number;
 	public active: boolean;
 	public url: UrlManager;
