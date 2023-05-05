@@ -190,7 +190,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
 	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
 
-	if ((facet.active?.low && facet.active?.high && values[0] != facet.active?.low) || values[1] != facet.active?.high) {
+	if (((facet.active?.low || facet.active?.low === 0) && facet.active?.high && values[0] != facet.active?.low) || values[1] != facet.active?.high) {
 		setActive([facet.active?.low, facet.active?.high]);
 		setValues([facet.active?.low, facet.active?.high]);
 	}
