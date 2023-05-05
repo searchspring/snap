@@ -8,7 +8,7 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended', // uses the recommended rules from the @typescript-eslint/eslint-plugin
 		'prettier', // disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
 	],
-	ignorePatterns: ["*.test.ts", "*.test.tsx"],
+	ignorePatterns: ["**/docs", "**/dist", "*.test.ts", "*.test.tsx"],
 	rules: {
 		// add rules... or dont...
 		'no-debugger': 'error',
