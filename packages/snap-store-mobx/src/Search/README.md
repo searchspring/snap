@@ -532,11 +532,15 @@ The number of products displayed per page
 The default number of results per page. Default is `24`.
 
 ### `pageSizeOptions` property
-An array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page.
+An array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page. These can be customized via the pagination settings in the controller config settings. 
 
 `label` - label text to display
 
 `value` - number of results for this selection
+
+`url` - reference to the URLManager containing href and onclick values
+
+`active` - boolean stating if current page size matches the value of this option
 
 Default values:
 ```typescript

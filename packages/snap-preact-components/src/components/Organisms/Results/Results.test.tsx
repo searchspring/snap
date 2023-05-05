@@ -15,6 +15,10 @@ const searchResponse: SearchResponseModel = mockData.search();
 const mockResults = searchResponse.results as SearchResultStore;
 
 describe('Results Component', () => {
+	const DetailSlot = () => {
+		return <div className="detail-slot">details...</div>;
+	};
+
 	const theme = {
 		components: {
 			results: {
@@ -22,8 +26,12 @@ describe('Results Component', () => {
 					backgroundColor: 'red',
 				},
 			},
+			result: {
+				detailSlot: [<DetailSlot />],
+			},
 		},
 	};
+
 	it('renders grid view', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
 		const resultElement = rendered.getByText(mockResults[0].mappings.core?.name!);
@@ -133,6 +141,36 @@ describe('Results Component', () => {
 		expect(resultsElement?.classList).toHaveLength(2);
 	});
 
+	it('can pass child component props via the theme', () => {
+		const clickFunc = jest.fn();
+		const theme2 = {
+			components: {
+				result: {
+					onClick: (e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+						e.preventDefault();
+						clickFunc();
+					},
+				},
+			},
+		};
+
+		const args = {
+			layout: Layout.GRID,
+			results: mockResults,
+		};
+		const rendered = render(
+			<ThemeProvider theme={theme2}>
+				<Results {...args} />
+			</ThemeProvider>
+		);
+		expect(clickFunc).not.toHaveBeenCalled();
+
+		const resultElement = rendered.container.querySelector('.ss__results .ss__result a')!;
+		userEvent.click(resultElement);
+
+		expect(clickFunc).toHaveBeenCalled();
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const args = {
 			layout: Layout.GRID,
@@ -164,31 +202,89 @@ describe('Results Component', () => {
 			layout: Layout.GRID,
 			results: mockResults,
 		};
-		const themeOverride = {
+
+		const ThemeDetailSlot = () => {
+			return <div className="theme-detail-slot">theme details...</div>;
+		};
+
+		const componentTheme = {
 			components: {
 				results: {
 					style: {
 						backgroundColor: 'blue',
 					},
 				},
+				result: {
+					detailSlot: [<ThemeDetailSlot />],
+				},
 			},
 		};
+
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<Results {...args} theme={themeOverride} />
+				<Results {...args} theme={componentTheme} />
 			</ThemeProvider>
 		);
+
 		const resultsElement = rendered.container.querySelector('.ss__results')!;
 		const styles = getComputedStyle(resultsElement);
-		expect(styles.backgroundColor).toBe(themeOverride.components.results.style.backgroundColor);
+		expect(styles.backgroundColor).toBe(componentTheme.components.results.style.backgroundColor);
+
+		const themeDetailSlots = rendered.container.querySelectorAll('.theme-detail-slot');
+		expect(themeDetailSlots).toHaveLength(30);
+
+		const globalDetailSlots = rendered.container.querySelectorAll('.detail-slot');
+		expect(globalDetailSlots).toHaveLength(0);
 	});
 
-	it('can pass child component props via the theme', () => {
-		const clickFunc = jest.fn();
-		const theme2 = {
+	it('breakpoints override theme prop', async () => {
+		// Change the viewport to 1200px.
+		global.innerWidth = 1200;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		const ThemeDetailSlot = () => {
+			return <div className="theme-detail-slot">theme details...</div>;
+		};
+
+		const BreakPointDetailSlot = () => {
+			return <div className="breakpoint-detail-slot">breakpoint details...</div>;
+		};
+
+		const componentTheme = {
 			components: {
+				results: {
+					style: {
+						backgroundColor: 'blue',
+					},
+				},
 				result: {
-					onClick: clickFunc,
+					detailSlot: [<ThemeDetailSlot />],
+				},
+			},
+		};
+
+		const customBreakpoints = {
+			0: {
+				columns: 3,
+				rows: 2,
+			},
+			700: {
+				columns: 3,
+				rows: 3,
+				theme: {
+					components: {
+						results: {
+							// TODO: need to support this!
+							// style: {
+							// 	backgroundColor: 'red',
+							// },
+						},
+						result: {
+							detailSlot: [<BreakPointDetailSlot />],
+						},
+					},
 				},
 			},
 		};
@@ -196,17 +292,53 @@ describe('Results Component', () => {
 		const args = {
 			layout: Layout.GRID,
 			results: mockResults,
+			breakpoints: customBreakpoints,
+			theme: componentTheme,
 		};
+
 		const rendered = render(
-			<ThemeProvider theme={theme2}>
+			<ThemeProvider theme={theme}>
 				<Results {...args} />
 			</ThemeProvider>
 		);
-		expect(clickFunc).not.toHaveBeenCalled();
 
-		const resultElement = rendered.container.querySelector('.ss__results .ss__result a')!;
-		userEvent.click(resultElement);
+		await waitFor(() => {
+			const resultsElement = rendered.container.querySelector('.ss__results')!;
 
-		expect(clickFunc).toHaveBeenCalled();
+			const styles = getComputedStyle(resultsElement);
+			expect(styles.backgroundColor).toBe(componentTheme.components.results.style.backgroundColor);
+
+			const themeDetailSlots = rendered.container.querySelectorAll('.theme-detail-slot');
+			expect(themeDetailSlots).toHaveLength(0);
+
+			const globalDetailSlots = rendered.container.querySelectorAll('.detail-slot');
+			expect(globalDetailSlots).toHaveLength(0);
+
+			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
+			expect(breakpointDetailSlots).toHaveLength(9);
+		});
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		// after resize the detailSlot should go back to using what is in the theme
+		await waitFor(() => {
+			const resultsElement = rendered.container.querySelector('.ss__results')!;
+
+			const styles = getComputedStyle(resultsElement);
+			expect(styles.backgroundColor).toBe(componentTheme.components.results.style.backgroundColor);
+
+			const themeDetailSlots = rendered.container.querySelectorAll('.theme-detail-slot');
+			expect(themeDetailSlots).toHaveLength(6);
+
+			const globalDetailSlots = rendered.container.querySelectorAll('.detail-slot');
+			expect(globalDetailSlots).toHaveLength(0);
+
+			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
+			expect(breakpointDetailSlots).toHaveLength(0);
+		});
 	});
 });

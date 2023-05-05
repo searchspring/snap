@@ -45,9 +45,9 @@ export type RestorePositionObj = {
 };
 
 export type ElementPositionObj = {
-	href: string;
-	selector: string;
-	domRect: DOMRect;
+	href?: string;
+	selector?: string;
+	domRect?: DOMRect;
 };
 
 export enum ControllerTypes {

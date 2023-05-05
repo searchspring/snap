@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Bug Fixes
+
+- **recommendationinstantiator:** bugfix for improper err logging when rec api call fails ([961ba75](https://github.com/searchspring/snap/commit/961ba75696ff29d77309b3ca7701fe46b664d401))
+
 ## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
 
 **Note:** Version bump only for package @searchspring/snap-preact

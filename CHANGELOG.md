@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Bug Fixes
+
+- **autocomplete.tsx:** bugfix for emify function when match was at start of term ([8430c5c](https://github.com/searchspring/snap/commit/8430c5c69198359f8397cf25ba0df555e4fe9bbf))
+- **controller-search:** fully escaping CSS selectors in restorePosition and adjusting maxCheck ([0b31fe8](https://github.com/searchspring/snap/commit/0b31fe87ab2634cd13bd6144e29ad6cf570c854b))
+- **preact-components-autocomplete:** adjusting theme deepmerge to ensure arrays are replaced ([56b57ad](https://github.com/searchspring/snap/commit/56b57adb92689e792c0f0ba728cfaf5e0df61af8))
+- **preact-components:** changing the way that theme display settings are merged for breakpoints ([cb660ef](https://github.com/searchspring/snap/commit/cb660ef3cd58e1bd151c5401a17806668d848f15))
+- **recommendationinstantiator:** bugfix for improper err logging when rec api call fails ([961ba75](https://github.com/searchspring/snap/commit/961ba75696ff29d77309b3ca7701fe46b664d401))
+- **usedisplaysettings.tsx:** fix for useDisplaySettings hook not updating computed breakpoints value ([389bd30](https://github.com/searchspring/snap/commit/389bd30e041ab6969c495e7ee5aec26b8fa2d253))
+
+### Features
+
+- **controller-search:** modifying href selector generation to account for extra spaces and colons ([87bbd8b](https://github.com/searchspring/snap/commit/87bbd8b13720c55dcb551bca14d34873790b7872))
+- **searchpaginationstore:** adding configuration for pagination pageSizeOptions ([9937548](https://github.com/searchspring/snap/commit/9937548e24904a825e8d3655890a4d51c3461717))
+
 ## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
 
 ### Bug Fixes

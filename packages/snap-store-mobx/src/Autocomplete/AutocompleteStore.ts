@@ -162,7 +162,8 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {});
-		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {});
+
+		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {}, this.config as AutocompleteStoreConfig);
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {

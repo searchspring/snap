@@ -94,7 +94,6 @@ export interface ShopperLoginEvent {
 	id: string;
 }
 export interface TrackErrorEvent {
-	userAgent?: string;
 	href?: string;
 	filename?: string;
 	stack?: string;
@@ -102,6 +101,13 @@ export interface TrackErrorEvent {
 	colno?: number;
 	lineno?: number;
 	errortimestamp?: number;
+	context?: {
+		controller?: {
+			type: string;
+			id: string;
+		};
+	};
+	details?: { [any: string]: unknown };
 }
 export interface ProductViewEvent {
 	sku?: string;
