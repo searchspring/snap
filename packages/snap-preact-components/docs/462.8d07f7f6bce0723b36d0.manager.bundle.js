@@ -1,4 +1,4 @@
-/*! For license information please see 462.15dde03612375d7e8d13.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 462.8d07f7f6bce0723b36d0.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[462],
 	{
@@ -16778,7 +16778,6 @@
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				react = (__webpack_require__(34769), __webpack_require__(43105), __webpack_require__(2784)),
-				react_namespaceObject = __webpack_require__.t(react, 2),
 				react_dom = __webpack_require__(28316);
 			function _extends() {
 				return (
@@ -16908,7 +16907,7 @@
 				(ResultType.data = 'data'), (ResultType.deferred = 'deferred'), (ResultType.redirect = 'redirect'), (ResultType.error = 'error');
 			})(ResultType || (ResultType = {}));
 			new Set(['lazy', 'caseSensitive', 'path', 'id', 'index', 'children']);
-			function stripBasename(pathname, basename) {
+			function router_stripBasename(pathname, basename) {
 				if ('/' === basename) return pathname;
 				if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) return null;
 				let startIndex = basename.endsWith('/') ? basename.length - 1 : basename.length,
@@ -16986,24 +16985,21 @@
 				new Set([307, 308]),
 				'undefined' != typeof window && void 0 !== window.document && window.document.createElement;
 			Symbol('deferred');
-			const is =
-					'function' == typeof Object.is
-						? Object.is
-						: function isPolyfill(x, y) {
-								return (x === y && (0 !== x || 1 / x == 1 / y)) || (x != x && y != y);
-						  },
-				{ useState, useEffect, useLayoutEffect, useDebugValue } = react_namespaceObject;
-			function checkIfSnapshotChanged(inst) {
-				const latestGetSnapshot = inst.getSnapshot,
-					prevValue = inst.value;
-				try {
-					const nextValue = latestGetSnapshot();
-					return !is(prevValue, nextValue);
-				} catch (error) {
-					return !0;
-				}
+			function dist_extends() {
+				return (
+					(dist_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					dist_extends.apply(this, arguments)
+				);
 			}
-			'undefined' == typeof window || void 0 === window.document || window.document.createElement;
+			const DataRouterContext = react.createContext(null);
 			const NavigationContext = react.createContext(null);
 			const LocationContext = react.createContext(null);
 			const RouteContext = react.createContext({ outlet: null, matches: [] });
@@ -17013,27 +17009,50 @@
 			function dist_useLocation() {
 				return useInRouterContext() || invariant(!1), react.useContext(LocationContext).location;
 			}
+			function useIsomorphicLayoutEffect(cb) {
+				react.useContext(NavigationContext).static || react.useLayoutEffect(cb);
+			}
 			function dist_useNavigate() {
-				useInRouterContext() || invariant(!1);
-				let { basename, navigator } = react.useContext(NavigationContext),
-					{ matches } = react.useContext(RouteContext),
-					{ pathname: locationPathname } = dist_useLocation(),
-					routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase)),
-					activeRef = react.useRef(!1);
-				react.useEffect(() => {
-					activeRef.current = !0;
-				});
-				let navigate = react.useCallback(
-					function (to, options) {
-						if ((void 0 === options && (options = {}), !activeRef.current)) return;
-						if ('number' == typeof to) return void navigator.go(to);
-						let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, 'path' === options.relative);
-						'/' !== basename && (path.pathname = '/' === path.pathname ? basename : router_joinPaths([basename, path.pathname])),
-							(options.replace ? navigator.replace : navigator.push)(path, options.state, options);
-					},
-					[basename, navigator, routePathnamesJson, locationPathname]
-				);
-				return navigate;
+				return null != react.useContext(DataRouterContext)
+					? (function useNavigateStable() {
+							let { router } = useDataRouterContext(DataRouterHook.UseNavigateStable),
+								id = useCurrentRouteId(DataRouterStateHook.UseNavigateStable),
+								activeRef = react.useRef(!1);
+							useIsomorphicLayoutEffect(() => {
+								activeRef.current = !0;
+							});
+							let navigate = react.useCallback(
+								function (to, options) {
+									void 0 === options && (options = {}),
+										activeRef.current &&
+											('number' == typeof to ? router.navigate(to) : router.navigate(to, dist_extends({ fromRouteId: id }, options)));
+								},
+								[router, id]
+							);
+							return navigate;
+					  })()
+					: (function useNavigateUnstable() {
+							useInRouterContext() || invariant(!1);
+							let { basename, navigator } = react.useContext(NavigationContext),
+								{ matches } = react.useContext(RouteContext),
+								{ pathname: locationPathname } = dist_useLocation(),
+								routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase)),
+								activeRef = react.useRef(!1);
+							useIsomorphicLayoutEffect(() => {
+								activeRef.current = !0;
+							});
+							let navigate = react.useCallback(
+								function (to, options) {
+									if ((void 0 === options && (options = {}), !activeRef.current)) return;
+									if ('number' == typeof to) return void navigator.go(to);
+									let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, 'path' === options.relative);
+									'/' !== basename && (path.pathname = '/' === path.pathname ? basename : router_joinPaths([basename, path.pathname])),
+										(options.replace ? navigator.replace : navigator.push)(path, options.state, options);
+								},
+								[basename, navigator, routePathnamesJson, locationPathname]
+							);
+							return navigate;
+					  })();
 			}
 			function dist_useResolvedPath(to, _temp2) {
 				let { relative } = void 0 === _temp2 ? {} : _temp2,
@@ -17047,15 +17066,15 @@
 			}
 			class RenderErrorBoundary extends react.Component {
 				constructor(props) {
-					super(props), (this.state = { location: props.location, error: props.error });
+					super(props), (this.state = { location: props.location, revalidation: props.revalidation, error: props.error });
 				}
 				static getDerivedStateFromError(error) {
 					return { error };
 				}
 				static getDerivedStateFromProps(props, state) {
-					return state.location !== props.location
-						? { error: props.error, location: props.location }
-						: { error: props.error || state.error, location: state.location };
+					return state.location !== props.location || ('idle' !== state.revalidation && 'idle' === props.revalidation)
+						? { error: props.error, location: props.location, revalidation: props.revalidation }
+						: { error: props.error || state.error, location: state.location, revalidation: props.revalidation || state.revalidation };
 				}
 				componentDidCatch(error, errorInfo) {
 					console.error('React Router caught the following error during render', error, errorInfo);
@@ -17071,8 +17090,22 @@
 				}
 			}
 			var DataRouterHook, DataRouterStateHook;
+			function useDataRouterContext(hookName) {
+				let ctx = react.useContext(DataRouterContext);
+				return ctx || invariant(!1), ctx;
+			}
+			function useCurrentRouteId(hookName) {
+				let route = (function useRouteContext(hookName) {
+						let route = react.useContext(RouteContext);
+						return route || invariant(!1), route;
+					})(),
+					thisRoute = route.matches[route.matches.length - 1];
+				return thisRoute.route.id || invariant(!1), thisRoute.route.id;
+			}
 			!(function (DataRouterHook) {
-				(DataRouterHook.UseBlocker = 'useBlocker'), (DataRouterHook.UseRevalidator = 'useRevalidator');
+				(DataRouterHook.UseBlocker = 'useBlocker'),
+					(DataRouterHook.UseRevalidator = 'useRevalidator'),
+					(DataRouterHook.UseNavigateStable = 'useNavigate');
 			})(DataRouterHook || (DataRouterHook = {})),
 				(function (DataRouterStateHook) {
 					(DataRouterStateHook.UseBlocker = 'useBlocker'),
@@ -17082,9 +17115,11 @@
 						(DataRouterStateHook.UseNavigation = 'useNavigation'),
 						(DataRouterStateHook.UseRouteLoaderData = 'useRouteLoaderData'),
 						(DataRouterStateHook.UseMatches = 'useMatches'),
-						(DataRouterStateHook.UseRevalidator = 'useRevalidator');
+						(DataRouterStateHook.UseRevalidator = 'useRevalidator'),
+						(DataRouterStateHook.UseNavigateStable = 'useNavigate'),
+						(DataRouterStateHook.UseRouteId = 'useRouteId');
 				})(DataRouterStateHook || (DataRouterStateHook = {}));
-			function dist_Router(_ref4) {
+			function dist_Router(_ref5) {
 				let {
 					basename: basenameProp = '/',
 					children = null,
@@ -17092,14 +17127,14 @@
 					navigationType = router_Action.Pop,
 					navigator,
 					static: staticProp = !1,
-				} = _ref4;
+				} = _ref5;
 				useInRouterContext() && invariant(!1);
 				let basename = basenameProp.replace(/^\/*/, '/'),
 					navigationContext = react.useMemo(() => ({ basename, navigator, static: staticProp }), [basename, navigator, staticProp]);
 				'string' == typeof locationProp && (locationProp = router_parsePath(locationProp));
 				let { pathname = '/', search = '', hash = '', state = null, key = 'default' } = locationProp,
 					locationContext = react.useMemo(() => {
-						let trailingPathname = stripBasename(pathname, basename);
+						let trailingPathname = router_stripBasename(pathname, basename);
 						return null == trailingPathname ? null : { location: { pathname: trailingPathname, search, hash, state, key }, navigationType };
 					}, [basename, pathname, search, hash, state, key, navigationType]);
 				return null == locationContext
@@ -17228,12 +17263,13 @@
 						rest = _objectWithoutPropertiesLoose(_ref4, _excluded),
 						{ basename } = react.useContext(NavigationContext),
 						isExternal = !1;
-					if ('string' == typeof to && dist_ABSOLUTE_URL_REGEX.test(to) && ((absoluteHref = to), dist_isBrowser)) {
-						let currentUrl = new URL(window.location.href),
-							targetUrl = to.startsWith('//') ? new URL(currentUrl.protocol + to) : new URL(to),
-							path = stripBasename(targetUrl.pathname, basename);
-						targetUrl.origin === currentUrl.origin && null != path ? (to = path + targetUrl.search + targetUrl.hash) : (isExternal = !0);
-					}
+					if ('string' == typeof to && dist_ABSOLUTE_URL_REGEX.test(to) && ((absoluteHref = to), dist_isBrowser))
+						try {
+							let currentUrl = new URL(window.location.href),
+								targetUrl = to.startsWith('//') ? new URL(currentUrl.protocol + to) : new URL(to),
+								path = router_stripBasename(targetUrl.pathname, basename);
+							targetUrl.origin === currentUrl.origin && null != path ? (to = path + targetUrl.search + targetUrl.hash) : (isExternal = !0);
+						} catch (e) {}
 					let href = (function useHref(to, _temp) {
 							let { relative } = void 0 === _temp ? {} : _temp;
 							useInRouterContext() || invariant(!1);
@@ -36270,10 +36306,10 @@
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
 			})('versions', []).push({
-				version: '3.30.0',
+				version: '3.30.1',
 				mode: IS_PURE ? 'pure' : 'global',
 				copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
-				license: 'https://github.com/zloirock/core-js/blob/v3.30.0/LICENSE',
+				license: 'https://github.com/zloirock/core-js/blob/v3.30.1/LICENSE',
 				source: 'https://github.com/zloirock/core-js',
 			});
 		},
@@ -51825,15 +51861,14 @@
 				IsCallable = __webpack_require__(2685),
 				RequireObjectCoercible = __webpack_require__(95339),
 				ToObject = __webpack_require__(14749),
-				callBound = __webpack_require__(62680),
+				safeConcat = __webpack_require__(80938),
 				reduce = __webpack_require__(43189),
 				$gOPD = Object.getOwnPropertyDescriptor,
 				$getOwnNames = Object.getOwnPropertyNames,
 				$getSymbols = Object.getOwnPropertySymbols,
-				$concat = callBound('Array.prototype.concat'),
 				getAll = $getSymbols
 					? function (obj) {
-							return $concat($getOwnNames(obj), $getSymbols(obj));
+							return safeConcat($getOwnNames(obj), $getSymbols(obj));
 					  }
 					: $getOwnNames,
 				isES5 = IsCallable($gOPD) && IsCallable($getOwnNames);
@@ -62725,6 +62760,7 @@
 					this.multiline && (result += 'm'),
 					this.dotAll && (result += 's'),
 					this.unicode && (result += 'u'),
+					this.unicodeSets && (result += 'v'),
 					this.sticky && (result += 'y'),
 					result
 				);
@@ -62795,6 +62831,38 @@
 					(descriptor && descriptor.get === polyfill) || defineProperty(proto, 'flags', { configurable: !0, enumerable: !1, get: polyfill }), polyfill
 				);
 			};
+		},
+		80938: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var $concat = __webpack_require__(67286)('%Array.prototype.concat%'),
+				callBind = __webpack_require__(89429),
+				$slice = __webpack_require__(62680)('Array.prototype.slice'),
+				isConcatSpreadable = __webpack_require__(66679)() && Symbol.isConcatSpreadable,
+				empty = [];
+			isConcatSpreadable && (empty[isConcatSpreadable] = !0);
+			var $concatApply = isConcatSpreadable ? callBind.apply($concat, empty) : null,
+				$concatCall = isConcatSpreadable ? null : callBind($concat, empty),
+				isArray = isConcatSpreadable ? __webpack_require__(39214) : null;
+			module.exports = isConcatSpreadable
+				? function safeArrayConcat(item) {
+						for (var i = 0; i < arguments.length; i += 1) {
+							var arg = arguments[i];
+							if (arg && 'object' == typeof arg && 'boolean' == typeof arg[isConcatSpreadable]) {
+								var arr = isArray(arg) ? $slice(arg) : [arg];
+								(arr[isConcatSpreadable] = !0), (arguments[i] = arr);
+							}
+						}
+						return $concatApply(arguments);
+				  }
+				: $concatCall;
+		},
+		39214: (module) => {
+			var toString = {}.toString;
+			module.exports =
+				Array.isArray ||
+				function (arr) {
+					return '[object Array]' == toString.call(arr);
+				};
 		},
 		63671: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';

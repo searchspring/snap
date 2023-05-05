@@ -1,4 +1,4 @@
-/*! For license information please see main.a82e5555.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.689fa5a4.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -5376,7 +5376,12 @@
 						var _props,
 							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_11___default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
-								(null == displaySettings ? void 0 : displaySettings.theme) || {}
+								(null == displaySettings ? void 0 : displaySettings.theme) || {},
+								{
+									arrayMerge: function arrayMerge(destinationArray, sourceArray) {
+										return sourceArray;
+									},
+								}
 							);
 						props.autoAdjustSlides &&
 							props.children.length < displaySettings.slidesPerView &&
@@ -15752,6 +15757,7 @@
 							flexDirection: 'column',
 							flex: '1 1 auto',
 							maxWidth: vertical || horizontalTerms ? 'auto' : '150px',
+							minWidth: '150px',
 							order: 1,
 							background: '#f8f8f8',
 							'& .ss__autocomplete__terms__options': {
@@ -15815,6 +15821,13 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
+						_props$hideFacets,
+						_props$vertical,
+						_props$hideHistory,
+						_props$hideTrending,
+						_props$vertical2,
+						_props$hideHistory2,
+						_props$hideTrending2,
 						_props,
 						_globalTheme$componen2,
 						_globalTheme$componen3,
@@ -15849,17 +15862,17 @@
 							0: {
 								columns: 2,
 								rows: 1,
-								hideFacets: props.hideFacets || !0,
-								vertical: props.vertical || !0,
-								hideHistory: props.hideHistory || !0,
-								hideTrending: props.hideTrending || !0,
+								hideFacets: null === (_props$hideFacets = props.hideFacets) || void 0 === _props$hideFacets || _props$hideFacets,
+								vertical: null === (_props$vertical = props.vertical) || void 0 === _props$vertical || _props$vertical,
+								hideHistory: null === (_props$hideHistory = props.hideHistory) || void 0 === _props$hideHistory || _props$hideHistory,
+								hideTrending: null === (_props$hideTrending = props.hideTrending) || void 0 === _props$hideTrending || _props$hideTrending,
 							},
 							540: {
 								columns: 3,
 								rows: 1,
-								vertical: props.vertical || !0,
-								hideHistory: props.hideHistory || !0,
-								hideTrending: props.hideTrending || !0,
+								vertical: null === (_props$vertical2 = props.vertical) || void 0 === _props$vertical2 || _props$vertical2,
+								hideHistory: null === (_props$hideHistory2 = props.hideHistory) || void 0 === _props$hideHistory2 || _props$hideHistory2,
+								hideTrending: null === (_props$hideTrending2 = props.hideTrending) || void 0 === _props$hideTrending2 || _props$hideTrending2,
 							},
 							768: { columns: 2, rows: 3 },
 						},
@@ -15872,7 +15885,7 @@
 							properties.onTermClick && properties.onTermClick(e),
 								(null == controller ? void 0 : controller.setFocused) && (null == controller || controller.setFocused());
 						},
-						themeOverride = {
+						themeDefaults = {
 							components: {
 								facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
 								facetGridOptions: { columns: 3, onClick: facetClickEvent },
@@ -15884,11 +15897,21 @@
 						},
 						displaySettings = (0, useDisplaySettings.o)(breakpoints) || {},
 						theme = cjs_default()(
-							themeOverride,
+							themeDefaults,
 							cjs_default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
-								(null == displaySettings ? void 0 : displaySettings.theme) || {}
-							)
+								(null == displaySettings ? void 0 : displaySettings.theme) || {},
+								{
+									arrayMerge: function arrayMerge(destinationArray, sourceArray) {
+										return sourceArray;
+									},
+								}
+							),
+							{
+								arrayMerge: function arrayMerge(destinationArray, sourceArray) {
+									return sourceArray;
+								},
+							}
 						),
 						input = (props = Object.assign({}, props, displaySettings, { theme })).input,
 						inputViewportOffsetBottom = 0;
@@ -16361,7 +16384,7 @@
 				emIfy = function emIfy(term, search) {
 					if (term && search) {
 						var match = term.match(escapeRegExp(search));
-						if (search && term && match && match.index) {
+						if (search && term && match && 'number' == typeof match.index) {
 							var beforeMatch = term.slice(0, match.index),
 								afterMatch = term.slice(match.index + search.length, term.length);
 							return (0, emotion_react_browser_esm.tZ)(
@@ -21402,7 +21425,12 @@
 						var _props,
 							theme = cjs_default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
-								(null == displaySettings ? void 0 : displaySettings.theme) || {}
+								(null == displaySettings ? void 0 : displaySettings.theme) || {},
+								{
+									arrayMerge: function arrayMerge(destinationArray, sourceArray) {
+										return sourceArray;
+									},
+								}
 							);
 						props = Object.assign({}, props, displaySettings, { theme });
 					}
@@ -23088,7 +23116,12 @@
 						),
 						theme = deepmerge__WEBPACK_IMPORTED_MODULE_6___default()(
 							(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme) || {},
-							(null == displaySettings ? void 0 : displaySettings.theme) || {}
+							(null == displaySettings ? void 0 : displaySettings.theme) || {},
+							{
+								arrayMerge: function arrayMerge(destinationArray, sourceArray) {
+									return sourceArray;
+								},
+							}
 						),
 						_props3 = (props = Object.assign({}, props, displaySettings, { theme })),
 						disableStyles = _props3.disableStyles,
@@ -24480,24 +24513,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
 			var hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				dist = __webpack_require__('../../node_modules/dequal/dist/index.mjs');
-			function useDeepCompareEffect(callback, dependencies) {
-				return (0, hooks_module.d4)(
-					callback,
-					(function useDeepCompareMemoize(value) {
-						var ref = (0, hooks_module.sO)(value),
-							signalRef = (0, hooks_module.sO)(0);
-						return (
-							(0, dist.J)(value, ref.current) || ((ref.current = value), (signalRef.current += 1)),
-							(0, hooks_module.Ye)(
-								function () {
-									return ref.current;
-								},
-								[signalRef.current]
-							)
-						);
-					})(dependencies)
-				);
-			}
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -24552,26 +24567,44 @@
 			}
 			function useDisplaySettings(breakpointsObj) {
 				if (breakpointsObj && Object.keys(breakpointsObj).length) {
-					var _useState2 = _slicedToArray((0, hooks_module.eJ)(getDisplaySettings(breakpointsObj)), 2),
+					var debouncedHandleResize,
+						_useState2 = _slicedToArray((0, hooks_module.eJ)(getDisplaySettings(breakpointsObj)), 2),
 						displaySettings = _useState2[0],
-						setDisplaySettings = _useState2[1];
-					return (
-						(0, hooks_module.d4)(function () {
-							var debouncedHandleResize = debounce(function () {
-								return (function handleResize() {
+						setDisplaySettings = _useState2[1],
+						resetResizeListener = function resetResizeListener() {
+							(debouncedHandleResize = debounce(function () {
+								!(function handleResize() {
 									setDisplaySettings(getDisplaySettings(breakpointsObj));
 								})();
-							});
+							}, 50)),
+								window.addEventListener('resize', debouncedHandleResize);
+						};
+					return (
+						(0, hooks_module.d4)(function () {
 							return (
-								window.addEventListener('resize', debouncedHandleResize),
+								resetResizeListener(),
 								function () {
 									return window.removeEventListener('resize', debouncedHandleResize);
 								}
 							);
 						}, []),
-						useDeepCompareEffect(
+						(function useDeepCompareEffect(callback, dependencies) {
+							return (0, hooks_module.d4)(callback, [
+								((value = dependencies),
+								(ref = (0, hooks_module.sO)(value)),
+								(signalRef = (0, hooks_module.sO)(0)),
+								(0, dist.J)(value, ref.current) || ((ref.current = value), (signalRef.current += 1)),
+								(0, hooks_module.Ye)(
+									function () {
+										return ref.current;
+									},
+									[signalRef.current]
+								)),
+							]);
+							var value, ref, signalRef;
+						})(
 							function () {
-								setDisplaySettings(getDisplaySettings(breakpointsObj));
+								setDisplaySettings(getDisplaySettings(breakpointsObj)), resetResizeListener();
 							},
 							[breakpointsObj]
 						),
@@ -24885,6 +24918,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
@@ -24892,18 +24926,24 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
 			var cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
-				cjs_default = __webpack_require__.n(cjs);
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				cjs_default = __webpack_require__.n(cjs),
+				css_escape = __webpack_require__('../../node_modules/css.escape/css.escape.js'),
+				css_escape_default = __webpack_require__.n(css_escape);
+			__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.unscopables.flat-map.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.find.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js');
+				__webpack_require__('../../node_modules/core-js/modules/es.array.find.js');
 			function _defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -25591,11 +25631,11 @@
 							(this.type = 'abstract'),
 							(this.targeters = {}),
 							(this._initialized = !1),
-							(this.handleError = function (err) {
+							(this.handleError = function (err, details) {
 								var event;
 								if (err instanceof ErrorEvent) event = err;
-								else if (err instanceof Error) event = new ErrorEvent('error', { error: err });
-								else if ('string' == typeof err) event = new ErrorEvent('error', { error: new Error(err) });
+								else if (err instanceof Error) event = new ErrorEvent('error', { error: err, message: err.message });
+								else if ('string' == typeof err || 'number' == typeof err) event = new ErrorEvent('error', { error: new Error(err.toString()) });
 								else if ('object' == typeof err && Object.keys(err).length)
 									try {
 										event = new ErrorEvent('error', { error: new Error(JSON.stringify(err)) });
@@ -25605,16 +25645,15 @@
 										filename = _event.filename,
 										colno = _event.colno,
 										lineno = _event.lineno,
-										stack = _event.error.stack,
-										message = _event.message,
-										timeStamp = _event.timeStamp,
 										beaconPayload = {
-											filename: filename || _this.id + ' (' + (_this.type.charAt(0).toUpperCase() + _this.type.slice(1)) + 'Controller)',
-											stack,
-											message,
+											filename,
+											stack: _event.error.stack,
+											message: _event.message,
 											colno,
 											lineno,
-											errortimestamp: timeStamp,
+											errortimestamp: _event.timeStamp,
+											details,
+											context: { controller: { id: _this.id, type: _this.type } },
 										};
 									_this.tracker.track.error(beaconPayload), _this.eventManager.fire('error', { controller: _this, error: err });
 								}
@@ -25847,33 +25886,28 @@
 					);
 				})(),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
-				cookies =
-					(__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-					{
-						set: function set(name, val, sameSite, expires) {
-							sameSite = sameSite || 'Lax';
-							var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
-							if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
-								var d = new Date();
-								d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
-							}
-							window.document.cookie = cookie;
-						},
-						get: function get(name) {
-							name += '=';
-							for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
-								for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
-								if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
-							}
-							return '';
-						},
-						unset: function unset(name) {
-							window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
-						},
-					});
+				cookies = {
+					set: function set(name, val, sameSite, expires) {
+						sameSite = sameSite || 'Lax';
+						var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
+						if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
+							var d = new Date();
+							d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
+						}
+						window.document.cookie = cookie;
+					},
+					get: function get(name) {
+						name += '=';
+						for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
+							for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
+							if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
+						}
+						return '';
+					},
+					unset: function unset(name) {
+						window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+					},
+				};
 			function getFlags() {
 				var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
 				userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
@@ -26767,23 +26801,36 @@
 											_document,
 											_document$querySelect,
 											target = e.target,
-											href =
-												(null == target ? void 0 : target.getAttribute('href')) ||
-												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+											resultHref =
+												null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
 													? void 0
-													: _result$mappings$core.url),
+													: _result$mappings$core.url,
+											elemHref = null == target ? void 0 : target.getAttribute('href'),
+											storedHref = -1 != (null == elemHref ? void 0 : elemHref.indexOf(resultHref)) ? resultHref : elemHref || resultHref,
 											scrollMap = {},
 											selector = (function generateHrefSelector(element, href) {
 												var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
 													level = 0,
 													elem = element;
-												for (; elem && level < levels; ) {
-													if (elem.querySelector('[href*="' + href + '"]') && elem.classList.value)
-														return elem.tagName + '.' + elem.classList.value.replace(/\s/g, '.') + ' [href*="' + href + '"]';
+												for (; elem && level <= levels; ) {
+													var innerHrefElem = elem.querySelector('[href*="' + href + '"]');
+													if (innerHrefElem) {
+														for (var selector = '', parentElem = innerHrefElem; parentElem && parentElem != elem.parentElement; ) {
+															var escapedClassSelector = parentElem.classList.value
+																.trim()
+																.split(' ')
+																.reduce(function (classes, classname) {
+																	return classname.trim() ? classes + '.' + css_escape_default()(classname.trim()) : classes;
+																}, '');
+															(selector = '' + parentElem.tagName + escapedClassSelector + (selector ? ' ' + selector : '')),
+																(parentElem = parentElem.parentElement);
+														}
+														return selector + '[href*="' + href + '"]';
+													}
 													(elem = elem.parentElement), level++;
 												}
 												return;
-											})(target, href),
+											})(target, storedHref),
 											domRect = selector
 												? null === (_document = document) ||
 												  void 0 === _document ||
@@ -26792,15 +26839,18 @@
 													? void 0
 													: _document$querySelect.getBoundingClientRect()
 												: void 0;
-										if (selector && href && domRect) {
-											var storableRequestParams = getStorableRequestParams(JSON.parse(_this.storage.get('lastStringyParams')));
-											scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href, selector };
-										}
+										if (selector || storedHref || domRect)
+											try {
+												var storableRequestParams = getStorableRequestParams(JSON.parse(_this.storage.get('lastStringyParams')));
+												scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href: storedHref, selector };
+											} catch (err) {
+												_this.log.warn('Failed to save scollMap!', err);
+											}
 										_this.storage.set('scrollMap', scrollMap);
 										var _result$attributes = result.attributes,
 											intellisuggestData = _result$attributes.intellisuggestData,
 											intellisuggestSignature = _result$attributes.intellisuggestSignature,
-											event = _this.tracker.track.product.click({ intellisuggestData, intellisuggestSignature, href });
+											event = _this.tracker.track.product.click({ intellisuggestData, intellisuggestSignature, href: elemHref || resultHref });
 										return (
 											_this.eventManager.fire('track.product.click', {
 												controller: _assertThisInitialized(_this),
@@ -27103,32 +27153,42 @@
 													case 110:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
 													case 112:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 132);
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 137);
 														break;
 													case 116:
 														if (((_context.prev = 116), (_context.t3 = _context.catch(5)), !_context.t3)) {
-															_context.next = 132;
+															_context.next = 137;
 															break;
 														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 122 : 500 === _context.t4 ? 125 : 128);
+														if (!_context.t3.err || !_context.t3.fetchDetails) {
+															_context.next = 133;
+															break;
+														}
+														(_context.t4 = _context.t3.fetchDetails.status),
+															(_context.next = 429 === _context.t4 ? 123 : 500 === _context.t4 ? 125 : 127);
 														break;
-													case 122:
+													case 123:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 130)
+															_context.abrupt('break', 129)
 														);
 													case 125:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_this.log.error(_this.store.error),
-															_context.abrupt('break', 130)
+															_context.abrupt('break', 129)
 														);
-													case 128:
-														return _this.log.error(_context.t3), _context.abrupt('break', 130);
-													case 130:
-														(_this.store.loading = !1), _this.handleError(_context.t3);
-													case 132:
+													case 127:
+														return (_this.store.error = { type: types.N.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 129);
+													case 129:
+														_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 136);
+														break;
+													case 133:
+														(_this.store.error = { type: types.N.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
+															_this.log.error(_context.t3),
+															_this.handleError(_context.t3);
+													case 136:
+														_this.store.loading = !1;
+													case 137:
 													case 'end':
 														return _context.stop();
 												}
@@ -27351,6 +27411,7 @@
 																							maxScrolls,
 																							maxCheckCount,
 																							scrollBackCount,
+																							checkCount,
 																							scrolledElem,
 																							checkAndScroll;
 																						return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
@@ -27364,12 +27425,13 @@
 																											500,
 																											(checkTime = 50),
 																											(maxScrolls = Math.ceil(500 / checkTime)),
-																											(maxCheckCount = maxScrolls + 1),
+																											(maxCheckCount = maxScrolls + 2),
 																											(scrollBackCount = 0),
+																											(checkCount = 0),
 																											(scrolledElem = void 0),
 																											(checkAndScroll = function checkAndScroll() {
 																												var elem = document.querySelector(null == element ? void 0 : element.selector);
-																												if ((elem && scrollBackCount++, elem && scrollBackCount < maxCheckCount)) {
+																												if ((elem ? scrollBackCount++ : checkCount++, elem)) {
 																													var y = elem.getBoundingClientRect().y;
 																													if (y > offset + 1 || y < offset - 1) {
 																														elem.scrollIntoView();
@@ -27379,21 +27441,21 @@
 																												}
 																												return !1;
 																											});
-																									case 8:
-																										if (!(checkAndScroll() || scrollBackCount <= maxScrolls)) {
-																											_context5.next = 13;
+																									case 9:
+																										if (!(checkAndScroll() || (scrollBackCount <= maxScrolls && checkCount <= maxCheckCount))) {
+																											_context5.next = 14;
 																											break;
 																										}
 																										return (
-																											(_context5.next = 11),
+																											(_context5.next = 12),
 																											new Promise(function (resolve) {
 																												return setTimeout(resolve, checkTime);
 																											})
 																										);
-																									case 11:
-																										_context5.next = 8;
+																									case 12:
+																										_context5.next = 9;
 																										break;
-																									case 13:
+																									case 14:
 																										scrolledElem
 																											? controller.log.debug('restored position to: ', scrolledElem)
 																											: controller.log.debug(
@@ -27401,7 +27463,7 @@
 																													null == element ? void 0 : element.selector
 																											  ),
 																											resolve();
-																									case 15:
+																									case 16:
 																									case 'end':
 																										return _context5.stop();
 																								}
@@ -28367,32 +28429,42 @@
 													case 58:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
 													case 60:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 80);
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 85);
 														break;
 													case 64:
 														if (((_context.prev = 64), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 80;
+															_context.next = 85;
 															break;
 														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 70 : 500 === _context.t4 ? 73 : 76);
+														if (!_context.t3.err || !_context.t3.fetchDetails) {
+															_context.next = 81;
+															break;
+														}
+														(_context.t4 = _context.t3.fetchDetails.status),
+															(_context.next = 429 === _context.t4 ? 71 : 500 === _context.t4 ? 73 : 75);
 														break;
-													case 70:
+													case 71:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 78)
+															_context.abrupt('break', 77)
 														);
 													case 73:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_this.log.error(_this.store.error),
-															_context.abrupt('break', 78)
+															_context.abrupt('break', 77)
 														);
-													case 76:
-														return _this.log.error(_context.t3), _context.abrupt('break', 78);
-													case 78:
-														(_this.store.loading = !1), _this.handleError(_context.t3);
-													case 80:
+													case 75:
+														return (_this.store.error = { type: types.N.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 77);
+													case 77:
+														_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 84);
+														break;
+													case 81:
+														(_this.store.error = { type: types.N.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
+															_this.log.error(_context.t3),
+															_this.handleError(_context.t3);
+													case 84:
+														_this.store.loading = !1;
+													case 85:
 													case 'end':
 														return _context.stop();
 												}
@@ -29133,13 +29205,11 @@
 																	break;
 																case 12:
 																	_this.config.settings.integratedSpellCorrection
-																		? input &&
-																		  _this.store.terms.length &&
-																		  _this.store.terms[0].value != input.value &&
+																		? _this.store.search.correctedQuery &&
 																		  (actionUrl =
 																				null === (_actionUrl = actionUrl) || void 0 === _actionUrl
 																					? void 0
-																					: _actionUrl.set('fallbackQuery', _this.store.terms[0].value))
+																					: _actionUrl.set('fallbackQuery', _this.store.search.correctedQuery.string))
 																		: _this.store.search.originalQuery &&
 																		  ((input.value =
 																				null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
@@ -29237,10 +29307,8 @@
 																	break;
 																case 11:
 																	_this.config.settings.integratedSpellCorrection
-																		? input &&
-																		  _this.store.terms.length &&
-																		  _this.store.terms[0].value != input.value &&
-																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.terms[0].value)
+																		? _this.store.search.correctedQuery &&
+																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.search.correctedQuery.string)
 																		: _this.store.search.originalQuery &&
 																		  (input &&
 																				(input.value =
@@ -29368,17 +29436,15 @@
 														void 0 === _this$config$settings10
 															? void 0
 															: _this$config$settings10.showResults);
-												value
-													? (_this.store.resetTerms(),
-													  (_this.handlers.input.timeoutDelay = setTimeout(function () {
-															_this.store.state.locks.terms.unlock(),
-																_this.store.state.locks.facets.unlock(),
-																(trendingResultsEnabled || historyResultsEnabled) && _this.urlManager.set({ query: '' }).go(),
-																_this.urlManager.set({ query: _this.store.state.input }).go();
-													  }, 200)))
-													: (_this.store.reset(),
-													  _this.urlManager.reset().go(),
-													  trendingResultsEnabled ? _this.store.trending[0].preview() : historyResultsEnabled && _this.store.history[0].preview());
+												_this.urlManager.reset().go(),
+													value
+														? (_this.handlers.input.timeoutDelay = setTimeout(function () {
+																_this.store.state.locks.terms.unlock(),
+																	_this.store.state.locks.facets.unlock(),
+																	_this.urlManager.set({ query: _this.store.state.input }).go();
+														  }, 200))
+														: (_this.store.reset(),
+														  trendingResultsEnabled ? _this.store.trending[0].preview() : historyResultsEnabled && _this.store.history[0].preview());
 											}
 										}
 									},
@@ -29576,32 +29642,42 @@
 													case 63:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
 													case 65:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 85);
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 90);
 														break;
 													case 69:
 														if (((_context4.prev = 69), (_context4.t3 = _context4.catch(5)), !_context4.t3)) {
-															_context4.next = 85;
+															_context4.next = 90;
 															break;
 														}
-														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 75 : 500 === _context4.t4 ? 78 : 81);
+														if (!_context4.t3.err || !_context4.t3.fetchDetails) {
+															_context4.next = 86;
+															break;
+														}
+														(_context4.t4 = _context4.t3.fetchDetails.status),
+															(_context4.next = 429 === _context4.t4 ? 76 : 500 === _context4.t4 ? 78 : 80);
 														break;
-													case 75:
+													case 76:
 														return (
 															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-															_this.log.warn(_this.store.error),
-															_context4.abrupt('break', 83)
+															_context4.abrupt('break', 82)
 														);
 													case 78:
 														return (
 															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_this.log.error(_this.store.error),
-															_context4.abrupt('break', 83)
+															_context4.abrupt('break', 82)
 														);
-													case 81:
-														return _this.log.error(_context4.t3), _context4.abrupt('break', 83);
-													case 83:
-														(_this.store.loading = !1), _this.handleError(_context4.t3);
-													case 85:
+													case 80:
+														return (_this.store.error = { type: types.N.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 82);
+													case 82:
+														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 89);
+														break;
+													case 86:
+														(_this.store.error = { type: types.N.ERROR, message: 'Something went wrong... - ' + _context4.t3 }),
+															_this.log.error(_context4.t3),
+															_this.handleError(_context4.t3);
+													case 89:
+														_this.store.loading = !1;
+													case 90:
 													case 'end':
 														return _context4.stop();
 												}
@@ -30625,6 +30701,9 @@
 												cachedResponse,
 												response,
 												responseJSON,
+												_response,
+												_response2,
+												_response3,
 												_this = this;
 											return Abstract_regeneratorRuntime().wrap(
 												function _callee$(_context) {
@@ -30646,12 +30725,16 @@
 																}
 																return (this.retryCount = 0), (this.retryDelay = 1e3), _context.abrupt('return', cachedResponse);
 															case 7:
-																return (_context.next = 9), this.fetchApi(url, init);
-															case 9:
-																return (response = _context.sent), (_context.next = 12), null == response ? void 0 : response.json();
-															case 12:
+																return (_context.prev = 7), (_context.next = 10), this.fetchApi(url, init);
+															case 10:
+																return (
+																	(response = _context.sent),
+																	(_context.next = 13),
+																	null === (_response = response) || void 0 === _response ? void 0 : _response.json()
+																);
+															case 13:
 																if (((responseJSON = _context.sent), !(response.status >= 200 && response.status < 300))) {
-																	_context.next = 20;
+																	_context.next = 21;
 																	break;
 																}
 																return (
@@ -30660,40 +30743,56 @@
 																	cacheKey && this.cache.set(cacheKey, responseJSON),
 																	_context.abrupt('return', responseJSON)
 																);
-															case 20:
+															case 21:
 																if (429 != response.status) {
-																	_context.next = 32;
-																	break;
-																}
-																if (!(this.retryCount < this.configuration.maxRetry)) {
 																	_context.next = 31;
 																	break;
 																}
+																if (!(this.retryCount < this.configuration.maxRetry)) {
+																	_context.next = 30;
+																	break;
+																}
 																return (
-																	(_context.next = 24),
+																	(_context.next = 25),
 																	new Promise(function (resolve) {
 																		return setTimeout(resolve, _this.retryDelay);
 																	})
 																);
-															case 24:
-																return (
-																	(this.retryDelay = 1e3 * fibonacci(this.retryCount)),
-																	this.retryCount++,
-																	(_context.next = 28),
-																	this.request(context, cacheKey)
-																);
-															case 28:
-																return _context.abrupt('return', _context.sent);
+															case 25:
+																throw ((this.retryDelay = 1e3 * fibonacci(this.retryCount)), this.retryCount++, new Error('Rate limited.'));
+															case 30:
+																throw new Error('Retry rate limit exceeded.');
 															case 31:
-															case 32:
-																throw response.status;
-															case 33:
+																throw new Error('Unexpected Response Status.');
+															case 34:
+																if (((_context.prev = 34), (_context.t0 = _context.catch(7)), 'Rate limited.' != _context.t0.message)) {
+																	_context.next = 40;
+																	break;
+																}
+																return (_context.next = 39), this.request(context, cacheKey);
+															case 39:
+																return _context.abrupt('return', _context.sent);
+															case 40:
+																throw {
+																	err: _context.t0,
+																	fetchDetails: Object.assign(
+																		{
+																			status: null === (_response2 = response) || void 0 === _response2 ? void 0 : _response2.status,
+																			message:
+																				(null === (_response3 = response) || void 0 === _response3 ? void 0 : _response3.statusText) || 'FAILED',
+																			url,
+																		},
+																		init
+																	),
+																};
+															case 41:
 															case 'end':
 																return _context.stop();
 														}
 												},
 												_callee,
-												this
+												this,
+												[[7, 34]]
 											);
 										})
 									)),
@@ -33366,7 +33465,6 @@
 					HybridAPI
 				);
 			})(API);
-			__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js');
 			function charsParams(params) {
 				if ('object' != typeof params) throw new Error('function requires an object');
 				return Object.keys(params).reduce(function (count, key) {
@@ -36400,14 +36498,18 @@
 			}
 			var SearchPaginationStore = (function () {
 					function SearchPaginationStore(config, services) {
-						var _meta$pagination,
+						var _config$settings,
+							_meta$pagination,
+							_this = this,
 							paginationData =
 								arguments.length > 2 && void 0 !== arguments[2]
 									? arguments[2]
 									: { page: void 0, pageSize: void 0, totalResults: void 0, totalPages: void 0 },
 							meta = arguments.length > 3 ? arguments[3] : void 0;
-						SearchPaginationStore_classCallCheck(this, SearchPaginationStore),
-							(this.services = services),
+						SearchPaginationStore_classCallCheck(this, SearchPaginationStore);
+						var paginationSettings =
+							null == config || null === (_config$settings = config.settings) || void 0 === _config$settings ? void 0 : _config$settings.pagination;
+						(this.services = services),
 							(this.controllerConfig = config),
 							(this.page = paginationData.page),
 							(this.pageSize = paginationData.pageSize),
@@ -36416,13 +36518,17 @@
 								null == meta || null === (_meta$pagination = meta.pagination) || void 0 === _meta$pagination
 									? void 0
 									: _meta$pagination.defaultPageSize),
-							(this.totalPages = paginationData.totalPages),
-							(this.pageSizeOptions = [
-								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
-								{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
-								{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
-							]),
+							(this.totalPages = paginationData.totalPages);
+						var pageSizeOptions = (null == paginationSettings ? void 0 : paginationSettings.pageSizeOptions) || [
+							{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
+							{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
+							{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
+						];
+						(this.pageSizeOptions = pageSizeOptions.map(function (pageOption) {
+							return new PageSizeOption(_this.services, _this.pageSize, { label: pageOption.label, value: pageOption.value });
+						})),
 							(0, mobx_esm.rC)(this, {
+								pageSizeOptions: mobx_esm.LO,
 								page: mobx_esm.LO,
 								pageSize: mobx_esm.LO,
 								totalResults: mobx_esm.LO,
@@ -36527,19 +36633,31 @@
 						SearchPaginationStore
 					);
 				})(),
+				PageSizeOption = SearchPaginationStore_createClass(function PageSizeOption(services, currentPageSize, option) {
+					var _this$services;
+					SearchPaginationStore_classCallCheck(this, PageSizeOption),
+						(this.services = services),
+						(this.value = option.value),
+						(this.label = option.label),
+						(this.url =
+							null === (_this$services = this.services) || void 0 === _this$services
+								? void 0
+								: _this$services.urlManager.remove('page').set('pageSize', option.value)),
+						(this.active = Boolean(currentPageSize == option.value));
+				}),
 				Page = SearchPaginationStore_createClass(function Page(services, page) {
-					var _this$services, _this$services$urlMan;
+					var _this$services2, _this$services2$urlMa;
 					SearchPaginationStore_classCallCheck(this, Page),
 						(this.services = services),
 						(this.number = page.number),
 						(this.active = page.active || !1),
 						(this.url =
-							null === (_this$services = this.services) ||
-							void 0 === _this$services ||
-							null === (_this$services$urlMan = _this$services.urlManager) ||
-							void 0 === _this$services$urlMan
+							null === (_this$services2 = this.services) ||
+							void 0 === _this$services2 ||
+							null === (_this$services2$urlMa = _this$services2.urlManager) ||
+							void 0 === _this$services2$urlMa
 								? void 0
-								: _this$services$urlMan.set('page', this.number)),
+								: _this$services2$urlMa.set('page', this.number)),
 						(this.key = this.url.href);
 				});
 			function SearchSortingStore_classCallCheck(instance, Constructor) {
@@ -37775,18 +37893,21 @@
 			function AutocompleteQueryStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			var AutocompleteQueryStore = AutocompleteQueryStore_createClass(function AutocompleteQueryStore(services, autocomplete, search) {
+			var AutocompleteQueryStore = AutocompleteQueryStore_createClass(function AutocompleteQueryStore(services, autocomplete, search, config) {
 					AutocompleteQueryStore_classCallCheck(this, AutocompleteQueryStore);
-					var observables = {};
-					null != search &&
+					var _config$settings,
+						observables = {};
+					(null != search &&
 						search.query &&
 						((this.query = new AutocompleteQueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
-						null != autocomplete &&
-							autocomplete.correctedQuery &&
-							autocomplete.query &&
-							((this.originalQuery = new AutocompleteQueryStore_Query(services.urlManager, autocomplete.query)),
-							(observables.originalQuery = mobx_esm.LO)),
-						(0, mobx_esm.rC)(this, observables);
+					null != autocomplete && autocomplete.correctedQuery) &&
+						(null !== (_config$settings = config.settings) && void 0 !== _config$settings && _config$settings.integratedSpellCorrection
+							? ((this.correctedQuery = new AutocompleteQueryStore_Query(services.urlManager, autocomplete.correctedQuery)),
+							  (observables.correctedQuery = mobx_esm.LO))
+							: autocomplete.query &&
+							  ((this.originalQuery = new AutocompleteQueryStore_Query(services.urlManager, autocomplete.query)),
+							  (observables.originalQuery = mobx_esm.LO)));
+					(0, mobx_esm.rC)(this, observables);
 				}),
 				AutocompleteQueryStore_Query = AutocompleteQueryStore_createClass(function Query(urlManager, query) {
 					AutocompleteQueryStore_classCallCheck(this, Query),
@@ -38260,7 +38381,7 @@
 											)),
 											data.autocomplete && this.state.locks.terms.lock()),
 										(this.merchandising = new SearchMerchandisingStore.A(this.services, data.merchandising || {})),
-										(this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {})),
+										(this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {}, this.config)),
 										this.state.locks.facets.locked ||
 											(this.facets = new AutocompleteFacetStore(
 												this.config,
@@ -41033,7 +41154,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.43.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41119,20 +41240,19 @@
 									if ((null != data && data.stack) || (null != data && data.message)) {
 										var context = _this.context;
 										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-										var userAgent = data.userAgent,
-											href = data.href,
+										var href = data.href,
 											filename = data.filename,
 											stack = data.stack,
 											message = data.message,
 											colno = data.colno,
 											lineno = data.lineno,
 											errortimestamp = data.errortimestamp,
+											details = data.details,
 											payload = {
 												type: BeaconType.ERROR,
 												category: BeaconCategory.RUNTIME,
 												context,
 												event: {
-													userAgent: userAgent || navigator.userAgent,
 													href: href || window.location.href,
 													filename,
 													stack,
@@ -41140,6 +41260,8 @@
 													colno,
 													lineno,
 													errortimestamp,
+													details,
+													context: data.context,
 												},
 											};
 										if (
@@ -41508,7 +41630,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.43.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -42811,7 +42933,7 @@
 						null,
 						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
 					),
-					(0, esm.kt)('div', { class: 'header' }, (0, esm.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.kt)('div', { class: 'header' }, (0, esm.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENTS')),
 					(0, esm.kt)('hr', null),
 					(0, esm.kt)(MDXContent, { mdxType: 'Readme' })
 				);
@@ -43434,7 +43556,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[431],
+			[700],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
