@@ -1,4 +1,4 @@
-/*! For license information please see main.64dc596f.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.75153f8a.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -36528,7 +36528,6 @@
 							return new PageSizeOption(_this.services, _this.pageSize, { label: pageOption.label, value: pageOption.value });
 						})),
 							(0, mobx_esm.rC)(this, {
-								pageSizeOptions: mobx_esm.LO,
 								page: mobx_esm.LO,
 								pageSize: mobx_esm.LO,
 								totalResults: mobx_esm.LO,
@@ -41154,7 +41153,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.3', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41630,7 +41629,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
