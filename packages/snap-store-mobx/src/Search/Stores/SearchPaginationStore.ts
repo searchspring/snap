@@ -60,7 +60,6 @@ export class SearchPaginationStore {
 		);
 
 		makeObservable(this, {
-			pageSizeOptions: observable,
 			page: observable,
 			pageSize: observable,
 			totalResults: observable,
