@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+### Bug Fixes
+
+- **preact-components-facetslider:** bugfix for slider handle hanging after clear all facets reset ([93c5d6d](https://github.com/searchspring/snap/commit/93c5d6df608a43ecc8b34d5c5baa47b83ae40d49))
+
 ## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
 
 **Note:** Version bump only for package @searchspring/snap
