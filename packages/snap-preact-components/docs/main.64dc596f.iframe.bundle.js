@@ -1,4 +1,4 @@
-/*! For license information please see main.689fa5a4.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.64dc596f.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -10513,6 +10513,7 @@
 						_facet$active6,
 						_facet$active7,
 						_facet$active8,
+						_facet$active9,
 						_facet$range,
 						_facet$range2,
 						_properties$facet3,
@@ -10558,10 +10559,10 @@
 									? 10 * (null === (_properties$facet4 = properties.facet) || void 0 === _properties$facet4 ? void 0 : _properties$facet4.step)
 									: 20)
 						: (tickSize = Number(tickSize));
-					var _facet$active9,
-						_facet$active10,
+					var _facet$active10,
 						_facet$active11,
 						_facet$active12,
+						_facet$active13,
 						_useState2 = _slicedToArray(
 							(0, hooks_module.eJ)([
 								null === (_facet$active = facet.active) || void 0 === _facet$active ? void 0 : _facet$active.low,
@@ -10580,21 +10581,20 @@
 						),
 						active = _useState4[0],
 						setActive = _useState4[1];
-					((null !== (_facet$active5 = facet.active) &&
-						void 0 !== _facet$active5 &&
-						_facet$active5.low &&
-						null !== (_facet$active6 = facet.active) &&
-						void 0 !== _facet$active6 &&
-						_facet$active6.high &&
-						values[0] != (null === (_facet$active7 = facet.active) || void 0 === _facet$active7 ? void 0 : _facet$active7.low)) ||
-						values[1] != (null === (_facet$active8 = facet.active) || void 0 === _facet$active8 ? void 0 : _facet$active8.high)) &&
+					((((null !== (_facet$active5 = facet.active) && void 0 !== _facet$active5 && _facet$active5.low) ||
+						0 === (null === (_facet$active6 = facet.active) || void 0 === _facet$active6 ? void 0 : _facet$active6.low)) &&
+						null !== (_facet$active7 = facet.active) &&
+						void 0 !== _facet$active7 &&
+						_facet$active7.high &&
+						values[0] != (null === (_facet$active8 = facet.active) || void 0 === _facet$active8 ? void 0 : _facet$active8.low)) ||
+						values[1] != (null === (_facet$active9 = facet.active) || void 0 === _facet$active9 ? void 0 : _facet$active9.high)) &&
 						(setActive([
-							null === (_facet$active9 = facet.active) || void 0 === _facet$active9 ? void 0 : _facet$active9.low,
-							null === (_facet$active10 = facet.active) || void 0 === _facet$active10 ? void 0 : _facet$active10.high,
+							null === (_facet$active10 = facet.active) || void 0 === _facet$active10 ? void 0 : _facet$active10.low,
+							null === (_facet$active11 = facet.active) || void 0 === _facet$active11 ? void 0 : _facet$active11.high,
 						]),
 						setValues([
-							null === (_facet$active11 = facet.active) || void 0 === _facet$active11 ? void 0 : _facet$active11.low,
-							null === (_facet$active12 = facet.active) || void 0 === _facet$active12 ? void 0 : _facet$active12.high,
+							null === (_facet$active12 = facet.active) || void 0 === _facet$active12 ? void 0 : _facet$active12.low,
+							null === (_facet$active13 = facet.active) || void 0 === _facet$active13 ? void 0 : _facet$active13.high,
 						]));
 					var _useRanger = (0, react_ranger.S)({
 							values: active,
@@ -41154,7 +41154,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41630,7 +41630,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
