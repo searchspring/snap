@@ -70,6 +70,26 @@ let config: SnapConfig = {
 						restorePosition: {
 							enabled: true,
 						},
+						pagination: {
+							pageSizeOptions: [
+								{
+									value: 12,
+									label: 'Show 12',
+								},
+								{
+									value: 24,
+									label: 'Show 24',
+								},
+								{
+									value: 48,
+									label: 'Show 48',
+								},
+								{
+									value: 72,
+									label: 'Show 72',
+								},
+							],
+						},
 					},
 				},
 				targeters: [
