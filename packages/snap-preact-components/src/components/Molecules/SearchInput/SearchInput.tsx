@@ -4,11 +4,13 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import { useRef } from 'preact/hooks';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { useEffect } from 'react';
 
 const CSS = {
 	searchInput: ({ theme }: { theme: Theme }) =>
@@ -46,7 +48,8 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		...properties.theme?.components?.searchInput,
 	};
 
-	const { placeholder, onChange, hideIcon, disableStyles, style, className } = props;
+	const { placeholder, onChange, hideIcon, value, disableStyles, style, className } = props;
+	const inputRef = useRef(null);
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -69,16 +72,39 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	// const [mounted, setMounted] = useState(false);
+	// let [count, setCount] = useState(0);
+
+	useEffect(() => {
+		// setCount(count++);
+		// console.log(count)
+
+		console.log('rerender');
+		if (inputRef) {
+			console.log('focus');
+			inputRef.current.focus();
+		}
+
+		// if (!mounted){
+		// 	console.log('first mount')
+
+		// 	setMounted(true);
+		// }
+	}, []);
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search-input', className)}>
 				{!hideIcon && <Icon {...subProps.icon} icon="search" />}
 				<input
+					ref={inputRef}
 					type="text"
 					className="ss__search-input__input"
 					onChange={(e) => {
 						onChange && onChange(e);
 					}}
+					value={value}
 					placeholder={placeholder}
 				/>
 			</div>
@@ -90,6 +116,7 @@ export interface SearchInputProps extends ComponentProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	hideIcon?: boolean;
+	value?: string;
 }
 
 interface SearchInputSubProps {

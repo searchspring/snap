@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -283,7 +282,12 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						}
 					>
 						{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-							<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+							<SearchInput
+								value={facet.search.input}
+								{...subProps.searchInput}
+								onChange={searchableFacet.searchFilter}
+								placeholder={`Search ${facet.label}`}
+							/>
 						)}
 						<div className={classnames('ss__facet__options', className)}>
 							{(() => {
