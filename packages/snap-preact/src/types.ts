@@ -9,7 +9,7 @@ import type {
 	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { SearchStore, AutocompleteStore, FinderStore, RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { UrlManager, UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { UrlManager, UrlTranslatorConfig, UrlState } from '@searchspring/snap-url-manager';
 import type { EventManager } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
@@ -26,8 +26,8 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
-type initialUrlConfig = {
-	[any: string]: any;
+export type initialUrlConfig = {
+	state: UrlState;
 	ignoreList?: string[];
 };
 

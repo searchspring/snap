@@ -1,69 +1,67 @@
-import type { UrlState, UrlStateFilter } from '@searchspring/snap-url-manager';
-import { SearchRequestModelFilterRange } from '@searchspring/snapi-types';
+import type { UrlState, UrlStateFilter, UrlStateRangeValue } from '@searchspring/snap-url-manager';
+import { initialUrlConfig } from '../types';
 import deepmerge from 'deepmerge';
 
-export const setInitialUrlState = (intitialStateConfig: any, _initialUrlState: UrlState) => {
-	let { ignoreList, sorts, filters, pagination } = intitialStateConfig;
+export const setInitialUrlState = (intitialStateConfig: initialUrlConfig, _initialUrlState: UrlState) => {
+	let { ignoreList, state } = intitialStateConfig;
 
-	ignoreList = (ignoreList || []).concat(['query', 'tag']);
+	if (state) {
+		let { sort, filter, page, pageSize } = state;
 
-	if (!Object.keys(_initialUrlState).filter((key) => ignoreList.indexOf(key) == -1).length) {
-		let initialUrlState = { ..._initialUrlState };
+		ignoreList = (ignoreList || []).concat(['query', 'tag']);
 
-		if (pagination?.page) {
-			initialUrlState.page = pagination.page;
-		}
+		if (!Object.keys(_initialUrlState).filter((key) => ignoreList!.indexOf(key) == -1).length) {
+			let initialUrlState = { ..._initialUrlState };
 
-		if (pagination?.pageSize) {
-			initialUrlState.pageSize = pagination.pageSize;
-		}
+			if (page) {
+				initialUrlState.page = page;
+			}
 
-		if (sorts && sorts.length) {
-			sorts.map((sort: any) => {
-				if (!sort.field || !sort.direction) {
-					console.log('valid sort requires field and direction');
-				}
+			if (pageSize) {
+				initialUrlState.pageSize = pageSize;
+			}
 
-				if (sort.direction != 'asc' && sort.direction != 'desc') {
-					console.log('valid sort directions: asc, desc');
-				}
-				if (sort.field && sort.direction) {
-					initialUrlState.sort = {
-						field: sort.field,
-						direction: sort.direction,
-					};
-				}
-			});
-		}
+			if (sort) {
+				initialUrlState.sort = sort;
+			}
 
-		if (filters && filters?.length) {
-			filters.map((filter: any) => {
-				const baseKey = filter.background ? 'bgfilter' : 'filter';
-				if (filter.type == 'value') {
-					const initFilterState = initialUrlState[baseKey] as UrlStateFilter;
+			if (filter) {
+				if (initialUrlState.filter) {
+					Object.keys(filter).map((filterField) => {
+						const baseKey = 'filter';
 
-					initialUrlState[baseKey] = deepmerge(initFilterState, {
-						[filter.field]: (initialUrlState[baseKey] && initFilterState[filter.field] ? [initFilterState[filter.field]] : []).concat([filter.value]),
+						//is it a range type?
+						if (Object.keys(filter![filterField]).indexOf('low' || 'high') > -1) {
+							const keyLow = baseKey + '.' + filterField + '.low';
+							const keyHigh = baseKey + '.' + filterField + '.high';
+
+							const low = (filter![filterField] as UrlStateRangeValue).low ?? '*';
+							const high = (filter![filterField] as UrlStateRangeValue).high ?? '*';
+
+							initialUrlState.filter = {
+								...initialUrlState.filter,
+								[filterField]: {
+									low: ((initialUrlState.filter && (initialUrlState.filter as any)[keyLow]) || []).concat([low]),
+									high: ((initialUrlState.filter && (initialUrlState.filter as any)[keyHigh]) || []).concat([high]),
+								},
+							};
+						} else {
+							const initFilterState = initialUrlState[baseKey] as UrlStateFilter;
+							initialUrlState[baseKey] = deepmerge(initFilterState, {
+								[filterField]: (initialUrlState[baseKey] && initFilterState[filterField] ? [initFilterState[filterField]] : []).concat(
+									filter![filterField]
+								),
+							});
+						}
 					});
-				} else if (filter.type == 'range') {
-					const keyLow = baseKey + '.' + filter.field + '.low';
-					const keyHigh = baseKey + '.' + filter.field + '.high';
-
-					const low = (filter as SearchRequestModelFilterRange)?.value?.low ?? '*';
-					const high = (filter as SearchRequestModelFilterRange)?.value?.high ?? '*';
-
-					initialUrlState.filter = {
-						...initialUrlState.filter,
-						[filter.field]: {
-							low: ((initialUrlState.filter && (initialUrlState.filter[keyLow] as any)) || []).concat([low]),
-							high: ((initialUrlState.filter && (initialUrlState.filter[keyHigh] as any)) || []).concat([high]),
-						},
-					};
+				} else {
+					initialUrlState.filter = filter;
 				}
-			});
+			}
+			return initialUrlState;
+		} else {
+			return {};
 		}
-
-		return initialUrlState;
 	} else {
 		return {};
 	}

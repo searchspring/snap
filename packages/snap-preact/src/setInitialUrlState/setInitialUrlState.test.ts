@@ -3,31 +3,25 @@ import { setInitialUrlState } from './setInitialUrlState';
 describe('setInitialUrlState function', () => {
 	it('sets initial foreground filters', () => {
 		let initialConfig = {
-			filters: [
-				{
-					field: 'color_family',
-					value: 'Blue',
-					type: 'value',
-					background: false,
+			state: {
+				filter: {
+					color_family: ['Blue'],
 				},
-			],
+			},
 		};
 
 		const initState = setInitialUrlState(initialConfig, {});
 
-		expect(initState).toStrictEqual({ filter: { color_family: ['Blue'] } });
+		expect(initState).toStrictEqual(initialConfig.state);
 	});
 
 	it('doesnt set initial filters when url state is pre-populated', () => {
 		let initialConfig = {
-			filters: [
-				{
-					field: 'color_family',
-					value: 'Blue',
-					type: 'value',
-					background: false,
+			state: {
+				filter: {
+					color_family: ['Blue'],
 				},
-			],
+			},
 		};
 
 		const populatedUrlState = {
@@ -43,14 +37,11 @@ describe('setInitialUrlState function', () => {
 
 	it('default ignore list includes query and tag', () => {
 		let initialConfig = {
-			filters: [
-				{
-					field: 'color_family',
-					value: 'Blue',
-					type: 'value',
-					background: false,
+			state: {
+				filter: {
+					color_family: ['Blue'],
 				},
-			],
+			},
 		};
 
 		const populatedUrlState = {
@@ -65,15 +56,12 @@ describe('setInitialUrlState function', () => {
 
 	it('can pass in additional ignore list params', () => {
 		let initialConfig = {
-			filters: [
-				{
-					field: 'color_family',
-					value: 'Blue',
-					type: 'value',
-					background: false,
+			state: {
+				filter: {
+					color_family: ['Blue'],
 				},
-			],
-			ignoreList: 'filter',
+			},
+			ignoreList: ['filter'],
 		};
 
 		const populatedUrlState = {
@@ -89,56 +77,67 @@ describe('setInitialUrlState function', () => {
 
 	it('can set pagination init params', () => {
 		let initialConfig = {
-			pagination: {
+			state: {
 				page: 3,
-				pageSize: 20,
+				pageSize: 30,
 			},
 		};
 
 		const initState = setInitialUrlState(initialConfig, {});
 
-		expect(initState).toStrictEqual({ page: 3, pageSize: 20 });
+		expect(initState).toStrictEqual(initialConfig.state);
 	});
 
 	it('can set sorting init params', () => {
 		let initialConfig = {
-			sorts: [
-				{
+			state: {
+				sort: {
 					field: 'title',
 					direction: 'desc',
 				},
-			],
+			},
 		};
 
 		const initState = setInitialUrlState(initialConfig, {});
 
-		expect(initState).toStrictEqual({ sort: { direction: 'desc', field: 'title' } });
+		expect(initState).toStrictEqual(initialConfig.state);
 	});
 
 	it('can set range filter init params', () => {
 		let initialConfig = {
-			filters: [
-				{
-					field: 'price',
-					value: {
+			state: {
+				filter: {
+					price: {
 						low: 35,
 						high: 108,
 					},
-					type: 'range',
-					background: false,
 				},
-			],
+			},
 		};
 
 		const initState = setInitialUrlState(initialConfig, {});
 
-		expect(initState).toStrictEqual({
-			filter: {
-				price: {
-					high: [108],
-					low: [35],
+		expect(initState).toStrictEqual(initialConfig.state);
+	});
+
+	it('can set EVERYTHING in init params', () => {
+		let initialConfig = {
+			state: {
+				filter: {
+					color_family: ['Red', 'Blue'],
+					size: ['Medium'],
+				},
+				page: 3,
+				pageSize: 30,
+				sort: {
+					field: 'title',
+					direction: 'desc',
 				},
 			},
-		});
+		};
+
+		const initState = setInitialUrlState(initialConfig, {});
+
+		expect(initState).toEqual(initialConfig.state);
 	});
 });
