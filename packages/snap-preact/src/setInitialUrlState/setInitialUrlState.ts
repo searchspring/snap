@@ -3,10 +3,11 @@ import { initialUrlConfig } from '../types';
 import deepmerge from 'deepmerge';
 
 export const setInitialUrlState = (intitialStateConfig: initialUrlConfig, _initialUrlState: UrlState) => {
-	let { ignoreList, state } = intitialStateConfig;
+	let { ignoreList } = intitialStateConfig;
+	const { state } = intitialStateConfig;
 
 	if (state) {
-		let { sort, filter, page, pageSize } = state;
+		const { sort, filter, page, pageSize } = state;
 
 		ignoreList = (ignoreList || []).concat(['query', 'tag']);
 

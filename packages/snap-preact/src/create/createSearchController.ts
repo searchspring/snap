@@ -12,10 +12,10 @@ import type { UrlState } from '@searchspring/snap-url-manager';
 import type { SnapControllerServices, SnapSearchControllerConfig } from '../types';
 
 export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
-	let urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
+	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
 
 	if (config.url?.initial) {
-		let initialUrlState = setInitialUrlState(config.url?.initial, { ...urlManager.urlState } as UrlState);
+		const initialUrlState = setInitialUrlState(config.url?.initial, { ...urlManager.urlState } as UrlState);
 		urlManager.merge(initialUrlState).go();
 	}
 
