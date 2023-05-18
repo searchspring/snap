@@ -12,7 +12,7 @@ export const setInitialUrlState = (intitialStateConfig: initialUrlConfig, _initi
 		ignoreList = (ignoreList || []).concat(['query', 'tag']);
 
 		if (!Object.keys(_initialUrlState).filter((key) => ignoreList!.indexOf(key) == -1).length) {
-			let initialUrlState = { ..._initialUrlState };
+			const initialUrlState = { ..._initialUrlState };
 
 			if (page) {
 				initialUrlState.page = page;
