@@ -54,6 +54,6 @@ jobs:
 
       - name: Create PR
         run: |
-          gh pr create --title "Patch file ${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/searchspring/snapfu-patches" --base "main" --head "patch-generate-${{ matrix.framework }}-${{ env.version }}" --reviewer "searchspring/snap-team" --project "Snap Beta" --reviewer "searchspring/snap-team"
+          gh pr create --title "Patch file ${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/searchspring/snapfu-patches" --base "main" --head "patch-generate-${{ matrix.framework }}-${{ env.version }}" --project "Snap Beta" --reviewer "searchspring/snap-team"
         env:
           GITHUB_TOKEN: ${{ secrets.MACHINE_PAT }}
