@@ -28,8 +28,8 @@ steps:
                 - update:
                     properties:
                         "dependencies": {
-                            "@searchspring/snap-${args.framework}": "^${args.version}",
-                            "@searchspring/snap-${args.framework}-components": "^${args.version}"
+                            "@searchspring/snap-${args.framework}": "${args.version}",
+                            "@searchspring/snap-${args.framework}-components": "${args.version}"
                         }
 `.trim();
 
