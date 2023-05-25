@@ -1,10 +1,11 @@
 ## Foreground Filters
-Foreground filters allow a page to be refined on initial load and displaying the active filter to the end-user. These filters can then be removed and modified by the end-user. 
+Foreground filters provide a way for pre-applying a filter on page load. The applied filter will be applied to the URL and can be removed as any other applied filter would. Foreground filtering is accomplished by setting the inital UrlManager state; this can be used for setting various states, but only filtering will be covered in this document.
 
-In this example, we'll set a foreground filter via the url translator config in the search controller settings. 
+Foreground filters are only usable with a SearchController.
+
+In the simplified example below, a foreground filter is used to pre-apply a filter for the `on_sale` field. 
 
 ```typescript
-
 const config = {
 	client: {
 		globals: {
@@ -16,18 +17,17 @@ const config = {
 			{
 				url: {
 					initial: {
-						state: {
+						parameters: {
 							filter: {
-								color_family: ['Blue'],
+								state: {
+									on_sale: ['yes'],
+								}
 							},
 						},
 					}
 				},
 				config: {
 					id: 'search',
-					globals: {
-						filters: backgroundFilters,
-					},
 				},
 			},
 		],
@@ -38,12 +38,11 @@ const snap = new Snap(config);
 ```
 
 
-The `initial.state` object takes `urlManager.state` values, such as filter, sort, page, and pageSize. Although this is more commonly to be used with filter. 
+The `initial.parameters` object takes `UrlManager` state parameters, such as filter, sort, page, and pageSize. This feature is likely to mostly be used used with filter, but any parameters including custom ones could be utilized. 
 
-There is also an optional `ignoreList` param you can set on the `initial` object. This will allow certain state values to be set initially via the url while also maintaining & merging the `initial.state` object. See example where the `initial.state` filter `color_family:blue` will be set even if there are other `filter` params present in the url manager state. 
+There is also an optional `ignoreParameter` param you can set on the `initial.settings` object, this allows for specifying additional UrlManager state parameters to be added to the ignore list. See example where the `initial.state` filter `on_sale:yes` will be set even if there are other `filter` params present in the UrlManager state. The default values in the `ignoreParameter` are `query`, `tag`, `oq` and `fallbackQuery`. This list is used to determine wether or not to apply the initial state provided - if the UrlManager state contains any states that are not being ignored, the initial state will not be applied.
 
 ```typescript
-
 const config = {
 	client: {
 		globals: {
@@ -55,19 +54,65 @@ const config = {
 			{
 				url: {
 					initial: {
-						state: {
+						settings: {
+							ignoreParameters: ['filter'],
+						},
+						parameters: {
 							filter: {
-								color_family: ['Blue'],
+								state: {
+									on_sale: ['yes'],
+								}
 							},
 						},
-						ignoreList: ['filter']
 					}
 				},
 				config: {
 					id: 'search',
-					globals: {
-						filters: backgroundFilters,
-					},
+				},
+			},
+		],
+	},
+};
+
+const snap = new Snap(config);
+```
+
+## Advanced Configuration
+Additional advanced configuration is available for special use cases. If you do not wish to use the default `ignoreParameters` you can specify as much using `initial.settings.useDefaultIgnoreParameters`, and setting it to `false`.
+
+More configuration can be made within Within each `initial.parameter` object. It is possible to specify individual `ignoreParameters` here, which allows for more control for when to apply each individual initial state. Within the parameter configuration it is also possible to opt out of the 'global' `ignoreParameter` settings specified in `initial.settings` by using the `useGlobalIgnoreParameters` configuration. Lastly, there may be cases where if isnecessary to replace existing state values instead of merging them (the default action). This is specified in each individual parameter configuration via the `action` configuration; this supports a `merge` or `set` value.
+
+Example using advanced configurations shown below:
+
+```typescript
+const config = {
+	client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+	controllers: {
+		search: [
+			{
+				url: {
+					initial: {
+						settings: {
+							ignoreParameters: ['query', 'tag', 'filter'],
+							useDefaultIgnoreParameters: false,
+						},
+						parameters: {
+							filter: {
+								useGlobalIgnoreParameters: true,
+								action: 'set',
+								state: {
+									on_sale: ['yes'],
+								}
+							},
+						},
+					}
+				},
+				config: {
+					id: 'search',
 				},
 			},
 		],

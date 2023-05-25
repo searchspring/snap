@@ -9,6 +9,8 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
+import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
+
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	AbstractController,
@@ -30,7 +32,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import { default as createSearchController } from './create/createSearchController';
 import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfig } from './types';
+import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -74,7 +76,9 @@ export type SnapConfig = {
 			config: SearchControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
+			url?: UrlTranslatorConfig & {
+				initial?: InitialUrlConfig;
+			};
 			context?: ContextVariables;
 		}[];
 		autocomplete?: {
@@ -567,6 +571,11 @@ export class Snap {
 							let searched = false;
 							const runSearch = () => {
 								if (!searched) {
+									// handle custom initial UrlManager state
+									if (controller.url?.initial) {
+										getInitialUrlState(controller.url.initial, cntrlr.urlManager).go({ history: 'replace' });
+									}
+
 									searched = true;
 									this.controllers[controller.config.id].search();
 								}

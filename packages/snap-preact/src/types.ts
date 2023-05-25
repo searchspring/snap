@@ -26,9 +26,21 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
-export type initialUrlConfig = {
-	state: UrlState;
-	ignoreList?: string[];
+type UrlParameterConfig<Type> = {
+	[Property in keyof Type]: {
+		action?: 'merge' | 'set';
+		ignoreParameters?: string[];
+		useGlobalIgnoreParameters?: boolean;
+		state: Type[Property];
+	};
+};
+
+export type InitialUrlConfig = {
+	settings?: {
+		ignoreParameters?: string[];
+		useDefaultIgnoreParameters?: boolean;
+	};
+	parameters: UrlParameterConfig<UrlState>;
 };
 
 export type SnapControllerConfig = {
@@ -45,7 +57,7 @@ export type SnapControllerConfig = {
 export type SnapSearchControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig & {
-		initial?: initialUrlConfig;
+		initial?: InitialUrlConfig;
 	};
 	client?: {
 		globals: ClientGlobals;

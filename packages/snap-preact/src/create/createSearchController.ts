@@ -6,18 +6,11 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { setInitialUrlState } from '../setInitialUrlState/setInitialUrlState';
-import type { UrlState } from '@searchspring/snap-url-manager';
 
 import type { SnapControllerServices, SnapSearchControllerConfig } from '../types';
 
 export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
-
-	if (config.url?.initial) {
-		const initialUrlState = setInitialUrlState(config.url?.initial, { ...urlManager.urlState } as UrlState);
-		urlManager.merge(initialUrlState).go();
-	}
 
 	// set client mode
 	if (config.mode && config.client) {
