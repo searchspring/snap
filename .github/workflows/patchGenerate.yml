@@ -25,12 +25,6 @@ jobs:
           ref: "main"
           token: ${{ secrets.MACHINE_PAT }}
 
-      - name: Set Github credentials
-        working-directory: snapfu-patches
-        run: |
-          git config user.name searchspring-machine
-          git config user.email machine@searchspring.com
-      
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -55,7 +49,7 @@ jobs:
           git config --global user.email "machine@searchspring.com"
           git checkout -b patch-generate-${{ matrix.framework }}-${{ env.version }}
           git add .
-          git commit -m "auto generated patch files from action release workflow"
+          git commit -m "auto generated patch files from 'Patch Generate' action workflow"
           git push -u origin patch-generate-${{ matrix.framework }}-${{ env.version }}
 
       - name: Create PR
