@@ -23,7 +23,7 @@ jobs:
           repository: "searchspring/snapfu-patches"
           path: "snapfu-patches"
           ref: "main"
-          token: ${{ secrets.MACHINE_PAT }}
+          token: ${{ secrets.MACHINE_ACTION_WORKFLOW_PAT }}
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -56,4 +56,4 @@ jobs:
         run: |
           gh pr create --title "Patch file ${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/searchspring/snapfu-patches" --base "main" --head "patch-generate-${{ matrix.framework }}-${{ env.version }}" --project "Snap Beta" --reviewer "searchspring/snap-team"
         env:
-          GITHUB_TOKEN: ${{ secrets.MACHINE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.MACHINE_ACTION_WORKFLOW_PAT }}
