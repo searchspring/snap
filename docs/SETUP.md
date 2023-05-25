@@ -65,7 +65,7 @@ Using Snapfu, there are two common ways to develop a project, using a local mock
 
 ### Local mockup
 
-Creation of a local mockup `index.html` file within the `/public` directory allows for the quickest development of a Snap integration. Mockup files can be created by copying the source files of particular pages that will contain the Snap integration - typically the search and category pages. These pages will need to include a link to the local bundle file (`bundle.js`) in order for the Snap bundle to run. A minimal mockup file (shown below) contains only the necessary script and target elements to get components rendered on the page. More complete mockups would normally contain DOM structure and links to website resources that would be present on the live site (CSS, etc...).
+Creation of a local mockup file (for example, `index.html` or `mockup.html`) within the `/public` directory allows for the quickest development of a Snap integration. Mockup files can be created by copying the source files of particular pages that will contain the Snap integration - typically the search and category pages. These pages will need to include a link to the local bundle file (`bundle.js`) in order for the Snap bundle to run. A minimal mockup file (shown below) contains only the necessary script and target elements to get components rendered on the page. More complete mockups would normally contain DOM structure and links to website resources that would be present on the live site (CSS, etc...).
 
 ```html
 <!DOCTYPE html>
