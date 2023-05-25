@@ -1,12 +1,15 @@
 /** @jsx jsx */
+/** @jsx h */
+
 import { h, Fragment, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
@@ -40,6 +43,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props: ButtonProps = {
 		// default props
+		disableA11y: false,
 		// global theme
 		...globalTheme?.components?.button,
 		// props
@@ -47,7 +51,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		...properties.theme?.components?.button,
 	};
 
-	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableStyles, className, style } = props;
+	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableA11y, disableStyles, className, style } = props;
 
 	const elementProps = {
 		css: disableStyles
@@ -68,6 +72,10 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
 
+	const a11yProps = {
+		ref: (e: any) => useA11y(e),
+	};
+
 	return content || children ? (
 		<CacheProvider>
 			{native ? (
@@ -76,7 +84,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{children}
 				</button>
 			) : (
-				<div {...elementProps}>
+				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					{content}
 					{children}
 				</div>
@@ -96,4 +104,5 @@ export interface ButtonProps extends ComponentProps {
 	disabled?: boolean;
 	native?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	disableA11y?: boolean;
 }

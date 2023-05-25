@@ -81,7 +81,7 @@ export class FinderController extends AbstractController {
 		const sessionId = this.tracker.getContext().sessionId;
 		const pageLoadId = this.tracker.getContext().pageLoadId;
 
-		let tracking: any = {};
+		const tracking: any = {};
 
 		if (userId) {
 			tracking.userId = userId;
@@ -161,13 +161,9 @@ export class FinderController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			const [meta, response] = await this.client.finder(params);
-			// @ts-ignore
+			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				// @ts-ignore
+				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 				response.meta = meta;
 			}
 
@@ -197,7 +193,7 @@ export class FinderController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// @ts-ignore
+			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -221,31 +217,48 @@ export class FinderController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-		} catch (err) {
+		} catch (err: any) {
 			if (err) {
-				switch (err) {
-					case 429:
-						this.store.error = {
-							code: 429,
-							type: ErrorType.WARNING,
-							message: 'Too many requests try again later',
-						};
-						this.log.warn(this.store.error);
-						break;
-					case 500:
-						this.store.error = {
-							code: 500,
-							type: ErrorType.ERROR,
-							message: 'Invalid Search Request or Service Unavailable',
-						};
-						this.log.error(this.store.error);
-						break;
-					default:
-						this.log.error(err);
-						break;
+				if (err.err && err.fetchDetails) {
+					switch (err.fetchDetails.status) {
+						case 429: {
+							this.store.error = {
+								code: 429,
+								type: ErrorType.WARNING,
+								message: 'Too many requests try again later',
+							};
+							break;
+						}
+
+						case 500: {
+							this.store.error = {
+								code: 500,
+								type: ErrorType.ERROR,
+								message: 'Invalid Search Request or Service Unavailable',
+							};
+							break;
+						}
+
+						default: {
+							this.store.error = {
+								type: ErrorType.ERROR,
+								message: err.err.message,
+							};
+							break;
+						}
+					}
+
+					this.log.error(this.store.error);
+					this.handleError(err.err, err.fetchDetails);
+				} else {
+					this.store.error = {
+						type: ErrorType.ERROR,
+						message: `Something went wrong... - ${err}`,
+					};
+					this.log.error(err);
+					this.handleError(err);
 				}
 				this.store.loading = false;
-				this.handleError(err);
 			}
 		}
 	};

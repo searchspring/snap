@@ -21,11 +21,19 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
-			restorePosition?: boolean;
+		};
+		restorePosition?: {
+			enabled: boolean;
 		};
 		history?: {
 			url?: string;
 			max?: number;
+		};
+		pagination?: {
+			pageSizeOptions?: {
+				label: string;
+				value: number;
+			}[];
 		};
 	};
 };

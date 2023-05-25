@@ -9,7 +9,7 @@ describe('htmlUnescape function', () => {
 
 		expect(htmlUnescape('test me')).toEqual('test me');
 
-		let unicodeString = 'Hugo &amp; Caddy &gt; WordPress &amp; Apache';
+		const unicodeString = 'Hugo &amp; Caddy &gt; WordPress &amp; Apache';
 		expect(htmlUnescape(unicodeString)).toEqual('Hugo & Caddy > WordPress & Apache');
 	});
 });

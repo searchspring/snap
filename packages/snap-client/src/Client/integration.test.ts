@@ -14,7 +14,7 @@ describe('Snap Client Integration Tests', () => {
 		const globals = { siteId: '8uyt2m' };
 		const CACHE_STORAGE_KEY = 'ss-networkcache';
 
-		let searchConfig: SearchControllerConfig = {
+		const searchConfig: SearchControllerConfig = {
 			id: 'search',
 			globals: {
 				filters: [],

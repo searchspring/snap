@@ -10,11 +10,11 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let searchResponse: SearchResponseModel = mockData.search();
+const searchResponse: SearchResponseModel = mockData.search();
 
 describe('image Component', () => {
 	const result = searchResponse.results![1].mappings?.core;
-	let badResult = searchResponse.results![0].mappings?.core;
+	const badResult = searchResponse.results![0].mappings?.core;
 	badResult!.imageUrl = '';
 	badResult!.thumbnailImageUrl = '';
 	const rolloverImage = searchResponse.results![2].mappings?.core?.thumbnailImageUrl;

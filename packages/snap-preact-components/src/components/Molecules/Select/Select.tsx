@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { StateUpdater, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -12,6 +12,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
@@ -174,6 +175,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	const selectedOptions = options.filter((option) => selection?.value === option.value);
+
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
@@ -219,11 +222,20 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableClickOutside={disableClickOutside}
 						open={open}
 						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-						onClick={(e) => setOpen((prev) => !prev)}
+						onClick={() => setOpen((prev) => !prev)}
+						disableA11y
 						button={
-							<Button {...subProps.button}>
+							<Button {...subProps.button} disableA11y={true}>
 								{label && !hideLabelOnSelection && (
-									<span className="ss__select__label">
+									<span
+										className="ss__select__label"
+										ref={(e) => useA11y(e)}
+										aria-label={`${label} dropdown, ${options.length} options ${
+											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+										}`}
+										aria-expanded={open}
+										role="button"
+									>
 										{label}
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
@@ -234,8 +246,13 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						}
 					>
 						<ul className="ss__select__select">
-							{options.map((option) => (
+							{options.map((option, idx) => (
 								<li
+									ref={(e) => useA11y(e)}
+									role={'link'}
+									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
+										option.label
+									}`}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}

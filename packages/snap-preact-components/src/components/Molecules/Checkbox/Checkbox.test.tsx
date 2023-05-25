@@ -79,9 +79,24 @@ describe('Checkbox Component', () => {
 
 			const rendered = render(<Checkbox style={style} />);
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox')!;
-			let styles = getComputedStyle(checkboxElement);
+			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
+		});
+
+		it('Can enable/disable useAlly with disableA11y prop', () => {
+			const rendered = render(<Checkbox checked />);
+
+			const checkbox = rendered.container.querySelector('.ss__checkbox');
+
+			expect(checkbox).toBeInTheDocument();
+
+			expect(checkbox).toHaveAttribute('ssA11y');
+
+			const rendered2 = render(<Checkbox checked disableA11y />);
+
+			const checkbox2 = rendered2.container.querySelector('.ss__checkbox');
+			expect(checkbox2).not.toHaveAttribute('ssA11y');
 		});
 
 		it('respects the disabled prop', () => {
@@ -104,7 +119,7 @@ describe('Checkbox Component', () => {
 			const svg = checkboxElement?.querySelector('svg')!;
 			const path = svg.querySelector('path');
 
-			let styles = getComputedStyle(svg);
+			const styles = getComputedStyle(svg);
 
 			expect(styles.width).toBe(`calc(${size} - 30%)`);
 			expect(styles.height).toBe(`calc(${size} - 30%)`);
@@ -120,7 +135,7 @@ describe('Checkbox Component', () => {
 			const rendered = render(<Checkbox checked size={size} icon={icon} iconColor={iconColor} />);
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const svg = checkboxElement?.querySelector('svg')!;
-			let styles = getComputedStyle(svg);
+			const styles = getComputedStyle(svg);
 			expect(styles.fill).toBe(iconColor);
 		});
 
@@ -142,7 +157,7 @@ describe('Checkbox Component', () => {
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const iconElement = checkboxElement?.querySelector('.ss__icon')!;
-			let iconStyles = getComputedStyle(iconElement);
+			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(globalTheme.components.checkbox.className);
 			expect(iconStyles.fill).toBe(globalTheme.components.icon.color);
@@ -153,7 +168,7 @@ describe('Checkbox Component', () => {
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const iconElement = checkboxElement?.querySelector('.ss__icon')!;
-			let iconStyles = getComputedStyle(iconElement);
+			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(iconStyles.fill).toBe(propTheme.components.icon.color);
@@ -168,7 +183,7 @@ describe('Checkbox Component', () => {
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const iconElement = checkboxElement?.querySelector('.ss__icon')!;
-			let iconStyles = getComputedStyle(iconElement);
+			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(checkboxElement).not.toHaveClass(globalTheme.components.checkbox.className);
@@ -244,7 +259,7 @@ describe('Checkbox Component', () => {
 
 			const rendered = render(<Checkbox native style={style} />);
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox')!;
-			let styles = getComputedStyle(checkboxElement);
+			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
 		});

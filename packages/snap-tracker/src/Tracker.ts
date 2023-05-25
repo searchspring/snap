@@ -150,7 +150,7 @@ export class Tracker {
 
 				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
 					Object.values(elem.attributes).forEach((attr: Attr) => {
-						var attrName = attr.nodeName;
+						const attrName = attr.nodeName;
 
 						if (attributeList.indexOf(attrName) != -1) {
 							attributes[attrName] = elem && elem.getAttribute(attrName);
@@ -245,15 +245,13 @@ export class Tracker {
 					},
 				});
 			}
-
-			const { userAgent, href, filename, stack, message, colno, lineno, errortimestamp } = data;
+			const { href, filename, stack, message, colno, lineno, errortimestamp, details } = data;
 
 			const payload = {
 				type: BeaconType.ERROR,
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					userAgent: userAgent || navigator.userAgent,
 					href: href || window.location.href,
 					filename,
 					stack,
@@ -261,6 +259,8 @@ export class Tracker {
 					colno,
 					lineno,
 					errortimestamp,
+					details,
+					context: data.context,
 				},
 			};
 
@@ -688,9 +688,9 @@ export class Tracker {
 			return;
 		}
 
-		let savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]') as BeaconEvent[];
+		const savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]') as BeaconEvent[];
 		if (eventsToSend) {
-			let eventsClone: BeaconEvent[] = [];
+			const eventsClone: BeaconEvent[] = [];
 			savedEvents.forEach((_event: BeaconEvent, idx: number) => {
 				// using Object.assign since we are not modifying nested properties
 				eventsClone.push(Object.assign({}, _event));
@@ -702,7 +702,7 @@ export class Tracker {
 
 			// de-dupe events
 			eventsToSend.forEach((event, idx) => {
-				let newEvent: BeaconEvent = Object.assign({}, event);
+				const newEvent: BeaconEvent = Object.assign({}, event);
 				delete newEvent.id;
 				delete newEvent.pid;
 				if (stringyEventsClone.indexOf(JSON.stringify(newEvent)) == -1) {

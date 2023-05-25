@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+### Bug Fixes
+
+- **store-mobx/search/pagination:** removing `pageSizeOptions` from being observed for compatibility ([63ace50](https://github.com/searchspring/snap/commit/63ace50416e787d56a70081b10dc05ea29bb4b71))
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Features
+
+- **searchpaginationstore:** adding configuration for pagination pageSizeOptions ([9937548](https://github.com/searchspring/snap/commit/9937548e24904a825e8d3655890a4d51c3461717))
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+### Bug Fixes
+
+- **controller-autocomplete:** fixing bugs around autocomplete terms ([a0d6b02](https://github.com/searchspring/snap/commit/a0d6b021073be4b4f3d769d33d8bc55bac2c2f39))
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+### Bug Fixes
+
+- **autocompletestore:** re-init ac history when setService urlManager is called ([0ff3114](https://github.com/searchspring/snap/commit/0ff311447f13b75240ca3d7e34e616c4eba52b00))
+- **store-search-result-store:** adjusting logic for inline banner injection and adding a test ([4ebd069](https://github.com/searchspring/snap/commit/4ebd069198f00059dfc834fef0a5a440f470ca9c))
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+### Bug Fixes
+
+- **store-mobx-finder:** fixing issue where selected persisted data was not being stored properly ([f05730a](https://github.com/searchspring/snap/commit/f05730ac5279050ec8fa236fa364c6ab5e04c878))
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Features
+
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

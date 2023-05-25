@@ -6,8 +6,9 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { FacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
@@ -87,7 +88,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		...properties.theme?.components?.facetGridOptions,
 	};
 
-	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -96,19 +97,28 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		styling.css = [style];
 	}
 
-	return values?.length ? (
+	const facetValues = values || facet?.values;
+
+	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-				{values.map((value) => (
+				{(facetValues as FacetValue[]).map((value) => (
 					<a
 						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
-						{...valueProps}
+						aria-label={
+							value.filtered
+								? `remove selected filter ${facet?.label || ''} - ${value.label}`
+								: facet?.label
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
+						}
 						href={value.url?.link?.href}
+						{...valueProps}
 						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 							value.url?.link?.onClick(e);
 							onClick && onClick(e);
 						}}
+						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
 						<span
 							className={classnames('ss__facet-grid-options__option__value', {
@@ -127,10 +137,11 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 });
 
 export interface FacetGridOptionsProps extends ComponentProps {
-	values: FacetValue[];
+	values?: FacetValue[];
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;
+	facet?: ValueFacet;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

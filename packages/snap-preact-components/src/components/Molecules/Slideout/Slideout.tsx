@@ -85,12 +85,22 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	// state
 	const [isActive, setActive] = useState(Boolean(active));
+	const [renderContent, setRenderContent] = useState(Boolean(active));
 	const toggleActive = () => {
+		if (isActive) {
+			setTimeout(() => {
+				setRenderContent(!renderContent);
+			}, 250);
+		} else {
+			setRenderContent(!isActive);
+		}
+
 		setActive(!isActive);
+
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
 
-	let isVisible = useMediaQuery(displayAt!, () => {
+	const isVisible = useMediaQuery(displayAt!, () => {
 		document.body.style.overflow = '';
 	});
 
@@ -115,7 +125,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				))}
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-				{cloneWithProps(children, { toggleActive, active: isActive })}
+				{renderContent && cloneWithProps(children, { toggleActive, active: isActive })}
 			</div>
 			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
 		</CacheProvider>

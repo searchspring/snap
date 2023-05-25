@@ -192,7 +192,7 @@ describe('Recommendation Component', () => {
 
 		for (let i = 0; i < 21; i++) {
 			// @ts-ignore
-			let [callback] = window.IntersectionObserver.mock.calls[i];
+			const [callback] = window.IntersectionObserver.mock.calls[i];
 
 			callback([
 				{
@@ -425,5 +425,75 @@ describe('Recommendation Component', () => {
 
 		expect(prev).toHaveTextContent(themeOverride.components.recommendation.prevButton);
 		expect(next).toHaveTextContent(themeOverride.components.recommendation.nextButton);
+	});
+
+	it('breakpoints override theme prop', async () => {
+		// Change the viewport to 1200px.
+		global.innerWidth = 1200;
+
+		const ThemeDetailSlot = () => {
+			return <div className="theme-detail-slot">theme details...</div>;
+		};
+
+		const BreakPointDetailSlot = () => {
+			return <div className="breakpoint-detail-slot">breakpoint details...</div>;
+		};
+
+		const componentTheme = {
+			components: {
+				result: {
+					detailSlot: [<ThemeDetailSlot />],
+				},
+			},
+		};
+
+		const customBreakpoints = {
+			0: {},
+			700: {
+				theme: {
+					components: {
+						result: {
+							detailSlot: [<BreakPointDetailSlot />],
+						},
+					},
+				},
+			},
+		};
+
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
+
+		await controller.search();
+
+		const rendered = render(<Recommendation controller={controller} breakpoints={customBreakpoints} theme={componentTheme} />);
+
+		await waitFor(() => {
+			const themeDetailSlots = rendered.container.querySelectorAll('.theme-detail-slot');
+			expect(themeDetailSlots).toHaveLength(0);
+
+			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
+			expect(breakpointDetailSlots).toHaveLength(22);
+		});
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		await waitFor(() => {
+			const themeDetailSlots = rendered.container.querySelectorAll('.theme-detail-slot');
+			expect(themeDetailSlots).toHaveLength(22);
+
+			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
+			expect(breakpointDetailSlots).toHaveLength(0);
+		});
 	});
 });

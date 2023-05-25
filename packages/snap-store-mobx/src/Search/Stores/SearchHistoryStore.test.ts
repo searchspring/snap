@@ -210,7 +210,7 @@ describe('History Store', () => {
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(config.max);
-		let trimmedData = historyData.slice(historyData.length - config.max).reverse();
+		const trimmedData = historyData.slice(historyData.length - config.max).reverse();
 		historyStore.queries.map((term, idx) => {
 			expect(term.string).toBe(trimmedData[idx]);
 		});

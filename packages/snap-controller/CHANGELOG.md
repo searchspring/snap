@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Bug Fixes
+
+- **controller-search:** fully escaping CSS selectors in restorePosition and adjusting maxCheck ([0b31fe8](https://github.com/searchspring/snap/commit/0b31fe87ab2634cd13bd6144e29ad6cf570c854b))
+- **recommendationinstantiator:** bugfix for improper err logging when rec api call fails ([961ba75](https://github.com/searchspring/snap/commit/961ba75696ff29d77309b3ca7701fe46b664d401))
+
+### Features
+
+- **controller-search:** modifying href selector generation to account for extra spaces and colons ([87bbd8b](https://github.com/searchspring/snap/commit/87bbd8b13720c55dcb551bca14d34873790b7872))
+- **searchpaginationstore:** adding configuration for pagination pageSizeOptions ([9937548](https://github.com/searchspring/snap/commit/9937548e24904a825e8d3655890a4d51c3461717))
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+### Bug Fixes
+
+- **controller-autocomplete:** fixing bugs around autocomplete terms ([a0d6b02](https://github.com/searchspring/snap/commit/a0d6b021073be4b4f3d769d33d8bc55bac2c2f39))
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+### Bug Fixes
+
+- **autcompletecontroller:** cant call go and preview at the same time ([841db30](https://github.com/searchspring/snap/commit/841db3097c1aeee12ee73e36fcf2628696038fee))
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+### Bug Fixes
+
+- **controller-autocomplete:** adding input attributes to disable 'autocorrect' and 'autocapitalize' ([eaef3cc](https://github.com/searchspring/snap/commit/eaef3ccadf9bc7c6f2fce5842f76bb541663d7eb))
+- **controller-autocomplete:** preventing duplicate hidden form fields from being created ([cfd5e68](https://github.com/searchspring/snap/commit/cfd5e688ed8f2c64f63d368444153d9c7d38c9b0))
+- **controller-search:** adjusting generateHrefSelector logic to ensure classList value ([3ed5890](https://github.com/searchspring/snap/commit/3ed58903ad6119a64e72d52d964e956c8aed822e))
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Bug Fixes
+
+- **controller-search:** fixing issue where 'restorePosition' would fire returning to previous search ([86a5ca7](https://github.com/searchspring/snap/commit/86a5ca787788c480d649eef6037e52304d2eee50))
+
+### Features
+
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+- **controller-search:** adding `restorePosition` event and refactoring restoration code ([cf57606](https://github.com/searchspring/snap/commit/cf57606322103cdf7d3884127ea272111c8a1644))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-controller

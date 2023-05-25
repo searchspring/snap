@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { Skeleton } from '@searchspring/snap-preact-components';
 
 export class SidebarSkel extends Component {

@@ -11,7 +11,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-let searchResponse: SearchResponseModel = mockData.search();
+const searchResponse: SearchResponseModel = mockData.search();
 
 // TODO: refactor to use mock store data
 const mockResults = searchResponse.results as SearchResultStore;

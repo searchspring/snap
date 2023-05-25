@@ -11,13 +11,13 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
-import { SearchController, getStorableRequestParams } from './SearchController';
-import type { SearchControllerConfig, BeforeSearchObj } from '../types';
+import { SearchController, getStorableRequestParams, generateHrefSelector } from './SearchController';
+import type { SearchControllerConfig, BeforeSearchObj, RestorePositionObj, ElementPositionObj } from '../types';
 import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
 
-let searchConfigDefault: SearchControllerConfig = {
+const searchConfigDefault: SearchControllerConfig = {
 	id: 'search',
 	globals: {
 		filters: [],
@@ -378,6 +378,7 @@ describe('Search Controller', () => {
 			intellisuggestSignature,
 			href,
 		});
+
 		expect(storagefn).toHaveBeenCalledTimes(1);
 
 		clickfn.mockClear();
@@ -566,9 +567,10 @@ describe('Search Controller', () => {
 		});
 
 		const handleError = jest.spyOn(controller, 'handleError');
+		const error = new Error('Too many requests try again later');
 
 		controller.client.search = jest.fn(() => {
-			throw 429;
+			throw { err: error, fetchDetails: { status: 429, url: 'test.com' } };
 		});
 
 		await controller.search();
@@ -579,7 +581,7 @@ describe('Search Controller', () => {
 			message: 'Too many requests try again later',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(429);
+		expect(handleError).toHaveBeenCalledWith(error, { status: 429, url: 'test.com' });
 		handleError.mockClear();
 	});
 
@@ -596,8 +598,9 @@ describe('Search Controller', () => {
 
 		const handleError = jest.spyOn(controller, 'handleError');
 
+		const error = new Error('Invalid Search Request or Service Unavailable');
 		controller.client.search = jest.fn(() => {
-			throw 500;
+			throw { err: error, fetchDetails: { status: 500, url: 'test.com' } };
 		});
 
 		await controller.search();
@@ -608,11 +611,58 @@ describe('Search Controller', () => {
 			message: 'Invalid Search Request or Service Unavailable',
 		});
 
-		expect(handleError).toHaveBeenCalledWith(500);
+		expect(handleError).toHaveBeenCalledWith(error, { status: 500, url: 'test.com' });
 		handleError.mockClear();
 	});
 
-	it('uses scrollMap to scroll to previous position when infinite backfill is set', async () => {
+	it(`stores scroll position in 'track.product.click' call`, async () => {
+		const href = 'https://localhost:2222/product.html';
+		// set initial DOM setup
+		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="link" href="${href}"></a></div></div>`;
+		const selector = `DIV.ss__result A.link[href*=\"${href}\"]`;
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		let stringyParams = '';
+		controller.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
+			stringyParams = JSON.stringify(getStorableRequestParams(search.request as SearchRequestModel));
+		});
+
+		await controller.search();
+
+		const restorePositionFunc = jest.fn((selector?: string) => {
+			console.log(selector);
+		});
+
+		const linkElem = document.querySelector('.link');
+
+		controller.track.product.click({ target: linkElem } as MouseEvent, {
+			mappings: { core: { url: href } },
+			attributes: { intellisuggestData: '', intellisuggestSignature: '' },
+		});
+
+		const scrollMap = controller.storage.get('scrollMap');
+		expect(scrollMap).toStrictEqual({
+			[stringyParams]: {
+				href,
+				selector,
+			},
+		});
+	});
+
+	it(`fires 'restorePosition' event and passes a position when one has been stored to a recent query`, async () => {
+		const href = 'https://localhost:2222/product.html';
+		// set initial DOM setup
+		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="inner-a" href="${href}"></a></div></div>`;
+
 		const scrollConfig: SearchStoreConfig = {
 			...searchConfig,
 			// add some filters, sorts, and pagination
@@ -639,10 +689,26 @@ describe('Search Controller', () => {
 				},
 			},
 			settings: {
-				infinite: {
-					backfill: 5,
+				restorePosition: {
+					enabled: true,
 				},
 			},
+		};
+
+		const scrollPosition = {
+			selector: `.ss__results .ss__result A[href*=\"${href}\"]`,
+			href,
+			// can't use real DOMRect...
+			domRect: {
+				bottom: 0,
+				height: 0,
+				left: 0,
+				right: 0,
+				top: 0,
+				width: 0,
+				x: 0,
+				y: 0,
+			} as DOMRect,
 		};
 
 		const controller = new SearchController(scrollConfig, {
@@ -655,30 +721,101 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		const scrollHeightSpy = jest.spyOn(document.documentElement, 'scrollHeight', 'get').mockImplementation(() => 1000);
-
 		controller.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			const stringyParams = getStorableRequestParams(search.request as SearchRequestModel);
 
 			// set a scrollMap for testing
-			const scrollMap: { [key: string]: any } = {};
+			const scrollMap: { [key: string]: ElementPositionObj } = {};
 
-			scrollMap[JSON.stringify(stringyParams)] = 777;
+			scrollMap[JSON.stringify(stringyParams)] = scrollPosition;
 
 			(search.controller as SearchController).storage.set('scrollMap', scrollMap);
 
 			await next();
 		});
 
-		await controller.search();
+		const restorePositionFunc = jest.fn((element?: ElementPositionObj) => {
+			console.log(element);
+		});
 
-		const scrollSpy = jest.spyOn(window, 'scrollTo');
+		controller.on('restorePosition', async (search: RestorePositionObj, next: Next) => {
+			restorePositionFunc(search.element);
+
+			await next();
+		});
+
+		await controller.search();
 
 		await waitFor(() => {
 			// expect window.scrollTo to have been called with our set value
-			expect(scrollSpy).toHaveBeenCalledWith(0, 777);
+			expect(restorePositionFunc).toHaveBeenCalledWith(scrollPosition);
+		});
+	});
+
+	describe('generateHrefSelector', () => {
+		const href = 'https://www.website.com/product.html';
+		beforeEach(() => {
+			document.body.innerHTML = `<div class="outer"><div class="inner"><a class="inner-a" href="${href}"><span class="inner-span"><span class="inner-inner-span"><span class="inner-inner-inner-span"></span></span></span></a></div></div>`;
 		});
 
-		scrollHeightSpy.mockClear();
+		it('generates a selector with parent element when href element is the element', () => {
+			const elem = document.querySelector('.inner-a') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.inner A.inner-a[href*=\"${href}\"]`);
+		});
+
+		it('generates a selector when an element with href is found within the element', () => {
+			const elem = document.querySelector('.outer') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.outer DIV.inner A.inner-a[href*=\"${href}\"]`);
+		});
+
+		it('does not generate a selector when an element with href is NOT found within the element', () => {
+			const elem = document.querySelector('.outer') as HTMLElement;
+			const selector = generateHrefSelector(elem, href + '/');
+			expect(selector).toBeUndefined();
+		});
+
+		it('generates a selector when an inner element is passed with a parent containing an element with href', () => {
+			const elem = document.querySelector('.inner-span') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.inner A.inner-a[href*=\"${href}\"]`);
+		});
+
+		it('stops trying to generate a selector when an inner element is passed too many levels inside', () => {
+			const elem = document.querySelector('.inner-inner-inner-span') as HTMLElement;
+			const selector = generateHrefSelector(elem, href, 3);
+			expect(selector).toBeUndefined();
+		});
+
+		it('generates a selector when an inner element is passed within levels specified of href element', () => {
+			const elem = document.querySelector('.inner-inner-inner-span') as HTMLElement;
+			const selector = generateHrefSelector(elem, href, 4);
+			expect(selector).toBe(`DIV.inner A.inner-a[href*=\"${href}\"]`);
+		});
+
+		it('generates an escaped selector when classes with special characters are encountered', () => {
+			document.body.innerHTML = `<div class="outer [brackets]"><div class="inner (parens)"><a class="inner-a w3ird!n3$$ pseudo:like:class" href="${href}"><span class="inner-span"><span class="inner-inner-span"><span class="inner-inner-inner-span"></span></span></span></a></div></div>`;
+
+			const elem = document.querySelector('.outer') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.outer.\\[brackets\\] DIV.inner.\\(parens\\) A.inner-a.w3ird\\!n3\\$\\$.pseudo\\:like\\:class[href*=\"${href}\"]`);
+		});
+
+		it('generates a selector when no class names are present on elements', () => {
+			document.body.innerHTML = `<div class="outer"><div><span><a href="${href}"></a><span></div></div>`;
+
+			const elem = document.querySelector('.outer') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.outer DIV SPAN A[href*=\"${href}\"]`);
+		});
+
+		it('generates a selector when no class names are present on elements', () => {
+			document.body.innerHTML = `<div class="outer"><div><div><span><a href="${href}"><span class="inner-span"></span></a><span></div></div></div>`;
+
+			const elem = document.querySelector('.outer') as HTMLElement;
+			const selector = generateHrefSelector(elem, href);
+			expect(selector).toBe(`DIV.outer DIV DIV SPAN A[href*=\"${href}\"]`);
+		});
 	});
 });

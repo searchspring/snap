@@ -10,7 +10,6 @@ import type {
 	RecommendRequestModel,
 	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
-	GenericGlobals,
 } from '../types';
 
 import type {

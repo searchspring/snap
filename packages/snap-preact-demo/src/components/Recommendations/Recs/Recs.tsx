@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
@@ -34,7 +34,7 @@ export class Recs extends Component<RecsProps> {
 
 				<hr style={{ margin: '20px 0' }} />
 
-				<Recommendation controller={controller} speed={0}>
+				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
 					{store.results.map((result) => (
 						<Result result={result}></Result>
 					))}

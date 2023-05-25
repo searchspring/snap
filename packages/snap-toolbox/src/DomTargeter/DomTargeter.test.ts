@@ -267,7 +267,7 @@ describe('DomTargeter', () => {
 			autoRetarget: true,
 		};
 
-		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+		new DomTargeter([selector], () => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
@@ -325,7 +325,7 @@ describe('DomTargeter', () => {
 			},
 		];
 
-		new DomTargeter(selectors, (target: Target, elem: Element) => {}, document);
+		new DomTargeter(selectors, () => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
@@ -373,7 +373,7 @@ describe('DomTargeter', () => {
 			clickRetarget: true,
 		};
 
-		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+		new DomTargeter([selector], () => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
@@ -416,7 +416,7 @@ describe('DomTargeter', () => {
 			clickRetarget: '#content',
 		};
 
-		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
+		new DomTargeter([selector], () => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
@@ -446,7 +446,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'append',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing';
 							div.innerHTML = 'blah';
@@ -458,7 +458,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'append',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing2';
 							div.innerHTML = 'tada';
@@ -470,7 +470,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'prepend',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing0';
 							div.innerHTML = 'first';
@@ -479,7 +479,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -501,7 +501,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'append',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing';
 							div.innerHTML = 'blah';
@@ -510,7 +510,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -520,7 +520,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'append',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing2';
 							div.innerHTML = 'tada';
@@ -529,7 +529,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -539,7 +539,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'prepend',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing0';
 							div.innerHTML = 'first';
@@ -548,7 +548,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -568,7 +568,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'before',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing';
 							div.innerHTML = 'blah';
@@ -577,7 +577,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -587,7 +587,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'after',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing2';
 							div.innerHTML = 'tada';
@@ -596,7 +596,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -614,7 +614,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'replace',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'content';
 							div.innerHTML = 'blah';
@@ -623,7 +623,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -633,7 +633,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'after',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'newThing';
 							div.innerHTML = 'tada';
@@ -642,7 +642,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 
@@ -654,7 +654,7 @@ describe('DomTargeter', () => {
 					selector: '#content',
 					inject: {
 						action: 'replace',
-						element: (target, element) => {
+						element: () => {
 							const div = document.createElement('div');
 							div.id = 'lastThing';
 							div.innerHTML = 'tada';
@@ -663,7 +663,7 @@ describe('DomTargeter', () => {
 					},
 				},
 			],
-			(target: Target, elem: Element) => {},
+			() => {},
 			document
 		);
 

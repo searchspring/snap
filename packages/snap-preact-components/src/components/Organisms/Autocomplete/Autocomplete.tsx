@@ -15,6 +15,7 @@ import { Results, ResultsProp } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
+import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -73,6 +74,7 @@ const CSS = {
 				flexDirection: 'column',
 				flex: `1 1 auto`,
 				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
+				minWidth: '150px',
 				order: 1,
 				background: '#f8f8f8',
 
@@ -188,17 +190,17 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		0: {
 			columns: 2,
 			rows: 1,
-			hideFacets: props.hideFacets || true,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			hideFacets: props.hideFacets ?? true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
-			vertical: props.vertical || true,
-			hideHistory: props.hideHistory || true,
-			hideTrending: props.hideTrending || true,
+			vertical: props.vertical ?? true,
+			hideHistory: props.hideHistory ?? true,
+			hideTrending: props.hideTrending ?? true,
 		},
 		768: {
 			columns: 2,
@@ -206,19 +208,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	let delayTimeout: number;
-	const delayTime = 333;
-	const valueProps = {
-		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) => {
-			clearTimeout(delayTimeout);
-			delayTimeout = window.setTimeout(() => {
-				(e.target as HTMLAnchorElement).focus();
-			}, delayTime);
-		},
-		onMouseLeave: () => {
-			clearTimeout(delayTimeout);
-		},
-	};
+	const valueProps = createHoverProps();
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		properties.onFacetOptionClick && properties.onFacetOptionClick(e);
@@ -234,7 +224,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller?.setFocused && controller?.setFocused();
 	};
 
-	const themeOverride: Theme = {
+	const themeDefaults: Theme = {
 		components: {
 			facet: {
 				limit: 6,
@@ -268,13 +258,20 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	const displaySettings = useDisplaySettings(breakpoints) || {};
-	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+
+	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+	const theme = deepmerge(
+		themeDefaults,
+		deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
+		{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
+	);
+
 	props = {
 		...props,
 		...displaySettings,
 		theme,
 	};
-	let input: String | Element | null = props.input;
+	let input: string | Element | null = props.input;
 	let inputViewportOffsetBottom = 0;
 	if (input) {
 		if (typeof input === 'string') {
@@ -400,8 +397,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	if (!state.input && (historyActive || trendingActive)) {
-		showHistory = true;
-		showTrending = true;
+		if (history?.length) showHistory = true;
+		if (trending?.length) showTrending = true;
 	}
 
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
@@ -466,8 +463,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{termsTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{terms.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
+											{terms.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -476,8 +473,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onFocus={() => term.preview()}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -494,8 +492,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{trendingTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{trending.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
+											{trending.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -504,8 +502,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onFocus={() => term.preview()}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -522,8 +521,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{historyTitle}</h5>
 											</div>
 										) : null}
-										<div className="ss__autocomplete__terms__options">
-											{history.map((term) => (
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
+											{history.map((term, idx) => (
 												<div
 													className={classnames('ss__autocomplete__terms__option', {
 														'ss__autocomplete__terms__option--active': term.active,
@@ -532,8 +531,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													<a
 														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 														href={term.url.href}
-														{...valueProps}
-														onFocus={() => term.preview()}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
 													>
 														{emIfy(term.value, state.input || '')}
 													</a>
@@ -640,7 +640,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 const emIfy = (term: string, search: string) => {
 	if (term && search) {
 		const match = term.match(escapeRegExp(search));
-		if (search && term && match && match.index) {
+		if (search && term && match && typeof match.index == 'number') {
 			const beforeMatch = term.slice(0, match.index);
 			const afterMatch = term.slice(match.index + search.length, term.length);
 			return (

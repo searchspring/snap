@@ -4,9 +4,14 @@ on:
       - main
       - develop
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   Tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
@@ -39,6 +44,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Eslint
+        run: npm run lint
 
       - name: Tests
         env:

@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+import SwiperCore, { Pagination, Navigation, A11y } from 'swiper/core';
 import { SwiperOptions } from 'swiper';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,6 +24,11 @@ const CSS = {
 			margin: 0,
 			padding: 0,
 			overflow: 'hidden',
+
+			'.swiper-notification': {
+				position: 'absolute',
+				left: '100000000000000px',
+			},
 
 			'&.ss__carousel-vertical': {
 				flexDirection: 'column',
@@ -195,7 +200,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
 		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
 			displaySettings.slidesPerView = props.children.length;
@@ -211,13 +216,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const {
 		children,
-		breakpoints,
 		loop,
 		nextButton,
 		prevButton,
 		hideButtons,
 		vertical,
-		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -246,7 +249,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		},
 	};
 
-	const swiperModulesUnfiltered = modules ? [Navigation, Pagination].concat(modules!) : [Navigation, Pagination];
+	const swiperModulesUnfiltered = modules ? [Navigation, Pagination, A11y].concat(modules!) : [Navigation, Pagination, A11y];
 	//remove any duplicates, in case user passes in Navigation or Pagination
 	const swiperModules = swiperModulesUnfiltered.filter((module, pos) => swiperModulesUnfiltered.indexOf(module) === pos);
 
@@ -296,9 +299,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				<Swiper
 					centerInsufficientSlides={true}
 					onInit={(swiper) => {
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-						//@ts-ignore
+						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
 						if (onInit) {
 							onInit(swiper);

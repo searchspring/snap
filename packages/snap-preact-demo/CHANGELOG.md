@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+### Bug Fixes
+
+- **store-mobx/search/pagination:** removing `pageSizeOptions` from being observed for compatibility ([63ace50](https://github.com/searchspring/snap/commit/63ace50416e787d56a70081b10dc05ea29bb4b71))
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Features
+
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+- **controller-search:** adding `restorePosition` event and refactoring restoration code ([cf57606](https://github.com/searchspring/snap/commit/cf57606322103cdf7d3884127ea272111c8a1644))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

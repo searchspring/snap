@@ -40,7 +40,7 @@ describe('RecommendationInstantiator', () => {
 	it('throws if configuration is not provided', () => {
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator();
+			new RecommendationInstantiator();
 		}).toThrow();
 	});
 
@@ -59,7 +59,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -75,7 +75,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -94,7 +94,7 @@ describe('RecommendationInstantiator', () => {
 
 		expect(() => {
 			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
+			new RecommendationInstantiator(invalidConfig);
 		}).toThrow();
 	});
 
@@ -124,6 +124,29 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(0);
 		expect(clientSpy).toHaveBeenCalledTimes(0);
+	});
+
+	it('logs an error when the recommend response does not comeback', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
+		const client = new MockClient(baseConfig.client!.globals, {});
+		client.mockData.updateConfig({ recommend: { results: 'broken' } });
+		const clientSpy = jest.spyOn(client, 'recommend');
+		const logSpy = jest.spyOn(console, 'log');
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { logger, client });
+		await wait();
+
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(logSpy).not.toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on the following element is missing a component!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
+		);
+		expect(logSpy).toHaveBeenCalledWith(
+			'%c ‼ %c [recommend_trending_0] :: Search JSON not found.',
+			'color: #cc1212; font-weight: bold; font-size: 14px; line-height: 12px;',
+			'color: #cc1212; font-weight: bold;'
+		);
 	});
 
 	it('logs an error when the profile response does not contain templateParameters', async () => {
@@ -245,7 +268,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(4);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			profileCount[controller.context.profile] = profileCount[controller.context.profile] + 1 || 0;
 			expect(controllerId).toBe(`recommend_${controller.context.profile}_${profileCount[controller.context.profile]}`);
@@ -271,7 +294,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controller.context).toStrictEqual({
 				profile: 'trending',
@@ -333,7 +356,7 @@ describe('RecommendationInstantiator', () => {
 		});
 		await wait();
 
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(6);
@@ -378,7 +401,7 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });
 		await wait();
 
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(3);

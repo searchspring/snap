@@ -1,4 +1,5 @@
 import deepmerge from 'deepmerge';
+import cssEscape from 'css.escape';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
@@ -7,11 +8,19 @@ import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type {
+	SearchControllerConfig,
+	BeforeSearchObj,
+	AfterSearchObj,
+	AfterStoreObj,
+	ControllerServices,
+	ContextVariables,
+	RestorePositionObj,
+	ElementPositionObj,
+} from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
-const HEIGHT_CHECK_INTERVAL = 50;
 const API_LIMIT = 500;
 
 const defaultConfig: SearchControllerConfig = {
@@ -54,8 +63,9 @@ export class SearchController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
-		if (this.config.settings?.infinite && typeof this.config.settings.infinite.restorePosition == 'undefined') {
-			this.config.settings.infinite.restorePosition = true;
+		// set restorePosition to be enabled by default when using infinite (if not provided)
+		if (this.config.settings?.infinite && typeof this.config.settings.restorePosition == 'undefined') {
+			this.config.settings.restorePosition = { enabled: true };
 		}
 
 		this.store.setConfig(this.config);
@@ -103,38 +113,83 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
-			search.controller.store.loading = false;
-
 			// save last params
 			this.storage.set('lastStringyParams', JSON.stringify(search.request));
 
+			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
-
 			const stringyParams = JSON.stringify(storableRequestParams);
-
-			if (this.config.settings?.infinite?.restorePosition) {
-				// restore the scroll position saved previously
-				const scrollMap = this.storage.get('scrollMap') || {};
-
-				// interval we ony need to keep checking until the page height > than our stored value
-				const scrollToPosition = scrollMap[stringyParams];
-
-				if (scrollToPosition) {
-					let checkCount = 0;
-					const heightCheck = window.setInterval(() => {
-						if (document.documentElement.scrollHeight >= scrollToPosition) {
-							window.scrollTo(0, scrollToPosition);
-							this.log.debug('scrolling to: ', scrollMap[stringyParams]);
-							window.clearInterval(heightCheck);
-						}
-						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
-							window.clearInterval(heightCheck);
-						}
-						checkCount++;
-					}, HEIGHT_CHECK_INTERVAL);
-				}
+			const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
+			const elementPosition = scrollMap[stringyParams];
+			if (!elementPosition) {
+				// search params have changed - empty the scrollMap
+				this.storage.set('scrollMap', {});
 			}
+
+			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
+
+			search.controller.store.loading = false;
 		});
+
+		// restore position
+		if (this.config.settings?.restorePosition?.enabled) {
+			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
+				const scrollToPosition = () => {
+					return new Promise<void>(async (resolve) => {
+						const offset = element?.domRect?.top || 0;
+						const maxCheckTime = 500;
+						const checkTime = 50;
+						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
+						const maxCheckCount = maxScrolls + 2;
+
+						let scrollBackCount = 0;
+						let checkCount = 0;
+						let scrolledElem: Element | undefined = undefined;
+
+						const checkAndScroll = () => {
+							const elem = document.querySelector(element?.selector!);
+							if (elem) {
+								scrollBackCount++;
+							} else {
+								checkCount++;
+							}
+
+							if (elem) {
+								const { y } = elem.getBoundingClientRect();
+
+								// if the offset is off, we need to scroll into position (can be caused by lazy loaded images)
+								if (y > offset + 1 || y < offset - 1) {
+									elem.scrollIntoView();
+									// after scrolling into view, use top value with offset (for when element at bottom)
+									const { top } = elem.getBoundingClientRect();
+									window.scrollBy(0, -(offset - top));
+									scrolledElem = elem;
+
+									return true;
+								}
+							}
+
+							return false;
+						};
+
+						while (checkAndScroll() || (scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
+							await new Promise((resolve) => setTimeout(resolve, checkTime));
+						}
+
+						if (scrolledElem) {
+							controller.log.debug('restored position to: ', scrolledElem);
+						} else {
+							controller.log.debug('could not locate element with selector: ', element?.selector);
+						}
+
+						resolve();
+					});
+				};
+
+				if (element) await scrollToPosition();
+				await next();
+			});
+		}
 
 		// attach config plugins and event middleware
 		this.use(this.config);
@@ -143,28 +198,43 @@ export class SearchController extends AbstractController {
 	track: SearchTrackMethods = {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
-				// store scroll position
-				if (this.config.settings?.infinite) {
-					let stringyParams = this.storage.get('lastStringyParams');
-					stringyParams = JSON.parse(stringyParams);
+				const target = e.target as HTMLAnchorElement;
+				const resultHref = result.mappings.core?.url;
+				const elemHref = target?.getAttribute('href');
 
-					const storableRequestParams = getStorableRequestParams(stringyParams);
-					stringyParams = JSON.stringify(storableRequestParams);
+				// the href that should be used for restoration - if the elemHref contains the resultHref - use resultHref
+				const storedHref = elemHref?.indexOf(resultHref) != -1 ? resultHref : elemHref || resultHref;
 
-					const scrollMap: any = {};
-					scrollMap[stringyParams] = window.scrollY;
-					this.storage.set('scrollMap', scrollMap);
+				const scrollMap: { [key: string]: ElementPositionObj } = {};
+
+				// generate the selector using element class and parent classes
+				const selector = generateHrefSelector(target, storedHref);
+				const domRect = selector ? document?.querySelector(selector)?.getBoundingClientRect() : undefined;
+
+				// store element position data to scrollMap
+				if (selector || storedHref || domRect) {
+					try {
+						const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
+						const storableRequestParams = getStorableRequestParams(stringyParams);
+						const storableStringyParams = JSON.stringify(storableRequestParams);
+
+						scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+					} catch (err) {
+						// failed to get lastStringParams
+						this.log.warn('Failed to save scollMap!', err);
+					}
 				}
+
+				// store position data or empty object
+				this.storage.set('scrollMap', scrollMap);
 
 				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
-				const target = e.target as HTMLAnchorElement;
-				const href = target?.href || result.mappings.core?.url || undefined;
 
 				const event = this.tracker.track.product.click({
 					intellisuggestData,
 					intellisuggestSignature,
-					href,
+					href: elemHref || resultHref,
 				});
 
 				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
@@ -307,7 +377,7 @@ export class SearchController extends AbstractController {
 				// infinite backfill results
 				if (backfills && backfills.length) {
 					// array to hold all results from backfill responses
-					let backfillResults: SearchResponseModelResult[] = [];
+					const backfillResults: SearchResponseModelResult[] = [];
 
 					const backfillResponses = await Promise.all(backfills);
 					backfillResponses.map(([metaBackfill, responseBackfill]) => {
@@ -333,23 +403,15 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					if (!response.meta) {
-						/**
-						 * MockClient will overwrite the client search() method and use
-						 * SearchData to return mock data which already contains meta data
-						 */
-						// @ts-ignore
+						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 						response.meta = meta;
 					}
 					//append new results to previous results
@@ -358,13 +420,9 @@ export class SearchController extends AbstractController {
 			} else {
 				//standard.
 				[meta, response] = await this.client.search(params);
-				// @ts-ignore
+				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 				if (!response.meta) {
-					/**
-					 * MockClient will overwrite the client search() method and use
-					 * SearchData to return mock data which already contains meta data
-					 */
-					// @ts-ignore
+					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 					response.meta = meta;
 				}
 			}
@@ -423,31 +481,48 @@ export class SearchController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-		} catch (err) {
+		} catch (err: any) {
 			if (err) {
-				switch (err) {
-					case 429:
-						this.store.error = {
-							code: 429,
-							type: ErrorType.WARNING,
-							message: 'Too many requests try again later',
-						};
-						this.log.warn(this.store.error);
-						break;
-					case 500:
-						this.store.error = {
-							code: 500,
-							type: ErrorType.ERROR,
-							message: 'Invalid Search Request or Service Unavailable',
-						};
-						this.log.error(this.store.error);
-						break;
-					default:
-						this.log.error(err);
-						break;
+				if (err.err && err.fetchDetails) {
+					switch (err.fetchDetails.status) {
+						case 429: {
+							this.store.error = {
+								code: 429,
+								type: ErrorType.WARNING,
+								message: 'Too many requests try again later',
+							};
+							break;
+						}
+
+						case 500: {
+							this.store.error = {
+								code: 500,
+								type: ErrorType.ERROR,
+								message: 'Invalid Search Request or Service Unavailable',
+							};
+							break;
+						}
+
+						default: {
+							this.store.error = {
+								type: ErrorType.ERROR,
+								message: err.err.message,
+							};
+							break;
+						}
+					}
+
+					this.log.error(this.store.error);
+					this.handleError(err.err, err.fetchDetails);
+				} else {
+					this.store.error = {
+						type: ErrorType.ERROR,
+						message: `Something went wrong... - ${err}`,
+					};
+					this.log.error(err);
+					this.handleError(err);
 				}
 				this.store.loading = false;
-				this.handleError(err);
 			}
 		}
 	};
@@ -470,6 +545,40 @@ export function getStorableRequestParams(request: SearchRequestModel): SearchReq
 			landingPage: request.merchandising?.landingPage || '',
 		},
 	};
+}
+
+export function generateHrefSelector(element: HTMLElement, href: string, levels = 7): string | undefined {
+	let level = 0;
+	let elem: HTMLElement | null = element;
+
+	while (elem && level <= levels) {
+		// check within
+		const innerHrefElem = elem.querySelector(`[href*="${href}"]`) as HTMLElement;
+		if (innerHrefElem) {
+			// innerHrefElem was found! now get selectors up to elem that contained it
+			let selector = '';
+			let parentElem: HTMLElement | null = innerHrefElem;
+
+			while (parentElem && parentElem != elem.parentElement) {
+				const classNames = parentElem.classList.value.trim().split(' ');
+				// document.querySelector does not appreciate special characters - must escape them
+				const escapedClassSelector = classNames.reduce(
+					(classes, classname) => (classname.trim() ? `${classes}.${cssEscape(classname.trim())}` : classes),
+					''
+				);
+				selector = `${parentElem.tagName}${escapedClassSelector}${selector ? ` ${selector}` : ''}`;
+
+				parentElem = parentElem.parentElement;
+			}
+
+			return `${selector}[href*="${href}"]`;
+		}
+
+		elem = elem.parentElement;
+		level++;
+	}
+
+	return;
 }
 
 function backFillSize(pages: number, pageSize: number) {

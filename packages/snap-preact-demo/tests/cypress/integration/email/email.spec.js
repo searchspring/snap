@@ -30,9 +30,6 @@ describe('Email Recs', () => {
 		it('snap bundle exists on email page', () => {
 			cy.waitForBundle().then((searchspring) => {
 				expect(searchspring).to.exist;
-				cy.window().then((window) => {
-					expect(window.RecsReady).to.equal(undefined);
-				});
 			});
 		});
 	});

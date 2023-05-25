@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { ComponentChildren, h, RefObject } from 'preact';
-import { useState, StateUpdater, MutableRef, useRef } from 'preact/hooks';
+import { ComponentChildren, h } from 'preact';
+import { useState, StateUpdater, MutableRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -10,6 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
+import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>
@@ -42,6 +43,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	const props: DropdownProps = {
 		// default props
 		startOpen: false,
+		disableA11y: false,
 		// global theme
 		...globalTheme?.components?.dropdown,
 		// props
@@ -60,6 +62,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		onToggle,
 		startOpen,
 		disableClickOutside,
+		disableA11y,
 		disableStyles,
 		className,
 		style,
@@ -111,6 +114,9 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 			>
 				<div
 					className="ss__dropdown__button"
+					ref={(e) => (!disableA11y ? useA11y(e) : null)}
+					aria-expanded={showContent}
+					role="button"
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
@@ -141,4 +147,5 @@ export interface DropdownProps extends ComponentProps {
 	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
+	disableA11y?: boolean;
 }

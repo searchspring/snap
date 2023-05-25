@@ -10,7 +10,7 @@ import {
 	SearchSortingStore,
 	SearchHistoryStore,
 } from '../Search/Stores';
-import { StorageStore, StorageType } from '../Storage/StorageStore';
+import { StorageStore } from '../Storage/StorageStore';
 import {
 	AutocompleteStateStore,
 	AutocompleteTermStore,
@@ -69,6 +69,7 @@ export class AutocompleteStore extends AbstractStore {
 			results: observable,
 			pagination: observable,
 			sorting: observable,
+			history: observable,
 		});
 	}
 
@@ -94,20 +95,6 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	public resetTrending(): void {
-		if (this.trending?.length) {
-			this.trending.forEach((term) => {
-				term.active = false;
-			});
-		}
-	}
-
-	public resetHistory(): void {
-		this.history.forEach((term) => {
-			term.active = false;
-		});
-	}
-
 	public resetTerms(): void {
 		this.resetSuggestions();
 		this.resetTrending();
@@ -115,9 +102,15 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	public resetSuggestions(): void {
-		this.terms?.forEach((term) => {
-			term.active = false;
-		});
+		this.terms?.forEach((term) => (term.active = false));
+	}
+
+	public resetTrending(): void {
+		this.trending?.forEach((term) => (term.active = false));
+	}
+
+	public resetHistory(): void {
+		this.history?.forEach((term) => (term.active = false));
 	}
 
 	public setService(name: keyof StoreServices, service: UrlManager): void {
@@ -125,6 +118,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.services[name] = service;
 			if (name === 'urlManager') {
 				this.state.url = service;
+				this.initHistory();
 			}
 		}
 	}
@@ -168,7 +162,8 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {});
-		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {});
+
+		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {}, this.config as AutocompleteStoreConfig);
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {

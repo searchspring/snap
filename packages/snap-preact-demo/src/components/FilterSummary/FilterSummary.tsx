@@ -1,7 +1,7 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { withStore, withController } from '@searchspring/snap-preact-components';
+import { withStore, withController, useA11y } from '@searchspring/snap-preact-components';
 
 type FilterSummaryProps = {
 	store?: SearchStore;
@@ -14,7 +14,7 @@ type FilterSummaryProps = {
 @observer
 export class FilterSummary extends Component<FilterSummaryProps> {
 	render() {
-		const { facets, filters } = this.props.store;
+		const { filters } = this.props.store;
 		const controller = this.props.controller;
 		const removeAll = controller?.urlManager.remove('filter');
 
@@ -34,7 +34,7 @@ export class FilterSummary extends Component<FilterSummaryProps> {
 							))}
 
 						<div className="ss-list-option ss-summary-reset">
-							<a {...removeAll.link} className="ss-list-link">
+							<a {...removeAll.link} className="ss-list-link" ref={(e) => useA11y(e)}>
 								Clear All
 							</a>
 							<a className="ss-list-link">Clear All</a>

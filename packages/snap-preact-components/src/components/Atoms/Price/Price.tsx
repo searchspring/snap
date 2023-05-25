@@ -72,7 +72,7 @@ export function Price(properties: PriceProps): JSX.Element {
 	}
 
 	return raw ? (
-		<>{formattedPrice}</>
+		<Fragment>{formattedPrice}</Fragment>
 	) : (
 		<CacheProvider>
 			<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>

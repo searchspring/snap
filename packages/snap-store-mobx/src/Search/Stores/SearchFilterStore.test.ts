@@ -79,7 +79,7 @@ describe('Filter Store', () => {
 		const filters = new SearchFilterStore(services, filtersInput, searchData.meta);
 
 		// check filter values
-		filters.forEach((filter, index) => {
+		filters.forEach((filter) => {
 			expect(filter.url.constructor.name).toStrictEqual(services.urlManager.constructor.name);
 		});
 	});

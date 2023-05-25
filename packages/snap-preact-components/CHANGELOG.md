@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+### Bug Fixes
+
+- **preact-components-facetslider:** bugfix for slider handle hanging after clear all facets reset ([93c5d6d](https://github.com/searchspring/snap/commit/93c5d6df608a43ecc8b34d5c5baa47b83ae40d49))
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Bug Fixes
+
+- **autocomplete.tsx:** bugfix for emify function when match was at start of term ([8430c5c](https://github.com/searchspring/snap/commit/8430c5c69198359f8397cf25ba0df555e4fe9bbf))
+- **preact-components-autocomplete:** adjusting theme deepmerge to ensure arrays are replaced ([56b57ad](https://github.com/searchspring/snap/commit/56b57adb92689e792c0f0ba728cfaf5e0df61af8))
+- **preact-components:** changing the way that theme display settings are merged for breakpoints ([cb660ef](https://github.com/searchspring/snap/commit/cb660ef3cd58e1bd151c5401a17806668d848f15))
+- **usedisplaysettings.tsx:** fix for useDisplaySettings hook not updating computed breakpoints value ([389bd30](https://github.com/searchspring/snap/commit/389bd30e041ab6969c495e7ee5aec26b8fa2d253))
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+### Bug Fixes
+
+- **controller-autocomplete:** fixing bugs around autocomplete terms ([a0d6b02](https://github.com/searchspring/snap/commit/a0d6b021073be4b4f3d769d33d8bc55bac2c2f39))
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+### Bug Fixes
+
+- **preact-components-hook-usedisplaysettings:** allow for computed values in origBreakpoints ([fb03dd3](https://github.com/searchspring/snap/commit/fb03dd327eba03658286208d23467e0e49c2f160))
+- **preact-components-results:** fixing theme usage to allow merging theme with breakpoints ([74e6a4a](https://github.com/searchspring/snap/commit/74e6a4ae0f64cb7a3da3299b02b753d0a6c79e17))
+- **preact-components:** removing console.log from createHoverProps ([cb56776](https://github.com/searchspring/snap/commit/cb5677698a449b0e46b1ed2674cf7e4f62d2be92))
+- **preact-components:** updating cloneWithProps to use observer for reactivity ([d7bb56d](https://github.com/searchspring/snap/commit/d7bb56dd4ac32df92ad0bd413941607ccbc0a746))
+
+### Features
+
+- **preact-components-hooks:** adding new hook 'useDeepCompareEffect' - using in useDisplaySettings ([0eba325](https://github.com/searchspring/snap/commit/0eba325286fc87f154ae05018a71aae416fd9a6a))
+- **preact-components-toolbox:** adding 'createHoverProps' a helper function for delayed hover props ([0243e7e](https://github.com/searchspring/snap/commit/0243e7eb64b4dcfa9e11d6f4208e6ef38c0cec35))
+- **preact-components:** refactoring to use `previwOnHover` in facet option components and ac ([c82664d](https://github.com/searchspring/snap/commit/c82664d09053e7ad29086c84cae7f9579418c531))
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Features
+
+- **a11y hook:** adding new a11y hook to easily add requirements for keyboard nav for ada on element ([9f21708](https://github.com/searchspring/snap/commit/9f21708f8ec7fdb4aca484ba8e9dbffe39e83a94))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

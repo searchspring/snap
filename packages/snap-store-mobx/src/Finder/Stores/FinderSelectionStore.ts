@@ -54,11 +54,9 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 
 							const storageKey = generateStorageKey(config.id, facet.field);
 							storage.set(`${storageKey}.${levelConfig.key}.values`, selection.data);
+							storage.set(`${storageKey}.${levelConfig.key}.selected`, selection.selected);
 
 							const selectionHierarchy = new SelectionHierarchy(services, config.id, state, facet, levelConfig, loading, storage);
-
-							selectionHierarchy.selected = selection.selected;
-							selectionHierarchy.data = selection.data;
 
 							if (config.persist?.lockSelections) {
 								selectionHierarchy.disabled = true;

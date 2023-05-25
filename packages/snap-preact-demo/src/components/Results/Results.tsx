@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Pagination, Results as ResultsComponent, withStore, withController } from '@searchspring/snap-preact-components';
@@ -39,7 +39,9 @@ export class Results extends Component<ResultsProps> {
 				<div class="clear"></div>
 
 				<Profile name="results" controller={controller}>
-					<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
+					<div id="ss_results">
+						<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
+					</div>
 				</Profile>
 
 				<div class="clear"></div>
@@ -59,7 +61,6 @@ type NoResultsProps = {
 
 @withController
 @withStore
-//@ts-ignore
 @observer
 export class NoResults extends Component<NoResultsProps> {
 	render() {

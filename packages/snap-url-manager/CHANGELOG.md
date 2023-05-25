@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+### Bug Fixes
+
+- **urlmanager-linker-react:** adjusting code so that if an event is not passed it will not error out ([e4a4b62](https://github.com/searchspring/snap/commit/e4a4b6235d5f6b4719b3bddf0a57e1bea118fc0d))
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Bug Fixes
+
+- **urltranslator:** url range filters bug fix when using tab manager ([4194261](https://github.com/searchspring/snap/commit/41942616f59428c5935f45175ac048a6244413ca))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

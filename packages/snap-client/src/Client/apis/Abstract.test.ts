@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import { API, ApiConfiguration, ApiConfigurationParameters, HTTPQuery } from './Abstract';
+import { API, ApiConfiguration, ApiConfigurationParameters } from './Abstract';
 import { HTTPHeaders } from '../../types';
 
 describe('ApiConfiguration', () => {
@@ -21,7 +21,7 @@ describe('ApiConfiguration', () => {
 			purgeable: false,
 		};
 
-		const customQueryParamsStringify = (params: HTTPQuery) => {
+		const customQueryParamsStringify = () => {
 			return 'custom';
 		};
 
@@ -88,7 +88,7 @@ describe('Abstract Api', () => {
 		customheader: 'customkey',
 	};
 
-	let CustomCacheConfig = {
+	const CustomCacheConfig = {
 		ttl: 2222,
 		enabled: false,
 		maxSize: 4, // KB
@@ -101,7 +101,7 @@ describe('Abstract Api', () => {
 		.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve() } as Response));
 
 	it('can pass in all the props', async () => {
-		let config: ApiConfigurationParameters = {
+		const config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			headers: customHeaders,
@@ -111,7 +111,7 @@ describe('Abstract Api', () => {
 
 		// end set up
 
-		let api = new API(new ApiConfiguration(config));
+		const api = new API(new ApiConfiguration(config));
 
 		//has correct values
 		expect(api?.cache).toEqual({
@@ -142,9 +142,9 @@ describe('Abstract Api', () => {
 	});
 
 	it('can pass pass in queryParamsStringify', async () => {
-		let queryParamMockfn = jest.fn(() => 'here');
+		const queryParamMockfn = jest.fn(() => 'here');
 
-		let config: ApiConfigurationParameters = {
+		const config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			queryParamsStringify: queryParamMockfn,
@@ -152,7 +152,7 @@ describe('Abstract Api', () => {
 
 		// end set up
 
-		let api = new API(new ApiConfiguration(config));
+		const api = new API(new ApiConfiguration(config));
 
 		//can use query params stringify
 		// @ts-ignore
@@ -161,14 +161,14 @@ describe('Abstract Api', () => {
 	});
 
 	it('can use createFetchParams', async () => {
-		let config: ApiConfigurationParameters = {
+		const config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			headers: customHeaders,
 		};
 
 		// end set up
-		let api = new API(new ApiConfiguration(config));
+		const api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -192,14 +192,14 @@ describe('Abstract Api', () => {
 		//@ts-ignore
 		expect(() => api.createFetchParams(badContext)).toThrowError(`Request failed. Missing "siteId" parameter.`);
 
-		let config2: ApiConfigurationParameters = {
+		const config2: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			headers: customHeaders,
 			maxRetry: 2,
 			cache: CustomCacheConfig,
 		};
-		let api2 = new API(new ApiConfiguration(config2));
+		const api2 = new API(new ApiConfiguration(config2));
 
 		const contextWithQuery = { ...context, query: { key: 'value' } };
 		// @ts-ignore
@@ -208,13 +208,13 @@ describe('Abstract Api', () => {
 	});
 
 	it('can use cacheKey', async () => {
-		let config: ApiConfigurationParameters = {
+		const config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			headers: customHeaders,
 		};
 
-		let api = new API(new ApiConfiguration(config));
+		const api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -267,14 +267,14 @@ describe('Abstract Api', () => {
 	});
 
 	it('can handle 429s', async () => {
-		let config: ApiConfigurationParameters = {
+		const config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
 			headers: customHeaders,
 			maxRetry: 2,
 		};
 
-		let api = new API(new ApiConfiguration(config));
+		const api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -292,7 +292,17 @@ describe('Abstract Api', () => {
 		await expect(async () => {
 			//@ts-ignore
 			await api.request(context);
-		}).rejects.toBe(429);
+		}).rejects.toStrictEqual({
+			err: new Error('Retry rate limit exceeded.'),
+			fetchDetails: {
+				body: '{"siteId":"8uyt2m"}',
+				headers: { customheader: 'customkey' },
+				message: 'FAILED',
+				method: 'POST',
+				status: 429,
+				url: 'https://searchspring.com/api/v1/autocomplete',
+			},
+		});
 
 		expect(fetchfn429).toHaveBeenCalledTimes((config.maxRetry || 0) + 1);
 	});

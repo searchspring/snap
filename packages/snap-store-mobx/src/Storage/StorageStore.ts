@@ -7,7 +7,7 @@ const utils = {
 export class StorageStore {
 	private type: StorageType | null = null;
 	private expiration = 31536000000; // one year (ms)
-	private sameSite: string = 'Lax';
+	private sameSite = 'Lax';
 	private key = 'ss-storage';
 	public state: Record<string, any> = {};
 

@@ -62,7 +62,6 @@ type DropdownProps = {
 	loading: boolean;
 };
 
-//@ts-ignore
 @observer
 class Dropdown extends Component<DropdownProps> {
 	render() {

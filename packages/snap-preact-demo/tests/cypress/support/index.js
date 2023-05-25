@@ -1,22 +1,34 @@
-// ***********************************************************
-// This example support/index.js is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
+// ***********************************************
+// Custom Snap Cypress Configuration
 //
 // You can read more here:
 // https://on.cypress.io/configuration
-// ***********************************************************
+// ***********************************************
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+import './custom';
+import { ignoredErrors } from './custom';
 
 import { BeaconType } from '@searchspring/snap-tracker';
+
+// ignore 3rd party uncaught exceptions - but not bundle exceptions
+Cypress.on('uncaught:exception', (err) => {
+	if (ignoredErrors?.length) {
+		for (let i = 0; i < ignoredErrors.length; i++) {
+			const checkFor = new RegExp(ignoredErrors[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+			if (err.stack.match(checkFor)) {
+				return false;
+			}
+		}
+	}
+
+	if (err.stack.match(/\/\/localhost:\d+\/bundle\./)) {
+		return true;
+	}
+
+	return false;
+});
 
 beforeEach(() => {
 	// make references to requests available

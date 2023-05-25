@@ -19,7 +19,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
-| settings.infinite.restorePosition | boolean to enable/disable restoring window scroll position when navigating back to previous page | true |   |
+| settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
 <br>
 
 ```typescript
@@ -115,7 +115,9 @@ const searchConfig = {
 For example, if `config.settings.infinite.backfill` contains a value of `5` and the user has paginated to page `4` and reloads the page, `4` pages of results will be shown. However, if the user has paginated to page `6` or above and reloads the page, only page `1` results will be shown. 
 
 ### Restore Position
-If `config.settings.infinite.backfill` is specified, any time you navigate back to a previous page, the controller will scroll to the pages previous position. This can be disabled and left entirely up to the browser by setting `restorePosition` to `false`.
+Any time you navigate back to a previous page, this setting will tell the controller to attempt to scroll to the previous position on the page. The restore position algorithm uses a selector that was stored when tracking the product that was clicked (`track.product.click()`) - this saves the product href, selector and domRect position details. This configuration can be disabled and left entirely up to the browser by setting `restorePosition.enabled` to `false` (the default setting).
+
+When using infinite scroll, it is recommended to specify a value for `config.settings.infinite.backfill` to ensure that when returning to the product listing page, that the product is there to scroll to.
 
 ```typescript
 const searchConfig = {
@@ -128,11 +130,53 @@ const searchConfig = {
 	settings: {
 		infinite: {
 			backfill: 5,
-			restorePosition: false,
+		}
+		restorePosition: {
+			enabled: false,
 		}
 	}
 };
 ```
+
+
+### Pagination Settings 
+
+#### `pageSizeOptions` property
+The optional `pageSizeOptions` property gives the ability to overright the default pageSizeOptions in the SearchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
+
+`label` - label text to display
+
+`value` - number of results for this selection
+
+`url` - reference to the URLManager containing href and onclick values
+
+`active` - boolean stating if current page size matches the value of this option
+
+
+```typescript
+const searchConfig = {
+	id: 'search',
+	settings: {
+		pagination: {
+			pageSizeOptions: [
+				{
+					label: `show 30`,
+					value: 30,
+				},
+				{
+					label: `show 40`,
+					value: 40,
+				},
+				{
+					label: `show 50`,
+					value: 50,
+				},
+			]
+		},
+	}
+};
+```
+
 
 ### Infinite Scrolling
 By default when using the infinite configuration, additional pages are appended when `store.pagination.next()` is invoked. To automatically request the next page when the user has scrolled to the bottom, an `useIntersection` hook along with a `useRef` attached to an element below the results can be used to invoke `pagination.next.url.go({ history: 'replace' })` when the element comes into the viewport. 
@@ -194,6 +238,11 @@ export class Content extends Component {
 ### afterStore
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
+
+### restorePosition
+- Called with `eventData` = { controller, element }
+- If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
+- Invoked during final stages of `afterStore` just prior to setting loading state to false
 
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 

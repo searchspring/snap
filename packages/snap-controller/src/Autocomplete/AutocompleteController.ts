@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType, ErrorType, SearchHistoryStore } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -116,7 +116,7 @@ export class AutocompleteController extends AbstractController {
 	track: AutocompleteTrackMethods = {
 		// TODO: add in future when autocomplete supports result click tracking
 		product: {
-			click: (e: MouseEvent, result): void => {
+			click: (): void => {
 				this.log.warn('product.click tracking is not currently supported in this controller type');
 			},
 		},
@@ -221,9 +221,9 @@ export class AutocompleteController extends AbstractController {
 						}
 
 						if (this.config.settings!.integratedSpellCorrection) {
-							// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-							if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+							//set fallbackQuery to the correctedQuery
+							if (this.store.search.correctedQuery) {
+								actionUrl = actionUrl?.set(PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 							}
 						} else if (this.store.search.originalQuery) {
 							// use corrected query and originalQuery
@@ -284,9 +284,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					if (this.config.settings!.integratedSpellCorrection) {
-						// if integratedSpellCorrection is set, set fallbackQuery to the first suggestion as long as its value differs
-						if (input && this.store.terms.length && this.store.terms[0].value != input.value) {
-							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.terms[0].value);
+						//set fallbackQuery to the correctedQuery
+						if (this.store.search.correctedQuery) {
+							addHiddenFormInput(form, PARAM_FALLBACK_QUERY, this.store.search.correctedQuery.string);
 						}
 					} else if (this.store.search.originalQuery) {
 						// use corrected query and originalQuery
@@ -348,8 +348,8 @@ export class AutocompleteController extends AbstractController {
 
 				const value = (e.target as HTMLInputElement).value;
 
-				// prevent search when value is unchanged
-				if (this.store.state.input == value && this.store.loaded) {
+				// prevent search when value is unchanged or empty
+				if (((!this.store.state.input && !value) || this.store.state.input == value) && this.store.loaded) {
 					return;
 				}
 
@@ -362,23 +362,30 @@ export class AutocompleteController extends AbstractController {
 					});
 				}
 
+				// TODO cancel any current requests?
+
 				clearTimeout(this.handlers.input.timeoutDelay);
 
-				if (!value) {
-					// TODO cancel any current requests?
-					this.store.reset();
-					this.urlManager.reset().go();
+				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
+				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
+				this.urlManager.reset().go();
 
-					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
+				if (!value) {
+					// there is no input value - reset state of store
+					this.store.reset();
+
+					// show results for trending or history (if configured) - trending has priority
+					if (trendingResultsEnabled) {
 						this.store.trending[0].preview();
-					} else if (this.store.history?.length && this.config.settings?.history?.showResults) {
+					} else if (historyResultsEnabled) {
 						this.store.history[0].preview();
 					}
 				} else {
-					this.store.resetTerms();
+					// new query in the input - trigger a new search via UrlManager
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();
+
 						this.urlManager.set({ query: this.store.state.input }).go();
 					}, INPUT_DELAY);
 				}
@@ -424,6 +431,8 @@ export class AutocompleteController extends AbstractController {
 		inputs.forEach((input) => {
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
+			input.setAttribute('autocorrect', 'off');
+			input.setAttribute('autocapitalize', 'none');
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
@@ -446,6 +455,7 @@ export class AutocompleteController extends AbstractController {
 				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 				formActionUrl = form.action || '';
 
+				// serializeForm will include additional form element in our urlManager as globals
 				if (this.config.settings?.serializeForm) {
 					bindFormParameters(form, this.handlers.input.formElementChange, function (elem: HTMLInputElement) {
 						return elem != input;
@@ -473,11 +483,13 @@ export class AutocompleteController extends AbstractController {
 				);
 			}
 
-			if (document.activeElement === input) {
+			// if the input is currently focused, trigger setFocues which will eventually trigger keyup - but not if loading
+			if (document.activeElement === input && !this.store.loading) {
 				this.setFocused(input);
 			}
 		});
 
+		// get trending terms - this is at the bottom because urlManager changes need to be in place before creating the store
 		if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
 			this.searchTrending();
 		}
@@ -512,8 +524,14 @@ export class AutocompleteController extends AbstractController {
 	};
 
 	search = async (): Promise<void> => {
+		// if urlManager has no query, there will be no need to get params and no query
+		if (!this.urlManager.state.query) {
+			return;
+		}
+
 		const params = this.params;
 
+		// if params have no query do not search
 		if (!params?.search?.query?.string) {
 			return;
 		}
@@ -537,13 +555,9 @@ export class AutocompleteController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			const [meta, response] = await this.client.autocomplete(params);
-			// @ts-ignore
+			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				// @ts-ignore
+				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 				response.meta = meta;
 			}
 
@@ -573,7 +587,6 @@ export class AutocompleteController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -597,31 +610,48 @@ export class AutocompleteController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-		} catch (err) {
+		} catch (err: any) {
 			if (err) {
-				switch (err) {
-					case 429:
-						this.store.error = {
-							code: 429,
-							type: ErrorType.WARNING,
-							message: 'Too many requests try again later',
-						};
-						this.log.warn(this.store.error);
-						break;
-					case 500:
-						this.store.error = {
-							code: 500,
-							type: ErrorType.ERROR,
-							message: 'Invalid Search Request or Service Unavailable',
-						};
-						this.log.error(this.store.error);
-						break;
-					default:
-						this.log.error(err);
-						break;
+				if (err.err && err.fetchDetails) {
+					switch (err.fetchDetails.status) {
+						case 429: {
+							this.store.error = {
+								code: 429,
+								type: ErrorType.WARNING,
+								message: 'Too many requests try again later',
+							};
+							break;
+						}
+
+						case 500: {
+							this.store.error = {
+								code: 500,
+								type: ErrorType.ERROR,
+								message: 'Invalid Search Request or Service Unavailable',
+							};
+							break;
+						}
+
+						default: {
+							this.store.error = {
+								type: ErrorType.ERROR,
+								message: err.err.message,
+							};
+							break;
+						}
+					}
+
+					this.log.error(this.store.error);
+					this.handleError(err.err, err.fetchDetails);
+				} else {
+					this.store.error = {
+						type: ErrorType.ERROR,
+						message: `Something went wrong... - ${err}`,
+					};
+					this.log.error(err);
+					this.handleError(err);
 				}
 				this.store.loading = false;
-				this.handleError(err);
 			}
 		}
 	};
@@ -632,6 +662,11 @@ function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) 
 	inputElem.type = 'hidden';
 	inputElem.name = name;
 	inputElem.value = value;
+
+	// remove existing form element if it exists (prevent duplicates)
+	form.querySelector(`[type="hidden"][name="${name}"]`)?.remove();
+
+	// append form element
 	form.append(inputElem);
 }
 
@@ -643,7 +678,7 @@ async function timeout(time: number): Promise<void> {
 
 // for grabbing other parameters from the form and using them in UrlManager
 
-const INPUT_TYPE_BLACKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
+const INPUT_TYPE_BLOCKLIST = ['file', 'reset', 'submit', 'button', 'image', 'password'];
 
 function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: string]: string | undefined } {
 	const parameters: { [formName: string]: string | undefined } = {};
@@ -656,7 +691,7 @@ function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: s
 				continue;
 			}
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				if ((elem.type != 'checkbox' && elem.type != 'radio') || elem.checked) {
 					parameters[elem.name] = elem.value;
 				}
@@ -667,6 +702,7 @@ function getFormParameters(form: HTMLFormElement, filterFn: any): { [formName: s
 	return parameters;
 }
 
+// this picks up changes to the form
 function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void {
 	if (typeof form == 'object' && form.nodeName == 'FORM') {
 		for (let i = form.elements.length - 1; i >= 0; i--) {
@@ -676,7 +712,7 @@ function bindFormParameters(form: HTMLFormElement, fn: any, filterFn: any): void
 				continue;
 			}
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				elem.addEventListener('change', fn);
 			}
 		}
@@ -688,7 +724,7 @@ function unbindFormParameters(form: HTMLFormElement, fn: any): void {
 		for (let i = form.elements.length - 1; i >= 0; i--) {
 			const elem = form.elements[i] as HTMLInputElement;
 
-			if (elem.name && !INPUT_TYPE_BLACKLIST.includes(elem.type)) {
+			if (elem.name && !INPUT_TYPE_BLOCKLIST.includes(elem.type)) {
 				elem.removeEventListener('change', fn);
 			}
 		}

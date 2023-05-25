@@ -5,10 +5,17 @@ Renders a list of hierarchy options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'hierarchy'.
+The `values` prop specifies all facet values where the facet type is 'hierarchy'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetHierarchyOptions facet={hierarchyFacet} />
 ```
 
 ### hideCount
@@ -19,7 +26,7 @@ The `hideCount` prop will disable the facet count values.
 ```
 
 ### previewOnFocus
-If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value is focused. 
+If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 
 ```jsx
 <Autocomplete>
@@ -28,6 +35,7 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
     ...
 </Autocomplete>
 ```
+
 
 ### valueProps
 The `valueProps` prop will be spread onto each value's `<a>` element. Typical usage would be to provide custom callback functions when used within Autocomplete.

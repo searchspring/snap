@@ -5,10 +5,17 @@ Renders a grid of facet options.
 ## Usage
 
 ### values
-The required `values` prop specifies all facet values where the facet type is 'grid'.
+The `values` prop specifies all facet values where the facet type is 'grid'. Overrides values passed via the facet prop. 
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} />
+```
+
+### facet
+The `facet` prop specifies the reference to the facet object in the store.
+
+```jsx
+<FacetGridOptions facet={sizeFacet} />
 ```
 
 ### columns
@@ -26,7 +33,7 @@ The `gapSize` prop is the gap size between rows and columns.
 ```
 
 ### previewOnFocus
-If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value is focused. 
+If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over. 
 
 ```jsx
 <Autocomplete>

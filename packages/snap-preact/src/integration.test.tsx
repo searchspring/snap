@@ -2,11 +2,10 @@ import { h } from 'preact';
 
 import '@testing-library/jest-dom/extend-expect';
 import { cleanup, waitFor } from '@testing-library/preact';
-import userEvent from '@testing-library/user-event';
 
 import { cookies } from '@searchspring/snap-toolbox';
 
-import { Snap, SnapConfig, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
+import { Snap, SnapConfig, DEV_COOKIE } from './Snap';
 
 const baseConfig: SnapConfig = {
 	client: {
@@ -168,7 +167,7 @@ describe('Snap Preact Integration', () => {
 	it(`takes the ss_attribution param from the URL and sets the sessionStorage`, async () => {
 		// set up
 		const key = 'ssAttribution';
-		let mockStorage: {
+		const mockStorage: {
 			[key: string]: string;
 		} = {};
 		global.Storage.prototype.setItem = jest.fn((key, value) => {
@@ -182,7 +181,7 @@ describe('Snap Preact Integration', () => {
 		window.location = {
 			href: 'https://www.merch.com',
 		};
-		let snap = new Snap(baseConfig);
+		new Snap(baseConfig);
 		expect(mockStorage[key]).toBeUndefined();
 
 		// should add attribution to storage from url
@@ -190,7 +189,7 @@ describe('Snap Preact Integration', () => {
 		window.location = {
 			href: 'https://www.merch.com?ss_attribution=email:emailTag',
 		};
-		snap = new Snap(baseConfig);
+		new Snap(baseConfig);
 		expect(mockStorage[key]).toBe('email:emailTag');
 
 		// remove attribution query param, but ensure that sessionStorage value still set
@@ -198,7 +197,7 @@ describe('Snap Preact Integration', () => {
 		window.location = {
 			href: 'https://www.merch.com',
 		};
-		snap = new Snap(baseConfig);
+		new Snap(baseConfig);
 		expect(mockStorage[key]).toBe('email:emailTag');
 
 		// change attribution to email:differentEmailTag
@@ -206,7 +205,7 @@ describe('Snap Preact Integration', () => {
 		window.location = {
 			href: 'https://www.merch.com?ss_attribution=email:differentEmailTag',
 		};
-		snap = new Snap(baseConfig);
+		new Snap(baseConfig);
 		expect(mockStorage[key]).toBe('email:differentEmailTag');
 
 		// clean up
@@ -227,7 +226,7 @@ describe('Snap Preact Integration', () => {
 		};
 
 		expect(() => {
-			const snap = new Snap(baseConfig);
+			new Snap(baseConfig);
 		}).toThrow();
 
 		// wait for rendering of BranchOverride component

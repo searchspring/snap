@@ -60,6 +60,26 @@ describe('Dropdown Component', () => {
 		expect(childElement).toBeInTheDocument();
 	});
 
+	it('Can enable/disable useAlly with disableA11y prop', () => {
+		const child = 'this is the child';
+		const rendered = render(<Dropdown button={'open me'}>{child}</Dropdown>);
+
+		const buttonElement = rendered.container.querySelector('.ss__dropdown__button');
+
+		expect(buttonElement).toBeInTheDocument();
+
+		expect(buttonElement).toHaveAttribute('ssA11y');
+
+		const rendered2 = render(
+			<Dropdown button={'open me'} disableA11y>
+				{child}
+			</Dropdown>
+		);
+
+		const buttonElement2 = rendered2.container.querySelector('.ss__dropdown__button');
+		expect(buttonElement2).not.toHaveAttribute('ssA11y');
+	});
+
 	it('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
@@ -79,11 +99,13 @@ describe('Dropdown Component', () => {
 		};
 		const rendered = render(<Dropdown button={<Button />}></Dropdown>);
 
-		const buttonElement = rendered.container.querySelector('.button-with-props');
+		let buttonElement = rendered.container.querySelector('.button-with-props');
 		expect(buttonElement).toBeInTheDocument();
 		expect(buttonElement?.innerHTML).toBe('open me');
 
 		await (buttonElement as HTMLElement).click();
+
+		buttonElement = rendered.container.querySelector('.button-with-props');
 		expect(buttonElement?.innerHTML).toBe('close me');
 	});
 
@@ -109,14 +131,16 @@ describe('Dropdown Component', () => {
 		const buttonElement = rendered.getByText('open me');
 		expect(buttonElement).toBeInTheDocument();
 
-		const childElement = rendered.container.querySelector('.child-with-props');
+		let childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement).toBeInTheDocument();
 		expect(childElement?.innerHTML).toBe('im closed');
 
 		await buttonElement.click();
+		childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement?.innerHTML).toBe('im open');
 
 		await (childElement as HTMLElement).click();
+		childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement?.innerHTML).toBe('im closed');
 	});
 
@@ -138,14 +162,16 @@ describe('Dropdown Component', () => {
 		const buttonElement = rendered.getByText('open me');
 		expect(buttonElement).toBeInTheDocument();
 
-		const contentElement = rendered.container.querySelector('.content-with-props');
+		let contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement).toBeInTheDocument();
 		expect(contentElement?.innerHTML).toBe('im closed');
 
 		await buttonElement.click();
+		contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement?.innerHTML).toBe('im open');
 
 		await (contentElement as HTMLElement).click();
+		contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement?.innerHTML).toBe('im closed');
 	});
 

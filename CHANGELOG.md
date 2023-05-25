@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
+
+### Bug Fixes
+
+- **store-mobx/search/pagination:** removing `pageSizeOptions` from being observed for compatibility ([63ace50](https://github.com/searchspring/snap/commit/63ace50416e787d56a70081b10dc05ea29bb4b71))
+
+## [0.44.2](https://github.com/searchspring/snap/compare/v0.44.1...v0.44.2) (2023-05-08)
+
+### Bug Fixes
+
+- **preact-components-facetslider:** bugfix for slider handle hanging after clear all facets reset ([93c5d6d](https://github.com/searchspring/snap/commit/93c5d6df608a43ecc8b34d5c5baa47b83ae40d49))
+
+## [0.44.1](https://github.com/searchspring/snap/compare/v0.44.0...v0.44.1) (2023-05-05)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.44.0](https://github.com/searchspring/snap/compare/v0.43.1...v0.44.0) (2023-05-05)
+
+### Bug Fixes
+
+- **autocomplete.tsx:** bugfix for emify function when match was at start of term ([8430c5c](https://github.com/searchspring/snap/commit/8430c5c69198359f8397cf25ba0df555e4fe9bbf))
+- **controller-search:** fully escaping CSS selectors in restorePosition and adjusting maxCheck ([0b31fe8](https://github.com/searchspring/snap/commit/0b31fe87ab2634cd13bd6144e29ad6cf570c854b))
+- **preact-components-autocomplete:** adjusting theme deepmerge to ensure arrays are replaced ([56b57ad](https://github.com/searchspring/snap/commit/56b57adb92689e792c0f0ba728cfaf5e0df61af8))
+- **preact-components:** changing the way that theme display settings are merged for breakpoints ([cb660ef](https://github.com/searchspring/snap/commit/cb660ef3cd58e1bd151c5401a17806668d848f15))
+- **recommendationinstantiator:** bugfix for improper err logging when rec api call fails ([961ba75](https://github.com/searchspring/snap/commit/961ba75696ff29d77309b3ca7701fe46b664d401))
+- **usedisplaysettings.tsx:** fix for useDisplaySettings hook not updating computed breakpoints value ([389bd30](https://github.com/searchspring/snap/commit/389bd30e041ab6969c495e7ee5aec26b8fa2d253))
+
+### Features
+
+- **controller-search:** modifying href selector generation to account for extra spaces and colons ([87bbd8b](https://github.com/searchspring/snap/commit/87bbd8b13720c55dcb551bca14d34873790b7872))
+- **searchpaginationstore:** adding configuration for pagination pageSizeOptions ([9937548](https://github.com/searchspring/snap/commit/9937548e24904a825e8d3655890a4d51c3461717))
+
+## [0.43.1](https://github.com/searchspring/snap/compare/v0.43.0...v0.43.1) (2023-04-13)
+
+### Bug Fixes
+
+- **controller-autocomplete:** fixing bugs around autocomplete terms ([a0d6b02](https://github.com/searchspring/snap/commit/a0d6b021073be4b4f3d769d33d8bc55bac2c2f39))
+
+# [0.43.0](https://github.com/searchspring/snap/compare/v0.42.3...v0.43.0) (2023-04-11)
+
+### Bug Fixes
+
+- **autcompletecontroller:** cant call go and preview at the same time ([841db30](https://github.com/searchspring/snap/commit/841db3097c1aeee12ee73e36fcf2628696038fee))
+- **preact-components-hook-usedisplaysettings:** allow for computed values in origBreakpoints ([fb03dd3](https://github.com/searchspring/snap/commit/fb03dd327eba03658286208d23467e0e49c2f160))
+- **preact-components-results:** fixing theme usage to allow merging theme with breakpoints ([74e6a4a](https://github.com/searchspring/snap/commit/74e6a4ae0f64cb7a3da3299b02b753d0a6c79e17))
+- **preact-components:** removing console.log from createHoverProps ([cb56776](https://github.com/searchspring/snap/commit/cb5677698a449b0e46b1ed2674cf7e4f62d2be92))
+- **preact-components:** updating cloneWithProps to use observer for reactivity ([d7bb56d](https://github.com/searchspring/snap/commit/d7bb56dd4ac32df92ad0bd413941607ccbc0a746))
+
+### Features
+
+- **preact-components-hooks:** adding new hook 'useDeepCompareEffect' - using in useDisplaySettings ([0eba325](https://github.com/searchspring/snap/commit/0eba325286fc87f154ae05018a71aae416fd9a6a))
+- **preact-components-toolbox:** adding 'createHoverProps' a helper function for delayed hover props ([0243e7e](https://github.com/searchspring/snap/commit/0243e7eb64b4dcfa9e11d6f4208e6ef38c0cec35))
+- **preact-components:** refactoring to use `previwOnHover` in facet option components and ac ([c82664d](https://github.com/searchspring/snap/commit/c82664d09053e7ad29086c84cae7f9579418c531))
+
+## [0.42.3](https://github.com/searchspring/snap/compare/v0.42.2...v0.42.3) (2023-03-28)
+
+### Bug Fixes
+
+- **autocompletestore:** re-init ac history when setService urlManager is called ([0ff3114](https://github.com/searchspring/snap/commit/0ff311447f13b75240ca3d7e34e616c4eba52b00))
+- **store-search-result-store:** adjusting logic for inline banner injection and adding a test ([4ebd069](https://github.com/searchspring/snap/commit/4ebd069198f00059dfc834fef0a5a440f470ca9c))
+- **urlmanager-linker-react:** adjusting code so that if an event is not passed it will not error out ([e4a4b62](https://github.com/searchspring/snap/commit/e4a4b6235d5f6b4719b3bddf0a57e1bea118fc0d))
+
+## [0.42.2](https://github.com/searchspring/snap/compare/v0.42.1...v0.42.2) (2023-03-24)
+
+### Bug Fixes
+
+- **store-mobx-finder:** fixing issue where selected persisted data was not being stored properly ([f05730a](https://github.com/searchspring/snap/commit/f05730ac5279050ec8fa236fa364c6ab5e04c878))
+
+## [0.42.1](https://github.com/searchspring/snap/compare/v0.42.0...v0.42.1) (2023-03-07)
+
+### Bug Fixes
+
+- **controller-autocomplete:** adding input attributes to disable 'autocorrect' and 'autocapitalize' ([eaef3cc](https://github.com/searchspring/snap/commit/eaef3ccadf9bc7c6f2fce5842f76bb541663d7eb))
+- **controller-autocomplete:** preventing duplicate hidden form fields from being created ([cfd5e68](https://github.com/searchspring/snap/commit/cfd5e688ed8f2c64f63d368444153d9c7d38c9b0))
+- **controller-search:** adjusting generateHrefSelector logic to ensure classList value ([3ed5890](https://github.com/searchspring/snap/commit/3ed58903ad6119a64e72d52d964e956c8aed822e))
+
+# [0.42.0](https://github.com/searchspring/snap/compare/v0.41.2...v0.42.0) (2023-03-03)
+
+### Bug Fixes
+
+- **controller-search:** fixing issue where 'restorePosition' would fire returning to previous search ([86a5ca7](https://github.com/searchspring/snap/commit/86a5ca787788c480d649eef6037e52304d2eee50))
+- **urltranslator:** url range filters bug fix when using tab manager ([4194261](https://github.com/searchspring/snap/commit/41942616f59428c5935f45175ac048a6244413ca))
+
+### Features
+
+- **a11y hook:** adding new a11y hook to easily add requirements for keyboard nav for ada on element ([9f21708](https://github.com/searchspring/snap/commit/9f21708f8ec7fdb4aca484ba8e9dbffe39e83a94))
+- **controller-search:** adding 'restorePosition' setting with offset option ([016586c](https://github.com/searchspring/snap/commit/016586ce826908fe8e8c3f34183edab8378390a2))
+- **controller-search:** adding `restorePosition` event and refactoring restoration code ([cf57606](https://github.com/searchspring/snap/commit/cf57606322103cdf7d3884127ea272111c8a1644))
+
 ## [0.41.2](https://github.com/searchspring/snap/compare/v0.41.1...v0.41.2) (2023-02-20)
 
 **Note:** Version bump only for package @searchspring/snap

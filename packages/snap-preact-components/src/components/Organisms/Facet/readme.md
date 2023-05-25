@@ -43,7 +43,7 @@ The `limit` prop sets the number of options to display before the remaining opti
 ```
 
 ### previewOnFocus
-If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value is focused. 
+If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over. 
 
 ```jsx
 <Facet facet={controller.store.facets[0]} previewOnFocus={true} />
