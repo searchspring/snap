@@ -57,12 +57,16 @@ describe('search request sort transform', () => {
 		expect(params).toEqual({});
 	});
 
-	it('throws if params invalid', () => {
-		expect(() => transformSearchRequest.sorts({ sorts: [{ field: 'a_field' }] })).toThrow();
-		expect(() => transformSearchRequest.sorts({ sorts: [{ direction: 'desc' as any }] })).toThrow();
-
+	it('returns empty object if params are invalid', () => {
+		//missing field or direction
+		const params1 = transformSearchRequest.sorts({ sorts: [{ field: 'a_field' }] });
+		const params2 = transformSearchRequest.sorts({ sorts: [{ direction: 'desc' as any }] });
 		// incorrect direction
-		expect(() => transformSearchRequest.sorts({ sorts: [{ field: 'a_field', direction: 'descending' as any }] })).toThrow();
+		const params3 = transformSearchRequest.sorts({ sorts: [{ field: 'a_field', direction: 'descending' as any }] });
+
+		expect(params1).toEqual({});
+		expect(params2).toEqual({});
+		expect(params3).toEqual({});
 	});
 });
 

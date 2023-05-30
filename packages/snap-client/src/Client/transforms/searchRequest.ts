@@ -29,11 +29,13 @@ transformSearchRequest.sorts = (request: SearchRequestModel = {}) => {
 		}
 
 		if (!sort.field || !sort.direction) {
-			throw 'valid sort requires field and direction';
+			console.warn('valid sort requires field and direction');
+			return {};
 		}
 
 		if (sort.direction != 'asc' && sort.direction != 'desc') {
-			throw 'valid sort directions: asc, desc';
+			console.warn(`invalid sort direction used: ${sort.direction} - valid sort directions are: asc, desc`);
+			return {};
 		}
 
 		return {
