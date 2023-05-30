@@ -57,25 +57,15 @@ After initializing a Snapfu project, it will contain a template ready for you to
 npm run dev
 ```
 
-The local server will run at [https://localhost:3333](https://localhost:3333) and serves the contents of the `/public` directory
+The local server will run at [https://localhost:3333](https://localhost:3333) and serves the contents of the `/public` directory as well as the project bundle files. The development bundle files are be served from [https://localhost:3333/bundle.js](https://localhost:3333/bundle.js).
 
-The development bundle will be served from [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js)
+Note: The local server uses a self-signed certificate for HTTPS, this will require adding a browser security exception for allowing the loading of these resources. There is a Chrome browser flag that can be set to prevent adding an exception: chrome://flags/#allow-insecure-localhost
 
-There are two ways we can develop and integration using the bundle:
-
-### Snapfu extension 
-
-[Snapfu extension](https://github.com/searchspring/snapfu-extension-chrome)
-
-Visit the website you are developing for. Click the extension to enable it and set the mode to `local`, then press `Save`.
-
-The page will reload and will load the local development bundle [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) onto the current website.
-
-The page will automatically reload upon saving any code modifications while `npm run dev` is running.
+Using Snapfu, there are two common ways to develop a project, using a local mockup file and leveraging the Snapfu Chrome extension.
 
 ### Local mockup
 
-Alternatively, you can create a local mockup `index.html` file within the `/public` directory that includes the bundle linked. The mockup can then be viewed at [https://localhost:3333](https://localhost:3333)
+Creation of a local mockup file (for example, `index.html` or `mockup.html`) within the `/public` directory allows for the quickest development of a Snap integration. Mockup files can be created by copying the source files of particular pages that will contain the Snap integration - typically the search and category pages. These pages will need to include a link to the local bundle file (`bundle.js`) in order for the Snap bundle to run. A minimal mockup file (shown below) contains only the necessary script and target elements to get components rendered on the page. More complete mockups would normally contain DOM structure and links to website resources that would be present on the live site (CSS, etc...).
 
 ```html
 <!DOCTYPE html>
@@ -94,24 +84,33 @@ Alternatively, you can create a local mockup `index.html` file within the `/publ
 </html>
 ```
 
+A `mockup.html` file within the `/public` directory is viewable at [https://localhost:3333/mockup.html](https://localhost:3333/mockup.html).
+
+### Snapfu extension 
+
+The Snapfu extension is a tool that can be used to test local changes on a live website. Visit the website you are developing for, then click the extension to enable it and set the mode to `local`, then press `Save`.
+
+The page will reload with the local development bundle [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) injected into the current website. While `npm run dev` is running, the page will automatically reload upon saving any code modifications.
+
+The Github repository for the [Snapfu extension](https://github.com/searchspring/snapfu-extension) has additional usage and installation documentation.
 ## Publishing
+
+### Searchspring Managed Integration
+
+When a Snap project resides within the [Searchspring Implementations Github organization](https://github.com/searchspring-implementations), the Snap bundle will automatically be built when the Snap (Github) action runs - this run is triggered by a Git push to the repository.
 
 ```sh
 git commit -am "Hello, snapfu"
 git push
 ```
 
-### Searchspring Managed Integration
-
-The bundle will automatically be built from the `production` branch and deployed to this URL:
+Github action runs triggered on the `production` branch will build and deploy bundle files to this URL:
 
 `https://snapui.searchspring.io/[your_site_id]/bundle.js`
 
 Builds on different branch names will be deployed to:
 
 `https://snapui.searchspring.io/[your_site_id]/[branch]/bundle.js`
-
-You can now view this integration on your site from any Chrome browser using the SearchSpring extension.
 
 ### Self Integration (self-snap)
 

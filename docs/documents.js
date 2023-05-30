@@ -508,26 +508,26 @@ var documents = [
 			},
 		],
 	},
-	{
-		categoryName: 'API',
-		searchable: false,
-		links: [
-			{
-				label: 'Documentation',
-				route: '/api-docs',
-				type: 'iframe',
-				url: 'https://searchspring.github.io/snapi-oas/',
-				searchable: false,
-			},
-			{
-				label: 'Explorer',
-				route: '/api-explorer',
-				type: 'iframe',
-				url: 'https://searchspring.github.io/snapi-explorer/',
-				searchable: false,
-			},
-		],
-	},
+	// {
+	// 	categoryName: 'API',
+	// 	searchable: false,
+	// 	links: [
+	// 		{
+	// 			label: 'Documentation',
+	// 			route: '/api-docs',
+	// 			type: 'iframe',
+	// 			url: 'https://searchspring.github.io/snapi-oas/',
+	// 			searchable: false,
+	// 		},
+	// 		{
+	// 			label: 'Explorer',
+	// 			route: '/api-explorer',
+	// 			type: 'iframe',
+	// 			url: 'https://searchspring.github.io/snapi-explorer/',
+	// 			searchable: false,
+	// 		},
+	// 	],
+	// },
 	{
 		categoryName: 'Development',
 		searchable: false,
