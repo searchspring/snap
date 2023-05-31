@@ -136,9 +136,9 @@ export class SearchController extends AbstractController {
 			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
 				const scrollToPosition = () => {
 					return new Promise<void>(async (resolve) => {
-						const offset = element?.domRect?.top || 0;
+						let offset = element?.domRect?.top || 0;
 						const maxCheckTime = 500;
-						const checkTime = 50;
+						const checkTime = 25;
 						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
 						const maxCheckCount = maxScrolls + 2;
 
@@ -147,39 +147,43 @@ export class SearchController extends AbstractController {
 						let scrolledElem: Element | undefined = undefined;
 
 						const checkAndScroll = () => {
-							const elem = document.querySelector(element?.selector!);
-							if (elem) {
-								scrollBackCount++;
-							} else {
-								checkCount++;
+							let elem = document.querySelector(element?.selector!);
+
+							// for case where the element clicked on has no height
+							while (elem && !elem.clientHeight) {
+								elem = elem.parentElement;
+								// original offset no longer applies since using different element
+								offset = 0;
 							}
 
 							if (elem) {
 								const { y } = elem.getBoundingClientRect();
 
+								scrollBackCount++;
+
 								// if the offset is off, we need to scroll into position (can be caused by lazy loaded images)
 								if (y > offset + 1 || y < offset - 1) {
-									elem.scrollIntoView();
-									// after scrolling into view, use top value with offset (for when element at bottom)
-									const { top } = elem.getBoundingClientRect();
-									window.scrollBy(0, -(offset - top));
+									window.scrollBy(0, y - offset);
+								} else {
 									scrolledElem = elem;
-
+									// don't need to scroll - it is right where we want it
 									return true;
 								}
+							} else {
+								checkCount++;
 							}
 
-							return false;
+							return true;
 						};
 
-						while (checkAndScroll() || (scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
+						while (checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount) {
 							await new Promise((resolve) => setTimeout(resolve, checkTime));
 						}
 
 						if (scrolledElem) {
 							controller.log.debug('restored position to: ', scrolledElem);
 						} else {
-							controller.log.debug('could not locate element with selector: ', element?.selector);
+							controller.log.debug('attempted to scroll back to element with selector: ', element?.selector);
 						}
 
 						resolve();
