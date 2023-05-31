@@ -6,6 +6,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
+
 import type { SnapControllerServices, SnapSearchControllerConfig } from '../types';
 
 export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {

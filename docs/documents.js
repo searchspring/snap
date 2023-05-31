@@ -145,6 +145,13 @@ var documents = [
 						searchable: true,
 					},
 					{
+						label: 'Foreground Filters',
+						route: '/integration-foregroundFilters',
+						type: 'markdown',
+						url: './docs/INTEGRATION_FOREGROUND_FILTERS.md',
+						searchable: true,
+					},
+					{
 						label: 'Recommendations',
 						route: '/integration-recommendations',
 						type: 'markdown',

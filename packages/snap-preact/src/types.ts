@@ -8,7 +8,7 @@ import type {
 	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { SearchStore, AutocompleteStore, FinderStore, RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { UrlManager, UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { UrlManager, UrlTranslatorConfig, UrlState } from '@searchspring/snap-url-manager';
 import type { EventManager } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
@@ -25,6 +25,23 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
+type UrlParameterConfig<Type> = {
+	[Property in keyof Type]: {
+		action?: 'merge' | 'set';
+		ignoreParameters?: string[];
+		useGlobalIgnoreParameters?: boolean;
+		state: Type[Property];
+	};
+};
+
+export type InitialUrlConfig = {
+	settings?: {
+		ignoreParameters?: string[];
+		useDefaultIgnoreParameters?: boolean;
+	};
+	parameters: UrlParameterConfig<UrlState>;
+};
+
 export type SnapControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	url?: UrlTranslatorConfig;
@@ -38,7 +55,9 @@ export type SnapControllerConfig = {
 
 export type SnapSearchControllerConfig = {
 	mode?: keyof typeof AppMode | AppMode;
-	url?: UrlTranslatorConfig;
+	url?: UrlTranslatorConfig & {
+		initial?: InitialUrlConfig;
+	};
 	client?: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
