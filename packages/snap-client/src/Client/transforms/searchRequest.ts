@@ -24,16 +24,8 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 
 transformSearchRequest.sorts = (request: SearchRequestModel = {}) => {
 	return (request.sorts || []).reduce((acc: Record<string, Array<SearchRequestModelSortsDirectionEnum>>, sort: SearchRequestModelSorts) => {
-		if (!sort.field && !sort.direction) {
+		if (!sort.field || !sort.direction || (sort.direction != 'asc' && sort.direction != 'desc')) {
 			return acc;
-		}
-
-		if (!sort.field || !sort.direction) {
-			throw 'valid sort requires field and direction';
-		}
-
-		if (sort.direction != 'asc' && sort.direction != 'desc') {
-			throw 'valid sort directions: asc, desc';
 		}
 
 		return {
