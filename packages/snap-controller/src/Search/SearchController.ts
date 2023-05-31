@@ -136,9 +136,8 @@ export class SearchController extends AbstractController {
 			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
 				const scrollToPosition = () => {
 					return new Promise<void>(async (resolve) => {
-						let offset = element?.domRect?.top || 0;
 						const maxCheckTime = 500;
-						const checkTime = 25;
+						const checkTime = 50;
 						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
 						const maxCheckCount = maxScrolls + 2;
 
@@ -147,10 +146,11 @@ export class SearchController extends AbstractController {
 						let scrolledElem: Element | undefined = undefined;
 
 						const checkAndScroll = () => {
+							let offset = element?.domRect?.top || 0;
 							let elem = document.querySelector(element?.selector!);
 
 							// for case where the element clicked on has no height
-							while (elem && !elem.clientHeight) {
+							while (elem && !elem.getBoundingClientRect().height) {
 								elem = elem.parentElement;
 								// original offset no longer applies since using different element
 								offset = 0;
@@ -165,9 +165,8 @@ export class SearchController extends AbstractController {
 								if (y > offset + 1 || y < offset - 1) {
 									window.scrollBy(0, y - offset);
 								} else {
-									scrolledElem = elem;
 									// don't need to scroll - it is right where we want it
-									return true;
+									scrolledElem = elem;
 								}
 							} else {
 								checkCount++;
