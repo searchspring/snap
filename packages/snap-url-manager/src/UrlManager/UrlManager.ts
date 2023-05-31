@@ -29,7 +29,7 @@ class WatcherPool {
 export class UrlManager {
 	private translator: Translator;
 
-	urlState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
+	private urlState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private globalState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private localState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private mergedState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
