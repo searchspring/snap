@@ -3,52 +3,26 @@ import type { MetaRequestModel, SearchResponseModelResult, SearchRequestModel, A
 
 export type HTTPHeaders = { [key: string]: string };
 
+type RequesterConfig<T> = {
+	origin?: string;
+	headers?: HTTPHeaders;
+	cache?: CacheConfig;
+	globals?: Partial<T>;
+};
+
 export type ClientConfig = {
 	mode?: keyof typeof AppMode | AppMode;
-	meta?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<MetaRequestModel>;
-	};
-	search?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<SearchRequestModel>;
-	};
-	autocomplete?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<AutocompleteRequestModel>;
-		requesters?: HybridRequesterConfig;
-	};
-	finder?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<SearchRequestModel>;
-	};
-	recommend?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<RecommendRequestModel>;
-	};
-	suggest?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<SuggestRequestModel>;
-	};
+	meta?: RequesterConfig<MetaRequestModel>;
+	search?: RequesterConfig<SearchRequestModel>;
+	autocomplete?: RequesterConfig<AutocompleteRequestModel> & { requesters?: HybridRequesterConfig };
+	finder?: RequesterConfig<SearchRequestModel>;
+	recommend?: RequesterConfig<RecommendRequestModel>;
+	suggest?: RequesterConfig<SuggestRequestModel>;
 };
 
 export type HybridRequesterConfig = {
-	suggest?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<SuggestRequestModel>;
-	};
-	legacy?: {
-		api?: SnapApiConfig;
-		cache?: CacheConfig;
-		globals?: Partial<AutocompleteRequestModel>;
-	};
+	suggest?: RequesterConfig<SuggestRequestModel>;
+	legacy?: RequesterConfig<SearchRequestModel | AutocompleteRequestModel>;
 };
 
 export type CacheConfig = Partial<DefaultCacheConfig>;
@@ -68,11 +42,6 @@ export type CacheEntry = {
 
 export type Cache = {
 	[key: string]: CacheEntry;
-};
-
-export type SnapApiConfig = {
-	origin?: string;
-	headers?: HTTPHeaders;
 };
 
 export type GenericGlobals = {

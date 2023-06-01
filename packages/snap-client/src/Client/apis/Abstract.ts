@@ -139,57 +139,57 @@ export interface ApiConfigurationParameters {
 }
 
 export class ApiConfiguration {
-	constructor(private configuration: ApiConfigurationParameters = {}) {
-		if (!configuration.maxRetry) {
-			this.configuration.maxRetry = 8;
+	constructor(private config: ApiConfigurationParameters = {}) {
+		if (!config.maxRetry) {
+			this.config.maxRetry = 8;
 		}
 
-		this.configuration.cache = this.configuration.cache || {};
-		this.configuration.mode = this.configuration.mode || AppMode.production;
+		this.config.cache = this.config.cache || {};
+		this.config.mode = this.config.mode || AppMode.production;
 
-		if (this.configuration.mode == AppMode.development) {
-			this.configuration.cache.enabled = false;
+		if (this.config.mode == AppMode.development) {
+			this.config.cache.enabled = false;
 		}
 	}
 
 	get cache(): CacheConfig {
-		return this.configuration?.cache || {};
+		return this.config?.cache || {};
 	}
 
 	get maxRetry(): number {
-		return this.configuration.maxRetry || 8;
+		return this.config.maxRetry || 8;
 	}
 
 	get origin(): string {
-		return this.configuration.origin || '';
+		return this.config.origin || '';
 	}
 
 	get fetchApi(): FetchAPI {
-		return this.configuration.fetchApi || window.fetch.bind(window);
+		return this.config.fetchApi || window.fetch.bind(window);
 	}
 
 	get queryParamsStringify(): (params: HTTPQuery) => string {
-		return this.configuration.queryParamsStringify || querystring;
+		return this.config.queryParamsStringify || querystring;
 	}
 
 	get headers(): HTTPHeaders {
-		return this.configuration.headers || {};
+		return this.config.headers || {};
 	}
 
 	set headers(newHeaders: HTTPHeaders) {
-		this.configuration.headers = newHeaders;
+		this.config.headers = newHeaders;
 	}
 
 	get globals(): GenericGlobals {
-		return this.configuration.globals || {};
+		return this.config.globals || {};
 	}
 
 	set globals(newGlobals: GenericGlobals) {
-		this.configuration.globals = newGlobals;
+		this.config.globals = newGlobals;
 	}
 
 	get mode(): AppMode {
-		return this.configuration.mode! as AppMode;
+		return this.config.mode! as AppMode;
 	}
 }
 
