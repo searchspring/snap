@@ -31,29 +31,19 @@ const defaultConfig: ClientConfig = {
 		},
 	},
 	search: {
-		api: {
-			// origin: 'https://snapi.kube.searchspring.io',
-		},
+		// origin: 'https://snapi.kube.searchspring.io'
 	},
 	autocomplete: {
-		api: {
-			// origin: 'https://snapi.kube.searchspring.io',
-		},
+		// origin: 'https://snapi.kube.searchspring.io'
 	},
 	recommend: {
-		api: {
-			// origin: 'https://snapi.kube.searchspring.io',
-		},
+		// origin: 'https://snapi.kube.searchspring.io'
 	},
 	finder: {
-		api: {
-			// origin: 'https://snapi.kube.searchspring.io',
-		},
+		// origin: 'https://snapi.kube.searchspring.io'
 	},
 	suggest: {
-		api: {
-			// origin: 'https://snapi.kube.searchspring.io',
-		},
+		// origin: 'https://snapi.kube.searchspring.io'
 	},
 };
 
@@ -86,8 +76,8 @@ export class Client {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.autocomplete?.api?.origin,
-					headers: this.config.autocomplete?.api?.headers,
+					origin: this.config.autocomplete?.origin,
+					headers: this.config.autocomplete?.headers,
 					cache: this.config.autocomplete?.cache,
 					globals: this.config.autocomplete?.globals,
 				}),
@@ -96,8 +86,8 @@ export class Client {
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.meta?.api?.origin,
-					headers: this.config.meta?.api?.headers,
+					origin: this.config.meta?.origin,
+					headers: this.config.meta?.headers,
 					cache: this.config.meta?.cache,
 					globals: this.config.meta?.globals,
 				})
@@ -105,8 +95,8 @@ export class Client {
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.recommend?.api?.origin,
-					headers: this.config.recommend?.api?.headers,
+					origin: this.config.recommend?.origin,
+					headers: this.config.recommend?.headers,
 					cache: this.config.recommend?.cache,
 					globals: this.config.recommend?.globals,
 				})
@@ -114,8 +104,8 @@ export class Client {
 			search: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.search?.api?.origin,
-					headers: this.config.search?.api?.headers,
+					origin: this.config.search?.origin,
+					headers: this.config.search?.headers,
 					cache: this.config.search?.cache,
 					globals: this.config.search?.globals,
 				})
@@ -123,8 +113,8 @@ export class Client {
 			finder: new HybridAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.finder?.api?.origin,
-					headers: this.config.finder?.api?.headers,
+					origin: this.config.finder?.origin,
+					headers: this.config.finder?.headers,
 					cache: this.config.finder?.cache,
 					globals: this.config.finder?.globals,
 				})
@@ -132,8 +122,8 @@ export class Client {
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					mode: this.mode,
-					origin: this.config.suggest?.api?.origin,
-					headers: this.config.suggest?.api?.headers,
+					origin: this.config.suggest?.origin,
+					headers: this.config.suggest?.headers,
 					cache: this.config.suggest?.cache,
 					globals: this.config.suggest?.globals,
 				})

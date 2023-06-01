@@ -145,6 +145,13 @@ var documents = [
 						searchable: true,
 					},
 					{
+						label: 'Foreground Filters',
+						route: '/integration-foregroundFilters',
+						type: 'markdown',
+						url: './docs/INTEGRATION_FOREGROUND_FILTERS.md',
+						searchable: true,
+					},
+					{
 						label: 'Recommendations',
 						route: '/integration-recommendations',
 						type: 'markdown',
@@ -508,26 +515,26 @@ var documents = [
 			},
 		],
 	},
-	{
-		categoryName: 'API',
-		searchable: false,
-		links: [
-			{
-				label: 'Documentation',
-				route: '/api-docs',
-				type: 'iframe',
-				url: 'https://searchspring.github.io/snapi-oas/',
-				searchable: false,
-			},
-			{
-				label: 'Explorer',
-				route: '/api-explorer',
-				type: 'iframe',
-				url: 'https://searchspring.github.io/snapi-explorer/',
-				searchable: false,
-			},
-		],
-	},
+	// {
+	// 	categoryName: 'API',
+	// 	searchable: false,
+	// 	links: [
+	// 		{
+	// 			label: 'Documentation',
+	// 			route: '/api-docs',
+	// 			type: 'iframe',
+	// 			url: 'https://searchspring.github.io/snapi-oas/',
+	// 			searchable: false,
+	// 		},
+	// 		{
+	// 			label: 'Explorer',
+	// 			route: '/api-explorer',
+	// 			type: 'iframe',
+	// 			url: 'https://searchspring.github.io/snapi-explorer/',
+	// 			searchable: false,
+	// 		},
+	// 	],
+	// },
 	{
 		categoryName: 'Development',
 		searchable: false,

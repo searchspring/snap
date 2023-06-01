@@ -57,29 +57,19 @@ describe('Snap Client', () => {
 	it('can pass in a client config', () => {
 		const config: ClientConfig = {
 			meta: {
-				api: {
-					origin: 'https://snapi.kube.searchspring.io/meta',
-				},
+				origin: 'https://snapi.kube.searchspring.io/meta',
 			},
 			search: {
-				api: {
-					origin: 'https://snapi.kube.searchspring.io/search',
-				},
+				origin: 'https://snapi.kube.searchspring.io/search',
 			},
 			autocomplete: {
-				api: {
-					origin: 'https://snapi.kube.searchspring.io/autocomplete',
-				},
+				origin: 'https://snapi.kube.searchspring.io/autocomplete',
 			},
 			recommend: {
-				api: {
-					origin: 'https://snapi.kube.searchspring.io/recommend',
-				},
+				origin: 'https://snapi.kube.searchspring.io/recommend',
 			},
 			suggest: {
-				api: {
-					origin: 'https://snapi.kube.searchspring.io/suggest',
-				},
+				origin: 'https://snapi.kube.searchspring.io/suggest',
 			},
 		};
 
@@ -89,14 +79,14 @@ describe('Snap Client', () => {
 		// @ts-ignore
 		const clientConfig = client.config;
 
-		expect(clientConfig?.meta?.api?.origin).toBe(config?.meta?.api?.origin);
+		expect(clientConfig?.meta?.origin).toBe(config?.meta?.origin);
 
 		//check it merged with the default config
 		expect(clientConfig?.meta?.cache?.purgeable).toBe(false);
-		expect(clientConfig?.search?.api?.origin).toBe(config?.search?.api?.origin);
-		expect(clientConfig?.autocomplete?.api?.origin).toBe(config?.autocomplete?.api?.origin);
-		expect(clientConfig?.recommend?.api?.origin).toBe(config?.recommend?.api?.origin);
-		expect(clientConfig?.suggest?.api?.origin).toBe(config?.suggest?.api?.origin);
+		expect(clientConfig?.search?.origin).toBe(config?.search?.origin);
+		expect(clientConfig?.autocomplete?.origin).toBe(config?.autocomplete?.origin);
+		expect(clientConfig?.recommend?.origin).toBe(config?.recommend?.origin);
+		expect(clientConfig?.suggest?.origin).toBe(config?.suggest?.origin);
 	});
 
 	it('can set mode via client config', () => {
