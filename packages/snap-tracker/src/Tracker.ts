@@ -604,7 +604,8 @@ export class Tracker {
 				queryStringParams += lastViewed.map((item) => `&lastViewed=${encodeURIComponent(item)}`).join('');
 			}
 
-			const endpoint = `https://${siteId}.a.searchspring.io/api/personalization/preflightCache`;
+			const origin = this.config.requesters?.personalization?.origin || `https://${siteId}.a.searchspring.io`;
+			const endpoint = `${origin}/api/personalization/preflightCache`;
 			const xhr = new XMLHttpRequest();
 
 			if (charsParams(preflightParams) > 1024) {
@@ -718,7 +719,8 @@ export class Tracker {
 		this.isSending = window.setTimeout(() => {
 			if (savedEvents.length) {
 				const xhr = new XMLHttpRequest();
-				xhr.open('POST', 'https://beacon.searchspring.io/beacon');
+				const origin = this.config.requesters?.beacon?.origin || 'https://beacon.searchspring.io';
+				xhr.open('POST', `${origin}/beacon`);
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(JSON.stringify(savedEvents.length == 1 ? savedEvents[0] : savedEvents));
 			}

@@ -64,7 +64,7 @@ describe('Abstract Api', () => {
 		expect(api.configuration).toBeDefined();
 
 		// @ts-ignore
-		expect(api.configuration.configuration.maxRetry).toBe(8);
+		expect(api.configuration.config.maxRetry).toBe(8);
 
 		// @ts-ignore
 		expect(api.retryDelay).toEqual(1000);

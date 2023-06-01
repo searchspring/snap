@@ -24,7 +24,7 @@ import type {
 	ControllerConfigs,
 	ContextVariables,
 } from '@searchspring/snap-controller';
-import type { TrackErrorEvent } from '@searchspring/snap-tracker';
+import type { TrackerConfig, TrackerGlobals, TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -66,6 +66,10 @@ export type SnapConfig = {
 	client?: {
 		globals: Partial<ClientGlobals>;
 		config?: ClientConfig;
+	};
+	tracker?: {
+		globals: TrackerGlobals;
+		config?: TrackerConfig;
 	};
 	instantiators?: {
 		recommendation?: RecommendationInstantiatorConfig;
@@ -381,8 +385,12 @@ export class Snap {
 			configureSnapFeatures(this.config);
 
 			this.client = services?.client || new Client(this.config.client!.globals as ClientGlobals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals as ClientGlobals, { framework: 'preact', mode: this.mode });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
+
+			// create tracker
+			const trackerGlobals = this.config.tracker?.globals || (this.config.client!.globals as ClientGlobals);
+			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
+			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// check for tracking attribution in URL ?ss_attribution=type:id
 			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
