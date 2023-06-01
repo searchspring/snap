@@ -1,0 +1,59 @@
+name: Patch Generate
+
+on:
+  workflow_run:
+    workflows: ["Publish"]
+    types: [completed]
+
+jobs:
+  PatchGenerate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        framework: [preact]
+    steps:
+      - name: Checkout Snap repositiory
+        uses: actions/checkout@v3
+        with:
+          ref: "main"
+
+      - name: Checkout snapfu-patches repositiory
+        uses: actions/checkout@v3
+        with:
+          repository: "searchspring/snapfu-patches"
+          path: "snapfu-patches"
+          ref: "main"
+          token: ${{ secrets.MACHINE_ACTION_WORKFLOW_PAT }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Determine version
+        run: |
+          echo "version=$(jq -r .version < lerna.json)" >> $GITHUB_ENV
+
+      - name: Generate ${{ matrix.framework }} patch file
+        run: |
+          node .github/workflows/scripts/generatePatchFile.js --version ${{ env.version }} --framework ${{ matrix.framework }}
+          mkdir -p snapfu-patches/${{ matrix.framework }}
+          mkdir -p snapfu-patches/${{ matrix.framework }}/${{ env.version }}
+          cp patch.${{ matrix.framework }}.${{ env.version }}.yml snapfu-patches/${{ matrix.framework }}/${{ env.version }}/
+
+      - name: Commit patch files
+        working-directory: snapfu-patches
+        run: |
+          git config --global user.name "searchspring-machine"
+          git config --global user.email "machine@searchspring.com"
+          git checkout -b patch-generate-${{ matrix.framework }}-${{ env.version }}
+          git add .
+          git commit -m "auto generated patch files from 'Patch Generate' action workflow"
+          git push -u origin patch-generate-${{ matrix.framework }}-${{ env.version }}
+
+      - name: Create PR
+        run: |
+          gh pr create --title "Patch file ${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/searchspring/snapfu-patches" --base "main" --head "patch-generate-${{ matrix.framework }}-${{ env.version }}" --project "Snap Beta" --reviewer "searchspring/snap-team"
+        env:
+          GITHUB_TOKEN: ${{ secrets.MACHINE_ACTION_WORKFLOW_PAT }}

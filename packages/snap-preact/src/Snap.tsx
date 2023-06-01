@@ -10,6 +10,8 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
+import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
+
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
 	Controllers,
@@ -22,14 +24,14 @@ import type {
 	ControllerConfigs,
 	ContextVariables,
 } from '@searchspring/snap-controller';
-import type { TrackErrorEvent } from '@searchspring/snap-tracker';
+import type { TrackerConfig, TrackerGlobals, TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfig } from './types';
+import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -65,6 +67,10 @@ export type SnapConfig = {
 		globals: Partial<ClientGlobals>;
 		config?: ClientConfig;
 	};
+	tracker?: {
+		globals: TrackerGlobals;
+		config?: TrackerConfig;
+	};
 	instantiators?: {
 		recommendation?: RecommendationInstantiatorConfig;
 	};
@@ -73,7 +79,9 @@ export type SnapConfig = {
 			config: SearchControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
+			url?: UrlTranslatorConfig & {
+				initial?: InitialUrlConfig;
+			};
 			context?: ContextVariables;
 		}[];
 		autocomplete?: {
@@ -377,8 +385,12 @@ export class Snap {
 			configureSnapFeatures(this.config);
 
 			this.client = services?.client || new Client(this.config.client!.globals as ClientGlobals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals as ClientGlobals, { framework: 'preact', mode: this.mode });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
+
+			// create tracker
+			const trackerGlobals = this.config.tracker?.globals || (this.config.client!.globals as ClientGlobals);
+			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
+			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// check for tracking attribution in URL ?ss_attribution=type:id
 			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
@@ -562,6 +574,11 @@ export class Snap {
 							let searched = false;
 							const runSearch = () => {
 								if (!searched) {
+									// handle custom initial UrlManager state
+									if (controller.url?.initial) {
+										getInitialUrlState(controller.url.initial, cntrlr.urlManager).go({ history: 'replace' });
+									}
+
 									searched = true;
 									this.controllers[controller.config.id].search();
 								}

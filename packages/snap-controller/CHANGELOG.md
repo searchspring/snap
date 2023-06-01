@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.45.0](https://github.com/searchspring/snap/compare/v0.44.3...v0.45.0) (2023-06-01)
+
+### Bug Fixes
+
+- **controller/search:** modifying the restorePosition functionality to support more use cases ([5d6478c](https://github.com/searchspring/snap/commit/5d6478ca9d7647740939da0ac6cda0b940ab7aec))
+
 ## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
 
 **Note:** Version bump only for package @searchspring/snap-controller

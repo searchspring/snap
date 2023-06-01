@@ -9,6 +9,14 @@ export type TrackerConfig = {
 	id?: string;
 	framework?: string;
 	mode?: keyof typeof AppMode | AppMode;
+	requesters?: {
+		personalization?: {
+			origin: string;
+		};
+		beacon?: {
+			origin?: string;
+		};
+	};
 };
 
 export type BeaconPayload = {

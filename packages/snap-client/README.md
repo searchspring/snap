@@ -56,27 +56,27 @@ Optional configuration for each requester. This can be used to specifiy a develo
 ```typescript
 export type ClientConfig = {
   meta?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 	search?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 	autocomplete?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 	finder?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 	recommend?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 	suggest?: {
-		api?: SnapApiConfig;
+		origin?: string;
 		cache?: CacheConfig;
 	};
 };
@@ -87,10 +87,6 @@ export type CacheConfig = {
 	maxSize?: number;
 	purgeable?: boolean;
 	entries?: { [key: string]: Response };
-};
-
-export type SnapApiConfig = {
-	origin?: string;
 };
 
 ```

@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.44.3",
+	"version": "0.45.0",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -19,8 +19,8 @@
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.44.3",
-		"@searchspring/snap-preact-components": "^0.44.3",
+		"@searchspring/snap-preact": "^0.45.0",
+		"@searchspring/snap-preact-components": "^0.45.0",
 		"deepmerge": "4.3.1",
 		"mobx-react": "7.5.0",
 		"preact": "10.9.0"
