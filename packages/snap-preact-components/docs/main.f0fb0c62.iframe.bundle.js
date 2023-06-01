@@ -1,4 +1,4 @@
-/*! For license information please see main.75153f8a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.f0fb0c62.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -24807,22 +24807,17 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { d: () => cloneWithProps });
 			__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
+			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				cloneWithProps = function cloneWithProps(input, props) {
-					if (input) {
-						if ('string' == typeof input || 'number' == typeof input || 'boolean' == typeof input) return input;
-						if (Array.isArray(input))
-							return input.map(function (entry) {
-								return cloneWithProps(entry, props);
-							});
-						var ObservableClone = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
-							return (0, preact__WEBPACK_IMPORTED_MODULE_3__.Tm)(input, properties);
-						});
-						return (0, preact__WEBPACK_IMPORTED_MODULE_3__.h)(ObservableClone, Object.assign({}, props));
-					}
+					if (input)
+						return 'string' == typeof input || 'number' == typeof input || 'boolean' == typeof input
+							? input
+							: Array.isArray(input)
+							? input.map(function (entry) {
+									return cloneWithProps(entry, props);
+							  })
+							: (0, preact__WEBPACK_IMPORTED_MODULE_2__.Tm)(input, props);
 				};
 		},
 		'./src/utilities/componentArgs.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -27405,24 +27400,12 @@
 																			(function () {
 																				var _ref10 = SearchController_asyncToGenerator(
 																					SearchController_regeneratorRuntime().mark(function _callee5(resolve) {
-																						var _element$domRect,
-																							offset,
-																							checkTime,
-																							maxScrolls,
-																							maxCheckCount,
-																							scrollBackCount,
-																							checkCount,
-																							scrolledElem,
-																							checkAndScroll;
+																						var checkTime, maxScrolls, maxCheckCount, scrollBackCount, checkCount, scrolledElem, checkAndScroll;
 																						return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
 																							for (;;)
 																								switch ((_context5.prev = _context5.next)) {
 																									case 0:
-																										(offset =
-																											(null == element || null === (_element$domRect = element.domRect) || void 0 === _element$domRect
-																												? void 0
-																												: _element$domRect.top) || 0),
-																											500,
+																										500,
 																											(checkTime = 50),
 																											(maxScrolls = Math.ceil(500 / checkTime)),
 																											(maxCheckCount = maxScrolls + 2),
@@ -27430,40 +27413,49 @@
 																											(checkCount = 0),
 																											(scrolledElem = void 0),
 																											(checkAndScroll = function checkAndScroll() {
-																												var elem = document.querySelector(null == element ? void 0 : element.selector);
-																												if ((elem ? scrollBackCount++ : checkCount++, elem)) {
+																												for (
+																													var _element$domRect,
+																														offset =
+																															(null == element ||
+																															null === (_element$domRect = element.domRect) ||
+																															void 0 === _element$domRect
+																																? void 0
+																																: _element$domRect.top) || 0,
+																														elem = document.querySelector(null == element ? void 0 : element.selector);
+																													elem && !elem.getBoundingClientRect().height;
+
+																												)
+																													(elem = elem.parentElement), (offset = 0);
+																												if (elem) {
 																													var y = elem.getBoundingClientRect().y;
-																													if (y > offset + 1 || y < offset - 1) {
-																														elem.scrollIntoView();
-																														var top = elem.getBoundingClientRect().top;
-																														return window.scrollBy(0, -(offset - top)), (scrolledElem = elem), !0;
-																													}
-																												}
-																												return !1;
+																													scrollBackCount++,
+																														y > offset + 1 || y < offset - 1 ? window.scrollBy(0, y - offset) : (scrolledElem = elem);
+																												} else checkCount++;
+																												return !0;
 																											});
-																									case 9:
-																										if (!(checkAndScroll() || (scrollBackCount <= maxScrolls && checkCount <= maxCheckCount))) {
-																											_context5.next = 14;
+																									case 8:
+																										if (!(checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
+																											_context5.next = 13;
 																											break;
 																										}
 																										return (
-																											(_context5.next = 12),
+																											(_context5.next = 11),
 																											new Promise(function (resolve) {
 																												return setTimeout(resolve, checkTime);
 																											})
 																										);
-																									case 12:
-																										_context5.next = 9;
+																									case 11:
+																										_context5.next = 8;
 																										break;
-																									case 14:
+																									case 13:
 																										scrolledElem
 																											? controller.log.debug('restored position to: ', scrolledElem)
 																											: controller.log.debug(
-																													'could not locate element with selector: ',
+																													'attempted to scroll back to element with selector: ',
 																													null == element ? void 0 : element.selector
 																											  ),
 																											resolve();
-																									case 16:
+																									case 15:
 																									case 'end':
 																										return _context5.stop();
 																								}
@@ -30859,71 +30851,69 @@
 				})(),
 				ApiConfiguration = (function () {
 					function ApiConfiguration() {
-						var configuration = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+						var config = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
 						Abstract_classCallCheck(this, ApiConfiguration),
-							(this.configuration = configuration),
-							configuration.maxRetry || (this.configuration.maxRetry = 8),
-							(this.configuration.cache = this.configuration.cache || {}),
-							(this.configuration.mode = this.configuration.mode || AppMode.production),
-							this.configuration.mode == AppMode.development && (this.configuration.cache.enabled = !1);
+							(this.config = config),
+							config.maxRetry || (this.config.maxRetry = 8),
+							(this.config.cache = this.config.cache || {}),
+							(this.config.mode = this.config.mode || AppMode.production),
+							this.config.mode == AppMode.development && (this.config.cache.enabled = !1);
 					}
 					return (
 						Abstract_createClass(ApiConfiguration, [
 							{
 								key: 'cache',
 								get: function get() {
-									var _this$configuration;
-									return (
-										(null === (_this$configuration = this.configuration) || void 0 === _this$configuration ? void 0 : _this$configuration.cache) || {}
-									);
+									var _this$config;
+									return (null === (_this$config = this.config) || void 0 === _this$config ? void 0 : _this$config.cache) || {};
 								},
 							},
 							{
 								key: 'maxRetry',
 								get: function get() {
-									return this.configuration.maxRetry || 8;
+									return this.config.maxRetry || 8;
 								},
 							},
 							{
 								key: 'origin',
 								get: function get() {
-									return this.configuration.origin || '';
+									return this.config.origin || '';
 								},
 							},
 							{
 								key: 'fetchApi',
 								get: function get() {
-									return this.configuration.fetchApi || window.fetch.bind(window);
+									return this.config.fetchApi || window.fetch.bind(window);
 								},
 							},
 							{
 								key: 'queryParamsStringify',
 								get: function get() {
-									return this.configuration.queryParamsStringify || querystring;
+									return this.config.queryParamsStringify || querystring;
 								},
 							},
 							{
 								key: 'headers',
 								get: function get() {
-									return this.configuration.headers || {};
+									return this.config.headers || {};
 								},
 								set: function set(newHeaders) {
-									this.configuration.headers = newHeaders;
+									this.config.headers = newHeaders;
 								},
 							},
 							{
 								key: 'globals',
 								get: function get() {
-									return this.configuration.globals || {};
+									return this.config.globals || {};
 								},
 								set: function set(newGlobals) {
-									this.configuration.globals = newGlobals;
+									this.config.globals = newGlobals;
 								},
 							},
 							{
 								key: 'mode',
 								get: function get() {
-									return this.configuration.mode;
+									return this.config.mode;
 								},
 							},
 						]),
@@ -32370,14 +32360,13 @@
 			(transformSearchRequest.sorts = function () {
 				return ((arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}).sorts || []).reduce(function (acc, sort) {
 					var _Object$assign;
-					if (!sort.field && !sort.direction) return acc;
-					if (!sort.field || !sort.direction) throw 'valid sort requires field and direction';
-					if ('asc' != sort.direction && 'desc' != sort.direction) throw 'valid sort directions: asc, desc';
-					return Object.assign(
-						{},
-						acc,
-						(((_Object$assign = {})['sort.' + sort.field] = (acc[sort.field] || []).concat([sort.direction])), _Object$assign)
-					);
+					return !sort.field || !sort.direction || ('asc' != sort.direction && 'desc' != sort.direction)
+						? acc
+						: Object.assign(
+								{},
+								acc,
+								(((_Object$assign = {})['sort.' + sort.field] = (acc[sort.field] || []).concat([sort.direction])), _Object$assign)
+						  );
 				}, {});
 			}),
 				(transformSearchRequest.search = function () {
@@ -34800,11 +34789,11 @@
 			var Client_defaultConfig = {
 					mode: AppMode.production,
 					meta: { cache: { purgeable: !1 } },
-					search: { api: {} },
-					autocomplete: { api: {} },
-					recommend: { api: {} },
-					finder: { api: {} },
-					suggest: { api: {} },
+					search: {},
+					autocomplete: {},
+					recommend: {},
+					finder: {},
+					suggest: {},
 				},
 				Client = (function () {
 					function Client(globals) {
@@ -34813,38 +34802,26 @@
 							_this$config$autocomp3,
 							_this$config$autocomp4,
 							_this$config$autocomp5,
-							_this$config$autocomp6,
-							_this$config$autocomp7,
 							_this$config$meta,
-							_this$config$meta$api,
 							_this$config$meta2,
-							_this$config$meta2$ap,
 							_this$config$meta3,
 							_this$config$meta4,
 							_this$config$recommen,
 							_this$config$recommen2,
 							_this$config$recommen3,
 							_this$config$recommen4,
-							_this$config$recommen5,
-							_this$config$recommen6,
 							_this$config$search,
-							_this$config$search$a,
 							_this$config$search2,
-							_this$config$search2$,
 							_this$config$search3,
 							_this$config$search4,
 							_this$config$finder,
-							_this$config$finder$a,
 							_this$config$finder2,
-							_this$config$finder2$,
 							_this$config$finder3,
 							_this$config$finder4,
 							_this$config$suggest,
-							_this$config$suggest$,
 							_this$config$suggest2,
 							_this$config$suggest3,
 							_this$config$suggest4,
-							_this$config$suggest5,
 							config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
 						if (
 							((function Client_classCallCheck(instance, Constructor) {
@@ -34862,49 +34839,31 @@
 									new ApiConfiguration({
 										mode: this.mode,
 										origin:
-											null === (_this$config$autocomp = this.config.autocomplete) ||
-											void 0 === _this$config$autocomp ||
-											null === (_this$config$autocomp2 = _this$config$autocomp.api) ||
-											void 0 === _this$config$autocomp2
+											null === (_this$config$autocomp = this.config.autocomplete) || void 0 === _this$config$autocomp
 												? void 0
-												: _this$config$autocomp2.origin,
+												: _this$config$autocomp.origin,
 										headers:
-											null === (_this$config$autocomp3 = this.config.autocomplete) ||
-											void 0 === _this$config$autocomp3 ||
-											null === (_this$config$autocomp4 = _this$config$autocomp3.api) ||
-											void 0 === _this$config$autocomp4
+											null === (_this$config$autocomp2 = this.config.autocomplete) || void 0 === _this$config$autocomp2
 												? void 0
-												: _this$config$autocomp4.headers,
+												: _this$config$autocomp2.headers,
 										cache:
-											null === (_this$config$autocomp5 = this.config.autocomplete) || void 0 === _this$config$autocomp5
+											null === (_this$config$autocomp3 = this.config.autocomplete) || void 0 === _this$config$autocomp3
 												? void 0
-												: _this$config$autocomp5.cache,
+												: _this$config$autocomp3.cache,
 										globals:
-											null === (_this$config$autocomp6 = this.config.autocomplete) || void 0 === _this$config$autocomp6
+											null === (_this$config$autocomp4 = this.config.autocomplete) || void 0 === _this$config$autocomp4
 												? void 0
-												: _this$config$autocomp6.globals,
+												: _this$config$autocomp4.globals,
 									}),
-									null === (_this$config$autocomp7 = this.config.autocomplete) || void 0 === _this$config$autocomp7
+									null === (_this$config$autocomp5 = this.config.autocomplete) || void 0 === _this$config$autocomp5
 										? void 0
-										: _this$config$autocomp7.requesters
+										: _this$config$autocomp5.requesters
 								),
 								meta: new HybridAPI(
 									new ApiConfiguration({
 										mode: this.mode,
-										origin:
-											null === (_this$config$meta = this.config.meta) ||
-											void 0 === _this$config$meta ||
-											null === (_this$config$meta$api = _this$config$meta.api) ||
-											void 0 === _this$config$meta$api
-												? void 0
-												: _this$config$meta$api.origin,
-										headers:
-											null === (_this$config$meta2 = this.config.meta) ||
-											void 0 === _this$config$meta2 ||
-											null === (_this$config$meta2$ap = _this$config$meta2.api) ||
-											void 0 === _this$config$meta2$ap
-												? void 0
-												: _this$config$meta2$ap.headers,
+										origin: null === (_this$config$meta = this.config.meta) || void 0 === _this$config$meta ? void 0 : _this$config$meta.origin,
+										headers: null === (_this$config$meta2 = this.config.meta) || void 0 === _this$config$meta2 ? void 0 : _this$config$meta2.headers,
 										cache: null === (_this$config$meta3 = this.config.meta) || void 0 === _this$config$meta3 ? void 0 : _this$config$meta3.cache,
 										globals: null === (_this$config$meta4 = this.config.meta) || void 0 === _this$config$meta4 ? void 0 : _this$config$meta4.globals,
 									})
@@ -34913,46 +34872,30 @@
 									new ApiConfiguration({
 										mode: this.mode,
 										origin:
-											null === (_this$config$recommen = this.config.recommend) ||
-											void 0 === _this$config$recommen ||
-											null === (_this$config$recommen2 = _this$config$recommen.api) ||
-											void 0 === _this$config$recommen2
+											null === (_this$config$recommen = this.config.recommend) || void 0 === _this$config$recommen
 												? void 0
-												: _this$config$recommen2.origin,
+												: _this$config$recommen.origin,
 										headers:
-											null === (_this$config$recommen3 = this.config.recommend) ||
-											void 0 === _this$config$recommen3 ||
-											null === (_this$config$recommen4 = _this$config$recommen3.api) ||
-											void 0 === _this$config$recommen4
+											null === (_this$config$recommen2 = this.config.recommend) || void 0 === _this$config$recommen2
 												? void 0
-												: _this$config$recommen4.headers,
+												: _this$config$recommen2.headers,
 										cache:
-											null === (_this$config$recommen5 = this.config.recommend) || void 0 === _this$config$recommen5
+											null === (_this$config$recommen3 = this.config.recommend) || void 0 === _this$config$recommen3
 												? void 0
-												: _this$config$recommen5.cache,
+												: _this$config$recommen3.cache,
 										globals:
-											null === (_this$config$recommen6 = this.config.recommend) || void 0 === _this$config$recommen6
+											null === (_this$config$recommen4 = this.config.recommend) || void 0 === _this$config$recommen4
 												? void 0
-												: _this$config$recommen6.globals,
+												: _this$config$recommen4.globals,
 									})
 								),
 								search: new HybridAPI(
 									new ApiConfiguration({
 										mode: this.mode,
 										origin:
-											null === (_this$config$search = this.config.search) ||
-											void 0 === _this$config$search ||
-											null === (_this$config$search$a = _this$config$search.api) ||
-											void 0 === _this$config$search$a
-												? void 0
-												: _this$config$search$a.origin,
+											null === (_this$config$search = this.config.search) || void 0 === _this$config$search ? void 0 : _this$config$search.origin,
 										headers:
-											null === (_this$config$search2 = this.config.search) ||
-											void 0 === _this$config$search2 ||
-											null === (_this$config$search2$ = _this$config$search2.api) ||
-											void 0 === _this$config$search2$
-												? void 0
-												: _this$config$search2$.headers,
+											null === (_this$config$search2 = this.config.search) || void 0 === _this$config$search2 ? void 0 : _this$config$search2.headers,
 										cache:
 											null === (_this$config$search3 = this.config.search) || void 0 === _this$config$search3 ? void 0 : _this$config$search3.cache,
 										globals:
@@ -34963,19 +34906,9 @@
 									new ApiConfiguration({
 										mode: this.mode,
 										origin:
-											null === (_this$config$finder = this.config.finder) ||
-											void 0 === _this$config$finder ||
-											null === (_this$config$finder$a = _this$config$finder.api) ||
-											void 0 === _this$config$finder$a
-												? void 0
-												: _this$config$finder$a.origin,
+											null === (_this$config$finder = this.config.finder) || void 0 === _this$config$finder ? void 0 : _this$config$finder.origin,
 										headers:
-											null === (_this$config$finder2 = this.config.finder) ||
-											void 0 === _this$config$finder2 ||
-											null === (_this$config$finder2$ = _this$config$finder2.api) ||
-											void 0 === _this$config$finder2$
-												? void 0
-												: _this$config$finder2$.headers,
+											null === (_this$config$finder2 = this.config.finder) || void 0 === _this$config$finder2 ? void 0 : _this$config$finder2.headers,
 										cache:
 											null === (_this$config$finder3 = this.config.finder) || void 0 === _this$config$finder3 ? void 0 : _this$config$finder3.cache,
 										globals:
@@ -34986,27 +34919,19 @@
 									new ApiConfiguration({
 										mode: this.mode,
 										origin:
-											null === (_this$config$suggest = this.config.suggest) ||
-											void 0 === _this$config$suggest ||
-											null === (_this$config$suggest$ = _this$config$suggest.api) ||
-											void 0 === _this$config$suggest$
-												? void 0
-												: _this$config$suggest$.origin,
+											null === (_this$config$suggest = this.config.suggest) || void 0 === _this$config$suggest ? void 0 : _this$config$suggest.origin,
 										headers:
-											null === (_this$config$suggest2 = this.config.suggest) ||
-											void 0 === _this$config$suggest2 ||
-											null === (_this$config$suggest3 = _this$config$suggest2.api) ||
-											void 0 === _this$config$suggest3
+											null === (_this$config$suggest2 = this.config.suggest) || void 0 === _this$config$suggest2
 												? void 0
-												: _this$config$suggest3.headers,
+												: _this$config$suggest2.headers,
 										cache:
+											null === (_this$config$suggest3 = this.config.suggest) || void 0 === _this$config$suggest3
+												? void 0
+												: _this$config$suggest3.cache,
+										globals:
 											null === (_this$config$suggest4 = this.config.suggest) || void 0 === _this$config$suggest4
 												? void 0
-												: _this$config$suggest4.cache,
-										globals:
-											null === (_this$config$suggest5 = this.config.suggest) || void 0 === _this$config$suggest5
-												? void 0
-												: _this$config$suggest5.globals,
+												: _this$config$suggest4.globals,
 									})
 								),
 							});
@@ -41153,7 +41078,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.44.3', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.45.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41502,7 +41427,9 @@
 									cart = _this.cookies.cart.get(),
 									lastViewed = _this.cookies.viewed.get();
 								if (userId && 'string' == typeof userId && siteId && (shopper || cart.length || lastViewed.length)) {
-									var preflightParams = { userId, siteId },
+									var _this$config$requeste,
+										_this$config$requeste2,
+										preflightParams = { userId, siteId },
 										queryStringParams = '?userId=' + encodeURIComponent(userId) + '&siteId=' + encodeURIComponent(siteId);
 									shopper && ((preflightParams.shopper = shopper), (queryStringParams += '&shopper=' + encodeURIComponent(shopper))),
 										cart.length &&
@@ -41519,7 +41446,13 @@
 													return '&lastViewed=' + encodeURIComponent(item);
 												})
 												.join('')));
-									var endpoint = 'https://' + siteId + '.a.searchspring.io/api/personalization/preflightCache',
+									var endpoint =
+											((null === (_this$config$requeste = _this.config.requesters) ||
+											void 0 === _this$config$requeste ||
+											null === (_this$config$requeste2 = _this$config$requeste.personalization) ||
+											void 0 === _this$config$requeste2
+												? void 0
+												: _this$config$requeste2.origin) || 'https://' + siteId + '.a.searchspring.io') + '/api/personalization/preflightCache',
 										xhr = new XMLHttpRequest();
 									charsParams(preflightParams) > 1024
 										? (xhr.open('POST', endpoint),
@@ -41605,8 +41538,17 @@
 									clearTimeout(_this.isSending),
 										(_this.isSending = window.setTimeout(function () {
 											if (savedEvents.length) {
-												var xhr = new XMLHttpRequest();
-												xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
+												var _this$config$requeste3,
+													_this$config$requeste4,
+													xhr = new XMLHttpRequest(),
+													origin =
+														(null === (_this$config$requeste3 = _this.config.requesters) ||
+														void 0 === _this$config$requeste3 ||
+														null === (_this$config$requeste4 = _this$config$requeste3.beacon) ||
+														void 0 === _this$config$requeste4
+															? void 0
+															: _this$config$requeste4.origin) || 'https://beacon.searchspring.io';
+												xhr.open('POST', origin + '/beacon'),
 													xhr.setRequestHeader('Content-Type', 'application/json'),
 													xhr.send(JSON.stringify(1 == savedEvents.length ? savedEvents[0] : savedEvents));
 											}
@@ -41629,7 +41571,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.44.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.45.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
