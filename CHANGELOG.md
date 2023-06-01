@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.45.0](https://github.com/searchspring/snap/compare/v0.44.3...v0.45.0) (2023-06-01)
+
+### Bug Fixes
+
+- **client:** adjusting configuration types which fixes the sub-requester issue for autocomplete ([e3a099c](https://github.com/searchspring/snap/commit/e3a099c1cb48aa3ab09d34c72b3556d5eb2c1f23))
+- **controller/search:** modifying the restorePosition functionality to support more use cases ([5d6478c](https://github.com/searchspring/snap/commit/5d6478ca9d7647740939da0ac6cda0b940ab7aec))
+- **preact-components/utilities/clonewithprops:** adding optional observability ([450b101](https://github.com/searchspring/snap/commit/450b10173dfc34dbdca8284dd2b136baad9f2dfb))
+- **preact-components/utilities/clonewithprops:** reverting to pre 0.43.0 code - no need for observer ([2437be2](https://github.com/searchspring/snap/commit/2437be204e955f0bc17a12fd480288b9b34e3db5))
+
+### Features
+
+- **setinitialurlstate:** new feature to manually set foreground filters in search controller ([bd0588a](https://github.com/searchspring/snap/commit/bd0588aef6ff1093f9b68c3c2122eb5c538157a5))
+- **tracker:** adding ability to configur tracker requesters ([b1c3039](https://github.com/searchspring/snap/commit/b1c303955e956be22b8db94067020d75f7ae1162))
+
 ## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
 
 ### Bug Fixes

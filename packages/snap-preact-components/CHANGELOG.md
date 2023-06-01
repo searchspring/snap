@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.45.0](https://github.com/searchspring/snap/compare/v0.44.3...v0.45.0) (2023-06-01)
+
+### Bug Fixes
+
+- **preact-components/utilities/clonewithprops:** adding optional observability ([450b101](https://github.com/searchspring/snap/commit/450b10173dfc34dbdca8284dd2b136baad9f2dfb))
+- **preact-components/utilities/clonewithprops:** reverting to pre 0.43.0 code - no need for observer ([2437be2](https://github.com/searchspring/snap/commit/2437be204e955f0bc17a12fd480288b9b34e3db5))
+
 ## [0.44.3](https://github.com/searchspring/snap/compare/v0.44.2...v0.44.3) (2023-05-08)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
