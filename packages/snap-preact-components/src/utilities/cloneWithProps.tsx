@@ -1,5 +1,4 @@
 import { h, cloneElement } from 'preact';
-import { observer } from 'mobx-react-lite';
 
 export const cloneWithProps = (input: any, props?: any): any => {
 	if (!input) {
@@ -12,9 +11,5 @@ export const cloneWithProps = (input: any, props?: any): any => {
 		});
 	}
 
-	const ObservableClone = observer((properties) => {
-		return cloneElement(input, properties);
-	});
-
-	return <ObservableClone {...props} />;
+	return cloneElement(input, props);
 };
