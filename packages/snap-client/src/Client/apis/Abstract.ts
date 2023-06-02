@@ -69,6 +69,9 @@ export class API {
 				} else {
 					throw new Error('Retry rate limit exceeded.');
 				}
+			} else if (response.status == 404 && responseJSON?.message == 'Profile is currently paused') {
+				//dont throw if profile is paused.
+				throw new Error(`${responseJSON.message}: ${context.query?.tag}`);
 			}
 
 			throw new Error('Unexpected Response Status.');

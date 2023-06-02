@@ -265,7 +265,12 @@ export class Tracker {
 			};
 
 			// prevent sending of errors when on localhost or CDN
-			if (!payload.event.href || payload.event.href.includes('//localhost') || payload.event.href.includes('//snapui.searchspring.io/')) {
+			if (
+				payload.event.message?.indexOf('Profile is currently paused') !== -1 ||
+				!payload.event.href ||
+				payload.event.href.includes('//localhost') ||
+				payload.event.href.includes('//snapui.searchspring.io/')
+			) {
 				return;
 			}
 
