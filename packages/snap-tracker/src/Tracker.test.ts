@@ -68,6 +68,7 @@ describe('Script Block Tracking', () => {
 		trackEvent.mockRestore();
 	});
 
+	//broken
 	it('can target track/cart/view', async () => {
 		const items = [{ sku: 'abc123' }];
 		global.document.body.innerHTML = `<div>

@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
-import { url } from '@searchspring/snap-toolbox';
+import { url, getContext } from '@searchspring/snap-toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';
@@ -14,13 +14,53 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
-let siteId = '8uyt2m';
+let siteId = 'b9nhn1';
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
 const urlSiteIdParam = urlObj.params.query.siteId;
 if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {
 	siteId = urlSiteIdParam;
 }
+const context = getContext(['shopper', 'siteId', 'category', 'brand']);
+
+console.log('getContext returned:', context);
+
+const backgroundFilters = [];
+
+if (context.category?.path) {
+	// set category background filter
+	backgroundFilters.push({
+		field: 'categories_hierarchy',
+		value: context.category.path,
+		type: 'value',
+		background: true,
+	});
+}
+
+if (context?.brand) {
+	// set brand background filter
+	backgroundFilters.push({
+		field: 'brand',
+		value: context.brand,
+		type: 'value',
+		background: true,
+	});
+}
+
+// // replace special characters
+// function replaceCharacters(value) {
+// 	if (value) {
+// 		return value
+// 			.replace(/\&amp\;/g, '&')
+// 			.replace(/\&lt\;/g, '<')
+// 			.replace(/\&gt\;/g, '>')
+// 			.replace(/\&quot\;/g, '"')
+// 			.replace(/\&#039\;/g, "'")
+// 			.trim();
+// 	} else {
+// 		return '';
+// 	}
+// }
 
 let config: SnapConfig = {
 	mode: 'development', // should be removed for 'production' usage
@@ -63,6 +103,9 @@ let config: SnapConfig = {
 				config: {
 					id: 'search',
 					plugins: [[afterStore]],
+					globals: {
+						filters: backgroundFilters,
+					},
 					settings: {
 						redirects: {
 							merchandising: false,

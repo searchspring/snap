@@ -41,10 +41,10 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	evaluate?.forEach((name) => {
 		const fn = new Function(`
 			var ${evaluate.join(', ')};
-			${scriptElem.innerHTML}
+			${scriptElem.innerHTML.replace(/\\/g, '%5C')}
+
 			return ${name};
 		`);
-
 		variables[name] = fn();
 	});
 
@@ -71,5 +71,25 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		}
 	}
 
-	return variables;
+	console.log(variables);
+
+	const decodeNestedVariables = (obj: any) => {
+		return Object.fromEntries(
+			Object.entries(obj).map(([key, val]): any => {
+				console.log('key', key);
+				console.log('val', val);
+				if (Array.isArray(val)) {
+					return [val]; // recurse
+				} else if (val && typeof val === 'object') {
+					return [key, decodeNestedVariables(val)]; // recurse
+				} else {
+					return [key, decodeURIComponent(val as string)];
+				}
+			})
+		);
+	};
+
+	console.log(decodeNestedVariables(variables));
+	return decodeNestedVariables(variables);
+	// return variables
 }
