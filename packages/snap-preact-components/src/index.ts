@@ -30,6 +30,7 @@ export * from './components/Molecules/Slideout';
 export * from './components/Molecules/FacetSlider';
 
 // ORGANISMS
+export * from './components/Organisms/SRP';
 export * from './components/Organisms/Autocomplete';
 export * from './components/Organisms/BranchOverride';
 export * from './components/Organisms/Facet';
