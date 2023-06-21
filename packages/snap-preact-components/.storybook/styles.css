@@ -18,3 +18,8 @@
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* Slideout component adds overflow to body and breaks storybook scrolling */
+body.sb-show-main {
+    overflow: auto!important;
+}
