@@ -1,6 +1,7 @@
 **/coverage/**
 **/dist/**
 **/test/**
+**/tests/**
 **/mocks/**
 **/__tests__/**
 **/__mocks__/**
