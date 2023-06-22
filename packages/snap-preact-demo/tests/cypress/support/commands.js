@@ -40,7 +40,14 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 	cy.addScript(`https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branch}/bundle.js`);
 });
 
-Cypress.Commands.add('snapController', (controllerId = 'search') => {
+Cypress.Commands.add('snapController', (controllerId = 'search', options) => {
+	const defaultOptions = {
+		delay: 200,
+	};
+
+	const mergedOptions = { ...defaultOptions, ...options };
+	cy.wait(mergedOptions.delay);
+
 	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
 			const checkTimeout = 200;
@@ -90,7 +97,7 @@ Cypress.Commands.add('waitForIdle', (options) => {
 Cypress.Commands.add('waitForRecsReady', () => {
 	return cy.document().then((doc) => {
 		return new Cypress.Promise((resolve) => {
-			let timeout = setTimeout(resolve, 5000);
+			setTimeout(resolve, 5000);
 			doc.addEventListener('RecsReady', resolve);
 		});
 	});

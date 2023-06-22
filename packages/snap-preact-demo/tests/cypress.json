@@ -1,8 +1,0 @@
-{
-	"defaultCommandTimeout": 12000,
-	"viewportWidth": 1280,
-	"viewportHeight": 960,
-	"chromeWebSecurity": false,
-	"video": false,
-	"screenshotOnRunFailure": false
-}

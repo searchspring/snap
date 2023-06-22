@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1](https://github.com/searchspring/snap/compare/v0.45.0...v0.45.1) (2023-06-22)
+
+### Bug Fixes
+
+- allow slideout contents width greater than 90% ([b24ec6a](https://github.com/searchspring/snap/commit/b24ec6ae4aa8bac3c2e1870371137931b8c21ad5))
+- slideout component adding overflow preventing scrolling on docs tab ([30da03f](https://github.com/searchspring/snap/commit/30da03fa3628f9d12065389e20edbcca3035baa4))
+
 # [0.45.0](https://github.com/searchspring/snap/compare/v0.44.3...v0.45.0) (2023-06-01)
 
 ### Bug Fixes

@@ -23,7 +23,7 @@ const CSS = {
 			top: slideDirection == 'top' ? (isActive ? '0' : `-100vh`) : slideDirection == 'bottom' ? 'initial' : '0',
 			height: '100%',
 			zIndex: '10004',
-			width: '90%',
+			width: width?.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
 			maxWidth: width,
 			padding: '10px',
 			background: '#fff',
