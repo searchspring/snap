@@ -80,7 +80,18 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, className, controller, facetLayout, filterSummaryLayout, sortLayout, perPageLayout, slideoutSlot } = props;
+	const {
+		disableStyles,
+		className,
+		controller,
+		facetLayout,
+		filterSummaryLayout,
+		noResultsTitle,
+		searchTitle,
+		sortLayout,
+		perPageLayout,
+		slideoutSlot,
+	} = props;
 	let style: any = props.style;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
 	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
@@ -251,32 +262,39 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 						) : (
 							<Fragment>
 								{pagination.totalResults ? (
-									<h3
-										className="ss-title ss-results-title"
-										aria-atomic="true"
-										aria-live="polite"
-										aria-label={`Now showing ${pagination.totalResults} items in the product grid`}
-									>
-										{`Showing `}
-										{pagination.multiplePages && <span className="ss-results-count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
-										<span className="ss-results-count-total">{pagination.totalResults}</span>
-										{` result${pagination.totalResults == 1 ? '' : 's'}`}
-										{search?.query && (
-											<span>
-												{` for `}
-												<span className="ss-results-query">"{search.query.string}"</span>
-											</span>
-										)}
-										{search?.originalQuery && (
-											<div className="ss-oq">
-												No results found for <em>"{search.originalQuery.string}"</em>, showing results for <em>"{search.query?.string}"</em> instead.
-											</div>
-										)}
-									</h3>
+									searchTitle ? (
+										searchTitle
+									) : (
+										<h3
+											className="ss-title ss-results-title"
+											aria-atomic="true"
+											aria-live="polite"
+											aria-label={`Now showing ${pagination.totalResults} items in the product grid`}
+										>
+											{`Showing `}
+											{pagination.multiplePages && <span className="ss-results-count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
+											<span className="ss-results-count-total">{pagination.totalResults}</span>
+											{` result${pagination.totalResults == 1 ? '' : 's'}`}
+											{search?.query && (
+												<span>
+													{` for `}
+													<span className="ss-results-query">"{search.query.string}"</span>
+												</span>
+											)}
+											{search?.originalQuery && (
+												<div className="ss-oq">
+													No results found for <em>"{search.originalQuery.string}"</em>, showing results for <em>"{search.query?.string}"</em>{' '}
+													instead.
+												</div>
+											)}
+										</h3>
+									)
 								) : (
 									pagination.totalResults === 0 && (
 										<h3 className="ss-title ss-results-title ss-no-results-title">
-											{search?.query ? (
+											{noResultsTitle ? (
+												{ noResultsTitle }
+											) : search?.query ? (
 												<span>
 													No results for <span className="ss-results-query">"{search.query.string}"</span> found.
 												</span>
@@ -384,6 +402,8 @@ export interface SrpProps extends Omit<ComponentProps, 'style'> {
 	perPageLayout?: 'horizontal' | 'vertical';
 	slideOutToggleWidth?: string;
 	slideoutSlot?: JSX.Element;
+	noResultsTitle?: string | JSX.Element;
+	searchTitle?: string | JSX.Element;
 	style?: ((props: SrpProps) => SerializedStyles) | string | Record<string, string>;
 }
 type controller = {

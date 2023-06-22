@@ -1,12 +1,13 @@
 import { RenderableProps } from 'preact';
 import { SerializedStyles } from '@emotion/react';
-import { Theme } from './providers/theme';
+// import { Theme } from './providers/theme';
 
 export interface ComponentProps extends RenderableProps<any> {
 	className?: string;
 	disableStyles?: boolean;
 	style?: string | Record<string, string>;
-	theme?: Theme;
+	// theme?: ({}:any) => void | Theme ;
+	theme?: any;
 }
 
 export enum Layout {

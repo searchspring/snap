@@ -4,10 +4,10 @@ export const Styling = (properties) => {
 	// const { theme } = properties;
 
 	return css({
-		// background: "gray",
+		fontFamily: properties.theme.primaryFont,
 
 		'.ss-title': {
-			fontFamily: properties.theme.primaryFont || 'Roboto, Helvetica, Arial',
+			fontFamily: properties.theme.secondaryFont || 'Roboto, Helvetica, Arial',
 		},
 	});
 };

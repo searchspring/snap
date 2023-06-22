@@ -53,34 +53,36 @@ const CSS = {
 export const Results = observer((properties: ResultsProp): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultBreakpointsProps = {
-		0: {
-			columns: properties.columns || 1,
-		},
-		540: {
-			columns: properties.columns || 2,
-		},
-		768: {
-			columns: properties.columns || 3,
-		},
-		991: {
-			columns: properties.columns || 4,
-		},
-	};
-
 	let props: ResultsProp = {
 		// default props
 		results: properties.controller?.store?.results,
 		columns: 4,
 		gapSize: '20px',
 		layout: Layout.GRID,
-		breakpoints: defaultBreakpointsProps,
+		// breakpoints: defaultBreakpointsProps,
 		// global theme
 		...globalTheme?.components?.results,
 		// props
 		...properties,
 		...properties.theme?.components?.results,
 	};
+
+	const defaultBreakpointsProps = {
+		0: {
+			columns: props.columns || 1,
+		},
+		540: {
+			columns: props.columns || 2,
+		},
+		768: {
+			columns: props.columns || 3,
+		},
+		991: {
+			columns: props.columns || 4,
+		},
+	};
+
+	props.breakpoints = props.breakpoints || defaultBreakpointsProps;
 
 	const displaySettings = useDisplaySettings(props?.breakpoints || {});
 	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });

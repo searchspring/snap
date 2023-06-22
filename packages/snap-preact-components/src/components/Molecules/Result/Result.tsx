@@ -76,18 +76,43 @@ const CSS = {
 export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: ResultProps = {
+	let props: ResultProps = {
 		// default props
 		layout: Layout.GRID,
 		// global theme
 		...globalTheme?.components?.result,
 		// props
 		...properties,
-		...properties.theme?.components?.result,
+		// ...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
-		props;
+	let theme;
+	if (properties.theme?.components?.result) {
+		if (typeof properties.theme?.components?.result == 'function') {
+			theme = properties.theme?.components?.result({ result: props.result, controller: props.controller });
+		} else {
+			theme = properties.theme?.components?.result;
+		}
+		props = { ...props, ...theme };
+	}
+
+	const {
+		result,
+		hideBadge,
+		hideTitle,
+		hidePricing,
+		hideImage,
+		detailSlot,
+		badgeSlot,
+		imageSlot,
+		fallback,
+		disableStyles,
+		className,
+		layout,
+		onClick,
+		style,
+		controller,
+	} = props;
 
 	const core = result?.mappings?.core;
 
@@ -157,8 +182,9 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							controller?.track?.product?.click(e as any, result);
 						}}
 					>
-						{!hideBadge && onSale && <Badge {...subProps.badge} />}
-						{!hideImage && <Image {...subProps.image} />}
+						{!hideBadge && (badgeSlot ? cloneWithProps(badgeSlot, { result }) : onSale && <Badge {...subProps.badge} />)}
+
+						{!hideImage && (imageSlot ? cloneWithProps(imageSlot, { result }) : <Image {...subProps.image} />)}
 					</a>
 				</div>
 				<div className="ss__result__details">
@@ -215,6 +241,8 @@ export interface ResultProps extends ComponentProps {
 	hideImage?: boolean;
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element;
+	badgeSlot?: JSX.Element;
+	imageSlot?: JSX.Element;
 	fallback?: string;
 	layout?: LayoutType;
 	truncateTitle?: TruncateTitleProps;

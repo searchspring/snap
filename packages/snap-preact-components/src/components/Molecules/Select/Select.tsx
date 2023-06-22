@@ -82,6 +82,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		iconOpen,
 		label,
 		native,
+		externalLabel,
 		onSelect,
 		selected,
 		separator,
@@ -217,52 +218,69 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						</select>
 					</>
 				) : (
-					<Dropdown
-						{...subProps.dropdown}
-						disableClickOutside={disableClickOutside}
-						open={open}
-						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-						onClick={() => setOpen((prev) => !prev)}
-						disableA11y
-						button={
-							<Button {...subProps.button} disableA11y={true}>
-								{label && !hideLabelOnSelection && (
-									<span
-										className="ss__select__label"
+					<>
+						{label && !hideLabelOnSelection && externalLabel && (
+							<span
+								className="ss__select__label"
+								ref={(e) => useA11y(e)}
+								aria-label={`${label} dropdown, ${options.length} options ${
+									selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+								}`}
+								aria-expanded={open}
+								role="button"
+							>
+								{label}
+								{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+							</span>
+						)}
+
+						<Dropdown
+							{...subProps.dropdown}
+							disableClickOutside={disableClickOutside}
+							open={open}
+							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+							onClick={() => setOpen((prev) => !prev)}
+							disableA11y
+							button={
+								<Button {...subProps.button} disableA11y={true}>
+									{label && !hideLabelOnSelection && !externalLabel && (
+										<span
+											className="ss__select__label"
+											ref={(e) => useA11y(e)}
+											aria-label={`${label} dropdown, ${options.length} options ${
+												selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+											}`}
+											aria-expanded={open}
+											role="button"
+										>
+											{label}
+											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+										</span>
+									)}
+									{selection && <span className="ss__select__selection">{selection?.label}</span>}
+									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+								</Button>
+							}
+						>
+							<ul className="ss__select__select">
+								{options.map((option, idx) => (
+									<li
 										ref={(e) => useA11y(e)}
-										aria-label={`${label} dropdown, ${options.length} options ${
-											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+										role={'link'}
+										aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
+											option.label
 										}`}
-										aria-expanded={open}
-										role="button"
+										className={classnames('ss__select__select__option', {
+											'ss__select__select__option--selected': selection?.value === option.value,
+										})}
+										onClick={(e) => !disabled && makeSelection(e as any, option)}
 									>
-										{label}
-										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
-									</span>
-								)}
-								{selection && <span className="ss__select__selection">{selection?.label}</span>}
-								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
-							</Button>
-						}
-					>
-						<ul className="ss__select__select">
-							{options.map((option, idx) => (
-								<li
-									ref={(e) => useA11y(e)}
-									role={'link'}
-									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
-										option.label
-									}`}
-									className={classnames('ss__select__select__option', {
-										'ss__select__select__option--selected': selection?.value === option.value,
-									})}
-									onClick={(e) => !disabled && makeSelection(e as any, option)}
-								>
-									<span>{option.label}</span>
-								</li>
-							))}
-						</ul>
-					</Dropdown>
+										<span>{option.label}</span>
+									</li>
+								))}
+							</ul>
+						</Dropdown>
+					</>
 				)}
 			</div>
 		</CacheProvider>
@@ -295,6 +313,7 @@ export interface SelectProps extends ComponentProps {
 	iconClose?: IconType | string;
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
+	externalLabel?: boolean;
 	native?: boolean;
 	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: Option | undefined) => void;
 	selected?: Option;

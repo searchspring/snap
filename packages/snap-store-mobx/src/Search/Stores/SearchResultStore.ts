@@ -67,19 +67,37 @@ export class Banner {
 	}
 }
 
+type productAttributes = Record<string, unknown> & {
+	imageSet?: {
+		activeImage?: string;
+	};
+};
 export class Product {
 	public type = 'product';
 	public id: string;
-	public attributes: Record<string, unknown> = {};
+	public attributes: productAttributes = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
 
+	public setActiveImage?: (imageUrl: string) => void;
+
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
+		this.attributes = {
+			...result.attributes!,
+			imageSet: {
+				activeImage: result.mappings?.core?.imageUrl!,
+			},
+		};
+
+		this.setActiveImage = (imageUrl: string) => {
+			this.attributes.imageSet!.activeImage = imageUrl;
+		};
+
 		this.mappings = result.mappings!;
 
 		if (result?.children?.length) {
