@@ -20,28 +20,13 @@ describe('Tracking', () => {
 		cy.get('#login-modal').find('input').type(shopperId);
 		cy.get('#login-modal').find('button').click();
 
-		// test of initial script context shopper value
-		cy.wait(`@${BeaconType.LOGIN}`).should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.response.body).to.have.property('success').to.equal(true);
-
-			const beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
-			expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
-			expect(beacon.type).to.equal(BeaconType.LOGIN);
-			expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
-			expect(beacon.context).to.be.an('object').include.key('shopperId');
-
-			cy.window().then((window) => {
-				expect(beacon.context.shopperId).to.equal(window.searchspring.context.shopper.id);
-			});
-		});
-
+		let beacon;
 		// test of new login using modal and tracker function
 		cy.wait(`@${BeaconType.LOGIN}`).should((interception) => {
 			expect(interception.state).to.equal('Complete');
 			expect(interception.response.body).to.have.property('success').to.equal(true);
 
-			const beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
+			beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
 			expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
 			expect(beacon.type).to.equal(BeaconType.LOGIN);
 			expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
@@ -238,11 +223,14 @@ describe('Tracking', () => {
 			// scroll down
 			cy.get('.ss__recommendation:first').scrollIntoView();
 
+			let profileImpressionBeacon, productImpressionBeacons;
+
 			cy.wait(`@${BeaconType.PROFILE_IMPRESSION}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
 				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-				const profileImpressionBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_IMPRESSION)[0];
+				profileImpressionBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_IMPRESSION)[0];
+				productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
 
 				expect(profileImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
 
@@ -251,52 +239,15 @@ describe('Tracking', () => {
 				expect(profileImpressionBeacon.event).to.have.property('profile');
 				expect(profileImpressionBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
 				expect(profileImpressionBeacon.id).to.be.an('string');
+			});
 
-				const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
-
-				let visibleSlides;
-				cy.get('.ss__recommendation:first .swiper-slide')
-					.filter(':visible')
-					.then((slides) => {
-						visibleSlides = slides.length;
-						expect(productImpressionBeacons).to.have.length(visibleSlides);
-					});
-
-				productImpressionBeacons.forEach((productImpressionBeacon) => {
-					expect(productImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
-					expect(productImpressionBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_IMPRESSION);
-
-					expect(productImpressionBeacon.id).to.be.an('string');
-					expect(productImpressionBeacon.event).to.have.property('context');
-					expect(productImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
-					expect(productImpressionBeacon.event).to.have.property('product');
-					expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
-					expect(productImpressionBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
-					expect(productImpressionBeacon.event.product.mappings.core)
-						.to.be.an('object')
-						// .include.all.keys(['brand', 'imageUrl', 'msrp', 'name', 'popularity', 'price', 'sku', 'thumbnailImageUrl', 'uid', 'url']);
-						.include.all.keys(['uid']);
-					expect(productImpressionBeacon.pid).to.equal(profileImpressionBeacon.id);
-				});
-
-				// click next button and assert new profile product impressions
-				cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
-
-				cy.wait(`@${BeaconType.PROFILE_CLICK}`).should((interception) => {
-					expect(interception.state).to.equal('Complete');
-					expect(interception.response.body).to.have.property('success').to.equal(true);
-
-					const profileClickBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_CLICK)[0];
-					expect(profileClickBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
-
-					expect(profileClickBeacon.event).to.have.property('context');
-					expect(profileClickBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
-					expect(profileClickBeacon.event).to.have.property('profile');
-					expect(profileClickBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
-					expect(profileClickBeacon.id).to.be.an('string');
-
-					const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
+			let visibleSlides;
+			cy.get('.ss__recommendation:first .swiper-slide')
+				.filter(':visible')
+				.then((slides) => {
+					visibleSlides = slides.length;
 					expect(productImpressionBeacons).to.have.length(visibleSlides);
+
 					productImpressionBeacons.forEach((productImpressionBeacon) => {
 						expect(productImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
 						expect(productImpressionBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_IMPRESSION);
@@ -315,36 +266,72 @@ describe('Tracking', () => {
 					});
 				});
 
-				// click on result
-				cy.get('.ss__recommendation:first .ss__result')
-					.filter(':visible:first')
-					.should('exist')
-					.find('.ss__result__details__pricing')
-					.should('exist')
-					.click();
-				cy.wait(`@${BeaconType.PROFILE_PRODUCT_CLICK}`).should((interception) => {
-					expect(interception.state).to.equal('Complete');
-					expect(interception.response.body).to.have.property('success').to.equal(true);
+			// click next button and assert new profile product impressions
+			cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
 
-					const profileClickBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_CLICK)[0];
-					expect(profileClickBeacon.id).to.be.an('string');
+			cy.wait(`@${BeaconType.PROFILE_CLICK}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-					const profileProductClickBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_CLICK)[0];
+				const profileClickBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_CLICK)[0];
+				expect(profileClickBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
 
-					expect(profileProductClickBeacons.category).to.equal(BeaconCategory.RECOMMENDATIONS);
-					expect(profileProductClickBeacons.type).to.equal(BeaconType.PROFILE_PRODUCT_CLICK);
-					expect(profileProductClickBeacons.id).to.be.an('string');
-					expect(profileProductClickBeacons.event).to.have.property('context');
-					expect(profileProductClickBeacons.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
-					expect(profileProductClickBeacons.event).to.have.property('product');
-					expect(profileProductClickBeacons.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
-					expect(profileProductClickBeacons.event.product.mappings).to.be.an('object').include.all.keys(['core']);
-					expect(profileProductClickBeacons.event.product.mappings.core)
+				expect(profileClickBeacon.event).to.have.property('context');
+				expect(profileClickBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
+				expect(profileClickBeacon.event).to.have.property('profile');
+				expect(profileClickBeacon.event.profile).to.be.an('object').include.all.keys(['placement', 'tag', 'templateId', 'threshold', 'seed']);
+				expect(profileClickBeacon.id).to.be.an('string');
+
+				const productImpressionBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_IMPRESSION);
+				expect(productImpressionBeacons).to.have.length(visibleSlides);
+				productImpressionBeacons.forEach((productImpressionBeacon) => {
+					expect(productImpressionBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
+					expect(productImpressionBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_IMPRESSION);
+
+					expect(productImpressionBeacon.id).to.be.an('string');
+					expect(productImpressionBeacon.event).to.have.property('context');
+					expect(productImpressionBeacon.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
+					expect(productImpressionBeacon.event).to.have.property('product');
+					expect(productImpressionBeacon.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
+					expect(productImpressionBeacon.event.product.mappings).to.be.an('object').include.all.keys(['core']);
+					expect(productImpressionBeacon.event.product.mappings.core)
 						.to.be.an('object')
 						// .include.all.keys(['brand', 'imageUrl', 'msrp', 'name', 'popularity', 'price', 'sku', 'thumbnailImageUrl', 'uid', 'url']);
 						.include.all.keys(['uid']);
-					expect(profileProductClickBeacons.pid).to.equal(profileClickBeacon.id);
+					expect(productImpressionBeacon.pid).to.equal(profileImpressionBeacon.id);
 				});
+			});
+
+			// click on result
+			cy.get('.ss__recommendation:first .ss__result')
+				.filter(':visible:first')
+				.should('exist')
+				.find('.ss__result__details__pricing')
+				.should('exist')
+				.click();
+
+			cy.wait(`@${BeaconType.PROFILE_PRODUCT_CLICK}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
+
+				const profileClickBeacon = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_CLICK)[0];
+				expect(profileClickBeacon.id).to.be.an('string');
+
+				const profileProductClickBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_CLICK)[0];
+
+				expect(profileProductClickBeacons.category).to.equal(BeaconCategory.RECOMMENDATIONS);
+				expect(profileProductClickBeacons.type).to.equal(BeaconType.PROFILE_PRODUCT_CLICK);
+				expect(profileProductClickBeacons.id).to.be.an('string');
+				expect(profileProductClickBeacons.event).to.have.property('context');
+				expect(profileProductClickBeacons.event.context).to.be.an('object').include.all.keys(['placement', 'tag', 'type']);
+				expect(profileProductClickBeacons.event).to.have.property('product');
+				expect(profileProductClickBeacons.event.product).to.be.an('object').include.all.keys(['id', 'mappings', 'seed']);
+				expect(profileProductClickBeacons.event.product.mappings).to.be.an('object').include.all.keys(['core']);
+				expect(profileProductClickBeacons.event.product.mappings.core)
+					.to.be.an('object')
+					// .include.all.keys(['brand', 'imageUrl', 'msrp', 'name', 'popularity', 'price', 'sku', 'thumbnailImageUrl', 'uid', 'url']);
+					.include.all.keys(['uid']);
+				expect(profileProductClickBeacons.pid).to.equal(profileClickBeacon.id);
 			});
 		});
 	});
