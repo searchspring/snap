@@ -1,4 +1,4 @@
-/*! For license information please see main.f0fb0c62.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.f339ff8c.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -25,16 +25,16 @@
 				);
 			___CSS_LOADER_EXPORT___.push([
 				module.id,
-				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }\n\n/* Slideout component adds overflow to body and breaks storybook scrolling */\nbody.sb-show-main {\n    overflow: auto!important;\n}",
 				'',
 				{
 					version: 3,
 					sources: ['webpack://./.storybook/styles.css'],
 					names: [],
 					mappings:
-						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE',
+						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE;;AAE3C,4EAA4E;AAC5E;IACI,wBAAwB;AAC5B',
 					sourcesContent: [
-						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }\n\n/* Slideout component adds overflow to body and breaks storybook scrolling */\nbody.sb-show-main {\n    overflow: auto!important;\n}",
 					],
 					sourceRoot: '',
 				},
@@ -15105,7 +15105,11 @@
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
-					(__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/es.string.ends-with.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+					__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -15245,7 +15249,7 @@
 					top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
 					height: '100%',
 					zIndex: '10004',
-					width: '90%',
+					width: null != width && width.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
 					maxWidth: width,
 					padding: '10px',
 					background: '#fff',
@@ -30694,6 +30698,8 @@
 												response,
 												responseJSON,
 												_response,
+												_responseJSON,
+												_context$query,
 												_response2,
 												_response3,
 												_this = this;
@@ -30737,7 +30743,7 @@
 																);
 															case 21:
 																if (429 != response.status) {
-																	_context.next = 31;
+																	_context.next = 33;
 																	break;
 																}
 																if (!(this.retryCount < this.configuration.maxRetry)) {
@@ -30755,16 +30761,33 @@
 															case 30:
 																throw new Error('Retry rate limit exceeded.');
 															case 31:
-																throw new Error('Unexpected Response Status.');
-															case 34:
-																if (((_context.prev = 34), (_context.t0 = _context.catch(7)), 'Rate limited.' != _context.t0.message)) {
-																	_context.next = 40;
+																_context.next = 35;
+																break;
+															case 33:
+																if (
+																	404 != response.status ||
+																	'Profile is currently paused' !=
+																		(null === (_responseJSON = responseJSON) || void 0 === _responseJSON ? void 0 : _responseJSON.message)
+																) {
+																	_context.next = 35;
 																	break;
 																}
-																return (_context.next = 39), this.request(context, cacheKey);
-															case 39:
+																throw new Error(
+																	responseJSON.message +
+																		': ' +
+																		(null === (_context$query = context.query) || void 0 === _context$query ? void 0 : _context$query.tag)
+																);
+															case 35:
+																throw new Error('Unexpected Response Status.');
+															case 38:
+																if (((_context.prev = 38), (_context.t0 = _context.catch(7)), 'Rate limited.' != _context.t0.message)) {
+																	_context.next = 44;
+																	break;
+																}
+																return (_context.next = 43), this.request(context, cacheKey);
+															case 43:
 																return _context.abrupt('return', _context.sent);
-															case 40:
+															case 44:
 																throw {
 																	err: _context.t0,
 																	fetchDetails: Object.assign(
@@ -30777,14 +30800,14 @@
 																		init
 																	),
 																};
-															case 41:
+															case 45:
 															case 'end':
 																return _context.stop();
 														}
 												},
 												_callee,
 												this,
-												[[7, 34]]
+												[[7, 38]]
 											);
 										})
 									)),
@@ -30796,10 +30819,10 @@
 								key: 'createFetchParams',
 								value: function createFetchParams(context) {
 									var _context$body,
-										_context$query,
+										_context$query2,
 										siteId =
 											(null == context || null === (_context$body = context.body) || void 0 === _context$body ? void 0 : _context$body.siteId) ||
-											(null == context || null === (_context$query = context.query) || void 0 === _context$query ? void 0 : _context$query.siteId);
+											(null == context || null === (_context$query2 = context.query) || void 0 === _context$query2 ? void 0 : _context$query2.siteId);
 									if (!siteId) throw new Error('Request failed. Missing "siteId" parameter.');
 									var siteIdHost = 'https://' + siteId + '.a.searchspring.io',
 										url = (this.configuration.origin || siteIdHost).replace(/\/$/, '') + '/' + context.path.replace(/^\//, ''),
@@ -41078,7 +41101,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.45.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.45.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41161,6 +41184,7 @@
 									return _this.sendEvents([beaconEvent]), beaconEvent;
 								},
 								error: function error(data, siteId) {
+									var _payload$event$messag;
 									if ((null != data && data.stack) || (null != data && data.message)) {
 										var context = _this.context;
 										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
@@ -41189,9 +41213,14 @@
 												},
 											};
 										if (
-											payload.event.href &&
-											!payload.event.href.includes('//localhost') &&
-											!payload.event.href.includes('//snapui.searchspring.io/')
+											!(
+												(null !== (_payload$event$messag = payload.event.message) &&
+													void 0 !== _payload$event$messag &&
+													_payload$event$messag.includes('Profile is currently paused')) ||
+												!payload.event.href ||
+												payload.event.href.includes('//localhost') ||
+												payload.event.href.includes('//snapui.searchspring.io/')
+											)
 										)
 											return _this.track.event(payload);
 									}
@@ -41571,7 +41600,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.45.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.45.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
