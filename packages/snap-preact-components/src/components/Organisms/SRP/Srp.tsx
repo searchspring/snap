@@ -64,6 +64,9 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 		sortLayout: 'horizontal',
 		perPageLayout: 'horizontal',
 		slideOutToggleWidth: '991px',
+		sortByLabel: 'Sort By',
+		perPageSortLabel: 'Per Page',
+
 		// global theme
 		...globalTheme?.components?.srp,
 		// props
@@ -91,6 +94,13 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 		sortLayout,
 		perPageLayout,
 		slideoutSlot,
+		sortByLabel,
+		perPageSortLabel,
+		hideSidebar,
+		topSideBarSlot,
+		bottomSideBarSlot,
+		topContentSlot,
+		bottomContentSlot,
 	} = props;
 	let style: any = props.style;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
@@ -192,68 +202,82 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 		},
 	};
 
+	const styling: { css?: StylingCSS } = {};
+	styling.css = [];
 	if (style && typeof style == 'function') {
 		style = style({ ...properties });
+		styling.css = [style];
+	} else if (style && Array.isArray(style)) {
+		style.map((script) => {
+			styling.css!.push(script({ ...properties }));
+		});
 	}
-	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [
+		styling.css.push(
 			CSS.SRP({
 				slideOutToggleWidth,
 				theme,
 			}),
-			style,
-		];
+			style
+		);
 	} else if (style) {
-		styling.css = [style];
+		styling.css.push(style);
 	}
 
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__srp', className)}>
 				{/* START SIDEBAR */}
-				<div className={classnames('ss__srp__sidebar')}>
-					{filterSummaryLayout == 'vertical' && <FilterSummary {...subProps.FilterSummary} filters={filters} controller={controller} />}
+				{!hideSidebar && (
+					<div className={classnames('ss__srp__sidebar')}>
+						{topSideBarSlot && cloneWithProps(topSideBarSlot, { controller })}
 
-					{sortLayout == 'vertical' && (
-						<div className="ss-sortby">
-							{sorting.current && (
-								<Select
-									{...subProps.Select}
-									className="ss-sort-by"
-									label="Sort By"
-									options={sorting.options}
-									selected={sorting.current}
-									onSelect={(e, selection) => {
-										selection?.url.go();
-									}}
-								/>
-							)}
-						</div>
-					)}
+						{filterSummaryLayout == 'vertical' && <FilterSummary {...subProps.FilterSummary} filters={filters} controller={controller} />}
 
-					{perPageLayout == 'vertical' && (
-						<div className="ss-per-page">
-							{pagination.pageSize && (
-								<Select
-									{...subProps.Select}
-									label="Per Page"
-									options={pagination.pageSizeOptions}
-									selected={{ label: `Show ${pagination.pageSize}`, value: pagination.pageSize }}
-									onSelect={(e, option) => {
-										pagination.setPageSize(+option!.value);
-									}}
-								/>
-							)}
-						</div>
-					)}
+						{sortLayout == 'vertical' && (
+							<div className="ss-sortby">
+								{sorting.current && (
+									<Select
+										{...subProps.Select}
+										className="ss-sort-by"
+										label="Sort By"
+										options={sorting.options}
+										selected={sorting.current}
+										onSelect={(e, selection) => {
+											selection?.url.go();
+										}}
+									/>
+								)}
+							</div>
+						)}
 
-					{facetLayout == 'vertical' && <Facets {...subProps.Facets} facets={facets} />}
-				</div>
+						{perPageLayout == 'vertical' && (
+							<div className="ss-per-page">
+								{pagination.pageSize && (
+									<Select
+										{...subProps.Select}
+										label="Per Page"
+										options={pagination.pageSizeOptions}
+										selected={{ label: `Show ${pagination.pageSize}`, value: pagination.pageSize }}
+										onSelect={(e, option) => {
+											pagination.setPageSize(+option!.value);
+										}}
+									/>
+								)}
+							</div>
+						)}
+
+						{facetLayout == 'vertical' && <Facets {...subProps.Facets} facets={facets} />}
+
+						{bottomSideBarSlot && cloneWithProps(bottomSideBarSlot, { controller })}
+					</div>
+				)}
 				{/* END SIDEBAR */}
 
 				{/* START MAIN CONTENT */}
 				<div className={classnames('ss__srp__content')}>
+					{topContentSlot && cloneWithProps(topContentSlot, { controller })}
+
 					<LoadingBar {...subProps.LoadingBar} active={store.loading} />
 
 					<header className="ss-header-container">
@@ -334,39 +358,35 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 							</Slideout>
 
 							{sortLayout == 'horizontal' && (
-								<div className="ss-toolbar-col">
-									<div className="ss-sortby">
-										{sorting.current && (
-											<Select
-												{...subProps.Select}
-												className="ss-sort-by"
-												label="Sort By"
-												options={sorting.options}
-												selected={sorting.current}
-												onSelect={(e, selection) => {
-													selection?.url.go();
-												}}
-											/>
-										)}
-									</div>
+								<div className="ss-toolbar-col ss-sortby">
+									{sorting.current && (
+										<Select
+											{...subProps.Select}
+											className="ss-sort-by"
+											label={sortByLabel}
+											options={sorting.options}
+											selected={sorting.current}
+											onSelect={(e, selection) => {
+												selection?.url.go();
+											}}
+										/>
+									)}
 								</div>
 							)}
 
 							{perPageLayout == 'horizontal' && (
-								<div className="ss-toolbar-col">
-									<div className="ss-per-page">
-										{pagination.pageSize && (
-											<Select
-												{...subProps.Select}
-												label="Per Page"
-												options={pagination.pageSizeOptions}
-												selected={{ label: `Show ${pagination.pageSize}`, value: pagination.pageSize }}
-												onSelect={(e, option) => {
-													pagination.setPageSize(+option!.value);
-												}}
-											/>
-										)}
-									</div>
+								<div className="ss-toolbar-col ss-per-page">
+									{pagination.pageSize && (
+										<Select
+											{...subProps.Select}
+											label={perPageSortLabel}
+											options={pagination.pageSizeOptions}
+											selected={{ label: `Show ${pagination.pageSize}`, value: pagination.pageSize }}
+											onSelect={(e, option) => {
+												pagination.setPageSize(+option!.value);
+											}}
+										/>
+									)}
 								</div>
 							)}
 							<div className="ss-toolbar-col pagination">
@@ -387,6 +407,8 @@ export const Srp = observer((properties: mergedProps): JSX.Element => {
 							{store.pagination.totalPages > 1 && <Pagination {...subProps.Pagination} pagination={store.pagination} />}
 						</div>
 					</div>
+
+					{bottomContentSlot && cloneWithProps(bottomContentSlot, { controller })}
 				</div>
 				{/* END MAIN CONTENT */}
 			</div>
@@ -400,8 +422,16 @@ export interface SrpProps extends Omit<ComponentProps, 'style'> {
 	filterSummaryLayout?: 'horizontal' | 'vertical';
 	sortLayout?: 'horizontal' | 'vertical';
 	perPageLayout?: 'horizontal' | 'vertical';
+
+	hideSidebar?: boolean;
+	perPageSortLabel?: string;
+	sortByLabel?: string;
 	slideOutToggleWidth?: string;
 	slideoutSlot?: JSX.Element;
+	topSideBarSlot?: JSX.Element;
+	bottomSideBarSlot?: JSX.Element;
+	bottomContentSlot?: JSX.Element;
+	topContentSlot?: JSX.Element;
 	noResultsTitle?: string | JSX.Element;
 	searchTitle?: string | JSX.Element;
 	style?: ((props: SrpProps) => SerializedStyles) | string | Record<string, string>;

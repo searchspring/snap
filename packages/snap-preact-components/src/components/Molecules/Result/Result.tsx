@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
+import { Rating, RatingProps } from '../../Molecules/Rating';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
@@ -89,7 +90,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	let theme;
 	if (properties.theme?.components?.result) {
 		if (typeof properties.theme?.components?.result == 'function') {
-			theme = properties.theme?.components?.result({ result: props.result, controller: props.controller });
+			theme = properties.theme?.components?.result({ result: props.result });
 		} else {
 			theme = properties.theme?.components?.result;
 		}
@@ -107,6 +108,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		imageSlot,
 		fallback,
 		disableStyles,
+		showRatings,
 		className,
 		layout,
 		onClick,
@@ -145,13 +147,26 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__image',
 			alt: core?.name,
-			src: core?.imageUrl,
+			src: result.attributes.imageSet!.activeImage,
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,
 				fallback: fallback,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		rating: {
+			// default props
+			className: 'ss__result__rating',
+			rating: core.rating,
+			// global theme
+			...globalTheme?.components?.rating,
+			// inherited props
+			...defined({
+				disableStyles,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -170,7 +185,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
-
 	return core ? (
 		<CacheProvider>
 			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
@@ -202,6 +216,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							/>
 						</div>
 					)}
+					{showRatings && core.rating && <Rating rating={core.rating} />}
 					{!hidePricing && (
 						<div className="ss__result__details__pricing">
 							{core.msrp && core.price && core.price < core.msrp ? (
@@ -228,6 +243,7 @@ interface ResultSubProps {
 	badge: BadgeProps;
 	price: PriceProps;
 	image: ImageProps;
+	rating: RatingProps;
 }
 interface TruncateTitleProps {
 	limit: number;
@@ -240,6 +256,7 @@ export interface ResultProps extends ComponentProps {
 	hideTitle?: boolean;
 	hideImage?: boolean;
 	hidePricing?: boolean;
+	showRatings?: boolean;
 	detailSlot?: JSX.Element;
 	badgeSlot?: JSX.Element;
 	imageSlot?: JSX.Element;
