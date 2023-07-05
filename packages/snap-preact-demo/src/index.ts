@@ -6,7 +6,6 @@ import { url } from '@searchspring/snap-toolbox';
 import { afterStore } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
-import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
 
@@ -94,19 +93,11 @@ let config: SnapConfig = {
 				},
 				targeters: [
 					{
-						selector: '#searchspring-content',
+						selector: '#searchspring-layout',
 						hideTarget: true,
 						skeleton: () => ContentSkel,
 						component: async () => {
-							return (await import('./components/Content/Content')).Content;
-						},
-					},
-					{
-						selector: '#searchspring-sidebar',
-						hideTarget: true,
-						skeleton: () => SidebarSkel,
-						component: async () => {
-							return (await import('./components/Sidebar/Sidebar')).Sidebar;
+							return (await import('./components/Layout/Layout')).Layout;
 						},
 					},
 				],

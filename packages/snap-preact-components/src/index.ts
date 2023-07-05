@@ -3,6 +3,7 @@ export * from './components/Atoms/Badge';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
+export * from './components/Atoms/Flex';
 export * from './components/Atoms/FormattedNumber';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
@@ -37,6 +38,9 @@ export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
+
+// LAYOUTS
+export * from './components/Layouts/Layout';
 
 // HOOKS
 export * from './hooks';

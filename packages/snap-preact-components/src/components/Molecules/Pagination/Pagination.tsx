@@ -10,6 +10,7 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
+import type { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
 	pagination: ({ theme }: { theme: Theme }) =>
@@ -46,6 +47,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 	const {
 		pagination,
+		controller,
 		pages,
 		pagesLeft,
 		pagesRight,
@@ -79,7 +81,8 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		},
 	};
 
-	const store = pagination;
+	const store = pagination || controller?.store?.pagination;
+
 	const getPagesParams = Number.isInteger(pagesLeft) && Number.isInteger(pagesRight) ? [pagesLeft, pagesRight] : [pages];
 	const _pages = store?.getPages(...getPagesParams);
 	const pageNumbers = _pages?.map((page) => page.number);
@@ -90,7 +93,10 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	} else if (style) {
 		styling.css = [style];
 	}
-	return store?.totalResults ? (
+
+	console.log('pagination rendering...');
+
+	return pageNumbers && store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
 				<nav role="navigation" aria-label="Pagination">
@@ -171,7 +177,8 @@ interface PaginationSubProps {
 }
 
 export interface PaginationProps extends ComponentProps {
-	pagination: SearchPaginationStore;
+	pagination?: SearchPaginationStore;
+	controller?: SearchController;
 	pages?: number;
 	pagesLeft?: number;
 	pagesRight?: number;
