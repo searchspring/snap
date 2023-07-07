@@ -1,12 +1,13 @@
-import { RenderableProps } from 'preact';
 import { SerializedStyles } from '@emotion/react';
 import { Theme } from './providers/theme';
+import type { AbstractController } from '@searchspring/snap-controller';
 
-export interface ComponentProps extends RenderableProps<any> {
+export interface ComponentProps {
 	className?: string;
 	disableStyles?: boolean;
 	style?: string | Record<string, string>;
 	theme?: Theme;
+	controller?: AbstractController;
 }
 
 export enum Layout {

@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
+import { ThemeProvider } from '../../../providers';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,12 +9,55 @@ import { observer } from 'mobx-react-lite';
 
 import { Flex, FlexProps } from '../../Atoms/Flex/Flex';
 import { Theme, useTheme, CacheProvider, ControllerProvider } from '../../../providers';
-
-import { ComponentProps, StylingCSS } from '../../../types';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 import type { SearchController } from '@searchspring/snap-controller';
+import type { ComponentProps, StylingCSS } from '../../../types';
+import type { SlideoutProps } from '../../Molecules/Slideout/Slideout';
+import type { PaginationProps } from '../../Molecules/Pagination/Pagination';
+import type { FacetsProps } from '../../Organisms/Facets/Facets';
+import type { RecommendationProps } from '../../Organisms/Recommendation/Recommendation';
+import type { ResultsProps } from '../../Organisms/Results/Results';
+import type { FilterSummaryProps } from '../../Organisms/FilterSummary/FilterSummary';
+import type { SortByProps } from '../../Molecules/SortBy/SortBy';
+import type { PerPageProps } from '../../Molecules/PerPage/PerPage';
+import type { StringProps } from '../../Atoms/String/String';
+import type { LoadingBarProps } from '../../Atoms/Loading/LoadingBar';
+import type { BreadcrumbProps } from '../../Atoms/Breadcrumbs/Breadcrumbs';
+import type { BannerProps } from '../../Atoms/Merchandising';
 
 // dynamically imported lazy loaded components
+const Banner = lazy(async () => {
+	return (await import('../../Atoms/Merchandising/Banner/')).Banner;
+});
+
+const Breadcrumbs = lazy(async () => {
+	return (await import('../../Atoms/Breadcrumbs/')).Breadcrumbs;
+});
+
+const String = lazy(async () => {
+	return (await import('../../Atoms/String/')).String;
+});
+
+const LoadingBar = lazy(async () => {
+	return (await import('../../Atoms/Loading/')).LoadingBar;
+});
+
+const PerPage = lazy(async () => {
+	return (await import('../../Molecules/PerPage/')).PerPage;
+});
+
+const SortBy = lazy(async () => {
+	return (await import('../../Molecules/SortBy/')).SortBy;
+});
+
+const Pagination = lazy(async () => {
+	return (await import('../../Molecules/Pagination/')).Pagination;
+});
+
+const Slideout = lazy(async () => {
+	return (await import('../../Molecules/Slideout/')).Slideout;
+});
 
 const Facets = lazy(async () => {
 	return (await import('../../Organisms/Facets/')).Facets;
@@ -27,25 +71,13 @@ const Results = lazy(async () => {
 	return (await import('../../Organisms/Results/')).Results;
 });
 
-const Pagination = lazy(async () => {
-	return (await import('../../Molecules/Pagination/')).Pagination;
+const Recommendation = lazy(async () => {
+	return (await import('../../Organisms/Recommendation/')).Recommendation;
 });
-
-const Banner = lazy(async () => {
-	return (await import('../../Atoms/Merchandising/Banner/')).Banner;
-});
-
-const componentMap = {
-	Banner,
-	Facets,
-	FilterSummary,
-	Results,
-	Pagination,
-};
 
 // CSS in JS
 const CSS = {
-	layout: ({ width, height }: FlexProps) =>
+	layout: ({ width, height }: Partial<LayoutProps>) =>
 		css({
 			width,
 			height,
@@ -64,7 +96,8 @@ export const Layout = observer((properties: LayoutProps) => {
 		...properties,
 		...properties.theme?.components?.flex,
 	};
-	const { controller, layout, width, height, disableStyles, className, style } = props;
+	const { controller, breakpoints, width, height, disableStyles, className, style, theme } = props;
+	let layout = props.layout;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -74,16 +107,23 @@ export const Layout = observer((properties: LayoutProps) => {
 		styling.css = [style];
 	}
 
-	const LayoutElements = containerize(controller, layout);
+	const displaySettings = useDisplaySettings(breakpoints!);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		layout = displaySettings as LayoutElement[];
+	}
+
+	const LayoutElements = containerize(controller, layout || []);
 
 	return (
 		<ControllerProvider controller={controller}>
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__layout', className)}>
-					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
-					<LayoutElements />
-				</div>
-			</CacheProvider>
+			<ThemeProvider theme={theme || {}}>
+				<CacheProvider>
+					<div {...styling} className={classnames('ss__layout', className)}>
+						{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
+						<LayoutElements />
+					</div>
+				</CacheProvider>
+			</ThemeProvider>
 		</ControllerProvider>
 	);
 });
@@ -97,22 +137,36 @@ function generateLayoutClassName(name?: string) {
 	return name ? `ss__layout__${normalizedName}` : '';
 }
 
-function containerize(controller: SearchController, layout: LayoutElements[]) {
+function containerize(controller: any, layout: LayoutElement[]) {
 	return () => {
 		return (
 			<Fragment>
 				{layout.map((element) => {
-					if ((element as LayoutContainerElement).items) {
-						const containerElement = element as LayoutContainerElement;
-						const InnerContainer = containerize(controller, containerElement.items);
+					if (element.items) {
+						const containerElement = element;
 
+						let InnerContainer;
+						if (element.component) {
+							const itemElement = element;
+							const Component = componentMap[itemElement.component as keyof typeof componentMap];
+
+							InnerContainer = () => (
+								<Suspense fallback={<Fragment />}>
+									<Component controller={controller} {...(itemElement.props as any)} breakpoints={{}}>
+										<Layout controller={controller} layout={element.items} />
+									</Component>
+								</Suspense>
+							);
+						} else {
+							InnerContainer = containerize(controller, containerElement.items || []);
+						}
 						return (
 							<Flex className={generateLayoutClassName(element.name)} {...element.layout}>
 								<InnerContainer />
 							</Flex>
 						);
 					} else {
-						const itemElement = element as LayoutComponentElement;
+						const itemElement = element;
 						const Component = componentMap[itemElement.component as keyof typeof componentMap];
 
 						return (
@@ -122,7 +176,7 @@ function containerize(controller: SearchController, layout: LayoutElements[]) {
 								{...itemElement.layout}
 							>
 								<Suspense fallback={<Fragment />}>
-									<Component controller={controller} {...itemElement.props} />
+									<Component controller={controller} {...(itemElement.props as any)} breakpoints={{}} />
 								</Suspense>
 							</Flex>
 						);
@@ -133,25 +187,107 @@ function containerize(controller: SearchController, layout: LayoutElements[]) {
 	};
 }
 
-export type LayoutElements = LayoutContainerElement | LayoutComponentElement;
-
-export type LayoutContainerElement = {
+export type LayoutElement = {
 	name?: string;
 	type?: 'Flex'; // supported layout container elements
-	width?: string;
-	height?: string;
 	layout?: FlexProps;
-	items: LayoutElements[];
+	items?: LayoutElement[];
+} & Partial<
+	| StringElement
+	| BannerElement
+	| BreadcrumbsElement
+	| LoadingBarElement
+	| PerPageElement
+	| SortByElement
+	| PaginationElement
+	| SlideoutElement
+	| FacetsElement
+	| FilterSummaryElement
+	| ResultsElement
+	| RecommendationElement
+>;
+
+const componentMap = {
+	Banner,
+	Breadcrumbs,
+	LoadingBar,
+	PerPage,
+	SortBy,
+	Pagination,
+	Slideout,
+	Facets,
+	FilterSummary,
+	Results,
+	Recommendation,
+	String,
 };
 
-export type LayoutComponentElement = {
-	name?: string;
-	component: 'Banner' | 'Results' | 'Pagination' | 'Facets' | 'FilterSummary'; // supported components
-	layout?: FlexProps;
-	props?: any;
+type StringElement = {
+	component: 'String';
+	props: StringProps;
+};
+
+type BannerElement = {
+	component: 'Banner';
+	props: BannerProps;
+};
+
+type BreadcrumbsElement = {
+	component: 'Breadcrumbs';
+	props: BreadcrumbProps;
+};
+
+type LoadingBarElement = {
+	component: 'LoadingBar';
+	props: LoadingBarProps;
+};
+
+type PerPageElement = {
+	component: 'PerPage';
+	props: PerPageProps;
+};
+
+type SortByElement = {
+	component: 'SortBy';
+	props: SortByProps;
+};
+
+type PaginationElement = {
+	component: 'Pagination';
+	props: PaginationProps;
+};
+
+type SlideoutElement = {
+	component: 'Slideout';
+	props: SlideoutProps;
+};
+
+type FacetsElement = {
+	component: 'Facets';
+	props: FacetsProps;
+};
+
+type FilterSummaryElement = {
+	component: 'FilterSummary';
+	props: FilterSummaryProps;
+};
+
+type ResultsElement = {
+	component: 'Results';
+	props: ResultsProps;
+};
+
+type RecommendationElement = {
+	component: 'Recommendation';
+	props: RecommendationProps;
 };
 
 export interface LayoutProps extends ComponentProps {
 	controller: SearchController;
-	layout: LayoutElements[];
+	layout?: LayoutElement[];
+	width?: string;
+	height?: string;
+	breakpoints?: {
+		[key: number]: LayoutElement[];
+	};
 }

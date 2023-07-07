@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
+import { observer } from 'mobx-react-lite';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -10,6 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
+import { parseProps } from '../../../utilities';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
@@ -32,7 +34,7 @@ const CSS = {
 		}),
 };
 
-export function Slideout(properties: SlideoutProps): JSX.Element {
+export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const props: SlideoutProps = {
@@ -51,6 +53,8 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
+	const parsedProps = parseProps(props.controller!, props);
+
 	const {
 		children,
 		active,
@@ -64,7 +68,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		disableStyles,
 		className,
 		style,
-	} = props;
+	} = parsedProps;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -132,7 +136,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	) : (
 		<Fragment></Fragment>
 	);
-}
+});
 
 export interface SlideoutProps extends ComponentProps {
 	children?: ComponentChildren;

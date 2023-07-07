@@ -37,9 +37,7 @@ export class Toolbar extends Component<ToolBarProps> {
 					<div className="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div className="ss-toolbar-col pagination">
-						{pagination.totalPages > 1 && !isMobile && <Pagination pagination={pagination} spread={3} />}
-					</div>
+					<div className="ss-toolbar-col pagination">{pagination.totalPages > 1 && !isMobile && <Pagination pagination={pagination} />}</div>
 				</div>
 			</div>
 		);

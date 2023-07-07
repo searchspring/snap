@@ -7,6 +7,7 @@ import deepmerge from 'deepmerge';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
+import type { SwiperOptions } from 'swiper';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -16,6 +17,7 @@ import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { parseProps } from '../../../utilities';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -54,6 +56,8 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		};
 	}
 
+	const parsedProps = parseProps(props.controller!, props);
+
 	const {
 		title,
 		controller,
@@ -70,7 +74,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		className,
 		vertical,
 		...additionalProps
-	} = props;
+	} = parsedProps;
 
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
@@ -156,7 +160,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	);
 });
 
-export interface RecommendationProps extends ComponentProps {
+export type RecommendationProps = {
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
@@ -168,7 +172,8 @@ export interface RecommendationProps extends ComponentProps {
 	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
-}
+} & SwiperOptions &
+	ComponentProps;
 
 interface RecommendationSubProps {
 	result: ResultProps;

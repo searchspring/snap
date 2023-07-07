@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
-
+import { observer } from 'mobx-react-lite';
 import { jsx, css, keyframes, Keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { parseProps } from '../../../utilities';
 
 const CSS = {
 	loadingBar: ({ color, height, backgroundColor, theme, animation }: Partial<LoadingBarProps> & { animation: Keyframes }) =>
@@ -41,7 +42,7 @@ const CSS = {
 	}),
 };
 
-export function LoadingBar(properties: LoadingBarProps): JSX.Element {
+export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
@@ -55,7 +56,9 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 		...properties.theme?.components?.loadingbar,
 	};
 
-	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
+	const parsedProps = parseProps(props.controller!, props);
+
+	const { active, color, backgroundColor, height, disableStyles, className, style } = parsedProps;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -72,7 +75,7 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 	) : (
 		<Fragment></Fragment>
 	);
-}
+});
 
 export interface LoadingBarProps extends ComponentProps {
 	active: boolean;

@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
-
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { ComponentProps, StylingCSS } from '../../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
+import type { SearchController } from '@searchspring/snap-controller';
+import { parseProps } from '../../../../utilities';
 
 const CSS = {
 	banner: () =>
@@ -18,7 +20,7 @@ const CSS = {
 		}),
 };
 
-export function Banner(properties: BannerProps): JSX.Element {
+export const Banner = observer((properties: BannerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const props: BannerProps = {
@@ -28,8 +30,11 @@ export function Banner(properties: BannerProps): JSX.Element {
 		...properties,
 		...properties.theme?.components?.banner,
 	};
+	const parsedProps = parseProps(props.controller!, props);
 
-	const { content, type, disableStyles, className, style } = props;
+	const { controller, type, disableStyles, className, style } = parsedProps;
+
+	const content = props.content || controller?.store?.merchandising.content;
 
 	if (type === ContentType.INLINE) {
 		console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
@@ -60,9 +65,10 @@ export function Banner(properties: BannerProps): JSX.Element {
 	) : (
 		<Fragment></Fragment>
 	);
-}
+});
 
 export interface BannerProps extends ComponentProps {
-	content: BannerContent;
+	controller?: SearchController;
+	content?: BannerContent;
 	type: ContentType;
 }

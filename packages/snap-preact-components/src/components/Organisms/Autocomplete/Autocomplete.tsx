@@ -11,7 +11,7 @@ import type { AutocompleteController } from '@searchspring/snap-controller';
 import { ContentType } from '@searchspring/snap-store-mobx';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProp } from '../../Organisms/Results';
+import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
@@ -667,7 +667,7 @@ const escapeRegExp = (string: string): string => {
 interface AutocompleteSubProps {
 	facets: FacetsProps;
 	banner: BannerProps;
-	results: ResultsProp;
+	results: ResultsProps;
 	icon: IconProps;
 }
 

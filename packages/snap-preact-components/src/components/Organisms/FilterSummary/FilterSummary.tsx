@@ -11,6 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
+import { parseProps } from '../../../utilities';
 
 const CSS = {
 	filterSummary: () =>
@@ -43,6 +44,8 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		...properties.theme?.components?.filterSummary,
 	};
 
+	const parsedProps = parseProps(props.controller!, props);
+
 	const {
 		filters,
 		title,
@@ -57,7 +60,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		disableStyles,
 		className,
 		style,
-	} = props;
+	} = parsedProps;
 
 	const subProps: FilterSummarySubProps = {
 		filter: {

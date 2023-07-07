@@ -15,9 +15,10 @@ import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { parseProps } from '../../../utilities';
 
 const CSS = {
-	results: ({ columns, gapSize }: ResultsProp) =>
+	results: ({ columns, gapSize }: ResultsProps) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -50,7 +51,7 @@ const CSS = {
 		}),
 };
 
-export const Results = observer((properties: ResultsProp): JSX.Element => {
+export const Results = observer((properties: ResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultBreakpointsProps = {
@@ -68,7 +69,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		},
 	};
 
-	let props: ResultsProp = {
+	let props: ResultsProps = {
 		// default props
 		results: properties.controller?.store?.results,
 		columns: 4,
@@ -91,7 +92,9 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, className, layout, style, controller } = props;
+	const parsedProps = parseProps(props.controller!, props);
+
+	const { disableStyles, className, layout, style, controller } = parsedProps;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -160,7 +163,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	);
 });
 
-export interface ResultsProp extends ComponentProps {
+export interface ResultsProps extends ComponentProps {
 	results?: SearchResultStore;
 	columns?: number;
 	rows?: number;

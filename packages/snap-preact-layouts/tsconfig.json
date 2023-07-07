@@ -1,0 +1,17 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"sourceMap": true,
+		"declaration": false,
+		"declarationMap": false,
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"experimentalDecorators": true,
+		"useDefineForClassFields": true,
+		"strict": true,
+	},
+	"include": [
+		"src"
+	],
+}

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Results, ResultsProp } from './Results';
+import { Results, ResultsProps } from './Results';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
@@ -128,7 +128,7 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
 
-export const Grid = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+export const Grid = (args: ResultsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} />;
 };
 
@@ -141,7 +141,7 @@ Grid.loaders = [
 	},
 ];
 
-export const List = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+export const List = (args: ResultsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
 };
 

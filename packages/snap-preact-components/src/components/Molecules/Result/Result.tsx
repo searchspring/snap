@@ -90,6 +90,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		props;
 
 	const core = result?.mappings?.core;
+	const images = result?.images;
 
 	const subProps: ResultSubProps = {
 		price: {
@@ -120,7 +121,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__image',
 			alt: core?.name,
-			src: core?.imageUrl,
+			src: images?.active || core?.imageUrl,
+			hoverSrc: images?.hover,
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props

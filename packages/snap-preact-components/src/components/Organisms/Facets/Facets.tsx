@@ -10,7 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
-
+import { parseProps } from '../../../utilities';
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -30,7 +30,10 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		...properties.theme?.components?.facets,
 	};
 
-	const { limit, disableStyles, className, style } = props;
+	const parsedProps = parseProps(props.controller!, props);
+
+	const { limit, disableStyles, className, style } = parsedProps;
+
 	let { facets } = props;
 	if (limit && facets && limit > 0) {
 		facets = facets.slice(0, +limit);

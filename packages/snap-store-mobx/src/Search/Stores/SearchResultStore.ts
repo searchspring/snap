@@ -67,6 +67,12 @@ export class Banner {
 	}
 }
 
+type resultImages = {
+	active: string;
+	hover?: string;
+	swatches?: unknown;
+};
+
 export class Product {
 	public type = 'product';
 	public id: string;
@@ -77,9 +83,16 @@ export class Product {
 	public custom = {};
 	public children?: Array<Child> = [];
 
+	public images?: resultImages;
+
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
+		this.images = {
+			active: result.mappings?.core?.imageUrl!,
+			hover: undefined,
+		};
+
 		this.mappings = result.mappings!;
 
 		if (result?.children?.length) {
@@ -95,6 +108,7 @@ export class Product {
 			id: observable,
 			attributes: observable,
 			custom: observable,
+			images: observable,
 		});
 
 		// must set all subo
