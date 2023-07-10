@@ -21,12 +21,10 @@ export function parseProps<T>(controller: AbstractController, props: T): T {
 							}
 						}, controller);
 
-						if (!variable) {
+						if (typeof variable == 'undefined') {
 							controller.log.error('unable to locate variable: ', templateVariable);
-						}
-
-						// validate that value can be used (it is a string or number)
-						if (typeof variable == 'string' || typeof variable == 'number') {
+						} else if (typeof variable == 'string' || typeof variable == 'number') {
+							// validate that value can be used (it is a string or number)
 							parsedProps[prop as keyof typeof parsedProps] = parsedProps[prop as keyof typeof parsedProps].replace(
 								templateVariable,
 								variable.toString()

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { Suspense, lazy } from 'preact/compat';
 import { ThemeProvider } from '../../../providers';
 
@@ -112,6 +113,10 @@ export const Layout = observer((properties: LayoutProps) => {
 		layout = displaySettings as LayoutElement[];
 	}
 
+	useEffect(() => {
+		// TODO: Can we operate with out this?
+	}, [controller.store.pagination]);
+
 	const LayoutElements = containerize(controller, layout || []);
 
 	return (
@@ -137,11 +142,37 @@ function generateLayoutClassName(name?: string) {
 	return name ? `ss__layout__${normalizedName}` : '';
 }
 
-function containerize(controller: any, layout: LayoutElement[]) {
+const checkCondition = (controller: SearchController, condition: string): boolean => {
+	const conditionMap = {
+		results: controller.store.results.length > 0,
+		facets: controller.store.facets.length > 0,
+	};
+	// debugger;
+
+	let bool = false;
+
+	if (typeof conditionMap[condition.replace('!', '') as keyof typeof conditionMap] == 'boolean') {
+		bool = conditionMap[condition.replace('!', '') as keyof typeof conditionMap];
+
+		if (condition.split('!').length > 1) {
+			bool = !bool;
+		}
+	}
+
+	return bool;
+};
+
+function containerize(controller: SearchController, layout: LayoutElement[]) {
 	return () => {
 		return (
 			<Fragment>
 				{layout.map((element) => {
+					if (element.if) {
+						// not rendering due to conditional `if` render prop
+						const rendering = checkCondition(controller, element.if);
+						if (!rendering) return;
+					}
+
 					if (element.items) {
 						const containerElement = element;
 
@@ -187,11 +218,14 @@ function containerize(controller: any, layout: LayoutElement[]) {
 	};
 }
 
+export type RenderConditions = 'results' | '!results';
+
 export type LayoutElement = {
 	name?: string;
 	type?: 'Flex'; // supported layout container elements
 	layout?: FlexProps;
 	items?: LayoutElement[];
+	if?: RenderConditions;
 } & Partial<
 	| StringElement
 	| BannerElement
