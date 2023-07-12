@@ -41,6 +41,7 @@ export * from './components/Organisms/Results';
 
 // LAYOUTS
 export * from './components/Layouts/Layout';
+export * from './components/Layouts/ResultLayout';
 
 // HOOKS
 export * from './hooks';

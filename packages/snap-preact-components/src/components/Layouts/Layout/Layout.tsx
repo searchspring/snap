@@ -108,29 +108,39 @@ export const Layout = observer((properties: LayoutProps) => {
 		styling.css = [style];
 	}
 
+	// TODO: make useDisplaySettings generic?
 	const displaySettings = useDisplaySettings(breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
-		layout = displaySettings as LayoutElement[];
+		layout = displaySettings as LayoutFunc;
 	}
 
 	useEffect(() => {
 		// TODO: Can we operate with out this?
 	}, [controller.store.pagination]);
 
-	const LayoutElements = containerize(controller, layout || []);
+	if (layout) {
+		let LayoutElements;
+		if (typeof layout == 'function') {
+			LayoutElements = containerize(controller, layout({ controller }) || []);
+		} else {
+			LayoutElements = containerize(controller, layout || []);
+		}
 
-	return (
-		<ControllerProvider controller={controller}>
-			<ThemeProvider theme={theme || {}}>
-				<CacheProvider>
-					<div {...styling} className={classnames('ss__layout', className)}>
-						{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
-						<LayoutElements />
-					</div>
-				</CacheProvider>
-			</ThemeProvider>
-		</ControllerProvider>
-	);
+		return (
+			<ControllerProvider controller={controller}>
+				<ThemeProvider theme={theme || {}}>
+					<CacheProvider>
+						<div {...styling} className={classnames('ss__layout', className)}>
+							{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
+							<LayoutElements />
+						</div>
+					</CacheProvider>
+				</ThemeProvider>
+			</ControllerProvider>
+		);
+	} else {
+		return <></>;
+	}
 });
 
 function generateLayoutClassName(name?: string) {
@@ -142,36 +152,16 @@ function generateLayoutClassName(name?: string) {
 	return name ? `ss__layout__${normalizedName}` : '';
 }
 
-const checkCondition = (controller: SearchController, condition: string): boolean => {
-	const conditionMap = {
-		results: controller.store.results.length > 0,
-		facets: controller.store.facets.length > 0,
-	};
-	// debugger;
-
-	let bool = false;
-
-	if (typeof conditionMap[condition.replace('!', '') as keyof typeof conditionMap] == 'boolean') {
-		bool = conditionMap[condition.replace('!', '') as keyof typeof conditionMap];
-
-		if (condition.split('!').length > 1) {
-			bool = !bool;
-		}
-	}
-
-	return bool;
-};
-
 function containerize(controller: SearchController, layout: LayoutElement[]) {
 	return () => {
 		return (
 			<Fragment>
 				{layout.map((element) => {
-					if (element.if) {
-						// not rendering due to conditional `if` render prop
-						const rendering = checkCondition(controller, element.if);
-						if (!rendering) return;
-					}
+					// if (element.if) {
+					// 	// not rendering due to conditional `if` render prop
+					// 	const rendering = checkCondition(controller, element.if);
+					// 	if (!rendering) return;
+					// }
 
 					if (element.items) {
 						const containerElement = element;
@@ -218,14 +208,14 @@ function containerize(controller: SearchController, layout: LayoutElement[]) {
 	};
 }
 
-export type RenderConditions = 'results' | '!results';
+// export type RenderConditions = 'results' | '!results';
 
 export type LayoutElement = {
 	name?: string;
 	type?: 'Flex'; // supported layout container elements
 	layout?: FlexProps;
 	items?: LayoutElement[];
-	if?: RenderConditions;
+	// if?: RenderConditions;
 } & Partial<
 	| StringElement
 	| BannerElement
@@ -316,12 +306,14 @@ type RecommendationElement = {
 	props: RecommendationProps;
 };
 
+export type LayoutFunc = (data: { controller: SearchController }) => LayoutElement[];
+
 export interface LayoutProps extends ComponentProps {
 	controller: SearchController;
-	layout?: LayoutElement[];
+	layout?: LayoutFunc | LayoutElement[];
 	width?: string;
 	height?: string;
 	breakpoints?: {
-		[key: number]: LayoutElement[];
+		[key: number]: LayoutFunc | LayoutElement[];
 	};
 }

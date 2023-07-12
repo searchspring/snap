@@ -16,6 +16,8 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { parseProps } from '../../../utilities';
+import { ResultLayout } from '../../Layouts/ResultLayout/ResultLayout';
+import type { ResultLayoutElement, ResultLayoutFunc } from '../../Layouts/ResultLayout/ResultLayout';
 
 const CSS = {
 	results: ({ columns, gapSize }: ResultsProps) =>
@@ -94,7 +96,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 
 	const parsedProps = parseProps(props.controller!, props);
 
-	const { disableStyles, className, layout, style, controller } = parsedProps;
+	const { disableStyles, className, layout, style, resultLayout, controller } = parsedProps;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -144,15 +146,19 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 							case ContentType.BANNER:
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
-								return (
-									<Result
-										key={(result as Product).id}
-										{...subProps.result}
-										result={result as Product}
-										layout={props.layout}
-										controller={controller}
-									/>
-								);
+								if (resultLayout) {
+									return <ResultLayout controller={controller as SearchController} result={result} layout={resultLayout} />;
+								} else {
+									return (
+										<Result
+											key={(result as Product).id}
+											{...subProps.result}
+											result={result as Product}
+											layout={props.layout}
+											controller={controller}
+										/>
+									);
+								}
 						}
 					})()
 				)}
@@ -171,6 +177,7 @@ export interface ResultsProps extends ComponentProps {
 	layout?: LayoutType;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
+	resultLayout?: ResultLayoutElement[] | ResultLayoutFunc;
 }
 
 interface ResultsSubProps {
