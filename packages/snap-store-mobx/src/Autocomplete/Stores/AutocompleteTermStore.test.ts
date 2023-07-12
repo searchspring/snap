@@ -86,8 +86,8 @@ describe('Term Store', () => {
 	it('has terms with undefined url properties when no controller is present', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
-		// @ts-ignore
 		const termStore = new AutocompleteTermStore(
+			// @ts-ignore
 			undefined,
 			autocomplete,
 			searchData.pagination,
@@ -107,8 +107,8 @@ describe('Term Store', () => {
 
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
-		// @ts-ignore
 		const termStore = new AutocompleteTermStore(
+			// @ts-ignore
 			services,
 			autocomplete,
 			searchData.pagination,
