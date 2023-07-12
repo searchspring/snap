@@ -18,8 +18,20 @@ let siteId = '8uyt2m';
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
 const urlSiteIdParam = urlObj.params.query.siteId;
+const storedSiteIdName = 'ss_siteId';
+
 if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {
 	siteId = urlSiteIdParam;
+	window.localStorage.setItem(storedSiteIdName, siteId);
+
+	// clear previously stored siteId storage
+	window.localStorage.removeItem('ss-history');
+	window.sessionStorage.removeItem('ss-controller-search');
+	window.sessionStorage.removeItem('ss-controller-autocomplete');
+} else {
+	// use siteId from storage
+	const storedSiteId = window.localStorage.getItem(storedSiteIdName);
+	if (storedSiteId) siteId = storedSiteId;
 }
 
 let config: SnapConfig = {
@@ -66,6 +78,7 @@ let config: SnapConfig = {
 					settings: {
 						redirects: {
 							merchandising: false,
+							singleResult: false,
 						},
 						restorePosition: {
 							enabled: true,
