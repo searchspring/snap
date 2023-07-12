@@ -92,7 +92,11 @@ export class HybridAPI extends API {
 		const suggestResults = await this.requesters.suggest.getSuggest(suggestParams);
 		const transformedSuggestResults = transformSuggestResponse(suggestResults);
 
-		const q = (suggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || suggestResults.query;
+		// determine the query to utilize
+		let q = (transformedSuggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || transformedSuggestResults.query;
+		if (this.requesters.suggest.configuration?.globals?.integratedSpellCorrection) {
+			q = (transformedSuggestResults.suggested || {}).text || transformedSuggestResults.query || transformedSuggestResults.correctedQuery;
+		}
 
 		const queryParameters = {
 			...legacyRequestParameters,
@@ -100,14 +104,16 @@ export class HybridAPI extends API {
 			q,
 		};
 
+		// modify the original request parameter for the transform
+		if (requestParameters.search?.query?.string) {
+			requestParameters.search.query.string = q;
+		}
+
 		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);
 		const searchResults = transformSearchResponse(legacyResults, requestParameters);
 
 		return {
 			...searchResults,
-			search: {
-				query: q,
-			},
 			autocomplete: transformedSuggestResults,
 		};
 	}
