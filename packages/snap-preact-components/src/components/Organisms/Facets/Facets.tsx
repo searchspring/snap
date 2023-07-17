@@ -4,6 +4,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -20,7 +21,7 @@ const CSS = {
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: FacetsProps = {
+	let props: FacetsProps = {
 		// default props
 		facets: properties.controller?.store?.facets,
 		// global theme
@@ -32,7 +33,39 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	const parsedProps = parseProps(props.controller!, props);
 
-	const { limit, disableStyles, className, style } = parsedProps;
+	const { limit, onFacetOptionClick, disableStyles, className, style, controller } = parsedProps;
+
+	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
+		onFacetOptionClick && onFacetOptionClick(e);
+
+		// remove focus from input (close the autocomplete)
+		(controller as AutocompleteController)?.setFocused && (controller as AutocompleteController)?.setFocused();
+	};
+
+	const themeDefaults: Theme = {
+		components: {
+			facetGridOptions: {
+				onClick: facetClickEvent,
+			},
+			facetHierarchyOptions: {
+				onClick: facetClickEvent,
+			},
+			facetListOptions: {
+				onClick: facetClickEvent,
+			},
+			facetPaletteOptions: {
+				onClick: facetClickEvent,
+			},
+		},
+	};
+
+	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+	const theme = deepmerge(themeDefaults, props?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+
+	props = {
+		...props,
+		theme,
+	};
 
 	let { facets } = props;
 	if (limit && facets && limit > 0) {
@@ -83,4 +116,5 @@ export interface FacetsProps extends ComponentProps {
 	facets?: IndividualFacetType[];
 	limit?: number;
 	controller?: SearchController | AutocompleteController;
+	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }

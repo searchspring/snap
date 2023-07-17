@@ -1,27 +1,27 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Layout as LayoutLib } from '@searchspring/snap-preact-components';
+import { SearchLayout as LayoutLib, PriceProps } from '@searchspring/snap-preact-components';
 import { defaultTheme } from '@searchspring/snap-preact-components';
-import type { LayoutProps } from '@searchspring/snap-preact-components';
+import type { SearchLayoutProps } from '@searchspring/snap-preact-components';
 
-import { mobileLayout } from './layouts/mobile';
-import { tabletLayout } from './layouts/tablet';
-import { desktopLayout } from './layouts/desktop';
+import { mobileLayout } from './layouts/mobile/searchMobile';
+import { tabletLayout } from './layouts/tablet/searchTablet';
+import { desktopLayout } from './layouts/desktop/searchDesktop';
 
 const _theme = (controller: SearchController) => {
 	console.log(controller);
 	return {
 		...defaultTheme,
-		// components: {
-		// 	perPage: {
-		// 		label: 'hi {{ id }}'
-		// 	},
-		// }
+		components: {
+			price: {
+				symbol: '%',
+			} as PriceProps,
+		},
 	};
 };
 
-export const Layout = observer((properties: LayoutProps): JSX.Element => {
+export const SearchLayout = observer((properties: SearchLayoutProps): JSX.Element => {
 	const controller = properties.controller;
 
 	const breakpoints = {

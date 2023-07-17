@@ -73,6 +73,10 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
+	get hasQuery() {
+		return Boolean((this.state.input && this.loaded) || this.search.query?.string);
+	}
+
 	public reset(): void {
 		this.state.reset();
 		this.update();

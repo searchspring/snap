@@ -1,10 +1,28 @@
-import type { LayoutElement } from '@searchspring/snap-preact-components';
-import { toolbar } from '../containers/toolbar';
-import { resultLayout } from '../layouts/resultLayout';
+import type { AutocompleteLayoutElement } from '@searchspring/snap-preact-components';
+import { resultLayout, listResultLayout } from './resultLayout';
+import { AutocompleteController } from '@searchspring/snap-controller';
 
-export const results = (controller: SearchController): LayoutElement => {
+export const results = (controller: AutocompleteController, display: 'mobile' | 'tablet' | 'desktop'): AutocompleteLayoutElement => {
 	const { pagination } = controller.store;
 	const totalResults = pagination.totalResults;
+
+	const resultGridMap = {
+		mobile: {
+			resultLayout: resultLayout,
+			columns: 2,
+			rows: 1,
+		},
+		tablet: {
+			resultLayout: listResultLayout,
+			columns: 1,
+			rows: 3,
+		},
+		desktop: {
+			resultLayout: resultLayout,
+			columns: 3,
+			rows: 2,
+		},
+	};
 
 	if (totalResults) {
 		return {
@@ -14,25 +32,14 @@ export const results = (controller: SearchController): LayoutElement => {
 			},
 			items: [
 				{
-					component: 'String',
-					props: {
-						content: `Showing ${pagination.pageSize} of ${pagination.totalResults} results...`,
-						className: 'search-title',
-					},
-				},
-				toolbar,
-				{
 					component: 'Results',
 					props: {
-						resultLayout: resultLayout,
+						...resultGridMap[display],
 					},
-				},
-				{
-					component: 'Pagination',
 				},
 			],
 		};
-	} else {
+	} else if (totalResults === 0) {
 		return {
 			name: 'NoResults-Container',
 			layout: {
@@ -53,15 +60,15 @@ export const results = (controller: SearchController): LayoutElement => {
 						className: 'moreInfo',
 					},
 				},
-
 				// {
 				//     component: 'Recommendation',
 				//     props: {
 				//         title: "Recommended For You"
-				//         controller: recsController
 				//     }
 				// }
 			],
 		};
+	} else {
+		return {};
 	}
 };

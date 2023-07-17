@@ -46,7 +46,32 @@ const config: SnapConfig = {
 						selector: '#searchspring-layout',
 						hideTarget: true,
 						component: async () => {
-							return (await import('./layout/layout')).Layout;
+							return (await import('./layout/SearchLayout')).SearchLayout;
+						},
+					},
+				],
+			},
+		],
+		autocomplete: [
+			{
+				config: {
+					id: 'autocomplete',
+					selector: 'input.searchspring-ac',
+					settings: {
+						trending: {
+							limit: 5,
+						},
+						history: {
+							limit: 5,
+						},
+					},
+				},
+				targeters: [
+					{
+						selector: 'input.searchspring-ac',
+						hideTarget: true,
+						component: async () => {
+							return (await import('./layout/AutocompleteLayout')).AutocompleteLayout;
 						},
 					},
 				],

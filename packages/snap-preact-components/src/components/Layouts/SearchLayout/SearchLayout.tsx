@@ -29,66 +29,66 @@ import type { BannerProps } from '../../Atoms/Merchandising';
 
 // dynamically imported lazy loaded components
 const Banner = lazy(async () => {
-	return (await import('../../Atoms/Merchandising/Banner/')).Banner;
+	return (await import('../../Atoms/Merchandising/Banner')).Banner;
 });
 
 const Breadcrumbs = lazy(async () => {
-	return (await import('../../Atoms/Breadcrumbs/')).Breadcrumbs;
+	return (await import('../../Atoms/Breadcrumbs')).Breadcrumbs;
 });
 
 const String = lazy(async () => {
-	return (await import('../../Atoms/String/')).String;
+	return (await import('../../Atoms/String')).String;
 });
 
 const LoadingBar = lazy(async () => {
-	return (await import('../../Atoms/Loading/')).LoadingBar;
+	return (await import('../../Atoms/Loading')).LoadingBar;
 });
 
 const PerPage = lazy(async () => {
-	return (await import('../../Molecules/PerPage/')).PerPage;
+	return (await import('../../Molecules/PerPage')).PerPage;
 });
 
 const SortBy = lazy(async () => {
-	return (await import('../../Molecules/SortBy/')).SortBy;
+	return (await import('../../Molecules/SortBy')).SortBy;
 });
 
 const Pagination = lazy(async () => {
-	return (await import('../../Molecules/Pagination/')).Pagination;
+	return (await import('../../Molecules/Pagination')).Pagination;
 });
 
 const Slideout = lazy(async () => {
-	return (await import('../../Molecules/Slideout/')).Slideout;
+	return (await import('../../Molecules/Slideout')).Slideout;
 });
 
 const Facets = lazy(async () => {
-	return (await import('../../Organisms/Facets/')).Facets;
+	return (await import('../../Organisms/Facets')).Facets;
 });
 
 const FilterSummary = lazy(async () => {
-	return (await import('../../Organisms/FilterSummary/')).FilterSummary;
+	return (await import('../../Organisms/FilterSummary')).FilterSummary;
 });
 
 const Results = lazy(async () => {
-	return (await import('../../Organisms/Results/')).Results;
+	return (await import('../../Organisms/Results')).Results;
 });
 
 const Recommendation = lazy(async () => {
-	return (await import('../../Organisms/Recommendation/')).Recommendation;
+	return (await import('../../Organisms/Recommendation')).Recommendation;
 });
 
 // CSS in JS
 const CSS = {
-	layout: ({ width, height }: Partial<LayoutProps>) =>
+	layout: ({ width, height }: Partial<SearchLayoutProps>) =>
 		css({
 			width,
 			height,
 		}),
 };
 
-export const Layout = observer((properties: LayoutProps) => {
+export const SearchLayout = observer((properties: SearchLayoutProps) => {
 	const globalTheme: Theme = useTheme();
 
-	const props: LayoutProps = {
+	const props: SearchLayoutProps = {
 		// default props
 
 		// global theme
@@ -174,7 +174,7 @@ function containerize(controller: SearchController, layout: LayoutElement[]) {
 							InnerContainer = () => (
 								<Suspense fallback={<Fragment />}>
 									<Component controller={controller} {...(itemElement.props as any)} breakpoints={{}}>
-										<Layout controller={controller} layout={element.items} />
+										<SearchLayout controller={controller} layout={element.items} />
 									</Component>
 								</Suspense>
 							);
@@ -308,7 +308,7 @@ type RecommendationElement = {
 
 export type LayoutFunc = (data: { controller: SearchController }) => LayoutElement[];
 
-export interface LayoutProps extends ComponentProps {
+export interface SearchLayoutProps extends ComponentProps {
 	controller: SearchController;
 	layout?: LayoutFunc | LayoutElement[];
 	width?: string;

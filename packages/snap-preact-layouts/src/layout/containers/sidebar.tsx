@@ -1,5 +1,4 @@
-import type { LayoutElement } from '@searchspring/snap-preact-components';
-
+import { LayoutElement } from '@searchspring/snap-preact-components';
 export const sidebar = (controller: SearchController): LayoutElement => {
 	console.log(controller);
 	// do things here...

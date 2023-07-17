@@ -8,13 +8,14 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
-const CSS = {
-	flex: ({ flex, flexDirection, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }: FlexProps) =>
+const _CSS = {
+	flex: ({ flex, flexDirection, textAlign, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }: FlexProps) =>
 		css({
 			display: item ? undefined : 'flex',
 			width,
 			height,
 			flexDirection,
+			textAlign: textAlign ? (textAlign as any) : undefined,
 			flexBasis,
 			flexGrow,
 			flexShrink,
@@ -40,6 +41,7 @@ export const Flex = observer((properties: FlexProps): JSX.Element => {
 		children,
 		flex,
 		flexDirection,
+		textAlign,
 		flexBasis,
 		flexGrow,
 		flexShrink,
@@ -56,7 +58,7 @@ export const Flex = observer((properties: FlexProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 
 	if (!disableStyles) {
-		styling.css = [CSS.flex({ flex, flexDirection, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }), style];
+		styling.css = [_CSS.flex({ flex, flexDirection, textAlign, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -80,6 +82,7 @@ export interface FlexProps extends ComponentProps {
 	flexGrow?: number;
 	flexShrink?: number;
 	flexBasis?: string;
+	textAlign?: string;
 	gap?: string;
 	item?: boolean;
 }
