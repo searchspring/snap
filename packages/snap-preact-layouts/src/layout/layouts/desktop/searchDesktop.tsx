@@ -1,9 +1,9 @@
 import { sidebar } from '../../containers/sidebar';
 import { results } from '../../containers/searchResults';
 
-import type { LayoutElement } from '@searchspring/snap-preact-components';
+import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const desktopLayout = (controller: SearchController): LayoutElement[] => {
+export const desktopLayout: SearchLayoutFunc = (data) => {
 	return [
 		{
 			name: 'main-container',
@@ -17,7 +17,7 @@ export const desktopLayout = (controller: SearchController): LayoutElement[] => 
 						flexDirection: 'column',
 						width: '20%',
 					},
-					items: [sidebar(controller)],
+					items: [sidebar()],
 				},
 				{
 					name: 'content',
@@ -25,7 +25,7 @@ export const desktopLayout = (controller: SearchController): LayoutElement[] => 
 						width: '75%',
 						flexDirection: 'column',
 					},
-					items: [results(controller)],
+					items: [results(data.controller)],
 				},
 			],
 		},

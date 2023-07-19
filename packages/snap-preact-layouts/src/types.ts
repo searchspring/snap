@@ -36,7 +36,3 @@ declare global {
 		mergeSnapConfig?: any;
 	}
 }
-
-declare module 'mobx-react' {
-	function observer(component: any): any;
-}

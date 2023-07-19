@@ -34,7 +34,7 @@ export enum FacetDisplay {
 }
 
 export type BreakpointsProps = {
-	[key: number]: BreakpointsEntry;
+	[key: number]: BreakpointsEntry | any;
 };
 
 export type BreakpointsEntry = {

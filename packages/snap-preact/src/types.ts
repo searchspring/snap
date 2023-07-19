@@ -104,3 +104,9 @@ declare global {
 		searchspring?: any;
 	}
 }
+
+export type SnapFeatures = {
+	integratedSpellCorrection?: {
+		enabled?: boolean;
+	};
+};

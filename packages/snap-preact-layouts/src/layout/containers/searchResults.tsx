@@ -1,8 +1,8 @@
-import type { LayoutElement } from '@searchspring/snap-preact-components';
+import type { SearchLayoutElement } from '@searchspring/snap-preact-components';
 import { toolbar } from './toolbar';
 import { resultLayout } from './resultLayout';
 
-export const results = (controller: SearchController): LayoutElement => {
+export const results = (controller: SearchController): SearchLayoutElement => {
 	const { pagination } = controller.store;
 	const totalResults = pagination.totalResults;
 

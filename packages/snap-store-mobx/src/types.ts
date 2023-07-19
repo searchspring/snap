@@ -6,36 +6,38 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
+export type SearchStoreConfigSettings = {
+	redirects?: {
+		merchandising?: boolean;
+		singleResult?: boolean;
+	};
+	facets?: FacetStoreConfig & {
+		fields?: {
+			[field: string]: FacetStoreConfig;
+		};
+	};
+	infinite?: {
+		backfill?: number;
+	};
+	restorePosition?: {
+		enabled: boolean;
+	};
+	history?: {
+		url?: string;
+		max?: number;
+	};
+	pagination?: {
+		pageSizeOptions?: {
+			label: string;
+			value: number;
+		}[];
+	};
+};
+
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
 	globals?: Partial<SearchRequestModel>;
-	settings?: {
-		redirects?: {
-			merchandising?: boolean;
-			singleResult?: boolean;
-		};
-		facets?: FacetStoreConfig & {
-			fields?: {
-				[field: string]: FacetStoreConfig;
-			};
-		};
-		infinite?: {
-			backfill?: number;
-		};
-		restorePosition?: {
-			enabled: boolean;
-		};
-		history?: {
-			url?: string;
-			max?: number;
-		};
-		pagination?: {
-			pageSizeOptions?: {
-				label: string;
-				value: number;
-			}[];
-		};
-	};
+	settings?: SearchStoreConfigSettings;
 };
 
 export type FacetStoreConfig = {
@@ -63,33 +65,35 @@ export type FinderFieldConfig = {
 	levels?: string[];
 };
 
+export type AutocompleteStoreConfigSettings = {
+	integratedSpellCorrection?: boolean;
+	initializeFromUrl?: boolean;
+	syncInputs?: boolean;
+	serializeForm?: boolean;
+	facets?: FacetStoreConfig & {
+		fields?: {
+			[field: string]: FacetStoreConfig;
+		};
+	};
+	trending?: {
+		limit: number;
+		showResults?: boolean;
+	};
+	history?: {
+		limit: number;
+		showResults?: boolean;
+	};
+	redirects?: {
+		merchandising?: boolean;
+	};
+};
+
 // Autocomplete config
 export type AutocompleteStoreConfig = StoreConfig & {
 	globals?: Partial<AutocompleteRequestModel>;
 	selector: string;
 	action?: string;
-	settings?: {
-		integratedSpellCorrection?: boolean;
-		initializeFromUrl?: boolean;
-		syncInputs?: boolean;
-		serializeForm?: boolean;
-		facets?: FacetStoreConfig & {
-			fields?: {
-				[field: string]: FacetStoreConfig;
-			};
-		};
-		trending?: {
-			limit: number;
-			showResults?: boolean;
-		};
-		history?: {
-			limit: number;
-			showResults?: boolean;
-		};
-		redirects?: {
-			merchandising?: boolean;
-		};
-	};
+	settings?: AutocompleteStoreConfigSettings;
 };
 
 // Recommendation config

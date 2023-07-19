@@ -1,6 +1,6 @@
-import type { LayoutElement } from '@searchspring/snap-preact-components';
+import type { SearchLayoutElement } from '@searchspring/snap-preact-components';
 
-export const toolbar: LayoutElement = {
+export const toolbar: SearchLayoutElement = {
 	name: 'toolbar',
 	layout: {
 		flexDirection: 'row',

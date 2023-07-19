@@ -1,10 +1,10 @@
 import { sidebar } from '../../containers/sidebar';
 import { toolbar } from '../../containers/toolbar';
 
-import type { LayoutElement } from '@searchspring/snap-preact-components';
+import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 import { ContentType } from '@searchspring/snap-store-mobx';
 
-export const tabletLayout = (controller: SearchController): LayoutElement[] => {
+export const tabletLayout: SearchLayoutFunc = () => {
 	return [
 		{
 			name: 'header',
@@ -18,7 +18,7 @@ export const tabletLayout = (controller: SearchController): LayoutElement[] => {
 			layout: {
 				// gap: '40px',
 			},
-			items: [sidebar(controller), { component: 'Results' }],
+			items: [sidebar(), { component: 'Results' }],
 		},
 		{
 			name: 'footer',

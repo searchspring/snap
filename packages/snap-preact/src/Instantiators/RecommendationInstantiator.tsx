@@ -12,6 +12,21 @@ import type { AbstractController, RecommendationController, Attachments, Context
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
 
+type RecommendationComponentFunc = () => Promise<any> | any;
+export type RecommendationComponentObject = {
+	component: RecommendationComponentFunc;
+	props: {
+		[name: string]: any;
+	};
+};
+
+export type RecommendationInstantiatorConfigSettings = {
+	branch: string;
+	realtime?: boolean;
+	batched?: boolean;
+	limit?: number;
+};
+
 export type RecommendationInstantiatorConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	client?: {
@@ -19,14 +34,9 @@ export type RecommendationInstantiatorConfig = {
 		config?: ClientConfig;
 	};
 	components: {
-		[name: string]: () => Promise<any> | any;
+		[name: string]: RecommendationComponentFunc | RecommendationComponentObject;
 	};
-	config: {
-		branch: string;
-		realtime?: boolean;
-		batched?: boolean;
-		limit?: number;
-	} & Attachments;
+	config: RecommendationInstantiatorConfigSettings & Attachments;
 	selector?: string;
 	url?: UrlTranslatorConfig;
 	context?: ContextVariables;
@@ -278,11 +288,19 @@ export class RecommendationInstantiator {
 					return;
 				}
 
-				const RecommendationsComponent =
-					this.config.components[component] &&
-					((await this.config.components[component]()) as React.ElementType<{
-						controller: RecommendationController;
-					}>);
+				let props = {};
+				let RecommendationsComponent:
+					| undefined
+					| React.ElementType<{
+							controller: RecommendationController;
+					  }> = undefined;
+
+				if (this.config.components[component] && typeof this.config.components[component] == 'function') {
+					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentFunc)();
+				} else if (this.config.components[component] && typeof this.config.components[component] == 'object') {
+					props = (this.config.components[component] as RecommendationComponentObject).props;
+					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentObject).component();
+				}
 
 				if (!RecommendationsComponent) {
 					this.logger.error(
@@ -292,8 +310,8 @@ export class RecommendationInstantiator {
 				}
 
 				setTimeout(() => {
-					if (injectedElem) {
-						render(<RecommendationsComponent controller={controller} />, injectedElem);
+					if (injectedElem && RecommendationsComponent) {
+						render(<RecommendationsComponent controller={controller} {...props} />, injectedElem);
 					}
 				});
 			}

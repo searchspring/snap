@@ -39,7 +39,7 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	return displaySettings;
 }
 
-const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry | undefined => {
+export const getDisplaySettings = (breakpoints: BreakpointsProps): any | undefined => {
 	let breakpointsSettings;
 
 	const currentScreenWidth = window.innerWidth;

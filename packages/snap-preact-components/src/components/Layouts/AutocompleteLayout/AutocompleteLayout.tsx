@@ -158,9 +158,15 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 	}
 
 	// TODO: make useDisplaySettings generic?
-	const displaySettings = useDisplaySettings(breakpoints!);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		layout = displaySettings as AutocompleteLayoutFunc;
+	if (breakpoints) {
+		const displaySettings = useDisplaySettings(breakpoints);
+		if (displaySettings) {
+			if (typeof displaySettings == 'function') {
+				layout = displaySettings as AutocompleteLayoutFunc;
+			} else if (Array.isArray(displaySettings)) {
+				layout = displaySettings;
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -352,6 +358,7 @@ type RecommendationElement = {
 };
 
 export type AutocompleteLayoutFunc = (data: { controller: AutocompleteController }) => AutocompleteLayoutElement[];
+export type AutocompleteLayoutFuncWrapper = () => AutocompleteLayoutFunc | AutocompleteLayoutElement[];
 
 export interface AutocompleteLayoutProps extends ComponentProps {
 	controller: AutocompleteController;
@@ -359,7 +366,7 @@ export interface AutocompleteLayoutProps extends ComponentProps {
 	width?: string;
 	height?: string;
 	breakpoints?: {
-		[key: number]: AutocompleteLayoutFunc | AutocompleteLayoutElement[];
+		[key: number]: AutocompleteLayoutFuncWrapper;
 	};
 	input: Element;
 }

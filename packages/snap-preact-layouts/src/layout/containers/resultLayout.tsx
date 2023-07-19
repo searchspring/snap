@@ -1,8 +1,8 @@
 import type { ResultLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const resultLayout: ResultLayoutFunc = ({ controller, result }: any) => {
+export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
 	const { core } = result.mappings;
-	console.log(controller);
+
 	return [
 		{
 			name: 'Result-Component',
@@ -86,9 +86,8 @@ export const resultLayout: ResultLayoutFunc = ({ controller, result }: any) => {
 	];
 };
 
-export const listResultLayout: ResultLayoutFunc = ({ controller, result }: any) => {
+export const listResultLayout: ResultLayoutFunc = ({ result }: any) => {
 	const { core } = result.mappings;
-	console.log(controller);
 
 	return [
 		{

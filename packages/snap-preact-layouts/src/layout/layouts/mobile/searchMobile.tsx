@@ -1,9 +1,9 @@
 import { sidebar } from '../../containers/sidebar';
 import { toolbar } from '../../containers/toolbar';
 import { ContentType } from '@searchspring/snap-store-mobx';
-import type { LayoutElement } from '@searchspring/snap-preact-components';
+import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const mobileLayout = (controller: SearchController): LayoutElement[] => {
+export const mobileLayout: SearchLayoutFunc = () => {
 	return [
 		{
 			name: 'mobile-facets',
@@ -14,7 +14,7 @@ export const mobileLayout = (controller: SearchController): LayoutElement[] => {
 					props: {
 						buttonContent: 'Refine Search',
 					},
-					items: [sidebar(controller)],
+					items: [sidebar()],
 				},
 			],
 		},

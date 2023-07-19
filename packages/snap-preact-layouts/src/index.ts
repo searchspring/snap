@@ -1,83 +1,62 @@
-import { Snap } from '@searchspring/snap-preact';
+import { SnapTemplate } from '@searchspring/snap-preact';
+import type { SnapTemplateConfig } from '@searchspring/snap-preact';
+import { mobileLayout } from './layout/layouts/mobile/searchMobile';
+import { tabletLayout } from './layout/layouts/tablet/searchTablet';
+import { desktopLayout } from './layout/layouts/desktop/searchDesktop';
+import { acDesktop } from './layout/layouts/desktop/acDesktop';
+import { acMobile } from './layout/layouts/mobile/acMobile';
+import { acTablet } from './layout/layouts/tablet/acTablet';
+import { autocompleteStyling } from './styles/autocomplete';
+import { recsMobile } from './layout/layouts/mobile/recsMobile';
+import { recsTablet } from './layout/layouts/tablet/recsTablet';
+import { recsDesktop } from './layout/layouts/desktop/recsDesktop';
 
 /*
 	configuration and instantiation
  */
 
-const siteId = '8uyt2m';
-
-const config: SnapConfig = {
-	mode: 'development', // should be removed for 'production' usage
-	features: {
-		integratedSpellCorrection: {
-			enabled: true,
-		},
+const config: SnapTemplateConfig = {
+	platform: 'custom',
+	siteId: '8uyt2m',
+	locale: {},
+	ui: {},
+	layout: {
+		breakpoints: [0, 767, 1024],
 	},
-	url: {
-		parameters: {
-			core: {
-				query: { name: 'q' },
-			},
-		},
-	},
-	client: {
-		globals: {
-			siteId,
-		},
-	},
-
-	controllers: {
-		search: [
+	search: {
+		// settings: {
+		// 	infinite: {
+		// 		backfill: 5,
+		// 	}
+		// },
+		layouts: [
 			{
-				config: {
-					id: 'search',
-					plugins: [],
-					settings: {
-						redirects: {
-							merchandising: false,
-						},
-						restorePosition: {
-							enabled: true,
-						},
-					},
-				},
-				targeters: [
-					{
-						selector: '#searchspring-layout',
-						hideTarget: true,
-						component: async () => {
-							return (await import('./layout/SearchLayout')).SearchLayout;
-						},
-					},
-				],
+				selector: '#searchspring-layout',
+				breakpoints: [mobileLayout, tabletLayout, desktopLayout],
 			},
 		],
-		autocomplete: [
+	},
+	recommendation: {
+		settings: {
+			branch: BRANCHNAME,
+		},
+		layouts: [
 			{
-				config: {
-					id: 'autocomplete',
-					selector: 'input.searchspring-ac',
-					settings: {
-						trending: {
-							limit: 5,
-						},
-						history: {
-							limit: 5,
-						},
-					},
-				},
-				targeters: [
-					{
-						selector: 'input.searchspring-ac',
-						hideTarget: true,
-						component: async () => {
-							return (await import('./layout/AutocompleteLayout')).AutocompleteLayout;
-						},
-					},
-				],
+				component: 'Recs',
+				breakpoints: [recsMobile, recsTablet, recsDesktop],
+			},
+		],
+	},
+	autocomplete: {
+		inputSelector: 'input.searchspring-ac',
+		layouts: [
+			{
+				selector: 'input.searchspring-ac',
+				style: autocompleteStyling,
+				breakpoints: [acMobile, acTablet, acDesktop],
 			},
 		],
 	},
 };
 
-new Snap(config);
+SnapTemplate(config);

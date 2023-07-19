@@ -46,6 +46,11 @@ export * from './components/Organisms/Results';
 export * from './components/Layouts/AutocompleteLayout';
 export * from './components/Layouts/SearchLayout';
 export * from './components/Layouts/ResultLayout';
+export * from './components/Layouts/RecommendationLayout';
+export * from './components/Layouts/CarouselLayout';
+
+// TYPES
+export * from './types';
 
 // HOOKS
 export * from './hooks';

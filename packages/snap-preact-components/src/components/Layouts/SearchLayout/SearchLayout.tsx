@@ -26,6 +26,7 @@ import type { StringProps } from '../../Atoms/String/String';
 import type { LoadingBarProps } from '../../Atoms/Loading/LoadingBar';
 import type { BreadcrumbProps } from '../../Atoms/Breadcrumbs/Breadcrumbs';
 import type { BannerProps } from '../../Atoms/Merchandising';
+import type { CarouselLayoutProps } from '../../Layouts/CarouselLayout';
 
 // dynamically imported lazy loaded components
 const Banner = lazy(async () => {
@@ -76,6 +77,10 @@ const Recommendation = lazy(async () => {
 	return (await import('../../Organisms/Recommendation')).Recommendation;
 });
 
+const CarouselLayout = lazy(async () => {
+	return (await import('../../Layouts/CarouselLayout')).CarouselLayout;
+});
+
 // CSS in JS
 const CSS = {
 	layout: ({ width, height }: Partial<SearchLayoutProps>) =>
@@ -108,10 +113,16 @@ export const SearchLayout = observer((properties: SearchLayoutProps) => {
 		styling.css = [style];
 	}
 
-	// TODO: make useDisplaySettings generic?
-	const displaySettings = useDisplaySettings(breakpoints!);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		layout = displaySettings as LayoutFunc;
+	// TODO: make useDisplaySettings generic
+	if (breakpoints) {
+		const displaySettings = useDisplaySettings(breakpoints);
+		if (displaySettings) {
+			if (typeof displaySettings == 'function') {
+				layout = displaySettings as SearchLayoutFunc;
+			} else if (Array.isArray(displaySettings)) {
+				layout = displaySettings;
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -120,6 +131,7 @@ export const SearchLayout = observer((properties: SearchLayoutProps) => {
 
 	if (layout) {
 		let LayoutElements;
+
 		if (typeof layout == 'function') {
 			LayoutElements = containerize(controller, layout({ controller }) || []);
 		} else {
@@ -152,7 +164,7 @@ function generateLayoutClassName(name?: string) {
 	return name ? `ss__layout__${normalizedName}` : '';
 }
 
-function containerize(controller: SearchController, layout: LayoutElement[]) {
+function containerize(controller: SearchController, layout: SearchLayoutElement[]) {
 	return () => {
 		return (
 			<Fragment>
@@ -210,11 +222,11 @@ function containerize(controller: SearchController, layout: LayoutElement[]) {
 
 // export type RenderConditions = 'results' | '!results';
 
-export type LayoutElement = {
+export type SearchLayoutElement = {
 	name?: string;
 	type?: 'Flex'; // supported layout container elements
 	layout?: FlexProps;
-	items?: LayoutElement[];
+	items?: SearchLayoutElement[];
 	// if?: RenderConditions;
 } & Partial<
 	| StringElement
@@ -229,6 +241,7 @@ export type LayoutElement = {
 	| FilterSummaryElement
 	| ResultsElement
 	| RecommendationElement
+	| CarouselLayoutElement
 >;
 
 const componentMap = {
@@ -244,6 +257,7 @@ const componentMap = {
 	Results,
 	Recommendation,
 	String,
+	CarouselLayout,
 };
 
 type StringElement = {
@@ -306,14 +320,20 @@ type RecommendationElement = {
 	props: RecommendationProps;
 };
 
-export type LayoutFunc = (data: { controller: SearchController }) => LayoutElement[];
+type CarouselLayoutElement = {
+	component: 'CarouselLayout';
+	props: CarouselLayoutProps;
+};
+
+export type SearchLayoutFunc = (data: { controller: SearchController }) => SearchLayoutElement[];
+export type SearchLayoutFuncWrapper = () => SearchLayoutFunc | SearchLayoutElement[];
 
 export interface SearchLayoutProps extends ComponentProps {
 	controller: SearchController;
-	layout?: LayoutFunc | LayoutElement[];
+	layout?: SearchLayoutFunc | SearchLayoutElement[];
 	width?: string;
 	height?: string;
 	breakpoints?: {
-		[key: number]: LayoutFunc | LayoutElement[];
+		[key: number]: SearchLayoutFuncWrapper;
 	};
 }

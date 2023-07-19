@@ -1,7 +1,7 @@
 import { results as resultsLayout } from '../../containers/acResults';
-import type { AutocompleteLayoutElement } from '@searchspring/snap-preact-components';
+import type { AutocompleteLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const acMobile = (controller: AutocompleteController): AutocompleteLayoutElement[] => {
+export const acMobile: AutocompleteLayoutFunc = ({ controller }) => {
 	const { pagination, hasQuery } = controller.store;
 
 	return hasQuery

@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useEffect } from 'preact/hooks';
 import { Suspense, lazy } from 'preact/compat';
 import { ThemeProvider } from '../../../providers';
 
@@ -11,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { Flex, FlexProps } from '../../Atoms/Flex/Flex';
 import { Theme, useTheme, CacheProvider, ControllerProvider } from '../../../providers';
 
-import type { SearchController } from '@searchspring/snap-controller';
+import type { AbstractController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { ComponentProps, StylingCSS } from '../../../types';
 
@@ -106,10 +105,6 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		styling.css = [style];
 	}
 
-	useEffect(() => {
-		// TODO: Can we operate with out this?
-	}, [controller.store.pagination]);
-
 	if (layout) {
 		let LayoutElements;
 		if (typeof layout == 'function') {
@@ -118,17 +113,26 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 			LayoutElements = containerize({ controller, result }, layout || []);
 		}
 
-		return (
+		return controller ? (
 			<ControllerProvider controller={controller}>
 				<ThemeProvider theme={theme || {}}>
 					<CacheProvider>
-						<div {...styling} className={classnames('ss__resultLayout', className)}>
+						<div {...styling} className={classnames('ss__result-layout', className)}>
 							{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
 							<LayoutElements />
 						</div>
 					</CacheProvider>
 				</ThemeProvider>
 			</ControllerProvider>
+		) : (
+			<ThemeProvider theme={theme || {}}>
+				<CacheProvider>
+					<div {...styling} className={classnames('ss__result-layout', className)}>
+						{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
+						<LayoutElements />
+					</div>
+				</CacheProvider>
+			</ThemeProvider>
 		);
 	} else {
 		return <></>;
@@ -144,7 +148,7 @@ function generateLayoutClassName(name?: string) {
 	return name ? `ss__result-layout__${normalizedName}` : '';
 }
 
-function containerize(data: { controller: SearchController; result: Product }, layout: ResultLayoutElement[]) {
+function containerize(data: { controller?: AbstractController; result: Product }, layout: ResultLayoutElement[]) {
 	const { controller, result } = data;
 	return () => {
 		return (
@@ -166,7 +170,7 @@ function containerize(data: { controller: SearchController; result: Product }, l
 
 							InnerContainer = () => (
 								<Suspense fallback={<Fragment />}>
-									<Component controller={controller} {...(itemElement.props as any)} breakpoints={{}}>
+									<Component {...(itemElement.props as any)}>
 										<ResultLayout controller={controller} result={result} layout={element.items as ResultLayoutElement[]} />
 									</Component>
 								</Suspense>
@@ -190,7 +194,7 @@ function containerize(data: { controller: SearchController; result: Product }, l
 								{...itemElement.layout}
 							>
 								<Suspense fallback={<Fragment />}>
-									<Component controller={controller} {...(itemElement.props as any)} breakpoints={{}} />
+									<Component {...(itemElement.props as any)} />
 								</Suspense>
 							</Flex>
 						);
@@ -282,10 +286,10 @@ type SelectElement = {
 	props: SelectProps;
 };
 
-export type ResultLayoutFunc = (data: { controller: SearchController; result: Product }) => ResultLayoutElement[];
+export type ResultLayoutFunc = (data: { controller?: AbstractController; result: Product }) => ResultLayoutElement[];
 
 export interface ResultLayoutProps extends ComponentProps {
-	controller: SearchController;
+	controller?: AbstractController;
 	result: Product;
 	layout: ResultLayoutFunc | ResultLayoutElement[];
 	width?: string;
