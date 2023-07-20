@@ -97,8 +97,6 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		styling.css = [style];
 	}
 
-	console.log('pagination rendering...');
-
 	return pageNumbers && store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
