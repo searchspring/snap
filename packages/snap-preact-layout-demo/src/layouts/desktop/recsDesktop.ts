@@ -1,6 +1,6 @@
 // import { useRef } from 'preact/hooks';
 import type { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
-import { resultLayout } from '../../containers/resultLayout';
+import { resultLayout } from '../containers/resultLayout';
 
 //TODO: try using createRef up here outside of layout for prev/next buttons
 

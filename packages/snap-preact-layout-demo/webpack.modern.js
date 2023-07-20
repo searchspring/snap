@@ -6,18 +6,17 @@ const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toSt
 
 module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/universal.ts',
+	entry: './src/index.ts',
 	output: {
-		filename: 'universal.bundle.js',
-		chunkFilename: 'universal.bundle.chunk.[fullhash:8].[id].js',
+		filename: 'bundle.js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 		chunkLoadingGlobal: `${branchName}BundleChunks`,
 	},
-	target: 'browserslist:universal',
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
-				include: [/node_modules\/@searchspring/, path.resolve(__dirname, 'src'), path.resolve(__dirname, '../')],
+				test: /\.(js)$/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -25,7 +24,7 @@ module.exports = merge(common, {
 							[
 								'@babel/preset-env',
 								{
-									browserslistEnv: 'universal',
+									browserslistEnv: 'modern',
 								},
 							],
 						],

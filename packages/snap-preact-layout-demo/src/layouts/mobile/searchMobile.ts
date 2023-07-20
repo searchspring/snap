@@ -1,5 +1,5 @@
-import { sidebar } from '../../containers/sidebar';
-import { toolbar } from '../../containers/toolbar';
+import { sidebar } from '../containers/sidebar';
+import { toolbar } from '../containers/toolbar';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 
@@ -12,7 +12,7 @@ export const mobileLayout: SearchLayoutFunc = () => {
 				{
 					component: 'Slideout',
 					props: {
-						buttonContent: 'Refine Search',
+						buttonContent: 'Refine Filters',
 					},
 					items: [sidebar()],
 				},

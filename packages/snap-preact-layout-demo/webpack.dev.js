@@ -13,7 +13,7 @@ const universal = merge(common, {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js)$/,
 				include: [/node_modules\/@searchspring/, path.resolve(__dirname, 'src'), path.resolve(__dirname, '../')],
 				use: {
 					loader: 'babel-loader',
@@ -45,7 +45,7 @@ const modern = merge(common, {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',

@@ -1,7 +1,7 @@
-import { results as resultsLayout } from '../../containers/acResults';
+import { results as resultsLayout } from '../containers/acResults';
 import type { AutocompleteLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const acDesktop: AutocompleteLayoutFunc = ({ controller }) => {
+export const acTablet: AutocompleteLayoutFunc = ({ controller }) => {
 	const { pagination, hasQuery } = controller.store;
 
 	return hasQuery
@@ -25,40 +25,6 @@ export const acDesktop: AutocompleteLayoutFunc = ({ controller }) => {
 										retainHistory: Boolean(pagination.totalPages),
 									},
 								},
-
-								// {
-								// 	layout: {
-								// 		flexDirection: "column"
-								// 	},
-								// 	items: [
-
-								// 		{
-								// 			name: 'suggested terms',
-								// 			component: 'Terms2',
-								// 			props: {
-								// 				title: 'Suggestions',
-								// 				terms: controller.store.terms,
-								// 			}
-								// 		},
-								// 		{
-								// 			name: 'popular terms',
-								// 			component: 'Terms2',
-								// 			props: {
-								// 				title: "Suggestions",
-								// 				terms: !controller.store.terms ? controller.store.trending : undefined
-								// 			}
-								// 		},
-								// 		{
-								// 			name: 'historical terms',
-								// 			component: 'Terms2',
-								// 			props: {
-								// 				title: 'Search History',
-								// 				terms: controller.store.history
-								// 			}
-								// 		}
-								// 	]
-								// },
-
 								{
 									component: 'Facets',
 									props: {
@@ -73,7 +39,7 @@ export const acDesktop: AutocompleteLayoutFunc = ({ controller }) => {
 										flexDirection: 'column',
 									},
 									items: [
-										resultsLayout(controller, 'desktop'),
+										resultsLayout(controller, 'tablet'),
 										{
 											component: 'SeeMore',
 											layout: {

@@ -1,7 +1,7 @@
-import { results as resultsLayout } from '../../containers/acResults';
+import { results as resultsLayout } from '../containers/acResults';
 import type { AutocompleteLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const acTablet: AutocompleteLayoutFunc = ({ controller }) => {
+export const acMobile: AutocompleteLayoutFunc = ({ controller }) => {
 	const { pagination, hasQuery } = controller.store;
 
 	return hasQuery
@@ -16,6 +16,7 @@ export const acTablet: AutocompleteLayoutFunc = ({ controller }) => {
 							name: 'content',
 							layout: {
 								gap: '10px',
+								flexDirection: 'column',
 							},
 							items: [
 								{
@@ -23,14 +24,7 @@ export const acTablet: AutocompleteLayoutFunc = ({ controller }) => {
 									props: {
 										controller: controller,
 										retainHistory: Boolean(pagination.totalPages),
-									},
-								},
-								{
-									component: 'Facets',
-									props: {
-										onFacetOptionClick: () => {
-											console.log('hi mom');
-										},
+										horizontal: true,
 									},
 								},
 								{
@@ -39,7 +33,7 @@ export const acTablet: AutocompleteLayoutFunc = ({ controller }) => {
 										flexDirection: 'column',
 									},
 									items: [
-										resultsLayout(controller, 'tablet'),
+										resultsLayout(controller, 'mobile'),
 										{
 											component: 'SeeMore',
 											layout: {

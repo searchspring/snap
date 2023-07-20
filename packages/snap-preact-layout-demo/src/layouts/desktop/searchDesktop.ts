@@ -1,5 +1,5 @@
-import { sidebar } from '../../containers/sidebar';
-import { results } from '../../containers/searchResults';
+import { sidebar } from '../containers/sidebar';
+import { results } from '../containers/searchResults';
 
 import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 

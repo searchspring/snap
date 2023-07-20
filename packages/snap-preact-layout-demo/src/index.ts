@@ -1,14 +1,14 @@
 import { SnapLayout } from '@searchspring/snap-preact';
-import { mobileLayout } from './layout/layouts/mobile/searchMobile';
-import { tabletLayout } from './layout/layouts/tablet/searchTablet';
-import { desktopLayout } from './layout/layouts/desktop/searchDesktop';
-import { acDesktop } from './layout/layouts/desktop/acDesktop';
-import { acMobile } from './layout/layouts/mobile/acMobile';
-import { acTablet } from './layout/layouts/tablet/acTablet';
+import { mobileLayout } from './layouts/mobile/searchMobile';
+import { tabletLayout } from './layouts/tablet/searchTablet';
+import { desktopLayout } from './layouts/desktop/searchDesktop';
+import { acDesktop } from './layouts/desktop/acDesktop';
+import { acMobile } from './layouts/mobile/acMobile';
+import { acTablet } from './layouts/tablet/acTablet';
 import { autocompleteStyling } from './styles/autocomplete';
-import { recsMobile } from './layout/layouts/mobile/recsMobile';
-import { recsTablet } from './layout/layouts/tablet/recsTablet';
-import { recsDesktop } from './layout/layouts/desktop/recsDesktop';
+import { recsMobile } from './layouts/mobile/recsMobile';
+import { recsTablet } from './layouts/tablet/recsTablet';
+import { recsDesktop } from './layouts/desktop/recsDesktop';
 
 /*
 	configuration and instantiation
