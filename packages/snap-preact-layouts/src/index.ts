@@ -1,5 +1,4 @@
-import { SnapTemplate } from '@searchspring/snap-preact';
-import type { SnapTemplateConfig } from '@searchspring/snap-preact';
+import { SnapLayout } from '@searchspring/snap-preact';
 import { mobileLayout } from './layout/layouts/mobile/searchMobile';
 import { tabletLayout } from './layout/layouts/tablet/searchTablet';
 import { desktopLayout } from './layout/layouts/desktop/searchDesktop';
@@ -15,7 +14,7 @@ import { recsDesktop } from './layout/layouts/desktop/recsDesktop';
 	configuration and instantiation
  */
 
-const config: SnapTemplateConfig = {
+new SnapLayout({
 	platform: 'custom',
 	siteId: '8uyt2m',
 	locale: {},
@@ -57,6 +56,4 @@ const config: SnapTemplateConfig = {
 			},
 		],
 	},
-};
-
-SnapTemplate(config);
+});

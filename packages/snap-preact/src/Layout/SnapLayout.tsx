@@ -1,5 +1,4 @@
 import deepmerge from 'deepmerge';
-
 import {
 	AutocompleteLayoutElement,
 	SearchLayoutElement,
@@ -7,13 +6,17 @@ import {
 	SearchLayoutFunc,
 	getDisplaySettings,
 } from '@searchspring/snap-preact-components';
-import { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
-import { SnapFeatures } from './types';
-import { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import { Snap, SnapConfig } from './Snap';
-import { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
-import { RecommendationLayoutElement } from '@searchspring/snap-preact-components';
-import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from './Instantiators/RecommendationInstantiator';
+
+import { Snap } from '../Snap';
+
+import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
+import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
+import type { RecommendationLayoutElement } from '@searchspring/snap-preact-components';
+import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
+
+import type { SnapFeatures } from '../types';
+import type { SnapConfig } from '../Snap';
 
 // // TODO: tabbing, layout toggling, finders
 type SearchTemplateLayout = {
@@ -34,7 +37,7 @@ type RecommendationTemplateLayout = {
 	breakpoints: (RecommendationLayoutFunc | RecommendationLayoutElement | undefined)[];
 };
 
-export type SnapTemplateConfig = {
+export type SnapLayoutConfig = {
 	platform: 'magento' | 'bigcommerce' | 'shopify' | 'custom';
 	siteId: string;
 	locale?: any;
@@ -63,70 +66,81 @@ export type SnapTemplateConfig = {
 	};
 };
 
-export function SnapTemplate(config: SnapTemplateConfig): Snap {
-	const mapBreakpoints = (breakpointsKeys: number[], breakpointSettings: unknown[]): { [key: number]: any } => {
-		return breakpointsKeys.reduce((mapping: any, width: number, index: number) => {
-			mapping[width] = breakpointSettings[index];
-			return mapping;
-		}, {});
-	};
+export class SnapLayout extends Snap {
+	constructor(config: SnapLayoutConfig) {
+		const snapConfig = createSnapConfig(config);
+		super(snapConfig);
+	}
+}
 
-	const createSearchTargeters = (layouts: SearchTemplateLayout[]) => {
-		return layouts.map((layout) => {
-			return {
-				selector: layout.selector,
-				props: {
-					style: layout.style,
-					breakpoints: mapBreakpoints(
-						config.layout.breakpoints,
-						layout.breakpoints.map((lb) => () => lb)
-					),
-				},
-				hideTarget: true,
-				component: async () => {
-					return (await import('./SnapLayouts')).SearchLayout;
-				},
-			};
-		});
-	};
+export function mapBreakpoints(breakpointsKeys: number[], breakpointSettings: unknown[]): { [key: number]: any } {
+	return breakpointsKeys.reduce((mapping: any, width: number, index: number) => {
+		mapping[width] = breakpointSettings[index];
+		return mapping;
+	}, {});
+}
 
-	const createAutocompleteTargeters = (layouts: AutocompleteTemplateLayout[]) => {
-		return layouts.map((layout) => {
-			return {
-				selector: layout.selector,
-				props: {
-					style: layout.style,
-					breakpoints: mapBreakpoints(
-						config.layout.breakpoints,
-						layout.breakpoints.map((lb) => () => lb)
-					),
-				},
-				hideTarget: true,
-				component: async () => {
-					return (await import('./SnapLayouts')).AutocompleteLayout;
-				},
-			};
-		});
-	};
+export const createSearchTargeters = (config: SnapLayoutConfig) => {
+	const layouts = config.search.layouts || [];
 
-	const createRecommendationComponentMapping = (layouts: RecommendationTemplateLayout[]): { [name: string]: RecommendationComponentObject } => {
-		return layouts.reduce((mapping, layout) => {
-			mapping[layout.component] = {
-				component: async () => {
-					return (await import('./SnapLayouts')).RecommendationLayout;
-				},
-				props: {
-					style: layout.style,
-					breakpoints: mapBreakpoints(
-						config.layout.breakpoints,
-						layout.breakpoints.map((lb) => () => lb)
-					),
-				},
-			};
-			return mapping;
-		}, {} as { [name: string]: RecommendationComponentObject });
-	};
+	return layouts.map((layout) => {
+		return {
+			selector: layout.selector,
+			props: {
+				style: layout.style,
+				breakpoints: mapBreakpoints(
+					config.layout.breakpoints,
+					layout.breakpoints.map((lb) => () => lb)
+				),
+			},
+			hideTarget: true,
+			component: async () => {
+				return (await import('./rootComponents')).SearchLayout;
+			},
+		};
+	});
+};
 
+export function createAutocompleteTargeters(config: SnapLayoutConfig) {
+	const layouts = config.autocomplete.layouts || [];
+	return layouts.map((layout) => {
+		return {
+			selector: layout.selector,
+			props: {
+				style: layout.style,
+				breakpoints: mapBreakpoints(
+					config.layout.breakpoints,
+					layout.breakpoints.map((lb) => () => lb)
+				),
+			},
+			hideTarget: true,
+			component: async () => {
+				return (await import('./rootComponents')).AutocompleteLayout;
+			},
+		};
+	});
+}
+
+export function createRecommendationComponentMapping(config: SnapLayoutConfig): { [name: string]: RecommendationComponentObject } {
+	const layouts = config.recommendation.layouts || [];
+	return layouts.reduce((mapping, layout) => {
+		mapping[layout.component] = {
+			component: async () => {
+				return (await import('./rootComponents')).RecommendationLayout;
+			},
+			props: {
+				style: layout.style,
+				breakpoints: mapBreakpoints(
+					config.layout.breakpoints,
+					layout.breakpoints.map((lb) => () => lb)
+				),
+			},
+		};
+		return mapping;
+	}, {} as { [name: string]: RecommendationComponentObject });
+}
+
+export function createSnapConfig(config: SnapLayoutConfig): SnapConfig {
 	const snapConfig: SnapConfig = {
 		features: config.features,
 		url: config.url,
@@ -137,7 +151,7 @@ export function SnapTemplate(config: SnapTemplateConfig): Snap {
 		},
 		instantiators: {
 			recommendation: {
-				components: createRecommendationComponentMapping(config.recommendation.layouts),
+				components: createRecommendationComponentMapping(config),
 				config: deepmerge(
 					config.recommendation?.settings || {},
 					getDisplaySettings(mapBreakpoints(config.layout.breakpoints, config.recommendation?.settings?.breakpoints || [])) || {}
@@ -155,7 +169,7 @@ export function SnapTemplate(config: SnapTemplateConfig): Snap {
 							getDisplaySettings(mapBreakpoints(config.layout.breakpoints, config.search.settings?.breakpoints || [])) || {}
 						),
 					},
-					targeters: createSearchTargeters(config.search.layouts),
+					targeters: createSearchTargeters(config),
 				},
 			],
 			autocomplete: [
@@ -175,11 +189,12 @@ export function SnapTemplate(config: SnapTemplateConfig): Snap {
 							getDisplaySettings(mapBreakpoints(config.layout.breakpoints, config.autocomplete.settings?.breakpoints || [])) || {}
 						),
 					},
-					targeters: createAutocompleteTargeters(config.autocomplete.layouts),
+					targeters: createAutocompleteTargeters(config),
 				},
 			],
 		},
 	};
 
-	return new Snap(snapConfig);
+	// return new Snap(snapConfig);
+	return snapConfig;
 }
