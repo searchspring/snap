@@ -1,4 +1,4 @@
-/*! For license information please see main.f339ff8c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.03c93725.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -33416,7 +33416,11 @@
 							value:
 								((_getAutocomplete = Hybrid_asyncToGenerator(
 									Hybrid_regeneratorRuntime().mark(function _callee4(requestParameters) {
-										var legacyRequestParameters,
+										var _this$requesters$sugg,
+											_this$requesters$sugg2,
+											_requestParameters$se,
+											_requestParameters$se2,
+											legacyRequestParameters,
 											suggestParams,
 											suggestResults,
 											transformedSuggestResults,
@@ -33445,21 +33449,36 @@
 															return (
 																(suggestResults = _context4.sent),
 																(transformedSuggestResults = transformSuggestResponse(suggestResults)),
-																(q = (suggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || suggestResults.query),
+																(q =
+																	(transformedSuggestResults.suggested || {}).text ||
+																	transformedSuggestResults.correctedQuery ||
+																	transformedSuggestResults.query),
+																null !== (_this$requesters$sugg = this.requesters.suggest.configuration) &&
+																	void 0 !== _this$requesters$sugg &&
+																	null !== (_this$requesters$sugg2 = _this$requesters$sugg.globals) &&
+																	void 0 !== _this$requesters$sugg2 &&
+																	_this$requesters$sugg2.integratedSpellCorrection &&
+																	(q =
+																		(transformedSuggestResults.suggested || {}).text ||
+																		transformedSuggestResults.query ||
+																		transformedSuggestResults.correctedQuery),
 																(queryParameters = Object.assign({}, legacyRequestParameters, { redirectResponse: 'full', q })),
-																(_context4.next = 11),
+																null !== (_requestParameters$se = requestParameters.search) &&
+																	void 0 !== _requestParameters$se &&
+																	null !== (_requestParameters$se2 = _requestParameters$se.query) &&
+																	void 0 !== _requestParameters$se2 &&
+																	_requestParameters$se2.string &&
+																	(requestParameters.search.query.string = q),
+																(_context4.next = 13),
 																this.requesters.legacy.getAutocomplete(queryParameters)
 															);
-														case 11:
+														case 13:
 															return (
 																(legacyResults = _context4.sent),
 																(searchResults = transformSearchResponse(legacyResults, requestParameters)),
-																_context4.abrupt(
-																	'return',
-																	Object.assign({}, searchResults, { search: { query: q }, autocomplete: transformedSuggestResults })
-																)
+																_context4.abrupt('return', Object.assign({}, searchResults, { autocomplete: transformedSuggestResults }))
 															);
-														case 14:
+														case 16:
 														case 'end':
 															return _context4.stop();
 													}
@@ -37412,18 +37431,27 @@
 							superClass && AutocompleteTermStore_setPrototypeOf(subClass, superClass);
 					})(AutocompleteTermStore, _Array);
 					var _super = AutocompleteTermStore_createSuper(AutocompleteTermStore);
-					function AutocompleteTermStore(services, autocomplete, paginationData, resetTerms, rootState) {
-						var _autocomplete$suggest;
+					function AutocompleteTermStore(services, autocomplete, paginationData, search, resetTerms, rootState, config) {
+						var _config$settings;
 						AutocompleteTermStore_classCallCheck(this, AutocompleteTermStore);
-						var suggestions = AutocompleteTermStore_toConsumableArray(
-							(null != autocomplete && autocomplete.alternatives ? autocomplete.alternatives : []).map(function (term) {
-								return term.text;
-							})
-						);
-						null != autocomplete &&
-						null !== (_autocomplete$suggest = autocomplete.suggested) &&
-						void 0 !== _autocomplete$suggest &&
-						_autocomplete$suggest.text
+						var _autocomplete$suggest,
+							suggestions = AutocompleteTermStore_toConsumableArray(
+								(null != autocomplete && autocomplete.alternatives ? autocomplete.alternatives : []).map(function (term) {
+									return term.text;
+								})
+							);
+						null !== (_config$settings = config.settings) && void 0 !== _config$settings && _config$settings.integratedSpellCorrection
+							? (null != autocomplete &&
+									autocomplete.correctedQuery &&
+									null != search &&
+									search.query &&
+									autocomplete.correctedQuery.toLowerCase() != search.query.toLowerCase() &&
+									suggestions.unshift(autocomplete.correctedQuery),
+							  (null == search ? void 0 : search.query) && suggestions.unshift(search.query))
+							: null != autocomplete &&
+							  null !== (_autocomplete$suggest = autocomplete.suggested) &&
+							  void 0 !== _autocomplete$suggest &&
+							  _autocomplete$suggest.text
 							? suggestions.unshift(autocomplete.suggested.text)
 							: null != autocomplete && autocomplete.correctedQuery && paginationData.totalResults
 							? suggestions.unshift(autocomplete.correctedQuery)
@@ -38321,10 +38349,12 @@
 												this.services,
 												data.autocomplete || {},
 												data.pagination || {},
+												data.search || {},
 												function () {
 													_this4.resetTerms();
 												},
-												this.state
+												this.state,
+												this.config
 											)),
 											data.autocomplete && this.state.locks.terms.lock()),
 										(this.merchandising = new SearchMerchandisingStore.A(this.services, data.merchandising || {})),
@@ -41101,7 +41131,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.45.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.46.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41600,7 +41630,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.45.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.46.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
