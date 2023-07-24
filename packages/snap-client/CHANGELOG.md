@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0](https://github.com/searchspring/snap/compare/v0.45.1...v0.46.0) (2023-07-24)
+
+### Features
+
+- **client/apis/hybrid:** modifying behavior when ISC is enabled ([86472d5](https://github.com/searchspring/snap/commit/86472d580f3ee94584948ae78efc34dc81c7bb24))
+
 ## [0.45.1](https://github.com/searchspring/snap/compare/v0.45.0...v0.45.1) (2023-06-22)
 
 **Note:** Version bump only for package @searchspring/snap-client
