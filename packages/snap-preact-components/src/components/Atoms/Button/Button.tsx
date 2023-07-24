@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 
@@ -51,22 +51,42 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		...properties.theme?.components?.button,
 	};
 
-	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableA11y, disableStyles, className, style } = props;
+	const {
+		backgroundColor,
+		borderColor,
+		color,
+		content,
+		children,
+		disabled,
+		native,
+		onClick,
+		disableA11y,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+	} = props;
+
+	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { backgroundColor, borderColor, color, disabled, native, theme };
+	if (!disableStyles) {
+		if (native) {
+			styling.css = [CSS.native(), style];
+		} else {
+			styling.css = [CSS.button(stylingProps), style];
+		}
+	} else if (style) {
+		styling.css = [style];
+	}
+
+	// add styleScript to styling
+	if (styleScript) {
+		styling.css = styling.css || [];
+		styling.css.push(styleScript(stylingProps));
+	}
 
 	const elementProps = {
-		css: disableStyles
-			? [style]
-			: native
-			? [CSS.native(), style]
-			: [
-					CSS.button({
-						color,
-						backgroundColor,
-						borderColor,
-						theme,
-					}),
-					style,
-			  ],
+		...styling,
 		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),

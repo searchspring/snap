@@ -1,5 +1,5 @@
 import { ThemeProvider as EmotionTheme } from '@emotion/react';
-export { useTheme, withTheme } from '@emotion/react';
+export { css, useTheme, withTheme } from '@emotion/react';
 
 interface ThemeProviderProps {
 	theme: Partial<Theme> | ((outerTheme: Theme) => Theme);
@@ -27,6 +27,9 @@ export const defaultTheme: Theme = {
 	components: {},
 };
 export interface Theme {
+	variables?: {
+		[key: string]: unknown;
+	};
 	colors?: {
 		primary: string;
 		secondary: string;

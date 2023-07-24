@@ -150,10 +150,10 @@ export const CarouselLayout = observer((properties: CarouselLayoutProps): JSX.El
 		loop: true,
 		autoAdjustSlides: true,
 		// global theme
-		...globalTheme?.components?.carousel,
+		...globalTheme?.components?.carouselLayout,
 		//props
 		...properties,
-		...properties.theme?.components?.carousel,
+		...properties.theme?.components?.carouselLayout,
 	};
 
 	if (props.autoAdjustSlides && props.slidesPerView && props.slides.length < props.slidesPerView) {

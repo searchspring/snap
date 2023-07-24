@@ -3,7 +3,7 @@ import { toolbar } from '../containers/toolbar';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const mobileLayout: SearchLayoutFunc = () => {
+export const searchMobile: SearchLayoutFunc = () => {
 	return [
 		{
 			name: 'mobile-facets',
@@ -59,6 +59,9 @@ export const mobileLayout: SearchLayoutFunc = () => {
 				{
 					name: 'Results',
 					component: 'Results',
+					props: {
+						columns: 2,
+					},
 				},
 			],
 		},

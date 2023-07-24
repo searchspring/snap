@@ -1,4 +1,4 @@
-export const autocompleteStyling = {
+export const autocomplete = {
 	display: 'flex',
 	flexDirection: 'row',
 	position: 'absolute',

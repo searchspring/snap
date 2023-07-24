@@ -83,10 +83,10 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		// default props
 
 		// global theme
-		...globalTheme?.components?.flex,
+		...globalTheme?.components?.autocompleteLayout,
 		// props
 		...properties,
-		...properties.theme?.components?.flex,
+		...properties.theme?.components?.autocompleteLayout,
 	};
 
 	const valueProps = createHoverProps();

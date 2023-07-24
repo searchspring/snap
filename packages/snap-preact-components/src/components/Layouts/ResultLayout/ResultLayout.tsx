@@ -89,10 +89,10 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		// default props
 
 		// global theme
-		...globalTheme?.components?.flex,
+		...globalTheme?.components?.resultLayout,
 		// props
 		...properties,
-		...properties.theme?.components?.flex,
+		...properties.theme?.components?.resultLayout,
 	};
 	const { controller, result, width, height, disableStyles, className, style, theme } = props;
 	const layout = props.layout;

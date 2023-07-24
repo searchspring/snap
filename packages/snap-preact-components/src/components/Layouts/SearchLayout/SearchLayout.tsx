@@ -26,9 +26,15 @@ import type { StringProps } from '../../Atoms/String/String';
 import type { LoadingBarProps } from '../../Atoms/Loading/LoadingBar';
 import type { BreadcrumbProps } from '../../Atoms/Breadcrumbs/Breadcrumbs';
 import type { BannerProps } from '../../Atoms/Merchandising';
+import type { ButtonProps } from '../../Atoms/Button';
 import type { CarouselLayoutProps } from '../../Layouts/CarouselLayout';
 
 // dynamically imported lazy loaded components
+
+const Button = lazy(async () => {
+	return (await import('../../Atoms/Button')).Button;
+});
+
 const Banner = lazy(async () => {
 	return (await import('../../Atoms/Merchandising/Banner')).Banner;
 });
@@ -97,10 +103,10 @@ export const SearchLayout = observer((properties: SearchLayoutProps) => {
 		// default props
 
 		// global theme
-		...globalTheme?.components?.flex,
+		...globalTheme?.components?.searchLayout,
 		// props
 		...properties,
-		...properties.theme?.components?.flex,
+		...properties.theme?.components?.searchLayout,
 	};
 	const { controller, breakpoints, width, height, disableStyles, className, style, theme } = props;
 	let layout = props.layout;
@@ -230,6 +236,7 @@ export type SearchLayoutElement = {
 	// if?: RenderConditions;
 } & Partial<
 	| StringElement
+	| ButtonElement
 	| BannerElement
 	| BreadcrumbsElement
 	| LoadingBarElement
@@ -245,6 +252,7 @@ export type SearchLayoutElement = {
 >;
 
 const componentMap = {
+	Button,
 	Banner,
 	Breadcrumbs,
 	LoadingBar,
@@ -263,6 +271,11 @@ const componentMap = {
 type StringElement = {
 	component: 'String';
 	props: StringProps;
+};
+
+type ButtonElement = {
+	component: 'Button';
+	props: ButtonProps;
 };
 
 type BannerElement = {

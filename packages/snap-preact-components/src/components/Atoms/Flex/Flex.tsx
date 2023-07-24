@@ -79,8 +79,8 @@ export interface FlexProps extends ComponentProps {
 	justifyContent?: string;
 	flex?: string;
 	flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
-	flexGrow?: number;
-	flexShrink?: number;
+	flexGrow?: number | string;
+	flexShrink?: number | string;
 	flexBasis?: string;
 	textAlign?: string;
 	gap?: string;

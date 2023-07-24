@@ -61,10 +61,10 @@ export const RecommendationLayout = observer((properties: RecommendationLayoutPr
 		// default props
 
 		// global theme
-		...globalTheme?.components?.flex,
+		...globalTheme?.components?.recommendationLayout,
 		// props
 		...properties,
-		...properties.theme?.components?.flex,
+		...properties.theme?.components?.recommendationLayout,
 	};
 	const { controller, breakpoints, disableStyles, className, style, theme } = props;
 	let layout = props.layout;

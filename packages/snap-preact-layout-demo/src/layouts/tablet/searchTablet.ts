@@ -4,7 +4,7 @@ import { toolbar } from '../containers/toolbar';
 import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 import { ContentType } from '@searchspring/snap-store-mobx';
 
-export const tabletLayout: SearchLayoutFunc = () => {
+export const searchTablet: SearchLayoutFunc = () => {
 	return [
 		{
 			name: 'header',
@@ -16,9 +16,17 @@ export const tabletLayout: SearchLayoutFunc = () => {
 		{
 			name: 'main-container',
 			layout: {
-				// gap: '40px',
+				gap: '40px',
 			},
-			items: [sidebar(), { component: 'Results' }],
+			items: [
+				sidebar(),
+				{
+					component: 'Results',
+					props: {
+						columns: 3,
+					},
+				},
+			],
 		},
 		{
 			name: 'footer',
