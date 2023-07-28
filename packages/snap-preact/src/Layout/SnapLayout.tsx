@@ -168,8 +168,8 @@ export function createSnapConfig(layoutConfig: SnapLayoutConfig): SnapConfig {
 					plugins: [],
 					settings: deepmerge(
 						layoutConfig.search.settings || {},
-						layoutConfig.config.breakpoints
-							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.search.settings?.breakpoints || []))
+						layoutConfig.config.breakpoints && layoutConfig.search.settings?.breakpoints
+							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.search.settings.breakpoints || []))
 							: {} || {}
 					),
 				},
@@ -194,8 +194,8 @@ export function createSnapConfig(layoutConfig: SnapLayoutConfig): SnapConfig {
 							},
 							layoutConfig.autocomplete.settings || {}
 						),
-						layoutConfig.config.breakpoints
-							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.autocomplete.settings?.breakpoints || []))
+						layoutConfig.config.breakpoints && layoutConfig.autocomplete.settings?.breakpoints
+							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.autocomplete.settings.breakpoints || []))
 							: {} || {}
 					),
 				},
@@ -210,8 +210,8 @@ export function createSnapConfig(layoutConfig: SnapLayoutConfig): SnapConfig {
 			components: createRecommendationComponentMapping(layoutConfig),
 			config: deepmerge(
 				layoutConfig.recommendation?.settings || {},
-				layoutConfig.config.breakpoints
-					? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.recommendation.settings?.breakpoints || []))
+				layoutConfig.config.breakpoints && layoutConfig.recommendation.settings?.breakpoints
+					? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.recommendation.settings.breakpoints || []))
 					: {} || {}
 			),
 		};
