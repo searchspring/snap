@@ -10,8 +10,6 @@ import { ComponentProps, StylingCSS } from '../../../types';
 const CSS = {
 	rating: (emptyRatingSrc?: string, fullRatingSrc?: string) =>
 		css({
-			display: 'block',
-			width: '100%',
 			textAlign: 'left',
 			height: '24px',
 			margin: '10px auto',
@@ -76,7 +74,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 				<div className={classnames('emptyRatingBox')}>
 					<div style={{ width: `${star}%` }} className={classnames('fullRatings')}></div>
 				</div>
-				{count && <span className={classnames('ratingCount')}>(${count})</span>}
+				{count && <span className={classnames('ratingCount')}>({count})</span>}
 			</div>
 		</CacheProvider>
 	) : (

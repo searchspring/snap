@@ -75,7 +75,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.facet,
 	};
-	//manual props override on a per facet level using the fields prop
+
+	//manual props override on a per facet display type level using the display prop
+	if (props.display && props.display[props.facet?.display]) {
+		props = {
+			...props,
+			...props.display[props.facet?.display],
+		};
+	}
+
+	//manual props override on a per facet field type level using the fields prop
 	if (props.fields && props.fields[props.facet?.field]) {
 		props = {
 			...props,
@@ -370,6 +379,7 @@ interface OptionalFacetProps extends ComponentProps {
 	iconOverflowMore?: string;
 	iconOverflowLess?: string;
 	fields?: FieldProps;
+	display?: FieldProps;
 	searchable?: boolean;
 }
 

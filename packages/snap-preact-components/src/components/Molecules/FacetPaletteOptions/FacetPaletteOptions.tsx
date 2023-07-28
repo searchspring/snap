@@ -106,7 +106,8 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		...properties.theme?.components?.facetPaletteOptions,
 	};
 
-	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const { values, hideLabel, columns, gapSize, colorMapping, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } =
+		props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -162,7 +163,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 									'ss__facet-palette-options__option__palette',
 									`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
 								)}
-								css={{ background: value.value }}
+								style={{ background: colorMapping && colorMapping[value.value] ? colorMapping[value.value] : value.value }}
 							>
 								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
 							</div>
@@ -187,6 +188,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	colorMapping?: { [name: string]: string };
 }
 
 interface FacetPaletteOptionsSubProps {

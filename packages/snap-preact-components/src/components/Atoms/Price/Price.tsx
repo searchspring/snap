@@ -54,15 +54,17 @@ export function Price(properties: PriceProps): JSX.Element {
 		className,
 		style,
 	} = props;
-
-	const formattedPrice = filters.currency(value, {
-		symbol,
-		decimalPlaces,
-		padDecimalPlaces,
-		thousandsSeparator,
-		decimalSeparator,
-		symbolAfter,
-	});
+	let formattedPrice: string | undefined;
+	if (value) {
+		formattedPrice = filters.currency(value, {
+			symbol,
+			decimalPlaces,
+			padDecimalPlaces,
+			thousandsSeparator,
+			decimalSeparator,
+			symbolAfter,
+		});
+	}
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -70,18 +72,22 @@ export function Price(properties: PriceProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
-
-	return raw ? (
-		<Fragment>{formattedPrice}</Fragment>
-	) : (
-		<CacheProvider>
-			<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
-				{formattedPrice}
-			</span>
-		</CacheProvider>
-	);
+	if (formattedPrice) {
+		return raw ? (
+			<Fragment>{formattedPrice}</Fragment>
+		) : (
+			<CacheProvider>
+				<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
+					{formattedPrice}
+				</span>
+			</CacheProvider>
+		);
+	} else {
+		return <Fragment></Fragment>;
+	}
 }
 
-export interface PriceProps extends FormattedNumberProps {
+export interface PriceProps extends Omit<FormattedNumberProps, 'value'> {
+	value?: number;
 	lineThrough?: boolean;
 }
