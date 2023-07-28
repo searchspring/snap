@@ -5,7 +5,7 @@ import type { AbstractController } from '@searchspring/snap-controller';
 export interface ComponentProps {
 	className?: string;
 	disableStyles?: boolean;
-	style?: string | Record<string, string>;
+	style?: string | Record<string, any>;
 	styleScript?: <Props>(props: Props) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
