@@ -1,19 +1,13 @@
 import deepmerge from 'deepmerge';
-import {
-	AutocompleteLayoutElement,
-	SearchLayoutElement,
-	AutocompleteLayoutFunc,
-	SearchLayoutFunc,
-	getDisplaySettings,
-} from '@searchspring/snap-preact-components';
+import { getDisplaySettings } from '@searchspring/snap-preact-components';
 
 import { Snap } from '../Snap';
 
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
-import type { RecommendationLayoutElement } from '@searchspring/snap-preact-components';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
+import type { LayoutTypes } from '@searchspring/snap-preact-components';
+import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 
 import type { SnapFeatures } from '../types';
 import type { SnapConfig } from '../Snap';
@@ -22,22 +16,22 @@ import type { SnapConfig } from '../Snap';
 type SearchTemplateLayout = {
 	selector: string;
 	theme?: any;
-	layout?: SearchLayoutFunc | SearchLayoutElement;
-	breakpoints?: (SearchLayoutFunc | SearchLayoutElement | undefined)[];
+	layout?: LayoutTypes<SearchController>;
+	breakpoints?: (LayoutTypes<SearchController> | undefined)[];
 };
 
 type AutocompleteTemplateLayout = {
 	selector: string;
 	theme?: any;
-	layout?: AutocompleteLayoutFunc | AutocompleteLayoutElement;
-	breakpoints?: (AutocompleteLayoutFunc | AutocompleteLayoutElement | undefined)[];
+	layout?: LayoutTypes<AutocompleteController>;
+	breakpoints?: (LayoutTypes<AutocompleteController> | undefined)[];
 };
 
 type RecommendationTemplateLayout = {
 	component: string;
 	theme?: any;
-	layout?: RecommendationLayoutFunc | RecommendationLayoutElement;
-	breakpoints?: (RecommendationLayoutFunc | RecommendationLayoutElement | undefined)[];
+	layout?: LayoutTypes<RecommendationController>;
+	breakpoints?: (LayoutTypes<RecommendationController> | undefined)[];
 };
 
 export type SnapLayoutConfig = {

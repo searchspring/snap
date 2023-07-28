@@ -11,12 +11,12 @@ export interface ComponentProps {
 	controller?: AbstractController;
 }
 
-export enum Layout {
+export enum ResultsLayout {
 	GRID = 'grid',
 	LIST = 'list',
 }
 
-export type LayoutType = Layout.GRID | Layout.LIST;
+export type ResultsLayoutType = ResultsLayout.GRID | ResultsLayout.LIST;
 
 // TODO: move to store or use store or snapi types
 export enum FacetType {

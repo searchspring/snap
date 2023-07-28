@@ -1,10 +1,9 @@
 // import { useRef } from 'preact/hooks';
-import type { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
 import { resultLayout } from '../containers/resultLayout';
 
 //TODO: try using createRef up here outside of layout for prev/next buttons
 
-export const recsDesktop: RecommendationLayoutFunc = ({ controller }: any) => {
+export const recsDesktop: LayoutFunc<RecommendationController> = ({ controller }: any) => {
 	const prevButtonClass = 'ss__carousel__prev';
 	const nextButtonClass = 'ss__carousel__next';
 
@@ -16,7 +15,7 @@ export const recsDesktop: RecommendationLayoutFunc = ({ controller }: any) => {
 			},
 			items: [
 				{
-					component: 'String',
+					component: 'HTML',
 					props: {
 						content: 'Recommended For You',
 					},
@@ -31,22 +30,20 @@ export const recsDesktop: RecommendationLayoutFunc = ({ controller }: any) => {
 							component: 'Button',
 							props: {
 								className: prevButtonClass,
-							},
-							layout: {
-								width: '5%',
-								justifyContent: 'left',
-							},
-							items: [
-								{
+								children: {
 									component: 'Icon',
 									props: {
 										icon: 'angle-left',
 									},
 								},
-							],
+							},
+							layout: {
+								width: '5%',
+								justifyContent: 'left',
+							},
 						},
 						{
-							component: 'CarouselLayout',
+							component: 'Carousel',
 							layout: {
 								width: '90%',
 							},
@@ -69,15 +66,13 @@ export const recsDesktop: RecommendationLayoutFunc = ({ controller }: any) => {
 							component: 'Button',
 							props: {
 								className: nextButtonClass,
-							},
-							items: [
-								{
+								children: {
 									component: 'Icon',
 									props: {
 										icon: 'angle-right',
 									},
 								},
-							],
+							},
 						},
 					],
 				},

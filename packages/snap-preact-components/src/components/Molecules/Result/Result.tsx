@@ -11,7 +11,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
+import { ComponentProps, ResultsLayout, ResultsLayoutType, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -78,7 +78,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	const props: ResultProps = {
 		// default props
-		layout: Layout.GRID,
+		layout: ResultsLayout.GRID,
 		// global theme
 		...globalTheme?.components?.result,
 		// props
@@ -218,7 +218,7 @@ export interface ResultProps extends ComponentProps {
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element;
 	fallback?: string;
-	layout?: LayoutType;
+	layout?: ResultsLayoutType;
 	truncateTitle?: TruncateTitleProps;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;

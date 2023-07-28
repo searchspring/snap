@@ -5,6 +5,7 @@ export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
 export * from './components/Atoms/Flex';
 export * from './components/Atoms/FormattedNumber';
+export * from './components/Atoms/HTML';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
@@ -32,6 +33,7 @@ export * from './components/Molecules/Result';
 export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
 export * from './components/Molecules/FacetSlider';
+export * from './components/Molecules/Rating';
 
 // ORGANISMS
 export * from './components/Organisms/Autocomplete';
@@ -43,9 +45,9 @@ export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
 
 // LAYOUTS
+export * from './components/Layouts/Layout';
 export * from './components/Layouts/AutocompleteLayout';
 export * from './components/Layouts/SearchLayout';
-export * from './components/Layouts/ResultLayout';
 export * from './components/Layouts/RecommendationLayout';
 export * from './components/Layouts/CarouselLayout';
 

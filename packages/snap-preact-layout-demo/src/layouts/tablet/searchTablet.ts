@@ -1,17 +1,15 @@
 import { sidebar } from '../containers/sidebar';
 import { toolbar } from '../containers/toolbar';
-
-import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 import { ContentType } from '@searchspring/snap-store-mobx';
 
-export const searchTablet: SearchLayoutFunc = () => {
+export const searchTablet: LayoutFunc<SearchController> = (data) => {
 	return [
 		{
 			name: 'header',
 			layout: {
 				justifyContent: 'flex-end',
 			},
-			items: [toolbar],
+			items: toolbar(data),
 		},
 		{
 			name: 'main-container',
@@ -19,7 +17,7 @@ export const searchTablet: SearchLayoutFunc = () => {
 				gap: '40px',
 			},
 			items: [
-				sidebar(),
+				...sidebar(data),
 				{
 					component: 'Results',
 					props: {

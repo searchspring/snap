@@ -6,7 +6,7 @@ import { InlineBanner, InlineBannerProps } from './InlineBanner';
 import { componentArgs } from '../../../../utilities';
 import { Snapify } from '../../../../utilities/snapify';
 import Readme from './readme.md';
-import { Layout } from '../../../../types';
+import { ResultsLayout } from '../../../../types';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -37,7 +37,7 @@ export default {
 		},
 		layout: {
 			description: 'Banner layout',
-			defaultValue: Layout.GRID,
+			defaultValue: ResultsLayout.GRID,
 			table: {
 				type: {
 					summary: 'string',
@@ -45,7 +45,7 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: [Layout.GRID, Layout.LIST],
+				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		width: {

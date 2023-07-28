@@ -9,9 +9,8 @@ import { SwiperOptions } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { ResultLayout } from '../../Layouts/ResultLayout/ResultLayout';
-import type { ResultLayoutElement, ResultLayoutFunc } from '../../Layouts/ResultLayout/ResultLayout';
-import { AbstractController } from '@searchspring/snap-controller';
+import { Layout, LayoutTypes } from '../Layout';
+import { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
 	carouselLayout: ({ theme, vertical }: Partial<CarouselLayoutProps>) =>
@@ -233,7 +232,7 @@ export const CarouselLayout = observer((properties: CarouselLayoutProps): JSX.El
 					{slides.map((slide) => {
 						return (
 							<SwiperSlide>
-								<ResultLayout result={slide} layout={slideLayout} controller={controller} />
+								<Layout data={{ result: slide }} layout={slideLayout} controller={controller} />
 							</SwiperSlide>
 						);
 					})}
@@ -248,10 +247,9 @@ export const CarouselLayout = observer((properties: CarouselLayoutProps): JSX.El
 export type CarouselLayoutProps = {
 	// TODO: tracking
 	// enableTracking?: boolean;
-
-	controller?: AbstractController;
+	controller?: SearchController | AutocompleteController | RecommendationController;
 	slides: any[];
-	slideLayout: ResultLayoutElement[] | ResultLayoutFunc;
+	slideLayout: LayoutTypes;
 	prevButtonSelector?: string;
 	nextButtonSelector?: string;
 	slidesPerView?: number;

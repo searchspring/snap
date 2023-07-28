@@ -1,4 +1,5 @@
 import type * as SnapPreactTypes from '@searchspring/snap-preact';
+import type * as ComponentTypes from '@searchspring/snap-preact-components';
 import type * as ControllerTypes from '@searchspring/snap-controller';
 import type * as StoreTypes from '@searchspring/snap-store-mobx';
 import type * as EventManagerTypes from '@searchspring/snap-event-manager';
@@ -26,6 +27,11 @@ declare global {
 	type Filter = StoreTypes.Filter;
 	type SearchFacetsStore = StoreTypes.SearchFacetStore;
 	type SearchResultsStore = StoreTypes.SearchResultStore;
+
+	// layout types
+	type LayoutElement = ComponentTypes.LayoutElement;
+	type LayoutFunc<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.LayoutFunc<Controller>;
+	type LayoutTypes<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.LayoutTypes<Controller>;
 
 	// services types
 	type Next = EventManagerTypes.Next;

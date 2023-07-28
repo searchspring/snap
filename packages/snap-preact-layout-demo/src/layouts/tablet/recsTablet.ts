@@ -1,12 +1,11 @@
 // import { useRef } from 'preact/hooks';
-import type { RecommendationLayoutFunc } from '@searchspring/snap-preact-components';
-import { Layout } from '@searchspring/snap-preact-components';
+import { ResultsLayout } from '@searchspring/snap-preact-components';
 
 // import { results as resultsLayout } from '../../containers/acResults';
 
 //TODO: try using createRef up here outside of layout for prev/next buttons
 
-export const recsTablet: RecommendationLayoutFunc = () => {
+export const recsTablet: LayoutFunc = () => {
 	return [
 		{
 			name: 'recommendations',
@@ -15,7 +14,7 @@ export const recsTablet: RecommendationLayoutFunc = () => {
 			},
 			items: [
 				{
-					component: 'String',
+					component: 'HTML',
 					props: {
 						content: 'Recommended For You',
 					},
@@ -24,7 +23,7 @@ export const recsTablet: RecommendationLayoutFunc = () => {
 					component: 'Results',
 					props: {
 						// resultLayout:resultLayout,
-						layout: Layout.LIST,
+						layout: ResultsLayout.LIST,
 						columns: 1,
 						rows: 4,
 					},

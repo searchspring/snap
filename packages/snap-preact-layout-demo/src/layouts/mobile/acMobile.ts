@@ -1,8 +1,7 @@
 import { results as resultsLayout } from '../containers/acResults';
-import type { AutocompleteLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const acMobile: AutocompleteLayoutFunc = ({ controller }) => {
-	const { pagination, hasQuery } = controller.store;
+export const acMobile: LayoutFunc<AutocompleteController> = (data) => {
+	const { pagination, hasQuery } = data.controller.store;
 
 	return hasQuery
 		? [
@@ -22,7 +21,7 @@ export const acMobile: AutocompleteLayoutFunc = ({ controller }) => {
 								{
 									component: 'GroupedTerms',
 									props: {
-										controller: controller,
+										controller: data.controller,
 										retainHistory: Boolean(pagination.totalPages),
 										horizontal: true,
 									},
@@ -33,7 +32,7 @@ export const acMobile: AutocompleteLayoutFunc = ({ controller }) => {
 										flexDirection: 'column',
 									},
 									items: [
-										resultsLayout(controller, 'mobile'),
+										...resultsLayout(data, 'mobile'),
 										{
 											component: 'SeeMore',
 											layout: {

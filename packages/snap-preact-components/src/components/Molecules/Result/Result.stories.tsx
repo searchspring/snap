@@ -7,7 +7,7 @@ import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
-import { Layout } from '../../../types';
+import { ResultsLayout } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
@@ -115,7 +115,7 @@ export default {
 		},
 		layout: {
 			description: 'Results layout',
-			defaultValue: Layout.GRID,
+			defaultValue: ResultsLayout.GRID,
 			table: {
 				type: {
 					summary: 'string',
@@ -123,7 +123,7 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: [Layout.GRID, Layout.LIST],
+				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		onClick: {

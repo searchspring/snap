@@ -3,9 +3,7 @@ import { useState } from 'preact/hooks';
 import { sidebar } from '../containers/sidebar';
 import { results } from '../containers/searchResults';
 
-import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
-
-export const searchDesktop: SearchLayoutFunc = (data) => {
+export const searchDesktop: LayoutFunc<SearchController> = (data) => {
 	const [showSidebar, setShowSidebar] = useState(true);
 
 	return [
@@ -27,7 +25,7 @@ export const searchDesktop: SearchLayoutFunc = (data) => {
 							overflow: 'hidden',
 						},
 					},
-					items: [sidebar()],
+					items: sidebar(data),
 				},
 				{
 					name: 'content',
@@ -44,7 +42,7 @@ export const searchDesktop: SearchLayoutFunc = (data) => {
 								},
 							},
 						},
-						results(data.controller),
+						...results(data),
 					],
 				},
 			],

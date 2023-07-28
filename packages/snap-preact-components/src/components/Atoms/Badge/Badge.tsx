@@ -32,7 +32,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.badge,
 	};
-	const { content, children, position, disableStyles, className, style } = props;
+	const { content, title, children, position, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -44,7 +44,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge', className)}>
+			<div {...styling} className={classnames('ss__badge', className)} title={title}>
 				{content || children}
 			</div>
 		</CacheProvider>
@@ -60,4 +60,5 @@ export interface BadgeProps extends ComponentProps {
 		bottom?: string | number;
 		left?: string | number;
 	};
+	title?: string;
 }

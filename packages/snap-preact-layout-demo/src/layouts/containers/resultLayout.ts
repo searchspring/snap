@@ -1,6 +1,4 @@
-import type { ResultLayoutFunc } from '@searchspring/snap-preact-components';
-
-export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
+export const resultLayout: LayoutFunc = ({ result }: any) => {
 	const { core } = result.mappings;
 
 	return [
@@ -12,7 +10,10 @@ export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
 			},
 			items: [
 				{
-					layout: {},
+					layout: {
+						style: { position: 'relative' },
+					},
+
 					items: [
 						{
 							component: 'Image',
@@ -31,9 +32,9 @@ export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
 					],
 				},
 				{
-					component: 'String',
+					component: 'HTML',
 					props: {
-						content: core?.name,
+						content: `${core?.name}`,
 					},
 				},
 				// {
@@ -42,12 +43,12 @@ export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
 				//         data: result.attributes?.swatches
 				//     }
 				// },
-				// {
-				//     component: "ratings",
-				//     props: {
-				//         rating: result.attributes.ratingstar
-				//     }
-				// },
+				{
+					component: 'Rating',
+					props: {
+						rating: result.attributes.ratingstar,
+					},
+				},
 				{
 					name: 'pricingWrapper',
 					layout: {
@@ -86,7 +87,7 @@ export const resultLayout: ResultLayoutFunc = ({ result }: any) => {
 	];
 };
 
-export const listResultLayout: ResultLayoutFunc = ({ result }: any) => {
+export const listResultLayout: LayoutFunc = ({ result }: any) => {
 	const { core } = result.mappings;
 
 	return [
@@ -123,9 +124,9 @@ export const listResultLayout: ResultLayoutFunc = ({ result }: any) => {
 					},
 					items: [
 						{
-							component: 'String',
+							component: 'HTML',
 							props: {
-								content: core?.name,
+								content: `${core?.name}`,
 							},
 						},
 						// {

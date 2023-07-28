@@ -5,7 +5,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { Results, ResultsProps } from './Results';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { Layout } from '../../../types';
+import { ResultsLayout } from '../../../types';
 
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -54,7 +54,7 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: [Layout.GRID, Layout.LIST],
+				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		columns: {
@@ -142,7 +142,7 @@ Grid.loaders = [
 ];
 
 export const List = (args: ResultsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
+	return <Results {...args} controller={controller} results={controller?.store?.results} layout={ResultsLayout.LIST} />;
 };
 
 List.loaders = [

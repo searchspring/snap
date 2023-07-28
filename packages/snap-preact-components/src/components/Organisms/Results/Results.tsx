@@ -11,13 +11,12 @@ import type { SearchResultStore, Product, Banner } from '@searchspring/snap-stor
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { parseProps } from '../../../utilities';
-import { ResultLayout } from '../../Layouts/ResultLayout/ResultLayout';
-import type { ResultLayoutElement, ResultLayoutFunc } from '../../Layouts/ResultLayout/ResultLayout';
+import { Layout, LayoutTypes } from '../../Layouts/Layout';
 
 const CSS = {
 	results: ({ columns, gapSize }: ResultsProps) =>
@@ -76,7 +75,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		results: properties.controller?.store?.results,
 		columns: 4,
 		gapSize: '20px',
-		layout: Layout.GRID,
+		layout: ResultsLayout.GRID,
 		breakpoints: defaultBreakpointsProps,
 		// global theme
 		...globalTheme?.components?.results,
@@ -132,7 +131,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
+		styling.css = [CSS.results({ columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -146,8 +145,8 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 							case ContentType.BANNER:
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
-								if (resultLayout) {
-									return <ResultLayout controller={controller as SearchController} result={result} layout={resultLayout} />;
+								if (resultLayout && controller) {
+									return <Layout controller={controller} data={{ result }} layout={resultLayout} />;
 								} else {
 									return (
 										<Result
@@ -174,10 +173,10 @@ export interface ResultsProps extends ComponentProps {
 	columns?: number;
 	rows?: number;
 	gapSize?: string;
-	layout?: LayoutType;
+	layout?: ResultsLayoutType;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
-	resultLayout?: ResultLayoutElement[] | ResultLayoutFunc;
+	resultLayout?: LayoutTypes;
 }
 
 interface ResultsSubProps {

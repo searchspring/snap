@@ -1,9 +1,7 @@
 import { sidebar } from '../containers/sidebar';
-import { toolbar } from '../containers/toolbar';
 import { ContentType } from '@searchspring/snap-store-mobx';
-import type { SearchLayoutFunc } from '@searchspring/snap-preact-components';
 
-export const searchMobile: SearchLayoutFunc = () => {
+export const searchMobile: LayoutFunc<SearchController> = (data) => {
 	return [
 		{
 			name: 'mobile-facets',
@@ -13,13 +11,12 @@ export const searchMobile: SearchLayoutFunc = () => {
 					component: 'Slideout',
 					props: {
 						buttonContent: 'Refine Filters',
+						children: sidebar(data),
 					},
-					items: [sidebar()],
 				},
 			],
 		},
 		{
-			...toolbar,
 			layout: {
 				flexDirection: 'column',
 				width: '100%',
@@ -38,12 +35,6 @@ export const searchMobile: SearchLayoutFunc = () => {
 							component: 'SortBy',
 						},
 					],
-				},
-				{
-					layout: {
-						justifyContent: 'flex-end',
-					},
-					component: 'Pagination',
 				},
 			],
 		},
