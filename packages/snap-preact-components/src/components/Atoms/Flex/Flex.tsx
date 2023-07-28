@@ -9,7 +9,26 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const _CSS = {
-	flex: ({ flex, flexDirection, textAlign, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }: FlexProps) =>
+	flex: ({
+		flex,
+		flexDirection,
+		textAlign,
+		flexBasis,
+		flexGrow,
+		flexShrink,
+		flexWrap,
+		flexFlow,
+		gap,
+		rowGap,
+		columnGap,
+		item,
+		justifyContent,
+		alignItems,
+		alignContent,
+		alignSelf,
+		width,
+		height,
+	}: FlexProps) =>
 		css({
 			display: item ? undefined : 'flex',
 			width,
@@ -19,8 +38,15 @@ const _CSS = {
 			flexBasis,
 			flexGrow,
 			flexShrink,
+			flexWrap,
+			flexFlow,
 			gap,
+			rowGap,
+			columnGap,
 			justifyContent,
+			alignItems,
+			alignContent,
+			alignSelf,
 			flex,
 		}),
 };
@@ -45,9 +71,16 @@ export const Flex = observer((properties: FlexProps): JSX.Element => {
 		flexBasis,
 		flexGrow,
 		flexShrink,
+		flexWrap,
+		flexFlow,
 		gap,
+		rowGap,
+		columnGap,
 		item,
 		justifyContent,
+		alignItems,
+		alignContent,
+		alignSelf,
 		width,
 		height,
 		disableStyles,
@@ -58,7 +91,29 @@ export const Flex = observer((properties: FlexProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 
 	if (!disableStyles) {
-		styling.css = [_CSS.flex({ flex, flexDirection, textAlign, flexBasis, flexGrow, flexShrink, gap, item, justifyContent, width, height }), style];
+		styling.css = [
+			_CSS.flex({
+				flex,
+				flexDirection,
+				textAlign,
+				flexBasis,
+				flexGrow,
+				flexShrink,
+				flexWrap,
+				flexFlow,
+				gap,
+				rowGap,
+				columnGap,
+				item,
+				justifyContent,
+				alignItems,
+				alignContent,
+				alignSelf,
+				width,
+				height,
+			}),
+			style,
+		];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -76,13 +131,20 @@ export interface FlexProps extends ComponentProps {
 	children?: ComponentChildren;
 	width?: string;
 	height?: string;
+	alignItems?: string;
+	alignContent?: string;
+	alignSelf?: string;
 	justifyContent?: string;
 	flex?: string;
+	flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+	flexFlow?: string;
 	flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
 	flexGrow?: number | string;
 	flexShrink?: number | string;
 	flexBasis?: string;
 	textAlign?: string;
 	gap?: string;
+	rowGap?: string;
+	columnGap?: string;
 	item?: boolean;
 }
