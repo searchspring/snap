@@ -110,7 +110,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			<ControllerProvider controller={controller}>
 				<ThemeProvider theme={theme || {}}>
 					<CacheProvider>
-						<div {...styling} className={classnames('ss__AClayout', className)}>
+						<div {...styling} className={classnames('ss__autocomplete-layout', className)}>
 							{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
 							{/* <LayoutElements /> */}
 							<Layout controller={controller} data={{ input }} layout={layout} />

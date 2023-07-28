@@ -20,10 +20,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	const props: TermsProps = {
 		// default props
-		suggestionTitle: '',
-		trendingTitle: 'Popular Searches',
-		historyTitle: 'Previously Searched',
-		horizontalTerms: false,
+
 		// global theme
 		...globalTheme?.components?.results,
 		// props
@@ -31,7 +28,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const { terms, title, onTermClick, disableStyles, style, controller } = props;
+	const { terms, title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, controller } = props;
 	const currentInput = controller?.store?.state?.input;
 
 	const styling: { css?: StylingCSS } = {};
@@ -41,7 +38,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const emIfy = (term: string, search: string) => {
+	const emIfyTerm = (term: string, search: string) => {
 		if (term && search) {
 			const match = term.match(escapeRegExp(search));
 			if (search && term && match && typeof match.index == 'number') {
@@ -75,7 +72,9 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	};
 
-	return terms?.length ? (
+	const termsToShow = limit ? terms?.slice(0, limit) : terms;
+
+	return termsToShow?.length ? (
 		<CacheProvider>
 			<div className="ss__autocomplete__terms">
 				{title ? (
@@ -84,7 +83,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 					</div>
 				) : null}
 				<div className="ss__autocomplete__terms__options" role={'list'} aria-label={title}>
-					{terms?.map((term, idx) => (
+					{termsToShow?.map((term, idx) => (
 						<div
 							className={classnames('ss__autocomplete__terms__option', {
 								'ss__autocomplete__terms__option--active': term.active,
@@ -93,11 +92,11 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 							<a
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
 								href={term.url.href}
-								{...createHoverProps(term.preview)}
+								{...(previewOnHover ? createHoverProps(term.preview) : {})}
 								role="link"
 								aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
 							>
-								{emIfy(term.value, currentInput || '')}
+								{emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}
 							</a>
 						</div>
 					))}
@@ -112,6 +111,9 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 export interface TermsProps extends ComponentProps {
 	controller?: AutocompleteController;
 	terms?: AutocompleteTermStore;
-	title: string;
+	title?: string;
+	limit?: number;
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	previewOnHover?: boolean;
+	emIfy?: boolean;
 }

@@ -20,7 +20,6 @@ export const SeeMore = observer((properties: SeeMoreProps): JSX.Element => {
 
 	const props: SeeMoreProps = {
 		// default props
-		content: 'See More',
 		icon: 'angle-right',
 		// global theme
 		...globalTheme?.components?.string,
@@ -32,13 +31,16 @@ export const SeeMore = observer((properties: SeeMoreProps): JSX.Element => {
 	const parsedProps = parseProps(props.controller!, props);
 	const { onClick, icon, iconColor, disableStyles, className, style, controller } = parsedProps;
 
-	if (controller?.store) {
-		const { pagination, filters, search, state } = (properties.controller as AutocompleteController).store;
+	if (!props.content && controller?.store) {
+		const { pagination, filters, search } = (properties.controller as AutocompleteController).store;
 
 		props.content = `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${
 			search.query?.string
 		}"`;
+	}
 
+	if (!props.href && controller?.store) {
+		const { state } = (properties.controller as AutocompleteController).store;
 		props.href = state.url.href;
 	}
 
