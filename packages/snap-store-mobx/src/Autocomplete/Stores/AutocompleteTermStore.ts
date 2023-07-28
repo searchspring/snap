@@ -1,8 +1,8 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
-import type { StoreServices } from '../../types';
-import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination } from '@searchspring/snapi-types';
+import type { AutocompleteStoreConfig, StoreServices } from '../../types';
+import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination, SearchResponseModelSearch } from '@searchspring/snapi-types';
 
 export class AutocompleteTermStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
@@ -13,20 +13,31 @@ export class AutocompleteTermStore extends Array<Term> {
 		services: StoreServices,
 		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
 		paginationData: SearchResponseModelPagination,
+		search: SearchResponseModelSearch,
 		resetTerms: () => void,
-		rootState: AutocompleteStateStore
+		rootState: AutocompleteStateStore,
+		config: AutocompleteStoreConfig
 	) {
 		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
 
-		if (autocomplete?.suggested?.text) {
-			// a suggestion for query
-			suggestions.unshift(autocomplete.suggested.text);
-		} else if (autocomplete?.correctedQuery && paginationData.totalResults) {
-			// the query was corrected
-			suggestions.unshift(autocomplete.correctedQuery);
-		} else if (autocomplete?.query && paginationData.totalResults) {
-			// there were no suggestions or corrections,
-			suggestions.unshift(autocomplete?.query);
+		if (config.settings?.integratedSpellCorrection) {
+			if (autocomplete?.correctedQuery && search?.query && autocomplete.correctedQuery.toLowerCase() != search.query.toLowerCase()) {
+				// the query was corrected
+				suggestions.unshift(autocomplete.correctedQuery);
+			}
+
+			search?.query && suggestions.unshift(search.query);
+		} else {
+			if (autocomplete?.suggested?.text) {
+				// a suggestion for query
+				suggestions.unshift(autocomplete.suggested.text);
+			} else if (autocomplete?.correctedQuery && paginationData.totalResults) {
+				// the query was corrected
+				suggestions.unshift(autocomplete.correctedQuery);
+			} else if (autocomplete?.query && paginationData.totalResults) {
+				// there were no suggestions or corrections,
+				suggestions.unshift(autocomplete?.query);
+			}
 		}
 
 		const terms: Array<Term> = [];

@@ -155,10 +155,12 @@ export class AutocompleteStore extends AbstractStore {
 				this.services,
 				data.autocomplete || {},
 				data.pagination || {},
+				data.search || {},
 				() => {
 					this.resetTerms();
 				},
-				this.state
+				this.state,
+				this.config as AutocompleteStoreConfig
 			);
 
 			// only lock if there was data

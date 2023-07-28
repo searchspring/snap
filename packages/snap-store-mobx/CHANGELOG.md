@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0](https://github.com/searchspring/snap/compare/v0.45.1...v0.46.0) (2023-07-24)
+
+### Features
+
+- **store-mobx/autocomplete:** modifying the term store behavior when using ISC ([baf2f71](https://github.com/searchspring/snap/commit/baf2f71f325a3924eadf110b1da23a2d45db61e0))
+
 ## [0.45.1](https://github.com/searchspring/snap/compare/v0.45.0...v0.45.1) (2023-06-22)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
