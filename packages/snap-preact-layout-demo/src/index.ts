@@ -36,7 +36,6 @@ import * as themes from './themes';
  */
 
 new SnapLayout({
-	platform: 'custom',
 	config: {
 		theme: themes.pike,
 		language: 'en',
@@ -52,10 +51,6 @@ new SnapLayout({
 		layouts: [
 			{
 				selector: '#searchspring-layout',
-				breakpoints: [searchMobile, searchTablet, searchDesktop],
-			},
-			{
-				selector: '#searchspring-sidebar',
 				breakpoints: [searchMobile, searchTablet, searchDesktop],
 			},
 		],

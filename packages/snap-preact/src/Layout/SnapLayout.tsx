@@ -35,28 +35,27 @@ type RecommendationTemplateLayout = {
 };
 
 export type SnapLayoutConfig = {
-	platform: 'magento' | 'bigcommerce' | 'shopify' | 'custom';
-	siteId?: string;
 	config: {
+		siteId?: string;
 		theme?: any;
 		currency: string;
 		language: string;
-		breakpoints: number[];
+		breakpoints?: number[];
 	};
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
-	search: {
+	search?: {
 		layouts: SearchTemplateLayout[];
 		settings?: SearchStoreConfigSettings & { breakpoints?: SearchStoreConfigSettings[] };
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
-	autocomplete: {
+	autocomplete?: {
 		inputSelector?: string;
 		layouts: AutocompleteTemplateLayout[];
 		settings?: AutocompleteStoreConfigSettings & { breakpoints?: AutocompleteStoreConfigSettings[] };
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
-	recommendation: {
+	recommendation?: {
 		layouts: RecommendationTemplateLayout[];
 		settings: RecommendationInstantiatorConfigSettings & { breakpoints?: RecommendationInstantiatorConfigSettings[] };
 		// settings?: RecommendationStoreConfigSettings & { breakpoints?: RecommendationStoreConfigSettings[] },
@@ -79,7 +78,7 @@ export function mapBreakpoints(breakpointsKeys: number[], breakpointSettings: un
 }
 
 export const createSearchTargeters = (layoutConfig: SnapLayoutConfig) => {
-	const layouts = layoutConfig.search.layouts || [];
+	const layouts = layoutConfig.search?.layouts || [];
 
 	return layouts.map((layout) => {
 		return {
@@ -87,10 +86,12 @@ export const createSearchTargeters = (layoutConfig: SnapLayoutConfig) => {
 			props: {
 				theme: layout.theme || layoutConfig.config.theme,
 				layout: layout.layout,
-				breakpoints: mapBreakpoints(
-					layoutConfig.config.breakpoints,
-					(layout.breakpoints || []).map((lb) => () => lb)
-				),
+				breakpoints: layoutConfig.config.breakpoints
+					? mapBreakpoints(
+							layoutConfig.config.breakpoints,
+							(layout.breakpoints || []).map((lb) => () => lb)
+					  )
+					: undefined,
 			},
 			hideTarget: true,
 			component: async () => {
@@ -101,17 +102,19 @@ export const createSearchTargeters = (layoutConfig: SnapLayoutConfig) => {
 };
 
 export function createAutocompleteTargeters(config: SnapLayoutConfig) {
-	const layouts = config.autocomplete.layouts || [];
+	const layouts = config.autocomplete?.layouts || [];
 	return layouts.map((layout) => {
 		return {
 			selector: layout.selector,
 			props: {
 				theme: layout.theme || config.config.theme,
 				layout: layout.layout,
-				breakpoints: mapBreakpoints(
-					config.config.breakpoints,
-					(layout.breakpoints || []).map((lb) => () => lb)
-				),
+				breakpoints: config.config.breakpoints
+					? mapBreakpoints(
+							config.config.breakpoints,
+							(layout.breakpoints || []).map((lb) => () => lb)
+					  )
+					: undefined,
 			},
 			hideTarget: true,
 			component: async () => {
@@ -122,7 +125,7 @@ export function createAutocompleteTargeters(config: SnapLayoutConfig) {
 }
 
 export function createRecommendationComponentMapping(config: SnapLayoutConfig): { [name: string]: RecommendationComponentObject } {
-	const layouts = config.recommendation.layouts || [];
+	const layouts = config.recommendation?.layouts || [];
 	return layouts.reduce((mapping, layout) => {
 		mapping[layout.component] = {
 			component: async () => {
@@ -131,70 +134,88 @@ export function createRecommendationComponentMapping(config: SnapLayoutConfig): 
 			props: {
 				theme: layout.theme || config.config.theme,
 				layout: layout.layout,
-				breakpoints: mapBreakpoints(
-					config.config.breakpoints,
-					(layout.breakpoints || []).map((lb) => () => lb)
-				),
+				breakpoints: config.config.breakpoints
+					? mapBreakpoints(
+							config.config.breakpoints,
+							(layout.breakpoints || []).map((lb) => () => lb)
+					  )
+					: undefined,
 			},
 		};
 		return mapping;
 	}, {} as { [name: string]: RecommendationComponentObject });
 }
 
-export function createSnapConfig(config: SnapLayoutConfig): SnapConfig {
+export function createSnapConfig(layoutConfig: SnapLayoutConfig): SnapConfig {
 	const snapConfig: SnapConfig = {
-		features: config.features,
-		url: config.url,
+		features: layoutConfig.features,
+		url: layoutConfig.url,
 		client: {
 			globals: {
-				siteId: config.siteId,
+				siteId: layoutConfig.config.siteId,
 			},
 		},
-		instantiators: {
-			recommendation: {
-				components: createRecommendationComponentMapping(config),
-				config: deepmerge(
-					config.recommendation?.settings || {},
-					getDisplaySettings(mapBreakpoints(config.config.breakpoints, config.recommendation?.settings?.breakpoints || [])) || {}
-				),
-			},
-		},
-		controllers: {
-			search: [
-				{
-					config: {
-						id: 'search',
-						plugins: [],
-						settings: deepmerge(
-							config.search.settings || {},
-							getDisplaySettings(mapBreakpoints(config.config.breakpoints, config.search.settings?.breakpoints || [])) || {}
-						),
-					},
-					targeters: createSearchTargeters(config),
-				},
-			],
-			autocomplete: [
-				{
-					config: {
-						id: 'autocomplete',
-						selector: config.autocomplete.inputSelector || 'input.searchspring-ac',
-						settings: deepmerge(
-							deepmerge(
-								{
-									trending: {
-										limit: 5,
-									},
-								},
-								config.autocomplete.settings || {}
-							),
-							getDisplaySettings(mapBreakpoints(config.config.breakpoints, config.autocomplete.settings?.breakpoints || [])) || {}
-						),
-					},
-					targeters: createAutocompleteTargeters(config),
-				},
-			],
-		},
+		instantiators: {},
+		controllers: {},
 	};
+
+	// add search controller
+	if (layoutConfig.search && snapConfig.controllers) {
+		snapConfig.controllers.search = [
+			{
+				config: {
+					id: 'search',
+					plugins: [],
+					settings: deepmerge(
+						layoutConfig.search.settings || {},
+						layoutConfig.config.breakpoints
+							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.search.settings?.breakpoints || []))
+							: {} || {}
+					),
+				},
+				targeters: createSearchTargeters(layoutConfig),
+			},
+		];
+	}
+
+	// add autocomplete controller
+	if (layoutConfig.autocomplete && snapConfig.controllers) {
+		snapConfig.controllers.autocomplete = [
+			{
+				config: {
+					id: 'autocomplete',
+					selector: layoutConfig.autocomplete.inputSelector || 'input.searchspring-ac',
+					settings: deepmerge(
+						deepmerge(
+							{
+								trending: {
+									limit: 5,
+								},
+							},
+							layoutConfig.autocomplete.settings || {}
+						),
+						layoutConfig.config.breakpoints
+							? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.autocomplete.settings?.breakpoints || []))
+							: {} || {}
+					),
+				},
+				targeters: createAutocompleteTargeters(layoutConfig),
+			},
+		];
+	}
+
+	// add recommendation instantiator
+	if (layoutConfig.recommendation && snapConfig.instantiators) {
+		snapConfig.instantiators.recommendation = {
+			components: createRecommendationComponentMapping(layoutConfig),
+			config: deepmerge(
+				layoutConfig.recommendation?.settings || {},
+				layoutConfig.config.breakpoints
+					? getDisplaySettings(mapBreakpoints(layoutConfig.config.breakpoints, layoutConfig.recommendation.settings?.breakpoints || []))
+					: {} || {}
+			),
+		};
+	}
 
 	// return new Snap(snapConfig);
 	return snapConfig;
