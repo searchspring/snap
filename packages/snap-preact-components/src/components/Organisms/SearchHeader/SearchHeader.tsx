@@ -23,7 +23,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		titleText: `Showing ${pagination.multiplePages ? `<span class="ss-results-count-range"> ${pagination.begin} - ${pagination.end} of </span>` : ''} 
 			<span class="ss-results-count-total">${pagination.totalResults}</span> 
 			result${pagination.totalResults == 1 ? '' : 's'} 
-			${search?.query && `<span>for <span class="ss-results-query">"${search.query.string}"</span></span>`}
+			${search?.query ? `<span>for <span class="ss-results-query">"${search.query.string}"</span></span>` : ''}
 		`,
 		oqText: `<div class="ss-oq">No results found for <em>"${search.originalQuery?.string}"</em>, showing results for <em>"${search.query?.string}"</em> instead.</div>`,
 		noResultsText: `${

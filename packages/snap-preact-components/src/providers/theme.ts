@@ -1,14 +1,4 @@
-import { ThemeProvider as EmotionTheme } from '@emotion/react';
-export { css, useTheme, withTheme } from '@emotion/react';
-
-interface ThemeProviderProps {
-	theme: Partial<Theme> | ((outerTheme: Theme) => Theme);
-	children?: any;
-}
-interface ThemeProvider {
-	(props: ThemeProviderProps): React.ReactElement;
-}
-export const ThemeProvider: ThemeProvider = EmotionTheme;
+export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
 export const defaultTheme: Theme = {
 	colors: {

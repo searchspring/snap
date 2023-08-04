@@ -42,6 +42,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const subProps: SidebarSubProps = {
 		FilterSummary: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.filterSummary,
 			// inherited props
@@ -53,6 +54,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 		Facets: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.facets,
 			// inherited props
@@ -64,6 +66,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 		SortBy: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.sortby,
 			// inherited props
@@ -75,6 +78,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 		PerPage: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.perpage,
 			// inherited props
@@ -86,33 +90,27 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 	};
 
-	const { pagination, filters, facets } = controller.store;
-
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__srp__sidebar')}>
-				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} filters={filters} controller={controller} />}
+			<div {...styling} className={classnames('ss__sidebar')}>
+				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
-				{!hideSortBy && (
-					<div className="ss-sortby">
-						<SortBy {...subProps.SortBy} />
-					</div>
-				)}
+				{!hideSortBy && <SortBy {...subProps.SortBy} />}
 
-				{!hidePerPage && <div className="ss-per-page">{pagination.pageSize && <PerPage {...subProps.PerPage} />}</div>}
+				{!hidePerPage && <PerPage {...subProps.PerPage} />}
 
-				{!hideFacets && <Facets {...subProps.Facets} facets={facets} />}
+				{!hideFacets && <Facets {...subProps.Facets} />}
 			</div>
 		</CacheProvider>
 	);
 });
 
 export interface SidebarProps extends ComponentProps {
-	hideFacets?: string;
-	hidePerPage?: string;
-	hideSortBy?: string;
-	hideFilterSummary?: string;
 	controller: SearchController;
+	hideFacets?: boolean;
+	hidePerPage?: boolean;
+	hideSortBy?: boolean;
+	hideFilterSummary?: boolean;
 }
 
 interface SidebarSubProps {

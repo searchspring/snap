@@ -15,7 +15,7 @@ import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, Sty
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { ResultLayout, ResultLayoutTypes } from '../ResultLayout';
+import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
 	results: ({ columns, gapSize }: ResultsProps) =>
@@ -26,7 +26,7 @@ const CSS = {
 			gridTemplateRows: 'auto',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 
-			'& .ss__result': {
+			'& .ss__result, & .ss__result-layout': {
 				boxSizing: 'border-box',
 				flex: '0 1 auto',
 				width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
@@ -43,8 +43,9 @@ const CSS = {
 			'@supports (display: grid)': {
 				display: 'grid',
 
-				'& .ss__result': {
+				'& .ss__result, & .ss__result-layout': {
 					width: 'initial',
+					flex: undefined,
 					margin: 0,
 				},
 			},

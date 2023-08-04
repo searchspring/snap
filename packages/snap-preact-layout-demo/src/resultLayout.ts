@@ -15,7 +15,6 @@ export const resultLayout: LayoutFunc = ({
 				justifyContent: 'space-around',
 				flexDirection: 'column',
 				height: '100%',
-				width: '200px',
 			},
 			items: [
 				{

@@ -11,12 +11,12 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Organisms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
-import { ResultLayoutTypes } from '../../Organisms/ResultLayout';
+import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
 	Search: ({ slideOutToggleWidth }: Partial<SearchProps>) =>
@@ -76,25 +76,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	// const displaySettings = useDisplaySettings(props?.breakpoints || {});
 	// let theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
-	props = {
-		...props,
-		// ...displaySettings,
-		...properties.theme,
-	};
-
-	const {
-		disableStyles,
-		className,
-		controller,
-		styleScript,
-		hideSidebar,
-		resultLayout,
-		hideSearchHeader,
-		hideResults,
-		hideNoResults,
-		hidetopToolBar,
-		hideBottomToolBar,
-	} = props;
+	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
 	const style: any = props.style;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
 	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
@@ -103,13 +85,11 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const subProps: SearchSubProps = {
 		TopToolbar: {
 			// default props
+			controller,
 			hideFacets: true,
 			hidefilterSummary: true,
 			hideSlideout: true,
 			slideOutToggleWidth: mobileMediaQuery,
-
-			// global theme
-			...globalTheme?.components?.toolbar,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -119,13 +99,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		BottomToolbar: {
 			// default props
+			controller,
 			hideFacets: true,
 			hidefilterSummary: true,
 			hidePerPage: true,
 			hideSortBy: true,
 			hideSlideout: true,
-			// global theme
-			...globalTheme?.components?.toolbar,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -135,10 +114,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Sidebar: {
 			// default props
+			controller,
 			hidePerPage: true,
 			hideSortBy: true,
-			// global theme
-			...globalTheme?.components?.sidebar,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -148,8 +126,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		SearchHeader: {
 			// default props
-			// global theme
-			...globalTheme?.components?.searchHeader,
+			controller,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -159,9 +136,8 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Results: {
 			// default props
+			controller,
 			resultLayout: resultLayout,
-			// global theme
-			...globalTheme?.components?.results,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -171,8 +147,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		NoResults: {
 			// default props
-			// global theme
-			...globalTheme?.components?.noResults,
+			controller,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -197,30 +172,34 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	}
 
 	return (
-		<CacheProvider>
-			<div {...styling} className={classnames('ss__search', className)}>
-				{!hideSidebar && <Sidebar {...subProps.Sidebar} controller={controller} />}
+		<ThemeProvider theme={properties.theme || {}}>
+			<CacheProvider>
+				<div {...styling} className={classnames('ss__search', className)}>
+					{!hideSidebar && <Sidebar {...subProps.Sidebar} />}
 
-				<div className={classnames('ss__search__content')}>
-					{/* do we want this? */}
-					{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
+					<div className={classnames('ss__search__content')}>
+						{/* do we want this? */}
+						{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
 
-					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
+						<SearchHeader {...subProps.SearchHeader} />
 
-					{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} controller={controller} name={'topToolBar'} />}
+						{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} />}
 
-					<div className="clear"></div>
+						<div className="clear"></div>
 
-					{store!.pagination.totalResults
-						? !hideResults && <Results {...subProps.Results} controller={controller} />
-						: store.pagination.totalResults === 0 && !hideNoResults && <NoResults {...subProps.NoResults} controller={controller} />}
+						{store.pagination.totalResults ? (
+							<Results {...subProps.Results} />
+						) : (
+							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} />
+						)}
 
-					<div className="clear"></div>
+						<div className="clear"></div>
 
-					{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} controller={controller} name={'bottomToolBar'} />}
+						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} />}
+					</div>
 				</div>
-			</div>
-		</CacheProvider>
+			</CacheProvider>
+		</ThemeProvider>
 	);
 });
 
@@ -230,18 +209,15 @@ export interface SearchProps extends ComponentProps {
 	slideOutToggleWidth?: string;
 	resultLayout?: ResultLayoutTypes;
 	hideSidebar?: boolean;
-	hideSearchHeader?: boolean;
-	hideResults?: boolean;
-	hideNoResults?: boolean;
 	hidetopToolBar?: boolean;
 	hideBottomToolBar?: boolean;
 }
 
 interface SearchSubProps {
-	Results: ResultsProps;
-	NoResults: NoResultsProps;
-	Sidebar: SidebarProps;
-	TopToolbar: ToolbarProps;
-	BottomToolbar: ToolbarProps;
-	SearchHeader: SearchHeaderProps;
+	Results: Partial<ResultsProps>;
+	NoResults: Partial<NoResultsProps>;
+	Sidebar: Partial<SidebarProps>;
+	TopToolbar: Partial<ToolbarProps>;
+	BottomToolbar: Partial<ToolbarProps>;
+	SearchHeader: Partial<SearchHeaderProps>;
 }

@@ -52,7 +52,7 @@ const Price = lazy(async () => {
 });
 
 const Rating = lazy(async () => {
-	return (await import('../../Molecules/Rating/')).Rating;
+	return (await import('../../Molecules/Rating')).Rating;
 });
 
 const Skeleton = lazy(async () => {
@@ -110,7 +110,7 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 
 		return (
 			<CacheProvider>
-				<div {...styling} className={classnames('ss__layout', className)}>
+				<div {...styling} className={classnames('ss__result-layout', className)}>
 					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
 					<LayoutElements />
 				</div>

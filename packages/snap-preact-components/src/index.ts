@@ -43,7 +43,7 @@ export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Results';
 
 // LAYOUTS
-export * from './components/Organisms/ResultLayout';
+export * from './components/Layouts/ResultLayout';
 
 // Templates
 export * from './components/Templates/Search';

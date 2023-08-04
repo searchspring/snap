@@ -13,7 +13,6 @@ import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { LoadingBarProps } from '../../Atoms/Loading';
-import { useMediaQuery } from '../../../hooks';
 import { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
@@ -67,6 +66,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const subProps: ToolbarSubProps = {
 		FilterSummary: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.filterSummary,
 			// inherited props
@@ -78,6 +78,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		Facets: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.facets,
 			// inherited props
@@ -89,6 +90,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		LoadingBar: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.loadingBar,
 			// inherited props
@@ -100,6 +102,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		Pagination: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.pagination,
 			// inherited props
@@ -111,6 +114,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		Slideout: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.slideout,
 			// inherited props
@@ -122,6 +126,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		SortBy: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.sortby,
 			// inherited props
@@ -133,6 +138,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 		PerPage: {
 			// default props
+			controller,
 			// global theme
 			...globalTheme?.components?.perpage,
 			// inherited props
@@ -145,54 +151,39 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	};
 
 	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
-	const isMobile = useMediaQuery(mobileMediaQuery);
-
-	const { pagination, filters, facets, sorting } = controller.store;
 
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toolbar', className)}>
-				{!hidefilterSummary && <FilterSummary {...subProps.FilterSummary} filters={filters} controller={controller} />}
+				{!hidefilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
-				{!hideFacets && <Facets {...subProps.Facets} facets={facets} />}
+				{!hideFacets && <Facets {...subProps.Facets} />}
 
-				<div className="ss-toolbar ss-toolbar-top">
-					{!hideSlideout && (
-						<Slideout displayAt={mobileMediaQuery} buttonContent={<div>slideoutButton</div>} {...subProps.Slideout}>
-							{/* {slideoutSlot ? (
-								cloneWithProps(slideoutSlot, { controller })
-							) : ( */}
-							<Fragment>
-								<h3>Filters</h3>
-								{/* <SidebarContents /> */}
-							</Fragment>
-							{/* )} */}
-						</Slideout>
-					)}
+				{!hideSlideout && (
+					<Slideout displayAt={mobileMediaQuery} buttonContent={<div>slideoutButton</div>} {...subProps.Slideout}>
+						{/* {slideoutSlot ? (
+							cloneWithProps(slideoutSlot, { controller })
+						) : ( */}
+						<Fragment>
+							<h3>Filters</h3>
+							{/* <SidebarContents /> */}
+						</Fragment>
+						{/* )} */}
+					</Slideout>
+				)}
 
-					{!hideSortBy && (
-						<div className="ss-toolbar-col ss-sortby">
-							{sorting.current && <SortBy {...subProps.SortBy} controller={controller} className="ss-sort-by" />}
-						</div>
-					)}
+				{!hideSortBy && <SortBy {...subProps.SortBy} />}
 
-					{!hidePerPage && (
-						<div className="ss-toolbar-col ss-per-page">
-							{pagination.pageSize && <PerPage {...subProps.PerPage} controller={controller} className="ss-perpage" />}
-						</div>
-					)}
-					{!hidePagination && (
-						<div className="ss-toolbar-col pagination">
-							{pagination.totalPages > 1 && !isMobile && <Pagination {...subProps.Pagination} pagination={pagination} />}
-						</div>
-					)}
-				</div>
+				{!hidePerPage && <PerPage {...subProps.PerPage} />}
+
+				{!hidePagination && <Pagination {...subProps.Pagination} />}
 			</div>
 		</CacheProvider>
 	);
 });
 
 export interface ToolbarProps extends ComponentProps {
+	controller: SearchController;
 	hideFacets?: boolean;
 	hidefilterSummary?: boolean;
 	hidePerPage?: boolean;
@@ -200,7 +191,6 @@ export interface ToolbarProps extends ComponentProps {
 	hidePagination?: boolean;
 	hideSlideout?: boolean;
 	slideOutToggleWidth?: string;
-	controller: SearchController;
 }
 
 interface ToolbarSubProps {
