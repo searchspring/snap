@@ -25,7 +25,7 @@ const CSS = {
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: ToolbarProps = {
+	let props: ToolbarProps = {
 		// default props
 
 		// global theme
@@ -34,6 +34,13 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.toolbar,
 	};
+
+	if (properties.theme?.namedComponents && properties.name) {
+		props = {
+			...props,
+			...properties.theme?.namedComponents[properties.name as any],
+		};
+	}
 
 	const {
 		controller,

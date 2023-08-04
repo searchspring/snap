@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 
 import classnames from 'classnames';
-import deepmerge from 'deepmerge';
 
 import type { SearchController } from '@searchspring/snap-controller';
 
@@ -67,23 +66,35 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		...properties.theme?.components?.search,
 	};
 
+	if (properties.theme?.namedComponents && properties.name) {
+		props = {
+			...props,
+			...properties.theme?.namedComponents[properties.name as any],
+		};
+	}
 	//breakpoints?
 	// const displaySettings = useDisplaySettings(props?.breakpoints || {});
 	// let theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
-	let theme;
-	//specific component theme spreading
-	if (props.name) {
-		theme = deepmerge(props.theme || {}, globalTheme?.namedComponents[props.name as any] || {});
-	}
-
 	props = {
 		...props,
 		// ...displaySettings,
-		theme,
+		...properties.theme,
 	};
 
-	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout } = props;
+	const {
+		disableStyles,
+		className,
+		controller,
+		styleScript,
+		hideSidebar,
+		resultLayout,
+		hideSearchHeader,
+		hideResults,
+		hideNoResults,
+		hidetopToolBar,
+		hideBottomToolBar,
+	} = props;
 	const style: any = props.style;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
 	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
@@ -194,21 +205,19 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{/* do we want this? */}
 					{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
 
-					<SearchHeader {...subProps.SearchHeader} controller={controller} />
+					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
-					<Toolbar {...subProps.TopToolbar} controller={controller} name={'topToolBar'} />
-
-					<div className="clear"></div>
-
-					{store!.pagination.totalResults ? (
-						<Results {...subProps.Results} controller={controller} />
-					) : (
-						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
-					)}
+					{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} controller={controller} name={'topToolBar'} />}
 
 					<div className="clear"></div>
 
-					<Toolbar {...subProps.BottomToolbar} controller={controller} name={'bottomToolBar'} />
+					{store!.pagination.totalResults
+						? !hideResults && <Results {...subProps.Results} controller={controller} />
+						: store.pagination.totalResults === 0 && !hideNoResults && <NoResults {...subProps.NoResults} controller={controller} />}
+
+					<div className="clear"></div>
+
+					{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} controller={controller} name={'bottomToolBar'} />}
 				</div>
 			</div>
 		</CacheProvider>
@@ -218,22 +227,14 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 //todo improve the controller spreading here..
 export interface SearchProps extends ComponentProps {
 	controller: SearchController;
-	facetLayout?: 'horizontal' | 'vertical';
-	filterSummaryLayout?: 'horizontal' | 'vertical';
-	sortLayout?: 'horizontal' | 'vertical';
-	perPageLayout?: 'horizontal' | 'vertical';
+	slideOutToggleWidth?: string;
 	resultLayout?: ResultLayoutTypes;
 	hideSidebar?: boolean;
-	perPageSortLabel?: string;
-	sortByLabel?: string;
-	slideOutToggleWidth?: string;
-	slideoutSlot?: JSX.Element;
-	topSideBarSlot?: JSX.Element;
-	bottomSideBarSlot?: JSX.Element;
-	bottomContentSlot?: JSX.Element;
-	topContentSlot?: JSX.Element;
-	noResultsTitle?: string | JSX.Element;
-	searchTitle?: string | JSX.Element;
+	hideSearchHeader?: boolean;
+	hideResults?: boolean;
+	hideNoResults?: boolean;
+	hidetopToolBar?: boolean;
+	hideBottomToolBar?: boolean;
 }
 
 interface SearchSubProps {
