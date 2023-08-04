@@ -7,7 +7,6 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { parseProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { AutocompleteController } from '@searchspring/snap-controller';
 
@@ -28,8 +27,7 @@ export const SeeMore = observer((properties: SeeMoreProps): JSX.Element => {
 		...properties.theme?.components?.string,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-	const { onClick, icon, iconColor, disableStyles, className, style, controller } = parsedProps;
+	const { onClick, icon, iconColor, disableStyles, className, style, controller } = props;
 
 	if (!props.content && controller?.store) {
 		const { pagination, filters, search } = (properties.controller as AutocompleteController).store;

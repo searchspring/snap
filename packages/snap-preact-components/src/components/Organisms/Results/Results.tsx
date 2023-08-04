@@ -15,8 +15,7 @@ import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, Sty
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { parseProps } from '../../../utilities';
-import { Layout, LayoutTypes } from '../../Layouts/Layout';
+import { ResultLayout, ResultLayoutTypes } from '../ResultLayout';
 
 const CSS = {
 	results: ({ columns, gapSize }: ResultsProps) =>
@@ -93,9 +92,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		theme,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { disableStyles, className, layout, style, resultLayout, controller } = parsedProps;
+	const { disableStyles, className, layout, style, resultLayout, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -146,7 +143,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
 								if (resultLayout && controller) {
-									return <Layout controller={controller} data={{ result }} layout={resultLayout} />;
+									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
 								} else {
 									return (
 										<Result
@@ -176,7 +173,7 @@ export interface ResultsProps extends ComponentProps {
 	layout?: ResultsLayoutType;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
-	resultLayout?: LayoutTypes;
+	resultLayout?: ResultLayoutTypes;
 }
 
 interface ResultsSubProps {

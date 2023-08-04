@@ -128,7 +128,7 @@ describe('Button Component', () => {
 			const rendered = render(<Button disableStyles>{content}</Button>);
 
 			const buttonElement = rendered!.container.querySelector('.ss__button');
-			expect(buttonElement?.classList.length).toBe(2);
+			expect(buttonElement?.classList.length).toBe(1);
 			expect(buttonElement).toBeInTheDocument();
 		});
 

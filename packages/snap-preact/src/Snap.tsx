@@ -469,7 +469,7 @@ export class Snap {
 						render(
 							<BranchOverride
 								{...props}
-								name={branchOverride}
+								branch={branchOverride}
 								onRemoveClick={() => {
 									cookies.unset(BRANCH_COOKIE);
 									const urlState = url(window.location.href);

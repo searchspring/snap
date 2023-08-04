@@ -6,7 +6,6 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { parseProps } from '../../../utilities';
 
 const CSS = {
 	loadingBar: ({ color, height, backgroundColor, theme, animation }: Partial<LoadingBarProps> & { animation: Keyframes }) =>
@@ -56,9 +55,7 @@ export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element =>
 		...properties.theme?.components?.loadingbar,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { active, color, backgroundColor, height, disableStyles, className, style } = parsedProps;
+	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {

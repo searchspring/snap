@@ -255,7 +255,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		...properties.theme?.components?.branchOverride,
 	};
 
-	const { name, details, error, className, darkMode, disableStyles, style, onRemoveClick } = props;
+	const { branch, details, error, className, darkMode, disableStyles, style, onRemoveClick } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
@@ -288,7 +288,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		styling.css = [style];
 	}
 
-	return (details || error) && name ? (
+	return (details || error) && branch ? (
 		<div
 			className={classnames(
 				'ss__branch-override',
@@ -322,7 +322,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
-						onRemoveClick && onRemoveClick(e, name);
+						onRemoveClick && onRemoveClick(e, branch);
 					}}
 				>
 					{componentThemes[themeName as keyof typeof componentThemes].top.button.content}
@@ -342,11 +342,11 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 							<span>{error.message}</span>
 						</>
 					) : (
-						name
+						branch
 					)}
 				</span>
 
-				<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
+				<span className="ss__branch-override__bottom__right">{error ? branch : details?.lastModified}</span>
 				<div className="ss__branch-override__bottom__content">
 					{error?.description || componentThemes[themeName as keyof typeof componentThemes].bottom.content}
 				</div>
@@ -362,7 +362,7 @@ interface BranchOverrideSubProps {
 }
 
 export interface BranchOverrideProps extends ComponentProps {
-	name: string;
+	branch: string;
 	error?: {
 		message: string;
 		description: string;
@@ -371,6 +371,6 @@ export interface BranchOverrideProps extends ComponentProps {
 		url: string;
 		lastModified: string;
 	};
-	onRemoveClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, name: string) => void;
+	onRemoveClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, branch: string) => void;
 	darkMode?: boolean;
 }

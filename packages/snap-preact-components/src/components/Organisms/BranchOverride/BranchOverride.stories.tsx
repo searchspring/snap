@@ -32,7 +32,7 @@ export default {
 		),
 	],
 	argTypes: {
-		name: {
+		branch: {
 			description: 'bundle branch name',
 			type: { required: true },
 			table: {
@@ -87,7 +87,7 @@ export default {
 
 export const Auto = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Auto.args = {
-	name: 'next',
+	branch: 'next',
 	details: {
 		url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js',
 		lastModified: '1 Feb 2022 1:02:03 GMT',
@@ -96,7 +96,7 @@ Auto.args = {
 
 export const Dark = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Dark.args = {
-	name: 'next',
+	branch: 'next',
 	details: {
 		url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js',
 		lastModified: '1 Feb 2022 1:02:03 GMT',
@@ -106,7 +106,7 @@ Dark.args = {
 
 export const Error = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Error.args = {
-	name: 'testing',
+	branch: 'testing',
 	error: {
 		message: 'Branch not found!',
 		description: 'Incorrect branch name or branch no longer exists.',
@@ -115,7 +115,7 @@ Error.args = {
 
 export const Light = (args: BranchOverrideProps) => <BranchOverride {...args} />;
 Light.args = {
-	name: 'next',
+	branch: 'next',
 	details: {
 		url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js',
 		lastModified: '1 Feb 2022 1:02:03 GMT',

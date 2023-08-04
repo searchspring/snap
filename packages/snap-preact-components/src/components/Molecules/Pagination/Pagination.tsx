@@ -11,7 +11,6 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { parseProps } from '../../../utilities';
 
 const CSS = {
 	pagination: ({ theme }: { theme: Theme }) =>
@@ -46,8 +45,6 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		...properties.theme?.components?.pagination,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
 	const {
 		pagination,
 		controller,
@@ -66,7 +63,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		disableStyles,
 		className,
 		style,
-	} = parsedProps;
+	} = props;
 
 	const subProps: PaginationSubProps = {
 		icon: {

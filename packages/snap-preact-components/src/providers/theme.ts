@@ -44,4 +44,5 @@ export interface Theme {
 		};
 	};
 	components?: any;
+	namedComponents?: any;
 }

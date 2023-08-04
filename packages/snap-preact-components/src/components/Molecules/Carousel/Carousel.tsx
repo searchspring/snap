@@ -353,7 +353,7 @@ export type CarouselProps = {
 	onInit?: (swiper: SwiperCore) => void;
 	modules?: any[];
 	children: JSX.Element[];
-} & SwiperOptions &
+} & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;
 
 interface CarouselSubProps {

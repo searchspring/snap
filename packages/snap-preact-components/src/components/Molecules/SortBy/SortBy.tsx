@@ -10,7 +10,6 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { parseProps } from '../../../utilities';
 
 const CSS = {
 	sortBy: ({}) => css({}),
@@ -30,9 +29,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		...properties.theme?.components?.Sortby,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { sorting, controller, label, disableStyles, className, style } = parsedProps;
+	const { sorting, controller, label, disableStyles, className, style } = props;
 
 	const store = sorting || controller?.store?.sorting;
 

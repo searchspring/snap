@@ -11,7 +11,6 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
-import { parseProps } from '../../../utilities';
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -31,9 +30,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		...properties.theme?.components?.facets,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { limit, onFacetOptionClick, disableStyles, className, style, controller } = parsedProps;
+	const { limit, onFacetOptionClick, disableStyles, className, style, controller } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);

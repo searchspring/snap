@@ -3,6 +3,7 @@ import { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 
 export interface ComponentProps {
+	name?: string;
 	className?: string;
 	disableStyles?: boolean;
 	style?: string | Record<string, any>;

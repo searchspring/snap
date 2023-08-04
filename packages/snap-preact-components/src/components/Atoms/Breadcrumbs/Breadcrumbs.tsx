@@ -7,7 +7,6 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { parseProps } from '../../../utilities';
 
 const CSS = {
 	breadcrumbs: () =>
@@ -35,9 +34,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 		...properties.theme?.components?.breadcrumbs,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { data, separator, disableStyles, className, style } = parsedProps;
+	const { data, separator, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {

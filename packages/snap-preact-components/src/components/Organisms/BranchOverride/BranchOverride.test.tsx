@@ -12,7 +12,7 @@ describe('BranchOverride Component', () => {
 	const lastModified = '07 Jan 2022 22:42:39 GMT';
 
 	const props = {
-		name: branch,
+		branch: branch,
 		details: {
 			url,
 			lastModified,
@@ -93,13 +93,13 @@ describe('BranchOverride Component', () => {
 	});
 
 	it('displays branch failure on bad branch', async () => {
-		const name = 'badBranch';
+		const branch = 'badBranch';
 		const error = {
 			message: 'Branch not found...',
 			description: 'Unable to find the branch.',
 		};
 
-		const rendered = render(<BranchOverride name={name} error={error} />);
+		const rendered = render(<BranchOverride branch={branch} error={error} />);
 
 		// wait for rendering of component
 		await waitFor(() => {
@@ -112,7 +112,7 @@ describe('BranchOverride Component', () => {
 		// branch name
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement?.innerHTML).toContain(name);
+		expect(bottomRightElement?.innerHTML).toContain(branch);
 
 		// error message
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
@@ -144,7 +144,7 @@ describe('BranchOverride Component', () => {
 		// branch name
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement?.innerHTML).toContain(props.name);
+		expect(bottomRightElement?.innerHTML).toContain(props.branch);
 
 		// error message
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');

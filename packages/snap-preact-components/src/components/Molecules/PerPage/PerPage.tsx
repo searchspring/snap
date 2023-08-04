@@ -11,7 +11,6 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { parseProps } from '../../../utilities';
 
 const CSS = {
 	perPage: ({}) => css({}),
@@ -31,9 +30,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 		...properties.theme?.components?.perPage,
 	};
 
-	const parsedProps = parseProps(props.controller!, props);
-
-	const { pagination, controller, label, disableStyles, className, style } = parsedProps;
+	const { pagination, controller, label, disableStyles, className, style } = props;
 
 	const store = pagination || controller?.store?.pagination;
 

@@ -8,7 +8,6 @@ import { ComponentProps, StylingCSS } from '../../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { parseProps } from '../../../../utilities';
 
 const CSS = {
 	banner: () =>
@@ -30,9 +29,8 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.banner,
 	};
-	const parsedProps = parseProps(props.controller!, props);
 
-	const { controller, type, disableStyles, className, style } = parsedProps;
+	const { controller, type, disableStyles, className, style } = props;
 
 	const content = props.content || controller?.store?.merchandising.content;
 

@@ -4,7 +4,7 @@ import { Result } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
-import { Layout } from '../../../types';
+import { ResultsLayout as Layout } from '../../../types';
 import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';

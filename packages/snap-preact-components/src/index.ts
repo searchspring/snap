@@ -5,7 +5,7 @@ export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
 export * from './components/Atoms/Flex';
 export * from './components/Atoms/FormattedNumber';
-export * from './components/Atoms/HTML';
+export * from './components/Atoms/String';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
@@ -36,20 +36,19 @@ export * from './components/Molecules/FacetSlider';
 export * from './components/Molecules/Rating';
 
 // ORGANISMS
-export * from './components/Organisms/Autocomplete';
 export * from './components/Organisms/BranchOverride';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
-export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
 
 // LAYOUTS
-export * from './components/Layouts/Layout';
-export * from './components/Layouts/AutocompleteLayout';
-export * from './components/Layouts/SearchLayout';
-export * from './components/Layouts/RecommendationLayout';
-export * from './components/Layouts/CarouselLayout';
+export * from './components/Organisms/ResultLayout';
+
+// Templates
+export * from './components/Templates/Search';
+export * from './components/Templates/Autocomplete';
+export * from './components/Templates/Recommendation';
 
 // TYPES
 export * from './types';

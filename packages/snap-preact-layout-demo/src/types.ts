@@ -30,8 +30,8 @@ declare global {
 
 	// layout types
 	type LayoutElement = ComponentTypes.LayoutElement;
-	type LayoutFunc<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.LayoutFunc<Controller>;
-	type LayoutTypes<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.LayoutTypes<Controller>;
+	type LayoutFunc<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.ResultLayoutFunc<Controller>;
+	type LayoutTypes<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.ResultLayoutTypes<Controller>;
 
 	// services types
 	type Next = EventManagerTypes.Next;

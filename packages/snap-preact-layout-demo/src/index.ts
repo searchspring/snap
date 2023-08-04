@@ -1,13 +1,5 @@
 import { SnapLayout } from '@searchspring/snap-preact';
-import { searchMobile } from './layouts/mobile/searchMobile';
-import { searchTablet } from './layouts/tablet/searchTablet';
-import { searchDesktop } from './layouts/desktop/searchDesktop';
-import { acDesktop } from './layouts/desktop/acDesktop';
-import { acMobile } from './layouts/mobile/acMobile';
-import { acTablet } from './layouts/tablet/acTablet';
-import { recsMobile } from './layouts/mobile/recsMobile';
-import { recsTablet } from './layouts/tablet/recsTablet';
-import { recsDesktop } from './layouts/desktop/recsDesktop';
+import { resultLayout } from './resultLayout';
 
 import * as themes from './themes';
 
@@ -51,7 +43,8 @@ new SnapLayout({
 		layouts: [
 			{
 				selector: '#searchspring-layout',
-				breakpoints: [searchMobile, searchTablet, searchDesktop],
+				template: 'Search',
+				resultLayout: resultLayout,
 			},
 		],
 	},
@@ -62,7 +55,8 @@ new SnapLayout({
 		layouts: [
 			{
 				component: 'Recs',
-				breakpoints: [recsMobile, recsTablet, recsDesktop],
+				template: 'Recommendation',
+				resultLayout: resultLayout,
 			},
 		],
 	},
@@ -71,7 +65,8 @@ new SnapLayout({
 		layouts: [
 			{
 				selector: 'input.searchspring-ac',
-				breakpoints: [acMobile, acTablet, acDesktop],
+				template: 'Autocomplete',
+				resultLayout: resultLayout,
 			},
 		],
 	},
