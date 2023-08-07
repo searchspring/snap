@@ -214,10 +214,10 @@ export interface SearchProps extends ComponentProps {
 }
 
 interface SearchSubProps {
-	Results: Partial<ResultsProps>;
-	NoResults: Partial<NoResultsProps>;
-	Sidebar: Partial<SidebarProps>;
-	TopToolbar: Partial<ToolbarProps>;
-	BottomToolbar: Partial<ToolbarProps>;
-	SearchHeader: Partial<SearchHeaderProps>;
+	Results: ResultsProps;
+	NoResults: NoResultsProps;
+	Sidebar: SidebarProps;
+	TopToolbar: ToolbarProps;
+	BottomToolbar: ToolbarProps;
+	SearchHeader: SearchHeaderProps;
 }
