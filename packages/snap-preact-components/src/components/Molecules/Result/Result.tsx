@@ -9,7 +9,7 @@ import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, cloneWithProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, ResultsLayout, ResultsLayoutType, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -76,15 +76,11 @@ const CSS = {
 export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: ResultProps = {
-		// default props
+	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.GRID,
-		// global theme
-		...globalTheme?.components?.result,
-		// props
-		...properties,
-		...properties.theme?.components?.result,
 	};
+
+	const props = mergeProps('result', globalTheme, defaultProps, properties);
 
 	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
 		props;
@@ -120,8 +116,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		image: {
 			// default props
 			className: 'ss__result__image',
-			alt: core?.name,
-			src: images?.active || core?.imageUrl,
+			alt: core?.name || '',
+			src: images?.active || core?.imageUrl || '',
 			hoverSrc: images?.hover,
 			// global theme
 			...globalTheme?.components?.image,
@@ -201,8 +197,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 });
 
 interface ResultSubProps {
-	badge: BadgeProps;
-	price: PriceProps;
+	badge: Partial<BadgeProps>;
+	price: Partial<PriceProps>;
 	image: ImageProps;
 }
 interface TruncateTitleProps {
@@ -216,7 +212,7 @@ export interface ResultProps extends ComponentProps {
 	hideTitle?: boolean;
 	hideImage?: boolean;
 	hidePricing?: boolean;
-	detailSlot?: JSX.Element;
+	detailSlot?: JSX.Element | JSX.Element[];
 	fallback?: string;
 	layout?: ResultsLayoutType;
 	truncateTitle?: TruncateTitleProps;

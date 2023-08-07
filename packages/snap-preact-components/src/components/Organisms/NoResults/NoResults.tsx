@@ -4,6 +4,7 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
+import { mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { SearchController } from '@searchspring/snap-controller';
@@ -15,14 +16,10 @@ const CSS = {
 export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: NoResultsProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.noresults,
-		// props
-		...properties,
-		...properties.theme?.components?.noresults,
-	};
+	const defaultProps: Partial<NoResultsProps> = {};
+
+	const props = mergeProps('noResults', globalTheme, defaultProps, properties);
+
 	const { controller, disableStyles, style } = props;
 
 	const styling: { css?: StylingCSS } = {};

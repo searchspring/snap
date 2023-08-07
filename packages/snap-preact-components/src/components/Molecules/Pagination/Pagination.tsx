@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
@@ -34,16 +34,11 @@ const CSS = {
 export const Pagination = observer((properties: PaginationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: PaginationProps = {
-		// default props
+	const defaultProps: Partial<PaginationProps> = {
 		pages: 5,
-		// global theme
-		...globalTheme?.components?.pagination,
-		// props
-		...properties,
-		...properties.theme?.components?.pagination,
 	};
+
+	const props = mergeProps('pagination', globalTheme, defaultProps, properties);
 
 	const {
 		pagination,

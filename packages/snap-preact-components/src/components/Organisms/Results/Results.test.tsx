@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { Results } from './Results';
 import { ResultsLayout as Layout } from '../../../types';
-import { ThemeProvider } from '../../../providers';
+import { Theme, ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import type { SearchResultStore } from '@searchspring/snap-store-mobx';
 

@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	badge: ({ position }: BadgeProps) =>
@@ -19,19 +20,15 @@ const CSS = {
 
 export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
-	const props: BadgeProps = {
-		// default props
+	const defaultProps: Partial<BadgeProps> = {
 		position: {
 			top: 0,
 			left: 0,
 		},
-		// global theme
-		...globalTheme?.components?.badge,
-		// props
-		...properties,
-		...properties.theme?.components?.badge,
 	};
+
+	const props = mergeProps('badge', globalTheme, defaultProps, properties);
+
 	const { content, title, children, position, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};

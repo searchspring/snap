@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	String: () => css({}),
@@ -12,15 +13,9 @@ const CSS = {
 
 export const String = observer((properties: StringProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<StringProps> = {};
 
-	const props: StringProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.string,
-		// props
-		...properties,
-		...properties.theme?.components?.string,
-	};
+	const props = mergeProps('string', globalTheme, defaultProps, properties);
 
 	const { content, disableStyles, className, style } = props;
 

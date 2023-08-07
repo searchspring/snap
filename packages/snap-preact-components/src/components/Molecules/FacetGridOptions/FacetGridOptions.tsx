@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
@@ -76,17 +77,12 @@ const CSS = {
 export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: FacetGridOptionsProps = {
-		// default props
+	const defaultProps: Partial<FacetGridOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
-		// global theme
-		...globalTheme?.components?.facetGridOptions,
-		// props
-		...properties,
-		...properties.theme?.components?.facetGridOptions,
 	};
+
+	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
 
 	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 

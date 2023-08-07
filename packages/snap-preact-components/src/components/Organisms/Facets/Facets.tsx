@@ -8,7 +8,7 @@ import deepmerge from 'deepmerge';
 
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
@@ -20,15 +20,11 @@ const CSS = {
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	let props: FacetsProps = {
-		// default props
+	const defaultProps: Partial<FacetsProps> = {
 		facets: properties.controller?.store?.facets,
-		// global theme
-		...globalTheme?.components?.facets,
-		// props
-		...properties,
-		...properties.theme?.components?.facets,
 	};
+
+	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
 	const { limit, onFacetOptionClick, disableStyles, className, style, controller } = props;
 
@@ -104,7 +100,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 });
 
 interface FacetsSubProps {
-	facet: FacetProps;
+	facet: Partial<FacetProps>;
 }
 
 export type IndividualFacetType = ValueFacet | RangeFacet;

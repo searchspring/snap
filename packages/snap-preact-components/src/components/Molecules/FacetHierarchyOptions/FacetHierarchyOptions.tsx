@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
@@ -54,15 +55,9 @@ const CSS = {
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
+	const defaultProps: Partial<FacetHierarchyOptionsProps> = {};
 
-	const props: FacetHierarchyOptionsProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.facetHierarchyOptions,
-		//props
-		...properties,
-		...properties.theme?.components?.facetHierarchyOptions,
-	};
+	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style } = props;
 

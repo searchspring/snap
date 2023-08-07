@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const _CSS = {
 	flex: ({
@@ -53,16 +54,10 @@ const _CSS = {
 
 export const Flex = observer((properties: FlexProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<FlexProps> = {};
 
-	const props: FlexProps = {
-		// default props
+	const props = mergeProps('flex', globalTheme, defaultProps, properties);
 
-		// global theme
-		...globalTheme?.components?.flex,
-		// props
-		...properties,
-		...properties.theme?.components?.flex,
-	};
 	const {
 		children,
 		flex,

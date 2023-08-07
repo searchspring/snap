@@ -9,7 +9,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
 
@@ -20,15 +20,10 @@ const CSS = {
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: SidebarProps = {
-		// default props
+	const defaultProps: Partial<SidebarProps> = {};
 
-		// global theme
-		...globalTheme?.components?.sidebar,
-		// props
-		...properties,
-		...properties.theme?.components?.sidebar,
-	};
+	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
+
 	const { controller, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
@@ -68,7 +63,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			// default props
 			controller,
 			// global theme
-			...globalTheme?.components?.sortby,
+			...globalTheme?.components?.sortBy,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -80,7 +75,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			// default props
 			controller,
 			// global theme
-			...globalTheme?.components?.perpage,
+			...globalTheme?.components?.perPage,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -114,8 +109,8 @@ export interface SidebarProps extends ComponentProps {
 }
 
 interface SidebarSubProps {
-	FilterSummary: FilterSummaryProps;
-	Facets: FacetsProps;
-	SortBy: SortByProps;
-	PerPage: PerPageProps;
+	FilterSummary: Partial<FilterSummaryProps>;
+	Facets: Partial<FacetsProps>;
+	SortBy: Partial<SortByProps>;
+	PerPage: Partial<PerPageProps>;
 }

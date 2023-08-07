@@ -3,7 +3,6 @@ import { Fragment, h, toChildArray } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
-import { Theme, useTheme } from '../../../../providers';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../../types';
@@ -14,18 +13,7 @@ const CSS = {
 };
 
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-
-	const props: RecommendationProfileTrackerProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.RecommendationProfileTracker,
-		// props
-		...properties,
-		...properties.theme?.components?.RecommendationProfileTracker,
-	};
-
-	const { children, controller, className, style, disableStyles } = props;
+	const { children, controller, className, style, disableStyles } = properties;
 
 	const childs = toChildArray(children);
 

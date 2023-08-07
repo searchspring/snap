@@ -6,11 +6,12 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { FlexProps } from '../../Atoms/Flex/Flex';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 import { containerize } from './containerize';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
+import type { FlexProps } from '../../Atoms/Flex/Flex';
 import type { ComponentProps, StylingCSS } from '../../../types';
 import type { ButtonProps } from '../../Atoms/Button';
 import type { IconProps } from '../../Atoms/Icon';
@@ -75,16 +76,10 @@ const CSS = {
 
 export const ResultLayout = observer((properties: ResultLayoutProps) => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<ResultLayoutProps> = {};
 
-	const props: ResultLayoutProps = {
-		// default props
+	const props = mergeProps('resultLayout', globalTheme, defaultProps, properties);
 
-		// global theme
-		...globalTheme?.components?.layout,
-		// props
-		...properties,
-		...properties.theme?.components?.layout,
-	};
 	const { controller, result, disableStyles, className, style } = props;
 	const layout = props.layout;
 

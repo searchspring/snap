@@ -30,7 +30,7 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 
 // Button component props
 // https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-button--default
-export const button = {
+export const button: ButtonProps = {
 	disableStyles: true,
 	styleScript: buttonStyleScript,
 };

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	overlay: ({ color, transitionSpeed }: Partial<OverlayProps>) =>
@@ -27,17 +28,12 @@ const CSS = {
 
 export function Overlay(properties: OverlayProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
-	const props: OverlayProps = {
-		// default props
+	const defaultProps: Partial<OverlayProps> = {
 		color: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
-		// global theme
-		...globalTheme?.components?.overlay,
-		// props
-		...properties,
-		...properties.theme?.components?.overlay,
 	};
+
+	const props = mergeProps('overlay', globalTheme, defaultProps, properties);
 
 	const { active, color, transitionSpeed, onClick, disableStyles, className, style } = props;
 

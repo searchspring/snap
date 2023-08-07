@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { iconPaths, IconType } from './paths';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	icon: ({ color, height, width, size, theme }: IconProps) =>
@@ -21,17 +22,13 @@ const CSS = {
 export function Icon(properties: IconProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: IconProps = {
-		// default props
+	const defaultProps: Partial<IconProps> = {
 		size: '16px',
 		viewBox: '0 0 56 56',
-		// global theme
-		...globalTheme?.components?.icon,
-		// props
-		...properties,
-		...properties.theme?.components?.icon,
 	};
+
+	const props = mergeProps('icon', globalTheme, defaultProps, properties);
+
 	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;

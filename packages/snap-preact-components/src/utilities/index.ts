@@ -5,3 +5,4 @@ export * from './sprintf';
 export * from './LightenDarkenColor';
 export * from './shiftColor';
 export * from './parseProps';
+export * from './mergeProps';

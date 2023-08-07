@@ -7,7 +7,7 @@ import { useState } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
 import { ComponentProps, StylingCSS } from '../../../types';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
 type componentTheme = {
@@ -247,13 +247,9 @@ const componentThemes = {
 export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: BranchOverrideProps = {
-		// global theme
-		...globalTheme?.components?.branchOverride,
-		// props
-		...properties,
-		...properties.theme?.components?.branchOverride,
-	};
+	const defaultProps: Partial<BranchOverrideProps> = {};
+
+	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
 	const { branch, details, error, className, darkMode, disableStyles, style, onRemoveClick } = props;
 
@@ -358,7 +354,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 };
 
 interface BranchOverrideSubProps {
-	icon: IconProps;
+	icon: Partial<IconProps>;
 }
 
 export interface BranchOverrideProps extends ComponentProps {

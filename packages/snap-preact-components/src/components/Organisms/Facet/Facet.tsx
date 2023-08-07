@@ -16,7 +16,7 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, StylingCSS } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
-import { defined, cloneWithProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 
@@ -57,9 +57,7 @@ const CSS = {
 export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	let props: FacetProps = {
-		// default props
+	const defaultProps: Partial<FacetProps> = {
 		limit: 12,
 		disableOverflow: false,
 		iconCollapse: 'angle-up',
@@ -69,12 +67,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
 		searchable: false,
-		// global theme
-		...globalTheme?.components?.facet,
-		// props
-		...properties,
-		...properties.theme?.components?.facet,
 	};
+
+	let props = mergeProps('facet', globalTheme, defaultProps, properties);
 
 	//manual props override on a per facet display type level using the display prop
 	if (props.display && props.display[props.facet?.display]) {
@@ -347,15 +342,15 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 });
 
 interface FacetSubProps {
-	dropdown: DropdownProps;
-	facetListOptions: FacetListOptionsProps;
-	facetGridOptions: FacetGridOptionsProps;
-	facetPaletteOptions: FacetPaletteOptionsProps;
-	facetHierarchyOptions: FacetHierarchyOptionsProps;
-	facetSlider: FacetSliderProps;
-	searchInput: SearchInputProps;
-	icon: IconProps;
-	showMoreLessIcon: IconProps;
+	dropdown: Partial<DropdownProps>;
+	facetListOptions: Partial<FacetListOptionsProps>;
+	facetGridOptions: Partial<FacetGridOptionsProps>;
+	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
+	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
+	facetSlider: Partial<FacetSliderProps>;
+	searchInput: Partial<SearchInputProps>;
+	icon: Partial<IconProps>;
+	showMoreLessIcon: Partial<IconProps>;
 }
 
 export interface FacetProps extends OptionalFacetProps {
@@ -369,8 +364,8 @@ interface OptionalFacetProps extends ComponentProps {
 	iconColor?: string;
 	iconExpand?: IconType | string;
 	limit?: number;
-	overflowSlot?: JSX.Element;
-	optionsSlot?: JSX.Element;
+	overflowSlot?: JSX.Element | JSX.Element[];
+	optionsSlot?: JSX.Element | JSX.Element[];
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;

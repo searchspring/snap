@@ -11,7 +11,7 @@ import type { SwiperOptions } from 'swiper';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -32,19 +32,15 @@ const CSS = {
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	let props: RecommendationProps = {
-		// default props
+	const defaultProps: Partial<RecommendationProps> = {
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
-		// global theme
-		...globalTheme?.components?.recommendation,
-		...properties,
-		// props
-		...properties.theme?.components?.recommendation,
 	};
+
+	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {

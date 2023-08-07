@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
@@ -56,18 +56,14 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: SelectProps = {
-		// default props
+	const defaultProps: Partial<SelectProps> = {
 		iconOpen: 'angle-down',
 		iconClose: 'angle-up',
 		separator: ': ',
 		startOpen: false,
-		// global theme
-		...globalTheme?.components?.select,
-		// props
-		...properties,
-		...properties.theme?.components?.select,
 	};
+
+	const props = mergeProps('select', globalTheme, defaultProps, properties);
 
 	const {
 		backgroundColor,
@@ -272,9 +268,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 });
 
 interface SelectSubProps {
-	button: ButtonProps;
-	dropdown: DropdownProps;
-	icon: IconProps;
+	button: Partial<ButtonProps>;
+	dropdown: Partial<DropdownProps>;
+	icon: Partial<IconProps>;
 }
 
 export type Option = {

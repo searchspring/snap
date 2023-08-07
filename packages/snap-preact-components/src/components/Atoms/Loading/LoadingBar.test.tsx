@@ -7,7 +7,7 @@ import { ThemeProvider } from '../../../providers';
 describe('LoadingBar Component', () => {
 	const theme = {
 		components: {
-			loadingbar: {
+			loadingBar: {
 				color: 'rgb(200, 100, 50)',
 			},
 		},
@@ -97,7 +97,7 @@ describe('LoadingBar Component', () => {
 		);
 		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar')!;
 		const styles = getComputedStyle(loadingbarElement);
-		expect(styles.backgroundColor).toBe(theme.components.loadingbar.color);
+		expect(styles.backgroundColor).toBe(theme.components.loadingBar.color);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -105,14 +105,14 @@ describe('LoadingBar Component', () => {
 		const rendered = render(<LoadingBar {...args} theme={theme} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar')!;
 		const styles = getComputedStyle(loadingbarElement);
-		expect(styles.backgroundColor).toBe(theme.components.loadingbar.color);
+		expect(styles.backgroundColor).toBe(theme.components.loadingBar.color);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = { active: true };
 		const themeOverride = {
 			components: {
-				loadingbar: {
+				loadingBar: {
 					color: 'rgb(123, 123, 123)',
 				},
 			},
@@ -124,6 +124,6 @@ describe('LoadingBar Component', () => {
 		);
 		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar')!;
 		const styles = getComputedStyle(loadingbarElement);
-		expect(styles.backgroundColor).toBe(themeOverride.components.loadingbar.color);
+		expect(styles.backgroundColor).toBe(themeOverride.components.loadingBar.color);
 	});
 });

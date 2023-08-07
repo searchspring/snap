@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
@@ -27,8 +27,7 @@ const CSS = {
 export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: FilterSummaryProps = {
-		// default props
+	const defaultProps: Partial<FilterSummaryProps> = {
 		title: 'Current Filters',
 		clearAllLabel: 'Clear All',
 		clearAllIcon: 'close-thin',
@@ -36,12 +35,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		filters: properties.controller?.store?.filters,
 		onClearAllClick: () => properties.controller?.urlManager.remove('filter').remove('page').go(),
 		separator: ':',
-		// global theme
-		...globalTheme?.components?.filterSummary,
-		// props
-		...properties,
-		...properties.theme?.components?.filterSummary,
 	};
+
+	const props = mergeProps('filterSummary', globalTheme, defaultProps, properties);
 
 	const {
 		filters,
@@ -62,7 +58,6 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	const subProps: FilterSummarySubProps = {
 		filter: {
 			// default props
-			clearAllLabel: '',
 			className: 'ss__filter-summary__filter',
 			// global theme
 			...globalTheme?.components?.filter,
@@ -126,5 +121,5 @@ export interface FilterSummaryProps extends ComponentProps {
 }
 
 interface FilterSummarySubProps {
-	filter: FilterProps;
+	filter: Partial<FilterProps>;
 }

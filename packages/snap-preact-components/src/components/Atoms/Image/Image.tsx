@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
@@ -29,17 +30,12 @@ const CSS = {
 
 export function Image(properties: ImageProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
-	const props: ImageProps = {
-		// default props
+	const defaultProps: Partial<ImageProps> = {
 		fallback: FALLBACK_IMAGE_URL,
 		lazy: true,
-		// global theme
-		...globalTheme?.components?.image,
-		// props
-		...properties,
-		...properties.theme?.components?.image,
 	};
+
+	const props = mergeProps('image', globalTheme, defaultProps, properties);
 
 	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
 

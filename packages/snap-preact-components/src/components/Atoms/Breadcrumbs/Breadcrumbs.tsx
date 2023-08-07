@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	breadcrumbs: () =>
@@ -21,18 +22,13 @@ const CSS = {
 		}),
 };
 
-export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element => {
+export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
-	const props: BreadcrumbProps = {
-		// default props
+	const defaultProps: Partial<BreadcrumbsProps> = {
 		separator: '>',
-		// global theme
-		...globalTheme?.components?.breadcrumbs,
-		// props
-		...properties,
-		...properties.theme?.components?.breadcrumbs,
 	};
+
+	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
 	const { data, separator, disableStyles, className, style } = props;
 
@@ -58,7 +54,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 	);
 });
 
-export interface BreadcrumbProps extends ComponentProps {
+export interface BreadcrumbsProps extends ComponentProps {
 	data: {
 		label: string;
 		url?: string;

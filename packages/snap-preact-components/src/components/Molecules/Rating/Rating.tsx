@@ -6,6 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	rating: (emptyRatingSrc?: string, fullRatingSrc?: string) =>
@@ -38,15 +39,9 @@ const CSS = {
 export const Rating = observer((properties: RatingProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: RatingProps = {
-		// default props
+	const defaultProps: Partial<RatingProps> = {};
 
-		// global theme
-		...globalTheme?.components?.rating,
-		// props
-		...properties,
-		...properties.theme?.components?.rating,
-	};
+	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
 	const { emptyRatingSrc, fullRatingSrc, showEmptyRatings, count, disableStyles, className, style } = props;
 

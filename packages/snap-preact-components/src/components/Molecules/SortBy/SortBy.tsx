@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
@@ -17,17 +17,12 @@ const CSS = {
 
 export const SortBy = observer((properties: SortByProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	// const theme = { ...globalTheme, ...properties.theme };
 
-	const props: SortByProps = {
-		// default props
+	const defaultProps: Partial<SortByProps> = {
 		label: 'Sort By',
-		// global theme
-		...globalTheme?.components?.Sortby,
-		// props
-		...properties,
-		...properties.theme?.components?.Sortby,
 	};
+
+	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
 	const { sorting, controller, label, disableStyles, className, style } = props;
 
@@ -73,7 +68,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 });
 
 interface SelectSubProps {
-	Select: SelectProps;
+	Select: Partial<SelectProps>;
 }
 
 export interface SortByProps extends ComponentProps {

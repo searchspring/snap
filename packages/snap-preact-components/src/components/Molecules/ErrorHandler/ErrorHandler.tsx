@@ -10,6 +10,7 @@ import { Button, ButtonProps } from '../../Atoms/Button/Button';
 import { defined, LightenDarkenColor } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
@@ -80,14 +81,9 @@ const CSS = {
 export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
+	const defaultProps: Partial<ErrorHandlerProps> = {};
 
-	const props: ErrorHandlerProps = {
-		// global theme
-		...globalTheme?.components?.errorHandler,
-		//props
-		...properties,
-		...properties.theme?.components?.errorHandler,
-	};
+	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
 	const { controller, error, disableStyles, style, onRetryClick, className } = props;
 

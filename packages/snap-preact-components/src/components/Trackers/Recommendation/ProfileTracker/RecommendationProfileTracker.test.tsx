@@ -3,7 +3,6 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '../../../../providers/theme';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -25,14 +24,6 @@ const recommendConfig: RecommendationStoreConfig = {
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = {
 	urlManager,
-};
-
-const theme = {
-	components: {
-		RecommendationProfileTracker: {
-			className: 'themeClass',
-		},
-	},
 };
 
 describe('RecommendationProfileTracker Component', () => {
@@ -305,112 +296,5 @@ describe('RecommendationProfileTracker Component', () => {
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
-	});
-
-	it('is themeable with ThemeProvider', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals, { mode: 'development' }),
-		});
-
-		await controller.search();
-
-		const rendered = render(
-			<ThemeProvider theme={theme}>
-				<RecommendationProfileTracker controller={controller}>
-					<div className="title">some title</div>
-					{controller.store.results.map((result, idx) => (
-						<div className={'findMe'} key={idx}>
-							<div className="result">{result.mappings.core?.name}</div>
-						</div>
-					))}
-				</RecommendationProfileTracker>
-			</ThemeProvider>
-		);
-		const ChildElement = rendered.container.querySelector('.findMe');
-		expect(ChildElement).toBeInTheDocument();
-
-		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
-		expect(CarouselElement).toBeInTheDocument();
-		expect(CarouselElement).toHaveClass(theme.components.RecommendationProfileTracker.className);
-	});
-
-	it('is themeable with theme prop', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals, { mode: 'development' }),
-		});
-
-		await controller.search();
-
-		const rendered = render(
-			<RecommendationProfileTracker controller={controller} theme={theme}>
-				<div className="title">some title</div>
-				{controller.store.results.map((result, idx) => (
-					<div className={'findMe'} key={idx}>
-						<div className="result">{result.mappings.core?.name}</div>
-					</div>
-				))}
-			</RecommendationProfileTracker>
-		);
-
-		const ChildElement = rendered.container.querySelector('.findMe');
-		expect(ChildElement).toBeInTheDocument();
-
-		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
-		expect(CarouselElement).toBeInTheDocument();
-		expect(CarouselElement).toHaveClass(theme.components.RecommendationProfileTracker.className);
-	});
-
-	it('is themeable with theme prop overrides ThemeProvider', async () => {
-		const themeOverride = {
-			components: {
-				RecommendationProfileTracker: {
-					className: 'newTheme',
-				},
-			},
-		};
-
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals, { mode: 'development' }),
-		});
-
-		await controller.search();
-
-		const rendered = render(
-			<ThemeProvider theme={theme}>
-				<RecommendationProfileTracker controller={controller} theme={themeOverride}>
-					<div className="title">some title</div>
-					{controller.store.results.map((result, idx) => (
-						<div className={'findMe'} key={idx}>
-							<div className="result">{result.mappings.core?.name}</div>
-						</div>
-					))}
-				</RecommendationProfileTracker>
-			</ThemeProvider>
-		);
-		const ChildElement = rendered.container.querySelector('.findMe');
-		expect(ChildElement).toBeInTheDocument();
-
-		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
-		expect(CarouselElement).toBeInTheDocument();
-		expect(CarouselElement).not.toHaveClass(theme.components.RecommendationProfileTracker.className);
-		expect(CarouselElement).toHaveClass(themeOverride.components.RecommendationProfileTracker.className);
 	});
 });

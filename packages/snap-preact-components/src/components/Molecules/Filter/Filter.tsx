@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
@@ -34,15 +34,9 @@ const CSS = {
 // TODO: look into urlManager and how it connects in this case, left the href out for the time being
 export const Filter = observer((properties: FilterProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<FilterProps> = {};
 
-	const props: FilterProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.filter,
-		//props
-		...properties,
-		...properties.theme?.components?.filter,
-	};
+	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
 	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style } = props;
 

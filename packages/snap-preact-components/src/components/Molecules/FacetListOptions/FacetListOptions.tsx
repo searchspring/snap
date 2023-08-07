@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
@@ -42,15 +42,9 @@ const CSS = {
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
+	const defaultProps: Partial<FacetListOptionsProps> = {};
 
-	const props: FacetListOptionsProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.facetListOptions,
-		//props
-		...properties,
-		...properties.theme?.components?.facetListOptions,
-	};
+	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
 	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
 

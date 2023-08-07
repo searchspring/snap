@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }: Partial<SkeletonProps> & { animation: Keyframes }) =>
@@ -49,17 +50,13 @@ const CSS = {
 
 export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
-	const props: SkeletonProps = {
-		// default props
+	const defaultProps: Partial<SkeletonProps> = {
 		backgroundColor: '#ebebeb',
 		animatedColor: '#f5f5f5',
-		// global theme
-		...globalTheme?.components?.skeleton,
-		// props
-		...properties,
-		...properties.theme?.components?.skeleton,
 	};
+
+	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);
+
 	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};

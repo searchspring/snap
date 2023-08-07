@@ -12,7 +12,7 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, StylingCSS } from '../../../types';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
@@ -70,19 +70,15 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		},
 	};
 
-	let props: ResultsProps = {
-		// default props
+	const defaultProps: Partial<ResultsProps> = {
 		results: properties.controller?.store?.results,
 		columns: 4,
 		gapSize: '20px',
 		layout: ResultsLayout.GRID,
 		breakpoints: defaultBreakpointsProps,
-		// global theme
-		...globalTheme?.components?.results,
-		// props
-		...properties,
-		...properties.theme?.components?.results,
 	};
+
+	let props = mergeProps('results', globalTheme, defaultProps, properties);
 
 	const displaySettings = useDisplaySettings(props?.breakpoints || {});
 	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
@@ -178,6 +174,6 @@ export interface ResultsProps extends ComponentProps {
 }
 
 interface ResultsSubProps {
-	result: ResultProps;
-	inlineBanner: InlineBannerProps;
+	result: Partial<ResultProps>;
+	inlineBanner: Partial<InlineBannerProps>;
 }

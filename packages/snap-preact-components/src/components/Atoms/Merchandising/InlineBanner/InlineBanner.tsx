@@ -5,6 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
 import { ComponentProps, ResultsLayout, ResultsLayoutType, StylingCSS } from '../../../../types';
+import { mergeProps } from '../../../../utilities';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
 
@@ -33,17 +34,12 @@ const CSS = {
 
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
-	const props: InlineBannerProps = {
-		// default props
+	const defaultProps: Partial<InlineBannerProps> = {
 		layout: ResultsLayout.GRID,
 		width: 'auto',
-		// global theme
-		...globalTheme?.components?.inlineBanner,
-		// props
-		...properties,
-		...properties.theme?.components?.inlineBanner,
 	};
+
+	const props = mergeProps('inlineBanner', globalTheme, defaultProps, properties);
 
 	const { banner, disableStyles, className, width, layout, onClick, style } = props;
 

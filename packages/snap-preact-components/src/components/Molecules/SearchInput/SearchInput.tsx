@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
@@ -34,17 +34,12 @@ const CSS = {
 export const SearchInput = observer((properties: SearchInputProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: SearchInputProps = {
-		// default props
+	const defaultProps: Partial<SearchInputProps> = {
 		placeholder: 'Search',
 		hideIcon: false,
-		// global theme
-		...globalTheme?.components?.searchInput,
-		//props
-		...properties,
-		...properties.theme?.components?.searchInput,
 	};
+
+	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
 	const { placeholder, onChange, hideIcon, disableStyles, style, className } = props;
 
@@ -93,5 +88,5 @@ export interface SearchInputProps extends ComponentProps {
 }
 
 interface SearchInputSubProps {
-	icon: IconProps;
+	icon: Partial<IconProps>;
 }

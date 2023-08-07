@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	searchheader: () => css(),
@@ -18,28 +19,23 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const landingPage = properties.controller.store.merchandising.landingPage;
 	const { pagination, search } = properties.controller.store;
 
-	const props: SearchHeaderProps = {
-		// default props
+	const defaultProps: Partial<SearchHeaderProps> = {
 		titleText: `Showing ${pagination.multiplePages ? `<span class="ss-results-count-range"> ${pagination.begin} - ${pagination.end} of </span>` : ''} 
-			<span class="ss-results-count-total">${pagination.totalResults}</span> 
-			result${pagination.totalResults == 1 ? '' : 's'} 
-			${search?.query ? `<span>for <span class="ss-results-query">"${search.query.string}"</span></span>` : ''}
-		`,
+		<span class="ss-results-count-total">${pagination.totalResults}</span> 
+		result${pagination.totalResults == 1 ? '' : 's'} 
+		${search?.query ? `<span>for <span class="ss-results-query">"${search.query.string}"</span></span>` : ''}
+	`,
 		oqText: `<div class="ss-oq">No results found for <em>"${search.originalQuery?.string}"</em>, showing results for <em>"${search.query?.string}"</em> instead.</div>`,
 		noResultsText: `${
 			search?.query
 				? `<span>
-				No results for <span class="ss-results-query">"${search.query.string}"</span> found.
-			</span>`
+			No results for <span class="ss-results-query">"${search.query.string}"</span> found.
+		</span>`
 				: `<span>No results found.</span>`
 		}`,
-
-		// global theme
-		...globalTheme?.components?.searchheader,
-		// props
-		...properties,
-		...properties.theme?.components?.searchheader,
 	};
+
+	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
 
 	const { controller, disableStyles, style } = props;
 

@@ -11,6 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>
@@ -39,17 +40,12 @@ const CSS = {
 
 export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
-	const props: DropdownProps = {
-		// default props
+	const defaultProps = {
 		startOpen: false,
 		disableA11y: false,
-		// global theme
-		...globalTheme?.components?.dropdown,
-		// props
-		...properties,
-		...properties.theme?.components?.dropdown,
 	};
+
+	const props = mergeProps('dropdown', globalTheme, defaultProps, properties);
 
 	const {
 		button,

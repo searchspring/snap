@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
@@ -49,29 +49,12 @@ const CSS = {
 export const Search = observer((properties: SearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	let props: SearchProps = {
-		// default props
-		facetLayout: 'vertical',
-		filterSummaryLayout: 'vertical',
-		sortLayout: 'horizontal',
-		perPageLayout: 'horizontal',
+	const defaultProps: Partial<SearchProps> = {
 		slideOutToggleWidth: '991px',
-		sortByLabel: 'Sort By',
-		perPageSortLabel: 'Per Page',
-
-		// global theme
-		...globalTheme?.components?.search,
-		// props
-		...properties,
-		...properties.theme?.components?.search,
 	};
 
-	if (properties.theme?.namedComponents && properties.name) {
-		props = {
-			...props,
-			...properties.theme?.namedComponents[properties.name as any],
-		};
-	}
+	const props = mergeProps('search', globalTheme, defaultProps, properties);
+
 	//breakpoints?
 	// const displaySettings = useDisplaySettings(props?.breakpoints || {});
 	// let theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
@@ -85,7 +68,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const subProps: SearchSubProps = {
 		TopToolbar: {
 			// default props
-			controller,
 			hideFacets: true,
 			hidefilterSummary: true,
 			hideSlideout: true,
@@ -99,7 +81,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		BottomToolbar: {
 			// default props
-			controller,
 			hideFacets: true,
 			hidefilterSummary: true,
 			hidePerPage: true,
@@ -114,7 +95,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Sidebar: {
 			// default props
-			controller,
 			hidePerPage: true,
 			hideSortBy: true,
 			// inherited props
@@ -126,7 +106,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		SearchHeader: {
 			// default props
-			controller,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -136,7 +115,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Results: {
 			// default props
-			controller,
 			resultLayout: resultLayout,
 			// inherited props
 			...defined({
@@ -147,7 +125,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		NoResults: {
 			// default props
-			controller,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -175,27 +152,27 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__search', className)}>
-					{!hideSidebar && <Sidebar {...subProps.Sidebar} />}
+					{!hideSidebar && <Sidebar {...subProps.Sidebar} controller={controller} />}
 
 					<div className={classnames('ss__search__content')}>
 						{/* do we want this? */}
 						{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
 
-						<SearchHeader {...subProps.SearchHeader} />
+						<SearchHeader {...subProps.SearchHeader} controller={controller} />
 
-						{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} />}
+						{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} controller={controller} />}
 
 						<div className="clear"></div>
 
 						{store.pagination.totalResults ? (
 							<Results {...subProps.Results} />
 						) : (
-							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} />
+							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
 						<div className="clear"></div>
 
-						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} />}
+						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} controller={controller} />}
 					</div>
 				</div>
 			</CacheProvider>
@@ -214,10 +191,10 @@ export interface SearchProps extends ComponentProps {
 }
 
 interface SearchSubProps {
-	Results: ResultsProps;
-	NoResults: NoResultsProps;
-	Sidebar: SidebarProps;
-	TopToolbar: ToolbarProps;
-	BottomToolbar: ToolbarProps;
-	SearchHeader: SearchHeaderProps;
+	Results: Partial<ResultsProps>;
+	NoResults: Partial<NoResultsProps>;
+	Sidebar: Partial<SidebarProps>;
+	TopToolbar: Partial<ToolbarProps>;
+	BottomToolbar: Partial<ToolbarProps>;
+	SearchHeader: Partial<SearchHeaderProps>;
 }

@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
@@ -150,16 +151,11 @@ const CSS = {
 export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: FacetSliderProps = {
-		// default props
+	const defaultProps: Partial<FacetSliderProps> = {
 		tickSize: properties.facet?.step ? properties.facet?.step * 10 : 20,
-		// global theme
-		...globalTheme?.components?.facetSlider,
-		// props
-		...properties,
-		...properties.theme?.components?.facetSlider,
 	};
+
+	const props = mergeProps('facetSlider', globalTheme, defaultProps, properties);
 
 	const {
 		tickTextColor,

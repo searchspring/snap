@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { defined, cloneWithProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
@@ -36,8 +36,7 @@ const CSS = {
 export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: SlideoutProps = {
-		// default props
+	const defaultProps: Partial<SlideoutProps> = {
 		active: false,
 		displayAt: '',
 		slideDirection: 'left',
@@ -45,12 +44,9 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		buttonContent: 'click me',
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
-		// global theme
-		...globalTheme?.components?.slideout,
-		// props
-		...properties,
-		...properties.theme?.components?.slideout,
 	};
+
+	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
 	const {
 		children,
@@ -149,5 +145,5 @@ export interface SlideoutProps extends ComponentProps {
 
 export type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';
 interface SlideoutSubProps {
-	overlay: OverlayProps;
+	overlay: Partial<OverlayProps>;
 }

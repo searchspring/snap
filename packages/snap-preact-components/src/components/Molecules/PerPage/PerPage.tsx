@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
@@ -18,24 +18,18 @@ const CSS = {
 
 export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	// const theme = { ...globalTheme, ...properties.theme };
-
-	const props: PerPageProps = {
-		// default props
+	const defaultProps: Partial<PerPageProps> = {
 		label: 'Per Page',
-		// global theme
-		...globalTheme?.components?.perPage,
-		// props
-		...properties,
-		...properties.theme?.components?.perPage,
 	};
+
+	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
 	const { pagination, controller, label, disableStyles, className, style } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
 	const subProps: SelectSubProps = {
-		Select: {
+		select: {
 			// global theme
 			...globalTheme?.components?.select,
 			// inherited props
@@ -59,7 +53,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			<Select
 				{...styling}
 				className={classnames('ss__perpage__select', className)}
-				{...subProps.Select}
+				{...subProps.select}
 				label={label}
 				options={store.pageSizeOptions}
 				selected={{ label: `Show ${store.pageSize}`, value: store.pageSize }}
@@ -74,7 +68,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 });
 
 interface SelectSubProps {
-	Select: SelectProps;
+	select: Partial<SelectProps>;
 }
 
 export interface PerPageProps extends ComponentProps {

@@ -10,6 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
@@ -40,16 +41,11 @@ const CSS = {
 export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: ButtonProps = {
-		// default props
+	const defaultProps = {
 		disableA11y: false,
-		// global theme
-		...globalTheme?.components?.button,
-		// props
-		...properties,
-		...properties.theme?.components?.button,
 	};
+
+	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
 	const {
 		backgroundColor,

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	loadingBar: ({ color, height, backgroundColor, theme, animation }: Partial<LoadingBarProps> & { animation: Keyframes }) =>
@@ -44,16 +45,11 @@ const CSS = {
 export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: LoadingBarProps = {
-		// default props
+	const defaultProps: Partial<LoadingBarProps> = {
 		height: '5px',
-		// global theme
-		...globalTheme?.components?.loadingbar,
-		// props
-		...properties,
-		...properties.theme?.components?.loadingbar,
 	};
+
+	const props = mergeProps('loadingBar', globalTheme, defaultProps, properties);
 
 	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
 

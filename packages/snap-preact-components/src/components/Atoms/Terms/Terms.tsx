@@ -6,10 +6,11 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
+import type { AutocompleteTermStore } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
-import { AutocompleteTermStore } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	Terms: () => css({}),
@@ -17,16 +18,9 @@ const CSS = {
 
 export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<TermsProps> = {};
 
-	const props: TermsProps = {
-		// default props
-
-		// global theme
-		...globalTheme?.components?.results,
-		// props
-		...properties,
-		...properties.theme?.components?.results,
-	};
+	const props = mergeProps('terms', globalTheme, defaultProps, properties);
 
 	const { terms, title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, controller } = props;
 	const currentInput = controller?.store?.state?.input;

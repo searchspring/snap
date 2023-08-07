@@ -1,3 +1,5 @@
+import { ThemeComponents } from './themeComponents';
+
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
 export const defaultTheme: Theme = {
@@ -16,7 +18,7 @@ export const defaultTheme: Theme = {
 	},
 	components: {},
 };
-export interface Theme {
+export type Theme = {
 	variables?: {
 		[key: string]: unknown;
 	};
@@ -33,6 +35,5 @@ export interface Theme {
 			info: string;
 		};
 	};
-	components?: any;
-	namedComponents?: any;
-}
+	components?: ThemeComponents;
+};

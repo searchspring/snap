@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	formattedNumber: () => css({}),
@@ -14,21 +15,16 @@ const CSS = {
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
-	const props: FormattedNumberProps = {
-		// default props
+	const defaultProps: Partial<FormattedNumberProps> = {
 		symbol: '',
 		decimalPlaces: 3,
 		padDecimalPlaces: true,
 		thousandsSeparator: '',
 		decimalSeparator: '.',
 		symbolAfter: true,
-		// global theme
-		...globalTheme?.components?.formattedNumber,
-		// props
-		...properties,
-		...properties.theme?.components?.formattedNumber,
 	};
+
+	const props = mergeProps('formattedNumber', globalTheme, defaultProps, properties);
 
 	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style, raw } =
 		props;

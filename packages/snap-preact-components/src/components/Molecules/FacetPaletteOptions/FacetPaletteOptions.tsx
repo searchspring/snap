@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { filters } from '@searchspring/snap-toolbox';
 
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -94,17 +94,12 @@ const CSS = {
 export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: FacetPaletteOptionsProps = {
-		// default props
+	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
-		// global theme
-		...globalTheme?.components?.facetPaletteOptions,
-		// props
-		...properties,
-		...properties.theme?.components?.facetPaletteOptions,
 	};
+
+	const props = mergeProps('facetPaletteOptions', globalTheme, defaultProps, properties);
 
 	const { values, hideLabel, columns, gapSize, colorMapping, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } =
 		props;

@@ -14,7 +14,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
@@ -171,20 +171,16 @@ const CSS = {
 export const Autocomplete = observer((properties: AutocompleteProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	let props: AutocompleteProps = {
-		// default props
+	const defaultProps: Partial<AutocompleteProps> = {
 		termsTitle: '',
 		trendingTitle: 'Popular Searches',
 		historyTitle: 'Previously Searched',
 		facetsTitle: '',
 		contentTitle: '',
 		width: '100%',
-		// global theme
-		...globalTheme?.components?.autocomplete,
-		// props
-		...properties,
-		...properties.theme?.components?.autocomplete,
 	};
+
+	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
 
 	//passed in or default breakpoints result props
 	const breakpoints = props.breakpoints || {
@@ -688,12 +684,12 @@ export interface AutocompleteProps extends ComponentProps {
 	facetsTitle?: string;
 	contentTitle?: string;
 	viewportMaxHeight?: boolean;
-	termsSlot?: JSX.Element;
-	facetsSlot?: JSX.Element;
-	contentSlot?: JSX.Element;
-	resultsSlot?: JSX.Element;
-	noResultsSlot?: JSX.Element;
-	linkSlot?: JSX.Element;
+	termsSlot?: JSX.Element | JSX.Element[];
+	facetsSlot?: JSX.Element | JSX.Element[];
+	contentSlot?: JSX.Element | JSX.Element[];
+	resultsSlot?: JSX.Element | JSX.Element[];
+	noResultsSlot?: JSX.Element | JSX.Element[];
+	linkSlot?: JSX.Element | JSX.Element[];
 	breakpoints?: BreakpointsProps;
 	width?: string;
 	resultLayout?: ResultLayoutTypes;

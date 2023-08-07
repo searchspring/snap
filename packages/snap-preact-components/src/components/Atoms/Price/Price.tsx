@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 import { StylingCSS } from '../../../types';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	price: ({ theme }: Partial<PriceProps>) =>
@@ -23,9 +24,7 @@ const CSS = {
 export function Price(properties: PriceProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: PriceProps = {
-		// default props
+	const defaultProps: Partial<PriceProps> = {
 		symbol: '$',
 		decimalPlaces: 2,
 		padDecimalPlaces: true,
@@ -33,12 +32,9 @@ export function Price(properties: PriceProps): JSX.Element {
 		decimalSeparator: '.',
 		symbolAfter: false,
 		lineThrough: false,
-		// global theme
-		...globalTheme?.components?.price,
-		// props
-		...properties,
-		...properties.theme?.components?.price,
 	};
+
+	const props = mergeProps('price', globalTheme, defaultProps, properties);
 
 	const {
 		lineThrough,

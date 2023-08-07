@@ -11,6 +11,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	checkbox: ({ size, color, theme }: CheckboxProps) =>
@@ -36,18 +37,13 @@ const CSS = {
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	const props: CheckboxProps = {
-		// default props
+	const defaultProps: Partial<CheckboxProps> = {
 		size: '12px',
 		startChecked: false,
 		disableA11y: false,
-		// global theme
-		...globalTheme?.components?.checkbox,
-		// props
-		...properties,
-		...properties.theme?.components?.checkbox,
 	};
+
+	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
 	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, style } = props;
 

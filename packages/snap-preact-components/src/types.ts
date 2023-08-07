@@ -7,7 +7,7 @@ export interface ComponentProps {
 	className?: string;
 	disableStyles?: boolean;
 	style?: string | Record<string, any>;
-	styleScript?: <Props>(props: Props) => SerializedStyles;
+	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
 }

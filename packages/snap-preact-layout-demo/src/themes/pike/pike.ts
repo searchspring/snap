@@ -7,6 +7,7 @@
 
 // attempt using a theme to pass styles to all available components
 
+import { Theme } from '@searchspring/snap-preact-components';
 import * as style from './styles/styles';
 
 const pikeVariables = {
@@ -16,15 +17,12 @@ const pikeVariables = {
 	},
 };
 
-export const pike = {
+export const pike: Theme = {
 	variables: pikeVariables,
 	components: {
 		button: {
 			...style.components.button,
 			// component theme prop overrides
-		},
-		autocompleteLayout: {
-			style: style.layouts.autocomplete,
 		},
 	},
 };

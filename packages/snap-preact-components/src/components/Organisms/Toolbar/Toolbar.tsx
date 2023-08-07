@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { Facets, FacetsProps } from '../Facets';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
-import { defined } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { LoadingBarProps } from '../../Atoms/Loading';
 import { SearchController } from '@searchspring/snap-controller';
@@ -24,22 +24,9 @@ const CSS = {
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	let props: ToolbarProps = {
-		// default props
+	const defaultProps: Partial<ToolbarProps> = {};
 
-		// global theme
-		...globalTheme?.components?.toolbar,
-		// props
-		...properties,
-		...properties.theme?.components?.toolbar,
-	};
-
-	if (properties.theme?.namedComponents && properties.name) {
-		props = {
-			...props,
-			...properties.theme?.namedComponents[properties.name as any],
-		};
-	}
+	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
 	const {
 		controller,
@@ -128,7 +115,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			// global theme
-			...globalTheme?.components?.sortby,
+			...globalTheme?.components?.sortBy,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -140,7 +127,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			// global theme
-			...globalTheme?.components?.perpage,
+			...globalTheme?.components?.perPage,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -194,11 +181,11 @@ export interface ToolbarProps extends ComponentProps {
 }
 
 interface ToolbarSubProps {
-	FilterSummary: FilterSummaryProps;
-	Facets: FacetsProps;
-	LoadingBar: LoadingBarProps;
-	Pagination: PaginationProps;
-	Slideout: SlideoutProps;
-	SortBy: SortByProps;
-	PerPage: PerPageProps;
+	FilterSummary: Partial<FilterSummaryProps>;
+	Facets: Partial<FacetsProps>;
+	LoadingBar: Partial<LoadingBarProps>;
+	Pagination: Partial<PaginationProps>;
+	Slideout: Partial<SlideoutProps>;
+	SortBy: Partial<SortByProps>;
+	PerPage: Partial<PerPageProps>;
 }

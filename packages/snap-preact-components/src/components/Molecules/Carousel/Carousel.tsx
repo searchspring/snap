@@ -14,6 +14,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { mergeProps } from '../../../utilities';
 
 const CSS = {
 	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
@@ -182,21 +183,16 @@ export const defaultVerticalCarouselBreakpoints = {
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
-
-	let props: CarouselProps = {
-		// default props
+	const defaultProps: Partial<CarouselProps> = {
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
 		autoAdjustSlides: true,
-		// global theme
-		...globalTheme?.components?.carousel,
-		//props
-		...properties,
-		...properties.theme?.components?.carousel,
 	};
+
+	let props = mergeProps('carousel', globalTheme, defaultProps, properties);
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {

@@ -6,6 +6,8 @@ import classnames from 'classnames';
 
 import { ComponentProps, StylingCSS } from '../../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
+import { mergeProps } from '../../../../utilities';
+
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
@@ -21,14 +23,9 @@ const CSS = {
 
 export const Banner = observer((properties: BannerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const defaultProps: Partial<BannerProps> = {};
 
-	const props: BannerProps = {
-		// global theme
-		...globalTheme?.components?.banner,
-		// props
-		...properties,
-		...properties.theme?.components?.banner,
-	};
+	const props = mergeProps('banner', globalTheme, defaultProps, properties);
 
 	const { controller, type, disableStyles, className, style } = props;
 
