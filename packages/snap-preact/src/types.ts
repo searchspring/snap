@@ -110,3 +110,9 @@ export type SnapFeatures = {
 		enabled?: boolean;
 	};
 };
+
+export type SnapThemeConfig = {
+	import: () => Promise<any> | any;
+	variables?: any;
+	overrides?: any;
+};

@@ -1,8 +1,6 @@
 import { SnapTemplate } from '@searchspring/snap-preact';
 import { resultLayout } from './resultLayout';
 
-import * as themes from './themes';
-
 /*
 	brainstorming...
 
@@ -29,18 +27,21 @@ import * as themes from './themes';
 
 new SnapTemplate({
 	config: {
-		theme: themes.pike,
-		/* PROPOSED THEME CONFIG */
-		// theme: {
-		// 	name: 'pike',
-		// 	variables: {
-		// 		breakpoints: [0, 540, 900, 1200],
-		// 	},
-		// 	override: {},
-		// },
+		theme: {
+			name: 'pike',
+			overrides: {
+				variables: {},
+				components: {
+					// button: {
+					// 	style: {
+					// 		color:'green'
+					// 	}
+					// }
+				},
+			},
+		},
 		language: 'en',
 		currency: 'usd',
-		breakpoints: [0, 900, 1200],
 	},
 	search: {
 		// settings: {

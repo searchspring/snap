@@ -11,10 +11,14 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
+import { SnapThemeConfig } from '../types';
+import { fetchTheme } from '../utils';
 
 type RecommendationComponentFunc = () => Promise<any> | any;
+
 export type RecommendationComponentObject = {
 	component: RecommendationComponentFunc;
+	theme?: SnapThemeConfig;
 	props: {
 		[name: string]: any;
 	};
@@ -288,7 +292,7 @@ export class RecommendationInstantiator {
 					return;
 				}
 
-				let props = {};
+				let props: any = {};
 				let RecommendationsComponent:
 					| undefined
 					| React.ElementType<{
@@ -299,7 +303,18 @@ export class RecommendationInstantiator {
 					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentFunc)();
 				} else if (this.config.components[component] && typeof this.config.components[component] == 'object') {
 					props = (this.config.components[component] as RecommendationComponentObject).props;
-					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentObject).component();
+					const importPromises = [];
+					// dynamically import the component
+					importPromises.push((this.config.components[component] as RecommendationComponentObject).component());
+
+					const themeConfig = (this.config.components[component] as RecommendationComponentObject).theme;
+					if (themeConfig) {
+						importPromises.push(fetchTheme(themeConfig));
+					}
+
+					const importResolutions = await Promise.all(importPromises);
+					RecommendationsComponent = importResolutions[0];
+					props.theme = importResolutions[1];
 				}
 
 				if (!RecommendationsComponent) {

@@ -59,3 +59,6 @@ export * from './providers';
 
 // TOOLBOX
 export * from './toolbox';
+
+// THEMES
+export * from './themes';

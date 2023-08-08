@@ -31,7 +31,9 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import { default as createSearchController } from './create/createSearchController';
 import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures } from './types';
+import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures, SnapThemeConfig } from './types';
+import { fetchTheme } from './utils';
+import { Theme } from '@searchspring/snap-preact-components';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -44,6 +46,7 @@ type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<any> | any;
+	theme?: SnapThemeConfig;
 	skeleton?: () => Promise<any> | any;
 	props?: {
 		[propName: string]: any;
@@ -584,7 +587,20 @@ export class Snap {
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const Component = await target.component!();
+									const importPromises = [];
+									// dynamically import the component
+									importPromises.push(target.component!());
+
+									if (target.theme) {
+										importPromises.push(fetchTheme(target.theme));
+									}
+
+									const importResolutions = await Promise.all(importPromises);
+									const Component = importResolutions[0];
+
+									target.props = target.props || {};
+									target.props.theme = importResolutions[1];
+
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
@@ -647,10 +663,19 @@ export class Snap {
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = (await target.component!()) as React.ElementType<{
-											controller: AutocompleteController;
-											input: HTMLInputElement | string | Element;
-										}>;
+										const importPromises = [];
+										// dynamically import the component
+										importPromises.push(target.component!());
+
+										if (target.theme) {
+											importPromises.push(fetchTheme(target.theme));
+										}
+
+										const importResolutions = await Promise.all(importPromises);
+										const Component = importResolutions[0];
+
+										target.props = target.props || {};
+										target.props.theme = importResolutions[1] as Theme;
 
 										setTimeout(() => {
 											render(
