@@ -165,7 +165,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						<div className="clear"></div>
 
 						{store.pagination.totalResults ? (
-							<Results {...subProps.Results} />
+							<Results {...subProps.Results} controller={controller} />
 						) : (
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}

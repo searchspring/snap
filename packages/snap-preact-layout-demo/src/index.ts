@@ -1,4 +1,4 @@
-import { SnapLayout } from '@searchspring/snap-preact';
+import { SnapTemplate } from '@searchspring/snap-preact';
 import { resultLayout } from './resultLayout';
 
 import * as themes from './themes';
@@ -27,12 +27,20 @@ import * as themes from './themes';
 
  */
 
-new SnapLayout({
+new SnapTemplate({
 	config: {
 		theme: themes.pike,
+		/* PROPOSED THEME CONFIG */
+		// theme: {
+		// 	name: 'pike',
+		// 	variables: {
+		// 		breakpoints: [0, 540, 900, 1200],
+		// 	},
+		// 	override: {},
+		// },
 		language: 'en',
 		currency: 'usd',
-		breakpoints: [0, 767, 991],
+		breakpoints: [0, 900, 1200],
 	},
 	search: {
 		// settings: {
@@ -40,7 +48,7 @@ new SnapLayout({
 		// 		backfill: 5,
 		// 	}
 		// },
-		layouts: [
+		templates: [
 			{
 				selector: '#searchspring-layout',
 				template: 'Search',
@@ -52,7 +60,7 @@ new SnapLayout({
 		settings: {
 			branch: BRANCHNAME,
 		},
-		layouts: [
+		templates: [
 			{
 				component: 'Recs',
 				template: 'Recommendation',
@@ -62,7 +70,7 @@ new SnapLayout({
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac',
-		layouts: [
+		templates: [
 			{
 				selector: 'input.searchspring-ac',
 				template: 'Autocomplete',

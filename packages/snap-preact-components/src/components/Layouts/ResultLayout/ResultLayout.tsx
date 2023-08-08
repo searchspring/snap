@@ -143,12 +143,10 @@ const componentMap = {
 	Badge: {
 		component: Badge,
 	},
-
 	Button: {
 		component: Button,
 		layoutProps: ['content', 'children'],
 	},
-
 	FormattedNumber: {
 		component: FormattedNumber,
 	},
