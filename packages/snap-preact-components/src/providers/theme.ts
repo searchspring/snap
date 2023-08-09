@@ -20,8 +20,10 @@ export const defaultTheme: Theme = {
 };
 export type Theme = {
 	variables?: {
+		breakpoints?: number[];
 		[key: string]: unknown;
 	};
+	responsive?: Theme[];
 	colors?: {
 		primary: string;
 		secondary: string;

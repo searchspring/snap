@@ -1,11 +1,11 @@
-import { PikeTheme } from './pike';
+import { PikeTemplateTheme } from './pike';
 
 export type TemplateThemeConfig = {
 	name: keyof typeof themeMap;
 	variables?: {
 		breakpoints: number[];
 	};
-} & Partial<PikeTheme>;
+} & Partial<PikeTemplateTheme>;
 
 export const themeMap = {
 	pike: async () => {

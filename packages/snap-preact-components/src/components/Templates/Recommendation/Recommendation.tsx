@@ -11,10 +11,10 @@ import type { SwiperOptions } from 'swiper';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps } from '../../../utilities';
+import { combineMerge, defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
-import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
@@ -40,18 +40,29 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		loop: true,
 	};
 
+	// handle responsive themes
+	if (properties.theme?.responsive) {
+		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
+		const _displaySettings = useDisplaySettings(breakpointsObj || {});
+		properties.theme = deepmerge(properties?.theme || {}, _displaySettings || {}, { arrayMerge: combineMerge });
+		properties.breakpoints = {};
+	}
+
 	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
 
-	const displaySettings = useDisplaySettings(props.breakpoints!);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+	let displaySettings;
+	if (props.breakpoints && !properties.theme?.responsive) {
+		displaySettings = useDisplaySettings(props.breakpoints);
+		if (displaySettings && Object.keys(displaySettings).length) {
+			// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+			const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
-		props = {
-			...props,
-			...displaySettings,
-			theme,
-		};
+			props = {
+				...props,
+				...displaySettings,
+				theme,
+			};
+		}
 	}
 
 	const {

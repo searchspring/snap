@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { defined, mergeProps } from '../../../utilities';
+import { combineMerge, defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
@@ -17,6 +17,8 @@ import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Organisms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
+import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Search: ({ slideOutToggleWidth }: Partial<SearchProps>) =>
@@ -55,9 +57,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
 
-	//breakpoints?
-	// const displaySettings = useDisplaySettings(props?.breakpoints || {});
-	// let theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+	// handle responsive themes
+	if (properties.theme?.responsive) {
+		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
+		const displaySettings = useDisplaySettings(breakpointsObj || {});
+		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
+	}
 
 	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
 	const style: any = props.style;
@@ -165,7 +170,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						<div className="clear"></div>
 
 						{store.pagination.totalResults ? (
-							<Results {...subProps.Results} controller={controller} />
+							<Results {...subProps.Results} controller={controller} breakpoints={{}} />
 						) : (
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}

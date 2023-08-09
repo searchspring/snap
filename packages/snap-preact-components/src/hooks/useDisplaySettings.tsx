@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
 import { useDeepCompareEffect } from './useDeepCompareEffect';
+import type { Theme } from '../providers';
 
 export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
 	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
@@ -71,6 +72,22 @@ export const getDisplaySettings = (breakpoints: BreakpointsProps): any | undefin
 	}
 
 	return breakpointsSettings;
+};
+
+export const buildThemeBreakpointsObject = (theme: Theme): undefined | BreakpointsProps => {
+	const breakpoints = theme?.variables?.breakpoints;
+	const responsiveTheme = theme?.responsive;
+	if (breakpoints?.length && responsiveTheme?.length) {
+		const breakpointsObject: any = {};
+
+		breakpoints.map((bp: number, index: number) => {
+			if (theme?.responsive && responsiveTheme[index]) {
+				breakpointsObject[bp] = responsiveTheme[index];
+			}
+		});
+
+		return breakpointsObject;
+	}
 };
 
 const debounce = (func: () => void, timeout = 200) => {

@@ -14,11 +14,11 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps, mergeProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps, combineMerge } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
-import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
@@ -254,20 +254,31 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const displaySettings = useDisplaySettings(breakpoints) || {};
+	let theme;
+	// handle responsive themes
+	if (properties.theme?.responsive) {
+		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
+		const displaySettings = useDisplaySettings(breakpointsObj || {});
+		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
+		theme = props.theme;
+		props.breakpoints = {};
+	} else {
+		const displaySettings = useDisplaySettings(breakpoints) || {};
 
-	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-	const theme = deepmerge(
-		themeDefaults,
-		deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
-		{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
-	);
+		// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
+		theme = deepmerge(
+			themeDefaults,
+			deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
+			{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
+		);
 
-	props = {
-		...props,
-		...displaySettings,
-		theme,
-	};
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
+
 	let input: string | Element | null = props.input;
 	let inputViewportOffsetBottom = 0;
 	if (input) {
