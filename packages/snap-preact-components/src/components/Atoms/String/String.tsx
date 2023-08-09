@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -27,15 +27,17 @@ export const String = observer((properties: StringProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	return (
+	return content ? (
 		<CacheProvider>
 			<span {...styling} className={classnames('ss__string', className)}>
 				{content}
 			</span>
 		</CacheProvider>
+	) : (
+		<Fragment />
 	);
 });
 
 export interface StringProps extends ComponentProps {
-	content: string;
+	content?: string;
 }
