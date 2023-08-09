@@ -12,6 +12,7 @@ import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { defined, mergeProps } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
+import { String, StringProps } from '../../Atoms/String';
 
 const CSS = {
 	Sidebar: () => css({}),
@@ -24,7 +25,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style } = props;
+	const { controller, hideTitle, title, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -35,6 +36,18 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	}
 
 	const subProps: SidebarSubProps = {
+		String: {
+			// default props
+			content: title || 'Filters',
+			// global theme
+			...globalTheme?.components?.string,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		FilterSummary: {
 			// default props
 			controller,
@@ -88,6 +101,8 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar')}>
+				{!hideTitle && <String className="ss--sidebar-title" content={subProps.String.content as string} {...subProps.String} />}
+
 				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
 				{!hideSortBy && <SortBy {...subProps.SortBy} />}
@@ -102,6 +117,8 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;
+	hideTitle?: boolean;
+	title?: string;
 	hideFacets?: boolean;
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
@@ -109,6 +126,7 @@ export interface SidebarProps extends ComponentProps {
 }
 
 interface SidebarSubProps {
+	String: Partial<StringProps>;
 	FilterSummary: Partial<FilterSummaryProps>;
 	Facets: Partial<FacetsProps>;
 	SortBy: Partial<SortByProps>;

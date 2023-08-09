@@ -55,19 +55,19 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		slideOutToggleWidth: '991px',
 	};
 
-	const props = mergeProps('search', globalTheme, defaultProps, properties);
+	let props = mergeProps('search', globalTheme, defaultProps, properties);
 
 	// handle responsive themes
 	if (properties.theme?.responsive) {
 		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
 		const displaySettings = useDisplaySettings(breakpointsObj || {});
 		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
+		props = mergeProps('search', globalTheme, defaultProps, props);
 	}
 
 	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
 	const style: any = props.style;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
-	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
 	const store = controller.store;
 
 	const subProps: SearchSubProps = {
@@ -76,7 +76,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			hideFacets: true,
 			hidefilterSummary: true,
 			hideSlideout: true,
-			slideOutToggleWidth: mobileMediaQuery,
+			slideOutToggleWidth: slideOutToggleWidth,
 			// inherited props
 			...defined({
 				disableStyles,

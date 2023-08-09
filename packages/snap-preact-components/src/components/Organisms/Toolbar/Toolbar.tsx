@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -16,6 +16,7 @@ import { LoadingBarProps } from '../../Atoms/Loading';
 import { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
+import { Sidebar } from '../Sidebar';
 
 const CSS = {
 	toolbar: () => css({}),
@@ -24,7 +25,9 @@ const CSS = {
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<ToolbarProps> = {};
+	const defaultProps: Partial<ToolbarProps> = {
+		slideOutToggleWidth: '650px',
+	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
@@ -147,15 +150,9 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 				{!hideFacets && <Facets {...subProps.Facets} />}
 
 				{!hideSlideout && (
-					<Slideout displayAt={mobileMediaQuery} buttonContent={<div>slideoutButton</div>} {...subProps.Slideout}>
-						{/* {slideoutSlot ? (
-							cloneWithProps(slideoutSlot, { controller })
-						) : ( */}
-						<Fragment>
-							<h3>Filters</h3>
-							{/* <SidebarContents /> */}
-						</Fragment>
-						{/* )} */}
+					<Slideout displayAt={mobileMediaQuery} buttonContent={<div>Filters</div>} {...subProps.Slideout}>
+						{/* mobile facets component? */}
+						<Sidebar controller={controller} />
 					</Slideout>
 				)}
 
