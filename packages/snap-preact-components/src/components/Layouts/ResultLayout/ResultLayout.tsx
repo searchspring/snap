@@ -1,14 +1,13 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { lazy } from 'preact/compat';
-
+import { useMemo } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
-import { containerize } from './containerize';
+import { Componentize, ComponentMap } from './Componentize';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import type { FlexProps } from '../../Atoms/Flex/Flex';
@@ -26,48 +25,6 @@ import type { CarouselProps } from '../../Molecules/Carousel';
 import type { StringProps } from '../../Atoms/String';
 
 // dynamically imported lazy loaded components
-
-/* ATOMS */
-const Badge = lazy(async () => {
-	return (await import('../../Atoms/Badge')).Badge;
-});
-
-const Button = lazy(async () => {
-	return (await import('../../Atoms/Button')).Button;
-});
-
-const FormattedNumber = lazy(async () => {
-	return (await import('../../Atoms/FormattedNumber')).FormattedNumber;
-});
-
-const Icon = lazy(async () => {
-	return (await import('../../Atoms/Icon')).Icon;
-});
-
-const Image = lazy(async () => {
-	return (await import('../../Atoms/Image')).Image;
-});
-
-const Price = lazy(async () => {
-	return (await import('../../Atoms/Price')).Price;
-});
-
-const Rating = lazy(async () => {
-	return (await import('../../Molecules/Rating')).Rating;
-});
-
-const Skeleton = lazy(async () => {
-	return (await import('../../Atoms/Skeleton')).Skeleton;
-});
-
-const String = lazy(async () => {
-	return (await import('../../Atoms/String')).String;
-});
-
-/* MOLECULES */
-const Carousel = lazy(async () => {
-	return (await import('../../Molecules/Carousel')).Carousel;
-});
 
 // CSS in JS
 const CSS = {
@@ -97,17 +54,17 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 	if (layout) {
 		let layouts: LayoutElement[] = [];
 		if (typeof layout == 'function') {
-			layouts = layouts.concat(layout(layoutData));
+			layouts = layouts.concat(useMemo(() => layout(layoutData), [layoutData.result.id]));
 		} else {
 			layouts = layouts.concat(layout);
 		}
-		const LayoutElements = containerize(layoutData, layouts, componentMap);
 
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__result-layout', className)}>
 					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
-					<LayoutElements />
+
+					<Componentize data={layoutData} layout={layouts} />
 				</div>
 			</CacheProvider>
 		);
@@ -121,7 +78,7 @@ export type LayoutElement = {
 	type?: 'Flex'; // supported layout container elements
 	layout?: FlexProps;
 	items?: LayoutElement[];
-	component?: keyof typeof componentMap;
+	component?: keyof ComponentMap;
 } & Partial<
 	/* ATOMS */
 	| BadgeElement
@@ -136,43 +93,6 @@ export type LayoutElement = {
 	/* MOLECULES */
 	| CarouselElement
 >;
-
-// componentMap must be type ResultLayoutComponentMap but isn't to allow for keyof typeof componentMap
-const componentMap = {
-	/* ATOMS */
-	Badge: {
-		component: Badge,
-	},
-	Button: {
-		component: Button,
-		layoutProps: ['content', 'children'],
-	},
-	FormattedNumber: {
-		component: FormattedNumber,
-	},
-	Icon: {
-		component: Icon,
-	},
-	Image: {
-		component: Image,
-	},
-	Price: {
-		component: Price,
-	},
-	Rating: {
-		component: Rating,
-	},
-	Skeleton: {
-		component: Skeleton,
-	},
-	String: {
-		component: String,
-	},
-	/* MOLECULES */
-	Carousel: {
-		component: Carousel,
-	},
-};
 
 /* Layout Element Type Overrides */
 
@@ -233,13 +153,6 @@ type StringElement = {
 type CarouselElement = {
 	component: 'Carousel';
 	props: CarouselProps;
-};
-
-export type ResultLayoutComponentMap = {
-	[componentName: string]: {
-		component: any;
-		layoutProps?: string[];
-	};
 };
 
 export type ResultLayoutFuncData<Controller> = {
