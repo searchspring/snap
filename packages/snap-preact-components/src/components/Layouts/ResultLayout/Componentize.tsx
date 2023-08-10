@@ -70,7 +70,7 @@ const Carousel = lazy(async () => {
 });
 
 // componentMap must be type ResultLayoutComponentMap but isn't to allow for keyof typeof componentMap
-export const componentMap: ResultLayoutComponentMap = {
+const componentMap: ResultLayoutComponentMap = {
 	/* ATOMS */
 	Badge: {
 		component: Badge,
@@ -105,6 +105,8 @@ export const componentMap: ResultLayoutComponentMap = {
 		component: Carousel,
 	},
 };
+
+export type ComponentMap = typeof componentMap;
 
 export const Componentize = (props: {
 	data: ResultLayoutFuncData<AutocompleteController | RecommendationController | SearchController>;
