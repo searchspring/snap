@@ -62,7 +62,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
 		const displaySettings = useDisplaySettings(breakpointsObj || {});
 		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		props = mergeProps('search', globalTheme, defaultProps, props);
+		const realTheme = deepmerge(props.theme || {}, props.theme.components?.search?.theme || {});
+		props = {
+			...props,
+			...props.theme.components?.search,
+		};
+		props.theme = realTheme;
 	}
 
 	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;

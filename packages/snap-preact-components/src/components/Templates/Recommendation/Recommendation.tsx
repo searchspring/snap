@@ -40,27 +40,31 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		loop: true,
 	};
 
+	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
+	let displaySettings;
 	// handle responsive themes
 	if (properties.theme?.responsive) {
 		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const _displaySettings = useDisplaySettings(breakpointsObj || {});
-		properties.theme = deepmerge(properties?.theme || {}, _displaySettings || {}, { arrayMerge: combineMerge });
-		properties.breakpoints = {};
+		const displaySettings = useDisplaySettings(breakpointsObj || {});
+
+		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
+		const realTheme = deepmerge(props.theme || {}, props.theme.components?.recommendation?.theme || {});
+
+		props = {
+			...props,
+			...props.theme?.components?.recommendation,
+		};
+		props.theme = realTheme;
 	}
 
-	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
-
-	let displaySettings;
-	if (props.breakpoints && !properties.theme?.responsive) {
+	if (props.breakpoints) {
 		displaySettings = useDisplaySettings(props.breakpoints);
 		if (displaySettings && Object.keys(displaySettings).length) {
 			// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-			const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
 			props = {
 				...props,
 				...displaySettings,
-				theme,
 			};
 		}
 	}
@@ -80,6 +84,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		disableStyles,
 		style,
 		className,
+		styleScript,
 		vertical,
 		...additionalProps
 	} = props;
@@ -128,6 +133,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styling.css = [style];
 	}
 
+	// add styleScript to styling
+	if (styleScript) {
+		styling.css = styling.css || [];
+		styling.css.push(styleScript(props));
+	}
+
 	return children || resultsToRender?.length ? (
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
@@ -154,7 +165,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 								: resultsToRender.map((result) => (
 										<RecommendationResultTracker controller={controller} result={result}>
 											{resultLayout && controller ? (
-												<ResultLayout controller={controller} result={result} layout={resultLayout} />
+												<ResultLayout {...subProps.result} controller={controller} result={result} layout={resultLayout} />
 											) : (
 												<Result {...subProps.result} controller={controller} result={result} />
 											)}

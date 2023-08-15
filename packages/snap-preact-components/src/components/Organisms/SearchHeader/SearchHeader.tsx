@@ -64,7 +64,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	return (
 		<CacheProvider>
-			<header className="ss__search-header">
+			<header {...styling} className="ss__search-header">
 				{landingPage ? (
 					<h3 className="ss__search-header--landingPageTitle">{landingPage.title}</h3>
 				) : (

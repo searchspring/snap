@@ -183,7 +183,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
 
 	//passed in or default breakpoints result props
-	const breakpoints = props.breakpoints || {
+	props.breakpoints = props.breakpoints || {
 		0: {
 			columns: 2,
 			rows: 1,
@@ -259,11 +259,18 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	if (properties.theme?.responsive) {
 		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
 		const displaySettings = useDisplaySettings(breakpointsObj || {});
+
 		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
+		const realTheme = deepmerge(props.theme || {}, props.theme.components?.autocomplete?.theme || {});
+		props = {
+			...props,
+			...props.theme.components?.autocomplete,
+		};
+		props.theme = realTheme;
 		theme = props.theme;
 		props.breakpoints = {};
 	} else {
-		const displaySettings = useDisplaySettings(breakpoints) || {};
+		const displaySettings = useDisplaySettings(props.breakpoints) || {};
 
 		// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
 		theme = deepmerge(
@@ -320,6 +327,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		width,
 		style,
 		controller,
+		styleScript,
 	} = props;
 
 	const subProps: AutocompleteSubProps = {
@@ -345,7 +353,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		results: {
 			// default props
 			className: 'ss__autocomplete__results',
-			breakpoints: breakpoints,
+			breakpoints: props.breakpoints,
 			resultLayout: resultLayout,
 			// inherited props
 			...defined({
@@ -431,6 +439,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		];
 	} else if (style) {
 		styling.css = [style];
+	}
+
+	// add styleScript to styling
+	if (styleScript) {
+		styling.css = styling.css || [];
+		styling.css.push(styleScript(props));
 	}
 
 	return visible ? (
@@ -624,7 +638,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
 													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
 													{search.query.string}"
-													<Icon {...subProps.icon} />
+													<Icon name="seeMoreIcon" {...subProps.icon} />
 												</a>
 											</div>
 										) : null

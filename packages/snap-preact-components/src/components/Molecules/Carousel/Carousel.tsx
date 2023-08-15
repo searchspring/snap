@@ -288,7 +288,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 					>
-						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
+						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'previousButton'} />}
 					</div>
 				</div>
 
@@ -325,7 +325,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationNextRef as React.RefObject<HTMLDivElement>}
 						onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
 					>
-						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
+						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} name={'nextButton'} />}
 					</div>
 				</div>
 			</div>

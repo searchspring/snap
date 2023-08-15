@@ -11,6 +11,7 @@ import { LayoutElement, ResultLayoutTypes } from '.';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { Product } from '@searchspring/snap-store-mobx';
+import { Theme } from '../../../providers';
 
 export type ResultLayoutComponentMap = {
 	[componentName: string]: {
@@ -128,8 +129,9 @@ export const Componentize = (props: {
 	result: Product;
 	controller: AutocompleteController | RecommendationController | SearchController;
 	layout: LayoutElement | LayoutElement[] | ResultLayoutFunc;
+	theme?: Theme;
 }) => {
-	const { controller, result, layout } = props;
+	const { controller, result, layout, theme } = props;
 	return (
 		<Fragment>
 			{makeLayoutArray(controller, result, layout).map((element) => {
@@ -140,7 +142,7 @@ export const Componentize = (props: {
 
 					return (
 						<Flex className={generateLayoutClassName(element.name)} {...element.layout}>
-							<Componentize controller={controller} result={result} layout={containerElement.items || []} />
+							<Componentize controller={controller} result={result} layout={containerElement.items || []} theme={theme} />
 						</Flex>
 					);
 				} else if (element.component) {
@@ -160,7 +162,7 @@ export const Componentize = (props: {
 								if (typeof layoutProp == 'function' || Array.isArray(layoutProp) || typeof layoutProp == 'object') {
 									// @ts-ignore - typing is hard
 									elementProps[propName as keyof typeof elementProps] = makeLayoutArray(controller, result, layoutProp).map((layout) => (
-										<Componentize controller={controller} result={result} layout={layout} />
+										<Componentize controller={controller} result={result} layout={layout} theme={theme} />
 									));
 								}
 							}
@@ -170,7 +172,7 @@ export const Componentize = (props: {
 					return (
 						<Flex className={classnames(generateLayoutClassName(element.name))} item {...element.layout}>
 							<Suspense fallback={<Fragment />}>
-								<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} />
+								<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} theme={theme} />
 							</Suspense>
 						</Flex>
 					);

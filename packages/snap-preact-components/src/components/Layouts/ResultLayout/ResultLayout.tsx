@@ -36,7 +36,7 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 
 	const props = mergeProps('resultLayout', globalTheme, defaultProps, properties);
 
-	const { controller, result, disableStyles, className, style } = props;
+	const { controller, result, disableStyles, className, style, theme } = props;
 	const layout = props.layout;
 
 	const styling: { css?: StylingCSS } = {};
@@ -51,7 +51,8 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__result-layout', className)}>
-					<Componentize controller={controller} result={result} layout={layout} />
+					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
+					<Componentize controller={controller} result={result} layout={layout} theme={theme} />
 				</div>
 			</CacheProvider>
 		);
