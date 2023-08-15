@@ -310,6 +310,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					loop={loop}
 					threshold={7}
 					{...additionalProps}
+					controller={undefined} // prevent passing controller in additionalProps (causes unnecessary swiper updates and errors)
 					{...displaySettings}
 					pagination={pagination}
 				>

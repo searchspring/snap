@@ -6,10 +6,11 @@ import { jsx } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Flex } from '../../Atoms/Flex';
-import { ResultLayout, ResultLayoutFuncData } from '.';
+import { ResultLayoutFunc } from '.';
 import { LayoutElement, ResultLayoutTypes } from '.';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
+import { Product } from '@searchspring/snap-store-mobx';
 
 export type ResultLayoutComponentMap = {
 	[componentName: string]: {
@@ -103,19 +104,35 @@ const componentMap: ResultLayoutComponentMap = {
 	/* MOLECULES */
 	Carousel: {
 		component: Carousel,
+		layoutProps: ['prevButton', 'nextButton', 'children'],
 	},
 };
 
 export type ComponentMap = typeof componentMap;
 
+function makeLayoutArray(
+	controller: AutocompleteController | RecommendationController | SearchController,
+	result: Product,
+	layout: LayoutElement | LayoutElement[] | ResultLayoutFunc
+): LayoutElement[] {
+	if (typeof layout == 'function') {
+		return layout({ controller, result });
+	} else if (Array.isArray(layout)) {
+		return layout;
+	}
+
+	return [layout];
+}
+
 export const Componentize = (props: {
-	data: ResultLayoutFuncData<AutocompleteController | RecommendationController | SearchController>;
-	layout: LayoutElement[];
+	result: Product;
+	controller: AutocompleteController | RecommendationController | SearchController;
+	layout: LayoutElement | LayoutElement[] | ResultLayoutFunc;
 }) => {
-	const { data, layout } = props;
+	const { controller, result, layout } = props;
 	return (
 		<Fragment>
-			{layout.map((element) => {
+			{makeLayoutArray(controller, result, layout).map((element) => {
 				if (element.items) {
 					// if the element is a Flex
 					const containerElement = element;
@@ -123,7 +140,7 @@ export const Componentize = (props: {
 
 					return (
 						<Flex className={generateLayoutClassName(element.name)} {...element.layout}>
-							<Componentize data={data} layout={containerElement.items || []} />
+							<Componentize controller={controller} result={result} layout={containerElement.items || []} />
 						</Flex>
 					);
 				} else if (element.component) {
@@ -132,26 +149,28 @@ export const Componentize = (props: {
 					const Component = componentMapping.component;
 
 					// create Layout from props supporting layout
-					const mappedProps = element.props || {};
-					if (mappedProps) {
-						Object.keys(mappedProps).map((propName) => {
-							const propValue = mappedProps[propName as keyof typeof mappedProps];
-							if ((componentMapping.layoutProps || []).includes(propName)) {
-								const layoutProp = propValue as ResultLayoutTypes;
-								if (typeof propValue == 'function' || Array.isArray(propValue) || typeof propValue == 'object') {
-									// it is a LayoutFunc or LayoutElement Array
+					const elementProps = element.props || {};
+					if (elementProps) {
+						Object.keys(elementProps).map((propName) => {
+							const layoutProp = elementProps[propName as keyof typeof elementProps] as ResultLayoutTypes;
 
+							// if the component has a prop that is of layout type
+							if ((componentMapping.layoutProps || []).includes(propName)) {
+								// if the layoutProp value is a LayoutElementType
+								if (typeof layoutProp == 'function' || Array.isArray(layoutProp) || typeof layoutProp == 'object') {
 									// @ts-ignore - typing is hard
-									mappedProps[propName as keyof typeof mappedProps] = <ResultLayout {...data} layout={layoutProp} />;
+									elementProps[propName as keyof typeof elementProps] = makeLayoutArray(controller, result, layoutProp).map((layout) => (
+										<Componentize controller={controller} result={result} layout={layout} />
+									));
 								}
 							}
 						});
 					}
 
 					return (
-						<Flex className={classnames(generateLayoutClassName(element.name), generateLayoutClassName(element.component))} item {...element.layout}>
+						<Flex className={classnames(generateLayoutClassName(element.name))} item {...element.layout}>
 							<Suspense fallback={<Fragment />}>
-								<Component {...data} {...(element.props as any)} breakpoints={{}} />
+								<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} />
 							</Suspense>
 						</Flex>
 					);

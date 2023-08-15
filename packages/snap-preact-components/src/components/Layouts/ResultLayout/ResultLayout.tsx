@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useMemo } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -48,23 +47,11 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		styling.css = [style];
 	}
 
-	// typed as any due to not knowing which controller type is used
-	const layoutData = { controller, result };
-
 	if (layout) {
-		let layouts: LayoutElement[] = [];
-		if (typeof layout == 'function') {
-			layouts = layouts.concat(useMemo(() => layout(layoutData), [layoutData.result.id]));
-		} else {
-			layouts = layouts.concat(layout);
-		}
-
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__result-layout', className)}>
-					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
-
-					<Componentize data={layoutData} layout={layouts} />
+					<Componentize controller={controller} result={result} layout={layout} />
 				</div>
 			</CacheProvider>
 		);
@@ -152,7 +139,11 @@ type StringElement = {
 
 type CarouselElement = {
 	component: 'Carousel';
-	props: CarouselProps;
+	props: Omit<CarouselProps, 'prevButton' | 'nextButton' | 'children'> & {
+		prevButton?: string | ResultLayoutTypes;
+		nextButton?: string | ResultLayoutTypes;
+		children?: string | ResultLayoutTypes;
+	};
 };
 
 export type ResultLayoutFuncData<Controller> = {
