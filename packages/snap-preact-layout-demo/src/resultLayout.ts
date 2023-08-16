@@ -1,10 +1,8 @@
-import { Product } from '@searchspring/snap-store-mobx';
-
 export const resultLayout: LayoutFunc = ({
 	result,
 }: {
 	controller: SearchController | AutocompleteController | RecommendationController;
-	result: Product;
+	result: Result;
 }) => {
 	const { core } = result.mappings;
 
@@ -95,7 +93,12 @@ export const resultLayout: LayoutFunc = ({
 	];
 };
 
-export const listResultLayout: LayoutFunc = ({ result }: any) => {
+export const listResultLayout: LayoutFunc = ({
+	result,
+}: {
+	controller: SearchController | AutocompleteController | RecommendationController;
+	result: Result;
+}) => {
 	const { core } = result.mappings;
 
 	return [
