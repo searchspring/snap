@@ -37,7 +37,7 @@ import { FacetsProps } from '../components/Organisms/Facets';
 import { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import { NoResultsProps } from '../components/Organisms/NoResults';
 import { ResultsProps } from '../components/Organisms/Results';
-import { SearchHeaderProps } from '../components/Organisms/SearchHeader';
+import { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import { SidebarProps } from '../components/Organisms/Sidebar';
 import { ToolbarProps } from '../components/Organisms/Toolbar';
 import { AutocompleteProps } from '../components/Templates/Autocomplete';

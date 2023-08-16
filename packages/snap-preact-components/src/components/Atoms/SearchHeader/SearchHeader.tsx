@@ -8,6 +8,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
+import { SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
+import classNames from 'classnames';
 
 const CSS = {
 	searchheader: () => css(),
@@ -16,16 +18,20 @@ const CSS = {
 export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const landingPage = properties.controller.store.merchandising.landingPage;
-	const { pagination, search } = properties.controller.store;
+	const landingPage = properties.controller?.store.merchandising.landingPage;
+
+	const pagination = properties.controller?.store.pagination || properties.paginationStore;
+	const search = properties.controller?.store.search || properties.queryStore;
 
 	const defaultProps: Partial<SearchHeaderProps> = {
-		titleText: `Showing ${pagination.multiplePages ? `<span class="ss-results-count-range"> ${pagination.begin} - ${pagination.end} of </span>` : ''} 
-		<span class="ss-results-count-total">${pagination.totalResults}</span> 
-		result${pagination.totalResults == 1 ? '' : 's'} 
+		titleText: `Showing ${
+			pagination?.multiplePages ? `<span class="ss-results-count-range"> ${pagination?.begin} - ${pagination?.end} of </span>` : ''
+		} 
+		<span class="ss-results-count-total">${pagination?.totalResults}</span> 
+		result${pagination?.totalResults == 1 ? '' : 's'} 
 		${search?.query ? `<span>for <span class="ss-results-query">"${search.query.string}"</span></span>` : ''}
 	`,
-		oqText: `<div class="ss-oq">No results found for <em>"${search.originalQuery?.string}"</em>, showing results for <em>"${search.query?.string}"</em> instead.</div>`,
+		oqText: `<div class="ss-oq">No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.</div>`,
 		noResultsText: `${
 			search?.query
 				? `<span>
@@ -37,7 +43,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
 
-	const { controller, disableStyles, style } = props;
+	const { disableStyles, style, className } = props;
 
 	let { titleText, subTitleText, oqText, noResultsText } = props;
 
@@ -49,27 +55,32 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		styling.css = [style];
 	}
 
+	const data: data = {
+		pagination: pagination,
+		search: search,
+	};
+
 	if (typeof titleText == 'function') {
-		titleText = titleText({ controller });
+		titleText = titleText(data);
 	}
 	if (typeof subTitleText == 'function') {
-		subTitleText = subTitleText({ controller });
+		subTitleText = subTitleText(data);
 	}
 	if (typeof oqText == 'function') {
-		oqText = oqText({ controller });
+		oqText = oqText(data);
 	}
 	if (typeof noResultsText == 'function') {
-		noResultsText = noResultsText({ controller });
+		noResultsText = noResultsText(data);
 	}
 
 	return (
 		<CacheProvider>
-			<header {...styling} className="ss__search-header">
+			<header {...styling} className={classNames('ss__search-header', className)}>
 				{landingPage ? (
 					<h3 className="ss__search-header--landingPageTitle">{landingPage.title}</h3>
 				) : (
 					<Fragment>
-						{pagination.totalResults ? (
+						{pagination?.totalResults ? (
 							<>
 								<h3
 									className="ss__search-header--title"
@@ -88,7 +99,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 									></h4>
 								)}
 
-								{search.originalQuery && (
+								{search?.originalQuery && (
 									<h5
 										className="ss__search-header--oq"
 										aria-atomic="true"
@@ -99,12 +110,12 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 								)}
 							</>
 						) : (
-							pagination.totalResults === 0 && (
+							pagination?.totalResults === 0 && (
 								<h3
 									className="ss__search-header--noresultstitle"
 									aria-atomic="true"
 									aria-live="polite"
-									aria-label={`No results found for ${search.query?.string}`}
+									aria-label={`No results found for ${search?.query?.string}`}
 									dangerouslySetInnerHTML={{ __html: noResultsText as string }}
 								></h3>
 							)
@@ -117,7 +128,10 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 });
 
 export interface SearchHeaderProps extends ComponentProps {
-	controller: SearchController;
+	controller?: SearchController;
+	queryStore?: SearchQueryStore;
+	paginationStore?: SearchPaginationStore;
+
 	titleText?: string | ((data: data) => string);
 	subTitleText?: string | ((data: data) => string);
 	oqText?: string | ((data: data) => string);
@@ -125,5 +139,6 @@ export interface SearchHeaderProps extends ComponentProps {
 }
 
 interface data {
-	controller: SearchController;
+	pagination?: SearchPaginationStore;
+	search?: SearchQueryStore;
 }
