@@ -29,13 +29,17 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
+	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style, styleScript } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.icon({ color, width, height, size, theme }), style];
+	const stylingProps = { color, width, height, size, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.icon(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

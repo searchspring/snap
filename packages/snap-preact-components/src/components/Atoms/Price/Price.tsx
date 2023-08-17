@@ -49,7 +49,9 @@ export function Price(properties: PriceProps): JSX.Element {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
+
 	let formattedPrice: string | undefined;
 	if (value) {
 		formattedPrice = filters.currency(value, {
@@ -63,8 +65,12 @@ export function Price(properties: PriceProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.price({ theme }), style];
+	const stylingProps = { theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.price(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

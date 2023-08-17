@@ -20,6 +20,7 @@ const CSS = {
 
 export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<BadgeProps> = {
 		position: {
 			top: 0,
@@ -29,12 +30,15 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 
 	const props = mergeProps('badge', globalTheme, defaultProps, properties);
 
-	const { content, title, children, position, disableStyles, className, style } = props;
+	const { content, title, children, position, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { position, theme };
 
-	if (!disableStyles) {
-		styling.css = [CSS.badge({ position }), style];
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.badge(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

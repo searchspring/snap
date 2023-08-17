@@ -30,6 +30,7 @@ const CSS = {
 
 export function Image(properties: ImageProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<ImageProps> = {
 		fallback: FALLBACK_IMAGE_URL,
 		lazy: true,
@@ -37,7 +38,8 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const props = mergeProps('image', globalTheme, defaultProps, properties);
 
-	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style, styleScript } =
+		props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
@@ -51,11 +53,16 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.image({ visibility }), style];
+	const stylingProps = { visibility, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.image(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__image', className)}>

@@ -50,6 +50,7 @@ const CSS = {
 
 export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<SkeletonProps> = {
 		backgroundColor: '#ebebeb',
 		animatedColor: '#f5f5f5',
@@ -57,14 +58,19 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);
 
-	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style } = props;
+	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.skeleton({ width, height, round, backgroundColor, animatedColor, animation: CSS.animation }), style];
+	const stylingProps = { width, height, round, backgroundColor, animatedColor, animation: CSS.animation, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.skeleton(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__skeleton', className)}></div>

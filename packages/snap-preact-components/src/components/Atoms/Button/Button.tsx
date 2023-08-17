@@ -65,7 +65,10 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { backgroundColor, borderColor, color, disabled, native, theme };
-	if (!disableStyles) {
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
@@ -73,12 +76,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		}
 	} else if (style) {
 		styling.css = [style];
-	}
-
-	// add styleScript to styling
-	if (styleScript) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(stylingProps));
 	}
 
 	const elementProps = {

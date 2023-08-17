@@ -12,7 +12,7 @@ import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	banner: () =>
+	banner: ({}) =>
 		css({
 			'& iframe, img': {
 				maxWidth: '100%',
@@ -23,11 +23,12 @@ const CSS = {
 
 export const Banner = observer((properties: BannerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<BannerProps> = {};
 
 	const props = mergeProps('banner', globalTheme, defaultProps, properties);
 
-	const { controller, type, disableStyles, className, style } = props;
+	const { controller, type, disableStyles, className, style, styleScript } = props;
 
 	const content = props.content || controller?.store?.merchandising.content;
 
@@ -36,8 +37,12 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 		return <Fragment></Fragment>;
 	}
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.banner(), style];
+	const stylingProps = { theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps)];
+	} else if (!disableStyles) {
+		styling.css = [CSS.banner(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
