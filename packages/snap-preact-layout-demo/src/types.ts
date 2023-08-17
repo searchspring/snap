@@ -41,4 +41,11 @@ declare global {
 	interface Window {
 		mergeSnapConfig?: any;
 	}
+
+	type Result = StoreTypes.Product & {
+		// attributes: {
+		// }
+		// custom: {
+		// }
+	};
 }
