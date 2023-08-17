@@ -21,15 +21,21 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const defaultProps: Partial<TermsProps> = {};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
-
-	const { terms, title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, controller } = props;
+	const { title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, className, controller, styleScript } = props;
 	const currentInput = controller?.store?.state?.input;
+	const terms = props.terms || controller?.store.terms;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.Terms(), style];
 	} else if (style) {
 		styling.css = [style];
+	}
+
+	// add styleScript to styling
+	if (styleScript) {
+		styling.css = styling.css || [];
+		styling.css.push(styleScript(props));
 	}
 
 	const emIfyTerm = (term: string, search: string) => {
@@ -70,17 +76,17 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	return termsToShow?.length ? (
 		<CacheProvider>
-			<div className="ss__autocomplete__terms">
+			<div {...styling} className={classnames('ss__terms', className)}>
 				{title ? (
-					<div className="ss__autocomplete__title">
+					<div className="ss__terms__title">
 						<h5>{title}</h5>
 					</div>
 				) : null}
-				<div className="ss__autocomplete__terms__options" role={'list'} aria-label={title}>
+				<div className="ss__terms__options" role={'list'} aria-label={title}>
 					{termsToShow?.map((term, idx) => (
 						<div
-							className={classnames('ss__autocomplete__terms__option', {
-								'ss__autocomplete__terms__option--active': term.active,
+							className={classnames('ss__terms__option', {
+								'ss__terms__option--active': term.active,
 							})}
 						>
 							<a
@@ -88,7 +94,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 								href={term.url.href}
 								{...(previewOnHover ? createHoverProps(term.preview) : {})}
 								role="link"
-								aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
+								aria-label={`item ${idx + 1} of ${termsToShow.length}, ${term.value}`}
 							>
 								{emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}
 							</a>
