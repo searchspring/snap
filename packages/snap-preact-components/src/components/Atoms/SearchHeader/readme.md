@@ -1,6 +1,6 @@
 # Search Header
 
-Will render a series of heading elements to build a search header. Depending on current store data, it may show verbiage for the search title & subtitle, corrected and original search query, no results title, or even a landing page title from the merchandising store. 
+Will render a series of heading elements to build a search header. Depending on current store data, it may show verbiage for the search title, corrected and original search query, no results title, or even a landing page title from the merchandising store.
 
 ## Usage
 
@@ -25,11 +25,11 @@ The `titleText` prop specifies the text to render in the title. This can be eith
 <SearchHeader controller={controller} titleText={'Search Results'}/>
 ```
 
-### subTitleText
-The `subTitleText` prop specifies an optional subtitle to render under the title. This can be either a string, or a function that returns a string, functions are passed the controller.
+### subtitleText
+The `subtitleText` prop specifies an optional subtitle to render under the the rest of the headings. This can be either a string, or a function that returns a string, functions are passed the controller.
 
 ```jsx
-<SearchHeader controller={controller} subTitleText={'Narrow your search!'} />
+<SearchHeader controller={controller} subtitleText={'Narrow your search!'} />
 ```
 
 ### correctedQueryText

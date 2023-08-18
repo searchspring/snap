@@ -29,9 +29,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		} 
 		<span class="ss__search-header__results-count-total">${pagination?.totalResults}</span> 
 		result${pagination?.totalResults == 1 ? '' : 's'} 
-		${search?.query ? `<span>for <span class="ss__search-header__results-query">"${search.query.string}"</span></span>` : ''}
+		${search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''}
 	`,
-		correctedQueryText: `<div class="ss__search-header__corrected">No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.</div>`,
+		correctedQueryText: `>No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
 		noResultsText: `${
 			search?.query
 				? `<span>
@@ -45,7 +45,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	const { disableStyles, style, className } = props;
 
-	let { titleText, subTitleText, correctedQueryText, noResultsText } = props;
+	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -77,7 +77,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		<CacheProvider>
 			<header {...styling} className={classNames('ss__search-header', className)}>
 				{landingPage ? (
-					<h3 className="ss__search-header__landingPageTitle">{landingPage.title}</h3>
+					<h3 className="ss__search-header__landing-page-title">{landingPage.title}</h3>
 				) : (
 					<Fragment>
 						{pagination?.totalResults ? (
@@ -103,7 +103,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 						) : (
 							pagination?.totalResults === 0 && (
 								<h3
-									className="ss__search-header__noresultstitle"
+									className="ss__search-header__no-results-title"
 									aria-atomic="true"
 									aria-live="polite"
 									aria-label={`No results found for ${search?.query?.string}`}
@@ -134,7 +134,7 @@ export interface SearchHeaderProps extends ComponentProps {
 	merchandisingStore?: SearchMerchandisingStore;
 
 	titleText?: string | ((data: data) => string);
-	subTitleText?: string | ((data: data) => string);
+	subtitleText?: string | ((data: data) => string);
 	correctedQueryText?: string | ((data: data) => string);
 	noResultsText?: string | ((data: data) => string);
 }
