@@ -20,6 +20,9 @@ export default {
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
+			actions: {
+				disabled: true,
+			},
 		},
 	},
 	decorators: [
@@ -36,7 +39,7 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'Search Controller reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'Search controller object',
@@ -44,30 +47,59 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		queryStore: {
+			description: 'Search Query Store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Search Query Store object',
+				},
+			},
+			control: { type: 'none' },
+		},
+		paginationStore: {
+			description: 'Search Pagination Store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Search Pagination Store object',
+				},
+			},
+			control: { type: 'none' },
+		},
+		merchandisingStore: {
+			description: 'Search Merchandising Store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Search Merchandising Store object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		titleText: {
-			defaultValue: 'Showing 1-30 of 8,474 results for "*"',
 			description: 'Search Title Text',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'Showing 1-30 of 8,474 results for "*"' },
+				defaultValue: {
+					summary:
+						'Showing <span class="ss-results-count-range">1-30 of</span> <span class="ss-results-count-total">8,474</span> results <span>for <span class="ss-results-query">"*"</span></span>',
+				},
 			},
 			control: { type: 'text' },
 		},
 		subTitleText: {
-			defaultValue: '',
 			description: 'Search Subtitle Text',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '' },
 			},
 			control: { type: 'text' },
 		},
-		oqText: {
-			defaultValue: '<div class="ss-oq">No results found for <em>"*"</em>, showing results for <em>"hat"</em> instead.</div>',
+		correctedQueryText: {
 			description: 'Original query redirect text',
 			table: {
 				type: {
@@ -78,7 +110,6 @@ export default {
 			control: { type: 'text' },
 		},
 		noResultsText: {
-			defaultValue: '<span>No results found.</span>',
 			description: 'no results found text',
 			table: {
 				type: {
@@ -92,7 +123,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
 
 export const Default = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;
@@ -103,6 +134,36 @@ Default.loaders = [
 		await snapInstance.search();
 		return {
 			controller: snapInstance,
+		};
+	},
+];
+
+const NoResultsSnapInstance = Snapify.search({ id: 'noResults', globals: { siteId: '8uyt2m', search: { query: { string: 'pokemon' } } } });
+
+export const NoResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchHeader {...args} controller={controller} />;
+};
+
+NoResults.loaders = [
+	async () => {
+		await NoResultsSnapInstance.search();
+		return {
+			controller: NoResultsSnapInstance,
+		};
+	},
+];
+
+const correctedSnapInstance = Snapify.search({ id: 'CorrectedResults', globals: { siteId: '8uyt2m', search: { query: { string: 'drezz' } } } });
+
+export const CorrectedResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchHeader {...args} controller={controller} />;
+};
+
+CorrectedResults.loaders = [
+	async () => {
+		await correctedSnapInstance.search();
+		return {
+			controller: correctedSnapInstance,
 		};
 	},
 ];
