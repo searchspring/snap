@@ -14,7 +14,7 @@ The `controller` prop specifies a reference to the autocomplete controller.
 
 ### Terms
 
-The `terms` prop specifies a reference to an autocomplete term store. 
+The `terms` prop specifies a reference to an autocomplete term store, if terms are not provided, the terms in the controller store will be used. 
 
 ```jsx
 <Terms controller={controller} terms={terms}/>
@@ -25,7 +25,7 @@ The `terms` prop specifies a reference to an autocomplete term store.
 The `title` prop is will display the given text above the terms area. The default value is blank. 
 
 ```jsx
-<Terms controller={controller} terms={terms} title={'Suggestions'}/>
+<Terms controller={controller} title={'Suggestions'}/>
 ```
 
 ### limit
@@ -33,7 +33,7 @@ The `title` prop is will display the given text above the terms area. The defaul
 The `limit` prop is used for number of terms to show. 
 
 ```jsx
-<Terms controller={controller} terms={terms} limit={4}/>
+<Terms controller={controller} limit={4}/>
 ```
 
 ### previewOnHover
@@ -41,7 +41,7 @@ The `limit` prop is used for number of terms to show.
 The `previewOnFocus` prop will invoke the `term.preview()` method when the value has been hovered over.
 
 ```jsx
-<Terms controller={controller} terms={terms} previewOnHover={true}/>
+<Terms controller={controller} previewOnHover={true}/>
 ```
 
 ### emify
@@ -49,7 +49,7 @@ The `previewOnFocus` prop will invoke the `term.preview()` method when the value
 The `emify` will automatically wrap non-matching characters within the term with an `<em>` element for different styling purposes. 
 
 ```jsx
-<Terms controller={controller} terms={terms} emify={true}/>
+<Terms controller={controller} emify={true}/>
 ```
 
 ### onTermClick
@@ -57,5 +57,5 @@ The `emify` will automatically wrap non-matching characters within the term with
 The `onTermClick` prop allows for a custom callback function for when a term value is clicked.
 
 ```jsx
-<Terms controller={controller} terms={terms} onTermClick={(e)=>{console.log(e)}}/>
+<Terms controller={controller} onTermClick={(e)=>{console.log(e)}}/>
 ```

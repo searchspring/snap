@@ -48,28 +48,27 @@ export default {
 	],
 	argTypes: {
 		controller: {
-			description: 'Autocomplete controller reference',
+			description: 'autocomplete controller reference',
 			type: { required: false },
 			table: {
 				type: {
-					summary: 'Autocomplete controller object',
+					summary: 'autocomplete controller object',
 				},
 			},
 			control: { type: 'none' },
 		},
 		terms: {
-			description: 'Autocomplete Term store reference',
+			description: 'autocomplete term store reference',
 			type: { required: false },
 			table: {
 				type: {
-					summary: 'Autocomplete Term store object',
+					summary: 'autocomplete term store object',
 				},
 			},
 			control: { type: 'none' },
 		},
 		title: {
 			description: 'terms title',
-			defaultValue: '',
 			type: { required: false },
 			table: {
 				type: {
@@ -80,7 +79,6 @@ export default {
 		},
 		limit: {
 			description: 'adjust the number of terms to show',
-			defaultValue: '',
 			type: { required: false },
 			table: {
 				type: {
@@ -90,29 +88,25 @@ export default {
 			control: { type: 'number' },
 		},
 		previewOnHover: {
-			defaultValue: false,
-			description: 'Invoke term preview upon focus',
+			description: 'invoke term preview upon focus',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		emIfy: {
-			defaultValue: false,
 			description: 'highlight the query matched section of the term',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		onTermClick: {
-			description: 'Custom onClick event handler for Terms',
+			description: 'custom onClick event handler for Terms',
 			table: {
 				type: {
 					summary: 'function',
