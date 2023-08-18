@@ -31,7 +31,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		result${pagination?.totalResults == 1 ? '' : 's'} 
 		${search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''}
 	`,
-		correctedQueryText: `>No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
+		correctedQueryText: `No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
 		noResultsText: `${
 			search?.query
 				? `<span>
@@ -77,13 +77,13 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		<CacheProvider>
 			<header {...styling} className={classNames('ss__search-header', className)}>
 				{landingPage ? (
-					<h3 className="ss__search-header__landing-page-title">{landingPage.title}</h3>
+					<h3 className={classNames('ss__search-header__title', 'ss__search-header__title--landing-page')}>{landingPage.title}</h3>
 				) : (
 					<Fragment>
 						{pagination?.totalResults ? (
 							<>
 								<h3
-									className="ss__search-header__title"
+									className={classNames('ss__search-header__title', 'ss__search-header__title--results')}
 									aria-atomic="true"
 									aria-live="polite"
 									aria-label={`Now showing ${pagination.totalResults} items in the product grid`}
@@ -92,7 +92,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 								{search?.originalQuery && (
 									<h5
-										className="ss__search-header__corrected"
+										className={classNames('ss__search-header__title', 'ss__search-header__title--corrected')}
 										aria-atomic="true"
 										aria-live="polite"
 										aria-label={`No results found for ${search.originalQuery?.string}, showing results for ${search.query?.string} instead`}
@@ -103,7 +103,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 						) : (
 							pagination?.totalResults === 0 && (
 								<h3
-									className="ss__search-header__no-results-title"
+									className={classNames('ss__search-header__title', 'ss__search-header__title--no-results')}
 									aria-atomic="true"
 									aria-live="polite"
 									aria-label={`No results found for ${search?.query?.string}`}
@@ -114,7 +114,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 						{subTitleText && (
 							<h4
-								className="ss__search-header__subtitle"
+								className={classNames('ss__search-header__title', 'ss__search-header__title--subtitle')}
 								aria-atomic="true"
 								aria-live="polite"
 								dangerouslySetInnerHTML={{ __html: subTitleText as string }}
