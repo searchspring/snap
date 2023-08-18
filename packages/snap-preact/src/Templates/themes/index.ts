@@ -1,18 +1,18 @@
 import { PikeTemplateTheme } from './pike';
-import { EverestTemplateTheme } from './everest';
+import { BocachicaTemplateTheme } from './bocachica';
 
 export type TemplateThemeConfig = {
-	name: 'pike' | 'everest'; // TODO: figure out why "keyof typeof themeMap" doesn't work here
+	name: 'pike' | 'bocachica'; // TODO: figure out why "keyof typeof themeMap" doesn't work here
 	variables?: {
 		breakpoints: number[];
 	};
-} & Partial<PikeTemplateTheme | EverestTemplateTheme>;
+} & Partial<PikeTemplateTheme | BocachicaTemplateTheme>;
 
 export const themeMap = {
 	pike: async () => {
 		return (await import('./pike')).pike;
 	},
-	everest: async () => {
-		return (await import('./everest')).everest;
+	bocachica: async () => {
+		return (await import('./bocachica')).bocachica;
 	},
 };

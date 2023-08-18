@@ -65,10 +65,10 @@ export function Price(properties: PriceProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.price(stylingProps), style];
 	} else if (style) {

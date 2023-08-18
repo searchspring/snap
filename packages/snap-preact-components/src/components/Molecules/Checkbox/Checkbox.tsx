@@ -31,7 +31,7 @@ const CSS = {
 				height: `calc(${size} - 30%)`,
 			},
 		}),
-	native: () => css({}),
+	native: ({}) => css({}),
 };
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
@@ -45,7 +45,22 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
-	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, style } = props;
+	const {
+		checked,
+		color,
+		disabled,
+		icon,
+		iconColor,
+		onClick,
+		size,
+		startChecked,
+		native,
+		disableA11y,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+	} = props;
 
 	const subProps: CheckboxSubProps = {
 		icon: {
@@ -89,11 +104,15 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
 		if (native) {
-			styling.css = [CSS.native(), style];
+			styling.css = [CSS.native(stylingProps), style];
 		} else {
-			styling.css = [CSS.checkbox({ size, color, theme }), style];
+			styling.css = [CSS.checkbox(stylingProps), style];
 		}
 	} else if (style) {
 		styling.css = [style];

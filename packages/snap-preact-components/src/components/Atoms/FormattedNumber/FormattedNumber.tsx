@@ -52,10 +52,10 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	});
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.formattedNumber(stylingProps), style];
 	} else if (style) {

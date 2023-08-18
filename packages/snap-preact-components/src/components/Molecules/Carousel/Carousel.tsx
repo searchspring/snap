@@ -223,6 +223,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		onClick,
 		disableStyles,
 		style,
+		styleScript,
 		modules,
 		className,
 		...additionalProps
@@ -256,8 +257,12 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const rootComponentRef = useRef(null);
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.carousel({ theme, vertical }), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.carousel(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

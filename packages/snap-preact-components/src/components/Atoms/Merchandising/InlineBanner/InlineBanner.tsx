@@ -42,13 +42,13 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const props = mergeProps('inlineBanner', globalTheme, defaultProps, properties);
 
-	const { banner, disableStyles, className, width, layout, onClick, style, styleScript } = props;
+	const { banner, disableStyles, className, layout, onClick, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { width, theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.inlineBanner(stylingProps), style];
 	} else if (style) {

@@ -32,6 +32,7 @@ export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
 export * from './components/Molecules/FacetSlider';
 export * from './components/Molecules/Rating';
+export * from './components/Molecules/SearchInput';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';

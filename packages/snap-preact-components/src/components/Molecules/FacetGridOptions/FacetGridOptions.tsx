@@ -84,11 +84,15 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
 
-	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const { values, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.grid({ columns, gapSize, theme }), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.grid(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

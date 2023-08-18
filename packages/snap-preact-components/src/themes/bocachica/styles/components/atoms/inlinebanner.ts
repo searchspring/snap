@@ -1,11 +1,11 @@
 import { css, InlineBannerProps } from '../../../../../index';
-import { EverestVariables } from '../../../index';
+import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the InlineBanner component
 const inlineBannerStyleScript = ({ width, theme }: InlineBannerProps) => {
 	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as EverestVariables;
+	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
 		height: '100%',

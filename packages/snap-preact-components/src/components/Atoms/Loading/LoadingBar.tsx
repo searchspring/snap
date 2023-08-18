@@ -51,13 +51,13 @@ export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element =>
 
 	const props = mergeProps('loadingBar', globalTheme, defaultProps, properties);
 
-	const { active, color, backgroundColor, height, disableStyles, className, style, styleScript } = props;
+	const { active, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { color, height, backgroundColor, animation: CSS.animation, theme };
+	const stylingProps = { ...props, animation: CSS.animation, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.loadingBar(stylingProps), style];
 	} else if (style) {

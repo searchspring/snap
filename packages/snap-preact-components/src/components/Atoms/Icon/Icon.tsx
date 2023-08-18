@@ -34,10 +34,10 @@ export function Icon(properties: IconProps): JSX.Element {
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { color, width, height, size, theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.icon(stylingProps), style];
 	} else if (style) {

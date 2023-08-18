@@ -36,13 +36,13 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const props = mergeProps('overlay', globalTheme, defaultProps, properties);
 
-	const { active, color, transitionSpeed, onClick, disableStyles, className, style, styleScript } = props;
+	const { active, onClick, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { color, transitionSpeed, theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.overlay(stylingProps), style];
 	} else if (style) {

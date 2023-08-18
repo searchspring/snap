@@ -53,10 +53,10 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { visibility, theme };
+	const stylingProps = { ...props, visibility, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.image(stylingProps), style];
 	} else if (style) {

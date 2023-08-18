@@ -49,7 +49,7 @@ const CSS = {
 				},
 			},
 		}),
-	native: () => css({}),
+	native: ({}) => css({}),
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
@@ -86,6 +86,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 	let { options } = props;
 
@@ -161,11 +162,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
 		if (native) {
-			styling.css = [CSS.native(), style];
+			styling.css = [CSS.native(stylingProps), style];
 		} else {
-			styling.css = [CSS.select({ color, backgroundColor, borderColor, theme }), style];
+			styling.css = [CSS.select(stylingProps), style];
 		}
 	} else if (style) {
 		styling.css = [style];

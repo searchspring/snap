@@ -41,7 +41,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholder, onChange, hideIcon, disableStyles, style, className } = props;
+	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className } = props;
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -59,8 +59,12 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.searchInput({ theme }), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.searchInput(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -58,6 +58,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 
 	const subProps: PaginationSubProps = {
@@ -83,8 +84,12 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const pageNumbers = _pages?.map((page) => page.number);
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.pagination({ theme }), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.pagination(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

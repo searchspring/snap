@@ -1,9 +1,9 @@
 import { css, ButtonProps } from '../../../../../index';
-import { EverestVariables } from '../../../index';
+import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Button component
 const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
-	const variables = theme?.variables as EverestVariables;
+	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
 		display: 'inline-flex',

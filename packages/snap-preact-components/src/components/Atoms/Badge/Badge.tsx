@@ -30,13 +30,13 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 
 	const props = mergeProps('badge', globalTheme, defaultProps, properties);
 
-	const { content, title, children, position, disableStyles, className, style, styleScript } = props;
+	const { content, title, children, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { position, theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.badge(stylingProps), style];
 	} else if (style) {

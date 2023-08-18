@@ -35,7 +35,7 @@ const CSS = {
 				},
 			},
 		}),
-	native: () => css({}),
+	native: ({}) => css({}),
 };
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
@@ -47,30 +47,16 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const {
-		backgroundColor,
-		borderColor,
-		color,
-		content,
-		children,
-		disabled,
-		native,
-		onClick,
-		disableA11y,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-	} = props;
+	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { backgroundColor, borderColor, color, disabled, native, theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		if (native) {
-			styling.css = [CSS.native(), style];
+			styling.css = [CSS.native(stylingProps), style];
 		} else {
 			styling.css = [CSS.button(stylingProps), style];
 		}

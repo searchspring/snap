@@ -85,7 +85,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
-	const { controller, error, disableStyles, style, onRetryClick, className } = props;
+	const { controller, error, disableStyles, style, styleScript, onRetryClick, className } = props;
 
 	const subProps: ErrorHandlerSubProps = {
 		icon: {
@@ -117,8 +117,12 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	const errorObject = controller?.store?.error || error;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.errorHandler({ theme }), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.errorHandler(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -34,10 +34,10 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 	const { data, separator, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { theme };
+	const stylingProps = { ...props, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.breadcrumbs(stylingProps), style];
 	} else if (style) {

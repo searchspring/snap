@@ -54,7 +54,6 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		children,
 		disabled,
 		open,
-		disableOverlay,
 		onClick,
 		onToggle,
 		startOpen,
@@ -98,9 +97,10 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { disableOverlay, theme };
+	const stylingProps = { ...props, theme };
+
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.dropdown(stylingProps), style];
 	} else if (style) {

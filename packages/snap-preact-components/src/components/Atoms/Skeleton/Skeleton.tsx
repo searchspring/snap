@@ -58,13 +58,13 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);
 
-	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style, styleScript } = props;
+	const { disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { width, height, round, backgroundColor, animatedColor, animation: CSS.animation, theme };
+	const stylingProps = { ...props, animation: CSS.animation, theme };
 
 	if (styleScript) {
-		styling.css = [styleScript(stylingProps)];
+		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.skeleton(stylingProps), style];
 	} else if (style) {

@@ -1,11 +1,11 @@
 import { css, BannerProps } from '../../../../../index';
-import { EverestVariables } from '../../../index';
+import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Banner component
 const bannerStyleScript = ({ theme }: BannerProps) => {
 	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as EverestVariables;
+	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
 		'& iframe, img': {
