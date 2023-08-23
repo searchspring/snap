@@ -5,7 +5,7 @@ export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
 export * from './components/Atoms/Flex';
 export * from './components/Atoms/FormattedNumber';
-export * from './components/Atoms/String';
+export * from './components/Atoms/Element';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
