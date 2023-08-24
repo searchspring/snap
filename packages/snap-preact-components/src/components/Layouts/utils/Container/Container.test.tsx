@@ -69,6 +69,7 @@ describe('Container Component', () => {
 		expect(element).toBeInTheDocument();
 		expect(parent).toBeInTheDocument();
 		expect(child).toBeInTheDocument();
+		expect(element).toHaveAttribute('href', link);
 		expect(child).toHaveTextContent(text);
 	});
 

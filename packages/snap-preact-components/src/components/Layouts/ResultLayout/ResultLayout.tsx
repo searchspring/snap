@@ -51,7 +51,6 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__result-layout', className)}>
-					{/* loop through layout component tree built above and render comonents with props within Container components */}
 					<Componentize controller={controller} result={result} layout={layout} theme={theme} />
 				</div>
 			</CacheProvider>
