@@ -58,7 +58,7 @@ export const resultLayout: LayoutFunc = ({
 				{
 					name: 'pricingWrapper',
 					layout: {
-						justifyContent: 'column',
+						flexDirection: 'column',
 					},
 					items: [
 						{
@@ -155,7 +155,7 @@ export const listResultLayout: LayoutFunc = ({
 						{
 							name: 'pricingWrapper',
 							layout: {
-								justifyContent: 'column',
+								flexDirection: 'column',
 							},
 							items: [
 								{
