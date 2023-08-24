@@ -1,6 +1,6 @@
 # Element
 
-Renders an html element of your choice. This component can be used for adding basic strings to your layouts, or for adding specific elements for third parties to target and inject into. 
+Renders an HTML element of your choice. This component can be used for adding basic strings to your layouts, or for adding specific elements for third parties to target and inject into. 
 
 ## Usage
 

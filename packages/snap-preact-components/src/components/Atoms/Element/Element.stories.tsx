@@ -58,10 +58,10 @@ export default {
 	},
 };
 
-export const Default = (args: ElementProps) => <Element {...args} />;
-Default.args = {
+export const Div = (args: ElementProps) => <Element {...args} />;
+Div.args = {
 	type: 'div',
-	content: 'content text',
+	content: "I'm a div",
 };
 
 export const Span = (args: ElementProps) => <Element {...args} />;
@@ -70,12 +70,12 @@ Span.args = {
 	content: "I'm a span",
 };
 
-export const Attributes = (args: ElementProps) => <Element {...args} />;
-Attributes.args = {
+export const Label = (args: ElementProps) => <Element {...args} />;
+Label.args = {
 	type: 'label',
 	content: "I'm a label with attributes",
 	attributes: {
-		attribute1: 'hi',
-		attribute2: 'mom',
+		attribute1: 'sku',
+		attribute2: 'link',
 	},
 };
