@@ -11,6 +11,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
+import { Term } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores/AutocompleteTermStore';
 
 const CSS = {
 	Terms: () => css({}),
@@ -21,15 +22,21 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const defaultProps: Partial<TermsProps> = {};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
-
-	const { terms, title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, controller } = props;
+	const { title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, className, controller, styleScript } = props;
 	const currentInput = controller?.store?.state?.input;
+	const terms = props.terms || controller?.store.terms;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.Terms(), style];
 	} else if (style) {
 		styling.css = [style];
+	}
+
+	// add styleScript to styling
+	if (styleScript) {
+		styling.css = styling.css || [];
+		styling.css.push(styleScript(props));
 	}
 
 	const emIfyTerm = (term: string, search: string) => {
@@ -55,8 +62,8 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		);
 	};
 
-	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
-		onTermClick && onTermClick(e);
+	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>, term: Term) => {
+		onTermClick && onTermClick(e, term);
 
 		// remove focus from input (close the autocomplete)
 		controller?.setFocused && controller?.setFocused();
@@ -70,25 +77,25 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	return termsToShow?.length ? (
 		<CacheProvider>
-			<div className="ss__autocomplete__terms">
+			<div {...styling} className={classnames('ss__terms', className)}>
 				{title ? (
-					<div className="ss__autocomplete__title">
+					<div className="ss__terms__title">
 						<h5>{title}</h5>
 					</div>
 				) : null}
-				<div className="ss__autocomplete__terms__options" role={'list'} aria-label={title}>
+				<div className="ss__terms__options" role={'list'} aria-label={title}>
 					{termsToShow?.map((term, idx) => (
 						<div
-							className={classnames('ss__autocomplete__terms__option', {
-								'ss__autocomplete__terms__option--active': term.active,
+							className={classnames('ss__terms__option', {
+								'ss__terms__option--active': term.active,
 							})}
 						>
 							<a
-								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
 								href={term.url.href}
 								{...(previewOnHover ? createHoverProps(term.preview) : {})}
 								role="link"
-								aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
+								aria-label={`item ${idx + 1} of ${termsToShow.length}, ${term.value}`}
 							>
 								{emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}
 							</a>
@@ -107,7 +114,7 @@ export interface TermsProps extends ComponentProps {
 	terms?: AutocompleteTermStore;
 	title?: string;
 	limit?: number;
-	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>, term: Term) => void;
 	previewOnHover?: boolean;
 	emIfy?: boolean;
 }
