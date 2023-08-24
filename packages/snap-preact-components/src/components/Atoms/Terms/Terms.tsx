@@ -11,6 +11,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
+import { Term } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores/AutocompleteTermStore';
 
 const CSS = {
 	Terms: () => css({}),
@@ -61,8 +62,8 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		);
 	};
 
-	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
-		onTermClick && onTermClick(e);
+	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>, term: Term) => {
+		onTermClick && onTermClick(e, term);
 
 		// remove focus from input (close the autocomplete)
 		controller?.setFocused && controller?.setFocused();
@@ -90,7 +91,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 							})}
 						>
 							<a
-								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
 								href={term.url.href}
 								{...(previewOnHover ? createHoverProps(term.preview) : {})}
 								role="link"
@@ -113,7 +114,7 @@ export interface TermsProps extends ComponentProps {
 	terms?: AutocompleteTermStore;
 	title?: string;
 	limit?: number;
-	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>, term: Term) => void;
 	previewOnHover?: boolean;
 	emIfy?: boolean;
 }

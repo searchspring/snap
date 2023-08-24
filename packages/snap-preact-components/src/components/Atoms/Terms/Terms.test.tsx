@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import { v4 as uuidv4 } from 'uuid';
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 
 import { Terms } from './Terms';
@@ -9,6 +9,9 @@ import { AutocompleteController, AutocompleteControllerConfig } from '@searchspr
 import { createAutocompleteController } from '@searchspring/snap-preact';
 import { MockClient } from '@searchspring/snap-shared';
 import userEvent from '@testing-library/user-event';
+
+import { AutocompleteTermStore } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores';
+import { UrlManager } from '@searchspring/snap-url-manager';
 
 describe('Terms Component', () => {
 	const globals = { siteId: '8uyt2m' };
@@ -34,46 +37,54 @@ describe('Terms Component', () => {
 	const mockClient = new MockClient(globals, {});
 	mockClient.mockData.updateConfig({ meta: 'ac.meta' });
 
-	let mockTerms = [
+	let mockTerms: AutocompleteTermStore = [
 		{
 			active: false,
-			preview: () => {},
+			preview: jest.fn(),
 			value: 'dress',
 			url: {
 				href: 'www.dress.com',
-			},
+			} as UrlManager,
 		},
 		{
 			active: false,
-			preview: () => {},
+			preview: jest.fn(),
 			value: 'drss',
 			url: {
 				href: 'www.drss.com',
-			},
+			} as UrlManager,
 		},
 		{
 			active: false,
-			preview: () => {},
+			preview: jest.fn(),
+			value: 'dreees',
+			url: {
+				href: 'www.dreees.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: jest.fn(),
 			value: 'dres',
 			url: {
 				href: 'www.dres.com',
-			},
+			} as UrlManager,
 		},
 		{
 			active: false,
-			preview: () => {},
+			preview: jest.fn(),
 			value: 'dss',
 			url: {
 				href: 'www.dss.com',
-			},
+			} as UrlManager,
 		},
 		{
 			active: false,
-			preview: () => {},
+			preview: jest.fn(),
 			value: 'ress',
 			url: {
 				href: 'www.ress.com',
-			},
+			} as UrlManager,
 		},
 	];
 
@@ -84,40 +95,23 @@ describe('Terms Component', () => {
 	});
 
 	it('renders', async () => {
-		// @ts-ignore - typing on terms
 		const rendered = render(<Terms controller={controller} terms={mockTerms} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 	});
 
-	it('renders with a title', async () => {
-		const title = 'Suggestions';
-		// @ts-ignore - typing on terms
-		const rendered = render(<Terms controller={controller} terms={mockTerms} title={title} />);
+	it('renders with terms just in controller', async () => {
+		const modded = controller;
+		modded.store.terms = mockTerms;
+		const rendered = render(<Terms controller={controller} />);
 		const terms = rendered.container.querySelector('.ss__terms');
-		const titleElem = rendered.container.querySelector('.ss__terms__title');
 		expect(terms).toBeInTheDocument();
-		expect(titleElem).toBeInTheDocument();
-		expect(titleElem).toHaveTextContent(title);
 	});
 
-	it('respects the limit', async () => {
-		const limit = 3;
-		// @ts-ignore - typing on terms
-		const rendered = render(<Terms controller={controller} terms={mockTerms} limit={limit} />);
-		const termOptions = rendered.container.querySelectorAll('.ss__terms__option');
-		expect(termOptions).toHaveLength(limit);
-	});
-
-	it('Can set custom onClick', async () => {
-		const onClick = jest.fn();
-		// @ts-ignore - typing on terms
-		const rendered = render(<Terms controller={controller} terms={mockTerms} onTermClick={onClick} />);
-		const termOptions = rendered.container.querySelector('.ss__terms__option a');
-
-		userEvent.click(termOptions!);
-
-		expect(onClick).toHaveBeenCalled();
+	it('doesnt render with no controller or terms', async () => {
+		const rendered = render(<Terms />);
+		const terms = rendered.container.querySelector('.ss__terms');
+		expect(terms).not.toBeInTheDocument();
 	});
 
 	it('Can use emify', async () => {
@@ -131,17 +125,64 @@ describe('Terms Component', () => {
 
 		userEvent.type(input!, 'dre');
 
-		// @ts-ignore - typing on terms
 		const rendered = render(<Terms controller={controller} terms={mockTerms} emIfy={true} />);
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option a')[0];
 
 		expect(termOptions?.innerHTML).toBe('dre<em>ss</em>');
 	});
 
+	it('passed in terms take priority over controller terms', async () => {
+		const modded = controller;
+		modded.store.terms = [...mockTerms].reverse();
+		const rendered = render(<Terms controller={modded} terms={mockTerms} />);
+		const termOptions = rendered.container.querySelectorAll('.ss__terms__option a');
+		termOptions.forEach((option, index) => {
+			expect(option).toBeInTheDocument();
+			expect(option.innerHTML).toEqual(mockTerms[index].value);
+			expect(option.innerHTML).not.toEqual(modded.store.terms[index].value);
+		});
+	});
+
+	it('renders with a title', async () => {
+		const title = 'Suggestions';
+		const rendered = render(<Terms controller={controller} terms={mockTerms} title={title} />);
+		const terms = rendered.container.querySelector('.ss__terms');
+		const titleElem = rendered.container.querySelector('.ss__terms__title');
+		expect(terms).toBeInTheDocument();
+		expect(titleElem).toBeInTheDocument();
+		expect(titleElem).toHaveTextContent(title);
+	});
+
+	it('previewonhover', async () => {
+		const rendered = render(<Terms controller={controller} terms={mockTerms} previewOnHover />);
+		const termOptions = rendered.container.querySelector('.ss__terms__option a');
+		expect(termOptions).toBeInTheDocument();
+
+		userEvent.hover(termOptions!);
+
+		await waitFor(() => expect(mockTerms[0].preview).toHaveBeenCalled());
+	});
+
+	it('respects the limit', async () => {
+		const limit = 3;
+		const rendered = render(<Terms controller={controller} terms={mockTerms} limit={limit} />);
+		const termOptions = rendered.container.querySelectorAll('.ss__terms__option');
+		expect(termOptions).toHaveLength(limit);
+	});
+
+	it('Can set custom onClick', async () => {
+		const onClick = jest.fn();
+		const rendered = render(<Terms controller={controller} terms={mockTerms} onTermClick={onClick} />);
+		const termOptions = rendered.container.querySelector('.ss__terms__option a');
+
+		userEvent.click(termOptions!);
+
+		expect(onClick).toHaveBeenCalled();
+	});
+
 	it('renders with classname', () => {
 		const className = 'classy';
 
-		// @ts-ignore - typing on terms
 		const rendered = render(<Terms controller={controller} terms={mockTerms} className={className} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 
@@ -149,7 +190,6 @@ describe('Terms Component', () => {
 	});
 
 	it('disables styles', () => {
-		// @ts-ignore - typing on terms
 		const rendered = render(<Terms controller={controller} terms={mockTerms} disableStyles />);
 		const terms = rendered.container.querySelector('.ss__terms');
 
@@ -166,7 +206,6 @@ describe('Terms Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				{/* @ts-ignore - typing on terms */}
 				<Terms controller={controller} terms={mockTerms} />
 			</ThemeProvider>
 		);
@@ -183,10 +222,7 @@ describe('Terms Component', () => {
 				},
 			},
 		};
-		const rendered = render(
-			// @ts-ignore - typing on terms
-			<Terms controller={controller} terms={mockTerms} theme={propTheme} />
-		);
+		const rendered = render(<Terms controller={controller} terms={mockTerms} theme={propTheme} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 		expect(terms?.classList.length).toBe(1);
@@ -209,7 +245,6 @@ describe('Terms Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				{/* @ts-ignore - typing on terms  */}
 				<Terms controller={controller} terms={mockTerms} theme={propTheme} />
 			</ThemeProvider>
 		);

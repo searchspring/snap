@@ -30,7 +30,7 @@ The `title` prop is will display the given text above the terms area. The defaul
 
 ### limit
 
-The `limit` prop is used for number of terms to show. 
+The `limit` prop is used for number of terms to render. Please note that this does not limit the number of terms fetched by the controller.  
 
 ```jsx
 <Terms controller={controller} limit={4}/>
@@ -54,8 +54,8 @@ The `emify` will automatically wrap non-matching characters within the term with
 
 ### onTermClick
 
-The `onTermClick` prop allows for a custom callback function for when a term value is clicked.
+The `onTermClick` prop allows for a custom callback function for when a term value is clicked. The function is passed the clicked terms reference in the term store. 
 
 ```jsx
-<Terms controller={controller} onTermClick={(e)=>{console.log(e)}}/>
+<Terms controller={controller} onTermClick={(e, term)=>{console.log(e, term)}}/>
 ```
