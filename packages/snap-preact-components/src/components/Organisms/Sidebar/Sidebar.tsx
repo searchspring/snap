@@ -90,7 +90,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar')}>
-				{!hideTitle && <h4 className="ss--sidebar-title">{title}</h4>}
+				{!hideTitle && <h4 className="ss__sidebar__title">{title}</h4>}
 
 				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
