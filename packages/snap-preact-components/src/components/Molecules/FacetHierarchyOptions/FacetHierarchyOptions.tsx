@@ -64,7 +64,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.hierarchy(stylingProps), style];

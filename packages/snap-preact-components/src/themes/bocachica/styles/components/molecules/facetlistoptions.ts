@@ -11,9 +11,12 @@ const facetListOptionsStyleScript = ({ hideCheckbox, theme }: FacetListOptionsPr
 			padding: '6px',
 			textDecoration: 'none',
 			alignItems: 'center',
+			color: variables?.color?.text,
+
 			'&:hover': {
 				cursor: 'pointer',
-				background: variables?.color?.hover,
+				background: variables.color?.hover?.background,
+				color: variables?.color?.hover?.text,
 			},
 			'&.ss__facet-list-options__option--filtered': {
 				fontWeight: 'bold',

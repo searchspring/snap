@@ -11,9 +11,12 @@ const facetHierarchyOptionsStyleScript = ({ theme }: FacetHierarchyOptionsProps)
 			padding: '6px 0',
 			textDecoration: 'none',
 			alignItems: 'center',
+			color: variables?.color?.text,
+
 			'&:hover': {
 				cursor: 'pointer',
-				background: variables.color?.hover,
+				background: variables.color?.hover?.background,
+				color: variables?.color?.hover?.text,
 			},
 			'&.ss__facet-hierarchy-options__option--filtered': {
 				fontWeight: 'bold',

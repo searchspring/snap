@@ -20,6 +20,7 @@ const facetSliderStyleScript = ({
 		flexDirection: 'column',
 		marginTop: '5px',
 		marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
+		color: variables?.color?.text,
 
 		'& .ss__facet-slider__slider': {
 			position: 'relative',
@@ -78,7 +79,7 @@ const facetSliderStyleScript = ({
 					cursor: 'pointer',
 
 					'&:after': {
-						backgroundColor: '#ffffff',
+						backgroundColor: variables?.color?.background || '#ffffff',
 						width: '30%',
 						height: '30%',
 						top: '0',
@@ -95,7 +96,7 @@ const facetSliderStyleScript = ({
 					'&.ss__facet-slider__handle--active': {
 						background: handleDraggingColor || handleColor || variables?.color?.primary || '#000',
 						'& label.ss__facet-slider__handle__label': {
-							background: '#fff',
+							background: variables?.color?.background || '#fff',
 							padding: '0 5px',
 						},
 					},

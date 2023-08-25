@@ -1,21 +1,28 @@
 import { Theme } from '../../providers';
 import * as style from './styles/styles';
 
-export type BocachicaVariables = {
-	breakpoints?: [number, number, number, number];
+type GlobalThemeVariables = {
 	color?: {
+		text?: string;
+		background?: string;
 		primary?: string;
+		primaryBgText?: string;
 		secondary?: string;
-		hover?: string;
+		hover?: {
+			background: string;
+			text: string;
+		};
 		message?: {
 			error?: string;
 			warning?: string;
 			info?: string;
 		};
-		text?: {
-			secondary?: string;
-		};
 	};
+};
+
+export type BocachicaVariables = GlobalThemeVariables & {
+	breakpoints?: [number, number, number, number];
+	filterSummary?: GlobalThemeVariables;
 };
 
 export type BocachicaTheme = Theme & {
@@ -26,16 +33,19 @@ export type BocachicaTheme = Theme & {
 const bocachicaVariables: BocachicaVariables = {
 	breakpoints: [0, 540, 767, 1200],
 	color: {
-		primary: 'blue',
-		secondary: 'red',
-		hover: 'red',
+		text: '#515151',
+		background: '',
+		primary: '#3A23AD',
+		primaryBgText: 'white',
+		secondary: '#8F6CF6',
+		hover: {
+			text: 'black',
+			background: '#eeeeee',
+		},
 		message: {
 			error: 'red',
 			warning: 'orange',
 			info: 'blue',
-		},
-		text: {
-			secondary: 'grey',
 		},
 	},
 };
@@ -123,6 +133,28 @@ export const bocachica: BocachicaTheme = {
 		},
 		slideout: {
 			...style.components.slideout,
+		},
+		// ORGANISMS
+		autocomplete: {
+			...style.components.autocomplete,
+		},
+		branchOverride: {
+			...style.components.branchOverride,
+		},
+		facet: {
+			...style.components.facet,
+		},
+		facets: {
+			...style.components.facets,
+		},
+		filterSummary: {
+			...style.components.filterSummary,
+		},
+		recommendation: {
+			...style.components.recommendation,
+		},
+		results: {
+			...style.components.results,
 		},
 	},
 	responsive: [{}, {}, {}, {}],

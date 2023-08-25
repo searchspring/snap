@@ -12,11 +12,14 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 			minHeight: '1em',
 			minWidth: '1em',
 			textAlign: 'center',
+			color: variables?.color?.text,
+
 			'&.ss__pagination__page--active': {
 				fontWeight: 'bold',
 			},
 			'&:hover:not(.ss__pagination__page--active)': {
-				backgroundColor: variables?.color?.hover || '#f8f8f8',
+				background: variables.color?.hover?.background,
+				color: variables?.color?.hover?.text,
 			},
 		},
 	});

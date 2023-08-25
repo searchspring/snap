@@ -24,7 +24,7 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 		},
 
 		'& .ss__error-handler__button': {
-			backgroundColor: 'white',
+			backgroundColor: variables?.color?.background || 'white',
 			color: 'inherit',
 			borderColor: variables?.color?.primary,
 			width: ['150px', 'fit-content'],

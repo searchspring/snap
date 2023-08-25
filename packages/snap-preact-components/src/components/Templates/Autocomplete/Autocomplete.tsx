@@ -422,29 +422,26 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [
-			CSS.Autocomplete({
-				inputViewportOffsetBottom,
-				hideFacets,
-				horizontalTerms,
-				noResults: Boolean(search?.query?.string && results.length === 0),
-				contentSlotExists: Boolean(contentSlot),
-				viewportMaxHeight,
-				vertical,
-				width,
-				theme,
-			}),
-			style,
-		];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const stylingProps = {
+		...props,
+		inputViewportOffsetBottom,
+		hideFacets,
+		horizontalTerms,
+		noResults: Boolean(search?.query?.string && results.length === 0),
+		contentSlotExists: Boolean(contentSlot),
+		viewportMaxHeight,
+		vertical,
+		width,
+		theme,
+	};
 
 	// add styleScript to styling
-	if (styleScript) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(props));
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Autocomplete(stylingProps), style];
+	} else if (style) {
+		styling.css = [style];
 	}
 
 	return visible ? (

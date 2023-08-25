@@ -89,7 +89,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.grid(stylingProps), style];

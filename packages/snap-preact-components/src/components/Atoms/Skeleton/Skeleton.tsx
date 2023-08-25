@@ -63,7 +63,7 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, animation: CSS.animation, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.skeleton(stylingProps), style];

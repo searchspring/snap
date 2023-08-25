@@ -107,6 +107,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 		searchable,
 	} = props;
 
@@ -246,8 +247,12 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.facet({ color, theme }), style];
+	const stylingProps = { ...props, color, theme };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.facet(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

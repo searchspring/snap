@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
-type componentTheme = {
+export type componentTheme = {
 	class: string;
 	main: {
 		border: string;
@@ -246,12 +246,13 @@ const componentThemes = {
 
 export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultProps: Partial<BranchOverrideProps> = {};
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
-	const { branch, details, error, className, darkMode, disableStyles, style, onRemoveClick } = props;
+	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
@@ -278,8 +279,12 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.override({ componentTheme: componentThemes[themeName as keyof typeof componentThemes] }), style];
+	const stylingProps = { ...props, componentTheme: componentThemes[themeName as keyof typeof componentThemes], theme };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.override(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

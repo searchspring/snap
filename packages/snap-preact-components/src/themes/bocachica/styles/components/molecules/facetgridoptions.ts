@@ -8,7 +8,8 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
-		gridTemplateColumns: `repeat(${columns}, 1fr)`,
+		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(45px, 1fr))`,
+		color: variables?.color?.text,
 		gap: gapSize,
 		gridAutoRows: `1fr`,
 
@@ -18,23 +19,26 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 			alignItems: 'center',
 			flex: '0 1 auto',
 			border: `1px solid ${variables?.color?.primary || '#333'}`,
+			borderRadius: '3px',
 			textAlign: 'center',
 			wordBreak: 'break-all',
 			boxSizing: 'border-box',
 			padding: '1em 0',
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 			margin: `0 ${gapSize} ${gapSize} 0`,
+			background: variables?.color?.background || '#fff',
 
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
 			},
 			'&.ss__facet-grid-options__option--filtered': {
 				background: variables?.color?.primary || '#ccc',
-				color: variables?.color?.text?.secondary,
+				color: variables?.color?.primaryBgText,
 			},
 			'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 				cursor: 'pointer',
-				background: variables?.color?.hover || '#f8f8f8',
+				background: variables?.color?.hover?.background,
+				color: variables?.color?.hover?.text,
 			},
 			'& .ss__facet-grid-options__option__value': {
 				'&.ss__facet-grid-options__option__value--smaller': {
@@ -70,4 +74,6 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 // https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facetgridoptions--default
 export const facetGridOptions: FacetGridOptionsProps = {
 	styleScript: facetGridOptionsStyleScript,
+	gapSize: '5px',
+	columns: 5,
 };

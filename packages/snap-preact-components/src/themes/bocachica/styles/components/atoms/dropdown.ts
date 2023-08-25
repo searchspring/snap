@@ -11,6 +11,7 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 		position: 'relative',
 		'&.ss__dropdown--open': {
 			'& .ss__dropdown__content': {
+				transition: `opacity .5s ease`,
 				position: disableOverlay ? 'relative' : undefined,
 				visibility: 'visible',
 				opacity: 1,

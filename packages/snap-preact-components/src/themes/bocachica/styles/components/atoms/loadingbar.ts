@@ -4,8 +4,6 @@ import { BocachicaVariables } from '../../../index';
 // CSS in JS style script for the LoadingBar component
 // TODO: animation typing
 const loadingBarStyleScript = ({ color, height, backgroundColor, animation, theme }: LoadingBarProps & { animation: any }) => {
-	// TODO: remove this comment when the variables are used
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
@@ -19,14 +17,14 @@ const loadingBarStyleScript = ({ color, height, backgroundColor, animation, them
 		opacity: '1',
 		visibility: 'visible',
 		zIndex: '10000',
-		background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
+		background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
 
 		'& .ss__loading-bar__bar': {
 			position: 'absolute',
 			top: '0',
 			left: '-200px',
 			height: '100%',
-			background: `${color || theme?.colors?.primary || '#ccc'}`,
+			background: `${color || variables?.color?.primary || '#ccc'}`,
 			animation: `${animation} 2s linear infinite`,
 		},
 	});

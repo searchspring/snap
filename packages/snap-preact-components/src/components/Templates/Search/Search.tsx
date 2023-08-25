@@ -153,7 +153,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	}
 
 	// add styleScript to styling
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = styling.css || [];
 		styling.css.push(styleScript(props));
 	}

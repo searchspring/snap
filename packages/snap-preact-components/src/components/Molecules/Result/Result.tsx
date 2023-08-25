@@ -155,7 +155,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.result(stylingProps), style];

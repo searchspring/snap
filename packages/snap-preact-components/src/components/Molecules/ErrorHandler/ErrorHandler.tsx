@@ -119,7 +119,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.errorHandler(stylingProps), style];

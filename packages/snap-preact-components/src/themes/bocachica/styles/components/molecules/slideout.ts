@@ -20,7 +20,7 @@ const slideoutStyleScript = ({ isActive, width, transitionSpeed, slideDirection,
 		width: width?.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
 		maxWidth: width,
 		padding: '10px',
-		background: '#fff',
+		background: variables?.color?.background || '#fff',
 		boxSizing: 'border-box',
 		overflowY: 'auto',
 	});

@@ -95,7 +95,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, isActive, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.slideout(stylingProps), style];

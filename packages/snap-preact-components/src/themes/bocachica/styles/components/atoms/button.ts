@@ -9,14 +9,15 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 		display: 'inline-flex',
 		padding: '5px 10px',
 		position: 'relative',
-		color: color || variables?.color?.primary,
+		color: variables?.color?.text || color,
 		outline: 0,
-		backgroundColor: backgroundColor || '#fff',
-		border: `1px solid ${variables?.color?.primary || borderColor || color || theme?.colors?.primary || '#333'}`,
+		backgroundColor: backgroundColor || variables?.color?.background || '#fff',
+		border: `1px solid ${variables?.color?.primary || borderColor || color || '#333'}`,
 		borderRadius: '3px',
 		'&:hover': {
 			cursor: 'pointer',
-			backgroundColor: variables?.color?.hover || '#f8f8f8',
+			backgroundColor: variables?.color?.hover?.background,
+			color: variables?.color?.hover?.text,
 		},
 		'&.ss__button--disabled': {
 			opacity: 0.7,
@@ -33,4 +34,5 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 // https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-button--default
 export const button: ButtonProps = {
 	styleScript: buttonStyleScript,
+	color: 'inherit',
 };

@@ -106,7 +106,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		if (native) {

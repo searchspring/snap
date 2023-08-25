@@ -66,7 +66,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.list(stylingProps), style];

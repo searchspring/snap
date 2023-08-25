@@ -134,7 +134,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	}
 
 	// add styleScript to styling
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = styling.css || [];
 		styling.css.push(styleScript(props));
 	}

@@ -2,7 +2,7 @@ import { css, ImageProps } from '../../../../../index';
 import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Image component
-const imageStyleScript = ({ theme, visibility }: ImageProps & { visibility: React.CSSProperties['visibility'] }) => {
+const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: React.CSSProperties['visibility'] }) => {
 	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;

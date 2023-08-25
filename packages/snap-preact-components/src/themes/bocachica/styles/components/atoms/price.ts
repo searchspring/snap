@@ -3,15 +3,13 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Price component
 const priceStyleScript = ({ theme }: PriceProps) => {
-	// TODO: remove this comment when the variables are used
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
-		color: theme?.colors?.primary,
+		color: variables?.color?.primary,
 		'&.ss__price--strike': {
 			textDecoration: 'line-through',
-			color: 'initial',
+			color: variables?.color?.text || 'inherit',
 		},
 	});
 };

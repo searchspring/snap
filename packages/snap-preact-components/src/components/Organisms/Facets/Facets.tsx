@@ -14,7 +14,7 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	facets: () => css({}),
+	facets: ({}) => css({}),
 };
 
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
@@ -26,7 +26,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
-	const { limit, onFacetOptionClick, disableStyles, className, style, controller } = props;
+	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -81,8 +81,12 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.facets(), style];
+	const stylingProps = { ...props, theme };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.facets(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -15,6 +15,8 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 			marginRight: gapSize,
 			marginBottom: gapSize,
+			color: variables?.color?.text,
+
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
 			},
@@ -32,20 +34,19 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 			},
 			'& .ss__facet-palette-options__option__wrapper': {
 				border: `2px solid transparent`,
-				borderRadius: '100%',
-				padding: '2px',
+				borderRadius: '3px',
 			},
 			'&.ss__facet-palette-options__option--filtered': {
 				'& .ss__facet-palette-options__option__wrapper': {
 					borderColor: variables?.color?.primary || '#333',
-					padding: '0px',
-					borderWidth: '4px',
+					padding: '2px',
+					borderWidth: '2px',
 				},
 			},
 			'& .ss__facet-palette-options__option__palette': {
-				paddingTop: 'calc(100% - 2px)',
-				border: '1px solid #EBEBEB',
-				borderRadius: '100%',
+				paddingTop: '100%',
+				boxShadow: `0px 0px 0 1px #EBEBEB`,
+				borderRadius: '3px',
 				position: 'relative',
 				'& .ss__facet-palette-options__icon': {
 					position: 'absolute',
@@ -84,4 +85,6 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 // https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facetpaletteoptions--default
 export const facetPaletteOptions: FacetPaletteOptionsProps = {
 	styleScript: facetPaletteStyleScript,
+	gapSize: '5px',
+	columns: 5,
 };

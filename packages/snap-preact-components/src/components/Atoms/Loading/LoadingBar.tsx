@@ -56,7 +56,7 @@ export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element =>
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { ...props, animation: CSS.animation, theme };
 
-	if (styleScript) {
+	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
 		styling.css = [CSS.loadingBar(stylingProps), style];

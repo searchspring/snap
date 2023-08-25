@@ -89,7 +89,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, className, layout, style, resultLayout, controller } = props;
+	const { disableStyles, className, layout, style, styleScript, resultLayout, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -124,8 +124,12 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.results({ columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
+	const stylingProps = { ...props, columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize, theme };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.results(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
