@@ -2,7 +2,7 @@ import { BadgeProps } from '../components/Atoms/Badge';
 import { BreadcrumbsProps } from '../components/Atoms/Breadcrumbs';
 import { ButtonProps } from '../components/Atoms/Button';
 import { DropdownProps } from '../components/Atoms/Dropdown';
-import { FlexProps } from '../components/Atoms/Flex';
+import { ContainerProps } from '../components/Layouts/utils/Container';
 import { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
 import { IconProps } from '../components/Atoms/Icon';
 import { ImageProps } from '../components/Atoms/Image';
@@ -52,7 +52,7 @@ export type ThemeComponents = {
 	breadcrumbs?: GenericComponentProps<BreadcrumbsProps>;
 	button?: GenericComponentProps<ButtonProps>;
 	dropdown?: GenericComponentProps<DropdownProps>;
-	flex?: GenericComponentProps<FlexProps>;
+	container?: GenericComponentProps<ContainerProps>;
 	formattedNumber?: GenericComponentProps<FormattedNumberProps>;
 	icon?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;

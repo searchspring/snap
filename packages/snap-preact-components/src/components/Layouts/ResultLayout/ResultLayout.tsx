@@ -6,10 +6,10 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
-import { Componentize, ComponentMap } from './Componentize';
+import { Componentize, ComponentMap } from '../utils/Componentize';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
-import type { FlexProps } from '../../Atoms/Flex/Flex';
+import type { ContainerProps } from '../utils/Container/Container';
 import type { ComponentProps, StylingCSS } from '../../../types';
 import type { ButtonProps } from '../../Atoms/Button';
 import type { IconProps } from '../../Atoms/Icon';
@@ -51,7 +51,6 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__result-layout', className)}>
-					{/* loop through layout component tree built above and render comonents with props within Flex and FlexItem components */}
 					<Componentize controller={controller} result={result} layout={layout} theme={theme} />
 				</div>
 			</CacheProvider>
@@ -64,7 +63,7 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 export type LayoutElement = {
 	name?: string;
 	type?: 'Flex'; // supported layout container elements
-	layout?: FlexProps;
+	layout?: ContainerProps;
 	items?: LayoutElement[];
 	component?: keyof ComponentMap;
 } & Partial<

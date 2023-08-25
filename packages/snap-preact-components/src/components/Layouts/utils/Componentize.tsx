@@ -5,9 +5,8 @@ import { Suspense } from 'preact/compat';
 import { jsx } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Flex } from '../../Atoms/Flex';
-import { ResultLayoutFunc } from '.';
-import { LayoutElement, ResultLayoutTypes } from '.';
+import { Container } from './Container';
+import { ResultLayoutFunc, LayoutElement, ResultLayoutTypes } from '../ResultLayout';
 
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { Product } from '@searchspring/snap-store-mobx';
@@ -136,14 +135,14 @@ export const Componentize = (props: {
 		<Fragment>
 			{makeLayoutArray(controller, result, layout).map((element) => {
 				if (element.items) {
-					// if the element is a Flex
+					// if the element is a Container
 					const containerElement = element;
 					// const InnerContainer = containerize(data, containerElement.items || [], componentMap);
 
 					return (
-						<Flex className={generateLayoutClassName(element.name)} {...element.layout}>
+						<Container className={generateLayoutClassName(element.name)} {...element.layout}>
 							<Componentize controller={controller} result={result} layout={containerElement.items || []} theme={theme} />
-						</Flex>
+						</Container>
 					);
 				} else if (element.component) {
 					// if the element is a component
@@ -170,11 +169,11 @@ export const Componentize = (props: {
 					}
 
 					return (
-						<Flex className={classnames(generateLayoutClassName(element.name))} item {...element.layout}>
+						<Container className={classnames(generateLayoutClassName(element.name))} item {...element.layout}>
 							<Suspense fallback={<Fragment />}>
 								<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} theme={theme} />
 							</Suspense>
-						</Flex>
+						</Container>
 					);
 				}
 			})}
