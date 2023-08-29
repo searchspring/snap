@@ -38,8 +38,9 @@ export const resultLayout: LayoutFunc = ({
 					],
 				},
 				{
-					component: 'String',
+					component: 'Element',
 					props: {
+						type: 'span',
 						content: `${core?.name}`,
 					},
 				},
@@ -135,8 +136,9 @@ export const listResultLayout: LayoutFunc = ({
 					},
 					items: [
 						{
-							component: 'String',
+							component: 'Element',
 							props: {
+								type: 'span',
 								content: `${core?.name}`,
 							},
 						},

@@ -11,7 +11,7 @@ import { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandisin
 import { OverlayProps } from '../components/Atoms/Overlay';
 import { PriceProps } from '../components/Atoms/Price';
 import { SkeletonProps } from '../components/Atoms/Skeleton';
-import { StringProps } from '../components/Atoms/String';
+import { ElementProps } from '../components/Atoms/Element';
 import { TermsProps } from '../components/Atoms/Terms';
 import { ResultLayoutProps } from '../components/Layouts/ResultLayout';
 import { CarouselProps } from '../components/Molecules/Carousel';
@@ -62,7 +62,7 @@ export type ThemeComponents = {
 	overlay?: GenericComponentProps<OverlayProps>;
 	price?: GenericComponentProps<PriceProps>;
 	skeleton?: GenericComponentProps<SkeletonProps>;
-	string?: GenericComponentProps<StringProps>;
+	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
