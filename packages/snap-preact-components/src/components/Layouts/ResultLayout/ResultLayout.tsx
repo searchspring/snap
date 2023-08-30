@@ -23,8 +23,6 @@ import type { RatingProps } from '../../Molecules/Rating/Rating';
 import type { CarouselProps } from '../../Molecules/Carousel';
 import type { ElementProps } from '../../Atoms/Element';
 
-// dynamically imported lazy loaded components
-
 // CSS in JS
 const CSS = {
 	layout: () => css(),
@@ -62,7 +60,6 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 
 export type LayoutElement = {
 	name?: string;
-	type?: 'Flex'; // supported layout container elements
 	layout?: ContainerProps;
 	items?: LayoutElement[];
 	component?: keyof ComponentMap;
