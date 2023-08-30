@@ -1,4 +1,4 @@
-import { htmlUnescape } from '../utils/htmlUnescape';
+import { unescapeHTML } from '@searchspring/snap-toolbox';
 
 import {
 	SearchRequestModel,
@@ -436,8 +436,8 @@ transformSearchResponse.search = (response: searchResponseType, request: SearchR
 // used for HTML entities decoding
 function decodeProperty(encoded: string | string[]) {
 	if (Array.isArray(encoded)) {
-		return encoded.map((item) => htmlUnescape(String(item)));
+		return encoded.map((item) => unescapeHTML(String(item)));
 	} else {
-		return htmlUnescape(String(encoded));
+		return unescapeHTML(String(encoded));
 	}
 }

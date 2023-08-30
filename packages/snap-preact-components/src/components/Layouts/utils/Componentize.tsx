@@ -61,8 +61,8 @@ const Skeleton = lazy(async () => {
 	return (await import('../../Atoms/Skeleton')).Skeleton;
 });
 
-const String = lazy(async () => {
-	return (await import('../../Atoms/String')).String;
+const Element = lazy(async () => {
+	return (await import('../../Atoms/Element')).Element;
 });
 
 /* MOLECULES */
@@ -98,8 +98,8 @@ const componentMap: ResultLayoutComponentMap = {
 	Skeleton: {
 		component: Skeleton,
 	},
-	String: {
-		component: String,
+	Element: {
+		component: Element,
 	},
 	/* MOLECULES */
 	Carousel: {

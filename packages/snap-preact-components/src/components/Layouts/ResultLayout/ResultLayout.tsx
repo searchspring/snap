@@ -21,7 +21,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import type { BadgeProps } from '../../Atoms/Badge';
 import type { RatingProps } from '../../Molecules/Rating/Rating';
 import type { CarouselProps } from '../../Molecules/Carousel';
-import type { StringProps } from '../../Atoms/String';
+import type { ElementProps } from '../../Atoms/Element';
 
 // dynamically imported lazy loaded components
 
@@ -76,7 +76,7 @@ export type LayoutElement = {
 	| PriceElement
 	| RatingElement
 	| SkeletonElement
-	| StringElement
+	| ElementElement
 	/* MOLECULES */
 	| CarouselElement
 >;
@@ -130,9 +130,9 @@ type SkeletonElement = {
 	props: SkeletonProps;
 };
 
-type StringElement = {
-	component: 'String';
-	props: StringProps;
+type ElementElement = {
+	component: 'Element';
+	props: ElementProps;
 };
 
 /* MOLECULES */
