@@ -1,5 +1,7 @@
 import { observable, makeObservable } from 'mobx';
 
+import { escapeHTML } from '@searchspring/snap-toolbox';
+
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
@@ -49,7 +51,7 @@ export class Query {
 	public url: UrlManager;
 
 	constructor(services: StoreServices, query: string) {
-		this.string = query;
+		this.string = escapeHTML(query);
 
 		this.url = services?.urlManager?.remove('page').remove('filter').set('query', this.string);
 
