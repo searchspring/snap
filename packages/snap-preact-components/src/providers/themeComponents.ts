@@ -43,6 +43,7 @@ import { ToolbarProps } from '../components/Organisms/Toolbar';
 import { AutocompleteProps } from '../components/Templates/Autocomplete';
 import { RecommendationProps } from '../components/Templates/Recommendation';
 import { SearchProps } from '../components/Templates/Search';
+import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -91,6 +92,7 @@ export type ThemeComponents = {
 	results?: GenericComponentProps<ResultsProps>;
 	searchHeader?: GenericComponentProps<SearchHeaderProps>;
 	sidebar?: GenericComponentProps<SidebarProps>;
+	mobileSidebar?: GenericComponentProps<MobileSidebarProps>;
 	toolbar?: GenericComponentProps<ToolbarProps>;
 	/* LAYOUTS */
 	resultLayout?: GenericComponentProps<ResultLayoutProps>;

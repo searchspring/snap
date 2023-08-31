@@ -171,16 +171,18 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		styling.css.push(styleScript(props));
 	}
 
-	const mobileMediaQuery = '(max-width: 991px)';
+	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
 	const isMobile = useMediaQuery(mobileMediaQuery);
 
 	return (
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__search', className)}>
-					{!hideSidebar && !isMobile && <Sidebar {...subProps.Sidebar} controller={controller} />}
-					{!hideSidebar && isMobile && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+					<div className="ss__search__sidebar-wrapper">
+						{!hideSidebar && !isMobile && <Sidebar {...subProps.Sidebar} controller={controller} />}
 
+						<MobileSidebar controller={controller} {...subProps.MobileSidebar} />
+					</div>
 					<div className={classnames('ss__search__content')}>
 						{/* do we want this? */}
 						{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}

@@ -83,6 +83,18 @@ describe('Button Component', () => {
 			expect(button).toBeInTheDocument();
 		});
 
+		it('renders with icon prop', () => {
+			const icon = 'close-thin';
+			const content = 'colorful button';
+
+			const rendered = render(<Button icon={icon}>{content}</Button>);
+
+			const button = rendered.getByText(content);
+			const iconElem = rendered.container.querySelector(`.ss__button .ss__icon`);
+			expect(iconElem).toBeInTheDocument();
+			expect(button).toBeInTheDocument();
+		});
+
 		it('fires onClick prop when clicked', () => {
 			const clickFn = jest.fn();
 			const content = 'clickable button';

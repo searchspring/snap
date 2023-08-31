@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -11,13 +11,12 @@ import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
-import { Icon } from '../../Atoms/Icon';
-import { Button } from '../../Atoms/Button';
+import { Button, ButtonProps } from '../../Atoms/Button';
 
 const CSS = {
 	toolbar: () =>
 		css({
-			'& .ss__mobileSidebar__title': {
+			'& .ss__mobile-sidebar__title': {
 				justifyContent: 'space-between',
 				flexDirection: 'row',
 				display: 'flex',
@@ -27,11 +26,11 @@ const CSS = {
 				},
 			},
 
-			'& .ss__mobileSidebar__slideout__slideoutbutton': {
+			'& .ss__mobile-sidebar__slideout__button': {
 				cursor: 'pointer',
 			},
 
-			'& .ss__mobileSidebar__cta-wrapper': {
+			'& .ss__mobile-sidebar__cta-wrapper': {
 				justifyContent: 'space-around',
 				flexDirection: 'row',
 				display: 'flex',
@@ -43,7 +42,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<MobileSidebarProps> = {
-		buttonText: 'Filters',
+		slideoutButtonText: 'Filters',
+		clearButtonText: 'Clear All',
+		applyButtonText: 'Apply Filters',
 		titleText: 'Filter Options',
 		displayAt: '650px',
 		iconClose: 'close-thin',
@@ -60,7 +61,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		hideSortBy,
 		hideApplyButton,
 		hideCloseButton,
-		buttonText,
+		slideoutButtonText,
+		clearButtonText,
+		applyButtonText,
 		iconClose,
 		iconOpen,
 		titleText,
@@ -80,11 +83,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	}
 
 	const subProps: MobileSidebarSubProps = {
-		Slideout: {
+		slideout: {
 			// default props
 			controller,
-			// noButtonWrapper: true,
-			className: 'ss__toolbar__slideout',
 			displayAt: `(max-width: ${displayAt})`,
 			// global theme
 			...globalTheme?.components?.slideout,
@@ -95,7 +96,18 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			// component theme overrides
 			theme: props?.theme,
 		},
-		Sidebar: {
+		button: {
+			// default props
+			// global theme
+			...globalTheme?.components?.button,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		sidebar: {
 			// default props
 			hideTitle: true,
 			hideFacets: hideFacets,
@@ -116,46 +128,63 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	const Content = (props: any) => {
 		const { toggleActive } = props;
 		return (
-			<Fragment>
+			<div className="ss__mobile-sidebar__content">
 				{!hideTitle && (
-					<div className="ss__mobileSidebar__title">
+					<div className="ss__mobile-sidebar__title">
 						<span>{titleText}</span>
 						{!hideCloseButton && (
-							<div onClick={() => toggleActive()}>
-								<Icon icon={iconClose} />
-							</div>
+							<Button
+								className="ss__mobile-sidebar__title__close-button"
+								name="mobile-sidebar__title__close-button"
+								disableStyles={true}
+								onClick={() => toggleActive()}
+								icon={iconClose}
+								{...subProps.button}
+							></Button>
 						)}
 					</div>
 				)}
 
-				<Sidebar controller={controller} {...subProps.Sidebar} />
+				<Sidebar className="ss__mobile-sidebar__sidebar" name={'mobile-sidebar__sidebar'} controller={controller} {...subProps.sidebar} />
 
-				<div className="ss__mobileSidebar__cta-wrapper">
-					{!hideApplyButton && <Button content={'Apply Filters'} onClick={() => toggleActive()} />}
+				<div className="ss__mobile-sidebar__cta-wrapper">
+					{!hideApplyButton && (
+						<Button
+							className="ss__mobile-sidebar__apply-button"
+							name={'mobile-sidebar__apply-button'}
+							content={applyButtonText}
+							onClick={() => toggleActive()}
+							{...subProps.button}
+						/>
+					)}
 					{!hideClearAllButton && (
 						<Button
-							content={'Clear All'}
+							className="ss__mobile-sidebar__clear-button"
+							name={'mobile-sidebar__clear-button'}
+							content={clearButtonText}
 							onClick={() => {
 								controller?.urlManager.remove('filter').remove('page').go();
 								toggleActive();
 							}}
+							{...subProps.button}
 						/>
 					)}
 				</div>
-			</Fragment>
+			</div>
 		);
 	};
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__mobileSidebar', className)}>
+			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
 				<Slideout
+					className="ss__mobile-sidebar__slideout"
 					buttonContent={
-						<div className="ss__mobileSidebar__slideout__slideoutbutton">
-							{buttonText} <Icon icon={iconOpen} />
-						</div>
+						<Button className="ss__mobile-sidebar__slideout__button" name={'mobile-sidebar__slideout__button'} icon={iconOpen} {...subProps.button}>
+							{slideoutButtonText}
+						</Button>
 					}
-					{...subProps.Slideout}
+					{...subProps.slideout}
 				>
 					<Content />
 				</Slideout>
@@ -167,7 +196,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
 	titleText?: string;
-	buttonText?: string;
+	slideoutButtonText?: string;
+	clearButtonText?: string;
+	applyButtonText?: string;
 	iconClose?: string;
 	iconOpen?: string;
 	hideTitle?: boolean;
@@ -182,6 +213,7 @@ export interface MobileSidebarProps extends ComponentProps {
 }
 
 interface MobileSidebarSubProps {
-	Sidebar: Partial<SidebarProps>;
-	Slideout: Partial<SlideoutProps>;
+	sidebar: Partial<SidebarProps>;
+	slideout: Partial<SlideoutProps>;
+	button: Partial<ButtonProps>;
 }

@@ -12,7 +12,6 @@ import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { defined, mergeProps } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
-import { String, StringProps } from '../../Atoms/String';
 
 const CSS = {
 	Sidebar: () => css({}),
@@ -21,11 +20,13 @@ const CSS = {
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<SidebarProps> = {};
+	const defaultProps: Partial<SidebarProps> = {
+		titleText: 'Filters',
+	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, title, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style } = props;
+	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, className } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -36,19 +37,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	}
 
 	const subProps: SidebarSubProps = {
-		String: {
-			// default props
-			content: title || 'Filters',
-			// global theme
-			...globalTheme?.components?.string,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
-		FilterSummary: {
+		filterSummary: {
 			// default props
 			controller,
 			// global theme
@@ -60,7 +49,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		Facets: {
+		facets: {
 			// default props
 			controller,
 			// global theme
@@ -72,7 +61,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		SortBy: {
+		sortBy: {
 			// default props
 			controller,
 			// global theme
@@ -84,7 +73,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		PerPage: {
+		perPage: {
 			// default props
 			controller,
 			// global theme
@@ -100,16 +89,16 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__sidebar')}>
-				{!hideTitle && <String className="ss--sidebar-title" content={subProps.String.content as string} {...subProps.String} />}
+			<div {...styling} className={classnames('ss__sidebar', className)}>
+				{!hideTitle && <h4 className="ss__sidebar__title">{titleText}</h4>}
 
-				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
+				{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
 
-				{!hideSortBy && <SortBy {...subProps.SortBy} />}
+				{!hideSortBy && <SortBy {...subProps.sortBy} />}
 
-				{!hidePerPage && <PerPage {...subProps.PerPage} />}
+				{!hidePerPage && <PerPage {...subProps.perPage} />}
 
-				{!hideFacets && <Facets {...subProps.Facets} />}
+				{!hideFacets && <Facets {...subProps.facets} />}
 			</div>
 		</CacheProvider>
 	);
@@ -118,7 +107,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;
 	hideTitle?: boolean;
-	title?: string;
+	titleText?: string;
 	hideFacets?: boolean;
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
@@ -126,9 +115,8 @@ export interface SidebarProps extends ComponentProps {
 }
 
 interface SidebarSubProps {
-	String: Partial<StringProps>;
-	FilterSummary: Partial<FilterSummaryProps>;
-	Facets: Partial<FacetsProps>;
-	SortBy: Partial<SortByProps>;
-	PerPage: Partial<PerPageProps>;
+	filterSummary: Partial<FilterSummaryProps>;
+	facets: Partial<FacetsProps>;
+	sortBy: Partial<SortByProps>;
+	perPage: Partial<PerPageProps>;
 }
