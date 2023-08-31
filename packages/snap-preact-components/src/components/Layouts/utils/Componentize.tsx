@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { lazy } from 'preact/compat';
-import { Suspense } from 'preact/compat';
+import { memo } from 'preact/compat';
 import { jsx } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -11,12 +10,20 @@ import { ResultLayoutFunc, LayoutElement, ResultLayoutTypes } from '../ResultLay
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { Product } from '@searchspring/snap-store-mobx';
 import { Theme } from '../../../providers';
+import { Badge, Button, FormattedNumber, Icon, Image, Price, Rating, Skeleton, Element, Carousel } from '../../../index';
 
 export type ResultLayoutComponentMap = {
 	[componentName: string]: {
 		component: any;
 		layoutProps?: string[];
 	};
+};
+
+type ComponentizeProps = {
+	result: Product;
+	controller: AutocompleteController | RecommendationController | SearchController;
+	layout: LayoutElement | LayoutElement[] | ResultLayoutFunc;
+	theme?: Theme;
 };
 
 function generateLayoutClassName(name?: string) {
@@ -27,48 +34,6 @@ function generateLayoutClassName(name?: string) {
 		.toLowerCase();
 	return name ? `ss__layout__${normalizedName}` : '';
 }
-
-/* ATOMS */
-const Badge = lazy(async () => {
-	return (await import('../../Atoms/Badge')).Badge;
-});
-
-const Button = lazy(async () => {
-	return (await import('../../Atoms/Button')).Button;
-});
-
-const FormattedNumber = lazy(async () => {
-	return (await import('../../Atoms/FormattedNumber')).FormattedNumber;
-});
-
-const Icon = lazy(async () => {
-	return (await import('../../Atoms/Icon')).Icon;
-});
-
-const Image = lazy(async () => {
-	return (await import('../../Atoms/Image')).Image;
-});
-
-const Price = lazy(async () => {
-	return (await import('../../Atoms/Price')).Price;
-});
-
-const Rating = lazy(async () => {
-	return (await import('../../Molecules/Rating')).Rating;
-});
-
-const Skeleton = lazy(async () => {
-	return (await import('../../Atoms/Skeleton')).Skeleton;
-});
-
-const Element = lazy(async () => {
-	return (await import('../../Atoms/Element')).Element;
-});
-
-/* MOLECULES */
-const Carousel = lazy(async () => {
-	return (await import('../../Molecules/Carousel')).Carousel;
-});
 
 // componentMap must be type ResultLayoutComponentMap but isn't to allow for keyof typeof componentMap
 const componentMap: ResultLayoutComponentMap = {
@@ -124,12 +89,8 @@ function makeLayoutArray(
 	return [layout];
 }
 
-export const Componentize = (props: {
-	result: Product;
-	controller: AutocompleteController | RecommendationController | SearchController;
-	layout: LayoutElement | LayoutElement[] | ResultLayoutFunc;
-	theme?: Theme;
-}) => {
+// Componentize component without memoization
+const Componentization = (props: ComponentizeProps) => {
 	const { controller, result, layout, theme } = props;
 	return (
 		<Fragment>
@@ -170,9 +131,7 @@ export const Componentize = (props: {
 
 					return (
 						<Container className={classnames(generateLayoutClassName(element.name))} item {...element.layout}>
-							<Suspense fallback={<Fragment />}>
-								<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} theme={theme} />
-							</Suspense>
+							<Component controller={controller} result={result} {...(elementProps as any)} breakpoints={{}} theme={theme} />
 						</Container>
 					);
 				}
@@ -180,3 +139,13 @@ export const Componentize = (props: {
 		</Fragment>
 	);
 };
+
+// memoized Componentization component - ensuring component is cached when result.id and other props are unchanged
+export const Componentize = memo(Componentization, (prevProps: ComponentizeProps, nextProps: ComponentizeProps) => {
+	return (
+		prevProps.result.id === nextProps.result.id &&
+		prevProps.layout === nextProps.layout &&
+		prevProps.controller === nextProps.controller &&
+		prevProps.theme === nextProps.theme
+	);
+});
