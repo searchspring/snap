@@ -11,7 +11,7 @@ import { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandisin
 import { OverlayProps } from '../components/Atoms/Overlay';
 import { PriceProps } from '../components/Atoms/Price';
 import { SkeletonProps } from '../components/Atoms/Skeleton';
-import { StringProps } from '../components/Atoms/String';
+import { ElementProps } from '../components/Atoms/Element';
 import { TermsProps } from '../components/Atoms/Terms';
 import { ResultLayoutProps } from '../components/Layouts/ResultLayout';
 import { CarouselProps } from '../components/Molecules/Carousel';
@@ -37,7 +37,7 @@ import { FacetsProps } from '../components/Organisms/Facets';
 import { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import { NoResultsProps } from '../components/Organisms/NoResults';
 import { ResultsProps } from '../components/Organisms/Results';
-import { SearchHeaderProps } from '../components/Organisms/SearchHeader';
+import { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import { SidebarProps } from '../components/Organisms/Sidebar';
 import { ToolbarProps } from '../components/Organisms/Toolbar';
 import { AutocompleteProps } from '../components/Templates/Autocomplete';
@@ -63,7 +63,7 @@ export type ThemeComponents = {
 	overlay?: GenericComponentProps<OverlayProps>;
 	price?: GenericComponentProps<PriceProps>;
 	skeleton?: GenericComponentProps<SkeletonProps>;
-	string?: GenericComponentProps<StringProps>;
+	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;

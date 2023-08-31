@@ -21,9 +21,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import type { BadgeProps } from '../../Atoms/Badge';
 import type { RatingProps } from '../../Molecules/Rating/Rating';
 import type { CarouselProps } from '../../Molecules/Carousel';
-import type { StringProps } from '../../Atoms/String';
-
-// dynamically imported lazy loaded components
+import type { ElementProps } from '../../Atoms/Element';
 
 // CSS in JS
 const CSS = {
@@ -62,7 +60,6 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 
 export type LayoutElement = {
 	name?: string;
-	type?: 'Flex'; // supported layout container elements
 	layout?: ContainerProps;
 	items?: LayoutElement[];
 	component?: keyof ComponentMap;
@@ -76,7 +73,7 @@ export type LayoutElement = {
 	| PriceElement
 	| RatingElement
 	| SkeletonElement
-	| StringElement
+	| ElementElement
 	/* MOLECULES */
 	| CarouselElement
 >;
@@ -130,9 +127,9 @@ type SkeletonElement = {
 	props: SkeletonProps;
 };
 
-type StringElement = {
-	component: 'String';
-	props: StringProps;
+type ElementElement = {
+	component: 'Element';
+	props: ElementProps;
 };
 
 /* MOLECULES */

@@ -1,0 +1,19 @@
+{
+  "search": {
+    "query": "blah"
+  },
+  "pagination": {
+    "totalResults": 0,
+    "page": 1,
+    "pageSize": 30,
+    "totalPages":0
+  },
+  "sorting": [],
+  "results": [],
+  "facets": [],
+  "merchandising": {
+    "campaigns": [],
+    "redirect": "",
+    "content": {}
+  }
+}

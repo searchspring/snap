@@ -14,7 +14,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
-import { SearchHeader, SearchHeaderProps } from '../../Organisms/SearchHeader';
+import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
