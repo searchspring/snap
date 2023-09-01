@@ -3,26 +3,24 @@ import * as style from './styles/styles';
 
 type GlobalThemeVariables = {
 	color?: {
-		text?: string;
-		background?: string;
-		primary?: string;
-		primaryBgText?: string;
-		secondary?: string;
-		hover?: {
-			background: string;
-			text: string;
+		primary?: string; // (search header text, regular text, result title)
+		secondary?: string; // (headings, dropdown button text)
+		accent?: string; // (icons, borders)
+		active?: {
+			foreground?: string; // (active state text)
+			background?: string; // (active state)
+			accent?: string; // (icons, borders)
 		};
-		message?: {
-			error?: string;
-			warning?: string;
-			info?: string;
+		hover?: {
+			foreground?: string; // (active state text)
+			background?: string; // (active state)
+			accent?: string; // (icons, borders)
 		};
 	};
 };
 
 export type BocachicaVariables = GlobalThemeVariables & {
 	breakpoints?: [number, number, number, number];
-	filterSummary?: GlobalThemeVariables;
 };
 
 export type BocachicaTheme = Theme & {
@@ -33,19 +31,18 @@ export type BocachicaTheme = Theme & {
 const bocachicaVariables: BocachicaVariables = {
 	breakpoints: [0, 540, 767, 1200],
 	color: {
-		text: '#515151',
-		background: '',
-		primary: '#3A23AD',
-		primaryBgText: 'white',
-		secondary: '#8F6CF6',
-		hover: {
-			text: 'black',
-			background: '#eeeeee',
+		primary: '#202223',
+		secondary: '#6d7175',
+		accent: '#6d7175',
+		active: {
+			foreground: '#ffffff',
+			background: '#6d7175',
+			accent: '#ffffff',
 		},
-		message: {
-			error: 'red',
-			warning: 'orange',
-			info: 'blue',
+		hover: {
+			foreground: '#ffffff',
+			background: '#000000',
+			accent: '#ffffff',
 		},
 	},
 };
@@ -91,6 +88,15 @@ export const bocachica: BocachicaTheme = {
 		skeleton: {
 			...style.components.skeleton,
 		},
+		element: {
+			...style.components.element,
+		},
+		searchHeader: {
+			...style.components.searchHeader,
+		},
+		terms: {
+			...style.components.terms,
+		},
 		// MOLECULES
 		carousel: {
 			...style.components.carousel,
@@ -134,6 +140,15 @@ export const bocachica: BocachicaTheme = {
 		slideout: {
 			...style.components.slideout,
 		},
+		perPage: {
+			...style.components.perPage,
+		},
+		rating: {
+			...style.components.rating,
+		},
+		sortBy: {
+			...style.components.sortBy,
+		},
 		// ORGANISMS
 		autocomplete: {
 			...style.components.autocomplete,
@@ -155,6 +170,15 @@ export const bocachica: BocachicaTheme = {
 		},
 		results: {
 			...style.components.results,
+		},
+		noResults: {
+			...style.components.noResults,
+		},
+		sidebar: {
+			...style.components.sidebar,
+		},
+		toolbar: {
+			...style.components.toolbar,
 		},
 	},
 	responsive: [{}, {}, {}, {}],

@@ -8,7 +8,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	Element: () => css({}),
+	Element: ({}: Partial<ElementProps>) => css({}),
 };
 
 export const Element = observer((properties: ElementProps): JSX.Element => {
@@ -17,12 +17,15 @@ export const Element = observer((properties: ElementProps): JSX.Element => {
 
 	const props = mergeProps('element', globalTheme, defaultProps, properties);
 
-	const { type, content, attributes, disableStyles, className, style } = props;
+	const { type, content, attributes, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { ...props };
 
-	if (!disableStyles) {
-		styling.css = [CSS.Element(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Element(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

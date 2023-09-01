@@ -11,19 +11,15 @@ const facetHierarchyOptionsStyleScript = ({ theme }: FacetHierarchyOptionsProps)
 			padding: '6px 0',
 			textDecoration: 'none',
 			alignItems: 'center',
-			color: variables?.color?.text,
+			color: variables?.color?.secondary,
 
 			'&:hover': {
 				cursor: 'pointer',
-				background: variables.color?.hover?.background,
-				color: variables?.color?.hover?.text,
 			},
 			'&.ss__facet-hierarchy-options__option--filtered': {
 				fontWeight: 'bold',
-				color: variables.color?.primary,
 				'&:hover': {
 					cursor: 'default',
-					background: 'unset',
 				},
 				'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
 					paddingLeft: '16px',
@@ -33,7 +29,7 @@ const facetHierarchyOptionsStyleScript = ({ theme }: FacetHierarchyOptionsProps)
 				'&:before': {
 					content: `'\\0000ab'`,
 					padding: '0 2px 0 0',
-					color: variables.color?.primary,
+					color: variables?.color?.accent,
 				},
 			},
 			'& .ss__facet-hierarchy-options__option__value': {
@@ -48,7 +44,6 @@ const facetHierarchyOptionsStyleScript = ({ theme }: FacetHierarchyOptionsProps)
 };
 
 // FacetHierarchyOptions component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facethierarchyoptions--default
-export const facetHierarchyOptions: FacetHierarchyOptionsProps = {
+export const facetHierarchyOptions: Partial<FacetHierarchyOptionsProps> = {
 	styleScript: facetHierarchyOptionsStyleScript,
 };

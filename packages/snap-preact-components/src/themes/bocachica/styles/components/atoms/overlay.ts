@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Overlay component
 const overlayStyleScript = ({ color, transitionSpeed, theme }: OverlayProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -24,7 +23,6 @@ const overlayStyleScript = ({ color, transitionSpeed, theme }: OverlayProps) => 
 };
 
 // Overlay component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-inlinebanner--default
-export const overlay: Omit<OverlayProps, 'active'> = {
+export const overlay: Partial<OverlayProps> = {
 	styleScript: overlayStyleScript,
 };

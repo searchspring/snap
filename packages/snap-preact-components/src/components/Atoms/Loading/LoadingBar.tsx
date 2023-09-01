@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
 import { observer } from 'mobx-react-lite';
-import { jsx, css, keyframes, Keyframes } from '@emotion/react';
+import { jsx, css, keyframes, type Keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -44,7 +44,6 @@ const CSS = {
 
 export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<LoadingBarProps> = {
 		height: '5px',
 	};
@@ -54,7 +53,7 @@ export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element =>
 	const { active, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, animation: CSS.animation, theme };
+	const stylingProps = { ...props, animation: CSS.animation };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the InlineBanner component
 const inlineBannerStyleScript = ({ width, theme }: InlineBannerProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -29,7 +28,6 @@ const inlineBannerStyleScript = ({ width, theme }: InlineBannerProps) => {
 };
 
 // InlineBanner component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-inlinebanner--default
-export const inlineBanner: Omit<InlineBannerProps, 'banner'> = {
+export const inlineBanner: Partial<InlineBannerProps> = {
 	styleScript: inlineBannerStyleScript,
 };

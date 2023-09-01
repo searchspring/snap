@@ -18,7 +18,7 @@ import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
-	results: ({ columns, gapSize }: ResultsProps) =>
+	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -144,7 +144,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
 								if (resultLayout && controller) {
-									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
+									return <ResultLayout controller={controller} result={result} layout={resultLayout} theme={theme} />;
 								} else {
 									return (
 										<Result

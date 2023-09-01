@@ -35,7 +35,6 @@ const CSS = {
 
 export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultProps: Partial<SlideoutProps> = {
 		active: false,
@@ -93,7 +92,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, isActive, theme };
+	const stylingProps = { ...props, isActive };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

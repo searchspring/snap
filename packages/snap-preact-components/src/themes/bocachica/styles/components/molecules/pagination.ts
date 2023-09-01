@@ -12,21 +12,18 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 			minHeight: '1em',
 			minWidth: '1em',
 			textAlign: 'center',
-			color: variables?.color?.text,
+			color: variables?.color?.secondary,
 
 			'&.ss__pagination__page--active': {
-				fontWeight: 'bold',
-			},
-			'&:hover:not(.ss__pagination__page--active)': {
-				background: variables.color?.hover?.background,
-				color: variables?.color?.hover?.text,
+				textDecoration: 'underline',
 			},
 		},
 	});
 };
 
 // Pagination component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-pagination--default
-export const pagination: PaginationProps = {
+export const pagination: Partial<PaginationProps> = {
 	styleScript: paginationStyleScript,
+	nextButton: 'Next »',
+	prevButton: '« Previous',
 };

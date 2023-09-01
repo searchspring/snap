@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the BranchOverride component
 const branchOverrideStyleScript = ({ theme, componentTheme }: BranchOverrideProps & { componentTheme: componentTheme }) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -95,7 +94,6 @@ const branchOverrideStyleScript = ({ theme, componentTheme }: BranchOverrideProp
 };
 
 // BranchOverride component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/organisms-branchoverride--auto
-export const branchOverride: Omit<BranchOverrideProps, 'branch'> = {
+export const branchOverride: Partial<BranchOverrideProps> = {
 	styleScript: branchOverrideStyleScript,
 };

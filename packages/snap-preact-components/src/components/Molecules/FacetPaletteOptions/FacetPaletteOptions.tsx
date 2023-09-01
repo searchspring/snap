@@ -93,7 +93,6 @@ const CSS = {
 
 export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
@@ -123,7 +122,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

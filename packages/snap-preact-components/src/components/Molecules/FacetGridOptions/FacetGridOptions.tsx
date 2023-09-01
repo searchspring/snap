@@ -76,7 +76,6 @@ const CSS = {
 
 export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetGridOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
@@ -87,7 +86,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 	const { values, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

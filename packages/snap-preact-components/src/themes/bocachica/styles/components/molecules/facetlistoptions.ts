@@ -8,19 +8,15 @@ const facetListOptionsStyleScript = ({ hideCheckbox, theme }: FacetListOptionsPr
 	return css({
 		'& .ss__facet-list-options__option': {
 			display: 'flex',
-			padding: '6px',
-			textDecoration: 'none',
+			margin: '0 0 5px 0',
 			alignItems: 'center',
-			color: variables?.color?.text,
+			color: variables?.color?.secondary,
 
 			'&:hover': {
 				cursor: 'pointer',
-				background: variables.color?.hover?.background,
-				color: variables?.color?.hover?.text,
 			},
 			'&.ss__facet-list-options__option--filtered': {
 				fontWeight: 'bold',
-				color: variables?.color?.primary,
 			},
 			'& .ss__facet-list-options__option__value': {
 				marginLeft: hideCheckbox ? '' : '8px',
@@ -34,7 +30,6 @@ const facetListOptionsStyleScript = ({ hideCheckbox, theme }: FacetListOptionsPr
 };
 
 // FacetListOptions component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facetlistoptions--default
-export const facetListOptions: FacetListOptionsProps = {
+export const facetListOptions: Partial<FacetListOptionsProps> = {
 	styleScript: facetListOptionsStyleScript,
 };

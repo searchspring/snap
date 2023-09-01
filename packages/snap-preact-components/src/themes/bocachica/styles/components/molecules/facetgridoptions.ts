@@ -9,7 +9,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 		display: 'flex',
 		flexFlow: 'row wrap',
 		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(45px, 1fr))`,
-		color: variables?.color?.text,
+		color: variables?.color?.secondary,
 		gap: gapSize,
 		gridAutoRows: `1fr`,
 
@@ -18,7 +18,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 			justifyContent: 'center',
 			alignItems: 'center',
 			flex: '0 1 auto',
-			border: `1px solid ${variables?.color?.primary || '#333'}`,
+			border: `1px solid ${variables?.color?.secondary || '#333'}`,
 			borderRadius: '3px',
 			textAlign: 'center',
 			wordBreak: 'break-all',
@@ -26,19 +26,17 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 			padding: '1em 0',
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 			margin: `0 ${gapSize} ${gapSize} 0`,
-			background: variables?.color?.background || '#fff',
+			color: variables?.color?.secondary,
 
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
 			},
 			'&.ss__facet-grid-options__option--filtered': {
-				background: variables?.color?.primary || '#ccc',
-				color: variables?.color?.primaryBgText,
+				background: variables?.color?.active?.background || '#ccc',
+				color: variables?.color?.active?.foreground,
 			},
 			'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 				cursor: 'pointer',
-				background: variables?.color?.hover?.background,
-				color: variables?.color?.hover?.text,
 			},
 			'& .ss__facet-grid-options__option__value': {
 				'&.ss__facet-grid-options__option__value--smaller': {
@@ -71,8 +69,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptio
 };
 
 // FacetGridOptions component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facetgridoptions--default
-export const facetGridOptions: FacetGridOptionsProps = {
+export const facetGridOptions: Partial<FacetGridOptionsProps> = {
 	styleScript: facetGridOptionsStyleScript,
 	gapSize: '5px',
 	columns: 5,

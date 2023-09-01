@@ -1,10 +1,17 @@
+import { type Keyframes } from '@emotion/react';
 import { css, SkeletonProps } from '../../../../../index';
 import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Skeleton component
-// TODO: animation typing
-const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedColor, animation, theme }: SkeletonProps & { animation: any }) => {
-	// TODO: remove this comment when the variables are used
+const skeletonStyleScript = ({
+	width,
+	height,
+	round,
+	backgroundColor,
+	animatedColor,
+	animation,
+	theme,
+}: SkeletonProps & { animation: Keyframes }) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -38,7 +45,6 @@ const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedCo
 };
 
 // Skeleton component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-skeleton--circle
-export const skeleton: Omit<SkeletonProps, 'width' | 'height'> = {
+export const skeleton: Partial<SkeletonProps> = {
 	styleScript: skeletonStyleScript,
 };

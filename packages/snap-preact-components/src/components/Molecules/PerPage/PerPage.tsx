@@ -13,7 +13,7 @@ import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	perPage: ({}) => css({}),
+	perPage: ({}: Partial<PerPageProps>) => css({}),
 };
 
 export const PerPage = observer((properties: PerPageProps): JSX.Element => {
@@ -24,7 +24,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
-	const { pagination, controller, label, disableStyles, className, style } = props;
+	const { pagination, controller, label, disableStyles, className, style, styleScript } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -42,8 +42,12 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.perPage({}), style];
+	const stylingProps = { ...props };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.perPage(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

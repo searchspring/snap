@@ -11,7 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	searchInput: ({ theme }: { theme: Theme }) =>
+	searchInput: ({ theme }: Partial<SearchInputProps>) =>
 		css({
 			display: 'flex',
 			alignItems: 'center',
@@ -33,7 +33,6 @@ const CSS = {
 
 export const SearchInput = observer((properties: SearchInputProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<SearchInputProps> = {
 		placeholder: 'Search',
 		hideIcon: false,
@@ -59,7 +58,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -4,6 +4,7 @@ import { LightenDarkenColor } from '../../../../../utilities';
 
 // CSS in JS style script for the ErrorHandler component
 const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
@@ -24,9 +25,9 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 		},
 
 		'& .ss__error-handler__button': {
-			backgroundColor: variables?.color?.background || 'white',
+			backgroundColor: 'white',
 			color: 'inherit',
-			borderColor: variables?.color?.primary,
+			borderColor: 'black',
 			width: ['150px', 'fit-content'],
 			margin: '5px 10px',
 
@@ -36,30 +37,30 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 		},
 
 		'&.ss__error-handler--error': {
-			backgroundColor: LightenDarkenColor(variables?.color?.message?.error || 'red', 180),
-			borderLeftColor: variables?.color?.message?.error || '#ff0000',
+			backgroundColor: LightenDarkenColor('red', 180),
+			borderLeftColor: '#ff0000',
 			'.ss__error-handler__message': {
 				'.ss__icon': {
-					fill: variables?.color?.message?.error || '#ff0000',
+					fill: '#ff0000',
 				},
 			},
 		},
 		'&.ss__error-handler--warning': {
-			backgroundColor: LightenDarkenColor(variables?.color?.message?.warning || 'yellow', 180),
-			borderLeftColor: variables?.color?.message?.warning || '#ffff00',
+			backgroundColor: LightenDarkenColor('yellow', 180),
+			borderLeftColor: '#ffff00',
 			'.ss__icon': {
-				fill: variables?.color?.message?.warning || '#ffff00',
+				fill: '#ffff00',
 			},
 			'.ss__error-handler__button': {
-				borderColor: variables?.color?.message?.warning || '#ffff00',
+				borderColor: '#ffff00',
 			},
 		},
 		'&.ss__error-handler--info': {
-			backgroundColor: LightenDarkenColor(variables?.color?.message?.info || 'blue', 180),
-			borderLeftColor: variables?.color?.message?.info || '#0000ff',
+			backgroundColor: LightenDarkenColor('blue', 180),
+			borderLeftColor: '#0000ff',
 			'.ss__error-handler__message': {
 				'.ss__icon': {
-					fill: variables?.color?.message?.info || '#0000ff',
+					fill: '#0000ff',
 				},
 			},
 		},
@@ -67,7 +68,6 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 };
 
 // ErrorHandler component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-errorhandler--custom-error
-export const errorHandler: ErrorHandlerProps = {
+export const errorHandler: Partial<ErrorHandlerProps> = {
 	styleScript: errorHandlerStyleScript,
 };

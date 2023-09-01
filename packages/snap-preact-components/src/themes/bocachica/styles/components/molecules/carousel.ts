@@ -44,7 +44,7 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 			},
 		},
 		'.swiper-pagination-bullet-active': {
-			background: variables?.color?.primary || 'inherit',
+			background: variables?.color?.accent || 'inherit',
 		},
 		'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 			display: 'flex',
@@ -110,13 +110,13 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 			height: '8px',
 			display: 'inline-block',
 			borderRadius: '50%',
-			background: '#000',
-			opacity: '.2',
+			background: variables?.color?.accent || '#000',
+			opacity: '.5',
 			cursor: 'pointer',
 			margin: '0 4px',
 			'&.swiper-pagination-bullet-active': {
-				opacity: '0.8',
-				background: variables?.color?.primary || '#000',
+				opacity: '1',
+				background: variables?.color?.active?.accent || '#000',
 			},
 		},
 		'.swiper-container-pointer-events': {
@@ -132,7 +132,6 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 };
 
 // Carousel component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-carousel--colors
-export const carousel: Omit<CarouselProps, 'children'> = {
+export const carousel: Partial<CarouselProps> = {
 	styleScript: carouselStyleScript,
 };

@@ -12,3 +12,6 @@ export { inlineBanner } from './inlinebanner';
 export { overlay } from './overlay';
 export { price } from './price';
 export { skeleton } from './skeleton';
+export { element } from './element';
+export { searchHeader } from './searchheader';
+export { terms } from './terms';

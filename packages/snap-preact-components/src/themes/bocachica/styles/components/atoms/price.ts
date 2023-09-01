@@ -6,16 +6,18 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
-		color: variables?.color?.primary,
+		color: variables?.color?.secondary,
+		margin: '0 0.5rem 0 0',
+
 		'&.ss__price--strike': {
 			textDecoration: 'line-through',
-			color: variables?.color?.text || 'inherit',
+			color: variables?.color?.secondary || 'inherit',
+			opacity: 0.5,
 		},
 	});
 };
 
 // Price component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-price--custom-currency
-export const price: PriceProps = {
+export const price: Partial<PriceProps> = {
 	styleScript: priceStyleScript,
 };

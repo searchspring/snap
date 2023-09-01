@@ -21,35 +21,45 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 			'& .ss__select__dropdown__button': {
 				border: 'none',
 				padding: '6px 30px',
+				fontWeight: 'bold',
+				'&:hover': {
+					backgroundColor: 'initial',
+					color: variables?.color?.secondary || 'unset',
+				},
+				'& .ss__select__dropdown__button__icon': {
+					transition: 'transform 0.25s ease 0s',
+				},
 			},
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__button': {
 					boxShadow: '0 6px 12px 1px #0000001f',
+					'& .ss__select__dropdown__button__icon': {
+						transform: 'rotate(180deg)',
+					},
 				},
 				'& .ss__dropdown__content': {
+					backgroundColor: backgroundColor || '#fff',
 					boxShadow: '0 6px 12px 1px #0000001f',
+					zIndex: '10000',
 				},
 			},
 		},
 
 		'& .ss__select__select': {
 			position: 'relative',
-			zIndex: '10000',
-			backgroundColor: backgroundColor || variables?.color?.background || '#fff',
-			listStyle: 'none',
 			padding: '0',
-			marginTop: '-1px',
+			margin: '-1px 0 0 0',
 			border: borderColor ? `1px solid ${borderColor || color}` : '',
 			'& .ss__select__select__option': {
+				listStyle: 'none',
 				cursor: 'pointer',
 				padding: '6px 30px',
-				color: 'initial',
+				color: variables?.color?.secondary,
 				'&.ss__select__select__option--selected': {
-					fontWeight: 'bold',
+					background: `rgba(109,113,117,.06)`,
 				},
 				'&:hover': {
-					background: variables.color?.hover?.background,
-					color: variables?.color?.hover?.text,
+					background: `rgba(109,113,117,.06)`,
 				},
 			},
 		},
@@ -57,18 +67,8 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 };
 
 // Select component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-select--default
-export const select: Omit<SelectProps, 'options'> = {
+export const select: Partial<SelectProps> = {
 	styleScript: selectStyleScript,
-	// backgroundColor: 'white',
-	// borderColor: 'red',
-	theme: {
-		components: {
-			button: {
-				// backgroundColor: 'white',
-				// borderColor: 'red',
-				// disableStyles: true,
-			},
-		},
-	},
+	iconClose: 'angle-down',
+	iconOpen: 'angle-down',
 };

@@ -70,8 +70,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		props.theme = realTheme;
 	}
 
-	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
-	const style: any = props.style;
+	const { disableStyles, className, controller, style, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
 	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
 	const store = controller.store;
 
@@ -145,17 +144,14 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { ...props };
 
-	if (!disableStyles) {
-		styling.css = [CSS.Search(props), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Search(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
-	}
-
-	// add styleScript to styling
-	if (styleScript && !disableStyles) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(props));
 	}
 
 	return (
@@ -170,7 +166,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 						<SearchHeader {...subProps.SearchHeader} controller={controller} />
 
-						{!hidetopToolBar && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} controller={controller} />}
+						{!hidetopToolBar && store.pagination.totalResults > 0 && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} controller={controller} />}
 
 						<div className="clear"></div>
 
@@ -182,7 +178,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 						<div className="clear"></div>
 
-						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} controller={controller} />}
+						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} controller={controller} />
+						)}
 					</div>
 				</div>
 			</CacheProvider>

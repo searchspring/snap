@@ -50,7 +50,6 @@ const CSS = {
 
 export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<SkeletonProps> = {
 		backgroundColor: '#ebebeb',
 		animatedColor: '#f5f5f5',
@@ -61,7 +60,7 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const { disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, animation: CSS.animation, theme };
+	const stylingProps = { ...props, animation: CSS.animation };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

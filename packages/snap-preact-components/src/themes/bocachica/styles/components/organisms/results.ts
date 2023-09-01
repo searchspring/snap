@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Results component
 const resultsStyleScript = ({ columns, gapSize, theme }: ResultsProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -41,7 +40,6 @@ const resultsStyleScript = ({ columns, gapSize, theme }: ResultsProps) => {
 };
 
 // Results component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/organisms-results--grid
-export const results: ResultsProps = {
+export const results: Partial<ResultsProps> = {
 	styleScript: resultsStyleScript,
 };

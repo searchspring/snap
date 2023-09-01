@@ -26,7 +26,7 @@ const autocompleteStyleScript = ({
 		position: 'absolute',
 		zIndex: '10002',
 		border: '1px solid #ebebeb',
-		background: variables?.color?.background || '#ffffff',
+		background: '#ffffff',
 		width: width,
 		maxWidth: '100vw',
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
@@ -39,7 +39,7 @@ const autocompleteStyleScript = ({
 		'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
 			fontWeight: 'normal',
 			margin: 0,
-			color: variables?.color?.text || '#c5c5c5',
+			color: variables?.color?.secondary || '#c5c5c5',
 			textTransform: 'uppercase',
 			padding: '10px',
 			'& h5': {
@@ -81,11 +81,11 @@ const autocompleteStyleScript = ({
 					},
 
 					'&.ss__autocomplete__terms__option--active': {
-						background: variables?.color?.background || '#fff',
+						background: variables?.color?.active?.background || '#fff',
 
 						'& a': {
 							fontWeight: 'bold',
-							color: variables?.color?.background ? variables?.color?.primaryBgText : variables?.color?.primary,
+							color: variables?.color?.active?.foreground,
 						},
 					},
 				},
@@ -94,12 +94,20 @@ const autocompleteStyleScript = ({
 
 		'& .ss__autocomplete__facets': {
 			display: 'flex',
-			flex: `0 0 150px`,
+			flex: `0 0 200px`,
 			flexDirection: vertical ? 'row' : 'column',
 			columnGap: '20px',
 			order: 2,
 			padding: vertical ? '10px 20px' : '10px',
 			overflowY: vertical ? undefined : 'auto',
+
+			'& .ss__facet__options': {
+				maxHeight: '250px',
+			},
+
+			'& .ss__facet-list-options__option__value': {
+				textAlign: 'left',
+			},
 			'& .ss__autocomplete__facet': {
 				flex: vertical ? '0 1 150px' : undefined,
 			},
@@ -139,7 +147,7 @@ const autocompleteStyleScript = ({
 
 				'& a': {
 					fontWeight: 'bold',
-					color: variables?.color?.primary,
+					color: variables?.color?.secondary,
 
 					'& .ss__icon': {
 						marginLeft: '5px',
@@ -151,18 +159,19 @@ const autocompleteStyleScript = ({
 };
 
 // Autocomplete component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/organisms-autocomplete--default
-export const autocomplete: Omit<AutocompleteProps, 'input' | 'controller'> = {
+export const autocomplete: Partial<AutocompleteProps> = {
 	styleScript: autocompleteStyleScript,
 	theme: {
 		components: {
+			results: {
+				rows: 2,
+				columns: 3,
+			},
 			facet: {
 				limit: 6,
-				style: {
-					'.ss__facet__options': {
-						maxHeight: '200px',
-					},
-				},
+				disableOverflow: true,
+				disableCollapse: true,
+				previewOnFocus: true,
 			},
 			facetGridOptions: {
 				columns: 3,

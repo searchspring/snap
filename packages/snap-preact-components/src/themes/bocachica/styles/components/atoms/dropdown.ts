@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Dropdown component
 const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -32,7 +31,6 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 };
 
 // Dropdown component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-dropdown--default
-export const dropdown: Omit<DropdownProps, 'button'> = {
+export const dropdown: Partial<DropdownProps> = {
 	styleScript: dropdownStyleScript,
 };

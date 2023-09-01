@@ -28,7 +28,6 @@ const CSS = {
 
 export function Overlay(properties: OverlayProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<OverlayProps> = {
 		color: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
@@ -39,7 +38,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 	const { active, onClick, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

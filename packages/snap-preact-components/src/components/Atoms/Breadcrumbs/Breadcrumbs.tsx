@@ -10,7 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	breadcrumbs: ({}) =>
+	breadcrumbs: ({}: Partial<BreadcrumbsProps>) =>
 		css({
 			'& .ss__breadcrumbs__crumbs': {
 				padding: '0',
@@ -24,7 +24,6 @@ const CSS = {
 
 export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<BreadcrumbsProps> = {
 		separator: '>',
 	};
@@ -34,7 +33,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 	const { data, separator, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

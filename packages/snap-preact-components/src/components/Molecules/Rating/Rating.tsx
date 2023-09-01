@@ -9,7 +9,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	rating: (emptyRatingSrc?: string, fullRatingSrc?: string) =>
+	rating: ({ emptyRatingSrc, fullRatingSrc }: { emptyRatingSrc?: string; fullRatingSrc?: string }) =>
 		css({
 			textAlign: 'left',
 			height: '24px',
@@ -43,13 +43,17 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { emptyRatingSrc, fullRatingSrc, showEmptyRatings, count, disableStyles, className, style } = props;
+	const { emptyRatingSrc, fullRatingSrc, showEmptyRatings, count, disableStyles, className, style, styleScript } = props;
 
 	let rating = props.rating;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.rating(emptyRatingSrc, fullRatingSrc), style];
+	const stylingProps = { ...props, emptyRatingSrc, fullRatingSrc };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.rating(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

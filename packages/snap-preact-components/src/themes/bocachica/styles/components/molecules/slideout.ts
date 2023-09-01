@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Slideout component
 const slideoutStyleScript = ({ isActive, width, transitionSpeed, slideDirection, theme }: SlideoutProps & { isActive: boolean }) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -20,14 +19,13 @@ const slideoutStyleScript = ({ isActive, width, transitionSpeed, slideDirection,
 		width: width?.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
 		maxWidth: width,
 		padding: '10px',
-		background: variables?.color?.background || '#fff',
+		background: '#fff',
 		boxSizing: 'border-box',
 		overflowY: 'auto',
 	});
 };
 
 // Slideout component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-slideout--default
-export const slideout: SlideoutProps = {
+export const slideout: Partial<SlideoutProps> = {
 	styleScript: slideoutStyleScript,
 };

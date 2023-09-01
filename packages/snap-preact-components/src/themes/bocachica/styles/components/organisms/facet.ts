@@ -22,9 +22,9 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			display: 'flex',
 			justifyContent: 'space-between',
 			alignItems: 'center',
-			color: color || variables?.color?.text,
+			color: color || variables?.color?.secondary,
 			fontWeight: 'bold',
-			padding: '6px 0',
+			margin: '0 0 20px 0',
 		},
 		'& .ss__facet__options': {
 			marginTop: '8px',
@@ -33,25 +33,20 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			overflowX: 'hidden',
 
 			'&::-webkit-scrollbar': {
-				width: '10px',
+				width: '8px',
 			},
 			'&::-webkit-scrollbar-track': {
-				background: variables?.color?.secondary,
-				borderRadius: '10px',
+				background: '#f2f2f2',
 			},
 			'&::-webkit-scrollbar-thumb': {
-				background: variables?.color?.primary,
-				borderRadius: '10px',
-			},
-			'&::-webkit-scrollbar-thumb:hover': {
-				background: variables?.color?.hover?.background,
+				background: variables?.color?.secondary || '#ccc',
 			},
 		},
 		'& .ss__facet__show-more-less': {
 			display: 'block',
 			margin: '8px',
 			cursor: 'pointer',
-			color: color || variables?.color?.text,
+			color: color || variables?.color?.secondary,
 			'& .ss__icon': {
 				marginRight: '8px',
 			},
@@ -63,8 +58,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 };
 
 // Facet component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/organisms-facet--grid
-export const facet: Omit<FacetProps, 'facet'> = {
+export const facet: Partial<FacetProps> = {
 	styleScript: facetStyleScript,
 	iconCollapse: 'angle-down',
 	iconExpand: 'angle-down',

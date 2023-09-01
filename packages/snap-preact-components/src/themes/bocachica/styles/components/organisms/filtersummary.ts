@@ -4,21 +4,31 @@ import { BocachicaVariables } from '../../../index';
 // CSS in JS style script for the FilterSummary component
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables as BocachicaVariables;
-	const { filterSummary } = variables;
 
 	return css({
+		margin: '10px 0 30px 0',
 		'& .ss__filter-summary__filter': {
 			margin: '5px 10px 5px 0',
+			'& .ss__filter__button': {
+				backgroundColor: variables?.color?.active?.background || '#ccc',
+				color: variables?.color?.active?.foreground,
+				border: 'none',
+
+				'& .ss__filter__button__icon': {
+					fill: variables?.color?.active?.accent,
+				},
+			},
 		},
 		'& .ss__filter-summary__title': {
 			fontSize: '1.2em',
-			color: filterSummary?.color?.text || variables?.color?.text,
+			fontWeight: 'bold',
+			color: variables?.color?.secondary,
 		},
 	});
 };
 
 // FilterSummary component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/organisms-filtersummary--regular
-export const filterSummary: FilterSummaryProps = {
+export const filterSummary: Partial<FilterSummaryProps> = {
 	styleScript: filterSummaryStyleScript,
+	title: 'Applied Filters',
 };

@@ -19,7 +19,7 @@ import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { Sidebar } from '../Sidebar';
 
 const CSS = {
-	toolbar: () => css({}),
+	toolbar: ({}: Partial<ToolbarProps>) => css({}),
 };
 
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
@@ -43,12 +43,16 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { ...props };
 
-	if (!disableStyles) {
-		styling.css = [CSS.toolbar(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.toolbar(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

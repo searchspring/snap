@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	badge: ({ position }: BadgeProps) =>
+	badge: ({ position }: Partial<BadgeProps>) =>
 		css({
 			display: 'inline-block',
 			position: 'absolute',
@@ -20,7 +20,6 @@ const CSS = {
 
 export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<BadgeProps> = {
 		position: {
 			top: 0,
@@ -33,7 +32,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	const { content, title, children, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

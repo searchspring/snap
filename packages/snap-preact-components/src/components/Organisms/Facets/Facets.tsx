@@ -14,7 +14,7 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	facets: ({}) => css({}),
+	facets: ({}: Partial<FacetsProps>) => css({}),
 };
 
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
@@ -81,7 +81,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

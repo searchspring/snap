@@ -9,7 +9,7 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
-		border: `1px solid ${variables?.color?.primary || '#ccc'}`,
+		border: `1px solid ${variables?.color?.secondary || '#ccc'}`,
 
 		'& .ss__icon': {
 			padding: '5px',
@@ -25,7 +25,6 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 };
 
 // SearchInput component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-searchinput--default
-export const searchInput: SearchInputProps = {
+export const searchInput: Partial<SearchInputProps> = {
 	styleScript: searchInputStyleScript,
 };

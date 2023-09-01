@@ -41,7 +41,6 @@ const CSS = {
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetListOptionsProps> = {};
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
@@ -64,7 +63,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

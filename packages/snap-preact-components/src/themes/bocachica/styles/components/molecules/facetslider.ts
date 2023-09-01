@@ -19,8 +19,8 @@ const facetSliderStyleScript = ({
 		display: 'flex',
 		flexDirection: 'column',
 		marginTop: '5px',
-		marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
-		color: variables?.color?.text,
+		marginBottom: showTicks && stickyHandleLabel ? '22px' : showTicks || stickyHandleLabel ? '10px' : '5px',
+		color: variables?.color?.secondary,
 
 		'& .ss__facet-slider__slider': {
 			position: 'relative',
@@ -51,18 +51,18 @@ const facetSliderStyleScript = ({
 			},
 		},
 		'& .ss__facet-slider__rail': {
-			background: railColor || variables?.color?.primary || '#333',
+			background: railColor || variables?.color?.secondary || '#333',
 			height: '100%',
 		},
 		'& .ss__facet-slider__segment': {
-			background: trackColor || variables?.color?.secondary || '#ccc',
+			background: trackColor || '#f2f2f2',
 			height: '100%',
 		},
 		'& .ss__facet-slider__handles': {
 			textAlign: 'center',
 			'& button': {
 				'& .ss__facet-slider__handle': {
-					background: handleColor || variables?.color?.primary || '#333',
+					background: handleColor || variables?.color?.secondary || '#333',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -71,7 +71,7 @@ const facetSliderStyleScript = ({
 					borderRadius: '100%',
 					fontSize: '0.7rem',
 					whiteSpace: 'nowrap',
-					color: valueTextColor || 'initial',
+					color: valueTextColor || variables?.color?.secondary || 'initial',
 					fontWeight: 'normal',
 					transform: 'translateY(0) scale(0.9)',
 					transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -79,7 +79,7 @@ const facetSliderStyleScript = ({
 					cursor: 'pointer',
 
 					'&:after': {
-						backgroundColor: variables?.color?.background || '#ffffff',
+						backgroundColor: variables?.color?.accent || '#ffffff',
 						width: '30%',
 						height: '30%',
 						top: '0',
@@ -94,10 +94,13 @@ const facetSliderStyleScript = ({
 					},
 
 					'&.ss__facet-slider__handle--active': {
-						background: handleDraggingColor || handleColor || variables?.color?.primary || '#000',
+						background: handleDraggingColor || handleColor || variables?.color?.active?.background || '#000',
 						'& label.ss__facet-slider__handle__label': {
-							background: variables?.color?.background || '#fff',
+							background: '#fff',
 							padding: '0 5px',
+						},
+						'&:after': {
+							backgroundColor: variables?.color?.active?.foreground || '#ffffff',
 						},
 					},
 
@@ -126,7 +129,7 @@ const facetSliderStyleScript = ({
 		'& .ss__facet-slider__labels': {
 			textAlign: 'center',
 			marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
-			color: valueTextColor,
+			color: variables?.color?.secondary || valueTextColor,
 
 			'& .ss__facet-slider__label--0': {
 				'&:after': {
@@ -139,7 +142,6 @@ const facetSliderStyleScript = ({
 };
 
 // FacetSlider component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-facetslider--price
-export const facetSlider: Omit<FacetSliderProps, 'facet'> = {
+export const facetSlider: Partial<FacetSliderProps> = {
 	styleScript: facetSliderStyleScript,
 };

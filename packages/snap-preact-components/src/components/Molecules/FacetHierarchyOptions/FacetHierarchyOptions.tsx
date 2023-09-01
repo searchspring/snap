@@ -12,7 +12,7 @@ import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	hierarchy: ({ theme }: { theme: Theme }) =>
+	hierarchy: ({ theme }: Partial<FacetHierarchyOptionsProps>) =>
 		css({
 			'& .ss__facet-hierarchy-options__option': {
 				display: 'flex',
@@ -21,11 +21,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme.colors?.hover,
+					background: theme?.colors?.hover,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme.colors?.primary,
+					color: theme?.colors?.primary,
 					'&:hover': {
 						cursor: 'default',
 						background: 'unset',
@@ -38,7 +38,7 @@ const CSS = {
 					'&:before': {
 						content: `'\\0000ab'`,
 						padding: '0 2px 0 0',
-						color: theme.colors?.primary,
+						color: theme?.colors?.primary,
 					},
 				},
 				'& .ss__facet-hierarchy-options__option__value': {
@@ -54,7 +54,6 @@ const CSS = {
 
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetHierarchyOptionsProps> = {};
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
@@ -62,7 +61,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -17,7 +17,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 import type { AbstractController } from '@searchspring/snap-controller';
 
 const CSS = {
-	errorHandler: ({ theme }: { theme: Theme }) =>
+	errorHandler: ({ theme }: Partial<ErrorHandlerProps>) =>
 		css({
 			borderRadius: '2px',
 			display: 'flex',
@@ -80,7 +80,6 @@ const CSS = {
 
 export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<ErrorHandlerProps> = {};
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
@@ -117,7 +116,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	const errorObject = controller?.store?.error || error;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

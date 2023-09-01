@@ -182,7 +182,6 @@ export const defaultVerticalCarouselBreakpoints = {
 
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<CarouselProps> = {
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
@@ -257,7 +256,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const rootComponentRef = useRef(null);
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

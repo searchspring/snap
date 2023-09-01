@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Banner component
 const bannerStyleScript = ({ theme }: BannerProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -16,7 +15,6 @@ const bannerStyleScript = ({ theme }: BannerProps) => {
 };
 
 // Banner component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-banner--footer
-export const banner: Omit<BannerProps, 'type'> = {
+export const banner: Partial<BannerProps> = {
 	styleScript: bannerStyleScript,
 };

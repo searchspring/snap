@@ -14,7 +14,7 @@ import { useA11y } from '../../../hooks/useA11y';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	checkbox: ({ size, color, theme }: CheckboxProps) =>
+	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -36,7 +36,6 @@ const CSS = {
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<CheckboxProps> = {
 		size: '12px',
 		startChecked: false,
@@ -60,6 +59,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		theme,
 	} = props;
 
 	const subProps: CheckboxSubProps = {
@@ -104,7 +104,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -13,3 +13,6 @@ export { result } from './result';
 export { searchInput } from './searchinput';
 export { select } from './select';
 export { slideout } from './slideout';
+export { perPage } from './perpage';
+export { rating } from './rating';
+export { sortBy } from './sortby';

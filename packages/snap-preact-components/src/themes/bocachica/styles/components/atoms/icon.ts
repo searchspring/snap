@@ -6,7 +6,7 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
-		fill: color || variables?.color?.primary,
+		fill: color || variables?.color?.accent,
 		width: width || size,
 		height: height || size,
 		position: 'relative',
@@ -14,7 +14,6 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 };
 
 // Icon component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-icon--custom
-export const icon: IconProps = {
+export const icon: Partial<IconProps> = {
 	styleScript: iconStyleScript,
 };

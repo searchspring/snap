@@ -23,7 +23,6 @@ const CSS = {
 
 export function Price(properties: PriceProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<PriceProps> = {
 		symbol: '$',
 		decimalPlaces: 2,
@@ -65,7 +64,7 @@ export function Price(properties: PriceProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

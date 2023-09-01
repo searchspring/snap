@@ -12,7 +12,7 @@ import { mergeProps } from '../../../utilities';
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility }: { visibility: string }) =>
+	image: ({ visibility }: Partial<ImageProps> & { visibility: string }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -30,7 +30,6 @@ const CSS = {
 
 export function Image(properties: ImageProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<ImageProps> = {
 		fallback: FALLBACK_IMAGE_URL,
 		lazy: true,
@@ -53,7 +52,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, visibility, theme };
+	const stylingProps = { ...props, visibility };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

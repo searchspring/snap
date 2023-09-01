@@ -46,7 +46,7 @@ export type componentTheme = {
 };
 
 const CSS = {
-	override: ({ componentTheme }: { componentTheme: componentTheme }) =>
+	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: componentTheme }) =>
 		css({
 			width: '360px',
 			height: '120px',
@@ -246,7 +246,6 @@ const componentThemes = {
 
 export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultProps: Partial<BranchOverrideProps> = {};
 
@@ -279,7 +278,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, componentTheme: componentThemes[themeName as keyof typeof componentThemes], theme };
+	const stylingProps = { ...props, componentTheme: componentThemes[themeName as keyof typeof componentThemes] };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

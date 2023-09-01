@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Filter component
 const filterStyleScript = ({ theme }: FilterProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -24,7 +23,6 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 };
 
 // Filter component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-filter--default
-export const filter: FilterProps = {
+export const filter: Partial<FilterProps> = {
 	styleScript: filterStyleScript,
 };

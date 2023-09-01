@@ -1,9 +1,9 @@
+import { type Keyframes } from '@emotion/react';
 import { css, LoadingBarProps } from '../../../../../index';
 import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the LoadingBar component
-// TODO: animation typing
-const loadingBarStyleScript = ({ color, height, backgroundColor, animation, theme }: LoadingBarProps & { animation: any }) => {
+const loadingBarStyleScript = ({ color, height, backgroundColor, animation, theme }: LoadingBarProps & { animation: Keyframes }) => {
 	const variables = theme?.variables as BocachicaVariables;
 
 	return css({
@@ -17,21 +17,20 @@ const loadingBarStyleScript = ({ color, height, backgroundColor, animation, them
 		opacity: '1',
 		visibility: 'visible',
 		zIndex: '10000',
-		background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
+		background: backgroundColor || '#f8f8f8',
 
 		'& .ss__loading-bar__bar': {
 			position: 'absolute',
 			top: '0',
 			left: '-200px',
 			height: '100%',
-			background: `${color || variables?.color?.primary || '#ccc'}`,
+			background: `${color || variables?.color?.accent || '#ccc'}`,
 			animation: `${animation} 2s linear infinite`,
 		},
 	});
 };
 
 // LoadingBar component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-loadingbar--active
-export const loadingBar: Omit<LoadingBarProps, 'active'> = {
+export const loadingBar: Partial<LoadingBarProps> = {
 	styleScript: loadingBarStyleScript,
 };

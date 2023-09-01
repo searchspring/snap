@@ -13,7 +13,7 @@ import { useA11y } from '../../../hooks/useA11y';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
+	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
@@ -40,7 +40,6 @@ const CSS = {
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps = {
 		disableA11y: false,
 	};
@@ -50,7 +49,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

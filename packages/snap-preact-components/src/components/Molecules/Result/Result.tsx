@@ -16,7 +16,7 @@ import type { SearchController, AutocompleteController, RecommendationController
 import type { Product } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	result: ({}) =>
+	result: ({}: Partial<ResultProps>) =>
 		css({
 			'&.ss__result--grid': {
 				display: 'flex',
@@ -75,7 +75,6 @@ const CSS = {
 
 export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.GRID,
@@ -153,7 +152,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

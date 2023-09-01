@@ -11,7 +11,8 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 		justifyContent: 'center',
 		height: size,
 		width: size,
-		border: `1px solid ${color || variables?.color?.primary || '#333'}`,
+		border: `1px solid ${color || variables?.color?.secondary || '#333'}`,
+		borderRadius: '3px',
 		'&.ss__checkbox--disabled': {
 			opacity: 0.7,
 		},
@@ -24,7 +25,7 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 };
 
 // Checkbox component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/molecules-checkbox--default
-export const checkbox: CheckboxProps = {
+export const checkbox: Partial<CheckboxProps> = {
 	styleScript: checkboxStyleScript,
+	size: '18px',
 };

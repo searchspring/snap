@@ -13,6 +13,7 @@ export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/Skeleton';
 export * from './components/Atoms/Terms';
+export * from './components/Atoms/SearchHeader';
 export * from './components/Trackers/Recommendation/ResultTracker';
 export * from './components/Trackers/Recommendation/ProfileTracker';
 
@@ -32,6 +33,8 @@ export * from './components/Molecules/Slideout';
 export * from './components/Molecules/FacetSlider';
 export * from './components/Molecules/Rating';
 export * from './components/Molecules/SearchInput';
+export * from './components/Molecules/PerPage';
+export * from './components/Molecules/SortBy';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
@@ -39,6 +42,9 @@ export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Results';
+export * from './components/Organisms/NoResults';
+export * from './components/Organisms/Sidebar';
+export * from './components/Organisms/Toolbar';
 
 // LAYOUTS
 export * from './components/Layouts/ResultLayout';

@@ -34,7 +34,6 @@ const CSS = {
 
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<InlineBannerProps> = {
 		layout: ResultsLayout.GRID,
 		width: 'auto',
@@ -45,7 +44,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const { banner, disableStyles, className, layout, onClick, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

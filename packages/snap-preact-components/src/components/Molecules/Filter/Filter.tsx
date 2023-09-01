@@ -14,7 +14,7 @@ import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
 const CSS = {
-	filter: ({}) =>
+	filter: ({}: Partial<FilterProps>) =>
 		css({
 			textDecoration: 'none',
 			display: 'inline-flex',
@@ -34,7 +34,6 @@ const CSS = {
 // TODO: look into urlManager and how it connects in this case, left the href out for the time being
 export const Filter = observer((properties: FilterProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FilterProps> = {};
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
@@ -76,7 +75,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -150,7 +150,6 @@ const CSS = {
 
 export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetSliderProps> = {
 		tickSize: properties.facet?.step ? properties.facet?.step * 10 : 20,
 	};
@@ -200,7 +199,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	});
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

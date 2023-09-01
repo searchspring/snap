@@ -3,7 +3,6 @@ import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Breadcrumbs component
 const breadcrumbsStyleScript = ({ theme }: BreadcrumbsProps) => {
-	// TODO: remove this comment when the variables are used
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
 
@@ -19,7 +18,6 @@ const breadcrumbsStyleScript = ({ theme }: BreadcrumbsProps) => {
 };
 
 // Breadcrumbs component props
-// https://searchspring.github.io/snap/packages/snap-preact-components/docs/?path=/docs/atoms-breadcrumbs--search-page
-export const breadcrumbs: Omit<BreadcrumbsProps, 'data'> = {
+export const breadcrumbs: Partial<BreadcrumbsProps> = {
 	styleScript: breadcrumbsStyleScript,
 };
