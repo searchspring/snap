@@ -15,7 +15,7 @@ import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../provider
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Organisms/SearchHeader';
-import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
+import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks';
 import deepmerge from 'deepmerge';
