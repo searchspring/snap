@@ -17,11 +17,11 @@ The required `controller` prop specifies a reference to the search controller.
 <MobileSidebar controller={controller} />
 ```
 
-### slideoutButtonText
-The `slideoutButtonText` prop will change the inner text of the slideout button
+### openButtonText
+The `openButtonText` prop will change the inner text of the slideout button
 
 ```jsx
-<MobileSidebar controller={controller} slideoutButtonText={'Click To Filter'} />
+<MobileSidebar controller={controller} openButtonText={'Click To Filter'} />
 ```
 
 ### displayAt
@@ -45,11 +45,59 @@ The `iconClose` prop specifies the name of an icon to add to the sidebar close b
 <MobileSidebar controller={controller} iconClose={'close'} />
 ```
 
+### applyButtonIcon 
+The `applyButtonIcon` prop specifies the name of an icon to add to the sidebar apply filters button.
+
+```jsx
+<MobileSidebar controller={controller} applyButtonIcon={'cog'} />
+```
+
+### clearButtonIcon 
+The `clearButtonIcon` prop specifies the name of an icon to add to the sidebar clear all filters button.
+
+```jsx
+<MobileSidebar controller={controller} clearButtonIcon={'close'} />
+```
+
+### closeButtonIcon 
+The `closeButtonIcon` prop specifies the name of an icon to add to the close sidebar button.
+
+```jsx
+<MobileSidebar controller={controller} closeButtonIcon={'close'} />
+```
+
+### openButtonIcon
+The `openButtonIcon` prop specifies the name of an icon to add to the slideout open sidebar button.
+
+```jsx
+<MobileSidebar controller={controller} openButtonIcon={'cog'} />
+```
+
+### hideHeader
+The `hideHeader` prop will disable the sidebar header from rendering. 
+
+```jsx
+<MobileSidebar controller={controller} hideHeader />
+```
+
+### hideFooter
+The `hideFooter` prop will disable the sidebar footer from rendering. 
+
+```jsx
+<MobileSidebar controller={controller} hideFooter />
+```
+
 ### hideCloseButton
 The `hideCloseButton` prop will disable the close Button component from rendering.
 
 ```jsx
 <MobileSidebar controller={controller} hideCloseButton />
+```
+
+### closeButtonText
+The `closeButtonText` prop will change the inner text of the sidebar close button.
+```jsx
+<MobileSidebar controller={controller} closeButtonText={'Close Sidebar'} />
 ```
 
 ### titleText
@@ -91,11 +139,11 @@ The `hideFilterSummary` prop will disable the FilterSummary component from rende
 <MobileSidebar controller={controller} hideFilterSummary />
 ```
 
-### hideClearAllButton
-The `hideClearAllButton` prop will disable the clear all Button component from rendering.
+### hideClearButton
+The `hideClearButton` prop will disable the clear all Button component from rendering.
 
 ```jsx
-<MobileSidebar controller={controller} hideClearAllButton />
+<MobileSidebar controller={controller} hideClearButton />
 ```
 
 ### clearButtonText

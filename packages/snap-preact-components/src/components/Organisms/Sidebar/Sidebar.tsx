@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -87,7 +87,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 	};
 
-	return (
+	return controller.store.loaded ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
 				{!hideTitle && <h4 className="ss__sidebar__title">{titleText}</h4>}
@@ -101,6 +101,8 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 				{!hideFacets && <Facets {...subProps.facets} />}
 			</div>
 		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

@@ -93,6 +93,7 @@ describe('Button Component', () => {
 			const iconElem = rendered.container.querySelector(`.ss__button .ss__icon`);
 			expect(iconElem).toBeInTheDocument();
 			expect(button).toBeInTheDocument();
+			expect(iconElem).toHaveClass('ss__icon--close-thin');
 		});
 
 		it('fires onClick prop when clicked', () => {
@@ -241,6 +242,23 @@ describe('Button Component', () => {
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();
+		});
+
+		it('renders with icon prop', () => {
+			const icon = 'close-thin';
+			const content = 'colorful button';
+
+			const rendered = render(
+				<Button native icon={icon}>
+					{content}
+				</Button>
+			);
+
+			const button = rendered.getByText(content);
+			const iconElem = rendered.container.querySelector(`.ss__button .ss__icon`);
+			expect(iconElem).toBeInTheDocument();
+			expect(button).toBeInTheDocument();
+			expect(iconElem).toHaveClass('ss__icon--close-thin');
 		});
 
 		it('Can enable/disable useAlly with disableA11y prop', () => {

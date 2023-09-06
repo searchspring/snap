@@ -76,7 +76,7 @@ export default {
 		},
 		hidePerPage: {
 			defaultValue: false,
-			description: 'hides the sidebar per page component',
+			description: 'hides the sidebar PerPage component',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -87,7 +87,7 @@ export default {
 		},
 		hideSortBy: {
 			defaultValue: false,
-			description: 'hides the sidebar sort by component',
+			description: 'hides the sidebar SortBy component',
 			table: {
 				type: {
 					summary: 'boolean',

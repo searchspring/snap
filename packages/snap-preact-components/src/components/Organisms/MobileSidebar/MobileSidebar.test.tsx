@@ -76,7 +76,7 @@ describe('MobileSidebar Component', () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		let title = rendered.container.querySelector('.ss__mobile-sidebar__title');
+		let title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 		let summary = rendered.container.querySelector('.ss__filter-summary');
 		let sortby = rendered.container.querySelector('.ss__sortby__select');
 		let perpage = rendered.container.querySelector('.ss__perpage__select');
@@ -93,7 +93,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			title = rendered.container.querySelector('.ss__mobile-sidebar__title');
+			title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			summary = rendered.container.querySelector('.ss__filter-summary');
 			sortby = rendered.container.querySelector('.ss__sortby__select');
 			perpage = rendered.container.querySelector('.ss__perpage__select');
@@ -131,29 +131,17 @@ describe('MobileSidebar Component', () => {
 		expect(slideoutContent).not.toBeInTheDocument();
 	});
 
-	it('can change slideout button text', async () => {
+	it('can change slideout open button text', async () => {
 		const text = 'click me';
-		const rendered = render(<MobileSidebar controller={controller} slideoutButtonText={text} />);
+		const rendered = render(<MobileSidebar controller={controller} openButtonText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		expect(slideoutButton?.innerHTML).toBe(text);
 	});
 
-	it('has expected default slideout button text', async () => {
+	it('has expected default slideout open button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		expect(slideoutButton?.innerHTML).toBe('Filters');
-	});
-
-	it('can change clear button text', async () => {
-		const text = 'click me';
-		const rendered = render(<MobileSidebar controller={controller} clearButtonText={text} />);
-		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		userEvent.click(slideoutButton!);
-
-		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__clear-button');
-			expect(element).toHaveTextContent(text);
-		});
 	});
 
 	it('has expected default clear button text', async () => {
@@ -168,7 +156,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide clear button', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hideClearAllButton={true} />);
+		const rendered = render(<MobileSidebar controller={controller} hideClearButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -184,23 +172,8 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__title-button');
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__header__title-button');
 			expect(element).not.toBeInTheDocument();
-		});
-	});
-
-	it('can change close button', async () => {
-		const icon = 'cog';
-		const title = 'title text';
-		const rendered = render(<MobileSidebar controller={controller} titleText={title} iconClose={icon} />);
-		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		userEvent.click(slideoutButton!);
-
-		await waitFor(() => {
-			const elem = rendered.container.querySelector(`.ss__mobile-sidebar__title span`);
-			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__title .ss__mobile-sidebar__title__close-button .ss__icon--${icon}`);
-			expect(elem).toHaveTextContent(title);
-			expect(iconElem).toBeInTheDocument();
 		});
 	});
 
@@ -210,7 +183,24 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__title .ss__mobile-sidebar__title__close-button .ss__icon--close-thin`);
+			const iconElem = rendered.container.querySelector(
+				`.ss__mobile-sidebar__header .ss__mobile-sidebar__header__close-button .ss__icon--close-thin`
+			);
+			expect(iconElem).toBeInTheDocument();
+		});
+	});
+
+	it('can change close button', async () => {
+		const icon = 'cog';
+		const title = 'title text';
+		const rendered = render(<MobileSidebar controller={controller} closeButtonText={title} closeButtonIcon={icon} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(() => {
+			const elem = rendered.container.querySelector(`.ss__mobile-sidebar__header__close-button`);
+			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__header .ss__mobile-sidebar__header__close-button .ss__icon--${icon}`);
+			expect(elem).toHaveTextContent(title);
 			expect(iconElem).toBeInTheDocument();
 		});
 	});
@@ -218,7 +208,7 @@ describe('MobileSidebar Component', () => {
 	it('can change open button', async () => {
 		const icon = 'cog';
 		const title = 'title text';
-		const rendered = render(<MobileSidebar controller={controller} slideoutButtonText={title} iconOpen={icon} />);
+		const rendered = render(<MobileSidebar controller={controller} openButtonText={title} openButtonIcon={icon} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 
 		const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__slideout__button .ss__icon--${icon}`);
@@ -226,16 +216,63 @@ describe('MobileSidebar Component', () => {
 		expect(iconElem).toBeInTheDocument();
 	});
 
-	it('can hideTitle', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hideTitle={true} />);
+	it('can change apply button', async () => {
+		const text = 'some text';
+		const icon = 'cog';
+		const rendered = render(<MobileSidebar controller={controller} applyButtonIcon={icon} applyButtonText={text} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(() => {
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
+			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__apply-button .ss__icon--${icon}`);
+
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			expect(element).toBeInTheDocument();
+			expect(applyButton).toHaveTextContent(text);
+			expect(iconElem).toBeInTheDocument();
+		});
+	});
+
+	it('can change clear button text', async () => {
+		const text = 'click me';
+		const icon = 'cog';
+
+		const rendered = render(<MobileSidebar controller={controller} clearButtonIcon={icon} clearButtonText={text} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__clear-button');
+			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__clear-button .ss__icon--${icon}`);
+			expect(iconElem).toBeInTheDocument();
+			expect(element).toHaveTextContent(text);
+		});
+	});
+
+	it('can hideHeader', async () => {
+		const rendered = render(<MobileSidebar controller={controller} hideHeader={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
-			const title = rendered.container.querySelector('.ss__mobile-sidebar__title');
+			const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			expect(element).toBeInTheDocument();
 			expect(title).not.toBeInTheDocument();
+		});
+	});
+
+	it('can hideFooter', async () => {
+		const rendered = render(<MobileSidebar controller={controller} hideFooter={true} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			const footer = rendered.container.querySelector('.ss__mobile-sidebar__footer');
+			expect(element).toBeInTheDocument();
+			expect(footer).not.toBeInTheDocument();
 		});
 	});
 
@@ -246,7 +283,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const title = rendered.container.querySelector('.ss__mobile-sidebar__title span');
+			const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			expect(title?.innerHTML).toBe(text);
 		});
 	});
@@ -258,7 +295,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const title = rendered.container.querySelector('.ss__mobile-sidebar__title span');
+			const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			expect(title?.innerHTML).toBe(text);
 		});
 	});
@@ -325,20 +362,6 @@ describe('MobileSidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
 			expect(applyButton).not.toBeInTheDocument();
-		});
-	});
-
-	it('can change apply button text', async () => {
-		const text = 'some text';
-		const rendered = render(<MobileSidebar controller={controller} applyButtonText={text} />);
-		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		userEvent.click(slideoutButton!);
-
-		await waitFor(() => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
-			expect(element).toBeInTheDocument();
-			expect(applyButton).toHaveTextContent(text);
 		});
 	});
 

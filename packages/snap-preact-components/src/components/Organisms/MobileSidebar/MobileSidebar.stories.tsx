@@ -40,9 +40,10 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		slideoutButtonText: {
+		openButtonText: {
 			description: 'Text to render in the slideout button',
 			type: { required: false },
+			defaultValue: 'Click to open filters',
 			table: {
 				type: {
 					summary: 'string',
@@ -58,7 +59,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'Filters' },
+				defaultValue: { summary: 'Filter Options' },
 			},
 			control: { type: 'text' },
 		},
@@ -73,6 +74,27 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideClearButton: {
+			description: 'hides the clear all filters button component',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		clearButtonIcon: {
+			description: 'Icon to render in the clear filters button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
 		applyButtonText: {
 			description: 'Text to render in the apply facets button',
 			type: { required: false },
@@ -83,6 +105,27 @@ export default {
 				defaultValue: { summary: 'Apply Filters' },
 			},
 			control: { type: 'text' },
+		},
+		applyButtonIcon: {
+			description: 'Icon to render in the apply facets button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
+		hideApplyButton: {
+			description: 'hides the apply facets button component',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
 		},
 		displayAt: {
 			description: 'specifies a CSS media query for when the component will render. By default, the component will always render',
@@ -96,116 +139,111 @@ export default {
 			control: { type: 'text' },
 		},
 		hideTitle: {
-			defaultValue: false,
 			description: 'hides the sidebar title component',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideApplyButton: {
-			defaultValue: false,
-			description: 'hides the apply facets button component',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideClearAllButton: {
-			defaultValue: false,
-			description: 'hides the clear all filters button component',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		hideCloseButton: {
-			defaultValue: false,
-			description: 'hides the close sidebar icon component',
+			description: 'hides the close sidebar button',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		closeButtonIcon: {
+			description: 'Icon to render in the close sidebar button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'close-thin' },
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
+		closeButtonText: {
+			description: 'Text to render in the close sidebar button',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		openButtonIcon: {
+			description: 'Icon to render in the open sidebar button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
+		hideHeader: {
+			description: 'hides the sidebar header',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		hideFooter: {
+			description: 'hides the sidebar footer',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
 			},
 			control: { type: 'boolean' },
 		},
 		hideFacets: {
-			defaultValue: false,
 			description: 'hides the sidebar facets component',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		hidePerPage: {
-			defaultValue: false,
 			description: 'hides the sidebar per page component',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		hideSortBy: {
-			defaultValue: false,
 			description: 'hides the sidebar sort by component',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
 		hideFilterSummary: {
-			defaultValue: false,
 			description: 'hides the sidebar FilterSummary component',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
-		},
-		iconOpen: {
-			description: 'Icon name for the open side bar icon, renders in the slideout button.',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			control: {
-				type: 'select',
-				options: [...Object.keys(iconPaths)],
-			},
-		},
-		iconClose: {
-			description: 'Icon name for the close side bar icon, renders in the sidebar title.',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			control: {
-				type: 'select',
-				options: [...Object.keys(iconPaths)],
-			},
 		},
 		...componentArgs,
 	},

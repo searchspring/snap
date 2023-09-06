@@ -42,12 +42,12 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<MobileSidebarProps> = {
-		slideoutButtonText: 'Filters',
+		openButtonText: 'Filters',
 		clearButtonText: 'Clear All',
 		applyButtonText: 'Apply Filters',
 		titleText: 'Filter Options',
 		displayAt: '650px',
-		iconClose: 'close-thin',
+		closeButtonIcon: 'close-thin',
 	};
 
 	const props = mergeProps('mobileSidebar', globalTheme, defaultProps, properties);
@@ -57,18 +57,22 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		hideFacets,
 		hideFilterSummary,
 		hidePerPage,
-		hideTitle,
+		hideHeader,
+		hideFooter,
 		hideSortBy,
 		hideApplyButton,
+		clearButtonIcon,
 		hideCloseButton,
-		slideoutButtonText,
+		closeButtonText,
+		openButtonText,
 		clearButtonText,
+		applyButtonIcon,
 		applyButtonText,
-		iconClose,
-		iconOpen,
+		closeButtonIcon,
+		openButtonIcon,
 		titleText,
 		displayAt,
-		hideClearAllButton,
+		hideClearButton,
 		disableStyles,
 		className,
 		style,
@@ -129,47 +133,53 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		const { toggleActive } = props;
 		return (
 			<div className="ss__mobile-sidebar__content">
-				{!hideTitle && (
-					<div className="ss__mobile-sidebar__title">
-						<span>{titleText}</span>
+				{!hideHeader && (
+					<div className="ss__mobile-sidebar__header">
+						<h4 className="ss__mobile-sidebar__header__title">{titleText}</h4>
 						{!hideCloseButton && (
 							<Button
-								className="ss__mobile-sidebar__title__close-button"
-								name="mobile-sidebar__title__close-button"
+								className="ss__mobile-sidebar__header__close-button"
+								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
 								onClick={() => toggleActive()}
-								icon={iconClose}
+								icon={closeButtonIcon}
 								{...subProps.button}
-							></Button>
+							>
+								{closeButtonText}
+							</Button>
 						)}
 					</div>
 				)}
 
-				<Sidebar className="ss__mobile-sidebar__sidebar" name={'mobile-sidebar__sidebar'} controller={controller} {...subProps.sidebar} />
+				<Sidebar className="ss__mobile-sidebar__body" name={'mobile-sidebar__body'} controller={controller} {...subProps.sidebar} />
 
-				<div className="ss__mobile-sidebar__cta-wrapper">
-					{!hideApplyButton && (
-						<Button
-							className="ss__mobile-sidebar__apply-button"
-							name={'mobile-sidebar__apply-button'}
-							content={applyButtonText}
-							onClick={() => toggleActive()}
-							{...subProps.button}
-						/>
-					)}
-					{!hideClearAllButton && (
-						<Button
-							className="ss__mobile-sidebar__clear-button"
-							name={'mobile-sidebar__clear-button'}
-							content={clearButtonText}
-							onClick={() => {
-								controller?.urlManager.remove('filter').remove('page').go();
-								toggleActive();
-							}}
-							{...subProps.button}
-						/>
-					)}
-				</div>
+				{!hideFooter && (
+					<div className="ss__mobile-sidebar__footer">
+						{!hideApplyButton && (
+							<Button
+								className="ss__mobile-sidebar__apply-button"
+								name={'mobile-sidebar__apply-button'}
+								content={applyButtonText}
+								icon={applyButtonIcon}
+								onClick={() => toggleActive()}
+								{...subProps.button}
+							/>
+						)}
+						{!hideClearButton && (
+							<Button
+								className="ss__mobile-sidebar__clear-button"
+								name={'mobile-sidebar__clear-button'}
+								icon={clearButtonIcon}
+								content={clearButtonText}
+								onClick={() => {
+									controller?.urlManager.remove('filter').remove('page').go();
+									toggleActive();
+								}}
+								{...subProps.button}
+							/>
+						)}
+					</div>
+				)}
 			</div>
 		);
 	};
@@ -180,8 +190,13 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 				<Slideout
 					className="ss__mobile-sidebar__slideout"
 					buttonContent={
-						<Button className="ss__mobile-sidebar__slideout__button" name={'mobile-sidebar__slideout__button'} icon={iconOpen} {...subProps.button}>
-							{slideoutButtonText}
+						<Button
+							className="ss__mobile-sidebar__slideout__button"
+							name={'mobile-sidebar__slideout__button'}
+							icon={openButtonIcon}
+							{...subProps.button}
+						>
+							{openButtonText}
 						</Button>
 					}
 					{...subProps.slideout}
@@ -196,19 +211,23 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
 	titleText?: string;
-	slideoutButtonText?: string;
+	openButtonText?: string;
 	clearButtonText?: string;
+	applyButtonIcon?: string;
+	clearButtonIcon?: string;
 	applyButtonText?: string;
-	iconClose?: string;
-	iconOpen?: string;
-	hideTitle?: boolean;
+	closeButtonIcon?: string;
+	openButtonIcon?: string;
+	hideHeader?: boolean;
+	hideFooter?: boolean;
 	hideFacets?: boolean;
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hideFilterSummary?: boolean;
 	hideApplyButton?: boolean;
-	hideClearAllButton?: boolean;
+	hideClearButton?: boolean;
 	hideCloseButton?: boolean;
+	closeButtonText?: string;
 	displayAt?: string;
 }
 
