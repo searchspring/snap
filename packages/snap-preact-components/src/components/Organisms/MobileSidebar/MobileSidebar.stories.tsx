@@ -139,7 +139,7 @@ export default {
 			control: { type: 'text' },
 		},
 		hideTitle: {
-			description: 'hides the sidebar title component',
+			description: 'hides the sidebar title',
 			table: {
 				type: {
 					summary: 'boolean',

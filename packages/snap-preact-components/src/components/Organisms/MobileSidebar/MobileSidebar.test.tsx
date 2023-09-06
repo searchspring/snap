@@ -155,6 +155,45 @@ describe('MobileSidebar Component', () => {
 		});
 	});
 
+	it('can use the apply button', async () => {
+		const rendered = render(<MobileSidebar controller={controller} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(async () => {
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
+
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			expect(element).toBeInTheDocument();
+
+			userEvent.click(applyButton!);
+
+			await waitFor(() => {
+				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+				expect(element).not.toBeInTheDocument();
+			});
+		});
+	});
+
+	it('can use the close button', async () => {
+		const rendered = render(<MobileSidebar controller={controller} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(async () => {
+			const closeButton = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			expect(element).toBeInTheDocument();
+
+			userEvent.click(closeButton!);
+
+			await waitFor(() => {
+				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+				expect(element).not.toBeInTheDocument();
+			});
+		});
+	});
+
 	it('can hide clear button', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideClearButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
@@ -172,7 +211,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__header__title-button');
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
 			expect(element).not.toBeInTheDocument();
 		});
 	});
