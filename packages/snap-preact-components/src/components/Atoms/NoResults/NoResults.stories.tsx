@@ -28,7 +28,7 @@ export default {
 	],
 	argTypes: {
 		staticSlot: {
-			description: 'Slot for more overriding no results content entirely',
+			description: 'Slot for overriding no results content entirely',
 			table: {
 				type: {
 					summary: 'string',
@@ -36,17 +36,14 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		dymText: {
-			description: '"Did you mean" text override',
+		hideSuggestions: {
+			description: 'Hide suggestions',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'boolean',
 				},
-				defaultValue: {
-					summary: `Did you mean <a href={properties.controller?.store?.search?.didYouMean?.url.href}>{properties.controller?.store?.search?.didYouMean?.string}</a>?`,
-				},
+				defaultValue: { summary: false },
 			},
-			control: { type: 'text' },
 		},
 		suggestionsTitleText: {
 			description: 'Suggestions title',
@@ -94,15 +91,6 @@ export default {
 				},
 			},
 			control: { type: 'object' },
-		},
-		controller: {
-			description: 'Search Controller reference',
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
-			control: { type: 'none' },
 		},
 		...componentArgs,
 	},

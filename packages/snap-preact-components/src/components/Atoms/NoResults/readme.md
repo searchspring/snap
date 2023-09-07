@@ -4,13 +4,6 @@ Renders no results verbiage.
 
 ## Usage
 
-### controller
-The optional `controller` prop specifies a reference to the `Search Controller`. This is mainly used for the 'did you mean' section. 
-
-```jsx
-<NoResults controller={controller} />
-```
-
 ### hideContact
 The `hideContact` prop will prevent the contact list and title from rendering.
 
@@ -18,20 +11,20 @@ The `hideContact` prop will prevent the contact list and title from rendering.
 <NoResults hideContact={true} />
 ```
 
+### hideSuggestions
+The `hideSuggestions` prop will prevent the suggestions list and title from rendering.
+
+```jsx
+<NoResults hideSuggestions={true} />
+```
+
 ### staticSlot
-The `staticSlot` prop provides a slot to override the entire inner content of the component. 
+The `staticSlot` prop provides a slot to override the entire inner content of the component. This can be JSX, string, or stringified HTML. 
 
 ```jsx
 const slot = <div>Nothing found..</div>
 
 <NoResults staticSlot={slot} />
-```
-
-### dymText
-The `dymText` prop overrides the `did you mean` text that shows when the search store contains a `didYouMean` term. Note the `did you mean` section requires a search controller in order to render. 
-
-```jsx
-<NoResults controller={controller} dymText={'no results found'} />
 ```
 
 ### suggestionsTitleText

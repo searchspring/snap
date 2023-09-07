@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -9,7 +9,6 @@ import { Theme, useTheme } from '../../../providers';
 import { cloneWithProps, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { handleize } from '@searchspring/snap-toolbox/dist/cjs/filters/handleize';
-import { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
 	noresults: () => css({}),
@@ -19,7 +18,6 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<NoResultsProps> = {
-		dymText: `Did you mean <a href=${properties.controller?.store?.search?.didYouMean?.url.href}>${properties.controller?.store?.search?.didYouMean?.string}</a>?`,
 		suggestionsTitleText: `Suggestions`,
 		suggestionsList: [
 			`Check for misspellings.`,
@@ -52,18 +50,16 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const {
 		staticSlot,
 		suggestionsTitleText,
-		dymText,
 		suggestionsList,
 		hideContact,
 		contactsTitleText,
+		hideSuggestions,
 		contactsList,
 		controller,
 		disableStyles,
 		className,
 		style,
 	} = props;
-
-	const dym = controller?.store?.search?.didYouMean;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
@@ -74,42 +70,39 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 	return (
 		<div className={classnames('ss__no-results', className)}>
-			{staticSlot ? (
-				<Fragment>{cloneWithProps(staticSlot, { controller })}</Fragment>
-			) : (
-				<Fragment>
-					{dym && <p className="ss__no-results__did-you-mean" dangerouslySetInnerHTML={{ __html: dymText! }}></p>}
+			{staticSlot &&
+				(typeof staticSlot == 'string' ? (
+					<div className="ss__no-results__static" dangerouslySetInnerHTML={{ __html: staticSlot }}></div>
+				) : (
+					<div className="ss__no-results__static">{cloneWithProps(staticSlot, { controller })}</div>
+				))}
 
-					<div className="ss__no-results__content">
-						{suggestionsList && (
-							<>
-								{suggestionsTitleText && <h4 className="ss__no-results__title">{suggestionsTitleText}</h4>}
-
-								{suggestionsList && suggestionsList.length !== 0 ? (
-									<ul className="ss__no-results__suggestion-list">
-										{suggestionsList.map((suggestion: any) => (
-											<li className="ss__no-results__suggestion-list__option">{suggestion}</li>
-										))}
-									</ul>
-								) : null}
-							</>
-						)}
-					</div>
-
-					{!hideContact && contactsList && contactsList.length !== 0 && (
-						<div className="ss__no-results__contact">
-							{contactsTitleText && <p className="ss__no-results__contact__title">{contactsTitleText}</p>}
-
-							{contactsList.map((contact: any) => (
-								<div className={`ss__no-results__contact__detail ss__contact__detail--${handleize(contact.title)}`}>
-									<h4 className="ss__no-results__contact__detail__title">{contact.title}</h4>
-
-									<p dangerouslySetInnerHTML={{ __html: contact.content }}></p>
-								</div>
-							))}
-						</div>
+			{!hideSuggestions && suggestionsList && suggestionsList.length !== 0 && (
+				<div className="ss__no-results__suggestions">
+					{suggestionsTitleText && (
+						<h4 className="ss__no-results__suggestions__title" dangerouslySetInnerHTML={{ __html: suggestionsTitleText }}></h4>
 					)}
-				</Fragment>
+
+					<ul className="ss__no-results__suggestions__list">
+						{suggestionsList.map((suggestion: any) => (
+							<li className="ss__no-results__suggestions__list__option" dangerouslySetInnerHTML={{ __html: suggestion }}></li>
+						))}
+					</ul>
+				</div>
+			)}
+
+			{!hideContact && contactsList && contactsList.length !== 0 && (
+				<div className="ss__no-results__contact">
+					{contactsTitleText && <p className="ss__no-results__contact__title" dangerouslySetInnerHTML={{ __html: contactsTitleText }}></p>}
+
+					{contactsList.map((contact: any) => (
+						<div className={`ss__no-results__contact__detail ss__contact__detail--${handleize(contact.title)}`}>
+							<h4 className="ss__no-results__contact__detail__title" dangerouslySetInnerHTML={{ __html: contact.title }}></h4>
+
+							<p className="ss__no-results__contact__detail__content" dangerouslySetInnerHTML={{ __html: contact.content }}></p>
+						</div>
+					))}
+				</div>
 			)}
 		</div>
 	);
@@ -122,11 +115,10 @@ interface contact {
 
 export interface NoResultsProps extends ComponentProps {
 	staticSlot?: any;
-	dymText?: string;
 	suggestionsTitleText?: string;
 	suggestionsList?: string[];
 	hideContact?: boolean;
+	hideSuggestions?: boolean;
 	contactsTitleText?: string;
 	contactsList?: contact[];
-	controller?: SearchController;
 }
