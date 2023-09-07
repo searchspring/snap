@@ -72,16 +72,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const { disableStyles, className, controller, styleScript, hideSidebar, resultLayout, hidetopToolBar, hideBottomToolBar } = props;
 	const style: any = props.style;
-	const slideOutToggleWidth: string = props.slideOutToggleWidth!;
 	const store = controller.store;
 
 	const subProps: SearchSubProps = {
 		TopToolbar: {
 			// default props
-			hideFacets: true,
 			hidefilterSummary: true,
-			hideSlideout: true,
-			slideOutToggleWidth: slideOutToggleWidth,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -91,11 +87,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		BottomToolbar: {
 			// default props
-			hideFacets: true,
 			hidefilterSummary: true,
 			hidePerPage: true,
 			hideSortBy: true,
-			hideSlideout: true,
 			// inherited props
 			...defined({
 				disableStyles,
