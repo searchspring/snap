@@ -5,21 +5,21 @@ import { AppMode, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
+import { fetchTheme } from '../utils';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
-import { SnapThemeConfig } from '../types';
-import { fetchTheme } from '../utils';
+import type { SnapThemeConfig } from '../Templates/themes';
 
 type RecommendationComponentFunc = () => Promise<any> | any;
 
 export type RecommendationComponentObject = {
 	component: RecommendationComponentFunc;
 	theme?: SnapThemeConfig;
-	props: {
+	props?: {
 		[name: string]: any;
 	};
 };
@@ -292,7 +292,7 @@ export class RecommendationInstantiator {
 					return;
 				}
 
-				let props: any = {};
+				let props: Record<string, unknown> = {};
 				let RecommendationsComponent:
 					| undefined
 					| React.ElementType<{
@@ -302,7 +302,7 @@ export class RecommendationInstantiator {
 				if (this.config.components[component] && typeof this.config.components[component] == 'function') {
 					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentFunc)();
 				} else if (this.config.components[component] && typeof this.config.components[component] == 'object') {
-					props = (this.config.components[component] as RecommendationComponentObject).props;
+					props = (this.config.components[component] as RecommendationComponentObject).props || {};
 					const importPromises = [];
 					// dynamically import the component
 					importPromises.push((this.config.components[component] as RecommendationComponentObject).component());
