@@ -150,7 +150,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__clear-button');
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 			expect(element).toHaveTextContent('Clear All');
 		});
 	});
@@ -161,7 +161,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
 
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
@@ -200,7 +200,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__clear-button');
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 			expect(element).not.toBeInTheDocument();
 		});
 	});
@@ -263,8 +263,8 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
-			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__apply-button .ss__icon--${icon}`);
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
+			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__footer__apply-button .ss__icon--${icon}`);
 
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
@@ -282,10 +282,35 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const element = rendered.container.querySelector('.ss__mobile-sidebar__clear-button');
-			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__clear-button .ss__icon--${icon}`);
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
+			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__footer__clear-button .ss__icon--${icon}`);
 			expect(iconElem).toBeInTheDocument();
 			expect(element).toHaveTextContent(text);
+		});
+	});
+
+	it('clear button clears filters', async () => {
+		const rendered = render(<MobileSidebar controller={controller} />);
+		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		userEvent.click(slideoutButton!);
+
+		await waitFor(async () => {
+			const filterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
+			expect(filterSummaryElement).toBeInTheDocument();
+		});
+
+		const clearButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
+
+		mockClient.mockData.updateConfig({ search: 'default' });
+
+		userEvent.click(clearButton!);
+
+		await controller.search();
+
+		await waitFor(() => {
+			expect(controller.store.filters.length).toBe(0);
+			const filterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
+			expect(filterSummaryElement).not.toBeInTheDocument();
 		});
 	});
 
@@ -397,7 +422,7 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
 			expect(applyButton).not.toBeInTheDocument();
@@ -410,10 +435,10 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__apply-button');
+			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
-			expect(applyButton).toHaveTextContent('Apply Filters');
+			expect(applyButton).toHaveTextContent('Apply');
 		});
 	});
 

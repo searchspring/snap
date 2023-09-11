@@ -44,7 +44,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	const defaultProps: Partial<MobileSidebarProps> = {
 		openButtonText: 'Filters',
 		clearButtonText: 'Clear All',
-		applyButtonText: 'Apply Filters',
+		applyButtonText: 'Apply',
 		titleText: 'Filter Options',
 		displayAt: '650px',
 		closeButtonIcon: 'close-thin',
@@ -157,8 +157,8 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					<div className="ss__mobile-sidebar__footer">
 						{!hideApplyButton && (
 							<Button
-								className="ss__mobile-sidebar__apply-button"
-								name={'mobile-sidebar__apply-button'}
+								className="ss__mobile-sidebar__footer__apply-button"
+								name={'mobile-sidebar__footer__apply-button'}
 								content={applyButtonText}
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
@@ -167,8 +167,8 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 						)}
 						{!hideClearButton && (
 							<Button
-								className="ss__mobile-sidebar__clear-button"
-								name={'mobile-sidebar__clear-button'}
+								className="ss__mobile-sidebar__footer__clear-button"
+								name={'mobile-sidebar__footer__clear-button'}
 								icon={clearButtonIcon}
 								content={clearButtonText}
 								onClick={() => {
