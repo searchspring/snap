@@ -12,7 +12,7 @@ Renders a search results toolbar.
 ## Usage
 
 ### controller
-The `controller` prop specifies a reference to the search controller.
+The required `controller` prop specifies a reference to the search controller.
 
 ```jsx
 <Toolbar controller={controller.store.results} />

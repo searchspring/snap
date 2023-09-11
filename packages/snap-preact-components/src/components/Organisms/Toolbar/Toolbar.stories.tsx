@@ -34,6 +34,16 @@ export default {
 		),
 	],
 	argTypes: {
+		controller: {
+			description: 'Controller reference',
+			type: { required: true },
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		hidefilterSummary: {
 			defaultValue: false,
 			description: 'prevents the FilterSummary component from rendering',
@@ -77,15 +87,6 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
-		},
-		controller: {
-			description: 'Controller reference',
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
-			control: { type: 'none' },
 		},
 		...componentArgs,
 	},
