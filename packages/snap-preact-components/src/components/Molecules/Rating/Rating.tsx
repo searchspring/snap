@@ -6,32 +6,40 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { mergeProps } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
+import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	rating: (emptyRatingSrc?: string, fullRatingSrc?: string) =>
+	rating: () =>
 		css({
-			textAlign: 'left',
-			height: '24px',
-			margin: '10px auto',
+			display: 'flex',
 
-			'& .emptyRatingBox': {
-				width: '129px',
-				height: '24px',
-				float: 'left',
-				backgroundRepeat: 'no-repeat',
-				background: `url(${emptyRatingSrc || '//4tcdn.blob.core.windows.net/4tjs1/images/allwallstarsempty.png'}) no-repeat`,
+			'& .ss__rating__stars': {
+				position: 'relative',
+			},
+
+			'& .ss__rating__stars__individualStar': {
+				flexBasis: '20%',
+				overflow: 'hidden',
+			},
+
+			'& .ss__rating__stars__empty': {
+				position: 'relative',
+				zIndex: 5,
+				display: 'flex',
+				flexDirection: 'row',
 				textAlign: 'center',
 				border: '0px !important',
 			},
 
-			'& .fullRatings': {
-				background: `url(${fullRatingSrc || '//4tcdn.blob.core.windows.net/4tjs1/images/allwallstarsfull.png'}) no-repeat`,
-				height: '24px',
-				textAlign: 'left',
-				backgroundRepeat: 'no-repeat',
+			'& .ss__rating__stars__full': {
+				position: 'absolute',
+				top: 0,
+				left: 0,
+				zIndex: 10,
+				display: 'flex',
+				flexDirection: 'row',
 				border: '0px !important',
-				float: 'left',
 			},
 		}),
 };
@@ -43,33 +51,85 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { emptyRatingSrc, fullRatingSrc, showEmptyRatings, count, disableStyles, className, style } = props;
+	const { showEmptyRatings, count, additionalText, disablePartialFill, disableStyles, className, style } = props;
 
-	let rating = props.rating;
+	const subProps: RatingSubProps = {
+		EmptyStar: {
+			// default props
+			//todo make this a star
+			icon: 'star',
+			color: 'black',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		FullStar: {
+			// default props
+			//todo make this a star
+			icon: 'star',
+			color: 'gray',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+	};
+
+	let value = props.value;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.rating(emptyRatingSrc, fullRatingSrc), style];
+		styling.css = [CSS.rating(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	if (isNaN(rating)) {
-		rating = 0;
+	if (isNaN(value)) {
+		value = 0;
 	}
-	if (rating > 5) {
-		rating = 5;
+	if (value > 5) {
+		value = 5;
 	}
 
-	const star = Math.floor(rating * 20);
+	const numStarsToShow = disablePartialFill ? Math.floor(value) : Math.ceil(value);
 
-	return showEmptyRatings || rating ? (
+	return showEmptyRatings || value ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__rating', className)}>
-				<div className={classnames('emptyRatingBox')}>
-					<div style={{ width: `${star}%` }} className={classnames('fullRatings')}></div>
+				<div className="ss__rating__stars">
+					<div className="ss__rating__stars__empty">
+						{[...Array(5)].map(() => (
+							<div className="ss__rating__stars__individualStar ss__rating__stars__empty__individualStar--empty">
+								<Icon name={'emptyStar'} {...subProps.EmptyStar} />
+							</div>
+						))}
+					</div>
+					<div className="ss__rating__stars__full">
+						{[...Array(numStarsToShow)].map((e, i) => {
+							let width = 100;
+							//if its the last star and there is remainder
+							if (i + 1 == numStarsToShow && !disablePartialFill && value % 1 != 0) {
+								width = (value % Math.floor(value)) * 100;
+							}
+
+							return (
+								<div className="ss__rating__stars__individualStarWrapper">
+									<div className="ss__rating__stars__individualStar ss__rating__stars__full__individualStar--full" style={{ width: `${width}%` }}>
+										<Icon name={'fullStar'} {...subProps.FullStar} />
+									</div>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{count && <span className={classnames('ratingCount')}>({count})</span>}
+
+				{count ? <span className="ss__rating__ratingCount">({count})</span> : <></>}
+				{additionalText ? <span className="ss__rating__additionalText">{additionalText}</span> : <></>}
 			</div>
 		</CacheProvider>
 	) : (
@@ -77,13 +137,15 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 	);
 });
 
+interface RatingSubProps {
+	EmptyStar: Partial<IconProps>;
+	FullStar: Partial<IconProps>;
+}
+
 export interface RatingProps extends ComponentProps {
-	rating: number;
+	value: number;
 	count?: number;
+	additionalText?: string;
 	showEmptyRatings?: boolean;
-	//todo
-	// emptyRatingSrc?: string | JSX.Element;
-	// fullRatingSrc?: string | JSX.Element;
-	emptyRatingSrc?: string;
-	fullRatingSrc?: string;
+	disablePartialFill?: boolean;
 }
