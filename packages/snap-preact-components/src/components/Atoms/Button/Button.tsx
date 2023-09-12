@@ -10,7 +10,8 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { mergeProps } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
+import { Icon, IconProps } from '../Icon';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
@@ -59,26 +60,42 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
+		icon,
 		style,
 		styleScript,
 	} = props;
 
+	const subProps: ButtonSubProps = {
+		icon: {
+			// default props
+			// global theme
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+	};
+
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = { backgroundColor, borderColor, color, disabled, native, theme };
+
 	if (!disableStyles) {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
 			styling.css = [CSS.button(stylingProps), style];
 		}
+
+		// add styleScript to styling
+		if (styleScript) {
+			styling.css = styling.css || [];
+			styling.css.push(styleScript(stylingProps));
+		}
 	} else if (style) {
 		styling.css = [style];
-	}
-
-	// add styleScript to styling
-	if (styleScript) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(stylingProps));
 	}
 
 	const elementProps = {
@@ -92,17 +109,19 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		ref: (e: any) => useA11y(e),
 	};
 
-	return content || children ? (
+	return content || children || icon ? (
 		<CacheProvider>
 			{native ? (
 				<button {...elementProps}>
 					{content}
 					{children}
+					{icon && <Icon icon={icon} {...subProps.icon} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					{content}
 					{children}
+					{icon && <Icon icon={icon} {...subProps.icon} />}
 				</div>
 			)}
 		</CacheProvider>
@@ -111,10 +130,15 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	);
 });
 
+interface ButtonSubProps {
+	icon: Partial<IconProps>;
+}
+
 export interface ButtonProps extends ComponentProps {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
+	icon?: string;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;

@@ -38,6 +38,8 @@ export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Results';
+export * from './components/Organisms/Sidebar';
+export * from './components/Organisms/MobileSidebar';
 
 // LAYOUTS
 export * from './components/Layouts/ResultLayout';
