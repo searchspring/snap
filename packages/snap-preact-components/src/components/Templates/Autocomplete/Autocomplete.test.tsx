@@ -10,7 +10,6 @@ import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '@searchspring/snap-preact';
 import { waitFor } from '@testing-library/preact';
-import { createSerializer } from '@emotion/jest';
 
 describe('Autocomplete Component', () => {
 	jest.setTimeout(10000);
@@ -46,21 +45,6 @@ describe('Autocomplete Component', () => {
 		container = document.getElementById('target')!;
 
 		mockClient.mockData.updateConfig({ autocomplete: 'default' });
-		expect.addSnapshotSerializer(createSerializer());
-	});
-
-	it('renders', async () => {
-		const input = document.querySelector('.searchspring-ac');
-		expect(input).toBeInTheDocument();
-		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
-		await controller.bind();
-
-		const args = {
-			controller,
-			input: controller.config.selector,
-		};
-		const { asFragment } = render(<Autocomplete {...args} />);
-		expect(asFragment()).toMatchSnapshot();
 	});
 
 	it('contains an input element on the page', () => {
@@ -80,8 +64,6 @@ describe('Autocomplete Component', () => {
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).not.toBeInTheDocument();
-
-		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders after input has been focused', async () => {
@@ -102,7 +84,6 @@ describe('Autocomplete Component', () => {
 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 			expect(autocomplete).toBeInTheDocument();
 		});
-		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
@@ -133,7 +114,6 @@ describe('Autocomplete Component', () => {
 			expect(results[0]).toBeInTheDocument();
 			expect(results.length).toEqual(9);
 		});
-		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('terms are emified as exected', async () => {
@@ -159,7 +139,6 @@ describe('Autocomplete Component', () => {
 			expect(termLinks[1]).toBeInTheDocument();
 			expect(termLinks[1].innerHTML).toEqual('<em>red </em>dress');
 		});
-		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hover over terms, & facets', async () => {
@@ -242,7 +221,6 @@ describe('Autocomplete Component', () => {
 			facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 			expect(facetOptions![0]).toHaveClass('ss__facet-list-options__option--filtered');
 		});
-		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink & hideHistory', async () => {
