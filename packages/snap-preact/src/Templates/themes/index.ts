@@ -1,3 +1,4 @@
+import { Theme } from '@searchspring/snap-preact-components';
 import { PikeTemplateTheme } from './pike';
 import { BocachicaTemplateTheme } from './bocachica';
 
@@ -15,4 +16,11 @@ export const themeMap = {
 	bocachica: async () => {
 		return (await import('./bocachica')).bocachica;
 	},
+};
+
+export type SnapThemeConfig = {
+	name: keyof typeof themeMap;
+	import: () => Promise<Theme>;
+	variables?: any;
+	overrides?: any;
 };

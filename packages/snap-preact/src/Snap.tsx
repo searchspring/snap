@@ -29,10 +29,10 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
-import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures, SnapThemeConfig } from './types';
-import { fetchTheme } from './utils';
+import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures } from './types';
+import type { SnapThemeConfig } from './Templates/themes';
+import { configureSnapFeatures, fetchTheme } from './utils';
 import { Theme } from '@searchspring/snap-preact-components';
 
 // configure MobX
@@ -42,7 +42,7 @@ export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
 export const STYLESHEET_CLASSNAME = 'ss-snap-bundle-styles';
 
-type ExtendedTarget = Target & {
+export type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<any> | any;

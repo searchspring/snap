@@ -67,6 +67,9 @@ export const bocachica: BocachicaTheme = {
 		loadingBar: {
 			...style.components.loadingBar,
 		},
+		noResults: {
+			...style.components.noResults,
+		},
 		overlay: {
 			...style.components.overlay,
 		},
@@ -149,9 +152,6 @@ export const bocachica: BocachicaTheme = {
 		},
 		filterSummary: {
 			...style.components.filterSummary,
-		},
-		noResults: {
-			...style.components.noResults,
 		},
 		recommendation: {
 			...style.components.recommendation,
