@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import type { SnapConfig } from './Snap';
+import type { SnapConfig } from '../../Snap';
 
 export function configureSnapFeatures(config: SnapConfig) {
 	/* configure snap features by mutating the config as needed */
@@ -7,7 +7,7 @@ export function configureSnapFeatures(config: SnapConfig) {
 	configureIntegratedSpellCorrection(config);
 }
 
-function configureIntegratedSpellCorrection(config: SnapConfig) {
+export function configureIntegratedSpellCorrection(config: SnapConfig) {
 	if (config.features?.integratedSpellCorrection?.enabled) {
 		if (config.client) {
 			config.client.config = deepmerge(
