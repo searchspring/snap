@@ -38,6 +38,13 @@ The `backgroundColor` prop specifies the button background color.
 <Button content={"click me!"} backgroundColor={'#eeeeee'} />
 ```
 
+### icon
+The `icon` prop specifies the name of the icon you wish to add to the button content. Note this currently only supports icons from our list of available icons. (see Icon Component for more details)
+
+```jsx
+<Button content={"click me!"} icon={'cog'} />
+```
+
 ### borderColor
 The `borderColor` prop specifies the button border color.
 

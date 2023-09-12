@@ -17,8 +17,9 @@ import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
-import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks';
+import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 
 const CSS = {
 	Search: ({ slideOutToggleWidth }: Partial<SearchProps>) =>
@@ -30,10 +31,6 @@ const CSS = {
 				flex: '0 1 auto',
 				width: '250px',
 				margin: '0 40px 0 0',
-
-				[`@media only screen and (max-width: ${slideOutToggleWidth})`]: {
-					display: 'none',
-				},
 			},
 
 			'.ss_desktop': {
@@ -44,6 +41,10 @@ const CSS = {
 
 			'.ss__search__content': {
 				flex: '1 1 0%',
+			},
+
+			[`@media only screen and (max-width: ${slideOutToggleWidth})`]: {
+				flexDirection: 'column',
 			},
 		}),
 };
@@ -75,6 +76,18 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const store = controller.store;
 
 	const subProps: SearchSubProps = {
+		MobileSidebar: {
+			// default props
+			hidePerPage: true,
+			hideSortBy: true,
+			displayAt: slideOutToggleWidth,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		TopToolbar: {
 			// default props
 			hidefilterSummary: true,
@@ -152,12 +165,18 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		styling.css.push(styleScript(props));
 	}
 
+	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
+	const isMobile = useMediaQuery(mobileMediaQuery);
+
 	return (
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__search', className)}>
-					{!hideSidebar && <Sidebar {...subProps.Sidebar} controller={controller} />}
+					<div className="ss__search__sidebar-wrapper">
+						{!hideSidebar && !isMobile && <Sidebar {...subProps.Sidebar} controller={controller} />}
 
+						<MobileSidebar controller={controller} {...subProps.MobileSidebar} />
+					</div>
 					<div className={classnames('ss__search__content')}>
 						{/* do we want this? */}
 						{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
@@ -201,4 +220,5 @@ interface SearchSubProps {
 	TopToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
+	MobileSidebar: Partial<MobileSidebarProps>;
 }

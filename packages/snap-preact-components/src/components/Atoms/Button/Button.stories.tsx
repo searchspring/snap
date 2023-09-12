@@ -5,6 +5,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { Button, ButtonProps } from './Button';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Button/readme.md';
+import { iconPaths } from '../Icon';
 
 export default {
 	title: `Atoms/Button`,
@@ -65,6 +66,18 @@ export default {
 				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
+		},
+		icon: {
+			description: 'Button Icon name',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
 		},
 		backgroundColor: {
 			description: 'Button background color',
