@@ -1,14 +1,16 @@
 # NoResults
 
-Renders no results verbiage. 
+Renders no results verbiage. Props that accept strings in this component will render HTML contained within them.
 
 ## Usage
 
-### hideContact
-The `hideContact` prop will prevent the contact list and title from rendering.
+### contentSlot
+The `contentSlot` prop provides a slot to provide custom content. This can be JSX, string, or stringified HTML. 
 
 ```jsx
-<NoResults hideContact={true} />
+const slot = <div>Nothing found..</div>
+
+<NoResults contentSlot={slot} />
 ```
 
 ### hideSuggestions
@@ -18,27 +20,11 @@ The `hideSuggestions` prop will prevent the suggestions list and title from rend
 <NoResults hideSuggestions={true} />
 ```
 
-### staticSlot
-The `staticSlot` prop provides a slot to override the entire inner content of the component. This can be JSX, string, or stringified HTML. 
-
-```jsx
-const slot = <div>Nothing found..</div>
-
-<NoResults staticSlot={slot} />
-```
-
 ### suggestionsTitleText
 The `suggestionsTitleText` prop allows you to set the inner text of the suggestions title.
 
 ```jsx
 <NoResults suggestionsTitleText={'suggestions'} />
-```
-
-### contactsTitleText
-The `contactsTitleText` prop allows you to set the inner text contacts title.
-
-```jsx
-<NoResults contactsTitleText={'contacts'} />
 ```
 
 ### suggestionsList
@@ -52,6 +38,20 @@ const list = [
 ],
 
 <NoResults suggestionsList={list} />
+```
+
+### hideContact
+The `hideContact` prop will prevent the contact list and title from rendering.
+
+```jsx
+<NoResults hideContact={true} />
+```
+
+### contactsTitleText
+The `contactsTitleText` prop allows you to set the inner text contacts title.
+
+```jsx
+<NoResults contactsTitleText={'contacts'} />
 ```
 
 ### contactsList

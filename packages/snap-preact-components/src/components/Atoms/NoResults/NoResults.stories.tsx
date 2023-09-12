@@ -19,19 +19,12 @@ export default {
 			),
 		},
 	},
-	decorators: [
-		(Story: any) => (
-			<div style={{ maxWidth: '250px' }}>
-				<Story />
-			</div>
-		),
-	],
 	argTypes: {
-		staticSlot: {
-			description: 'Slot for overriding no results content entirely',
+		contentSlot: {
+			description: 'Slot for adding custom content',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string, JSX',
 				},
 			},
 			control: { type: 'text' },
@@ -44,6 +37,7 @@ export default {
 				},
 				defaultValue: { summary: false },
 			},
+			control: { type: 'boolean' },
 		},
 		suggestionsTitleText: {
 			description: 'Suggestions title',
@@ -59,10 +53,10 @@ export default {
 			description: 'list of suggestions to display',
 			table: {
 				type: {
-					summary: 'array',
+					summary: 'string[]',
 				},
 			},
-			control: { type: 'object' },
+			control: { type: 'object', defaultValue: [] },
 		},
 		hideContact: {
 			description: 'Hide contact section',
@@ -72,6 +66,7 @@ export default {
 				},
 				defaultValue: { summary: false },
 			},
+			control: { type: 'boolean' },
 		},
 		contactsTitleText: {
 			description: 'contact section title',
@@ -87,7 +82,7 @@ export default {
 			description: 'list of contact lines to display',
 			table: {
 				type: {
-					summary: 'array',
+					summary: '{ title, content }[]',
 				},
 			},
 			control: { type: 'object' },

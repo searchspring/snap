@@ -12,7 +12,7 @@ describe('NoResults  Component', () => {
 
 	it('renders jsx with custom static slot', () => {
 		const slot = <div className="findMe">custom</div>;
-		const rendered = render(<NoResults staticSlot={slot} />);
+		const rendered = render(<NoResults contentSlot={slot} />);
 
 		const element = rendered.container.querySelector('.ss__no-results');
 		const slotElem = rendered.container.querySelector('.findMe');
@@ -22,10 +22,10 @@ describe('NoResults  Component', () => {
 
 	it('renders string with custom static slot', () => {
 		const slot = 'findMe';
-		const rendered = render(<NoResults staticSlot={slot} />);
+		const rendered = render(<NoResults contentSlot={slot} />);
 
 		const element = rendered.container.querySelector('.ss__no-results');
-		const slotElem = rendered.container.querySelector('.ss__no-results__static');
+		const slotElem = rendered.container.querySelector('.ss__no-results__slot');
 		expect(element).toBeInTheDocument();
 		expect(slotElem).toBeInTheDocument();
 		expect(slotElem?.innerHTML).toBe(slot);
@@ -33,10 +33,10 @@ describe('NoResults  Component', () => {
 
 	it('renders string with HTML with custom static slot', () => {
 		const slot = `<div class="findMe">custom</div>`;
-		const rendered = render(<NoResults staticSlot={slot} />);
+		const rendered = render(<NoResults contentSlot={slot} />);
 
 		const element = rendered.container.querySelector('.ss__no-results');
-		const slotElem = rendered.container.querySelector('.ss__no-results__static');
+		const slotElem = rendered.container.querySelector('.ss__no-results__slot');
 		expect(element).toBeInTheDocument();
 		expect(slotElem).toBeInTheDocument();
 		expect(slotElem?.innerHTML).toBe(slot);
@@ -86,7 +86,7 @@ describe('NoResults  Component', () => {
 		expect(contactElems).toHaveLength(contacts.length);
 		contactElems.forEach((elem, idx) => {
 			expect(elem).toContainHTML(
-				`<div class="ss__no-results__contact__detail ss__contact__detail--${contacts[idx].title}"><h4 class="ss__no-results__contact__detail__title">${contacts[idx].title}</h4><p class="ss__no-results__contact__detail__content">${contacts[idx].content}</p></div>`
+				`<div class="ss__no-results__contact__detail ss__no-results__contact__detail--${contacts[idx].title}"><h4 class="ss__no-results__contact__detail__title">${contacts[idx].title}</h4><p class="ss__no-results__contact__detail__content">${contacts[idx].content}</p></div>`
 			);
 		});
 	});
@@ -156,6 +156,18 @@ describe('NoResults  Component', () => {
 		const element = rendered.container.querySelector('.ss__no-results');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
+	});
+
+	it('renders with additional style using prop', () => {
+		const style = {
+			padding: '20px',
+		};
+		const rendered = render(<NoResults style={style} />);
+
+		const element = rendered.container.querySelector('.ss__no-results');
+		const styles = getComputedStyle(element!);
+
+		expect(styles.padding).toBe(style.padding);
 	});
 
 	it('can disable styles', () => {
