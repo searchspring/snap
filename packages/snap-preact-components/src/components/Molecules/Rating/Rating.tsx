@@ -9,7 +9,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	rating: ({ emptyRatingSrc, fullRatingSrc }: { emptyRatingSrc?: string; fullRatingSrc?: string }) =>
+	rating: ({ emptyRatingSrc, fullRatingSrc }: Partial<RatingProps>) =>
 		css({
 			textAlign: 'left',
 			height: '24px',

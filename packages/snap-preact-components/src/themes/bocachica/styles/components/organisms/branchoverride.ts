@@ -1,10 +1,12 @@
-import { css, BranchOverrideProps, componentTheme } from '../../../../../index';
+import { css, BranchOverrideProps, componentThemes } from '../../../../../index';
 import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the BranchOverride component
-const branchOverrideStyleScript = ({ theme, componentTheme }: BranchOverrideProps & { componentTheme: componentTheme }) => {
+const branchOverrideStyleScript = ({ darkMode, error, theme }: BranchOverrideProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
+	const prefersDark = typeof darkMode == 'boolean' ? darkMode : window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : false;
+	const componentTheme = componentThemes[error ? 'failureTheme' : prefersDark ? 'darkTheme' : 'lightTheme'];
 
 	return css({
 		width: '360px',

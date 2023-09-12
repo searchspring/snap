@@ -1,19 +1,19 @@
-import { type Keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 import { css, SkeletonProps } from '../../../../../index';
 import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Skeleton component
-const skeletonStyleScript = ({
-	width,
-	height,
-	round,
-	backgroundColor,
-	animatedColor,
-	animation,
-	theme,
-}: SkeletonProps & { animation: Keyframes }) => {
+const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedColor, theme }: SkeletonProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables as BocachicaVariables;
+	const animation = keyframes({
+		from: {
+			transform: 'translateX(-100%)',
+		},
+		to: {
+			transform: 'translateX(100%)',
+		},
+	});
 
 	return css({
 		width: width,

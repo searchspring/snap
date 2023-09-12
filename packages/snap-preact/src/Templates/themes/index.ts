@@ -2,7 +2,7 @@ import { PikeTemplateTheme } from './pike';
 import { BocachicaTemplateTheme } from './bocachica';
 
 export type TemplateThemeConfig = {
-	name: 'pike' | 'bocachica'; // TODO: figure out why "keyof typeof themeMap" doesn't work here
+	name: keyof typeof themeMap;
 	variables?: {
 		breakpoints: number[];
 	};

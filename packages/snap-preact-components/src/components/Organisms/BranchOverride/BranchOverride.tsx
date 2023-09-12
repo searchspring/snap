@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
-export type componentTheme = {
+export type ComponentTheme = {
 	class: string;
 	main: {
 		border: string;
@@ -46,7 +46,7 @@ export type componentTheme = {
 };
 
 const CSS = {
-	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: componentTheme }) =>
+	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: ComponentTheme }) =>
 		css({
 			width: '360px',
 			height: '120px',
@@ -134,7 +134,7 @@ const CSS = {
 		}),
 };
 
-const darkTheme: componentTheme = {
+const darkTheme: ComponentTheme = {
 	class: 'ss__branch-override--dark',
 	main: {
 		border: '0',
@@ -169,7 +169,7 @@ const darkTheme: componentTheme = {
 	},
 };
 
-const lightTheme: componentTheme = {
+const lightTheme: ComponentTheme = {
 	class: 'ss__branch-override--light',
 	main: {
 		border: '1px solid #ccc',
@@ -203,7 +203,7 @@ const lightTheme: componentTheme = {
 	},
 };
 
-const failureTheme: componentTheme = {
+const failureTheme: ComponentTheme = {
 	class: 'ss__branch-override--error',
 	main: {
 		border: '0',
@@ -238,7 +238,7 @@ const failureTheme: componentTheme = {
 	},
 };
 
-const componentThemes = {
+export const componentThemes = {
 	darkTheme,
 	lightTheme,
 	failureTheme,
@@ -278,12 +278,12 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, componentTheme: componentThemes[themeName as keyof typeof componentThemes] };
+	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
-		styling.css = [CSS.override(stylingProps), style];
+		styling.css = [CSS.override({ componentTheme: componentThemes[themeName as keyof typeof componentThemes], ...stylingProps }), style];
 	} else if (style) {
 		styling.css = [style];
 	}

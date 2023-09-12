@@ -1,23 +1,5 @@
-import { Theme } from '../../providers';
+import { Theme, GlobalThemeVariables } from '../../providers';
 import * as style from './styles/styles';
-
-type GlobalThemeVariables = {
-	color?: {
-		primary?: string; // (search header text, regular text, result title)
-		secondary?: string; // (headings, dropdown button text)
-		accent?: string; // (icons, borders)
-		active?: {
-			foreground?: string; // (active state text)
-			background?: string; // (active state)
-			accent?: string; // (icons, borders)
-		};
-		hover?: {
-			foreground?: string; // (active state text)
-			background?: string; // (active state)
-			accent?: string; // (icons, borders)
-		};
-	};
-};
 
 export type BocachicaVariables = GlobalThemeVariables & {
 	breakpoints?: [number, number, number, number];
@@ -55,8 +37,11 @@ export const bocachica: BocachicaTheme = {
 			...style.components.badge,
 			// component theme prop overrides
 		},
+		banner: {
+			...style.components.banner,
+		},
 		breadcrumbs: {
-			...style.components.button,
+			...style.components.breadcrumbs,
 		},
 		button: {
 			...style.components.button,
@@ -64,20 +49,23 @@ export const bocachica: BocachicaTheme = {
 		dropdown: {
 			...style.components.dropdown,
 		},
+		element: {
+			...style.components.element,
+		},
 		formattedNumber: {
 			...style.components.formattedNumber,
 		},
 		icon: {
 			...style.components.icon,
 		},
-		loadingBar: {
-			...style.components.loadingBar,
-		},
-		banner: {
-			...style.components.banner,
+		image: {
+			...style.components.image,
 		},
 		inlineBanner: {
 			...style.components.inlineBanner,
+		},
+		loadingBar: {
+			...style.components.loadingBar,
 		},
 		overlay: {
 			...style.components.overlay,
@@ -85,14 +73,11 @@ export const bocachica: BocachicaTheme = {
 		price: {
 			...style.components.price,
 		},
-		skeleton: {
-			...style.components.skeleton,
-		},
-		element: {
-			...style.components.element,
-		},
 		searchHeader: {
 			...style.components.searchHeader,
+		},
+		skeleton: {
+			...style.components.skeleton,
 		},
 		terms: {
 			...style.components.terms,
@@ -128,6 +113,12 @@ export const bocachica: BocachicaTheme = {
 		pagination: {
 			...style.components.pagination,
 		},
+		perPage: {
+			...style.components.perPage,
+		},
+		rating: {
+			...style.components.rating,
+		},
 		result: {
 			...style.components.result,
 		},
@@ -139,12 +130,6 @@ export const bocachica: BocachicaTheme = {
 		},
 		slideout: {
 			...style.components.slideout,
-		},
-		perPage: {
-			...style.components.perPage,
-		},
-		rating: {
-			...style.components.rating,
 		},
 		sortBy: {
 			...style.components.sortBy,
@@ -165,14 +150,14 @@ export const bocachica: BocachicaTheme = {
 		filterSummary: {
 			...style.components.filterSummary,
 		},
+		noResults: {
+			...style.components.noResults,
+		},
 		recommendation: {
 			...style.components.recommendation,
 		},
 		results: {
 			...style.components.results,
-		},
-		noResults: {
-			...style.components.noResults,
 		},
 		sidebar: {
 			...style.components.sidebar,

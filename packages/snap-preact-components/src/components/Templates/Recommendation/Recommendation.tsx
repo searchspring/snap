@@ -127,16 +127,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.recommendation({ vertical }), style];
+	const stylingProps = { ...props };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.recommendation(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
-	}
-
-	// add styleScript to styling
-	if (styleScript && !disableStyles) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(props));
 	}
 
 	return children || resultsToRender?.length ? (

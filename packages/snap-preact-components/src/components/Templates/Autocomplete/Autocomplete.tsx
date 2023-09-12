@@ -27,12 +27,12 @@ const CSS = {
 		hideFacets,
 		horizontalTerms,
 		noResults,
-		contentSlotExists,
+		contentSlot,
 		viewportMaxHeight,
 		vertical,
 		width,
 		theme,
-	}: Partial<AutocompleteProps> & { inputViewportOffsetBottom: number; noResults: boolean; contentSlotExists: boolean }) =>
+	}: Partial<AutocompleteProps> & { inputViewportOffsetBottom: number; noResults: boolean }) =>
 		css({
 			'&, & *, & *:before, & *:after': {
 				boxSizing: 'border-box',
@@ -51,7 +51,7 @@ const CSS = {
 			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
 
 			'&.ss__autocomplete--only-terms': {
-				width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
+				width: `${vertical || horizontalTerms || Boolean(contentSlot) ? width : '150px'}`,
 			},
 
 			'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
@@ -306,14 +306,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideTrending,
 		retainTrending,
 		retainHistory,
-		horizontalTerms,
 		vertical,
 		termsTitle,
 		trendingTitle,
 		historyTitle,
 		facetsTitle,
 		contentTitle,
-		viewportMaxHeight,
 		termsSlot,
 		facetsSlot,
 		contentSlot,
@@ -324,7 +322,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		onTermClick,
 		disableStyles,
 		className,
-		width,
 		style,
 		controller,
 		styleScript,
@@ -425,13 +422,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const stylingProps = {
 		...props,
 		inputViewportOffsetBottom,
-		hideFacets,
-		horizontalTerms,
 		noResults: Boolean(search?.query?.string && results.length === 0),
-		contentSlotExists: Boolean(contentSlot),
-		viewportMaxHeight,
-		vertical,
-		width,
 		theme,
 	};
 

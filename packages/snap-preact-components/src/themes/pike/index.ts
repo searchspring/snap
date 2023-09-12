@@ -1,7 +1,7 @@
-import { Theme } from '../../providers';
+import { Theme, GlobalThemeVariables } from '../../providers';
 import * as style from './styles/styles';
 
-export type PikeVariables = {
+export type PikeVariables = GlobalThemeVariables & {
 	breakpoints?: [number, number, number, number];
 	color?: {
 		primary?: string;
