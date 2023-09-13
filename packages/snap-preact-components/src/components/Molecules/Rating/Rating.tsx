@@ -94,12 +94,12 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = { ...props, value };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
-		styling.css = [CSS.rating({ ...props, value }), style];
+		styling.css = [CSS.rating(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
