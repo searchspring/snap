@@ -10,36 +10,33 @@ import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	rating: () =>
+	rating: ({}: Partial<RatingProps>) =>
 		css({
 			display: 'flex',
+			alignItems: 'center',
+
+			'& .ss__rating__icons': {
+				position: 'relative',
+			},
 
 			'& .ss__rating__stars': {
-				position: 'relative',
+				width: '100%',
+				display: 'inline-grid',
+				gridTemplateColumns: '20% 20% 20% 20% 20%',
+
+				'&.ss__rating__stars--full': {
+					position: 'absolute',
+					top: 0,
+					left: 0,
+				},
+
+				'&.ss__rating__stars--empty': {
+					position: 'relative',
+				},
 			},
 
-			'& .ss__rating__stars__individualStar': {
-				flexBasis: '20%',
+			'& .ss__rating__stars__star': {
 				overflow: 'hidden',
-			},
-
-			'& .ss__rating__stars__empty': {
-				position: 'relative',
-				zIndex: 5,
-				display: 'flex',
-				flexDirection: 'row',
-				textAlign: 'center',
-				border: '0px !important',
-			},
-
-			'& .ss__rating__stars__full': {
-				position: 'absolute',
-				top: 0,
-				left: 0,
-				zIndex: 10,
-				display: 'flex',
-				flexDirection: 'row',
-				border: '0px !important',
 			},
 		}),
 };
@@ -47,18 +44,21 @@ const CSS = {
 export const Rating = observer((properties: RatingProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<RatingProps> = {};
+	const defaultProps: Partial<RatingProps> = {
+		fullIcon: 'star',
+		emptyIcon: 'star-o',
+	};
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { showEmptyRatings, count, additionalText, disablePartialFill, disableStyles, className, style } = props;
+	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, style, styleScript } = props;
 
 	const subProps: RatingSubProps = {
-		EmptyStar: {
+		fullIcon: {
 			// default props
-			//todo make this a star
-			icon: 'star',
-			color: 'black',
+			icon: fullIcon,
+			// global theme
+			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -66,11 +66,12 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		FullStar: {
+		emptyIcon: {
 			// default props
-			//todo make this a star
-			icon: 'star',
-			color: 'gray',
+			icon: emptyIcon,
+			color: '#ccc',
+			// global theme
+			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -80,56 +81,62 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		},
 	};
 
+	// normalize values to ensure good rendering
 	let value = props.value;
-
-	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.rating(), style];
-	} else if (style) {
-		styling.css = [style];
-	}
-
 	if (isNaN(value)) {
+		value = Number(value) || 0;
+	}
+	if (value < 0) {
 		value = 0;
 	}
 	if (value > 5) {
 		value = 5;
 	}
 
+	const styling: { css?: StylingCSS } = {};
+	const stylingProps = { ...props };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.rating({ ...props, value }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
+	// with 'disablePartialFill' we are rounding down
 	const numStarsToShow = disablePartialFill ? Math.floor(value) : Math.ceil(value);
 
-	return showEmptyRatings || value ? (
+	return alwaysRender || value || count ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__rating', className)}>
-				<div className="ss__rating__stars">
-					<div className="ss__rating__stars__empty">
+			<div className={classnames('ss__rating', className)} {...styling}>
+				<div className="ss__rating__icons">
+					<div className="ss__rating__stars ss__rating__stars--empty">
 						{[...Array(5)].map(() => (
-							<div className="ss__rating__stars__individualStar ss__rating__stars__empty__individualStar--empty">
-								<Icon name={'emptyStar'} {...subProps.EmptyStar} />
-							</div>
+							<span className="ss__rating__stars__star ss__rating__stars__star--empty">
+								<Icon name={'ss__rating__stars__star--empty'} {...subProps.emptyIcon} />
+							</span>
 						))}
 					</div>
-					<div className="ss__rating__stars__full">
+					<div className="ss__rating__stars ss__rating__stars--full">
 						{[...Array(numStarsToShow)].map((e, i) => {
 							let width = 100;
 							//if its the last star and there is remainder
 							if (i + 1 == numStarsToShow && !disablePartialFill && value % 1 != 0) {
-								width = (value % Math.floor(value)) * 100;
+								width = (value % 1 || 1) * 100;
 							}
 
 							return (
-								<div className="ss__rating__stars__individualStarWrapper">
-									<div className="ss__rating__stars__individualStar ss__rating__stars__full__individualStar--full" style={{ width: `${width}%` }}>
-										<Icon name={'fullStar'} {...subProps.FullStar} />
-									</div>
-								</div>
+								<span className="ss__rating__stars__star ss__rating__stars__star--full" style={{ width: `${width}%` }}>
+									<Icon name={'ss__rating__stars__star--full'} {...subProps.fullIcon} />
+								</span>
 							);
 						})}
 					</div>
 				</div>
 
-				{count ? <span className="ss__rating__ratingCount">({count})</span> : <></>}
-				{additionalText ? <span className="ss__rating__additionalText">{additionalText}</span> : <></>}
+				{count ? <span className="ss__rating__count">({count})</span> : <></>}
+				{text ? <span className="ss__rating__text">{text}</span> : <></>}
 			</div>
 		</CacheProvider>
 	) : (
@@ -138,14 +145,16 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 });
 
 interface RatingSubProps {
-	EmptyStar: Partial<IconProps>;
-	FullStar: Partial<IconProps>;
+	fullIcon: Partial<IconProps>;
+	emptyIcon: Partial<IconProps>;
 }
 
 export interface RatingProps extends ComponentProps {
 	value: number;
 	count?: number;
-	additionalText?: string;
-	showEmptyRatings?: boolean;
+	text?: string;
+	alwaysRender?: boolean;
 	disablePartialFill?: boolean;
+	fullIcon?: string;
+	emptyIcon?: string;
 }

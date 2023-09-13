@@ -1,55 +1,57 @@
-# Filter
+# Rating
 
-Renders a facet filter.
+Renders a component for a product rating. By default it supports partial star icons (eg. 4.5 / 50% width). The component will render only when the `value` prop is above zero - unless a `count` prop greater than zero is provided or the `alwaysRender` prop is used.
 
 ## Sub-components
 - Icon
-- Button
 
 ## Usage
 
-### facetLabel
-The `facetLabel` prop specifies the filter label. Typically set to the facet label.
+### value
+The `value` prop is required and expects a number between 0 and 5.
 
 ```jsx
-<Filter facetLabel={'Brand'} />
+<Rating value={4.4} />
 ```
 
-### valueLabel
-The `valueLabel` prop specifies the filter value. Typically set to the facet value label.
+### count
+The `count` prop specifies the number of ratings for the product, this number will show after the rating icons.
 
 ```jsx
-<Filter valueLabel={'Nike'} />
+<Rating rating={5} count={70} />
 ```
 
-### url
-The `url` prop specifies a link to clear the filter selection.
+### text
+An optional `text` prop specifies any additional text to display next to the rating icons (shows after the count if used)
 
 ```jsx
-<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} url={filter.url} />
+<Rating rating={5} text="Product Rating" />
 ```
 
-### hideFacetLabel
-The `hideFacetLabel` prop will disable the filter facet label.
+### alwaysRender
+The `alwaysRender` prop will allow a product with no rating, or a zero rating to render.
 
 ```jsx
-<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} hideFacetLabel={true} />
-```
-### separator
-The `separator` prop will specify the separator character between `facetLabel` and `valueLabel`.
-
-```jsx
-<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} separator={': '} />
+<Rating rating={0} alwaysRender />
 ```
 
-### icon
-The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery).
-
-### Events
-
-#### onClick
-The `onClick` prop allows for a custom callback function for when a filter is clicked.
+### disablePartialFill
+The `disablePartialFill` prop will specify wether or not to show a partial star rating (eg. 3.3). When using this prop stars will round down. For example, a `value` of 3.3 would display as 3, and a `value` of 4.9 would round down to 4.
 
 ```jsx
-<Filter onClick={(e)=>{console.log(e)}}/>
+<Rating rating={3.3} disablePartialFill />
+```
+
+### fullIcon
+The `fullIcon` prop specifies a path within the `Icon` component to use for the "full icons". The default value is `star`.
+
+```jsx
+<Rating rating={4} fullIcon="heart" />
+```
+
+### emptyIcon
+The `emptyIcon` prop specifies a path within the `Icon` component to use for the "full icons". The default value is `star-o`.
+
+```jsx
+<Rating rating={4} emptyIcon="heart-o" />
 ```
