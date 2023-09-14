@@ -273,100 +273,119 @@ transformSearchResponse.filters = (response: searchResponseType): any => {
 transformSearchResponse.facets = (response: searchResponseType, request: SearchRequestModel = {}) => {
 	const filters = request.filters || [];
 	const facets = response?.facets || [];
+	const limit = request?.facets?.limit;
+	const valueLimit = request?.facets?.valueLimit;
 
-	return {
-		facets: facets.map((facet) => {
-			let transformedFacet: any = {
-				field: facet.field,
-				type: 'value',
-				filtered: Boolean(facet.facet_active),
-			};
+	let transformedFacets = facets.map((facet) => {
+		let transformedFacet: any = {
+			field: facet.field,
+			type: 'value',
+			filtered: Boolean(facet.facet_active),
+		};
 
-			if (facet.step) {
-				if (facet.range) {
-					transformedFacet = {
-						...transformedFacet,
-						type: 'range',
-						step: facet.step,
-						range: {
-							// TODO: change to null
-							low: facet.range[0] == '*' ? undefined : +facet.range[0],
-							high: facet.range[1] == '*' ? undefined : +facet.range[1],
-						},
-					};
-				}
-				if (facet.active && typeof facet.active != 'boolean' && facet.active.length > 1) {
-					transformedFacet.active = {
+		if (facet.step) {
+			if (facet.range) {
+				transformedFacet = {
+					...transformedFacet,
+					type: 'range',
+					step: facet.step,
+					range: {
 						// TODO: change to null
-						low: facet.active[0] == '*' ? undefined : +facet.active[0],
-						high: facet.active[1] == '*' ? undefined : +facet.active[1],
+						low: facet.range[0] == '*' ? undefined : +facet.range[0],
+						high: facet.range[1] == '*' ? undefined : +facet.range[1],
+					},
+				};
+			}
+			if (facet.active && typeof facet.active != 'boolean' && facet.active.length > 1) {
+				transformedFacet.active = {
+					// TODO: change to null
+					low: facet.active[0] == '*' ? undefined : +facet.active[0],
+					high: facet.active[1] == '*' ? undefined : +facet.active[1],
+				};
+			}
+		} else if (facet.values instanceof Array) {
+			if (facet.type == 'hierarchy') {
+				transformedFacet.type = 'value';
+
+				transformedFacet.values = (facet.values || []).map((value) => {
+					return {
+						filtered: Boolean(value.active),
+						value: value.value,
+						label: value.label,
+						count: value.count,
 					};
-				}
-			} else if (facet.values instanceof Array) {
-				if (facet.type == 'hierarchy') {
-					transformedFacet.type = 'value';
+				});
 
-					transformedFacet.values = (facet.values || []).map((value) => {
-						return {
-							filtered: Boolean(value.active),
-							value: value.value,
-							label: value.label,
-							count: value.count,
-						};
-					});
+				const filterSelected: SearchRequestModelFilterValue | undefined = filters.find((f: any) => f.field == facet.field);
 
-					const filterSelected: SearchRequestModelFilterValue | undefined = filters.find((f: any) => f.field == facet.field);
+				const newValues = [];
+				if (filterSelected && !filterSelected.background) {
+					const valueLevels = filterSelected.value?.split(facet.hierarchyDelimiter || '>');
 
-					const newValues = [];
-					if (filterSelected && !filterSelected.background) {
-						const valueLevels = filterSelected.value?.split(facet.hierarchyDelimiter || '>');
-
-						if (valueLevels) {
-							for (let i = valueLevels.length - 1; i >= 0; i--) {
-								const valueSplit = valueLevels.slice(0, i + 1);
-								const value = valueSplit.join(facet.hierarchyDelimiter);
-								newValues.unshift({
-									value,
-									filtered: value == (filterSelected as SearchRequestModelFilterValue).value,
-									label: valueSplit[valueSplit.length - 1],
-								});
-							}
+					if (valueLevels) {
+						for (let i = valueLevels.length - 1; i >= 0; i--) {
+							const valueSplit = valueLevels.slice(0, i + 1);
+							const value = valueSplit.join(facet.hierarchyDelimiter);
+							newValues.unshift({
+								value,
+								filtered: value == (filterSelected as SearchRequestModelFilterValue).value,
+								label: valueSplit[valueSplit.length - 1],
+							});
 						}
-
-						newValues.unshift({
-							value: null,
-							filtered: false,
-							label: 'View All',
-						});
 					}
 
-					transformedFacet.values = newValues.concat(transformedFacet.values);
-				} else if (facet.values[0].type == 'value') {
-					transformedFacet.type = 'value';
-					transformedFacet.values = facet.values.map((value) => {
-						return {
-							filtered: value.active,
-							value: value.value,
-							label: value.label,
-							count: value.count,
-						};
-					});
-				} else if (facet.values[0].type == 'range') {
-					transformedFacet.type = 'range-buckets';
-					transformedFacet.values = facet.values.map((value) => {
-						return {
-							filtered: value.active,
-							low: value.low == '*' ? null : value.low ? +value.low : null,
-							high: value.high == '*' ? null : value.high ? +value.high : null,
-							label: value.label,
-							count: value.count,
-						};
+					newValues.unshift({
+						value: null,
+						filtered: false,
+						label: 'View All',
 					});
 				}
-			}
 
-			return transformedFacet;
-		}),
+				transformedFacet.values = newValues.concat(transformedFacet.values);
+			} else if (facet.values[0].type == 'value') {
+				transformedFacet.type = 'value';
+				transformedFacet.values = facet.values.map((value) => {
+					return {
+						filtered: value.active,
+						value: value.value,
+						label: value.label,
+						count: value.count,
+					};
+				});
+			} else if (facet.values[0].type == 'range') {
+				transformedFacet.type = 'range-buckets';
+				transformedFacet.values = facet.values.map((value) => {
+					return {
+						filtered: value.active,
+						low: value.low == '*' ? null : value.low ? +value.low : null,
+						high: value.high == '*' ? null : value.high ? +value.high : null,
+						label: value.label,
+						count: value.count,
+					};
+				});
+			}
+		}
+
+		return transformedFacet;
+	});
+
+	// limit facets based on request
+	if (limit) {
+		transformedFacets = transformedFacets.slice(0, limit);
+	}
+
+	// limit facet values based on request
+	if (valueLimit) {
+		transformedFacets = transformedFacets.map((facet) => {
+			if (facet.values) {
+				facet.values = facet.values.slice(0, valueLimit);
+			}
+			return facet;
+		});
+	}
+
+	return {
+		facets: transformedFacets,
 	};
 };
 
