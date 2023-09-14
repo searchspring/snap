@@ -20,6 +20,7 @@
 		"**/*.spec.tsx",
 		"**/*.test.ts",
 		"**/*.test.tsx",
+		"**/*.stories.tsx",
 		"**/__tests__/*",
 		"**/__mocks__/*",
 		"**/test/*",
