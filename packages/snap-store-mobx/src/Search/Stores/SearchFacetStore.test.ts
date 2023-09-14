@@ -989,6 +989,8 @@ describe('Facet Store', () => {
 
 				const filteredValues = filteredValueFacet.values.filter((value: FacetValue) => value.filtered);
 
+				expect(filteredValueFacet.filteredCount).toBe(filteredValues.length);
+
 				filteredValues.forEach((filteredValue: FacetValue) => {
 					expect(filteredValue.url.href).not.toMatch(filteredValueFacet.field);
 				});
