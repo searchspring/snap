@@ -35,7 +35,17 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 
 	const siteIdString = 'siteId';
 
-	const variables: ContextVariables = {};
+	const attributeVariables: ContextVariables = {};
+
+	// grab element attributes and put into variables
+	Object.values(scriptElem.attributes).map((attr) => {
+		const name = attr.nodeName;
+		if (evaluate.includes(name)) {
+			attributeVariables[name] = scriptElem.getAttribute(name);
+		}
+	});
+
+	const scriptVariables: ContextVariables = {};
 
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
@@ -45,21 +55,13 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 			return ${name};
 		`);
 
-		variables[name] = fn();
+		scriptVariables[name] = fn();
 	});
 
-	// grab element attributes and put into variables
-	Object.values(scriptElem.attributes).map((attr) => {
-		const name = attr.nodeName;
-		if (evaluate.includes(name)) {
-			variables[name] = scriptElem.getAttribute(name);
-		}
-	});
-
-	// remove undefined entries
-	Object.keys(variables).forEach((key) => {
-		if (typeof variables[key] === 'undefined') delete variables[key];
-	});
+	const variables = {
+		...removeUndefined(attributeVariables),
+		...removeUndefined(scriptVariables),
+	};
 
 	if (evaluate.includes(siteIdString)) {
 		// if we didnt find a siteId in the context, lets grab the id from the src url.
@@ -71,5 +73,12 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		}
 	}
 
+	return variables;
+}
+
+function removeUndefined(variables: ContextVariables) {
+	Object.keys(variables).forEach((key) => {
+		if (typeof variables[key] === 'undefined') delete variables[key];
+	});
 	return variables;
 }
