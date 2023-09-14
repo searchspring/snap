@@ -35,7 +35,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...properties };
+	const stylingProps = properties;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

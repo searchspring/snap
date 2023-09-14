@@ -36,7 +36,7 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 		return <Fragment></Fragment>;
 	}
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

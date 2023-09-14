@@ -256,7 +256,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const rootComponentRef = useRef(null);
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

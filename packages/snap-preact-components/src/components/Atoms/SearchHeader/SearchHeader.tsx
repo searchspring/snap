@@ -47,7 +47,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

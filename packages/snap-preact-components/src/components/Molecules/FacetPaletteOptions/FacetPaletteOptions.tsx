@@ -122,7 +122,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

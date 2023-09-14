@@ -33,7 +33,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const { controller, hidefilterSummary, hidePerPage, hideSortBy, hidePagination, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

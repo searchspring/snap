@@ -60,7 +60,7 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const { disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

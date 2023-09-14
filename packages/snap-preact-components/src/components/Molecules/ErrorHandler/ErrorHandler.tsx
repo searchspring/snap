@@ -116,7 +116,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	const errorObject = controller?.store?.error || error;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

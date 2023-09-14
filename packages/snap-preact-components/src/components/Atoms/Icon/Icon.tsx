@@ -33,7 +33,7 @@ export function Icon(properties: IconProps): JSX.Element {
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

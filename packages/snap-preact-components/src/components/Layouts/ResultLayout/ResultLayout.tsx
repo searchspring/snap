@@ -38,7 +38,7 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 	const layout = props.layout;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

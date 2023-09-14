@@ -30,7 +30,7 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 	childs.length && controller.track.render();
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...properties };
+	const stylingProps = properties;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

@@ -27,7 +27,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const terms = props.terms || controller?.store.terms;
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];

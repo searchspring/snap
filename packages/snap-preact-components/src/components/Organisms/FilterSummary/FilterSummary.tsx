@@ -75,7 +75,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props };
+	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
