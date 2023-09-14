@@ -9,11 +9,11 @@ import { ComponentProps, StylingCSS } from '../../../../types';
 import classnames from 'classnames';
 
 const CSS = {
-	RecommendationProfileTracker: () => css({}),
+	RecommendationProfileTracker: ({}: Partial<RecommendationProfileTrackerProps>) => css({}),
 };
 
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
-	const { children, controller, className, style, disableStyles } = properties;
+	const { children, controller, className, style, styleScript, disableStyles } = properties;
 
 	const childs = toChildArray(children);
 
@@ -30,8 +30,12 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 	childs.length && controller.track.render();
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.RecommendationProfileTracker(), style];
+	const stylingProps = properties;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.RecommendationProfileTracker(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

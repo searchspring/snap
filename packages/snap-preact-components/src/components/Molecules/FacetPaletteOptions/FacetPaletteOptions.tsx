@@ -93,7 +93,6 @@ const CSS = {
 
 export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
@@ -101,7 +100,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	const props = mergeProps('facetPaletteOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideLabel, columns, gapSize, colorMapping, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } =
+	const { values, hideLabel, colorMapping, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } =
 		props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
@@ -123,8 +122,12 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.palette({ columns, gapSize, theme }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.palette(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

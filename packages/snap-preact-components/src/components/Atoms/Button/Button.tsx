@@ -14,7 +14,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps } from '../Icon';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
+	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
@@ -36,34 +36,18 @@ const CSS = {
 				},
 			},
 		}),
-	native: () => css({}),
+	native: ({}) => css({}),
 };
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps = {
 		disableA11y: false,
 	};
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const {
-		backgroundColor,
-		borderColor,
-		color,
-		content,
-		children,
-		disabled,
-		native,
-		onClick,
-		disableA11y,
-		disableStyles,
-		className,
-		icon,
-		style,
-		styleScript,
-	} = props;
+	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript } = props;
 
 	const subProps: ButtonSubProps = {
 		icon: {
@@ -80,19 +64,15 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { backgroundColor, borderColor, color, disabled, native, theme };
+	const stylingProps = props;
 
-	if (!disableStyles) {
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
 		if (native) {
-			styling.css = [CSS.native(), style];
+			styling.css = [CSS.native(stylingProps), style];
 		} else {
 			styling.css = [CSS.button(stylingProps), style];
-		}
-
-		// add styleScript to styling
-		if (styleScript) {
-			styling.css = styling.css || [];
-			styling.css.push(styleScript(stylingProps));
 		}
 	} else if (style) {
 		styling.css = [style];

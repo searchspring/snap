@@ -53,7 +53,6 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		children,
 		disabled,
 		open,
-		disableOverlay,
 		onClick,
 		onToggle,
 		startOpen,
@@ -62,6 +61,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 
 	let showContent: boolean | undefined, setShowContent: undefined | StateUpdater<boolean | undefined>;
@@ -96,8 +96,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.dropdown({ disableOverlay }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.dropdown(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

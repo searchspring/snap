@@ -12,7 +12,7 @@ import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	sortBy: ({}) => css({}),
+	sortBy: ({}: Partial<SortByProps>) => css({}),
 };
 
 export const SortBy = observer((properties: SortByProps): JSX.Element => {
@@ -24,7 +24,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, controller, label, disableStyles, className, style } = props;
+	const { sorting, controller, label, disableStyles, className, style, styleScript } = props;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -42,8 +42,12 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.sortBy({}), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.sortBy(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

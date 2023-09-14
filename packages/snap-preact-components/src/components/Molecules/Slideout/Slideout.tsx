@@ -48,20 +48,8 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const {
-		children,
-		active,
-		buttonContent,
-		noButtonWrapper,
-		width,
-		displayAt,
-		transitionSpeed,
-		overlayColor,
-		slideDirection,
-		disableStyles,
-		className,
-		style,
-	} = props;
+	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, style, styleScript } =
+		props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -104,8 +92,12 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
+	const stylingProps = { ...props, isActive };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.slideout(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -25,7 +25,7 @@ import type { ElementProps } from '../../Atoms/Element';
 
 // CSS in JS
 const CSS = {
-	layout: () => css(),
+	layout: ({}: Partial<ResultLayoutProps>) => css(),
 };
 
 export const ResultLayout = observer((properties: ResultLayoutProps) => {
@@ -34,13 +34,16 @@ export const ResultLayout = observer((properties: ResultLayoutProps) => {
 
 	const props = mergeProps('resultLayout', globalTheme, defaultProps, properties);
 
-	const { controller, result, disableStyles, className, style, theme } = props;
+	const { controller, result, disableStyles, className, style, styleScript, theme } = props;
 	const layout = props.layout;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.layout(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.layout(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

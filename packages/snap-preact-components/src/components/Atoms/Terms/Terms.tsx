@@ -14,7 +14,7 @@ import { mergeProps } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores/AutocompleteTermStore';
 
 const CSS = {
-	Terms: () => css({}),
+	Terms: ({}: Partial<TermsProps>) => css({}),
 };
 
 export const Terms = observer((properties: TermsProps): JSX.Element => {
@@ -27,16 +27,14 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const terms = props.terms || controller?.store.terms;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.Terms(), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Terms(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
-	}
-
-	// add styleScript to styling
-	if (styleScript) {
-		styling.css = styling.css || [];
-		styling.css.push(styleScript(props));
 	}
 
 	const emIfyTerm = (term: string, search: string) => {

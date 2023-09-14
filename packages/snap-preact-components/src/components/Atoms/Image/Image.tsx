@@ -12,7 +12,7 @@ import { mergeProps } from '../../../utilities';
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility }: { visibility: string }) =>
+	image: ({ visibility }: Partial<ImageProps> & { visibility: string }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -37,7 +37,8 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const props = mergeProps('image', globalTheme, defaultProps, properties);
 
-	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style, styleScript } =
+		props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
@@ -51,11 +52,16 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.image({ visibility }), style];
+	const stylingProps = { ...props, visibility };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.image(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__image', className)}>

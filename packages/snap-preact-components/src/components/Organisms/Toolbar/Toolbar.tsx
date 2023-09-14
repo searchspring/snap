@@ -15,7 +15,7 @@ import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 
 const CSS = {
-	toolbar: () => css({}),
+	toolbar: ({}: Partial<ToolbarProps>) => css({}),
 };
 
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
@@ -30,12 +30,15 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
-	const { controller, hidefilterSummary, hidePerPage, hideSortBy, hidePagination, disableStyles, className, style } = props;
+	const { controller, hidefilterSummary, hidePerPage, hideSortBy, hidePagination, disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.toolbar(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.toolbar(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

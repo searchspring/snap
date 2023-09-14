@@ -13,7 +13,7 @@ import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	pagination: ({ theme }: { theme: Theme }) =>
+	pagination: ({ theme }: Partial<PaginationProps>) =>
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
@@ -33,7 +33,6 @@ const CSS = {
 
 export const Pagination = observer((properties: PaginationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<PaginationProps> = {
 		pages: 5,
 	};
@@ -58,6 +57,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 
 	const subProps: PaginationSubProps = {
@@ -83,8 +83,12 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const pageNumbers = _pages?.map((page) => page.number);
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.pagination({ theme }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.pagination(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

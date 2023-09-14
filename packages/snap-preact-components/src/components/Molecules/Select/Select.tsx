@@ -49,12 +49,11 @@ const CSS = {
 				},
 			},
 		}),
-	native: () => css({}),
+	native: ({}) => css({}),
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultProps: Partial<SelectProps> = {
 		iconOpen: 'angle-down',
@@ -86,6 +85,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 	let { options } = props;
 
@@ -161,11 +161,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
 		if (native) {
-			styling.css = [CSS.native(), style];
+			styling.css = [CSS.native(stylingProps), style];
 		} else {
-			styling.css = [CSS.select({ color, backgroundColor, borderColor, theme }), style];
+			styling.css = [CSS.select(stylingProps), style];
 		}
 	} else if (style) {
 		styling.css = [style];

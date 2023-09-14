@@ -18,7 +18,7 @@ import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
-	results: ({ columns, gapSize }: ResultsProps) =>
+	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -89,7 +89,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, className, layout, style, resultLayout, controller } = props;
+	const { disableStyles, className, layout, style, styleScript, resultLayout, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -124,8 +124,12 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.results({ columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
+	const stylingProps = { ...props, columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize, theme };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.results(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -140,7 +144,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
 								if (resultLayout && controller) {
-									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
+									return <ResultLayout controller={controller} result={result} layout={resultLayout} theme={theme} />;
 								} else {
 									return (
 										<Result

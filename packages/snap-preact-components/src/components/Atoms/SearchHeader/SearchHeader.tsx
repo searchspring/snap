@@ -12,7 +12,7 @@ import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } fro
 import classNames from 'classnames';
 
 const CSS = {
-	searchheader: () => css(),
+	searchheader: ({}: Partial<SearchHeaderProps>) => css({}),
 };
 
 export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Element => {
@@ -42,15 +42,17 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	};
 
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
-
-	const { disableStyles, style, className } = props;
+	const { disableStyles, style, styleScript, className } = props;
 
 	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText } = props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.searchheader(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.searchheader(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

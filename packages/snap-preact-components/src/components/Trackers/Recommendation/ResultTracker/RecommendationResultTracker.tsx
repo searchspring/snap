@@ -10,11 +10,11 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 
 const CSS = {
-	RecommendationResultTracker: () => css({}),
+	RecommendationResultTracker: ({}: Partial<RecommendationResultTrackerProps>) => css({}),
 };
 
 export const RecommendationResultTracker = observer((properties: RecommendationResultTrackerProps): JSX.Element => {
-	const { children, result, controller, className, disableStyles, style } = properties;
+	const { children, result, controller, className, disableStyles, style, styleScript } = properties;
 
 	const resultRef = useRef(null);
 	const resultInViewport = useIntersection(resultRef, '0px');
@@ -35,8 +35,12 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.RecommendationResultTracker(), style];
+	const stylingProps = properties;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.RecommendationResultTracker(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

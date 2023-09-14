@@ -10,7 +10,7 @@ import { iconPaths, IconType } from './paths';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	icon: ({ color, height, width, size, theme }: IconProps) =>
+	icon: ({ color, height, width, size, theme }: Partial<IconProps>) =>
 		css({
 			fill: color || theme?.colors?.primary,
 			width: width || size,
@@ -21,7 +21,6 @@ const CSS = {
 
 export function Icon(properties: IconProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<IconProps> = {
 		size: '16px',
 		viewBox: '0 0 56 56',
@@ -29,13 +28,17 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
+	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style, styleScript } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.icon({ color, width, height, size, theme }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.icon(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -14,7 +14,7 @@ import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	Sidebar: () => css({}),
+	Sidebar: ({}: Partial<SidebarProps>) => css({}),
 };
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
@@ -26,12 +26,16 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, className } = props;
+	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, styleScript, className } =
+		props;
 
 	const styling: { css?: StylingCSS } = {};
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.Sidebar(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Sidebar(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -87,7 +91,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		},
 	};
 
-	return controller.store.loaded ? (
+	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
 				{!hideTitle && <h4 className="ss__sidebar__title">{titleText}</h4>}

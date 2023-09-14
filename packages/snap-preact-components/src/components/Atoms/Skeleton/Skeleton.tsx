@@ -57,14 +57,19 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);
 
-	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style } = props;
+	const { disableStyles, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.skeleton({ width, height, round, backgroundColor, animatedColor, animation: CSS.animation }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.skeleton({ animation: CSS.animation, ...stylingProps }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__skeleton', className)}></div>

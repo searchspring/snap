@@ -21,7 +21,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
-	facet: ({ color, theme }: OptionalFacetProps) =>
+	facet: ({ color, theme }: Partial<FacetProps>) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
@@ -56,7 +56,6 @@ const CSS = {
 
 export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetProps> = {
 		limit: 12,
 		disableOverflow: false,
@@ -107,6 +106,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		styleScript,
 		searchable,
 	} = props;
 
@@ -246,8 +246,12 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	}
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.facet({ color, theme }), style];
+	const stylingProps = { ...props, color };
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.facet(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

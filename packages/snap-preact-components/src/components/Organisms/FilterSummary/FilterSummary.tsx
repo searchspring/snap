@@ -13,7 +13,7 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	filterSummary: () =>
+	filterSummary: ({}: Partial<FilterSummaryProps>) =>
 		css({
 			'& .ss__filter-summary__filter': {
 				margin: '5px 10px 5px 0',
@@ -53,6 +53,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		disableStyles,
 		className,
 		style,
+		styleScript,
 	} = props;
 
 	const subProps: FilterSummarySubProps = {
@@ -74,8 +75,12 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.filterSummary(), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.filterSummary(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -101,3 +101,21 @@ export type ThemeComponents = {
 	recommendation?: GenericComponentProps<RecommendationProps>;
 	search?: GenericComponentProps<SearchProps>;
 };
+
+export type GlobalThemeVariables = {
+	color?: {
+		primary?: string; // (search header text, regular text, result title)
+		secondary?: string; // (headings, dropdown button text)
+		accent?: string; // (icons, borders)
+		active?: {
+			foreground?: string; // (active state text)
+			background?: string; // (active state)
+			accent?: string; // (icons, borders)
+		};
+		hover?: {
+			foreground?: string; // (active state text)
+			background?: string; // (active state)
+			accent?: string; // (icons, borders)
+		};
+	};
+};

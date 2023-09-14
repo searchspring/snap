@@ -14,7 +14,7 @@ import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
 const CSS = {
-	filter: () =>
+	filter: ({}: Partial<FilterProps>) =>
 		css({
 			textDecoration: 'none',
 			display: 'inline-flex',
@@ -38,7 +38,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
-	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style } = props;
+	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style, styleScript } = props;
 
 	const link = filter?.url?.link || url?.link;
 	const value = filter?.value.label || valueLabel;
@@ -75,11 +75,16 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.filter(), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.filter(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return value ? (
 		<CacheProvider>
 			<a

@@ -41,12 +41,11 @@ const CSS = {
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetListOptionsProps> = {};
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -64,8 +63,12 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.list({ theme, hideCheckbox }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.list(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	formattedNumber: () => css({}),
+	formattedNumber: ({}: Partial<FormattedNumberProps>) => css({}),
 };
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
@@ -26,8 +26,20 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 
 	const props = mergeProps('formattedNumber', globalTheme, defaultProps, properties);
 
-	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style, raw } =
-		props;
+	const {
+		value,
+		symbol,
+		decimalPlaces,
+		padDecimalPlaces,
+		thousandsSeparator,
+		decimalSeparator,
+		symbolAfter,
+		disableStyles,
+		className,
+		style,
+		raw,
+		styleScript,
+	} = props;
 
 	const formattedNumber = filters.formatNumber(value, {
 		symbol,
@@ -39,8 +51,12 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	});
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.formattedNumber(), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.formattedNumber(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}

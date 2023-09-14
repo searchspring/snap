@@ -150,29 +150,13 @@ const CSS = {
 
 export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 	const defaultProps: Partial<FacetSliderProps> = {
 		tickSize: properties.facet?.step ? properties.facet?.step * 10 : 20,
 	};
 
 	const props = mergeProps('facetSlider', globalTheme, defaultProps, properties);
 
-	const {
-		tickTextColor,
-		trackColor,
-		valueTextColor,
-		railColor,
-		handleColor,
-		handleDraggingColor,
-		showTicks,
-		facet,
-		stickyHandleLabel,
-		onChange,
-		onDrag,
-		disableStyles,
-		className,
-		style,
-	} = props;
+	const { showTicks, facet, stickyHandleLabel, onChange, onDrag, disableStyles, className, style, styleScript } = props;
 
 	let { tickSize } = props;
 
@@ -215,21 +199,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	});
 
 	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [
-			CSS.facetSlider({
-				railColor,
-				trackColor,
-				handleColor,
-				valueTextColor,
-				handleDraggingColor,
-				showTicks,
-				stickyHandleLabel,
-				tickTextColor,
-				theme,
-			}),
-			style,
-		];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.facetSlider(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
