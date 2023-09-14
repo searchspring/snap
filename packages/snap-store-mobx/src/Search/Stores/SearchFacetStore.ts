@@ -195,6 +195,10 @@ export class RangeFacet extends Facet {
 			formatValue: observable,
 		});
 	}
+
+	public get filteredCount() {
+		return Number(this.filtered);
+	}
 }
 
 export class ValueFacet extends Facet {
@@ -310,6 +314,10 @@ export class ValueFacet extends Facet {
 				this.overflow.calculate();
 			}
 		);
+	}
+
+	public get filteredCount() {
+		return this.values.filter((value) => value?.filtered).length;
 	}
 
 	public get refinedValues() {
