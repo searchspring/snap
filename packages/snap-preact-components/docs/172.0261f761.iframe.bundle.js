@@ -1,4 +1,4 @@
-/*! For license information please see 172.8b3e5231.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 172.0261f761.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -14,7 +14,7 @@
 					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
-			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
+			__webpack_require__('../../node_modules/@storybook/components/node_modules/regenerator-runtime/runtime.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),

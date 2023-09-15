@@ -358,11 +358,11 @@
 										return m.enabled;
 									})),
 									(function runModifierEffects() {
-										state.orderedModifiers.forEach(function (_ref3) {
-											var name = _ref3.name,
-												_ref3$options = _ref3.options,
-												options = void 0 === _ref3$options ? {} : _ref3$options,
-												effect = _ref3.effect;
+										state.orderedModifiers.forEach(function (_ref) {
+											var name = _ref.name,
+												_ref$options = _ref.options,
+												options = void 0 === _ref$options ? {} : _ref$options,
+												effect = _ref.effect;
 											if ('function' == typeof effect) {
 												var cleanupFn = effect({ state, name, instance, options }),
 													noopFn = function noopFn() {};
