@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0](https://github.com/searchspring/snap/compare/v0.46.0...v0.47.0) (2023-09-15)
+
+### Features
+
+- **controller/autocomplete:** changing keyup event to input for better support of copy/paste ([4a95251](https://github.com/searchspring/snap/commit/4a9525117af6bd376da952e0986ccf6efaaad4ce))
+
 # [0.46.0](https://github.com/searchspring/snap/compare/v0.45.1...v0.46.0) (2023-07-24)
 
 **Note:** Version bump only for package @searchspring/snap-controller
