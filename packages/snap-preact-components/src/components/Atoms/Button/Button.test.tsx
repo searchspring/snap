@@ -69,10 +69,17 @@ describe('Button Component', () => {
 			const borderColor = 'red';
 
 			const rendered = render(
-				<Button color={color} backgroundColor={backgroundColor} borderColor={borderColor}>
-					{content}
-				</Button>
+				<div class="colortest">
+					<button>a dummy button</button>
+					<Button color={color} backgroundColor={backgroundColor} borderColor={borderColor}>
+						{content}
+					</Button>
+				</div>
 			);
+
+			// needed to ensure that the Button is not hovered for test to pass
+			const dummyButton = rendered.getByText('a dummy button');
+			dummyButton.focus();
 
 			const button = rendered.getByText(content);
 
