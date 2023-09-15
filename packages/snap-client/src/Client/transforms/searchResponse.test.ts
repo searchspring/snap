@@ -437,7 +437,32 @@ describe('search response facet transformer', () => {
 		});
 	});
 
-	it('has same values', () => {
+	it('limits the number of facets', () => {
+		const request = {
+			facets: {
+				limit: 1,
+			},
+		};
+
+		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets }, request);
+
+		expect(response.facets).toHaveLength(request.facets.limit);
+	});
+
+	it('limits the number of facet options', () => {
+		const request = {
+			facets: {
+				valueLimit: 1,
+			},
+		};
+
+		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets }, request);
+
+		expect(response.facets[0].values.length).toEqual(request.facets.valueLimit);
+		expect(response.facets[1].values.length).toEqual(request.facets.valueLimit);
+	});
+
+	it('has some values', () => {
 		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets });
 
 		expect(response.facets[0].values.length).toEqual(3);
