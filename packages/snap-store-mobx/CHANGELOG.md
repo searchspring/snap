@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0](https://github.com/searchspring/snap/compare/v0.46.0...v0.47.0) (2023-09-15)
+
+### Features
+
+- add facet filteredCount getter ([fb507b1](https://github.com/searchspring/snap/commit/fb507b11cdd6d1a825754094d184b289566e7c17))
+
 # [0.46.0](https://github.com/searchspring/snap/compare/v0.45.1...v0.46.0) (2023-07-24)
 
 ### Features
