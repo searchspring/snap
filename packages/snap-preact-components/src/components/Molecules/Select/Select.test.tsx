@@ -102,7 +102,16 @@ describe('Select Component', () => {
 				iconColor: 'red',
 			};
 
-			const rendered = render(<Select options={options} {...props} />);
+			const rendered = render(
+				<div>
+					<button>a dummy button</button>
+					<Select options={options} {...props} />
+				</div>
+			);
+
+			// needed to ensure that the Button is not hovered for test to pass
+			const dummyButton = rendered.getByText('a dummy button');
+			dummyButton.focus();
 
 			const selectElement = rendered.container.querySelector('.ss__select')!;
 			const selectStyles = getComputedStyle(selectElement);

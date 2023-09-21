@@ -190,7 +190,7 @@ export class AutocompleteController extends AbstractController {
 			}
 		}
 
-		inputElement?.dispatchEvent(new Event('keyup'));
+		inputElement?.dispatchEvent(new Event('input'));
 	}
 
 	reset(): void {
@@ -337,11 +337,8 @@ export class AutocompleteController extends AbstractController {
 					}
 				}
 			},
-			keyUp: (e: KeyboardEvent): void => {
-				// ignore enter and escape keys
-				if (e?.keyCode == KEY_ENTER || e?.keyCode == KEY_ESCAPE) return;
-
-				// return focus on keyup if it was lost
+			input: (e: Event) => {
+				// return focus on input if it was lost
 				if (e.isTrusted && this.store.state.focusedInput !== (e.target as HTMLInputElement)) {
 					this.setFocused(e.target as HTMLInputElement);
 				}
@@ -407,7 +404,7 @@ export class AutocompleteController extends AbstractController {
 	unbind(): void {
 		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(`input[${INPUT_ATTRIBUTE}]`);
 		inputs?.forEach((input) => {
-			input.removeEventListener('keyup', this.handlers.input.keyUp);
+			input.removeEventListener('input', this.handlers.input.input);
 			input.removeEventListener('keydown', this.handlers.input.enterKey);
 			input.removeEventListener('keydown', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
@@ -436,7 +433,7 @@ export class AutocompleteController extends AbstractController {
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
-			input.addEventListener('keyup', this.handlers.input.keyUp);
+			input.addEventListener('input', this.handlers.input.input);
 
 			if (this.config?.settings?.initializeFromUrl && !input.value && this.store.state.input) {
 				input.value = this.store.state.input;
@@ -483,7 +480,7 @@ export class AutocompleteController extends AbstractController {
 				);
 			}
 
-			// if the input is currently focused, trigger setFocues which will eventually trigger keyup - but not if loading
+			// if the input is currently focused, trigger setFocues which will eventually trigger input - but not if loading
 			if (document.activeElement === input && !this.store.loading) {
 				this.setFocused(input);
 			}

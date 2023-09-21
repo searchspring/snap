@@ -76,8 +76,9 @@ describe('Snap Preact Layouts', () => {
 	describe('themeMap object', () => {
 		it('has propreties representing each theme supported', () => {
 			// this will need to be adjusted after adding themes
-			expect(Object.keys(themeMap).length).toBe(1);
+			expect(Object.keys(themeMap).length).toBe(2);
 			expect(themeMap).toHaveProperty('pike');
+			expect(themeMap).toHaveProperty('bocachica');
 		});
 
 		it('returns a theme from the promise within the mapping', async () => {
