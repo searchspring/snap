@@ -222,7 +222,7 @@ describe('Autocomplete Controller', () => {
 		const query = 'bumpers';
 		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.dispatchEvent(new Event('input'));
 		expect(controller.urlManager.state.query).toBe(undefined);
 	});
 
@@ -303,8 +303,8 @@ describe('Autocomplete Controller', () => {
 		await controller.bind();
 		const query = 'bumpers';
 		inputEl1.value = query;
-		inputEl1.focus();
-		inputEl1.dispatchEvent(new Event('keyup'));
+		// inputEl1.focus();
+		inputEl1.dispatchEvent(new Event('input'));
 
 		await waitFor(() => {
 			expect(inputEl1.value).toBe(query);
@@ -337,7 +337,6 @@ describe('Autocomplete Controller', () => {
 
 		inputElem.focus();
 		inputElem.value = query;
-		inputElem.dispatchEvent(new Event('keyup'));
 
 		await waitFor(() => {
 			expect(controller.store.loaded).toBe(true);
@@ -381,7 +380,6 @@ describe('Autocomplete Controller', () => {
 
 		inputElem.focus();
 		inputElem.value = query;
-		inputElem.dispatchEvent(new Event('keyup'));
 
 		await waitFor(() => {
 			expect(controller.store.loaded).toBe(true);
@@ -490,8 +488,6 @@ describe('Autocomplete Controller', () => {
 		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
 		const query = 'bumpers';
 		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 		await controller.search();
@@ -596,8 +592,6 @@ describe('Autocomplete Controller', () => {
 
 		const query = 'bumpers';
 		inputEl!.value = query;
-		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
 
 		const form = inputEl!.form;
 		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
@@ -641,9 +635,8 @@ describe('Autocomplete Controller', () => {
 
 		const form = inputEl!.form;
 
-		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = query;
 
 		await controller.search();
 
@@ -685,9 +678,8 @@ describe('Autocomplete Controller', () => {
 
 		const form = inputEl!.form;
 
-		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = query;
 
 		await controller.search();
 
@@ -722,9 +714,8 @@ describe('Autocomplete Controller', () => {
 		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
 
 		const query = 'dresss';
-		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = query;
 
 		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
@@ -878,9 +869,8 @@ describe('Autocomplete Controller', () => {
 		const storeResetfn = jest.spyOn(controller.store, 'reset');
 		const urlManagerResetfn = jest.spyOn(controller.urlManager, 'reset');
 		// reset() should not be called input exists
-		inputEl!.value = 'wh';
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = 'wh';
 
 		await waitFor(() => {
 			expect(storeResetfn).not.toHaveBeenCalled();
@@ -889,9 +879,8 @@ describe('Autocomplete Controller', () => {
 		});
 
 		// reset() to be called when input is blank
-		inputEl!.value = '';
 		inputEl!.dispatchEvent(new Event('focus'));
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = '';
 
 		await waitFor(() => {
 			expect(storeResetfn).toHaveBeenCalled();
@@ -1163,9 +1152,8 @@ describe('Autocomplete Controller', () => {
 		expect(middleware).not.toHaveBeenCalled();
 
 		const inputEl = document.querySelector(controller.config.selector) as HTMLInputElement | null;
-		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = query;
 
 		const logErrorfn = jest.spyOn(controller.log, 'error');
 		const form = inputEl!.form;
@@ -1203,9 +1191,8 @@ describe('Autocomplete Controller', () => {
 
 		const inputEl = document.querySelector(controller.config.selector) as HTMLInputElement | null;
 		const query = 'bumpers';
-		inputEl!.value = query;
 		inputEl!.focus();
-		inputEl!.dispatchEvent(new Event('keyup'));
+		inputEl!.value = query;
 
 		const spy = jest.spyOn(controller.log, 'warn');
 

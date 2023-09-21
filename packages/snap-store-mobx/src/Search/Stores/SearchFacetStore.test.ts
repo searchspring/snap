@@ -333,7 +333,6 @@ describe('Facet Store', () => {
 			searchData.merchandising || {}
 		);
 		const rangeFacet = facets.filter((facet) => facet.type == 'range').pop();
-
 		expect(rangeFacet.type).toBe('range');
 	});
 
@@ -989,6 +988,8 @@ describe('Facet Store', () => {
 
 				const filteredValues = filteredValueFacet.values.filter((value: FacetValue) => value.filtered);
 
+				expect(filteredValueFacet.filteredCount).toBe(filteredValues.length);
+
 				filteredValues.forEach((filteredValue: FacetValue) => {
 					expect(filteredValue.url.href).not.toMatch(filteredValueFacet.field);
 				});
@@ -1222,6 +1223,24 @@ describe('Facet Store', () => {
 					expect(facet.active).toStrictEqual(searchDataFacet?.active);
 				}
 			});
+		});
+
+		it('has filteredCount of 1 for a filtered range facet', () => {
+			searchData = mockData.searchMeta('filtered');
+
+			const facets = new SearchFacetStore(
+				searchConfig,
+				services,
+				storageStore,
+				searchData.facets,
+				searchData.pagination,
+				searchData.meta,
+				searchData.merchandising || {}
+			);
+			const rangeFacet = facets.filter((facet) => facet.type == 'range' && facet.filtered).pop();
+			expect(rangeFacet).toBeDefined();
+
+			expect(rangeFacet.filteredCount).toBe(1);
 		});
 	});
 });

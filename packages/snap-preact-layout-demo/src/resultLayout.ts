@@ -53,7 +53,7 @@ export const resultLayout: LayoutFunc = ({
 				{
 					component: 'Rating',
 					props: {
-						rating: result.attributes.ratingstar as number,
+						value: result.attributes.ratingstar as number,
 					},
 				},
 				{
