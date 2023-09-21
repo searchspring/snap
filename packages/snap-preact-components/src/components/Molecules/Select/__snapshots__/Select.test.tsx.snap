@@ -1662,116 +1662,121 @@ exports[`Select Component styled has props to customize colors 1`] = `
   position: relative;
 }
 
-<div
-    class="ss__select emotion-0"
-  >
+<div>
+    <button>
+      a dummy button
+    </button>
     <div
-      class="ss__dropdown ss__select__dropdown emotion-1"
+      class="ss__select emotion-0"
     >
       <div
-        aria-expanded="false"
-        class="ss__dropdown__button"
-        role="button"
+        class="ss__dropdown ss__select__dropdown emotion-1"
       >
         <div
-          class="ss__button ss__select__dropdown__button emotion-2"
+          aria-expanded="false"
+          class="ss__dropdown__button"
           role="button"
         >
-          <svg
-            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
-            viewBox="0 0 56 56"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            class="ss__button ss__select__dropdown__button emotion-2"
+            role="button"
           >
-            <path
-              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
-            />
-          </svg>
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
         </div>
-      </div>
-      <div
-        class="ss__dropdown__content"
-      >
-        <ul
-          class="ss__select__select"
+        <div
+          class="ss__dropdown__content"
         >
-          <li
-            aria-label=" option 1 of 7, Red"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
+          <ul
+            class="ss__select__select"
           >
-            <span>
-              Red
-            </span>
-          </li>
-          <li
-            aria-label=" option 2 of 7, Orange"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Orange
-            </span>
-          </li>
-          <li
-            aria-label=" option 3 of 7, Yellow"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Yellow
-            </span>
-          </li>
-          <li
-            aria-label=" option 4 of 7, Green"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Green
-            </span>
-          </li>
-          <li
-            aria-label=" option 5 of 7, Blue"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Blue
-            </span>
-          </li>
-          <li
-            aria-label=" option 6 of 7, Indigo"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Indigo
-            </span>
-          </li>
-          <li
-            aria-label=" option 7 of 7, Violet"
-            class="ss__select__select__option"
-            role="link"
-            ssa11y="true"
-            tabindex="0"
-          >
-            <span>
-              Violet
-            </span>
-          </li>
-        </ul>
+            <li
+              aria-label=" option 1 of 7, Red"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Red
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 7, Orange"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Orange
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 7, Yellow"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Yellow
+              </span>
+            </li>
+            <li
+              aria-label=" option 4 of 7, Green"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Green
+              </span>
+            </li>
+            <li
+              aria-label=" option 5 of 7, Blue"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Blue
+              </span>
+            </li>
+            <li
+              aria-label=" option 6 of 7, Indigo"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Indigo
+              </span>
+            </li>
+            <li
+              aria-label=" option 7 of 7, Violet"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Violet
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

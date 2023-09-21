@@ -11,4 +11,5 @@ module.exports = {
 	},
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 	testTimeout: 10000,
+	snapshotSerializers: ['@emotion/jest/serializer'],
 };

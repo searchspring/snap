@@ -699,12 +699,19 @@ exports[`Button Component styled renders with colors prop 1`] = `
 }
 
 <div
-    class="ss__button emotion-0"
-    role="button"
-    ssa11y="true"
-    tabindex="0"
+    class="colortest"
   >
-    colorful button
+    <button>
+      a dummy button
+    </button>
+    <div
+      class="ss__button emotion-0"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      colorful button
+    </div>
   </div>
 </DocumentFragment>
 `;
