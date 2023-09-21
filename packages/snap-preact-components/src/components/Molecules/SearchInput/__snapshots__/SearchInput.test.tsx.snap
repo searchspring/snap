@@ -1,0 +1,546 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput Component can disable styling 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component can hide icon using hideIcon prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component can invoke onChange callback 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component can invoke onChange callback 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component can update placeholder text 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="hello"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="theme"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="theme"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="theme 2"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SearchInput Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.emotion-0 .ss__icon {
+  padding: 5px;
+}
+
+.emotion-0 .ss__search-input__input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__search-input classy emotion-0"
+  >
+    <svg
+      class="ss__icon ss__icon--search ss__search-input__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M38.769 23.692c0-8.313-6.764-15.077-15.077-15.077s-15.077 6.764-15.077 15.077 6.764 15.077 15.077 15.077 15.077-6.764 15.077-15.077zM56 51.692c0 2.356-1.952 4.308-4.308 4.308-1.144 0-2.255-0.471-3.029-1.279l-11.543-11.51c-3.937 2.726-8.649 4.173-13.428 4.173-13.091 0-23.692-10.601-23.692-23.692s10.601-23.692 23.692-23.692 23.692 10.601 23.692 23.692c0 4.779-1.447 9.49-4.173 13.428l11.543 11.543c0.774 0.774 1.245 1.885 1.245 3.029z"
+      />
+    </svg>
+    <input
+      class="ss__search-input__input"
+      placeholder="Search"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;

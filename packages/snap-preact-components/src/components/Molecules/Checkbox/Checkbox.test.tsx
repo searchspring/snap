@@ -38,6 +38,7 @@ describe('Checkbox Component', () => {
 			expect(checkboxElement).toBeInTheDocument();
 			expect(checkboxElement?.classList.length).toBe(2);
 			expect(checkboxElement?.className.match(/disabled/)).toBeFalsy();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is not checked by default', () => {
@@ -45,6 +46,7 @@ describe('Checkbox Component', () => {
 			const svgElement = rendered.container.querySelector('svg');
 
 			expect(svgElement).not.toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can handle checked state internally', () => {
@@ -52,6 +54,7 @@ describe('Checkbox Component', () => {
 			const svgElement = rendered.container.querySelector('svg');
 
 			expect(svgElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders an icon when checked', () => {
@@ -59,6 +62,7 @@ describe('Checkbox Component', () => {
 			const svgElement = rendered.container.querySelector('svg');
 
 			expect(svgElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('fires onClick prop when clicked', () => {
@@ -67,9 +71,11 @@ describe('Checkbox Component', () => {
 			const rendered = render(<Checkbox onClick={clickFn} />);
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(checkboxElement);
 			expect(clickFn).toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with additional style using prop', () => {
@@ -82,6 +88,7 @@ describe('Checkbox Component', () => {
 			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('Can enable/disable useAlly with disableA11y prop', () => {
@@ -92,11 +99,13 @@ describe('Checkbox Component', () => {
 			expect(checkbox).toBeInTheDocument();
 
 			expect(checkbox).toHaveAttribute('ssA11y');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			const rendered2 = render(<Checkbox checked disableA11y />);
 
 			const checkbox2 = rendered2.container.querySelector('.ss__checkbox');
 			expect(checkbox2).not.toHaveAttribute('ssA11y');
+			expect(rendered2.asFragment()).toMatchSnapshot();
 		});
 
 		it('respects the disabled prop', () => {
@@ -105,8 +114,11 @@ describe('Checkbox Component', () => {
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(checkboxElement?.className.match(/disabled/)).toBeTruthy();
+			expect(rendered.asFragment()).toMatchSnapshot();
+
 			if (checkboxElement) userEvent.click(checkboxElement);
 			expect(clickFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('passes props to icon', () => {
@@ -125,6 +137,7 @@ describe('Checkbox Component', () => {
 			expect(styles.height).toBe(`calc(${size} - 30%)`);
 			expect(styles.fill).toBe(color);
 			expect(path).toHaveAttribute('d', iconPaths[icon]);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can use iconColor prop instead of color', () => {
@@ -137,6 +150,7 @@ describe('Checkbox Component', () => {
 			const svg = checkboxElement?.querySelector('svg')!;
 			const styles = getComputedStyle(svg);
 			expect(styles.fill).toBe(iconColor);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can disableStyles', () => {
@@ -146,6 +160,7 @@ describe('Checkbox Component', () => {
 			expect(rendered.container).toBeInTheDocument();
 			expect(checkboxElement?.classList.length).toBe(1);
 			expect(checkboxElement?.className.match(/disabled/)).toBeFalsy();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -161,6 +176,7 @@ describe('Checkbox Component', () => {
 
 			expect(checkboxElement).toHaveClass(globalTheme.components.checkbox.className);
 			expect(iconStyles.fill).toBe(globalTheme.components.icon.color);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -172,6 +188,7 @@ describe('Checkbox Component', () => {
 
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(iconStyles.fill).toBe(propTheme.components.icon.color);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -188,6 +205,7 @@ describe('Checkbox Component', () => {
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(checkboxElement).not.toHaveClass(globalTheme.components.checkbox.className);
 			expect(iconStyles.fill).toBe(propTheme.components.icon.color);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -202,6 +220,7 @@ describe('Checkbox Component', () => {
 			expect(checkboxElement).toBe(inputElement);
 			expect(checkboxElement?.className.match(/disabled/)).toBeFalsy();
 			expect(inputElement).not.toHaveAttribute('disabled');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is not checked by default', () => {
@@ -210,6 +229,7 @@ describe('Checkbox Component', () => {
 
 			expect(inputElement).toBeInTheDocument();
 			expect(inputElement?.checked).toBe(false);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can handle checked state internally', () => {
@@ -218,6 +238,7 @@ describe('Checkbox Component', () => {
 
 			expect(inputElement).toBeInTheDocument();
 			expect(inputElement?.checked).toBe(true);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('does not render an icon when checked', () => {
@@ -228,6 +249,7 @@ describe('Checkbox Component', () => {
 			expect(svgElement).not.toBeInTheDocument();
 			expect(inputElement).toBeInTheDocument();
 			expect(inputElement?.checked).toBe(true);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('fires onClick prop when clicked', () => {
@@ -239,6 +261,7 @@ describe('Checkbox Component', () => {
 
 			userEvent.click(checkboxElement);
 			expect(clickFn).toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('respects the disabled prop', () => {
@@ -248,8 +271,11 @@ describe('Checkbox Component', () => {
 
 			expect(checkboxElement.className.match(/disabled/)).toBeTruthy();
 			expect(checkboxElement).toHaveAttribute('disabled');
+			expect(rendered.asFragment()).toMatchSnapshot();
+
 			userEvent.click(checkboxElement);
 			expect(clickFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with additional style using prop', () => {
@@ -262,6 +288,7 @@ describe('Checkbox Component', () => {
 			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -273,6 +300,7 @@ describe('Checkbox Component', () => {
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(globalTheme.components.checkbox.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -280,6 +308,7 @@ describe('Checkbox Component', () => {
 
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -292,6 +321,7 @@ describe('Checkbox Component', () => {
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(checkboxElement).not.toHaveClass(globalTheme.components.checkbox.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

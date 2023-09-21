@@ -41,6 +41,7 @@ describe('BranchOverride Component', () => {
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right')!;
 		expect(bottomRightElement).toBeInTheDocument();
 		expect(bottomRightElement?.innerHTML).toContain(lastModified);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set dark mode', async () => {
@@ -52,6 +53,7 @@ describe('BranchOverride Component', () => {
 			expect(overrideElement).toBeInTheDocument();
 			const styles = getComputedStyle(overrideElement);
 			expect(styles.background).toBe('rgba(59, 35, 173, 0.9)');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -68,11 +70,15 @@ describe('BranchOverride Component', () => {
 
 		const collapseButton = overrideElement.querySelector('.ss__branch-override__top__collapse');
 		expect(collapseButton).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		userEvent.click(collapseButton);
 		await waitFor(() => expect(overrideElement).toHaveClass('ss__branch-override--collapsed'));
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(overrideElement);
 		await waitFor(() => expect(overrideElement).not.toHaveClass('ss__branch-override--collapsed'));
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`has a remove button that calls 'onRemove'`, async () => {
@@ -88,8 +94,11 @@ describe('BranchOverride Component', () => {
 
 		const closeButton = overrideElement.querySelector('.ss__branch-override__top__button');
 		expect(closeButton).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		userEvent.click(closeButton);
 		expect(removeFn).toHaveBeenCalledTimes(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('displays branch failure on bad branch', async () => {
@@ -123,6 +132,8 @@ describe('BranchOverride Component', () => {
 		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
 		expect(bottomContentElement).toBeInTheDocument();
 		expect(bottomContentElement?.textContent).toContain(error.description);
+
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`displays branch failure when both 'error' and 'details' props are provided`, async () => {
@@ -155,6 +166,8 @@ describe('BranchOverride Component', () => {
 		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
 		expect(bottomContentElement).toBeInTheDocument();
 		expect(bottomContentElement?.textContent).toContain(error.description);
+
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', async () => {
@@ -166,6 +179,7 @@ describe('BranchOverride Component', () => {
 			expect(overrideElement).toBeInTheDocument();
 			expect(overrideElement?.classList).toHaveLength(2);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can add additional styles', async () => {
@@ -178,6 +192,7 @@ describe('BranchOverride Component', () => {
 			const styles = getComputedStyle(overrideElement);
 			expect(styles.background).toBe('blue');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can add additional styles when default styles are disabled', async () => {
@@ -190,6 +205,7 @@ describe('BranchOverride Component', () => {
 			const styles = getComputedStyle(overrideElement);
 			expect(styles.background).toBe('blue');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', async () => {
@@ -202,6 +218,8 @@ describe('BranchOverride Component', () => {
 			expect(overrideElement).toBeInTheDocument();
 			expect(overrideElement).toHaveClass(className);
 		});
+
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('component theming works', () => {
@@ -226,6 +244,7 @@ describe('BranchOverride Component', () => {
 				expect(overrideElement).toBeInTheDocument();
 				expect(overrideElement).toHaveClass(globalTheme.components.branchOverride.className);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', async () => {
@@ -245,6 +264,7 @@ describe('BranchOverride Component', () => {
 				expect(overrideElement).toBeInTheDocument();
 				expect(overrideElement).toHaveClass(propTheme.components.branchOverride.className);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('the theme prop overrides ThemeProvider', async () => {
@@ -276,6 +296,7 @@ describe('BranchOverride Component', () => {
 				expect(overrideElement).toHaveClass(propTheme.components.branchOverride.className);
 				expect(overrideElement).not.toHaveClass(globalTheme.components.branchOverride.className);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

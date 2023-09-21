@@ -24,6 +24,7 @@ describe('Icon Component', () => {
 
 		const svg = rendered.container.querySelector('svg');
 		expect(svg).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with icon prop', () => {
@@ -33,6 +34,7 @@ describe('Icon Component', () => {
 		const iconElement = rendered.container.querySelector('.ss__icon');
 
 		expect(iconElement?.classList.length).toBe(3);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -44,6 +46,7 @@ describe('Icon Component', () => {
 
 		expect(iconElement).toHaveClass(className);
 		expect(iconElement?.classList.length).toBe(4);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -57,6 +60,7 @@ describe('Icon Component', () => {
 		const styles = getComputedStyle(iconElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders cog icon with default props', () => {
@@ -76,6 +80,7 @@ describe('Icon Component', () => {
 
 		const path = svg.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders cog icon with sizing', () => {
@@ -95,6 +100,7 @@ describe('Icon Component', () => {
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders cog icon with custom props', () => {
@@ -119,6 +125,7 @@ describe('Icon Component', () => {
 
 		const path = svg.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders custom path with default props', () => {
@@ -139,6 +146,7 @@ describe('Icon Component', () => {
 
 		const path = svg.querySelector('path');
 		expect(path).toHaveAttribute('d', svgPath);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders custom path with custom props', () => {
@@ -164,6 +172,7 @@ describe('Icon Component', () => {
 
 		const path = svg.querySelector('path');
 		expect(path).toHaveAttribute('d', svgPath);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -183,6 +192,7 @@ describe('Icon Component', () => {
 		const path = svg?.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
 		expect(path).toHaveAttribute('fill', color);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -202,6 +212,7 @@ describe('Icon Component', () => {
 
 		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(globalTheme.components.icon.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -217,6 +228,7 @@ describe('Icon Component', () => {
 
 		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(propTheme.components.icon.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -245,5 +257,6 @@ describe('Icon Component', () => {
 		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(propTheme.components.icon.className);
 		expect(iconElement).not.toHaveClass(globalTheme.components.icon.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

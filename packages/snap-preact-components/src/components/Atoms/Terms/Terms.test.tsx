@@ -98,6 +98,7 @@ describe('Terms Component', () => {
 		const rendered = render(<Terms controller={controller} terms={mockTerms} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with terms just in controller', async () => {
@@ -106,12 +107,14 @@ describe('Terms Component', () => {
 		const rendered = render(<Terms controller={controller} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('doesnt render with no controller or terms', async () => {
 		const rendered = render(<Terms />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('Can use emify', async () => {
@@ -129,6 +132,7 @@ describe('Terms Component', () => {
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option a')[0];
 
 		expect(termOptions?.innerHTML).toBe('dre<em>ss</em>');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('passed in terms take priority over controller terms', async () => {
@@ -141,6 +145,7 @@ describe('Terms Component', () => {
 			expect(option.innerHTML).toEqual(mockTerms[index].value);
 			expect(option.innerHTML).not.toEqual(modded.store.terms[index].value);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with a title', async () => {
@@ -151,16 +156,19 @@ describe('Terms Component', () => {
 		expect(terms).toBeInTheDocument();
 		expect(titleElem).toBeInTheDocument();
 		expect(titleElem).toHaveTextContent(title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('previewonhover', async () => {
 		const rendered = render(<Terms controller={controller} terms={mockTerms} previewOnHover />);
 		const termOptions = rendered.container.querySelector('.ss__terms__option a');
 		expect(termOptions).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.hover(termOptions!);
 
 		await waitFor(() => expect(mockTerms[0].preview).toHaveBeenCalled());
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('respects the limit', async () => {
@@ -168,16 +176,19 @@ describe('Terms Component', () => {
 		const rendered = render(<Terms controller={controller} terms={mockTerms} limit={limit} />);
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option');
 		expect(termOptions).toHaveLength(limit);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('Can set custom onClick', async () => {
 		const onClick = jest.fn();
 		const rendered = render(<Terms controller={controller} terms={mockTerms} onTermClick={onClick} />);
 		const termOptions = rendered.container.querySelector('.ss__terms__option a');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(termOptions!);
 
 		expect(onClick).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -187,6 +198,7 @@ describe('Terms Component', () => {
 		const terms = rendered.container.querySelector('.ss__terms');
 
 		expect(terms).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -194,6 +206,7 @@ describe('Terms Component', () => {
 		const terms = rendered.container.querySelector('.ss__terms');
 
 		expect(terms?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -212,6 +225,7 @@ describe('Terms Component', () => {
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 		expect(terms?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -226,6 +240,7 @@ describe('Terms Component', () => {
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 		expect(terms?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -252,5 +267,6 @@ describe('Terms Component', () => {
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 		expect(terms?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

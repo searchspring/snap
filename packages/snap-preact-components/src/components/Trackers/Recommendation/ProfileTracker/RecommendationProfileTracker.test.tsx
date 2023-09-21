@@ -153,6 +153,7 @@ describe('RecommendationProfileTracker Component', () => {
 				},
 			},
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 		trackfn.mockClear();
 	});
 
@@ -237,6 +238,7 @@ describe('RecommendationProfileTracker Component', () => {
 		});
 
 		expect(trackfn).toHaveBeenCalledTimes(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		trackfn.mockClear();
 	});
@@ -267,6 +269,7 @@ describe('RecommendationProfileTracker Component', () => {
 
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
 		expect(CarouselElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', async () => {
@@ -296,5 +299,6 @@ describe('RecommendationProfileTracker Component', () => {
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation-profile-tracker');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

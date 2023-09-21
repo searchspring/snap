@@ -40,6 +40,7 @@ describe('Slideout Component', () => {
 		const styles = getComputedStyle(slideoutElement);
 		expect(slideoutElement).toBeInTheDocument();
 		expect(styles.left).toBe('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is not visible', () => {
@@ -51,6 +52,7 @@ describe('Slideout Component', () => {
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.left).toBe('-300px');
 		expect(styles.left).not.toBe('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom width', () => {
@@ -62,6 +64,7 @@ describe('Slideout Component', () => {
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(args.width);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom displayAtWidth', () => {
@@ -73,6 +76,7 @@ describe('Slideout Component', () => {
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		expect(slideoutElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render if matchMedia returns false', () => {
@@ -95,6 +99,7 @@ describe('Slideout Component', () => {
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		expect(slideoutElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('displays overlay', () => {
@@ -104,6 +109,7 @@ describe('Slideout Component', () => {
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		expect(overlayElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides overlay when inactive', () => {
@@ -113,6 +119,7 @@ describe('Slideout Component', () => {
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		expect(overlayElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom overlay color', () => {
@@ -124,6 +131,7 @@ describe('Slideout Component', () => {
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active')!;
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.background).toBe(args.overlayColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom slideDirection', () => {
@@ -136,6 +144,7 @@ describe('Slideout Component', () => {
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.right).toBe('0px');
 		expect(styles.left).toBe('');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom transitionSpeed', () => {
@@ -147,6 +156,7 @@ describe('Slideout Component', () => {
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active')!;
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.transition).toBe(`left ${args.transitionSpeed}`);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders a wrapper element with classname', () => {
@@ -159,6 +169,7 @@ describe('Slideout Component', () => {
 		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
 		expect(buttonElement).toBeInTheDocument();
 		expect(buttonElement).toHaveTextContent(args.buttonContent);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render a wrapper element when using "noButtonWrapper" prop', () => {
@@ -173,6 +184,7 @@ describe('Slideout Component', () => {
 		const buttonElement = rendered.container.querySelector(`.${args.className}`);
 		expect(buttonWrapperElement).not.toBeInTheDocument();
 		expect(buttonElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('toggles the "ss__slideout--active" class when the button is clicked', async () => {
@@ -185,10 +197,12 @@ describe('Slideout Component', () => {
 		const containerElement = rendered.container.querySelector('.ss__slideout');
 
 		expect(containerElement).not.toHaveClass('ss__slideout--active');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// click the button
 		if (buttonElement) await userEvent.click(buttonElement);
 		expect(containerElement).toHaveClass('ss__slideout--active');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('toggles the "ss__slideout--active" class when using clonedElement props', async () => {
@@ -211,11 +225,13 @@ describe('Slideout Component', () => {
 
 		expect(containerElement).not.toHaveClass('ss__slideout--active');
 		expect(buttonElement).toHaveTextContent('inactive');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// click the button
 		if (buttonElement) await userEvent.click(buttonElement);
 		expect(containerElement).toHaveClass('ss__slideout--active');
 		expect(buttonElement).toHaveTextContent('active');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -228,6 +244,7 @@ describe('Slideout Component', () => {
 		const resultElement = rendered.container.querySelector('.ss__slideout');
 
 		expect(resultElement?.classList).toHaveLength(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can add additional styles', () => {
@@ -243,6 +260,7 @@ describe('Slideout Component', () => {
 		const styles = getComputedStyle(slideoutElement!);
 
 		expect(styles.backgroundColor).toBe(args.style.backgroundColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -257,6 +275,7 @@ describe('Slideout Component', () => {
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -267,6 +286,7 @@ describe('Slideout Component', () => {
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme  prop overrides ThemeProvider', () => {
@@ -288,5 +308,6 @@ describe('Slideout Component', () => {
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(themeOverride.components.slideout.width);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

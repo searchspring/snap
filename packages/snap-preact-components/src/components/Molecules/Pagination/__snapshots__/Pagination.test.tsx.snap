@@ -1,0 +1,1019 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Lets test the Pagination Component optional props can disable styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__pagination"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props custom first and last buttns 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        FIRST
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        LAST
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props custom next and prev buttns 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        PREV
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        NEXT
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props hides elipses 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props hides first and last 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props hides next and prev 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__pagination classy emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Lets test the Pagination Component optional props shows all the optional buttons 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__pagination__page:hover:not(.ss__pagination__page--active) {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <a
+        aria-label="go to previous page"
+        class="ss__pagination__page ss__pagination__page--previous"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-left ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+          />
+        </svg>
+      </a>
+      <a
+        aria-label="go to first page"
+        class="ss__pagination__page ss__pagination__page--first"
+      >
+        1
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to page 8"
+        class="ss__pagination__page"
+      >
+        8
+      </a>
+      <a
+        aria-label="go to page 9"
+        class="ss__pagination__page"
+      >
+        9
+      </a>
+      <span
+        aria-current="true"
+        aria-label="go to page 10"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        10
+      </span>
+      <a
+        aria-label="go to page 11"
+        class="ss__pagination__page"
+      >
+        11
+      </a>
+      <a
+        aria-label="go to page 12"
+        class="ss__pagination__page"
+      >
+        12
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 186"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        186
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Pagination Component renders the correct number of page options 1`] = `<DocumentFragment />`;
+
+exports[`Pagination theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__pagination"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <span
+        aria-current="true"
+        aria-label="go to page 1"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        1
+      </span>
+      <a
+        aria-label="go to page 2"
+        class="ss__pagination__page"
+      >
+        2
+      </a>
+      <a
+        aria-label="go to page 3"
+        class="ss__pagination__page"
+      >
+        3
+      </a>
+      <a
+        aria-label="go to page 4"
+        class="ss__pagination__page"
+      >
+        4
+      </a>
+      <a
+        aria-label="go to page 5"
+        class="ss__pagination__page"
+      >
+        5
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 149"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        149
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Pagination theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__pagination"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <span
+        aria-current="true"
+        aria-label="go to page 1"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        1
+      </span>
+      <a
+        aria-label="go to page 2"
+        class="ss__pagination__page"
+      >
+        2
+      </a>
+      <a
+        aria-label="go to page 3"
+        class="ss__pagination__page"
+      >
+        3
+      </a>
+      <a
+        aria-label="go to page 4"
+        class="ss__pagination__page"
+      >
+        4
+      </a>
+      <a
+        aria-label="go to page 5"
+        class="ss__pagination__page"
+      >
+        5
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 149"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        149
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Pagination theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__pagination"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <span
+        aria-current="true"
+        aria-label="go to page 1"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        1
+      </span>
+      <a
+        aria-label="go to page 2"
+        class="ss__pagination__page"
+      >
+        2
+      </a>
+      <a
+        aria-label="go to page 3"
+        class="ss__pagination__page"
+      >
+        3
+      </a>
+      <a
+        aria-label="go to page 4"
+        class="ss__pagination__page"
+      >
+        4
+      </a>
+      <a
+        aria-label="go to page 5"
+        class="ss__pagination__page"
+      >
+        5
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 149"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        149
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        <svg
+          class="ss__icon ss__icon--angle-right ss__pagination__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;

@@ -17,6 +17,7 @@ describe('Error Handler Component', () => {
 		const rendered = render(<ErrorHandler error={error} />);
 		const errorElement = rendered.container.querySelector('.ss__error-handler');
 		expect(errorElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use custom retry onClick event', () => {
@@ -26,9 +27,11 @@ describe('Error Handler Component', () => {
 		const retryButton = errorElement?.querySelector('.ss__error-handler__button')!;
 		expect(errorElement).toBeInTheDocument();
 		expect(retryButton).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(retryButton);
 		expect(onClick).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -36,6 +39,7 @@ describe('Error Handler Component', () => {
 
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
 		expect(ErrorElement?.classList.length).toBe(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -45,6 +49,7 @@ describe('Error Handler Component', () => {
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
 		expect(ErrorElement).toBeInTheDocument();
 		expect(ErrorElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	const gTheme = {
@@ -65,6 +70,7 @@ describe('Error Handler Component', () => {
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
 		expect(ErrorElement).toBeInTheDocument();
 		expect(ErrorElement).toHaveClass(gTheme.components.errorHandler.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -73,6 +79,7 @@ describe('Error Handler Component', () => {
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
 		expect(ErrorElement).toBeInTheDocument();
 		expect(ErrorElement).toHaveClass(gTheme.components.errorHandler.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -94,5 +101,6 @@ describe('Error Handler Component', () => {
 		expect(ErrorElement).toBeInTheDocument();
 		expect(ErrorElement).toHaveClass(themeOverride.components.errorHandler.className);
 		expect(ErrorElement).not.toHaveClass(gTheme.components.errorHandler.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

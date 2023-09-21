@@ -65,6 +65,7 @@ describe('Select Component', () => {
 		const selectElement = rendered.container.querySelector('.ss__select');
 
 		expect(selectElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -78,6 +79,7 @@ describe('Select Component', () => {
 		const styles = getComputedStyle(selectElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('styled', () => {
@@ -89,6 +91,7 @@ describe('Select Component', () => {
 			expect(selectElement).toBeInTheDocument();
 			expect(optionsElements).toHaveLength(options.length);
 			expect(selectElement?.classList.length).toBeGreaterThan(1);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('has props to customize colors', () => {
@@ -120,6 +123,7 @@ describe('Select Component', () => {
 			expect(buttonStyles.backgroundColor).toBe(props.backgroundColor);
 			expect(iconStyles.fill).toBe(props.iconColor);
 			expect(optionsStyles.backgroundColor).toBe(props.backgroundColor);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('has props to customize the icon', async () => {
@@ -138,9 +142,12 @@ describe('Select Component', () => {
 
 			expect(iconStyles!.fill).toBe(props.iconColor);
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconOpen}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
+
 			await userEvent.click(dropdownButton);
 			iconElement = selectElement.querySelector('.ss__icon')!;
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconClose}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is open on render when using startOpen prop', () => {
@@ -148,6 +155,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const dropdownElement = selectElement?.querySelector('.ss__dropdown');
 			expect(dropdownElement).toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is closed on render when using startOpen false prop', () => {
@@ -155,6 +163,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const dropdownElement = selectElement?.querySelector('.ss__dropdown');
 			expect(dropdownElement).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('opens and closes on button click', async () => {
@@ -164,10 +173,12 @@ describe('Select Component', () => {
 			const dropdownButton = dropdownElement?.querySelector('.ss__dropdown__button')!;
 
 			expect(dropdownElement).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(dropdownButton);
 
 			expect(dropdownElement).toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it adds "selected" class on option selection and closes the dropdown', async () => {
@@ -179,6 +190,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select')!;
 			let optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 			const dropdownButton = selectElement.querySelector('.ss__dropdown__button')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(dropdownButton);
 			await userEvent.click(optionElements[selectIndex]);
@@ -194,6 +206,7 @@ describe('Select Component', () => {
 					expect(optionElement).toHaveClass('ss__select__select__option--selected');
 				}
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it shows clearSelection label when a selection is made', async () => {
@@ -201,6 +214,7 @@ describe('Select Component', () => {
 			const rendered = render(<Select clearSelection={clearSelectionLabel} options={options} />);
 			const selectElement = rendered.container.querySelector('.ss__select');
 			let optionElements = selectElement?.querySelectorAll('.ss__select__select__option')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(optionElements[2]);
 
@@ -209,6 +223,7 @@ describe('Select Component', () => {
 			expect(selectElement).toBeInTheDocument();
 			expect(optionElements).toHaveLength(options.length + 1);
 			expect(optionElements[0]).toHaveTextContent(clearSelectionLabel);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it fires onSelect event on option selection', async () => {
@@ -218,10 +233,12 @@ describe('Select Component', () => {
 
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement?.querySelectorAll('.ss__select__select__option')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(optionElements[1]);
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it can be disabled', async () => {
@@ -235,14 +252,17 @@ describe('Select Component', () => {
 
 			expect(selectElement).toHaveClass('ss__select--disabled');
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(dropdownButton);
 
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(optionElements[1]);
 
 			expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders the "label" prop in button', () => {
@@ -252,6 +272,7 @@ describe('Select Component', () => {
 			const buttonLabel = rendered.container.querySelector('.ss__select__label');
 
 			expect(buttonLabel).toHaveTextContent(label);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders the "separator" prop in button when there is a label and a selection is made', async () => {
@@ -261,12 +282,14 @@ describe('Select Component', () => {
 
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement?.querySelectorAll('.ss__select__select__option')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(optionElements[3]);
 
 			const buttonSeparator = selectElement?.querySelector('.ss__select__label__separator');
 
 			expect(buttonSeparator).toHaveTextContent(separator);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('does not render the "separator" prop in button when there is no label and a selection is made', async () => {
@@ -275,12 +298,14 @@ describe('Select Component', () => {
 
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement?.querySelectorAll('.ss__select__select__option')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(optionElements[3]);
 
 			const buttonSeparator = selectElement?.querySelector('.ss__select__label__separator');
 
 			expect(buttonSeparator).not.toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it can have managed state with "selected" prop', () => {
@@ -299,6 +324,7 @@ describe('Select Component', () => {
 					expect(optionElement).toHaveClass('ss__select__select__option--selected');
 				}
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('does not render the "label" prop in button with hideLabelOnSelection', () => {
@@ -309,6 +335,7 @@ describe('Select Component', () => {
 			const buttonLabel = rendered.container.querySelector('.ss__select__label');
 
 			expect(buttonLabel).not.toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can disableStyles', () => {
@@ -317,6 +344,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 
 			expect(selectElement?.classList).toHaveLength(1);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with classname', () => {
@@ -326,6 +354,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			expect(selectElement).toBeInTheDocument();
 			expect(selectElement).toHaveClass(className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -342,6 +371,7 @@ describe('Select Component', () => {
 			expect(selectElement).toBeInTheDocument();
 			expect(styles?.color).toBe(globalTheme.components.button.color);
 			expect(selectElement).toHaveClass(globalTheme.components.select.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -354,6 +384,7 @@ describe('Select Component', () => {
 			expect(styles?.color).toBe(propTheme.components.button.color);
 			expect(selectElement).toBeInTheDocument();
 			expect(selectElement).toHaveClass(propTheme.components.select.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -370,6 +401,7 @@ describe('Select Component', () => {
 			expect(selectElement).toBeInTheDocument();
 			expect(selectElement).toHaveClass(propTheme.components.select.className);
 			expect(styles?.color).toBe(propTheme.components.button.color);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -389,6 +421,7 @@ describe('Select Component', () => {
 
 			const optionsElements = selectElement?.querySelectorAll('option');
 			expect(optionsElements).toHaveLength(options.length);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('uses the "label" and "separator" prop', () => {
@@ -405,6 +438,7 @@ describe('Select Component', () => {
 
 			expect(separatorElement).toBeInTheDocument();
 			expect(separatorElement).toHaveTextContent(separator);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it fires onSelect event on option selection', () => {
@@ -416,12 +450,14 @@ describe('Select Component', () => {
 			const optionsElements = selectElement.querySelectorAll('option')!;
 
 			expect(optionsElements[0].selected).toBe(true);
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.selectOptions(selectElement, options[1].value);
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(optionsElements[0].selected).toBe(false);
 			expect(optionsElements[1].selected).toBe(true);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('it can be disabled', () => {
@@ -436,12 +472,14 @@ describe('Select Component', () => {
 
 			expect(firstOptionElement?.selected).toBe(true);
 			expect(selectElement).toHaveAttribute('disabled');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.selectOptions(selectElement, options[1].value);
 
 			expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(firstOptionElement?.selected).toBe(true);
 			expect(secondOptionElement?.selected).toBe(false);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with classname', () => {
@@ -451,6 +489,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			expect(selectElement).toBeInTheDocument();
 			expect(selectElement).toHaveClass(className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -462,6 +501,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 
 			expect(selectElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -469,6 +509,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 
 			expect(selectElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -480,6 +521,7 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 
 			expect(selectElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

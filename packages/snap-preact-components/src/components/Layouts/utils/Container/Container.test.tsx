@@ -10,12 +10,14 @@ describe('Container Component', () => {
 		const rendered = render(<Container />);
 		const element = rendered.container.querySelector('div.ss__container');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as item', () => {
 		const rendered = render(<Container item={true} />);
 		const element = rendered.container.querySelector('div.ss__container-item');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with children', () => {
@@ -34,6 +36,7 @@ describe('Container Component', () => {
 		expect(parent).toBeInTheDocument();
 		expect(child).toBeInTheDocument();
 		expect(child).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as link', () => {
@@ -42,6 +45,7 @@ describe('Container Component', () => {
 		const element = rendered.container.querySelector('a.ss__container');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveAttribute('href', link);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as link item', () => {
@@ -50,6 +54,7 @@ describe('Container Component', () => {
 		const element = rendered.container.querySelector('a.ss__container-item');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveAttribute('href', link);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as link with children', () => {
@@ -71,6 +76,7 @@ describe('Container Component', () => {
 		expect(child).toBeInTheDocument();
 		expect(element).toHaveAttribute('href', link);
 		expect(child).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -79,6 +85,7 @@ describe('Container Component', () => {
 		const elem = rendered.container.querySelector('.ss__container');
 
 		expect(elem).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -86,6 +93,7 @@ describe('Container Component', () => {
 		const elem = rendered.container.querySelector('.ss__container');
 
 		expect(elem?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('styling props', () => {
@@ -95,6 +103,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`width: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a height', () => {
@@ -103,6 +112,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`height: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a alignItems', () => {
@@ -111,6 +121,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`alignItems: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a alignContent', () => {
@@ -119,6 +130,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`alignContent: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexWrap', () => {
@@ -127,6 +139,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flexWrap: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexDirection', () => {
@@ -135,6 +148,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flexDirection: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexGrow', () => {
@@ -143,6 +157,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flexGrow: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexShrink', () => {
@@ -159,6 +174,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`alignSelf: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexFlow', () => {
@@ -167,6 +183,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flexFlow: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a justifyContent', () => {
@@ -175,6 +192,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`justifyContent: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flex', () => {
@@ -183,6 +201,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flex: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a flexBasis', () => {
@@ -191,6 +210,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`flexBasis: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a textAlign', () => {
@@ -199,6 +219,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`textAlign: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a gap', () => {
@@ -207,6 +228,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`gap: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a rowGap', () => {
@@ -215,6 +237,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`rowGap: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can set a columnGap', () => {
@@ -223,6 +246,7 @@ describe('Container Component', () => {
 			const element = rendered.container.querySelector('.ss__container');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveStyle(`columnGap: ${prop}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -243,6 +267,7 @@ describe('Container Component', () => {
 			const elem = rendered.container.querySelector('.ss__container');
 			expect(elem).toBeInTheDocument();
 			expect(elem?.classList.length).toBe(1);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -257,6 +282,7 @@ describe('Container Component', () => {
 			const elem = rendered.container.querySelector('.ss__container');
 			expect(elem).toBeInTheDocument();
 			expect(elem?.classList.length).toBe(1);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -283,6 +309,7 @@ describe('Container Component', () => {
 			const elem = rendered.container.querySelector('.ss__container');
 			expect(elem).toBeInTheDocument();
 			expect(elem?.classList.length).toBe(1);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

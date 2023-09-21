@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container Component Container theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__container"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component Container theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__container"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component Container theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__container"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__container"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component renders as item 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__container-item emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component renders as link 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<a
+    class="ss__container emotion-0"
+    href="www.href.com"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component renders as link item 1`] = `
+<DocumentFragment>
+  <a
+    class="ss__container-item emotion-0"
+    href="www.href.com"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component renders as link with children 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<a
+    class="ss__container emotion-0"
+    href="www.href.com"
+  >
+    <div
+      class="parent"
+    >
+      <span
+        class="child"
+      >
+        findMe
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Container Component renders with children 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<div
+    class="ss__container emotion-0"
+  >
+    <div
+      class="parent"
+    >
+      <span
+        class="child"
+      >
+        findMe
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Container Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<div
+    class="ss__container classy emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a alignContent 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: start;
+  -ms-flex-line-pack: start;
+  align-content: start;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a alignItems 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a alignSelf 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a columnGap 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 20px;
+  column-gap: 20px;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flex 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flexBasis 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-basis: 1;
+  -ms-flex-preferred-size: 1;
+  flex-basis: 1;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flexDirection 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flexFlow 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flexGrow 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a flexWrap 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a gap 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a height 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 15px;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a justifyContent 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a rowGap 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  row-gap: 20px;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a textAlign 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Container Component styling props can set a width 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 15px;
+}
+
+<div
+    class="ss__container emotion-0"
+  />
+</DocumentFragment>
+`;

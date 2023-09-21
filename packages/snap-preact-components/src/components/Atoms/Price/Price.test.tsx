@@ -9,6 +9,7 @@ describe('Price Component', () => {
 		const rendered = render(<Price value={1099.99} />);
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has a line-through', () => {
@@ -20,6 +21,7 @@ describe('Price Component', () => {
 		const priceElement = rendered.container.querySelector('.ss__price')!;
 		const styles = getComputedStyle(priceElement);
 		expect(styles.textDecoration).toBe('line-through');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has default custom options', () => {
@@ -30,6 +32,7 @@ describe('Price Component', () => {
 		const priceElement = rendered.container.querySelector('.ss__price');
 		const priceText = priceElement?.textContent;
 		expect(priceText).toBe('$1,099.99');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom options', () => {
@@ -45,6 +48,7 @@ describe('Price Component', () => {
 		const priceElement = rendered.container.querySelector('.ss__price');
 		const priceText = priceElement?.textContent;
 		expect(priceText).toBe('1.099.99 £');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -57,6 +61,7 @@ describe('Price Component', () => {
 		const styles = getComputedStyle(priceElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -67,6 +72,7 @@ describe('Price Component', () => {
 		const rendered = render(<Price {...args} />);
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement?.className).not.toMatch(/formatted-/);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can custom className', () => {
@@ -77,6 +83,7 @@ describe('Price Component', () => {
 		const rendered = render(<Price {...args} />);
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement?.classList).toContain(args.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -96,6 +103,7 @@ describe('Price Component', () => {
 
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(globalTheme.components.price.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -111,6 +119,7 @@ describe('Price Component', () => {
 
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(propTheme.components.price.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -139,5 +148,6 @@ describe('Price Component', () => {
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(propTheme.components.price.className);
 		expect(priceElement).not.toHaveClass(globalTheme.components.price.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

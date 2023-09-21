@@ -35,12 +35,14 @@ describe('Slider Component', () => {
 		const rendered = render(<FacetSlider {...args} />);
 		const sliderElement = rendered.container.querySelector('.ss__facet-slider');
 		expect(sliderElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has both slide handles', () => {
 		const rendered = render(<FacetSlider {...args} />);
 		const sliderHandles = rendered.container.querySelectorAll('.ss__facet-slider__handle');
 		expect(sliderHandles.length).toBe(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('both handles are where they should be and have proper text', () => {
@@ -48,6 +50,7 @@ describe('Slider Component', () => {
 		const sliderMarks = rendered.container.querySelectorAll('.ss__facet-slider__label');
 		expect(sliderMarks[0].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active?.low));
 		expect(sliderMarks[1].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active?.high));
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom track, rail, and handle colors', () => {
@@ -68,6 +71,7 @@ describe('Slider Component', () => {
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle')!;
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(colorArgs.handleColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -75,6 +79,7 @@ describe('Slider Component', () => {
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-slider');
 		expect(paletteElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -84,6 +89,7 @@ describe('Slider Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-slider');
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -103,6 +109,7 @@ describe('Slider Component', () => {
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle')!;
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(theme.components.facetSlider.handleColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -118,6 +125,7 @@ describe('Slider Component', () => {
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle')!;
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(theme.components.facetSlider.handleColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -146,5 +154,6 @@ describe('Slider Component', () => {
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle')!;
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.facetSlider.handleColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

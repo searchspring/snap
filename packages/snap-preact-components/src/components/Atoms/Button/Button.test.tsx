@@ -14,6 +14,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).not.toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with content prop', () => {
@@ -27,6 +28,7 @@ describe('Button Component', () => {
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with children prop', () => {
@@ -41,6 +43,7 @@ describe('Button Component', () => {
 
 			const childElementAltSelector = rendered.getByText('childbutton');
 			expect(childElementAltSelector).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with children and content props', () => {
@@ -50,6 +53,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.getByText(content + childrenContent);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with className prop', () => {
@@ -60,6 +64,7 @@ describe('Button Component', () => {
 
 			const button = rendered.container.querySelector(`.${className}`);
 			expect(button).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with colors prop', () => {
@@ -81,6 +86,7 @@ describe('Button Component', () => {
 			expect(styles.backgroundColor).toBe(backgroundColor);
 			expect(styles.borderColor).toBe(borderColor);
 			expect(button).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with icon prop', () => {
@@ -94,6 +100,7 @@ describe('Button Component', () => {
 			expect(iconElem).toBeInTheDocument();
 			expect(button).toBeInTheDocument();
 			expect(iconElem).toHaveClass('ss__icon--close-thin');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('fires onClick prop when clicked', () => {
@@ -103,10 +110,12 @@ describe('Button Component', () => {
 			const rendered = render(<Button onClick={clickFn}>{content}</Button>);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			if (buttonElement) userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('adds class "ss__button--disabled" and prevents onClick when disabled by prop', () => {
@@ -117,9 +126,11 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			if (buttonElement) userEvent.click(buttonElement);
 			expect(clickFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with additional style using prop', () => {
@@ -133,6 +144,7 @@ describe('Button Component', () => {
 			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.padding).toBe(style.padding);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can disable styles', () => {
@@ -143,6 +155,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered!.container.querySelector('.ss__button');
 			expect(buttonElement?.classList.length).toBe(1);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -167,6 +180,7 @@ describe('Button Component', () => {
 
 			expect(styles.color).toBe(globalTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -187,6 +201,7 @@ describe('Button Component', () => {
 
 			expect(styles.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -219,6 +234,7 @@ describe('Button Component', () => {
 
 			expect(styles.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -229,6 +245,7 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).not.toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with content prop', () => {
@@ -242,6 +259,7 @@ describe('Button Component', () => {
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with icon prop', () => {
@@ -259,6 +277,7 @@ describe('Button Component', () => {
 			expect(iconElem).toBeInTheDocument();
 			expect(button).toBeInTheDocument();
 			expect(iconElem).toHaveClass('ss__icon--close-thin');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('Can enable/disable useAlly with disableA11y prop', () => {
@@ -269,11 +288,13 @@ describe('Button Component', () => {
 			expect(buttonElement).toBeInTheDocument();
 
 			expect(buttonElement).toHaveAttribute('ssA11y');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			const rendered2 = render(<Button content={content} disableA11y />);
 
 			const buttonElement2 = rendered2.container.querySelector('.ss__button');
 			expect(buttonElement2).not.toHaveAttribute('ssA11y');
+			expect(rendered2.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with children prop', () => {
@@ -288,6 +309,7 @@ describe('Button Component', () => {
 
 			const childElementAltSelector = rendered.getByText('childbutton');
 			expect(childElementAltSelector).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with children and content props', () => {
@@ -304,6 +326,7 @@ describe('Button Component', () => {
 
 			const childElementAltSelector = rendered.getByText(content + childrenContent);
 			expect(childElementAltSelector).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with className prop', () => {
@@ -318,6 +341,7 @@ describe('Button Component', () => {
 
 			const button = rendered.container.querySelector(`.${className}`);
 			expect(button).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('does not render with colors prop', () => {
@@ -339,6 +363,7 @@ describe('Button Component', () => {
 			expect(styles.backgroundColor).not.toBe(backgroundColor);
 			expect(styles.borderColor).not.toBe(borderColor);
 			expect(button).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('fires onClick prop when clicked', () => {
@@ -352,10 +377,12 @@ describe('Button Component', () => {
 			);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			if (buttonElement) userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('adds class "ss__button--disabled" and prevents onClick when disabled by prop', () => {
@@ -366,9 +393,11 @@ describe('Button Component', () => {
 
 			const button = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(button).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			if (button) userEvent.click(button);
 			expect(clickFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

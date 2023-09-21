@@ -1,0 +1,932 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingBar Component can custom className 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: #ccc;
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar custom-class emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__loading-bar"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component can use custom colors 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: rgb(204, 204, 204);
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: blue;
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component displays loading bar when active 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: #ccc;
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component hides loading bar when inactive 1`] = `<DocumentFragment />`;
+
+exports[`LoadingBar Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: rgb(200, 100, 50);
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: rgb(200, 100, 50);
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: rgb(123, 123, 123);
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component renders 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: #ccc;
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoadingBar Component uses custom height 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes animation-0 {
+  from {
+    left: -200px;
+    width: 30%;
+  }
+
+  50% {
+    width: 30%;
+  }
+
+  70% {
+    width: 70%;
+  }
+
+  80% {
+    left: 50%;
+  }
+
+  95% {
+    left: 120%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.emotion-0 {
+  height: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10000;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__loading-bar__bar {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  background: #ccc;
+  -webkit-animation: animation-0 2s linear infinite;
+  animation: animation-0 2s linear infinite;
+}
+
+<div
+    class="ss__loading-bar emotion-0"
+  >
+    <div
+      class="ss__loading-bar__bar"
+    />
+  </div>
+</DocumentFragment>
+`;

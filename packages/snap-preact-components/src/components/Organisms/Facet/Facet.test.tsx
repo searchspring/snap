@@ -56,6 +56,283 @@ describe('Facet Component', () => {
 			expect(facetElement).toBeInTheDocument();
 			const count = facetElement?.querySelectorAll('.ss__facet-list-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
+			expect(rendered.asFragment()).toMatchInlineSnapshot(`
+			<DocumentFragment>
+			  .emotion-0 {
+			  width: 100%;
+			  margin: 0 0 20px 0;
+			}
+
+			.emotion-0 .ss__facet__header {
+			  display: -webkit-box;
+			  display: -webkit-flex;
+			  display: -ms-flexbox;
+			  display: flex;
+			  -webkit-box-pack: justify;
+			  -webkit-justify-content: space-between;
+			  justify-content: space-between;
+			  -webkit-align-items: center;
+			  -webkit-box-align: center;
+			  -ms-flex-align: center;
+			  align-items: center;
+			  border: none;
+			  border-bottom: 2px solid #ccc;
+			  padding: 6px 0;
+			}
+
+			.emotion-0 .ss__facet__options {
+			  margin-top: 8px;
+			  max-height: 300px;
+			  overflow-y: auto;
+			  overflow-x: hidden;
+			}
+
+			.emotion-0 .ss__facet__show-more-less {
+			  display: block;
+			  margin: 8px;
+			  cursor: pointer;
+			}
+
+			.emotion-0 .ss__facet__show-more-less .ss__icon {
+			  margin-right: 8px;
+			}
+
+			.emotion-0 .ss__search-input {
+			  margin: 16px 0 0 0;
+			}
+
+			.emotion-1 {
+			  position: relative;
+			}
+
+			.emotion-1.ss__dropdown--open .ss__dropdown__content {
+			  position: relative;
+			  visibility: visible;
+			  opacity: 1;
+			}
+
+			.emotion-1 .ss__dropdown__button {
+			  cursor: default;
+			}
+
+			.emotion-1 .ss__dropdown__content {
+			  position: absolute;
+			  min-width: 100%;
+			  visibility: hidden;
+			  opacity: 0;
+			  top: auto;
+			  left: 0;
+			}
+
+			.emotion-2 {
+			  width: 12px;
+			  height: 12px;
+			  position: relative;
+			}
+
+			.emotion-3 .ss__facet-list-options__option {
+			  display: -webkit-box;
+			  display: -webkit-flex;
+			  display: -ms-flexbox;
+			  display: flex;
+			  padding: 6px;
+			  -webkit-text-decoration: none;
+			  text-decoration: none;
+			  -webkit-align-items: center;
+			  -webkit-box-align: center;
+			  -ms-flex-align: center;
+			  align-items: center;
+			}
+
+			.emotion-3 .ss__facet-list-options__option:hover {
+			  cursor: pointer;
+			}
+
+			.emotion-3 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+			  font-weight: bold;
+			}
+
+			.emotion-3 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+			  margin-left: 8px;
+			}
+
+			.emotion-3 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+			  font-size: 0.8em;
+			  margin-left: 6px;
+			}
+
+			.emotion-4 {
+			  display: -webkit-inline-box;
+			  display: -webkit-inline-flex;
+			  display: -ms-inline-flexbox;
+			  display: inline-flex;
+			  -webkit-align-items: center;
+			  -webkit-box-align: center;
+			  -ms-flex-align: center;
+			  align-items: center;
+			  -webkit-box-pack: center;
+			  -ms-flex-pack: center;
+			  -webkit-justify-content: center;
+			  justify-content: center;
+			  height: 12px;
+			  width: 12px;
+			  border: 1px solid #333;
+			}
+
+			.emotion-4.ss__checkbox--disabled {
+			  opacity: 0.7;
+			}
+
+			.emotion-4 .ss__checkbox__empty {
+			  display: inline-block;
+			  width: calc(12px - 30%);
+			  height: calc(12px - 30%);
+			}
+
+			<div
+			    class="ss__facet ss__facet--undefined ss__facet--season emotion-0"
+			  >
+			    <div
+			      class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-1"
+			    >
+			      <div
+			        aria-expanded="true"
+			        class="ss__dropdown__button"
+			        role="button"
+			      >
+			        <div
+			          aria-label="currently open undefined facet dropdown 4 options"
+			          aria-level="3"
+			          class="ss__facet__header"
+			          open="true"
+			          role="heading"
+			          ssa11y="true"
+			          tabindex="0"
+			        >
+			          <svg
+			            class="ss__icon ss__icon--angle-up ss__facet__dropdown__icon emotion-2"
+			            viewBox="0 0 56 56"
+			            xmlns="http://www.w3.org/2000/svg"
+			          >
+			            <path
+			              d="M56 39.671c0 0.449-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.786 0.561-1.291 0.561-0.449 0-0.954-0.224-1.291-0.561l-22.052-22.052-22.052 22.052c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+			            />
+			          </svg>
+			        </div>
+			      </div>
+			      <div
+			        class="ss__dropdown__content"
+			      >
+			        <div
+			          class="ss__facet__options"
+			          open="true"
+			        >
+			          <div
+			            class="ss__facet-list-options ss__facet__facet-list-options emotion-3"
+			          >
+			            <a
+			              aria-label="filter by Summer"
+			              class="ss__facet-list-options__option"
+			            >
+			              <span
+			                aria-label=" unchecked checkbox"
+			                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+			                role="checkbox"
+			              >
+			                <span
+			                  class="ss__checkbox__empty"
+			                />
+			              </span>
+			              <span
+			                class="ss__facet-list-options__option__value"
+			              >
+			                Summer
+			                <span
+			                  class="ss__facet-list-options__option__value__count"
+			                >
+			                  (577)
+			                </span>
+			              </span>
+			            </a>
+			            <a
+			              aria-label="filter by Spring"
+			              class="ss__facet-list-options__option"
+			            >
+			              <span
+			                aria-label=" unchecked checkbox"
+			                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+			                role="checkbox"
+			              >
+			                <span
+			                  class="ss__checkbox__empty"
+			                />
+			              </span>
+			              <span
+			                class="ss__facet-list-options__option__value"
+			              >
+			                Spring
+			                <span
+			                  class="ss__facet-list-options__option__value__count"
+			                >
+			                  (444)
+			                </span>
+			              </span>
+			            </a>
+			            <a
+			              aria-label="filter by Fall"
+			              class="ss__facet-list-options__option"
+			            >
+			              <span
+			                aria-label=" unchecked checkbox"
+			                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+			                role="checkbox"
+			              >
+			                <span
+			                  class="ss__checkbox__empty"
+			                />
+			              </span>
+			              <span
+			                class="ss__facet-list-options__option__value"
+			              >
+			                Fall
+			                <span
+			                  class="ss__facet-list-options__option__value__count"
+			                >
+			                  (252)
+			                </span>
+			              </span>
+			            </a>
+			            <a
+			              aria-label="filter by Winter"
+			              class="ss__facet-list-options__option"
+			            >
+			              <span
+			                aria-label=" unchecked checkbox"
+			                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+			                role="checkbox"
+			              >
+			                <span
+			                  class="ss__checkbox__empty"
+			                />
+			              </span>
+			              <span
+			                class="ss__facet-list-options__option__value"
+			              >
+			                Winter
+			                <span
+			                  class="ss__facet-list-options__option__value__count"
+			                >
+			                  (39)
+			                </span>
+			              </span>
+			            </a>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</DocumentFragment>
+		`);
 		});
 	});
 
@@ -71,6 +348,7 @@ describe('Facet Component', () => {
 			expect(facetElement).toBeInTheDocument();
 			const count = facetElement?.querySelectorAll('.ss__facet-grid-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -82,11 +360,11 @@ describe('Facet Component', () => {
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet facet={args.facet} />);
-			rendered.debug();
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
 			const count = facetElement?.querySelectorAll('.ss__facet-palette-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -102,6 +380,7 @@ describe('Facet Component', () => {
 			expect(facetElement).toBeInTheDocument();
 			const sliderElement = facetElement.querySelector('.ss__facet-slider');
 			expect(sliderElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -112,11 +391,11 @@ describe('Facet Component', () => {
 			};
 			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
-			rendered.debug();
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
 			const hierarchyElement = facetElement?.querySelector('.ss__facet-hierarchy-options');
 			expect(hierarchyElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -133,6 +412,7 @@ describe('Facet Component', () => {
 			expect(facetElement).toBeInTheDocument();
 			const styles = getComputedStyle(facetElement);
 			expect(styles.color).toBe(args.color);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('show more/less text prop', async () => {
@@ -147,10 +427,12 @@ describe('Facet Component', () => {
 			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
 			expect(facetElement).toBeInTheDocument();
 			expect(facetElement).toHaveTextContent(args.showMoreText);
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(facetElement);
 
 			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders with specified icons', async () => {
@@ -169,6 +451,7 @@ describe('Facet Component', () => {
 			expect(headerIconElement).toBeInTheDocument();
 			expect(headerIconElement).toHaveClass(`ss__icon--${args.iconCollapse}`);
 			expect(showMoreLessElem).toHaveClass(`ss__icon--${args.iconOverflowMore}`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			args.facet.collapsed = false;
 
@@ -180,6 +463,7 @@ describe('Facet Component', () => {
 			expect(headerIconElement2).toBeInTheDocument();
 			expect(headerIconElement2).toHaveClass(`ss__icon--${args.iconCollapse}`);
 			expect(showMoreLessElem2).toHaveClass(`ss__icon--${args.iconOverflowMore}`);
+			expect(rendered2.asFragment()).toMatchSnapshot();
 		});
 
 		it('set custom overflow slot', async () => {
@@ -196,6 +480,7 @@ describe('Facet Component', () => {
 			const overflowSlot = rendered.container.querySelector('.findMe');
 			expect(overflowSlot).toBeInTheDocument();
 			expect(overflowSlot).toHaveTextContent('Show More please');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('set custom options slot', async () => {
@@ -213,6 +498,7 @@ describe('Facet Component', () => {
 			const optionsSlot = rendered.container.querySelector('.findMe');
 			expect(optionsSlot).toBeInTheDocument();
 			expect(optionsSlot).toHaveTextContent('stuff and things');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can use limit prop', async () => {
@@ -227,6 +513,7 @@ describe('Facet Component', () => {
 			const facetElement = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 
 			expect(facetElement.length).toBe(args.limit);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can use searchable prop', async () => {
@@ -238,6 +525,7 @@ describe('Facet Component', () => {
 
 			const searchInputElement = rendered.container.querySelector('.ss__search-input input')!;
 			expect(searchInputElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 			userEvent.type(searchInputElement, 'su');
 
 			await waitFor(() => expect(searchInputElement).toHaveValue('su'));
@@ -245,6 +533,7 @@ describe('Facet Component', () => {
 
 			const optionsElement = rendered.container.querySelector('.ss__facet__options');
 			expect(optionsElement).toHaveTextContent('Summer');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -258,6 +547,7 @@ describe('Facet Component', () => {
 
 		const facetElement = rendered.container.querySelector('.ss__facet');
 		expect(facetElement).toHaveClass(args.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -271,6 +561,7 @@ describe('Facet Component', () => {
 		const facetElement = rendered.container.querySelector('.ss__facet');
 
 		expect(facetElement?.classList).toHaveLength(3);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('Image theming works', () => {
@@ -290,6 +581,7 @@ describe('Facet Component', () => {
 			const facet = rendered.container.querySelector('.ss__facet');
 			expect(facet).toBeInTheDocument();
 			expect(facet).toHaveClass(globalTheme.components.facet.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -304,6 +596,7 @@ describe('Facet Component', () => {
 			const facet = rendered.container.querySelector('.ss__facet');
 			expect(facet).toBeInTheDocument();
 			expect(facet).toHaveClass(propTheme.components.facet.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -331,6 +624,7 @@ describe('Facet Component', () => {
 			expect(facet).toBeInTheDocument();
 			expect(facet).toHaveClass(propTheme.components.facet.className);
 			expect(facet).not.toHaveClass(globalTheme.components.facet.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

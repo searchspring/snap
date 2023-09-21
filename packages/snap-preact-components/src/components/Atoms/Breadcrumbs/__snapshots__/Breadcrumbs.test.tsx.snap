@@ -1,0 +1,771 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Component does not use links when url is not present in data 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component has all crumbs and separators 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component has custom component separator 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        <span>
+          |
+        </span>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        <span>
+          |
+        </span>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        <span>
+          |
+        </span>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component has custom string separator 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;&gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;&gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;&gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs theme-class emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs global-theme-class emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs props-theme-class emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding: 20px;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component respects disableStyles prop when true 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__breadcrumbs"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs Component uses links when url is present in data 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

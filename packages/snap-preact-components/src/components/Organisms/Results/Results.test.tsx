@@ -40,6 +40,7 @@ describe('Results Component', () => {
 		const results = rendered.container.querySelector('.ss__result')!;
 		const styles = getComputedStyle(results);
 		expect(styles['flex-direction' as keyof CSSStyleDeclaration]).toBe('column');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders list view', () => {
@@ -54,12 +55,14 @@ describe('Results Component', () => {
 		const results = rendered.container.querySelector('.ss__results')!;
 		const resultsStyles = getComputedStyle(results);
 		expect(resultsStyles['grid-template-columns' as keyof CSSStyleDeclaration]).toBe('repeat(1, 1fr)');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders all', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
 		const results = rendered.container.querySelectorAll('.ss__results__result');
 		expect(results.length).toBe(mockResults.length);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders correct number of products when passing rows and columns', () => {
@@ -71,6 +74,7 @@ describe('Results Component', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={mockResults} {...args} />);
 		const results = rendered.container.querySelectorAll('.ss__result');
 		expect(results.length).toBe(args.columns * args.rows);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders custom rows and gapsize', () => {
@@ -91,6 +95,7 @@ describe('Results Component', () => {
 		const resultStyles = getComputedStyle(result);
 		expect(resultStyles.marginRight).toBe(args.gapSize);
 		expect(resultStyles.marginBottom).toBe(args.gapSize);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use breakpoints', async () => {
@@ -111,6 +116,7 @@ describe('Results Component', () => {
 
 		expect(resultsElement).toBeInTheDocument();
 		expect(resultsElement).toHaveClass('ss__results-list');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
@@ -122,6 +128,7 @@ describe('Results Component', () => {
 		await waitFor(() => {
 			expect(resultsElement).toHaveClass('ss__results-grid');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -131,6 +138,7 @@ describe('Results Component', () => {
 		const resultsElement = rendered.container.querySelector('.ss__results');
 		expect(resultsElement).toBeInTheDocument();
 		expect(resultsElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -139,6 +147,7 @@ describe('Results Component', () => {
 		const resultsElement = rendered.container.querySelector('.ss__results');
 
 		expect(resultsElement?.classList).toHaveLength(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can pass child component props via the theme', () => {
@@ -166,9 +175,11 @@ describe('Results Component', () => {
 		expect(clickFunc).not.toHaveBeenCalled();
 
 		const resultElement = rendered.container.querySelector('.ss__results .ss__result a')!;
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(resultElement);
 
 		expect(clickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -184,6 +195,7 @@ describe('Results Component', () => {
 		const resultsElement = rendered.container.querySelector('.ss__results')!;
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -195,6 +207,7 @@ describe('Results Component', () => {
 		const resultsElement = rendered.container.querySelector('.ss__results')!;
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -235,6 +248,7 @@ describe('Results Component', () => {
 
 		const globalDetailSlots = rendered.container.querySelectorAll('.detail-slot');
 		expect(globalDetailSlots).toHaveLength(0);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('breakpoints override theme prop', async () => {
@@ -317,6 +331,7 @@ describe('Results Component', () => {
 			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
 			expect(breakpointDetailSlots).toHaveLength(9);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
@@ -340,5 +355,6 @@ describe('Results Component', () => {
 			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
 			expect(breakpointDetailSlots).toHaveLength(0);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

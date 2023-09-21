@@ -1,0 +1,2033 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recommendation Component breakpoints override theme prop 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component breakpoints override theme prop 2`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__recommendation"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-0"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          >
+            Global Theme Next
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          >
+            Global Theme Next
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          >
+            Next Button Yo
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation classy emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component renders with results 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component tracks as expected 1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendation Component tracks as expected 2`] = `
+<DocumentFragment>
+  .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.emotion-2 .swiper-notification {
+  position: absolute;
+  left: 100000000000000px;
+}
+
+.emotion-2.ss__carousel-vertical {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-slide {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-container {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination {
+  width: auto;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.emotion-2.ss__carousel-vertical .swiper-pagination-bullet {
+  margin: 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet-active {
+  background: inherit;
+}
+
+.emotion-2 .ss__carousel__next-wrapper,
+.emotion-2 .ss__carousel__prev-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__next-wrapper--hidden,
+.emotion-2 .ss__carousel__next-wrapper.ss__carousel__prev-wrapper--hidden,
+.emotion-2 .ss__carousel__prev-wrapper.ss__carousel__prev-wrapper--hidden {
+  display: none;
+}
+
+.emotion-2 .ss__carousel__next,
+.emotion-2 .ss__carousel__prev {
+  padding: 5px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.emotion-2 .ss__carousel__next.swiper-button-disabled,
+.emotion-2 .ss__carousel__prev.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.emotion-2 .swiper-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.emotion-2 .swiper-container-vertical .swiper-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2 .swiper-wrapper {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.emotion-2 .swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.emotion-2 .swiper-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-transition: .3s opacity;
+  transition: .3s opacity;
+}
+
+.emotion-2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.emotion-2 .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #000;
+}
+
+.emotion-2 .swiper-container-pointer-events {
+  touch-action: pan-y;
+}
+
+.emotion-2 .swiper-container-pointer-events.swiper-container-vertical {
+  touch-action: pan-x;
+}
+
+.emotion-2 .swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+<div
+    class="ss__recommendation emotion-0"
+  >
+    <div
+      class="ss__recommendation-profile-tracker emotion-1"
+    >
+      <div
+        class="ss__carousel ss__recommendation__Carousel emotion-2"
+      >
+        <div
+          class="ss__carousel__prev-wrapper"
+        >
+          <div
+            aria-controls="swiper-wrapper-test"
+            aria-label="Previous slide"
+            class="ss__carousel__prev"
+            role="button"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

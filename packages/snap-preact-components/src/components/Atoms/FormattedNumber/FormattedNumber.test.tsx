@@ -9,6 +9,7 @@ describe('FormattedNumber Component', () => {
 		const rendered = render(<FormattedNumber value={1099.99} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has default formatting', () => {
@@ -20,6 +21,7 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099.999mm');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has support for custom options', () => {
@@ -35,6 +37,7 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1.099,99 £');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('pads digits when it needs to', () => {
@@ -45,6 +48,7 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099.000');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not pads digits when prop specified', () => {
@@ -56,6 +60,7 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement?.textContent;
 		expect(formattednumber).toBe('1099');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -68,6 +73,7 @@ describe('FormattedNumber Component', () => {
 		const styles = getComputedStyle(formattednumberElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -82,6 +88,7 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number')!;
 		const styles = getComputedStyle(formattednumberElement);
 		expect(styles.background).not.toBe(args.style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('uses custom className', () => {
@@ -92,6 +99,7 @@ describe('FormattedNumber Component', () => {
 		const rendered = render(<FormattedNumber {...args} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement?.classList).toContain(args.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -111,6 +119,7 @@ describe('FormattedNumber Component', () => {
 
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(globalTheme.components.formattedNumber.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -126,6 +135,7 @@ describe('FormattedNumber Component', () => {
 
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(propTheme.components.formattedNumber.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -154,5 +164,6 @@ describe('FormattedNumber Component', () => {
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(propTheme.components.formattedNumber.className);
 		expect(formattednumberElement).not.toHaveClass(globalTheme.components.formattedNumber.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

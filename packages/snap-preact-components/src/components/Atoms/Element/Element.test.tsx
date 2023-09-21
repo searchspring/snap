@@ -14,6 +14,7 @@ describe('Element Component', () => {
 		const element = rendered.container.querySelector('div.ss__element');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as span', () => {
@@ -22,6 +23,7 @@ describe('Element Component', () => {
 		const element = rendered.container.querySelector('span.ss__element');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as label', () => {
@@ -30,6 +32,7 @@ describe('Element Component', () => {
 		const element = rendered.container.querySelector('label.ss__element');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders as p', () => {
@@ -38,6 +41,7 @@ describe('Element Component', () => {
 		const element = rendered.container.querySelector('p.ss__element');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('doesnt render without type prop', () => {
@@ -46,6 +50,7 @@ describe('Element Component', () => {
 
 		const element = rendered.container.querySelector('.ss__element');
 		expect(element).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with attributes', () => {
@@ -63,6 +68,7 @@ describe('Element Component', () => {
 		expect(element).toHaveAttribute('attribute1', attributes.attribute1);
 		expect(element).toHaveAttribute('attribute2', attributes.attribute2);
 		expect(element).toHaveAttribute('attribute3', attributes.attribute3.toString());
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('ignores onClick attribute', () => {
@@ -81,6 +87,7 @@ describe('Element Component', () => {
 		expect(element).not.toHaveAttribute('onClick');
 		expect(element).toHaveAttribute('attribute2', attributes.attribute2);
 		expect(element).toHaveAttribute('attribute3', attributes.attribute3.toString());
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with className prop', () => {
@@ -89,6 +96,7 @@ describe('Element Component', () => {
 
 		const element = rendered.container.querySelector(`.ss__element.${className}`);
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -96,6 +104,7 @@ describe('Element Component', () => {
 
 		const element = rendered.container.querySelector('.ss__element');
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -115,6 +124,7 @@ describe('Element Component', () => {
 
 		const dropdownElement = rendered.container.querySelector('.ss__element');
 		expect(dropdownElement).toHaveClass(globalTheme.components.element.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -130,6 +140,7 @@ describe('Element Component', () => {
 
 		const dropdownElement = rendered.container.querySelector('.ss__element');
 		expect(dropdownElement).toHaveClass(propTheme.components.element.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -158,5 +169,6 @@ describe('Element Component', () => {
 		const dropdownElement = rendered.container.querySelector('.ss__element');
 		expect(dropdownElement).toHaveClass(propTheme.components.element.className);
 		expect(dropdownElement).not.toHaveClass(globalTheme.components.element.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

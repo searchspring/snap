@@ -10,24 +10,28 @@ describe('Skeleton Component', () => {
 		const rendered = render(<Skeleton height="200px" width="200px" />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has correct demmensions', () => {
 		const rendered = render(<Skeleton height="400px" width="300px" />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('height:400px; width:300px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change the backgroundColor color', () => {
 		const rendered = render(<Skeleton height="400px" width="300px" backgroundColor={'red'} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('background-color:red');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change to a circle', () => {
 		const rendered = render(<Skeleton height="300px" width="300px" round={true} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('border-radius:300px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -36,6 +40,7 @@ describe('Skeleton Component', () => {
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 
 		expect(skeleton).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -43,9 +48,8 @@ describe('Skeleton Component', () => {
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 
 		expect(skeleton?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
-
-	expect(true).toBe(true);
 });
 
 describe('Skeleton theming works', () => {
@@ -65,6 +69,7 @@ describe('Skeleton theming works', () => {
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
 		expect(skeleton?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -79,6 +84,7 @@ describe('Skeleton theming works', () => {
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
 		expect(skeleton?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -105,5 +111,6 @@ describe('Skeleton theming works', () => {
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
 		expect(skeleton?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

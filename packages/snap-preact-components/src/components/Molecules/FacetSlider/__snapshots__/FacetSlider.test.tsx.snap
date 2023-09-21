@@ -1,0 +1,1809 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider Component both handles are where they should be and have proper text 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: #333;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: #ccc;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: #333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: #000;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__facet-slider"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component has both slide handles 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: #333;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: #ccc;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: #333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: #000;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component has custom track, rail, and handle colors 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: rgb(0, 100, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: rgb(100, 0, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: rgb(0, 0, 100);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: rgb(0, 0, 100);
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: rgb(0, 255, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: rgb(255, 0, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: rgb(0, 0, 255);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: rgb(0, 0, 255);
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: rgb(0, 255, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: rgb(255, 0, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: rgb(0, 0, 255);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: rgb(0, 0, 255);
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: rgb(0, 123, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: rgb(123, 0, 0);
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: rgb(0, 0, 123);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: rgb(0, 0, 123);
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: #333;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: #ccc;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: #333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: #000;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Slider Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.emotion-0 .ss__facet-slider__slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  top: 10px;
+}
+
+.emotion-0 .ss__facet-slider__tick:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 2px;
+  -webkit-transform: translate(-50%, 0.7rem);
+  -moz-transform: translate(-50%, 0.7rem);
+  -ms-transform: translate(-50%, 0.7rem);
+  transform: translate(-50%, 0.7rem);
+}
+
+.emotion-0 .ss__facet-slider__tick .ss__facet-slider__tick__label {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 100%;
+  -webkit-transform: translate(-50%, 1.2rem);
+  -moz-transform: translate(-50%, 1.2rem);
+  -ms-transform: translate(-50%, 1.2rem);
+  transform: translate(-50%, 1.2rem);
+  white-space: nowrap;
+}
+
+.emotion-0 .ss__facet-slider__rail {
+  background: #333;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__segment {
+  background: #ccc;
+  height: 100%;
+}
+
+.emotion-0 .ss__facet-slider__handles {
+  text-align: center;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle {
+  background: #333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: initial;
+  font-weight: normal;
+  -webkit-transform: translateY(0) scale(0.9);
+  -moz-transform: translateY(0) scale(0.9);
+  -ms-transform: translateY(0) scale(0.9);
+  transform: translateY(0) scale(0.9);
+  -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle:after {
+  background-color: #ffffff;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  border-radius: 12px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active {
+  background: #000;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle.ss__facet-slider__handle--active label.ss__facet-slider__handle__label {
+  background: #fff;
+  padding: 0 5px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinleft {
+  left: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--pinright {
+  right: 0px;
+}
+
+.emotion-0 .ss__facet-slider__handles button .ss__facet-slider__handle label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+  position: absolute;
+  top: -20px;
+  font-family: Roboto,Helvetica,Arial;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.emotion-0 .ss__facet-slider__labels {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emotion-0 .ss__facet-slider__labels .ss__facet-slider__label--0:after {
+  content: "-";
+  padding: 5px;
+}
+
+<div
+    class="ss__facet-slider classy emotion-0"
+    style="position: relative; user-select: none;"
+  >
+    <div
+      class="ss__facet-slider__slider"
+    >
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 0%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__rail"
+        style="position: absolute; left: 0%; width: 100%;"
+      />
+      <div
+        class="ss__facet-slider__segment"
+        style="position: absolute; left: 100%; width: 0%;"
+      />
+      <div
+        class="ss__facet-slider__handles"
+      >
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          aria-valuetext="undefined slider button, current value 0,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 0%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+        <button
+          aria-label="undefined slider button"
+          aria-valuemax="280"
+          aria-valuemin="0"
+          aria-valuenow="280"
+          aria-valuetext="undefined slider button, current value 280,  max value 280"
+          role="slider"
+          ssa11y="true"
+          style="position: absolute; top: 50%; left: 100%; z-index: 0; transform: translate(-50%, -50%); appearance: none; background: transparent; outline: none;"
+          tabindex="0"
+          type="button"
+        >
+          <div
+            class="ss__facet-slider__handle"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="ss__facet-slider__labels"
+    >
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--0"
+      />
+      <label
+        class="ss__facet-slider__label ss__facet-slider__label--1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

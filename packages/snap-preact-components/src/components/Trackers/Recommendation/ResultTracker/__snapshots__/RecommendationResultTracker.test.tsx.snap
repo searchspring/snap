@@ -1,0 +1,1077 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecommendationResultTracker Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__recommendation-profile-tracker emotion-0"
+  >
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Take The Leap Pink Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          A Simple Necessity Slip
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Barely There Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just A Game Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Crossing Limits Black Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just Like That Tank Top
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Let Me Work It Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trendy on the Treadmill Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Love Game Black Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Sweet Thing Print Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Seaside Escape White Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          All I Think About Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trophy Wife Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          With Whimsy Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Code Red Lace-Up Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Here Comes The Fun Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Fringe Never Forget You Tie-Dye Romper
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RecommendationResultTracker Component renders with classname 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__recommendation-profile-tracker emotion-0"
+  >
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Take The Leap Pink Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          A Simple Necessity Slip
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Barely There Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just A Game Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Crossing Limits Black Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just Like That Tank Top
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Let Me Work It Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trendy on the Treadmill Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Love Game Black Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Sweet Thing Print Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Seaside Escape White Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          All I Think About Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trophy Wife Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          With Whimsy Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Code Red Lace-Up Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Here Comes The Fun Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker classy emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Fringe Never Forget You Tie-Dye Romper
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RecommendationResultTracker Component tracks as expected 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__recommendation-profile-tracker emotion-0"
+  >
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Take The Leap Pink Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          A Simple Necessity Slip
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Barely There Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just A Game Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Crossing Limits Black Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just Like That Tank Top
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Let Me Work It Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trendy on the Treadmill Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Love Game Black Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Sweet Thing Print Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Seaside Escape White Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          All I Think About Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trophy Wife Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          With Whimsy Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Code Red Lace-Up Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Here Comes The Fun Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Fringe Never Forget You Tie-Dye Romper
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RecommendationResultTracker Component tracks as expected 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__recommendation-profile-tracker emotion-0"
+  >
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Take The Leap Pink Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          A Simple Necessity Slip
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Barely There Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just A Game Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Crossing Limits Black Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Just Like That Tank Top
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Let Me Work It Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trendy on the Treadmill Sports Bra
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Love Game Black Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Sweet Thing Print Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Seaside Escape White Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          All I Think About Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Jack By Jerrilyn Mini Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Trophy Wife Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          With Whimsy Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Code Red Lace-Up Romper
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Here Comes The Fun Black Embroidered Dress
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__recommendation-result-tracker emotion-0"
+    >
+      <div
+        class="findMe"
+      >
+        <div
+          class="result"
+        >
+          Fringe Never Forget You Tie-Dye Romper
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -41,6 +41,7 @@ describe('Filter Component', () => {
 		expect(valueTextElement).toHaveClass('ss__filter__value');
 
 		expect(iconElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with Filter prop data', () => {
@@ -57,6 +58,7 @@ describe('Filter Component', () => {
 
 		expect(facetTextElement).toBeInTheDocument();
 		expect(valueTextElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with specified icon', () => {
@@ -70,6 +72,7 @@ describe('Filter Component', () => {
 
 		expect(iconElement).toBeInTheDocument();
 		expect(iconElement).toHaveClass(`ss__icon--${icon}`);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has a url value when passed one', () => {
@@ -81,6 +84,7 @@ describe('Filter Component', () => {
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
 		expect(filterElement).toHaveAttribute('href', url);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not show facetLabel when told not to', () => {
@@ -89,6 +93,7 @@ describe('Filter Component', () => {
 		const facetTextElement = rendered.container.querySelector('.ss__filter__label');
 
 		expect(facetTextElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use a custom separator', () => {
@@ -100,6 +105,7 @@ describe('Filter Component', () => {
 
 		expect(separatorTextElement).toBeInTheDocument();
 		expect(separatorText).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can have no separator', () => {
@@ -109,6 +115,7 @@ describe('Filter Component', () => {
 		const separatorTextElement = rendered.container.querySelector('.ss__filter__label__separator');
 
 		expect(separatorTextElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('fires onClick prop when clicked', () => {
@@ -120,6 +127,7 @@ describe('Filter Component', () => {
 
 		userEvent.click(filterElement);
 		expect(clickFn).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -129,6 +137,7 @@ describe('Filter Component', () => {
 		const filterElement = rendered.container.querySelector('.ss__filter');
 		expect(filterElement).toBeInTheDocument();
 		expect(filterElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -137,6 +146,7 @@ describe('Filter Component', () => {
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
 		expect(filterElement?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -162,6 +172,7 @@ describe('Filter theming works', () => {
 		const seperator = rendered.container.querySelector('.ss__filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(globalTheme.components.filter.separator);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -176,6 +187,7 @@ describe('Filter theming works', () => {
 		const seperator = rendered.container.querySelector('.ss__filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(propTheme.components.filter.separator);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -202,5 +214,6 @@ describe('Filter theming works', () => {
 		const seperator = rendered.container.querySelector('.ss__filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(propTheme.components.filter.separator);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

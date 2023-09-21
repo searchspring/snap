@@ -25,6 +25,9 @@ describe('hierarchyValue Component', () => {
 	beforeEach(() => {
 		hierarchyValueComponent = render(<FacetHierarchyOptions values={hierarchyFacetFilteredMock.values as FacetHierarchyValue[]} />);
 	});
+	afterAll(() => {
+		expect(hierarchyValueComponent.asFragment()).toMatchSnapshot();
+	});
 
 	it('renders', () => {
 		const hierarchyValueElement = hierarchyValueComponent.container.querySelector('.ss__facet-hierarchy-options');
@@ -56,6 +59,9 @@ describe('hierarchyValue Component hiding count', () => {
 	beforeEach(() => {
 		hierarchyValueComponent = render(<FacetHierarchyOptions hideCount={true} values={hierarchyFacetMock.values as FacetHierarchyValue[]} />);
 	});
+	afterAll(() => {
+		expect(hierarchyValueComponent.asFragment()).toMatchSnapshot();
+	});
 
 	it('renders', () => {
 		const hierarchyValueElement = hierarchyValueComponent.container.querySelector('.ss__facet-hierarchy-options');
@@ -83,6 +89,7 @@ describe('FacetHierarchyOptions generic props work', () => {
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyOption?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -92,6 +99,7 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyOption).toBeInTheDocument();
 		expect(hierarchyOption).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom onClick func', () => {
@@ -100,8 +108,11 @@ describe('FacetHierarchyOptions generic props work', () => {
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option')!;
 		expect(hierarchyOption).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		userEvent.click(hierarchyOption);
 		expect(onClickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -123,6 +134,7 @@ describe('FacetHierarchyOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-hierarchy-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -140,6 +152,7 @@ describe('FacetHierarchyOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-hierarchy-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -167,5 +180,6 @@ describe('FacetHierarchyOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-hierarchy-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

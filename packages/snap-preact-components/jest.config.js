@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const rootConfig = require('../../jest.base.config.json');
 module.exports = {
 	...rootConfig,

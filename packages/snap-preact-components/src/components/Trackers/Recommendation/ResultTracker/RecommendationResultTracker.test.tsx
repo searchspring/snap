@@ -139,6 +139,7 @@ describe('RecommendationResultTracker Component', () => {
 			});
 		});
 
+		expect(rendered.asFragment()).toMatchSnapshot();
 		trackfn.mockClear();
 
 		const resultElem = rendered.container.querySelector('.findMe');
@@ -170,6 +171,7 @@ describe('RecommendationResultTracker Component', () => {
 			})
 		);
 
+		expect(rendered.asFragment()).toMatchSnapshot();
 		trackfn.mockClear();
 	});
 
@@ -200,6 +202,7 @@ describe('RecommendationResultTracker Component', () => {
 
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation-result-tracker');
 		expect(CarouselElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', async () => {
@@ -230,5 +233,6 @@ describe('RecommendationResultTracker Component', () => {
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation-result-tracker');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

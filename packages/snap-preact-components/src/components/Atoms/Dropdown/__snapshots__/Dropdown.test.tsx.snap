@@ -1,0 +1,1928 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Component Can enable/disable useAlly with disableA11y prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the child
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component Can enable/disable useAlly with disableA11y prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the child
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__dropdown"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      click me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the content
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component does not fire onClick prop when disabled 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component does not fire onClick prop when disabled 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component does not fire onToggle prop when clicked outside (while opened) when disableClickOutside prop is true 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div>
+    <span
+      class="outside"
+    >
+      outside
+    </span>
+    <div
+      class="ss__dropdown ss__dropdown--open emotion-0"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        click me
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        this is the content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component does not fire onToggle prop when clicked outside (while opened) when disableClickOutside prop is true 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div>
+    <span
+      class="outside"
+    >
+      outside
+    </span>
+    <div
+      class="ss__dropdown ss__dropdown--open emotion-0"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        click me
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        this is the content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component external state does not fire onToggle prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component external state does not fire onToggle prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component external state uses prop open for state 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component external state uses prop open for state 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component fires onClick prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component fires onToggle prop when clicked outside (while opened) 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div>
+    <span
+      class="outside"
+    >
+      outside
+    </span>
+    <div
+      class="ss__dropdown emotion-0"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        click me
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        this is the content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component fires onToggle prop when clicked outside (while opened) 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div>
+    <span
+      class="outside"
+    >
+      outside
+    </span>
+    <div
+      class="ss__dropdown emotion-0"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        click me
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        this is the content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component fires onToggle prop when clicked outside (while opened) 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div>
+    <span
+      class="outside"
+    >
+      outside
+    </span>
+    <div
+      class="ss__dropdown emotion-0"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        click me
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        this is the content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state can start open 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state does not fire onToggle prop when disabled 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state does not fire onToggle prop when disabled 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state fires onToggle prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state fires onToggle prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state keeps its own internal state and passes it to onToggle 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state keeps its own internal state and passes it to onToggle 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state keeps its own internal state and passes it to onToggle 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component internal state starts closed 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown theme-class emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown theme-class emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown theme-class emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders button prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      click me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders button prop with props 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      <div
+        class="button-with-props"
+      >
+        open me
+      </div>
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders button prop with props 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      <div
+        class="button-with-props"
+      >
+        close me
+      </div>
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders children prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the child
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders children prop with props 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="child-with-props"
+      >
+        im closed
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders children prop with props 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="child-with-props"
+      >
+        im open
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders children prop with props 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="child-with-props"
+      >
+        im closed
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders content and children props 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the contentthis is the child
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders content prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      this is the content
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders content prop with props 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="content-with-props"
+      >
+        im closed
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders content prop with props 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown ss__dropdown--open emotion-0"
+  >
+    <div
+      aria-expanded="true"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="content-with-props"
+      >
+        im open
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders content prop with props 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      <div
+        class="content-with-props"
+      >
+        im closed
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+  padding: 20px;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component renders with className prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown classy emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    />
+  </div>
+</DocumentFragment>
+`;

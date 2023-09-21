@@ -21,24 +21,28 @@ describe('Result Component', () => {
 		const rendered = render(<Result result={mockResults[0]} />);
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders image', () => {
 		const rendered = render(<Result result={mockResults[0]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders badge', () => {
 		const rendered = render(<Result result={mockResults[0]} />);
 		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__badge');
 		expect(badgeElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders title', () => {
 		const rendered = render(<Result result={searchResponse.results![0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
 		expect(title?.textContent).toBe(searchResponse.results![0].mappings?.core?.name);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders pricing', () => {
@@ -46,6 +50,7 @@ describe('Result Component', () => {
 		const priceElement = rendered.container.querySelectorAll('.ss__result .ss__result__details__pricing .ss__price');
 		expect(priceElement[0]).toBeInTheDocument();
 		expect(priceElement.length).toBe(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders details', () => {
@@ -57,6 +62,7 @@ describe('Result Component', () => {
 		const detailsElement = rendered.container.querySelector('.ss__result .ss__result__details .details');
 		expect(detailsElement).toBeInTheDocument();
 		expect(detailsElement).toHaveTextContent('Add to cart');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides various sections', () => {
@@ -73,6 +79,7 @@ describe('Result Component', () => {
 		expect(badgeElement).not.toBeInTheDocument();
 		expect(titleElement).not.toBeInTheDocument();
 		expect(priceElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides image section', () => {
@@ -83,6 +90,7 @@ describe('Result Component', () => {
 		const rendered = render(<Result {...args} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image');
 		expect(imageElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('should display a fallback image', () => {
@@ -90,12 +98,14 @@ describe('Result Component', () => {
 		const rendered = render(<Result result={mockResults[1]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('should can change the layout', () => {
 		const rendered = render(<Result result={mockResults[1]} layout={Layout.LIST} />);
 		const Element = rendered.container.querySelector('.ss__result');
 		expect(Element).toHaveClass(`ss__result--${Layout.LIST}`);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can truncate the title', () => {
@@ -110,6 +120,7 @@ describe('Result Component', () => {
 		const Element = rendered.container.querySelector('.ss__result__details__title a');
 		expect(Element?.innerHTML.length).toBeLessThanOrEqual(6);
 		expect(Element).toHaveTextContent('...');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set a custom onClick function', () => {
@@ -121,6 +132,7 @@ describe('Result Component', () => {
 
 		userEvent.click(resultElement);
 		expect(onClickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -130,6 +142,7 @@ describe('Result Component', () => {
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
 		expect(resultElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -138,6 +151,7 @@ describe('Result Component', () => {
 		const resultElement = rendered.container.querySelector('.ss__result');
 
 		expect(resultElement?.classList).toHaveLength(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -159,6 +173,7 @@ describe('Result theming works', () => {
 		const title = rendered.container.querySelector('.ss__result__details__title');
 		expect(result).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -174,6 +189,7 @@ describe('Result theming works', () => {
 		const title = rendered.container.querySelector('.ss__result__details__title');
 		expect(result).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -204,5 +220,6 @@ describe('Result theming works', () => {
 		expect(result).toBeInTheDocument();
 		expect(title).toBeInTheDocument();
 		expect(badge).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

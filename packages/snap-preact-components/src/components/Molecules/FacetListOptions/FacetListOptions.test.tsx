@@ -20,6 +20,9 @@ describe('ListValue Component', () => {
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} />);
 	});
+	afterAll(() => {
+		expect(listValueComponent.asFragment()).toMatchSnapshot();
+	});
 
 	it('renders', () => {
 		const listValueElement = listValueComponent.container.querySelector('.ss__facet-list-options');
@@ -48,6 +51,9 @@ describe('ListValue Component hiding checkbox and count', () => {
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions hideCheckbox={true} hideCount={true} values={listFacetMock.values as FacetValue[]} />);
 	});
+	afterAll(() => {
+		expect(listValueComponent.asFragment()).toMatchSnapshot();
+	});
 
 	it('renders', () => {
 		const listValueElement = listValueComponent.container.querySelector('.ss__facet-list-options');
@@ -75,6 +81,7 @@ describe('FacetListOptions generic props work', () => {
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
 		expect(listOption?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -84,6 +91,7 @@ describe('FacetListOptions generic props work', () => {
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
 		expect(listOption).toBeInTheDocument();
 		expect(listOption).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom onClick func', () => {
@@ -92,8 +100,11 @@ describe('FacetListOptions generic props work', () => {
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		expect(listOption).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		userEvent.click(listOption);
 		expect(onClickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -115,6 +126,7 @@ describe('FacetListOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -132,6 +144,7 @@ describe('FacetListOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -159,5 +172,6 @@ describe('FacetListOptions theming works', () => {
 		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

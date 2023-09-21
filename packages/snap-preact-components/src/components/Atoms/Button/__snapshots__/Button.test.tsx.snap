@@ -1,0 +1,805 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component native Can enable/disable useAlly with disableA11y prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    button1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component native Can enable/disable useAlly with disableA11y prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+  >
+    button1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component native adds class "ss__button--disabled" and prevents onClick when disabled by prop 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button ss__button--disabled emotion-0"
+    disabled=""
+  >
+    disabled button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native adds class "ss__button--disabled" and prevents onClick when disabled by prop 2`] = `
+<DocumentFragment>
+  <button
+    class="ss__button ss__button--disabled emotion-0"
+    disabled=""
+  >
+    disabled button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native does not render with colors prop 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    colorful button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native does not render without children or content props 1`] = `<DocumentFragment />`;
+
+exports[`Button Component native fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    clickable button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native fires onClick prop when clicked 2`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    clickable button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native renders with children and content props 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    contenttextbuttontext
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native renders with children prop 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    <h1
+      class="child"
+    >
+      childbutton
+    </h1>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native renders with className prop 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button classy emotion-0"
+  >
+    classy button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native renders with content prop 1`] = `
+<DocumentFragment>
+  <button
+    class="ss__button emotion-0"
+  >
+    button1
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component native renders with icon prop 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<button
+    class="ss__button emotion-0"
+  >
+    colorful button
+    <svg
+      class="ss__icon ss__icon--close-thin emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+      />
+    </svg>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled adds class "ss__button--disabled" and prevents onClick when disabled by prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    aria-disabled="true"
+    class="ss__button ss__button--disabled emotion-0"
+    disabled="true"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    disabled button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled adds class "ss__button--disabled" and prevents onClick when disabled by prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    aria-disabled="true"
+    class="ss__button ss__button--disabled emotion-0"
+    disabled="true"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    disabled button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled can disable styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__button"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    styleless button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled does not render without children or content props 1`] = `<DocumentFragment />`;
+
+exports[`Button Component styled fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    clickable button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled fires onClick prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    clickable button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: red;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid red;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    themed button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: blue;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid blue;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    themed button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: blue;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid blue;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    themed button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+  padding: 20px;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    styled button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with children and content props 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    contenttextbuttontext
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with children prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <h1
+      class="child"
+    >
+      childbutton
+    </h1>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with className prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button classy emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    classy button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with colors prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: blue;
+  outline: 0;
+  background-color: green;
+  border: 1px solid red;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    colorful button
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with content prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    button1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Button Component styled renders with icon prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-0.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-0.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-1 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__button emotion-0"
+    role="button"
+    ssa11y="true"
+    tabindex="0"
+  >
+    colorful button
+    <svg
+      class="ss__icon ss__icon--close-thin emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+      />
+    </svg>
+  </div>
+</DocumentFragment>
+`;

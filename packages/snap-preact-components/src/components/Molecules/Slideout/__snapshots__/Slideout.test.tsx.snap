@@ -1,0 +1,991 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slideout Component can add additional styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  background-color: green;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  <div
+    class="ss__overlay ss__slideout__overlay"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component can disable styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  <div
+    class="ss__slideout ss__slideout--active"
+  />
+  <div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component can set custom slideDirection 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: right 0.25s;
+  transition: right 0.25s;
+  left: initial;
+  right: 0;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component can set custom transitionSpeed 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.55s;
+  transition: left 0.55s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.55s ease 0s,left 0s ease 0.55s;
+  transition: background 0.55s ease 0s,left 0s ease 0.55s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.55s ease,left 0s ease;
+  transition: background 0.55s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component displays overlay 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component does not render a wrapper element when using "noButtonWrapper" prop 1`] = `
+<DocumentFragment>
+  <div>
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout clickit emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component does not render if matchMedia returns false 1`] = `<DocumentFragment />`;
+
+exports[`Slideout Component has custom displayAtWidth 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -400px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component has custom overlay color 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0, 0, 0, 0.1);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component has custom width 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -400px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component hides overlay when inactive 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component is not visible 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 550px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component is themeable with theme  prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 600px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 550px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component renders a wrapper element with classname 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component renders and is visible 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component toggles the "ss__slideout--active" class when the button is clicked 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component toggles the "ss__slideout--active" class when the button is clicked 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component toggles the "ss__slideout--active" class when using clonedElement props 1`] = `
+<DocumentFragment>
+  <div
+    class="custom-button"
+  >
+    inactive
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Slideout Component toggles the "ss__slideout--active" class when using clonedElement props 2`] = `
+<DocumentFragment>
+  <div
+    class="custom-button"
+  >
+    active
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;

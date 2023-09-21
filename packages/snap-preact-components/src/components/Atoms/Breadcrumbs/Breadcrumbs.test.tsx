@@ -31,6 +31,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 		expect(breadcrumbElement).toBeInTheDocument();
 		expect(breadcrumbElement?.classList.length).toBe(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('uses links when url is present in data', () => {
@@ -46,6 +47,7 @@ describe('Breadcrumbs Component', () => {
 		expect(anchorElement).toBeInTheDocument();
 		expect(anchorElement).toHaveAttribute('href', url);
 		expect(anchorElement).toHaveTextContent(label);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not use links when url is not present in data', () => {
@@ -58,12 +60,14 @@ describe('Breadcrumbs Component', () => {
 		expect(anchorElement).not.toBeInTheDocument();
 
 		expect(breadcrumbElement).toHaveTextContent(args.data[args.data.length - 1].label);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has all crumbs and separators', () => {
 		const rendered = render(<Breadcrumbs {...args} />);
 		const breadcrumbElements = rendered.container.querySelectorAll('.ss__breadcrumbs li');
 		expect(breadcrumbElements.length).toEqual(args.data.length * 2 - 1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom string separator', () => {
@@ -73,6 +77,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbSeparatorElements = rendered.container.querySelectorAll('.ss__breadcrumbs li:nth-child(even)');
 		expect(breadcrumbSeparatorElements.length).toEqual(args.data.length - 1);
 		expect(breadcrumbSeparatorElements[0].textContent).toEqual('>>');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom component separator', () => {
@@ -82,6 +87,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbSeparatorElements = rendered.container.querySelectorAll('.ss__breadcrumbs li:nth-child(even)');
 		expect(breadcrumbSeparatorElements.length).toEqual(args.data.length - 1);
 		expect(breadcrumbSeparatorElements[0].textContent).toEqual('|');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -94,6 +100,7 @@ describe('Breadcrumbs Component', () => {
 		const styles = getComputedStyle(breadcrumbElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('respects disableStyles prop when true', () => {
@@ -101,6 +108,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 
 		expect(breadcrumbElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -120,6 +128,7 @@ describe('Breadcrumbs Component', () => {
 
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 		expect(breadcrumbElement).toHaveClass(globalTheme.components.breadcrumbs.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -135,6 +144,7 @@ describe('Breadcrumbs Component', () => {
 
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 		expect(breadcrumbElement).toHaveClass(propTheme.components.breadcrumbs.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -163,5 +173,6 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 		expect(breadcrumbElement).toHaveClass(propTheme.components.breadcrumbs.className);
 		expect(breadcrumbElement).not.toHaveClass(globalTheme.components.breadcrumbs.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

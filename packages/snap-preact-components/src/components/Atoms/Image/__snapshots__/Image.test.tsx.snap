@@ -1,0 +1,421 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__image"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Image theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__image"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Image theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__image"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component Broken Image should display custom fallback image 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="https://www.telegraph.co.uk/content/dam/Pets/spark/royal-canin/happy-puppy-xlarge.jpg?imwidth=1200"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component Broken Image should display default fallback image 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component Working Image renders image 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Freezing Point Cream Turtleneck Sweater"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Freezing Point Cream Turtleneck Sweater"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component click func custom onclick src on hover 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component click func custom onclick src on hover 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__image"
+  >
+    <img
+      alt="Freezing Point Cream Turtleneck Sweater"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Freezing Point Cream Turtleneck Sweater"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component hover src should change src on hover & run a custom onhoverfunc prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component hover src should change src on hover & run a custom onhoverfunc prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Play For Keeps Burgundy Velvet Bralette"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3650_thumb_med.jpg"
+      title="Play For Keeps Burgundy Velvet Bralette"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image emotion-0"
+  >
+    <img
+      alt="Freezing Point Cream Turtleneck Sweater"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Freezing Point Cream Turtleneck Sweater"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`image Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-0 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<div
+    class="ss__image classy emotion-0"
+  >
+    <img
+      alt="Freezing Point Cream Turtleneck Sweater"
+      loading="lazy"
+      src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/110_lcp_9262_copyright_loganpotterf_2016_thumb_med.jpg"
+      title="Freezing Point Cream Turtleneck Sweater"
+    />
+  </div>
+</DocumentFragment>
+`;

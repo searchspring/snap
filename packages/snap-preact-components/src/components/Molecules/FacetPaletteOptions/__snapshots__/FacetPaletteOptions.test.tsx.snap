@@ -1,0 +1,3754 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetPaletteOptions Component Palette container element has correct number of classes 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="filter by Print"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component Palette option label element has correct number of classes 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component can change gapsize and columns 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(2, calc((100% - (1 * 10px))/ 2));
+  gap: 10px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 2 - 4px );
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(2n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__facet-palette-options"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon"
+            height="40%"
+            viewBox="0 0 56 56"
+            width="40%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+              fill="white"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component can set custom onClick func 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component can set custom onClick func 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component has icons by default 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component hideIcons and hideLabel works as expected 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(6, calc((100% - (5 * 8px))/ 6));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 6 - 8px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(6n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(6, calc((100% - (5 * 8px))/ 6));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 6 - 8px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(6n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(3, calc((100% - (2 * 8px))/ 3));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 3 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component maps through and renders the correct number of options 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="filter by Print"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+<div
+    class="ss__facet-palette-options emotion-0"
+  >
+    <a
+      aria-label="filter by Print"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetPaletteOptions Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(4, calc((100% - (3 * 8px))/ 4));
+  gap: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option {
+  width: calc(100% / 4 - 6px );
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-0 .ss__facet-palette-options__option:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-0 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.emotion-0 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #333;
+  padding: 0px;
+  border-width: 4px;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: calc(100% - 2px);
+  border: 1px solid #EBEBEB;
+  border-radius: 100%;
+  position: relative;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-0 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-1 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+<div
+    class="ss__facet-palette-options classy emotion-0"
+  >
+    <a
+      aria-label="remove selected filter  - Print"
+      class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--print"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-1"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Print
+      </span>
+    </a>
+    <a
+      aria-label="filter by Floral"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--floral"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Floral
+      </span>
+    </a>
+    <a
+      aria-label="filter by Stripe"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--stripe"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Stripe
+      </span>
+    </a>
+    <a
+      aria-label="filter by Embroidered"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--embroidered"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Embroidered
+      </span>
+    </a>
+    <a
+      aria-label="filter by Plaid"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--plaid"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Plaid
+      </span>
+    </a>
+    <a
+      aria-label="filter by Paisley"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--paisley"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Paisley
+      </span>
+    </a>
+    <a
+      aria-label="filter by Polka Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--polka-dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Polka Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Camo"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--camo"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Camo
+      </span>
+    </a>
+    <a
+      aria-label="filter by Dot"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--dot"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Dot
+      </span>
+    </a>
+    <a
+      aria-label="filter by Herringbone"
+      class="ss__facet-palette-options__option"
+    >
+      <div
+        class="ss__facet-palette-options__option__wrapper"
+      >
+        <div
+          class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--herringbone"
+        />
+      </div>
+      <span
+        class="ss__facet-palette-options__option__value"
+      >
+        Herringbone
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;

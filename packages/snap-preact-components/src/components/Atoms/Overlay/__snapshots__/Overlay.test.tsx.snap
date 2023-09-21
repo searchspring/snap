@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overlay Component can custom className 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active custom-class emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__overlay ss__overlay--active"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component fires onClick prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component is has custom color & transition speed 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.35s ease 0s,left 0s ease 0.35s;
+  transition: background 0.35s ease 0s,left 0s ease 0.35s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.35s ease,left 0s ease;
+  transition: background 0.35s ease,left 0s ease;
+  background: rgba(0, 0, 0, 0.3);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component is hidden when inactive 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(200, 100, 50, 0.5);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(200, 100, 50, 0.5);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(100, 100, 100, 0.9);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Overlay Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;

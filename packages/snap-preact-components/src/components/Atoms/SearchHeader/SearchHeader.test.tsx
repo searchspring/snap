@@ -28,6 +28,7 @@ describe('Search Header Component', () => {
 		const headerElement = rendered.container.querySelector('.ss__search-header');
 		expect(headerElement).toBeInTheDocument();
 		expect(headerElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -36,6 +37,7 @@ describe('Search Header Component', () => {
 		const headerElement = rendered.container.querySelector('.ss__search-header');
 
 		expect(headerElement?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	const theme = {
@@ -60,6 +62,7 @@ describe('Search Header Component', () => {
 		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
 
 		expect(subtitle?.innerHTML).toBe(theme.components.searchHeader.subtitleText);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -71,6 +74,7 @@ describe('Search Header Component', () => {
 		const rendered = render(<SearchHeader {...args} theme={theme} />);
 		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
 		expect(subtitle?.innerHTML).toBe(theme.components.searchHeader.subtitleText);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -95,6 +99,7 @@ describe('Search Header Component', () => {
 
 		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
 		expect(subtitle?.innerHTML).toBe(componentTheme.components.searchHeader.subtitleText);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders a custom subtitle', async () => {
@@ -104,6 +109,7 @@ describe('Search Header Component', () => {
 		const headerElement = rendered.container.querySelector('.ss__search-header__title--subtitle');
 		expect(headerElement).toBeInTheDocument();
 		expect(headerElement).toHaveTextContent(customsubTitle);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders a custom subtitle using a function', async () => {
@@ -116,6 +122,7 @@ describe('Search Header Component', () => {
 		const headerElement = rendered.container.querySelector('.ss__search-header__title--subtitle');
 		expect(headerElement).toBeInTheDocument();
 		expect(headerElement).toHaveTextContent('1298 dress subtitle!');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('dangerously sets the inner html of subtitle', async () => {
@@ -128,6 +135,7 @@ describe('Search Header Component', () => {
 		const Element = rendered.container.querySelector('.ss__search-header__title--subtitle .findMe');
 		expect(Element).toBeInTheDocument();
 		expect(Element).toHaveTextContent('1298 dress subtitle!');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('has Results', () => {
@@ -137,6 +145,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('Showing 1 - 30 of 1298 results for "dress"');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom title', async () => {
@@ -146,6 +155,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--results');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customTitle);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom title using a function', async () => {
@@ -158,6 +168,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--results');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('look mom 1298 results found for dress!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('dangerously sets the inner html of title', async () => {
@@ -170,6 +181,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--results .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('look mom 1298 results found for dress!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -184,6 +196,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('No results for "blah" found.');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom no results title', async () => {
@@ -193,6 +206,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customNoResults);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom no results title using a function', async () => {
@@ -205,6 +219,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('look mom 0 results found for blah!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('dangerously sets the inner html of no results title', async () => {
@@ -217,6 +232,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('look mom 0 results found for blah!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -231,6 +247,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('No results found for "rodd", showing results for "road" instead.');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom correctedQueryText', async () => {
@@ -240,6 +257,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customoq);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('renders a custom correctedQueryText using a function', async () => {
@@ -252,6 +270,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('1298 road oq!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('dangerously sets the inner html of correctedQueryText', async () => {
@@ -264,6 +283,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('1298 road oq!');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -282,6 +302,7 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--landing-page');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('glasses');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

@@ -1,0 +1,3599 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSummary Component can hide the facet label 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component custom clearAll Button 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="start over"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          start over
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__filter-summary"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter"
+    >
+      <div
+        class="ss__button ss__filter__button"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter"
+    >
+      <div
+        class="ss__button ss__filter__button"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter"
+    >
+      <div
+        class="ss__button ss__filter__button"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all"
+    >
+      <div
+        class="ss__button ss__filter__button"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon"
+          height="10px"
+          viewBox="0 0 56 56"
+          width="10px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component does not render if no filters 1`] = `<DocumentFragment />`;
+
+exports[`FilterSummary Component hides clearAll Button 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders a custom title 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      you clicked these earlier
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders a default title 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders clearAll Button 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary classy emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with custom on clear all click func 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with custom on clear all click func 2`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with custom onclick func 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with custom onclick func 2`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with custom seperator 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            &gt;&gt;&gt;
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            &gt;&gt;&gt;
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            &gt;&gt;&gt;
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with filter list 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary Component renders with specified icons 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Current Filters
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--check ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 14.921c0 0.903-0.361 1.806-1.012 2.457l-31.071 31.071c-0.65 0.65-1.554 1.012-2.457 1.012s-1.806-0.361-2.457-1.012l-17.992-17.992c-0.65-0.65-1.012-1.554-1.012-2.457s0.361-1.806 1.012-2.457l4.914-4.914c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l10.622 10.658 23.701-23.737c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l4.914 4.914c0.65 0.65 1.012 1.554 1.012 2.457z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--check ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 14.921c0 0.903-0.361 1.806-1.012 2.457l-31.071 31.071c-0.65 0.65-1.554 1.012-2.457 1.012s-1.806-0.361-2.457-1.012l-17.992-17.992c-0.65-0.65-1.012-1.554-1.012-2.457s0.361-1.806 1.012-2.457l4.914-4.914c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l10.622 10.658 23.701-23.737c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l4.914 4.914c0.65 0.65 1.012 1.554 1.012 2.457z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--check ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 14.921c0 0.903-0.361 1.806-1.012 2.457l-31.071 31.071c-0.65 0.65-1.554 1.012-2.457 1.012s-1.806-0.361-2.457-1.012l-17.992-17.992c-0.65-0.65-1.012-1.554-1.012-2.457s0.361-1.806 1.012-2.457l4.914-4.914c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l10.622 10.658 23.701-23.737c0.65-0.65 1.554-1.012 2.457-1.012s1.806 0.361 2.457 1.012l4.914 4.914c0.65 0.65 1.012 1.554 1.012 2.457z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--circle ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 28c0 15.458-12.542 28-28 28s-28-12.542-28-28 12.542-28 28-28 28 12.542 28 28z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      should find this
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Lorem Ipsum
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterSummary theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-0 .ss__filter-summary__title {
+  font-size: 1.2em;
+}
+
+.emotion-1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-1 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-1 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<div
+    class="ss__filter-summary emotion-0"
+  >
+    <div
+      class="ss__filter-summary__title"
+    >
+      Lorem Ipsum
+    </div>
+    <a
+      aria-label="remove selected Dress Size filter Large"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Dress Size
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Large
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Price filter $20.00 - $200.00"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Price
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          $20.00 - $200.00
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="remove selected Color filter Red"
+      class="ss__filter ss__filter-summary__filter emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__label"
+        >
+          Color
+          <span
+            class="ss__filter__label__separator"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="ss__filter__value"
+        >
+          Red
+        </span>
+      </div>
+    </a>
+    <a
+      aria-label="Clear All"
+      class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-1"
+    >
+      <div
+        class="ss__button ss__filter__button emotion-2"
+        role="button"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-3"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+        <span
+          class="ss__filter__value"
+        >
+          Clear All
+        </span>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;

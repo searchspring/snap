@@ -54,6 +54,7 @@ describe('Sidebar Component', () => {
 		const rendered = render(<Sidebar controller={controller} />);
 		const element = rendered.container.querySelector('.ss__sidebar');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders expected subComponents', () => {
@@ -69,6 +70,7 @@ describe('Sidebar Component', () => {
 		expect(sortby).toBeInTheDocument();
 		expect(perpage).toBeInTheDocument();
 		expect(facets).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hideTitle', () => {
@@ -77,6 +79,7 @@ describe('Sidebar Component', () => {
 		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(element).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default titleText', () => {
@@ -84,6 +87,7 @@ describe('Sidebar Component', () => {
 		const rendered = render(<Sidebar controller={controller} />);
 		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(title?.innerHTML).toBe(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change titleText', () => {
@@ -91,30 +95,35 @@ describe('Sidebar Component', () => {
 		const rendered = render(<Sidebar controller={controller} titleText={text} />);
 		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(title?.innerHTML).toBe(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide hideFacets', () => {
 		const rendered = render(<Sidebar controller={controller} hideFacets={true} />);
 		const facets = rendered.container.querySelector('.ss__facets');
 		expect(facets).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide perpage', () => {
 		const rendered = render(<Sidebar controller={controller} hidePerPage={true} />);
 		const perpage = rendered.container.querySelector('.ss__perpage__select');
 		expect(perpage).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide hideSortBy', () => {
 		const rendered = render(<Sidebar controller={controller} hideSortBy={true} />);
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
 		expect(sortby).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide FilterSummary', () => {
 		const rendered = render(<Sidebar controller={controller} hideFilterSummary={true} />);
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		expect(summary).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -122,12 +131,14 @@ describe('Sidebar Component', () => {
 		const rendered = render(<Sidebar controller={controller} className={className} />);
 		const element = rendered.container.querySelector('.ss__sidebar');
 		expect(element).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
 		const rendered = render(<Sidebar controller={controller} disableStyles />);
 		const element = rendered.container.querySelector('.ss__sidebar');
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('Sidebar theming works', () => {
@@ -147,6 +158,7 @@ describe('Sidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__sidebar');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(globalTheme.components.sidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -161,6 +173,7 @@ describe('Sidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__sidebar');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.sidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -188,6 +201,7 @@ describe('Sidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.sidebar.className);
 			expect(element).not.toHaveClass(globalTheme.components.sidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });
