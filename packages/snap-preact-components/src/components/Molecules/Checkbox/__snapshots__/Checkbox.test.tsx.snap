@@ -936,3 +936,61 @@ exports[`Checkbox Component styled respects the disabled prop 2`] = `
   </span>
 </DocumentFragment>
 `;
+
+exports[`Checkbox Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+}
+
+.emotion-1 {
+  fill: #6d7175;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;

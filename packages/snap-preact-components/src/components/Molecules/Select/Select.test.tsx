@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Select } from './Select';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Select Component', () => {
 	const options = [
@@ -59,6 +60,14 @@ describe('Select Component', () => {
 			},
 		},
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Select theme={theme} options={options} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('it does not render without options', () => {
 		const rendered = render(<Select options={[]} />);

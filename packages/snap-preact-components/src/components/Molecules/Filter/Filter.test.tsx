@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
@@ -20,6 +21,16 @@ describe('Filter Component', () => {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
 	const mockData = new MockData().searchMeta('filtered');
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+			const filter = filters[0];
+			const rendered = render(<Filter theme={theme} filter={filter} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders', () => {
 		const rendered = render(<Filter {...args} />);

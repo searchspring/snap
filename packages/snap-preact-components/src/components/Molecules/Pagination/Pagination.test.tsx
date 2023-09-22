@@ -2,6 +2,7 @@ import { h } from 'preact';
 
 import { render, RenderResult } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { Pagination } from './Pagination';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
@@ -195,6 +196,14 @@ describe('Pagination theming works', () => {
 	const data = new MockData().searchMeta();
 
 	const paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Pagination theme={theme} pagination={paginationStore} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {

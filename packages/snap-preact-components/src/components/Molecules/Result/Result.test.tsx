@@ -3,6 +3,7 @@ import { render } from '@testing-library/preact';
 import { Result } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import userEvent from '@testing-library/user-event';
 import { ResultsLayout as Layout } from '../../../types';
 import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
@@ -17,6 +18,14 @@ const searchResponse: SearchResponseModel = mockData.search();
 const mockResults = searchResponse.results as SearchResultStore;
 
 describe('Result Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Result theme={theme} result={mockResults[0]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<Result result={mockResults[0]} />);
 		const resultElement = rendered.container.querySelector('.ss__result');

@@ -4,10 +4,18 @@ import { render } from '@testing-library/preact';
 
 import { Element } from './Element';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Element Component', () => {
 	const text = 'some text';
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Element theme={theme} type={'div'} content={text} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('renders as div', () => {
 		const rendered = render(<Element type={'div'} content={text} />);
 

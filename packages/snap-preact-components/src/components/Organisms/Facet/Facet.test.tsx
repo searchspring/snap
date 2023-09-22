@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { Facet } from './Facet';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import userEvent from '@testing-library/user-event';
 import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
@@ -43,6 +44,14 @@ facetOverflowMock.overflow = {
 
 describe('Facet Component', () => {
 	//TODO: type: FacetType and display: FacetDisplay in interface BaseFacet not compatible with searchResponse mock data!
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Facet theme={theme} facet={listFacetMock as ValueFacet} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	describe('List Facet Display', () => {
 		it('renders', () => {

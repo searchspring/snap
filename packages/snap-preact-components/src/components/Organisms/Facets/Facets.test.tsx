@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { Facets, IndividualFacetType } from './Facets';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import userEvent from '@testing-library/user-event';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -11,6 +12,14 @@ const mockData = new MockData();
 const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Facets Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Facets theme={theme} facets={searchResponse.facets as IndividualFacetType[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const args = {
 			facets: searchResponse.facets as IndividualFacetType[],

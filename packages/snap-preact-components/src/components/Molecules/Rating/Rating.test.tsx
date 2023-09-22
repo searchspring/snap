@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { render } from '@testing-library/preact';
 import { Rating } from './Rating';
 
@@ -9,6 +10,14 @@ const args = {
 };
 
 describe('Rating Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Rating theme={theme} value={4} count={10} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const value = 5;
 		const rendered = render(<Rating value={value} />);

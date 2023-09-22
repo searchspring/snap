@@ -37690,3 +37690,3018 @@ exports[`Sidebar Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Sidebar Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__sidebar__title {
+  color: #202223;
+}
+
+.emotion-1 {
+  margin: 10px 0 30px 0;
+}
+
+.emotion-1 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-1 .ss__filter-summary__filter .ss__filter__button {
+  background-color: #6d7175;
+  color: #ffffff;
+  border: none;
+}
+
+.emotion-1 .ss__filter-summary__filter .ss__filter__button .ss__filter__button__icon {
+  fill: #ffffff;
+}
+
+.emotion-1 .ss__filter-summary__title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #6d7175;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-2 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-2 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-3:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-3.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-3.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-4 {
+  fill: #6d7175;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+.emotion-11 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-11.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-11 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-11 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-11 .ss__dropdown .ss__select__dropdown__button {
+  border: none;
+  padding: 6px 30px;
+  font-weight: bold;
+}
+
+.emotion-11 .ss__dropdown .ss__select__dropdown__button:hover {
+  background-color: initial;
+  color: #6d7175;
+}
+
+.emotion-11 .ss__dropdown .ss__select__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transition: -webkit-transform 0.25s ease 0s;
+  transition: transform 0.25s ease 0s;
+}
+
+.emotion-11 .ss__dropdown.ss__dropdown--open .ss__dropdown__button {
+  box-shadow: 0 6px 12px 1px #0000001f;
+}
+
+.emotion-11 .ss__dropdown.ss__dropdown--open .ss__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-11 .ss__dropdown.ss__dropdown--open .ss__dropdown__content {
+  background-color: #fff;
+  box-shadow: 0 6px 12px 1px #0000001f;
+  z-index: 10000;
+}
+
+.emotion-11 .ss__select__select {
+  position: relative;
+  padding: 0;
+  margin: -1px 0 0 0;
+}
+
+.emotion-11 .ss__select__select .ss__select__select__option {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 30px;
+  color: #6d7175;
+}
+
+.emotion-11 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-11 .ss__select__select .ss__select__select__option:hover {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-12 {
+  position: relative;
+}
+
+.emotion-12.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-12 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-12 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-14 {
+  fill: #6d7175;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+.emotion-20 {
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+
+.emotion-20 .ss__facet__dropdown .ss__facet__dropdown__icon {
+  -webkit-transition: -webkit-transform ease .5s;
+  transition: transform ease .5s;
+}
+
+.emotion-20 .ss__facet__dropdown.ss__dropdown--open .ss__facet__dropdown__icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-20 .ss__facet__header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.emotion-20 .ss__facet__options {
+  margin-top: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.emotion-20 .ss__facet__options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.emotion-20 .ss__facet__options::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+.emotion-20 .ss__facet__options::-webkit-scrollbar-thumb {
+  background: #6d7175;
+}
+
+.emotion-20 .ss__facet__show-more-less {
+  display: block;
+  margin: 8px;
+  cursor: pointer;
+  color: #6d7175;
+}
+
+.emotion-20 .ss__facet__show-more-less .ss__icon {
+  margin-right: 8px;
+}
+
+.emotion-20 .ss__search-input {
+  margin: 16px 0 0 0;
+}
+
+.emotion-21 {
+  position: relative;
+}
+
+.emotion-21.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-21 .ss__dropdown__button {
+  cursor: default;
+}
+
+.emotion-21 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-22 {
+  fill: #6d7175;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.emotion-23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(5, calc((100% - (4 * 5px))/ 5));
+  gap: 5px;
+}
+
+.emotion-23 .ss__facet-palette-options__option {
+  width: calc(100% / 5 - 8px );
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: #6d7175;
+}
+
+.emotion-23 .ss__facet-palette-options__option:nth-of-type(5n) {
+  margin-right: 0;
+}
+
+.emotion-23 .ss__facet-palette-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-23 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__wrapper {
+  border-color: #EBEBEB;
+}
+
+.emotion-23 .ss__facet-palette-options__option:hover .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  opacity: 1;
+}
+
+.emotion-23 .ss__facet-palette-options__option .ss__facet-palette-options__option__wrapper {
+  border: 2px solid transparent;
+  border-radius: 3px;
+}
+
+.emotion-23 .ss__facet-palette-options__option.ss__facet-palette-options__option--filtered .ss__facet-palette-options__option__wrapper {
+  border-color: #6d7175;
+  padding: 2px;
+  border-width: 2px;
+}
+
+.emotion-23 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette {
+  padding-top: 100%;
+  box-shadow: 0px 0px 0 1px #EBEBEB;
+  border-radius: 3px;
+  position: relative;
+}
+
+.emotion-23 .ss__facet-palette-options__option .ss__facet-palette-options__option__palette .ss__facet-palette-options__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 0;
+  text-align: center;
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.emotion-23 .ss__facet-palette-options__option .ss__facet-palette-options__option__value {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .emotion-23 {
+    display: grid;
+  }
+
+  .emotion-23 .ss__facet-palette-options__option {
+    margin: 0;
+    width: initial;
+  }
+}
+
+.emotion-24 {
+  fill: white;
+  width: 40%;
+  height: 40%;
+  position: relative;
+}
+
+.emotion-28 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 5px 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+}
+
+.emotion-28 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-28 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-28 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-28 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-29 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-29.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-29 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+  color: #6d7175;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-45 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-56 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(5, 1fr);
+  color: #6d7175;
+  gap: 5px;
+  grid-auto-rows: 1fr;
+}
+
+.emotion-56 .ss__facet-grid-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+  text-align: center;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding: 1em 0;
+  width: calc(100% / 5 - 8px);
+  margin: 0 5px 5px 0;
+  color: #6d7175;
+}
+
+.emotion-56 .ss__facet-grid-options__option:nth-of-type(5n) {
+  margin-right: 0;
+}
+
+.emotion-56 .ss__facet-grid-options__option.ss__facet-grid-options__option--filtered {
+  background: #6d7175;
+  color: #ffffff;
+}
+
+.emotion-56 .ss__facet-grid-options__option:hover:not(.ss__facet-grid-options__option--filtered) {
+  cursor: pointer;
+}
+
+.emotion-56 .ss__facet-grid-options__option .ss__facet-grid-options__option__value.ss__facet-grid-options__option__value--smaller {
+  font-size: 70%;
+}
+
+@supports (display: grid) {
+  .emotion-56 {
+    display: grid;
+  }
+
+  .emotion-56 .ss__facet-grid-options__option {
+    padding: 0;
+    margin: 0;
+    width: initial;
+  }
+
+  .emotion-56::before {
+    content: "";
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1/1;
+    grid-column: 1/1;
+  }
+
+  .emotion-56>*:first-of-type {
+    grid-row: 1/1;
+    grid-column: 1/1;
+  }
+}
+
+<div
+    class="ss__sidebar emotion-0"
+  >
+    <h4
+      class="ss__sidebar__title"
+    >
+      Filters
+    </h4>
+    <div
+      class="ss__filter-summary emotion-1"
+    >
+      <div
+        class="ss__filter-summary__title"
+      >
+        Applied Filters
+      </div>
+      <a
+        aria-label="remove selected Price filter $20 to $30"
+        class="ss__filter ss__filter-summary__filter emotion-2"
+        href="/"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__label"
+          >
+            Price
+            <span
+              class="ss__filter__label__separator"
+            >
+              :
+            </span>
+          </span>
+          <span
+            class="ss__filter__value"
+          >
+            $20 to $30
+          </span>
+        </div>
+      </a>
+      <a
+        aria-label="remove selected Color filter Blue"
+        class="ss__filter ss__filter-summary__filter emotion-2"
+        href="/"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__label"
+          >
+            Color
+            <span
+              class="ss__filter__label__separator"
+            >
+              :
+            </span>
+          </span>
+          <span
+            class="ss__filter__value"
+          >
+            Blue
+          </span>
+        </div>
+      </a>
+      <a
+        aria-label="Clear All"
+        class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-2"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__value"
+          >
+            Clear All
+          </span>
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__select ss__sortby__select emotion-11"
+    >
+      <div
+        class="ss__dropdown ss__select__dropdown emotion-12"
+      >
+        <div
+          aria-expanded="false"
+          class="ss__dropdown__button"
+          role="button"
+        >
+          <div
+            class="ss__button ss__select__dropdown__button emotion-3"
+            role="button"
+          >
+            <span
+              aria-expanded="false"
+              aria-label="Sort By dropdown, 5 options , Currently selected option is Most Popular"
+              class="ss__select__label"
+              role="button"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Sort By
+              <span
+                class="ss__select__label__separator"
+              >
+                : 
+              </span>
+            </span>
+            <span
+              class="ss__select__selection"
+            >
+              Most Popular
+            </span>
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-14"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="ss__dropdown__content"
+        >
+          <ul
+            class="ss__select__select"
+          >
+            <li
+              aria-label="selected option, option 1 of 5, Most Popular"
+              class="ss__select__select__option ss__select__select__option--selected"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Most Popular
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 5, Name (A - Z)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Name (A - Z)
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 5, Price ($ - $S$)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Price ($ - $S$)
+              </span>
+            </li>
+            <li
+              aria-label=" option 4 of 5, Price ($$$ - $)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Price ($$$ - $)
+              </span>
+            </li>
+            <li
+              aria-label=" option 5 of 5, Name (Z - A)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Name (Z - A)
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__select ss__perpage__select emotion-11"
+    >
+      <div
+        class="ss__dropdown ss__select__dropdown emotion-12"
+      >
+        <div
+          aria-expanded="false"
+          class="ss__dropdown__button"
+          role="button"
+        >
+          <div
+            class="ss__button ss__select__dropdown__button emotion-3"
+            role="button"
+          >
+            <span
+              aria-expanded="false"
+              aria-label="Per Page dropdown, 3 options "
+              class="ss__select__label"
+              role="button"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Per Page
+              <span
+                class="ss__select__label__separator"
+              >
+                : 
+              </span>
+            </span>
+            <span
+              class="ss__select__selection"
+            >
+              Show 30
+            </span>
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-14"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="ss__dropdown__content"
+        >
+          <ul
+            class="ss__select__select"
+          >
+            <li
+              aria-label=" option 1 of 3, Show 24"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 24
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 3, Show 48"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 48
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 3, Show 72"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 72
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__facets emotion-19"
+    >
+      <div
+        class="ss__facet ss__facet--palette ss__facet--color_family ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Color facet dropdown 12 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Color
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-palette-options ss__facet__facet-palette-options emotion-23"
+              >
+                <a
+                  aria-label="remove selected filter Color - Blue"
+                  class="ss__facet-palette-options__option ss__facet-palette-options__option--filtered"
+                  href="/"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--blue"
+                      style="background: Blue;"
+                    >
+                      <svg
+                        class="ss__icon ss__icon--close-thin ss__facet-palette-options__icon emotion-24"
+                        viewBox="0 0 56 56"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Blue
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - White"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=White"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--white"
+                      style="background: White;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    White
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Pink"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Pink"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--pink"
+                      style="background: Pink;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Pink
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Black"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Black"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--black"
+                      style="background: Black;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Black
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Beige"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Beige"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--beige"
+                      style="background: Beige;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Beige
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Yellow"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Yellow"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--yellow"
+                      style="background: Yellow;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Yellow
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Gray"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Gray"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--gray"
+                      style="background: Gray;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Gray
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Red"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Red"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--red"
+                      style="background: Red;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Red
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Green"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Green"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--green"
+                      style="background: Green;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Green
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Brown"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Brown"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--brown"
+                      style="background: Brown;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Brown
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Purple"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Purple"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--purple"
+                      style="background: Purple;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Purple
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Color - Orange"
+                  class="ss__facet-palette-options__option"
+                  href="/?filter.color_family=Orange"
+                >
+                  <div
+                    class="ss__facet-palette-options__option__wrapper"
+                  >
+                    <div
+                      class="ss__facet-palette-options__option__palette ss__facet-palette-options__option__palette--orange"
+                      style="background: Orange;"
+                    />
+                  </div>
+                  <span
+                    class="ss__facet-palette-options__option__value"
+                  >
+                    Orange
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--brand ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Brand facet dropdown 40 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Brand
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by Brand - 5th Avenue"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=5th%20Avenue"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    5th Avenue
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - American Bazi"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=American%20Bazi"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    American Bazi
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Anzell"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Anzell"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Anzell
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (4)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Bamboo"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Bamboo"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Bamboo
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Breckelle's"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Breckelle's"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Breckelle's
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (3)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Ciffy Classified"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Ciffy%20Classified"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Ciffy Classified
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - City Classified"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=City%20Classified"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    City Classified
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Colorfully Yours"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Colorfully%20Yours"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Colorfully Yours
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Essue"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Essue"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Essue
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Fifth Avenue"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Fifth%20Avenue"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Fifth Avenue
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Fun 2 Fun"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Fun%202%20Fun"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Fun 2 Fun
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Brand - Ginger G"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.brand=Ginger%20G"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Ginger G
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div
+              class="ss__facet__show-more-less"
+              open="true"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <svg
+                class="ss__icon ss__icon--plus-thin ss__facet__show-more-less__icon emotion-4"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 31.946h-24.054v24.054h-7.893v-24.054h-24.054v-7.893h24.054v-24.054h7.893v24.054h24.054v7.893z"
+                />
+              </svg>
+              <span>
+                Show More
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--hierarchy ss__facet--ss_category_hierarchy ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Category facet dropdown 17 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Category
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-hierarchy-options ss__facet__facet-hierarchy-options emotion-45"
+              >
+                <a
+                  aria-label="filter by Category - Gifts for Her"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Gifts%20for%20Her"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Gifts for Her
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (92)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - What's New"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=What's%20New"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    What's New
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (32)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - All Jewelry"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=All%20Jewelry"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    All Jewelry
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (28)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - Shop By Trend"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Shop%20By%20Trend"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Shop By Trend
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (28)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - All Accessories"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=All%20Accessories"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    All Accessories
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (22)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - All Tops"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=All%20Tops"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    All Tops
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (8)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - Notify of Restock"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Notify%20of%20Restock"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Notify of Restock
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (8)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - Swimwear"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Swimwear"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Swimwear
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (8)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - All Bottoms"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=All%20Bottoms"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    All Bottoms
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (5)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - Going Fast"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Going%20Fast"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Going Fast
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (5)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - All Shoes"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=All%20Shoes"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    All Shoes
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (4)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Category - Back in Stock"
+                  class="ss__facet-hierarchy-options__option"
+                  href="/?filter.ss_category_hierarchy=Back%20in%20Stock"
+                >
+                  <span
+                    class="ss__facet-hierarchy-options__option__value"
+                  >
+                    Back in Stock
+                    <span
+                      class="ss__facet-hierarchy-options__option__value__count"
+                    >
+                      (4)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div
+              class="ss__facet__show-more-less"
+              open="true"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <svg
+                class="ss__icon ss__icon--plus-thin ss__facet__show-more-less__icon emotion-4"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 31.946h-24.054v24.054h-7.893v-24.054h-24.054v-7.893h24.054v-24.054h7.893v24.054h24.054v7.893z"
+                />
+              </svg>
+              <span>
+                Show More
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--on_sale ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="false"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently collapsed On Sale facet dropdown 2 options"
+              aria-level="3"
+              class="ss__facet__header"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              On Sale
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by On Sale - Yes"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.on_sale=Yes"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Yes
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (22)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by On Sale - No"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.on_sale=No"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    No
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (70)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--grid ss__facet--size ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Size facet dropdown 16 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Size
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-grid-options ss__facet__facet-grid-options emotion-56"
+              >
+                <a
+                  aria-label="filter by Size - 6"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=6"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    6
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 7"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=7"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    7
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 8"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=8"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    8
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 9"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=9"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    9
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 10"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=10"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    10
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 11"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=11"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    11
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - X-Small"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=X-Small"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    X-Small
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - Small"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=Small"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Small
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - Medium"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=Medium"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Medium
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - Large"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=Large"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Large
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - X-Large"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=X-Large"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    X-Large
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Size - 5.5"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size=5.5"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    5.5
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div
+              class="ss__facet__show-more-less"
+              open="true"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <svg
+                class="ss__icon ss__icon--plus-thin ss__facet__show-more-less__icon emotion-4"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 31.946h-24.054v24.054h-7.893v-24.054h-24.054v-7.893h24.054v-24.054h7.893v24.054h24.054v7.893z"
+                />
+              </svg>
+              <span>
+                Show More
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--material ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="false"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently collapsed Material facet dropdown 7 options"
+              aria-level="3"
+              class="ss__facet__header"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Material
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by Material - Wool"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Wool"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Wool
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Spandex"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Spandex"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Spandex
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (14)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Rubber"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Rubber"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Rubber
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Polyester"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Polyester"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Polyester
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (18)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Linen"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Linen"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Linen
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Denim"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Denim"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Denim
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (6)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Material - Cotton"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.material=Cotton"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Cotton
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (6)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--grid ss__facet--size_dress ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="false"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently collapsed Dress Size facet dropdown 5 options"
+              aria-level="3"
+              class="ss__facet__header"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Dress Size
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+            >
+              <div
+                class="ss__facet-grid-options ss__facet__facet-grid-options emotion-56"
+              >
+                <a
+                  aria-label="filter by Dress Size - Large"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_dress=Large"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Large
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Dress Size - Medium"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_dress=Medium"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Medium
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Dress Size - Small"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_dress=Small"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    Small
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Dress Size - X-Large"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_dress=X-Large"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    X-Large
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Dress Size - X-Small"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_dress=X-Small"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+                  >
+                    X-Small
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--season ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="false"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently collapsed Season facet dropdown 3 options"
+              aria-level="3"
+              class="ss__facet__header"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Season
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by Season - Summer"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.season=Summer"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Summer
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (20)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Season - Spring"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.season=Spring"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Spring
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (5)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Season - Fall"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.season=Fall"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Fall
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--pattern ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="false"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently collapsed Pattern facet dropdown 3 options"
+              aria-level="3"
+              class="ss__facet__header"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Pattern
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by Pattern - Print"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.pattern=Print"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Print
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (7)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Pattern - Stripe"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.pattern=Stripe"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Stripe
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (2)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Pattern - Plaid"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.pattern=Plaid"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Plaid
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--grid ss__facet--size_footwear ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Shoe Size facet dropdown 10 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Shoe Size
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-grid-options ss__facet__facet-grid-options emotion-56"
+              >
+                <a
+                  aria-label="filter by Shoe Size - 5.5"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=5.5"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    5.5
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 6"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=6"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    6
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 6.5"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=6.5"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    6.5
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 7"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=7"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    7
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 7.5"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=7.5"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    7.5
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 8"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=8"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    8
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 8.5"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=8.5"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    8.5
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 9"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=9"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    9
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 10"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=10"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    10
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Shoe Size - 11"
+                  class="ss__facet-grid-options__option"
+                  href="/?filter.size_footwear=11"
+                >
+                  <span
+                    class="ss__facet-grid-options__option__value"
+                  >
+                    11
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ss__facet ss__facet--list ss__facet--collection ss__facets__facet emotion-20"
+      >
+        <div
+          class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-21"
+        >
+          <div
+            aria-expanded="true"
+            class="ss__dropdown__button"
+            role="button"
+          >
+            <div
+              aria-label="currently open Collection facet dropdown 6 options"
+              aria-level="3"
+              class="ss__facet__header"
+              open="true"
+              role="heading"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Collection
+              <svg
+                class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-22"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="ss__dropdown__content"
+          >
+            <div
+              class="ss__facet__options ss__facets__facet"
+              open="true"
+            >
+              <div
+                class="ss__facet-list-options ss__facet__facet-list-options emotion-28"
+              >
+                <a
+                  aria-label="filter by Collection - Balancing Act"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=Balancing%20Act"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Balancing Act
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Collection - Basics Of Love"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=Basics%20Of%20Love"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Basics Of Love
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Collection - Bazaar Beauty"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=Bazaar%20Beauty"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Bazaar Beauty
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Collection - Bold Streak"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=Bold%20Streak"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Bold Streak
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Collection - Chart Topping"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=Chart%20Topping"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    Chart Topping
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (4)
+                    </span>
+                  </span>
+                </a>
+                <a
+                  aria-label="filter by Collection - City Of Stars"
+                  class="ss__facet-list-options__option"
+                  href="/?filter.collection=City%20Of%20Stars"
+                >
+                  <span
+                    aria-label=" unchecked checkbox"
+                    class="ss__checkbox ss__facet-list-options__checkbox emotion-29"
+                    role="checkbox"
+                  >
+                    <span
+                      class="ss__checkbox__empty"
+                    />
+                  </span>
+                  <span
+                    class="ss__facet-list-options__option__value"
+                  >
+                    City Of Stars
+                    <span
+                      class="ss__facet-list-options__option__value__count"
+                    >
+                      (1)
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

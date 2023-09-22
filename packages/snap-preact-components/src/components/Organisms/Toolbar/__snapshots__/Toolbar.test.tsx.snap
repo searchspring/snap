@@ -5671,3 +5671,616 @@ exports[`Results Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Results Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  margin: 10px 0 30px 0;
+}
+
+.emotion-1 .ss__filter-summary__filter {
+  margin: 5px 10px 5px 0;
+}
+
+.emotion-1 .ss__filter-summary__filter .ss__filter__button {
+  background-color: #6d7175;
+  color: #ffffff;
+  border: none;
+}
+
+.emotion-1 .ss__filter-summary__filter .ss__filter__button .ss__filter__button__icon {
+  fill: #ffffff;
+}
+
+.emotion-1 .ss__filter-summary__title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #6d7175;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-2 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-2 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-3:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-3.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-3.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-4 {
+  fill: #6d7175;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+.emotion-14 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-14.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-14 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-14 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-14 .ss__dropdown .ss__select__dropdown__button {
+  border: none;
+  padding: 6px 30px;
+  font-weight: bold;
+}
+
+.emotion-14 .ss__dropdown .ss__select__dropdown__button:hover {
+  background-color: initial;
+  color: #6d7175;
+}
+
+.emotion-14 .ss__dropdown .ss__select__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transition: -webkit-transform 0.25s ease 0s;
+  transition: transform 0.25s ease 0s;
+}
+
+.emotion-14 .ss__dropdown.ss__dropdown--open .ss__dropdown__button {
+  box-shadow: 0 6px 12px 1px #0000001f;
+}
+
+.emotion-14 .ss__dropdown.ss__dropdown--open .ss__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-14 .ss__dropdown.ss__dropdown--open .ss__dropdown__content {
+  background-color: #fff;
+  box-shadow: 0 6px 12px 1px #0000001f;
+  z-index: 10000;
+}
+
+.emotion-14 .ss__select__select {
+  position: relative;
+  padding: 0;
+  margin: -1px 0 0 0;
+}
+
+.emotion-14 .ss__select__select .ss__select__select__option {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 30px;
+  color: #6d7175;
+}
+
+.emotion-14 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-14 .ss__select__select .ss__select__select__option:hover {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-15 {
+  position: relative;
+}
+
+.emotion-15.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-15 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-15 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-17 {
+  fill: #6d7175;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+.emotion-22 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+  color: #6d7175;
+}
+
+.emotion-22 .ss__pagination__page.ss__pagination__page--active {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="ss__toolbar emotion-0"
+  >
+    <div
+      class="ss__filter-summary ss__toolbar__filter-summary emotion-1"
+    >
+      <div
+        class="ss__filter-summary__title"
+      >
+        Applied Filters
+      </div>
+      <a
+        aria-label="remove selected Dress Size filter Large"
+        class="ss__filter ss__filter-summary__filter emotion-2"
+        href="/"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__label"
+          >
+            Dress Size
+            <span
+              class="ss__filter__label__separator"
+            >
+              :
+            </span>
+          </span>
+          <span
+            class="ss__filter__value"
+          >
+            Large
+          </span>
+        </div>
+      </a>
+      <a
+        aria-label="remove selected Price filter $20.00 - $200.00"
+        class="ss__filter ss__filter-summary__filter emotion-2"
+        href="/"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__label"
+          >
+            Price
+            <span
+              class="ss__filter__label__separator"
+            >
+              :
+            </span>
+          </span>
+          <span
+            class="ss__filter__value"
+          >
+            $20.00 - $200.00
+          </span>
+        </div>
+      </a>
+      <a
+        aria-label="remove selected Color filter Red"
+        class="ss__filter ss__filter-summary__filter emotion-2"
+        href="/"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__label"
+          >
+            Color
+            <span
+              class="ss__filter__label__separator"
+            >
+              :
+            </span>
+          </span>
+          <span
+            class="ss__filter__value"
+          >
+            Red
+          </span>
+        </div>
+      </a>
+      <a
+        aria-label="Clear All"
+        class="ss__filter ss__filter-summary__filter ss__filter-summary__clear-all emotion-2"
+      >
+        <div
+          class="ss__button ss__filter__button emotion-3"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-4"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+            />
+          </svg>
+          <span
+            class="ss__filter__value"
+          >
+            Clear All
+          </span>
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__select ss__sortby__select ss__toolbar__sort-by emotion-14"
+    >
+      <div
+        class="ss__dropdown ss__select__dropdown emotion-15"
+      >
+        <div
+          aria-expanded="false"
+          class="ss__dropdown__button"
+          role="button"
+        >
+          <div
+            class="ss__button ss__select__dropdown__button emotion-3"
+            role="button"
+          >
+            <span
+              aria-expanded="false"
+              aria-label="Sort By dropdown, 5 options , Currently selected option is Most Popular"
+              class="ss__select__label"
+              role="button"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Sort By
+              <span
+                class="ss__select__label__separator"
+              >
+                : 
+              </span>
+            </span>
+            <span
+              class="ss__select__selection"
+            >
+              Most Popular
+            </span>
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-17"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="ss__dropdown__content"
+        >
+          <ul
+            class="ss__select__select"
+          >
+            <li
+              aria-label="selected option, option 1 of 5, Most Popular"
+              class="ss__select__select__option ss__select__select__option--selected"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Most Popular
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 5, Name (A - Z)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Name (A - Z)
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 5, Price ($ - $S$)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Price ($ - $S$)
+              </span>
+            </li>
+            <li
+              aria-label=" option 4 of 5, Price ($$$ - $)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Price ($$$ - $)
+              </span>
+            </li>
+            <li
+              aria-label=" option 5 of 5, Name (Z - A)"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Name (Z - A)
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__select ss__perpage__select ss__toolbar__per-page emotion-14"
+    >
+      <div
+        class="ss__dropdown ss__select__dropdown emotion-15"
+      >
+        <div
+          aria-expanded="false"
+          class="ss__dropdown__button"
+          role="button"
+        >
+          <div
+            class="ss__button ss__select__dropdown__button emotion-3"
+            role="button"
+          >
+            <span
+              aria-expanded="false"
+              aria-label="Per Page dropdown, 3 options "
+              class="ss__select__label"
+              role="button"
+              ssa11y="true"
+              tabindex="0"
+            >
+              Per Page
+              <span
+                class="ss__select__label__separator"
+              >
+                : 
+              </span>
+            </span>
+            <span
+              class="ss__select__selection"
+            >
+              Show 30
+            </span>
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-17"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="ss__dropdown__content"
+        >
+          <ul
+            class="ss__select__select"
+          >
+            <li
+              aria-label=" option 1 of 3, Show 24"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 24
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 3, Show 48"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 48
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 3, Show 72"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Show 72
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ss__pagination ss__toolbar__pagination emotion-22"
+    >
+      <nav
+        aria-label="Pagination"
+        role="navigation"
+      >
+        <span
+          aria-current="true"
+          aria-label="go to page 1"
+          class="ss__pagination__page ss__pagination__page--active"
+        >
+          1
+        </span>
+        <a
+          aria-label="go to page 2"
+          class="ss__pagination__page"
+          href="/?page=2"
+        >
+          2
+        </a>
+        <a
+          aria-label="go to page 3"
+          class="ss__pagination__page"
+          href="/?page=3"
+        >
+          3
+        </a>
+        <a
+          aria-label="go to page 4"
+          class="ss__pagination__page"
+          href="/?page=4"
+        >
+          4
+        </a>
+        <a
+          aria-label="go to page 5"
+          class="ss__pagination__page"
+          href="/?page=5"
+        >
+          5
+        </a>
+        <span>
+          …
+        </span>
+        <a
+          aria-label="go to last page 7"
+          class="ss__pagination__page ss__pagination__page--last"
+          href="/?page=7"
+        >
+          7
+        </a>
+        <a
+          aria-label="go to next page"
+          class="ss__pagination__page ss__pagination__page--next"
+          href="/?page=2"
+        >
+          Next »
+        </a>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;

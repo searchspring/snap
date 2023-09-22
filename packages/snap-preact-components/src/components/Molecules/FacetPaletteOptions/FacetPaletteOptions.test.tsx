@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { FacetPaletteOptions } from './FacetPaletteOptions';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -16,6 +17,14 @@ const paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValue
 	.pop()!;
 
 describe('FacetPaletteOptions Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetPaletteOptions theme={theme} values={paletteFacetMock.values as FacetValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			facetPaletteOptions: {

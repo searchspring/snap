@@ -5,8 +5,16 @@ import userEvent from '@testing-library/user-event';
 
 import { Button } from './Button';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Button Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Button theme={theme} content={'hello world'} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	describe('styled', () => {
 		it('does not render without children or content props', () => {
 			const rendered = render(<Button />);

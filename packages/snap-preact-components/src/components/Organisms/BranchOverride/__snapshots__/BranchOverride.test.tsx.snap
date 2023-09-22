@@ -2453,3 +2453,167 @@ exports[`BranchOverride Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`BranchOverride Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 360px;
+  height: 120px;
+  overflow: hidden;
+  font-size: 14px;
+  position: fixed;
+  z-index: 9999;
+  cursor: auto;
+  bottom: 50px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: #515151;
+  border: 1px solid #ccc;
+  border-right: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: rgba(81, 81, 81, 0.5) 1px 1px 3px 0px;
+  -webkit-transition: height ease 0.2s,right ease 0.5s 0.2s;
+  transition: height ease 0.2s,right ease 0.5s 0.2s;
+}
+
+.emotion-0.ss__branch-override--collapsed {
+  -webkit-transition: height ease 0.5s 0.5s,right ease 0.5s;
+  transition: height ease 0.5s 0.5s,right ease 0.5s;
+  right: -316px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__branch-override__top {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.emotion-0 .ss__branch-override__top .ss__branch-override__top__logo {
+  display: inline-block;
+  height: 30px;
+  max-height: 30px;
+  vertical-align: middle;
+}
+
+.emotion-0 .ss__branch-override__top .ss__branch-override__top__collapse {
+  display: inline-block;
+  float: right;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.emotion-0 .ss__branch-override__top .ss__branch-override__top__button {
+  border-radius: 5px;
+  padding: 6px;
+  height: 100%;
+  line-height: 14px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 10px;
+  border: 1px solid #515151;
+  color: #515151;
+  float: right;
+  margin-right: 14px;
+}
+
+.emotion-0 .ss__branch-override__bottom {
+  padding: 10px 15px;
+  font-size: 12px;
+}
+
+.emotion-0 .ss__branch-override__bottom .ss__branch-override__bottom__left {
+  font-weight: bold;
+  font-style: italic;
+  color: #3a23ad;
+  font-size: 14px;
+  line-height: 20px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emotion-0 .ss__branch-override__bottom .ss__branch-override__bottom__left svg {
+  margin-right: 10px;
+}
+
+.emotion-0 .ss__branch-override__bottom .ss__branch-override__bottom__right {
+  float: right;
+  font-style: italic;
+  color: #3a23ad;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.emotion-0 .ss__branch-override__bottom .ss__branch-override__bottom__content {
+  margin-top: 10px;
+}
+
+.emotion-1 {
+  fill: #515151;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+<div
+    class="ss__branch-override ss__branch-override--light emotion-0"
+  >
+    <div
+      class="ss__branch-override__top"
+    >
+      <img
+        class="ss__branch-override__top__logo"
+        src="https://snapui.searchspring.io/searchspring.svg"
+      />
+      <div
+        class="ss__branch-override__top__collapse"
+      >
+        <svg
+          class="ss__icon ss__icon--close-thin ss__branch-override__bottom__left__icon emotion-1"
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+          />
+        </svg>
+      </div>
+      <div
+        class="ss__branch-override__top__button"
+      >
+        STOP PREVIEW
+      </div>
+    </div>
+    <div
+      class="ss__branch-override__bottom"
+    >
+      <span
+        class="ss__branch-override__bottom__left"
+      >
+        branch
+      </span>
+      <span
+        class="ss__branch-override__bottom__right"
+      >
+        07 Jan 2022 22:42:39 GMT
+      </span>
+      <div
+        class="ss__branch-override__bottom__content"
+      >
+        Preview functionality may differ from production.
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

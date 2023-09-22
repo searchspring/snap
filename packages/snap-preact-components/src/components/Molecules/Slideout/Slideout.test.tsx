@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Slideout, SlideDirectionType } from './Slideout';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Slideout Component', () => {
 	beforeEach(() => {
@@ -30,6 +31,14 @@ describe('Slideout Component', () => {
 			},
 		},
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Slideout theme={theme} active={true} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders and is visible', () => {
 		const args = {

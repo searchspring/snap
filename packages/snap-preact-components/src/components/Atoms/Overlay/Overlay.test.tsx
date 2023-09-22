@@ -5,8 +5,17 @@ import userEvent from '@testing-library/user-event';
 
 import { Overlay } from './Overlay';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Overlay Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Overlay theme={theme} active={true} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			overlay: {

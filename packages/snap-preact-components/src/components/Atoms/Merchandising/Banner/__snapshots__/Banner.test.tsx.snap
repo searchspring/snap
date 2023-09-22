@@ -259,3 +259,36 @@ exports[`Merchandising Banner Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Merchandising Banner Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;

@@ -1926,3 +1926,50 @@ exports[`Dropdown Component renders with className prop 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Dropdown Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-0.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-0 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+<div
+    class="ss__dropdown emotion-0"
+  >
+    <div
+      aria-expanded="false"
+      class="ss__dropdown__button"
+      role="button"
+      ssa11y="true"
+      tabindex="0"
+    >
+      open me
+    </div>
+    <div
+      class="ss__dropdown__content"
+    >
+      content
+    </div>
+  </div>
+</DocumentFragment>
+`;

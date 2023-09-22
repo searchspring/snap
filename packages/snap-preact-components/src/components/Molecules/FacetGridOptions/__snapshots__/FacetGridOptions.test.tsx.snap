@@ -1359,6 +1359,189 @@ exports[`FacetGridOptions Component renders with classname 1`] = `
 </DocumentFragment>
 `;
 
+exports[`FacetGridOptions Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(5, 1fr);
+  color: #6d7175;
+  gap: 5px;
+  grid-auto-rows: 1fr;
+}
+
+.emotion-0 .ss__facet-grid-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+  text-align: center;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding: 1em 0;
+  width: calc(100% / 5 - 8px);
+  margin: 0 5px 5px 0;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__facet-grid-options__option:nth-of-type(5n) {
+  margin-right: 0;
+}
+
+.emotion-0 .ss__facet-grid-options__option.ss__facet-grid-options__option--filtered {
+  background: #6d7175;
+  color: #ffffff;
+}
+
+.emotion-0 .ss__facet-grid-options__option:hover:not(.ss__facet-grid-options__option--filtered) {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-grid-options__option .ss__facet-grid-options__option__value.ss__facet-grid-options__option__value--smaller {
+  font-size: 70%;
+}
+
+@supports (display: grid) {
+  .emotion-0 {
+    display: grid;
+  }
+
+  .emotion-0 .ss__facet-grid-options__option {
+    padding: 0;
+    margin: 0;
+    width: initial;
+  }
+
+  .emotion-0::before {
+    content: "";
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1/1;
+    grid-column: 1/1;
+  }
+
+  .emotion-0>*:first-of-type {
+    grid-row: 1/1;
+    grid-column: 1/1;
+  }
+}
+
+<div
+    class="ss__facet-grid-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1X"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value"
+      >
+        1X
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2X"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value"
+      >
+        2X
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3X"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value"
+      >
+        3X
+      </span>
+    </a>
+    <a
+      aria-label="filter by L/XL"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        L/XL
+      </span>
+    </a>
+    <a
+      aria-label="filter by Large"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        Large
+      </span>
+    </a>
+    <a
+      aria-label="filter by Medium"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        Medium
+      </span>
+    </a>
+    <a
+      aria-label="filter by Small"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        Small
+      </span>
+    </a>
+    <a
+      aria-label="filter by X-Large"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        X-Large
+      </span>
+    </a>
+    <a
+      aria-label="filter by X-Small"
+      class="ss__facet-grid-options__option"
+    >
+      <span
+        class="ss__facet-grid-options__option__value ss__facet-grid-options__option__value--smaller"
+      >
+        X-Small
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`FacetGridOptions theming works is theme prop overrides ThemeProvider 1`] = `
 <DocumentFragment>
   .emotion-0 {

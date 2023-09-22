@@ -899,3 +899,117 @@ exports[`Error Handler Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Error Handler Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  border-radius: 2px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  border-left: 4px solid;
+}
+
+.emotion-0 .ss__error-handler__message {
+  padding: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__error-handler__message .ss__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__error-handler__button {
+  background-color: white;
+  color: inherit;
+  border-color: black;
+  width: 150px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 5px 10px;
+}
+
+.emotion-0 .ss__error-handler__button .ss__icon {
+  margin-right: 5px;
+}
+
+.emotion-0.ss__error-handler--error {
+  background-color: b4b4b4;
+  border-left-color: #ff0000;
+}
+
+.emotion-0.ss__error-handler--error .ss__error-handler__message .ss__icon {
+  fill: #ff0000;
+}
+
+.emotion-0.ss__error-handler--warning {
+  background-color: b4b4b4;
+  border-left-color: #ffff00;
+}
+
+.emotion-0.ss__error-handler--warning .ss__icon {
+  fill: #ffff00;
+}
+
+.emotion-0.ss__error-handler--warning .ss__error-handler__button {
+  border-color: #ffff00;
+}
+
+.emotion-0.ss__error-handler--info {
+  background-color: b4b4bf;
+  border-left-color: #0000ff;
+}
+
+.emotion-0.ss__error-handler--info .ss__error-handler__message .ss__icon {
+  fill: #0000ff;
+}
+
+.emotion-1 {
+  fill: #6d7175;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+<div
+    class="ss__error-handler ss__error-handler--warning emotion-0"
+  >
+    <div
+      class="ss__error-handler__message"
+    >
+      <svg
+        class="ss__icon ss__icon--warn ss__error-handler__icon emotion-1"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M31.2981 5.28228C29.8323 2.74341 26.1677 2.74341 24.7019 5.28228L0.515899 47.1737C-0.94992 49.7126 0.88235 52.8861 3.81399 52.8861H52.186C55.1176 52.8861 56.9499 49.7126 55.4841 47.1737L31.2981 5.28228ZM25.2229 35.0037L24.8264 18.837C24.8264 18.655 24.8923 18.4729 25.047 18.3686C25.1794 18.2387 25.3776 18.1601 25.5759 18.1601H30.4241C30.6223 18.1601 30.8206 18.238 30.953 18.3686C31.1071 18.4729 31.1736 18.655 31.1736 18.837L30.7988 35.0037C30.7988 35.3679 30.4682 35.6542 30.0493 35.6542H25.9724C25.5759 35.6542 25.2453 35.3679 25.2229 35.0037ZM25.1788 43.9593V39.0131C25.1788 38.5447 25.487 38.1541 25.8618 38.1541H30.0929C30.4894 38.1541 30.82 38.5447 30.82 39.0131V43.9593C30.82 44.4277 30.4894 44.8183 30.0929 44.8183H25.8618C25.487 44.8183 25.1788 44.4277 25.1788 43.9593Z"
+        />
+      </svg>
+      <b>
+        Warning: 
+      </b>
+      hello
+    </div>
+  </div>
+</DocumentFragment>
+`;

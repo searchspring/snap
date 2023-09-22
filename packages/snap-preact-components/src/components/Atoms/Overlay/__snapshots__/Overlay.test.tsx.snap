@@ -241,3 +241,29 @@ exports[`Overlay Component renders 1`] = `
   />
 </DocumentFragment>
 `;
+
+exports[`Overlay Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active emotion-0"
+  />
+</DocumentFragment>
+`;

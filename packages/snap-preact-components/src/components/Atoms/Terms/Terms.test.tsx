@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { v4 as uuidv4 } from 'uuid';
 import { render, waitFor } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { Terms } from './Terms';
 import { AutocompleteController, AutocompleteControllerConfig } from '@searchspring/snap-controller';
@@ -92,6 +93,14 @@ describe('Terms Component', () => {
 	beforeEach(async () => {
 		controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
+	});
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Terms theme={theme} controller={controller} terms={mockTerms} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
 	});
 
 	it('renders', async () => {

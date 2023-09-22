@@ -5,8 +5,16 @@ import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Dropdown Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Dropdown theme={theme} button={'open me'} content={'content'} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('renders', () => {
 		const rendered = render(<Dropdown button={'open me'} />);
 

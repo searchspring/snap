@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { InlineBanner } from './InlineBanner';
 import { ThemeProvider } from '../../../../providers';
+import themes from '../../../../themes';
 import type { Banner } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -15,6 +16,14 @@ mockData.updateConfig({ search: 'inlineBanners' });
 const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Merchandising Inline Banner Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<InlineBanner theme={theme} banner={searchResponse.merchandising?.content?.inline![0] as Banner} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders type:inline banner', () => {
 		const rendered = render(<InlineBanner banner={searchResponse.merchandising?.content?.inline![0] as Banner} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');

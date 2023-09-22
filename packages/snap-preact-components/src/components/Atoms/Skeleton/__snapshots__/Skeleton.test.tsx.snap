@@ -50,6 +50,22 @@ exports[`Skeleton Component can change the backgroundColor color 1`] = `
   }
 }
 
+@keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
 .emotion-0 {
   width: 300px;
   height: 400px;
@@ -93,6 +109,22 @@ exports[`Skeleton Component can change the backgroundColor color 1`] = `
 exports[`Skeleton Component can change to a circle 1`] = `
 <DocumentFragment>
   @keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+@keyframes animation-0 {
   from {
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
@@ -238,6 +270,22 @@ exports[`Skeleton Component has correct demmensions 1`] = `
   }
 }
 
+@keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
 .emotion-0 {
   width: 300px;
   height: 400px;
@@ -281,6 +329,22 @@ exports[`Skeleton Component has correct demmensions 1`] = `
 exports[`Skeleton Component renders 1`] = `
 <DocumentFragment>
   @keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+@keyframes animation-0 {
   from {
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
@@ -418,6 +482,22 @@ exports[`Skeleton Component renders with classname 1`] = `
   }
 }
 
+@keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
 .emotion-0 {
   width: 300px;
   height: 300px;
@@ -454,6 +534,64 @@ exports[`Skeleton Component renders with classname 1`] = `
 
 <div
     class="ss__skeleton classy emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Skeleton Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  @keyframes animation-0 {
+  from {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+  to {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+.emotion-0 {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  background-color: red;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.emotion-0:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(90deg, red, #f5f5f5, red);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-animation: animation-0 1.5s linear infinite;
+  animation: animation-0 1.5s linear infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+}
+
+<div
+    class="ss__skeleton emotion-0"
   />
 </DocumentFragment>
 `;

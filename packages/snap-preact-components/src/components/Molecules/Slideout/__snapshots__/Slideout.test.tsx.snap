@@ -989,3 +989,56 @@ exports[`Slideout Component toggles the "ss__slideout--active" class when using 
   />
 </DocumentFragment>
 `;
+
+exports[`Slideout Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__slideout__button"
+  >
+    click me
+  </div>
+  .emotion-0 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: 0;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+<div
+    class="ss__slideout ss__slideout--active emotion-0"
+  />
+  .emotion-0 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-0.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__overlay ss__overlay--active ss__slideout__overlay emotion-0"
+  />
+</DocumentFragment>
+`;

@@ -4,6 +4,7 @@ import { render, waitFor } from '@testing-library/preact';
 
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -57,6 +58,37 @@ describe('Recommendation Component', () => {
 		// @ts-ignore
 		window.IntersectionObserver.mockReset();
 	});
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, async () => {
+			const theme = themes[themeName as keyof typeof themes];
+
+			const controller = new RecommendationController(recommendConfig, {
+				client: new MockClient(globals, {}),
+				store: new RecommendationStore(recommendConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals, { mode: 'development' }),
+			});
+
+			await controller.search();
+
+			const rendered = render(
+				<Recommendation controller={controller} theme={theme}>
+					{controller.store.results.map((result, idx) => (
+						<div className="result" key={idx}>
+							{result.mappings.core?.name}
+						</div>
+					))}
+				</Recommendation>
+			);
+			rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders with results', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),

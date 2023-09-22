@@ -11298,3 +11298,309 @@ exports[`Facet Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Facet Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+
+.emotion-0 .ss__facet__dropdown .ss__facet__dropdown__icon {
+  -webkit-transition: -webkit-transform ease .5s;
+  transition: transform ease .5s;
+}
+
+.emotion-0 .ss__facet__dropdown.ss__dropdown--open .ss__facet__dropdown__icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-0 .ss__facet__header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.emotion-0 .ss__facet__options {
+  margin-top: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.emotion-0 .ss__facet__options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.emotion-0 .ss__facet__options::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+.emotion-0 .ss__facet__options::-webkit-scrollbar-thumb {
+  background: #6d7175;
+}
+
+.emotion-0 .ss__facet__show-more-less {
+  display: block;
+  margin: 8px;
+  cursor: pointer;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__facet__show-more-less .ss__icon {
+  margin-right: 8px;
+}
+
+.emotion-0 .ss__search-input {
+  margin: 16px 0 0 0;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: default;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  fill: #6d7175;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.emotion-3 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 5px 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+}
+
+.emotion-3 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-3 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-3 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-3 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-4 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-4.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-4 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+}
+
+<div
+    class="ss__facet ss__facet--undefined ss__facet--season emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__dropdown--open ss__facet__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          aria-label="currently open undefined facet dropdown 4 options"
+          aria-level="3"
+          class="ss__facet__header"
+          open="true"
+          role="heading"
+          ssa11y="true"
+          tabindex="0"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__facet__dropdown__icon emotion-2"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <div
+          class="ss__facet__options"
+          open="true"
+        >
+          <div
+            class="ss__facet-list-options ss__facet__facet-list-options emotion-3"
+          >
+            <a
+              aria-label="filter by Summer"
+              class="ss__facet-list-options__option"
+            >
+              <span
+                aria-label=" unchecked checkbox"
+                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+                role="checkbox"
+              >
+                <span
+                  class="ss__checkbox__empty"
+                />
+              </span>
+              <span
+                class="ss__facet-list-options__option__value"
+              >
+                Summer
+                <span
+                  class="ss__facet-list-options__option__value__count"
+                >
+                  (577)
+                </span>
+              </span>
+            </a>
+            <a
+              aria-label="filter by Spring"
+              class="ss__facet-list-options__option"
+            >
+              <span
+                aria-label=" unchecked checkbox"
+                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+                role="checkbox"
+              >
+                <span
+                  class="ss__checkbox__empty"
+                />
+              </span>
+              <span
+                class="ss__facet-list-options__option__value"
+              >
+                Spring
+                <span
+                  class="ss__facet-list-options__option__value__count"
+                >
+                  (444)
+                </span>
+              </span>
+            </a>
+            <a
+              aria-label="filter by Fall"
+              class="ss__facet-list-options__option"
+            >
+              <span
+                aria-label=" unchecked checkbox"
+                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+                role="checkbox"
+              >
+                <span
+                  class="ss__checkbox__empty"
+                />
+              </span>
+              <span
+                class="ss__facet-list-options__option__value"
+              >
+                Fall
+                <span
+                  class="ss__facet-list-options__option__value__count"
+                >
+                  (252)
+                </span>
+              </span>
+            </a>
+            <a
+              aria-label="filter by Winter"
+              class="ss__facet-list-options__option"
+            >
+              <span
+                aria-label=" unchecked checkbox"
+                class="ss__checkbox ss__facet-list-options__checkbox emotion-4"
+                role="checkbox"
+              >
+                <span
+                  class="ss__checkbox__empty"
+                />
+              </span>
+              <span
+                class="ss__facet-list-options__option__value"
+              >
+                Winter
+                <span
+                  class="ss__facet-list-options__option__value__count"
+                >
+                  (39)
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

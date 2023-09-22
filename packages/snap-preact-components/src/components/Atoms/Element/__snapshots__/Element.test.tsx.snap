@@ -106,3 +106,17 @@ exports[`Element Component renders with className prop 1`] = `
   />
 </DocumentFragment>
 `;
+
+exports[`Element Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  color: #6d7175;
+}
+
+<div
+    class="ss__element emotion-0"
+  >
+    some text
+  </div>
+</DocumentFragment>
+`;

@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, RenderResult } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
 import type { FacetHierarchyValue } from '@searchspring/snap-store-mobx';
@@ -117,6 +118,13 @@ describe('FacetHierarchyOptions generic props work', () => {
 });
 
 describe('FacetHierarchyOptions theming works', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetHierarchyOptions theme={theme} values={hierarchyFacetMock.values as FacetHierarchyValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {

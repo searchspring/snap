@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, RenderResult } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { FacetListOptions } from './FacetListOptions';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
@@ -109,6 +110,14 @@ describe('FacetListOptions generic props work', () => {
 });
 
 describe('FacetListOptions theming works', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetListOptions theme={theme} values={listFacetMock.values as FacetValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {

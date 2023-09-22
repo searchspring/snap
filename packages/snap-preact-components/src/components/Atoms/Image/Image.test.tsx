@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { render, waitFor } from '@testing-library/preact';
 
 import { Image, FALLBACK_IMAGE_URL } from './Image';
@@ -18,6 +19,14 @@ describe('image Component', () => {
 	badResult!.imageUrl = '';
 	badResult!.thumbnailImageUrl = '';
 	const rolloverImage = searchResponse.results![2].mappings?.core?.thumbnailImageUrl;
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Image theme={theme} alt={result?.name!} src={result?.thumbnailImageUrl!} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders', () => {
 		const rendered = render(<Image alt={result?.name!} src={result?.thumbnailImageUrl!} />);

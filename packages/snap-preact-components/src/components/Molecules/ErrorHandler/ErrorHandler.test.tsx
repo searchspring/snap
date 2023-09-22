@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { ErrorHandler } from './ErrorHandler';
 
 describe('Error Handler Component', () => {
@@ -12,6 +13,14 @@ describe('Error Handler Component', () => {
 		type: ErrorType.WARNING,
 		message: 'hello',
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<ErrorHandler theme={theme} error={error} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders using custom error', () => {
 		const rendered = render(<ErrorHandler error={error} />);

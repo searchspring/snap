@@ -82842,3 +82842,133 @@ exports[`MobileSidebar Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`MobileSidebar Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__mobile-sidebar__title {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-0 .ss__mobile-sidebar__title .ss__icon {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__mobile-sidebar__slideout__button {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__mobile-sidebar__cta-wrapper {
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  display: block;
+  position: fixed;
+  -webkit-transition: left 0.25s;
+  transition: left 0.25s;
+  left: -300px;
+  right: initial;
+  bottom: initial;
+  top: 0;
+  height: 100%;
+  z-index: 10004;
+  width: 90%;
+  max-width: 300px;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.emotion-3 {
+  -webkit-transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  transition: background 0.25s ease 0s,left 0s ease 0.25s;
+  position: fixed;
+  z-index: 10003;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+}
+
+.emotion-3.ss__overlay--active {
+  -webkit-transition: background 0.25s ease,left 0s ease;
+  transition: background 0.25s ease,left 0s ease;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+}
+
+<div
+    class="ss__mobile-sidebar emotion-0"
+  >
+    <div
+      class="ss__slideout__button"
+    >
+      <div
+        class="ss__button ss__mobile-sidebar__slideout__button emotion-1"
+        role="button"
+        ssa11y="true"
+        tabindex="0"
+      >
+        Filters
+      </div>
+    </div>
+    <div
+      class="ss__slideout ss__mobile-sidebar__slideout emotion-2"
+    />
+    <div
+      class="ss__overlay ss__slideout__overlay emotion-3"
+    />
+  </div>
+</DocumentFragment>
+`;

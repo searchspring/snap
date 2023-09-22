@@ -865,6 +865,103 @@ exports[`Filter Component renders with specified icon 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Filter Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  fill: #6d7175;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected Dress Size filter Large"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        Dress Size
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        Large
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
 exports[`Filter theming works is theme prop overrides ThemeProvider 1`] = `
 <DocumentFragment>
   .emotion-0 {

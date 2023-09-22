@@ -2,6 +2,7 @@ import { h } from 'preact';
 
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { FacetGridOptions } from './FacetGridOptions';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
@@ -17,6 +18,14 @@ const gridFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAll
 describe('FacetGridOptions Component', () => {
 	let gridComponent;
 	let gridElement;
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetGridOptions theme={theme} values={gridFacetMock!.values as FacetValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders', () => {
 		gridComponent = render(<FacetGridOptions values={gridFacetMock!.values as FacetValue[]} />);

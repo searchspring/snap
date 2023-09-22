@@ -2,7 +2,8 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { Results } from './Results';
 import { ResultsLayout as Layout } from '../../../types';
-import { Theme, ThemeProvider } from '../../../providers';
+import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import userEvent from '@testing-library/user-event';
 import type { SearchResultStore } from '@searchspring/snap-store-mobx';
 
@@ -31,6 +32,14 @@ describe('Results Component', () => {
 			},
 		},
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Results theme={theme} layout={Layout.GRID} results={mockResults} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders grid view', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);

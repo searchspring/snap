@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { Checkbox } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 const globalTheme = {
 	components: {
@@ -30,6 +31,14 @@ const propTheme = {
 };
 
 describe('Checkbox Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Checkbox theme={theme} checked={true} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	describe('styled', () => {
 		it('renders', () => {
 			const rendered = render(<Checkbox />);

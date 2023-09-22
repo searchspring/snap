@@ -3,9 +3,18 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { SearchInput } from './SearchInput';
 
 describe('SearchInput Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<SearchInput theme={theme} placeholder={'hello world'} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			searchInput: {

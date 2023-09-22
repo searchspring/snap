@@ -1,13 +1,21 @@
 import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { SearchHeader } from './SearchHeader';
-import { Theme, ThemeProvider } from '../../../providers';
-import type { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { MockData } from '@searchspring/snap-shared';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
 describe('Search Header Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<SearchHeader theme={theme} paginationStore={paginationStore} queryStore={queryStore} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const services = {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};

@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { Carousel } from './Carousel';
 import { Result } from '../../Molecules/Result';
 import userEvent from '@testing-library/user-event';
@@ -21,6 +22,23 @@ function replaceSwiperId(html: string) {
 }
 
 describe('Carousel Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(
+				<Carousel theme={theme}>
+					{searchResponse.results!.map((result, idx) => (
+						<div className={'findMe'} key={idx}>
+							<Result result={result as Product} />
+						</div>
+					))}
+				</Carousel>
+			);
+			rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			carousel: {

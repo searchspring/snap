@@ -5,6 +5,7 @@ import { render } from '@testing-library/preact';
 import { Banner } from './Banner';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { ThemeProvider } from '../../../../providers';
+import themes from '../../../../themes';
 
 import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModel } from '@searchspring/snapi-types';
@@ -14,6 +15,14 @@ mockData.updateConfig({ search: 'merchandising' });
 const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Merchandising Banner Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Banner theme={theme} content={searchResponse.merchandising?.content!} type={ContentType.BANNER} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			banner: {

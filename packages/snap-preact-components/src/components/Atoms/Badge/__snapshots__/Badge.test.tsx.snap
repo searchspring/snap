@@ -213,3 +213,22 @@ exports[`Badge Component positions badge based on prop 4`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Badge Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;

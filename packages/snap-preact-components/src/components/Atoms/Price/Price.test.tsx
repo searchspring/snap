@@ -3,8 +3,17 @@ import { render } from '@testing-library/preact';
 
 import { Price } from './Price';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Price Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Price theme={theme} value={1099.99} lineThrough={true} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<Price value={1099.99} />);
 		const priceElement = rendered.container.querySelector('.ss__price');

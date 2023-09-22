@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { FacetSlider } from './FacetSlider';
 import { sprintf } from '../../../utilities';
@@ -18,6 +19,18 @@ const sliderFacetMock: SearchResponseModelFacet & SearchResponseModelFacetRangeA
 	.pop()!;
 
 describe('Slider Component', () => {
+	const args = {
+		facet: sliderFacetMock as RangeFacet,
+	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetSlider theme={theme} {...args} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			facetSlider: {
@@ -26,9 +39,6 @@ describe('Slider Component', () => {
 				handleColor: 'rgb(0, 0, 255)',
 			},
 		},
-	};
-	const args = {
-		facet: sliderFacetMock as RangeFacet,
 	};
 
 	it('renders', () => {

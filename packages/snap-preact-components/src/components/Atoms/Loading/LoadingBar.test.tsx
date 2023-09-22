@@ -3,8 +3,17 @@ import { render } from '@testing-library/preact';
 
 import { LoadingBar } from './LoadingBar';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('LoadingBar Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<LoadingBar theme={theme} active={true} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			loadingBar: {

@@ -157,3 +157,25 @@ exports[`Price Component renders with additional style using prop 1`] = `
   </span>
 </DocumentFragment>
 `;
+
+exports[`Price Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  color: #6d7175;
+  margin: 0 0.5rem 0 0;
+}
+
+.emotion-0.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: #6d7175;
+  opacity: 0.5;
+}
+
+<span
+    class="ss__price ss__price--strike emotion-0"
+  >
+    $1,099.99
+  </span>
+</DocumentFragment>
+`;

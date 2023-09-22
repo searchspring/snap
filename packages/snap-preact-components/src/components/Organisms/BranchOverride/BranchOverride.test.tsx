@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { BranchOverride } from './BranchOverride';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('BranchOverride Component', () => {
 	const branch = 'branch';
@@ -18,6 +19,14 @@ describe('BranchOverride Component', () => {
 			lastModified,
 		},
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<BranchOverride theme={theme} {...props} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('displays branch bundle details', async () => {
 		const rendered = render(<BranchOverride {...props} />);

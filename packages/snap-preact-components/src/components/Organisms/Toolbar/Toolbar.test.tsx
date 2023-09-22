@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { Toolbar } from './Toolbar';
 import { v4 as uuidv4 } from 'uuid';
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
@@ -46,6 +47,14 @@ describe('Results Component', () => {
 		});
 
 		await controller.search();
+	});
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Toolbar theme={theme} controller={controller} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
 	});
 
 	it('renders', () => {

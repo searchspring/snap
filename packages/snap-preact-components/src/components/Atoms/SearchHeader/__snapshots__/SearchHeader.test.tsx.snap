@@ -747,3 +747,46 @@ exports[`Search Header Component renders with classname 1`] = `
   </header>
 </DocumentFragment>
 `;
+
+exports[`Search Header Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__search-header__title {
+  color: #202223;
+}
+
+<header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+  </header>
+</DocumentFragment>
+`;

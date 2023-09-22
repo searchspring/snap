@@ -5,6 +5,7 @@ import { render } from '@testing-library/preact';
 import { Icon } from './Icon';
 import { iconPaths } from './paths';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 const defaultProps = {
 	className: '',
@@ -18,6 +19,13 @@ const defaultProps = {
 };
 
 describe('Icon Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Icon theme={theme} icon={'cog'} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('does not render without icon or path props', () => {
 		const rendered = render(<Icon />);
 		expect(rendered.container).toBeInTheDocument();

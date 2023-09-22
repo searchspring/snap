@@ -700,6 +700,76 @@ exports[`Breadcrumbs Component respects disableStyles prop when true 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Breadcrumbs Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__breadcrumbs__crumbs {
+  padding: 0;
+}
+
+.emotion-0 .ss__breadcrumbs__crumbs__crumb,
+.emotion-0 .ss__breadcrumbs__crumbs__separator {
+  padding: 0 5px;
+  display: inline-block;
+}
+
+<div
+    class="ss__breadcrumbs emotion-0"
+  >
+    <ul
+      class="ss__breadcrumbs__crumbs"
+    >
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Collections
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        <a
+          href="/"
+        >
+          Appliances
+        </a>
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__separator"
+      >
+        &gt;
+      </li>
+      <li
+        class="ss__breadcrumbs__crumbs__crumb"
+      >
+        Fridge
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Breadcrumbs Component uses links when url is present in data 1`] = `
 <DocumentFragment>
   .emotion-0 .ss__breadcrumbs__crumbs {

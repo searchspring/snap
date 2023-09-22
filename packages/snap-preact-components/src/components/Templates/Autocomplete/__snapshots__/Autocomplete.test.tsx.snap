@@ -25424,3 +25424,293 @@ exports[`Autocomplete Component terms are emified as exected 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Autocomplete Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  position: absolute;
+  z-index: 10002;
+  border: 1px solid #ebebeb;
+  background: #ffffff;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.emotion-0,
+.emotion-0 *,
+.emotion-0 *:before,
+.emotion-0 *:after {
+  box-sizing: border-box;
+}
+
+.emotion-0.ss__autocomplete--only-terms {
+  width: 150px;
+}
+
+.emotion-0 .ss__autocomplete__title--trending,
+.emotion-0 .ss__autocomplete__title--history,
+.emotion-0 .ss__autocomplete__title--terms {
+  font-weight: normal;
+  margin: 0;
+  color: #c5c5c5;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.emotion-0 .ss__autocomplete__title--trending h5,
+.emotion-0 .ss__autocomplete__title--history h5,
+.emotion-0 .ss__autocomplete__title--terms h5 {
+  font-size: .8em;
+  margin: 0;
+}
+
+.emotion-0 .ss__autocomplete__terms {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  max-width: 150px;
+  min-width: 150px;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  background: #f8f8f8;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options {
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options .ss__autocomplete__terms__option {
+  word-break: break-all;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options .ss__autocomplete__terms__option a {
+  display: block;
+  padding: 10px;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options .ss__autocomplete__terms__option a em {
+  font-style: normal;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options .ss__autocomplete__terms__option.ss__autocomplete__terms__option--active {
+  background: #fff;
+}
+
+.emotion-0 .ss__autocomplete__terms .ss__autocomplete__terms__options .ss__autocomplete__terms__option.ss__autocomplete__terms__option--active a {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__autocomplete__facets {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 0 0 200px;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-column-gap: 20px;
+  column-gap: 20px;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.emotion-0 .ss__autocomplete__facets .ss__facet__options {
+  max-height: 250px;
+}
+
+.emotion-0 .ss__autocomplete__facets .ss__facet-list-options__option__value {
+  text-align: left;
+}
+
+.emotion-0 .ss__autocomplete__facets .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 0;
+}
+
+.emotion-0 .ss__autocomplete__facets .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__autocomplete__facets .ss__facet-palette-options__icon {
+  display: none;
+}
+
+.emotion-0 .ss__autocomplete__content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 1 0%;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__banner.ss__banner--header,
+.emotion-0 .ss__autocomplete__content .ss__banner.ss__banner--banner {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__banner.ss__banner--footer {
+  margin: 10px 0;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__autocomplete__content__results {
+  min-height: 0%;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__autocomplete__content__info {
+  padding: 10px;
+  text-align: right;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__autocomplete__content__info a {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__autocomplete__content .ss__autocomplete__content__info a .ss__icon {
+  margin-left: 5px;
+}
+
+<div
+    class="ss__autocomplete ss__autocomplete--only-terms emotion-0"
+  >
+    <div
+      class="ss__autocomplete__terms ss__autocomplete__terms-trending"
+    >
+      <div
+        class="ss__autocomplete__terms__trending"
+      >
+        <div
+          class="ss__autocomplete__title ss__autocomplete__title--trending"
+        >
+          <h5>
+            Popular Searches
+          </h5>
+        </div>
+        <div
+          aria-label="Popular Searches"
+          class="ss__autocomplete__terms__options"
+          role="list"
+        >
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 1 of 6, dress"
+              href="/?q=dress"
+              role="link"
+            >
+              <em>
+                dress
+              </em>
+            </a>
+          </div>
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 2 of 6, red"
+              href="/?q=red"
+              role="link"
+            >
+              <em>
+                red
+              </em>
+            </a>
+          </div>
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 3 of 6, blue"
+              href="/?q=blue"
+              role="link"
+            >
+              <em>
+                blue
+              </em>
+            </a>
+          </div>
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 4 of 6, glasses"
+              href="/?q=glasses"
+              role="link"
+            >
+              <em>
+                glasses
+              </em>
+            </a>
+          </div>
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 5 of 6, skirt"
+              href="/?q=skirt"
+              role="link"
+            >
+              <em>
+                skirt
+              </em>
+            </a>
+          </div>
+          <div
+            class="ss__autocomplete__terms__option"
+          >
+            <a
+              aria-label="item 6 of 6, white"
+              href="/?q=white"
+              role="link"
+            >
+              <em>
+                white
+              </em>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

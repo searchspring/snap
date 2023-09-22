@@ -657,3 +657,90 @@ exports[`Merchandising Inline Banner Component renders with classname 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Merchandising Inline Banner Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: auto;
+}
+
+.emotion-0.ss__inline-banner--grid {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0.ss__inline-banner--list {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: block;
+  width: 100%;
+}
+
+.emotion-0 iframe {
+  max-width: 100%;
+}
+
+<div
+    class="ss__inline-banner ss__inline-banner--grid emotion-0"
+  >
+    <script
+      data-banner-html="<div	style=\\"		background-image: url('http://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a0515_3_large.jpg');		background-position: center;		background-size: cover;		height: 100%;		width: 100%;	\\">	<div		style=\\"			background: rgba(0, 0, 0, 0.4);			display: flex;			flex-direction: column;			justify-content: flex-end;			height: 100%;		\\"	>		<div style=\\"padding: 20px\\">			<h3				class=\\"emotion-1\\"				style=\\"					font-size: 36px;					font-weight: 100;					color: #fff;					line-height: 1.2em;				\\"			>				It's okay to be cool in Winter.			</h3>			<p style=\\"color: #fff; font-size: 16px\\">				<strong>20% off select sunglasses.</strong> <br />Limited time offer.			</p>		</div>	</div></div>"
+      data-banner-type="html"
+      type="text/widget"
+    />
+    <div
+      style="		background-image: url('http://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a0515_3_large.jpg');		background-position: center;		background-size: cover;		height: 100%;		width: 100%;	"
+    >
+      	
+      <div
+        style="			background: rgba(0, 0, 0, 0.4);			display: flex;			flex-direction: column;			justify-content: flex-end;			height: 100%;		"
+      >
+        		
+        <div
+          style="padding: 20px"
+        >
+          			
+          <h3
+            class="emotion-1"
+            style="					font-size: 36px;					font-weight: 100;					color: #fff;					line-height: 1.2em;				"
+          >
+            				It's okay to be cool in Winter.			
+          </h3>
+          			
+          <p
+            style="color: #fff; font-size: 16px"
+          >
+            				
+            <strong>
+              20% off select sunglasses.
+            </strong>
+             
+            <br />
+            Limited time offer.			
+          </p>
+          		
+        </div>
+        	
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

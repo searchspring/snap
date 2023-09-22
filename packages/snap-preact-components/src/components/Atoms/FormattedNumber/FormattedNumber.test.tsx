@@ -3,8 +3,16 @@ import { render } from '@testing-library/preact';
 
 import { FormattedNumber } from './FormattedNumber';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('FormattedNumber Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FormattedNumber theme={theme} value={1099.99} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('renders', () => {
 		const rendered = render(<FormattedNumber value={1099.99} />);
 		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');

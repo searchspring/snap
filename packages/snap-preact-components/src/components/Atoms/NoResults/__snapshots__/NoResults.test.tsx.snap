@@ -1956,3 +1956,131 @@ exports[`NoResults  Component renders with custom suggestionsList 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`NoResults  Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  color: #6d7175;
+}
+
+.emotion-0 .ss__title {
+  color: #6d7175;
+}
+
+<div
+    class="ss__no-results emotion-0"
+  >
+    <div
+      class="ss__no-results__suggestions"
+    >
+      <h4
+        class="ss__no-results__suggestions__title"
+      >
+        Suggestions
+      </h4>
+      <ul
+        class="ss__no-results__suggestions__list"
+      >
+        <li
+          class="ss__no-results__suggestions__list__option"
+        >
+          Check for misspellings.
+        </li>
+        <li
+          class="ss__no-results__suggestions__list__option"
+        >
+          Remove possible redundant keywords (ie. "products").
+        </li>
+        <li
+          class="ss__no-results__suggestions__list__option"
+        >
+          Use other words to describe what you are searching for.
+        </li>
+      </ul>
+    </div>
+    <div
+      class="ss__no-results__contact"
+    >
+      <h4
+        class="ss__no-results__contact__title"
+      >
+        Still can't find what you're looking for? 
+        <a
+          href="/contact-us"
+        >
+          Contact us
+        </a>
+        .
+      </h4>
+      <div
+        class="ss__no-results__contact__detail ss__no-results__contact__detail--address"
+      >
+        <h4
+          class="ss__no-results__contact__detail__title"
+        >
+          Address
+        </h4>
+        <p
+          class="ss__no-results__contact__detail__content"
+        >
+          123 Street Address
+          <br />
+          City, State, Zipcode
+        </p>
+      </div>
+      <div
+        class="ss__no-results__contact__detail ss__no-results__contact__detail--hours"
+      >
+        <h4
+          class="ss__no-results__contact__detail__title"
+        >
+          Hours
+        </h4>
+        <p
+          class="ss__no-results__contact__detail__content"
+        >
+          Monday - Saturday, 00:00am - 00:00pm
+          <br />
+          Sunday, 00:00am - 00:00pm
+        </p>
+      </div>
+      <div
+        class="ss__no-results__contact__detail ss__no-results__contact__detail--phone"
+      >
+        <h4
+          class="ss__no-results__contact__detail__title"
+        >
+          Phone
+        </h4>
+        <p
+          class="ss__no-results__contact__detail__content"
+        >
+          <a
+            href="tel:1234567890"
+          >
+            123-456-7890
+          </a>
+        </p>
+      </div>
+      <div
+        class="ss__no-results__contact__detail ss__no-results__contact__detail--email"
+      >
+        <h4
+          class="ss__no-results__contact__detail__title"
+        >
+          Email
+        </h4>
+        <p
+          class="ss__no-results__contact__detail__content"
+        >
+          <a
+            href="mailto:email@site.com"
+          >
+            email@site.com
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

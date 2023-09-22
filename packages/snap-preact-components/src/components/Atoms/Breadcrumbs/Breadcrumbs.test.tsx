@@ -4,6 +4,7 @@ import { render } from '@testing-library/preact';
 
 import { Breadcrumbs } from './Breadcrumbs';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Breadcrumbs Component', () => {
 	const args = {
@@ -25,6 +26,14 @@ describe('Breadcrumbs Component', () => {
 			},
 		],
 	};
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Breadcrumbs theme={theme} {...args} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('renders', () => {
 		const rendered = render(<Breadcrumbs {...args} />);

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
-
+import themes from '../../../themes';
 import { Badge } from './Badge';
 
 const CONTENT = 'sale';
@@ -10,6 +10,13 @@ const CLASSNAME = 'sale-badge';
 const CHILDREN = <div>{CONTENT}</div>;
 
 describe('Badge Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Badge theme={theme}>{CHILDREN}</Badge>);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('positions badge based on prop', () => {
 		const position = { right: 0 };
 		const rendered = render(<Badge position={position}>{CHILDREN}</Badge>);

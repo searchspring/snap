@@ -1191,3 +1191,83 @@ exports[`Terms Component respects the limit 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Terms Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

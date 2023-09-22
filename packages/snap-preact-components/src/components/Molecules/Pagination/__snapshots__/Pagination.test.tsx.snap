@@ -1017,3 +1017,77 @@ exports[`Pagination theming works is themeable with theme prop 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Pagination theming works uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__pagination__page {
+  padding: 5px;
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  text-align: center;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__pagination__page.ss__pagination__page--active {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="ss__pagination emotion-0"
+  >
+    <nav
+      aria-label="Pagination"
+      role="navigation"
+    >
+      <span
+        aria-current="true"
+        aria-label="go to page 1"
+        class="ss__pagination__page ss__pagination__page--active"
+      >
+        1
+      </span>
+      <a
+        aria-label="go to page 2"
+        class="ss__pagination__page"
+      >
+        2
+      </a>
+      <a
+        aria-label="go to page 3"
+        class="ss__pagination__page"
+      >
+        3
+      </a>
+      <a
+        aria-label="go to page 4"
+        class="ss__pagination__page"
+      >
+        4
+      </a>
+      <a
+        aria-label="go to page 5"
+        class="ss__pagination__page"
+      >
+        5
+      </a>
+      <span>
+        …
+      </span>
+      <a
+        aria-label="go to last page 149"
+        class="ss__pagination__page ss__pagination__page--last"
+      >
+        149
+      </a>
+      <a
+        aria-label="go to next page"
+        class="ss__pagination__page ss__pagination__page--next"
+      >
+        Next »
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
+`;

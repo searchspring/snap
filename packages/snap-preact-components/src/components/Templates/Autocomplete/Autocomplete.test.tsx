@@ -5,6 +5,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { Autocomplete } from '../../Templates/Autocomplete/Autocomplete';
 import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
@@ -45,6 +46,25 @@ describe('Autocomplete Component', () => {
 		container = document.getElementById('target')!;
 
 		mockClient.mockData.updateConfig({ autocomplete: 'default' });
+	});
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, async () => {
+			const theme = themes[themeName as keyof typeof themes];
+
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+			await controller.bind();
+
+			const input = document.querySelector('.searchspring-ac');
+			(input as HTMLInputElement).focus();
+
+			const rendered = render(<Autocomplete theme={theme} controller={controller} input={controller.config.selector} />, { container });
+			await waitFor(() => {
+				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+				expect(autocomplete).toBeInTheDocument();
+			});
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
 	});
 
 	it('contains an input element on the page', () => {

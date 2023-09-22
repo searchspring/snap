@@ -108,6 +108,16 @@ exports[`FormattedNumber Component renders with additional style using prop 1`] 
 </DocumentFragment>
 `;
 
+exports[`FormattedNumber Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.990
+  </span>
+</DocumentFragment>
+`;
+
 exports[`FormattedNumber Component uses custom className 1`] = `
 <DocumentFragment>
   <span

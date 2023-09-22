@@ -1,9 +1,18 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { NoResults } from '../NoResults';
 
 describe('NoResults  Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<NoResults theme={theme} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<NoResults />);
 		const element = rendered.container.querySelector('.ss__no-results');
