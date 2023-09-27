@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
-import { FacetPaletteOptions } from './FacetPaletteOptions';
+import { FacetPaletteOptions, colorMappingTypes } from './FacetPaletteOptions';
 import { ThemeProvider } from '../../../providers';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
 
@@ -69,6 +69,36 @@ describe('FacetPaletteOptions Component', () => {
 
 		expect(paletteOptionsElement).not.toBeInTheDocument();
 		expect(selectedIcons).not.toBeInTheDocument();
+	});
+
+	it('can use the color mapping', () => {
+		const colorMapping = {
+			Camo: {
+				value: 'brown',
+				type: colorMappingTypes.Color,
+			},
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).toEqual(colorMapping['Camo'].value);
+	});
+
+	it('can use the color mapping as img', () => {
+		const colorMapping = {
+			Camo: {
+				value: 'https://littlesleepies.com/cdn/shop/files/candy-stripe-square_small.jpg',
+				type: colorMappingTypes.Img,
+			},
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).toEqual(`url(${colorMapping['Camo'].value})`);
 	});
 
 	it('can disable styling', () => {

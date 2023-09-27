@@ -133,6 +133,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	}
 
 	const facetValues = values || facet?.values;
+	console.log(colorMapping);
 
 	return facetValues?.length ? (
 		<CacheProvider>
@@ -161,7 +162,19 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 									'ss__facet-palette-options__option__palette',
 									`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
 								)}
-								style={{ background: colorMapping && colorMapping[value.value] ? colorMapping[value.value] : value.value }}
+								style={
+									colorMapping && colorMapping[value.value]
+										? colorMapping[value.value].type == 'img'
+											? {
+													background: `url(${colorMapping[value.value].value})`,
+											  }
+											: {
+													background: colorMapping[value.value].value,
+											  }
+										: {
+												background: value.value,
+										  }
+								}
 							>
 								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
 							</div>
@@ -186,7 +199,17 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
-	colorMapping?: { [name: string]: string };
+	colorMapping?: {
+		[name: string]: {
+			value: string;
+			type: colorMappingTypes;
+		};
+	};
+}
+
+export enum colorMappingTypes {
+	Color = 'color',
+	Img = 'img',
 }
 
 interface FacetPaletteOptionsSubProps {
