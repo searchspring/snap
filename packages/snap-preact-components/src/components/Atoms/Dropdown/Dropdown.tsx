@@ -14,11 +14,11 @@ import { useA11y } from '../../../hooks/useA11y';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>
+	dropdown: ({ disableOverlay, classid }: Partial<DropdownProps> & { classid: string }) =>
 		css({
 			position: 'relative',
 			'&.ss__dropdown--open': {
-				'& .ss__dropdown__content': {
+				[`& .ss__dropdown__content--${classid}`]: {
 					position: disableOverlay ? 'relative' : undefined,
 					visibility: 'visible',
 					opacity: 1,
@@ -27,7 +27,7 @@ const CSS = {
 			'.ss__dropdown__button': {
 				cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 			},
-			'.ss__dropdown__content': {
+			[`.ss__dropdown__content`]: {
 				position: 'absolute',
 				minWidth: '100%',
 				visibility: 'hidden',
@@ -96,8 +96,10 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	};
 
 	const styling: { css?: StylingCSS } = {};
-	const stylingProps = props;
+	const stylingProps: any = props;
 
+	const [classid] = useState((Math.random() + 1).toString(36).substring(7));
+	stylingProps['classid'] = classid;
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
@@ -127,7 +129,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 
-				<div className="ss__dropdown__content">
+				<div className={`ss__dropdown__content ss__dropdown__content--${classid}`}>
 					{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
 					{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
