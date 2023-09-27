@@ -133,7 +133,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	}
 
 	const facetValues = values || facet?.values;
-	console.log(colorMapping);
 
 	return facetValues?.length ? (
 		<CacheProvider>
