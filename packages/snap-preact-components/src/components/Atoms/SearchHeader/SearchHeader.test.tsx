@@ -267,6 +267,53 @@ describe('Search Header Component', () => {
 		});
 	});
 
+	describe('didyoumean text', () => {
+		const dymData = new MockData().searchMeta('dym');
+		const dymPaginationStore = new SearchPaginationStore(searchConfig, services, dymData.pagination, dymData.meta);
+		const dymQueryStore = new SearchQueryStore(services, dymData.search!);
+
+		it('renders the default dymText', async () => {
+			const rendered = render(<SearchHeader paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement?.innerHTML).toBe('Did you mean <a href="/?q=dress">dress</a>?');
+		});
+
+		it('renders a custom dymText', async () => {
+			const customdym = 'Custom dym';
+			const rendered = render(<SearchHeader dymText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent(customdym);
+		});
+
+		it('renders a custom dymText using a function', async () => {
+			const customdym = (data: any) => {
+				const { pagination, search } = data;
+				return `${pagination.totalResults} ${search?.query?.string} dym!`;
+			};
+			const rendered = render(<SearchHeader dymText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent('0 dresss dym!');
+		});
+
+		it('dangerously sets the inner html of dymText', async () => {
+			const customTitle = (data: any) => {
+				const { pagination, search } = data;
+				return `<span class="findMe">${pagination.totalResults} ${search?.query?.string} dym!</span>`;
+			};
+			const rendered = render(<SearchHeader dymText={customTitle} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym .findMe');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent('0 dresss dym!');
+		});
+	});
+
 	describe('landing page', () => {
 		const landingData = new MockData().searchMeta('landingPage');
 		const landingPaginationStore = new SearchPaginationStore(searchConfig, services, landingData.pagination, landingData.meta);

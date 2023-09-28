@@ -119,6 +119,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		dymText: {
+			description: '"Did you mean" text',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?' },
+			},
+			control: { type: 'text' },
+		},
 		...componentArgs,
 	},
 };

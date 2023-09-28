@@ -32,6 +32,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		${search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''}
 	`,
 		correctedQueryText: `No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
+		dymText: `Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?`,
 		noResultsText: `${
 			search?.query
 				? `<span>
@@ -44,7 +45,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
 	const { disableStyles, style, styleScript, className } = props;
 
-	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText } = props;
+	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText, dymText } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -73,6 +74,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	}
 	if (typeof noResultsText == 'function') {
 		noResultsText = noResultsText(data);
+	}
+	if (typeof dymText == 'function') {
+		dymText = dymText(data);
 	}
 
 	return (
@@ -104,13 +108,24 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 							</>
 						) : (
 							pagination?.totalResults === 0 && (
-								<h3
-									className={classNames('ss__search-header__title', 'ss__search-header__title--no-results')}
-									aria-atomic="true"
-									aria-live="polite"
-									aria-label={`No results found for ${search?.query?.string}`}
-									dangerouslySetInnerHTML={{ __html: noResultsText as string }}
-								></h3>
+								<div className="ss__search-header__no-results-wrapper">
+									<h3
+										className={classNames('ss__search-header__title', 'ss__search-header__title--no-results')}
+										aria-atomic="true"
+										aria-live="polite"
+										aria-label={`No results found for ${search?.query?.string}`}
+										dangerouslySetInnerHTML={{ __html: noResultsText as string }}
+									></h3>
+
+									{search?.didYouMean && (
+										<h3
+											className="ss__search-header__title--no-results__dym"
+											aria-atomic="true"
+											aria-live="polite"
+											dangerouslySetInnerHTML={{ __html: dymText as string }}
+										></h3>
+									)}
+								</div>
 							)
 						)}
 
@@ -139,6 +154,7 @@ export interface SearchHeaderProps extends ComponentProps {
 	subtitleText?: string | ((data: data) => string);
 	correctedQueryText?: string | ((data: data) => string);
 	noResultsText?: string | ((data: data) => string);
+	dymText?: string | ((data: data) => string);
 }
 
 interface data {
