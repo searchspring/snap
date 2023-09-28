@@ -7,6 +7,7 @@ import { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
 import { IconProps } from '../components/Atoms/Icon';
 import { ImageProps } from '../components/Atoms/Image';
 import { LoadingBarProps } from '../components/Atoms/Loading';
+import { LoadMoreProps } from '../components/Atoms/LoadMore';
 import { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandising';
 import { OverlayProps } from '../components/Atoms/Overlay';
 import { PriceProps } from '../components/Atoms/Price';
@@ -58,6 +59,7 @@ export type ThemeComponents = {
 	icon?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;
 	loadingBar?: GenericComponentProps<LoadingBarProps>;
+	loadMore?: GenericComponentProps<LoadMoreProps>;
 	banner?: GenericComponentProps<BannerProps>;
 	inlineBanner?: GenericComponentProps<InlineBannerProps>;
 	overlay?: GenericComponentProps<OverlayProps>;

@@ -8,6 +8,7 @@ export * from './components/Atoms/FormattedNumber';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
+export * from './components/Atoms/LoadMore';
 export * from './components/Atoms/Merchandising';
 export * from './components/Atoms/NoResults';
 export * from './components/Atoms/Overlay';

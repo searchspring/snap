@@ -67,6 +67,9 @@ export const bocachica: BocachicaTheme = {
 		loadingBar: {
 			...style.components.loadingBar,
 		},
+		loadMore: {
+			...style.components.loadMore,
+		},
 		noResults: {
 			...style.components.noResults,
 		},
