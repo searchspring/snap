@@ -95,18 +95,22 @@ The `onClick` prop allows for a custom callback function for when a facet value 
 
 
 #### colorMapping
-The `colorMapping` prop allows for custom color mapping overrides. These can be anything you can pass as a css background. So a color string, hash, rgb, gradiants, or an image url for more complex swatches. 
+The `colorMapping` prop allows for custom color mapping overrides. These objects are keyed off the color label, and can take background, and a label values. The color label can be any accepted css background property value. So a color string, hash, rgb, gradiants, or an image url for more complex swatches. The label takes a string. 
 
 ```jsx
 const colorMapping = {
-	'Striped': "url(https://mysite.com/cdn/shop/files/candy-stripe-square_small.jpg)"
+	'Striped': {
+		background: "url(https://mysite.com/cdn/shop/files/candy-stripe-square_small.jpg)",
+		label: "stripy"
+	}
 }
 <FacetPaletteOptions values={paletteFacet.values} colorMapping={colorMapping} />
 ```
 or 
 ```jsx
 const colorMapping = {
-	'rainbow': `linear-gradient(
+	'rainbow': {
+		background: `linear-gradient(
 			90deg,
 			rgba(255, 0, 0, 1) 0%,
 			rgba(255, 154, 0, 1) 10%,
@@ -120,6 +124,7 @@ const colorMapping = {
 			rgba(251, 7, 217, 1) 90%,
 			rgba(255, 0, 0, 1) 100%
 		)`,
+	}
 }
 
 <FacetPaletteOptions values={paletteFacet.values} colorMapping={colorMapping} />
@@ -127,8 +132,11 @@ const colorMapping = {
 or 
 ```jsx
 const colorMapping = {
-	'Camo': 'brown',
-}
+		'Camo': {
+			background: 'brown',
+			label: 'Army'
+		}	
+	}
 <FacetPaletteOptions values={paletteFacet.values} colorMapping={colorMapping} />
 ```
 
