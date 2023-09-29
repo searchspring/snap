@@ -275,42 +275,44 @@ describe('Search Header Component', () => {
 		it('renders the default dymText', async () => {
 			const rendered = render(<SearchHeader paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement?.innerHTML).toBe('Did you mean <a href="/?q=dress">dress</a>?');
 		});
 
 		it('renders a custom dymText', async () => {
 			const customdym = 'Custom dym';
-			const rendered = render(<SearchHeader dymText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+			const rendered = render(<SearchHeader didYouMeanText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customdym);
 		});
 
 		it('renders a custom dymText using a function', async () => {
 			const customdym = (data: any) => {
-				const { pagination, search } = data;
-				return `${pagination.totalResults} ${search?.query?.string} dym!`;
-			};
-			const rendered = render(<SearchHeader dymText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+				const dym = data.search.didYouMean;
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym');
+				return `Ooops, did you mean <a href=${dym.url.href}>${dym.string}</a>?`;
+			};
+			const rendered = render(<SearchHeader didYouMeanText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
 			expect(headerElement).toBeInTheDocument();
-			expect(headerElement).toHaveTextContent('0 dresss dym!');
+			expect(headerElement).toHaveTextContent('Ooops, did you mean dress?');
 		});
 
 		it('dangerously sets the inner html of dymText', async () => {
-			const customTitle = (data: any) => {
-				const { pagination, search } = data;
-				return `<span class="findMe">${pagination.totalResults} ${search?.query?.string} dym!</span>`;
+			const customdym = (data: any) => {
+				const dym = data.search.didYouMean;
+				return `<span class="findMe">Ooops, did you mean <a href=${dym.url.href}>${dym.string}</a>?</span>`;
 			};
-			const rendered = render(<SearchHeader dymText={customTitle} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+			const rendered = render(<SearchHeader didYouMeanText={customdym} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--no-results__dym .findMe');
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym .findMe');
 			expect(headerElement).toBeInTheDocument();
-			expect(headerElement).toHaveTextContent('0 dresss dym!');
+			expect(headerElement).toHaveTextContent('Ooops, did you mean dress?');
+			expect(headerElement?.innerHTML).toBe('Ooops, did you mean <a href="/?q=dress">dress</a>?');
 		});
 	});
 

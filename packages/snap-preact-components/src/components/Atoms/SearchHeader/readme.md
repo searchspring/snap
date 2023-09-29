@@ -51,14 +51,14 @@ The `noResultsText` prop specifies the text to show when the totalResults count 
 ```
 
 
-### dymText
-The `dymText` prop specifies the text to show when there is a "didYouMean" query. This can be either a string, or a function that returns a string, functions are passed the controller. 
+### didYouMeanText
+The `didYouMeanText` prop specifies the text to show when there is a "didYouMean" query. This can be either a string, or a function that returns a string, functions are passed the controller. 
 
 ```jsx
 const getDym = (controller) => {
 	const { search } = controller.store;
 	return `<div class="ss__search-header__dym">Sorry, but did you mean <em>"<a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>"</em></div>`
 }
-<SearchHeader controller={controller} dymText={getDym} />
+<SearchHeader controller={controller} didYouMeanText={getDym} />
 ```
 

@@ -119,7 +119,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		dymText: {
+		didYouMeanText: {
 			description: '"Did you mean" text',
 			table: {
 				type: {
