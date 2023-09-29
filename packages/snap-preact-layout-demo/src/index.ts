@@ -1,5 +1,6 @@
 import { SnapTemplate } from '@searchspring/snap-preact';
-import { resultLayout } from './resultLayout';
+// import { resultLayout } from './resultLayout';
+import { Result } from './components/Result';
 
 /*
 	brainstorming...
@@ -53,7 +54,8 @@ new SnapTemplate({
 			{
 				selector: '#searchspring-layout',
 				template: 'Search',
-				resultLayout: resultLayout,
+				// resultLayout: resultLayout,
+				resultComponent: Result,
 			},
 		],
 	},
@@ -65,7 +67,8 @@ new SnapTemplate({
 			{
 				component: 'Recs',
 				template: 'Recommendation',
-				resultLayout: resultLayout,
+				// resultLayout: resultLayout,
+				resultComponent: Result,
 			},
 		],
 	},
@@ -75,7 +78,8 @@ new SnapTemplate({
 			{
 				selector: 'input.searchspring-ac',
 				template: 'Autocomplete',
-				resultLayout: resultLayout,
+				// resultLayout: resultLayout,
+				resultComponent: Result,
 			},
 		],
 	},
