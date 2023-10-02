@@ -24,14 +24,52 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.ts$/,
+				test: /\.tsx?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.(css|scss)$/,
+				exclude: /\.module\.(css|scss)$/,
+				use: [
+					{
+						loader: 'style-loader',
+						options: {
+							attributes: { class: styleClass },
+						},
+					},
+					'css-loader',
+					'sass-loader',
+				],
+			},
+			{
+				test: /\.module\.(css|scss)$/,
+				use: [
+					{
+						loader: 'style-loader',
+						options: {
+							attributes: { class: styleClass },
+						},
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								localIdentName: '[local]--[hash:base64:5]',
+							},
+						},
+					},
+					'sass-loader',
+				],
+			},
+			{
+				test: /\.(png|svg)$/,
+				use: ['file-loader'],
 			},
 		],
 	},
 	resolve: {
-		extensions: ['.ts', '.js'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx'],
 		alias: {
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',

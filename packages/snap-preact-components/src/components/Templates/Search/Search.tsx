@@ -10,7 +10,7 @@ import type { SearchController } from '@searchspring/snap-controller';
 
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { combineMerge, defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, ResultComponent, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
@@ -79,6 +79,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		styleScript,
 		hideSidebar,
 		resultLayout,
+		resultComponent,
 		hidetopToolBar,
 		hideBottomToolBar,
 		slideOutToggleWidth,
@@ -143,6 +144,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		Results: {
 			// default props
 			resultLayout: resultLayout,
+			resultComponent: resultComponent,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -217,6 +219,7 @@ export interface SearchProps extends ComponentProps {
 	controller: SearchController;
 	slideOutToggleWidth?: string;
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 	hideSidebar?: boolean;
 	hidetopToolBar?: boolean;
 	hideBottomToolBar?: boolean;

@@ -13,7 +13,7 @@ import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCar
 import { Result, ResultProps } from '../../Molecules/Result';
 import { combineMerge, defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -81,6 +81,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		prevButton,
 		hideButtons,
 		resultLayout,
+		resultComponent,
 		disableStyles,
 		style,
 		className,
@@ -162,11 +163,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 								  ))
 								: resultsToRender.map((result) => (
 										<RecommendationResultTracker controller={controller} result={result}>
-											{resultLayout && controller ? (
-												<ResultLayout {...subProps.result} controller={controller} result={result} layout={resultLayout} />
-											) : (
-												<Result {...subProps.result} controller={controller} result={result} />
-											)}
+											{(() => {
+												if (resultComponent && controller) {
+													const ResultComponent = resultComponent;
+													return <ResultComponent controller={controller} result={result} />;
+												} else if (resultLayout && controller) {
+													return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
+												} else {
+													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
+												}
+											})()}
 										</RecommendationResultTracker>
 								  ))}
 						</Carousel>
@@ -192,6 +198,7 @@ export type RecommendationProps = {
 	children?: ComponentChildren;
 	vertical?: boolean;
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 } & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;
 

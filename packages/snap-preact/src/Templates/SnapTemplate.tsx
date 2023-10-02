@@ -8,7 +8,7 @@ import { componentMap } from './components';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { ResultLayoutTypes } from '@searchspring/snap-preact-components';
+import type { ResultComponent, ResultLayoutTypes } from '@searchspring/snap-preact-components';
 import type { TemplateThemeConfig } from './themes';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
@@ -19,6 +19,7 @@ type SearchTemplateConfig = {
 	theme?: TemplateThemeConfig;
 	template: 'Search';
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 };
 
 type AutocompleteTemplateConfig = {
@@ -26,6 +27,7 @@ type AutocompleteTemplateConfig = {
 	theme?: TemplateThemeConfig;
 	template: 'Autocomplete';
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 };
 
 type RecommendationTemplateConfig = {
@@ -33,6 +35,7 @@ type RecommendationTemplateConfig = {
 	theme?: TemplateThemeConfig;
 	template: 'Recommendation';
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 };
 
 export type SnapTemplateConfig = {
@@ -108,7 +111,12 @@ export const createSearchTargeters = (templateConfig: SnapTemplateConfig): Exten
 		};
 
 		// if they are not undefined, add them
-		if (template.resultLayout) targeter.props = { resultLayout: template.resultLayout };
+		if (template.resultComponent) {
+			targeter.props = { resultComponent: template.resultComponent };
+		} else if (template.resultLayout) {
+			targeter.props = { resultLayout: template.resultLayout };
+		}
+
 		const variables = template.theme?.variables || templateConfig.config.theme.variables;
 		if (variables && targeter.theme) targeter.theme.variables = variables;
 		const overrides = template.theme?.overrides || templateConfig.config.theme.overrides;
@@ -132,7 +140,11 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig):
 		};
 
 		// if they are not undefined, add them
-		if (template.resultLayout) targeter.props = { resultLayout: template.resultLayout };
+		if (template.resultComponent) {
+			targeter.props = { resultComponent: template.resultComponent };
+		} else if (template.resultLayout) {
+			targeter.props = { resultLayout: template.resultLayout };
+		}
 		const variables = template.theme?.variables || templateConfig.config.theme.variables;
 		if (variables && targeter.theme) targeter.theme.variables = variables;
 		const overrides = template.theme?.overrides || templateConfig.config.theme.overrides;
@@ -155,7 +167,11 @@ export function createRecommendationComponentMapping(templateConfig: SnapTemplat
 				};
 
 				// if they are not undefined, add them
-				if (template.resultLayout) mapping[template.component].props = { resultLayout: template.resultLayout };
+				if (template.resultComponent) {
+					mapping[template.component].props = { resultComponent: template.resultComponent };
+				} else if (template.resultLayout) {
+					mapping[template.component].props = { resultLayout: template.resultLayout };
+				}
 				const theme = mapping[template.component].theme;
 				const variables = template.theme?.variables || templateConfig.config.theme.variables;
 				if (variables && theme) theme.variables = variables;
