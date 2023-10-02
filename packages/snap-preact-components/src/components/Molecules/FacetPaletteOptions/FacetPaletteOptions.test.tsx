@@ -71,6 +71,50 @@ describe('FacetPaletteOptions Component', () => {
 		expect(selectedIcons).not.toBeInTheDocument();
 	});
 
+	it('can use the color mapping', () => {
+		const colorMapping = {
+			Camo: {
+				background: 'brown',
+			},
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).toEqual(colorMapping['Camo'].background);
+	});
+
+	it('can use the color mapping for label', () => {
+		const colorMapping = {
+			Camo: {
+				label: 'brown',
+			},
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).not.toEqual(colorMapping['Camo'].label);
+		expect(paletteOptionsSwatch?.parentElement?.nextSibling).toHaveTextContent(colorMapping['Camo'].label);
+	});
+
+	it('can use the color mapping as img', () => {
+		const colorMapping = {
+			Camo: {
+				background: 'url(https://snapui.searchspring.io/favicon.svg)',
+			},
+		};
+
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).toEqual(`${colorMapping['Camo'].background}`);
+	});
+
 	it('can disable styling', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} disableStyles={true} />);
 

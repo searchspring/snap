@@ -121,6 +121,16 @@ export default {
 			},
 			action: 'onClick',
 		},
+		colorMapping: {
+			description: 'Object of color mapping values',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '{}' },
+			},
+			control: { type: 'object' },
+		},
 		...componentArgs,
 	},
 };
