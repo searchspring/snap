@@ -92,28 +92,7 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	globals?: Partial<AutocompleteRequestModel>;
 	selector: string;
 	action?: string;
-	settings?: {
-		integratedSpellCorrection?: boolean;
-		initializeFromUrl?: boolean;
-		syncInputs?: boolean;
-		serializeForm?: boolean;
-		facets?: FacetStoreConfig & {
-			fields?: {
-				[field: string]: FacetStoreConfig;
-			};
-		};
-		trending?: {
-			limit: number;
-			showResults?: boolean;
-		};
-		history?: {
-			limit: number;
-			showResults?: boolean;
-		};
-		redirects?: {
-			merchandising?: boolean;
-		};
-	};
+	settings?: AutocompleteStoreConfigSettings;
 };
 
 // Recommendation config
