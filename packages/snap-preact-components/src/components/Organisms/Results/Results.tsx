@@ -11,7 +11,7 @@ import type { SearchResultStore, Product, Banner } from '@searchspring/snap-stor
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -89,7 +89,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, className, layout, style, styleScript, resultLayout, controller } = props;
+	const { disableStyles, resultComponent, className, layout, style, styleScript, resultLayout, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -143,8 +143,12 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 							case ContentType.BANNER:
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
-								if (resultLayout && controller) {
-									return <ResultLayout controller={controller} result={result} layout={resultLayout} theme={theme} />;
+								// TODO: wrap with SearchResultTracker component (need to create)
+								if (resultComponent && controller) {
+									const ResultComponent = resultComponent;
+									return <ResultComponent controller={controller} result={result} />;
+								} else if (resultLayout && controller) {
+									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
 								} else {
 									return (
 										<Result
@@ -175,6 +179,7 @@ export interface ResultsProps extends ComponentProps {
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 }
 
 interface ResultsSubProps {

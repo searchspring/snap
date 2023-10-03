@@ -16,7 +16,7 @@ module.exports = merge(common, {
 	module: {
 		rules: [
 			{
-				test: /\.(js)$/,
+				test: /\.(js|jsx)$/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -36,7 +36,7 @@ module.exports = merge(common, {
 	devServer: {
 		client: false,
 		server: 'https',
-		port: 2222,
+		port: 1111,
 		hot: false,
 		allowedHosts: 'all',
 		headers: {

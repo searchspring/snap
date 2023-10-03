@@ -37,6 +37,10 @@ declare global {
 	type Next = EventManagerTypes.Next;
 	type Middleware<T> = EventManagerTypes.Middleware<T>;
 
+	// component types
+	type Theme = ComponentTypes.Theme;
+	type ResultComponent = ComponentTypes.ResultComponent;
+
 	// window globals
 	interface Window {
 		mergeSnapConfig?: any;

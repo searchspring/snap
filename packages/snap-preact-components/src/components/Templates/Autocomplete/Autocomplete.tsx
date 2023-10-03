@@ -17,7 +17,7 @@ import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps, mergeProps, combineMerge } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
-import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
@@ -319,6 +319,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		noResultsSlot,
 		linkSlot,
 		resultLayout,
+		resultComponent,
 		onTermClick,
 		disableStyles,
 		className,
@@ -352,6 +353,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			className: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,
 			resultLayout: resultLayout,
+			resultComponent: resultComponent,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -706,6 +708,7 @@ export interface AutocompleteProps extends ComponentProps {
 	breakpoints?: BreakpointsProps;
 	width?: string;
 	resultLayout?: ResultLayoutTypes;
+	resultComponent?: ResultComponent;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }
