@@ -8,9 +8,9 @@ export type UntilOptions = {
 };
 
 const defaultUntilOptions: UntilOptions = {
-	checkMax: 20,
+	checkMax: 25,
 	checkCount: 0,
-	checkTime: 50,
+	checkTime: 60,
 	exponential: 1.1,
 	defer: false,
 	executeFunction: true,
