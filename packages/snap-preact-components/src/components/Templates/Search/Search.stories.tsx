@@ -7,7 +7,6 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Search, SearchProps } from './Search';
-import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
 	title: `Templates/Search`,
@@ -88,7 +87,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hidetopToolBar: {
+		hideTopToolBar: {
 			defaultValue: false,
 			description: 'prevents the top Toolbar component from rendering',
 			table: {
@@ -126,21 +125,21 @@ export default {
 };
 
 const snapInstance = Snapify.search({
-	id: 'FilterSummary',
+	id: 'search',
 	globals: {
 		siteId: '8uyt2m',
-		filters: [
-			{
-				type: 'value',
-				field: 'color_family',
-				value: 'Blue',
-			} as SearchRequestModelFilterValue,
-			{
-				type: 'value',
-				field: 'size',
-				value: 'Small',
-			} as SearchRequestModelFilterValue,
-		],
+	},
+});
+
+const noresultsInstance = Snapify.search({
+	id: 'noresults',
+	globals: {
+		siteId: '8uyt2m',
+		search: {
+			query: {
+				string: 'eijworhufsbgd',
+			},
+		},
 	},
 });
 
@@ -171,16 +170,14 @@ ToggleSidebar.loaders = [
 ];
 
 export const NoResults = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	controller.store.results = [];
-
 	return <Search {...args} controller={controller} />;
 };
 
 NoResults.loaders = [
 	async () => {
-		await snapInstance.search();
+		await noresultsInstance.search();
 		return {
-			controller: snapInstance,
+			controller: noresultsInstance,
 		};
 	},
 ];

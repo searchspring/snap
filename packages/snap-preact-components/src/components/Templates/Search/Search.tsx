@@ -20,10 +20,10 @@ import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
-import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
+import { useState } from 'react';
 
 const CSS = {
 	Search: ({ mobileSidebarDisplayAt: slideOutToggleWidth }: Partial<SearchProps>) =>
@@ -87,7 +87,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		resultLayout,
 		hideMerchandisingBanners,
 		toggleSidebarButtonText,
-		hidetopToolBar,
+		hideTopToolbar,
 		hideBottomToolBar,
 		mobileSidebarDisplayAt,
 	} = props;
@@ -108,18 +108,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Button: {
 			// default props
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
-		Dropdown: {
-			// default props
-			disableOverlay: true,
-			startOpen: true,
-			disableClickOutside: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -237,21 +225,23 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			hideFooterBanner = true;
 		} else if (typeof hideMerchandisingBanners == 'object') {
 			hideMerchandisingBanners.map((type) => {
-				if (type == ContentType.BANNER) {
+				if (type.toLowerCase() == 'banner') {
 					hideBannerBanner = true;
 				}
-				if (type == ContentType.HEADER) {
+				if (type.toLowerCase() == 'header') {
 					hideHeaderBanner = true;
 				}
-				if (type == ContentType.FOOTER) {
+				if (type.toLowerCase() == 'footer') {
 					hideFooterBanner = true;
 				}
-				if (type == ContentType.LEFT) {
+				if (type.toLowerCase() == 'left') {
 					hideLeftBanner = true;
 				}
 			});
 		}
 	}
+
+	const [sidebarOpenState, setSidebarOpenState] = useState(true);
 
 	return (
 		<ThemeProvider theme={properties.theme || {}}>
@@ -260,20 +250,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideSidebar && !isMobile && (
 						<div className="ss__search__sidebar-wrapper">
 							{toggleSidebarButtonText ? (
-								<Dropdown
-									button={
-										<Button className="ss__search__sidebar-wrapper-toggle" name={'search__sidebar-wrapper-toggle-button'} {...subProps.Button}>
-											{toggleSidebarButtonText}
-										</Button>
-									}
-									name={'search__sidebar-wrapper-toggle'}
-									{...subProps.Dropdown}
-								>
+								sidebarOpenState && (
 									<Fragment>
 										<Sidebar {...subProps.Sidebar} controller={controller} />
 										{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
 									</Fragment>
-								</Dropdown>
+								)
 							) : (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
@@ -288,7 +270,18 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
 						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
 
-						{!hidetopToolBar && store.pagination.totalResults > 0 && (
+						{toggleSidebarButtonText && (
+							<Button
+								onClick={() => setSidebarOpenState(!sidebarOpenState)}
+								className="ss__search__sidebar-wrapper-toggle"
+								name={'search__sidebar-wrapper-toggle-button'}
+								{...subProps.Button}
+							>
+								{toggleSidebarButtonText}
+							</Button>
+						)}
+
+						{!hideTopToolbar && store.pagination.totalResults > 0 && (
 							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--topToolBar" name={'topToolBar'} controller={controller} />
 						)}
 
@@ -329,9 +322,9 @@ export interface SearchProps extends ComponentProps {
 	hideSidebar?: boolean;
 	hideMobileSidebar?: boolean;
 	hideSearchHeader?: boolean;
-	hidetopToolBar?: boolean;
+	hideTopToolbar?: boolean;
 	hideBottomToolBar?: boolean;
-	hideMerchandisingBanners?: boolean | ContentType[];
+	hideMerchandisingBanners?: boolean | string[];
 	toggleSidebarButtonText?: string;
 }
 
@@ -344,7 +337,6 @@ interface SearchSubProps {
 	Toolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
 	MobileSidebar: Partial<MobileSidebarProps>;
-	Dropdown: Partial<DropdownProps>;
 	Button: Partial<ButtonProps>;
 	Banner: Partial<BannerProps>;
 }

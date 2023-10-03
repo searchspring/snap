@@ -10,7 +10,6 @@ Renders a Search Results Page.
 - Toolbar
 - SearchHeader
 - MobileSidebar
-- Dropdown
 - Button
 - Banner
 
@@ -66,7 +65,7 @@ The `hideBottomToolBar` prop specifies if the bottom ToolBar component should be
 ```
 
 ### toggleSidebarButtonText
-The `toggleSidebarButtonText` prop specifies the inner text of the Sidebar toggle button. If passed, the sidebar will be rendered inside a Dropdown component.   
+The `toggleSidebarButtonText` prop specifies the inner text of the Sidebar toggle button. If left undefined, no button will render. 
 
 ```jsx
 <Search controller={controller} toggleSidebarButtonText={'Toggle Facets'} />
@@ -80,5 +79,5 @@ The `hideMerchandisingBanners` prop specifies if merchandising banners should re
 ```
 or
 ```jsx
-<Search controller={controller} hideMerchandisingBanners={["Footer", "Header"]} />
+<Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```

@@ -30,7 +30,7 @@ let controller: SearchController;
 
 const mockClient = new MockClient(globals, {});
 
-describe('Results Component', () => {
+describe('Search Template Component', () => {
 	beforeEach(async () => {
 		searchConfig = { ...searchConfigDefault };
 		searchConfig.id = uuidv4().split('-').join('');
@@ -80,6 +80,43 @@ describe('Results Component', () => {
 		expect(toggleFiltersButton).not.toBeInTheDocument();
 	});
 
+	it('renders with merchandising banners', async () => {
+		mockClient.mockData.updateConfig({ search: 'merchandising' });
+
+		searchConfig = { ...searchConfigDefault };
+		searchConfig.id = uuidv4().split('-').join('');
+
+		controller = new SearchController(searchConfig, {
+			client: mockClient,
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const rendered = render(<Search controller={controller} />);
+
+		const element = rendered.container.querySelector('.ss__search');
+		const banners = rendered.container.querySelectorAll('.ss__banner');
+		const headerBanner = rendered.container.querySelector('.ss__banner--header');
+		const leftBanner = rendered.container.querySelector('.ss__banner--left');
+		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
+		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
+
+		expect(element).toBeInTheDocument();
+		expect(banners).toHaveLength(4);
+		expect(headerBanner).toBeInTheDocument();
+		expect(bannerBanner).toBeInTheDocument();
+		expect(footerBanner).toBeInTheDocument();
+		expect(leftBanner).toBeInTheDocument();
+
+		mockClient.mockData.updateConfig({ search: 'default' });
+	});
+
 	it('can hide sidebar', () => {
 		const rendered = render(<Search controller={controller} hideSidebar />);
 		const element = rendered.container.querySelector('.ss__search')!;
@@ -108,7 +145,7 @@ describe('Results Component', () => {
 	});
 
 	it('can hide toptoolbar', () => {
-		const rendered = render(<Search controller={controller} hidetopToolBar />);
+		const rendered = render(<Search controller={controller} hideTopToolbar />);
 		const element = rendered.container.querySelector('.ss__search')!;
 		const topToolBar = rendered.container.querySelector('.ss__search__content__toolbar--topToolBar');
 
@@ -155,14 +192,18 @@ describe('Results Component', () => {
 		expect(sidebar).toBeInTheDocument();
 		expect(button).toHaveTextContent(buttonText);
 
-		expect(sidebar?.parentElement?.parentElement).toHaveClass('ss__dropdown--open');
 		await userEvent.click(button!);
+
 		await waitFor(() => {
-			expect(sidebar?.parentElement?.parentElement).not.toHaveClass('ss__dropdown--open');
+			const sidebar = rendered.container.querySelector('.ss__sidebar');
+			expect(sidebar).not.toBeInTheDocument();
 		});
+
 		await userEvent.click(button!);
+
 		await waitFor(() => {
-			expect(sidebar?.parentElement?.parentElement).toHaveClass('ss__dropdown--open');
+			const sidebar = rendered.container.querySelector('.ss__sidebar');
+			expect(sidebar).toBeInTheDocument();
 		});
 	});
 
@@ -192,27 +233,8 @@ describe('Results Component', () => {
 		expect(sidebar).not.toBeInTheDocument();
 	});
 
-	it('renders with merchandising banners', async () => {
-		mockClient.mockData.updateConfig({ search: 'merchandising' });
-
-		await controller.search();
-
-		const rendered = render(<Search controller={controller} />);
-
-		const element = rendered.container.querySelector('.ss__search');
-		const banners = rendered.container.querySelectorAll('.ss__banner');
-		const headerBanner = rendered.container.querySelector('.ss__banner--header');
-		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
-		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
-
-		expect(element).toBeInTheDocument();
-		expect(banners).toHaveLength(3);
-		expect(headerBanner).toBeInTheDocument();
-		expect(bannerBanner).toBeInTheDocument();
-		expect(footerBanner).toBeInTheDocument();
-	});
-
 	it('can hide all merchandising banners', async () => {
+		mockClient.mockData.updateConfig({ search: 'merchandising' });
 		await controller.search();
 
 		const rendered = render(<Search controller={controller} hideMerchandisingBanners />);
@@ -225,6 +247,7 @@ describe('Results Component', () => {
 	});
 
 	it('can hide only some merchandising banners', async () => {
+		mockClient.mockData.updateConfig({ search: 'merchandising' });
 		await controller.search();
 
 		const rendered = render(<Search controller={controller} hideMerchandisingBanners={[ContentType.FOOTER, ContentType.HEADER]} />);
