@@ -63,6 +63,30 @@ export type FinderFieldConfig = {
 	levels?: string[];
 };
 
+export type AutocompleteStoreConfigSettings = {
+	integratedSpellCorrection?: boolean;
+	initializeFromUrl?: boolean;
+	syncInputs?: boolean;
+	serializeForm?: boolean;
+	facets?: FacetStoreConfig & {
+		fields?: {
+			[field: string]: FacetStoreConfig;
+		};
+	};
+	trending?: {
+		limit: number;
+		showResults?: boolean;
+	};
+	history?: {
+		limit: number;
+		showResults?: boolean;
+	};
+	redirects?: {
+		merchandising?: boolean;
+		singleResult?: boolean;
+	};
+};
+
 // Autocomplete config
 export type AutocompleteStoreConfig = StoreConfig & {
 	globals?: Partial<AutocompleteRequestModel>;
