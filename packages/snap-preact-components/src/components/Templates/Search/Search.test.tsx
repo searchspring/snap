@@ -246,11 +246,47 @@ describe('Search Template Component', () => {
 		expect(banners).toHaveLength(0);
 	});
 
-	it('can hide only some merchandising banners', async () => {
+	it('can hide only some merchandising banners with enums', async () => {
 		mockClient.mockData.updateConfig({ search: 'merchandising' });
 		await controller.search();
 
 		const rendered = render(<Search controller={controller} hideMerchandisingBanners={[ContentType.FOOTER, ContentType.HEADER]} />);
+
+		const element = rendered.container.querySelector('.ss__search');
+		const banners = rendered.container.querySelectorAll('.ss__banner');
+		const headerBanner = rendered.container.querySelector('.ss__banner--header');
+		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
+		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
+
+		expect(element).toBeInTheDocument();
+		expect(headerBanner).not.toBeInTheDocument();
+		expect(bannerBanner).toBeInTheDocument();
+		expect(footerBanner).not.toBeInTheDocument();
+	});
+
+	it('can hide only some merchandising banners with uppercase strings', async () => {
+		mockClient.mockData.updateConfig({ search: 'merchandising' });
+		await controller.search();
+
+		const rendered = render(<Search controller={controller} hideMerchandisingBanners={['Footer', 'HEADER']} />);
+
+		const element = rendered.container.querySelector('.ss__search');
+		const banners = rendered.container.querySelectorAll('.ss__banner');
+		const headerBanner = rendered.container.querySelector('.ss__banner--header');
+		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
+		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
+
+		expect(element).toBeInTheDocument();
+		expect(headerBanner).not.toBeInTheDocument();
+		expect(bannerBanner).toBeInTheDocument();
+		expect(footerBanner).not.toBeInTheDocument();
+	});
+
+	it('can hide only some merchandising banners with lowercase strings', async () => {
+		mockClient.mockData.updateConfig({ search: 'merchandising' });
+		await controller.search();
+
+		const rendered = render(<Search controller={controller} hideMerchandisingBanners={['footer', 'header']} />);
 
 		const element = rendered.container.querySelector('.ss__search');
 		const banners = rendered.container.querySelectorAll('.ss__banner');
