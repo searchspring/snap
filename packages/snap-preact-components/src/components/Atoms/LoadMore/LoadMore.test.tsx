@@ -74,11 +74,11 @@ describe('LoadMore Component', () => {
 		expect(buttonElement?.textContent).toBe(loadMoreText);
 	});
 
-	it('does not render button if auto prop', () => {
-		const rendered = render(<LoadMore pagination={paginationStore} auto={true} />);
+	it('does not render button if autoFetch prop', () => {
+		const rendered = render(<LoadMore pagination={paginationStore} autoFetch={true} />);
 
 		const loadMoreElement = rendered.container.querySelector('.ss__loadMore');
-		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__loadMore--auto')).toBe(true);
+		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__loadMore--autoFetch')).toBe(true);
 
 		const buttonElement = rendered.container.querySelector('.ss__loadMore__button');
 		expect(buttonElement).not.toBeInTheDocument();
@@ -95,9 +95,9 @@ describe('LoadMore Component', () => {
 		expect(Object.values(buttonElement?.classList || {}).includes('ss__button--disabled')).toBe(true);
 	});
 
-	it('auto prop observes component', () => {
+	it('autoFetch prop observes component', () => {
 		expect(observe).toHaveBeenCalledTimes(0);
-		render(<LoadMore pagination={paginationStore} auto={true} />);
+		render(<LoadMore pagination={paginationStore} autoFetch={true} />);
 		expect(observe).toHaveBeenCalledTimes(1);
 	});
 
@@ -137,6 +137,16 @@ describe('LoadMore Component', () => {
 		const barIndicatorBarStyles = getComputedStyle(loadMoreIndicatorBarElement);
 		expect(barIndicatorBarStyles.height).toBe(`${progressIndicatorSize}px`);
 		expect(barIndicatorBarStyles.borderRadius).toBe(`${progressIndicatorSize}px`);
+	});
+
+	it('hides progress text using hideProgressText prop', () => {
+		const rendered = render(<LoadMore pagination={paginationStore} hideProgressText={true} />);
+
+		const progressIndicatorElement = rendered.container.querySelector('.ss__loadMore__progress__indicator')!;
+		expect(progressIndicatorElement).toBeInTheDocument();
+
+		const progressTextElement = rendered.container.querySelector('.ss__loadMore__progress__text')!;
+		expect(progressTextElement).not.toBeInTheDocument();
 	});
 
 	it('renders with radial indicator', () => {
@@ -187,6 +197,24 @@ describe('LoadMore Component', () => {
 
 		expect(radialIndicatorElement).not.toBeInTheDocument();
 		expect(radialTextElement).toBeInTheDocument();
+	});
+
+	it('renders with color and backgroundColor props', () => {
+		const colorProps = {
+			color: 'red',
+			backgroundColor: 'blue',
+		};
+
+		const rendered = render(<LoadMore pagination={paginationStore} {...colorProps} />);
+		const progressIndicatorElement = rendered.container.querySelector('.ss__loadMore__progress__indicator')!;
+		const progressIndicatorStyles = getComputedStyle(progressIndicatorElement);
+
+		expect(progressIndicatorStyles.background).toBe(colorProps.backgroundColor);
+
+		const progressIndicatorBarElement = rendered.container.querySelector('.ss__loadMore__progress__indicator__bar')!;
+		const progressIndicatorBarStyles = getComputedStyle(progressIndicatorBarElement);
+
+		expect(progressIndicatorBarStyles.background).toBe(colorProps.color);
 	});
 
 	it('renders with additional style using prop', () => {

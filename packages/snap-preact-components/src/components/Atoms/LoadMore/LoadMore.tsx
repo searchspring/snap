@@ -140,7 +140,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		pagination,
 		controller,
 		onClick,
-		auto,
+		autoFetch,
 		intersectionOffset,
 		loading,
 		loadMoreText,
@@ -187,7 +187,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	}
 
 	const autoProps: { ref?: MutableRef<null> } = {};
-	if (auto) {
+	if (autoFetch) {
 		const loadMoreRef = useRef(null);
 		autoProps.ref = loadMoreRef;
 
@@ -206,22 +206,19 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 					'ss__loadMore',
 					`ss__loadMore--${progressIndicator}`,
 					{ 'ss__loadMore--loading': isLoading },
-					{ 'ss__loadMore--auto': auto },
+					{ 'ss__loadMore--autoFetch': autoFetch },
 					className
 				)}
 			>
-				{!auto && (
+				{!autoFetch && (
 					<Button
 						onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-							if (onClick && typeof onClick == 'function') {
-								onClick(e);
-							} else if (store.next) {
-								store.next.url.go({ history: 'replace' });
-							}
+							store.next?.url.go({ history: 'replace' });
+							onClick && onClick(e);
 						}}
 						disabled={isLoading}
 						icon={isLoading ? 'spinner' : undefined}
-						aria-label={'load more products'}
+						aria-label={loadMoreText}
 						{...subProps.button}
 					>
 						{loadMoreText}
@@ -284,7 +281,7 @@ interface LoadMoreSubProps {
 export interface LoadMoreProps extends ComponentProps {
 	pagination?: SearchPaginationStore;
 	controller?: SearchController;
-	auto?: boolean;
+	autoFetch?: boolean;
 	intersectionOffset?: string;
 	loading?: boolean;
 	loadMoreText?: string;

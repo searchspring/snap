@@ -23,9 +23,17 @@ export default {
 		},
 	},
 	argTypes: {
+		controller: {
+			description: 'Search Controller reference',
+			table: {
+				type: {
+					summary: 'Search controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		pagination: {
 			description: 'Pagination store reference',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'pagination store object',
@@ -33,7 +41,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		auto: {
+		autoFetch: {
 			description: 'Automatically load more results when component comes into viewport',
 			table: {
 				type: {

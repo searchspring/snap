@@ -18,28 +18,28 @@ The required `pagination` (or `controller`) prop specifies a reference to the pa
 <LoadMore controller={controller} />
 ```
 
-### auto
-The `auto` prop will not render a "Show More" button and instead fetch the next page of results when the component appears in the viewport. Recommended to place underneath Results to allow for infinite scrolling. 
+### autoFetch
+The `autoFetch` prop will not render a "Show More" button and instead fetch the next page of results when the component appears in the viewport. Recommended to place underneath Results to allow for infinite scrolling. 
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} auto={true} />
+<LoadMore pagination={controller.store.pagination} autoFetch={true} />
 ```
 
 Can be used in combination with `` and `` to not display anything and have infinite scrolling still function:
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} auto={true} hideProgressIndicator={true} hideProgressText={true} />
+<LoadMore pagination={controller.store.pagination} autoFetch={true} hideProgressIndicator={true} hideProgressText={true} />
 ```
 
-### intersectionOffset + auto
-Requires `auto` prop to be `true`. The `intersectionOffset` prop defines the IntersectionObserver's `rootMargin` value. This is an offset added to each side of the component's bounding box to create the final root bounds. These bounds then determine when the component is in the viewport and the next results are fetched. Default: `0px`
+### intersectionOffset + autoFetch
+Requires `autoFetch` prop to be `true`. The `intersectionOffset` prop defines the IntersectionObserver's `rootMargin` value. This is an offset added to each side of the component's bounding box to create the final root bounds. These bounds then determine when the component is in the viewport and the next results are fetched. Default: `0px`
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} auto={true} intersectionOffset={'40px'} />
+<LoadMore pagination={controller.store.pagination} autoFetch={true} intersectionOffset={'40px'} />
 ```
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} auto={true} intersectionOffset={'100%'} />
+<LoadMore pagination={controller.store.pagination} autoFetch={true} intersectionOffset={'100%'} />
 ```
 
 ### loading
@@ -70,7 +70,7 @@ The `color` prop specifies the color of the indicator active state.
 The `backgroundColor` prop specifies the background color of the indicator.
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} color={'#eeeeee'} />
+<LoadMore pagination={controller.store.pagination} backgroundColor={'#eeeeee'} />
 ```
 
 ### progressIndicator
@@ -98,7 +98,7 @@ The `progressIndicatorSize` prop sets the progress indicator size in pixels. Whe
 The `hideProgressIndicator` prop hides the progress indicator.
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicator={true} />
+<LoadMore pagination={controller.store.pagination} hideProgressIndicator={true} />
 ```
 
 ### hideProgressText
