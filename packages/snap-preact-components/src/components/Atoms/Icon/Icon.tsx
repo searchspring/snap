@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h } from 'preact';
+import { Fragment, h, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -12,8 +12,8 @@ const CSS = {
 	icon: ({ color, height, width, size, theme }: IconProps) =>
 		css({
 			fill: color || theme?.colors?.primary,
-			width: width || size,
-			height: height || size,
+			width: isNaN(Number(width || size)) ? width || size : `${width || size}px`,
+			height: isNaN(Number(height || size)) ? height || size : `${height || size}px`,
 			position: 'relative',
 		}),
 };
@@ -32,10 +32,10 @@ export function Icon(properties: IconProps): JSX.Element {
 		...properties,
 		...properties.theme?.components?.icon,
 	};
-	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
+	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, ...otherProps } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
-
+	const pathType = typeof iconPath;
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.icon({ color, width, height, size, theme }), style];
@@ -43,7 +43,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		styling.css = [style];
 	}
 
-	return iconPath ? (
+	return children || (iconPath && pathType === 'string') || (pathType === 'object' && Array.isArray(path)) ? (
 		<CacheProvider>
 			<svg
 				{...styling}
@@ -52,8 +52,17 @@ export function Icon(properties: IconProps): JSX.Element {
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles ? width || size : undefined}
 				height={disableStyles ? height || size : undefined}
+				{...otherProps}
 			>
-				<path fill={disableStyles ? color : undefined} d={iconPath} />
+				{(() => {
+					if (children) {
+						return children;
+					} else if (pathType === 'string') {
+						return <path fill={disableStyles ? color : undefined} d={iconPath as string} />;
+					} else if (pathType === 'object' && Array.isArray(path)) {
+						return path.map((p: SVGPathElement, i) => <p.type key={i} {...p.attributes} />);
+					}
+				})()}
 			</svg>
 		</CacheProvider>
 	) : (
@@ -61,12 +70,20 @@ export function Icon(properties: IconProps): JSX.Element {
 	);
 }
 
+type SVGPathElement = {
+	type: string;
+	attributes: {
+		[attribute: string]: string;
+	};
+};
+
 export interface IconProps extends ComponentProps {
 	color?: string;
 	icon?: IconType | string;
-	path?: string;
+	path?: string | SVGPathElement[];
+	children?: ComponentChildren;
 	size?: string;
-	width?: string;
-	height?: string;
+	width?: string | number;
+	height?: string | number;
 	viewBox?: string;
 }
