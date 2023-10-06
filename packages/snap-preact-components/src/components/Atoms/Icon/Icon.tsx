@@ -12,6 +12,7 @@ const CSS = {
 	icon: ({ color, height, width, size, theme }: IconProps) =>
 		css({
 			fill: color || theme?.colors?.primary,
+			stroke: color || theme?.colors?.primary,
 			width: isNaN(Number(width || size)) ? width || size : `${width || size}px`,
 			height: isNaN(Number(height || size)) ? height || size : `${height || size}px`,
 			position: 'relative',
@@ -43,7 +44,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		styling.css = [style];
 	}
 
-	return children || (iconPath && pathType === 'string') || (pathType === 'object' && Array.isArray(path)) ? (
+	return children || (iconPath && (pathType === 'string' || (pathType === 'object' && Array.isArray(iconPath)))) ? (
 		<CacheProvider>
 			<svg
 				{...styling}
@@ -59,8 +60,8 @@ export function Icon(properties: IconProps): JSX.Element {
 						return children;
 					} else if (pathType === 'string') {
 						return <path fill={disableStyles ? color : undefined} d={iconPath as string} />;
-					} else if (pathType === 'object' && Array.isArray(path)) {
-						return path.map((p: SVGPathElement, i) => <p.type key={i} {...p.attributes} />);
+					} else if (iconPath && pathType === 'object' && Array.isArray(iconPath)) {
+						return iconPath.map((p: SVGPathElement, i) => <p.type key={i} {...p.attributes} />);
 					}
 				})()}
 			</svg>
@@ -70,7 +71,7 @@ export function Icon(properties: IconProps): JSX.Element {
 	);
 }
 
-type SVGPathElement = {
+export type SVGPathElement = {
 	type: string;
 	attributes: {
 		[attribute: string]: string;
@@ -82,7 +83,7 @@ export interface IconProps extends ComponentProps {
 	icon?: IconType | string;
 	path?: string | SVGPathElement[];
 	children?: ComponentChildren;
-	size?: string;
+	size?: string | number;
 	width?: string | number;
 	height?: string | number;
 	viewBox?: string;

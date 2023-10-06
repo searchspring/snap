@@ -68,7 +68,7 @@ export default {
 			description: 'Icon size',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string | number',
 				},
 				defaultValue: { summary: '16px' },
 			},
@@ -123,75 +123,6 @@ export const CustomPath = (props: IconProps): JSX.Element => <Icon {...props} />
 CustomPath.args = {
 	path: 'M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z',
 	size: '70px',
-	viewBox: '0 0 70 70',
-};
-
-export const Children = (props: IconProps): JSX.Element => (
-	<Icon {...props}>
-		<line x1="1" y1="10" x2="69" y2="10" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></line>
-		<line x1="1" y1="30" x2="69" y2="30" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></line>
-		<circle cx="15" cy="10" r="6" fill="#000000" stroke="#000000" stroke-width="3"></circle>
-		<circle cx="55" cy="30" r="6" fill="#000000" stroke="#000000" stroke-width="3"></circle>
-	</Icon>
-);
-Children.args = {
-	size: '70px',
-	viewBox: '0 0 70 70',
-};
-
-export const ArrayPath = (props: IconProps): JSX.Element => <Icon {...props} />;
-ArrayPath.args = {
-	path: [
-		{
-			type: 'line',
-			attributes: {
-				x1: '1',
-				y1: '10',
-				x2: '69',
-				y2: '10',
-				stroke: '#000000',
-				'stroke-width': '3',
-				'stroke-linecap': 'round',
-				'stroke-linejoin': 'round',
-			},
-		},
-		{
-			type: 'line',
-			attributes: {
-				x1: '1',
-				y1: '30',
-				x2: '69',
-				y2: '30',
-				stroke: '#000000',
-				'stroke-width': '3',
-				'stroke-linecap': 'round',
-				'stroke-linejoin': 'round',
-			},
-		},
-		{
-			type: 'circle',
-			attributes: {
-				cx: '15',
-				cy: '10',
-				r: '6',
-				fill: '#000000',
-				stroke: '#000000',
-				'stroke-width': '3',
-			},
-		},
-		{
-			type: 'circle',
-			attributes: {
-				cx: '55',
-				cy: '30',
-				r: '6',
-				fill: '#000000',
-				stroke: '#000000',
-				'stroke-width': '3',
-			},
-		},
-	],
-	size: '70',
 	viewBox: '0 0 70 70',
 };
 
