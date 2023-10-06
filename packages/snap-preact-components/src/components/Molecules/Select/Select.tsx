@@ -81,6 +81,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		selected,
 		separator,
 		startOpen,
+		hideIcon,
+		hideSelection,
 		stayOpenOnSelection,
 		disableStyles,
 		className,
@@ -240,8 +242,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
-								{selection && <span className="ss__select__selection">{selection?.label}</span>}
-								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+								{selection && !hideSelection && <span className="ss__select__selection">{selection?.label}</span>}
+
+								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
 							</Button>
 						}
 					>
@@ -282,6 +285,7 @@ export type Option = {
 	value: string | number;
 	[otherOptions: string]: any;
 };
+
 export interface SelectProps extends ComponentProps {
 	options: Option[];
 	backgroundColor?: string;
@@ -301,4 +305,6 @@ export interface SelectProps extends ComponentProps {
 	separator?: string | JSX.Element;
 	startOpen?: boolean;
 	stayOpenOnSelection?: boolean;
+	hideSelection?: boolean;
+	hideIcon?: boolean;
 }
