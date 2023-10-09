@@ -23,7 +23,7 @@ import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
-import { useState } from 'react';
+import { useState } from 'preact/hooks';
 
 const CSS = {
 	Search: ({ mobileSidebarDisplayAt: slideOutToggleWidth }: Partial<SearchProps>) =>
