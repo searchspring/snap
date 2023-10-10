@@ -49,6 +49,26 @@ The `hideIcon` prop will disable the facet icon from being rendered.
 <FacetPaletteOptions values={paletteFacet.values} hideIcon={true} />
 ```
 
+### hideCount
+The `hideCount` prop will disable the facet option counts from being rendered.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCount={true} />
+```
+
+### hideCheckbox
+The `hideCheckbox` prop will disable the facet option checkboxes from being rendered.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+```
+
+### layout
+The `layout` prop determines if the options should render as a `list` or `grid`. By default `grid` will be used.
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+```
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 
