@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -20,9 +20,13 @@ import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import { Banner, BannerProps } from '../../Atoms/Merchandising';
+import { ContentType } from '@searchspring/snap-store-mobx';
+import { useState } from 'preact/hooks';
 
 const CSS = {
-	Search: ({ slideOutToggleWidth }: Partial<SearchProps>) =>
+	Search: ({ mobileSidebarDisplayAt: slideOutToggleWidth }: Partial<SearchProps>) =>
 		css({
 			display: 'flex',
 			minHeight: '600px',
@@ -53,7 +57,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<SearchProps> = {
-		slideOutToggleWidth: '991px',
+		mobileSidebarDisplayAt: '991px',
 	};
 
 	let props = mergeProps('search', globalTheme, defaultProps, properties);
@@ -78,11 +82,15 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		style,
 		styleScript,
 		hideSidebar,
+		hideSearchHeader,
+		hideMobileSidebar,
 		resultLayout,
+		hideMerchandisingBanners,
+		toggleSidebarButtonText,
+		hideTopToolbar,
 		resultComponent,
-		hidetopToolBar,
 		hideBottomToolBar,
-		slideOutToggleWidth,
+		mobileSidebarDisplayAt,
 	} = props;
 	const store = controller.store;
 
@@ -91,7 +99,25 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			hidePerPage: true,
 			hideSortBy: true,
-			displayAt: slideOutToggleWidth,
+			displayAt: mobileSidebarDisplayAt,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		Button: {
+			// default props
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		Toolbar: {
+			// default props
 			// inherited props
 			...defined({
 				disableStyles,
@@ -161,6 +187,15 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		Banner: {
+			// default props
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 	};
 
 	const styling: { css?: StylingCSS } = {};
@@ -174,25 +209,85 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const mobileMediaQuery = `(max-width: ${slideOutToggleWidth})`;
+	const mobileMediaQuery = `(max-width: ${mobileSidebarDisplayAt})`;
 	const isMobile = useMediaQuery(mobileMediaQuery);
+	const merchandising = controller.store.merchandising;
+
+	let hideLeftBanner;
+	let hideHeaderBanner;
+	let hideBannerBanner;
+	let hideFooterBanner;
+
+	if (hideMerchandisingBanners) {
+		if (typeof hideMerchandisingBanners == 'boolean') {
+			//hide all
+			hideLeftBanner = true;
+			hideHeaderBanner = true;
+			hideBannerBanner = true;
+			hideFooterBanner = true;
+		} else if (typeof hideMerchandisingBanners == 'object') {
+			hideMerchandisingBanners.map((type) => {
+				if (type.toLowerCase() == 'banner') {
+					hideBannerBanner = true;
+				}
+				if (type.toLowerCase() == 'header') {
+					hideHeaderBanner = true;
+				}
+				if (type.toLowerCase() == 'footer') {
+					hideFooterBanner = true;
+				}
+				if (type.toLowerCase() == 'left') {
+					hideLeftBanner = true;
+				}
+			});
+		}
+	}
+
+	const [sidebarOpenState, setSidebarOpenState] = useState(true);
 
 	return (
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__search', className)}>
-					<div className="ss__search__sidebar-wrapper">
-						{!hideSidebar && !isMobile && <Sidebar {...subProps.Sidebar} controller={controller} />}
-
-						<MobileSidebar controller={controller} {...subProps.MobileSidebar} />
-					</div>
+					{!hideSidebar && !isMobile && (
+						<div className="ss__search__sidebar-wrapper">
+							{toggleSidebarButtonText ? (
+								sidebarOpenState && (
+									<Fragment>
+										<Sidebar {...subProps.Sidebar} controller={controller} />
+										{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+									</Fragment>
+								)
+							) : (
+								<Fragment>
+									<Sidebar {...subProps.Sidebar} controller={controller} />
+									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+								</Fragment>
+							)}
+						</div>
+					)}
 					<div className={classnames('ss__search__content')}>
-						{/* do we want this? */}
-						{/* <LoadingBar {...subProps.LoadingBar} active={store.loading} /> */}
+						{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
-						<SearchHeader {...subProps.SearchHeader} controller={controller} />
+						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
+						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
 
-						{!hidetopToolBar && store.pagination.totalResults > 0 && <Toolbar {...subProps.TopToolbar} name={'topToolBar'} controller={controller} />}
+						{toggleSidebarButtonText && (
+							<Button
+								onClick={() => setSidebarOpenState(!sidebarOpenState)}
+								className="ss__search__sidebar-wrapper-toggle"
+								name={'search__sidebar-wrapper-toggle-button'}
+								{...subProps.Button}
+							>
+								{toggleSidebarButtonText}
+							</Button>
+						)}
+
+						{!hideTopToolbar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--topToolBar" name={'topToolBar'} controller={controller} />
+						)}
+
+						{!hideMobileSidebar && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
 
 						<div className="clear"></div>
 
@@ -202,10 +297,17 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
+						{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
+
 						<div className="clear"></div>
 
 						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-							<Toolbar {...subProps.BottomToolbar} name={'bottomToolBar'} controller={controller} />
+							<Toolbar
+								{...subProps.BottomToolbar}
+								name={'bottomToolBar'}
+								className="ss__search__content__toolbar--bottomToolBar"
+								controller={controller}
+							/>
 						)}
 					</div>
 				</div>
@@ -217,12 +319,16 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 //todo improve the controller spreading here..
 export interface SearchProps extends ComponentProps {
 	controller: SearchController;
-	slideOutToggleWidth?: string;
+	mobileSidebarDisplayAt?: string;
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 	hideSidebar?: boolean;
-	hidetopToolBar?: boolean;
+	hideMobileSidebar?: boolean;
+	hideSearchHeader?: boolean;
+	hideTopToolbar?: boolean;
 	hideBottomToolBar?: boolean;
+	hideMerchandisingBanners?: boolean | string[];
+	toggleSidebarButtonText?: string;
 }
 
 interface SearchSubProps {
@@ -231,6 +337,9 @@ interface SearchSubProps {
 	Sidebar: Partial<SidebarProps>;
 	TopToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
+	Toolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
 	MobileSidebar: Partial<MobileSidebarProps>;
+	Button: Partial<ButtonProps>;
+	Banner: Partial<BannerProps>;
 }
