@@ -40,10 +40,18 @@ export default {
 			description: 'SVG path',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string | SVGPathElement[]',
 				},
 			},
 			control: { type: 'text' },
+		},
+		children: {
+			description: 'SVG elements to be contained within (using children)',
+			table: {
+				type: {
+					summary: 'string, JSX',
+				},
+			},
 		},
 		color: {
 			description: 'Icon color',
@@ -60,7 +68,7 @@ export default {
 			description: 'Icon size',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string | number',
 				},
 				defaultValue: { summary: '16px' },
 			},
@@ -70,7 +78,7 @@ export default {
 			description: 'Icon height. Overwrites size.',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string | number',
 				},
 			},
 			control: { type: 'text' },
@@ -79,7 +87,7 @@ export default {
 			description: 'Icon width. Overwrites size.',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'string | number',
 				},
 			},
 			control: { type: 'text' },
