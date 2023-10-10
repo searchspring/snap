@@ -61,7 +61,10 @@ export function RadioSelect(properties: RadioSelectProps): JSX.Element {
 	const subProps: RadioSelectSubProps = {
 		CheckedIcon: {
 			// default props
-			icon: 'check',
+			width: 20,
+			height: 20,
+			viewBox: undefined,
+			children: <circle cx="10" cy="10" r="5" stroke="black" stroke-width="3" fill="gray"></circle>,
 			className: 'ss__list__option__radio__icon--checked',
 			// inherited props
 			...defined({
@@ -72,7 +75,10 @@ export function RadioSelect(properties: RadioSelectProps): JSX.Element {
 		},
 		UncheckedIcon: {
 			// default props
-			icon: 'circle',
+			width: 20,
+			height: 20,
+			viewBox: undefined,
+			children: <circle cx="10" cy="10" r="5" stroke="black" stroke-width="3" fill="white"></circle>,
 			className: 'ss__list__option__radio__icon--unchecked',
 			// inherited props
 			...defined({
