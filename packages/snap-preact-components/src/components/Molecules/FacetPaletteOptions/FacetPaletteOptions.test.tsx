@@ -119,7 +119,7 @@ describe('FacetPaletteOptions Component', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} disableStyles={true} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
-		expect(paletteElement?.classList.length).toBe(1);
+		expect(paletteElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
@@ -157,6 +157,55 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteOptionElement = rendered.container.querySelector('.ss__facet-palette-options__option')!;
 		const optionStyles = getComputedStyle(paletteOptionElement);
 		expect(optionStyles.width).toBe(`calc(100% / ${args.columns} - ${2 * Math.round((args.columns + 2) / 2)}px )`);
+	});
+
+	it('can add a count', () => {
+		const args = {
+			hideCount: false,
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} {...args} />);
+
+		const countElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option__value__count')!;
+		expect(countElement).toHaveLength(paletteFacetMock.values!.length);
+
+		countElement.forEach((elem, idx) => {
+			if (paletteFacetMock.values![idx].count) {
+				// @ts-ignore
+				expect(elem).toHaveTextContent(paletteFacetMock.values[idx].count);
+			}
+		});
+	});
+
+	it('can add checkboxes', () => {
+		const args = {
+			hideCheckbox: false,
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} {...args} />);
+
+		const Element = rendered.container.querySelectorAll('.ss__facet-palette-options__checkbox')!;
+		expect(Element).toHaveLength(paletteFacetMock.values!.length);
+	});
+
+	it('renders as grid layout by default', () => {
+		const args = {};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} {...args} />);
+
+		const Element = rendered.container.querySelector('.ss__facet-palette-options')!;
+		expect(Element).toBeInTheDocument();
+		expect(Element).toHaveClass('ss__facet-palette-options--grid');
+		expect(Element).not.toHaveClass('ss__facet-palette-options--list');
+	});
+
+	it('renders as list layout', () => {
+		const args = {
+			layout: 'list' as const,
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} {...args} />);
+
+		const Element = rendered.container.querySelector('.ss__facet-palette-options')!;
+		expect(Element).toBeInTheDocument();
+		expect(Element).toHaveClass('ss__facet-palette-options--list');
+		expect(Element).not.toHaveClass('ss__facet-palette-options--grid');
 	});
 
 	it('is themeable with ThemeProvider', () => {
