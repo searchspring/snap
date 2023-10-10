@@ -5,7 +5,7 @@ import { Theme } from './providers/theme';
 export interface ComponentProps extends RenderableProps<any> {
 	className?: string;
 	disableStyles?: boolean;
-	style?: string | Record<string, string>;
+	style?: string | Record<string, any>;
 	theme?: Theme;
 }
 
