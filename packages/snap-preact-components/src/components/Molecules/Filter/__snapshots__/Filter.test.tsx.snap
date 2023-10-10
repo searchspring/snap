@@ -1,0 +1,1254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter Component can disable styles 1`] = `
+<DocumentFragment>
+  <a
+    aria-label="remove selected facet filter value"
+    class="ss__filter"
+  >
+    <div
+      class="ss__button ss__filter__button"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon"
+        height="10px"
+        viewBox="0 0 56 56"
+        width="10px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component can have no separator 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component can use a custom separator 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+        <span
+          class="ss__filter__label__separator"
+        >
+          gottakeepemseperated
+        </span>
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component does not show facetLabel when told not to 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component has a url value when passed one 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+    href="www.searchspring.com"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component renders with Filter prop data 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected Dress Size filter Large"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        Dress Size
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        Large
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter classy emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component renders with specified icon 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--cog ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M37.333 28c0-5.141-4.193-9.333-9.333-9.333s-9.333 4.193-9.333 9.333 4.193 9.333 9.333 9.333 9.333-4.193 9.333-9.333zM56 24.026v8.094c0 0.547-0.438 1.203-1.021 1.312l-6.745 1.021c-0.401 1.167-0.839 2.26-1.422 3.318 1.24 1.786 2.552 3.391 3.901 5.031 0.219 0.255 0.365 0.583 0.365 0.911s-0.109 0.583-0.328 0.839c-0.875 1.167-5.797 6.526-7.036 6.526-0.328 0-0.656-0.146-0.948-0.328l-5.031-3.938c-1.057 0.547-2.188 1.021-3.318 1.385-0.255 2.224-0.474 4.594-1.057 6.781-0.146 0.583-0.656 1.021-1.312 1.021h-8.094c-0.656 0-1.24-0.474-1.312-1.094l-1.021-6.708c-1.13-0.365-2.224-0.802-3.281-1.349l-5.141 3.901c-0.255 0.219-0.583 0.328-0.911 0.328s-0.656-0.146-0.911-0.401c-1.932-1.75-4.484-4.010-6.016-6.125-0.182-0.255-0.255-0.547-0.255-0.839 0-0.328 0.109-0.583 0.292-0.839 1.24-1.677 2.589-3.281 3.828-4.995-0.62-1.167-1.13-2.37-1.495-3.609l-6.672-0.984c-0.62-0.109-1.057-0.693-1.057-1.312v-8.094c0-0.547 0.438-1.203 0.984-1.312l6.781-1.021c0.365-1.167 0.839-2.26 1.422-3.354-1.24-1.75-2.552-3.391-3.901-5.031-0.219-0.255-0.365-0.547-0.365-0.875s0.146-0.583 0.328-0.839c0.875-1.203 5.797-6.526 7.036-6.526 0.328 0 0.656 0.146 0.948 0.365l5.031 3.901c1.057-0.547 2.188-1.021 3.318-1.385 0.255-2.224 0.474-4.594 1.057-6.781 0.146-0.583 0.656-1.021 1.312-1.021h8.094c0.656 0 1.24 0.474 1.312 1.094l1.021 6.708c1.13 0.365 2.224 0.802 3.281 1.349l5.177-3.901c0.219-0.219 0.547-0.328 0.875-0.328s0.656 0.146 0.911 0.365c1.932 1.786 4.484 4.047 6.016 6.198 0.182 0.219 0.255 0.51 0.255 0.802 0 0.328-0.109 0.583-0.292 0.839-1.24 1.677-2.589 3.281-3.828 4.995 0.62 1.167 1.13 2.37 1.495 3.573l6.672 1.021c0.62 0.109 1.057 0.693 1.057 1.312z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  fill: #6d7175;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected Dress Size filter Large"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        Dress Size
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        Large
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+        <span
+          class="ss__filter__label__separator"
+        >
+          ---
+        </span>
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+        <span
+          class="ss__filter__label__separator"
+        >
+          seperator
+        </span>
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Filter theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .ss__filter__button {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__filter__button .ss__filter__button__icon {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__filter__label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-1.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-1.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-2 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+<a
+    aria-label="remove selected facet filter value"
+    class="ss__filter emotion-0"
+  >
+    <div
+      class="ss__button ss__filter__button emotion-1"
+      role="button"
+    >
+      <svg
+        class="ss__icon ss__icon--close-thin ss__filter__button__icon emotion-2"
+        viewBox="0 0 56 56"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+        />
+      </svg>
+      <span
+        class="ss__filter__label"
+      >
+        facet
+        <span
+          class="ss__filter__label__separator"
+        >
+          seperator
+        </span>
+      </span>
+      <span
+        class="ss__filter__value"
+      >
+        value
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;

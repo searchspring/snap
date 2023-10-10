@@ -2,6 +2,7 @@ import { h } from 'preact';
 
 import { render, RenderResult } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { Pagination } from './Pagination';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
@@ -25,6 +26,9 @@ describe('Pagination Component', () => {
 
 	beforeEach(() => {
 		rendered = render(<Pagination pagination={paginationStore} />);
+	});
+	afterAll(() => {
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders', () => {
@@ -94,6 +98,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		expect(next).toBeInTheDocument();
 		expect(prev).toBeInTheDocument();
 		expect(paginationElement).toHaveTextContent('…');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides first and last', () => {
@@ -105,6 +110,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const last = rendered.container.querySelector('.ss__pagination__page--last');
 		expect(first).not.toBeInTheDocument();
 		expect(last).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides next and prev', () => {
@@ -116,6 +122,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const prev = rendered.container.querySelector('.ss__pagination__page--previous');
 		expect(next).not.toBeInTheDocument();
 		expect(prev).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides elipses', () => {
@@ -125,6 +132,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		expect(paginationElement).toBeInTheDocument();
 
 		expect(paginationElement).not.toHaveTextContent('…');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('custom next and prev buttns', () => {
@@ -136,6 +144,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const prev = rendered.container.querySelector('.ss__pagination__page--previous');
 		expect(next).toHaveTextContent('NEXT');
 		expect(prev).toHaveTextContent('PREV');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('custom first and last buttns', () => {
@@ -152,6 +161,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const last = rendered.container.querySelector('.ss__pagination__page--last');
 		expect(first).toHaveTextContent(args.firstButton);
 		expect(last).toHaveTextContent(args.lastButton);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -161,6 +171,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss__pagination');
 		expect(paginationElement).toBeInTheDocument();
 		expect(paginationElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -169,6 +180,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss__pagination');
 
 		expect(paginationElement?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -184,6 +196,14 @@ describe('Pagination theming works', () => {
 	const data = new MockData().searchMeta();
 
 	const paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Pagination theme={theme} pagination={paginationStore} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
@@ -201,6 +221,7 @@ describe('Pagination theming works', () => {
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
 		expect(pagination?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -215,6 +236,7 @@ describe('Pagination theming works', () => {
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
 		expect(pagination?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -241,5 +263,6 @@ describe('Pagination theming works', () => {
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
 		expect(pagination?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

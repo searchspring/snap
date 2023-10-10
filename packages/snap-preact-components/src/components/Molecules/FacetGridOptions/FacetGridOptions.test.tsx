@@ -2,6 +2,7 @@ import { h } from 'preact';
 
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 import { FacetGridOptions } from './FacetGridOptions';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
@@ -18,6 +19,14 @@ describe('FacetGridOptions Component', () => {
 	let gridComponent;
 	let gridElement;
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetGridOptions theme={theme} values={gridFacetMock!.values as FacetValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		gridComponent = render(<FacetGridOptions values={gridFacetMock!.values as FacetValue[]} />);
 
@@ -25,6 +34,7 @@ describe('FacetGridOptions Component', () => {
 
 		expect(gridElement).toBeInTheDocument();
 		expect(gridElement).toHaveTextContent(gridFacetMock.values![0].label!);
+		expect(gridComponent.asFragment()).toMatchSnapshot();
 	});
 
 	it('has the correct number of options', () => {
@@ -32,6 +42,7 @@ describe('FacetGridOptions Component', () => {
 
 		const gridOptions = gridComponent.container.querySelectorAll('.ss__facet-grid-options__option');
 		expect(gridOptions).toHaveLength(gridFacetMock.values!.length);
+		expect(gridComponent.asFragment()).toMatchSnapshot();
 	});
 
 	it('has the correct label', () => {
@@ -41,6 +52,7 @@ describe('FacetGridOptions Component', () => {
 		for (let i = 0; i < gridOptions.length; i++) {
 			expect(gridOptions[i]).toHaveTextContent(gridFacetMock.values![i].label!);
 		}
+		expect(gridComponent.asFragment()).toMatchSnapshot();
 	});
 
 	it('Grid container element has correct number of classes', () => {
@@ -50,6 +62,7 @@ describe('FacetGridOptions Component', () => {
 
 		expect(gridElement?.classList.length).toBe(2);
 		expect(gridElement).toHaveClass('ss__facet-grid-options');
+		expect(gridComponent.asFragment()).toMatchSnapshot();
 	});
 
 	it('Grid option elements have correct classes', () => {
@@ -63,6 +76,7 @@ describe('FacetGridOptions Component', () => {
 		const activeGridOption = gridOptionsElement[2];
 		expect(inactiveGridOption).toHaveClass('ss__facet-grid-options__option__value');
 		expect(activeGridOption.parentElement).toHaveClass('ss__facet-grid-options__option--filtered');
+		expect(gridComponent.asFragment()).toMatchSnapshot();
 	});
 
 	it('Grid option can adjust gapSize & columns', () => {
@@ -78,6 +92,7 @@ describe('FacetGridOptions Component', () => {
 		const styles = getComputedStyle(gridOptionsElement);
 		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
 		expect(styles.gap).toBe(args.gapSize);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -85,6 +100,7 @@ describe('FacetGridOptions Component', () => {
 
 		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
 		expect(gridElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -94,6 +110,7 @@ describe('FacetGridOptions Component', () => {
 		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
 		expect(gridElement).toBeInTheDocument();
 		expect(gridElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -115,6 +132,7 @@ describe('FacetGridOptions theming works', () => {
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(globalTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -130,6 +148,7 @@ describe('FacetGridOptions theming works', () => {
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -156,5 +175,6 @@ describe('FacetGridOptions theming works', () => {
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

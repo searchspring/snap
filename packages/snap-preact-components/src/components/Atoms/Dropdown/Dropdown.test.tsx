@@ -5,14 +5,23 @@ import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 
 describe('Dropdown Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Dropdown theme={theme} button={'open me'} content={'content'} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('renders', () => {
 		const rendered = render(<Dropdown button={'open me'} />);
 
 		const dropdownElement = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdownElement).toBeInTheDocument();
 		expect(dropdownElement?.classList).toHaveLength(2);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with className prop', () => {
@@ -21,6 +30,7 @@ describe('Dropdown Component', () => {
 
 		const dropdownElement = rendered.container.querySelector(`.ss__dropdown.${className}`);
 		expect(dropdownElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -34,6 +44,7 @@ describe('Dropdown Component', () => {
 		const styles = getComputedStyle(dropdownElement);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders button prop', () => {
@@ -42,6 +53,7 @@ describe('Dropdown Component', () => {
 
 		const buttonElement = rendered.getByText(buttonText);
 		expect(buttonElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders content prop', () => {
@@ -50,6 +62,7 @@ describe('Dropdown Component', () => {
 
 		const contentElement = rendered.getByText(contentText);
 		expect(contentElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders children prop', () => {
@@ -58,6 +71,7 @@ describe('Dropdown Component', () => {
 
 		const childElement = rendered.getByText(child);
 		expect(childElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('Can enable/disable useAlly with disableA11y prop', () => {
@@ -69,6 +83,7 @@ describe('Dropdown Component', () => {
 		expect(buttonElement).toBeInTheDocument();
 
 		expect(buttonElement).toHaveAttribute('ssA11y');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const rendered2 = render(
 			<Dropdown button={'open me'} disableA11y>
@@ -78,6 +93,7 @@ describe('Dropdown Component', () => {
 
 		const buttonElement2 = rendered2.container.querySelector('.ss__dropdown__button');
 		expect(buttonElement2).not.toHaveAttribute('ssA11y');
+		expect(rendered2.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders content and children props', () => {
@@ -91,6 +107,7 @@ describe('Dropdown Component', () => {
 
 		const buttonElement = rendered.getByText(contentText + child);
 		expect(buttonElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders button prop with props', async () => {
@@ -102,11 +119,13 @@ describe('Dropdown Component', () => {
 		let buttonElement = rendered.container.querySelector('.button-with-props');
 		expect(buttonElement).toBeInTheDocument();
 		expect(buttonElement?.innerHTML).toBe('open me');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		await (buttonElement as HTMLElement).click();
 
 		buttonElement = rendered.container.querySelector('.button-with-props');
 		expect(buttonElement?.innerHTML).toBe('close me');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders children prop with props', async () => {
@@ -134,14 +153,17 @@ describe('Dropdown Component', () => {
 		let childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement).toBeInTheDocument();
 		expect(childElement?.innerHTML).toBe('im closed');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		await buttonElement.click();
 		childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement?.innerHTML).toBe('im open');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		await (childElement as HTMLElement).click();
 		childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement?.innerHTML).toBe('im closed');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders content prop with props', async () => {
@@ -165,14 +187,17 @@ describe('Dropdown Component', () => {
 		let contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement).toBeInTheDocument();
 		expect(contentElement?.innerHTML).toBe('im closed');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		await buttonElement.click();
 		contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement?.innerHTML).toBe('im open');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		await (contentElement as HTMLElement).click();
 		contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement?.innerHTML).toBe('im closed');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {
@@ -190,12 +215,15 @@ describe('Dropdown Component', () => {
 
 		const button = rendered.container.querySelector('.ss__dropdown__button')!;
 		const outside = rendered.container.querySelector('.outside')!;
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(button);
 		expect(clickFn).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(outside);
 		expect(toggleFn).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not fire onToggle prop when clicked outside (while opened) when disableClickOutside prop is true', () => {
@@ -211,9 +239,11 @@ describe('Dropdown Component', () => {
 		);
 
 		const outside = rendered.container.querySelector('.outside')!;
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(outside);
 		expect(toggleFn).not.toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('fires onClick prop when clicked', () => {
@@ -222,9 +252,11 @@ describe('Dropdown Component', () => {
 		const rendered = render(<Dropdown button={'open me'} onClick={clickFn} />);
 
 		const button = rendered.container.querySelector('.ss__dropdown__button')!;
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(button);
 		expect(clickFn).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not fire onClick prop when disabled', () => {
@@ -233,9 +265,11 @@ describe('Dropdown Component', () => {
 		const rendered = render(<Dropdown button={'open me'} disabled onClick={clickFn} />);
 
 		const button = rendered.container.querySelector('.ss__dropdown__button')!;
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(button);
 		expect(clickFn).not.toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -245,6 +279,7 @@ describe('Dropdown Component', () => {
 
 		const dropdown = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdown?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -264,6 +299,7 @@ describe('Dropdown Component', () => {
 
 		const dropdownElement = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdownElement).toHaveClass(globalTheme.components.dropdown.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -279,6 +315,7 @@ describe('Dropdown Component', () => {
 
 		const dropdownElement = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdownElement).toHaveClass(propTheme.components.dropdown.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -307,6 +344,7 @@ describe('Dropdown Component', () => {
 		const dropdownElement = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdownElement).toHaveClass(propTheme.components.dropdown.className);
 		expect(dropdownElement).not.toHaveClass(globalTheme.components.dropdown.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('internal state', () => {
@@ -316,9 +354,11 @@ describe('Dropdown Component', () => {
 			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} />);
 
 			const button = rendered.container.querySelector('.ss__dropdown__button')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('does not fire onToggle prop when disabled', () => {
@@ -327,9 +367,11 @@ describe('Dropdown Component', () => {
 			const rendered = render(<Dropdown button={'open me'} disabled onToggle={toggleFn} />);
 
 			const button = rendered.container.querySelector('.ss__dropdown__button')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(button);
 			expect(toggleFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('starts closed', () => {
@@ -338,6 +380,7 @@ describe('Dropdown Component', () => {
 			const dropdown = rendered.container.querySelector('.ss__dropdown');
 
 			expect(dropdown).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('can start open', () => {
@@ -346,6 +389,7 @@ describe('Dropdown Component', () => {
 			const dropdown = rendered.container.querySelector('.ss__dropdown');
 
 			expect(dropdown).toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('keeps its own internal state and passes it to onToggle', async () => {
@@ -354,14 +398,17 @@ describe('Dropdown Component', () => {
 			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} />);
 			const dropdown = rendered.container.querySelector('.ss__dropdown');
 			const button = rendered.container.querySelector('.ss__dropdown__button')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), true);
 			expect(dropdown).toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			await userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), false);
 			expect(dropdown).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -372,9 +419,11 @@ describe('Dropdown Component', () => {
 			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} open={true} />);
 
 			const button = rendered.container.querySelector('.ss__dropdown__button')!;
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(button);
 			expect(toggleFn).not.toHaveBeenCalled();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('uses prop open for state', () => {
@@ -382,9 +431,11 @@ describe('Dropdown Component', () => {
 
 			const dropdown = rendered.container.querySelector('.ss__dropdown');
 			expect(dropdown).toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			rendered.rerender(<Dropdown button={'open me'} open={false} />);
 			expect(dropdown).not.toHaveClass('ss__dropdown--open');
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

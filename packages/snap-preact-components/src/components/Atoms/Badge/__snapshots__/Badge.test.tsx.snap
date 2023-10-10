@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge Component Badge theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge classier emotion-0"
+  >
+    ahhhh
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge classy emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge classy emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with children Badge has correct number of classes 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with children renders Badge 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with content Badge has correct classes 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+<div
+    class="ss__badge sale-badge emotion-0"
+  >
+    sale
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with content renders Badge 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+<div
+    class="ss__badge sale-badge emotion-0"
+  >
+    sale
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with disableStyles Badge has correct number of classes 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__badge"
+  >
+    sale
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component Badge with disableStyles renders Badge 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__badge"
+  >
+    sale
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component positions badge based on prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component positions badge based on prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component positions badge based on prop 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component positions badge based on prop 4`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Badge Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+<div
+    class="ss__badge emotion-0"
+  >
+    <div>
+      sale
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormattedNumber Component can disable styling 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding: 20px;
+}
+
+<span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.990
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component does not pads digits when prop specified 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component has default formatting 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.999mm
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component has support for custom options 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1.099,99 £
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number theme-class emotion-0"
+  >
+    33.333
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number theme-class emotion-0"
+  >
+    33.333
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number theme-class emotion-0"
+  >
+    33.333
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component pads digits when it needs to 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.000
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component renders 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.990
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding: 20px;
+}
+
+<span
+    class="ss__formatted-number emotion-0"
+  >
+    100.000
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number emotion-0"
+  >
+    1099.990
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FormattedNumber Component uses custom className 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__formatted-number custom-class emotion-0"
+  >
+    1099.990
+  </span>
+</DocumentFragment>
+`;

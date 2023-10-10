@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Merchandising Banner Component can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__banner ss__banner--banner"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component doesnt render if empty 1`] = `<DocumentFragment />`;
+
+exports[`Merchandising Banner Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  background-color: red;
+}
+
+.emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  background-color: red;
+}
+
+.emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  background-color: blue;
+}
+
+.emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component renders type:banner banner 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component renders type:footer banner 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--footer emotion-0"
+  >
+    <script
+      data-banner-html="footer banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    footer banner.
+    <script
+      data-banner-html="footer banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    footer banner again.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component renders type:header banner 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--header emotion-0"
+  >
+    <script
+      data-banner-html="Primary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Primary banner.
+    <script
+      data-banner-html="Primary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Primary banner again.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner classy emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Merchandising Banner Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 iframe,
+.emotion-0 img {
+  max-width: 100%;
+  height: auto;
+}
+
+<div
+    class="ss__banner ss__banner--banner emotion-0"
+  >
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner again.
+    <script
+      data-banner-html="Secondary banner."
+      data-banner-type="html"
+      type="text/widget"
+    />
+    Secondary banner a third.
+  </div>
+</DocumentFragment>
+`;

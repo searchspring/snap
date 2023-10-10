@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { MobileSidebar } from './MobileSidebar';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { v4 as uuidv4 } from 'uuid';
 
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
@@ -66,10 +67,19 @@ describe('MobileSidebar Component', () => {
 		await controller.search();
 	});
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<MobileSidebar theme={theme} controller={controller} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const element = rendered.container.querySelector('.ss__mobile-sidebar');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render unless button is clicked', async () => {
@@ -89,6 +99,7 @@ describe('MobileSidebar Component', () => {
 		expect(sortby).not.toBeInTheDocument();
 		expect(perpage).not.toBeInTheDocument();
 		expect(facets).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(slideoutButton!);
 
@@ -104,6 +115,7 @@ describe('MobileSidebar Component', () => {
 			expect(perpage).toBeInTheDocument();
 			expect(facets).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render unless media query matches', async () => {
@@ -129,6 +141,7 @@ describe('MobileSidebar Component', () => {
 
 		expect(slideoutButton).not.toBeInTheDocument();
 		expect(slideoutContent).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change slideout open button text', async () => {
@@ -136,28 +149,33 @@ describe('MobileSidebar Component', () => {
 		const rendered = render(<MobileSidebar controller={controller} openButtonText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		expect(slideoutButton?.innerHTML).toBe(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default slideout open button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		expect(slideoutButton?.innerHTML).toBe('Filters');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default clear button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 			expect(element).toHaveTextContent('Clear All');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use the apply button', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
@@ -165,6 +183,7 @@ describe('MobileSidebar Component', () => {
 
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(applyButton!);
 
@@ -172,18 +191,21 @@ describe('MobileSidebar Component', () => {
 				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 				expect(element).not.toBeInTheDocument();
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
 	it('can use the close button', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
 			const closeButton = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			userEvent.click(closeButton!);
 
@@ -191,34 +213,40 @@ describe('MobileSidebar Component', () => {
 				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 				expect(element).not.toBeInTheDocument();
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
 	it('can hide clear button', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideClearButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 			expect(element).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide close button', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideCloseButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
 			expect(element).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default close button icon', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -227,6 +255,7 @@ describe('MobileSidebar Component', () => {
 			);
 			expect(iconElem).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change close button', async () => {
@@ -234,6 +263,7 @@ describe('MobileSidebar Component', () => {
 		const title = 'title text';
 		const rendered = render(<MobileSidebar controller={controller} closeButtonText={title} closeButtonIcon={icon} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -242,6 +272,7 @@ describe('MobileSidebar Component', () => {
 			expect(elem).toHaveTextContent(title);
 			expect(iconElem).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change open button', async () => {
@@ -253,6 +284,7 @@ describe('MobileSidebar Component', () => {
 		const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__slideout__button .ss__icon--${icon}`);
 		expect(slideoutButton).toHaveTextContent(title);
 		expect(iconElem).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change apply button', async () => {
@@ -260,6 +292,7 @@ describe('MobileSidebar Component', () => {
 		const icon = 'cog';
 		const rendered = render(<MobileSidebar controller={controller} applyButtonIcon={icon} applyButtonText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -271,6 +304,7 @@ describe('MobileSidebar Component', () => {
 			expect(applyButton).toHaveTextContent(text);
 			expect(iconElem).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change clear button text', async () => {
@@ -279,6 +313,7 @@ describe('MobileSidebar Component', () => {
 
 		const rendered = render(<MobileSidebar controller={controller} clearButtonIcon={icon} clearButtonText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -287,17 +322,20 @@ describe('MobileSidebar Component', () => {
 			expect(iconElem).toBeInTheDocument();
 			expect(element).toHaveTextContent(text);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('clear button clears filters', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
 			const filterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
 			expect(filterSummaryElement).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const clearButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 
@@ -312,11 +350,13 @@ describe('MobileSidebar Component', () => {
 			const filterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
 			expect(filterSummaryElement).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hideHeader', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideHeader={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -325,11 +365,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(title).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hideFooter', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideFooter={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -338,35 +380,41 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(footer).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default titleText', async () => {
 		const text = 'Filter Options';
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			expect(title?.innerHTML).toBe(text);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change titleText', async () => {
 		const text = 'title text';
 		const rendered = render(<MobileSidebar controller={controller} titleText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
 			const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			expect(title?.innerHTML).toBe(text);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide hideFacets', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideFacets={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -375,11 +423,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(facets).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide perpage', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hidePerPage={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -388,11 +438,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(perpage).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide hideSortBy', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideSortBy={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -401,11 +453,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(sortby).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide FilterSummary', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideFilterSummary={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -414,11 +468,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(summary).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide hideApplyButton', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideApplyButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -427,11 +483,13 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(applyButton).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has expected default apply button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+		expect(rendered.asFragment()).toMatchSnapshot();
 		userEvent.click(slideoutButton!);
 
 		await waitFor(() => {
@@ -440,6 +498,7 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(applyButton).toHaveTextContent('Apply');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -447,12 +506,14 @@ describe('MobileSidebar Component', () => {
 		const rendered = render(<MobileSidebar controller={controller} className={className} />);
 		const element = rendered.container.querySelector('.ss__mobile-sidebar');
 		expect(element).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
 		const rendered = render(<MobileSidebar controller={controller} disableStyles />);
 		const element = rendered.container.querySelector('.ss__mobile-sidebar');
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('Sidebar theming works', () => {
@@ -472,6 +533,7 @@ describe('MobileSidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(globalTheme.components.mobileSidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -486,6 +548,7 @@ describe('MobileSidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.mobileSidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -513,6 +576,7 @@ describe('MobileSidebar Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.mobileSidebar.className);
 			expect(element).not.toHaveClass(globalTheme.components.mobileSidebar.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

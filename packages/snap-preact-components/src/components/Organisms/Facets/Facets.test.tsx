@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { Facets, IndividualFacetType } from './Facets';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import userEvent from '@testing-library/user-event';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -11,6 +12,14 @@ const mockData = new MockData();
 const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Facets Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Facets theme={theme} facets={searchResponse.facets as IndividualFacetType[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const args = {
 			facets: searchResponse.facets as IndividualFacetType[],
@@ -18,6 +27,7 @@ describe('Facets Component', () => {
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has all facets', () => {
@@ -28,6 +38,7 @@ describe('Facets Component', () => {
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		const count = facetsElement?.querySelectorAll('.ss__facet').length;
 		expect(count).toBe(args.facets.length);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has limited facets with limit prop', () => {
@@ -40,6 +51,7 @@ describe('Facets Component', () => {
 		const count = facetsElement?.querySelectorAll('.ss__facet').length;
 		expect(count).toBeLessThanOrEqual(args.facets.length);
 		expect(count).toBe(args.limit);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -52,6 +64,7 @@ describe('Facets Component', () => {
 
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toHaveClass(args.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -64,6 +77,7 @@ describe('Facets Component', () => {
 
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -89,12 +103,14 @@ describe('Facets Component is themeable', () => {
 		);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toHaveClass(globalTheme.components.facets.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
 		const rendered = render(<Facets {...args} theme={globalTheme} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toHaveClass(globalTheme.components.facets.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -113,6 +129,7 @@ describe('Facets Component is themeable', () => {
 		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toHaveClass(theme.components.facets.className);
 		expect(facetsElement).not.toHaveClass(globalTheme.components.facets.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can pass child component props via the theme', () => {
@@ -128,10 +145,12 @@ describe('Facets Component is themeable', () => {
 		const rendered = render(<Facets {...args} theme={theme2} />);
 
 		expect(clickFunc).not.toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const resultElement = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		userEvent.click(resultElement);
 
 		expect(clickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

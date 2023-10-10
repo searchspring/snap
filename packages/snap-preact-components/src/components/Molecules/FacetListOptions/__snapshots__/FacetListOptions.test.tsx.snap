@@ -1,0 +1,3948 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetListOptions generic props work can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__facet-list-options"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions generic props work can set custom onClick func 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions generic props work can set custom onClick func 2`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions generic props work renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options classy emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetListOptions theming works uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-list-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 5px 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__facet-list-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-list-options__option.ss__facet-list-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-list-options__option .ss__facet-list-options__option__value .ss__facet-list-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-1.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-1 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+}
+
+<div
+    class="ss__facet-list-options emotion-0"
+  >
+    <a
+      aria-label="filter by 1"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        1
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 2"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        2
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 3"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        3
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 4"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        4
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 5"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        5
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 6"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        6
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 7"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        7
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 8"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        8
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (1)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 9"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        9
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 11"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        11
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 13"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        13
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (2)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 24"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        24
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (63)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 25"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        25
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (69)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 26"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        26
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 27"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        27
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 28"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        28
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 29"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        29
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 30"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        30
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (72)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by 31"
+      class="ss__facet-list-options__option"
+    >
+      <span
+        aria-label=" unchecked checkbox"
+        class="ss__checkbox ss__facet-list-options__checkbox emotion-1"
+        role="checkbox"
+      >
+        <span
+          class="ss__checkbox__empty"
+        />
+      </span>
+      <span
+        class="ss__facet-list-options__option__value"
+      >
+        31
+        <span
+          class="ss__facet-list-options__option__value__count"
+        >
+          (58)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ListValue Component hiding checkbox and count renders label but not count 1`] = `<DocumentFragment />`;
+
+exports[`ListValue Component renders checkboxs 1`] = `<DocumentFragment />`;

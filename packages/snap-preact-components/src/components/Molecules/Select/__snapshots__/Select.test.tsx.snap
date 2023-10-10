@@ -1,0 +1,7306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Component it does not render without options 1`] = `<DocumentFragment />`;
+
+exports[`Select Component native is renders with options 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select classy-global emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select classy-global emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select classy-global emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native it can be disabled 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select ss__select--disabled emotion-0"
+  >
+    <select
+      class="ss__select__select"
+      disabled=""
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native it can be disabled 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__select ss__select--disabled emotion-0"
+  >
+    <select
+      class="ss__select__select"
+      disabled=""
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native it fires onSelect event on option selection 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native it fires onSelect event on option selection 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__select emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native renders with classname 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select classy emotion-0"
+  >
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component native uses the "label" and "separator" prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select emotion-0"
+  >
+    <span
+      class="ss__select__label"
+    >
+      selectme
+      <span
+        class="ss__select__label__separator"
+      >
+        :::
+      </span>
+    </span>
+    <select
+      class="ss__select__select"
+    >
+      <option
+        class="ss__select__select__option"
+        value="red"
+      >
+        Red
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="orange"
+      >
+        Orange
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="yellow"
+      >
+        Yellow
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="green"
+      >
+        Green
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="blue"
+      >
+        Blue
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="indigo"
+      >
+        Indigo
+      </option>
+      <option
+        class="ss__select__select__option"
+        value="violet"
+      >
+        Violet
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 20px;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled can disableStyles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__select"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon"
+            height="14px"
+            viewBox="0 0 56 56"
+            width="14px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled does not render the "label" prop in button with hideLabelOnSelection 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Orange
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 2 of 7, Orange"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled does not render the "separator" prop in button when there is no label and a selection is made 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled does not render the "separator" prop in button when there is no label and a selection is made 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Green
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 4 of 7, Green"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled has props to customize colors 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: blue;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: purple;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid green;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: blue;
+  outline: 0;
+  background-color: purple;
+  border: 1px solid green;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  fill: red;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div>
+    <button>
+      a dummy button
+    </button>
+    <div
+      class="ss__select emotion-0"
+    >
+      <div
+        class="ss__dropdown ss__select__dropdown emotion-1"
+      >
+        <div
+          aria-expanded="false"
+          class="ss__dropdown__button"
+          role="button"
+        >
+          <div
+            class="ss__button ss__select__dropdown__button emotion-2"
+            role="button"
+          >
+            <svg
+              class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="ss__dropdown__content"
+        >
+          <ul
+            class="ss__select__select"
+          >
+            <li
+              aria-label=" option 1 of 7, Red"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Red
+              </span>
+            </li>
+            <li
+              aria-label=" option 2 of 7, Orange"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Orange
+              </span>
+            </li>
+            <li
+              aria-label=" option 3 of 7, Yellow"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Yellow
+              </span>
+            </li>
+            <li
+              aria-label=" option 4 of 7, Green"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Green
+              </span>
+            </li>
+            <li
+              aria-label=" option 5 of 7, Blue"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Blue
+              </span>
+            </li>
+            <li
+              aria-label=" option 6 of 7, Indigo"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Indigo
+              </span>
+            </li>
+            <li
+              aria-label=" option 7 of 7, Violet"
+              class="ss__select__select__option"
+              role="link"
+              ssa11y="true"
+              tabindex="0"
+            >
+              <span>
+                Violet
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled has props to customize the icon 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  fill: purple,;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-left ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M44.329 4.657c0 0.449-0.224 0.954-0.561 1.291l-22.052 22.052 22.052 22.052c0.337 0.337 0.561 0.842 0.561 1.291s-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.786 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled has props to customize the icon 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  fill: purple,;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__dropdown--open ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-right ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M44.329 28c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.786-0.561-1.291 0-0.449 0.224-0.954 0.561-1.291l22.052-22.052-22.052-22.052c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+          open="true"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled is closed on render when using startOpen false prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled is open on render when using startOpen prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__dropdown--open ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-up ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 39.671c0 0.449-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.786 0.561-1.291 0.561-0.449 0-0.954-0.224-1.291-0.561l-22.052-22.052-22.052 22.052c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+          open="true"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: red;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid red;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select classy-global emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: blue;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid blue;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select classy-global emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: red;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid red;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select classy-global emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it adds "selected" class on option selection and closes the dropdown 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it adds "selected" class on option selection and closes the dropdown 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Orange
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 2 of 7, Orange"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it can be disabled 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select ss__select--disabled emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          aria-disabled="true"
+          class="ss__button ss__button--disabled ss__select__dropdown__button emotion-2"
+          disabled="true"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it can be disabled 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select ss__select--disabled emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          aria-disabled="true"
+          class="ss__button ss__button--disabled ss__select__dropdown__button emotion-2"
+          disabled="true"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it can be disabled 3`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select ss__select--disabled emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          aria-disabled="true"
+          class="ss__button ss__button--disabled ss__select__dropdown__button emotion-2"
+          disabled="true"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it can have managed state with "selected" prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Orange
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 2 of 7, Orange"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it fires onSelect event on option selection 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it fires onSelect event on option selection 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Orange
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 2 of 7, Orange"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it renders with options 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it shows clearSelection label when a selection is made 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled it shows clearSelection label when a selection is made 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            class="ss__select__selection"
+          >
+            Yellow
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 8, clear selection"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              clear selection
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 8, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 8, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 4 of 8, Yellow"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 8, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 8, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 8, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 8 of 8, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled opens and closes on button click 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled opens and closes on button click 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__dropdown--open ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="true"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-up ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 39.671c0 0.449-0.224 0.954-0.561 1.291l-2.806 2.806c-0.337 0.337-0.786 0.561-1.291 0.561-0.449 0-0.954-0.224-1.291-0.561l-22.052-22.052-22.052 22.052c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-2.806-2.806c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l26.148-26.148c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l26.148 26.148c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+          open="true"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled renders the "label" prop in button 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            aria-expanded="false"
+            aria-label="selectme dropdown, 7 options "
+            class="ss__select__label"
+            role="button"
+            ssa11y="true"
+            tabindex="0"
+          >
+            selectme
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled renders the "separator" prop in button when there is a label and a selection is made 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            aria-expanded="false"
+            aria-label="color dropdown, 7 options "
+            class="ss__select__label"
+            role="button"
+            ssa11y="true"
+            tabindex="0"
+          >
+            color
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled renders the "separator" prop in button when there is a label and a selection is made 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <span
+            aria-expanded="false"
+            aria-label="color dropdown, 7 options , Currently selected option is Green"
+            class="ss__select__label"
+            role="button"
+            ssa11y="true"
+            tabindex="0"
+          >
+            color
+            <span
+              class="ss__select__label__separator"
+            >
+              :::
+            </span>
+          </span>
+          <span
+            class="ss__select__selection"
+          >
+            Green
+          </span>
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label="selected option, option 4 of 7, Green"
+            class="ss__select__select__option ss__select__select__option--selected"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component styled renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  z-index: 10000;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin-top: -1px;
+  border: 1px solid #333;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  cursor: pointer;
+  padding: 6px 8px;
+  color: initial;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background-color: #f8f8f8;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select classy emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0.ss__select--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__select__dropdown__button__icon {
+  margin: auto 0 auto 5px;
+}
+
+.emotion-0 .ss__select__label {
+  margin-right: 5px;
+}
+
+.emotion-0 .ss__dropdown .ss__select__dropdown__button {
+  border: none;
+  padding: 6px 30px;
+  font-weight: bold;
+}
+
+.emotion-0 .ss__dropdown .ss__select__dropdown__button:hover {
+  background-color: initial;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__dropdown .ss__select__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transition: -webkit-transform 0.25s ease 0s;
+  transition: transform 0.25s ease 0s;
+}
+
+.emotion-0 .ss__dropdown.ss__dropdown--open .ss__dropdown__button {
+  box-shadow: 0 6px 12px 1px #0000001f;
+}
+
+.emotion-0 .ss__dropdown.ss__dropdown--open .ss__dropdown__button .ss__select__dropdown__button__icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-0 .ss__dropdown.ss__dropdown--open .ss__dropdown__content {
+  background-color: #fff;
+  box-shadow: 0 6px 12px 1px #0000001f;
+  z-index: 10000;
+}
+
+.emotion-0 .ss__select__select {
+  position: relative;
+  padding: 0;
+  margin: -1px 0 0 0;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 30px;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option.ss__select__select__option--selected {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-0 .ss__select__select .ss__select__select__option:hover {
+  background: rgba(109,113,117,.06);
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1.ss__dropdown--open .ss__dropdown__content {
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.emotion-1 .ss__dropdown__button {
+  cursor: pointer;
+}
+
+.emotion-1 .ss__dropdown__content {
+  position: absolute;
+  min-width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: auto;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 10px;
+  position: relative;
+  color: #6d7175;
+  outline: 0;
+  background-color: #fff;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-2:hover {
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.emotion-2.ss__button--disabled {
+  opacity: 0.7;
+  border-color: rgba(51,51,51,0.7);
+  background-color: initial;
+}
+
+.emotion-2.ss__button--disabled:hover {
+  cursor: default;
+}
+
+.emotion-3 {
+  fill: #6d7175;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+<div
+    class="ss__select emotion-0"
+  >
+    <div
+      class="ss__dropdown ss__select__dropdown emotion-1"
+    >
+      <div
+        aria-expanded="false"
+        class="ss__dropdown__button"
+        role="button"
+      >
+        <div
+          class="ss__button ss__select__dropdown__button emotion-2"
+          role="button"
+        >
+          <svg
+            class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon emotion-3"
+            viewBox="0 0 56 56"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="ss__dropdown__content"
+      >
+        <ul
+          class="ss__select__select"
+        >
+          <li
+            aria-label=" option 1 of 7, Red"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Red
+            </span>
+          </li>
+          <li
+            aria-label=" option 2 of 7, Orange"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Orange
+            </span>
+          </li>
+          <li
+            aria-label=" option 3 of 7, Yellow"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Yellow
+            </span>
+          </li>
+          <li
+            aria-label=" option 4 of 7, Green"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Green
+            </span>
+          </li>
+          <li
+            aria-label=" option 5 of 7, Blue"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Blue
+            </span>
+          </li>
+          <li
+            aria-label=" option 6 of 7, Indigo"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Indigo
+            </span>
+          </li>
+          <li
+            aria-label=" option 7 of 7, Violet"
+            class="ss__select__select__option"
+            role="link"
+            ssa11y="true"
+            tabindex="0"
+          >
+            <span>
+              Violet
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

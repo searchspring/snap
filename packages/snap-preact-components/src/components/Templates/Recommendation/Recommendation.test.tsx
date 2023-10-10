@@ -4,6 +4,7 @@ import { render, waitFor } from '@testing-library/preact';
 
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
@@ -36,6 +37,11 @@ const theme = {
 	},
 };
 
+function replaceSwiperId(html: string) {
+	return html
+		.replace(/id="swiper-wrapper-.*"/, 'id="swiper-wrapper-test"')
+		.replace(/aria-controls="swiper-wrapper-.*"/, 'aria-controls="swiper-wrapper-test"');
+}
 describe('Recommendation Component', () => {
 	beforeAll(() => {
 		const mock = jest.fn(() => ({
@@ -52,6 +58,37 @@ describe('Recommendation Component', () => {
 		// @ts-ignore
 		window.IntersectionObserver.mockReset();
 	});
+
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, async () => {
+			const theme = themes[themeName as keyof typeof themes];
+
+			const controller = new RecommendationController(recommendConfig, {
+				client: new MockClient(globals, {}),
+				store: new RecommendationStore(recommendConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals, { mode: 'development' }),
+			});
+
+			await controller.search();
+
+			const rendered = render(
+				<Recommendation controller={controller} theme={theme}>
+					{controller.store.results.map((result, idx) => (
+						<div className="result" key={idx}>
+							{result.mappings.core?.name}
+						</div>
+					))}
+				</Recommendation>
+			);
+			rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders with results', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
@@ -84,6 +121,9 @@ describe('Recommendation Component', () => {
 		expect(prevButton).toBeInTheDocument();
 		expect(nextButton).toBeInTheDocument();
 		expect(results).toHaveLength(20);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// @ts-ignore
 		window.IntersectionObserver.mockClear();
@@ -161,6 +201,8 @@ describe('Recommendation Component', () => {
 			});
 		});
 
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 		trackfn.mockClear();
 
 		//click the next button
@@ -250,6 +292,8 @@ describe('Recommendation Component', () => {
 			});
 		});
 
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 		trackfn.mockClear();
 	});
 
@@ -278,6 +322,9 @@ describe('Recommendation Component', () => {
 
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation');
 		expect(CarouselElement?.classList.length).toBe(1);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', async () => {
@@ -306,6 +353,9 @@ describe('Recommendation Component', () => {
 		const CarouselElement = rendered.container.querySelector('.ss__recommendation');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', async () => {
@@ -342,6 +392,9 @@ describe('Recommendation Component', () => {
 
 		expect(prev).toHaveTextContent(theme.components.recommendation.prevButton);
 		expect(next).toHaveTextContent(theme.components.recommendation.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', async () => {
@@ -377,6 +430,9 @@ describe('Recommendation Component', () => {
 
 		expect(prev).toHaveTextContent(theme.components.recommendation.prevButton);
 		expect(next).toHaveTextContent(theme.components.recommendation.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', async () => {
@@ -425,6 +481,9 @@ describe('Recommendation Component', () => {
 
 		expect(prev).toHaveTextContent(themeOverride.components.recommendation.prevButton);
 		expect(next).toHaveTextContent(themeOverride.components.recommendation.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('breakpoints override theme prop', async () => {
@@ -482,6 +541,9 @@ describe('Recommendation Component', () => {
 			expect(breakpointDetailSlots).toHaveLength(22);
 		});
 
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
 
@@ -495,5 +557,8 @@ describe('Recommendation Component', () => {
 			const breakpointDetailSlots = rendered.container.querySelectorAll('.breakpoint-detail-slot');
 			expect(breakpointDetailSlots).toHaveLength(0);
 		});
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

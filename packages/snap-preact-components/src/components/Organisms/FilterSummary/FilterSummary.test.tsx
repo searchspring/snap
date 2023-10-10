@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { FilterSummary } from './FilterSummary';
 import userEvent from '@testing-library/user-event';
 
@@ -16,6 +17,14 @@ describe('FilterSummary Component', () => {
 	const mockData = new MockData().searchMeta('filtered');
 	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FilterSummary theme={theme} filters={filters} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
 		const FilterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
@@ -23,6 +32,7 @@ describe('FilterSummary Component', () => {
 
 		expect(FilterSummaryElement).toBeInTheDocument();
 		expect(FilterElements.length).toBe(3);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders clearAll Button', () => {
@@ -30,6 +40,7 @@ describe('FilterSummary Component', () => {
 		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__clear-all');
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent('Clear All');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('custom clearAll Button', () => {
@@ -39,12 +50,14 @@ describe('FilterSummary Component', () => {
 
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent(clearLabel);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hides clearAll Button', () => {
 		const rendered = render(<FilterSummary filters={filters} hideClearAll />);
 		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__clear-all');
 		expect(clearAllButton).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders a default title', () => {
@@ -52,6 +65,7 @@ describe('FilterSummary Component', () => {
 		const title = rendered.container.querySelector('.ss__filter-summary__title');
 		expect(title).toBeInTheDocument();
 		expect(title).toHaveTextContent('Current Filters');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders a custom title', () => {
@@ -59,6 +73,7 @@ describe('FilterSummary Component', () => {
 		const title = rendered.container.querySelector('.ss__filter-summary__title');
 		expect(title).toBeInTheDocument();
 		expect(title).toHaveTextContent('you clicked these earlier');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with specified icons', async () => {
@@ -75,12 +90,14 @@ describe('FilterSummary Component', () => {
 
 		expect(filterIcon).toHaveClass(`ss__icon--${args.filterIcon}`);
 		expect(clearAllIcon).toHaveClass(`ss__icon--${args.clearAllIcon}`);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide the facet label', () => {
 		const rendered = render(<FilterSummary filters={filters} hideFacetLabel={true} />);
 		const facetLabel = rendered.container.querySelector('.ss__filter__label');
 		expect(facetLabel).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render if no filters', () => {
@@ -88,6 +105,7 @@ describe('FilterSummary Component', () => {
 		const FilterElement = rendered.container.querySelector('.ss__filter-summary');
 
 		expect(FilterElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with custom seperator', () => {
@@ -99,6 +117,7 @@ describe('FilterSummary Component', () => {
 		const seperatorElem = rendered.container.querySelector('.ss__filter__label__separator');
 
 		expect(seperatorElem).toHaveTextContent(sep);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with custom onclick func', () => {
@@ -111,10 +130,12 @@ describe('FilterSummary Component', () => {
 		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter')!;
 
 		expect(filter).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with custom on clear all click func', () => {
@@ -127,10 +148,12 @@ describe('FilterSummary Component', () => {
 		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter-summary__clear-all')!;
 
 		expect(filter).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -142,6 +165,7 @@ describe('FilterSummary Component', () => {
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
 		expect(facetsElement).toHaveClass(args.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('disables styles', () => {
@@ -153,6 +177,7 @@ describe('FilterSummary Component', () => {
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
 		expect(facetsElement?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -179,6 +204,7 @@ describe('FilterSummary theming works', () => {
 		const element = rendered.container.querySelector('.ss__filter-summary');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(globalTheme.components.filterSummary.title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -193,6 +219,7 @@ describe('FilterSummary theming works', () => {
 		const element = rendered.container.querySelector('.ss__filter-summary');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(propTheme.components.filterSummary.title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -220,5 +247,6 @@ describe('FilterSummary theming works', () => {
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(propTheme.components.filterSummary.title);
 		expect(element).not.toHaveTextContent(globalTheme.components.filterSummary.title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

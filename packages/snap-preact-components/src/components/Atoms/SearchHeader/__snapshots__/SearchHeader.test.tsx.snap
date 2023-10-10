@@ -1,0 +1,792 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Header Component No Results dangerously sets the inner html of no results title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="No results found for blah"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--no-results"
+    >
+      <span
+        class="findMe"
+      >
+        look mom 0 results found for blah!
+      </span>
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component No Results renders a custom no results title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="No results found for blah"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--no-results"
+    >
+      look mom no results found!
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component No Results renders a custom no results title using a function 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="No results found for blah"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--no-results"
+    >
+      look mom 0 results found for blah!
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component No Results renders the default no results title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="No results found for blah"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--no-results"
+    >
+      <span>
+        
+			No results for 
+        <span
+          class="ss__search-header__results-query"
+        >
+          "blah"
+        </span>
+         found.
+		
+      </span>
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component can disable styles 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component correctedQueryText dangerously sets the inner html of correctedQueryText 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "road"
+      </span>
+      
+	
+    </h3>
+    <h5
+      aria-atomic="true"
+      aria-label="No results found for rodd, showing results for road instead"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--corrected"
+    >
+      <span
+        class="findMe"
+      >
+        1298 road oq!
+      </span>
+    </h5>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component correctedQueryText renders a custom correctedQueryText 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "road"
+      </span>
+      
+	
+    </h3>
+    <h5
+      aria-atomic="true"
+      aria-label="No results found for rodd, showing results for road instead"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--corrected"
+    >
+      Custom oq
+    </h5>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component correctedQueryText renders a custom correctedQueryText using a function 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "road"
+      </span>
+      
+	
+    </h3>
+    <h5
+      aria-atomic="true"
+      aria-label="No results found for rodd, showing results for road instead"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--corrected"
+    >
+      1298 road oq!
+    </h5>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component correctedQueryText renders the default correctedQueryText 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "road"
+      </span>
+      
+	
+    </h3>
+    <h5
+      aria-atomic="true"
+      aria-label="No results found for rodd, showing results for road instead"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--corrected"
+    >
+      No results found for 
+      <em>
+        "rodd"
+      </em>
+      , showing results for 
+      <em>
+        "road"
+      </em>
+       instead.
+    </h5>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component dangerously sets the inner html of subtitle 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      <span
+        class="findMe"
+      >
+        1298 dress subtitle!
+      </span>
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component has Results dangerously sets the inner html of title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      <span
+        class="findMe"
+      >
+        look mom 1298 results found for dress!
+      </span>
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component has Results renders a custom title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Custom title
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component has Results renders a custom title using a function 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      look mom 1298 results found for dress!
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component has Results renders the default title 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      hi mom
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      hi mom
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component is themeable with theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      hi dad
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component landing page renders the default correctedQueryText 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      class="ss__search-header__title ss__search-header__title--landing-page"
+    >
+      glasses
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component renders a custom subtitle 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      Custom title
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component renders a custom subtitle using a function 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+    <h4
+      aria-atomic="true"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--subtitle"
+    >
+      1298 dress subtitle!
+    </h4>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component renders with classname 1`] = `
+<DocumentFragment>
+  <header
+    class="ss__search-header classy emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Search Header Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__search-header__title {
+  color: #202223;
+}
+
+<header
+    class="ss__search-header emotion-0"
+  >
+    <h3
+      aria-atomic="true"
+      aria-label="Now showing 1298 items in the product grid"
+      aria-live="polite"
+      class="ss__search-header__title ss__search-header__title--results"
+    >
+      Showing 
+      <span
+        class="ss__search-header__results-count-range"
+      >
+         1 - 30 of 
+      </span>
+       
+		
+      <span
+        class="ss__search-header__results-count-total"
+      >
+        1298
+      </span>
+       
+		results 
+		for 
+      <span
+        class="ss__search-header__results-query"
+      >
+        "dress"
+      </span>
+      
+	
+    </h3>
+  </header>
+</DocumentFragment>
+`;

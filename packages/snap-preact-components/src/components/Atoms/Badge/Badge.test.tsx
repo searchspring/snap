@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
-
+import themes from '../../../themes';
 import { Badge } from './Badge';
 
 const CONTENT = 'sale';
@@ -10,6 +10,13 @@ const CLASSNAME = 'sale-badge';
 const CHILDREN = <div>{CONTENT}</div>;
 
 describe('Badge Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Badge theme={theme}>{CHILDREN}</Badge>);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
 	it('positions badge based on prop', () => {
 		const position = { right: 0 };
 		const rendered = render(<Badge position={position}>{CHILDREN}</Badge>);
@@ -17,24 +24,28 @@ describe('Badge Component', () => {
 		let styles = getComputedStyle(badge)!;
 
 		expect(styles.right).toEqual('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const newPosition = { left: 0 };
 		rendered.rerender(<Badge position={newPosition}>{CHILDREN}</Badge>);
 		styles = getComputedStyle(badge);
 
 		expect(styles.left).toEqual('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const bottomPosition = { bottom: 0 };
 		rendered.rerender(<Badge position={bottomPosition}>{CHILDREN}</Badge>);
 		styles = getComputedStyle(badge);
 
 		expect(styles.bottom).toEqual('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const topPosition = { top: 0 };
 		rendered.rerender(<Badge position={topPosition}>{CHILDREN}</Badge>);
 		styles = getComputedStyle(badge);
 
 		expect(styles.top).toEqual('0px');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('Badge with content', () => {
@@ -47,6 +58,7 @@ describe('Badge Component', () => {
 			const BadgeElement = rendered.getByText(CONTENT);
 
 			expect(BadgeElement).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('Badge has correct classes', () => {
@@ -55,6 +67,7 @@ describe('Badge Component', () => {
 			expect(badge.classList.length).toBe(3);
 			expect(badge.classList[0]).toMatch(/^ss__badge/);
 			expect(badge).toHaveClass(CLASSNAME);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -69,6 +82,7 @@ describe('Badge Component', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
 			expect(BadgeElement).toBeInTheDocument();
+			expect(badge.asFragment()).toMatchSnapshot();
 		});
 
 		it('Badge has correct number of classes', () => {
@@ -76,6 +90,7 @@ describe('Badge Component', () => {
 
 			expect(BadgeElement.classList.length).toBe(2);
 			expect(BadgeElement.classList[0]).toMatch(/^ss__badge/);
+			expect(badge.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -89,12 +104,14 @@ describe('Badge Component', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
 			expect(BadgeElement).toBeInTheDocument();
+			expect(badge.asFragment()).toMatchSnapshot();
 		});
 
 		it('Badge has correct number of classes', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
 			expect(BadgeElement?.classList.length).toBe(1);
+			expect(badge.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -116,6 +133,7 @@ describe('Badge Component', () => {
 			const element = rendered.container.querySelector('.ss__badge');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(globalTheme.components.badge.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -135,6 +153,7 @@ describe('Badge Component', () => {
 			const element = rendered.container.querySelector('.ss__badge');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.badge.className);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -169,6 +188,7 @@ describe('Badge Component', () => {
 			expect(element).not.toHaveClass(globalTheme.components.badge.className);
 			expect(element).toHaveTextContent(propTheme.components.badge.content);
 			expect(element).not.toHaveTextContent(globalTheme.components.badge.content);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

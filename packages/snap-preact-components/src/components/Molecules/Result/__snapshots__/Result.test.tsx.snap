@@ -1,0 +1,2940 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result Component can disable styles 1`] = `
+<DocumentFragment>
+  <article
+    class="ss__result ss__result--grid"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Freezing Point Cream Turtleneck Sweater
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component can set a custom onClick function 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Freezing Point Cream Turtleneck Sweater
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component can truncate the title 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Fr...
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component hides image section 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-2"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-2"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component hides various sections 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-1 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__image ss__result__image emotion-1"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    />
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders badge 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders details 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+      <div
+        class="details"
+        result="[object Object]"
+      >
+        Add to cart'
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders image 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders pricing 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders title 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid classy emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Freezing Point Cream Turtleneck Sweater
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component should can change the layout 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--list emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Freezing Point Cream Turtleneck Sweater
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component should display a fallback image 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-MAK-T1-K8028"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Freezing Point Cream Turtleneck Sweater"
+            loading="lazy"
+            src="//cdn.searchspring.net/ajax_search/img/default_image.png"
+            title="Freezing Point Cream Turtleneck Sweater"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-MAK-T1-K8028"
+        >
+          Freezing Point Cream Turtleneck Sweater
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $39.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3 {
+  color: #6d7175;
+  margin: 0 0.5rem 0 0;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: #6d7175;
+  opacity: 0.5;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result theming works is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-1 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-2.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__image ss__result__image emotion-1"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__title"
+      >
+        <a
+          href="/product/C-LTO-R6-L5316"
+        >
+          Play For Keeps Burgundy Velvet Bralette
+        </a>
+      </div>
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-2"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-2"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Result theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0.ss__result--grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.emotion-0.ss__result--grid .ss__result__image-wrapper {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 0%;
+}
+
+.emotion-0.ss__result--list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-0.ss__result--list .ss__result__image-wrapper {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.emotion-0.ss__result--list .ss__result__details {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.emotion-0 .ss__result__image-wrapper {
+  position: relative;
+}
+
+.emotion-0 .ss__result__image-wrapper .ss__result__badge {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.emotion-0 .ss__result__details {
+  padding: 10px;
+  text-align: center;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__title {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing {
+  margin-bottom: 10px;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__result__price {
+  font-size: 1.2em;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__pricing .ss__price--strike {
+  font-size: 80%;
+}
+
+.emotion-0 .ss__result__details .ss__result__details__button {
+  margin-bottom: 10px;
+}
+
+.emotion-1 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: auto;
+}
+
+.emotion-2 img {
+  visibility: hidden;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.emotion-3.ss__price--strike {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: initial;
+}
+
+<article
+    class="ss__result ss__result--grid emotion-0"
+  >
+    <div
+      class="ss__result__image-wrapper"
+    >
+      <a
+        href="/product/C-LTO-R6-L5316"
+      >
+        <div
+          class="ss__badge ss__result__badge emotion-1"
+        >
+          Sale
+        </div>
+        <div
+          class="ss__image ss__result__image emotion-2"
+        >
+          <img
+            alt="Play For Keeps Burgundy Velvet Bralette"
+            loading="lazy"
+            src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg"
+            title="Play For Keeps Burgundy Velvet Bralette"
+          />
+        </div>
+      </a>
+    </div>
+    <div
+      class="ss__result__details"
+    >
+      <div
+        class="ss__result__details__pricing"
+      >
+        <span
+          class="ss__price ss__price--strike ss__result__price emotion-3"
+        >
+          $50.00
+        </span>
+         
+        <span
+          class="ss__price ss__result__price emotion-3"
+        >
+          $26.00
+        </span>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;

@@ -1,0 +1,1273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Terms Component Can set custom onClick 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component Can set custom onClick 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component Can use emify 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dre
+          <em>
+            ss
+          </em>
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          <em>
+            drss
+          </em>
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dre
+          <em>
+            ees
+          </em>
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dre
+          <em>
+            s
+          </em>
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          <em>
+            dss
+          </em>
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          <em>
+            ress
+          </em>
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component doesnt render with no controller or terms 1`] = `<DocumentFragment />`;
+
+exports[`Terms Component is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component passed in terms take priority over controller terms 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component previewonhover 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component previewonhover 2`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component renders 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component renders with a title 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__title"
+    >
+      <h5>
+        Suggestions
+      </h5>
+    </div>
+    <div
+      aria-label="Suggestions"
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component renders with classname 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms classy emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component renders with terms just in controller 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component respects the limit 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 3, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 3, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 3, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Terms Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__terms emotion-0"
+  >
+    <div
+      class="ss__terms__options"
+      role="list"
+    >
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 1 of 6, dress"
+          href="www.dress.com"
+          role="link"
+        >
+          dress
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 2 of 6, drss"
+          href="www.drss.com"
+          role="link"
+        >
+          drss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 3 of 6, dreees"
+          href="www.dreees.com"
+          role="link"
+        >
+          dreees
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 4 of 6, dres"
+          href="www.dres.com"
+          role="link"
+        >
+          dres
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 5 of 6, dss"
+          href="www.dss.com"
+          role="link"
+        >
+          dss
+        </a>
+      </div>
+      <div
+        class="ss__terms__option"
+      >
+        <a
+          aria-label="item 6 of 6, ress"
+          href="www.ress.com"
+          role="link"
+        >
+          ress
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,996 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Component native can handle checked state internally 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native does not render an icon when checked 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native is not checked by default 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox props-theme-class emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox global-theme-class emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox props-theme-class emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native renders 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding: 20px;
+}
+
+<input
+    class="ss__checkbox emotion-0"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native respects the disabled prop 1`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox ss__checkbox--disabled emotion-0"
+    disabled=""
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component native respects the disabled prop 2`] = `
+<DocumentFragment>
+  <input
+    class="ss__checkbox ss__checkbox--disabled emotion-0"
+    disabled=""
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled Can enable/disable useAlly with disableA11y prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled Can enable/disable useAlly with disableA11y prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled can disableStyles 1`] = `
+<DocumentFragment>
+  <span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled can handle checked state internally 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled can use iconColor prop instead of color 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  fill: blue;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--close-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled fires onClick prop when clicked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled fires onClick prop when clicked 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled is not checked by default 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  fill: red;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox props-theme-class emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  fill: blue;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox global-theme-class emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  fill: red;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox props-theme-class emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled passes props to icon 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid blue;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  fill: blue;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--close-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled renders 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled renders an icon when checked 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+.emotion-1 {
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled renders with additional style using prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+  padding: 20px;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label=" unchecked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled respects the disabled prop 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label="disabled unchecked checkbox"
+    class="ss__checkbox ss__checkbox--disabled emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component styled respects the disabled prop 2`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #333;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(12px - 30%);
+  height: calc(12px - 30%);
+}
+
+<span
+    aria-label="disabled unchecked checkbox"
+    class="ss__checkbox ss__checkbox--disabled emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <span
+      class="ss__checkbox__empty"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Checkbox Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid #6d7175;
+  border-radius: 3px;
+}
+
+.emotion-0.ss__checkbox--disabled {
+  opacity: 0.7;
+}
+
+.emotion-0 .ss__checkbox__empty {
+  display: inline-block;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+}
+
+.emotion-1 {
+  fill: #6d7175;
+  width: calc(18px - 30%);
+  height: calc(18px - 30%);
+  position: relative;
+}
+
+<span
+    aria-label=" checked checkbox"
+    class="ss__checkbox emotion-0"
+    role="checkbox"
+    ssa11y="true"
+    tabindex="0"
+  >
+    <svg
+      class="ss__icon ss__icon--check-thin ss__checkbox__icon emotion-1"
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17.771 40.395l33.749-33.749 4.48 4.48-38.229 38.229-17.771-17.771 4.48-4.48z"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;

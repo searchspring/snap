@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const rootConfig = require('../../jest.base.config.json');
 module.exports = {
 	...rootConfig,
@@ -10,4 +11,5 @@ module.exports = {
 	},
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 	testTimeout: 10000,
+	snapshotSerializers: ['@emotion/jest/serializer'],
 };

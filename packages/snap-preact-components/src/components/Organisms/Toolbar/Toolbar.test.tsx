@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { Toolbar } from './Toolbar';
 import { v4 as uuidv4 } from 'uuid';
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
@@ -48,10 +49,19 @@ describe('Results Component', () => {
 		await controller.search();
 	});
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Toolbar theme={theme} controller={controller} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<Toolbar controller={controller} />);
 		const element = rendered.container.querySelector('.ss__toolbar')!;
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders expected sub-components', () => {
@@ -65,6 +75,7 @@ describe('Results Component', () => {
 		expect(paginationElement).toBeInTheDocument();
 		expect(sortByElement).toBeInTheDocument();
 		expect(perPageElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide filterSummary', () => {
@@ -78,6 +89,7 @@ describe('Results Component', () => {
 		expect(paginationElement).toBeInTheDocument();
 		expect(sortByElement).toBeInTheDocument();
 		expect(perPageElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide pagination', () => {
@@ -91,6 +103,7 @@ describe('Results Component', () => {
 		expect(paginationElement).not.toBeInTheDocument();
 		expect(sortByElement).toBeInTheDocument();
 		expect(perPageElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide sortBy', () => {
@@ -104,6 +117,7 @@ describe('Results Component', () => {
 		expect(paginationElement).toBeInTheDocument();
 		expect(sortByElement).not.toBeInTheDocument();
 		expect(perPageElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide perPage', () => {
@@ -117,6 +131,7 @@ describe('Results Component', () => {
 		expect(paginationElement).toBeInTheDocument();
 		expect(sortByElement).toBeInTheDocument();
 		expect(perPageElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide everything', () => {
@@ -132,6 +147,7 @@ describe('Results Component', () => {
 		expect(paginationElement).not.toBeInTheDocument();
 		expect(sortByElement).not.toBeInTheDocument();
 		expect(perPageElement).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -141,6 +157,7 @@ describe('Results Component', () => {
 		const element = rendered.container.querySelector('.ss__toolbar');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -149,6 +166,7 @@ describe('Results Component', () => {
 		const element = rendered.container.querySelector('.ss__toolbar');
 
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -166,6 +184,7 @@ describe('Results Component', () => {
 		);
 		const element = rendered.container.querySelector('.ss__toolbar')!;
 		expect(element).toHaveClass(theme.components.toolbar.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -179,6 +198,7 @@ describe('Results Component', () => {
 		const rendered = render(<Toolbar controller={controller} theme={theme} />);
 		const element = rendered.container.querySelector('.ss__toolbar')!;
 		expect(element).toHaveClass(theme.components.toolbar.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -207,5 +227,6 @@ describe('Results Component', () => {
 		const element = rendered.container.querySelector('.ss__toolbar')!;
 		expect(element).toHaveClass(componentTheme.components.toolbar.className);
 		expect(element).not.toHaveClass(theme.components.toolbar.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers/theme';
+import themes from '../../../themes';
 import { Carousel } from './Carousel';
 import { Result } from '../../Molecules/Result';
 import userEvent from '@testing-library/user-event';
@@ -14,7 +15,30 @@ import { SearchResponseModel } from '@searchspring/snapi-types';
 const mockData = new MockData();
 const searchResponse: SearchResponseModel = mockData.search();
 
+function replaceSwiperId(html: string) {
+	return html
+		.replace(/id="swiper-wrapper-.*"/, 'id="swiper-wrapper-test"')
+		.replace(/aria-controls="swiper-wrapper-.*"/, 'aria-controls="swiper-wrapper-test"');
+}
+
 describe('Carousel Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(
+				<Carousel theme={theme}>
+					{searchResponse.results!.map((result, idx) => (
+						<div className={'findMe'} key={idx}>
+							<Result result={result as Product} />
+						</div>
+					))}
+				</Carousel>
+			);
+			rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			carousel: {
@@ -37,6 +61,9 @@ describe('Carousel Component', () => {
 		);
 		const carousel = rendered.container.querySelector('.ss__carousel');
 		expect(carousel).toBeInTheDocument();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('able to render child jsx', () => {
@@ -52,6 +79,9 @@ describe('Carousel Component', () => {
 
 		const results = rendered.container.querySelector('.swiper-slide[data-swiper-slide-index="0"]');
 		expect(results?.textContent).toContain(searchResponse.results![0].mappings?.core?.name);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders the correct amount of children', () => {
@@ -67,6 +97,9 @@ describe('Carousel Component', () => {
 
 		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .findMe');
 		expect(results?.length).toBe(searchResponse.results!.length);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders next & prev buttons', () => {
@@ -83,6 +116,9 @@ describe('Carousel Component', () => {
 		const next = rendered.container.querySelector('.ss__carousel__next');
 		expect(prev).toBeInTheDocument();
 		expect(next).toBeInTheDocument();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('vertical prop works', () => {
@@ -97,6 +133,9 @@ describe('Carousel Component', () => {
 		);
 		const verticalCarouselWrapper = rendered.container.querySelector('.swiper-container-vertical');
 		expect(verticalCarouselWrapper).toBeInTheDocument();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders custom next & prev buttons', () => {
@@ -118,6 +157,9 @@ describe('Carousel Component', () => {
 
 		expect(prev).toHaveTextContent(prevButtonText);
 		expect(next).toHaveTextContent(nextButtonText);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable next & prev buttons', () => {
@@ -134,6 +176,9 @@ describe('Carousel Component', () => {
 		expect(prev).toHaveClass('ss__carousel__prev-wrapper--hidden');
 		expect(next).toBeInTheDocument();
 		expect(next).toHaveClass('ss__carousel__next-wrapper--hidden');
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has custom onClick functions', () => {
@@ -164,6 +209,9 @@ describe('Carousel Component', () => {
 
 		userEvent.click(slide[0]);
 		expect(onClickFunc).toHaveBeenCalled();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can enable pagination dots', async () => {
@@ -183,6 +231,9 @@ describe('Carousel Component', () => {
 			const paginationBullets = rendered.container.querySelector('.swiper-pagination-bullets');
 			return expect(paginationBullets).toBeInTheDocument();
 		});
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can add additional modules', () => {
@@ -195,6 +246,9 @@ describe('Carousel Component', () => {
 		);
 		const scrollbar = rendered.container.querySelector('.ss__carousel .swiper-scrollbar');
 		expect(scrollbar).toBeInTheDocument();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use breakpoints', async () => {
@@ -223,6 +277,9 @@ describe('Carousel Component', () => {
 		expect(next).toBeInTheDocument();
 		expect(next).not.toHaveClass('ss__carousel__next-wrapper--hidden');
 
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
 
@@ -234,6 +291,9 @@ describe('Carousel Component', () => {
 
 		expect(next).toBeInTheDocument();
 		expect(next).toHaveClass('ss__carousel__next-wrapper--hidden');
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styling', () => {
@@ -249,6 +309,9 @@ describe('Carousel Component', () => {
 
 		const CarouselElement = rendered.container.querySelector('.ss__carousel');
 		expect(CarouselElement?.classList.length).toBe(1);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -265,6 +328,9 @@ describe('Carousel Component', () => {
 		const CarouselElement = rendered.container.querySelector('.ss__carousel');
 		expect(CarouselElement).toBeInTheDocument();
 		expect(CarouselElement).toHaveClass(className);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -289,6 +355,9 @@ describe('Carousel Component', () => {
 
 		expect(prev).toHaveTextContent(theme.components.carousel.prevButton);
 		expect(next).toHaveTextContent(theme.components.carousel.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -311,6 +380,9 @@ describe('Carousel Component', () => {
 
 		expect(prev).toHaveTextContent(theme.components.carousel.prevButton);
 		expect(next).toHaveTextContent(theme.components.carousel.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -347,6 +419,9 @@ describe('Carousel Component', () => {
 
 		expect(prev).toHaveTextContent(themeOverride.components.carousel.prevButton);
 		expect(next).toHaveTextContent(themeOverride.components.carousel.nextButton);
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can add additional modules', () => {
@@ -359,6 +434,9 @@ describe('Carousel Component', () => {
 		);
 		const scrollbar = rendered.container.querySelector('.ss__carousel .swiper-scrollbar');
 		expect(scrollbar).toBeInTheDocument();
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('breakpoints override theme prop', async () => {
@@ -414,6 +492,9 @@ describe('Carousel Component', () => {
 			expect(secondBreakpointIconElements).toHaveLength(0);
 		});
 
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
 
@@ -430,5 +511,8 @@ describe('Carousel Component', () => {
 			const secondBreakpointIconElements = rendered.container.querySelectorAll('.ss__icon.ss__icon--eye');
 			expect(secondBreakpointIconElements).toHaveLength(2);
 		});
+
+		rendered.container.innerHTML = replaceSwiperId(rendered.container.innerHTML);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

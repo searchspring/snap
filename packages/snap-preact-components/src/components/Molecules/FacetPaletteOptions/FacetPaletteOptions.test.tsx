@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { FacetPaletteOptions } from './FacetPaletteOptions';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -16,6 +17,14 @@ const paletteFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValue
 	.pop()!;
 
 describe('FacetPaletteOptions Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<FacetPaletteOptions theme={theme} values={paletteFacetMock.values as FacetValue[]} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	const theme = {
 		components: {
 			facetPaletteOptions: {
@@ -30,6 +39,7 @@ describe('FacetPaletteOptions Component', () => {
 
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveTextContent(paletteFacetMock.values![0].label!);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('Palette container element has correct number of classes', () => {
@@ -37,12 +47,14 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveClass('ss__facet-palette-options');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('maps through and renders the correct number of options', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} />);
 		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
 		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('Palette option label element has correct number of classes', () => {
@@ -54,12 +66,14 @@ describe('FacetPaletteOptions Component', () => {
 		const activePaletteOption = paletteOptionsElement[0];
 		expect(inactivePaletteOption).toHaveClass('ss__facet-palette-options__option__value');
 		expect(activePaletteOption.parentElement).toHaveClass('ss__facet-palette-options__option--filtered');
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('has icons by default', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} />);
 		const selectedIcons = rendered.container.querySelector('.ss__icon');
 		expect(selectedIcons).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('hideIcons and hideLabel works as expected', () => {
@@ -69,6 +83,7 @@ describe('FacetPaletteOptions Component', () => {
 
 		expect(paletteOptionsElement).not.toBeInTheDocument();
 		expect(selectedIcons).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use the color mapping', () => {
@@ -120,6 +135,7 @@ describe('FacetPaletteOptions Component', () => {
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement?.classList.length).toBe(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -129,6 +145,7 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom onClick func', () => {
@@ -137,8 +154,11 @@ describe('FacetPaletteOptions Component', () => {
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options__option')!;
 		expect(paletteElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
+
 		userEvent.click(paletteElement);
 		expect(onClickFunc).toHaveBeenCalled();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change gapsize and columns', () => {
@@ -157,6 +177,7 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteOptionElement = rendered.container.querySelector('.ss__facet-palette-options__option')!;
 		const optionStyles = getComputedStyle(paletteOptionElement);
 		expect(optionStyles.width).toBe(`calc(100% / ${args.columns} - ${2 * Math.round((args.columns + 2) / 2)}px )`);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -175,6 +196,7 @@ describe('FacetPaletteOptions Component', () => {
 				theme.components.facetPaletteOptions.columns
 			}))`
 		);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -189,6 +211,7 @@ describe('FacetPaletteOptions Component', () => {
 				theme.components.facetPaletteOptions.columns
 			}))`
 		);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -214,5 +237,6 @@ describe('FacetPaletteOptions Component', () => {
 				themeOverride.components.facetPaletteOptions.columns - 1
 			} * 8px))/ ${themeOverride.components.facetPaletteOptions.columns}))`
 		);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

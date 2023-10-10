@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Element Component disables styles 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element"
+  />
+</DocumentFragment>
+`;
+
+exports[`Element Component doesnt render without type prop 1`] = `<DocumentFragment />`;
+
+exports[`Element Component ignores onClick attribute 1`] = `
+<DocumentFragment>
+  <div
+    attribute2="two"
+    attribute3="3"
+    class="ss__element emotion-0"
+  >
+    some text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Element Component is themeable and theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element theme-class emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Element Component is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element theme-class emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Element Component is themeable with theme prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element theme-class emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Element Component renders as div 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element emotion-0"
+  >
+    some text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Element Component renders as label 1`] = `
+<DocumentFragment>
+  <label
+    class="ss__element emotion-0"
+  >
+    some text
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Element Component renders as p 1`] = `
+<DocumentFragment>
+  <p
+    class="ss__element emotion-0"
+  >
+    some text
+  </p>
+</DocumentFragment>
+`;
+
+exports[`Element Component renders as span 1`] = `
+<DocumentFragment>
+  <span
+    class="ss__element emotion-0"
+  >
+    some text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Element Component renders with attributes 1`] = `
+<DocumentFragment>
+  <div
+    attribute1="one"
+    attribute2="two"
+    attribute3="3"
+    class="ss__element emotion-0"
+  >
+    some text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Element Component renders with className prop 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__element classy emotion-0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Element Component uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  color: #6d7175;
+}
+
+<div
+    class="ss__element emotion-0"
+  >
+    some text
+  </div>
+</DocumentFragment>
+`;

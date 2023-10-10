@@ -1,0 +1,3583 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetHierarchyOptions generic props work can disable styling 1`] = `
+<DocumentFragment>
+  <div
+    class="ss__facet-hierarchy-options"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions generic props work can set custom onClick func 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions generic props work can set custom onClick func 2`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions generic props work renders with classname 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options classy emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions theming works is theme prop overrides ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions theming works is themeable with ThemeProvider 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions theming works is themeable with theme prop 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+  background: unset;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FacetHierarchyOptions theming works uses bocachica theme 1`] = `
+<DocumentFragment>
+  .emotion-0 .ss__facet-hierarchy-options__option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option:hover {
+  cursor: pointer;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered {
+  font-weight: bold;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover {
+  cursor: default;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered) {
+  padding-left: 16px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--return:before {
+  content: '\\0000ab';
+  padding: 0 2px 0 0;
+  color: #6d7175;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value {
+  margin-left: 8px;
+}
+
+.emotion-0 .ss__facet-hierarchy-options__option .ss__facet-hierarchy-options__option__value .ss__facet-hierarchy-options__option__value__count {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+<div
+    class="ss__facet-hierarchy-options emotion-0"
+  >
+    <a
+      aria-label="filter by Gifts for Her"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Gifts for Her
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (4460)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Trend"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Trend
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (1240)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by What's New"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        What's New
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (573)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Accessories"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Accessories
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (473)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Dresses"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Dresses
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (400)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (365)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Jewelry"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Jewelry
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (342)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Tops"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Tops
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (322)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Brands We Love"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Brands We Love
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (274)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Notify of Restock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Notify of Restock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (239)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Home & Office Decor"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Home & Office Decor
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (220)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Shoes"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Shoes
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (213)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Swimwear"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Swimwear
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (169)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Going Fast"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Going Fast
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (157)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Bottoms"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Bottoms
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (140)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Playsuits"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Playsuits
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (139)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Special Occasion"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Special Occasion
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (125)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Athleisure"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Athleisure
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (119)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Style Influencer"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Style Influencer
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Trending"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Trending
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (112)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Memorial Day Sale"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Memorial Day Sale
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (103)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Back in Stock"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Back in Stock
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (64)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Valentine's Day"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Valentine's Day
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (55)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop Lookbook"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop Lookbook
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (30)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Intimates"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Intimates
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by All Pajamas"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        All Pajamas
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by White & Blue Looks"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        White & Blue Looks
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (20)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Top Rated"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Top Rated
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (9)
+        </span>
+      </span>
+    </a>
+    <a
+      aria-label="filter by Shop By Outfit"
+      class="ss__facet-hierarchy-options__option"
+    >
+      <span
+        class="ss__facet-hierarchy-options__option__value"
+      >
+        Shop By Outfit
+        <span
+          class="ss__facet-hierarchy-options__option__value__count"
+        >
+          (3)
+        </span>
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`hierarchyValue Component hiding count renders label but not count 1`] = `<DocumentFragment />`;
+
+exports[`hierarchyValue Component renders label and count 1`] = `<DocumentFragment />`;

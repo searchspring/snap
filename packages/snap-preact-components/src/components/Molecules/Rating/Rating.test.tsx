@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { render } from '@testing-library/preact';
 import { Rating } from './Rating';
 
@@ -9,6 +10,14 @@ const args = {
 };
 
 describe('Rating Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<Rating theme={theme} value={4} count={10} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const value = 5;
 		const rendered = render(<Rating value={value} />);
@@ -52,6 +61,7 @@ describe('Rating Component', () => {
 		expect(fullStarIconElements).toHaveLength(Math.ceil(value));
 		// uses a specific full icon by default
 		fullStarIconElements.forEach((fullIcon) => expect(fullIcon.classList.contains('ss__icon--star')).toBe(true));
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render by default with a zero value', () => {
@@ -59,6 +69,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('does not render by default with a zero value and no count', () => {
@@ -66,6 +77,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('will render with a zero value when there is a count', () => {
@@ -73,6 +85,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will render with a zero value when using 'alwaysRender' prop`, () => {
@@ -80,6 +93,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will attempt to change string values to number values`, () => {
@@ -92,6 +106,7 @@ describe('Rating Component', () => {
 		// has specific number of full stars based on the value provided
 		const fullStarsElements = rendered.container.querySelectorAll('.ss__rating .ss__rating__stars__star--full');
 		expect(fullStarsElements).toHaveLength(5);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will change values that are not numbers to zero (which it won't without 'alwaysRender' prop)`, () => {
@@ -100,6 +115,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will change values that less than zero to zero`, () => {
@@ -108,6 +124,7 @@ describe('Rating Component', () => {
 
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('will take any numbers greater than 5 and set them to 5', () => {
@@ -121,6 +138,7 @@ describe('Rating Component', () => {
 			// has specific number of full stars based on the value provided
 			const fullStarsElements = rendered.container.querySelectorAll('.ss__rating .ss__rating__stars__star--full');
 			expect(fullStarsElements).toHaveLength(5);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -143,6 +161,7 @@ describe('Rating Component', () => {
 			// calculation should match calculation in component
 			const width = (value % 1 || 1) * 100;
 			expect(styles.width).toBe(`${width}%`);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -165,6 +184,7 @@ describe('Rating Component', () => {
 				const styles = getComputedStyle(lastFullStarElement!);
 				expect(styles.width).toBe(`100%`);
 			}
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -176,6 +196,7 @@ describe('Rating Component', () => {
 		expect(element).toBeInTheDocument();
 		const countElement = rendered.container.querySelector('.ss__rating__count');
 		expect(countElement).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will render with text when provided`, () => {
@@ -187,6 +208,7 @@ describe('Rating Component', () => {
 		const textElement = rendered.container.querySelector('.ss__rating .ss__rating__text');
 		expect(textElement).toBeInTheDocument();
 		expect(textElement).toHaveTextContent(text);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`will render with different full and empty icons when provided`, () => {
@@ -205,6 +227,7 @@ describe('Rating Component', () => {
 		// has specific number of full stars based on the value provided
 		const fullStarIconElements = rendered.container.querySelectorAll(`.ss__rating .ss__rating__stars__star--full .ss__icon.ss__icon--${fullIcon}`);
 		expect(fullStarIconElements).toHaveLength(Math.ceil(value));
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it(`renders a specific number of empty and full stars based on the value prop provided`, () => {
@@ -233,6 +256,7 @@ describe('Rating Component', () => {
 			// has specific number of full stars based on the value provided
 			const fullStarsElements = rendered.container.querySelectorAll('.ss__rating .ss__rating__stars__star--full');
 			expect(fullStarsElements).toHaveLength(Math.ceil(value));
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 
@@ -243,6 +267,7 @@ describe('Rating Component', () => {
 		const element = rendered.container.querySelector('.ss__rating');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -256,6 +281,7 @@ describe('Rating Component', () => {
 		const styles = getComputedStyle(element!);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -264,6 +290,7 @@ describe('Rating Component', () => {
 		const element = rendered.container.querySelector('.ss__rating');
 
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	describe('Rating theming works', () => {
@@ -284,6 +311,7 @@ describe('Rating Component', () => {
 			// would normally not render unless using the `alwaysRender` prop
 			const element = rendered.container.querySelector('.ss__rating');
 			expect(element).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', () => {
@@ -299,6 +327,7 @@ describe('Rating Component', () => {
 			// would normally not render unless using the `alwaysRender` prop
 			const element = rendered.container.querySelector('.ss__rating');
 			expect(element).toBeInTheDocument();
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', () => {
@@ -331,6 +360,7 @@ describe('Rating Component', () => {
 			const textElement = rendered.container.querySelector('.ss__rating .ss__rating__text');
 			expect(textElement).toBeInTheDocument();
 			expect(textElement).toHaveTextContent(propTheme.components.rating.text);
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });

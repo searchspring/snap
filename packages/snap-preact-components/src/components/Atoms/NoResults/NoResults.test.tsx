@@ -1,13 +1,23 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { NoResults } from '../NoResults';
 
 describe('NoResults  Component', () => {
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, () => {
+			const theme = themes[themeName as keyof typeof themes];
+			const rendered = render(<NoResults theme={theme} />);
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('renders', () => {
 		const rendered = render(<NoResults />);
 		const element = rendered.container.querySelector('.ss__no-results');
 		expect(element).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders jsx with custom static slot', () => {
@@ -18,6 +28,7 @@ describe('NoResults  Component', () => {
 		const slotElem = rendered.container.querySelector('.findMe');
 		expect(element).toBeInTheDocument();
 		expect(slotElem).toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders string with custom static slot', () => {
@@ -29,6 +40,7 @@ describe('NoResults  Component', () => {
 		expect(element).toBeInTheDocument();
 		expect(slotElem).toBeInTheDocument();
 		expect(slotElem?.innerHTML).toBe(slot);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders string with HTML with custom static slot', () => {
@@ -40,6 +52,7 @@ describe('NoResults  Component', () => {
 		expect(element).toBeInTheDocument();
 		expect(slotElem).toBeInTheDocument();
 		expect(slotElem?.innerHTML).toBe(slot);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with custom suggestionsList', () => {
@@ -52,6 +65,7 @@ describe('NoResults  Component', () => {
 		expect(element).toBeInTheDocument();
 		expect(suggestionElems).toHaveLength(suggestions.length);
 		suggestionElems.forEach((elem, idx) => expect(elem.innerHTML).toBe(suggestions[idx]));
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with custom contactsList', () => {
@@ -89,6 +103,7 @@ describe('NoResults  Component', () => {
 				`<div class="ss__no-results__contact__detail ss__no-results__contact__detail--${contacts[idx].title}"><h4 class="ss__no-results__contact__detail__title">${contacts[idx].title}</h4><p class="ss__no-results__contact__detail__content">${contacts[idx].content}</p></div>`
 			);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders expected defaults', () => {
@@ -105,6 +120,7 @@ describe('NoResults  Component', () => {
 		expect(suggestionsList).toHaveLength(3);
 		expect(contactsTitle?.innerHTML).toBe('Still can\'t find what you\'re looking for? <a href="/contact-us">Contact us</a>.');
 		expect(contactList).toHaveLength(4);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change the suggestion title', () => {
@@ -116,6 +132,7 @@ describe('NoResults  Component', () => {
 
 		expect(element).toBeInTheDocument();
 		expect(suggestionTitle?.innerHTML).toBe(title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can change the contact title', () => {
@@ -127,6 +144,7 @@ describe('NoResults  Component', () => {
 
 		expect(element).toBeInTheDocument();
 		expect(contactsTitle?.innerHTML).toBe(title);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide the contact section', () => {
@@ -137,6 +155,7 @@ describe('NoResults  Component', () => {
 
 		expect(element).toBeInTheDocument();
 		expect(contactsElem).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hide the suggestions section', () => {
@@ -147,6 +166,7 @@ describe('NoResults  Component', () => {
 
 		expect(element).toBeInTheDocument();
 		expect(suggestionElem).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with classname', () => {
@@ -156,6 +176,7 @@ describe('NoResults  Component', () => {
 		const element = rendered.container.querySelector('.ss__no-results');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders with additional style using prop', () => {
@@ -168,6 +189,7 @@ describe('NoResults  Component', () => {
 		const styles = getComputedStyle(element!);
 
 		expect(styles.padding).toBe(style.padding);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can disable styles', () => {
@@ -176,6 +198,7 @@ describe('NoResults  Component', () => {
 		const element = rendered.container.querySelector('.ss__no-results');
 
 		expect(element?.classList).toHaveLength(1);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });
 
@@ -195,6 +218,7 @@ describe('NoResult theming works', () => {
 		);
 		const elem = rendered.container.querySelector('.ss__no-results');
 		expect(elem).toHaveClass(globalTheme.components.noResults.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable with theme prop', () => {
@@ -208,6 +232,7 @@ describe('NoResult theming works', () => {
 		const rendered = render(<NoResults theme={propTheme} />);
 		const elem = rendered.container.querySelector('.ss__no-results');
 		expect(elem).toHaveClass(propTheme.components.noResults.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('is themeable and theme prop overrides ThemeProvider', () => {
@@ -234,5 +259,6 @@ describe('NoResult theming works', () => {
 		const elem = rendered.container.querySelector('.ss__no-results');
 		expect(elem).toHaveClass(propTheme.components.noResults.className);
 		expect(elem).not.toHaveClass(globalTheme.components.noResults.className);
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 });

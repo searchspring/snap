@@ -5,6 +5,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers';
+import themes from '../../../themes';
 import { Autocomplete } from '../../Templates/Autocomplete/Autocomplete';
 import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
@@ -47,6 +48,25 @@ describe('Autocomplete Component', () => {
 		mockClient.mockData.updateConfig({ autocomplete: 'default' });
 	});
 
+	Object.keys(themes || {}).forEach((themeName) => {
+		it(`uses ${themeName} theme`, async () => {
+			const theme = themes[themeName as keyof typeof themes];
+
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+			await controller.bind();
+
+			const input = document.querySelector('.searchspring-ac');
+			(input as HTMLInputElement).focus();
+
+			const rendered = render(<Autocomplete theme={theme} controller={controller} input={controller.config.selector} />, { container });
+			await waitFor(() => {
+				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+				expect(autocomplete).toBeInTheDocument();
+			});
+			expect(rendered.asFragment()).toMatchSnapshot();
+		});
+	});
+
 	it('contains an input element on the page', () => {
 		const input = document.querySelector('.searchspring-ac');
 		expect(input).toBeInTheDocument();
@@ -64,6 +84,7 @@ describe('Autocomplete Component', () => {
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).not.toBeInTheDocument();
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders after input has been focused', async () => {
@@ -84,6 +105,7 @@ describe('Autocomplete Component', () => {
 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 			expect(autocomplete).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
@@ -114,6 +136,7 @@ describe('Autocomplete Component', () => {
 			expect(results[0]).toBeInTheDocument();
 			expect(results.length).toEqual(9);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('terms are emified as exected', async () => {
@@ -139,6 +162,7 @@ describe('Autocomplete Component', () => {
 			expect(termLinks[1]).toBeInTheDocument();
 			expect(termLinks[1].innerHTML).toEqual('<em>red </em>dress');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hover over terms, & facets', async () => {
@@ -176,6 +200,7 @@ describe('Autocomplete Component', () => {
 			//first term should be auto selected
 			expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
 
@@ -204,6 +229,7 @@ describe('Autocomplete Component', () => {
 			//shouldnt be active
 			expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.facet' });
 
@@ -221,6 +247,7 @@ describe('Autocomplete Component', () => {
 			facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
 			expect(facetOptions![0]).toHaveClass('ss__facet-list-options__option--filtered');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink & hideHistory', async () => {
@@ -287,7 +314,9 @@ describe('Autocomplete Component', () => {
 
 			const trending = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
 			expect(trending).not.toBeInTheDocument();
+			expect(renderedWithout.asFragment()).toMatchSnapshot();
 		});
+		expect(renderedWithout.asFragment()).toMatchSnapshot();
 
 		const renderedWith = render(<Autocomplete {...otherArgs} />, { container });
 
@@ -310,6 +339,7 @@ describe('Autocomplete Component', () => {
 			const trending2 = renderedWithout.container.querySelector('.ss__autocomplete__terms__trending .ss__autocomplete__terms__options');
 			expect(trending2).toBeInTheDocument();
 		});
+		expect(renderedWith.asFragment()).toMatchSnapshot();
 	});
 
 	it('can hideBanners', async () => {
@@ -340,6 +370,7 @@ describe('Autocomplete Component', () => {
 			const banners = renderedWithoutBanners.container.querySelector('.ss__banner');
 			expect(banners).not.toBeInTheDocument();
 		});
+		expect(renderedWithoutBanners.asFragment()).toMatchSnapshot();
 
 		const renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container });
 
@@ -347,6 +378,7 @@ describe('Autocomplete Component', () => {
 			const banners2 = renderedWithBanners.container.querySelector('.ss__banner');
 			expect(banners2).toBeInTheDocument();
 		});
+		expect(renderedWithBanners.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
@@ -397,6 +429,7 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use retainhistory && retaintrending false', async () => {
@@ -434,6 +467,7 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		input.focus();
 		userEvent.keyboard('dress');
@@ -445,6 +479,7 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const args2 = {
 			controller,
@@ -466,6 +501,7 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
+		expect(rendered2.asFragment()).toMatchSnapshot();
 
 		input.focus();
 		userEvent.keyboard('dress');
@@ -478,6 +514,7 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered2.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
+		expect(rendered2.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set a custom trending title', async () => {
@@ -501,9 +538,10 @@ describe('Autocomplete Component', () => {
 			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
-	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
+	it('can set custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
@@ -540,6 +578,7 @@ describe('Autocomplete Component', () => {
 			expect(defaultLink).not.toBeInTheDocument();
 			expect(linkSlot).toHaveTextContent('custom linkSlot');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	//cant render both content slot and results slot at the same time.
@@ -563,6 +602,7 @@ describe('Autocomplete Component', () => {
 			const contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
 			expect(contentSlot).toHaveTextContent('Lorem Ipsum');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	// needs own term
@@ -589,6 +629,7 @@ describe('Autocomplete Component', () => {
 			const noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
 			expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('auto selects first trending term', async () => {
@@ -629,6 +670,7 @@ describe('Autocomplete Component', () => {
 			const results = rendered.container.querySelectorAll('.ss__result');
 			expect(results[0]).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 	});
 
 	it('can set a custom css width', async () => {
@@ -658,6 +700,7 @@ describe('Autocomplete Component', () => {
 			const styles = getComputedStyle(ac);
 			expect(styles['width']).toBe(args.width);
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		const rendered2 = render(<Autocomplete {...args2} />, { container });
 		await waitFor(() => {
@@ -665,6 +708,7 @@ describe('Autocomplete Component', () => {
 			const styles2 = getComputedStyle(ac2);
 			expect(styles2['width']).toBe(args2.width);
 		});
+		expect(rendered2.asFragment()).toMatchSnapshot();
 	});
 
 	it('can use breakpoints', async () => {
@@ -696,6 +740,7 @@ describe('Autocomplete Component', () => {
 			acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
 			expect(acFacets).toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// Change the viewport to 500px.
 		global.innerWidth = 500;
@@ -705,6 +750,7 @@ describe('Autocomplete Component', () => {
 		await waitFor(() => {
 			expect(acFacets).not.toBeInTheDocument();
 		});
+		expect(rendered.asFragment()).toMatchSnapshot();
 
 		// Change the viewport back to desktop.
 		global.innerWidth = 1500;
@@ -742,6 +788,7 @@ describe('Autocomplete Component', () => {
 				expect(element).toBeInTheDocument();
 				expect(element).toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is themeable with theme prop', async () => {
@@ -781,6 +828,7 @@ describe('Autocomplete Component', () => {
 				expect(contentElem).toBeInTheDocument();
 				expect(contentElem).toHaveTextContent('the contents...');
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('is theme prop overrides ThemeProvider', async () => {
@@ -839,6 +887,7 @@ describe('Autocomplete Component', () => {
 				expect(contentElem).toBeInTheDocument();
 				expect(contentElem).toHaveTextContent('contents...');
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 
 		it('breakpoints override theme prop', async () => {
@@ -925,6 +974,7 @@ describe('Autocomplete Component', () => {
 				expect(termsSlots).toHaveLength(1);
 				expect(detailSlots).toHaveLength(3);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 
 			// Change the viewport to 500px.
 			global.innerWidth = 500;
@@ -942,6 +992,7 @@ describe('Autocomplete Component', () => {
 				expect(termsSlots).toHaveLength(1);
 				expect(detailSlots).toHaveLength(3);
 			});
+			expect(rendered.asFragment()).toMatchSnapshot();
 		});
 	});
 });
