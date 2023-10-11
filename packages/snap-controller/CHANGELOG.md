@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0](https://github.com/searchspring/snap/compare/v0.47.0...v0.48.0) (2023-10-11)
+
+### Bug Fixes
+
+- **controller/finder:** altering the beforeFind middleware to ensure redirection is blocked ([936e184](https://github.com/searchspring/snap/commit/936e184ba932fce75b379eeb6e197af0648aac68))
+
+### Features
+
+- add autocomplete settings.redirects.singleResult config ([e620701](https://github.com/searchspring/snap/commit/e620701cb7d528ea4d3fe823bd0104e1bdd73a31))
+
 # [0.47.0](https://github.com/searchspring/snap/compare/v0.46.0...v0.47.0) (2023-09-15)
 
 ### Features

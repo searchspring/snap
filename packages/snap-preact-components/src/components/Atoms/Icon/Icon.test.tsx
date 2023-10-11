@@ -166,6 +166,180 @@ describe('Icon Component', () => {
 		expect(path).toHaveAttribute('d', svgPath);
 	});
 
+	it('renders path array of elements', () => {
+		const line1 = {
+			type: 'line',
+			attributes: {
+				x1: '1',
+				y1: '6',
+				x2: '19',
+				y2: '6',
+				stroke: '#000000',
+				'stroke-linecap': 'round',
+				'stroke-linejoin': 'round',
+			},
+		};
+		const line2 = {
+			type: 'line',
+			attributes: {
+				x1: '1',
+				y1: '14',
+				x2: '19',
+				y2: '14',
+				stroke: '#000000',
+				'stroke-linecap': 'round',
+				'stroke-linejoin': 'round',
+			},
+		};
+		const circle1 = {
+			type: 'circle',
+			attributes: {
+				cx: '7',
+				cy: '6',
+				r: '3',
+				fill: 'none',
+				stroke: 'currentColor',
+			},
+		};
+		const circle2 = {
+			type: 'circle',
+			attributes: {
+				cx: '13',
+				cy: '14',
+				r: '3',
+				fill: 'none',
+				stroke: 'currentColor',
+			},
+		};
+		const path = [{ ...line1 }, { ...line2 }, { ...circle1 }, { ...circle2 }];
+
+		const otherProps = {
+			'stroke-width': '1.25',
+			fill: 'none',
+			xmlns: 'http://www.w3.org/2000/svg',
+		};
+		const props = {
+			color: '#ff0000',
+			className: 'active',
+			width: '23',
+			height: '19',
+			viewBox: '0 0 20 20',
+			style: {
+				transition: `transform .4s cubic-bezier(.11,.44,.03,1)`,
+				'&.active': {
+					'& circle:nth-child(3)': {
+						transform: `translate(6px)`,
+					},
+					'& circle:nth-child(4)': {
+						transform: `translate(-6px)`,
+					},
+				},
+			},
+			...otherProps,
+		};
+
+		const rendered = render(<Icon path={path} {...props} />);
+
+		expect.assertions(
+			Object.keys(line1.attributes).length +
+				Object.keys(line2.attributes).length +
+				Object.keys(circle1.attributes).length +
+				Object.keys(circle2.attributes).length +
+				Object.keys(otherProps).length +
+				13
+		);
+
+		const svgLine1 = rendered.container.querySelector(`svg ${line1.type}:nth-of-type(1)`)!;
+		expect(svgLine1).toBeInTheDocument();
+		Object.keys(line1.attributes).forEach((key) => {
+			expect(svgLine1).toHaveAttribute(key, line1.attributes[key as keyof typeof line1.attributes]);
+		});
+
+		const svgLine2 = rendered.container.querySelector(`svg ${line2.type}:nth-of-type(2)`)!;
+		expect(svgLine2).toBeInTheDocument();
+		Object.keys(line2.attributes).forEach((key) => {
+			expect(svgLine2).toHaveAttribute(key, line2.attributes[key as keyof typeof line2.attributes]);
+		});
+
+		const svgCircle1 = rendered.container.querySelector(`svg ${circle1.type}:nth-of-type(1)`)!;
+		expect(svgCircle1).toBeInTheDocument();
+		Object.keys(circle1.attributes).forEach((key) => {
+			expect(svgCircle1).toHaveAttribute(key, circle1.attributes[key as keyof typeof circle1.attributes]);
+		});
+
+		const svgCircle2 = rendered.container.querySelector(`svg ${circle2.type}:nth-of-type(2)`)!;
+		expect(svgCircle2).toBeInTheDocument();
+		Object.keys(circle2.attributes).forEach((key) => {
+			expect(svgCircle2).toHaveAttribute(key, circle2.attributes[key as keyof typeof circle2.attributes]);
+		});
+
+		const svg = rendered.container.querySelector(`svg`)!;
+		expect(svg).toBeInTheDocument();
+
+		// svg attributes that aren't props to be added on the root element
+		Object.keys(otherProps).forEach((key) => {
+			expect(svg).toHaveAttribute(key, otherProps[key as keyof typeof otherProps]);
+		});
+
+		// props
+		expect(svg).toHaveAttribute('viewBox', props.viewBox);
+		const styles = getComputedStyle(svg);
+		expect(styles.width).toBe(`${props.width}px`);
+		expect(styles.height).toBe(`${props.height}px`);
+		expect(styles.fill).toBe(props.color);
+
+		// custom style script
+		expect(styles.transition).toBe(props.style.transition);
+		expect(svg).toHaveClass(props.className);
+		const circle1Styles = getComputedStyle(svgCircle1);
+		expect(circle1Styles.transform).toBe(props.style['&.active']['& circle:nth-child(3)'].transform);
+		const circle2Styles = getComputedStyle(svgCircle2);
+		expect(circle2Styles.transform).toBe(props.style['&.active']['& circle:nth-child(4)'].transform);
+	});
+
+	it('renders children elements', () => {
+		const lineAttributes = {
+			x1: '1',
+			y1: '6',
+			x2: '19',
+			y2: '6',
+			stroke: '#000000',
+			'stroke-linecap': 'round',
+			'stroke-linejoin': 'round',
+		};
+
+		const cicleAttributes = {
+			cx: '7',
+			cy: '6',
+			r: '3',
+			fill: 'none',
+			stroke: 'currentColor',
+		};
+
+		expect.assertions(Object.keys(lineAttributes).length + Object.keys(cicleAttributes).length + 2);
+
+		const rendered = render(
+			<Icon>
+				<line {...lineAttributes}></line>
+				<circle {...cicleAttributes}></circle>
+			</Icon>
+		);
+
+		const svgLine = rendered.container.querySelector('svg line')!;
+		expect(svgLine).toBeInTheDocument();
+
+		Object.keys(lineAttributes).forEach((key) => {
+			expect(svgLine).toHaveAttribute(key, lineAttributes[key as keyof typeof lineAttributes]);
+		});
+
+		const svgCicle = rendered.container.querySelector('svg circle')!;
+		expect(svgCicle).toBeInTheDocument();
+
+		Object.keys(cicleAttributes).forEach((key) => {
+			expect(svgCicle).toHaveAttribute(key, cicleAttributes[key as keyof typeof cicleAttributes]);
+		});
+	});
+
 	it('can disable styles', () => {
 		const icon = 'cog';
 		const color = '#3a23ad';
