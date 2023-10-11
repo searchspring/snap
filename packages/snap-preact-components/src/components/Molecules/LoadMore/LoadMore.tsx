@@ -11,7 +11,8 @@ import { defined, mergeProps } from '../../../utilities';
 import { useIntersection } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { Button, ButtonProps } from '../Button';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
 	LoadMore: ({
@@ -27,41 +28,42 @@ const CSS = {
 		const radialAngle = ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2;
 
 		return css({
-			'& .ss__loadMore__button': {
-				'& .ss__icon--spinner': {
-					marginLeft: '5px',
-					animation: `${keyframes({
-						'0%': { transform: `rotate(0deg)` },
-						'100%': { transform: `rotate(360deg)` },
-					})} linear 1s infinite`,
-				},
+			'& .ss__loadMore__button--hidden': {
+				display: 'none',
+			},
+			'& .ss__button': {
+				alignItems: 'center',
+			},
+			'& .ss__icon--spinner': {
+				marginLeft: '5px',
+				animation: `${keyframes({
+					'0%': { transform: `rotate(0deg)` },
+					'100%': { transform: `rotate(360deg)` },
+				})} linear 1s infinite`,
 			},
 			'&.ss__loadMore--bar': {
 				display: 'flex',
 				flexDirection: 'column',
-				width: 'fit-content',
+				alignItems: 'center',
 				gap: '20px',
-
-				'& .ss__loadMore__button': {
-					margin: '0 auto',
-				},
 				'& .ss__loadMore__progress': {
 					display: 'flex',
 					flexDirection: 'column',
 					gap: '5px',
 					'& .ss__loadMore__progress__indicator': {
-						width: '100%',
-						maxWidth: `${progressIndicatorWidth}px`,
+						width: progressIndicatorWidth,
 						background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
-						borderRadius: `${progressIndicatorSize}px`,
+						borderRadius: progressIndicatorSize,
 						'& .ss__loadMore__progress__indicator__bar': {
 							width: pagination ? `${(pagination.end / pagination.totalResults) * 100}%` : '',
 							background: color || theme?.colors?.primary || '#ccc',
-							borderRadius: `${progressIndicatorSize}px`,
-							height: `${progressIndicatorSize}px`,
+							borderRadius: progressIndicatorSize,
+							height: progressIndicatorSize,
 						},
 					},
-					'& .ss__loadMore__progress__text': {},
+					'& .ss__loadMore__progress__text': {
+						textAlign: 'center',
+					},
 				},
 			},
 			'&.ss__loadMore--radial': {
@@ -73,44 +75,44 @@ const CSS = {
 				},
 				'& .ss__loadMore__progress': {
 					// remove height if progress indicator is hidden but hideProgressText is not
-					height: !hideProgressText && hideProgressIndicator ? undefined : `${progressIndicatorWidth}px`,
+					height: !hideProgressText && hideProgressIndicator ? undefined : progressIndicatorWidth,
 
 					'& .ss__loadMore__progress__indicator': {
 						'& .ss__loadMore__progress__indicator__radial': {
 							'& .ss__loadMore__progress__indicator__radial__circle': {
 								background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
-								height: `${progressIndicatorWidth}px`,
-								width: `${progressIndicatorWidth}px`,
+								height: progressIndicatorWidth,
+								width: progressIndicatorWidth,
 								borderRadius: '50%',
 
 								'& .ss__loadMore__progress__indicator__radial__circle__mask, .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
-									width: `${progressIndicatorWidth}px`,
-									height: `${progressIndicatorWidth}px`,
+									width: progressIndicatorWidth,
+									height: progressIndicatorWidth,
 									position: 'absolute',
 									borderRadius: '50%',
 								},
 								'& .ss__loadMore__progress__indicator__radial__circle__mask': {
-									clip: `rect(0px, ${progressIndicatorWidth}px, ${progressIndicatorWidth}px, ${progressIndicatorWidth! / 2}px)`,
+									clipPath: `inset(0px 0px 0px calc(${progressIndicatorWidth}/2))`,
 								},
 								'& .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
 									transform: `rotate(${radialAngle}deg)`,
 								},
 							},
 							'& .ss__loadMore__progress__text': {
-								width: `${progressIndicatorWidth! - progressIndicatorSize!}px`,
-								height: `${progressIndicatorWidth! - progressIndicatorSize!}px`,
+								width: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+								height: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
 								borderRadius: '50%',
 								background: '#fff',
-								lineHeight: `${progressIndicatorWidth! - progressIndicatorSize!}px`,
+								lineHeight: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
 								textAlign: 'center',
-								marginTop: `${progressIndicatorSize! / 2}px`,
-								marginLeft: `${progressIndicatorSize! / 2}px`,
+								marginTop: `calc(${progressIndicatorSize} / 2)`,
+								marginLeft: `calc(${progressIndicatorSize} / 2)`,
 								position: 'absolute',
-								fontSize: `calc(${progressIndicatorWidth}px / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
+								fontSize: `calc(${progressIndicatorWidth} / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
 							},
 							'& .ss__loadMore__progress__indicator__radial__circle__mask': {
 								'& .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
-									clip: `rect(0px, ${progressIndicatorWidth! / 2 + 0.5}px, ${progressIndicatorWidth}px, 0px)`,
+									clipPath: `inset(0px calc((${progressIndicatorWidth} / 2) - 0.5px) 0px 0px)`,
 									backgroundColor: color || theme?.colors?.primary || '#ccc',
 								},
 								'&.ss__loadMore__progress__indicator__radial__circle__mask--full': {
@@ -130,8 +132,10 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	const defaultProps: Partial<LoadMoreProps> = {
 		loadMoreText: 'Load More',
 		progressIndicator: 'bar',
-		progressIndicatorWidth: properties?.progressIndicator === 'radial' ? 70 : 300,
-		progressIndicatorSize: properties?.progressIndicator === 'radial' ? 10 : 5,
+		loadingLocation: 'button',
+		loadingIcon: 'spinner',
+		progressIndicatorWidth: properties?.progressIndicator === 'radial' ? '70px' : '300px',
+		progressIndicatorSize: properties?.progressIndicator === 'radial' ? '10px' : '5px',
 	};
 
 	const props = mergeProps('loadMore', globalTheme, defaultProps, properties);
@@ -147,16 +151,21 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		progressIndicator,
 		hideProgressIndicator,
 		hideProgressText,
+		loadingLocation,
+		loadingIcon,
 		disableStyles,
 		className,
 		style,
 		styleScript,
 	} = props;
 
+	const store = pagination || controller?.store?.pagination;
+	const isLoading = typeof loading == 'boolean' ? loading : controller?.store?.loading;
+
 	const subProps: LoadMoreSubProps = {
 		button: {
 			// default props
-			className: 'ss__loadMore__button',
+			className: classnames('ss__loadMore__button', { 'ss__loadMore__button--hidden': isLoading && loadingLocation === 'outside' }),
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props
@@ -166,10 +175,19 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		icon: {
+			// default props
+			className: 'ss__loadMore__icon',
+			// global theme
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 	};
-
-	const store = pagination || controller?.store?.pagination;
-	const isLoading = typeof loading == 'boolean' ? loading : controller?.store?.loading;
 
 	if (!store) {
 		return <Fragment></Fragment>;
@@ -192,7 +210,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		autoProps.ref = loadMoreRef;
 
 		const loadMoreInViewport = useIntersection(loadMoreRef, intersectionOffset || '0px');
-		if (loadMoreInViewport && store.next) {
+		if (loadMoreInViewport && store.next && !isLoading) {
 			store.next.url.go({ history: 'replace' });
 		}
 	}
@@ -211,18 +229,22 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				)}
 			>
 				{!autoFetch && (
-					<Button
-						onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-							store.next?.url.go({ history: 'replace' });
-							onClick && onClick(e);
-						}}
-						disabled={isLoading}
-						icon={isLoading ? 'spinner' : undefined}
-						aria-label={loadMoreText}
-						{...subProps.button}
-					>
-						{loadMoreText}
-					</Button>
+					<Fragment>
+						<Button
+							onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+								store.next?.url.go({ history: 'replace' });
+								onClick && onClick(e);
+							}}
+							aria-label={loadMoreText}
+							disabled={isLoading && loadingLocation === 'button'}
+							{...subProps.button}
+						>
+							{loadMoreText}
+							{loadingIcon && isLoading && loadingLocation === 'button' ? <Icon icon={loadingIcon} {...subProps.icon}></Icon> : <Fragment></Fragment>}
+						</Button>
+
+						{loadingLocation === 'outside' && isLoading && <Icon icon={loadingIcon} {...subProps.icon}></Icon>}
+					</Fragment>
 				)}
 
 				{(!hideProgressIndicator || !hideProgressText) && (
@@ -276,6 +298,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 
 interface LoadMoreSubProps {
 	button: Partial<ButtonProps>;
+	icon: Partial<IconProps>;
 }
 
 export interface LoadMoreProps extends ComponentProps {
@@ -288,9 +311,11 @@ export interface LoadMoreProps extends ComponentProps {
 	color?: string;
 	backgroundColor?: string;
 	progressIndicator?: 'bar' | 'radial';
-	progressIndicatorWidth?: number;
-	progressIndicatorSize?: number;
+	progressIndicatorWidth?: string;
+	progressIndicatorSize?: string;
 	hideProgressIndicator?: boolean;
 	hideProgressText?: boolean;
+	loadingIcon?: string;
+	loadingLocation?: 'button' | 'outside';
 	onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

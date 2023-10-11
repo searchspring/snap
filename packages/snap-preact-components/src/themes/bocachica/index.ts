@@ -67,9 +67,6 @@ export const bocachica: BocachicaTheme = {
 		loadingBar: {
 			...style.components.loadingBar,
 		},
-		loadMore: {
-			...style.components.loadMore,
-		},
 		noResults: {
 			...style.components.noResults,
 		},
@@ -115,6 +112,9 @@ export const bocachica: BocachicaTheme = {
 		},
 		filter: {
 			...style.components.filter,
+		},
+		loadMore: {
+			...style.components.loadMore,
 		},
 		pagination: {
 			...style.components.pagination,

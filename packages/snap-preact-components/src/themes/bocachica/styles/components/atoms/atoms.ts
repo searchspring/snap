@@ -10,7 +10,6 @@ export { icon } from './icon';
 export { image } from './image';
 export { inlineBanner } from './inlinebanner';
 export { loadingBar } from './loadingbar';
-export { loadMore } from './loadmore';
 export { overlay } from './overlay';
 export { price } from './price';
 export { searchHeader } from './searchheader';

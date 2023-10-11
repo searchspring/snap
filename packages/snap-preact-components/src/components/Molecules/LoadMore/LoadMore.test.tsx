@@ -95,6 +95,31 @@ describe('LoadMore Component', () => {
 		expect(Object.values(buttonElement?.classList || {}).includes('ss__button--disabled')).toBe(true);
 	});
 
+	it('renders different loading icon using loadingIcon prop', () => {
+		const loadingIcon = 'cog';
+		const rendered = render(<LoadMore pagination={paginationStore} loading={true} loadingIcon={loadingIcon} />);
+
+		const loadingIconElement = rendered.container.querySelector(`.ss__icon--${loadingIcon}`);
+		expect(loadingIconElement).toBeInTheDocument();
+	});
+
+	it('renders loading icon within button using loadingLocation prop', () => {
+		const rendered = render(<LoadMore pagination={paginationStore} loading={true} loadingLocation={'button'} />);
+
+		const loadingIconElement = rendered.container.querySelector(`.ss__button .ss__icon--spinner`);
+		expect(loadingIconElement).toBeInTheDocument();
+	});
+
+	it('renders different loading icon location using loadingLocation prop', () => {
+		const rendered = render(<LoadMore pagination={paginationStore} loading={true} loadingLocation={'outside'} />);
+
+		const loadingIconElement = rendered.container.querySelector(`.ss__button .ss__icon--spinner`);
+		expect(loadingIconElement).not.toBeInTheDocument();
+
+		const loadingIconElement2 = rendered.container.querySelector(`.ss__button + .ss__icon--spinner`);
+		expect(loadingIconElement2).toBeInTheDocument();
+	});
+
 	it('autoFetch prop observes component', () => {
 		expect(observe).toHaveBeenCalledTimes(0);
 		render(<LoadMore pagination={paginationStore} autoFetch={true} />);
@@ -123,13 +148,17 @@ describe('LoadMore Component', () => {
 		const progressIndicatorSize = 45;
 
 		const rendered = render(
-			<LoadMore pagination={paginationStore} progressIndicatorWidth={progressIndicatorWidth} progressIndicatorSize={progressIndicatorSize} />
+			<LoadMore
+				pagination={paginationStore}
+				progressIndicatorWidth={`${progressIndicatorWidth}px`}
+				progressIndicatorSize={`${progressIndicatorSize}px`}
+			/>
 		);
 
 		const loadMoreIndicatorElement = rendered.container.querySelector('.ss__loadMore--bar .ss__loadMore__progress__indicator')!;
 		expect(loadMoreIndicatorElement).toBeInTheDocument();
 		const barIndicatorStyles = getComputedStyle(loadMoreIndicatorElement);
-		expect(barIndicatorStyles.maxWidth).toBe(`${progressIndicatorWidth}px`);
+		expect(barIndicatorStyles.width).toBe(`${progressIndicatorWidth}px`);
 		expect(barIndicatorStyles.borderRadius).toBe(`${progressIndicatorSize}px`);
 
 		const loadMoreIndicatorBarElement = rendered.container.querySelector('.ss__loadMore--bar .ss__loadMore__progress__indicator__bar')!;
@@ -171,8 +200,8 @@ describe('LoadMore Component', () => {
 			<LoadMore
 				pagination={paginationStore}
 				progressIndicator={'radial'}
-				progressIndicatorWidth={progressIndicatorWidth}
-				progressIndicatorSize={progressIndicatorSize}
+				progressIndicatorWidth={`${progressIndicatorWidth}px`}
+				progressIndicatorSize={`${progressIndicatorSize}px`}
 			/>
 		);
 
@@ -185,8 +214,8 @@ describe('LoadMore Component', () => {
 		const loadMoreIndicatorRadialElement = rendered.container.querySelector('.ss__loadMore--radial .ss__loadMore__progress__text')!;
 		expect(loadMoreIndicatorRadialElement).toBeInTheDocument();
 		const radialIndicatorBarStyles = getComputedStyle(loadMoreIndicatorRadialElement);
-		expect(radialIndicatorBarStyles.height).toBe(`${progressIndicatorWidth - progressIndicatorSize}px`);
-		expect(radialIndicatorBarStyles.width).toBe(`${progressIndicatorWidth - progressIndicatorSize}px`);
+		expect(radialIndicatorBarStyles.height).toBe(`calc(${progressIndicatorWidth}px - ${progressIndicatorSize}px)`);
+		expect(radialIndicatorBarStyles.width).toBe(`calc(${progressIndicatorWidth}px - ${progressIndicatorSize}px)`);
 	});
 
 	it('renders with radial indicator with hideProgressIndicator', () => {

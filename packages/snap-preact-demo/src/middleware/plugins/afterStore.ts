@@ -29,9 +29,9 @@ function mutateFacets(facets: SearchFacetsStore) {
 	}
 }
 
-async function restorePosition({ element }, next: Next) {
+async function restorePosition({ element, controller }, next: Next) {
 	// scroll to top only if we are not going to be scrolling to stored element
-	if (!element) {
+	if (!element && !controller.config.settings?.infinite) {
 		setTimeout(() => {
 			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 		});

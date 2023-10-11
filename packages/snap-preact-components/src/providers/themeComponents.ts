@@ -7,7 +7,6 @@ import { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
 import { IconProps } from '../components/Atoms/Icon';
 import { ImageProps } from '../components/Atoms/Image';
 import { LoadingBarProps } from '../components/Atoms/Loading';
-import { LoadMoreProps } from '../components/Atoms/LoadMore';
 import { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandising';
 import { OverlayProps } from '../components/Atoms/Overlay';
 import { PriceProps } from '../components/Atoms/Price';
@@ -24,6 +23,7 @@ import { FacetListOptionsProps } from '../components/Molecules/FacetListOptions'
 import { FacetPaletteOptionsProps } from '../components/Molecules/FacetPaletteOptions';
 import { FacetSliderProps } from '../components/Molecules/FacetSlider';
 import { FilterProps } from '../components/Molecules/Filter';
+import { LoadMoreProps } from '../components/Molecules/LoadMore';
 import { PaginationProps } from '../components/Molecules/Pagination';
 import { PerPageProps } from '../components/Molecules/PerPage';
 import { RatingProps } from '../components/Molecules/Rating';
@@ -59,7 +59,6 @@ export type ThemeComponents = {
 	icon?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;
 	loadingBar?: GenericComponentProps<LoadingBarProps>;
-	loadMore?: GenericComponentProps<LoadMoreProps>;
 	banner?: GenericComponentProps<BannerProps>;
 	inlineBanner?: GenericComponentProps<InlineBannerProps>;
 	overlay?: GenericComponentProps<OverlayProps>;
@@ -77,6 +76,7 @@ export type ThemeComponents = {
 	facetPaletteOptions?: GenericComponentProps<FacetPaletteOptionsProps>;
 	facetSlider?: GenericComponentProps<FacetSliderProps>;
 	filter?: GenericComponentProps<FilterProps>;
+	loadMore?: GenericComponentProps<LoadMoreProps>;
 	pagination?: GenericComponentProps<PaginationProps>;
 	perPage?: GenericComponentProps<PerPageProps>;
 	rating?: GenericComponentProps<RatingProps>;

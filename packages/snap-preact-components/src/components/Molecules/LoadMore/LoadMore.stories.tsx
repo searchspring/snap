@@ -10,7 +10,7 @@ import Readme from '../LoadMore/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Atoms/LoadMore`,
+	title: `Molecules/LoadMore`,
 	component: LoadMore,
 	parameters: {
 		docs: {
@@ -155,6 +155,30 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
+		},
+		loadingIcon: {
+			description: 'Loading icon',
+			defaultValue: 'spinner',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: 'spinner' },
+			},
+			control: { type: 'text' },
+		},
+		loadingLocation: {
+			description: 'Location of loading indicator',
+			defaultValue: 'button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: ['button', 'outside'],
+			},
 		},
 		onClick: {
 			description: 'Button click event handler',

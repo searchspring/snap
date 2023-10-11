@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Pagination, Results as ResultsComponent, withStore, withController } from '@searchspring/snap-preact-components';
+import { Pagination, Results as ResultsComponent, LoadMore, withStore, withController } from '@searchspring/snap-preact-components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
@@ -46,7 +46,15 @@ export class Results extends Component<ResultsProps> {
 
 				<div class="clear"></div>
 
-				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
+				<div className={`ss-toolbar ${controller.config.settings.infinite ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
+					{(() => {
+						if (controller.config.settings.infinite) {
+							return <LoadMore controller={this.props.controller} />;
+						} else if (pagination.totalPages > 1) {
+							return <Pagination pagination={pagination} />;
+						}
+					})()}
+				</div>
 
 				<div class="clear"></div>
 			</div>

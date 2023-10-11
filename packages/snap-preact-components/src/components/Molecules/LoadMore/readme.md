@@ -43,8 +43,7 @@ Requires `autoFetch` prop to be `true`. The `intersectionOffset` prop defines th
 ```
 
 ### loading
-The `loading` prop is not required if the `controller` prop is provided or `hideProgressIndicator` and `hideProgressText` are both `true`
-
+The `loading` prop is not required if the `controller` prop is provided.
 
 If the `pagination` prop is used, the `loading` prop should contain a value from `controller.store.loading` to allow for the "Load More" button to be disabled and the spinner icon visible while fetching results.
 
@@ -81,17 +80,21 @@ The `progressIndicator` prop allows you to pick from two progress indicator desi
 ```
 
 ### progressIndicatorWidth
-The `progressIndicatorWidth` prop sets the progress indicator width in pixels. When `progressIndicator='bar'` the default is `300` (bar width.) When `progressIndicator='radial'` the default is `70` (width and height.)
+The `progressIndicatorWidth` prop sets the progress indicator width. Recommended units: `px`, `rem`, `em`, `vw`. Unsupported unit: `%` not recommended. 
+
+When `progressIndicator='bar'` the default is `300px` (bar width.) When `progressIndicator='radial'` the default is `70px` (width and height.)
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicatorWidth={70} />
+<LoadMore pagination={controller.store.pagination} progressIndicatorWidth={'300px'} />
 ```
 
 ### progressIndicatorSize
-The `progressIndicatorSize` prop sets the progress indicator size in pixels. When `progressIndicator='bar'` the default is `5` (bar height.) When `progressIndicator='radial'` the default is `10` (thickness between inner and outer radials)
+The `progressIndicatorSize` prop sets the progress indicator size. Recommended units: `px`, `rem`, `em`, `vw`. Unsupported unit: `%` not recommended. 
+
+When `progressIndicator='bar'` the default is `5px` (bar height.) When `progressIndicator='radial'` the default is `10px` (thickness between inner and outer radials)
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicatorSize={5} />
+<LoadMore pagination={controller.store.pagination} progressIndicatorSize={'5px'} />
 ```
 
 ### hideProgressIndicator
@@ -114,6 +117,15 @@ When both `hideProgressIndicator` and `hideProgressText` props are `true` only t
 ```jsx
 <LoadMore pagination={controller.store.pagination} progressIndicator={true} hideProgressText={true} />
 ```
+
+### loadingIcon
+The `loadingIcon` prop defines the icon used when loading. Default: `spinner`
+```jsx
+<LoadMore pagination={controller.store.pagination} loadingIcon={'spinner'} />
+```
+
+### loadingLocation
+The `loadingLocation` prop defines the location of the loading icon. Default: `button` will be displayed within the "Load More" button. Alternative value of `outside` will display the loading icon in place of the button.
 
 #### onClick
 The `onClick` prop allows for a custom callback function for when the button is clicked. Only supported if `progressIndicator={'bar'}`
