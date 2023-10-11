@@ -17,6 +17,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
 | settings.history.max | how many search terms should be kept in the history store | 25 |   | 
 | settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
+| settings.pagination.pageSizeOptions | setting to change the page size options available | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 | settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
@@ -142,7 +143,7 @@ const searchConfig = {
 ### Pagination Settings 
 
 #### `pageSizeOptions` property
-The optional `pageSizeOptions` property gives the ability to overright the default pageSizeOptions in the SearchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
+The optional `pageSizeOptions` property gives the ability to overwrite the default page size options in the SearchPaginationStore. These are typically used in a `<select>` dropdown to change the number of results displayed per page. You can pass in as many options as you need. Each option has a `label` and a numeric `value`. The SearchPaginationStore then automatically populates and updates the `url` and `active` values. 
 
 `label` - label text to display
 

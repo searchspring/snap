@@ -33,6 +33,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 		},
 		redirects: {
 			merchandising: true,
+			singleResult: true,
 		},
 	},
 };
@@ -107,6 +108,15 @@ export class AutocompleteController extends AbstractController {
 			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
 				window.location.href = redirectURL;
 				return false;
+			}
+
+			if (this.config?.settings?.redirects?.singleResult) {
+				const { results } = (ac.controller as AutocompleteController).store;
+				const singleResultUrl = results.length === 1 && results[0].type === 'product' && results[0].mappings.core?.url;
+				if (singleResultUrl) {
+					window.location.href = singleResultUrl;
+					return false;
+				}
 			}
 		});
 		// attach config plugins and event middleware
