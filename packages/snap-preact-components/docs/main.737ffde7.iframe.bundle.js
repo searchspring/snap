@@ -1,4 +1,4 @@
-/*! For license information please see main.f5d28412.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.737ffde7.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -1586,6 +1586,39 @@
 							"<Icon color='#3a23ad' size='120px' style='padding: 20px;' viewBox='0 0 70 70' path='M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z' />\n"
 						)
 					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'path'),
+						' prop can also contain an array of children svg elements to render.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Icon size={\'70\'} viewBox={\'0 0 70 70\'} path={[\n    {\n        type: \'line\', \n        attributes: { \n            x1: "1",\n            y1: "10",\n            x2: "69",\n            y2: "10",\n            stroke: "#000000",\n            \'stroke-width\': "3",\n            \'stroke-linecap\': "round",\n            \'stroke-linejoin\': "round",\n        }\n    },\n    {\n        type: \'line\', \n        attributes: { \n            x1: "1",\n            y1: "30",\n            x2: "69",\n            y2: "30",\n            stroke: "#000000",\n            \'stroke-width\': "3",\n            \'stroke-linecap\': "round",\n            \'stroke-linejoin\': "round",\n        }\n    },\n    {\n        type: \'circle\', \n        attributes: { \n            cx: "15",\n            cy: "10",\n            r: "6",\n            fill: "#000000",\n            stroke: "#000000",\n            \'stroke-width\': "3",\n        }\n    },\n    {\n        type: \'circle\', \n        attributes: { \n            cx: "55",\n            cy: "30",\n            r: "6",\n            fill: "#000000",\n            stroke: "#000000",\n            \'stroke-width\': "3",\n        }\n    },\n]} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'children' }, 'children'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Component children can be provided and will be rendered within the wrapping ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'svg'),
+						' element.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Icon size={\'70\'} viewBox={\'0 0 70 70\'} >\n    <line x1="1" y1="10" x2="69" y2="10" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></line>\n    <line x1="1" y1="30" x2="69" y2="30" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></line>\n    <circle cx="15" cy="10" r="6" fill="#000000" stroke="#000000" stroke-width="3"></circle>\n    <circle cx="55" cy="30" r="6" fill="#000000" stroke="#000000" stroke-width="3"></circle>\n</Icon>\n'
+						)
+					),
 					(0, esm.kt)('h3', { id: 'color' }, 'color'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the icon color.'),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Icon icon=\'cogs\' color="#ffff00" />\n')),
@@ -1682,7 +1715,8 @@
 								})(Object.keys(paths.N)),
 							},
 						},
-						path: { description: 'SVG path', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						path: { description: 'SVG path', table: { type: { summary: 'string | SVGPathElement[]' } }, control: { type: 'text' } },
+						children: { description: 'SVG elements to be contained within (using children)', table: { type: { summary: 'string, JSX' } } },
 						color: {
 							description: 'Icon color',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'theme.colors.primary' } },
@@ -1691,11 +1725,11 @@
 						size: {
 							defaultValue: '16px',
 							description: 'Icon size',
-							table: { type: { summary: 'string' }, defaultValue: { summary: '16px' } },
+							table: { type: { summary: 'string | number' }, defaultValue: { summary: '16px' } },
 							control: { type: 'text' },
 						},
-						height: { description: 'Icon height. Overwrites size.', table: { type: { summary: 'string' } }, control: { type: 'text' } },
-						width: { description: 'Icon width. Overwrites size.', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						height: { description: 'Icon height. Overwrites size.', table: { type: { summary: 'string | number' } }, control: { type: 'text' } },
+						width: { description: 'Icon width. Overwrites size.', table: { type: { summary: 'string | number' } }, control: { type: 'text' } },
 						viewBox: {
 							description: 'SVG view box',
 							defaultValue: '0 0 56 56',
@@ -1740,37 +1774,68 @@
 		'./src/components/Atoms/Icon/Icon.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { J: () => Icon });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+			__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js');
+			var preact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
-				_paths__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
-				CSS = {
-					icon: function icon(_ref) {
-						var _theme$colors,
-							color = _ref.color,
-							height = _ref.height,
-							width = _ref.width,
-							size = _ref.size,
-							theme = _ref.theme;
-						return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
-							fill: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
-							width: width || size,
-							height: height || size,
-							position: 'relative',
-						});
-					},
-				};
+				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
+				_paths__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
+				_excluded = ['color', 'icon', 'path', 'children', 'size', 'width', 'height', 'viewBox', 'disableStyles', 'className', 'style'];
+			function _objectWithoutProperties(source, excluded) {
+				if (null == source) return {};
+				var key,
+					i,
+					target = (function _objectWithoutPropertiesLoose(source, excluded) {
+						if (null == source) return {};
+						var key,
+							i,
+							target = {},
+							sourceKeys = Object.keys(source);
+						for (i = 0; i < sourceKeys.length; i++) (key = sourceKeys[i]), excluded.indexOf(key) >= 0 || (target[key] = source[key]);
+						return target;
+					})(source, excluded);
+				if (Object.getOwnPropertySymbols) {
+					var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+					for (i = 0; i < sourceSymbolKeys.length; i++)
+						(key = sourceSymbolKeys[i]),
+							excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+				}
+				return target;
+			}
+			var CSS = {
+				icon: function icon(_ref) {
+					var _theme$colors,
+						_theme$colors2,
+						color = _ref.color,
+						height = _ref.height,
+						width = _ref.width,
+						size = _ref.size,
+						theme = _ref.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
+						fill: color || (null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
+						stroke:
+							color || (null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary),
+						width: isNaN(Number(width || size)) ? width || size : (width || size) + 'px',
+						height: isNaN(Number(height || size)) ? height || size : (height || size) + 'px',
+						position: 'relative',
+					});
+				},
+			};
 			function Icon(properties) {
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 					theme = Object.assign({}, globalTheme, properties.theme),
 					props = Object.assign(
 						{ size: '16px', viewBox: '0 0 56 56' },
@@ -1788,6 +1853,7 @@
 					color = props.color,
 					icon = props.icon,
 					path = props.path,
+					children = props.children,
 					size = props.size,
 					width = props.width,
 					height = props.height,
@@ -1795,27 +1861,41 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
-					iconPath = _paths__WEBPACK_IMPORTED_MODULE_5__.N[icon] || path,
+					otherProps = _objectWithoutProperties(props, _excluded),
+					iconPath = _paths__WEBPACK_IMPORTED_MODULE_11__.N[icon] || path,
+					pathType = typeof iconPath,
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.icon({ color, width, height, size, theme }), style]),
-					iconPath
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+					children || (iconPath && ('string' === pathType || ('object' === pathType && Array.isArray(iconPath))))
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_12__.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 									'svg',
-									Object.assign({}, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
-										viewBox,
-										xmlns: 'http://www.w3.org/2000/svg',
-										width: disableStyles ? width || size : void 0,
-										height: disableStyles ? height || size : void 0,
-									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('path', { fill: disableStyles ? color : void 0, d: iconPath })
+									Object.assign(
+										{},
+										styling,
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
+											viewBox,
+											xmlns: 'http://www.w3.org/2000/svg',
+											width: disableStyles ? width || size : void 0,
+											height: disableStyles ? height || size : void 0,
+										},
+										otherProps
+									),
+									children ||
+										('string' === pathType
+											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)('path', { fill: disableStyles ? color : void 0, d: iconPath })
+											: iconPath && 'object' === pathType && Array.isArray(iconPath)
+											? iconPath.map(function (p, i) {
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(p.type, Object.assign({ key: i }, p.attributes));
+											  })
+											: void 0)
 								)
 						  )
-						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null)
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(preact__WEBPACK_IMPORTED_MODULE_7__.HY, null)
 				);
 			}
 		},
@@ -1861,6 +1941,18 @@
 					'M52 28c-2.969-4.594-7.031-8.531-11.906-11.031 1.25 2.125 1.906 4.563 1.906 7.031 0 7.719-6.281 14-14 14s-14-6.281-14-14c0-2.469 0.656-4.906 1.906-7.031-4.875 2.5-8.938 6.437-11.906 11.031 5.344 8.25 13.969 14 24 14s18.656-5.75 24-14zM29.5 16c0-0.812-0.687-1.5-1.5-1.5-5.219 0-9.5 4.281-9.5 9.5 0 0.812 0.687 1.5 1.5 1.5s1.5-0.687 1.5-1.5c0-3.563 2.937-6.5 6.5-6.5 0.812 0 1.5-0.687 1.5-1.5zM56 28c0 0.781-0.25 1.5-0.625 2.156-5.75 9.469-16.281 15.844-27.375 15.844s-21.625-6.406-27.375-15.844c-0.375-0.656-0.625-1.375-0.625-2.156s0.25-1.5 0.625-2.156c5.75-9.437 16.281-15.844 27.375-15.844s21.625 6.406 27.375 15.844c0.375 0.656 0.625 1.375 0.625 2.156z',
 				filter:
 					'M25.519 21.889c0 0-0.241-4.089-0.241-4.089s0-13.471 0-13.471c0.002-1.162-0.005-2.636 0.825-3.553 1.104-1.224 3.156-0.929 4.022 0.435 0.498 0.787 0.443 1.744 0.445 2.636 0 0 0 25.258 0 25.258s-5.052 0-5.052 0c0 0 0-7.217 0-7.217zM42.358 3.848c0.019-1.576 0.281-3.476 2.165-3.794 2.798-0.471 3.125 2.24 3.127 4.275 0 0 0 11.546 0 11.546s-2.646-0.233-2.646-0.233c0 0-2.646 0.233-2.646 0.233s0-12.028 0-12.028zM8.44 3.848c0.014-1.181 0.147-2.442 1.229-3.163 1.484-0.986 3.286-0.156 3.825 1.479 0.322 0.984 0.238 2.545 0.238 3.608 0 0 0 6.014 0 6.014s-2.646-0.197-2.646-0.197c0 0-2.646 0.197-2.646 0.197s0-7.938 0-7.938zM13.010 13.556c5.509 1.855 5.477 10.377-1.203 11.551-5.121 0.902-8.455-5.015-5.867-9.23 0.907-1.475 2.314-2.151 3.943-2.535 1.176-0.166 1.985-0.171 3.127 0.214zM46.207 28.993c-5.564 1.051-8.874-4.833-6.348-9.028 1.046-1.737 2.533-2.357 4.424-2.774 7.57-0.883 9.36 10.399 1.924 11.802zM13.732 26.46c0 0 0 24.536 0 24.536-0.002 1.215-0.067 3.079-0.844 4.063-1.066 1.352-3.094 1.222-3.984-0.226-0.496-0.808-0.462-1.958-0.464-2.875 0 0 0-25.499 0-25.499s5.292 0 5.292 0zM33.219 33.436c1.936 3.286-0.019 8.15-3.851 8.821-1.169 0.207-3.019 0.135-4.089-0.402-4.71-2.355-4.39-9.803 1.443-11.193 2.673-0.375 5.056 0.33 6.497 2.774zM45.004 30.77c0 0 2.646-0.221 2.646-0.221s0 21.409 0 21.409c-0.002 1.034 0.034 2.215-0.649 3.074-0.977 1.224-3.017 1.224-3.993 0-0.637-0.799-0.645-1.867-0.649-2.834 0 0 0-21.65 0-21.65s2.646 0.221 2.646 0.221zM27.684 43.998c0 0 2.887-0.219 2.887-0.219s0 8.66 0 8.66c-0.022 1.758-0.654 3.861-2.887 3.517-1.912-0.296-2.384-2.114-2.406-3.757 0 0 0-8.419 0-8.419s2.406 0.219 2.406 0.219z',
+				filters: [
+					{
+						type: 'line',
+						attributes: { x1: '1', y1: '17', x2: '55', y2: '17', 'stroke-width': '4', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
+					},
+					{
+						type: 'line',
+						attributes: { x1: '1', y1: '39', x2: '55', y2: '39', 'stroke-width': '4', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
+					},
+					{ type: 'circle', attributes: { cx: '18', cy: '17', r: '8', fill: 'white', 'stroke-width': '4' } },
+					{ type: 'circle', attributes: { cx: '38', cy: '39', r: '8', fill: 'white', 'stroke-width': '4' } },
+				],
 				heart:
 					'M28 52c-0.5 0-1-0.188-1.375-0.563l-19.5-18.813c-0.25-0.219-7.125-6.5-7.125-14 0-9.156 5.594-14.625 14.938-14.625 5.469 0 10.594 4.312 13.062 6.75 2.469-2.437 7.594-6.75 13.062-6.75 9.344 0 14.938 5.469 14.938 14.625 0 7.5-6.875 13.781-7.156 14.063l-19.469 18.75c-0.375 0.375-0.875 0.563-1.375 0.563z',
 				'heart-o':
@@ -28491,7 +28583,7 @@
 						syncInputs: !0,
 						serializeForm: !1,
 						facets: { trim: !0, pinFiltered: !0 },
-						redirects: { merchandising: !0 },
+						redirects: { merchandising: !0, singleResult: !0 },
 					},
 				},
 				AutocompleteController = (function (_AbstractController, _setFocused, _bind) {
@@ -29142,7 +29234,17 @@
 									_ref7 ||
 									AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee8(ac, next) {
-											var _ac$controller$store$, _this$config2, _this$config2$setting, _this$config2$setting2, redirectURL;
+											var _ac$controller$store$,
+												_this$config2,
+												_this$config2$setting,
+												_this$config2$setting2,
+												_this$config3,
+												_this$config3$setting,
+												_this$config3$setting2,
+												redirectURL,
+												_results$0$mappings$c,
+												results,
+												singleResultUrl;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee8$(_context8) {
 												for (;;)
 													switch ((_context8.prev = _context8.next)) {
@@ -29167,6 +29269,32 @@
 															}
 															return (window.location.href = redirectURL), _context8.abrupt('return', !1);
 														case 6:
+															if (
+																null === (_this$config3 = _this.config) ||
+																void 0 === _this$config3 ||
+																null === (_this$config3$setting = _this$config3.settings) ||
+																void 0 === _this$config3$setting ||
+																null === (_this$config3$setting2 = _this$config3$setting.redirects) ||
+																void 0 === _this$config3$setting2 ||
+																!_this$config3$setting2.singleResult
+															) {
+																_context8.next = 12;
+																break;
+															}
+															if (
+																((results = ac.controller.store.results),
+																!(singleResultUrl =
+																	1 === results.length &&
+																	'product' === results[0].type &&
+																	(null === (_results$0$mappings$c = results[0].mappings.core) || void 0 === _results$0$mappings$c
+																		? void 0
+																		: _results$0$mappings$c.url)))
+															) {
+																_context8.next = 12;
+																break;
+															}
+															return (window.location.href = singleResultUrl), _context8.abrupt('return', !1);
+														case 12:
 														case 'end':
 															return _context8.stop();
 													}
@@ -40297,7 +40425,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.47.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.48.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40796,7 +40924,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.47.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.48.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
