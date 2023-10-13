@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders } from '../../types';
+import { HTTPHeaders, filtersObj, PostRecommendRequestModel, filter, GetRecommendRequestModel } from '../../types';
 import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
@@ -106,13 +106,31 @@ export class RecommendAPI extends API {
 				}
 
 				let response: RecommendResponseModel;
+
 				if (charsParams(batch.request) > 1024) {
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
 					}
-					response = await this.postRecommendations(batch.request as RecommendRequestModel);
+
+					// //transform filters here
+					if (batch.request.filters) {
+						(batch.request as PostRecommendRequestModel)['filters'] = this.transformFilters(batch.request.filters, 'POST') as filtersObj[];
+					}
+
+					response = await this.postRecommendations(batch.request as PostRecommendRequestModel);
 				} else {
-					response = await this.getRecommendations(batch.request as RecommendRequestModel);
+					if (batch.request.filters) {
+						const filters = this.transformFilters(batch.request.filters, 'GET');
+						if (filters) {
+							Object.keys(filters).map((filter) => {
+								const _filter = filter as `filter.${string}`;
+								(batch.request as GetRecommendRequestModel)[_filter] = filters[_filter as keyof typeof filters];
+							});
+						}
+					}
+
+					delete batch.request.filters;
+					response = await this.getRecommendations(batch.request as GetRecommendRequestModel);
 				}
 
 				batch.entries?.forEach((entry, index) => {
@@ -128,7 +146,82 @@ export class RecommendAPI extends API {
 		return deferred.promise;
 	}
 
-	async getRecommendations(queryParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+	transformFilters(filters: filter[], type: 'POST' | 'GET') {
+		if (type == 'POST') {
+			const filterArray: filtersObj[] = [];
+			filters.map((filter) => {
+				if (filter.type == 'value') {
+					//check if filterArray contains a filter for this value already
+					const i = filterArray.findIndex((_filter) => _filter.field == filter.field);
+					if (i > -1) {
+						//if so just push another value to the already existing obj
+						(filterArray[i].values as string[]).push(filter.value);
+					} else {
+						//else create a new one
+						const val = {
+							field: filter.field,
+							type: '=' as const,
+							values: [filter.value],
+						};
+
+						filterArray.push(val);
+					}
+				} else if (filter.type == 'range') {
+					//low
+					if (typeof filter.value.low == 'number') {
+						const low = {
+							field: filter.field,
+							type: '>=' as const,
+							values: [filter.value.low as number],
+						};
+						filterArray.push(low);
+					}
+					//high
+					if (typeof filter.value.high == 'number') {
+						const high = {
+							field: filter.field,
+							type: '<=' as const,
+							values: [filter.value.high as number],
+						};
+						filterArray.push(high);
+					}
+				}
+			});
+
+			return filterArray;
+		} else if (type == 'GET') {
+			const filterArray: {
+				[filter: `filter.${string}`]: string | number | string[] | number[];
+			} = {};
+
+			filters.map((filter) => {
+				if (filter.type == 'value') {
+					//check if filterArray contains a filter for this value already
+					if (filterArray[`filter.${filter.field}`]) {
+						// is the existing filter an array already? or just a single value
+						if (typeof filterArray[`filter.${filter.field}`] == 'string') {
+							filterArray[`filter.${filter.field}`] = [filterArray[`filter.${filter.field}`] as string, filter.value];
+						} else {
+							(filterArray[`filter.${filter.field}`] as string[]).push(filter.value);
+						}
+					} else {
+						//else create a new one
+						filterArray[`filter.${filter.field}`] = filter.value;
+					}
+				} else if (filter.type == 'range') {
+					if (typeof filter.value.low == 'number') {
+						filterArray[`filter.${filter.field}.low`] = filter.value.low;
+					}
+					if (typeof filter.value.high == 'number') {
+						filterArray[`filter.${filter.field}.high`] = filter.value.high;
+					}
+				}
+			});
+			return filterArray;
+		}
+	}
+
+	async getRecommendations(queryParameters: GetRecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
 		const siteId = queryParameters.siteId;
@@ -147,7 +240,7 @@ export class RecommendAPI extends API {
 		return response as unknown as RecommendResponseModel;
 	}
 
-	async postRecommendations(requestParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 

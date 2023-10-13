@@ -25,6 +25,8 @@ describe('Recommend Api', () => {
 		expect(api?.getRecommendations).toBeDefined();
 
 		expect(api?.postRecommendations).toBeDefined();
+
+		expect(api.transformFilters).toBeDefined();
 	});
 
 	it('can call getProfile', async () => {
@@ -407,5 +409,60 @@ describe('Recommend Api', () => {
 
 		expect(POSTRequestMock).toHaveBeenCalledWith(POSTRequestUrl, POSTParams);
 		POSTRequestMock.mockReset();
+	});
+
+	it('transformFilters works with GET', async () => {
+		const filters = [
+			{ type: 'value' as const, field: 'color', value: 'blue' },
+			{ type: 'value' as const, field: 'color', value: 'red' },
+			{ type: 'value' as const, field: 'color', value: 'green' },
+			{ type: 'range' as const, field: 'price', value: { high: 20, low: 0 } },
+		];
+		const api = new RecommendAPI(new ApiConfiguration({}));
+		const tranformedFilters = await api.transformFilters(filters, 'GET');
+		expect(tranformedFilters).toStrictEqual({ 'filter.color': ['blue', 'red', 'green'], 'filter.price.high': 20, 'filter.price.low': 0 });
+	});
+
+	it('transformFilters works with POST', async () => {
+		const filters = [
+			{ type: 'value' as const, field: 'color', value: 'blue' },
+			{ type: 'value' as const, field: 'color', value: 'red' },
+			{ type: 'value' as const, field: 'color', value: 'green' },
+			{ type: 'range' as const, field: 'price', value: { high: 20, low: 0 } },
+		];
+		const api = new RecommendAPI(new ApiConfiguration({}));
+		const tranformedFilters = await api.transformFilters(filters, 'POST');
+		expect(tranformedFilters).toStrictEqual([
+			{ field: 'color', type: '=', values: ['blue', 'red', 'green'] },
+			{ field: 'price', type: '>=', values: [0] },
+			{ field: 'price', type: '<=', values: [20] },
+		]);
+	});
+
+	it('transformFilters POST works with single high or low range value', async () => {
+		const filterHigh = [{ type: 'range' as const, field: 'price', value: { high: 20 } }];
+		const filterLow = [{ type: 'range' as const, field: 'price', value: { low: 0 } }];
+
+		const api = new RecommendAPI(new ApiConfiguration({}));
+		const tranformedFilterHigh = await api.transformFilters(filterHigh, 'POST');
+		expect(tranformedFilterHigh).toStrictEqual([{ field: 'price', type: '<=', values: [20] }]);
+
+		const tranformedFilterLow = await api.transformFilters(filterLow, 'POST');
+		expect(tranformedFilterLow).toStrictEqual([{ field: 'price', type: '>=', values: [0] }]);
+	});
+
+	it('transformFilters GET works with single high or low range value', async () => {
+		const filterHigh = [{ type: 'range' as const, field: 'price', value: { high: 20 } }];
+		const filterLow = [
+			//also works with 0
+			{ type: 'range' as const, field: 'price', value: { low: 0 } },
+		];
+
+		const api = new RecommendAPI(new ApiConfiguration({}));
+		const tranformedFilterHigh = await api.transformFilters(filterHigh, 'GET');
+		expect(tranformedFilterHigh).toStrictEqual({ 'filter.price.high': 20 });
+
+		const tranformedFilterLow = await api.transformFilters(filterLow, 'GET');
+		expect(tranformedFilterLow).toStrictEqual({ 'filter.price.low': 0 });
 	});
 });

@@ -107,6 +107,21 @@ export type RecommendRequestModel = {
 	batched?: boolean;
 	limits?: number | number[];
 	order?: number;
+	filters?: filter[];
+};
+
+export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+	[filter: `filter.${string}`]: string | number | string[] | number[];
+};
+
+export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+	filters?: filtersObj[];
+};
+
+export type filtersObj = {
+	field: string;
+	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
+	values: string[] | number[];
 };
 
 export type RecommendResponseModel = {
@@ -154,6 +169,21 @@ export type RecommendCombinedRequestModel = {
 	lastViewed?: string[];
 	test?: boolean;
 	branch?: string;
+	filters?: filter[];
+};
+
+export type filter = rangeFilter | valueFilter;
+
+type rangeFilter = {
+	type: 'range';
+	field: string;
+	value: { low?: number; high?: number };
+};
+
+type valueFilter = {
+	type: 'value';
+	field: string;
+	value: string;
 };
 
 export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
