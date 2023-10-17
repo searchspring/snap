@@ -292,13 +292,17 @@ export class RecommendationController extends AbstractController {
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
 			order: this.context?.options?.order,
-			filters: this.context.options?.filters,
 			...this.config.globals,
 		};
 
 		const shopperId = this.tracker.getContext().shopperId;
 		const cart = this.tracker.cookies.cart.get();
 		const lastViewed = this.tracker.cookies.viewed.get();
+
+		if (this.context.options?.filters) {
+			params.filters = this.context.options?.filters;
+		}
+
 		if (shopperId) {
 			params.shopper = shopperId;
 		}

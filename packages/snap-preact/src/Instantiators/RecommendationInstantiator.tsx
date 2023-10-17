@@ -192,7 +192,10 @@ export class RecommendationInstantiator {
 				const defaultGlobals = {
 					limits: 20,
 				};
-				const globals = deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals);
+				const globals = deepmerge(
+					deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals),
+					this.config.config.globals || {}
+				);
 
 				const controllerConfig = {
 					id: `recommend_${tag}_${profileCount[tag] - 1}`,

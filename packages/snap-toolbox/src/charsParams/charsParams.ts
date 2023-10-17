@@ -15,6 +15,9 @@ export function charsParams(params: ParameterObject): number {
 					return length + keyLength + 1 + ('' + val).length;
 				}, 0)
 			);
+		} else if (typeof value == 'object') {
+			//recursive check
+			return count + keyLength + 1 + charsParams(value as any);
 		} else if (typeof value == 'string' || typeof value == 'number') {
 			return count + keyLength + 1 + ('' + value).length;
 		} else return count + keyLength;
