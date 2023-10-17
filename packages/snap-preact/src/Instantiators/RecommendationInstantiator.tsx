@@ -194,7 +194,7 @@ export class RecommendationInstantiator {
 				};
 				const globals = deepmerge(
 					deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals),
-					this.config.config.globals || {}
+					(this.config.config?.globals as any) || {}
 				);
 
 				const controllerConfig = {
