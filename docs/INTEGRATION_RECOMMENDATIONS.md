@@ -18,7 +18,8 @@ Context variables may be applied to individual recommendation profiles similar t
 | product | current product sku | product detail page | used to identify the current product being viewed |
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |
-| options.categories | category path | all | optional category identifier to restrict recommendations |
+| options.categories | category path | all | optional category identifier for category trending rec type |
+| options.brands | brands | all | optional brand identifier for category trending rec type |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |
 | options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) | 
 | options.order | number | all | optional order number for recommendation params to be added to the batched request. Profiles that do not specify an order will be placed at the end, in the occurrence they appear in the DOM.
