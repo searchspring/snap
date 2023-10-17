@@ -284,6 +284,7 @@ describe('RecommendationInstantiator', () => {
 				branch: 'testing',
 				siteId: 'abc123',
 				categories: ['cats', 'dogs'],
+				brands: ['nike', 'h&m'],
 				limit: 5
 			}
 		</script>`;
@@ -305,6 +306,7 @@ describe('RecommendationInstantiator', () => {
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
+					brands: ['nike', 'h&m'],
 					limit: 5,
 					siteId: 'abc123',
 				},
@@ -316,6 +318,7 @@ describe('RecommendationInstantiator', () => {
 			batched: true,
 			branch: 'testing',
 			categories: ['cats', 'dogs'],
+			brands: ['nike', 'h&m'],
 			limits: 5,
 			product: 'sku1',
 			shopper: 'snapdev',
