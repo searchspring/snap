@@ -296,7 +296,7 @@ describe('RecommendationInstantiator', () => {
 						  field: 'price',
 						  value: { low: 0, high: 20 }
 					}
-				]
+				],
 				brands: ['nike', 'h&m'],
 			}
 			
