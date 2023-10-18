@@ -9,7 +9,6 @@ export const transformRecommendationFiltersGet = (filters: RecommendationRequest
 		if (filter.type == 'value') {
 			//check if filterArray contains a filter for this value already
 			if (filterArray[`filter.${filter.field}`]) {
-				// is the existing filter an array already? or just a single value
 				filterArray[`filter.${filter.field}`].push(filter.value);
 			} else {
 				//else create a new one

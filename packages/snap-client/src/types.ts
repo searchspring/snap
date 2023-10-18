@@ -114,11 +114,11 @@ export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & 
 	[filter: `filter.${string}`]: (string | number)[];
 };
 
-export type PostRecommendationRequestFiltersModel = Omit<RecommendRequestModel, 'filters'> & {
-	filters?: filtersObj[];
+export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+	filters?: PostRecommendRequestFiltersModel[];
 };
 
-export type filtersObj = {
+export type PostRecommendRequestFiltersModel = {
 	field: string;
 	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
 	values: (string | number)[];

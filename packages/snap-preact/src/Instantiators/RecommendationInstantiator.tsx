@@ -166,6 +166,9 @@ export class RecommendationInstantiator {
 				if (options?.categories) {
 					contextGlobals.categories = options.categories;
 				}
+				if (options?.filters) {
+					contextGlobals.filters = options.filters;
+				}
 				if (options?.limit && Number.isInteger(Number(options?.limit))) {
 					contextGlobals.limits = Number(options?.limit);
 				}
@@ -193,8 +196,8 @@ export class RecommendationInstantiator {
 					limits: 20,
 				};
 				const globals = deepmerge(
-					deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals),
-					(this.config.config?.globals as any) || {}
+					deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), (this.config.config?.globals as any) || {}),
+					contextGlobals
 				);
 
 				const controllerConfig = {

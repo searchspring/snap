@@ -1,7 +1,7 @@
-import { RecommendationRequestFilterModel, filtersObj } from '../../types';
+import { RecommendationRequestFilterModel, PostRecommendRequestFiltersModel } from '../../types';
 
 export const transformRecommendationFiltersPost = (filters: RecommendationRequestFilterModel[]) => {
-	const filterArray: filtersObj[] = [];
+	const filterArray: PostRecommendRequestFiltersModel[] = [];
 	filters.map((filter) => {
 		if (filter.type == 'value') {
 			//check if filterArray contains a filter for this value already
@@ -27,7 +27,14 @@ export const transformRecommendationFiltersPost = (filters: RecommendationReques
 					type: '>=' as const,
 					values: [filter.value.low as number],
 				};
-				filterArray.push(low);
+
+				//dedupe
+				const i = filterArray.findIndex((_filter) => _filter.field == filter.field && _filter.type == '>=');
+				if (i > -1) {
+					filterArray[i] = low;
+				} else {
+					filterArray.push(low);
+				}
 			}
 			//high
 			if (typeof filter.value.high == 'number') {
@@ -36,7 +43,14 @@ export const transformRecommendationFiltersPost = (filters: RecommendationReques
 					type: '<=' as const,
 					values: [filter.value.high as number],
 				};
-				filterArray.push(high);
+
+				//dedupe
+				const i = filterArray.findIndex((_filter) => _filter.field == filter.field && _filter.type == '<=');
+				if (i > -1) {
+					filterArray[i] = high;
+				} else {
+					filterArray.push(high);
+				}
 			}
 		}
 	});

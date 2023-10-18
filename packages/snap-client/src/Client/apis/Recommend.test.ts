@@ -286,6 +286,35 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations handles filters expected', async () => {
+		const api = new RecommendAPI(new ApiConfiguration({}));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			limits: 10,
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'red',
+				},
+			],
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+		const reorderedGetURL =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=10&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10&filter.color=red';
+		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
+		requestMock.mockReset();
+	});
+
 	it('batchRecommendations resolves in right order with order prop', async () => {
 		const api = new RecommendAPI(new ApiConfiguration({}));
 		const response = mockData.file('recommend/results/8uyt2m/ordered.json');

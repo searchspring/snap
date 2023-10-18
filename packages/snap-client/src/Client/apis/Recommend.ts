@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, filtersObj, PostRecommendationRequestFiltersModel, GetRecommendRequestModel } from '../../types';
+import { HTTPHeaders, PostRecommendRequestFiltersModel, PostRecommendRequestModel, GetRecommendRequestModel } from '../../types';
 import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersGet, transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
@@ -106,20 +106,19 @@ export class RecommendAPI extends API {
 				}
 
 				let response: RecommendResponseModel;
-
 				if (charsParams(batch.request) > 1024) {
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
 					}
 
-					// //transform filters here
+					//transform filters here
 					if (batch.request.filters) {
-						(batch.request as PostRecommendationRequestFiltersModel)['filters'] = transformRecommendationFiltersPost(
+						(batch.request as PostRecommendRequestModel)['filters'] = transformRecommendationFiltersPost(
 							batch.request.filters
-						) as filtersObj[];
+						) as PostRecommendRequestFiltersModel[];
 					}
 
-					response = await this.postRecommendations(batch.request as PostRecommendationRequestFiltersModel);
+					response = await this.postRecommendations(batch.request as PostRecommendRequestModel);
 				} else {
 					if (batch.request.filters) {
 						const filters = transformRecommendationFiltersGet(batch.request.filters);
@@ -167,7 +166,7 @@ export class RecommendAPI extends API {
 		return response as unknown as RecommendResponseModel;
 	}
 
-	async postRecommendations(requestParameters: PostRecommendationRequestFiltersModel): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 

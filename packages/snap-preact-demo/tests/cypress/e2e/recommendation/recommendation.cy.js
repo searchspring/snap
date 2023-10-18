@@ -133,45 +133,5 @@ describe('Recommendations', () => {
 					});
 			});
 		});
-
-		it('adds filters to store', function () {
-			const filters = [
-				{
-					type: 'value',
-					field: 'color',
-					value: 'blue',
-				},
-				{
-					type: 'range',
-					field: 'price',
-					value: { low: 0, high: 20 },
-				},
-			];
-			cy.on('window:before:load', (win) => {
-				win.mergeSnapConfig = {
-					instantiators: {
-						recommendation: {
-							config: {
-								globals: {
-									filters: filters,
-								},
-							},
-						},
-					},
-				};
-			});
-
-			cy.visit(config.url);
-
-			it('snap bundle exists on product page', () => {
-				cy.waitForBundle().then((searchspring) => {
-					expect(searchspring).to.exist;
-				});
-			});
-
-			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
-				expect(store.config.globals.filters).to.deep.equal(filters);
-			});
-		});
 	});
 });

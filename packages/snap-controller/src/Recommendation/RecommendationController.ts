@@ -299,10 +299,6 @@ export class RecommendationController extends AbstractController {
 		const cart = this.tracker.cookies.cart.get();
 		const lastViewed = this.tracker.cookies.viewed.get();
 
-		if (this.context.options?.filters) {
-			params.filters = this.context.options?.filters;
-		}
-
 		if (shopperId) {
 			params.shopper = shopperId;
 		}
