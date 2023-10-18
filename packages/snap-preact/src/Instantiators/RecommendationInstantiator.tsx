@@ -145,7 +145,8 @@ export class RecommendationInstantiator {
 							branch?: string;
 							batched?: boolean;
 							realtime?: boolean;
-							categories?: any;
+							categories?: string[];
+							brands?: string[];
 							limit?: number;
 						}
 					}
@@ -165,6 +166,9 @@ export class RecommendationInstantiator {
 				}
 				if (options?.categories) {
 					contextGlobals.categories = options.categories;
+				}
+				if (options?.brands) {
+					contextGlobals.brands = options.brands;
 				}
 				if (options?.limit && Number.isInteger(Number(options?.limit))) {
 					contextGlobals.limits = Number(options?.limit);

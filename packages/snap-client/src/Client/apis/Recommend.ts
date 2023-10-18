@@ -74,7 +74,7 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				const { tags, categories, ...otherParams } = entry.request;
+				const { tags, categories, brands, ...otherParams } = entry.request;
 				let limits = entry.request.limits;
 
 				if (!limits) {
@@ -93,6 +93,14 @@ export class RecommendAPI extends API {
 						batch.request.categories = Array.isArray(categories) ? categories : [categories];
 					} else {
 						batch.request.categories = batch.request.categories.concat(categories);
+					}
+				}
+
+				if (brands) {
+					if (!batch.request.brands) {
+						batch.request.brands = Array.isArray(brands) ? brands : [brands];
+					} else {
+						batch.request.brands = batch.request.brands.concat(brands);
 					}
 				}
 

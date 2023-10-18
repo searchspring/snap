@@ -101,6 +101,7 @@ export type RecommendRequestModel = {
 	product?: string;
 	shopper?: string;
 	categories?: string[];
+	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
@@ -150,6 +151,7 @@ export type RecommendCombinedRequestModel = {
 	product?: string;
 	shopper?: string;
 	categories?: string[];
+	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
