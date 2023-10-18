@@ -297,6 +297,7 @@ describe('RecommendationInstantiator', () => {
 						  value: { low: 0, high: 20 }
 					}
 				]
+				brands: ['nike', 'h&m'],
 			}
 			
 		</script>`;
@@ -330,6 +331,7 @@ describe('RecommendationInstantiator', () => {
 							value: { low: 0, high: 20 },
 						},
 					],
+					brands: ['nike', 'h&m'],
 					limit: 5,
 					siteId: 'abc123',
 				},
@@ -353,6 +355,7 @@ describe('RecommendationInstantiator', () => {
 					value: { low: 0, high: 20 },
 				},
 			],
+			brands: ['nike', 'h&m'],
 			limits: 5,
 			product: 'sku1',
 			shopper: 'snapdev',
