@@ -145,7 +145,8 @@ export class RecommendationInstantiator {
 							branch?: string;
 							batched?: boolean;
 							realtime?: boolean;
-							categories?: any;
+							categories?: string[];
+							brands?: string[];
 							limit?: number;
 						}
 					}
@@ -165,6 +166,12 @@ export class RecommendationInstantiator {
 				}
 				if (options?.categories) {
 					contextGlobals.categories = options.categories;
+				}
+				if (options?.filters) {
+					contextGlobals.filters = options.filters;
+				}
+				if (options?.brands) {
+					contextGlobals.brands = options.brands;
 				}
 				if (options?.limit && Number.isInteger(Number(options?.limit))) {
 					contextGlobals.limits = Number(options?.limit);
@@ -192,7 +199,10 @@ export class RecommendationInstantiator {
 				const defaultGlobals = {
 					limits: 20,
 				};
-				const globals = deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals);
+				const globals = deepmerge(
+					deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), (this.config.config?.globals as any) || {}),
+					contextGlobals
+				);
 
 				const controllerConfig = {
 					id: `recommend_${tag}_${profileCount[tag] - 1}`,

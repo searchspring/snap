@@ -27,6 +27,7 @@ type RecommendCombinedRequestModel = {
 	product?: string;
 	shopper?: string;
 	categories?: string[];
+	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
@@ -298,6 +299,7 @@ export class RecommendationController extends AbstractController {
 		const shopperId = this.tracker.getContext().shopperId;
 		const cart = this.tracker.cookies.cart.get();
 		const lastViewed = this.tracker.cookies.viewed.get();
+
 		if (shopperId) {
 			params.shopper = shopperId;
 		}

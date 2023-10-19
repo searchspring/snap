@@ -1,7 +1,7 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders } from '../../types';
+import { HTTPHeaders, PostRecommendRequestFiltersModel, PostRecommendRequestModel, GetRecommendRequestModel } from '../../types';
 import { AppMode, charsParams } from '@searchspring/snap-toolbox';
-
+import { transformRecommendationFiltersGet, transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
 
 class Deferred {
@@ -74,7 +74,7 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				const { tags, categories, ...otherParams } = entry.request;
+				const { tags, categories, brands, ...otherParams } = entry.request;
 				let limits = entry.request.limits;
 
 				if (!limits) {
@@ -96,6 +96,14 @@ export class RecommendAPI extends API {
 					}
 				}
 
+				if (brands) {
+					if (!batch.request.brands) {
+						batch.request.brands = Array.isArray(brands) ? brands : [brands];
+					} else {
+						batch.request.brands = batch.request.brands.concat(brands);
+					}
+				}
+
 				batch.request.limits = (batch.request.limits as number[]).concat(limits);
 				batch.request = { ...batch.request, ...otherParams };
 			});
@@ -110,9 +118,28 @@ export class RecommendAPI extends API {
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
 					}
-					response = await this.postRecommendations(batch.request as RecommendRequestModel);
+
+					//transform filters here
+					if (batch.request.filters) {
+						(batch.request as PostRecommendRequestModel)['filters'] = transformRecommendationFiltersPost(
+							batch.request.filters
+						) as PostRecommendRequestFiltersModel[];
+					}
+
+					response = await this.postRecommendations(batch.request as PostRecommendRequestModel);
 				} else {
-					response = await this.getRecommendations(batch.request as RecommendRequestModel);
+					if (batch.request.filters) {
+						const filters = transformRecommendationFiltersGet(batch.request.filters);
+						if (filters) {
+							Object.keys(filters).map((filter) => {
+								const _filter = filter as `filter.${string}`;
+								(batch.request as GetRecommendRequestModel)[_filter] = filters[_filter as keyof typeof filters];
+							});
+						}
+					}
+
+					delete batch.request.filters;
+					response = await this.getRecommendations(batch.request as GetRecommendRequestModel);
 				}
 
 				batch.entries?.forEach((entry, index) => {
@@ -128,7 +155,7 @@ export class RecommendAPI extends API {
 		return deferred.promise;
 	}
 
-	async getRecommendations(queryParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+	async getRecommendations(queryParameters: GetRecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
 		const siteId = queryParameters.siteId;
@@ -147,7 +174,7 @@ export class RecommendAPI extends API {
 		return response as unknown as RecommendResponseModel;
 	}
 
-	async postRecommendations(requestParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
