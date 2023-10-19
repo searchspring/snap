@@ -449,6 +449,11 @@ describe('Recommend Api', () => {
 					'moema-4x6',
 				],
 				product: 'marnie-runner-2-7x10',
+				filters: [
+					{ field: 'color', type: '=', values: ['blue'] },
+					{ field: 'price', type: '>=', values: [0] },
+					{ field: 'price', type: '<=', values: [20] },
+				],
 			}),
 		};
 		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
@@ -462,6 +467,18 @@ describe('Recommend Api', () => {
 			api.batchRecommendations({
 				tags: [i.toString()],
 				...batchParams,
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
 				batched: true,
 			});
 		}
