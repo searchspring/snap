@@ -299,6 +299,7 @@ export class RecommendationController extends AbstractController {
 		const shopperId = this.tracker.getContext().shopperId;
 		const cart = this.tracker.cookies.cart.get();
 		const lastViewed = this.tracker.cookies.viewed.get();
+
 		if (shopperId) {
 			params.shopper = shopperId;
 		}

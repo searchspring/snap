@@ -38,4 +38,9 @@ describe('param character length', () => {
 		const countWithMixed = charsParams({ array: ['one', 'two'], one: 1, char: 'char' });
 		expect(countWithMixed).toBe(33);
 	});
+
+	it('handles nested objects', () => {
+		const countWithObj = charsParams({ foo: { thing: '4', bar: 'stuff', char: {} } });
+		expect(countWithObj).toBe(28);
+	});
 });

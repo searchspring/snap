@@ -284,9 +284,22 @@ describe('RecommendationInstantiator', () => {
 				branch: 'testing',
 				siteId: 'abc123',
 				categories: ['cats', 'dogs'],
+				limit: 5,
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue'
+					},
+					{
+						  type: 'range',
+						  field: 'price',
+						  value: { low: 0, high: 20 }
+					}
+				],
 				brands: ['nike', 'h&m'],
-				limit: 5
 			}
+			
 		</script>`;
 
 		const client = new MockClient(baseConfig.client!.globals, {});
@@ -306,6 +319,18 @@ describe('RecommendationInstantiator', () => {
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'blue',
+						},
+						{
+							type: 'range',
+							field: 'price',
+							value: { low: 0, high: 20 },
+						},
+					],
 					brands: ['nike', 'h&m'],
 					limit: 5,
 					siteId: 'abc123',
@@ -318,6 +343,18 @@ describe('RecommendationInstantiator', () => {
 			batched: true,
 			branch: 'testing',
 			categories: ['cats', 'dogs'],
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'blue',
+				},
+				{
+					type: 'range',
+					field: 'price',
+					value: { low: 0, high: 20 },
+				},
+			],
 			brands: ['nike', 'h&m'],
 			limits: 5,
 			product: 'sku1',

@@ -21,6 +21,7 @@ Context variables may be applied to individual recommendation profiles similar t
 | options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |
+| options.filters | array of filters | all | optional recommendation filters |
 | options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) | 
 | options.order | number | all | optional order number for recommendation params to be added to the batched request. Profiles that do not specify an order will be placed at the end, in the occurrence they appear in the DOM.
 | options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
@@ -73,5 +74,32 @@ Having multiple scripts batched using the order context variable
 		<!-- this will be added 1st -->
 		order: 1
 	};
+</script>
+```
+
+### Filters
+The example shown below will filter the recommendations for products matching color: blue, & red, and price range 0 - 20.
+
+```html
+<script type="searchspring/recommend" profile="customers-also-bought">
+	options = {
+		filters: [
+			{
+				type: 'value',
+				field: 'color',
+				value: 'blue'
+			},
+			{
+				type: 'value',
+				field: 'color',
+				value: 'red'
+			},
+			{
+				type: 'range',
+				field: 'price',
+				value: { low: 0, high: 20 }
+			}
+		]
+	}
 </script>
 ```
