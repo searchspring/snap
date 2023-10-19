@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0](https://github.com/searchspring/snap/compare/v0.48.0...v0.49.0) (2023-10-19)
+
+### Bug Fixes
+
+- add options.brands to recommendation instantiator context ([afb6c4d](https://github.com/searchspring/snap/commit/afb6c4d19730fc3e120cc3c9e941a3d223373da8))
+
+### Features
+
+- **client-recommend:** adding filtering to recommendations ([d711f7b](https://github.com/searchspring/snap/commit/d711f7b79237132ec89dfc33c18c2fe3242a1503))
+- **recommend:** add recommendation request parameter - options.brands ([a83460e](https://github.com/searchspring/snap/commit/a83460e8101a6700a3a46033770dc30a96ca695c))
+
 # [0.48.0](https://github.com/searchspring/snap/compare/v0.47.0...v0.48.0) (2023-10-11)
 
 ### Bug Fixes
