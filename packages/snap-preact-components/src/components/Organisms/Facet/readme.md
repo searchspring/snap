@@ -8,6 +8,8 @@ Renders a single complete facet. This includes determining the correct options t
 - FacetGridOptions
 - FacetListOptions
 - FacetPaletteOptions
+- FacetToggle
+- FacetSlider
 - Slider
 - Icon
 - SearchInput
