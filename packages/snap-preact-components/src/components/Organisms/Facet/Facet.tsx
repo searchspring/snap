@@ -19,6 +19,7 @@ import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRang
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
+import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 
 const CSS = {
 	facet: ({ color, theme }: Partial<FacetProps>) =>
@@ -209,6 +210,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		facetToggle: {
+			// default props
+			className: 'ss__facet__facet-toggle',
+			// global theme
+			...globalTheme?.components?.facetToggle,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
@@ -300,6 +313,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 									return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
 								} else {
 									switch (facet?.display) {
+										case FacetDisplay.TOGGLE:
+											return <FacetToggle value={limitedValues[0] as FacetValue} label={facet.label} {...subProps.facetToggle} />;
 										case FacetDisplay.SLIDER:
 											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 										case FacetDisplay.GRID:
@@ -351,6 +366,7 @@ interface FacetSubProps {
 	facetGridOptions: Partial<FacetGridOptionsProps>;
 	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
 	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
+	facetToggle: Partial<FacetToggleProps>;
 	facetSlider: Partial<FacetSliderProps>;
 	searchInput: Partial<SearchInputProps>;
 	icon: Partial<IconProps>;

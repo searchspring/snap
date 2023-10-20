@@ -44,6 +44,7 @@ import { RecommendationProps } from '../components/Templates/Recommendation';
 import { SearchProps } from '../components/Templates/Search';
 import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import { FacetToggleProps } from '../components/Molecules/FacetToggle';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -65,6 +66,8 @@ export type ThemeComponents = {
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
+	facetToggle?: GenericComponentProps<FacetToggleProps>;
+
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
 	checkbox?: GenericComponentProps<CheckboxProps>;
