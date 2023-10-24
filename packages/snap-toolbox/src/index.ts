@@ -3,6 +3,7 @@ export * from './DomTargeter/DomTargeter';
 export * from './featureFlags/featureFlags';
 export * from './cookies/cookies';
 export * from './getContext/getContext';
+export * from './until/until';
 export * from './url/url';
 export * from './version/version';
 export * from './charsParams/charsParams';
