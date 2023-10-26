@@ -20,6 +20,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.history.limit | when set, historical (previously searched) queries will be fetched and made available in the history store | ➖ |   | 
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
+| settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | true |   |
 
 <br>
 

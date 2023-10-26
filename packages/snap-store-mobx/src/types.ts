@@ -85,6 +85,7 @@ export type AutocompleteStoreConfigSettings = {
 	};
 	redirects?: {
 		merchandising?: boolean;
+		singleResult?: boolean;
 	};
 };
 

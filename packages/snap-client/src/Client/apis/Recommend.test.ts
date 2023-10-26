@@ -233,6 +233,41 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations handles multiple brands as expected', async () => {
+		const api = new RecommendAPI(new ApiConfiguration({}));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		const GETRequestUrl = `https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=14&limits=10&brands=shirts&brands=pants&brands=pants2&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10`;
+
+		//shirt category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['similar'],
+			brands: ['shirts'],
+			limits: 14,
+			batched: true,
+			...batchParams,
+		});
+		//pants category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			brands: ['pants', 'pants2'],
+			limits: 10,
+			batched: true,
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		requestMock.mockReset();
+	});
+
 	it('batchRecommendations handles order prop as expected', async () => {
 		const api = new RecommendAPI(new ApiConfiguration({}));
 
@@ -282,6 +317,35 @@ describe('Recommend Api', () => {
 		await wait(250);
 		const reorderedGetURL =
 			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&tags=crossSell&tags=similar&tags=crossSell&limits=10&limits=10&limits=14&limits=10&categories=pants&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations handles filters expected', async () => {
+		const api = new RecommendAPI(new ApiConfiguration({}));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			limits: 10,
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'red',
+				},
+			],
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+		const reorderedGetURL =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=10&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10&filter.color=red';
 		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
 		requestMock.mockReset();
 	});
@@ -385,6 +449,11 @@ describe('Recommend Api', () => {
 					'moema-4x6',
 				],
 				product: 'marnie-runner-2-7x10',
+				filters: [
+					{ field: 'color', type: '=', values: ['blue'] },
+					{ field: 'price', type: '>=', values: [0] },
+					{ field: 'price', type: '<=', values: [20] },
+				],
 			}),
 		};
 		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
@@ -398,6 +467,18 @@ describe('Recommend Api', () => {
 			api.batchRecommendations({
 				tags: [i.toString()],
 				...batchParams,
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
 				batched: true,
 			});
 		}

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0](https://github.com/searchspring/snap/compare/v0.48.0...v0.49.0) (2023-10-19)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+# [0.48.0](https://github.com/searchspring/snap/compare/v0.47.0...v0.48.0) (2023-10-11)
+
+### Features
+
+- icon component path element array, children support ([c8a6c44](https://github.com/searchspring/snap/commit/c8a6c4411636021f49da85c8eeb3e40528998f14))
+
 # [0.47.0](https://github.com/searchspring/snap/compare/v0.46.0...v0.47.0) (2023-09-15)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
