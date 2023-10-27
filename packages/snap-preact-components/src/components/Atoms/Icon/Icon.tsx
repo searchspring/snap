@@ -29,7 +29,7 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, styleScript, style, ...otherProps } = props;
+	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, ...otherProps } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 	const pathType = typeof iconPath;
