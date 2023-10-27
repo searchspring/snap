@@ -22,11 +22,11 @@ const CSS = {
 			flexFlow: 'row wrap',
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
-			padding: '5px 0px',
 
 			'& .ss__facet-palette-options__option--list': {
 				display: 'flex',
 				flexDirection: 'row',
+				paddingLeft: '6px',
 			},
 
 			'& .ss__facet-palette-options__option': {
