@@ -7,18 +7,18 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
-import { AbstractController } from '@searchspring/snap-controller';
-import { ProductClickEvent } from '@searchspring/snap-tracker';
+import { SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
-	ResultTracker: ({}: Partial<ResultTrackerProps>) => css({}),
+	ResultTracker: ({}: Partial<SearchResultTrackerProps>) => css({}),
 };
 
-export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Element => {
+export const SearchResultTracker = observer((properties: SearchResultTrackerProps): JSX.Element => {
 	const { children, result, controller, className, disableStyles, style, styleScript } = properties;
 
 	const resultRef = useRef(null);
 
+	// FUTURE
 	// const resultInViewport = useIntersection(resultRef, '0px');
 	// if (resultInViewport) {
 	// intersection observer can trigger in any random order,
@@ -40,17 +40,10 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		styling.css = [style];
 	}
 
-	const { intellisuggestData, intellisuggestSignature } = result.attributes;
-	const data: ProductClickEvent = {
-		intellisuggestData: intellisuggestData as string,
-		intellisuggestSignature: intellisuggestSignature as string,
-		href: result.mappings.core?.url,
-	};
-
 	return (
 		<div
 			className={classnames('ss__result-tracker', className)}
-			onClick={() => controller.tracker.track.product.click(data)}
+			onClick={(e: any) => controller.track.product.click(e, result)}
 			ref={resultRef}
 			{...styling}
 		>
@@ -59,8 +52,8 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	);
 });
 
-export interface ResultTrackerProps extends ComponentProps {
+export interface SearchResultTrackerProps extends ComponentProps {
 	children?: any;
 	result: Product;
-	controller: AbstractController;
+	controller: SearchController;
 }

@@ -16,7 +16,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
-import { ResultTracker } from '../../Trackers/ResultTracker';
+import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
 
 const CSS = {
 	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
@@ -152,7 +152,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
 								} else {
 									return (
-										<ResultTracker result={result} controller={controller!}>
+										<SearchResultTracker result={result} controller={controller as SearchController}>
 											<Result
 												key={(result as Product).id}
 												{...subProps.result}
@@ -160,7 +160,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 												layout={props.layout}
 												controller={controller}
 											/>
-										</ResultTracker>
+										</SearchResultTracker>
 									);
 								}
 						}

@@ -11,7 +11,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
-import { ResultTracker } from './ResultTracker';
+import { SearchResultTracker } from './SearchResultTracker';
 
 const globals = { siteId: '8uyt2m' };
 
@@ -54,11 +54,11 @@ describe('Result Tracker Component', () => {
 		const rendered = render(
 			<Fragment>
 				{controller.store.results.map((result, idx) => (
-					<ResultTracker controller={controller} result={result}>
+					<SearchResultTracker controller={controller} result={result}>
 						<div className={'findMe'} key={idx}>
 							<div className="result">{result.mappings.core?.name}</div>
 						</div>
-					</ResultTracker>
+					</SearchResultTracker>
 				))}
 			</Fragment>
 		);
