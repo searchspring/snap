@@ -1,6 +1,6 @@
 # Carousel
 
-Renders a carousel of slides using children, built with [Swiper](https://swiper6.vercel.app)
+Renders a carousel of slides using children, built with [Swiper v6.8.4](https://swiper6.vercel.app)
 
 ## Sub-components
 - Icon
@@ -101,7 +101,7 @@ The `modules` prop accepts additional [Swiper Modules](https://swiper6.vercel.ap
 
 ```jsx
 import { Scrollbar } from 'swiper';
-<Carousel modules={[Scrollbar]} scrollbar>{children}</Carousel>
+<Carousel modules={[Scrollbar]} scrollbar={{ draggable: true }}>{children}</Carousel>
 ```
 
 ### autoAdjustSlides
