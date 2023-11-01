@@ -6,6 +6,7 @@ import { ThemeProvider } from '../../../providers';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
+import userEvent from '@testing-library/user-event';
 
 describe('SortBy Component', () => {
 	const services = {
@@ -42,25 +43,36 @@ describe('SortBy Component', () => {
 		expect(labelElem).toBeInTheDocument();
 	});
 
-	it('it renders with as a dropdown type', () => {
-		const rendered = render(<SortBy type={'Dropdown'} sorting={sortingStore} />);
-
+	it('it renders as a dropdown type', () => {
+		const rendered = render(<SortBy type={'dropdown'} sorting={sortingStore} />);
 		const element = rendered.container.querySelector('.ss__sortby__select');
 		expect(element).toBeInTheDocument();
 	});
 
-	it('it renders with as a list type', () => {
-		const rendered = render(<SortBy type={'List'} sorting={sortingStore} />);
-
-		const element = rendered.container.querySelector('.ss__sortby__list.ss__radio-select');
+	it('it renders as a list type', () => {
+		const rendered = render(<SortBy type={'list'} sorting={sortingStore} />);
+		const element = rendered.container.querySelector('.ss__sortby__list.ss__list');
 		expect(element).toBeInTheDocument();
 	});
 
-	it('it renders with as a Radio type', () => {
-		const rendered = render(<SortBy type={'Radio'} sorting={sortingStore} />);
-
-		const element = rendered.container.querySelector('.ss__sortby__radioList.ss__radio-select');
+	it('it renders as a Radio type', () => {
+		const rendered = render(<SortBy type={'radio'} sorting={sortingStore} />);
+		const element = rendered.container.querySelector('.ss__sortby__radioList.ss__radio-list');
 		expect(element).toBeInTheDocument();
+	});
+
+	it('it can do onClick things', () => {
+		let onClick = jest.fn();
+
+		sortingStore.options.forEach((option) => (option.url.go = onClick));
+
+		const rendered = render(<SortBy type={'radio'} sorting={sortingStore} />);
+		const option = rendered.container.querySelectorAll('.ss__radio-list__option')[3];
+		expect(option).toBeInTheDocument();
+
+		userEvent.click(option);
+
+		expect(onClick).toHaveBeenCalled();
 	});
 
 	it('renders with classname', () => {

@@ -44,7 +44,8 @@ import { RecommendationProps } from '../components/Templates/Recommendation';
 import { SearchProps } from '../components/Templates/Search';
 import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
-import { RadioSelectProps } from '../components/Molecules/RadioSelect';
+import { RadioListProps } from '../components/Molecules/RadioList';
+import { ListProps } from '../components/Molecules/List';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -84,7 +85,9 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
-	radioSelect?: GenericComponentProps<RadioSelectProps>;
+	radioList?: GenericComponentProps<RadioListProps>;
+	list?: GenericComponentProps<ListProps>;
+
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;

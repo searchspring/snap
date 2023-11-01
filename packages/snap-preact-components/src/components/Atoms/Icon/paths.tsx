@@ -86,6 +86,32 @@ export const iconPaths: { [name: string]: string | SVGPathElement[] } = {
 			},
 		},
 	],
+	bullet: [
+		{
+			type: 'circle',
+			attributes: {
+				cx: '10',
+				cy: '10',
+				r: '5',
+				stroke: 'black',
+				'stroke-width': '3',
+				fill: 'grey',
+			},
+		},
+	],
+	'selected-bullet': [
+		{
+			type: 'circle',
+			attributes: {
+				cx: '10',
+				cy: '10',
+				r: '5',
+				stroke: 'black',
+				'stroke-width': '3',
+				fill: 'white',
+			},
+		},
+	],
 	heart:
 		'M28 52c-0.5 0-1-0.188-1.375-0.563l-19.5-18.813c-0.25-0.219-7.125-6.5-7.125-14 0-9.156 5.594-14.625 14.938-14.625 5.469 0 10.594 4.312 13.062 6.75 2.469-2.437 7.594-6.75 13.062-6.75 9.344 0 14.938 5.469 14.938 14.625 0 7.5-6.875 13.781-7.156 14.063l-19.469 18.75c-0.375 0.375-0.875 0.563-1.375 0.563z',
 	'heart-o':

@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -55,11 +54,14 @@ export default {
 			description: 'type of Select to render.',
 			table: {
 				type: {
-					summary: '"Dropdown" | "List" | "Radio"',
+					summary: '"dropdown" | "list" | "radio"',
 				},
-				defaultValue: { summary: 'Dropdown' },
+				defaultValue: { summary: 'dropdown' },
 			},
-			control: { type: 'text' },
+			control: {
+				type: 'select',
+				options: ['dropdown', 'list', 'radio'],
+			},
 		},
 		...componentArgs,
 	},
@@ -67,12 +69,8 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
 
-const ObservablePerPage = observer(({ args, controller }: { args: PerPageProps; controller: SearchController }) => {
-	return <PerPage {...args} pagination={controller?.store?.pagination} />;
-});
-
 export const Default = (args: PerPageProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservablePerPage args={args} controller={controller} />;
+	return <PerPage {...args} pagination={controller?.store?.pagination} />;
 };
 
 Default.loaders = [
@@ -88,7 +86,7 @@ Default.args = {
 };
 
 export const List = (args: PerPageProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservablePerPage args={args} controller={controller} />;
+	return <PerPage {...args} pagination={controller?.store?.pagination} />;
 };
 
 List.loaders = [
@@ -101,11 +99,11 @@ List.loaders = [
 ];
 List.args = {
 	label: 'Per Page',
-	type: 'List',
+	type: 'list',
 };
 
 export const Radio = (args: PerPageProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservablePerPage args={args} controller={controller} />;
+	return <PerPage {...args} pagination={controller?.store?.pagination} />;
 };
 
 Radio.loaders = [
@@ -118,5 +116,5 @@ Radio.loaders = [
 ];
 Radio.args = {
 	label: 'Per Page',
-	type: 'Radio',
+	type: 'radio',
 };

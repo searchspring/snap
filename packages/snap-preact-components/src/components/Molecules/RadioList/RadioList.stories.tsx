@@ -1,14 +1,14 @@
 import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import { RadioSelect, RadioSelectProps } from './RadioSelect';
+import { RadioList, RadioListProps } from './RadioList';
 import { componentArgs } from '../../../utilities';
-import Readme from '../RadioSelect/readme.md';
+import Readme from '../RadioList/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: `Molecules/RadioSelect`,
-	component: RadioSelect,
+	title: `Molecules/RadioList`,
+	component: RadioList,
 	parameters: {
 		docs: {
 			page: () => (
@@ -96,7 +96,7 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
 
-export const Default = (args: RadioSelectProps) => <RadioSelect {...args} />;
+export const Default = (args: RadioListProps) => <RadioList {...args} />;
 Default.args = {
 	options: [
 		{
@@ -112,9 +112,9 @@ Default.args = {
 			value: 'four',
 		},
 	],
-} as RadioSelectProps;
+} as RadioListProps;
 
-export const Native = (args: RadioSelectProps) => <RadioSelect {...args} />;
+export const Native = (args: RadioListProps) => <RadioList {...args} />;
 Native.args = {
 	native: true,
 	options: [
@@ -131,30 +131,10 @@ Native.args = {
 			value: 'four',
 		},
 	],
-} as RadioSelectProps;
+} as RadioListProps;
 
-export const List = (args: RadioSelectProps) => <RadioSelect {...args} />;
-List.args = {
-	title: 'List of numbers',
-	options: [
-		{
-			value: 'one',
-		},
-		{
-			value: 'two',
-		},
-		{
-			value: 'three',
-		},
-		{
-			value: 'four',
-		},
-	],
-	hideRadios: true,
-} as RadioSelectProps;
-
-export const PerPage = (args: RadioSelectProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioSelect {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSize} />;
+export const PerPage = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <RadioList {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSize} />;
 };
 
 PerPage.loaders = [
@@ -168,10 +148,10 @@ PerPage.loaders = [
 
 PerPage.args = {
 	titleText: 'Per Page',
-} as RadioSelectProps;
+} as RadioListProps;
 
-export const SortBy = (args: RadioSelectProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioSelect {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
+export const SortBy = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <RadioList {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
 };
 
 SortBy.loaders = [
@@ -185,4 +165,4 @@ SortBy.loaders = [
 
 SortBy.args = {
 	titleText: 'Sort By',
-} as RadioSelectProps;
+} as RadioListProps;

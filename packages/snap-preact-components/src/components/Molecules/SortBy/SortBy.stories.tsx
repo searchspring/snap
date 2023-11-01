@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -8,7 +7,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../SortBy/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
-
 export default {
 	title: `Molecules/SortBy`,
 	component: SortBy,
@@ -55,11 +53,14 @@ export default {
 			description: 'type of Select to render.',
 			table: {
 				type: {
-					summary: '"Dropdown" | "List" | "Radio"',
+					summary: '"dropdown" | "list" | "radio"',
 				},
-				defaultValue: { summary: 'Dropdown' },
+				defaultValue: { summary: 'dropdown' },
 			},
-			control: { type: 'text' },
+			control: {
+				type: 'select',
+				options: ['dropdown', 'list', 'radio'],
+			},
 		},
 		...componentArgs,
 	},
@@ -67,12 +68,8 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
 
-const ObservableSortBy = observer(({ args, controller }: { args: SortByProps; controller: SearchController }) => {
-	return <SortBy {...args} sorting={controller?.store?.sorting} />;
-});
-
 export const Default = (args: SortByProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableSortBy args={args} controller={controller} />;
+	return <SortBy {...args} sorting={controller?.store?.sorting} />;
 };
 
 Default.loaders = [
@@ -88,7 +85,7 @@ Default.args = {
 };
 
 export const List = (args: SortByProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableSortBy args={args} controller={controller} />;
+	return <SortBy {...args} sorting={controller?.store?.sorting} />;
 };
 
 List.loaders = [
@@ -101,11 +98,11 @@ List.loaders = [
 ];
 List.args = {
 	label: 'Sort By',
-	type: 'List',
+	type: 'list',
 };
 
 export const Radio = (args: SortByProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableSortBy args={args} controller={controller} />;
+	return <SortBy {...args} sorting={controller?.store?.sorting} />;
 };
 
 Radio.loaders = [
@@ -118,5 +115,5 @@ Radio.loaders = [
 ];
 Radio.args = {
 	label: 'Sort By',
-	type: 'Radio',
+	type: 'radio',
 };

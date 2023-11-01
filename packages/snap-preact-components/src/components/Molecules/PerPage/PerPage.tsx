@@ -11,7 +11,8 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { RadioSelect, RadioSelectProps } from '../../Molecules/RadioSelect';
+import { RadioList, RadioListProps } from '../RadioList';
+import { List, ListProps } from '../List';
 
 const CSS = {
 	perPage: ({}: Partial<PerPageProps>) => css({}),
@@ -21,7 +22,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<PerPageProps> = {
 		label: 'Per Page',
-		type: 'Dropdown',
+		type: 'dropdown',
 	};
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
@@ -43,7 +44,17 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 		},
 		RadioSelect: {
 			// global theme
-			...globalTheme?.components?.radioSelect,
+			...globalTheme?.components?.radioList,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		List: {
+			// global theme
+			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -82,11 +93,10 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			)}
 
 			{type?.toLowerCase() == 'list' && (
-				<RadioSelect
+				<List
 					{...styling}
 					className={classnames('ss__perpage__list', className)}
 					{...subProps.RadioSelect}
-					hideRadios={true}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
 					}}
@@ -97,7 +107,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			)}
 
 			{type?.toLowerCase() == 'radio' && (
-				<RadioSelect
+				<RadioList
 					{...styling}
 					className={classnames('ss__perpage__radioList', className)}
 					{...subProps.RadioSelect}
@@ -117,12 +127,13 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 interface SelectSubProps {
 	select: Partial<SelectProps>;
-	RadioSelect: Partial<RadioSelectProps>;
+	RadioSelect: Partial<RadioListProps>;
+	List: Partial<ListProps>;
 }
 
 export interface PerPageProps extends ComponentProps {
 	pagination?: SearchPaginationStore;
 	controller?: SearchController;
 	label?: string;
-	type?: 'Dropdown' | 'List' | 'Radio';
+	type?: 'dropdown' | 'list' | 'radio';
 }

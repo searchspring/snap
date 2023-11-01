@@ -10,7 +10,8 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
-import { RadioSelect, RadioSelectProps } from '../../Molecules/RadioSelect';
+import { RadioList, RadioListProps } from '../RadioList';
+import { List, ListProps } from '../List';
 
 const CSS = {
 	sortBy: ({}: Partial<SortByProps>) => css({}),
@@ -21,7 +22,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const defaultProps: Partial<SortByProps> = {
 		label: 'Sort By',
-		type: 'Dropdown',
+		type: 'dropdown',
 	};
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
@@ -43,7 +44,17 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		},
 		RadioSelect: {
 			// global theme
-			...globalTheme?.components?.radioSelect,
+			...globalTheme?.components?.radioList,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		List: {
+			// global theme
+			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -82,25 +93,30 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			)}
 
 			{type?.toLowerCase() == 'list' && (
-				<RadioSelect
+				<List
 					{...styling}
 					className={classnames('ss__sortby__list', className)}
 					{...subProps.RadioSelect}
-					hideRadios={true}
 					options={store.options}
 					selected={store.current.value}
 					titleText={label}
+					onSelect={(e, selection) => {
+						selection?.url.go();
+					}}
 				/>
 			)}
 
 			{type?.toLowerCase() == 'radio' && (
-				<RadioSelect
+				<RadioList
 					{...styling}
 					className={classnames('ss__sortby__radioList', className)}
 					{...subProps.RadioSelect}
 					options={store.options}
 					selected={store.current.value}
 					titleText={label}
+					onSelect={(e, selection) => {
+						selection?.url.go();
+					}}
 				/>
 			)}
 		</CacheProvider>
@@ -111,12 +127,13 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 interface SelectSubProps {
 	Select: Partial<SelectProps>;
-	RadioSelect: Partial<RadioSelectProps>;
+	RadioSelect: Partial<RadioListProps>;
+	List: Partial<ListProps>;
 }
 
 export interface SortByProps extends ComponentProps {
 	sorting?: SearchSortingStore;
 	controller?: SearchController;
 	label?: string;
-	type?: 'Dropdown' | 'List' | 'Radio';
+	type?: 'dropdown' | 'list' | 'radio';
 }
