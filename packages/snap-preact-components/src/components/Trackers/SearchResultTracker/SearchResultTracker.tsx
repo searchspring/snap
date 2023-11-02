@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
@@ -40,7 +40,7 @@ export const SearchResultTracker = observer((properties: SearchResultTrackerProp
 		styling.css = [style];
 	}
 
-	return (
+	return controller ? (
 		<div
 			className={classnames('ss__result-tracker', className)}
 			onClick={(e: any) => controller.track.product.click(e, result)}
@@ -49,6 +49,8 @@ export const SearchResultTracker = observer((properties: SearchResultTrackerProp
 		>
 			{children}
 		</div>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
