@@ -37,29 +37,12 @@ const CSS = {
 					marginRight: '0',
 				},
 
-				'&:hover': {
-					cursor: 'pointer',
-					'.ss__facet-palette-options__option__wrapper': {
-						borderColor: '#EBEBEB',
-					},
-					'& .ss__facet-palette-options__option__palette': {
-						'& .ss__facet-palette-options__icon': {
-							opacity: 1,
-						},
-					},
-				},
 				'& .ss__facet-palette-options__option__wrapper': {
 					border: `2px solid transparent`,
 					borderRadius: '100%',
 					padding: '2px',
 				},
-				'&.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.colors?.primary || '#333',
-						padding: '0px',
-						borderWidth: '4px',
-					},
-				},
+
 				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
 					border: '1px solid #EBEBEB',
@@ -98,8 +81,14 @@ const CSS = {
 
 			'&.ss__facet-palette-options--list': {
 				'& .ss__facet-palette-options__option__wrapper': {
-					width: '10%',
+					width: '16px',
 					height: 'fit-content',
+				},
+
+				'.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__value': {
+						fontWeight: 'bold',
+					},
 				},
 
 				'& .ss__facet-palette-options__option--list': {
@@ -127,6 +116,28 @@ const CSS = {
 					overflow: 'hidden',
 					margin: 'auto',
 					marginBottom: '5px',
+				},
+
+				'.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__wrapper': {
+						borderColor: theme?.colors?.primary || '#333' + ' !important',
+						padding: '0px',
+						borderWidth: '4px',
+					},
+				},
+
+				'& .ss__facet-palette-options__option': {
+					'&:hover': {
+						cursor: 'pointer',
+						'.ss__facet-palette-options__option__wrapper': {
+							borderColor: '#EBEBEB',
+						},
+						'& .ss__facet-palette-options__option__palette': {
+							'& .ss__facet-palette-options__icon': {
+								opacity: 1,
+							},
+						},
+					},
 				},
 			},
 
@@ -175,6 +186,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		style,
 		styleScript,
 	} = props;
+
+	if (layout == 'list') {
+		props.gapSize = '2px';
+	}
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -258,7 +273,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 											: value.value,
 								}}
 							>
-								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
+								{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
 							</div>
 						</div>
 						{!hideLabel && (
