@@ -13,7 +13,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.integratedSpellCorrection | integrated spell correction feature flag | false |   |
 | settings.initializeFromUrl | initialize the controller with query parameter from URL (pre-fill input with current search) | true |   |
 | settings.syncInputs | if the selector targets multiple inputs, the value of those inputs will be synced | true |   |
-| settings.serializeForm | if no action is specified in the config and a form element is found for the input, additional elements that are found will be added to the generated URLs (eg. hidden form input) | true |   |
+| settings.serializeForm | if no action is specified in the config and a form element is found for the input, additional elements that are found will be added to the generated URLs (eg. hidden form input) | false |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
 | settings.trending.limit | when set, trending (popular) queries will be fetched and made available in the trending store | ➖ |   | 
 | settings.trending.showResults | if trending limit is set and there is no input, the first term results will be displayed | false |   | 
