@@ -157,7 +157,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		layout: 'grid',
-		gapSize: '8px',
+		gapSize: properties.layout == 'list' ? '2px' : '8px',
 		hideCount: true,
 		hideCheckbox: true,
 		// global theme
@@ -186,10 +186,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		style,
 		styleScript,
 	} = props;
-
-	if (layout == 'list') {
-		props.gapSize = '2px';
-	}
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
