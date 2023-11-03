@@ -40,6 +40,10 @@ export const SearchResultTracker = observer((properties: SearchResultTrackerProp
 		styling.css = [style];
 	}
 
+	if (!controller) {
+		console.error('No SearchController was passed to SearchResultTracker.');
+	}
+
 	return controller ? (
 		<div
 			className={classnames('ss__result-tracker', className)}
@@ -50,7 +54,7 @@ export const SearchResultTracker = observer((properties: SearchResultTrackerProp
 			{children}
 		</div>
 	) : (
-		<Fragment></Fragment>
+		<Fragment>{children}</Fragment>
 	);
 });
 
