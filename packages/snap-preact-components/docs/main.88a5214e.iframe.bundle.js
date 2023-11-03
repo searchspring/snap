@@ -1,4 +1,4 @@
-/*! For license information please see main.e2294e12.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.88a5214e.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -4828,7 +4828,11 @@
 						'p',
 						null,
 						'Renders a carousel of slides using children, built with ',
-						(0, esm.kt)('a', { parentName: 'p', href: 'https://swiperjs.com/', target: '_blank', rel: 'nofollow noopener noreferrer' }, 'Swiper')
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiper6.vercel.app', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper v6.8.4'
+						)
 					),
 					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Icon')),
@@ -4839,13 +4843,13 @@
 						'Additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Component Props'
 						),
 						' can be specified, but may need to be camelCased where appropriate.\nAdditional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Modules'
 						),
 						' can be provided via the ',
@@ -4875,12 +4879,7 @@
 						' prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in ',
 						(0, esm.kt)(
 							'a',
-							{
-								parentName: 'p',
-								href: 'https://swiperjs.com/swiper-api#param-pagination-dynamicBullets',
-								target: '_blank',
-								rel: 'nofollow noopener noreferrer',
-							},
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#pagination', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'swiper docs'
 						),
 						'. '
@@ -5034,7 +5033,7 @@
 						' prop accepts additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Modules'
 						),
 						' - these may need additional props and or stylesheets to function. We include ',
@@ -5049,7 +5048,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"import { Scrollbar } from 'swiper';\n<Carousel modules={[Scrollbar]} scrollbar>{children}</Carousel>\n"
+							"import { Scrollbar } from 'swiper';\n<Carousel modules={[Scrollbar]} scrollbar={{ draggable: true }}>{children}</Carousel>\n"
 						)
 					),
 					(0, esm.kt)('h3', { id: 'autoadjustslides' }, 'autoAdjustSlides'),
@@ -5082,7 +5081,7 @@
 						' or ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper API parameters'
 						),
 						' can also be specified. '
@@ -21288,13 +21287,13 @@
 						'Additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/react#swiper-props', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Component Props'
 						),
 						' can be specified, but may need to be camelCased where appropriate.\nAdditional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Modules'
 						),
 						' can be provided via the ',
@@ -21437,7 +21436,7 @@
 						' prop accepts additional ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#modules', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper Modules'
 						),
 						' - these may need additional props and or stylesheets to function. We include ',
@@ -21452,7 +21451,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"import { Scrollbar } from 'swiper';\n<Recommendation controller={controller} modules={[Scrollbar]} scrollbar />\n"
+							"import { Scrollbar } from 'swiper';\n<Recommendation controller={controller} modules={[Scrollbar]} scrollbar={{ draggable: true }} />\n"
 						)
 					),
 					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
@@ -21466,7 +21465,7 @@
 						', or ',
 						(0, esm.kt)(
 							'a',
-							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							{ parentName: 'p', href: 'https://swiper6.vercel.app/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
 							'Swiper API parameters'
 						),
 						' can also be specified. '
@@ -40495,7 +40494,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.49.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.49.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40994,7 +40993,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.49.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.49.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
