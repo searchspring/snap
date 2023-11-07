@@ -4,7 +4,7 @@ Renders a select dropdown or a RadioSelect to be used with the pagination store,
 
 ## Sub-components
 - Select
-- RadioSelect
+- List
 - RadioList
 
 ## Usage

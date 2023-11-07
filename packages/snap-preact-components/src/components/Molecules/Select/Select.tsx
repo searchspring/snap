@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS, option } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -140,7 +140,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	const [open, setOpen] = useState<boolean>(Boolean(startOpen));
 
 	// selection state
-	const [selection, setSelection] = useState<Option | undefined>(selected);
+	const [selection, setSelection] = useState<option | undefined>(selected);
 
 	if (selection && clearSelection) {
 		options = [
@@ -152,7 +152,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		];
 	}
 
-	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
+	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: option) => {
 		if (option != selection) {
 			onSelect && onSelect(e, option);
 		}
@@ -280,14 +280,8 @@ interface SelectSubProps {
 	icon: Partial<IconProps>;
 }
 
-export type Option = {
-	label: string;
-	value: string | number;
-	[otherOptions: string]: any;
-};
-
 export interface SelectProps extends ComponentProps {
-	options: Option[];
+	options: option[];
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
@@ -300,8 +294,8 @@ export interface SelectProps extends ComponentProps {
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
 	native?: boolean;
-	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: Option | undefined) => void;
-	selected?: Option;
+	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: option | undefined) => void;
+	selected?: option;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;
 	stayOpenOnSelection?: boolean;

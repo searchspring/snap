@@ -42,7 +42,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		hideCheckboxes: {
+		hideCheckbox: {
 			description: 'enable/disable checkbox icons from rendering.',
 			table: {
 				type: {

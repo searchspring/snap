@@ -1,10 +1,9 @@
 import { h } from 'preact';
-
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { List } from './List';
 import { ThemeProvider } from '../../../providers';
-import { Option } from '../Select';
+import { option } from '../../../types';
 
 describe('List Component', () => {
 	const options = [
@@ -36,7 +35,7 @@ describe('List Component', () => {
 			label: 'Violet',
 			value: 'violet',
 		},
-	] as Option[];
+	] as option[];
 
 	const globalTheme = {
 		components: {
@@ -98,7 +97,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements[1]);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1], [options[1].value]);
 	});
 
 	it('it adds "selected" class on selected option', async () => {
@@ -118,7 +117,7 @@ describe('List Component', () => {
 
 		optionElements = element.querySelectorAll('.ss__list__option');
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex].value]);
 
 		optionElements.forEach((optionElement, index) => {
 			if (index != selectIndex) {
@@ -156,7 +155,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements[selectIndex]);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], []);
 
 		selected = rendered.container.querySelector('.ss__list__option--selected');
 
@@ -187,7 +186,7 @@ describe('List Component', () => {
 	it('it can be disabled', async () => {
 		const rendered = render(<List disabled={true} options={options} />);
 
-		const element = rendered.container?.querySelector('.ss__list__options-wrapper--disabled')!;
+		const element = rendered.container?.querySelector('.ss__list--disabled')!;
 
 		expect(element).toBeInTheDocument();
 		const styles = getComputedStyle(element);
@@ -267,10 +266,10 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
 	});
 
-	it('it can hideCheckboxes', async () => {
+	it('it can hideCheckbox', async () => {
 		const selectFn = jest.fn();
 
 		const rendered = render(<List hideCheckbox={true} options={options} onSelect={selectFn} />);
@@ -283,7 +282,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
 	});
 
 	it('renders the titleText', () => {

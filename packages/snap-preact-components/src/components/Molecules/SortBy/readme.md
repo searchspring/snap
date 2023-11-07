@@ -4,7 +4,7 @@ Renders a Select dropdown or a RadioSelect, to be used with the SearchSortingSto
 
 ## Sub-components
 - Select
-- RadioSelect
+- List
 - RadioList
 
 ## Usage

@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { RadioList } from './RadioList';
 import { ThemeProvider } from '../../../providers';
-import { Option } from '../Select';
+import { option } from '../../../types';
 
 describe('RadioList Component', () => {
 	const options = [
@@ -36,7 +36,7 @@ describe('RadioList Component', () => {
 			label: 'Violet',
 			value: 'violet',
 		},
-	] as Option[];
+	] as option[];
 
 	const globalTheme = {
 		components: {
@@ -187,8 +187,7 @@ describe('RadioList Component', () => {
 	it('it can be disabled', async () => {
 		const rendered = render(<RadioList disabled={true} options={options} />);
 
-		const element = rendered.container?.querySelector('.ss__radio-list__options-wrapper--disabled')!;
-
+		const element = rendered.container?.querySelector('.ss__radio-list--disabled')!;
 		expect(element).toBeInTheDocument();
 		const styles = getComputedStyle(element);
 		expect(styles.pointerEvents).toBe('none');
@@ -215,7 +214,6 @@ describe('RadioList Component', () => {
 
 		const rendered = render(<RadioList native={true} options={options} onSelect={selectFn} />);
 
-		rendered.debug();
 		const optionElements = rendered.container?.querySelectorAll('input.ss__radio-list__option__radio')[0]!;
 
 		expect(optionElements).toBeInTheDocument();

@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS, option } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
@@ -29,7 +29,7 @@ const CSS = {
 				},
 			},
 
-			'.ss__radio-list__options-wrapper--disabled, .ss__radio-list__option--disabled': {
+			'&.ss__radio-list--disabled, .ss__radio-list__option--disabled': {
 				cursor: 'none',
 				pointerEvents: 'none',
 				opacity: 0.5,
@@ -103,10 +103,10 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__radio-list', className)}>
+			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
-				<ul className={`ss__radio-list__options-wrapper ${disabled ? 'ss__radio-list__options-wrapper--disabled' : ''}`}>
+				<ul className={`ss__radio-list__options-wrapper`}>
 					{options.map((option: option) => {
 						return (
 							<li
@@ -137,13 +137,6 @@ export interface RadioListProps extends ComponentProps {
 	disabled?: boolean;
 	selected?: string | number;
 }
-
-type option = {
-	value: string | number;
-	label?: string;
-	disabled?: boolean;
-	[otherOptions: string]: any;
-};
 
 interface RadioListSubProps {
 	Radio: Partial<RadioProps>;

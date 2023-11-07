@@ -82,7 +82,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideSelection: {
-			description: 'Hide the current selection in the dropdown button',
+			description: 'Hide the current selection in the dropdown button (non-native only)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -92,7 +92,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideIcon: {
-			description: 'Hide the icon in the dropdown button',
+			description: 'Hide the icon in the dropdown button (non-native only)',
 			table: {
 				type: {
 					summary: 'boolean',

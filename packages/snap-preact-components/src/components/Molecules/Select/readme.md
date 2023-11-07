@@ -82,13 +82,13 @@ The `hideLabelOnSelection` prop will prevent the `label` and `separator` from be
 ```
 
 ### hideSelection
-The `hideSelection` prop will prevent the current selection from rendering in the dropdown button. 
+The `hideSelection` prop will prevent the current selection from rendering in the dropdown button (non-native only). 
 ```jsx
 <Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideSelection={true} />
 ```
 
 ### hideIcon
-The `hideIcon` prop will prevent the icon froom rendering in the dropdown button. 
+The `hideIcon` prop will prevent the icon froom rendering in the dropdown button (non-native only). 
 ```jsx
 <Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideIcon={true} />
 ```

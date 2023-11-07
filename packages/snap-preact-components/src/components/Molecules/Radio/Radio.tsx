@@ -14,7 +14,7 @@ import { useA11y } from '../../../hooks/useA11y';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	radio: ({ size, color, theme }: Partial<RadioProps>) =>
+	radio: ({ size, color }: Partial<RadioProps>) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -25,7 +25,9 @@ const CSS = {
 
 			'&.ss__radio--disabled': {
 				opacity: 0.5,
+				cursor: 'none',
 			},
+
 			'& .ss__radio__empty': {
 				display: 'inline-block',
 				width: `calc(${size} - 30%)`,
@@ -33,16 +35,20 @@ const CSS = {
 			},
 
 			'& .ss__radio__icon--active circle:first-of-type': {
-				stroke: `${color || theme?.colors?.primary || '#333'}`,
+				stroke: `${color || '#333'}`,
 			},
 			'& .ss__radio__icon--active circle:last-of-type': {
-				fill: `${color || theme?.colors?.primary || '#333'}`,
+				fill: `${color || '#333'}`,
 			},
 			'& svg.ss__radio__icon--inactive circle': {
-				stroke: `${color || theme?.colors?.primary || '#333'}  !important`,
+				stroke: `${color || '#333'}  !important`,
 			},
 		}),
-	native: ({}) => css({}),
+	native: ({ size }: Partial<RadioProps>) =>
+		css({
+			height: size,
+			width: size,
+		}),
 };
 
 export const Radio = observer((properties: RadioProps): JSX.Element => {
@@ -70,7 +76,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
-		theme,
 	} = props;
 
 	const subProps: RadioSubProps = {
@@ -82,7 +87,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: color || theme?.colors?.primary,
+				color: color,
 				disableStyles,
 				size: size && `calc(${size} - 30%)`,
 			}),
@@ -97,7 +102,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: color || theme?.colors?.primary,
+				color: color,
 				disableStyles,
 				size: size && `calc(${size} - 30%)`,
 			}),
@@ -163,7 +168,11 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
 					role="radio"
 				>
-					{checkedState ? <Icon {...subProps.activeIcon} name="active" /> : <Icon {...subProps.inactiveIcon} name="inactive" />}
+					{checkedState ? (
+						<Icon {...subProps.activeIcon} name="ss__radio__icon--active" />
+					) : (
+						<Icon {...subProps.inactiveIcon} name="ss__radio__icon--inactive" />
+					)}
 				</span>
 			)}
 		</CacheProvider>
