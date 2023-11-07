@@ -42,7 +42,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		RadioSelect: {
+		RadioList: {
 			// global theme
 			...globalTheme?.components?.radioList,
 			// inherited props
@@ -96,7 +96,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 				<List
 					{...styling}
 					className={classnames('ss__sortby__list', className)}
-					{...subProps.RadioSelect}
+					{...subProps.List}
 					options={store.options}
 					selected={store.current.value}
 					titleText={label}
@@ -110,7 +110,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 				<RadioList
 					{...styling}
 					className={classnames('ss__sortby__radioList', className)}
-					{...subProps.RadioSelect}
+					{...subProps.RadioList}
 					options={store.options}
 					selected={store.current.value}
 					titleText={label}
@@ -127,7 +127,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 interface SelectSubProps {
 	Select: Partial<SelectProps>;
-	RadioSelect: Partial<RadioListProps>;
+	RadioList: Partial<RadioListProps>;
 	List: Partial<ListProps>;
 }
 

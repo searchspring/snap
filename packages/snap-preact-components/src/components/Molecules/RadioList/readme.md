@@ -46,7 +46,7 @@ The `disabled` prop will put the inputs in a disabled state.
 The `selected` prop specifies the currently selected Option object. 
 
 ```jsx
-<RadioList options={store.options} selected={store.pagination.pageSize} />
+<RadioList options={store.pagination.pageSizeOptions} selected={store.pagination.pageSize} />
 ```
 
 ### Events

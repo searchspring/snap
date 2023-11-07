@@ -148,11 +148,7 @@ describe('List Component', () => {
 
 		expect(selected?.querySelector('.ss__list__option__label')?.innerHTML).toBe(options[1].label);
 
-		await userEvent.click(optionElements[selectIndex]);
-
 		optionElements = element.querySelectorAll('.ss__list__option');
-
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex]);
 
 		optionElements.forEach((optionElement, index) => {
 			if (index != selectIndex) {
@@ -161,6 +157,14 @@ describe('List Component', () => {
 				expect(optionElement).toHaveClass('ss__list__option--selected');
 			}
 		});
+
+		await userEvent.click(optionElements[selectIndex]);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex].value]);
+
+		selected = rendered.container.querySelector('.ss__list__option--selected');
+
+		expect(selected).not.toBeInTheDocument();
 	});
 
 	it('uses label when passed, and value if not', async () => {
@@ -185,17 +189,89 @@ describe('List Component', () => {
 	});
 
 	it('it can be disabled', async () => {
+		const rendered = render(<List disabled={true} options={options} />);
+
+		const element = rendered.container?.querySelector('.ss__list__options-wrapper--disabled')!;
+
+		expect(element).toBeInTheDocument();
+		const styles = getComputedStyle(element);
+		expect(styles.pointerEvents).toBe('none');
+	});
+
+	it('it can multi-select', async () => {
 		const selectFn = jest.fn();
 
-		const rendered = render(<List disabled={true} options={options} onSelect={selectFn} />);
+		const rendered = render(<List options={options} onSelect={selectFn} />);
 
-		const optionElements = rendered.container?.querySelector('.ss__list__option--disabled')!;
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option');
+
+		expect(optionElements[0]).toBeInTheDocument();
+		expect(optionElements[0]).not.toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[0]);
+
+		expect(optionElements[0]).toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[1]);
+
+		expect(optionElements[0]).toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[0]);
+
+		expect(optionElements[0]).not.toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[1]);
+
+		expect(optionElements[0]).not.toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+	});
+
+	it('it can turn off multi-select', async () => {
+		const selectFn = jest.fn();
+
+		const rendered = render(<List multiSelect={false} options={options} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option');
+
+		expect(optionElements[0]).toBeInTheDocument();
+		expect(optionElements[0]).not.toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[0]);
+
+		expect(optionElements[0]).toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[1]);
+
+		expect(optionElements[0]).not.toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).toHaveClass('ss__list__option--selected');
+
+		await userEvent.click(optionElements[0]);
+
+		expect(optionElements[0]).toHaveClass('ss__list__option--selected');
+		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
+	});
+
+	it('it use native prop to render native checkbox elements', async () => {
+		const selectFn = jest.fn();
+
+		const rendered = render(<List native={true} options={options} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option')[0]!;
+
+		const checkbox = rendered.container.querySelector('.ss__checkbox');
 
 		expect(optionElements).toBeInTheDocument();
+		expect(checkbox).toBeInTheDocument();
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0]);
 	});
 
 	it('it can hideCheckboxes', async () => {

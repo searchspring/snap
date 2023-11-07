@@ -52,6 +52,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		multiSelect: {
+			description: 'enable/disable multiselect.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		horizontal: {
+			description: 'render the list options horizontally.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		onSelect: {
 			description: 'option onSelect event handler',
 			table: {
@@ -63,6 +83,16 @@ export default {
 		},
 		disabled: {
 			description: 'boolean to set the select in a disabled state',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		native: {
+			description: 'boolean to render unstyled native checkbox elements',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -91,6 +121,25 @@ Default.args = {
 	options: [
 		{
 			value: 'one',
+		},
+		{
+			value: 'two',
+		},
+		{
+			value: 'three',
+		},
+		{
+			value: 'four',
+		},
+	],
+} as ListProps;
+
+export const DisabledOption = (args: ListProps) => <List {...args} />;
+DisabledOption.args = {
+	options: [
+		{
+			value: 'one',
+			disabled: true,
 		},
 		{
 			value: 'two',

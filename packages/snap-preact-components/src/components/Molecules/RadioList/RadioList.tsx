@@ -7,8 +7,8 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { Icon, IconProps } from '../../Atoms/Icon';
 import { useState } from 'react';
+import { Radio, RadioProps } from '../Radio/Radio';
 
 const CSS = {
 	radioList: ({}: Partial<RadioListProps>) =>
@@ -27,6 +27,12 @@ const CSS = {
 				'& label': {
 					cursor: 'pointer',
 				},
+			},
+
+			'.ss__radio-list__options-wrapper--disabled, .ss__radio-list__option--disabled': {
+				cursor: 'none',
+				pointerEvents: 'none',
+				opacity: 0.5,
 			},
 
 			'.ss__radio-list__option--selected': {
@@ -59,27 +65,11 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	const { titleText, onSelect, hideRadios, native, disabled, selected, options, disableStyles, className, style, styleScript } = props;
 
 	const subProps: RadioListSubProps = {
-		CheckedIcon: {
-			// default props
-			width: 20,
-			height: 20,
-			viewBox: undefined,
-			icon: 'bullet',
-			className: 'ss__list__option__radio__icon--checked',
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
-		UncheckedIcon: {
-			// default props
-			width: 20,
-			height: 20,
-			viewBox: undefined,
-			icon: 'selected-bullet',
-			className: 'ss__list__option__radio__icon--unchecked',
+		Radio: {
+			className: 'ss__radio-list__option__radio',
+			native: native,
+			disableA11y: true,
+			disabled: disabled,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -116,30 +106,16 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__radio-list', className)}>
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
-				<ul className="ss__radio-list__options-wrapper">
+				<ul className={`ss__radio-list__options-wrapper ${disabled ? 'ss__radio-list__options-wrapper--disabled' : ''}`}>
 					{options.map((option: option) => {
 						return (
 							<li
 								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
-									disabled ? 'ss__radio-list__option--disabled' : ''
+									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideRadios &&
-									(native ? (
-										<input
-											className="ss__radio-list__option__radio"
-											type="radio"
-											id={option.value.toString()}
-											disabled={disabled}
-											name={option.value.toString()}
-											checked={option.value == selection}
-										/>
-									) : option.value == selection ? (
-										<Icon name={'ss__radio-list__option__radio__icon--checked'} {...subProps.CheckedIcon} />
-									) : (
-										<Icon name={'ss__radio-list__option__radio__icon--unchecked'} {...subProps.UncheckedIcon} />
-									))}
+								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection} />}
 								<label className="ss__radio-list__option__label">{option.label || option.value}</label>
 							</li>
 						);
@@ -165,10 +141,10 @@ export interface RadioListProps extends ComponentProps {
 type option = {
 	value: string | number;
 	label?: string;
+	disabled?: boolean;
 	[otherOptions: string]: any;
 };
 
 interface RadioListSubProps {
-	CheckedIcon: Partial<IconProps>;
-	UncheckedIcon: Partial<IconProps>;
+	Radio: Partial<RadioProps>;
 }

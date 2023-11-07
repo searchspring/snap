@@ -90,22 +90,32 @@ export const iconPaths: { [name: string]: string | SVGPathElement[] } = {
 		{
 			type: 'circle',
 			attributes: {
-				cx: '10',
-				cy: '10',
-				r: '5',
+				cx: '28',
+				cy: '28',
+				r: '20',
 				stroke: 'black',
 				'stroke-width': '3',
-				fill: 'grey',
+				fill: 'white',
 			},
 		},
-	],
-	'selected-bullet': [
 		{
 			type: 'circle',
 			attributes: {
-				cx: '10',
-				cy: '10',
-				r: '5',
+				cx: '28',
+				cy: '28',
+				r: '13',
+				fill: 'black',
+				'stroke-width': '0',
+			},
+		},
+	],
+	'bullet-o': [
+		{
+			type: 'circle',
+			attributes: {
+				cx: '28',
+				cy: '28',
+				r: '20',
 				stroke: 'black',
 				'stroke-width': '3',
 				fill: 'white',

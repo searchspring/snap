@@ -11,10 +11,11 @@ import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 
 const CSS = {
-	List: ({}: Partial<ListProps>) =>
+	List: ({ horizontal }: Partial<ListProps>) =>
 		css({
 			'& .ss__list__options-wrapper': {
 				border: 'none',
+				display: `${horizontal ? 'flex' : 'initial'}`,
 			},
 
 			'.ss__list__title': {
@@ -29,7 +30,12 @@ const CSS = {
 				},
 			},
 
-			'.ss__list--selected': {
+			'.ss__list__options-wrapper--disabled, .ss__list__option--disabled': {
+				cursor: 'none',
+				pointerEvents: 'none',
+				opacity: 0.5,
+			},
+			'.ss__list__option--selected': {
 				fontWeight: 'bold',
 			},
 
@@ -52,15 +58,20 @@ const CSS = {
 
 export function List(properties: ListProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<ListProps> = {};
+	const defaultProps: Partial<ListProps> = {
+		multiSelect: true,
+	};
 
 	const props = mergeProps('list', globalTheme, defaultProps, properties);
 
-	const { titleText, onSelect, hideCheckbox, disabled, selected, options, disableStyles, className, style, styleScript } = props;
+	const { titleText, onSelect, native, multiSelect, hideCheckbox, disabled, options, disableStyles, className, style, styleScript } = props;
+
+	let selected = props.selected;
 
 	const subProps: ListSubProps = {
 		checkbox: {
 			// default props
+			native: native,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -81,15 +92,33 @@ export function List(properties: ListProps): JSX.Element {
 		styling.css = [style];
 	}
 
+	if (selected && !Array.isArray(selected)) {
+		selected = [selected];
+	}
 	// selection state
-	const [selection, setSelection] = useState<string | number | undefined>(selected);
+	const [selection, setSelection] = useState<(string | number)[]>((selected as (string | number)[]) || []);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: option) => {
-		if (onSelect) {
-			onSelect(e, option!);
-		}
+		if (multiSelect) {
+			if (selection.includes(option.value)) {
+				const newArray = [...selection];
+				newArray.splice(newArray.indexOf(option.value), 1);
 
-		setSelection(option?.value);
+				if (onSelect) {
+					onSelect(e, option!, selection);
+				}
+				setSelection(newArray);
+			} else {
+				const newArray = [...selection, option.value];
+
+				if (onSelect) {
+					onSelect(e, option!);
+				}
+				setSelection(newArray);
+			}
+		} else {
+			setSelection([option.value]);
+		}
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -97,16 +126,16 @@ export function List(properties: ListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__list', className)}>
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
-				<ul className="ss__list__options-wrapper">
+				<ul className={`ss__list__options-wrapper ${disabled ? 'ss__list__options-wrapper--disabled' : ''}`}>
 					{options.map((option: option) => {
 						return (
 							<li
-								className={`ss__list__option ${selection == option.value ? 'ss__list__option--selected' : ''} ${
-									disabled ? 'ss__list__option--disabled' : ''
+								className={`ss__list__option ${selection && selection.indexOf(option.value.toString()) > -1 ? 'ss__list__option--selected' : ''} ${
+									option.disabled ? 'ss__list__option--disabled' : ''
 								}`}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={option.value == selection} disableA11y={true} />}
+								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={selection.indexOf(option.value.toString()) > -1} disableA11y={true} />}
 								<label className="ss__list__option__label">{option.label || option.value}</label>
 							</li>
 						);
@@ -121,16 +150,20 @@ export function List(properties: ListProps): JSX.Element {
 
 export interface ListProps extends ComponentProps {
 	options: option[];
+	multiSelect?: boolean;
 	hideCheckbox?: boolean;
-	onSelect?: (e: React.MouseEvent<HTMLElement>, option: option) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement>, option: option, optionList?: string | number | undefined | (string | number)[]) => void;
 	titleText?: string;
 	disabled?: boolean;
-	selected?: string | number;
+	horizontal?: boolean;
+	native?: boolean;
+	selected?: string | number | (string | number)[];
 }
 
 type option = {
 	value: string | number;
 	label?: string;
+	disabled?: boolean;
 	[otherOptions: string]: any;
 };
 

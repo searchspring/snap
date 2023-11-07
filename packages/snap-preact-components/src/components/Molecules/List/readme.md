@@ -21,6 +21,27 @@ The `hideCheckbox` prop will disable the checkbox elements from rendering.
 <List options={store.options} hideCheckbox={true} />
 ```
 
+### multiSelect
+The `multiSelect` prop will enable/disable the ability to select more than one option at a time. `multiSelect` is `true` by default.
+
+```jsx
+<List options={store.options} multiSelect={false} />
+```
+
+### horizontal
+The `horizontal` prop will render the list options horizontally.
+
+```jsx
+<List options={store.options} horizontal={true} />
+```
+
+### native
+The `native` prop is a boolean to render unstyled native checkbox elements
+
+```jsx
+<List options={store.options} native={true} />
+```
+
 ### titleText
 The `titleText` prop is will render a title element
 
@@ -39,7 +60,7 @@ The `disabled` prop will put the inputs in a disabled state.
 The `selected` prop specifies the currently selected Option object. 
 
 ```jsx
-<List options={store.options} selected={store.pagination.pageSize} />
+<List options={store.pagination.pageSizeOptions} selected={store.pagination.pageSize} />
 ```
 
 ### Events

@@ -185,17 +185,13 @@ describe('RadioList Component', () => {
 	});
 
 	it('it can be disabled', async () => {
-		const selectFn = jest.fn();
+		const rendered = render(<RadioList disabled={true} options={options} />);
 
-		const rendered = render(<RadioList disabled={true} options={options} onSelect={selectFn} />);
+		const element = rendered.container?.querySelector('.ss__radio-list__options-wrapper--disabled')!;
 
-		const optionElements = rendered.container?.querySelector('.ss__radio-list__option--disabled')!;
-
-		expect(optionElements).toBeInTheDocument();
-
-		await userEvent.click(optionElements);
-
-		expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
+		expect(element).toBeInTheDocument();
+		const styles = getComputedStyle(element);
+		expect(styles.pointerEvents).toBe('none');
 	});
 
 	it('it can hideRadios', async () => {
@@ -219,6 +215,7 @@ describe('RadioList Component', () => {
 
 		const rendered = render(<RadioList native={true} options={options} onSelect={selectFn} />);
 
+		rendered.debug();
 		const optionElements = rendered.container?.querySelectorAll('input.ss__radio-list__option__radio')[0]!;
 
 		expect(optionElements).toBeInTheDocument();

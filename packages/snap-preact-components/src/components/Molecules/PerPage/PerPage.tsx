@@ -42,7 +42,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
-		RadioSelect: {
+		RadioList: {
 			// global theme
 			...globalTheme?.components?.radioList,
 			// inherited props
@@ -96,7 +96,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 				<List
 					{...styling}
 					className={classnames('ss__perpage__list', className)}
-					{...subProps.RadioSelect}
+					{...subProps.List}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
 					}}
@@ -110,7 +110,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 				<RadioList
 					{...styling}
 					className={classnames('ss__perpage__radioList', className)}
-					{...subProps.RadioSelect}
+					{...subProps.RadioList}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
 					}}
@@ -127,7 +127,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 interface SelectSubProps {
 	select: Partial<SelectProps>;
-	RadioSelect: Partial<RadioListProps>;
+	RadioList: Partial<RadioListProps>;
 	List: Partial<ListProps>;
 }
 
