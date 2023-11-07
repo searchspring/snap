@@ -1,6 +1,6 @@
-# Checkbox
+# Radio
 
-Renders a native or custom checkbox.
+Renders a native or custom radio.
 
 ## Sub-components
 - Icon
@@ -8,69 +8,73 @@ Renders a native or custom checkbox.
 ## Usage
 
 ### native
-The `native` prop will render an `<input type='checkbox'>` element.
+The `native` prop will render an `<input type='radio'>` element.
 
 ```jsx
-<Checkbox native />
+    <Radio native />
 ```
 
 ### checked
 The `checked` prop allows for external state management. Otherwise if not provided, the component will use its own internal state.
 
 ```jsx
-<Checkbox checked={true} />
+    <Radio checked={true} />
 ```
 
 ### startChecked
-The `startChecked` prop sets the checkbox to be checked on the initial render. Must use internal state by not using the `checked` prop.
+The `startChecked` prop sets the radio to be checked on the initial render. Must use internal state by not using the `checked` prop.
 
 ```jsx
-<Checkbox startChecked={true} />
+    <Radio startChecked={true} />
 ```
 
 ### disabled
-The `disabled` prop disables the checkbox from being toggled or invoking the `onClick` callback.
+The `disabled` prop disables the radio from being toggled or invoking the `onClick` callback.
 
 ```jsx
-<Checkbox disabled={true} />
+    <Radio disabled={true} />
 ```
 
 ### disableA11y
 The `disableA11y` prop specifies a boolean to disable the autoset ally properties.
 
 ```jsx
-<Checkbox disableA11y={true} />
+    <Radio disableA11y={true} />
 ```
 
 ### size
-The `size` prop will set the custom checkbox size.
+The `size` prop will set the custom radio size.
 
 ```jsx
-<Checkbox size={'16px'} />
+    <Radio size={'16px'} />
 ```
 
 ### color
-The `color` prop sets the checkbox border color and the icon color if the `iconColor` prop is not set.
+The `color` prop sets the radio border stroke and fill colors.
 
 ```jsx
-<Checkbox color={'#ffff00'} />
+    <Radio color={'#ffff00'} />
 ```
 
-### iconColor
-The `iconColor` prop sets the icon color and overwrites the `color` prop. It will not affect checkbox border color.
 
+### checkedIcon
+The `checkedIcon` prop specifies a path within the `Icon` component paths (see Icon Gallery) to show when the radio is checked. This only applies if using a custom radio `native={false}`.
 ```jsx
-<Checkbox iconColor={'#ffff00'} />
+    <Radio checkedIcon={'radio'} />
 ```
-### icon
-The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery). This only applies if using a custom checkbox `native={false}`.
+
+### unCheckedIcon
+The `unCheckedIcon` prop specifies a path within the `Icon` component paths (see Icon Gallery) to show when the radio is not pchecked. This only applies if using a custom radio `native={false}`.
+```jsx
+    <Radio unCheckedIcon={'radio-o'} />
+```
 
 
 ### Events
 
 #### onClick
-The `onClick` prop allows for a custom callback function for when the checkbox is clicked.
+The `onClick` prop allows for a custom callback function for when the radio is clicked.
 
 ```jsx
-<Checkbox onClick={(e)=>{console.log(e)}} />
+    <Radio onClick={(e)=>{console.log(e)}} />
 ```

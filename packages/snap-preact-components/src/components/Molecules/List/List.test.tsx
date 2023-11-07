@@ -88,10 +88,6 @@ describe('List Component', () => {
 		expect(styles.padding).toBe(style.padding);
 	});
 
-	//todo - maybe a good test for when we update the icon code
-	// it('can change the icons in the theme', async () => {
-	// });
-
 	it('it fires onSelect event on option selection', async () => {
 		const selectFn = jest.fn();
 

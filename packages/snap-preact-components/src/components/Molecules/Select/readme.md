@@ -81,6 +81,18 @@ The `hideLabelOnSelection` prop will prevent the `label` and `separator` from be
 <Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideLabelOnSelection={true} />
 ```
 
+### hideSelection
+The `hideSelection` prop will prevent the current selection from rendering in the dropdown button. 
+```jsx
+<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideSelection={true} />
+```
+
+### hideIcon
+The `hideIcon` prop will prevent the icon froom rendering in the dropdown button. 
+```jsx
+<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideIcon={true} />
+```
+
 ### clearSelection
 The `clearSelection` prop accepts a string value to display as the option that will clear the current selection.
 

@@ -81,6 +81,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideSelection: {
+			description: 'Hide the current selection in the dropdown button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideIcon: {
+			description: 'Hide the icon in the dropdown button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		separator: {
 			defaultValue: ': ',
 			description: 'Select delimiter',

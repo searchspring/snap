@@ -67,7 +67,7 @@ export function Icon(properties: IconProps): JSX.Element {
 			</svg>
 		</CacheProvider>
 	) : (
-		<Fragment>h</Fragment>
+		<Fragment></Fragment>
 	);
 }
 

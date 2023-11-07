@@ -3,7 +3,7 @@
 Renders a list of options with radio inputs.
 
 ## Sub-components
-- Icon
+- Radio
 
 ## Usage
 

@@ -68,11 +68,11 @@ export type ThemeComponents = {
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
-	radio?: GenericComponentProps<RadioProps>;
 
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
 	checkbox?: GenericComponentProps<CheckboxProps>;
+	radio?: GenericComponentProps<RadioProps>;
 	errorHandler?: GenericComponentProps<ErrorHandlerProps>;
 	facetGridOptions?: GenericComponentProps<FacetGridOptionsProps>;
 	facetHierarchyOptions?: GenericComponentProps<FacetHierarchyOptionsProps>;

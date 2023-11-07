@@ -22,7 +22,7 @@ export default {
 	},
 	argTypes: {
 		checked: {
-			description: 'Checkbox is checked (externally managed state)',
+			description: 'Radio is checked (externally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -32,7 +32,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		disabled: {
-			description: 'Checkbox is disabled',
+			description: 'Radio is disabled',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -43,7 +43,7 @@ export default {
 		},
 		size: {
 			defaultValue: '20px',
-			description: 'Checkbox size',
+			description: 'Radio size',
 			table: {
 				type: {
 					summary: 'string',
@@ -52,9 +52,8 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		icon: {
-			// defaultValue: 'bullet',
-			description: 'Icon name',
+		checkedIcon: {
+			description: 'Icon name when radio is checked',
 			table: {
 				type: {
 					summary: 'string',
@@ -66,18 +65,21 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
-		color: {
-			description: 'Checkbox color',
+		unCheckedIcon: {
+			description: 'Icon name when radio is unchecked',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'theme.colors.primary' },
+				defaultValue: { summary: 'bullet-o' },
 			},
-			control: { type: 'color' },
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
 		},
-		iconColor: {
-			description: 'Checkbox icon color. Overwrites color.',
+		color: {
+			description: 'Radio color',
 			table: {
 				type: {
 					summary: 'string',
@@ -87,7 +89,7 @@ export default {
 			control: { type: 'color' },
 		},
 		startChecked: {
-			description: 'Checkbox is checked initially (internally managed state)',
+			description: 'Radio is checked initially (internally managed state)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -97,7 +99,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		native: {
-			description: 'Render as unstyled native checkbox',
+			description: 'Render as unstyled native radio',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -107,7 +109,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		onClick: {
-			description: 'Checkbox click event handler',
+			description: 'Radio click event handler',
 			table: {
 				type: {
 					summary: 'function',

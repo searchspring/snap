@@ -21,7 +21,8 @@ const CSS = {
 			justifyContent: 'center',
 			height: size,
 			width: size,
-			// border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
+			cursor: 'pointer',
+
 			'&.ss__radio--disabled': {
 				opacity: 0.5,
 			},
@@ -37,8 +38,8 @@ const CSS = {
 			'& .ss__radio__icon--active circle:last-of-type': {
 				fill: `${color || theme?.colors?.primary || '#333'}`,
 			},
-			'& .ss__radio__icon--inactive': {
-				stroke: `${color || theme?.colors?.primary || '#333'}`,
+			'& svg.ss__radio__icon--inactive circle': {
+				stroke: `${color || theme?.colors?.primary || '#333'}  !important`,
 			},
 		}),
 	native: ({}) => css({}),
@@ -54,21 +55,35 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 
 	const props = mergeProps('radio', globalTheme, defaultProps, properties);
 
-	const { checked, color, disabled, icon, onClick, size, startChecked, native, disableA11y, disableStyles, className, style, styleScript, theme } =
-		props;
+	const {
+		checked,
+		color,
+		disabled,
+		checkedIcon,
+		unCheckedIcon,
+		onClick,
+		size,
+		startChecked,
+		native,
+		disableA11y,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		theme,
+	} = props;
 
 	const subProps: RadioSubProps = {
 		activeIcon: {
 			// default props
 			className: 'ss__radio__icon--active',
-			icon: 'bullet',
+			icon: checkedIcon || 'bullet',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				color: color || theme?.colors?.primary,
 				disableStyles,
-				icon,
 				size: size && `calc(${size} - 30%)`,
 			}),
 			// component theme overrides
@@ -77,14 +92,13 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			// default props
 			className: 'ss__radio__icon--inactive',
-			icon: 'bullet-o',
+			icon: unCheckedIcon || 'bullet-o',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				color: color || theme?.colors?.primary,
 				disableStyles,
-				icon,
 				size: size && `calc(${size} - 30%)`,
 			}),
 			// component theme overrides
@@ -157,14 +171,15 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 });
 
 interface RadioSubProps {
-	activeIcon: IconProps;
-	inactiveIcon: IconProps;
+	activeIcon: Partial<IconProps>;
+	inactiveIcon: Partial<IconProps>;
 }
 export interface RadioProps extends ComponentProps {
 	checked?: boolean;
 	color?: string;
 	disabled?: boolean;
-	icon?: string;
+	checkedIcon?: string;
+	unCheckedIcon?: string;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string;
 	startChecked?: boolean;

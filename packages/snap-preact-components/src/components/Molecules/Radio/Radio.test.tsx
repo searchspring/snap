@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Radio } from './Radio';
@@ -112,12 +112,13 @@ describe('Radio Component', () => {
 			expect(clickFn).not.toHaveBeenCalled();
 		});
 
-		it('passes props to icon', () => {
-			const icon = 'close-thin';
+		it('passes props to icon', async () => {
+			const checkedIcon = 'close-thin';
+			const unCheckedIcon = 'star';
 			const color = 'blue';
 			const size = '12px';
 
-			const rendered = render(<Radio checked size={size} icon={icon} color={color} />);
+			const rendered = render(<Radio size={size} checkedIcon={checkedIcon} unCheckedIcon={unCheckedIcon} color={color} />);
 			const RadioElement = rendered.container.querySelector('.ss__radio');
 			const svg = RadioElement?.querySelector('svg')!;
 			const path = svg.querySelector('path');
@@ -127,7 +128,16 @@ describe('Radio Component', () => {
 			expect(styles.width).toBe(`calc(${size} - 30%)`);
 			expect(styles.height).toBe(`calc(${size} - 30%)`);
 			expect(styles.fill).toBe(color);
-			expect(path).toHaveAttribute('d', iconPaths[icon]);
+			expect(path).toHaveAttribute('d', iconPaths[unCheckedIcon]);
+
+			userEvent.click(RadioElement!);
+
+			await waitFor(() => {
+				expect(path).toHaveAttribute('d', iconPaths[checkedIcon]);
+				expect(styles.width).toBe(`calc(${size} - 30%)`);
+				expect(styles.height).toBe(`calc(${size} - 30%)`);
+				expect(styles.fill).toBe(color);
+			});
 		});
 
 		it('can use iconColor prop instead of color', () => {
@@ -135,7 +145,7 @@ describe('Radio Component', () => {
 			const color = 'blue';
 			const size = '12px';
 
-			const rendered = render(<Radio checked size={size} icon={icon} color={color} />);
+			const rendered = render(<Radio checked size={size} checkedIcon={icon} color={color} />);
 			const RadioElement = rendered.container.querySelector('.ss__radio');
 			const svg = RadioElement?.querySelector('svg')!;
 			const styles = getComputedStyle(svg);
@@ -185,107 +195,107 @@ describe('Radio Component', () => {
 		});
 	});
 
-	// describe('native', () => {
-	// 	it('renders', () => {
-	// 		const rendered = render(<Radio native />);
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio');
-	// 		const inputElement = rendered.container.querySelector('input');
+	describe('native', () => {
+		it('renders', () => {
+			const rendered = render(<Radio native />);
+			const RadioElement = rendered.container.querySelector('.ss__radio');
+			const inputElement = rendered.container.querySelector('input');
 
-	// 		expect(rendered.container).toBeInTheDocument();
-	// 		expect(RadioElement).toBeInTheDocument();
-	// 		expect(RadioElement).toBe(inputElement);
-	// 		expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
-	// 		expect(inputElement).not.toHaveAttribute('disabled');
-	// 	});
+			expect(rendered.container).toBeInTheDocument();
+			expect(RadioElement).toBeInTheDocument();
+			expect(RadioElement).toBe(inputElement);
+			expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
+			expect(inputElement).not.toHaveAttribute('disabled');
+		});
 
-	// 	it('is not checked by default', () => {
-	// 		const rendered = render(<Radio native />);
-	// 		const inputElement = rendered.container.querySelector('input');
+		it('is not checked by default', () => {
+			const rendered = render(<Radio native />);
+			const inputElement = rendered.container.querySelector('input');
 
-	// 		expect(inputElement).toBeInTheDocument();
-	// 		expect(inputElement?.checked).toBe(false);
-	// 	});
+			expect(inputElement).toBeInTheDocument();
+			expect(inputElement?.checked).toBe(false);
+		});
 
-	// 	it('can handle checked state internally', () => {
-	// 		const rendered = render(<Radio native startChecked={true} />);
-	// 		const inputElement = rendered.container.querySelector('input');
+		it('can handle checked state internally', () => {
+			const rendered = render(<Radio native startChecked={true} />);
+			const inputElement = rendered.container.querySelector('input');
 
-	// 		expect(inputElement).toBeInTheDocument();
-	// 		expect(inputElement?.checked).toBe(true);
-	// 	});
+			expect(inputElement).toBeInTheDocument();
+			expect(inputElement?.checked).toBe(true);
+		});
 
-	// 	it('does not render an icon when checked', () => {
-	// 		const rendered = render(<Radio native checked />);
-	// 		const svgElement = rendered.container.querySelector('svg');
-	// 		const inputElement = rendered.container.querySelector('input');
+		it('does not render an icon when checked', () => {
+			const rendered = render(<Radio native checked />);
+			const svgElement = rendered.container.querySelector('svg');
+			const inputElement = rendered.container.querySelector('input');
 
-	// 		expect(svgElement).not.toBeInTheDocument();
-	// 		expect(inputElement).toBeInTheDocument();
-	// 		expect(inputElement?.checked).toBe(true);
-	// 	});
+			expect(svgElement).not.toBeInTheDocument();
+			expect(inputElement).toBeInTheDocument();
+			expect(inputElement?.checked).toBe(true);
+		});
 
-	// 	it('fires onClick prop when clicked', () => {
-	// 		const clickFn = jest.fn();
+		it('fires onClick prop when clicked', () => {
+			const clickFn = jest.fn();
 
-	// 		const rendered = render(<Radio native onClick={clickFn} />);
+			const rendered = render(<Radio native onClick={clickFn} />);
 
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio')!;
+			const RadioElement = rendered.container.querySelector('.ss__radio')!;
 
-	// 		userEvent.click(RadioElement);
-	// 		expect(clickFn).toHaveBeenCalled();
-	// 	});
+			userEvent.click(RadioElement);
+			expect(clickFn).toHaveBeenCalled();
+		});
 
-	// 	it('respects the disabled prop', () => {
-	// 		const clickFn = jest.fn();
-	// 		const rendered = render(<Radio native disabled />);
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio')!;
+		it('respects the disabled prop', () => {
+			const clickFn = jest.fn();
+			const rendered = render(<Radio native disabled />);
+			const RadioElement = rendered.container.querySelector('.ss__radio')!;
 
-	// 		expect(RadioElement.className.match(/disabled/)).toBeTruthy();
-	// 		expect(RadioElement).toHaveAttribute('disabled');
-	// 		userEvent.click(RadioElement);
-	// 		expect(clickFn).not.toHaveBeenCalled();
-	// 	});
+			expect(RadioElement.className.match(/disabled/)).toBeTruthy();
+			expect(RadioElement).toHaveAttribute('disabled');
+			userEvent.click(RadioElement);
+			expect(clickFn).not.toHaveBeenCalled();
+		});
 
-	// 	it('renders with additional style using prop', () => {
-	// 		const style = {
-	// 			padding: '20px',
-	// 		};
+		it('renders with additional style using prop', () => {
+			const style = {
+				padding: '20px',
+			};
 
-	// 		const rendered = render(<Radio native style={style} />);
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio')!;
-	// 		const styles = getComputedStyle(RadioElement);
+			const rendered = render(<Radio native style={style} />);
+			const RadioElement = rendered.container.querySelector('.ss__radio')!;
+			const styles = getComputedStyle(RadioElement);
 
-	// 		expect(styles.padding).toBe(style.padding);
-	// 	});
+			expect(styles.padding).toBe(style.padding);
+		});
 
-	// 	it('is themeable with ThemeProvider', () => {
-	// 		const rendered = render(
-	// 			<ThemeProvider theme={globalTheme}>
-	// 				<Radio native />
-	// 			</ThemeProvider>
-	// 		);
+		it('is themeable with ThemeProvider', () => {
+			const rendered = render(
+				<ThemeProvider theme={globalTheme}>
+					<Radio native />
+				</ThemeProvider>
+			);
 
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio');
-	// 		expect(RadioElement).toHaveClass(globalTheme.components.radio.className);
-	// 	});
+			const RadioElement = rendered.container.querySelector('.ss__radio');
+			expect(RadioElement).toHaveClass(globalTheme.components?.radio?.className!);
+		});
 
-	// 	it('is themeable with theme prop', () => {
-	// 		const rendered = render(<Radio native theme={propTheme} />);
+		it('is themeable with theme prop', () => {
+			const rendered = render(<Radio native theme={propTheme} />);
 
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio');
-	// 		expect(RadioElement).toHaveClass(propTheme.components.radio.className);
-	// 	});
+			const RadioElement = rendered.container.querySelector('.ss__radio');
+			expect(RadioElement).toHaveClass(propTheme.components?.radio?.className!);
+		});
 
-	// 	it('is themeable and theme prop overrides ThemeProvider', () => {
-	// 		const rendered = render(
-	// 			<ThemeProvider theme={globalTheme}>
-	// 				<Radio native theme={propTheme} />
-	// 			</ThemeProvider>
-	// 		);
+		it('is themeable and theme prop overrides ThemeProvider', () => {
+			const rendered = render(
+				<ThemeProvider theme={globalTheme}>
+					<Radio native theme={propTheme} />
+				</ThemeProvider>
+			);
 
-	// 		const RadioElement = rendered.container.querySelector('.ss__radio');
-	// 		expect(RadioElement).toHaveClass(propTheme.components.radio.className);
-	// 		expect(RadioElement).not.toHaveClass(globalTheme.components.radio.className);
-	// 	});
-	// });
+			const RadioElement = rendered.container.querySelector('.ss__radio');
+			expect(RadioElement).toHaveClass(propTheme.components?.radio?.className!);
+			expect(RadioElement).not.toHaveClass(globalTheme.components?.radio?.className!);
+		});
+	});
 });
