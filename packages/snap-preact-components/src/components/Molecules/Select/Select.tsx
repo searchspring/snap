@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -81,6 +81,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		selected,
 		separator,
 		startOpen,
+		hideIcon,
+		hideSelection,
 		stayOpenOnSelection,
 		disableStyles,
 		className,
@@ -138,7 +140,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	const [open, setOpen] = useState<boolean>(Boolean(startOpen));
 
 	// selection state
-	const [selection, setSelection] = useState<Option | undefined>(selected);
+	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
 	if (selection && clearSelection) {
 		options = [
@@ -150,7 +152,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		];
 	}
 
-	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
+	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: ListOption) => {
 		if (option != selection) {
 			onSelect && onSelect(e, option);
 		}
@@ -240,8 +242,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
-								{selection && <span className="ss__select__selection">{selection?.label}</span>}
-								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+								{selection && !hideSelection && <span className="ss__select__selection">{selection?.label}</span>}
+
+								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
 							</Button>
 						}
 					>
@@ -277,13 +280,8 @@ interface SelectSubProps {
 	icon: Partial<IconProps>;
 }
 
-export type Option = {
-	label: string;
-	value: string | number;
-	[otherOptions: string]: any;
-};
 export interface SelectProps extends ComponentProps {
-	options: Option[];
+	options: ListOption[];
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
@@ -296,9 +294,11 @@ export interface SelectProps extends ComponentProps {
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
 	native?: boolean;
-	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: Option | undefined) => void;
-	selected?: Option;
+	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: ListOption | undefined) => void;
+	selected?: ListOption;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;
 	stayOpenOnSelection?: boolean;
+	hideSelection?: boolean;
+	hideIcon?: boolean;
 }

@@ -44,6 +44,9 @@ import { RecommendationProps } from '../components/Templates/Recommendation';
 import { SearchProps } from '../components/Templates/Search';
 import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import { RadioListProps } from '../components/Molecules/RadioList';
+import { ListProps } from '../components/Molecules/List';
+import { RadioProps } from '../components/Molecules/Radio';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -65,9 +68,11 @@ export type ThemeComponents = {
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
+
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
 	checkbox?: GenericComponentProps<CheckboxProps>;
+	radio?: GenericComponentProps<RadioProps>;
 	errorHandler?: GenericComponentProps<ErrorHandlerProps>;
 	facetGridOptions?: GenericComponentProps<FacetGridOptionsProps>;
 	facetHierarchyOptions?: GenericComponentProps<FacetHierarchyOptionsProps>;
@@ -83,6 +88,9 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
+	radioList?: GenericComponentProps<RadioListProps>;
+	list?: GenericComponentProps<ListProps>;
+
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;
