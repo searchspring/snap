@@ -14,7 +14,7 @@ import { useA11y } from '../../../hooks/useA11y';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
-	radio: ({ size, color }: Partial<RadioProps>) =>
+	radio: ({ size }: Partial<RadioProps>) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -27,27 +27,19 @@ const CSS = {
 				opacity: 0.5,
 				cursor: 'none',
 			},
-
-			'& .ss__radio__empty': {
-				display: 'inline-block',
-				width: `calc(${size} - 30%)`,
-				height: `calc(${size} - 30%)`,
-			},
-
-			'& .ss__radio__icon--active circle:first-of-type': {
-				stroke: `${color || '#333'}`,
-			},
-			'& .ss__radio__icon--active circle:last-of-type': {
-				fill: `${color || '#333'}`,
-			},
-			'& svg.ss__radio__icon--inactive circle': {
-				stroke: `${color || '#333'}  !important`,
-			},
 		}),
 	native: ({ size }: Partial<RadioProps>) =>
 		css({
-			height: size,
 			width: size,
+			height: size,
+			display: 'flex',
+			justifyContent: 'center',
+
+			'.ss__radio__input': {
+				height: `calc(${size} - 30%)`,
+				width: `calc(${size} - 30%)`,
+				margin: 'auto',
+			},
 		}),
 };
 
@@ -89,7 +81,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...defined({
 				color: color,
 				disableStyles,
-				size: size && `calc(${size} - 30%)`,
+				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -104,7 +96,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...defined({
 				color: color,
 				disableStyles,
-				size: size && `calc(${size} - 30%)`,
+				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -151,14 +143,9 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			{native ? (
-				<input
-					{...styling}
-					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
-					type="radio"
-					onClick={(e) => clickFunc(e)}
-					disabled={disabled}
-					checked={checkedState}
-				/>
+				<div className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)} {...styling}>
+					<input className={classnames('ss__radio__input')} type="radio" onClick={(e) => clickFunc(e)} disabled={disabled} checked={checkedState} />
+				</div>
 			) : (
 				<span
 					{...styling}

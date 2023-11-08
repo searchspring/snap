@@ -13,7 +13,7 @@ export interface ComponentProps {
 	controller?: AbstractController;
 }
 
-export type option = {
+export type ListOption = {
 	value: string | number;
 	label?: string;
 	disabled?: boolean;

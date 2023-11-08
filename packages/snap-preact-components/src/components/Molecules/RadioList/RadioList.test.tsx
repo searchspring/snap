@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { RadioList } from './RadioList';
 import { ThemeProvider } from '../../../providers';
-import { option } from '../../../types';
+import { ListOption } from '../../../types';
 
 describe('RadioList Component', () => {
 	const options = [
@@ -36,7 +36,7 @@ describe('RadioList Component', () => {
 			label: 'Violet',
 			value: 'violet',
 		},
-	] as option[];
+	] as ListOption[];
 
 	const globalTheme = {
 		components: {
@@ -87,10 +87,6 @@ describe('RadioList Component', () => {
 
 		expect(styles.padding).toBe(style.padding);
 	});
-
-	//todo - maybe a good test for when we update the icon code
-	// it('can change the icons in the theme', async () => {
-	// });
 
 	it('it fires onSelect event on option selection', async () => {
 		const selectFn = jest.fn();
@@ -214,7 +210,7 @@ describe('RadioList Component', () => {
 
 		const rendered = render(<RadioList native={true} options={options} onSelect={selectFn} />);
 
-		const optionElements = rendered.container?.querySelectorAll('input.ss__radio-list__option__radio')[0]!;
+		const optionElements = rendered.container?.querySelectorAll('.ss__radio-list__option__radio input')[0]!;
 
 		expect(optionElements).toBeInTheDocument();
 

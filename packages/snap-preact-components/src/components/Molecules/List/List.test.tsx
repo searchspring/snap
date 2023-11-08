@@ -3,7 +3,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { List } from './List';
 import { ThemeProvider } from '../../../providers';
-import { option } from '../../../types';
+import { ListOption } from '../../../types';
 
 describe('List Component', () => {
 	const options = [
@@ -35,7 +35,7 @@ describe('List Component', () => {
 			label: 'Violet',
 			value: 'violet',
 		},
-	] as option[];
+	] as ListOption[];
 
 	const globalTheme = {
 		components: {

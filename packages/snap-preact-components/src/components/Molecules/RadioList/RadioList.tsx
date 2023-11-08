@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, option } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
@@ -15,6 +15,9 @@ const CSS = {
 		css({
 			'& .ss__radio-list__options-wrapper': {
 				border: 'none',
+				listStyle: 'none',
+				padding: '0px',
+				margin: '0px',
 			},
 
 			'.ss__radio-list__title': {
@@ -24,8 +27,12 @@ const CSS = {
 
 			'.ss__radio-list__option': {
 				cursor: 'pointer',
-				'& label': {
-					cursor: 'pointer',
+				display: 'flex',
+				alignItems: 'center',
+				padding: '5px',
+
+				'& .ss__radio-list__option__label': {
+					padding: '0px 0px 0px 5px',
 				},
 			},
 
@@ -37,21 +44,6 @@ const CSS = {
 
 			'.ss__radio-list__option--selected': {
 				fontWeight: 'bold',
-			},
-
-			ul: {
-				listStyle: 'none',
-				padding: '0px',
-				margin: '0px',
-			},
-
-			li: {
-				display: 'flex',
-				alignItems: 'center',
-				padding: '5px',
-			},
-			'li label': {
-				padding: '0px 0px 0px 5px',
 			},
 		}),
 };
@@ -93,7 +85,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	// selection state
 	const [selection, setSelection] = useState<string | number | undefined>(selected);
 
-	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: option) => {
+	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (onSelect) {
 			onSelect(e, option!);
 		}
@@ -107,7 +99,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
 				<ul className={`ss__radio-list__options-wrapper`}>
-					{options.map((option: option) => {
+					{options.map((option: ListOption) => {
 						return (
 							<li
 								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
@@ -129,10 +121,10 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 }
 
 export interface RadioListProps extends ComponentProps {
-	options: option[];
+	options: ListOption[];
 	native?: boolean;
 	hideRadios?: boolean;
-	onSelect?: (e: React.MouseEvent<HTMLElement>, option: option) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
 	disabled?: boolean;
 	selected?: string | number;

@@ -8,7 +8,7 @@ import { ThemeProvider } from '../../../providers';
 
 const defaultProps = {
 	className: '',
-	color: '',
+	color: '#333',
 	icon: '',
 	path: '',
 	size: '16px',

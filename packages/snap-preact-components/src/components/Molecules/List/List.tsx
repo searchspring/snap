@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, option } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
@@ -15,6 +15,9 @@ const CSS = {
 		css({
 			'& .ss__list__options-wrapper': {
 				border: 'none',
+				listStyle: 'none',
+				padding: '0px',
+				margin: '0px',
 				display: `${horizontal ? 'flex' : 'initial'}`,
 			},
 
@@ -25,8 +28,13 @@ const CSS = {
 
 			'.ss__list__option': {
 				cursor: 'pointer',
-				'& label': {
+				display: 'flex',
+				alignItems: 'center',
+				padding: '5px',
+
+				'& .ss__list__option__label': {
 					cursor: 'pointer',
+					padding: '0px 0px 0px 5px',
 				},
 			},
 
@@ -37,21 +45,6 @@ const CSS = {
 			},
 			'.ss__list__option--selected': {
 				fontWeight: 'bold',
-			},
-
-			ul: {
-				listStyle: 'none',
-				padding: '0px',
-				margin: '0px',
-			},
-
-			li: {
-				display: 'flex',
-				alignItems: 'center',
-				padding: '5px',
-			},
-			'li label': {
-				padding: '0px 0px 0px 5px',
 			},
 		}),
 };
@@ -98,21 +91,21 @@ export function List(properties: ListProps): JSX.Element {
 	// selection state
 	const [selection, setSelection] = useState<(string | number)[]>((selected as (string | number)[]) || []);
 
-	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: option) => {
+	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
 			if (selection.includes(option.value)) {
 				const newArray = [...selection];
 				newArray.splice(newArray.indexOf(option.value), 1);
 
 				if (onSelect) {
-					onSelect(e, option!, newArray);
+					onSelect(e, option, newArray);
 				}
 				setSelection(newArray);
 			} else {
 				const newArray = [...selection, option.value];
 
 				if (onSelect) {
-					onSelect(e, option!, newArray);
+					onSelect(e, option, newArray);
 				}
 				setSelection(newArray);
 			}
@@ -127,7 +120,7 @@ export function List(properties: ListProps): JSX.Element {
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
 				<ul className={`ss__list__options-wrapper`}>
-					{options.map((option: option) => {
+					{options.map((option: ListOption) => {
 						return (
 							<li
 								className={`ss__list__option ${selection && selection.indexOf(option.value.toString()) > -1 ? 'ss__list__option--selected' : ''} ${
@@ -149,10 +142,10 @@ export function List(properties: ListProps): JSX.Element {
 }
 
 export interface ListProps extends ComponentProps {
-	options: option[];
+	options: ListOption[];
 	multiSelect?: boolean;
 	hideCheckbox?: boolean;
-	onSelect?: (e: React.MouseEvent<HTMLElement>, option: option, optionList?: (string | number)[]) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, optionList: (string | number)[]) => void;
 	titleText?: string;
 	disabled?: boolean;
 	horizontal?: boolean;

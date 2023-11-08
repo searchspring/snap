@@ -125,8 +125,8 @@ describe('Radio Component', () => {
 
 			const styles = getComputedStyle(svg);
 
-			expect(styles.width).toBe(`calc(${size} - 30%)`);
-			expect(styles.height).toBe(`calc(${size} - 30%)`);
+			expect(styles.width).toBe(`${size}`);
+			expect(styles.height).toBe(`${size}`);
 			expect(styles.fill).toBe(color);
 			expect(path).toHaveAttribute('d', iconPaths[unCheckedIcon]);
 
@@ -134,8 +134,8 @@ describe('Radio Component', () => {
 
 			await waitFor(() => {
 				expect(path).toHaveAttribute('d', iconPaths[checkedIcon]);
-				expect(styles.width).toBe(`calc(${size} - 30%)`);
-				expect(styles.height).toBe(`calc(${size} - 30%)`);
+				expect(styles.width).toBe(`${size}`);
+				expect(styles.height).toBe(`${size}`);
 				expect(styles.fill).toBe(color);
 			});
 		});
@@ -203,7 +203,6 @@ describe('Radio Component', () => {
 
 			expect(rendered.container).toBeInTheDocument();
 			expect(RadioElement).toBeInTheDocument();
-			expect(RadioElement).toBe(inputElement);
 			expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
 			expect(inputElement).not.toHaveAttribute('disabled');
 		});
@@ -239,7 +238,7 @@ describe('Radio Component', () => {
 
 			const rendered = render(<Radio native onClick={clickFn} />);
 
-			const RadioElement = rendered.container.querySelector('.ss__radio')!;
+			const RadioElement = rendered.container.querySelector('.ss__radio__input')!;
 
 			userEvent.click(RadioElement);
 			expect(clickFn).toHaveBeenCalled();
@@ -249,10 +248,11 @@ describe('Radio Component', () => {
 			const clickFn = jest.fn();
 			const rendered = render(<Radio native disabled />);
 			const RadioElement = rendered.container.querySelector('.ss__radio')!;
+			const radioInput = rendered.container.querySelector('.ss__radio__input');
 
 			expect(RadioElement.className.match(/disabled/)).toBeTruthy();
-			expect(RadioElement).toHaveAttribute('disabled');
-			userEvent.click(RadioElement);
+			expect(radioInput).toHaveAttribute('disabled');
+			userEvent.click(radioInput!);
 			expect(clickFn).not.toHaveBeenCalled();
 		});
 
