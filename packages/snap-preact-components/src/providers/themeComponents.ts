@@ -45,6 +45,7 @@ import { SearchProps } from '../components/Templates/Search';
 import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import { FacetToggleProps } from '../components/Molecules/FacetToggle';
+import { ToggleProps } from '../components/Atoms/Toggle';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -66,7 +67,7 @@ export type ThemeComponents = {
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
-	facetToggle?: GenericComponentProps<FacetToggleProps>;
+	toggle?: GenericComponentProps<ToggleProps>;
 
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
@@ -86,6 +87,8 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
+	facetToggle?: GenericComponentProps<FacetToggleProps>;
+
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;

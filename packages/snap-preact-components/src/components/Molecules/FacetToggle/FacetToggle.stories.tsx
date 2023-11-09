@@ -1,16 +1,14 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
-
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { FacetToggle, FacetToggleProps } from './FacetToggle';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import Readme from '../FacetToggle/readme.md';
+import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Atoms/FacetToggle`,
+	title: `Molecules/FacetToggle`,
 	component: FacetToggle,
 	parameters: {
 		docs: {
@@ -32,10 +30,10 @@ export default {
 	argTypes: {
 		value: {
 			description: 'Facet.value store reference',
-			type: { required: false },
+			type: { required: true },
 			table: {
 				type: {
-					summary: 'Single facet value store array',
+					summary: 'Single facet.value store reference',
 				},
 			},
 			control: { type: 'none' },
@@ -46,46 +44,6 @@ export default {
 				type: {
 					summary: 'string',
 				},
-			},
-			control: { type: 'text' },
-		},
-		round: {
-			description: 'round toggle switch',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		activeColor: {
-			description: 'Change the background color of the toggle when active',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: '#2196F3' },
-			},
-			control: { type: 'text' },
-		},
-		inactiveColor: {
-			description: 'Change the background color of the toggle when in active',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: '#ccc' },
-			},
-			control: { type: 'text' },
-		},
-		buttonColor: {
-			description: 'Change the background color of the toggle button',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'white' },
 			},
 			control: { type: 'text' },
 		},
@@ -105,14 +63,10 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'FacetFacetToggle', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacetToggle = observer(({ args, controller }: { args: FacetToggleProps; controller: SearchController }) => {
+export const Default = (args: FacetToggleProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'on_sale').pop();
 
-	return <FacetToggle {...args} label={sizeFacet.label} value={sizeFacet.values[0]} />;
-});
-
-export const Default = (args: FacetToggleProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableFacetToggle args={args} controller={controller} />;
+	return <FacetToggle label={sizeFacet.label} {...args} value={sizeFacet.values[0]} />;
 };
 Default.args = {};
 

@@ -24,52 +24,25 @@ describe('FacetToggle Component', () => {
 		expect(element).toBeInTheDocument();
 	});
 
-	it('renders label and count', () => {
-		const rendered = render(<FacetToggle value={value} label={value.label} />);
+	it('renders custom label', () => {
+		const _label = 'custom label';
+		const rendered = render(<FacetToggle value={value} label={_label} />);
 
 		const element = rendered.container.querySelector('.ss__facet-toggle');
-		const label = rendered.container.querySelector('.ss__facet-toggle__label');
+		const label = rendered.container.querySelector('.ss__toggle__label');
+
+		expect(element).toBeInTheDocument();
+		expect(label).toHaveTextContent(_label);
+	});
+
+	it('renders value label by default', () => {
+		const rendered = render(<FacetToggle value={value} />);
+
+		const element = rendered.container.querySelector('.ss__facet-toggle');
+		const label = rendered.container.querySelector('.ss__toggle__label');
 
 		expect(element).toBeInTheDocument();
 		expect(label).toHaveTextContent(value.label);
-	});
-
-	it('renders with round prop', () => {
-		const rendered = render(<FacetToggle value={value} round={true} label={value.label} />);
-
-		const element = rendered.container.querySelector('.ss__facet-toggle');
-		const slider = rendered.container.querySelector('.ss__facet-toggle__slider');
-
-		expect(element).toBeInTheDocument();
-		expect(slider).toBeInTheDocument();
-		expect(slider).toHaveClass('ss__facet-toggle__slider--round');
-		let styles = getComputedStyle(slider!);
-		expect(styles.borderRadius).toBe('34px');
-	});
-
-	it('can change the colors', async () => {
-		const activeColor = 'orange';
-		const inactiveColor = 'red';
-		const buttonColor = 'blue';
-		const rendered = render(
-			<FacetToggle value={value} activeColor={activeColor} inactiveColor={inactiveColor} buttonColor={buttonColor} label={value.label} />
-		);
-
-		const element = rendered.container.querySelector('.ss__facet-toggle');
-		const slider = rendered.container.querySelector('.ss__facet-toggle__slider');
-		const toggle = rendered.container.querySelector('.ss__facet-toggle__switch');
-
-		expect(element).toBeInTheDocument();
-		expect(slider).toBeInTheDocument();
-		let styles = getComputedStyle(slider!);
-		expect(styles.backgroundColor).toBe(inactiveColor);
-
-		userEvent.click(toggle!);
-
-		await waitFor(() => {
-			let styles = getComputedStyle(slider!);
-			expect(styles.backgroundColor).toBe(activeColor);
-		});
 	});
 
 	it('can disable styling', () => {
@@ -88,14 +61,17 @@ describe('FacetToggle Component', () => {
 		expect(element).toHaveClass(className);
 	});
 
-	it('can set custom onClick func', () => {
+	it('can set custom onClick func', async () => {
 		const onClickFunc = jest.fn();
 		const rendered = render(<FacetToggle value={value} onClick={onClickFunc} />);
 
-		const element = rendered.container.querySelector('.ss__facet-toggle__switch')!;
+		const element = rendered.container.querySelector('.ss__toggle__switch')!;
 		expect(element).toBeInTheDocument();
 		userEvent.click(element);
-		expect(onClickFunc).toHaveBeenCalled();
+
+		await waitFor(() => {
+			expect(onClickFunc).toHaveBeenCalled();
+		});
 	});
 
 	it('calls urlManager onclick func onclick', async () => {
@@ -110,7 +86,7 @@ describe('FacetToggle Component', () => {
 		const rendered = render(<FacetToggle value={value} />);
 
 		const element = rendered.container.querySelector('.ss__facet-toggle');
-		const toggle = rendered.container.querySelector('.ss__facet-toggle__switch');
+		const toggle = rendered.container.querySelector('.ss__toggle__switch');
 
 		expect(element).toBeInTheDocument();
 
