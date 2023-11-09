@@ -82,6 +82,39 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideCount: {
+			description: 'Hide facet option count',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCheckbox: {
+			description: 'Hide facet option checkbox',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		layout: {
+			description: 'facet option layout',
+			defaultValue: 'grid',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: ['grid', 'list'],
+			},
+		},
 		hideIcon: {
 			description: 'Hide facet option icon',
 			table: {
@@ -148,6 +181,25 @@ export const Default = (args: FacetPaletteOptionsProps, { loaded: { controller }
 };
 
 Default.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+
+export const List = (args: FacetPaletteOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <ObservableFacetPaletteOptions args={args} controller={controller} />;
+};
+
+List.args = {
+	layout: 'list',
+	hideCount: false,
+	hideCheckbox: false,
+};
+
+List.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {

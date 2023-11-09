@@ -63,12 +63,6 @@ export class FinderController extends AbstractController {
 			finder.controller.store.loading = false;
 		});
 
-		this.eventManager.on('beforeFind', async (finder: { controller: FinderController }, next: Next): Promise<void | boolean> => {
-			await next();
-
-			window.location.href = this.urlManager.href;
-		});
-
 		// attach config plugins and event middleware
 		this.use(this.config);
 
@@ -115,6 +109,9 @@ export class FinderController extends AbstractController {
 			await this.eventManager.fire('beforeFind', {
 				controller: this,
 			});
+
+			// redirect to configured URL after middleware completes
+			window.location.href = this.urlManager.href;
 		} catch (err: any) {
 			if (err?.message == 'cancelled') {
 				this.log.warn(`'beforeFind' middleware cancelled`);

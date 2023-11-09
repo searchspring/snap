@@ -13,6 +13,13 @@ export interface ComponentProps {
 	controller?: AbstractController;
 }
 
+export type ListOption = {
+	value: string | number;
+	label?: string;
+	disabled?: boolean;
+	[otherOptions: string]: any;
+};
+
 export type ResultComponent = React.FunctionComponent<{
 	controller: AbstractController;
 	result: Product;

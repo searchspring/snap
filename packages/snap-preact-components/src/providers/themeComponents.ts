@@ -46,6 +46,9 @@ import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import { FacetToggleProps } from '../components/Molecules/FacetToggle';
 import { ToggleProps } from '../components/Atoms/Toggle';
+import { RadioListProps } from '../components/Molecules/RadioList';
+import { ListProps } from '../components/Molecules/List';
+import { RadioProps } from '../components/Molecules/Radio';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -72,6 +75,7 @@ export type ThemeComponents = {
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
 	checkbox?: GenericComponentProps<CheckboxProps>;
+	radio?: GenericComponentProps<RadioProps>;
 	errorHandler?: GenericComponentProps<ErrorHandlerProps>;
 	facetGridOptions?: GenericComponentProps<FacetGridOptionsProps>;
 	facetHierarchyOptions?: GenericComponentProps<FacetHierarchyOptionsProps>;
@@ -88,6 +92,8 @@ export type ThemeComponents = {
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
 	facetToggle?: GenericComponentProps<FacetToggleProps>;
+	radioList?: GenericComponentProps<RadioListProps>;
+	list?: GenericComponentProps<ListProps>;
 
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;

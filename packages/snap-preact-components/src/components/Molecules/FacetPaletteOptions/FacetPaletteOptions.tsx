@@ -13,6 +13,7 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
+import { Checkbox, CheckboxProps } from '../Checkbox';
 
 const CSS = {
 	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
@@ -22,6 +23,12 @@ const CSS = {
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
 
+			'& .ss__facet-palette-options__option--list': {
+				display: 'flex',
+				flexDirection: 'row',
+				paddingLeft: '6px',
+			},
+
 			'& .ss__facet-palette-options__option': {
 				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 				marginRight: gapSize,
@@ -30,29 +37,12 @@ const CSS = {
 					marginRight: '0',
 				},
 
-				'&:hover': {
-					cursor: 'pointer',
-					'.ss__facet-palette-options__option__wrapper': {
-						borderColor: '#EBEBEB',
-					},
-					'& .ss__facet-palette-options__option__palette': {
-						'& .ss__facet-palette-options__icon': {
-							opacity: 1,
-						},
-					},
-				},
 				'& .ss__facet-palette-options__option__wrapper': {
 					border: `2px solid transparent`,
 					borderRadius: '100%',
 					padding: '2px',
 				},
-				'&.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.colors?.primary || '#333',
-						padding: '0px',
-						borderWidth: '4px',
-					},
-				},
+
 				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
 					border: '1px solid #EBEBEB',
@@ -88,6 +78,77 @@ const CSS = {
 					width: 'initial',
 				},
 			},
+
+			'&.ss__facet-palette-options--list': {
+				'& .ss__facet-palette-options__option__wrapper': {
+					width: '16px',
+					height: 'fit-content',
+				},
+
+				'.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__value': {
+						fontWeight: 'bold',
+					},
+				},
+
+				'& .ss__facet-palette-options__option--list': {
+					alignItems: 'center',
+					marginTop: `calc(${gapSize} / 2)`,
+					marginBottom: `calc(${gapSize} / 2)`,
+				},
+
+				'& .ss__facet-palette-options__option__value__count': {
+					marginLeft: '5px',
+				},
+
+				'& .ss__facet-palette-options__checkbox': {
+					marginRight: '5px',
+				},
+
+				display: 'flex',
+				flexDirection: 'column',
+			},
+
+			'&.ss__facet-palette-options--grid': {
+				'& .ss__facet-palette-options__checkbox': {
+					display: 'flex',
+					textAlign: 'center',
+					overflow: 'hidden',
+					margin: 'auto',
+					marginBottom: '5px',
+				},
+
+				'.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__wrapper': {
+						borderColor: theme?.colors?.primary || '#333' + ' !important',
+						padding: '0px',
+						borderWidth: '4px',
+					},
+				},
+
+				'& .ss__facet-palette-options__option': {
+					'&:hover': {
+						cursor: 'pointer',
+						'.ss__facet-palette-options__option__wrapper': {
+							borderColor: '#EBEBEB',
+						},
+						'& .ss__facet-palette-options__option__palette': {
+							'& .ss__facet-palette-options__icon': {
+								opacity: 1,
+							},
+						},
+					},
+				},
+			},
+
+			'& .ss__facet-palette-options__option__value__count': {
+				fontSize: '0.8em',
+				display: 'block',
+				textAlign: 'center',
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+				whiteSpace: 'nowrap',
+			},
 		}),
 };
 
@@ -95,13 +156,36 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
-		gapSize: '8px',
+		layout: 'grid',
+		gapSize: properties.layout == 'list' ? '2px' : '8px',
+		hideCount: true,
+		hideCheckbox: true,
+		// global theme
+		...globalTheme?.components?.facetPaletteOptions,
+		// props
+		...properties,
+		...properties.theme?.components?.facetPaletteOptions,
 	};
 
 	const props = mergeProps('facetPaletteOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideLabel, colorMapping, hideIcon, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } =
-		props;
+	const {
+		values,
+		hideLabel,
+		layout,
+		hideCount,
+		hideCheckbox,
+		colorMapping,
+		hideIcon,
+		onClick,
+		previewOnFocus,
+		valueProps,
+		facet,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+	} = props;
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -115,6 +199,18 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 				icon: 'close-thin',
 				color: 'white',
 				size: '40%',
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		checkbox: {
+			// default props
+			className: 'ss__facet-palette-options__checkbox',
+			// global theme
+			...globalTheme?.components?.checkbox,
+			// inherited props
+			...defined({
+				disableStyles,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -136,10 +232,14 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-palette-options', className)}>
+			<div {...styling} className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className)}>
 				{(facetValues as FacetValue[]).map((value) => (
 					<a
-						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+						className={classnames(
+							'ss__facet-palette-options__option',
+							{ 'ss__facet-palette-options__option--filtered': value.filtered },
+							`ss__facet-palette-options__option--${layout?.toLowerCase()}`
+						)}
 						aria-label={
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
@@ -155,6 +255,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 						}}
 						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 					>
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 						<div className="ss__facet-palette-options__option__wrapper">
 							<div
 								className={classnames(
@@ -168,7 +269,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 											: value.value,
 								}}
 							>
-								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
+								{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
 							</div>
 						</div>
 						{!hideLabel && (
@@ -176,6 +277,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								{colorMapping && colorMapping[value.label] && colorMapping[value.label].label ? colorMapping[value.label].label : value.label}
 							</span>
 						)}
+						{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}
 					</a>
 				))}
 			</div>
@@ -195,6 +297,9 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	layout?: 'list' | 'grid';
+	hideCount?: boolean;
+	hideCheckbox?: boolean;
 	colorMapping?: {
 		[name: string]: {
 			label?: string;
@@ -205,4 +310,5 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 
 interface FacetPaletteOptionsSubProps {
 	icon: IconProps;
+	checkbox: CheckboxProps;
 }
