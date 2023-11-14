@@ -1,10 +1,12 @@
+import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
-import { getDisplaySettings } from '@searchspring/snap-preact-components';
 
 import { Snap } from '../Snap';
-import { themeMap } from './themes';
-import { componentMap } from './components';
+import { componentMap, TemplateSelect } from './components';
 
+import { AppMode, DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
+import { TemplateStore } from './Stores/TemplateStore';
+import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
@@ -13,10 +15,12 @@ import type { TemplateThemeConfig } from './themes';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 
+export const THEME_EDIT_COOKIE = 'ssThemeEdit';
+
 // // TODO: tabbing, result layout toggling, finders
 type SearchTemplateConfig = {
 	selector: string;
-	theme?: TemplateThemeConfig;
+	theme?: string;
 	template: 'Search';
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
@@ -24,7 +28,7 @@ type SearchTemplateConfig = {
 
 type AutocompleteTemplateConfig = {
 	selector: string;
-	theme?: TemplateThemeConfig;
+	theme?: string;
 	template: 'Autocomplete';
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
@@ -32,7 +36,7 @@ type AutocompleteTemplateConfig = {
 
 type RecommendationTemplateConfig = {
 	component: string;
-	theme?: TemplateThemeConfig;
+	theme?: string;
 	template: 'Recommendation';
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
@@ -41,7 +45,10 @@ type RecommendationTemplateConfig = {
 export type SnapTemplateConfig = {
 	config: {
 		siteId?: string;
-		theme: TemplateThemeConfig;
+		themes?: {
+			global: TemplateThemeConfig;
+			[themeName: string]: TemplateThemeConfig;
+		};
 		currency: string;
 		language: string;
 	};
@@ -82,8 +89,58 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 
 export class SnapTemplate extends Snap {
 	constructor(config: SnapTemplateConfig) {
-		const snapConfig = createSnapConfig(config);
+		const templateStore = new TemplateStore(config);
+		window.searchspring = window.searchspring || {};
+		window.searchspring.templateStore = templateStore;
+
+		const snapConfig = createSnapConfig(config, templateStore);
+		templateStore.importInitialThemes(snapConfig);
 		super(snapConfig);
+
+		const urlParams = url(window.location.href);
+		const themeEdit = urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE);
+
+		setTimeout(() => {
+			// ?dev=1&theme=1
+			if (this.mode === AppMode.development && themeEdit) {
+				new DomTargeter(
+					[
+						{
+							selector: 'body',
+							inject: {
+								action: 'append',
+								element: () => {
+									const themeEditContainer = document.createElement('div');
+									themeEditContainer.id = 'searchspring-template-editor';
+									return themeEditContainer;
+								},
+							},
+						},
+					],
+					async (target: Target, elem: Element) => {
+						const TemplateEditor = (await import('./components/TemplateEditor')).TemplateEditor;
+						render(
+							<TemplateEditor
+								templateStore={templateStore}
+								onRemoveClick={() => {
+									cookies.unset(THEME_EDIT_COOKIE);
+									const urlState = url(window.location.href);
+									delete urlState?.params.query['theme'];
+
+									const newUrl = urlState?.url();
+									if (newUrl && newUrl != window.location.href) {
+										window.location.href = newUrl;
+									} else {
+										window.location.reload();
+									}
+								}}
+							/>,
+							elem
+						);
+					}
+				);
+			}
+		});
 	}
 }
 
@@ -97,93 +154,76 @@ export function mapBreakpoints<ControllerConfigSettings>(
 	}, {});
 }
 
-export const createSearchTargeters = (templateConfig: SnapTemplateConfig): ExtendedTarget[] => {
+export const createSearchTargeters = (templateConfig: SnapTemplateConfig, templateStore: TemplateStore): ExtendedTarget[] => {
 	const templates = templateConfig.search?.templates || [];
 	return templates.map((template) => {
+		const targetId = templateStore.addTemplate('search', template);
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
-			theme: {
-				name: template.theme?.name || templateConfig.config.theme.name,
-				import: themeMap[(template.theme?.name || templateConfig.config.theme.name) as keyof typeof themeMap],
-			},
 			hideTarget: true,
-			component: componentMap.search[template.template],
+			component: TemplateSelect,
+			props: { componentMap, type: 'search', templateStore, targetId, themeName: template.theme },
 		};
 
 		// if they are not undefined, add them
 		if (template.resultComponent) {
-			targeter.props = { resultComponent: template.resultComponent };
+			targeter.props!.resultComponent = template.resultComponent;
 		} else if (template.resultLayout) {
-			targeter.props = { resultLayout: template.resultLayout };
+			targeter.props!.resultLayout = template.resultLayout;
 		}
-
-		const variables = template.theme?.variables || templateConfig.config.theme.variables;
-		if (variables && targeter.theme) targeter.theme.variables = variables;
-		const overrides = template.theme?.overrides || templateConfig.config.theme.overrides;
-		if (overrides && targeter.theme) targeter.theme.overrides = overrides;
 
 		return targeter;
 	});
 };
 
-export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig): ExtendedTarget[] {
+export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig, templateStore: TemplateStore): ExtendedTarget[] {
 	const templates = templateConfig.autocomplete?.templates || [];
 	return templates.map((template) => {
+		const targetId = templateStore.addTemplate('autocomplete', template);
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
-			theme: {
-				name: template.theme?.name || templateConfig.config.theme.name,
-				import: themeMap[(template.theme?.name || templateConfig.config.theme.name) as keyof typeof themeMap],
-			},
-			component: componentMap.autocomplete[template.template],
+			component: TemplateSelect,
+			props: { componentMap, type: 'autocomplete', templateStore, targetId, themeName: template.theme },
 			hideTarget: true,
 		};
 
 		// if they are not undefined, add them
 		if (template.resultComponent) {
-			targeter.props = { resultComponent: template.resultComponent };
+			targeter.props!.resultComponent = template.resultComponent;
 		} else if (template.resultLayout) {
-			targeter.props = { resultLayout: template.resultLayout };
+			targeter.props!.resultLayout = template.resultLayout;
 		}
-		const variables = template.theme?.variables || templateConfig.config.theme.variables;
-		if (variables && targeter.theme) targeter.theme.variables = variables;
-		const overrides = template.theme?.overrides || templateConfig.config.theme.overrides;
-		if (overrides && targeter.theme) targeter.theme.overrides = overrides;
 
 		return targeter;
 	});
 }
 
-export function createRecommendationComponentMapping(templateConfig: SnapTemplateConfig): { [name: string]: RecommendationComponentObject } {
+export function createRecommendationComponentMapping(
+	templateConfig: SnapTemplateConfig,
+	templateStore: TemplateStore
+): { [name: string]: RecommendationComponentObject } {
 	const templates = templateConfig.recommendation?.templates;
 	return templates
 		? templates.reduce((mapping, template) => {
+				const targetId = templateStore.addTemplate('recommendation', template);
 				mapping[template.component] = {
-					theme: {
-						name: template.theme?.name || templateConfig.config.theme.name,
-						import: themeMap[(template.theme?.name || templateConfig.config.theme.name) as keyof typeof themeMap],
-					},
-					component: componentMap.recommendation[template.template],
+					component: TemplateSelect,
+					props: { componentMap, type: 'recommendation', templateStore, targetId, themeName: template.theme },
 				};
 
 				// if they are not undefined, add them
 				if (template.resultComponent) {
-					mapping[template.component].props = { resultComponent: template.resultComponent };
+					mapping[template.component].props!.resultComponent = template.resultComponent;
 				} else if (template.resultLayout) {
-					mapping[template.component].props = { resultLayout: template.resultLayout };
+					mapping[template.component].props!.resultLayout = template.resultLayout;
 				}
-				const theme = mapping[template.component].theme;
-				const variables = template.theme?.variables || templateConfig.config.theme.variables;
-				if (variables && theme) theme.variables = variables;
-				const overrides = template.theme?.overrides || templateConfig.config.theme.overrides;
-				if (overrides && theme) theme.overrides = overrides;
 
 				return mapping;
 		  }, {} as { [name: string]: RecommendationComponentObject })
 		: {};
 }
 
-export function createSnapConfig(templateConfig: SnapTemplateConfig): SnapConfig {
+export function createSnapConfig(templateConfig: SnapTemplateConfig, templateStore: TemplateStore): SnapConfig {
 	const snapConfig: SnapConfig = {
 		features: templateConfig.features || DEFAULT_FEATURES,
 		client: {
@@ -208,15 +248,15 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig): SnapConfig
 				plugins: [],
 				settings: templateConfig.search.settings || {},
 			},
-			targeters: createSearchTargeters(templateConfig),
+			targeters: createSearchTargeters(templateConfig, templateStore),
 		};
 
 		// merge the responsive settings if there are any
-		if (templateConfig.config.theme.variables?.breakpoints && templateConfig.search.breakpointSettings) {
-			const mappedBreakpoints = mapBreakpoints(templateConfig.config.theme.variables.breakpoints, templateConfig.search.breakpointSettings || []);
-			const breakpointSettings = getDisplaySettings(mappedBreakpoints) as SearchStoreConfigSettings;
-			searchControllerConfig.config.settings = deepmerge(searchControllerConfig.config.settings, breakpointSettings);
-		}
+		// if (templateConfig.config.theme.variables?.breakpoints && templateConfig.search.breakpointSettings) {
+		// 	const mappedBreakpoints = mapBreakpoints(templateConfig.config.theme.variables.breakpoints, templateConfig.search.breakpointSettings || []);
+		// 	const breakpointSettings = getDisplaySettings(mappedBreakpoints) as SearchStoreConfigSettings;
+		// 	searchControllerConfig.config.settings = deepmerge(searchControllerConfig.config.settings, breakpointSettings);
+		// }
 
 		snapConfig.controllers.search = [searchControllerConfig];
 	}
@@ -235,18 +275,18 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig): SnapConfig
 				selector: templateConfig.autocomplete.inputSelector,
 				settings: autocompleteControllerSettings,
 			},
-			targeters: createAutocompleteTargeters(templateConfig),
+			targeters: createAutocompleteTargeters(templateConfig, templateStore),
 		};
 
 		// merge the responsive settings if there are any
-		if (templateConfig.config.theme.variables?.breakpoints && templateConfig.autocomplete.breakpointSettings) {
-			const mappedBreakpoints = mapBreakpoints(
-				templateConfig.config.theme.variables.breakpoints,
-				templateConfig.autocomplete.breakpointSettings || []
-			);
-			const breakpointSettings = getDisplaySettings(mappedBreakpoints) as AutocompleteStoreConfigSettings;
-			autocompleteControllerConfig.config.settings = deepmerge(autocompleteControllerConfig.config.settings, breakpointSettings);
-		}
+		// if (templateConfig.config.theme.variables?.breakpoints && templateConfig.autocomplete.breakpointSettings) {
+		// 	const mappedBreakpoints = mapBreakpoints(
+		// 		templateConfig.config.theme.variables.breakpoints,
+		// 		templateConfig.autocomplete.breakpointSettings || []
+		// 	);
+		// 	const breakpointSettings = getDisplaySettings(mappedBreakpoints) as AutocompleteStoreConfigSettings;
+		// 	autocompleteControllerConfig.config.settings = deepmerge(autocompleteControllerConfig.config.settings, breakpointSettings);
+		// }
 
 		snapConfig.controllers.autocomplete = [autocompleteControllerConfig];
 	}
@@ -254,19 +294,19 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig): SnapConfig
 	/* RECOMMENDATION INSTANTIATOR */
 	if (templateConfig.recommendation && snapConfig.instantiators) {
 		const recommendationInstantiatorConfig = {
-			components: createRecommendationComponentMapping(templateConfig),
+			components: createRecommendationComponentMapping(templateConfig, templateStore),
 			config: templateConfig.recommendation?.settings || {},
 		};
 
 		// merge the responsive settings if there are any
-		if (templateConfig.config.theme.variables?.breakpoints && templateConfig.recommendation.breakpointSettings) {
-			const mappedBreakpoints = mapBreakpoints(
-				templateConfig.config.theme.variables.breakpoints,
-				templateConfig.recommendation.breakpointSettings || []
-			);
-			const breakpointSettings = getDisplaySettings(mappedBreakpoints);
-			recommendationInstantiatorConfig.config = deepmerge(recommendationInstantiatorConfig.config, breakpointSettings);
-		}
+		// if (templateConfig.config.theme.variables?.breakpoints && templateConfig.recommendation.breakpointSettings) {
+		// 	const mappedBreakpoints = mapBreakpoints(
+		// 		templateConfig.config.theme.variables.breakpoints,
+		// 		templateConfig.recommendation.breakpointSettings || []
+		// 	);
+		// 	const breakpointSettings = getDisplaySettings(mappedBreakpoints);
+		// 	recommendationInstantiatorConfig.config = deepmerge(recommendationInstantiatorConfig.config, breakpointSettings);
+		// }
 
 		snapConfig.instantiators.recommendation = recommendationInstantiatorConfig;
 	}

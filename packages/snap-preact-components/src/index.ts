@@ -39,6 +39,7 @@ export * from './components/Molecules/SortBy';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
+export * from './components/Organisms/TemplateEditor';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
@@ -54,6 +55,7 @@ export * from './components/Layouts/ResultLayout';
 export * from './components/Templates/Autocomplete';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/Search';
+export * from './components/Templates/TemplateSelect';
 
 // TYPES
 export * from './types';

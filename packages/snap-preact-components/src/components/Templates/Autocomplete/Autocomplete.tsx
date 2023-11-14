@@ -182,6 +182,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
 
+	// TODO: fix this / create task to fix
+	props = {
+		...props,
+		theme: properties.theme,
+	};
+
 	//passed in or default breakpoints result props
 	props.breakpoints = props.breakpoints || {
 		0: {
