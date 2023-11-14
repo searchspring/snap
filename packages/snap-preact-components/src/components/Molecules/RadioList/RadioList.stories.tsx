@@ -134,7 +134,7 @@ Native.args = {
 } as RadioListProps;
 
 export const PerPage = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioList {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSize} />;
+	return <RadioList {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0]} />;
 };
 
 PerPage.loaders = [
@@ -151,7 +151,7 @@ PerPage.args = {
 } as RadioListProps;
 
 export const SortBy = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioList {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
+	return <RadioList {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
 };
 
 SortBy.loaders = [

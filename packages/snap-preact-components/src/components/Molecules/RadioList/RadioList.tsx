@@ -5,10 +5,11 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption, layoutOptionValue } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
+import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
 	radioList: ({}: Partial<RadioListProps>) =>
@@ -31,7 +32,8 @@ const CSS = {
 				alignItems: 'center',
 				padding: '5px',
 
-				'& .ss__radio-list__option__label': {
+				'& .ss__radio-list__option__label, .ss__radio-list__option__icon': {
+					cursor: 'pointer',
 					padding: '0px 0px 0px 5px',
 				},
 			},
@@ -69,6 +71,15 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		Icon: {
+			className: 'ss__radio-list__option__icon',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 	};
 
 	const styling: { css?: StylingCSS } = {};
@@ -83,14 +94,14 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	}
 
 	// selection state
-	const [selection, setSelection] = useState<string | number | undefined>(selected);
+	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (onSelect) {
 			onSelect(e, option!);
 		}
 
-		setSelection(option?.value);
+		setSelection(option);
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -99,16 +110,27 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
 				<ul className={`ss__radio-list__options-wrapper`}>
-					{options.map((option: ListOption) => {
+					{options.map((option) => {
 						return (
 							<li
-								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
+								className={`ss__radio-list__option ${selection?.value == option.value ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
+								title={option.label}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection} />}
-								<label className="ss__radio-list__option__label">{option.label || option.value}</label>
+								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection?.value} />}
+
+								{(option.value as layoutOptionValue)?.icon ? (
+									<Icon
+										{...subProps.Icon}
+										{...(typeof (option.value as layoutOptionValue).icon == 'string'
+											? { icon: (option.value as layoutOptionValue).icon as string }
+											: ((option.value as layoutOptionValue)?.icon as Partial<IconProps>))}
+									/>
+								) : (
+									<label className="ss__radio-list__option__label">{option.label || option.value}</label>
+								)}
 							</li>
 						);
 					})}
@@ -127,9 +149,10 @@ export interface RadioListProps extends ComponentProps {
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
 	disabled?: boolean;
-	selected?: string | number;
+	selected?: ListOption;
 }
 
 interface RadioListSubProps {
 	Radio: Partial<RadioProps>;
+	Icon: Partial<IconProps>;
 }

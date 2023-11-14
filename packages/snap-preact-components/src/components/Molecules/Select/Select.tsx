@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption, layoutOptionValue } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -200,7 +200,10 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
 								const selectedOption = options
 									.filter((option, index) => {
-										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
+										return (
+											option.label == selectedOptionElement.text &&
+											(option.value == selectedOptionElement.value || option.label == selectedOptionElement.value || option.value == index)
+										);
 									})
 									.pop();
 								!disabled && makeSelection(e, selectedOption);
@@ -212,7 +215,11 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								</option>
 							)}
 							{options.map((option, index) => (
-								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
+								<option
+									className="ss__select__select__option"
+									selected={selection?.value === option.value || selection?.label == option.label}
+									value={(typeof option.value == 'number' || typeof option.value == 'string' ? option.value : option.label) ?? index}
+								>
 									{option.label}
 								</option>
 							))}
@@ -242,7 +249,19 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
-								{selection && !hideSelection && <span className="ss__select__selection">{selection?.label}</span>}
+
+								{selection &&
+									!hideSelection &&
+									((selection.value as layoutOptionValue)?.icon ? (
+										<Icon
+											{...subProps.icon}
+											{...(typeof (selection.value as layoutOptionValue).icon == 'string'
+												? { icon: (selection.value as layoutOptionValue).icon as string }
+												: ((selection.value as layoutOptionValue)?.icon as Partial<IconProps>))}
+										/>
+									) : (
+										<span className="ss__select__selection">{selection?.label}</span>
+									))}
 
 								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
 							</Button>
@@ -253,15 +272,26 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								<li
 									ref={(e) => useA11y(e)}
 									role={'link'}
+									aria-disabled={option.di}
 									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
 										option.label
 									}`}
+									title={option.label}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
 								>
-									<span>{option.label}</span>
+									{(option.value as layoutOptionValue)?.icon ? (
+										<Icon
+											{...subProps.icon}
+											{...(typeof (option.value as layoutOptionValue).icon == 'string'
+												? { icon: (option.value as layoutOptionValue).icon as string }
+												: ((option.value as layoutOptionValue)?.icon as Partial<IconProps>))}
+										/>
+									) : (
+										<span>{option.label}</span>
+									)}
 								</li>
 							))}
 						</ul>

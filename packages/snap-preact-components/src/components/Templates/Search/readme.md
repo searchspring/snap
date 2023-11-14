@@ -81,3 +81,71 @@ or
 ```jsx
 <Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```
+
+### hideLayoutSelector
+The `hideLayoutSelector` prop specifies if the layoutSelector component should be rendered. 
+
+```jsx
+<Search controller={controller} hideLayoutSelector={true} />
+```
+
+### layoutConfig
+The `layoutConfig` prop specifies the configuration for the layoutSelector.  
+
+```jsx
+
+const layoutConfig = {
+    default: {
+        label: "5 wide",
+        value: {
+            columns:5,
+        }
+    },
+    options: [
+        {
+            label: "1 wide",
+            value: {
+                
+                icon: "square",
+                columns:1,
+            }
+        },
+        {
+            label: "2 wide",
+            value: {
+                icon: {
+                    icon: "layout-large",
+                },
+                columns:2,
+            }
+        },
+        {
+            label: "3 wide",
+            value: {
+                icon: {
+                    icon: 'layout-grid',
+                },
+                columns:3,
+            }
+        },
+        {
+            label: "4 wide",
+            value: {
+                columns:4,
+            }
+        },
+        {
+            label: "list",
+            value: {
+                icon: {
+                    icon: 'layout-list',
+                },
+                component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.LIST}/>,
+                columns:1,
+            }
+        },
+    ]	
+}
+
+<Search controller={controller} layoutConfig={layoutConfig} />
+```

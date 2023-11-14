@@ -133,7 +133,7 @@ describe('RadioList Component', () => {
 		const selectFn = jest.fn();
 		const selectIndex = 1;
 
-		const rendered = render(<RadioList options={options} onSelect={selectFn} selected={options[1].value} />);
+		const rendered = render(<RadioList options={options} onSelect={selectFn} selected={options[1]} />);
 
 		const element = rendered.container.querySelector('.ss__radio-list')!;
 		let optionElements = element.querySelectorAll('.ss__radio-list__option');

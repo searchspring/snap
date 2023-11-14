@@ -47,6 +47,7 @@ import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import { RadioListProps } from '../components/Molecules/RadioList';
 import { ListProps } from '../components/Molecules/List';
 import { RadioProps } from '../components/Molecules/Radio';
+import { LayoutSelectorProps } from '../components/Molecules/LayoutSelector';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -90,6 +91,7 @@ export type ThemeComponents = {
 	sortBy?: GenericComponentProps<SortByProps>;
 	radioList?: GenericComponentProps<RadioListProps>;
 	list?: GenericComponentProps<ListProps>;
+	layoutSelector?: GenericComponentProps<LayoutSelectorProps>;
 
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;

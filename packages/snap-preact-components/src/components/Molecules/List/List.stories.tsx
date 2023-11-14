@@ -154,7 +154,7 @@ DisabledOption.args = {
 } as ListProps;
 
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <List {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSize} />;
+	return <List {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0]} />;
 };
 
 PerPage.loaders = [
@@ -168,10 +168,11 @@ PerPage.loaders = [
 
 PerPage.args = {
 	titleText: 'Per Page',
+	multiSelect: false,
 } as ListProps;
 
 export const SortBy = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
+	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
 };
 
 SortBy.loaders = [
@@ -185,4 +186,5 @@ SortBy.loaders = [
 
 SortBy.args = {
 	titleText: 'Sort By',
+	multiSelect: false,
 } as ListProps;
