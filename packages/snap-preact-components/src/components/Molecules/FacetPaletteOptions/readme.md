@@ -49,6 +49,26 @@ The `hideIcon` prop will disable the facet icon from being rendered.
 <FacetPaletteOptions values={paletteFacet.values} hideIcon={true} />
 ```
 
+### hideCount
+The `hideCount` prop will disable the facet option counts from being rendered.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCount={true} />
+```
+
+### hideCheckbox
+The `hideCheckbox` prop will disable the facet option checkboxes from being rendered.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+```
+
+### layout
+The `layout` prop determines if the options should render as a `list` or `grid`. By default `grid` will be used.
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+```
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 
@@ -92,3 +112,39 @@ The `onClick` prop allows for a custom callback function for when a facet value 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} onClick={(e)=>{console.log(e)}} />
 ```
+
+
+#### colorMapping
+The colorMapping prop allows for custom color mapping overrides. The object used is keyed by a color label, and can take background and label properties. The color label can be any accepted CSS background property value. So a color, string, hash, RGB, gradiant, or an image URL could be used. The label takes a string value and replaces the color's original label for display.
+
+```jsx
+const colorMapping = {
+	'Camo': {
+		background: 'brown',
+		label: 'Army'
+	},
+	'Striped': {
+		background: "url(https://mysite.com/cdn/shop/files/candy-stripe-square_small.jpg)",
+		label: "stripy"
+	},
+	'rainbow': {
+		background: `linear-gradient(
+			90deg,
+			rgba(255, 0, 0, 1) 0%,
+			rgba(255, 154, 0, 1) 10%,
+			rgba(208, 222, 33, 1) 20%,
+			rgba(79, 220, 74, 1) 30%,
+			rgba(63, 218, 216, 1) 40%,
+			rgba(47, 201, 226, 1) 50%,
+			rgba(28, 127, 238, 1) 60%,
+			rgba(95, 21, 242, 1) 70%,
+			rgba(186, 12, 248, 1) 80%,
+			rgba(251, 7, 217, 1) 90%,
+			rgba(255, 0, 0, 1) 100%
+		)`,
+	}
+}
+<FacetPaletteOptions values={paletteFacet.values} colorMapping={colorMapping} />
+```
+
+

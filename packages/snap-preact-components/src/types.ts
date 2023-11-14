@@ -1,6 +1,7 @@
-import { SerializedStyles } from '@emotion/react';
-import { Theme } from './providers/theme';
+import type { SerializedStyles } from '@emotion/react';
+import type { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 export interface ComponentProps {
 	name?: string;
@@ -11,6 +12,19 @@ export interface ComponentProps {
 	theme?: Theme;
 	controller?: AbstractController;
 }
+
+export type ListOption = {
+	value: string | number;
+	label?: string;
+	disabled?: boolean;
+	[otherOptions: string]: any;
+};
+
+export type ResultComponent = React.FunctionComponent<{
+	controller: AbstractController;
+	result: Product;
+	theme?: Theme;
+}>;
 
 export enum ResultsLayout {
 	GRID = 'grid',

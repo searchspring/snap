@@ -101,12 +101,28 @@ export type RecommendRequestModel = {
 	product?: string;
 	shopper?: string;
 	categories?: string[];
+	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
 	batched?: boolean;
 	limits?: number | number[];
 	order?: number;
+	filters?: RecommendationRequestFilterModel[];
+};
+
+export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+	[filter: `filter.${string}`]: (string | number)[];
+};
+
+export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+	filters?: PostRecommendRequestFiltersModel[];
+};
+
+export type PostRecommendRequestFiltersModel = {
+	field: string;
+	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
+	values: (string | number)[];
 };
 
 export type RecommendResponseModel = {
@@ -150,10 +166,26 @@ export type RecommendCombinedRequestModel = {
 	product?: string;
 	shopper?: string;
 	categories?: string[];
+	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
 	branch?: string;
+	filters?: RecommendationRequestFilterModel[];
+};
+
+export type RecommendationRequestFilterModel = RecommendationRequestRangeFilterModel | RecommendationRequestValueFilterModel;
+
+type RecommendationRequestRangeFilterModel = {
+	type: 'range';
+	field: string;
+	value: { low?: number; high?: number };
+};
+
+type RecommendationRequestValueFilterModel = {
+	type: 'value';
+	field: string;
+	value: string | number;
 };
 
 export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };

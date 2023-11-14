@@ -11,7 +11,25 @@ module.exports = (api) => {
 					corejs: '3.19',
 				},
 			],
+			['@babel/preset-react'],
 		],
-		plugins: [['@babel/plugin-transform-runtime'], ['@babel/plugin-transform-arrow-functions']],
+		plugins: [
+			['@babel/plugin-transform-runtime'],
+			[
+				'@babel/plugin-proposal-decorators',
+				{
+					legacy: true,
+				},
+			],
+			['@babel/plugin-proposal-class-properties'],
+			[
+				'@babel/plugin-transform-react-jsx',
+				{
+					pragma: 'h',
+					pragmaFrag: 'Fragment',
+				},
+			],
+			['@babel/plugin-transform-arrow-functions'],
+		],
 	};
 };

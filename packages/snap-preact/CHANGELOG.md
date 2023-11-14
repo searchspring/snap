@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0](https://github.com/searchspring/snap/compare/v0.48.0...v0.49.0) (2023-10-19)
+
+### Bug Fixes
+
+- add options.brands to recommendation instantiator context ([afb6c4d](https://github.com/searchspring/snap/commit/afb6c4d19730fc3e120cc3c9e941a3d223373da8))
+
+# [0.48.0](https://github.com/searchspring/snap/compare/v0.47.0...v0.48.0) (2023-10-11)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
 # [0.47.0](https://github.com/searchspring/snap/compare/v0.46.0...v0.47.0) (2023-09-15)
 
 **Note:** Version bump only for package @searchspring/snap-preact
