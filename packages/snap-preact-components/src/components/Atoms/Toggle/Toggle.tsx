@@ -117,7 +117,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__toggle', disabled ? 'ss__toggle--disabled' : '', className)}>
 				{label && <label className="ss__toggle__label">{label}</label>}
 
-				<label
+				<div
 					className={`ss__toggle__switch ${!disabled && toggledState ? 'ss__toggle__switch--filtered' : ''}`}
 					onClick={(e) => {
 						clickFunc(e);
@@ -126,7 +126,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 					<div className={`ss__toggle__slider-box ${round ? 'ss__toggle__slider-box--round' : ''}`}>
 						<div className={`ss__toggle__slider ${round ? 'ss__toggle__slider--round' : ''}`}></div>
 					</div>
-				</label>
+				</div>
 			</div>
 		</CacheProvider>
 	);
