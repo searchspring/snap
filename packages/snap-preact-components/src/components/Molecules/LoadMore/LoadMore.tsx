@@ -28,13 +28,13 @@ const CSS = {
 		const radialAngle = ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2;
 
 		return css({
-			'& .ss__loadMore__button--hidden': {
+			'& .ss__load-more__button--hidden': {
 				display: 'none',
 			},
 			'& .ss__button': {
 				alignItems: 'center',
 			},
-			'& .ss__icon--spinner': {
+			'& .ss__loadMore__icon': {
 				marginLeft: '5px',
 				animation: `${keyframes({
 					'0%': { transform: `rotate(0deg)` },
@@ -70,7 +70,7 @@ const CSS = {
 				display: 'flex',
 				alignItems: 'center',
 				gap: '10px',
-				'& .ss__loadMore__button': {
+				'& .ss__load-more__button': {
 					height: 'fit-content',
 				},
 				'& .ss__loadMore__progress': {
@@ -161,11 +161,17 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 
 	const store = pagination || controller?.store?.pagination;
 	const isLoading = typeof loading == 'boolean' ? loading : controller?.store?.loading;
+	const isButtonDisabled = (isLoading && loadingLocation === 'button') || !Boolean(store?.next);
 
 	const subProps: LoadMoreSubProps = {
 		button: {
 			// default props
-			className: classnames('ss__loadMore__button', { 'ss__loadMore__button--hidden': isLoading && loadingLocation === 'outside' }),
+			className: classnames(
+				'ss__load-more__button',
+				{ 'ss__load-more__button--hidden': isLoading && loadingLocation === 'outside' },
+				{ 'ss__load-more__button--disabled': isButtonDisabled }
+			),
+			disabled: isButtonDisabled,
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props
@@ -236,7 +242,6 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 								onClick && onClick(e);
 							}}
 							aria-label={loadMoreText}
-							disabled={isLoading && loadingLocation === 'button'}
 							{...subProps.button}
 						>
 							{loadMoreText}

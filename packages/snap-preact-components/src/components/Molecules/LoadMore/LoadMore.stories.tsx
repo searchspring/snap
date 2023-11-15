@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -8,6 +7,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../LoadMore/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
+import type { SearchRequestModelFilterTypeEnum } from '@searchspring/snapi-types';
 
 export default {
 	title: `Molecules/LoadMore`,
@@ -110,6 +110,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'bar' },
 			},
 			control: {
 				type: 'select',
@@ -174,6 +175,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'button' },
 			},
 			control: {
 				type: 'select',
@@ -192,25 +194,29 @@ export default {
 		...componentArgs,
 	},
 };
-
-const snapInstance = Snapify.search({ id: 'Pagination', globals: { siteId: '8uyt2m' } });
-
-const ObservableLoadMore = observer(({ args, controller }: { args: LoadMoreProps; controller: SearchController }) => {
-	return <LoadMore {...args} pagination={controller?.store?.pagination} />;
+const snapInstance = Snapify.search({
+	id: 'Pagination',
+	globals: {
+		siteId: '8uyt2m',
+		filters: [
+			{
+				type: 'value' as SearchRequestModelFilterTypeEnum,
+				field: 'color_family',
+				// @ts-ignore - value does not exist on SearchRequestModelFilter
+				value: 'Beige',
+				background: true,
+			},
+		],
+	},
 });
 
 export const Default = (args: LoadMoreProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableLoadMore args={args} controller={controller} />;
+	return <LoadMore {...args} controller={controller} />;
 };
 
 Default.loaders = [
 	async () => {
-		// limit to 100 results to show progress indicator
-		snapInstance.on('afterStore', () => {
-			snapInstance.store.pagination.totalResults = 100;
-		});
 		await snapInstance.search();
-
 		return {
 			controller: snapInstance,
 		};
@@ -218,17 +224,12 @@ Default.loaders = [
 ];
 
 export const Radial = (args: LoadMoreProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <ObservableLoadMore args={args} controller={controller} />;
+	return <LoadMore {...args} controller={controller} />;
 };
 
 Radial.loaders = [
 	async () => {
-		// limit to 100 results to show progress indicator
-		snapInstance.on('afterStore', () => {
-			snapInstance.store.pagination.totalResults = 100;
-		});
 		await snapInstance.search();
-
 		return {
 			controller: snapInstance,
 		};

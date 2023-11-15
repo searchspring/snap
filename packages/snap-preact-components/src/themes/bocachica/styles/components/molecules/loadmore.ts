@@ -28,7 +28,7 @@ const loadMoreStyleScript = ({
 	});
 
 	return css({
-		'& .ss__loadMore__button--hidden': {
+		'& .ss__load-more__button--hidden': {
 			display: 'none',
 		},
 		'& .ss__button': {
@@ -67,7 +67,7 @@ const loadMoreStyleScript = ({
 			display: 'flex',
 			alignItems: 'center',
 			gap: '10px',
-			'& .ss__loadMore__button': {
+			'& .ss__load-more__button': {
 				height: 'fit-content',
 			},
 			'& .ss__loadMore__progress': {

@@ -61,7 +61,7 @@ describe('LoadMore Component', () => {
 		// has default progress indicator
 		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__loadMore--bar')).toBe(true);
 
-		const buttonElement = rendered.container.querySelector('.ss__loadMore__button');
+		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(buttonElement).toBeInTheDocument();
 	});
 
@@ -69,7 +69,7 @@ describe('LoadMore Component', () => {
 		const loadMoreText = 'More Results';
 		const rendered = render(<LoadMore pagination={paginationStore} loadMoreText={loadMoreText} />);
 
-		const buttonElement = rendered.container.querySelector('.ss__loadMore__button');
+		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(buttonElement).toBeInTheDocument();
 		expect(buttonElement?.textContent).toBe(loadMoreText);
 	});
@@ -80,7 +80,7 @@ describe('LoadMore Component', () => {
 		const loadMoreElement = rendered.container.querySelector('.ss__loadMore');
 		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__loadMore--autoFetch')).toBe(true);
 
-		const buttonElement = rendered.container.querySelector('.ss__loadMore__button');
+		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(buttonElement).not.toBeInTheDocument();
 	});
 
@@ -90,7 +90,7 @@ describe('LoadMore Component', () => {
 		const loadMoreElement = rendered.container.querySelector('.ss__loadMore');
 		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__loadMore--loading')).toBe(true);
 
-		const buttonElement = rendered.container.querySelector('.ss__loadMore__button');
+		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(buttonElement).toHaveAttribute('disabled');
 		expect(Object.values(buttonElement?.classList || {}).includes('ss__button--disabled')).toBe(true);
 	});
@@ -135,7 +135,7 @@ describe('LoadMore Component', () => {
 
 		const rendered = render(<LoadMore pagination={paginationStore} onClick={onClick} />);
 
-		const loadMoreButtonElement = rendered.container.querySelector('.ss__loadMore__button');
+		const loadMoreButtonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(loadMoreButtonElement).toBeInTheDocument();
 
 		expect(onClick).toHaveBeenCalledTimes(0);

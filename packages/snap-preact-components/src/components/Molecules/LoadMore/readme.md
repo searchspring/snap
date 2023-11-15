@@ -25,7 +25,7 @@ The `autoFetch` prop will not render a "Show More" button and instead fetch the 
 <LoadMore pagination={controller.store.pagination} autoFetch={true} />
 ```
 
-Can be used in combination with `` and `` to not display anything and have infinite scrolling still function:
+Can be used in combination with `hideProgressIndicator` and `hideProgressText` to not display anything and have infinite scrolling still function:
 
 ```jsx
 <LoadMore pagination={controller.store.pagination} autoFetch={true} hideProgressIndicator={true} hideProgressText={true} />
@@ -36,10 +36,6 @@ Requires `autoFetch` prop to be `true`. The `intersectionOffset` prop defines th
 
 ```jsx
 <LoadMore pagination={controller.store.pagination} autoFetch={true} intersectionOffset={'40px'} />
-```
-
-```jsx
-<LoadMore pagination={controller.store.pagination} autoFetch={true} intersectionOffset={'100%'} />
 ```
 
 ### loading
@@ -128,8 +124,8 @@ The `loadingIcon` prop defines the icon used when loading. Default: `spinner`
 The `loadingLocation` prop defines the location of the loading icon. Default: `button` will be displayed within the "Load More" button. Alternative value of `outside` will display the loading icon in place of the button.
 
 #### onClick
-The `onClick` prop allows for a custom callback function for when the button is clicked. Only supported if `progressIndicator={'bar'}`
+The `onClick` prop allows for a custom callback function for when the button is clicked.
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicator={'bar'} onClick={(e)=>{console.log(e)}} />
+<LoadMore pagination={controller.store.pagination} onClick={(e)=>{console.log(e)}} />
 ```
