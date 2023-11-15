@@ -34,7 +34,7 @@ describe('Toggle Component', () => {
 		expect(slider).toBeInTheDocument();
 		expect(slider).toHaveClass('ss__toggle__slider--round');
 		let styles = getComputedStyle(slider!);
-		expect(styles.borderRadius).toBe('50%');
+		expect(styles.borderRadius).toBe('calc(60px / 2)');
 	});
 
 	it('can set toggled state', () => {

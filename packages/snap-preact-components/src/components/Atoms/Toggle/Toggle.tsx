@@ -71,11 +71,11 @@ const CSS = {
 
 			/* Rounded sliders */
 			'& .ss__toggle__slider-box.ss__toggle__slider-box--round': {
-				borderRadius: '34px',
+				borderRadius: `calc(${size} * 2)`,
 			},
 
 			'& .ss__toggle__slider.ss__toggle__slider--round': {
-				borderRadius: '50%',
+				borderRadius: `calc(${size} / 2)`,
 			},
 		}),
 };

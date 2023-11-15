@@ -1,17 +1,24 @@
 # Facet Toggle
 
-Renders a facet option toggle switch
+Renders a facet option toggle switch. Note this component will only render when used with a single facet value.
 
 ## Sub-components
 - toggle
 
 ## Usage
 
-### value
-The required `value` prop specifies a single facet value to use.
+### values
+The `values` prop specifies facet values to use. Overrides values passed via the facet prop. Note this component will only render when used with a single facet value.
 
 ```jsx
-<FacetToggle value={facet.values[0]} />
+<FacetToggle values={facet.values} />
+```
+
+## facet
+The `facet` prop specifies the reference to the facet object in the store. Note this component will only render when used with a single facet value.
+
+```jsx
+<FacetToggle facet={sizeFacet} />
 ```
 
 ### label

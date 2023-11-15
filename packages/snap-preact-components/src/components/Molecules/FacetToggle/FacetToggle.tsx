@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { mergeProps, defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import type { FacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Toggle, ToggleProps } from '../../Atoms/Toggle';
 
 const CSS = {
@@ -16,13 +16,21 @@ const CSS = {
 
 export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+
+	let value: FacetValue | undefined = undefined;
+	if (properties.values && properties.values.length == 1) {
+		value = properties.values[0];
+	} else if (properties.facet && properties.facet.values.length == 1) {
+		value = properties.facet.values[0] as FacetValue;
+	}
+
 	const defaultProps: Partial<FacetToggleProps> = {
-		label: properties.value.label,
+		label: value?.label,
 	};
 
 	const props = mergeProps('facetToggle', globalTheme, defaultProps, properties);
 
-	const { value, label, onClick, disableStyles, className, style, styleScript } = props;
+	const { label, onClick, disableStyles, className, style, styleScript } = props;
 
 	const subProps: FacetToggleSubProps = {
 		Toggle: {
@@ -50,11 +58,11 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 	}
 
 	const clickFunc = (e: React.MouseEvent<Element, MouseEvent>, toggled: boolean) => {
-		value.url?.link?.onClick(e);
+		value?.url?.link?.onClick(e);
 		onClick && onClick(e, toggled);
 	};
 
-	return (
+	return value ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-toggle', className)}>
 				<Toggle
@@ -66,11 +74,14 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 				/>
 			</div>
 		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface FacetToggleProps extends ComponentProps {
-	value: FacetValue;
+	values?: FacetValue[];
+	facet?: ValueFacet;
 	label?: string;
 	onClick?: (e: React.MouseEvent, toggled: boolean) => void;
 }

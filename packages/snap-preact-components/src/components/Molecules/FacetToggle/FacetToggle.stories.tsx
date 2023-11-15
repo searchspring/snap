@@ -28,18 +28,28 @@ export default {
 		),
 	],
 	argTypes: {
-		value: {
-			description: 'Facet.value store reference',
+		values: {
+			description: 'Facet.values store reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'Single facet.value store reference',
+					summary: 'facet values store array',
+				},
+			},
+			control: { type: 'none' },
+		},
+		facet: {
+			description: 'Facet store reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'facet store object',
 				},
 			},
 			control: { type: 'none' },
 		},
 		label: {
-			description: 'Hide facet option label',
+			description: 'custom toggle label',
 			table: {
 				type: {
 					summary: 'string',
@@ -66,7 +76,7 @@ const snapInstance = Snapify.search({ id: 'FacetFacetToggle', globals: { siteId:
 export const Default = (args: FacetToggleProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'on_sale').pop();
 
-	return <FacetToggle label={sizeFacet.label} {...args} value={sizeFacet.values[0]} />;
+	return <FacetToggle label={sizeFacet.label} {...args} values={[sizeFacet.values[0]]} />;
 };
 Default.args = {};
 
