@@ -44,6 +44,8 @@ import { RecommendationProps } from '../components/Templates/Recommendation';
 import { SearchProps } from '../components/Templates/Search';
 import { NoResultsProps } from '../components/Atoms/NoResults';
 import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import { FacetToggleProps } from '../components/Molecules/FacetToggle';
+import { ToggleProps } from '../components/Atoms/Toggle';
 import { RadioListProps } from '../components/Molecules/RadioList';
 import { ListProps } from '../components/Molecules/List';
 import { RadioProps } from '../components/Molecules/Radio';
@@ -68,6 +70,7 @@ export type ThemeComponents = {
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
+	toggle?: GenericComponentProps<ToggleProps>;
 
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
@@ -88,6 +91,7 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
+	facetToggle?: GenericComponentProps<FacetToggleProps>;
 	radioList?: GenericComponentProps<RadioListProps>;
 	list?: GenericComponentProps<ListProps>;
 
