@@ -7,37 +7,45 @@ import type { SnapConfig } from '../../Snap';
 import { ControllerTypes } from '@searchspring/snap-controller';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 
-/* config defined themes
-		themes: {
-			global: MergedTheme,
-			boca1: MergedTheme,
-		}
+/* classy store
 
-		locale: {
-			language: 'en',
-			currency: 'usd',
-		}
+	{
+		config,
+		templates: { //rename to targets
+			search: { [targetId: string]: TargetStore }
+			autocomplete: { [targetId: string]: TargetStore }
+			recommendation: { [targetId: string]: TargetStore }
+		},
 		themes: {
-			global: {
-				base: merge(library.themes[name], themeVariables, themeOverrides) // only have to have merged this on init
-				overrides: { variables: {} }, // editor overrides
-				merged: merge(this.base, library.locales.language['en'], library.locales.currency['usd'], editorOverrides) // lastest merge
-			},
-			boca1: {
-				base: merge(library.themes[name], themeVariables, themeOverrides) // only have to have merged this on init
-
-				// initial themeVariables
-				// initial themeOverrides
-				
-				overrides: { variables: {} }, // editor overrides
-				merged: merge(this.base, editorOverrides) // lastest merge
+			local: {
+				[themeName: 'global' | string]: ThemeStore;
+			}
+			base: {
+				[themeName: string]: ThemeStore;
+			}
+		},
+		library: (LibraryStore) {
+			themes: {
+				[themeName in keyof typeof themeMap]?: Theme;
+			};
+			components: { // component map
+				search: { [name: string]: () => Component }
+				autocomplete: { [name: string]: () => Component }
+				recommendation: { [name: string]: () => Component }
+			};
+			locales: { // locale map
+				language: {
+					en: { ... }
+				},
+				currency: {
+					usd: { ... },
+					eur: { ... },
+				},
 			}
 		}
-
-		library: ThemeLibrary = {}
-
-		MergedTheme = merge(baseTheme, themeVariables, themeOverrides, localeOverides, editorOverrides)
-	*/
+	}
+	
+*/
 
 type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
 
@@ -46,6 +54,19 @@ type TemplateTheme = {
 	base: any;
 	overrides: any;
 	merged: any;
+};
+
+type TemplateTarget = {
+	template: string;
+	selector?: string;
+	component?: string;
+	theme?: string;
+	/*
+		theme: {
+			location: 'library' | 'local',
+			name: string
+		}
+	*/
 };
 
 const GLOBAL_THEME_NAME = 'global';
@@ -57,7 +78,7 @@ export class TemplateStore {
 	themeMap: { [key in keyof typeof themeMap]: () => Promise<Theme> } = themeMap;
 	templates: {
 		[key in TemplateTypes]: {
-			[targetId: string]: string;
+			[targetId: string]: TemplateTarget;
 		};
 	};
 	themes: {
@@ -133,19 +154,34 @@ export class TemplateStore {
 		});
 	}
 
-	public addTemplate(type: TemplateTypes, template: { template: string; selector?: string; component?: string; theme?: string }): string | undefined {
+	public addTemplate(type: TemplateTypes, template: TemplateTarget): string | undefined {
 		const targetId = template.selector || template.component;
 		if (targetId) {
-			this.templates[type][targetId] = template.template;
+			this.templates[type][targetId] = template;
+			makeObservable(this.templates[type], {
+				[targetId]: observable,
+			});
 			return targetId;
 		}
 	}
 
-	public getTemplate(type: TemplateTypes, targetId: string, themeName: string): any {
+	public getTemplate(type: TemplateTypes, targetId: string): any {
+		const themeName = this.templates[type][targetId].theme || GLOBAL_THEME_NAME;
 		return {
-			template: this.templates[type][targetId],
-			theme: this.themes[themeName || GLOBAL_THEME_NAME]?.merged || {},
+			template: this.templates[type][targetId].template,
+			theme: this.themes[themeName || GLOBAL_THEME_NAME]?.merged || this.library.themes[themeName as keyof typeof themeMap] || {},
 		};
+	}
+
+	public async initialize() {
+		const themes = Object.keys(this.themeMap || {});
+		for (let i = 0; i < themes?.length; i++) {
+			const themeName = themes[i];
+			if (!this.library.themes[themeName as keyof typeof themeMap]) {
+				const libraryBaseTheme = await this.themeMap[themeName as keyof typeof themeMap]();
+				this.library.themes[themeName as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
+			}
+		}
 	}
 
 	// only imports theme if a service is using that theme
@@ -158,7 +194,8 @@ export class TemplateStore {
 				const controllerConfig = controllers[j];
 				for (let k = 0; k < (controllerConfig?.targeters || []).length; k++) {
 					const target = controllerConfig?.targeters && controllerConfig?.targeters[k];
-					await this.importTheme(target?.props?.themeName || GLOBAL_THEME_NAME);
+					const themeName = this.templates[target!.props!.type as TemplateTypes][target!.props!.targetId]?.theme;
+					await this.importTheme(themeName || GLOBAL_THEME_NAME);
 				}
 			}
 		}
@@ -265,13 +302,11 @@ export class TemplateStore {
 	}
 
 	public changeTemplate(type: TemplateTypes, target: string, template: string): void {
-		this.templates = {
-			...this.templates,
-			[type]: {
-				...this.templates[type],
-				[target]: template,
-			},
-		};
+		this.templates[type][target].template = template;
+	}
+
+	public changeTheme(type: TemplateTypes, target: string, from: 'local' | 'base', theme: string): void {
+		this.templates[type][target].theme = theme;
 	}
 
 	public save(theme: string) {

@@ -119,6 +119,7 @@ export class SnapTemplate extends Snap {
 					],
 					async (target: Target, elem: Element) => {
 						const TemplateEditor = (await import('./components/TemplateEditor')).TemplateEditor;
+						await templateStore.initialize();
 						render(
 							<TemplateEditor
 								templateStore={templateStore}
@@ -162,7 +163,7 @@ export const createSearchTargeters = (templateConfig: SnapTemplateConfig, templa
 			selector: template.selector,
 			hideTarget: true,
 			component: TemplateSelect,
-			props: { componentMap, type: 'search', templateStore, targetId, themeName: template.theme },
+			props: { componentMap, type: 'search', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 		};
 
 		// if they are not undefined, add them
@@ -183,7 +184,7 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig, 
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
 			component: TemplateSelect,
-			props: { componentMap, type: 'autocomplete', templateStore, targetId, themeName: template.theme },
+			props: { componentMap, type: 'autocomplete', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 			hideTarget: true,
 		};
 
@@ -208,7 +209,7 @@ export function createRecommendationComponentMapping(
 				const targetId = templateStore.addTemplate('recommendation', template);
 				mapping[template.component] = {
 					component: TemplateSelect,
-					props: { componentMap, type: 'recommendation', templateStore, targetId, themeName: template.theme },
+					props: { componentMap, type: 'recommendation', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 				};
 
 				// if they are not undefined, add them

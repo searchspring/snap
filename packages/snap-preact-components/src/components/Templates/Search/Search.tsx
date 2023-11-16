@@ -530,6 +530,7 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 						</div>
 					)}
 					<div className={classnames('ss__search__content')}>
+						<h3>This is SearchTest</h3>
 						{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
 						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}

@@ -155,11 +155,11 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 		css: [CSS.TemplateEditor({ ...properties })],
 	};
 
-	const { library, themeMap } = templateStore;
+	const { library } = templateStore;
 	const { language, currency } = library.locales;
 	const languages = Object.keys(language);
 	const currencies = Object.keys(currency);
-	const baseThemes = Object.keys(themeMap || {});
+	const baseThemes = Object.keys(library.themes || {});
 	const lcoalThemes = Object.keys(templateStore.themes || {}).sort((a, b) => {
 		if (a === 'global') return -1;
 		if (b === 'global') return 1;
@@ -210,13 +210,13 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 				>
 					Stop Editing
 				</Button>
-				{/* @ts-ignore - onClick prop */}
-				<Icon
-					icon="close-thin"
+				<span
 					onClick={() => {
 						setCollapsed(true);
 					}}
-				></Icon>
+				>
+					<Icon icon="close-thin" />
+				</span>
 			</div>
 
 			{!collapsed ? (
@@ -330,7 +330,17 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 
 			<div className="section">
 				<label htmlFor="theme-select">Theme: </label>
-				<select id="theme-select">
+				<select
+					id="theme-select"
+					onChange={(e) => {
+						const { selectedIndex, options } = e.currentTarget;
+						const selectedOption = options[selectedIndex];
+						const selectedTheme = selectedOption.value;
+						const type = selectedOption.closest('optgroup')?.label;
+
+						templateStore.changeTheme(selectedTarget.type, selectedTarget.target, type, selectedTheme);
+					}}
+				>
 					<optgroup label="base">
 						{baseThemes.map((baseTheme) => (
 							<option>{baseTheme}</option>
@@ -347,7 +357,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 			<h3>Theme Variables</h3>
 			<div className="section">
 				<div className="indent">
-					{themes[selectedTargetConfig.theme].isFromStorage ? (
+					{themes[selectedTargetConfig.theme]?.isFromStorage ? (
 						<Fragment>
 							<label htmlFor="theme-select">
 								<i>Loaded from storage</i>
@@ -364,13 +374,18 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 					) : (
 						''
 					)}
-					<ThemeEditor
-						property={themes[selectedTargetConfig.theme].merged.variables}
-						rootEditingKey={'variables'}
-						themeName={selectedTargetConfig.theme}
-						setThemeOverrides={setThemeOverrides}
-					/>
-					{Object.keys(themes[selectedTargetConfig.theme].overrides || {}).length > 0 ? (
+					{themes[selectedTargetConfig.theme]?.merged?.variables ? (
+						<ThemeEditor
+							property={themes[selectedTargetConfig.theme].merged.variables}
+							rootEditingKey={'variables'}
+							themeName={selectedTargetConfig.theme}
+							setThemeOverrides={setThemeOverrides}
+						/>
+					) : (
+						''
+					)}
+
+					{Object.keys(themes[selectedTargetConfig.theme]?.overrides || {}).length > 0 ? (
 						<button
 							onClick={() => {
 								templateStore.save(selectedTargetConfig.theme);
