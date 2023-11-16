@@ -28,6 +28,11 @@ const CSS = {
 			'& .ss__select__label': {
 				marginRight: '5px',
 			},
+
+			'& .ss__select__selection__icon': {
+				margin: '0px 5px 0px 0px',
+			},
+
 			'& .ss__select__select': {
 				position: 'relative',
 				zIndex: '10000',
@@ -36,10 +41,22 @@ const CSS = {
 				padding: '0',
 				marginTop: '-1px',
 				border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
+
+				'.ss__select__dropdown__button': {
+					alignItems: 'center',
+				},
+
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
 					color: 'initial',
+					display: 'flex',
+					alignItems: 'center',
+
+					'& .ss__select__select__option__icon': {
+						margin: '0px 5px 0px 0px',
+					},
+
 					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',
 					},
@@ -256,8 +273,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									<>
 										{selection.icon && !hideOptionIcons && (
 											<Icon
-												className="ss__select__selection__icon"
 												{...subProps.icon}
+												className="ss__select__selection__icon"
 												{...(typeof selection.icon == 'string' ? { icon: selection.icon as string } : (selection.icon as Partial<IconProps>))}
 											/>
 										)}
