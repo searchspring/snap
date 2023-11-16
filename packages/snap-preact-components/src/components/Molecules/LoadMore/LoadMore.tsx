@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { MutableRef, useRef } from 'preact/hooks';
+import { MutableRef, useRef, useState } from 'preact/hooks';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -13,6 +13,7 @@ import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { useFuncDebounce } from '../../../hooks/';
 
 const CSS = {
 	LoadMore: ({
@@ -214,9 +215,18 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	if (autoFetch) {
 		const loadMoreRef = useRef(null);
 		autoProps.ref = loadMoreRef;
-
 		const loadMoreInViewport = useIntersection(loadMoreRef, intersectionOffset || '0px');
-		if (loadMoreInViewport && store.next && !isLoading) {
+		const [preventLoading, setPreventLoading] = useState(true);
+
+		if (isLoading) {
+			setPreventLoading(true);
+		} else {
+			useFuncDebounce(() => {
+				setPreventLoading(false);
+			}, 500);
+		}
+
+		if (loadMoreInViewport && store.next && !preventLoading) {
 			store.next.url.go({ history: 'replace' });
 		}
 	}
