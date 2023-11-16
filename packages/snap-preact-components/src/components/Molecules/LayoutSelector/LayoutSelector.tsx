@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, StylingCSS, layoutOption } from '../../../types';
+import { ComponentProps, ListOption, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { List, ListProps } from '../List';
 import { RadioList, RadioListProps } from '../RadioList';
@@ -40,7 +40,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			// component theme overrides
 			theme: props?.theme,
 		},
-		RadioSelect: {
+		RadioList: {
 			// global theme
 			...globalTheme?.components?.radioList,
 			// inherited props
@@ -94,12 +94,12 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 				<List
 					{...styling}
 					className={classnames('ss__layout__list', className)}
-					{...subProps.RadioSelect}
+					{...subProps.List}
 					onSelect={(e: any, option: any) => {
 						onSelect(e, option);
 					}}
 					options={options}
-					selected={selected}
+					selected={selected?.value}
 					titleText={label}
 				/>
 			)}
@@ -108,12 +108,12 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 				<RadioList
 					{...styling}
 					className={classnames('ss__layout__radioList', className)}
-					{...subProps.RadioSelect}
+					{...subProps.RadioList}
 					onSelect={(e: any, option: any) => {
 						onSelect(e, option);
 					}}
 					options={options}
-					selected={selected}
+					selected={selected?.value}
 					titleText={label}
 				/>
 			)}
@@ -125,14 +125,14 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 interface SelectSubProps {
 	Select: Partial<SelectProps>;
-	RadioSelect: Partial<RadioListProps>;
+	RadioList: Partial<RadioListProps>;
 	List: Partial<ListProps>;
 }
 
 export interface LayoutSelectorProps extends ComponentProps {
 	onSelect: (e: React.ChangeEvent<HTMLSelectElement>, option?: ListOption) => void;
-	options: layoutOption[];
-	selected?: layoutOption;
+	options: ListOption[];
+	selected?: ListOption;
 	label?: string;
 	type?: 'dropdown' | 'list' | 'radio';
 }

@@ -53,6 +53,9 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			theme: props?.theme,
 		},
 		List: {
+			multiSelect: false,
+			hideOptionCheckboxes: true,
+			horizontal: true,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props
@@ -98,7 +101,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					className={classnames('ss__sortby__list', className)}
 					{...subProps.List}
 					options={store.options}
-					selected={{ value: store.current.value }}
+					selected={store.current.value}
 					titleText={label}
 					onSelect={(e, selection) => {
 						selection?.url.go();
@@ -112,7 +115,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					className={classnames('ss__sortby__radioList', className)}
 					{...subProps.RadioList}
 					options={store.options}
-					selected={{ value: store.current.value }}
+					selected={store.current.value}
 					titleText={label}
 					onSelect={(e, selection) => {
 						selection?.url.go();

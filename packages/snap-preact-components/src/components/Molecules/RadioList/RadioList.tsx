@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption, layoutOptionValue } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
@@ -56,7 +56,21 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 
 	const props = mergeProps('radioList', globalTheme, defaultProps, properties);
 
-	const { titleText, onSelect, hideRadios, native, disabled, selected, options, disableStyles, className, style, styleScript } = props;
+	const {
+		titleText,
+		onSelect,
+		hideOptionRadios,
+		hideOptionIcons,
+		hideOptionLabels,
+		native,
+		disabled,
+		selected,
+		options,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+	} = props;
 
 	const subProps: RadioListSubProps = {
 		Radio: {
@@ -94,14 +108,14 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	}
 
 	// selection state
-	const [selection, setSelection] = useState<ListOption | undefined>(selected);
+	const [selection, setSelection] = useState<string | number | undefined>(selected);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (onSelect) {
 			onSelect(e, option!);
 		}
 
-		setSelection(option);
+		setSelection(option.value);
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -113,24 +127,22 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 					{options.map((option) => {
 						return (
 							<li
-								className={`ss__radio-list__option ${selection?.value == option.value ? 'ss__radio-list__option--selected' : ''} ${
+								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
 								title={option.label}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection?.value} />}
+								{!hideOptionRadios && <Radio {...subProps.Radio} checked={option.value == selection} />}
 
-								{(option.value as layoutOptionValue)?.icon ? (
+								{option.icon && !hideOptionIcons && (
 									<Icon
 										{...subProps.Icon}
-										{...(typeof (option.value as layoutOptionValue).icon == 'string'
-											? { icon: (option.value as layoutOptionValue).icon as string }
-											: ((option.value as layoutOptionValue)?.icon as Partial<IconProps>))}
+										{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
 									/>
-								) : (
-									<label className="ss__radio-list__option__label">{option.label || option.value}</label>
 								)}
+
+								{!hideOptionLabels && <label className="ss__radio-list__option__label">{option.label || option.value}</label>}
 							</li>
 						);
 					})}
@@ -145,11 +157,13 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 export interface RadioListProps extends ComponentProps {
 	options: ListOption[];
 	native?: boolean;
-	hideRadios?: boolean;
+	hideOptionRadios?: boolean;
+	hideOptionLabels?: boolean;
+	hideOptionIcons?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
 	disabled?: boolean;
-	selected?: ListOption;
+	selected?: string | number;
 }
 
 interface RadioListSubProps {

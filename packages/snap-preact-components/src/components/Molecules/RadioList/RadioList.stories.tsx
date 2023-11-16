@@ -52,8 +52,28 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideRadios: {
+		hideOptionRadios: {
 			description: 'enable/disable radio icons from rendering.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideOptionIcons: {
+			description: 'enable/disable option icons from rendering.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideOptionLabels: {
+			description: 'enable/disable option labels from rendering.',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -114,6 +134,31 @@ Default.args = {
 	],
 } as RadioListProps;
 
+export const Icons = (args: RadioListProps) => <RadioList {...args} />;
+Icons.args = {
+	options: [
+		{
+			label: '1 wide',
+			value: '1 wide',
+			icon: 'square',
+		},
+		{
+			label: '2 wide',
+			value: '2 wide',
+			icon: {
+				icon: 'layout-large',
+			},
+		},
+		{
+			label: '3 wide',
+			value: '3 wide',
+			icon: {
+				icon: 'layout-grid',
+			},
+		},
+	],
+} as RadioListProps;
+
 export const Native = (args: RadioListProps) => <RadioList {...args} />;
 Native.args = {
 	native: true,
@@ -134,7 +179,9 @@ Native.args = {
 } as RadioListProps;
 
 export const PerPage = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioList {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0]} />;
+	return (
+		<RadioList {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0].value} />
+	);
 };
 
 PerPage.loaders = [
@@ -151,7 +198,7 @@ PerPage.args = {
 } as RadioListProps;
 
 export const SortBy = (args: RadioListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <RadioList {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
+	return <RadioList {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
 };
 
 SortBy.loaders = [

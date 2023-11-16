@@ -3,46 +3,41 @@ import { render, waitFor } from '@testing-library/preact';
 import { Theme, ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { LayoutSelector } from './LayoutSelector';
-import { layoutOption } from '../../../types';
+import { ListOption } from '../../../types';
 
 describe('LayoutSelector Component', () => {
-	const options: layoutOption[] = [
+	const options: ListOption[] = [
 		{
 			label: '1 wide',
-			value: {
-				icon: 'square',
-				columns: 1,
-			},
+			value: '1 wide',
+			icon: 'square',
+			columns: 1,
 		},
 		{
 			label: '2 wide',
-			value: {
-				icon: {
-					icon: 'layout-large',
-				},
-				columns: 2,
+			value: '2 wide',
+			icon: {
+				icon: 'layout-large',
 			},
+			columns: 2,
 		},
 		{
 			label: '3 wide',
-			value: {
-				icon: {
-					icon: 'layout-grid',
-				},
-				columns: 3,
+			value: '3 wide',
+			icon: {
+				icon: 'layout-grid',
 			},
+			columns: 3,
 		},
 		{
 			label: '4 wide',
-			value: {
-				columns: 4,
-			},
+			value: '4 wide',
+			columns: 4,
 		},
 		{
 			label: 'custom',
-			value: {
-				component: (props) => <div className="custom">custom</div>,
-			},
+			value: 'custom',
+			component: (props: any) => <div className="custom">custom</div>,
 		},
 	];
 

@@ -22,10 +22,24 @@ The `native` prop will use native html `<input type='radio'>` elements.
 ```
 
 ### hideRadios
-The `hideRadios` prop will disable the radio elements from rendering.
+The `hideRadios` prop will disable the option radio elements from rendering.
 
 ```jsx
 <RadioList options={store.options} hideRadios={true} />
+```
+
+### hideLabels
+The `hideLabels` prop will disable the option label elements from rendering.
+
+```jsx
+<RadioList options={store.options} hideLabels={true} />
+```
+
+### hideIcons
+The `hideIcons` prop will disable the option icon elements from rendering.
+
+```jsx
+<RadioList options={store.options} hideIcons={true} />
 ```
 
 ### titleText

@@ -14,28 +14,13 @@ export interface ComponentProps {
 	controller?: AbstractController;
 }
 
-export type layoutOption = {
-	label: string;
-	value: layoutOptionValue;
-};
-
-export type layoutOptionValue = {
+export type ListOption = {
+	value: string | number;
+	label?: string;
+	disabled?: boolean;
 	icon?: string | Partial<IconProps>;
 	columns?: number;
 	component?: ResultComponent;
-} & (
-	| {
-			columns: number;
-	  }
-	| {
-			component: ResultComponent;
-	  }
-);
-
-export type ListOption = {
-	value: string | number | layoutOptionValue;
-	label?: string;
-	disabled?: boolean;
 	[otherOptions: string]: any;
 };
 

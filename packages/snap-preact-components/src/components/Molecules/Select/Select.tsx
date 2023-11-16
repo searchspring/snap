@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS, ListOption, layoutOptionValue } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -82,6 +82,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		separator,
 		startOpen,
 		hideIcon,
+		hideOptionIcons,
+		hideOptionLabels,
 		hideSelection,
 		stayOpenOnSelection,
 		disableStyles,
@@ -250,19 +252,18 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									</span>
 								)}
 
-								{selection &&
-									!hideSelection &&
-									((selection.value as layoutOptionValue)?.icon ? (
-										<Icon
-											{...subProps.icon}
-											{...(typeof (selection.value as layoutOptionValue).icon == 'string'
-												? { icon: (selection.value as layoutOptionValue).icon as string }
-												: ((selection.value as layoutOptionValue)?.icon as Partial<IconProps>))}
-										/>
-									) : (
-										<span className="ss__select__selection">{selection?.label}</span>
-									))}
-
+								{selection && !hideSelection && (
+									<>
+										{selection.icon && !hideOptionIcons && (
+											<Icon
+												className="ss__select__selection__icon"
+												{...subProps.icon}
+												{...(typeof selection.icon == 'string' ? { icon: selection.icon as string } : (selection.icon as Partial<IconProps>))}
+											/>
+										)}
+										{!hideOptionLabels && <span className="ss__select__selection">{selection?.label}</span>}
+									</>
+								)}
 								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
 							</Button>
 						}
@@ -272,7 +273,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								<li
 									ref={(e) => useA11y(e)}
 									role={'link'}
-									aria-disabled={option.di}
+									aria-disabled={option.disabled}
 									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
 										option.label
 									}`}
@@ -282,16 +283,14 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									})}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
 								>
-									{(option.value as layoutOptionValue)?.icon ? (
+									{option.icon && !hideOptionIcons && (
 										<Icon
 											{...subProps.icon}
-											{...(typeof (option.value as layoutOptionValue).icon == 'string'
-												? { icon: (option.value as layoutOptionValue).icon as string }
-												: ((option.value as layoutOptionValue)?.icon as Partial<IconProps>))}
+											className="ss__select__select__option__icon"
+											{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
 										/>
-									) : (
-										<span>{option.label}</span>
 									)}
+									{!hideOptionLabels && <span>{option.label}</span>}
 								</li>
 							))}
 						</ul>
@@ -331,4 +330,6 @@ export interface SelectProps extends ComponentProps {
 	stayOpenOnSelection?: boolean;
 	hideSelection?: boolean;
 	hideIcon?: boolean;
+	hideOptionIcons?: boolean;
+	hideOptionLabels?: boolean;
 }

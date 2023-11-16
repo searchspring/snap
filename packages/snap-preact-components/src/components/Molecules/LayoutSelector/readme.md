@@ -4,7 +4,7 @@ Renders a layout selector to be used with snap templates for changing result lay
 
 ## Sub-components
 - Select
-- RadioSelect 
+- RadioList 
 - List
 
 

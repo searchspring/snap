@@ -53,6 +53,9 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			theme: props?.theme,
 		},
 		List: {
+			multiSelect: false,
+			hideOptionCheckboxes: true,
+			horizontal: true,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props
@@ -101,7 +104,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 						store.setPageSize(+option!.value);
 					}}
 					options={store.pageSizeOptions}
-					selected={{ value: store.pageSize }}
+					selected={store.pageSize}
 					titleText={label}
 				/>
 			)}
@@ -115,7 +118,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 						store.setPageSize(+option!.value);
 					}}
 					options={store.pageSizeOptions}
-					selected={{ value: store.pageSize }}
+					selected={store.pageSize}
 					titleText={label}
 				/>
 			)}

@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 import { LayoutSelector, LayoutSelectorProps } from './LayoutSelector';
-import { layoutOption } from '../../../types';
+import { ListOption } from '../../../types';
 
 export default {
 	title: `Molecules/LayoutSelector`,
@@ -75,43 +75,38 @@ export default {
 	},
 };
 
-const layoutOptions: layoutOption[] = [
+const layoutOptions: ListOption[] = [
 	{
 		label: '1 wide',
-		value: {
-			icon: 'square',
-			columns: 1,
-		},
+		value: '1 wide',
+		icon: 'square',
+		columns: 1,
 	},
 	{
 		label: '2 wide',
-		value: {
-			icon: {
-				icon: 'layout-large',
-			},
-			columns: 2,
+		value: '2 wide',
+		icon: {
+			icon: 'layout-large',
 		},
+		columns: 2,
 	},
 	{
 		label: '3 wide',
-		value: {
-			icon: {
-				icon: 'layout-grid',
-			},
-			columns: 3,
+		value: '3 wide',
+		icon: {
+			icon: 'layout-grid',
 		},
+		columns: 3,
 	},
 	{
 		label: '4 wide',
-		value: {
-			columns: 4,
-		},
+		value: '4 wide',
+		columns: 4,
 	},
 	{
 		label: 'custom',
-		value: {
-			component: () => <div className="custom">custom</div>,
-		},
+		value: 'custom',
+		component: () => <div className="custom">custom</div>,
 	},
 ];
 export const Default = (args: LayoutSelectorProps) => {

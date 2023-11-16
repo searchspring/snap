@@ -97,7 +97,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements[1]);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1], [options[1]]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1], [options[1].value]);
 	});
 
 	it('it adds "selected" class on selected option', async () => {
@@ -117,7 +117,7 @@ describe('List Component', () => {
 
 		optionElements = element.querySelectorAll('.ss__list__option');
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex]]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex].value]);
 
 		optionElements.forEach((optionElement, index) => {
 			if (index != selectIndex) {
@@ -132,7 +132,7 @@ describe('List Component', () => {
 		const selectFn = jest.fn();
 		const selectIndex = 1;
 
-		const rendered = render(<List options={options} onSelect={selectFn} selected={options[1]} />);
+		const rendered = render(<List options={options} onSelect={selectFn} selected={options[1].value} />);
 
 		const element = rendered.container.querySelector('.ss__list')!;
 		let optionElements = element.querySelectorAll('.ss__list__option');
@@ -266,13 +266,13 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0]]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
 	});
 
-	it('it can hideCheckbox', async () => {
+	it('it can hideOptionCheckboxes', async () => {
 		const selectFn = jest.fn();
 
-		const rendered = render(<List hideCheckbox={true} options={options} onSelect={selectFn} />);
+		const rendered = render(<List hideOptionCheckboxes={true} options={options} onSelect={selectFn} />);
 
 		const optionElements = rendered.container?.querySelectorAll('.ss__list__option')[0]!;
 
@@ -282,7 +282,110 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0]]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
+	});
+
+	it('it can hideOptionLabels', async () => {
+		const selectFn = jest.fn();
+
+		const rendered = render(<List hideOptionLabels={true} options={options} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__list__option__label');
+
+		expect(label).not.toBeInTheDocument();
+		expect(optionElements).toBeInTheDocument();
+
+		expect(optionElements.innerHTML).toBe(
+			`<span class=\"ss__checkbox ss-v51376-I\" aria-label=\" unchecked checkbox\" role=\"checkbox\"><span class=\"ss__checkbox__empty\"></span></span>`
+		);
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
+	});
+
+	it('it can render Icon options', async () => {
+		const selectFn = jest.fn();
+
+		const iconOptions = [
+			{
+				label: '1 wide',
+				value: '1 wide',
+				icon: 'square',
+			},
+			{
+				label: '2 wide',
+				value: '2 wide',
+				icon: {
+					icon: 'layout-large',
+				},
+			},
+			{
+				label: '3 wide',
+				value: '3 wide',
+				icon: {
+					icon: 'layout-grid',
+				},
+			},
+		];
+
+		const rendered = render(<List options={iconOptions} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__list__option__label');
+		const icon = rendered.container.querySelector('.ss__list__option__icon');
+
+		expect(label).toBeInTheDocument();
+		expect(icon).toBeInTheDocument();
+		expect(icon?.classList.contains('ss__icon--square')).toBe(true);
+
+		expect(optionElements).toBeInTheDocument();
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0].value]);
+	});
+
+	it('it can hide Icon options', async () => {
+		const selectFn = jest.fn();
+
+		const iconOptions = [
+			{
+				label: '1 wide',
+				value: '1 wide',
+				icon: 'square',
+			},
+			{
+				label: '2 wide',
+				value: '2 wide',
+				icon: {
+					icon: 'layout-large',
+				},
+			},
+			{
+				label: '3 wide',
+				value: '3 wide',
+				icon: {
+					icon: 'layout-grid',
+				},
+			},
+		];
+
+		const rendered = render(<List hideOptionIcons={true} options={iconOptions} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__list__option__label');
+		const icon = rendered.container.querySelector('.ss__list__option__icon');
+
+		expect(label).toBeInTheDocument();
+		expect(icon).not.toBeInTheDocument();
+
+		expect(optionElements).toBeInTheDocument();
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0].value]);
 	});
 
 	it('renders the titleText', () => {

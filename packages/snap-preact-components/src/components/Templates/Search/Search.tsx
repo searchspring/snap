@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { combineMerge, defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ResultComponent, ResultsLayout, StylingCSS, layoutOption } from '../../../types';
+import { ComponentProps, ListOption, ResultComponent, ResultsLayout, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
@@ -50,7 +50,7 @@ const CSS = {
 				flexDirection: 'column',
 			},
 
-			'.ss__search__content__toolbar--topToolBar': {
+			'.ss__search__content__toolbar--top-toolbar': {
 				display: 'flex',
 				justifyContent: 'flex-end',
 				margin: '10px 0px',
@@ -68,53 +68,42 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const defaultProps: Partial<SearchProps> = {
 		mobileSidebarDisplayAt: '991px',
 		layoutConfig: {
-			default: {
-				label: '5 wide',
-				value: {
-					columns: 5,
-				},
-			},
 			options: [
 				{
 					label: '1 wide',
-					value: {
-						icon: 'square',
-						columns: 1,
-					},
+					value: '1 wide',
+					icon: 'square',
+					columns: 1,
 				},
 				{
 					label: '2 wide',
-					value: {
-						icon: {
-							icon: 'layout-large',
-						},
-						columns: 2,
+					value: '2 wide',
+					icon: {
+						icon: 'layout-large',
 					},
+					columns: 2,
 				},
 				{
 					label: '3 wide',
-					value: {
-						icon: {
-							icon: 'layout-grid',
-						},
-						columns: 3,
+					value: '3 wide',
+					icon: {
+						icon: 'layout-grid',
 					},
+					columns: 3,
 				},
 				{
 					label: '4 wide',
-					value: {
-						columns: 4,
-					},
+					value: '4 wide',
+					columns: 4,
 				},
 				{
 					label: 'list',
-					value: {
-						icon: {
-							icon: 'layout-list',
-						},
-						component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.LIST} />,
-						columns: 1,
+					value: 'list',
+					icon: {
+						icon: 'layout-list',
 					},
+					component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.LIST} />,
+					columns: 1,
 				},
 			],
 		},
@@ -157,18 +146,32 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const store = controller.store;
 
 	//get current layout from controller local storage
-	let storedLayoutState: string | layoutOption | null = controller.storage.get('currentLayoutState');
+	let storedLayoutState: string | ListOption | null = controller.storage.get('currentLayoutState');
 	if (storedLayoutState) {
 		storedLayoutState = JSON.parse(storedLayoutState as string);
 
 		layoutConfig?.options.map((option) => {
-			if (option.label == (storedLayoutState as layoutOption)!.label && option.value.component) {
-				(storedLayoutState as layoutOption)!.value.component = option.value.component;
+			if (option.label == (storedLayoutState as ListOption)!.label && option.component) {
+				(storedLayoutState as ListOption)!.component = option.component;
 			}
 		});
 	}
 
-	const [layoutState, setLayoutState] = useState((storedLayoutState as layoutOption) || layoutConfig?.default);
+	let defaultLayout: ListOption = {
+		label: '4 wide',
+		value: '4 wide',
+		columns: 4,
+	};
+
+	if (layoutConfig?.default) {
+		if (typeof layoutConfig.default == 'string') {
+			defaultLayout = layoutConfig.options.filter((option) => option.value == layoutConfig.default)[0];
+		} else {
+			defaultLayout = layoutConfig.default;
+		}
+	}
+
+	const [layoutState, setLayoutState] = useState((storedLayoutState as ListOption) || defaultLayout);
 
 	const subProps: SearchSubProps = {
 		MobileSidebar: {
@@ -246,8 +249,8 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		Results: {
 			// default props
 			resultLayout: resultLayout,
-			resultComponent: layoutState ? layoutState.value.component : resultComponent,
-			columns: layoutState ? layoutState.value.columns : 4,
+			resultComponent: layoutState ? layoutState.component : resultComponent,
+			columns: layoutState ? layoutState.columns : 4,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -322,7 +325,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const [sidebarOpenState, setSidebarOpenState] = useState(true);
 
-	const changeLayout = (e: any, option?: layoutOption) => {
+	const changeLayout = (e: any, option?: ListOption) => {
 		if (option) {
 			//set current layout in controller local storage
 			controller.storage.set('currentLayoutState', JSON.stringify(option));
@@ -343,7 +346,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 										{layoutConfig?.options && !hideLayoutSelector && store.pagination.totalResults > 0 && (
 											<LayoutSelector
 												selected={layoutState}
-												onSelect={(e, option) => changeLayout(e, option as layoutOption)}
+												onSelect={(e, option) => changeLayout(e, option as ListOption)}
 												options={layoutConfig?.options}
 											/>
 										)}
@@ -356,7 +359,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 									{layoutConfig?.options && !hideLayoutSelector && store.pagination.totalResults > 0 && (
 										<LayoutSelector
 											selected={layoutState}
-											onSelect={(e, option) => changeLayout(e, option as layoutOption)}
+											onSelect={(e, option) => changeLayout(e, option as ListOption)}
 											options={layoutConfig?.options}
 										/>
 									)}
@@ -371,7 +374,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						{layoutConfig?.options && store.pagination.totalResults > 0 && !hideLayoutSelector && (
 							<LayoutSelector
 								selected={layoutState}
-								onSelect={(e, option) => changeLayout(e, option as layoutOption)}
+								onSelect={(e, option) => changeLayout(e, option as ListOption)}
 								options={layoutConfig?.options}
 							/>
 						)}
@@ -391,7 +394,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						)}
 
 						{!hideTopToolbar && store.pagination.totalResults > 0 && (
-							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--topToolBar" name={'topToolBar'} controller={controller} />
+							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
 						)}
 
 						{!hideMobileSidebar && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
@@ -412,7 +415,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							<Toolbar
 								{...subProps.BottomToolbar}
 								name={'bottomToolBar'}
-								className="ss__search__content__toolbar--bottomToolBar"
+								className="ss__search__content__toolbar--bottom-toolbar"
 								controller={controller}
 							/>
 						)}
@@ -441,8 +444,8 @@ export interface SearchProps extends ComponentProps {
 }
 
 export type layoutConfig = {
-	options: layoutOption[];
-	default?: layoutOption;
+	options: ListOption[];
+	default?: ListOption | string;
 };
 
 interface SearchSubProps {

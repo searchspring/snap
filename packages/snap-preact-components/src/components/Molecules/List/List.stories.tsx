@@ -52,6 +52,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideOptionIcons: {
+			description: 'enable/disable option icons from rendering.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideOptionLabels: {
+			description: 'enable/disable option labels from rendering.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		multiSelect: {
 			description: 'enable/disable multiselect.',
 			table: {
@@ -153,8 +173,33 @@ DisabledOption.args = {
 	],
 } as ListProps;
 
+export const Icons = (args: ListProps) => <List {...args} />;
+Icons.args = {
+	options: [
+		{
+			label: '1 wide',
+			value: '1 wide',
+			icon: 'square',
+		},
+		{
+			label: '2 wide',
+			value: '2 wide',
+			icon: {
+				icon: 'layout-large',
+			},
+		},
+		{
+			label: '3 wide',
+			value: '3 wide',
+			icon: {
+				icon: 'layout-grid',
+			},
+		},
+	],
+} as ListProps;
+
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <List {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0]} />;
+	return <List {...args} options={controller.store.pagination.pageSizeOptions} selected={controller.store.pagination.pageSizeOptions[0].value} />;
 };
 
 PerPage.loaders = [
@@ -172,7 +217,7 @@ PerPage.args = {
 } as ListProps;
 
 export const SortBy = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
+	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current?.value} />;
 };
 
 SortBy.loaders = [
