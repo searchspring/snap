@@ -1,12 +1,13 @@
 import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { SnapTemplateConfig } from '../SnapTemplate';
-import { themeMap } from '../themes/index';
 import type { Theme } from '@searchspring/snap-preact-components';
-import type { SnapConfig } from '../../Snap';
-import { ControllerTypes } from '@searchspring/snap-controller';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-
+import { ThemeStore } from './ThemeStore';
+import { TargetStore } from './TargetStore';
+import { componentMap } from '../components';
+import { themeMap } from '../themes';
+import { localeMap } from '../locale';
 /* classy store
 
 	{
@@ -47,16 +48,16 @@ import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 	
 */
 
-type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
+export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
 
-type TemplateTheme = {
+export type TemplateTheme = {
 	isFromStorage: boolean;
 	base: any;
 	overrides: any;
 	merged: any;
 };
 
-type TemplateTarget = {
+export type TemplateTarget = {
 	template: string;
 	selector?: string;
 	component?: string;
@@ -69,36 +70,59 @@ type TemplateTarget = {
 	*/
 };
 
-const GLOBAL_THEME_NAME = 'global';
+// export type Library = {
+// 	themes: {
+// 		[themeName in keyof typeof themeMap]: Promise<Theme>;
+// 	};
+// 	components: {
+// 		[componentName in keyof typeof componentMap]: Promise<JSX.Element>;
+// 	},
+// 	locale: {
+// 		currency: {
+// 			[currencyName in keyof typeof localeMap.currency]: Promise<Theme>;
+// 		},
+// 		language: {
+// 			[languageName in keyof typeof localeMap.language]: Promise<Theme>;
+// 		}
+// 	}
+// }
+
+export type Dependancies = {
+	storage: StorageStore;
+	library: typeof libraryImports;
+};
+export const GLOBAL_THEME_NAME = 'global';
+
+const libraryImports = {
+	themes: themeMap,
+	components: componentMap,
+	locale: localeMap,
+};
 export class TemplateStore {
 	config: SnapTemplateConfig;
 	storage: StorageStore;
 	language: string; // TODO: type as keyof typeof languageMap
 	currency: string; // TODO: type as keyof typeof currencyMap
-	themeMap: { [key in keyof typeof themeMap]: () => Promise<Theme> } = themeMap;
 	templates: {
 		[key in TemplateTypes]: {
-			[targetId: string]: TemplateTarget;
+			[targetId: string]: TargetStore;
 		};
 	};
 	themes: {
-		[themeName: 'global' | string]: TemplateTheme;
-	};
-	library: {
-		themes: {
-			[themeName in keyof typeof themeMap]?: Theme;
+		local: {
+			[themeName: 'global' | string]: ThemeStore;
 		};
-		components: {
-			templates: {
-				[key in TemplateTypes]?: string[];
-			};
+		library: {
+			// [themeName in keyof typeof themeMap]: ThemeStore;
+			[themeName: string]: ThemeStore;
 		};
-		locales: any;
 	};
+	library = libraryImports;
 
 	constructor(config: SnapTemplateConfig) {
 		this.config = config;
-		this.storage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-theme-overrides' });
+		this.storage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-templates' });
+
 		this.language = this.config.config.language || 'en';
 		this.currency = this.config.config.currency || 'usd';
 
@@ -107,46 +131,20 @@ export class TemplateStore {
 			autocomplete: {},
 			recommendation: {},
 		};
-		this.themes = {};
-
-		this.library = {
-			components: {
-				templates: {
-					search: ['Search', 'SearchTest'],
-					autocomplete: ['Autocomplete'],
-					recommendation: ['Recommendation'],
-				},
-			},
-			locales: {
-				language: {
-					en: {
-						components: {
-							filterSummary: {
-								title: 'Current Filters Custom',
-								clearAllLabel: 'Clear All Custom',
-							},
-						},
-					},
-				},
-				currency: {
-					usd: {
-						components: {
-							price: {
-								symbol: '$',
-							},
-						},
-					},
-					eur: {
-						components: {
-							price: {
-								symbol: '€',
-							},
-						},
-					},
-				},
-			},
-			themes: {},
+		this.themes = {
+			local: {},
+			library: {},
 		};
+
+		// setup themes used by config
+		if (config.config.themes)
+			Object.keys(config.config.themes || {}).forEach((themeKey) => {
+				const theme = config?.config?.themes![themeKey]; // TODO - fix
+				// this.themes.library[theme.name] = this.themes.library[theme.name] || new ThemeStore({ config, themeName: theme.name,  })
+				this.themes.local[themeKey] =
+					this.themes.library[theme.name] || new ThemeStore({ config, themeName: themeKey }, { library: this.library, storage: this.storage });
+				this.themes.local;
+			});
 
 		makeObservable(this, {
 			templates: observable,
@@ -157,178 +155,132 @@ export class TemplateStore {
 	public addTemplate(type: TemplateTypes, template: TemplateTarget): string | undefined {
 		const targetId = template.selector || template.component;
 		if (targetId) {
-			this.templates[type][targetId] = template;
-			makeObservable(this.templates[type], {
-				[targetId]: observable,
-			});
+			this.templates[type][targetId] = new TargetStore(template, 'local');
 			return targetId;
 		}
 	}
 
-	public getTemplate(type: TemplateTypes, targetId: string): any {
-		const themeName = this.templates[type][targetId].theme || GLOBAL_THEME_NAME;
+	public async getTemplate(type: TemplateTypes, targetId: string): Promise<{ Component: JSX.Element; theme?: Theme }> {
+		const componentName = this.templates[type][targetId].template;
+		const templateComponentTypes = this.library.components[type as keyof typeof this.library.components];
+		const component = templateComponentTypes[componentName as keyof typeof templateComponentTypes];
 		return {
-			template: this.templates[type][targetId].template,
-			theme: this.themes[themeName || GLOBAL_THEME_NAME]?.merged || this.library.themes[themeName as keyof typeof themeMap] || {},
+			Component: component(),
 		};
 	}
 
-	public async initialize() {
-		const themes = Object.keys(this.themeMap || {});
-		for (let i = 0; i < themes?.length; i++) {
-			const themeName = themes[i];
-			if (!this.library.themes[themeName as keyof typeof themeMap]) {
-				const libraryBaseTheme = await this.themeMap[themeName as keyof typeof themeMap]();
-				this.library.themes[themeName as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
-			}
-		}
+	public async getTheme(type: TemplateTypes, targetId: string): Promise<{ Component?: JSX.Element; theme?: Theme }> {
+		const themeName = this.templates[type][targetId].theme.name || GLOBAL_THEME_NAME;
+		const theme = this.themes.local[themeName].merged();
+
+		return {
+			theme,
+		};
 	}
+
+	// public async init() {
+	// 	this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency] = await this.imports.locales.currency[this.currency as keyof typeof this.imports.locales.currency]();
+	// }
+
+	// public async initialize() {
+	// 	const themes = Object.keys(this.library.themes || {});
+	// 	for (let i = 0; i < themes?.length; i++) {
+	// 		const themeName = themes[i];
+	// 		if (!this.library.themes[themeName as keyof typeof themeMap]) {
+	// 			const libraryBaseTheme = await this.library.themes[themeName as keyof typeof themeMap]();
+	// 			this.library.themes[themeName as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
+	// 		}
+	// 	}
+	// }
 
 	// only imports theme if a service is using that theme
-	public async importInitialThemes(snapConfig: SnapConfig) {
-		const controllerTypes = Object.keys(snapConfig.controllers || {});
-		for (let i = 0; i < controllerTypes?.length; i++) {
-			const controllerType = controllerTypes[i];
-			const controllers = snapConfig.controllers![controllerType as keyof typeof ControllerTypes] || [];
-			for (let j = 0; j < controllers?.length; j++) {
-				const controllerConfig = controllers[j];
-				for (let k = 0; k < (controllerConfig?.targeters || []).length; k++) {
-					const target = controllerConfig?.targeters && controllerConfig?.targeters[k];
-					const themeName = this.templates[target!.props!.type as TemplateTypes][target!.props!.targetId]?.theme;
-					await this.importTheme(themeName || GLOBAL_THEME_NAME);
-				}
-			}
-		}
-	}
+	// public async importInitialThemes(snapConfig: SnapConfig) {
+	// 	const controllerTypes = Object.keys(snapConfig.controllers || {});
+	// 	for (let i = 0; i < controllerTypes?.length; i++) {
+	// 		const controllerType = controllerTypes[i];
+	// 		const controllers = snapConfig.controllers![controllerType as keyof typeof ControllerTypes] || [];
+	// 		for (let j = 0; j < controllers?.length; j++) {
+	// 			const controllerConfig = controllers[j];
+	// 			for (let k = 0; k < (controllerConfig?.targeters || []).length; k++) {
+	// 				const target = controllerConfig?.targeters && controllerConfig?.targeters[k];
+	// 				const themeName = this.templates[target!.props!.type as TemplateTypes][target!.props!.targetId]?.theme.name;
+	// 				await this.importTheme(themeName || GLOBAL_THEME_NAME);
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	public async importTheme(themeName: string): Promise<void> {
-		if (!this.themes[themeName] && this.config.config.themes && this.config.config.themes[themeName]) {
-			const themeConfig = this.config.config.themes![themeName];
-			const { name, overrides, variables } = themeConfig;
+	// public async importTheme(themeName: string): Promise<void> {
+	// 	if ((!this.themes.local[themeName]) && this.config.config.themes && this.config.config.themes[themeName]) {
+	// 		const themeConfig = this.config.config.themes![themeName];
+	// 		const { name } = themeConfig;
 
-			if (this.themeMap[name as keyof typeof themeMap]) {
-				let libraryBaseTheme: Theme;
+	// 		if (this.library.themes[name as keyof typeof themeMap]) {
+	// 			let libraryBaseTheme: Theme;
 
-				if (this.library.themes[name as keyof typeof themeMap]) {
-					libraryBaseTheme = this.library.themes[name as keyof typeof themeMap]!;
-				} else {
-					libraryBaseTheme = await this.themeMap[name as keyof typeof themeMap]();
-					this.library.themes[name as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
-				}
+	// 			if (this.themes.library[name as keyof typeof themeMap]) {
+	// 				libraryBaseTheme = this.themes.library[name as keyof typeof themeMap]!;
+	// 			} else {
+	// 				libraryBaseTheme = await this.library.themes[name as keyof typeof themeMap]();
+	// 				this.library.themes[name as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
+	// 			}
 
-				const themeVariables = variables || this.config.config.themes![GLOBAL_THEME_NAME].variables || {};
-				const themeOverrides = overrides || this.config.config.themes![GLOBAL_THEME_NAME].overrides || {};
+	// 			this.themes.local[themeName] = new ThemeStore({
+	// 				config: this.config,
+	// 				themeName,
+	// 				libraryBaseTheme,
+	// 			}, { storage: this.storage, library: this.library });
+	// 		}
+	// 	}
+	// }
 
-				const base = deepmerge(libraryBaseTheme, deepmerge({ variables: themeVariables }, themeOverrides, { arrayMerge: combineMerge }), {
-					arrayMerge: combineMerge,
-				});
-
-				const merged = deepmerge(
-					base,
-					deepmerge(this.library.locales.language[this.language], this.library.locales.currency[this.currency], { arrayMerge: combineMerge }),
-					{ arrayMerge: combineMerge }
-				);
-
-				const storedOverrides = this.storage.get(themeName);
-
-				this.themes[themeName] = {
-					isFromStorage: Boolean(Object.keys(storedOverrides || {})?.length),
-					base,
-					overrides: storedOverrides || {},
-					merged,
-				};
-				if (storedOverrides) {
-					this.regenerateTheme(themeName);
-				}
-			}
-		}
-	}
-
-	public setThemeOverrides(obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }): void {
-		const { themeName, path, rootEditingKey, value } = obj;
-
-		const overrides = {
-			[rootEditingKey]: path.reverse().reduce((res, key) => {
-				if (path.indexOf(key) === 0) {
-					return {
-						[key]: value,
-					};
-				}
-				return {
-					[key]: res,
-				};
-			}, {}),
-		};
-
-		this.themes[themeName].overrides = deepmerge(this.themes[themeName].overrides, overrides, { arrayMerge: combineMerge });
-		this.regenerateTheme(themeName);
-	}
-	public regenerateTheme(themeName: string): void {
-		if (this.themes && this.themes[themeName]) {
-			const merged: any = deepmerge(
-				deepmerge(
-					this.themes[themeName].base,
-					deepmerge(this.library.locales.language[this.language], this.library.locales.currency[this.currency], { arrayMerge: combineMerge }),
-					{ arrayMerge: combineMerge }
-				),
-				this.themes[themeName].overrides,
-				{ arrayMerge: combineMerge }
-			);
-
-			this.themes = {
-				...this.themes,
-				[themeName]: {
-					...this.themes[themeName],
-					merged,
-				},
-			};
-		}
-	}
-
-	public regenerateThemes(): void {
-		Object.keys(this.themes || {}).forEach((themeName) => {
-			this.regenerateTheme(themeName);
-		});
-	}
+	// public setThemeOverrides(obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }): void {
+	// 	const { themeName, path, rootEditingKey, value } = obj;
+	// 	this.themes.local[themeName].setOverride({
+	// 		path,
+	// 		rootEditingKey,
+	// 		value,
+	// 	});
+	// }
 
 	public changeCurrency(currency: string): void {
 		this.currency = currency;
-		this.regenerateThemes();
+		// this.regenerateThemes();
 	}
 
 	public changeLanguage(language: string): void {
 		this.language = language;
-		this.regenerateThemes();
+		// this.regenerateThemes();
 	}
 
-	public changeTemplate(type: TemplateTypes, target: string, template: string): void {
-		this.templates[type][target].template = template;
-	}
+	// 	public changeTemplate(type: TemplateTypes, target: string, template: string): void {
+	// 		this.templates[type][target].setTemplate(template);
+	// 	}
 
-	public changeTheme(type: TemplateTypes, target: string, from: 'local' | 'base', theme: string): void {
-		this.templates[type][target].theme = theme;
-	}
+	// 	public changeTheme(type: TemplateTypes, target: string, from: TargetLocation, theme: string): void {
+	// 		this.templates[type][target].setTheme(theme, from);
+	// 	}
 
-	public save(theme: string) {
-		const overrides = this.themes[theme].overrides;
-		this.storage.set(theme, overrides);
-	}
+	// 	public save(theme: string) {
+	// 		const overrides = this.themes[theme].overrides;
+	// 		this.storage.set(theme, overrides);
+	// 	}
 
-	public removeFromStorage(theme: string) {
-		this.storage.set(theme, {});
-	}
+	// 	public removeFromStorage(theme: string) {
+	// 		this.storage.set(theme, {});
+	// 	}
 }
 
-const deepFreeze = (obj: any) => {
-	Object.keys(obj).forEach((prop) => {
-		if (typeof obj[prop] === 'object') {
-			deepFreeze(obj[prop]);
-		}
-	});
-	return Object.freeze(obj);
-};
+// const deepFreeze = (obj: any) => {
+// 	Object.keys(obj).forEach((prop) => {
+// 		if (typeof obj[prop] === 'object') {
+// 			deepFreeze(obj[prop]);
+// 		}
+// 	});
+// 	return Object.freeze(obj);
+// };
 
-const combineMerge = (target: any, source: any, options: any) => {
+export const combineMerge = (target: any, source: any, options: any) => {
 	const destination = target.slice();
 	source.forEach((item: any, index: any) => {
 		if (typeof destination[index] === 'undefined') {

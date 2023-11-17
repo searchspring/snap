@@ -94,7 +94,9 @@ export class SnapTemplate extends Snap {
 		window.searchspring.templateStore = templateStore;
 
 		const snapConfig = createSnapConfig(config, templateStore);
-		templateStore.importInitialThemes(snapConfig);
+		// templateStore.importInitialThemes(snapConfig);
+		// templateStore.init();
+
 		super(snapConfig);
 
 		const urlParams = url(window.location.href);
@@ -119,7 +121,7 @@ export class SnapTemplate extends Snap {
 					],
 					async (target: Target, elem: Element) => {
 						const TemplateEditor = (await import('./components/TemplateEditor')).TemplateEditor;
-						await templateStore.initialize();
+						// await templateStore.initialize();
 						render(
 							<TemplateEditor
 								templateStore={templateStore}
