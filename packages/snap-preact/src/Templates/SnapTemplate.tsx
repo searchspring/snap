@@ -2,9 +2,10 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { componentMap, TemplateSelect } from './components';
+import { componentMap } from './components';
+import { TemplateSelect } from '@searchspring/snap-preact-components';
 
-import { AppMode, DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
+import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
 import { TemplateStore } from './Stores/TemplateStore';
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
@@ -18,7 +19,7 @@ import type { SnapConfig, ExtendedTarget } from '../Snap';
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
 // // TODO: tabbing, result layout toggling, finders
-type SearchTemplateConfig = {
+export type SearchTemplateConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Search';
@@ -26,7 +27,7 @@ type SearchTemplateConfig = {
 	resultComponent?: ResultComponent;
 };
 
-type AutocompleteTemplateConfig = {
+export type AutocompleteTemplateConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Autocomplete';
@@ -34,7 +35,7 @@ type AutocompleteTemplateConfig = {
 	resultComponent?: ResultComponent;
 };
 
-type RecommendationTemplateConfig = {
+export type RecommendationTemplateConfig = {
 	component: string;
 	theme?: string;
 	template: 'Recommendation';
@@ -89,7 +90,11 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 
 export class SnapTemplate extends Snap {
 	constructor(config: SnapTemplateConfig) {
-		const templateStore = new TemplateStore(config);
+		const urlParams = url(window.location.href);
+		const themeEdit = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
+
+		const templateStore = new TemplateStore(config, themeEdit);
+
 		window.searchspring = window.searchspring || {};
 		window.searchspring.templateStore = templateStore;
 
@@ -99,12 +104,8 @@ export class SnapTemplate extends Snap {
 
 		super(snapConfig);
 
-		const urlParams = url(window.location.href);
-		const themeEdit = urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE);
-
-		setTimeout(() => {
-			// ?dev=1&theme=1
-			if (this.mode === AppMode.development && themeEdit) {
+		if (themeEdit) {
+			setTimeout(() => {
 				new DomTargeter(
 					[
 						{
@@ -121,7 +122,7 @@ export class SnapTemplate extends Snap {
 					],
 					async (target: Target, elem: Element) => {
 						const TemplateEditor = (await import('./components/TemplateEditor')).TemplateEditor;
-						// await templateStore.initialize();
+						await templateStore.initializeEditor();
 						render(
 							<TemplateEditor
 								templateStore={templateStore}
@@ -142,8 +143,8 @@ export class SnapTemplate extends Snap {
 						);
 					}
 				);
-			}
-		});
+			}, 1000);
+		}
 	}
 }
 
@@ -164,7 +165,7 @@ export const createSearchTargeters = (templateConfig: SnapTemplateConfig, templa
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
 			hideTarget: true,
-			component: TemplateSelect,
+			component: () => TemplateSelect,
 			props: { componentMap, type: 'search', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 		};
 
@@ -185,7 +186,7 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig, 
 		const targetId = templateStore.addTemplate('autocomplete', template);
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
-			component: TemplateSelect,
+			component: () => TemplateSelect,
 			props: { componentMap, type: 'autocomplete', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 			hideTarget: true,
 		};
@@ -210,7 +211,7 @@ export function createRecommendationComponentMapping(
 		? templates.reduce((mapping, template) => {
 				const targetId = templateStore.addTemplate('recommendation', template);
 				mapping[template.component] = {
-					component: TemplateSelect,
+					component: () => TemplateSelect,
 					props: { componentMap, type: 'recommendation', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
 				};
 

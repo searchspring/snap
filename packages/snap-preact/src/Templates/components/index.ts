@@ -1,25 +1,15 @@
-export const TemplateSelect = async () => {
-	return (await import('./templateselect')).TemplateSelect;
-};
-
 // allowed template components for each main type
 export const componentMap = {
-	search: {
-		Search: async () => {
-			return (await import('./search')).Search;
-		},
-		SearchTest: async () => {
-			return (await import('./search')).SearchTest;
-		},
+	Search: async () => {
+		return (await import('./search')).Search;
 	},
-	autocomplete: {
-		Autocomplete: async () => {
-			return (await import('./autocomplete')).Autocomplete;
-		},
+	SearchTest: async () => {
+		return (await import('./search')).SearchTest;
 	},
-	recommendation: {
-		Recommendation: async () => {
-			return (await import('./recommendation')).Recommendation;
-		},
+	Autocomplete: async () => {
+		return (await import('./autocomplete')).Autocomplete;
+	},
+	Recommendation: async () => {
+		return (await import('./recommendation')).Recommendation;
 	},
 };
