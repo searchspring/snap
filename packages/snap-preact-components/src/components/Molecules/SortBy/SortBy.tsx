@@ -53,6 +53,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			theme: props?.theme,
 		},
 		List: {
+			multiSelect: false,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props

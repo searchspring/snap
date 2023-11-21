@@ -53,6 +53,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			theme: props?.theme,
 		},
 		List: {
+			multiSelect: false,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props

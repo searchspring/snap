@@ -9,6 +9,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
@@ -110,6 +111,9 @@ export function List(properties: ListProps): JSX.Element {
 				setSelection(newArray);
 			}
 		} else {
+			if (onSelect) {
+				onSelect(e, option, [option.value]);
+			}
 			setSelection([option.value]);
 		}
 	};
@@ -121,14 +125,14 @@ export function List(properties: ListProps): JSX.Element {
 
 				<ul className={`ss__list__options-wrapper`}>
 					{options.map((option: ListOption) => {
+						const selected = selection.indexOf(option.value.toString()) > -1 || selection.indexOf(option.value) > -1;
 						return (
 							<li
-								className={`ss__list__option ${selection && selection.indexOf(option.value.toString()) > -1 ? 'ss__list__option--selected' : ''} ${
-									option.disabled ? 'ss__list__option--disabled' : ''
-								}`}
+								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
+								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={selection.indexOf(option.value.toString()) > -1} disableA11y={true} />}
+								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
 								<label className="ss__list__option__label">{option.label || option.value}</label>
 							</li>
 						);

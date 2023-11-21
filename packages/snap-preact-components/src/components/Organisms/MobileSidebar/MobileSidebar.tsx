@@ -12,6 +12,8 @@ import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
+import { useA11y } from '../../../hooks';
+import { useRef } from 'react';
 
 const CSS = {
 	toolbar: () =>
@@ -129,23 +131,36 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 	};
 
+	const closeButtonRef = useRef();
+
 	const Content = (props: any) => {
 		const { toggleActive } = props;
 		return (
-			<div className="ss__mobile-sidebar__content">
+			<div className="ss__mobile-sidebar__content" ref={(e) => useA11y(e, -1, { returnelem: closeButtonRef, clickToClose: true })}>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 className="ss__mobile-sidebar__header__title">{titleText}</h4>
+						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title">
+							{titleText}
+						</h4>
+
 						{!hideCloseButton && (
 							<Button
 								className="ss__mobile-sidebar__header__close-button"
 								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
 								onClick={() => toggleActive()}
+								// @ts-ignore -  Property 'ref' does not exist on type componentProps
+								ref={(e: any) => {
+									if (e) {
+										closeButtonRef.current = e;
+									}
+								}}
 								icon={closeButtonIcon}
 								{...subProps.button}
 							>
-								{closeButtonText}
+								<label ref={(e) => useA11y(e)} aria-label={closeButtonText || `close ${openButtonText || 'sidebar'} button`}>
+									{closeButtonText}
+								</label>
 							</Button>
 						)}
 					</div>

@@ -20,6 +20,7 @@ import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../provider
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	Autocomplete: ({
@@ -444,6 +445,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{...styling}
 					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}
+					ref={(e) => useA11y(e, 0, { returnelem: input, blurToClose: true, controller: controller })}
 				>
 					{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>

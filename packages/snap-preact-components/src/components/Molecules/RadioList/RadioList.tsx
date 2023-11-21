@@ -9,6 +9,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	radioList: ({}: Partial<RadioListProps>) =>
@@ -105,9 +106,10 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
+								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection} />}
+								{!hideRadios && <Radio {...subProps.Radio} checked={option.value == selection} disableA11y={true} />}
 								<label className="ss__radio-list__option__label">{option.label || option.value}</label>
 							</li>
 						);
