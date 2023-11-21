@@ -35,7 +35,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
+				border: `1px solid ${borderColor || color || theme?.variables?.color?.primary || '#333'}`,
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
@@ -44,7 +44,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme?.colors?.hover || '#f8f8f8',
+						backgroundColor: theme?.variables?.color?.hover?.background || '#f8f8f8',
 					},
 				},
 			},

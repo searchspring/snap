@@ -48,7 +48,7 @@ const CSS = {
 				},
 				'&.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.colors?.primary || '#333',
+						borderColor: theme?.variables?.color?.primary || '#333',
 						padding: '0px',
 						borderWidth: '4px',
 					},

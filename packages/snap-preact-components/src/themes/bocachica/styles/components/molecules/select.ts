@@ -1,9 +1,8 @@
 import { css, SelectProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Select component
 const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: SelectProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		display: 'inline-flex',

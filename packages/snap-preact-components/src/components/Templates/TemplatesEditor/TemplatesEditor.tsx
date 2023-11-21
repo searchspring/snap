@@ -142,6 +142,7 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 		template: templatesStore.templates.recommendation[target],
 	}));
 	const templates = [...searchTemplates, ...autocompleteTemplates, ...recommendationTemplates];
+
 	if (templates.length === 0) {
 		return <div>no themes found</div>;
 	}
@@ -156,11 +157,11 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 	};
 
 	const { library } = templatesStore;
-	const { language, currency } = library.locales;
-	const languages = Object.keys(language);
-	const currencies = Object.keys(currency);
-	const baseThemes = Object.keys(library.themes || {});
-	const lcoalThemes = Object.keys(templatesStore.themes || {}).sort((a, b) => {
+	const { languages, currencies } = library.locales;
+	const languageKeys = Object.keys(languages);
+	const currencyKeys = Object.keys(currencies);
+	const libraryThemes = Object.keys(templatesStore.themes.library || {});
+	const lcoalThemes = Object.keys(templatesStore.themes.local || {}).sort((a, b) => {
 		if (a === 'global') return -1;
 		if (b === 'global') return 1;
 		return 0;
@@ -173,12 +174,13 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 		return template.selector === selectedTarget.target;
 	});
 
-	const setThemeOverrides = (obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
-		templatesStore.setThemeOverrides(obj);
-		setThemes(templatesStore.themes);
-	};
+	const themeRef = templatesStore.themes[selectedTarget.template.theme.location][selectedTarget.template.theme.name];
+	const [theme, setTheme] = useState(themeRef.theme);
 
-	const [themes, setThemes] = useState(templatesStore.themes);
+	const setOverride = (obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
+		themeRef.setOverride(obj);
+		setTheme(themeRef.theme);
+	};
 
 	return (
 		<div
@@ -242,10 +244,10 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const language = selectedOption.value;
 
 						changeLanguage(language);
-						templatesStore.changeLanguage(language);
+						templatesStore.setLanguage(language);
 					}}
 				>
-					{languages.map((language: string) => {
+					{languageKeys.map((language: string) => {
 						return <option selected={language === selectedLanguage}>{language}</option>;
 					})}
 				</select>
@@ -261,10 +263,10 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const currency = selectedOption.value;
 
 						changeCurrency(currency);
-						templatesStore.changeCurrency(currency);
+						templatesStore.setCurrency(currency);
 					}}
 				>
-					{currencies.map((currency: string) => {
+					{currencyKeys.map((currency: string) => {
 						return <option selected={currency === selectedCurrency}>{currency}</option>;
 					})}
 				</select>
@@ -319,11 +321,11 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const selectedOption = options[selectedIndex];
 						const selectedTemplate = selectedOption.value;
 
-						templatesStore.changeTemplate(selectedTarget.type, selectedTarget.target, selectedTemplate);
+						templatesStore.templates[selectedTarget.type][selectedTarget.target].setTemplate(selectedTemplate);
 					}}
 				>
-					{library.components.templates[selectedTarget.type].map((componentName: string) => {
-						return <option selected={componentName === selectedTarget.template}>{componentName}</option>;
+					{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
+						return <option selected={componentName === selectedTarget.template.template}>{componentName}</option>;
 					})}
 				</select>
 			</div>
@@ -338,12 +340,12 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const selectedTheme = selectedOption.value;
 						const type = selectedOption.closest('optgroup')?.label;
 
-						templatesStore.changeTheme(selectedTarget.type, selectedTarget.target, type, selectedTheme);
+						templatesStore.templates[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
 					}}
 				>
-					<optgroup label="base">
-						{baseThemes.map((baseTheme) => (
-							<option>{baseTheme}</option>
+					<optgroup label="library">
+						{libraryThemes.map((libraryTheme) => (
+							<option>{libraryTheme}</option>
 						))}
 					</optgroup>
 					<optgroup label="local">
@@ -357,7 +359,7 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 			<h3>Theme Variables</h3>
 			<div className="section">
 				<div className="indent">
-					{themes[selectedTargetConfig.theme]?.isFromStorage ? (
+					{/* {themes[selectedTargetConfig.theme]?.isFromStorage ? (
 						<Fragment>
 							<label htmlFor="theme-select">
 								<i>Loaded from storage</i>
@@ -373,27 +375,14 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						</Fragment>
 					) : (
 						''
-					)}
-					{themes[selectedTargetConfig.theme]?.merged?.variables ? (
+					)} */}
+					{theme?.variables ? (
 						<ThemeEditor
-							property={themes[selectedTargetConfig.theme].merged.variables}
+							property={theme?.variables}
 							rootEditingKey={'variables'}
-							themeName={selectedTargetConfig.theme}
-							setThemeOverrides={setThemeOverrides}
+							themeName={selectedTarget.template.theme.name}
+							setOverride={setOverride}
 						/>
-					) : (
-						''
-					)}
-
-					{Object.keys(themes[selectedTargetConfig.theme]?.overrides || {}).length > 0 ? (
-						<button
-							onClick={() => {
-								templatesStore.save(selectedTargetConfig.theme);
-								window?.location.reload();
-							}}
-						>
-							Save
-						</button>
 					) : (
 						''
 					)}
@@ -407,7 +396,7 @@ const ThemeEditor = (props: any): any => {
 	const pathPrefix: any = props.pathPrefix || [];
 	const path = [...pathPrefix, props?.propertyName].filter((a) => a);
 	const themeName = props.themeName;
-	const setThemeOverrides = props.setThemeOverrides;
+	const setOverride = props.setOverride;
 	const rootEditingKey = props.rootEditingKey;
 
 	const [isColorPickerVisible, setColorPickerVisible] = useState(false);
@@ -418,16 +407,16 @@ const ThemeEditor = (props: any): any => {
 		return;
 	}
 
-	if (Array.isArray(props.property)) {
-		// string input comma separated
-		return (
-			<Fragment>
-				<label>{path.join('.')}: </label>
-				<input type="text" value={props.property.join(',')} />
-				<span>(csv)</span>
-			</Fragment>
-		);
-	}
+	// if (Array.isArray(props.property)) {
+	// 	// string input comma separated
+	// 	return (
+	// 		<Fragment>
+	// 			<label>{path.join('.')}: </label>
+	// 			<input type="text" value={props.property.join(',')} />
+	// 			<span>(csv)</span>
+	// 		</Fragment>
+	// 	);
+	// }
 
 	if (typeof props.property === 'number' || typeof props.property === 'string' || typeof props.property === 'boolean') {
 		const value = props.property.toString();
@@ -451,7 +440,7 @@ const ThemeEditor = (props: any): any => {
 								setColorBeingEdited(color.hex);
 							}}
 							onChangeComplete={(color) => {
-								setThemeOverrides({
+								setOverride({
 									themeName,
 									path,
 									rootEditingKey,
@@ -477,7 +466,7 @@ const ThemeEditor = (props: any): any => {
 					property={property}
 					rootEditingKey={rootEditingKey}
 					themeName={themeName}
-					setThemeOverrides={setThemeOverrides}
+					setOverride={setOverride}
 					propertyName={Object.getOwnPropertyNames(props.property)[index]}
 					pathPrefix={[...pathPrefix, props.propertyName]}
 				/>

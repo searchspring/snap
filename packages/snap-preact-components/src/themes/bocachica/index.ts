@@ -1,16 +1,7 @@
-import { Theme, GlobalThemeVariables } from '../../providers';
+import { Theme, ThemeVariables } from '../../providers';
 import * as style from './styles/styles';
 
-export type BocachicaVariables = GlobalThemeVariables & {
-	breakpoints?: [number, number, number, number];
-};
-
-export type BocachicaTheme = Theme & {
-	variables: BocachicaVariables;
-	responsive: [Theme, Theme, Theme, Theme];
-};
-
-const bocachicaVariables: BocachicaVariables = {
+const bocachicaVariables: ThemeVariables = {
 	breakpoints: [0, 540, 767, 1200],
 	color: {
 		primary: '#202223',
@@ -29,7 +20,7 @@ const bocachicaVariables: BocachicaVariables = {
 	},
 };
 
-export const bocachica: BocachicaTheme = {
+export const bocachica: Theme = {
 	variables: bocachicaVariables,
 	components: {
 		// ATOMS

@@ -21,11 +21,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.colors?.hover,
+					background: theme?.variables?.color?.hover?.background,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme?.colors?.primary,
+					color: theme?.variables?.color?.primary,
 					'&:hover': {
 						cursor: 'default',
 						background: 'unset',
@@ -38,7 +38,7 @@ const CSS = {
 					'&:before': {
 						content: `'\\0000ab'`,
 						padding: '0 2px 0 0',
-						color: theme?.colors?.primary,
+						color: theme?.variables?.color?.primary,
 					},
 				},
 				'& .ss__facet-hierarchy-options__option__value': {

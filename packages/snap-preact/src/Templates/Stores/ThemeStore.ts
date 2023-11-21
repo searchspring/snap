@@ -1,27 +1,38 @@
-import { observable, makeObservable } from 'mobx';
+import { observable, computed, action, makeObservable } from 'mobx';
 // import { memo } from 'preact/compat';
 // import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { Theme } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
 import type { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes } from './TemplateStore';
+import type { DeepPartial } from '../../types';
 
 export class ThemeStore {
+	dependencies: { storage: StorageStore };
 	name: string;
 	type: string;
 	base: Theme;
-	overrides: Theme;
-	variables: Theme;
-	currency: Theme;
-	language: Theme;
-	// stored: Theme;
-	// custom: { storage: StorageStore; set: (path: string[], value: string) => void; theme: Theme };
+	overrides: DeepPartial<Theme>;
+	variables: DeepPartial<ThemeVariables>;
+	currency: Partial<Theme>;
+	language: Partial<Theme>;
+	stored: Partial<Theme>;
 
 	constructor(
-		config: { name: string; type: TemplateThemeTypes; base: Theme; overrides?: Theme; variables?: Theme; currency: Theme; language: Theme },
+		config: {
+			name: string;
+			type: TemplateThemeTypes;
+			base: Theme;
+			overrides?: DeepPartial<Theme>;
+			variables?: DeepPartial<ThemeVariables>;
+			currency: Partial<Theme>;
+			language: Partial<Theme>;
+		},
 		dependencies: { storage: StorageStore }
 	) {
+		this.dependencies = dependencies;
+
 		const { name, type, base, overrides, variables, currency, language } = config;
 		this.name = name;
 		this.type = type;
@@ -30,8 +41,7 @@ export class ThemeStore {
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
-
-		console.log('need to add local storage using:', dependencies);
+		this.stored = this.dependencies.storage.get(`themes.${this.type}.${this.name}`) || {};
 
 		makeObservable(this, {
 			name: observable,
@@ -40,40 +50,57 @@ export class ThemeStore {
 			variables: observable,
 			currency: observable,
 			language: observable,
+			stored: observable,
+			setOverride: action,
+			theme: computed,
 		});
 	}
 
 	public get theme(): Theme {
-		return mergeLayers(this.base, this.overrides, { variables: this.variables }, this.currency, this.language);
+		return mergeLayers(
+			this.base,
+			this.overrides as Partial<Theme>,
+			{ variables: this.variables } as Partial<Theme>,
+			this.currency,
+			this.language,
+			this.stored
+		);
 	}
 
-	public setCurrency(currency: Theme) {
+	public setCurrency(currency: Partial<Theme>) {
 		this.currency = currency;
 	}
 
-	public setLanguage(language: Theme) {
+	public setLanguage(language: Partial<Theme>) {
 		this.language = language;
 	}
 
-	// public setOverride(obj: { path: string[]; rootEditingKey: string; value: string }) {
-	//     const { path, rootEditingKey, value } = obj;
-	//     const overrides = {
-	// 		[rootEditingKey]: path.reverse().reduce((res, key) => {
-	// 			if (path.indexOf(key) === 0) {
-	// 				return {
-	// 					[key]: value,
-	// 				};
-	// 			}
-	// 			return {
-	// 				[key]: res,
-	// 			};
-	// 		}, {}),
-	// 	};
-	//     this.overrides = deepmerge(this.overrides, overrides, { arrayMerge: combineMerge });
+	// removing a key from custom theme
+	// public removeOverride(obj: { path: string[]; rootEditingKey: string; }) {
+	// 	// TODO: remove key from stored
 	// }
+
+	// setting a key custom theme
+	public setOverride(obj: { path: string[]; rootEditingKey: string; value: string }) {
+		const { path, rootEditingKey, value } = obj;
+		const overrides = {
+			[rootEditingKey]: path.reverse().reduce((res, key) => {
+				if (path.indexOf(key) === 0) {
+					return {
+						[key]: value,
+					};
+				}
+				return {
+					[key]: res,
+				};
+			}, {}),
+		};
+		this.stored = mergeLayers(this.stored, overrides);
+		this.dependencies.storage.set(`themes.${this.type}.${this.name}`, this.stored);
+	}
 }
 
-function mergeLayers(...layers: Theme[]): Theme {
+function mergeLayers(...layers: Partial<Theme>[]): Partial<Theme> {
 	// TODO: memoize
 	return deepmerge.all(layers, { arrayMerge: combineMerge, isMergeableObject: isPlainObject });
 }

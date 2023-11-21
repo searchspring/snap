@@ -9,7 +9,10 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	const themeLocation = templatesStore?.themes?.[targeter.theme.location];
 	const theme = themeLocation && themeLocation[targeter.theme.name]?.theme;
 
-	console.log('using template and theme', Component, theme);
+	console.log('using component', templatesStore?.library?.components[type][targeter.template]);
+	console.log('using components[type]', templatesStore?.library?.components[type]);
+	console.log('using targeter.template', targeter.template);
+	console.log('using -----');
 
 	console.log('template selecting!');
 

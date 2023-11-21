@@ -12,7 +12,7 @@ import { mergeProps } from '../../../utilities';
 const CSS = {
 	icon: ({ color, height, width, size, theme }: Partial<IconProps>) =>
 		css({
-			fill: color || theme?.colors?.primary,
+			fill: color || theme?.variables?.color?.primary,
 			width: width || size,
 			height: height || size,
 			position: 'relative',

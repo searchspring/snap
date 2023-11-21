@@ -22,11 +22,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.colors?.hover,
+					background: theme?.variables?.color?.hover?.background,
 				},
 				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme?.colors?.primary,
+					color: theme?.variables?.color?.primary,
 				},
 				'& .ss__facet-list-options__option__value': {
 					marginLeft: hideCheckbox ? '' : '8px',

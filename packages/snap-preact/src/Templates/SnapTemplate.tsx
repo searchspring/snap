@@ -11,9 +11,9 @@ import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from 
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
 import type { ResultComponent, ResultLayoutTypes } from '@searchspring/snap-preact-components';
-import type { SnapFeatures } from '../types';
+import type { SnapFeatures, DeepPartial } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import { Theme } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
@@ -46,11 +46,8 @@ export type RecommendationTemplateConfig = {
 // TODO - clean up theme typing
 type TemplateThemeConfig = {
 	name: 'pike' | 'bocachica'; // various themes available
-	variables?: any;
-	// variables?: {
-	// 	breakpoints: number[];
-	// };
-	overrides?: Partial<Theme>;
+	variables?: DeepPartial<ThemeVariables>;
+	overrides?: DeepPartial<Theme>;
 };
 
 export type SnapTemplatesConfig = {

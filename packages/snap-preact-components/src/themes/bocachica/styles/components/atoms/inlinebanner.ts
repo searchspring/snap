@@ -1,10 +1,9 @@
 import { css, InlineBannerProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the InlineBanner component
 const inlineBannerStyleScript = ({ width, theme }: InlineBannerProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		height: '100%',

@@ -1,4 +1,6 @@
-import { Theme } from '@searchspring/snap-preact-components';
+import type { Theme } from '@searchspring/snap-preact-components';
+import type { FunctionalComponent } from 'preact';
+import type { TemplateTypes } from './TemplateStore';
 
 export class LibraryStore {
 	themes: {
@@ -6,14 +8,8 @@ export class LibraryStore {
 	} = {};
 
 	components: {
-		search: {
-			[componentName: string]: any;
-		};
-		autocomplete: {
-			[componentName: string]: any;
-		};
-		recommendation: {
-			[componentName: string]: any;
+		[key in TemplateTypes]: {
+			[componentName: string]: FunctionalComponent<any>;
 		};
 	} = {
 		search: {},

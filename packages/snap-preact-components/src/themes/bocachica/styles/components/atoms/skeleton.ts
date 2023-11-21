@@ -1,11 +1,10 @@
 import { keyframes } from '@emotion/react';
 import { css, SkeletonProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Skeleton component
 const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedColor, theme }: SkeletonProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 	const animation = keyframes({
 		from: {
 			transform: 'translateX(-100%)',
