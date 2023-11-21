@@ -1,4 +1,4 @@
-import { SnapTemplate } from '@searchspring/snap-preact';
+import { SnapTemplates } from '@searchspring/snap-preact';
 // import { resultLayout } from './resultLayout';
 import { Result } from './components/Result';
 
@@ -44,20 +44,19 @@ import { Result } from './components/Result';
 // 	}
 // });
 
-new SnapTemplate({
+new SnapTemplates({
 	config: {
 		language: 'en',
 		currency: 'eur',
 		themes: {
 			global: {
 				name: 'bocachica',
-				overrides: {
-					variables: {
-						color: {
-							primary: 'yellow',
-							secondary: 'yellow',
-							accent: 'yellow',
-						},
+				variables: {
+					breakpoints: [500, 768, 1024, 1600],
+					color: {
+						primary: 'yellow',
+						secondary: 'yellow',
+						accent: 'yellow',
 					},
 				},
 			},

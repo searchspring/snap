@@ -15,7 +15,7 @@ const CSS = {
 			backgroundColor: color,
 			border: isColorPickerVisible ? '1px solid black' : '',
 		}),
-	TemplateEditor: ({}: Partial<TemplateEditorProps>) =>
+	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -124,22 +124,22 @@ const CSS = {
 		}),
 };
 
-export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => {
-	const { onRemoveClick, templateStore } = properties;
-	const searchTemplates = Object.keys(templateStore.templates.search || {}).map((target) => ({
+export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element => {
+	const { onRemoveClick, templatesStore } = properties;
+	const searchTemplates = Object.keys(templatesStore.templates.search || {}).map((target) => ({
 		type: 'search',
 		target,
-		template: templateStore.templates.search[target],
+		template: templatesStore.templates.search[target],
 	}));
-	const autocompleteTemplates = Object.keys(templateStore.templates.autocomplete || {}).map((target) => ({
+	const autocompleteTemplates = Object.keys(templatesStore.templates.autocomplete || {}).map((target) => ({
 		type: 'autocomplete',
 		target,
-		template: templateStore.templates.autocomplete[target],
+		template: templatesStore.templates.autocomplete[target],
 	}));
-	const recommendationTemplates = Object.keys(templateStore.templates.recommendation || {}).map((target) => ({
+	const recommendationTemplates = Object.keys(templatesStore.templates.recommendation || {}).map((target) => ({
 		type: 'recommendation',
 		target,
-		template: templateStore.templates.recommendation[target],
+		template: templatesStore.templates.recommendation[target],
 	}));
 	const templates = [...searchTemplates, ...autocompleteTemplates, ...recommendationTemplates];
 	if (templates.length === 0) {
@@ -148,25 +148,25 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 
 	const [collapsed, setCollapsed] = useState(false);
 	const [selectedTarget, changeTargetSelection] = useState(templates[0]);
-	const [selectedLanguage, changeLanguage] = useState(templateStore.language);
-	const [selectedCurrency, changeCurrency] = useState(templateStore.currency);
+	const [selectedLanguage, changeLanguage] = useState(templatesStore.language);
+	const [selectedCurrency, changeCurrency] = useState(templatesStore.currency);
 
 	const styling: { css?: StylingCSS } = {
-		css: [CSS.TemplateEditor({ ...properties })],
+		css: [CSS.TemplatesEditor({ ...properties })],
 	};
 
-	const { library } = templateStore;
+	const { library } = templatesStore;
 	const { language, currency } = library.locales;
 	const languages = Object.keys(language);
 	const currencies = Object.keys(currency);
 	const baseThemes = Object.keys(library.themes || {});
-	const lcoalThemes = Object.keys(templateStore.themes || {}).sort((a, b) => {
+	const lcoalThemes = Object.keys(templatesStore.themes || {}).sort((a, b) => {
 		if (a === 'global') return -1;
 		if (b === 'global') return 1;
 		return 0;
 	});
 
-	const selectedTargetConfig = templateStore.config[selectedTarget.type].templates.find((template: any) => {
+	const selectedTargetConfig = templatesStore.config[selectedTarget.type].templates.find((template: any) => {
 		if (selectedTarget.type === 'recommendation') {
 			return template.component === selectedTarget.target;
 		}
@@ -174,11 +174,11 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 	});
 
 	const setThemeOverrides = (obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
-		templateStore.setThemeOverrides(obj);
-		setThemes(templateStore.themes);
+		templatesStore.setThemeOverrides(obj);
+		setThemes(templatesStore.themes);
 	};
 
-	const [themes, setThemes] = useState(templateStore.themes);
+	const [themes, setThemes] = useState(templatesStore.themes);
 
 	return (
 		<div
@@ -204,7 +204,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 			>
 				<Button
 					onClick={() => {
-						templateStore.storage.clear();
+						templatesStore.storage.clear();
 						onRemoveClick();
 					}}
 				>
@@ -242,7 +242,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 						const language = selectedOption.value;
 
 						changeLanguage(language);
-						templateStore.changeLanguage(language);
+						templatesStore.changeLanguage(language);
 					}}
 				>
 					{languages.map((language: string) => {
@@ -261,7 +261,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 						const currency = selectedOption.value;
 
 						changeCurrency(currency);
-						templateStore.changeCurrency(currency);
+						templatesStore.changeCurrency(currency);
 					}}
 				>
 					{currencies.map((currency: string) => {
@@ -319,7 +319,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 						const selectedOption = options[selectedIndex];
 						const selectedTemplate = selectedOption.value;
 
-						templateStore.changeTemplate(selectedTarget.type, selectedTarget.target, selectedTemplate);
+						templatesStore.changeTemplate(selectedTarget.type, selectedTarget.target, selectedTemplate);
 					}}
 				>
 					{library.components.templates[selectedTarget.type].map((componentName: string) => {
@@ -338,7 +338,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 						const selectedTheme = selectedOption.value;
 						const type = selectedOption.closest('optgroup')?.label;
 
-						templateStore.changeTheme(selectedTarget.type, selectedTarget.target, type, selectedTheme);
+						templatesStore.changeTheme(selectedTarget.type, selectedTarget.target, type, selectedTheme);
 					}}
 				>
 					<optgroup label="base">
@@ -364,7 +364,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 							</label>
 							<button
 								onClick={() => {
-									templateStore.removeFromStorage(selectedTargetConfig.theme);
+									templatesStore.removeFromStorage(selectedTargetConfig.theme);
 									window?.location.reload();
 								}}
 							>
@@ -388,7 +388,7 @@ export const TemplateEditor = (properties: TemplateEditorProps): JSX.Element => 
 					{Object.keys(themes[selectedTargetConfig.theme]?.overrides || {}).length > 0 ? (
 						<button
 							onClick={() => {
-								templateStore.save(selectedTargetConfig.theme);
+								templatesStore.save(selectedTargetConfig.theme);
 								window?.location.reload();
 							}}
 						>
@@ -486,7 +486,7 @@ const ThemeEditor = (props: any): any => {
 	));
 };
 
-export interface TemplateEditorProps extends ComponentProps {
+export interface TemplatesEditorProps extends ComponentProps {
 	onRemoveClick: () => void;
-	templateStore: any;
+	templatesStore: any;
 }

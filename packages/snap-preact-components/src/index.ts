@@ -39,7 +39,7 @@ export * from './components/Molecules/SortBy';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
-export * from './components/Organisms/TemplateEditor';
+export * from './components/Templates/TemplatesEditor';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';

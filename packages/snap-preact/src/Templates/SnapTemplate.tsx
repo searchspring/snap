@@ -2,27 +2,27 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { componentMap } from './components';
 import { TemplateSelect } from '@searchspring/snap-preact-components';
 
 import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
-import { TemplateStore } from './Stores/TemplateStore';
+import { TemplatesStore } from './Stores/TemplateStore';
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
 import type { ResultComponent, ResultLayoutTypes } from '@searchspring/snap-preact-components';
-import type { TemplateThemeConfig } from './themes';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
+import { Theme } from '@searchspring/snap-preact-components';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
+export const GLOBAL_THEME_NAME = 'global';
 
 // // TODO: tabbing, result layout toggling, finders
 export type SearchTemplateConfig = {
 	selector: string;
 	theme?: string;
-	template: 'Search';
+	template: 'Search'; // various component (template) types allowed
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
@@ -30,7 +30,7 @@ export type SearchTemplateConfig = {
 export type AutocompleteTemplateConfig = {
 	selector: string;
 	theme?: string;
-	template: 'Autocomplete';
+	template: 'Autocomplete'; // various components (templates) available
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
@@ -38,18 +38,27 @@ export type AutocompleteTemplateConfig = {
 export type RecommendationTemplateConfig = {
 	component: string;
 	theme?: string;
-	template: 'Recommendation';
+	template: 'Recommendation'; // various components (templates) available
 	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
 
-export type SnapTemplateConfig = {
+// TODO - clean up theme typing
+type TemplateThemeConfig = {
+	name: 'pike' | 'bocachica'; // various themes available
+	variables?: any;
+	// variables?: {
+	// 	breakpoints: number[];
+	// };
+	overrides?: Partial<Theme>;
+};
+
+export type SnapTemplatesConfig = {
 	config: {
 		siteId?: string;
-		themes?: {
+		themes: {
 			global: TemplateThemeConfig;
-			[themeName: string]: TemplateThemeConfig;
-		};
+		} & { [themeName: string]: TemplateThemeConfig };
 		currency: string;
 		language: string;
 	};
@@ -88,24 +97,27 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 	},
 };
 
-export class SnapTemplate extends Snap {
-	constructor(config: SnapTemplateConfig) {
+export class SnapTemplates extends Snap {
+	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
 		const themeEdit = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
 
-		const templateStore = new TemplateStore(config, themeEdit);
+		const templatesStore = new TemplatesStore(config, themeEdit);
 
 		window.searchspring = window.searchspring || {};
-		window.searchspring.templateStore = templateStore;
+		window.searchspring.templates = templatesStore;
 
-		const snapConfig = createSnapConfig(config, templateStore);
-		// templateStore.importInitialThemes(snapConfig);
-		// templateStore.init();
+		const snapConfig = createSnapConfig(config, templatesStore);
+		// templatesStore.importInitialThemes(snapConfig);
+		// templatesStore.init();
 
 		super(snapConfig);
 
 		if (themeEdit) {
-			setTimeout(() => {
+			setTimeout(async () => {
+				// preload the library
+				await templatesStore.preLoad();
+
 				new DomTargeter(
 					[
 						{
@@ -121,11 +133,11 @@ export class SnapTemplate extends Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const TemplateEditor = (await import('./components/TemplateEditor')).TemplateEditor;
-						await templateStore.initializeEditor();
+						const TemplateEditor = (await import('../components/TemplatesEditor')).TemplatesEditor;
+
 						render(
 							<TemplateEditor
-								templateStore={templateStore}
+								templatesStore={templatesStore}
 								onRemoveClick={() => {
 									cookies.unset(THEME_EDIT_COOKIE);
 									const urlState = url(window.location.href);
@@ -158,15 +170,18 @@ export function mapBreakpoints<ControllerConfigSettings>(
 	}, {});
 }
 
-export const createSearchTargeters = (templateConfig: SnapTemplateConfig, templateStore: TemplateStore): ExtendedTarget[] => {
+export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] => {
 	const templates = templateConfig.search?.templates || [];
 	return templates.map((template) => {
-		const targetId = templateStore.addTemplate('search', template);
+		const targetId = templatesStore.addTemplate('search', template);
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
 			hideTarget: true,
-			component: () => TemplateSelect,
-			props: { componentMap, type: 'search', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
+			component: async () => {
+				await templatesStore.library.import.component[template.template]();
+				return TemplateSelect;
+			},
+			props: { type: 'search', templatesStore, targetId },
 		};
 
 		// if they are not undefined, add them
@@ -180,14 +195,17 @@ export const createSearchTargeters = (templateConfig: SnapTemplateConfig, templa
 	});
 };
 
-export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig, templateStore: TemplateStore): ExtendedTarget[] {
+export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] {
 	const templates = templateConfig.autocomplete?.templates || [];
 	return templates.map((template) => {
-		const targetId = templateStore.addTemplate('autocomplete', template);
+		const targetId = templatesStore.addTemplate('autocomplete', template);
 		const targeter: ExtendedTarget = {
 			selector: template.selector,
-			component: () => TemplateSelect,
-			props: { componentMap, type: 'autocomplete', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
+			component: async () => {
+				await templatesStore.library.import.component[template.template]();
+				return TemplateSelect;
+			},
+			props: { type: 'autocomplete', templatesStore, targetId },
 			hideTarget: true,
 		};
 
@@ -203,16 +221,19 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplateConfig, 
 }
 
 export function createRecommendationComponentMapping(
-	templateConfig: SnapTemplateConfig,
-	templateStore: TemplateStore
+	templateConfig: SnapTemplatesConfig,
+	templatesStore: TemplatesStore
 ): { [name: string]: RecommendationComponentObject } {
 	const templates = templateConfig.recommendation?.templates;
 	return templates
 		? templates.reduce((mapping, template) => {
-				const targetId = templateStore.addTemplate('recommendation', template);
+				const targetId = templatesStore.addTemplate('recommendation', template);
 				mapping[template.component] = {
-					component: () => TemplateSelect,
-					props: { componentMap, type: 'recommendation', templateStore, targetId, themes: templateStore.themes, templates: templateStore.templates },
+					component: async () => {
+						await templatesStore.library.import.component[template.template]();
+						return TemplateSelect;
+					},
+					props: { type: 'recommendation', templatesStore, targetId },
 				};
 
 				// if they are not undefined, add them
@@ -227,7 +248,7 @@ export function createRecommendationComponentMapping(
 		: {};
 }
 
-export function createSnapConfig(templateConfig: SnapTemplateConfig, templateStore: TemplateStore): SnapConfig {
+export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): SnapConfig {
 	const snapConfig: SnapConfig = {
 		features: templateConfig.features || DEFAULT_FEATURES,
 		client: {
@@ -252,7 +273,7 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig, templateSto
 				plugins: [],
 				settings: templateConfig.search.settings || {},
 			},
-			targeters: createSearchTargeters(templateConfig, templateStore),
+			targeters: createSearchTargeters(templateConfig, templatesStore),
 		};
 
 		// merge the responsive settings if there are any
@@ -279,7 +300,7 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig, templateSto
 				selector: templateConfig.autocomplete.inputSelector,
 				settings: autocompleteControllerSettings,
 			},
-			targeters: createAutocompleteTargeters(templateConfig, templateStore),
+			targeters: createAutocompleteTargeters(templateConfig, templatesStore),
 		};
 
 		// merge the responsive settings if there are any
@@ -298,7 +319,7 @@ export function createSnapConfig(templateConfig: SnapTemplateConfig, templateSto
 	/* RECOMMENDATION INSTANTIATOR */
 	if (templateConfig.recommendation && snapConfig.instantiators) {
 		const recommendationInstantiatorConfig = {
-			components: createRecommendationComponentMapping(templateConfig, templateStore),
+			components: createRecommendationComponentMapping(templateConfig, templatesStore),
 			config: templateConfig.recommendation?.settings || {},
 		};
 

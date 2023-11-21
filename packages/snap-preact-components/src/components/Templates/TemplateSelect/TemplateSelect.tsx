@@ -1,27 +1,24 @@
 /** @jsx jsx */
-import { Fragment } from 'preact';
-import { Suspense, lazy } from 'preact/compat';
 import { observer } from 'mobx-react-lite';
 import { jsx } from '@emotion/react';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
-	const { componentMap, templateStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
-	const { template, theme } = templateStore.getTemplate(type, targetId);
-	const Component = lazy(() => componentMap[template]()) as React.ComponentType<Partial<TemplateSelectProps>>;
+	const { templatesStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
+	const targeter = templatesStore.getTargeter(type, targetId);
+	const Component = templatesStore?.library?.components[type][targeter.template];
+	const themeLocation = templatesStore?.themes?.[targeter.theme.location];
+	const theme = themeLocation && themeLocation[targeter.theme.name]?.theme;
+
+	console.log('using template and theme', Component, theme);
+
+	console.log('template selecting!');
 
 	// ensuring that theme and component are
-	return (
-		theme &&
-		Component && (
-			<Suspense fallback={<Fragment />}>
-				<Component controller={controller} theme={theme} resultComponent={resultComponent} {...otherProps} />
-			</Suspense>
-		)
-	);
+	return theme && Component && <Component controller={controller} theme={theme} resultComponent={resultComponent} {...otherProps} />;
 });
 export interface TemplateSelectProps {
 	componentMap: any;
-	templateStore: any;
+	templatesStore: any;
 	targetId: string;
 	type: string;
 	controller: any;

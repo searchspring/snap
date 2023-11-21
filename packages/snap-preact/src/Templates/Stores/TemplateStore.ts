@@ -1,54 +1,12 @@
 import { observable, makeObservable } from 'mobx';
-import deepmerge from 'deepmerge';
-import { SnapTemplateConfig } from '../SnapTemplate';
-import type { Theme } from '@searchspring/snap-preact-components';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { SnapTemplatesConfig } from '../SnapTemplate';
 import { ThemeStore } from './ThemeStore';
 import { TargetStore } from './TargetStore';
-import { componentMap } from '../components';
-import { themeMap } from '../themes';
-import { localeMap } from '../locale';
+import { LibraryStore } from './LibraryStore';
 
-/* classy store
-
-	{
-		config,
-		templates: { //rename to targets
-			search: { [targetId: string]: TargetStore }
-			autocomplete: { [targetId: string]: TargetStore }
-			recommendation: { [targetId: string]: TargetStore }
-		},
-		themes: {
-			local: {
-				[themeName: 'global' | string]: ThemeStore;
-			}
-			base: {
-				[themeName: string]: ThemeStore;
-			}
-		},
-		library: (LibraryStore) {
-			themes: {
-				[themeName in keyof typeof themeMap]?: Theme;
-			};
-			components: { // component map
-				search: { [name: string]: () => Component }
-				autocomplete: { [name: string]: () => Component }
-				recommendation: { [name: string]: () => Component }
-			};
-			locales: { // locale map
-				language: {
-					en: { ... }
-				},
-				currency: {
-					usd: { ... },
-					eur: { ... },
-				},
-			}
-		}
-	}
-	
-*/
-
+import type { Theme } from '@searchspring/snap-preact-components';
+export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
 
 export type TemplateTheme = {
@@ -71,35 +29,8 @@ export type TemplateTarget = {
 	*/
 };
 
-type Library = {
-	themes: {
-		[themeName: string]: Theme;
-	};
-	components: {
-		[componentName: string]: JSX.Element;
-	};
-	locale: {
-		currency: {
-			[currencyName: string]: Partial<Theme>;
-		};
-		language: {
-			[languageName: string]: Partial<Theme>;
-		};
-	};
-};
-
-export type Dependancies = {
-	storage: StorageStore;
-};
-export const GLOBAL_THEME_NAME = 'global';
-
-const libraryImports = {
-	themes: themeMap,
-	components: componentMap,
-	locale: localeMap,
-};
-export class TemplateStore {
-	config: SnapTemplateConfig;
+export class TemplatesStore {
+	config: SnapTemplatesConfig;
 	isEditorMode: boolean;
 	storage: StorageStore;
 	language: string;
@@ -115,21 +46,14 @@ export class TemplateStore {
 		local: {
 			[themeName: 'global' | string]: ThemeStore;
 		};
-		library: {
+		library?: {
 			[themeName: string]: ThemeStore;
 		};
 	};
 
-	library: Library = {
-		themes: {},
-		components: {},
-		locale: {
-			currency: {},
-			language: {},
-		},
-	};
+	library: LibraryStore;
 
-	constructor(config: SnapTemplateConfig, isEditorMode: boolean) {
+	constructor(config: SnapTemplatesConfig, isEditorMode: boolean) {
 		this.isEditorMode = isEditorMode;
 		this.config = config;
 		this.storage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-templates' });
@@ -142,58 +66,80 @@ export class TemplateStore {
 			autocomplete: {},
 			recommendation: {},
 		};
+
 		this.themes = {
 			local: {},
-			library: {},
 		};
 
-		/* Setup Themes */
-		const baseThemeNames = Object.keys(config.config.themes || {}).map((themeKey) => {
-			const theme = config?.config?.themes![themeKey];
-			return theme.name;
-		});
-		const uniqueBaseThemeNames = Array.from(new Set(baseThemeNames)); // ['bocachica']
+		this.library = new LibraryStore();
 
-		const importPromises = [];
-		importPromises.push(libraryImports.locale.currency[this.currency as keyof typeof libraryImports.locale.currency]());
-		importPromises.push(libraryImports.locale.language[this.language as keyof typeof libraryImports.locale.language]());
+		// import locale selections
+		const importCurrency = this.library.import.currency[this.currency as keyof typeof this.library.import.currency]();
+		const importLanguage = this.library.import.language[this.language as keyof typeof this.library.import.language]();
 
-		uniqueBaseThemeNames.forEach((baseThemeName) => {
-			// import theme
-			importPromises.push(themeMap[baseThemeName]());
-		});
+		// setup local themes
+		Object.keys(config.config.themes).map((themeKey) => {
+			const theme = config.config.themes[themeKey];
+			const imports = [importCurrency, importLanguage, this.library.import.theme[theme.name]()];
 
-		// create theme stores from objects
-		Promise.all(importPromises).then((importResolutions) => {
-			const [importedCurrency, importedLanguage, ...themes] = importResolutions;
-
-			// put locales into library
-			this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency] = importedCurrency as Partial<Theme>;
-			this.library.locale.language[this.language as keyof typeof this.library.locale.language] = importedLanguage as Partial<Theme>;
-
-			// put themes into library
-			themes.forEach((theme, index) => (this.library.themes[uniqueBaseThemeNames[index]] = theme as Theme));
-
-			// create theme stores
-			Object.keys(config.config.themes!).forEach((name) => {
-				// ['global', 'boca1']
-				const theme = config.config.themes![name];
-				const libraryBaseThemeName = theme.name;
-
-				const base = this.library.themes[libraryBaseThemeName];
+			Promise.all(imports).then(() => {
+				const base = this.library.themes[theme.name];
 				const overrides = theme.overrides || {};
 				const variables = theme.variables || {};
-				const currency = this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency];
-				const language = this.library.locale.language[this.language as keyof typeof this.library.locale.language];
+				const currency = this.library.locales.currencies[this.currency];
+				const language = this.library.locales.languages[this.language];
 
-				this.themes.local[name] = new ThemeStore({ name, base, overrides, variables, currency, language }, { storage: this.storage });
+				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language });
 			});
-
-			// trigger mobx
-			this.themes = {
-				...this.themes,
-			};
 		});
+
+		/* Setup Themes */
+		// const baseThemeNames = Object.keys(config.config.themes || {}).map((themeKey) => {
+		// 	const theme = config?.config?.themes![themeKey];
+		// 	return theme.name;
+		// });
+		// const uniqueBaseThemeNames = Array.from(new Set(baseThemeNames)); // ['bocachica']
+
+		// const importPromises = [];
+		// importPromises.push(libraryImports.locale.currency[this.currency as keyof typeof libraryImports.locale.currency]());
+		// importPromises.push(libraryImports.locale.language[this.language as keyof typeof libraryImports.locale.language]());
+
+		// uniqueBaseThemeNames.forEach((baseThemeName) => {
+		// 	// import theme
+		// 	importPromises.push(themeMap[baseThemeName]());
+		// });
+
+		// // create theme stores from objects
+		// Promise.all(importPromises).then((importResolutions) => {
+		// 	const [importedCurrency, importedLanguage, ...themes] = importResolutions;
+
+		// 	// put locales into library
+		// 	this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency] = importedCurrency as Partial<Theme>;
+		// 	this.library.locale.language[this.language as keyof typeof this.library.locale.language] = importedLanguage as Partial<Theme>;
+
+		// 	// put themes into library
+		// 	themes.forEach((theme, index) => (this.library.themes[uniqueBaseThemeNames[index]] = theme as Theme));
+
+		// 	// create theme stores
+		// 	Object.keys(config.config.themes!).forEach((name) => {
+		// 		// ['global', 'boca1']
+		// 		const theme = config.config.themes![name];
+		// 		const libraryBaseThemeName = theme.name;
+
+		// 		const base = this.library.themes[libraryBaseThemeName];
+		// 		const overrides = theme.overrides || {};
+		// 		const variables = theme.variables || {};
+		// 		const currency = this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency];
+		// 		const language = this.library.locale.language[this.language as keyof typeof this.library.locale.language];
+
+		// 		this.themes.local[name] = new ThemeStore({ name, base, overrides, variables, currency, language }, { storage: this.storage });
+		// 	});
+
+		// 	// trigger mobx
+		// 	this.themes = {
+		// 		...this.themes,
+		// 	};
+		// });
 
 		makeObservable(this, {
 			templates: observable,
@@ -201,6 +147,7 @@ export class TemplateStore {
 		});
 	}
 
+	// TODO - rename to addTargeter / and change template - target(er) in SnapTemplate (config) and elsewhere
 	public addTemplate(type: TemplateTypes, template: TemplateTarget): string | undefined {
 		const targetId = template.selector || template.component;
 		if (targetId) {
@@ -209,173 +156,78 @@ export class TemplateStore {
 		}
 	}
 
-	public getTemplate(type: TemplateTypes, targetId: string): any {
-		const themeName = this.templates[type][targetId].theme.name || GLOBAL_THEME_NAME;
-		// const location = this.templates[type][targetId].theme.location;
-
-		return {
-			template: this.templates[type][targetId].template,
-			theme: this.themes.local[themeName as keyof typeof this.themes.local]?.theme,
-		};
+	public getTargeter(type: TemplateTypes, targetId: string) {
+		return this.templates[type][targetId];
 	}
 
-	public async initializeEditor() {
-		// fetch all themes to the library
-		// fetch all locales to the library
-		// create library theme stores
+	// { name: themeKey, type: 'local', base, overrides, variables, currency, language }
+	public addTheme(config: {
+		name: string;
+		type: TemplateThemeTypes;
+		base: Theme;
+		overrides?: Theme;
+		variables?: Theme;
+		currency: Theme;
+		language: Theme;
+	}) {
+		const theme = new ThemeStore(config, { storage: this.storage });
+		const themeLocation = this.themes[config.type as keyof typeof this.themes] || {};
+		themeLocation[config.name] = theme;
+	}
 
-		const themes = Object.keys(themeMap || {});
-		for (let i = 0; i < themes?.length; i++) {
-			const themeName = themes[i];
-			if (!this.library.themes[themeName as keyof typeof themeMap]) {
-				await this.loadTheme(themeName);
-				// new ThemeStore
-				// this.themes.library = new ThemeStore()
+	public async setCurrency(currencyCode: string) {
+		if (currencyCode in this.library.import.currency) {
+			await this.library.import.currency[currencyCode as keyof typeof this.library.import.currency]();
+			const currency = this.library.locales.currencies[currencyCode];
+
+			if (currency) {
+				console.log('changing currency!!!', currencyCode);
+				this.currency = currencyCode;
+				for (const themeName in this.themes.local) {
+					const theme = this.themes.local[themeName];
+					theme.setCurrency(currency);
+				}
+				for (const themeName in this.themes.library) {
+					const theme = this.themes.library[themeName];
+					theme.setCurrency(currency);
+				}
 			}
 		}
-
-		// importPromises.push(libraryImports.locale.currency[this.currency as keyof typeof libraryImports.locale.currency]());
 	}
 
-	public async loadTheme(themeName: string) {
-		if (!this.library.themes[themeName]) {
-			const libraryBaseTheme = await themeMap[themeName as keyof typeof themeMap]();
-			this.library.themes[themeName as keyof typeof themeMap] = libraryBaseTheme;
-		}
-	}
+	public async setLanguage(languageCode: string) {
+		if (languageCode in this.library.import.language) {
+			await this.library.import.language[languageCode as keyof typeof this.library.import.language]();
+			const language = this.library.locales.currencies[languageCode];
 
-	// public async init() {
-	// 	this.library.locale.currency[this.currency as keyof typeof this.library.locale.currency] = await this.imports.locales.currency[this.currency as keyof typeof this.imports.locales.currency]();
-	// }
-
-	// public async initialize() {
-	// 	const themes = Object.keys(this.library.themes || {});
-	// 	for (let i = 0; i < themes?.length; i++) {
-	// 		const themeName = themes[i];
-	// 		if (!this.library.themes[themeName as keyof typeof themeMap]) {
-	// 			const libraryBaseTheme = await this.library.themes[themeName as keyof typeof themeMap]();
-	// 			this.library.themes[themeName as keyof typeof themeMap] = deepFreeze(libraryBaseTheme);
-	// 		}
-	// 	}
-	// }
-
-	// public setThemeOverrides(obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }): void {
-	// 	const { themeName, path, rootEditingKey, value } = obj;
-	// 	this.themes.local[themeName].setOverride({
-	// 		path,
-	// 		rootEditingKey,
-	// 		value,
-	// 	});
-	// }
-
-	public changeCurrency(currency: string): void {
-		this.currency = currency;
-		// this.regenerateThemes();
-	}
-
-	public changeLanguage(language: string): void {
-		this.language = language;
-		// this.regenerateThemes();
-	}
-
-	// 	public changeTemplate(type: TemplateTypes, target: string, template: string): void {
-	// 		this.templates[type][target].setTemplate(template);
-	// 	}
-
-	// 	public changeTheme(type: TemplateTypes, target: string, from: TargetLocation, theme: string): void {
-	// 		this.templates[type][target].setTheme(theme, from);
-	// 	}
-
-	// 	public save(theme: string) {
-	// 		const overrides = this.themes[theme].overrides;
-	// 		this.storage.set(theme, overrides);
-	// 	}
-
-	// 	public removeFromStorage(theme: string) {
-	// 		this.storage.set(theme, {});
-	// 	}
-}
-
-// const deepFreeze = (obj: any) => {
-// 	Object.keys(obj).forEach((prop) => {
-// 		if (typeof obj[prop] === 'object') {
-// 			deepFreeze(obj[prop]);
-// 		}
-// 	});
-// 	return Object.freeze(obj);
-// };
-
-export const combineMerge = (target: any, source: any, options: any) => {
-	const destination = target.slice();
-	source.forEach((item: any, index: any) => {
-		if (typeof destination[index] === 'undefined') {
-			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
-		} else if (options.isMergeableObject(item)) {
-			destination[index] = deepmerge(target[index], item, options);
-		} else if (target.indexOf(item) === -1) {
-			destination[index] = item;
-		}
-	});
-	return destination;
-};
-
-/*
-
-TemplateStore Brainstorming
------------------------------
-
-TemplateStore = {
-  global: {
-		theme: {
-			name: 'pike',
-			base: {...}, // reference the library
-			locale: {...}, // reference the libary
-			variables: {...},
-			overrides: {...},
-		}
-	},
-	search: {
-		templates: [
-			{
-				name: 'main',
-				selector: '#searchspring-layout',
-				template: 'Search',
-				resultComponent: Result,
-				theme: {
-					name: 'bocachica',
-					base: {...}, // reference the library
-					locale: {...}, // reference the libary
-					variables: {
-						color: {
-							primary: 'red',
-							secondary: 'red',
-							accent: 'red',
-						},
-					},
-					overrides: {...},
-				},
-			},
-		],
-	},
-	autocomplete: {
-		templates: [...],
-	},
-	recommendation: {
-		templates: [...],
-	},
-
-	// for reference when making selections
-	library: {
-		components: {
-			templates: {
-				search: {...},
-				autocomplete: {...},
-				recommendations: {...}
+			if (language) {
+				console.log('changing language!!!', languageCode);
+				this.language = languageCode;
+				for (const themeName in this.themes.local) {
+					const theme = this.themes.local[themeName];
+					theme.setLanguage(language);
+				}
+				for (const themeName in this.themes.library) {
+					const theme = this.themes.library[themeName];
+					theme.setLanguage(language);
+				}
 			}
-		},
-		locales: {...},
-		themes: {...}
+		}
+	}
+
+	public async preLoad() {
+		await this.library.preLoad();
+
+		this.themes.library = {};
+		for (const themeName in this.library.themes) {
+			const theme = this.library.themes[themeName];
+			this.addTheme({
+				name: themeName,
+				type: 'library',
+				base: theme,
+				language: this.library.locales.languages[this.language],
+				currency: this.library.locales.currencies[this.currency],
+			});
+		}
 	}
 }
-
-*/

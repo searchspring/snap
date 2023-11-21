@@ -1,20 +1,20 @@
 import { observable, makeObservable } from 'mobx';
-import { TemplateTarget, GLOBAL_THEME_NAME } from './TemplateStore';
+import { TemplateTarget } from './TemplateStore';
+import { GLOBAL_THEME_NAME } from '../SnapTemplate';
 
-export type TargetLocation = 'library' | 'local';
+export type TemplateThemeLocation = 'library' | 'local';
+
 export class TargetStore {
 	public template: string;
 	public selector: string;
-	public component: string;
 	public theme: {
-		location: TargetLocation;
+		location: TemplateThemeLocation;
 		name: string;
 	};
 
-	constructor(template: TemplateTarget, location: TargetLocation) {
+	constructor(template: TemplateTarget, location: TemplateThemeLocation) {
 		this.template = template.template;
 		this.selector = template.selector || '';
-		this.component = template.component || '';
 		this.theme = {
 			location,
 			name: template.theme || GLOBAL_THEME_NAME,
@@ -23,7 +23,6 @@ export class TargetStore {
 		makeObservable(this, {
 			template: observable,
 			selector: observable,
-			component: observable,
 			theme: observable,
 		});
 	}
@@ -32,7 +31,7 @@ export class TargetStore {
 		this.template = templateName;
 	}
 
-	public setTheme(themeName: string, location: TargetLocation) {
+	public setTheme(themeName: string, location: TemplateThemeLocation) {
 		this.theme = {
 			location,
 			name: themeName,

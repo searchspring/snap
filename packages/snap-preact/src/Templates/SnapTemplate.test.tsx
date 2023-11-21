@@ -1,6 +1,6 @@
 import { AutocompleteStoreConfigSettings, SearchStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import {
-	SnapTemplate,
+	SnapTemplates,
 	mapBreakpoints,
 	createSearchTargeters,
 	createAutocompleteTargeters,
@@ -8,13 +8,13 @@ import {
 	createSnapConfig,
 	DEFAULT_FEATURES,
 	DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS,
-} from './SnapTemplate';
+} from './SnapTemplates';
 import { componentMap } from './components';
 import { themeMap } from './themes';
 import { RecommendationInstantiatorConfigSettings } from '../Instantiators/RecommendationInstantiator';
 
 import type { RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { SnapTemplateConfig } from './SnapTemplate';
+import type { SnapTemplatesConfig } from './SnapTemplates';
 
 const wait = (time = 1) => {
 	return new Promise((resolve) => {
@@ -147,7 +147,7 @@ describe('Snap Preact Layouts', () => {
 
 	describe('createSearchTargeters function', () => {
 		it('creates extended domTarget objects from a Snap Template search configuration', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				search: {
 					templates: [
@@ -187,7 +187,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the resultLayout if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				search: {
 					templates: [
@@ -209,7 +209,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the template theme over the global theme if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: {
 					currency: 'usd',
 					language: 'en',
@@ -261,7 +261,7 @@ describe('Snap Preact Layouts', () => {
 
 	describe('createAutocompleteTargeters function', () => {
 		it('creates extended domTarget objects from a Snap Template autocomplete configuration', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				autocomplete: {
 					inputSelector: 'input.searchspring-ac',
@@ -295,7 +295,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the resultLayout if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				autocomplete: {
 					inputSelector: 'input.searchspring-ac',
@@ -318,7 +318,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the template theme over the global theme if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: {
 					currency: 'usd',
 					language: 'en',
@@ -371,7 +371,7 @@ describe('Snap Preact Layouts', () => {
 
 	describe('createRecommendationComponentMapping function', () => {
 		it('creates a recommendation component mapping from a Snap Template recommendation configuration', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				recommendation: {
 					settings: {
@@ -398,7 +398,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the resultLayout if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				recommendation: {
 					settings: {
@@ -423,7 +423,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('will use the template theme over the global theme if provided', async () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: {
 					currency: 'usd',
 					language: 'en',
@@ -476,8 +476,8 @@ describe('Snap Preact Layouts', () => {
 	});
 
 	describe('createSnapConfig function', () => {
-		it('transforms a minimal SnapTemplate config into a minimal Snap config', () => {
-			const snapTemplateConfig: SnapTemplateConfig = { config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } } };
+		it('transforms a minimal SnapTemplates config into a minimal Snap config', () => {
+			const snapTemplateConfig: SnapTemplatesConfig = { config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } } };
 			const snapConfig = createSnapConfig(snapTemplateConfig);
 
 			expect(snapConfig).toStrictEqual({
@@ -489,7 +489,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('supports passing in custom set of features', () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				features: {
 					integratedSpellCorrection: { enabled: false },
@@ -501,7 +501,7 @@ describe('Snap Preact Layouts', () => {
 		});
 
 		it('supports passing in a custom URL configuration', () => {
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				url: {
 					parameters: {
@@ -518,7 +518,7 @@ describe('Snap Preact Layouts', () => {
 
 		describe('search controller', () => {
 			it('will setup a minimal search controller with targeters', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					search: {
 						templates: [
@@ -552,7 +552,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will setup a search controller with specific settings when one is provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					search: {
 						templates: [
@@ -591,7 +591,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will use initial browser width breakpoint settings when provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike', variables: { breakpoints: [0, 540, 768, 1200] } } },
 					search: {
 						templates: [
@@ -668,7 +668,7 @@ describe('Snap Preact Layouts', () => {
 
 		describe('autocomplete controller', () => {
 			it('will setup a minimal autocomplete controller with targeters', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					autocomplete: {
 						inputSelector: 'input.searchspring-ac',
@@ -704,7 +704,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will setup a autocomplete controller with specific settings when one is provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					autocomplete: {
 						inputSelector: 'input.searchspring-ac',
@@ -743,7 +743,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will use initial browser width breakpoint settings when provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike', variables: { breakpoints: [0, 540, 768, 1200] } } },
 					autocomplete: {
 						inputSelector: 'input.searchspring-ac',
@@ -824,7 +824,7 @@ describe('Snap Preact Layouts', () => {
 
 		describe('recommendation instantiator', () => {
 			it('will setup a minimal recommendation instantiator configuration with targeters', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					recommendation: {
 						settings: {
@@ -859,7 +859,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will setup a recommendation instantiator configuration with specific settings when provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 					recommendation: {
 						settings: {
@@ -897,7 +897,7 @@ describe('Snap Preact Layouts', () => {
 			});
 
 			it('will use initial browser width breakpoint settings when provided', () => {
-				const snapTemplateConfig: SnapTemplateConfig = {
+				const snapTemplateConfig: SnapTemplatesConfig = {
 					config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike', variables: { breakpoints: [0, 540, 768, 1200] } } },
 					recommendation: {
 						templates: [
@@ -966,13 +966,13 @@ describe('Snap Preact Layouts', () => {
 		});
 	});
 
-	describe('SnapTemplate class', () => {
-		it('creates a minimal Snap object by transforming a SnapTemplate config into a Snap config and passing that to the Snap constructor', () => {
+	describe('SnapTemplates class', () => {
+		it('creates a minimal Snap object by transforming a SnapTemplates config into a Snap config and passing that to the Snap constructor', () => {
 			// script tag needed to prevent console error
 			document.body.innerHTML = `<script id="searchspring-context" siteId="8uyt2m"></script>`;
 
-			const snapTemplateConfig: SnapTemplateConfig = { config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } } };
-			const snapObj = new SnapTemplate(snapTemplateConfig);
+			const snapTemplateConfig: SnapTemplatesConfig = { config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } } };
+			const snapObj = new SnapTemplates(snapTemplateConfig);
 			expect(snapObj).toBeDefined();
 			expect(snapObj).toHaveProperty('config');
 			// @ts-ignore - verifying private member
@@ -983,11 +983,11 @@ describe('Snap Preact Layouts', () => {
 			expect(snapObj.config.controllers).toStrictEqual({});
 		});
 
-		it('creates a full Snap object by transforming a SnapTemplate config into a Snap config and passing that to the Snap constructor', async () => {
+		it('creates a full Snap object by transforming a SnapTemplates config into a Snap config and passing that to the Snap constructor', async () => {
 			// script tag needed to prevent console error
 			document.body.innerHTML = `<script id="searchspring-context" siteId="8uyt2m"></script><input type="text" class="searchspring-ac"/>`;
 
-			const snapTemplateConfig: SnapTemplateConfig = {
+			const snapTemplateConfig: SnapTemplatesConfig = {
 				config: { siteId: '123abc', currency: 'usd', language: 'en', theme: { name: 'pike' } },
 				url: {
 					parameters: {
@@ -1036,7 +1036,7 @@ describe('Snap Preact Layouts', () => {
 					],
 				},
 			};
-			const snapObj = new SnapTemplate(snapTemplateConfig);
+			const snapObj = new SnapTemplates(snapTemplateConfig);
 
 			// need to give the async createAutocompleteController a bit to find a target and create
 			await wait();
