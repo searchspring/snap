@@ -19,7 +19,7 @@ export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
 
 // // TODO: tabbing, result layout toggling, finders
-export type SearchTemplateConfig = {
+export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Search'; // various component (template) types allowed
@@ -27,7 +27,7 @@ export type SearchTemplateConfig = {
 	resultComponent?: ResultComponent;
 };
 
-export type AutocompleteTemplateConfig = {
+export type AutocompleteTargetConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Autocomplete'; // various components (templates) available
@@ -35,7 +35,7 @@ export type AutocompleteTemplateConfig = {
 	resultComponent?: ResultComponent;
 };
 
-export type RecommendationTemplateConfig = {
+export type RecommendationTargetConfig = {
 	component: string;
 	theme?: string;
 	template: 'Recommendation'; // various components (templates) available
@@ -62,20 +62,20 @@ export type SnapTemplatesConfig = {
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
 	search?: {
-		templates: [SearchTemplateConfig, ...SearchTemplateConfig[]];
+		targets: [SearchTargetConfig, ...SearchTargetConfig[]];
 		settings?: SearchStoreConfigSettings;
 		breakpointSettings?: SearchStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	autocomplete?: {
 		inputSelector: string;
-		templates: [AutocompleteTemplateConfig, ...AutocompleteTemplateConfig[]];
+		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
 		settings?: AutocompleteStoreConfigSettings;
 		breakpointSettings?: AutocompleteStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	recommendation?: {
-		templates: [RecommendationTemplateConfig, ...RecommendationTemplateConfig[]];
+		targets: [RecommendationTargetConfig, ...RecommendationTargetConfig[]];
 		settings: RecommendationInstantiatorConfigSettings;
 		breakpointSettings?: RecommendationInstantiatorConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
@@ -97,20 +97,18 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 export class SnapTemplates extends Snap {
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
-		const themeEdit = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
+		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
 
-		const templatesStore = new TemplatesStore(config, themeEdit);
+		const templatesStore = new TemplatesStore(config, { editMode });
 
 		window.searchspring = window.searchspring || {};
 		window.searchspring.templates = templatesStore;
 
 		const snapConfig = createSnapConfig(config, templatesStore);
-		// templatesStore.importInitialThemes(snapConfig);
-		// templatesStore.init();
 
 		super(snapConfig);
 
-		if (themeEdit) {
+		if (editMode) {
 			setTimeout(async () => {
 				// preload the library
 				await templatesStore.preLoad();
@@ -152,7 +150,7 @@ export class SnapTemplates extends Snap {
 						);
 					}
 				);
-			}, 1000);
+			});
 		}
 	}
 }
@@ -168,24 +166,24 @@ export function mapBreakpoints<ControllerConfigSettings>(
 }
 
 export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] => {
-	const templates = templateConfig.search?.templates || [];
-	return templates.map((template) => {
-		const targetId = templatesStore.addTemplate('search', template);
+	const targets = templateConfig.search?.targets || [];
+	return targets.map((target) => {
+		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
-			selector: template.selector,
+			selector: target.selector,
 			hideTarget: true,
 			component: async () => {
-				await templatesStore.library.import.component[template.template]();
+				await templatesStore.library.import.component[target.template]();
 				return TemplateSelect;
 			},
 			props: { type: 'search', templatesStore, targetId },
 		};
 
 		// if they are not undefined, add them
-		if (template.resultComponent) {
-			targeter.props!.resultComponent = template.resultComponent;
-		} else if (template.resultLayout) {
-			targeter.props!.resultLayout = template.resultLayout;
+		if (target.resultComponent) {
+			targeter.props!.resultComponent = target.resultComponent;
+		} else if (target.resultLayout) {
+			targeter.props!.resultLayout = target.resultLayout;
 		}
 
 		return targeter;
@@ -193,13 +191,13 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 };
 
 export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] {
-	const templates = templateConfig.autocomplete?.templates || [];
-	return templates.map((template) => {
-		const targetId = templatesStore.addTemplate('autocomplete', template);
+	const targets = templateConfig.autocomplete?.targets || [];
+	return targets.map((target) => {
+		const targetId = templatesStore.addTarget('autocomplete', target);
 		const targeter: ExtendedTarget = {
-			selector: template.selector,
+			selector: target.selector,
 			component: async () => {
-				await templatesStore.library.import.component[template.template]();
+				await templatesStore.library.import.component[target.template]();
 				return TemplateSelect;
 			},
 			props: { type: 'autocomplete', templatesStore, targetId },
@@ -207,10 +205,10 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 		};
 
 		// if they are not undefined, add them
-		if (template.resultComponent) {
-			targeter.props!.resultComponent = template.resultComponent;
-		} else if (template.resultLayout) {
-			targeter.props!.resultLayout = template.resultLayout;
+		if (target.resultComponent) {
+			targeter.props!.resultComponent = target.resultComponent;
+		} else if (target.resultLayout) {
+			targeter.props!.resultLayout = target.resultLayout;
 		}
 
 		return targeter;
@@ -221,23 +219,23 @@ export function createRecommendationComponentMapping(
 	templateConfig: SnapTemplatesConfig,
 	templatesStore: TemplatesStore
 ): { [name: string]: RecommendationComponentObject } {
-	const templates = templateConfig.recommendation?.templates;
-	return templates
-		? templates.reduce((mapping, template) => {
-				const targetId = templatesStore.addTemplate('recommendation', template);
-				mapping[template.component] = {
+	const targets = templateConfig.recommendation?.targets;
+	return targets
+		? targets.reduce((mapping, target) => {
+				const targetId = templatesStore.addTarget('recommendation', target);
+				mapping[target.component] = {
 					component: async () => {
-						await templatesStore.library.import.component[template.template]();
+						await templatesStore.library.import.component[target.template]();
 						return TemplateSelect;
 					},
 					props: { type: 'recommendation', templatesStore, targetId },
 				};
 
 				// if they are not undefined, add them
-				if (template.resultComponent) {
-					mapping[template.component].props!.resultComponent = template.resultComponent;
-				} else if (template.resultLayout) {
-					mapping[template.component].props!.resultLayout = template.resultLayout;
+				if (target.resultComponent) {
+					mapping[target.component].props!.resultComponent = target.resultComponent;
+				} else if (target.resultLayout) {
+					mapping[target.component].props!.resultLayout = target.resultLayout;
 				}
 
 				return mapping;

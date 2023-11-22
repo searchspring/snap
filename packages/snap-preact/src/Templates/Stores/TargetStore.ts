@@ -1,25 +1,22 @@
 import { observable, makeObservable } from 'mobx';
-import { TemplateTarget } from './TemplateStore';
+import { TemplateTarget, type TemplatesStoreSettings, type TemplatesStoreDependencies, type TemplateThemeTypes } from './TemplateStore';
 import { GLOBAL_THEME_NAME } from '../SnapTemplate';
-import { StorageStore } from '@searchspring/snap-store-mobx';
-
-export type TemplateThemeLocation = 'library' | 'local';
 
 export class TargetStore {
 	public selector: string;
 	public template: string;
 	public theme: {
-		location: TemplateThemeLocation;
+		location: TemplateThemeTypes;
 		name: string;
 	};
-	private dependencies: { storage: StorageStore };
+	private dependencies: TemplatesStoreDependencies;
 
-	constructor(template: TemplateTarget, location: TemplateThemeLocation, dependencies: { storage: StorageStore }) {
+	constructor(template: TemplateTarget, dependencies: TemplatesStoreDependencies, settings: TemplatesStoreSettings) {
 		this.dependencies = dependencies;
-		this.selector = template.selector || '';
-		this.template = this.dependencies.storage.get(`templates.${this.selector}.template`) || template.template;
-		this.theme = this.dependencies.storage.get(`templates.${this.selector}.theme`) || {
-			location,
+		this.selector = template.component ? `.ss__recommendation-${template.component}` : template.selector || '';
+		this.template = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.template`)) || template.template;
+		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
+			location: 'local',
 			name: template.theme || GLOBAL_THEME_NAME,
 		};
 
@@ -35,7 +32,7 @@ export class TargetStore {
 		this.dependencies.storage.set(`templates.${this.selector}.template`, this.template);
 	}
 
-	public setTheme(themeName: string, location: TemplateThemeLocation) {
+	public setTheme(themeName: string, location: TemplateThemeTypes) {
 		this.theme = {
 			location,
 			name: themeName,

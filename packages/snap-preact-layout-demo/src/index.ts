@@ -71,7 +71,18 @@ new SnapTemplates({
 					},
 				},
 				overrides: {
-					responsive: [{}, {}, {}, {}],
+					responsive: [
+						{
+							components: {
+								results: {
+									columns: 1,
+								},
+							},
+						},
+						{},
+						{},
+						{},
+					],
 					components: {},
 					// variables: {
 					// 	color: {
@@ -149,7 +160,7 @@ new SnapTemplates({
 		// },
 	},
 	search: {
-		templates: [
+		targets: [
 			{
 				// theme: {
 				// 	name: 'bocachica',
@@ -174,7 +185,8 @@ new SnapTemplates({
 		settings: {
 			branch: BRANCHNAME,
 		},
-		templates: [
+		// TODO make better - currently confusing
+		targets: [
 			{
 				component: 'Recs',
 				template: 'Recommendation',
@@ -191,7 +203,7 @@ new SnapTemplates({
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac',
-		templates: [
+		targets: [
 			{
 				// theme: {
 				// 	name: 'bocachica',

@@ -1,15 +1,12 @@
-import { observable, computed, action, makeObservable } from 'mobx';
-// import { memo } from 'preact/compat';
-// import { observable, makeObservable } from 'mobx';
+import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
-import type { StorageStore } from '@searchspring/snap-store-mobx';
-import { TemplateThemeTypes } from './TemplateStore';
+import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import type { DeepPartial } from '../../types';
 
 export class ThemeStore {
-	dependencies: { storage: StorageStore };
+	dependencies: TemplatesStoreDependencies;
 	name: string;
 	type: string;
 	base: Theme;
@@ -29,7 +26,8 @@ export class ThemeStore {
 			currency: Partial<Theme>;
 			language: Partial<Theme>;
 		},
-		dependencies: { storage: StorageStore }
+		dependencies: TemplatesStoreDependencies,
+		settings: TemplatesStoreSettings
 	) {
 		this.dependencies = dependencies;
 
@@ -41,7 +39,7 @@ export class ThemeStore {
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
-		this.stored = this.dependencies.storage.get(`themes.${this.type}.${this.name}`) || {};
+		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}`)) || {};
 
 		makeObservable(this, {
 			name: observable,
@@ -51,8 +49,6 @@ export class ThemeStore {
 			currency: observable,
 			language: observable,
 			stored: observable,
-			setOverride: action,
-			theme: computed,
 		});
 	}
 
@@ -102,20 +98,5 @@ export class ThemeStore {
 
 function mergeLayers(...layers: Partial<Theme>[]): Partial<Theme> {
 	// TODO: memoize
-	return deepmerge.all(layers, { arrayMerge: combineMerge, isMergeableObject: isPlainObject });
-}
-
-// TODO: verify this is needed
-function combineMerge(target: any, source: any, options: any) {
-	const destination = target.slice();
-	source.forEach((item: any, index: any) => {
-		if (typeof destination[index] === 'undefined') {
-			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
-		} else if (options.isMergeableObject(item)) {
-			destination[index] = deepmerge(target[index], item, options);
-		} else if (target.indexOf(item) === -1) {
-			destination[index] = item;
-		}
-	});
-	return destination;
+	return deepmerge.all(layers, { isMergeableObject: isPlainObject });
 }

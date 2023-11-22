@@ -308,6 +308,8 @@ export class RecommendationInstantiator {
 					RecommendationsComponent = importResolutions[0];
 				}
 
+				props.className = `ss__recommendation-${component.toLowerCase()}`;
+
 				if (!RecommendationsComponent) {
 					this.logger.error(
 						`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`

@@ -9,7 +9,6 @@ import type { DeepPartial } from '../../types';
 import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
-
 export type TemplateTarget = {
 	template: string;
 	selector?: string;
@@ -17,14 +16,25 @@ export type TemplateTarget = {
 	theme?: string;
 };
 
+export type TemplatesStoreSettings = {
+	editMode: boolean;
+};
+
+export type TemplatesStoreDependencies = {
+	storage: StorageStore;
+};
+
 export class TemplatesStore {
+	loading = false;
 	config: SnapTemplatesConfig;
-	isEditorMode: boolean;
+	editMode = false;
 	storage: StorageStore;
 	language: string;
 	currency: string;
+	settings: TemplatesStoreSettings;
+	dependencies: TemplatesStoreDependencies;
 
-	templates: {
+	targets: {
 		[key in TemplateTypes]: {
 			[targetId: string]: TargetStore;
 		};
@@ -41,15 +51,19 @@ export class TemplatesStore {
 
 	library: LibraryStore;
 
-	constructor(config: SnapTemplatesConfig, isEditorMode: boolean) {
-		this.isEditorMode = isEditorMode;
+	constructor(config: SnapTemplatesConfig, settings: TemplatesStoreSettings) {
 		this.config = config;
 		this.storage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-templates' });
 
-		this.language = this.storage.get('language') || this.config.config.language || 'en';
-		this.currency = this.storage.get('currency') || this.config.config.currency || 'usd';
+		this.dependencies = {
+			storage: this.storage,
+		};
+		this.settings = settings;
 
-		this.templates = {
+		this.language = (this.settings.editMode && this.storage.get('language')) || this.config.config.language || 'en';
+		this.currency = (this.settings.editMode && this.storage.get('currency')) || this.config.config.currency || 'usd';
+
+		this.targets = {
 			search: {},
 			autocomplete: {},
 			recommendation: {},
@@ -82,25 +96,25 @@ export class TemplatesStore {
 		});
 
 		makeObservable(this, {
-			templates: observable,
+			loading: observable,
+			targets: observable,
 			themes: observable,
 		});
 	}
 
 	// TODO - rename to addTargeter / and change template - target(er) in SnapTemplate (config) and elsewhere
-	public addTemplate(type: TemplateTypes, template: TemplateTarget): string | undefined {
-		const targetId = template.selector || template.component;
+	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
+		const targetId = target.selector || target.component;
 		if (targetId) {
-			this.templates[type][targetId] = new TargetStore(template, 'local', { storage: this.storage });
+			this.targets[type][targetId] = new TargetStore(target, this.dependencies, this.settings);
 			return targetId;
 		}
 	}
 
-	public getTargeter(type: TemplateTypes, targetId: string) {
-		return this.templates[type][targetId];
+	public getTarget(type: TemplateTypes, targetId: string) {
+		return this.targets[type][targetId];
 	}
 
-	// { name: themeKey, type: 'local', base, overrides, variables, currency, language }
 	public addTheme(config: {
 		name: string;
 		type: TemplateThemeTypes;
@@ -110,7 +124,7 @@ export class TemplatesStore {
 		currency: Partial<Theme>;
 		language: Partial<Theme>;
 	}) {
-		const theme = new ThemeStore(config, { storage: this.storage });
+		const theme = new ThemeStore(config, this.dependencies, this.settings);
 		const themeLocation = this.themes[config.type as keyof typeof this.themes] || {};
 		themeLocation[config.name] = theme;
 	}
@@ -159,8 +173,8 @@ export class TemplatesStore {
 
 	public async preLoad() {
 		// preload the library
+		this.loading = true;
 		await this.library.preLoad();
-		console.log('preload this.templates', this.templates);
 
 		// build out the library themes
 		this.themes.library = {};
@@ -174,5 +188,6 @@ export class TemplatesStore {
 				currency: this.library.locales.currencies[this.currency],
 			});
 		}
+		this.loading = false;
 	}
 }

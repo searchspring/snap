@@ -8,6 +8,8 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { ChromePicker } from 'react-color';
 import { Icon } from '../../Atoms/Icon/Icon';
 import { Button } from '../../Atoms/Button';
+import { observer } from 'mobx-react-lite';
+import { debounce } from '@searchspring/snap-toolbox';
 
 const CSS = {
 	ColorDisplay: ({ color, isColorPickerVisible }: any) =>
@@ -124,31 +126,34 @@ const CSS = {
 		}),
 };
 
-export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element => {
+export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.Element => {
 	const { onRemoveClick, templatesStore } = properties;
-	const searchTemplates = Object.keys(templatesStore.templates.search || {}).map((target) => ({
+	const searchTargets = Object.keys(templatesStore.targets.search || {}).map((target) => ({
 		type: 'search',
 		target,
-		template: templatesStore.templates.search[target],
+		template: templatesStore.targets.search[target],
+		selector: templatesStore.targets.search[target].selector,
 	}));
-	const autocompleteTemplates = Object.keys(templatesStore.templates.autocomplete || {}).map((target) => ({
+	const autocompleteTargets = Object.keys(templatesStore.targets.autocomplete || {}).map((target) => ({
 		type: 'autocomplete',
 		target,
-		template: templatesStore.templates.autocomplete[target],
+		template: templatesStore.targets.autocomplete[target],
+		selector: templatesStore.targets.autocomplete[target].selector,
 	}));
-	const recommendationTemplates = Object.keys(templatesStore.templates.recommendation || {}).map((target) => ({
+	const recommendationTargets = Object.keys(templatesStore.targets.recommendation || {}).map((target) => ({
 		type: 'recommendation',
 		target,
-		template: templatesStore.templates.recommendation[target],
+		template: templatesStore.targets.recommendation[target],
+		selector: templatesStore.targets.recommendation[target].selector,
 	}));
-	const templates = [...searchTemplates, ...autocompleteTemplates, ...recommendationTemplates];
+	const targets = [...searchTargets, ...autocompleteTargets, ...recommendationTargets];
 
-	if (templates.length === 0) {
+	if (targets.length === 0) {
 		return <div>no themes found</div>;
 	}
 
 	const [collapsed, setCollapsed] = useState(false);
-	const [selectedTarget, changeTargetSelection] = useState(templates[0]);
+	const [selectedTarget, changeTargetSelection] = useState(targets[0]);
 	const [selectedLanguage, changeLanguage] = useState(templatesStore.language);
 	const [selectedCurrency, changeCurrency] = useState(templatesStore.currency);
 
@@ -166,21 +171,22 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 		if (b === 'global') return 1;
 		return 0;
 	});
-
-	const selectedTargetConfig = templatesStore.config[selectedTarget.type].templates.find((template: any) => {
-		if (selectedTarget.type === 'recommendation') {
-			return template.component === selectedTarget.target;
-		}
-		return template.selector === selectedTarget.target;
-	});
+	console.log('selectedTarget', selectedTarget);
+	// const selectedTargetConfig = templatesStore.config[selectedTarget.type].targets.find((template: any) => {
+	// 	if (selectedTarget.type === 'recommendation') {
+	// 		return template.component === selectedTarget.target;
+	// 	}
+	// 	return template.selector === selectedTarget.target;
+	// });
+	const selectedTargetConfig = templatesStore.getTarget(selectedTarget.type, selectedTarget.target);
+	console.log('selectedTargetConfig', selectedTargetConfig);
 
 	const themeRef = templatesStore.themes[selectedTarget.template.theme.location][selectedTarget.template.theme.name];
-	const [theme, setTheme] = useState(themeRef.theme);
+	const theme = themeRef.theme;
 
-	const setOverride = (obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
+	const setOverride = debounce((obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
 		themeRef.setOverride(obj);
-		setTheme(themeRef.theme);
-	};
+	}, 10);
 
 	return (
 		<div
@@ -224,7 +230,7 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 			{!collapsed ? (
 				<Global
 					styles={css`
-						${selectedTarget.target} {
+						${selectedTarget.selector} {
 							border: 1px dashed black !important;
 						}
 					`}
@@ -282,29 +288,29 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const selectedOption = options[selectedIndex];
 						const targetId = selectedOption.value;
 						const controller = selectedOption.closest('optgroup')?.label;
-						const newTarget = templates.find((template) => template.target === targetId && template.type === controller);
+						const newTarget = targets.find((target) => target.target === targetId && target.type === controller);
 						if (newTarget) {
 							changeTargetSelection(newTarget);
 						}
 					}}
 				>
-					{searchTemplates && (
+					{searchTargets && (
 						<optgroup label="search">
-							{searchTemplates.map((target) => (
+							{searchTargets.map((target) => (
 								<option>{target.target}</option>
 							))}
 						</optgroup>
 					)}
-					{autocompleteTemplates && (
+					{autocompleteTargets && (
 						<optgroup label="autocomplete">
-							{autocompleteTemplates.map((target) => (
+							{autocompleteTargets.map((target) => (
 								<option>{target.target}</option>
 							))}
 						</optgroup>
 					)}
-					{recommendationTemplates && (
+					{recommendationTargets && (
 						<optgroup label="recommendation">
-							{recommendationTemplates.map((target) => (
+							{recommendationTargets.map((target) => (
 								<option>{target.target}</option>
 							))}
 						</optgroup>
@@ -321,7 +327,7 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const selectedOption = options[selectedIndex];
 						const selectedTemplate = selectedOption.value;
 
-						templatesStore.templates[selectedTarget.type][selectedTarget.target].setTemplate(selectedTemplate);
+						templatesStore.targets[selectedTarget.type][selectedTarget.target].setTemplate(selectedTemplate);
 					}}
 				>
 					{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
@@ -340,23 +346,27 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 						const selectedTheme = selectedOption.value;
 						const type = selectedOption.closest('optgroup')?.label;
 
-						templatesStore.templates[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
+						templatesStore.targets[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
 					}}
 				>
 					<optgroup label="library">
 						{libraryThemes.map((libraryTheme) => (
-							<option>{libraryTheme}</option>
+							<option selected={selectedTargetConfig.theme.location === 'library' && selectedTargetConfig.theme.name === libraryTheme}>
+								{libraryTheme}
+							</option>
 						))}
 					</optgroup>
 					<optgroup label="local">
 						{lcoalThemes.map((localTheme) => (
-							<option selected={selectedTargetConfig.theme === localTheme}>{localTheme}</option>
+							<option selected={selectedTargetConfig.theme.location === 'local' && selectedTargetConfig.theme.name === localTheme}>
+								{localTheme}
+							</option>
 						))}
 					</optgroup>
 				</select>
 			</div>
 
-			<h3>Theme Variables</h3>
+			<h3>{selectedTargetConfig.theme.name} variables</h3>
 			<div className="section">
 				<div className="indent">
 					{/* {themes[selectedTargetConfig.theme]?.isFromStorage ? (
@@ -390,7 +400,7 @@ export const TemplatesEditor = (properties: TemplatesEditorProps): JSX.Element =
 			</div>
 		</div>
 	);
-};
+});
 
 const ThemeEditor = (props: any): any => {
 	const pathPrefix: any = props.pathPrefix || [];
@@ -402,21 +412,22 @@ const ThemeEditor = (props: any): any => {
 	const [isColorPickerVisible, setColorPickerVisible] = useState(false);
 	const [colorBeingEdited, setColorBeingEdited] = useState('');
 
-	if (!props?.property) {
-		// Property is empty
-		return;
-	}
-
-	// if (Array.isArray(props.property)) {
-	// 	// string input comma separated
-	// 	return (
-	// 		<Fragment>
-	// 			<label>{path.join('.')}: </label>
-	// 			<input type="text" value={props.property.join(',')} />
-	// 			<span>(csv)</span>
-	// 		</Fragment>
-	// 	);
+	// if (!props?.property) {
+	// 	// Property is empty
+	// 	return;
 	// }
+
+	if (Array.isArray(props.property)) {
+		// string input comma separated
+		return;
+		// return (
+		// 	<Fragment>
+		// 		<label>{path.join('.')}: </label>
+		// 		<input type="text" value={props.property.join(',')} />
+		// 		<span>(csv)</span>
+		// 	</Fragment>
+		// );
+	}
 
 	if (typeof props.property === 'number' || typeof props.property === 'string' || typeof props.property === 'boolean') {
 		const value = props.property.toString();
@@ -438,8 +449,6 @@ const ThemeEditor = (props: any): any => {
 							color={colorBeingEdited}
 							onChange={(color) => {
 								setColorBeingEdited(color.hex);
-							}}
-							onChangeComplete={(color) => {
 								setOverride({
 									themeName,
 									path,
@@ -447,6 +456,9 @@ const ThemeEditor = (props: any): any => {
 									value: color.hex,
 								});
 							}}
+							// onChangeComplete={(color) => {
+
+							// }}
 						/>
 					) : (
 						''
@@ -460,7 +472,7 @@ const ThemeEditor = (props: any): any => {
 
 	return Object.values(props.property).map((property, index) => (
 		<Fragment>
-			<div className="theme-editor">
+			<div className={classnames({ 'theme-editor': index > 0 })}>
 				<ThemeEditor
 					key={index}
 					property={property}
