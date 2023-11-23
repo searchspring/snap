@@ -10,7 +10,7 @@ import { ResultLayoutFunc, LayoutElement, ResultLayoutTypes } from '../ResultLay
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { Product } from '@searchspring/snap-store-mobx';
 import { Theme } from '../../../providers';
-import { Badge, Button, FormattedNumber, Icon, Image, Price, Rating, Skeleton, Element, Carousel } from '../../../index';
+import { Badge, Button, FormattedNumber, Icon, Image, Price, Rating, Skeleton, Element } from '../../../index';
 
 export type ResultLayoutComponentMap = {
 	[componentName: string]: {
@@ -67,10 +67,10 @@ const componentMap: ResultLayoutComponentMap = {
 		component: Element,
 	},
 	/* MOLECULES */
-	Carousel: {
-		component: Carousel,
-		layoutProps: ['prevButton', 'nextButton', 'children'],
-	},
+	// Carousel: {
+	// 	component: Carousel,
+	// 	layoutProps: ['prevButton', 'nextButton', 'children'],
+	// },
 };
 
 export type ComponentMap = typeof componentMap;
