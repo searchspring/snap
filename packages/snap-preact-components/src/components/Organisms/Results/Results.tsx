@@ -15,6 +15,7 @@ import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, Sty
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
 
 const CSS = {
 	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
@@ -148,13 +149,15 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 									return <ResultComponent controller={controller} result={result} />;
 								} else {
 									return (
-										<Result
-											key={(result as Product).id}
-											{...subProps.result}
-											result={result as Product}
-											layout={props.layout}
-											controller={controller}
-										/>
+										<SearchResultTracker result={result} controller={controller as SearchController}>
+											<Result
+												key={(result as Product).id}
+												{...subProps.result}
+												result={result as Product}
+												layout={props.layout}
+												controller={controller}
+											/>
+										</SearchResultTracker>
 									);
 								}
 						}

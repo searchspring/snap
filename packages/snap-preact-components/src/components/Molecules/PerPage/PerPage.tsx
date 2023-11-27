@@ -11,6 +11,8 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
+import { RadioList, RadioListProps } from '../RadioList';
+import { List, ListProps } from '../List';
 
 const CSS = {
 	perPage: ({}: Partial<PerPageProps>) => css({}),
@@ -20,11 +22,12 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<PerPageProps> = {
 		label: 'Per Page',
+		type: 'dropdown',
 	};
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
-	const { pagination, controller, label, disableStyles, className, style, styleScript } = props;
+	const { pagination, type, controller, label, disableStyles, className, style, styleScript } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -32,6 +35,26 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 		select: {
 			// global theme
 			...globalTheme?.components?.select,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		RadioList: {
+			// global theme
+			...globalTheme?.components?.radioList,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		List: {
+			// global theme
+			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -51,20 +74,51 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	// options can be an Array or ObservableArray - but should have length
-	return store?.pageSize ? (
+	return store?.pageSize && typeof store?.pageSizeOptions == 'object' && store.pageSizeOptions?.length ? (
 		<CacheProvider>
-			<Select
-				{...styling}
-				className={classnames('ss__perpage__select', className)}
-				{...subProps.select}
-				label={label}
-				options={store.pageSizeOptions}
-				selected={{ label: `Show ${store.pageSize}`, value: store.pageSize }}
-				onSelect={(e, option) => {
-					store.setPageSize(+option!.value);
-				}}
-			/>
+			{type?.toLowerCase() == 'dropdown' && (
+				<Select
+					{...styling}
+					className={classnames('ss__perpage__select', className)}
+					{...subProps.select}
+					label={label}
+					options={store.pageSizeOptions}
+					selected={{ label: `Show ${store.pageSize}`, value: store.pageSize }}
+					onSelect={(e, option) => {
+						store.setPageSize(+option!.value);
+					}}
+				/>
+			)}
+
+			{type?.toLowerCase() == 'list' && (
+				<List
+					{...styling}
+					className={classnames('ss__perpage__list', className)}
+					{...subProps.List}
+					onSelect={(e: any, option: any) => {
+						store.setPageSize(+option!.value);
+					}}
+					options={store.pageSizeOptions}
+					selected={store.pageSize}
+					titleText={label}
+				/>
+			)}
+
+			{type?.toLowerCase() == 'radio' && (
+				<RadioList
+					{...styling}
+					className={classnames('ss__perpage__radioList', className)}
+					{...subProps.RadioList}
+					onSelect={(e: any, option: any) => {
+						store.setPageSize(+option!.value);
+					}}
+					options={store.pageSizeOptions}
+					selected={store.pageSize}
+					titleText={label}
+				/>
+			)}
 		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
@@ -73,10 +127,13 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 interface SelectSubProps {
 	select: Partial<SelectProps>;
+	RadioList: Partial<RadioListProps>;
+	List: Partial<ListProps>;
 }
 
 export interface PerPageProps extends ComponentProps {
 	pagination?: SearchPaginationStore;
 	controller?: SearchController;
 	label?: string;
+	type?: 'dropdown' | 'list' | 'radio';
 }

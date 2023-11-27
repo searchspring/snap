@@ -19,6 +19,7 @@ import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRang
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
+import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 
 const CSS = {
 	facet: ({ color, theme }: Partial<FacetProps>) =>
@@ -209,6 +210,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		facetToggle: {
+			// default props
+			className: 'ss__facet__facet-toggle',
+			// global theme
+			...globalTheme?.components?.facetToggle,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
@@ -266,82 +279,89 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 	};
 
-	return (
-		facet && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
-					<Dropdown
-						{...subProps.dropdown}
-						open={disableCollapse || !facet?.collapsed}
-						onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
-						disableA11y={true}
-						button={
-							<div
-								className="ss__facet__header"
-								ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
-								role="heading"
-								aria-level={3}
-								aria-label={`currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
-									(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
-								}`}
-							>
-								{facet?.label}
-								{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
-							</div>
-						}
-					>
-						{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-							<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
-						)}
-						<div className={classnames('ss__facet__options', className)}>
-							{(() => {
-								//manual options component
-								if (optionsSlot) {
-									return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
-								} else {
-									switch (facet?.display) {
-										case FacetDisplay.SLIDER:
-											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
-										case FacetDisplay.GRID:
-											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
-										case FacetDisplay.PALETTE:
-											return (
-												<FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />
-											);
-										case FacetDisplay.HIERARCHY:
-											return (
-												<FacetHierarchyOptions
-													{...subProps.facetHierarchyOptions}
-													values={limitedValues as FacetHierarchyValue[]}
-													facet={facet as ValueFacet}
-												/>
-											);
-										default:
-											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
-									}
-								}
-							})()}
-						</div>
+	let renderFacet = true;
+	if (facet.display == FacetDisplay.TOGGLE && facet && (facet as ValueFacet)?.values.length !== 1) {
+		renderFacet = false;
+	}
 
-						{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
-							<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
-								{overflowSlot ? (
-									cloneWithProps(overflowSlot, { facet })
-								) : (
-									<Fragment>
-										<Icon
-											{...subProps.showMoreLessIcon}
-											icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
-										/>
-										<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
-									</Fragment>
-								)}
-							</div>
-						)}
-					</Dropdown>
-				</div>
-			</CacheProvider>
-		)
+	return facet && renderFacet ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
+				<Dropdown
+					{...subProps.dropdown}
+					open={disableCollapse || !facet?.collapsed}
+					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
+					disableA11y={true}
+					button={
+						<div
+							className="ss__facet__header"
+							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+							role="heading"
+							aria-level={3}
+							aria-label={`currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
+								(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
+							}`}
+						>
+							{facet?.label}
+							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+						</div>
+					}
+				>
+					{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
+						<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+					)}
+					<div className={classnames('ss__facet__options', className)}>
+						{(() => {
+							//manual options component
+							if (optionsSlot) {
+								return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+							} else {
+								switch (facet?.display) {
+									case FacetDisplay.TOGGLE:
+										return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
+									case FacetDisplay.SLIDER:
+										return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+									case FacetDisplay.GRID:
+										return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+									case FacetDisplay.PALETTE:
+										return (
+											<FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />
+										);
+									case FacetDisplay.HIERARCHY:
+										return (
+											<FacetHierarchyOptions
+												{...subProps.facetHierarchyOptions}
+												values={limitedValues as FacetHierarchyValue[]}
+												facet={facet as ValueFacet}
+											/>
+										);
+									default:
+										return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								}
+							}
+						})()}
+					</div>
+
+					{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
+						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
+							{overflowSlot ? (
+								cloneWithProps(overflowSlot, { facet })
+							) : (
+								<Fragment>
+									<Icon
+										{...subProps.showMoreLessIcon}
+										icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
+									/>
+									<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
+								</Fragment>
+							)}
+						</div>
+					)}
+				</Dropdown>
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -351,6 +371,7 @@ interface FacetSubProps {
 	facetGridOptions: Partial<FacetGridOptionsProps>;
 	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
 	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
+	facetToggle: Partial<FacetToggleProps>;
 	facetSlider: Partial<FacetSliderProps>;
 	searchInput: Partial<SearchInputProps>;
 	icon: Partial<IconProps>;

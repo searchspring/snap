@@ -41,6 +41,11 @@ import type { RecommendationProps } from '../components/Templates/Recommendation
 import type { SearchProps } from '../components/Templates/Search';
 import type { NoResultsProps } from '../components/Atoms/NoResults';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import type { FacetToggleProps } from '../components/Molecules/FacetToggle';
+import type { ToggleProps } from '../components/Atoms/Toggle';
+import type { RadioListProps } from '../components/Molecules/RadioList';
+import type { ListProps } from '../components/Molecules/List';
+import type { RadioProps } from '../components/Molecules/Radio';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -60,9 +65,12 @@ export type ThemeComponents = {
 	price?: GenericComponentProps<PriceProps>;
 	skeleton?: GenericComponentProps<SkeletonProps>;
 	terms?: GenericComponentProps<TermsProps>;
+	toggle?: GenericComponentProps<ToggleProps>;
+
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
 	checkbox?: GenericComponentProps<CheckboxProps>;
+	radio?: GenericComponentProps<RadioProps>;
 	errorHandler?: GenericComponentProps<ErrorHandlerProps>;
 	facetGridOptions?: GenericComponentProps<FacetGridOptionsProps>;
 	facetHierarchyOptions?: GenericComponentProps<FacetHierarchyOptionsProps>;
@@ -78,6 +86,10 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
+	facetToggle?: GenericComponentProps<FacetToggleProps>;
+	radioList?: GenericComponentProps<RadioListProps>;
+	list?: GenericComponentProps<ListProps>;
+
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;
