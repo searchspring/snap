@@ -313,6 +313,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	);
 });
 
+// TODO: remove this
 export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 

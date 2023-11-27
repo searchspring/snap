@@ -145,7 +145,7 @@ This usually happens when you pass a JSX Element, and not a function that return
 
 The error above happened in the following targeter in the Snap Config`;
 export class Snap {
-	protected mode = AppMode.production;
+	private mode = AppMode.production;
 	private config: SnapConfig;
 	private _instantiatorPromises: {
 		[instantiatorId: string]: Promise<RecommendationInstantiator>;

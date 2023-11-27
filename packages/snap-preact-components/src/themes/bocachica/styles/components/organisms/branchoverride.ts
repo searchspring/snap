@@ -1,6 +1,6 @@
-import { css, BranchOverrideProps, ComponentTheme } from '../../../../../index';
+import { css, BranchOverrideProps, BranchOverrideTheme } from '../../../../../index';
 
-const darkTheme: ComponentTheme = {
+const darkTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--dark',
 	main: {
 		border: '0',
@@ -35,7 +35,7 @@ const darkTheme: ComponentTheme = {
 	},
 };
 
-const lightTheme: ComponentTheme = {
+const lightTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--light',
 	main: {
 		border: '1px solid #ccc',
@@ -69,7 +69,7 @@ const lightTheme: ComponentTheme = {
 	},
 };
 
-const failureTheme: ComponentTheme = {
+const failureTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--error',
 	main: {
 		border: '0',

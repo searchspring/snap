@@ -10,7 +10,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
-export type ComponentTheme = {
+export type BranchOverrideTheme = {
 	class: string;
 	main: {
 		border: string;
@@ -46,7 +46,7 @@ export type ComponentTheme = {
 };
 
 const CSS = {
-	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: ComponentTheme }) =>
+	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: BranchOverrideTheme }) =>
 		css({
 			width: '360px',
 			height: '120px',
@@ -134,7 +134,7 @@ const CSS = {
 		}),
 };
 
-const darkTheme: ComponentTheme = {
+const darkTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--dark',
 	main: {
 		border: '0',
@@ -169,7 +169,7 @@ const darkTheme: ComponentTheme = {
 	},
 };
 
-const lightTheme: ComponentTheme = {
+const lightTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--light',
 	main: {
 		border: '1px solid #ccc',
@@ -203,7 +203,7 @@ const lightTheme: ComponentTheme = {
 	},
 };
 
-const failureTheme: ComponentTheme = {
+const failureTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--error',
 	main: {
 		border: '0',
@@ -238,7 +238,7 @@ const failureTheme: ComponentTheme = {
 	},
 };
 
-export const componentThemes = {
+const componentThemes = {
 	darkTheme,
 	lightTheme,
 	failureTheme,

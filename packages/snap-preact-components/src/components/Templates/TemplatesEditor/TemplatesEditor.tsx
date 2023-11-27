@@ -212,7 +212,6 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 			>
 				<Button
 					onClick={() => {
-						templatesStore.storage.clear();
 						onRemoveClick();
 					}}
 				>

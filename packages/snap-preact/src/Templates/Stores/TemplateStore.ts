@@ -135,7 +135,6 @@ export class TemplatesStore {
 			const currency = this.library.locales.currencies[currencyCode];
 
 			if (currency) {
-				console.log('changing currency!!!', currencyCode);
 				this.currency = currencyCode;
 				this.storage.set('currency', this.currency);
 				for (const themeName in this.themes.local) {
@@ -156,7 +155,6 @@ export class TemplatesStore {
 			const language = this.library.locales.currencies[languageCode];
 
 			if (language) {
-				console.log('changing language!!!', languageCode);
 				this.language = languageCode;
 				this.storage.set('language', this.language);
 				for (const themeName in this.themes.local) {

@@ -98,12 +98,11 @@ export class SnapTemplates extends Snap {
 
 		const templatesStore = new TemplatesStore(config, { editMode });
 
-		window.searchspring = window.searchspring || {};
-		window.searchspring.templates = templatesStore;
-
 		const snapConfig = createSnapConfig(config, templatesStore);
 
 		super(snapConfig);
+
+		window.searchspring.templates = templatesStore;
 
 		if (editMode) {
 			setTimeout(async () => {
