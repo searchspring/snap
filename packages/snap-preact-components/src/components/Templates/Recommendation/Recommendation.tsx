@@ -17,7 +17,6 @@ import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '.
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
-import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -80,7 +79,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		nextButton,
 		prevButton,
 		hideButtons,
-		resultLayout,
 		resultComponent,
 		disableStyles,
 		style,
@@ -167,8 +165,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 												if (resultComponent && controller) {
 													const ResultComponent = resultComponent;
 													return <ResultComponent controller={controller} result={result} />;
-												} else if (resultLayout && controller) {
-													return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
 												} else {
 													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
 												}
@@ -197,7 +193,6 @@ export type RecommendationProps = {
 	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 } & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;

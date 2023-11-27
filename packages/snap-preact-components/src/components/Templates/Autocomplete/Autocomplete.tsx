@@ -19,7 +19,6 @@ import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
 	Autocomplete: ({
@@ -324,7 +323,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		resultsSlot,
 		noResultsSlot,
 		linkSlot,
-		resultLayout,
 		resultComponent,
 		onTermClick,
 		disableStyles,
@@ -358,7 +356,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// default props
 			className: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,
-			resultLayout: resultLayout,
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -713,7 +710,6 @@ export interface AutocompleteProps extends ComponentProps {
 	linkSlot?: JSX.Element | JSX.Element[];
 	breakpoints?: BreakpointsProps;
 	width?: string;
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;

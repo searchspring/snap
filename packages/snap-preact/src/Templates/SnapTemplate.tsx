@@ -10,7 +10,7 @@ import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { ResultComponent, ResultLayoutTypes } from '@searchspring/snap-preact-components';
+import type { ResultComponent } from '@searchspring/snap-preact-components';
 import type { SnapFeatures, DeepPartial } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
@@ -23,7 +23,6 @@ export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Search'; // various component (template) types allowed
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
 
@@ -31,7 +30,6 @@ export type AutocompleteTargetConfig = {
 	selector: string;
 	theme?: string;
 	template: 'Autocomplete'; // various components (templates) available
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
 
@@ -39,7 +37,6 @@ export type RecommendationTargetConfig = {
 	component: string;
 	theme?: string;
 	template: 'Recommendation'; // various components (templates) available
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 };
 
@@ -182,8 +179,6 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		// if they are not undefined, add them
 		if (target.resultComponent) {
 			targeter.props!.resultComponent = target.resultComponent;
-		} else if (target.resultLayout) {
-			targeter.props!.resultLayout = target.resultLayout;
 		}
 
 		return targeter;
@@ -207,8 +202,6 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 		// if they are not undefined, add them
 		if (target.resultComponent) {
 			targeter.props!.resultComponent = target.resultComponent;
-		} else if (target.resultLayout) {
-			targeter.props!.resultLayout = target.resultLayout;
 		}
 
 		return targeter;
@@ -234,8 +227,6 @@ export function createRecommendationComponentMapping(
 				// if they are not undefined, add them
 				if (target.resultComponent) {
 					mapping[target.component].props!.resultComponent = target.resultComponent;
-				} else if (target.resultLayout) {
-					mapping[target.component].props!.resultLayout = target.resultLayout;
 				}
 
 				return mapping;

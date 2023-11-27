@@ -3,7 +3,6 @@ export * from './components/Atoms/Badge';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
-export * from './components/Atoms/Element';
 export * from './components/Atoms/FormattedNumber';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
@@ -47,9 +46,6 @@ export * from './components/Organisms/MobileSidebar';
 export * from './components/Organisms/Results';
 export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
-
-// LAYOUTS
-export * from './components/Layouts/ResultLayout';
 
 // TEMAPLTES
 export * from './components/Templates/Autocomplete';

@@ -2,7 +2,6 @@ import type { BadgeProps } from '../components/Atoms/Badge';
 import type { BreadcrumbsProps } from '../components/Atoms/Breadcrumbs';
 import type { ButtonProps } from '../components/Atoms/Button';
 import type { DropdownProps } from '../components/Atoms/Dropdown';
-import type { ContainerProps } from '../components/Layouts/utils/Container';
 import type { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
 import type { IconProps } from '../components/Atoms/Icon';
 import type { ImageProps } from '../components/Atoms/Image';
@@ -11,9 +10,7 @@ import type { BannerProps, InlineBannerProps } from '../components/Atoms/Merchan
 import type { OverlayProps } from '../components/Atoms/Overlay';
 import type { PriceProps } from '../components/Atoms/Price';
 import type { SkeletonProps } from '../components/Atoms/Skeleton';
-import type { ElementProps } from '../components/Atoms/Element';
 import type { TermsProps } from '../components/Atoms/Terms';
-import type { ResultLayoutProps } from '../components/Layouts/ResultLayout';
 import type { CarouselProps } from '../components/Molecules/Carousel';
 import type { CheckboxProps } from '../components/Molecules/Checkbox';
 import type { ErrorHandlerProps } from '../components/Molecules/ErrorHandler';
@@ -53,7 +50,6 @@ export type ThemeComponents = {
 	breadcrumbs?: GenericComponentProps<BreadcrumbsProps>;
 	button?: GenericComponentProps<ButtonProps>;
 	dropdown?: GenericComponentProps<DropdownProps>;
-	container?: GenericComponentProps<ContainerProps>;
 	formattedNumber?: GenericComponentProps<FormattedNumberProps>;
 	icon?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;
@@ -63,7 +59,6 @@ export type ThemeComponents = {
 	overlay?: GenericComponentProps<OverlayProps>;
 	price?: GenericComponentProps<PriceProps>;
 	skeleton?: GenericComponentProps<SkeletonProps>;
-	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
@@ -94,8 +89,6 @@ export type ThemeComponents = {
 	sidebar?: GenericComponentProps<SidebarProps>;
 	mobileSidebar?: GenericComponentProps<MobileSidebarProps>;
 	toolbar?: GenericComponentProps<ToolbarProps>;
-	/* LAYOUTS */
-	resultLayout?: GenericComponentProps<ResultLayoutProps>;
 	/* TEMPLATES */
 	autocomplete?: GenericComponentProps<AutocompleteProps>;
 	recommendation?: GenericComponentProps<RecommendationProps>;

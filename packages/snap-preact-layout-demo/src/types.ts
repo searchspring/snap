@@ -28,11 +28,6 @@ declare global {
 	type SearchFacetsStore = StoreTypes.SearchFacetStore;
 	type SearchResultsStore = StoreTypes.SearchResultStore;
 
-	// layout types
-	type LayoutElement = ComponentTypes.LayoutElement;
-	type LayoutFunc<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.ResultLayoutFunc<Controller>;
-	type LayoutTypes<Controller = SearchController | AutocompleteController | RecommendationController> = ComponentTypes.ResultLayoutTypes<Controller>;
-
 	// services types
 	type Next = EventManagerTypes.Next;
 	type Middleware<T> = EventManagerTypes.Middleware<T>;

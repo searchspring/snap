@@ -16,7 +16,6 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
-import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
@@ -84,7 +83,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		hideSidebar,
 		hideSearchHeader,
 		hideMobileSidebar,
-		resultLayout,
 		hideMerchandisingBanners,
 		toggleSidebarButtonText,
 		hideTopToolbar,
@@ -169,7 +167,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Results: {
 			// default props
-			resultLayout: resultLayout,
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -347,7 +344,6 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 		hideSidebar,
 		hideSearchHeader,
 		hideMobileSidebar,
-		resultLayout,
 		hideMerchandisingBanners,
 		toggleSidebarButtonText,
 		hideTopToolbar,
@@ -432,7 +428,6 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 		},
 		Results: {
 			// default props
-			resultLayout: resultLayout,
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -584,7 +579,6 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 export interface SearchProps extends ComponentProps {
 	controller: SearchController;
 	mobileSidebarDisplayAt?: string;
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 	hideSidebar?: boolean;
 	hideMobileSidebar?: boolean;

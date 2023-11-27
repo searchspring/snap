@@ -1,5 +1,4 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
-// import { resultLayout } from './resultLayout';
 import { Result } from './components/Result';
 
 /*

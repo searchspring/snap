@@ -40,9 +40,6 @@ export const bocachica: Theme = {
 		dropdown: {
 			...style.components.dropdown,
 		},
-		element: {
-			...style.components.element,
-		},
 		formattedNumber: {
 			...style.components.formattedNumber,
 		},
