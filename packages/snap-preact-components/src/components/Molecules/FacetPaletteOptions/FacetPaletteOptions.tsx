@@ -126,7 +126,7 @@ const CSS = {
 
 				'.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.colors?.primary || '#333' + ' !important',
+						borderColor: theme?.variables?.color?.primary || '#333' + ' !important',
 						padding: '0px',
 						borderWidth: '4px',
 					},

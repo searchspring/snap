@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import { Theme, useTheme } from '../../../providers';
 import { cloneWithProps, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { handleize } from '@searchspring/snap-toolbox/dist/cjs/filters/handleize';
+import { filters } from '@searchspring/snap-toolbox';
 
 const CSS = {
 	noResults: () => css({}),
@@ -107,7 +107,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 					{contactsExist &&
 						contactsList.map((contact: NoResultsContact) => (
-							<div className={`ss__no-results__contact__detail ss__no-results__contact__detail--${handleize(contact.title)}`}>
+							<div className={`ss__no-results__contact__detail ss__no-results__contact__detail--${filters.handleize(contact.title)}`}>
 								<h4 className="ss__no-results__contact__detail__title" dangerouslySetInnerHTML={{ __html: contact.title }}></h4>
 
 								<p className="ss__no-results__contact__detail__content" dangerouslySetInnerHTML={{ __html: contact.content }}></p>
