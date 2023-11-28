@@ -1,9 +1,8 @@
 import { css, SearchInputProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the SearchInput component
 const searchInputStyleScript = ({ theme }: SearchInputProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		display: 'flex',

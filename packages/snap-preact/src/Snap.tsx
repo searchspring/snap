@@ -31,9 +31,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures } from './types';
-import type { SnapThemeConfig } from './Templates/themes';
-import { configureSnapFeatures, fetchTheme } from './utils';
-import { Theme } from '@searchspring/snap-preact-components';
+import { configureSnapFeatures } from './utils';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -46,7 +44,6 @@ export type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<any> | any;
-	theme?: SnapThemeConfig;
 	skeleton?: () => Promise<any> | any;
 	props?: {
 		[propName: string]: any;
@@ -591,15 +588,8 @@ export class Snap {
 									// dynamically import the component
 									importPromises.push(target.component!());
 
-									if (target.theme) {
-										importPromises.push(fetchTheme(target.theme));
-									}
-
 									const importResolutions = await Promise.all(importPromises);
 									const Component = importResolutions[0];
-
-									target.props = target.props || {};
-									target.props.theme = importResolutions[1];
 
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
@@ -667,15 +657,8 @@ export class Snap {
 										// dynamically import the component
 										importPromises.push(target.component!());
 
-										if (target.theme) {
-											importPromises.push(fetchTheme(target.theme));
-										}
-
 										const importResolutions = await Promise.all(importPromises);
 										const Component = importResolutions[0];
-
-										target.props = target.props || {};
-										target.props.theme = importResolutions[1] as Theme;
 
 										setTimeout(() => {
 											render(

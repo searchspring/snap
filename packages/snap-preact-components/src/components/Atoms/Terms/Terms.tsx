@@ -6,12 +6,12 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
-import type { AutocompleteTermStore } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores';
+import type { AutocompleteTermStore } from '@searchspring/snap-store-mobx';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
-import { Term } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores/AutocompleteTermStore';
+import { Term } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	Terms: ({}: Partial<TermsProps>) => css({}),

@@ -38,7 +38,7 @@ const CSS = {
 			'& .ss__error-handler__button': {
 				backgroundColor: 'white',
 				color: 'inherit',
-				borderColor: theme?.colors?.primary,
+				borderColor: theme?.variables?.color?.primary,
 				width: ['150px', 'fit-content'],
 				margin: '5px 10px',
 
@@ -48,30 +48,30 @@ const CSS = {
 			},
 
 			'&.ss__error-handler--error': {
-				backgroundColor: LightenDarkenColor(theme?.colors?.message?.error || 'red', 180),
-				borderLeftColor: theme?.colors?.message?.error || '#ff0000',
+				backgroundColor: LightenDarkenColor('#cc1212', 180),
+				borderLeftColor: '#cc1212',
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: theme?.colors?.message?.error || '#ff0000',
+						fill: '#cc1212',
 					},
 				},
 			},
 			'&.ss__error-handler--warning': {
-				backgroundColor: LightenDarkenColor(theme?.colors?.message?.warning || 'yellow', 180),
-				borderLeftColor: theme?.colors?.message?.warning || '#ffff00',
+				backgroundColor: LightenDarkenColor('#ecaa15', 180),
+				borderLeftColor: '#ecaa15',
 				'.ss__icon': {
-					fill: theme?.colors?.message?.warning || '#ffff00',
+					fill: '#ecaa15',
 				},
 				'.ss__error-handler__button': {
-					borderColor: theme?.colors?.message?.warning || '#ffff00',
+					borderColor: '#ecaa15',
 				},
 			},
 			'&.ss__error-handler--info': {
-				backgroundColor: LightenDarkenColor(theme?.colors?.message?.info || 'blue', 180),
-				borderLeftColor: theme?.colors?.message?.info || '#0000ff',
+				backgroundColor: LightenDarkenColor('#4c3ce2', 180),
+				borderLeftColor: '#4c3ce2',
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: theme?.colors?.message?.info || '#0000ff',
+						fill: '#4c3ce2',
 					},
 				},
 			},

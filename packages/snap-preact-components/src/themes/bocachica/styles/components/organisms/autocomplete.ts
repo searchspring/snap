@@ -1,5 +1,4 @@
 import { css, AutocompleteProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Autocomplete component
 const autocompleteStyleScript = ({
@@ -13,7 +12,7 @@ const autocompleteStyleScript = ({
 	width,
 	theme,
 }: AutocompleteProps & { inputViewportOffsetBottom: number; noResults: boolean; contentSlotExists: boolean }) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		'&, & *, & *:before, & *:after': {

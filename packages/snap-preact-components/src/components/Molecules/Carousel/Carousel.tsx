@@ -57,7 +57,7 @@ const CSS = {
 				},
 			},
 			'.swiper-pagination-bullet-active': {
-				background: theme?.colors?.primary || 'inherit',
+				background: theme?.variables?.color?.primary || 'inherit',
 			},
 			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
@@ -129,7 +129,7 @@ const CSS = {
 				margin: '0 4px',
 				'&.swiper-pagination-bullet-active': {
 					opacity: '0.8',
-					background: theme?.colors?.primary || '#000',
+					background: theme?.variables?.color?.primary || '#000',
 				},
 			},
 			'.swiper-container-pointer-events': {

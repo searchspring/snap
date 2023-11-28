@@ -1,10 +1,9 @@
 import { css, OverlayProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Overlay component
 const overlayStyleScript = ({ color, transitionSpeed, theme }: OverlayProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,

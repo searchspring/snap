@@ -1,9 +1,8 @@
 import { css, PaginationProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Pagination component
 const paginationStyleScript = ({ theme }: PaginationProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		'& .ss__pagination__page': {

@@ -1,11 +1,11 @@
 import { css, ErrorHandlerProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
+
 import { LightenDarkenColor } from '../../../../../utilities';
 
 // CSS in JS style script for the ErrorHandler component
 const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		borderRadius: '2px',

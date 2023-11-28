@@ -47,6 +47,7 @@ export enum FacetDisplay {
 	LIST = 'list',
 	SLIDER = 'slider',
 	HIERARCHY = 'hierarchy',
+	TOGGLE = 'toggle',
 }
 
 export type BreakpointsProps = {

@@ -3,7 +3,6 @@ export * from './components/Atoms/Badge';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
-export * from './components/Atoms/Element';
 export * from './components/Atoms/FormattedNumber';
 export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
@@ -40,6 +39,7 @@ export * from './components/Molecules/SortBy';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
+export * from './components/Templates/TemplatesEditor';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
@@ -48,13 +48,11 @@ export * from './components/Organisms/Results';
 export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
 
-// LAYOUTS
-export * from './components/Layouts/ResultLayout';
-
 // TEMAPLTES
 export * from './components/Templates/Autocomplete';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/Search';
+export * from './components/Templates/TemplateSelect';
 
 // TYPES
 export * from './types';

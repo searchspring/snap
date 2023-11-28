@@ -19,7 +19,6 @@ import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { ResultLayoutTypes } from '../../Layouts/ResultLayout';
 
 const CSS = {
 	Autocomplete: ({
@@ -103,7 +102,7 @@ const CSS = {
 
 							'& a': {
 								fontWeight: 'bold',
-								color: theme?.colors?.primary,
+								color: theme?.variables?.color?.primary,
 							},
 						},
 					},
@@ -157,7 +156,7 @@ const CSS = {
 
 					'& a': {
 						fontWeight: 'bold',
-						color: theme?.colors?.primary,
+						color: theme?.variables?.color?.primary,
 
 						'& .ss__icon': {
 							marginLeft: '5px',
@@ -181,6 +180,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
+
+	// TODO: fix this / create task to fix
+	props = {
+		...props,
+		theme: properties.theme,
+	};
 
 	//passed in or default breakpoints result props
 	props.breakpoints = props.breakpoints || {
@@ -318,7 +323,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		resultsSlot,
 		noResultsSlot,
 		linkSlot,
-		resultLayout,
 		resultComponent,
 		onTermClick,
 		disableStyles,
@@ -352,7 +356,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// default props
 			className: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,
-			resultLayout: resultLayout,
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -707,7 +710,6 @@ export interface AutocompleteProps extends ComponentProps {
 	linkSlot?: JSX.Element | JSX.Element[];
 	breakpoints?: BreakpointsProps;
 	width?: string;
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;

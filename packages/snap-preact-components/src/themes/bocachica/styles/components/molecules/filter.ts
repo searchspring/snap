@@ -1,10 +1,9 @@
 import { css, FilterProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Filter component
 const filterStyleScript = ({ theme }: FilterProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		textDecoration: 'none',

@@ -21,14 +21,14 @@ const CSS = {
 			opacity: '1',
 			visibility: 'visible',
 			zIndex: '10000',
-			background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
+			background: backgroundColor || theme?.variables?.color?.secondary || '#f8f8f8',
 
 			'& .ss__loading-bar__bar': {
 				position: 'absolute',
 				top: '0',
 				left: '-200px',
 				height: '100%',
-				background: `${color || theme?.colors?.primary || '#ccc'}`,
+				background: `${color || theme?.variables?.color?.primary || '#ccc'}`,
 				animation: `${animation} 2s linear infinite`,
 			},
 		}),

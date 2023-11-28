@@ -1,10 +1,9 @@
 import { css, ToolbarProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Toolbar component
 const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({});
 };

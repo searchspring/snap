@@ -4,7 +4,6 @@ export { banner } from './banner';
 export { breadcrumbs } from './breadcrumbs';
 export { button } from './button';
 export { dropdown } from './dropdown';
-export { element } from './element';
 export { formattedNumber } from './formattednumber';
 export { icon } from './icon';
 export { image } from './image';

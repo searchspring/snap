@@ -61,18 +61,18 @@ const CSS = {
 				},
 			},
 			'& .ss__facet-slider__rail': {
-				background: railColor || theme?.colors?.primary || '#333',
+				background: railColor || theme?.variables?.color?.primary || '#333',
 				height: '100%',
 			},
 			'& .ss__facet-slider__segment': {
-				background: trackColor || theme?.colors?.secondary || '#ccc',
+				background: trackColor || theme?.variables?.color?.secondary || '#ccc',
 				height: '100%',
 			},
 			'& .ss__facet-slider__handles': {
 				textAlign: 'center',
 				'& button': {
 					'& .ss__facet-slider__handle': {
-						background: handleColor || theme?.colors?.primary || '#333',
+						background: handleColor || theme?.variables?.color?.primary || '#333',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
@@ -104,7 +104,7 @@ const CSS = {
 						},
 
 						'&.ss__facet-slider__handle--active': {
-							background: handleDraggingColor || handleColor || theme?.colors?.primary || '#000',
+							background: handleDraggingColor || handleColor || theme?.variables?.color?.primary || '#000',
 							'& label.ss__facet-slider__handle__label': {
 								background: '#fff',
 								padding: '0 5px',
