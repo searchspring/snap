@@ -26,7 +26,7 @@ const CSS = {
 		backgroundColor,
 		theme,
 	}: Partial<LoadMoreProps>) => {
-		const radialAngle = ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2;
+		const radialAngle = Math.max(3.6, ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2);
 
 		return css({
 			'& .ss__load-more__button--hidden': {
@@ -35,90 +35,88 @@ const CSS = {
 			'& .ss__button': {
 				alignItems: 'center',
 			},
-			'& .ss__loadMore__icon': {
+			'& .ss__load-more__icon': {
 				marginLeft: '5px',
 				animation: `${keyframes({
 					'0%': { transform: `rotate(0deg)` },
 					'100%': { transform: `rotate(360deg)` },
 				})} linear 1s infinite`,
 			},
-			'&.ss__loadMore--bar': {
+			'&.ss__load-more--bar': {
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
 				gap: '20px',
-				'& .ss__loadMore__progress': {
+				'& .ss__load-more__progress': {
 					display: 'flex',
 					flexDirection: 'column',
 					gap: '5px',
-					'& .ss__loadMore__progress__indicator': {
+					'& .ss__load-more__progress__indicator': {
 						width: progressIndicatorWidth,
 						background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
 						borderRadius: progressIndicatorSize,
-						'& .ss__loadMore__progress__indicator__bar': {
+						'& .ss__load-more__progress__indicator__bar': {
 							width: pagination ? `${(pagination.end / pagination.totalResults) * 100}%` : '',
 							background: color || theme?.colors?.primary || '#ccc',
 							borderRadius: progressIndicatorSize,
 							height: progressIndicatorSize,
 						},
 					},
-					'& .ss__loadMore__progress__text': {
+					'& .ss__load-more__progress__text': {
 						textAlign: 'center',
 					},
 				},
 			},
-			'&.ss__loadMore--radial': {
+			'&.ss__load-more--radial': {
 				display: 'flex',
 				alignItems: 'center',
 				gap: '10px',
 				'& .ss__load-more__button': {
 					height: 'fit-content',
 				},
-				'& .ss__loadMore__progress': {
+				'& .ss__load-more__progress': {
 					// remove height if progress indicator is hidden but hideProgressText is not
 					height: !hideProgressText && hideProgressIndicator ? undefined : progressIndicatorWidth,
 
-					'& .ss__loadMore__progress__indicator': {
-						'& .ss__loadMore__progress__indicator__radial': {
-							'& .ss__loadMore__progress__indicator__radial__circle': {
-								background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
-								height: progressIndicatorWidth,
-								width: progressIndicatorWidth,
-								borderRadius: '50%',
+					'& .ss__load-more__progress__indicator': {
+						'& .ss__load-more__progress__indicator__radial': {
+							background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
+							height: progressIndicatorWidth,
+							width: progressIndicatorWidth,
+							borderRadius: '50%',
 
-								'& .ss__loadMore__progress__indicator__radial__circle__mask, .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
-									width: progressIndicatorWidth,
-									height: progressIndicatorWidth,
-									position: 'absolute',
-									borderRadius: '50%',
-								},
-								'& .ss__loadMore__progress__indicator__radial__circle__mask': {
-									clipPath: `inset(0px 0px 0px calc(${progressIndicatorWidth}/2))`,
-								},
-								'& .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
-									transform: `rotate(${radialAngle}deg)`,
-								},
-							},
-							'& .ss__loadMore__progress__text': {
-								width: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-								height: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-								borderRadius: '50%',
-								background: '#fff',
-								lineHeight: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-								textAlign: 'center',
-								marginTop: `calc(${progressIndicatorSize} / 2)`,
-								marginLeft: `calc(${progressIndicatorSize} / 2)`,
+							'& .ss__load-more__progress__indicator__radial__mask, .ss__load-more__progress__indicator__radial__mask__fill': {
+								width: progressIndicatorWidth,
+								height: progressIndicatorWidth,
 								position: 'absolute',
-								fontSize: `calc(${progressIndicatorWidth} / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
+								borderRadius: '50%',
 							},
-							'& .ss__loadMore__progress__indicator__radial__circle__mask': {
-								'& .ss__loadMore__progress__indicator__radial__circle__mask__fill': {
-									clipPath: `inset(0px calc((${progressIndicatorWidth} / 2) - 0.5px) 0px 0px)`,
-									backgroundColor: color || theme?.colors?.primary || '#ccc',
-								},
-								'&.ss__loadMore__progress__indicator__radial__circle__mask--full': {
-									transform: `rotate(${radialAngle}deg)`,
-								},
+							'& .ss__load-more__progress__indicator__radial__mask': {
+								clipPath: `inset(0px 0px 0px calc(${progressIndicatorWidth}/2))`,
+							},
+							'& .ss__load-more__progress__indicator__radial__mask__fill': {
+								transform: `rotate(${radialAngle}deg)`,
+							},
+						},
+						'& .ss__load-more__progress__text': {
+							width: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+							height: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+							borderRadius: '50%',
+							background: '#fff',
+							lineHeight: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+							textAlign: 'center',
+							marginTop: `calc(${progressIndicatorSize} / 2)`,
+							marginLeft: `calc(${progressIndicatorSize} / 2)`,
+							position: 'absolute',
+							fontSize: `calc(${progressIndicatorWidth} / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
+						},
+						'& .ss__load-more__progress__indicator__radial__mask': {
+							'& .ss__load-more__progress__indicator__radial__mask__fill': {
+								clipPath: `inset(0px calc((${progressIndicatorWidth} / 2)) 0px 0px)`,
+								backgroundColor: color || theme?.colors?.primary || '#ccc',
+							},
+							'&.ss__load-more__progress__indicator__radial__mask--full': {
+								transform: `rotate(${radialAngle}deg)`,
 							},
 						},
 					},
@@ -184,7 +182,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		},
 		icon: {
 			// default props
-			className: 'ss__loadMore__icon',
+			className: 'ss__load-more__icon',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -237,10 +235,10 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				{...styling}
 				{...autoProps}
 				className={classnames(
-					'ss__loadMore',
-					`ss__loadMore--${progressIndicator}`,
-					{ 'ss__loadMore--loading': isLoading },
-					{ 'ss__loadMore--autoFetch': autoFetch },
+					'ss__load-more',
+					`ss__load-more--${progressIndicator}`,
+					{ 'ss__load-more--loading': isLoading },
+					{ 'ss__load-more--autoFetch': autoFetch },
 					className
 				)}
 			>
@@ -263,16 +261,16 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				)}
 
 				{(!hideProgressIndicator || !hideProgressText) && (
-					<div className={'ss__loadMore__progress'}>
+					<div className={'ss__load-more__progress'}>
 						{progressIndicator === 'bar' && (
 							<Fragment>
 								{!hideProgressIndicator && (
-									<div className={'ss__loadMore__progress__indicator'}>
-										<div className={`ss__loadMore__progress__indicator__bar`}></div>
+									<div className={'ss__load-more__progress__indicator'}>
+										<div className={`ss__load-more__progress__indicator__bar`}></div>
 									</div>
 								)}
 								{!hideProgressText && (
-									<div className={'ss__loadMore__progress__text'}>
+									<div className={'ss__load-more__progress__text'}>
 										You've viewed {store?.end} of {store?.totalResults} products
 									</div>
 								)}
@@ -282,19 +280,17 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 							<Fragment>
 								{!hideProgressText && hideProgressIndicator ? (
 									// displays text when progress indicator is hidden but hideProgressText is not
-									<div className="ss__loadMore__progress__text">{`${store.end} / ${store.totalResults}`}</div>
+									<div className="ss__load-more__progress__text">{`${store.end} / ${store.totalResults}`}</div>
 								) : !hideProgressIndicator ? (
-									<div className={'ss__loadMore__progress__indicator'}>
-										<div className={`ss__loadMore__progress__indicator__radial`}>
-											<div className="ss__loadMore__progress__indicator__radial__circle">
-												<div className="ss__loadMore__progress__indicator__radial__circle__mask ss__loadMore__progress__indicator__radial__circle__mask--full">
-													<div className="ss__loadMore__progress__indicator__radial__circle__mask__fill"></div>
-												</div>
-												<div className="ss__loadMore__progress__indicator__radial__circle__mask ss__loadMore__progress__indicator__radial__circle__mask--half">
-													<div className="ss__loadMore__progress__indicator__radial__circle__mask__fill"></div>
-												</div>
-												<div className="ss__loadMore__progress__text"> {!hideProgressText ? `${store.end} / ${store.totalResults}` : ''}</div>
+									<div className={'ss__load-more__progress__indicator'}>
+										<div className="ss__load-more__progress__indicator__radial">
+											<div className="ss__load-more__progress__indicator__radial__mask ss__load-more__progress__indicator__radial__mask--full">
+												<div className="ss__load-more__progress__indicator__radial__mask__fill"></div>
 											</div>
+											<div className="ss__load-more__progress__indicator__radial__mask ss__load-more__progress__indicator__radial__mask--half">
+												<div className="ss__load-more__progress__indicator__radial__mask__fill"></div>
+											</div>
+											<div className="ss__load-more__progress__text"> {!hideProgressText ? `${store.end} / ${store.totalResults}` : ''}</div>
 										</div>
 									</div>
 								) : (

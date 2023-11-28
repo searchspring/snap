@@ -49,7 +49,7 @@ export class Results extends Component<ResultsProps> {
 				<div className={`ss-toolbar ${controller.config.settings.infinite ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
 					{(() => {
 						if (controller.config.settings.infinite) {
-							return <LoadMore controller={this.props.controller} />;
+							return <LoadMore controller={this.props.controller} progressIndicator="radial" />;
 						} else if (pagination.totalPages > 1) {
 							return <Pagination pagination={pagination} />;
 						}

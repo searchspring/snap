@@ -111,7 +111,7 @@ The `hideProgressText` prop hides the progress text.
 When both `hideProgressIndicator` and `hideProgressText` props are `true` only the button will be displayed.
 
 ```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicator={true} hideProgressText={true} />
+<LoadMore pagination={controller.store.pagination} hideProgressIndicator={true} hideProgressText={true} />
 ```
 
 ### loadingIcon
@@ -123,7 +123,7 @@ The `loadingIcon` prop defines the icon used when loading. Default: `spinner`
 ### loadingLocation
 The `loadingLocation` prop defines the location of the loading icon. Default: `button` will be displayed within the "Load More" button. Alternative value of `outside` will display the loading icon in place of the button.
 
-#### onClick
+### onClick
 The `onClick` prop allows for a custom callback function for when the button is clicked.
 
 ```jsx
