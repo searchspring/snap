@@ -1,7 +1,6 @@
 import { keyframes } from '@emotion/react';
 
 import { css, LoadMoreProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the LoadMore component
 const loadMoreStyleScript = ({
@@ -14,9 +13,9 @@ const loadMoreStyleScript = ({
 	backgroundColor,
 	theme,
 }: LoadMoreProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
-	const radialAngle = ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2;
+	const radialAngle = Math.max(3.6, ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2);
 	const radialAnimation = keyframes({
 		'0%': { transform: `rotate(0deg)` },
 		'100%': { transform: `rotate(${radialAngle}deg)` },
@@ -76,47 +75,45 @@ const loadMoreStyleScript = ({
 
 				'& .ss__load-more__progress__indicator': {
 					'& .ss__load-more__progress__indicator__radial': {
-						'& .ss__load-more__progress__indicator__radial__circle': {
-							background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
-							height: progressIndicatorWidth,
-							width: progressIndicatorWidth,
-							borderRadius: '50%',
+						background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
+						height: progressIndicatorWidth,
+						width: progressIndicatorWidth,
+						borderRadius: '50%',
 
-							'& .ss__load-more__progress__indicator__radial__circle__mask, .ss__load-more__progress__indicator__radial__circle__mask__fill': {
-								width: progressIndicatorWidth,
-								height: progressIndicatorWidth,
-								position: 'absolute',
-								borderRadius: '50%',
-							},
-							'& .ss__load-more__progress__indicator__radial__circle__mask': {
-								clipPath: `inset(0px 0px 0px calc(${progressIndicatorWidth}/2))`,
-							},
-							'& .ss__load-more__progress__indicator__radial__circle__mask__fill': {
-								animation: `${radialAnimation} ease-in-out 1s`,
-								transform: `rotate(${radialAngle}deg)`,
-							},
-						},
-						'& .ss__load-more__progress__text': {
-							width: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-							height: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-							borderRadius: '50%',
-							background: '#fff',
-							lineHeight: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
-							textAlign: 'center',
-							marginTop: `calc(${progressIndicatorSize} / 2)`,
-							marginLeft: `calc(${progressIndicatorSize} / 2)`,
+						'& .ss__load-more__progress__indicator__radial__mask, .ss__load-more__progress__indicator__radial__mask__fill': {
+							width: progressIndicatorWidth,
+							height: progressIndicatorWidth,
 							position: 'absolute',
-							fontSize: `calc(${progressIndicatorWidth} / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
+							borderRadius: '50%',
 						},
-						'& .ss__load-more__progress__indicator__radial__circle__mask': {
-							'& .ss__load-more__progress__indicator__radial__circle__mask__fill': {
-								clipPath: `inset(0px calc((${progressIndicatorWidth} / 2) - 0.5px) 0px 0px)`,
-								backgroundColor: color || variables?.color?.primary || '#ccc',
-							},
-							'&.ss__load-more__progress__indicator__radial__circle__mask--full': {
-								animation: `${radialAnimation} ease-in-out 1s`,
-								transform: `rotate(${radialAngle}deg)`,
-							},
+						'& .ss__load-more__progress__indicator__radial__mask': {
+							clipPath: `inset(0px 0px 0px calc(${progressIndicatorWidth}/2))`,
+						},
+						'& .ss__load-more__progress__indicator__radial__mask__fill': {
+							animation: `${radialAnimation} ease-in-out 1s`,
+							transform: `rotate(${radialAngle}deg)`,
+						},
+					},
+					'& .ss__load-more__progress__text': {
+						width: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+						height: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+						borderRadius: '50%',
+						background: '#fff',
+						lineHeight: `calc(${progressIndicatorWidth} - ${progressIndicatorSize})`,
+						textAlign: 'center',
+						marginTop: `calc(${progressIndicatorSize} / 2)`,
+						marginLeft: `calc(${progressIndicatorSize} / 2)`,
+						position: 'absolute',
+						fontSize: `calc(${progressIndicatorWidth} / ${Math.max(1, `${pagination!.end}`.length + `${pagination!.totalResults}`.length)})`,
+					},
+					'& .ss__load-more__progress__indicator__radial__mask': {
+						'& .ss__load-more__progress__indicator__radial__mask__fill': {
+							clipPath: `inset(0px calc((${progressIndicatorWidth} / 2)) 0px 0px)`,
+							backgroundColor: color || variables?.color?.primary || '#ccc',
+						},
+						'&.ss__load-more__progress__indicator__radial__mask--full': {
+							animation: `${radialAnimation} ease-in-out 1s`,
+							transform: `rotate(${radialAngle}deg)`,
 						},
 					},
 				},
