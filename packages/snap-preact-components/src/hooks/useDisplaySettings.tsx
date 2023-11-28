@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
+import { debounce } from '@searchspring/snap-toolbox';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
 import { useDeepCompareEffect } from './useDeepCompareEffect';
 import type { Theme } from '../providers';
@@ -88,14 +89,4 @@ export const buildThemeBreakpointsObject = (theme: Theme): undefined | Breakpoin
 
 		return breakpointsObject;
 	}
-};
-
-const debounce = (func: () => void, timeout = 200) => {
-	let timer: number;
-	return (...args: any) => {
-		clearTimeout(timer);
-		timer = window.setTimeout(() => {
-			func.apply(this, args);
-		}, timeout);
-	};
 };

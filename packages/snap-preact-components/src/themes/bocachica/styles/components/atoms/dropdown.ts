@@ -1,10 +1,9 @@
 import { css, DropdownProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Dropdown component
 const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		position: 'relative',

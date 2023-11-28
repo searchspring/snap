@@ -1,10 +1,9 @@
 import { css, RecommendationProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Recommendation component
 const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		height: vertical ? '100%' : undefined,
