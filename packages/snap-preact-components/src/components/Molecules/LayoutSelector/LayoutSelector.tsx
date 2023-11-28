@@ -51,6 +51,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			theme: props?.theme,
 		},
 		List: {
+			multiSelect: false,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props

@@ -135,6 +135,10 @@ export function List(properties: ListProps): JSX.Element {
 				setSelection(newArray);
 			}
 		} else {
+			if (onSelect) {
+				onSelect(e, option, [option.value]);
+			}
+
 			setSelection([option.value]);
 		}
 	};

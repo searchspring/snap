@@ -219,10 +219,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
 								const selectedOption = options
 									.filter((option, index) => {
-										return (
-											option.label == selectedOptionElement.text &&
-											(option.value == selectedOptionElement.value || option.label == selectedOptionElement.value || option.value == index)
-										);
+										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
 									})
 									.pop();
 								!disabled && makeSelection(e, selectedOption);
@@ -234,11 +231,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								</option>
 							)}
 							{options.map((option, index) => (
-								<option
-									className="ss__select__select__option"
-									selected={selection?.value === option.value || selection?.label == option.label}
-									value={(typeof option.value == 'number' || typeof option.value == 'string' ? option.value : option.label) ?? index}
-								>
+								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
 									{option.label}
 								</option>
 							))}

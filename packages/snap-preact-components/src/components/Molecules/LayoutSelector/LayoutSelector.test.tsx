@@ -60,21 +60,50 @@ describe('LayoutSelector Component', () => {
 		expect(element).toBeInTheDocument();
 	});
 
-	it('can set custom onselect', async () => {
+	it('can set custom onselect for list', async () => {
 		let func = jest.fn();
 		const rendered = render(<LayoutSelector type={'list'} options={options} onSelect={func} />);
 
-		const element = rendered.container.querySelector('.ss__layout__list li');
+		const element = rendered.container.querySelectorAll('.ss__layout__list li')[1];
 
 		expect(element).toBeInTheDocument();
 
 		userEvent.click(element!);
 
 		await waitFor(() => {
-			expect(func).toHaveBeenCalledWith(expect.anything(), options[0]);
+			expect(func).toHaveBeenCalledWith(expect.anything(), options[1]);
 		});
 	});
 
+	it('can set custom onselect for radio', async () => {
+		let func = jest.fn();
+		const rendered = render(<LayoutSelector type={'radio'} options={options} onSelect={func} />);
+
+		const element = rendered.container.querySelectorAll('.ss__layout__radioList li')[1];
+
+		expect(element).toBeInTheDocument();
+
+		userEvent.click(element!);
+
+		await waitFor(() => {
+			expect(func).toHaveBeenCalledWith(expect.anything(), options[1]);
+		});
+	});
+
+	it('can set custom onselect for dropdown', async () => {
+		let func = jest.fn();
+		const rendered = render(<LayoutSelector type={'dropdown'} options={options} onSelect={func} />);
+
+		const element = rendered.container.querySelectorAll('.ss__layout__select li')[1];
+
+		expect(element).toBeInTheDocument();
+
+		userEvent.click(element!);
+
+		await waitFor(() => {
+			expect(func).toHaveBeenCalledWith(expect.anything(), options[1]);
+		});
+	});
 	it('it renders with a label', () => {
 		const label = 'my label';
 		const rendered = render(<LayoutSelector onSelect={onSelect} label={label} options={options} />);
@@ -101,7 +130,6 @@ describe('LayoutSelector Component', () => {
 
 	it('it renders as a Radio type', () => {
 		const rendered = render(<LayoutSelector onSelect={onSelect} type={'radio'} options={options} />);
-		rendered.debug();
 		const element = rendered.container.querySelector('.ss__radio-list.ss__layout__radioList');
 		expect(element).toBeInTheDocument();
 	});
