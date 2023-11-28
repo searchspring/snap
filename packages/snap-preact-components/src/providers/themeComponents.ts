@@ -25,6 +25,7 @@ import type { PerPageProps } from '../components/Molecules/PerPage';
 import type { RatingProps } from '../components/Molecules/Rating';
 import type { ResultProps } from '../components/Molecules/Result';
 import type { SearchInputProps } from '../components/Molecules/SearchInput';
+import type { LoadMoreProps } from '../components/Molecules/LoadMore';
 import type { SelectProps } from '../components/Molecules/Select';
 import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
@@ -78,6 +79,7 @@ export type ThemeComponents = {
 	facetPaletteOptions?: GenericComponentProps<FacetPaletteOptionsProps>;
 	facetSlider?: GenericComponentProps<FacetSliderProps>;
 	filter?: GenericComponentProps<FilterProps>;
+	loadMore?: GenericComponentProps<LoadMoreProps>;
 	pagination?: GenericComponentProps<PaginationProps>;
 	perPage?: GenericComponentProps<PerPageProps>;
 	rating?: GenericComponentProps<RatingProps>;

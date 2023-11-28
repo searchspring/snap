@@ -8,6 +8,7 @@ export { facetListOptions } from './facetlistoptions';
 export { facetPaletteOptions } from './facetpaletteoptions';
 export { facetSlider } from './facetslider';
 export { filter } from './filter';
+export { loadMore } from './loadmore';
 export { pagination } from './pagination';
 export { result } from './result';
 export { searchInput } from './searchinput';

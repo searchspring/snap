@@ -27,6 +27,7 @@ export * from './components/Molecules/FacetListOptions';
 export * from './components/Molecules/FacetPaletteOptions';
 export * from './components/Molecules/FacetSlider';
 export * from './components/Molecules/Filter';
+export * from './components/Molecules/LoadMore';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/PerPage';
 export * from './components/Molecules/Rating';

@@ -101,6 +101,9 @@ export const bocachica: Theme = {
 		filter: {
 			...style.components.filter,
 		},
+		loadMore: {
+			...style.components.loadMore,
+		},
 		pagination: {
 			...style.components.pagination,
 		},
