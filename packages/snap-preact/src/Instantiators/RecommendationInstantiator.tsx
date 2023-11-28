@@ -5,20 +5,17 @@ import { AppMode, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { fetchTheme } from '../utils';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
-import type { SnapThemeConfig } from '../Templates/themes';
 
 type RecommendationComponentFunc = () => Promise<any> | any;
 
 export type RecommendationComponentObject = {
 	component: RecommendationComponentFunc;
-	theme?: SnapThemeConfig;
 	props?: {
 		[name: string]: any;
 	};
@@ -317,15 +314,11 @@ export class RecommendationInstantiator {
 					// dynamically import the component
 					importPromises.push((this.config.components[component] as RecommendationComponentObject).component());
 
-					const themeConfig = (this.config.components[component] as RecommendationComponentObject).theme;
-					if (themeConfig) {
-						importPromises.push(fetchTheme(themeConfig));
-					}
-
 					const importResolutions = await Promise.all(importPromises);
 					RecommendationsComponent = importResolutions[0];
-					props.theme = importResolutions[1];
 				}
+
+				props.className = `ss__recommendation-${component.toLowerCase()}`;
 
 				if (!RecommendationsComponent) {
 					this.logger.error(

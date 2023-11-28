@@ -1,9 +1,8 @@
 import { css, CheckboxProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Checkbox component
 const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		display: 'inline-flex',

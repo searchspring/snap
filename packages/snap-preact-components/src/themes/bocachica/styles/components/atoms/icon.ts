@@ -1,9 +1,8 @@
 import { css, IconProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Icon component
 const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		fill: color || variables?.color?.accent,

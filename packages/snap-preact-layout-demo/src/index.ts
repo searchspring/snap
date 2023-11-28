@@ -1,5 +1,4 @@
-import { SnapTemplate } from '@searchspring/snap-preact';
-// import { resultLayout } from './resultLayout';
+import { SnapTemplates } from '@searchspring/snap-preact';
 import { Result } from './components/Result';
 
 /*
@@ -26,36 +25,158 @@ import { Result } from './components/Result';
 
  */
 
-new SnapTemplate({
+// {
+// 	variables: 	{} | [{},{},{},{}]
+// }
+
+/* Project Themes (as opposed to themes per template) */
+// const themes = {
+// 	global: globalTheme,
+// 	boca1: {
+
+// 	}
+// }
+
+// new SnapTemplate({
+// 	config: {
+// 		themes,
+// 	}
+// });
+
+new SnapTemplates({
 	config: {
-		theme: {
-			name: 'pike',
-			overrides: {
-				variables: {},
-				components: {
-					// button: {
-					// 	style: {
-					// 		color:'green'
-					// 	}
-					// }
+		language: 'en',
+		currency: 'eur',
+		themes: {
+			global: {
+				name: 'bocachica',
+				variables: {
+					breakpoints: [500, 768, 1024, 1600],
+					color: {
+						primary: 'yellow',
+						secondary: 'yellow',
+						accent: 'yellow',
+					},
+				},
+			},
+			boca1: {
+				name: 'bocachica',
+				variables: {
+					breakpoints: [500, 768, 1024, 1600],
+					color: {
+						primary: 'pink',
+						secondary: 'pink',
+						accent: 'pink',
+					},
+				},
+				overrides: {
+					responsive: [
+						{
+							components: {
+								results: {
+									columns: 1,
+								},
+							},
+						},
+						{},
+						{},
+						{},
+					],
+					components: {},
+					// variables: {
+					// 	color: {
+					// 		primary: 'pink',
+					// 		secondary: 'pink',
+					// 		accent: 'pink',
+					// 	},
+					// },
+				},
+			},
+			boca2: {
+				name: 'bocachica',
+				overrides: {
+					variables: {
+						color: {
+							primary: 'cyan',
+							secondary: 'cyan',
+							accent: 'cyan',
+						},
+					},
 				},
 			},
 		},
-		language: 'en',
-		currency: 'usd',
-	},
-	search: {
-		// settings: {
-		// 	infinite: {
-		// 		backfill: 5,
+		// theme: {
+		/* Current Breakpoint Method */
+		// name: 'bocachica',
+		// variables: {
+		// 	breakpoints: [500, 768, 1024, 1600],
+		// 	color: {
+		// 		primary: 'red',
+		// 		secondary: 'red',
+		// 		accent: 'red',
+		// 	},
+		// },
+		// overrides: {
+		// responsive: {[{ components: { filterSummary: { hideTitle } }}, theme, theme, theme]}
+		// components: {
+		// 	facet: {
+		// 		color: 'red',
 		// 	}
 		// },
-		templates: [
+		// variables: {
+		// color: {
+		// primary: 'red',
+		// secondary: 'red',
+		// accent: 'red',
+		// },
+		// },
+		// },
+		// },
+
+		/* Future Breakpoint Method ? */
+		// 	name: 'bocachica',
+		// 	variables: {
+		// 		color: {
+		// 			primary: 'red',
+		// 			secondary: 'red',
+		// 			accent: 'red',
+		// 		},
+		// 	},
+		// 	overrides: {
+		// 		components: {
+		// 			facet: {
+		// 				color: 'red',
+		// 			}
+		// 		},
+		// 	},
+		// 	responsive: [{ at: '500', overrides: {} }, { at: '768'}, { at: '1024'}, { at: '1600'},]
+		// },
+
+		// 	name: 'bocachica',
+		// 	variables: {},
+		// 	components: {},
+		// 	responsive: [{ at: '500' components: {}, variables: {} }, { at: '768' }, { at: '1024' }, { at: '1600' }]
+		// },
+	},
+	search: {
+		targets: [
 			{
+				// theme: {
+				// 	name: 'bocachica',
+				// 	overrides: {
+				// 		variables: {
+				// 			color: {
+				// 				primary: 'blue',
+				// 				secondary: 'blue',
+				// 				accent: 'blue',
+				// 			},
+				// 		},
+				// 	},
+				// },
+				theme: 'boca1',
 				selector: '#searchspring-layout',
 				template: 'Search',
-				// resultLayout: resultLayout,
-				resultComponent: Result,
+				// resultComponent: Result,
 			},
 		],
 	},
@@ -63,22 +184,41 @@ new SnapTemplate({
 		settings: {
 			branch: BRANCHNAME,
 		},
-		templates: [
+		// TODO make better - currently confusing
+		targets: [
 			{
 				component: 'Recs',
 				template: 'Recommendation',
-				// resultLayout: resultLayout,
 				resultComponent: Result,
+				// theme: 'boca2',
+			},
+			{
+				component: 'HomePageComponent',
+				template: 'Recommendation',
+				resultComponent: Result,
+				// theme: 'boca1',
 			},
 		],
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac',
-		templates: [
+		targets: [
 			{
+				// theme: {
+				// 	name: 'bocachica',
+				// 	overrides: {
+				// 		variables: {
+				// 			color: {
+				// 				primary: 'orange',
+				// 				secondary: 'orange',
+				// 				accent: 'orange',
+				// 			},
+				// 		},
+				// 	},
+				// },
+				// theme: 'boca2',
 				selector: 'input.searchspring-ac',
 				template: 'Autocomplete',
-				// resultLayout: resultLayout,
 				resultComponent: Result,
 			},
 		],

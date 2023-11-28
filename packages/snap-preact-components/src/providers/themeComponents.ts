@@ -1,53 +1,53 @@
-import { BadgeProps } from '../components/Atoms/Badge';
-import { BreadcrumbsProps } from '../components/Atoms/Breadcrumbs';
-import { ButtonProps } from '../components/Atoms/Button';
-import { DropdownProps } from '../components/Atoms/Dropdown';
-import { ContainerProps } from '../components/Layouts/utils/Container';
-import { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
-import { IconProps } from '../components/Atoms/Icon';
-import { ImageProps } from '../components/Atoms/Image';
-import { LoadingBarProps } from '../components/Atoms/Loading';
-import { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandising';
-import { OverlayProps } from '../components/Atoms/Overlay';
-import { PriceProps } from '../components/Atoms/Price';
-import { SkeletonProps } from '../components/Atoms/Skeleton';
-import { ElementProps } from '../components/Atoms/Element';
-import { TermsProps } from '../components/Atoms/Terms';
-import { ResultLayoutProps } from '../components/Layouts/ResultLayout';
-import { CarouselProps } from '../components/Molecules/Carousel';
-import { CheckboxProps } from '../components/Molecules/Checkbox';
-import { ErrorHandlerProps } from '../components/Molecules/ErrorHandler';
-import { FacetGridOptionsProps } from '../components/Molecules/FacetGridOptions';
-import { FacetHierarchyOptionsProps } from '../components/Molecules/FacetHierarchyOptions';
-import { FacetListOptionsProps } from '../components/Molecules/FacetListOptions';
-import { FacetPaletteOptionsProps } from '../components/Molecules/FacetPaletteOptions';
-import { FacetSliderProps } from '../components/Molecules/FacetSlider';
-import { FilterProps } from '../components/Molecules/Filter';
-import { PaginationProps } from '../components/Molecules/Pagination';
-import { PerPageProps } from '../components/Molecules/PerPage';
-import { RatingProps } from '../components/Molecules/Rating';
-import { ResultProps } from '../components/Molecules/Result';
-import { SearchInputProps } from '../components/Molecules/SearchInput';
-import { SelectProps } from '../components/Molecules/Select';
-import { SlideoutProps } from '../components/Molecules/Slideout';
-import { SortByProps } from '../components/Molecules/SortBy';
-import { BranchOverrideProps } from '../components/Organisms/BranchOverride';
-import { FacetProps } from '../components/Organisms/Facet';
-import { FacetsProps } from '../components/Organisms/Facets';
-import { FilterSummaryProps } from '../components/Organisms/FilterSummary';
-import { ResultsProps } from '../components/Organisms/Results';
-import { SearchHeaderProps } from '../components/Atoms/SearchHeader';
-import { SidebarProps } from '../components/Organisms/Sidebar';
-import { ToolbarProps } from '../components/Organisms/Toolbar';
-import { AutocompleteProps } from '../components/Templates/Autocomplete';
-import { RecommendationProps } from '../components/Templates/Recommendation';
-import { SearchProps } from '../components/Templates/Search';
-import { NoResultsProps } from '../components/Atoms/NoResults';
-import { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
-import { RadioListProps } from '../components/Molecules/RadioList';
-import { ListProps } from '../components/Molecules/List';
-import { RadioProps } from '../components/Molecules/Radio';
-import { LayoutSelectorProps } from '../components/Molecules/LayoutSelector';
+import type { BadgeProps } from '../components/Atoms/Badge';
+import type { BreadcrumbsProps } from '../components/Atoms/Breadcrumbs';
+import type { ButtonProps } from '../components/Atoms/Button';
+import type { DropdownProps } from '../components/Atoms/Dropdown';
+import type { FormattedNumberProps } from '../components/Atoms/FormattedNumber';
+import type { IconProps } from '../components/Atoms/Icon';
+import type { ImageProps } from '../components/Atoms/Image';
+import type { LoadingBarProps } from '../components/Atoms/Loading';
+import type { BannerProps, InlineBannerProps } from '../components/Atoms/Merchandising';
+import type { OverlayProps } from '../components/Atoms/Overlay';
+import type { PriceProps } from '../components/Atoms/Price';
+import type { SkeletonProps } from '../components/Atoms/Skeleton';
+import type { TermsProps } from '../components/Atoms/Terms';
+import type { CarouselProps } from '../components/Molecules/Carousel';
+import type { CheckboxProps } from '../components/Molecules/Checkbox';
+import type { ErrorHandlerProps } from '../components/Molecules/ErrorHandler';
+import type { FacetGridOptionsProps } from '../components/Molecules/FacetGridOptions';
+import type { FacetHierarchyOptionsProps } from '../components/Molecules/FacetHierarchyOptions';
+import type { FacetListOptionsProps } from '../components/Molecules/FacetListOptions';
+import type { FacetPaletteOptionsProps } from '../components/Molecules/FacetPaletteOptions';
+import type { FacetSliderProps } from '../components/Molecules/FacetSlider';
+import type { FilterProps } from '../components/Molecules/Filter';
+import type { PaginationProps } from '../components/Molecules/Pagination';
+import type { PerPageProps } from '../components/Molecules/PerPage';
+import type { RatingProps } from '../components/Molecules/Rating';
+import type { ResultProps } from '../components/Molecules/Result';
+import type { SearchInputProps } from '../components/Molecules/SearchInput';
+import type { LoadMoreProps } from '../components/Molecules/LoadMore';
+import type { SelectProps } from '../components/Molecules/Select';
+import type { SlideoutProps } from '../components/Molecules/Slideout';
+import type { SortByProps } from '../components/Molecules/SortBy';
+import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
+import type { FacetProps } from '../components/Organisms/Facet';
+import type { FacetsProps } from '../components/Organisms/Facets';
+import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
+import type { ResultsProps } from '../components/Organisms/Results';
+import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
+import type { SidebarProps } from '../components/Organisms/Sidebar';
+import type { ToolbarProps } from '../components/Organisms/Toolbar';
+import type { AutocompleteProps } from '../components/Templates/Autocomplete';
+import type { RecommendationProps } from '../components/Templates/Recommendation';
+import type { SearchProps } from '../components/Templates/Search';
+import type { NoResultsProps } from '../components/Atoms/NoResults';
+import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import type { FacetToggleProps } from '../components/Molecules/FacetToggle';
+import type { ToggleProps } from '../components/Atoms/Toggle';
+import type { RadioListProps } from '../components/Molecules/RadioList';
+import type { ListProps } from '../components/Molecules/List';
+import type { RadioProps } from '../components/Molecules/Radio';
+import type { LayoutSelectorProps } from '../components/Molecules/LayoutSelector';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -57,7 +57,6 @@ export type ThemeComponents = {
 	breadcrumbs?: GenericComponentProps<BreadcrumbsProps>;
 	button?: GenericComponentProps<ButtonProps>;
 	dropdown?: GenericComponentProps<DropdownProps>;
-	container?: GenericComponentProps<ContainerProps>;
 	formattedNumber?: GenericComponentProps<FormattedNumberProps>;
 	icon?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;
@@ -67,8 +66,8 @@ export type ThemeComponents = {
 	overlay?: GenericComponentProps<OverlayProps>;
 	price?: GenericComponentProps<PriceProps>;
 	skeleton?: GenericComponentProps<SkeletonProps>;
-	element?: GenericComponentProps<ElementProps>;
 	terms?: GenericComponentProps<TermsProps>;
+	toggle?: GenericComponentProps<ToggleProps>;
 
 	/* MOLECULES */
 	carousel?: GenericComponentProps<CarouselProps>;
@@ -81,6 +80,7 @@ export type ThemeComponents = {
 	facetPaletteOptions?: GenericComponentProps<FacetPaletteOptionsProps>;
 	facetSlider?: GenericComponentProps<FacetSliderProps>;
 	filter?: GenericComponentProps<FilterProps>;
+	loadMore?: GenericComponentProps<LoadMoreProps>;
 	pagination?: GenericComponentProps<PaginationProps>;
 	perPage?: GenericComponentProps<PerPageProps>;
 	rating?: GenericComponentProps<RatingProps>;
@@ -89,6 +89,7 @@ export type ThemeComponents = {
 	select?: GenericComponentProps<SelectProps>;
 	slideout?: GenericComponentProps<SlideoutProps>;
 	sortBy?: GenericComponentProps<SortByProps>;
+	facetToggle?: GenericComponentProps<FacetToggleProps>;
 	radioList?: GenericComponentProps<RadioListProps>;
 	list?: GenericComponentProps<ListProps>;
 	layoutSelector?: GenericComponentProps<LayoutSelectorProps>;
@@ -104,28 +105,8 @@ export type ThemeComponents = {
 	sidebar?: GenericComponentProps<SidebarProps>;
 	mobileSidebar?: GenericComponentProps<MobileSidebarProps>;
 	toolbar?: GenericComponentProps<ToolbarProps>;
-	/* LAYOUTS */
-	resultLayout?: GenericComponentProps<ResultLayoutProps>;
 	/* TEMPLATES */
 	autocomplete?: GenericComponentProps<AutocompleteProps>;
 	recommendation?: GenericComponentProps<RecommendationProps>;
 	search?: GenericComponentProps<SearchProps>;
-};
-
-export type GlobalThemeVariables = {
-	color?: {
-		primary?: string; // (search header text, regular text, result title)
-		secondary?: string; // (headings, dropdown button text)
-		accent?: string; // (icons, borders)
-		active?: {
-			foreground?: string; // (active state text)
-			background?: string; // (active state)
-			accent?: string; // (icons, borders)
-		};
-		hover?: {
-			foreground?: string; // (active state text)
-			background?: string; // (active state)
-			accent?: string; // (icons, borders)
-		};
-	};
 };

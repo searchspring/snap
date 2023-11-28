@@ -10,7 +10,7 @@ import { createAutocompleteController } from '@searchspring/snap-preact';
 import { MockClient } from '@searchspring/snap-shared';
 import userEvent from '@testing-library/user-event';
 
-import { AutocompleteTermStore } from '@searchspring/snap-store-mobx/dist/cjs/Autocomplete/Stores';
+import { AutocompleteTermStore } from '@searchspring/snap-store-mobx';
 import { UrlManager } from '@searchspring/snap-url-manager';
 
 describe('Terms Component', () => {

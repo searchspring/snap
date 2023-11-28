@@ -15,7 +15,6 @@ import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, Sty
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { ResultLayout, ResultLayoutTypes } from '../../Layouts/ResultLayout';
 import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
 
 const CSS = {
@@ -90,7 +89,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		theme,
 	};
 
-	const { disableStyles, resultComponent, className, layout, style, styleScript, resultLayout, controller } = props;
+	const { disableStyles, resultComponent, className, layout, style, styleScript, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -148,8 +147,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								if (resultComponent && controller) {
 									const ResultComponent = resultComponent;
 									return <ResultComponent controller={controller} result={result} />;
-								} else if (resultLayout && controller) {
-									return <ResultLayout controller={controller} result={result} layout={resultLayout} />;
 								} else {
 									return (
 										<SearchResultTracker result={result} controller={controller as SearchController}>
@@ -181,7 +178,6 @@ export interface ResultsProps extends ComponentProps {
 	layout?: ResultsLayoutType;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
-	resultLayout?: ResultLayoutTypes;
 	resultComponent?: ResultComponent;
 }
 

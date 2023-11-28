@@ -5,15 +5,17 @@ import { SortBy } from './SortBy';
 import { PerPage } from './PerPage';
 import { SidebarContents } from '../Sidebar/Sidebar';
 
-import { Button, Pagination, Slideout, withStore, useMediaQuery } from '@searchspring/snap-preact-components';
+import { Button, Pagination, Slideout, withStore, withController, useMediaQuery } from '@searchspring/snap-preact-components';
 
 type ToolBarProps = {
 	store?: SearchStore;
+	controller?: SearchController;
 };
 
 const mobileMediaQuery = '(max-width: 991px)';
 
 @withStore
+@withController
 @observer
 export class Toolbar extends Component<ToolBarProps> {
 	render() {
@@ -37,7 +39,9 @@ export class Toolbar extends Component<ToolBarProps> {
 					<div className="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div className="ss-toolbar-col pagination">{pagination.totalPages > 1 && !isMobile && <Pagination pagination={pagination} />}</div>
+					<div className="ss-toolbar-col pagination">
+						{pagination.totalPages > 1 && !isMobile && !this.props.controller.config?.settings?.infinite && <Pagination pagination={pagination} />}
+					</div>
 				</div>
 			</div>
 		);

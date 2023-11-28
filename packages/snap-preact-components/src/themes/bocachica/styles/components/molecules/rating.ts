@@ -1,10 +1,9 @@
 import { css, RatingProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Rating component
 const ratingStyleScript = ({ emptyRatingSrc, fullRatingSrc, theme }: RatingProps & { emptyRatingSrc?: string; fullRatingSrc?: string }) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		textAlign: 'left',

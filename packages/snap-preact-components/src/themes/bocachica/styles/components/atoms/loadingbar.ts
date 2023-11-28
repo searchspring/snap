@@ -1,10 +1,9 @@
 import { keyframes } from '@emotion/react';
 import { css, LoadingBarProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the LoadingBar component
 const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: LoadingBarProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 	const animation = keyframes({
 		from: { left: '-200px', width: '30%' },
 		'50%': { width: '30%' },
