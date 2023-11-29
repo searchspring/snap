@@ -1,9 +1,7 @@
-import { AutocompleteController } from '@searchspring/snap-controller';
-
 export function useA11y(
 	elem: any,
 	tabIndex?: number,
-	trapFocus?: boolean | { returnelem?: any; clickToClose?: boolean; blurToClose?: boolean; controller?: AutocompleteController }
+	trapFocus?: boolean | { returnelem?: any; clickToClose?: boolean; blurToClose?: boolean; callback?: () => unknown }
 ) {
 	const styleId = 'ssA11yFocusStyle';
 	if (!document.querySelector(`#${styleId}`)) {
@@ -28,23 +26,26 @@ export function useA11y(
 		});
 
 		if (trapFocus) {
-			const focusableEls = elem.querySelectorAll('[tabindex]');
-			const firstFocusableEl = focusableEls[0];
-			const lastFocusableEl = focusableEls[focusableEls.length - 1];
 			const KEYCODE_TAB = 9;
 			const escKey = 27;
 
 			elem.addEventListener('keydown', function (e: any) {
+				const focusableEls = elem.querySelectorAll(
+					'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]'
+				);
+				const firstFocusableEl = focusableEls[0];
+				const lastFocusableEl = focusableEls[focusableEls.length - 1];
+
 				let returnElem;
 				let clickToClose;
 				let blurToClose;
-				let controller;
+				let callback;
 
 				if (typeof trapFocus !== 'boolean') {
 					returnElem = trapFocus.returnelem;
 					clickToClose = trapFocus.clickToClose;
 					blurToClose = trapFocus.blurToClose;
-					controller = trapFocus.controller;
+					callback = trapFocus.callback;
 				}
 				//esc key
 				if (e.keyCode == escKey) {
@@ -74,8 +75,8 @@ export function useA11y(
 					if (blurToClose) {
 						actionElem.blur && actionElem.blur();
 					}
-					if (controller) {
-						controller.reset();
+					if (callback) {
+						callback();
 					}
 
 					e.preventDefault();
