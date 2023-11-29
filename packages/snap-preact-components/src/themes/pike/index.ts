@@ -1,28 +1,26 @@
-import { Theme, GlobalThemeVariables } from '../../providers';
+import { Theme, ThemeVariables } from '../../providers';
 import * as style from './styles/styles';
 
-export type PikeVariables = GlobalThemeVariables & {
-	breakpoints?: [number, number, number, number];
-	color?: {
-		primary?: string;
-		secondary?: string;
-	};
-};
-
-export type PikeTheme = Theme & {
-	variables: PikeVariables;
-	responsive: [Theme, Theme, Theme, Theme];
-};
-
-const pikeVariables: PikeVariables = {
+const pikeVariables: ThemeVariables = {
 	breakpoints: [0, 540, 767, 1200],
 	color: {
 		primary: 'blue',
-		secondary: 'red',
+		secondary: 'blue',
+		accent: 'blue',
+		active: {
+			foreground: '',
+			background: '',
+			accent: '',
+		},
+		hover: {
+			foreground: '',
+			background: '',
+			accent: '',
+		},
 	},
 };
 
-export const pike: PikeTheme = {
+export const pike: Theme = {
 	variables: pikeVariables,
 	components: {
 		button: {

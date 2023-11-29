@@ -1,9 +1,8 @@
 import { css, FacetListOptionsProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the FacetListOptions component
 const facetListOptionsStyleScript = ({ hideCheckbox, theme }: FacetListOptionsProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		'& .ss__facet-list-options__option': {

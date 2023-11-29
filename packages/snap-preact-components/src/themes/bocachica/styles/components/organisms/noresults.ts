@@ -1,9 +1,8 @@
 import { css, NoResultsProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the NoResults component
 const noResultsStyleScript = ({ theme }: NoResultsProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		color: variables?.color?.secondary,

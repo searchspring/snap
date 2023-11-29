@@ -1,10 +1,119 @@
-import { css, BranchOverrideProps, componentThemes } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
+import { css, BranchOverrideProps, BranchOverrideTheme } from '../../../../../index';
+
+const darkTheme: BranchOverrideTheme = {
+	class: 'ss__branch-override--dark',
+	main: {
+		border: '0',
+		background: 'rgba(59, 35, 173, 0.9)',
+		color: '#fff',
+		boxShadow: '#4c3ce2 1px 1px 3px 0px',
+	},
+	top: {
+		background: 'rgba(59, 35, 173, 0.3)',
+		border: '1px solid #4c3de1',
+		logo: {
+			src: 'https://snapui.searchspring.io/searchspring_light.svg',
+		},
+		button: {
+			border: '1px solid #fff',
+			color: '#fff',
+			content: 'STOP PREVIEW',
+		},
+		close: {
+			fill: '#fff',
+		},
+	},
+	bottom: {
+		content: 'Preview functionality may differ from production.',
+		branch: {
+			color: '#03cee1',
+			style: 'italic',
+		},
+		additional: {
+			color: '#03cee1',
+		},
+	},
+};
+
+const lightTheme: BranchOverrideTheme = {
+	class: 'ss__branch-override--light',
+	main: {
+		border: '1px solid #ccc',
+		background: 'rgba(255, 255, 255, 0.95)',
+		color: '#515151',
+		boxShadow: 'rgba(81, 81, 81, 0.5) 1px 1px 3px 0px',
+	},
+	top: {
+		border: '1px solid #ccc',
+		logo: {
+			src: 'https://snapui.searchspring.io/searchspring.svg',
+		},
+		button: {
+			border: '1px solid #515151',
+			color: '#515151',
+			content: 'STOP PREVIEW',
+		},
+		close: {
+			fill: '#515151',
+		},
+	},
+	bottom: {
+		content: 'Preview functionality may differ from production.',
+		branch: {
+			color: '#3a23ad',
+			style: 'italic',
+		},
+		additional: {
+			color: '#3a23ad',
+		},
+	},
+};
+
+const failureTheme: BranchOverrideTheme = {
+	class: 'ss__branch-override--error',
+	main: {
+		border: '0',
+		background: 'rgba(130, 6, 6, 0.9)',
+		color: '#fff',
+		boxShadow: 'rgba(130, 6, 6, 0.4) 1px 1px 3px 0px',
+	},
+	top: {
+		background: 'rgba(130, 6, 6, 0.3)',
+		border: '1px solid #760000',
+		logo: {
+			src: 'https://snapui.searchspring.io/searchspring_light.svg',
+		},
+		button: {
+			border: '1px solid #fff',
+			color: '#fff',
+			content: 'REMOVE',
+		},
+		close: {
+			fill: '#fff',
+		},
+	},
+	bottom: {
+		content: 'Incorrect branch name or branch no longer exists.',
+		branch: {
+			color: '#be9628',
+			style: 'italic',
+		},
+		additional: {
+			color: '#be9628',
+		},
+	},
+};
+
+export const componentThemes = {
+	darkTheme,
+	lightTheme,
+	failureTheme,
+};
 
 // CSS in JS style script for the BranchOverride component
 const branchOverrideStyleScript = ({ darkMode, error, theme }: BranchOverrideProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 	const prefersDark = typeof darkMode == 'boolean' ? darkMode : window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : false;
 	const componentTheme = componentThemes[error ? 'failureTheme' : prefersDark ? 'darkTheme' : 'lightTheme'];
 

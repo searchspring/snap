@@ -730,6 +730,12 @@ input[type='text'] {
   float: right;
 }
 
+.ss-toolbar-col.pagination,
+.ss-toolbar.ss-toolbar-bottom-infinite {
+  display: flex;
+  justify-content: center;
+}
+
 .ss-slideout__button {
   width: 100%; 
   border: 1px solid #333; 

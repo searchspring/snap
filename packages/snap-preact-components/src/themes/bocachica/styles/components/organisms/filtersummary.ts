@@ -1,9 +1,8 @@
 import { css, FilterSummaryProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the FilterSummary component
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		margin: '10px 0 30px 0',

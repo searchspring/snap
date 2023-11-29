@@ -1,9 +1,8 @@
 import { css, FacetProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the Facet component
 const facetStyleScript = ({ color, theme }: FacetProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		width: '100%',

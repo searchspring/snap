@@ -76,6 +76,9 @@ let config: SnapConfig = {
 					id: 'search',
 					plugins: [[afterStore]],
 					settings: {
+						infinite: {
+							backfill: 5,
+						},
 						redirects: {
 							merchandising: false,
 							singleResult: false,

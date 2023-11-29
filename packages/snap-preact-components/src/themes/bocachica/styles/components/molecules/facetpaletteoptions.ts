@@ -1,9 +1,8 @@
 import { css, FacetPaletteOptionsProps } from '../../../../../index';
-import { BocachicaVariables } from '../../../index';
 
 // CSS in JS style script for the FacetPaletteOptions component
 const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOptionsProps) => {
-	const variables = theme?.variables as BocachicaVariables;
+	const variables = theme?.variables;
 
 	return css({
 		display: 'flex',
