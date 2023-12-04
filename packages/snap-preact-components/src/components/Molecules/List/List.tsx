@@ -9,6 +9,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
+import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
@@ -32,7 +33,7 @@ const CSS = {
 				alignItems: 'center',
 				padding: '5px',
 
-				'& .ss__list__option__label': {
+				'& .ss__list__option__label , .ss__list__option__icon': {
 					cursor: 'pointer',
 					padding: '0px 0px 0px 5px',
 				},
@@ -57,7 +58,21 @@ export function List(properties: ListProps): JSX.Element {
 
 	const props = mergeProps('list', globalTheme, defaultProps, properties);
 
-	const { titleText, onSelect, native, multiSelect, hideCheckbox, disabled, options, disableStyles, className, style, styleScript } = props;
+	const {
+		titleText,
+		onSelect,
+		native,
+		multiSelect,
+		hideOptionLabels,
+		hideOptionIcons,
+		hideOptionCheckboxes,
+		disabled,
+		options,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+	} = props;
 
 	let selected = props.selected;
 
@@ -65,6 +80,16 @@ export function List(properties: ListProps): JSX.Element {
 		checkbox: {
 			// default props
 			native: native,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		icon: {
+			// default props
+			className: 'ss__list__option__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -89,7 +114,7 @@ export function List(properties: ListProps): JSX.Element {
 		selected = [selected];
 	}
 	// selection state
-	const [selection, setSelection] = useState<(string | number)[]>((selected as (string | number)[]) || []);
+	const [selection, setSelection] = useState((selected as (string | number)[]) || []);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
@@ -110,6 +135,10 @@ export function List(properties: ListProps): JSX.Element {
 				setSelection(newArray);
 			}
 		} else {
+			if (onSelect) {
+				onSelect(e, option, [option.value]);
+			}
+
 			setSelection([option.value]);
 		}
 	};
@@ -123,13 +152,22 @@ export function List(properties: ListProps): JSX.Element {
 					{options.map((option: ListOption) => {
 						return (
 							<li
-								className={`ss__list__option ${selection && selection.indexOf(option.value.toString()) > -1 ? 'ss__list__option--selected' : ''} ${
+								className={`ss__list__option ${selection && selection.indexOf(option.value) > -1 ? 'ss__list__option--selected' : ''} ${
 									option.disabled ? 'ss__list__option--disabled' : ''
 								}`}
+								title={option.label}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
-								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={selection.indexOf(option.value.toString()) > -1} disableA11y={true} />}
-								<label className="ss__list__option__label">{option.label || option.value}</label>
+								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selection.indexOf(option.value) > -1} disableA11y={true} />}
+
+								{option.icon && !hideOptionIcons && (
+									<Icon
+										{...subProps.icon}
+										{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
+									/>
+								)}
+
+								{!hideOptionLabels && <label className="ss__list__option__label">{option.label || option.value}</label>}
 							</li>
 						);
 					})}
@@ -144,7 +182,9 @@ export function List(properties: ListProps): JSX.Element {
 export interface ListProps extends ComponentProps {
 	options: ListOption[];
 	multiSelect?: boolean;
-	hideCheckbox?: boolean;
+	hideOptionCheckboxes?: boolean;
+	hideOptionLabels?: boolean;
+	hideOptionIcons?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, optionList: (string | number)[]) => void;
 	titleText?: string;
 	disabled?: boolean;
@@ -155,4 +195,5 @@ export interface ListProps extends ComponentProps {
 
 interface ListSubProps {
 	checkbox: Partial<CheckboxProps>;
+	icon: Partial<IconProps>;
 }

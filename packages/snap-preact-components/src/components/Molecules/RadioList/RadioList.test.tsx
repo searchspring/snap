@@ -192,7 +192,7 @@ describe('RadioList Component', () => {
 	it('it can hideRadios', async () => {
 		const selectFn = jest.fn();
 
-		const rendered = render(<RadioList hideRadios={true} options={options} onSelect={selectFn} />);
+		const rendered = render(<RadioList hideOptionRadios={true} options={options} onSelect={selectFn} />);
 
 		const optionElements = rendered.container?.querySelectorAll('.ss__radio-list__option')[0]!;
 
@@ -203,6 +203,109 @@ describe('RadioList Component', () => {
 		await userEvent.click(optionElements);
 
 		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0]);
+	});
+
+	it('it can hideLabels', async () => {
+		const selectFn = jest.fn();
+
+		const rendered = render(<RadioList hideOptionLabels={true} options={options} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__radio-list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__radio-list__option__label');
+
+		expect(label).not.toBeInTheDocument();
+		expect(optionElements).toBeInTheDocument();
+
+		expect(optionElements.innerHTML).toBe(
+			`<span class=\"ss__radio ss__radio-list__option__radio ss-stz164-I\" aria-label=\" unchecked checkbox\" role=\"radio\"><svg class=\"ss__icon ss__icon--bullet-o ss__radio__icon--inactive ss-3t6diw-I\" viewBox=\"0 0 56 56\" xmlns=\"http://www.w3.org/2000/svg\" name=\"ss__radio__icon--inactive\"><circle cx=\"28\" cy=\"28\" r=\"20\" stroke-width=\"3\" fill=\"white\"></circle></svg></span>`
+		);
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0]);
+	});
+
+	it('it can render Icon options', async () => {
+		const selectFn = jest.fn();
+
+		const iconOptions = [
+			{
+				label: '1 wide',
+				value: '1 wide',
+				icon: 'square',
+			},
+			{
+				label: '2 wide',
+				value: '2 wide',
+				icon: {
+					icon: 'layout-large',
+				},
+			},
+			{
+				label: '3 wide',
+				value: '3 wide',
+				icon: {
+					icon: 'layout-grid',
+				},
+			},
+		];
+
+		const rendered = render(<RadioList options={iconOptions} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__radio-list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__radio-list__option__label');
+		const icon = rendered.container.querySelector('.ss__radio-list__option__icon');
+
+		expect(label).toBeInTheDocument();
+		expect(icon).toBeInTheDocument();
+		expect(icon?.classList.contains('ss__icon--square')).toBe(true);
+
+		expect(optionElements).toBeInTheDocument();
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0]);
+	});
+
+	it('it can hide Icon options', async () => {
+		const selectFn = jest.fn();
+
+		const iconOptions = [
+			{
+				label: '1 wide',
+				value: '1 wide',
+				icon: 'square',
+			},
+			{
+				label: '2 wide',
+				value: '2 wide',
+				icon: {
+					icon: 'layout-large',
+				},
+			},
+			{
+				label: '3 wide',
+				value: '3 wide',
+				icon: {
+					icon: 'layout-grid',
+				},
+			},
+		];
+
+		const rendered = render(<RadioList hideOptionIcons={true} options={iconOptions} onSelect={selectFn} />);
+
+		const optionElements = rendered.container?.querySelectorAll('.ss__radio-list__option')[0]!;
+		const label = rendered.container.querySelector('.ss__radio-list__option__label');
+		const icon = rendered.container.querySelector('.ss__radio-list__option__icon');
+
+		expect(label).toBeInTheDocument();
+		expect(icon).not.toBeInTheDocument();
+
+		expect(optionElements).toBeInTheDocument();
+
+		await userEvent.click(optionElements);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0]);
 	});
 
 	it('it can use native prop to render native radios', async () => {

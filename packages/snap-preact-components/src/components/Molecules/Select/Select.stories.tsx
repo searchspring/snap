@@ -101,6 +101,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideOptionIcons: {
+			description: 'Hide the icon in the options (non-native only)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideOptionLabels: {
+			description: 'Hide the label in the options (non-native only)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		separator: {
 			defaultValue: ': ',
 			description: 'Select delimiter',
@@ -282,4 +302,37 @@ Native.loaders = [
 Native.args = {
 	label: 'Sort By',
 	native: true,
+};
+
+export const IconOptions = (args: SelectProps) => {
+	const iconOptions = [
+		{
+			label: '1 wide',
+			value: '1 wide',
+			icon: 'square',
+			columns: 1,
+		},
+		{
+			label: '2 wide',
+			value: '2 wide',
+			icon: {
+				icon: 'layout-large',
+			},
+			columns: 2,
+		},
+		{
+			label: '3 wide',
+			value: '3 wide',
+			icon: {
+				icon: 'layout-grid',
+			},
+			columns: 3,
+		},
+	];
+
+	return <Select {...args} options={iconOptions} />;
+};
+
+IconOptions.args = {
+	label: 'Layout',
 };

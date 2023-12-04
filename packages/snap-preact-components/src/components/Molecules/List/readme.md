@@ -21,6 +21,20 @@ The `hideCheckbox` prop will disable the checkbox elements from rendering.
 <List options={store.options} hideCheckbox={true} />
 ```
 
+### hideLabels
+The `hideLabels` prop will disable the option label elements from rendering.
+
+```jsx
+<List options={store.options} hideLabels={true} />
+```
+
+### hideIcons
+The `hideIcons` prop will disable the option icon elements from rendering.
+
+```jsx
+<List options={store.options} hideIcons={true} />
+```
+
 ### multiSelect
 The `multiSelect` prop will enable/disable the ability to select more than one option at a time. `multiSelect` is `true` by default.
 

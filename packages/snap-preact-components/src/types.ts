@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import type { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
+import { IconProps } from './components/Atoms/Icon';
 
 export interface ComponentProps {
 	name?: string;
@@ -17,6 +18,9 @@ export type ListOption = {
 	value: string | number;
 	label?: string;
 	disabled?: boolean;
+	icon?: string | Partial<IconProps>;
+	columns?: number;
+	component?: ResultComponent;
 	[otherOptions: string]: any;
 };
 
