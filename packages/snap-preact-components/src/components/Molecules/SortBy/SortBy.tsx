@@ -54,6 +54,8 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		},
 		List: {
 			multiSelect: false,
+			hideOptionCheckboxes: true,
+			horizontal: true,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props

@@ -28,6 +28,11 @@ const CSS = {
 			'& .ss__select__label': {
 				marginRight: '5px',
 			},
+
+			'& .ss__select__selection__icon': {
+				margin: '0px 5px 0px 0px',
+			},
+
 			'& .ss__select__select': {
 				position: 'relative',
 				zIndex: '10000',
@@ -36,10 +41,22 @@ const CSS = {
 				padding: '0',
 				marginTop: '-1px',
 				border: `1px solid ${borderColor || color || theme?.variables?.color?.primary || '#333'}`,
+
+				'.ss__select__dropdown__button': {
+					alignItems: 'center',
+				},
+
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
 					color: 'initial',
+					display: 'flex',
+					alignItems: 'center',
+
+					'& .ss__select__select__option__icon': {
+						margin: '0px 5px 0px 0px',
+					},
+
 					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',
 					},
@@ -82,6 +99,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		separator,
 		startOpen,
 		hideIcon,
+		hideOptionIcons,
+		hideOptionLabels,
 		hideSelection,
 		stayOpenOnSelection,
 		disableStyles,
@@ -242,8 +261,19 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
-								{selection && !hideSelection && <span className="ss__select__selection">{selection?.label}</span>}
 
+								{selection && !hideSelection && (
+									<>
+										{selection.icon && !hideOptionIcons && (
+											<Icon
+												{...subProps.icon}
+												className="ss__select__selection__icon"
+												{...(typeof selection.icon == 'string' ? { icon: selection.icon as string } : (selection.icon as Partial<IconProps>))}
+											/>
+										)}
+										{!hideOptionLabels && <span className="ss__select__selection">{selection?.label}</span>}
+									</>
+								)}
 								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
 							</Button>
 						}
@@ -253,15 +283,24 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								<li
 									ref={(e) => useA11y(e)}
 									role={'link'}
+									aria-disabled={option.disabled}
 									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
 										option.label
 									}`}
+									title={option.label}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
 								>
-									<span>{option.label}</span>
+									{option.icon && !hideOptionIcons && (
+										<Icon
+											{...subProps.icon}
+											className="ss__select__select__option__icon"
+											{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
+										/>
+									)}
+									{!hideOptionLabels && <span>{option.label}</span>}
 								</li>
 							))}
 						</ul>
@@ -301,4 +340,6 @@ export interface SelectProps extends ComponentProps {
 	stayOpenOnSelection?: boolean;
 	hideSelection?: boolean;
 	hideIcon?: boolean;
+	hideOptionIcons?: boolean;
+	hideOptionLabels?: boolean;
 }

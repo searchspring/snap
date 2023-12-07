@@ -47,6 +47,7 @@ import type { ToggleProps } from '../components/Atoms/Toggle';
 import type { RadioListProps } from '../components/Molecules/RadioList';
 import type { ListProps } from '../components/Molecules/List';
 import type { RadioProps } from '../components/Molecules/Radio';
+import type { LayoutSelectorProps } from '../components/Molecules/LayoutSelector';
 
 type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
 
@@ -91,6 +92,7 @@ export type ThemeComponents = {
 	facetToggle?: GenericComponentProps<FacetToggleProps>;
 	radioList?: GenericComponentProps<RadioListProps>;
 	list?: GenericComponentProps<ListProps>;
+	layoutSelector?: GenericComponentProps<LayoutSelectorProps>;
 
 	/* ORGANISMS */
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;

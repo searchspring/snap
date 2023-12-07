@@ -88,9 +88,21 @@ The `hideSelection` prop will prevent the current selection from rendering in th
 ```
 
 ### hideIcon
-The `hideIcon` prop will prevent the icon froom rendering in the dropdown button (non-native only). 
+The `hideIcon` prop will prevent the icon from rendering in the dropdown button (non-native only). 
 ```jsx
 <Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideIcon={true} />
+```
+
+### hideOptionIcons
+The `hideOptionIcons` prop will prevent icons from rendering in the dropdown options (non-native only). 
+```jsx
+<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideOptionIcons={true} />
+```
+
+### hideOptionLabels
+The `hideOptionLabels` prop will prevent labels from rendering in the dropdown options (non-native only). 
+```jsx
+<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideOptionLabels={true} />
 ```
 
 ### clearSelection
