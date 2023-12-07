@@ -100,12 +100,14 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
 				<ul className={`ss__radio-list__options-wrapper`}>
-					{options.map((option: ListOption) => {
+					{options.map((option: ListOption, idx: number) => {
 						return (
 							<li
 								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
+								role={'link'}
+								aria-label={`${selection == option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${option.label}`}
 								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>

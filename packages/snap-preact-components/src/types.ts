@@ -11,6 +11,7 @@ export interface ComponentProps {
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
+	ref?: (e: any) => void | React.RefObject<React.Component<any>>;
 }
 
 export type ListOption = {

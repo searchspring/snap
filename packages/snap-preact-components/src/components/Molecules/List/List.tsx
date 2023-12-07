@@ -94,22 +94,19 @@ export function List(properties: ListProps): JSX.Element {
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
+			let newArray;
+
 			if (selection.includes(option.value)) {
-				const newArray = [...selection];
+				newArray = [...selection];
 				newArray.splice(newArray.indexOf(option.value), 1);
-
-				if (onSelect) {
-					onSelect(e, option, newArray);
-				}
-				setSelection(newArray);
 			} else {
-				const newArray = [...selection, option.value];
-
-				if (onSelect) {
-					onSelect(e, option, newArray);
-				}
-				setSelection(newArray);
+				newArray = [...selection, option.value];
 			}
+
+			if (onSelect) {
+				onSelect(e, option, newArray);
+			}
+			setSelection(newArray);
 		} else {
 			if (onSelect) {
 				onSelect(e, option, [option.value]);
@@ -124,12 +121,14 @@ export function List(properties: ListProps): JSX.Element {
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
 				<ul className={`ss__list__options-wrapper`}>
-					{options.map((option: ListOption) => {
+					{options.map((option: ListOption, idx: number) => {
 						const selected = selection.indexOf(option.value.toString()) > -1 || selection.indexOf(option.value) > -1;
 						return (
 							<li
 								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
 								ref={(e) => useA11y(e)}
+								role={'link'}
+								aria-label={`${selected ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${option.label}`}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 							>
 								{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}

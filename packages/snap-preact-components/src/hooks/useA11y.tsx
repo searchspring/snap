@@ -1,8 +1,7 @@
-export function useA11y(
-	elem: any,
-	tabIndex?: number,
-	trapFocus?: boolean | { returnelem?: any; clickToClose?: boolean; blurToClose?: boolean; callback?: () => unknown }
-) {
+const KEYCODE_TAB = 9;
+const KEYCODE_ESC = 27;
+
+export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean | { returnElem?: any; clickToClose?: boolean; callback?: () => unknown }) {
 	const styleId = 'ssA11yFocusStyle';
 	if (!document.querySelector(`#${styleId}`)) {
 		const style = document.createElement('style');
@@ -26,9 +25,6 @@ export function useA11y(
 		});
 
 		if (trapFocus) {
-			const KEYCODE_TAB = 9;
-			const escKey = 27;
-
 			elem.addEventListener('keydown', function (e: any) {
 				const focusableEls = elem.querySelectorAll(
 					'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]'
@@ -38,17 +34,15 @@ export function useA11y(
 
 				let returnElem;
 				let clickToClose;
-				let blurToClose;
 				let callback;
 
 				if (typeof trapFocus !== 'boolean') {
-					returnElem = trapFocus.returnelem;
+					returnElem = trapFocus.returnElem;
 					clickToClose = trapFocus.clickToClose;
-					blurToClose = trapFocus.blurToClose;
 					callback = trapFocus.callback;
 				}
 				//esc key
-				if (e.keyCode == escKey) {
+				if (e.keyCode == KEYCODE_ESC) {
 					let actionElem;
 
 					if (returnElem) {
@@ -71,9 +65,6 @@ export function useA11y(
 					actionElem.focus();
 					if (clickToClose) {
 						actionElem.click && actionElem.click();
-					}
-					if (blurToClose) {
-						actionElem.blur && actionElem.blur();
 					}
 					if (callback) {
 						callback();
