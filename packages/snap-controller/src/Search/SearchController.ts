@@ -134,6 +134,15 @@ export class SearchController extends AbstractController {
 		// restore position
 		if (this.config.settings?.restorePosition?.enabled) {
 			this.eventManager.on('restorePosition', async ({ controller, element }: RestorePositionObj, next: Next) => {
+				// attempt to grab the element from storage if it is not provided
+				if (!element?.selector) {
+					const lastRequest = this.storage.get('lastStringyParams');
+					const storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+					const stringyParams = JSON.stringify(storableRequestParams);
+					const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
+					element = scrollMap[stringyParams];
+				}
+
 				const scrollToPosition = () => {
 					return new Promise<void>(async (resolve) => {
 						const maxCheckTime = 500;
@@ -192,6 +201,13 @@ export class SearchController extends AbstractController {
 				if (element) await scrollToPosition();
 				await next();
 			});
+
+			// fire restorePosition event on 'pageshow' when setting is enabled
+			if (this.config.settings?.restorePosition?.onPageShow) {
+				window.removeEventListener('pageshow', () => {
+					this.eventManager.fire('restorePosition', { controller: this, element: {} });
+				});
+			}
 		}
 
 		// attach config plugins and event middleware
