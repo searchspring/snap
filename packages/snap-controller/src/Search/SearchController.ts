@@ -204,7 +204,7 @@ export class SearchController extends AbstractController {
 
 			// fire restorePosition event on 'pageshow' when setting is enabled
 			if (this.config.settings?.restorePosition?.onPageShow) {
-				window.removeEventListener('pageshow', () => {
+				window.addEventListener('pageshow', () => {
 					this.eventManager.fire('restorePosition', { controller: this, element: {} });
 				});
 			}
