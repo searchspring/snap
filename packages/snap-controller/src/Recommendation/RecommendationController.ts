@@ -10,6 +10,11 @@ import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
+export interface selectedItem {
+	id: string;
+	quantity: number;
+}
+
 type RecommendationTrackMethods = {
 	product: {
 		click: (e: MouseEvent, result: any) => BeaconEvent | undefined;
@@ -17,6 +22,7 @@ type RecommendationTrackMethods = {
 		impression: (result: any) => BeaconEvent | undefined;
 	};
 	click: (e: MouseEvent) => BeaconEvent | undefined;
+	addBundleToCart: (e: MouseEvent, results: selectedItem[], price: number) => BeaconEvent | undefined;
 	impression: () => BeaconEvent | undefined;
 	render: (results?: Product[]) => BeaconEvent | undefined;
 };
@@ -206,6 +212,34 @@ export class RecommendationController extends AbstractController {
 					return event;
 				},
 			},
+			addBundleToCart: (e: MouseEvent, results: selectedItem[], price: number): BeaconEvent | undefined => {
+				if (!this.store.profile.tag) return;
+				const event: BeaconEvent = this.tracker.track.event({
+					type: BeaconType.PROFILE_CLICK,
+					category: BeaconCategory.RECOMMENDATIONS,
+					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+					event: {
+						context: {
+							action: 'navigate',
+							placement: this.store.profile.placement,
+							tag: this.store.profile.tag,
+							type: 'product-recommendation',
+							results: results,
+							price: price,
+						},
+						profile: {
+							tag: this.store.profile.tag,
+							placement: this.store.profile.placement,
+							threshold: this.store.profile.display.threshold,
+							templateId: this.store.profile.display.template.uuid,
+							seed: getSeed(),
+						},
+					},
+				});
+				this.events.click = event;
+				this.eventManager.fire('track.click', { controller: this, event: e, trackEvent: event });
+				return event;
+			},
 			click: (e: MouseEvent): BeaconEvent | undefined => {
 				if (!this.store.profile.tag) return;
 				const event: BeaconEvent = this.tracker.track.event({
@@ -284,7 +318,7 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.render', { controller: this, trackEvent: event });
 				return event;
 			},
-		};
+		} as RecommendationTrackMethods;
 	})();
 
 	get params(): RecommendCombinedRequestModel {

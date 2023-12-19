@@ -38,6 +38,9 @@ export type BreakpointsProps = {
 
 export type BreakpointsEntry = {
 	[property: string]: any;
+	slidesPerView?: number;
+	slidesPerGroup?: number;
+	spaceBetween?: number;
 };
 
 export type StylingCSS = Array<SerializedStyles | string | Record<string, string> | undefined>;

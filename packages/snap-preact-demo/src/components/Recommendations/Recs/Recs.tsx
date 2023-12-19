@@ -1,7 +1,8 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
+import { Carousel, BundledRecommendations, BundledRecommendationsProps } from '@searchspring/snap-preact-components';
+// import { Button, Result,  Icon, Checkbox } from '@searchspring/snap-preact-components';
 
 type RecsProps = {
 	controller?: RecommendationController;
@@ -24,6 +25,63 @@ export class Recs extends Component<RecsProps> {
 		const store = controller?.store;
 		const arr = Array.from(Array(9).keys());
 
+		// const CTASlot = (props) => {
+		// 	return (
+		// 		<>
+		// 			<p>
+		// 				{`custom total for ${props.selectedItems.length} items `}
+		// 				<label>{`$${props.bundlePrice}`}</label>
+		// 				<label>{`was - $${props.strikePrice}`}</label>
+		// 			</p>
+
+		// 			<Button onClick={() => props.onclick()}>custom button here</Button>
+		// 		</>
+		// 	)
+		// };
+
+		// const ResultSlot = (props) => {
+		// 	console.log(props)
+
+		// 	return (
+		// 		<div className={`ss__bundle-selector ${props.seed ? 'ss__bundle-selector--seed' : ''} `}>
+
+		// 			<div style={props.seed ? {border: "1px solid gray"} : {}} className='ss__bundle-selector__result-wrapper'>
+		// 				<Checkbox onClick={() => props.onCheckboxClick(props.result)} checked={props.selected}/>
+		// 				{/* {props.seed && <div className={'ss__bundle-selector__seed-badge'}>Seed Product WOOO</div>} */}
+
+		// 				<Result result={props.result}/>
+
+		// 				<div className="ss__bundle-selector__qty">
+		// 					QTY
+		// 					<input className="ss__bundle-selector__qty__input" onChange={(e:any) => props.result.setQuantity(e.target.value)} aria-label="Product Quantity" type="number" min="0" placeholder="QTY #" value={props.result.quantity} />
+
+		// 				</div>
+		// 			</div>
+		// 		</div>
+		// 	)
+		// };
+
+		const props: BundledRecommendationsProps = {
+			// preselectedCount: 0,
+			// seedChecked: false,
+			controller: controller,
+			// seedIconOnly: true,
+			// seperatorIcon: false,
+			// seperatorIcon: "plus",
+			// seedInCarousel: true,
+			seedText: 'Seed Product WOOO2',
+			title: 'Bundle 4 You',
+			// peekabooEnableAt: '(min-width: 650px)',
+			// peekabooEnableAt: true,
+			quantityPicker: true,
+			results: store.results,
+			// showCheckboxes: false,
+			// seedInCarousel: false,
+			onAddToCart: (props) => console.log(props),
+			// ctaSlot: <CTASlot />,
+			// resultComponent: <ResultSlot />
+		};
+
 		return (
 			<div>
 				<Carousel>
@@ -33,12 +91,7 @@ export class Recs extends Component<RecsProps> {
 				</Carousel>
 
 				<hr style={{ margin: '20px 0' }} />
-
-				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
-					{store.results.map((result) => (
-						<Result result={result}></Result>
-					))}
-				</Recommendation>
+				<BundledRecommendations {...props} />
 			</div>
 		);
 	}

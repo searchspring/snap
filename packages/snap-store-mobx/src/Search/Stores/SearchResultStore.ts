@@ -22,7 +22,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising
 	) {
-		let results = (resultData || []).map((result) => {
+		let results: (Product | Banner)[] = (resultData || []).map((result) => {
 			return new Product(services, result);
 		});
 
@@ -76,6 +76,10 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
+	public quantity = 1;
+	public setQuantity = (quantity: number) => {
+		this.quantity = Number(quantity) || 1;
+	};
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id!;
@@ -95,6 +99,8 @@ export class Product {
 			id: observable,
 			attributes: observable,
 			custom: observable,
+			quantity: observable,
+			setQuantity: observable,
 		});
 
 		// must set all subo
@@ -127,7 +133,7 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: StoreConfigs, results: Product[], banners: Banner[], paginationData: SearchResponseModelPagination) {
+function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationData: SearchResponseModelPagination) {
 	const productCount = results.length;
 	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
 	const maxIndex = minIndex + paginationData.pageSize!;

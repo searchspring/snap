@@ -36,6 +36,7 @@ export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
+export * from './components/Organisms/BundledRecommendations';
 export * from './components/Organisms/Results';
 
 // HOOKS
