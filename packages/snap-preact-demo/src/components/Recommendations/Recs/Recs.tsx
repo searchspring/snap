@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Carousel, BundledRecommendations, BundledRecommendationsProps } from '@searchspring/snap-preact-components';
-// import { Button, Result,  Icon, Checkbox } from '@searchspring/snap-preact-components';
+import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
+// import { Button, Result,  Icon, Checkbox, BundledRecommendations, BundledRecommendationsProps } from '@searchspring/snap-preact-components';
 
 type RecsProps = {
 	controller?: RecommendationController;
@@ -61,26 +61,26 @@ export class Recs extends Component<RecsProps> {
 		// 	)
 		// };
 
-		const props: BundledRecommendationsProps = {
-			// preselectedCount: 0,
-			// seedChecked: false,
-			controller: controller,
-			// seedIconOnly: true,
-			// seperatorIcon: false,
-			// seperatorIcon: "plus",
-			// seedInCarousel: true,
-			seedText: 'Seed Product WOOO2',
-			title: 'Bundle 4 You',
-			// peekabooEnableAt: '(min-width: 650px)',
-			// peekabooEnableAt: true,
-			quantityPicker: true,
-			results: store.results,
-			// showCheckboxes: false,
-			// seedInCarousel: false,
-			onAddToCart: (props) => console.log(props),
-			// ctaSlot: <CTASlot />,
-			// resultComponent: <ResultSlot />
-		};
+		// const props: BundledRecommendationsProps = {
+		// 	// preselectedCount: 0,
+		// 	// seedChecked: false,
+		// 	controller: controller,
+		// 	// seedIconOnly: true,
+		// 	// seperatorIcon: false,
+		// 	// seperatorIcon: "plus",
+		// 	// seedInCarousel: true,
+		// 	seedText: 'Seed Product WOOO2',
+		// 	title: 'Bundle 4 You',
+		// 	// peekabooEnableAt: '(min-width: 650px)',
+		// 	// peekabooEnableAt: true,
+		// 	quantityPicker: true,
+		// 	results: store.results,
+		// 	// showCheckboxes: false,
+		// 	// seedInCarousel: false,
+		// 	onAddToCart: (props) => console.log(props),
+		// 	// ctaSlot: <CTASlot />,
+		// 	// resultComponent: <ResultSlot />
+		// };
 
 		return (
 			<div>
@@ -91,7 +91,12 @@ export class Recs extends Component<RecsProps> {
 				</Carousel>
 
 				<hr style={{ margin: '20px 0' }} />
-				<BundledRecommendations {...props} />
+				{/* <BundledRecommendations {...props} /> */}
+				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
+					{store.results.map((result) => (
+						<Result result={result}></Result>
+					))}
+				</Recommendation>
 			</div>
 		);
 	}
