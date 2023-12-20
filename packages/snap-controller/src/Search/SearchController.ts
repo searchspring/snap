@@ -137,10 +137,12 @@ export class SearchController extends AbstractController {
 				// attempt to grab the element from storage if it is not provided
 				if (!element?.selector) {
 					const lastRequest = this.storage.get('lastStringyParams');
-					const storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
-					const stringyParams = JSON.stringify(storableRequestParams);
-					const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
-					element = scrollMap[stringyParams];
+					if (lastRequest) {
+						const storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+						const stringyParams = JSON.stringify(storableRequestParams);
+						const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
+						element = scrollMap[stringyParams];
+					}
 				}
 
 				const scrollToPosition = () => {
