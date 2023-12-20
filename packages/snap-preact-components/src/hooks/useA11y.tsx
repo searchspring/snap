@@ -1,7 +1,7 @@
 const KEYCODE_TAB = 9;
 const KEYCODE_ESC = 27;
 
-export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean | { returnElem?: any; clickToClose?: boolean; callback?: () => unknown }) {
+export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCallback?: () => unknown) {
 	const styleId = 'ssA11yFocusStyle';
 	if (!document.querySelector(`#${styleId}`)) {
 		const style = document.createElement('style');
@@ -32,42 +32,12 @@ export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean | { re
 				const firstFocusableEl = focusableEls[0];
 				const lastFocusableEl = focusableEls[focusableEls.length - 1];
 
-				let returnElem;
-				let clickToClose;
-				let callback;
-
-				if (typeof trapFocus !== 'boolean') {
-					returnElem = trapFocus.returnElem;
-					clickToClose = trapFocus.clickToClose;
-					callback = trapFocus.callback;
-				}
 				//esc key
 				if (e.keyCode == KEYCODE_ESC) {
-					let actionElem;
+					elem.focus();
 
-					if (returnElem) {
-						if (typeof returnElem == 'string') {
-							const returnTo = document.querySelector(returnElem);
-							actionElem = returnTo;
-						} else if (returnElem.current) {
-							if (returnElem.current.base) {
-								actionElem = returnElem.current.base;
-							} else {
-								actionElem = returnElem.current;
-							}
-						} else {
-							actionElem = returnElem;
-						}
-					} else {
-						actionElem = elem;
-					}
-
-					actionElem.focus();
-					if (clickToClose) {
-						actionElem.click && actionElem.click();
-					}
-					if (callback) {
-						callback();
+					if (escCallback) {
+						escCallback();
 					}
 
 					e.preventDefault();

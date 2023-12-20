@@ -3,6 +3,7 @@ import type { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { IconProps } from './components/Atoms/Icon';
+import { MutableRef } from 'preact/hooks';
 
 export interface ComponentProps {
 	name?: string;
@@ -12,7 +13,7 @@ export interface ComponentProps {
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
-	ref?: (e: any) => void | React.RefObject<React.Component<any>>;
+	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
 }
 
 export type ListOption = {

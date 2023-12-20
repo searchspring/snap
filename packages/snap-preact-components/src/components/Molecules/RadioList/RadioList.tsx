@@ -124,18 +124,18 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
 
-				<ul className={`ss__radio-list__options-wrapper`}>
-					{options.map((option: ListOption, idx: number) => {
+				<ul className={`ss__radio-list__options-wrapper`} role="listbox" aria-label={titleText}>
+					{options.map((option: ListOption) => {
 						return (
 							<li
 								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
-								role={'link'}
-								aria-label={`${selection == option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${option.label}`}
 								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 								title={option.label}
+								role="option"
+								aria-selected={option.value == selection}
 							>
 								{!hideOptionRadios && <Radio {...subProps.Radio} checked={option.value == selection} disableA11y={true} />}
 

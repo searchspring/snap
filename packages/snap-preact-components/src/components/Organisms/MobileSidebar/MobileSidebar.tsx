@@ -13,7 +13,7 @@ import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { useA11y } from '../../../hooks';
-import { useRef } from 'preact/hooks';
+import { MutableRef, useRef } from 'preact/hooks';
 
 const CSS = {
 	toolbar: () =>
@@ -131,12 +131,22 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 	};
 
-	const closeButtonRef = useRef();
+	const closeButtonRef: MutableRef<any> = useRef();
+	const openButtonRef: MutableRef<any> = useRef();
 
 	const Content = (props: any) => {
 		const { toggleActive } = props;
 		return (
-			<div className="ss__mobile-sidebar__content" ref={(e) => useA11y(e, 0, { returnElem: closeButtonRef, clickToClose: true })}>
+			<div
+				className="ss__mobile-sidebar__content"
+				ref={(e) =>
+					useA11y(e, 0, true, () => {
+						closeButtonRef.current?.base?.focus();
+						closeButtonRef.current?.base?.click();
+						openButtonRef.current.base.focus();
+					})
+				}
+			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
 						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title">
@@ -196,7 +206,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			</div>
 		);
 	};
-
+	const ContentRef: MutableRef<any> = useRef();
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
@@ -207,14 +217,20 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 							className="ss__mobile-sidebar__slideout__button"
 							name={'mobile-sidebar__slideout__button'}
 							icon={openButtonIcon}
+							ref={openButtonRef}
 							{...subProps.button}
+							onClick={() => {
+								setTimeout(() => {
+									ContentRef.current?.base?.focus();
+								});
+							}}
 						>
 							{openButtonText}
 						</Button>
 					}
 					{...subProps.slideout}
 				>
-					<Content />
+					<Content ref={ContentRef} />
 				</Slideout>
 			</div>
 		</CacheProvider>

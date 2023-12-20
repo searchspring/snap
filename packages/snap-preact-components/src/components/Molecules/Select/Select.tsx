@@ -278,20 +278,18 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 							</Button>
 						}
 					>
-						<ul className="ss__select__select">
-							{options.map((option, idx) => (
+						<ul className="ss__select__select" role="listbox" aria-label={typeof label == 'string' ? label : ''}>
+							{options.map((option) => (
 								<li
 									ref={(e) => useA11y(e)}
-									role={'link'}
 									aria-disabled={option.disabled}
-									aria-label={`${selection?.value === option.value ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${
-										option.label
-									}`}
 									title={option.label}
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									role="option"
+									aria-selected={selection?.value === option.value}
 								>
 									{option.icon && !hideOptionIcons && (
 										<Icon

@@ -463,7 +463,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{...styling}
 					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}
-					ref={(e) => useA11y(e, 0, { callback: reset })}
+					ref={(e) => useA11y(e, 0, true, reset)}
 				>
 					<span
 						role={'link'}

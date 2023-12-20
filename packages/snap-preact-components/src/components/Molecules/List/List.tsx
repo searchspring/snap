@@ -145,17 +145,17 @@ export function List(properties: ListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
-				<ul className={`ss__list__options-wrapper`}>
-					{options.map((option: ListOption, idx: number) => {
+				<ul className={`ss__list__options-wrapper`} role="listbox" aria-label={titleText}>
+					{options.map((option: ListOption) => {
 						const selected = selection.indexOf(option.value.toString()) > -1 || selection.indexOf(option.value) > -1;
 						return (
 							<li
 								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
 								ref={(e) => useA11y(e)}
-								role={'link'}
-								aria-label={`${selected ? 'selected option,' : ''} option ${idx + 1} of ${options.length}, ${option.label}`}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 								title={option.label}
+								role="option"
+								aria-selected={selected}
 							>
 								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
 
