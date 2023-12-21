@@ -9,7 +9,7 @@ export const Result: ResultComponent = (props) => {
 		<article className="ss__result">
 			<div className="ss__result__image-wrapper">
 				<a href={core.url}>
-					<Image src={core.thumbnailImageUrl} alt={core.name} />
+					<Image src={core.thumbnailImageUrl} alt={core.name} theme={props?.theme} />
 				</a>
 			</div>
 			<div className="ss__result__details">
@@ -25,11 +25,11 @@ export const Result: ResultComponent = (props) => {
 				<div className="ss__result__details__pricing">
 					{core.price < core.msrp ? (
 						<Fragment>
-							<Price value={core.msrp} lineThrough={true} />
-							<Price value={core.price} />
+							<Price value={core.msrp} lineThrough={true} theme={props?.theme} />
+							<Price value={core.price} theme={props?.theme} />
 						</Fragment>
 					) : (
-						<Price value={core.price} />
+						<Price value={core.price} theme={props?.theme} />
 					)}
 				</div>
 			</div>

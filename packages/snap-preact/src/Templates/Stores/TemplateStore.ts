@@ -4,9 +4,10 @@ import { SnapTemplatesConfig } from '../SnapTemplate';
 import { ThemeStore } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
-
+import { debounce } from '@searchspring/snap-toolbox';
 import type { DeepPartial } from '../../types';
 import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
+
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
 export type TemplateTarget = {
@@ -24,6 +25,7 @@ export type TemplatesStoreDependencies = {
 	storage: StorageStore;
 };
 
+const RESIZE_DEBOUNCE = 100;
 export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
@@ -50,6 +52,8 @@ export class TemplatesStore {
 	};
 
 	library: LibraryStore;
+
+	innerWidth?: number;
 
 	constructor(config: SnapTemplatesConfig, settings: TemplatesStoreSettings) {
 		this.config = config;
@@ -91,9 +95,19 @@ export class TemplatesStore {
 				const currency = this.library.locales.currencies[this.currency];
 				const language = this.library.locales.languages[this.language];
 
-				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language });
+				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language, innerWidth: this.innerWidth });
 			});
 		});
+
+		if (window) {
+			this.setInnerWidth(window.innerWidth);
+			const debouncedHandleResize = debounce(() => {
+				this.setInnerWidth(window.innerWidth);
+			}, RESIZE_DEBOUNCE);
+
+			window.removeEventListener('resize', debouncedHandleResize);
+			window.addEventListener('resize', debouncedHandleResize);
+		}
 
 		makeObservable(this, {
 			loading: observable,
@@ -123,10 +137,25 @@ export class TemplatesStore {
 		variables?: DeepPartial<ThemeVariables>;
 		currency: Partial<Theme>;
 		language: Partial<Theme>;
+		innerWidth?: number;
 	}) {
 		const theme = new ThemeStore(config, this.dependencies, this.settings);
 		const themeLocation = this.themes[config.type as keyof typeof this.themes] || {};
 		themeLocation[config.name] = theme;
+	}
+
+	public setInnerWidth(innerWidth: number) {
+		if (this.innerWidth === innerWidth) return;
+
+		this.innerWidth = innerWidth;
+		for (const themeName in this.themes.local) {
+			const theme = this.themes.local[themeName];
+			theme.setInnerWidth(this.innerWidth);
+		}
+		for (const themeName in this.themes.library) {
+			const theme = this.themes.library[themeName];
+			theme.setInnerWidth(this.innerWidth);
+		}
 	}
 
 	public async setCurrency(currencyCode: string) {
@@ -184,6 +213,7 @@ export class TemplatesStore {
 				base: theme,
 				language: this.library.locales.languages[this.language],
 				currency: this.library.locales.currencies[this.currency],
+				innerWidth: this.innerWidth,
 			});
 		}
 		this.loading = false;

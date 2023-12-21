@@ -160,24 +160,4 @@ const autocompleteStyleScript = ({
 // Autocomplete component props
 export const autocomplete: Partial<AutocompleteProps> = {
 	styleScript: autocompleteStyleScript,
-	theme: {
-		components: {
-			results: {
-				rows: 2,
-				columns: 3,
-			},
-			facet: {
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
-				previewOnFocus: true,
-			},
-			facetGridOptions: {
-				columns: 3,
-			},
-			facetPaletteOptions: {
-				columns: 3,
-			},
-		},
-	},
 };

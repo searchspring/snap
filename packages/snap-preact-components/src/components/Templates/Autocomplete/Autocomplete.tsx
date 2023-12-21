@@ -14,11 +14,11 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps, mergeProps, combineMerge } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
-import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
 	Autocomplete: ({
@@ -181,35 +181,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
 
-	// TODO: fix this / create task to fix
-	props = {
-		...props,
-		theme: properties.theme,
-	};
-
-	//passed in or default breakpoints result props
-	props.breakpoints = props.breakpoints || {
-		0: {
-			columns: 2,
-			rows: 1,
-			hideFacets: props.hideFacets ?? true,
-			vertical: props.vertical ?? true,
-			hideHistory: props.hideHistory ?? true,
-			hideTrending: props.hideTrending ?? true,
-		},
-		540: {
-			columns: 3,
-			rows: 1,
-			vertical: props.vertical ?? true,
-			hideHistory: props.hideHistory ?? true,
-			hideTrending: props.hideTrending ?? true,
-		},
-		768: {
-			columns: 2,
-			rows: 3,
-		},
-	};
-
 	const valueProps = createHoverProps();
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -226,69 +197,93 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller?.setFocused && controller?.setFocused();
 	};
 
-	const themeDefaults: Theme = {
+	const themeFunctionalityProps: Theme = {
 		components: {
 			facet: {
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
-				previewOnFocus: true,
 				valueProps,
+				previewOnFocus: true,
 			},
 			facetGridOptions: {
-				columns: 3,
 				onClick: facetClickEvent,
 			},
 			facetHierarchyOptions: {
-				hideCount: true,
 				onClick: facetClickEvent,
 			},
 			facetListOptions: {
-				hideCheckbox: true,
-				hideCount: true,
 				onClick: facetClickEvent,
 			},
 			facetPaletteOptions: {
-				hideLabel: true,
-				columns: 3,
 				onClick: facetClickEvent,
-			},
-			result: {
-				hideBadge: true,
 			},
 		},
 	};
 
-	let theme;
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.autocomplete?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.autocomplete,
+	if (!properties.theme?.name) {
+		// breakpoint settings are calculated in ThemeStore for snap templates
+		props.breakpoints = props.breakpoints || {
+			0: {
+				columns: 2,
+				rows: 1,
+				hideFacets: props.hideFacets ?? true,
+				vertical: props.vertical ?? true,
+				hideHistory: props.hideHistory ?? true,
+				hideTrending: props.hideTrending ?? true,
+			},
+			540: {
+				columns: 3,
+				rows: 1,
+				vertical: props.vertical ?? true,
+				hideHistory: props.hideHistory ?? true,
+				hideTrending: props.hideTrending ?? true,
+			},
+			768: {
+				columns: 2,
+				rows: 3,
+			},
 		};
-		props.theme = realTheme;
-		theme = props.theme;
-		props.breakpoints = {};
-	} else {
+
+		const themeDefaults: Theme = {
+			components: {
+				facet: {
+					limit: 6,
+					disableOverflow: true,
+					disableCollapse: true,
+				},
+				facetGridOptions: {
+					columns: 3,
+				},
+				facetHierarchyOptions: {
+					hideCount: true,
+				},
+				facetListOptions: {
+					hideCheckbox: true,
+					hideCount: true,
+				},
+				facetPaletteOptions: {
+					hideLabel: true,
+					columns: 3,
+				},
+				result: {
+					hideBadge: true,
+				},
+			},
+		};
+
 		const displaySettings = useDisplaySettings(props.breakpoints) || {};
 
 		// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-		theme = deepmerge(
-			themeDefaults,
-			deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
-			{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
-		);
+		const theme = deepmerge.all([themeDefaults, themeFunctionalityProps, props?.theme || {}, displaySettings?.theme || {}], {
+			arrayMerge: (destinationArray, sourceArray) => sourceArray,
+		});
 
 		props = {
 			...props,
 			...displaySettings,
 			theme,
 		};
+	} else {
+		// templates
+		props.theme = deepmerge.all([themeFunctionalityProps, props?.theme || {}], { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 	}
 
 	let input: string | Element | null = props.input;
@@ -428,7 +423,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		...props,
 		inputViewportOffsetBottom,
 		noResults: Boolean(search?.query?.string && results.length === 0),
-		theme,
 	};
 
 	// add styleScript to styling

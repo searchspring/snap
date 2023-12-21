@@ -15,6 +15,7 @@ export class ThemeStore {
 	currency: Partial<Theme>;
 	language: Partial<Theme>;
 	stored: Partial<Theme>;
+	innerWidth?: number;
 
 	constructor(
 		config: {
@@ -25,13 +26,14 @@ export class ThemeStore {
 			variables?: DeepPartial<ThemeVariables>;
 			currency: Partial<Theme>;
 			language: Partial<Theme>;
+			innerWidth?: number;
 		},
 		dependencies: TemplatesStoreDependencies,
 		settings: TemplatesStoreSettings
 	) {
 		this.dependencies = dependencies;
 
-		const { name, type, base, overrides, variables, currency, language } = config;
+		const { name, type, base, overrides, variables, currency, language, innerWidth } = config;
 		this.name = name;
 		this.type = type;
 		this.base = base;
@@ -40,27 +42,52 @@ export class ThemeStore {
 		this.currency = currency;
 		this.language = language;
 		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}`)) || {};
+		this.innerWidth = innerWidth;
 
 		makeObservable(this, {
 			name: observable,
-			base: observable,
-			overrides: observable,
 			variables: observable,
 			currency: observable,
 			language: observable,
 			stored: observable,
+			innerWidth: observable,
 		});
 	}
 
 	public get theme(): Theme {
-		return mergeLayers(
+		let baseBreakpoint = {};
+		let overrideBreakpoint = {};
+		if (this.innerWidth) {
+			const breakpoints = (this.variables.breakpoints || this.base.variables?.breakpoints) as number[];
+			const breakpoint = breakpoints.find((breakpoint) => this.innerWidth! < breakpoint);
+			if (breakpoint) {
+				const breakpointIndex = breakpoints.indexOf(breakpoint);
+				const responsiveIndex = Math.max(breakpointIndex - 1, 0); // index 0 also applies to under first breakpoint
+				baseBreakpoint = (this.base?.responsive && (this.base?.responsive as any)[responsiveIndex]) || {};
+				overrideBreakpoint = (this.overrides?.responsive && (this.overrides?.responsive as any)[responsiveIndex]) || {};
+			} else if (this.innerWidth >= breakpoints[breakpoints.length - 1]) {
+				// if innerWidth is greater than the last breakpoint, use the last breakpoint
+				const responsiveIndex = breakpoints.length - 1;
+				baseBreakpoint = (this.base?.responsive && (this.base?.responsive as any)[responsiveIndex]) || {};
+				overrideBreakpoint = (this.overrides?.responsive && (this.overrides?.responsive as any)[responsiveIndex]) || {};
+			}
+		}
+
+		const theme = mergeLayers(
 			this.base,
-			this.overrides as Partial<Theme>,
-			{ variables: this.variables } as Partial<Theme>,
+			baseBreakpoint,
 			this.currency,
 			this.language,
+			this.overrides as Partial<Theme>,
+			overrideBreakpoint,
+			{ variables: this.variables } as Partial<Theme>,
 			this.stored
 		);
+		return theme;
+	}
+
+	public setInnerWidth(innerWidth: number) {
+		this.innerWidth = innerWidth;
 	}
 
 	public setCurrency(currency: Partial<Theme>) {
@@ -97,6 +124,19 @@ export class ThemeStore {
 }
 
 function mergeLayers(...layers: Partial<Theme>[]): Partial<Theme> {
-	// TODO: memoize
-	return deepmerge.all(layers, { isMergeableObject: isPlainObject });
+	return deepmerge.all(layers, { isMergeableObject: isPlainObject, arrayMerge: combineMerge });
 }
+
+const combineMerge = (target: any, source: any, options: any) => {
+	const destination = target.slice();
+	source.forEach((item: any, index: any) => {
+		if (typeof destination[index] === 'undefined') {
+			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
+		} else if (options.isMergeableObject(item)) {
+			destination[index] = deepmerge(target[index], item, options);
+		} else if (target.indexOf(item) === -1) {
+			destination.push(item);
+		}
+	});
+	return destination;
+};

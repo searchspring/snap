@@ -5,15 +5,14 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { combineMerge, defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, ListOption, ResultComponent, ResultsLayout, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
-import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
-import deepmerge from 'deepmerge';
+import { useMediaQuery } from '../../../hooks';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
@@ -108,20 +107,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 	};
 
-	let props = mergeProps('search', globalTheme, defaultProps, properties);
-
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.search?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.search,
-		};
-		props.theme = realTheme;
-	}
+	const props = mergeProps('search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,
@@ -431,20 +417,7 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 		mobileSidebarDisplayAt: '991px',
 	};
 
-	let props = mergeProps('search', globalTheme, defaultProps, properties);
-
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.search?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.search,
-		};
-		props.theme = realTheme;
-	}
+	const props = mergeProps('search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,

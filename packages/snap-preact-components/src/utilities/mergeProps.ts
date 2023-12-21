@@ -1,5 +1,6 @@
 import type { ComponentProps } from '../types';
 import type { Theme } from '../providers';
+import deepmerge from 'deepmerge';
 
 type NamedComponentProps = ComponentProps & {
 	named: {
@@ -40,18 +41,27 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		mergedProps = mergeThemeProps(componentName, themeComponent, mergedProps) as Partial<GenericComponentProps>;
 	}
 
+	// put additional theme properties back onto the theme (without components)
+	const globalThemeProperties = {
+		...globalTheme,
+	};
+	delete globalThemeProperties.components;
+
+	const themeProperties = {
+		...theme,
+	};
+	delete themeProperties.components;
+
+	mergedProps = {
+		...mergedProps,
+		theme: {
+			...(mergedProps as ComponentProps).theme,
+			...deepmerge(globalThemeProperties, themeProperties),
+		},
+	};
+
 	return mergedProps as GenericComponentProps;
 }
-
-// function helperFunc(mergedProps:any, prop2: any, prop3: any, prop4: any) {
-//     const thing = namedComponent && themeComponent.named && themeComponent.named[namedComponent as keyof typeof themeComponent.named];
-//     if (thing) {
-//         return {
-//             ...mergedProps,
-//             ...thing,
-//         };
-//     }
-// }
 
 function mergeThemeProps(
 	componentName = '',

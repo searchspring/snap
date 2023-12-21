@@ -25,6 +25,7 @@ export const defaultTheme: Theme = {
 };
 
 export type Theme = {
+	name?: string;
 	variables?: ThemeVariables;
 	responsive?: [Partial<Theme>, Partial<Theme>, Partial<Theme>, Partial<Theme>];
 	components?: ThemeComponents;
