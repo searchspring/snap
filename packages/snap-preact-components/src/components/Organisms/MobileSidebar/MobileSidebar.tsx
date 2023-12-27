@@ -206,7 +206,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			</div>
 		);
 	};
-	const ContentRef: MutableRef<any> = useRef();
+	const contentRef: MutableRef<any> = useRef();
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
@@ -221,7 +221,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 							{...subProps.button}
 							onClick={() => {
 								setTimeout(() => {
-									ContentRef.current?.base?.focus();
+									contentRef.current?.base?.focus();
 								});
 							}}
 						>
@@ -230,7 +230,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					}
 					{...subProps.slideout}
 				>
-					<Content ref={ContentRef} />
+					<Content ref={contentRef} />
 				</Slideout>
 			</div>
 		</CacheProvider>

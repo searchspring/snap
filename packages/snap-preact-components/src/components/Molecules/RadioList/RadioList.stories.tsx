@@ -43,7 +43,7 @@ export default {
 			control: { type: 'text' },
 		},
 		native: {
-			description: 'render a list of native HTML radio inputs.',
+			description: 'use native HTML radio inputs',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -53,7 +53,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideOptionRadios: {
-			description: 'enable/disable radio icons from rendering.',
+			description: 'enable/disable radio icons',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -63,7 +63,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideOptionIcons: {
-			description: 'enable/disable option icons from rendering.',
+			description: 'enable/disable option icons',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -73,7 +73,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideOptionLabels: {
-			description: 'enable/disable option labels from rendering.',
+			description: 'enable/disable option labels',
 			table: {
 				type: {
 					summary: 'boolean',
