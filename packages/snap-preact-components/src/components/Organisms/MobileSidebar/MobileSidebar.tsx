@@ -12,6 +12,8 @@ import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
+import { useA11y } from '../../../hooks';
+import { MutableRef, useRef } from 'preact/hooks';
 
 const CSS = {
 	toolbar: () =>
@@ -129,19 +131,40 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 	};
 
+	const closeButtonRef: MutableRef<any> = useRef();
+	const openButtonRef: MutableRef<any> = useRef();
+
 	const Content = (props: any) => {
 		const { toggleActive } = props;
 		return (
-			<div className="ss__mobile-sidebar__content">
+			<div
+				className="ss__mobile-sidebar__content"
+				ref={(e) =>
+					useA11y(e, 0, true, () => {
+						closeButtonRef.current?.base?.focus();
+						closeButtonRef.current?.base?.click();
+						openButtonRef.current.base.focus();
+					})
+				}
+			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 className="ss__mobile-sidebar__header__title">{titleText}</h4>
+						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title">
+							{titleText}
+						</h4>
+
 						{!hideCloseButton && (
 							<Button
 								className="ss__mobile-sidebar__header__close-button"
 								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
+								aria-label={closeButtonText || `close ${openButtonText} button`}
 								onClick={() => toggleActive()}
+								ref={(e: any) => {
+									if (e) {
+										closeButtonRef.current = e;
+									}
+								}}
 								icon={closeButtonIcon}
 								{...subProps.button}
 							>
@@ -183,7 +206,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			</div>
 		);
 	};
-
+	const contentRef: MutableRef<any> = useRef();
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
@@ -194,14 +217,20 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 							className="ss__mobile-sidebar__slideout__button"
 							name={'mobile-sidebar__slideout__button'}
 							icon={openButtonIcon}
+							ref={openButtonRef}
 							{...subProps.button}
+							onClick={() => {
+								setTimeout(() => {
+									contentRef.current?.base?.focus();
+								});
+							}}
 						>
 							{openButtonText}
 						</Button>
 					}
 					{...subProps.slideout}
 				>
-					<Content />
+					<Content ref={contentRef} />
 				</Slideout>
 			</div>
 		</CacheProvider>

@@ -394,7 +394,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
 						)}
 
-						{!hideMobileSidebar && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+						{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
 
 						<div className="clear"></div>
 

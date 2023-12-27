@@ -19,6 +19,7 @@ import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	Autocomplete: ({
@@ -48,6 +49,16 @@ const CSS = {
 			maxWidth: '100vw',
 			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
+
+			'& .ss__autocomplete__close-button': {
+				color: '#c5c5c5',
+				fontSize: '.8em',
+			},
+			'& .ss__autocomplete__close-button:focus': {
+				top: '0px !important',
+				left: '0px !important',
+				zIndex: '1',
+			},
 
 			'&.ss__autocomplete--only-terms': {
 				width: `${vertical || horizontalTerms || Boolean(contentSlot) ? width : '150px'}`,
@@ -440,6 +451,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		styling.css = [style];
 	}
 
+	const reset = () => {
+		controller.setFocused();
+		controller.reset();
+	};
+
 	return visible ? (
 		<ThemeProvider theme={properties.theme || {}}>
 			<CacheProvider>
@@ -447,7 +463,19 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{...styling}
 					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}
+					ref={(e) => useA11y(e, 0, true, reset)}
 				>
+					<span
+						role={'link'}
+						aria-label={'close autocomplete'}
+						ref={(e) => useA11y(e)}
+						onClick={() => reset()}
+						className="ss__autocomplete__close-button"
+						style={{ position: 'absolute', top: '-10000000px', left: '-1000000px' }}
+					>
+						Close Autocomplete
+					</span>
+
 					{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (

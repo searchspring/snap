@@ -144,7 +144,14 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		<CacheProvider>
 			{native ? (
 				<div className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)} {...styling}>
-					<input className={classnames('ss__radio__input')} type="radio" onClick={(e) => clickFunc(e)} disabled={disabled} checked={checkedState} />
+					<input
+						className={classnames('ss__radio__input')}
+						aria-checked={checkedState}
+						type="radio"
+						onClick={(e) => clickFunc(e)}
+						disabled={disabled}
+						checked={checkedState}
+					/>
 				</div>
 			) : (
 				<span
@@ -152,8 +159,9 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
+					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} radio button`}
 					role="radio"
+					aria-checked={checkedState}
 				>
 					{checkedState ? (
 						<Icon {...subProps.activeIcon} name="ss__radio__icon--active" />
