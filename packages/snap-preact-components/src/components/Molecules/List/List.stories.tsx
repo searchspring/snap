@@ -42,8 +42,8 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		hideCheckbox: {
-			description: 'enable/disable checkbox icons from rendering.',
+		hideOptionCheckboxes: {
+			description: 'enable/disable checkboxes',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -53,7 +53,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideOptionIcons: {
-			description: 'enable/disable option icons from rendering.',
+			description: 'enable/disable option icons',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -63,7 +63,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideOptionLabels: {
-			description: 'enable/disable option labels from rendering.',
+			description: 'enable/disable option labels',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -73,7 +73,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		multiSelect: {
-			description: 'enable/disable multiselect.',
+			description: 'enable/disable multiselect',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -83,7 +83,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		horizontal: {
-			description: 'render the list options horizontally.',
+			description: 'render the list options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

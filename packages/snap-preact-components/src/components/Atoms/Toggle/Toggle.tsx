@@ -8,6 +8,7 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useState } from 'react';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	toggle: ({ activeColor, inactiveColor: deActiveColor, buttonColor, size }: Partial<ToggleProps>) =>
@@ -122,6 +123,9 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 					onClick={(e) => {
 						clickFunc(e);
 					}}
+					ref={(e) => useA11y(e)}
+					aria-label={`currently ${toggledState ? 'selected' : 'not selected'} toggle switch ${label ? `for ${label}` : ''} `}
+					aria-checked={toggledState}
 				>
 					<div className={`ss__toggle__slider-box ${round ? 'ss__toggle__slider-box--round' : ''}`}>
 						<div className={`ss__toggle__slider ${round ? 'ss__toggle__slider--round' : ''}`}></div>

@@ -47,7 +47,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript } = props;
+	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript, ...additionalProps } = props;
 
 	const subProps: ButtonSubProps = {
 		icon: {
@@ -83,6 +83,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
+		...additionalProps,
 	};
 
 	const a11yProps = {

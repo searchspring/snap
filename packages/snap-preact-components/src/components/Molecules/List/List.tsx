@@ -9,6 +9,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
+import { useA11y } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
@@ -118,27 +119,23 @@ export function List(properties: ListProps): JSX.Element {
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
+			let newArray;
+
 			if (selection.includes(option.value)) {
-				const newArray = [...selection];
+				newArray = [...selection];
 				newArray.splice(newArray.indexOf(option.value), 1);
-
-				if (onSelect) {
-					onSelect(e, option, newArray);
-				}
-				setSelection(newArray);
 			} else {
-				const newArray = [...selection, option.value];
-
-				if (onSelect) {
-					onSelect(e, option, newArray);
-				}
-				setSelection(newArray);
+				newArray = [...selection, option.value];
 			}
+
+			if (onSelect) {
+				onSelect(e, option, newArray);
+			}
+			setSelection(newArray);
 		} else {
 			if (onSelect) {
 				onSelect(e, option, [option.value]);
 			}
-
 			setSelection([option.value]);
 		}
 	};
@@ -148,17 +145,19 @@ export function List(properties: ListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
-				<ul className={`ss__list__options-wrapper`}>
+				<ul className={`ss__list__options-wrapper`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
+						const selected = selection.indexOf(option.value.toString()) > -1 || selection.indexOf(option.value) > -1;
 						return (
 							<li
-								className={`ss__list__option ${selection && selection.indexOf(option.value) > -1 ? 'ss__list__option--selected' : ''} ${
-									option.disabled ? 'ss__list__option--disabled' : ''
-								}`}
-								title={option.label}
+								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
+								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
+								title={option.label}
+								role="option"
+								aria-selected={selected}
 							>
-								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selection.indexOf(option.value) > -1} disableA11y={true} />}
+								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
 
 								{option.icon && !hideOptionIcons && (
 									<Icon
