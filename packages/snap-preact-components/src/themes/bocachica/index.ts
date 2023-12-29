@@ -2,7 +2,7 @@ import { Theme, ThemeVariables } from '../../providers';
 import * as style from './styles/styles';
 
 const bocachicaVariables: ThemeVariables = {
-	breakpoints: [0, 540, 767, 1200],
+	breakpoints: [0, 540, 767, 1024],
 	color: {
 		primary: '#202223',
 		secondary: '#6d7175',
@@ -21,12 +21,13 @@ const bocachicaVariables: ThemeVariables = {
 };
 
 export const bocachica: Theme = {
+	name: 'bocachica',
 	variables: bocachicaVariables,
 	components: {
+		// component theme prop overrides
 		// ATOMS
 		badge: {
 			...style.components.badge,
-			// component theme prop overrides
 		},
 		banner: {
 			...style.components.banner,
@@ -157,5 +158,115 @@ export const bocachica: Theme = {
 			...style.components.toolbar,
 		},
 	},
-	responsive: [{}, {}, {}, {}],
+	responsive: [
+		{
+			components: {
+				results: {
+					columns: 2,
+				},
+				autocomplete: {
+					hideFacets: true,
+					vertical: true,
+					horizontalTerms: true,
+					theme: {
+						components: {
+							results: {
+								rows: 1,
+								columns: 2,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			components: {
+				results: {
+					columns: 2,
+				},
+				autocomplete: {
+					hideFacets: true,
+					vertical: true,
+					horizontalTerms: true,
+					theme: {
+						components: {
+							results: {
+								rows: 1,
+								columns: 3,
+							},
+							facets: {
+								limit: 3,
+							},
+							facet: {
+								limit: 3,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			components: {
+				results: {
+					columns: 3,
+				},
+				autocomplete: {
+					vertical: true,
+					horizontalTerms: true,
+					theme: {
+						components: {
+							results: {
+								rows: 1,
+								columns: 4,
+							},
+							facets: {
+								limit: 3,
+								style: {
+									// horizontal facets
+									width: '100%',
+									display: 'flex',
+								},
+							},
+							facet: {
+								limit: 4,
+								disableCollapse: true,
+								disableOverflow: true,
+							},
+							image: {
+								lazy: false,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			components: {
+				results: {
+					columns: 4,
+				},
+				autocomplete: {
+					theme: {
+						components: {
+							results: {
+								rows: 2,
+								columns: 3,
+							},
+							facets: {
+								limit: 3,
+							},
+							facet: {
+								limit: 5,
+								disableCollapse: true,
+								disableOverflow: true,
+							},
+							image: {
+								lazy: false,
+							},
+						},
+					},
+				},
+			},
+		},
+	],
 };

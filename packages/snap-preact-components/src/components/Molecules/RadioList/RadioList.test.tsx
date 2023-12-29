@@ -217,7 +217,7 @@ describe('RadioList Component', () => {
 		expect(optionElements).toBeInTheDocument();
 
 		expect(optionElements.innerHTML).toBe(
-			`<span class=\"ss__radio ss__radio-list__option__radio ss-stz164-I\" aria-label=\" unchecked radio button\" role=\"radio\" aria-checked=\"false\"><svg class=\"ss__icon ss__icon--bullet-o ss__radio__icon--inactive ss-3t6diw-I\" viewBox=\"0 0 56 56\" xmlns=\"http://www.w3.org/2000/svg\" name=\"ss__radio__icon--inactive\"><circle cx=\"28\" cy=\"28\" r=\"20\" stroke-width=\"3\" fill=\"white\"></circle></svg></span>`
+			`<span class=\"ss__radio ss__radio-list__option__radio ss-stz164-I\" aria-label=\" unchecked radio button\" role=\"radio\" aria-checked=\"false\"><svg class=\"ss__icon ss__icon--bullet-o ss__radio__icon--inactive ss-3t6diw-I\" viewBox=\"0 0 56 56\" xmlns=\"http://www.w3.org/2000/svg\" theme=\"[object Object]\" name=\"ss__radio__icon--inactive\"><circle cx=\"28\" cy=\"28\" r=\"20\" stroke-width=\"3\" fill=\"white\"></circle></svg></span>`
 		);
 
 		await userEvent.click(optionElements);

@@ -14,11 +14,11 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps, mergeProps, combineMerge } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
-import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { useA11y } from '../../../hooks';
 
 const CSS = {
@@ -192,35 +192,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let props = mergeProps('autocomplete', globalTheme, defaultProps, properties);
 
-	// TODO: fix this / create task to fix
-	props = {
-		...props,
-		theme: properties.theme,
-	};
-
-	//passed in or default breakpoints result props
-	props.breakpoints = props.breakpoints || {
-		0: {
-			columns: 2,
-			rows: 1,
-			hideFacets: props.hideFacets ?? true,
-			vertical: props.vertical ?? true,
-			hideHistory: props.hideHistory ?? true,
-			hideTrending: props.hideTrending ?? true,
-		},
-		540: {
-			columns: 3,
-			rows: 1,
-			vertical: props.vertical ?? true,
-			hideHistory: props.hideHistory ?? true,
-			hideTrending: props.hideTrending ?? true,
-		},
-		768: {
-			columns: 2,
-			rows: 3,
-		},
-	};
-
 	const valueProps = createHoverProps();
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -237,69 +208,93 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller?.setFocused && controller?.setFocused();
 	};
 
-	const themeDefaults: Theme = {
+	const themeFunctionalityProps: Theme = {
 		components: {
 			facet: {
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
-				previewOnFocus: true,
 				valueProps,
+				previewOnFocus: true,
 			},
 			facetGridOptions: {
-				columns: 3,
 				onClick: facetClickEvent,
 			},
 			facetHierarchyOptions: {
-				hideCount: true,
 				onClick: facetClickEvent,
 			},
 			facetListOptions: {
-				hideCheckbox: true,
-				hideCount: true,
 				onClick: facetClickEvent,
 			},
 			facetPaletteOptions: {
-				hideLabel: true,
-				columns: 3,
 				onClick: facetClickEvent,
-			},
-			result: {
-				hideBadge: true,
 			},
 		},
 	};
 
-	let theme;
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.autocomplete?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.autocomplete,
+	if (!properties.theme?.name) {
+		// breakpoint settings are calculated in ThemeStore for snap templates
+		props.breakpoints = props.breakpoints || {
+			0: {
+				columns: 2,
+				rows: 1,
+				hideFacets: props.hideFacets ?? true,
+				vertical: props.vertical ?? true,
+				hideHistory: props.hideHistory ?? true,
+				hideTrending: props.hideTrending ?? true,
+			},
+			540: {
+				columns: 3,
+				rows: 1,
+				vertical: props.vertical ?? true,
+				hideHistory: props.hideHistory ?? true,
+				hideTrending: props.hideTrending ?? true,
+			},
+			768: {
+				columns: 2,
+				rows: 3,
+			},
 		};
-		props.theme = realTheme;
-		theme = props.theme;
-		props.breakpoints = {};
-	} else {
+
+		const themeDefaults: Theme = {
+			components: {
+				facet: {
+					limit: 6,
+					disableOverflow: true,
+					disableCollapse: true,
+				},
+				facetGridOptions: {
+					columns: 3,
+				},
+				facetHierarchyOptions: {
+					hideCount: true,
+				},
+				facetListOptions: {
+					hideCheckbox: true,
+					hideCount: true,
+				},
+				facetPaletteOptions: {
+					hideLabel: true,
+					columns: 3,
+				},
+				result: {
+					hideBadge: true,
+				},
+			},
+		};
+
 		const displaySettings = useDisplaySettings(props.breakpoints) || {};
 
 		// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-		theme = deepmerge(
-			themeDefaults,
-			deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray }),
-			{ arrayMerge: (destinationArray, sourceArray) => sourceArray }
-		);
+		const theme = deepmerge.all([themeDefaults, themeFunctionalityProps, props?.theme || {}, displaySettings?.theme || {}], {
+			arrayMerge: (destinationArray, sourceArray) => sourceArray,
+		});
 
 		props = {
 			...props,
 			...displaySettings,
 			theme,
 		};
+	} else {
+		// snap templates
+		props.theme = deepmerge.all([themeFunctionalityProps, props?.theme || {}], { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 	}
 
 	let input: string | Element | null = props.input;
@@ -439,7 +434,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		...props,
 		inputViewportOffsetBottom,
 		noResults: Boolean(search?.query?.string && results.length === 0),
-		theme,
 	};
 
 	// add styleScript to styling
@@ -457,220 +451,218 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	return visible ? (
-		<ThemeProvider theme={properties.theme || {}}>
-			<CacheProvider>
-				<div
-					{...styling}
-					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
-					onClick={(e) => e.stopPropagation()}
-					ref={(e) => useA11y(e, 0, true, reset)}
+		<CacheProvider>
+			<div
+				{...styling}
+				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
+				onClick={(e) => e.stopPropagation()}
+				ref={(e) => useA11y(e, 0, true, reset)}
+			>
+				<span
+					role={'link'}
+					aria-label={'close autocomplete'}
+					ref={(e) => useA11y(e)}
+					onClick={() => reset()}
+					className="ss__autocomplete__close-button"
+					style={{ position: 'absolute', top: '-10000000px', left: '-1000000px' }}
 				>
-					<span
-						role={'link'}
-						aria-label={'close autocomplete'}
-						ref={(e) => useA11y(e)}
-						onClick={() => reset()}
-						className="ss__autocomplete__close-button"
-						style={{ position: 'absolute', top: '-10000000px', left: '-1000000px' }}
-					>
-						Close Autocomplete
-					</span>
+					Close Autocomplete
+				</span>
 
-					{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
-						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
-							{termsSlot ? (
-								cloneWithProps(termsSlot, {
-									terms,
-									trending,
-									termsTitle,
-									trendingTitle,
-									showTrending,
-									history,
-									historyTitle,
-									valueProps,
-									emIfy,
-									onTermClick,
-									controller,
-								})
-							) : (
-								<>
-									{terms.length > 0 ? (
-										<div className="ss__autocomplete__terms__suggestions">
-											{termsTitle ? (
-												<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
-													<h5>{termsTitle}</h5>
-												</div>
-											) : null}
-											<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
-												{terms.map((term, idx) => (
-													<div
-														className={classnames('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														})}
-													>
-														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-															href={term.url.href}
-															{...createHoverProps(term.preview)}
-															role="link"
-															aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
-														>
-															{emIfy(term.value, state.input || '')}
-														</a>
-													</div>
-												))}
-											</div>
-										</div>
-									) : null}
-
-									{showTrending && !hideTrending ? (
-										<div className="ss__autocomplete__terms__trending">
-											{trendingTitle ? (
-												<div className="ss__autocomplete__title ss__autocomplete__title--trending">
-													<h5>{trendingTitle}</h5>
-												</div>
-											) : null}
-											<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
-												{trending.map((term, idx) => (
-													<div
-														className={classnames('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														})}
-													>
-														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-															href={term.url.href}
-															{...createHoverProps(term.preview)}
-															role="link"
-															aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
-														>
-															{emIfy(term.value, state.input || '')}
-														</a>
-													</div>
-												))}
-											</div>
-										</div>
-									) : null}
-
-									{showHistory && !hideHistory ? (
-										<div className="ss__autocomplete__terms__history">
-											{historyTitle ? (
-												<div className="ss__autocomplete__title ss__autocomplete__title--history">
-													<h5>{historyTitle}</h5>
-												</div>
-											) : null}
-											<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
-												{history.map((term, idx) => (
-													<div
-														className={classnames('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														})}
-													>
-														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-															href={term.url.href}
-															{...createHoverProps(term.preview)}
-															role="link"
-															aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
-														>
-															{emIfy(term.value, state.input || '')}
-														</a>
-													</div>
-												))}
-											</div>
-										</div>
-									) : null}
-								</>
-							)}
-						</div>
-					)}
-
-					{!hideFacets &&
-						(facetsSlot ? (
-							<div className="ss__autocomplete__facets">
-								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
-							</div>
+				{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
+					<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
+						{termsSlot ? (
+							cloneWithProps(termsSlot, {
+								terms,
+								trending,
+								termsTitle,
+								trendingTitle,
+								showTrending,
+								history,
+								historyTitle,
+								valueProps,
+								emIfy,
+								onTermClick,
+								controller,
+							})
 						) : (
-							facetsToShow.length > 0 && (
-								<>
-									{facetsTitle && vertical ? (
+							<>
+								{terms.length > 0 ? (
+									<div className="ss__autocomplete__terms__suggestions">
+										{termsTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
+												<h5>{termsTitle}</h5>
+											</div>
+										) : null}
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
+											{terms.map((term, idx) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+														href={term.url.href}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
+													>
+														{emIfy(term.value, state.input || '')}
+													</a>
+												</div>
+											))}
+										</div>
+									</div>
+								) : null}
+
+								{showTrending && !hideTrending ? (
+									<div className="ss__autocomplete__terms__trending">
+										{trendingTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
+												<h5>{trendingTitle}</h5>
+											</div>
+										) : null}
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
+											{trending.map((term, idx) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+														href={term.url.href}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
+													>
+														{emIfy(term.value, state.input || '')}
+													</a>
+												</div>
+											))}
+										</div>
+									</div>
+								) : null}
+
+								{showHistory && !hideHistory ? (
+									<div className="ss__autocomplete__terms__history">
+										{historyTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--history">
+												<h5>{historyTitle}</h5>
+											</div>
+										) : null}
+										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
+											{history.map((term, idx) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+														href={term.url.href}
+														{...createHoverProps(term.preview)}
+														role="link"
+														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
+													>
+														{emIfy(term.value, state.input || '')}
+													</a>
+												</div>
+											))}
+										</div>
+									</div>
+								) : null}
+							</>
+						)}
+					</div>
+				)}
+
+				{!hideFacets &&
+					(facetsSlot ? (
+						<div className="ss__autocomplete__facets">
+							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
+						</div>
+					) : (
+						facetsToShow.length > 0 && (
+							<>
+								{facetsTitle && vertical ? (
+									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+										<h5>{facetsTitle}</h5>
+									</div>
+								) : null}
+								<div className="ss__autocomplete__facets">
+									{facetsTitle && !vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 											<h5>{facetsTitle}</h5>
 										</div>
 									) : null}
-									<div className="ss__autocomplete__facets">
-										{facetsTitle && !vertical ? (
-											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-												<h5>{facetsTitle}</h5>
-											</div>
-										) : null}
-										<Facets {...subProps.facets} facets={facetsToShow} />
-										{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} /> : null}
+									<Facets {...subProps.facets} facets={facetsToShow} />
+									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} /> : null}
+								</div>
+							</>
+						)
+					))}
+
+				{!hideContent ? (
+					contentSlot ? (
+						<div className="ss__autocomplete__content">
+							{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+						</div>
+					) : showResults ? (
+						<div className="ss__autocomplete__content">
+							<>
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} /> : null}
+								{results.length > 0 ? (
+									<div className="ss__autocomplete__content__results">
+										{resultsSlot ? (
+											cloneWithProps(resultsSlot, { results, contentTitle, controller })
+										) : (
+											<>
+												{contentTitle && results.length > 0 ? (
+													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+														<h5>{contentTitle}</h5>
+													</div>
+												) : null}
+												<Results results={results} {...subProps.results} controller={controller} />
+											</>
+										)}
 									</div>
-								</>
-							)
-						))}
+								) : (
+									<div className="ss__autocomplete__content__no-results">
+										{noResultsSlot ? (
+											cloneWithProps(noResultsSlot, { search, pagination, controller })
+										) : (
+											<>
+												<p>No results found for "{search.originalQuery?.string || search.query?.string}".</p>
+												<p>Please try another search.</p>
+											</>
+										)}
+									</div>
+								)}
 
-					{!hideContent ? (
-						contentSlot ? (
-							<div className="ss__autocomplete__content">
-								{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller })}
-							</div>
-						) : showResults ? (
-							<div className="ss__autocomplete__content">
-								<>
-									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} /> : null}
-									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} /> : null}
-									{results.length > 0 ? (
-										<div className="ss__autocomplete__content__results">
-											{resultsSlot ? (
-												cloneWithProps(resultsSlot, { results, contentTitle, controller })
-											) : (
-												<>
-													{contentTitle && results.length > 0 ? (
-														<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-															<h5>{contentTitle}</h5>
-														</div>
-													) : null}
-													<Results results={results} {...subProps.results} controller={controller} />
-												</>
-											)}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} /> : null}
+
+								{!hideLink ? (
+									linkSlot ? (
+										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
+									) : search?.query?.string && results.length > 0 ? (
+										<div className="ss__autocomplete__content__info">
+											<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+												{search.query.string}"
+												<Icon name="seeMoreIcon" {...subProps.icon} />
+											</a>
 										</div>
-									) : (
-										<div className="ss__autocomplete__content__no-results">
-											{noResultsSlot ? (
-												cloneWithProps(noResultsSlot, { search, pagination, controller })
-											) : (
-												<>
-													<p>No results found for "{search.originalQuery?.string || search.query?.string}".</p>
-													<p>Please try another search.</p>
-												</>
-											)}
-										</div>
-									)}
-
-									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} /> : null}
-
-									{!hideLink ? (
-										linkSlot ? (
-											cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
-										) : search?.query?.string && results.length > 0 ? (
-											<div className="ss__autocomplete__content__info">
-												<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
-													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-													{search.query.string}"
-													<Icon name="seeMoreIcon" {...subProps.icon} />
-												</a>
-											</div>
-										) : null
-									) : null}
-								</>
-							</div>
-						) : null
-					) : null}
-				</div>
-			</CacheProvider>
-		</ThemeProvider>
+									) : null
+								) : null}
+							</>
+						</div>
+					) : null
+				) : null}
+			</div>
+		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
 	);

@@ -5,15 +5,14 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { combineMerge, defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, ListOption, ResultComponent, ResultsLayout, StylingCSS } from '../../../types';
-import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
-import { buildThemeBreakpointsObject, useDisplaySettings, useMediaQuery } from '../../../hooks';
-import deepmerge from 'deepmerge';
+import { useMediaQuery } from '../../../hooks';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
@@ -108,20 +107,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 	};
 
-	let props = mergeProps('search', globalTheme, defaultProps, properties);
-
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.search?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.search,
-		};
-		props.theme = realTheme;
-	}
+	const props = mergeProps('search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,
@@ -331,26 +317,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	};
 
 	return (
-		<ThemeProvider theme={properties.theme || {}}>
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__search', className)}>
-					{!hideSidebar && !isMobile && (
-						<div className="ss__search__sidebar-wrapper">
-							{toggleSidebarButtonText ? (
-								sidebarOpenState && (
-									<Fragment>
-										<Sidebar {...subProps.Sidebar} controller={controller} />
-										{layoutConfig?.options && !hideLayoutSelector && store.pagination.totalResults > 0 && (
-											<LayoutSelector
-												selected={layoutState}
-												onSelect={(e, option) => changeLayout(e, option as ListOption)}
-												options={layoutConfig?.options}
-											/>
-										)}
-										{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
-									</Fragment>
-								)
-							) : (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__search', className)}>
+				{!hideSidebar && !isMobile && (
+					<div className="ss__search__sidebar-wrapper">
+						{toggleSidebarButtonText ? (
+							sidebarOpenState && (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
 									{layoutConfig?.options && !hideLayoutSelector && store.pagination.totalResults > 0 && (
@@ -362,64 +334,72 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 									)}
 									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
 								</Fragment>
-							)}
-						</div>
-					)}
-					<div className={classnames('ss__search__content')}>
-						{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-
-						{layoutConfig?.options && store.pagination.totalResults > 0 && !hideLayoutSelector && (
-							<LayoutSelector
-								selected={layoutState}
-								onSelect={(e, option) => changeLayout(e, option as ListOption)}
-								options={layoutConfig?.options}
-							/>
-						)}
-
-						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
-						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
-
-						{toggleSidebarButtonText && (
-							<Button
-								onClick={() => setSidebarOpenState(!sidebarOpenState)}
-								className="ss__search__sidebar-wrapper-toggle"
-								name={'search__sidebar-wrapper-toggle-button'}
-								{...subProps.Button}
-							>
-								{toggleSidebarButtonText}
-							</Button>
-						)}
-
-						{!hideTopToolbar && store.pagination.totalResults > 0 && (
-							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
-						)}
-
-						{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
-
-						<div className="clear"></div>
-
-						{store.pagination.totalResults ? (
-							<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+							)
 						) : (
-							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
-						)}
-
-						{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
-
-						<div className="clear"></div>
-
-						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-							<Toolbar
-								{...subProps.BottomToolbar}
-								name={'bottomToolBar'}
-								className="ss__search__content__toolbar--bottom-toolbar"
-								controller={controller}
-							/>
+							<Fragment>
+								<Sidebar {...subProps.Sidebar} controller={controller} />
+								{layoutConfig?.options && !hideLayoutSelector && store.pagination.totalResults > 0 && (
+									<LayoutSelector
+										selected={layoutState}
+										onSelect={(e, option) => changeLayout(e, option as ListOption)}
+										options={layoutConfig?.options}
+									/>
+								)}
+								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+							</Fragment>
 						)}
 					</div>
+				)}
+				<div className={classnames('ss__search__content')}>
+					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
+
+					{layoutConfig?.options && store.pagination.totalResults > 0 && !hideLayoutSelector && (
+						<LayoutSelector selected={layoutState} onSelect={(e, option) => changeLayout(e, option as ListOption)} options={layoutConfig?.options} />
+					)}
+
+					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
+					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
+
+					{toggleSidebarButtonText && (
+						<Button
+							onClick={() => setSidebarOpenState(!sidebarOpenState)}
+							className="ss__search__sidebar-wrapper-toggle"
+							name={'search__sidebar-wrapper-toggle-button'}
+							{...subProps.Button}
+						>
+							{toggleSidebarButtonText}
+						</Button>
+					)}
+
+					{!hideTopToolbar && store.pagination.totalResults > 0 && (
+						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
+					)}
+
+					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+
+					<div className="clear"></div>
+
+					{store.pagination.totalResults ? (
+						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+					) : (
+						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
+					)}
+
+					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
+
+					<div className="clear"></div>
+
+					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
+						<Toolbar
+							{...subProps.BottomToolbar}
+							name={'bottomToolBar'}
+							className="ss__search__content__toolbar--bottom-toolbar"
+							controller={controller}
+						/>
+					)}
 				</div>
-			</CacheProvider>
-		</ThemeProvider>
+			</div>
+		</CacheProvider>
 	);
 });
 
@@ -431,20 +411,7 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 		mobileSidebarDisplayAt: '991px',
 	};
 
-	let props = mergeProps('search', globalTheme, defaultProps, properties);
-
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.search?.theme || {});
-		props = {
-			...props,
-			...props.theme.components?.search,
-		};
-		props.theme = realTheme;
-	}
+	const props = mergeProps('search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,
@@ -615,74 +582,72 @@ export const SearchTest = observer((properties: SearchProps): JSX.Element => {
 	const [sidebarOpenState, setSidebarOpenState] = useState(true);
 
 	return (
-		<ThemeProvider theme={properties.theme || {}}>
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__search', className)}>
-					{!hideSidebar && !isMobile && (
-						<div className="ss__search__sidebar-wrapper">
-							{toggleSidebarButtonText ? (
-								sidebarOpenState && (
-									<Fragment>
-										<Sidebar {...subProps.Sidebar} controller={controller} />
-										{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
-									</Fragment>
-								)
-							) : (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__search', className)}>
+				{!hideSidebar && !isMobile && (
+					<div className="ss__search__sidebar-wrapper">
+						{toggleSidebarButtonText ? (
+							sidebarOpenState && (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
 									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
 								</Fragment>
-							)}
-						</div>
-					)}
-					<div className={classnames('ss__search__content')}>
-						<h3>This is SearchTest</h3>
-						{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-
-						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
-						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
-
-						{toggleSidebarButtonText && (
-							<Button
-								onClick={() => setSidebarOpenState(!sidebarOpenState)}
-								className="ss__search__sidebar-wrapper-toggle"
-								name={'search__sidebar-wrapper-toggle-button'}
-								{...subProps.Button}
-							>
-								{toggleSidebarButtonText}
-							</Button>
-						)}
-
-						{!hideTopToolbar && store.pagination.totalResults > 0 && (
-							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--topToolBar" name={'topToolBar'} controller={controller} />
-						)}
-
-						{!hideMobileSidebar && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
-
-						<div className="clear"></div>
-
-						{store.pagination.totalResults ? (
-							<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+							)
 						) : (
-							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
-						)}
-
-						{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
-
-						<div className="clear"></div>
-
-						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-							<Toolbar
-								{...subProps.BottomToolbar}
-								name={'bottomToolBar'}
-								className="ss__search__content__toolbar--bottomToolBar"
-								controller={controller}
-							/>
+							<Fragment>
+								<Sidebar {...subProps.Sidebar} controller={controller} />
+								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+							</Fragment>
 						)}
 					</div>
+				)}
+				<div className={classnames('ss__search__content')}>
+					<h3>This is SearchTest</h3>
+					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
+
+					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
+					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
+
+					{toggleSidebarButtonText && (
+						<Button
+							onClick={() => setSidebarOpenState(!sidebarOpenState)}
+							className="ss__search__sidebar-wrapper-toggle"
+							name={'search__sidebar-wrapper-toggle-button'}
+							{...subProps.Button}
+						>
+							{toggleSidebarButtonText}
+						</Button>
+					)}
+
+					{!hideTopToolbar && store.pagination.totalResults > 0 && (
+						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--topToolBar" name={'topToolBar'} controller={controller} />
+					)}
+
+					{!hideMobileSidebar && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+
+					<div className="clear"></div>
+
+					{store.pagination.totalResults ? (
+						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+					) : (
+						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
+					)}
+
+					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
+
+					<div className="clear"></div>
+
+					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
+						<Toolbar
+							{...subProps.BottomToolbar}
+							name={'bottomToolBar'}
+							className="ss__search__content__toolbar--bottomToolBar"
+							controller={controller}
+						/>
+					)}
 				</div>
-			</CacheProvider>
-		</ThemeProvider>
+			</div>
+		</CacheProvider>
 	);
 });
 

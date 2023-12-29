@@ -80,16 +80,18 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 
 	let props = mergeProps('results', globalTheme, defaultProps, properties);
 
-	const displaySettings = useDisplaySettings(props?.breakpoints || {});
-	const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+	if (!properties.theme?.name) {
+		// breakpoint settings are calculated in ThemeStore for snap templates
+		const displaySettings = useDisplaySettings(props?.breakpoints || {});
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
-	props = {
-		...props,
-		...displaySettings,
-		theme,
-	};
-
-	const { disableStyles, resultComponent, className, layout, style, styleScript, controller } = props;
+	const { disableStyles, resultComponent, className, layout, style, theme, styleScript, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -146,7 +148,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								// TODO: wrap with SearchResultTracker component (need to create)
 								if (resultComponent && controller) {
 									const ResultComponent = resultComponent;
-									return <ResultComponent controller={controller} result={result} />;
+									return <ResultComponent controller={controller} result={result} theme={theme} />;
 								} else {
 									return (
 										<SearchResultTracker result={result} controller={controller as SearchController}>

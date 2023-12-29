@@ -3,7 +3,6 @@ import { h, Fragment, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import deepmerge from 'deepmerge';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
@@ -11,10 +10,10 @@ import type { SwiperOptions } from 'swiper';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { combineMerge, defined, mergeProps } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
+import { defined, mergeProps } from '../../../utilities';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
-import { buildThemeBreakpointsObject, useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 
@@ -41,22 +40,10 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
 	let displaySettings;
-	// handle responsive themes
-	if (properties.theme?.responsive) {
-		const breakpointsObj = buildThemeBreakpointsObject(properties.theme);
-		const displaySettings = useDisplaySettings(breakpointsObj || {});
 
-		props.theme = deepmerge(props?.theme || {}, displaySettings || {}, { arrayMerge: combineMerge });
-		const realTheme = deepmerge(props.theme || {}, props.theme.components?.recommendation?.theme || {});
+	if (!properties.theme?.name && props.breakpoints) {
+		// breakpoint settings are calculated in ThemeStore for snap templates
 
-		props = {
-			...props,
-			...props.theme?.components?.recommendation,
-		};
-		props.theme = realTheme;
-	}
-
-	if (props.breakpoints) {
 		displaySettings = useDisplaySettings(props.breakpoints);
 		if (displaySettings && Object.keys(displaySettings).length) {
 			// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
@@ -137,45 +124,43 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	}
 
 	return children || resultsToRender?.length ? (
-		<ThemeProvider theme={properties.theme || {}}>
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__recommendation', className)}>
-					<RecommendationProfileTracker controller={controller}>
-						{title && <h3 className="ss__recommendation__title">{title}</h3>}
-						<Carousel
-							prevButton={prevButton}
-							nextButton={nextButton}
-							hideButtons={hideButtons}
-							loop={loop}
-							pagination={pagination}
-							breakpoints={breakpoints}
-							{...subProps.carousel}
-							{...additionalProps}
-							{...displaySettings}
-						>
-							{Array.isArray(children) && children.length
-								? children.map((child: any, idx: number) => (
-										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-											{child}
-										</RecommendationResultTracker>
-								  ))
-								: resultsToRender.map((result) => (
-										<RecommendationResultTracker controller={controller} result={result}>
-											{(() => {
-												if (resultComponent && controller) {
-													const ResultComponent = resultComponent;
-													return <ResultComponent controller={controller} result={result} />;
-												} else {
-													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
-												}
-											})()}
-										</RecommendationResultTracker>
-								  ))}
-						</Carousel>
-					</RecommendationProfileTracker>
-				</div>
-			</CacheProvider>
-		</ThemeProvider>
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__recommendation', className)}>
+				<RecommendationProfileTracker controller={controller}>
+					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					<Carousel
+						prevButton={prevButton}
+						nextButton={nextButton}
+						hideButtons={hideButtons}
+						loop={loop}
+						pagination={pagination}
+						breakpoints={breakpoints}
+						{...subProps.carousel}
+						{...additionalProps}
+						{...displaySettings}
+					>
+						{Array.isArray(children) && children.length
+							? children.map((child: any, idx: number) => (
+									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+										{child}
+									</RecommendationResultTracker>
+							  ))
+							: resultsToRender.map((result) => (
+									<RecommendationResultTracker controller={controller} result={result}>
+										{(() => {
+											if (resultComponent && controller) {
+												const ResultComponent = resultComponent;
+												return <ResultComponent controller={controller} result={result} />;
+											} else {
+												return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
+											}
+										})()}
+									</RecommendationResultTracker>
+							  ))}
+					</Carousel>
+				</RecommendationProfileTracker>
+			</div>
+		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
 	);
