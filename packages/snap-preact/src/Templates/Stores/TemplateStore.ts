@@ -25,11 +25,14 @@ export type TemplatesStoreDependencies = {
 	storage: StorageStore;
 };
 
-const RESIZE_DEBOUNCE = 100;
+type WindowProperties = {
+	innerWidth: number;
+};
+
+const RESIZE_DEBOUNCE = 10;
 export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
-	editMode = false;
 	storage: StorageStore;
 	language: string;
 	currency: string;
@@ -53,7 +56,7 @@ export class TemplatesStore {
 
 	library: LibraryStore;
 
-	innerWidth?: number;
+	window: WindowProperties = { innerWidth: 0 };
 
 	constructor(config: SnapTemplatesConfig, settings: TemplatesStoreSettings) {
 		this.config = config;
@@ -83,6 +86,16 @@ export class TemplatesStore {
 		const importCurrency = this.library.import.currency[this.currency as keyof typeof this.library.import.currency]();
 		const importLanguage = this.library.import.language[this.language as keyof typeof this.library.import.language]();
 
+		// configure window properties and add event listeners
+		if (window) {
+			this.setInnerWidth(window.innerWidth);
+			const debouncedHandleResize = debounce(() => {
+				this.setInnerWidth(window.innerWidth);
+			}, RESIZE_DEBOUNCE);
+
+			window.addEventListener('resize', debouncedHandleResize);
+		}
+
 		// setup local themes
 		Object.keys(config.config.themes).map((themeKey) => {
 			const theme = config.config.themes[themeKey];
@@ -95,19 +108,9 @@ export class TemplatesStore {
 				const currency = this.library.locales.currencies[this.currency];
 				const language = this.library.locales.languages[this.language];
 
-				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language, innerWidth: this.innerWidth });
+				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language, innerWidth: this.window.innerWidth });
 			});
 		});
-
-		if (window) {
-			this.setInnerWidth(window.innerWidth);
-			const debouncedHandleResize = debounce(() => {
-				this.setInnerWidth(window.innerWidth);
-			}, RESIZE_DEBOUNCE);
-
-			window.removeEventListener('resize', debouncedHandleResize);
-			window.addEventListener('resize', debouncedHandleResize);
-		}
 
 		makeObservable(this, {
 			loading: observable,
@@ -144,17 +147,17 @@ export class TemplatesStore {
 		themeLocation[config.name] = theme;
 	}
 
-	public setInnerWidth(innerWidth: number) {
-		if (this.innerWidth === innerWidth) return;
+	private setInnerWidth(innerWidth: number) {
+		if (this.window.innerWidth === innerWidth) return;
 
-		this.innerWidth = innerWidth;
+		this.window.innerWidth = innerWidth;
 		for (const themeName in this.themes.local) {
 			const theme = this.themes.local[themeName];
-			theme.setInnerWidth(this.innerWidth);
+			theme.setInnerWidth(this.window.innerWidth);
 		}
 		for (const themeName in this.themes.library) {
 			const theme = this.themes.library[themeName];
-			theme.setInnerWidth(this.innerWidth);
+			theme.setInnerWidth(this.window.innerWidth);
 		}
 	}
 
@@ -213,7 +216,7 @@ export class TemplatesStore {
 				base: theme,
 				language: this.library.locales.languages[this.language],
 				currency: this.library.locales.currencies[this.currency],
-				innerWidth: this.innerWidth,
+				innerWidth: this.window.innerWidth,
 			});
 		}
 		this.loading = false;

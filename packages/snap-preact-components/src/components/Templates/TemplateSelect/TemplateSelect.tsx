@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { observer } from 'mobx-react-lite';
 import { jsx } from '@emotion/react';
+import { ThemeProvider } from '../../../providers';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
 	const { templatesStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
@@ -11,7 +12,15 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	const theme = themeLocation && themeLocation[targeter.theme.name]?.theme;
 
 	// ensuring that theme and component are
-	return !loading && theme && Component && <Component controller={controller} theme={theme} resultComponent={resultComponent} {...otherProps} />;
+	return (
+		!loading &&
+		theme &&
+		Component && (
+			<ThemeProvider theme={theme}>
+				<Component controller={controller} resultComponent={resultComponent} {...otherProps} />
+			</ThemeProvider>
+		)
+	);
 });
 export interface TemplateSelectProps {
 	templatesStore: any;

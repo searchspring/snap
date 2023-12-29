@@ -57,9 +57,10 @@ export class ThemeStore {
 	public get theme(): Theme {
 		let baseBreakpoint = {};
 		let overrideBreakpoint = {};
-		if (this.innerWidth) {
+		if (this.innerWidth && Number.isInteger(this.innerWidth)) {
 			const breakpoints = (this.variables.breakpoints || this.base.variables?.breakpoints) as number[];
 			const breakpoint = breakpoints.find((breakpoint) => this.innerWidth! < breakpoint);
+
 			if (breakpoint) {
 				const breakpointIndex = breakpoints.indexOf(breakpoint);
 				const responsiveIndex = Math.max(breakpointIndex - 1, 0); // index 0 also applies to under first breakpoint

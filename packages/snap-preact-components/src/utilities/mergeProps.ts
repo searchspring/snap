@@ -41,16 +41,18 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		mergedProps = mergeThemeProps(componentName, themeComponent, mergedProps) as Partial<GenericComponentProps>;
 	}
 
-	// put additional theme properties back onto the theme (without components)
+	// put additional theme properties back onto the theme
 	const globalThemeProperties = {
 		...globalTheme,
 	};
 	delete globalThemeProperties.components;
+	delete globalThemeProperties.responsive;
 
 	const themeProperties = {
 		...theme,
 	};
 	delete themeProperties.components;
+	delete themeProperties.responsive;
 
 	mergedProps = {
 		...mergedProps,

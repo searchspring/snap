@@ -11,7 +11,7 @@ import type { SwiperOptions } from 'swiper';
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, ThemeProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
@@ -124,45 +124,43 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	}
 
 	return children || resultsToRender?.length ? (
-		<ThemeProvider theme={properties.theme || {}}>
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__recommendation', className)}>
-					<RecommendationProfileTracker controller={controller}>
-						{title && <h3 className="ss__recommendation__title">{title}</h3>}
-						<Carousel
-							prevButton={prevButton}
-							nextButton={nextButton}
-							hideButtons={hideButtons}
-							loop={loop}
-							pagination={pagination}
-							breakpoints={breakpoints}
-							{...subProps.carousel}
-							{...additionalProps}
-							{...displaySettings}
-						>
-							{Array.isArray(children) && children.length
-								? children.map((child: any, idx: number) => (
-										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-											{child}
-										</RecommendationResultTracker>
-								  ))
-								: resultsToRender.map((result) => (
-										<RecommendationResultTracker controller={controller} result={result}>
-											{(() => {
-												if (resultComponent && controller) {
-													const ResultComponent = resultComponent;
-													return <ResultComponent controller={controller} result={result} />;
-												} else {
-													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
-												}
-											})()}
-										</RecommendationResultTracker>
-								  ))}
-						</Carousel>
-					</RecommendationProfileTracker>
-				</div>
-			</CacheProvider>
-		</ThemeProvider>
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__recommendation', className)}>
+				<RecommendationProfileTracker controller={controller}>
+					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					<Carousel
+						prevButton={prevButton}
+						nextButton={nextButton}
+						hideButtons={hideButtons}
+						loop={loop}
+						pagination={pagination}
+						breakpoints={breakpoints}
+						{...subProps.carousel}
+						{...additionalProps}
+						{...displaySettings}
+					>
+						{Array.isArray(children) && children.length
+							? children.map((child: any, idx: number) => (
+									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+										{child}
+									</RecommendationResultTracker>
+							  ))
+							: resultsToRender.map((result) => (
+									<RecommendationResultTracker controller={controller} result={result}>
+										{(() => {
+											if (resultComponent && controller) {
+												const ResultComponent = resultComponent;
+												return <ResultComponent controller={controller} result={result} />;
+											} else {
+												return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
+											}
+										})()}
+									</RecommendationResultTracker>
+							  ))}
+					</Carousel>
+				</RecommendationProfileTracker>
+			</div>
+		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
 	);
