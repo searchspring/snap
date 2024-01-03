@@ -5,6 +5,10 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		boxSizing: 'border-box',
+		width: '320px',
+		paddingInlineEnd: '60px',
+
 		'& .ss__sidebar__title': {
 			color: variables?.color?.primary,
 		},

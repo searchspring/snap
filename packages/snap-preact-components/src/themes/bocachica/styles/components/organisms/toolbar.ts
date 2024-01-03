@@ -5,7 +5,14 @@ const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		display: 'flex',
+		justifyContent: 'space-between',
+
+		'&.ss__search__content__toolbar--bottom-toolbar': {
+			justifyContent: 'center',
+		},
+	});
 };
 
 // Toolbar component props

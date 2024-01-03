@@ -164,6 +164,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 2,
 				},
+				toolbar: {
+					named: {
+						topToolBar: {
+							hidePagination: true,
+						},
+					},
+				},
 				autocomplete: {
 					hideFacets: true,
 					vertical: true,
@@ -184,6 +191,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 2,
 				},
+				toolbar: {
+					named: {
+						topToolBar: {
+							hidePagination: true,
+						},
+					},
+				},
 				autocomplete: {
 					hideFacets: true,
 					vertical: true,
@@ -193,12 +207,6 @@ export const bocachica: Theme = {
 							results: {
 								rows: 1,
 								columns: 3,
-							},
-							facets: {
-								limit: 3,
-							},
-							facet: {
-								limit: 3,
 							},
 						},
 					},
@@ -210,6 +218,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 3,
 				},
+				toolbar: {
+					named: {
+						topToolBar: {
+							hidePagination: true,
+						},
+					},
+				},
 				autocomplete: {
 					vertical: true,
 					horizontalTerms: true,
@@ -220,7 +235,6 @@ export const bocachica: Theme = {
 								columns: 4,
 							},
 							facets: {
-								limit: 3,
 								style: {
 									// horizontal facets
 									width: '100%',
@@ -229,11 +243,6 @@ export const bocachica: Theme = {
 							},
 							facet: {
 								limit: 4,
-								disableCollapse: true,
-								disableOverflow: true,
-							},
-							image: {
-								lazy: false,
 							},
 						},
 					},
@@ -245,23 +254,19 @@ export const bocachica: Theme = {
 				results: {
 					columns: 4,
 				},
+				toolbar: {
+					named: {
+						topToolBar: {
+							hidePagination: true,
+						},
+					},
+				},
 				autocomplete: {
 					theme: {
 						components: {
 							results: {
 								rows: 2,
 								columns: 3,
-							},
-							facets: {
-								limit: 3,
-							},
-							facet: {
-								limit: 5,
-								disableCollapse: true,
-								disableOverflow: true,
-							},
-							image: {
-								lazy: false,
 							},
 						},
 					},

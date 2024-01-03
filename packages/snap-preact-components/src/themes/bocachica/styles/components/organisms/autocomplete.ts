@@ -30,6 +30,7 @@ const autocompleteStyleScript = ({
 		maxWidth: '100vw',
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 		overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
+		padding: '0 20px',
 
 		'&.ss__autocomplete--only-terms': {
 			width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
@@ -58,21 +59,21 @@ const autocompleteStyleScript = ({
 			maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
 			minWidth: '150px',
 			order: 1,
-			background: '#f8f8f8',
+			background: '#fff',
+			borderBottom: vertical ? `1px solid ${variables?.color?.primary || '#333'}` : undefined,
 
 			'& .ss__autocomplete__terms__options': {
 				display: vertical || horizontalTerms ? 'flex' : undefined,
-				justifyContent: 'space-evenly',
 				flexWrap: 'wrap',
 
 				'& .ss__autocomplete__terms__option': {
-					flexGrow: vertical || horizontalTerms ? '1' : undefined,
 					textAlign: vertical || horizontalTerms ? 'center' : undefined,
 					wordBreak: 'break-all',
 
 					'& a': {
 						display: 'block',
-						padding: vertical || horizontalTerms ? '10px 30px' : '10px',
+						padding: '10px',
+						color: variables?.color?.primary,
 
 						'& em': {
 							fontStyle: 'normal',
@@ -80,11 +81,8 @@ const autocompleteStyleScript = ({
 					},
 
 					'&.ss__autocomplete__terms__option--active': {
-						background: variables?.color?.active?.background || '#fff',
-
 						'& a': {
 							fontWeight: 'bold',
-							color: variables?.color?.active?.foreground,
 						},
 					},
 				},
@@ -93,12 +91,26 @@ const autocompleteStyleScript = ({
 
 		'& .ss__autocomplete__facets': {
 			display: 'flex',
-			flex: `0 0 200px`,
+			flex: `0 0 ${vertical ? 'auto' : '200px'}`,
 			flexDirection: vertical ? 'row' : 'column',
 			columnGap: '20px',
 			order: 2,
 			padding: vertical ? '10px 20px' : '10px',
 			overflowY: vertical ? undefined : 'auto',
+			borderBottom: vertical ? `1px solid ${variables?.color?.primary || '#333'}` : undefined,
+
+			'& .ss__facet-palette-options, .ss__facet-grid-options': {
+				gridTemplateColumns: 'repeat(auto-fill, minmax(36px, 1fr))',
+			},
+
+			'& .ss__facet': {
+				margin: vertical ? '0 20px 0 0' : undefined,
+			},
+
+			'& .ss__facet__header': {
+				color: variables?.color?.primary,
+				textTransform: 'uppercase',
+			},
 
 			'& .ss__facet__options': {
 				maxHeight: '250px',
@@ -142,11 +154,12 @@ const autocompleteStyleScript = ({
 			},
 			'& .ss__autocomplete__content__info': {
 				padding: '10px',
-				textAlign: noResults ? 'center' : 'right',
+				textAlign: noResults ? 'center' : 'left',
 
 				'& a': {
 					fontWeight: 'bold',
-					color: variables?.color?.secondary,
+					textTransform: 'uppercase',
+					color: variables?.color?.primary,
 
 					'& .ss__icon': {
 						marginLeft: '5px',
@@ -167,8 +180,11 @@ export const autocomplete: Partial<AutocompleteProps> = {
 				disableOverflow: true,
 				disableCollapse: true,
 			},
+			facets: {
+				limit: 3,
+			},
 			facetGridOptions: {
-				columns: 3,
+				columns: 4,
 			},
 			facetHierarchyOptions: {
 				hideCount: true,
