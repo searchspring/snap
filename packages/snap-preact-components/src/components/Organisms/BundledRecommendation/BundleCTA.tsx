@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
 import { Price } from '../../Atoms/Price';
-import type { selectedItem } from './BundledRecommendation';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
 	const { ctaSlot, selectedItems, bundlePrice, bundleStrikePrice, onAddToCartClick, addToCartText } = properties;
@@ -23,7 +23,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 					selectedItems: selectedItems,
 					bundlePrice: bundlePrice,
 					bundleStrikePrice: bundleStrikePrice,
-					onAddToCartClick: (e: any) => onAddToCartClick(e),
+					onAddToCartClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => onAddToCartClick(e),
 				})
 			) : (
 				<Fragment>
@@ -52,9 +52,9 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 interface BundledCTAProps {
 	ctaSlot?: JSX.Element;
-	selectedItems: selectedItem[];
+	selectedItems: Product[];
 	bundlePrice: number;
 	bundleStrikePrice?: number;
-	onAddToCartClick: (e: any) => void;
+	onAddToCartClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	addToCartText?: string;
 }

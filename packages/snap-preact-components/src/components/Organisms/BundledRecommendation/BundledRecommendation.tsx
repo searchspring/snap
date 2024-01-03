@@ -149,7 +149,6 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 	let props: BundledRecommendationProps = {
 		// default props
 		breakpoints: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
-		// pagination: false,
 		showCheckboxes: true,
 		seperatorIcon: 'plus-thin',
 		seedText: 'Seed Product',
@@ -469,7 +468,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 export interface BundledRecommendationProps extends ComponentProps {
 	results?: Product[];
 	controller: RecommendationController;
-	onAddToCart: (items: selectedItem[]) => void;
+	onAddToCart: (items: Product[]) => void;
 	addToCartButtonText?: string;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
@@ -494,9 +493,4 @@ export interface BundledRecommendationProps extends ComponentProps {
 interface BundleRecommendationSubProps {
 	result: Partial<ResultProps>;
 	carousel: Partial<CarouselProps>;
-}
-
-export interface selectedItem {
-	id: string;
-	quantity: number;
 }
