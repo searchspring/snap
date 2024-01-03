@@ -10,11 +10,6 @@ import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
-export interface SelectedBundleItem {
-	id: string;
-	quantity: number;
-}
-
 type RecommendationTrackMethods = {
 	product: {
 		click: (e: MouseEvent, result: any) => BeaconEvent | undefined;
@@ -22,7 +17,7 @@ type RecommendationTrackMethods = {
 		impression: (result: any) => BeaconEvent | undefined;
 	};
 	click: (e: MouseEvent) => BeaconEvent | undefined;
-	addBundleToCart: (e: MouseEvent, results: SelectedBundleItem[], price: number) => BeaconEvent | undefined;
+	addBundleToCart: (e: MouseEvent, results: Product[], price: number) => BeaconEvent | undefined;
 	impression: () => BeaconEvent | undefined;
 	render: (results?: Product[]) => BeaconEvent | undefined;
 };
@@ -212,7 +207,7 @@ export class RecommendationController extends AbstractController {
 					return event;
 				},
 			},
-			addBundleToCart: (e: MouseEvent, results: SelectedBundleItem[], price: number): BeaconEvent | undefined => {
+			addBundleToCart: (e: MouseEvent, results: Product[], price: number): BeaconEvent | undefined => {
 				if (!this.store.profile.tag) return;
 				const event: BeaconEvent = this.tracker.track.event({
 					type: BeaconType.PROFILE_CLICK,
