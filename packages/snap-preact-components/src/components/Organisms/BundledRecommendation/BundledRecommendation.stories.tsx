@@ -78,8 +78,8 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		addToCartText: {
-			description: 'Text to render in add to cart button. ',
+		addToCartButtonText: {
+			description: 'Text to render in add to cart button',
 			table: {
 				type: {
 					summary: 'string',
@@ -156,7 +156,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		seedText: {
-			description: 'Text to render in seed product badge.',
+			description: 'Text to render in seed product badge',
 			table: {
 				type: {
 					summary: 'string',
@@ -165,8 +165,8 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		seedIconOnly: {
-			description: 'boolean to only have seperator Icon for the seed product.',
+		seedSeparatorIconOnly: {
+			description: 'boolean to only have seperator Icon for the seed product',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -189,25 +189,24 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
-		mobileMediaQuery: {
-			defaultValue: '(max-width: 650px)',
-			description: 'Media query for when to enable the mobile display',
+		stackedCTA: {
+			description: 'boolean to enable the stacked add to cart button display',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'boolean',
 				},
-				defaultValue: { summary: '(max-width: 650px)' },
+				defaultValue: { summary: false },
 			},
-			control: { type: 'text' },
+			control: { type: 'boolean' },
 		},
-		peekabooEnableAt: {
+		peekaboo: {
 			defaultValue: '',
-			description: 'Media query for when to enable the peekaboo carousel',
+			description: 'boolean to enable the peekaboo carousel',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'boolean',
 				},
-				defaultValue: { summary: '' },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'text' },
 		},

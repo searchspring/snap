@@ -200,7 +200,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
 
 		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView!) {
 			displaySettings.slidesPerView = props.children.length;
@@ -292,9 +292,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		const slides_visible = swiperElem?.querySelectorAll('.swiper-slide-visible');
 
 		slides_visible.forEach((element, idx) => {
-			element.classList.remove('last-visible-slide');
+			element.classList.remove('swiper-last-visible-slide');
 			if (idx == slides_visible.length - 1) {
-				element.classList.add('last-visible-slide');
+				element.classList.add('swiper-last-visible-slide');
 			}
 		});
 	};
@@ -323,6 +323,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+					}}
+					onInit={(swiper) => {
 						if (onInit) {
 							onInit(swiper);
 						}

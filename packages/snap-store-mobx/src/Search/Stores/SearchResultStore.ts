@@ -78,7 +78,7 @@ export class Product {
 	public children?: Array<Child> = [];
 	public quantity = 1;
 	public setQuantity = (quantity: number) => {
-		this.quantity = Number(quantity) || 1;
+		this.quantity = Number(quantity);
 	};
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {

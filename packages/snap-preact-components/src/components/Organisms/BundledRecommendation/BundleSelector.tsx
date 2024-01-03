@@ -23,14 +23,13 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
-			className: 'ss__bundled-recommendations__product-wrapper__selector__icon',
-			color: 'black',
+			className: 'ss__bundled-recommendations__wrapper__selector__icon',
 			size: 15,
 			// global theme
 			...globalTheme?.components?.icon,
 		},
 		checkbox: {
-			className: 'ss__bundled-recommendations__product-wrapper__selector__result-wrapper__checkbox',
+			className: 'ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox',
 			checked: checked,
 			onClick: onCheck,
 			...globalTheme?.components?.checkbox,
@@ -39,20 +38,17 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	return (
 		<div
-			className={classnames(
-				'ss__bundled-recommendations__product-wrapper__selector',
-				seedText ? 'ss__bundled-recommendations__product-wrapper__selector--seed' : ''
-			)}
+			className={classnames('ss__bundled-recommendations__wrapper__selector', seedText ? 'ss__bundled-recommendations__wrapper__selector--seed' : '')}
 		>
-			<div className="ss__bundled-recommendations__product-wrapper__selector__result-wrapper">
+			<div className="ss__bundled-recommendations__wrapper__selector__result-wrapper">
 				{showCheckboxes && <Checkbox {...subProps.checkbox} />}
-				{seedText && <div className={'ss__bundled-recommendations__product-wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
+				{seedText && <div className={'ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
 				{typeof quantity == 'number' && (
-					<div className="ss__bundled-recommendations__product-wrapper__selector__qty">
+					<div className="ss__bundled-recommendations__wrapper__selector__qty">
 						{qtyText}
 						<input
-							className="ss__bundled-recommendations__product-wrapper__selector__qty__input"
+							className="ss__bundled-recommendations__wrapper__selector__qty__input"
 							onChange={onInputChange}
 							aria-label="Product Quantity"
 							type="number"

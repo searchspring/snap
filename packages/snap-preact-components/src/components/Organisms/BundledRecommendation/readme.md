@@ -32,11 +32,11 @@ The `results` prop specifies a reference to the results store array to use inste
 <BundledRecommendations controller={controller} results={controller.store.results} />
 ```
 
-### addToCartText
-The `addToCartText` prop specifies the inner text to render in the add to cart button.
+### addToCartButtonText
+The `addToCartButtonText` prop specifies the inner text to render in the add to cart button.
 
 ```jsx
-<BundledRecommendations controller={controller} addToCartText={'Add Bundle'} />
+<BundledRecommendations controller={controller} addToCartButtonText={'Add Bundle'} />
 ```
 
 ### title
@@ -111,25 +111,25 @@ The `seperatorIcon` prop specifies the icon to render between products. Takes an
 <BundledRecommendations controller={controller} seperatorIcon={'cog'} />
 ```
 
-### seedIconOnly
-The `seedIconOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
+### seedSeparatorIconOnly
+The `seedSeparatorIconOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
 
 ```jsx
-<BundledRecommendations controller={controller} seedIconOnly={true} />
+<BundledRecommendations controller={controller} seedSeparatorIconOnly={true} />
 ```
 
-### mobileMediaQuery
-The `mobileMediaQuery` prop specifies a media query for when to enable the mobile display.
+### stackedCTA
+The `stackedCTA` prop specifies if the add to cart display should be block or inline witht the carousel.
 
 ```jsx
-<BundledRecommendations controller={controller} mobileMediaQuery={`(max-width: 650px)`} />
+<BundledRecommendations controller={controller} stackedCTA={true} />
 ```
 
-### peekabooEnableAt
-The `peekabooEnableAt` prop specifies a media query for when to enable the peek-a-boo display in the carousel.
+### peekaboo
+The `peekaboo` prop enables the peek-a-boo display in the carousel.
 
 ```jsx
-<BundledRecommendations controller={controller} peekabooEnableAt={`(max-width: 650px)`} />
+<BundledRecommendations controller={controller} peekaboo={true} />
 ```
 
 ### showQuantityPicker
