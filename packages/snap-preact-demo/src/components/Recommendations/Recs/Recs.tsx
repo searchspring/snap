@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
-// import { Button, Result,  Icon, Checkbox, BundledRecommendations, BundledRecommendationsProps } from '@searchspring/snap-preact-components';
+// import { Button, Result,  Icon, Checkbox, BundledRecommendation, BundledRecommendationProps } from '@searchspring/snap-preact-components';
 
 type RecsProps = {
 	controller?: RecommendationController;
@@ -61,7 +61,7 @@ export class Recs extends Component<RecsProps> {
 		// 	)
 		// };
 
-		// const props: BundledRecommendationsProps = {
+		// const props: BundledRecommendationProps = {
 		// 	// preselectedCount: 0,
 		// 	// seedChecked: false,
 		// 	controller: controller,
@@ -91,7 +91,7 @@ export class Recs extends Component<RecsProps> {
 				</Carousel>
 
 				<hr style={{ margin: '20px 0' }} />
-				{/* <BundledRecommendations {...props} /> */}
+				{/* <BundledRecommendation {...props} /> */}
 				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
 					{store.results.map((result) => (
 						<Result result={result}></Result>

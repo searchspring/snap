@@ -288,15 +288,17 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	}
 
 	const attachClasstoLastVisibleSlide = () => {
-		const swiperElem = rootComponentRef.current as unknown as HTMLElement;
-		const slides_visible = swiperElem?.querySelectorAll('.swiper-slide-visible');
+		if (rootComponentRef.current) {
+			const swiperElem: HTMLElement = rootComponentRef.current;
+			const slides_visible = swiperElem?.querySelectorAll('.swiper-slide-visible');
 
-		slides_visible.forEach((element, idx) => {
-			element.classList.remove('swiper-last-visible-slide');
-			if (idx == slides_visible.length - 1) {
-				element.classList.add('swiper-last-visible-slide');
-			}
-		});
+			slides_visible.forEach((element, idx) => {
+				element.classList.remove('swiper-last-visible-slide');
+				if (idx == slides_visible.length - 1) {
+					element.classList.add('swiper-last-visible-slide');
+				}
+			});
+		}
 	};
 
 	return children?.length ? (
