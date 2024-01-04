@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0](https://github.com/searchspring/snap/compare/v0.49.1...v0.50.0) (2024-01-04)
+
+### Bug Fixes
+
+- **preact-demo:** adding support for all lowercase `siteid` parameter ([d1a49da](https://github.com/searchspring/snap/commit/d1a49da025970b45f526e89b0555f1a5f3d09f8c))
+
 ## [0.49.1](https://github.com/searchspring/snap/compare/v0.49.0...v0.49.1) (2023-11-03)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
