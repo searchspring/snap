@@ -1,4 +1,4 @@
-/*! For license information please see main.88a5214e.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.006c8867.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -26330,6 +26330,8 @@
 							_this$config$settings10,
 							_this,
 							_ref9,
+							_this$config$settings11,
+							_this$config$settings12,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -26924,12 +26926,12 @@
 							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
 							void 0 !== _this$config$settings10 &&
 							_this$config$settings10.enabled) &&
-							_this.eventManager.on('restorePosition', function (_x7, _x8) {
+							(_this.eventManager.on('restorePosition', function (_x7, _x8) {
 								return (_ref9 =
 									_ref9 ||
 									SearchController_asyncToGenerator(
 										SearchController_regeneratorRuntime().mark(function _callee6(_ref8, next) {
-											var controller, element, scrollToPosition;
+											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
 											return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
@@ -26937,6 +26939,12 @@
 															if (
 																((controller = _ref8.controller),
 																(element = _ref8.element),
+																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
+																	((lastRequest = _this.storage.get('lastStringyParams')) &&
+																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
+																		(stringyParams = JSON.stringify(storableRequestParams)),
+																		(scrollMap = _this.storage.get('scrollMap') || {}),
+																		(element = scrollMap[stringyParams]))),
 																(scrollToPosition = function scrollToPosition() {
 																	var _ref10;
 																	return new Promise(function (_x9) {
@@ -26944,7 +26952,14 @@
 																			_ref10 ||
 																			SearchController_asyncToGenerator(
 																				SearchController_regeneratorRuntime().mark(function _callee5(resolve) {
-																					var checkTime, maxScrolls, maxCheckCount, scrollBackCount, checkCount, scrolledElem, checkAndScroll;
+																					var checkTime,
+																						maxScrolls,
+																						maxCheckCount,
+																						scrollBackCount,
+																						checkCount,
+																						scrolledElem,
+																						checkAndScroll,
+																						_element4;
 																					return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
 																						for (;;)
 																							switch ((_context5.prev = _context5.next)) {
@@ -26958,14 +26973,19 @@
 																										(scrolledElem = void 0),
 																										(checkAndScroll = function checkAndScroll() {
 																											for (
-																												var _element$domRect,
+																												var _element2,
+																													_element2$domRect,
+																													_element3,
 																													offset =
-																														(null == element ||
-																														null === (_element$domRect = element.domRect) ||
-																														void 0 === _element$domRect
+																														(null === (_element2 = element) ||
+																														void 0 === _element2 ||
+																														null === (_element2$domRect = _element2.domRect) ||
+																														void 0 === _element2$domRect
 																															? void 0
-																															: _element$domRect.top) || 0,
-																													elem = document.querySelector(null == element ? void 0 : element.selector);
+																															: _element2$domRect.top) || 0,
+																													elem = document.querySelector(
+																														null === (_element3 = element) || void 0 === _element3 ? void 0 : _element3.selector
+																													);
 																												elem && !elem.getBoundingClientRect().height;
 
 																											)
@@ -26996,7 +27016,7 @@
 																										? controller.log.debug('restored position to: ', scrolledElem)
 																										: controller.log.debug(
 																												'attempted to scroll back to element with selector: ',
-																												null == element ? void 0 : element.selector
+																												null === (_element4 = element) || void 0 === _element4 ? void 0 : _element4.selector
 																										  ),
 																										resolve();
 																								case 15:
@@ -27010,20 +27030,28 @@
 																}),
 																!element)
 															) {
-																_context6.next = 5;
+																_context6.next = 6;
 																break;
 															}
-															return (_context6.next = 5), scrollToPosition();
-														case 5:
-															return (_context6.next = 7), next();
-														case 7:
+															return (_context6.next = 6), scrollToPosition();
+														case 6:
+															return (_context6.next = 8), next();
+														case 8:
 														case 'end':
 															return _context6.stop();
 													}
 											}, _callee6);
 										})
 									)).apply(this, arguments);
-							});
+							}),
+							null !== (_this$config$settings11 = _this.config.settings) &&
+								void 0 !== _this$config$settings11 &&
+								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
+								void 0 !== _this$config$settings12 &&
+								_this$config$settings12.onPageShow &&
+								window.addEventListener('pageshow', function () {
+									_this.eventManager.fire('restorePosition', { controller: _assertThisInitialized(_this), element: {} });
+								}));
 						return _this.use(_this.config), _this;
 					}
 					return (
@@ -27038,16 +27066,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings11,
-										_this$config$settings12,
+									var _this$config$settings13,
+										_this$config$settings14,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings11 = this.config.settings) &&
-										void 0 !== _this$config$settings11 &&
-										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
-										void 0 !== _this$config$settings12 &&
-										_this$config$settings12.merchandising &&
+									(null !== (_this$config$settings13 = this.config.settings) &&
+										void 0 !== _this$config$settings13 &&
+										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
+										void 0 !== _this$config$settings14 &&
+										_this$config$settings14.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -40494,7 +40522,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.49.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.50.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40993,7 +41021,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.49.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.50.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
