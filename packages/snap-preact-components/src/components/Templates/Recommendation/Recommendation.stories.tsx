@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Recommendation, RecommendationProps } from './Recommendation';
 import { componentArgs } from '../../../utilities';
@@ -12,7 +12,6 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 
 export default {
-	title: `Organisms/Recommendation`,
 	component: Recommendation,
 	parameters: {
 		docs: {

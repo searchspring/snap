@@ -1,14 +1,12 @@
-/** @jsx h */
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Skeleton, SkeletonProps } from './Skeleton';
 import Readme from '../Skeleton/readme.md';
 
 export default {
-	title: `Atoms/Skeleton`,
 	component: Skeleton,
 	parameters: {
 		docs: {

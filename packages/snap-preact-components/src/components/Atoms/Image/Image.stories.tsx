@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Image, FALLBACK_IMAGE_URL, ImageProps } from './Image';
 import { componentArgs } from '../../../utilities';
@@ -20,7 +20,6 @@ const searchResponse = {
 import Readme from '../Image/readme.md';
 
 export default {
-	title: `Atoms/Image`,
 	component: Image,
 	parameters: {
 		docs: {

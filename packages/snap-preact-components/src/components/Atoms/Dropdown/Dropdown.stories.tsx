@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Dropdown, DropdownProps } from './Dropdown';
 import { componentArgs } from '../../../utilities';
@@ -8,7 +8,6 @@ import Readme from '../Dropdown/readme.md';
 import { Badge } from '../Badge/Badge';
 
 export default {
-	title: `Atoms/Dropdown`,
 	component: Dropdown,
 	parameters: {
 		docs: {

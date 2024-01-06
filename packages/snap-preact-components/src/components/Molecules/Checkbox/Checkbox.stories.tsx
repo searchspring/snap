@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Checkbox, CheckboxProps } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
@@ -8,7 +8,6 @@ import { componentArgs } from '../../../utilities';
 import Readme from '../Checkbox/readme.md';
 
 export default {
-	title: `Molecules/Checkbox`,
 	component: Checkbox,
 	parameters: {
 		docs: {

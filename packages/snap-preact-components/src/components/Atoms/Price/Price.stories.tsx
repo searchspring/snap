@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Price, PriceProps } from './Price';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Price/readme.md';
 
 export default {
-	title: `Atoms/Price`,
 	component: Price,
 	parameters: {
 		docs: {

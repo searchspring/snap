@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h } from 'preact';
 import { useState, StateUpdater } from 'preact/hooks';
 

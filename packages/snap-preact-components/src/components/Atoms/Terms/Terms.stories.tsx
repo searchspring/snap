@@ -1,7 +1,6 @@
-/** @jsx h */
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Terms, TermsProps } from './Terms';
@@ -10,7 +9,6 @@ import { AutocompleteController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: `Atoms/Terms`,
 	component: Terms,
 	parameters: {
 		docs: {

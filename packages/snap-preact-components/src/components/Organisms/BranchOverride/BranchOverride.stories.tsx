@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { BranchOverride, BranchOverrideProps } from './BranchOverride';
 import { componentArgs } from '../../../utilities';
 import Readme from '../BranchOverride/readme.md';
 
 export default {
-	title: `Organisms/BranchOverride`,
 	component: BranchOverride,
 	parameters: {
 		docs: {

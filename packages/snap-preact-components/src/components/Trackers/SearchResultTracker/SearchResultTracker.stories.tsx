@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { SearchResultTracker, SearchResultTrackerProps } from './SearchResultTracker';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Result } from '../../Molecules/Result';
 
 export default {
-	title: `Trackers/SearchResultTracker`,
 	component: SearchResultTracker,
 	parameters: {
 		docs: {

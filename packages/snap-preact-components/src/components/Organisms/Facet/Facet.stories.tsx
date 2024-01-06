@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Facet, FacetProps } from './Facet';
 import { iconPaths } from '../../Atoms/Icon';
@@ -12,7 +12,6 @@ import Readme from '../Facet/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Facet`,
 	component: Facet,
 	parameters: {
 		docs: {

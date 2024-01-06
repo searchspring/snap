@@ -5,11 +5,11 @@
 		"sourceMap": true,
 		"declaration": false,
 		"declarationMap": false,
-		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
 		"experimentalDecorators": true,
 		"useDefineForClassFields": true,
 		"strict": false,
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
 	},
 	"include": [
 		"src"

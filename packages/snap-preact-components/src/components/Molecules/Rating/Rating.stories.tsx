@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
@@ -8,7 +8,6 @@ import { Rating, RatingProps } from './Rating';
 import { iconPaths } from '../../Atoms/Icon';
 
 export default {
-	title: `Molecules/Rating`,
 	component: Rating,
 	parameters: {
 		docs: {

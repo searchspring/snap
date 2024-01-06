@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Autocomplete, AutocompleteProps } from './Autocomplete';
 import { componentArgs } from '../../../utilities';
@@ -9,7 +9,6 @@ import Readme from '../Autocomplete/readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Autocomplete`,
 	component: Autocomplete,
 	parameters: {
 		docs: {

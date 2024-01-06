@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Select, SelectProps } from './Select';
 import { componentArgs } from '../../../utilities';
@@ -11,7 +11,6 @@ import Readme from '../Select/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/Select`,
 	component: Select,
 	parameters: {
 		docs: {

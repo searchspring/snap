@@ -18,7 +18,7 @@ export class PerPage extends Component<PerPageProps> {
 		const { pagination } = this.props.store;
 
 		return (
-			<div class="ss-per-page">
+			<div className="ss-per-page">
 				<Select
 					label="Per Page"
 					options={pagination.pageSizeOptions}

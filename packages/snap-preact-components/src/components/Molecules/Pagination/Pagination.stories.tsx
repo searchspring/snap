@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Pagination, PaginationProps } from './Pagination';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import Readme from '../Pagination/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/Pagination`,
 	component: Pagination,
 	parameters: {
 		docs: {

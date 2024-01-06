@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
@@ -8,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
+import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
@@ -85,8 +84,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
+									? `filter by ${facet?.label} - ${value.label}`
+									: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

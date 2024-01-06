@@ -1,9 +1,11 @@
 {
 	"extends": "../../tsconfig.cjs.json",
+	"include": [
+		"src"
+	],
 	"compilerOptions": {
 		"outDir": "./dist/cjs",
-		"jsx": "react",
-		"jsxFactory": "h",
-		"jsxFragmentFactory": "Fragment"
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
 	}
 }

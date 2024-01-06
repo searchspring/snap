@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { RecommendationProfileTracker, RecommendationProfileTrackerProps } from './RecommendationProfileTracker';
 import { componentArgs } from '../../../../utilities';
@@ -11,7 +11,6 @@ import { Carousel } from '../../../Molecules/Carousel';
 import { Result } from '../../../Molecules/Result';
 
 export default {
-	title: `Trackers/Recommendation/Profile`,
 	component: RecommendationProfileTracker,
 	parameters: {
 		docs: {

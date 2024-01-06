@@ -2,12 +2,11 @@ import { h } from 'preact';
 
 import { LoadingBar, LoadingBarProps } from './LoadingBar';
 import { componentArgs } from '../../../utilities';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import Readme from '../Loading/readme.md';
 
 export default {
-	title: `Atoms/LoadingBar`,
 	component: LoadingBar,
 	parameters: {
 		docs: {

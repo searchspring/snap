@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Filter, FilterProps } from './Filter';
 import { iconPaths } from '../../Atoms/Icon/paths';
@@ -13,7 +13,6 @@ import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/Filter`,
 	component: Filter,
 	parameters: {
 		docs: {

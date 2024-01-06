@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { NoResults, NoResultsProps } from './NoResults';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: `Atoms/NoResults`,
 	component: NoResults,
 	parameters: {
 		docs: {

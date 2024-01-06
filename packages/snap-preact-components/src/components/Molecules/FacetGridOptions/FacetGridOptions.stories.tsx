@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { FacetGridOptions, FacetGridOptionsProps } from './FacetGridOptions';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import Readme from '../FacetGridOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/FacetGridOptions`,
 	component: FacetGridOptions,
 	parameters: {
 		docs: {

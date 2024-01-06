@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
@@ -29,7 +29,6 @@ const sliderFacetMock = {
 };
 
 export default {
-	title: `Molecules/FacetSlider`,
 	component: FacetSlider,
 	parameters: {
 		docs: {

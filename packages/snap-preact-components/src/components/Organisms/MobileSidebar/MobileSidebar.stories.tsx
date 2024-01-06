@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { MobileSidebar, MobileSidebarProps } from './MobileSidebar';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { iconPaths } from '../../Atoms/Icon';
 
 export default {
-	title: `Organisms/MobileSidebar`,
 	component: MobileSidebar,
 	parameters: {
 		docs: {

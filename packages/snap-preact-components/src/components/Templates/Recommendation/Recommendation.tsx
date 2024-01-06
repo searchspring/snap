@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -144,7 +143,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
 										{child}
 									</RecommendationResultTracker>
-							  ))
+								))
 							: resultsToRender.map((result) => (
 									<RecommendationResultTracker controller={controller} result={result}>
 										{(() => {
@@ -156,7 +155,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 											}
 										})()}
 									</RecommendationResultTracker>
-							  ))}
+								))}
 					</Carousel>
 				</RecommendationProfileTracker>
 			</div>

@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { FormattedNumber, FormattedNumberProps } from './FormattedNumber';
 import { componentArgs } from '../../../utilities';
 import Readme from '../FormattedNumber/readme.md';
 
 export default {
-	title: `Atoms/FormattedNumber`,
 	component: FormattedNumber,
 	parameters: {
 		docs: {

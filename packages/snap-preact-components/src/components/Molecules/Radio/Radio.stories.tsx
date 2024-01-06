@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Radio, RadioProps } from './Radio';
 import { iconPaths } from '../../Atoms/Icon';
@@ -8,7 +8,6 @@ import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: `Molecules/Radio`,
 	component: Radio,
 	parameters: {
 		docs: {

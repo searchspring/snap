@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
@@ -108,8 +107,8 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
+									? `filter by ${facet?.label} - ${value.label}`
+									: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

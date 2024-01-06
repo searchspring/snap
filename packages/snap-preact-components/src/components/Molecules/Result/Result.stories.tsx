@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Result, ResultProps } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
@@ -11,7 +11,6 @@ import { ResultsLayout } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/Result`,
 	component: Result,
 	parameters: {
 		docs: {

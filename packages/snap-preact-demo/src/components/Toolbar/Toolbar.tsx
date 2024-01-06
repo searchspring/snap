@@ -31,7 +31,7 @@ export class Toolbar extends Component<ToolBarProps> {
 					</Fragment>
 				</Slideout>
 
-				<div class="ss-toolbar-row">
+				<div className="ss-toolbar-row">
 					<div className="ss-toolbar-col">
 						<SortBy />
 					</div>

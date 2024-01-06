@@ -1,12 +1,11 @@
 import { h } from 'preact';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Toggle, ToggleProps } from './Toggle';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: `Atoms/Toggle`,
 	component: Toggle,
 	parameters: {
 		docs: {

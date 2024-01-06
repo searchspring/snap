@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Button, ButtonProps } from './Button';
 import { componentArgs } from '../../../utilities';
@@ -8,7 +8,6 @@ import Readme from '../Button/readme.md';
 import { iconPaths } from '../Icon';
 
 export default {
-	title: `Atoms/Button`,
 	component: Button,
 	parameters: {
 		docs: {

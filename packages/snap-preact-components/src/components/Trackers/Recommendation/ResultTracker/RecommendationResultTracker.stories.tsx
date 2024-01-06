@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { RecommendationResultTracker, RecommendationResultTrackerProps } from './RecommendationResultTracker';
 import { componentArgs } from '../../../../utilities';
@@ -10,7 +10,6 @@ import type { RecommendationController } from '@searchspring/snap-controller';
 import { Result } from '../../../Molecules/Result';
 
 export default {
-	title: `Trackers/Recommendation/Result`,
 	component: RecommendationResultTracker,
 	parameters: {
 		docs: {

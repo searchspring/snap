@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Banner, BannerProps } from './Banner';
 import { componentArgs } from '../../../../utilities';
@@ -9,7 +9,6 @@ import Readme from './readme.md';
 import { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Atoms/Banner`,
 	component: Banner,
 	parameters: {
 		docs: {

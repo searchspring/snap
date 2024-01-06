@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { iconPaths } from '../../Atoms/Icon';
 import { FilterSummary, FilterSummaryProps } from './FilterSummary';
@@ -11,7 +11,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
-	title: `Organisms/FilterSummary`,
 	component: FilterSummary,
 	parameters: {
 		docs: {

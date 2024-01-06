@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 import { RadioList, RadioListProps } from './RadioList';
 import { componentArgs } from '../../../utilities';
 import Readme from '../RadioList/readme.md';
@@ -7,7 +7,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: `Molecules/RadioList`,
 	component: RadioList,
 	parameters: {
 		docs: {

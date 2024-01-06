@@ -1,13 +1,19 @@
 import { h } from 'preact';
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+
 import { ThemeProvider, defaultTheme } from '../src/providers/theme';
 import './styles.css';
+import { bocachica, pike } from '../src/themes';
 
 export const decorators = [
-	(Story) => (
-		<ThemeProvider theme={defaultTheme}>
-			<Story />
-		</ThemeProvider>
-	),
+	withThemeFromJSXProvider({
+		themes: {
+			bocachica: bocachica,
+			pike: pike,
+		},
+		defaultTheme: 'bocachica',
+		Provider: ThemeProvider,
+	}),
 ];
 
 export const parameters = {
@@ -21,5 +27,8 @@ export const parameters = {
 	},
 	options: {
 		showPanel: true,
+		storySort: {
+			order: ['Documentation', 'Components'],
+		},
 	},
 };

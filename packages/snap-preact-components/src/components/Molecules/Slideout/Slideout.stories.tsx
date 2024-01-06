@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Slideout, SlideoutProps } from './Slideout';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Slideout/readme.md';
 
 export default {
-	title: `Molecules/Slideout`,
 	component: Slideout,
 	parameters: {
 		docs: {

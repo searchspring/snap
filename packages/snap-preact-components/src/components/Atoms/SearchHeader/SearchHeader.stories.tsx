@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
@@ -10,7 +10,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { SearchHeader, SearchHeaderProps } from './SearchHeader';
 
 export default {
-	title: `Atoms/SearchHeader`,
 	component: SearchHeader,
 	parameters: {
 		docs: {

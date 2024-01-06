@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 import { LayoutSelector, LayoutSelectorProps } from './LayoutSelector';
 import { ListOption } from '../../../types';
 
 export default {
-	title: `Molecules/LayoutSelector`,
 	component: LayoutSelector,
 	parameters: {
 		docs: {

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Results, ResultsProps } from './Results';
 import { componentArgs } from '../../../utilities';
@@ -11,7 +11,6 @@ import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Results`,
 	component: Results,
 	parameters: {
 		docs: {

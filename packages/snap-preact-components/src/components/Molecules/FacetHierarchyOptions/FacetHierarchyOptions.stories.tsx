@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from './FacetHierarchyOptions';
 import { componentArgs } from '../../../utilities';
@@ -11,7 +11,6 @@ import Readme from '../FacetHierarchyOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/FacetHierarchyOptions`,
 	component: FacetHierarchyOptions,
 	parameters: {
 		docs: {

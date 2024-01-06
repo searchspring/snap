@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { MutableRef, useRef, useState } from 'preact/hooks';
 import { jsx, css, keyframes } from '@emotion/react';
@@ -13,7 +12,7 @@ import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { useFuncDebounce } from '../../../hooks/';
+import { useFuncDebounce } from '../../../hooks';
 
 const CSS = {
 	LoadMore: ({

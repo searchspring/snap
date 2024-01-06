@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Overlay, OverlayProps } from './Overlay';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Overlay/readme.md';
 
 export default {
-	title: `Atoms/Overlay`,
 	component: Overlay,
 	parameters: {
 		docs: {

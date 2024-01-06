@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { SortBy, SortByProps } from './SortBy';
 import { componentArgs } from '../../../utilities';
@@ -8,7 +8,6 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../SortBy/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 export default {
-	title: `Molecules/SortBy`,
 	component: SortBy,
 	parameters: {
 		docs: {

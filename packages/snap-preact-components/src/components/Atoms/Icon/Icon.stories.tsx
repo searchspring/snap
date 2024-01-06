@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Icon, IconProps } from './Icon';
 import { iconPaths } from './paths';
@@ -8,7 +8,6 @@ import { componentArgs, shiftColor } from '../../../utilities';
 import Readme from '../Icon/readme.md';
 
 export default {
-	title: `Atoms/Icon`,
 	component: Icon,
 	parameters: {
 		docs: {
@@ -128,12 +127,20 @@ CustomPath.args = {
 
 export const Gallery = (): JSX.Element => {
 	return (
-		<div style='display: flex; flex-wrap: wrap; font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 10px;'>
+		<div
+			style={{
+				display: 'flex',
+				flexWrap: 'wrap',
+				fontFamily:
+					'"Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif',
+				fontSize: '10px',
+			}}
+		>
 			{Object.keys(iconPaths).map((icon, index) => {
 				return (
-					<div style="margin-bottom: 40px;">
+					<div style={{ marginBottom: '40px' }}>
 						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="40px" style={{ padding: '20px' }} />
-						<div style="text-align: center">{icon}</div>
+						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);
 			})}

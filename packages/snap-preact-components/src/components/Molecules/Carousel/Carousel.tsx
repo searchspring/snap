@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
 import { useRef } from 'preact/hooks';
 

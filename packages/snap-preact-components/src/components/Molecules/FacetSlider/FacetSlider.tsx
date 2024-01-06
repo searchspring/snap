@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 

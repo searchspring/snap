@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { ErrorHandler, ErrorHandlerProps } from './ErrorHandler';
@@ -8,7 +8,6 @@ import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: `Molecules/ErrorHandler`,
 	component: ErrorHandler,
 	parameters: {
 		docs: {

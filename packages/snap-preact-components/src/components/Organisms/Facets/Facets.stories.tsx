@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Facets, FacetsProps } from './Facets';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import Readme from '../Facets/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Facets`,
 	component: Facets,
 	parameters: {
 		docs: {

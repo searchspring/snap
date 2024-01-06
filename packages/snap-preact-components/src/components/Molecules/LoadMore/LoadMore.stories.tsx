@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { LoadMore, LoadMoreProps } from './LoadMore';
 import { componentArgs } from '../../../utilities';
@@ -10,7 +10,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import type { SearchRequestModelFilterTypeEnum } from '@searchspring/snapi-types';
 
 export default {
-	title: `Molecules/LoadMore`,
 	component: LoadMore,
 	parameters: {
 		docs: {

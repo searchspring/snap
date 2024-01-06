@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { Sidebar, SidebarProps } from './Sidebar';
 import { componentArgs } from '../../../utilities';
@@ -9,7 +9,6 @@ import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Sidebar`,
 	component: Sidebar,
 	parameters: {
 		docs: {

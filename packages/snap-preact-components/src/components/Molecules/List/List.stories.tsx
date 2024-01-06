@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 import { List, ListProps } from './List';
 import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
@@ -7,7 +7,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: `Molecules/List`,
 	component: List,
 	parameters: {
 		docs: {

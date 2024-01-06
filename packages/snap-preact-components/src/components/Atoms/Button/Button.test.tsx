@@ -69,7 +69,7 @@ describe('Button Component', () => {
 			const borderColor = 'red';
 
 			const rendered = render(
-				<div class="colortest">
+				<div className="colortest">
 					<button>a dummy button</button>
 					<Button color={color} backgroundColor={backgroundColor} borderColor={borderColor}>
 						{content}

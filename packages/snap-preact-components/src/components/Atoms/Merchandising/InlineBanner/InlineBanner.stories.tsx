@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { InlineBanner, InlineBannerProps } from './InlineBanner';
 import { componentArgs } from '../../../../utilities';
@@ -12,7 +12,6 @@ import type { Banner } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Atoms/InlineBanner`,
 	component: InlineBanner,
 	parameters: {
 		docs: {

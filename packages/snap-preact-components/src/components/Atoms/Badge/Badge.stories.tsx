@@ -1,14 +1,13 @@
 /** @jsx h */
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Badge, BadgeProps } from './Badge';
 import Readme from '../Badge/readme.md';
 
 export default {
-	title: `Atoms/Badge`,
 	component: Badge,
 	parameters: {
 		docs: {

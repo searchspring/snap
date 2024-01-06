@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
@@ -10,7 +10,6 @@ import { Toolbar, ToolbarProps } from './Toolbar';
 import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
-	title: `Organisms/Toolbar`,
 	component: Toolbar,
 	parameters: {
 		docs: {
