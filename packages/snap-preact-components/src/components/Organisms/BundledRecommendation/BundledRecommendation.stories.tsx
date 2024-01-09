@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BundledRecommendations, BundledRecommendationsProps } from '../BundledRecommendations';
+import { BundledRecommendation, BundledRecommendationProps } from '../BundledRecommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -13,8 +13,8 @@ import type { Next } from '@searchspring/snap-event-manager';
 import { iconPaths } from '../../Atoms/Icon';
 
 export default {
-	title: `Organisms/BundledRecommendations`,
-	component: BundledRecommendations,
+	title: `Organisms/BundledRecommendation`,
+	component: BundledRecommendation,
 	parameters: {
 		docs: {
 			page: () => (
@@ -208,7 +208,7 @@ export default {
 				},
 				defaultValue: { summary: false },
 			},
-			control: { type: 'text' },
+			control: { type: 'boolean' },
 		},
 		loop: {
 			defaultValue: true,
@@ -278,8 +278,8 @@ export default {
 
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
 
-export const Default = (props: BundledRecommendationsProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <BundledRecommendations {...props} controller={controller} />;
+export const Default = (props: BundledRecommendationProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <BundledRecommendation {...props} controller={controller} />;
 };
 
 Default.loaders = [

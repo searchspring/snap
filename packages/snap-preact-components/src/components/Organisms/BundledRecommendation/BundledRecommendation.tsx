@@ -295,8 +295,8 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 
 		if (peekaboo) {
 			modifiedBreakpoints[breakpoint] = {
-				...obj,
-				slidesPerView: obj.slidesPerView! + 0.5,
+				...modifiedBreakpoints[breakpoint],
+				slidesPerView: modifiedBreakpoints[breakpoint].slidesPerView! + 0.5,
 			};
 		}
 	});
@@ -368,7 +368,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 												onProductSelect,
 											})
 										) : (
-											<Result result={seed} />
+											<Result {...subProps.result} controller={controller} result={seed} />
 										)}
 									</RecommendationResultTracker>
 								</BundleSelector>
@@ -393,7 +393,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 
 									if (idx == 0 && seedInCarousel) {
 										return (
-											<div className="ss__bundled-recommendation__wrapper__seed">
+											<div className="ss__bundled-recommendations__wrapper__seed">
 												<BundleSelector
 													seedText={seedText}
 													icon={seperatorIcon}
