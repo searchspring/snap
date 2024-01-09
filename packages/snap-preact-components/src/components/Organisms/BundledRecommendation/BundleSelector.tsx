@@ -38,7 +38,11 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	return (
 		<div
-			className={classnames('ss__bundled-recommendations__wrapper__selector', seedText ? 'ss__bundled-recommendations__wrapper__selector--seed' : '')}
+			className={classnames(
+				'ss__bundled-recommendations__wrapper__selector',
+				checked ? 'ss__bundled-recommendations__wrapper__selector--selected' : '',
+				seedText ? 'ss__bundled-recommendations__wrapper__selector--seed' : ''
+			)}
 		>
 			<div className="ss__bundled-recommendations__wrapper__selector__result-wrapper">
 				{showCheckboxes && <Checkbox {...subProps.checkbox} />}

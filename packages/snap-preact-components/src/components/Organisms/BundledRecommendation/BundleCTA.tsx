@@ -43,7 +43,9 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						</div>
 					</div>
 
-					<Button onClick={(e) => onAddToCartClick(e)}>{addToCartText}</Button>
+					<Button className={'ss__bundled-recommendations__wrapper__cta__button'} onClick={(e) => onAddToCartClick(e)}>
+						{addToCartText}
+					</Button>
 				</Fragment>
 			)}
 		</div>
