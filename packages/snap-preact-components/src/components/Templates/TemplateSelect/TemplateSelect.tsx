@@ -17,7 +17,7 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 		theme &&
 		Component && (
 			<ThemeProvider theme={theme}>
-				<Component controller={controller} resultComponent={resultComponent} {...otherProps} />
+				<Component controller={controller} resultComponent={resultComponent} theme={theme} {...otherProps} />
 			</ThemeProvider>
 		)
 	);

@@ -5,6 +5,7 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		textAlign: 'center',
 		' .ss__search-header__title': {
 			color: variables?.color?.primary,
 		},

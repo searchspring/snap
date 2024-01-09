@@ -7,7 +7,7 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
-		gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
+		gridTemplateColumns: 'repeat(auto-fill, minmax(45px, 1fr))',
 		gap: gapSize,
 
 		'& .ss__facet-palette-options__option': {
@@ -83,6 +83,6 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 // FacetPaletteOptions component props
 export const facetPaletteOptions: Partial<FacetPaletteOptionsProps> = {
 	styleScript: facetPaletteStyleScript,
-	gapSize: '5px',
+	gapSize: '3px',
 	columns: 5,
 };
