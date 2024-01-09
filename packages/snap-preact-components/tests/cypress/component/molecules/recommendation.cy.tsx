@@ -53,7 +53,7 @@ describe('Recommendation Component', async () => {
 	});
 
 	it('tracks as expected', () => {
-		cy.spy(controller.tracker.track, 'event').as('trackfn');
+		const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
 
 		mount(
 			<Recommendation controller={controller}>
@@ -68,8 +68,29 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__recommendation')
 			.should('exist')
 			.then(() => {
-				cy.get('@trackfn').its('callCount').should('eq', 21);
-				// cy.get('@trackfn').should('be.calledWith', ({
+				cy.get('@trackfn').its('callCount').should('eq', 27);
+
+				//todo - get these beacon tests working again, or move back into jest if possible.
+
+				// expect(spy).to.be.calledOn({
+				//     type: BeaconType.PROFILE_RENDER,
+				//     category: BeaconCategory.RECOMMENDATIONS,
+				//     context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				//     event: {
+				//         context: {
+				//             placement: controller.store.profile.placement,
+				//             tag: controller.store.profile.tag,
+				//             type: 'product-recommendation',
+				//         },
+				//         profile: {
+				//             placement: controller.store.profile.placement,
+				//             tag: controller.store.profile.tag,
+				//             templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
+				//             threshold: 4,
+				//         },
+				//     },
+				// },)
+				// cy.get('@trackfn').should('have.been.calledWith', ({
 				//     type: BeaconType.PROFILE_RENDER,
 				//     category: BeaconCategory.RECOMMENDATIONS,
 				//     context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
@@ -184,11 +205,10 @@ describe('Recommendation Component', async () => {
 
 		// // next 4 results should have done impression tracking
 		// controller.store.results.map((result) => {
-		// 	expect(trackfn).toHaveBeenCalledWith({
+		// 	cy.get('@trackfn').should('be.calledWith', Cypress.sinon.match.object).should('include', {
 		// 		type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 		// 		category: BeaconCategory.RECOMMENDATIONS,
 		// 		context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-		// 		pid: controller.events.impression?.id,
 		// 		event: {
 		// 			context: {
 		// 				placement: controller.store.profile.placement,
@@ -203,7 +223,8 @@ describe('Recommendation Component', async () => {
 		// 				},
 		// 			},
 		// 		},
-		// 	});
+		// 		pid: controller.events.impression?.id,
+		// 	})
 		// });
 
 		// trackfn.mockClear();

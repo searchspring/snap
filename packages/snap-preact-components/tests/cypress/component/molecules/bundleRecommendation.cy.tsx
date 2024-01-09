@@ -138,7 +138,7 @@ describe('BundledRecommendation Component', async () => {
 	});
 
 	it('can use custom resultComponent', () => {
-		const ResultSlot = (props) => {
+		const ResultSlot = (props: any) => {
 			return (
 				<div className="findMe">
 					<div
@@ -166,7 +166,7 @@ describe('BundledRecommendation Component', async () => {
 	});
 
 	it('can use custom ctaSlot', () => {
-		const CtaSlot = (props) => {
+		const CtaSlot = (props: any) => {
 			return (
 				<div className="findMe">
 					<p>
