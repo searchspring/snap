@@ -1,22 +1,31 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { SearchResultTracker, SearchResultTrackerProps } from './SearchResultTracker';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 import { Snapify } from '../../../utilities/snapify';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Result } from '../../Molecules/Result';
 
 export default {
-	title: `Trackers/SearchResultTracker`,
+	title: 'Trackers/Search/Result',
 	component: SearchResultTracker,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -55,7 +64,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Tracker', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
+const snapInstance = Snapify.search({ id: 'SearchResultTracker', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
 
 export const Default = (props: SearchResultTrackerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return (

@@ -1,6 +1,6 @@
 # Formatted Number
 
-Utilizes `formatNumber` from [@searchspring/snap-toolbox](https://searchspring.github.io/snap/#/toolbox) to render a `<span>` containing a formatted number.
+Utilizes `formatNumber` from [@searchspring/snap-toolbox](https://searchspring.github.io/snap/#/package-toolbox) to render a `<span>` containing a formatted number.
 
 ## Usage
 

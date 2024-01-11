@@ -1,29 +1,47 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { iconPaths } from '../../Atoms/Icon';
 import { FilterSummary, FilterSummaryProps } from './FilterSummary';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FilterSummary/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
-	title: `Organisms/FilterSummary`,
+	title: 'Organisms/FilterSummary',
 	component: FilterSummary,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
 		},
 	},
 	argTypes: {
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		filters: {
 			description: 'Filters object',
 			type: { required: false },
@@ -32,7 +50,7 @@ export default {
 					summary: 'object',
 				},
 			},
-			control: { type: 'object' },
+			control: { type: 'none' },
 		},
 		title: {
 			defaultValue: 'Current Filters',
@@ -95,9 +113,9 @@ export default {
 				},
 				defaultValue: { summary: 'close-thin' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		filterIcon: {
@@ -109,9 +127,9 @@ export default {
 				},
 				defaultValue: { summary: 'close-thin' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		onClick: {
@@ -121,6 +139,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		onClearAllClick: {
@@ -130,16 +149,8 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClearAllClick',
-		},
-		controller: {
-			description: 'Controller reference',
-			table: {
-				type: {
-					summary: 'Controller object',
-				},
-			},
 			control: { type: 'none' },
+			action: 'onClearAllClick',
 		},
 		...componentArgs,
 	},

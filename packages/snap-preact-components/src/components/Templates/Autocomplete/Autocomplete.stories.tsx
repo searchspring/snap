@@ -1,21 +1,30 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Autocomplete, AutocompleteProps } from './Autocomplete';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Autocomplete/readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Autocomplete`,
+	title: 'Templates/Autocomplete',
 	component: Autocomplete,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -25,7 +34,7 @@ export default {
 		(Story: any) => (
 			<div
 				style={{
-					maxWidth: '900px',
+					maxWidth: '960px',
 					position: 'relative',
 				}}
 			>
@@ -271,6 +280,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		facetsSlot: {
 			description: 'Slot for custom facets component',
@@ -279,6 +289,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		contentSlot: {
 			description: 'Slot for custom content component',
@@ -287,6 +298,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		linkSlot: {
 			description: 'Slot for custom "see n results for keyword" link component',
@@ -295,6 +307,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		resultsSlot: {
 			description: 'Slot for custom results component & title.',
@@ -303,6 +316,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		noResultsSlot: {
 			description: 'Slot for custom no-results component.',
@@ -311,6 +325,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		breakpoints: {
 			description: 'Breakpoints options object',
@@ -318,10 +333,9 @@ export default {
 				type: {
 					summary: 'object',
 				},
+				defaultValue: { summary: 'Breakpoint object' },
 			},
-			control: {
-				type: 'object',
-			},
+			control: { type: 'none' },
 		},
 		onFacetOptionClick: {
 			description: 'Custom onClick event handler for facet options.',
@@ -330,6 +344,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onFacetOptionClick',
 		},
 		onTermClick: {
@@ -339,6 +354,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onTermClick',
 		},
 		...componentArgs,
@@ -371,21 +387,3 @@ Default.loaders = [
 		controller: await snapInstance,
 	}),
 ];
-Default.args = {
-	breakpoints: {
-		0: {
-			columns: 1,
-			rows: 1,
-		},
-		320: {
-			columns: 2,
-			rows: 1,
-			hideFacets: true,
-			vertical: true,
-		},
-		768: {
-			columns: 3,
-			rows: 1,
-		},
-	},
-};

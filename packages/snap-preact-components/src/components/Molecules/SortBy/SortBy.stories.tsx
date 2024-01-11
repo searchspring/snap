@@ -1,20 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { SortBy, SortByProps } from './SortBy';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../SortBy/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 export default {
-	title: `Molecules/SortBy`,
+	title: 'Molecules/SortBy',
 	component: SortBy,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -57,16 +66,16 @@ export default {
 				},
 				defaultValue: { summary: 'dropdown' },
 			},
+			options: ['dropdown', 'list', 'radio'],
 			control: {
 				type: 'select',
-				options: ['dropdown', 'list', 'radio'],
 			},
 		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'SortBy', globals: { siteId: '8uyt2m' } });
 
 export const Default = (args: SortByProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SortBy {...args} sorting={controller?.store?.sorting} />;
@@ -97,7 +106,7 @@ List.loaders = [
 	},
 ];
 List.args = {
-	label: 'Sort By',
+	label: '',
 	type: 'list',
 };
 

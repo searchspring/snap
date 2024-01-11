@@ -33,10 +33,10 @@ export class Results extends Component<ResultsProps> {
 		const controller = this.props.controller;
 
 		return (
-			<div class="ss-results">
+			<div className="ss-results">
 				<Toolbar />
 
-				<div class="clear"></div>
+				<div className="clear"></div>
 
 				<Profile name="results" controller={controller}>
 					<div id="ss_results">
@@ -44,7 +44,7 @@ export class Results extends Component<ResultsProps> {
 					</div>
 				</Profile>
 
-				<div class="clear"></div>
+				<div className="clear"></div>
 
 				<div className={`ss-toolbar ${controller.config.settings.infinite ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
 					{(() => {
@@ -56,7 +56,7 @@ export class Results extends Component<ResultsProps> {
 					})()}
 				</div>
 
-				<div class="clear"></div>
+				<div className="clear"></div>
 			</div>
 		);
 	}
@@ -76,19 +76,19 @@ export class NoResults extends Component<NoResultsProps> {
 		const dym = store.search.didYouMean;
 
 		return (
-			<div class="ss-no-results">
-				<div class="ss-no-results-container">
+			<div className="ss-no-results">
+				<div className="ss-no-results-container">
 					{dym && (
-						<p class="ss-did-you-mean">
+						<p className="ss-did-you-mean">
 							Did you mean <a href={dym.url.href}>{dym.string}</a>?
 						</p>
 					)}
 				</div>
 
-				<div class="ss-no-results-container">
-					<h4 class="ss-title">Suggestions</h4>
+				<div className="ss-no-results-container">
+					<h4 className="ss-title">Suggestions</h4>
 
-					<ul class="ss-suggestion-list">
+					<ul className="ss-suggestion-list">
 						<li>Check for misspellings.</li>
 						<li>Remove possible redundant keywords (ie. "products").</li>
 						<li>Use other words to describe what you are searching for.</li>
@@ -98,8 +98,8 @@ export class NoResults extends Component<NoResultsProps> {
 						Still can't find what you're looking for? <a href="/urlhere.html">Contact us</a>.
 					</p>
 
-					<div class="ss-contact ss-location">
-						<h4 class="ss-title">Address</h4>
+					<div className="ss-contact ss-location">
+						<h4 className="ss-title">Address</h4>
 						<p>
 							1234 Random Street
 							<br />
@@ -107,8 +107,8 @@ export class NoResults extends Component<NoResultsProps> {
 						</p>
 					</div>
 
-					<div class="ss-contact ss-hours">
-						<h4 class="ss-title">Hours</h4>
+					<div className="ss-contact ss-hours">
+						<h4 className="ss-title">Hours</h4>
 						<p>
 							Mon - Sat, 00:00am - 00:00pm
 							<br />
@@ -116,8 +116,8 @@ export class NoResults extends Component<NoResultsProps> {
 						</p>
 					</div>
 
-					<div class="ss-contact ss-phone">
-						<h4 class="ss-title">Call Us</h4>
+					<div className="ss-contact ss-phone">
+						<h4 className="ss-title">Call Us</h4>
 						<p>
 							<strong>Telephone:</strong> 123-456-7890
 							<br />
@@ -125,8 +125,8 @@ export class NoResults extends Component<NoResultsProps> {
 						</p>
 					</div>
 
-					<div class="ss-contact ss-email">
-						<h4 class="ss-title">Email</h4>
+					<div className="ss-contact ss-email">
+						<h4 className="ss-title">Email</h4>
 						<p>
 							<a href="mailto:email@sitename.com">email@sitename.com</a>
 						</p>

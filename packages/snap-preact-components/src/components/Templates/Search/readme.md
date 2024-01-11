@@ -78,6 +78,7 @@ The `hideMerchandisingBanners` prop specifies if merchandising banners should re
 <Search controller={controller} hideMerchandisingBanners={true} />
 ```
 or
+
 ```jsx
 <Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```

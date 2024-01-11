@@ -14,11 +14,11 @@ export class Finder extends Component<FinderProps> {
 
 		return (
 			selections.length > 0 && (
-				<div class={`finder-container`}>
-					<div class="finder-wrapper">
+				<div className={`finder-container`}>
+					<div className="finder-wrapper">
 						{selections.map((selection) =>
 							controller.config.wrapSelect ? (
-								<div class="finder-column finder-dropdown form-select-wrapper">
+								<div className="finder-column finder-dropdown form-select-wrapper">
 									<Dropdown selection={selection} store={store} loading={loading} />
 								</div>
 							) : (
@@ -26,15 +26,15 @@ export class Finder extends Component<FinderProps> {
 							)
 						)}
 
-						<span style={{ color: '#aaa', 'font-size': '10px' }}>{` ${pagination.totalResults} results`}</span>
+						<span style={{ color: '#aaa', fontSize: '10px' }}>{` ${pagination.totalResults} results`}</span>
 
-						<div class="finder-column finder-button ss-shop">
+						<div className="finder-column finder-button ss-shop">
 							<button
 								onClick={() => {
 									controller.find();
 								}}
 								disabled={loading}
-								class="button button--primary searchspring-finder_submit"
+								className="button button--primary searchspring-finder_submit"
 							>
 								Shop Now
 							</button>
@@ -44,7 +44,7 @@ export class Finder extends Component<FinderProps> {
 									controller.reset();
 								}}
 								disabled={loading}
-								class="button button--primary searchspring-finder_reset"
+								className="button button--primary searchspring-finder_reset"
 							>
 								Reset
 							</button>
@@ -70,7 +70,7 @@ class Dropdown extends Component<DropdownProps> {
 
 		return (
 			<select
-				class="form-input form-select form-input-short searchspring-finder_field"
+				className="form-input form-select form-input-short searchspring-finder_field"
 				onChange={(e: any) => {
 					selection.select(e.target.value);
 				}}

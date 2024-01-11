@@ -25,4 +25,4 @@ import { Pagination } from '@searchspring/snap-preact-components';
 
 <br/>
 
-**Usage examples for each component can be seen in the component's 'Docs' tab.**
+**Usage examples for each component can be seen in each component's 'Docs'.**

@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { jsx, css, keyframes, type Keyframes } from '@emotion/react';

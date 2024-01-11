@@ -30,10 +30,10 @@ const services = { urlManager };
 
 let controller: SearchController;
 
-describe('MobileSidebar Component', () => {
-	const mockClient = new MockClient(globals, {});
-	mockClient.mockData.updateConfig({ search: 'filteredRangeBucket' });
+const mockClient = new MockClient(globals, {});
+mockClient.mockData.updateConfig({ search: 'filteredRangeBucket' });
 
+describe('MobileSidebar Component', () => {
 	beforeEach(async () => {
 		//override matchmedia to always return true
 		Object.defineProperty(window, 'matchMedia', {
@@ -161,17 +161,16 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
-			const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
-
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
+		});
 
-			userEvent.click(applyButton!);
+		const applyButton = rendered.container.querySelector('.ss__mobile-sidebar__footer__apply-button');
+		userEvent.click(applyButton!);
 
-			await waitFor(() => {
-				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
-				expect(element).not.toBeInTheDocument();
-			});
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			expect(element).not.toBeInTheDocument();
 		});
 	});
 
@@ -181,16 +180,16 @@ describe('MobileSidebar Component', () => {
 		userEvent.click(slideoutButton!);
 
 		await waitFor(async () => {
-			const closeButton = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
+		});
 
-			userEvent.click(closeButton!);
+		const closeButton = rendered.container.querySelector('.ss__mobile-sidebar__header__close-button');
+		userEvent.click(closeButton!);
 
-			await waitFor(() => {
-				const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
-				expect(element).not.toBeInTheDocument();
-			});
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
+			expect(element).not.toBeInTheDocument();
 		});
 	});
 

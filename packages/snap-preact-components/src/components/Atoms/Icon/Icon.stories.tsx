@@ -1,20 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Icon, IconProps } from './Icon';
 import { iconPaths } from './paths';
-import { componentArgs, shiftColor } from '../../../utilities';
+import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
 import Readme from '../Icon/readme.md';
 
 export default {
-	title: `Atoms/Icon`,
+	title: 'Atoms/Icon',
 	component: Icon,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -31,9 +40,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		path: {
@@ -52,6 +61,7 @@ export default {
 					summary: 'string, JSX',
 				},
 			},
+			control: { type: 'none' },
 		},
 		color: {
 			description: 'Icon color',
@@ -128,12 +138,20 @@ CustomPath.args = {
 
 export const Gallery = (): JSX.Element => {
 	return (
-		<div style='display: flex; flex-wrap: wrap; font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 10px;'>
+		<div
+			style={{
+				display: 'flex',
+				flexWrap: 'wrap',
+				fontFamily:
+					'"Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif',
+				fontSize: '10px',
+			}}
+		>
 			{Object.keys(iconPaths).map((icon, index) => {
 				return (
-					<div style="margin-bottom: 40px;">
+					<div style={{ marginBottom: '40px' }}>
 						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="40px" style={{ padding: '20px' }} />
-						<div style="text-align: center">{icon}</div>
+						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);
 			})}

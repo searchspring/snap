@@ -1,9 +1,11 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Markdown } from '@storybook/blocks';
 import Readme from '../Usage/Usage.md';
+import { highlightedCode } from '../../utilities';
 
 <Meta title="Documentation/Usage" />
 
-<style>{`
+<style>
+  {`
 	.header {
 		display: flex;
 		align-items: center;
@@ -18,7 +20,8 @@ import Readme from '../Usage/Usage.md';
 		width: 300px;
 		margin-right: 20px;
 	}
-`}</style>
+  `}
+</style>
 
 <div class="header">
 	<span class="subtitle">SNAP PREACT COMPONENETS</span>
@@ -26,4 +29,9 @@ import Readme from '../Usage/Usage.md';
 
 ---
 
-<Readme />
+<Markdown  options={{
+	overrides: {
+		code: highlightedCode
+	}
+}}
+>{ Readme }</Markdown>

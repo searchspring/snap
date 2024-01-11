@@ -46,7 +46,7 @@ export class SidebarContents extends Component<SidebarContentsProps> {
 		const { filters, facets } = this.props.store;
 
 		return (
-			<div class="ss-sidebar-container">
+			<div className="ss-sidebar-container">
 				<FilterSummary filters={filters} controller={this.props.controller} />
 				<Facets facets={facets} />
 			</div>

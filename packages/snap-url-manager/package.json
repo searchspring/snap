@@ -24,7 +24,7 @@
 		"seamless-immutable": "7.1.4"
 	},
 	"devDependencies": {
-		"@types/seamless-immutable": "7.1.16"
+		"@types/seamless-immutable": "7.1.19"
 	},
 	"sideEffects": false,
 	"files": [

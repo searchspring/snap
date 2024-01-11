@@ -1,20 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Dropdown, DropdownProps } from './Dropdown';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Dropdown/readme.md';
 import { Badge } from '../Badge/Badge';
 
 export default {
-	title: `Atoms/Dropdown`,
+	title: 'Atoms/Dropdown',
 	component: Dropdown,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -47,6 +56,7 @@ export default {
 					summary: 'string, JSX',
 				},
 			},
+			control: { type: 'none' },
 		},
 		disabled: {
 			description: 'Disable dropdown - prevents all click events',
@@ -105,6 +115,7 @@ export default {
 					summary: 'function(e: Event)',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		onToggle: {
@@ -112,9 +123,9 @@ export default {
 			table: {
 				type: {
 					summary: 'function(e: Event, open: boolean)',
-					detail: 'e is the click event',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onToggle',
 		},
 		disableA11y: {

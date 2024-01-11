@@ -36,6 +36,6 @@ export const componentArgs = {
 				summary: 'object',
 			},
 		},
-		control: { type: 'object' },
+		control: { type: 'none' },
 	},
 };

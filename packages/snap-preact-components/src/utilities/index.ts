@@ -6,3 +6,4 @@ export * from './LightenDarkenColor';
 export * from './shiftColor';
 export * from './parseProps';
 export * from './mergeProps';
+export * from './storybook';

@@ -1,21 +1,30 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Search, SearchProps } from './Search';
 
 export default {
-	title: `Templates/Search`,
+	title: 'Templates/Search',
 	component: Search,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -145,14 +154,14 @@ export default {
 };
 
 const snapInstance = Snapify.search({
-	id: 'search',
+	id: 'Search',
 	globals: {
 		siteId: '8uyt2m',
 	},
 });
 
 const noresultsInstance = Snapify.search({
-	id: 'noresults',
+	id: 'Search-noResults',
 	globals: {
 		siteId: '8uyt2m',
 		search: {

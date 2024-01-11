@@ -1,20 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Button, ButtonProps } from './Button';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Button/readme.md';
 import { iconPaths } from '../Icon';
 
 export default {
-	title: `Atoms/Button`,
+	title: 'Atoms/Button',
 	component: Button,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -37,6 +46,7 @@ export default {
 					summary: 'string, JSX',
 				},
 			},
+			control: { type: 'none' },
 		},
 		disabled: {
 			description: 'Disable button',
@@ -55,6 +65,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		color: {
@@ -74,9 +85,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		backgroundColor: {

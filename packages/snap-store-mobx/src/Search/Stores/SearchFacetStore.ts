@@ -48,7 +48,7 @@ export class SearchFacetStore extends Array {
 
 				// trim facets - remove facets that have no use
 				const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
-				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig.trim : config.settings?.facets?.trim;
+				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig?.trim : config.settings?.facets?.trim;
 				if (shouldTrim) {
 					if (
 						facet.type === 'range' &&

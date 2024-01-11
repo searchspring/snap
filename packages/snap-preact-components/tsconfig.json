@@ -5,8 +5,7 @@
 	],
 	"compilerOptions": {
 		"outDir": "./dist/esm",
-		"jsx": "react",
-		"jsxFactory": "h",
-		"jsxFragmentFactory": "Fragment",
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
 	}
 }

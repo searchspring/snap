@@ -1,20 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { ErrorHandler, ErrorHandlerProps } from './ErrorHandler';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: `Molecules/ErrorHandler`,
+	title: 'Molecules/ErrorHandler',
 	component: ErrorHandler,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -58,6 +67,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onRetryClick',
 		},
 		...componentArgs,

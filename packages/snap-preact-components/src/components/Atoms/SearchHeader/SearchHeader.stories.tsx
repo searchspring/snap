@@ -1,8 +1,8 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
@@ -10,13 +10,22 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { SearchHeader, SearchHeaderProps } from './SearchHeader';
 
 export default {
-	title: `Atoms/SearchHeader`,
+	title: 'Atoms/SearchHeader',
 	component: SearchHeader,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -133,7 +142,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
+const snapInstance = Snapify.search({ id: 'SearchHeader', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
 
 export const Default = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;
@@ -148,7 +157,10 @@ Default.loaders = [
 	},
 ];
 
-const NoResultsSnapInstance = Snapify.search({ id: 'noResults', globals: { siteId: '8uyt2m', search: { query: { string: 'pokemon' } } } });
+const NoResultsSnapInstance = Snapify.search({
+	id: 'SearchHeader-noResults',
+	globals: { siteId: '8uyt2m', search: { query: { string: 'pokemon' } } },
+});
 
 export const NoResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;
@@ -163,7 +175,10 @@ NoResults.loaders = [
 	},
 ];
 
-const correctedSnapInstance = Snapify.search({ id: 'CorrectedResults', globals: { siteId: '8uyt2m', search: { query: { string: 'drezz' } } } });
+const correctedSnapInstance = Snapify.search({
+	id: 'SearchHeader-correctedResults',
+	globals: { siteId: '8uyt2m', search: { query: { string: 'drezz' } } },
+});
 
 export const CorrectedResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;

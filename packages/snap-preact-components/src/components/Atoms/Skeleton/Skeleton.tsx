@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h } from 'preact';
 
 import { jsx, css, keyframes, Keyframes } from '@emotion/react';

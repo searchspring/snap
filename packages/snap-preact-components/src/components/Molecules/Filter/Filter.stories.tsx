@@ -1,10 +1,10 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Filter, FilterProps } from './Filter';
 import { iconPaths } from '../../Atoms/Icon/paths';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
 import Readme from '../Filter/readme.md';
@@ -13,13 +13,22 @@ import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Molecules/Filter`,
+	title: 'Molecules/Filter',
 	component: Filter,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -33,7 +42,7 @@ export default {
 					summary: 'object',
 				},
 			},
-			control: { type: 'object' },
+			control: { type: 'none' },
 		},
 		facetLabel: {
 			description: 'Filter field',
@@ -90,9 +99,9 @@ export default {
 				},
 				defaultValue: { summary: 'close-thin' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		onClick: {
@@ -102,6 +111,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		...componentArgs,

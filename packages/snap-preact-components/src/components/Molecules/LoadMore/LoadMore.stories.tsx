@@ -1,22 +1,31 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { LoadMore, LoadMoreProps } from './LoadMore';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../LoadMore/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import type { SearchRequestModelFilterTypeEnum } from '@searchspring/snapi-types';
 
 export default {
-	title: `Molecules/LoadMore`,
+	title: 'Molecules/LoadMore',
 	component: LoadMore,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -112,9 +121,9 @@ export default {
 				},
 				defaultValue: { summary: 'bar' },
 			},
+			options: ['bar', 'radial'],
 			control: {
 				type: 'select',
-				options: ['bar', 'radial'],
 			},
 		},
 		progressIndicatorWidth: {
@@ -177,9 +186,9 @@ export default {
 				},
 				defaultValue: { summary: 'button' },
 			},
+			options: ['button', 'outside'],
 			control: {
 				type: 'select',
-				options: ['button', 'outside'],
 			},
 		},
 		onClick: {
@@ -189,13 +198,14 @@ export default {
 					summary: 'function(e: Event)',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		...componentArgs,
 	},
 };
 const snapInstance = Snapify.search({
-	id: 'Pagination',
+	id: 'LoadMore',
 	globals: {
 		siteId: '8uyt2m',
 		filters: [

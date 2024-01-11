@@ -1,9 +1,6 @@
-/** @jsx jsx */
-/** @jsx h */
-
 import { h, Fragment, ComponentChildren } from 'preact';
 
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 

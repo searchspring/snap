@@ -1,6 +1,5 @@
-/** @jsx jsx */
+import { h } from 'preact';
 import { observer } from 'mobx-react-lite';
-import { jsx } from '@emotion/react';
 import { ThemeProvider } from '../../../providers';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {

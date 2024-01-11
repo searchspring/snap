@@ -1,21 +1,30 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../PerPage/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { PerPage, PerPageProps } from './PerPage';
 
 export default {
-	title: `Molecules/PerPage`,
+	title: 'Molecules/PerPage',
 	component: PerPage,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -58,16 +67,16 @@ export default {
 				},
 				defaultValue: { summary: 'dropdown' },
 			},
+			options: ['dropdown', 'list', 'radio'],
 			control: {
 				type: 'select',
-				options: ['dropdown', 'list', 'radio'],
 			},
 		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'PerPage', globals: { siteId: '8uyt2m' } });
 
 export const Default = (args: PerPageProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <PerPage {...args} pagination={controller?.store?.pagination} />;
@@ -85,20 +94,34 @@ Default.args = {
 	label: 'Per Page',
 };
 
+const snapInstanceList = Snapify.search({
+	id: 'PerPage-list',
+	globals: { siteId: '8uyt2m' },
+	settings: {
+		pagination: {
+			pageSizeOptions: [
+				{ label: '24', value: 12 },
+				{ label: '48', value: 24 },
+				{ label: '72', value: 48 },
+			],
+		},
+	},
+});
+
 export const List = (args: PerPageProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <PerPage {...args} pagination={controller?.store?.pagination} />;
 };
 
 List.loaders = [
 	async () => {
-		await snapInstance.search();
+		await snapInstanceList.search();
 		return {
-			controller: snapInstance,
+			controller: snapInstanceList,
 		};
 	},
 ];
 List.args = {
-	label: 'Per Page',
+	label: '',
 	type: 'list',
 };
 

@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Recommendation, RecommendationProps } from './Recommendation';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
@@ -12,13 +12,22 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 
 export default {
-	title: `Organisms/Recommendation`,
+	title: 'Templates/Recommendation',
 	component: Recommendation,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -86,6 +95,7 @@ export default {
 				},
 				defaultValue: { summary: '[Navigation, Pagination]' },
 			},
+			control: { type: 'none' },
 		},
 		pagination: {
 			defaultValue: false,
@@ -147,7 +157,7 @@ export default {
 				},
 				defaultValue: { summary: 'Breakpoint object' },
 			},
-			control: { type: 'object' },
+			control: { type: 'none' },
 		},
 		...componentArgs,
 	},

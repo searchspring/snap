@@ -2,7 +2,7 @@ export const createHoverProps = (callback?: () => void, options: { delay?: numbe
 	let delayTimeout: number;
 
 	return {
-		onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 			clearTimeout(delayTimeout);
 			delayTimeout = window.setTimeout(() => {
 				options.focusElem && (e.target as HTMLElement).focus();

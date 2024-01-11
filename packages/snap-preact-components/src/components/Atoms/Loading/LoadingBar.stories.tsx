@@ -1,19 +1,28 @@
 import { h } from 'preact';
 
 import { LoadingBar, LoadingBarProps } from './LoadingBar';
-import { componentArgs } from '../../../utilities';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { componentArgs, highlightedCode } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import Readme from '../Loading/readme.md';
 
 export default {
-	title: `Atoms/LoadingBar`,
+	title: 'Atoms/LoadingBar',
 	component: LoadingBar,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Results, ResultsProps } from './Results';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { ResultsLayout } from '../../../types';
 
@@ -11,13 +11,22 @@ import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/Results`,
+	title: 'Organisms/Results',
 	component: Results,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -52,9 +61,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			control: {
 				type: 'select',
-				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		columns: {
@@ -89,29 +98,14 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: {
-				0: {
-					columns: 1,
-				},
-				540: {
-					columns: 2,
-				},
-				768: {
-					columns: 3,
-				},
-				991: {
-					columns: 4,
-				},
-			},
+			defaultValue: { summary: 'Breakpoint object' },
 			description: 'Breakpoints options object',
 			table: {
 				type: {
 					summary: 'object',
 				},
 			},
-			control: {
-				type: 'object',
-			},
+			control: { type: 'none' },
 		},
 		controller: {
 			description: 'Controller reference',
