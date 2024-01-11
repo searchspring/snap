@@ -1,18 +1,28 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Slideout, SlideoutProps } from './Slideout';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Slideout/readme.md';
 
 export default {
+	title: 'Molecules/Slideout',
 	component: Slideout,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

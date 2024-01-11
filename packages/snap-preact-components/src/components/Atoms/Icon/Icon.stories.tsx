@@ -1,19 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Icon, IconProps } from './Icon';
 import { iconPaths } from './paths';
-import { componentArgs, shiftColor } from '../../../utilities';
+import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
 import Readme from '../Icon/readme.md';
 
 export default {
+	title: 'Atoms/Icon',
 	component: Icon,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -30,9 +40,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		path: {
@@ -51,6 +61,7 @@ export default {
 					summary: 'string, JSX',
 				},
 			},
+			control: { type: 'none' },
 		},
 		color: {
 			description: 'Icon color',

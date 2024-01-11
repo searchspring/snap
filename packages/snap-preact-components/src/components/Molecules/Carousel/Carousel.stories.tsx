@@ -1,19 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Carousel, CarouselProps } from './Carousel';
 import { Icon, iconPaths } from '../../Atoms/Icon';
-import { componentArgs, shiftColor } from '../../../utilities';
+import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
+	title: 'Molecules/Carousel',
 	component: Carousel,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -73,6 +83,7 @@ export default {
 				},
 				defaultValue: { summary: '[Navigation, Pagination]' },
 			},
+			control: { type: 'none' },
 		},
 		hideButtons: {
 			defaultValue: false,
@@ -133,6 +144,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onNextButtonClick',
 		},
 		onPrevButtonClick: {
@@ -142,6 +154,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onPrevButtonClick',
 		},
 		onClick: {
@@ -151,6 +164,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		onInit: {
@@ -160,6 +174,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onInit',
 		},
 		...componentArgs,

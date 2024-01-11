@@ -1,9 +1,11 @@
 import { h } from 'preact';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 
-import { ThemeProvider, defaultTheme } from '../src/providers/theme';
-import './styles.css';
+import { ThemeProvider } from '../src/providers/theme';
 import { bocachica, pike } from '../src/themes';
+
+// custom styles for storybook
+import './styles.scss';
 
 export const decorators = [
 	withThemeFromJSXProvider({
@@ -28,7 +30,8 @@ export const parameters = {
 	options: {
 		showPanel: true,
 		storySort: {
-			order: ['Documentation', 'Components'],
+			// custom order of stories
+			order: ['Documentation', 'Atoms', 'Molecules', 'Organisms', 'Templates', 'Trackers'],
 		},
 	},
 };

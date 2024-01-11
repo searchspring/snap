@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Image, FALLBACK_IMAGE_URL, ImageProps } from './Image';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 
 const searchResponse = {
 	product1: {
@@ -20,12 +20,22 @@ const searchResponse = {
 import Readme from '../Image/readme.md';
 
 export default {
+	title: 'Atoms/Image',
 	component: Image,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -101,6 +111,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onError',
 		},
 		onLoad: {
@@ -110,6 +121,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onLoad',
 		},
 		onClick: {
@@ -119,6 +131,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		onMouseOver: {
@@ -128,6 +141,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onMouseOver',
 		},
 		onMouseOut: {
@@ -137,6 +151,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onMouseOut',
 		},
 		...componentArgs,

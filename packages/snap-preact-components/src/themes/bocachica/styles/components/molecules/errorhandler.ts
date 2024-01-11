@@ -47,12 +47,12 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 		},
 		'&.ss__error-handler--warning': {
 			backgroundColor: LightenDarkenColor('yellow', 180),
-			borderLeftColor: '#ffff00',
+			borderLeftColor: '#ecaa15',
 			'.ss__icon': {
-				fill: '#ffff00',
+				fill: '#ecaa15',
 			},
 			'.ss__error-handler__button': {
-				borderColor: '#ffff00',
+				borderColor: '#ecaa15',
 			},
 		},
 		'&.ss__error-handler--info': {

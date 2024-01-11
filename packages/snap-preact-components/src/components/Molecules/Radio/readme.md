@@ -59,12 +59,14 @@ The `color` prop sets the radio border stroke and fill colors.
 
 ### checkedIcon
 The `checkedIcon` prop specifies a path within the `Icon` component paths (see Icon Gallery) to show when the radio is checked. This only applies if using a custom radio `native={false}`.
+
 ```jsx
     <Radio checkedIcon={'radio'} />
 ```
 
 ### unCheckedIcon
 The `unCheckedIcon` prop specifies a path within the `Icon` component paths (see Icon Gallery) to show when the radio is not pchecked. This only applies if using a custom radio `native={false}`.
+
 ```jsx
     <Radio unCheckedIcon={'radio-o'} />
 ```

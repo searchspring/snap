@@ -1,19 +1,28 @@
-/** @jsx h */
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Badge, BadgeProps } from './Badge';
 import Readme from '../Badge/readme.md';
 
 export default {
+	title: 'Atoms/Badge',
 	component: Badge,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -24,7 +33,7 @@ export default {
 			<div
 				style={{
 					width: '200px',
-					height: '200px',
+					height: '270px',
 					position: 'relative',
 					border: '2px dotted lightgrey',
 				}}
@@ -50,6 +59,7 @@ export default {
 					summary: 'string, JSX',
 				},
 			},
+			control: { type: 'none' },
 		},
 		position: {
 			description: 'Position of badge',

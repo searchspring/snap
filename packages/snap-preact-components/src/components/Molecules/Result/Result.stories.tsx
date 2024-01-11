@@ -1,22 +1,32 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Result, ResultProps } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
 import { ResultsLayout } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
+	title: 'Molecules/Result',
 	component: Result,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -30,6 +40,15 @@ export default {
 		),
 	],
 	argTypes: {
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		result: {
 			description: 'Result store Product reference',
 			type: { required: true },
@@ -120,9 +139,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			control: {
 				type: 'select',
-				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		onClick: {
@@ -132,16 +151,8 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
-		},
-		controller: {
-			description: 'Controller reference',
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
 			control: { type: 'none' },
+			action: 'onClick',
 		},
 		...componentArgs,
 	},

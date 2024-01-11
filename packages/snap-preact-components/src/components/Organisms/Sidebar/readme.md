@@ -28,12 +28,14 @@ The `hideTitle` prop will disable the sidebar title from rendering.
 
 ### titleText
 The `titleText` prop will change the inner text of the sidebar title.
+
 ```jsx
 <Sidebar controller={controller} titleText={'Filter By: '} />
 ```
 
 ### hideFacets
 The `hideFacets` prop will disable the Facets component from rendering.
+
 ```jsx
 <Sidebar controller={controller} hideFacets/>
 ```

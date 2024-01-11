@@ -1,22 +1,32 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Select, SelectProps } from './Select';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { iconPaths } from '../../Atoms/Icon';
 import Readme from '../Select/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
+	title: 'Molecules/Select',
 	component: Select,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -179,9 +189,9 @@ export default {
 				},
 				defaultValue: { summary: 'angle-down' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		iconClose: {
@@ -193,9 +203,9 @@ export default {
 				},
 				defaultValue: { summary: 'angle-up' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		stayOpenOnSelection: {

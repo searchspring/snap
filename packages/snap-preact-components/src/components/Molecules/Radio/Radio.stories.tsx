@@ -1,19 +1,29 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Radio, RadioProps } from './Radio';
 import { iconPaths } from '../../Atoms/Icon';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
+	title: 'Molecules/Radio',
 	component: Radio,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -59,9 +69,9 @@ export default {
 				},
 				defaultValue: { summary: 'bullet' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		unCheckedIcon: {
@@ -72,9 +82,9 @@ export default {
 				},
 				defaultValue: { summary: 'bullet-o' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		color: {
@@ -114,6 +124,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		disableA11y: {

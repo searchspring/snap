@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { InlineBanner, InlineBannerProps } from './InlineBanner';
-import { componentArgs } from '../../../../utilities';
+import { componentArgs, highlightedCode } from '../../../../utilities';
 import { Snapify } from '../../../../utilities/snapify';
 import Readme from './readme.md';
 import { ResultsLayout } from '../../../../types';
@@ -12,12 +12,22 @@ import type { Banner } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
+	title: 'Atoms/InlineBanner',
 	component: InlineBanner,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -42,9 +52,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			control: {
 				type: 'select',
-				options: [ResultsLayout.GRID, ResultsLayout.LIST],
 			},
 		},
 		width: {
@@ -63,6 +73,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		...componentArgs,

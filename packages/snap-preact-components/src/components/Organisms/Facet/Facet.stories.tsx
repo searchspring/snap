@@ -1,23 +1,33 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Facet, FacetProps } from './Facet';
 import { iconPaths } from '../../Atoms/Icon';
 import { FacetDisplay } from '../../../types';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Facet/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
+	title: 'Organisms/Facet',
 	component: Facet,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -112,9 +122,9 @@ export default {
 				},
 				defaultValue: { summary: 'angle-down' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		iconCollapse: {
@@ -126,9 +136,9 @@ export default {
 				},
 				defaultValue: { summary: 'angle-up' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		showMoreText: {
@@ -162,9 +172,9 @@ export default {
 				},
 				defaultValue: { summary: 'plus' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		iconOverflowLess: {
@@ -176,9 +186,9 @@ export default {
 				},
 				defaultValue: { summary: 'minus' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		overflowSlot: {
@@ -188,6 +198,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		optionsSlot: {
 			description: 'Slot for custom facet option components',
@@ -196,6 +207,7 @@ export default {
 					summary: 'component',
 				},
 			},
+			control: { type: 'none' },
 		},
 		previewOnFocus: {
 			description: 'Invoke facet value preview upon focus',
@@ -257,7 +269,13 @@ List.loaders = [
 // Slider Facet
 
 const ObservableSliderFacet = observer(({ args, controller }: { args: FacetProps; controller: SearchController }) => {
-	return <Facet {...args} facet={controller?.store?.facets.filter((facet) => facet.display === FacetDisplay.SLIDER).shift()} />;
+	const facet = controller?.store?.facets.filter((facet) => facet.display === FacetDisplay.SLIDER).shift();
+	if (facet) {
+		return <Facet {...args} facet={facet} />;
+	}
+
+	// prevent error when no facet is found...
+	return <div></div>;
 });
 
 export const Slider = (args: FacetProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (

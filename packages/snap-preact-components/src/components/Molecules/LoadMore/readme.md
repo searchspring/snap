@@ -116,6 +116,7 @@ When both `hideProgressIndicator` and `hideProgressText` props are `true` only t
 
 ### loadingIcon
 The `loadingIcon` prop defines the icon used when loading. Default: `spinner`
+
 ```jsx
 <LoadMore pagination={controller.store.pagination} loadingIcon={'spinner'} />
 ```

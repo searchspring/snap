@@ -1,21 +1,31 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { MobileSidebar, MobileSidebarProps } from './MobileSidebar';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { iconPaths } from '../../Atoms/Icon';
 
 export default {
+	title: 'Organisms/MobileSidebar',
 	component: MobileSidebar,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -69,9 +79,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		hideHeader: {
@@ -120,9 +130,9 @@ export default {
 				},
 				defaultValue: { summary: 'close-thin' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		closeButtonText: {
@@ -207,9 +217,9 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		hideClearButton: {
@@ -239,16 +249,16 @@ export default {
 					summary: 'string',
 				},
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Facet', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'MobileSidebar', globals: { siteId: '8uyt2m' } });
 
 export const Default = (args: MobileSidebarProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <MobileSidebar {...args} controller={controller} />;

@@ -1,21 +1,31 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { FacetGridOptions, FacetGridOptionsProps } from './FacetGridOptions';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetGridOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
+	title: 'Molecules/FacetGridOptions',
 	component: FacetGridOptions,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -89,7 +99,7 @@ export default {
 				},
 				defaultValue: { summary: '{}' },
 			},
-			control: { type: 'object' },
+			control: { type: 'none' },
 		},
 		onClick: {
 			description: 'Facet option click event handler',
@@ -98,6 +108,7 @@ export default {
 					summary: 'function',
 				},
 			},
+			control: { type: 'none' },
 			action: 'onClick',
 		},
 		...componentArgs,

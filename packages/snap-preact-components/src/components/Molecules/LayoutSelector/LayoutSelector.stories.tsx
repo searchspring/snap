@@ -1,18 +1,28 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/blocks';
-import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 import { LayoutSelector, LayoutSelectorProps } from './LayoutSelector';
 import { ListOption } from '../../../types';
 
 export default {
+	title: 'Molecules/LayoutSelector',
 	component: LayoutSelector,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -47,9 +57,9 @@ export default {
 				},
 				defaultValue: { summary: 'dropdown' },
 			},
+			options: ['dropdown', 'list', 'radio'],
 			control: {
 				type: 'select',
-				options: ['dropdown', 'list', 'radio'],
 			},
 		},
 		label: {

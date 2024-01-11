@@ -54,6 +54,7 @@ The `hideTitle` prop will disable the sidebar title from rendering.
 
 ### titleText
 The `titleText` prop will change the inner text of the sidebar title.
+
 ```jsx
 <MobileSidebar controller={controller} titleText={'Filter By: '} />
 ```
@@ -74,6 +75,7 @@ The `closeButtonIcon` prop specifies the name of an icon to add to the close sid
 
 ### closeButtonText
 The `closeButtonText` prop will change the inner text of the sidebar close button.
+
 ```jsx
 <MobileSidebar controller={controller} closeButtonText={'Close Sidebar'} />
 ```
@@ -101,6 +103,7 @@ The `hidePerPage` prop will disable the PerPage component from rendering.
 
 ### hideFacets
 The `hideFacets` prop will disable the Facets component from rendering.
+
 ```jsx
 <MobileSidebar controller={controller} hideFacets/>
 ```
