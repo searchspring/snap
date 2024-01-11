@@ -77,6 +77,8 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	const selectedOption = store && store?.pageSizeOptions?.find((option) => option.value == store?.pageSize);
+
 	// options can be an Array or ObservableArray - but should have length
 	return store?.pageSize && typeof store?.pageSizeOptions == 'object' && store.pageSizeOptions?.length ? (
 		<CacheProvider>
@@ -87,7 +89,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 					{...subProps.select}
 					label={label}
 					options={store.pageSizeOptions}
-					selected={{ label: `Show ${store.pageSize}`, value: store.pageSize }}
+					selected={selectedOption}
 					onSelect={(e, option) => {
 						store.setPageSize(+option!.value);
 					}}
