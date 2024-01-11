@@ -1,7 +1,5 @@
 const rootConfig = require('../../jest.base.config.json');
 
-// const esModules = ['uuid', 'preact'].join('|');
-
 module.exports = {
 	...rootConfig,
 	displayName: 'snap-controller',
@@ -11,5 +9,4 @@ module.exports = {
 		'^preact/hooks$': '<rootDir>/../../node_modules/preact/hooks/dist/hooks.js',
 		'^preact/test-utils$': '<rootDir>/../../node_modules/preact/test-utils/dist/testUtils.js',
 	},
-	// transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules}))`],
 };
