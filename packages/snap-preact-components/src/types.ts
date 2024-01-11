@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import type { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
-import { IconProps } from './Components/Atoms/Icon';
+import { IconProps } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
 
 export interface ComponentProps {
