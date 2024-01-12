@@ -84,8 +84,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-									? `filter by ${facet?.label} - ${value.label}`
-									: `filter by ${value.label}`
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}
@@ -117,6 +117,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	horizontal?: boolean;
 }
 
 interface FacetListOptionsSubProps {

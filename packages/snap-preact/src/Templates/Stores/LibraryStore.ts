@@ -53,6 +53,12 @@ export class LibraryStore {
 					this.components.search.SearchTest || (this.components.search.SearchTest = (await import('./library/components/SearchTest')).SearchTest)
 				);
 			},
+			HorizontalSearch: async () => {
+				return (
+					this.components.search.HorizontalSearch ||
+					(this.components.search.HorizontalSearch = (await import('./library/components/HorizontalSearch')).HorizontalSearch)
+				);
+			},
 			Recommendation: async () => {
 				return (
 					this.components.recommendation.Recommendation ||

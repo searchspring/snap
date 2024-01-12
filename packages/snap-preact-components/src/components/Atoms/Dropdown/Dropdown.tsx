@@ -52,6 +52,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		children,
 		disabled,
 		open,
+		hideContent,
 		onClick,
 		onToggle,
 		startOpen,
@@ -128,10 +129,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 
-				<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
-					{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
-					{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
-				</div>
+				{!hideContent && (
+					<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
+						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
+						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
+					</div>
+				)}
 			</div>
 		</CacheProvider>
 	);
@@ -144,6 +147,7 @@ export interface DropdownProps extends ComponentProps {
 	disabled?: boolean;
 	open?: boolean;
 	disableOverlay?: boolean;
+	hideContent?: boolean;
 	onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;

@@ -17,6 +17,15 @@ import { MutableRef, useRef } from 'preact/hooks';
 const CSS = {
 	toolbar: () =>
 		css({
+			'& .ss__mobile-sidebar__header': {
+				display: 'flex',
+				justifyContent: 'space-between',
+				alignItems: 'baseline',
+
+				'& .ss__mobile-sidebar__header__close-button': {
+					cursor: 'pointer',
+				},
+			},
 			'& .ss__mobile-sidebar__title': {
 				justifyContent: 'space-between',
 				flexDirection: 'row',

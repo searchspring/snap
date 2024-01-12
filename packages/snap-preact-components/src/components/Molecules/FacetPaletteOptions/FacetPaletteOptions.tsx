@@ -249,8 +249,8 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-									? `filter by ${facet?.label} - ${value.label}`
-									: `filter by ${value.label}`
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}
@@ -305,6 +305,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	layout?: 'list' | 'grid';
 	hideCount?: boolean;
 	hideCheckbox?: boolean;
+	horizontal?: boolean;
 	colorMapping?: {
 		[name: string]: {
 			label?: string;

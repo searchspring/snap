@@ -37,7 +37,7 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 					},
 				},
 				'& .ss__dropdown__content': {
-					backgroundColor: backgroundColor || '#fff',
+					backgroundColor: backgroundColor,
 					boxShadow: '0 6px 12px 1px #0000001f',
 					zIndex: '10000',
 				},

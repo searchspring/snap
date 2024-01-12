@@ -8,6 +8,9 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 	return css({
 		position: 'relative',
 		'&.ss__dropdown--open': {
+			// '& .ss__dropdown__button': {
+			// 	boxShadow: '0 6px 12px 1px #0000001f',
+			// },
 			'& .ss__dropdown__content': {
 				transition: `opacity .5s ease`,
 				position: disableOverlay ? 'relative' : undefined,
@@ -19,12 +22,15 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 		},
 		'.ss__dropdown__content': {
+			boxSizing: 'border-box',
+			background: '#fff',
 			position: 'absolute',
 			minWidth: '100%',
 			visibility: 'hidden',
 			opacity: 0,
 			top: 'auto',
 			left: 0,
+			padding: '0px 10px',
 		},
 	});
 };

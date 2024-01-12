@@ -5,6 +5,7 @@ new SnapTemplates({
 	config: {
 		language: 'en',
 		currency: 'usd',
+		siteId: 'rp9hld',
 		themes: {
 			global: {
 				name: 'bocachica',
@@ -15,7 +16,8 @@ new SnapTemplates({
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				template: 'Search',
+				// template: 'Search',
+				template: 'HorizontalSearch',
 				resultComponent: Result,
 			},
 		],

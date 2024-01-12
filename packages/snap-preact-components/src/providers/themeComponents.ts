@@ -98,6 +98,7 @@ export type ThemeComponents = {
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;
 	facets?: GenericComponentProps<FacetsProps>;
+	horizontalFacets?: GenericComponentProps<FacetsProps>;
 	filterSummary?: GenericComponentProps<FilterSummaryProps>;
 	noResults?: GenericComponentProps<NoResultsProps>;
 	results?: GenericComponentProps<ResultsProps>;
