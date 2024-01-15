@@ -9,26 +9,39 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 		'& .ss__horizontal-facets__header': {
 			display: 'flex',
 			flexWrap: 'wrap',
-			width: '100%',
-			alignItems: 'baseline',
-		},
 
-		'& .ss__facet': {
-			boxSizing: 'border-box',
-			margin: '0px 0px 10px 0px',
-			paddingInlineEnd: '20px',
-			width: 'auto',
-			// minWidth: '180px',
-			// width: '33.3%',
-			// maxWidth: '20%',
-
-			'& .ss__facet__dropdown__icon': {
-				margin: 'auto 0 auto 5px',
+			'& .ss__mobile-sidebar': {
+				margin: '0 10px',
 			},
 
-			'& .ss__dropdown__content': {
-				zIndex: '1',
-				minWidth: '200px',
+			'& .ss__horizontal-facets__header__dropdown': {
+				flex: '0 0 0%',
+				padding: '5px 10px',
+				margin: '0 0 10px 0',
+				boxSizing: 'border-box',
+				minWidth: '100px',
+
+				'& .ss__icon': {
+					transition: 'transform ease .5s',
+				},
+
+				'& .ss__horizontal-facets__header__dropdown__button': {
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				},
+
+				'&.ss__dropdown--open': {
+					backgroundColor: variables?.color?.active?.background,
+					color: variables?.color?.active?.foreground,
+
+					'& .ss__horizontal-facets__header__dropdown__button': {
+						'& .ss__icon': {
+							fill: variables?.color?.active?.accent,
+							transform: 'rotate(180deg)',
+						},
+					},
+				},
 			},
 		},
 	});
@@ -40,17 +53,21 @@ export const horizontalFacets: Partial<HorizontalFacetsProps> = {
 	theme: {
 		components: {
 			facet: {
-				theme: {
-					components: {
-						facetGridOptions: {
-							horizontal: true,
-						},
-						facetPaletteOptions: {
-							horizontal: true,
-						},
-						facetListOptions: {
-							horizontal: true,
-							hideCheckbox: true,
+				named: {
+					horizontalFacet: {
+						theme: {
+							components: {
+								facetGridOptions: {
+									horizontal: true,
+								},
+								facetPaletteOptions: {
+									horizontal: true,
+								},
+								facetListOptions: {
+									horizontal: true,
+									hideCheckbox: true,
+								},
+							},
 						},
 					},
 				},

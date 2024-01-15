@@ -1,5 +1,4 @@
 import { h, Fragment } from 'preact';
-import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -109,11 +108,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		dropdown: {
 			// default props
 			className: 'ss__facet__dropdown',
-			// disableClickOutside: horizontal ? false : true,
-			// disableOverlay: horizontal ? false : true,
-
-			// disableOverlay: behavior === 'overlay' ? true : false,
-			// hideContent: behavior === 'overlay' ? true : false,
+			disableClickOutside: true,
+			disableOverlay: true,
 
 			// global theme
 			...globalTheme?.components?.dropdown,
@@ -282,8 +278,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		renderFacet = false;
 	}
 
-	const [collapsed, setCollapsed] = useState(false);
-
 	const facetContentProps = {
 		limitedValues,
 		searchableFacet,
@@ -300,18 +294,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
 				<Dropdown
 					{...subProps.dropdown}
-					open={!ignoreStoreCollapse ? disableCollapse || !facet?.collapsed : undefined}
-					onClick={() => {
-						if (ignoreStoreCollapse) {
-							console.log('got here');
-							setCollapsed(!collapsed);
-						} else {
-							!disableCollapse && facet.toggleCollapse && facet?.toggleCollapse();
-						}
-					}}
-					onToggle={(e, a) => {
-						console.log('ontoggle', e, a);
-					}}
+					open={disableCollapse || !facet?.collapsed}
+					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 					disableA11y={true}
 					button={
 						<div
@@ -324,7 +308,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							}`}
 						>
 							{facet?.label}
-							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}{' '}
 						</div>
 					}
 				>
