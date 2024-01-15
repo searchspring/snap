@@ -23,7 +23,6 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			alignItems: 'center',
 			color: color || variables?.color?.secondary,
 			fontWeight: 'bold',
-			// margin: '0 0 20px 0',
 		},
 		'& .ss__facet__options': {
 			marginTop: '8px',
