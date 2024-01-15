@@ -27,7 +27,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<HorizontalFacetsProps> = {
-		limit: 4,
+		limit: 6,
 		facets: properties.controller?.store?.facets,
 	};
 

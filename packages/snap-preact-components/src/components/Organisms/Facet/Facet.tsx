@@ -96,7 +96,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		color,
 		previewOnFocus,
 		valueProps,
-		ignoreStoreCollapse,
 		disableStyles,
 		className,
 		style,
@@ -308,11 +307,11 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							}`}
 						>
 							{facet?.label}
-							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}{' '}
+							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>
-					{!ignoreStoreCollapse && <FacetContent {...facetContentProps}></FacetContent>}
+					<FacetContent {...facetContentProps}></FacetContent>
 				</Dropdown>
 			</div>
 		</CacheProvider>
@@ -430,7 +429,6 @@ interface OptionalFacetProps extends ComponentProps {
 	fields?: FieldProps;
 	display?: FieldProps;
 	searchable?: boolean;
-	ignoreStoreCollapse?: boolean;
 	justContent?: boolean;
 }
 

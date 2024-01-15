@@ -42,6 +42,7 @@ export default {
 		},
 		limit: {
 			description: 'Maximum number of facets to display',
+			defaultValue: 6,
 			type: { required: false },
 			table: {
 				type: {
@@ -49,6 +50,28 @@ export default {
 				},
 			},
 			control: { type: 'number' },
+		},
+		hideFiltersButton: {
+			defaultValue: false,
+			description: 'prevents the MobileSidebar and its button from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		alwaysShowFiltersButton: {
+			defaultValue: false,
+			description: 'Always render MobileSidebar regardless of facet overflow set my limit prop',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		controller: {
 			description: 'Controller reference',
