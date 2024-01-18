@@ -56,7 +56,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		clearButtonText: 'Clear All',
 		applyButtonText: 'Apply',
 		titleText: 'Filter Options',
-		displayAt: '650px',
+		displayAt: '',
 		closeButtonIcon: 'close-thin',
 	};
 
@@ -100,7 +100,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		slideout: {
 			// default props
 			controller,
-			displayAt: `(max-width: ${displayAt})`,
+			displayAt: (displayAt && `(max-width: ${displayAt})`) || '',
 			// global theme
 			...globalTheme?.components?.slideout,
 			// inherited props

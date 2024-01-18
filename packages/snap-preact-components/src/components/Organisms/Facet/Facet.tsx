@@ -101,6 +101,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		style,
 		styleScript,
 		justContent,
+		horizontal,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -157,6 +158,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -171,6 +173,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -185,6 +188,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -199,6 +203,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -430,6 +435,7 @@ interface OptionalFacetProps extends ComponentProps {
 	display?: FieldProps;
 	searchable?: boolean;
 	justContent?: boolean;
+	horizontal?: boolean;
 }
 
 type FieldProps = {

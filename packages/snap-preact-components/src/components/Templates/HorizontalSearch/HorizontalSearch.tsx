@@ -144,7 +144,23 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		},
 		TopToolbar: {
 			// default props
+			hidefilterSummary: false,
+			hideSortBy: true,
+			hidePagination: true,
+			hidePerPage: true,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		MiddleToolbar: {
+			// default props
 			hidefilterSummary: true,
+			hideSortBy: false,
+			hidePagination: false,
+			hidePerPage: false,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -208,7 +224,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 
 	const merchandising = controller.store.merchandising;
 
-	// let hideLeftBanner; // TODO: Where should left banner go for horizontal layout?
 	let hideHeaderBanner;
 	let hideBannerBanner;
 	let hideFooterBanner;
@@ -216,7 +231,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 	if (hideMerchandisingBanners) {
 		if (typeof hideMerchandisingBanners == 'boolean') {
 			//hide all
-			// hideLeftBanner = true;
 			hideHeaderBanner = true;
 			hideBannerBanner = true;
 			hideFooterBanner = true;
@@ -231,9 +245,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				if (type.toLowerCase() == 'footer') {
 					hideFooterBanner = true;
 				}
-				// if (type.toLowerCase() == 'left') {
-				// 	hideLeftBanner = true;
-				// }
 			});
 		}
 	}
@@ -251,6 +262,14 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			<div {...styling} className={classnames('ss__horizontal-search', className)}>
 				{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
+				{!hideTopToolbar && store.pagination.totalResults > 0 && (
+					<Toolbar
+						{...subProps.TopToolbar}
+						className="ss__horizontal-search__content__toolbar--top-toolbar"
+						name={'topToolBar'}
+						controller={controller}
+					/>
+				)}
 				<HorizontalFacets {...subProps.HorizontalFacets} facets={store.facets} controller={controller} />
 
 				<div className={classnames('ss__horizontal-search__content')}>
@@ -268,9 +287,9 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 
 					{!hideTopToolbar && store.pagination.totalResults > 0 && (
 						<Toolbar
-							{...subProps.TopToolbar}
-							className="ss__horizontal-search__content__toolbar--top-toolbar"
-							name={'topToolBar'}
+							{...subProps.MiddleToolbar}
+							className="ss__horizontal-search__content__toolbar--middle-toolbar"
+							name={'middleToolBar'}
 							controller={controller}
 						/>
 					)}
@@ -323,6 +342,7 @@ interface HorizontalSearchSubProps {
 	LayoutSelector: Partial<LayoutSelectorProps>;
 	Banner: Partial<BannerProps>;
 	TopToolbar: Partial<ToolbarProps>;
+	MiddleToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
 	Results: Partial<ResultsProps>;

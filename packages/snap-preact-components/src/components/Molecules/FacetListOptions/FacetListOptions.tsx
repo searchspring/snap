@@ -40,7 +40,9 @@ const CSS = {
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<FacetListOptionsProps> = {};
+	const defaultProps: Partial<FacetListOptionsProps> = {
+		hideCheckbox: properties.horizontal ? true : false,
+	};
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
@@ -84,8 +86,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
+									? `filter by ${facet?.label} - ${value.label}`
+									: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

@@ -14,7 +14,6 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
-import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { useClickOutside } from '../../../hooks';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -33,8 +32,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 
 	let props = mergeProps('horizontalFacets', globalTheme, defaultProps, properties);
 
-	const { facets, limit, hideFiltersButton, alwaysShowFiltersButton, onFacetOptionClick, disableStyles, className, style, styleScript, controller } =
-		props;
+	const { facets, limit, overlay, alwaysShowFiltersButton, onFacetOptionClick, disableStyles, className, style, styleScript, controller } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -77,19 +75,6 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 	}
 
 	const subProps: HorizontalFacetsSubProps = {
-		filterSummary: {
-			// default props
-			className: 'ss__horizontal-facets__filter-summary',
-			controller,
-			// global theme
-			...globalTheme?.components?.filterSummary,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
 		dropdown: {
 			// default props
 			className: 'ss__horizontal-facets__header__dropdown',
@@ -119,13 +104,17 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		},
 		facet: {
 			// default props
-			className: 'ss__horizontal-facets__content__facet ss__horizontal-facets__content__facet--horizontalFacet',
+			className: `ss__horizontal-facets__content__facet ss__horizontal-facets__content__facet--${
+				overlay ? 'horizontalOverlayFacet' : 'horizontalFacet'
+			}`,
 			justContent: true,
+			horizontal: true,
 			// global theme
 			...globalTheme?.components?.facet,
 			// inherited props
 			...defined({
 				disableStyles,
+				overlay,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -135,7 +124,6 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			className: 'ss__horizontal-facets__header__mobile-sidebar',
 			hidePerPage: true,
 			hideSortBy: true,
-			displayAt: '5000px',
 			// global theme
 			...globalTheme?.components?.mobileSidebar,
 			// inherited props
@@ -166,9 +154,11 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 
 	return facetsToShow && facetsToShow?.length > 0 ? (
 		<CacheProvider>
-			<div className={classnames('ss__horizontal-facets', className)} ref={innerRef as React.LegacyRef<HTMLDivElement>} {...styling}>
-				<FilterSummary {...subProps.filterSummary} />
-
+			<div
+				className={classnames('ss__horizontal-facets', { 'ss__horizontal-facets--overlay': overlay }, className)}
+				ref={innerRef as React.LegacyRef<HTMLDivElement>}
+				{...styling}
+			>
 				<div className="ss__horizontal-facets__header">
 					{facetsToShow.map((facet: IndividualFacetType) => (
 						<Dropdown
@@ -183,7 +173,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 							}}
 							button={
 								<div
-									className="ss__horizontal-facets__header__dropdown__button"
+									className="ss__horizontal-facets__header__dropdown__button ss__dropdown__button"
 									role="heading"
 									aria-level={3}
 									aria-label={`currently ${selectedFacet?.field === facet.field ? 'collapsed' : 'open'} ${facet.field} facet dropdown ${
@@ -194,15 +184,22 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 									<Icon {...subProps.icon} icon={selectedFacet?.field === facet.field ? 'angle-up' : 'angle-down'} />
 								</div>
 							}
-						/>
+							disableOverlay={!overlay}
+						>
+							{overlay ? <Facet {...subProps.facet} facet={facet} /> : undefined}
+						</Dropdown>
 					))}
-					{((isOverflowing && !hideFiltersButton) || alwaysShowFiltersButton) && (
-						<MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>
-					)}
+					{(isOverflowing || alwaysShowFiltersButton) && <MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>}
 				</div>
 
-				{selectedFacet && (
-					<div className="ss__horizontal-facets__content">
+				{!overlay && selectedFacet && (
+					<div
+						className={classnames(
+							'ss__horizontal-facets__content',
+							`ss__horizontal-facets__content--${selectedFacet.display}`,
+							`ss__horizontal-facets__content--${selectedFacet.field}`
+						)}
+					>
 						<Facet {...subProps.facet} name={'horizontalFacet'} facet={facets?.find((facet) => facet.field === selectedFacet.field)!} />
 					</div>
 				)}
@@ -214,7 +211,6 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 });
 
 interface HorizontalFacetsSubProps {
-	filterSummary: Partial<FilterSummaryProps>;
 	dropdown: Partial<DropdownProps>;
 	icon: Partial<IconProps>;
 	facet: Partial<FacetProps>;
@@ -224,7 +220,7 @@ interface HorizontalFacetsSubProps {
 export interface HorizontalFacetsProps extends ComponentProps {
 	facets?: IndividualFacetType[];
 	limit?: number;
-	hideFiltersButton?: boolean;
+	overlay?: boolean;
 	alwaysShowFiltersButton?: boolean;
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;

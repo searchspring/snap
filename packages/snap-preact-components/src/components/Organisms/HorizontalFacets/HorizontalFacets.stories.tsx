@@ -51,9 +51,9 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		hideFiltersButton: {
+		alwaysShowFiltersButton: {
 			defaultValue: false,
-			description: 'prevents the MobileSidebar and its button from rendering',
+			description: 'Always render MobileSidebar regardless of facet overflow set my limit prop',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -62,9 +62,9 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		alwaysShowFiltersButton: {
+		overlay: {
 			defaultValue: false,
-			description: 'Always render MobileSidebar regardless of facet overflow set my limit prop',
+			description: 'render facet options as a dropdown overlay',
 			table: {
 				type: {
 					summary: 'boolean',

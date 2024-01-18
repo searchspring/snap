@@ -31,16 +31,16 @@ The `limit` prop will limit the maximum number of facets to display before displ
 <HorizontalFacets controller={controller} limit={6}/>
 ```
 
-### hideFiltersButton
-The `hideFiltersButton` prop will hide the overflow button and MobileSidebar if facets are overflowing due to `limit` prop. 
-
-```jsx
-<HorizontalFacets controller={controller} hideFiltersButton={true} />
-```
-
 ### alwaysShowFiltersButton
 The `alwaysShowFiltersButton` prop will always render the button and MobileSidebar.
 
 ```jsx
 <HorizontalFacets controller={controller} alwaysShowFiltersButton={true} />
+```
+
+### overlay
+The `overlay` prop will render the facet options in a dropdown overlay.
+
+```jsx
+<HorizontalFacets controller={controller} overlay={true}/>
 ```

@@ -40,6 +40,7 @@ import type { ToolbarProps } from '../components/Organisms/Toolbar';
 import type { AutocompleteProps } from '../components/Templates/Autocomplete';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
 import type { SearchProps } from '../components/Templates/Search';
+import type { HorizontalSearchProps } from '../components/Templates/HorizontalSearch';
 import type { NoResultsProps } from '../components/Atoms/NoResults';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import type { FacetToggleProps } from '../components/Molecules/FacetToggle';
@@ -110,4 +111,5 @@ export type ThemeComponents = {
 	autocomplete?: GenericComponentProps<AutocompleteProps>;
 	recommendation?: GenericComponentProps<RecommendationProps>;
 	search?: GenericComponentProps<SearchProps>;
+	horizontalSearch?: GenericComponentProps<HorizontalSearchProps>;
 };

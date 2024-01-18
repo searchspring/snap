@@ -16,7 +16,6 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 
 			'& .ss__horizontal-facets__header__dropdown': {
 				flex: '0 0 0%',
-				padding: '5px 10px',
 				margin: '0 0 10px 0',
 				boxSizing: 'border-box',
 				minWidth: '100px',
@@ -29,19 +28,45 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
+					padding: '5px 10px',
 				},
 
 				'&.ss__dropdown--open': {
-					backgroundColor: variables?.color?.active?.background,
-					color: variables?.color?.active?.foreground,
-
 					'& .ss__horizontal-facets__header__dropdown__button': {
+						backgroundColor: variables?.color?.active?.background,
+						color: variables?.color?.active?.foreground,
+
 						'& .ss__icon': {
 							fill: variables?.color?.active?.accent,
 							transform: 'rotate(180deg)',
 						},
 					},
+					'& .ss__dropdown__content': {
+						padding: '10px',
+						minWidth: '160px',
+						width: 'max-content',
+						maxHeight: '500px',
+						overflowY: 'auto',
+						zIndex: 1,
+					},
 				},
+			},
+		},
+		'&.ss__horizontal-facets--overlay': {
+			'& .ss__horizontal-facets__header__dropdown': {
+				'&.ss__dropdown--open': {
+					'& .ss__dropdown__content': {
+						border: `1px solid ${variables?.color?.active?.background || '#ccc'}`,
+					},
+				},
+			},
+		},
+		'& .ss__facet__show-more-less': {
+			display: 'block',
+			margin: '8px 8px 0 8px',
+			cursor: 'pointer',
+			'& .ss__icon': {
+				marginRight: '8px',
 			},
 		},
 	});
@@ -58,14 +83,10 @@ export const horizontalFacets: Partial<HorizontalFacetsProps> = {
 						theme: {
 							components: {
 								facetGridOptions: {
-									horizontal: true,
+									columns: 0,
 								},
 								facetPaletteOptions: {
-									horizontal: true,
-								},
-								facetListOptions: {
-									horizontal: true,
-									hideCheckbox: true,
+									columns: 0,
 								},
 							},
 						},
