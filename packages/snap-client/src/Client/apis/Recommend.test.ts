@@ -440,6 +440,26 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations will utilize the `blockedItems` parameter when provided', async () => {
+		const api = new RecommendAPI(new ApiConfiguration({}));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		const requestURL =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=undefined&limits=20&blockedItems=blocked_sku1&blockedItems=blocked_sku2&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+
+		// @ts-ignore
+		api.batchRecommendations({ blockedItems: ['blocked_sku1', 'blocked_sku2'], ...batchParams });
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledWith(requestURL, GETParams);
+		requestMock.mockReset();
+	});
+
 	it('batchRecommendations handles POST requests', async () => {
 		const api = new RecommendAPI(new ApiConfiguration({}));
 
