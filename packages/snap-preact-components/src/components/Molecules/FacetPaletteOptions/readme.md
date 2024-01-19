@@ -28,8 +28,15 @@ The `hideLabel` prop will disable the facet label.
 <FacetPaletteOptions values={paletteFacet.values} hideLabel={true} />
 ```
 
+### horizontal
+The `horizontal` prop render facet options horizontally.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} horizontal={true} />
+```
+
 ### columns
-The `columns` prop is the number of columns the grid should contain.
+The `columns` prop is the number of columns the grid should contain. Not applicable if using `horizontal` prop'.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} columns={3} />

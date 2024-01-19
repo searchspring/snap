@@ -18,8 +18,15 @@ The `facet` prop specifies the reference to the facet object in the store.
 <FacetGridOptions facet={sizeFacet} />
 ```
 
+### horizontal
+The `horizontal` prop render facet options horizontally.
+
+```jsx
+<FacetGridOptions values={sizeFacet.values} horizontal={true} />
+```
+
 ### columns
-The `columns` prop is the number of columns the grid should contain.
+The `columns` prop is the number of columns the grid should contain. Not applicable if using `horizontal` prop'.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} columns={3} />

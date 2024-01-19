@@ -14,6 +14,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 				flex: '0 1 auto',
 				border: `1px solid ${variables?.color?.secondary || '#333'}`,
 				padding: '0.5em 0.5em',
+				textDecoration: 'none',
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
 					marginRight: '2em',

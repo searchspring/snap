@@ -1,34 +1,36 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { HorizontalFacets, HorizontalFacetsProps } from './HorizontalFacets';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from '../HorizontalFacets/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/HorizontalFacets`,
+	title: 'Organisms/HorizontalFacets',
 	component: HorizontalFacets,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
 		},
 	},
-	decorators: [
-		(Story: any) => (
-			<div style={{ maxWidth: '300px' }}>
-				<Story />
-			</div>
-		),
-	],
 	argTypes: {
 		facets: {
 			description: 'Facets store reference',

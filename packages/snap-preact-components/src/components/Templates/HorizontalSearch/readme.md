@@ -66,7 +66,6 @@ The `hideLayoutSelector` prop specifies if the layoutSelector component should b
 The `layoutConfig` prop specifies the configuration for the layoutSelector.  
 
 ```jsx
-
 const layoutConfig = {
     default: {
         label: "5 wide",

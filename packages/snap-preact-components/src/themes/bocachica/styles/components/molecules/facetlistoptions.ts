@@ -18,7 +18,7 @@ const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetL
 			flex: horizontal ? '0 1 auto' : undefined,
 			border: horizontal ? `1px solid ${variables?.color?.secondary || '#333'}` : undefined,
 			padding: horizontal ? '0.5em 0.5em' : undefined,
-
+			textDecoration: 'none',
 			'&:hover': {
 				cursor: 'pointer',
 			},

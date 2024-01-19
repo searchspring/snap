@@ -49,6 +49,44 @@ const CSS = {
 				},
 			},
 		}),
+	hierarchyHorizontal: ({ theme }: Partial<FacetHierarchyOptionsProps>) =>
+		css({
+			display: 'flex',
+			flexWrap: 'wrap',
+			'& .ss__facet-hierarchy-options__option': {
+				margin: '0 5px 5px 0',
+				padding: '6px',
+				textDecoration: 'none',
+				flex: '0 1 auto',
+
+				'&:hover': {
+					cursor: 'pointer',
+					background: theme?.variables?.color?.hover?.background,
+				},
+				'&.ss__facet-hierarchy-options__option--filtered': {
+					fontWeight: 'bold',
+					color: theme?.variables?.color?.primary,
+					marginRight: '2em',
+					'&:hover': {
+						cursor: 'default',
+						background: 'unset',
+					},
+				},
+				'&.ss__facet-hierarchy-options__option--return': {
+					'&:before': {
+						content: `'\\0000ab'`,
+						padding: '0 2px 0 0',
+						color: theme?.variables?.color?.primary,
+					},
+				},
+				'& .ss__facet-hierarchy-options__option__value': {
+					'& .ss__facet-hierarchy-options__option__value__count': {
+						fontSize: '0.8em',
+						marginLeft: '6px',
+					},
+				},
+			},
+		}),
 };
 
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
@@ -57,7 +95,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, className, style, styleScript } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, horizontal, className, style, styleScript } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -65,7 +103,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
 	} else if (!disableStyles) {
-		styling.css = [CSS.hierarchy(stylingProps), style];
+		styling.css = [horizontal ? CSS.hierarchyHorizontal(stylingProps) : CSS.hierarchy(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -86,8 +124,8 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
+									? `filter by ${facet?.label} - ${value.label}`
+									: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

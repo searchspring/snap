@@ -92,6 +92,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		horizontal: {
+			defaultValue: false,
 			description: 'render the list options horizontally',
 			table: {
 				type: {

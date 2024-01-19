@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
@@ -19,7 +18,64 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	facets: ({}: Partial<HorizontalFacetsProps>) => css({}),
+	facets: ({ theme }: Partial<HorizontalFacetsProps>) =>
+		css({
+			'& .ss__horizontal-facets__header': {
+				display: 'flex',
+				flexWrap: 'wrap',
+
+				'& .ss__mobile-sidebar': {
+					margin: '0 10px',
+				},
+
+				'& .ss__horizontal-facets__header__dropdown': {
+					flex: '0 0 0%',
+					margin: '0 0 10px 0',
+					boxSizing: 'border-box',
+					minWidth: '100px',
+
+					'& .ss__horizontal-facets__header__dropdown__button': {
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						padding: '5px 10px',
+					},
+
+					'&.ss__dropdown--open': {
+						'& .ss__horizontal-facets__header__dropdown__button': {
+							'& .ss__icon': {
+								fill: theme?.variables?.color?.active?.accent,
+							},
+						},
+						'& .ss__dropdown__content': {
+							padding: '10px',
+							minWidth: '160px',
+							width: 'max-content',
+							maxHeight: '500px',
+							overflowY: 'auto',
+							zIndex: 1,
+						},
+					},
+				},
+			},
+			'&.ss__horizontal-facets--overlay': {
+				'& .ss__horizontal-facets__header__dropdown': {
+					'&.ss__dropdown--open': {
+						'& .ss__dropdown__content': {
+							border: `1px solid ${theme?.variables?.color?.active?.background || '#ccc'}`,
+						},
+					},
+				},
+			},
+			'& .ss__facet__show-more-less': {
+				display: 'block',
+				margin: '8px 8px 0 8px',
+				cursor: 'pointer',
+				'& .ss__icon': {
+					marginRight: '8px',
+				},
+			},
+		}),
 };
 
 export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JSX.Element => {

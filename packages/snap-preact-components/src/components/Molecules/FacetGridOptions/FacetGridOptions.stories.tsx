@@ -31,13 +31,6 @@ export default {
 			),
 		},
 	},
-	decorators: [
-		(Story: any) => (
-			<div style={{ maxWidth: '300px' }}>
-				<Story />
-			</div>
-		),
-	],
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
@@ -61,7 +54,7 @@ export default {
 		},
 		columns: {
 			defaultValue: 4,
-			description: 'Number of columns in grid',
+			description: 'Number of columns in grid. Not applicable if using horizontal prop',
 			table: {
 				type: {
 					summary: 'number',
@@ -100,6 +93,17 @@ export default {
 				defaultValue: { summary: '{}' },
 			},
 			control: { type: 'none' },
+		},
+		horizontal: {
+			defaultValue: false,
+			description: 'render facet options horizontally',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		onClick: {
 			description: 'Facet option click event handler',

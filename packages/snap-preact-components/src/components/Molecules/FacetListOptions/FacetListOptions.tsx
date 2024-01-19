@@ -12,13 +12,17 @@ import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
+	list: ({ theme, horizontal, hideCheckbox }: Partial<FacetListOptionsProps>) =>
 		css({
+			display: horizontal ? 'flex' : undefined,
+			flexWrap: horizontal ? 'wrap' : undefined,
+
 			'& .ss__facet-list-options__option': {
-				display: 'flex',
+				display: horizontal ? undefined : 'flex',
+				alignItems: horizontal ? undefined : 'center',
+				flex: horizontal ? '0 1 auto' : undefined,
 				padding: '6px',
 				textDecoration: 'none',
-				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
 					background: theme?.variables?.color?.hover?.background,

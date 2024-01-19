@@ -19,7 +19,9 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
-			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
+			gridTemplateColumns: columns
+				? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
+				: 'repeat(auto-fill, minmax(45px, 1fr))',
 			gap: gapSize,
 
 			'& .ss__facet-palette-options__option--list': {
@@ -186,6 +188,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		previewOnFocus,
 		valueProps,
 		facet,
+		horizontal,
 		disableStyles,
 		className,
 		style,
@@ -221,6 +224,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			theme: props?.theme,
 		},
 	};
+
+	if (horizontal) {
+		props.columns = 0;
+	}
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -311,6 +318,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 			background?: string;
 		};
 	};
+	horizontal?: boolean;
 }
 
 interface FacetPaletteOptionsSubProps {

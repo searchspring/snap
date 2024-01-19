@@ -15,7 +15,7 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
-			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(45px, 1fr))`,
 			gap: gapSize,
 			gridAutoRows: `1fr`,
 
@@ -82,7 +82,11 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
 
-	const { values, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
+	const { values, onClick, previewOnFocus, valueProps, facet, horizontal, disableStyles, className, style, styleScript } = props;
+
+	if (horizontal) {
+		props.columns = 0;
+	}
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -107,8 +111,8 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
+									? `filter by ${facet?.label} - ${value.label}`
+									: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}
