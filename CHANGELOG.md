@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
+
+### Bug Fixes
+
+- **controller/autocomplete:** reverting the default setting for redirect on single result from AC ([8cd9a1e](https://github.com/searchspring/snap/commit/8cd9a1ee0894b57addcd3782d8bdb52c869dd8bb))
+
+### Features
+
+- **client/recommend:** adding support for `products` and `blockedItems` parameters ([f71859e](https://github.com/searchspring/snap/commit/f71859e0cc942f58121e3e3e2ea05fb2cc5fcd90))
+
 # [0.50.0](https://github.com/searchspring/snap/compare/v0.49.1...v0.50.0) (2024-01-04)
 
 ### Bug Fixes
