@@ -257,7 +257,7 @@ const client = new Client(globals, clientConfig);
 const results = await client.recommend({
   tag: 'similar',
   siteId: 'abc123',
-  product: 'product123',
+  products: ['product123'],
   shopper: 'snapdev',
 });
 ```
