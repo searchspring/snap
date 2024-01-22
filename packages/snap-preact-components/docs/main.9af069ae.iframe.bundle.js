@@ -1,4 +1,4 @@
-/*! For license information please see main.006c8867.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.9af069ae.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -28610,7 +28610,7 @@
 						syncInputs: !0,
 						serializeForm: !1,
 						facets: { trim: !0, pinFiltered: !0 },
-						redirects: { merchandising: !0, singleResult: !0 },
+						redirects: { merchandising: !0, singleResult: !1 },
 					},
 				},
 				AutocompleteController = (function (_AbstractController, _setFocused, _bind) {
@@ -33618,7 +33618,11 @@
 																															? (batch.request.brands = batch.request.brands.concat(brands))
 																															: (batch.request.brands = Array.isArray(brands) ? brands : [brands])),
 																													(batch.request.limits = batch.request.limits.concat(limits)),
-																													(batch.request = Object.assign({}, batch.request, otherParams));
+																													(batch.request = Object.assign({}, batch.request, otherParams)),
+																													batch.request.product &&
+																														Array.isArray(batch.request.products) &&
+																														((batch.request.products = batch.request.products.concat(batch.request.product)),
+																														delete batch.request.product);
 																											}),
 																											(_context2.prev = 3),
 																											_this3.configuration.mode == AppMode.development && (batch.request.test = !0),
@@ -40522,7 +40526,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.50.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.51.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41021,7 +41025,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.50.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.51.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
