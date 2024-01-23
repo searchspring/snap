@@ -1,0 +1,15 @@
+{
+	"name": "bundle",
+	"label": "Bundle Template",
+	"description": "a bundle template...",
+	"component": "Bundles",
+	"orientation": "horizontal",
+	"parameters": [
+		{
+			"name": "title",
+			"label": "Title",
+			"description": "this shows the title",
+			"defaultValue": "Why not also buy?"
+		}
+	]
+}

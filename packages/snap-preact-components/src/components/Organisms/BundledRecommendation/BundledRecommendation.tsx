@@ -281,7 +281,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 	Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
 		const obj = props.breakpoints![breakpoint];
 
-		if (!seedInCarousel) {
+		if (!seedInCarousel && resultsToRender.length) {
 			modifiedBreakpoints[breakpoint] = {
 				...obj,
 				slidesPerView: obj.slidesPerView! - 1,
