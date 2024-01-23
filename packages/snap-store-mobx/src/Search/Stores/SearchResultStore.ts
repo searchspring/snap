@@ -209,48 +209,52 @@ class Variants {
 		});
 	}
 
-	public reset(skip?: string) {
-		// this.selections.map(selection => {
-		// 	if ((available && (selection.field !== topLevelFeild)) || (!available && (selection.field !== updatedFrom))) {
+	// public reset(skip?: string) {
+	// this.selections.map(selection => {
+	// 	if ((available && (selection.field !== topLevelFeild)) || (!available && (selection.field !== updatedFrom))) {
 
-		// 		//choose the last user selection if it exists
-		// 		if (selection.lastUserSelection && availableVariants.filter(variant => variant.options[selection.field] == selection.lastUserSelection).length) {
-		// 			availableVariants = availableVariants.filter(variant => variant.options[selection.field] == selection.lastUserSelection)
-		// 			selection.select(selection.lastUserSelection);
-		// 		}else {
-		// 			//otherwise just choose the first available option
-		// 			if (availableVariants.length){
-		// 				const valueToSelect = availableVariants[0].options[selection.field] as string;
-		// 				if (valueToSelect){
-		// 					selection.setSelected(valueToSelect)
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// });
+	// 		//choose the last user selection if it exists
+	// 		if (selection.lastUserSelection && availableVariants.filter(variant => variant.options[selection.field] == selection.lastUserSelection).length) {
+	// 			availableVariants = availableVariants.filter(variant => variant.options[selection.field] == selection.lastUserSelection)
+	// 			selection.select(selection.lastUserSelection);
+	// 		}else {
+	// 			//otherwise just choose the first available option
+	// 			if (availableVariants.length){
+	// 				const valueToSelect = availableVariants[0].options[selection.field] as string;
+	// 				if (valueToSelect){
+	// 					selection.setSelected(valueToSelect)
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// });
 
-		if (this.selections) {
-			this.options.map((option) => {
-				if (option !== skip) {
-					const resetMe = this.selections.filter((selection) => selection.field == option);
-					if (resetMe.length) {
-						resetMe[0].reset();
-					}
-				}
-			});
+	// 	if (this.selections) {
+	// 		this.options.map((option) => {
+	// 			if (option !== skip) {
+	// 				const resetMe = this.selections.filter((selection) => selection.field == option);
+	// 				if (resetMe.length) {
+	// 					resetMe[0].reset();
+	// 				}
+	// 			}
+	// 		});
 
-			const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
+	// 		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
 
-			this.selections.forEach((selection) => selection.refineSelections(this.data, selectedSelections));
-		}
-	}
+	// 		this.selections.forEach((selection) => selection.refineSelections(this.data, selectedSelections, selection.field));
+	// 	}
+	// }
 
-	public update(updatedFrom: string, available: boolean) {
+	public update(updatedFrom: VariantSelection) {
 		/*
 			variantSelection runs update after selection is made
-			then
+			THEN
 			each variantSelection needs to refine its options based on selections
-				1. this may unselect current selection IF it is
+				* this may unselect current selection IF it is unavailable
+			INSIDE refineSelections
+				* use reference to variants to get all other selections
+				* flag wether or not the 
+
 		*/
 
 		// if (this.selections){
@@ -273,18 +277,17 @@ class Variants {
 		// filter out data based on current selections
 		// find out what the currently selection options are (from sibling VariantSelections)
 
-		//grab the selections that are actually selected
+		// //grab the selections that are actually selected
 		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
-		const topLevelFeild = this.options[0];
+		// const topLevelFeild = this.options[0];
 
-		if ((available && topLevelFeild == updatedFrom) || !available) {
-			this.reset(updatedFrom);
-			return;
-		}
+		// if ((available && topLevelFeild == updatedFrom) || !available) {
+		// 	this.reset(updatedFrom);
+		// 	return;
+		// }
 
 		if (selectedSelections.length) {
-			const filteredData: Variant[] = [];
-			let availableVariants: Variant[] = [];
+			const availableVariants: Variant[] = [];
 			this.data.map((variant) => {
 				//find active variant if exists
 				let variantOptionAvailable = true;
@@ -294,44 +297,21 @@ class Variants {
 					}
 				}
 
-				filteredData.push(variant);
-
 				if (variantOptionAvailable) {
 					availableVariants.push(variant);
 				}
 			});
+			this.selections.forEach((selection) =>
+				selection.refineSelections(
+					this.data,
+					availableVariants,
+					this.selections.filter((selection) => selection.selected),
+					updatedFrom
+				)
+			);
 
-			this.selections.map((selection) => {
-				selection.refineSelections(filteredData, selectedSelections);
-			});
-
-			//if the value you are trying to select is not currently available or top level option changed. (color) pick first variant that fits that option and update the display
-			if (topLevelFeild == updatedFrom || !available) {
-				this.selections.map((selection) => {
-					if ((available && selection.field !== topLevelFeild) || (!available && selection.field !== updatedFrom)) {
-						//choose the last user selection if it exists
-						console.log('lastuserSelection in update', selection.lastUserSelection, selection.field);
-
-						if (
-							selection.lastUserSelection &&
-							availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection).length
-						) {
-							availableVariants = availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection);
-							selection.select(selection.lastUserSelection);
-						} else {
-							//otherwise just choose the first available option
-							if (availableVariants.length) {
-								const valueToSelect = availableVariants[0].options[selection.field] as string;
-								if (valueToSelect) {
-									selection.setSelected(valueToSelect);
-								}
-							}
-						}
-					}
-				});
-			} else if (availableVariants.length == 1) {
-				//check if all selections are made, and set active if true
-
+			//check if all selections are made, and set active if true
+			if (availableVariants.length == 1) {
 				//needed to check variant selection length, in case some variants dont have all the same length of selections
 				const options = this.options;
 				let variantSelectionLength = 0;
@@ -341,15 +321,66 @@ class Variants {
 					}
 				});
 
-				if (this.selections.filter((selection) => selection.selected?.length).length == variantSelectionLength) {
+				if (selectedSelections.length == variantSelectionLength) {
 					this.active = availableVariants[0];
 					this.setDisplay(this.active);
 				}
 			}
-		} else {
-			//back to normal
-			this.selections.map((selection) => selection.refineSelections(this.data, selectedSelections));
+			// } else {
+			// 	//back to normal
+			// 	this.selections.map((selection) => selection.refineSelections(this.data, selectedSelections));
+			// }
 		}
+
+		// 	this.selections.map((selection) => {
+		// 		selection.refineSelections(filteredData, selectedSelections);
+		// 	});
+
+		// 	//if the value you are trying to select is not currently available or top level option changed. (color) pick first variant that fits that option and update the display
+		// 	if (topLevelFeild == updatedFrom || !available) {
+		// 		this.selections.map((selection) => {
+		// 			if ((available && selection.field !== topLevelFeild) || (!available && selection.field !== updatedFrom)) {
+		// 				//choose the last user selection if it exists
+		// 				console.log('lastuserSelection in update', selection.lastUserSelection, selection.field);
+
+		// 				if (
+		// 					selection.lastUserSelection &&
+		// 					availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection).length
+		// 				) {
+		// 					availableVariants = availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection);
+		// 					selection.select(selection.lastUserSelection);
+		// 				} else {
+		// 					//otherwise just choose the first available option
+		// 					if (availableVariants.length) {
+		// 						const valueToSelect = availableVariants[0].options[selection.field] as string;
+		// 						if (valueToSelect) {
+		// 							selection.setSelected(valueToSelect);
+		// 						}
+		// 					}
+		// 				}
+		// 			}
+		// 		});
+		// 	} else if (availableVariants.length == 1) {
+		// 		//check if all selections are made, and set active if true
+
+		// 		//needed to check variant selection length, in case some variants dont have all the same length of selections
+		// 		const options = this.options;
+		// 		let variantSelectionLength = 0;
+		// 		options?.forEach((option) => {
+		// 			if (availableVariants[0].options.hasOwnProperty(option)) {
+		// 				variantSelectionLength++;
+		// 			}
+		// 		});
+
+		// 		if (this.selections.filter((selection) => selection.selected?.length).length == variantSelectionLength) {
+		// 			this.active = availableVariants[0];
+		// 			this.setDisplay(this.active);
+		// 		}
+		// 	}
+		// } else {
+		// 	//back to normal
+		// 	this.selections.map((selection) => selection.refineSelections(this.data, selectedSelections));
+		// }
 	}
 }
 
@@ -377,7 +408,7 @@ class VariantSelection {
 		this.variants = variants;
 
 		// create possible values from the data
-		this.refineSelections(data, []);
+		this.refineSelections(data, data, []);
 
 		//set first variant active if flag is set
 		if ((config as SearchStoreConfig).settings?.variants?.setFirstActive) {
@@ -394,46 +425,211 @@ class VariantSelection {
 		});
 	}
 
-	public refineSelections(data: Variant[], selectedSelections: VariantSelection[]) {
+	public refineSelections(
+		allVariants: Variant[],
+		availableVariants: Variant[],
+		selectedSelections: VariantSelection[],
+		updatedFrom?: VariantSelection
+	) {
+		console.log(selectedSelections, updatedFrom);
+		/*
+			INSIDE refineSelections
+			* use reference to variants to get all other selections
+			1. reduce the values to what is available based on selections
+
+		*/
+
+		// //grab the selections that are actually selected
+		// const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
+		// const topLevelFeild = this.options[0];
+
+		// if ((available && topLevelFeild == updatedFrom) || !available) {
+		// 	this.reset(updatedFrom);
+		// 	return;
+		// }
+
+		// const valueObj: SelectionValue = {
+		// 	value: variant.options[this.field] as string,
+		// 	available: false,
+		// };
+
+		// //only push the new value if it hasnt already been added to the selection
+		// if (!newValues.some((val) => val.value === variant.options[this.field])) {
+		// 	newValues.push(valueObj);
+		// }
+
+		// if (variant.attributes.available) {
+		// 	if (selectedSelections.length) {
+		// 		let available = true;
+
+		// 		for (let i = 0; i < selectedSelections.length; i++) {
+		// 			const selection = selectedSelections[i];
+		// 			//need to check if the variant is available if you dont consider its own field
+		// 			if (selection.field !== this.field) {
+		// 				//if any selection matches, variant is available
+		// 				if (variant.options[selection.field] !== selection.selected) {
+		// 					available = false;
+		// 					break;
+		// 				}
+		// 			}
+		// 		}
+		// 		if (available) {
+		// 			newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+		// 		}
+		// 	} else {
+		// 		newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+		// 	}
+		// }
+
+		// get values for this option
+		// determine if that option has any variants available for it (in availableVariants)
+
+		// const newValues: SelectionValue[] = allVariants.reduce((values: SelectionValue[], variant) => {
+		// 	if (!values.some(val => variant.options[this.field] == val.value)) {
+		// 		values.push({
+		// 			value: variant.options[this.field] as string,
+		// 			available: Boolean(availableVariants.some(variant => variant.options[this.field] == variant.options[this.field] && variant.available)),
+		// 		})
+		// 	}
+		// 	return values;
+		// }, [])
+
 		const newValues: SelectionValue[] = [];
-		data.forEach((variant) => {
-			if (variant.options[this.field] && typeof variant.options[this.field] == 'string') {
-				const valueObj: SelectionValue = {
+		allVariants
+			.filter((variant) => variant.options[this.field])
+			.map((variant) => {
+				const valueObj = {
 					value: variant.options[this.field] as string,
 					available: false,
 				};
 
-				//only push the new value if it hasnt already been added to the selection
 				if (!newValues.some((val) => val.value === variant.options[this.field])) {
 					newValues.push(valueObj);
 				}
 
-				if (variant.attributes.available) {
-					if (selectedSelections.length) {
-						let available = true;
+				if (availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])) {
+					newValues[newValues.findIndex((val) => val.value == variant.options[this.field])].available = true;
+				}
+			});
 
-						for (let i = 0; i < selectedSelections.length; i++) {
-							const selection = selectedSelections[i];
-							//need to check if the variant is available if you dont consider its own field
-							if (selection.field !== this.field) {
-								//if any selection matches, variant is available
-								if (variant.options[selection.field] !== selection.selected) {
-									available = false;
-									break;
-								}
-							}
-						}
-						if (available) {
-							newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+		// if selection has been made
+		if (this.selected) {
+			//is that selection still available?
+			if (!newValues.some((val) => val.value == this.selected && val.available)) {
+				// the previous selection is no longer available
+				// if (this.lastUserSelection && availableVariants.filter((variant) => variant.options[this.field] == this.lastUserSelection).length) {
+				if (this.lastUserSelection && newValues.some((val) => val.value == this.lastUserSelection && val.available)) {
+					// availableVariants = availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection);
+					if (this.selected !== this.lastUserSelection) {
+						this.setSelected(this.lastUserSelection);
+					}
+				} else {
+					//otherwise just choose the first available option
+					const availableValues = newValues.filter((val) => val.available);
+					if (newValues.length && availableValues.length) {
+						const nextAvailableValue = availableValues[0].value;
+						if (this.selected !== nextAvailableValue) {
+							this.setSelected(nextAvailableValue);
 						}
 					} else {
-						newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+						console.log('no available variants to autoselect for ', this.field);
 					}
 				}
 			}
-		});
+		}
 
 		this.values = newValues;
+
+		// const available = updatedFrom.values.find((val) => val.value == updatedFrom.selected)?.available;
+
+		// 	//if the value you are trying to select is not currently available or top level option changed. (color) pick first variant that fits that option and update the display
+
+		// selectedSelections.map((selection) => {
+
+		// 	if (selection.field !== updatedFrom.field) {
+
+		// 		//choose the last user selection if it exists
+		// 		console.log('lastuserSelection in update', selection.lastUserSelection, selection.field);
+
+		// 		if (
+		// 			selection.lastUserSelection &&
+		// 			availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection).length
+		// 		) {
+		// 			availableVariants = availableVariants.filter((variant) => variant.options[selection.field] == selection.lastUserSelection);
+		// 			selection.select(selection.lastUserSelection);
+		// 		} else {
+		// 			//otherwise just choose the first available option
+		// 			if (availableVariants.length) {
+		// 				const valueToSelect = availableVariants[0].options[selection.field] as string;
+		// 				if (valueToSelect) {
+		// 					selection.setSelected(valueToSelect);
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// });
+
+		// 	} else if (availableVariants.length == 1) {
+		// 		//check if all selections are made, and set active if true
+
+		// 		//needed to check variant selection length, in case some variants dont have all the same length of selections
+		// 		const options = this.options;
+		// 		let variantSelectionLength = 0;
+		// 		options?.forEach((option) => {
+		// 			if (availableVariants[0].options.hasOwnProperty(option)) {
+		// 				variantSelectionLength++;
+		// 			}
+		// 		});
+
+		// 		if (this.selections.filter((selection) => selection.selected?.length).length == variantSelectionLength) {
+		// 			this.active = availableVariants[0];
+		// 			this.setDisplay(this.active);
+		// 		}
+		// 	}
+		// } else {
+		// 	//back to normal
+		// 	this.selections.map((selection) => selection.refineSelections(this.data, selectedSelections));
+		// }
+
+		// const newValues: SelectionValue[] = [];
+		// allVariants.forEach((variant) => {
+		// 	if (variant.options[this.field] && typeof variant.options[this.field] == 'string') {
+		// 		const valueObj: SelectionValue = {
+		// 			value: variant.options[this.field] as string,
+		// 			available: false,
+		// 		};
+
+		// 		//only push the new value if it hasnt already been added to the selection
+		// 		if (!newValues.some((val) => val.value === variant.options[this.field])) {
+		// 			newValues.push(valueObj);
+		// 		}
+
+		// 		if (variant.attributes.available) {
+		// 			if (selectedSelections.length) {
+		// 				let available = true;
+
+		// 				for (let i = 0; i < selectedSelections.length; i++) {
+		// 					const selection = selectedSelections[i];
+		// 					//need to check if the variant is available if you dont consider its own field
+		// 					if (selection.field !== this.field) {
+		// 						//if any selection matches, variant is available
+		// 						if (variant.options[selection.field] !== selection.selected) {
+		// 							available = false;
+		// 							break;
+		// 						}
+		// 					}
+		// 				}
+		// 				if (available) {
+		// 					newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+		// 				}
+		// 			} else {
+		// 				newValues[newValues.findIndex((_variant) => _variant.value == valueObj.value)].available = true;
+		// 			}
+		// 		}
+		// 	}
+		// });
+
+		// this.values = newValues;
 	}
 
 	public reset() {
@@ -445,10 +641,8 @@ class VariantSelection {
 	public setSelected(value: string) {
 		this.selected = value;
 
-		const val = this.values.find((val) => val.value == value);
-
 		// after a selection is made, we have to refine all other selections (eg. color chosen, need to limit size selection)
-		this.variants.update(this.field, val?.available!);
+		this.variants.update(this);
 	}
 
 	//select is used when you want to set lastUserSelection as well as selected
@@ -456,7 +650,7 @@ class VariantSelection {
 		const valueExist = this.values.find((val) => val.value == value);
 		if (valueExist) {
 			this.lastUserSelection = value;
-			console.log('lastuserSelection in select', this.lastUserSelection, this.field);
+			console.log('new lastuserSelection in select', this.lastUserSelection, this.field);
 			this.setSelected(value);
 		}
 	}
