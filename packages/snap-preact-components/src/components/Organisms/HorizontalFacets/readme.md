@@ -1,10 +1,9 @@
 # HorizontalFacets
 
-Renders all facets in a horizontal display. Incluses FilterSummary and MobileSidebar
+Renders all facets in a horizontal display. Also incluses MobileSidebar.
 
 ## Sub-components
 - Facet
-- FilterSummary
 - Dropdown
 - MobileSidebar
 
@@ -22,6 +21,20 @@ The optional`facets` prop specifies a reference to the facets store array. If no
 
 ```jsx
 <HorizontalFacets facets={facets} />
+```
+
+### iconExpand
+The `iconExpand` prop is the name of the icon to render when the facet is in its collapsed state.
+
+```jsx
+<HorizontalFacets facets={facets} iconExpand={'angle-down'} />
+```
+
+### iconCollapse
+The `iconCollapse` prop is the name of the icon to render when the facet is in its open state.
+
+```jsx
+<HorizontalFacets facets={facets} iconCollapse={'angle-up'} />
 ```
 
 ### limit

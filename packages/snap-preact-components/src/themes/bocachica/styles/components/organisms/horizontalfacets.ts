@@ -24,7 +24,7 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 					transition: 'transform ease .5s',
 				},
 
-				'& .ss__horizontal-facets__header__dropdown__button': {
+				'& .ss__dropdown__button__heading': {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
@@ -32,7 +32,7 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 				},
 
 				'&.ss__dropdown--open': {
-					'& .ss__horizontal-facets__header__dropdown__button': {
+					'& .ss__dropdown__button__heading': {
 						backgroundColor: variables?.color?.active?.background,
 						color: variables?.color?.active?.foreground,
 
@@ -75,24 +75,5 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 // Facets component props
 export const horizontalFacets: Partial<HorizontalFacetsProps> = {
 	styleScript: horizontalFacetsStyleScript,
-	theme: {
-		components: {
-			facet: {
-				named: {
-					horizontalFacet: {
-						theme: {
-							components: {
-								facetGridOptions: {
-									columns: 0,
-								},
-								facetPaletteOptions: {
-									columns: 0,
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	},
+	iconCollapse: 'angle-down',
 };

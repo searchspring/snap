@@ -49,6 +49,13 @@ The `gapSize` prop is the gap size between rows and columns.
 <FacetPaletteOptions values={paletteFacet.values} gapSize={'10px'} />
 ```
 
+### gridSize
+The `gridSize` prop is the size of each palette item. Does not apply if using `columns` prop.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} gridSize={'45px'} columns={0} />
+```
+
 ### hideIcon
 The `hideIcon` prop will disable the facet icon from being rendered.
 

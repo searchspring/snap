@@ -175,3 +175,17 @@ The `iconColor` prop sets the facet icon color.
 ```jsx
 <Facet facet={controller.store.facets[0]} iconColor={'#222222'} />
 ```
+
+### horizontal
+The `horizontal` prop renders the facet horizontally.
+
+```jsx
+<Facet facet={controller.store.facets[0]}  horizontal={true} />
+```
+
+### justContent
+The `justContent` prop renders just the facet options. Excludes rendering of the Dropdown sub-component.
+
+```jsx
+<Facet facet={controller.store.facets[0]}  justContent={true} />
+```

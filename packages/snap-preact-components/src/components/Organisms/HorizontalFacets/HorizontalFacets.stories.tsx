@@ -5,7 +5,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { HorizontalFacets, HorizontalFacetsProps } from './HorizontalFacets';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-
+import { iconPaths } from '../../Atoms/Icon';
 import Readme from '../HorizontalFacets/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 
@@ -66,7 +66,7 @@ export default {
 		},
 		overlay: {
 			defaultValue: false,
-			description: 'render facet options as a dropdown overlay',
+			description: 'Render facet options as a dropdown overlay',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -74,6 +74,34 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
+		},
+		iconExpand: {
+			defaultValue: 'angle-down',
+			description: 'Icon for when facet is collapsed',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'angle-down' },
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
+		},
+		iconCollapse: {
+			defaultValue: 'angle-up',
+			description: 'Icon for when facet is expanded',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'angle-up' },
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
 		},
 		controller: {
 			description: 'Controller reference',

@@ -93,7 +93,7 @@ export default {
 		},
 		horizontal: {
 			defaultValue: false,
-			description: 'render the list options horizontally',
+			description: 'Render the list options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

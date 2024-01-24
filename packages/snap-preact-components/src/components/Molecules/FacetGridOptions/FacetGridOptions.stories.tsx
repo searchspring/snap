@@ -31,6 +31,13 @@ export default {
 			),
 		},
 	},
+	decorators: [
+		(Story: any) => (
+			<div style={{ maxWidth: '500px' }}>
+				<Story />
+			</div>
+		),
+	],
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
@@ -74,6 +81,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		gridSize: {
+			defaultValue: '45px',
+			description: 'Size of each grid item. Does not apply if using `columns` prop',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '45px' },
+			},
+			control: { type: 'text' },
+		},
 		previewOnFocus: {
 			description: 'Invoke facet value preview upon focus',
 			table: {
@@ -96,7 +114,7 @@ export default {
 		},
 		horizontal: {
 			defaultValue: false,
-			description: 'render facet options horizontally',
+			description: 'Render facet options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

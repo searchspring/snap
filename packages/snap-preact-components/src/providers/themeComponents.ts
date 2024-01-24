@@ -31,6 +31,7 @@ import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
 import type { FacetProps } from '../components/Organisms/Facet';
+import type { HorizontalFacetsProps } from '../components/Organisms/HorizontalFacets';
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import type { ResultsProps } from '../components/Organisms/Results';
@@ -99,7 +100,7 @@ export type ThemeComponents = {
 	branchOverride?: GenericComponentProps<BranchOverrideProps>;
 	facet?: GenericComponentProps<FacetProps>;
 	facets?: GenericComponentProps<FacetsProps>;
-	horizontalFacets?: GenericComponentProps<FacetsProps>;
+	horizontalFacets?: GenericComponentProps<HorizontalFacetsProps>;
 	filterSummary?: GenericComponentProps<FilterSummaryProps>;
 	noResults?: GenericComponentProps<NoResultsProps>;
 	results?: GenericComponentProps<ResultsProps>;

@@ -76,7 +76,7 @@ export default {
 		},
 		horizontal: {
 			defaultValue: false,
-			description: 'render facet options horizontally',
+			description: 'Render facet options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

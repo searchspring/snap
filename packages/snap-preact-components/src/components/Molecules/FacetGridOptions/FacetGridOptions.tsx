@@ -11,11 +11,11 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
+	grid: ({ columns, gapSize, gridSize, theme }: Partial<FacetGridOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
-			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(45px, 1fr))`,
+			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 			gap: gapSize,
 			gridAutoRows: `1fr`,
 
@@ -78,6 +78,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 	const defaultProps: Partial<FacetGridOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
+		gridSize: '45px',
 	};
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
@@ -142,6 +143,7 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	values?: FacetValue[];
 	columns?: number;
 	gapSize?: string;
+	gridSize?: string;
 	onClick?: (e: React.MouseEvent) => void;
 	facet?: ValueFacet;
 	previewOnFocus?: boolean;

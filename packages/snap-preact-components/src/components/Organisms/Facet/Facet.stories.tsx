@@ -241,6 +241,28 @@ export default {
 				type: 'object',
 			},
 		},
+		horizontal: {
+			defaultValue: false,
+			description: 'Render facet options horizontally',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		justContent: {
+			defaultValue: false,
+			description: 'Render just the facet options. Excludes rendering of the Dropdown sub-component.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

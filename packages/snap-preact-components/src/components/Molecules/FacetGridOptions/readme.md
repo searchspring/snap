@@ -39,6 +39,13 @@ The `gapSize` prop is the gap size between rows and columns.
 <FacetGridOptions values={sizeFacet.values} gapSize={'10px'} />
 ```
 
+### gridSize
+The `gridSize` prop is the size of each grid item. Does not apply if using `columns` prop.
+
+```jsx
+<FacetGridOptions values={sizeFacet.values} gridSize={'45px'} columns={0} />
+```
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over. 
 

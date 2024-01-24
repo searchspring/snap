@@ -15,13 +15,13 @@ import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 
 const CSS = {
-	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
+	palette: ({ columns, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
 			gridTemplateColumns: columns
 				? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
-				: 'repeat(auto-fill, minmax(45px, 1fr))',
+				: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 			gap: gapSize,
 
 			'& .ss__facet-palette-options__option--list': {
@@ -163,6 +163,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
+		gridSize: '45px',
 		layout: 'grid',
 		gapSize: properties.layout == 'list' ? '2px' : '8px',
 		hideCount: true,
@@ -304,6 +305,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	hideLabel?: boolean;
 	columns?: number;
 	gapSize?: string;
+	gridSize?: string;
 	hideIcon?: boolean;
 	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;

@@ -1,13 +1,13 @@
 import { css, FacetGridOptionsProps } from '../../../../../index';
 
 // CSS in JS style script for the FacetGridOptions component
-const facetGridOptionsStyleScript = ({ columns, gapSize, theme }: FacetGridOptionsProps) => {
+const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: FacetGridOptionsProps) => {
 	const variables = theme?.variables;
 
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
-		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(45px, 1fr))`,
+		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 		color: variables?.color?.secondary,
 		gap: gapSize,
 		gridAutoRows: `1fr`,

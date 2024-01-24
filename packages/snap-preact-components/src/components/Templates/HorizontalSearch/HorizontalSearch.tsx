@@ -79,6 +79,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		layoutConfig,
 		hideMerchandisingBanners,
 		hideTopToolbar,
+		hideMiddleToolbar,
 		hideLayoutSelector,
 		resultComponent,
 		hideBottomToolBar,
@@ -284,7 +285,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} />}
 					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} />}
 
-					{!hideTopToolbar && store.pagination.totalResults > 0 && (
+					{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
 						<Toolbar
 							{...subProps.MiddleToolbar}
 							className="ss__horizontal-search__content__toolbar--middle-toolbar"
@@ -325,6 +326,7 @@ export interface HorizontalSearchProps extends ComponentProps {
 	resultComponent?: ResultComponent;
 	hideSearchHeader?: boolean;
 	hideTopToolbar?: boolean;
+	hideMiddleToolbar?: boolean;
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
 	hideLayoutSelector?: boolean;

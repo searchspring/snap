@@ -15,7 +15,7 @@ import type { IndividualFacetType } from '../Facets/Facets';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { useClickOutside } from '../../../hooks';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	facets: ({ theme }: Partial<HorizontalFacetsProps>) =>
@@ -34,7 +34,7 @@ const CSS = {
 					boxSizing: 'border-box',
 					minWidth: '100px',
 
-					'& .ss__horizontal-facets__header__dropdown__button': {
+					'& .ss__dropdown__button__heading': {
 						display: 'flex',
 						justifyContent: 'space-between',
 						alignItems: 'center',
@@ -42,7 +42,7 @@ const CSS = {
 					},
 
 					'&.ss__dropdown--open': {
-						'& .ss__horizontal-facets__header__dropdown__button': {
+						'& .ss__dropdown__button__heading': {
 							'& .ss__icon': {
 								fill: theme?.variables?.color?.active?.accent,
 							},
@@ -83,18 +83,30 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 
 	const defaultProps: Partial<HorizontalFacetsProps> = {
 		limit: 6,
+		iconCollapse: 'angle-up',
+		iconExpand: 'angle-down',
 		facets: properties.controller?.store?.facets,
 	};
 
 	let props = mergeProps('horizontalFacets', globalTheme, defaultProps, properties);
 
-	const { facets, limit, overlay, alwaysShowFiltersButton, onFacetOptionClick, disableStyles, className, style, styleScript, controller } = props;
+	const {
+		facets,
+		limit,
+		overlay,
+		alwaysShowFiltersButton,
+		onFacetOptionClick,
+		iconExpand,
+		iconCollapse,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		controller,
+	} = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
-
-		// remove focus from input (close the autocomplete)
-		(controller as AutocompleteController)?.setFocused && (controller as AutocompleteController)?.setFocused();
 	};
 
 	const themeDefaults: Theme = {
@@ -148,7 +160,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		},
 		icon: {
 			// default props
-			className: 'ss__horizontal-facets__header__dropdown__button__icon',
+			className: 'ss__dropdown__button__heading__icon',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -160,9 +172,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		},
 		facet: {
 			// default props
-			className: `ss__horizontal-facets__content__facet ss__horizontal-facets__content__facet--${
-				overlay ? 'horizontalOverlayFacet' : 'horizontalFacet'
-			}`,
+			className: `ss__horizontal-facets__content__facet`,
 			justContent: true,
 			horizontal: true,
 			// global theme
@@ -219,6 +229,11 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 					{facetsToShow.map((facet: IndividualFacetType) => (
 						<Dropdown
 							{...subProps.dropdown}
+							className={classnames(
+								subProps.dropdown.className,
+								`ss__horizontal-facets__header__dropdown--${facet.display}`,
+								`ss__horizontal-facets__header__dropdown--${facet.field}`
+							)}
 							open={selectedFacet?.field === facet.field}
 							onClick={() => {
 								if (selectedFacet === facet) {
@@ -229,7 +244,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 							}}
 							button={
 								<div
-									className="ss__horizontal-facets__header__dropdown__button ss__dropdown__button"
+									className="ss__dropdown__button__heading"
 									role="heading"
 									aria-level={3}
 									aria-label={`currently ${selectedFacet?.field === facet.field ? 'collapsed' : 'open'} ${facet.field} facet dropdown ${
@@ -237,7 +252,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 									}`}
 								>
 									{facet?.label}
-									<Icon {...subProps.icon} icon={selectedFacet?.field === facet.field ? 'angle-up' : 'angle-down'} />
+									<Icon {...subProps.icon} icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse} />
 								</div>
 							}
 							disableOverlay={!overlay}
@@ -256,7 +271,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 							`ss__horizontal-facets__content--${selectedFacet.field}`
 						)}
 					>
-						<Facet {...subProps.facet} name={'horizontalFacet'} facet={facets?.find((facet) => facet.field === selectedFacet.field)!} />
+						<Facet {...subProps.facet} facet={facets?.find((facet) => facet.field === selectedFacet.field)!} />
 					</div>
 				)}
 			</div>
@@ -278,6 +293,8 @@ export interface HorizontalFacetsProps extends ComponentProps {
 	limit?: number;
 	overlay?: boolean;
 	alwaysShowFiltersButton?: boolean;
+	iconCollapse?: IconType | string;
+	iconExpand?: IconType | string;
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }

@@ -52,10 +52,10 @@ describe('HorizontalFacets Component', () => {
 		};
 		const rendered = render(<HorizontalFacets {...args} />);
 
-		const mobileSidebar = rendered.container.querySelector(
-			'.ss__horizontal-facets__header__dropdown .ss__dropdown__content .ss__horizontal-facets__content__facet--horizontalOverlayFacet'
+		const facetElement = rendered.container.querySelector(
+			`.ss__horizontal-facets--overlay .ss__horizontal-facets__header .ss__horizontal-facets__header__dropdown--${args.facets[0].field} .ss__facet__options`
 		);
-		expect(mobileSidebar).toBeInTheDocument();
+		expect(facetElement).toBeInTheDocument();
 	});
 
 	it('renders with className', () => {
