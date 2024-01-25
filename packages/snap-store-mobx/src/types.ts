@@ -8,8 +8,6 @@ export type StoreConfig = {
 
 type VariantConfig = {
 	field: string;
-	setFirstActive?: boolean;
-	// clearOnSelect?: boolean;
 };
 
 export type VariantSelectionOptions = {

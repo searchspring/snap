@@ -8,7 +8,7 @@ type RecsProps = {
 };
 
 @observer
-export class Recs extends Component<RecsProps> {
+export class Bundles extends Component<RecsProps> {
 	constructor(props: RecsProps) {
 		super();
 

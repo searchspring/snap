@@ -58,6 +58,9 @@ let config: SnapConfig = {
 	instantiators: {
 		recommendation: {
 			components: {
+				Bundle: async () => {
+					return (await import('./components/Recommendations/Bundles/Bundles')).Bundles;
+				},
 				Default: async () => {
 					return (await import('./components/Recommendations/Recs/Recs')).Recs;
 				},
@@ -68,7 +71,6 @@ let config: SnapConfig = {
 
 			config: {
 				branch: BRANCHNAME,
-				// plugins: [[afterSearch]],
 				plugins: [],
 				settings: {
 					variants: {

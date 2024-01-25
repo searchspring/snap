@@ -100,6 +100,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const props: ResultProps = {
 		// default props
 		layout: Layout.GRID,
+		hideSelections: true,
 		// global theme
 		...globalTheme?.components?.result,
 		// props
@@ -107,8 +108,22 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
-		props;
+	const {
+		result,
+		hideBadge,
+		hideTitle,
+		hidePricing,
+		hideImage,
+		hideSelections,
+		detailSlot,
+		fallback,
+		disableStyles,
+		className,
+		layout,
+		onClick,
+		style,
+		controller,
+	} = props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
 
@@ -212,7 +227,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							)}
 						</div>
 					)}
-					{selections && (
+					{selections && !hideSelections && (
 						<div className="ss__result__details__variants">
 							{selections.map((selection: any) => {
 								if (selection.values.length) {
@@ -268,6 +283,7 @@ export interface ResultProps extends ComponentProps {
 	hideImage?: boolean;
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element;
+	hideSelections?: boolean;
 	fallback?: string;
 	layout?: LayoutType;
 	truncateTitle?: TruncateTitleProps;

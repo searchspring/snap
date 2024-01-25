@@ -14,7 +14,6 @@ import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 import { IconProps } from '../../Atoms/Icon';
-import { useMediaQuery } from '../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
@@ -28,31 +27,25 @@ const CSS = {
 				maxWidth: '100%',
 				margin: '0',
 				padding: '0',
-				overflow: 'hidden',
+			},
+
+			'.ss__bundled-recommendations__wrapper__seed': {
+				width: `calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)})`,
 			},
 
 			'.ss__bundled-recommendations__wrapper__cta': {
+				width: `${stackedCTA ? '100%' : `calc(100% / ${slidesPerView + 1})`}`,
+
 				textAlign: 'center',
-				border: '1px solid black',
 
 				'& .ss__bundled-recommendations__wrapper__cta__subtotal__prices': {
 					display: 'block',
 				},
 			},
 
-			'.ss__bundled-recommendations__wrapper--seed-not-in-carousel': {
-				'.ss__bundled-recommendations__wrapper__seed': {
-					width: `calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)})`,
-				},
-
-				'.ss__bundled-recommendations__wrapper__cta': {
-					width: `calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)})`,
-				},
-
-				'.ss__bundled-recommendations__wrapper__carousel': {
-					width: `calc(calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)}) * ${slidesPerView - 1})`,
-					padding: '0px 15px',
-				},
+			'.ss__bundled-recommendations__wrapper__carousel': {
+				width: `calc(calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)}) * ${slidesPerView - 1})`,
+				padding: '0px 15px',
 			},
 
 			'.ss__bundled-recommendations__wrapper--seed-in-carousel': {
@@ -62,6 +55,7 @@ const CSS = {
 
 				'.ss__bundled-recommendations__wrapper__carousel': {
 					width: `calc(calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)}) * ${slidesPerView})`,
+					padding: '0',
 				},
 			},
 
@@ -114,7 +108,6 @@ const CSS = {
 					right: '0',
 					zIndex: '1',
 					cursor: 'pointer',
-					background: 'white',
 				},
 			},
 		}),
@@ -128,6 +121,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 			slidesPerView: 2,
 			slidesPerGroup: 2,
 			spaceBetween: 10,
+			stackedCTA: true,
 		},
 		768: {
 			slidesPerView: 3,
@@ -154,7 +148,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		seedText: 'Seed Product',
 		loop: false,
 		addToCartButtonText: 'Add All To Cart',
-		stackedCTA: useMediaQuery('(max-width: 650px)'),
+		stackedCTA: false,
 		// global theme
 		...globalTheme?.components?.recommendation,
 		...properties,
@@ -270,10 +264,8 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 	resultsToRender?.forEach((result) => {
 		selectedItems.forEach((item) => {
 			if (item.id && item.id.indexOf(result.id) > -1) {
-				bundlePrice += (result.mappings.core?.price || 0) * result.quantity;
-				if (result.mappings.core?.msrp) {
-					bundleStrikePrice += result.mappings.core?.msrp * result.quantity;
-				}
+				bundlePrice += (result.display.mappings.core?.price || 0) * result.quantity;
+				bundleStrikePrice += (result.display.mappings.core?.msrp || result.display.mappings.core?.price || 0) * result.quantity;
 			}
 		});
 	});
@@ -319,6 +311,12 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 				//already selected, deselect it now
 				selectedItems.splice(idx, 1);
 				const newIds = [...selectedItems];
+
+				// ensure something is selected (use seed)
+				if (newIds.length == 0) {
+					newIds.push(seed);
+				}
+
 				setSelectedItems(newIds);
 			} else {
 				//add it to the list;
@@ -339,14 +337,14 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__bundled-recommendations', className)}>
+			<div {...styling} className={classnames('ss__bundled-recommendations', { 'ss__bundled-recommendations--stacked': stackedCTA }, className)}>
 				<RecommendationProfileTracker controller={controller}>
 					{title && <h3 className="ss__bundled-recommendations__title">{title}</h3>}
 
 					<div
-						className={`ss__bundled-recommendations__wrapper ${
-							seedInCarousel ? 'ss__bundled-recommendations__wrapper--seed-in-carousel' : 'ss__bundled-recommendations__wrapper--seed-not-in-carousel'
-						}`}
+						className={classnames('ss__bundled-recommendations__wrapper', {
+							'ss__bundled-recommendations__wrapper--seed-in-carousel': seedInCarousel,
+						})}
 					>
 						{!seedInCarousel && (
 							<div className="ss__bundled-recommendations__wrapper__seed">
@@ -358,6 +356,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 									onInputChange={(e) => onInputChange(seed, e.target.value)}
 									quantity={showQuantityPicker ? (seed as Product).quantity : undefined}
 									showCheckboxes={showCheckboxes}
+									theme={props.theme}
 								>
 									<RecommendationResultTracker controller={controller} result={seed}>
 										{resultComponent ? (
@@ -368,7 +367,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 												onProductSelect,
 											})
 										) : (
-											<Result result={seed} />
+											<Result {...subProps.result} controller={controller} result={seed} />
 										)}
 									</RecommendationResultTracker>
 								</BundleSelector>
@@ -402,6 +401,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 													onInputChange={(e) => onInputChange(result, e.target.value)}
 													quantity={showQuantityPicker ? result.quantity : undefined}
 													showCheckboxes={showCheckboxes}
+													theme={props.theme}
 												>
 													<RecommendationResultTracker controller={controller} result={result}>
 														{resultComponent ? (
@@ -422,6 +422,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 												onInputChange={(e) => onInputChange(result, e.target.value)}
 												quantity={showQuantityPicker ? result.quantity : undefined}
 												showCheckboxes={showCheckboxes}
+												theme={props.theme}
 											>
 												<RecommendationResultTracker controller={controller} result={result}>
 													{resultComponent ? (
