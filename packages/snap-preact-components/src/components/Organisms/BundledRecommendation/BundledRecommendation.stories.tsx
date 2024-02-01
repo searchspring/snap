@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BundledRecommendations, BundledRecommendationsProps } from '../BundledRecommendations';
+import { BundledRecommendation, BundledRecommendationProps } from '../BundledRecommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -13,8 +13,8 @@ import type { Next } from '@searchspring/snap-event-manager';
 import { iconPaths } from '../../Atoms/Icon';
 
 export default {
-	title: `Organisms/BundledRecommendations`,
-	component: BundledRecommendations,
+	title: `Organisms/BundledRecommendation`,
+	component: BundledRecommendation,
 	parameters: {
 		docs: {
 			page: () => (
@@ -48,16 +48,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		results: {
-			description: 'Results store reference, overrides controller.store.results',
-			type: { required: false },
-			table: {
-				type: {
-					summary: 'Results store object',
-				},
-			},
-			control: { type: 'none' },
-		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button',
 			type: { required: true },
@@ -67,6 +57,16 @@ export default {
 				},
 			},
 			action: 'onAddToCart',
+		},
+		results: {
+			description: 'Results store reference, overrides controller.store.results',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Results store object',
+				},
+			},
+			control: { type: 'none' },
 		},
 		title: {
 			description: 'Recommendation title',
@@ -124,19 +124,19 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		quantityPickerText: {
+			description: 'Text to before the quantity picker input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Qty:' },
+			},
+			control: { type: 'text' },
+		},
 		showCheckboxes: {
 			defaultValue: true,
 			description: 'Hide/show bundle checkboxes in results',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
-		seedChecked: {
-			description: 'Seed product checked by default boolean',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -171,7 +171,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -200,7 +200,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		peekaboo: {
-			defaultValue: '',
 			description: 'boolean to enable the peekaboo carousel',
 			table: {
 				type: {
@@ -208,7 +207,7 @@ export default {
 				},
 				defaultValue: { summary: false },
 			},
-			control: { type: 'text' },
+			control: { type: 'boolean' },
 		},
 		loop: {
 			defaultValue: true,
@@ -278,8 +277,8 @@ export default {
 
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
 
-export const Default = (props: BundledRecommendationsProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <BundledRecommendations {...props} controller={controller} />;
+export const Default = (props: BundledRecommendationProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <BundledRecommendation {...props} controller={controller} />;
 };
 
 Default.loaders = [

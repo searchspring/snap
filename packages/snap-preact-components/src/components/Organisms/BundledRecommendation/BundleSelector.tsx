@@ -14,12 +14,12 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const props: BundleSelectorProps = {
 		// default props
 		showCheckboxes: true,
-		qtyText: 'Qty:',
+		quantityPickerText: 'Qty:',
 		// global theme
 		...properties,
 	};
 
-	const { children, checked, quantity, icon, seedText, qtyText, showCheckboxes, onCheck, onInputChange } = props;
+	const { children, checked, quantity, icon, seedText, quantityPickerText, showCheckboxes, onCheck, onInputChange } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -52,7 +52,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 				{children}
 				{typeof quantity == 'number' && (
 					<div className="ss__bundled-recommendations__wrapper__selector__qty">
-						{qtyText}
+						{quantityPickerText}
 						<input
 							className="ss__bundled-recommendations__wrapper__selector__qty__input"
 							onChange={onInputChange}
@@ -81,7 +81,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	quantity?: number;
 	seedText?: string;
 	showCheckboxes?: boolean;
-	qtyText?: string;
+	quantityPickerText?: string;
 	onCheck?: () => void;
 	onInputChange?: (e: any) => void;
 	icon?: string | Partial<IconProps> | boolean;

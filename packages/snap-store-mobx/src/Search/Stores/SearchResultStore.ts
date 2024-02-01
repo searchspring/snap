@@ -267,7 +267,7 @@ type SelectionValue = {
 	available?: boolean;
 };
 
-class VariantSelection {
+export class VariantSelection {
 	public field: string;
 	public label: string;
 	public selected?: string = ''; //ex: blue

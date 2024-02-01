@@ -87,10 +87,8 @@ const CSS = {
 				padding: 0,
 				zIndex: '1',
 			},
-			'.swiper-container-vertical': {
-				'.swiper-wrapper': {
-					flexDirection: 'column',
-				},
+			'.swiper-vertical > .swiper-wrapper': {
+				flexDirection: 'column',
 			},
 			'.swiper-wrapper': {
 				order: 0,
@@ -133,12 +131,16 @@ const CSS = {
 			},
 			'.swiper-container-pointer-events': {
 				touchAction: 'pan-y',
-				'&.swiper-container-vertical': {
-					touchAction: 'pan-x',
-				},
 			},
 			'.swiper-slide-invisible-blank': {
 				visibility: 'hidden',
+			},
+
+			'.swiper-horizontal': {
+				touchAction: 'pan-y',
+			},
+			'.swiper-vertical': {
+				touchAction: 'pan-x',
 			},
 		}),
 };

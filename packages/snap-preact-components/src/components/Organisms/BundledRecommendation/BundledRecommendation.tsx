@@ -146,7 +146,9 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		showCheckboxes: true,
 		seperatorIcon: 'plus-thin',
 		seedText: 'Seed Product',
+		seedSeparatorIconOnly: true,
 		loop: false,
+		ctaIcon: true,
 		addToCartButtonText: 'Add All To Cart',
 		stackedCTA: false,
 		// global theme
@@ -182,6 +184,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		showCheckboxes,
 		seedText,
 		showQuantityPicker,
+		quantityPickerText,
 		onAddToCart,
 		seedSeparatorIconOnly,
 		resultComponent,
@@ -189,6 +192,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		addToCartButtonText,
 		disableStyles,
 		peekaboo,
+		ctaIcon,
 		stackedCTA,
 		style,
 		className,
@@ -241,8 +245,6 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		styling.css = [style];
 	}
 
-	const modifiedBreakpoints: any = { ...breakpoints };
-
 	const initialSelectedItems: Product[] = [];
 
 	const _preSelectedCount = typeof preselectedCount == 'number' ? preselectedCount : slidesPerView;
@@ -270,22 +272,22 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		});
 	});
 
+	const modifiedBreakpoints: BreakpointsProps = { ...breakpoints };
+
 	Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
 		const obj = props.breakpoints![breakpoint];
 
 		if (!seedInCarousel && resultsToRender.length) {
 			modifiedBreakpoints[breakpoint] = {
 				...obj,
-				slidesPerView: obj.slidesPerView! - 1,
+				slidesPerView: obj.slidesPerView! - 1 + (peekaboo ? 0.5 : 0),
 				slidesPerGroup: obj.slidesPerGroup! - 1,
 			};
 
 			if (resultsToRender[0].id == products[0].id) {
 				resultsToRender?.shift();
 			}
-		}
-
-		if (peekaboo) {
+		} else if (peekaboo) {
 			modifiedBreakpoints[breakpoint] = {
 				...obj,
 				slidesPerView: obj.slidesPerView! + 0.5,
@@ -339,7 +341,11 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__bundled-recommendations', { 'ss__bundled-recommendations--stacked': stackedCTA }, className)}>
 				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__bundled-recommendations__title">{title}</h3>}
+					{title && (
+						<h3 className="ss__bundled-recommendations__title">
+							<span>{title}</span>
+						</h3>
+					)}
 
 					<div
 						className={classnames('ss__bundled-recommendations__wrapper', {
@@ -355,6 +361,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 									icon={seperatorIcon}
 									onInputChange={(e) => onInputChange(seed, e.target.value)}
 									quantity={showQuantityPicker ? (seed as Product).quantity : undefined}
+									quantityPickerText={quantityPickerText}
 									showCheckboxes={showCheckboxes}
 									theme={props.theme}
 								>
@@ -397,6 +404,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 													seedText={seedText}
 													icon={seperatorIcon}
 													onCheck={() => onProductSelect(result)}
+													quantityPickerText={quantityPickerText}
 													checked={selected}
 													onInputChange={(e) => onInputChange(result, e.target.value)}
 													quantity={showQuantityPicker ? result.quantity : undefined}
@@ -421,6 +429,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 												checked={selected}
 												onInputChange={(e) => onInputChange(result, e.target.value)}
 												quantity={showQuantityPicker ? result.quantity : undefined}
+												quantityPickerText={quantityPickerText}
 												showCheckboxes={showCheckboxes}
 												theme={props.theme}
 											>
@@ -445,6 +454,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 								bundleStrikePrice={bundleStrikePrice}
 								onAddToCartClick={(e: any) => addToCart(e)}
 								addToCartText={addToCartButtonText}
+								icon={ctaIcon}
 							/>
 						)}
 					</div>
@@ -456,6 +466,7 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 							bundleStrikePrice={bundleStrikePrice}
 							onAddToCartClick={(e: any) => addToCart(e)}
 							addToCartText={addToCartButtonText}
+							icon={ctaIcon}
 						/>
 					)}
 				</RecommendationProfileTracker>
@@ -479,15 +490,17 @@ export interface BundledRecommendationProps extends ComponentProps {
 	loop?: boolean;
 	pagination?: boolean;
 	resultComponent?: JSX.Element;
-	ctaSlot?: JSX.Element;
 	preselectedCount?: number;
 	showQuantityPicker?: boolean;
+	quantityPickerText?: string;
 	showCheckboxes?: boolean;
 	seedInCarousel?: boolean;
 	seedText?: string;
 	seedSeparatorIconOnly?: boolean;
 	seperatorIcon?: string | Partial<IconProps> | boolean;
 	stackedCTA?: boolean;
+	ctaIcon?: string | Partial<IconProps> | boolean;
+	ctaSlot?: JSX.Element;
 	peekaboo?: boolean;
 }
 
