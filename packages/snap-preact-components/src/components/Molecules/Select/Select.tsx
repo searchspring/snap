@@ -144,6 +144,11 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// selection state
 	const [selection, setSelection] = useState<Option | undefined>(selected);
 
+	// reset selection if 'selected' prop changes
+	if (selection && selected && selection != selected) {
+		setSelection(selected);
+	}
+
 	if (selection && clearSelection) {
 		options = [
 			{

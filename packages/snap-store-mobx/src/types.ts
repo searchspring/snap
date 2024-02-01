@@ -6,6 +6,17 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
+type VariantConfig = {
+	field: string;
+};
+
+export type VariantSelectionOptions = {
+	field: string;
+	label: string;
+	//todo
+	//swatches: swatchObj
+};
+
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
 	globals?: Partial<SearchRequestModel>;
@@ -25,6 +36,7 @@ export type SearchStoreConfig = StoreConfig & {
 		restorePosition?: {
 			enabled: boolean;
 		};
+		variants?: VariantConfig;
 		history?: {
 			url?: string;
 			max?: number;
@@ -77,6 +89,7 @@ export type AutocompleteStoreConfigSettings = {
 		limit: number;
 		showResults?: boolean;
 	};
+	variants?: VariantConfig;
 	history?: {
 		limit: number;
 		showResults?: boolean;
@@ -103,6 +116,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
+	variants?: VariantConfig;
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;

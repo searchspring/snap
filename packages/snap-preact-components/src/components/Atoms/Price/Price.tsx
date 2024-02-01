@@ -55,7 +55,7 @@ export function Price(properties: PriceProps): JSX.Element {
 		style,
 	} = props;
 
-	const formattedPrice = filters.currency(value, {
+	const formattedPrice = filters.currency(+value, {
 		symbol,
 		decimalPlaces,
 		padDecimalPlaces,

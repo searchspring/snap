@@ -48,16 +48,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		results: {
-			description: 'Results store reference, overrides controller.store.results',
-			type: { required: false },
-			table: {
-				type: {
-					summary: 'Results store object',
-				},
-			},
-			control: { type: 'none' },
-		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button',
 			type: { required: true },
@@ -67,6 +57,16 @@ export default {
 				},
 			},
 			action: 'onAddToCart',
+		},
+		results: {
+			description: 'Results store reference, overrides controller.store.results',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Results store object',
+				},
+			},
+			control: { type: 'none' },
 		},
 		title: {
 			description: 'Recommendation title',
@@ -124,19 +124,19 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		quantityPickerText: {
+			description: 'Text to before the quantity picker input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Qty:' },
+			},
+			control: { type: 'text' },
+		},
 		showCheckboxes: {
 			defaultValue: true,
 			description: 'Hide/show bundle checkboxes in results',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
-		seedChecked: {
-			description: 'Seed product checked by default boolean',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -171,7 +171,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -200,7 +200,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		peekaboo: {
-			defaultValue: '',
 			description: 'boolean to enable the peekaboo carousel',
 			table: {
 				type: {

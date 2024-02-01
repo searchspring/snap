@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import type { ComponentProps } from '../../../types';
 
 export const BundleSelector = observer((properties: BundleSelectorProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -13,12 +14,12 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const props: BundleSelectorProps = {
 		// default props
 		showCheckboxes: true,
-		qtyText: 'Qty:',
+		quantityPickerText: 'Qty:',
 		// global theme
 		...properties,
 	};
 
-	const { children, checked, quantity, icon, seedText, qtyText, showCheckboxes, onCheck, onInputChange } = props;
+	const { children, checked, quantity, icon, seedText, quantityPickerText, showCheckboxes, onCheck, onInputChange } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -27,12 +28,17 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			size: 15,
 			// global theme
 			...globalTheme?.components?.icon,
+			// component theme overrides
+			theme: props?.theme,
 		},
 		checkbox: {
 			className: 'ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox',
 			checked: checked,
 			onClick: onCheck,
+			// global theme
 			...globalTheme?.components?.checkbox,
+			// component theme overrides
+			theme: props?.theme,
 		},
 	};
 
@@ -50,7 +56,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 				{children}
 				{typeof quantity == 'number' && (
 					<div className="ss__bundled-recommendations__wrapper__selector__qty">
-						{qtyText}
+						{quantityPickerText}
 						<input
 							className="ss__bundled-recommendations__wrapper__selector__qty__input"
 							onChange={onInputChange}
@@ -73,13 +79,13 @@ export interface BundleSelectorSubProps {
 	checkbox: Partial<CheckboxProps>;
 }
 
-export interface BundleSelectorProps {
+export interface BundleSelectorProps extends ComponentProps {
 	children?: ComponentChildren;
 	checked?: boolean;
 	quantity?: number;
 	seedText?: string;
 	showCheckboxes?: boolean;
-	qtyText?: string;
+	quantityPickerText?: string;
 	onCheck?: () => void;
 	onInputChange?: (e: any) => void;
 	icon?: string | Partial<IconProps> | boolean;
