@@ -6,3 +6,5 @@ export * from './useDisplaySettings';
 export * from './useFuncDebounce';
 export * from './useA11y';
 export * from './useDeepCompareEffect';
+export * from './useCreateController';
+export * from './useComponent';

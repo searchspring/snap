@@ -15,10 +15,13 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { useA11y } from '../../../hooks';
+import { useA11y, useComponent } from '../../../hooks';
+import { useCreateController } from '../../../hooks/useCreateController';
+import type { RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
+import type { FunctionalComponent } from 'preact';
 
 const CSS = {
 	Autocomplete: ({
@@ -330,6 +333,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		linkSlot,
 		resultComponent,
 		onTermClick,
+		templates,
 		disableStyles,
 		className,
 		style,
@@ -448,6 +452,28 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		controller.setFocused();
 		controller.reset();
 	};
+
+	let recommendationTemplateComponent: (() => FunctionalComponent<{ controller: RecommendationController }>) | undefined;
+	let recsController: RecommendationController | undefined;
+
+	if (templates?.recommendation?.template) {
+		const snap = useSnap();
+		const mergedConfig = Object.assign(
+			{
+				id: 'no-results',
+				tag: 'no-results',
+				branch: 'production',
+			},
+			templates.recommendation!.config
+		);
+		recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
+		if (!recsController?.store?.loaded && recsController?.store.error?.type !== 'error') {
+			recsController?.search();
+		}
+		recommendationTemplateComponent = useComponent(snap, templates.recommendation!.template);
+	}
+
+	const RecommendationTemplateComponent = recommendationTemplateComponent as unknown as FunctionalComponent<{ controller: RecommendationController }>;
 
 	return visible ? (
 		<CacheProvider>
@@ -643,6 +669,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} /> : null}
 
+								{RecommendationTemplateComponent && recsController?.store?.loaded && (
+									<div className="ss__autocomplete__content__recommendations">
+										<RecommendationTemplateComponent controller={recsController} />
+									</div>
+								)}
+
 								{!hideLink ? (
 									linkSlot ? (
 										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
@@ -732,4 +764,10 @@ export interface AutocompleteProps extends ComponentProps {
 	resultComponent?: ResultComponent;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	templates?: {
+		recommendation?: {
+			template: 'Recommendation' | 'Recommendation2';
+			config?: Partial<RecommendationControllerConfig>;
+		};
+	};
 }

@@ -1,9 +1,9 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react-lite';
-import { ThemeProvider } from '../../../providers';
+import { ThemeProvider, SnapProvider } from '../../../providers';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
-	const { templatesStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
+	const { snap, templatesStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
 	const { loading } = templatesStore;
 	const targeter = templatesStore.getTarget(type, targetId);
 	const Component = templatesStore?.library?.components[type][targeter.template];
@@ -15,9 +15,11 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 		!loading &&
 		theme &&
 		Component && (
-			<ThemeProvider theme={theme}>
-				<Component controller={controller} resultComponent={resultComponent} theme={theme} {...otherProps} />
-			</ThemeProvider>
+			<SnapProvider snap={snap}>
+				<ThemeProvider theme={theme}>
+					<Component controller={controller} resultComponent={resultComponent} theme={theme} {...otherProps} />
+				</ThemeProvider>
+			</SnapProvider>
 		)
 	);
 });
@@ -26,6 +28,7 @@ export interface TemplateSelectProps {
 	targetId: string;
 	type: string;
 	controller: any;
+	snap: any;
 	resultComponent: any;
 	theme?: any;
 }

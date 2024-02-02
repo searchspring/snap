@@ -13,6 +13,7 @@ export interface ComponentProps {
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
+	snap?: any;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
 }
 

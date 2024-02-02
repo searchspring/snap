@@ -92,6 +92,8 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 };
 
 export class SnapTemplates extends Snap {
+	public templates: TemplatesStore;
+
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
@@ -101,6 +103,7 @@ export class SnapTemplates extends Snap {
 		const snapConfig = createSnapConfig(config, templatesStore);
 
 		super(snapConfig);
+		this.templates = templatesStore;
 
 		window.searchspring.templates = templatesStore;
 
@@ -213,23 +216,26 @@ export function createRecommendationComponentMapping(
 ): { [name: string]: RecommendationComponentObject } {
 	const targets = templateConfig.recommendation?.targets;
 	return targets
-		? targets.reduce((mapping, target) => {
-				const targetId = templatesStore.addTarget('recommendation', target);
-				mapping[target.component] = {
-					component: async () => {
-						await templatesStore.library.import.component[target.template]();
-						return TemplateSelect;
-					},
-					props: { type: 'recommendation', templatesStore, targetId },
-				};
+		? targets.reduce(
+				(mapping, target) => {
+					const targetId = templatesStore.addTarget('recommendation', target);
+					mapping[target.component] = {
+						component: async () => {
+							await templatesStore.library.import.component[target.template]();
+							return TemplateSelect;
+						},
+						props: { type: 'recommendation', templatesStore, targetId },
+					};
 
-				// if they are not undefined, add them
-				if (target.resultComponent) {
-					mapping[target.component].props!.resultComponent = target.resultComponent;
-				}
+					// if they are not undefined, add them
+					if (target.resultComponent) {
+						mapping[target.component].props!.resultComponent = target.resultComponent;
+					}
 
-				return mapping;
-		  }, {} as { [name: string]: RecommendationComponentObject })
+					return mapping;
+				},
+				{} as { [name: string]: RecommendationComponentObject }
+			)
 		: {};
 }
 
