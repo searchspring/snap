@@ -3,7 +3,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(ts|tsx)$/,
+				test: /\.(ts|tsx|jsx)$/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -19,7 +19,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.ts', '.tsx'],
+		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		alias: {
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',

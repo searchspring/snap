@@ -159,7 +159,7 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .findMe .ss__result').should('have.length', 20);
 		cy.get('.ss__bundled-recommendations .findMe .ss__result .ss__result__details__title a').should('satisfy', ($el) => {
-			return Array.from($el).map((titleElem: any, idx: any) => {
+			return Array.from($el).map((titleElem: any, idx) => {
 				return titleElem.innerHTML == controller.store.results[idx].mappings.core?.name;
 			});
 		});
@@ -226,9 +226,6 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get(
-			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-not-in-carousel .ss__bundled-recommendations__wrapper__seed'
-		).should('not.exist');
-		cy.get(
 			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed'
 		).should('exist');
 	});
@@ -237,9 +234,10 @@ describe('BundledRecommendation Component', async () => {
 		mount(<BundledRecommendation controller={controller} seedInCarousel={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get(
-			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-not-in-carousel .ss__bundled-recommendations__wrapper__seed'
-		).should('exist');
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__seed').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed').should(
+			'not.exist'
+		);
 		cy.get(
 			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed'
 		).should('not.exist');
@@ -295,7 +293,9 @@ describe('BundledRecommendation Component', async () => {
 	});
 
 	it('can set custom seperator icons', () => {
-		mount(<BundledRecommendation controller={controller} seperatorIcon={'cog'} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(
+			<BundledRecommendation controller={controller} seperatorIcon={'cog'} seedSeparatorIconOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />
+		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon.ss__icon--cog').should('have.length', 20);

@@ -1,4 +1,5 @@
 const { defineConfig } = require('cypress');
+const webpackConfig = require('../webpack.config');
 
 module.exports = defineConfig({
 	viewportWidth: 1280,
@@ -9,4 +10,5 @@ module.exports = defineConfig({
 			bundler: 'webpack',
 		},
 	},
+	webpackConfig,
 });
