@@ -21,6 +21,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 | settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
+| settings.restorePosition.onPageShow | boolean to enable/disable having restorePosition occur on the 'pageshow' window event (requires `restorePosition.enable`) | false |   |
 <br>
 
 ```typescript

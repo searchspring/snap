@@ -35,6 +35,7 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		restorePosition?: {
 			enabled: boolean;
+			onPageShow?: boolean;
 		};
 		variants?: VariantConfig;
 		history?: {

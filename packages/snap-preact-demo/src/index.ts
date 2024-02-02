@@ -19,7 +19,7 @@ let siteId = 'z7h1jh';
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
-const urlSiteIdParam = urlObj.params.query.siteId;
+const urlSiteIdParam = urlObj.params.query.siteId || urlObj.params.query.siteid;
 const storedSiteIdName = 'ss_siteId';
 
 if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {

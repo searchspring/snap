@@ -124,12 +124,12 @@ export class RecommendationInstantiator {
 				const contextGlobals: any = {};
 
 				const elemContext = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'cart', 'options', 'profile', 'custom'],
+					['shopperId', 'shopper', 'product', 'products', 'seed', 'cart', 'options', 'profile', 'custom'],
 					elem as HTMLScriptElement
 				);
 				const context: ContextVariables = deepmerge(this.context, elemContext);
 
-				const { shopper, shopperId, product, seed, cart, options } = context;
+				const { shopper, shopperId, product, products, seed, cart, options } = context;
 
 				/*
 					type instantiatorContext = {
@@ -138,6 +138,7 @@ export class RecommendationInstantiator {
 						};
 						shopperId?: string;
 						product?: string;
+						products?: string[];
 						seed?: string;
 						cart?: string[] | () => string[];
 						options?: {
@@ -146,6 +147,7 @@ export class RecommendationInstantiator {
 							batched?: boolean;
 							realtime?: boolean;
 							categories?: string[];
+							blockedItems?: string[];
 							brands?: string[];
 							limit?: number;
 						}
@@ -158,6 +160,11 @@ export class RecommendationInstantiator {
 				if (product || seed) {
 					contextGlobals.product = product || seed;
 				}
+				if (products) {
+					contextGlobals.products = products;
+				}
+
+				// options
 				if (options?.branch) {
 					contextGlobals.branch = options.branch;
 				}
@@ -176,6 +183,10 @@ export class RecommendationInstantiator {
 				if (options?.limit && Number.isInteger(Number(options?.limit))) {
 					contextGlobals.limits = Number(options?.limit);
 				}
+				if (options?.blockedItems && Array.isArray(options.blockedItems)) {
+					contextGlobals.blockedItems = options.blockedItems;
+				}
+
 				let cartContents;
 				if (typeof cart === 'function') {
 					try {

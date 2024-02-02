@@ -8,6 +8,7 @@ import { ControllerTypes } from '../types';
 import type { ProductViewEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
+import type { RecommendCombinedRequestModel } from '@searchspring/snap-client';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
 type RecommendationTrackMethods = {
@@ -20,19 +21,6 @@ type RecommendationTrackMethods = {
 	addBundleToCart: (e: MouseEvent, results: Product[], price: number) => BeaconEvent | undefined;
 	impression: () => BeaconEvent | undefined;
 	render: (results?: Product[]) => BeaconEvent | undefined;
-};
-
-type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	shopper?: string;
-	categories?: string[];
-	brands?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
 };
 
 const defaultConfig: RecommendationControllerConfig = {
@@ -317,7 +305,7 @@ export class RecommendationController extends AbstractController {
 	})();
 
 	get params(): RecommendCombinedRequestModel {
-		const params = {
+		const params: RecommendCombinedRequestModel = {
 			tag: this.config.tag,
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
