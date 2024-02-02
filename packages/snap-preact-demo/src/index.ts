@@ -14,8 +14,8 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
-// let siteId = '8uyt2m';
-let siteId = 'z7h1jh';
+let siteId = '8uyt2m';
+// let siteId = 'z7h1jh';
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
@@ -58,6 +58,9 @@ let config: SnapConfig = {
 	instantiators: {
 		recommendation: {
 			components: {
+				Recs: async () => {
+					return (await import('./components/Recommendations/Recs/Recs')).Recs;
+				},
 				Bundle: async () => {
 					return (await import('./components/Recommendations/Bundles/Bundles')).Bundles;
 				},
