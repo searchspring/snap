@@ -66,7 +66,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						) : (
 							<></>
 						)}
-						<span className="ss__bundled-recommendations__wrapper__cta__subtotal__title">{`Subtotal for ${totalNumProdsInBundle} items `}</span>
+						<span className="ss__bundled-recommendations__wrapper__cta__subtotal__title">{`Subtotal for ${totalNumProdsInBundle} items`}</span>
 						<div className="ss__bundled-recommendations__wrapper__cta__subtotal__prices">
 							{bundleStrikePrice && bundleStrikePrice !== bundlePrice ? (
 								<label className="ss__bundled-recommendations__wrapper__cta__subtotal__strike">

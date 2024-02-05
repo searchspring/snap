@@ -152,10 +152,10 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		addToCartButtonText: 'Add All To Cart',
 		stackedCTA: false,
 		// global theme
-		...globalTheme?.components?.recommendation,
+		...globalTheme?.components?.bundledRecommendation,
 		...properties,
 		// props
-		...properties.theme?.components?.recommendation,
+		...properties.theme?.components?.bundledRecommendation,
 	};
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);

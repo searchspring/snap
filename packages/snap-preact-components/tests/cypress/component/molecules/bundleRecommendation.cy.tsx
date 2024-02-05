@@ -27,7 +27,7 @@ const services = {
 
 const theme = {
 	components: {
-		recommendation: {
+		bundledRecommendation: {
 			prevButton: 'Global Theme Prev',
 			nextButton: 'Global Theme Next',
 		},
@@ -78,7 +78,7 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__cta').should('exist');
-		cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('exist').should('have.text', 'Subtotal for 4 items ');
+		cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('exist').should('have.text', 'Subtotal for 4 items');
 		cy.get('.ss__bundled-recommendations__wrapper__cta__button')
 			.should('exist')
 			.click()
@@ -169,11 +169,9 @@ describe('BundledRecommendation Component', async () => {
 		const CtaSlot = (props: any) => {
 			return (
 				<div className="findMe">
-					<p>
-						{`custom total for ${props.selectedItems.length} items `}
-						<label>{`$${props.bundlePrice}`}</label>
-						<label>{`was - $${props.strikePrice}`}</label>
-					</p>
+					<div className="selectedItems">{props.selectedItems.length}</div>
+					<div className="bundlePrice">{props.bundlePrice}</div>
+					<div className="strikePrice">{props.bundleStrikePrice}</div>
 
 					<div className="ctaButton" onClick={() => props.onAddToCartClick()}>
 						custom button here
@@ -186,6 +184,11 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .findMe').should('exist');
+
+		cy.get('.ss__bundled-recommendations .findMe .bundlePrice').should('exist').should('have.text', '241');
+		cy.get('.ss__bundled-recommendations .findMe .strikePrice').should('exist').should('have.text', '275');
+		cy.get('.ss__bundled-recommendations .findMe .selectedItems').should('exist').should('have.text', '4');
+
 		cy.get('.ctaButton')
 			.should('exist')
 			.click()
@@ -207,18 +210,26 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--selected').should('have.length', 7);
 	});
 
-	it('can use set showQuantityPicker', () => {
-		mount(<BundledRecommendation controller={controller} showQuantityPicker={true} onAddToCart={cy.stub().as('onAddToCart')} />);
-
-		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__qty').should('exist');
-	});
-
 	it('can hide checkboxes with showCheckboxes', () => {
 		mount(<BundledRecommendation controller={controller} showCheckboxes={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox').should('not.exist');
+
+		mount(<BundledRecommendation controller={controller} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox').should('exist');
+
+		cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('have.text', 'Subtotal for 4 items');
+
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox')
+			.should('exist')
+			.first()
+			.click()
+			.then(() => {
+				cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('have.text', 'Subtotal for 3 items');
+			});
 	});
 
 	it('can put the seed in the carousel', () => {
@@ -228,9 +239,7 @@ describe('BundledRecommendation Component', async () => {
 		cy.get(
 			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed'
 		).should('exist');
-	});
 
-	it('can pull the seed out of the carousel', () => {
 		mount(<BundledRecommendation controller={controller} seedInCarousel={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
@@ -301,6 +310,34 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon.ss__icon--cog').should('have.length', 20);
 	});
 
+	it('can use set showQuantityPicker and adjust quantity', () => {
+		mount(<BundledRecommendation controller={controller} showQuantityPicker={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__qty')
+			.should('exist')
+			.first()
+			.type('3')
+			.then(() => {
+				expect(controller.store.results[0].quantity).to.equal(13);
+				cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('have.text', 'Subtotal for 16 items');
+			});
+	});
+
+	it('can use set quantityPickerText', () => {
+		const text = 'some text';
+		mount(
+			<BundledRecommendation controller={controller} showQuantityPicker={true} quantityPickerText={text} onAddToCart={cy.stub().as('onAddToCart')} />
+		);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__qty').should('satisfy', ($el) => {
+			return Array.from($el).map((elem: any) => {
+				return elem.innerHTML == text;
+			});
+		});
+	});
+
 	it('can set stackedCTA prop', () => {
 		mount(<BundledRecommendation controller={controller} stackedCTA={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
@@ -312,6 +349,32 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta').should('not.exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__cta').should('exist');
+	});
+
+	it('can set CTAicon', () => {
+		//has default icon
+		mount(<BundledRecommendation controller={controller} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta .ss__bundled-recommendations__wrapper__cta__icon'
+		).should('exist');
+
+		mount(<BundledRecommendation controller={controller} ctaIcon={'cog'} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta .ss__bundled-recommendations__wrapper__cta__icon'
+		)
+			.should('exist')
+			.should('have.class', 'ss__icon--cog');
+
+		mount(<BundledRecommendation controller={controller} ctaIcon={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta .ss__bundled-recommendations__wrapper__cta__icon'
+		).should('not.exist');
 	});
 
 	it('can set peekaboo prop', () => {
@@ -356,11 +419,11 @@ describe('BundledRecommendation Component', async () => {
 
 		const prev = cy.get('.ss__carousel__prev');
 		prev.should('exist');
-		prev.should('have.text', theme.components.recommendation.prevButton);
+		prev.should('have.text', theme.components.bundledRecommendation.prevButton);
 
 		const next = cy.get('.ss__carousel__next');
 		next.should('exist');
-		next.should('have.text', theme.components.recommendation.nextButton);
+		next.should('have.text', theme.components.bundledRecommendation.nextButton);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -370,17 +433,17 @@ describe('BundledRecommendation Component', async () => {
 
 		const prev = cy.get('.ss__carousel__prev');
 		prev.should('exist');
-		prev.should('have.text', theme.components.recommendation.prevButton);
+		prev.should('have.text', theme.components.bundledRecommendation.prevButton);
 
 		const next = cy.get('.ss__carousel__next');
 		next.should('exist');
-		next.should('have.text', theme.components.recommendation.nextButton);
+		next.should('have.text', theme.components.bundledRecommendation.nextButton);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const themeOverride = {
 			components: {
-				recommendation: {
+				bundledRecommendation: {
 					prevButton: 'Prev Button Yo',
 					nextButton: 'Next Button Yo',
 				},
@@ -397,13 +460,13 @@ describe('BundledRecommendation Component', async () => {
 
 		const prev = cy.get('.ss__carousel__prev');
 		prev.should('exist');
-		prev.should('have.text', themeOverride.components.recommendation.prevButton);
-		prev.should('not.have.text', theme.components.recommendation.prevButton);
+		prev.should('have.text', themeOverride.components.bundledRecommendation.prevButton);
+		prev.should('not.have.text', theme.components.bundledRecommendation.prevButton);
 
 		const next = cy.get('.ss__carousel__next');
 		next.should('exist');
-		next.should('have.text', themeOverride.components.recommendation.nextButton);
-		next.should('not.have.text', theme.components.recommendation.nextButton);
+		next.should('have.text', themeOverride.components.bundledRecommendation.nextButton);
+		next.should('not.have.text', theme.components.bundledRecommendation.nextButton);
 	});
 
 	it('breakpoints override theme prop', () => {
