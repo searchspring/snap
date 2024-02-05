@@ -5,6 +5,11 @@ export type TrackerGlobals = {
 	siteId: string;
 };
 
+export type DoNotTrackEntry = {
+	type: BeaconType;
+	category: BeaconCategory;
+};
+
 export type TrackerConfig = {
 	id?: string;
 	framework?: string;
@@ -17,6 +22,7 @@ export type TrackerConfig = {
 			origin?: string;
 		};
 	};
+	doNotTrack?: DoNotTrackEntry[];
 };
 
 export type BeaconPayload = {
@@ -195,7 +201,7 @@ export type PreflightRequestModel = {
 };
 
 export interface TrackMethods {
-	event: (payload: BeaconPayload) => BeaconEvent;
+	event: (payload: BeaconPayload) => BeaconEvent | undefined;
 	error: (data: TrackErrorEvent) => BeaconEvent | undefined;
 	shopper: {
 		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;
