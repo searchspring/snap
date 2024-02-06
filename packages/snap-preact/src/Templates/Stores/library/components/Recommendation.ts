@@ -1,1 +1,1 @@
-export { Recommendation } from '@searchspring/snap-preact-components';
+export { Recommendation } from '../../../../../components/src';

@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { TemplateSelect } from '@searchspring/snap-preact-components';
+import { TemplateSelect } from '../../components/src';
 
 import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
 import { TemplatesStore } from './Stores/TemplateStore';
@@ -10,10 +10,10 @@ import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { ResultComponent } from '@searchspring/snap-preact-components';
+import type { ResultComponent } from '../../components/src';
 import type { SnapFeatures, DeepPartial } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '../../components/src';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';

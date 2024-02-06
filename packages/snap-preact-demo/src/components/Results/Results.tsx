@@ -10,7 +10,7 @@ import {
 	withSnap,
 	Recommendation,
 	useCreateController,
-} from '@searchspring/snap-preact-components';
+} from '@searchspring/snap-preact/components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';

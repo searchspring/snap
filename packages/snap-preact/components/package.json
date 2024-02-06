@@ -1,0 +1,14 @@
+{
+	"name": "snap-preact-components",
+	"version": "0.49.0",
+	"private": true,
+	"description": "Snap Preact Component Library",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"source": "src/index.ts",
+	"files": [
+		"dist/**/*",
+		"README.md"
+	],
+	"sideEffects": false
+}

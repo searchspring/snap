@@ -1,1 +1,1 @@
-export { bocachica } from '@searchspring/snap-preact-components';
+export { bocachica } from '../../../../../components/src';
