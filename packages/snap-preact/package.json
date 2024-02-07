@@ -2,6 +2,8 @@
 	"name": "@searchspring/snap-preact",
 	"version": "0.49.0",
 	"description": "Snap Preact",
+	"main": "dist/cjs/src/index.js",
+	"module": "dist/esm/src/index.js",
 	"author": "Searchspring",
 	"license": "MIT",
 	"repository": "https://github.com/searchspring/snap",
@@ -10,7 +12,6 @@
 	},
 	"scripts": {
 		"build": "rm -rf ./dist && rm -fr ./components/dist && tsc && tsc -p tsconfig.cjs.json",
-		"build:components": "tsc -p ./components/tsconfig.json && tsc -p ./components/tsconfig.cjs.json",
 		"build:docs": "typedoc --out docs src/index.ts && storybook build -o ./docs",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
@@ -74,10 +75,14 @@
 	],
 	"exports": {
 		".": {
-			"default": "./dist/cjs/src/index.js"
+			"types": "./dist/esm/src/index.d.ts",
+			"import": "./dist/esm/src/index.js",
+			"require": "./dist/cjs/src/index.js"
 		},
 		"./components": {
-			"default": "./dist/cjs/components/src/index.js"
+			"types": "./dist/esm/components/src/index.d.ts",
+			"import": "./dist/esm/components/src/index.js",
+			"require": "./dist/cjs/components/src/index.js"
 		}
 	}
 }

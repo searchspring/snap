@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { Price, Image } from '@searchspring/snap-preact-components';
+import { Price, Image } from '@searchspring/snap-preact/components';
 
 export const Result: ResultComponent = (props) => {
 	const { result } = props;

@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ThemeProvider, LoadingBar, defaultTheme, StoreProvider, ControllerProvider, SnapProvider } from '@searchspring/snap-preact-components';
+import { ThemeProvider, LoadingBar, defaultTheme, StoreProvider, ControllerProvider, SnapProvider } from '@searchspring/snap-preact/components';
 import { Header } from '../Header/Header';
 import { Results, NoResults } from '../Results/Results';
 import type { Snap } from '@searchspring/snap-preact';

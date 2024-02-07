@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
+import { Carousel, Recommendation, Result } from '@searchspring/snap-preact/components';
 
 type RecsProps = {
 	controller?: RecommendationController;

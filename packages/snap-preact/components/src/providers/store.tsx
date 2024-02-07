@@ -1,4 +1,4 @@
-import { h, createContext, ComponentChildren, FunctionComponent } from 'preact';
+import { h, createContext, ComponentChildren, ComponentType } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 
@@ -10,7 +10,7 @@ export const StoreProvider = ({ children, store }: { children: ComponentChildren
 
 export const useStore = () => useContext(StoreContext);
 
-export function withStore<C extends FunctionComponent>(Component: C): C {
+export function withStore<C extends ComponentType>(Component: C): C {
 	return ((props: any) => (
 		// additional props must come after store prop
 		<Component store={useStore()} {...props} />

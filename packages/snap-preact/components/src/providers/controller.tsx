@@ -1,4 +1,4 @@
-import { h, createContext, ComponentChildren, FunctionComponent } from 'preact';
+import { h, createContext, ComponentChildren, ComponentType } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { AbstractController } from '@searchspring/snap-controller';
 
@@ -10,7 +10,7 @@ export const ControllerProvider = ({ children, controller }: { children: Compone
 
 export const useController = () => useContext(ControllerContext);
 
-export function withController<C extends FunctionComponent>(Component: C): C {
+export function withController<C extends ComponentType>(Component: C): C {
 	return ((props: any) => (
 		// additional props must come after controller prop
 		<Component controller={useController()} {...props} />

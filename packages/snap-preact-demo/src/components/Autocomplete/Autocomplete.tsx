@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact-components';
+import { Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact/components';
 
 type AutocompleteProps = {
 	controller?: AutocompleteController;

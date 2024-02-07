@@ -3,8 +3,8 @@
 	"version": "0.49.0",
 	"private": true,
 	"description": "Snap Preact Component Library",
-	"main": "dist/cjs/index.js",
-	"module": "dist/esm/index.js",
+	"main": "../dist/cjs/components/src/index.js",
+	"module": "../dist/esm/components/src/index.js",
 	"source": "src/index.ts",
 	"files": [
 		"dist/**/*",

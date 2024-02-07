@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Result } from '@searchspring/snap-preact-components';
+import { Result } from '@searchspring/snap-preact/components';
 
 type EmailProps = {
 	controller?: RecommendationController;

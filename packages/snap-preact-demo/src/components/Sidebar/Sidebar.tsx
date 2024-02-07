@@ -10,7 +10,7 @@ import {
 	withStore,
 	withController,
 	ControllerProvider,
-} from '@searchspring/snap-preact-components';
+} from '@searchspring/snap-preact/components';
 
 type SidebarProps = {
 	controller?: SearchController;
