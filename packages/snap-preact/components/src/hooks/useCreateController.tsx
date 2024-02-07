@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'preact/hooks';
 
 import type { ControllerTypes, ControllerConfigs, Controllers } from '@searchspring/snap-controller';
+import type { Snap } from '../../../src';
 
 export const useCreateController = <ControllerType extends Controllers>(
-	snap: any,
+	snap: Snap,
 	type: keyof typeof ControllerTypes,
 	config: ControllerConfigs
 ): ControllerType => {

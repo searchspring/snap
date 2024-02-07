@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { ThemeProvider, SnapProvider } from '../../../providers';
+import type { Snap } from '../../../../../src';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
 	const { snap, templatesStore, targetId, type, controller, resultComponent, ...otherProps } = properties;
@@ -28,7 +29,7 @@ export interface TemplateSelectProps {
 	targetId: string;
 	type: string;
 	controller: any;
-	snap: any;
+	snap: Snap;
 	resultComponent: any;
 	theme?: any;
 }

@@ -41,6 +41,7 @@ const CSS = {
 			'.ss__search__content': {
 				flex: '1 1 0%',
 				padding: '0px 10px',
+				width: '100%',
 			},
 
 			[`@media only screen and (max-width: ${slideOutToggleWidth})`]: {

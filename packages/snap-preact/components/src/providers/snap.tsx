@@ -1,10 +1,10 @@
 import { h, createContext, ComponentChildren, ComponentType } from 'preact';
 import { useContext } from 'preact/hooks';
+import type { Snap, SnapTemplates } from '../../../src';
 
-// TODO: change from any -> Snap
-const SnapContext = createContext<null | any>(null);
+const SnapContext = createContext<undefined | Snap | SnapTemplates>(undefined);
 
-export const SnapProvider = ({ children, snap }: { children: ComponentChildren; snap: any }) => {
+export const SnapProvider = ({ children, snap }: { children: ComponentChildren; snap: Snap }) => {
 	return <SnapContext.Provider value={snap}>{children}</SnapContext.Provider>;
 };
 

@@ -4,6 +4,7 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { IconProps } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
+import type { Snap } from '../../src';
 
 export interface ComponentProps {
 	name?: string;
@@ -13,7 +14,7 @@ export interface ComponentProps {
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
-	snap?: any;
+	snap?: Snap;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
 }
 

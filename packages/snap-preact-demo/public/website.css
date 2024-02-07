@@ -605,13 +605,11 @@ input[type='text'] {
     -webkit-flex: 0 1 auto;
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
-    width: 250px;
+    max-width: 250px;
     margin: 0 40px 0 0; }
   .ss-lite-main-layout .ss-lite-content {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 0%;
-    -ms-flex: 1 1 0%;
-    flex: 1 1 0%; }
+    max-width: 100%;
+  }
 
 /* Footer
 ============================================== */

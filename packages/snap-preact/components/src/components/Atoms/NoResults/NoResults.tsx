@@ -12,6 +12,7 @@ import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
 import type { RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
 import type { FunctionalComponent } from 'preact';
+import type { SnapTemplates } from '../../../../../src';
 
 const CSS = {
 	noResults: () => css({}),
@@ -80,11 +81,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const suggestionsExist = suggestionsList && Array.isArray(suggestionsList) && suggestionsList.length !== 0;
 	const contactsExist = contactsList && Array.isArray(contactsList) && contactsList.length !== 0;
 
-	let recommendationTemplateComponent: (() => FunctionalComponent<{ controller: RecommendationController }>) | undefined;
+	let recommendationTemplateComponent: (() => FunctionalComponent<{ controller: RecommendationController; name: string }>) | undefined;
 	let recsController: RecommendationController | undefined;
 
 	if (templates?.recommendation?.template) {
-		const snap = useSnap();
+		const snap = useSnap() as SnapTemplates;
 		const mergedConfig = Object.assign(
 			{
 				id: 'no-results',
@@ -93,14 +94,18 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			},
 			templates.recommendation!.config
 		);
-		recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
-		if (!recsController?.store?.loaded && recsController?.store.error?.type !== 'error') {
-			recsController?.search();
+		if (snap) {
+			recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
+			if (!recsController?.store?.loaded && recsController?.store.error?.type !== 'error') {
+				recsController?.search();
+			}
+			recommendationTemplateComponent = useComponent(snap, templates.recommendation!.template);
 		}
-		recommendationTemplateComponent = useComponent(snap, templates.recommendation!.template);
 	}
 
-	const RecommendationTemplateComponent = recommendationTemplateComponent as unknown as FunctionalComponent<{ controller: RecommendationController }>;
+	const RecommendationTemplateComponent = recommendationTemplateComponent as
+		| FunctionalComponent<{ controller: RecommendationController; name: string }>
+		| undefined;
 
 	return (
 		<div className={classnames('ss__no-results', className)} {...styling}>
@@ -142,11 +147,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 				</div>
 			)}
 
-			{RecommendationTemplateComponent && recsController?.store?.loaded && (
+			{RecommendationTemplateComponent && recsController?.store?.loaded ? (
 				<div className="ss__no-results__recommendations">
-					<RecommendationTemplateComponent controller={recsController} />
+					<RecommendationTemplateComponent controller={recsController} name={'noResultsRecommendations'} />
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 });
