@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import { Skeleton } from '@searchspring/snap-preact-components';
+import { Skeleton } from '@searchspring/snap-preact/components';
 
 export class ContentSkel extends Component {
 	render() {

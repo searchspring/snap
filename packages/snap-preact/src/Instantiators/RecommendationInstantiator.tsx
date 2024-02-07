@@ -11,6 +11,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
+import type { Snap } from '../Snap';
 
 type RecommendationComponentFunc = () => Promise<any> | any;
 
@@ -47,6 +48,7 @@ export type RecommendationInstantiatorServices = {
 	client?: Client;
 	logger?: Logger;
 	tracker?: Tracker;
+	snap?: Snap;
 };
 
 export class RecommendationInstantiator {
@@ -304,6 +306,7 @@ export class RecommendationInstantiator {
 					| undefined
 					| React.ElementType<{
 							controller: RecommendationController;
+							snap?: Snap;
 					  }> = undefined;
 
 				if (this.config.components[component] && typeof this.config.components[component] == 'function') {
@@ -329,7 +332,7 @@ export class RecommendationInstantiator {
 
 				setTimeout(() => {
 					if (injectedElem && RecommendationsComponent) {
-						render(<RecommendationsComponent controller={controller} {...props} />, injectedElem);
+						render(<RecommendationsComponent controller={controller} snap={services?.snap} {...props} />, injectedElem);
 					}
 				});
 			}

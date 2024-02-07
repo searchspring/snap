@@ -1,7 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { withController } from '@searchspring/snap-preact-components';
+import { withController } from '@searchspring/snap-preact/components';
 
 type HeaderProps = {
 	controller?: SearchController;

@@ -1,1 +1,1 @@
-export { TemplatesEditor } from '@searchspring/snap-preact-components';
+export { TemplatesEditor } from '../../components/src';

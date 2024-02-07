@@ -1,1 +1,1 @@
-export { BranchOverride } from '@searchspring/snap-preact-components';
+export { BranchOverride } from '../../components/src';

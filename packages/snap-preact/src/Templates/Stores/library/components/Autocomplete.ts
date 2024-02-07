@@ -1,1 +1,1 @@
-export { Autocomplete } from '@searchspring/snap-preact-components';
+export { Autocomplete } from '../../../../../components/src';
