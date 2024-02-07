@@ -4,8 +4,8 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Result, ResultProps } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
-import { componentArgs, highlightedCode } from '../../../../utilities';
-import { Snapify } from '../../../../utilities/snapify';
+import { componentArgs, highlightedCode } from '../../../utilities';
+import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
 import { ResultsLayout } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';

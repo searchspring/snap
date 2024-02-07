@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
-import { url } from '@searchspring/snap-toolbox';
+import { url } from '@searchspring/snap-preact/toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';

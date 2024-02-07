@@ -2,7 +2,8 @@
 	"extends": "../../tsconfig.json",
 	"include": [
 		"src",
-		"components/src"
+		"components/src",
+		"toolbox/src"
 	],
 	"compilerOptions": {
 		"outDir": "./dist/esm",

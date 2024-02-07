@@ -12,13 +12,13 @@
 	},
 	"scripts": {
 		"build": "rm -rf ./dist && rm -fr ./components/dist && tsc && tsc -p tsconfig.cjs.json",
-		"build:docs": "typedoc --out docs src/index.ts && storybook build -o ./docs",
+		"build:docs": "typedoc --out docs src/index.ts && storybook build -c ./components/.storybook -o ./components/docs",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint '{src,components}/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"storybook": "storybook dev -p 6006"
+		"storybook": "storybook dev -c ./components/.storybook -p 6006"
 	},
 	"peerDependencies": {
 		"preact": "10.9.0"
@@ -83,6 +83,11 @@
 			"types": "./dist/esm/components/src/index.d.ts",
 			"import": "./dist/esm/components/src/index.js",
 			"require": "./dist/cjs/components/src/index.js"
+		},
+		"./toolbox": {
+			"types": "./dist/esm/toolbox/src/index.d.ts",
+			"import": "./dist/esm/toolbox/src/index.js",
+			"require": "./dist/cjs/toolbox/src/index.js"
 		}
 	}
 }
