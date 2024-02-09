@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.1](https://github.com/searchspring/snap/compare/v0.51.0...v0.51.1) (2024-02-09)
+
+### Bug Fixes
+
+- **controller/search:** altering backfill algorithm to use per page value instead of maximum rpp ([fc1bee1](https://github.com/searchspring/snap/commit/fc1bee1887ed2ded9010dfe681b15469759c5d42))
+
 # [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

@@ -19,9 +19,13 @@ import type {
 	ElementPositionObj,
 } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { SearchRequestModel, SearchResponseModelResult, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
-
-const API_LIMIT = 500;
+import type {
+	SearchRequestModel,
+	SearchResponseModelResult,
+	SearchRequestModelSearchRedirectResponseEnum,
+	MetaResponseModel,
+	SearchResponseModel,
+} from '@searchspring/snapi-types';
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -351,11 +355,10 @@ export class SearchController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			let meta: any;
-			let response: any;
+			let meta: MetaResponseModel = {};
+			let response: SearchResponseModel & { meta?: MetaResponseModel } = {};
 
-			// infinite functionality
-			// if params.page > 1 and infinite setting exists we should append results
+			// infinite scroll functionality (after page 1)
 			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
 				const preventBackfill =
 					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination.page > this.config.settings.infinite.backfill;
@@ -367,85 +370,50 @@ export class SearchController extends AbstractController {
 					return;
 				}
 
-				const backfills = [];
-				let pageSize = params.pagination?.pageSize || this.store.pagination.pageSize || this.store.pagination.defaultPageSize;
-
-				// if no results fetch results...
+				// infinite backfill is enabled AND we have not yet fetched any results
 				if (this.config.settings?.infinite.backfill && !this.previousResults.length) {
-					if (!pageSize) {
-						// pageSize is unknown - need to fetch meta to know defaultPageSize before we can continue
-						const meta = await this.client.meta();
-						pageSize = meta.pagination?.defaultPageSize!;
-					}
+					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
+					const backfillRequests = Array(params.pagination.page)
+						.fill('backfill')
+						.map((v, i) => {
+							const backfillParams = deepmerge({ ...params }, { pagination: { page: i + 1 } });
+							return this.client.search(backfillParams);
+						});
 
-					// restricting pageSize to the limit
-					pageSize = pageSize > API_LIMIT ? API_LIMIT : pageSize;
+					const backfillResponses = await Promise.all(backfillRequests);
 
-					const pagesNeeded =
-						params.pagination?.page && params.pagination?.page > this.config.settings?.infinite.backfill
-							? this.config.settings?.infinite.backfill
-							: params.pagination?.page;
+					// backfillResponses are [meta, searchResponse][]
+					// set the meta and response to the first page of backfillResponses
+					meta = backfillResponses[0][0];
+					response = backfillResponses[0][1];
 
-					// figure out how many pages of results to backfill and wait on all responses
-					const { size: backFillPageSize, pages: backFillPages } = backFillSize(pagesNeeded, pageSize);
-
-					for (let i = 1; i <= backFillPages; i++) {
-						const backfillParams = deepmerge({ ...params }, { pagination: { pageSize: backFillPageSize, page: i } });
-						backfills.push(this.client.search(backfillParams));
-					}
-				}
-
-				// infinite backfill results
-				if (backfills && backfills.length) {
-					// array to hold all results from backfill responses
-					const backfillResults: SearchResponseModelResult[] = [];
-
-					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([metaBackfill, responseBackfill]) => {
-						if (!meta) {
-							meta = metaBackfill;
-						}
-						if (!response) {
-							response = responseBackfill;
-						}
-
-						// push results to array
-						if (responseBackfill.results) {
-							backfillResults.push(...responseBackfill.results);
-						}
-					});
+					// accumulate results from all backfill responses
+					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
+						// response is [meta, searchResponse]
+						return results.concat(...response[1].results!);
+					}, [] as SearchResponseModelResult[]);
 
 					// overwrite pagination params to expected state
-					response.pagination.pageSize = pageSize;
-					response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize);
-					response.pagination.page = params.pagination?.page;
+					response.pagination!.totalPages = Math.ceil(response.pagination!.totalResults! / response.pagination!.pageSize!);
+					response.pagination!.page = params.pagination?.page;
 
 					// set the response results with results from backfill responses
 					response.results = backfillResults;
-
-					if (!response.meta) {
-						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-						response.meta = meta;
-					}
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-					if (!response.meta) {
-						// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-						response.meta = meta;
-					}
-					//append new results to previous results
+
+					// append new results to previous results
 					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
-				//standard.
+				// standard request (not using infinite scroll)
 				[meta, response] = await this.client.search(params);
-				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-				if (!response.meta) {
-					// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-					response.meta = meta;
-				}
+			}
+
+			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
+			if (!response.meta) {
+				response.meta = meta;
 			}
 
 			searchProfile.stop();
@@ -600,13 +568,4 @@ export function generateHrefSelector(element: HTMLElement, href: string, levels 
 	}
 
 	return;
-}
-
-function backFillSize(pages: number, pageSize: number) {
-	const totalResults = pages * pageSize;
-	let numPages = Math.ceil(totalResults / API_LIMIT);
-
-	while (totalResults % numPages) numPages++;
-
-	return { size: totalResults / numPages, pages: numPages };
 }
