@@ -1,4 +1,4 @@
-/*! For license information please see main.9af069ae.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.acd94ebc.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -24520,8 +24520,10 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -24529,7 +24531,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
@@ -26120,22 +26121,6 @@
 					e
 				);
 			}
-			function SearchController_toConsumableArray(arr) {
-				return (
-					(function SearchController_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return SearchController_arrayLikeToArray(arr);
-					})(arr) ||
-					(function SearchController_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					SearchController_unsupportedIterableToArray(arr) ||
-					(function SearchController_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
 			function _slicedToArray(arr, i) {
 				return (
 					(function SearchController_arrayWithHoles(arr) {
@@ -26172,6 +26157,22 @@
 					(function SearchController_nonIterableRest() {
 						throw new TypeError(
 							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function SearchController_toConsumableArray(arr) {
+				return (
+					(function SearchController_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return SearchController_arrayLikeToArray(arr);
+					})(arr) ||
+					(function SearchController_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					SearchController_unsupportedIterableToArray(arr) ||
+					(function SearchController_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
@@ -26322,16 +26323,16 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this$config$settings8,
+						var _this$config$settings6,
+							_ref3,
+							_ref4,
 							_ref5,
-							_ref6,
+							_this$config$settings7,
+							_this$config$settings8,
+							_this,
 							_ref7,
 							_this$config$settings9,
 							_this$config$settings10,
-							_this,
-							_ref9,
-							_this$config$settings11,
-							_this$config$settings12,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -26423,7 +26424,7 @@
 									params,
 									_this$config$settings,
 									_params$pagination,
-									_this$config$settings7,
+									_this$config$settings5,
 									stringyParams,
 									prevStringyParams,
 									searchProfile,
@@ -26431,26 +26432,12 @@
 									response,
 									_this$config$settings2,
 									_this$config$settings3,
-									_params$pagination2,
 									_this$config$settings4,
 									preventBackfill,
 									dontBackfill,
-									backfills,
-									pageSize,
-									_params$pagination3,
-									_params$pagination4,
-									_this$config$settings5,
-									_this$config$settings6,
-									_params$pagination5,
-									_meta$pagination,
-									_meta,
-									pagesNeeded,
-									_backFillSize,
-									backFillPageSize,
-									backFillPages,
-									i,
-									backfillParams,
-									_params$pagination6,
+									_params$pagination2,
+									backfillRequests,
+									backfillResponses,
 									backfillResults,
 									_yield$_this$client$s,
 									_yield$_this$client$s2,
@@ -26515,6 +26502,8 @@
 												case 24:
 													if (
 														((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+														(meta = {}),
+														(response = {}),
 														!(
 															null !== (_this$config$settings = _this.config.settings) &&
 															void 0 !== _this$config$settings &&
@@ -26525,7 +26514,7 @@
 															params.pagination.page > 1
 														))
 													) {
-														_context.next = 67;
+														_context.next = 56;
 														break;
 													}
 													if (
@@ -26543,203 +26532,156 @@
 														)),
 														!preventBackfill && !dontBackfill)
 													) {
-														_context.next = 32;
+														_context.next = 34;
 														break;
 													}
 													return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-												case 32:
+												case 34:
 													if (
-														((backfills = []),
-														(pageSize =
-															(null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
-																? void 0
-																: _params$pagination2.pageSize) ||
-															_this.store.pagination.pageSize ||
-															_this.store.pagination.defaultPageSize),
 														null === (_this$config$settings4 = _this.config.settings) ||
-															void 0 === _this$config$settings4 ||
-															!_this$config$settings4.infinite.backfill ||
-															_this.previousResults.length)
+														void 0 === _this$config$settings4 ||
+														!_this$config$settings4.infinite.backfill ||
+														_this.previousResults.length
 													) {
-														_context.next = 44;
+														_context.next = 47;
 														break;
 													}
-													if (pageSize) {
-														_context.next = 40;
-														break;
-													}
-													return (_context.next = 38), _this.client.meta();
+													return (
+														(backfillRequests = Array(params.pagination.page)
+															.fill('backfill')
+															.map(function (v, i) {
+																var backfillParams = cjs_default()(Object.assign({}, params), { pagination: { page: i + 1 } });
+																return _this.client.search(backfillParams);
+															})),
+														(_context.next = 38),
+														Promise.all(backfillRequests)
+													);
 												case 38:
-													(_meta = _context.sent),
-														(pageSize =
-															null === (_meta$pagination = _meta.pagination) || void 0 === _meta$pagination
-																? void 0
-																: _meta$pagination.defaultPageSize);
-												case 40:
-													for (
-														pageSize = pageSize > 500 ? 500 : pageSize,
-															pagesNeeded =
-																null !== (_params$pagination3 = params.pagination) &&
-																void 0 !== _params$pagination3 &&
-																_params$pagination3.page &&
-																(null === (_params$pagination4 = params.pagination) || void 0 === _params$pagination4
-																	? void 0
-																	: _params$pagination4.page) >
-																	(null === (_this$config$settings5 = _this.config.settings) || void 0 === _this$config$settings5
-																		? void 0
-																		: _this$config$settings5.infinite.backfill)
-																	? null === (_this$config$settings6 = _this.config.settings) || void 0 === _this$config$settings6
-																		? void 0
-																		: _this$config$settings6.infinite.backfill
-																	: null === (_params$pagination5 = params.pagination) || void 0 === _params$pagination5
-																	? void 0
-																	: _params$pagination5.page,
-															_backFillSize = backFillSize(pagesNeeded, pageSize),
-															backFillPageSize = _backFillSize.size,
-															backFillPages = _backFillSize.pages,
-															i = 1;
-														i <= backFillPages;
-														i++
-													)
-														(backfillParams = cjs_default()(Object.assign({}, params), { pagination: { pageSize: backFillPageSize, page: i } })),
-															backfills.push(_this.client.search(backfillParams));
-												case 44:
-													if (!backfills || !backfills.length) {
-														_context.next = 57;
-														break;
-													}
-													return (backfillResults = []), (_context.next = 48), Promise.all(backfills);
-												case 48:
-													_context.sent.map(function (_ref3) {
-														var _ref4 = _slicedToArray(_ref3, 2),
-															metaBackfill = _ref4[0],
-															responseBackfill = _ref4[1];
-														meta || (meta = metaBackfill),
-															response || (response = responseBackfill),
-															responseBackfill.results &&
-																backfillResults.push.apply(backfillResults, SearchController_toConsumableArray(responseBackfill.results));
-													}),
-														(response.pagination.pageSize = pageSize),
+													(backfillResponses = _context.sent),
+														(meta = backfillResponses[0][0]),
+														(response = backfillResponses[0][1]),
+														(backfillResults = backfillResponses.reduce(function (results, response) {
+															return results.concat.apply(results, SearchController_toConsumableArray(response[1].results));
+														}, [])),
 														(response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize)),
 														(response.pagination.page =
-															null === (_params$pagination6 = params.pagination) || void 0 === _params$pagination6
+															null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
 																? void 0
-																: _params$pagination6.page),
+																: _params$pagination2.page),
 														(response.results = backfillResults),
-														response.meta || (response.meta = meta),
-														(_context.next = 65);
+														(_context.next = 54);
 													break;
-												case 57:
-													return (_context.next = 59), _this.client.search(params);
-												case 59:
+												case 47:
+													return (_context.next = 49), _this.client.search(params);
+												case 49:
 													(_yield$_this$client$s = _context.sent),
 														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 														(meta = _yield$_this$client$s2[0]),
-														(response = _yield$_this$client$s2[1]).meta || (response.meta = meta),
-														(response.results = [].concat(
+														((response = _yield$_this$client$s2[1]).results = [].concat(
 															SearchController_toConsumableArray(_this.previousResults),
 															SearchController_toConsumableArray(response.results || [])
 														));
-												case 65:
-													_context.next = 74;
+												case 54:
+													_context.next = 62;
 													break;
-												case 67:
-													return (_context.next = 69), _this.client.search(params);
-												case 69:
+												case 56:
+													return (_context.next = 58), _this.client.search(params);
+												case 58:
 													(_yield$_this$client$s3 = _context.sent),
 														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
 														(meta = _yield$_this$client$s4[0]),
-														(response = _yield$_this$client$s4[1]).meta || (response.meta = meta);
-												case 74:
+														(response = _yield$_this$client$s4[1]);
+												case 62:
 													return (
+														response.meta || (response.meta = meta),
 														searchProfile.stop(),
 														_this.log.profile(searchProfile),
 														(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-														(_context.prev = 77),
-														(_context.next = 80),
+														(_context.prev = 66),
+														(_context.next = 69),
 														_this.eventManager.fire('afterSearch', { controller: _assertThisInitialized(_this), request: params, response })
 													);
-												case 80:
-													_context.next = 92;
+												case 69:
+													_context.next = 81;
 													break;
-												case 82:
+												case 71:
 													if (
-														((_context.prev = 82),
-														(_context.t1 = _context.catch(77)),
+														((_context.prev = 71),
+														(_context.t1 = _context.catch(66)),
 														'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 													) {
-														_context.next = 90;
+														_context.next = 79;
 														break;
 													}
 													return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-												case 90:
+												case 79:
 													throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-												case 92:
+												case 81:
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
-														null !== (_this$config$settings7 = _this.config.settings) &&
-															void 0 !== _this$config$settings7 &&
-															_this$config$settings7.infinite &&
+														null !== (_this$config$settings5 = _this.config.settings) &&
+															void 0 !== _this$config$settings5 &&
+															_this$config$settings5.infinite &&
 															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-														(_context.prev = 97),
-														(_context.next = 100),
+														(_context.prev = 86),
+														(_context.next = 89),
 														_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
 													);
-												case 100:
-													_context.next = 112;
+												case 89:
+													_context.next = 101;
 													break;
-												case 102:
+												case 91:
 													if (
-														((_context.prev = 102),
-														(_context.t2 = _context.catch(97)),
+														((_context.prev = 91),
+														(_context.t2 = _context.catch(86)),
 														'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 													) {
-														_context.next = 110;
+														_context.next = 99;
 														break;
 													}
 													return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-												case 110:
+												case 99:
 													throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-												case 112:
-													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 137);
+												case 101:
+													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 126);
 													break;
-												case 116:
-													if (((_context.prev = 116), (_context.t3 = _context.catch(5)), !_context.t3)) {
-														_context.next = 137;
+												case 105:
+													if (((_context.prev = 105), (_context.t3 = _context.catch(5)), !_context.t3)) {
+														_context.next = 126;
 														break;
 													}
 													if (!_context.t3.err || !_context.t3.fetchDetails) {
-														_context.next = 133;
+														_context.next = 122;
 														break;
 													}
 													(_context.t4 = _context.t3.fetchDetails.status),
-														(_context.next = 429 === _context.t4 ? 123 : 500 === _context.t4 ? 125 : 127);
+														(_context.next = 429 === _context.t4 ? 112 : 500 === _context.t4 ? 114 : 116);
 													break;
-												case 123:
+												case 112:
 													return (
 														(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-														_context.abrupt('break', 129)
+														_context.abrupt('break', 118)
 													);
-												case 125:
+												case 114:
 													return (
 														(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-														_context.abrupt('break', 129)
+														_context.abrupt('break', 118)
 													);
-												case 127:
-													return (_this.store.error = { type: types.N.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 129);
-												case 129:
-													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 136);
+												case 116:
+													return (_this.store.error = { type: types.N.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 118);
+												case 118:
+													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 125);
 													break;
-												case 133:
+												case 122:
 													(_this.store.error = { type: types.N.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
 														_this.log.error(_context.t3),
 														_this.handleError(_context.t3);
-												case 136:
+												case 125:
 													_this.store.loading = !1;
-												case 137:
+												case 126:
 												case 'end':
 													return _context.stop();
 											}
@@ -26747,26 +26689,26 @@
 									_callee,
 									null,
 									[
-										[5, 116],
+										[5, 105],
 										[6, 11],
-										[77, 82],
-										[97, 102],
+										[66, 71],
+										[86, 91],
 									]
 								);
 							})
 						)),
 						(_this.config = cjs_default()(defaultConfig, _this.config)),
-						null !== (_this$config$settings8 = _this.config.settings) &&
-							void 0 !== _this$config$settings8 &&
-							_this$config$settings8.infinite &&
+						null !== (_this$config$settings6 = _this.config.settings) &&
+							void 0 !== _this$config$settings6 &&
+							_this$config$settings6.infinite &&
 							void 0 === _this.config.settings.restorePosition &&
 							(_this.config.settings.restorePosition = { enabled: !0 }),
 						_this.store.setConfig(_this.config),
 						(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 						_this.storage.set('lastStringyParams', void 0),
 						_this.eventManager.on('beforeSearch', function (_x, _x2) {
-							return (_ref5 =
-								_ref5 ||
+							return (_ref3 =
+								_ref3 ||
 								SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee2(search, next) {
 										return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -26783,8 +26725,8 @@
 								)).apply(this, arguments);
 						}),
 						_this.eventManager.on('afterSearch', function (_x3, _x4) {
-							return (_ref6 =
-								_ref6 ||
+							return (_ref4 =
+								_ref4 ||
 								SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee3(search, next) {
 										var _search$response,
@@ -26891,8 +26833,8 @@
 								)).apply(this, arguments);
 						}),
 						_this.eventManager.on('afterStore', function (_x5, _x6) {
-							return (_ref7 =
-								_ref7 ||
+							return (_ref5 =
+								_ref5 ||
 								SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
 										var storableRequestParams, stringyParams, scrollMap, elementPosition;
@@ -26921,24 +26863,24 @@
 									})
 								)).apply(this, arguments);
 						}),
-						null !== (_this$config$settings9 = _this.config.settings) &&
-							void 0 !== _this$config$settings9 &&
-							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
-							void 0 !== _this$config$settings10 &&
-							_this$config$settings10.enabled) &&
+						null !== (_this$config$settings7 = _this.config.settings) &&
+							void 0 !== _this$config$settings7 &&
+							null !== (_this$config$settings8 = _this$config$settings7.restorePosition) &&
+							void 0 !== _this$config$settings8 &&
+							_this$config$settings8.enabled) &&
 							(_this.eventManager.on('restorePosition', function (_x7, _x8) {
-								return (_ref9 =
-									_ref9 ||
+								return (_ref7 =
+									_ref7 ||
 									SearchController_asyncToGenerator(
-										SearchController_regeneratorRuntime().mark(function _callee6(_ref8, next) {
+										SearchController_regeneratorRuntime().mark(function _callee6(_ref6, next) {
 											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
 											return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
 														case 0:
 															if (
-																((controller = _ref8.controller),
-																(element = _ref8.element),
+																((controller = _ref6.controller),
+																(element = _ref6.element),
 																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
 																	((lastRequest = _this.storage.get('lastStringyParams')) &&
 																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
@@ -26946,10 +26888,10 @@
 																		(scrollMap = _this.storage.get('scrollMap') || {}),
 																		(element = scrollMap[stringyParams]))),
 																(scrollToPosition = function scrollToPosition() {
-																	var _ref10;
+																	var _ref8;
 																	return new Promise(function (_x9) {
-																		return (_ref10 =
-																			_ref10 ||
+																		return (_ref8 =
+																			_ref8 ||
 																			SearchController_asyncToGenerator(
 																				SearchController_regeneratorRuntime().mark(function _callee5(resolve) {
 																					var checkTime,
@@ -27044,11 +26986,11 @@
 										})
 									)).apply(this, arguments);
 							}),
-							null !== (_this$config$settings11 = _this.config.settings) &&
-								void 0 !== _this$config$settings11 &&
-								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
-								void 0 !== _this$config$settings12 &&
-								_this$config$settings12.onPageShow &&
+							null !== (_this$config$settings9 = _this.config.settings) &&
+								void 0 !== _this$config$settings9 &&
+								null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
+								void 0 !== _this$config$settings10 &&
+								_this$config$settings10.onPageShow &&
 								window.addEventListener('pageshow', function () {
 									_this.eventManager.fire('restorePosition', { controller: _assertThisInitialized(_this), element: {} });
 								}));
@@ -27066,16 +27008,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings13,
-										_this$config$settings14,
+									var _this$config$settings11,
+										_this$config$settings12,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings13 = this.config.settings) &&
-										void 0 !== _this$config$settings13 &&
-										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
-										void 0 !== _this$config$settings14 &&
-										_this$config$settings14.merchandising &&
+									(null !== (_this$config$settings11 = this.config.settings) &&
+										void 0 !== _this$config$settings11 &&
+										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
+										void 0 !== _this$config$settings12 &&
+										_this$config$settings12.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -27139,10 +27081,6 @@
 								: _request$merchandisin.landingPage) || '',
 					},
 				};
-			}
-			function backFillSize(pages, pageSize) {
-				for (var totalResults = pages * pageSize, numPages = Math.ceil(totalResults / 500); totalResults % numPages; ) numPages++;
-				return { size: totalResults / numPages, pages: numPages };
 			}
 			function RecommendationController_regeneratorRuntime() {
 				RecommendationController_regeneratorRuntime = function _regeneratorRuntime() {
@@ -40526,7 +40464,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.51.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.51.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -41025,7 +40963,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.51.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.51.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
