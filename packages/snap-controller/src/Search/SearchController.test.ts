@@ -415,7 +415,7 @@ describe('Search Controller', () => {
 		await controller.search();
 
 		const { pageSize } = controller.store.pagination;
-		expect(searchfn).toHaveBeenCalledTimes(1);
+		expect(searchfn).toHaveBeenCalledTimes(page);
 		expect(controller.store.results.length).toBe(pageSize * page);
 
 		searchfn.mockClear();
