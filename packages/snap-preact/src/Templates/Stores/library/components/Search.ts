@@ -1,1 +1,1 @@
-export { Search } from '@searchspring/snap-preact-components';
+export { Search } from '../../../../../components/src';

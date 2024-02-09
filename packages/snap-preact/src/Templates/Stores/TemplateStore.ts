@@ -6,7 +6,7 @@ import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 import type { DeepPartial } from '../../types';
-import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '../../../components/src';
 
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';

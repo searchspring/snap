@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { TemplateSelect } from '@searchspring/snap-preact-components';
+import { TemplateSelect } from '../../components/src';
 
 import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
 import { TemplatesStore } from './Stores/TemplateStore';
@@ -10,10 +10,10 @@ import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { ResultComponent } from '@searchspring/snap-preact-components';
+import type { ResultComponent } from '../../components/src';
 import type { SnapFeatures, DeepPartial } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '../../components/src';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
@@ -92,6 +92,8 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 };
 
 export class SnapTemplates extends Snap {
+	public templates: TemplatesStore;
+
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
@@ -101,6 +103,7 @@ export class SnapTemplates extends Snap {
 		const snapConfig = createSnapConfig(config, templatesStore);
 
 		super(snapConfig);
+		this.templates = templatesStore;
 
 		window.searchspring.templates = templatesStore;
 
@@ -213,23 +216,26 @@ export function createRecommendationComponentMapping(
 ): { [name: string]: RecommendationComponentObject } {
 	const targets = templateConfig.recommendation?.targets;
 	return targets
-		? targets.reduce((mapping, target) => {
-				const targetId = templatesStore.addTarget('recommendation', target);
-				mapping[target.component] = {
-					component: async () => {
-						await templatesStore.library.import.component[target.template]();
-						return TemplateSelect;
-					},
-					props: { type: 'recommendation', templatesStore, targetId },
-				};
+		? targets.reduce(
+				(mapping, target) => {
+					const targetId = templatesStore.addTarget('recommendation', target);
+					mapping[target.component] = {
+						component: async () => {
+							await templatesStore.library.import.component[target.template]();
+							return TemplateSelect;
+						},
+						props: { type: 'recommendation', templatesStore, targetId },
+					};
 
-				// if they are not undefined, add them
-				if (target.resultComponent) {
-					mapping[target.component].props!.resultComponent = target.resultComponent;
-				}
+					// if they are not undefined, add them
+					if (target.resultComponent) {
+						mapping[target.component].props!.resultComponent = target.resultComponent;
+					}
 
-				return mapping;
-		  }, {} as { [name: string]: RecommendationComponentObject })
+					return mapping;
+				},
+				{} as { [name: string]: RecommendationComponentObject }
+			)
 		: {};
 }
 

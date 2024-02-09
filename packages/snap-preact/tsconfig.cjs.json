@@ -1,8 +1,13 @@
 {
 	"extends": "../../tsconfig.cjs.json",
+	"include": [
+		"src",
+		"components/src",
+		"toolbox/src"
+	],
 	"compilerOptions": {
 		"outDir": "./dist/cjs",
 		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
+		"jsxImportSource": "@emotion/react",
 	}
 }

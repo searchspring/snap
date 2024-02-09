@@ -1,1 +1,1 @@
-export { pike } from '@searchspring/snap-preact-components';
+export { pike } from '../../../../../components/src';

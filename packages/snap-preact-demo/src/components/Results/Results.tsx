@@ -1,7 +1,16 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Pagination, Results as ResultsComponent, LoadMore, withStore, withController } from '@searchspring/snap-preact-components';
+import {
+	Pagination,
+	Results as ResultsComponent,
+	LoadMore,
+	withStore,
+	withController,
+	withSnap,
+	Recommendation,
+	useCreateController,
+} from '@searchspring/snap-preact/components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
@@ -65,8 +74,10 @@ export class Results extends Component<ResultsProps> {
 type NoResultsProps = {
 	store?: SearchStore;
 	controller?: SearchController;
+	snap?: Snap;
 };
 
+@withSnap
 @withController
 @withStore
 @observer
@@ -74,6 +85,15 @@ export class NoResults extends Component<NoResultsProps> {
 	render() {
 		const store = this.props.store;
 		const dym = store.search.didYouMean;
+
+		const recsController = useCreateController<RecommendationController>(this.props.snap, 'recommendation', {
+			id: 'no-results',
+			tag: 'no-results',
+			branch: 'production',
+		});
+		if (!recsController?.store?.loaded && recsController?.store.error?.type !== 'error') {
+			recsController?.search();
+		}
 
 		return (
 			<div className="ss-no-results">
@@ -131,6 +151,7 @@ export class NoResults extends Component<NoResultsProps> {
 							<a href="mailto:email@sitename.com">email@sitename.com</a>
 						</p>
 					</div>
+					<div>{recsController?.store?.loaded && <Recommendation controller={recsController} />}</div>
 				</div>
 			</div>
 		);

@@ -5,9 +5,33 @@ new SnapTemplates({
 	config: {
 		language: 'en',
 		currency: 'usd',
+		// components: {
+		// 	global: Result,
+		// 	ProductCardAlt: ResultAlt,
+		// },
 		themes: {
 			global: {
 				name: 'bocachica',
+				overrides: {
+					components: {
+						noResults: {
+							templates: {
+								recommendation: {
+									template: 'Recommendation',
+									// resultComponent: 'Product', TODO: support resultComponent
+								},
+							},
+						},
+						autocomplete: {
+							templates: {
+								recommendation: {
+									template: 'Recommendation',
+									// resultComponent: 'Product',
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 	},

@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Select, withStore } from '@searchspring/snap-preact-components';
+import { Select, withStore } from '@searchspring/snap-preact/components';
 
 type SortByProps = {
 	store?: SearchStore;

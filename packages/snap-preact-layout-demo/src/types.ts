@@ -1,5 +1,5 @@
 import type * as SnapPreactTypes from '@searchspring/snap-preact';
-import type * as ComponentTypes from '@searchspring/snap-preact-components';
+import type * as ComponentTypes from '@searchspring/snap-preact/components';
 import type * as ControllerTypes from '@searchspring/snap-controller';
 import type * as StoreTypes from '@searchspring/snap-store-mobx';
 import type * as EventManagerTypes from '@searchspring/snap-event-manager';

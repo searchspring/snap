@@ -1,4 +1,4 @@
-import type { Theme } from '@searchspring/snap-preact-components';
+import type { Theme } from '../../../components/src';
 import type { FunctionalComponent } from 'preact';
 import type { TemplateTypes } from './TemplateStore';
 

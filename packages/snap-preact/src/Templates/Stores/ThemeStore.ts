@@ -1,7 +1,7 @@
 import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { Theme, ThemeVariables } from '@searchspring/snap-preact-components';
+import type { Theme, ThemeVariables } from '../../../components/src';
 import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import type { DeepPartial } from '../../types';
 

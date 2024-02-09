@@ -1,16 +1,19 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact-components';
+import { Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact/components';
+import type { Snap } from '@searchspring/snap-preact';
 
 type AutocompleteProps = {
 	controller?: AutocompleteController;
+	snap?: Snap;
 };
 
 @observer
 export class Autocomplete extends Component<AutocompleteProps> {
 	render() {
 		const controller = this.props.controller;
+		const snap = this.props.snap;
 
 		const theme = {
 			components: {
@@ -47,6 +50,6 @@ export class Autocomplete extends Component<AutocompleteProps> {
 			},
 		};
 
-		return <LibraryAutocomplete controller={controller} input={controller.config.selector} breakpoints={breakpoints} theme={theme} />;
+		return <LibraryAutocomplete controller={controller} snap={snap} input={controller.config.selector} breakpoints={breakpoints} theme={theme} />;
 	}
 }

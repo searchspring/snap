@@ -592,7 +592,7 @@ export class Snap {
 									const Component = importResolutions[0];
 
 									setTimeout(() => {
-										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 									});
 								} catch (err) {
 									this.logger.error(err);
@@ -665,6 +665,7 @@ export class Snap {
 												<Component
 													controller={this.controllers[controller.config.id] as AutocompleteController}
 													input={originalElem}
+													snap={this}
 													{...target.props}
 												/>,
 												elem
@@ -765,7 +766,7 @@ export class Snap {
 										const Component = await target.component!();
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+											render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 										});
 									} catch (err) {
 										this.logger.error(err);
@@ -841,7 +842,7 @@ export class Snap {
 										const Component = await target.component!();
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+											render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 										});
 									} catch (err) {
 										this.logger.error(err);
@@ -906,6 +907,7 @@ export class Snap {
 							client: this.client,
 							tracker: this.tracker,
 							logger: this.logger,
+							snap: this,
 						},
 						this.context
 					);
