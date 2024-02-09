@@ -25,6 +25,13 @@ The `hideCount` prop will disable the facet count values.
 <FacetHierarchyOptions values={hierarchyFacet.values} hideCount={true} />
 ```
 
+### horizontal
+The `horizontal` prop render facet options horizontally.
+
+```jsx
+<FacetHierarchyOptions values={hierarchyFacet.values} horizontal={true} />
+```
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 

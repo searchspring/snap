@@ -33,7 +33,7 @@ export default {
 	},
 	decorators: [
 		(Story: any) => (
-			<div style={{ maxWidth: '300px' }}>
+			<div style={{ maxWidth: '500px' }}>
 				<Story />
 			</div>
 		),
@@ -61,7 +61,7 @@ export default {
 		},
 		columns: {
 			defaultValue: 4,
-			description: 'Number of columns in palette',
+			description: 'Number of columns in palette. Not applicable if using horizontal prop',
 			table: {
 				type: {
 					summary: 'number',
@@ -69,6 +69,17 @@ export default {
 				defaultValue: { summary: 4 },
 			},
 			control: { type: 'number' },
+		},
+		gridSize: {
+			defaultValue: '45px',
+			description: 'Size of each palette item. Does not apply if using `columns` prop',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '45px' },
+			},
+			control: { type: 'text' },
 		},
 		gapSize: {
 			defaultValue: '8px',
@@ -126,6 +137,17 @@ export default {
 		},
 		hideIcon: {
 			description: 'Hide facet option icon',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		horizontal: {
+			defaultValue: false,
+			description: 'Render facet options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

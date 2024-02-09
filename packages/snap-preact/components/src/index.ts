@@ -42,6 +42,7 @@ export * from './components/Organisms/BranchOverride';
 export * from './components/Templates/TemplatesEditor';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
+export * from './components/Organisms/HorizontalFacets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/MobileSidebar';
 export * from './components/Organisms/Results';
@@ -52,6 +53,7 @@ export * from './components/Organisms/Toolbar';
 export * from './components/Templates/Autocomplete';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/Search';
+export * from './components/Templates/HorizontalSearch';
 export * from './components/Templates/TemplateSelect';
 
 // TYPES

@@ -12,13 +12,17 @@ import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
+	list: ({ theme, horizontal, hideCheckbox }: Partial<FacetListOptionsProps>) =>
 		css({
+			display: horizontal ? 'flex' : undefined,
+			flexWrap: horizontal ? 'wrap' : undefined,
+
 			'& .ss__facet-list-options__option': {
-				display: 'flex',
+				display: horizontal ? undefined : 'flex',
+				alignItems: horizontal ? undefined : 'center',
+				flex: horizontal ? '0 1 auto' : undefined,
 				padding: '6px',
 				textDecoration: 'none',
-				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
 					background: theme?.variables?.color?.hover?.background,
@@ -40,7 +44,9 @@ const CSS = {
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<FacetListOptionsProps> = {};
+	const defaultProps: Partial<FacetListOptionsProps> = {
+		hideCheckbox: properties.horizontal ? true : false,
+	};
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
@@ -114,6 +120,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
 	facet?: ValueFacet;
+	horizontal?: boolean;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

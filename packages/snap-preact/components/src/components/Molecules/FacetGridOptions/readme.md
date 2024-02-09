@@ -19,10 +19,17 @@ The `facet` prop specifies the reference to the facet object in the store.
 ```
 
 ### columns
-The `columns` prop is the number of columns the grid should contain.
+The `columns` prop is the number of columns the grid should contain. Not applicable if using `horizontal` prop'.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} columns={3} />
+```
+
+### gridSize
+The `gridSize` prop is the size of each grid item. Does not apply if using `columns` prop.
+
+```jsx
+<FacetGridOptions values={sizeFacet.values} gridSize={'45px'} columns={0} />
 ```
 
 ### gapSize
@@ -30,6 +37,13 @@ The `gapSize` prop is the gap size between rows and columns.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} gapSize={'10px'} />
+```
+
+### horizontal
+The `horizontal` prop render facet options horizontally.
+
+```jsx
+<FacetGridOptions values={sizeFacet.values} horizontal={true} />
 ```
 
 ### previewOnFocus

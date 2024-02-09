@@ -17,6 +17,15 @@ import { MutableRef, useRef } from 'preact/hooks';
 const CSS = {
 	toolbar: () =>
 		css({
+			'& .ss__mobile-sidebar__header': {
+				display: 'flex',
+				justifyContent: 'space-between',
+				alignItems: 'baseline',
+
+				'& .ss__mobile-sidebar__header__close-button': {
+					cursor: 'pointer',
+				},
+			},
 			'& .ss__mobile-sidebar__title': {
 				justifyContent: 'space-between',
 				flexDirection: 'row',
@@ -47,7 +56,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		clearButtonText: 'Clear All',
 		applyButtonText: 'Apply',
 		titleText: 'Filter Options',
-		displayAt: '650px',
+		displayAt: '',
 		closeButtonIcon: 'close-thin',
 	};
 
@@ -91,7 +100,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		slideout: {
 			// default props
 			controller,
-			displayAt: `(max-width: ${displayAt})`,
+			displayAt: (displayAt && `(max-width: ${displayAt})`) || '',
 			// global theme
 			...globalTheme?.components?.slideout,
 			// inherited props

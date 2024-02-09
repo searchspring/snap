@@ -12,6 +12,7 @@ export const decorators = [
 		themes: {
 			bocachica: bocachica,
 			pike: pike,
+			none: {},
 		},
 		defaultTheme: 'bocachica',
 		Provider: ThemeProvider,
