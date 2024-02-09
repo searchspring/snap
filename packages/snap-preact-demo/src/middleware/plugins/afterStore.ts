@@ -29,12 +29,15 @@ function mutateFacets(facets: SearchFacetsStore) {
 	}
 }
 
-async function restorePosition({ element }, next: Next) {
+async function restorePosition({ controller, element }, next: Next) {
 	// scroll to top only if we are not going to be scrolling to stored element
 	if (!element) {
-		setTimeout(() => {
-			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-		});
+		// prevent scroll to top when using infinite
+		if (!(controller.config.settings.infinite && controller.store.pagination.page != 1)) {
+			setTimeout(() => {
+				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+			});
+		}
 	}
 
 	await next();
