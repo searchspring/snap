@@ -272,6 +272,7 @@ export class SearchController extends AbstractController {
 		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals || {});
 
 		// redirect setting
+		// DUPLICATED LOGIC can be found in infinite backfill (change both if updating)
 		if (!this.config.settings?.redirects?.merchandising || this.store.loaded) {
 			params.search = params.search || {};
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
@@ -376,7 +377,21 @@ export class SearchController extends AbstractController {
 					const backfillRequests = Array(params.pagination.page)
 						.fill('backfill')
 						.map((v, i) => {
-							const backfillParams = deepmerge({ ...params }, { pagination: { page: i + 1 } });
+							const backfillParams: SearchRequestModel = deepmerge(
+								{ ...params },
+								{ pagination: { page: i + 1 }, search: { redirectResponse: 'full' } }
+							);
+							// don't include page parameter if on page 1
+							if (i + 1 == 1) {
+								delete backfillParams?.pagination?.page;
+
+								if (this.config.settings?.redirects?.merchandising) {
+									// redirect setting
+									// DUPLICATED LOGIC can be found in params getter
+									delete backfillParams?.search?.redirectResponse;
+								}
+							}
+
 							return this.client.search(backfillParams);
 						});
 
