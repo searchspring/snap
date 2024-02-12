@@ -11,6 +11,7 @@ export class LegacyAPI extends API {
 		//remove pageLoadId from cache key query params
 		const cacheParameters = { ...queryParameters };
 		delete cacheParameters.pageLoadId;
+		delete cacheParameters.domain;
 
 		const legacyResponse = await this.request(
 			{
