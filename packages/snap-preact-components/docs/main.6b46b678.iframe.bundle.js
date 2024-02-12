@@ -1,4 +1,4 @@
-/*! For license information please see main.acd94ebc.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.6b46b678.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -26323,16 +26323,16 @@
 					})(SearchController, _AbstractController);
 					var _super = _createSuper(SearchController);
 					function SearchController(config, _ref, context) {
-						var _this$config$settings6,
+						var _this$config$settings8,
 							_ref3,
 							_ref4,
 							_ref5,
-							_this$config$settings7,
-							_this$config$settings8,
-							_this,
-							_ref7,
 							_this$config$settings9,
 							_this$config$settings10,
+							_this,
+							_ref7,
+							_this$config$settings11,
+							_this$config$settings12,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -26424,7 +26424,7 @@
 									params,
 									_this$config$settings,
 									_params$pagination,
-									_this$config$settings5,
+									_this$config$settings7,
 									stringyParams,
 									prevStringyParams,
 									searchProfile,
@@ -26550,7 +26550,28 @@
 														(backfillRequests = Array(params.pagination.page)
 															.fill('backfill')
 															.map(function (v, i) {
-																var backfillParams = cjs_default()(Object.assign({}, params), { pagination: { page: i + 1 } });
+																var _backfillParams$pagin,
+																	_this$config$settings5,
+																	_this$config$settings6,
+																	_backfillParams$searc,
+																	backfillParams = cjs_default()(Object.assign({}, params), {
+																		pagination: { page: i + 1 },
+																		search: { redirectResponse: 'full' },
+																	});
+																i + 1 == 1 &&
+																	(null == backfillParams ||
+																		null === (_backfillParams$pagin = backfillParams.pagination) ||
+																		void 0 === _backfillParams$pagin ||
+																		delete _backfillParams$pagin.page,
+																	null !== (_this$config$settings5 = _this.config.settings) &&
+																		void 0 !== _this$config$settings5 &&
+																		null !== (_this$config$settings6 = _this$config$settings5.redirects) &&
+																		void 0 !== _this$config$settings6 &&
+																		_this$config$settings6.merchandising &&
+																		(null == backfillParams ||
+																			null === (_backfillParams$searc = backfillParams.search) ||
+																			void 0 === _backfillParams$searc ||
+																			delete _backfillParams$searc.redirectResponse));
 																return _this.client.search(backfillParams);
 															})),
 														(_context.next = 38),
@@ -26620,9 +26641,9 @@
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
-														null !== (_this$config$settings5 = _this.config.settings) &&
-															void 0 !== _this$config$settings5 &&
-															_this$config$settings5.infinite &&
+														null !== (_this$config$settings7 = _this.config.settings) &&
+															void 0 !== _this$config$settings7 &&
+															_this$config$settings7.infinite &&
 															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
@@ -26698,9 +26719,9 @@
 							})
 						)),
 						(_this.config = cjs_default()(defaultConfig, _this.config)),
-						null !== (_this$config$settings6 = _this.config.settings) &&
-							void 0 !== _this$config$settings6 &&
-							_this$config$settings6.infinite &&
+						null !== (_this$config$settings8 = _this.config.settings) &&
+							void 0 !== _this$config$settings8 &&
+							_this$config$settings8.infinite &&
 							void 0 === _this.config.settings.restorePosition &&
 							(_this.config.settings.restorePosition = { enabled: !0 }),
 						_this.store.setConfig(_this.config),
@@ -26863,11 +26884,11 @@
 									})
 								)).apply(this, arguments);
 						}),
-						null !== (_this$config$settings7 = _this.config.settings) &&
-							void 0 !== _this$config$settings7 &&
-							null !== (_this$config$settings8 = _this$config$settings7.restorePosition) &&
-							void 0 !== _this$config$settings8 &&
-							_this$config$settings8.enabled) &&
+						null !== (_this$config$settings9 = _this.config.settings) &&
+							void 0 !== _this$config$settings9 &&
+							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
+							void 0 !== _this$config$settings10 &&
+							_this$config$settings10.enabled) &&
 							(_this.eventManager.on('restorePosition', function (_x7, _x8) {
 								return (_ref7 =
 									_ref7 ||
@@ -26986,11 +27007,11 @@
 										})
 									)).apply(this, arguments);
 							}),
-							null !== (_this$config$settings9 = _this.config.settings) &&
-								void 0 !== _this$config$settings9 &&
-								null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
-								void 0 !== _this$config$settings10 &&
-								_this$config$settings10.onPageShow &&
+							null !== (_this$config$settings11 = _this.config.settings) &&
+								void 0 !== _this$config$settings11 &&
+								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
+								void 0 !== _this$config$settings12 &&
+								_this$config$settings12.onPageShow &&
 								window.addEventListener('pageshow', function () {
 									_this.eventManager.fire('restorePosition', { controller: _assertThisInitialized(_this), element: {} });
 								}));
@@ -27008,16 +27029,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings11,
-										_this$config$settings12,
+									var _this$config$settings13,
+										_this$config$settings14,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings11 = this.config.settings) &&
-										void 0 !== _this$config$settings11 &&
-										null !== (_this$config$settings12 = _this$config$settings11.redirects) &&
-										void 0 !== _this$config$settings12 &&
-										_this$config$settings12.merchandising &&
+									(null !== (_this$config$settings13 = this.config.settings) &&
+										void 0 !== _this$config$settings13 &&
+										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
+										void 0 !== _this$config$settings14 &&
+										_this$config$settings14.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -30888,15 +30909,16 @@
 																	(queryParameters.resultsFormat = 'native'),
 																	(headerParameters = {}),
 																	delete (cacheParameters = Object.assign({}, queryParameters)).pageLoadId,
-																	(_context.next = 7),
+																	delete cacheParameters.domain,
+																	(_context.next = 8),
 																	this.request(
 																		{ path, method: 'GET', headers: headerParameters, query: queryParameters },
 																		path + JSON.stringify(cacheParameters)
 																	)
 																);
-															case 7:
+															case 8:
 																return (legacyResponse = _context.sent), _context.abrupt('return', legacyResponse);
-															case 9:
+															case 10:
 															case 'end':
 																return _context.stop();
 														}
@@ -40464,7 +40486,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.51.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.51.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -40963,7 +40985,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.51.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.51.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
