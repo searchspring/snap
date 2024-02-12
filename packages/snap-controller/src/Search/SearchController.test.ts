@@ -416,6 +416,11 @@ describe('Search Controller', () => {
 
 		const { pageSize } = controller.store.pagination;
 		expect(searchfn).toHaveBeenCalledTimes(page);
+
+		expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }));
+		expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }));
+		expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }));
+
 		expect(controller.store.results.length).toBe(pageSize * page);
 
 		searchfn.mockClear();
