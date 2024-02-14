@@ -29,7 +29,7 @@ type WindowProperties = {
 	innerWidth: number;
 };
 
-const RESIZE_DEBOUNCE = 10;
+const RESIZE_DEBOUNCE = 100;
 export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
@@ -49,7 +49,7 @@ export class TemplatesStore {
 		local: {
 			[themeName: 'global' | string]: ThemeStore;
 		};
-		library?: {
+		library: {
 			[themeName: string]: ThemeStore;
 		};
 	};
@@ -78,6 +78,7 @@ export class TemplatesStore {
 
 		this.themes = {
 			local: {},
+			library: {},
 		};
 
 		this.library = new LibraryStore();
@@ -158,6 +159,12 @@ export class TemplatesStore {
 		for (const themeName in this.themes.library) {
 			const theme = this.themes.library[themeName];
 			theme.setInnerWidth(this.window.innerWidth);
+		}
+	}
+
+	public getThemeStore(themeName?: string): ThemeStore | undefined {
+		if (themeName) {
+			return this.themes.local[themeName] || this.themes.library[themeName];
 		}
 	}
 

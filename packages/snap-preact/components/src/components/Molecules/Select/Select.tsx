@@ -160,6 +160,11 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// selection state
 	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
+	// reset selection if 'selected' prop changes
+	if (selection && selected && selection != selected) {
+		setSelection(selected);
+	}
+
 	if (selection && clearSelection) {
 		options = [
 			{
@@ -170,7 +175,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		];
 	}
 
-	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: ListOption) => {
+	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => {
 		if (option != selection) {
 			onSelect && onSelect(e, option);
 		}
@@ -286,7 +291,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									className={classnames('ss__select__select__option', {
 										'ss__select__select__option--selected': selection?.value === option.value,
 									})}
-									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									onClick={(e) => !disabled && makeSelection(e, option)}
 									role="option"
 									aria-selected={selection?.value === option.value}
 								>
@@ -330,7 +335,7 @@ export interface SelectProps extends ComponentProps {
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
 	native?: boolean;
-	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: ListOption | undefined) => void;
+	onSelect?: (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => void;
 	selected?: ListOption;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;

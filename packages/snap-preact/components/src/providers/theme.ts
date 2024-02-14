@@ -1,4 +1,5 @@
 import { ThemeComponents } from './themeComponents';
+import { ListOption } from '../types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
@@ -25,11 +26,11 @@ export const defaultTheme: Theme = {
 };
 
 export type Theme = {
-	name?: string;
+	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
-	responsive?: [Partial<Theme>, Partial<Theme>, Partial<Theme>, Partial<Theme>];
+	responsive?: [Theme, Theme, Theme, Theme];
 	components?: ThemeComponents;
-	// [other: string]: unknown; // legacy theme support
+	layoutOptions?: ListOption[];
 };
 
 export type ThemeVariables = {

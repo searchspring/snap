@@ -11,7 +11,6 @@ describe('LayoutSelector Component', () => {
 			label: '1 wide',
 			value: '1 wide',
 			icon: 'square',
-			columns: 1,
 		},
 		{
 			label: '2 wide',
@@ -19,7 +18,6 @@ describe('LayoutSelector Component', () => {
 			icon: {
 				icon: 'layout-large',
 			},
-			columns: 2,
 		},
 		{
 			label: '3 wide',
@@ -27,17 +25,14 @@ describe('LayoutSelector Component', () => {
 			icon: {
 				icon: 'layout-grid',
 			},
-			columns: 3,
 		},
 		{
 			label: '4 wide',
 			value: '4 wide',
-			columns: 4,
 		},
 		{
 			label: 'custom',
 			value: 'custom',
-			component: (props: any) => <div className="custom">custom</div>,
 		},
 	];
 

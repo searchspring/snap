@@ -18,11 +18,18 @@ The required `controller` prop specifies a reference to the search controller.
 <Toolbar controller={controller.store.results} />
 ```
 
-### hidefilterSummary
-The `hidefilterSummary` prop specifies if the FilterSummary component should be rendered.  
+### hideFilterSummary
+The `hideFilterSummary` prop specifies if the FilterSummary component should be rendered.  
 
 ```jsx
-<Toolbar hidefilterSummary={true} />
+<Toolbar hideFilterSummary={true} />
+```
+
+### hideLayoutSelector
+The `hideLayoutSelector` prop specifies if the LayoutSelector component should be rendered.  
+
+```jsx
+<Toolbar hideLayoutSelector={true} />
 ```
 
 ### hidePerPage

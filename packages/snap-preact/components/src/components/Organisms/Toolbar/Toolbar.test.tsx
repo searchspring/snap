@@ -68,7 +68,7 @@ describe('Results Component', () => {
 	});
 
 	it('can hide filterSummary', () => {
-		const rendered = render(<Toolbar controller={controller} hidefilterSummary />);
+		const rendered = render(<Toolbar controller={controller} hideFilterSummary />);
 		const filterSummaryElement = rendered.container.querySelector('.ss__toolbar__filter-summary');
 		const paginationElement = rendered.container.querySelector('.ss__toolbar__pagination');
 		const sortByElement = rendered.container.querySelector('.ss__toolbar__sort-by');
@@ -120,7 +120,7 @@ describe('Results Component', () => {
 	});
 
 	it('can hide everything', () => {
-		const rendered = render(<Toolbar controller={controller} hidePerPage hidePagination hideSortBy hidefilterSummary />);
+		const rendered = render(<Toolbar controller={controller} hidePerPage hidePagination hideSortBy hideFilterSummary />);
 		const filterSummaryElement = rendered.container.querySelector('.ss__toolbar__filter-summary');
 		const paginationElement = rendered.container.querySelector('.ss__toolbar__pagination');
 		const sortByElement = rendered.container.querySelector('.ss__toolbar__sort-by');

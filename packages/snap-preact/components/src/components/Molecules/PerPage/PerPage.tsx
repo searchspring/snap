@@ -105,7 +105,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 						store.setPageSize(+option!.value);
 					}}
 					options={store.pageSizeOptions}
-					selected={store.pageSize}
+					selected={store.pageSizeOption}
 					titleText={label}
 				/>
 			)}
@@ -119,7 +119,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 						store.setPageSize(+option!.value);
 					}}
 					options={store.pageSizeOptions}
-					selected={store.pageSize}
+					selected={store.pageSizeOption}
 					titleText={label}
 				/>
 			)}

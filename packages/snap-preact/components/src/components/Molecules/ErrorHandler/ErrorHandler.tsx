@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Button, ButtonProps } from '../../Atoms/Button/Button';
-import { defined, LightenDarkenColor, mergeProps } from '../../../utilities';
+import { defined, lightenDarkenColor, mergeProps } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
@@ -46,7 +46,7 @@ const CSS = {
 			},
 
 			'&.ss__error-handler--error': {
-				backgroundColor: LightenDarkenColor('#cc1212', 180),
+				backgroundColor: lightenDarkenColor('#cc1212', 180),
 				borderLeftColor: '#cc1212',
 				'.ss__error-handler__message': {
 					'.ss__icon': {
@@ -55,7 +55,7 @@ const CSS = {
 				},
 			},
 			'&.ss__error-handler--warning': {
-				backgroundColor: LightenDarkenColor('#ecaa15', 180),
+				backgroundColor: lightenDarkenColor('#ecaa15', 180),
 				borderLeftColor: '#ecaa15',
 				'.ss__icon': {
 					fill: '#ecaa15',
@@ -65,7 +65,7 @@ const CSS = {
 				},
 			},
 			'&.ss__error-handler--info': {
-				backgroundColor: LightenDarkenColor('#4c3ce2', 180),
+				backgroundColor: lightenDarkenColor('#4c3ce2', 180),
 				borderLeftColor: '#4c3ce2',
 				'.ss__error-handler__message': {
 					'.ss__icon': {

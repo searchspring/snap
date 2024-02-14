@@ -8,6 +8,7 @@ export class SearchPaginationStore {
 	public services: StoreServices;
 	public page: number;
 	public pageSize: number;
+	public pageSizeOption?: PageSizeOption;
 	public pageSizeOptions: PageSizeOption[];
 	public defaultPageSize: number;
 	public totalResults: number;
@@ -58,6 +59,8 @@ export class SearchPaginationStore {
 					value: pageOption.value,
 				})
 		);
+
+		this.pageSizeOption = this.pageSizeOptions.find((option) => option.active);
 
 		makeObservable(this, {
 			page: observable,

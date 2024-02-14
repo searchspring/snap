@@ -53,9 +53,20 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		hidefilterSummary: {
+		hideFilterSummary: {
 			defaultValue: false,
 			description: 'prevents the FilterSummary component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideLayoutSelector: {
+			defaultValue: false,
+			description: 'prevents the LayoutSelector component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',

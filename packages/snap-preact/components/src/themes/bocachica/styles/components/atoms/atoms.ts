@@ -1,4 +1,4 @@
-// COMPONENTS
+// ATOMS
 export { badge } from './badge';
 export { banner } from './banner';
 export { breadcrumbs } from './breadcrumbs';
@@ -9,8 +9,10 @@ export { icon } from './icon';
 export { image } from './image';
 export { inlineBanner } from './inlinebanner';
 export { loadingBar } from './loadingbar';
+export { noResults } from './noresults';
 export { overlay } from './overlay';
 export { price } from './price';
 export { searchHeader } from './searchheader';
 export { skeleton } from './skeleton';
 export { terms } from './terms';
+export { toggle } from './toggle';

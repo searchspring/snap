@@ -8,6 +8,7 @@ const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 	return css({
 		display: 'flex',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 
 		'&.ss__search__content__toolbar--bottom-toolbar': {
 			justifyContent: 'center',

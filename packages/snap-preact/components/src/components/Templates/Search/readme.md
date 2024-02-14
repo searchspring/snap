@@ -83,13 +83,6 @@ or
 <Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```
 
-### hideLayoutSelector
-The `hideLayoutSelector` prop specifies if the layoutSelector component should be rendered. 
-
-```jsx
-<Search controller={controller} hideLayoutSelector={true} />
-```
-
 ### layoutConfig
 The `layoutConfig` prop specifies the configuration for the layoutSelector.  
 
