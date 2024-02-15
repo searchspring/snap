@@ -22,7 +22,7 @@ export const GLOBAL_THEME_NAME = 'global';
 export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
-	template: 'Search'; // various component (template) types allowed
+	template: 'Search' | 'HorizontalSearch'; // various component (template) types allowed
 	resultComponent?: ResultComponent;
 };
 

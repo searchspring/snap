@@ -29,10 +29,17 @@ The `hideLabel` prop will disable the facet label.
 ```
 
 ### columns
-The `columns` prop is the number of columns the grid should contain.
+The `columns` prop is the number of columns the grid should contain. Not applicable if using `horizontal` prop'.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} columns={3} />
+```
+
+### gridSize
+The `gridSize` prop is the size of each palette item. Does not apply if using `columns` prop.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} gridSize={'45px'} columns={0} />
 ```
 
 ### gapSize
@@ -67,6 +74,13 @@ The `hideCheckbox` prop will disable the facet option checkboxes from being rend
 The `layout` prop determines if the options should render as a `list` or `grid`. By default `grid` will be used.
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+```
+
+### horizontal
+The `horizontal` prop render facet options horizontally.
+
+```jsx
+<FacetPaletteOptions values={paletteFacet.values} horizontal={true} />
 ```
 
 ### previewOnFocus

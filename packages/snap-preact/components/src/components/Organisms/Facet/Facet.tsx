@@ -97,17 +97,12 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		color,
 		previewOnFocus,
 		valueProps,
-		showMoreText,
-		showLessText,
-		iconOverflowMore,
-		iconOverflowLess,
-		overflowSlot,
-		optionsSlot,
+		justContent,
+		horizontal,
 		disableStyles,
 		className,
 		style,
 		styleScript,
-		searchable,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -163,6 +158,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -177,6 +173,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -191,6 +188,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -205,6 +203,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -283,6 +282,17 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		renderFacet = false;
 	}
 
+	const facetContentProps = {
+		limitedValues,
+		searchableFacet,
+		subProps,
+		className,
+		...props,
+	};
+	if (justContent) {
+		return <FacetContent {...facetContentProps}></FacetContent>;
+	}
+
 	return facet && renderFacet ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
@@ -306,56 +316,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						</div>
 					}
 				>
-					{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-						<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
-					)}
-					<div className={classnames('ss__facet__options', className)}>
-						{(() => {
-							//manual options component
-							if (optionsSlot) {
-								return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
-							} else {
-								switch (facet?.display) {
-									case FacetDisplay.TOGGLE:
-										return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
-									case FacetDisplay.SLIDER:
-										return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
-									case FacetDisplay.GRID:
-										return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
-									case FacetDisplay.PALETTE:
-										return (
-											<FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />
-										);
-									case FacetDisplay.HIERARCHY:
-										return (
-											<FacetHierarchyOptions
-												{...subProps.facetHierarchyOptions}
-												values={limitedValues as FacetHierarchyValue[]}
-												facet={facet as ValueFacet}
-											/>
-										);
-									default:
-										return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
-								}
-							}
-						})()}
-					</div>
-
-					{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
-						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
-							{overflowSlot ? (
-								cloneWithProps(overflowSlot, { facet })
-							) : (
-								<Fragment>
-									<Icon
-										{...subProps.showMoreLessIcon}
-										icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
-									/>
-									<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
-								</Fragment>
-							)}
-						</div>
-					)}
+					<FacetContent {...facetContentProps}></FacetContent>
 				</Dropdown>
 			</div>
 		</CacheProvider>
@@ -363,6 +324,80 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		<Fragment></Fragment>
 	);
 });
+
+const FacetContent = (props: any) => {
+	const {
+		searchableFacet,
+		subProps,
+		className,
+		limitedValues,
+		facet,
+		limit,
+		overflowSlot,
+		optionsSlot,
+		searchable,
+		showMoreText,
+		showLessText,
+		iconOverflowMore,
+		iconOverflowLess,
+		disableOverflow,
+		previewOnFocus,
+		valueProps,
+	} = props;
+
+	return (
+		<Fragment>
+			{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
+				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+			)}
+			<div className={classnames('ss__facet__options', className)}>
+				{(() => {
+					//manual options component
+					if (optionsSlot) {
+						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+					} else {
+						switch (facet?.display) {
+							case FacetDisplay.TOGGLE:
+								return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
+							case FacetDisplay.SLIDER:
+								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+							case FacetDisplay.GRID:
+								return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+							case FacetDisplay.PALETTE:
+								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+							case FacetDisplay.HIERARCHY:
+								return (
+									<FacetHierarchyOptions
+										{...subProps.facetHierarchyOptions}
+										values={limitedValues as FacetHierarchyValue[]}
+										facet={facet as ValueFacet}
+									/>
+								);
+							default:
+								return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+						}
+					}
+				})()}
+			</div>
+
+			{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
+				<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
+					{overflowSlot ? (
+						cloneWithProps(overflowSlot, { facet })
+					) : (
+						<Fragment>
+							<Icon
+								{...subProps.showMoreLessIcon}
+								icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
+							/>
+							<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
+						</Fragment>
+					)}
+				</div>
+			)}
+		</Fragment>
+	);
+};
 
 interface FacetSubProps {
 	dropdown: Partial<DropdownProps>;
@@ -400,6 +435,8 @@ interface OptionalFacetProps extends ComponentProps {
 	fields?: FieldProps;
 	display?: FieldProps;
 	searchable?: boolean;
+	justContent?: boolean;
+	horizontal?: boolean;
 }
 
 type FieldProps = {

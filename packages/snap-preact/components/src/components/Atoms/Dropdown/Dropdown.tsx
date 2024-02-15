@@ -127,10 +127,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 
-				<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
-					{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
-					{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
-				</div>
+				{(content || children) && (
+					<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
+						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
+						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
+					</div>
+				)}
 			</div>
 		</CacheProvider>
 	);

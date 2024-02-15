@@ -15,11 +15,13 @@ import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 
 const CSS = {
-	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
+	palette: ({ columns, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
-			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
+			gridTemplateColumns: columns
+				? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
+				: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 			gap: gapSize,
 
 			'& .ss__facet-palette-options__option--list': {
@@ -162,6 +164,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		layout: 'grid',
+		gridSize: '45px',
 		gapSize: properties.layout == 'list' ? '2px' : '8px',
 		hideCount: true,
 		hideCheckbox: true,
@@ -186,11 +189,16 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		previewOnFocus,
 		valueProps,
 		facet,
+		horizontal,
 		disableStyles,
 		className,
 		style,
 		styleScript,
 	} = props;
+
+	if (horizontal) {
+		props.columns = 0;
+	}
 
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
@@ -296,9 +304,11 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	values?: FacetValue[];
 	hideLabel?: boolean;
 	columns?: number;
+	gridSize?: string;
 	gapSize?: string;
 	hideIcon?: boolean;
 	facet?: ValueFacet;
+	horizontal?: boolean;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;

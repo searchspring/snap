@@ -34,7 +34,8 @@ new SnapTemplates({
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				template: 'Search',
+				// template: 'Search',
+				template: 'HorizontalSearch',
 				resultComponent: Result,
 			},
 		],

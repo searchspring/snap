@@ -31,13 +31,6 @@ export default {
 			),
 		},
 	},
-	decorators: [
-		(Story: any) => (
-			<div style={{ maxWidth: '300px' }}>
-				<Story />
-			</div>
-		),
-	],
 	argTypes: {
 		values: {
 			description: 'Facet.values store reference',
@@ -73,6 +66,17 @@ export default {
 		hideCount: {
 			defaultValue: false,
 			description: 'Hide facet option count',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		horizontal: {
+			defaultValue: false,
+			description: 'Render facet options horizontally',
 			table: {
 				type: {
 					summary: 'boolean',

@@ -19,6 +19,8 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 		},
 		'.ss__dropdown__content': {
+			boxSizing: 'border-box',
+			background: '#fff',
 			position: 'absolute',
 			minWidth: '100%',
 			visibility: 'hidden',

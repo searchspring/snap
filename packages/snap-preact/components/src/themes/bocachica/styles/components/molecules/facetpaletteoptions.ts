@@ -7,7 +7,7 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
-		gridTemplateColumns: 'repeat(auto-fill, minmax(45px, 1fr))',
+		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : 'repeat(auto-fill, minmax(45px, 1fr))',
 		gap: gapSize,
 
 		'& .ss__facet-palette-options__option': {

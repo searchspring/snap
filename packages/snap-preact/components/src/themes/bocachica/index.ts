@@ -182,6 +182,9 @@ export const bocachica: Theme = {
 		facets: {
 			...style.components.facets,
 		},
+		horizontalFacets: {
+			...style.components.horizontalFacets,
+		},
 		filterSummary: {
 			...style.components.filterSummary,
 		},

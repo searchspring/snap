@@ -1,15 +1,22 @@
 import { css, FacetListOptionsProps } from '../../../../../index';
 
 // CSS in JS style script for the FacetListOptions component
-const facetListOptionsStyleScript = ({ hideCheckbox, theme }: FacetListOptionsProps) => {
+const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetListOptionsProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		display: horizontal ? 'flex' : undefined,
+		flexWrap: horizontal ? 'wrap' : undefined,
+
 		'& .ss__facet-list-options__option': {
-			display: 'flex',
-			margin: '0 0 5px 0',
-			alignItems: 'center',
+			display: horizontal ? undefined : 'flex',
+			alignItems: horizontal ? undefined : 'center',
+			margin: horizontal ? '0 5px 5px 0' : '0 0 5px 0',
 			color: variables?.color?.secondary,
+			flex: horizontal ? '0 1 auto' : undefined,
+			border: horizontal ? `1px solid ${variables?.color?.secondary || '#333'}` : undefined,
+			padding: horizontal ? '0.5em 0.5em' : undefined,
+			textDecoration: 'none',
 
 			'&:hover': {
 				cursor: 'pointer',
