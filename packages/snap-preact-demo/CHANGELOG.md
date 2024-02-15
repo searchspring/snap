@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.51.1](https://github.com/searchspring/snap/compare/v0.51.0...v0.51.1) (2024-02-09)
+
+### Bug Fixes
+
+- **controller/search:** altering backfill algorithm to use per page value instead of maximum rpp ([fc1bee1](https://github.com/searchspring/snap/commit/fc1bee1887ed2ded9010dfe681b15469759c5d42))
+
+# [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.50.0](https://github.com/searchspring/snap/compare/v0.49.1...v0.50.0) (2024-01-04)
+
+### Bug Fixes
+
+- **preact-demo:** adding support for all lowercase `siteid` parameter ([d1a49da](https://github.com/searchspring/snap/commit/d1a49da025970b45f526e89b0555f1a5f3d09f8c))
+
+## [0.49.1](https://github.com/searchspring/snap/compare/v0.49.0...v0.49.1) (2023-11-03)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
 # [0.49.0](https://github.com/searchspring/snap/compare/v0.48.0...v0.49.0) (2023-10-19)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

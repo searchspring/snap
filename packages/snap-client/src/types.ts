@@ -99,6 +99,7 @@ export type RecommendRequestModel = {
 	tags: string[];
 	siteId: string;
 	product?: string;
+	products?: string[];
 	shopper?: string;
 	categories?: string[];
 	brands?: string[];
@@ -109,6 +110,7 @@ export type RecommendRequestModel = {
 	limits?: number | number[];
 	order?: number;
 	filters?: RecommendationRequestFilterModel[];
+	blockedItems?: string[];
 };
 
 export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
@@ -164,6 +166,7 @@ export type RecommendCombinedRequestModel = {
 	tag: string;
 	siteId: string;
 	product?: string;
+	products?: string[];
 	shopper?: string;
 	categories?: string[];
 	brands?: string[];
@@ -172,6 +175,7 @@ export type RecommendCombinedRequestModel = {
 	test?: boolean;
 	branch?: string;
 	filters?: RecommendationRequestFilterModel[];
+	blockedItems?: string[];
 };
 
 export type RecommendationRequestFilterModel = RecommendationRequestRangeFilterModel | RecommendationRequestValueFilterModel;

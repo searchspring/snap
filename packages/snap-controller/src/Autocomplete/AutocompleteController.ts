@@ -33,7 +33,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 		},
 		redirects: {
 			merchandising: true,
-			singleResult: true,
+			singleResult: false,
 		},
 	},
 };

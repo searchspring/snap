@@ -106,6 +106,13 @@ export class RecommendAPI extends API {
 
 				batch.request.limits = (batch.request.limits as number[]).concat(limits);
 				batch.request = { ...batch.request, ...otherParams };
+
+				// combine product data if both 'product' and 'products' are used
+				if (batch.request.product && Array.isArray(batch.request.products)) {
+					batch.request.products = batch.request.products.concat(batch.request.product);
+
+					delete batch.request.product;
+				}
 			});
 
 			try {

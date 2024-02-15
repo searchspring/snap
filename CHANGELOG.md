@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
+
+### Bug Fixes
+
+- **controller/search:** modifying logic for infinite backfill to optimize cache ([f6fa5d6](https://github.com/searchspring/snap/commit/f6fa5d6e8d74a472906d642f0f36bed82bd87b6f))
+
+## [0.51.1](https://github.com/searchspring/snap/compare/v0.51.0...v0.51.1) (2024-02-09)
+
+### Bug Fixes
+
+- **controller/search:** altering backfill algorithm to use per page value instead of maximum rpp ([fc1bee1](https://github.com/searchspring/snap/commit/fc1bee1887ed2ded9010dfe681b15469759c5d42))
+
+# [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
+
+### Bug Fixes
+
+- **controller/autocomplete:** reverting the default setting for redirect on single result from AC ([8cd9a1e](https://github.com/searchspring/snap/commit/8cd9a1ee0894b57addcd3782d8bdb52c869dd8bb))
+
+### Features
+
+- **client/recommend:** adding support for `products` and `blockedItems` parameters ([f71859e](https://github.com/searchspring/snap/commit/f71859e0cc942f58121e3e3e2ea05fb2cc5fcd90))
+
+# [0.50.0](https://github.com/searchspring/snap/compare/v0.49.1...v0.50.0) (2024-01-04)
+
+### Bug Fixes
+
+- **controller/search:** addressing PR feedback to correct potential error ([33b917f](https://github.com/searchspring/snap/commit/33b917f506bfdb16dfcbca33db4c05d12aef4e52))
+- **controller/search:** fixing eventListener typo from 'remove' -> 'add' ([c66ae1d](https://github.com/searchspring/snap/commit/c66ae1db0a47bfb89e482d4669ed097f4197a4fb))
+- **preact-demo:** adding support for all lowercase `siteid` parameter ([71a8574](https://github.com/searchspring/snap/commit/71a8574d94eefdd6d5953f81c734598e632f7e2a))
+- **preact-demo:** adding support for all lowercase `siteid` parameter ([d1a49da](https://github.com/searchspring/snap/commit/d1a49da025970b45f526e89b0555f1a5f3d09f8c))
+
+### Features
+
+- **controller/search:** adding ability to fire 'restorePosition' event and 'pageshow' setting ([aa3d447](https://github.com/searchspring/snap/commit/aa3d4477c14aa07ae8d4abc5eea11f4c4ee05a71))
+
+## [0.49.1](https://github.com/searchspring/snap/compare/v0.49.0...v0.49.1) (2023-11-03)
+
+**Note:** Version bump only for package @searchspring/snap
+
 # [0.49.0](https://github.com/searchspring/snap/compare/v0.48.0...v0.49.0) (2023-10-19)
 
 ### Bug Fixes
