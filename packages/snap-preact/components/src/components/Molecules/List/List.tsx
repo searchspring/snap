@@ -114,17 +114,20 @@ export function List(properties: ListProps): JSX.Element {
 		selected = [selected];
 	}
 	// selection state
-	const [selection, setSelection] = useState((selected as (string | number)[]) || []);
+	const [selection, setSelection] = useState((selected as ListOption[]) || []);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
-			let newArray;
+			let newArray: ListOption[];
 
-			if (selection.includes(option.value)) {
+			if (selection.find((select) => select.value === option.value)) {
 				newArray = [...selection];
-				newArray.splice(newArray.indexOf(option.value), 1);
+				newArray.splice(
+					newArray.findIndex((select) => select.value === option.value),
+					1
+				);
 			} else {
-				newArray = [...selection, option.value];
+				newArray = [...selection, option];
 			}
 
 			if (onSelect) {
@@ -133,9 +136,9 @@ export function List(properties: ListProps): JSX.Element {
 			setSelection(newArray);
 		} else {
 			if (onSelect) {
-				onSelect(e, option, [option.value]);
+				onSelect(e, option, [option]);
 			}
-			setSelection([option.value]);
+			setSelection([option]);
 		}
 	};
 
@@ -146,7 +149,7 @@ export function List(properties: ListProps): JSX.Element {
 
 				<ul className={`ss__list__options-wrapper`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
-						const selected = selection.indexOf(option.value.toString()) > -1 || selection.indexOf(option.value) > -1;
+						const selected = selection.some((select: ListOption) => select.value == option.value);
 						return (
 							<li
 								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
@@ -165,7 +168,9 @@ export function List(properties: ListProps): JSX.Element {
 									/>
 								)}
 
-								{!hideOptionLabels && <label className="ss__list__option__label">{option.label || option.value}</label>}
+								{!hideOptionLabels && (option.label || !option.icon) && (
+									<label className="ss__list__option__label">{option.label || option.value}</label>
+								)}
 							</li>
 						);
 					})}
@@ -183,12 +188,12 @@ export interface ListProps extends ComponentProps {
 	hideOptionCheckboxes?: boolean;
 	hideOptionLabels?: boolean;
 	hideOptionIcons?: boolean;
-	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, optionList: (string | number)[]) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, selected: ListOption[]) => void;
 	titleText?: string;
 	disabled?: boolean;
 	horizontal?: boolean;
 	native?: boolean;
-	selected?: string | number | (string | number)[];
+	selected?: ListOption | ListOption[];
 }
 
 interface ListSubProps {

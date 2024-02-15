@@ -80,6 +80,17 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		showSingleOption: {
+			defaultValue: false,
+			description: 'specifies if the component should render if the provided options prop contains a single option',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
@@ -89,7 +100,6 @@ const layoutOptions: ListOption[] = [
 		label: '1 wide',
 		value: '1 wide',
 		icon: 'square',
-		columns: 1,
 	},
 	{
 		label: '2 wide',
@@ -97,7 +107,6 @@ const layoutOptions: ListOption[] = [
 		icon: {
 			icon: 'layout-large',
 		},
-		columns: 2,
 	},
 	{
 		label: '3 wide',
@@ -105,17 +114,14 @@ const layoutOptions: ListOption[] = [
 		icon: {
 			icon: 'layout-grid',
 		},
-		columns: 3,
 	},
 	{
 		label: '4 wide',
 		value: '4 wide',
-		columns: 4,
 	},
 	{
 		label: 'custom',
 		value: 'custom',
-		component: () => <div className="custom">custom</div>,
 	},
 ];
 export const Default = (args: LayoutSelectorProps) => {

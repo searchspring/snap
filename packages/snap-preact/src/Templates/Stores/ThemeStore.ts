@@ -1,16 +1,43 @@
 import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
+import { StorageStore } from '@searchspring/snap-store-mobx';
 import type { Theme, ThemeVariables } from '../../../components/src';
 import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import type { DeepPartial } from '../../types';
+import type { ListOption } from '../../../components/src/types';
+
+class SelectedLayout {
+	public selected?: ListOption;
+	private storage: StorageStore;
+	private name: string;
+	private type: string;
+
+	public select(layout: ListOption) {
+		this.selected = layout;
+		this.storage.set(`themes.${this.type}.${this.name}.layout`, this.selected);
+	}
+
+	constructor(storageStore: StorageStore, name: string, type: string) {
+		this.storage = storageStore;
+		this.name = name;
+		this.type = type;
+		this.selected = this.storage.get(`themes.${this.type}.${this.name}.layout`);
+
+		makeObservable(this, {
+			selected: observable,
+		});
+	}
+}
 
 export class ThemeStore {
-	dependencies: TemplatesStoreDependencies;
-	name: string;
-	type: string;
-	base: Theme;
-	overrides: DeepPartial<Theme>;
+	public name: string;
+	public type: string;
+	public layout: SelectedLayout;
+
+	private dependencies: TemplatesStoreDependencies;
+	private base: Theme;
+	private overrides: DeepPartial<Theme>;
 	variables: DeepPartial<ThemeVariables>;
 	currency: Partial<Theme>;
 	language: Partial<Theme>;
@@ -37,11 +64,12 @@ export class ThemeStore {
 		this.name = name;
 		this.type = type;
 		this.base = base;
+		this.layout = new SelectedLayout(this.dependencies.storage, this.name, this.type);
 		this.overrides = overrides || {};
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
-		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}`)) || {};
+		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}.variables`)) || {};
 		this.innerWidth = innerWidth;
 
 		makeObservable(this, {
@@ -74,7 +102,7 @@ export class ThemeStore {
 			}
 		}
 
-		const theme = mergeLayers(
+		let theme = mergeLayers(
 			this.base,
 			baseBreakpoint,
 			this.currency,
@@ -84,6 +112,27 @@ export class ThemeStore {
 			{ variables: this.variables } as Partial<Theme>,
 			this.stored
 		);
+
+		const layoutOptions = theme.layoutOptions;
+		const selectedOption: ListOption | undefined =
+			layoutOptions?.find((option) => option?.value === this.layout.selected?.value) ||
+			layoutOptions?.find((option) => option?.default) ||
+			(Array.isArray(layoutOptions) ? layoutOptions[0] : undefined);
+
+		if (selectedOption?.overrides) {
+			theme = mergeLayers(theme, selectedOption.overrides as Partial<Theme>);
+
+			// if the the selectedOption differs from this.layout.selected, then select the layout
+			if (
+				!this?.layout?.selected ||
+				(this?.layout?.selected && selectedOption.value !== this.layout.selected.value && selectedOption.label !== this.layout.selected.label)
+			) {
+				this.layout.select(selectedOption);
+			}
+		}
+
+		// change the theme name to match the ThemeStore theme name
+		theme.name = this.name;
 		return theme;
 	}
 
@@ -120,7 +169,7 @@ export class ThemeStore {
 			}, {}),
 		};
 		this.stored = mergeLayers(this.stored, overrides);
-		this.dependencies.storage.set(`themes.${this.type}.${this.name}`, this.stored);
+		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
 	}
 }
 

@@ -274,7 +274,7 @@ const ObservableSelect = observer(({ args, controller }: { args: SelectProps; co
 			options={controller?.store?.sorting?.options}
 			selected={controller?.store?.sorting?.current}
 			onSelect={(e, selectedOption) => {
-				selectedOption && selectedOption.url.go();
+				selectedOption && selectedOption?.url?.go();
 			}}
 		/>
 	);

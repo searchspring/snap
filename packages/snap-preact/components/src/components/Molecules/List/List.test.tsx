@@ -97,7 +97,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements[1]);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1], [options[1].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1], [options[1]]);
 	});
 
 	it('it adds "selected" class on selected option', async () => {
@@ -117,7 +117,7 @@ describe('List Component', () => {
 
 		optionElements = element.querySelectorAll('.ss__list__option');
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex]]);
 
 		optionElements.forEach((optionElement, index) => {
 			if (index != selectIndex) {
@@ -132,7 +132,7 @@ describe('List Component', () => {
 		const selectFn = jest.fn();
 		const selectIndex = 1;
 
-		const rendered = render(<List options={options} onSelect={selectFn} selected={options[1].value} />);
+		const rendered = render(<List options={options} onSelect={selectFn} selected={options[1]} />);
 
 		const element = rendered.container.querySelector('.ss__list')!;
 		let optionElements = element.querySelectorAll('.ss__list__option');
@@ -266,7 +266,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0]]);
 	});
 
 	it('it can hideOptionCheckboxes', async () => {
@@ -282,7 +282,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0]]);
 	});
 
 	it('it can hideOptionLabels', async () => {
@@ -302,7 +302,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[0], [options[0]]);
 	});
 
 	it('it can render Icon options', async () => {
@@ -344,7 +344,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0]]);
 	});
 
 	it('it can hide Icon options', async () => {
@@ -385,7 +385,7 @@ describe('List Component', () => {
 
 		await userEvent.click(optionElements);
 
-		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0].value]);
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), iconOptions[0], [iconOptions[0]]);
 	});
 
 	it('renders the titleText', () => {

@@ -6,6 +6,7 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 
 	return css({
 		fill: color || variables?.color?.accent,
+		stroke: color || variables?.color?.accent,
 		width: width || size,
 		height: height || size,
 		position: 'relative',

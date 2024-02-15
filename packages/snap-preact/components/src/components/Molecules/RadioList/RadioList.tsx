@@ -108,14 +108,14 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	}
 
 	// selection state
-	const [selection, setSelection] = useState<string | number | undefined>(selected);
+	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (onSelect) {
 			onSelect(e, option!);
 		}
 
-		setSelection(option.value);
+		setSelection(option);
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -125,18 +125,19 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 
 				<ul className={`ss__radio-list__options-wrapper`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
+						const selected = selection && selection.value == option.value;
 						return (
 							<li
-								className={`ss__radio-list__option ${selection == option.value ? 'ss__radio-list__option--selected' : ''} ${
+								className={`ss__radio-list__option ${selected ? 'ss__radio-list__option--selected' : ''} ${
 									option.disabled ? 'ss__radio-list__option--disabled' : ''
 								}`}
 								ref={(e) => useA11y(e)}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
+								onClick={(e) => !disabled && makeSelection(e, option)}
 								title={option.label}
 								role="option"
-								aria-selected={option.value == selection}
+								aria-selected={selected}
 							>
-								{!hideOptionRadios && <Radio {...subProps.Radio} checked={option.value == selection} disableA11y={true} />}
+								{!hideOptionRadios && <Radio {...subProps.Radio} checked={selected} disableA11y={true} />}
 
 								{option.icon && !hideOptionIcons && (
 									<Icon
@@ -145,7 +146,9 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 									/>
 								)}
 
-								{!hideOptionLabels && <label className="ss__radio-list__option__label">{option.label || option.value}</label>}
+								{!hideOptionLabels && (option.label || !option.icon) && (
+									<label className="ss__radio-list__option__label">{option.label || option.value}</label>
+								)}
 							</li>
 						);
 					})}
@@ -166,7 +169,7 @@ export interface RadioListProps extends ComponentProps {
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
 	disabled?: boolean;
-	selected?: string | number;
+	selected?: ListOption;
 }
 
 interface RadioListSubProps {

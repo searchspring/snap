@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Icon, IconProps } from './Icon';
 import { iconPaths } from './paths';
-import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Icon/readme.md';
 
 export default {
@@ -147,10 +147,10 @@ export const Gallery = (): JSX.Element => {
 				fontSize: '10px',
 			}}
 		>
-			{Object.keys(iconPaths).map((icon, index) => {
+			{Object.keys(iconPaths).map((icon) => {
 				return (
 					<div style={{ marginBottom: '40px' }}>
-						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="40px" style={{ padding: '20px' }} />
+						<Icon icon={icon} size="40px" style={{ padding: '20px' }} />
 						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);

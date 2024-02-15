@@ -85,26 +85,6 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideLayoutSelector: {
-			defaultValue: false,
-			description: 'prevents the layoutSelector component from rendering',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		layoutConfig: {
-			description: 'object to configure the layoutSelector',
-			table: {
-				type: {
-					summary: 'object',
-				},
-			},
-			control: { type: 'object' },
-		},
 		hideSearchHeader: {
 			defaultValue: false,
 			description: 'prevents the SearchHeader component from rendering',

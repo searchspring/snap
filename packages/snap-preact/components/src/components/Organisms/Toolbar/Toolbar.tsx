@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps } from '../../../utilities';
@@ -12,6 +12,8 @@ import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
+import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
+import { SnapTemplates } from '../../../../../src';
 
 const CSS = {
 	toolbar: ({}: Partial<ToolbarProps>) => css({}),
@@ -20,8 +22,12 @@ const CSS = {
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
+	const snap = useSnap() as SnapTemplates;
+	const themeStore = snap?.templates.getThemeStore(globalTheme.name);
+
 	const defaultProps: Partial<ToolbarProps> = {
-		hidefilterSummary: false,
+		hideFilterSummary: false,
+		hideLayoutSelector: false,
 		hidePerPage: false,
 		hideSortBy: false,
 		hidePagination: false,
@@ -29,7 +35,8 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
-	const { controller, hidefilterSummary, hidePerPage, hideSortBy, hidePagination, disableStyles, className, style, styleScript } = props;
+	const { controller, hideFilterSummary, hidePerPage, hideSortBy, hideLayoutSelector, hidePagination, disableStyles, className, style, styleScript } =
+		props;
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -49,6 +56,19 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			className: 'ss__toolbar__filter-summary',
 			// global theme
 			...globalTheme?.components?.filterSummary,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		LayoutSelector: {
+			// default props
+			controller,
+			className: 'ss__toolbar__layout-selector',
+			// global theme
+			...globalTheme?.components?.layoutSelector,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -100,7 +120,20 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toolbar', className)}>
-				{!hidefilterSummary && <FilterSummary {...subProps.FilterSummary} />}
+				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
+
+				{!hideLayoutSelector && (
+					<LayoutSelector
+						onSelect={(e, option) => {
+							if (option) {
+								themeStore?.layout.select(option);
+							}
+						}}
+						selected={themeStore?.layout.selected}
+						options={props.theme?.layoutOptions}
+						{...subProps.LayoutSelector}
+					/>
+				)}
 
 				{!hideSortBy && <SortBy {...subProps.SortBy} />}
 
@@ -114,7 +147,8 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
-	hidefilterSummary?: boolean;
+	hideFilterSummary?: boolean;
+	hideLayoutSelector?: boolean;
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hidePagination?: boolean;
@@ -125,4 +159,5 @@ interface ToolbarSubProps {
 	Pagination: Partial<PaginationProps>;
 	SortBy: Partial<SortByProps>;
 	PerPage: Partial<PerPageProps>;
+	LayoutSelector: Partial<LayoutSelectorProps>;
 }

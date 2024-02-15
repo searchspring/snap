@@ -1,6 +1,6 @@
 import { css, ErrorHandlerProps } from '../../../../../index';
 
-import { LightenDarkenColor } from '../../../../../utilities';
+import { lightenDarkenColor } from '../../../../../utilities';
 
 // CSS in JS style script for the ErrorHandler component
 const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
@@ -37,7 +37,7 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 		},
 
 		'&.ss__error-handler--error': {
-			backgroundColor: LightenDarkenColor('red', 180),
+			backgroundColor: lightenDarkenColor('red', 180),
 			borderLeftColor: '#ff0000',
 			'.ss__error-handler__message': {
 				'.ss__icon': {
@@ -46,7 +46,7 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 			},
 		},
 		'&.ss__error-handler--warning': {
-			backgroundColor: LightenDarkenColor('yellow', 180),
+			backgroundColor: lightenDarkenColor('yellow', 180),
 			borderLeftColor: '#ecaa15',
 			'.ss__icon': {
 				fill: '#ecaa15',
@@ -56,7 +56,7 @@ const errorHandlerStyleScript = ({ theme }: ErrorHandlerProps) => {
 			},
 		},
 		'&.ss__error-handler--info': {
-			backgroundColor: LightenDarkenColor('blue', 180),
+			backgroundColor: lightenDarkenColor('blue', 180),
 			borderLeftColor: '#0000ff',
 			'.ss__error-handler__message': {
 				'.ss__icon': {

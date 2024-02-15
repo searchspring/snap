@@ -24,7 +24,7 @@ export class SortBy extends Component<SortByProps> {
 				options={sorting.options}
 				selected={sorting.current}
 				onSelect={(e, selection) => {
-					selection.url.go();
+					selection?.url?.go();
 				}}
 			/>
 		);

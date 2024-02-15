@@ -89,7 +89,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					options={store.options}
 					selected={store.current}
 					onSelect={(e, selection) => {
-						selection?.url.go();
+						selection?.url?.go();
 					}}
 				/>
 			)}
@@ -100,10 +100,10 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					className={classnames('ss__sortby__list', className)}
 					{...subProps.List}
 					options={store.options}
-					selected={store.current.value}
+					selected={store.current}
 					titleText={label}
 					onSelect={(e, selection) => {
-						selection?.url.go();
+						selection?.url?.go();
 					}}
 				/>
 			)}
@@ -114,10 +114,10 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					className={classnames('ss__sortby__radioList', className)}
 					{...subProps.RadioList}
 					options={store.options}
-					selected={store.current.value}
+					selected={store.current}
 					titleText={label}
 					onSelect={(e, selection) => {
-						selection?.url.go();
+						selection?.url?.go();
 					}}
 				/>
 			)}

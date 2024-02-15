@@ -2,7 +2,7 @@ import { Theme, ThemeVariables } from '../../providers';
 import * as style from './styles/styles';
 
 const bocachicaVariables: ThemeVariables = {
-	breakpoints: [0, 540, 767, 1024],
+	breakpoints: [0, 767, 999, 1299],
 	color: {
 		primary: '#202223',
 		secondary: '#6d7175',
@@ -23,6 +23,34 @@ const bocachicaVariables: ThemeVariables = {
 export const bocachica: Theme = {
 	name: 'bocachica',
 	variables: bocachicaVariables,
+	layoutOptions: [
+		{
+			value: 1,
+			icon: 'square',
+			overrides: {
+				components: {
+					results: {
+						named: {
+							searchResults: { columns: 1 },
+						},
+					},
+				},
+			},
+		},
+		{
+			value: 2,
+			icon: 'layout-large',
+			overrides: {
+				components: {
+					results: {
+						named: {
+							searchResults: { columns: 2 },
+						},
+					},
+				},
+			},
+		},
+	],
 	components: {
 		// component theme prop overrides
 		// ATOMS
@@ -74,6 +102,9 @@ export const bocachica: Theme = {
 		terms: {
 			...style.components.terms,
 		},
+		toggle: {
+			...style.components.toggle,
+		},
 		// MOLECULES
 		carousel: {
 			...style.components.carousel,
@@ -102,6 +133,12 @@ export const bocachica: Theme = {
 		filter: {
 			...style.components.filter,
 		},
+		layoutSelector: {
+			...style.components.layoutSelector,
+		},
+		list: {
+			...style.components.list,
+		},
 		loadMore: {
 			...style.components.loadMore,
 		},
@@ -110,6 +147,12 @@ export const bocachica: Theme = {
 		},
 		perPage: {
 			...style.components.perPage,
+		},
+		radio: {
+			...style.components.radio,
+		},
+		radioList: {
+			...style.components.radioList,
 		},
 		rating: {
 			...style.components.rating,
@@ -130,9 +173,6 @@ export const bocachica: Theme = {
 			...style.components.sortBy,
 		},
 		// ORGANISMS
-		autocomplete: {
-			...style.components.autocomplete,
-		},
 		branchOverride: {
 			...style.components.branchOverride,
 		},
@@ -145,8 +185,8 @@ export const bocachica: Theme = {
 		filterSummary: {
 			...style.components.filterSummary,
 		},
-		recommendation: {
-			...style.components.recommendation,
+		mobileSidebar: {
+			...style.components.mobileSidebar,
 		},
 		results: {
 			...style.components.results,
@@ -156,6 +196,16 @@ export const bocachica: Theme = {
 		},
 		toolbar: {
 			...style.components.toolbar,
+		},
+		// TEMPLATES
+		autocomplete: {
+			...style.components.autocomplete,
+		},
+		recommendation: {
+			...style.components.recommendation,
+		},
+		search: {
+			...style.components.search,
 		},
 	},
 	responsive: [
@@ -168,6 +218,8 @@ export const bocachica: Theme = {
 					named: {
 						topToolBar: {
 							hidePagination: true,
+							hideSortBy: true,
+							hidePerPage: true,
 						},
 					},
 				},
@@ -214,6 +266,7 @@ export const bocachica: Theme = {
 			},
 		},
 		{
+			layoutOptions: [],
 			components: {
 				results: {
 					columns: 3,
@@ -250,6 +303,7 @@ export const bocachica: Theme = {
 			},
 		},
 		{
+			layoutOptions: [],
 			components: {
 				results: {
 					columns: 4,

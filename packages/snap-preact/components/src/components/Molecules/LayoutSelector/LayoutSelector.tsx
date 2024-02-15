@@ -21,12 +21,13 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 	const defaultProps: Partial<LayoutSelectorProps> = {
 		label: 'Layout',
 		type: 'dropdown',
+		showSingleOption: false,
 		selected: properties.options && properties.options.length ? properties.options[0] : undefined,
 	};
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, label, disableStyles, className, style, styleScript } = props;
+	const { options, selected, type, onSelect, label, showSingleOption, disableStyles, className, style, styleScript } = props;
 
 	const subProps: SelectSubProps = {
 		Select: {
@@ -76,7 +77,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 	}
 
 	// options can be an Array or ObservableArray - but should have length
-	return options ? (
+	return (options && options.length > 1) || (options?.length === 1 && showSingleOption) ? (
 		<CacheProvider>
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
@@ -97,11 +98,11 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					{...styling}
 					className={classnames('ss__layout__list', className)}
 					{...subProps.List}
-					onSelect={(e: any, option: any) => {
+					onSelect={(e, option: ListOption) => {
 						onSelect(e, option);
 					}}
 					options={options}
-					selected={selected?.value}
+					selected={selected}
 					titleText={label}
 				/>
 			)}
@@ -111,11 +112,11 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					{...styling}
 					className={classnames('ss__layout__radioList', className)}
 					{...subProps.RadioList}
-					onSelect={(e: any, option: any) => {
+					onSelect={(e, option: ListOption) => {
 						onSelect(e, option);
 					}}
 					options={options}
-					selected={selected?.value}
+					selected={selected}
 					titleText={label}
 				/>
 			)}
@@ -132,9 +133,10 @@ interface SelectSubProps {
 }
 
 export interface LayoutSelectorProps extends ComponentProps {
-	onSelect: (e: React.ChangeEvent<HTMLSelectElement>, option?: ListOption) => void;
-	options: ListOption[];
+	onSelect: (e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLElement>, option?: ListOption) => void;
+	options?: ListOption[];
 	selected?: ListOption;
 	label?: string;
 	type?: 'dropdown' | 'list' | 'radio';
+	showSingleOption?: boolean;
 }

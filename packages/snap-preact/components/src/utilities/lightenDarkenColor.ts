@@ -1,4 +1,4 @@
-export const LightenDarkenColor = (col: string, amt: number): string => {
+export const lightenDarkenColor = (col: string, amt: number): string => {
 	let usePound = false;
 
 	if (col[0] == '#') {
