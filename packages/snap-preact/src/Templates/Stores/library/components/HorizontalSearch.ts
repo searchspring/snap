@@ -1,1 +1,1 @@
-export { HorizontalSearch } from '@searchspring/snap-preact-components';
+export { HorizontalSearch } from '../../../../../components/src';
