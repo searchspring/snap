@@ -21,10 +21,12 @@ export class SearchMerchandisingStore {
 	public campaigns: SearchResponseModelMerchandisingCampaigns[] = [];
 	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 	public personalized?: boolean;
+	// public badges: any;
 
 	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
 			this.redirect = merchData.redirect || '';
+			// this.badges = (merchData as any).badges || {};
 
 			if (merchData.content) {
 				Object.values(ContentType).forEach((type) => {

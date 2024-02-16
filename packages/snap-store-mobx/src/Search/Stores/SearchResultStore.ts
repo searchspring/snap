@@ -8,6 +8,7 @@ import type {
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 export class SearchResultStore extends Array<Product | Banner> {
@@ -18,12 +19,13 @@ export class SearchResultStore extends Array<Product | Banner> {
 	constructor(
 		config: StoreConfigs,
 		services: StoreServices,
+		metaData: MetaResponseModel,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising
 	) {
 		let results = (resultData || []).map((result) => {
-			return new Product(services, result);
+			return new Product(services, result, metaData);
 		});
 
 		if (merchData?.content?.inline) {
@@ -53,6 +55,7 @@ export class Banner {
 	public custom = {};
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
+	public badges: any;
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
@@ -67,6 +70,39 @@ export class Banner {
 	}
 }
 
+export type ResultBadge = {
+	tag: string;
+	label: string;
+};
+
+export type MetaBadges = {
+	locations: {
+		overlay: {
+			[position: string]: {
+				name: string;
+				label: string;
+				description: string;
+			}[];
+		};
+		callouts: {
+			name: string;
+			label: string;
+			description: string;
+		}[];
+	};
+	tags: {
+		[tag: string]: {
+			component: string;
+			location: string;
+			parameters: {
+				color: string;
+				colorText: string;
+				url: string;
+			};
+		};
+	};
+};
+
 export class Product {
 	public type = 'product';
 	public id: string;
@@ -76,11 +112,22 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
+	public badges: any;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult) {
+	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
+
+		this.badges =
+			(result as SearchResponseModelResult & { badges: ResultBadge[] }).badges?.map((badge) => {
+				const meta = metaData as MetaBadges & { badges: MetaBadges };
+				const metaBadgeData = (badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag]) || {};
+				return {
+					...badge,
+					...metaBadgeData,
+				};
+			}) || [];
 
 		if (result?.children?.length) {
 			this.children = result.children.map((variant, index) => {

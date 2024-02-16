@@ -6,12 +6,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Image, ImageProps } from '../../Atoms/Image';
-import { Badge, BadgeProps } from '../../Atoms/Badge';
+import { BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
+import { SelfServeBadge } from '../../Atoms/SelfServeBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -133,7 +134,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 	};
 
-	const onSale = Boolean(core?.msrp && core.price && core?.msrp * 1 > core?.price * 1);
+	// const onSale = Boolean(core?.msrp && core.price && core?.msrp * 1 > core?.price * 1);
 	let displayName = core?.name;
 	if (props.truncateTitle) {
 		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
@@ -149,21 +150,38 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	return core ? (
 		<CacheProvider>
 			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-				<div className="ss__result__image-wrapper">
-					<a
-						href={core.url}
-						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
-						}}
-					>
-						{!hideBadge && onSale && <Badge {...subProps.badge} />}
-						{!hideImage && <Image {...subProps.image} />}
-					</a>
-				</div>
+				{!hideBadge ? (
+					<SelfServeBadge result={result} controller={controller}>
+						<div className="ss__result__image-wrapper">
+							<a
+								href={core.url}
+								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+									onClick && onClick(e);
+									controller?.track?.product?.click(e as any, result);
+								}}
+							>
+								{!hideImage && <Image {...subProps.image} />}
+							</a>
+						</div>
+					</SelfServeBadge>
+				) : (
+					<div className="ss__result__image-wrapper">
+						<a
+							href={core.url}
+							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+								onClick && onClick(e);
+								controller?.track?.product?.click(e as any, result);
+							}}
+						>
+							{!hideImage && <Image {...subProps.image} />}
+						</a>
+					</div>
+				)}
+
 				<div className="ss__result__details">
 					{!hideTitle && (
 						<div className="ss__result__details__title">
+							{!hideBadge && <SelfServeBadge result={result} controller={controller} />}
 							<a
 								href={core.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
@@ -189,6 +207,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							)}
 						</div>
 					)}
+					{!hideBadge && <SelfServeBadge result={result} controller={controller} callout="callout2" />}
 					{cloneWithProps(detailSlot, { result })}
 				</div>
 			</article>
