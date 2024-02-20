@@ -1,6 +1,6 @@
 import { h, Fragment } from 'preact';
 
-import { jsx, css, Global } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import classnames from 'classnames';
 import { useState } from 'preact/hooks';
 import { ComponentProps, StylingCSS } from '../../../types';

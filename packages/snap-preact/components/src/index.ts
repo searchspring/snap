@@ -13,10 +13,9 @@ export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/SearchHeader';
 export * from './components/Atoms/Skeleton';
+export * from './components/Atoms/TemplateSelect';
 export * from './components/Atoms/Terms';
 export * from './components/Atoms/Toggle';
-export * from './components/Trackers/Recommendation/ResultTracker';
-export * from './components/Trackers/Recommendation/ProfileTracker';
 
 // MOLECULES
 export * from './components/Molecules/Carousel';
@@ -41,10 +40,10 @@ export * from './components/Molecules/SearchInput';
 export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
 export * from './components/Molecules/SortBy';
+export * from './components/Molecules/TemplatesEditor';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
-export * from './components/Templates/TemplatesEditor';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/HorizontalFacets';
@@ -59,7 +58,10 @@ export * from './components/Templates/Autocomplete';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/Search';
 export * from './components/Templates/HorizontalSearch';
-export * from './components/Templates/TemplateSelect';
+
+// TRACKERS
+export * from './components/Trackers/Recommendation/ProfileTracker';
+export * from './components/Trackers/Recommendation/ResultTracker';
 
 // TYPES
 export * from './types';

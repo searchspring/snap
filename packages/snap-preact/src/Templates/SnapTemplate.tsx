@@ -127,7 +127,7 @@ export class SnapTemplates extends Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const TemplateEditor = (await import('../components/TemplatesEditor')).TemplatesEditor;
+						const TemplateEditor = (await import('../../components/src/')).TemplatesEditor;
 
 						render(
 							<TemplateEditor

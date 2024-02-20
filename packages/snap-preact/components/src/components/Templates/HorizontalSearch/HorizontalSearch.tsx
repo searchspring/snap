@@ -5,16 +5,13 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, ResultComponent, ResultsLayout, StylingCSS } from '../../../types';
+import { ComponentProps, ResultComponent, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
-import { useState } from 'preact/hooks';
-import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
-import { Result } from '../../Molecules/Result';
 import { HorizontalFacets, HorizontalFacetsProps } from '../../Organisms/HorizontalFacets';
 
 const CSS = {
@@ -24,48 +21,7 @@ const CSS = {
 export const HorizontalSearch = observer((properties: HorizontalSearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<HorizontalSearchProps> = {
-		layoutConfig: {
-			options: [
-				{
-					label: '1 wide',
-					value: '1 wide',
-					icon: 'square',
-					columns: 1,
-				},
-				{
-					label: '2 wide',
-					value: '2 wide',
-					icon: {
-						icon: 'layout-large',
-					},
-					columns: 2,
-				},
-				{
-					label: '3 wide',
-					value: '3 wide',
-					icon: {
-						icon: 'layout-grid',
-					},
-					columns: 3,
-				},
-				{
-					label: '4 wide',
-					value: '4 wide',
-					columns: 4,
-				},
-				{
-					label: 'list',
-					value: 'list',
-					icon: {
-						icon: 'layout-list',
-					},
-					component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.LIST} />,
-					columns: 1,
-				},
-			],
-		},
-	};
+	const defaultProps: Partial<HorizontalSearchProps> = {};
 
 	const props = mergeProps('horizontalSearch', globalTheme, defaultProps, properties);
 
@@ -76,55 +32,16 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		style,
 		styleScript,
 		hideSearchHeader,
-		layoutConfig,
 		hideMerchandisingBanners,
 		hideTopToolbar,
 		hideMiddleToolbar,
-		hideLayoutSelector,
 		resultComponent,
 		hideBottomToolBar,
 	} = props;
 	const store = controller.store;
 
-	//get current layout from controller local storage
-	let storedLayoutState: string | ListOption | null = controller.storage.get('currentLayoutState');
-	if (storedLayoutState) {
-		storedLayoutState = JSON.parse(storedLayoutState as string);
-
-		layoutConfig?.options.map((option) => {
-			if (option.label == (storedLayoutState as ListOption)!.label && option.component) {
-				(storedLayoutState as ListOption)!.component = option.component;
-			}
-		});
-	}
-
-	let defaultLayout: ListOption = {
-		label: '4 wide',
-		value: '4 wide',
-		columns: 4,
-	};
-
-	if (layoutConfig?.default) {
-		if (typeof layoutConfig.default == 'string') {
-			defaultLayout = layoutConfig.options.filter((option) => option.value == layoutConfig.default)[0];
-		} else {
-			defaultLayout = layoutConfig.default;
-		}
-	}
-
-	const [layoutState, setLayoutState] = useState((storedLayoutState as ListOption) || defaultLayout);
-
 	const subProps: HorizontalSearchSubProps = {
 		HorizontalFacets: {
-			// default props
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
-		LayoutSelector: {
 			// default props
 			// inherited props
 			...defined({
@@ -139,12 +56,11 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		TopToolbar: {
 			// default props
-			hidefilterSummary: false,
+			hideFilterSummary: false,
+			hideLayoutSelector: true,
 			hideSortBy: true,
 			hidePagination: true,
 			hidePerPage: true,
@@ -152,33 +68,27 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		MiddleToolbar: {
 			// default props
-			hidefilterSummary: true,
+			hideFilterSummary: true,
+			hidePagination: true,
 			hideSortBy: false,
-			hidePagination: false,
 			hidePerPage: false,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		BottomToolbar: {
 			// default props
-			hidefilterSummary: true,
+			hideFilterSummary: true,
 			hidePerPage: true,
 			hideSortBy: true,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		SearchHeader: {
 			// default props
@@ -186,19 +96,14 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		Results: {
 			// default props
-			resultComponent: layoutState ? layoutState.component : resultComponent,
-			columns: layoutState ? layoutState.columns : 4,
+			resultComponent: resultComponent,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 		NoResults: {
 			// default props
@@ -206,8 +111,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: props?.theme,
 		},
 	};
 
@@ -249,14 +152,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		}
 	}
 
-	const changeLayout = (e: any, option?: ListOption) => {
-		if (option) {
-			//set current layout in controller local storage
-			controller.storage.set('currentLayoutState', JSON.stringify(option));
-			setLayoutState(option);
-		}
-	};
-
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__horizontal-search', className)}>
@@ -273,15 +168,6 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				<HorizontalFacets {...subProps.HorizontalFacets} facets={store.facets} controller={controller} />
 
 				<div className={classnames('ss__horizontal-search__content')}>
-					{layoutConfig?.options && store.pagination.totalResults > 0 && !hideLayoutSelector && (
-						<LayoutSelector
-							{...subProps.LayoutSelector}
-							selected={layoutState}
-							onSelect={(e, option) => changeLayout(e, option as ListOption)}
-							options={layoutConfig?.options}
-						/>
-					)}
-
 					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} />}
 					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} />}
 
@@ -329,18 +215,10 @@ export interface HorizontalSearchProps extends ComponentProps {
 	hideMiddleToolbar?: boolean;
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
-	hideLayoutSelector?: boolean;
-	layoutConfig?: layoutConfig;
 }
-
-type layoutConfig = {
-	options: ListOption[];
-	default?: ListOption | string;
-};
 
 interface HorizontalSearchSubProps {
 	HorizontalFacets: Partial<HorizontalFacetsProps>;
-	LayoutSelector: Partial<LayoutSelectorProps>;
 	Banner: Partial<BannerProps>;
 	TopToolbar: Partial<ToolbarProps>;
 	MiddleToolbar: Partial<ToolbarProps>;

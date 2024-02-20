@@ -465,7 +465,7 @@ export class Snap {
 							props.error = err;
 						}
 
-						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
+						const BranchOverride = (await import('../components/src')).BranchOverride;
 						render(
 							<BranchOverride
 								{...props}

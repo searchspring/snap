@@ -149,7 +149,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'searchResults',
 			resultComponent: resultComponent,
-			// columns: layoutState ? layoutState.columns : 4,
 			// inherited props
 			...defined({
 				disableStyles,
