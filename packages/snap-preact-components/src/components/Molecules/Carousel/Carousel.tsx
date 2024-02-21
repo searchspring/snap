@@ -129,13 +129,9 @@ const CSS = {
 					background: theme?.colors?.primary || '#000',
 				},
 			},
-			'.swiper-container-pointer-events': {
-				touchAction: 'pan-y',
-			},
 			'.swiper-slide-invisible-blank': {
 				visibility: 'hidden',
 			},
-
 			'.swiper-horizontal': {
 				touchAction: 'pan-y',
 			},
@@ -269,7 +265,17 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		//backwards compatability for legacy styles
 		const swipers = document.querySelectorAll('.swiper');
 		swipers.forEach((elem: any) => {
-			elem.classList.add('swiper-container');
+			elem.classList.add('swiper-container', 'swiper-container-pointer-events');
+		});
+
+		const verticalSwipers = document.querySelectorAll('.swiper-vertical');
+		verticalSwipers.forEach((elem: any) => {
+			elem.classList.add('swiper-container-vertical');
+		});
+
+		const horizontalSwipers = document.querySelectorAll('.swiper-horizontal');
+		horizontalSwipers.forEach((elem: any) => {
+			elem.classList.add('swiper-container-horizontal');
 		});
 
 		//add usable class to last visible slide.
@@ -333,12 +339,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 							onInit(swiper);
 						}
 					}}
-					onResize={() => {
-						attachClasstoLastVisibleSlide();
-					}}
-					onTransitionEnd={() => {
-						attachClasstoLastVisibleSlide();
-					}}
 					onClick={(swiper, e) => {
 						onClick && onClick(swiper, e);
 					}}
@@ -350,6 +350,18 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...additionalProps}
 					{...displaySettings}
 					pagination={pagination}
+					onResize={() => {
+						if (additionalProps.onResize) {
+							additionalProps.onResize();
+						}
+						attachClasstoLastVisibleSlide();
+					}}
+					onTransitionEnd={() => {
+						if (additionalProps.onTransitionEnd) {
+							additionalProps.onTransitionEnd();
+						}
+						attachClasstoLastVisibleSlide();
+					}}
 				>
 					{children.map((child) => {
 						return <SwiperSlide>{child}</SwiperSlide>;

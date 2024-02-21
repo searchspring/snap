@@ -23,6 +23,10 @@ For example, if the page contains the following single recommendation instance:
 The controller id would be `recommend_trending_0`.
 
 
+### cartStore
+
+If the profile type passed to the controller is `bundle`, the controller will automatically create a [cartStore](https://github.com/searchspring/snap/blob/bundledRecComponent/packages/snap-store-mobx/src/Cart/README.md) for use with the Bundle Recommendations.
+
 
 ### client
 

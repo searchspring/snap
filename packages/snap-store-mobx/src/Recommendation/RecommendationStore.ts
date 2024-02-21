@@ -1,6 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { Product, SearchResultStore } from '../Search/Stores';
+import { CartStore } from '../Cart/CartStore';
 import { RecommendationProfileStore } from './Stores';
 import type { RecommendationStoreConfig, StoreServices } from '../types';
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
@@ -10,6 +11,7 @@ export class RecommendationStore extends AbstractStore {
 	public loaded = false;
 	public profile!: RecommendationProfileStore;
 	public results!: Product[];
+	public cart!: CartStore;
 
 	constructor(config: RecommendationStoreConfig, services: StoreServices) {
 		super(config);
@@ -37,5 +39,10 @@ export class RecommendationStore extends AbstractStore {
 		this.loaded = !!data?.profile;
 		this.profile = new RecommendationProfileStore(this.services, data);
 		this.results = new SearchResultStore(this.config, this.services, data?.results) as Product[];
+
+		// only create a cart store when type is bundle
+		if (this.profile.type == 'bundle') {
+			this.cart = new CartStore();
+		}
 	}
 }

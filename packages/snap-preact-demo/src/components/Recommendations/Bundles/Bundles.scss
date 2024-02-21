@@ -1,0 +1,36 @@
+.ss__result__qty-wrapper {
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 30px;
+    input {
+        max-width: 20%;
+        margin:0px;
+        text-align: center;
+    }
+}
+.ss__bundled-recommendations__wrapper--vertical {
+    border-bottom: 1px solid black;
+    padding-bottom: 20px !important;
+    width: 90% !important;
+    margin: auto !important;
+    margin-bottom: 20px !important;
+
+    .ss__result {
+        display: flex;
+        flex-direction: row;
+        .ss__checkbox {
+        
+        }
+    }
+   
+    .ss__bundled-recommendations__wrapper__selector--seed {
+        flex-direction: column;
+        margin-bottom: 20px;
+        .ss__bundled-recommendations__wrapper__selector__icon {
+            position: relative;
+            top:initial;
+            right: initial;
+        }
+    }
+}

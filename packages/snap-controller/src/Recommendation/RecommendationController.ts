@@ -13,12 +13,14 @@ import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, Co
 
 type RecommendationTrackMethods = {
 	product: {
-		click: (e: MouseEvent, result: any) => BeaconEvent | undefined;
-		render: (result: any) => BeaconEvent | undefined;
-		impression: (result: any) => BeaconEvent | undefined;
+		click: (e: MouseEvent, result: Product) => BeaconEvent | undefined;
+		render: (result: Product) => BeaconEvent | undefined;
+		impression: (result: Product) => BeaconEvent | undefined;
+		removedFromBundle: (result: Product) => BeaconEvent | undefined;
+		addedToBundle: (result: Product) => BeaconEvent | undefined;
 	};
 	click: (e: MouseEvent) => BeaconEvent | undefined;
-	addBundleToCart: (e: MouseEvent, results: Product[], price: number) => BeaconEvent | undefined;
+	addBundle: (e: MouseEvent, results: Product[]) => BeaconEvent | undefined;
 	impression: () => BeaconEvent | undefined;
 	render: (results?: Product[]) => BeaconEvent | undefined;
 };
@@ -74,6 +76,19 @@ export class RecommendationController extends AbstractController {
 		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
+			// attach tracking events to cart store
+			this.store.cart?.on('addItems', ({ items }: { items: Product[] }) => {
+				items.forEach((item) => {
+					this.track.product.addedToBundle(item);
+				});
+			});
+
+			this.store.cart?.on('removeItems', ({ items }: { items: Product[] }) => {
+				items.forEach((item) => {
+					this.track.product.removedFromBundle(item);
+				});
+			});
+
 			recommend.controller.store.loading = false;
 		});
 
@@ -88,6 +103,8 @@ export class RecommendationController extends AbstractController {
 				case ProfilePlacement.PRODUCTPAGE:
 					if (this.config.globals.product) {
 						skus = [this.config.globals.product];
+					} else if (this.config.globals.products) {
+						skus = this.config.globals.products;
 					}
 					break;
 				case ProfilePlacement.BASKETPAGE:
@@ -125,7 +142,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.mappings.core,
+									core: result.display.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -153,7 +170,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.mappings.core,
+									core: result.display.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -181,7 +198,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.mappings.core,
+									core: result.display.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -194,22 +211,96 @@ export class RecommendationController extends AbstractController {
 					this.eventManager.fire('track.product.render', { controller: this, result, trackEvent: event });
 					return event;
 				},
+				removedFromBundle: (result): BeaconEvent | undefined => {
+					if (
+						!this.store.profile.tag ||
+						!result ||
+						!this.events.render ||
+						!this.events.product![result.id]?.render ||
+						this.store.profile.type != 'bundle'
+					)
+						return;
+					const payload: BeaconPayload = {
+						type: BeaconType.PROFILE_PRODUCT_REMOVEDFROMBUNDLE,
+						category: BeaconCategory.RECOMMENDATIONS,
+						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						event: {
+							context: {
+								placement: this.store.profile.placement,
+								tag: this.store.profile.tag,
+								type: 'product-recommendation',
+							},
+							product: {
+								id: result.id,
+								mappings: {
+									core: result.display.mappings.core,
+								},
+								seed: getSeed(),
+							},
+						},
+						pid: this.events.click?.id,
+					};
+
+					this.events.product![result.id] = this.events.product![result.id] || {};
+					const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
+					this.eventManager.fire('track.product.removedFromBundle', { controller: this, result, trackEvent: event });
+					return event;
+				},
+				addedToBundle: (result): BeaconEvent | undefined => {
+					if (
+						!this.store.profile.tag ||
+						!result ||
+						!this.events.render ||
+						!this.events.product![result.id]?.render ||
+						this.store.profile.type != 'bundle'
+					)
+						return;
+					const payload: BeaconPayload = {
+						type: BeaconType.PROFILE_PRODUCT_ADDEDTOBUNDLE,
+						category: BeaconCategory.RECOMMENDATIONS,
+						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						event: {
+							context: {
+								placement: this.store.profile.placement,
+								tag: this.store.profile.tag,
+								type: 'product-recommendation',
+							},
+							product: {
+								id: result.id,
+								mappings: {
+									core: result.display.mappings.core,
+								},
+								seed: getSeed(),
+							},
+						},
+						pid: this.events.click?.id,
+					};
+
+					this.events.product![result.id] = this.events.product![result.id] || {};
+					const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
+					this.eventManager.fire('track.product.addedToBundle', { controller: this, result, trackEvent: event });
+					return event;
+				},
 			},
-			addBundleToCart: (e: MouseEvent, results: Product[], price: number): BeaconEvent | undefined => {
-				if (!this.store.profile.tag) return;
+			addBundle: (e: MouseEvent, results: Product[]): BeaconEvent | undefined => {
+				if (!results.length || !this.store.profile.tag || this.store.profile.type != 'bundle') return;
 				const event: BeaconEvent = this.tracker.track.event({
-					type: BeaconType.PROFILE_CLICK,
+					type: BeaconType.PROFILE_ADDBUNDLE,
 					category: BeaconCategory.RECOMMENDATIONS,
 					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
 					event: {
 						context: {
-							action: 'navigate',
 							placement: this.store.profile.placement,
 							tag: this.store.profile.tag,
 							type: 'product-recommendation',
-							results: results,
-							price: price,
 						},
+						products: results.map((result) => ({
+							id: result.id,
+							mappings: {
+								core: result.display.mappings.core,
+							},
+							quantity: result.quantity,
+						})),
 						profile: {
 							tag: this.store.profile.tag,
 							placement: this.store.profile.placement,
@@ -219,8 +310,7 @@ export class RecommendationController extends AbstractController {
 						},
 					},
 				});
-				this.events.click = event;
-				this.eventManager.fire('track.click', { controller: this, event: e, trackEvent: event });
+				this.eventManager.fire('track.addBundle', { controller: this, event: e, trackEvent: event });
 				return event;
 			},
 			click: (e: MouseEvent): BeaconEvent | undefined => {

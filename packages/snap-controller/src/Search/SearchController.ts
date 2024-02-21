@@ -220,7 +220,7 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				const target = e.target as HTMLAnchorElement;
-				const resultHref = result.mappings.core?.url;
+				const resultHref = result.display.mappings.core?.url;
 				const elemHref = target?.getAttribute('href');
 
 				// the href that should be used for restoration - if the elemHref contains the resultHref - use resultHref

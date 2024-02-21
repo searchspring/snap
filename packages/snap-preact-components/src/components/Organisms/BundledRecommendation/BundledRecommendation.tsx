@@ -2,10 +2,10 @@
 import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { useState } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import { Carousel, CarouselProps } from '../../Molecules/Carousel';
+import { Carousel, CarouselProps as _CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { cloneWithProps, defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -18,9 +18,10 @@ import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
 import { BundledCTA } from './BundleCTA';
+import { useEffect } from 'react';
 
 const CSS = {
-	bundledRecommendations: ({ slidesPerView, stackedCTA }: any) =>
+	bundledRecommendations: ({ slidesPerView, ctaInline, vertical, peekaboo, seperatorIcon }: any) =>
 		css({
 			'.ss__bundled-recommendations__wrapper': {
 				display: 'flex',
@@ -29,12 +30,17 @@ const CSS = {
 				padding: '0',
 			},
 
-			'.ss__bundled-recommendations__wrapper__seed': {
-				width: `calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)})`,
+			'.ss__bundled-recommendations__wrapper__selector--seed': {
+				width: `${vertical ? '100%' : 'auto'}`,
+				margin: `${!seperatorIcon ? 'auto !important' : 'initial'}`,
+			},
+
+			'.ss__bundled-recommendations__wrapper__seed-container': {
+				width: `calc(100% / ${slidesPerView + peekaboo + (!ctaInline ? 0 : 1)})`,
 			},
 
 			'.ss__bundled-recommendations__wrapper__cta': {
-				width: `${stackedCTA ? '100%' : `calc(100% / ${slidesPerView + 1})`}`,
+				width: `${!ctaInline ? '100%' : `calc(100% / ${slidesPerView + peekaboo + 1})`}`,
 
 				textAlign: 'center',
 
@@ -44,17 +50,17 @@ const CSS = {
 			},
 
 			'.ss__bundled-recommendations__wrapper__carousel': {
-				width: `calc(calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)}) * ${slidesPerView - 1})`,
+				width: `calc(calc(100% / ${slidesPerView + peekaboo + (!ctaInline ? 0 : 1)}) * ${slidesPerView + peekaboo - 1})`,
 				padding: '0px 15px',
 			},
 
 			'.ss__bundled-recommendations__wrapper--seed-in-carousel': {
 				'.ss__bundled-recommendations__wrapper__cta': {
-					width: `calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)})`,
+					width: `calc(100% / ${slidesPerView + peekaboo + (!ctaInline ? 0 : 1)})`,
 				},
 
 				'.ss__bundled-recommendations__wrapper__carousel': {
-					width: `calc(calc(100% / ${slidesPerView + (stackedCTA ? 0 : 1)}) * ${slidesPerView})`,
+					width: `calc(calc(100% / ${slidesPerView + peekaboo + (!ctaInline ? 0 : 1)}) * ${slidesPerView + peekaboo})`,
 					padding: '0',
 				},
 			},
@@ -71,10 +77,12 @@ const CSS = {
 				},
 			},
 
+			'.ss__bundled-recommendations__wrapper--vertical': {
+				flexDirection: 'column',
+			},
+
 			'.ss__bundled-recommendations__wrapper__selector': {
-				display: 'flex',
-				flexDirection: 'row',
-				alignItems: 'center',
+				alignItems: 'baseline',
 				position: 'relative',
 
 				'& .ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge': {
@@ -84,11 +92,6 @@ const CSS = {
 					zIndex: '1',
 				},
 
-				'& .ss__bundled-recommendations__wrapper__selector__qty__input': {
-					boxSizing: 'border-box',
-					width: '100%',
-				},
-
 				'& .ss__bundled-recommendations__wrapper__selector__icon': {
 					position: 'absolute',
 					right: '-1em',
@@ -96,8 +99,6 @@ const CSS = {
 				},
 
 				'& .ss__bundled-recommendations__wrapper__selector__result-wrapper': {
-					display: 'flex',
-					flexDirection: 'column',
 					alignItems: 'center',
 					position: 'relative',
 					margin: '0px 15px',
@@ -121,14 +122,9 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 			slidesPerView: 2,
 			slidesPerGroup: 2,
 			spaceBetween: 10,
-			stackedCTA: true,
+			ctaInline: false,
 		},
 		768: {
-			slidesPerView: 3,
-			slidesPerGroup: 3,
-			spaceBetween: 10,
-		},
-		1024: {
 			slidesPerView: 3,
 			slidesPerGroup: 3,
 			spaceBetween: 10,
@@ -145,12 +141,11 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		breakpoints: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		showCheckboxes: true,
 		seperatorIcon: 'plus-thin',
-		seedText: 'Seed Product',
+		seedText: 'This Product',
 		seedSeparatorIconOnly: true,
-		loop: false,
 		ctaIcon: true,
 		addToCartButtonText: 'Add All To Cart',
-		stackedCTA: false,
+		ctaInline: true,
 		// global theme
 		...globalTheme?.components?.bundledRecommendation,
 		...properties,
@@ -172,40 +167,61 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		title,
 		controller,
 		breakpoints,
-		loop,
 		results,
-		seedInCarousel,
-		pagination,
-		nextButton,
-		prevButton,
-		hideButtons,
+		carousel,
 		preselectedCount,
 		seperatorIcon,
 		showCheckboxes,
+		limit,
 		seedText,
-		showQuantityPicker,
-		quantityPickerText,
+		vertical,
 		onAddToCart,
 		seedSeparatorIconOnly,
 		resultComponent,
 		ctaSlot,
 		addToCartButtonText,
 		disableStyles,
-		peekaboo,
 		ctaIcon,
-		stackedCTA,
+		ctaInline,
 		style,
 		className,
 		...additionalProps
 	} = props;
 
-	if (!controller || controller.type !== 'recommendation') {
-		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
+	const mergedCarouselProps = {
+		enabled: true,
+		loop: false,
+		...carousel,
+	};
+	const { seedInCarousel, prevButton, nextButton, hideButtons, loop, pagination } = mergedCarouselProps;
+
+	let peekaboo = 0;
+	if (mergedCarouselProps.peekaboo) {
+		if (typeof mergedCarouselProps.peekaboo == 'boolean' || mergedCarouselProps.peekaboo >= 1 || mergedCarouselProps.peekaboo <= 0) {
+			// default
+			peekaboo = 0.5;
+		} else {
+			peekaboo = mergedCarouselProps.peekaboo;
+		}
 	}
 
-	//need to make a clone of products to show to prevent infinite re-renders when changing selected items
-	const products = results || controller.store?.results;
-	const resultsToRender: Product[] = [...products];
+	const carouselEnabled = mergedCarouselProps.enabled;
+
+	if (!controller || controller.type !== 'recommendation') {
+		throw new Error(`<BundleRecommendation> Component requires 'controller' prop with an instance of RecommendationController`);
+	}
+
+	let resultsToRender: Product[] = results || controller.store?.results;
+
+	if (limit) {
+		resultsToRender = resultsToRender.slice(0, limit);
+	}
+
+	const cartStore = controller.store.cart;
+
+	if (!cartStore) {
+		throw new Error(`<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store`);
+	}
 
 	const seed = results ? results[0] : controller.store?.results[0];
 
@@ -237,109 +253,115 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 		},
 	};
 
-	const slidesPerView = props.slidesPerView;
+	let slidesPerView = props.slidesPerView;
+	if (resultsToRender.length < slidesPerView) {
+		slidesPerView = resultsToRender.length;
+	}
+
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.bundledRecommendations({ slidesPerView, stackedCTA }), style];
+		styling.css = [CSS.bundledRecommendations({ slidesPerView, ctaInline, vertical, peekaboo, seperatorIcon }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	const initialSelectedItems: Product[] = [];
+	const _preSelectedCount = typeof preselectedCount == 'number' ? preselectedCount : carouselEnabled ? slidesPerView : resultsToRender.length;
 
-	const _preSelectedCount = typeof preselectedCount == 'number' ? preselectedCount : slidesPerView;
+	//this resets the selected items if the results to render changes
+	// so you dont end up with something selected that is no longer rendered
+	useEffect(() => {
+		cartStore.reset();
 
-	if (_preSelectedCount) {
-		resultsToRender?.forEach((result, idx) => {
-			if (idx < _preSelectedCount) {
-				initialSelectedItems.push(result);
-			}
-		});
-	}
+		if (_preSelectedCount) {
+			resultsToRender?.forEach((result, idx) => {
+				if (idx < _preSelectedCount) {
+					cartStore.addItems([result]);
+				}
+			});
+		}
+	}, [resultsToRender.length]);
 
-	const [selectedItems, setSelectedItems] = useState<Product[]>(initialSelectedItems);
-
-	let bundlePrice = 0;
-	let bundleStrikePrice = 0;
-
-	//set current price/bundle price based on whats selected
-	resultsToRender?.forEach((result) => {
-		selectedItems.forEach((item) => {
-			if (item.id && item.id.indexOf(result.id) > -1) {
-				bundlePrice += (result.display.mappings.core?.price || 0) * result.quantity;
-				bundleStrikePrice += (result.display.mappings.core?.msrp || result.display.mappings.core?.price || 0) * result.quantity;
-			}
-		});
-	});
+	const selectedItems = cartStore.items;
 
 	const modifiedBreakpoints: BreakpointsProps = { ...breakpoints };
 
-	Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
-		const obj = props.breakpoints![breakpoint];
+	if (carouselEnabled) {
+		Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
+			const obj = props.breakpoints![breakpoint];
 
-		if (!seedInCarousel && resultsToRender.length) {
-			modifiedBreakpoints[breakpoint] = {
-				...obj,
-				slidesPerView: obj.slidesPerView! - 1 + (peekaboo ? 0.5 : 0),
-				slidesPerGroup: obj.slidesPerGroup! - 1,
-			};
+			let newSlidesPerView = obj.slidesPerView;
+			let newSlidesPerGroup = obj.slidesPerGroup;
 
-			if (resultsToRender[0].id == products[0].id) {
-				resultsToRender?.shift();
+			const resultCount = seedInCarousel ? resultsToRender.length : resultsToRender.length - 1;
+
+			if (resultCount) {
+				if (resultCount >= obj.slidesPerView + peekaboo) {
+					newSlidesPerView = obj.slidesPerView! - (!seedInCarousel ? 1 : 0) + peekaboo;
+					if (!seedInCarousel) {
+						newSlidesPerGroup = obj.slidesPerGroup! - 1;
+					}
+				} else {
+					(newSlidesPerView = resultCount), (newSlidesPerGroup = resultCount);
+				}
 			}
-		} else if (peekaboo) {
+
 			modifiedBreakpoints[breakpoint] = {
 				...modifiedBreakpoints[breakpoint],
-				slidesPerView: modifiedBreakpoints[breakpoint].slidesPerView! + 0.5,
+				slidesPerView: newSlidesPerView,
+				slidesPerGroup: newSlidesPerGroup,
 			};
-		}
-	});
-
-	const onInputChange = (product: Product, qty: string) => {
-		//numify
-		const quantity = Number(qty || 1);
-
-		//update the store
-		const index = products.findIndex((result: any) => result.id == product.id);
-		(products[index] as Product).setQuantity && (products[index] as Product).setQuantity(quantity);
-	};
+		});
+	}
 
 	const onProductSelect = (product: Product) => {
 		if (product) {
 			const idx = selectedItems.findIndex((result) => result.id == product.id);
-
 			//is it in the selected items?
 			if (idx > -1) {
 				//already selected, deselect it now
-				selectedItems.splice(idx, 1);
-				const newIds = [...selectedItems];
+				cartStore.removeItems([product]);
 
-				// ensure something is selected (use seed)
-				if (newIds.length == 0) {
-					newIds.push(seed);
+				if (cartStore.items.length == 0) {
+					//we dont call addItems here to prevent tracking
+					cartStore.items.push(seed);
 				}
-
-				setSelectedItems(newIds);
 			} else {
 				//add it to the list;
-				const newIds = [...selectedItems];
-				newIds.push(product);
-				setSelectedItems(newIds);
+				cartStore.addItems([product]);
 			}
 		}
 	};
 
 	const addToCart = (e: any) => {
-		// profile click for add to cart (what was added, sku/price/qty)
-		controller.track.addBundleToCart(e, selectedItems, bundlePrice);
+		// add to cart tracking
+		controller.track.addBundle(e, selectedItems);
 
 		//call the function passed
 		onAddToCart && onAddToCart(selectedItems);
 	};
 
+	const setSeedwidth = () => {
+		if (seedRef.current) {
+			// @ts-ignore - todo can this be typed appropriatly?
+			const seedElem: HTMLElement = seedRef.current?.base;
+			// @ts-ignore - todo can this be typed appropriatly?
+			const carouselElem: HTMLElement = carouselRef.current?.base;
+
+			const visibleSlide = carouselElem?.querySelector('.swiper-slide-visible .ss__bundled-recommendations__wrapper__selector') as HTMLElement;
+			const width = visibleSlide?.offsetWidth;
+
+			if (seedElem) {
+				seedElem.style.width = `${width}px`;
+			}
+		}
+	};
+
+	const seedRef = useRef();
+	const carouselRef = useRef();
+
 	return resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__bundled-recommendations', { 'ss__bundled-recommendations--stacked': stackedCTA }, className)}>
+			<div {...styling} className={classnames('ss__bundled-recommendations', { 'ss__bundled-recommendations--stacked': !ctaInline }, className)}>
 				<RecommendationProfileTracker controller={controller}>
 					{title && (
 						<h3 className="ss__bundled-recommendations__title">
@@ -350,120 +372,163 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 					<div
 						className={classnames('ss__bundled-recommendations__wrapper', {
 							'ss__bundled-recommendations__wrapper--seed-in-carousel': seedInCarousel,
+							'ss__bundled-recommendations__wrapper--vertical': vertical,
 						})}
 					>
-						{!seedInCarousel && (
-							<div className="ss__bundled-recommendations__wrapper__seed">
-								<BundleSelector
-									seedText={seedText}
-									onCheck={() => onProductSelect(seed)}
-									checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
-									icon={seperatorIcon}
-									onInputChange={(e) => onInputChange(seed, e.target.value)}
-									quantity={showQuantityPicker ? (seed as Product).quantity : undefined}
-									quantityPickerText={quantityPickerText}
-									showCheckboxes={showCheckboxes}
-									theme={props.theme}
-								>
-									<RecommendationResultTracker controller={controller} result={seed}>
-										{resultComponent ? (
-											cloneWithProps(resultComponent, {
-												result: seed,
-												seed: true,
-												selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
-												onProductSelect,
-											})
-										) : (
-											<Result {...subProps.result} controller={controller} result={seed} />
-										)}
-									</RecommendationResultTracker>
-								</BundleSelector>
-							</div>
-						)}
-						<div className="ss__bundled-recommendations__wrapper__carousel">
-							<Carousel
-								prevButton={prevButton}
-								nextButton={nextButton}
-								hideButtons={hideButtons}
-								loop={loop}
-								pagination={pagination}
-								breakpoints={modifiedBreakpoints}
-								watchSlidesProgress={true}
-								observer={true}
-								{...subProps.carousel}
-								{...additionalProps}
-								{...displaySettings}
-							>
-								{resultsToRender.map((result, idx) => {
-									const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+						{carouselEnabled ? (
+							<Fragment>
+								{!seedInCarousel && (
+									<div className="ss__bundled-recommendations__wrapper__seed-container">
+										<BundleSelector
+											seedText={seedText}
+											seed={true}
+											onCheck={() => onProductSelect(seed)}
+											checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
+											icon={seperatorIcon}
+											showCheckboxes={showCheckboxes}
+											theme={props.theme}
+											ref={seedRef}
+										>
+											<RecommendationResultTracker controller={controller} result={seed}>
+												{resultComponent ? (
+													cloneWithProps(resultComponent, {
+														result: seed,
+														seed: true,
+														selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
+														onProductSelect,
+													})
+												) : (
+													<Result {...subProps.result} controller={controller} result={seed} />
+												)}
+											</RecommendationResultTracker>
+										</BundleSelector>
+									</div>
+								)}
+								<div className="ss__bundled-recommendations__wrapper__carousel">
+									<Carousel
+										prevButton={prevButton}
+										nextButton={nextButton}
+										hideButtons={hideButtons}
+										loop={loop}
+										pagination={pagination}
+										breakpoints={modifiedBreakpoints}
+										watchSlidesProgress={true}
+										observer={true}
+										vertical={vertical}
+										onResize={() => setSeedwidth()}
+										{...subProps.carousel}
+										{...additionalProps}
+										{...displaySettings}
+										ref={carouselRef}
+									>
+										{resultsToRender.map((result, idx) => {
+											const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
 
-									if (idx == 0 && seedInCarousel) {
-										return (
-											<div className="ss__bundled-recommendations__wrapper__seed">
-												<BundleSelector
-													seedText={seedText}
-													icon={seperatorIcon}
-													onCheck={() => onProductSelect(result)}
-													quantityPickerText={quantityPickerText}
-													checked={selected}
-													onInputChange={(e) => onInputChange(result, e.target.value)}
-													quantity={showQuantityPicker ? result.quantity : undefined}
-													showCheckboxes={showCheckboxes}
-													theme={props.theme}
-												>
-													<RecommendationResultTracker controller={controller} result={result}>
-														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
-														) : (
-															<Result {...subProps.result} controller={controller} result={result} />
-														)}
-													</RecommendationResultTracker>
-												</BundleSelector>
-											</div>
-										);
-									} else {
-										return (
-											<BundleSelector
-												icon={seedSeparatorIconOnly ? false : seperatorIcon}
-												onCheck={() => onProductSelect(result)}
-												checked={selected}
-												onInputChange={(e) => onInputChange(result, e.target.value)}
-												quantity={showQuantityPicker ? result.quantity : undefined}
-												quantityPickerText={quantityPickerText}
-												showCheckboxes={showCheckboxes}
-												theme={props.theme}
-											>
-												<RecommendationResultTracker controller={controller} result={result}>
-													{resultComponent ? (
-														cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
-													) : (
-														<Result {...subProps.result} controller={controller} result={result} />
-													)}
-												</RecommendationResultTracker>
-											</BundleSelector>
-										);
-									}
-								})}
-							</Carousel>
-						</div>
-						{!stackedCTA && (
+											if (idx == 0 && seedInCarousel) {
+												return (
+													<BundleSelector
+														seedText={seedText}
+														seed={true}
+														icon={seperatorIcon}
+														onCheck={() => onProductSelect(result)}
+														checked={selected}
+														showCheckboxes={showCheckboxes}
+														theme={props.theme}
+													>
+														<RecommendationResultTracker controller={controller} result={result}>
+															{resultComponent ? (
+																cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+															) : (
+																<Result {...subProps.result} controller={controller} result={result} />
+															)}
+														</RecommendationResultTracker>
+													</BundleSelector>
+												);
+											} else if (idx == 0 && !seedInCarousel) {
+												return <></>;
+											} else {
+												return (
+													<BundleSelector
+														icon={seedSeparatorIconOnly ? false : seperatorIcon}
+														onCheck={() => onProductSelect(result)}
+														checked={selected}
+														showCheckboxes={showCheckboxes}
+														theme={props.theme}
+													>
+														<RecommendationResultTracker controller={controller} result={result}>
+															{resultComponent ? (
+																cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+															) : (
+																<Result {...subProps.result} controller={controller} result={result} />
+															)}
+														</RecommendationResultTracker>
+													</BundleSelector>
+												);
+											}
+										})}
+									</Carousel>
+								</div>
+							</Fragment>
+						) : (
+							resultsToRender.map((result, idx) => {
+								const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+
+								if (idx == 0 && seedInCarousel) {
+									return (
+										<BundleSelector
+											seedText={seedText}
+											seed={true}
+											icon={seperatorIcon}
+											onCheck={() => onProductSelect(result)}
+											checked={selected}
+											showCheckboxes={showCheckboxes}
+											theme={props.theme}
+										>
+											<RecommendationResultTracker controller={controller} result={result}>
+												{resultComponent ? (
+													cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+												) : (
+													<Result {...subProps.result} controller={controller} result={result} />
+												)}
+											</RecommendationResultTracker>
+										</BundleSelector>
+									);
+								} else {
+									return (
+										<BundleSelector
+											icon={seedSeparatorIconOnly ? false : seperatorIcon}
+											onCheck={() => onProductSelect(result)}
+											checked={selected}
+											showCheckboxes={showCheckboxes}
+											theme={props.theme}
+										>
+											<RecommendationResultTracker controller={controller} result={result}>
+												{resultComponent ? (
+													cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+												) : (
+													<Result {...subProps.result} controller={controller} result={result} />
+												)}
+											</RecommendationResultTracker>
+										</BundleSelector>
+									);
+								}
+							})
+						)}
+
+						{ctaInline && (
 							<BundledCTA
 								ctaSlot={ctaSlot}
-								selectedItems={selectedItems}
-								bundlePrice={bundlePrice}
-								bundleStrikePrice={bundleStrikePrice}
+								cartStore={cartStore}
 								onAddToCartClick={(e: any) => addToCart(e)}
 								addToCartText={addToCartButtonText}
 								icon={ctaIcon}
 							/>
 						)}
 					</div>
-					{stackedCTA && (
+					{!ctaInline && (
 						<BundledCTA
 							ctaSlot={ctaSlot}
-							selectedItems={selectedItems}
-							bundlePrice={bundlePrice}
-							bundleStrikePrice={bundleStrikePrice}
+							cartStore={cartStore}
 							onAddToCartClick={(e: any) => addToCart(e)}
 							addToCartText={addToCartButtonText}
 							icon={ctaIcon}
@@ -475,36 +540,42 @@ export const BundledRecommendation = observer((properties: BundledRecommendation
 	) : (
 		<Fragment></Fragment>
 	);
+	return <></>;
 });
 
-export interface BundledRecommendationProps extends ComponentProps {
-	results?: Product[];
-	controller: RecommendationController;
-	onAddToCart: (items: Product[]) => void;
-	addToCartButtonText?: string;
-	title?: JSX.Element | string;
-	breakpoints?: BreakpointsProps;
+interface CarouselProps {
+	enabled?: boolean;
+	peekaboo?: boolean | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9;
+	seedInCarousel?: boolean;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
 	pagination?: boolean;
+}
+
+export interface BundledRecommendationProps extends ComponentProps {
+	results?: Product[];
+	limit?: number;
+	controller: RecommendationController;
+	onAddToCart: (items: Product[]) => void;
+	addToCartButtonText?: string;
+	title?: JSX.Element | string;
+	breakpoints?: BreakpointsProps;
 	resultComponent?: JSX.Element;
 	preselectedCount?: number;
-	showQuantityPicker?: boolean;
-	quantityPickerText?: string;
 	showCheckboxes?: boolean;
-	seedInCarousel?: boolean;
 	seedText?: string;
 	seedSeparatorIconOnly?: boolean;
 	seperatorIcon?: string | Partial<IconProps> | boolean;
-	stackedCTA?: boolean;
+	ctaInline?: boolean;
 	ctaIcon?: string | Partial<IconProps> | boolean;
 	ctaSlot?: JSX.Element;
-	peekaboo?: boolean;
+	vertical?: boolean;
+	carousel?: CarouselProps;
 }
 
 interface BundleRecommendationSubProps {
 	result: Partial<ResultProps>;
-	carousel: Partial<CarouselProps>;
+	carousel: Partial<_CarouselProps>;
 }

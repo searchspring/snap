@@ -1,5 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
+import { isPlainObject } from 'is-plain-object';
 import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
 import type {
 	SearchResponseModelResult,
@@ -92,14 +93,6 @@ export class Product {
 		options: {},
 	};
 
-	defaultDisplay: VariantData = {
-		mappings: {
-			core: {},
-		},
-		attributes: {},
-		options: {},
-	};
-
 	public variants?: Variants;
 
 	constructor(services: StoreServices, result: SearchResponseModelResult, config?: StoreConfigs) {
@@ -107,13 +100,8 @@ export class Product {
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 
-		this.defaultDisplay = {
-			mappings: result.mappings!,
-			attributes: result.attributes!,
-			options: {},
-		};
-
-		this.display = this.defaultDisplay;
+		//initialize the display
+		this.setDisplay();
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -161,8 +149,21 @@ export class Product {
 		this.quantity = Number(quantity);
 	};
 
-	public setDisplay = (display: VariantData) => {
-		this.display = deepmerge(this.defaultDisplay, display);
+	public setDisplay = (display?: {
+		mappings: SearchResponseModelResultMappings;
+		attributes: Record<string, unknown>;
+		options: Record<string, string>;
+	}) => {
+		const defaultDisplay = {
+			mappings: this.mappings!,
+			attributes: this.attributes!,
+			options: {},
+		};
+
+		const newDisplay = deepmerge(defaultDisplay, display || defaultDisplay, { isMergeableObject: isPlainObject });
+		if (JSON.stringify(this.display) !== JSON.stringify(newDisplay)) {
+			this.display = newDisplay;
+		}
 	};
 }
 
@@ -174,15 +175,14 @@ class Variants {
 
 	public setDisplay: (variant: VariantData) => void;
 
-	public options: string[];
 	constructor(config: StoreConfigs, services: StoreServices, variantData: VariantData[], setDisplay: (variant: VariantData) => void) {
-		this.options = [];
+		const options: string[] = [];
 
 		// create variants objects
 		this.data = variantData.map((variant) => {
 			Object.keys(variant.options).forEach((variantOption) => {
-				if (!this.options.includes(variantOption)) {
-					this.options.push(variantOption);
+				if (!options.includes(variantOption)) {
+					options.push(variantOption);
 				}
 			});
 
@@ -193,7 +193,7 @@ class Variants {
 
 		this.setDisplay = setDisplay;
 
-		this.options.map((option) => {
+		options.map((option) => {
 			// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
 			const optionConfig = {
 				field: option,
@@ -203,7 +203,6 @@ class Variants {
 		});
 
 		// select first available
-		// TODO - improve this so that the selections start with the a selection - instead of having to select one after the fact
 		this.makeSelections();
 	}
 

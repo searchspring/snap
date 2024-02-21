@@ -14,12 +14,11 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const props: BundleSelectorProps = {
 		// default props
 		showCheckboxes: true,
-		quantityPickerText: 'Qty:',
 		// global theme
 		...properties,
 	};
 
-	const { children, checked, quantity, icon, seedText, quantityPickerText, showCheckboxes, onCheck, onInputChange } = props;
+	const { children, checked, icon, seedText, seed, showCheckboxes, onCheck } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -47,27 +46,13 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			className={classnames(
 				'ss__bundled-recommendations__wrapper__selector',
 				checked ? 'ss__bundled-recommendations__wrapper__selector--selected' : '',
-				seedText ? 'ss__bundled-recommendations__wrapper__selector--seed' : ''
+				seedText || seed ? 'ss__bundled-recommendations__wrapper__selector--seed' : ''
 			)}
 		>
 			<div className="ss__bundled-recommendations__wrapper__selector__result-wrapper">
 				{showCheckboxes && <Checkbox {...subProps.checkbox} />}
 				{seedText && <div className={'ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
-				{typeof quantity == 'number' && (
-					<div className="ss__bundled-recommendations__wrapper__selector__qty">
-						{quantityPickerText}
-						<input
-							className="ss__bundled-recommendations__wrapper__selector__qty__input"
-							onChange={onInputChange}
-							aria-label="Product Quantity"
-							type="number"
-							min="0"
-							placeholder="QTY #"
-							value={quantity}
-						/>
-					</div>
-				)}
 			</div>
 			<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
 		</div>
@@ -82,11 +67,9 @@ export interface BundleSelectorSubProps {
 export interface BundleSelectorProps extends ComponentProps {
 	children?: ComponentChildren;
 	checked?: boolean;
-	quantity?: number;
 	seedText?: string;
+	seed?: boolean;
 	showCheckboxes?: boolean;
-	quantityPickerText?: string;
 	onCheck?: () => void;
-	onInputChange?: (e: any) => void;
 	icon?: string | Partial<IconProps> | boolean;
 }

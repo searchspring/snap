@@ -11,6 +11,7 @@ import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import { iconPaths } from '../../Atoms/Icon';
+import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/BundledRecommendation`,
@@ -104,6 +105,29 @@ export default {
 				},
 			},
 		},
+		limit: {
+			description: 'limit the number of results rendered',
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
+		carousel: {
+			description: 'Carousel Settings object',
+			defaultValue: {
+				enabled: true,
+				loop: false,
+			},
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: 'Carousel Settings object' },
+			},
+			control: { type: 'object' },
+		},
 		preselectedCount: {
 			description: 'Number of results to have selected by default. (seed included)',
 			table: {
@@ -112,27 +136,6 @@ export default {
 				},
 			},
 			control: { type: 'number' },
-		},
-		showQuantityPicker: {
-			defaultValue: false,
-			description: 'Hide/show quantity pickers in results',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		quantityPickerText: {
-			description: 'Text to before the quantity picker input',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'Qty:' },
-			},
-			control: { type: 'text' },
 		},
 		showCheckboxes: {
 			defaultValue: true,
@@ -145,8 +148,9 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		seedInCarousel: {
-			description: 'Seed product included in carousel boolean',
+		vertical: {
+			defaultValue: false,
+			description: 'results to render vertically.',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -199,67 +203,6 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		peekaboo: {
-			description: 'boolean to enable the peekaboo carousel',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		loop: {
-			defaultValue: true,
-			description: 'Recommendation pagination loops',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
-		pagination: {
-			defaultValue: false,
-			description: 'Display pagination dots',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideButtons: {
-			defaultValue: false,
-			description: 'Hide prev/next buttons',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		prevButton: {
-			description: 'Previous button',
-			table: {
-				type: {
-					summary: 'string | JSX Element',
-				},
-			},
-			control: { type: 'text' },
-		},
-		nextButton: {
-			description: 'Next button',
-			table: {
-				type: {
-					summary: 'string | JSX Element',
-				},
-			},
-			control: { type: 'text' },
-		},
 		breakpoints: {
 			defaultValue: undefined,
 			description: 'Recommendation title',
@@ -275,10 +218,19 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
+const config: RecommendationControllerConfig = {
+	id: 'Recommendation',
+	tag: 'bundle',
+	globals: {
+		siteId: '8uyt2m',
+		products: ['C-AD-W1-1869P'],
+	},
+};
+
+const snapInstance = Snapify.recommendation(config);
 
 export const Default = (props: BundledRecommendationProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <BundledRecommendation {...props} controller={controller} />;
+	return <BundledRecommendation {...props} controller={controller} results={controller.store.results.reverse()} />;
 };
 
 Default.loaders = [

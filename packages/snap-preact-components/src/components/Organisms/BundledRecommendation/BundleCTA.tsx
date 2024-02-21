@@ -5,10 +5,10 @@ import { observer } from 'mobx-react-lite';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
 import { Price } from '../../Atoms/Price';
-import type { Product } from '@searchspring/snap-store-mobx';
 import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
+import type { CartStore } from '@searchspring/snap-store-mobx';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -19,13 +19,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		...properties,
 	};
 
-	const { ctaSlot, selectedItems, icon, bundlePrice, bundleStrikePrice, onAddToCartClick, addToCartText } = props;
-
-	let totalNumProdsInBundle = 0;
-
-	selectedItems.forEach((item) => {
-		totalNumProdsInBundle += item.quantity;
-	});
+	const { ctaSlot, icon, cartStore, onAddToCartClick, addToCartText } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -51,9 +45,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		<div className={`ss__bundled-recommendations__wrapper__cta`}>
 			{ctaSlot ? (
 				cloneWithProps(ctaSlot, {
-					selectedItems: selectedItems,
-					bundlePrice: bundlePrice,
-					bundleStrikePrice: bundleStrikePrice,
+					cartStore: cartStore,
 					onAddToCartClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => onAddToCartClick(e),
 				})
 			) : (
@@ -66,17 +58,17 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						) : (
 							<></>
 						)}
-						<span className="ss__bundled-recommendations__wrapper__cta__subtotal__title">{`Subtotal for ${totalNumProdsInBundle} items`}</span>
+						<span className="ss__bundled-recommendations__wrapper__cta__subtotal__title">{`Subtotal for ${cartStore.count} items`}</span>
 						<div className="ss__bundled-recommendations__wrapper__cta__subtotal__prices">
-							{bundleStrikePrice && bundleStrikePrice !== bundlePrice ? (
+							{cartStore.msrp && cartStore.msrp !== cartStore.price ? (
 								<label className="ss__bundled-recommendations__wrapper__cta__subtotal__strike">
-									Was <Price lineThrough={true} value={bundleStrikePrice} />
+									Was <Price lineThrough={true} value={cartStore.msrp} />
 								</label>
 							) : (
 								<></>
 							)}
 							<label className="ss__bundled-recommendations__wrapper__cta__subtotal__price">
-								<Price value={bundlePrice} />
+								<Price value={cartStore.price} />
 							</label>
 						</div>
 					</div>
@@ -96,10 +88,8 @@ export interface BundleSelectorSubProps {
 
 interface BundledCTAProps extends ComponentProps {
 	ctaSlot?: JSX.Element;
-	selectedItems: Product[];
+	cartStore: CartStore;
 	icon?: string | Partial<IconProps> | boolean;
-	bundlePrice: number;
-	bundleStrikePrice?: number;
 	onAddToCartClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	addToCartText?: string;
 }

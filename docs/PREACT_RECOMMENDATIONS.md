@@ -148,3 +148,56 @@ To sync the template(s) to multiple accounts, multiple siteIds must be defined i
 
 See [Getting Started > Github Setup](https://searchspring.github.io/snap/#/start-github)
 
+
+
+### Bundled Recommendations 
+
+Let's look at how to setup a bundled recommendation template. Although the instantiator config for a bundled recommendation is the same as any other recommendation type, there are some key changes that need to happen in the `.json` file, and of course in the component file. Both of these key changes will automatically be applied if setup using the Snapfu CLI, and `bundle` type is selected. 
+
+#### `.json` file parameters
+The `.json` file will look very similar to the other recommendation types with the key change being in the `type` value. This must now include the value `snap/recommendation/bundle`
+
+Example:
+```json
+{
+    "type": "snap/recommendation/bundle",
+    "name": "defaultrecommendations",
+    "label": "DefaultRecommendations",
+    "description": "DefaultRecommendations custom template",
+    "component": "DefaultRecommendations",
+    "orientation": "horizontal",
+    "parameters": [
+        {
+            "name": "title",
+            "label": "Title",
+            "description": "text used for the heading",
+            "defaultValue": "Recommended Products"
+        }
+    ]
+}
+```
+
+
+### Component file: 
+
+additionally the default component `.jsx` file included will look slightly different as it now uses the `BundledRecommendation` component imported from the snap component library. See [Components Preact > BundledRecommendation](https://searchspring.github.io/snap/#/components-preact) for more details.
+
+```jsx
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+
+import { BundledRecommendation } from '@searchspring/snap-preact-components';
+
+export const Bundle = observer((props) => {
+	const controller = props.controller;
+	const store = controller?.store;
+
+	if (!controller.store.loaded && !controller.store.loading) {
+		controller.search();
+	}
+
+	const parameters = store?.profile?.display?.templateParameters;
+
+	return store.results.length > 0 && <BundledRecommendation controller={controller} onAddToCart={(e)=> console.log("added to cart", e)}  title={parameters?.title} />;
+});
+```

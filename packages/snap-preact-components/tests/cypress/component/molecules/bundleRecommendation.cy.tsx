@@ -17,7 +17,11 @@ const globals = { siteId: '8uyt2m' };
 
 const recommendConfig = {
 	id: 'search',
-	tag: 'trending',
+	tag: 'bundle',
+	globals: {
+		siteId: '8uyt2m',
+		products: ['C-AD-W1-1869P'],
+	},
 };
 
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
@@ -56,8 +60,8 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__carousel__prev').should('exist');
 		cy.get('.ss__carousel__next').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__result').should('have.length', 20);
-		cy.get('.ss__bundled-recommendations__wrapper__seed').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__result').should('have.length', 10);
+		cy.get('.ss__bundled-recommendations__wrapper__selector--seed').should('exist');
 	});
 
 	it('renders with results', () => {
@@ -66,8 +70,8 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__carousel__prev').should('exist');
 		cy.get('.ss__carousel__next').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__result').should('have.length', 20);
-		cy.get('.ss__bundled-recommendations__wrapper__seed').should('exist');
+		cy.get('.ss__bundled-recommendations .ss__result').should('have.length', 10);
+		cy.get('.ss__bundled-recommendations__wrapper__selector--seed').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__result:first .ss__result__details__title a').should('have.text', results[0].mappings.core?.name);
 	});
 
@@ -122,6 +126,18 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations__title').should('exist').should('have.text', title);
 	});
 
+	it('can use vertical prop', () => {
+		mount(<BundledRecommendation controller={controller} vertical={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get('.ss__bundled-recommendations__wrapper--vertical').should('exist');
+
+		mount(<BundledRecommendation controller={controller} vertical={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__bundled-recommendations').should('exist');
+		cy.get('.ss__bundled-recommendations__wrapper--vertical').should('not.exist');
+	});
+
 	it('can use hideButtons prop', () => {
 		mount(<BundledRecommendation controller={controller} hideButtons={true} onAddToCart={cy.stub().as('onAddToCart')} />);
 
@@ -157,7 +173,7 @@ describe('BundledRecommendation Component', async () => {
 		mount(<BundledRecommendation controller={controller} resultComponent={<ResultSlot />} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations .findMe .ss__result').should('have.length', 20);
+		cy.get('.ss__bundled-recommendations .findMe .ss__result').should('have.length', 10);
 		cy.get('.ss__bundled-recommendations .findMe .ss__result .ss__result__details__title a').should('satisfy', ($el) => {
 			return Array.from($el).map((titleElem: any, idx) => {
 				return titleElem.innerHTML == controller.store.results[idx].mappings.core?.name;
@@ -169,9 +185,9 @@ describe('BundledRecommendation Component', async () => {
 		const CtaSlot = (props: any) => {
 			return (
 				<div className="findMe">
-					<div className="selectedItems">{props.selectedItems.length}</div>
-					<div className="bundlePrice">{props.bundlePrice}</div>
-					<div className="strikePrice">{props.bundleStrikePrice}</div>
+					<div className="selectedItems">{props.cartStore.items.length}</div>
+					<div className="bundlePrice">{props.cartStore.price}</div>
+					<div className="strikePrice">{props.cartStore.msrp}</div>
 
 					<div className="ctaButton" onClick={() => props.onAddToCartClick()}>
 						custom button here
@@ -185,8 +201,8 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .findMe').should('exist');
 
-		cy.get('.ss__bundled-recommendations .findMe .bundlePrice').should('exist').should('have.text', '241');
-		cy.get('.ss__bundled-recommendations .findMe .strikePrice').should('exist').should('have.text', '275');
+		cy.get('.ss__bundled-recommendations .findMe .bundlePrice').should('exist').should('have.text', '260');
+		cy.get('.ss__bundled-recommendations .findMe .strikePrice').should('exist').should('have.text', '325');
 		cy.get('.ss__bundled-recommendations .findMe .selectedItems').should('exist').should('have.text', '4');
 
 		cy.get('.ctaButton')
@@ -233,22 +249,28 @@ describe('BundledRecommendation Component', async () => {
 	});
 
 	it('can put the seed in the carousel', () => {
-		mount(<BundledRecommendation controller={controller} seedInCarousel={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+		const carouselProps = {
+			seedInCarousel: true,
+		};
+		mount(<BundledRecommendation controller={controller} carousel={carouselProps} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get(
-			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed'
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__selector--seed'
 		).should('exist');
 
-		mount(<BundledRecommendation controller={controller} seedInCarousel={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+		const carouselProps2 = {
+			seedInCarousel: false,
+		};
+		mount(<BundledRecommendation controller={controller} carousel={carouselProps2} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__seed').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed').should(
-			'not.exist'
-		);
+		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--seed').should('exist');
 		cy.get(
-			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__seed'
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__selector--seed'
+		).should('not.exist');
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper--seed-in-carousel .ss__bundled-recommendations__wrapper__carousel .ss__bundled-recommendations__wrapper__selector--seed'
 		).should('not.exist');
 	});
 
@@ -259,7 +281,7 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get(
-			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__seed .ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--seed .ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'
 		)
 			.should('exist')
 			.should('have.text', seedText);
@@ -271,9 +293,9 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 1);
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__seed .ss__bundled-recommendations__wrapper__selector__icon').should(
-			'exist'
-		);
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--seed .ss__bundled-recommendations__wrapper__selector__icon'
+		).should('exist');
 
 		// can set seed icon only with seed in carousel
 		mount(
@@ -282,15 +304,15 @@ describe('BundledRecommendation Component', async () => {
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 1);
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__seed .ss__bundled-recommendations__wrapper__selector__icon').should(
-			'exist'
-		);
+		cy.get(
+			'.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--seed .ss__bundled-recommendations__wrapper__selector__icon'
+		).should('exist');
 
 		//can set seed icon only false with seed not in carousel
 		mount(<BundledRecommendation controller={controller} seedSeparatorIconOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 20);
+		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 10);
 
 		//can set seed icon only false with seed in carousel
 		mount(
@@ -298,7 +320,7 @@ describe('BundledRecommendation Component', async () => {
 		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 20);
+		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 10);
 	});
 
 	it('can set custom seperator icons', () => {
@@ -307,44 +329,16 @@ describe('BundledRecommendation Component', async () => {
 		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations__wrapper__selector__icon.ss__icon--cog').should('have.length', 20);
+		cy.get('.ss__bundled-recommendations__wrapper__selector__icon.ss__icon--cog').should('have.length', 10);
 	});
 
-	it('can use set showQuantityPicker and adjust quantity', () => {
-		mount(<BundledRecommendation controller={controller} showQuantityPicker={true} onAddToCart={cy.stub().as('onAddToCart')} />);
-
-		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__qty')
-			.should('exist')
-			.first()
-			.type('3')
-			.then(() => {
-				expect(controller.store.results[0].quantity).to.equal(13);
-				cy.get('.ss__bundled-recommendations__wrapper__cta__subtotal__title').should('have.text', 'Subtotal for 16 items');
-			});
-	});
-
-	it('can use set quantityPickerText', () => {
-		const text = 'some text';
-		mount(
-			<BundledRecommendation controller={controller} showQuantityPicker={true} quantityPickerText={text} onAddToCart={cy.stub().as('onAddToCart')} />
-		);
-
-		cy.get('.ss__bundled-recommendations').should('exist');
-		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__qty').should('satisfy', ($el) => {
-			return Array.from($el).map((elem: any) => {
-				return elem.innerHTML == text;
-			});
-		});
-	});
-
-	it('can set stackedCTA prop', () => {
-		mount(<BundledRecommendation controller={controller} stackedCTA={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+	it('can set ctaInline prop', () => {
+		mount(<BundledRecommendation controller={controller} ctaInline={true} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta').should('exist');
 
-		mount(<BundledRecommendation controller={controller} stackedCTA={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(<BundledRecommendation controller={controller} ctaInline={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper .ss__bundled-recommendations__wrapper__cta').should('not.exist');
@@ -378,12 +372,18 @@ describe('BundledRecommendation Component', async () => {
 	});
 
 	it('can set peekaboo prop', () => {
-		mount(<BundledRecommendation controller={controller} peekaboo={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+		const carouselProps = {
+			peekaboo: true,
+		};
+		mount(<BundledRecommendation controller={controller} carousel={carouselProps} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.swiper-slide-visible').should('have.length', 4);
 
-		mount(<BundledRecommendation controller={controller} peekaboo={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+		const carouselProps2 = {
+			peekaboo: false,
+		};
+		mount(<BundledRecommendation controller={controller} carousel={carouselProps2} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.swiper-slide-visible').should('have.length', 3);
@@ -512,12 +512,12 @@ describe('BundledRecommendation Component', async () => {
 		);
 
 		cy.get('.theme-detail-slot').should('have.length', 0);
-		cy.get('.breakpoint-detail-slot').should('have.length', 20);
+		cy.get('.breakpoint-detail-slot').should('have.length', 10);
 
 		// Change the viewport to 500px.
 		cy.viewport(500, 750);
 
-		cy.get('.theme-detail-slot').should('have.length', 20);
+		cy.get('.theme-detail-slot').should('have.length', 10);
 		cy.get('.breakpoint-detail-slot').should('have.length', 0);
 
 		// reset the viewport to 1200px.
