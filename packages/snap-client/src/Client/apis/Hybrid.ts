@@ -149,7 +149,7 @@ export class HybridAPI extends API {
 				},
 				tags: {
 					'on-sale': {
-						location: 'left-middle',
+						location: 'left-middle-upper',
 						component: 'BadgePill',
 						parameters: {
 							color: '#0000FF',

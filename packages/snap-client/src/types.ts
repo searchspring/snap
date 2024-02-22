@@ -1,5 +1,11 @@
 import { AppMode } from '@searchspring/snap-toolbox';
-import type { MetaRequestModel, SearchResponseModelResult, SearchRequestModel, AutocompleteRequestModel } from '@searchspring/snapi-types';
+import type {
+	MetaRequestModel,
+	SearchResponseModelResult,
+	SearchRequestModel,
+	AutocompleteRequestModel,
+	MetaResponseModel,
+} from '@searchspring/snapi-types';
 
 export type HTTPHeaders = { [key: string]: string };
 
@@ -192,4 +198,4 @@ type RecommendationRequestValueFilterModel = {
 	value: string | number;
 };
 
-export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
+export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] } & { meta: MetaResponseModel };

@@ -11,7 +11,7 @@ import { UrlManager } from '@searchspring/snap-url-manager';
 export class FinderStore extends AbstractStore {
 	public services: StoreServices;
 	public config!: FinderStoreConfig;
-	public meta: MetaResponseModel = {};
+	public meta!: MetaResponseModel;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
@@ -94,10 +94,10 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	public update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
+	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = data.meta;
+		this.meta = data.meta || {};
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.selections = new FinderSelectionStore(this.config, this.services, {
 			state: this.state,

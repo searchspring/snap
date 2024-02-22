@@ -9,6 +9,10 @@ export interface ComponentProps extends RenderableProps<any> {
 	theme?: Theme;
 }
 
+export type ComponentMap = {
+	[key: string]: (args?: any) => JSX.Element;
+};
+
 export enum Layout {
 	GRID = 'grid',
 	LIST = 'list',

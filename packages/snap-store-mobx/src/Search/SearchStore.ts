@@ -1,7 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
-import type { SearchStoreConfig, StoreServices } from '../types';
+import type { MetaBadges, SearchStoreConfig, StoreServices } from '../types';
 import {
 	SearchMerchandisingStore,
 	SearchFacetStore,
@@ -11,6 +11,7 @@ import {
 	SearchSortingStore,
 	SearchQueryStore,
 	SearchHistoryStore,
+	SearchBadgeStore,
 } from './Stores';
 import type { HistoryStoreConfig } from './Stores/SearchHistoryStore';
 import { AbstractStore } from '../Abstract/AbstractStore';
@@ -28,6 +29,7 @@ export class SearchStore extends AbstractStore {
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
 	public history: SearchHistoryStore;
+	public badges!: SearchBadgeStore;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -101,5 +103,7 @@ export class SearchStore extends AbstractStore {
 		this.results = new SearchResultStore(this.config, this.services, this.meta, data?.results || [], data.pagination, data.merchandising);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
+		// TODO: remove MetaBadges typing once MetaResponseModel is updated
+		this.badges = new SearchBadgeStore(this.meta as MetaResponseModel & { badges: MetaBadges });
 	}
 }

@@ -6,3 +6,4 @@ export { SearchResultStore, Product, Banner } from './SearchResultStore';
 export { SearchSortingStore } from './SearchSortingStore';
 export { SearchQueryStore } from './SearchQueryStore';
 export { SearchHistoryStore } from './SearchHistoryStore';
+export { SearchBadgeStore } from './SearchBadgeStore';

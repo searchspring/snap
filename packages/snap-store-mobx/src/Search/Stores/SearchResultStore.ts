@@ -1,6 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 
-import type { SearchStoreConfig, StoreServices, StoreConfigs } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, ResultBadge, MetaBadges } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -55,7 +55,7 @@ export class Banner {
 	public custom = {};
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
-	public badges: any;
+	public badges: ResultBadge[] = [];
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
@@ -70,39 +70,6 @@ export class Banner {
 	}
 }
 
-export type ResultBadge = {
-	tag: string;
-	label: string;
-};
-
-export type MetaBadges = {
-	locations: {
-		overlay: {
-			[position: string]: {
-				name: string;
-				label: string;
-				description: string;
-			}[];
-		};
-		callouts: {
-			name: string;
-			label: string;
-			description: string;
-		}[];
-	};
-	tags: {
-		[tag: string]: {
-			component: string;
-			location: string;
-			parameters: {
-				color: string;
-				colorText: string;
-				url: string;
-			};
-		};
-	};
-};
-
 export class Product {
 	public type = 'product';
 	public id: string;
@@ -112,7 +79,7 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
-	public badges: any;
+	public badges: ResultBadge[] = [];
 
 	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel) {
 		this.id = result.id!;
