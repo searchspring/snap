@@ -45,16 +45,7 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 
 	return badge ? (
 		<CacheProvider>
-			<div
-				{...styling}
-				className={classnames(
-					'ss__badge-pill',
-					`ss__badge-pill--${badge.component}`,
-					`ss__badge-pill--${badge.location}`,
-					`ss__badge-pill--${badge.tag}`,
-					className
-				)}
-			>
+			<div {...styling} className={classnames('ss__badge-pill', className)}>
 				{badge.label}
 			</div>
 		</CacheProvider>

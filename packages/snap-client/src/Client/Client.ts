@@ -189,7 +189,7 @@ export class Client {
 		};
 
 		const [meta, profile, recommendations] = await Promise.all([
-			this.meta({ siteId: params.siteId || '' }),
+			this.meta(params.siteId ? { siteId: params.siteId } : undefined),
 			this.requesters.recommend.getProfile(profileParams),
 			this.requesters.recommend.batchRecommendations(recommendParams),
 		]);

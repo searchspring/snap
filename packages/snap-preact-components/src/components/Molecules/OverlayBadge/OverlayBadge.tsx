@@ -74,7 +74,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const overlayBadges = controller.store.badges.getOverlayBadges(result);
+	const overlayBadges = controller?.store?.badges.getOverlayBadges(result);
 
 	if (overlayBadges?.length) {
 		return (
@@ -87,7 +87,19 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 							controller?.log?.warn(`Badge component not found for ${badge?.component}`);
 							return;
 						}
-						return <BadgeComponent css={[CSS.BadgePositioning(badge)]} badge={badge} />;
+						return (
+							<BadgeComponent
+								css={[CSS.BadgePositioning(badge)]}
+								badge={badge}
+								className={classnames(
+									`ss__overlay-badge--${badge.tag}`,
+									`ss__overlay-badge--${badge.location}`,
+									`ss__overlay-badge__${badge.component}`,
+									`ss__overlay-badge__${badge.component}--${badge.location}`,
+									`ss__overlay-badge__${badge.component}--${badge.tag}`
+								)}
+							/>
+						);
 					})}
 				</div>
 			</CacheProvider>

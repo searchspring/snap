@@ -38,18 +38,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 
 	return badge?.parameters?.url ? (
 		<CacheProvider>
-			<img
-				{...styling}
-				className={classnames(
-					'ss__badge-image',
-					`ss__badge-image--${badge.component}`,
-					`ss__badge-image--${badge.location}`,
-					`ss__badge-image--${badge.tag}`,
-					className
-				)}
-				alt={badge.label}
-				src={badge.parameters.url}
-			/>
+			<img {...styling} className={classnames('ss__badge-image', className)} alt={badge.label} src={badge.parameters.url} />
 		</CacheProvider>
 	) : (
 		<Fragment />

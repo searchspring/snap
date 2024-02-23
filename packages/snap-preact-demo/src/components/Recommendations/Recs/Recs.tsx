@@ -36,7 +36,7 @@ export class Recs extends Component<RecsProps> {
 
 				<Recommendation controller={controller} title={'Recommended For You'} speed={0}>
 					{store.results.map((result) => (
-						<Result result={result}></Result>
+						<Result controller={controller} result={result}></Result>
 					))}
 				</Recommendation>
 			</div>
