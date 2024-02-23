@@ -9,7 +9,8 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
-
+import json from '../../fixtures/recommend-results-default.json';
+import profile from '../../fixtures/profile-default.json';
 import { Recommendation } from '../../../../src/components/Organisms/Recommendation';
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';
@@ -49,6 +50,9 @@ const controller = new RecommendationController(recommendConfig, {
 
 describe('Recommendation Component', async () => {
 	before(async () => {
+		cy.intercept('*recommend*', json);
+		cy.intercept('*profile*', profile);
+
 		await controller.search();
 	});
 
