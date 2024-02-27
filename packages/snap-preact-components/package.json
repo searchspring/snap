@@ -36,7 +36,7 @@
 		"dequal": "2.0.3",
 		"mobx-react-lite": "3.4.0",
 		"react-ranger": "2.1.0",
-		"swiper": "9.0.5"
+		"swiper": "11.0.7"
 	},
 	"peerDependencies": {
 		"preact": "10.9.0"
@@ -72,7 +72,6 @@
 		"@testing-library/user-event": "13.5.0",
 		"@types/react": "16.14.28",
 		"@types/react-ranger": "2.0.1",
-		"babel-loader": "^9.1.2",
 		"mobx-react": "7.5.0",
 		"preact": "10.9.0",
 		"react": "16.14.0",
