@@ -279,6 +279,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			elem.classList.add('swiper-container-horizontal');
 		});
 
+		const nativeArrows = document.querySelectorAll('.ss__carousel .swiper-button-prev, .ss__carousel .swiper-button-next');
+		nativeArrows.forEach((elem) => {
+			elem.remove();
+		});
+
 		//add usable class to last visible slide.
 		attachClasstoLastVisibleSlide();
 	}, []);
@@ -346,6 +351,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					direction={vertical ? 'vertical' : 'horizontal'}
 					loop={loop}
 					threshold={7}
+					loopAddBlankSlides={false}
 					modules={swiperModules}
 					navigation
 					{...additionalProps}
