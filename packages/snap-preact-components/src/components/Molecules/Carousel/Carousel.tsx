@@ -7,9 +7,10 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper';
+import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import type { Swiper as SwiperTypes, SwiperOptions } from 'swiper';
+import type { Swiper as SwiperTypes } from 'swiper';
+import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
@@ -246,7 +247,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		},
 	};
 
-	const swiperModulesUnfiltered = modules ? [Navigation, Pagination, A11y].concat(modules!) : [Navigation, Pagination, A11y];
+	const swiperModulesUnfiltered = Array.isArray(modules) ? [Navigation, Pagination, A11y].concat(modules) : [Navigation, Pagination, A11y];
 	//remove any duplicates, in case user passes in Navigation or Pagination
 	const swiperModules = swiperModulesUnfiltered.filter((module, pos) => swiperModulesUnfiltered.indexOf(module) === pos);
 
@@ -276,6 +277,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		const horizontalSwipers = document.querySelectorAll('.swiper-horizontal');
 		horizontalSwipers.forEach((elem: any) => {
 			elem.classList.add('swiper-container-horizontal');
+		});
+
+		const nativeArrows = document.querySelectorAll('.ss__carousel .swiper-button-prev, .ss__carousel .swiper-button-next');
+		nativeArrows.forEach((elem) => {
+			elem.remove();
 		});
 
 		//add usable class to last visible slide.
@@ -345,6 +351,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					direction={vertical ? 'vertical' : 'horizontal'}
 					loop={loop}
 					threshold={7}
+					loopAddBlankSlides={false}
 					modules={swiperModules}
 					navigation
 					{...additionalProps}
@@ -391,7 +398,7 @@ export interface CarouselProps extends ComponentProps {
 	hideButtons?: boolean;
 	loop?: boolean;
 	vertical?: boolean;
-	pagination?: boolean | SwiperOptions['pagination'];
+	pagination?: boolean | PaginationOptions;
 	autoAdjustSlides?: boolean;
 	onClick?: (swiper: SwiperTypes, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;

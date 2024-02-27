@@ -17,7 +17,7 @@ export function getFlags(userAgent = ''): FeatureFlags {
 
 	return {
 		cors: function () {
-			return !isIE() || isIE() >= 10;
+			return !isIE() || Number(isIE()) >= 10;
 		},
 		cookies: function () {
 			return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && window.navigator.doNotTrack === '1');

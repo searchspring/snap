@@ -193,13 +193,13 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
-		stackedCTA: {
+		ctaInline: {
 			description: 'boolean to enable the stacked add to cart button display',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
