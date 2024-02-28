@@ -54,7 +54,8 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__callout-badge', className)}>
 					<BadgeComponent
-						badge={calloutBadge}
+						{...calloutBadge}
+						{...calloutBadge.parameters}
 						className={classnames(
 							`ss__callout-badge--${calloutBadge.tag}`,
 							`ss__callout-badge--${calloutBadge.location}`,

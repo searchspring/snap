@@ -7,11 +7,13 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import type { ResultBadge, OverlayResultBadge } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	BadgeImage: ({}: BadgeImageProps) => {
-		return css({});
+	BadgeImage: (props: BadgeImageProps) => {
+		return css({
+			maxHeight: props.overflow ? '100%' : undefined,
+			maxWidth: props.overflow ? '100%' : 'unset',
+		});
 	},
 };
 
@@ -20,13 +22,14 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 
 	const props: BadgeImageProps = {
 		// default props
+		overflow: false,
 		// global theme
 		...globalTheme?.components?.badgeImage,
 		// props
 		...properties,
 		...properties.theme?.components?.badgeImage,
 	};
-	const { badge, disableStyles, className, style } = props;
+	const { label, url, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -36,9 +39,9 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 		styling.css = [style];
 	}
 
-	return badge?.parameters?.url ? (
+	return url ? (
 		<CacheProvider>
-			<img {...styling} className={classnames('ss__badge-image', className)} alt={badge.label} src={badge.parameters.url} />
+			<img {...styling} className={classnames('ss__badge-image', className)} alt={label} src={url} />
 		</CacheProvider>
 	) : (
 		<Fragment />
@@ -46,5 +49,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 });
 
 export interface BadgeImageProps extends ComponentProps {
-	badge: ResultBadge | OverlayResultBadge;
+	url: string;
+	label?: string;
+	overflow?: boolean;
 }

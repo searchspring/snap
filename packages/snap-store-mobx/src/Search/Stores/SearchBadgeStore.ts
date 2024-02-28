@@ -1,6 +1,6 @@
 import { MetaResponseModel } from '@searchspring/snapi-types';
 import { Product } from './SearchResultStore';
-import type { MetaBadges, ResultBadge, OverlayResultBadge } from '../../types';
+import type { MetaBadges, ResultBadge } from '../../types';
 
 export class SearchBadgeStore {
 	private meta: MetaResponseModel & { badges: MetaBadges };
@@ -22,7 +22,7 @@ export class SearchBadgeStore {
 		});
 	}
 
-	getOverlayBadges(result: Product): OverlayResultBadge[] | undefined {
+	getOverlayBadges(result: Product): ResultBadge[] | undefined {
 		const resultBadges = result.badges;
 		const overlay = this.meta.badges?.locations?.overlay;
 
@@ -30,22 +30,12 @@ export class SearchBadgeStore {
 			return;
 		}
 
-		return resultBadges
-			?.map((badge) => {
-				// add overlayLocation and overlayLocationOptions properties to be used in styling
-				const isRightOverlay = overlay.right.some((rightOverlays) => rightOverlays.name === badge.location);
-				const isLeftOverlay = overlay.left.some((leftOverlays) => leftOverlays.name === badge.location);
-				const overlayLocation = isRightOverlay ? 'right' : isLeftOverlay ? 'left' : '';
+		return resultBadges?.filter((badge) => {
+			// filter out badges that are not overlay badges
+			const isRightOverlay = overlay.right.some((rightOverlays) => rightOverlays.name === badge.location);
+			const isLeftOverlay = overlay.left.some((leftOverlays) => leftOverlays.name === badge.location);
 
-				return {
-					...badge,
-					overlayLocation,
-					overlayLocationOptions: overlay[overlayLocation as keyof typeof overlay],
-				};
-			})
-			.filter((badge) => {
-				// filter out badges that are not overlay badges
-				return badge.overlayLocation;
-			});
+			return isLeftOverlay || isRightOverlay;
+		});
 	}
 }

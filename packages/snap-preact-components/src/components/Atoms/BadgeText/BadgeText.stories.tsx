@@ -2,13 +2,13 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BadgeImageProps, BadgeImage } from './BadgeImage';
+import { BadgeTextProps, BadgeText } from './BadgeText';
 import { componentArgs } from '../../../utilities';
-import Readme from '../BadgeImage/readme.md';
+import Readme from '../BadgeText/readme.md';
 
 export default {
-	title: `Atoms/BadgeImage`,
-	component: BadgeImage,
+	title: `Atoms/BadgeText`,
+	component: BadgeText,
 	parameters: {
 		docs: {
 			page: () => (
@@ -33,8 +33,8 @@ export default {
 		),
 	],
 	argTypes: {
-		url: {
-			description: 'Badge image url',
+		label: {
+			description: 'Badge text contents',
 			type: { required: true },
 			table: {
 				type: {
@@ -44,18 +44,28 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		label: {
-			description: 'Badge image alt text',
+		color: {
+			description: 'Badge background color',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '' },
+				defaultValue: { summary: 'rgba(255, 255, 255, 0.5)' },
 			},
-			control: { type: 'text' },
+			control: { type: 'color' },
+		},
+		colorText: {
+			description: 'Badge text color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '#000000' },
+			},
+			control: { type: 'color' },
 		},
 		overflow: {
-			description: 'Allow badge image to overflow grid cell',
+			description: 'Allow badge sizing to overflow grid cell',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -68,9 +78,10 @@ export default {
 	},
 };
 
-export const Default = (args: BadgeImageProps) => <BadgeImage {...args} />;
+export const Default = (args: BadgeTextProps) => <BadgeText {...args} />;
 Default.args = {
-	url: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png',
-	label: 'placeholder badge image',
-	constrain: true,
+	label: '30% Off',
+	color: '#0000FF',
+	colorText: '#FFFFFF',
+	overflow: true,
 };

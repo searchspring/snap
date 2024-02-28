@@ -133,5 +133,97 @@
   },
   "pagination": {
     "defaultPageSize": 24
+  },
+  "badges": {
+    "locations": {
+      "overlay": {
+        "left": [
+          {
+            "name": "left-upper",
+            "label": "Left Upper",
+            "description": "description for left upper"
+          },
+          {
+            "name": "left-middle-upper",
+            "label": "Left Middle Upper",
+            "description": "description for left middle upper"
+          },
+          {
+            "name": "left-middle",
+            "label": "Left Middle",
+            "description": "description for left middle"
+          },
+          {
+            "name": "left-middle-lower",
+            "label": "Left Middle Lower",
+            "description": "description for left middle lower"
+          },
+          {
+            "name": "left-lower",
+            "label": "Left Lower",
+            "description": "description for left lower"
+          }
+        ],
+        "right": [
+          {
+            "name": "right-upper",
+            "label": "Right Upper",
+            "description": "description for right upper"
+          },
+          {
+            "name": "right-middle-upper",
+            "label": "Right Middle Upper",
+            "description": "description for right middle upper"
+          },
+          {
+            "name": "right-middle",
+            "label": "Right Middle",
+            "description": "description for right middle"
+          },
+          {
+            "name": "right-middle-lower",
+            "label": "Right Middle Lower",
+            "description": "description for right middle lower"
+          },
+          {
+            "name": "right-lower",
+            "label": "Right Lower",
+            "description": "description for right lower"
+          }
+        ]
+      },
+      "callouts": [
+        {
+          "name": "callout",
+          "label": "Callout",
+          "description": "description for callout"
+        }
+      ]
+    },
+    "tags": {
+      "on-sale": {
+        "location": "left-middle",
+        "component": "BadgeText",
+        "parameters": {
+          "color": "#0000FF",
+          "colorText": "#FFFFFF"
+        }
+      },
+      "free-shipping": {
+        "location": "callout",
+        "component": "BadgeText",
+        "parameters": {
+          "color": "#FF0000",
+          "colorText": "#FFFFFF"
+        }
+      },
+      "christmas": {
+        "location": "right-lower",
+        "component": "BadgeImage",
+        "parameters": {
+          "url": "//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png"
+        }
+      }
+    }
   }
 }

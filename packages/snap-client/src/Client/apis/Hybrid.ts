@@ -14,25 +14,6 @@ import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguratio
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
 
-const badges = [
-	{
-		tag: 'on-sale',
-		label: '30% Off',
-	},
-	{
-		tag: 'free-shipping',
-		label: 'Free Shipping',
-	},
-	{
-		tag: 'christmas',
-		label: 'On Sale for Christmas',
-	},
-	{
-		tag: 'specialoffer',
-		label: 'Special Offer',
-	},
-];
-
 export class HybridAPI extends API {
 	private requesters: {
 		legacy: LegacyAPI;
@@ -75,123 +56,7 @@ export class HybridAPI extends API {
 
 	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const legacyRequestParameters = requestParameters;
-		const mockBadgesMeta = {
-			badges: {
-				locations: {
-					overlay: {
-						left: [
-							{
-								name: 'left-upper',
-								label: 'Left',
-								description: 'description for left',
-							},
-							{
-								name: 'left-middle-upper',
-								label: 'Left',
-								description: 'description for left',
-							},
-							{
-								name: 'left-middle',
-								label: 'Left',
-								description: 'description for left',
-							},
-							{
-								name: 'left-middle-lower',
-								label: 'Left',
-								description: 'description for left',
-							},
-							{
-								name: 'left-lower',
-								label: 'Left',
-								description: 'description for left',
-							},
-						],
-						right: [
-							{
-								name: 'right-upper',
-								label: 'Right',
-								description: 'description for right',
-							},
-							{
-								name: 'right-middle-upper',
-								label: 'Right',
-								description: 'description for right',
-							},
-							{
-								name: 'right-middle',
-								label: 'Right',
-								description: 'description for right',
-							},
-							{
-								name: 'right-middle-lower',
-								label: 'Right',
-								description: 'description for right',
-							},
-							{
-								name: 'right-lower',
-								label: 'Right',
-								description: 'description for right',
-							},
-						],
-					},
-					callouts: [
-						{
-							name: 'callout',
-							label: 'Callout',
-							description: 'description for callout',
-						},
-						{
-							name: 'callout2',
-							label: 'Callout2',
-							description: 'description for callout2',
-						},
-					],
-				},
-				tags: {
-					'on-sale': {
-						location: 'left-middle-upper',
-						component: 'BadgePill',
-						parameters: {
-							color: '#0000FF',
-							colorText: '#FFFFFF',
-						},
-					},
-					'free-shipping': {
-						location: 'callout',
-						component: 'BadgePill',
-						parameters: {
-							color: '#FF0000',
-							colorText: '#FFFFFF',
-						},
-					},
-					specialoffer: {
-						location: 'callout2',
-						component: 'BadgePill',
-						parameters: {
-							color: '#00ff00',
-							colorText: '#000000',
-						},
-					},
-					// "new": {
-					// 	"location": "right",
-					// 	"component": "BadgeStar",
-					// 	"parameters": {
-					// 		"color": "#faff00",
-					// 		"colorText": "#000000",
-					// 		"points": 5
-					// 	}
-					// },
-					christmas: {
-						location: 'right-lower',
-						component: 'BadgeImage',
-						parameters: {
-							url: 'https://placehold.co/100x100',
-						},
-					},
-				},
-			},
-		};
-		return { ...(await this.requesters.legacy.getMeta(legacyRequestParameters)), ...mockBadgesMeta };
+		return this.requesters.legacy.getMeta(legacyRequestParameters);
 	}
 
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
@@ -199,28 +64,7 @@ export class HybridAPI extends API {
 
 		const legacyData = await this.requesters.legacy.getSearch(legacyRequestParameters);
 
-		const response = transformSearchResponse(legacyData, requestParameters);
-
-		response.results = response.results.map((result: any, index: number) => {
-			// if(badges[index]) {
-			// 	return {
-			// 		...result,
-			// 		badges: [
-			// 			badges[index],
-			// 		],
-			// 	}
-			// }
-			// return result;
-
-			return {
-				...result,
-				badges: [
-					badges[index % badges.length],
-					// ...badges
-				],
-			};
-		});
-		return response;
+		return transformSearchResponse(legacyData, requestParameters);
 	}
 
 	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
@@ -267,25 +111,6 @@ export class HybridAPI extends API {
 
 		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);
 		const searchResults = transformSearchResponse(legacyResults, requestParameters);
-		searchResults.results = searchResults.results.map((result: any, index: number) => {
-			// if(badges[index]) {
-			// 	return {
-			// 		...result,
-			// 		badges: [
-			// 			badges[index],
-			// 		],
-			// 	}
-			// }
-			// return result;
-
-			return {
-				...result,
-				badges: [
-					badges[index % badges.length],
-					// ...badges
-				],
-			};
-		});
 
 		return {
 			...searchResults,

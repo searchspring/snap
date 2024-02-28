@@ -83,7 +83,13 @@
         "popularity": "4461",
         "product_type_unigram": "play",
         "id": "c1cf679d32fb4d03bfbb0bd06c347fcd"
-      }
+      },
+      "badges": [
+        {
+          "tag": "on-sale",
+          "label": "30% Off"
+        }
+      ]
     },
     {
       "id": "171591",
@@ -256,7 +262,13 @@
         "popularity": "4432",
         "product_type_unigram": "boots",
         "id": "3719511a03faf9347152de3d0b6a6036"
-      }
+      },
+      "badges": [
+        {
+          "tag": "free-shipping",
+          "label": "Free Shipping"
+        }
+      ]
     },
     {
       "id": "168580",

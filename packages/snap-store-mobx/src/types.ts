@@ -146,11 +146,6 @@ export type ResultBadge = BadgeTag & {
 	label: string;
 };
 
-export type OverlayResultBadge = ResultBadge & {
-	overlayLocation: string;
-	overlayLocationOptions: BadgeLocation[];
-};
-
 export type MetaBadges = {
 	locations: {
 		overlay: {

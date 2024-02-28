@@ -1,2 +1,0 @@
-# BadgePill // TODO
-
