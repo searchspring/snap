@@ -17,19 +17,19 @@ const CTASlot = observer((props) => {
 			<div className="cta__pricing">
 				<p className="bundle-price-title">Total Bundle Price</p>
 
-				{cartStore.strikePrice > cartStore.price && (
+				{cartStore.msrp > cartStore.price && (
 					<span class="strike">
 						<s>
-							<Price value={cartStore.strikePrice} />
+							<Price value={cartStore.msrp} />
 						</s>
 					</span>
 				)}
-				<span class={`price ${cartStore.strikePrice > cartStore.price ? 'sale' : ''}`}>
+				<span class={`price ${cartStore.msrp > cartStore.price ? 'sale' : ''}`}>
 					<Price value={cartStore.price} />
 				</span>
 			</div>
 			<div>
-				<Button disabled={cartStore.items.length == 0} onClick={() => props.onAddToCartClick()}>
+				<Button disabled={cartStore.count == 0} onClick={() => props.onAddToCartClick()}>
 					Add All {cartStore.count} To Cart
 				</Button>
 			</div>
@@ -38,7 +38,7 @@ const CTASlot = observer((props) => {
 });
 
 const Result = observer((props) => {
-	const { result, selected, seed, onProductSelect, layout } = props;
+	const { result, selected, onProductSelect, layout } = props;
 
 	const quantity = result.quantity;
 
@@ -77,15 +77,6 @@ const Result = observer((props) => {
 	};
 
 	const isMobile = useMediaQuery('(max-width: 991px)');
-	if (isMobile && seed) {
-		result.setDisplay({
-			mappings: {
-				core: {
-					name: '<label>This Item:</label>' + result.display.mappings.core.name,
-				},
-			},
-		});
-	}
 
 	const checkboxProps = {
 		className: '',
