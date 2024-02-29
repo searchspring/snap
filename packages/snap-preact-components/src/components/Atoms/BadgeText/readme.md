@@ -5,7 +5,7 @@ Renders a text badge. It is expected to be used with `CalloutBadge` and `Overlay
 ## Usage
 
 ### label
-The requires `label` prop specifies the badge text contents.
+The required `label` prop specifies the badge text contents.
 
 ```jsx
 <BadgeText label={'30% Off'} />

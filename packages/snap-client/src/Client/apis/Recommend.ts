@@ -178,34 +178,6 @@ export class RecommendAPI extends API {
 			path + JSON.stringify(queryParameters)
 		);
 
-		const badges = [
-			{
-				tag: 'on-sale',
-				label: '30% Off',
-			},
-			{
-				tag: 'free-shipping',
-				label: 'Free Shipping',
-			},
-			{
-				tag: 'christmas',
-				label: 'On Sale for Christmas',
-			},
-			{
-				tag: 'specialoffer',
-				label: 'Special Offer',
-			},
-		];
-		// @ts-ignore - mock badges
-		response[0].results = response[0].results.map((result: any, index: number) => {
-			return {
-				...result,
-				badges: [
-					badges[index % badges.length],
-					// ...badges
-				],
-			};
-		});
 		return response as unknown as RecommendResponseModel;
 	}
 
