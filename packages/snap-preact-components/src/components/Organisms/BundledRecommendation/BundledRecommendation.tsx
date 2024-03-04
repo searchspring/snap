@@ -3,7 +3,7 @@ import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRef } from 'preact/hooks';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';

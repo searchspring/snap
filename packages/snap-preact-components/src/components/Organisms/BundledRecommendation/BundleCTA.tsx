@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { jsx } from '@emotion/react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
 import { Price } from '../../Atoms/Price';

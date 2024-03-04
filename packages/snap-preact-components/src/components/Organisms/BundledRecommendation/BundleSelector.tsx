@@ -2,7 +2,7 @@
 import { h, ComponentChildren } from 'preact';
 import { jsx } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps } from '../../Atoms/Icon';

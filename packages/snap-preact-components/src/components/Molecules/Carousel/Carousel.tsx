@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
