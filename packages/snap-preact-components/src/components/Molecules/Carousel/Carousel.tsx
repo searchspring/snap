@@ -77,7 +77,7 @@ const CSS = {
 					cursor: 'default',
 				},
 			},
-			'.swiper-container': {
+			'.swiper': {
 				display: 'flex',
 				flexDirection: 'column',
 				marginLeft: 'auto',
@@ -87,6 +87,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: 0,
 				zIndex: '1',
+				width: '100%',
 			},
 			'.swiper-vertical > .swiper-wrapper': {
 				flexDirection: 'column',
@@ -397,6 +398,7 @@ export interface CarouselProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
+	spaceBetween?: number;
 	vertical?: boolean;
 	pagination?: boolean | PaginationOptions;
 	autoAdjustSlides?: boolean;

@@ -105,22 +105,22 @@ export const Bundles = observer((props) => {
 
 	const bundleRecsProps = {
 		controller: controller,
-		seedSeparatorIconOnly: false,
+		separatorIconSeedOnly: false,
 		ctaSlot: <CTASlot />,
 		title: 'Frequently Bought Together',
 		resultComponent: <Result />,
 		onAddToCart: (data) => controller.log.debug('ADDING TO CART', data),
 		breakpoints: {
 			0: {
-				stackedCTA: true,
+				ctaInline: true,
 				carousel: {
 					enabled: false,
 				},
-				seedSeparatorIconOnly: true,
+				separatorIconSeedOnly: true,
 				resultComponent: <Result layout={'list'} />,
 				limit: 3,
 				vertical: true,
-				showCheckboxes: false,
+				hideCheckboxes: true,
 			},
 			1024: {
 				slidesPerView: 3,

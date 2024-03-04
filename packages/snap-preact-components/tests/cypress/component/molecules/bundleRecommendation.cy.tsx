@@ -105,9 +105,9 @@ describe('BundledRecommendation Component', async () => {
 			});
 	});
 
-	it('can use addToCartButtonText prop', () => {
+	it('can use ctaButtonText prop', () => {
 		const text = 'some custom button';
-		mount(<BundledRecommendation controller={controller} addToCartButtonText={text} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(<BundledRecommendation controller={controller} ctaButtonText={text} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('@onAddToCart').should('not.be.called');
 
@@ -312,8 +312,8 @@ describe('BundledRecommendation Component', async () => {
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector--selected').should('have.length', 2);
 	});
 
-	it('can hide checkboxes with showCheckboxes', () => {
-		mount(<BundledRecommendation controller={controller} showCheckboxes={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+	it('can hide checkboxes with hideCheckboxes', () => {
+		mount(<BundledRecommendation controller={controller} hideCheckboxes={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations .ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox').should('not.exist');
@@ -375,7 +375,7 @@ describe('BundledRecommendation Component', async () => {
 
 	it('can set seed icon only', () => {
 		// can set seed icon only with seed not in carousel
-		mount(<BundledRecommendation controller={controller} seedSeparatorIconOnly={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(<BundledRecommendation controller={controller} separatorIconSeedOnly={true} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 1);
@@ -385,7 +385,7 @@ describe('BundledRecommendation Component', async () => {
 
 		// can set seed icon only with seed in carousel
 		mount(
-			<BundledRecommendation controller={controller} seedInCarousel={true} seedSeparatorIconOnly={true} onAddToCart={cy.stub().as('onAddToCart')} />
+			<BundledRecommendation controller={controller} seedInCarousel={true} separatorIconSeedOnly={true} onAddToCart={cy.stub().as('onAddToCart')} />
 		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
@@ -395,14 +395,14 @@ describe('BundledRecommendation Component', async () => {
 		).should('exist');
 
 		//can set seed icon only false with seed not in carousel
-		mount(<BundledRecommendation controller={controller} seedSeparatorIconOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(<BundledRecommendation controller={controller} separatorIconSeedOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
 		cy.get('.ss__bundled-recommendations__wrapper__selector__icon').should('have.length', 5);
 
 		//can set seed icon only false with seed in carousel
 		mount(
-			<BundledRecommendation controller={controller} seedInCarousel={true} seedSeparatorIconOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />
+			<BundledRecommendation controller={controller} seedInCarousel={true} separatorIconSeedOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />
 		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');
@@ -411,7 +411,7 @@ describe('BundledRecommendation Component', async () => {
 
 	it('can set custom seperator icons', () => {
 		mount(
-			<BundledRecommendation controller={controller} seperatorIcon={'cog'} seedSeparatorIconOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />
+			<BundledRecommendation controller={controller} seperatorIcon={'cog'} separatorIconSeedOnly={false} onAddToCart={cy.stub().as('onAddToCart')} />
 		);
 
 		cy.get('.ss__bundled-recommendations').should('exist');

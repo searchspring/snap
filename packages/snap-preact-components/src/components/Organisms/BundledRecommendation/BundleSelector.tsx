@@ -13,12 +13,12 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const props: BundleSelectorProps = {
 		// default props
-		showCheckboxes: true,
+		hideCheckboxes: false,
 		// global theme
 		...properties,
 	};
 
-	const { children, checked, icon, seedText, seed, showCheckboxes, onCheck } = props;
+	const { className, children, checked, icon, seedText, seed, hideCheckboxes, onCheck } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -46,11 +46,12 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			className={classnames(
 				'ss__bundled-recommendations__wrapper__selector',
 				checked ? 'ss__bundled-recommendations__wrapper__selector--selected' : '',
-				seedText || seed ? 'ss__bundled-recommendations__wrapper__selector--seed' : ''
+				seedText || seed ? 'ss__bundled-recommendations__wrapper__selector--seed' : '',
+				className
 			)}
 		>
 			<div className="ss__bundled-recommendations__wrapper__selector__result-wrapper">
-				{showCheckboxes && <Checkbox {...subProps.checkbox} />}
+				{!hideCheckboxes && <Checkbox {...subProps.checkbox} />}
 				{seedText && <div className={'ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
 			</div>
@@ -69,7 +70,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	checked?: boolean;
 	seedText?: string;
 	seed?: boolean;
-	showCheckboxes?: boolean;
+	hideCheckboxes?: boolean;
 	onCheck?: () => void;
 	icon?: string | Partial<IconProps> | boolean;
 }

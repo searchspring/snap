@@ -79,7 +79,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		addToCartButtonText: {
+		ctaButtonText: {
 			description: 'Text to render in add to cart button',
 			table: {
 				type: {
@@ -137,20 +137,9 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		showCheckboxes: {
+		hideCheckboxes: {
 			defaultValue: true,
 			description: 'Hide/show bundle checkboxes in results',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
-		vertical: {
-			defaultValue: false,
-			description: 'results to render vertically.',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -169,7 +158,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		seedSeparatorIconOnly: {
+		separatorIconSeedOnly: {
 			description: 'boolean to only have seperator Icon for the seed product',
 			table: {
 				type: {
@@ -179,7 +168,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		seperatorIcon: {
+		separatorIcon: {
 			defaultValue: 'plus',
 			description: 'Icon to render between results',
 			table: {

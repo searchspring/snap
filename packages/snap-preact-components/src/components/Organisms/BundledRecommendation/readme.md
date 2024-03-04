@@ -8,8 +8,8 @@ Renders a recommended bundle of products with seed, carousel of recommendations 
 
 ## Usage
 
-Additional [Swiper Component Props](https://swiper6.vercel.app/swiper-api#parameters) can be specified, but may need to be camelCased where appropriate.
-Additional [Swiper Modules](https://swiper6.vercel.app/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -33,25 +33,21 @@ The `results` prop specifies a reference to the results store array to use inste
 ```
 
 ### carousel 
-The `carousel` prop specifies an object of carousel settings. These settings will be merged with the default settings (listed below). Available settings are as follows
+The `carousel` prop specifies an object of carousel settings. These settings will be merged with the default settings (listed below). All valid Carousel component props (and any non-documented SwiperJS props) can be used here. The below example uses the `prevButton`, `nextButton` and `loop` props from the Carousel:
 
 ```jsx
-interface CarouselProps {
+type BundleCarouselProps = {
 	enabled: boolean;
-	peekaboo?: boolean | .1 | .2 | .3 | .4 | .5 | .6 | .7 | .8 | .9;
 	seedInCarousel?: boolean;
-	prevButton?: JSX.Element | string;
-	nextButton?: JSX.Element | string;
-	hideButtons?: boolean;
-	loop?: boolean;
-	pagination?: boolean;
-}
+} & CarouselProps
 
-const defaultCarouselProps = {
+const customCarouselProps = {
 	enabled: true,
 	loop: false,
+	prevButton: 'Previous',
+	nextButton: 'Next'
 }
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ defaultCarouselProps } />
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ customCarouselProps } />
 ```
 
 ### enabled
@@ -66,19 +62,6 @@ The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies 
 
 ```jsx
 <BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ seedInCarousel:true } />
-```
-
-### peekaboo
-The `peekaboo` prop  is a sub prop under the `carousel` prop. It enables the peek-a-boo display in the carousel. if passed `true` it will show the default (show half of the next  available product card). Or you can pass it a decimal to customize how much of the next available product card should show. 
-
-```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ peekaboo:true } />
-```
-
-or 
-
-```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ peekaboo:.2 } />
 ```
 
 ### pagination
@@ -109,14 +92,6 @@ The `nextButton` prop  is a sub prop under the `carousel` prop. It specifies the
 <BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ nextButton: '>' } />
 ```
 
-
-### addToCartButtonText
-The `addToCartButtonText` prop specifies the inner text to render in the add to cart button.
-
-```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} addToCartButtonText={'Add Bundle'} />
-```
-
 ### title
 The `title` prop specifies the carousel title
 
@@ -140,6 +115,27 @@ The `resultComponent` prop allows for a custom result component to be rendered. 
 <BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} resultComponent={<ResultSlot />} />
 ```
 
+### ctaButtonText
+The `ctaButtonText` prop specifies the inner text to render in the add to cart button.
+
+```jsx
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaButtonText={'Add Bundle'} />
+```
+
+### ctaIcon
+The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.     
+
+```jsx
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaIcon={'bag'} />
+```
+
+### ctaInline
+The `ctaInline` prop specifies if the add to cart display should be block or inline witht the carousel.
+
+```jsx
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaInline={true} />
+```
+
 ### ctaSlot
 The `ctaSlot` prop allows for a custom add to cart cta component to be rendered. This component will be passed the following props -
 
@@ -161,7 +157,6 @@ The `preselectedCount` prop specifies how many products in the bundle will be pr
 <BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} preselectedCount={4} />
 ```
 
-
 ### seedText
 The `seedText` prop specifies text to be rendered as a badge in the seed product.   
 
@@ -169,37 +164,30 @@ The `seedText` prop specifies text to be rendered as a badge in the seed product
 <BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} seedText={"Main Product"} />
 ```
 
-### seperatorIcon
-The `seperatorIcon` prop specifies the icon to render between products. Takes an object with `Icon` component props or a string.     
+### separatorIcon
+The `separatorIcon` prop specifies the icon to render between products. Takes an object with `Icon` component props or a string.     
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} seperatorIcon={'cog'} />
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIcon={'cog'} />
 ```
 
-### seedSeparatorIconOnly
-The `seedSeparatorIconOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
+### separatorIconSeedOnly
+The `separatorIconSeedOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} seedSeparatorIconOnly={true} />
-```
-
-### stackedCTA
-The `stackedCTA` prop specifies if the add to cart display should be block or inline witht the carousel.
-
-```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} stackedCTA={true} />
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIconSeedOnly={true} />
 ```
 
 
-### showCheckboxes
-The `showCheckboxes` prop specifies if the bundle checkboxes should be rendered. 
+### hideCheckboxes
+The `hideCheckboxes` prop specifies if the bundle checkboxes should be rendered. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} showCheckboxes={true} />
+<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} hideCheckboxes={true} />
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiper6.vercel.app/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
@@ -211,7 +199,7 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however **`any BundleRecommendation props`**, or [Swiper API parameters](https://swiper6.vercel.app/swiper-api#parameters) can also be specified. 
+The default configuration contains the following properties, however **`any BundleRecommendation props`**, or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
 
 `slidesPerView` - number of products to display per page
 

@@ -23,7 +23,7 @@ const CSS = {
 				flexDirection: 'column',
 				height: '100%',
 				'& .ss__result__image-wrapper': {
-					// flex: '1 0 auto',
+					flex: '1 0 auto',
 					minHeight: '0%',
 				},
 			},
@@ -70,27 +70,6 @@ const CSS = {
 					marginBottom: '10px',
 				},
 			},
-
-			'& .selection-value': {
-				padding: '5px',
-				cursor: 'pointer',
-			},
-			'& .selection-value-selected': {
-				fontWeight: 'bold',
-			},
-			'& .variant-selection': {
-				display: 'grid',
-				gridTemplateColumns: `repeat(${6}, 1fr)`,
-			},
-			'& .selection-value-disabled': {
-				opacity: 0.5,
-				textDecoration: 'line-through',
-				// cursor: 'initial'
-			},
-			'& .variant-title': {
-				fontWeight: 'bold',
-				fontSize: '13px',
-			},
 		}),
 };
 
@@ -100,7 +79,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const props: ResultProps = {
 		// default props
 		layout: Layout.GRID,
-		hideSelections: true,
 		// global theme
 		...globalTheme?.components?.result,
 		// props
@@ -108,22 +86,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const {
-		result,
-		hideBadge,
-		hideTitle,
-		hidePricing,
-		hideImage,
-		hideSelections,
-		detailSlot,
-		fallback,
-		disableStyles,
-		className,
-		layout,
-		onClick,
-		style,
-		controller,
-	} = props;
+	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
+		props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
 
@@ -182,8 +146,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const selections = result.variants?.selections;
-
 	return core ? (
 		<CacheProvider>
 			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
@@ -227,36 +189,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							)}
 						</div>
 					)}
-					{selections && !hideSelections && (
-						<div className="ss__result__details__variants">
-							{selections.map((selection: any) => {
-								if (selection.values.length) {
-									return (
-										<div className="ss__result__details__variant">
-											<div className="variant-title">{selection.label}: </div>
-											<div className="variant-selection">
-												{selection.values.map((value: any) => {
-													return (
-														<div
-															className={`selection-value ${!value.available ? 'selection-value-disabled' : ''} ${
-																selection.selected == value.value ? 'selection-value-selected' : ''
-															}`}
-															onClick={() => {
-																selection.select(value.value);
-															}}
-														>
-															{/* <div>label {value.label}</div> */}
-															<div>{value.value}</div>
-														</div>
-													);
-												})}
-											</div>
-										</div>
-									);
-								}
-							})}
-						</div>
-					)}
 					{cloneWithProps(detailSlot, { result })}
 				</div>
 			</article>
@@ -283,7 +215,6 @@ export interface ResultProps extends ComponentProps {
 	hideImage?: boolean;
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element;
-	hideSelections?: boolean;
 	fallback?: string;
 	layout?: LayoutType;
 	truncateTitle?: TruncateTitleProps;

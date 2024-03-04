@@ -1,14 +1,14 @@
 # Carousel
 
-Renders a carousel of slides using children, built with [Swiper v9.0.5](https://v9.swiperjs.com/get-started)
+Renders a carousel of slides using children, built with [Swiper v11](https://swiperjs.com/get-started)
 
 ## Sub-components
 - Icon
 
 ## Usage
 
-Additional [Swiper Component Props](https://v9.swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
-Additional [Swiper Modules](https://v9.swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ```jsx
 <Carousel>{children}</Carousel>
@@ -21,7 +21,7 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 ```
 
 ### pagination
-The `pagination` prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in [swiper docs](https://v9.swiperjs.com/swiper-api#pagination). 
+The `pagination` prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in [swiper docs](https://swiperjs.com/swiper-api#pagination). 
 
 ```jsx
 <Carousel pagination={true}>{children}</Carousel>
@@ -97,7 +97,7 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://v9.swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
@@ -112,7 +112,7 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however **`any Carousel props`** or [Swiper API parameters](https://v9.swiperjs.com/react#swiper-props) can also be specified. 
+The default configuration contains the following properties, however **`any Carousel props`** or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
 
 `slidesPerView` - number of products to display per page
 
