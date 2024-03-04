@@ -11,6 +11,8 @@ import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
 import type { PaginationOptions } from 'swiper/types/modules/pagination';
+import type { NavigationOptions } from 'swiper/types/modules/navigation';
+
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
@@ -234,6 +236,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	} = props;
 
 	let pagination = props.pagination;
+	let navigation = props.navigation;
 
 	const subProps: CarouselSubProps = {
 		icon: {
@@ -282,11 +285,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			elem.classList.add('swiper-container-horizontal');
 		});
 
-		const nativeArrows = document.querySelectorAll('.ss__carousel .swiper-button-prev, .ss__carousel .swiper-button-next');
-		nativeArrows.forEach((elem) => {
-			elem.remove();
-		});
-
 		//add usable class to last visible slide.
 		attachClasstoLastVisibleSlide();
 	}, []);
@@ -302,6 +300,19 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				clickable: true,
 			};
 		}
+	}
+
+	if (navigation && typeof navigation == 'object') {
+		navigation = {
+			nextEl: '.ss_carousel_DNE',
+			prevEl: '.ss_carousel_DNE',
+			...navigation,
+		};
+	} else {
+		navigation = {
+			nextEl: '.ss_carousel_DNE',
+			prevEl: '.ss_carousel_DNE',
+		};
 	}
 
 	const attachClasstoLastVisibleSlide = () => {
@@ -342,6 +353,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+
 						if (onBeforeInit) {
 							onBeforeInit(swiper);
 						}
@@ -380,9 +392,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					threshold={7}
 					loopAddBlankSlides={false}
 					modules={swiperModules}
-					navigation
 					{...additionalProps}
 					{...displaySettings}
+					navigation={navigation}
 					pagination={pagination}
 					onResize={() => {
 						if (additionalProps.onResize) {
@@ -427,6 +439,7 @@ export interface CarouselProps extends ComponentProps {
 	spaceBetween?: number;
 	vertical?: boolean;
 	pagination?: boolean | PaginationOptions;
+	navigation?: boolean | NavigationOptions;
 	autoAdjustSlides?: boolean;
 	onClick?: (swiper: SwiperTypes, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
