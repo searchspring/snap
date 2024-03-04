@@ -221,6 +221,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		hideButtons,
 		vertical,
 		onInit,
+		onBeforeInit,
+		onAfterInit,
 		onNextButtonClick,
 		onPrevButtonClick,
 		onClick,
@@ -340,10 +342,34 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore : someone should refactor this
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+						if (onBeforeInit) {
+							onBeforeInit(swiper);
+						}
 					}}
 					onInit={(swiper) => {
 						if (onInit) {
 							onInit(swiper);
+						}
+					}}
+					onAfterInit={(swiper) => {
+						//@ts-ignore : someone should refactor this
+						swiper.navigation.onPrevClick = (e: any) => {
+							e.preventDefault();
+							if (swiper.isBeginning && !swiper.params.loop && !swiper.params.rewind) return;
+							swiper.slidePrev();
+							swiper.emit('navigationPrev');
+						};
+
+						//@ts-ignore : someone should refactor this
+						swiper.navigation.onNextClick = (e: any) => {
+							e.preventDefault();
+							if (swiper.isEnd && !swiper.params.loop && !swiper.params.rewind) return;
+							swiper.slideNext();
+							swiper.emit('navigationNext');
+						};
+
+						if (onAfterInit) {
+							onAfterInit(swiper);
 						}
 					}}
 					onClick={(swiper, e) => {
@@ -405,7 +431,9 @@ export interface CarouselProps extends ComponentProps {
 	onClick?: (swiper: SwiperTypes, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onPrevButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	onBeforeInit?: (swiper: SwiperTypes) => void;
 	onInit?: (swiper: SwiperTypes) => void;
+	onAfterInit?: (swiper: SwiperTypes) => void;
 	modules?: any[];
 	children: JSX.Element[];
 }
