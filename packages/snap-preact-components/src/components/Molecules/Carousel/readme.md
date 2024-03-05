@@ -97,7 +97,7 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation`, `Pagination` and `A11y` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
@@ -110,11 +110,11 @@ The `autoAdjustSlides` prop when set to `false` will disable the carousel from a
 ### breakpoints
 An object that modifies the responsive behavior of the carousel at various viewports. 
 
-The object key specified the viewport for when the parameters will be applied. 
+The object key specifies the viewport for when the parameters will be applied. 
 
 The default configuration contains the following properties, however **`any Carousel props`** or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
 
-`slidesPerView` - number of products to display per page
+`slidesPerView` - number of products to display per page (for a peekaboo effect use a decimal number here)
 
 `slidesPerGroup` - number of products to scroll by when next/previous button is clicked
 
