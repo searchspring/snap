@@ -125,7 +125,6 @@ const CSS = {
 
 export const RecommendationBundle = observer((properties: RecommendationBundleProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
 	const defaultCarouselBreakpoints = {
 		0: {
 			slidesPerView: 2,
@@ -156,10 +155,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonText: 'Add All To Cart',
 		ctaInline: true,
 		// global theme
-		...globalTheme?.components?.RecommendationBundle,
+		...globalTheme?.components?.recommendationBundle,
 		...properties,
 		// props
-		...properties.theme?.components?.RecommendationBundle,
+		...properties.theme?.components?.recommendationBundle,
 	};
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
@@ -578,7 +577,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 type BundleCarouselProps = {
 	enabled?: boolean;
 	seedInCarousel?: boolean;
-} & CarouselProps;
+} & Partial<CarouselProps>;
 
 export interface RecommendationBundleProps extends ComponentProps {
 	results?: Product[];
