@@ -83,7 +83,7 @@ describe('CartStore store', () => {
 		expect(cartStore.price).toStrictEqual(result.mappings.core?.price);
 		expect(cartStore.msrp).toStrictEqual(result.mappings.core?.msrp);
 
-		result.setQuantity(3);
+		result.quantity = 3;
 
 		expect(cartStore.items).toHaveLength(1);
 		expect(cartStore.count).toStrictEqual(3);

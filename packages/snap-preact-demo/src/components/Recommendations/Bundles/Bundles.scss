@@ -9,7 +9,7 @@
         text-align: center;
     }
 }
-.ss__bundled-recommendations__wrapper--vertical {
+.ss__recommendation-bundle__wrapper--vertical {
     border-bottom: 1px solid black;
     padding-bottom: 20px !important;
     width: 90% !important;
@@ -24,10 +24,10 @@
         }
     }
    
-    .ss__bundled-recommendations__wrapper__selector--seed {
+    .ss__recommendation-bundle__wrapper__selector--seed {
         flex-direction: column;
         margin-bottom: 20px;
-        .ss__bundled-recommendations__wrapper__selector__icon {
+        .ss__recommendation-bundle__wrapper__selector__icon {
             position: relative;
             top:initial;
             right: initial;

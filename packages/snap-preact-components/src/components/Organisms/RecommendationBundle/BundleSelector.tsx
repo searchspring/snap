@@ -23,7 +23,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
-			className: 'ss__bundled-recommendations__wrapper__selector__icon',
+			className: 'ss__recommendation-bundle__wrapper__selector__icon',
 			size: 15,
 			// global theme
 			...globalTheme?.components?.icon,
@@ -31,8 +31,9 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			theme: props?.theme,
 		},
 		checkbox: {
-			className: 'ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox',
+			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
 			checked: checked,
+			size: 18,
 			onClick: onCheck,
 			// global theme
 			...globalTheme?.components?.checkbox,
@@ -44,15 +45,15 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	return (
 		<div
 			className={classnames(
-				'ss__bundled-recommendations__wrapper__selector',
-				checked ? 'ss__bundled-recommendations__wrapper__selector--selected' : '',
-				seedText || seed ? 'ss__bundled-recommendations__wrapper__selector--seed' : '',
+				'ss__recommendation-bundle__wrapper__selector',
+				checked ? 'ss__recommendation-bundle__wrapper__selector--selected' : '',
+				seedText || seed ? 'ss__recommendation-bundle__wrapper__selector--seed' : '',
 				className
 			)}
 		>
-			<div className="ss__bundled-recommendations__wrapper__selector__result-wrapper">
+			<div className="ss__recommendation-bundle__wrapper__selector__result-wrapper">
 				{!hideCheckboxes && <Checkbox {...subProps.checkbox} />}
-				{seedText && <div className={'ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
+				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
 			</div>
 			<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />

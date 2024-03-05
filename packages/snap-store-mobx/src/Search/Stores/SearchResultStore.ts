@@ -101,7 +101,7 @@ export class Product {
 		this.mappings = result.mappings!;
 
 		//initialize the display
-		this.setDisplay();
+		this.updateDisplay();
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -109,7 +109,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(config, services, parsedVariants, this.setDisplay);
+				this.variants = new Variants(config, services, parsedVariants, this.updateDisplay);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -131,7 +131,6 @@ export class Product {
 			attributes: observable,
 			custom: observable,
 			quantity: observable,
-			setQuantity: observable,
 		});
 
 		// must set all subo
@@ -145,11 +144,7 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
-	public setQuantity = (quantity: number) => {
-		this.quantity = Number(quantity);
-	};
-
-	public setDisplay = (display?: {
+	public updateDisplay = (display?: {
 		mappings: SearchResponseModelResultMappings;
 		attributes: Record<string, unknown>;
 		options: Record<string, string>;
@@ -173,9 +168,9 @@ class Variants {
 	public selections: VariantSelection[] = [];
 	public config: StoreConfigs;
 
-	public setDisplay: (variant: VariantData) => void;
+	public updateDisplay: (variant: VariantData) => void;
 
-	constructor(config: StoreConfigs, services: StoreServices, variantData: VariantData[], setDisplay: (variant: VariantData) => void) {
+	constructor(config: StoreConfigs, services: StoreServices, variantData: VariantData[], updateDisplay: (variant: VariantData) => void) {
 		const options: string[] = [];
 
 		// create variants objects
@@ -191,7 +186,7 @@ class Variants {
 
 		this.config = config;
 
-		this.setDisplay = setDisplay;
+		this.updateDisplay = updateDisplay;
 
 		options.map((option) => {
 			// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
@@ -208,7 +203,7 @@ class Variants {
 
 	public setActive(variant: Variant) {
 		this.active = variant;
-		this.setDisplay(this.active);
+		this.updateDisplay(this.active);
 	}
 
 	public makeSelections(options?: Record<string, string>) {

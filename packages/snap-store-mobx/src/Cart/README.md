@@ -1,5 +1,5 @@
 # CartStore
-The cart store is meant to act as a standalone temporary cart, mainly to be used in BundledRecommendations.
+The cart store is meant to act as a standalone temporary cart, mainly to be used in RecommendationBundle.
 
 ## `items` property
 

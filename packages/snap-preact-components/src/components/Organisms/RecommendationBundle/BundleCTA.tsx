@@ -24,7 +24,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
-			className: 'ss__bundled-recommendations__wrapper__cta__icon',
+			className: 'ss__recommendation-bundle__wrapper__cta__icon',
 			icon: 'bag',
 			size: 50,
 			// global theme
@@ -34,12 +34,12 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		},
 	};
 	return (
-		<div className={`ss__bundled-recommendations__wrapper__cta`}>
+		<div className={`ss__recommendation-bundle__wrapper__cta`}>
 			{ctaSlot ? (
 				cloneWithProps(ctaSlot, props)
 			) : (
 				<Fragment>
-					<div className="ss__bundled-recommendations__wrapper__cta__subtotal">
+					<div className="ss__recommendation-bundle__wrapper__cta__subtotal">
 						{icon ? (
 							<div className="icon">
 								<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
@@ -47,22 +47,22 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						) : (
 							<></>
 						)}
-						<span className="ss__bundled-recommendations__wrapper__cta__subtotal__title">{`Subtotal for ${cartStore.count} items`}</span>
-						<div className="ss__bundled-recommendations__wrapper__cta__subtotal__prices">
+						<span className="ss__recommendation-bundle__wrapper__cta__subtotal__title">{`Subtotal for ${cartStore.count} items`}</span>
+						<div className="ss__recommendation-bundle__wrapper__cta__subtotal__prices">
 							{cartStore.msrp && cartStore.msrp !== cartStore.price ? (
-								<label className="ss__bundled-recommendations__wrapper__cta__subtotal__strike">
+								<label className="ss__recommendation-bundle__wrapper__cta__subtotal__strike">
 									Was <Price lineThrough={true} value={cartStore.msrp} />
 								</label>
 							) : (
 								<></>
 							)}
-							<label className="ss__bundled-recommendations__wrapper__cta__subtotal__price">
+							<label className="ss__recommendation-bundle__wrapper__cta__subtotal__price">
 								<Price value={cartStore.price} />
 							</label>
 						</div>
 					</div>
 
-					<Button className={'ss__bundled-recommendations__wrapper__cta__button'} onClick={(e) => onAddToCartClick(e)}>
+					<Button className={'ss__recommendation-bundle__wrapper__cta__button'} onClick={(e) => onAddToCartClick(e)}>
 						{addToCartText}
 					</Button>
 				</Fragment>

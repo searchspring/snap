@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BundledRecommendation, BundledRecommendationProps } from '../BundledRecommendation';
+import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -14,8 +14,8 @@ import { iconPaths } from '../../Atoms/Icon';
 import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/BundledRecommendation`,
-	component: BundledRecommendation,
+	title: `Organisms/RecommendationBundle`,
+	component: RecommendationBundle,
 	parameters: {
 		docs: {
 			page: () => (
@@ -208,7 +208,7 @@ export default {
 };
 
 const config: RecommendationControllerConfig = {
-	id: 'Recommendation',
+	id: 'RecommendationBundle',
 	tag: 'bundle',
 	globals: {
 		siteId: '8uyt2m',
@@ -218,8 +218,8 @@ const config: RecommendationControllerConfig = {
 
 const snapInstance = Snapify.recommendation(config);
 
-export const Default = (props: BundledRecommendationProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <BundledRecommendation {...props} controller={controller} results={controller.store.results.reverse()} />;
+export const Default = (props: RecommendationBundleProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <RecommendationBundle {...props} controller={controller} results={controller.store.results.reverse()} />;
 };
 
 Default.loaders = [

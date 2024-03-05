@@ -1,4 +1,4 @@
-# BundleRecommendations
+# RecommendationBundle
 
 Renders a recommended bundle of products with seed, carousel of recommendations and add to cart display.
 
@@ -15,21 +15,21 @@ Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be prov
 The required `controller` prop specifies a reference to the RecommendationController
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} />
 ```
 
 ### onAddToCart 
 the required `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} />
 ```
 
 ### results
 The `results` prop specifies a reference to the results store array to use instead of the default `controller.store.results`. Note the first result will be displayed as the `seed` product. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} results={controller.store.results} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} results={controller.store.results} />
 ```
 
 ### carousel 
@@ -47,56 +47,56 @@ const customCarouselProps = {
 	prevButton: 'Previous',
 	nextButton: 'Next'
 }
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ customCarouselProps } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ customCarouselProps } />
 ```
 
 ### enabled
 The `enabled` prop is a sub prop under the `carousel` prop. It specifies weather the bundle should render as a carousel or not.
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ enabled:false } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ enabled:false } />
 ```
 
 ### seedInCarousel
 The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ seedInCarousel:true } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ seedInCarousel:true } />
 ```
 
 ### pagination
 The `pagination` prop is a sub prop under the `carousel` prop. It specifies if the carousel should display pagination dots. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ pagination:true } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ pagination:true } />
 ```
 
 ### hideButtons
 The `hideButtons` is a sub prop under the `carousel` prop. It specifies if the carousel should hide prev/next buttons.
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ hideButtons:true }><Recommendation/>
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ hideButtons:true }><Recommendation/>
 ```
 
 ### prevButton
 The `prevButton` prop is a sub prop under the `carousel` prop. It specifies the previous button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ prevButton: '<' } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ prevButton: '<' } />
 ```
 
 ### nextButton
 The `nextButton` prop  is a sub prop under the `carousel` prop. It specifies the next button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ nextButton: '>' } />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ nextButton: '>' } />
 ```
 
 ### title
 The `title` prop specifies the carousel title
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} title={'Recommended Bundle'} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} title={'Recommended Bundle'} />
 ```
 
 ### resultComponent
@@ -112,28 +112,28 @@ The `resultComponent` prop allows for a custom result component to be rendered. 
 ```
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} resultComponent={<ResultSlot />} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} resultComponent={<ResultSlot />} />
 ```
 
 ### ctaButtonText
 The `ctaButtonText` prop specifies the inner text to render in the add to cart button.
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaButtonText={'Add Bundle'} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaButtonText={'Add Bundle'} />
 ```
 
 ### ctaIcon
 The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.     
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaIcon={'bag'} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaIcon={'bag'} />
 ```
 
 ### ctaInline
 The `ctaInline` prop specifies if the add to cart display should be block or inline witht the carousel.
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaInline={true} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaInline={true} />
 ```
 
 ### ctaSlot
@@ -147,35 +147,35 @@ The `ctaSlot` prop allows for a custom add to cart cta component to be rendered.
 ```
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaSlot={<CTASlot />} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaSlot={<CTASlot />} />
 ```
 
 ### preselectedCount
 The `preselectedCount` prop specifies how many products in the bundle will be preselected. This number will include the seed. Example `preselectedCount={3}` would be `seed` + 2 preselected items. If not provided, this will default to however many products are initially visible. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} preselectedCount={4} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} preselectedCount={4} />
 ```
 
 ### seedText
 The `seedText` prop specifies text to be rendered as a badge in the seed product.   
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} seedText={"Main Product"} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} seedText={"Main Product"} />
 ```
 
 ### separatorIcon
 The `separatorIcon` prop specifies the icon to render between products. Takes an object with `Icon` component props or a string.     
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIcon={'cog'} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIcon={'cog'} />
 ```
 
 ### separatorIconSeedOnly
 The `separatorIconSeedOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIconSeedOnly={true} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIconSeedOnly={true} />
 ```
 
 
@@ -183,7 +183,7 @@ The `separatorIconSeedOnly` prop specifies if the seperator Icon should only be 
 The `hideCheckboxes` prop specifies if the bundle checkboxes should be rendered. 
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} hideCheckboxes={true} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} hideCheckboxes={true} />
 ```
 
 ### modules
@@ -191,7 +191,7 @@ The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swip
 
 ```jsx
 import { Scrollbar } from 'swiper';
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} modules={[Scrollbar]} scrollbar={{ draggable: true }} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} modules={[Scrollbar]} scrollbar={{ draggable: true }} />
 ```
 
 ### breakpoints
@@ -234,6 +234,6 @@ const defaultRecommendationBreakpoints = {
 ```
 
 ```jsx
-<BundledRecommendations controller={controller} onAddToCart={(items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />
 ```
 
