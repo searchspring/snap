@@ -46,7 +46,6 @@
     "jsdom": "20.0.0",
     "lerna": "8.1.2",
     "lint-staged": "12.4.1",
-    "nx": "18.0.7",
     "prettier": "2.6.2",
     "standard-version": "9.5.0",
     "ts-jest": "29.1.2",
