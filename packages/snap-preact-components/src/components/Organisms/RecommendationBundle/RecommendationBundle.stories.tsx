@@ -138,7 +138,7 @@ export default {
 			control: { type: 'number' },
 		},
 		hideCheckboxes: {
-			defaultValue: true,
+			defaultValue: false,
 			description: 'Hide/show bundle checkboxes in results',
 			table: {
 				type: {
