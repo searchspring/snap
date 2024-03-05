@@ -158,6 +158,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		vertical: {
+			description: 'set the recommendation to render vertically',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		separatorIconSeedOnly: {
 			description: 'boolean to only have seperator Icon for the seed product',
 			table: {

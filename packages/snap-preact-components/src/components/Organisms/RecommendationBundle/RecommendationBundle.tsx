@@ -79,9 +79,6 @@ const CSS = {
 
 			'.ss__recommendation-bundle__wrapper--vertical': {
 				flexDirection: 'column',
-				'.ss__carousel': {
-					height: '600px',
-				},
 			},
 
 			'.ss__recommendation-bundle__wrapper__selector': {

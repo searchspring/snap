@@ -186,6 +186,13 @@ The `hideCheckboxes` prop specifies if the bundle checkboxes should be rendered.
 <RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} hideCheckboxes={true} />
 ```
 
+### vertical
+The `vertical` prop sets the carousel scroll direction to vertical.
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} vertical={true} />
+```
+
 ### modules
 The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
 
