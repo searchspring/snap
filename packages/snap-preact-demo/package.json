@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.51.2",
+	"version": "0.52.0",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -18,11 +18,24 @@
 		"test": "(kill $(lsof -ti:2222,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:2222,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)",
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
+	"searchspring": {
+		"siteId": {
+			"8uyt2m": {
+				"name": "snap.searchspring.io"
+			}
+		},
+		"framework": "preact",
+		"updates": [
+			"all"
+		],
+		"version": "0.51.0",
+		"scaffold": "snapfu-core"
+	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.51.2",
-		"@searchspring/snap-preact-components": "^0.51.2",
+		"@searchspring/snap-preact": "^0.52.0",
+		"@searchspring/snap-preact-components": "^0.52.0",
 		"deepmerge": "4.3.1",
-		"mobx-react": "7.5.0",
+		"mobx-react": "7.6.0",
 		"preact": "10.9.0"
 	},
 	"devDependencies": {

@@ -13,8 +13,8 @@ Any modification to the results array and data are recommended to be made using 
 
 ## Usage
 
-Additional [Swiper Component Props](https://swiper6.vercel.app/swiper-api#parameters) can be specified, but may need to be camelCased where appropriate.
-Additional [Swiper Modules](https://swiper6.vercel.app/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -81,7 +81,7 @@ The `nextButton` prop specifies the next button element of the carousel. This ca
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiper6.vercel.app/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation` and `Pagination` modules by default.
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation`, `Pagination` and `A11y` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
@@ -93,9 +93,9 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however **`any Recommendation props`**, or [Swiper API parameters](https://swiper6.vercel.app/swiper-api#parameters) can also be specified. 
+The default configuration contains the following properties, however **`any Recommendation props`**, or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
 
-`slidesPerView` - number of products to display per page
+`slidesPerView` - number of products to display per page (for a peekaboo effect use a decimal number here)
 
 `slidesPerGroup` - number of products to scroll by when next/previous button is clicked
 

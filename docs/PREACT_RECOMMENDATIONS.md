@@ -41,7 +41,7 @@ module.exports = {
 ```
 
 ## Default Template
-The Searchspring Management Console contains a `Default` template availble for all profiles that does not require the use of the Snapfu CLI to create a custom template. To use the `Default` template, the following instantiator config should be added to your `snap-preact` config.
+The Searchspring Management Console contains a `Default` template availble for standard profiles (non-bundle) that does not require the use of the Snapfu CLI to create a custom template. To use the `Default` template, the following instantiator config should be added to your `snap-preact` config.
 
 ```js
 instantiators: {
@@ -82,6 +82,51 @@ export const Recs = observer((props) => {
 });
 ```
 
+## Default Bundle Template
+The Searchspring Management Console also contains a `Bundle` template availble for bundle profiles, this template does not require the use of the Snapfu CLI to create a custom template. To use the `Bundle` template, another component mapping will need to be added to your `snap-preact` instantiator config.
+
+```js
+instantiators: {
+	recommendation: {
+		components: {
+			Default: async () => {
+				return (await import('./components/Recommendations/Recs')).Recs;
+			},
+			Bundle: async () => {
+				return (await import('./components/Recommendations/Bundled')).Bundled;
+			},
+		},
+		config: {
+			branch: BRANCHNAME || 'production',
+		},
+	},
+},
+```
+
+Note that the component is not required to be named `Bundle`, however `instantiators.recommendation.component` must contain the `Bundle` key as seen in the example above.
+
+The example Bundled component below uses the `RecommendationBundle` component imported from the snap component library. See [Components Preact > RecommendationBundle](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Forganisms-recommendationbundle--default) for more details. 
+
+```jsx
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+
+import { RecommendationBundle } from '@searchspring/snap-preact-components';
+
+export const Bundled = observer((props) => {
+	const controller = props.controller;
+	const store = controller?.store;
+
+	if (!controller.store.loaded && !controller.store.loading) {
+		controller.search();
+	}
+
+	const parameters = store?.profile?.display?.templateParameters;
+
+	return store.results.length > 0 && <RecommendationBundle controller={controller} onAddToCart={(items)=> console.log("need to add these to the platform cart", items)}  title={parameters?.title} />;
+});
+```
+
 ## Custom Template
 Let's look at how to setup a custom recommendation template using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/#/start-setup) for installing Snapfu.
 
@@ -91,7 +136,7 @@ There are three steps required for adding recommendations:
 - Updating our Snap config (see instantiator config above)
 
 ### Creating a new recommendation template
-To generate a new template, run the following at the root of the project. This command will prompt you to provide various inputs such as the template name, an optional description, and the path to the component.
+To generate a new template, run the following at the root of the project. This command will prompt you to provide various inputs such as the template type, template name, an optional description, and the path to the component.
 
 ```bash
 snapfu recs init
@@ -147,4 +192,3 @@ snapfu recs sync
 To sync the template(s) to multiple accounts, multiple siteIds must be defined in the project's package.json file
 
 See [Getting Started > Github Setup](https://searchspring.github.io/snap/#/start-github)
-
