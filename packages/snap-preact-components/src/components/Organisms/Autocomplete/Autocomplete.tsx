@@ -2,7 +2,7 @@
 import { h, Fragment } from 'preact';
 import { useEffect } from 'preact/hooks';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';

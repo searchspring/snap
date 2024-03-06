@@ -1,0 +1,20 @@
+{
+    "profile": {
+        "tag": "bundled",
+        "placement": "product-page",
+        "display": {
+            "threshold": 2,
+            "template": {
+                "name": "bundle__production",
+                "uuid": "b719ee74-b97a-11ee-b799-c62aa8183b6c",
+                "component": "Bundle",
+                "branch": "production",
+                "group": "bundle",
+                "type": "bundle"
+            },
+            "templateParameters": {
+                "title": "Recommended Products"
+            }
+        }
+    }
+}

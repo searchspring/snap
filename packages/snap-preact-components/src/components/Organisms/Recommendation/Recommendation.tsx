@@ -2,11 +2,11 @@
 import { h, Fragment, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
-import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -163,7 +163,7 @@ export interface RecommendationProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
-	results?: SearchResultStore;
+	results?: Product[];
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: ComponentChildren;
