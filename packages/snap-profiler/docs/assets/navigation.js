@@ -1,0 +1,2 @@
+window.navigationData =
+	'data:application/octet-stream;base64,H4sIAAAAAAAAA4uuVipJrShRslIKKMpPy8xJLVLSUSpILMkAiiTnJBYXpxbrw2T0Mkpyc4DS2Zl5KUpWhkYWtbEA5I2Hvz8AAAA=';
