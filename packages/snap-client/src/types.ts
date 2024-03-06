@@ -160,6 +160,7 @@ export type ProfileResponseModel = {
 				component?: string;
 				branch?: string;
 				group?: string;
+				type?: string;
 			};
 			templateParameters: {
 				[any: string]: unknown;

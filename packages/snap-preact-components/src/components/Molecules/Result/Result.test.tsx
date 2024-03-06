@@ -18,13 +18,13 @@ const mockResults = searchResponse.results as SearchResultStore;
 
 describe('Result Component', () => {
 	it('renders', () => {
-		const rendered = render(<Result result={mockResults[0]} />);
+		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
 	});
 
 	it('renders image', () => {
-		const rendered = render(<Result result={mockResults[0]} />);
+		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toBeInTheDocument();
 	});
@@ -36,7 +36,7 @@ describe('Result Component', () => {
 	});
 
 	it('renders pricing', () => {
-		const rendered = render(<Result result={mockResults[0]} />);
+		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const priceElement = rendered.container.querySelectorAll('.ss__result .ss__result__details__pricing .ss__price');
 		expect(priceElement[0]).toBeInTheDocument();
 		expect(priceElement.length).toBe(2);
@@ -44,7 +44,7 @@ describe('Result Component', () => {
 
 	it('renders details', () => {
 		const args = {
-			result: mockResults[0],
+			result: mockResults[0] as Product,
 			detailSlot: <div className="details">Add to cart'</div>,
 		};
 		const rendered = render(<Result {...args} />);
@@ -55,7 +55,7 @@ describe('Result Component', () => {
 
 	it('hides various sections', () => {
 		const args = {
-			result: mockResults[0],
+			result: mockResults[0] as Product,
 			hideBadge: true,
 			hideTitle: true,
 			hidePricing: true,
@@ -71,7 +71,7 @@ describe('Result Component', () => {
 
 	it('hides image section', () => {
 		const args = {
-			result: mockResults[0],
+			result: mockResults[0] as Product,
 			hideImage: true,
 		};
 		const rendered = render(<Result {...args} />);
@@ -81,20 +81,20 @@ describe('Result Component', () => {
 
 	it('should display a fallback image', () => {
 		mockResults[1].mappings!.core!.imageUrl = '';
-		const rendered = render(<Result result={mockResults[1]} />);
+		const rendered = render(<Result result={mockResults[1] as Product} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 	});
 
 	it('should can change the layout', () => {
-		const rendered = render(<Result result={mockResults[1]} layout={Layout.LIST} />);
+		const rendered = render(<Result result={mockResults[1] as Product} layout={Layout.LIST} />);
 		const Element = rendered.container.querySelector('.ss__result');
 		expect(Element).toHaveClass(`ss__result--${Layout.LIST}`);
 	});
 
 	it('can truncate the title', () => {
 		const args = {
-			result: mockResults[1],
+			result: mockResults[1] as Product,
 			truncateTitle: {
 				limit: 3,
 				append: '...',
@@ -109,7 +109,7 @@ describe('Result Component', () => {
 	it('can set a custom onClick function', () => {
 		const onClickFunc = jest.fn();
 
-		const rendered = render(<Result result={mockResults[1]} onClick={onClickFunc} />);
+		const rendered = render(<Result result={mockResults[1] as Product} onClick={onClickFunc} />);
 		const resultElement = rendered.container.querySelector('.ss__result a')!;
 		expect(resultElement).toBeInTheDocument();
 
@@ -119,7 +119,7 @@ describe('Result Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Result result={mockResults[1]} className={className} />);
+		const rendered = render(<Result result={mockResults[1] as Product} className={className} />);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
@@ -127,7 +127,7 @@ describe('Result Component', () => {
 	});
 
 	it('can disable styles', () => {
-		const rendered = render(<Result result={mockResults[1]} disableStyles />);
+		const rendered = render(<Result result={mockResults[1] as Product} disableStyles />);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 
@@ -146,7 +146,7 @@ describe('Result theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Result result={mockResults[0]} />
+				<Result result={mockResults[0] as Product} />
 			</ThemeProvider>
 		);
 		const result = rendered.container.querySelector('.ss__result');
@@ -163,7 +163,7 @@ describe('Result theming works', () => {
 				},
 			},
 		};
-		const rendered = render(<Result result={mockResults[0]} theme={propTheme} />);
+		const rendered = render(<Result result={mockResults[0] as Product} theme={propTheme} />);
 		const result = rendered.container.querySelector('.ss__result');
 		const title = rendered.container.querySelector('.ss__result__details__title');
 		expect(result).toBeInTheDocument();
@@ -188,7 +188,7 @@ describe('Result theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Result result={mockResults[0]} theme={propTheme} />
+				<Result result={mockResults[0] as Product} theme={propTheme} />
 			</ThemeProvider>
 		);
 

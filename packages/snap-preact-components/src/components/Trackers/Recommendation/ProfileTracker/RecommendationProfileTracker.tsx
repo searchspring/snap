@@ -2,7 +2,7 @@
 import { Fragment, h, toChildArray } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../../providers';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';

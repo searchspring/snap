@@ -2,6 +2,7 @@ node_modules
 yarn-error.log
 lerna-debug.log
 .DS_Store
+.nx
 dist
 coverage
 metrics/data

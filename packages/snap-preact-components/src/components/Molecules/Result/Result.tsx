@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -90,7 +90,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
 		props;
 
-	const core = result?.mappings?.core;
+	const core = result?.display?.mappings.core || result?.mappings?.core;
 
 	const subProps: ResultSubProps = {
 		price: {

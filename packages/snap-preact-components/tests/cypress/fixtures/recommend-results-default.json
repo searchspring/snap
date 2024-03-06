@@ -1,0 +1,648 @@
+[
+    {
+        "results": [
+            {
+                "id": "102434",
+                "mappings": {
+                    "core": {
+                        "uid": "102434",
+                        "name": "Blush Label Greek Key Pillow",
+                        "sku": "D-PMC03",
+                        "msrp": 125,
+                        "price": 110,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a3214_thumb_med.jpg",
+                        "url": "/product/D-PMC03",
+                        "rating": "5",
+                        "brand": "The Label",
+                        "popularity": 860,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a3214_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "The Label"
+                    ],
+                    "color": [
+                        "Mint"
+                    ],
+                    "ss_category_hierarchy": [
+                        "All Sale",
+                        "Gifts for Her",
+                        "All Sale>Home Decor on Sale"
+                    ]
+                }
+            },
+            {
+                "id": "103544",
+                "mappings": {
+                    "core": {
+                        "uid": "103544",
+                        "name": "One Day At A Time Skinny Jeans",
+                        "sku": "C-JU-G5-P1021",
+                        "msrp": 75,
+                        "price": 54,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a8398_thumb_med.jpg",
+                        "url": "/product/C-JU-G5-P1021",
+                        "rating": "5",
+                        "brand": "Just USA",
+                        "popularity": 2128,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a8398_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Just USA"
+                    ],
+                    "color": [
+                        "Gray"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "104926",
+                "mappings": {
+                    "core": {
+                        "uid": "104926",
+                        "name": "Water Pitcher-Raise A Glass",
+                        "sku": "D-153430",
+                        "msrp": 75,
+                        "price": 52,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/153430_725.jpeg",
+                        "url": "/product/D-153430",
+                        "rating": "5",
+                        "brand": "Kate Spade",
+                        "popularity": 443,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/153430_725.jpeg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Kate Spade"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Shop By Trend",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Home & Office Decor>Home Decor>drinkware",
+                        "Shop By Trend>Polka Dots",
+                        "Home & Office Decor>Home Decor>outdoor entertaining",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York"
+                    ]
+                }
+            },
+            {
+                "id": "104927",
+                "mappings": {
+                    "core": {
+                        "uid": "104927",
+                        "name": "Raise A Glass Ice Bucket",
+                        "sku": "D-153630",
+                        "msrp": 75,
+                        "price": 54,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/153630_725.jpeg",
+                        "url": "/product/D-153630",
+                        "rating": "5",
+                        "brand": "Kate Spade",
+                        "popularity": 3947,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/153630_725.jpeg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Kate Spade"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Shop By Trend",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Shop By Trend>After Hours",
+                        "Shop By Trend>Polka Dots",
+                        "Home & Office Decor>Home Decor>outdoor entertaining",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York"
+                    ]
+                }
+            },
+            {
+                "id": "105329",
+                "mappings": {
+                    "core": {
+                        "uid": "105329",
+                        "name": "Ask Me Out Boyfriend Jeans",
+                        "sku": "C-JU-G7-P1013",
+                        "msrp": 75,
+                        "price": 56,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a4409_thumb_med.jpg",
+                        "url": "/product/C-JU-G7-P1013",
+                        "rating": "5",
+                        "brand": "Just Black",
+                        "popularity": 2474,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a4409_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Just Black"
+                    ],
+                    "color": [
+                        "Black"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "106747",
+                "mappings": {
+                    "core": {
+                        "uid": "106747",
+                        "name": "Hooked On A Feeling Vest",
+                        "sku": "C-ANM-T1-NF401",
+                        "msrp": 75,
+                        "price": 54.5,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a8000_1_thumb_med.jpg",
+                        "url": "/product/C-ANM-T1-NF401",
+                        "rating": "5",
+                        "brand": "ANM",
+                        "popularity": 302,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a8000_1_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "ANM"
+                    ],
+                    "color": [
+                        "Beige"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "106980",
+                "mappings": {
+                    "core": {
+                        "uid": "106980",
+                        "name": "Of Two Minds Cardigan",
+                        "sku": "C-ANM-T6-15097",
+                        "msrp": 75,
+                        "price": 62,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6668_1_thumb_med.jpg",
+                        "url": "/product/C-ANM-T6-15097",
+                        "rating": "5",
+                        "brand": "ANM",
+                        "popularity": 912,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6668_1_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "ANM"
+                    ],
+                    "color": [
+                        "Taupe"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "107386",
+                "mappings": {
+                    "core": {
+                        "uid": "107386",
+                        "name": "His & Hers Highball Glass Set",
+                        "sku": "D-820855",
+                        "msrp": 50,
+                        "price": 50,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a4893_3_thumb_med.jpg",
+                        "url": "/product/D-820855",
+                        "rating": "5",
+                        "brand": "Lenox",
+                        "popularity": 2766,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a4893_3_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Lenox"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Home & Office Decor>Home Decor>drinkware",
+                        "Home & Office Decor>Brands>Kate Spade New York>China",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York",
+                        "Home & Office Decor>Brands>Kate Spade New York>Glassware"
+                    ]
+                }
+            },
+            {
+                "id": "107408",
+                "mappings": {
+                    "core": {
+                        "uid": "107408",
+                        "name": "Pearl Place Double Old Fashioned Glass Set",
+                        "sku": "D-852107",
+                        "msrp": 50,
+                        "price": 50,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/852107-ks-f14_thumb_med.jpg",
+                        "url": "/product/D-852107",
+                        "rating": "5",
+                        "brand": "Lenox",
+                        "popularity": 2397,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/852107-ks-f14_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Lenox"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Home & Office Decor>Home Decor>drinkware",
+                        "Home & Office Decor>Brands>Kate Spade New York>China",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York",
+                        "Home & Office Decor>Brands>Kate Spade New York>Glassware"
+                    ]
+                }
+            },
+            {
+                "id": "107409",
+                "mappings": {
+                    "core": {
+                        "uid": "107409",
+                        "name": "Pearl Place Highball Glass Set",
+                        "sku": "D-852108",
+                        "msrp": 50,
+                        "price": 50,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/852108-ks-f14_thumb_med.jpg",
+                        "url": "/product/D-852108",
+                        "rating": "5",
+                        "brand": "Lenox",
+                        "popularity": 2763,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/852108-ks-f14_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Lenox"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Shop By Trend",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Home & Office Decor>Home Decor>drinkware",
+                        "Home & Office Decor>Brands>Kate Spade New York>China",
+                        "Shop By Trend>After Hours",
+                        "Shop By Trend>Polka Dots",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York",
+                        "Home & Office Decor>Brands>Kate Spade New York>Glassware"
+                    ]
+                }
+            },
+            {
+                "id": "107413",
+                "mappings": {
+                    "core": {
+                        "uid": "107413",
+                        "name": "Posy Court Rectangular Green Tray",
+                        "sku": "D-854765",
+                        "msrp": 75,
+                        "price": 60,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/play_nice_tray_thumb_med.jpg",
+                        "url": "/product/D-854765",
+                        "rating": "5",
+                        "brand": "Lenox",
+                        "popularity": 2014,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/play_nice_tray_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Lenox"
+                    ],
+                    "ss_category_hierarchy": [
+                        "All Sale",
+                        "Gifts for Her",
+                        "All Sale>Home Decor on Sale"
+                    ]
+                }
+            },
+            {
+                "id": "107583",
+                "mappings": {
+                    "core": {
+                        "uid": "107583",
+                        "name": "Pineapple Of My Eye Large White Shelfie",
+                        "sku": "D-UT-38428",
+                        "msrp": 75,
+                        "price": 54,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a1938_thumb_med.jpg",
+                        "url": "/product/D-UT-38428",
+                        "rating": "5",
+                        "brand": "Urban Trends",
+                        "popularity": 3916,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a1938_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Urban Trends"
+                    ],
+                    "color": [
+                        "White"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Gifts for Her",
+                        "Home & Office Decor>Home Decor>room accents",
+                        "Home & Office Decor>Desk Decor"
+                    ]
+                }
+            },
+            {
+                "id": "107723",
+                "mappings": {
+                    "core": {
+                        "uid": "107723",
+                        "name": "Come As You Are Vest",
+                        "sku": "C-ANM-R5-15003-DMF-103944-C",
+                        "msrp": 75,
+                        "price": 62,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3079_1_2_thumb_med.jpg",
+                        "url": "/product/C-ANM-R5-15003-DMF-103944-C",
+                        "rating": "5",
+                        "brand": "ANM",
+                        "popularity": 2406,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3079_1_2_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "ANM"
+                    ],
+                    "color": [
+                        "Red"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "107894",
+                "mappings": {
+                    "core": {
+                        "uid": "107894",
+                        "name": "LOVESTITCH: Corn Maze Adventures Cardigan",
+                        "sku": "C-LS-W2-P5616",
+                        "msrp": 100,
+                        "price": 88,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/img_6853_thumb_med.jpg",
+                        "url": "/product/C-LS-W2-P5616",
+                        "rating": "5",
+                        "brand": "Love Stitch",
+                        "popularity": 3129,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/img_6853_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Love Stitch"
+                    ],
+                    "color": [
+                        "Tan"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "108014",
+                "mappings": {
+                    "core": {
+                        "uid": "108014",
+                        "name": "ANAMÁ: Never Go Back Vest",
+                        "sku": "C-ANM-G5-15104",
+                        "msrp": 125,
+                        "price": 106,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a4383_1_4_thumb_med.jpg",
+                        "url": "/product/C-ANM-G5-15104",
+                        "rating": "5",
+                        "brand": "Anama",
+                        "popularity": 2929,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a4383_1_4_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Anama"
+                    ],
+                    "color": [
+                        "Ivory"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "108340",
+                "mappings": {
+                    "core": {
+                        "uid": "108340",
+                        "name": "Two of a Kind Yours & Mine Bowls",
+                        "sku": "D-KS-857043",
+                        "msrp": 50,
+                        "price": 50,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/857043_ks_yours_mine_bowls_thumb_med.jpg",
+                        "url": "/product/D-KS-857043",
+                        "rating": "5",
+                        "brand": "Kate Spade",
+                        "popularity": 189,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/857043_ks_yours_mine_bowls_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Kate Spade"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Gifts for Her",
+                        "Home & Office Decor>Home Decor>dinnerware",
+                        "Home & Office Decor>Brands>Kate Spade New York"
+                    ]
+                }
+            },
+            {
+                "id": "109061",
+                "mappings": {
+                    "core": {
+                        "uid": "109061",
+                        "name": "One With Nature Jacket",
+                        "sku": "EL30249",
+                        "msrp": 75,
+                        "price": 68,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a8102_thumb_med.jpg",
+                        "url": "/product/EL30249",
+                        "rating": "5",
+                        "brand": "Ellison",
+                        "popularity": 2860,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a8102_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Ellison"
+                    ],
+                    "color": [
+                        "Olive"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            },
+            {
+                "id": "179773",
+                "mappings": {
+                    "core": {
+                        "uid": "179773",
+                        "name": "Your Best Shot Pink Open Shoulder Dress",
+                        "sku": "C-AD-P2-1905S",
+                        "msrp": 75,
+                        "price": 59,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26609_thumb_med.jpg",
+                        "url": "/product/C-AD-P2-1905S",
+                        "rating": "5",
+                        "popularity": 930,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26609_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "color": [
+                        "Pink",
+                        "White"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Shop By Trend",
+                        "All Dresses",
+                        "All Dresses>Short Dresses",
+                        "Shop By Trend>Spring Preview",
+                        "All Dresses>Shop by Color",
+                        "Shop By Trend>Think Pink",
+                        "Gifts for Her",
+                        "Shop By Trend>Cold Shoulder Trend",
+                        "All Dresses>Shop by Color>Pink Dresses"
+                    ]
+                }
+            },
+            {
+                "id": "110674",
+                "mappings": {
+                    "core": {
+                        "uid": "110674",
+                        "name": "His & Hers Stemless Wine Glasses",
+                        "sku": "D-KS-857835",
+                        "msrp": 50,
+                        "price": 50,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/his_hers_stemless_2_thumb_med.jpg",
+                        "url": "/product/D-KS-857835",
+                        "rating": "5",
+                        "brand": "Kate Spade",
+                        "popularity": 3485,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/his_hers_stemless_2_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Kate Spade"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Home & Office Decor>Brands",
+                        "Home & Office Decor",
+                        "Home & Office Decor>Home Decor",
+                        "Home & Office Decor>Home Decor>drinkware",
+                        "Gifts for Her",
+                        "Home & Office Decor>Brands>Kate Spade New York"
+                    ]
+                }
+            },
+            {
+                "id": "111023",
+                "mappings": {
+                    "core": {
+                        "uid": "111023",
+                        "name": "JUDITH MARCH: The Great Odyssey Tote",
+                        "sku": "B-JTH-T4-TOTE",
+                        "msrp": 75,
+                        "price": 64,
+                        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a8410_thumb_med.jpg",
+                        "url": "/product/B-JTH-T4-TOTE",
+                        "rating": "5",
+                        "brand": "Judith March",
+                        "popularity": 1310,
+                        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a8410_large.jpg",
+                        "ratingCount": 1111
+                    }
+                },
+                "attributes": {
+                    "brand": [
+                        "Judith March"
+                    ],
+                    "color": [
+                        "Tan"
+                    ],
+                    "ss_category_hierarchy": [
+                        "Gifts for Her"
+                    ]
+                }
+            }
+        ],
+        "profile": {
+            "tag": "trending"
+        }
+    }
+]
