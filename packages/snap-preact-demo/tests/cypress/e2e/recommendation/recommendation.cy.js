@@ -123,14 +123,16 @@ describe('Recommendations', () => {
 
 		it('can click on a result and go to that page', function () {
 			cy.document().then((doc) => {
-				cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
-				let url = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} a`).attributes?.href
-					?.value;
-				cy.get(config?.selectors?.recommendation.activeSlide)
-					.click({ multiple: true })
-					.then(() => {
-						cy.location('pathname').should('include', url);
-					});
+				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
+					cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
+					let url = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} a`).attributes
+						?.href?.value;
+					cy.get(config?.selectors?.recommendation.activeSlide)
+						.click({ multiple: true })
+						.then(() => {
+							cy.location('pathname').should('include', url);
+						});
+				});
 			});
 		});
 	});

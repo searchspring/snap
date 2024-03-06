@@ -24,7 +24,7 @@
 		"@searchspring/snap-toolbox": "^0.51.2",
 		"@types/uuid": "8.3.4",
 		"deepmerge": "4.3.1",
-		"uuid": "8.3.2"
+		"uuid": "9.0.1"
 	},
 	"sideEffects": false,
 	"files": [

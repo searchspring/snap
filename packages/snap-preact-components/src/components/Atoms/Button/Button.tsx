@@ -5,7 +5,7 @@ import { h, Fragment, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
