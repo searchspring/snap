@@ -42,7 +42,7 @@ export class RecommendationStore extends AbstractStore {
 		this.loaded = !!data?.profile;
 		this.meta = data?.meta || {};
 		this.profile = new RecommendationProfileStore(this.services, data);
-		this.results = new SearchResultStore(this.config, this.services, data?.results) as Product[];
+		this.results = new SearchResultStore(this.config, this.services, this.meta, data?.results) as Product[];
 
 		// TODO: remove MetaBadges typing once MetaResponseModel is updated
 		this.badges = new SearchBadgeStore(this.meta as MetaResponseModel & { badges: MetaBadges });

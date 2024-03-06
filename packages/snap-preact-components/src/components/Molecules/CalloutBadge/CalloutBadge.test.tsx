@@ -32,7 +32,7 @@ describe('CalloutBadge Component', () => {
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
-		result = controller.store.results.find((result) => result.badges.find((badge) => badge.location === CALLOUT_NAME))!;
+		result = controller.store.results.find((result) => result.badges.find((badge) => badge.location === CALLOUT_NAME))! as Product;
 		expect(result).toBeDefined();
 		expect(result.badges).toBeDefined();
 	});

@@ -43,7 +43,7 @@ describe('OverlayBadge Component', () => {
 
 				return isLeftOverlay || isRightOverlay;
 			})
-		)!;
+		)! as Product;
 		expect(result).toBeDefined();
 		expect(result.badges).toBeDefined();
 	});
