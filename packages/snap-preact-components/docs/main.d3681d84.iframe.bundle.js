@@ -1,4 +1,4 @@
-/*! For license information please see main.7dd7b83a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.d3681d84.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -22155,26 +22155,91 @@
 					return (0,
 					emotion_react_browser_esm.Y)('div', { className: classnames_default()('ss__recommendation-bundle__wrapper__selector', checked ? 'ss__recommendation-bundle__wrapper__selector--selected' : '', seedText || seed ? 'ss__recommendation-bundle__wrapper__selector--seed' : '', className) }, (0, emotion_react_browser_esm.Y)('div', { className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper' }, !hideCheckboxes && (0, emotion_react_browser_esm.Y)(Checkbox.S, Object.assign({}, subProps.checkbox)), seedText && (0, emotion_react_browser_esm.Y)('div', { className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge' }, seedText), children), (0, emotion_react_browser_esm.Y)(Icon.I, Object.assign({}, subProps.icon, 'string' == typeof icon ? { icon } : icon)));
 				}),
-				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
-				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
-				BundledCTA = (0, mobxreact_esm.PA)(function (properties) {
+				Button =
+					(__webpack_require__('../../node_modules/core-js/modules/web.timers.js'), __webpack_require__('./src/components/Atoms/Button/Button.tsx')),
+				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx');
+			function _slicedToArray(arr, i) {
+				return (
+					(function _arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function _iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(arr, i) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var BundledCTA = (0, mobxreact_esm.PA)(function (properties) {
 					var _globalTheme$componen,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
-						props = Object.assign({}, properties),
-						ctaSlot = props.ctaSlot,
-						icon = props.icon,
+						props = Object.assign({}, properties);
+					props.onAddToCart = function (e) {
+						setAddedToCart(!0),
+							properties.onAddToCart(e),
+							setTimeout(function () {
+								return setAddedToCart(!1);
+							}, properties.ctaButtonSuccessTimeout);
+					};
+					var ctaSlot = props.ctaSlot,
 						cartStore = props.cartStore,
-						onAddToCartClick = props.onAddToCartClick,
-						addToCartText = props.addToCartText,
-						subProps = {
-							icon: Object.assign(
-								{ className: 'ss__recommendation-bundle__wrapper__cta__icon', icon: 'bag', size: 50 },
-								null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
-									? void 0
-									: _globalTheme$componen.icon,
-								{ theme: null == props ? void 0 : props.theme }
-							),
-						};
+						onAddToCart = props.onAddToCart,
+						ctaIcon = props.ctaIcon,
+						ctaButtonText = props.ctaButtonText,
+						ctaButtonSuccessText = props.ctaButtonSuccessText,
+						_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+						addedToCart = _useState2[0],
+						setAddedToCart = _useState2[1];
+					props.addedToCart = addedToCart;
+					var subProps = {
+						icon: Object.assign(
+							{ className: 'ss__recommendation-bundle__wrapper__cta__icon', icon: 'bag', size: 50 },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.icon,
+							{ theme: null == props ? void 0 : props.theme }
+						),
+					};
 					return (0, emotion_react_browser_esm.Y)(
 						'div',
 						{ className: 'ss__recommendation-bundle__wrapper__cta' },
@@ -22186,11 +22251,14 @@
 									(0, emotion_react_browser_esm.Y)(
 										'div',
 										{ className: 'ss__recommendation-bundle__wrapper__cta__subtotal' },
-										icon
+										ctaIcon
 											? (0, emotion_react_browser_esm.Y)(
 													'div',
 													{ className: 'icon' },
-													(0, emotion_react_browser_esm.Y)(Icon.I, Object.assign({}, subProps.icon, 'string' == typeof icon ? { icon } : icon))
+													(0, emotion_react_browser_esm.Y)(
+														Icon.I,
+														Object.assign({}, subProps.icon, 'string' == typeof ctaIcon ? { icon: ctaIcon } : ctaIcon)
+													)
 											  )
 											: (0, emotion_react_browser_esm.Y)(preact_module.FK, null),
 										(0, emotion_react_browser_esm.Y)(
@@ -22219,12 +22287,15 @@
 									(0, emotion_react_browser_esm.Y)(
 										Button.$,
 										{
-											className: 'ss__recommendation-bundle__wrapper__cta__button',
+											className: classnames_default()('ss__recommendation-bundle__wrapper__cta__button', {
+												addedToCart: 'ss__recommendation-bundle__wrapper__cta__button--added',
+											}),
 											onClick: function onClick(e) {
-												return onAddToCartClick(e);
+												return onAddToCart(e);
 											},
+											disabled: addedToCart,
 										},
-										addToCartText
+										addedToCart ? ctaButtonSuccessText : ctaButtonText
 									)
 							  )
 					);
@@ -22247,6 +22318,8 @@
 					'resultComponent',
 					'ctaSlot',
 					'ctaButtonText',
+					'ctaButtonSuccessText',
+					'ctaButtonSuccessTimeout',
 					'disableStyles',
 					'ctaIcon',
 					'ctaInline',
@@ -22366,6 +22439,8 @@
 								separatorIconSeedOnly: !0,
 								ctaIcon: !0,
 								ctaButtonText: 'Add All To Cart',
+								ctaButtonSuccessText: 'Bundle Added!',
+								ctaButtonSuccessTimeout: 2e3,
 								ctaInline: !0,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -22410,6 +22485,8 @@
 						resultComponent = _props2.resultComponent,
 						ctaSlot = _props2.ctaSlot,
 						ctaButtonText = _props2.ctaButtonText,
+						ctaButtonSuccessText = _props2.ctaButtonSuccessText,
+						ctaButtonSuccessTimeout = _props2.ctaButtonSuccessTimeout,
 						disableStyles = _props2.disableStyles,
 						ctaIcon = _props2.ctaIcon,
 						ctaInline = _props2.ctaInline,
@@ -22513,7 +22590,7 @@
 									: cartStore.addItems([product]));
 						},
 						addToCart = function addToCart(e) {
-							controller.track.addBundle(e, selectedItems), onAddToCart && onAddToCart(selectedItems);
+							controller.track.addBundle(e, selectedItems), onAddToCart && onAddToCart(e, selectedItems);
 						},
 						seedRef = (0, hooks_module.li)(),
 						carouselRef = (0, hooks_module.li)();
@@ -22771,22 +22848,26 @@
 												(0, emotion_react_browser_esm.Y)(BundledCTA, {
 													ctaSlot,
 													cartStore,
-													onAddToCartClick: function onAddToCartClick(e) {
+													onAddToCart: function onAddToCart(e) {
 														return addToCart(e);
 													},
-													addToCartText: ctaButtonText,
-													icon: ctaIcon,
+													ctaButtonText,
+													ctaButtonSuccessText,
+													ctaButtonSuccessTimeout,
+													ctaIcon,
 												})
 										),
 										!ctaInline &&
 											(0, emotion_react_browser_esm.Y)(BundledCTA, {
 												ctaSlot,
 												cartStore,
-												onAddToCartClick: function onAddToCartClick(e) {
+												onAddToCart: function onAddToCart(e) {
 													return addToCart(e);
 												},
-												addToCartText: ctaButtonText,
-												icon: ctaIcon,
+												ctaButtonText,
+												ctaButtonSuccessText,
+												ctaButtonSuccessTimeout,
+												ctaIcon,
 											})
 									)
 								)
@@ -22853,7 +22934,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'onaddtocart' }, 'onAddToCart'),
@@ -22870,7 +22951,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'results' }, 'results'),
@@ -22891,7 +22972,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} results={controller.store.results} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} results={controller.store.results} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'carousel' }, 'carousel'),
@@ -22914,7 +22995,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"type BundleCarouselProps = {\n    enabled: boolean;\n    seedInCarousel?: boolean;\n} & CarouselProps\n\nconst customCarouselProps = {\n    enabled: true,\n    loop: false,\n    prevButton: 'Previous',\n    nextButton: 'Next'\n}\n<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ customCarouselProps } />\n"
+							"type BundleCarouselProps = {\n    enabled: boolean;\n    seedInCarousel?: boolean;\n} & CarouselProps\n\nconst customCarouselProps = {\n    enabled: true,\n    loop: false,\n    prevButton: 'Previous',\n    nextButton: 'Next'\n}\n<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ customCarouselProps } />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'enabled' }, 'enabled'),
@@ -22933,7 +23014,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ enabled:false } />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'seedincarousel' }, 'seedInCarousel'),
@@ -22952,7 +23033,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ seedInCarousel:true } />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ seedInCarousel:true } />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'pagination' }, 'pagination'),
@@ -22971,7 +23052,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ pagination:true } />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ pagination:true } />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'hidebuttons' }, 'hideButtons'),
@@ -22990,7 +23071,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ hideButtons:true }><Recommendation/>\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ hideButtons:true }><Recommendation/>\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'prevbutton' }, 'prevButton'),
@@ -23009,7 +23090,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ prevButton: '<' } />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ prevButton: '<' } />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'nextbutton' }, 'nextButton'),
@@ -23028,7 +23109,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} carousel={ nextButton: '>' } />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ nextButton: '>' } />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'title' }, 'title'),
@@ -23039,7 +23120,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} title={'Recommended Bundle'} />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} title={'Recommended Bundle'} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'resultcomponent' }, 'resultComponent'),
@@ -23065,7 +23146,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} resultComponent={<ResultSlot />} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} resultComponent={<ResultSlot />} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'ctabuttontext' }, 'ctaButtonText'),
@@ -23082,7 +23163,41 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaButtonText={'Add Bundle'} />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaButtonText={'Add Bundle'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'ctabuttonsuccesstext' }, 'ctaButtonSuccessText'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ctaButtonSuccessText'),
+						' prop specifies text to temporarily render in the add to cart button after it is clicked.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaButtonSuccessText={'Thanks for Shopping!'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'ctabuttonsuccesstimeout' }, 'ctaButtonSuccessTimeout'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ctaButtonSuccessTimeout'),
+						' prop specifies number of ms to show success text in add to cart button before reverting back to normal text'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaButtonSuccessTimeout={1500} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'ctaicon' }, 'ctaIcon'),
@@ -23101,7 +23216,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaIcon={'bag'} />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaIcon={'bag'} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'ctainline' }, 'ctaInline'),
@@ -23118,7 +23233,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaInline={true} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaInline={true} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'ctaslot' }, 'ctaSlot'),
@@ -23144,7 +23259,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} ctaSlot={<CTASlot />} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaSlot={<CTASlot />} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'preselectedcount' }, 'preselectedCount'),
@@ -23165,7 +23280,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} preselectedCount={4} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} preselectedCount={4} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'seedtext' }, 'seedText'),
@@ -23182,7 +23297,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} seedText={"Main Product"} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} seedText={"Main Product"} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'separatoricon' }, 'separatorIcon'),
@@ -23201,7 +23316,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIcon={'cog'} />\n"
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIcon={'cog'} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'separatoriconseedonly' }, 'separatorIconSeedOnly'),
@@ -23218,7 +23333,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} separatorIconSeedOnly={true} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIconSeedOnly={true} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'hidecheckboxes' }, 'hideCheckboxes'),
@@ -23235,7 +23350,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} hideCheckboxes={true} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideCheckboxes={true} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'vertical' }, 'vertical'),
@@ -23252,7 +23367,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} vertical={true} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} vertical={true} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'modules' }, 'modules'),
@@ -23279,7 +23394,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"import { Scrollbar } from 'swiper';\n<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} modules={[Scrollbar]} scrollbar={{ draggable: true }} />\n"
+							"import { Scrollbar } from 'swiper';\n<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} modules={[Scrollbar]} scrollbar={{ draggable: true }} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'breakpoints' }, 'breakpoints'),
@@ -23321,7 +23436,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<RecommendationBundle controller={controller} onAddToCart={(items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />\n'
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />\n'
 						)
 					)
 				);
@@ -23693,7 +23808,7 @@
 					});
 				};
 			}
-			function _arrayLikeToArray(arr, len) {
+			function RecommendationBundle_stories_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
@@ -23721,35 +23836,29 @@
 							table: { type: { summary: 'Controller' } },
 							control: { type: 'none' },
 						},
-						onAddToCart: {
-							description: 'onClick event handler for add bundle to cart button',
-							type: { required: !0 },
-							table: { type: { summary: 'function' } },
-							action: 'onAddToCart',
-						},
 						results: {
 							description: 'Results store reference, overrides controller.store.results',
 							type: { required: !1 },
 							table: { type: { summary: 'Results store object' } },
 							control: { type: 'none' },
 						},
+						resultComponent: { description: 'Slot for custom result component', table: { type: { summary: 'component' } } },
 						title: {
-							description: 'Recommendation title',
+							description: 'recommendation title',
 							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
 							control: { type: 'text' },
 						},
-						ctaButtonText: {
-							description: 'Text to render in add to cart button',
-							table: { type: { summary: 'string' }, defaultValue: { summary: 'Add All To Cart' } },
-							control: { type: 'text' },
+						onAddToCart: {
+							description: 'onClick event handler for add bundle to cart button in CTA',
+							type: { required: !0 },
+							table: { type: { summary: 'function' } },
+							action: 'onAddToCart',
 						},
-						resultComponent: { description: 'Slot for custom result component', table: { type: { summary: 'component' } } },
-						ctaSlot: { description: 'Slot for custom add to cart component', table: { type: { summary: 'component' } } },
 						limit: { description: 'limit the number of results rendered', table: { type: { summary: 'number' } }, control: { type: 'number' } },
 						carousel: {
-							description: 'Carousel Settings object',
+							description: 'Carousel settings object',
 							defaultValue: { enabled: !0, loop: !1 },
-							table: { type: { summary: 'object' }, defaultValue: { summary: 'Carousel Settings object' } },
+							table: { type: { summary: 'object' }, defaultValue: { summary: 'Carousel settings object' } },
 							control: { type: 'object' },
 						},
 						preselectedCount: {
@@ -23788,18 +23897,19 @@
 								options: (function _toConsumableArray(arr) {
 									return (
 										(function _arrayWithoutHoles(arr) {
-											if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+											if (Array.isArray(arr)) return RecommendationBundle_stories_arrayLikeToArray(arr);
 										})(arr) ||
 										(function _iterableToArray(iter) {
 											if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 										})(arr) ||
-										(function _unsupportedIterableToArray(o, minLen) {
+										(function RecommendationBundle_stories_unsupportedIterableToArray(o, minLen) {
 											if (!o) return;
-											if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+											if ('string' == typeof o) return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
 											var n = Object.prototype.toString.call(o).slice(8, -1);
 											'Object' === n && o.constructor && (n = o.constructor.name);
 											if ('Map' === n || 'Set' === n) return Array.from(o);
-											if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+											if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+												return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
 										})(arr) ||
 										(function _nonIterableSpread() {
 											throw new TypeError(
@@ -23810,11 +23920,28 @@
 								})(Object.keys(paths.c)),
 							},
 						},
+						ctaButtonText: {
+							description: 'text to render in add to cart button',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'Add All To Cart' } },
+							control: { type: 'text' },
+						},
+						ctaButtonSuccessText: {
+							description: 'text to temporarily render in the add to cart button after it is clicked',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'Bundle Added!' } },
+							control: { type: 'text' },
+						},
+						ctaButtonSuccessTimeout: {
+							description: 'Number of ms to show success text in add to cart button before reverting back to normal text',
+							defaultValue: 2e3,
+							table: { type: { summary: 'number' } },
+							control: { type: 'number' },
+						},
 						ctaInline: {
 							description: 'boolean to enable the stacked add to cart button display',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
 							control: { type: 'boolean' },
 						},
+						ctaSlot: { description: 'Slot for custom add to cart component', table: { type: { summary: 'component' } } },
 						breakpoints: {
 							defaultValue: void 0,
 							description: 'Recommendation title',
@@ -42661,7 +42788,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.52.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.52.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43154,7 +43281,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.52.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.52.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
