@@ -22,7 +22,8 @@
 		"lint": "eslint 'src/components/**/*.{js,jsx,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",
 		"cypress": "cypress open --project tests",
-		"test": "jest",
+		"cypress:headless": "cypress run --component --project tests",
+		"test": "jest; npm run cypress:headless",
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {

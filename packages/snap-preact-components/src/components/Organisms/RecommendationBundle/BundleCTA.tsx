@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
+import { useState } from 'preact/hooks';
 import { jsx } from '@emotion/react';
 import { observer } from 'mobx-react';
+import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
 import { Price } from '../../Atoms/Price';
@@ -19,7 +21,19 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		...properties,
 	};
 
-	const { ctaSlot, icon, cartStore, onAddToCartClick, addToCartText } = props;
+	props.onAddToCart = (e: any) => {
+		setAddedToCart(true);
+
+		properties.onAddToCart(e);
+
+		setTimeout(() => setAddedToCart(false), properties.ctaButtonSuccessTimeout);
+	};
+
+	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText } = props;
+
+	const [addedToCart, setAddedToCart] = useState(false);
+
+	props.addedToCart = addedToCart;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -40,9 +54,9 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			) : (
 				<Fragment>
 					<div className="ss__recommendation-bundle__wrapper__cta__subtotal">
-						{icon ? (
+						{ctaIcon ? (
 							<div className="icon">
-								<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
+								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon as string } : (ctaIcon as Partial<IconProps>))} />
 							</div>
 						) : (
 							<></>
@@ -62,8 +76,14 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						</div>
 					</div>
 
-					<Button className={'ss__recommendation-bundle__wrapper__cta__button'} onClick={(e) => onAddToCartClick(e)}>
-						{addToCartText}
+					<Button
+						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
+							addedToCart: 'ss__recommendation-bundle__wrapper__cta__button--added',
+						})}
+						onClick={(e) => onAddToCart(e)}
+						disabled={addedToCart}
+					>
+						{addedToCart ? ctaButtonSuccessText : ctaButtonText}
 					</Button>
 				</Fragment>
 			)}
@@ -78,7 +98,9 @@ export interface BundleSelectorSubProps {
 interface BundledCTAProps extends ComponentProps {
 	ctaSlot?: JSX.Element;
 	cartStore: CartStore;
-	icon?: string | Partial<IconProps> | boolean;
-	onAddToCartClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	addToCartText?: string;
+	onAddToCart: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	ctaIcon?: string | Partial<IconProps> | boolean;
+	ctaButtonText?: string;
+	ctaButtonSuccessText?: string;
+	ctaButtonSuccessTimeout?: number;
 }

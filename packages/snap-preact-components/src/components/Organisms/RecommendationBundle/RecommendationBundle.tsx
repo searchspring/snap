@@ -150,6 +150,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		separatorIconSeedOnly: true,
 		ctaIcon: true,
 		ctaButtonText: 'Add All To Cart',
+		ctaButtonSuccessText: 'Bundle Added!',
+		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
 		// global theme
 		...globalTheme?.components?.recommendationBundle,
@@ -185,6 +187,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		resultComponent,
 		ctaSlot,
 		ctaButtonText,
+		ctaButtonSuccessText,
+		ctaButtonSuccessTimeout,
 		disableStyles,
 		ctaIcon,
 		ctaInline,
@@ -333,13 +337,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}
 		}
 	};
-
-	const addToCart = (e: any) => {
+	const addToCart = (e: MouseEvent) => {
 		// add to cart tracking
 		controller.track.addBundle(e, selectedItems);
 
 		//call the function passed
-		onAddToCart && onAddToCart(selectedItems);
+		onAddToCart && onAddToCart(e, selectedItems);
 	};
 
 	const setSeedwidth = () => {
@@ -547,9 +550,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 							<BundledCTA
 								ctaSlot={ctaSlot}
 								cartStore={cartStore}
-								onAddToCartClick={(e: any) => addToCart(e)}
-								addToCartText={ctaButtonText}
-								icon={ctaIcon}
+								onAddToCart={(e: any) => addToCart(e)}
+								ctaButtonText={ctaButtonText}
+								ctaButtonSuccessText={ctaButtonSuccessText}
+								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
+								ctaIcon={ctaIcon}
 							/>
 						)}
 					</div>
@@ -557,9 +562,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 						<BundledCTA
 							ctaSlot={ctaSlot}
 							cartStore={cartStore}
-							onAddToCartClick={(e: any) => addToCart(e)}
-							addToCartText={ctaButtonText}
-							icon={ctaIcon}
+							onAddToCart={(e: any) => addToCart(e)}
+							ctaButtonText={ctaButtonText}
+							ctaButtonSuccessText={ctaButtonSuccessText}
+							ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
+							ctaIcon={ctaIcon}
 						/>
 					)}
 				</RecommendationProfileTracker>
@@ -580,7 +587,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	results?: Product[];
 	limit?: number;
 	controller: RecommendationController;
-	onAddToCart: (items: Product[]) => void;
+	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	resultComponent?: JSX.Element;
@@ -592,6 +599,8 @@ export interface RecommendationBundleProps extends ComponentProps {
 	ctaInline?: boolean;
 	ctaIcon?: string | Partial<IconProps> | boolean;
 	ctaButtonText?: string;
+	ctaButtonSuccessText?: string;
+	ctaButtonSuccessTimeout?: number;
 	ctaSlot?: JSX.Element;
 	vertical?: boolean;
 	carousel?: BundleCarouselProps;
