@@ -3,7 +3,7 @@
 	"name": "bundle",
 	"label": "Bundle Template",
 	"description": "a bundle template...",
-	"component": "Bundles",
+	"component": "Bundle",
 	"orientation": "horizontal",
 	"parameters": [
 		{
