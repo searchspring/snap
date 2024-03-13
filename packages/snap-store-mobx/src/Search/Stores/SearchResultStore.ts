@@ -206,15 +206,42 @@ class Variants {
 		this.updateDisplay(this.active);
 	}
 
-	public makeSelections(options?: Record<string, string>) {
-		// TODO - support for affinity to attempt to pre-selected options
+	public makeSelections(options?: Record<string, string[]>) {
 		// options = {color: 'Blue', size: 'L'};
+
 		if (!options) {
 			// select first available for each selection
 			this.selections.forEach((selection) => {
 				const firstAvailableOption = selection.values.find((value) => value.available);
 				if (firstAvailableOption) {
 					selection.select(firstAvailableOption.value);
+				}
+			});
+		} else {
+			// select first available for each selection
+			this.selections.forEach((selection, idx) => {
+				// filter by first available, then by preselected option preference
+				//make all options available for first selection.
+				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
+				const preferedOptions = options[selection.field as keyof typeof options];
+				let preferencedOption = availableOptions[0];
+
+				// if theres a preference for that field
+				if (preferedOptions) {
+					//loop through each preference option
+					preferedOptions.forEach((preference: string) => {
+						//see if that option is in the available options
+						const availablePreferedOptions = availableOptions.find((value) => value.value.toLowerCase() == preference.toLowerCase());
+
+						//use it
+						if (availablePreferedOptions) {
+							preferencedOption = availablePreferedOptions;
+						}
+					});
+				}
+
+				if (preferencedOption) {
+					selection.select(preferencedOption.value);
 				}
 			});
 		}
