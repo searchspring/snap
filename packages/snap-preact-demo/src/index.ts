@@ -15,7 +15,6 @@ import './styles/custom.scss';
  */
 
 let siteId = '8uyt2m';
-// let siteId = 'z7h1jh';
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
