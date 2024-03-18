@@ -1,4 +1,4 @@
-/*! For license information please see main.d3681d84.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.4fc934c2.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -37872,60 +37872,94 @@
 						(this.value = banner.value),
 						(0, mobx_esm.Gn)(this, { id: mobx_esm.sH, mappings: mobx_esm.sH, attributes: mobx_esm.sH });
 				}),
-				Product = SearchResultStore_createClass(function Product(services, result, config) {
-					var _config$settings,
-						_config$settings$vari,
-						_result$children,
-						_this = this;
-					SearchResultStore_classCallCheck(this, Product),
-						(this.type = 'product'),
-						(this.attributes = {}),
-						(this.mappings = { core: {} }),
-						(this.custom = {}),
-						(this.children = []),
-						(this.quantity = 1),
-						(this.display = { mappings: { core: {} }, attributes: {}, options: {} }),
-						(this.updateDisplay = function (display) {
-							var defaultDisplay = { mappings: _this.mappings, attributes: _this.attributes, options: {} },
-								newDisplay = cjs_default()(defaultDisplay, display || defaultDisplay, { isMergeableObject: is_plain_object.Q });
-							JSON.stringify(_this.display) !== JSON.stringify(newDisplay) && (_this.display = newDisplay);
-						}),
-						(this.id = result.id),
-						(this.attributes = result.attributes),
-						(this.mappings = result.mappings),
-						this.updateDisplay();
-					var variantsField =
-						null == config ||
-						null === (_config$settings = config.settings) ||
-						void 0 === _config$settings ||
-						null === (_config$settings$vari = _config$settings.variants) ||
-						void 0 === _config$settings$vari
-							? void 0
-							: _config$settings$vari.field;
-					if (config && variantsField && this.attributes && this.attributes[variantsField])
-						try {
-							var parsedVariants = JSON.parse(this.attributes[variantsField]);
-							this.variants = new Variants(config, services, parsedVariants, this.updateDisplay);
-						} catch (err) {
-							console.error(err, 'Invalid variant JSON for product id: ' + result.id);
-						}
-					null != result &&
-						null !== (_result$children = result.children) &&
-						void 0 !== _result$children &&
-						_result$children.length &&
-						(this.children = result.children.map(function (variant, index) {
-							return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
-						})),
-						(0, mobx_esm.Gn)(this, { id: mobx_esm.sH, display: mobx_esm.sH, attributes: mobx_esm.sH, custom: mobx_esm.sH, quantity: mobx_esm.sH });
-					var coreObservables = Object.keys(this.mappings.core).reduce(function (map, key) {
-						var _Object$assign;
-						return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.sH), _Object$assign));
-					}, {});
-					(0, mobx_esm.Gn)(this.mappings.core, coreObservables);
-				}),
+				Product = (function () {
+					function Product(services, result, config) {
+						var _config$settings, _config$settings$vari, _result$children;
+						SearchResultStore_classCallCheck(this, Product),
+							(this.type = 'product'),
+							(this.attributes = {}),
+							(this.mappings = { core: {} }),
+							(this.custom = {}),
+							(this.children = []),
+							(this.quantity = 1),
+							(this.mask = new ProductMask()),
+							(this.id = result.id),
+							(this.attributes = result.attributes),
+							(this.mappings = result.mappings);
+						var variantsField =
+							null == config ||
+							null === (_config$settings = config.settings) ||
+							void 0 === _config$settings ||
+							null === (_config$settings$vari = _config$settings.variants) ||
+							void 0 === _config$settings$vari
+								? void 0
+								: _config$settings$vari.field;
+						if (config && variantsField && this.attributes && this.attributes[variantsField])
+							try {
+								var parsedVariants = JSON.parse(this.attributes[variantsField]);
+								this.variants = new Variants(parsedVariants, this.mask);
+							} catch (err) {
+								console.error(err, 'Invalid variant JSON for product id: ' + result.id);
+							}
+						null != result &&
+							null !== (_result$children = result.children) &&
+							void 0 !== _result$children &&
+							_result$children.length &&
+							(this.children = result.children.map(function (variant, index) {
+								return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
+							})),
+							(0, mobx_esm.Gn)(this, { id: mobx_esm.sH, display: mobx_esm.EW, attributes: mobx_esm.sH, custom: mobx_esm.sH, quantity: mobx_esm.sH });
+						var coreObservables = Object.keys(this.mappings.core).reduce(function (map, key) {
+							var _Object$assign;
+							return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.sH), _Object$assign));
+						}, {});
+						(0, mobx_esm.Gn)(this.mappings.core, coreObservables);
+					}
+					return (
+						SearchResultStore_createClass(Product, [
+							{
+								key: 'display',
+								get: function get() {
+									return cjs_default()({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, {
+										isMergeableObject: is_plain_object.Q,
+									});
+								},
+							},
+						]),
+						Product
+					);
+				})(),
+				ProductMask = (function () {
+					function ProductMask() {
+						SearchResultStore_classCallCheck(this, ProductMask), (this.data = {}), (0, mobx_esm.Gn)(this, { data: mobx_esm.sH });
+					}
+					return (
+						SearchResultStore_createClass(ProductMask, [
+							{
+								key: 'merge',
+								value: function merge(mask) {
+									JSON.stringify(cjs_default()(this.data, mask)) != JSON.stringify(this.data) && (this.data = cjs_default()(this.data, mask));
+								},
+							},
+							{
+								key: 'set',
+								value: function set(mask) {
+									JSON.stringify(mask) != JSON.stringify(this.data) && (this.data = mask);
+								},
+							},
+							{
+								key: 'reset',
+								value: function reset() {
+									this.data = {};
+								},
+							},
+						]),
+						ProductMask
+					);
+				})(),
 				Variants = (function () {
-					function Variants(config, services, variantData, updateDisplay) {
-						var _this2 = this;
+					function Variants(variantData, mask) {
+						var _this = this;
 						SearchResultStore_classCallCheck(this, Variants), (this.data = []), (this.selections = []);
 						var options = [];
 						(this.data = variantData.map(function (variant) {
@@ -37933,25 +37967,20 @@
 								Object.keys(variant.options).forEach(function (variantOption) {
 									options.includes(variantOption) || options.push(variantOption);
 								}),
-								new Variant(services, variant)
+								new Variant(variant)
 							);
 						})),
-							(this.config = config),
-							(this.updateDisplay = updateDisplay),
 							options.map(function (option) {
 								var optionConfig = { field: option, label: option };
-								_this2.selections.push(new VariantSelection(config, services, _this2, optionConfig, _this2.data));
+								_this.selections.push(new VariantSelection(_this, optionConfig));
+							}),
+							(this.setActive = function (variant) {
+								(_this.active = variant), mask.set({ mappings: _this.active.mappings, attributes: _this.active.attributes });
 							}),
 							this.makeSelections();
 					}
 					return (
 						SearchResultStore_createClass(Variants, [
-							{
-								key: 'setActive',
-								value: function setActive(variant) {
-									(this.active = variant), this.updateDisplay(this.active);
-								},
-							},
 							{
 								key: 'makeSelections',
 								value: function makeSelections(options) {
@@ -37960,20 +37989,20 @@
 											var firstAvailableOption = selection.values.find(function (value) {
 												return value.available;
 											});
-											firstAvailableOption && selection.select(firstAvailableOption.value);
+											firstAvailableOption && selection.select(firstAvailableOption.value, !0);
 										});
 								},
 							},
 							{
 								key: 'update',
 								value: function update(fromSelection) {
-									var _this3 = this,
+									var _this2 = this,
 										orderedSelections = SearchResultStore_toConsumableArray(this.selections);
 									orderedSelections.sort(function (a) {
 										return a.field == fromSelection.field ? 1 : -1;
 									}),
 										orderedSelections.forEach(function (selection) {
-											return selection.refineSelections(_this3.data);
+											return selection.refineSelections(_this2);
 										});
 									var selectedSelections = this.selections.filter(function (selection) {
 										var _selection$selected;
@@ -38008,28 +38037,31 @@
 					);
 				})(),
 				VariantSelection = (function () {
-					function VariantSelection(config, services, variants, selectorConfig, data) {
+					function VariantSelection(variants, selectorConfig) {
+						var _this3 = this;
 						SearchResultStore_classCallCheck(this, VariantSelection),
 							(this.selected = ''),
 							(this.previouslySelected = ''),
 							(this.values = []),
 							(this.field = selectorConfig.field),
 							(this.label = selectorConfig.label),
-							(this.variants = variants),
-							this.refineSelections(data),
+							(this.variantsUpdate = function () {
+								return variants.update(_this3);
+							}),
+							this.refineSelections(variants),
 							(0, mobx_esm.Gn)(this, { selected: mobx_esm.sH, values: mobx_esm.sH });
 					}
 					return (
 						SearchResultStore_createClass(VariantSelection, [
 							{
 								key: 'refineSelections',
-								value: function refineSelections(allVariants) {
+								value: function refineSelections(variants) {
 									var _step2,
 										_this4 = this,
-										selectedSelections = this.variants.selections.filter(function (selection) {
+										selectedSelections = variants.selections.filter(function (selection) {
 											return selection.field != _this4.field && selection.selected;
 										}),
-										availableVariants = allVariants,
+										availableVariants = variants.data,
 										_loop2 = function _loop2(selectedSelection) {
 											availableVariants = availableVariants.filter(function (variant) {
 												return selectedSelection.selected == variant.options[selectedSelection.field] && variant.available;
@@ -38045,7 +38077,7 @@
 									} finally {
 										_iterator2.f();
 									}
-									var newValues = allVariants
+									var newValues = variants.data
 										.filter(function (variant) {
 											return variant.options[_this4.field];
 										})
@@ -38076,12 +38108,13 @@
 										})
 									)
 										if (
+											this.selected !== this.previouslySelected &&
 											this.previouslySelected &&
 											newValues.some(function (val) {
 												return val.value == _this4.previouslySelected && val.available;
 											})
 										)
-											this.selected !== this.previouslySelected && this.select(this.previouslySelected, !0);
+											this.select(this.previouslySelected, !0);
 										else {
 											var availableValues = newValues.filter(function (val) {
 												return val.available;
@@ -38109,14 +38142,14 @@
 									var internalSelection = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
 									this.values.find(function (val) {
 										return val.value == value;
-									}) && ((this.selected = value), internalSelection || (this.previouslySelected = value), this.variants.update(this));
+									}) && (internalSelection || (this.previouslySelected = this.selected), (this.selected = value), this.variantsUpdate());
 								},
 							},
 						]),
 						VariantSelection
 					);
 				})(),
-				Variant = SearchResultStore_createClass(function Variant(services, variantData) {
+				Variant = SearchResultStore_createClass(function Variant(variantData) {
 					SearchResultStore_classCallCheck(this, Variant),
 						(this.type = 'variant'),
 						(this.attributes = {}),
@@ -42788,7 +42821,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.52.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.52.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43281,7 +43314,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.52.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.52.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
