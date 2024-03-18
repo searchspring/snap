@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+### Bug Fixes
+
+- **store-mobx/resultstore:** modifying display to leverage mask - adding variant and middleware test ([0eaffd8](https://github.com/searchspring/snap/commit/0eaffd8a6435c71c16e816c5682b20eac0125739))
+
 ## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
 
 **Note:** Version bump only for package @searchspring/snap
