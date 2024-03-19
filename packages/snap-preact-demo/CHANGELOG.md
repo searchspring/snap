@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+### Bug Fixes
+
+- **store-mobx/resultstore:** modifying display to leverage mask - adding variant and middleware test ([0eaffd8](https://github.com/searchspring/snap/commit/0eaffd8a6435c71c16e816c5682b20eac0125739))
+
+## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.52.0](https://github.com/searchspring/snap/compare/v0.51.2...v0.52.0) (2024-03-06)
+
+### Features
+
+- **preact-components-bundlerecommendations:** new component for upcoming bundlerecs feature ([5547094](https://github.com/searchspring/snap/commit/554709406640e6232e525367f1776fd03979fd44))
+- **product-variants:** adding initial product variants code to the result store ([15208ed](https://github.com/searchspring/snap/commit/15208ed652a73d177618d9c62cfb146f1dcbf173))
+
+## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.51.1](https://github.com/searchspring/snap/compare/v0.51.0...v0.51.1) (2024-02-09)
+
+### Bug Fixes
+
+- **controller/search:** altering backfill algorithm to use per page value instead of maximum rpp ([fc1bee1](https://github.com/searchspring/snap/commit/fc1bee1887ed2ded9010dfe681b15469759c5d42))
+
 # [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+### Bug Fixes
+
+- **store-mobx/resultstore:** modifying display to leverage mask - adding variant and middleware test ([0eaffd8](https://github.com/searchspring/snap/commit/0eaffd8a6435c71c16e816c5682b20eac0125739))
+
+## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.52.0](https://github.com/searchspring/snap/compare/v0.51.2...v0.52.0) (2024-03-06)
+
+### Bug Fixes
+
+- **bundledrecommendation:** bugfixes around seedincarousel ([881ad04](https://github.com/searchspring/snap/commit/881ad04ab3e3c5ac77a9d6809a20525c796472cb))
+- **preact-components-carousel:** custom swiper navigation support, bc for default nav containers ([abdc4eb](https://github.com/searchspring/snap/commit/abdc4ebab5c0c85c730c7d0ced8226bcc5db39c3))
+- **preact-components-carousel:** monkey patching navigation.onprev and onnext functions for swiper ([355b5c0](https://github.com/searchspring/snap/commit/355b5c0073844fd2385b8bd4411025bad31eb0bf))
+
+### Features
+
+- **preact-components-bundlerecommendations:** new component for upcoming bundlerecs feature ([5547094](https://github.com/searchspring/snap/commit/554709406640e6232e525367f1776fd03979fd44))
+- **preact-components/carousel:** updating to swiper v11 ([6a7a761](https://github.com/searchspring/snap/commit/6a7a761ce2dda5acd9ca2bef803a87dd6e003e33))
+- **product-variants:** adding initial product variants code to the result store ([15208ed](https://github.com/searchspring/snap/commit/15208ed652a73d177618d9c62cfb146f1dcbf173))
+
+## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
+
+### Bug Fixes
+
+- **controller/search:** modifying logic for infinite backfill to optimize cache ([f6fa5d6](https://github.com/searchspring/snap/commit/f6fa5d6e8d74a472906d642f0f36bed82bd87b6f))
+
+## [0.51.1](https://github.com/searchspring/snap/compare/v0.51.0...v0.51.1) (2024-02-09)
+
+### Bug Fixes
+
+- **controller/search:** altering backfill algorithm to use per page value instead of maximum rpp ([fc1bee1](https://github.com/searchspring/snap/commit/fc1bee1887ed2ded9010dfe681b15469759c5d42))
+
 # [0.51.0](https://github.com/searchspring/snap/compare/v0.50.0...v0.51.0) (2024-01-22)
 
 ### Bug Fixes

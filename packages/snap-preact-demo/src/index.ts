@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
 import { url } from '@searchspring/snap-toolbox';
-
+// import { afterSearch } from './middleware/plugins/afterSearch';
 import { afterStore } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
@@ -15,6 +15,7 @@ import './styles/custom.scss';
  */
 
 let siteId = '8uyt2m';
+
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
 const urlSiteIdParam = urlObj.params.query.siteId || urlObj.params.query.siteid;
@@ -59,6 +60,12 @@ let config: SnapConfig = {
 				Recs: async () => {
 					return (await import('./components/Recommendations/Recs/Recs')).Recs;
 				},
+				Bundle: async () => {
+					return (await import('./components/Recommendations/Bundles/Bundles')).Bundles;
+				},
+				Default: async () => {
+					return (await import('./components/Recommendations/Recs/Recs')).Recs;
+				},
 				Email: async () => {
 					return (await import('./components/Recommendations/Email/Email')).Email;
 				},
@@ -66,6 +73,12 @@ let config: SnapConfig = {
 
 			config: {
 				branch: BRANCHNAME,
+				plugins: [],
+				settings: {
+					variants: {
+						field: 'ss_variants',
+					},
+				},
 			},
 		},
 	},
@@ -79,6 +92,9 @@ let config: SnapConfig = {
 						redirects: {
 							merchandising: false,
 							singleResult: false,
+						},
+						variants: {
+							field: 'ss_variants',
 						},
 						restorePosition: {
 							enabled: true,

@@ -326,6 +326,13 @@ var documents = [
 						searchable: true,
 					},
 					{
+						label: 'Cart',
+						route: '/package-storeMobx-cart',
+						type: 'markdown',
+						url: './packages/snap-store-mobx/src/Cart/README.md',
+						searchable: true,
+					},
+					{
 						label: 'Typedocs',
 						type: 'external',
 						url: 'https://searchspring.github.io/snap/packages/snap-store-mobx/docs/',

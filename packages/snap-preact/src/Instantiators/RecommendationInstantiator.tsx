@@ -96,9 +96,7 @@ export class RecommendationInstantiator {
 		this.targeter = new DomTargeter(
 			[
 				{
-					selector: `script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]${
-						this.config.selector ? ` , ${this.config.selector}` : ''
-					}`,
+					selector: this.config.selector || 'script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]',
 					autoRetarget: true,
 					clickRetarget: true,
 					inject: {
