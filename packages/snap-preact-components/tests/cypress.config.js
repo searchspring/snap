@@ -10,5 +10,8 @@ module.exports = defineConfig({
 			bundler: 'webpack',
 		},
 	},
+	chromeWebSecurity: false,
+	video: false,
+	screenshotOnRunFailure: false,
 	webpackConfig,
 });

@@ -1,0 +1,15 @@
+{
+	"facets": {
+		"ss_price": { "multiple": "or", "display": "list", "label": "Price", "collapsed": true },
+		"ss_review_value": { "multiple": "or", "display": "list", "label": "Customer Rating", "collapsed": true },
+		"ss_tags_color": { "multiple": "or", "display": "palette", "label": "Color", "collapsed": true },
+		"tags_fit": { "multiple": "or", "display": "list", "label": "Fit", "collapsed": true },
+		"tags_gender": { "multiple": "or", "display": "list", "label": "Gender", "collapsed": true },
+		"tags_style": { "multiple": "or", "display": "list", "label": "Style", "collapsed": true },
+		"variant_inseam": { "multiple": "or", "display": "grid", "label": "Inseam", "collapsed": true },
+		"variant_size": { "multiple": "or", "display": "grid", "label": "Size", "collapsed": true },
+		"vendor": { "multiple": "or", "display": "list", "label": "Brand", "collapsed": false }
+	},
+	"sortOptions": [{ "type": "relevance", "field": "relevance", "direction": "desc", "label": "Best Match" }],
+	"pagination": { "defaultPageSize": 40 }
+}

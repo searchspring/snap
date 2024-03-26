@@ -15,7 +15,6 @@ import './styles/custom.scss';
  */
 
 let siteId = '8uyt2m';
-// let siteId = 'z7h1jh';
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
@@ -61,7 +60,7 @@ let config: SnapConfig = {
 				Recs: async () => {
 					return (await import('./components/Recommendations/Recs/Recs')).Recs;
 				},
-				Bundles: async () => {
+				Bundle: async () => {
 					return (await import('./components/Recommendations/Bundles/Bundles')).Bundles;
 				},
 				Default: async () => {

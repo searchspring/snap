@@ -49,16 +49,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		onAddToCart: {
-			description: 'onClick event handler for add bundle to cart button',
-			type: { required: true },
-			table: {
-				type: {
-					summary: 'function',
-				},
-			},
-			action: 'onAddToCart',
-		},
 		results: {
 			description: 'Results store reference, overrides controller.store.results',
 			type: { required: false },
@@ -69,26 +59,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		title: {
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'string | JSX Element',
-				},
-				defaultValue: { summary: '' },
-			},
-			control: { type: 'text' },
-		},
-		ctaButtonText: {
-			description: 'Text to render in add to cart button',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'Add All To Cart' },
-			},
-			control: { type: 'text' },
-		},
 		resultComponent: {
 			description: 'Slot for custom result component',
 			table: {
@@ -97,13 +67,25 @@ export default {
 				},
 			},
 		},
-		ctaSlot: {
-			description: 'Slot for custom add to cart component',
+		title: {
+			description: 'recommendation title',
 			table: {
 				type: {
-					summary: 'component',
+					summary: 'string | JSX Element',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		onAddToCart: {
+			description: 'onClick event handler for add bundle to cart button in CTA',
+			type: { required: true },
+			table: {
+				type: {
+					summary: 'function',
 				},
 			},
+			action: 'onAddToCart',
 		},
 		limit: {
 			description: 'limit the number of results rendered',
@@ -115,7 +97,7 @@ export default {
 			control: { type: 'number' },
 		},
 		carousel: {
-			description: 'Carousel Settings object',
+			description: 'Carousel settings object',
 			defaultValue: {
 				enabled: true,
 				loop: false,
@@ -124,7 +106,7 @@ export default {
 				type: {
 					summary: 'object',
 				},
-				defaultValue: { summary: 'Carousel Settings object' },
+				defaultValue: { summary: 'Carousel settings object' },
 			},
 			control: { type: 'object' },
 		},
@@ -193,6 +175,36 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
+		ctaButtonText: {
+			description: 'text to render in add to cart button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Add All To Cart' },
+			},
+			control: { type: 'text' },
+		},
+		ctaButtonSuccessText: {
+			description: 'text to temporarily render in the add to cart button after it is clicked',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Bundle Added!' },
+			},
+			control: { type: 'text' },
+		},
+		ctaButtonSuccessTimeout: {
+			description: 'Number of ms to show success text in add to cart button before reverting back to normal text',
+			defaultValue: 2000,
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
 		ctaInline: {
 			description: 'boolean to enable the stacked add to cart button display',
 			table: {
@@ -202,6 +214,14 @@ export default {
 				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
+		},
+		ctaSlot: {
+			description: 'Slot for custom add to cart component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
 		},
 		breakpoints: {
 			defaultValue: undefined,
