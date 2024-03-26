@@ -9,7 +9,6 @@ import {
 	SearchPaginationStore,
 	SearchSortingStore,
 	SearchHistoryStore,
-	SearchBadgeStore,
 } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 import {
@@ -23,7 +22,7 @@ import {
 
 import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { TrendingResponseModel } from '@searchspring/snap-client';
-import type { AutocompleteStoreConfig, MetaBadges, StoreServices } from '../types';
+import type { AutocompleteStoreConfig, StoreServices } from '../types';
 
 export class AutocompleteStore extends AbstractStore {
 	public services: StoreServices;
@@ -40,7 +39,6 @@ export class AutocompleteStore extends AbstractStore {
 	public storage: StorageStore;
 	public trending: AutocompleteTrendingStore;
 	public history: AutocompleteHistoryStore;
-	public badges!: SearchBadgeStore;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
 		super(config);
@@ -194,7 +192,5 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta);
-		// TODO: remove MetaBadges typing once MetaResponseModel is updated
-		this.badges = new SearchBadgeStore(this.meta as MetaResponseModel & { badges: MetaBadges });
 	}
 }

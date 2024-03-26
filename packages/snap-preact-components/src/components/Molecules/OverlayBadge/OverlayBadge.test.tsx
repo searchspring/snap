@@ -28,22 +28,12 @@ describe('OverlayBadge Component', () => {
 	let result: Product;
 	beforeAll(async () => {
 		expect(controller).toBeDefined();
-		expect(controller.store.badges).toBeDefined();
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
-		result = controller.store.results.find((result) =>
-			result.badges.find((badge) => {
-				const isRightOverlay = (controller.store.meta as any).badges.locations.overlay.right.some(
-					(rightOverlays: any) => rightOverlays.name === badge.location
-				);
-				const isLeftOverlay = (controller.store.meta as any).badges.locations.overlay.left.some(
-					(leftOverlays: any) => leftOverlays.name === badge.location
-				);
-
-				return isLeftOverlay || isRightOverlay;
-			})
-		)! as Product;
+		result = controller.store.results.find((result) => {
+			return result.badges.some((badge) => badge.type === 'overlay');
+		}) as Product;
 		expect(result).toBeDefined();
 		expect(result.badges).toBeDefined();
 	});
@@ -57,7 +47,8 @@ describe('OverlayBadge Component', () => {
 		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
 		expect(OverlayBadgeEl).toBeInTheDocument();
 
-		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.badges[0].tag}`)!;
+		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.getOverlayBadges()[0].tag}`)!;
+
 		expect(OverlayBadgeComponentEl).toBeInTheDocument();
 
 		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges[0].location}`)).toBe(true);
@@ -71,17 +62,11 @@ describe('OverlayBadge Component', () => {
 
 	it("warns when componentMap doesn't find component", () => {
 		const componentName = 'TestComponent';
-
 		const consoleWarn = jest.spyOn(controller.log, 'warn');
 
-		const result2 = {
-			...result,
-			badges: [result.badges[0]],
-		};
-		result2.badges[0] = {
-			...result2.badges[0],
-			component: componentName,
-		};
+		const result2 = result;
+		result2.badges[0].component = componentName;
+
 		const rendered = render(
 			<OverlayBadge
 				controller={controller}
@@ -103,14 +88,9 @@ describe('OverlayBadge Component', () => {
 		const customComponentClassName = 'custom-component-class';
 		const consoleWarn = jest.spyOn(controller.log, 'warn');
 
-		const result2 = {
-			...result,
-			badges: [result.badges[0]],
-		};
-		result2.badges[0] = {
-			...result2.badges[0],
-			component: componentName,
-		};
+		const result2 = result;
+		result2.badges[0].component = componentName;
+
 		const rendered = render(
 			<OverlayBadge
 				controller={controller}

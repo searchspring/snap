@@ -17,28 +17,6 @@ describe('BadgeImage Component', () => {
 		expect(BadgeImg).toHaveAttribute('alt', BADGE_LABEL);
 	});
 
-	it('renders BadgeImage with overflow prop true', () => {
-		const rendered = render(<BadgeImage url={BADGE_URL} label={BADGE_LABEL} overflow={true} />);
-		const BadgeImg = rendered.container.querySelector('.ss__badge-image')!;
-		expect(BadgeImg).toBeInTheDocument();
-
-		const styles = getComputedStyle(BadgeImg);
-
-		expect(styles.maxHeight).toBe('100%');
-		expect(styles.maxWidth).toBe('100%');
-	});
-
-	it('renders BadgeImage with overflow prop false', () => {
-		const rendered = render(<BadgeImage url={BADGE_URL} label={BADGE_LABEL} overflow={false} />);
-		const BadgeImg = rendered.container.querySelector('.ss__badge-image')!;
-		expect(BadgeImg).toBeInTheDocument();
-
-		const styles = getComputedStyle(BadgeImg);
-
-		expect(styles.maxHeight).toBe('');
-		expect(styles.maxWidth).toBe('unset');
-	});
-
 	describe('BadgeImage theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

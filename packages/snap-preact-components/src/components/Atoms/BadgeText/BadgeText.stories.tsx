@@ -33,7 +33,7 @@ export default {
 		),
 	],
 	argTypes: {
-		label: {
+		value: {
 			description: 'Badge text contents',
 			type: { required: true },
 			table: {
@@ -64,24 +64,13 @@ export default {
 			},
 			control: { type: 'color' },
 		},
-		overflow: {
-			description: 'Allow badge sizing to overflow grid cell',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
 		...componentArgs,
 	},
 };
 
 export const Default = (args: BadgeTextProps) => <BadgeText {...args} />;
 Default.args = {
-	label: '30% Off',
+	value: '30% Off',
 	color: '#0000FF',
 	colorText: '#FFFFFF',
-	overflow: true,
 };

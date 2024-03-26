@@ -87,7 +87,7 @@
       "badges": [
         {
           "tag": "on-sale",
-          "label": "30% Off"
+          "value": "30% Off"
         }
       ]
     },
@@ -266,7 +266,7 @@
       "badges": [
         {
           "tag": "free-shipping",
-          "label": "Free Shipping"
+          "value": "Free Shipping"
         }
       ]
     },

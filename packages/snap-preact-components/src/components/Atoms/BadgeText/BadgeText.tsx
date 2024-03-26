@@ -4,27 +4,20 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import type { CSSObject } from '@emotion/serialize';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
 	BadgeText: (props: BadgeTextProps) => {
-		const overflow: CSSObject = props.overflow
-			? {
-					textOverflow: 'ellipsis',
-					whiteSpace: 'nowrap',
-					overflow: 'hidden',
-					maxWidth: '200%',
-			  }
-			: {};
-
 		return css({
 			display: 'inline-block',
 			padding: '0.2em 0.5em',
 			background: props.color,
 			color: props.colorText,
-			...overflow,
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
+			overflow: 'hidden',
+			maxWidth: '100%',
 		});
 	},
 };
@@ -34,7 +27,6 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 
 	const props: BadgeTextProps = {
 		// default props
-		overflow: true,
 		color: 'rgba(255, 255, 255, 0.5)',
 		colorText: '#000000',
 		// global theme
@@ -43,7 +35,7 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.badgeText,
 	};
-	const { label, disableStyles, className, style } = props;
+	const { value, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -53,10 +45,10 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	return label ? (
+	return value ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__badge-text', className)}>
-				{label}
+				{value}
 			</div>
 		</CacheProvider>
 	) : (
@@ -65,8 +57,7 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 });
 
 export interface BadgeTextProps extends ComponentProps {
-	label: string;
+	value: string;
 	color?: string;
 	colorText?: string;
-	overflow?: boolean;
 }

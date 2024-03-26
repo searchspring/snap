@@ -1,7 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge, MetaBadges } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge, MetaBadges, BadgeTag } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -105,15 +105,28 @@ export class Product {
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 
+		const meta = metaData as MetaBadges & { badges: MetaBadges };
 		this.badges =
-			(result as SearchResponseModelResult & { badges: ResultBadge[] }).badges?.map((badge) => {
-				const meta = metaData as MetaBadges & { badges: MetaBadges };
-				const metaBadgeData = (badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag]) || {};
-				return {
-					...badge,
-					...metaBadgeData,
-				};
-			}) || [];
+			(result as SearchResponseModelResult & { badges: ResultBadge[] }).badges
+				?.filter((badge) => {
+					// remove badges that are not in the meta
+					return !!(badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag]);
+				})
+				.map((badge) => {
+					const metaBadgeData = badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag];
+					const location = (metaBadgeData as BadgeTag).location;
+
+					const isCallout = meta?.badges?.locations?.callouts?.some((callout) => callout.name === location);
+					const isOverlay =
+						meta?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === location) ||
+						meta?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === location);
+
+					return {
+						...badge,
+						...metaBadgeData,
+						type: isCallout ? 'callout' : isOverlay ? 'overlay' : '',
+					};
+				}) || [];
 
 		//initialize the display
 		this.updateDisplay();
@@ -157,6 +170,13 @@ export class Product {
 		}, {});
 
 		makeObservable(this.mappings.core!, coreObservables);
+	}
+
+	public getCalloutBadge(name: string): ResultBadge | undefined {
+		return this.badges.find((badge) => badge.type === 'callout' && badge.location === name);
+	}
+	public getOverlayBadges(): ResultBadge[] {
+		return this.badges.filter((badge) => badge.type === 'overlay');
 	}
 
 	public updateDisplay = (display?: {

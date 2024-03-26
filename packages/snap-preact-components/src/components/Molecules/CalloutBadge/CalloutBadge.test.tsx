@@ -28,7 +28,6 @@ describe('CalloutBadge Component', () => {
 	let result: Product;
 	beforeAll(async () => {
 		expect(controller).toBeDefined();
-		expect(controller.store.badges).toBeDefined();
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
@@ -53,17 +52,11 @@ describe('CalloutBadge Component', () => {
 
 	it("warns when componentMap doesn't find component", () => {
 		const componentName = 'TestComponent';
-
 		const consoleWarn = jest.spyOn(controller.log, 'warn');
 
-		const result2 = {
-			...result,
-			badges: [result.badges[0]],
-		};
-		result2.badges[0] = {
-			...result2.badges[0],
-			component: componentName,
-		};
+		const result2 = result;
+		result2.badges[0].component = componentName;
+
 		const rendered = render(
 			<CalloutBadge
 				controller={controller}
@@ -84,14 +77,9 @@ describe('CalloutBadge Component', () => {
 		const customComponentClassName = 'custom-component-class';
 		const consoleWarn = jest.spyOn(controller.log, 'warn');
 
-		const result2 = {
-			...result,
-			badges: [result.badges[0]],
-		};
-		result2.badges[0] = {
-			...result2.badges[0],
-			component: componentName,
-		};
+		const result2 = result;
+		result2.badges[0].component = componentName;
+
 		const rendered = render(
 			<CalloutBadge
 				controller={controller}

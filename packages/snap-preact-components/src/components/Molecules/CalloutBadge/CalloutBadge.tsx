@@ -42,7 +42,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const calloutBadge = controller?.store?.badges.getCalloutBadge(result, name);
+	const calloutBadge = result?.getCalloutBadge && result.getCalloutBadge(name);
 
 	if (calloutBadge) {
 		const BadgeComponent = badgeComponentMap[calloutBadge.component];

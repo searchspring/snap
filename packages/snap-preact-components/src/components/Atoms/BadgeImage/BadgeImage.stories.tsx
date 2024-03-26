@@ -54,16 +54,6 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		overflow: {
-			description: 'Allow badge image to overflow grid cell',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
 		...componentArgs,
 	},
 };
@@ -72,5 +62,4 @@ export const Default = (args: BadgeImageProps) => <BadgeImage {...args} />;
 Default.args = {
 	url: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png',
 	label: 'placeholder badge image',
-	constrain: true,
 };

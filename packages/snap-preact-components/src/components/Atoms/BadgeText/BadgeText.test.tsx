@@ -5,14 +5,14 @@ import { ThemeProvider } from '../../../providers';
 
 import { BadgeText } from './BadgeText';
 
-const BADGE_LABEL = 'example badge';
+const BADGE_VALUE = 'example badge';
 
 describe('BadgeText Component', () => {
-	it('renders BadgeText with label text', () => {
-		const rendered = render(<BadgeText label={BADGE_LABEL} />);
+	it('renders BadgeText with value text', () => {
+		const rendered = render(<BadgeText value={BADGE_VALUE} />);
 		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
 		expect(BadgeTextEl).toBeInTheDocument();
-		expect(BadgeTextEl).toHaveTextContent(BADGE_LABEL);
+		expect(BadgeTextEl).toHaveTextContent(BADGE_VALUE);
 
 		const styles = getComputedStyle(BadgeTextEl);
 
@@ -24,7 +24,7 @@ describe('BadgeText Component', () => {
 		const color = 'rgb(255, 0, 0)';
 		const colorText = 'rgb(14, 14, 14)';
 
-		const rendered = render(<BadgeText label={BADGE_LABEL} color={color} colorText={colorText} />);
+		const rendered = render(<BadgeText value={BADGE_VALUE} color={color} colorText={colorText} />);
 		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
 		expect(BadgeTextEl).toBeInTheDocument();
 
@@ -32,32 +32,6 @@ describe('BadgeText Component', () => {
 
 		expect(styles.background).toBe(color);
 		expect(styles.color).toBe(colorText);
-	});
-
-	it('renders BadgeText with overflow prop true', () => {
-		const rendered = render(<BadgeText label={BADGE_LABEL} overflow={true} />);
-		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
-		expect(BadgeTextEl).toBeInTheDocument();
-
-		const styles = getComputedStyle(BadgeTextEl);
-
-		expect(styles.textOverflow).toBe('ellipsis');
-		expect(styles.whiteSpace).toBe('nowrap');
-		expect(styles.overflow).toBe('hidden');
-		expect(styles.maxWidth).toBe('200%');
-	});
-
-	it('renders BadgeText with overflow prop false', () => {
-		const rendered = render(<BadgeText label={BADGE_LABEL} overflow={false} />);
-		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
-		expect(BadgeTextEl).toBeInTheDocument();
-
-		const styles = getComputedStyle(BadgeTextEl);
-
-		expect(styles.textOverflow).toBe('');
-		expect(styles.whiteSpace).toBe('');
-		expect(styles.overflow).toBe('');
-		expect(styles.maxWidth).toBe('');
 	});
 
 	describe('BadgeText theming works', () => {
@@ -71,7 +45,7 @@ describe('BadgeText Component', () => {
 			};
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
-					<BadgeText label={BADGE_LABEL} />
+					<BadgeText value={BADGE_VALUE} />
 				</ThemeProvider>
 			);
 			const element = rendered.container.querySelector('.ss__badge-text');
@@ -87,7 +61,7 @@ describe('BadgeText Component', () => {
 					},
 				},
 			};
-			const rendered = render(<BadgeText label={BADGE_LABEL} theme={propTheme} />);
+			const rendered = render(<BadgeText value={BADGE_VALUE} theme={propTheme} />);
 			const element = rendered.container.querySelector('.ss__badge-text');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.badgeText.className);
@@ -98,7 +72,7 @@ describe('BadgeText Component', () => {
 				components: {
 					badgeText: {
 						className: 'classy',
-						label: 'oooo',
+						value: 'oooo',
 					},
 				},
 			};
@@ -106,13 +80,13 @@ describe('BadgeText Component', () => {
 				components: {
 					badgeText: {
 						className: 'classier',
-						label: 'ahhhh',
+						value: 'ahhhh',
 					},
 				},
 			};
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
-					<BadgeText label={BADGE_LABEL} theme={propTheme} />
+					<BadgeText value={BADGE_VALUE} theme={propTheme} />
 				</ThemeProvider>
 			);
 
@@ -120,8 +94,8 @@ describe('BadgeText Component', () => {
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.badgeText.className);
 			expect(element).not.toHaveClass(globalTheme.components.badgeText.className);
-			expect(element).toHaveTextContent(propTheme.components.badgeText.label);
-			expect(element).not.toHaveTextContent(globalTheme.components.badgeText.label);
+			expect(element).toHaveTextContent(propTheme.components.badgeText.value);
+			expect(element).not.toHaveTextContent(globalTheme.components.badgeText.value);
 		});
 	});
 });

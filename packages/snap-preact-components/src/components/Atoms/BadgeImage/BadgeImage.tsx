@@ -9,10 +9,10 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	BadgeImage: (props: BadgeImageProps) => {
+	BadgeImage: () => {
 		return css({
-			maxHeight: props.overflow ? '100%' : undefined,
-			maxWidth: props.overflow ? '100%' : 'unset',
+			maxHeight: '100%',
+			maxWidth: '100%',
 		});
 	},
 };
@@ -22,7 +22,6 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 
 	const props: BadgeImageProps = {
 		// default props
-		overflow: false,
 		// global theme
 		...globalTheme?.components?.badgeImage,
 		// props
@@ -34,7 +33,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 	const styling: { css?: StylingCSS } = {};
 
 	if (!disableStyles) {
-		styling.css = [CSS.BadgeImage(props), style];
+		styling.css = [CSS.BadgeImage(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -51,5 +50,4 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 export interface BadgeImageProps extends ComponentProps {
 	url: string;
 	label?: string;
-	overflow?: boolean;
 }

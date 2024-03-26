@@ -156,6 +156,7 @@ export type BadgeLocation = {
 };
 
 export type ResultBadge = BadgeTag & {
+	type: string;
 	tag: string;
 	label: string;
 };

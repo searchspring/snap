@@ -58,7 +58,7 @@ const CSS = {
 			[overlayLocation]: 0,
 			bottom: isBottom ? 0 : undefined,
 			boxSizing: 'border-box',
-			zIndex: Math.max(10 - index, 1),
+			zIndex: Math.max(100 - index, 1),
 		});
 	},
 };
@@ -92,7 +92,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const overlayBadges = controller?.store?.badges.getOverlayBadges(result);
+	const overlayBadges = result?.getOverlayBadges && result.getOverlayBadges();
 
 	if (overlayBadges?.length) {
 		return (
