@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
@@ -68,10 +68,16 @@ export class Banner {
 	}
 }
 
-type VariantData = {
+export type VariantData = {
 	mappings: SearchResponseModelResultMappings;
 	attributes: Record<string, unknown>;
 	options: Record<string, string>;
+};
+
+type ProductMinimal = {
+	id: string;
+	attributes: Record<string, unknown>;
+	mappings: SearchResponseModelResultMappings;
 };
 
 export class Product {
@@ -84,15 +90,7 @@ export class Product {
 	public custom = {};
 	public children?: Array<Child> = [];
 	public quantity = 1;
-
-	public display: VariantData = {
-		mappings: {
-			core: {},
-		},
-		attributes: {},
-		options: {},
-	};
-
+	public mask = new ProductMask();
 	public variants?: Variants;
 
 	constructor(services: StoreServices, result: SearchResponseModelResult, config?: StoreConfigs) {
@@ -100,16 +98,13 @@ export class Product {
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 
-		//initialize the display
-		this.updateDisplay();
-
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(config, services, parsedVariants, this.updateDisplay);
+				this.variants = new Variants(parsedVariants, this.mask);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -127,7 +122,7 @@ export class Product {
 
 		makeObservable(this, {
 			id: observable,
-			display: observable,
+			display: computed,
 			attributes: observable,
 			custom: observable,
 			quantity: observable,
@@ -144,33 +139,49 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
-	public updateDisplay = (display?: {
-		mappings: SearchResponseModelResultMappings;
-		attributes: Record<string, unknown>;
-		options: Record<string, string>;
-	}) => {
-		const defaultDisplay = {
-			mappings: this.mappings!,
-			attributes: this.attributes!,
-			options: {},
-		};
-
-		const newDisplay = deepmerge(defaultDisplay, display || defaultDisplay, { isMergeableObject: isPlainObject });
-		if (JSON.stringify(this.display) !== JSON.stringify(newDisplay)) {
-			this.display = newDisplay;
-		}
-	};
+	public get display(): ProductMinimal {
+		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
+	}
 }
 
-class Variants {
+// Mask is used to power the product display for quick attribute swapping
+export class ProductMask {
+	public data: Partial<Product> = {};
+
+	constructor() {
+		makeObservable(this, {
+			data: observable,
+		});
+	}
+
+	public merge(mask: Partial<Product>) {
+		// TODO: look into making more performant
+		// needed to prevent infinite re-render on merge with same data
+		if (JSON.stringify(deepmerge(this.data, mask)) != JSON.stringify(this.data)) {
+			this.data = deepmerge(this.data, mask);
+		}
+	}
+
+	public set(mask: Partial<Product>) {
+		// TODO: look into making more performant
+		// needed to prevent infinite re-render on set with same data
+		if (JSON.stringify(mask) != JSON.stringify(this.data)) {
+			this.data = mask;
+		}
+	}
+
+	public reset() {
+		this.data = {};
+	}
+}
+
+export class Variants {
 	public active?: Variant;
 	public data: Variant[] = [];
 	public selections: VariantSelection[] = [];
-	public config: StoreConfigs;
+	public setActive: (variant: Variant) => void;
 
-	public updateDisplay: (variant: VariantData) => void;
-
-	constructor(config: StoreConfigs, services: StoreServices, variantData: VariantData[], updateDisplay: (variant: VariantData) => void) {
+	constructor(variantData: VariantData[], mask: ProductMask) {
 		const options: string[] = [];
 
 		// create variants objects
@@ -181,12 +192,8 @@ class Variants {
 				}
 			});
 
-			return new Variant(services, variant);
+			return new Variant(variant);
 		});
-
-		this.config = config;
-
-		this.updateDisplay = updateDisplay;
 
 		options.map((option) => {
 			// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
@@ -194,16 +201,17 @@ class Variants {
 				field: option,
 				label: option,
 			};
-			this.selections.push(new VariantSelection(config, services, this, optionConfig, this.data));
+			this.selections.push(new VariantSelection(this, optionConfig));
 		});
+
+		// setting function in constructor to prevent exposing mask as class property
+		this.setActive = (variant: Variant) => {
+			this.active = variant;
+			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
+		};
 
 		// select first available
 		this.makeSelections();
-	}
-
-	public setActive(variant: Variant) {
-		this.active = variant;
-		this.updateDisplay(this.active);
 	}
 
 	public makeSelections(options?: Record<string, string[]>) {
@@ -214,7 +222,7 @@ class Variants {
 			this.selections.forEach((selection) => {
 				const firstAvailableOption = selection.values.find((value) => value.available);
 				if (firstAvailableOption) {
-					selection.select(firstAvailableOption.value);
+					selection.select(firstAvailableOption.value, true);
 				}
 			});
 		} else {
@@ -258,7 +266,7 @@ class Variants {
 		});
 
 		// refine selections ensuring that the selection that triggered the update refines LAST
-		orderedSelections.forEach((selection) => selection.refineSelections(this.data));
+		orderedSelections.forEach((selection) => selection.refineSelections(this));
 
 		// check to see if we have enough selections made to update the display
 		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
@@ -293,19 +301,19 @@ export class VariantSelection {
 	public label: string;
 	public selected?: string = ''; //ex: blue
 	public previouslySelected?: string = '';
-
 	public values: SelectionValue[] = [];
-	private variants: Variants;
 
-	constructor(config: StoreConfigs, services: StoreServices, variants: Variants, selectorConfig: VariantSelectionOptions, data: Variant[]) {
+	private variantsUpdate: () => void;
+
+	constructor(variants: Variants, selectorConfig: VariantSelectionOptions) {
 		this.field = selectorConfig.field;
 		this.label = selectorConfig.label;
 
-		// reference to parent variants
-		this.variants = variants;
+		// needed to prevent attaching variants as class property
+		this.variantsUpdate = () => variants.update(this);
 
 		// create possible values from the data and refine them
-		this.refineSelections(data);
+		this.refineSelections(variants);
 
 		makeObservable(this, {
 			selected: observable,
@@ -313,11 +321,11 @@ export class VariantSelection {
 		});
 	}
 
-	public refineSelections(allVariants: Variant[]) {
+	public refineSelections(variants: Variants) {
 		// current selection should only consider OTHER selections for availability
-		const selectedSelections = this.variants.selections.filter((selection) => selection.field != this.field && selection.selected);
+		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
 
-		let availableVariants = allVariants;
+		let availableVariants = variants.data;
 
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
@@ -326,32 +334,37 @@ export class VariantSelection {
 			);
 		}
 
-		const newValues: SelectionValue[] = allVariants
+		const newValues: SelectionValue[] = variants.data
 			.filter((variant) => variant.options[this.field])
 			.reduce((values: SelectionValue[], variant) => {
 				if (!values.some((val) => variant.options[this.field] == val.value)) {
 					values.push({
 						value: variant.options[this.field] as string,
-						label: variant.options[this.field] as string, // TODO - use configurable mappings
-						// TODO set background for swatches (via configurable mappings)
+						label: variant.options[this.field] as string,
+						// TODO: use configurable mappings from config
+						// TODO: set background for swatches (via configurable mappings) from config
 						thumbnailImageUrl: variant.mappings.core?.thumbnailImageUrl,
 						available: Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])),
 					});
 				}
+
+				// TODO: use sorting function from config
 				return values;
 			}, []);
 
 		// if selection has been made
 		if (this.selected) {
-			//is that selection still available?
+			// check if the selection is stil available
 			if (!newValues.some((val) => val.value == this.selected && val.available)) {
-				// the previous selection is no longer available
-				if (this.previouslySelected && newValues.some((val) => val.value == this.previouslySelected && val.available)) {
-					if (this.selected !== this.previouslySelected) {
-						this.select(this.previouslySelected, true);
-					}
+				// the selection is no longer available, attempt to select previous selection
+				if (
+					this.selected !== this.previouslySelected &&
+					this.previouslySelected &&
+					newValues.some((val) => val.value == this.previouslySelected && val.available)
+				) {
+					this.select(this.previouslySelected, true);
 				} else {
-					//otherwise just choose the first available option
+					// choose the first available option if previous seletions are unavailable
 					const availableValues = newValues.filter((val) => val.available);
 					if (newValues.length && availableValues.length) {
 						const nextAvailableValue = availableValues[0].value;
@@ -374,17 +387,18 @@ export class VariantSelection {
 	public select(value: string, internalSelection = false) {
 		const valueExist = this.values.find((val) => val.value == value);
 		if (valueExist) {
-			this.selected = value;
 			if (!internalSelection) {
-				this.previouslySelected = value;
+				this.previouslySelected = this.selected;
 			}
 
-			this.variants.update(this);
+			this.selected = value;
+
+			this.variantsUpdate();
 		}
 	}
 }
 
-class Variant {
+export class Variant {
 	public type = 'variant';
 	public available: boolean;
 	public attributes: Record<string, unknown> = {};
@@ -394,7 +408,7 @@ class Variant {
 	};
 	public custom = {};
 
-	constructor(services: StoreServices, variantData: VariantData) {
+	constructor(variantData: VariantData) {
 		this.attributes = variantData.attributes;
 		this.mappings = variantData.mappings;
 		this.options = variantData.options;
