@@ -87,7 +87,7 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[afterStore]],
+					plugins: [[afterStore], [badges]],
 					settings: {
 						redirects: {
 							merchandising: false,
@@ -226,3 +226,138 @@ if (window.mergeSnapConfig) {
 }
 
 new Snap(config);
+
+export function badges(controller: AbstractController) {
+	const badges = [
+		{
+			tag: 'on-sale',
+			value: '30% Off',
+		},
+		{
+			tag: 'free-shipping',
+			value: 'Free Shipping',
+		},
+		// {
+		// 	tag: "new",
+		// 	value: "New",
+		// },
+		{
+			tag: 'christmas',
+			value: 'https://placehold.co/1000x1000',
+		},
+	];
+
+	controller.on('afterSearch', async ({ response }, next) => {
+		response.meta.badges = {
+			locations: {
+				overlay: {
+					left: [
+						{
+							name: 'left-upper',
+							label: 'Left Upper',
+							description: 'description for left upper',
+						},
+						{
+							name: 'left-middle-upper',
+							label: 'Left Middle Upper',
+							description: 'description for left middle upper',
+						},
+						{
+							name: 'left-middle',
+							label: 'Left Middle',
+							description: 'description for left middle',
+						},
+						{
+							name: 'left-middle-lower',
+							label: 'Left Middle Lower',
+							description: 'description for left middle lower',
+						},
+						{
+							name: 'left-lower',
+							label: 'Left Lower',
+							description: 'description for left lower',
+						},
+					],
+					right: [
+						{
+							name: 'right-upper',
+							label: 'Right Upper',
+							description: 'description for right upper',
+						},
+						{
+							name: 'right-middle-upper',
+							label: 'Right Middle Upper',
+							description: 'description for right middle upper',
+						},
+						{
+							name: 'right-middle',
+							label: 'Right Middle',
+							description: 'description for right middle',
+						},
+						{
+							name: 'right-middle-lower',
+							label: 'Right Middle Lower',
+							description: 'description for right middle lower',
+						},
+						{
+							name: 'right-lower',
+							label: 'Right Lower',
+							description: 'description for right lower',
+						},
+					],
+				},
+				callouts: [
+					{
+						name: 'callout',
+						label: 'Callout',
+						description: 'description for callout',
+					},
+				],
+			},
+			tags: {
+				'on-sale': {
+					location: 'left-middle',
+					component: 'BadgeText',
+					priority: 1,
+					enabled: true,
+					parameters: {
+						color: '#0000FF',
+						colorText: '#FFFFFF',
+					},
+				},
+				'free-shipping': {
+					location: 'callout',
+					component: 'BadgeText',
+					priority: 1,
+					enabled: true,
+					parameters: {
+						color: '#FF0000',
+						colorText: '#FFFFFF',
+					},
+				},
+				christmas: {
+					location: 'right-middle',
+					component: 'BadgeImage',
+					priority: 1,
+					enabled: true,
+					parameters: {
+						url: '//placehold.co/1000x2000',
+					},
+				},
+			},
+		};
+
+		response.results = response.results.map((result) => {
+			const random = Math.floor(Math.random() * badges.length);
+			return {
+				...result,
+				mappings: {
+					...result.mappings,
+					badges: [badges[random]],
+				},
+			};
+		});
+
+		await next();
+	});
+}

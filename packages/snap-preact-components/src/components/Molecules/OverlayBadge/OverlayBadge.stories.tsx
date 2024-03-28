@@ -9,6 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../OverlayBadge/readme.md';
 
 import type { SearchController } from '@searchspring/snap-controller';
+import { Product } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/OverlayBadge`,
@@ -91,7 +92,7 @@ const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' 
 
 const ObservableOverlayBadge = observer(({ args, controller }: { args: OverlayBadgeProps; controller: SearchController }) => {
 	return (
-		<OverlayBadge {...args} controller={controller} result={controller?.store?.results[0]}>
+		<OverlayBadge {...args} controller={controller} result={controller?.store?.results[0] as Product}>
 			<div
 				style={{
 					height: '300px',
@@ -116,24 +117,20 @@ Default.loaders = [
 			 * here so that when switching between OverlayBadge and CalloutBadge stories,
 			 * a page reload is not required
 			 */
-			response.results[0] = {
-				...response.results[0],
-				badges: [
-					{
-						tag: 'free-shipping-overlay',
-						label: 'Free Shipping',
-					},
-				],
-			};
-			response.results[1] = {
-				...response.results[1],
-				badges: [
-					{
-						tag: 'free-shipping-callout',
-						label: 'Free Shipping',
-					},
-				],
-			};
+
+			response.results[0].mappings.badges = [
+				{
+					tag: 'free-shipping-overlay',
+					value: 'Free Shipping',
+				},
+			];
+			response.results[1].mappings.badges = [
+				{
+					tag: 'free-shipping-callout',
+					value: 'Free Shipping',
+				},
+			];
+
 			response.meta = {
 				...response.meta,
 				badges: {
@@ -160,6 +157,8 @@ Default.loaders = [
 						'free-shipping-overlay': {
 							location: 'left',
 							component: 'BadgeText',
+							priority: 1,
+							enabled: true,
 							parameters: {
 								color: '#FF0000',
 								colorText: '#FFFFFF',
@@ -168,6 +167,8 @@ Default.loaders = [
 						'free-shipping-callout': {
 							location: 'callout',
 							component: 'BadgeText',
+							priority: 1,
+							enabled: true,
 							parameters: {
 								color: '#FF0000',
 								colorText: '#FFFFFF',

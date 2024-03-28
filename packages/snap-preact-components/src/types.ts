@@ -1,4 +1,4 @@
-import { RenderableProps } from 'preact';
+import { FunctionalComponent, RenderableProps } from 'preact';
 import { SerializedStyles } from '@emotion/react';
 import { Theme } from './providers/theme';
 
@@ -10,7 +10,7 @@ export interface ComponentProps extends RenderableProps<any> {
 }
 
 export type ComponentMap = {
-	[key: string]: (args?: any) => JSX.Element;
+	[key: string]: (args?: any) => FunctionalComponent<RenderableProps<any>> | Promise<(args?: any) => React.ReactElement>;
 };
 
 export enum Layout {

@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge, MetaBadges, BadgeTag } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -56,7 +56,6 @@ export class Banner {
 	public custom = {};
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
-	public badges: ResultBadge[] = [];
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
@@ -92,7 +91,7 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
-	public badges: ResultBadge[] = [];
+	public badges: Badges;
 
 	public quantity = 1;
 	public mask = new ProductMask();
@@ -103,28 +102,7 @@ export class Product {
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 
-		const meta = metaData as MetaBadges & { badges: MetaBadges };
-		this.badges =
-			(result as SearchResponseModelResult & { badges: ResultBadge[] }).badges
-				?.filter((badge) => {
-					// remove badges that are not in the meta
-					return !!(badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag]);
-				})
-				.map((badge) => {
-					const metaBadgeData = badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag];
-					const location = (metaBadgeData as BadgeTag).location;
-
-					const isCallout = meta?.badges?.locations?.callouts?.some((callout) => callout.name === location);
-					const isOverlay =
-						meta?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === location) ||
-						meta?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === location);
-
-					return {
-						...badge,
-						...metaBadgeData,
-						type: isCallout ? 'callout' : isOverlay ? 'overlay' : '',
-					};
-				}) || [];
+		this.badges = new Badges(result, metaData);
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -167,14 +145,76 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
-	public getCalloutBadge(name: string): ResultBadge | undefined {
-		return this.badges.find((badge) => badge.type === 'callout' && badge.location === name);
-	}
-	public getOverlayBadges(): ResultBadge[] {
-		return this.badges.filter((badge) => badge.type === 'overlay');
-	}
 	public get display(): ProductMinimal {
 		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
+	}
+}
+
+export class Badges {
+	public all: ResultBadge[] = [];
+
+	constructor(result: SearchResponseModelResult, metaData: MetaResponseModel) {
+		this.all = (result.mappings?.badges || [])
+			.filter((badge) => {
+				// remove badges that are not in the meta or are disabled
+				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
+			})
+			.map((badge) => {
+				const metaBadgeData = metaData?.badges?.tags[badge.tag]!;
+				const locationName = metaBadgeData!.location;
+
+				const isCallout = metaData?.badges?.locations?.callouts?.some((callout) => callout.name === locationName);
+				const isLeftOverlay = metaData?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === locationName);
+				const isRightOverlay = metaData?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === locationName);
+
+				const locationPrefix = isCallout ? 'callout' : isLeftOverlay ? 'overlay/left' : isRightOverlay ? 'overlay/right' : '';
+				const path = `${locationPrefix}/${locationName}`;
+
+				return {
+					...badge,
+					...metaBadgeData,
+					path,
+				};
+			})
+			.sort((a, b) => {
+				return b.priority - a.priority;
+			}) as ResultBadge[];
+
+		makeObservable(this, {
+			all: observable,
+			overlay: computed,
+			callout: computed,
+		});
+	}
+
+	public get overlay(): { [postion: string]: Record<string, ResultBadge> } {
+		return this.all
+			.filter((badge) => {
+				return badge.path.startsWith('overlay/');
+			})
+			.reduce(
+				(badgeMap: { [postion: string]: Record<string, ResultBadge> }, badge) => {
+					const [_, position, name] = badge.path.split('/');
+					badgeMap[position][name] = badge;
+					return badgeMap;
+				},
+				{
+					left: {},
+					right: {},
+				}
+			);
+	}
+
+	public get callout(): Record<string, ResultBadge> {
+		return this.all
+			.filter((badge) => {
+				return badge.path.startsWith('callout/');
+			})
+			.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
+				const [_, name] = badge.path.split('/');
+				badgeMap[name] = badge;
+				return badgeMap;
+			}, {});
 	}
 }
 

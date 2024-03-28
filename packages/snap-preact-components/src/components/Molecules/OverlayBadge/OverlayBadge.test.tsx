@@ -21,6 +21,7 @@ const searchConfig: SearchControllerConfig = {
 	id: 'search',
 };
 const CHILDREN = <div className="children">children</div>;
+const OVERLAY_NAME = 'left-middle';
 const mockClient = new MockClient(globals, {});
 const controller = createSearchController({ client: clientConfig, controller: searchConfig }, { client: mockClient });
 
@@ -31,11 +32,10 @@ describe('OverlayBadge Component', () => {
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
-		result = controller.store.results.find((result) => {
-			return result.badges.some((badge) => badge.type === 'overlay');
-		}) as Product;
+		result = (controller.store.results as Product[]).find((result) => {
+			return result.badges.overlay.left[OVERLAY_NAME];
+		})! as Product;
 		expect(result).toBeDefined();
-		expect(result.badges).toBeDefined();
 	});
 
 	it('renders OverlayBadge', () => {
@@ -47,64 +47,45 @@ describe('OverlayBadge Component', () => {
 		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
 		expect(OverlayBadgeEl).toBeInTheDocument();
 
-		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.getOverlayBadges()[0].tag}`)!;
+		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.badges.overlay.left[OVERLAY_NAME].tag}`)!;
 
 		expect(OverlayBadgeComponentEl).toBeInTheDocument();
 
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges[0].location}`)).toBe(true);
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges[0].component}`)).toBe(true);
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges[0].component}--${result.badges[0].location}`)).toBe(true);
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges[0].component}--${result.badges[0].tag}`)).toBe(true);
+		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges.overlay.left[OVERLAY_NAME].location}`)).toBe(true);
+		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}`)).toBe(true);
+		expect(
+			OverlayBadgeComponentEl.classList.contains(
+				`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}--${result.badges.overlay.left[OVERLAY_NAME].location}`
+			)
+		).toBe(true);
+		expect(
+			OverlayBadgeComponentEl.classList.contains(
+				`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}--${result.badges.overlay.left[OVERLAY_NAME].tag}`
+			)
+		).toBe(true);
 
 		const ChildrenEl = rendered.container.querySelector(`.children`)!;
 		expect(ChildrenEl).toBeInTheDocument();
 	});
 
-	it("warns when componentMap doesn't find component", () => {
-		const componentName = 'TestComponent';
-		const consoleWarn = jest.spyOn(controller.log, 'warn');
-
-		const result2 = result;
-		result2.badges[0].component = componentName;
-
-		const rendered = render(
-			<OverlayBadge
-				controller={controller}
-				result={result2}
-				componentMap={{
-					dne: () => <div>test</div>,
-				}}
-			>
-				{CHILDREN}
-			</OverlayBadge>
-		);
-
-		expect(consoleWarn).toHaveBeenCalledWith(`Badge component not found for ${componentName}`);
-		consoleWarn.mockRestore();
-	});
-
 	it('can use componentMap to render a custom component', () => {
 		const componentName = 'TestComponent';
 		const customComponentClassName = 'custom-component-class';
-		const consoleWarn = jest.spyOn(controller.log, 'warn');
 
 		const result2 = result;
-		result2.badges[0].component = componentName;
+		result2.badges.overlay.left[OVERLAY_NAME].component = componentName;
 
 		const rendered = render(
 			<OverlayBadge
 				controller={controller}
 				result={result2}
 				componentMap={{
-					[componentName]: () => <div className={customComponentClassName}>test</div>,
+					[componentName]: () => () => <div className={customComponentClassName}>test</div>,
 				}}
 			>
 				{CHILDREN}
 			</OverlayBadge>
 		);
-
-		expect(consoleWarn).not.toHaveBeenCalled();
-		consoleWarn.mockRestore();
 
 		const OverlayBadgeCustomComponent = rendered.container.querySelector(`.${customComponentClassName}`)!;
 		expect(OverlayBadgeCustomComponent).toBeInTheDocument();

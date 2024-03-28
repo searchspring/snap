@@ -40,6 +40,7 @@ type sortingOption = {
 };
 
 type rawResult = {
+	badges?: any; // TODO: change? SearchResponseModelResultMappingsBadges[];
 	brand?: string;
 	collection_handle?: string[];
 	collection_id?: string[];
@@ -236,6 +237,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 		id: rawResult.uid,
 		mappings: {
 			core: coreFieldValues,
+			badges: rawResult.badges || [],
 		},
 		attributes,
 		children,

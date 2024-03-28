@@ -23,10 +23,11 @@ import {
 import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { AutocompleteStoreConfig, StoreServices } from '../types';
+import { MetaStore } from '../Meta/MetaStore';
 
 export class AutocompleteStore extends AbstractStore {
 	public services: StoreServices;
-	public meta!: MetaResponseModel;
+	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
 	public search!: AutocompleteQueryStore;
 	public terms!: AutocompleteTermStore;
@@ -138,7 +139,7 @@ export class AutocompleteStore extends AbstractStore {
 		if (!data) return;
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = data.meta || {};
+		this.meta = new MetaStore(data.meta);
 
 		// set the query to match the actual queried term and not the input query
 		if (data.search) {
@@ -175,14 +176,14 @@ export class AutocompleteStore extends AbstractStore {
 				this.storage,
 				data.facets || [],
 				data.pagination || {},
-				this.meta,
+				this.meta.data,
 				this.state,
 				data.merchandising || {}
 			);
 		}
 
-		this.filters = new SearchFilterStore(this.services, data.filters, this.meta);
-		this.results = new SearchResultStore(this.config, this.services, this.meta, data.results || [], data.pagination, data.merchandising);
+		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
+		this.results = new SearchResultStore(this.config, this.services, this.meta.data, data.results || [], data.pagination, data.merchandising);
 
 		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms?.filter((term) => term.active).length) {
 			// if a trending term was selected and then a subsequent search yields no results, reset trending terms to remove active state
@@ -190,7 +191,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.resetTrending();
 		}
 
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
-		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
+		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta.data);
 	}
 }

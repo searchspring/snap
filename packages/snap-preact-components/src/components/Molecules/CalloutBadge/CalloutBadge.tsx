@@ -8,8 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
-
-import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
+import { useComponent } from '../../../hooks';
 import type { Product } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -30,7 +29,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		...properties,
 		...properties.theme?.components?.calloutBadge,
 	};
-	const { result, name, controller, disableStyles, className, style } = props;
+	const { result, name, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -42,12 +41,11 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const calloutBadge = result?.getCalloutBadge && result.getCalloutBadge(name);
+	const calloutBadge = result?.badges?.callout && result?.badges?.callout[name];
 
 	if (calloutBadge) {
-		const BadgeComponent = badgeComponentMap[calloutBadge.component];
+		const BadgeComponent = useComponent(badgeComponentMap, calloutBadge.component);
 		if (!BadgeComponent) {
-			controller?.log?.warn(`Badge component not found for ${calloutBadge.component}`);
 			return <Fragment />;
 		}
 		return (
@@ -73,7 +71,6 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 export interface CalloutBadgeProps extends ComponentProps {
 	result: Product;
-	controller: SearchController | AutocompleteController | RecommendationController;
 	name: string;
 	componentMap?: ComponentMap;
 }

@@ -7,24 +7,13 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
-import { defaultBadgeComponentMap, lcm } from '../../../utilities';
-
+import { defaultBadgeComponentMap } from '../../../utilities';
+import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import type { Product, ResultBadge } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	OverlayBadge: ({ meta }: OverlayBadgeProps & { meta: any }) => {
-		// TODO: type meta as MetaResponseModel when updated
-		const leftAreas = meta?.badges?.locations?.overlay?.left?.map((area: any) => area.name) || [];
-		const rightAreas = meta?.badges?.locations?.overlay?.right?.map((area: any) => area.name) || [];
-
-		const LCM = lcm(leftAreas.length, rightAreas.length);
-		const leftAreasLCM = Array.from({ length: LCM }).map((_, index) => leftAreas[Math.floor(index / (LCM / leftAreas.length))]);
-		const rightAreasLCM = Array.from({ length: LCM }).map((_, index) => rightAreas[Math.floor(index / (LCM / rightAreas.length))]);
-
-		const gridTemplateAreas = leftAreasLCM.map((left, index) => `"${left} ${rightAreasLCM[index]}"`).join(' ');
-		const columns = Object.keys(meta?.badges?.locations?.overlay || {}).length;
-
+	OverlayBadge: ({ meta }: OverlayBadgeProps) => {
 		return css({
 			position: 'relative',
 
@@ -35,28 +24,18 @@ const CSS = {
 				left: '0',
 				width: '100%',
 				height: '100%',
-				gridTemplateColumns: columns && `repeat(${columns}, 1fr)`,
-				gridTemplateAreas,
+				...meta?.badges?.locations?.gridProperties,
 			},
 		});
 	},
-	BadgePositioning: (props: ResultBadge & { meta: any; index: number }) => {
-		// TODO: type meta as MetaResponseModel when updated
-		const { location, meta, index } = props;
-
-		const isLeftOverlay = meta?.badges?.locations?.overlay?.left?.some((leftOverlays: any) => leftOverlays.name === location);
-		const isRightOverlay = meta?.badges?.locations?.overlay?.right?.some((rightOverlays: any) => rightOverlays.name === location);
-		const overlayLocation = isRightOverlay ? 'right' : isLeftOverlay ? 'left' : '';
-
-		const overlayLocationArr = overlayLocation && meta?.badges?.locations?.overlay[overlayLocation];
-		const isBottom =
-			Array.isArray(overlayLocationArr) && overlayLocationArr.length > 1 && overlayLocationArr[overlayLocationArr.length - 1].name === location;
+	BadgePositioning: (props: ResultBadge & { index: number }) => {
+		const { location, path, index } = props;
+		const [_, overlayLocation] = path.split('/');
 
 		return css({
 			position: 'absolute',
 			gridArea: location,
 			[overlayLocation]: 0,
-			bottom: isBottom ? 0 : undefined,
 			boxSizing: 'border-box',
 			zIndex: Math.max(100 - index, 1),
 		});
@@ -92,7 +71,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const overlayBadges = result?.getOverlayBadges && result.getOverlayBadges();
+	const overlayBadges = result?.badges?.all?.filter((badge) => badge.path.startsWith('overlay'));
 
 	if (overlayBadges?.length) {
 		return (
@@ -101,16 +80,15 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 					{children}
 					<div className="ss__overlay-badge__grid-wrapper">
 						{overlayBadges.map((badge, index) => {
-							const BadgeComponent = badgeComponentMap[badge?.component];
+							const BadgeComponent = useComponent(badgeComponentMap, badge.component);
 							if (!BadgeComponent) {
-								controller?.log?.warn(`Badge component not found for ${badge?.component}`);
-								return;
+								return <Fragment />;
 							}
 							return (
 								<BadgeComponent
 									{...badge}
 									{...badge.parameters}
-									css={[CSS.BadgePositioning({ ...badge, meta, index })]}
+									css={[CSS.BadgePositioning({ ...badge, index })]}
 									className={classnames(
 										`ss__overlay-badge--${badge.tag}`,
 										`ss__overlay-badge--${badge.location}`,

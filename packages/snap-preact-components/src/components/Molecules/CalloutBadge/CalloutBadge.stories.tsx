@@ -9,6 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../CalloutBadge/readme.md';
 
 import type { SearchController } from '@searchspring/snap-controller';
+import { Product } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/CalloutBadge`,
@@ -72,16 +73,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		controller: {
-			description: 'Controller reference',
-			type: { required: true },
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
-			control: { type: 'none' },
-		},
 		componentMap: {
 			description: 'Component map containing custom badge component',
 			table: {
@@ -98,7 +89,7 @@ export default {
 const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
 
 const ObservableCalloutBadge = observer(({ args, controller }: { args: CalloutBadgeProps; controller: SearchController }) => {
-	return <CalloutBadge {...args} controller={controller} result={controller?.store?.results[1]} />;
+	return <CalloutBadge {...args} result={controller?.store?.results[1] as Product} />;
 });
 
 export const Default = (args: CalloutBadgeProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
@@ -115,24 +106,20 @@ Default.loaders = [
 			 * here so that when switching between OverlayBadge and CalloutBadge stories,
 			 * a page reload is not required
 			 */
-			response.results[0] = {
-				...response.results[0],
-				badges: [
-					{
-						tag: 'free-shipping-overlay',
-						label: 'Free Shipping',
-					},
-				],
-			};
-			response.results[1] = {
-				...response.results[1],
-				badges: [
-					{
-						tag: 'free-shipping-callout',
-						label: 'Free Shipping',
-					},
-				],
-			};
+
+			response.results[0].mappings.badges = [
+				{
+					tag: 'free-shipping-overlay',
+					value: 'Free Shipping',
+				},
+			];
+			response.results[1].mappings.badges = [
+				{
+					tag: 'free-shipping-callout',
+					value: 'Free Shipping',
+				},
+			];
+
 			response.meta = {
 				...response.meta,
 				badges: {
@@ -159,6 +146,8 @@ Default.loaders = [
 						'free-shipping-overlay': {
 							location: 'left',
 							component: 'BadgeText',
+							priority: 1,
+							enabled: true,
 							parameters: {
 								color: '#FF0000',
 								colorText: '#FFFFFF',
@@ -167,6 +156,8 @@ Default.loaders = [
 						'free-shipping-callout': {
 							location: 'callout',
 							component: 'BadgeText',
+							priority: 1,
+							enabled: true,
 							parameters: {
 								color: '#FF0000',
 								colorText: '#FFFFFF',

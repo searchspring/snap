@@ -1,5 +1,11 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchResponseModelFacetValueAllOfValues, AutocompleteRequestModel, SearchRequestModel } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModelFacetValueAllOfValues,
+	AutocompleteRequestModel,
+	SearchRequestModel,
+	MetaResponseModelBadgeTag,
+	SearchResponseModelResultMappingsBadges,
+} from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -142,34 +148,7 @@ export type FinderStoreState = {
 	persisted: boolean;
 };
 
-export type BadgeTag = {
-	location: string;
-	component: string;
-	parameters: {
-		[key: string]: string;
+export type ResultBadge = MetaResponseModelBadgeTag &
+	SearchResponseModelResultMappingsBadges & {
+		path: string;
 	};
-};
-export type BadgeLocation = {
-	name: string;
-	label: string;
-	description: string;
-};
-
-export type ResultBadge = BadgeTag & {
-	type: string;
-	tag: string;
-	label: string;
-};
-
-export type MetaBadges = {
-	locations: {
-		overlay: {
-			left: BadgeLocation[];
-			right: BadgeLocation[];
-		};
-		callouts: BadgeLocation[];
-	};
-	tags: {
-		[key: string]: BadgeTag;
-	};
-};

@@ -8,21 +8,14 @@ Renders callout badges configured in the Searchspring Management Console and ret
 The required `name` prop specifies the name of the callout badge to display. 
 
 ```jsx
-<CalloutBadge name={'callout'} controller={controller} result={controller.store.results[0]} />
-```
-
-### controller
-The required `controller` prop specifies a reference to the controller.
-
-```jsx
-<CalloutBadge name={'callout'} controller={controller} result={controller.store.results[0]} />
+<CalloutBadge name={'callout'} result={controller.store.results[0]} />
 ```
 
 ### result
 The required `result` prop specifies a reference to a product object from the `results` store array.
 
 ```jsx
-<CalloutBadge name={'callout'} controller={controller} result={controller.store.results[0]} />
+<CalloutBadge name={'callout'} result={controller.store.results[0]} />
 ```
 
 ### componentMap
@@ -31,7 +24,6 @@ The `componentMap` prop allows for custom badge components. This functionallity 
 ```jsx
 <CalloutBadge 
     name={'callout'} 
-    controller={controller} 
     result={controller.store.results[0]} 
     componentMap={{
         'customOnSaleBadge': () => <div>On Sale</div>
