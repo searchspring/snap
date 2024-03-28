@@ -284,7 +284,7 @@ export class RecommendationController extends AbstractController {
 			},
 			addBundle: (e: MouseEvent, results: Product[]): BeaconEvent | undefined => {
 				if (!results.length || !this.store.profile.tag || this.store.profile.type != 'bundle') return;
-				const event: BeaconEvent = this.tracker.track.event({
+				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_ADDBUNDLE,
 					category: BeaconCategory.RECOMMENDATIONS,
 					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
@@ -315,7 +315,7 @@ export class RecommendationController extends AbstractController {
 			},
 			click: (e: MouseEvent): BeaconEvent | undefined => {
 				if (!this.store.profile.tag) return;
-				const event: BeaconEvent = this.tracker.track.event({
+				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_CLICK,
 					category: BeaconCategory.RECOMMENDATIONS,
 					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
@@ -341,7 +341,7 @@ export class RecommendationController extends AbstractController {
 			},
 			impression: (): BeaconEvent | undefined => {
 				if (!this.store.profile.tag || this.events.impression) return;
-				const event: BeaconEvent = this.tracker.track.event({
+				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_IMPRESSION,
 					category: BeaconCategory.RECOMMENDATIONS,
 					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
@@ -366,7 +366,7 @@ export class RecommendationController extends AbstractController {
 			},
 			render: (): BeaconEvent | undefined => {
 				if (!this.store.profile.tag || this.events.render) return;
-				const event: BeaconEvent = this.tracker.track.event({
+				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_RENDER,
 					category: BeaconCategory.RECOMMENDATIONS,
 					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
