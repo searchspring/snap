@@ -182,7 +182,7 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.filters = new SearchFilterStore(this.services, data.filters, this.meta);
-		this.results = new SearchResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising);
+		this.results = new SearchResultStore(this.config, this.services, this.meta, data.results || [], data.pagination, data.merchandising);
 
 		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms?.filter((term) => term.active).length) {
 			// if a trending term was selected and then a subsequent search yields no results, reset trending terms to remove active state

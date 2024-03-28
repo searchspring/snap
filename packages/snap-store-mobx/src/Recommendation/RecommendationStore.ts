@@ -5,9 +5,11 @@ import { CartStore } from '../Cart/CartStore';
 import { RecommendationProfileStore } from './Stores';
 import type { RecommendationStoreConfig, StoreServices } from '../types';
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
+import { MetaResponseModel } from '@searchspring/snapi-types';
 
 export class RecommendationStore extends AbstractStore {
 	public services: StoreServices;
+	public meta!: MetaResponseModel;
 	public loaded = false;
 	public profile!: RecommendationProfileStore;
 	public results!: Product[];
@@ -34,11 +36,12 @@ export class RecommendationStore extends AbstractStore {
 		this.update();
 	}
 
-	public update(data?: RecommendCombinedResponseModel): void {
+	public update(data?: RecommendCombinedResponseModel & { meta?: MetaResponseModel }): void {
 		this.error = undefined;
 		this.loaded = !!data?.profile;
+		this.meta = data?.meta || {};
 		this.profile = new RecommendationProfileStore(this.services, data);
-		this.results = new SearchResultStore(this.config, this.services, data?.results) as Product[];
+		this.results = new SearchResultStore(this.config, this.services, this.meta, data?.results) as Product[];
 
 		// only create a cart store when type is bundle
 		if (this.profile.type == 'bundle') {

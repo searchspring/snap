@@ -141,3 +141,35 @@ export type SelectedSelection = {
 export type FinderStoreState = {
 	persisted: boolean;
 };
+
+export type BadgeTag = {
+	location: string;
+	component: string;
+	parameters: {
+		[key: string]: string;
+	};
+};
+export type BadgeLocation = {
+	name: string;
+	label: string;
+	description: string;
+};
+
+export type ResultBadge = BadgeTag & {
+	type: string;
+	tag: string;
+	label: string;
+};
+
+export type MetaBadges = {
+	locations: {
+		overlay: {
+			left: BadgeLocation[];
+			right: BadgeLocation[];
+		};
+		callouts: BadgeLocation[];
+	};
+	tags: {
+		[key: string]: BadgeTag;
+	};
+};

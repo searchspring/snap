@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge, MetaBadges, BadgeTag } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -9,6 +9,7 @@ import type {
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 export class SearchResultStore extends Array<Product | Banner> {
@@ -19,12 +20,13 @@ export class SearchResultStore extends Array<Product | Banner> {
 	constructor(
 		config: StoreConfigs,
 		services: StoreServices,
+		metaData: MetaResponseModel,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, config);
+			return new Product(services, result, metaData, config);
 		});
 
 		if (merchData?.content?.inline) {
@@ -54,6 +56,7 @@ export class Banner {
 	public custom = {};
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
+	public badges: ResultBadge[] = [];
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
@@ -89,14 +92,39 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
+	public badges: ResultBadge[] = [];
+
 	public quantity = 1;
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, config?: StoreConfigs) {
+	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
+
+		const meta = metaData as MetaBadges & { badges: MetaBadges };
+		this.badges =
+			(result as SearchResponseModelResult & { badges: ResultBadge[] }).badges
+				?.filter((badge) => {
+					// remove badges that are not in the meta
+					return !!(badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag]);
+				})
+				.map((badge) => {
+					const metaBadgeData = badge?.tag && meta?.badges?.tags && meta?.badges?.tags[badge.tag];
+					const location = (metaBadgeData as BadgeTag).location;
+
+					const isCallout = meta?.badges?.locations?.callouts?.some((callout) => callout.name === location);
+					const isOverlay =
+						meta?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === location) ||
+						meta?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === location);
+
+					return {
+						...badge,
+						...metaBadgeData,
+						type: isCallout ? 'callout' : isOverlay ? 'overlay' : '',
+					};
+				}) || [];
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -139,6 +167,12 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
+	public getCalloutBadge(name: string): ResultBadge | undefined {
+		return this.badges.find((badge) => badge.type === 'callout' && badge.location === name);
+	}
+	public getOverlayBadges(): ResultBadge[] {
+		return this.badges.filter((badge) => badge.type === 'overlay');
+	}
 	public get display(): ProductMinimal {
 		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
 	}

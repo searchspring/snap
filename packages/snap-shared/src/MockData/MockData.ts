@@ -122,6 +122,7 @@ export class MockData {
 			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend?.profile}.json`;
 			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
+				meta: this.meta(),
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,
 			};

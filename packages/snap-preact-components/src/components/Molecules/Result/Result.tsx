@@ -6,12 +6,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Image, ImageProps } from '../../Atoms/Image';
-import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
+import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
+import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -103,12 +104,23 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// component theme overrides
 			theme: props.theme,
 		},
-		badge: {
+		calloutBadge: {
 			// default props
-			className: 'ss__result__badge',
-			content: 'Sale',
+			className: 'ss__result__callout-badge',
 			// global theme
-			...globalTheme?.components?.badge,
+			...globalTheme?.components?.calloutBadge,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+		},
+		overlayBadge: {
+			// default props
+			className: 'ss__result__overlay-badge',
+			// global theme
+			...globalTheme?.components?.overlayBadge,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -133,7 +145,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 	};
 
-	const onSale = Boolean(core?.msrp && core.price && core?.msrp * 1 > core?.price * 1);
 	let displayName = core?.name;
 	if (props.truncateTitle) {
 		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
@@ -146,22 +157,46 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	const ImageWrapper = () => {
+		return (
+			<div className="ss__result__image-wrapper">
+				<a
+					href={core!.url}
+					onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+						onClick && onClick(e);
+						controller?.track?.product?.click(e as any, result);
+					}}
+				>
+					{!hideImage && <Image {...subProps.image} />}
+				</a>
+			</div>
+		);
+	};
+
 	return core ? (
 		<CacheProvider>
 			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-				<div className="ss__result__image-wrapper">
-					<a
-						href={core.url}
-						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
-						}}
+				{!hideBadge ? (
+					<OverlayBadge
+						{...subProps.overlayBadge}
+						result={result}
+						controller={controller as SearchController | AutocompleteController | RecommendationController}
 					>
-						{!hideBadge && onSale && <Badge {...subProps.badge} />}
-						{!hideImage && <Image {...subProps.image} />}
-					</a>
-				</div>
+						<ImageWrapper />
+					</OverlayBadge>
+				) : (
+					<ImageWrapper />
+				)}
+
 				<div className="ss__result__details">
+					{!hideBadge && (
+						<CalloutBadge
+							{...subProps.calloutBadge}
+							result={result}
+							controller={controller as SearchController | AutocompleteController | RecommendationController}
+							name={'callout'}
+						/>
+					)}
 					{!hideTitle && (
 						<div className="ss__result__details__title">
 							<a
@@ -199,7 +234,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 });
 
 interface ResultSubProps {
-	badge: BadgeProps;
+	calloutBadge: CalloutBadgeProps;
+	overlayBadge: OverlayBadgeProps;
 	price: PriceProps;
 	image: ImageProps;
 }

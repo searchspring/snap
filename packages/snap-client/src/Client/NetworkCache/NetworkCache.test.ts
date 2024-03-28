@@ -115,7 +115,7 @@ describe('Network Cache', () => {
 		const cacheConfig = {
 			ttl: 1000,
 			enabled: true,
-			maxSize: 2, // KB
+			maxSize: 4, // KB
 			purgeable: true,
 		};
 
@@ -169,7 +169,7 @@ describe('Network Cache', () => {
 			const cacheConfig = {
 				ttl: 1000,
 				enabled: true,
-				maxSize: 2, // KB
+				maxSize: 4, // KB
 				purgeable: false,
 			};
 

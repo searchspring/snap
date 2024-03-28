@@ -98,7 +98,7 @@ export class SearchStore extends AbstractStore {
 			data?.merchandising || {}
 		);
 		this.filters = new SearchFilterStore(this.services, data.filters, this.meta);
-		this.results = new SearchResultStore(this.config, this.services, data?.results || [], data.pagination, data.merchandising);
+		this.results = new SearchResultStore(this.config, this.services, this.meta, data?.results || [], data.pagination, data.merchandising);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
 	}
