@@ -210,6 +210,37 @@ describe('SearchResultStore', () => {
 			});
 		});
 
+		describe('can use setVariants function to add varaints after construction', () => {
+			it('can use setVariants', () => {
+				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+				const variantSearchConfig = {
+					...searchConfig,
+				};
+
+				const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+				expect(results.length).toBe(searchData.pagination?.pageSize);
+
+				results.forEach((result, index) => {
+					const productData = searchData.results && searchData.results[index];
+					const variantData = productData?.attributes?.ss_variants;
+					expect(variantData).toBeDefined();
+					const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+					const variants = (result as Product).variants;
+
+					expect(variants).not.toBeDefined();
+
+					(result as Product).setVariants(parsedVariantData);
+
+					expect((result as Product).variants).toBeDefined();
+
+					expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+					expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+				});
+			});
+		});
+
 		describe('variant class', () => {
 			it('has specific properties', () => {
 				const mask = new ProductMask();

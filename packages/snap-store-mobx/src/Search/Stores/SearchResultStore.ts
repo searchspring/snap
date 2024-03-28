@@ -139,6 +139,15 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
+	public setVariants = (data: VariantData[]) => {
+		try {
+			this.variants = new Variants(data, this.mask);
+		} catch (err) {
+			// failed to parse the variant JSON
+			console.error(err, `Invalid variant JSON for product id: ${data}`);
+		}
+	};
+
 	public get display(): ProductMinimal {
 		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
 	}
