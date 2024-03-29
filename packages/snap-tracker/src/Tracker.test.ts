@@ -1408,47 +1408,4 @@ describe('Tracker', () => {
 		expect(trackEvent).toHaveBeenCalled();
 		expect(trackEvent).toHaveReturnedWith(undefined);
 	});
-
-	it('recognizes the ssWebPixel cookie and blocks multiple tracking events', async () => {
-		//'{"enabled":true,"siteId":"abc123","version":"0.1.1"}'
-		global.document.cookie = 'ssWebPixel=%7B%22enabled%22%3Atrue%2C%22siteId%22%3A%22abc123%22%2C%22version%22%3A%220.1.1%22%7D; ';
-		const tracker = new Tracker(globals, config);
-
-		// @ts-ignore - checking private variable value
-		expect(tracker.doNotTrack.length).toBeGreaterThan(0);
-		// @ts-ignore - checking private variable value
-		expect(tracker.doNotTrack).toStrictEqual([
-			{
-				type: BeaconType.PRODUCT,
-				category: BeaconCategory.PAGEVIEW,
-			},
-			{
-				type: BeaconType.CART,
-				category: BeaconCategory.CARTVIEW,
-			},
-			{
-				type: BeaconType.ORDER,
-				category: BeaconCategory.ORDERVIEW,
-			},
-		]);
-
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-
-		tracker.track.product.view({ sku: 'abc123' });
-		expect(trackEvent).toHaveBeenCalled();
-		expect(trackEvent).toHaveReturnedWith(undefined);
-		trackEvent.mockClear();
-
-		tracker.track.cart.view({ items: [{ sku: 'abc123', price: 123, qty: 1 }] });
-		expect(trackEvent).toHaveBeenCalled();
-		expect(trackEvent).toHaveReturnedWith(undefined);
-		trackEvent.mockClear();
-
-		tracker.track.order.transaction({ order: { id: 777, total: 123 }, items: [{ sku: 'abc123', price: 123, qty: 1 }] });
-		expect(trackEvent).toHaveBeenCalled();
-		expect(trackEvent).toHaveReturnedWith(undefined);
-		trackEvent.mockClear();
-
-		resetAllCookies();
-	});
 });

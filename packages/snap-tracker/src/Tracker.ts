@@ -40,7 +40,6 @@ const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 20;
 const MAX_PARENT_LEVELS = 3;
-const SHOPIFY_WEBPIXEL_COOKIE_NAME = 'ssWebPixel';
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
@@ -92,32 +91,6 @@ export class Tracker {
 			window.searchspring = window.searchspring || {};
 			window.searchspring.tracker = this;
 			window.searchspring.version = version;
-		}
-
-		// Searchspring's Shopify Web Pixel App compatibility
-		const webPixel = cookies.get(SHOPIFY_WEBPIXEL_COOKIE_NAME);
-		if (webPixel) {
-			try {
-				const webPixelData = JSON.parse(webPixel);
-
-				// when enabled, add certain events to doNotTrack list
-				if (webPixelData?.enabled) {
-					this.doNotTrack = [
-						{
-							type: BeaconType.PRODUCT,
-							category: BeaconCategory.PAGEVIEW,
-						},
-						{
-							type: BeaconType.CART,
-							category: BeaconCategory.CARTVIEW,
-						},
-						{
-							type: BeaconType.ORDER,
-							category: BeaconCategory.ORDERVIEW,
-						},
-					];
-				}
-			} catch (e) {}
 		}
 
 		// since this is in the constructor, setTimeout is required for jest.spyOn
