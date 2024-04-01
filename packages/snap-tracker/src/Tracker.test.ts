@@ -477,10 +477,17 @@ describe('Tracker', () => {
 			framework: 'test',
 		};
 
+		const customGlobals = {
+			siteId: 'custom',
+		};
+
 		const tracker = new Tracker(globals);
 
 		// @ts-ignore - private property
-		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
+		expect(tracker.localStorage.key).toStrictEqual(`ss-${tracker.config.id}`);
+
+		// @ts-ignore - private property
+		expect(tracker.localStorage.get('siteId')).toStrictEqual(globals.siteId);
 
 		// @ts-ignore - private property
 		expect(tracker.config.id).toStrictEqual('track');
@@ -488,10 +495,13 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.config.framework).toStrictEqual('snap');
 
-		const tracker2 = new Tracker(globals, customConfig);
+		const tracker2 = new Tracker(customGlobals, customConfig);
 
 		// @ts-ignore - private property
-		expect(tracker2.localStorage.key).toStrictEqual(`ss-${customConfig.id}-${globals.siteId}-local`);
+		expect(tracker2.localStorage.key).toStrictEqual(`ss-${customConfig.id}`);
+
+		// @ts-ignore - private property
+		expect(tracker2.localStorage.get('siteId')).toStrictEqual(customGlobals.siteId);
 
 		// @ts-ignore - private property
 		expect(tracker2.config.id).toBe(customConfig.id);
