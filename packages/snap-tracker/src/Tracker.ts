@@ -74,8 +74,10 @@ export class Tracker {
 
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
-			key: `ss-${this.config.id}-${this.globals.siteId}-local`,
+			key: `ss-${this.config.id}`,
 		});
+
+		this.localStorage.set('siteId', this.globals.siteId);
 
 		this.context = {
 			userId: this.getUserId() || '',
