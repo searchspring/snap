@@ -1,4 +1,4 @@
-/*! For license information please see main.4fc934c2.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.0576f5ea.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -7317,7 +7317,7 @@
 						style = props.style,
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_grid({ columns, gapSize, theme }), style]);
-					var facetValues = values || (null == facet ? void 0 : facet.values);
+					var facetValues = values || (null == facet ? void 0 : facet.refinedValues);
 					return null != facetValues && facetValues.length
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 								_providers__WEBPACK_IMPORTED_MODULE_11__._,
@@ -8093,7 +8093,7 @@
 						style = props.style,
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_hierarchy({ theme }), style]);
-					var facetValues = values || (null == facet ? void 0 : facet.values);
+					var facetValues = values || (null == facet ? void 0 : facet.refinedValues);
 					return null != facetValues && facetValues.length
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 								_providers__WEBPACK_IMPORTED_MODULE_11__._,
@@ -8907,7 +8907,7 @@
 						},
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_list({ theme, hideCheckbox }), style]);
-					var facetValues = values || (null == facet ? void 0 : facet.values);
+					var facetValues = values || (null == facet ? void 0 : facet.refinedValues);
 					return null != facetValues && facetValues.length
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 								_providers__WEBPACK_IMPORTED_MODULE_12__._,
@@ -9819,7 +9819,7 @@
 						},
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]);
-					var facetValues = values || (null == facet ? void 0 : facet.values);
+					var facetValues = values || (null == facet ? void 0 : facet.refinedValues);
 					return null != facetValues && facetValues.length
 						? (0, emotion_react_browser_esm.Y)(
 								cache._,
@@ -27508,7 +27508,7 @@
 						return !isIE() || Number(isIE()) >= 10;
 					},
 					cookies: function cookies() {
-						return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
+						return window.navigator.cookieEnabled;
 					},
 					storage: function storage() {
 						try {
@@ -27644,7 +27644,6 @@
 								case StorageType.LOCAL:
 									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
-											!window.localStorage.getItem(this.key) &&
 											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
 											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
@@ -42821,7 +42820,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.52.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -42888,14 +42887,20 @@
 							(this.track = {
 								event: function event(payload) {
 									var event = {
-											type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
-											category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
-											context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
-											event: payload.event,
-											pid: (null == payload ? void 0 : payload.pid) || void 0,
-										},
-										beaconEvent = new BeaconEvent(event, _this.config);
-									return _this.sendEvents([beaconEvent]), beaconEvent;
+										type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
+										category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
+										context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
+										event: payload.event,
+										pid: (null == payload ? void 0 : payload.pid) || void 0,
+									};
+									if (
+										!_this.doNotTrack.find(function (entry) {
+											return entry.type === event.type && entry.category === event.category;
+										})
+									) {
+										var beaconEvent = new BeaconEvent(event, _this.config);
+										return _this.sendEvents([beaconEvent]), beaconEvent;
+									}
 								},
 								error: function error(data, siteId) {
 									var _payload$event$messag;
@@ -42978,23 +42983,25 @@
 														childSku: null != data && data.childSku ? '' + data.childSku : void 0,
 													},
 												},
-												sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
-											if (sku) {
-												var lastViewedProducts = _this.cookies.viewed.get(),
-													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
-														return item.trim();
-													});
-												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
-													lastViewedProducts.includes(sku) || _this.sendPreflight();
+												event = _this.track.event(payload);
+											if (event) {
+												var sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
+												if (sku) {
+													var lastViewedProducts = _this.cookies.viewed.get(),
+														uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (
+															item
+														) {
+															return item.trim();
+														});
+													cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
+														lastViewedProducts.includes(sku) || _this.sendPreflight();
+												}
+												return null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })), event;
 											}
-											return (
-												null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })),
-												_this.track.event(payload)
+										} else
+											console.error(
+												'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
 											);
-										}
-										console.error(
-											'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
-										);
 									},
 									click: function click(data, siteId) {
 										if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
@@ -43045,22 +43052,25 @@
 															' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 													);
 												}),
-												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
-											if (items.length) {
-												var products = items
-													.map(function (item) {
-														return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
-													})
-													.filter(function (sku) {
-														return sku;
-													});
-												_this.cookies.cart.add(products);
+												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } },
+												event = _this.track.event(payload);
+											if (event) {
+												if (items.length) {
+													var products = items
+														.map(function (item) {
+															return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
+														})
+														.filter(function (sku) {
+															return sku;
+														});
+													_this.cookies.cart.add(products);
+												}
+												return new PixelEvent(payload), event;
 											}
-											return new PixelEvent(payload), _this.track.event(payload);
-										}
-										console.error(
-											'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-										);
+										} else
+											console.error(
+												'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+											);
 									},
 								},
 								order: {
@@ -43115,8 +43125,9 @@
 															: void 0,
 													items,
 												},
-												payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload };
-											return _this.cookies.cart.clear(), new PixelEvent(payload), _this.track.event(payload);
+												payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload },
+												event = _this.track.event(payload);
+											return event ? (_this.cookies.cart.clear(), new PixelEvent(payload), event) : void 0;
 										}
 										console.error(
 											'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -43303,9 +43314,11 @@
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
 						(this.config = cjs_default()(Tracker_defaultConfig, config || {})),
+							(this.doNotTrack = this.config.doNotTrack || []),
 							Object.values(AppMode).includes(this.config.mode) && (this.mode = this.config.mode),
 							(this.globals = globals),
-							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
+							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id })),
+							this.localStorage.set('siteId', this.globals.siteId),
 							(this.context = {
 								userId: this.getUserId() || '',
 								sessionId: this.getSessionId(),
@@ -43314,7 +43327,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.52.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
