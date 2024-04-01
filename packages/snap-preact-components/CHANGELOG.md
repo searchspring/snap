@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **preact-components/facetoptions:** modifying facet options components to utilize refinedValues ([9002d17](https://github.com/searchspring/snap/commit/9002d17c72b059fe9c3ab1d32a537b43b39b5c05))
+
 ## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
