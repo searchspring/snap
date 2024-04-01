@@ -451,6 +451,20 @@ describe('Storage Store', () => {
 					storage.clear();
 				});
 			});
+
+			describe(`${storageType}Storage persisting data functionality`, () => {
+				it('sets a state and that state is set on next instantiation', () => {
+					const path = 'path';
+					const value = 'value';
+					const storage = new StorageStore({ type: storageType, key: 'ss-key' });
+					storage.set(path, value);
+					expect(storage.get(path)).toStrictEqual(value);
+					expect(storage.state).toStrictEqual({ [path]: value });
+
+					const newStorage = new StorageStore({ type: storageType, key: 'ss-key' });
+					expect(newStorage.state).toStrictEqual({ [path]: value });
+				});
+			});
 		});
 	});
 });
