@@ -18,6 +18,17 @@ npm install --save @searchspring/snap-tracker
 ```typescript
 import { Tracker } from '@searchspring/snap-tracker';
 ```
+
+## Tracker Config
+
+| option | description | default value | required | 
+|---|---|:---:|:---:|
+| id | unique identifier for the tracker | track |   |
+| framework | unique identifier for the framework utilizing the tracker | snap |   |
+| mode | application mode (production, development) | production |   |
+| doNotTrack | array of DoNotTrackEntry objects, used to block specific types of tracking | ➖ |   |
+
+
 ## Controller usage
 Snap Tracker is a dependency of Snap Controller and Tracker events can be invoked via the `tracker` reference of any Snap Controller. 
 

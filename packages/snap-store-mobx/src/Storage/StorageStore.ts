@@ -34,7 +34,7 @@ export class StorageStore {
 				}
 				case StorageType.LOCAL: {
 					this.type = featureFlags.storage ? config.type : null;
-					if (this.type && !window.localStorage.getItem(this.key)) {
+					if (this.type) {
 						this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
 						window.localStorage.setItem(this.key, JSON.stringify(this.state));
 					}

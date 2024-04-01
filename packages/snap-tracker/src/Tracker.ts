@@ -23,6 +23,7 @@ import {
 	OrderTransactionData,
 	Product,
 	TrackerConfig,
+	DoNotTrackEntry,
 	PreflightRequestModel,
 } from './types';
 
@@ -52,6 +53,7 @@ export class Tracker {
 	private localStorage: StorageStore;
 	private context: BeaconContext;
 	private isSending: number | undefined;
+	private doNotTrack: DoNotTrackEntry[];
 
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
@@ -62,6 +64,7 @@ export class Tracker {
 		}
 
 		this.config = deepmerge(defaultConfig, config || {});
+		this.doNotTrack = this.config.doNotTrack || [];
 
 		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
 			this.mode = this.config.mode as AppMode;
@@ -71,8 +74,10 @@ export class Tracker {
 
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
-			key: `ss-${this.config.id}-${this.globals.siteId}-local`,
+			key: `ss-${this.config.id}`,
 		});
+
+		this.localStorage.set('siteId', this.globals.siteId);
 
 		this.context = {
 			userId: this.getUserId() || '',
@@ -214,7 +219,7 @@ export class Tracker {
 	}
 
 	track: TrackMethods = {
-		event: (payload: BeaconPayload): BeaconEvent => {
+		event: (payload: BeaconPayload): BeaconEvent | undefined => {
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
 				category: payload?.category || BeaconCategory.CUSTOM,
@@ -222,6 +227,11 @@ export class Tracker {
 				event: payload.event,
 				pid: payload?.pid || undefined,
 			};
+
+			const doNotTrack = this.doNotTrack.find((entry) => entry.type === event.type && entry.category === event.category);
+			if (doNotTrack) {
+				return;
+			}
 
 			const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
 			this.sendEvents([beaconEvent]);
@@ -347,29 +357,31 @@ export class Tracker {
 					},
 				};
 
-				// save recently viewed products to cookie
-				const sku = data?.sku || data?.childSku;
-				if (sku) {
-					const lastViewedProducts = this.cookies.viewed.get();
-					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
-					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
-					if (!lastViewedProducts.includes(sku)) {
-						this.sendPreflight();
+				const event = this.track.event(payload);
+				if (event) {
+					// save recently viewed products to cookie
+					const sku = data?.sku || data?.childSku;
+					if (sku) {
+						const lastViewedProducts = this.cookies.viewed.get();
+						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
+						cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+						if (!lastViewedProducts.includes(sku)) {
+							this.sendPreflight();
+						}
 					}
-				}
 
-				// legacy tracking
-				if (data?.sku) {
-					// only send sku to pixel tracker if present (don't send childSku)
-					new PixelEvent({
-						...payload,
-						event: {
-							sku: data.sku,
-						},
-					});
+					// legacy tracking
+					if (data?.sku) {
+						// only send sku to pixel tracker if present (don't send childSku)
+						new PixelEvent({
+							...payload,
+							event: {
+								sku: data.sku,
+							},
+						});
+					}
+					return event;
 				}
-
-				return this.track.event(payload);
 			},
 			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
@@ -449,16 +461,17 @@ export class Tracker {
 					event: { items },
 				};
 
-				// save cart items to cookie
-				if (items.length) {
-					const products = items.map((item) => item?.sku || item?.childSku || '').filter((sku) => sku);
-					this.cookies.cart.add(products);
+				const event = this.track.event(payload);
+				if (event) {
+					// save cart items to cookie
+					if (items.length) {
+						const products = items.map((item) => item?.sku || item?.childSku || '').filter((sku) => sku);
+						this.cookies.cart.add(products);
+					}
+					// legacy tracking
+					new PixelEvent(payload);
+					return event;
 				}
-
-				// legacy tracking
-				new PixelEvent(payload);
-
-				return this.track.event(payload);
 			},
 		},
 		order: {
@@ -513,13 +526,16 @@ export class Tracker {
 					event: eventPayload,
 				};
 
-				// clear cart items from cookie when order is placed
-				this.cookies.cart.clear();
+				const event = this.track.event(payload);
+				if (event) {
+					// clear cart items from cookie when order is placed
+					this.cookies.cart.clear();
 
-				// legacy tracking
-				new PixelEvent(payload);
+					// legacy tracking
+					new PixelEvent(payload);
 
-				return this.track.event(payload);
+					return event;
+				}
 			},
 		},
 	};

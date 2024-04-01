@@ -20,7 +20,7 @@ export function getFlags(userAgent = ''): FeatureFlags {
 			return !isIE() || Number(isIE()) >= 10;
 		},
 		cookies: function () {
-			return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && window.navigator.doNotTrack === '1');
+			return window.navigator.cookieEnabled;
 		},
 		storage: function () {
 			const test = 'ss-test';

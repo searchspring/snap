@@ -15,23 +15,26 @@ describe('Tracking', () => {
 			expect(searchspring).to.exist;
 		});
 
-		const shopperId = 'snaptest';
-		cy.get('#login').click();
-		cy.get('#login-modal').find('input').type(shopperId);
-		cy.get('#login-modal').find('button').click();
+		// wait for first login event
+		cy.wait(`@${BeaconType.LOGIN}`).then(() => {
+			// initial init will send a login event for the shopper due to integration script variables
+			const shopperId = 'snaptest';
+			cy.get('#login').click();
+			cy.get('#login-modal').find('input').type(shopperId);
+			cy.get('#login-modal').find('button').click();
 
-		let beacon;
-		// test of new login using modal and tracker function
-		cy.wait(`@${BeaconType.LOGIN}`).should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.response.body).to.have.property('success').to.equal(true);
+			// test of new login using modal and tracker function
+			cy.wait(`@${BeaconType.LOGIN}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-			beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
-			expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
-			expect(beacon.type).to.equal(BeaconType.LOGIN);
-			expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
-			expect(beacon.context).to.be.an('object').include.key('shopperId');
-			expect(beacon.context.shopperId).to.equal(shopperId);
+				const beacon = interception.request.body.filter((event) => event.type === BeaconType.LOGIN)[0];
+				expect(beacon.category).to.equal(BeaconCategory.PERSONALIZATION);
+				expect(beacon.type).to.equal(BeaconType.LOGIN);
+				expect(beacon.event).to.be.an('object').include.key('shopperId').include.key('userId');
+				expect(beacon.context).to.be.an('object').include.key('shopperId');
+				expect(beacon.context.shopperId).to.equal(shopperId);
+			});
 		});
 	});
 
