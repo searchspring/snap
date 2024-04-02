@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+### Bug Fixes
+
+- **preact-componenbts/carousel:** updating swiper patch version and perview props and classnames ([defe16b](https://github.com/searchspring/snap/commit/defe16bc526fe59d9510c70f84261b821cae7e76))
+
 # [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
 
 ### Bug Fixes
