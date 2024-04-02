@@ -1,4 +1,4 @@
-/*! For license information please see main.0576f5ea.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.d5fdb632.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5230,32 +5230,33 @@
 				og: () => defaultVerticalCarouselBreakpoints,
 			});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js');
-			var preact__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				preact_hooks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_12___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_12__),
-				mobx_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_13___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_13__),
-				swiper_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/swiper-react.mjs'),
-				swiper_modules__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/modules/index.mjs'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				_utilities__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_13___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_13__),
+				mobx_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_14___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_14__),
+				swiper_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/swiper-react.mjs'),
+				swiper_modules__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/modules/index.mjs'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
 					'loop',
@@ -5300,7 +5301,7 @@
 						_theme$colors2,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.AH)({
 						display: 'flex',
 						maxWidth: '100%',
 						maxHeight: vertical ? '100%' : void 0,
@@ -5392,12 +5393,12 @@
 					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
 				},
 				defaultVerticalCarouselBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
-				Carousel = (0, mobx_react__WEBPACK_IMPORTED_MODULE_17__.PA)(function (properties) {
+				Carousel = (0, mobx_react__WEBPACK_IMPORTED_MODULE_18__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_18__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_19__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -5418,11 +5419,16 @@
 								void 0 === _properties$theme$com
 								? void 0
 								: _properties$theme$com.carousel
-						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_19__.X)(props.breakpoints);
+						);
+					Object.keys(props.breakpoints).forEach(function (breakpoint) {
+						var breakPointProps = props.breakpoints[breakpoint];
+						breakPointProps.slidesPerView && (breakPointProps.slidesPerView = Number(breakPointProps.slidesPerView) || 1),
+							breakPointProps.slidesPerGroup && (breakPointProps.slidesPerGroup = Number(breakPointProps.slidesPerGroup) || 1);
+					});
+					var displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_20__.X)(props.breakpoints);
 					if (displaySettings && Object.keys(displaySettings).length) {
 						var _props,
-							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_13___default()(
+							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_14___default()(
 								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
 								(null == displaySettings ? void 0 : displaySettings.theme) || {},
 								{
@@ -5462,40 +5468,39 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_20__.s)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_21__.s)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						},
 						swiperModulesUnfiltered = Array.isArray(modules)
 							? [
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.Vx,
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.dK,
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.Jq,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Vx,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.dK,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Jq,
 							  ].concat(modules)
 							: [
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.Vx,
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.dK,
-									swiper_modules__WEBPACK_IMPORTED_MODULE_15__.Jq,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Vx,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.dK,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Jq,
 							  ],
 						swiperModules = swiperModulesUnfiltered.filter(function (module, pos) {
 							return swiperModulesUnfiltered.indexOf(module) === pos;
 						}),
-						navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.li)(null),
-						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.li)(null),
-						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.li)(null),
+						navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.li)(null),
+						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.li)(null),
+						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.li)(null),
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
-						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_11__.vJ)(function () {
-							document.querySelectorAll('.swiper').forEach(function (elem) {
-								elem.classList.add('swiper-container', 'swiper-container-pointer-events');
-							}),
-								document.querySelectorAll('.swiper-vertical').forEach(function (elem) {
-									elem.classList.add('swiper-container-vertical');
-								}),
-								document.querySelectorAll('.swiper-horizontal').forEach(function (elem) {
-									elem.classList.add('swiper-container-horizontal');
-								}),
-								attachClasstoLastVisibleSlide();
+						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.vJ)(function () {
+							if (rootComponentRef.current) {
+								var swiperElem = rootComponentRef.current.querySelector('.swiper');
+								null == swiperElem || swiperElem.classList.add('swiper-container', 'swiper-container-pointer-events'),
+									(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-vertical')) &&
+										swiperElem.classList.add('swiper-container-vertical'),
+									(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-horizontal')) &&
+										swiperElem.classList.add('swiper-container-horizontal');
+							}
+							attachClasstoLastVisibleSlide();
 						}, []),
 						pagination && (pagination = 'object' == typeof pagination ? Object.assign({ clickable: !0 }, pagination) : { clickable: !0 }),
 						(navigation =
@@ -5513,22 +5518,22 @@
 						}
 					};
 					return null != children && children.length
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
-								_providers__WEBPACK_IMPORTED_MODULE_21__._,
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+								_providers__WEBPACK_IMPORTED_MODULE_22__._,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 									'div',
 									Object.assign({ ref: rootComponentRef }, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_12___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
+										className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
 									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 										'div',
 										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_12___default()('ss__carousel__prev-wrapper', {
+											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__prev-wrapper', {
 												'ss__carousel__prev-wrapper--hidden': hideButtons,
 											}),
 										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 											'div',
 											{
 												className: 'ss__carousel__prev',
@@ -5540,14 +5545,14 @@
 													},
 											},
 											prevButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_22__.I,
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
 													Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
 												)
 										)
 									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
-										swiper_react__WEBPACK_IMPORTED_MODULE_14__.RC,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+										swiper_react__WEBPACK_IMPORTED_MODULE_15__.RC,
 										Object.assign(
 											{
 												centerInsufficientSlides: !0,
@@ -5594,17 +5599,17 @@
 											}
 										),
 										children.map(function (child) {
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_14__.qr, null, child);
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_15__.qr, null, child);
 										})
 									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 										'div',
 										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_12___default()('ss__carousel__next-wrapper', {
+											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__next-wrapper', {
 												'ss__carousel__next-wrapper--hidden': hideButtons,
 											}),
 										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 											'div',
 											{
 												className: 'ss__carousel__next',
@@ -5616,15 +5621,15 @@
 													},
 											},
 											nextButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_22__.I,
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
 													Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
 												)
 										)
 									)
 								)
 						  )
-						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_16__.Y)(preact__WEBPACK_IMPORTED_MODULE_10__.FK, null);
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(preact__WEBPACK_IMPORTED_MODULE_11__.FK, null);
 				});
 		},
 		'./src/components/Molecules/Checkbox/Checkbox.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -42820,7 +42825,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43327,7 +43332,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {

@@ -1,4 +1,4 @@
-/*! For license information please see 7.5c9e5300.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 7.64b83b03.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[7],
 	{
@@ -56602,8 +56602,8 @@
 		'../../node_modules/swiper/modules/index.mjs': (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { Jq: () => A11y, Vx: () => Navigation, dK: () => Pagination });
-			__webpack_require__('../../node_modules/swiper/shared/ssr-window.esm.mjs');
-			var utils = __webpack_require__('../../node_modules/swiper/shared/utils.mjs');
+			var ssr_window_esm = __webpack_require__('../../node_modules/swiper/shared/ssr-window.esm.mjs'),
+				utils = __webpack_require__('../../node_modules/swiper/shared/utils.mjs');
 			function create_element_if_not_defined_createElementIfNotDefined(swiper, originalParams, params, checkProps) {
 				return (
 					swiper.params.createElements &&
@@ -56626,11 +56626,9 @@
 						? res
 						: (el &&
 								('string' == typeof el && (res = [...document.querySelectorAll(el)]),
-								swiper.params.uniqueNavElements &&
-									'string' == typeof el &&
-									res.length > 1 &&
-									1 === swiper.el.querySelectorAll(el).length &&
-									(res = swiper.el.querySelector(el))),
+								swiper.params.uniqueNavElements && 'string' == typeof el && res && res.length > 1 && 1 === swiper.el.querySelectorAll(el).length
+									? (res = swiper.el.querySelector(el))
+									: res && 1 === res.length && (res = res[0])),
 						  el && !res ? el : res);
 				}
 				function toggleEl(el, disabled) {
@@ -57115,7 +57113,10 @@
 					},
 				}),
 					(swiper.a11y = { clicked: !1 });
-				let liveRegion = null;
+				let preventFocusHandler,
+					focusTargetSlideEl,
+					liveRegion = null,
+					visibilityChangedTimestamp = new Date().getTime();
 				function notify(message) {
 					const notification = liveRegion;
 					0 !== notification.length && ((notification.innerHTML = ''), (notification.innerHTML = message));
@@ -57159,21 +57160,23 @@
 					if (13 !== e.keyCode && 32 !== e.keyCode) return;
 					const params = swiper.params.a11y,
 						targetEl = e.target;
-					(swiper.pagination &&
-						swiper.pagination.el &&
-						(targetEl === swiper.pagination.el || swiper.pagination.el.contains(e.target)) &&
-						!e.target.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass))) ||
-						(swiper.navigation &&
-							swiper.navigation.nextEl &&
-							targetEl === swiper.navigation.nextEl &&
-							((swiper.isEnd && !swiper.params.loop) || swiper.slideNext(),
-							swiper.isEnd ? notify(params.lastSlideMessage) : notify(params.nextSlideMessage)),
-						swiper.navigation &&
-							swiper.navigation.prevEl &&
-							targetEl === swiper.navigation.prevEl &&
-							((swiper.isBeginning && !swiper.params.loop) || swiper.slidePrev(),
-							swiper.isBeginning ? notify(params.firstSlideMessage) : notify(params.prevSlideMessage)),
-						swiper.pagination && targetEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass)) && targetEl.click());
+					if (
+						!swiper.pagination ||
+						!swiper.pagination.el ||
+						(targetEl !== swiper.pagination.el && !swiper.pagination.el.contains(e.target)) ||
+						e.target.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass))
+					) {
+						if (swiper.navigation && swiper.navigation.prevEl && swiper.navigation.nextEl) {
+							const prevEls = (0, utils.m)(swiper.navigation.prevEl);
+							(0, utils.m)(swiper.navigation.nextEl).includes(targetEl) &&
+								((swiper.isEnd && !swiper.params.loop) || swiper.slideNext(),
+								swiper.isEnd ? notify(params.lastSlideMessage) : notify(params.nextSlideMessage)),
+								prevEls.includes(targetEl) &&
+									((swiper.isBeginning && !swiper.params.loop) || swiper.slidePrev(),
+									swiper.isBeginning ? notify(params.firstSlideMessage) : notify(params.prevSlideMessage));
+						}
+						swiper.pagination && targetEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass)) && targetEl.click();
+					}
 				}
 				function hasPagination() {
 					return swiper.pagination && swiper.pagination.bullets && swiper.pagination.bullets.length;
@@ -57191,26 +57194,36 @@
 								});
 							})(el, wrapperId);
 					},
-					handlePointerDown = () => {
-						swiper.a11y.clicked = !0;
+					handlePointerDown = (e) => {
+						focusTargetSlideEl && focusTargetSlideEl !== e.target && !focusTargetSlideEl.contains(e.target) && (preventFocusHandler = !0),
+							(swiper.a11y.clicked = !0);
 					},
 					handlePointerUp = () => {
-						requestAnimationFrame(() => {
+						(preventFocusHandler = !1),
 							requestAnimationFrame(() => {
-								swiper.destroyed || (swiper.a11y.clicked = !1);
+								requestAnimationFrame(() => {
+									swiper.destroyed || (swiper.a11y.clicked = !1);
+								});
 							});
-						});
+					},
+					onVisibilityChange = (e) => {
+						visibilityChangedTimestamp = new Date().getTime();
 					},
 					handleFocus = (e) => {
 						if (swiper.a11y.clicked) return;
+						if (new Date().getTime() - visibilityChangedTimestamp < 100) return;
 						const slideEl = e.target.closest(`.${swiper.params.slideClass}, swiper-slide`);
 						if (!slideEl || !swiper.slides.includes(slideEl)) return;
+						focusTargetSlideEl = slideEl;
 						const isActive = swiper.slides.indexOf(slideEl) === swiper.activeIndex,
 							isVisible = swiper.params.watchSlidesProgress && swiper.visibleSlides && swiper.visibleSlides.includes(slideEl);
 						isActive ||
 							isVisible ||
 							(e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) ||
-							(swiper.isHorizontal() ? (swiper.el.scrollLeft = 0) : (swiper.el.scrollTop = 0), swiper.slideTo(swiper.slides.indexOf(slideEl), 0));
+							(swiper.isHorizontal() ? (swiper.el.scrollLeft = 0) : (swiper.el.scrollTop = 0),
+							requestAnimationFrame(() => {
+								preventFocusHandler || (swiper.slideTo(swiper.slides.indexOf(slideEl), 0), (preventFocusHandler = !1));
+							}));
 					},
 					initSlides = () => {
 						const params = swiper.params.a11y;
@@ -57260,7 +57273,9 @@
 								el.addEventListener('keydown', onEnterOrSpaceKey);
 							});
 						}
-						swiper.el.addEventListener('focus', handleFocus, !0),
+						(0, ssr_window_esm.g)().addEventListener('visibilitychange', onVisibilityChange),
+							swiper.el.addEventListener('focus', handleFocus, !0),
+							swiper.el.addEventListener('focus', handleFocus, !0),
 							swiper.el.addEventListener('pointerdown', handlePointerDown, !0),
 							swiper.el.addEventListener('pointerup', handlePointerUp, !0);
 					};
@@ -57314,7 +57329,8 @@
 										(0, utils.m)(swiper.pagination.el).forEach((el) => {
 											el.removeEventListener('keydown', onEnterOrSpaceKey);
 										});
-								swiper.el.removeEventListener('focus', handleFocus, !0),
+								(0, ssr_window_esm.g)().removeEventListener('visibilitychange', onVisibilityChange),
+									swiper.el.removeEventListener('focus', handleFocus, !0),
 									swiper.el.removeEventListener('pointerdown', handlePointerDown, !0),
 									swiper.el.removeEventListener('pointerup', handlePointerUp, !0);
 							})();
@@ -57784,6 +57800,11 @@
 					);
 				},
 			};
+			const toggleSlideClasses = (slideEl, condition, className) => {
+				condition && !slideEl.classList.contains(className)
+					? slideEl.classList.add(className)
+					: !condition && slideEl.classList.contains(className) && slideEl.classList.remove(className);
+			};
 			const processLazyPreloader = (swiper, imageEl) => {
 					if (!swiper || swiper.destroyed || !swiper.params) return;
 					const slideEl = imageEl.closest(swiper.isElement ? 'swiper-slide' : `.${swiper.params.slideClass}`);
@@ -58166,12 +58187,7 @@
 						gridEnabled = swiper.grid && params.grid && params.grid.rows > 1,
 						getFilteredSlide = (selector) => (0, utils.e)(slidesEl, `.${params.slideClass}${selector}, swiper-slide${selector}`)[0];
 					let activeSlide, prevSlide, nextSlide;
-					if (
-						(slides.forEach((slideEl) => {
-							slideEl.classList.remove(params.slideActiveClass, params.slideNextClass, params.slidePrevClass);
-						}),
-						isVirtual)
-					)
+					if (isVirtual)
 						if (params.loop) {
 							let slideIndex = activeIndex - swiper.virtual.slidesBefore;
 							slideIndex < 0 && (slideIndex = swiper.virtual.slides.length + slideIndex),
@@ -58185,15 +58201,16 @@
 							  (prevSlide = slides.filter((slideEl) => slideEl.column === activeIndex - 1)[0]))
 							: (activeSlide = slides[activeIndex]);
 					activeSlide &&
-						(activeSlide.classList.add(params.slideActiveClass),
-						gridEnabled
-							? (nextSlide && nextSlide.classList.add(params.slideNextClass), prevSlide && prevSlide.classList.add(params.slidePrevClass))
-							: ((nextSlide = (0, utils.p)(activeSlide, `.${params.slideClass}, swiper-slide`)[0]),
-							  params.loop && !nextSlide && (nextSlide = slides[0]),
-							  nextSlide && nextSlide.classList.add(params.slideNextClass),
-							  (prevSlide = (0, utils.q)(activeSlide, `.${params.slideClass}, swiper-slide`)[0]),
-							  params.loop && 0 === !prevSlide && (prevSlide = slides[slides.length - 1]),
-							  prevSlide && prevSlide.classList.add(params.slidePrevClass))),
+						(gridEnabled ||
+							((nextSlide = (0, utils.p)(activeSlide, `.${params.slideClass}, swiper-slide`)[0]),
+							params.loop && !nextSlide && (nextSlide = slides[0]),
+							(prevSlide = (0, utils.q)(activeSlide, `.${params.slideClass}, swiper-slide`)[0]),
+							params.loop && 0 === !prevSlide && (prevSlide = slides[slides.length - 1]))),
+						slides.forEach((slideEl) => {
+							toggleSlideClasses(slideEl, slideEl === activeSlide, params.slideActiveClass),
+								toggleSlideClasses(slideEl, slideEl === nextSlide, params.slideNextClass),
+								toggleSlideClasses(slideEl, slideEl === prevSlide, params.slidePrevClass);
+						}),
 						swiper.emitSlidesClasses();
 				},
 				updateActiveIndex: function updateActiveIndex(newActiveIndex) {
@@ -58363,6 +58380,7 @@
 												(swiper.wrapperEl.removeEventListener('transitionend', swiper.onTranslateToWrapperTransitionEnd),
 												(swiper.onTranslateToWrapperTransitionEnd = null),
 												delete swiper.onTranslateToWrapperTransitionEnd,
+												(swiper.animating = !1),
 												runCallbacks && swiper.emit('transitionEnd'));
 										}),
 									swiper.wrapperEl.addEventListener('transitionend', swiper.onTranslateToWrapperTransitionEnd))),
@@ -58386,15 +58404,13 @@
 			}
 			var slide = {
 				slideTo: function slideTo(index, speed, runCallbacks, internal, initial) {
-					void 0 === index && (index = 0),
-						void 0 === speed && (speed = this.params.speed),
-						void 0 === runCallbacks && (runCallbacks = !0),
-						'string' == typeof index && (index = parseInt(index, 10));
+					void 0 === index && (index = 0), void 0 === runCallbacks && (runCallbacks = !0), 'string' == typeof index && (index = parseInt(index, 10));
 					const swiper = this;
 					let slideIndex = index;
 					slideIndex < 0 && (slideIndex = 0);
 					const { params, snapGrid, slidesGrid, previousIndex, activeIndex, rtlTranslate: rtl, wrapperEl, enabled } = swiper;
-					if ((swiper.animating && params.preventInteractionOnTransition) || (!enabled && !internal && !initial) || swiper.destroyed) return !1;
+					if ((!enabled && !internal && !initial) || swiper.destroyed || (swiper.animating && params.preventInteractionOnTransition)) return !1;
+					void 0 === speed && (speed = swiper.params.speed);
 					const skip = Math.min(swiper.params.slidesPerGroupSkip, slideIndex);
 					let snapIndex = skip + Math.floor((slideIndex - skip) / swiper.params.slidesPerGroup);
 					snapIndex >= snapGrid.length && (snapIndex = snapGrid.length - 1);
@@ -58484,16 +58500,12 @@
 					);
 				},
 				slideToLoop: function slideToLoop(index, speed, runCallbacks, internal) {
-					if (
-						(void 0 === index && (index = 0),
-						void 0 === speed && (speed = this.params.speed),
-						void 0 === runCallbacks && (runCallbacks = !0),
-						'string' == typeof index)
-					) {
+					if ((void 0 === index && (index = 0), void 0 === runCallbacks && (runCallbacks = !0), 'string' == typeof index)) {
 						index = parseInt(index, 10);
 					}
 					const swiper = this;
 					if (swiper.destroyed) return;
+					void 0 === speed && (speed = swiper.params.speed);
 					const gridEnabled = swiper.grid && swiper.params.grid && swiper.params.grid.rows > 1;
 					let newIndex = index;
 					if (swiper.params.loop)
@@ -58512,7 +58524,11 @@
 								: ((slidesPerView = Math.ceil(parseFloat(swiper.params.slidesPerView, 10))),
 								  centeredSlides && slidesPerView % 2 == 0 && (slidesPerView += 1));
 							let needLoopFix = cols - targetSlideIndex < slidesPerView;
-							if ((centeredSlides && (needLoopFix = needLoopFix || targetSlideIndex < Math.ceil(slidesPerView / 2)), needLoopFix)) {
+							if (
+								(centeredSlides && (needLoopFix = needLoopFix || targetSlideIndex < Math.ceil(slidesPerView / 2)),
+								internal && centeredSlides && 'auto' !== swiper.params.slidesPerView && !gridEnabled && (needLoopFix = !1),
+								needLoopFix)
+							) {
 								const direction = centeredSlides
 									? targetSlideIndex < swiper.activeIndex
 										? 'prev'
@@ -58540,10 +58556,11 @@
 					);
 				},
 				slideNext: function slideNext(speed, runCallbacks, internal) {
-					void 0 === speed && (speed = this.params.speed), void 0 === runCallbacks && (runCallbacks = !0);
+					void 0 === runCallbacks && (runCallbacks = !0);
 					const swiper = this,
 						{ enabled, params, animating } = swiper;
 					if (!enabled || swiper.destroyed) return swiper;
+					void 0 === speed && (speed = swiper.params.speed);
 					let perGroup = params.slidesPerGroup;
 					'auto' === params.slidesPerView &&
 						1 === params.slidesPerGroup &&
@@ -58570,10 +58587,11 @@
 						: swiper.slideTo(swiper.activeIndex + increment, speed, runCallbacks, internal);
 				},
 				slidePrev: function slidePrev(speed, runCallbacks, internal) {
-					void 0 === speed && (speed = this.params.speed), void 0 === runCallbacks && (runCallbacks = !0);
+					void 0 === runCallbacks && (runCallbacks = !0);
 					const swiper = this,
 						{ params, snapGrid, slidesGrid, rtlTranslate, enabled, animating } = swiper;
 					if (!enabled || swiper.destroyed) return swiper;
+					void 0 === speed && (speed = swiper.params.speed);
 					const isVirtual = swiper.virtual && params.virtual.enabled;
 					if (params.loop) {
 						if (animating && !isVirtual && params.loopPreventsSliding) return !1;
@@ -58615,13 +58633,16 @@
 						: swiper.slideTo(prevIndex, speed, runCallbacks, internal);
 				},
 				slideReset: function slideReset(speed, runCallbacks, internal) {
-					if ((void 0 === speed && (speed = this.params.speed), void 0 === runCallbacks && (runCallbacks = !0), !this.destroyed))
-						return this.slideTo(this.activeIndex, speed, runCallbacks, internal);
+					void 0 === runCallbacks && (runCallbacks = !0);
+					const swiper = this;
+					if (!swiper.destroyed)
+						return void 0 === speed && (speed = swiper.params.speed), swiper.slideTo(swiper.activeIndex, speed, runCallbacks, internal);
 				},
 				slideToClosest: function slideToClosest(speed, runCallbacks, internal, threshold) {
-					void 0 === speed && (speed = this.params.speed), void 0 === runCallbacks && (runCallbacks = !0), void 0 === threshold && (threshold = 0.5);
+					void 0 === runCallbacks && (runCallbacks = !0), void 0 === threshold && (threshold = 0.5);
 					const swiper = this;
 					if (swiper.destroyed) return;
+					void 0 === speed && (speed = swiper.params.speed);
 					let index = swiper.activeIndex;
 					const skip = Math.min(swiper.params.slidesPerGroupSkip, index),
 						snapIndex = skip + Math.floor((index - skip) / swiper.params.slidesPerGroup),
@@ -59508,6 +59529,8 @@
 							const breakpointParams = (breakpoint in breakpoints ? breakpoints[breakpoint] : void 0) || swiper.originalParams,
 								wasMultiRow = isGridEnabled(swiper, params),
 								isMultiRow = isGridEnabled(swiper, breakpointParams),
+								wasGrabCursor = swiper.params.grabCursor,
+								isGrabCursor = breakpointParams.grabCursor,
 								wasEnabled = params.enabled;
 							wasMultiRow && !isMultiRow
 								? (el.classList.remove(`${params.containerModifierClass}grid`, `${params.containerModifierClass}grid-column`),
@@ -59519,6 +59542,7 @@
 										(!breakpointParams.grid.fill && 'column' === params.grid.fill)) &&
 										el.classList.add(`${params.containerModifierClass}grid-column`),
 								  swiper.emitContainerClasses()),
+								wasGrabCursor && !isGrabCursor ? swiper.unsetGrabCursor() : !wasGrabCursor && isGrabCursor && swiper.setGrabCursor(),
 								['navigation', 'pagination', 'scrollbar'].forEach((prop) => {
 									if (void 0 === breakpointParams[prop]) return;
 									const wasModuleEnabled = params[prop] && params[prop].enabled,
@@ -60811,4 +60835,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=7.5c9e5300.iframe.bundle.js.map
+//# sourceMappingURL=7.64b83b03.iframe.bundle.js.map
