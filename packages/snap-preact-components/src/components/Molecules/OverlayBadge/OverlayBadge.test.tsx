@@ -21,7 +21,7 @@ const searchConfig: SearchControllerConfig = {
 	id: 'search',
 };
 const CHILDREN = <div className="children">children</div>;
-const OVERLAY_NAME = 'left-middle';
+// const OVERLAY_NAME = 'left-middle';
 const mockClient = new MockClient(globals, {});
 const controller = createSearchController({ client: clientConfig, controller: searchConfig }, { client: mockClient });
 
@@ -33,7 +33,7 @@ describe('OverlayBadge Component', () => {
 
 		await controller.search();
 		result = (controller.store.results as Product[]).find((result) => {
-			return result.badges.overlay.left[OVERLAY_NAME];
+			return result.badges.overlay.length > 0;
 		})! as Product;
 		expect(result).toBeDefined();
 	});
@@ -47,21 +47,17 @@ describe('OverlayBadge Component', () => {
 		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
 		expect(OverlayBadgeEl).toBeInTheDocument();
 
-		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.badges.overlay.left[OVERLAY_NAME].tag}`)!;
+		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.badges.overlay[0].tag}`)!;
 
 		expect(OverlayBadgeComponentEl).toBeInTheDocument();
 
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges.overlay.left[OVERLAY_NAME].location}`)).toBe(true);
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}`)).toBe(true);
+		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges.overlay[0].location}`)).toBe(true);
+		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}`)).toBe(true);
 		expect(
-			OverlayBadgeComponentEl.classList.contains(
-				`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}--${result.badges.overlay.left[OVERLAY_NAME].location}`
-			)
+			OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}--${result.badges.overlay[0].location}`)
 		).toBe(true);
 		expect(
-			OverlayBadgeComponentEl.classList.contains(
-				`ss__overlay-badge__${result.badges.overlay.left[OVERLAY_NAME].component}--${result.badges.overlay.left[OVERLAY_NAME].tag}`
-			)
+			OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}--${result.badges.overlay[0].tag}`)
 		).toBe(true);
 
 		const ChildrenEl = rendered.container.querySelector(`.children`)!;
@@ -73,7 +69,7 @@ describe('OverlayBadge Component', () => {
 		const customComponentClassName = 'custom-component-class';
 
 		const result2 = result;
-		result2.badges.overlay.left[OVERLAY_NAME].component = componentName;
+		result2.badges.overlay[0].component = componentName;
 
 		const rendered = render(
 			<OverlayBadge

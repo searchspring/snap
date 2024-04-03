@@ -501,4 +501,136 @@ describe('SearchResultStore', () => {
 			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
 		});
 	});
+	describe('with badges', () => {
+		it('has overlay result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 0;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+			expect(result.badges.all[0]).toHaveProperty('path');
+
+			const badgeMeta = searchData.meta?.badges?.tags[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+				path: `overlay/left/${badgeMeta.location}`,
+			});
+
+			expect(result.badges.overlay).toStrictEqual([result.badges.all[0]]);
+		});
+
+		it('has callout result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 2;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+			expect(result.badges.all[0]).toHaveProperty('path');
+
+			const badgeMeta = searchData.meta?.badges?.tags[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+				path: `callout/${badgeMeta.location}`,
+			});
+
+			expect(result.badges.callout).toStrictEqual({
+				[badgeMeta.location]: result.badges.all[0],
+			});
+		});
+
+		it('has sorted badges based on priority', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const indexOfOverlayBadge = 1;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			const badgeMeta = searchData.meta?.badges?.tags!;
+			expect(badgeMeta).toBeDefined();
+
+			// raw result badges should have two badges, first one with priority 2, second one with priority 1
+			expect(badgeMeta[resultBadges[0].tag].priority).toBeGreaterThan(badgeMeta[resultBadges[1].tag].priority);
+
+			// result badges should be sorted by priority in the store
+			expect(result.badges.all[0].priority).toBeLessThan(result.badges.all[1].priority);
+
+			// mock data should have two overlay badges with the same same location
+			expect(result.badges.all[0].location).toBe(result.badges.all[1].location);
+			expect(result.badges.all[0].path).toBe(result.badges.all[1].path);
+			expect(result.badges.all[0].priority).not.toBe(result.badges.all[1].priority);
+
+			// result.overlay should only return 1 badge per location based on priority
+			expect(result.badges.overlay).toStrictEqual([result.badges.all[0]]);
+		});
+	});
 });

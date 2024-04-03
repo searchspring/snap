@@ -204,8 +204,8 @@
       "on-sale": {
         "location": "left-middle",
         "component": "BadgeText",
-        "priority": 1,
-				"enabled": true,
+        "priority": 2,
+        "enabled": true,
         "parameters": {
           "color": "#0000FF",
           "colorText": "#FFFFFF"
@@ -215,17 +215,17 @@
         "location": "callout",
         "component": "BadgeText",
         "priority": 1,
-				"enabled": true,
+        "enabled": true,
         "parameters": {
           "color": "#FF0000",
           "colorText": "#FFFFFF"
         }
       },
       "christmas": {
-        "location": "right-lower",
+        "location": "left-middle",
         "component": "BadgeImage",
         "priority": 1,
-				"enabled": true,
+        "enabled": true,
         "parameters": {
           "url": "//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png"
         }

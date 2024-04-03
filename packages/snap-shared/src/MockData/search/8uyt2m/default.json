@@ -104,7 +104,16 @@
           "name": "Freezing Point Cream Turtleneck Sweater",
           "sku": "C-MAK-T1-K8028",
           "brand": "Mak"
-        }
+        },
+        "badges": [
+          {
+            "tag": "on-sale",
+            "value": "30% Off"
+          },
+          {
+            "tag": "christmas"
+          }
+        ]
       },
       "attributes": {
         "intellisuggestData": "eJwrTs4tNM9jYGBw1vV19NYNMdT1tjAwsmAwZDBiMDZgMDExM2BIL8pMAQC97gjZ",

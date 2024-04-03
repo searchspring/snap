@@ -9,7 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../OverlayBadge/readme.md';
 
 import type { SearchController } from '@searchspring/snap-controller';
-import { Product } from '@searchspring/snap-store-mobx';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/OverlayBadge`,

@@ -8,6 +8,7 @@ import {
 	SearchResponseModelPagination,
 	SearchResponseModelSearchMatchTypeEnum,
 	SearchResponseModelMerchandising,
+	SearchResponseModelResultMappingsBadges,
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
@@ -40,7 +41,7 @@ type sortingOption = {
 };
 
 type rawResult = {
-	badges?: any; // TODO: change? SearchResponseModelResultMappingsBadges[];
+	badges?: SearchResponseModelResultMappingsBadges[];
 	brand?: string;
 	collection_handle?: string[];
 	collection_id?: string[];
@@ -455,9 +456,14 @@ transformSearchResponse.search = (response: searchResponseType, request: SearchR
 };
 
 // used for HTML entities decoding
-function decodeProperty(encoded: string | string[]) {
+function decodeProperty(encoded: string | string[] | SearchResponseModelResultMappingsBadges[]) {
 	if (Array.isArray(encoded)) {
-		return encoded.map((item) => htmlUnescape(String(item)));
+		return encoded.map((item) => {
+			if (typeof item === 'string') {
+				return htmlUnescape(String(item));
+			}
+			return item;
+		});
 	} else {
 		return htmlUnescape(String(encoded));
 	}

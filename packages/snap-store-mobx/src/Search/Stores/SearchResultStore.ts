@@ -177,7 +177,7 @@ export class Badges {
 				};
 			})
 			.sort((a, b) => {
-				return b.priority - a.priority;
+				return a.priority - b.priority;
 			}) as ResultBadge[];
 
 		makeObservable(this, {
@@ -187,22 +187,18 @@ export class Badges {
 		});
 	}
 
-	public get overlay(): { [postion: string]: Record<string, ResultBadge> } {
+	public get overlay(): ResultBadge[] {
 		return this.all
 			.filter((badge) => {
 				return badge.path.startsWith('overlay/');
 			})
-			.reduce(
-				(badgeMap: { [postion: string]: Record<string, ResultBadge> }, badge) => {
-					const [_, position, name] = badge.path.split('/');
-					badgeMap[position][name] = badge;
-					return badgeMap;
-				},
-				{
-					left: {},
-					right: {},
+			.reduce((badgeArr: ResultBadge[], badge) => {
+				// one badge per location (this.all is already sorted by priority)
+				if (!badgeArr.some((badge) => badge.path === badge.path)) {
+					badgeArr.push(badge);
 				}
-			);
+				return badgeArr;
+			}, []);
 	}
 
 	public get callout(): Record<string, ResultBadge> {
@@ -210,6 +206,13 @@ export class Badges {
 			.filter((badge) => {
 				return badge.path.startsWith('callout/');
 			})
+			.reduce((badgeArr: ResultBadge[], badge) => {
+				// one badge per location (this.all is already sorted by priority)
+				if (!badgeArr.some((badge) => badge.path === badge.path)) {
+					badgeArr.push(badge);
+				}
+				return badgeArr;
+			}, [])
 			.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
 				const [_, name] = badge.path.split('/');
 				badgeMap[name] = badge;

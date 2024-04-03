@@ -41,11 +41,13 @@ The required `result` prop specifies a reference to a product object from the `r
 The `componentMap` prop allows for custom badge components. This functionallity requires the component and accompanying files to be synced to the Searchspring Management Console using Snapfu.
 
 ```jsx
+import { CustomOnSale } from './components/Badges/CustomOnSale';
+...
 <OverlayBadge 
     controller={controller} 
     result={controller.store.results[0]}
     componentMap={{
-        'customOnSaleBadge': () => <div>On Sale</div>
+        'customOnSaleBadge': () => CustomOnSale
     }}
 >
     <div>
@@ -54,4 +56,21 @@ The `componentMap` prop allows for custom badge components. This functionallity 
 </OverlayBadge>
 ```
 
+The `componentMap` also supports async functions for dynamic importing of badges.
+
+```jsx
+<OverlayBadge 
+    controller={controller} 
+    result={controller.store.results[0]}
+    componentMap={{
+        'customOnSaleBadge': () => {
+            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;
+        }
+    }}
+>
+    <div>
+        <img src='/images/example.png'/>
+    </div>
+</OverlayBadge>
+```
 

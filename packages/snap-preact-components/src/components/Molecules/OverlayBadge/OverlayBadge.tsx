@@ -71,7 +71,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const overlayBadges = result?.badges?.all?.filter((badge) => badge.path.startsWith('overlay'));
+	const overlayBadges = result?.badges?.overlay;
 
 	if (overlayBadges?.length) {
 		return (
