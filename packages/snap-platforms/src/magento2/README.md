@@ -1,29 +1,12 @@
-# Magento2 Plugin
-This plugin gives you helper functions to use with the Magento2 platform. 
+# Magento2 Platform
+This platform interface gives you helper functions to use with the Magento2 platform. 
 
 
 ## Usage 
-To use the plugin, simply import it and pass it to your plugins array on the controller config. This will automatically make any functions on the plugin available to use on the controller via `controller.magento2`.
-
+To use the platform interface, simply import what you wish to use from `@searchspring/snap-platforms/magento2`.
 
 ```jsx
-import { magento2 } from '@searchspring/snap-plugins-bigCommerce';
-
-const config = {
-	...
-	controllers: {
-		search: [
-			{
-				config: {
-					id: 'search',
-					plugins: [[magento2]],	
-				},
-                ...
-            }
-        ]
-    }
-    ...
-}
+import { addToCart } from '@searchspring/snap-platforms/magento2';
 
 export const Result = withController(observer((props) => {
 	const { controller, result } = props;
@@ -34,7 +17,7 @@ export const Result = withController(observer((props) => {
     }
 
     return (
-        <div onClick={() => controller.magento2.addToCart([result], config)}>Add To Cart</div>
+        <div onClick={() => addToCart([result], config)}>Add To Cart</div>
     )
 }))
 ```

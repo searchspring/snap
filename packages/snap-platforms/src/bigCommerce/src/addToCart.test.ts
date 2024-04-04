@@ -37,7 +37,7 @@ let controller: any;
 let errMock: any;
 
 // @ts-ignore
-const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]) }));
+const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 const root = 'http://localhost/remote/v1/cart/add';
 
 describe('addToCart', () => {

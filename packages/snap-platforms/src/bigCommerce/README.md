@@ -1,29 +1,12 @@
-# BigCommerce Plugin
-This plugin gives you helper functions to use with the BigCommerce platform. 
+# BigCommerce Platform
+This platform interface gives you helper functions to use with the BigCommerce platform. 
 
 
 ## Usage 
-To use the plugin, simply import it and pass it to your plugins array on the controller config. This will automatically make any functions on the plugin available to use on the controller via `controller.bigcommerce`.
-
+To use the platform interface, simply import what you wish to use from `@searchspring/snap-platforms/bigCommerce`.
 
 ```jsx
-import { bigcommerce } from '@searchspring/snap-plugins-bigcommerce';
-
-const config = {
-	...
-	controllers: {
-		search: [
-			{
-				config: {
-					id: 'search',
-					plugins: [[bigcommerce]],	
-				},
-                ...
-            }
-        ]
-    }
-    ...
-}
+import { addToCart } from '@searchspring/snap-platforms/bigCommerce';
 
 export const Result = withController(observer((props) => {
 	const { controller, result } = props;
@@ -34,7 +17,7 @@ export const Result = withController(observer((props) => {
     }
 
     return (
-        <div onClick={() => controller.bigcommerce.addToCart([result], config)}>Add To Cart</div>
+        <div onClick={() => addToCart([result], config)}>Add To Cart</div>
     )
 }))
 ```

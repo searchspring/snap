@@ -89,7 +89,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 
 			return jsonResponse;
 		} else {
-			return new Error(`Error: Snap-plugin-shopify addToCart responded with ${response.status}, ${response}`);
+			return new Error(`Error: Snap-platform-shopify addToCart responded with ${response.status}, ${response}`);
 		}
 	} catch (err) {
 		console.error(err);

@@ -36,6 +36,8 @@ let results: any;
 let controller: any;
 let formKey = 'omnomnom';
 let errMock: any;
+// @ts-ignore
+const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 
 describe('Magento2', () => {
 	beforeAll(async () => {
@@ -63,11 +65,6 @@ describe('Magento2', () => {
 	});
 
 	describe('addToCart', () => {
-		// @ts-ignore
-		const fetchMock = jest
-			.spyOn(global, 'fetch')
-			.mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
-
 		const uenc = btoa(window.location.href);
 		const root = `http://localhost/checkout/cart/add/uenc/${uenc}`;
 

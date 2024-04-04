@@ -87,7 +87,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 				const jsonResponse = response.json();
 				return jsonResponse;
 			} else {
-				return new Error(`Error: Snap-plugin-bigcommerce addToCart responded with ${response.status}, ${response}`);
+				return new Error(`Error: Snap-platform-bigcommerce addToCart responded with ${response.status}, ${response}`);
 			}
 		} catch (err) {
 			console.error(err);

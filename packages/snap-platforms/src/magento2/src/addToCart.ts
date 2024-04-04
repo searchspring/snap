@@ -110,7 +110,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 				);
 
 				if (response.status !== 200) {
-					console.error(`Error: Snap-plugin-magento2 addToCart responded with ${response.status}, ${response}`);
+					console.error(`Error: Snap-platform-magento2 addToCart responded with ${response.status}, ${response}`);
 				}
 			} catch (err) {
 				console.error('Error:', err);

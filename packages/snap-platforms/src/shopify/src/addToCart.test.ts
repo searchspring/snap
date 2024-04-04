@@ -36,6 +36,8 @@ const searchConfigDefault = {
 let results: any;
 let controller: any;
 let errMock: any;
+// @ts-ignore
+const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 
 describe('Shopify AddToCart', () => {
 	beforeAll(async () => {
@@ -56,9 +58,6 @@ describe('Shopify AddToCart', () => {
 
 		errMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 	});
-
-	// @ts-ignore
-	const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 
 	describe('requires shopify to exist on the dom', () => {
 		it('requires shopify to exist on the dom', () => {
