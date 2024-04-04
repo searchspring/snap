@@ -76,7 +76,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		styling.css = [style];
 	}
 
-	const facetValues = values || facet?.values;
+	const facetValues = values || facet?.refinedValues;
 
 	return facetValues?.length ? (
 		<CacheProvider>

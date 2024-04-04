@@ -133,7 +133,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		styling.css = [style];
 	}
 
-	const facetValues = values || facet?.values;
+	const facetValues = values || facet?.refinedValues;
 
 	return facetValues?.length ? (
 		<CacheProvider>

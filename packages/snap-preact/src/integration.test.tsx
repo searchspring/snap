@@ -5,7 +5,8 @@ import { cleanup, waitFor } from '@testing-library/preact';
 
 import { cookies } from '@searchspring/snap-toolbox';
 
-import { Snap, SnapConfig, DEV_COOKIE } from './Snap';
+import { Snap, SnapConfig, DEV_COOKIE, BRANCH_COOKIE } from './Snap';
+import { SHOPIFY_WEBPIXEL_STORAGE_KEY } from './configureSnapFeatures';
 
 const baseConfig: SnapConfig = {
 	client: {
@@ -234,5 +235,45 @@ describe('Snap Preact Integration', () => {
 			const overrideElement = document.querySelector('.ss__branch-override')!;
 			expect(overrideElement).toBeDefined();
 		});
+
+		// clean up
+		cookies.unset(BRANCH_COOKIE);
+		cookies.unset(DEV_COOKIE);
+	});
+
+	it(`will register doNotTrack with the tracker when ssWebPixel storage is found`, async () => {
+		// set up
+		const mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+
+		// stringified web pixel identifier
+		global.Storage.prototype.setItem(SHOPIFY_WEBPIXEL_STORAGE_KEY, '{"enabled":true,"siteId":"abc123","version":"0.1.1"}');
+		// end set up
+
+		const snap = new Snap(baseConfig);
+		// @ts-ignore private
+		expect(snap.config.tracker?.config?.doNotTrack).toBeDefined();
+		// @ts-ignore private
+		expect(snap.config.tracker?.config?.doNotTrack).toHaveLength(3);
+
+		// @ts-ignore private
+		expect(snap.tracker.doNotTrack).toStrictEqual([
+			{ category: 'searchspring.page.view', type: 'product' },
+			{ category: 'searchspring.shop.cart', type: 'cart' },
+			{ category: 'searchspring.shop.transaction', type: 'transaction' },
+		]);
+
+		// clean up
+		// return our mocks to their original values
+		// 🚨 THIS IS VERY IMPORTANT to avoid polluting future tests!
+		// @ts-ignore
+		global.Storage.prototype.setItem.mockRestore();
+		// @ts-ignore
+		global.Storage.prototype.getItem.mockRestore();
 	});
 });

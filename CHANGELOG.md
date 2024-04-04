@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+### Bug Fixes
+
+- **preact-componenbts/carousel:** updating swiper patch version and perview props and classnames ([defe16b](https://github.com/searchspring/snap/commit/defe16bc526fe59d9510c70f84261b821cae7e76))
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **controller/recommendation:** fixing issue with types affecting build ([9a2007a](https://github.com/searchspring/snap/commit/9a2007afeca1656c39dbb3447649d98d93355b6b))
+- **preact-components/facetoptions:** modifying facet options components to utilize refinedValues ([9002d17](https://github.com/searchspring/snap/commit/9002d17c72b059fe9c3ab1d32a537b43b39b5c05))
+- **store-mobx/storagestore:** fix on localstorage state persistence ([2ae98e6](https://github.com/searchspring/snap/commit/2ae98e6e2c08b1ebfb43bcb905d27fdb20c42e72))
+- **toolbox/featureflags:** removing the doNotTrack navigator check due to deprecation ([16bb191](https://github.com/searchspring/snap/commit/16bb19162a407a5ccf103c02f443c53acbcce918))
+
+### Features
+
+- **tracker:** add doNotTrack config options to allow certains events to be excluded ([f9114b0](https://github.com/searchspring/snap/commit/f9114b0b651578543112759573ed8719c7326579))
+
 ## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
 
 ### Bug Fixes

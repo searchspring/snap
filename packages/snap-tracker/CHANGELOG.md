@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Features
+
+- **tracker:** add doNotTrack config options to allow certains events to be excluded ([f9114b0](https://github.com/searchspring/snap/commit/f9114b0b651578543112759573ed8719c7326579))
+
 ## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
