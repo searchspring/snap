@@ -15,12 +15,7 @@ describe('Meta Store', () => {
 	it('can construct without metaData', () => {
 		const store = new MetaStore();
 		expect(store.data).toEqual({});
-		expect(store.badges.locations).toStrictEqual({
-			gridProperties: {
-				gridTemplateColumns: '',
-				gridTemplateAreas: '',
-			},
-		});
+		expect(store.badges.locations).toStrictEqual({ grid: [] });
 	});
 
 	it('has badges in mock meta data', () => {
@@ -42,10 +37,13 @@ describe('Meta Store', () => {
 		const store = new MetaStore(metaData);
 		expect(store.data).toStrictEqual(metaData);
 		expect(store.badges.locations).toStrictEqual({
-			gridProperties: {
-				gridTemplateColumns: 'repeat(2, 1fr)',
-				gridTemplateAreas: `"left-upper right-upper" "left-middle-upper right-middle-upper" "left-middle right-middle" "left-middle-lower right-middle-lower" "left-lower right-lower"`,
-			},
+			grid: [
+				['left-upper', 'right-upper'],
+				['left-middle-upper', 'right-middle-upper'],
+				['left-middle', 'right-middle'],
+				['left-middle-lower', 'right-middle-lower'],
+				['left-lower', 'right-lower'],
+			],
 		});
 	});
 });

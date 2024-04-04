@@ -194,7 +194,7 @@ export class Badges {
 			})
 			.reduce((badgeArr: ResultBadge[], badge) => {
 				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((badge) => badge.path === badge.path)) {
+				if (!badgeArr.some((existingBadge) => existingBadge.path === badge.path)) {
 					badgeArr.push(badge);
 				}
 				return badgeArr;
@@ -208,7 +208,7 @@ export class Badges {
 			})
 			.reduce((badgeArr: ResultBadge[], badge) => {
 				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((badge) => badge.path === badge.path)) {
+				if (!badgeArr.some((existingBadge) => existingBadge.path === badge.path)) {
 					badgeArr.push(badge);
 				}
 				return badgeArr;

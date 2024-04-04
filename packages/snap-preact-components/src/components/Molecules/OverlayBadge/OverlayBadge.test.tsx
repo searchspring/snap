@@ -21,7 +21,6 @@ const searchConfig: SearchControllerConfig = {
 	id: 'search',
 };
 const CHILDREN = <div className="children">children</div>;
-// const OVERLAY_NAME = 'left-middle';
 const mockClient = new MockClient(globals, {});
 const controller = createSearchController({ client: clientConfig, controller: searchConfig }, { client: mockClient });
 

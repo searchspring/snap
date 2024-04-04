@@ -14,6 +14,18 @@ import type { Product, ResultBadge } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	OverlayBadge: ({ meta }: OverlayBadgeProps) => {
+		const grid = meta?.badges?.locations?.grid;
+
+		let gridProperties = {};
+		if (grid?.length && grid[0]?.length) {
+			const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
+			const columns = grid[0].length;
+			gridProperties = {
+				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+				gridTemplateAreas,
+			};
+		}
+
 		return css({
 			position: 'relative',
 
@@ -24,7 +36,7 @@ const CSS = {
 				left: '0',
 				width: '100%',
 				height: '100%',
-				...meta?.badges?.locations?.gridProperties,
+				...gridProperties,
 			},
 		});
 	},

@@ -11,21 +11,17 @@ export class MetaStore {
 }
 
 class MetaBadges {
-	public locations: { gridProperties: Record<string, string> } = { gridProperties: {} };
+	public locations: { grid: string[][] } = { grid: [] };
 
 	constructor(metaData?: MetaResponseModel) {
 		const leftAreas = metaData?.badges?.locations?.overlay?.left?.map((area: any) => area.name) || [];
 		const rightAreas = metaData?.badges?.locations?.overlay?.right?.map((area: any) => area.name) || [];
 		const LCM = lcm(leftAreas.length, rightAreas.length);
-		const leftAreasLCM = Array.from({ length: LCM }).map((_, index) => leftAreas[Math.floor(index / (LCM / leftAreas.length))]);
-		const rightAreasLCM = Array.from({ length: LCM }).map((_, index) => rightAreas[Math.floor(index / (LCM / rightAreas.length))]);
-		const gridTemplateAreas = leftAreasLCM.map((left, index) => `"${left} ${rightAreasLCM[index]}"`).join(' ');
-		const columns = Object.keys(metaData?.badges?.locations?.overlay || {}).length;
 
-		this.locations.gridProperties = {
-			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : '',
-			gridTemplateAreas,
-		};
+		this.locations.grid = Array.from({ length: LCM }).map((_, index) => {
+			const i = Math.floor(index / (LCM / leftAreas.length));
+			return [leftAreas[i], rightAreas[i]];
+		});
 	}
 }
 
