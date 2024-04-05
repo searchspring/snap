@@ -55,7 +55,6 @@ export const addToCart = async (data: Product[], config?: config) => {
 			sku = item.display.mappings.core?.uid;
 		}
 
-		// console.log(sku, item.quantity)
 		if (sku && item.quantity) {
 			const attributes: any = [];
 
@@ -65,7 +64,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 					const parsed = JSON.parse(json_config);
 					if (parsed && parsed.attributes) {
 						Object.keys(parsed.attributes).map(async (att) => {
-							//todo this will need to be matched up with what the selected options are on the result
+							//TODO!! this will need to be matched up with what the selected options are on the result
 							const firstOption = parsed.attributes[att].options[0].id;
 
 							const attributeObj = {
@@ -117,7 +116,6 @@ export const addToCart = async (data: Product[], config?: config) => {
 			}
 		}
 		if (config?.callback) {
-			// console.log('here', config.callback)
 			config.callback();
 		} else {
 			console.log('redirecting');
