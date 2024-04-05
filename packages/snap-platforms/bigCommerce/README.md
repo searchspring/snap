@@ -1,12 +1,12 @@
-# Shopify Platform
-This platform interface gives you helper functions to use with the Shopify platform. 
+# BigCommerce Platform
+This platform library gives you helper functions to use with the BigCommerce platform. 
 
 
 ## Usage 
-To use the platform interface, simply import what you wish to use from `@searchspring/snap-platforms/shopify`.
+To use the platform library, simply import what you wish to use from `@searchspring/snap-platforms/bigCommerce`.
 
 ```jsx
-import { addToCart } from '@searchspring/snap-platforms/shopify';
+import { addToCart } from '@searchspring/snap-platforms/bigCommerce';
 
 export const Result = withController(observer((props) => {
 	const { controller, result } = props;
@@ -25,9 +25,6 @@ export const Result = withController(observer((props) => {
 ## AddToCart
 The `addToCart` function will automatically add products to the cart and then navigate to the cart page. The function takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional fields, a `callback` and `idFieldName`. 
 
-The `callback` setting takes a function to call after the products are added to the cart, this will get called rather than the automatic redirect to the cart page.
+The `callback` setting takes a function to call after the products are added to the cart, this will get called rather than the automatic redirect to the cart page. 
 
 The `idFieldName` setting takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
-
-Note that the `Shopify` object needs to be available on the window. 
-

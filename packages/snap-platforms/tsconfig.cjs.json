@@ -1,9 +1,9 @@
 {
 	"extends": "../../tsconfig.cjs.json",
 	"include": [
-		"src/bigCommerce/src",
-		"src/magento2/src",
-		"src/shopify/src"
+		"bigCommerce/src",
+		"magento2/src",
+		"shopify/src"
 	],
 	"compilerOptions": {
 		"outDir": "./dist/cjs",

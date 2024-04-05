@@ -1,9 +1,9 @@
 # Magento2 Platform
-This platform interface gives you helper functions to use with the Magento2 platform. 
+This platform library gives you helper functions to use with the Magento2 platform. 
 
 
 ## Usage 
-To use the platform interface, simply import what you wish to use from `@searchspring/snap-platforms/magento2`.
+To use the platform library, simply import what you wish to use from `@searchspring/snap-platforms/magento2`.
 
 ```jsx
 import { addToCart } from '@searchspring/snap-platforms/magento2';

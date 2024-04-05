@@ -2,7 +2,7 @@
 	"name": "snap-platforms-shopify",
 	"private": true,
 	"description": "Snap Shopify Platform Library",
-	"main": "../../dist/cjs/shopify/src/index.js",
-	"module": "../../dist/esm/shopify/src/index.js",
+	"main": "../dist/cjs/shopify/src/index.js",
+	"module": "../dist/esm/shopify/src/index.js",
 	"sideEffects": false
 }

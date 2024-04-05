@@ -2,7 +2,7 @@
 	"name": "snap-platforms-magento2",
 	"private": true,
 	"description": "Snap Magento 2 Platform Library",
-	"main": "../../dist/cjs/magento2/src/index.js",
-	"module": "../../dist/esm/magento2/src/index.js",
+	"main": "../dist/cjs/magento2/src/index.js",
+	"module": "../dist/esm/magento2/src/index.js",
 	"sideEffects": false
 }
