@@ -1,4 +1,4 @@
-/*! For license information please see main.d5fdb632.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.86da478f.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5248,8 +5248,8 @@
 				mobx_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				deepmerge__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
 				deepmerge__WEBPACK_IMPORTED_MODULE_14___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_14__),
-				swiper_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/swiper-react.mjs'),
-				swiper_modules__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/modules/index.mjs'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./node_modules/swiper/swiper-react.mjs'),
+				swiper_modules__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./node_modules/swiper/modules/index.mjs'),
 				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/utilities/defined.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
@@ -42825,7 +42825,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43332,7 +43332,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -45205,7 +45205,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[7],
+			[231],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
