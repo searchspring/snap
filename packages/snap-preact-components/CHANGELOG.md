@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+### Bug Fixes
+
+- **preact-components-swiper:** downgrade swiper version to 11.0.7 ([4777277](https://github.com/searchspring/snap/commit/47772770f25a80c0bc5ff4bcd7769ba9ebd44c61))
+
 ## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
 
 ### Bug Fixes
