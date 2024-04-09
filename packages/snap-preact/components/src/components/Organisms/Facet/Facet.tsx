@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import { FacetListOptions, FacetListOptionsProps } from '../../Molecules/FacetListOptions';
 import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGridOptions';

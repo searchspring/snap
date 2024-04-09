@@ -58,11 +58,11 @@ export type SnapConfig = {
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
-		globals: Partial<ClientGlobals>;
+		globals?: Partial<ClientGlobals>;
 		config?: ClientConfig;
 	};
 	tracker?: {
-		globals: TrackerGlobals;
+		globals?: TrackerGlobals;
 		config?: TrackerConfig;
 	};
 	instantiators?: {
@@ -422,7 +422,7 @@ export class Snap {
 				}
 
 				// get the path and siteId from the current bundle script in case its not the same as the client config
-				let path = `https://snapui.searchspring.io/${this.config.client!.globals.siteId}/`;
+				let path = `https://snapui.searchspring.io/${this.config.client?.globals?.siteId}/`;
 				const script: HTMLScriptElement | null = document.querySelector('script[src*="//snapui.searchspring.io"]');
 
 				if (script) {

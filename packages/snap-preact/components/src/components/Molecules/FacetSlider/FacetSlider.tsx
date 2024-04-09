@@ -1,7 +1,7 @@
 import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRanger } from 'react-ranger';

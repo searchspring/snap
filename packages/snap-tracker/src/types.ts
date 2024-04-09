@@ -5,6 +5,11 @@ export type TrackerGlobals = {
 	siteId: string;
 };
 
+export type DoNotTrackEntry = {
+	type: BeaconType;
+	category: BeaconCategory;
+};
+
 export type TrackerConfig = {
 	id?: string;
 	framework?: string;
@@ -17,6 +22,7 @@ export type TrackerConfig = {
 			origin?: string;
 		};
 	};
+	doNotTrack?: DoNotTrackEntry[];
 };
 
 export type BeaconPayload = {
@@ -49,11 +55,14 @@ export enum BeaconType {
 	PROFILE_RENDER = 'profile.render', // A profile is loaded onto the page.
 	PROFILE_IMPRESSION = 'profile.impression', // A profile is visible to the shopper (within viewport, not hidden). If determining visibility is not possible, this can be sent at the same time as a profile.render event.
 	PROFILE_CLICK = 'profile.click', // Any area of the profile is clicked.
+	PROFILE_ADDBUNDLE = 'profile.addBundle',
 
 	/** For Recommended Products within a Profile */
 	PROFILE_PRODUCT_RENDER = 'profile.product.render', // A recommended product is loaded onto the page.
 	PROFILE_PRODUCT_IMPRESSION = 'profile.product.impression', // A recommended product is visible to the shopper (within viewport, not hidden). If determining visibility is not possible, this can be sent at the same time as a profile.product.render event.
 	PROFILE_PRODUCT_CLICK = 'profile.product.click', // A recommended product is clicked.
+	PROFILE_PRODUCT_ADDEDTOBUNDLE = 'profile.product.addedToBundle',
+	PROFILE_PRODUCT_REMOVEDFROMBUNDLE = 'profile.product.removedFromBundle',
 }
 
 export enum BeaconCategory {
@@ -195,7 +204,7 @@ export type PreflightRequestModel = {
 };
 
 export interface TrackMethods {
-	event: (payload: BeaconPayload) => BeaconEvent;
+	event: (payload: BeaconPayload) => BeaconEvent | undefined;
 	error: (data: TrackErrorEvent) => BeaconEvent | undefined;
 	shopper: {
 		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;

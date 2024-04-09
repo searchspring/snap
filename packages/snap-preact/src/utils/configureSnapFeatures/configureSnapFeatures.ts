@@ -1,10 +1,14 @@
 import deepmerge from 'deepmerge';
 import type { SnapConfig } from '../../Snap';
+import { DoNotTrackEntry, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
+
+export const SHOPIFY_WEBPIXEL_STORAGE_KEY = 'ssWebPixel';
 
 export function configureSnapFeatures(config: SnapConfig) {
 	/* configure snap features by mutating the config as needed */
 
 	configureIntegratedSpellCorrection(config);
+	configureTracking(config);
 }
 
 export function configureIntegratedSpellCorrection(config: SnapConfig) {
@@ -54,5 +58,37 @@ export function configureIntegratedSpellCorrection(config: SnapConfig) {
 				}
 			}
 		});
+	}
+}
+
+function configureTracking(config: SnapConfig) {
+	// Searchspring's Shopify Web Pixel App compatibility
+	const webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
+	if (webPixel) {
+		try {
+			const webPixelData = JSON.parse(webPixel);
+
+			// when enabled, add certain events to doNotTrack list
+			if (webPixelData?.enabled) {
+				const doNotTrack: DoNotTrackEntry[] = [
+					{
+						type: BeaconType.PRODUCT,
+						category: BeaconCategory.PAGEVIEW,
+					},
+					{
+						type: BeaconType.CART,
+						category: BeaconCategory.CARTVIEW,
+					},
+					{
+						type: BeaconType.ORDER,
+						category: BeaconCategory.ORDERVIEW,
+					},
+				];
+
+				config.tracker = config.tracker || {};
+				config.tracker.config = config.tracker.config || {};
+				config.tracker.config.doNotTrack = (config.tracker.config.doNotTrack || []).concat(doNotTrack);
+			}
+		} catch (e) {}
 	}
 }

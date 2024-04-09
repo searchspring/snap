@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.51.2",
+	"version": "0.53.2",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -18,8 +18,21 @@
 		"test": "(kill $(lsof -ti:2222,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:2222,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)",
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
+	"searchspring": {
+		"siteId": {
+			"8uyt2m": {
+				"name": "snap.searchspring.io"
+			}
+		},
+		"framework": "preact",
+		"updates": [
+			"all"
+		],
+		"version": "0.51.0",
+		"scaffold": "snapfu-core"
+	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.51.2",
+		"@searchspring/snap-preact": "^0.53.2",
 		"deepmerge": "4.3.1",
 		"mobx-react": "7.6.0",
 		"preact": "10.9.0"
@@ -35,10 +48,10 @@
 		"@babel/runtime": "^7.23.7",
 		"@lhci/cli": "^0.13.0",
 		"@searchspring/browserslist-config-snap": "^1.0.6",
-		"babel-loader": "^9.1.3",
-		"core-js": "^3.35.0",
-		"css-loader": "^6.8.1",
-		"cypress": "^12.17.4",
+		"babel-loader": "^9.1.2",
+		"core-js": "^3.30.0",
+		"css-loader": "^6.7.3",
+		"cypress": "^13.7.1",
 		"cypress-wait-until": "^3.0.1",
 		"file-loader": "^6.2.0",
 		"sass": "^1.69.7",

@@ -1,6 +1,6 @@
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';
@@ -147,10 +147,10 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								// TODO: wrap with SearchResultTracker component (need to create)
 								if (resultComponent && controller) {
 									const ResultComponent = resultComponent;
-									return <ResultComponent controller={controller} result={result} theme={theme} />;
+									return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
 								} else {
 									return (
-										<SearchResultTracker result={result} controller={controller as SearchController}>
+										<SearchResultTracker result={result as Product} controller={controller as SearchController}>
 											<Result
 												key={(result as Product).id}
 												{...subProps.result}

@@ -2,7 +2,7 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
@@ -78,7 +78,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		styling.css = [style];
 	}
 
-	const facetValues = values || facet?.values;
+	const facetValues = values || facet?.refinedValues;
 
 	return facetValues?.length ? (
 		<CacheProvider>
@@ -90,8 +90,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-									? `filter by ${facet?.label} - ${value.label}`
-									: `filter by ${value.label}`
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

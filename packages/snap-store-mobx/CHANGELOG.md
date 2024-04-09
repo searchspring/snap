@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **store-mobx/storagestore:** fix on localstorage state persistence ([2ae98e6](https://github.com/searchspring/snap/commit/2ae98e6e2c08b1ebfb43bcb905d27fdb20c42e72))
+
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+### Bug Fixes
+
+- **store-mobx/resultstore:** modifying display to leverage mask - adding variant and middleware test ([0eaffd8](https://github.com/searchspring/snap/commit/0eaffd8a6435c71c16e816c5682b20eac0125739))
+
+## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.52.0](https://github.com/searchspring/snap/compare/v0.51.2...v0.52.0) (2024-03-06)
+
+### Features
+
+- **preact-components-bundlerecommendations:** new component for upcoming bundlerecs feature ([5547094](https://github.com/searchspring/snap/commit/554709406640e6232e525367f1776fd03979fd44))
+- **product-variants:** adding initial product variants code to the result store ([15208ed](https://github.com/searchspring/snap/commit/15208ed652a73d177618d9c62cfb146f1dcbf173))
+
 ## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

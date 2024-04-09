@@ -9,6 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
 import { ResultsLayout } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
+import { Product } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: 'Molecules/Result',
@@ -161,7 +162,7 @@ export default {
 const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
 
 export const Default = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
-	<Result {...args} result={controller?.store?.results[0]} />
+	<Result {...args} result={controller?.store?.results[0] as Product} />
 );
 
 Default.loaders = [
@@ -174,7 +175,7 @@ Default.loaders = [
 ];
 
 export const hideSections = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
-	<Result {...args} result={controller?.store?.results[0]} />
+	<Result {...args} result={controller?.store?.results[0] as Product} />
 );
 
 hideSections.loaders = [
@@ -192,7 +193,7 @@ hideSections.args = {
 };
 
 export const truncateTitle = (args: ResultProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
-	<Result {...args} result={controller?.store?.results[0]} />
+	<Result {...args} result={controller?.store?.results[0] as Product} />
 );
 
 truncateTitle.loaders = [

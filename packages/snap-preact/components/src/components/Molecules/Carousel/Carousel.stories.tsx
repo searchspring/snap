@@ -62,7 +62,7 @@ export default {
 				},
 				defaultValue: { summary: false },
 			},
-			control: { type: 'boolean | SwiperOptions.pagination' },
+			control: { type: 'boolean' },
 		},
 		vertical: {
 			defaultValue: false,

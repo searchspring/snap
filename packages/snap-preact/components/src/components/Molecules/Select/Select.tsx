@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -159,6 +159,11 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 	// selection state
 	const [selection, setSelection] = useState<ListOption | undefined>(selected);
+
+	// reset selection if 'selected' prop changes
+	if (selection && selected && selection != selected) {
+		setSelection(selected);
+	}
 
 	// reset selection if 'selected' prop changes
 	if (selection && selected && selection != selected) {

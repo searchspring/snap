@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **controller/recommendation:** fixing issue with types affecting build ([9a2007a](https://github.com/searchspring/snap/commit/9a2007afeca1656c39dbb3447649d98d93355b6b))
+
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+# [0.52.0](https://github.com/searchspring/snap/compare/v0.51.2...v0.52.0) (2024-03-06)
+
+### Features
+
+- **preact-components-bundlerecommendations:** new component for upcoming bundlerecs feature ([5547094](https://github.com/searchspring/snap/commit/554709406640e6232e525367f1776fd03979fd44))
+
 ## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
 
 ### Bug Fixes

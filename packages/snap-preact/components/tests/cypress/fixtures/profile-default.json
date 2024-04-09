@@ -1,0 +1,20 @@
+{
+    "profile": {
+        "tag": "trending",
+        "placement": "home-page",
+        "display": {
+            "threshold": 4,
+            "template": {
+                "name": "recs__production",
+                "uuid": "1c023788-06d9-11ed-998b-9219cea6216e",
+                "component": "Recs",
+                "branch": "production",
+                "group": "recs",
+                "type": "default"
+            },
+            "templateParameters": {
+                "title": "Recommended Products"
+            }
+        }
+    }
+}

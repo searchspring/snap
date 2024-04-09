@@ -34,6 +34,7 @@ import type { FacetProps } from '../components/Organisms/Facet';
 import type { HorizontalFacetsProps } from '../components/Organisms/HorizontalFacets';
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
+import type { RecommendationBundleProps } from '../components/Organisms/RecommendationBundle';
 import type { ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
@@ -103,6 +104,7 @@ export type ThemeComponents = {
 	horizontalFacets?: GenericComponentProps<HorizontalFacetsProps>;
 	filterSummary?: GenericComponentProps<FilterSummaryProps>;
 	noResults?: GenericComponentProps<NoResultsProps>;
+	recommendationBundle?: GenericComponentProps<RecommendationBundleProps>;
 	results?: GenericComponentProps<ResultsProps>;
 	searchHeader?: GenericComponentProps<SearchHeaderProps>;
 	sidebar?: GenericComponentProps<SidebarProps>;

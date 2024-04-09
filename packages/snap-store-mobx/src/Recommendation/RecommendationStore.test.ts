@@ -17,7 +17,7 @@ describe('RecommendationStore store', () => {
 		};
 		const store = new RecommendationStore(recommendationConfig, services);
 		expect(store.loaded).toBe(false);
-		expect(store.profile).toEqual({ display: {} });
+		expect(store.profile).toEqual({ display: {}, type: 'default' });
 		expect(store.results).toStrictEqual([]);
 	});
 

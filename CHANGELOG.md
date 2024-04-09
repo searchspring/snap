@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+### Bug Fixes
+
+- **preact-components-swiper:** downgrade swiper version to 11.0.7 ([4777277](https://github.com/searchspring/snap/commit/47772770f25a80c0bc5ff4bcd7769ba9ebd44c61))
+
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+### Bug Fixes
+
+- **preact-componenbts/carousel:** updating swiper patch version and perview props and classnames ([defe16b](https://github.com/searchspring/snap/commit/defe16bc526fe59d9510c70f84261b821cae7e76))
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **controller/recommendation:** fixing issue with types affecting build ([9a2007a](https://github.com/searchspring/snap/commit/9a2007afeca1656c39dbb3447649d98d93355b6b))
+- **preact-components/facetoptions:** modifying facet options components to utilize refinedValues ([9002d17](https://github.com/searchspring/snap/commit/9002d17c72b059fe9c3ab1d32a537b43b39b5c05))
+- **store-mobx/storagestore:** fix on localstorage state persistence ([2ae98e6](https://github.com/searchspring/snap/commit/2ae98e6e2c08b1ebfb43bcb905d27fdb20c42e72))
+- **toolbox/featureflags:** removing the doNotTrack navigator check due to deprecation ([16bb191](https://github.com/searchspring/snap/commit/16bb19162a407a5ccf103c02f443c53acbcce918))
+
+### Features
+
+- **tracker:** add doNotTrack config options to allow certains events to be excluded ([f9114b0](https://github.com/searchspring/snap/commit/f9114b0b651578543112759573ed8719c7326579))
+
+## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
+
+### Bug Fixes
+
+- **store-mobx/resultstore:** modifying display to leverage mask - adding variant and middleware test ([0eaffd8](https://github.com/searchspring/snap/commit/0eaffd8a6435c71c16e816c5682b20eac0125739))
+
+## [0.52.1](https://github.com/searchspring/snap/compare/v0.52.0...v0.52.1) (2024-03-08)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.52.0](https://github.com/searchspring/snap/compare/v0.51.2...v0.52.0) (2024-03-06)
+
+### Bug Fixes
+
+- **bundledrecommendation:** bugfixes around seedincarousel ([881ad04](https://github.com/searchspring/snap/commit/881ad04ab3e3c5ac77a9d6809a20525c796472cb))
+- **preact-components-carousel:** custom swiper navigation support, bc for default nav containers ([abdc4eb](https://github.com/searchspring/snap/commit/abdc4ebab5c0c85c730c7d0ced8226bcc5db39c3))
+- **preact-components-carousel:** monkey patching navigation.onprev and onnext functions for swiper ([355b5c0](https://github.com/searchspring/snap/commit/355b5c0073844fd2385b8bd4411025bad31eb0bf))
+
+### Features
+
+- **preact-components-bundlerecommendations:** new component for upcoming bundlerecs feature ([5547094](https://github.com/searchspring/snap/commit/554709406640e6232e525367f1776fd03979fd44))
+- **preact-components/carousel:** updating to swiper v11 ([6a7a761](https://github.com/searchspring/snap/commit/6a7a761ce2dda5acd9ca2bef803a87dd6e003e33))
+- **product-variants:** adding initial product variants code to the result store ([15208ed](https://github.com/searchspring/snap/commit/15208ed652a73d177618d9c62cfb146f1dcbf173))
+
 ## [0.51.2](https://github.com/searchspring/snap/compare/v0.51.1...v0.51.2) (2024-02-12)
 
 ### Bug Fixes
