@@ -1,4 +1,4 @@
-/*! For license information please see main.86da478f.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.11399a52.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5177,10 +5177,10 @@
 							control: { type: 'object' },
 						},
 						autoAdjustSlides: {
-							defaultValue: !0,
+							defaultValue: !1,
 							description:
 								'If true and children length is less than the current breakpoint slidesPerView value, slidesPerView and slidesPerGroup will be set to the children length and loop to false',
-							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
 						onNextButtonClick: {
@@ -5407,7 +5407,7 @@
 									: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 								pagination: !1,
 								loop: !0,
-								autoAdjustSlides: !0,
+								autoAdjustSlides: !1,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
@@ -42825,7 +42825,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.3', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43332,7 +43332,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
