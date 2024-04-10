@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+### Bug Fixes
+
+- **preact-components-carousel:** changing the default value for autoAdjustSlides to false ([1abe427](https://github.com/searchspring/snap/commit/1abe42754debfacb584a3c4b3650f4de24473faa))
+
 ## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
 
 ### Bug Fixes

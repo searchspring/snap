@@ -192,7 +192,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
-		autoAdjustSlides: true,
+		autoAdjustSlides: false,
 		// global theme
 		...globalTheme?.components?.carousel,
 		//props
