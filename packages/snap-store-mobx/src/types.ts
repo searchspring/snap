@@ -8,6 +8,9 @@ export type StoreConfig = {
 
 type VariantConfig = {
 	field: string;
+	preselected?: {
+		[field: string]: string[];
+	};
 };
 
 export type VariantSelectionOptions = {

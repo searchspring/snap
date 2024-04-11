@@ -104,7 +104,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask);
+				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig).settings?.variants?.preselected);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -181,7 +181,7 @@ export class Variants {
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
 
-	constructor(variantData: VariantData[], mask: ProductMask) {
+	constructor(variantData: VariantData[], mask: ProductMask, preselectedOptions?: Record<string, string[]>) {
 		const options: string[] = [];
 
 		// create variants objects
@@ -211,7 +211,7 @@ export class Variants {
 		};
 
 		// select first available
-		this.makeSelections();
+		this.makeSelections(preselectedOptions);
 	}
 
 	public makeSelections(options?: Record<string, string[]>) {
@@ -236,8 +236,7 @@ export class Variants {
 
 				// if theres a preference for that field
 				if (preferedOptions) {
-					//loop through each preference option
-					preferedOptions.forEach((preference: string) => {
+					const checkIfAvailable = (preference: string) => {
 						//see if that option is in the available options
 						const availablePreferedOptions = availableOptions.find((value) => value.value.toLowerCase() == preference.toLowerCase());
 
@@ -245,7 +244,16 @@ export class Variants {
 						if (availablePreferedOptions) {
 							preferencedOption = availablePreferedOptions;
 						}
-					});
+					};
+
+					if (typeof preferedOptions == 'object') {
+						//loop through each preference option
+						preferedOptions.forEach((preference: string) => {
+							checkIfAvailable(preference);
+						});
+					} else {
+						checkIfAvailable(preferedOptions);
+					}
 				}
 
 				if (preferencedOption) {

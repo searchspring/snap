@@ -9,6 +9,8 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
+import { EventManager } from '@searchspring/snap-event-manager';
+import type { Next } from '@searchspring/snap-event-manager';
 
 import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
 
@@ -32,6 +34,7 @@ import { default as createSearchController } from './create/createSearchControll
 import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
+import { Product, SearchStore } from '@searchspring/snap-store-mobx';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -168,6 +171,8 @@ export class Snap {
 		[controllerConfigId: string]: Controllers;
 	} = {};
 
+	public eventManager: EventManager;
+
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
 	};
@@ -298,6 +303,53 @@ export class Snap {
 		window.addEventListener('error', this.handlers.error);
 
 		this.config = config;
+		this.eventManager = new EventManager();
+
+		this.eventManager.on('selectVariant', async (data: any, next: Next) => {
+			const { variantData, profileIds } = data;
+
+			//filter through all controllers for matches with profileIds
+			const controllerListToUse: AbstractController[] = [];
+			Object.keys(window.searchspring.controller).forEach((controller) => {
+				const current = window.searchspring.controller[controller];
+				if (profileIds) {
+					//only push if controller/profile matches?
+					if (profileIds instanceof RegExp) {
+						if (controller.match(profileIds)?.length) {
+							controllerListToUse.push(current);
+						}
+					} else if (typeof profileIds == 'object') {
+						profileIds.forEach((id: string) => {
+							if (id.startsWith('/')) {
+								if (controller.match(id)?.length) {
+									controllerListToUse.push(current);
+								}
+							} else if (controller.indexOf(`recommend_${id}`) > -1) {
+								controllerListToUse.push(current);
+							}
+						});
+					} else if (controller.indexOf(`recommend_${profileIds}`) > -1) {
+						controllerListToUse.push(current);
+					}
+				} else {
+					controllerListToUse.push(current);
+				}
+			});
+
+			//then run set makeSelections on each result in that controller result store with the passed variant data
+			controllerListToUse.map((controller) => {
+				if ((controller.store as SearchStore).results) {
+					(controller.store as SearchStore).results.forEach((result) => {
+						//no banner types
+						if (result.type == 'product') {
+							(result as Product).variants?.makeSelections(variantData);
+						}
+					});
+				}
+			});
+
+			await next();
+		});
 
 		let globalContext: ContextVariables = {};
 		try {
@@ -521,6 +573,16 @@ export class Snap {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
+
+		if (this.eventManager) {
+			window.searchspring.on = (event: string, ...func: any) => {
+				this.eventManager.on(event, ...func);
+			};
+
+			window.searchspring.fire = (event: string, ...func: any) => {
+				this.eventManager.fire(event, ...func);
+			};
+		}
 
 		// autotrack shopper id from the context
 		if (this.context?.shopper?.id) {
