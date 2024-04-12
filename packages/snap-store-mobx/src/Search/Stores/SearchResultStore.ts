@@ -139,15 +139,6 @@ export class Product {
 		makeObservable(this.mappings.core!, coreObservables);
 	}
 
-	public setVariants = (data: VariantData[]) => {
-		try {
-			this.variants = new Variants(data, this.mask);
-		} catch (err) {
-			// failed to parse the variant JSON
-			console.error(err, `Invalid variant JSON for product id: ${data}`);
-		}
-	};
-
 	public get display(): ProductMinimal {
 		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
 	}
@@ -223,6 +214,41 @@ export class Variants {
 		this.makeSelections();
 	}
 
+	public update(variantData: VariantData[]) {
+		try {
+			const options: string[] = [];
+
+			// create variants objects
+			this.data = variantData.map((variant) => {
+				Object.keys(variant.options).forEach((variantOption) => {
+					if (!options.includes(variantOption)) {
+						options.push(variantOption);
+					}
+				});
+
+				return new Variant(variant);
+			});
+
+			//need to reset this.selections first
+			this.selections = [];
+
+			options.map((option) => {
+				// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
+				const optionConfig = {
+					field: option,
+					label: option,
+				};
+				this.selections.push(new VariantSelection(this, optionConfig));
+			});
+
+			// select first available
+			this.makeSelections();
+		} catch (err) {
+			// failed to parse the variant JSON
+			console.error(err, `Invalid variant JSON for: ${variantData}`);
+		}
+	}
+
 	public makeSelections(options?: Record<string, string>) {
 		// TODO - support for affinity to attempt to pre-selected options
 		// options = {color: 'Blue', size: 'L'};
@@ -237,7 +263,7 @@ export class Variants {
 		}
 	}
 
-	public update(fromSelection: VariantSelection) {
+	public refineOptions(fromSelection: VariantSelection) {
 		// need to ensure the update originator is at the BOTTOM of the list for refinement
 		const orderedSelections = [...this.selections];
 		orderedSelections.sort((a) => {
@@ -292,7 +318,7 @@ export class VariantSelection {
 		this.label = selectorConfig.label;
 
 		// needed to prevent attaching variants as class property
-		this.variantsUpdate = () => variants.update(this);
+		this.variantsUpdate = () => variants.refineOptions(this);
 
 		// create possible values from the data and refine them
 		this.refineSelections(variants);
