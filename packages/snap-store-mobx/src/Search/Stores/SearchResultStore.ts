@@ -182,36 +182,13 @@ export class Variants {
 	public setActive: (variant: Variant) => void;
 
 	constructor(variantData: VariantData[], mask: ProductMask) {
-		const options: string[] = [];
-
-		// create variants objects
-		this.data = variantData.map((variant) => {
-			Object.keys(variant.options).forEach((variantOption) => {
-				if (!options.includes(variantOption)) {
-					options.push(variantOption);
-				}
-			});
-
-			return new Variant(variant);
-		});
-
-		options.map((option) => {
-			// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
-			const optionConfig = {
-				field: option,
-				label: option,
-			};
-			this.selections.push(new VariantSelection(this, optionConfig));
-		});
-
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
 
-		// select first available
-		this.makeSelections();
+		this.update(variantData);
 	}
 
 	public update(variantData: VariantData[]) {
@@ -263,7 +240,7 @@ export class Variants {
 		}
 	}
 
-	public refineOptions(fromSelection: VariantSelection) {
+	public refineSelections(fromSelection: VariantSelection) {
 		// need to ensure the update originator is at the BOTTOM of the list for refinement
 		const orderedSelections = [...this.selections];
 		orderedSelections.sort((a) => {
@@ -274,7 +251,7 @@ export class Variants {
 		});
 
 		// refine selections ensuring that the selection that triggered the update refines LAST
-		orderedSelections.forEach((selection) => selection.refineSelections(this));
+		orderedSelections.forEach((selection) => selection.refineValues(this));
 
 		// check to see if we have enough selections made to update the display
 		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
@@ -318,10 +295,10 @@ export class VariantSelection {
 		this.label = selectorConfig.label;
 
 		// needed to prevent attaching variants as class property
-		this.variantsUpdate = () => variants.refineOptions(this);
+		this.variantsUpdate = () => variants.refineSelections(this);
 
 		// create possible values from the data and refine them
-		this.refineSelections(variants);
+		this.refineValues(variants);
 
 		makeObservable(this, {
 			selected: observable,
@@ -329,7 +306,7 @@ export class VariantSelection {
 		});
 	}
 
-	public refineSelections(variants: Variants) {
+	public refineValues(variants: Variants) {
 		// current selection should only consider OTHER selections for availability
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
 
