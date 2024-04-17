@@ -192,13 +192,20 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
-		autoAdjustSlides: true,
+		autoAdjustSlides: false,
 		// global theme
 		...globalTheme?.components?.carousel,
 		//props
 		...properties,
 		...properties.theme?.components?.carousel,
 	};
+
+	Object.keys(props.breakpoints!).forEach((breakpoint) => {
+		const breakPointProps = props.breakpoints![breakpoint as keyof typeof props.breakpoints];
+		// make certain props numbers
+		if (breakPointProps.slidesPerView) breakPointProps.slidesPerView = Number(breakPointProps.slidesPerView) || 1;
+		if (breakPointProps.slidesPerGroup) breakPointProps.slidesPerGroup = Number(breakPointProps.slidesPerGroup) || 1;
+	});
 
 	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
@@ -270,20 +277,14 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	useEffect(() => {
 		//backwards compatability for legacy styles
-		const swipers = document.querySelectorAll('.swiper');
-		swipers.forEach((elem: any) => {
-			elem.classList.add('swiper-container', 'swiper-container-pointer-events');
-		});
+		if (rootComponentRef.current) {
+			const rootElem: HTMLElement = rootComponentRef.current;
+			const swiperElem = rootElem.querySelector('.swiper');
+			swiperElem?.classList.add('swiper-container', 'swiper-container-pointer-events');
 
-		const verticalSwipers = document.querySelectorAll('.swiper-vertical');
-		verticalSwipers.forEach((elem: any) => {
-			elem.classList.add('swiper-container-vertical');
-		});
-
-		const horizontalSwipers = document.querySelectorAll('.swiper-horizontal');
-		horizontalSwipers.forEach((elem: any) => {
-			elem.classList.add('swiper-container-horizontal');
-		});
+			swiperElem?.classList.contains('swiper-vertical') && swiperElem.classList.add('swiper-container-vertical');
+			swiperElem?.classList.contains('swiper-horizontal') && swiperElem.classList.add('swiper-container-horizontal');
+		}
 
 		//add usable class to last visible slide.
 		attachClasstoLastVisibleSlide();

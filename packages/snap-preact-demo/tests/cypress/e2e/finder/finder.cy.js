@@ -157,20 +157,15 @@ config?.pages?.forEach((page, _i) => {
 
 						cy.snapController(id).then((controller) => {
 							const targetSelector = controller.targeters[id].targets.map((target) => target.selector).join(',');
-
-							cy.on('url:changed', (newUrl) => {
-								const expectedUrl = controller.store.selections.filter((selection) => selection.selected)[0].services.urlManager.href;
-								expect(expectedUrl).to.exist;
-								expect(newUrl).to.contain(expectedUrl.substring(1)); //remove first character '?'
-
-								const findButtonUrl = controller.store.config.url;
-								if (findButtonUrl) {
-									expect(newUrl).to.contain(findButtonUrl);
-								}
-							});
-
-							// click on find button
+							const url = controller.urlManager.href;
 							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({ force: true });
+
+							cy.url().should('contain', url);
+
+							const findButtonUrl = controller.store.config.url;
+							if (findButtonUrl) {
+								expect(url).to.contain(findButtonUrl);
+							}
 						});
 					});
 				});
@@ -283,20 +278,15 @@ config?.pages?.forEach((page, _i) => {
 
 						cy.snapController(id).then((controller) => {
 							const targetSelector = controller.targeters[id].targets.map((target) => target.selector).join(',');
-
-							cy.on('url:changed', (newUrl) => {
-								const expectedUrl = controller.store.selections.filter((selection) => selection.selected)[0].services.urlManager.href;
-								expect(expectedUrl).to.exist;
-								expect(newUrl).to.contain(expectedUrl.substring(1)); //remove first character '?'
-
-								const findButtonUrl = controller.store.config.url;
-								if (findButtonUrl) {
-									expect(newUrl).to.contain(findButtonUrl);
-								}
-							});
-
-							// click on find button
+							const url = controller.urlManager.href;
 							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({ force: true });
+
+							cy.url().should('contain', url);
+
+							const findButtonUrl = controller.store.config.url;
+							if (findButtonUrl) {
+								expect(url).to.contain(findButtonUrl);
+							}
 						});
 					});
 				});

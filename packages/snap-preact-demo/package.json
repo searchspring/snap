@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.52.2",
+	"version": "0.53.3",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -32,8 +32,8 @@
 		"scaffold": "snapfu-core"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.52.2",
-		"@searchspring/snap-preact-components": "^0.52.2",
+		"@searchspring/snap-preact": "^0.53.3",
+		"@searchspring/snap-preact-components": "^0.53.3",
 		"deepmerge": "4.3.1",
 		"mobx-react": "7.6.0",
 		"preact": "10.9.0"
@@ -52,8 +52,8 @@
 		"babel-loader": "^9.1.2",
 		"core-js": "^3.30.0",
 		"css-loader": "^6.7.3",
-		"cypress": "^12.15.0",
-		"cypress-wait-until": "^1.7.2",
+		"cypress": "^13.7.1",
+		"cypress-wait-until": "^3.0.1",
 		"file-loader": "^6.2.0",
 		"sass": "^1.60.0",
 		"sass-loader": "^13.2.2",

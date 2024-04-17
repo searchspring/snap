@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+### Bug Fixes
+
+- **preact-components-carousel:** changing the default value for autoAdjustSlides to false ([1abe427](https://github.com/searchspring/snap/commit/1abe42754debfacb584a3c4b3650f4de24473faa))
+
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+### Bug Fixes
+
+- **preact-components-swiper:** downgrade swiper version to 11.0.7 ([4777277](https://github.com/searchspring/snap/commit/47772770f25a80c0bc5ff4bcd7769ba9ebd44c61))
+
+## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
+
+### Bug Fixes
+
+- **preact-componenbts/carousel:** updating swiper patch version and perview props and classnames ([defe16b](https://github.com/searchspring/snap/commit/defe16bc526fe59d9510c70f84261b821cae7e76))
+
+# [0.53.0](https://github.com/searchspring/snap/compare/v0.52.2...v0.53.0) (2024-04-01)
+
+### Bug Fixes
+
+- **preact-components/facetoptions:** modifying facet options components to utilize refinedValues ([9002d17](https://github.com/searchspring/snap/commit/9002d17c72b059fe9c3ab1d32a537b43b39b5c05))
+
 ## [0.52.2](https://github.com/searchspring/snap/compare/v0.52.1...v0.52.2) (2024-03-18)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
