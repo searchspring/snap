@@ -317,7 +317,7 @@ export function badges(controller: AbstractController) {
 			tags: {
 				'on-sale': {
 					location: 'left-middle',
-					component: 'BadgeText',
+					component: 'BadgeRectangle',
 					priority: 1,
 					enabled: true,
 					parameters: {
@@ -331,8 +331,7 @@ export function badges(controller: AbstractController) {
 					priority: 1,
 					enabled: true,
 					parameters: {
-						color: '#FF0000',
-						colorText: '#FFFFFF',
+						colorText: '#333333',
 					},
 				},
 				christmas: {

@@ -2,13 +2,13 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { BadgeTextProps, BadgeText } from './BadgeText';
+import { BadgePillProps, BadgePill } from './BadgePill';
 import { componentArgs } from '../../../utilities';
-import Readme from '../BadgeText/readme.md';
+import Readme from '../BadgePill/readme.md';
 
 export default {
-	title: `Atoms/BadgeText`,
-	component: BadgeText,
+	title: `Atoms/BadgePill`,
+	component: BadgePill,
 	parameters: {
 		docs: {
 			page: () => (
@@ -44,6 +44,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		color: {
+			description: 'Badge background color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'rgba(255, 255, 255, 0.5)' },
+			},
+			control: { type: 'color' },
+		},
 		colorText: {
 			description: 'Badge text color',
 			table: {
@@ -58,8 +68,9 @@ export default {
 	},
 };
 
-export const Default = (args: BadgeTextProps) => <BadgeText {...args} />;
+export const Default = (args: BadgePillProps) => <BadgePill {...args} />;
 Default.args = {
 	value: '30% Off',
-	colorText: '#000000',
+	color: '#0000FF',
+	colorText: '#FFFFFF',
 };

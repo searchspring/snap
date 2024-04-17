@@ -1,5 +1,9 @@
 // ATOMS
 export * from './components/Atoms/Badge';
+export * from './components/Atoms/BadgeImage';
+export * from './components/Atoms/BadgePill';
+export * from './components/Atoms/BadgeRectangle';
+export * from './components/Atoms/BadgeText';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';

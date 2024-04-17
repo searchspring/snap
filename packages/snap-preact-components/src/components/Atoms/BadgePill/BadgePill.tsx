@@ -8,43 +8,47 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	BadgeText: (props: BadgeTextProps) => {
+	BadgePill: (props: BadgePillProps) => {
 		return css({
 			display: 'inline-block',
 			padding: '0.2em 0.5em',
+			background: props.color,
 			color: props.colorText,
 			textOverflow: 'ellipsis',
 			whiteSpace: 'nowrap',
 			overflow: 'hidden',
 			maxWidth: '100%',
+			borderRadius: '1em',
 		});
 	},
 };
 
-export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
+export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: BadgeTextProps = {
+	const props: BadgePillProps = {
 		// default props
+		color: 'rgba(255, 255, 255, 0.5)',
+		colorText: '#000000',
 		// global theme
-		...globalTheme?.components?.badgeText,
+		...globalTheme?.components?.badgePill,
 		// props
 		...properties,
-		...properties.theme?.components?.badgeText,
+		...properties.theme?.components?.badgePill,
 	};
 	const { value, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
 	if (!disableStyles) {
-		styling.css = [CSS.BadgeText(props), style];
+		styling.css = [CSS.BadgePill(props), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-text', className)}>
+			<div {...styling} className={classnames('ss__badge-pill', className)}>
 				{value}
 			</div>
 		</CacheProvider>
@@ -53,7 +57,8 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 	);
 });
 
-export interface BadgeTextProps extends ComponentProps {
+export interface BadgePillProps extends ComponentProps {
 	value: string;
+	color?: string;
 	colorText?: string;
 }

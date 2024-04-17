@@ -11,13 +11,6 @@ The required `value` prop specifies the badge text contents.
 <BadgeText value={'30% Off'} />
 ```
 
-### color
-The `color` prop specifies the badge background color.
-
-```jsx
-<BadgeText color={'rgba(255, 255, 255, 0.5)'} value={'30% Off'} />
-```
-
 ### colorText
 The `colorText` prop specifies the badge text color.
 

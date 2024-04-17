@@ -13,24 +13,17 @@ describe('BadgeText Component', () => {
 		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
 		expect(BadgeTextEl).toBeInTheDocument();
 		expect(BadgeTextEl).toHaveTextContent(BADGE_VALUE);
-
-		const styles = getComputedStyle(BadgeTextEl);
-
-		expect(styles.background).toBeDefined();
-		expect(styles.color).toBeDefined();
 	});
 
-	it('renders BadgeText with color and colorText props', () => {
-		const color = 'rgb(255, 0, 0)';
+	it('renders BadgeText with colorText prop', () => {
 		const colorText = 'rgb(14, 14, 14)';
 
-		const rendered = render(<BadgeText value={BADGE_VALUE} color={color} colorText={colorText} />);
+		const rendered = render(<BadgeText value={BADGE_VALUE} colorText={colorText} />);
 		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
 		expect(BadgeTextEl).toBeInTheDocument();
 
 		const styles = getComputedStyle(BadgeTextEl);
 
-		expect(styles.background).toBe(color);
 		expect(styles.color).toBe(colorText);
 	});
 

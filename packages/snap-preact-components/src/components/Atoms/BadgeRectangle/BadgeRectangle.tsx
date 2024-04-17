@@ -8,10 +8,11 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	BadgeText: (props: BadgeTextProps) => {
+	BadgeRectangle: (props: BadgeRectangleProps) => {
 		return css({
 			display: 'inline-block',
 			padding: '0.2em 0.5em',
+			background: props.color,
 			color: props.colorText,
 			textOverflow: 'ellipsis',
 			whiteSpace: 'nowrap',
@@ -21,30 +22,32 @@ const CSS = {
 	},
 };
 
-export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
+export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: BadgeTextProps = {
+	const props: BadgeRectangleProps = {
 		// default props
+		color: 'rgba(255, 255, 255, 0.5)',
+		colorText: '#000000',
 		// global theme
-		...globalTheme?.components?.badgeText,
+		...globalTheme?.components?.badgeRectangle,
 		// props
 		...properties,
-		...properties.theme?.components?.badgeText,
+		...properties.theme?.components?.badgeRectangle,
 	};
 	const { value, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
 	if (!disableStyles) {
-		styling.css = [CSS.BadgeText(props), style];
+		styling.css = [CSS.BadgeRectangle(props), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-text', className)}>
+			<div {...styling} className={classnames('ss__badge-rectangle', className)}>
 				{value}
 			</div>
 		</CacheProvider>
@@ -53,7 +56,8 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 	);
 });
 
-export interface BadgeTextProps extends ComponentProps {
+export interface BadgeRectangleProps extends ComponentProps {
 	value: string;
+	color?: string;
 	colorText?: string;
 }
