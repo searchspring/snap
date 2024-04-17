@@ -6,7 +6,7 @@ export const setupEvents = () => {
 	const eventManager = new EventManager();
 
 	type controllerSelectVariantOptionsData = {
-		options: Record<string, string>;
+		options: Record<string, string[]>;
 		controllerIds: string | RegExp | (string | RegExp)[];
 	};
 
