@@ -100,6 +100,39 @@ const config = {
 };
 ```
 
+## Global Events
+
+We can attach global events to the `window.searchspring` object via the event-manager created by the Snap instance. These events can be listened for or fired via the `on` and `fire` methods. 
+
+Example: 
+```typescript
+	window.searchspring.on('myEvent', () => {
+		console.log('myEvent happened!'); 
+	})
+
+	window.searchspring.fire('myEvent');
+```
+
+## Provided Global Events
+
+### controller/selectVariantOptions 
+The `controller/selectVariantOptions` event takes a payload with 2 values, `options` and `controllerIds` (optional). 
+
+This event will loop through all available controllers on the window, find matches to the passed controllerIds (will use all controllers if no ids are provided), and then call `variants.makeSelections` with the options provided for each `product` type result in that controller store. This allows you to programmatically select variant options for results completely outside your result components. 
+
+The `controllerIds` can be an exact controller id string match or an array of matches - 
+
+```typescript
+controllerIds: `search`,
+controllerIds: [`search`, `autocomplete`]
+```
+
+it can also take regex for partial matches -
+
+```typescript
+controllerIds: [/^recommend_/]
+```
+
 ## Controller Events
 
 On the controller we can attach middleware via `on` or `plugin` methods.
@@ -284,3 +317,7 @@ snap.getController('search').then((search) => {
 ### track.render
 - Called with `eventData` = { controller, trackEvent } 
 - Always invoked after `track.render()` method has been invoked
+
+
+
+

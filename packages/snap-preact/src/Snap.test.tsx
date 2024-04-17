@@ -1200,6 +1200,21 @@ describe('Snap Preact', () => {
 		});
 	});
 
+	describe('creates eventManager', () => {
+		it('creates eventManager on snap instance and adds functions to window', () => {
+			const baseConfig = generateBaseConfig();
+			const snap = new Snap(baseConfig);
+
+			expect(snap.eventManager).toBeDefined();
+			expect(snap.eventManager.events).toBeDefined();
+			expect(snap.eventManager.fire).toBeDefined();
+			expect(snap.eventManager.on).toBeDefined();
+
+			expect(window.searchspring.on).toBeDefined();
+			expect(window.searchspring.fire).toBeDefined();
+		});
+	});
+
 	describe(`the 'getInstantiator' method`, () => {
 		it('rejects if requested instantiator does not exist', async () => {
 			const baseConfig = generateBaseConfig();

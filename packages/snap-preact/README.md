@@ -286,3 +286,6 @@ polyfills.then(() => {
 	import('./index');
 })
 ```
+
+## event-manager 
+A reference to the shared [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) instance. 
