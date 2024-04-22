@@ -375,27 +375,28 @@ export class AutocompleteController extends AbstractController {
 
 				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
 				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
-				this.urlManager.reset().go();
 
-				if (!value) {
-					// there is no input value - reset state of store
-					this.store.reset();
+				this.handlers.input.timeoutDelay = setTimeout(() => {
+					if (!value) {
+						// there is no input value - reset state of store
+						this.store.reset();
 
-					// show results for trending or history (if configured) - trending has priority
-					if (trendingResultsEnabled) {
-						this.store.trending[0].preview();
-					} else if (historyResultsEnabled) {
-						this.store.history[0].preview();
-					}
-				} else {
-					// new query in the input - trigger a new search via UrlManager
-					this.handlers.input.timeoutDelay = setTimeout(() => {
+						// show results for trending or history (if configured) - trending has priority
+						if (trendingResultsEnabled) {
+							this.store.trending[0].preview();
+						} else if (historyResultsEnabled) {
+							this.store.history[0].preview();
+						} else {
+							// no input - need to reset URL
+							this.urlManager.reset().go();
+						}
+					} else {
+						// new query in the input - trigger a new search via UrlManager
 						this.store.state.locks.terms.unlock();
 						this.store.state.locks.facets.unlock();
-
 						this.urlManager.set({ query: this.store.state.input }).go();
-					}, INPUT_DELAY);
-				}
+					}
+				}, INPUT_DELAY);
 			},
 			timeoutDelay: undefined as undefined | ReturnType<typeof setTimeout>,
 		},
