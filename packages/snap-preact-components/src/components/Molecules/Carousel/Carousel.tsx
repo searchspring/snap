@@ -288,7 +288,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 		//add usable class to last visible slide.
 		attachClasstoLastVisibleSlide();
-	}, []);
+	}, [properties]);
 
 	if (pagination) {
 		if (typeof pagination == 'object') {
