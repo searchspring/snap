@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+### Bug Fixes
+
+- **preact-components-carousel:** bugfix for backwards compatible classnames on carousel re-renders ([0fbbf29](https://github.com/searchspring/snap/commit/0fbbf29134dfedb35bf1327b47673a7e91e9fd36))
+
 ## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
 
 ### Bug Fixes
