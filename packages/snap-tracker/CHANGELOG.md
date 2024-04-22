@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-tracker
+
 ## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
