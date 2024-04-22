@@ -1,4 +1,4 @@
-/*! For license information please see main.11399a52.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.47652c23.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5491,17 +5491,20 @@
 						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.li)(null),
 						styling = {};
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
-						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.vJ)(function () {
-							if (rootComponentRef.current) {
-								var swiperElem = rootComponentRef.current.querySelector('.swiper');
-								null == swiperElem || swiperElem.classList.add('swiper-container', 'swiper-container-pointer-events'),
-									(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-vertical')) &&
-										swiperElem.classList.add('swiper-container-vertical'),
-									(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-horizontal')) &&
-										swiperElem.classList.add('swiper-container-horizontal');
-							}
-							attachClasstoLastVisibleSlide();
-						}, []),
+						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.vJ)(
+							function () {
+								if (rootComponentRef.current) {
+									var swiperElem = rootComponentRef.current.querySelector('.swiper');
+									null == swiperElem || swiperElem.classList.add('swiper-container', 'swiper-container-pointer-events'),
+										(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-vertical')) &&
+											swiperElem.classList.add('swiper-container-vertical'),
+										(null == swiperElem ? void 0 : swiperElem.classList.contains('swiper-horizontal')) &&
+											swiperElem.classList.add('swiper-container-horizontal');
+								}
+								attachClasstoLastVisibleSlide();
+							},
+							[properties]
+						),
 						pagination && (pagination = 'object' == typeof pagination ? Object.assign({ clickable: !0 }, pagination) : { clickable: !0 }),
 						(navigation =
 							navigation && 'object' == typeof navigation
@@ -42825,7 +42828,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.3', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.4', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43332,7 +43335,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.4')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
