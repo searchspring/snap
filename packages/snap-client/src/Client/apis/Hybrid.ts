@@ -25,9 +25,10 @@ export class HybridAPI extends API {
 
 		const legacyConfig: ApiConfigurationParameters = deepmerge(
 			{
-				mode: configuration.mode,
-				origin: configuration.origin,
+				mode: this.configuration.mode,
+				origin: this.configuration.origin,
 				cache: this.configuration.cache,
+				fetchApi: this.configuration.fetchApi,
 			},
 			requesterConfigurations?.legacy || {}
 		);
@@ -36,11 +37,12 @@ export class HybridAPI extends API {
 			legacyConfig.headers = { ...legacyConfig.headers, 'searchspring-no-beacon': '' };
 		}
 
-		const suggestConfig = deepmerge(
+		const suggestConfig: ApiConfigurationParameters = deepmerge(
 			{
-				mode: configuration.mode,
-				origin: configuration.origin,
+				mode: this.configuration.mode,
+				origin: this.configuration.origin,
 				cache: this.configuration.cache,
+				fetchApi: this.configuration.fetchApi,
 			},
 			requesterConfigurations?.suggest || {}
 		);

@@ -18,6 +18,7 @@ export type ClientConfig = {
 	finder?: RequesterConfig<SearchRequestModel>;
 	recommend?: RequesterConfig<RecommendRequestModel>;
 	suggest?: RequesterConfig<SuggestRequestModel>;
+	fetchApi?: WindowOrWorkerGlobalScope['fetch'];
 };
 
 export type HybridRequesterConfig = {
