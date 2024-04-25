@@ -113,7 +113,6 @@ Default.args = {
 	selection: {
 		select: (e: any) => {
 			console.log('selected', e);
-			selected = e;
 		},
 		previouslySelected: '',
 		field: 'color',
@@ -127,7 +126,6 @@ List.args = {
 	selection: {
 		select: (e: any) => {
 			console.log('selected', e);
-			selected = e;
 		},
 		previouslySelected: '',
 		field: 'color',
@@ -142,7 +140,6 @@ Grid.args = {
 	selection: {
 		select: (e: any) => {
 			console.log('selected', e);
-			selected = e;
 		},
 		previouslySelected: '',
 		field: 'color',
@@ -157,7 +154,6 @@ Swatches.args = {
 	selection: {
 		select: (e: any) => {
 			console.log('selected', e);
-			selected = e;
 		},
 		previouslySelected: '',
 		field: 'color',
