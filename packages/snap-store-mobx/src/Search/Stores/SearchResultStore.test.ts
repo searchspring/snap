@@ -210,6 +210,47 @@ describe('SearchResultStore', () => {
 			});
 		});
 
+		it('can use variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[2].attributes.ss_variants;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantDataToUse);
+
+				expect((result as Product).variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+			});
+		});
+
 		describe('variant class', () => {
 			it('has specific properties', () => {
 				const mask = new ProductMask();
@@ -327,14 +368,14 @@ describe('SearchResultStore', () => {
 					expect(selection).toHaveProperty('previouslySelected');
 					expect(selection).toHaveProperty('selected');
 					expect(selection).toHaveProperty('values');
-					expect(selection).toHaveProperty('refineSelections');
+					expect(selection).toHaveProperty('refineValues');
 					expect(selection).toHaveProperty('reset');
 					expect(selection).toHaveProperty('select');
 
 					expect(selection.field).toBe(dataOptionName);
 					expect(selection.label).toBe(dataOptionName);
-					expect(selection.selected).toBe(firstAvailableOption?.value);
-					expect(selection.previouslySelected).toBe('');
+					expect(selection.selected?.value).toBe(firstAvailableOption?.value);
+					expect(selection.previouslySelected).toBe(undefined);
 				});
 			});
 
@@ -345,11 +386,11 @@ describe('SearchResultStore', () => {
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants(parsedVariantData, mask);
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				variants.selections[0].select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 
@@ -362,19 +403,19 @@ describe('SearchResultStore', () => {
 				const colorSelector = variants.selections[0];
 				const sizeSelector = variants.selections[1];
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				colorSelector.select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 
 				colorSelector.select('Mirage');
-				const newerSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newerSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newerSelectedSelections).toStrictEqual(['Mirage', '36', '34']);
 
 				sizeSelector.select('30');
-				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected);
+				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(previouslySelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 		});

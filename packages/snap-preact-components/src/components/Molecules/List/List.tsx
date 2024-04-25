@@ -41,6 +41,8 @@ const CSS = {
 			},
 
 			'&.ss__list--disabled, .ss__list__option--disabled': {
+				cursor: 'none',
+				pointerEvents: 'none',
 				opacity: 0.5,
 			},
 			'.ss__list__option--selected': {
