@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -104,7 +104,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask);
+				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig)?.settings?.variants);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -181,7 +181,7 @@ export class Variants {
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
 
-	constructor(variantData: VariantData[], mask: ProductMask) {
+	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
 		const options: string[] = [];
 
 		// create variants objects
@@ -196,12 +196,12 @@ export class Variants {
 		});
 
 		options.map((option) => {
-			// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
 			const optionConfig = {
 				field: option,
 				label: option,
 			};
-			this.selections.push(new VariantSelection(this, optionConfig));
+
+			this.selections.push(new VariantSelection(this, optionConfig, config));
 		});
 
 		// setting function in constructor to prevent exposing mask as class property
@@ -242,14 +242,14 @@ export class Variants {
 		orderedSelections.forEach((selection) => selection.refineSelections(this));
 
 		// check to see if we have enough selections made to update the display
-		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
+		const selectedSelections = this.selections.filter((selection) => selection.selected?.value?.length);
 		if (selectedSelections.length) {
 			let availableVariants: Variant[] = this.data;
 
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected == variant.options[selectedSelection.field] && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field] && variant.available
 				);
 			}
 
@@ -261,7 +261,7 @@ export class Variants {
 	}
 }
 
-type SelectionValue = {
+export type SelectionValue = {
 	value: string;
 	label?: string;
 	thumbnailImageUrl?: string;
@@ -272,15 +272,27 @@ type SelectionValue = {
 export class VariantSelection {
 	public field: string;
 	public label: string;
-	public selected?: string = ''; //ex: blue
-	public previouslySelected?: string = '';
+	public selected?: SelectionValue = undefined;
+	public previouslySelected?: SelectionValue = undefined;
 	public values: SelectionValue[] = [];
 
 	private variantsUpdate: () => void;
 
-	constructor(variants: Variants, selectorConfig: VariantSelectionOptions) {
+	public mappings:
+		| {
+				[name: string]: {
+					[name: string]: {
+						label?: string;
+						background?: string;
+					};
+				};
+		  }
+		| undefined;
+
+	constructor(variants: Variants, selectorConfig: VariantSelectionOptions, variantConfig?: VariantConfig) {
 		this.field = selectorConfig.field;
 		this.label = selectorConfig.label;
+		this.mappings = variantConfig?.mappings;
 
 		// needed to prevent attaching variants as class property
 		this.variantsUpdate = () => variants.update(this);
@@ -296,14 +308,14 @@ export class VariantSelection {
 
 	public refineSelections(variants: Variants) {
 		// current selection should only consider OTHER selections for availability
-		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
+		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected?.value);
 
 		let availableVariants = variants.data;
 
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected == variant.options[selectedSelection.field] && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field] && variant.available
 			);
 		}
 
@@ -311,12 +323,26 @@ export class VariantSelection {
 			.filter((variant) => variant.options[this.field])
 			.reduce((values: SelectionValue[], variant) => {
 				if (!values.some((val) => variant.options[this.field] == val.value)) {
+					const value = variant.options[this.field] as string;
+					let label = variant.options[this.field] as string;
+					let thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
+
+					if (this.mappings && this.mappings[this.field] && this.mappings[this.field][value]) {
+						const mapping = this.mappings[this.field][value];
+
+						if (mapping.label) {
+							label = mapping.label as string;
+						}
+
+						if (mapping.background) {
+							thumbnailImageUrl = mapping.background as string;
+						}
+					}
+
 					values.push({
-						value: variant.options[this.field] as string,
-						label: variant.options[this.field] as string,
-						// TODO: use configurable mappings from config
-						// TODO: set background for swatches (via configurable mappings) from config
-						thumbnailImageUrl: variant.mappings.core?.thumbnailImageUrl,
+						value: value,
+						label: label,
+						thumbnailImageUrl: thumbnailImageUrl,
 						available: Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])),
 					});
 				}
@@ -328,20 +354,20 @@ export class VariantSelection {
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
-			if (!newValues.some((val) => val.value == this.selected && val.available)) {
+			if (!newValues.some((val) => val.value == this.selected?.value && val.available)) {
 				// the selection is no longer available, attempt to select previous selection
 				if (
 					this.selected !== this.previouslySelected &&
 					this.previouslySelected &&
-					newValues.some((val) => val.value == this.previouslySelected && val.available)
+					newValues.some((val) => val.value == this.previouslySelected?.value && val.available)
 				) {
-					this.select(this.previouslySelected, true);
+					this.select(this.previouslySelected.value, true);
 				} else {
 					// choose the first available option if previous seletions are unavailable
 					const availableValues = newValues.filter((val) => val.available);
 					if (newValues.length && availableValues.length) {
 						const nextAvailableValue = availableValues[0].value;
-						if (this.selected !== nextAvailableValue) {
+						if (this.selected?.value !== nextAvailableValue) {
 							this.select(nextAvailableValue, true);
 						}
 					}
@@ -353,7 +379,7 @@ export class VariantSelection {
 	}
 
 	public reset() {
-		this.selected = '';
+		this.selected = undefined;
 		this.values.forEach((val) => (val.available = false));
 	}
 
@@ -364,7 +390,7 @@ export class VariantSelection {
 				this.previouslySelected = this.selected;
 			}
 
-			this.selected = value;
+			this.selected = valueExist;
 
 			this.variantsUpdate();
 		}

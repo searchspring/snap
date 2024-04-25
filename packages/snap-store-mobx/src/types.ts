@@ -6,15 +6,21 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
-type VariantConfig = {
+export type VariantConfig = {
 	field: string;
+	mappings?: {
+		[name: string]: {
+			[name: string]: {
+				label?: string;
+				background?: string;
+			};
+		};
+	};
 };
 
 export type VariantSelectionOptions = {
 	field: string;
 	label: string;
-	//todo
-	//swatches: swatchObj
 };
 
 // Search Config
