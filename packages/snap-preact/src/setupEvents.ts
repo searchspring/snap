@@ -7,7 +7,7 @@ export const setupEvents = () => {
 
 	type controllerSelectVariantOptionsData = {
 		options: Record<string, string[]>;
-		controllerIds: string | RegExp | (string | RegExp)[];
+		controllerIds: (string | RegExp)[];
 	};
 
 	eventManager.on('controller/selectVariantOptions', async (data: controllerSelectVariantOptionsData, next: Next) => {
@@ -17,25 +17,17 @@ export const setupEvents = () => {
 		const controllerListToUse: AbstractController[] = [];
 		Object.keys(window.searchspring.controller).forEach((controller) => {
 			const current = window.searchspring.controller[controller];
-			if (controllerIds) {
+			if (controllerIds && Array.isArray(controllerIds)) {
 				//only push if controller/profile matches?
-				if (controllerIds instanceof RegExp) {
-					if (controller.match(controllerIds)?.length) {
-						controllerListToUse.push(current);
-					}
-				} else if (typeof controllerIds == 'object') {
-					controllerIds.forEach((id) => {
-						if (id instanceof RegExp) {
-							if (controller.match(id)?.length) {
-								controllerListToUse.push(current);
-							}
-						} else if (controller == id) {
+				controllerIds.forEach((id) => {
+					if (id instanceof RegExp) {
+						if (controller.match(id)?.length) {
 							controllerListToUse.push(current);
 						}
-					});
-				} else if (controller == controllerIds) {
-					controllerListToUse.push(current);
-				}
+					} else if (controller == id) {
+						controllerListToUse.push(current);
+					}
+				});
 			} else {
 				controllerListToUse.push(current);
 			}

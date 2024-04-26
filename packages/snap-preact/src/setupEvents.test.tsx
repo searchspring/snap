@@ -116,7 +116,7 @@ describe('setupEvents', () => {
 			expect(makeSelectionsSpy).not.toHaveBeenCalled();
 
 			expect(() => {
-				eventManager.fire('controller/selectVariantOptions', { options: options, controllerIds: 'search' });
+				eventManager.fire('controller/selectVariantOptions', { options: options, controllerIds: ['search'] });
 			}).not.toThrow();
 
 			expect(makeSelectionsSpy).toHaveBeenCalledTimes(3);
@@ -129,7 +129,7 @@ describe('setupEvents', () => {
 			expect(makeSelectionsSpy).not.toHaveBeenCalled();
 
 			expect(() => {
-				eventManager.fire('controller/selectVariantOptions', { controllerIds: 'search' });
+				eventManager.fire('controller/selectVariantOptions', { controllerIds: ['search'] });
 			}).not.toThrow();
 
 			expect(makeSelectionsSpy).toHaveBeenCalledTimes(3);
@@ -166,7 +166,7 @@ describe('setupEvents', () => {
 			expect(makeSelectionsSpy).not.toHaveBeenCalled();
 
 			expect(() => {
-				eventManager.fire('controller/selectVariantOptions', { options: options, controllerIds: /^recommend_/ });
+				eventManager.fire('controller/selectVariantOptions', { options: options, controllerIds: [/^recommend_/] });
 			}).not.toThrow();
 
 			expect(makeSelectionsSpy).toHaveBeenCalledTimes(2);

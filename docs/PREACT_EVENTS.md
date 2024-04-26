@@ -106,11 +106,11 @@ We can attach global events to the `window.searchspring` object via the event-ma
 
 Example: 
 ```typescript
-	window.searchspring.on('myEvent', () => {
-		console.log('myEvent happened!'); 
+	window.searchspring.on('myEvent', (data) => {
+		console.log('myEvent happened!', data); 
 	})
 
-	window.searchspring.fire('myEvent');
+	window.searchspring.fire('myEvent', data);
 ```
 
 ## Provided Global Events

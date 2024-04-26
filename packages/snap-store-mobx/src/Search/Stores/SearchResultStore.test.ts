@@ -280,6 +280,16 @@ describe('SearchResultStore', () => {
 
 				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
 				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				variants?.selections.forEach((selection) => {
+					const field = selection.field;
+					const settings = variantSearchConfig.settings.variants.preselected[field as keyof typeof variantSearchConfig.settings.variants.preselected];
+					if (settings) {
+						if (selection.values.filter((val) => settings.indexOf(val.value) > -1).length) {
+							expect(settings).toContain(selection.selected?.toLowerCase());
+						}
+					}
+				});
 			});
 		});
 

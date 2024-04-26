@@ -238,7 +238,6 @@ export class Variants {
 				}
 			});
 		} else {
-			// select first available for each selection
 			this.selections.forEach((selection, idx) => {
 				// filter by first available, then by preselected option preference
 				//make all options available for first selection.
@@ -258,7 +257,7 @@ export class Variants {
 						}
 					};
 
-					if (typeof preferedOptions == 'object') {
+					if (Array.isArray(preferedOptions)) {
 						//loop through each preference option
 						preferedOptions.forEach((preference: string) => {
 							checkIfAvailable(preference);

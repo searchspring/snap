@@ -1212,6 +1212,17 @@ describe('Snap Preact', () => {
 
 			expect(window.searchspring.on).toBeDefined();
 			expect(window.searchspring.fire).toBeDefined();
+
+			const func = jest.fn();
+
+			const data = { test: true };
+			snap.eventManager.on('testEvent', (data) => func(data));
+
+			expect(func).not.toHaveBeenCalled();
+
+			snap.eventManager.fire('testEvent', data);
+
+			expect(func).toHaveBeenCalledWith(data);
 		});
 	});
 
