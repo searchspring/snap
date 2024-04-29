@@ -35,7 +35,7 @@ export class NetworkCache {
 					}
 				}
 
-				if (window?.sessionStorage) {
+				if (typeof window !== 'undefined' && window?.sessionStorage) {
 					const stored = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 					const localData: Cache = stored && JSON.parse(stored);
 
@@ -71,7 +71,7 @@ export class NetworkCache {
 
 				this.memoryCache[key] = cacheObject;
 
-				if (window?.sessionStorage) {
+				if (typeof window !== 'undefined' && window?.sessionStorage) {
 					const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 					const newStored: Cache = {
 						...(stored && JSON.parse(stored)),
@@ -106,7 +106,9 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			window?.sessionStorage?.setItem(CACHE_STORAGE_KEY, '');
+			if (typeof window !== 'undefined' && window?.sessionStorage) {
+				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
+			}
 		} catch (err) {
 			console.warn('something went wrong, browser might not have cookies enabled');
 		}
