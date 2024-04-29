@@ -408,13 +408,13 @@ transformSearchResponse.sorting = (response: searchResponseType) => {
 transformSearchResponse.merchandising = (response: searchResponseType) => {
 	const merchandising = response?.merchandising;
 
-	if (merchandising.content && Array.isArray(merchandising.content) && !merchandising.content.length) {
+	if (merchandising?.content && Array.isArray(merchandising.content) && !merchandising.content.length) {
 		merchandising.content = {};
 	}
 
 	const transformedMerchandising: SearchResponseModelMerchandising = {
 		redirect: merchandising?.redirect || '',
-		content: merchandising.content || {},
+		content: merchandising?.content || {},
 		campaigns: merchandising?.triggeredCampaigns || [],
 		personalized: merchandising?.personalized,
 	};
