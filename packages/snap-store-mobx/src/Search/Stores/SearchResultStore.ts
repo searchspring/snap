@@ -163,7 +163,8 @@ export class Badges {
 				const metaBadgeData = metaData?.badges?.tags[badge.tag]!;
 				const locationName = metaBadgeData!.location;
 
-				const isCallout = metaData?.badges?.locations?.callouts?.some((callout) => callout.name === locationName);
+				// @ts-ignore - todo need to update meta types to have locations.callout
+				const isCallout = metaData?.badges?.locations?.callout?.some((callout) => callout.name === locationName);
 				const isLeftOverlay = metaData?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === locationName);
 				const isRightOverlay = metaData?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === locationName);
 

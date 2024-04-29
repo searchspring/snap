@@ -145,7 +145,7 @@ Default.loaders = [
 							],
 							right: [],
 						},
-						callouts: [
+						callout: [
 							{
 								name: 'callout',
 								label: 'Callout',

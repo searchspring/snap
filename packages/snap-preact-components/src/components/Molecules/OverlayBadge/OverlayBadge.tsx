@@ -50,6 +50,7 @@ const CSS = {
 			[overlayLocation]: 0,
 			boxSizing: 'border-box',
 			zIndex: Math.max(100 - index, 1),
+			maxWidth: '100%',
 		});
 	},
 };
@@ -74,7 +75,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		return <Fragment />;
 	}
 
-	const badgeComponentMap = Object.assign(defaultBadgeComponentMap, props.componentMap || {});
+	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
 
 	const meta = controller?.store?.meta;
 	if (!disableStyles) {
@@ -97,9 +98,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 								return <Fragment />;
 							}
 							return (
-								<BadgeComponent
-									{...badge}
-									{...badge.parameters}
+								<div
 									css={[CSS.BadgePositioning({ ...badge, index })]}
 									className={classnames(
 										`ss__overlay-badge--${badge.tag}`,
@@ -108,7 +107,9 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 										`ss__overlay-badge__${badge.component}--${badge.location}`,
 										`ss__overlay-badge__${badge.component}--${badge.tag}`
 									)}
-								/>
+								>
+									<BadgeComponent {...badge} {...badge.parameters} />
+								</div>
 							);
 						})}
 					</div>

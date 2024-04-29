@@ -33,8 +33,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 	const styling: { css?: StylingCSS } = {};
 
-	const badgeComponentMap = Object.assign(defaultBadgeComponentMap, props.componentMap || {});
-
+	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
 	if (!disableStyles) {
 		styling.css = [CSS.CalloutBadge(props), style];
 	} else if (style) {
@@ -51,9 +50,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__callout-badge', className)}>
-					<BadgeComponent
-						{...calloutBadge}
-						{...calloutBadge.parameters}
+					<div
 						className={classnames(
 							`ss__callout-badge--${calloutBadge.tag}`,
 							`ss__callout-badge--${calloutBadge.location}`,
@@ -61,7 +58,9 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 							`ss__callout-badge__${calloutBadge.component}--${calloutBadge.location}`,
 							`ss__callout-badge__${calloutBadge.component}--${calloutBadge.tag}`
 						)}
-					/>
+					>
+						<BadgeComponent {...calloutBadge} {...calloutBadge.parameters} />
+					</div>
 				</div>
 			</CacheProvider>
 		);
