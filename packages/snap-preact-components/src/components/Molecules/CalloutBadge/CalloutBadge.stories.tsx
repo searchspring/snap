@@ -145,7 +145,7 @@ Default.loaders = [
 					tags: {
 						'free-shipping-overlay': {
 							location: 'left',
-							component: 'BadgeText',
+							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
 							parameters: {
@@ -155,7 +155,7 @@ Default.loaders = [
 						},
 						'free-shipping-callout': {
 							location: 'callout',
-							component: 'BadgeText',
+							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
 							parameters: {
