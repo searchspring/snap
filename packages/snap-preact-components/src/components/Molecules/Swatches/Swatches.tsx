@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { useA11y } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
 import { defined } from '../../../utilities';
-
+import { Grid, GridProps } from '../Grid';
+import { ImageProps, Image } from '../../Atoms/Image';
 const CSS = {
 	Swatches: ({}: Partial<SwatchesProps>) =>
 		css({
@@ -19,15 +20,12 @@ const CSS = {
 				boxSizing: 'content-box',
 				cursor: 'pointer',
 				backgroundRepeat: 'no-repeat',
-				display: 'inline-block',
-				borderRadius: '50%',
+				display: 'flex',
+				justifyContent: 'center',
 				border: '4px solid #eee',
 				width: '40px',
 				height: '40px',
 				margin: 'auto',
-				backgroundSize: ' 40px !important',
-				backgroundPosition: 'center !important',
-
 				'& .ss__swatches__carousel__swatch__value': {
 					textAlign: 'center',
 					verticalAlign: 'middle',
@@ -61,6 +59,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 	const props: SwatchesProps = {
 		// default props
+		carouselEnabled: true,
 		// global theme
 		...globalTheme?.components?.swatches,
 		// props
@@ -68,7 +67,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		...properties.theme?.components?.swatches,
 	};
 
-	const { onSelect, disabled, options, showLabel, disableStyles, className, breakpoints, style, ...additionalProps } = props;
+	const { onSelect, disabled, options, showLabel, disableStyles, className, breakpoints, style, carouselEnabled, ...additionalProps } = props;
 
 	const subProps: SwatchesSubProps = {
 		carousel: {
@@ -80,6 +79,31 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			// inherited props
 			...defined({
 				breakpoints,
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		grid: {
+			// default props
+			className: 'ss__swatches__grid',
+			showLabel: showLabel,
+			// global theme
+			...globalTheme?.components?.grid,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+		image: {
+			// default props
+			className: 'ss__swatches__Image',
+			// global theme
+			...globalTheme?.components?.image,
+			// inherited props
+			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
@@ -109,29 +133,44 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__swatches', className)}>
-				<Carousel {...subProps.carousel} {...additionalProps}>
-					{options.map((option) => {
-						const label = option.label;
-						const background = option.thumbnailImageUrl ? `url(${option.thumbnailImageUrl})` : option.background ? option.background : option.value;
-						const selected = selection?.value == option.value;
+				{carouselEnabled ? (
+					<Carousel {...subProps.carousel} {...additionalProps}>
+						{options.map((option) => {
+							const label = option.label;
+							const selected = selection?.value == option.value;
 
-						return (
-							<div
-								className={`ss__swatches__carousel__swatch ${selected ? 'ss__swatches__carousel__swatch--selected' : ''} ${
-									option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''
-								}`}
-								title={label}
-								style={{ background: background }}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
-								ref={(e) => useA11y(e)}
-								role="option"
-								aria-selected={selected}
-							>
-								{showLabel && <span className="ss__swatches__carousel__swatch__value">{label}</span>}
-							</div>
-						);
-					})}
-				</Carousel>
+							return (
+								<div
+									className={`ss__swatches__carousel__swatch ${selected ? 'ss__swatches__carousel__swatch--selected' : ''} ${
+										option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''
+									}`}
+									title={label}
+									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
+									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									ref={(e) => useA11y(e)}
+									role="option"
+									aria-selected={selected}
+								>
+									{!option.background && option.backgroundImageUrl ? (
+										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
+									) : (
+										<></>
+									)}
+									{showLabel && <span className="ss__swatches__carousel__swatch__value">{label}</span>}
+								</div>
+							);
+						})}
+					</Carousel>
+				) : (
+					<Grid
+						{...subProps.grid}
+						options={options}
+						onSelect={(e, option) => {
+							!disabled && makeSelection(e as any, option);
+						}}
+						selected={selected}
+					/>
+				)}
 			</div>
 		</CacheProvider>
 	) : (
@@ -145,8 +184,11 @@ export interface SwatchesProps extends ComponentProps {
 	selected?: SwatchOption;
 	showLabel?: boolean;
 	breakpoints?: BreakpointsProps;
+	carouselEnabled?: boolean;
 }
 
 interface SwatchesSubProps {
-	carousel: CarouselProps;
+	carousel: Partial<CarouselProps>;
+	grid: Partial<GridProps>;
+	image: Partial<ImageProps>;
 }

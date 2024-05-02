@@ -87,6 +87,15 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		rows: {
+			description: 'Number of rows in grid',
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
 		gapSize: {
 			defaultValue: '8px',
 			description: 'Gap size between rows and columns',
@@ -97,6 +106,38 @@ export default {
 				defaultValue: { summary: '8px' },
 			},
 			control: { type: 'text' },
+		},
+		showLessText: {
+			defaultValue: 'Show Less',
+			description: 'show less text',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Show Less' },
+			},
+			control: { type: 'text' },
+		},
+		showMoreText: {
+			defaultValue: 'Show more',
+			description: 'show more text',
+			table: {
+				type: {
+					summary: 'string | (remainder) => string',
+				},
+				defaultValue: { summary: 'Show more' },
+			},
+			control: { type: 'text' },
+		},
+		disableShowMoreClick: {
+			description: 'enable/disable show more click functionality',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		...componentArgs,
 	},

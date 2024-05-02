@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig, VariantMappings } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -180,6 +180,7 @@ export class Variants {
 	public data: Variant[] = [];
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
+	private variantConfig?: VariantConfig;
 
 	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
 		// setting function in constructor to prevent exposing mask as class property
@@ -188,10 +189,18 @@ export class Variants {
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
 
+		if (config) {
+			this.variantConfig = config;
+		}
+
 		this.update(variantData, config);
 	}
 
 	public update(variantData: VariantData[], config?: VariantConfig) {
+		if (config) {
+			this.variantConfig = config;
+		}
+
 		try {
 			const options: string[] = [];
 
@@ -215,7 +224,7 @@ export class Variants {
 					field: option,
 					label: option,
 				};
-				this.selections.push(new VariantSelection(this, optionConfig, config));
+				this.selections.push(new VariantSelection(this, optionConfig, this.variantConfig));
 			});
 
 			// select first available
@@ -277,6 +286,7 @@ export type SelectionValue = {
 	value: string;
 	label?: string;
 	thumbnailImageUrl?: string;
+	backgroundImageUrl?: string;
 	background?: string;
 	available?: boolean;
 };
@@ -290,16 +300,7 @@ export class VariantSelection {
 
 	private variantsUpdate: () => void;
 
-	public mappings:
-		| {
-				[name: string]: {
-					[name: string]: {
-						label?: string;
-						background?: string;
-					};
-				};
-		  }
-		| undefined;
+	public mappings: VariantMappings | undefined;
 
 	constructor(variants: Variants, selectorConfig: VariantSelectionOptions, variantConfig?: VariantConfig) {
 		this.field = selectorConfig.field;
@@ -337,8 +338,9 @@ export class VariantSelection {
 				if (!values.some((val) => variant.options[this.field] == val.value)) {
 					const value = variant.options[this.field] as string;
 					let label = variant.options[this.field] as string;
-					let thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
-
+					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
+					let background = undefined;
+					let backgroundImageUrl = undefined;
 					if (this.mappings && this.mappings[this.field] && this.mappings[this.field][value]) {
 						const mapping = this.mappings[this.field][value];
 
@@ -347,7 +349,11 @@ export class VariantSelection {
 						}
 
 						if (mapping.background) {
-							thumbnailImageUrl = mapping.background as string;
+							background = mapping.background as string;
+						}
+
+						if (mapping.backgroundImageUrl) {
+							backgroundImageUrl = mapping.backgroundImageUrl;
 						}
 					}
 
@@ -355,6 +361,8 @@ export class VariantSelection {
 						value: value,
 						label: label,
 						thumbnailImageUrl: thumbnailImageUrl,
+						background: background,
+						backgroundImageUrl: backgroundImageUrl,
 						available: Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])),
 					});
 				}

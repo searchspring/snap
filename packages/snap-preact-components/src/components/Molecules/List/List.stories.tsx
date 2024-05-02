@@ -114,6 +114,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		clickableDisabledOptions: {
+			description: 'boolean allow disabled options to be selectable',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		native: {
 			description: 'boolean to render unstyled native checkbox elements',
 			table: {
@@ -199,6 +209,7 @@ Icons.args = {
 			},
 		},
 	],
+	multiSelect: false,
 } as ListProps;
 
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

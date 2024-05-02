@@ -8,12 +8,79 @@ import { defined } from '../../../utilities';
 import { ComponentProps, ListOption, StylingCSS } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
-import { Grid, GridProps } from '../Grid';
 import { Swatches, SwatchesProps } from '../Swatches';
-import { Option, Select, SelectProps } from '../Select';
+import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 
 const CSS = {
-	variantSelection: () => css({}),
+	variantSelection: () =>
+		css({
+			'.ss__variant-selection__dropdown': {
+				'.ss__dropdown__button': {
+					display: 'flex',
+					flexDirection: 'row',
+
+					label: {
+						marginLeft: '5px',
+						fontSize: '12px',
+					},
+
+					span: {
+						padding: '0px 15px',
+					},
+
+					'.ss__dropdown__button-wrapper': {
+						width: '100%',
+						justifyContent: 'flex-start',
+						display: 'flex',
+						alignItems: 'center',
+						label: {
+							cursor: 'pointer',
+						},
+						span: {
+							cursor: 'pointer',
+						},
+					},
+					'.ss__icon': {
+						marginLeft: '10px',
+						marginRight: '10px',
+					},
+				},
+
+				'.ss__dropdown__content': {
+					minWidth: 'auto',
+					left: '0',
+					right: '0',
+
+					'.ss__variant-selection__option': {
+						cursor: 'pointer',
+					},
+
+					'.ss__variant-selection__option:hover': {
+						fontWeight: 'bold',
+					},
+
+					'.ss__variant-selection__option--selected': {
+						fontWeight: 'bold',
+					},
+
+					'.ss__variant-selection__option--disabled': {
+						opacity: '.5',
+					},
+
+					'.ss__variant-selection__option--disabled:before': {
+						content: '""',
+						display: 'block',
+						position: 'absolute',
+						top: '50%',
+						left: '0',
+						right: '0',
+						width: '40px',
+						height: '1px',
+						borderTop: '1px solid black',
+					},
+				},
+			},
+		}),
 };
 
 export const VariantSelection = observer((properties: VariantSelectionProps): JSX.Element => {
@@ -21,7 +88,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	const props: VariantSelectionProps = {
 		// default props
-		type: 'select',
+		type: 'dropdown',
 		// global theme
 		...globalTheme?.components?.variantSelection,
 		// props
@@ -32,11 +99,11 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 	const { type, selection, hideTitle, disableStyles, className, style } = props;
 
 	const subProps: VariantSelectionSubProps = {
-		select: {
-			className: 'ss__variant-selection__select',
+		dropdown: {
+			className: 'ss__variant-selection__dropdown',
 			label: !hideTitle ? selection.field : undefined,
 			// global theme
-			...globalTheme?.components?.select,
+			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -47,6 +114,12 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		list: {
 			titleText: !hideTitle ? selection.field : undefined,
 			className: 'ss__variant-selection__list',
+			multiSelect: false,
+			hideOptionCheckboxes: true,
+			clickableDisabledOptions: true,
+			onSelect: (e, option) => selection.select(option.value as string),
+			selected: selection.selected,
+
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props
@@ -56,22 +129,13 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			// component theme overrides
 			theme: props?.theme,
 		},
-		grid: {
-			className: 'ss__variant-selection__grid',
-			titleText: !hideTitle ? selection.field : undefined,
-			// global theme
-			...globalTheme?.components?.grid,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
 		swatches: {
 			className: 'ss__variant-selection__swatches',
+			onSelect: (e, option) => selection.select(option.value as string),
+			selected: selection.selected,
+
 			// global theme
-			...globalTheme?.components?.grid,
+			...globalTheme?.components?.swatches,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -88,53 +152,53 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		styling.css = [style];
 	}
 
+	const convertedValues: ListOption[] = selection.values.map(
+		(val) =>
+			(val = {
+				//@ts-ignore - disabled isnt available on SelectionValue
+				disabled: !val.available,
+				...val,
+			})
+	);
+
 	return selection.values.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__variant-selection', className)}>
 				{(() => {
 					switch (type) {
-						case 'select':
+						case 'dropdown':
 							return (
 								<Fragment>
 									{(() => {
-										const convertedValues: Option[] = selection.values.map(
-											(val) =>
-												(val = {
-													//@ts-ignore - disabled isnt available on SelectionValue
-													disabled: !val.available,
-													label: val.label || val.value,
-													...val,
-												})
-										);
+										const Button = () => {
+											return (
+												<div className="ss__dropdown__button-wrapper">
+													<span>{selection.field}</span>
+													{selection.selected?.value ? <label>({selection.selected.value})</label> : <></>}
+												</div>
+											);
+										};
 
 										return (
-											<Select {...subProps.select} options={convertedValues} onSelect={(e, option) => selection.select(option?.value as string)} />
-										);
-									})()}
-								</Fragment>
-							);
-						case 'grid':
-							return (
-								<Fragment>
-									{(() => {
-										const convertedValues: ListOption[] = selection.values.map(
-											(val) =>
-												(val = {
-													//@ts-ignore - disabled isnt available on SelectionValue
-													disabled: !val.available,
-													...val,
-												})
-										);
-
-										return (
-											<Grid
-												{...subProps.grid}
-												options={convertedValues}
-												onSelect={(e, option) => {
-													selection.select(option.value as string);
-												}}
-												selected={selection.selected}
-											/>
+											<Dropdown button={<Button />} {...subProps.dropdown}>
+												<div>
+													{selection.values.map((val) => {
+														const selected = selection.selected?.value == val.value;
+														return (
+															<div
+																className={`
+																	ss__variant-selection__option
+																	${selected ? 'ss__variant-selection__option--selected' : ''} 
+																	${val.available ? '' : 'ss__variant-selection__option--disabled'}
+																`}
+																onClick={() => selection.select(val.value)}
+															>
+																{val.label}
+															</div>
+														);
+													})}
+												</div>
+											</Dropdown>
 										);
 									})()}
 								</Fragment>
@@ -143,25 +207,15 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 							return (
 								<Fragment>
 									{(() => {
-										const convertedValues: ListOption[] = selection.values.map(
-											(val) =>
-												(val = {
-													//@ts-ignore - disabled isnt available on SelectionValue
-													disabled: !val.available,
-													...val,
-												})
-										);
-
-										return (
-											<List
-												{...subProps.list}
-												options={convertedValues}
-												onSelect={(e, option) => selection.select(option.value as string)}
-												multiSelect={false}
-												hideOptionCheckboxes={true}
-												selected={selection.selected}
-											/>
-										);
+										return <List {...subProps.list} options={convertedValues} />;
+									})()}
+								</Fragment>
+							);
+						case 'grid':
+							return (
+								<Fragment>
+									{(() => {
+										return <Swatches {...subProps.swatches} carouselEnabled={false} options={convertedValues} />;
 									})()}
 								</Fragment>
 							);
@@ -169,23 +223,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 							return (
 								<Fragment>
 									{(() => {
-										const convertedValues: ListOption[] = selection.values.map(
-											(val) =>
-												(val = {
-													//@ts-ignore - disabled isnt available on SelectionValue
-													disabled: !val.available,
-													...val,
-												})
-										);
-
-										return (
-											<Swatches
-												{...subProps.swatches}
-												options={convertedValues}
-												onSelect={(e, option) => selection.select(option.value as string)}
-												selected={selection.selected}
-											/>
-										);
+										return <Swatches {...subProps.swatches} options={convertedValues} />;
 									})()}
 								</Fragment>
 							);
@@ -199,14 +237,13 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 });
 
 interface VariantSelectionSubProps {
-	select: SelectProps;
+	dropdown: Partial<DropdownProps>;
 	list: ListProps;
-	grid: GridProps;
 	swatches: SwatchesProps;
 }
 
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
-	type?: 'select' | 'swatches' | 'grid' | 'list';
+	type?: 'dropdown' | 'swatches' | 'list' | 'grid';
 	hideTitle?: boolean;
 }

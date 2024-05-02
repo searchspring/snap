@@ -5,13 +5,21 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../types';
 import { useState } from 'react';
 import { useA11y } from '../../../hooks';
+import { Image, ImageProps } from '../../Atoms/Image';
+import { defined } from '../../../utilities';
 
 const CSS = {
-	Grid: ({ theme, columns, gapSize }: Partial<GridProps>) =>
+	Grid: ({ theme, columns, gapSize, disableShowMoreClick }: Partial<GridProps>) =>
 		css({
+			'.ss__grid__show-more-wrapper': {
+				span: {
+					cursor: disableShowMoreClick ? 'initial' : 'pointer',
+				},
+			},
+
 			'.ss__grid__options-wrapper': {
 				display: 'flex',
 				flexFlow: 'row wrap',
@@ -20,6 +28,10 @@ const CSS = {
 				gridAutoRows: `1fr`,
 
 				'& .ss__grid__option': {
+					boxSizing: 'content-box',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
+					backgroundPosition: 'center !important',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -27,10 +39,13 @@ const CSS = {
 					border: `1px solid ${theme?.colors?.primary || '#333'}`,
 					textAlign: 'center',
 					wordBreak: 'break-all',
-					boxSizing: 'border-box',
 					padding: '1em 0',
 					width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 					margin: `0 ${gapSize} ${gapSize} 0`,
+
+					'.ss__grid__option__label': {
+						cursor: 'pointer',
+					},
 
 					[`:nth-of-type(${columns}n)`]: {
 						marginRight: '0',
@@ -93,10 +108,11 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	const props: GridProps = {
 		// default props
+		showLabel: true,
 		multiSelect: false,
 		columns: 4,
 		gapSize: '8px',
-
+		showLessText: 'Show Less',
 		// global theme
 		...globalTheme?.components?.grid,
 		// props
@@ -104,13 +120,43 @@ export function Grid(properties: GridProps): JSX.Element {
 		...properties.theme?.components?.grid,
 	};
 
-	const { titleText, onSelect, multiSelect, columns, gapSize, disabled, options, disableStyles, className, style } = props;
+	const {
+		titleText,
+		onSelect,
+		showLabel,
+		showLessText,
+		disableShowMoreClick,
+		multiSelect,
+		columns,
+		rows,
+		gapSize,
+		disabled,
+		options,
+		disableStyles,
+		className,
+		style,
+	} = props;
+
+	const subProps: GridSubProps = {
+		image: {
+			// default props
+			className: 'ss__swatches__Image',
+			// global theme
+			...globalTheme?.components?.image,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
+	};
 
 	let selected = props.selected;
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.Grid({ theme, columns, gapSize }), style];
+		styling.css = [CSS.Grid({ theme, columns, gapSize, disableShowMoreClick }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -148,27 +194,66 @@ export function Grid(properties: GridProps): JSX.Element {
 		}
 	};
 
+	const limit = rows && columns ? columns * rows : options.length;
+	const remainder = Math.max(0, options.length - limit);
+
+	const [limited, setLimited] = useState<number | boolean>(remainder);
+
+	let showMoreText = props.showMoreText;
+	if (showMoreText) {
+		if (typeof showMoreText == 'function') {
+			showMoreText = showMoreText(remainder);
+		}
+	} else {
+		showMoreText = `+ ${remainder} more`;
+	}
+
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__grid', disabled ? 'ss__grid--disabled' : '', className)}>
 				{titleText && <h5 className="ss__grid__title">{titleText}</h5>}
 
 				<div className="ss__grid__options-wrapper">
-					{options.map((option) => {
+					{options.map((option, idx) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
-						return (
-							<div
-								className={`ss__grid__option ${selected ? 'ss__grid__option--selected' : ''} ${option.disabled ? 'ss__grid__option--disabled' : ''}`}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
-								ref={(e) => useA11y(e)}
-								title={option.label}
-								role="option"
-								aria-selected={selected}
-							>
-								<label className="ss__grid__option__label">{option.label || option.value}</label>
-							</div>
-						);
+
+						if (!limited || idx < limit) {
+							return (
+								<div
+									className={`ss__grid__option ${selected ? 'ss__grid__option--selected' : ''} ${
+										option.disabled ? 'ss__grid__option--disabled' : ''
+									}`}
+									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
+									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									ref={(e) => useA11y(e)}
+									title={option.label}
+									role="option"
+									aria-selected={selected}
+								>
+									{!option.background && option.backgroundImageUrl ? (
+										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
+									) : (
+										<></>
+									)}
+									{showLabel ? <label className="ss__grid__option__label">{option.label || option.value}</label> : <></>}
+								</div>
+							);
+						}
 					})}
+				</div>
+
+				<div className={'ss__grid__show-more-wrapper'}>
+					{limited ? (
+						<span className={'ss__grid__show-more'} onClick={() => !disableShowMoreClick && setLimited(false)}>
+							{showMoreText}
+						</span>
+					) : remainder ? (
+						<span className={'ss__grid__show-less'} onClick={() => !disableShowMoreClick && setLimited(true)}>
+							{showLessText}
+						</span>
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</CacheProvider>
@@ -178,11 +263,20 @@ export function Grid(properties: GridProps): JSX.Element {
 }
 
 export interface GridProps extends ComponentProps {
-	options: ListOption[];
+	options: SwatchOption[];
+	showLabel?: boolean;
 	multiSelect?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, selected: ListOption[]) => void;
 	titleText?: string;
 	selected?: ListOption | ListOption[];
 	columns?: number;
+	rows?: number;
 	gapSize?: string;
+	showMoreText?: string | ((remainder: number) => string);
+	showLessText?: string;
+	disableShowMoreClick?: boolean;
+}
+
+interface GridSubProps {
+	image: Partial<ImageProps>;
 }

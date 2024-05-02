@@ -8,12 +8,15 @@ export type StoreConfig = {
 
 export type VariantConfig = {
 	field: string;
-	mappings?: {
+	mappings?: VariantMappings;
+};
+
+export type VariantMappings = {
+	[name: string]: {
 		[name: string]: {
-			[name: string]: {
-				label?: string;
-				background?: string;
-			};
+			label?: string;
+			background?: string;
+			backgroundImageUrl?: string;
 		};
 	};
 };

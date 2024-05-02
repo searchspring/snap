@@ -17,13 +17,11 @@ export type ListOption = {
 	disabled?: boolean;
 	default?: boolean;
 	icon?: string | Partial<IconProps>;
-	//merge in templates for use
-	// overrides?: DeepPartial<Theme>;
 	url?: UrlManager;
 };
 
 export type SwatchOption = ListOption & {
-	thumbnailImageUrl?: string;
+	backgroundImageUrl?: string;
 	background?: string;
 };
 

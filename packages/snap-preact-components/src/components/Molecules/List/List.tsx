@@ -13,7 +13,7 @@ import { useA11y } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	List: ({ horizontal }: Partial<ListProps>) =>
+	List: ({ horizontal, clickableDisabledOptions }: Partial<ListProps>) =>
 		css({
 			'& .ss__list__options-wrapper': {
 				border: 'none',
@@ -41,8 +41,8 @@ const CSS = {
 			},
 
 			'&.ss__list--disabled, .ss__list__option--disabled': {
-				cursor: 'none',
-				pointerEvents: 'none',
+				cursor: `${clickableDisabledOptions ? 'pointer' : 'none'}`,
+				pointerEvents: `${clickableDisabledOptions ? 'initial' : 'none'}`,
 				opacity: 0.5,
 			},
 			'.ss__list__option--selected': {
@@ -70,6 +70,7 @@ export function List(properties: ListProps): JSX.Element {
 		native,
 		multiSelect,
 		hideOptionLabels,
+		clickableDisabledOptions,
 		hideOptionIcons,
 		hideOptionCheckboxes,
 		disabled,
@@ -107,7 +108,7 @@ export function List(properties: ListProps): JSX.Element {
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.List({ horizontal }), style];
+		styling.css = [CSS.List({ horizontal, clickableDisabledOptions }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -156,7 +157,7 @@ export function List(properties: ListProps): JSX.Element {
 							<li
 								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
 								ref={(e) => useA11y(e)}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
+								onClick={(e) => (clickableDisabledOptions || !disabled) && makeSelection(e as any, option)}
 								title={option.label}
 								role="option"
 								aria-selected={selected}
@@ -196,6 +197,7 @@ export interface ListProps extends ComponentProps {
 	horizontal?: boolean;
 	native?: boolean;
 	selected?: ListOption | ListOption[];
+	clickableDisabledOptions?: boolean;
 }
 
 interface ListSubProps {

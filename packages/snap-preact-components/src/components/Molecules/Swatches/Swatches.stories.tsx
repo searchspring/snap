@@ -77,6 +77,16 @@ export default {
 			},
 			control: { type: 'object' },
 		},
+		carouselEnabled: {
+			description: 'enable/disable carousel',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
@@ -86,6 +96,10 @@ const ObservableSelection = observer(({ args }: { args: SwatchesProps }) => {
 });
 
 export const Default = (args: SwatchesProps) => {
+	return <ObservableSelection args={args} />;
+};
+
+export const Grid = (args: SwatchesProps) => {
 	return <ObservableSelection args={args} />;
 };
 
@@ -112,6 +126,20 @@ Default.args = {
 		{ value: 'Black', label: 'Black', disabled: false },
 		{ value: 'White', label: 'White', disabled: false },
 	],
+};
+
+Grid.args = {
+	options: [
+		{ value: 'Red', label: 'Red', disabled: false },
+		{ value: 'Blue', label: 'Blue', disabled: false },
+		{ value: 'Green', label: 'Green', disabled: false },
+		{ value: 'Orange', label: 'Orange', disabled: false },
+		{ value: 'Tan', label: 'Tan', disabled: false },
+		{ value: 'Pink', label: 'Pink', disabled: false },
+		{ value: 'Black', label: 'Black', disabled: false },
+		{ value: 'White', label: 'White', disabled: false },
+	],
+	carouselEnabled: false,
 };
 
 Disabled.args = {
@@ -162,31 +190,31 @@ ThumbnailImageBackground.args = {
 			value: 'PastelPalms',
 			label: 'Pastel Palms',
 			disabled: false,
-			thumbnailImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0533-PastelPalms_2.jpg',
+			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0533-PastelPalms_2.jpg',
 		},
 		{
 			value: 'ShimmerOn-Swim',
 			label: 'ShimmerOn Swim',
 			disabled: false,
-			thumbnailImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0598-ShimmerOn-Swim_1.jpg',
+			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0598-ShimmerOn-Swim_1.jpg',
 		},
 		{
 			value: 'MarineGlow',
 			label: 'Marine Glow',
 			disabled: false,
-			thumbnailImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0543-MarineGlow.jpg',
+			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0543-MarineGlow.jpg',
 		},
 		{
 			value: 'PeriwinkleButterflyGarden',
 			label: 'Periwinkle Butterfly Garden',
 			disabled: false,
-			thumbnailImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0621-PeriwinkleButterflyGarden.jpg',
+			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0621-PeriwinkleButterflyGarden.jpg',
 		},
 		{
 			value: 'PeriwinkleBlueSeersucker',
 			label: 'Periwinkle Blue Seersucker',
 			disabled: false,
-			thumbnailImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0539-ApparelPeriwinkleBlueSeersucker_1.jpg',
+			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0539-ApparelPeriwinkleBlueSeersucker_1.jpg',
 		},
 	],
 };
