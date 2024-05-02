@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -104,7 +104,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig).settings?.variants?.preselected);
+				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig).settings?.variants);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -181,17 +181,17 @@ export class Variants {
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
 
-	constructor(variantData: VariantData[], mask: ProductMask, preselectedOptions?: Record<string, string[]>) {
+	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
 
-		this.update(variantData, preselectedOptions);
+		this.update(variantData, config);
 	}
 
-	public update(variantData: VariantData[], preselectedOptions?: Record<string, string[]>) {
+	public update(variantData: VariantData[], config?: VariantConfig) {
 		try {
 			const options: string[] = [];
 
@@ -217,6 +217,15 @@ export class Variants {
 				};
 				this.selections.push(new VariantSelection(this, optionConfig));
 			});
+
+			const preselectedOptions: Record<string, string[]> = {};
+			if (config?.options) {
+				Object.keys(config?.options).forEach((option) => {
+					if (config.options![option].preSelected) {
+						preselectedOptions[option] = config.options![option].preSelected as string[];
+					}
+				});
+			}
 
 			// select first available
 			this.makeSelections(preselectedOptions);

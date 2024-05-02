@@ -6,10 +6,12 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
-type VariantConfig = {
+export type VariantConfig = {
 	field: string;
-	preselected?: {
-		[field: string]: string[];
+	options?: {
+		[field: string]: {
+			preSelected?: string[];
+		};
 	};
 };
 

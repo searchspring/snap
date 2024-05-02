@@ -259,9 +259,13 @@ describe('SearchResultStore', () => {
 				settings: {
 					variants: {
 						field: 'ss_variants',
-						preselected: {
-							color: ['mirage', 'khaki', 'desert'],
-							size: ['32'],
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
 						},
 					},
 				},
@@ -283,7 +287,8 @@ describe('SearchResultStore', () => {
 
 				variants?.selections.forEach((selection) => {
 					const field = selection.field;
-					const settings = variantSearchConfig.settings.variants.preselected[field as keyof typeof variantSearchConfig.settings.variants.preselected];
+					const settings =
+						variantSearchConfig.settings.variants.options[field as keyof typeof variantSearchConfig.settings.variants.options]?.preSelected;
 					if (settings) {
 						if (selection.values.filter((val) => settings.indexOf(val.value) > -1).length) {
 							expect(settings).toContain(selection.selected?.toLowerCase());
