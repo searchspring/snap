@@ -181,17 +181,19 @@ export class Variants {
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
 
+	private config?: VariantConfig;
+
 	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
-
+		this.config = config;
 		this.update(variantData, config);
 	}
 
-	public update(variantData: VariantData[], config?: VariantConfig) {
+	public update(variantData: VariantData[], config = this.config) {
 		try {
 			const options: string[] = [];
 

@@ -254,7 +254,7 @@ const { search } = snap.controllers;
 ## properties
 After instantiating an instance of Snap, the following properties can be accessed. 
 
-### event-manager 
+### eventManager 
 A reference to the shared [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) instance. 
 
 ### config
