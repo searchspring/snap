@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -104,7 +104,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask);
+				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig).settings?.variants);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -181,17 +181,19 @@ export class Variants {
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
 
-	constructor(variantData: VariantData[], mask: ProductMask) {
+	private config?: VariantConfig;
+
+	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
-
-		this.update(variantData);
+		this.config = config;
+		this.update(variantData, config);
 	}
 
-	public update(variantData: VariantData[]) {
+	public update(variantData: VariantData[], config = this.config) {
 		try {
 			const options: string[] = [];
 
@@ -218,23 +220,66 @@ export class Variants {
 				this.selections.push(new VariantSelection(this, optionConfig));
 			});
 
+			const preselectedOptions: Record<string, string[]> = {};
+			if (config?.options) {
+				Object.keys(config?.options).forEach((option) => {
+					if (config.options![option].preSelected) {
+						preselectedOptions[option] = config.options![option].preSelected as string[];
+					}
+				});
+			}
+
 			// select first available
-			this.makeSelections();
+			this.makeSelections(preselectedOptions);
 		} catch (err) {
 			// failed to parse the variant JSON
 			console.error(err, `Invalid variant JSON for: ${variantData}`);
 		}
 	}
 
-	public makeSelections(options?: Record<string, string>) {
-		// TODO - support for affinity to attempt to pre-selected options
+	public makeSelections(options?: Record<string, string[]>) {
 		// options = {color: 'Blue', size: 'L'};
+
 		if (!options) {
 			// select first available for each selection
 			this.selections.forEach((selection) => {
 				const firstAvailableOption = selection.values.find((value) => value.available);
 				if (firstAvailableOption) {
 					selection.select(firstAvailableOption.value, true);
+				}
+			});
+		} else {
+			this.selections.forEach((selection, idx) => {
+				// filter by first available, then by preselected option preference
+				//make all options available for first selection.
+				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
+				const preferedOptions = options[selection.field as keyof typeof options];
+				let preferencedOption = availableOptions[0];
+
+				// if theres a preference for that field
+				if (preferedOptions) {
+					const checkIfAvailable = (preference: string) => {
+						//see if that option is in the available options
+						const availablePreferedOptions = availableOptions.find((value) => value.value.toLowerCase() == preference.toLowerCase());
+
+						//use it
+						if (availablePreferedOptions) {
+							preferencedOption = availablePreferedOptions;
+						}
+					};
+
+					if (Array.isArray(preferedOptions)) {
+						//loop through each preference option
+						preferedOptions.forEach((preference: string) => {
+							checkIfAvailable(preference);
+						});
+					} else {
+						checkIfAvailable(preferedOptions);
+					}
+				}
+
+				if (preferencedOption) {
+					selection.select(preferencedOption.value);
 				}
 			});
 		}
