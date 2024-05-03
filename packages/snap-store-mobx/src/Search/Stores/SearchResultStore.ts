@@ -71,7 +71,14 @@ export class Banner {
 export type VariantData = {
 	mappings: SearchResponseModelResultMappings;
 	attributes: Record<string, unknown>;
-	options: Record<string, string>;
+	options: Record<
+		string,
+		{
+			value: string;
+			attributeId?: string;
+			optionId?: string;
+		}
+	>;
 };
 
 type ProductMinimal = {
@@ -254,14 +261,14 @@ export class Variants {
 		orderedSelections.forEach((selection) => selection.refineValues(this));
 
 		// check to see if we have enough selections made to update the display
-		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
+		const selectedSelections = this.selections.filter((selection) => selection.selected);
 		if (selectedSelections.length) {
 			let availableVariants: Variant[] = this.data;
 
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected == variant.options[selectedSelection.field] && variant.available
+					(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
 				);
 			}
 
@@ -315,21 +322,23 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected == variant.options[selectedSelection.field] && variant.available
+				(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
 			);
 		}
 
 		const newValues: SelectionValue[] = variants.data
 			.filter((variant) => variant.options[this.field])
 			.reduce((values: SelectionValue[], variant) => {
-				if (!values.some((val) => variant.options[this.field] == val.value)) {
+				if (!values.some((val) => variant.options[this.field].value == val.value)) {
 					values.push({
-						value: variant.options[this.field] as string,
-						label: variant.options[this.field] as string,
+						label: variant.options[this.field].value,
 						// TODO: use configurable mappings from config
 						// TODO: set background for swatches (via configurable mappings) from config
 						thumbnailImageUrl: variant.mappings.core?.thumbnailImageUrl,
-						available: Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])),
+						available: Boolean(
+							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
+						),
+						...variant.options[this.field],
 					});
 				}
 
@@ -387,7 +396,15 @@ export class Variant {
 	public type = 'variant';
 	public available: boolean;
 	public attributes: Record<string, unknown> = {};
-	public options: Record<string, string> = {};
+	public options: Record<
+		string,
+		{
+			value: string;
+			attributeId?: string;
+			optionId?: string;
+		}
+	>;
+
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
