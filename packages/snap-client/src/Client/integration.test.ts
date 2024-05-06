@@ -59,6 +59,9 @@ describe('Snap Client Integration Tests', () => {
 		});
 
 		it('Caches search responses and uses them', async () => {
+			//mock fetch
+			const fetchfn = jest.spyOn(global.window, 'fetch');
+
 			const controller = new SearchController(searchConfig, {
 				client: new Client(globals),
 				store: new SearchStore(searchConfig, services),
@@ -70,9 +73,6 @@ describe('Snap Client Integration Tests', () => {
 			});
 			//no cache initially
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
-
-			//mock fetch
-			const fetchfn = jest.spyOn(global.window, 'fetch');
 
 			//make a search
 			await controller.search();
@@ -106,11 +106,13 @@ describe('Snap Client Integration Tests', () => {
 			//but it did not make additional calls and used previous cache response
 			expect(fetchfn).toHaveBeenCalledTimes(4);
 
-			fetchfn.mockClear();
 			fetchfn.mockReset();
 		});
 
 		it('Cache can be disabled via requester configs', async () => {
+			//mock fetch
+			const fetchfn = jest.spyOn(global.window, 'fetch');
+
 			const clientConfig = {
 				search: {
 					cache: {
@@ -136,8 +138,6 @@ describe('Snap Client Integration Tests', () => {
 			//no cache initially
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
 
-			//mock fetch
-			const fetchfn = jest.spyOn(global.window, 'fetch');
 			//make a search
 			await controller.search();
 
@@ -156,11 +156,13 @@ describe('Snap Client Integration Tests', () => {
 			//but it did make additional calls
 			expect(fetchfn).toHaveBeenCalledTimes(4);
 
-			fetchfn.mockClear();
 			fetchfn.mockReset();
 		});
 
 		it('Cache can be disabled via client mode', async () => {
+			//mock fetch
+			const fetchfn = jest.spyOn(global.window, 'fetch');
+
 			const clientConfig: ClientConfig = {
 				mode: 'development',
 			};
@@ -177,8 +179,6 @@ describe('Snap Client Integration Tests', () => {
 			//no cache initially
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
 
-			//mock fetch
-			const fetchfn = jest.spyOn(global.window, 'fetch');
 			//make a search
 			await controller.search();
 
@@ -197,7 +197,6 @@ describe('Snap Client Integration Tests', () => {
 			//but it did make additional calls
 			expect(fetchfn).toHaveBeenCalledTimes(4);
 
-			fetchfn.mockClear();
 			fetchfn.mockReset();
 		});
 	});

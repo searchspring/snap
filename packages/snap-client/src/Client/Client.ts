@@ -75,6 +75,7 @@ export class Client {
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.autocomplete?.origin,
 					headers: this.config.autocomplete?.headers,
@@ -85,6 +86,7 @@ export class Client {
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.meta?.origin,
 					headers: this.config.meta?.headers,
@@ -94,6 +96,7 @@ export class Client {
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.recommend?.origin,
 					headers: this.config.recommend?.headers,
@@ -103,6 +106,7 @@ export class Client {
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.search?.origin,
 					headers: this.config.search?.headers,
@@ -112,6 +116,7 @@ export class Client {
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.finder?.origin,
 					headers: this.config.finder?.headers,
@@ -121,6 +126,7 @@ export class Client {
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
 					mode: this.mode,
 					origin: this.config.suggest?.origin,
 					headers: this.config.suggest?.headers,
@@ -195,7 +201,7 @@ export class Client {
 
 		return {
 			...profile,
-			results: recommendations[0].results,
+			results: recommendations[0] && recommendations[0].results,
 		};
 	}
 }

@@ -168,7 +168,7 @@ export class ApiConfiguration {
 	}
 
 	get fetchApi(): FetchAPI {
-		return this.config.fetchApi || window.fetch.bind(window);
+		return this.config.fetchApi || (typeof window !== 'undefined' ? window.fetch?.bind(window) : fetch);
 	}
 
 	get queryParamsStringify(): (params: HTTPQuery) => string {
