@@ -531,7 +531,7 @@ describe('SearchResultStore', () => {
 			expect(result.badges.all[0]).toHaveProperty('parameters');
 			expect(result.badges.all[0]).toHaveProperty('path');
 
-			const badgeMeta = searchData.meta?.badges?.tags[resultBadges[0].tag]!;
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
 			expect(badgeMeta).toBeDefined();
 
 			expect(result.badges.all[0]).toStrictEqual({
@@ -542,7 +542,7 @@ describe('SearchResultStore', () => {
 				priority: badgeMeta.priority,
 				enabled: badgeMeta.enabled,
 				parameters: badgeMeta.parameters,
-				path: `overlay/left/${badgeMeta.location}`,
+				path: `left/${badgeMeta.location}`,
 			});
 
 			expect(result.badges.overlay).toStrictEqual([result.badges.all[0]]);

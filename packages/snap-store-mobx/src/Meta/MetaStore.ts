@@ -14,8 +14,8 @@ class MetaBadges {
 	public locations: { grid: string[][] } = { grid: [] };
 
 	constructor(metaData?: MetaResponseModel) {
-		const leftAreas = metaData?.badges?.locations?.overlay?.left?.map((area: any) => area.name) || [];
-		const rightAreas = metaData?.badges?.locations?.overlay?.right?.map((area: any) => area.name) || [];
+		const leftAreas = metaData?.badges?.locations?.left?.map((area: any) => area.tag) || [];
+		const rightAreas = metaData?.badges?.locations?.right?.map((area: any) => area.tag) || [];
 		const LCM = lcm(leftAreas.length, rightAreas.length);
 
 		this.locations.grid = Array.from({ length: LCM }).map((_, index) => {

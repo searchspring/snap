@@ -135,16 +135,14 @@ Default.loaders = [
 				...response.meta,
 				badges: {
 					locations: {
-						overlay: {
-							left: [
-								{
-									name: 'left',
-									label: 'Left',
-									description: 'description for left',
-								},
-							],
-							right: [],
-						},
+						left: [
+							{
+								name: 'left',
+								label: 'Left',
+								description: 'description for left',
+							},
+						],
+						right: [],
 						callout: [
 							{
 								name: 'callout',

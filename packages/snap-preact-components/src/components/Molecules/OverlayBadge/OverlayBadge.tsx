@@ -41,8 +41,8 @@ const CSS = {
 		});
 	},
 	BadgePositioning: (props: ResultBadge & { index: number }) => {
-		const { location, path, index } = props;
-		const [_, overlayLocation] = path.split('/');
+		const { location, index } = props;
+		const [overlayLocation] = location.split('/');
 
 		return css({
 			position: 'absolute',

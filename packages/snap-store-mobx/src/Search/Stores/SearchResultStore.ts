@@ -160,21 +160,11 @@ export class Badges {
 				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
 			})
 			.map((badge) => {
-				const metaBadgeData = metaData?.badges?.tags[badge.tag]!;
-				const locationName = metaBadgeData!.location;
-
-				// @ts-ignore - todo need to update meta types to have locations.callout
-				const isCallout = metaData?.badges?.locations?.callout?.some((callout) => callout.name === locationName);
-				const isLeftOverlay = metaData?.badges?.locations?.overlay?.left?.some((leftOverlays) => leftOverlays.name === locationName);
-				const isRightOverlay = metaData?.badges?.locations?.overlay?.right?.some((rightOverlays) => rightOverlays.name === locationName);
-
-				const locationPrefix = isCallout ? 'callout' : isLeftOverlay ? 'overlay/left' : isRightOverlay ? 'overlay/right' : '';
-				const path = `${locationPrefix}/${locationName}`;
+				const metaBadgeData = metaData?.badges?.tags?.[badge.tag]!;
 
 				return {
 					...badge,
 					...metaBadgeData,
-					path,
 				};
 			})
 			.sort((a, b) => {
@@ -191,11 +181,11 @@ export class Badges {
 	public get overlay(): ResultBadge[] {
 		return this.all
 			.filter((badge) => {
-				return badge.path.startsWith('overlay/');
+				return badge.location.startsWith('left/') || badge.location.startsWith('right/');
 			})
 			.reduce((badgeArr: ResultBadge[], badge) => {
 				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((existingBadge) => existingBadge.path === badge.path)) {
+				if (!badgeArr.some((existingBadge) => existingBadge.location === badge.location)) {
 					badgeArr.push(badge);
 				}
 				return badgeArr;
@@ -205,17 +195,17 @@ export class Badges {
 	public get callout(): Record<string, ResultBadge> {
 		return this.all
 			.filter((badge) => {
-				return badge.path.startsWith('callout/');
+				return badge.location.startsWith('callout/');
 			})
 			.reduce((badgeArr: ResultBadge[], badge) => {
 				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((existingBadge) => existingBadge.path === badge.path)) {
+				if (!badgeArr.some((existingBadge) => existingBadge.location === badge.location)) {
 					badgeArr.push(badge);
 				}
 				return badgeArr;
 			}, [])
 			.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
-				const [_, name] = badge.path.split('/');
+				const [_, name] = badge.location.split('/');
 				badgeMap[name] = badge;
 				return badgeMap;
 			}, {});

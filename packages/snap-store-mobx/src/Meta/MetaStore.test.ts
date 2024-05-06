@@ -20,14 +20,14 @@ describe('Meta Store', () => {
 
 	it('has badges in mock meta data', () => {
 		expect(metaData?.badges).toBeDefined();
-		expect(metaData?.badges?.locations?.overlay?.left).toBeDefined();
-		expect(metaData?.badges?.locations?.overlay?.right).toBeDefined();
-		expect(metaData?.badges?.locations?.callouts).toBeDefined();
+		expect(metaData?.badges?.locations?.left).toBeDefined();
+		expect(metaData?.badges?.locations?.right).toBeDefined();
+		expect(metaData?.badges?.locations?.callout).toBeDefined();
 
-		expect(metaData?.badges?.locations.overlay.left.length).toBeGreaterThan(0);
-		expect(metaData?.badges?.locations.overlay.right.length).toBeGreaterThan(0);
+		expect(metaData?.badges?.locations.left.length).toBeGreaterThan(0);
+		expect(metaData?.badges?.locations.right.length).toBeGreaterThan(0);
 
-		expect(metaData?.badges?.locations.callouts.length).toBeGreaterThan(0);
+		expect(metaData?.badges?.locations.callout.length).toBeGreaterThan(0);
 
 		expect(metaData?.badges?.tags).toBeDefined();
 		expect(Object.keys(metaData?.badges?.tags || {}).length).toBeGreaterThan(0);
