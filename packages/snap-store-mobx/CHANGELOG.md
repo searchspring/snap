@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Features
+
+- **resultstore:** adding setVariants function to give a way to set variant data after initializatio ([5c0c0fb](https://github.com/searchspring/snap/commit/5c0c0fbab2e47c9dfd9f416bb6986cd991b7c809))
+- **searchresultstore:** adding ability to pre select variant options ([551055a](https://github.com/searchspring/snap/commit/551055ada41ec6d23930afeb7fd9dacd2fbba272))
+- **variants:** adding preselected variants to config. & adding eventManager to Snap Preact ([acac381](https://github.com/searchspring/snap/commit/acac3812771b6e66f89472e65357eeff4a3cb8c1))
+
 ## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
