@@ -1,5 +1,5 @@
 export function getFlags(userAgent = ''): FeatureFlags {
-	userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
+	userAgent = (userAgent || (typeof window == 'undefined' ? {} : window?.navigator).userAgent || '').toLowerCase();
 
 	const isIE = (function () {
 		let ieVersion: number | boolean;
@@ -20,14 +20,14 @@ export function getFlags(userAgent = ''): FeatureFlags {
 			return !isIE() || Number(isIE()) >= 10;
 		},
 		cookies: function () {
-			return window.navigator.cookieEnabled;
+			return typeof window == 'undefined' ? false : window?.navigator?.cookieEnabled;
 		},
 		storage: function () {
 			const test = 'ss-test';
 
 			try {
-				window.localStorage.setItem(test, test);
-				window.localStorage.removeItem(test);
+				window?.localStorage.setItem(test, test);
+				window?.localStorage.removeItem(test);
 
 				return true;
 			} catch (e) {

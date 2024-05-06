@@ -125,8 +125,12 @@ describe('Snap Client', () => {
 	});
 
 	describe('each fetch method uses the expected requester', () => {
-		it('autocomplete method', async () => {
-			const client = new Client({ siteId: '8uyt2m' });
+		it('Autocomplete method', async () => {
+			const fetchApiMock = jest
+				.spyOn(global.window, 'fetch')
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.autocomplete()) } as Response));
+
+			const client = new Client({ siteId: '8uyt2m' }, { mode: 'development' });
 
 			//@ts-ignore
 			const autocompleteRequester = client.requesters.autocomplete.requesters.legacy;
@@ -139,10 +143,6 @@ describe('Snap Client', () => {
 			const suggestRequesterSpy = jest.spyOn(suggestRequester, 'request' as never);
 			const acRequesterSpy = jest.spyOn(autocompleteRequester, 'request' as never);
 
-			const fetchApiMock = jest
-				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.autocomplete()) } as Response));
-
 			const acparams = {
 				search: {
 					query: {
@@ -151,9 +151,7 @@ describe('Snap Client', () => {
 				},
 			};
 
-			client.autocomplete(acparams);
-
-			await wait();
+			await client.autocomplete(acparams);
 
 			const metaRequest = {
 				headers: {},
@@ -210,11 +208,11 @@ describe('Snap Client', () => {
 
 			expect(fetchApiMock).toHaveBeenCalledTimes(3);
 
-			fetchApiMock.mockClear();
+			fetchApiMock.mockReset();
 		});
 
 		it('Meta method', async () => {
-			const client = new Client({ siteId: '8uyt2m' });
+			const client = new Client({ siteId: '8uyt2m' }, { mode: 'development' });
 
 			//@ts-ignore
 			const metaRequester = client.requesters.meta.requesters.legacy;
@@ -225,31 +223,31 @@ describe('Snap Client', () => {
 				.spyOn(global.window, 'fetch')
 				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
-			const metaprops = { siteId: '88uyt2m' };
+			const metaprops = { siteId: '8uyt2m' };
 
-			client.meta(metaprops);
-
-			await wait();
+			await client.meta(metaprops);
 
 			const metaRequest = {
 				headers: {},
 				method: 'GET',
 				path: '/api/meta/meta.json',
 				query: {
-					siteId: '88uyt2m',
+					siteId: '8uyt2m',
 				},
 			};
 
-			const metaCacheKey = '/api/meta/meta.json{"siteId":"88uyt2m"}';
+			const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
 
 			expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
 
 			expect(fetchApiMock).toHaveBeenCalledTimes(1);
+
+			fetchApiMock.mockReset();
 		});
 
 		it('Search method', async () => {
-			const client = new Client({ siteId: '8uyt2m' });
+			const client = new Client({ siteId: '8uyt2m' }, { mode: 'development' });
 
 			//@ts-ignore
 			const searchRequester = client.requesters.search.requesters.legacy;
@@ -267,9 +265,7 @@ describe('Snap Client', () => {
 
 			const searchprops = { siteId: '8uyt2m' };
 
-			client.search(searchprops);
-
-			await wait();
+			await client.search(searchprops);
 
 			const searchparams = {
 				headers: {},
@@ -302,7 +298,7 @@ describe('Snap Client', () => {
 		});
 
 		it('Trending method', async () => {
-			const client = new Client({ siteId: '8uyt2m' });
+			const client = new Client({ siteId: '8uyt2m' }, { mode: 'development' });
 
 			//@ts-ignore
 			const suggestRequester = client.requesters.suggest;
@@ -315,9 +311,7 @@ describe('Snap Client', () => {
 
 			const trendingprops = { siteId: '8uyt2m' };
 
-			client.trending(trendingprops);
-
-			await wait();
+			await client.trending(trendingprops);
 
 			const trendingparams = { headers: {}, method: 'GET', path: '/api/suggest/trending', query: { siteId: '8uyt2m' } };
 
@@ -330,7 +324,7 @@ describe('Snap Client', () => {
 		});
 
 		it('Recommend method', async () => {
-			const client = new Client({ siteId: '8uyt2m' });
+			const client = new Client({ siteId: '8uyt2m' }, { mode: 'development' });
 
 			//@ts-ignore
 			const recommendRequester = client.requesters.recommend;
@@ -343,11 +337,9 @@ describe('Snap Client', () => {
 
 			const recommendprops = { siteId: '8uyt2m', tag: 'dress' };
 
-			client.recommend(recommendprops);
+			await client.recommend(recommendprops);
 
-			await wait();
-
-			const recommendparams = {
+			const profileParams = {
 				headers: {},
 				method: 'GET',
 				path: '/api/personalized-recommendations/profile.json',
@@ -357,16 +349,277 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const recommendcacheKey = '/api/personalized-recommendations/profile.json{"tag":"dress","siteId":"8uyt2m"}';
+			const profileCacheKey = '/api/personalized-recommendations/profile.json{"tag":"dress","siteId":"8uyt2m"}';
 
-			expect(recommendRequesterSpy).toHaveBeenCalledTimes(1);
-			expect(recommendRequesterSpy.mock.calls).toEqual([[recommendparams, recommendcacheKey]]);
+			const recommendParams = {
+				headers: {},
+				method: 'GET',
+				path: '/boost/8uyt2m/recommend',
+				query: {
+					limits: [20],
+					siteId: '8uyt2m',
+					tags: ['dress'],
+					test: true,
+				},
+			};
+
+			const recommendCacheKey = '/boost/8uyt2m/recommend{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+
+			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
+			expect(recommendRequesterSpy.mock.calls).toEqual([
+				[profileParams, profileCacheKey],
+				[recommendParams, recommendCacheKey],
+			]);
 
 			//wait for batch timeout
 			await wait(300);
 
 			expect(fetchApiMock).toHaveBeenCalledTimes(2);
 			fetchApiMock.mockReset();
+		});
+
+		describe('with custom fetchApi', () => {
+			it('Autocomplete method', async () => {
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
+
+				//@ts-ignore
+				const autocompleteRequester = client.requesters.autocomplete.requesters.legacy;
+				//@ts-ignore
+				const suggestRequester = client.requesters.autocomplete.requesters.suggest;
+				//@ts-ignore
+				const metaRequester = client.requesters.meta.requesters.legacy;
+
+				const metaRequesterSpy = jest.spyOn(metaRequester, 'request' as never);
+				const suggestRequesterSpy = jest.spyOn(suggestRequester, 'request' as never);
+				const acRequesterSpy = jest.spyOn(autocompleteRequester, 'request' as never);
+
+				const acparams = {
+					search: {
+						query: {
+							string: 'hello',
+						},
+					},
+				};
+
+				await client.autocomplete(acparams);
+
+				const metaRequest = {
+					headers: {},
+					method: 'GET',
+					path: '/api/meta/meta.json',
+					query: {
+						siteId: '8uyt2m',
+					},
+				};
+
+				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+
+				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(metaRequesterSpy.mock.calls).toEqual([
+					[metaRequest, metaCacheKey], // first call
+				]);
+				const suggestRequest = {
+					headers: {},
+					method: 'GET',
+					path: '/api/suggest/query',
+					query: {
+						disableSpellCorrect: true,
+						language: 'en',
+						query: ['hello'],
+						siteId: ['8uyt2m'],
+						suggestionCount: 5,
+					},
+				};
+				const suggestCacheKey =
+					'/api/suggest/query{"siteId":["8uyt2m"],"language":"en","query":["hello"],"suggestionCount":5,"disableSpellCorrect":true}';
+
+				expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(suggestRequesterSpy.mock.calls).toEqual([
+					[suggestRequest, suggestCacheKey], // first call
+				]);
+
+				const acRequest = {
+					headers: {},
+					method: 'GET',
+					path: '/api/search/autocomplete.json',
+					query: {
+						q: undefined,
+						redirectResponse: 'full',
+						resultsFormat: 'native',
+						siteId: ['8uyt2m'],
+					},
+				};
+				const acCacheKey =
+					'/api/search/autocomplete.json{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
+
+				expect(acRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(acRequesterSpy.mock.calls).toEqual([
+					[{ ...acRequest, query: { ajaxCatalog: 'Snap', ...acRequest.query } }, acCacheKey], // first call
+				]);
+
+				expect(fetchApiMock).toHaveBeenCalledTimes(3);
+
+				fetchApiMock.mockReset();
+			});
+
+			it('Meta method with custom fetchApi', async () => {
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
+
+				//@ts-ignore
+				const metaRequester = client.requesters.meta.requesters.legacy;
+
+				const metaRequesterSpy = jest.spyOn(metaRequester, 'request' as never);
+
+				const metaprops = { siteId: '8uyt2m' };
+
+				await client.meta(metaprops);
+
+				const metaRequest = {
+					headers: {},
+					method: 'GET',
+					path: '/api/meta/meta.json',
+					query: {
+						siteId: '8uyt2m',
+					},
+				};
+
+				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+
+				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
+
+				expect(fetchApiMock).toHaveBeenCalledTimes(1);
+				fetchApiMock.mockReset();
+			});
+
+			it('Search method with custom fetchApi', async () => {
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
+
+				//@ts-ignore
+				const searchRequester = client.requesters.search.requesters.legacy;
+
+				const searchRequesterSpy = jest.spyOn(searchRequester, 'request' as never);
+
+				//@ts-ignore
+				const metaRequester = client.requesters.meta.requesters.legacy;
+
+				const metaRequesterSpy = jest.spyOn(metaRequester, 'request' as never);
+
+				const searchprops = { siteId: '8uyt2m' };
+
+				await client.search(searchprops);
+
+				const searchparams = {
+					headers: {},
+					method: 'GET',
+					path: '/api/search/search.json',
+					query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
+				};
+
+				const searchcacheKey = '/api/search/search.json{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
+
+				expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
+
+				const metaRequest = {
+					headers: {},
+					method: 'GET',
+					path: '/api/meta/meta.json',
+					query: {
+						siteId: '8uyt2m',
+					},
+				};
+
+				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+
+				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
+
+				expect(fetchApiMock).toHaveBeenCalledTimes(2);
+				fetchApiMock.mockReset();
+			});
+
+			it('Trending method with custom fetchApi', async () => {
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
+
+				//@ts-ignore
+				const suggestRequester = client.requesters.suggest;
+
+				const suggestRequesterSpy = jest.spyOn(suggestRequester, 'request' as never);
+
+				const trendingprops = { siteId: '8uyt2m' };
+
+				await client.trending(trendingprops);
+
+				const trendingparams = { headers: {}, method: 'GET', path: '/api/suggest/trending', query: { siteId: '8uyt2m' } };
+
+				const trendingcacheKey = '/api/suggest/trending{"siteId":"8uyt2m"}';
+
+				expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
+				expect(suggestRequesterSpy.mock.calls).toEqual([[trendingparams, trendingcacheKey]]);
+				expect(fetchApiMock).toHaveBeenCalledTimes(1);
+				fetchApiMock.mockReset();
+			});
+
+			it('Recommend method with custom fetchApi', async () => {
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
+
+				//@ts-ignore
+				const recommendRequester = client.requesters.recommend;
+
+				const recommendRequesterSpy = jest.spyOn(recommendRequester, 'request' as never);
+
+				const recommendprops = { siteId: '8uyt2m', tag: 'dress' };
+
+				await client.recommend(recommendprops);
+
+				const profileParams = {
+					headers: {},
+					method: 'GET',
+					path: '/api/personalized-recommendations/profile.json',
+					query: {
+						siteId: '8uyt2m',
+						tag: 'dress',
+					},
+				};
+
+				const profileCacheKey = '/api/personalized-recommendations/profile.json{"tag":"dress","siteId":"8uyt2m"}';
+
+				const recommendParams = {
+					headers: {},
+					method: 'GET',
+					path: '/boost/8uyt2m/recommend',
+					query: {
+						limits: [20],
+						siteId: '8uyt2m',
+						tags: ['dress'],
+						test: true,
+					},
+				};
+
+				const recommendCacheKey = '/boost/8uyt2m/recommend{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+
+				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
+				expect(recommendRequesterSpy.mock.calls).toEqual([
+					[profileParams, profileCacheKey],
+					[recommendParams, recommendCacheKey],
+				]);
+
+				//wait for batch timeout
+				await wait(300);
+
+				expect(fetchApiMock).toHaveBeenCalledTimes(2);
+				fetchApiMock.mockReset();
+			});
 		});
 	});
 });

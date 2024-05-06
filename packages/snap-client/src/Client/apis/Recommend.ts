@@ -26,7 +26,7 @@ const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	private batches: {
 		[key: string]: {
-			timeout: number;
+			timeout: number | NodeJS.Timeout;
 			request: Partial<RecommendRequestModel>;
 			entries: BatchEntry[];
 		};
@@ -63,8 +63,10 @@ export class RecommendAPI extends API {
 		batch.entries.push({ request: parameters, deferred: deferred });
 
 		// wait for all of the requests to come in
-		window.clearTimeout(batch.timeout);
-		batch.timeout = window.setTimeout(async () => {
+		const timeoutClear = typeof window !== 'undefined' ? window.clearTimeout : clearTimeout;
+		const timeoutSet = typeof window !== 'undefined' ? window.setTimeout : setTimeout;
+		timeoutClear && timeoutClear(batch.timeout);
+		batch.timeout = timeoutSet(async () => {
 			// delete the batch so a new one can take its place
 			delete this.batches[key];
 

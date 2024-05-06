@@ -12,6 +12,7 @@ type RequesterConfig<T> = {
 
 export type ClientConfig = {
 	mode?: keyof typeof AppMode | AppMode;
+	fetchApi?: WindowOrWorkerGlobalScope['fetch'];
 	meta?: RequesterConfig<MetaRequestModel>;
 	search?: RequesterConfig<SearchRequestModel>;
 	autocomplete?: RequesterConfig<AutocompleteRequestModel> & { requesters?: HybridRequesterConfig };
