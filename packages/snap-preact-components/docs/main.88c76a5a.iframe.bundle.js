@@ -1,4 +1,4 @@
-/*! For license information please see main.47652c23.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.88c76a5a.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -22425,6 +22425,8 @@
 						_properties$theme$com,
 						_controller$store,
 						_controller$store2,
+						_controller$store2$re,
+						_controller$store3,
 						_globalTheme$componen2,
 						_props3,
 						_globalTheme$componen3,
@@ -22517,11 +22519,22 @@
 					limit && (resultsToRender = resultsToRender.slice(0, limit));
 					var cartStore = controller.store.cart;
 					if (!cartStore) throw new Error("<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store");
+					if (
+						!(
+							(results && results.length) ||
+							(null !== (_controller$store2 = controller.store) &&
+								void 0 !== _controller$store2 &&
+								null !== (_controller$store2$re = _controller$store2.results) &&
+								void 0 !== _controller$store2$re &&
+								_controller$store2$re.length)
+						)
+					)
+						throw new Error('<BundleRecommendation> Component has no results to render!');
 					var seed = results
 							? results[0]
-							: null === (_controller$store2 = controller.store) || void 0 === _controller$store2
+							: null === (_controller$store3 = controller.store) || void 0 === _controller$store3
 							? void 0
-							: _controller$store2.results[0],
+							: _controller$store3.results[0],
 						subProps = {
 							carousel: Object.assign(
 								{ loop, className: 'ss__recommendation__carousel' },
@@ -27501,8 +27514,13 @@
 					},
 				};
 			function getFlags() {
-				var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
-				userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
+				var _window,
+					userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
+				userAgent = (
+					userAgent ||
+					('undefined' == typeof window ? {} : null === (_window = window) || void 0 === _window ? void 0 : _window.navigator).userAgent ||
+					''
+				).toLowerCase();
 				var ieVersion,
 					isIE = function isIE() {
 						if (void 0 === ieVersion) {
@@ -27516,11 +27534,25 @@
 						return !isIE() || Number(isIE()) >= 10;
 					},
 					cookies: function cookies() {
-						return window.navigator.cookieEnabled;
+						var _window2, _window2$navigator;
+						return (
+							'undefined' != typeof window &&
+							(null === (_window2 = window) ||
+							void 0 === _window2 ||
+							null === (_window2$navigator = _window2.navigator) ||
+							void 0 === _window2$navigator
+								? void 0
+								: _window2$navigator.cookieEnabled)
+						);
 					},
 					storage: function storage() {
 						try {
-							return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
+							var _window3, _window4;
+							return (
+								null === (_window3 = window) || void 0 === _window3 || _window3.localStorage.setItem('ss-test', 'ss-test'),
+								null === (_window4 = window) || void 0 === _window4 || _window4.localStorage.removeItem('ss-test'),
+								!0
+							);
 						} catch (e) {
 							return !1;
 						}
@@ -31012,15 +31044,18 @@
 													void 0 === _this$config$settings10
 														? void 0
 														: _this$config$settings10.showResults);
-											_this.urlManager.reset().go(),
+											_this.handlers.input.timeoutDelay = setTimeout(function () {
 												value
-													? (_this.handlers.input.timeoutDelay = setTimeout(function () {
-															_this.store.state.locks.terms.unlock(),
-																_this.store.state.locks.facets.unlock(),
-																_this.urlManager.set({ query: _this.store.state.input }).go();
-													  }, 200))
+													? (_this.store.state.locks.terms.unlock(),
+													  _this.store.state.locks.facets.unlock(),
+													  _this.urlManager.set({ query: _this.store.state.input }).go())
 													: (_this.store.reset(),
-													  trendingResultsEnabled ? _this.store.trending[0].preview() : historyResultsEnabled && _this.store.history[0].preview());
+													  trendingResultsEnabled
+															? _this.store.trending[0].preview()
+															: historyResultsEnabled
+															? _this.store.history[0].preview()
+															: _this.urlManager.reset().go());
+											}, 200);
 										}
 									},
 									timeoutDelay: void 0,
@@ -31802,13 +31837,16 @@
 								value: function get(key) {
 									if (this.config.enabled)
 										try {
+											var _window;
 											if (this.memoryCache[key] && Date.now() < this.memoryCache[key].expires) return cjs_default()({}, this.memoryCache[key].value);
-											var stored = sessionStorage.getItem('ss-networkcache'),
-												localData = stored && JSON.parse(stored);
-											if (localData && key && localData[key]) {
-												if (!(Date.now() >= localData[key].expires)) return localData[key].value;
-												var newStored = Object.assign({}, localData);
-												delete newStored[key], sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+											if ('undefined' != typeof window && null !== (_window = window) && void 0 !== _window && _window.sessionStorage) {
+												var stored = window.sessionStorage.getItem('ss-networkcache'),
+													localData = stored && JSON.parse(stored);
+												if (localData && key && localData[key]) {
+													if (!(Date.now() >= localData[key].expires)) return localData[key].value;
+													var newStored = Object.assign({}, localData);
+													delete newStored[key], window.sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+												}
 											}
 										} catch (err) {
 											console.warn('something went wrong, browser might not have cookies enabled');
@@ -31820,23 +31858,28 @@
 								value: function set(key, value) {
 									if (this.config.enabled)
 										try {
-											var cacheObject = { value, expires: Date.now() + this.config.ttl, purgeable: this.config.purgeable };
-											this.memoryCache[key] = cacheObject;
-											var stored = sessionStorage.getItem('ss-networkcache'),
-												newStored = Object.assign({}, stored && JSON.parse(stored));
-											newStored[key] = cacheObject;
-											for (var size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024; size > this.config.maxSize; ) {
-												var oldestKey = Object.keys(newStored)
-													.filter(function (key) {
-														return newStored[key].purgeable;
-													})
-													.sort(function (a, b) {
-														return newStored[a].expires - newStored[b].expires;
-													})[0];
-												if (!oldestKey) break;
-												delete newStored[oldestKey], (size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024);
+											var _window2,
+												cacheObject = { value, expires: Date.now() + this.config.ttl, purgeable: this.config.purgeable };
+											if (
+												((this.memoryCache[key] = cacheObject),
+												'undefined' != typeof window && null !== (_window2 = window) && void 0 !== _window2 && _window2.sessionStorage)
+											) {
+												var stored = window.sessionStorage.getItem('ss-networkcache'),
+													newStored = Object.assign({}, stored && JSON.parse(stored));
+												newStored[key] = cacheObject;
+												for (var size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024; size > this.config.maxSize; ) {
+													var oldestKey = Object.keys(newStored)
+														.filter(function (key) {
+															return newStored[key].purgeable;
+														})
+														.sort(function (a, b) {
+															return newStored[a].expires - newStored[b].expires;
+														})[0];
+													if (!oldestKey) break;
+													delete newStored[oldestKey], (size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024);
+												}
+												size < this.config.maxSize && window.sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
 											}
-											size < this.config.maxSize && sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
 										} catch (err) {
 											console.warn('something went wrong, browser might not have cookies enabled');
 										}
@@ -31846,7 +31889,13 @@
 								key: 'clear',
 								value: function clear() {
 									try {
-										(this.memoryCache = {}), sessionStorage.setItem('ss-networkcache', '');
+										var _window3;
+										(this.memoryCache = {}),
+											'undefined' != typeof window &&
+												null !== (_window3 = window) &&
+												void 0 !== _window3 &&
+												_window3.sessionStorage &&
+												window.sessionStorage.setItem('ss-networkcache', '');
 									} catch (err) {
 										console.warn('something went wrong, browser might not have cookies enabled');
 									}
@@ -32491,7 +32540,15 @@
 							{
 								key: 'fetchApi',
 								get: function get() {
-									return this.config.fetchApi || window.fetch.bind(window);
+									var _window$fetch;
+									return (
+										this.config.fetchApi ||
+										('undefined' != typeof window
+											? null === (_window$fetch = window.fetch) || void 0 === _window$fetch
+												? void 0
+												: _window$fetch.bind(window)
+											: fetch)
+									);
 								},
 							},
 							{
@@ -34649,11 +34706,15 @@
 				(transformSearchResponse.merchandising = function (response) {
 					var merchandising = null == response ? void 0 : response.merchandising;
 					return (
-						merchandising.content && Array.isArray(merchandising.content) && !merchandising.content.length && (merchandising.content = {}),
+						null != merchandising &&
+							merchandising.content &&
+							Array.isArray(merchandising.content) &&
+							!merchandising.content.length &&
+							(merchandising.content = {}),
 						{
 							merchandising: {
 								redirect: (null == merchandising ? void 0 : merchandising.redirect) || '',
-								content: merchandising.content || {},
+								content: (null == merchandising ? void 0 : merchandising.content) || {},
 								campaigns: (null == merchandising ? void 0 : merchandising.triggeredCampaigns) || [],
 								personalized: null == merchandising ? void 0 : merchandising.personalized,
 							},
@@ -34742,13 +34803,23 @@
 					})(this, HybridAPI),
 						(_this = Hybrid_callSuper(this, HybridAPI, [configuration]));
 					var legacyConfig = cjs_default()(
-						{ mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache },
+						{
+							mode: _this.configuration.mode,
+							origin: _this.configuration.origin,
+							cache: _this.configuration.cache,
+							fetchApi: _this.configuration.fetchApi,
+						},
 						(null == requesterConfigurations ? void 0 : requesterConfigurations.legacy) || {}
 					);
 					configuration.mode == AppMode.development &&
 						(legacyConfig.headers = Object.assign({}, legacyConfig.headers, { 'searchspring-no-beacon': '' }));
 					var suggestConfig = cjs_default()(
-							{ mode: configuration.mode, origin: configuration.origin, cache: _this.configuration.cache },
+							{
+								mode: _this.configuration.mode,
+								origin: _this.configuration.origin,
+								cache: _this.configuration.cache,
+								fetchApi: _this.configuration.fetchApi,
+							},
 							(null == requesterConfigurations ? void 0 : requesterConfigurations.suggest) || {}
 						),
 						legacyConfiguration = new ApiConfiguration(legacyConfig),
@@ -35605,6 +35676,8 @@
 											var key,
 												batch,
 												deferred,
+												timeoutClear,
+												timeoutSet,
 												_this3 = this;
 											return Recommend_regeneratorRuntime().wrap(
 												function _callee3$(_context3) {
@@ -35617,8 +35690,10 @@
 																		this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] }),
 																	(deferred = new Deferred()),
 																	batch.entries.push({ request: parameters, deferred }),
-																	window.clearTimeout(batch.timeout),
-																	(batch.timeout = window.setTimeout(
+																	(timeoutClear = 'undefined' != typeof window ? window.clearTimeout : clearTimeout),
+																	(timeoutSet = 'undefined' != typeof window ? window.setTimeout : setTimeout),
+																	timeoutClear && timeoutClear(batch.timeout),
+																	(batch.timeout = timeoutSet(
 																		Recommend_asyncToGenerator(
 																			Recommend_regeneratorRuntime().mark(function _callee2() {
 																				var _batch$entries, response, filters, _batch$entries2;
@@ -35720,7 +35795,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 7:
+															case 9:
 															case 'end':
 																return _context3.stop();
 														}
@@ -36335,6 +36410,7 @@
 							(this.requesters = {
 								autocomplete: new HybridAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin:
 											null === (_this$config$autocomp = this.config.autocomplete) || void 0 === _this$config$autocomp
@@ -36359,6 +36435,7 @@
 								),
 								meta: new HybridAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin: null === (_this$config$meta = this.config.meta) || void 0 === _this$config$meta ? void 0 : _this$config$meta.origin,
 										headers: null === (_this$config$meta2 = this.config.meta) || void 0 === _this$config$meta2 ? void 0 : _this$config$meta2.headers,
@@ -36368,6 +36445,7 @@
 								),
 								recommend: new RecommendAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin:
 											null === (_this$config$recommen = this.config.recommend) || void 0 === _this$config$recommen
@@ -36389,6 +36467,7 @@
 								),
 								search: new HybridAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin:
 											null === (_this$config$search = this.config.search) || void 0 === _this$config$search ? void 0 : _this$config$search.origin,
@@ -36402,6 +36481,7 @@
 								),
 								finder: new HybridAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin:
 											null === (_this$config$finder = this.config.finder) || void 0 === _this$config$finder ? void 0 : _this$config$finder.origin,
@@ -36415,6 +36495,7 @@
 								),
 								suggest: new SuggestAPI(
 									new ApiConfiguration({
+										fetchApi: this.config.fetchApi,
 										mode: this.mode,
 										origin:
 											null === (_this$config$suggest = this.config.suggest) || void 0 === _this$config$suggest ? void 0 : _this$config$suggest.origin,
@@ -36650,7 +36731,10 @@
 																	(_yield$Promise$all2 = Client_slicedToArray(_yield$Promise$all, 2)),
 																	(profile = _yield$Promise$all2[0]),
 																	(recommendations = _yield$Promise$all2[1]),
-																	_context6.abrupt('return', Object.assign({}, profile, { results: recommendations[0].results }))
+																	_context6.abrupt(
+																		'return',
+																		Object.assign({}, profile, { results: recommendations[0] && recommendations[0].results })
+																	)
 																);
 															case 13:
 															case 'end':
@@ -37818,14 +37902,14 @@
 								null != paginationData &&
 								paginationData.totalResults &&
 								(results = (function addBannersToResults(config, results, banners, paginationData) {
-									var _config$settings2,
+									var _config$settings3,
 										productCount = results.length,
 										minIndex = paginationData.pageSize * (paginationData.page - 1),
 										maxIndex = minIndex + paginationData.pageSize;
 									null != config &&
-										null !== (_config$settings2 = config.settings) &&
-										void 0 !== _config$settings2 &&
-										_config$settings2.infinite &&
+										null !== (_config$settings3 = config.settings) &&
+										void 0 !== _config$settings3 &&
+										_config$settings3.infinite &&
 										(minIndex = 0);
 									return (
 										banners
@@ -37903,8 +37987,13 @@
 								: _config$settings$vari.field;
 						if (config && variantsField && this.attributes && this.attributes[variantsField])
 							try {
-								var parsedVariants = JSON.parse(this.attributes[variantsField]);
-								this.variants = new Variants(parsedVariants, this.mask);
+								var _config$settings2,
+									parsedVariants = JSON.parse(this.attributes[variantsField]);
+								this.variants = new Variants(
+									parsedVariants,
+									this.mask,
+									null === (_config$settings2 = config.settings) || void 0 === _config$settings2 ? void 0 : _config$settings2.variants
+								);
 							} catch (err) {
 								console.error(err, 'Invalid variant JSON for product id: ' + result.id);
 							}
@@ -37965,64 +38054,104 @@
 					);
 				})(),
 				Variants = (function () {
-					function Variants(variantData, mask) {
+					function Variants(variantData, mask, config) {
 						var _this = this;
-						SearchResultStore_classCallCheck(this, Variants), (this.data = []), (this.selections = []);
-						var options = [];
-						(this.data = variantData.map(function (variant) {
-							return (
-								Object.keys(variant.options).forEach(function (variantOption) {
-									options.includes(variantOption) || options.push(variantOption);
-								}),
-								new Variant(variant)
-							);
-						})),
-							options.map(function (option) {
-								var optionConfig = { field: option, label: option };
-								_this.selections.push(new VariantSelection(_this, optionConfig));
-							}),
+						SearchResultStore_classCallCheck(this, Variants),
+							(this.data = []),
+							(this.selections = []),
 							(this.setActive = function (variant) {
 								(_this.active = variant), mask.set({ mappings: _this.active.mappings, attributes: _this.active.attributes });
 							}),
-							this.makeSelections();
+							(this.config = config),
+							this.update(variantData, config);
 					}
 					return (
 						SearchResultStore_createClass(Variants, [
 							{
-								key: 'makeSelections',
-								value: function makeSelections(options) {
-									options ||
-										this.selections.forEach(function (selection) {
-											var firstAvailableOption = selection.values.find(function (value) {
-												return value.available;
+								key: 'update',
+								value: function update(variantData) {
+									var _this2 = this,
+										config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : this.config;
+									try {
+										var options = [];
+										(this.data = variantData.map(function (variant) {
+											return (
+												Object.keys(variant.options).forEach(function (variantOption) {
+													options.includes(variantOption) || options.push(variantOption);
+												}),
+												new Variant(variant)
+											);
+										})),
+											(this.selections = []),
+											options.map(function (option) {
+												var optionConfig = { field: option, label: option };
+												_this2.selections.push(new VariantSelection(_this2, optionConfig));
 											});
-											firstAvailableOption && selection.select(firstAvailableOption.value, !0);
-										});
+										var preselectedOptions = {};
+										null != config &&
+											config.options &&
+											Object.keys(null == config ? void 0 : config.options).forEach(function (option) {
+												config.options[option].preSelected && (preselectedOptions[option] = config.options[option].preSelected);
+											}),
+											this.makeSelections(preselectedOptions);
+									} catch (err) {
+										console.error(err, 'Invalid variant JSON for: ' + variantData);
+									}
 								},
 							},
 							{
-								key: 'update',
-								value: function update(fromSelection) {
-									var _this2 = this,
+								key: 'makeSelections',
+								value: function makeSelections(options) {
+									options
+										? this.selections.forEach(function (selection, idx) {
+												var availableOptions = selection.values.filter(function (value) {
+														return 0 == idx || value.available;
+													}),
+													preferedOptions = options[selection.field],
+													preferencedOption = availableOptions[0];
+												if (preferedOptions) {
+													var checkIfAvailable = function checkIfAvailable(preference) {
+														var availablePreferedOptions = availableOptions.find(function (value) {
+															return value.value.toLowerCase() == preference.toLowerCase();
+														});
+														availablePreferedOptions && (preferencedOption = availablePreferedOptions);
+													};
+													Array.isArray(preferedOptions)
+														? preferedOptions.forEach(function (preference) {
+																checkIfAvailable(preference);
+														  })
+														: checkIfAvailable(preferedOptions);
+												}
+												preferencedOption && selection.select(preferencedOption.value);
+										  })
+										: this.selections.forEach(function (selection) {
+												var firstAvailableOption = selection.values.find(function (value) {
+													return value.available;
+												});
+												firstAvailableOption && selection.select(firstAvailableOption.value, !0);
+										  });
+								},
+							},
+							{
+								key: 'refineSelections',
+								value: function refineSelections(fromSelection) {
+									var _this3 = this,
 										orderedSelections = SearchResultStore_toConsumableArray(this.selections);
 									orderedSelections.sort(function (a) {
 										return a.field == fromSelection.field ? 1 : -1;
 									}),
 										orderedSelections.forEach(function (selection) {
-											return selection.refineSelections(_this2);
+											return selection.refineValues(_this3);
 										});
 									var selectedSelections = this.selections.filter(function (selection) {
-										var _selection$selected;
-										return null === (_selection$selected = selection.selected) || void 0 === _selection$selected
-											? void 0
-											: _selection$selected.length;
+										return selection.selected;
 									});
 									if (selectedSelections.length) {
 										var _step,
 											availableVariants = this.data,
 											_loop = function _loop(selectedSelection) {
 												availableVariants = availableVariants.filter(function (variant) {
-													return selectedSelection.selected == variant.options[selectedSelection.field] && variant.available;
+													return selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available;
 												});
 											},
 											_iterator = SearchResultStore_createForOfIteratorHelper(selectedSelections);
@@ -38045,7 +38174,7 @@
 				})(),
 				VariantSelection = (function () {
 					function VariantSelection(variants, selectorConfig) {
-						var _this3 = this;
+						var _this4 = this;
 						SearchResultStore_classCallCheck(this, VariantSelection),
 							(this.selected = ''),
 							(this.previouslySelected = ''),
@@ -38053,25 +38182,25 @@
 							(this.field = selectorConfig.field),
 							(this.label = selectorConfig.label),
 							(this.variantsUpdate = function () {
-								return variants.update(_this3);
+								return variants.refineSelections(_this4);
 							}),
-							this.refineSelections(variants),
+							this.refineValues(variants),
 							(0, mobx_esm.Gn)(this, { selected: mobx_esm.sH, values: mobx_esm.sH });
 					}
 					return (
 						SearchResultStore_createClass(VariantSelection, [
 							{
-								key: 'refineSelections',
-								value: function refineSelections(variants) {
+								key: 'refineValues',
+								value: function refineValues(variants) {
 									var _step2,
-										_this4 = this,
+										_this5 = this,
 										selectedSelections = variants.selections.filter(function (selection) {
-											return selection.field != _this4.field && selection.selected;
+											return selection.field != _this5.field && selection.selected;
 										}),
 										availableVariants = variants.data,
 										_loop2 = function _loop2(selectedSelection) {
 											availableVariants = availableVariants.filter(function (variant) {
-												return selectedSelection.selected == variant.options[selectedSelection.field] && variant.available;
+												return selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available;
 											});
 										},
 										_iterator2 = SearchResultStore_createForOfIteratorHelper(selectedSelections);
@@ -38086,39 +38215,43 @@
 									}
 									var newValues = variants.data
 										.filter(function (variant) {
-											return variant.options[_this4.field];
+											return variant.options[_this5.field];
 										})
 										.reduce(function (values, variant) {
 											var _variant$mappings$cor;
 											values.some(function (val) {
-												return variant.options[_this4.field] == val.value;
+												return variant.options[_this5.field].value == val.value;
 											}) ||
-												values.push({
-													value: variant.options[_this4.field],
-													label: variant.options[_this4.field],
-													thumbnailImageUrl:
-														null === (_variant$mappings$cor = variant.mappings.core) || void 0 === _variant$mappings$cor
-															? void 0
-															: _variant$mappings$cor.thumbnailImageUrl,
-													available: Boolean(
-														availableVariants.some(function (availableVariant) {
-															return availableVariant.options[_this4.field] == variant.options[_this4.field];
-														})
-													),
-												});
+												values.push(
+													Object.assign(
+														{
+															label: variant.options[_this5.field].value,
+															thumbnailImageUrl:
+																null === (_variant$mappings$cor = variant.mappings.core) || void 0 === _variant$mappings$cor
+																	? void 0
+																	: _variant$mappings$cor.thumbnailImageUrl,
+															available: Boolean(
+																availableVariants.some(function (availableVariant) {
+																	return availableVariant.options[_this5.field].value == variant.options[_this5.field].value;
+																})
+															),
+														},
+														variant.options[_this5.field]
+													)
+												);
 											return values;
 										}, []);
 									if (
 										this.selected &&
 										!newValues.some(function (val) {
-											return val.value == _this4.selected && val.available;
+											return val.value == _this5.selected && val.available;
 										})
 									)
 										if (
 											this.selected !== this.previouslySelected &&
 											this.previouslySelected &&
 											newValues.some(function (val) {
-												return val.value == _this4.previouslySelected && val.available;
+												return val.value == _this5.previouslySelected && val.available;
 											})
 										)
 											this.select(this.previouslySelected, !0);
@@ -38160,7 +38293,6 @@
 					SearchResultStore_classCallCheck(this, Variant),
 						(this.type = 'variant'),
 						(this.attributes = {}),
-						(this.options = {}),
 						(this.mappings = { core: {} }),
 						(this.custom = {}),
 						(this.attributes = variantData.attributes),
@@ -42828,7 +42960,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.53.4', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.54.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43335,7 +43467,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.53.4')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.54.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
