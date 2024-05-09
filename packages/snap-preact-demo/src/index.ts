@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
+import { StorageStore } from '@searchspring/snap-store-mobx';
 import { url } from '@searchspring/snap-toolbox';
 // import { afterSearch } from './middleware/plugins/afterSearch';
 import { afterStore } from './middleware/plugins/afterStore';
@@ -10,29 +11,75 @@ import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
 
+// storage for custom configuration
+const configStore = new StorageStore({ type: 'local', key: 'ss-demo-config' });
+
 /*
 	configuration and instantiation
  */
 
 let siteId = '8uyt2m';
+let customOrigin = '';
+let clientConfig = {};
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
 const urlSiteIdParam = urlObj.params.query.siteId || urlObj.params.query.siteid;
-const storedSiteIdName = 'ss_siteId';
+const urlOriginParam = urlObj.params.query.origin || urlObj.params.query.origin;
 
+// custom siteId
 if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {
 	siteId = urlSiteIdParam;
-	window.localStorage.setItem(storedSiteIdName, siteId);
+	configStore.set('siteId', siteId);
 
-	// clear previously stored siteId storage
+	// clear previously stored storage
 	window.localStorage.removeItem('ss-history');
 	window.sessionStorage.removeItem('ss-controller-search');
 	window.sessionStorage.removeItem('ss-controller-autocomplete');
 } else {
 	// use siteId from storage
-	const storedSiteId = window.localStorage.getItem(storedSiteIdName);
+	const storedSiteId = configStore.get('siteId');
 	if (storedSiteId) siteId = storedSiteId;
+}
+
+if (urlOriginParam) {
+	customOrigin = urlOriginParam;
+	configStore.set('origin', urlOriginParam);
+} else {
+	const storedOrigin = configStore.get('origin');
+	if (storedOrigin) customOrigin = storedOrigin;
+}
+
+// if there is a custom origin set clientConfig
+
+if (customOrigin) {
+	clientConfig = {
+		meta: {
+			origin: customOrigin,
+		},
+		search: {
+			origin: customOrigin,
+		},
+		autocomplete: {
+			requesters: {
+				suggest: {
+					origin: customOrigin,
+				},
+				legacy: {
+					origin: customOrigin,
+				},
+			},
+		},
+		finder: {
+			origin: customOrigin,
+		},
+		// recommend: {
+		// 	origin: recommendOrigin,
+		// },
+		suggest: {
+			origin: customOrigin,
+		},
+	};
 }
 
 let config: SnapConfig = {
@@ -53,6 +100,7 @@ let config: SnapConfig = {
 		globals: {
 			siteId,
 		},
+		config: clientConfig,
 	},
 	instantiators: {
 		recommendation: {
