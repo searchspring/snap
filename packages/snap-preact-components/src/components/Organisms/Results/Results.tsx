@@ -23,7 +23,7 @@ const CSS = {
 			flexFlow: 'row wrap',
 			gap: gapSize,
 			gridTemplateRows: 'auto',
-			gridTemplateColumns: columns && `repeat(${columns}, ${100 / columns}%)`,
+			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 
 			'& .ss__result': {
 				boxSizing: 'border-box',

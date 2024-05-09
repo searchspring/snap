@@ -82,6 +82,16 @@ export default {
 			},
 			control: { type: 'object' },
 		},
+		renderEmpty: {
+			description: 'Render wrapper element even when there are no badges',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

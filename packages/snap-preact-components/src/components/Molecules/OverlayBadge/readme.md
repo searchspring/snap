@@ -74,3 +74,20 @@ The `componentMap` also supports async functions for dynamic importing of badges
 </OverlayBadge>
 ```
 
+### renderEmpty
+By default if there are no badges, the wrapper element will not render. If you need the wrapper element to persist, this prop will cause the wrapper element `ss__overlay-badge` to render.
+
+```jsx
+<OverlayBadge
+    renderEmpty
+    controller={controller} 
+    result={controller.store.results[0]}
+    componentMap={{
+        'customOnSaleBadge': () => CustomOnSale
+    }}
+>
+    <div>
+        <img src='/images/example.png'/>
+    </div>
+</OverlayBadge>
+```

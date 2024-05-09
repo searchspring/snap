@@ -26,15 +26,23 @@ const controller = createSearchController({ client: clientConfig, controller: se
 
 describe('OverlayBadge Component', () => {
 	let result: Product;
+	let resultNoBadges: Product;
 	beforeAll(async () => {
 		expect(controller).toBeDefined();
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
+
 		result = (controller.store.results as Product[]).find((result) => {
 			return result.badges.atLocation(['left', 'right']).length > 0;
 		})! as Product;
+
+		resultNoBadges = (controller.store.results as Product[]).find((result) => {
+			return result.badges.atLocation(['left', 'right']).length == 0;
+		})! as Product;
+
 		expect(result).toBeDefined();
+		expect(resultNoBadges).toBeDefined();
 	});
 
 	it('renders OverlayBadge', () => {
@@ -55,6 +63,32 @@ describe('OverlayBadge Component', () => {
 		)!;
 
 		expect(OverlayBadgeComponentEl).toBeInTheDocument();
+
+		const ChildrenEl = rendered.container.querySelector(`.children`)!;
+		expect(ChildrenEl).toBeInTheDocument();
+	});
+
+	it('will NOT render the wrapper element if there are no badges', () => {
+		const rendered = render(
+			<OverlayBadge controller={controller} result={resultNoBadges}>
+				{CHILDREN}
+			</OverlayBadge>
+		);
+		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
+		expect(OverlayBadgeEl).not.toBeInTheDocument();
+
+		const ChildrenEl = rendered.container.querySelector(`.children`)!;
+		expect(ChildrenEl).toBeInTheDocument();
+	});
+
+	it('will render the wrapper element if there are no badges when using the `renderEmpty` prop', () => {
+		const rendered = render(
+			<OverlayBadge controller={controller} result={resultNoBadges} renderEmpty>
+				{CHILDREN}
+			</OverlayBadge>
+		);
+		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
+		expect(OverlayBadgeEl).toBeInTheDocument();
 
 		const ChildrenEl = rendered.container.querySelector(`.children`)!;
 		expect(ChildrenEl).toBeInTheDocument();

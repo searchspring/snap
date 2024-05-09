@@ -30,10 +30,10 @@ const CSS = {
 			'& .ss__overlay-badge__grid-wrapper': {
 				display: 'grid',
 				position: 'absolute',
-				top: '0',
-				left: '0',
-				width: '100%',
-				height: '100%',
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0,
 				...gridProperties,
 			},
 		});
@@ -49,7 +49,8 @@ const CSS = {
 			[['left', 'right'].includes(section) ? section : '']: 0,
 			boxSizing: 'border-box',
 			zIndex: Math.max(100 - index, 1),
-			maxWidth: '100%',
+			width: '100%',
+			height: '100%',
 		});
 	},
 };
@@ -65,7 +66,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		...properties,
 		...properties.theme?.components?.overlayBadge,
 	};
-	const { result, children, controller, disableStyles, className, style } = props;
+	const { result, children, controller, renderEmpty, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -77,16 +78,29 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 	const limit = 1;
 	const meta = controller?.store?.meta;
 	const group = 'overlay';
-	const grid = meta?.badges?.groups?.overlay?.grid;
+	const grid = meta?.badges?.groups?.[group]?.grid;
 	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
 
 	const sections = meta?.badges?.groups?.[group]?.sections;
-	const locations = sections?.map((section) => {
-		return {
-			section,
-			slots: meta?.data?.badges?.locations[section as keyof typeof meta.data.badges.locations],
-		};
-	});
+
+	// build locations and filter out the locations that have no badges in them to prevent rendering
+	const locations = sections
+		?.map((section) => {
+			const sectionSlots = meta?.data?.badges?.locations[section as keyof typeof meta.data.badges.locations];
+			const slots = sectionSlots
+				?.map((slot) => ({
+					tag: slot.tag,
+					name: slot.name,
+					badges: result?.badges?.atLocation(`${section}/${slot.tag}`).slice(0, limit),
+				}))
+				.filter((slot) => slot.badges.length);
+
+			return {
+				section,
+				slots,
+			};
+		})
+		.filter((location) => location.slots?.length);
 
 	if (!disableStyles) {
 		styling.css = [CSS.OverlayBadge({ ...props, grid }), style];
@@ -94,21 +108,19 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	if (locations?.length) {
+	if (renderEmpty || locations?.length) {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__overlay-badge', className)}>
 					<div className="ss__overlay-badge__grid-wrapper">
 						{locations.map((location, index) => {
 							return location.slots?.map((slot) => {
-								const gridBadges = result?.badges?.atLocation(`${location.section}/${slot.tag}`).slice(0, limit);
-
 								return (
 									<div
 										className={classnames('ss__overlay-badge__grid-wrapper__slot', `ss__overlay-badge__grid-wrapper__slot--${slot.tag}`)}
 										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index })]}
 									>
-										{gridBadges.map((badge) => {
+										{slot.badges.map((badge) => {
 											const BadgeComponent = useComponent(badgeComponentMap, badge.component);
 											if (!BadgeComponent) {
 												return <Fragment />;
@@ -134,5 +146,6 @@ export interface OverlayBadgeProps extends ComponentProps {
 	result: Product;
 	controller: SearchController | AutocompleteController | RecommendationController;
 	children: ComponentChildren;
+	renderEmpty?: boolean;
 	componentMap?: ComponentMap;
 }

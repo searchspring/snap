@@ -157,36 +157,31 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const ImageWrapper = () => {
-		return (
-			<div className="ss__result__image-wrapper">
-				<a
-					href={core!.url}
-					onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-						onClick && onClick(e);
-						controller?.track?.product?.click(e as any, result);
-					}}
-				>
-					{!hideImage && <Image {...subProps.image} />}
-				</a>
-			</div>
-		);
-	};
-
 	return core ? (
 		<CacheProvider>
 			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-				{!hideBadge ? (
-					<OverlayBadge
-						{...subProps.overlayBadge}
-						result={result}
-						controller={controller as SearchController | AutocompleteController | RecommendationController}
+				<div className="ss__result__image-wrapper">
+					<a
+						href={core!.url}
+						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+							onClick && onClick(e);
+							controller?.track?.product?.click(e as any, result);
+						}}
 					>
-						<ImageWrapper />
-					</OverlayBadge>
-				) : (
-					<ImageWrapper />
-				)}
+						{!hideImage &&
+							(!hideBadge ? (
+								<OverlayBadge
+									{...subProps.overlayBadge}
+									result={result}
+									controller={controller as SearchController | AutocompleteController | RecommendationController}
+								>
+									<Image {...subProps.image} />
+								</OverlayBadge>
+							) : (
+								<Image {...subProps.image} />
+							))}
+					</a>
+				</div>
 
 				<div className="ss__result__details">
 					{!hideBadge && (

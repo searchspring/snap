@@ -47,3 +47,16 @@ The `componentMap` also supports async functions for dynamic importing of badges
 />
 ```
 
+### renderEmpty
+By default if there are no badges, the wrapper element will not render. If you need the wrapper element to persist, this prop will cause the wrapper element `ss__callout-badge` to render.
+
+```jsx
+<CalloutBadge
+    renderEmpty
+    name={'callout'} 
+    result={controller.store.results[0]} 
+    componentMap={{
+        'customOnSaleBadge': () => CustomOnSale
+    }}
+/>
+```

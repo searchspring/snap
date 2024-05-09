@@ -32,7 +32,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		...properties,
 		...properties.theme?.components?.calloutBadge,
 	};
-	const { result, tag, disableStyles, className, style } = props;
+	const { result, tag, renderEmpty, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -46,7 +46,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 	const limit = 1;
 	const badges = result?.badges?.atLocation(tag).slice(0, limit);
 
-	if (badges?.length) {
+	if (renderEmpty || badges?.length) {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__callout-badge', `ss__callout-badge--${tag?.replace('/', '-')}`, className)}>
@@ -67,5 +67,6 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 export interface CalloutBadgeProps extends ComponentProps {
 	result: Product;
 	tag?: string;
+	renderEmpty?: boolean;
 	componentMap?: ComponentMap;
 }

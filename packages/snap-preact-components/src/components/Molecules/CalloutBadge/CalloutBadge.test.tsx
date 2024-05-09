@@ -36,13 +36,30 @@ describe('CalloutBadge Component', () => {
 	});
 
 	it('renders CalloutBadge', () => {
-		const badge = result.badges.atLocation('callout').pop();
-		const rendered = render(<CalloutBadge result={result} name={CALLOUT_NAME} />);
+		const rendered = render(<CalloutBadge result={result} tag={CALLOUT_NAME} />);
 		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
 		expect(CalloutBadgeEl).toBeInTheDocument();
 
 		const CalloutBadgeComponentEl = rendered.container.querySelector(`.ss__callout-badge > div`)!;
 		expect(CalloutBadgeComponentEl).toBeInTheDocument();
+	});
+
+	it('will NOT render the wrapper element if there are no badges', () => {
+		const rendered = render(<CalloutBadge result={result} tag="NO BADGES!" />);
+		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
+		expect(CalloutBadgeEl).not.toBeInTheDocument();
+
+		const CalloutBadgeComponentEl = rendered.container.querySelector(`.ss__callout-badge > div`)!;
+		expect(CalloutBadgeComponentEl).not.toBeInTheDocument();
+	});
+
+	it('will render the wrapper element if there are no badges when using the `renderEmpty` prop', () => {
+		const rendered = render(<CalloutBadge result={result} tag="NO BADGES!" renderEmpty />);
+		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
+		expect(CalloutBadgeEl).toBeInTheDocument();
+
+		const CalloutBadgeComponentEl = rendered.container.querySelector(`.ss__callout-badge > div`)!;
+		expect(CalloutBadgeComponentEl).not.toBeInTheDocument();
 	});
 
 	it('can use componentMap to render a custom component', () => {

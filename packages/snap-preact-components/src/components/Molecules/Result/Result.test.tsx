@@ -69,9 +69,13 @@ describe('Result Component', () => {
 		};
 		const rendered = render(<Result {...args} />);
 		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__badge');
+		const overlayBadgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__overlay-badge');
+		const calloutBadgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__callout-badge');
 		const titleElement = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__wrapper__details__title');
 		const priceElement = rendered.container.querySelector('.ss__result .ss__result__details__pricing .ss__price');
 		expect(badgeElement).not.toBeInTheDocument();
+		expect(overlayBadgeElement).not.toBeInTheDocument();
+		expect(calloutBadgeElement).not.toBeInTheDocument();
 		expect(titleElement).not.toBeInTheDocument();
 		expect(priceElement).not.toBeInTheDocument();
 	});
