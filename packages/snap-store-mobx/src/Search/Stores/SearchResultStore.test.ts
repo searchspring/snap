@@ -243,7 +243,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[2].attributes.ss_variants;
@@ -292,7 +299,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			results.forEach((result, index) => {
@@ -339,7 +353,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants;
@@ -399,7 +420,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants;
