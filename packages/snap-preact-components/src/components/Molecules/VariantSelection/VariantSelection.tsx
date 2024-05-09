@@ -96,12 +96,13 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		...properties.theme?.components?.variantSelection,
 	};
 
-	const { type, selection, hideTitle, disableStyles, className, style } = props;
+	const { type, selection, disableStyles, className, style } = props;
 
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
+			name: `ss__variant-selection__dropdown-${selection.field}`,
 			className: 'ss__variant-selection__dropdown',
-			label: !hideTitle ? selection.field : undefined,
+			label: selection.field,
 			// global theme
 			...globalTheme?.components?.dropdown,
 			// inherited props
@@ -112,7 +113,8 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			theme: props?.theme,
 		},
 		list: {
-			titleText: !hideTitle ? selection.field : undefined,
+			name: `ss__variant-selection__list-${selection.field}`,
+			titleText: selection.field,
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
@@ -130,10 +132,10 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			theme: props?.theme,
 		},
 		swatches: {
+			name: `ss__variant-selection__swatches-${selection.field}`,
 			className: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value as string),
 			selected: selection.selected,
-
 			// global theme
 			...globalTheme?.components?.swatches,
 			// inherited props
@@ -153,7 +155,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 	}
 
 	const convertedValues: ListOption[] = selection.values.map(
-		(val) =>
+		(val: any) =>
 			(val = {
 				//@ts-ignore - disabled isnt available on SelectionValue
 				disabled: !val.available,
@@ -163,7 +165,10 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	return selection.values.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__variant-selection', className)}>
+			<div
+				{...styling}
+				className={classnames('ss__variant-selection', `ss__variant-selection--${type}`, `ss__variant-selection--${selection.field}`, className)}
+			>
 				{(() => {
 					switch (type) {
 						case 'dropdown':
@@ -182,7 +187,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 										return (
 											<Dropdown button={<Button />} {...subProps.dropdown}>
 												<div>
-													{selection.values.map((val) => {
+													{selection.values.map((val: any) => {
 														const selected = selection.selected?.value == val.value;
 														return (
 															<div
@@ -208,14 +213,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 								<Fragment>
 									{(() => {
 										return <List {...subProps.list} options={convertedValues} />;
-									})()}
-								</Fragment>
-							);
-						case 'grid':
-							return (
-								<Fragment>
-									{(() => {
-										return <Swatches {...subProps.swatches} carouselEnabled={false} options={convertedValues} />;
 									})()}
 								</Fragment>
 							);
@@ -245,5 +242,4 @@ interface VariantSelectionSubProps {
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
 	type?: 'dropdown' | 'swatches' | 'list' | 'grid';
-	hideTitle?: boolean;
 }

@@ -56,13 +56,13 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		showLabel: {
+		hideLabels: {
 			description: 'enable/disable option labels',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -77,15 +77,18 @@ export default {
 			},
 			control: { type: 'object' },
 		},
-		carouselEnabled: {
-			description: 'enable/disable carousel',
+		type: {
+			description: 'swatches type to render',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'swatches type',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: 'carousel' },
 			},
-			control: { type: 'boolean' },
+			control: {
+				type: 'select',
+				options: ['carousel', 'grid'],
+			},
 		},
 		...componentArgs,
 	},
@@ -139,8 +142,8 @@ Grid.args = {
 		{ value: 'Black', label: 'Black', disabled: false },
 		{ value: 'White', label: 'White', disabled: false },
 	],
-	carouselEnabled: false,
-};
+	type: 'grid',
+} as SwatchesProps;
 
 Disabled.args = {
 	options: [
@@ -153,7 +156,8 @@ Disabled.args = {
 		{ value: 'Black', label: 'Black', disabled: false },
 		{ value: 'White', label: 'White', disabled: true },
 	],
-};
+	type: 'carousel',
+} as SwatchesProps;
 
 GradientBackground.args = {
 	options: [

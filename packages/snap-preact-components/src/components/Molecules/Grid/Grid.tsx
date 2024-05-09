@@ -9,14 +9,14 @@ import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../t
 import { useState } from 'react';
 import { useA11y } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
-import { defined } from '../../../utilities';
+import { cloneWithProps, defined } from '../../../utilities';
 
 const CSS = {
-	Grid: ({ theme, columns, gapSize, disableShowMoreClick }: Partial<GridProps>) =>
+	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
 		css({
 			'.ss__grid__show-more-wrapper': {
 				span: {
-					cursor: disableShowMoreClick ? 'initial' : 'pointer',
+					cursor: disableOverflowAction ? 'initial' : 'pointer',
 				},
 			},
 
@@ -108,11 +108,9 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	const props: GridProps = {
 		// default props
-		showLabel: true,
 		multiSelect: false,
 		columns: 4,
 		gapSize: '8px',
-		showLessText: 'Show Less',
 		// global theme
 		...globalTheme?.components?.grid,
 		// props
@@ -123,16 +121,18 @@ export function Grid(properties: GridProps): JSX.Element {
 	const {
 		titleText,
 		onSelect,
-		showLabel,
-		showLessText,
-		disableShowMoreClick,
+		hideLabels,
+		disableOverflowAction,
 		multiSelect,
+		overflowButton,
 		columns,
 		rows,
 		gapSize,
+		overflowButtonInGrid,
 		disabled,
 		options,
 		disableStyles,
+		onOverflowButtonClick,
 		className,
 		style,
 	} = props;
@@ -156,7 +156,7 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.Grid({ theme, columns, gapSize, disableShowMoreClick }), style];
+		styling.css = [CSS.Grid({ theme, columns, gapSize, disableOverflowAction }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -199,14 +199,25 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	const [limited, setLimited] = useState<number | boolean>(remainder);
 
-	let showMoreText = props.showMoreText;
-	if (showMoreText) {
-		if (typeof showMoreText == 'function') {
-			showMoreText = showMoreText(remainder);
-		}
-	} else {
-		showMoreText = `+ ${remainder} more`;
-	}
+	const OverflowButtonElem = () => (
+		<div
+			className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
+			onClick={() => {
+				!disableOverflowAction && setLimited(!limited);
+				onOverflowButtonClick && onOverflowButtonClick(Boolean(limited), remainder);
+			}}
+		>
+			{overflowButton ? (
+				cloneWithProps(overflowButton, { limited, remainder })
+			) : limited ? (
+				<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
+			) : remainder ? (
+				<span className={'ss__grid__show-less'}>Show Less</span>
+			) : (
+				<></>
+			)}
+		</div>
+	);
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
@@ -217,7 +228,7 @@ export function Grid(properties: GridProps): JSX.Element {
 					{options.map((option, idx) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 
-						if (!limited || idx < limit) {
+						if (!limited || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
 									className={`ss__grid__option ${selected ? 'ss__grid__option--selected' : ''} ${
@@ -235,26 +246,15 @@ export function Grid(properties: GridProps): JSX.Element {
 									) : (
 										<></>
 									)}
-									{showLabel ? <label className="ss__grid__option__label">{option.label || option.value}</label> : <></>}
+									{!hideLabels ? <label className="ss__grid__option__label">{option.label || option.value}</label> : <></>}
 								</div>
 							);
 						}
 					})}
+					{overflowButtonInGrid ? <OverflowButtonElem /> : <></>}
 				</div>
 
-				<div className={'ss__grid__show-more-wrapper'}>
-					{limited ? (
-						<span className={'ss__grid__show-more'} onClick={() => !disableShowMoreClick && setLimited(false)}>
-							{showMoreText}
-						</span>
-					) : remainder ? (
-						<span className={'ss__grid__show-less'} onClick={() => !disableShowMoreClick && setLimited(true)}>
-							{showLessText}
-						</span>
-					) : (
-						<></>
-					)}
-				</div>
+				{!overflowButtonInGrid ? <OverflowButtonElem /> : <></>}
 			</div>
 		</CacheProvider>
 	) : (
@@ -264,7 +264,7 @@ export function Grid(properties: GridProps): JSX.Element {
 
 export interface GridProps extends ComponentProps {
 	options: SwatchOption[];
-	showLabel?: boolean;
+	hideLabels?: boolean;
 	multiSelect?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, selected: ListOption[]) => void;
 	titleText?: string;
@@ -272,9 +272,10 @@ export interface GridProps extends ComponentProps {
 	columns?: number;
 	rows?: number;
 	gapSize?: string;
-	showMoreText?: string | ((remainder: number) => string);
-	showLessText?: string;
-	disableShowMoreClick?: boolean;
+	disableOverflowAction?: boolean;
+	overflowButton?: JSX.Element;
+	overflowButtonInGrid?: boolean;
+	onOverflowButtonClick?: (status: boolean, remainder: number) => void;
 }
 
 interface GridSubProps {

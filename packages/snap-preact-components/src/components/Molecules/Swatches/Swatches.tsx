@@ -7,11 +7,12 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, SwatchOption, BreakpointsProps } from '../../../types';
 import { useState } from 'react';
-import { useA11y } from '../../../hooks';
+import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
 import { defined } from '../../../utilities';
 import { Grid, GridProps } from '../Grid';
 import { ImageProps, Image } from '../../Atoms/Image';
+import deepmerge from 'deepmerge';
 const CSS = {
 	Swatches: ({}: Partial<SwatchesProps>) =>
 		css({
@@ -57,9 +58,34 @@ const CSS = {
 export function Swatches(properties: SwatchesProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 
-	const props: SwatchesProps = {
+	const defaultCarouselBreakpoints = {
+		0: {
+			carousel: {
+				slidesPerView: 3,
+				slidesPerGroup: 3,
+				spaceBetween: 10,
+			},
+		},
+		768: {
+			carousel: {
+				slidesPerView: 4,
+				slidesPerGroup: 4,
+				spaceBetween: 10,
+			},
+		},
+		1200: {
+			carousel: {
+				slidesPerView: 5,
+				slidesPerGroup: 5,
+				spaceBetween: 10,
+			},
+		},
+	};
+
+	let props: SwatchesProps = {
 		// default props
-		carouselEnabled: true,
+		type: 'carousel',
+		hideLabels: true,
 		// global theme
 		...globalTheme?.components?.swatches,
 		// props
@@ -67,13 +93,26 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		...properties.theme?.components?.swatches,
 	};
 
-	const { onSelect, disabled, options, showLabel, disableStyles, className, breakpoints, style, carouselEnabled, ...additionalProps } = props;
+	const breakpoints = props.breakpoints || (props.type == 'carousel' ? defaultCarouselBreakpoints : {});
+
+	const displaySettings = useDisplaySettings(breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
+
+	const { onSelect, disabled, options, hideLabels, disableStyles, className, style, type, carousel, grid } = props;
 
 	const subProps: SwatchesSubProps = {
 		carousel: {
 			// default props
 			className: 'ss__swatches__carousel',
 			loop: false,
+			...carousel,
 			// global theme
 			...globalTheme?.components?.carousel,
 			// inherited props
@@ -87,7 +126,12 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		grid: {
 			// default props
 			className: 'ss__swatches__grid',
-			showLabel: showLabel,
+			hideLabels: hideLabels,
+			overflowButtonInGrid: true,
+			disableOverflowAction: true,
+			rows: 1,
+			columns: 6,
+			...grid,
 			// global theme
 			...globalTheme?.components?.grid,
 			// inherited props
@@ -133,8 +177,8 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__swatches', className)}>
-				{carouselEnabled ? (
-					<Carousel {...subProps.carousel} {...additionalProps}>
+				{type == 'carousel' ? (
+					<Carousel {...subProps.carousel}>
 						{options.map((option) => {
 							const label = option.label;
 							const selected = selection?.value == option.value;
@@ -156,7 +200,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 									) : (
 										<></>
 									)}
-									{showLabel && <span className="ss__swatches__carousel__swatch__value">{label}</span>}
+									{!hideLabels && <span className="ss__swatches__carousel__swatch__value">{label}</span>}
 								</div>
 							);
 						})}
@@ -178,14 +222,23 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 	);
 }
 
-export interface SwatchesProps extends ComponentProps {
+export type SwatchesProps = {
 	options: SwatchOption[];
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: SwatchOption) => void;
 	selected?: SwatchOption;
-	showLabel?: boolean;
+	hideLabels?: boolean;
 	breakpoints?: BreakpointsProps;
-	carouselEnabled?: boolean;
-}
+} & (
+	| {
+			type?: 'carousel';
+			carousel?: Partial<CarouselProps>;
+	  }
+	| {
+			type?: 'grid';
+			grid?: Partial<GridProps>;
+	  }
+) &
+	ComponentProps;
 
 interface SwatchesSubProps {
 	carousel: Partial<CarouselProps>;

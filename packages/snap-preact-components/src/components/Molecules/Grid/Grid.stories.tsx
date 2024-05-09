@@ -53,7 +53,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -75,6 +75,16 @@ export default {
 				},
 			},
 			control: { type: 'none' },
+		},
+		hideLabels: {
+			description: 'enable/disable option labels from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		columns: {
 			defaultValue: 4,
@@ -107,29 +117,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		showLessText: {
-			defaultValue: 'Show Less',
-			description: 'show less text',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'Show Less' },
-			},
-			control: { type: 'text' },
-		},
-		showMoreText: {
-			defaultValue: 'Show more',
-			description: 'show more text',
-			table: {
-				type: {
-					summary: 'string | (remainder) => string',
-				},
-				defaultValue: { summary: 'Show more' },
-			},
-			control: { type: 'text' },
-		},
-		disableShowMoreClick: {
+		disableOverflowAction: {
 			description: 'enable/disable show more click functionality',
 			table: {
 				type: {
@@ -138,6 +126,33 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
+		},
+		overflowButtonInGrid: {
+			description: 'render overflow button in the grid or below',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		overflowButton: {
+			description: 'Slot for custom overflow button component.',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		onOverflowButtonClick: {
+			description: 'Custom onClick event handler for overflow button',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onOverflowButtonClick',
 		},
 		...componentArgs,
 	},
