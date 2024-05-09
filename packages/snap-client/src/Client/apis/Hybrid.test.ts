@@ -26,10 +26,11 @@ describe('Hybrid Api', () => {
 	});
 
 	it('can call getMeta', async () => {
-		const api = new HybridAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+		const api = new HybridAPI(new ApiConfiguration({}));
 
 		const params = { body: undefined, headers: {}, method: 'GET' };
 		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/meta/meta.json?siteId=8uyt2m';

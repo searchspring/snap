@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Features
+
+- **variants:** adding preselected variants to config. & adding eventManager to Snap Preact ([acac381](https://github.com/searchspring/snap/commit/acac3812771b6e66f89472e65357eeff4a3cb8c1))
+
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+### Bug Fixes
+
+- **preact-components-carousel:** bugfix for backwards compatible classnames on carousel re-renders ([0fbbf29](https://github.com/searchspring/snap/commit/0fbbf29134dfedb35bf1327b47673a7e91e9fd36))
+
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+### Bug Fixes
+
+- **preact-components-carousel:** changing the default value for autoAdjustSlides to false ([1abe427](https://github.com/searchspring/snap/commit/1abe42754debfacb584a3c4b3650f4de24473faa))
+
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+### Bug Fixes
+
+- **preact-components-swiper:** downgrade swiper version to 11.0.7 ([4777277](https://github.com/searchspring/snap/commit/47772770f25a80c0bc5ff4bcd7769ba9ebd44c61))
+
 ## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
 
 ### Bug Fixes
