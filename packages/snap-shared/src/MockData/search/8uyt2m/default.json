@@ -21,13 +21,7 @@
           "name": "Play For Keeps Burgundy Velvet Bralette",
           "sku": "C-LTO-R6-L5316",
           "brand": "Leto"
-        },
-        "badges": [
-          {
-            "tag": "on-sale",
-            "value": "30% Off"
-          }
-        ]
+        }
       },
       "attributes": {
         "intellisuggestData": "eJwrTs4tNM9jYGBw1vUJ8dcNMtP1MTU2NGMwBEJjAwYTEzMDhvSizBQAwGUI7w",
@@ -89,7 +83,13 @@
         "popularity": "4461",
         "product_type_unigram": "play",
         "id": "c1cf679d32fb4d03bfbb0bd06c347fcd"
-      }
+      },
+      "badges": [
+        {
+          "tag": "on-sale",
+          "value": "30% Off"
+        }
+      ]
     },
     {
       "id": "171591",
@@ -104,16 +104,7 @@
           "name": "Freezing Point Cream Turtleneck Sweater",
           "sku": "C-MAK-T1-K8028",
           "brand": "Mak"
-        },
-        "badges": [
-          {
-            "tag": "on-sale",
-            "value": "30% Off"
-          },
-          {
-            "tag": "christmas"
-          }
-        ]
+        }
       },
       "attributes": {
         "intellisuggestData": "eJwrTs4tNM9jYGBw1vV19NYNMdT1tjAwsmAwZDBiMDZgMDExM2BIL8pMAQC97gjZ",
@@ -179,7 +170,16 @@
         "popularity": "4445",
         "product_type_unigram": "sweater",
         "id": "b9868ea9a34107ef51e061f73a2a1162"
-      }
+      },
+      "badges": [
+        {
+          "tag": "on-sale",
+          "value": "30% Off"
+        },
+        {
+          "tag": "christmas"
+        }
+      ]
     },
     {
       "id": "166753",
@@ -194,13 +194,7 @@
           "name": "New Direction Black Knee High Boots",
           "sku": "F-QPD-G7-BIN36",
           "brand": "Qupid"
-        },
-        "badges": [
-          {
-            "tag": "free-shipping",
-            "value": "Free Shipping"
-          }
-        ]
+        }
       },
       "attributes": {
         "intellisuggestData": "eJwrTs4tNM9jYGBw0w0McNF1N9d18vQzNmMwZDBmMDZgMDExM2BIL8pMAQDB5QkH",
@@ -277,7 +271,13 @@
         "popularity": "4432",
         "product_type_unigram": "boots",
         "id": "3719511a03faf9347152de3d0b6a6036"
-      }
+      },
+      "badges": [
+        {
+          "tag": "free-shipping",
+          "value": "Free Shipping"
+        }
+      ]
     },
     {
       "id": "168580",

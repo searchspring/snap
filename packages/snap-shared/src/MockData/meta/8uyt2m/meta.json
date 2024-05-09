@@ -136,73 +136,60 @@
   },
   "badges": {
     "locations": {
-      "overlay": {
-        "left": [
-          {
-            "name": "left-upper",
-            "label": "Left Upper",
-            "description": "description for left upper"
-          },
-          {
-            "name": "left-middle-upper",
-            "label": "Left Middle Upper",
-            "description": "description for left middle upper"
-          },
-          {
-            "name": "left-middle",
-            "label": "Left Middle",
-            "description": "description for left middle"
-          },
-          {
-            "name": "left-middle-lower",
-            "label": "Left Middle Lower",
-            "description": "description for left middle lower"
-          },
-          {
-            "name": "left-lower",
-            "label": "Left Lower",
-            "description": "description for left lower"
-          }
-        ],
-        "right": [
-          {
-            "name": "right-upper",
-            "label": "Right Upper",
-            "description": "description for right upper"
-          },
-          {
-            "name": "right-middle-upper",
-            "label": "Right Middle Upper",
-            "description": "description for right middle upper"
-          },
-          {
-            "name": "right-middle",
-            "label": "Right Middle",
-            "description": "description for right middle"
-          },
-          {
-            "name": "right-middle-lower",
-            "label": "Right Middle Lower",
-            "description": "description for right middle lower"
-          },
-          {
-            "name": "right-lower",
-            "label": "Right Lower",
-            "description": "description for right lower"
-          }
-        ]
-      },
-      "callouts": [
+      "left": [
         {
-          "name": "callout",
-          "label": "Callout",
-          "description": "description for callout"
+          "tag": "left-upper",
+          "name": "Left Upper"
+        },
+        {
+          "tag": "left-middle-upper",
+          "name": "Left Middle Upper"
+        },
+        {
+          "tag": "left-middle",
+          "name": "Left Middle"
+        },
+        {
+          "tag": "left-middle-lower",
+          "name": "Left Middle Lower"
+        },
+        {
+          "tag": "left-lower",
+          "name": "Left Lower"
+        }
+      ],
+      "right": [
+        {
+          "tag": "right-upper",
+          "name": "Right Upper"
+        },
+        {
+          "tag": "right-middle-upper",
+          "name": "Right Middle Upper"
+        },
+        {
+          "tag": "right-middle",
+          "name": "Right Middle"
+        },
+        {
+          "tag": "right-middle-lower",
+          "name": "Right Middle Lower"
+        },
+        {
+          "tag": "right-lower",
+          "name": "Right Lower"
+        }
+      ],
+      "callout": [
+        {
+          "tag": "callout",
+          "name": "Callout"
         }
       ]
     },
     "tags": {
       "on-sale": {
-        "location": "left-middle",
+        "location": "left/left-middle",
         "component": "BadgeText",
         "priority": 2,
         "enabled": true,
@@ -212,7 +199,7 @@
         }
       },
       "free-shipping": {
-        "location": "callout",
+        "location": "callout/callout",
         "component": "BadgeText",
         "priority": 1,
         "enabled": true,
@@ -222,7 +209,7 @@
         }
       },
       "christmas": {
-        "location": "left-middle",
+        "location": "left/left-middle",
         "component": "BadgeImage",
         "priority": 1,
         "enabled": true,

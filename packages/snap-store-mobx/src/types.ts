@@ -4,7 +4,7 @@ import type {
 	AutocompleteRequestModel,
 	SearchRequestModel,
 	MetaResponseModelBadgeTag,
-	SearchResponseModelResultMappingsBadges,
+	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
@@ -148,7 +148,4 @@ export type FinderStoreState = {
 	persisted: boolean;
 };
 
-export type ResultBadge = MetaResponseModelBadgeTag &
-	SearchResponseModelResultMappingsBadges & {
-		path: string;
-	};
+export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;

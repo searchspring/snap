@@ -11,7 +11,8 @@ const CSS = {
 	BadgePill: (props: BadgePillProps) => {
 		return css({
 			display: 'inline-block',
-			padding: '0.2em 0.5em',
+			boxSizing: 'border-box',
+			padding: '0.3em 0.9em',
 			background: props.color,
 			color: props.colorText,
 			textOverflow: 'ellipsis',
@@ -28,15 +29,15 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 
 	const props: BadgePillProps = {
 		// default props
-		color: 'rgba(255, 255, 255, 0.5)',
-		colorText: '#000000',
+		color: 'rgba(58, 35, 173, 0.5)',
+		colorText: '#fff',
 		// global theme
 		...globalTheme?.components?.badgePill,
 		// props
 		...properties,
 		...properties.theme?.components?.badgePill,
 	};
-	const { value, disableStyles, className, style } = props;
+	const { value, disableStyles, tag, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -48,8 +49,8 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-pill', className)}>
-				{value}
+			<div {...styling} className={classnames('ss__badge-pill', `ss__badge-pill--${tag}`, className)}>
+				<span className="ss__badge-pill__value">{value}</span>
 			</div>
 		</CacheProvider>
 	) : (
@@ -61,4 +62,5 @@ export interface BadgePillProps extends ComponentProps {
 	value: string;
 	color?: string;
 	colorText?: string;
+	tag?: string;
 }

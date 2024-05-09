@@ -31,30 +31,18 @@ describe('CalloutBadge Component', () => {
 		expect(controller.store.meta).toBeDefined();
 
 		await controller.search();
-		result = (controller.store.results as Product[]).find((result) => result.badges.callout[CALLOUT_NAME])! as Product;
+		result = (controller.store.results as Product[]).find((result) => result.badges.atLocation('callout').length > 0)! as Product;
 		expect(result).toBeDefined();
 	});
 
 	it('renders CalloutBadge', () => {
+		const badge = result.badges.atLocation('callout').pop();
 		const rendered = render(<CalloutBadge result={result} name={CALLOUT_NAME} />);
 		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
 		expect(CalloutBadgeEl).toBeInTheDocument();
 
-		const CalloutBadgeComponentEl = rendered.container.querySelector(`.ss__callout-badge--${result.badges.callout[CALLOUT_NAME].tag}`)!;
+		const CalloutBadgeComponentEl = rendered.container.querySelector(`.ss__callout-badge > div`)!;
 		expect(CalloutBadgeComponentEl).toBeInTheDocument();
-
-		expect(CalloutBadgeComponentEl.classList.contains(`ss__callout-badge--${result.badges.callout[CALLOUT_NAME].location}`)).toBe(true);
-		expect(CalloutBadgeComponentEl.classList.contains(`ss__callout-badge__${result.badges.callout[CALLOUT_NAME].component}`)).toBe(true);
-		expect(
-			CalloutBadgeComponentEl.classList.contains(
-				`ss__callout-badge__${result.badges.callout[CALLOUT_NAME].component}--${result.badges.callout[CALLOUT_NAME].location}`
-			)
-		).toBe(true);
-		expect(
-			CalloutBadgeComponentEl.classList.contains(
-				`ss__callout-badge__${result.badges.callout[CALLOUT_NAME].component}--${result.badges.callout[CALLOUT_NAME].tag}`
-			)
-		).toBe(true);
 	});
 
 	it('can use componentMap to render a custom component', () => {
@@ -62,7 +50,7 @@ describe('CalloutBadge Component', () => {
 		const customComponentClassName = 'custom-component-class';
 
 		const result2 = result;
-		result2.badges.callout[CALLOUT_NAME].component = componentName;
+		result2.badges.atLocation('callout')!.pop()!.component = componentName;
 
 		const rendered = render(
 			<CalloutBadge

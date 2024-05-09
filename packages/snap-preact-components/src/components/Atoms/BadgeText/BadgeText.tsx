@@ -11,7 +11,8 @@ const CSS = {
 	BadgeText: (props: BadgeTextProps) => {
 		return css({
 			display: 'inline-block',
-			padding: '0.2em 0.5em',
+			boxSizing: 'border-box',
+			padding: '0.3em 0.9em',
 			color: props.colorText,
 			textOverflow: 'ellipsis',
 			whiteSpace: 'nowrap',
@@ -32,7 +33,7 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.badgeText,
 	};
-	const { value, disableStyles, className, style } = props;
+	const { value, disableStyles, tag, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -44,8 +45,8 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-text', className)}>
-				{value}
+			<div {...styling} className={classnames('ss__badge-text', `ss__badge-text--${tag}`, className)}>
+				<span className="ss__badge-text__value">{value}</span>
 			</div>
 		</CacheProvider>
 	) : (
@@ -56,4 +57,5 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 export interface BadgeTextProps extends ComponentProps {
 	value: string;
 	colorText?: string;
+	tag?: string;
 }

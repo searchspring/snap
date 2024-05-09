@@ -194,7 +194,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							{...subProps.calloutBadge}
 							result={result}
 							controller={controller as SearchController | AutocompleteController | RecommendationController}
-							name={'callout'}
 						/>
 					)}
 					{!hideTitle && (

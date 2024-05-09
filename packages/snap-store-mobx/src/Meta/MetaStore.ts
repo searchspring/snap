@@ -11,16 +11,36 @@ export class MetaStore {
 }
 
 class MetaBadges {
-	public locations: { grid: string[][] } = { grid: [] };
+	public groups: Record<string, { sections: string[]; grid: string[][] }> = {};
 
 	constructor(metaData?: MetaResponseModel) {
-		const leftAreas = metaData?.badges?.locations?.left?.map((area: any) => area.tag) || [];
-		const rightAreas = metaData?.badges?.locations?.right?.map((area: any) => area.tag) || [];
-		const LCM = lcm(leftAreas.length, rightAreas.length);
+		// 'overlay' group is created by default - could support additional groups via config in the future
+		const groups = { overlay: { sections: ['left', 'right'] } };
 
-		this.locations.grid = Array.from({ length: LCM }).map((_, index) => {
-			const i = Math.floor(index / (LCM / leftAreas.length));
-			return [leftAreas[i], rightAreas[i]];
+		// process groups - create the grid for each group
+		Object.keys(groups).map((name) => {
+			const group = groups[name as keyof typeof groups];
+			const sections: { areas: string[]; grid: string[] }[] = group.sections.map((section) => ({
+				areas: metaData?.badges?.locations?.[section as keyof typeof metaData.badges.locations]?.map((area) => area.tag) || [],
+				grid: [],
+			}));
+
+			// find lcm of sections
+			const lcmSections = sections.map((section) => section.areas.length).reduce(lcm);
+
+			sections.forEach((section) => {
+				section.grid = Array.from({ length: lcmSections }).map((_, index) => section.areas[Math.floor(index / (lcmSections / section.areas.length))]);
+			});
+
+			// set the grid by creating rows of columns
+			const grid = Array.from({ length: lcmSections }).map((_, i) => {
+				return sections.map((section) => section.grid[i]);
+			});
+
+			this.groups[name] = {
+				sections: group.sections,
+				grid,
+			};
 		});
 	}
 }

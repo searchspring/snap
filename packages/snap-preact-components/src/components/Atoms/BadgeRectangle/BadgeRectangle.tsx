@@ -11,7 +11,8 @@ const CSS = {
 	BadgeRectangle: (props: BadgeRectangleProps) => {
 		return css({
 			display: 'inline-block',
-			padding: '0.2em 0.5em',
+			boxSizing: 'border-box',
+			padding: '0.3em 0.9em',
 			background: props.color,
 			color: props.colorText,
 			textOverflow: 'ellipsis',
@@ -27,15 +28,15 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 
 	const props: BadgeRectangleProps = {
 		// default props
-		color: 'rgba(255, 255, 255, 0.5)',
-		colorText: '#000000',
+		color: 'rgba(58, 35, 173, 0.5)',
+		colorText: '#fff',
 		// global theme
 		...globalTheme?.components?.badgeRectangle,
 		// props
 		...properties,
 		...properties.theme?.components?.badgeRectangle,
 	};
-	const { value, disableStyles, className, style } = props;
+	const { value, disableStyles, tag, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -47,8 +48,8 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-rectangle', className)}>
-				{value}
+			<div {...styling} className={classnames('ss__badge-rectangle', `ss__badge-rectangle--${tag}`, className)}>
+				<span className="ss__badge-rectangle__value">{value}</span>
 			</div>
 		</CacheProvider>
 	) : (
@@ -60,4 +61,5 @@ export interface BadgeRectangleProps extends ComponentProps {
 	value: string;
 	color?: string;
 	colorText?: string;
+	tag?: string;
 }

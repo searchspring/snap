@@ -32,7 +32,7 @@ describe('OverlayBadge Component', () => {
 
 		await controller.search();
 		result = (controller.store.results as Product[]).find((result) => {
-			return result.badges.overlay.length > 0;
+			return result.badges.atLocation(['left', 'right']).length > 0;
 		})! as Product;
 		expect(result).toBeDefined();
 	});
@@ -46,18 +46,15 @@ describe('OverlayBadge Component', () => {
 		const OverlayBadgeEl = rendered.container.querySelector('.ss__overlay-badge')!;
 		expect(OverlayBadgeEl).toBeInTheDocument();
 
-		const OverlayBadgeComponentEl = rendered.container.querySelector(`.ss__overlay-badge--${result.badges.overlay[0].tag}`)!;
+		const badge = result.badges.atLocation(['left', 'right'])[0];
+		expect(badge).toBeDefined();
+		expect(badge.location).toBe('left/left-middle');
+
+		const OverlayBadgeComponentEl = rendered.container.querySelector(
+			`.ss__overlay-badge__grid-wrapper > .ss__overlay-badge__grid-wrapper__slot--${badge.location.split('/')[1]}`
+		)!;
 
 		expect(OverlayBadgeComponentEl).toBeInTheDocument();
-
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge--${result.badges.overlay[0].location}`)).toBe(true);
-		expect(OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}`)).toBe(true);
-		expect(
-			OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}--${result.badges.overlay[0].location}`)
-		).toBe(true);
-		expect(
-			OverlayBadgeComponentEl.classList.contains(`ss__overlay-badge__${result.badges.overlay[0].component}--${result.badges.overlay[0].tag}`)
-		).toBe(true);
 
 		const ChildrenEl = rendered.container.querySelector(`.children`)!;
 		expect(ChildrenEl).toBeInTheDocument();
@@ -68,7 +65,7 @@ describe('OverlayBadge Component', () => {
 		const customComponentClassName = 'custom-component-class';
 
 		const result2 = result;
-		result2.badges.overlay[0].component = componentName;
+		result2.badges.atLocation(['left', 'right'])[0].component = componentName;
 
 		const rendered = render(
 			<OverlayBadge

@@ -5,16 +5,23 @@ import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
-import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
-
+import { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
-import { SearchResponseModel } from '@searchspring/snapi-types';
+
+import type { Product } from '@searchspring/snap-store-mobx';
 
 const mockData = new MockData();
-const searchResponse: SearchResponseModel = mockData.search();
+const searchResponse = mockData.searchMeta();
 
-// TODO: refactor to use mock store data
-const mockResults = searchResponse.results as SearchResultStore;
+const mockResults = new SearchResultStore(
+	{ id: 'test' },
+	{ urlManager: new UrlManager(new UrlTranslator()) },
+	searchResponse.meta,
+	searchResponse.results,
+	searchResponse.pagination,
+	searchResponse.merchandising
+);
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -30,7 +37,7 @@ describe('Result Component', () => {
 	});
 
 	it('renders title', () => {
-		const rendered = render(<Result result={searchResponse.results![0] as Product} />);
+		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
 		expect(title?.textContent).toBe(searchResponse.results![0].mappings?.core?.name);
 	});

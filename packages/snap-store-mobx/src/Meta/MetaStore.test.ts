@@ -15,7 +15,7 @@ describe('Meta Store', () => {
 	it('can construct without metaData', () => {
 		const store = new MetaStore();
 		expect(store.data).toEqual({});
-		expect(store.badges.locations).toStrictEqual({ grid: [] });
+		expect(store.badges.groups.overlay).toStrictEqual({ sections: ['left', 'right'], grid: [] });
 	});
 
 	it('has badges in mock meta data', () => {
@@ -36,7 +36,8 @@ describe('Meta Store', () => {
 	it('can construct given meta data', () => {
 		const store = new MetaStore(metaData);
 		expect(store.data).toStrictEqual(metaData);
-		expect(store.badges.locations).toStrictEqual({
+		expect(store.badges.groups.overlay).toStrictEqual({
+			sections: ['left', 'right'],
 			grid: [
 				['left-upper', 'right-upper'],
 				['left-middle-upper', 'right-middle-upper'],

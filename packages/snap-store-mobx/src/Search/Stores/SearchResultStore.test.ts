@@ -519,7 +519,7 @@ describe('SearchResultStore', () => {
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -529,7 +529,6 @@ describe('SearchResultStore', () => {
 			expect(result.badges.all[0]).toHaveProperty('priority');
 			expect(result.badges.all[0]).toHaveProperty('enabled');
 			expect(result.badges.all[0]).toHaveProperty('parameters');
-			expect(result.badges.all[0]).toHaveProperty('path');
 
 			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
 			expect(badgeMeta).toBeDefined();
@@ -542,10 +541,9 @@ describe('SearchResultStore', () => {
 				priority: badgeMeta.priority,
 				enabled: badgeMeta.enabled,
 				parameters: badgeMeta.parameters,
-				path: `left/${badgeMeta.location}`,
 			});
 
-			expect(result.badges.overlay).toStrictEqual([result.badges.all[0]]);
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual([result.badges.all[0]]);
 		});
 
 		it('has callout result badges', () => {
@@ -565,7 +563,7 @@ describe('SearchResultStore', () => {
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -575,9 +573,8 @@ describe('SearchResultStore', () => {
 			expect(result.badges.all[0]).toHaveProperty('priority');
 			expect(result.badges.all[0]).toHaveProperty('enabled');
 			expect(result.badges.all[0]).toHaveProperty('parameters');
-			expect(result.badges.all[0]).toHaveProperty('path');
 
-			const badgeMeta = searchData.meta?.badges?.tags[resultBadges[0].tag]!;
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
 			expect(badgeMeta).toBeDefined();
 
 			expect(result.badges.all[0]).toStrictEqual({
@@ -588,11 +585,10 @@ describe('SearchResultStore', () => {
 				priority: badgeMeta.priority,
 				enabled: badgeMeta.enabled,
 				parameters: badgeMeta.parameters,
-				path: `callout/${badgeMeta.location}`,
 			});
 
-			expect(result.badges.callout).toStrictEqual({
-				[badgeMeta.location]: result.badges.all[0],
+			expect(result.badges.locations.callout).toStrictEqual({
+				[badgeMeta.location.split('/')[1]]: [result.badges.all[0]],
 			});
 		});
 
@@ -611,7 +607,7 @@ describe('SearchResultStore', () => {
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].mappings?.badges!;
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -626,11 +622,10 @@ describe('SearchResultStore', () => {
 
 			// mock data should have two overlay badges with the same same location
 			expect(result.badges.all[0].location).toBe(result.badges.all[1].location);
-			expect(result.badges.all[0].path).toBe(result.badges.all[1].path);
 			expect(result.badges.all[0].priority).not.toBe(result.badges.all[1].priority);
 
 			// result.overlay should only return 1 badge per location based on priority
-			expect(result.badges.overlay).toStrictEqual([result.badges.all[0]]);
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual(result.badges.all);
 		});
 	});
 });

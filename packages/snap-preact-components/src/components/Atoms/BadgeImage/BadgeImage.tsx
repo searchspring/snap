@@ -28,7 +28,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 		...properties,
 		...properties.theme?.components?.badgeImage,
 	};
-	const { label, url, disableStyles, className, style } = props;
+	const { label, url, tag, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -40,7 +40,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 
 	return url ? (
 		<CacheProvider>
-			<img {...styling} className={classnames('ss__badge-image', className)} alt={label} src={url} />
+			<img {...styling} className={classnames('ss__badge-image', `ss__badge-image--${tag}`, className)} alt={label || `${tag} badge`} src={url} />
 		</CacheProvider>
 	) : (
 		<Fragment />
@@ -50,4 +50,5 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 export interface BadgeImageProps extends ComponentProps {
 	url: string;
 	label?: string;
+	tag?: string;
 }

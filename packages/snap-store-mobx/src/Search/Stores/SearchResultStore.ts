@@ -154,12 +154,13 @@ export class Badges {
 	public all: ResultBadge[] = [];
 
 	constructor(result: SearchResponseModelResult, metaData: MetaResponseModel) {
-		this.all = (result.mappings?.badges || [])
+		this.all = (result.badges || [])
 			.filter((badge) => {
 				// remove badges that are not in the meta or are disabled
 				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
 			})
 			.map((badge) => {
+				// merge badge with badge meta data
 				const metaBadgeData = metaData?.badges?.tags?.[badge.tag]!;
 
 				return {
@@ -173,42 +174,44 @@ export class Badges {
 
 		makeObservable(this, {
 			all: observable,
-			overlay: computed,
-			callout: computed,
+			tags: computed,
+			locations: computed,
 		});
 	}
 
-	public get overlay(): ResultBadge[] {
-		return this.all
-			.filter((badge) => {
-				return badge.location.startsWith('left/') || badge.location.startsWith('right/');
-			})
-			.reduce((badgeArr: ResultBadge[], badge) => {
-				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((existingBadge) => existingBadge.location === badge.location)) {
-					badgeArr.push(badge);
-				}
-				return badgeArr;
-			}, []);
+	// get all the result badges that are in a specific location
+	public atLocation(location?: string[] | string): ResultBadge[] {
+		const locations = Array.isArray(location) ? location : [location];
+		return this.all.filter((badge) => {
+			// filter location
+			return locations.some((location) => badge.location.startsWith(`${location}/`) || badge.location == location);
+		});
 	}
 
-	public get callout(): Record<string, ResultBadge> {
+	// get the badge with specific tag
+	public getTag(tag?: string): ResultBadge | undefined {
 		return this.all
 			.filter((badge) => {
-				return badge.location.startsWith('callout/');
+				badge.tag == tag;
 			})
-			.reduce((badgeArr: ResultBadge[], badge) => {
-				// one badge per location (this.all is already sorted by priority)
-				if (!badgeArr.some((existingBadge) => existingBadge.location === badge.location)) {
-					badgeArr.push(badge);
-				}
-				return badgeArr;
-			}, [])
-			.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
-				const [_, name] = badge.location.split('/');
-				badgeMap[name] = badge;
-				return badgeMap;
-			}, {});
+			.pop();
+	}
+
+	public get tags(): Record<string, ResultBadge> {
+		return this.all.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
+			badgeMap[badge.tag] = badge;
+			return badgeMap;
+		}, {});
+	}
+
+	public get locations(): Record<string, Record<string, ResultBadge[]>> {
+		return this.all.reduce((locationMap: Record<string, Record<string, ResultBadge[]>>, badge) => {
+			// put badge in location by path
+			const [section, tag] = badge.location.split('/');
+			locationMap[section] = locationMap[section] || {};
+			locationMap[section][tag] = (locationMap[section][tag] || []).concat(badge);
+			return locationMap;
+		}, {});
 	}
 }
 

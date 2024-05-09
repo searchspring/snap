@@ -10,12 +10,10 @@ import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
-import type { Product, ResultBadge } from '@searchspring/snap-store-mobx';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	OverlayBadge: ({ meta }: OverlayBadgeProps) => {
-		const grid = meta?.badges?.locations?.grid;
-
+	OverlayBadge: ({ grid }: OverlayBadgeProps) => {
 		let gridProperties = {};
 		if (grid?.length && grid[0]?.length) {
 			const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
@@ -40,14 +38,15 @@ const CSS = {
 			},
 		});
 	},
-	BadgePositioning: (props: ResultBadge & { index: number }) => {
-		const { location, index } = props;
-		const [overlayLocation] = location.split('/');
-
+	BadgePositioning: ({ index, section, tag }: { index: number; section: string; tag: string }) => {
 		return css({
 			position: 'absolute',
-			gridArea: location,
-			[overlayLocation]: 0,
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'flex-start',
+			gap: '0.5em',
+			gridArea: tag,
+			[['left', 'right'].includes(section) ? section : '']: 0,
 			boxSizing: 'border-box',
 			zIndex: Math.max(100 - index, 1),
 			maxWidth: '100%',
@@ -75,44 +74,54 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		return <Fragment />;
 	}
 
+	const limit = 1;
+	const meta = controller?.store?.meta;
+	const group = 'overlay';
+	const grid = meta?.badges?.groups?.overlay?.grid;
 	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
 
-	const meta = controller?.store?.meta;
+	const sections = meta?.badges?.groups?.[group]?.sections;
+	const locations = sections?.map((section) => {
+		return {
+			section,
+			slots: meta?.data?.badges?.locations[section as keyof typeof meta.data.badges.locations],
+		};
+	});
+
 	if (!disableStyles) {
-		styling.css = [CSS.OverlayBadge({ ...props, meta }), style];
+		styling.css = [CSS.OverlayBadge({ ...props, grid }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	const overlayBadges = result?.badges?.overlay;
-
-	if (overlayBadges?.length) {
+	if (locations?.length) {
 		return (
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__overlay-badge', className)}>
-					{children}
 					<div className="ss__overlay-badge__grid-wrapper">
-						{overlayBadges.map((badge, index) => {
-							const BadgeComponent = useComponent(badgeComponentMap, badge.component);
-							if (!BadgeComponent) {
-								return <Fragment />;
-							}
-							return (
-								<div
-									css={[CSS.BadgePositioning({ ...badge, index })]}
-									className={classnames(
-										`ss__overlay-badge--${badge.tag}`,
-										`ss__overlay-badge--${badge.location}`,
-										`ss__overlay-badge__${badge.component}`,
-										`ss__overlay-badge__${badge.component}--${badge.location}`,
-										`ss__overlay-badge__${badge.component}--${badge.tag}`
-									)}
-								>
-									<BadgeComponent {...badge} {...badge.parameters} />
-								</div>
-							);
+						{locations.map((location, index) => {
+							return location.slots?.map((slot) => {
+								const gridBadges = result?.badges?.atLocation(`${location.section}/${slot.tag}`).slice(0, limit);
+
+								return (
+									<div
+										className={classnames('ss__overlay-badge__grid-wrapper__slot', `ss__overlay-badge__grid-wrapper__slot--${slot.tag}`)}
+										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index })]}
+									>
+										{gridBadges.map((badge) => {
+											const BadgeComponent = useComponent(badgeComponentMap, badge.component);
+											if (!BadgeComponent) {
+												return <Fragment />;
+											}
+
+											return <BadgeComponent {...badge} {...badge.parameters} />;
+										})}
+									</div>
+								);
+							});
 						})}
 					</div>
+					{children}
 				</div>
 			</CacheProvider>
 		);

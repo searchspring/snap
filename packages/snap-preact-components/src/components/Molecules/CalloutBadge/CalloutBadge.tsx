@@ -14,7 +14,9 @@ import type { Product } from '@searchspring/snap-store-mobx';
 const CSS = {
 	CalloutBadge: ({}: CalloutBadgeProps) =>
 		css({
-			display: 'inline-block',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
 		}),
 };
 
@@ -23,13 +25,14 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 	const props: CalloutBadgeProps = {
 		// default props
+		tag: 'callout',
 		// global theme
 		...globalTheme?.components?.calloutBadge,
 		// props
 		...properties,
 		...properties.theme?.components?.calloutBadge,
 	};
-	const { result, name, disableStyles, className, style } = props;
+	const { result, tag, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -40,27 +43,20 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const calloutBadge = result?.badges?.callout && result?.badges?.callout[name];
+	const limit = 1;
+	const badges = result?.badges?.atLocation(tag).slice(0, limit);
 
-	if (calloutBadge) {
-		const BadgeComponent = useComponent(badgeComponentMap, calloutBadge.component);
-		if (!BadgeComponent) {
-			return <Fragment />;
-		}
+	if (badges?.length) {
 		return (
 			<CacheProvider>
-				<div {...styling} className={classnames('ss__callout-badge', className)}>
-					<div
-						className={classnames(
-							`ss__callout-badge--${calloutBadge.tag}`,
-							`ss__callout-badge--${calloutBadge.location}`,
-							`ss__callout-badge__${calloutBadge.component}`,
-							`ss__callout-badge__${calloutBadge.component}--${calloutBadge.location}`,
-							`ss__callout-badge__${calloutBadge.component}--${calloutBadge.tag}`
-						)}
-					>
-						<BadgeComponent {...calloutBadge} {...calloutBadge.parameters} />
-					</div>
+				<div {...styling} className={classnames('ss__callout-badge', `ss__callout-badge--${tag?.replace('/', '-')}`, className)}>
+					{badges.map((badge) => {
+						const BadgeComponent = useComponent(badgeComponentMap, badge.component);
+						if (!BadgeComponent) {
+							return <Fragment />;
+						}
+						return <BadgeComponent {...badge} {...badge.parameters} />;
+					})}
 				</div>
 			</CacheProvider>
 		);
@@ -70,6 +66,6 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 export interface CalloutBadgeProps extends ComponentProps {
 	result: Product;
-	name: string;
+	tag?: string;
 	componentMap?: ComponentMap;
 }
