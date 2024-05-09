@@ -3,7 +3,7 @@ import { makeObservable, observable } from 'mobx';
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { SearchPaginationStore } from '../Search/Stores';
-import { StorageStore, StorageType } from '../Storage/StorageStore';
+import { StorageStore } from '../Storage/StorageStore';
 import { FinderSelectionStore } from './Stores';
 import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
@@ -31,7 +31,7 @@ export class FinderStore extends AbstractStore {
 
 		if (config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
-				type: StorageType.LOCAL,
+				type: 'local',
 				key: `ss-${config.id}-persisted`,
 			});
 		}
