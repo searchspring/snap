@@ -5,6 +5,7 @@ import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types
 
 import { Banner, Product, SearchResultStore, ProductMask, Variants, Variant, VariantSelection, VariantData } from './SearchResultStore';
 import { parse } from 'uuid';
+import { StoreConfigs } from '../../types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -248,6 +249,215 @@ describe('SearchResultStore', () => {
 
 				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
 				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+			});
+		});
+
+		it('can be configured to preselect certain variants', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				variants?.selections.forEach((selection) => {
+					const field = selection.field;
+					const settings = variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[field].preSelected;
+					if (settings) {
+						if (selection.values.filter((val) => settings.indexOf(val.value) > -1).length) {
+							expect(settings).toContain(selection.selected?.value.toLowerCase());
+						}
+					}
+				});
+			});
+		});
+
+		it('uses the original constructed config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantDataToUse);
+
+				expect((result as Product).variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+				variants?.selections.forEach((selection) => {
+					const field = selection.field;
+					const settings =
+						variantSearchConfig.settings.variants.options[field as keyof typeof variantSearchConfig.settings.variants.options]?.preSelected;
+					if (settings) {
+						if (selection.values.filter((val) => settings.indexOf(val.value) > -1).length) {
+							expect(settings).toContain(selection.selected?.value.toLowerCase());
+						}
+					}
+				});
+			});
+		});
+
+		it('can use a different config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantDataToUse);
+
+				expect((result as Product).variants).toBeDefined();
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+				variants?.selections.forEach((selection) => {
+					const field = selection.field;
+					const settings =
+						variantSearchConfig.settings.variants.options[field as keyof typeof variantSearchConfig.settings.variants.options]?.preSelected;
+					if (settings) {
+						if (selection.values.filter((val) => settings.indexOf(val.value) > -1).length) {
+							expect(settings).toContain(selection.selected?.value.toLowerCase());
+						}
+					}
+				});
+			});
+
+			const newVariantsConfig = {
+				field: 'ss_variants',
+				options: {
+					color: {
+						preSelected: ['scout'],
+					},
+					inseam: {
+						preSelected: ['34'],
+					},
+				},
+			};
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantData, newVariantsConfig);
+
+				expect((result as Product).variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				variants?.selections.forEach((selection) => {
+					const field = selection.field;
+					const settings = newVariantsConfig.options[field as keyof typeof newVariantsConfig.options]?.preSelected;
+					if (settings) {
+						if (selection.values.filter((val) => val.available && settings.indexOf(val.value) > -1).length) {
+							expect(settings).toContain(selection.selected?.value?.toLowerCase());
+						}
+					}
+				});
 			});
 		});
 

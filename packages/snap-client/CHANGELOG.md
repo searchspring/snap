@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Bug Fixes
+
+- **client:** add window checks to NetworkCache ([2c44dc9](https://github.com/searchspring/snap/commit/2c44dc9af5a9425021b9d34c1cc5a88dba23f05b))
+
+### Features
+
+- **client:** adding 'fetchApi' configuration and fallback for windowless environments ([c88da99](https://github.com/searchspring/snap/commit/c88da990c00fcfb223ac10ada387f1e2467addf6))
+
 ## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
 
 **Note:** Version bump only for package @searchspring/snap-client

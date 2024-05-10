@@ -9,11 +9,16 @@ export type StoreConfig = {
 export type VariantConfig = {
 	field: string;
 	mappings?: VariantMappings;
+	options?: {
+		[field: string]: {
+			preSelected?: string[];
+		};
+	};
 };
 
 export type VariantMappings = {
-	[name: string]: {
-		[name: string]: {
+	[field: string]: {
+		[option: string]: {
 			label?: string;
 			background?: string;
 			backgroundImageUrl?: string;

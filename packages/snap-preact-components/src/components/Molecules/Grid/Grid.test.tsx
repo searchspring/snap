@@ -171,7 +171,7 @@ describe('Grid Component', () => {
 
 		expect(optionElems).toHaveLength(args.columns * args.rows);
 		expect(overflowButton).toBeInTheDocument();
-		expect(overflowButton).toHaveTextContent(`+ ${options.length - args.columns * args.rows} more`);
+		expect(overflowButton).toHaveTextContent(`+ ${options.length - args.columns * args.rows}`);
 
 		await userEvent.click(overflowButton!);
 
