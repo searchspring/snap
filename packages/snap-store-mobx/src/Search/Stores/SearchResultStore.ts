@@ -446,7 +446,7 @@ export class VariantSelection {
 	}
 
 	public reset() {
-		this.selected = undefined;
+		this.selected = '';
 		this.values.forEach((val) => (val.available = false));
 	}
 
