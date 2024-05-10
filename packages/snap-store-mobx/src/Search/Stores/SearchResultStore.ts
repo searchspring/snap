@@ -410,7 +410,9 @@ export class VariantSelection {
 						thumbnailImageUrl: thumbnailImageUrl,
 						background: background,
 						backgroundImageUrl: backgroundImageUrl,
-						available: Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field] == variant.options[this.field])),
+						available: Boolean(
+							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
+						),
 					});
 				}
 
