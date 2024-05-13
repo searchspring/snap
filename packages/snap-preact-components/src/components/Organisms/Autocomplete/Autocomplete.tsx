@@ -251,9 +251,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				columns: 3,
 				onClick: facetClickEvent,
 			},
-			// result: {
-			// 	hideBadge: true,
-			// },
 		},
 	};
 

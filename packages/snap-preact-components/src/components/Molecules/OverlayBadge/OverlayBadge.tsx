@@ -44,6 +44,7 @@ const CSS = {
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: section == 'right' ? 'flex-end' : 'flex-start',
+			right: section == 'right' ? 0 : undefined,
 			gap: '0.5em',
 			gridArea: tag,
 			boxSizing: 'border-box',
