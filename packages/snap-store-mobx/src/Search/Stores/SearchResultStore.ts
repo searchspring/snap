@@ -195,15 +195,6 @@ export class Badges {
 		});
 	}
 
-	// get the badge with specific tag
-	public getTag(tag?: string): ResultBadge | undefined {
-		return this.all
-			.filter((badge) => {
-				badge.tag == tag;
-			})
-			.pop();
-	}
-
 	public get tags(): Record<string, ResultBadge> {
 		return this.all.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
 			badgeMap[badge.tag] = badge;
