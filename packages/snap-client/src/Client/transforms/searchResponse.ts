@@ -242,7 +242,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 			core: coreFieldValues,
 		},
 		attributes,
-		badges: rawResult.badges || [],
+		badges: typeof rawResult.badges == 'object' ? rawResult.badges : [],
 		children,
 	});
 };
