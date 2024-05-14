@@ -227,7 +227,6 @@ export class Variants {
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
-
 			if (config?.options) {
 				Object.keys(config?.options).forEach((option) => {
 					if (config.options![option].preSelected) {
