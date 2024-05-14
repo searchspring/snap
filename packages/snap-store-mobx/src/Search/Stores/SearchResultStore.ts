@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, VariantConfig, VariantMappings } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantConfig, VariantOptionConfigMappings, VariantOptionConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -187,7 +187,6 @@ export class Variants {
 	public data: Variant[] = [];
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
-	private variantConfig?: VariantConfig;
 	private config?: VariantConfig;
 
 	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
@@ -198,7 +197,7 @@ export class Variants {
 		};
 
 		if (config) {
-			this.variantConfig = config;
+			this.config = config;
 		}
 
 		this.update(variantData, config);
@@ -223,15 +222,12 @@ export class Variants {
 			this.selections = [];
 
 			options.map((option) => {
-				// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
-				const optionConfig = {
-					field: option,
-					label: option,
-				};
-				this.selections.push(new VariantSelection(this, optionConfig, this.variantConfig));
+				const variantOptionConfig = this.config?.options && this.config.options[option];
+				this.selections.push(new VariantSelection(this, option, variantOptionConfig));
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
+
 			if (config?.options) {
 				Object.keys(config?.options).forEach((option) => {
 					if (config.options![option].preSelected) {
@@ -239,6 +235,7 @@ export class Variants {
 					}
 				});
 			}
+
 			// select first available
 			this.makeSelections(preselectedOptions);
 		} catch (err) {
@@ -249,8 +246,7 @@ export class Variants {
 
 	public makeSelections(options?: Record<string, string[]>) {
 		// options = {color: 'Blue', size: 'L'};
-
-		if (!options?.length) {
+		if (!options || !Object.keys(options).length) {
 			// select first available for each selection
 			this.selections.forEach((selection) => {
 				const firstAvailableOption = selection.values.find((value) => value.available);
@@ -265,7 +261,6 @@ export class Variants {
 				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
 				const preferedOptions = options[selection.field as keyof typeof options];
 				let preferencedOption = availableOptions[0];
-
 				// if theres a preference for that field
 				if (preferedOptions) {
 					const checkIfAvailable = (preference: string) => {
@@ -309,14 +304,14 @@ export class Variants {
 		orderedSelections.forEach((selection) => selection.refineValues(this));
 
 		// check to see if we have enough selections made to update the display
-		const selectedSelections = this.selections.filter((selection) => selection.selected?.length);
+		const selectedSelections = this.selections.filter((selection) => selection.selected?.value?.length);
 		if (selectedSelections.length) {
 			let availableVariants: Variant[] = this.data;
 
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
 				);
 			}
 
@@ -340,17 +335,17 @@ export type SelectionValue = {
 export class VariantSelection {
 	public field: string;
 	public label: string;
-	public selected?: string = '';
-	public previouslySelected?: string = '';
+	public selected?: SelectionValue = undefined;
+	public previouslySelected?: SelectionValue = undefined;
 	public values: SelectionValue[] = [];
 
 	private variantsUpdate: () => void;
 
-	public mappings: VariantMappings | undefined;
+	public mappings: VariantOptionConfigMappings | undefined;
 
-	constructor(variants: Variants, selectorConfig: VariantSelectionOptions, variantConfig?: VariantConfig) {
-		this.field = selectorConfig.field;
-		this.label = selectorConfig.label;
+	constructor(variants: Variants, selectorField: string, variantConfig?: VariantOptionConfig) {
+		this.field = selectorField;
+		this.label = variantConfig?.label || selectorField;
 		this.mappings = variantConfig?.mappings;
 
 		// needed to prevent attaching variants as class property
@@ -374,7 +369,7 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
 			);
 		}
 
@@ -383,37 +378,42 @@ export class VariantSelection {
 			.reduce((values: SelectionValue[], variant) => {
 				if (!values.some((val) => variant.options[this.field].value == val.value)) {
 					const value = variant.options[this.field].value;
-					let label = variant.options[this.field].value;
 
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
-					let background = undefined;
-					let backgroundImageUrl = undefined;
-					if (this.mappings && this.mappings[this.field] && this.mappings[this.field][value]) {
-						const mapping = this.mappings[this.field][value];
 
-						if (mapping.label) {
-							label = mapping.label as string;
-						}
-
-						if (mapping.background) {
-							background = mapping.background as string;
-						}
-
-						if (mapping.backgroundImageUrl) {
-							backgroundImageUrl = mapping.backgroundImageUrl;
-						}
-					}
-
-					values.push({
+					const mappedValue: {
+						available: boolean;
+						value: string;
+						label: string;
+						thumbnailImageUrl?: string;
+						background?: string;
+						backgroundImageUrl?: string;
+					} = {
 						value: value,
-						label: label,
+						label: value,
 						thumbnailImageUrl: thumbnailImageUrl,
-						background: background,
-						backgroundImageUrl: backgroundImageUrl,
 						available: Boolean(
 							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
 						),
-					});
+					};
+
+					if (this.mappings && this.mappings && this.mappings[value.toLowerCase()]) {
+						const mapping = this.mappings[value.toLowerCase()];
+
+						if (mapping.label) {
+							mappedValue.label = mapping.label;
+						}
+
+						if (mapping.background) {
+							mappedValue.background = mapping.background;
+						}
+
+						if (mapping.backgroundImageUrl) {
+							mappedValue.backgroundImageUrl = mapping.backgroundImageUrl;
+						}
+					}
+
+					values.push(mappedValue);
 				}
 
 				// TODO: use sorting function from config
@@ -423,20 +423,20 @@ export class VariantSelection {
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
-			if (!newValues.some((val) => val.value == this.selected && val.available)) {
+			if (!newValues.some((val) => val.value == this.selected?.value && val.available)) {
 				// the selection is no longer available, attempt to select previous selection
 				if (
 					this.selected !== this.previouslySelected &&
 					this.previouslySelected &&
-					newValues.some((val) => val.value == this.previouslySelected && val.available)
+					newValues.some((val) => val.value == this.previouslySelected?.value && val.available)
 				) {
-					this.select(this.previouslySelected, true);
+					this.select(this.previouslySelected.value, true);
 				} else {
 					// choose the first available option if previous seletions are unavailable
 					const availableValues = newValues.filter((val) => val.available);
 					if (newValues.length && availableValues.length) {
 						const nextAvailableValue = availableValues[0].value;
-						if (this.selected !== nextAvailableValue) {
+						if (this.selected.value !== nextAvailableValue) {
 							this.select(nextAvailableValue, true);
 						}
 					}
@@ -448,7 +448,7 @@ export class VariantSelection {
 	}
 
 	public reset() {
-		this.selected = '';
+		this.selected = undefined;
 		this.values.forEach((val) => (val.available = false));
 	}
 
@@ -459,7 +459,7 @@ export class VariantSelection {
 				this.previouslySelected = this.selected;
 			}
 
-			this.selected = value;
+			this.selected = valueExist;
 
 			this.variantsUpdate();
 		}

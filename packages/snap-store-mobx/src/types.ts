@@ -8,21 +8,22 @@ export type StoreConfig = {
 
 export type VariantConfig = {
 	field: string;
-	mappings?: VariantMappings;
 	options?: {
-		[field: string]: {
-			preSelected?: string[];
-		};
+		[optionField: string]: VariantOptionConfig;
 	};
 };
 
-export type VariantMappings = {
-	[field: string]: {
-		[option: string]: {
-			label?: string;
-			background?: string;
-			backgroundImageUrl?: string;
-		};
+export type VariantOptionConfig = {
+	label?: string;
+	preSelected?: string[];
+	mappings?: VariantOptionConfigMappings;
+};
+
+export type VariantOptionConfigMappings = {
+	[optionValue: string]: {
+		label?: string;
+		background?: string;
+		backgroundImageUrl?: string;
 	};
 };
 

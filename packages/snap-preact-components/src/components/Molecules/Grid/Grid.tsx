@@ -14,12 +14,6 @@ import { cloneWithProps, defined } from '../../../utilities';
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
 		css({
-			'.ss__grid__show-more-wrapper': {
-				span: {
-					cursor: disableOverflowAction ? 'initial' : 'pointer',
-				},
-			},
-
 			'.ss__grid__options-wrapper': {
 				display: 'flex',
 				flexFlow: 'row wrap',
@@ -97,6 +91,13 @@ const CSS = {
 						gridRow: '1 / 1',
 						gridColumn: '1 / 1',
 					},
+				},
+			},
+
+			'.ss__grid__show-more-wrapper': {
+				'&:hover': {
+					cursor: disableOverflowAction ? 'initial !important' : 'pointer !important',
+					background: !disableOverflowAction ? `${theme?.colors?.hover || '#f8f8f8'} !important` : 'initial !important',
 				},
 			},
 		}),

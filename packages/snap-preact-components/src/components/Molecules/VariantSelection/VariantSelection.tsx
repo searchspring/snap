@@ -179,7 +179,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 											return (
 												<div className="ss__dropdown__button-wrapper">
 													<span>{selection.field}</span>
-													{selection.selected?.value ? <label>({selection.selected.value})</label> : <></>}
+													{selection.selected ? <label>({selection.selected.value})</label> : <></>}
 												</div>
 											);
 										};
