@@ -112,6 +112,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// inherited props
 			...defined({
 				disableStyles,
+				result,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -124,6 +125,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// inherited props
 			...defined({
 				disableStyles,
+				result,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -172,7 +174,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							(!hideBadge ? (
 								<OverlayBadge
 									{...subProps.overlayBadge}
-									result={result}
 									controller={controller as SearchController | AutocompleteController | RecommendationController}
 								>
 									<Image {...subProps.image} />
@@ -187,7 +188,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 					{!hideBadge && (
 						<CalloutBadge
 							{...subProps.calloutBadge}
-							result={result}
 							controller={controller as SearchController | AutocompleteController | RecommendationController}
 						/>
 					)}

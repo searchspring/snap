@@ -54,6 +54,15 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		tag: {
+			description: 'Badge location tag',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		...componentArgs,
 	},
 };

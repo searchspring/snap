@@ -17,6 +17,29 @@ describe('BadgeImage Component', () => {
 		expect(BadgeImg).toHaveAttribute('alt', BADGE_LABEL);
 	});
 
+	it('renders BadgeImage with tag class', () => {
+		const tag = 'example-tag';
+		const rendered = render(<BadgeImage tag={tag} url={BADGE_URL} label={BADGE_LABEL} />);
+		const BadgeImg = rendered.container.querySelector('.ss__badge-image');
+		expect(BadgeImg).toBeInTheDocument();
+		expect(BadgeImg).toHaveClass(`ss__badge-image--${tag}`);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<BadgeImage className={className} url={BADGE_URL} label={BADGE_LABEL} />);
+		const BadgeImg = rendered.container.querySelector('.ss__badge-image');
+
+		expect(BadgeImg).toHaveClass(className);
+	});
+
+	it('disables styles', () => {
+		const rendered = render(<BadgeImage disableStyles url={BADGE_URL} label={BADGE_LABEL} />);
+		const BadgeImg = rendered.container.querySelector('.ss__badge-image');
+
+		expect(BadgeImg?.classList).toHaveLength(2);
+	});
+
 	describe('BadgeImage theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

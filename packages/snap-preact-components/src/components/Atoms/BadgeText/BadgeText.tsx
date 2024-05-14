@@ -27,6 +27,7 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 
 	const props: BadgeTextProps = {
 		// default props
+		colorText: '#000000',
 		// global theme
 		...globalTheme?.components?.badgeText,
 		// props

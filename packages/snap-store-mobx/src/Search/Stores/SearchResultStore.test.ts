@@ -906,5 +906,26 @@ describe('SearchResultStore', () => {
 			// result.overlay should only return 1 badge per location based on priority
 			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual(result.badges.all);
 		});
+
+		it('has helper method atLocation and tags getter', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const result = results[0] as Product;
+			expect(result.badges.all.length).toBe(1);
+
+			const badge = result.badges.all[0];
+			expect(result.badges.atLocation(badge.location)).toStrictEqual(result.badges.all);
+			expect(result.badges.tags).toStrictEqual({
+				[badge.tag]: badge,
+			});
+		});
 	});
 });

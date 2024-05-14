@@ -18,3 +18,9 @@ The `colorText` prop specifies the badge text color.
 <BadgeText colorText={'#000000'} value={'30% Off'} />
 ```
 
+### tag
+The `tag` prop specifies the badge location tag and adds an identifying classname.
+
+```jsx
+<BadgeText tag={'30-off-promo'} colorText={'#000000'} value={'30% Off'} />
+```

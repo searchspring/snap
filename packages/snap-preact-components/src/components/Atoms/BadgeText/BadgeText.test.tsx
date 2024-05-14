@@ -27,6 +27,29 @@ describe('BadgeText Component', () => {
 		expect(styles.color).toBe(colorText);
 	});
 
+	it('renders BadgeText with tag class', () => {
+		const tag = 'example-tag';
+		const rendered = render(<BadgeText tag={tag} value={BADGE_VALUE} />);
+		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
+		expect(BadgeTextEl).toBeInTheDocument();
+		expect(BadgeTextEl).toHaveClass(`ss__badge-text--${tag}`);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<BadgeText className={className} value={BADGE_VALUE} />);
+		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
+
+		expect(BadgeTextEl).toHaveClass(className);
+	});
+
+	it('disables styles', () => {
+		const rendered = render(<BadgeText disableStyles value={BADGE_VALUE} />);
+		const BadgeTextEl = rendered.container.querySelector('.ss__badge-text')!;
+
+		expect(BadgeTextEl?.classList).toHaveLength(2);
+	});
+
 	describe('BadgeText theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

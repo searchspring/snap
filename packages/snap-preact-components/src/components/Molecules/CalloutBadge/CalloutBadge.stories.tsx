@@ -52,17 +52,6 @@ export default {
 		),
 	],
 	argTypes: {
-		name: {
-			description: 'Callout location name',
-			type: { required: true },
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'callout' },
-			},
-			control: { type: 'text' },
-		},
 		result: {
 			description: 'Result store Product reference',
 			type: { required: true },
@@ -92,6 +81,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		tag: {
+			description: 'Callout location tag',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'callout' },
+			},
+			control: { type: 'text' },
+		},
 		...componentArgs,
 	},
 };
@@ -117,13 +116,13 @@ Default.loaders = [
 			 * a page reload is not required
 			 */
 
-			response.results[0].mappings.badges = [
+			response.results[0].badges = [
 				{
 					tag: 'free-shipping-overlay',
 					value: 'Free Shipping',
 				},
 			];
-			response.results[1].mappings.badges = [
+			response.results[1].badges = [
 				{
 					tag: 'free-shipping-callout',
 					value: 'Free Shipping',
@@ -136,23 +135,21 @@ Default.loaders = [
 					locations: {
 						left: [
 							{
-								name: 'left',
-								label: 'Left',
-								description: 'description for left',
+								tag: 'left',
+								name: 'Left',
 							},
 						],
 						right: [],
 						callout: [
 							{
-								name: 'callout',
-								label: 'Callout',
-								description: 'description for callout',
+								tag: 'callout',
+								name: 'Callout',
 							},
 						],
 					},
 					tags: {
 						'free-shipping-overlay': {
-							location: 'left',
+							location: 'left/left',
 							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
@@ -162,7 +159,7 @@ Default.loaders = [
 							},
 						},
 						'free-shipping-callout': {
-							location: 'callout',
+							location: 'callout/callout',
 							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
@@ -183,5 +180,5 @@ Default.loaders = [
 	},
 ];
 Default.args = {
-	name: 'callout',
+	tag: 'callout',
 };

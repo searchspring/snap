@@ -5,15 +5,8 @@ import { BadgeImage } from '../components/Atoms/BadgeImage';
 import { ComponentMap } from '../types';
 
 export const defaultBadgeComponentMap: ComponentMap = {
-	BadgeText: () => BadgeText, // TODO: remove these
-	'searchspring/text': () => BadgeText,
-
-	BadgePill: () => BadgePill, // TODO: remove these
-	'searchspring/pill': () => BadgePill,
-
-	BadgeRectangle: () => BadgeRectangle, // TODO: remove these
-	'searchspring/rectangle': () => BadgeRectangle,
-
-	BadgeImage: () => BadgeImage, // TODO: remove these
-	'searchspring/image': () => BadgeImage,
+	BadgeText: () => BadgeText,
+	BadgePill: () => BadgePill,
+	BadgeRectangle: () => BadgeRectangle,
+	BadgeImage: () => BadgeImage,
 };

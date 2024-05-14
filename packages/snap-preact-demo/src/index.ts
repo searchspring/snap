@@ -25,7 +25,7 @@ let clientConfig = {};
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
 const urlSiteIdParam = urlObj.params.query.siteId || urlObj.params.query.siteid;
-const urlOriginParam = urlObj.params.query.origin || urlObj.params.query.origin;
+const urlOriginParam = urlObj.params.query.origin;
 
 // custom siteId
 if (urlSiteIdParam && urlSiteIdParam.match(/[a-zA-Z0-9]{6}/)) {

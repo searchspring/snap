@@ -50,7 +50,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'rgba(255, 255, 255, 0.5)' },
+				defaultValue: { summary: 'rgba(58, 35, 173, 0.5)' },
 			},
 			control: { type: 'color' },
 		},
@@ -60,9 +60,18 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#000000' },
+				defaultValue: { summary: '#ffffff' },
 			},
 			control: { type: 'color' },
+		},
+		tag: {
+			description: 'Badge location tag',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
 		},
 		...componentArgs,
 	},

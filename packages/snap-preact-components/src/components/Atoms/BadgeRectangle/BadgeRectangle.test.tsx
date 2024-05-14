@@ -34,6 +34,29 @@ describe('BadgeRectangle Component', () => {
 		expect(styles.color).toBe(colorText);
 	});
 
+	it('renders BadgeRectangle with tag class', () => {
+		const tag = 'example-tag';
+		const rendered = render(<BadgeRectangle tag={tag} value={BADGE_VALUE} />);
+		const BadgeRectangleEl = rendered.container.querySelector('.ss__badge-rectangle')!;
+		expect(BadgeRectangleEl).toBeInTheDocument();
+		expect(BadgeRectangleEl).toHaveClass(`ss__badge-rectangle--${tag}`);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<BadgeRectangle className={className} value={BADGE_VALUE} />);
+		const BadgeRectangleEl = rendered.container.querySelector('.ss__badge-rectangle')!;
+
+		expect(BadgeRectangleEl).toHaveClass(className);
+	});
+
+	it('disables styles', () => {
+		const rendered = render(<BadgeRectangle disableStyles value={BADGE_VALUE} />);
+		const BadgeRectangleEl = rendered.container.querySelector('.ss__badge-rectangle')!;
+
+		expect(BadgeRectangleEl?.classList).toHaveLength(2);
+	});
+
 	describe('BadgeRectangle theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

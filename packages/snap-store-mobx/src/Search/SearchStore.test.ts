@@ -27,6 +27,7 @@ describe('Search Store', () => {
 		expect(searchStore.loading).toBe(false);
 
 		expect(searchStore.meta).toBeDefined();
+		expect(searchStore.meta.data).toStrictEqual({});
 
 		expect(searchStore.merchandising).toBeDefined();
 		expect(searchStore.merchandising).toEqual({ redirect: '', content: {}, campaigns: [] });
@@ -55,6 +56,7 @@ describe('Search Store', () => {
 		searchStore.update(searchData as SearchResponseModel);
 
 		expect(searchStore.meta).toBeDefined();
+		expect(searchStore.meta.data).toStrictEqual(searchData.meta);
 
 		expect(searchStore.search).toBeDefined();
 		expect(searchStore.search?.query).toStrictEqual(searchData.search?.query);

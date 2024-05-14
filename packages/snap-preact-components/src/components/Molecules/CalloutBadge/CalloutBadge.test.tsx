@@ -83,6 +83,21 @@ describe('CalloutBadge Component', () => {
 		expect(CalloutBadgeCustomComponent).toBeInTheDocument();
 	});
 
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<CalloutBadge result={result} className={className} />);
+		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
+
+		expect(CalloutBadgeEl).toHaveClass(className);
+	});
+
+	it('disables styles', () => {
+		const rendered = render(<CalloutBadge result={result} disableStyles />);
+		const CalloutBadgeEl = rendered.container.querySelector('.ss__callout-badge')!;
+
+		expect(CalloutBadgeEl?.classList).toHaveLength(2);
+	});
+
 	describe('CalloutBadge theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

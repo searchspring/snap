@@ -1,5 +1,4 @@
 // ATOMS
-export * from './components/Atoms/Badge';
 export * from './components/Atoms/BadgeImage';
 export * from './components/Atoms/BadgePill';
 export * from './components/Atoms/BadgeRectangle';

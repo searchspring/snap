@@ -34,6 +34,28 @@ describe('BadgePill Component', () => {
 		expect(styles.color).toBe(colorText);
 	});
 
+	it('renders BadgePill with tag class', () => {
+		const tag = 'example-tag';
+		const rendered = render(<BadgePill tag={tag} value={BADGE_VALUE} />);
+		const BadgePillEl = rendered.container.querySelector('.ss__badge-pill')!;
+		expect(BadgePillEl).toBeInTheDocument();
+		expect(BadgePillEl).toHaveClass(`ss__badge-pill--${tag}`);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<BadgePill className={className} value={BADGE_VALUE} />);
+		const BadgePillEl = rendered.container.querySelector('.ss__badge-pill')!;
+		expect(BadgePillEl).toHaveClass(className);
+	});
+
+	it('disables styles', () => {
+		const rendered = render(<BadgePill disableStyles value={BADGE_VALUE} />);
+		const BadgePillEl = rendered.container.querySelector('.ss__badge-pill')!;
+
+		expect(BadgePillEl?.classList).toHaveLength(2);
+	});
+
 	describe('BadgePill theming works', () => {
 		it('is themeable with ThemeProvider', () => {
 			const globalTheme = {

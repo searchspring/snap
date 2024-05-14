@@ -33,6 +33,15 @@ export default {
 		),
 	],
 	argTypes: {
+		tag: {
+			description: 'Badge location tag',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		url: {
 			description: 'Badge image url',
 			type: { required: true },
