@@ -16,6 +16,7 @@ export type VariantConfig = {
 export type VariantOptionConfig = {
 	label?: string;
 	preSelected?: string[];
+	thumbnailBackgroundImages?: boolean;
 	mappings?: VariantOptionConfigMappings;
 };
 

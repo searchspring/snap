@@ -73,13 +73,23 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		requireSelection: {
+			description: 'enable/disable requireSelection',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		multiSelect: {
 			description: 'enable/disable multiselect',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -209,7 +219,6 @@ Icons.args = {
 			},
 		},
 	],
-	multiSelect: false,
 } as ListProps;
 
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
@@ -227,8 +236,8 @@ PerPage.loaders = [
 
 PerPage.args = {
 	titleText: 'Per Page',
-	multiSelect: false,
-} as ListProps;
+	requireSelection: true,
+} as Partial<ListProps>;
 
 export const SortBy = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
@@ -245,5 +254,5 @@ SortBy.loaders = [
 
 SortBy.args = {
 	titleText: 'Sort By',
-	multiSelect: false,
-} as ListProps;
+	requireSelection: true,
+} as Partial<ListProps>;

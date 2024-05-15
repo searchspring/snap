@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantConfig, VariantOptionConfigMappings, VariantOptionConfig } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantConfig, VariantOptionConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -337,15 +337,13 @@ export class VariantSelection {
 	public selected?: SelectionValue = undefined;
 	public previouslySelected?: SelectionValue = undefined;
 	public values: SelectionValue[] = [];
-
+	private config: VariantOptionConfig;
 	private variantsUpdate: () => void;
-
-	public mappings: VariantOptionConfigMappings | undefined;
 
 	constructor(variants: Variants, selectorField: string, variantConfig?: VariantOptionConfig) {
 		this.field = selectorField;
 		this.label = variantConfig?.label || selectorField;
-		this.mappings = variantConfig?.mappings;
+		this.config = variantConfig || {};
 
 		// needed to prevent attaching variants as class property
 		this.variantsUpdate = () => variants.refineSelections(this);
@@ -379,7 +377,6 @@ export class VariantSelection {
 					const value = variant.options[this.field].value;
 
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
-
 					const mappedValue: {
 						available: boolean;
 						value: string;
@@ -396,8 +393,12 @@ export class VariantSelection {
 						),
 					};
 
-					if (this.mappings && this.mappings && this.mappings[value.toLowerCase()]) {
-						const mapping = this.mappings[value.toLowerCase()];
+					if (this.config.thumbnailBackgroundImages) {
+						mappedValue.backgroundImageUrl = thumbnailImageUrl;
+					}
+
+					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toLowerCase()]) {
+						const mapping = this.config.mappings[value.toLowerCase()];
 
 						if (mapping.label) {
 							mappedValue.label = mapping.label;

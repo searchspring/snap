@@ -464,6 +464,38 @@ describe('SearchResultStore', () => {
 			expect(newinseamSettings).toContain(newinseamSelection?.selected?.value?.toLocaleLowerCase());
 		});
 
+		it('can use the "thumbnailBackgroundImages" option to set the backgroundImageUrl for each variant to the variant thumbnailImageUrl', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			expect(selection).toBeDefined();
+
+			selection?.values.forEach((value) => {
+				console.log(value);
+				expect(value.backgroundImageUrl).toEqual(value.thumbnailImageUrl);
+			});
+		});
+
 		it('can use variantMappings', () => {
 			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
 
@@ -475,9 +507,12 @@ describe('SearchResultStore', () => {
 						options: {
 							color: {
 								label: 'myColor',
+								thumbnailBackgroundImages: true,
 								mappings: {
 									['mirage']: {
 										label: 'notMirage',
+										background: 'mirage',
+										backgroundImageUrl: 'mirage',
 									},
 								},
 							},
@@ -500,7 +535,12 @@ describe('SearchResultStore', () => {
 			const selectionValueWithMappings = selection?.values.find((val) => val.value.toLowerCase() == 'mirage')!;
 
 			const mappedLabel = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.label;
+			const mappedBackground = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.background;
+			const mappedBackgroundImageUrl = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.backgroundImageUrl;
+
 			expect(selectionValueWithMappings?.label).toEqual(mappedLabel);
+			expect(selectionValueWithMappings?.background).toEqual(mappedBackground);
+			expect(selectionValueWithMappings?.backgroundImageUrl).toEqual(mappedBackgroundImageUrl);
 		});
 
 		describe('variant class', () => {

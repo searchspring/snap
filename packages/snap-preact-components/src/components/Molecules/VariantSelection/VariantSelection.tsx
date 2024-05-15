@@ -102,7 +102,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		dropdown: {
 			name: `ss__variant-selection__dropdown-${selection.field}`,
 			className: 'ss__variant-selection__dropdown',
-			label: selection.field,
+			label: selection.label || selection.field,
 			// global theme
 			...globalTheme?.components?.dropdown,
 			// inherited props
@@ -175,6 +175,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 							return (
 								<Fragment>
 									{(() => {
+										//todo prettify the button
 										const Button = () => {
 											return (
 												<div className="ss__dropdown__button-wrapper">
@@ -235,11 +236,11 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 interface VariantSelectionSubProps {
 	dropdown: Partial<DropdownProps>;
-	list: ListProps;
-	swatches: SwatchesProps;
+	list: Partial<ListProps>;
+	swatches: Partial<SwatchesProps>;
 }
 
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
-	type?: 'dropdown' | 'swatches' | 'list' | 'grid';
+	type?: 'dropdown' | 'swatches' | 'list';
 }

@@ -2,7 +2,7 @@
 
 Renders an variant selection component to be used with a VariantSelection on the searchResultStore.
 
-The varientSelection can be rendered as 3 different types, Dropdown, List, or Swatches.
+The variantSelection can be rendered as 3 different types, Dropdown, List, or Swatches.
 
 ## Components Used
 - Dropdown

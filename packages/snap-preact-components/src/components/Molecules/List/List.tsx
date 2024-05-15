@@ -56,7 +56,6 @@ export function List(properties: ListProps): JSX.Element {
 
 	const props: ListProps = {
 		// default props
-		multiSelect: true,
 		// global theme
 		...globalTheme?.components?.list,
 		// props
@@ -75,6 +74,7 @@ export function List(properties: ListProps): JSX.Element {
 		hideOptionCheckboxes,
 		disabled,
 		options,
+		requireSelection,
 		disableStyles,
 		className,
 		style,
@@ -116,33 +116,41 @@ export function List(properties: ListProps): JSX.Element {
 	if (selected && !Array.isArray(selected)) {
 		selected = [selected];
 	}
+
 	// selection state
 	const [selection, setSelection] = useState((selected as ListOption[]) || []);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
-		if (multiSelect) {
-			let newArray: ListOption[];
+		let newArray: ListOption[];
 
+		if (multiSelect) {
 			if (selection.find((select) => select.value === option.value)) {
 				newArray = [...selection];
+
 				newArray.splice(
 					newArray.findIndex((select) => select.value === option.value),
 					1
 				);
+
+				if (newArray.length == 0 && requireSelection) {
+					newArray = [option];
+				}
 			} else {
 				newArray = [...selection, option];
 			}
-
-			if (onSelect) {
-				onSelect(e, option, newArray);
-			}
-			setSelection(newArray);
 		} else {
-			if (onSelect) {
-				onSelect(e, option, [option]);
+			if (!requireSelection && selection.find((select) => select.value === option.value)) {
+				newArray = [];
+			} else {
+				newArray = [option];
 			}
-			setSelection([option]);
 		}
+
+		if (onSelect) {
+			onSelect(e, option, newArray);
+		}
+
+		setSelection(newArray);
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -198,6 +206,7 @@ export interface ListProps extends ComponentProps {
 	native?: boolean;
 	selected?: ListOption | ListOption[];
 	clickableDisabledOptions?: boolean;
+	requireSelection?: boolean;
 }
 
 interface ListSubProps {
