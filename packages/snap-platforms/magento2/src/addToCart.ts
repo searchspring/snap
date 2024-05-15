@@ -34,7 +34,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 		return false;
 	}
 
-	data.map(async (item: any) => {
+	data.map(async (item: Product) => {
 		let sku: string;
 		if (config?.idFieldName) {
 			let level: any = item;
@@ -57,26 +57,18 @@ export const addToCart = async (data: Product[], config?: config) => {
 
 		if (sku && item.quantity) {
 			const attributes: any = [];
-
-			const json_config = item.display.attributes.json_config;
-			if (json_config) {
-				try {
-					const parsed = JSON.parse(json_config);
-					if (parsed && parsed.attributes) {
-						Object.keys(parsed.attributes).map(async (att) => {
-							//TODO!! this will need to be matched up with what the selected options are on the result
-							const firstOption = parsed.attributes[att].options[0].id;
-
-							const attributeObj = {
-								name: att,
-								val: firstOption,
-							};
-							attributes.push(attributeObj);
-						});
-					}
-				} catch (err) {}
+			const options = item.variants?.active?.options;
+			if (options) {
+				Object.keys(options).forEach((option) => {
+					const attrId = options[option].attributeId;
+					const optionId = options[option].optionId;
+					const attributeObj = {
+						name: attrId,
+						val: optionId,
+					};
+					attributes.push(attributeObj);
+				});
 			}
-
 			line_items.push({
 				product_id: sku,
 				quantity: item.quantity as number,
