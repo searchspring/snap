@@ -34,8 +34,8 @@ export const addToCart = async (data: Product[], config?: config) => {
 		return false;
 	}
 
-	data.map(async (item: Product) => {
-		let sku: string;
+	data.map(async (item) => {
+		let sku: string | undefined;
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
