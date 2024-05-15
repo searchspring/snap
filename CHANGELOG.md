@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Bug Fixes
+
+- **client:** add window checks to NetworkCache ([2c44dc9](https://github.com/searchspring/snap/commit/2c44dc9af5a9425021b9d34c1cc5a88dba23f05b))
+- **controller/autocomplete:** fixing issue where searches were being duplicated initially ([595d5c1](https://github.com/searchspring/snap/commit/595d5c14eb877c497c8fa5da3690d6cd2b9f006c))
+- **preact-components-carousel:** add backwards compatible classnames on each rerender of carousel ([240d9bf](https://github.com/searchspring/snap/commit/240d9bfee9de5230a48792bee56563328cbfae5b))
+
+### Features
+
+- **client:** adding 'fetchApi' configuration and fallback for windowless environments ([c88da99](https://github.com/searchspring/snap/commit/c88da990c00fcfb223ac10ada387f1e2467addf6))
+- **resultstore:** adding setVariants function to give a way to set variant data after initializatio ([5c0c0fb](https://github.com/searchspring/snap/commit/5c0c0fbab2e47c9dfd9f416bb6986cd991b7c809))
+- **searchresultstore:** adding ability to pre select variant options ([551055a](https://github.com/searchspring/snap/commit/551055ada41ec6d23930afeb7fd9dacd2fbba272))
+- **variants:** adding preselected variants to config. & adding eventManager to Snap Preact ([acac381](https://github.com/searchspring/snap/commit/acac3812771b6e66f89472e65357eeff4a3cb8c1))
+
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+### Bug Fixes
+
+- **preact-components-carousel:** bugfix for backwards compatible classnames on carousel re-renders ([0fbbf29](https://github.com/searchspring/snap/commit/0fbbf29134dfedb35bf1327b47673a7e91e9fd36))
+
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+### Bug Fixes
+
+- **preact-components-carousel:** changing the default value for autoAdjustSlides to false ([1abe427](https://github.com/searchspring/snap/commit/1abe42754debfacb584a3c4b3650f4de24473faa))
+
+## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
+
+### Bug Fixes
+
+- **preact-components-swiper:** downgrade swiper version to 11.0.7 ([4777277](https://github.com/searchspring/snap/commit/47772770f25a80c0bc5ff4bcd7769ba9ebd44c61))
+
 ## [0.53.1](https://github.com/searchspring/snap/compare/v0.53.0...v0.53.1) (2024-04-02)
 
 ### Bug Fixes

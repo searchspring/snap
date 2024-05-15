@@ -5,6 +5,7 @@ import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types
 
 import { Banner, Product, SearchResultStore, ProductMask, Variants, Variant, VariantSelection, VariantData } from './SearchResultStore';
 import { parse } from 'uuid';
+import { StoreConfigs, VariantConfig } from '../../types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -210,6 +211,338 @@ describe('SearchResultStore', () => {
 			});
 		});
 
+		it('can use variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[2].attributes.ss_variants;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantDataToUse);
+
+				expect((result as Product).variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+			});
+		});
+
+		it('can be configured to preselect certain variants', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('uses the original constructed config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants as string;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
+
+			const resultForTest = results[0] as Product;
+
+			const productData = searchData.results && searchData.results[0];
+			const variantData = productData?.attributes?.ss_variants;
+
+			expect(variantData).toBeDefined();
+
+			const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+			const variants = (resultForTest as Product).variants;
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('can use a different config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants as string;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
+
+			const resultForTest = results[0] as Product;
+
+			const productData = searchData.results && searchData.results[0];
+			const variantData = productData?.attributes?.ss_variants;
+
+			expect(variantData).toBeDefined();
+
+			const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+			const variants = (resultForTest as Product).variants;
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+
+			//now lets make a new config with different settings and run update with it
+
+			const newVariantsConfig: VariantConfig = {
+				field: 'ss_variants',
+				options: {
+					color: {
+						preSelected: ['scout'],
+					},
+					inseam: {
+						preSelected: ['34'],
+					},
+				},
+			};
+
+			expect(variantData).toBeDefined();
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse, newVariantsConfig);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const newcolorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const newinseamSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'inseam');
+
+			expect(newinseamSelection).toBeDefined();
+			expect(newcolorSelection).toBeDefined();
+
+			const newcolorSettings = newVariantsConfig.options && newVariantsConfig.options[newcolorSelection?.field!]?.preSelected;
+			const newinseamSettings = newVariantsConfig.options && newVariantsConfig.options[newinseamSelection?.field!]?.preSelected;
+
+			expect(newcolorSettings).toContain(newcolorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(newinseamSettings).toContain(newinseamSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('can use the "thumbnailBackgroundImages" option to set the backgroundImageUrl for each variant to the variant thumbnailImageUrl', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			expect(selection).toBeDefined();
+
+			selection?.values.forEach((value) => {
+				console.log(value);
+				expect(value.backgroundImageUrl).toEqual(value.thumbnailImageUrl);
+			});
+		});
+
+		it('can use variantMappings', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								label: 'myColor',
+								thumbnailBackgroundImages: true,
+								mappings: {
+									['mirage']: {
+										label: 'notMirage',
+										background: 'mirage',
+										backgroundImageUrl: 'mirage',
+									},
+								},
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			expect(selection).toBeDefined();
+
+			const settings = variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[selection?.field!];
+			expect(selection?.label).toEqual(settings?.label);
+			const selectionValueWithMappings = selection?.values.find((val) => val.value.toLowerCase() == 'mirage')!;
+
+			const mappedLabel = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.label;
+			const mappedBackground = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.background;
+			const mappedBackgroundImageUrl = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.backgroundImageUrl;
+
+			expect(selectionValueWithMappings?.label).toEqual(mappedLabel);
+			expect(selectionValueWithMappings?.background).toEqual(mappedBackground);
+			expect(selectionValueWithMappings?.backgroundImageUrl).toEqual(mappedBackgroundImageUrl);
+		});
+
 		describe('variant class', () => {
 			it('has specific properties', () => {
 				const mask = new ProductMask();
@@ -327,14 +660,14 @@ describe('SearchResultStore', () => {
 					expect(selection).toHaveProperty('previouslySelected');
 					expect(selection).toHaveProperty('selected');
 					expect(selection).toHaveProperty('values');
-					expect(selection).toHaveProperty('refineSelections');
+					expect(selection).toHaveProperty('refineValues');
 					expect(selection).toHaveProperty('reset');
 					expect(selection).toHaveProperty('select');
 
 					expect(selection.field).toBe(dataOptionName);
 					expect(selection.label).toBe(dataOptionName);
-					expect(selection.selected).toBe(firstAvailableOption?.value);
-					expect(selection.previouslySelected).toBe('');
+					expect(selection.selected?.value).toBe(firstAvailableOption?.value);
+					expect(selection.previouslySelected).toBe(undefined);
 				});
 			});
 
@@ -345,11 +678,11 @@ describe('SearchResultStore', () => {
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants(parsedVariantData, mask);
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				variants.selections[0].select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 
@@ -362,19 +695,19 @@ describe('SearchResultStore', () => {
 				const colorSelector = variants.selections[0];
 				const sizeSelector = variants.selections[1];
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				colorSelector.select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 
 				colorSelector.select('Mirage');
-				const newerSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newerSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newerSelectedSelections).toStrictEqual(['Mirage', '36', '34']);
 
 				sizeSelector.select('30');
-				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected);
+				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(previouslySelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 		});

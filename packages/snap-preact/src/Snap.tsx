@@ -9,6 +9,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
+import { EventManager } from '@searchspring/snap-event-manager';
 
 import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
 
@@ -32,6 +33,7 @@ import { default as createSearchController } from './create/createSearchControll
 import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
+import { setupEvents } from './setupEvents';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -168,6 +170,8 @@ export class Snap {
 		[controllerConfigId: string]: Controllers;
 	} = {};
 
+	public eventManager: EventManager;
+
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
 	};
@@ -298,6 +302,8 @@ export class Snap {
 		window.addEventListener('error', this.handlers.error);
 
 		this.config = config;
+
+		this.eventManager = setupEvents();
 
 		let globalContext: ContextVariables = {};
 		try {
@@ -521,6 +527,16 @@ export class Snap {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
+
+		if (this.eventManager) {
+			window.searchspring.on = (event: string, ...func: any) => {
+				this.eventManager.on(event, ...func);
+			};
+
+			window.searchspring.fire = (event: string, ...func: any) => {
+				this.eventManager.fire(event, ...func);
+			};
+		}
 
 		// autotrack shopper id from the context
 		if (this.context?.shopper?.id) {

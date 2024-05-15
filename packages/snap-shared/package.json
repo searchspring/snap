@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-shared",
 	"private": true,
-	"version": "0.53.1",
+	"version": "0.54.0",
 	"description": "library of shared code utilized by snap packages",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -15,7 +15,7 @@
 		"test:watch": "jest --watch"
 	},
 	"devDependencies": {
-		"@searchspring/snap-client": "^0.53.1"
+		"@searchspring/snap-client": "^0.54.0"
 	},
 	"sideEffects": false,
 	"files": [

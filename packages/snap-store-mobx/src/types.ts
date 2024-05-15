@@ -6,15 +6,31 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
-type VariantConfig = {
+export type VariantConfig = {
 	field: string;
+	options?: {
+		[optionField: string]: VariantOptionConfig;
+	};
+};
+
+export type VariantOptionConfig = {
+	label?: string;
+	preSelected?: string[];
+	thumbnailBackgroundImages?: boolean;
+	mappings?: VariantOptionConfigMappings;
+};
+
+export type VariantOptionConfigMappings = {
+	[optionValue: string]: {
+		label?: string;
+		background?: string;
+		backgroundImageUrl?: string;
+	};
 };
 
 export type VariantSelectionOptions = {
 	field: string;
 	label: string;
-	//todo
-	//swatches: swatchObj
 };
 
 // Search Config

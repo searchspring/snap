@@ -35,21 +35,23 @@ export class NetworkCache {
 					}
 				}
 
-				const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
-				const localData: Cache = stored && JSON.parse(stored);
+				if (typeof window !== 'undefined' && window?.sessionStorage) {
+					const stored = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
+					const localData: Cache = stored && JSON.parse(stored);
 
-				if (localData && key && localData[key]) {
-					// compare the expiry time of the item with the current time
-					if (Date.now() >= localData[key].expires) {
-						// remove item
-						const newStored = {
-							...localData,
-						};
-						delete newStored[key];
-						// update storage
-						sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
-					} else {
-						return localData[key].value;
+					if (localData && key && localData[key]) {
+						// compare the expiry time of the item with the current time
+						if (Date.now() >= localData[key].expires) {
+							// remove item
+							const newStored = {
+								...localData,
+							};
+							delete newStored[key];
+							// update storage
+							window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+						} else {
+							return localData[key].value;
+						}
 					}
 				}
 			} catch (err) {
@@ -69,29 +71,31 @@ export class NetworkCache {
 
 				this.memoryCache[key] = cacheObject;
 
-				const stored: any = sessionStorage.getItem(CACHE_STORAGE_KEY);
-				const newStored: Cache = {
-					...(stored && JSON.parse(stored)),
-				};
-				newStored[key] = cacheObject;
+				if (typeof window !== 'undefined' && window?.sessionStorage) {
+					const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
+					const newStored: Cache = {
+						...(stored && JSON.parse(stored)),
+					};
+					newStored[key] = cacheObject;
 
-				let size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
-				while (size > this.config.maxSize) {
-					const oldestKey = Object.keys(newStored)
-						.filter((key) => newStored[key].purgeable)
-						.sort((a, b) => {
-							return newStored[a].expires - newStored[b].expires;
-						})[0];
+					let size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
+					while (size > this.config.maxSize) {
+						const oldestKey = Object.keys(newStored)
+							.filter((key) => newStored[key].purgeable)
+							.sort((a, b) => {
+								return newStored[a].expires - newStored[b].expires;
+							})[0];
 
-					if (!oldestKey) break;
-					delete newStored[oldestKey];
+						if (!oldestKey) break;
+						delete newStored[oldestKey];
 
-					// recalculate size after removing oldest
-					size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
-				}
+						// recalculate size after removing oldest
+						size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
+					}
 
-				if (size < this.config.maxSize) {
-					sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+					if (size < this.config.maxSize) {
+						window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+					}
 				}
 			} catch (err) {
 				console.warn('something went wrong, browser might not have cookies enabled');
@@ -102,7 +106,9 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			sessionStorage.setItem(CACHE_STORAGE_KEY, '');
+			if (typeof window !== 'undefined' && window?.sessionStorage) {
+				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
+			}
 		} catch (err) {
 			console.warn('something went wrong, browser might not have cookies enabled');
 		}
