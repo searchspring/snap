@@ -29,7 +29,7 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 
 	const props: BadgePillProps = {
 		// default props
-		color: 'rgba(58, 35, 173, 0.5)',
+		color: 'rgba(58, 35, 173, 1)',
 		colorText: '#fff',
 		// global theme
 		...globalTheme?.components?.badgePill,

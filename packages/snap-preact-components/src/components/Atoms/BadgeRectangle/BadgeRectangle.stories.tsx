@@ -50,7 +50,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'rgba(58, 35, 173, 0.5)' },
+				defaultValue: { summary: 'rgba(58, 35, 173, 1)' },
 			},
 			control: { type: 'color' },
 		},
