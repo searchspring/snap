@@ -23,7 +23,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 	}
 
 	data.map((item) => {
-		let sku: any;
+		let id: any;
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
@@ -35,64 +35,22 @@ export const addToCart = async (data: Product[], config?: config) => {
 				}
 			});
 			if (level && level !== item) {
-				sku = level;
+				id = level;
 			} else {
-				sku = item.display.mappings.core?.uid;
+				id = item.display.mappings.core?.uid;
 			}
 		} else {
-			sku = item.display.mappings.core?.uid;
+			id = item.display.mappings.core?.uid;
 		}
-		if (sku && item.quantity) {
+		if (id && item.quantity) {
 			const obj = {
-				product_id: sku,
+				product_id: id,
 				quantity: item.quantity,
 			};
 
 			formData.line_items.push(obj);
 		}
 	});
-
-	const addSingleProductv1 = async (item: { product_id: number; quantity: number }) => {
-		const endpoint = {
-			route: `/remote/v1/cart/add`,
-			method: 'POST',
-			accept: 'application/json',
-			content: 'application/json',
-			success: 200,
-		};
-
-		const resource = `${window.location.origin}${endpoint.route}`;
-
-		const init: any = {
-			method: endpoint.method,
-			credentials: 'same-origin',
-			headers: {
-				// note: no authorization
-				Accept: endpoint.accept,
-			},
-		};
-
-		if (item) {
-			init.headers['Content-Type'] = endpoint.content;
-			//clone item..
-			init.body = { ...item };
-			init.body['action'] = 'add';
-			init.body = JSON.stringify(init.body);
-		}
-
-		try {
-			const response = await fetch(resource, init);
-
-			if (response.status === endpoint.success) {
-				const jsonResponse = response.json();
-				return jsonResponse;
-			} else {
-				return new Error(`Error: Snap-platform-bigcommerce addToCart responded with ${response.status}, ${response}`);
-			}
-		} catch (err) {
-			console.error(err);
-		}
-	};
 
 	//first check how many products we are adding
 	if (formData.line_items.length) {
@@ -106,5 +64,47 @@ export const addToCart = async (data: Product[], config?: config) => {
 	} else {
 		console.log('redirecting');
 		setTimeout(() => (window.location.href = '/cart.php'));
+	}
+};
+
+const addSingleProductv1 = async (item: { product_id: number; quantity: number }) => {
+	const endpoint = {
+		route: `/remote/v1/cart/add`,
+		method: 'POST',
+		accept: 'application/json',
+		content: 'application/json',
+		success: 200,
+	};
+
+	const resource = `${window.location.origin}${endpoint.route}`;
+
+	const init: any = {
+		method: endpoint.method,
+		credentials: 'same-origin',
+		headers: {
+			// note: no authorization
+			Accept: endpoint.accept,
+		},
+	};
+
+	if (item) {
+		init.headers['Content-Type'] = endpoint.content;
+		//clone item..
+		init.body = { ...item };
+		init.body['action'] = 'add';
+		init.body = JSON.stringify(init.body);
+	}
+
+	try {
+		const response = await fetch(resource, init);
+
+		if (response.status === endpoint.success) {
+			const jsonResponse = response.json();
+			return jsonResponse;
+		} else {
+			return new Error(`Error: Snap-platform-bigcommerce addToCart responded with ${response.status}, ${response}`);
+		}
+	} catch (err) {
+		console.error(err);
 	}
 };
