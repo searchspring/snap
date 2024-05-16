@@ -4,3 +4,4 @@ export * from './componentArgs';
 export * from './sprintf';
 export * from './LightenDarkenColor';
 export * from './shiftColor';
+export * from './defaultBadgeComponentMap';

@@ -125,7 +125,7 @@ describe('Snap Client Node Integration Tests', () => {
 			const recParams = { siteId: '8uyt2m', tag: 'dress' };
 			await client.recommend(recParams);
 
-			expect(fetchApiMock).toHaveBeenCalledTimes(2);
+			expect(fetchApiMock).toHaveBeenCalledTimes(3);
 
 			fetchApiMock.mockReset();
 		});

@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantConfig, VariantOptionConfig } from '../../types';
+import type { SearchStoreConfig, StoreServices, StoreConfigs, ResultBadge, VariantOptionConfig, VariantConfig } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -9,6 +9,7 @@ import type {
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 export class SearchResultStore extends Array<Product | Banner> {
@@ -19,12 +20,13 @@ export class SearchResultStore extends Array<Product | Banner> {
 	constructor(
 		config: StoreConfigs,
 		services: StoreServices,
+		metaData: MetaResponseModel,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, config);
+			return new Product(services, result, metaData, config);
 		});
 
 		if (merchData?.content?.inline) {
@@ -96,14 +98,18 @@ export class Product {
 	};
 	public custom = {};
 	public children?: Array<Child> = [];
+	public badges: Badges;
+
 	public quantity = 1;
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, config?: StoreConfigs) {
+	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
+
+		this.badges = new Badges(result, metaData);
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -148,6 +154,62 @@ export class Product {
 
 	public get display(): ProductMinimal {
 		return deepmerge({ id: this.id, mappings: this.mappings, attributes: this.attributes }, this.mask.data, { isMergeableObject: isPlainObject });
+	}
+}
+
+export class Badges {
+	public all: ResultBadge[] = [];
+
+	constructor(result: SearchResponseModelResult, metaData: MetaResponseModel) {
+		this.all = (result.badges || [])
+			.filter((badge) => {
+				// remove badges that are not in the meta or are disabled
+				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
+			})
+			.map((badge) => {
+				// merge badge with badge meta data
+				const metaBadgeData = metaData?.badges?.tags?.[badge.tag]!;
+
+				return {
+					...badge,
+					...metaBadgeData,
+				};
+			})
+			.sort((a, b) => {
+				return a.priority - b.priority;
+			}) as ResultBadge[];
+
+		makeObservable(this, {
+			all: observable,
+			tags: computed,
+			locations: computed,
+		});
+	}
+
+	// get all the result badges that are in a specific location
+	public atLocation(location?: string[] | string): ResultBadge[] {
+		const locations = Array.isArray(location) ? location : [location];
+		return this.all.filter((badge) => {
+			// filter location
+			return locations.some((location) => badge.location.startsWith(`${location}/`) || badge.location == location);
+		});
+	}
+
+	public get tags(): Record<string, ResultBadge> {
+		return this.all.reduce((badgeMap: Record<string, ResultBadge>, badge) => {
+			badgeMap[badge.tag] = badge;
+			return badgeMap;
+		}, {});
+	}
+
+	public get locations(): Record<string, Record<string, ResultBadge[]>> {
+		return this.all.reduce((locationMap: Record<string, Record<string, ResultBadge[]>>, badge) => {
+			// put badge in location by path
+			const [section, tag] = badge.location.split('/');
+			locationMap[section] = locationMap[section] || {};
+			locationMap[section][tag] = (locationMap[section][tag] || []).concat(badge);
+			return locationMap;
+		}, {});
 	}
 }
 

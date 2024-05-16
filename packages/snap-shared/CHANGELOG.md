@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Features
+
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+
 # [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
 
 **Note:** Version bump only for package @searchspring/snap-shared

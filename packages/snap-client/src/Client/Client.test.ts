@@ -374,7 +374,7 @@ describe('Snap Client', () => {
 			//wait for batch timeout
 			await wait(300);
 
-			expect(fetchApiMock).toHaveBeenCalledTimes(2);
+			expect(fetchApiMock).toHaveBeenCalledTimes(3);
 			fetchApiMock.mockReset();
 		});
 
@@ -617,7 +617,7 @@ describe('Snap Client', () => {
 				//wait for batch timeout
 				await wait(300);
 
-				expect(fetchApiMock).toHaveBeenCalledTimes(2);
+				expect(fetchApiMock).toHaveBeenCalledTimes(3);
 				fetchApiMock.mockReset();
 			});
 		});

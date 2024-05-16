@@ -6,5 +6,5 @@ export * from './Search/Stores/';
 export { RecommendationStore } from './Recommendation/RecommendationStore';
 export { CartStore } from './Cart/CartStore';
 export { StorageStore, StorageConfig, StorageType } from './Storage/StorageStore';
-
+export { MetaStore } from './Meta/MetaStore';
 export * from './types';

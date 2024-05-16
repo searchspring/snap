@@ -1,4 +1,4 @@
-import { RenderableProps } from 'preact';
+import { FunctionalComponent, RenderableProps } from 'preact';
 import { SerializedStyles } from '@emotion/react';
 import { Theme } from './providers/theme';
 import { IconProps } from './components/Atoms/Icon';
@@ -24,6 +24,10 @@ export type ListOption = {
 export type SwatchOption = ListOption & {
 	backgroundImageUrl?: string;
 	background?: string;
+};
+
+export type ComponentMap = {
+	[key: string]: (args?: any) => FunctionalComponent<RenderableProps<any>> | Promise<(args?: any) => React.ReactElement>;
 };
 
 export enum Layout {

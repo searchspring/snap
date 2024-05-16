@@ -1,5 +1,8 @@
 // ATOMS
-export * from './components/Atoms/Badge';
+export * from './components/Atoms/BadgeImage';
+export * from './components/Atoms/BadgePill';
+export * from './components/Atoms/BadgeRectangle';
+export * from './components/Atoms/BadgeText';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
@@ -15,6 +18,7 @@ export * from './components/Trackers/Recommendation/ResultTracker';
 export * from './components/Trackers/Recommendation/ProfileTracker';
 
 // MOLECULES
+export * from './components/Molecules/CalloutBadge';
 export * from './components/Molecules/Carousel';
 export * from './components/Molecules/Checkbox';
 export * from './components/Molecules/ErrorHandler';
@@ -23,6 +27,7 @@ export * from './components/Molecules/FacetHierarchyOptions';
 export * from './components/Molecules/FacetListOptions';
 export * from './components/Molecules/FacetPaletteOptions';
 export * from './components/Molecules/Filter';
+export * from './components/Molecules/OverlayBadge';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/Result';
 export * from './components/Molecules/Select';
