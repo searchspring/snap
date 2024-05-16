@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useA11y } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
+import { filters } from '@searchspring/snap-toolbox';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
@@ -238,9 +239,9 @@ export function Grid(properties: GridProps): JSX.Element {
 						if (!limited || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
-									className={`ss__grid__option ss__grid__option--${option.value} ${selected ? 'ss__grid__option--selected' : ''} ${
-										option.disabled ? 'ss__grid__option--disabled' : ''
-									} ${option.available == false ? 'ss__grid__option--unavailable' : ''} `}
+									className={`ss__grid__option ss__grid__option--${filters.handleize(option.value.toString())} ${
+										selected ? 'ss__grid__option--selected' : ''
+									} ${option.disabled ? 'ss__grid__option--disabled' : ''} ${option.available == false ? 'ss__grid__option--unavailable' : ''} `}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}

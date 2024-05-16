@@ -13,6 +13,8 @@ import { defined } from '../../../utilities';
 import { Grid, GridProps } from '../Grid';
 import { ImageProps, Image } from '../../Atoms/Image';
 import deepmerge from 'deepmerge';
+import { filters } from '@searchspring/snap-toolbox';
+
 const CSS = {
 	Swatches: ({}: Partial<SwatchesProps>) =>
 		css({
@@ -185,7 +187,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 							return (
 								<div
-									className={`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${option.value} ${
+									className={`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value.toString())} ${
 										selected ? 'ss__swatches__carousel__swatch--selected' : ''
 									} ${option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''}`}
 									title={label}

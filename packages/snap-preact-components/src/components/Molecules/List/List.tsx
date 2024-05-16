@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { useA11y } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { filters } from '@searchspring/snap-toolbox';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
@@ -169,9 +170,9 @@ export function List(properties: ListProps): JSX.Element {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 						return (
 							<li
-								className={`ss__list__option ss__list__option--${option.value} ${selected ? 'ss__list__option--selected' : ''} ${
-									option.disabled ? 'ss__list__option--disabled' : ''
-								} ${option.available == false ? 'ss__list__option--unavailable' : ''}`}
+								className={`ss__list__option ss__list__option--${filters.handleize(option.value.toString())} ${
+									selected ? 'ss__list__option--selected' : ''
+								} ${option.disabled ? 'ss__list__option--disabled' : ''} ${option.available == false ? 'ss__list__option--unavailable' : ''}`}
 								ref={(e) => useA11y(e)}
 								onClick={(e) => !disabled && makeSelection(e as any, option)}
 								title={option.label}
