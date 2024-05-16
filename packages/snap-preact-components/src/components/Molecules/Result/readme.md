@@ -17,7 +17,7 @@ The required `result` prop specifies a reference to a product object from the `r
 ```
 
 ### hideBadge
-The `hideBadge` prop will prevent the `<Badge />` component from rendering.
+The `hideBadge` prop will prevent the `<OverlayBadge />` and `<CalloutBadge />` components from rendering.
 
 ```jsx
 <Result result={controller.store.results[0]} hideBadge={true} />

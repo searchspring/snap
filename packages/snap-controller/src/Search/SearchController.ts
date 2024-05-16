@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import cssEscape from 'css.escape';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
@@ -75,7 +75,7 @@ export class SearchController extends AbstractController {
 		this.store.setConfig(this.config);
 
 		this.storage = new StorageStore({
-			type: StorageType.SESSION,
+			type: 'session',
 			key: `ss-controller-${this.config.id}`,
 		});
 

@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -72,7 +72,7 @@ export class AutocompleteController extends AbstractController {
 
 		// persist trending terms in local storage
 		this.storage = new StorageStore({
-			type: StorageType.SESSION,
+			type: 'session',
 			key: `ss-controller-${this.config.id}`,
 		});
 

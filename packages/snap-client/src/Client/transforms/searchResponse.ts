@@ -8,6 +8,7 @@ import {
 	SearchResponseModelPagination,
 	SearchResponseModelSearchMatchTypeEnum,
 	SearchResponseModelMerchandising,
+	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
@@ -40,6 +41,7 @@ type sortingOption = {
 };
 
 type rawResult = {
+	badges?: SearchResponseModelResultBadges[];
 	brand?: string;
 	collection_handle?: string[];
 	collection_id?: string[];
@@ -211,6 +213,8 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 
 	const attributes = Object.keys(rawResult)
 		.filter((k) => CORE_FIELDS.indexOf(k) == -1)
+		// remove 'badges' from attributes - but only if it is an object
+		.filter((k) => !(k == 'badges' && typeof rawResult[k] == 'object'))
 		.reduce((attributes, key) => {
 			return {
 				...attributes,
@@ -238,6 +242,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 			core: coreFieldValues,
 		},
 		attributes,
+		badges: typeof rawResult.badges == 'object' ? rawResult.badges : [],
 		children,
 	});
 };
@@ -453,9 +458,14 @@ transformSearchResponse.search = (response: searchResponseType, request: SearchR
 };
 
 // used for HTML entities decoding
-function decodeProperty(encoded: string | string[]) {
+function decodeProperty(encoded: string | string[] | SearchResponseModelResultBadges[]) {
 	if (Array.isArray(encoded)) {
-		return encoded.map((item) => htmlUnescape(String(item)));
+		return encoded.map((item) => {
+			if (typeof item === 'string') {
+				return htmlUnescape(String(item));
+			}
+			return item;
+		});
 	} else {
 		return htmlUnescape(String(encoded));
 	}
