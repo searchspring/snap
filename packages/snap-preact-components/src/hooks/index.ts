@@ -5,3 +5,4 @@ export * from './useIntersection';
 export * from './useDisplaySettings';
 export * from './useA11y';
 export * from './useDeepCompareEffect';
+export * from './useComponent';

@@ -5,16 +5,23 @@ import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
-import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
-
+import { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
-import { SearchResponseModel } from '@searchspring/snapi-types';
+
+import type { Product } from '@searchspring/snap-store-mobx';
 
 const mockData = new MockData();
-const searchResponse: SearchResponseModel = mockData.search();
+const searchResponse = mockData.searchMeta();
 
-// TODO: refactor to use mock store data
-const mockResults = searchResponse.results as SearchResultStore;
+const mockResults = new SearchResultStore(
+	{ id: 'test' },
+	{ urlManager: new UrlManager(new UrlTranslator()) },
+	searchResponse.meta,
+	searchResponse.results,
+	searchResponse.pagination,
+	searchResponse.merchandising
+);
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -29,14 +36,8 @@ describe('Result Component', () => {
 		expect(imageElement).toBeInTheDocument();
 	});
 
-	it('renders badge', () => {
-		const rendered = render(<Result result={mockResults[0] as Product} />);
-		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__badge');
-		expect(badgeElement).toBeInTheDocument();
-	});
-
 	it('renders title', () => {
-		const rendered = render(<Result result={searchResponse.results![0] as Product} />);
+		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
 		expect(title?.textContent).toBe(searchResponse.results![0].mappings?.core?.name);
 	});
@@ -68,9 +69,13 @@ describe('Result Component', () => {
 		};
 		const rendered = render(<Result {...args} />);
 		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__badge');
+		const overlayBadgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__overlay-badge');
+		const calloutBadgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__callout-badge');
 		const titleElement = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__wrapper__details__title');
 		const priceElement = rendered.container.querySelector('.ss__result .ss__result__details__pricing .ss__price');
 		expect(badgeElement).not.toBeInTheDocument();
+		expect(overlayBadgeElement).not.toBeInTheDocument();
+		expect(calloutBadgeElement).not.toBeInTheDocument();
 		expect(titleElement).not.toBeInTheDocument();
 		expect(priceElement).not.toBeInTheDocument();
 	});

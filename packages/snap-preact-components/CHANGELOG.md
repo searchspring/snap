@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Bug Fixes
+
+- add right css property to OverlayBadge ([30b4f5a](https://github.com/searchspring/snap/commit/30b4f5a5dd86cd0f397906c0817925e664505524))
+- pr feedback ([c977223](https://github.com/searchspring/snap/commit/c977223ccfc6c9be649d05028981c2f189b811d6))
+- **preact-components-badges:** some small bugfixes to new badge components ([3ba9fd9](https://github.com/searchspring/snap/commit/3ba9fd944cf8e966a7bc7a3f9c42f2dc84d691e6))
+- **preact-components/overlaybadge:** restoring lost positioning of the 'right' section (align right) ([fc72bbc](https://github.com/searchspring/snap/commit/fc72bbc2698868f86a3f515a7417f49b3da82eab))
+- remove opacity from BadgePill and BadgeRectangle color default ([0daf2d8](https://github.com/searchspring/snap/commit/0daf2d892fe36c8d3d292b76055815bc85e624ed))
+- update badges to latest meta changes ([c06ec17](https://github.com/searchspring/snap/commit/c06ec17e3ef934cb4813b27959c8411b9f9e2bd8))
+
+### Features
+
+- add BadgePill and BadgeRectangle components ([6ffb28b](https://github.com/searchspring/snap/commit/6ffb28b29584f6bd5a5af1755279a0cbfcf03c27))
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+- initial badge component ([a8aaad9](https://github.com/searchspring/snap/commit/a8aaad91496d7b4808973612fdf818d8db7e10e2))
+
 # [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
 
 ### Features

@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
-import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { StorageStore } from '@searchspring/snap-store-mobx';
 import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 
@@ -73,7 +73,7 @@ export class Tracker {
 		this.globals = globals;
 
 		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
+			type: 'local',
 			key: `ss-${this.config.id}`,
 		});
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Bug Fixes
+
+- pr feedback ([c977223](https://github.com/searchspring/snap/commit/c977223ccfc6c9be649d05028981c2f189b811d6))
+- **preact-components-badges:** some small bugfixes to new badge components ([3ba9fd9](https://github.com/searchspring/snap/commit/3ba9fd944cf8e966a7bc7a3f9c42f2dc84d691e6))
+- remove getTag helper ([9cc4a72](https://github.com/searchspring/snap/commit/9cc4a72d96247357a5114adb771b370f5d7fd109))
+- update badges to latest meta changes ([c06ec17](https://github.com/searchspring/snap/commit/c06ec17e3ef934cb4813b27959c8411b9f9e2bd8))
+
+### Features
+
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+- initial badge component ([a8aaad9](https://github.com/searchspring/snap/commit/a8aaad91496d7b4808973612fdf818d8db7e10e2))
+
 # [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
 
 ### Features
