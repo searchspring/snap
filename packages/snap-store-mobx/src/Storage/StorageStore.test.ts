@@ -213,7 +213,7 @@ describe('Storage Store', () => {
 
 	describe('Storage Store sets custom config', () => {
 		const config = {
-			type: StorageType.SESSION,
+			type: StorageType.session,
 			cookie: {
 				expiration: 100000,
 				sameSite: 'sameSite',
@@ -233,7 +233,7 @@ describe('Storage Store', () => {
 		});
 	});
 
-	[StorageType.SESSION, StorageType.LOCAL, StorageType.COOKIE].forEach((storageType) => {
+	[StorageType.session, StorageType.local, StorageType.cookie].forEach((storageType) => {
 		describe(`Storage Store using ${storageType} storage`, () => {
 			describe('set functionality', () => {
 				it('does nothing when you pass undefined for both path and value', () => {

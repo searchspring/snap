@@ -1,4 +1,4 @@
-import { StorageStore, StorageType } from '../../Storage/StorageStore';
+import { StorageStore } from '../../Storage/StorageStore';
 import type { StoreServices } from '../../types';
 import { Query } from './SearchQueryStore';
 
@@ -30,7 +30,7 @@ export class SearchHistoryStore {
 		}
 
 		this.storage = new StorageStore({
-			type: StorageType.LOCAL,
+			type: 'local',
 			key: `ss-history${this.config.siteId ? `-${this.config.siteId}` : ``}`,
 		});
 

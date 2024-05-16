@@ -43,7 +43,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.loading).toBe(false);
 
 		expect(autocompleteStore.meta).toBeDefined();
-		expect(autocompleteStore.meta).toStrictEqual({});
+		expect(autocompleteStore.meta.data).toStrictEqual({});
 
 		expect(autocompleteStore.terms).toBeDefined();
 		expect(autocompleteStore.terms).toStrictEqual([]);
@@ -82,7 +82,7 @@ describe('Autocomplete Store', () => {
 		autocompleteStore.update(searchData);
 
 		expect(autocompleteStore.meta).toBeDefined();
-		expect(autocompleteStore.meta).toStrictEqual(searchData.meta);
+		expect(autocompleteStore.meta.data).toStrictEqual(searchData.meta);
 
 		expect(autocompleteStore.search).toBeDefined();
 		expect(autocompleteStore.search?.query).toBeDefined();

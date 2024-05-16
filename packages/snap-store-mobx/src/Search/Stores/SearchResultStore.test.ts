@@ -27,13 +27,13 @@ describe('SearchResultStore', () => {
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		// @ts-ignore
-		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined);
+		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new SearchResultStore(searchConfig, services, [], undefined, undefined);
+		const results = new SearchResultStore(searchConfig, services, {}, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
@@ -41,7 +41,7 @@ describe('SearchResultStore', () => {
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results?.length);
 	});
@@ -49,7 +49,7 @@ describe('SearchResultStore', () => {
 	it('has result data that matches what was passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -126,7 +126,14 @@ describe('SearchResultStore', () => {
 		it('has a mask property and also a display property that "masks"" the core fields and attributes', () => {
 			const searchData = mockData.searchMeta();
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			results.forEach((result, index) => {
 				// check display properties
@@ -169,7 +176,14 @@ describe('SearchResultStore', () => {
 		it('can use the mask with the display property', () => {
 			const searchData = mockData.searchMeta();
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			const firstProduct = results[0] as Product;
 
 			const maskData = { mappings: { core: { name: 'new name', price: 1.0 } }, attributes: { special: 'thing' } };
@@ -194,7 +208,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			results.forEach((result, index) => {
@@ -222,7 +243,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[2].attributes.ss_variants;
@@ -271,7 +299,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			results.forEach((result, index) => {
@@ -318,7 +353,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants;
@@ -378,7 +420,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants;
@@ -635,7 +684,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
@@ -644,7 +693,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -657,7 +706,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page2');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -668,7 +717,7 @@ describe('SearchResultStore', () => {
 		it('correctly splices four inline banners into the results array with low numbers of results', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners-x4');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(11);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -724,11 +773,159 @@ describe('SearchResultStore', () => {
 					},
 				},
 			};
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
 			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
+		});
+	});
+	describe('with badges', () => {
+		it('has overlay result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 0;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+			});
+
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual([result.badges.all[0]]);
+		});
+
+		it('has callout result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 2;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+			});
+
+			expect(result.badges.locations.callout).toStrictEqual({
+				[badgeMeta.location.split('/')[1]]: [result.badges.all[0]],
+			});
+		});
+
+		it('has sorted badges based on priority', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const indexOfOverlayBadge = 1;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			const badgeMeta = searchData.meta?.badges?.tags!;
+			expect(badgeMeta).toBeDefined();
+
+			// raw result badges should have two badges, first one with priority 2, second one with priority 1
+			expect(badgeMeta[resultBadges[0].tag].priority).toBeGreaterThan(badgeMeta[resultBadges[1].tag].priority);
+
+			// result badges should be sorted by priority in the store
+			expect(result.badges.all[0].priority).toBeLessThan(result.badges.all[1].priority);
+
+			// mock data should have two overlay badges with the same same location
+			expect(result.badges.all[0].location).toBe(result.badges.all[1].location);
+			expect(result.badges.all[0].priority).not.toBe(result.badges.all[1].priority);
+
+			// result.overlay should only return 1 badge per location based on priority
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual(result.badges.all);
+		});
+
+		it('has helper method atLocation and tags getter', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const result = results[0] as Product;
+			expect(result.badges.all.length).toBe(1);
+
+			const badge = result.badges.all[0];
+			expect(result.badges.atLocation(badge.location)).toStrictEqual(result.badges.all);
+			expect(result.badges.tags).toStrictEqual({
+				[badge.tag]: badge,
+			});
 		});
 	});
 });

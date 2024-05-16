@@ -24,25 +24,25 @@ export class StorageStore {
 			}
 
 			switch (config.type) {
-				case StorageType.SESSION: {
-					this.type = featureFlags.storage ? config.type : null;
+				case StorageType.session: {
+					this.type = featureFlags.storage ? (config.type as StorageType) : null;
 					if (this.type) {
 						this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
 						window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				}
-				case StorageType.LOCAL: {
-					this.type = featureFlags.storage ? config.type : null;
+				case StorageType.local: {
+					this.type = featureFlags.storage ? (config.type as StorageType) : null;
 					if (this.type) {
 						this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
 						window.localStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				}
-				case StorageType.COOKIE: {
+				case StorageType.cookie: {
 					if (featureFlags.cookies) {
-						this.type = config.type;
+						this.type = config.type as StorageType;
 						const data = utils.cookies.get(this.key);
 						if (data) {
 							this.state = JSON.parse(data);
@@ -51,7 +51,7 @@ export class StorageStore {
 					break;
 				}
 				default: {
-					this.type = StorageType.MEMORY;
+					this.type = StorageType.memory;
 				}
 			}
 		}
@@ -70,13 +70,13 @@ export class StorageStore {
 			}
 		});
 		switch (this.type) {
-			case StorageType.SESSION:
+			case StorageType.session:
 				window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 				break;
-			case StorageType.LOCAL:
+			case StorageType.local:
 				window.localStorage.setItem(this.key, JSON.stringify(this.state));
 				break;
-			case StorageType.COOKIE:
+			case StorageType.cookie:
 				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
 				break;
 		}
@@ -84,15 +84,15 @@ export class StorageStore {
 
 	public get(path: string): any | undefined {
 		switch (this.type) {
-			case StorageType.SESSION:
+			case StorageType.session:
 				const sessionData = window.sessionStorage.getItem(this.key);
 				this.state = sessionData ? JSON.parse(sessionData) : {};
 				break;
-			case StorageType.LOCAL:
+			case StorageType.local:
 				const localData = window.localStorage.getItem(this.key);
 				this.state = localData ? JSON.parse(localData) : {};
 				break;
-			case StorageType.COOKIE:
+			case StorageType.cookie:
 				const data = utils.cookies.get(this.key);
 				if (data) {
 					this.state = JSON.parse(data) || {};
@@ -117,13 +117,13 @@ export class StorageStore {
 
 	public clear(): void {
 		switch (this.type) {
-			case StorageType.SESSION:
+			case StorageType.session:
 				window.sessionStorage.removeItem(this.key);
 				break;
-			case StorageType.LOCAL:
+			case StorageType.local:
 				window.localStorage.removeItem(this.key);
 				break;
-			case StorageType.COOKIE:
+			case StorageType.cookie:
 				utils.cookies.unset(this.key);
 				break;
 		}
@@ -132,7 +132,7 @@ export class StorageStore {
 }
 
 export type StorageConfig = {
-	type: StorageType;
+	type: StorageType | keyof typeof StorageType;
 	cookie?: {
 		expiration?: number;
 		sameSite?: string;
@@ -141,8 +141,8 @@ export type StorageConfig = {
 };
 
 export enum StorageType {
-	SESSION = 'session',
-	LOCAL = 'local',
-	COOKIE = 'cookie',
-	MEMORY = 'memory',
+	session = 'session',
+	local = 'local',
+	cookie = 'cookie',
+	memory = 'memory',
 }
