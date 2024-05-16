@@ -131,7 +131,7 @@ const snapInstance = Snapify.search(config);
 
 export const Default = (props: VariantSelectionProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	const selection = (controller.store.results[0] as Product).variants?.selections[0];
-	return <VariantSelection selection={selection!} />;
+	return <VariantSelection {...props} selection={selection!} />;
 };
 
 Default.loaders = [

@@ -86,6 +86,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideShowLess: {
+			description: 'hide show less button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		columns: {
 			defaultValue: 4,
 			description: 'Number of columns in grid',
@@ -217,4 +227,94 @@ DisabledOption.args = {
 			value: 'eight',
 		},
 	],
+} as GridProps;
+
+export const backgroundImages = (args: GridProps) => <Grid {...args} />;
+backgroundImages.args = {
+	options: [
+		{
+			value: 'one',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/1610055_outerknown_fortchinopants_sct_F_pdp_1400x1400_f953fa33-a0ae-4186-8214-c8802b5455c7.jpg?v=1706131359',
+		},
+		{
+			value: 'two',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/8054ec99b74ddfc80a333f6e00cff3e3_29c3167d-d168-4027-a861-903833e708e7.jpg?v=1706125265',
+		},
+		{
+			value: 'three',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_1_0e3b5702-49e2-4608-acb6-7c131891fc18_450x.jpg?v=1706124808',
+		},
+		{
+			value: 'four',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_2_8ccf82df-634c-4566-a804-467d76f61906.jpg?v=1706124808',
+		},
+	],
+	hideLabels: true,
+	rows: 2,
+	columns: 2,
+} as GridProps;
+
+export const backgroundColors = (args: GridProps) => <Grid {...args} />;
+backgroundColors.args = {
+	options: [
+		{
+			value: 'red',
+			background: 'red',
+		},
+		{
+			value: 'blue',
+			background: 'blue',
+		},
+		{
+			value: 'white',
+			background: 'white',
+			disabled: true,
+		},
+		{
+			value: 'green',
+			background: 'green',
+		},
+		{
+			value: 'yellow',
+			background: 'yellow',
+		},
+	],
+	hideLabels: true,
+	rows: 2,
+	columns: 2,
+} as GridProps;
+export const overflow = (args: GridProps) => <Grid {...args} />;
+overflow.args = {
+	options: [
+		{
+			value: 'one',
+		},
+		{
+			value: 'two',
+		},
+		{
+			value: 'three',
+		},
+		{
+			value: 'four',
+		},
+		{
+			value: 'five',
+		},
+		{
+			value: 'six',
+		},
+		{
+			value: 'seven',
+		},
+		{
+			value: 'eight',
+		},
+	],
+	rows: 2,
+	columns: 3,
 } as GridProps;

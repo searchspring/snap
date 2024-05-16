@@ -90,15 +90,15 @@ describe('Grid Component', () => {
 
 		expect(selectedOptions.length).toBe(0);
 
-		await userEvent.click(optionElems[0]);
+		await userEvent.click(optionElems[1]);
 
 		selectedOptions = gridComponent.container.querySelectorAll('.ss__grid__option--selected');
 
 		expect(selectedOptions.length).toBe(1);
 
-		expect(selectedOptions[0]).toHaveTextContent(options[0].value);
+		expect(selectedOptions[0]).toHaveTextContent(options[1].value);
 
-		await userEvent.click(optionElems[1]);
+		await userEvent.click(optionElems[2]);
 
 		selectedOptions = gridComponent.container.querySelectorAll('.ss__grid__option--selected');
 
@@ -117,13 +117,13 @@ describe('Grid Component', () => {
 		expect(selectedOptions.length).toBe(0);
 		expect(myFunc).not.toHaveBeenCalled();
 
-		await userEvent.click(optionElems[0]);
+		await userEvent.click(optionElems[1]);
 
 		selectedOptions = gridComponent.container.querySelectorAll('.ss__grid__option--selected');
 
 		expect(selectedOptions.length).toBe(1);
 
-		expect(selectedOptions[0]).toHaveTextContent(options[0].value);
+		expect(selectedOptions[0]).toHaveTextContent(options[1].value);
 
 		expect(myFunc).toHaveBeenCalled();
 	});

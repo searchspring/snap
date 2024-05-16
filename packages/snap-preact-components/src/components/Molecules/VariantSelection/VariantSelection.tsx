@@ -53,6 +53,7 @@ const CSS = {
 
 					'.ss__variant-selection__option': {
 						cursor: 'pointer',
+						position: 'relative',
 					},
 
 					'.ss__variant-selection__option:hover': {
@@ -65,18 +66,7 @@ const CSS = {
 
 					'.ss__variant-selection__option--disabled': {
 						opacity: '.5',
-					},
-
-					'.ss__variant-selection__option--disabled:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						top: '50%',
-						left: '0',
-						right: '0',
-						width: '40px',
-						height: '1px',
-						borderTop: '1px solid black',
+						textDecoration: 'line-through',
 					},
 				},
 			},

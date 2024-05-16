@@ -102,6 +102,13 @@ The optional `hideLabels` prop specifies if option labels should be hidden.
 <Grid options={options} hideLabels={true} />
 ```
 
+### hideShowLess
+The optional `hideShowLess` prop specifies if show less button should be hidden. 
+
+```jsx
+<Grid options={options} hideShowLess={true} />
+```
+
 ### multiselect
 The optional `multiselect` prop specifies if more than a single option can be selected at once. 
 

@@ -15,6 +15,7 @@ export type ListOption = {
 	value: string | number;
 	label?: string;
 	disabled?: boolean;
+	available?: boolean;
 	default?: boolean;
 	icon?: string | Partial<IconProps>;
 	url?: UrlManager;

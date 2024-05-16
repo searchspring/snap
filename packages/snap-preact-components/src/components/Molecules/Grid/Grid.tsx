@@ -52,18 +52,24 @@ const CSS = {
 					'&.ss__grid__option--disabled': {
 						position: 'relative',
 						opacity: '.5',
+						cursor: 'none',
+						pointerEvents: 'none',
 					},
-					'&.ss__grid__option--disabled:before': {
+
+					'&.ss__grid__option--unavailable': {
+						position: 'relative',
+						opacity: '.5',
+					},
+
+					'&.ss__grid__option--disabled:before, &.ss__grid__option--unavailable:before': {
 						content: '""',
 						display: 'block',
 						position: 'absolute',
 						top: '50%',
-						left: '0',
-						right: '0',
-						margin: 'auto',
-						width: '40px',
+						width: '90%',
 						height: '1px',
-						borderTop: '1px solid black',
+						borderTop: '3px solid #eee',
+						transform: 'rotate(-45deg)',
 					},
 
 					'&:hover:not(.ss__grid__option--selected)': {
@@ -97,7 +103,6 @@ const CSS = {
 			'.ss__grid__show-more-wrapper': {
 				'&:hover': {
 					cursor: disableOverflowAction ? 'initial !important' : 'pointer !important',
-					background: !disableOverflowAction ? `${theme?.colors?.hover || '#f8f8f8'} !important` : 'initial !important',
 				},
 			},
 		}),
@@ -128,6 +133,7 @@ export function Grid(properties: GridProps): JSX.Element {
 		overflowButton,
 		columns,
 		rows,
+		hideShowLess,
 		gapSize,
 		overflowButtonInGrid,
 		disabled,
@@ -212,7 +218,7 @@ export function Grid(properties: GridProps): JSX.Element {
 				cloneWithProps(overflowButton, { limited, remainder })
 			) : limited ? (
 				<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
-			) : remainder ? (
+			) : remainder && !hideShowLess ? (
 				<span className={'ss__grid__show-less'}>Show Less</span>
 			) : (
 				<></>
@@ -232,9 +238,9 @@ export function Grid(properties: GridProps): JSX.Element {
 						if (!limited || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
-									className={`ss__grid__option ${selected ? 'ss__grid__option--selected' : ''} ${
+									className={`ss__grid__option ss__grid__option--${option.value} ${selected ? 'ss__grid__option--selected' : ''} ${
 										option.disabled ? 'ss__grid__option--disabled' : ''
-									}`}
+									} ${option.available == false ? 'ss__grid__option--unavailable' : ''} `}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
@@ -269,6 +275,7 @@ export interface GridProps extends ComponentProps {
 	multiSelect?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption, selected: ListOption[]) => void;
 	titleText?: string;
+	hideShowLess?: boolean;
 	selected?: ListOption | ListOption[];
 	columns?: number;
 	rows?: number;

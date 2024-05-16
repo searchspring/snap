@@ -24,13 +24,11 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				border: '4px solid #eee',
-				width: '40px',
-				height: '40px',
+				aspectRatio: '1/1',
 				margin: 'auto',
 				'& .ss__swatches__carousel__swatch__value': {
 					textAlign: 'center',
 					verticalAlign: 'middle',
-					lineHeight: '40px',
 					display: 'block',
 					fontSize: '10px',
 				},
@@ -40,16 +38,18 @@ const CSS = {
 				'&.ss__swatches__carousel__swatch--disabled': {
 					position: 'relative',
 					opacity: '0.4',
-					'&:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						top: '20px',
-						width: '40px',
-						height: '1px',
-						borderTop: '4px solid #eee',
-						transform: 'rotate(-45deg)',
-					},
+				},
+
+				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--selected:before': {
+					content: '""',
+					display: 'block',
+					position: 'absolute',
+					top: '50%',
+					width: '90%',
+					height: '1px',
+					borderTop: '3px solid #eee',
+					outline: '1px solid #ffff',
+					transform: 'rotate(-45deg)',
 				},
 			},
 		}),
@@ -185,9 +185,9 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 							return (
 								<div
-									className={`ss__swatches__carousel__swatch ${selected ? 'ss__swatches__carousel__swatch--selected' : ''} ${
-										option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''
-									}`}
+									className={`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${option.value} ${
+										selected ? 'ss__swatches__carousel__swatch--selected' : ''
+									} ${option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''}`}
 									title={label}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
 									onClick={(e) => !disabled && makeSelection(e as any, option)}
