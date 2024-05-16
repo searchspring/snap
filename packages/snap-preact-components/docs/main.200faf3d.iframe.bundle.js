@@ -1,4 +1,4 @@
-/*! For license information please see main.88c76a5a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.200faf3d.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -41,19 +41,15 @@
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
 		},
-		'./src/components/Atoms/Badge/Badge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/BadgeImage/BadgeImage.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, {
-					BadgeWithChildren: () => BadgeWithChildren,
-					BadgeWithContent: () => BadgeWithContent,
-					default: () => Badge_stories,
-				});
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeImage_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				BadgeImage = __webpack_require__('./src/components/Atoms/BadgeImage/BadgeImage.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
-				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -76,66 +72,70 @@
 				return (0, esm.yg)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)('h1', { id: 'badge' }, 'Badge'),
+					(0, esm.yg)('h1', { id: 'badgeimage' }, 'BadgeImage'),
 					(0, esm.yg)(
 						'p',
 						null,
-						'Renders an absolute-positioned badge. It is expected that the parent element contains ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'position: relative'),
-						'.'
+						'Renders an image badge. It is expected to be used with ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'CalloutBadge'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'OverlayBadge'),
+						' components.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
-					(0, esm.yg)('h3', { id: 'content' }, 'content'),
-					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'content'), ' prop specifies the badge.'),
+					(0, esm.yg)('h3', { id: 'url' }, 'url'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'url'),
+						' prop specifies the badge image ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'src'),
+						' attribute.'
+					),
 					(0, esm.yg)(
 						'pre',
 						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<div style="position: relative;">\n    <Badge content="Sale" />\n</div>\n'
-						)
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeImage url={'/images/example.png'}/>\n")
 					),
-					(0, esm.yg)('p', null, 'Or alternatively using children:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<div style="position: relative;">\n    <Badge>Sale</Badge>\n</div>\n'
-						)
-					),
-					(0, esm.yg)('h3', { id: 'position' }, 'position'),
+					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
 					(0, esm.yg)(
 						'p',
 						null,
 						'The ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'position'),
-						' prop specifies an object with CSS ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'top'),
-						', ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'bottom'),
-						', ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'left'),
-						', and ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'right'),
-						' attributes. The default position is top left ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '{ top: 0, left: 0 }'),
-						'.'
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
+						' prop specifies the badge location tag and adds an identifying classname.'
 					),
-					(0, esm.yg)('p', null, 'In this example, the badge will be 2px from the top and 2px from the right:'),
 					(0, esm.yg)(
 						'pre',
 						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>\n')
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeImage tag={'30-off-promo'} url={'/images/example.png'}/>\n")
+					),
+					(0, esm.yg)('h3', { id: 'label' }, 'label'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'label'),
+						' prop specifies the badge image ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'alt'),
+						' attribute. '
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgeImage label={'example badge'} url={'/images/example.png'} />\n"
+						)
 					)
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			const Badge_stories = {
-				title: 'Atoms/Badge',
-				component: Badge.E,
+			const BadgeImage_stories = {
+				title: 'Atoms/BadgeImage',
+				component: BadgeImage.z,
 				parameters: {
 					docs: {
 						page: function page() {
@@ -147,89 +147,687 @@
 					function (Story) {
 						return (0, preact_module.h)(
 							'div',
-							{ style: { width: '200px', height: '200px', position: 'relative', border: '2px dotted lightgrey' } },
-							(0, preact_module.h)(Story, { height: '200px' })
+							{ style: { width: '200px', height: '200px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)(Story, null)
 						);
 					},
 				],
 				argTypes: Object.assign(
 					{
-						content: { description: 'Content to be displayed in badge', table: { type: { summary: 'string' } }, control: { type: 'text' } },
-						children: { description: 'Content to be displayed in badge using children', table: { type: { summary: 'string, JSX' } } },
-						position: {
-							description: 'Position of badge',
-							defaultValue: { top: 0, left: 0 },
-							table: { type: { summary: 'object' }, defaultValue: { summary: '{ top: 0, left: 0 }' } },
-							control: { type: 'object' },
+						tag: { description: 'Badge location tag', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						url: {
+							description: 'Badge image url',
+							type: { required: !0 },
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						label: {
+							description: 'Badge image alt text',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
 						},
 					},
 					componentArgs.F
 				),
 			};
-			var BadgeWithContent = function BadgeWithContent(args) {
-				return (0, preact_module.h)(Badge.E, Object.assign({}, args));
+			var Default = function Default(args) {
+				return (0, preact_module.h)(BadgeImage.z, Object.assign({}, args));
 			};
-			BadgeWithContent.args = { content: 'pink', position: { top: 0, right: 0 } };
-			var BadgeWithChildren = function BadgeWithChildren(args) {
-				return (0, preact_module.h)(
-					Badge.E,
-					Object.assign({}, args),
-					(0, preact_module.h)('img', { src: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png' })
-				);
-			};
+			Default.args = { url: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png', label: 'placeholder badge image' };
 		},
-		'./src/components/Atoms/Badge/Badge.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/components/Atoms/BadgeImage/BadgeImage.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { E: () => Badge });
+			__webpack_require__.d(__webpack_exports__, { z: () => BadgeImage });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				mobx_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
-				CSS_badge = function badge(_ref) {
-					var position = _ref.position;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.AH)(Object.assign({ display: 'inline-block', position: 'absolute' }, position));
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				CSS_BadgeImage = function BadgeImage() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({ maxHeight: '100%', maxWidth: '100%' });
 				},
-				Badge = (0, mobx_react__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+				BadgeImage = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
 						props = Object.assign(
-							{ position: { top: 0, left: 0 } },
+							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
-								: _globalTheme$componen.badge,
+								: _globalTheme$componen.badgeImage,
 							properties,
 							null === (_properties$theme = properties.theme) ||
 								void 0 === _properties$theme ||
 								null === (_properties$theme$com = _properties$theme.components) ||
 								void 0 === _properties$theme$com
 								? void 0
-								: _properties$theme$com.badge
+								: _properties$theme$com.badgeImage
 						),
-						content = props.content,
-						children = props.children,
-						position = props.position,
+						label = props.label,
+						url = props.url,
+						tag = props.tag,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
 						styling = {};
 					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_badge({ position }), style]),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.Y)(
-							_providers__WEBPACK_IMPORTED_MODULE_5__._,
-							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.Y)(
-								'div',
-								Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__badge', className) }),
-								content || children
-							)
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeImage(), style]),
+						url
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_6__._,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+										'img',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-image', 'ss__badge-image--' + tag, className),
+											alt: label || tag + ' badge',
+											src: url,
+										})
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+					);
+				});
+		},
+		'./src/components/Atoms/BadgePill/BadgePill.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgePill_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				BadgePill = __webpack_require__('./src/components/Atoms/BadgePill/BadgePill.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('h1', { id: 'badgepill' }, 'BadgePill'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Renders a text badge in the shape of a pill. It is expected to be used with ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'CalloutBadge'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'OverlayBadge'),
+						' components.'
+					),
+					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)('h3', { id: 'value' }, 'value'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'value'),
+						' prop specifies the badge text contents.'
+					),
+					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgePill value={'30% Off'} />\n")),
+					(0, esm.yg)('h3', { id: 'color' }, 'color'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the badge background color.'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgePill color={'rgba(255, 255, 255, 0.5)'} value={'30% Off'} />\n"
 						)
+					),
+					(0, esm.yg)('h3', { id: 'colortext' }, 'colorText'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'colorText'), ' prop specifies the badge text color.'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgePill colorText={'#000000'} value={'30% Off'} />\n")
+					),
+					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
+						' prop specifies the badge location tag and adds an identifying classname.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgePill tag={'30-off-promo'} colorText={'#000000'} value={'30% Off'} />\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const BadgePill_stories = {
+				title: 'Atoms/BadgePill',
+				component: BadgePill.L,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.uY, { story: blocks.h1 }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)(
+							'div',
+							{ style: { width: '200px', height: '200px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)(Story, null)
+						);
+					},
+				],
+				argTypes: Object.assign(
+					{
+						value: {
+							description: 'Badge text contents',
+							type: { required: !0 },
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						color: {
+							description: 'Badge background color',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'rgba(58, 35, 173, 1)' } },
+							control: { type: 'color' },
+						},
+						colorText: {
+							description: 'Badge text color',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '#ffffff' } },
+							control: { type: 'color' },
+						},
+						tag: { description: 'Badge location tag', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+					},
+					componentArgs.F
+				),
+			};
+			var Default = function Default(args) {
+				return (0, preact_module.h)(BadgePill.L, Object.assign({}, args));
+			};
+			Default.args = { value: '30% Off', color: '#0000FF', colorText: '#FFFFFF' };
+		},
+		'./src/components/Atoms/BadgePill/BadgePill.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { L: () => BadgePill });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				CSS_BadgePill = function BadgePill(props) {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+						display: 'inline-block',
+						boxSizing: 'border-box',
+						padding: '0.3em 0.9em',
+						background: props.color,
+						color: props.colorText,
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						maxWidth: '100%',
+						borderRadius: '1em',
+					});
+				},
+				BadgePill = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
+						props = Object.assign(
+							{ color: 'rgba(58, 35, 173, 1)', colorText: '#fff' },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.badgePill,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.badgePill
+						),
+						value = props.value,
+						disableStyles = props.disableStyles,
+						tag = props.tag,
+						className = props.className,
+						style = props.style,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgePill(props), style]),
+						value
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_6__._,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+										'div',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-pill', 'ss__badge-pill--' + tag, className),
+										}),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-pill__value' }, value)
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+					);
+				});
+		},
+		'./src/components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeRectangle_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				BadgeRectangle = __webpack_require__('./src/components/Atoms/BadgeRectangle/BadgeRectangle.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('h1', { id: 'badgerectangle' }, 'BadgeRectangle'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Renders a text badge in the shape of a rectangle. It is expected to be used with ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'CalloutBadge'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'OverlayBadge'),
+						' components.'
+					),
+					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)('h3', { id: 'value' }, 'value'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'value'),
+						' prop specifies the badge text contents.'
+					),
+					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeRectangle value={'30% Off'} />\n")),
+					(0, esm.yg)('h3', { id: 'color' }, 'color'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the badge background color.'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgeRectangle color={'rgba(255, 255, 255, 0.5)'} value={'30% Off'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'colortext' }, 'colorText'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'colorText'), ' prop specifies the badge text color.'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeRectangle colorText={'#000000'} value={'30% Off'} />\n")
+					),
+					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
+						' prop specifies the badge location tag and adds an identifying classname.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgeRectangle tag={'30-off-promo'} colorText={'#000000'} value={'30% Off'} />\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const BadgeRectangle_stories = {
+				title: 'Atoms/BadgeRectangle',
+				component: BadgeRectangle.Z,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.uY, { story: blocks.h1 }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)(
+							'div',
+							{ style: { width: '200px', height: '200px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)(Story, null)
+						);
+					},
+				],
+				argTypes: Object.assign(
+					{
+						value: {
+							description: 'Badge text contents',
+							type: { required: !0 },
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						color: {
+							description: 'Badge background color',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'rgba(58, 35, 173, 1)' } },
+							control: { type: 'color' },
+						},
+						colorText: {
+							description: 'Badge text color',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '#ffffff' } },
+							control: { type: 'color' },
+						},
+						tag: { description: 'Badge location tag', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+					},
+					componentArgs.F
+				),
+			};
+			var Default = function Default(args) {
+				return (0, preact_module.h)(BadgeRectangle.Z, Object.assign({}, args));
+			};
+			Default.args = { value: '30% Off', color: '#0000FF', colorText: '#FFFFFF' };
+		},
+		'./src/components/Atoms/BadgeRectangle/BadgeRectangle.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Z: () => BadgeRectangle });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				CSS_BadgeRectangle = function BadgeRectangle(props) {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+						display: 'inline-block',
+						boxSizing: 'border-box',
+						padding: '0.3em 0.9em',
+						background: props.color,
+						color: props.colorText,
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						maxWidth: '100%',
+					});
+				},
+				BadgeRectangle = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
+						props = Object.assign(
+							{ color: 'rgba(58, 35, 173, 1)', colorText: '#fff' },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.badgeRectangle,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.badgeRectangle
+						),
+						value = props.value,
+						disableStyles = props.disableStyles,
+						tag = props.tag,
+						className = props.className,
+						style = props.style,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeRectangle(props), style]),
+						value
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_6__._,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+										'div',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-rectangle', 'ss__badge-rectangle--' + tag, className),
+										}),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-rectangle__value' }, value)
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+					);
+				});
+		},
+		'./src/components/Atoms/BadgeText/BadgeText.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeText_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				BadgeText = __webpack_require__('./src/components/Atoms/BadgeText/BadgeText.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('h1', { id: 'badgetext' }, 'BadgeText'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Renders a text badge. It is expected to be used with ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'CalloutBadge'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'OverlayBadge'),
+						' components.'
+					),
+					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)('h3', { id: 'value' }, 'value'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'value'),
+						' prop specifies the badge text contents.'
+					),
+					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeText value={'30% Off'} />\n")),
+					(0, esm.yg)('h3', { id: 'colortext' }, 'colorText'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'colorText'), ' prop specifies the badge text color.'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<BadgeText colorText={'#000000'} value={'30% Off'} />\n")
+					),
+					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
+						' prop specifies the badge location tag and adds an identifying classname.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<BadgeText tag={'30-off-promo'} colorText={'#000000'} value={'30% Off'} />\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const BadgeText_stories = {
+				title: 'Atoms/BadgeText',
+				component: BadgeText.p,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.uY, { story: blocks.h1 }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)(
+							'div',
+							{ style: { width: '200px', height: '200px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)(Story, null)
+						);
+					},
+				],
+				argTypes: Object.assign(
+					{
+						value: {
+							description: 'Badge text contents',
+							type: { required: !0 },
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						colorText: {
+							description: 'Badge text color',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '#000000' } },
+							control: { type: 'color' },
+						},
+						tag: { description: 'Badge location tag', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+					},
+					componentArgs.F
+				),
+			};
+			var Default = function Default(args) {
+				return (0, preact_module.h)(BadgeText.p, Object.assign({}, args));
+			};
+			Default.args = { value: '30% Off', colorText: '#000000' };
+		},
+		'./src/components/Atoms/BadgeText/BadgeText.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { p: () => BadgeText });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				CSS_BadgeText = function BadgeText(props) {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+						display: 'inline-block',
+						boxSizing: 'border-box',
+						padding: '0.3em 0.9em',
+						color: props.colorText,
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						maxWidth: '100%',
+					});
+				},
+				BadgeText = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
+						props = Object.assign(
+							{ colorText: '#000000' },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.badgeText,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.badgeText
+						),
+						value = props.value,
+						disableStyles = props.disableStyles,
+						tag = props.tag,
+						className = props.className,
+						style = props.style,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeText(props), style]),
+						value
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_6__._,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+										'div',
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-text', 'ss__badge-text--' + tag, className),
+										}),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-text__value' }, value)
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
 					);
 				});
 		},
@@ -924,7 +1522,6 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			var Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx');
 			const Dropdown_stories = {
 				title: 'Atoms/Dropdown',
 				component: Dropdown.m,
@@ -998,14 +1595,14 @@
 			};
 			JSXContent.args = {
 				button: 'button text',
-				content: (0, preact_module.h)(Badge.E, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
+				content: (0, preact_module.h)('div', null, 'jsx content - (note this component receieved the open state as a prop)'),
 			};
 			var JSXChildren = function JSXChildren(args) {
 				return (0, preact_module.h)(Dropdown.m, { button: args.button }, args.content);
 			};
 			JSXChildren.args = {
 				button: 'button text',
-				content: (0, preact_module.h)(Badge.E, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
+				content: (0, preact_module.h)('div', null, 'jsx content - (note this component receieved the open state as a prop)'),
 			};
 			var StringChildren = function StringChildren(args) {
 				return (0, preact_module.h)(Dropdown.m, { button: args.button }, args.content);
@@ -4781,6 +5378,717 @@
 				return (0, preact_module.h)(Skeleton, Object.assign({}, args));
 			};
 			Circle.args = { width: '100px', height: '100px', round: !0 };
+		},
+		'./src/components/Molecules/CalloutBadge/CalloutBadge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => CalloutBadge_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.async-iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.math.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.json.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				CalloutBadge = __webpack_require__('./src/components/Molecules/CalloutBadge/CalloutBadge.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('h1', { id: 'calloutbadge' }, 'CalloutBadge'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Renders callout badges configured in the Searchspring Management Console and returned from the API. This component is intended to be used within a ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'Result'),
+						' component to display callout badges.'
+					),
+					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)('h3', { id: 'result' }, 'result'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'result'),
+						' prop specifies a reference to a product object from the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'results'),
+						' store array.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<CalloutBadge tag={'callout'} result={controller.store.results[0]} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'componentmap' }, 'componentMap'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'componentMap'),
+						' prop allows for custom badge components. This functionallity requires the component and accompanying files to be synced to the Searchspring Management Console using Snapfu.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<CalloutBadge \n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
+						)
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'componentMap'),
+						' also supports async functions for dynamic importing of badges.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<CalloutBadge \n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n/>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'renderempty' }, 'renderEmpty'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'By default if there are no badges, the wrapper element will not render. If you need the wrapper element to persist, this prop will cause the wrapper element ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ss__callout-badge'),
+						' to render.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<CalloutBadge\n    renderEmpty\n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
+						' prop specifies the location name of this callout location. '
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<CalloutBadge tag={'callout'} result={controller.store.results[0]} />\n"
+						)
+					)
+				);
+			}
+			function _regeneratorRuntime() {
+				_regeneratorRuntime = function _regeneratorRuntime() {
+					return e;
+				};
+				var t,
+					e = {},
+					r = Object.prototype,
+					n = r.hasOwnProperty,
+					o =
+						Object.defineProperty ||
+						function (t, e, r) {
+							t[e] = r.value;
+						},
+					i = 'function' == typeof Symbol ? Symbol : {},
+					a = i.iterator || '@@iterator',
+					c = i.asyncIterator || '@@asyncIterator',
+					u = i.toStringTag || '@@toStringTag';
+				function define(t, e, r) {
+					return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e];
+				}
+				try {
+					define({}, '');
+				} catch (t) {
+					define = function define(t, e, r) {
+						return (t[e] = r);
+					};
+				}
+				function wrap(t, e, r, n) {
+					var i = e && e.prototype instanceof Generator ? e : Generator,
+						a = Object.create(i.prototype),
+						c = new Context(n || []);
+					return o(a, '_invoke', { value: makeInvokeMethod(t, r, c) }), a;
+				}
+				function tryCatch(t, e, r) {
+					try {
+						return { type: 'normal', arg: t.call(e, r) };
+					} catch (t) {
+						return { type: 'throw', arg: t };
+					}
+				}
+				e.wrap = wrap;
+				var h = 'suspendedStart',
+					l = 'suspendedYield',
+					f = 'executing',
+					s = 'completed',
+					y = {};
+				function Generator() {}
+				function GeneratorFunction() {}
+				function GeneratorFunctionPrototype() {}
+				var p = {};
+				define(p, a, function () {
+					return this;
+				});
+				var d = Object.getPrototypeOf,
+					v = d && d(d(values([])));
+				v && v !== r && n.call(v, a) && (p = v);
+				var g = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p));
+				function defineIteratorMethods(t) {
+					['next', 'throw', 'return'].forEach(function (e) {
+						define(t, e, function (t) {
+							return this._invoke(e, t);
+						});
+					});
+				}
+				function AsyncIterator(t, e) {
+					function invoke(r, o, i, a) {
+						var c = tryCatch(t[r], t, o);
+						if ('throw' !== c.type) {
+							var u = c.arg,
+								h = u.value;
+							return h && 'object' == typeof h && n.call(h, '__await')
+								? e.resolve(h.__await).then(
+										function (t) {
+											invoke('next', t, i, a);
+										},
+										function (t) {
+											invoke('throw', t, i, a);
+										}
+								  )
+								: e.resolve(h).then(
+										function (t) {
+											(u.value = t), i(u);
+										},
+										function (t) {
+											return invoke('throw', t, i, a);
+										}
+								  );
+						}
+						a(c.arg);
+					}
+					var r;
+					o(this, '_invoke', {
+						value: function value(t, n) {
+							function callInvokeWithMethodAndArg() {
+								return new e(function (e, r) {
+									invoke(t, n, e, r);
+								});
+							}
+							return (r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg());
+						},
+					});
+				}
+				function makeInvokeMethod(e, r, n) {
+					var o = h;
+					return function (i, a) {
+						if (o === f) throw new Error('Generator is already running');
+						if (o === s) {
+							if ('throw' === i) throw a;
+							return { value: t, done: !0 };
+						}
+						for (n.method = i, n.arg = a; ; ) {
+							var c = n.delegate;
+							if (c) {
+								var u = maybeInvokeDelegate(c, n);
+								if (u) {
+									if (u === y) continue;
+									return u;
+								}
+							}
+							if ('next' === n.method) n.sent = n._sent = n.arg;
+							else if ('throw' === n.method) {
+								if (o === h) throw ((o = s), n.arg);
+								n.dispatchException(n.arg);
+							} else 'return' === n.method && n.abrupt('return', n.arg);
+							o = f;
+							var p = tryCatch(e, r, n);
+							if ('normal' === p.type) {
+								if (((o = n.done ? s : l), p.arg === y)) continue;
+								return { value: p.arg, done: n.done };
+							}
+							'throw' === p.type && ((o = s), (n.method = 'throw'), (n.arg = p.arg));
+						}
+					};
+				}
+				function maybeInvokeDelegate(e, r) {
+					var n = r.method,
+						o = e.iterator[n];
+					if (o === t)
+						return (
+							(r.delegate = null),
+							('throw' === n && e.iterator.return && ((r.method = 'return'), (r.arg = t), maybeInvokeDelegate(e, r), 'throw' === r.method)) ||
+								('return' !== n && ((r.method = 'throw'), (r.arg = new TypeError("The iterator does not provide a '" + n + "' method")))),
+							y
+						);
+					var i = tryCatch(o, e.iterator, r.arg);
+					if ('throw' === i.type) return (r.method = 'throw'), (r.arg = i.arg), (r.delegate = null), y;
+					var a = i.arg;
+					return a
+						? a.done
+							? ((r[e.resultName] = a.value),
+							  (r.next = e.nextLoc),
+							  'return' !== r.method && ((r.method = 'next'), (r.arg = t)),
+							  (r.delegate = null),
+							  y)
+							: a
+						: ((r.method = 'throw'), (r.arg = new TypeError('iterator result is not an object')), (r.delegate = null), y);
+				}
+				function pushTryEntry(t) {
+					var e = { tryLoc: t[0] };
+					1 in t && (e.catchLoc = t[1]), 2 in t && ((e.finallyLoc = t[2]), (e.afterLoc = t[3])), this.tryEntries.push(e);
+				}
+				function resetTryEntry(t) {
+					var e = t.completion || {};
+					(e.type = 'normal'), delete e.arg, (t.completion = e);
+				}
+				function Context(t) {
+					(this.tryEntries = [{ tryLoc: 'root' }]), t.forEach(pushTryEntry, this), this.reset(!0);
+				}
+				function values(e) {
+					if (e || '' === e) {
+						var r = e[a];
+						if (r) return r.call(e);
+						if ('function' == typeof e.next) return e;
+						if (!isNaN(e.length)) {
+							var o = -1,
+								i = function next() {
+									for (; ++o < e.length; ) if (n.call(e, o)) return (next.value = e[o]), (next.done = !1), next;
+									return (next.value = t), (next.done = !0), next;
+								};
+							return (i.next = i);
+						}
+					}
+					throw new TypeError(typeof e + ' is not iterable');
+				}
+				return (
+					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
+					o(g, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
+					o(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
+					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, 'GeneratorFunction')),
+					(e.isGeneratorFunction = function (t) {
+						var e = 'function' == typeof t && t.constructor;
+						return !!e && (e === GeneratorFunction || 'GeneratorFunction' === (e.displayName || e.name));
+					}),
+					(e.mark = function (t) {
+						return (
+							Object.setPrototypeOf
+								? Object.setPrototypeOf(t, GeneratorFunctionPrototype)
+								: ((t.__proto__ = GeneratorFunctionPrototype), define(t, u, 'GeneratorFunction')),
+							(t.prototype = Object.create(g)),
+							t
+						);
+					}),
+					(e.awrap = function (t) {
+						return { __await: t };
+					}),
+					defineIteratorMethods(AsyncIterator.prototype),
+					define(AsyncIterator.prototype, c, function () {
+						return this;
+					}),
+					(e.AsyncIterator = AsyncIterator),
+					(e.async = function (t, r, n, o, i) {
+						void 0 === i && (i = Promise);
+						var a = new AsyncIterator(wrap(t, r, n, o), i);
+						return e.isGeneratorFunction(r)
+							? a
+							: a.next().then(function (t) {
+									return t.done ? t.value : a.next();
+							  });
+					}),
+					defineIteratorMethods(g),
+					define(g, u, 'Generator'),
+					define(g, a, function () {
+						return this;
+					}),
+					define(g, 'toString', function () {
+						return '[object Generator]';
+					}),
+					(e.keys = function (t) {
+						var e = Object(t),
+							r = [];
+						for (var n in e) r.push(n);
+						return (
+							r.reverse(),
+							function next() {
+								for (; r.length; ) {
+									var t = r.pop();
+									if (t in e) return (next.value = t), (next.done = !1), next;
+								}
+								return (next.done = !0), next;
+							}
+						);
+					}),
+					(e.values = values),
+					(Context.prototype = {
+						constructor: Context,
+						reset: function reset(e) {
+							if (
+								((this.prev = 0),
+								(this.next = 0),
+								(this.sent = this._sent = t),
+								(this.done = !1),
+								(this.delegate = null),
+								(this.method = 'next'),
+								(this.arg = t),
+								this.tryEntries.forEach(resetTryEntry),
+								!e)
+							)
+								for (var r in this) 't' === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
+						},
+						stop: function stop() {
+							this.done = !0;
+							var t = this.tryEntries[0].completion;
+							if ('throw' === t.type) throw t.arg;
+							return this.rval;
+						},
+						dispatchException: function dispatchException(e) {
+							if (this.done) throw e;
+							var r = this;
+							function handle(n, o) {
+								return (a.type = 'throw'), (a.arg = e), (r.next = n), o && ((r.method = 'next'), (r.arg = t)), !!o;
+							}
+							for (var o = this.tryEntries.length - 1; o >= 0; --o) {
+								var i = this.tryEntries[o],
+									a = i.completion;
+								if ('root' === i.tryLoc) return handle('end');
+								if (i.tryLoc <= this.prev) {
+									var c = n.call(i, 'catchLoc'),
+										u = n.call(i, 'finallyLoc');
+									if (c && u) {
+										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
+									} else if (c) {
+										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+									} else {
+										if (!u) throw new Error('try statement without catch or finally');
+										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
+									}
+								}
+							}
+						},
+						abrupt: function abrupt(t, e) {
+							for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+								var o = this.tryEntries[r];
+								if (o.tryLoc <= this.prev && n.call(o, 'finallyLoc') && this.prev < o.finallyLoc) {
+									var i = o;
+									break;
+								}
+							}
+							i && ('break' === t || 'continue' === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null);
+							var a = i ? i.completion : {};
+							return (a.type = t), (a.arg = e), i ? ((this.method = 'next'), (this.next = i.finallyLoc), y) : this.complete(a);
+						},
+						complete: function complete(t, e) {
+							if ('throw' === t.type) throw t.arg;
+							return (
+								'break' === t.type || 'continue' === t.type
+									? (this.next = t.arg)
+									: 'return' === t.type
+									? ((this.rval = this.arg = t.arg), (this.method = 'return'), (this.next = 'end'))
+									: 'normal' === t.type && e && (this.next = e),
+								y
+							);
+						},
+						finish: function finish(t) {
+							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+								var r = this.tryEntries[e];
+								if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y;
+							}
+						},
+						catch: function _catch(t) {
+							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+								var r = this.tryEntries[e];
+								if (r.tryLoc === t) {
+									var n = r.completion;
+									if ('throw' === n.type) {
+										var o = n.arg;
+										resetTryEntry(r);
+									}
+									return o;
+								}
+							}
+							throw new Error('illegal catch attempt');
+						},
+						delegateYield: function delegateYield(e, r, n) {
+							return (this.delegate = { iterator: values(e), resultName: r, nextLoc: n }), 'next' === this.method && (this.arg = t), y;
+						},
+					}),
+					e
+				);
+			}
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			MDXContent.isMDXComponent = !0;
+			const CalloutBadge_stories = {
+				title: 'Molecules/CalloutBadge',
+				component: CalloutBadge.W,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.uY, { story: blocks.h1 }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)(
+							'div',
+							{ style: { width: '300px', height: '500px', padding: '20px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)('div', { style: { height: '300px', border: '2px dotted lightgrey' } }),
+							(0, preact_module.h)('div', { style: { height: '50px', margin: '10px 0', border: '2px dotted lightgrey' } }),
+							(0, preact_module.h)(Story, null)
+						);
+					},
+				],
+				argTypes: Object.assign(
+					{
+						result: {
+							description: 'Result store Product reference',
+							type: { required: !0 },
+							table: { type: { summary: 'result store Product object' } },
+							control: { type: 'none' },
+						},
+						componentMap: {
+							description: 'Component map containing custom badge component',
+							table: { type: { summary: 'object' } },
+							control: { type: 'object' },
+						},
+						renderEmpty: {
+							description: 'Render wrapper element even when there are no badges',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						tag: {
+							description: 'Callout location tag',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'callout' } },
+							control: { type: 'text' },
+						},
+					},
+					componentArgs.F
+				),
+			};
+			var snapInstance = snapify.p.search({ id: 'Result', globals: { siteId: '8uyt2m' } }),
+				ObservableCalloutBadge = (0, mobxreact_esm.PA)(function (_ref) {
+					var _controller$store,
+						args = _ref.args,
+						controller = _ref.controller;
+					return (0,
+					preact_module.h)(CalloutBadge.W, Object.assign({}, args, { result: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results[1] }));
+				}),
+				Default = function Default(args, _ref2) {
+					var controller = _ref2.loaded.controller;
+					return (0, preact_module.h)(ObservableCalloutBadge, { args, controller });
+				};
+			(Default.loaders = [
+				_asyncToGenerator(
+					_regeneratorRuntime().mark(function _callee() {
+						return _regeneratorRuntime().wrap(function _callee$(_context) {
+							for (;;)
+								switch ((_context.prev = _context.next)) {
+									case 0:
+										return (
+											snapInstance.on('afterSearch', function (_ref4) {
+												var response = _ref4.response;
+												(response.results[0].badges = [{ tag: 'free-shipping-overlay', value: 'Free Shipping' }]),
+													(response.results[1].badges = [{ tag: 'free-shipping-callout', value: 'Free Shipping' }]),
+													(response.meta = Object.assign({}, response.meta, {
+														badges: {
+															locations: { left: [{ tag: 'left', name: 'Left' }], right: [], callout: [{ tag: 'callout', name: 'Callout' }] },
+															tags: {
+																'free-shipping-overlay': {
+																	location: 'left/left',
+																	component: 'BadgeRectangle',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																},
+																'free-shipping-callout': {
+																	location: 'callout/callout',
+																	component: 'BadgeRectangle',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																},
+															},
+														},
+													}));
+											}),
+											(_context.next = 3),
+											snapInstance.search()
+										);
+									case 3:
+										return _context.abrupt('return', { controller: snapInstance });
+									case 4:
+									case 'end':
+										return _context.stop();
+								}
+						}, _callee);
+					})
+				),
+			]),
+				(Default.args = { tag: 'callout' });
+		},
+		'./src/components/Molecules/CalloutBadge/CalloutBadge.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { W: () => CalloutBadge });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
+			var preact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/utilities/defaultBadgeComponentMap.ts'),
+				_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/hooks/useComponent.tsx');
+			var CSS_CalloutBadge = function CalloutBadge(_ref) {
+					return (
+						(function _objectDestructuringEmpty(obj) {
+							if (null == obj) throw new TypeError('Cannot destructure ' + obj);
+						})(_ref),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.AH)({ display: 'flex', justifyContent: 'center', alignItems: 'center' })
+					);
+				},
+				CalloutBadge = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.PA)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						_result$badges,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
+						props = Object.assign(
+							{ tag: 'callout' },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.calloutBadge,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.calloutBadge
+						),
+						result = props.result,
+						tag = props.tag,
+						renderEmpty = props.renderEmpty,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						styling = {},
+						badgeComponentMap = Object.assign({}, _utilities__WEBPACK_IMPORTED_MODULE_10__.q, props.componentMap);
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_CalloutBadge(props), style]);
+					var badges =
+						null == result || null === (_result$badges = result.badges) || void 0 === _result$badges
+							? void 0
+							: _result$badges.atLocation(tag).slice(0, 1);
+					return renderEmpty || (null != badges && badges.length)
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
+								_providers__WEBPACK_IMPORTED_MODULE_11__._,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
+									'div',
+									Object.assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+											'ss__callout-badge',
+											'ss__callout-badge--' + (null == tag ? void 0 : tag.replace('/', '-')),
+											className
+										),
+									}),
+									badges.map(function (badge) {
+										var BadgeComponent = (0, _hooks__WEBPACK_IMPORTED_MODULE_12__.x)(badgeComponentMap, badge.component);
+										return BadgeComponent
+											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
+											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
+									})
+								)
+						  )
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
+				});
 		},
 		'./src/components/Molecules/Carousel/Carousel.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -11565,6 +12873,854 @@
 					);
 				});
 		},
+		'./src/components/Molecules/OverlayBadge/OverlayBadge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => OverlayBadge_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.async-iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.math.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.json.to-string-tag.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				OverlayBadge = __webpack_require__('./src/components/Molecules/OverlayBadge/OverlayBadge.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				snapify = __webpack_require__('./src/utilities/snapify.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('h1', { id: 'overlaybadge' }, 'OverlayBadge'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Renders overlay badges configured in the Searchspring Management Console and returned from the API. This component is intended to be used within a ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'Result'),
+						' component to wrap elements (children) that should have overlay badges.'
+					),
+					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)('h3', { id: 'children' }, 'children'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required children provided to the component will be wrapped and rendered in a relative div to allow badges to be positioned absolutely. '
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to the controller.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'result' }, 'result'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'result'),
+						' prop specifies a reference to a product object from the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'results'),
+						' store array.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'componentmap' }, 'componentMap'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'componentMap'),
+						' prop allows for custom badge components. This functionallity requires the component and accompanying files to be synced to the Searchspring Management Console using Snapfu.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<OverlayBadge \n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'componentMap'),
+						' also supports async functions for dynamic importing of badges.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<OverlayBadge \n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'renderempty' }, 'renderEmpty'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'By default if there are no badges, the wrapper element will not render. If you need the wrapper element to persist, this prop will cause the wrapper element ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ss__overlay-badge'),
+						' to render.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<OverlayBadge\n    renderEmpty\n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+						)
+					)
+				);
+			}
+			function _regeneratorRuntime() {
+				_regeneratorRuntime = function _regeneratorRuntime() {
+					return e;
+				};
+				var t,
+					e = {},
+					r = Object.prototype,
+					n = r.hasOwnProperty,
+					o =
+						Object.defineProperty ||
+						function (t, e, r) {
+							t[e] = r.value;
+						},
+					i = 'function' == typeof Symbol ? Symbol : {},
+					a = i.iterator || '@@iterator',
+					c = i.asyncIterator || '@@asyncIterator',
+					u = i.toStringTag || '@@toStringTag';
+				function define(t, e, r) {
+					return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e];
+				}
+				try {
+					define({}, '');
+				} catch (t) {
+					define = function define(t, e, r) {
+						return (t[e] = r);
+					};
+				}
+				function wrap(t, e, r, n) {
+					var i = e && e.prototype instanceof Generator ? e : Generator,
+						a = Object.create(i.prototype),
+						c = new Context(n || []);
+					return o(a, '_invoke', { value: makeInvokeMethod(t, r, c) }), a;
+				}
+				function tryCatch(t, e, r) {
+					try {
+						return { type: 'normal', arg: t.call(e, r) };
+					} catch (t) {
+						return { type: 'throw', arg: t };
+					}
+				}
+				e.wrap = wrap;
+				var h = 'suspendedStart',
+					l = 'suspendedYield',
+					f = 'executing',
+					s = 'completed',
+					y = {};
+				function Generator() {}
+				function GeneratorFunction() {}
+				function GeneratorFunctionPrototype() {}
+				var p = {};
+				define(p, a, function () {
+					return this;
+				});
+				var d = Object.getPrototypeOf,
+					v = d && d(d(values([])));
+				v && v !== r && n.call(v, a) && (p = v);
+				var g = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p));
+				function defineIteratorMethods(t) {
+					['next', 'throw', 'return'].forEach(function (e) {
+						define(t, e, function (t) {
+							return this._invoke(e, t);
+						});
+					});
+				}
+				function AsyncIterator(t, e) {
+					function invoke(r, o, i, a) {
+						var c = tryCatch(t[r], t, o);
+						if ('throw' !== c.type) {
+							var u = c.arg,
+								h = u.value;
+							return h && 'object' == typeof h && n.call(h, '__await')
+								? e.resolve(h.__await).then(
+										function (t) {
+											invoke('next', t, i, a);
+										},
+										function (t) {
+											invoke('throw', t, i, a);
+										}
+								  )
+								: e.resolve(h).then(
+										function (t) {
+											(u.value = t), i(u);
+										},
+										function (t) {
+											return invoke('throw', t, i, a);
+										}
+								  );
+						}
+						a(c.arg);
+					}
+					var r;
+					o(this, '_invoke', {
+						value: function value(t, n) {
+							function callInvokeWithMethodAndArg() {
+								return new e(function (e, r) {
+									invoke(t, n, e, r);
+								});
+							}
+							return (r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg());
+						},
+					});
+				}
+				function makeInvokeMethod(e, r, n) {
+					var o = h;
+					return function (i, a) {
+						if (o === f) throw new Error('Generator is already running');
+						if (o === s) {
+							if ('throw' === i) throw a;
+							return { value: t, done: !0 };
+						}
+						for (n.method = i, n.arg = a; ; ) {
+							var c = n.delegate;
+							if (c) {
+								var u = maybeInvokeDelegate(c, n);
+								if (u) {
+									if (u === y) continue;
+									return u;
+								}
+							}
+							if ('next' === n.method) n.sent = n._sent = n.arg;
+							else if ('throw' === n.method) {
+								if (o === h) throw ((o = s), n.arg);
+								n.dispatchException(n.arg);
+							} else 'return' === n.method && n.abrupt('return', n.arg);
+							o = f;
+							var p = tryCatch(e, r, n);
+							if ('normal' === p.type) {
+								if (((o = n.done ? s : l), p.arg === y)) continue;
+								return { value: p.arg, done: n.done };
+							}
+							'throw' === p.type && ((o = s), (n.method = 'throw'), (n.arg = p.arg));
+						}
+					};
+				}
+				function maybeInvokeDelegate(e, r) {
+					var n = r.method,
+						o = e.iterator[n];
+					if (o === t)
+						return (
+							(r.delegate = null),
+							('throw' === n && e.iterator.return && ((r.method = 'return'), (r.arg = t), maybeInvokeDelegate(e, r), 'throw' === r.method)) ||
+								('return' !== n && ((r.method = 'throw'), (r.arg = new TypeError("The iterator does not provide a '" + n + "' method")))),
+							y
+						);
+					var i = tryCatch(o, e.iterator, r.arg);
+					if ('throw' === i.type) return (r.method = 'throw'), (r.arg = i.arg), (r.delegate = null), y;
+					var a = i.arg;
+					return a
+						? a.done
+							? ((r[e.resultName] = a.value),
+							  (r.next = e.nextLoc),
+							  'return' !== r.method && ((r.method = 'next'), (r.arg = t)),
+							  (r.delegate = null),
+							  y)
+							: a
+						: ((r.method = 'throw'), (r.arg = new TypeError('iterator result is not an object')), (r.delegate = null), y);
+				}
+				function pushTryEntry(t) {
+					var e = { tryLoc: t[0] };
+					1 in t && (e.catchLoc = t[1]), 2 in t && ((e.finallyLoc = t[2]), (e.afterLoc = t[3])), this.tryEntries.push(e);
+				}
+				function resetTryEntry(t) {
+					var e = t.completion || {};
+					(e.type = 'normal'), delete e.arg, (t.completion = e);
+				}
+				function Context(t) {
+					(this.tryEntries = [{ tryLoc: 'root' }]), t.forEach(pushTryEntry, this), this.reset(!0);
+				}
+				function values(e) {
+					if (e || '' === e) {
+						var r = e[a];
+						if (r) return r.call(e);
+						if ('function' == typeof e.next) return e;
+						if (!isNaN(e.length)) {
+							var o = -1,
+								i = function next() {
+									for (; ++o < e.length; ) if (n.call(e, o)) return (next.value = e[o]), (next.done = !1), next;
+									return (next.value = t), (next.done = !0), next;
+								};
+							return (i.next = i);
+						}
+					}
+					throw new TypeError(typeof e + ' is not iterable');
+				}
+				return (
+					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
+					o(g, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
+					o(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
+					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, 'GeneratorFunction')),
+					(e.isGeneratorFunction = function (t) {
+						var e = 'function' == typeof t && t.constructor;
+						return !!e && (e === GeneratorFunction || 'GeneratorFunction' === (e.displayName || e.name));
+					}),
+					(e.mark = function (t) {
+						return (
+							Object.setPrototypeOf
+								? Object.setPrototypeOf(t, GeneratorFunctionPrototype)
+								: ((t.__proto__ = GeneratorFunctionPrototype), define(t, u, 'GeneratorFunction')),
+							(t.prototype = Object.create(g)),
+							t
+						);
+					}),
+					(e.awrap = function (t) {
+						return { __await: t };
+					}),
+					defineIteratorMethods(AsyncIterator.prototype),
+					define(AsyncIterator.prototype, c, function () {
+						return this;
+					}),
+					(e.AsyncIterator = AsyncIterator),
+					(e.async = function (t, r, n, o, i) {
+						void 0 === i && (i = Promise);
+						var a = new AsyncIterator(wrap(t, r, n, o), i);
+						return e.isGeneratorFunction(r)
+							? a
+							: a.next().then(function (t) {
+									return t.done ? t.value : a.next();
+							  });
+					}),
+					defineIteratorMethods(g),
+					define(g, u, 'Generator'),
+					define(g, a, function () {
+						return this;
+					}),
+					define(g, 'toString', function () {
+						return '[object Generator]';
+					}),
+					(e.keys = function (t) {
+						var e = Object(t),
+							r = [];
+						for (var n in e) r.push(n);
+						return (
+							r.reverse(),
+							function next() {
+								for (; r.length; ) {
+									var t = r.pop();
+									if (t in e) return (next.value = t), (next.done = !1), next;
+								}
+								return (next.done = !0), next;
+							}
+						);
+					}),
+					(e.values = values),
+					(Context.prototype = {
+						constructor: Context,
+						reset: function reset(e) {
+							if (
+								((this.prev = 0),
+								(this.next = 0),
+								(this.sent = this._sent = t),
+								(this.done = !1),
+								(this.delegate = null),
+								(this.method = 'next'),
+								(this.arg = t),
+								this.tryEntries.forEach(resetTryEntry),
+								!e)
+							)
+								for (var r in this) 't' === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
+						},
+						stop: function stop() {
+							this.done = !0;
+							var t = this.tryEntries[0].completion;
+							if ('throw' === t.type) throw t.arg;
+							return this.rval;
+						},
+						dispatchException: function dispatchException(e) {
+							if (this.done) throw e;
+							var r = this;
+							function handle(n, o) {
+								return (a.type = 'throw'), (a.arg = e), (r.next = n), o && ((r.method = 'next'), (r.arg = t)), !!o;
+							}
+							for (var o = this.tryEntries.length - 1; o >= 0; --o) {
+								var i = this.tryEntries[o],
+									a = i.completion;
+								if ('root' === i.tryLoc) return handle('end');
+								if (i.tryLoc <= this.prev) {
+									var c = n.call(i, 'catchLoc'),
+										u = n.call(i, 'finallyLoc');
+									if (c && u) {
+										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
+									} else if (c) {
+										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+									} else {
+										if (!u) throw new Error('try statement without catch or finally');
+										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
+									}
+								}
+							}
+						},
+						abrupt: function abrupt(t, e) {
+							for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+								var o = this.tryEntries[r];
+								if (o.tryLoc <= this.prev && n.call(o, 'finallyLoc') && this.prev < o.finallyLoc) {
+									var i = o;
+									break;
+								}
+							}
+							i && ('break' === t || 'continue' === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null);
+							var a = i ? i.completion : {};
+							return (a.type = t), (a.arg = e), i ? ((this.method = 'next'), (this.next = i.finallyLoc), y) : this.complete(a);
+						},
+						complete: function complete(t, e) {
+							if ('throw' === t.type) throw t.arg;
+							return (
+								'break' === t.type || 'continue' === t.type
+									? (this.next = t.arg)
+									: 'return' === t.type
+									? ((this.rval = this.arg = t.arg), (this.method = 'return'), (this.next = 'end'))
+									: 'normal' === t.type && e && (this.next = e),
+								y
+							);
+						},
+						finish: function finish(t) {
+							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+								var r = this.tryEntries[e];
+								if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y;
+							}
+						},
+						catch: function _catch(t) {
+							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+								var r = this.tryEntries[e];
+								if (r.tryLoc === t) {
+									var n = r.completion;
+									if ('throw' === n.type) {
+										var o = n.arg;
+										resetTryEntry(r);
+									}
+									return o;
+								}
+							}
+							throw new Error('illegal catch attempt');
+						},
+						delegateYield: function delegateYield(e, r, n) {
+							return (this.delegate = { iterator: values(e), resultName: r, nextLoc: n }), 'next' === this.method && (this.arg = t), y;
+						},
+					}),
+					e
+				);
+			}
+			function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function _asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			MDXContent.isMDXComponent = !0;
+			const OverlayBadge_stories = {
+				title: 'Molecules/OverlayBadge',
+				component: OverlayBadge.Q,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.uY, { story: blocks.h1 }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)(
+							'div',
+							{ style: { width: '300px', height: '500px', padding: '20px', border: '2px dotted lightgrey' } },
+							(0, preact_module.h)(Story, null),
+							(0, preact_module.h)('div', { style: { height: '50px', margin: '10px 0', border: '2px dotted lightgrey' } })
+						);
+					},
+				],
+				argTypes: Object.assign(
+					{
+						result: {
+							description: 'Result store Product reference',
+							type: { required: !0 },
+							table: { type: { summary: 'result store Product object' } },
+							control: { type: 'none' },
+						},
+						controller: {
+							description: 'Controller reference',
+							type: { required: !0 },
+							table: { type: { summary: 'Controller' } },
+							control: { type: 'none' },
+						},
+						children: { description: 'Overlay content to be displayed', type: { required: !0 }, table: { type: { summary: 'string, JSX' } } },
+						componentMap: {
+							description: 'Component map containing custom badge component',
+							table: { type: { summary: 'object' } },
+							control: { type: 'object' },
+						},
+						renderEmpty: {
+							description: 'Render wrapper element even when there are no badges',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+					},
+					componentArgs.F
+				),
+			};
+			var snapInstance = snapify.p.search({ id: 'Result', globals: { siteId: '8uyt2m' } }),
+				ObservableOverlayBadge = (0, mobxreact_esm.PA)(function (_ref) {
+					var _controller$store,
+						args = _ref.args,
+						controller = _ref.controller;
+					return (0,
+					preact_module.h)(OverlayBadge.Q, Object.assign({}, args, { controller, result: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results[0] }), (0, preact_module.h)('div', { style: { height: '300px', border: '2px dotted lightgrey' } }));
+				}),
+				Default = function Default(args, _ref2) {
+					var controller = _ref2.loaded.controller;
+					return (0, preact_module.h)(ObservableOverlayBadge, { args, controller });
+				};
+			Default.loaders = [
+				_asyncToGenerator(
+					_regeneratorRuntime().mark(function _callee() {
+						return _regeneratorRuntime().wrap(function _callee$(_context) {
+							for (;;)
+								switch ((_context.prev = _context.next)) {
+									case 0:
+										return (
+											snapInstance.on('afterSearch', function (_ref4) {
+												var response = _ref4.response;
+												(response.results[0].badges = [{ tag: 'free-shipping-overlay', value: 'Free Shipping' }]),
+													(response.results[1].badges = [{ tag: 'free-shipping-callout', value: 'Free Shipping' }]),
+													(response.meta = Object.assign({}, response.meta, {
+														badges: {
+															locations: { left: [{ tag: 'left', name: 'Left' }], right: [], callout: [{ tag: 'callout', name: 'Callout' }] },
+															tags: {
+																'free-shipping-overlay': {
+																	location: 'left/left',
+																	component: 'BadgeRectangle',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																},
+																'free-shipping-callout': {
+																	location: 'callout/callout',
+																	component: 'BadgeRectangle',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																},
+															},
+														},
+													}));
+											}),
+											(_context.next = 3),
+											snapInstance.search()
+										);
+									case 3:
+										return _context.abrupt('return', { controller: snapInstance });
+									case 4:
+									case 'end':
+										return _context.stop();
+								}
+						}, _callee);
+					})
+				),
+			];
+		},
+		'./src/components/Molecules/OverlayBadge/OverlayBadge.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Q: () => OverlayBadge });
+			__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
+			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defaultBadgeComponentMap.ts'),
+				_hooks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/hooks/useComponent.tsx'),
+				CSS_OverlayBadge = function OverlayBadge(_ref) {
+					var _grid$,
+						grid = _ref.grid,
+						gridProperties = {};
+					if (null != grid && grid.length && null !== (_grid$ = grid[0]) && void 0 !== _grid$ && _grid$.length) {
+						var gridTemplateAreas = grid
+							.map(function (row) {
+								return '"' + row.join(' ') + '"';
+							})
+							.join(' ');
+						gridProperties = { gridTemplateColumns: 'repeat(' + grid[0].length + ', 1fr)', gridTemplateAreas };
+					}
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
+						position: 'relative',
+						'& .ss__overlay-badge__grid-wrapper': Object.assign(
+							{ display: 'grid', position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
+							gridProperties
+						),
+					});
+				},
+				CSS_BadgePositioning = function BadgePositioning(_ref2) {
+					var index = _ref2.index,
+						section = _ref2.section,
+						tag = _ref2.tag;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
+						position: 'absolute',
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'right' == section ? 'flex-end' : 'flex-start',
+						right: 'right' == section ? 0 : void 0,
+						gap: '0.5em',
+						gridArea: tag,
+						boxSizing: 'border-box',
+						zIndex: Math.max(100 - index, 1),
+						width: '100%',
+						height: '100%',
+					});
+				},
+				OverlayBadge = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.PA)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						_controller$store,
+						_meta$badges,
+						_meta$badges$groups,
+						_meta$badges$groups$g,
+						_meta$badges2,
+						_meta$badges2$groups,
+						_meta$badges2$groups$,
+						_controller$log,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
+						props = Object.assign(
+							{},
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.overlayBadge,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.overlayBadge
+						),
+						result = props.result,
+						children = props.children,
+						controller = props.controller,
+						renderEmpty = props.renderEmpty,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						styling = {};
+					if (!children)
+						return (
+							null == controller ||
+								null === (_controller$log = controller.log) ||
+								void 0 === _controller$log ||
+								_controller$log.warn('OverlayBadge component must have children'),
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null)
+						);
+					var meta =
+							null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.meta,
+						grid =
+							null == meta ||
+							null === (_meta$badges = meta.badges) ||
+							void 0 === _meta$badges ||
+							null === (_meta$badges$groups = _meta$badges.groups) ||
+							void 0 === _meta$badges$groups ||
+							null === (_meta$badges$groups$g = _meta$badges$groups.overlay) ||
+							void 0 === _meta$badges$groups$g
+								? void 0
+								: _meta$badges$groups$g.grid,
+						badgeComponentMap = Object.assign({}, _utilities__WEBPACK_IMPORTED_MODULE_11__.q, props.componentMap),
+						sections =
+							null == meta ||
+							null === (_meta$badges2 = meta.badges) ||
+							void 0 === _meta$badges2 ||
+							null === (_meta$badges2$groups = _meta$badges2.groups) ||
+							void 0 === _meta$badges2$groups ||
+							null === (_meta$badges2$groups$ = _meta$badges2$groups.overlay) ||
+							void 0 === _meta$badges2$groups$
+								? void 0
+								: _meta$badges2$groups$.sections,
+						locations =
+							null == sections
+								? void 0
+								: sections
+										.map(function (section) {
+											var _meta$data,
+												_meta$data$badges,
+												sectionSlots =
+													null == meta ||
+													null === (_meta$data = meta.data) ||
+													void 0 === _meta$data ||
+													null === (_meta$data$badges = _meta$data.badges) ||
+													void 0 === _meta$data$badges
+														? void 0
+														: _meta$data$badges.locations[section],
+												slots =
+													null == sectionSlots
+														? void 0
+														: sectionSlots
+																.map(function (slot) {
+																	var _result$badges;
+																	return {
+																		tag: slot.tag,
+																		name: slot.name,
+																		badges:
+																			null == result || null === (_result$badges = result.badges) || void 0 === _result$badges
+																				? void 0
+																				: _result$badges.atLocation(section + '/' + slot.tag).slice(0, 1),
+																	};
+																})
+																.filter(function (slot) {
+																	return slot.badges.length;
+																});
+											return { section, slots };
+										})
+										.filter(function (location) {
+											var _location$slots;
+											return null === (_location$slots = location.slots) || void 0 === _location$slots ? void 0 : _location$slots.length;
+										});
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_OverlayBadge(Object.assign({}, props, { grid })), style]),
+						renderEmpty || (null != locations && locations.length)
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_12__._,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+										'div',
+										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__overlay-badge', className) }),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+											'div',
+											{ className: 'ss__overlay-badge__grid-wrapper' },
+											locations.map(function (location, index) {
+												var _location$slots2;
+												return null === (_location$slots2 = location.slots) || void 0 === _location$slots2
+													? void 0
+													: _location$slots2.map(function (slot) {
+															return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+																'div',
+																{
+																	className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
+																		'ss__overlay-badge__grid-wrapper__slot',
+																		'ss__overlay-badge__grid-wrapper__slot--' + slot.tag
+																	),
+																	css: [CSS_BadgePositioning({ tag: slot.tag, section: location.section, index })],
+																},
+																slot.badges.map(function (badge) {
+																	var BadgeComponent = (0, _hooks__WEBPACK_IMPORTED_MODULE_13__.x)(badgeComponentMap, badge.component);
+																	return BadgeComponent
+																		? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
+																		: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null);
+																})
+															);
+													  });
+											})
+										),
+										children
+									)
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null, children)
+					);
+				});
+		},
 		'./src/components/Molecules/Pagination/Pagination.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -12567,8 +14723,10 @@
 						'The ',
 						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'hideBadge'),
 						' prop will prevent the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Badge />'),
-						' component from rendering.'
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<OverlayBadge />'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<CalloutBadge />'),
+						' components from rendering.'
 					),
 					(0, esm.yg)(
 						'pre',
@@ -13259,7 +15417,6 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
-				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
 				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
@@ -13267,6 +15424,8 @@
 				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.tsx');
 			__webpack_require__('../../node_modules/core-js/modules/es.array.last-index-of.js');
 			var types = __webpack_require__('./src/types.ts'),
+				CalloutBadge = __webpack_require__('./src/components/Molecules/CalloutBadge/CalloutBadge.tsx'),
+				OverlayBadge = __webpack_require__('./src/components/Molecules/OverlayBadge/OverlayBadge.tsx'),
 				CSS_result = function result() {
 					return (0, emotion_react_browser_esm.AH)({
 						'&.ss__result--grid': {
@@ -13307,6 +15466,7 @@
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_globalTheme$componen4,
+						_globalTheme$componen5,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ layout: types.PE.GRID },
@@ -13348,26 +15508,31 @@
 								(0, defined.s)({ disableStyles }),
 								{ theme: props.theme }
 							),
-							badge: Object.assign(
-								{ className: 'ss__result__badge', content: 'Sale' },
+							calloutBadge: Object.assign(
+								{ className: 'ss__result__callout-badge' },
 								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
 									? void 0
-									: _globalTheme$componen3.badge,
-								(0, defined.s)({ disableStyles }),
+									: _globalTheme$componen3.calloutBadge,
+								(0, defined.s)({ disableStyles, result }),
+								{ theme: props.theme }
+							),
+							overlayBadge: Object.assign(
+								{ className: 'ss__result__overlay-badge' },
+								null == globalTheme || null === (_globalTheme$componen4 = globalTheme.components) || void 0 === _globalTheme$componen4
+									? void 0
+									: _globalTheme$componen4.overlayBadge,
+								(0, defined.s)({ disableStyles, result }),
 								{ theme: props.theme }
 							),
 							image: Object.assign(
 								{ className: 'ss__result__image', alt: null == core ? void 0 : core.name, src: null == core ? void 0 : core.imageUrl },
-								null == globalTheme || null === (_globalTheme$componen4 = globalTheme.components) || void 0 === _globalTheme$componen4
+								null == globalTheme || null === (_globalTheme$componen5 = globalTheme.components) || void 0 === _globalTheme$componen5
 									? void 0
-									: _globalTheme$componen4.image,
+									: _globalTheme$componen5.image,
 								(0, defined.s)({ disableStyles, fallback }),
 								{ theme: null == props ? void 0 : props.theme }
 							),
 						},
-						onSale = Boolean(
-							(null == core ? void 0 : core.msrp) && core.price && 1 * (null == core ? void 0 : core.msrp) > 1 * (null == core ? void 0 : core.price)
-						),
 						displayName = null == core ? void 0 : core.name;
 					props.truncateTitle &&
 						(displayName = (function truncate(input, limit, append) {
@@ -13404,13 +15569,20 @@
 																_controller$track$pro.click(e, result);
 													},
 												},
-												!hideBadge && onSale && (0, emotion_react_browser_esm.Y)(Badge.E, Object.assign({}, subProps.badge)),
-												!hideImage && (0, emotion_react_browser_esm.Y)(Image._, Object.assign({}, subProps.image))
+												!hideImage &&
+													(hideBadge
+														? (0, emotion_react_browser_esm.Y)(Image._, Object.assign({}, subProps.image))
+														: (0, emotion_react_browser_esm.Y)(
+																OverlayBadge.Q,
+																Object.assign({}, subProps.overlayBadge, { controller }),
+																(0, emotion_react_browser_esm.Y)(Image._, Object.assign({}, subProps.image))
+														  ))
 											)
 										),
 										(0, emotion_react_browser_esm.Y)(
 											'div',
 											{ className: 'ss__result__details' },
+											!hideBadge && (0, emotion_react_browser_esm.Y)(CalloutBadge.W, Object.assign({}, subProps.calloutBadge, { controller })),
 											!hideTitle &&
 												(0, emotion_react_browser_esm.Y)(
 													'div',
@@ -15786,7 +17958,6 @@
 								facetHierarchyOptions: { hideCount: !0, onClick: facetClickEvent },
 								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: facetClickEvent },
 								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: facetClickEvent },
-								result: { hideBadge: !0 },
 							},
 						},
 						displaySettings = (0, useDisplaySettings.X)(breakpoints) || {},
@@ -26140,6 +28311,98 @@
 			}
 			__webpack_require__.d(__webpack_exports__, { i: () => useA11y });
 		},
+		'./src/hooks/useComponent.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { x: () => useComponent });
+			__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js');
+			function _slicedToArray(arr, i) {
+				return (
+					(function _arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function _iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(arr, i) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var useComponent = function useComponent(map, name) {
+				var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.J0)(void 0), 2),
+					importedComponent = _useState2[0],
+					setImportedComponent = _useState2[1];
+				return (
+					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.vJ)(function () {
+						var importFn = map[name];
+						if (importFn && 'function' == typeof importFn) {
+							var componentFn = importFn();
+							componentFn instanceof Promise
+								? componentFn.then(function (component) {
+										setImportedComponent(function () {
+											return component;
+										});
+								  })
+								: setImportedComponent(function () {
+										return componentFn;
+								  });
+						}
+					}, []),
+					importedComponent
+				);
+			};
+		},
 		'./src/hooks/useDisplaySettings.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { X: () => useDisplaySettings });
@@ -26486,6 +28749,30 @@
 				style: { description: 'Inline style', table: { type: { summary: 'string, object' } }, control: { type: 'text' } },
 				theme: { description: 'Specify specific sub component props', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 			};
+		},
+		'./src/utilities/defaultBadgeComponentMap.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { q: () => defaultBadgeComponentMap });
+			var _components_Atoms_BadgeText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('./src/components/Atoms/BadgeText/BadgeText.tsx'),
+				_components_Atoms_BadgePill__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('./src/components/Atoms/BadgePill/BadgePill.tsx'),
+				_components_Atoms_BadgeRectangle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+					'./src/components/Atoms/BadgeRectangle/BadgeRectangle.tsx'
+				),
+				_components_Atoms_BadgeImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('./src/components/Atoms/BadgeImage/BadgeImage.tsx'),
+				defaultBadgeComponentMap = {
+					BadgeText: function BadgeText() {
+						return _components_Atoms_BadgeText__WEBPACK_IMPORTED_MODULE_0__.p;
+					},
+					BadgePill: function BadgePill() {
+						return _components_Atoms_BadgePill__WEBPACK_IMPORTED_MODULE_1__.L;
+					},
+					BadgeRectangle: function BadgeRectangle() {
+						return _components_Atoms_BadgeRectangle__WEBPACK_IMPORTED_MODULE_2__.Z;
+					},
+					BadgeImage: function BadgeImage() {
+						return _components_Atoms_BadgeImage__WEBPACK_IMPORTED_MODULE_3__.z;
+					},
+				};
 		},
 		'./src/utilities/defined.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -27675,19 +29962,19 @@
 									(this.sameSite = config.cookie.sameSite),
 								config.type)
 							) {
-								case StorageType.SESSION:
+								case StorageType.session:
 									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
 											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
-								case StorageType.LOCAL:
+								case StorageType.local:
 									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
 											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
-								case StorageType.COOKIE:
+								case StorageType.cookie:
 									if (featureFlags_cookies) {
 										this.type = config.type;
 										var data = utils_cookies.get(this.key);
@@ -27695,7 +29982,7 @@
 									}
 									break;
 								default:
-									this.type = StorageType.MEMORY;
+									this.type = StorageType.memory;
 							}
 					}
 					return (
@@ -27719,13 +30006,13 @@
 											}),
 										this.type)
 									) {
-										case StorageType.SESSION:
+										case StorageType.session:
 											window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 											break;
-										case StorageType.LOCAL:
+										case StorageType.local:
 											window.localStorage.setItem(this.key, JSON.stringify(this.state));
 											break;
-										case StorageType.COOKIE:
+										case StorageType.cookie:
 											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
 									}
 								},
@@ -27734,15 +30021,15 @@
 								key: 'get',
 								value: function get(path) {
 									switch (this.type) {
-										case StorageType.SESSION:
+										case StorageType.session:
 											var sessionData = window.sessionStorage.getItem(this.key);
 											this.state = sessionData ? JSON.parse(sessionData) : {};
 											break;
-										case StorageType.LOCAL:
+										case StorageType.local:
 											var localData = window.localStorage.getItem(this.key);
 											this.state = localData ? JSON.parse(localData) : {};
 											break;
-										case StorageType.COOKIE:
+										case StorageType.cookie:
 											var data = utils_cookies.get(this.key);
 											data && (this.state = JSON.parse(data) || {});
 									}
@@ -27770,13 +30057,13 @@
 								key: 'clear',
 								value: function clear() {
 									switch (this.type) {
-										case StorageType.SESSION:
+										case StorageType.session:
 											window.sessionStorage.removeItem(this.key);
 											break;
-										case StorageType.LOCAL:
+										case StorageType.local:
 											window.localStorage.removeItem(this.key);
 											break;
-										case StorageType.COOKIE:
+										case StorageType.cookie:
 											utils_cookies.unset(this.key);
 									}
 									this.state = {};
@@ -27787,7 +30074,7 @@
 					);
 				})();
 			!(function (StorageType) {
-				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie'), (StorageType.MEMORY = 'memory');
+				(StorageType.session = 'session'), (StorageType.local = 'local'), (StorageType.cookie = 'cookie'), (StorageType.memory = 'memory');
 			})(StorageType || (StorageType = {}));
 			var ControllerTypes;
 			__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js');
@@ -28753,7 +31040,7 @@
 							void 0 === _this.config.settings.restorePosition &&
 							(_this.config.settings.restorePosition = { enabled: !0 }),
 						_this.store.setConfig(_this.config),
-						(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+						(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 						_this.storage.set('lastStringyParams', void 0),
 						_this.eventManager.on(
 							'beforeSearch',
@@ -31306,7 +33593,7 @@
 							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
 							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
-							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on(
 								'beforeSearch',
 								(function () {
@@ -34103,7 +36390,7 @@
 			function decodeProperty(encoded) {
 				return Array.isArray(encoded)
 					? encoded.map(function (item) {
-							return htmlUnescape(String(item));
+							return 'string' == typeof item ? htmlUnescape(String(item)) : item;
 					  })
 					: htmlUnescape(String(encoded));
 			}
@@ -34572,6 +36859,9 @@
 							.filter(function (k) {
 								return -1 == CORE_FIELDS.indexOf(k);
 							})
+							.filter(function (k) {
+								return !('badges' == k && 'object' == typeof rawResult[k]);
+							})
 							.reduce(function (attributes, key) {
 								var _Object$assign2;
 								return Object.assign({}, attributes, (((_Object$assign2 = {})[key] = decodeProperty(rawResult[key] || '')), _Object$assign2));
@@ -34590,7 +36880,13 @@
 											),
 										};
 								  })) || [];
-					return new Result({ id: rawResult.uid, mappings: { core: coreFieldValues }, attributes, children });
+					return new Result({
+						id: rawResult.uid,
+						mappings: { core: coreFieldValues },
+						attributes,
+						badges: 'object' == typeof rawResult.badges ? rawResult.badges : [],
+						children,
+					});
 				}),
 				(transformSearchResponse.filters = function (response) {
 					return {
@@ -36703,7 +38999,7 @@
 								value:
 									((_recommend = Client_asyncToGenerator(
 										Client_regeneratorRuntime().mark(function _callee6(params) {
-											var tag, otherParams, profileParams, recommendParams, _yield$Promise$all, _yield$Promise$all2, profile, recommendations;
+											var tag, otherParams, profileParams, recommendParams, _yield$Promise$all, _yield$Promise$all2, meta, profile, recommendations;
 											return Client_regeneratorRuntime().wrap(
 												function _callee6$(_context6) {
 													for (;;)
@@ -36721,6 +39017,7 @@
 																	(recommendParams = Object.assign({ tags: [tag] }, otherParams, { siteId: params.siteId || this.globals.siteId })),
 																	(_context6.next = 8),
 																	Promise.all([
+																		this.meta(params.siteId ? { siteId: params.siteId } : void 0),
 																		this.requesters.recommend.getProfile(profileParams),
 																		this.requesters.recommend.batchRecommendations(recommendParams),
 																	])
@@ -36728,15 +39025,16 @@
 															case 8:
 																return (
 																	(_yield$Promise$all = _context6.sent),
-																	(_yield$Promise$all2 = Client_slicedToArray(_yield$Promise$all, 2)),
-																	(profile = _yield$Promise$all2[0]),
-																	(recommendations = _yield$Promise$all2[1]),
+																	(_yield$Promise$all2 = Client_slicedToArray(_yield$Promise$all, 3)),
+																	(meta = _yield$Promise$all2[0]),
+																	(profile = _yield$Promise$all2[1]),
+																	(recommendations = _yield$Promise$all2[2]),
 																	_context6.abrupt(
 																		'return',
-																		Object.assign({}, profile, { results: recommendations[0] && recommendations[0].results })
+																		Object.assign({}, profile, { meta, results: recommendations[0] && recommendations[0].results })
 																	)
 																);
-															case 13:
+															case 14:
 															case 'end':
 																return _context6.stop();
 														}
@@ -36848,10 +39146,7 @@
 									return Object.assign({}, translatorConfig, { urlRoot: _this.config.url });
 								})),
 							Number.isInteger(this.config.max) || (this.config.max = 25),
-							(this.storage = new StorageStore({
-								type: StorageType.LOCAL,
-								key: 'ss-history' + (this.config.siteId ? '-' + this.config.siteId : ''),
-							})),
+							(this.storage = new StorageStore({ type: 'local', key: 'ss-history' + (this.config.siteId ? '-' + this.config.siteId : '') })),
 							0 === this.config.max && this.reset(),
 							this.queries.length > this.config.max &&
 								this.getStoredData().forEach(function (term, index) {
@@ -37679,6 +39974,7 @@
 				}),
 				is_plain_object =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.some.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.starts-with.js'),
 					__webpack_require__('../../node_modules/is-plain-object/dist/is-plain-object.mjs'));
 			function SearchResultStore_createForOfIteratorHelper(o, allowArrayLike) {
 				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
@@ -37724,6 +40020,46 @@
 						}
 					},
 				};
+			}
+			function SearchResultStore_slicedToArray(arr, i) {
+				return (
+					(function SearchResultStore_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function SearchResultStore_iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(arr, i) ||
+					SearchResultStore_unsupportedIterableToArray(arr, i) ||
+					(function SearchResultStore_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
 			}
 			function SearchResultStore_toConsumableArray(arr) {
 				return (
@@ -37879,11 +40215,11 @@
 				);
 			}
 			var SearchResultStore = (function (_Array, _Symbol$species) {
-					function SearchResultStore(config, services, resultData, paginationData, merchData) {
+					function SearchResultStore(config, services, metaData, resultData, paginationData, merchData) {
 						var _merchData$content;
 						SearchResultStore_classCallCheck(this, SearchResultStore);
 						var results = (resultData || []).map(function (result) {
-							return new Product(services, result, config);
+							return new Product(services, result, metaData, config);
 						});
 						if (
 							null != merchData &&
@@ -37964,7 +40300,7 @@
 						(0, mobx_esm.Gn)(this, { id: mobx_esm.sH, mappings: mobx_esm.sH, attributes: mobx_esm.sH });
 				}),
 				Product = (function () {
-					function Product(services, result, config) {
+					function Product(services, result, metaData, config) {
 						var _config$settings, _config$settings$vari, _result$children;
 						SearchResultStore_classCallCheck(this, Product),
 							(this.type = 'product'),
@@ -37976,7 +40312,8 @@
 							(this.mask = new ProductMask()),
 							(this.id = result.id),
 							(this.attributes = result.attributes),
-							(this.mappings = result.mappings);
+							(this.mappings = result.mappings),
+							(this.badges = new Badges(result, metaData));
 						var variantsField =
 							null == config ||
 							null === (_config$settings = config.settings) ||
@@ -38023,6 +40360,88 @@
 							},
 						]),
 						Product
+					);
+				})(),
+				Badges = (function () {
+					function Badges(result, metaData) {
+						SearchResultStore_classCallCheck(this, Badges),
+							(this.all = []),
+							(this.all = (result.badges || [])
+								.filter(function (badge) {
+									var _metaData$badges, _metaData$badges2, _metaData$badges3;
+									return !!(
+										null != badge &&
+										badge.tag &&
+										null != metaData &&
+										null !== (_metaData$badges = metaData.badges) &&
+										void 0 !== _metaData$badges &&
+										_metaData$badges.tags &&
+										null != metaData &&
+										null !== (_metaData$badges2 = metaData.badges) &&
+										void 0 !== _metaData$badges2 &&
+										_metaData$badges2.tags[badge.tag] &&
+										null != metaData &&
+										null !== (_metaData$badges3 = metaData.badges) &&
+										void 0 !== _metaData$badges3 &&
+										_metaData$badges3.tags[badge.tag].enabled
+									);
+								})
+								.map(function (badge) {
+									var _metaData$badges4,
+										_metaData$badges4$tag,
+										metaBadgeData =
+											null == metaData ||
+											null === (_metaData$badges4 = metaData.badges) ||
+											void 0 === _metaData$badges4 ||
+											null === (_metaData$badges4$tag = _metaData$badges4.tags) ||
+											void 0 === _metaData$badges4$tag
+												? void 0
+												: _metaData$badges4$tag[badge.tag];
+									return Object.assign({}, badge, metaBadgeData);
+								})
+								.sort(function (a, b) {
+									return a.priority - b.priority;
+								})),
+							(0, mobx_esm.Gn)(this, { all: mobx_esm.sH, tags: mobx_esm.EW, locations: mobx_esm.EW });
+					}
+					return (
+						SearchResultStore_createClass(Badges, [
+							{
+								key: 'atLocation',
+								value: function atLocation(location) {
+									var locations = Array.isArray(location) ? location : [location];
+									return this.all.filter(function (badge) {
+										return locations.some(function (location) {
+											return badge.location.startsWith(location + '/') || badge.location == location;
+										});
+									});
+								},
+							},
+							{
+								key: 'tags',
+								get: function get() {
+									return this.all.reduce(function (badgeMap, badge) {
+										return (badgeMap[badge.tag] = badge), badgeMap;
+									}, {});
+								},
+							},
+							{
+								key: 'locations',
+								get: function get() {
+									return this.all.reduce(function (locationMap, badge) {
+										var _badge$location$split2 = SearchResultStore_slicedToArray(badge.location.split('/'), 2),
+											section = _badge$location$split2[0],
+											tag = _badge$location$split2[1];
+										return (
+											(locationMap[section] = locationMap[section] || {}),
+											(locationMap[section][tag] = (locationMap[section][tag] || []).concat(badge)),
+											locationMap
+										);
+									}, {});
+								},
+							},
+						]),
+						Badges
 					);
 				})(),
 				ProductMask = (function () {
@@ -38650,6 +41069,90 @@
 					AbstractStore
 				);
 			})();
+			function MetaStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, MetaStore_toPropertyKey(descriptor.key), descriptor);
+				}
+			}
+			function MetaStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && MetaStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && MetaStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function MetaStore_toPropertyKey(t) {
+				var i = (function MetaStore_toPrimitive(t, r) {
+					if ('object' != typeof t || !t) return t;
+					var e = t[Symbol.toPrimitive];
+					if (void 0 !== e) {
+						var i = e.call(t, r || 'default');
+						if ('object' != typeof i) return i;
+						throw new TypeError('@@toPrimitive must return a primitive value.');
+					}
+					return ('string' === r ? String : Number)(t);
+				})(t, 'string');
+				return 'symbol' == typeof i ? i : String(i);
+			}
+			function MetaStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			var MetaStore = MetaStore_createClass(function MetaStore(metaData) {
+					MetaStore_classCallCheck(this, MetaStore), (this.data = null != metaData ? metaData : {}), (this.badges = new MetaBadges(this.data));
+				}),
+				MetaBadges = MetaStore_createClass(function MetaBadges(metaData) {
+					var _this = this;
+					MetaStore_classCallCheck(this, MetaBadges), (this.groups = {});
+					var groups = { overlay: { sections: ['left', 'right'] } };
+					Object.keys(groups).map(function (name) {
+						var group = groups[name],
+							sections = group.sections.map(function (section) {
+								var _metaData$badges, _metaData$badges$loca, _metaData$badges$loca2;
+								return {
+									areas:
+										(null == metaData ||
+										null === (_metaData$badges = metaData.badges) ||
+										void 0 === _metaData$badges ||
+										null === (_metaData$badges$loca = _metaData$badges.locations) ||
+										void 0 === _metaData$badges$loca ||
+										null === (_metaData$badges$loca2 = _metaData$badges$loca[section]) ||
+										void 0 === _metaData$badges$loca2
+											? void 0
+											: _metaData$badges$loca2.map(function (area) {
+													return area.tag;
+											  })) || [],
+									grid: [],
+								};
+							}),
+							lcmSections = sections
+								.map(function (section) {
+									return section.areas.length;
+								})
+								.reduce(lcm);
+						sections.forEach(function (section) {
+							section.grid = Array.from({ length: lcmSections }).map(function (_, index) {
+								return section.areas[Math.floor(index / (lcmSections / section.areas.length))];
+							});
+						});
+						var grid = Array.from({ length: lcmSections }).map(function (_, i) {
+							return sections.map(function (section) {
+								return section.grid[i];
+							});
+						});
+						_this.groups[name] = { sections: group.sections, grid };
+					});
+				});
+			function gcd(a, b) {
+				return b ? gcd(b, a % b) : a;
+			}
+			function lcm(a, b) {
+				return (a * b) / gcd(a, b);
+			}
 			function SearchStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -38802,7 +41305,7 @@
 								var data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
 								(this.error = void 0),
 									(this.loaded = !!data.pagination),
-									(this.meta = data.meta || {}),
+									(this.meta = new MetaStore(data.meta)),
 									(this.merchandising = new SearchMerchandisingStore.W(this.services, (null == data ? void 0 : data.merchandising) || {})),
 									(this.search = new SearchQueryStore(this.services, (null == data ? void 0 : data.search) || {})),
 									(this.facets = new SearchFacetStore(
@@ -38811,23 +41314,24 @@
 										this.storage,
 										data.facets,
 										(null == data ? void 0 : data.pagination) || {},
-										this.meta,
+										this.meta.data,
 										(null == data ? void 0 : data.merchandising) || {}
 									)),
-									(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
+									(this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data)),
 									(this.results = new SearchResultStore(
 										this.config,
 										this.services,
+										this.meta.data,
 										(null == data ? void 0 : data.results) || [],
 										data.pagination,
 										data.merchandising
 									)),
-									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta)),
+									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data)),
 									(this.sorting = new SearchSortingStore(
 										this.services,
 										(null == data ? void 0 : data.sorting) || [],
 										(null == data ? void 0 : data.search) || {},
-										this.meta
+										this.meta.data
 									));
 							},
 						},
@@ -40148,8 +42652,9 @@
 							value: function update(data) {
 								(this.error = void 0),
 									(this.loaded = !(null == data || !data.profile)),
+									(this.meta = new MetaStore(null == data ? void 0 : data.meta)),
 									(this.profile = new RecommendationProfileStore(this.services, data)),
-									(this.results = new SearchResultStore(this.config, this.services, null == data ? void 0 : data.results)),
+									(this.results = new SearchResultStore(this.config, this.services, this.meta.data, null == data ? void 0 : data.results)),
 									'bundle' == this.profile.type && (this.cart = new CartStore());
 							},
 						},
@@ -41258,7 +43763,7 @@
 									data &&
 										((this.error = void 0),
 										(this.loaded = !!data.pagination),
-										(this.meta = data.meta || {}),
+										(this.meta = new MetaStore(data.meta)),
 										data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
 										this.state.locks.terms.locked ||
 											((this.terms = new AutocompleteTermStore(
@@ -41282,12 +43787,19 @@
 												this.storage,
 												data.facets || [],
 												data.pagination || {},
-												this.meta,
+												this.meta.data,
 												this.state,
 												data.merchandising || {}
 											)),
-										(this.filters = new SearchFilterStore(this.services, data.filters, this.meta)),
-										(this.results = new SearchResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising)),
+										(this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data)),
+										(this.results = new SearchResultStore(
+											this.config,
+											this.services,
+											this.meta.data,
+											data.results || [],
+											data.pagination,
+											data.merchandising
+										)),
 										((0 === this.results.length &&
 											!this.trending.filter(function (term) {
 												return term.active;
@@ -41298,8 +43810,8 @@
 													return term.active;
 												}).length)) &&
 											this.resetTrending(),
-										(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta)),
-										(this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta)));
+										(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data)),
+										(this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta.data)));
 								},
 							},
 						]),
@@ -42960,7 +45472,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.54.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.55.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -43457,7 +45969,7 @@
 							(this.doNotTrack = this.config.doNotTrack || []),
 							Object.values(AppMode).includes(this.config.mode) && (this.mode = this.config.mode),
 							(this.globals = globals),
-							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id })),
+							(this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + this.config.id })),
 							this.localStorage.set('siteId', this.globals.siteId),
 							(this.context = {
 								userId: this.getUserId() || '',
@@ -43467,7 +45979,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.54.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.55.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -45241,7 +47753,10 @@
 			__webpack_require__
 		) => {
 			var map = {
-				'./components/Atoms/Badge/Badge.stories.tsx': './src/components/Atoms/Badge/Badge.stories.tsx',
+				'./components/Atoms/BadgeImage/BadgeImage.stories.tsx': './src/components/Atoms/BadgeImage/BadgeImage.stories.tsx',
+				'./components/Atoms/BadgePill/BadgePill.stories.tsx': './src/components/Atoms/BadgePill/BadgePill.stories.tsx',
+				'./components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx': './src/components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx',
+				'./components/Atoms/BadgeText/BadgeText.stories.tsx': './src/components/Atoms/BadgeText/BadgeText.stories.tsx',
 				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': './src/components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx',
 				'./components/Atoms/Button/Button.stories.tsx': './src/components/Atoms/Button/Button.stories.tsx',
 				'./components/Atoms/Dropdown/Dropdown.stories.tsx': './src/components/Atoms/Dropdown/Dropdown.stories.tsx',
@@ -45255,6 +47770,7 @@
 				'./components/Atoms/Overlay/Overlay.stories.tsx': './src/components/Atoms/Overlay/Overlay.stories.tsx',
 				'./components/Atoms/Price/Price.stories.tsx': './src/components/Atoms/Price/Price.stories.tsx',
 				'./components/Atoms/Skeleton/Skeleton.stories.tsx': './src/components/Atoms/Skeleton/Skeleton.stories.tsx',
+				'./components/Molecules/CalloutBadge/CalloutBadge.stories.tsx': './src/components/Molecules/CalloutBadge/CalloutBadge.stories.tsx',
 				'./components/Molecules/Carousel/Carousel.stories.tsx': './src/components/Molecules/Carousel/Carousel.stories.tsx',
 				'./components/Molecules/Checkbox/Checkbox.stories.tsx': './src/components/Molecules/Checkbox/Checkbox.stories.tsx',
 				'./components/Molecules/ErrorHandler/ErrorHandler.stories.tsx': './src/components/Molecules/ErrorHandler/ErrorHandler.stories.tsx',
@@ -45268,6 +47784,7 @@
 					'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx',
 				'./components/Molecules/FacetSlider/FacetSlider.stories.tsx': './src/components/Molecules/FacetSlider/FacetSlider.stories.tsx',
 				'./components/Molecules/Filter/Filter.stories.tsx': './src/components/Molecules/Filter/Filter.stories.tsx',
+				'./components/Molecules/OverlayBadge/OverlayBadge.stories.tsx': './src/components/Molecules/OverlayBadge/OverlayBadge.stories.tsx',
 				'./components/Molecules/Pagination/Pagination.stories.tsx': './src/components/Molecules/Pagination/Pagination.stories.tsx',
 				'./components/Molecules/Result/Result.stories.tsx': './src/components/Molecules/Result/Result.stories.tsx',
 				'./components/Molecules/SearchInput/SearchInput.stories.tsx': './src/components/Molecules/SearchInput/SearchInput.stories.tsx',
@@ -45340,7 +47857,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[231],
+			[916],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
