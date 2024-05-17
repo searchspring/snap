@@ -530,7 +530,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
@@ -570,7 +577,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;

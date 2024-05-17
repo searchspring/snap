@@ -39,18 +39,20 @@ let errMock: any;
 // @ts-ignore
 const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 
+const controllerServices: any = {
+	client: new MockClient(globals, {}),
+	store: new SearchStore(searchConfig, services),
+	urlManager,
+	eventManager: new EventManager(),
+	profiler: new Profiler(),
+	logger: new Logger(),
+	tracker: new Tracker(globals),
+};
+
 describe('Shopify AddToCart', () => {
 	beforeAll(async () => {
 		searchConfig = { ...searchConfigDefault };
-		controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
+		controller = new SearchController(searchConfig, controllerServices);
 
 		await controller.search();
 
