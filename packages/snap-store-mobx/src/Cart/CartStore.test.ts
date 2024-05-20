@@ -91,6 +91,22 @@ describe('CartStore store', () => {
 		expect(cartStore.msrp).toStrictEqual(result.mappings.core?.msrp ? result.mappings.core?.msrp * 3 : 0);
 	});
 
+	it('will ensure price and MSRP are numbers', () => {
+		const cartStore = new CartStore();
+		const result = results[0] as Product;
+		result.quantity = 1;
+
+		// @ts-ignore - sometimes the values in variant data can be strings
+		result.mask.set({ mappings: { core: { msrp: '0.00' } } });
+
+		cartStore.addItems([result]);
+
+		expect(cartStore.items).toHaveLength(1);
+		expect(cartStore.count).toStrictEqual(1);
+		expect(cartStore.price).toStrictEqual(result.mappings.core?.price);
+		expect(cartStore.msrp).toStrictEqual(result.mappings.core?.price);
+	});
+
 	it('can use the eventmanager events', async () => {
 		const cartStore = new CartStore();
 
