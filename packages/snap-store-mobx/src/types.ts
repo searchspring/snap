@@ -12,8 +12,15 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
+export type VariantConfigFilterTypes = 'first' | 'unaltered';
+
 export type VariantConfig = {
 	field: string;
+	realtime?: {
+		enabled: boolean;
+		filter?: VariantConfigFilterTypes[];
+		// filterFunction - maybe add later as needed?  filter(({ products, controller }) => products)
+	};
 	options?: {
 		[optionField: string]: VariantOptionConfig;
 	};
@@ -134,7 +141,9 @@ export type RecommendationStoreConfig = StoreConfig & {
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
-	variants?: VariantConfig;
+	settings?: {
+		variants?: VariantConfig;
+	};
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;

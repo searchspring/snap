@@ -10,6 +10,7 @@ import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendCombinedRequestModel } from '@searchspring/snap-client';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import { variantSelectionPlugin } from '../plugins/variantSelection';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -91,6 +92,8 @@ export class RecommendationController extends AbstractController {
 
 			recommend.controller.store.loading = false;
 		});
+
+		this.plugin(variantSelectionPlugin);
 
 		// attach config plugins and event middleware
 		this.use(this.config);

@@ -26,6 +26,7 @@ import type {
 	MetaResponseModel,
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
+import { variantSelectionPlugin } from '../plugins/variantSelection';
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -215,6 +216,8 @@ export class SearchController extends AbstractController {
 				});
 			}
 		}
+
+		this.plugin(variantSelectionPlugin);
 
 		// attach config plugins and event middleware
 		this.use(this.config);

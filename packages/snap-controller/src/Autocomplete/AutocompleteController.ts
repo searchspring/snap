@@ -9,6 +9,7 @@ import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
+import { variantSelectionPlugin } from '../plugins/variantSelection';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 export const INPUT_DELAY = 200;
@@ -119,6 +120,9 @@ export class AutocompleteController extends AbstractController {
 				}
 			}
 		});
+
+		this.plugin(variantSelectionPlugin);
+
 		// attach config plugins and event middleware
 		this.use(this.config);
 	}
