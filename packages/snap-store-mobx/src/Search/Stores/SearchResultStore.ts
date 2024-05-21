@@ -348,7 +348,7 @@ export class Variants {
 				}
 
 				if (preferencedOption) {
-					selection.select(preferencedOption.value);
+					selection.select(preferencedOption.value, true);
 				}
 			});
 		}

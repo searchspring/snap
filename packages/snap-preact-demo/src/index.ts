@@ -118,7 +118,6 @@ let config: SnapConfig = {
 					return (await import('./components/Recommendations/Email/Email')).Email;
 				},
 			},
-
 			config: {
 				branch: BRANCHNAME,
 				plugins: [],

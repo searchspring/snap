@@ -25,6 +25,9 @@ type RecommendationTrackMethods = {
 	render: (results?: Product[]) => BeaconEvent | undefined;
 };
 
+const VARIANT_ATTRIBUTE = 'ss-variant-option';
+const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
+
 const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
 	tag: '',
@@ -89,7 +92,82 @@ export class RecommendationController extends AbstractController {
 				});
 			});
 
+			// check for attributes for preselection
+			// @ts-ignore - fix me
+			const variantConfig = this.config.settings.variants;
+			if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+				// grab values from elements on the page to form preselected elements
+				const options: Record<string, string[]> = {};
+				document.querySelectorAll(`[${VARIANT_ATTRIBUTE_SELECTED}]`).forEach((elem) => {
+					const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+					if (attr) {
+						const [option, value] = attr.split(':');
+						options[option.toLowerCase()] = [value.toLowerCase()];
+					}
+				});
+
+				let filteredResults = this.store.results;
+
+				// filter based on config
+				variantConfig.realtime.filter?.forEach((filter) => {
+					if (filter == 'first') {
+						filteredResults = [filteredResults[0]];
+					}
+
+					if (filter == 'unaltered') {
+						filteredResults = filteredResults.filter(
+							(result) => !(result as Product).variants?.selections.some((selection) => selection.previouslySelected)
+						);
+					}
+				});
+
+				filteredResults.forEach((result) => {
+					// no banner types
+					if (result.type == 'product') {
+						(result as Product).variants?.makeSelections(options);
+					}
+				});
+			}
+
 			recommend.controller.store.loading = false;
+		});
+
+		// // attach click event listener to elements for product variant clicks
+		document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
+			// @ts-ignore - fix me too
+			const variantConfig = this.config.settings.variants;
+			if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+				elem.addEventListener('click', () => {
+					const options: Record<string, string[]> = {};
+					const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+					if (attr) {
+						const [option, value] = attr.split(':');
+						options[option.toLowerCase()] = [value.toLowerCase()];
+
+						let filteredResults = this.store.results;
+
+						// filter based on config
+						variantConfig.realtime?.filter?.forEach((filter) => {
+							if (filter == 'first') {
+								filteredResults = [filteredResults[0]];
+							}
+
+							if (filter == 'unaltered') {
+								filteredResults = filteredResults.filter(
+									(result) => !(result as Product).variants?.selections.some((selection) => selection.previouslySelected)
+								);
+							}
+						});
+
+						filteredResults.forEach((result) => {
+							// no banner types
+							if (result.type == 'product') {
+								(result as Product).variants?.makeSelections(options);
+							}
+						});
+					}
+				});
+			}
 		});
 
 		// attach config plugins and event middleware

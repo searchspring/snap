@@ -12,8 +12,15 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
+export type VariantConfigFilterTypes = 'first' | 'unaltered';
+
 export type VariantConfig = {
 	field: string;
+	realtime?: {
+		enabled: boolean;
+		filter?: VariantConfigFilterTypes[];
+		// filterFunction - maybe add later as needed?  filter(({ products, controller }) => products)
+	};
 	options?: {
 		[field: string]: {
 			preSelected?: string[];
