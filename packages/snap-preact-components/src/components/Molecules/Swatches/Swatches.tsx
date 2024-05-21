@@ -16,7 +16,7 @@ import deepmerge from 'deepmerge';
 import { filters } from '@searchspring/snap-toolbox';
 
 const CSS = {
-	Swatches: ({}: Partial<SwatchesProps>) =>
+	Swatches: ({ theme }: Partial<SwatchesProps>) =>
 		css({
 			marginTop: '10px',
 			'.ss__swatches__carousel__swatch': {
@@ -25,24 +25,17 @@ const CSS = {
 				backgroundRepeat: 'no-repeat',
 				display: 'flex',
 				justifyContent: 'center',
-				border: '4px solid #eee',
+				alignItems: 'center',
+				border: `1px solid ${theme?.colors?.primary || '#333'}`,
 				aspectRatio: '1/1',
 				margin: 'auto',
-				'& .ss__swatches__carousel__swatch__value': {
-					textAlign: 'center',
-					verticalAlign: 'middle',
-					display: 'block',
-					fontSize: '10px',
-				},
+				flexDirection: 'column',
+
 				'&.ss__swatches__carousel__swatch--selected': {
-					border: '4px solid black',
-				},
-				'&.ss__swatches__carousel__swatch--disabled': {
-					position: 'relative',
-					opacity: '0.4',
+					border: `2px solid ${theme?.colors?.primary || '#333'}`,
 				},
 
-				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--selected:before': {
+				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--unavailable:before': {
 					content: '""',
 					display: 'block',
 					position: 'absolute',
@@ -53,12 +46,25 @@ const CSS = {
 					outline: '1px solid #ffff',
 					transform: 'rotate(-45deg)',
 				},
+
+				'&.ss__swatches__carousel__swatch--disabled': {
+					position: 'relative',
+					cursor: 'none',
+					pointerEvents: 'none',
+					opacity: 0.5,
+				},
+
+				'&.ss__swatches__carousel__swatch--unavailable': {
+					cursor: 'pointer',
+					opacity: 0.5,
+				},
 			},
 		}),
 };
 
 export function Swatches(properties: SwatchesProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultCarouselBreakpoints = {
 		0: {
@@ -161,7 +167,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.Swatches({}), style];
+		styling.css = [CSS.Swatches({ theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -187,12 +193,17 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 							return (
 								<div
-									className={`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value.toString())} ${
-										selected ? 'ss__swatches__carousel__swatch--selected' : ''
-									} ${option.disabled ? 'ss__swatches__carousel__swatch--disabled' : ''}`}
+									className={classnames(
+										`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value.toString())}`,
+										{
+											'ss__swatches__carousel__swatch--selected': selected,
+											'ss__swatches__carousel__swatch--disabled': option?.disabled,
+											'ss__swatches__carousel__swatch--unavailable': option?.available === false,
+										}
+									)}
 									title={label}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
-									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
 									role="option"
 									aria-selected={selected}

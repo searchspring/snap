@@ -16,19 +16,22 @@ import { filters } from '@searchspring/snap-toolbox';
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
 		css({
-			display: `${horizontal ? 'flex' : 'initial'}`,
-			alignItems: `${horizontal ? 'center' : 'initial'}`,
+			display: 'flex',
+			flexDirection: horizontal ? 'row' : 'column',
+			alignItems: horizontal ? 'center' : undefined,
+			justifyItems: 'flex-start',
+			gap: '5px',
 
-			'& .ss__list__options-wrapper': {
+			'& .ss__list__options': {
 				border: 'none',
 				listStyle: 'none',
 				padding: '0px',
 				margin: '0px',
-				display: `${horizontal ? 'flex' : 'initial'}`,
-			},
-
-			'.ss__list__title': {
-				margin: '0px',
+				display: 'flex',
+				flexDirection: horizontal ? 'row' : 'column',
+				alignItems: horizontal ? 'center' : undefined,
+				justifyItems: 'flex-start',
+				gap: '5px',
 			},
 
 			'.ss__list__option': {
@@ -165,16 +168,18 @@ export function List(properties: ListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
-				<ul className={`ss__list__options-wrapper`} role="listbox" aria-label={titleText}>
+				<ul className={`ss__list__options`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 						return (
 							<li
-								className={`ss__list__option ss__list__option--${filters.handleize(option.value.toString())} ${
-									selected ? 'ss__list__option--selected' : ''
-								} ${option.disabled ? 'ss__list__option--disabled' : ''} ${option.available == false ? 'ss__list__option--unavailable' : ''}`}
+								className={classnames(`ss__list__option ss__list__option--${filters.handleize(option.value.toString())}`, {
+									'ss__list__option--selected': selected,
+									'ss__list__option--disabled': option?.disabled,
+									'ss__list__option--unavailable': option?.available === false,
+								})}
 								ref={(e) => useA11y(e)}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
+								onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 								title={option.label}
 								role="option"
 								aria-selected={selected}

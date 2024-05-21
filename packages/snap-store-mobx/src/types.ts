@@ -34,11 +34,6 @@ export type VariantOptionConfigMappings = {
 	};
 };
 
-export type VariantSelectionOptions = {
-	field: string;
-	label: string;
-};
-
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
 	globals?: Partial<SearchRequestModel>;

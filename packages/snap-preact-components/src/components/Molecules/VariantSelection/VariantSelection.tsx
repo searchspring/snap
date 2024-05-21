@@ -5,44 +5,25 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps, ListOption, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
 import { Swatches, SwatchesProps } from '../Swatches';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
+import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
 	variantSelection: () =>
 		css({
 			'.ss__variant-selection__dropdown': {
 				'.ss__dropdown__button': {
+					width: '100%',
 					display: 'flex',
-					flexDirection: 'row',
-
-					label: {
-						marginLeft: '5px',
-						fontSize: '12px',
-					},
-
-					span: {
-						padding: '0px 15px',
-					},
-
+					alignItems: 'center',
+					justifyContent: 'space-between',
 					'.ss__dropdown__button-wrapper': {
-						width: '100%',
-						justifyContent: 'flex-start',
 						display: 'flex',
-						alignItems: 'center',
-						label: {
-							cursor: 'pointer',
-						},
-						span: {
-							cursor: 'pointer',
-						},
-					},
-					'.ss__icon': {
-						marginLeft: '10px',
-						marginRight: '10px',
+						gap: '5px',
 					},
 				},
 
@@ -65,8 +46,13 @@ const CSS = {
 					},
 
 					'.ss__variant-selection__option--disabled': {
-						opacity: '.5',
+						pointerEvents: 'none',
+						cursor: 'initial',
+					},
+
+					'.ss__variant-selection__option--disabled, .ss__variant-selection__option--unavailable': {
 						textDecoration: 'line-through',
+						opacity: 0.5,
 					},
 				},
 			},
@@ -90,7 +76,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
-			name: `ss__variant-selection__dropdown-${selection.field}`,
+			name: `ss__variant-selection__dropdown--${selection.field}`,
 			className: 'ss__variant-selection__dropdown',
 			label: selection.label || selection.field,
 			// global theme
@@ -102,8 +88,22 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			// component theme overrides
 			theme: props?.theme,
 		},
+		icon: {
+			// default props
+			name: `ss__variant-selection__icon--${selection.field}`,
+			className: 'ss__variant-selection__icon',
+			size: '12px',
+			// global theme
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		list: {
-			name: `ss__variant-selection__list-${selection.field}`,
+			name: `ss__variant-selection__list--${selection.field}`,
 			titleText: selection.field,
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
@@ -122,7 +122,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			theme: props?.theme,
 		},
 		swatches: {
-			name: `ss__variant-selection__swatches-${selection.field}`,
+			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value as string),
 			selected: selection.selected,
@@ -144,15 +144,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		styling.css = [style];
 	}
 
-	const convertedValues: ListOption[] = selection.values.map(
-		(val: any) =>
-			(val = {
-				//@ts-ignore - disabled isnt available on SelectionValue
-				disabled: !val.available,
-				...val,
-			})
-	);
-
 	return selection.values.length ? (
 		<CacheProvider>
 			<div
@@ -166,28 +157,37 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 								<Fragment>
 									{(() => {
 										//todo prettify the button
-										const Button = () => {
+										const Button = (props: any) => {
+											const { open } = props;
 											return (
-												<div className="ss__dropdown__button-wrapper">
-													<span>{selection.field}</span>
-													{selection.selected ? <label>({selection.selected.value})</label> : <></>}
-												</div>
+												<Fragment>
+													<div className="ss__dropdown__button-wrapper">
+														<span className="ss__dropdown__button-wrapper__label">{selection.label}</span>
+
+														{selection.selected ? (
+															<span className="ss__dropdown__button-wrapper__selection">({selection.selected.value})</span>
+														) : (
+															<></>
+														)}
+													</div>
+													<Icon icon={open ? 'angle-up' : 'angle-down'} {...subProps.icon} />
+												</Fragment>
 											);
 										};
 
 										return (
 											<Dropdown button={<Button />} {...subProps.dropdown}>
-												<div>
+												<div className="ss__variant-selection__options">
 													{selection.values.map((val: any) => {
 														const selected = selection.selected?.value == val.value;
 														return (
 															<div
-																className={`
-																	ss__variant-selection__option
-																	${selected ? 'ss__variant-selection__option--selected' : ''} 
-																	${val.available ? '' : 'ss__variant-selection__option--disabled'}
-																`}
-																onClick={() => selection.select(val.value)}
+																className={classnames(`ss__variant-selection__option`, {
+																	'ss__variant-selection__option--selected': selected,
+																	'ss__variant-selection__option--disabled': val.disabled,
+																	'ss__variant-selection__option--unavailable': val.available === false,
+																})}
+																onClick={() => !val.disabled && selection.select(val.value)}
 															>
 																{val.label}
 															</div>
@@ -203,7 +203,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 							return (
 								<Fragment>
 									{(() => {
-										return <List {...subProps.list} options={convertedValues} />;
+										return <List {...subProps.list} options={selection.values} />;
 									})()}
 								</Fragment>
 							);
@@ -211,7 +211,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 							return (
 								<Fragment>
 									{(() => {
-										return <Swatches {...subProps.swatches} options={convertedValues} />;
+										return <Swatches {...subProps.swatches} options={selection.values} />;
 									})()}
 								</Fragment>
 							);
@@ -226,6 +226,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 interface VariantSelectionSubProps {
 	dropdown: Partial<DropdownProps>;
+	icon: Partial<IconProps>;
 	list: Partial<ListProps>;
 	swatches: Partial<SwatchesProps>;
 }

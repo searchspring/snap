@@ -144,7 +144,7 @@ describe('Grid Component', () => {
 
 		const rendered = render(<Grid options={options} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options')!;
 
 		const styles = getComputedStyle(gridOptionsElement);
 		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
@@ -160,7 +160,7 @@ describe('Grid Component', () => {
 
 		const rendered = render(<Grid options={options} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options')!;
 
 		const styles = getComputedStyle(gridOptionsElement);
 		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
@@ -180,7 +180,7 @@ describe('Grid Component', () => {
 
 		expect(optionElems).toHaveLength(options.length);
 		expect(overflowButton).toBeInTheDocument();
-		expect(overflowButton).toHaveTextContent(`Show Less`);
+		expect(overflowButton).toHaveTextContent(`Less`);
 	});
 
 	it('can disableOverflowAction, and set overflowButtonInGrid', async () => {
@@ -194,7 +194,7 @@ describe('Grid Component', () => {
 
 		const rendered = render(<Grid options={options} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options')!;
 
 		const styles = getComputedStyle(gridOptionsElement);
 		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
@@ -226,7 +226,7 @@ describe('Grid Component', () => {
 
 		const rendered = render(<Grid options={options} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridOptionsElement = rendered.container.querySelector('.ss__grid__options')!;
 
 		const styles = getComputedStyle(gridOptionsElement);
 		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
@@ -303,7 +303,7 @@ describe('FacetGridOptions theming works', () => {
 				<Grid options={options} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridElement = rendered.container.querySelector('.ss__grid__options')!;
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(globalTheme.components.grid.gapSize);
 		expect(gridElement).toBeInTheDocument();
@@ -318,7 +318,7 @@ describe('FacetGridOptions theming works', () => {
 			},
 		};
 		const rendered = render(<Grid options={options} theme={propTheme} />);
-		const gridElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridElement = rendered.container.querySelector('.ss__grid__options')!;
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(propTheme.components.grid.gapSize);
 		expect(gridElement).toBeInTheDocument();
@@ -344,7 +344,7 @@ describe('FacetGridOptions theming works', () => {
 				<Grid options={options} theme={propTheme} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__grid__options-wrapper')!;
+		const gridElement = rendered.container.querySelector('.ss__grid__options')!;
 		const styles = getComputedStyle(gridElement);
 		expect(styles.gap).toBe(propTheme.components.grid.gapSize);
 		expect(gridElement).toBeInTheDocument();

@@ -15,7 +15,7 @@ import { filters } from '@searchspring/snap-toolbox';
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
 		css({
-			'.ss__grid__options-wrapper': {
+			'.ss__grid__options': {
 				display: 'flex',
 				flexFlow: 'row wrap',
 				gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -23,11 +23,12 @@ const CSS = {
 				gridAutoRows: `1fr`,
 
 				'& .ss__grid__option': {
+					display: 'flex',
+					flexDirection: 'column',
 					boxSizing: 'content-box',
 					backgroundRepeat: 'no-repeat',
 					backgroundSize: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 					backgroundPosition: 'center !important',
-					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
 					flex: '0 1 auto',
@@ -46,8 +47,7 @@ const CSS = {
 						marginRight: '0',
 					},
 					'&.ss__grid__option--selected': {
-						background: theme?.colors?.primary || '#ccc',
-						color: theme?.colors?.text?.secondary,
+						border: `2px solid ${theme?.colors?.primary || '#333'}`,
 					},
 
 					'&.ss__grid__option--disabled': {
@@ -70,6 +70,7 @@ const CSS = {
 						width: '90%',
 						height: '1px',
 						borderTop: '3px solid #eee',
+						outline: '1px solid #ffff',
 						transform: 'rotate(-45deg)',
 					},
 
@@ -203,47 +204,55 @@ export function Grid(properties: GridProps): JSX.Element {
 	};
 
 	const limit = rows && columns ? columns * rows : options.length;
-	const remainder = Math.max(0, options.length - limit);
+	const remainder = Math.max(0, options.length - (limit - (overflowButtonInGrid ? 1 : 0)));
 
 	const [limited, setLimited] = useState<number | boolean>(remainder);
 
-	const OverflowButtonElem = () => (
-		<div
-			className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
-			onClick={() => {
-				!disableOverflowAction && setLimited(!limited);
-				onOverflowButtonClick && onOverflowButtonClick(Boolean(limited), remainder);
-			}}
-		>
-			{overflowButton ? (
-				cloneWithProps(overflowButton, { limited, remainder })
-			) : limited ? (
-				<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
-			) : remainder && !hideShowLess ? (
-				<span className={'ss__grid__show-less'}>Show Less</span>
-			) : (
-				<></>
-			)}
-		</div>
-	);
+	const OverflowButtonElem = () => {
+		const showButton = hideShowLess ? (!limited ? false : true) : true;
+
+		return showButton && remainder > 0 && options.length !== limit ? (
+			<div
+				className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
+				onClick={() => {
+					!disableOverflowAction && setLimited(!limited);
+					onOverflowButtonClick && onOverflowButtonClick(Boolean(limited), remainder);
+				}}
+			>
+				{overflowButton ? (
+					cloneWithProps(overflowButton, { limited, remainder })
+				) : limited ? (
+					<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
+				) : remainder ? (
+					<span className={'ss__grid__show-less'}>Less</span>
+				) : (
+					<></>
+				)}
+			</div>
+		) : (
+			<Fragment />
+		);
+	};
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__grid', disabled ? 'ss__grid--disabled' : '', className)}>
 				{titleText && <h5 className="ss__grid__title">{titleText}</h5>}
 
-				<div className="ss__grid__options-wrapper">
+				<div className="ss__grid__options">
 					{options.map((option, idx) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 
-						if (!limited || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
+						if (!limited || options.length == limit || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
-									className={`ss__grid__option ss__grid__option--${filters.handleize(option.value.toString())} ${
-										selected ? 'ss__grid__option--selected' : ''
-									} ${option.disabled ? 'ss__grid__option--disabled' : ''} ${option.available == false ? 'ss__grid__option--unavailable' : ''} `}
-									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
-									onClick={(e) => !disabled && makeSelection(e as any, option)}
+									className={classnames(`ss__grid__option ss__grid__option--${filters.handleize(option.value.toString())}`, {
+										'ss__grid__option--selected': selected,
+										'ss__grid__option--disabled': option?.disabled,
+										'ss__grid__option--unavailable': option?.available === false,
+									})}
+									style={{ background: option.background ? option.background : option.backgroundImageUrl ? undefined : option.value }}
+									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
 									title={option.label}
 									role="option"

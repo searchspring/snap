@@ -196,29 +196,33 @@ DisabledOption.args = {
 	],
 } as ListProps;
 
+const viewOptions = [
+	{
+		label: '1 wide',
+		value: '1 wide',
+		icon: 'square',
+	},
+	{
+		label: '2 wide',
+		value: '2 wide',
+		icon: {
+			icon: 'layout-large',
+		},
+	},
+	{
+		label: '3 wide',
+		value: '3 wide',
+		icon: {
+			icon: 'layout-grid',
+		},
+	},
+];
+
 export const Icons = (args: ListProps) => <List {...args} />;
 Icons.args = {
-	options: [
-		{
-			label: '1 wide',
-			value: '1 wide',
-			icon: 'square',
-		},
-		{
-			label: '2 wide',
-			value: '2 wide',
-			icon: {
-				icon: 'layout-large',
-			},
-		},
-		{
-			label: '3 wide',
-			value: '3 wide',
-			icon: {
-				icon: 'layout-grid',
-			},
-		},
-	],
+	requireSelection: true,
+	options: viewOptions,
+	selected: viewOptions[0],
 } as ListProps;
 
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {

@@ -384,7 +384,7 @@ export class Variants {
 	}
 }
 
-export type SelectionValue = {
+export type VariantSelectionValue = {
 	value: string;
 	label?: string;
 	thumbnailImageUrl?: string;
@@ -396,9 +396,9 @@ export type SelectionValue = {
 export class VariantSelection {
 	public field: string;
 	public label: string;
-	public selected?: SelectionValue = undefined;
-	public previouslySelected?: SelectionValue = undefined;
-	public values: SelectionValue[] = [];
+	public selected?: VariantSelectionValue = undefined;
+	public previouslySelected?: VariantSelectionValue = undefined;
+	public values: VariantSelectionValue[] = [];
 	private config: VariantOptionConfig;
 	private variantsUpdate: () => void;
 
@@ -432,9 +432,9 @@ export class VariantSelection {
 			);
 		}
 
-		const newValues: SelectionValue[] = variants.data
+		const newValues: VariantSelectionValue[] = variants.data
 			.filter((variant) => variant.options[this.field])
-			.reduce((values: SelectionValue[], variant) => {
+			.reduce((values: VariantSelectionValue[], variant) => {
 				if (!values.some((val) => variant.options[this.field].value == val.value)) {
 					const value = variant.options[this.field].value;
 

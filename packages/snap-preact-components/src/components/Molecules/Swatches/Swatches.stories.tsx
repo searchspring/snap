@@ -114,7 +114,7 @@ export const GradientBackground = (args: SwatchesProps) => {
 	return <ObservableSelection args={args} />;
 };
 
-export const ThumbnailImageBackground = (args: SwatchesProps) => {
+export const Images = (args: SwatchesProps) => {
 	return <ObservableSelection args={args} />;
 };
 
@@ -188,37 +188,33 @@ GradientBackground.args = {
 		{ value: 'Tan', label: 'Tan', disabled: false },
 	],
 };
-ThumbnailImageBackground.args = {
+
+Images.args = {
+	carousel: {
+		slidesPerView: 3,
+		spaceBetween: 10,
+	},
+	breakpoints: {},
 	options: [
 		{
-			value: 'PastelPalms',
-			label: 'Pastel Palms',
-			disabled: false,
-			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0533-PastelPalms_2.jpg',
+			value: 'Faded Khaki',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/25caa3be92e5680ba340a62dc99cac3f_1b83cffd-c611-42bf-b6d8-59a497fe2ec7.jpg?v=1706125264',
 		},
 		{
-			value: 'ShimmerOn-Swim',
-			label: 'ShimmerOn Swim',
-			disabled: false,
-			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0598-ShimmerOn-Swim_1.jpg',
+			value: 'Indigo',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/4dae673375338093f817804c8da6305a_7de3d458-28f4-41d1-903a-b8916ef26dcb.jpg?v=1706125265https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_1_0e3b5702-49e2-4608-acb6-7c131891fc18_450x.jpg?v=1706124808',
 		},
 		{
-			value: 'MarineGlow',
-			label: 'Marine Glow',
-			disabled: false,
-			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0543-MarineGlow.jpg',
+			value: 'Mirage',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/a853b69a38627e53209e0cb98c90d154_63b6fc1d-2fe5-4c54-bb86-09bd4f7b550b.jpg?v=1706125265',
 		},
 		{
-			value: 'PeriwinkleButterflyGarden',
-			label: 'Periwinkle Butterfly Garden',
-			disabled: false,
-			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0621-PeriwinkleButterflyGarden.jpg',
-		},
-		{
-			value: 'PeriwinkleBlueSeersucker',
-			label: 'Periwinkle Blue Seersucker',
-			disabled: false,
-			backgroundImageUrl: 'https://www.rufflebutts.com/media/wysiwyg/P0539-ApparelPeriwinkleBlueSeersucker_1.jpg',
+			value: 'Toasted',
+			backgroundImageUrl:
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/77f9701fc6979aadbedec33a68398aaa_cecd6b05-9aea-4db1-b4f1-ac245da74abb.jpg?v=1706125264',
 		},
 	],
 };

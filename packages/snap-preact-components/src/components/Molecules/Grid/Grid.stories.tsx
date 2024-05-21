@@ -233,29 +233,30 @@ export const backgroundImages = (args: GridProps) => <Grid {...args} />;
 backgroundImages.args = {
 	options: [
 		{
-			value: 'one',
+			value: 'Faded Khaki',
 			backgroundImageUrl:
-				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/1610055_outerknown_fortchinopants_sct_F_pdp_1400x1400_f953fa33-a0ae-4186-8214-c8802b5455c7.jpg?v=1706131359',
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/25caa3be92e5680ba340a62dc99cac3f_1b83cffd-c611-42bf-b6d8-59a497fe2ec7.jpg?v=1706125264',
 		},
 		{
-			value: 'two',
+			value: 'Indigo',
 			backgroundImageUrl:
-				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/8054ec99b74ddfc80a333f6e00cff3e3_29c3167d-d168-4027-a861-903833e708e7.jpg?v=1706125265',
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/4dae673375338093f817804c8da6305a_7de3d458-28f4-41d1-903a-b8916ef26dcb.jpg?v=1706125265https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_1_0e3b5702-49e2-4608-acb6-7c131891fc18_450x.jpg?v=1706124808',
 		},
 		{
-			value: 'three',
+			value: 'Mirage',
 			backgroundImageUrl:
-				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_1_0e3b5702-49e2-4608-acb6-7c131891fc18_450x.jpg?v=1706124808',
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/a853b69a38627e53209e0cb98c90d154_63b6fc1d-2fe5-4c54-bb86-09bd4f7b550b.jpg?v=1706125265',
 		},
 		{
-			value: 'four',
+			value: 'Toasted',
 			backgroundImageUrl:
-				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/11136413-I_OK_x_Arvin_Gds_Wool_Boot_Socks_CBM_2_8ccf82df-634c-4566-a804-467d76f61906.jpg?v=1706124808',
+				'https://cdn.shopify.com/s/files/1/0677/2424/7298/files/77f9701fc6979aadbedec33a68398aaa_cecd6b05-9aea-4db1-b4f1-ac245da74abb.jpg?v=1706125264',
 		},
 	],
+	overflowButtonInGrid: true,
 	hideLabels: true,
-	rows: 2,
-	columns: 2,
+	rows: 1,
+	columns: 4,
 } as GridProps;
 
 export const backgroundColors = (args: GridProps) => <Grid {...args} />;
@@ -284,9 +285,10 @@ backgroundColors.args = {
 		},
 	],
 	hideLabels: true,
-	rows: 2,
-	columns: 2,
+	overflowButtonInGrid: true,
+	rows: 1,
 } as GridProps;
+
 export const overflow = (args: GridProps) => <Grid {...args} />;
 overflow.args = {
 	options: [
