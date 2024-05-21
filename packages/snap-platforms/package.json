@@ -38,10 +38,10 @@
 			"import": "./dist/esm/magento2/src/index.js",
 			"require": "./dist/cjs/magento2/src/index.js"
 		},
-		"./bigCommerce": {
-			"types": "./dist/esm/bigCommerce/src/index.d.ts",
-			"import": "./dist/esm/bigCommerce/src/index.js",
-			"require": "./dist/cjs/bigCommerce/src/index.js"
+		"./bigcommerce": {
+			"types": "./dist/esm/bigcommerce/src/index.d.ts",
+			"import": "./dist/esm/bigcommerce/src/index.js",
+			"require": "./dist/cjs/bigcommerce/src/index.js"
 		}
 	}
 }

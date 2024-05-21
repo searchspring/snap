@@ -3,10 +3,10 @@ This platform library gives you helper functions to use with the BigCommerce pla
 
 
 ## Usage 
-To use the platform library, simply import what you wish to use from `@searchspring/snap-platforms/bigCommerce`.
+To use the platform library, simply import what you wish to use from `@searchspring/snap-platforms/bigcommerce`.
 
 ```jsx
-import { addToCart } from '@searchspring/snap-platforms/bigCommerce';
+import { addToCart } from '@searchspring/snap-platforms/bigcommerce';
 
 export const Result = withController(observer((props) => {
 	const { controller, result } = props;
