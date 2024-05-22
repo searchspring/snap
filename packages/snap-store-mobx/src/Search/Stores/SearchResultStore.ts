@@ -1,7 +1,16 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, ResultBadge, VariantOptionConfig, VariantConfig } from '../../types';
+import type {
+	SearchStoreConfig,
+	StoreServices,
+	StoreConfigs,
+	ResultBadge,
+	VariantOptionConfig,
+	VariantConfig,
+	AutocompleteStoreConfig,
+	RecommendationStoreConfig,
+} from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -11,6 +20,9 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+const VARIANT_ATTRIBUTE = 'ss-variant-option';
+const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
 
 export class SearchResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
@@ -23,11 +35,45 @@ export class SearchResultStore extends Array<Product | Banner> {
 		metaData: MetaResponseModel,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
-		merchData?: SearchResponseModelMerchandising
+		merchData?: SearchResponseModelMerchandising,
+		loaded?: boolean
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
 			return new Product(services, result, metaData, config);
 		});
+
+		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig).settings?.variants;
+
+		// preselected variant options
+		if (variantConfig?.realtime?.enabled) {
+			// attach click events - ONLY happens once (known limitation)
+			if (!loaded && results.length) {
+				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
+					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, results));
+					}
+				});
+			}
+
+			// check for attributes for preselection
+			if (results.length) {
+				if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+					const options: Record<string, string[]> = {};
+					// grab values from elements on the page to form preselected elements
+					document.querySelectorAll(`[${VARIANT_ATTRIBUTE_SELECTED}]`).forEach((elem) => {
+						const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+						if (attr) {
+							const [option, value] = attr.split(':');
+							if (option && value) {
+								options[option.toLowerCase()] = [value.toLowerCase()];
+							}
+						}
+					});
+
+					makeVariantSelections(variantConfig, options, results);
+				}
+			}
+		}
 
 		if (merchData?.content?.inline) {
 			const banners = merchData.content.inline
@@ -321,12 +367,14 @@ export class Variants {
 				//make all options available for first selection.
 				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
 				const preferedOptions = options[selection.field as keyof typeof options];
-				let preferencedOption = availableOptions[0];
+				let preferencedOption = selection.selected || availableOptions[0];
 				// if theres a preference for that field
 				if (preferedOptions) {
 					const checkIfAvailable = (preference: string) => {
 						//see if that option is in the available options
-						const availablePreferedOptions = availableOptions.find((value) => value.value.toLowerCase() == preference.toLowerCase());
+						const availablePreferedOptions = availableOptions.find(
+							(value) => value.value.toString().toLowerCase() == preference?.toString().toLowerCase()
+						);
 
 						//use it
 						if (availablePreferedOptions) {
@@ -459,8 +507,8 @@ export class VariantSelection {
 						mappedValue.backgroundImageUrl = thumbnailImageUrl;
 					}
 
-					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toLowerCase()]) {
-						const mapping = this.config.mappings[value.toLowerCase()];
+					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toString().toLowerCase()]) {
+						const mapping = this.config.mappings[value.toString().toLowerCase()];
 
 						if (mapping.label) {
 							mappedValue.label = mapping.label;
@@ -605,4 +653,39 @@ function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[]
 		});
 
 	return results;
+}
+
+function variantOptionClick(elem: Element, variantConfig: VariantConfig, results: (Product | Banner)[]) {
+	const options: Record<string, string[]> = {};
+	const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+	if (attr) {
+		const [option, value] = attr.split(':');
+		options[option.toLowerCase()] = [value.toLowerCase()];
+
+		makeVariantSelections(variantConfig, options, results);
+	}
+}
+
+function makeVariantSelections(variantConfig: VariantConfig, options: Record<string, string[]>, results: (Product | Banner)[]) {
+	let filteredResults = results;
+
+	// filter based on config
+	variantConfig.realtime?.filters?.forEach((filter: any) => {
+		if (filter == 'first') {
+			filteredResults = [filteredResults[0]];
+		}
+
+		if (filter == 'unaltered') {
+			filteredResults = filteredResults.filter(
+				(result) => !(result as Product).variants?.selections.some((selection) => selection.previouslySelected)
+			);
+		}
+	});
+
+	filteredResults.forEach((result) => {
+		// no banner types
+		if (result.type == 'product') {
+			(result as Product).variants?.makeSelections(options);
+		}
+	});
 }
