@@ -214,9 +214,9 @@ export function Grid(properties: GridProps): JSX.Element {
 		return showButton && remainder > 0 && options.length !== limit ? (
 			<div
 				className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
-				onClick={() => {
+				onClick={(e) => {
 					!disableOverflowAction && setLimited(!limited);
-					onOverflowButtonClick && onOverflowButtonClick(Boolean(limited), remainder);
+					onOverflowButtonClick && onOverflowButtonClick(e, Boolean(limited), remainder);
 				}}
 			>
 				{overflowButton ? (
@@ -293,7 +293,7 @@ export interface GridProps extends ComponentProps {
 	disableOverflowAction?: boolean;
 	overflowButton?: JSX.Element;
 	overflowButtonInGrid?: boolean;
-	onOverflowButtonClick?: (status: boolean, remainder: number) => void;
+	onOverflowButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, status: boolean, remainder: number) => void;
 }
 
 interface GridSubProps {

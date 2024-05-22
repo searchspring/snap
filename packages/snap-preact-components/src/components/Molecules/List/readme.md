@@ -77,12 +77,6 @@ The `disabled` prop will put the inputs in a disabled state.
 <List options={store.options} disabled={true} />
 ```
 
-### clickableDisabledOptions
-The `clickableDisabledOptions` prop will enable the ability to select disabled options.
-
-```jsx
-<List options={store.options} clickableDisabledOptions={true} />
-
 ### selected
 The `selected` prop specifies the currently selected Option object. 
 

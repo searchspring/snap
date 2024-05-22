@@ -55,16 +55,6 @@ export default {
 			// 	options: ['dropdown', 'list', 'swatches'],
 			// },
 		},
-		hideTitle: {
-			description: 'enable/disable selection title from render',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
 		...componentArgs,
 	},
 };

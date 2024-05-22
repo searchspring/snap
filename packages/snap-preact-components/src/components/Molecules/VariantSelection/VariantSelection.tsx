@@ -108,7 +108,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
-			clickableDisabledOptions: true,
 			onSelect: (e, option) => selection.select(option.value as string),
 			selected: selection.selected,
 

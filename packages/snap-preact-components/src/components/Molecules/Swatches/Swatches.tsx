@@ -151,7 +151,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		},
 		image: {
 			// default props
-			className: 'ss__swatches__Image',
+			className: 'ss__swatches__image',
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props
@@ -213,7 +213,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 									) : (
 										<></>
 									)}
-									{!hideLabels && <span className="ss__swatches__carousel__swatch__value">{label}</span>}
+									{!hideLabels && <span className="ss__swatches__carousel__swatch__value">{label || option.value}</span>}
 								</div>
 							);
 						})}

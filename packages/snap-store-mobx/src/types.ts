@@ -18,8 +18,7 @@ export type VariantConfig = {
 	field: string;
 	realtime?: {
 		enabled: boolean;
-		filter?: VariantConfigFilterTypes[];
-		// filterFunction - maybe add later as needed?  filter(({ products, controller }) => products)
+		filters?: VariantConfigFilterTypes[];
 	};
 	options?: {
 		[optionField: string]: VariantOptionConfig;
