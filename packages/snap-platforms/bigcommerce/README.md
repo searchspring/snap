@@ -21,8 +21,8 @@ export const AddToCart = (props) => {
 ```
 
 ## AddToCart
-The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/cart.php`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional fields, a `redirect` and `idFieldName`. 
+The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/cart.php`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional properties, `redirect` and `idFieldName`. 
 
 The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/cart.php`). 
 
-The `idFieldName` setting takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
+The `idFieldName` property takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
