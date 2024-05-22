@@ -85,7 +85,6 @@ export class SearchStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		this.loaded = !!data.pagination;
 		this.meta = new MetaStore(data.meta);
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
 		this.search = new SearchQueryStore(this.services, data?.search || {});
@@ -99,8 +98,18 @@ export class SearchStore extends AbstractStore {
 			data?.merchandising || {}
 		);
 		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
-		this.results = new SearchResultStore(this.config, this.services, this.meta.data, data?.results || [], data.pagination, data.merchandising);
+		this.results = new SearchResultStore(
+			this.config,
+			this.services,
+			this.meta.data,
+			data?.results || [],
+			data.pagination,
+			data.merchandising,
+			this.loaded
+		);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
+
+		this.loaded = !!data.pagination;
 	}
 }

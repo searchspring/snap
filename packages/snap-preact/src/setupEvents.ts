@@ -5,12 +5,12 @@ import { Product, SearchStore } from '@searchspring/snap-store-mobx';
 export const setupEvents = () => {
 	const eventManager = new EventManager();
 
-	type controllerSelectVariantOptionsData = {
+	type ControllerSelectVariantOptionsData = {
 		options: Record<string, string[]>;
 		controllerIds: (string | RegExp)[];
 	};
 
-	eventManager.on('controller/selectVariantOptions', async (data: controllerSelectVariantOptionsData, next: Next) => {
+	eventManager.on('controller/selectVariantOptions', async (data: ControllerSelectVariantOptionsData, next: Next) => {
 		const { options, controllerIds } = data;
 
 		//filter through all controllers for matches with profileIds

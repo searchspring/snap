@@ -26,13 +26,17 @@ export * from './components/Molecules/FacetGridOptions';
 export * from './components/Molecules/FacetHierarchyOptions';
 export * from './components/Molecules/FacetListOptions';
 export * from './components/Molecules/FacetPaletteOptions';
+export * from './components/Molecules/FacetSlider';
 export * from './components/Molecules/Filter';
+export * from './components/Molecules/Grid';
+export * from './components/Molecules/List';
 export * from './components/Molecules/OverlayBadge';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/Result';
 export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
-export * from './components/Molecules/FacetSlider';
+export * from './components/Molecules/Swatches';
+export * from './components/Molecules/VariantSelection';
 
 // ORGANISMS
 export * from './components/Organisms/Autocomplete';

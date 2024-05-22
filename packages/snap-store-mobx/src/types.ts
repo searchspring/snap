@@ -12,20 +12,32 @@ export type StoreConfig = {
 	[any: string]: unknown;
 };
 
+export type VariantConfigFilterTypes = 'first' | 'unaltered';
+
 export type VariantConfig = {
 	field: string;
+	realtime?: {
+		enabled: boolean;
+		filters?: VariantConfigFilterTypes[];
+	};
 	options?: {
-		[field: string]: {
-			preSelected?: string[];
-		};
+		[optionField: string]: VariantOptionConfig;
 	};
 };
 
-export type VariantSelectionOptions = {
-	field: string;
-	label: string;
-	//todo
-	//swatches: swatchObj
+export type VariantOptionConfig = {
+	label?: string;
+	preSelected?: string[];
+	thumbnailBackgroundImages?: boolean;
+	mappings?: VariantOptionConfigMappings;
+};
+
+export type VariantOptionConfigMappings = {
+	[optionValue: string]: {
+		label?: string;
+		background?: string;
+		backgroundImageUrl?: string;
+	};
 };
 
 // Search Config
@@ -128,7 +140,9 @@ export type RecommendationStoreConfig = StoreConfig & {
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
-	variants?: VariantConfig;
+	settings?: {
+		variants?: VariantConfig;
+	};
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;

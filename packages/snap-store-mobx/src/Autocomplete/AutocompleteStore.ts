@@ -138,7 +138,6 @@ export class AutocompleteStore extends AbstractStore {
 	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
 		if (!data) return;
 		this.error = undefined;
-		this.loaded = !!data.pagination;
 		this.meta = new MetaStore(data.meta);
 
 		// set the query to match the actual queried term and not the input query
@@ -183,7 +182,15 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
-		this.results = new SearchResultStore(this.config, this.services, this.meta.data, data.results || [], data.pagination, data.merchandising);
+		this.results = new SearchResultStore(
+			this.config,
+			this.services,
+			this.meta.data,
+			data.results || [],
+			data.pagination,
+			data.merchandising,
+			this.loaded
+		);
 
 		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms?.filter((term) => term.active).length) {
 			// if a trending term was selected and then a subsequent search yields no results, reset trending terms to remove active state
@@ -193,5 +200,7 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data.sorting || [], data.search || {}, this.meta.data);
+
+		this.loaded = !!data.pagination;
 	}
 }

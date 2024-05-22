@@ -409,6 +409,36 @@ var documents = [
 				],
 			},
 			{
+				label: 'Platforms',
+				route: '/package-platforms',
+				type: 'markdown',
+				url: './packages/snap-platforms/README.md',
+				searchable: true,
+				links: [
+					{
+						label: 'BigCommerce',
+						route: '/package-platforms-bigcommerce',
+						type: 'markdown',
+						url: './packages/snap-platforms/bigcommerce/README.md',
+						searchable: true,
+					},
+					{
+						label: 'Magento2',
+						route: '/package-platforms-magento2',
+						type: 'markdown',
+						url: './packages/snap-platforms/magento2/README.md',
+						searchable: true,
+					},
+					{
+						label: 'Shopify',
+						route: '/package-platforms-shopify',
+						type: 'markdown',
+						url: './packages/snap-platforms/shopify/README.md',
+						searchable: true,
+					},
+				],
+			},
+			{
 				label: 'Profiler',
 				route: '/package-profiler',
 				type: 'markdown',
