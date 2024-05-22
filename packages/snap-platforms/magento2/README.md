@@ -8,30 +8,28 @@ To use the platform library, simply import what you wish to use from `@searchspr
 ```jsx
 import { addToCart } from '@searchspring/snap-platforms/magento2';
 
-export const Result = withController(observer((props) => {
-	const { controller, result } = props;
-
+export const AddToCart = (props) => {
+    const { result } = props;
     const config = {
         idFieldName: `display.mappings.core.sku`,
-        callback: () => console.log('added to cart'),
     }
 
     return (
         <div onClick={() => addToCart([result], config)}>Add To Cart</div>
     )
-}))
+};
 ```
 
 ## AddToCart
-The `addToCart` function will automatically add products to the cart and then navigate to the cart page. The function takes an array of products (Result Store References) to add, and an optional config. The optional config can take four optional fields, `callback`,`idFieldName`, `form_key`, & `uenc`.
+The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/checkout/cart/`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional fields, a `redirect`, `idFieldName`, `formKey`, and `uenc`.
 
-The `callback` setting takes a function to call after the products are added to the cart, this will get called rather than the automatic redirect to the cart page. 
+The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/checkout/cart/`). 
 
 The `idFieldName` setting takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
 
-The `form_key` setting allows you to pass a custom `form_key` to use in the add to cart api call. 
+The `formKey` setting allows you to pass a custom form key to use in the add to cart call. 
 
-The `uenc` setting allows you to pass a custom `uenc` code to use in the add to cart api call. 
+The `uenc` setting allows you to pass a custom `uenc` code to use in the add to cart call. 
 
 ## getUenc 
 The `getUenc` function will return the uenc code from the url using the `btoa` function.

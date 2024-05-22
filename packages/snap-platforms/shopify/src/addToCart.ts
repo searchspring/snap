@@ -1,9 +1,9 @@
 import type { Product } from '@searchspring/snap-store-mobx';
 
-export interface config {
-	callback?: () => void;
-	idFieldName?: string; //display.mappings.core.id
-}
+type ShopifyAddToCartConfig = {
+	redirect?: boolean | string;
+	idFieldName?: string; // display.mappings.core.id
+};
 
 declare global {
 	interface Window {
@@ -11,30 +11,30 @@ declare global {
 	}
 }
 
-type formData = {
+type FormData = {
 	items: {
 		id: number;
 		quantity: number;
 	}[];
 };
 
-export const addToCart = async (data: Product[], config?: config) => {
-	const formData: formData = {
-		items: [],
-	};
-
+export const addToCart = async (data: Product[], config?: ShopifyAddToCartConfig) => {
 	if (!window.Shopify) {
-		console.error('Error: Shopify Object not detected');
-		return false;
+		console.error('Error: window.Shopify not found');
+		return;
 	}
 
 	if (!data) {
 		console.error('Error: no products to add');
-		return false;
+		return;
 	}
 
+	const formData: FormData = {
+		items: [],
+	};
+
 	data.map((item) => {
-		let sku;
+		let id = Number(item?.display?.mappings.core?.uid);
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
@@ -45,23 +45,18 @@ export const addToCart = async (data: Product[], config?: config) => {
 				}
 			});
 			if (level && level !== item) {
-				sku = level;
-			} else {
-				// @ts-ignore - need to add uid to snapi-types
-				sku = item.display.mappings.core?.uid;
+				id = level;
 			}
-		} else {
-			// @ts-ignore - need to add uid to snapi-types
-			sku = item.display.mappings.core?.uid;
 		}
 
-		if (sku?.toString().match(/^[0-9]+$/)) {
-			sku = +sku;
+		// cast as number
+		if (id?.toString().match(/^[0-9]+$/)) {
+			id = +id;
 		}
 
-		if (sku && item.quantity) {
+		if (id && item.quantity) {
 			const obj = {
-				id: sku,
+				id: id,
 				quantity: item.quantity,
 			};
 
@@ -70,7 +65,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 	});
 
 	try {
-		const response = await fetch(window?.Shopify?.routes.root + 'cart/add.js', {
+		const response = await fetch(window?.Shopify?.routes?.root + 'cart/add.js', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -79,17 +74,12 @@ export const addToCart = async (data: Product[], config?: config) => {
 		});
 
 		if (response.status === 200) {
-			const jsonResponse = response.json();
-
-			if (config?.callback) {
-				config.callback();
-			} else {
-				setTimeout(() => (window.location.href = '/cart'));
+			// do redirect (or not)
+			if (config?.redirect !== false) {
+				setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/cart'));
 			}
-
-			return jsonResponse;
 		} else {
-			return new Error(`Error: Snap-platform-shopify addToCart responded with ${response.status}, ${response}`);
+			throw new Error(`Error: addToCart responded with ${response.status}, ${response}`);
 		}
 	} catch (err) {
 		console.error(err);

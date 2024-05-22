@@ -10,6 +10,10 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { SearchController } from '@searchspring/snap-controller';
 
+const ORIGIN = 'http://localhost';
+const ADD_ROUTE = '/remote/v1/cart/add';
+const CART_ROUTE = '/cart.php';
+
 const wait = (time = 1) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, time);
@@ -38,7 +42,6 @@ let errMock: any;
 
 // @ts-ignore
 const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
-const root = 'http://localhost/remote/v1/cart/add';
 
 const controllerServices: any = {
 	client: new MockClient(globals, {}),
@@ -62,11 +65,23 @@ describe('addToCart', () => {
 		errMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 	});
 
-	it('requires data to exist on the dom', () => {
+	beforeEach(() => {
+		global.window = Object.create(window);
+		Object.defineProperty(window, 'location', {
+			value: {
+				origin: ORIGIN,
+				href: ORIGIN,
+			},
+			writable: true,
+		});
+	});
+
+	it('requires product(s) to be passed', () => {
 		// @ts-ignore
 		addToCart();
 
 		expect(fetchMock).not.toHaveBeenCalled();
+		expect(errMock).toHaveBeenCalledWith('Error: no products to add');
 	});
 
 	it('adds data passed', () => {
@@ -85,7 +100,7 @@ describe('addToCart', () => {
 			method: 'POST',
 		};
 
-		expect(fetchMock).toHaveBeenCalledWith(root, params);
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
 
 		fetchMock.mockClear();
 	});
@@ -110,7 +125,7 @@ describe('addToCart', () => {
 			method: 'POST',
 		};
 
-		expect(fetchMock).toHaveBeenCalledWith(root, params);
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
 
 		fetchMock.mockClear();
 
@@ -139,15 +154,69 @@ describe('addToCart', () => {
 			method: 'POST',
 		};
 
-		expect(fetchMock).toHaveBeenCalledWith(root, params);
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
 
 		fetchMock.mockClear();
 	});
 
-	it('can pass a callback', async () => {
-		const cb = jest.fn();
+	it('will redirect by default', async () => {
+		const item = results[0] as Product;
+
+		addToCart([item]);
+
+		const obj = {
+			product_id: item.id,
+			quantity: item.quantity,
+			action: 'add',
+		};
+		const params = {
+			body: JSON.stringify(obj),
+			credentials: 'same-origin',
+			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			method: 'POST',
+		};
+
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
+
+		await wait(10);
+
+		expect(window.location.href).toEqual(CART_ROUTE);
+
+		fetchMock.mockClear();
+	});
+
+	it('will not redirect if config is false', async () => {
+		const item = results[0] as Product;
 		const config = {
-			callback: cb,
+			redirect: false,
+		};
+
+		addToCart([item], config);
+
+		const obj = {
+			product_id: item.id,
+			quantity: item.quantity,
+			action: 'add',
+		};
+		const params = {
+			body: JSON.stringify(obj),
+			credentials: 'same-origin',
+			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			method: 'POST',
+		};
+
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
+
+		await wait(10);
+
+		expect(window.location.href).toEqual(ORIGIN);
+
+		fetchMock.mockClear();
+	});
+
+	it('can use a custom redirect', async () => {
+		const config = {
+			redirect: 'https://redirect.localhost',
 		};
 
 		const item = results[0] as Product;
@@ -166,11 +235,11 @@ describe('addToCart', () => {
 			method: 'POST',
 		};
 
-		expect(fetchMock).toHaveBeenCalledWith(root, params);
+		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
 
 		await wait(10);
 
-		expect(cb).toHaveBeenCalled();
+		expect(window.location.href).toEqual(config.redirect);
 
 		fetchMock.mockClear();
 	});
@@ -194,7 +263,7 @@ describe('addToCart', () => {
 
 			await wait(10);
 
-			expect(fetchMock).toHaveBeenCalledWith(root, params);
+			expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
 		}
 
 		fetchMock.mockClear();

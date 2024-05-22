@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { addToCart } from './addToCart';
+import { getUenc } from './getUenc';
 import { Product } from '@searchspring/snap-store-mobx';
 import { MockClient } from '@searchspring/snap-shared';
 import { SearchStore } from '@searchspring/snap-store-mobx';
@@ -9,6 +10,9 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { SearchController } from '@searchspring/snap-controller';
+
+const ORIGIN = 'http://localhost';
+const CART_ROUTE = '/checkout/cart/';
 
 const wait = (time = 1) => {
 	return new Promise((resolve) => {
@@ -32,10 +36,14 @@ const searchConfigDefault = {
 	},
 	settings: {},
 };
+
 let results: any;
 let controller: any;
 let formKey = 'omnomnom';
 let errMock: any;
+let uenc = getUenc();
+let root = `${ORIGIN}/checkout/cart/add/uenc/${uenc}`;
+
 // @ts-ignore
 const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
 
@@ -48,6 +56,7 @@ const controllerServices: any = {
 	logger: new Logger(),
 	tracker: new Tracker(globals),
 };
+
 describe('Magento2', () => {
 	beforeAll(async () => {
 		searchConfig = { ...searchConfigDefault };
@@ -58,18 +67,30 @@ describe('Magento2', () => {
 		results = controller.store.results;
 
 		errMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+	});
+
+	beforeEach(() => {
+		global.window = Object.create(window);
+		Object.defineProperty(window, 'location', {
+			value: {
+				origin: ORIGIN,
+				href: ORIGIN,
+			},
+			writable: true,
+		});
 
 		Object.defineProperty(window.document, 'cookie', {
 			writable: true,
 			value: `form_key=${formKey}`,
 		});
+
+		// reset variables
+		uenc = getUenc();
+		root = `${ORIGIN}/checkout/cart/add/uenc/${uenc}`;
 	});
 
 	describe('addToCart', () => {
-		const uenc = btoa(window.location.href);
-		const root = `http://localhost/checkout/cart/add/uenc/${uenc}`;
-
-		it('requires data to exist on the dom', () => {
+		it('requires product(s) to be passed', () => {
 			// @ts-ignore
 			addToCart();
 
@@ -92,6 +113,37 @@ describe('Magento2', () => {
 
 			expect(fetchMock).toHaveBeenCalledWith(
 				`${root}/product/${item.id}/addon_product/1/`,
+				expect.objectContaining({ method: 'POST', body: expect.any(FormData) })
+			);
+
+			// @ts-ignore
+			const fetchedFormData = Array.from(fetchMock.mock.calls[0][1].body.entries()).reduce((acc, f) => ({ ...acc, [f[0]]: f[1] }), {});
+
+			expect(fetchedFormData).toMatchObject(body);
+
+			fetchMock.mockClear();
+		});
+
+		it('can use a custom formKey and uenc', () => {
+			const config = {
+				formKey: 'nommmmmnomnom',
+				uenc: 'totallyawesomeencodedurl',
+			};
+
+			const item = results[0];
+			addToCart([item], config);
+
+			expect(fetchMock).toHaveBeenCalled();
+
+			const body = {
+				product: item.mappings.core?.uid,
+				form_key: config.formKey,
+				uenc: config.uenc,
+				qty: '1',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(
+				`${ORIGIN}/checkout/cart/add/uenc/${config.uenc}/product/${item.id}/addon_product/1/`,
 				expect.objectContaining({ method: 'POST', body: expect.any(FormData) })
 			);
 
@@ -163,13 +215,40 @@ describe('Magento2', () => {
 			fetchMock.mockClear();
 		});
 
-		it('can pass a callback', async () => {
-			const cb = jest.fn();
-			const config = {
-				callback: cb,
+		it('will redirect by default', async () => {
+			const item = results[0];
+
+			addToCart([item]);
+
+			const body = {
+				product: item.mappings.core?.uid,
+				form_key: formKey,
+				uenc: uenc,
+				qty: '1',
 			};
 
-			const item = results[0];
+			expect(fetchMock).toHaveBeenCalledWith(
+				`${root}/product/${item.id}/addon_product/1/`,
+				expect.objectContaining({ method: 'POST', body: expect.any(FormData) })
+			);
+
+			// @ts-ignore
+			const fetchedFormData = Array.from(fetchMock.mock.calls[0][1].body.entries()).reduce((acc, f) => ({ ...acc, [f[0]]: f[1] }), {});
+
+			expect(fetchedFormData).toMatchObject(body);
+
+			await wait(300);
+
+			expect(window.location.href).toEqual(CART_ROUTE);
+
+			fetchMock.mockClear();
+		});
+
+		it('will not redirect if config is false', async () => {
+			const item = results[0] as Product;
+			const config = {
+				redirect: false,
+			};
 
 			addToCart([item], config);
 
@@ -192,7 +271,39 @@ describe('Magento2', () => {
 
 			await wait(300);
 
-			expect(cb).toHaveBeenCalled();
+			expect(window.location.href).toEqual(ORIGIN);
+
+			fetchMock.mockClear();
+		});
+
+		it('can use a custom redirect', async () => {
+			const item = results[0] as Product;
+			const config = {
+				redirect: 'https://redirect.localhost',
+			};
+
+			addToCart([item], config);
+
+			const body = {
+				product: item.mappings.core?.uid,
+				form_key: formKey,
+				uenc: uenc,
+				qty: '1',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(
+				`${root}/product/${item.id}/addon_product/1/`,
+				expect.objectContaining({ method: 'POST', body: expect.any(FormData) })
+			);
+
+			// @ts-ignore
+			const fetchedFormData = Array.from(fetchMock.mock.calls[0][1].body.entries()).reduce((acc, f) => ({ ...acc, [f[0]]: f[1] }), {});
+
+			expect(fetchedFormData).toMatchObject(body);
+
+			await wait(300);
+
+			expect(window.location.href).toEqual(config.redirect);
 
 			fetchMock.mockClear();
 		});

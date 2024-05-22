@@ -11,6 +11,10 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { SearchController } from '@searchspring/snap-controller';
 
+const ORIGIN = 'http://localhost';
+const CART_ROUTE = '/cart';
+const ROOT = 'root/';
+
 const wait = (time = 1) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, time);
@@ -61,27 +65,42 @@ describe('Shopify AddToCart', () => {
 		errMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 	});
 
+	beforeEach(() => {
+		global.window = Object.create(window);
+
+		Object.defineProperty(window, 'location', {
+			value: {
+				origin: ORIGIN,
+				href: ORIGIN,
+			},
+			writable: true,
+		});
+
+		// @ts-ignore
+		global.Shopify = {
+			routes: {
+				root: ROOT,
+			},
+		};
+	});
+
 	describe('requires shopify to exist on the dom', () => {
+		beforeEach(() => {
+			delete window.Shopify;
+		});
+
 		it('requires shopify to exist on the dom', () => {
-			//@ts-ignore
-			addToCart();
+			const item = results[0] as Product;
+
+			addToCart([item]);
+
 			expect(fetchMock).not.toHaveBeenCalled();
-			expect(errMock).toHaveBeenCalledWith('Error: Shopify Object not detected');
+			expect(errMock).toHaveBeenCalledWith('Error: window.Shopify not found');
 		});
 	});
 
 	describe('has shopify in the dom', () => {
-		const root = 'root/';
-		beforeAll(() => {
-			//@ts-ignore
-			global.Shopify = {
-				routes: {
-					root: root,
-				},
-			};
-		});
-
-		it('requires data to be passed', () => {
+		it('requires product(s) to be passed', () => {
 			//@ts-ignore
 			addToCart();
 			expect(fetchMock).not.toHaveBeenCalled();
@@ -115,7 +134,7 @@ describe('Shopify AddToCart', () => {
 
 			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
 
-			const requestUrl = `${root}cart/add.js`;
+			const requestUrl = `${ROOT}cart/add.js`;
 
 			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
 
@@ -140,18 +159,65 @@ describe('Shopify AddToCart', () => {
 
 			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
 
-			const requestUrl = `${root}cart/add.js`;
+			const requestUrl = `${ROOT}cart/add.js`;
 
 			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
 
 			fetchMock.mockClear();
 		});
 
-		it('can pass a callback', async () => {
-			const cb = jest.fn();
+		it('will redirect by default', async () => {
+			const item = results[0] as Product;
+
+			addToCart([item]);
+
+			const obj = {
+				id: +item.id,
+				quantity: item.quantity,
+			};
+
+			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+			const requestUrl = `${ROOT}cart/add.js`;
+
+			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+			await wait(10);
+
+			expect(window.location.href).toEqual(CART_ROUTE);
+
+			fetchMock.mockClear();
+		});
+
+		it('will not redirect if config is false', async () => {
+			const item = results[0] as Product;
 			const config = {
-				idFieldName: 'id',
-				callback: cb,
+				redirect: false,
+			};
+
+			addToCart([item], config);
+
+			const obj = {
+				id: +item.id,
+				quantity: item.quantity,
+			};
+
+			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+			const requestUrl = `${ROOT}cart/add.js`;
+
+			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+			await wait(10);
+
+			expect(window.location.href).toEqual(ORIGIN);
+
+			fetchMock.mockClear();
+		});
+
+		it('can use a custom redirect', async () => {
+			const config = {
+				redirect: 'https://redirect.localhost',
 			};
 
 			const item = results[0] as Product;
@@ -165,13 +231,13 @@ describe('Shopify AddToCart', () => {
 
 			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
 
-			const requestUrl = `${root}cart/add.js`;
+			const requestUrl = `${ROOT}cart/add.js`;
 
 			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
 
 			await wait(10);
 
-			expect(cb).toHaveBeenCalled();
+			expect(window.location.href).toEqual(config.redirect);
 
 			fetchMock.mockClear();
 		});
@@ -196,7 +262,7 @@ describe('Shopify AddToCart', () => {
 
 			const params = { body: JSON.stringify({ items: itemsArray }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
 
-			const requestUrl = `${root}cart/add.js`;
+			const requestUrl = `${ROOT}cart/add.js`;
 
 			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
 

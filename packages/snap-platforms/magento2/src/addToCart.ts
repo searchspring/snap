@@ -2,40 +2,32 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { getFormKey } from './getFormKey';
 import { getUenc } from './getUenc';
 
-export interface config {
+type Magento2AddToCartConfig = {
 	formKey?: string;
 	uenc?: string;
-	callback?: () => void;
-	idFieldName?: string; //display.mappings.core.id
-}
+	redirect?: boolean | string;
+	idFieldName?: string; // display.mappings.core.id
+};
 
-type line_items = {
+type LineItems = {
 	product_id: string;
 	quantity: number;
 	attributes: { name: string; val: string }[];
 }[];
 
-export const addToCart = async (data: Product[], config?: config) => {
-	let form_key = config?.formKey;
-	let uenc = config?.uenc;
-
-	const line_items: line_items = [];
-
-	if (!form_key) {
-		form_key = getFormKey();
-	}
-
-	if (!uenc) {
-		uenc = getUenc();
-	}
-
+export const addToCart = async (data: Product[], config?: Magento2AddToCartConfig) => {
 	if (!data) {
 		console.error('Error: no products to add');
-		return false;
+		return;
 	}
 
+	const form_key = config?.formKey || getFormKey();
+	const uenc = config?.uenc || getUenc();
+
+	const lineItems: LineItems = [];
+
 	data.map(async (item) => {
-		let sku: string | undefined;
+		let sku = item?.display?.mappings.core?.uid;
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
@@ -43,16 +35,12 @@ export const addToCart = async (data: Product[], config?: config) => {
 					level = level[field];
 				} else {
 					console.error('Error: couldnt find column in item data. please check your idFieldName is correct in the config.');
-					return false;
+					return;
 				}
 			});
 			if (level && level !== item) {
 				sku = level;
-			} else {
-				sku = item.display.mappings.core?.uid;
 			}
-		} else {
-			sku = item.display.mappings.core?.uid;
 		}
 
 		if (sku && item.quantity) {
@@ -69,7 +57,7 @@ export const addToCart = async (data: Product[], config?: config) => {
 					attributes.push(attributeObj);
 				});
 			}
-			line_items.push({
+			lineItems.push({
 				product_id: sku,
 				quantity: item.quantity as number,
 				attributes: attributes,
@@ -77,9 +65,9 @@ export const addToCart = async (data: Product[], config?: config) => {
 		}
 	});
 
-	if (line_items.length) {
-		for (let i = 0; i < line_items.length; i++) {
-			const itemData = line_items[i];
+	if (lineItems.length) {
+		for (let i = 0; i < lineItems.length; i++) {
+			const itemData = lineItems[i];
 			const quantity = itemData.quantity || 1;
 			const form = new FormData();
 			form.append('product', itemData.product_id);
@@ -101,17 +89,16 @@ export const addToCart = async (data: Product[], config?: config) => {
 				);
 
 				if (response.status !== 200) {
-					console.error(`Error: Snap-platform-magento2 addToCart responded with ${response.status}, ${response}`);
+					throw new Error(`Error: addToCart responded with ${response.status}, ${response}`);
 				}
 			} catch (err) {
 				console.error('Error:', err);
 			}
 		}
-		if (config?.callback) {
-			config.callback();
-		} else {
-			console.log('redirecting');
-			setTimeout(() => (window.location.href = '/checkout/cart/'));
+
+		// do redirect (or not)
+		if (config?.redirect !== false) {
+			setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/checkout/cart/'));
 		}
 	}
 };

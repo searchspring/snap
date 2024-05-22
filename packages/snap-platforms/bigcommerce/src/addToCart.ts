@@ -1,29 +1,33 @@
 import type { Product } from '@searchspring/snap-store-mobx';
 
-interface config {
-	callback?: () => void;
-	idFieldName?: string; //display.mappings.core.id
-}
-
-type formData = {
-	line_items: {
-		product_id: number;
-		quantity: number;
-	}[];
+type BigCommerceAddToCartConfig = {
+	redirect?: boolean | string;
+	idFieldName?: string; // display.mappings.core.id
 };
 
-export const addToCart = async (data: Product[], config?: config) => {
-	const formData: formData = {
+type LineItem = {
+	product_id: string;
+	quantity: number;
+};
+
+type FormData = {
+	line_items: LineItem[];
+};
+
+export const addToCart = async (items: Product[], config?: BigCommerceAddToCartConfig) => {
+	if (!items) {
+		console.error('Error: no products to add');
+		return;
+	}
+
+	const formData: FormData = {
 		line_items: [],
 	};
 
-	if (!data) {
-		console.error('Error: no products to add');
-		return false;
-	}
+	items.map((item) => {
+		let id = item?.display?.mappings?.core?.uid;
 
-	data.map((item) => {
-		let id: any;
+		// try to find custom field in data
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
@@ -31,17 +35,14 @@ export const addToCart = async (data: Product[], config?: config) => {
 					level = level[field];
 				} else {
 					console.error('Error: couldnt find column in item data. please check your idFieldName is correct in the config.');
-					return false;
+					return;
 				}
 			});
 			if (level && level !== item) {
 				id = level;
-			} else {
-				id = item.display.mappings.core?.uid;
 			}
-		} else {
-			id = item.display.mappings.core?.uid;
 		}
+
 		if (id && item.quantity) {
 			const obj = {
 				product_id: id,
@@ -52,22 +53,25 @@ export const addToCart = async (data: Product[], config?: config) => {
 		}
 	});
 
-	//first check how many products we are adding
+	// first check how many products we are adding
 	if (formData.line_items.length) {
 		for (let i = 0; i < formData.line_items.length; i++) {
 			await addSingleProductv1(formData.line_items[i]);
 		}
 	}
 
-	if (config?.callback) {
-		config.callback();
-	} else {
-		console.log('redirecting');
-		setTimeout(() => (window.location.href = '/cart.php'));
+	// do redirect (or not)
+	if (config?.redirect !== false) {
+		setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/cart.php'));
 	}
 };
 
-const addSingleProductv1 = async (item: { product_id: number; quantity: number }) => {
+const addSingleProductv1 = async (item: LineItem) => {
+	if (!item) {
+		console.error('Error: no product to add');
+		return;
+	}
+
 	const endpoint = {
 		route: `/remote/v1/cart/add`,
 		method: 'POST',
@@ -76,33 +80,27 @@ const addSingleProductv1 = async (item: { product_id: number; quantity: number }
 		success: 200,
 	};
 
-	const resource = `${window.location.origin}${endpoint.route}`;
-
-	const init: any = {
-		method: endpoint.method,
-		credentials: 'same-origin',
-		headers: {
-			// note: no authorization
-			Accept: endpoint.accept,
-		},
-	};
-
-	if (item) {
-		init.headers['Content-Type'] = endpoint.content;
-		//clone item..
-		init.body = { ...item };
-		init.body['action'] = 'add';
-		init.body = JSON.stringify(init.body);
-	}
-
 	try {
-		const response = await fetch(resource, init);
+		const payload = JSON.stringify({
+			...item,
+			action: 'add',
+		});
 
-		if (response.status === endpoint.success) {
-			const jsonResponse = response.json();
-			return jsonResponse;
-		} else {
-			return new Error(`Error: Snap-platform-bigcommerce addToCart responded with ${response.status}, ${response}`);
+		const init: RequestInit = {
+			method: endpoint.method,
+			credentials: 'same-origin',
+			headers: {
+				// note: no authorization
+				Accept: endpoint.accept,
+				'Content-Type': endpoint.content,
+			},
+			body: payload,
+		};
+
+		const response = await fetch(endpoint.route, init);
+
+		if (response.status !== endpoint.success) {
+			throw new Error(`Error: addToCart responded with ${response.status}, ${response}`);
 		}
 	} catch (err) {
 		console.error(err);
