@@ -42,7 +42,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 			return new Product(services, result, metaData, config);
 		});
 
-		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig).settings?.variants;
+		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
 
 		// preselected variant options
 		if (variantConfig?.realtime?.enabled) {
