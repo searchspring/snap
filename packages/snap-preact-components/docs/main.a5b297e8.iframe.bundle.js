@@ -1,4 +1,4 @@
-/*! For license information please see main.49a18ff2.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.a5b297e8.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -48787,7 +48787,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49302,7 +49302,7 @@
 									website: { trackingCode: this.globals.siteId },
 								}),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.1')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.2')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
