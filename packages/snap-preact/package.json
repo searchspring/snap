@@ -24,6 +24,7 @@
 		"@searchspring/snap-controller": "^0.56.1",
 		"@searchspring/snap-event-manager": "^0.56.1",
 		"@searchspring/snap-logger": "^0.56.1",
+		"@searchspring/snap-platforms": "^0.56.1",
 		"@searchspring/snap-preact-components": "^0.56.1",
 		"@searchspring/snap-profiler": "^0.56.1",
 		"@searchspring/snap-store-mobx": "^0.56.1",
