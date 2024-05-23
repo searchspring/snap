@@ -1,4 +1,4 @@
-/*! For license information please see 777.f3882dd78a9b74e26c8f.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 777.020db1feb12d0f91ed1d.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[777],
 	{
@@ -1506,7 +1506,7 @@
 					(code >= 13 && code <= 31) ||
 					(code >= 127 && code <= 159) ||
 					(code >= 64976 && code <= 65007) ||
-					65535 == (65535 & code) ||
+					!(65535 & ~code) ||
 					65534 == (65535 & code)
 				);
 			}

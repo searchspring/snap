@@ -1233,7 +1233,7 @@
 					ratio > 1 && ((wh /= ratio), (bl /= ratio));
 					var i = Math.floor(6 * h),
 						v = 1 - bl;
-					(f = 6 * h - i), 0 != (1 & i) && (f = 1 - f);
+					(f = 6 * h - i), 1 & i && (f = 1 - f);
 					var r,
 						g,
 						b,

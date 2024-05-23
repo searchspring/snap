@@ -1,4 +1,4 @@
-/*! For license information please see 777.68b01f68.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 777.e3b5972a.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[777],
 	{
@@ -1138,7 +1138,7 @@
 					(code >= 13 && code <= 31) ||
 					(code >= 127 && code <= 159) ||
 					(code >= 64976 && code <= 65007) ||
-					65535 == (65535 & code) ||
+					!(65535 & ~code) ||
 					65534 == (65535 & code)
 				);
 			}
