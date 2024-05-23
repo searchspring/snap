@@ -1,4 +1,4 @@
-/*! For license information please see main.a5b297e8.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.ba91dc99.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -47,7 +47,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeImage_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				BadgeImage = __webpack_require__('./src/components/Atoms/BadgeImage/BadgeImage.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -241,7 +241,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgePill_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				BadgePill = __webpack_require__('./src/components/Atoms/BadgePill/BadgePill.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -446,7 +446,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeRectangle_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				BadgeRectangle = __webpack_require__('./src/components/Atoms/BadgeRectangle/BadgeRectangle.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -650,7 +650,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => BadgeText_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				BadgeText = __webpack_require__('./src/components/Atoms/BadgeText/BadgeText.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -841,7 +841,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
@@ -1018,7 +1018,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Button = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -1332,7 +1332,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -1816,7 +1816,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				formatNumber = __webpack_require__('../snap-toolbox/dist/esm/filters/formatNumber.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -2133,7 +2133,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -2602,7 +2602,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -3141,7 +3141,7 @@
 				);
 			}
 			var componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				esm =
 					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
@@ -3285,7 +3285,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Banner = __webpack_require__('./src/components/Atoms/Merchandising/Banner/Banner.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -4064,7 +4064,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				InlineBanner = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -4700,7 +4700,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Overlay_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Overlay = __webpack_require__('./src/components/Atoms/Overlay/Overlay.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -4897,7 +4897,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -5136,7 +5136,7 @@
 				__webpack_require__.d(__webpack_exports__, { Circle: () => Circle, Default: () => Default, default: () => Skeleton_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -5409,7 +5409,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				CalloutBadge = __webpack_require__('./src/components/Molecules/CalloutBadge/CalloutBadge.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -6104,7 +6104,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-start.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
@@ -6967,7 +6967,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Checkbox = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -7444,7 +7444,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
@@ -7916,7 +7916,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetGridOptions = __webpack_require__('./src/components/Molecules/FacetGridOptions/FacetGridOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -8733,7 +8733,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetHierarchyOptions = __webpack_require__('./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -9519,7 +9519,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetListOptions = __webpack_require__('./src/components/Molecules/FacetListOptions/FacetListOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -10333,7 +10333,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetPaletteOptions = __webpack_require__('./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -11220,7 +11220,7 @@
 				__webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => FacetSlider_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				FacetSlider = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -12103,7 +12103,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Filter = __webpack_require__('./src/components/Molecules/Filter/Filter.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -12894,7 +12894,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Grid = __webpack_require__('./src/components/Molecules/Grid/Grid.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -13702,7 +13702,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				List = __webpack_require__('./src/components/Molecules/List/List.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -14733,7 +14733,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				OverlayBadge = __webpack_require__('./src/components/Molecules/OverlayBadge/OverlayBadge.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -15376,7 +15376,11 @@
 								return '"' + row.join(' ') + '"';
 							})
 							.join(' ');
-						gridProperties = { gridTemplateColumns: 'repeat(' + grid[0].length + ', 1fr)', gridTemplateAreas };
+						gridProperties = {
+							gridTemplateColumns: 'repeat(' + grid[0].length + ', minmax(0, 1fr))',
+							gridTemplateRows: 'repeat(' + grid.length + ', minmax(0, 1fr))',
+							gridTemplateAreas,
+						};
 					}
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
 						position: 'relative',
@@ -15388,14 +15392,16 @@
 				},
 				CSS_BadgePositioning = function BadgePositioning(_ref2) {
 					var index = _ref2.index,
+						top = _ref2.top,
+						bottom = _ref2.bottom,
 						section = _ref2.section,
 						tag = _ref2.tag;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
-						position: 'absolute',
+						position: 'relative',
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'right' == section ? 'flex-end' : 'flex-start',
-						right: 'right' == section ? 0 : void 0,
+						justifyContent: top || bottom ? (bottom && !top ? 'flex-end' : 'flex-start') : 'center',
 						gap: '0.5em',
 						gridArea: tag,
 						boxSizing: 'border-box',
@@ -15488,11 +15494,13 @@
 													null == sectionSlots
 														? void 0
 														: sectionSlots
-																.map(function (slot) {
+																.map(function (slot, index) {
 																	var _result$badges;
 																	return {
 																		tag: slot.tag,
 																		name: slot.name,
+																		top: 0 == index,
+																		bottom: index == sectionSlots.length - 1,
 																		badges:
 																			null == result || null === (_result$badges = result.badges) || void 0 === _result$badges
 																				? void 0
@@ -15532,7 +15540,9 @@
 																		'ss__overlay-badge__grid-wrapper__slot',
 																		'ss__overlay-badge__grid-wrapper__slot--' + slot.tag
 																	),
-																	css: [CSS_BadgePositioning({ tag: slot.tag, section: location.section, index })],
+																	css: [
+																		CSS_BadgePositioning({ tag: slot.tag, section: location.section, index, top: slot.top, bottom: slot.bottom }),
+																	],
 																},
 																slot.badges.map(function (badge) {
 																	var BadgeComponent = (0, _hooks__WEBPACK_IMPORTED_MODULE_13__.x)(badgeComponentMap, badge.component);
@@ -15581,7 +15591,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
@@ -16493,7 +16503,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -17460,7 +17470,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => SearchInput_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				SearchInput = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -17692,7 +17702,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -18995,7 +19005,7 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Slideout_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.ends-with.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
@@ -19570,7 +19580,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Swatches = __webpack_require__('./src/components/Molecules/Swatches/Swatches.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -20234,7 +20244,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 					__webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js')),
@@ -21056,7 +21066,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -23033,7 +23043,7 @@
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
@@ -23604,7 +23614,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facet = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				types = __webpack_require__('./src/types.ts'),
@@ -25055,7 +25065,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -25675,7 +25685,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				paths = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
@@ -26585,7 +26595,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
@@ -27578,7 +27588,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
@@ -29535,7 +29545,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -30402,7 +30412,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				RecommendationProfileTracker = __webpack_require__(
 					'./src/components/Trackers/Recommendation/ProfileTracker/RecommendationProfileTracker.tsx'
 				),
@@ -30998,7 +31008,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				RecommendationResultTracker = __webpack_require__('./src/components/Trackers/Recommendation/ResultTracker/RecommendationResultTracker.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				esm =
@@ -48787,7 +48797,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.3', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49302,7 +49312,7 @@
 									website: { trackingCode: this.globals.siteId },
 								}),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.2')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.3')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -50457,8 +50467,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -50578,8 +50588,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -50940,8 +50950,8 @@
 			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('../../node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('../../node_modules/@storybook/addon-docs/blocks.js');
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -51188,12 +51198,12 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[796],
+			[685],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
 				__webpack_exec__('./storybook-init-framework-entry.js'),
-				__webpack_exec__('../../node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
+				__webpack_exec__('./node_modules/@storybook/addon-docs/dist/esm/frameworks/common/config.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/preact/dist/esm/client/preview/config-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-links/dist/esm/preset/addDecorator.js-generated-config-entry.js'),
 				__webpack_exec__('../../node_modules/@storybook/addon-actions/dist/esm/preset/addDecorator.js-generated-config-entry.js'),

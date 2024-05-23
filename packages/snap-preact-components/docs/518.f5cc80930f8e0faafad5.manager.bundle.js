@@ -1,6 +1,6 @@
-/*! For license information please see 603.1d38e38930b809db9fd2.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 518.f5cc80930f8e0faafad5.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[603],
+	[518],
 	{
 		73860: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -4611,35 +4611,6 @@
 					},
 				});
 			});
-		},
-		5205: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__(16411);
-			var SourceType,
-				esm = __webpack_require__(27893),
-				types = __webpack_require__(94652),
-				PANEL_ID = ''.concat('storybook/docs', '/panel');
-			''.concat('storybook/docs', '/snippet-rendered');
-			!(function (SourceType) {
-				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
-			})(SourceType || (SourceType = {})),
-				esm.MC.register('storybook/docs', function () {
-					esm.MC.add(PANEL_ID, {
-						type: types.g.TAB,
-						title: 'Docs',
-						route: function route(_ref) {
-							var storyId = _ref.storyId,
-								refId = _ref.refId;
-							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
-						},
-						match: function match(_ref2) {
-							return 'docs' === _ref2.viewMode;
-						},
-						render: function render() {
-							return null;
-						},
-					});
-				});
 		},
 		24813: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -57897,6 +57868,35 @@
 				if (((rnds[6] = (15 & rnds[6]) | 64), (rnds[8] = (63 & rnds[8]) | 128), buf)) for (var ii = 0; ii < 16; ++ii) buf[i + ii] = rnds[ii];
 				return buf || bytesToUuid(rnds);
 			};
+		},
+		97954: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__(16411);
+			var SourceType,
+				esm = __webpack_require__(27893),
+				types = __webpack_require__(94652),
+				PANEL_ID = ''.concat('storybook/docs', '/panel');
+			''.concat('storybook/docs', '/snippet-rendered');
+			!(function (SourceType) {
+				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
+			})(SourceType || (SourceType = {})),
+				esm.MC.register('storybook/docs', function () {
+					esm.MC.add(PANEL_ID, {
+						type: types.g.TAB,
+						title: 'Docs',
+						route: function route(_ref) {
+							var storyId = _ref.storyId,
+								refId = _ref.refId;
+							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
+						},
+						match: function match(_ref2) {
+							return 'docs' === _ref2.viewMode;
+						},
+						render: function render() {
+							return null;
+						},
+					});
+				});
 		},
 		44230: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
