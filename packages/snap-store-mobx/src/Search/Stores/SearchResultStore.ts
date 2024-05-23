@@ -1,7 +1,16 @@
 import { computed, makeObservable, observable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import type { SearchStoreConfig, StoreServices, StoreConfigs, VariantSelectionOptions, ResultBadge, VariantConfig } from '../../types';
+import type {
+	SearchStoreConfig,
+	StoreServices,
+	StoreConfigs,
+	ResultBadge,
+	VariantOptionConfig,
+	VariantConfig,
+	AutocompleteStoreConfig,
+	RecommendationStoreConfig,
+} from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelPagination,
@@ -11,6 +20,9 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+const VARIANT_ATTRIBUTE = 'ss-variant-option';
+const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
 
 export class SearchResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
@@ -23,11 +35,45 @@ export class SearchResultStore extends Array<Product | Banner> {
 		metaData: MetaResponseModel,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
-		merchData?: SearchResponseModelMerchandising
+		merchData?: SearchResponseModelMerchandising,
+		loaded?: boolean
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
 			return new Product(services, result, metaData, config);
 		});
+
+		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
+
+		// preselected variant options
+		if (variantConfig?.realtime?.enabled) {
+			// attach click events - ONLY happens once (known limitation)
+			if (!loaded && results.length) {
+				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
+					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, results));
+					}
+				});
+			}
+
+			// check for attributes for preselection
+			if (results.length) {
+				if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
+					const options: Record<string, string[]> = {};
+					// grab values from elements on the page to form preselected elements
+					document.querySelectorAll(`[${VARIANT_ATTRIBUTE_SELECTED}]`).forEach((elem) => {
+						const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+						if (attr) {
+							const [option, value] = attr.split(':');
+							if (option && value) {
+								options[option.toLowerCase()] = [value.toLowerCase()];
+							}
+						}
+					});
+
+					makeVariantSelections(variantConfig, options, results);
+				}
+			}
+		}
 
 		if (merchData?.content?.inline) {
 			const banners = merchData.content.inline
@@ -117,7 +163,7 @@ export class Product {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig).settings?.variants);
+				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig)?.settings?.variants);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -249,7 +295,6 @@ export class Variants {
 	public data: Variant[] = [];
 	public selections: VariantSelection[] = [];
 	public setActive: (variant: Variant) => void;
-
 	private config?: VariantConfig;
 
 	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
@@ -258,7 +303,11 @@ export class Variants {
 			this.active = variant;
 			mask.set({ mappings: this.active.mappings, attributes: this.active.attributes });
 		};
-		this.config = config;
+
+		if (config) {
+			this.config = config;
+		}
+
 		this.update(variantData, config);
 	}
 
@@ -281,12 +330,8 @@ export class Variants {
 			this.selections = [];
 
 			options.map((option) => {
-				// TODO - merge with variant config before constructing selection (for label overrides and swatch mappings)
-				const optionConfig = {
-					field: option,
-					label: option,
-				};
-				this.selections.push(new VariantSelection(this, optionConfig));
+				const variantOptionConfig = this.config?.options && this.config.options[option];
+				this.selections.push(new VariantSelection(this, option, variantOptionConfig));
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
@@ -308,8 +353,7 @@ export class Variants {
 
 	public makeSelections(options?: Record<string, string[]>) {
 		// options = {color: 'Blue', size: 'L'};
-
-		if (!options) {
+		if (!options || !Object.keys(options).length) {
 			// select first available for each selection
 			this.selections.forEach((selection) => {
 				const firstAvailableOption = selection.values.find((value) => value.available);
@@ -323,13 +367,14 @@ export class Variants {
 				//make all options available for first selection.
 				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
 				const preferedOptions = options[selection.field as keyof typeof options];
-				let preferencedOption = availableOptions[0];
-
+				let preferencedOption = selection.selected || availableOptions[0];
 				// if theres a preference for that field
 				if (preferedOptions) {
 					const checkIfAvailable = (preference: string) => {
 						//see if that option is in the available options
-						const availablePreferedOptions = availableOptions.find((value) => value.value.toLowerCase() == preference.toLowerCase());
+						const availablePreferedOptions = availableOptions.find(
+							(value) => value.value.toString().toLowerCase() == preference?.toString().toLowerCase()
+						);
 
 						//use it
 						if (availablePreferedOptions) {
@@ -348,7 +393,7 @@ export class Variants {
 				}
 
 				if (preferencedOption) {
-					selection.select(preferencedOption.value);
+					selection.select(preferencedOption.value, true);
 				}
 			});
 		}
@@ -368,14 +413,14 @@ export class Variants {
 		orderedSelections.forEach((selection) => selection.refineValues(this));
 
 		// check to see if we have enough selections made to update the display
-		const selectedSelections = this.selections.filter((selection) => selection.selected);
+		const selectedSelections = this.selections.filter((selection) => selection.selected?.value?.length);
 		if (selectedSelections.length) {
 			let availableVariants: Variant[] = this.data;
 
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
 				);
 			}
 
@@ -387,10 +432,11 @@ export class Variants {
 	}
 }
 
-type SelectionValue = {
+export type VariantSelectionValue = {
 	value: string;
 	label?: string;
 	thumbnailImageUrl?: string;
+	backgroundImageUrl?: string;
 	background?: string;
 	available?: boolean;
 };
@@ -398,15 +444,16 @@ type SelectionValue = {
 export class VariantSelection {
 	public field: string;
 	public label: string;
-	public selected?: string = ''; //ex: blue
-	public previouslySelected?: string = '';
-	public values: SelectionValue[] = [];
-
+	public selected?: VariantSelectionValue = undefined;
+	public previouslySelected?: VariantSelectionValue = undefined;
+	public values: VariantSelectionValue[] = [];
+	private config: VariantOptionConfig;
 	private variantsUpdate: () => void;
 
-	constructor(variants: Variants, selectorConfig: VariantSelectionOptions) {
-		this.field = selectorConfig.field;
-		this.label = selectorConfig.label;
+	constructor(variants: Variants, selectorField: string, variantConfig?: VariantOptionConfig) {
+		this.field = selectorField;
+		this.label = variantConfig?.label || selectorField;
+		this.config = variantConfig || {};
 
 		// needed to prevent attaching variants as class property
 		this.variantsUpdate = () => variants.refineSelections(this);
@@ -429,24 +476,54 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected == variant.options[selectedSelection.field].value && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
 			);
 		}
 
-		const newValues: SelectionValue[] = variants.data
+		const newValues: VariantSelectionValue[] = variants.data
 			.filter((variant) => variant.options[this.field])
-			.reduce((values: SelectionValue[], variant) => {
+			.reduce((values: VariantSelectionValue[], variant) => {
 				if (!values.some((val) => variant.options[this.field].value == val.value)) {
-					values.push({
-						label: variant.options[this.field].value,
-						// TODO: use configurable mappings from config
-						// TODO: set background for swatches (via configurable mappings) from config
-						thumbnailImageUrl: variant.mappings.core?.thumbnailImageUrl,
+					const value = variant.options[this.field].value;
+
+					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
+					const mappedValue: {
+						available: boolean;
+						value: string;
+						label: string;
+						thumbnailImageUrl?: string;
+						background?: string;
+						backgroundImageUrl?: string;
+					} = {
+						value: value,
+						label: value,
+						thumbnailImageUrl: thumbnailImageUrl,
 						available: Boolean(
 							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
 						),
-						...variant.options[this.field],
-					});
+					};
+
+					if (this.config.thumbnailBackgroundImages) {
+						mappedValue.backgroundImageUrl = thumbnailImageUrl;
+					}
+
+					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toString().toLowerCase()]) {
+						const mapping = this.config.mappings[value.toString().toLowerCase()];
+
+						if (mapping.label) {
+							mappedValue.label = mapping.label;
+						}
+
+						if (mapping.background) {
+							mappedValue.background = mapping.background;
+						}
+
+						if (mapping.backgroundImageUrl) {
+							mappedValue.backgroundImageUrl = mapping.backgroundImageUrl;
+						}
+					}
+
+					values.push(mappedValue);
 				}
 
 				// TODO: use sorting function from config
@@ -456,20 +533,20 @@ export class VariantSelection {
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
-			if (!newValues.some((val) => val.value == this.selected && val.available)) {
+			if (!newValues.some((val) => val.value == this.selected?.value && val.available)) {
 				// the selection is no longer available, attempt to select previous selection
 				if (
 					this.selected !== this.previouslySelected &&
 					this.previouslySelected &&
-					newValues.some((val) => val.value == this.previouslySelected && val.available)
+					newValues.some((val) => val.value == this.previouslySelected?.value && val.available)
 				) {
-					this.select(this.previouslySelected, true);
+					this.select(this.previouslySelected.value, true);
 				} else {
 					// choose the first available option if previous seletions are unavailable
 					const availableValues = newValues.filter((val) => val.available);
 					if (newValues.length && availableValues.length) {
 						const nextAvailableValue = availableValues[0].value;
-						if (this.selected !== nextAvailableValue) {
+						if (this.selected.value !== nextAvailableValue) {
 							this.select(nextAvailableValue, true);
 						}
 					}
@@ -481,7 +558,7 @@ export class VariantSelection {
 	}
 
 	public reset() {
-		this.selected = '';
+		this.selected = undefined;
 		this.values.forEach((val) => (val.available = false));
 	}
 
@@ -492,7 +569,7 @@ export class VariantSelection {
 				this.previouslySelected = this.selected;
 			}
 
-			this.selected = value;
+			this.selected = valueExist;
 
 			this.variantsUpdate();
 		}
@@ -576,4 +653,39 @@ function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[]
 		});
 
 	return results;
+}
+
+function variantOptionClick(elem: Element, variantConfig: VariantConfig, results: (Product | Banner)[]) {
+	const options: Record<string, string[]> = {};
+	const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+	if (attr) {
+		const [option, value] = attr.split(':');
+		options[option.toLowerCase()] = [value.toLowerCase()];
+
+		makeVariantSelections(variantConfig, options, results);
+	}
+}
+
+function makeVariantSelections(variantConfig: VariantConfig, options: Record<string, string[]>, results: (Product | Banner)[]) {
+	let filteredResults = results;
+
+	// filter based on config
+	variantConfig.realtime?.filters?.forEach((filter: any) => {
+		if (filter == 'first') {
+			filteredResults = [filteredResults[0]];
+		}
+
+		if (filter == 'unaltered') {
+			filteredResults = filteredResults.filter(
+				(result) => !(result as Product).variants?.selections.some((selection) => selection.previouslySelected)
+			);
+		}
+	});
+
+	filteredResults.forEach((result) => {
+		// no banner types
+		if (result.type == 'product') {
+			(result as Product).variants?.makeSelections(options);
+		}
+	});
 }

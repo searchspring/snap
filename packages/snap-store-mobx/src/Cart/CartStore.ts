@@ -32,7 +32,7 @@ export class CartStore {
 	get price(): number {
 		let price = 0;
 		this.items.forEach((item) => {
-			price += (item.display.mappings.core?.price || 0) * item.quantity;
+			price += +(item.display.mappings.core?.price || 0) * item.quantity;
 		});
 		return price;
 	}
@@ -40,7 +40,7 @@ export class CartStore {
 	get msrp(): number {
 		let price = 0;
 		this.items.forEach((item) => {
-			price += (item.display.mappings.core?.msrp || item.display.mappings.core?.price || 0) * item.quantity;
+			price += (+(item.display.mappings.core?.msrp || 0) || +(item.display.mappings.core?.price || 0) || 0) * item.quantity;
 		});
 		return price;
 	}
