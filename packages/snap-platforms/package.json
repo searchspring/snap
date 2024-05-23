@@ -9,8 +9,8 @@
 		"access": "public"
 	},
 	"scripts": {
-		"build": "rm -rf ./dist && rm -fr ./components/dist && tsc && tsc -p tsconfig.cjs.json",
-		"build:docs": "typedoc --out docs src/index.ts",
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"build:docs": "echo 'no docs for snap-platforms'",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint './**/*.{js,jsx,ts,tsx}'",
