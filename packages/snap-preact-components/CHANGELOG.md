@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0](https://github.com/searchspring/snap/compare/v0.55.0...v0.56.0) (2024-05-23)
+
+### Features
+
+- **preact-components-variantselection:** variantSelection & supporting components & option mappings ([f4a4001](https://github.com/searchspring/snap/commit/f4a4001cef1b63c351f3c8f1e8b7ab79242dc4b0))
+
 # [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
 
 ### Bug Fixes

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0](https://github.com/searchspring/snap/compare/v0.55.0...v0.56.0) (2024-05-23)
+
+### Bug Fixes
+
+- **preact/createrecommendationcontroller:** fixing test after typing change ([2bda50b](https://github.com/searchspring/snap/commit/2bda50bfb06477bc90d7f79040005aa94c599efa))
+- **store-mobx/cart:** typecasting price and MSRP in cart for edge cases where values are strings ([1627d90](https://github.com/searchspring/snap/commit/1627d90039514e5b5a38b8ed8766d08ee58ad824))
+- **store-mobx/searchresultstore:** adding an optional chain for cases when the config is undefined ([b847c18](https://github.com/searchspring/snap/commit/b847c1847c39e040ae619a98d68b71558cf6a6d6))
+
+### Features
+
+- **preact-components-variantselection:** variantSelection & supporting components & option mappings ([f4a4001](https://github.com/searchspring/snap/commit/f4a4001cef1b63c351f3c8f1e8b7ab79242dc4b0))
+- **snap-platforms:** snap-platforms added for shopify, bigc, & magento2 ([3fbd797](https://github.com/searchspring/snap/commit/3fbd797a149e08beec5da21407d233c90326350e))
+
 # [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
 
 ### Bug Fixes
