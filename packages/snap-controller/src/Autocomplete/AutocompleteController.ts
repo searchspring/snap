@@ -119,6 +119,7 @@ export class AutocompleteController extends AbstractController {
 				}
 			}
 		});
+
 		// attach config plugins and event middleware
 		this.use(this.config);
 	}

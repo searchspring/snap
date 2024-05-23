@@ -153,11 +153,6 @@ describe('createRecommendationController', () => {
 		it('creates an recommendation controller with custom Store service', () => {
 			const storeConfig = {
 				...createConfig.controller,
-				settings: {
-					facets: {
-						pinFiltered: false,
-					},
-				},
 			};
 			const customUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
 			const customStore = new RecommendationStore(storeConfig, { urlManager: customUrlManager });

@@ -1,0 +1,47 @@
+{
+	"name": "@searchspring/snap-platforms",
+	"version": "0.54.0",
+	"description": "Snap Platforms Library",
+	"author": "Searchspring",
+	"license": "MIT",
+	"repository": "https://github.com/searchspring/snap",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && rm -fr ./components/dist && tsc && tsc -p tsconfig.cjs.json",
+		"build:docs": "typedoc --out docs src/index.ts",
+		"dev": "tsc --watch",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint './**/*.{js,jsx,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"@searchspring/snap-store-mobx": "^0.54.0",
+		"@searchspring/snap-toolbox": "^0.54.0"
+	},
+	"devDependencies": {
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	],
+	"exports": {
+		"./shopify": {
+			"types": "./dist/esm/shopify/src/index.d.ts",
+			"import": "./dist/esm/shopify/src/index.js",
+			"require": "./dist/cjs/shopify/src/index.js"
+		},
+		"./magento2": {
+			"types": "./dist/esm/magento2/src/index.d.ts",
+			"import": "./dist/esm/magento2/src/index.js",
+			"require": "./dist/cjs/magento2/src/index.js"
+		},
+		"./bigcommerce": {
+			"types": "./dist/esm/bigcommerce/src/index.d.ts",
+			"import": "./dist/esm/bigcommerce/src/index.js",
+			"require": "./dist/cjs/bigcommerce/src/index.js"
+		}
+	}
+}

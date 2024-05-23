@@ -1,0 +1,8 @@
+{
+	"name": "snap-platforms-bigcommerce",
+	"private": true,
+	"description": "Snap BigCommerce Platform Library",
+	"main": "../dist/cjs/bigcommerce/src/index.js",
+	"module": "../dist/esm/bigcommerce/src/index.js",
+	"sideEffects": false
+}

@@ -39,14 +39,15 @@ export class RecommendationStore extends AbstractStore {
 
 	public update(data?: RecommendCombinedResponseModel & { meta?: MetaResponseModel }): void {
 		this.error = undefined;
-		this.loaded = !!data?.profile;
 		this.meta = new MetaStore(data?.meta);
 		this.profile = new RecommendationProfileStore(this.services, data);
-		this.results = new SearchResultStore(this.config, this.services, this.meta.data, data?.results) as Product[];
+		this.results = new SearchResultStore(this.config, this.services, this.meta.data, data?.results, undefined, undefined, this.loaded) as Product[];
 
 		// only create a cart store when type is bundle
 		if (this.profile.type == 'bundle') {
 			this.cart = new CartStore();
 		}
+
+		this.loaded = !!data?.profile;
 	}
 }
