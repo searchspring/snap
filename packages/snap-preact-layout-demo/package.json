@@ -19,7 +19,7 @@
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.53.2",
+		"@searchspring/snap-preact": "^0.56.1",
 		"preact": "10.9.0"
 	},
 	"devDependencies": {

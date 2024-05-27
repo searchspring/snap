@@ -3,15 +3,16 @@ import { makeObservable, observable } from 'mobx';
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { SearchPaginationStore } from '../Search/Stores';
-import { StorageStore, StorageType } from '../Storage/StorageStore';
+import { StorageStore } from '../Storage/StorageStore';
 import { FinderSelectionStore } from './Stores';
 import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
+import { MetaStore } from '../Meta/MetaStore';
 
 export class FinderStore extends AbstractStore {
 	public services: StoreServices;
 	public config!: FinderStoreConfig;
-	public meta: MetaResponseModel = {};
+	public meta!: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
@@ -31,7 +32,7 @@ export class FinderStore extends AbstractStore {
 
 		if (config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
-				type: StorageType.LOCAL,
+				type: 'local',
 				key: `ss-${config.id}-persisted`,
 			});
 		}
@@ -94,15 +95,15 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	public update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
+	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = data.meta;
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
+		this.meta = new MetaStore(data.meta);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.selections = new FinderSelectionStore(this.config, this.services, {
 			state: this.state,
 			facets: data.facets || [],
-			meta: this.meta,
+			meta: this.meta.data,
 			loading: this.loading,
 			storage: this.storage,
 			selections: selectedSelections || [],

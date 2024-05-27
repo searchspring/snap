@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.1](https://github.com/searchspring/snap/compare/v0.56.0...v0.56.1) (2024-05-23)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.56.0](https://github.com/searchspring/snap/compare/v0.55.0...v0.56.0) (2024-05-23)
+
+### Bug Fixes
+
+- **preact/createrecommendationcontroller:** fixing test after typing change ([2bda50b](https://github.com/searchspring/snap/commit/2bda50bfb06477bc90d7f79040005aa94c599efa))
+- **store-mobx/cart:** typecasting price and MSRP in cart for edge cases where values are strings ([1627d90](https://github.com/searchspring/snap/commit/1627d90039514e5b5a38b8ed8766d08ee58ad824))
+- **store-mobx/searchresultstore:** adding an optional chain for cases when the config is undefined ([b847c18](https://github.com/searchspring/snap/commit/b847c1847c39e040ae619a98d68b71558cf6a6d6))
+
+### Features
+
+- **preact-components-variantselection:** variantSelection & supporting components & option mappings ([f4a4001](https://github.com/searchspring/snap/commit/f4a4001cef1b63c351f3c8f1e8b7ab79242dc4b0))
+- **snap-platforms:** snap-platforms added for shopify, bigc, & magento2 ([3fbd797](https://github.com/searchspring/snap/commit/3fbd797a149e08beec5da21407d233c90326350e))
+
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Bug Fixes
+
+- add right css property to OverlayBadge ([30b4f5a](https://github.com/searchspring/snap/commit/30b4f5a5dd86cd0f397906c0817925e664505524))
+- only lift badges if an object ([9db11fb](https://github.com/searchspring/snap/commit/9db11fb9d44798019c7589f3f7be2d66a9522e85))
+- pr feedback ([c977223](https://github.com/searchspring/snap/commit/c977223ccfc6c9be649d05028981c2f189b811d6))
+- **preact-components-badges:** some small bugfixes to new badge components ([3ba9fd9](https://github.com/searchspring/snap/commit/3ba9fd944cf8e966a7bc7a3f9c42f2dc84d691e6))
+- **preact-components/overlaybadge:** restoring lost positioning of the 'right' section (align right) ([fc72bbc](https://github.com/searchspring/snap/commit/fc72bbc2698868f86a3f515a7417f49b3da82eab))
+- remove getTag helper ([9cc4a72](https://github.com/searchspring/snap/commit/9cc4a72d96247357a5114adb771b370f5d7fd109))
+- remove opacity from BadgePill and BadgeRectangle color default ([0daf2d8](https://github.com/searchspring/snap/commit/0daf2d892fe36c8d3d292b76055815bc85e624ed))
+- update badges to latest meta changes ([c06ec17](https://github.com/searchspring/snap/commit/c06ec17e3ef934cb4813b27959c8411b9f9e2bd8))
+
+### Features
+
+- add BadgePill and BadgeRectangle components ([6ffb28b](https://github.com/searchspring/snap/commit/6ffb28b29584f6bd5a5af1755279a0cbfcf03c27))
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+- initial badge component ([a8aaad9](https://github.com/searchspring/snap/commit/a8aaad91496d7b4808973612fdf818d8db7e10e2))
+
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Bug Fixes
+
+- **client:** add window checks to NetworkCache ([2c44dc9](https://github.com/searchspring/snap/commit/2c44dc9af5a9425021b9d34c1cc5a88dba23f05b))
+- **controller/autocomplete:** fixing issue where searches were being duplicated initially ([595d5c1](https://github.com/searchspring/snap/commit/595d5c14eb877c497c8fa5da3690d6cd2b9f006c))
+- **preact-components-carousel:** add backwards compatible classnames on each rerender of carousel ([240d9bf](https://github.com/searchspring/snap/commit/240d9bfee9de5230a48792bee56563328cbfae5b))
+
+### Features
+
+- **client:** adding 'fetchApi' configuration and fallback for windowless environments ([c88da99](https://github.com/searchspring/snap/commit/c88da990c00fcfb223ac10ada387f1e2467addf6))
+- **resultstore:** adding setVariants function to give a way to set variant data after initializatio ([5c0c0fb](https://github.com/searchspring/snap/commit/5c0c0fbab2e47c9dfd9f416bb6986cd991b7c809))
+- **searchresultstore:** adding ability to pre select variant options ([551055a](https://github.com/searchspring/snap/commit/551055ada41ec6d23930afeb7fd9dacd2fbba272))
+- **variants:** adding preselected variants to config. & adding eventManager to Snap Preact ([acac381](https://github.com/searchspring/snap/commit/acac3812771b6e66f89472e65357eeff4a3cb8c1))
+
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+### Bug Fixes
+
+- **preact-components-carousel:** bugfix for backwards compatible classnames on carousel re-renders ([0fbbf29](https://github.com/searchspring/snap/commit/0fbbf29134dfedb35bf1327b47673a7e91e9fd36))
+
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+### Bug Fixes
+
+- **preact-components-carousel:** changing the default value for autoAdjustSlides to false ([1abe427](https://github.com/searchspring/snap/commit/1abe42754debfacb584a3c4b3650f4de24473faa))
+
 ## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
 
 ### Bug Fixes

@@ -132,7 +132,7 @@ describe('List Component', () => {
 		const selectFn = jest.fn();
 		const selectIndex = 1;
 
-		const rendered = render(<List options={options} onSelect={selectFn} selected={options[1]} />);
+		const rendered = render(<List requireSelection={false} options={options} onSelect={selectFn} selected={options[selectIndex]} />);
 
 		const element = rendered.container.querySelector('.ss__list')!;
 		let optionElements = element.querySelectorAll('.ss__list__option');
@@ -141,7 +141,7 @@ describe('List Component', () => {
 
 		expect(selected).toBeInTheDocument();
 
-		expect(selected?.querySelector('.ss__list__option__label')?.innerHTML).toBe(options[1].label);
+		expect(selected?.querySelector('.ss__list__option__label')?.innerHTML).toBe(options[selectIndex].label);
 
 		optionElements = element.querySelectorAll('.ss__list__option');
 
@@ -153,6 +153,7 @@ describe('List Component', () => {
 			}
 		});
 
+		// unselect original selection
 		await userEvent.click(optionElements[selectIndex]);
 
 		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], []);
@@ -160,6 +161,41 @@ describe('List Component', () => {
 		selected = rendered.container.querySelector('.ss__list__option--selected');
 
 		expect(selected).not.toBeInTheDocument();
+	});
+
+	it('can use requireSelection to prevent empty selection', async () => {
+		const selectFn = jest.fn();
+		const selectIndex = 1;
+
+		const rendered = render(<List requireSelection={true} options={options} onSelect={selectFn} selected={options[selectIndex]} />);
+
+		const element = rendered.container.querySelector('.ss__list')!;
+		let optionElements = element.querySelectorAll('.ss__list__option');
+
+		let selected = rendered.container.querySelector('.ss__list__option--selected');
+
+		expect(selected).toBeInTheDocument();
+
+		expect(selected?.querySelector('.ss__list__option__label')?.innerHTML).toBe(options[selectIndex].label);
+
+		optionElements = element.querySelectorAll('.ss__list__option');
+
+		optionElements.forEach((optionElement, index) => {
+			if (index != selectIndex) {
+				expect(optionElement).not.toHaveClass('ss__list__option--selected');
+			} else {
+				expect(optionElement).toHaveClass('ss__list__option--selected');
+			}
+		});
+
+		// fail to unselect original selection
+		await userEvent.click(optionElements[selectIndex]);
+
+		expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex], [options[selectIndex]]);
+
+		selected = rendered.container.querySelector('.ss__list__option--selected');
+
+		expect(selected).toBeInTheDocument();
 	});
 
 	it('uses label when passed, and value if not', async () => {
@@ -193,10 +229,10 @@ describe('List Component', () => {
 		expect(styles.pointerEvents).toBe('none');
 	});
 
-	it('it can multi-select', async () => {
+	it('it can use multi-select with prop', async () => {
 		const selectFn = jest.fn();
 
-		const rendered = render(<List options={options} onSelect={selectFn} />);
+		const rendered = render(<List multiSelect={true} options={options} onSelect={selectFn} />);
 
 		const optionElements = rendered.container?.querySelectorAll('.ss__list__option');
 
@@ -225,10 +261,10 @@ describe('List Component', () => {
 		expect(optionElements[1]).not.toHaveClass('ss__list__option--selected');
 	});
 
-	it('it can turn off multi-select', async () => {
+	it('it does not use multi-select by default', async () => {
 		const selectFn = jest.fn();
 
-		const rendered = render(<List multiSelect={false} options={options} onSelect={selectFn} />);
+		const rendered = render(<List options={options} onSelect={selectFn} />);
 
 		const optionElements = rendered.container?.querySelectorAll('.ss__list__option');
 
@@ -297,7 +333,7 @@ describe('List Component', () => {
 		expect(optionElements).toBeInTheDocument();
 
 		expect(optionElements.innerHTML).toBe(
-			`<span class=\"ss__checkbox ss-v51376-I\" aria-label=\" unchecked checkbox\" role=\"checkbox\" aria-checked=\"false\"><span class=\"ss__checkbox__empty\"></span></span>`
+			`<span class=\"ss__checkbox ss-v51376-I\" aria-label=\" unchecked checkbox\" role=\"checkbox\"><span class=\"ss__checkbox__empty\"></span></span>`
 		);
 
 		await userEvent.click(optionElements);

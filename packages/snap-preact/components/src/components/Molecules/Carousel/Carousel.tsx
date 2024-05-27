@@ -190,7 +190,12 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
-		autoAdjustSlides: true,
+		autoAdjustSlides: false,
+		// global theme
+		...globalTheme?.components?.carousel,
+		//props
+		...properties,
+		...properties.theme?.components?.carousel,
 	};
 
 	let props = mergeProps('carousel', globalTheme, defaultProps, properties);
@@ -287,7 +292,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 		//add usable class to last visible slide.
 		attachClasstoLastVisibleSlide();
-	}, []);
+	}, [properties]);
 
 	if (pagination) {
 		if (typeof pagination == 'object') {

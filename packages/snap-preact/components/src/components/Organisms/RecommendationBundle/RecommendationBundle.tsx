@@ -223,6 +223,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		throw new Error(`<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store`);
 	}
 
+	if (!(results && results.length) && !controller.store?.results?.length) {
+		throw new Error(`<BundleRecommendation> Component has no results to render!`);
+	}
+
 	const seed = results ? results[0] : controller.store?.results[0];
 
 	const subProps: RecommendationBundleSubProps = {

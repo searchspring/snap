@@ -64,14 +64,14 @@ describe('Radio Component', () => {
 			expect(svgElement).toBeInTheDocument();
 		});
 
-		it('fires onClick prop when clicked', () => {
+		it('fires onClick prop when clicked', async () => {
 			const clickFn = jest.fn();
 
 			const rendered = render(<Radio onClick={clickFn} />);
 
 			const RadioElement = rendered.container.querySelector('.ss__radio')!;
 
-			userEvent.click(RadioElement);
+			await userEvent.click(RadioElement);
 			expect(clickFn).toHaveBeenCalled();
 		});
 
@@ -233,14 +233,14 @@ describe('Radio Component', () => {
 			expect(inputElement?.checked).toBe(true);
 		});
 
-		it('fires onClick prop when clicked', () => {
+		it('fires onClick prop when clicked', async () => {
 			const clickFn = jest.fn();
 
 			const rendered = render(<Radio native onClick={clickFn} />);
 
 			const RadioElement = rendered.container.querySelector('.ss__radio__input')!;
 
-			userEvent.click(RadioElement);
+			await userEvent.click(RadioElement);
 			expect(clickFn).toHaveBeenCalled();
 		});
 

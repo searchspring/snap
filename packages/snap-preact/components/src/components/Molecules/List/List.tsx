@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
@@ -10,32 +11,37 @@ import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { useA11y } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { filters } from '@searchspring/snap-toolbox';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
 		css({
-			'& .ss__list__options-wrapper': {
+			display: 'flex',
+			flexDirection: horizontal ? 'row' : 'column',
+			alignItems: horizontal ? 'center' : undefined,
+			justifyItems: 'flex-start',
+			gap: '5px',
+
+			'& .ss__list__options': {
 				border: 'none',
 				listStyle: 'none',
 				padding: '0px',
 				margin: '0px',
-				display: `${horizontal ? 'flex' : 'initial'}`,
-			},
-
-			'.ss__list__title': {
-				margin: '0px',
-				padding: '5px',
+				display: 'flex',
+				flexDirection: horizontal ? 'row' : 'column',
+				alignItems: horizontal ? 'center' : undefined,
+				justifyItems: 'flex-start',
+				gap: '5px',
 			},
 
 			'.ss__list__option': {
 				cursor: 'pointer',
 				display: 'flex',
 				alignItems: 'center',
-				padding: '5px',
+				gap: '5px',
 
 				'& .ss__list__option__label , .ss__list__option__icon': {
 					cursor: 'pointer',
-					padding: '0px 0px 0px 5px',
 				},
 			},
 
@@ -44,6 +50,12 @@ const CSS = {
 				pointerEvents: 'none',
 				opacity: 0.5,
 			},
+
+			'&.ss__list--disabled, .ss__list__option--unavailable': {
+				cursor: 'pointer',
+				opacity: 0.5,
+			},
+
 			'.ss__list__option--selected': {
 				fontWeight: 'bold',
 			},
@@ -52,8 +64,13 @@ const CSS = {
 
 export function List(properties: ListProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<ListProps> = {
-		multiSelect: true,
+	const defaultProps: ListProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.list,
+		// props
+		...properties,
+		...properties.theme?.components?.list,
 	};
 
 	const props = mergeProps('list', globalTheme, defaultProps, properties);
@@ -68,6 +85,7 @@ export function List(properties: ListProps): JSX.Element {
 		hideOptionCheckboxes,
 		disabled,
 		options,
+		requireSelection,
 		disableStyles,
 		className,
 		style,
@@ -117,29 +135,36 @@ export function List(properties: ListProps): JSX.Element {
 	const [selection, setSelection] = useState((selected as ListOption[]) || []);
 
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
-		if (multiSelect) {
-			let newArray: ListOption[];
+		let newArray: ListOption[];
 
+		if (multiSelect) {
 			if (selection.find((select) => select.value === option.value)) {
 				newArray = [...selection];
+
 				newArray.splice(
 					newArray.findIndex((select) => select.value === option.value),
 					1
 				);
+
+				if (newArray.length == 0 && requireSelection) {
+					newArray = [option];
+				}
 			} else {
 				newArray = [...selection, option];
 			}
-
-			if (onSelect) {
-				onSelect(e, option, newArray);
-			}
-			setSelection(newArray);
 		} else {
-			if (onSelect) {
-				onSelect(e, option, [option]);
+			if (!requireSelection && selection.find((select) => select.value === option.value)) {
+				newArray = [];
+			} else {
+				newArray = [option];
 			}
-			setSelection([option]);
 		}
+
+		if (onSelect) {
+			onSelect(e, option, newArray);
+		}
+
+		setSelection(newArray);
 	};
 
 	return typeof options == 'object' && options?.length ? (
@@ -147,14 +172,18 @@ export function List(properties: ListProps): JSX.Element {
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
 
-				<ul className={`ss__list__options-wrapper`} role="listbox" aria-label={titleText}>
+				<ul className={`ss__list__options`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 						return (
 							<li
-								className={`ss__list__option ${selected ? 'ss__list__option--selected' : ''} ${option.disabled ? 'ss__list__option--disabled' : ''}`}
+								className={classnames(`ss__list__option ss__list__option--${filters.handleize(option.value.toString())}`, {
+									'ss__list__option--selected': selected,
+									'ss__list__option--disabled': option?.disabled,
+									'ss__list__option--unavailable': option?.available === false,
+								})}
 								ref={(e) => useA11y(e)}
-								onClick={(e) => !disabled && makeSelection(e as any, option)}
+								onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 								title={option.label}
 								role="option"
 								aria-selected={selected}
@@ -194,6 +223,7 @@ export interface ListProps extends ComponentProps {
 	horizontal?: boolean;
 	native?: boolean;
 	selected?: ListOption | ListOption[];
+	requireSelection?: boolean;
 }
 
 interface ListSubProps {

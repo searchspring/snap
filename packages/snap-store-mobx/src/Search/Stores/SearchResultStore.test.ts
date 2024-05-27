@@ -5,6 +5,7 @@ import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types
 
 import { Banner, Product, SearchResultStore, ProductMask, Variants, Variant, VariantSelection, VariantData } from './SearchResultStore';
 import { parse } from 'uuid';
+import { StoreConfigs, VariantConfig } from '../../types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -27,13 +28,13 @@ describe('SearchResultStore', () => {
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		// @ts-ignore
-		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined);
+		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new SearchResultStore(searchConfig, services, [], undefined, undefined);
+		const results = new SearchResultStore(searchConfig, services, {}, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
@@ -41,7 +42,7 @@ describe('SearchResultStore', () => {
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results?.length);
 	});
@@ -49,7 +50,7 @@ describe('SearchResultStore', () => {
 	it('has result data that matches what was passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -126,7 +127,14 @@ describe('SearchResultStore', () => {
 		it('has a mask property and also a display property that "masks"" the core fields and attributes', () => {
 			const searchData = mockData.searchMeta();
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			results.forEach((result, index) => {
 				// check display properties
@@ -169,7 +177,14 @@ describe('SearchResultStore', () => {
 		it('can use the mask with the display property', () => {
 			const searchData = mockData.searchMeta();
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			const firstProduct = results[0] as Product;
 
 			const maskData = { mappings: { core: { name: 'new name', price: 1.0 } }, attributes: { special: 'thing' } };
@@ -194,7 +209,14 @@ describe('SearchResultStore', () => {
 				},
 			};
 
-			const results = new SearchResultStore(variantSearchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 
 			results.forEach((result, index) => {
@@ -208,6 +230,380 @@ describe('SearchResultStore', () => {
 				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
 				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 			});
+		});
+
+		it('can use variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[2].attributes.ss_variants;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+				(result as Product).variants?.update(parsedVariantDataToUse);
+
+				expect((result as Product).variants).toBeDefined();
+
+				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+			});
+		});
+
+		it('can be configured to preselect certain variants', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('uses the original constructed config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants as string;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
+
+			const resultForTest = results[0] as Product;
+
+			const productData = searchData.results && searchData.results[0];
+			const variantData = productData?.attributes?.ss_variants;
+
+			expect(variantData).toBeDefined();
+
+			const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+			const variants = (resultForTest as Product).variants;
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('can use a different config when calling variants.update', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								preSelected: ['mirage', 'khaki', 'desert'],
+							},
+							size: {
+								preSelected: ['32'],
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const variantDataToUse = results[0].attributes.ss_variants as string;
+			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
+
+			const resultForTest = results[0] as Product;
+
+			const productData = searchData.results && searchData.results[0];
+			const variantData = productData?.attributes?.ss_variants;
+
+			expect(variantData).toBeDefined();
+
+			const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+			const variants = (resultForTest as Product).variants;
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const colorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const sizeSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'size');
+			expect(sizeSelection).toBeDefined();
+			expect(colorSelection).toBeDefined();
+
+			const colorSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[colorSelection?.field!].preSelected;
+			const sizeSettings =
+				variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[sizeSelection?.field!].preSelected;
+
+			expect(colorSettings).toContain(colorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(sizeSettings).toContain(sizeSelection?.selected?.value?.toLocaleLowerCase());
+
+			//now lets make a new config with different settings and run update with it
+
+			const newVariantsConfig: VariantConfig = {
+				field: 'ss_variants',
+				options: {
+					color: {
+						preSelected: ['scout'],
+					},
+					inseam: {
+						preSelected: ['34'],
+					},
+				},
+			};
+
+			expect(variantData).toBeDefined();
+
+			expect(variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+
+			(resultForTest as Product).variants?.update(parsedVariantDataToUse, newVariantsConfig);
+
+			expect((resultForTest as Product).variants).toBeDefined();
+
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
+
+			expect(resultForTest).toBeDefined();
+
+			const newcolorSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			const newinseamSelection = resultForTest.variants?.selections.find((selection) => selection.field == 'inseam');
+
+			expect(newinseamSelection).toBeDefined();
+			expect(newcolorSelection).toBeDefined();
+
+			const newcolorSettings = newVariantsConfig.options && newVariantsConfig.options[newcolorSelection?.field!]?.preSelected;
+			const newinseamSettings = newVariantsConfig.options && newVariantsConfig.options[newinseamSelection?.field!]?.preSelected;
+
+			expect(newcolorSettings).toContain(newcolorSelection?.selected?.value?.toLocaleLowerCase());
+			expect(newinseamSettings).toContain(newinseamSelection?.selected?.value?.toLocaleLowerCase());
+		});
+
+		it('can use the "thumbnailBackgroundImages" option to set the backgroundImageUrl for each variant to the variant thumbnailImageUrl', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			expect(selection).toBeDefined();
+
+			selection?.values.forEach((value) => {
+				console.log(value);
+				expect(value.backgroundImageUrl).toEqual(value.thumbnailImageUrl);
+			});
+		});
+
+		it('can use variantMappings', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						options: {
+							color: {
+								label: 'myColor',
+								thumbnailBackgroundImages: true,
+								mappings: {
+									['mirage']: {
+										label: 'notMirage',
+										background: 'mirage',
+										backgroundImageUrl: 'mirage',
+									},
+								},
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == 'color');
+			expect(selection).toBeDefined();
+
+			const settings = variantSearchConfig.settings?.variants?.options && variantSearchConfig.settings?.variants?.options[selection?.field!];
+			expect(selection?.label).toEqual(settings?.label);
+			const selectionValueWithMappings = selection?.values.find((val) => val.value.toLowerCase() == 'mirage')!;
+
+			const mappedLabel = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.label;
+			const mappedBackground = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.background;
+			const mappedBackgroundImageUrl = settings?.mappings && settings.mappings[selectionValueWithMappings?.value.toLowerCase()]?.backgroundImageUrl;
+
+			expect(selectionValueWithMappings?.label).toEqual(mappedLabel);
+			expect(selectionValueWithMappings?.background).toEqual(mappedBackground);
+			expect(selectionValueWithMappings?.backgroundImageUrl).toEqual(mappedBackgroundImageUrl);
 		});
 
 		describe('variant class', () => {
@@ -327,14 +723,14 @@ describe('SearchResultStore', () => {
 					expect(selection).toHaveProperty('previouslySelected');
 					expect(selection).toHaveProperty('selected');
 					expect(selection).toHaveProperty('values');
-					expect(selection).toHaveProperty('refineSelections');
+					expect(selection).toHaveProperty('refineValues');
 					expect(selection).toHaveProperty('reset');
 					expect(selection).toHaveProperty('select');
 
 					expect(selection.field).toBe(dataOptionName);
 					expect(selection.label).toBe(dataOptionName);
-					expect(selection.selected).toBe(firstAvailableOption?.value);
-					expect(selection.previouslySelected).toBe('');
+					expect(selection.selected?.value).toBe(firstAvailableOption?.value);
+					expect(selection.previouslySelected).toBe(undefined);
 				});
 			});
 
@@ -345,11 +741,11 @@ describe('SearchResultStore', () => {
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants(parsedVariantData, mask);
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				variants.selections[0].select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 
@@ -362,19 +758,19 @@ describe('SearchResultStore', () => {
 				const colorSelector = variants.selections[0];
 				const sizeSelector = variants.selections[1];
 
-				const initialSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const initialSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(initialSelectedSelections).toStrictEqual(['Scout', '30', '32']);
 
 				colorSelector.select('Desert');
-				const newSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newSelectedSelections).toStrictEqual(['Desert', '30', '34']);
 
 				colorSelector.select('Mirage');
-				const newerSelectedSelections = variants.selections.map((selection) => selection.selected);
+				const newerSelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(newerSelectedSelections).toStrictEqual(['Mirage', '36', '34']);
 
 				sizeSelector.select('30');
-				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected);
+				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(previouslySelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
 		});
@@ -384,7 +780,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
@@ -393,7 +789,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -406,7 +802,7 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page2');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -417,7 +813,7 @@ describe('SearchResultStore', () => {
 		it('correctly splices four inline banners into the results array with low numbers of results', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners-x4');
 
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(11);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -473,11 +869,159 @@ describe('SearchResultStore', () => {
 					},
 				},
 			};
-			const results = new SearchResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
 			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
+		});
+	});
+	describe('with badges', () => {
+		it('has overlay result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 0;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+			});
+
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual([result.badges.all[0]]);
+		});
+
+		it('has callout result badges', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const indexOfOverlayBadge = 2;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			expect(result.badges.all[0]).toHaveProperty('tag');
+			expect(result.badges.all[0]).toHaveProperty('location');
+			expect(result.badges.all[0]).toHaveProperty('component');
+			expect(result.badges.all[0]).toHaveProperty('priority');
+			expect(result.badges.all[0]).toHaveProperty('enabled');
+			expect(result.badges.all[0]).toHaveProperty('parameters');
+
+			const badgeMeta = searchData.meta?.badges?.tags?.[resultBadges[0].tag]!;
+			expect(badgeMeta).toBeDefined();
+
+			expect(result.badges.all[0]).toStrictEqual({
+				tag: resultBadges[0].tag,
+				value: resultBadges[0].value,
+				location: badgeMeta.location,
+				component: badgeMeta.component,
+				priority: badgeMeta.priority,
+				enabled: badgeMeta.enabled,
+				parameters: badgeMeta.parameters,
+			});
+
+			expect(result.badges.locations.callout).toStrictEqual({
+				[badgeMeta.location.split('/')[1]]: [result.badges.all[0]],
+			});
+		});
+
+		it('has sorted badges based on priority', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const indexOfOverlayBadge = 1;
+			const result = results[indexOfOverlayBadge] as Product;
+			expect(result.badges?.all).toBeDefined();
+
+			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			expect(resultBadges).toBeDefined();
+			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
+
+			const badgeMeta = searchData.meta?.badges?.tags!;
+			expect(badgeMeta).toBeDefined();
+
+			// raw result badges should have two badges, first one with priority 2, second one with priority 1
+			expect(badgeMeta[resultBadges[0].tag].priority).toBeGreaterThan(badgeMeta[resultBadges[1].tag].priority);
+
+			// result badges should be sorted by priority in the store
+			expect(result.badges.all[0].priority).toBeLessThan(result.badges.all[1].priority);
+
+			// mock data should have two overlay badges with the same same location
+			expect(result.badges.all[0].location).toBe(result.badges.all[1].location);
+			expect(result.badges.all[0].priority).not.toBe(result.badges.all[1].priority);
+
+			// result.overlay should only return 1 badge per location based on priority
+			expect(result.badges.atLocation(['left', 'right'])).toStrictEqual(result.badges.all);
+		});
+
+		it('has helper method atLocation and tags getter', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			const result = results[0] as Product;
+			expect(result.badges.all.length).toBe(1);
+
+			const badge = result.badges.all[0];
+			expect(result.badges.atLocation(badge.location)).toStrictEqual(result.badges.all);
+			expect(result.badges.tags).toStrictEqual({
+				[badge.tag]: badge,
+			});
 		});
 	});
 });

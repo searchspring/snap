@@ -64,14 +64,14 @@ describe('Overlay Component', () => {
 		expect(overlayElement?.classList).toContain(args.className);
 	});
 
-	it('fires onClick prop when clicked', () => {
+	it('fires onClick prop when clicked', async () => {
 		const args = {
 			active: true,
 			onClick: jest.fn(),
 		};
 		const rendered = render(<Overlay {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay')!;
-		userEvent.click(overlayElement);
+		await userEvent.click(overlayElement);
 		expect(args.onClick).toHaveBeenCalled();
 	});
 

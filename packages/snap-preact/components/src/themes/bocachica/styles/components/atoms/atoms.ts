@@ -1,5 +1,8 @@
 // ATOMS
-export { badge } from './badge';
+export { badgeImage } from './badgeimage';
+export { badgePill } from './badgepill';
+export { badgeRectangle } from './badgerectangle';
+export { badgeText } from './badgetext';
 export { banner } from './banner';
 export { breadcrumbs } from './breadcrumbs';
 export { button } from './button';

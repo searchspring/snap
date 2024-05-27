@@ -94,13 +94,13 @@ describe('FacetHierarchyOptions generic props work', () => {
 		expect(hierarchyOption).toHaveClass(className);
 	});
 
-	it('can set custom onClick func', () => {
+	it('can set custom onClick func', async () => {
 		const onClickFunc = jest.fn();
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values as FacetHierarchyValue[]} onClick={onClickFunc} />);
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option')!;
 		expect(hierarchyOption).toBeInTheDocument();
-		userEvent.click(hierarchyOption);
+		await userEvent.click(hierarchyOption);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });

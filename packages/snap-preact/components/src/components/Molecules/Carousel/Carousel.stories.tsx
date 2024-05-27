@@ -126,14 +126,14 @@ export default {
 			control: { type: 'object' },
 		},
 		autoAdjustSlides: {
-			defaultValue: true,
+			defaultValue: false,
 			description:
 				'If true and children length is less than the current breakpoint slidesPerView value, slidesPerView and slidesPerGroup will be set to the children length and loop to false',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},

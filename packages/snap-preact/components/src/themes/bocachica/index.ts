@@ -54,8 +54,17 @@ export const bocachica: Theme = {
 	components: {
 		// component theme prop overrides
 		// ATOMS
-		badge: {
-			...style.components.badge,
+		badgeImage: {
+			...style.components.badgeImage,
+		},
+		badgePill: {
+			...style.components.badgePill,
+		},
+		badgeRectangle: {
+			...style.components.badgeRectangle,
+		},
+		badgeText: {
+			...style.components.badgeText,
 		},
 		banner: {
 			...style.components.banner,

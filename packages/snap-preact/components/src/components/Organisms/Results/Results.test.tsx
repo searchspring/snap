@@ -4,15 +4,22 @@ import { Results } from './Results';
 import { ResultsLayout as Layout } from '../../../types';
 import { Theme, ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
-import type { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
 import { MockData } from '@searchspring/snap-shared';
-import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-const searchResponse: SearchResponseModel = mockData.search();
+const searchResponse = mockData.searchMeta();
 
-const mockResults = searchResponse.results as SearchResultStore;
+const mockResults = new SearchResultStore(
+	{ id: 'test' },
+	{ urlManager: new UrlManager(new UrlTranslator()) },
+	searchResponse.meta,
+	searchResponse.results,
+	searchResponse.pagination,
+	searchResponse.merchandising
+);
 
 describe('Results Component', () => {
 	const DetailSlot = () => {

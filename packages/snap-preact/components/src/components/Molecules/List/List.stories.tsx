@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { List, ListProps } from './List';
-import { componentArgs, highlightedCode } from '../../../utilities';
+import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
@@ -14,15 +14,7 @@ export default {
 		docs: {
 			page: () => (
 				<div>
-					<Markdown
-						options={{
-							overrides: {
-								code: highlightedCode,
-							},
-						}}
-					>
-						{Readme}
-					</Markdown>
+					<Readme />
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -81,13 +73,23 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		requireSelection: {
+			description: 'enable/disable requireSelection',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		multiSelect: {
 			description: 'enable/disable multiselect',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -184,29 +186,33 @@ DisabledOption.args = {
 	],
 } as ListProps;
 
+const viewOptions = [
+	{
+		label: '1 wide',
+		value: '1 wide',
+		icon: 'square',
+	},
+	{
+		label: '2 wide',
+		value: '2 wide',
+		icon: {
+			icon: 'layout-large',
+		},
+	},
+	{
+		label: '3 wide',
+		value: '3 wide',
+		icon: {
+			icon: 'layout-grid',
+		},
+	},
+];
+
 export const Icons = (args: ListProps) => <List {...args} />;
 Icons.args = {
-	options: [
-		{
-			label: '1 wide',
-			value: '1 wide',
-			icon: 'square',
-		},
-		{
-			label: '2 wide',
-			value: '2 wide',
-			icon: {
-				icon: 'layout-large',
-			},
-		},
-		{
-			label: '3 wide',
-			value: '3 wide',
-			icon: {
-				icon: 'layout-grid',
-			},
-		},
-	],
+	requireSelection: true,
+	options: viewOptions,
+	selected: viewOptions[0],
 } as ListProps;
 
 export const PerPage = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
@@ -224,8 +230,8 @@ PerPage.loaders = [
 
 PerPage.args = {
 	titleText: 'Per Page',
-	multiSelect: false,
-} as ListProps;
+	requireSelection: true,
+} as Partial<ListProps>;
 
 export const SortBy = (args: ListProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <List {...args} options={controller?.store?.sorting.options} selected={controller?.store?.sorting.current} />;
@@ -242,5 +248,5 @@ SortBy.loaders = [
 
 SortBy.args = {
 	titleText: 'Sort By',
-	multiSelect: false,
-} as ListProps;
+	requireSelection: true,
+} as Partial<ListProps>;

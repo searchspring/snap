@@ -86,13 +86,13 @@ describe('FacetListOptions generic props work', () => {
 		expect(listOption).toHaveClass(className);
 	});
 
-	it('can set custom onClick func', () => {
+	it('can set custom onClick func', async () => {
 		const onClickFunc = jest.fn();
 		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} onClick={onClickFunc} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		expect(listOption).toBeInTheDocument();
-		userEvent.click(listOption);
+		await userEvent.click(listOption);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });

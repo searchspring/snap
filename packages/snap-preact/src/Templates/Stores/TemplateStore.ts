@@ -60,7 +60,7 @@ export class TemplatesStore {
 
 	constructor(config: SnapTemplatesConfig, settings: TemplatesStoreSettings) {
 		this.config = config;
-		this.storage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-templates' });
+		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
 		this.dependencies = {
 			storage: this.storage,

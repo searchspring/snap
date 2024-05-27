@@ -101,7 +101,7 @@ describe('FilterSummary Component', () => {
 		expect(seperatorElem).toHaveTextContent(sep);
 	});
 
-	it('renders with custom onclick func', () => {
+	it('renders with custom onclick func', async () => {
 		const onclickfunc = jest.fn();
 
 		const rendered = render(<FilterSummary filters={filters} onClick={onclickfunc} />);
@@ -112,12 +112,12 @@ describe('FilterSummary Component', () => {
 
 		expect(filter).toBeInTheDocument();
 
-		userEvent.click(filter);
+		await userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
 	});
 
-	it('renders with custom on clear all click func', () => {
+	it('renders with custom on clear all click func', async () => {
 		const onclickfunc = jest.fn();
 
 		const rendered = render(<FilterSummary filters={filters} onClearAllClick={onclickfunc} />);
@@ -128,7 +128,7 @@ describe('FilterSummary Component', () => {
 
 		expect(filter).toBeInTheDocument();
 
-		userEvent.click(filter);
+		await userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
 	});

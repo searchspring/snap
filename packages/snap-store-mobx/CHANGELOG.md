@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.1](https://github.com/searchspring/snap/compare/v0.56.0...v0.56.1) (2024-05-23)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.56.0](https://github.com/searchspring/snap/compare/v0.55.0...v0.56.0) (2024-05-23)
+
+### Bug Fixes
+
+- **store-mobx/cart:** typecasting price and MSRP in cart for edge cases where values are strings ([1627d90](https://github.com/searchspring/snap/commit/1627d90039514e5b5a38b8ed8766d08ee58ad824))
+- **store-mobx/searchresultstore:** adding an optional chain for cases when the config is undefined ([b847c18](https://github.com/searchspring/snap/commit/b847c1847c39e040ae619a98d68b71558cf6a6d6))
+
+### Features
+
+- **preact-components-variantselection:** variantSelection & supporting components & option mappings ([f4a4001](https://github.com/searchspring/snap/commit/f4a4001cef1b63c351f3c8f1e8b7ab79242dc4b0))
+
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Bug Fixes
+
+- pr feedback ([c977223](https://github.com/searchspring/snap/commit/c977223ccfc6c9be649d05028981c2f189b811d6))
+- **preact-components-badges:** some small bugfixes to new badge components ([3ba9fd9](https://github.com/searchspring/snap/commit/3ba9fd944cf8e966a7bc7a3f9c42f2dc84d691e6))
+- remove getTag helper ([9cc4a72](https://github.com/searchspring/snap/commit/9cc4a72d96247357a5114adb771b370f5d7fd109))
+- update badges to latest meta changes ([c06ec17](https://github.com/searchspring/snap/commit/c06ec17e3ef934cb4813b27959c8411b9f9e2bd8))
+
+### Features
+
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+- initial badge component ([a8aaad9](https://github.com/searchspring/snap/commit/a8aaad91496d7b4808973612fdf818d8db7e10e2))
+
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Features
+
+- **resultstore:** adding setVariants function to give a way to set variant data after initializatio ([5c0c0fb](https://github.com/searchspring/snap/commit/5c0c0fbab2e47c9dfd9f416bb6986cd991b7c809))
+- **searchresultstore:** adding ability to pre select variant options ([551055a](https://github.com/searchspring/snap/commit/551055ada41ec6d23930afeb7fd9dacd2fbba272))
+- **variants:** adding preselected variants to config. & adding eventManager to Snap Preact ([acac381](https://github.com/searchspring/snap/commit/acac3812771b6e66f89472e65357eeff4a3cb8c1))
+
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
 ## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

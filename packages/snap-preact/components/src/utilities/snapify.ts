@@ -1,3 +1,6 @@
+import { h } from 'preact';
+
+import { configure as configureMobx } from 'mobx';
 import { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, AutocompleteStore, RecommendationStore } from '@searchspring/snap-store-mobx';
@@ -17,6 +20,9 @@ type CreateConfig = {
 	};
 	controller: SearchControllerConfig | AutocompleteControllerConfig | RecommendationControllerConfig;
 };
+
+// configure MobX
+configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
 
 const controllers: {
 	[id: string]: SearchController | AutocompleteController | RecommendationController;

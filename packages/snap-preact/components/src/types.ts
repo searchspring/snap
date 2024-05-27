@@ -7,6 +7,7 @@ import { IconProps } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
 import type { Snap } from '../../src';
 import type { DeepPartial } from '../../src/types';
+import { FunctionalComponent, RenderableProps } from 'preact';
 
 export interface ComponentProps {
 	name?: string;
@@ -28,6 +29,7 @@ export type ListOption = {
 	icon?: string | Partial<IconProps>;
 	overrides?: DeepPartial<Theme>;
 	url?: UrlManager;
+	available?: boolean;
 };
 
 export type ResultComponent = React.FunctionComponent<{
@@ -60,8 +62,11 @@ export enum FacetDisplay {
 	TOGGLE = 'toggle',
 }
 
+// export type BreakpointsProps = {
+// 	[key: number]: BreakpointsEntry | any;
+// };
 export type BreakpointsProps = {
-	[key: number]: BreakpointsEntry | any;
+	[key: number]: BreakpointsEntry;
 };
 
 export type BreakpointsEntry = {
@@ -69,3 +74,12 @@ export type BreakpointsEntry = {
 };
 
 export type StylingCSS = Array<SerializedStyles | string | Record<string, string> | undefined>;
+
+export type SwatchOption = ListOption & {
+	backgroundImageUrl?: string;
+	background?: string;
+};
+
+export type ComponentMap = {
+	[key: string]: (args?: any) => FunctionalComponent<RenderableProps<any>> | Promise<(args?: any) => React.ReactElement>;
+};

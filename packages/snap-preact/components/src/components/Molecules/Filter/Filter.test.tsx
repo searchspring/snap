@@ -111,14 +111,14 @@ describe('Filter Component', () => {
 		expect(separatorTextElement).not.toBeInTheDocument();
 	});
 
-	it('fires onClick prop when clicked', () => {
+	it('fires onClick prop when clicked', async () => {
 		const clickFn = jest.fn();
 
 		const rendered = render(<Filter {...args} onClick={clickFn} />);
 
 		const filterElement = rendered.container.querySelector('.ss__filter')!;
 
-		userEvent.click(filterElement);
+		await userEvent.click(filterElement);
 		expect(clickFn).toHaveBeenCalled();
 	});
 

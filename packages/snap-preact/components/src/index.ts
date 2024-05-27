@@ -1,5 +1,8 @@
 // ATOMS
-export * from './components/Atoms/Badge';
+export * from './components/Atoms/BadgeImage';
+export * from './components/Atoms/BadgePill';
+export * from './components/Atoms/BadgeRectangle';
+export * from './components/Atoms/BadgeText';
 export * from './components/Atoms/Breadcrumbs';
 export * from './components/Atoms/Button';
 export * from './components/Atoms/Dropdown';
@@ -18,6 +21,7 @@ export * from './components/Atoms/Terms';
 export * from './components/Atoms/Toggle';
 
 // MOLECULES
+export * from './components/Molecules/CalloutBadge';
 export * from './components/Molecules/Carousel';
 export * from './components/Molecules/Checkbox';
 export * from './components/Molecules/ErrorHandler';
@@ -30,6 +34,9 @@ export * from './components/Molecules/Filter';
 export * from './components/Molecules/LayoutSelector';
 export * from './components/Molecules/List';
 export * from './components/Molecules/LoadMore';
+export * from './components/Molecules/Grid';
+export * from './components/Molecules/List';
+export * from './components/Molecules/OverlayBadge';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/PerPage';
 export * from './components/Molecules/Radio';
@@ -41,6 +48,8 @@ export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
 export * from './components/Molecules/SortBy';
 export * from './components/Molecules/TemplatesEditor';
+export * from './components/Molecules/Swatches';
+export * from './components/Molecules/VariantSelection';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';

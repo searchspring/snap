@@ -3,7 +3,7 @@ import { h, Fragment } from 'preact';
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { v4 as uuidv4 } from 'uuid';
-import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
+import { SearchStore, SearchStoreConfig, Product } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -54,7 +54,7 @@ describe('Result Tracker Component', () => {
 		const rendered = render(
 			<Fragment>
 				{controller.store.results.map((result, idx) => (
-					<SearchResultTracker controller={controller} result={result}>
+					<SearchResultTracker controller={controller} result={result as Product}>
 						<div className={'findMe'} key={idx}>
 							<div className="result">{result.mappings.core?.name}</div>
 						</div>

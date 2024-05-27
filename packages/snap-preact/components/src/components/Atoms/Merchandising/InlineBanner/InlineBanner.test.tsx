@@ -22,14 +22,14 @@ describe('Merchandising Inline Banner Component', () => {
 		expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising?.content?.inline![0].value!);
 	});
 
-	it('can set a custom onClick function', () => {
+	it('can set a custom onClick function', async () => {
 		const onClickFunc = jest.fn();
 
 		const rendered = render(<InlineBanner banner={searchResponse.merchandising?.content?.inline![0] as Banner} onClick={onClickFunc} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner')!;
 		expect(merchBannerElement).toBeInTheDocument();
 
-		userEvent.click(merchBannerElement);
+		await userEvent.click(merchBannerElement);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 

@@ -5,7 +5,6 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { Dropdown, DropdownProps } from './Dropdown';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Dropdown/readme.md';
-import { Badge } from '../Badge/Badge';
 
 export default {
 	title: 'Atoms/Dropdown',
@@ -158,13 +157,13 @@ ExternalState.args = {
 export const JSXContent = (args: DropdownProps) => <Dropdown {...args} />;
 JSXContent.args = {
 	button: 'button text',
-	content: <Badge content={'jsx content - (note this component receieved the open state as a prop)'} />,
+	content: <div>jsx content - (note this component receieved the open state as a prop)</div>,
 };
 
 export const JSXChildren = (args: DropdownProps) => <Dropdown button={args.button}>{args.content}</Dropdown>;
 JSXChildren.args = {
 	button: 'button text',
-	content: <Badge content={'jsx content - (note this component receieved the open state as a prop)'} />,
+	content: <div>jsx content - (note this component receieved the open state as a prop)</div>,
 };
 
 export const StringChildren = (args: DropdownProps) => <Dropdown button={args.button}>{args.content}</Dropdown>;

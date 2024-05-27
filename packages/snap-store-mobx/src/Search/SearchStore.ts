@@ -15,10 +15,11 @@ import {
 import type { HistoryStoreConfig } from './Stores/SearchHistoryStore';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
+import { MetaStore } from '../Meta/MetaStore';
 
 export class SearchStore extends AbstractStore {
 	public services: StoreServices;
-	public meta!: MetaResponseModel;
+	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
 	public search!: SearchQueryStore;
 	public facets!: SearchFacetStore;
@@ -84,8 +85,7 @@ export class SearchStore extends AbstractStore {
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		this.loaded = !!data.pagination;
-		this.meta = data.meta || {};
+		this.meta = new MetaStore(data.meta);
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
 		this.search = new SearchQueryStore(this.services, data?.search || {});
 		this.facets = new SearchFacetStore(
@@ -94,12 +94,22 @@ export class SearchStore extends AbstractStore {
 			this.storage,
 			data.facets,
 			data?.pagination || {},
-			this.meta,
+			this.meta.data,
 			data?.merchandising || {}
 		);
-		this.filters = new SearchFilterStore(this.services, data.filters, this.meta);
-		this.results = new SearchResultStore(this.config, this.services, data?.results || [], data.pagination, data.merchandising);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta);
-		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
+		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
+		this.results = new SearchResultStore(
+			this.config,
+			this.services,
+			this.meta.data,
+			data?.results || [],
+			data.pagination,
+			data.merchandising,
+			this.loaded
+		);
+		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
+		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
+
+		this.loaded = !!data.pagination;
 	}
 }

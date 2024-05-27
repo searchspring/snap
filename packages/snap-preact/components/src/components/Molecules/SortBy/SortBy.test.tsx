@@ -61,7 +61,7 @@ describe('SortBy Component', () => {
 		expect(element).toBeInTheDocument();
 	});
 
-	it('it can do onClick things', () => {
+	it('it can do onClick things', async () => {
 		let onClick = jest.fn();
 
 		sortingStore.options.forEach((option) => (option.url.go = onClick));
@@ -70,7 +70,7 @@ describe('SortBy Component', () => {
 		const option = rendered.container.querySelectorAll('.ss__radio-list__option')[3];
 		expect(option).toBeInTheDocument();
 
-		userEvent.click(option);
+		await userEvent.click(option);
 
 		expect(onClick).toHaveBeenCalled();
 	});

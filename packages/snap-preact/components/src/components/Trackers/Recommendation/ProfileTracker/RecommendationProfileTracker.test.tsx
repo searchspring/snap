@@ -95,7 +95,7 @@ describe('RecommendationProfileTracker Component', () => {
 		trackfn.mockClear();
 
 		//click the title
-		userEvent.click(title);
+		await userEvent.click(title);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
@@ -214,7 +214,7 @@ describe('RecommendationProfileTracker Component', () => {
 		trackfn.mockClear();
 
 		//click the title
-		userEvent.click(title);
+		await userEvent.click(title);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,

@@ -54,34 +54,25 @@ const globals = {
 Optional configuration for each requester. This can be used to specifiy a development origin URL or to configure cache settings per requester.
 
 ```typescript
-export type ClientConfig = {
-  meta?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
-	search?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
-	autocomplete?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
-	finder?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
-	recommend?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
-	suggest?: {
-		origin?: string;
-		cache?: CacheConfig;
-	};
+type ClientConfig = {
+	mode?: keyof typeof AppMode | AppMode;
+	fetchApi?: WindowOrWorkerGlobalScope['fetch'];
+	meta?: RequesterConfig<MetaRequestModel>;
+	search?: RequesterConfig<SearchRequestModel>;
+	autocomplete?: RequesterConfig<AutocompleteRequestModel> & { requesters?: HybridRequesterConfig };
+	finder?: RequesterConfig<SearchRequestModel>;
+	recommend?: RequesterConfig<RecommendRequestModel>;
+	suggest?: RequesterConfig<SuggestRequestModel>;
 };
 
-export type CacheConfig = {
+type RequesterConfig<T> = {
+	origin?: string;
+	headers?: HTTPHeaders;
+	cache?: CacheConfig;
+	globals?: Partial<T>;
+};
+
+type CacheConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;

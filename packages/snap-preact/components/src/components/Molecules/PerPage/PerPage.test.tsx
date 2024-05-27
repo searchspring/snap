@@ -62,14 +62,14 @@ describe('PerPage Component', () => {
 		expect(element).toBeInTheDocument();
 	});
 
-	it('it can do setPageSize things', () => {
+	it('it can do setPageSize things', async () => {
 		let func = jest.fn();
 
 		paginationStore.setPageSize = func;
 		const rendered = render(<PerPage type={'radio'} pagination={paginationStore} />);
 		const option = rendered.container.querySelectorAll('.ss__radio-list__option')[2];
 		expect(option).toBeInTheDocument();
-		userEvent.click(option);
+		await userEvent.click(option);
 		expect(func).toHaveBeenCalled();
 	});
 

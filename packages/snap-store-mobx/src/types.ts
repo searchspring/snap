@@ -1,5 +1,11 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchResponseModelFacetValueAllOfValues, AutocompleteRequestModel, SearchRequestModel } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModelFacetValueAllOfValues,
+	AutocompleteRequestModel,
+	SearchRequestModel,
+	MetaResponseModelBadgeTag,
+	SearchResponseModelResultBadges,
+} from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -35,16 +41,32 @@ export type SearchStoreConfigSettings = {
 		}[];
 	};
 };
+export type VariantConfigFilterTypes = 'first' | 'unaltered';
 
-type VariantConfig = {
+export type VariantConfig = {
 	field: string;
+	realtime?: {
+		enabled: boolean;
+		filters?: VariantConfigFilterTypes[];
+	};
+	options?: {
+		[optionField: string]: VariantOptionConfig;
+	};
 };
 
-export type VariantSelectionOptions = {
-	field: string;
-	label: string;
-	//todo
-	//swatches: swatchObj
+export type VariantOptionConfig = {
+	label?: string;
+	preSelected?: string[];
+	thumbnailBackgroundImages?: boolean;
+	mappings?: VariantOptionConfigMappings;
+};
+
+export type VariantOptionConfigMappings = {
+	[optionValue: string]: {
+		label?: string;
+		background?: string;
+		backgroundImageUrl?: string;
+	};
 };
 
 // Search Config
@@ -119,7 +141,9 @@ export type RecommendationStoreConfig = StoreConfig & {
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
-	variants?: VariantConfig;
+	settings?: {
+		variants?: VariantConfig;
+	};
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;
@@ -143,3 +167,5 @@ export type SelectedSelection = {
 export type FinderStoreState = {
 	persisted: boolean;
 };
+
+export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;

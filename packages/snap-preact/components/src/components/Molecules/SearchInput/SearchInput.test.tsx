@@ -28,14 +28,14 @@ describe('SearchInput Component', () => {
 		expect(searchInput.placeholder).toBe(placeholder);
 	});
 
-	it('can invoke onChange callback', () => {
+	it('can invoke onChange callback', async () => {
 		const onChangeFn = jest.fn();
 		const text = 'hello world';
 		const rendered = render(<SearchInput onChange={onChangeFn} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
-		userEvent.type(searchInput, text);
+		await userEvent.type(searchInput, text);
 		expect(searchInput.value).toBe(text);
 		expect(onChangeFn).toHaveBeenCalled();
 	});

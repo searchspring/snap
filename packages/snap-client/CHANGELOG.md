@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.1](https://github.com/searchspring/snap/compare/v0.56.0...v0.56.1) (2024-05-23)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.56.0](https://github.com/searchspring/snap/compare/v0.55.0...v0.56.0) (2024-05-23)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.55.0](https://github.com/searchspring/snap/compare/v0.54.0...v0.55.0) (2024-05-16)
+
+### Bug Fixes
+
+- only lift badges if an object ([9db11fb](https://github.com/searchspring/snap/commit/9db11fb9d44798019c7589f3f7be2d66a9522e85))
+
+### Features
+
+- badge component cleanup, add tests, storybook files, docs ([fa9c638](https://github.com/searchspring/snap/commit/fa9c6382012188761b5530f59931a60a9073711f))
+- initial badge component ([a8aaad9](https://github.com/searchspring/snap/commit/a8aaad91496d7b4808973612fdf818d8db7e10e2))
+
+# [0.54.0](https://github.com/searchspring/snap/compare/v0.53.4...v0.54.0) (2024-05-06)
+
+### Bug Fixes
+
+- **client:** add window checks to NetworkCache ([2c44dc9](https://github.com/searchspring/snap/commit/2c44dc9af5a9425021b9d34c1cc5a88dba23f05b))
+
+### Features
+
+- **client:** adding 'fetchApi' configuration and fallback for windowless environments ([c88da99](https://github.com/searchspring/snap/commit/c88da990c00fcfb223ac10ada387f1e2467addf6))
+
+## [0.53.4](https://github.com/searchspring/snap/compare/v0.53.3...v0.53.4) (2024-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.53.3](https://github.com/searchspring/snap/compare/v0.53.2...v0.53.3) (2024-04-10)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
 ## [0.53.2](https://github.com/searchspring/snap/compare/v0.53.1...v0.53.2) (2024-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-client

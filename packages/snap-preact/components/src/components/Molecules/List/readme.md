@@ -35,11 +35,18 @@ The `hideIcons` prop will disable the option icon elements from rendering.
 <List options={store.options} hideIcons={true} />
 ```
 
-### multiSelect
-The `multiSelect` prop will enable/disable the ability to select more than one option at a time. `multiSelect` is `true` by default.
+### requireSelection
+The `requireSelection` prop will enable/disable the ability to have no options selected.
 
 ```jsx
-<List options={store.options} multiSelect={false} />
+<List options={store.options} requireSelection={false} />
+```
+
+### multiSelect
+The `multiSelect` prop will enable/disable the ability to select more than one option at a time.
+
+```jsx
+<List options={store.options} multiSelect={true} />
 ```
 
 ### horizontal

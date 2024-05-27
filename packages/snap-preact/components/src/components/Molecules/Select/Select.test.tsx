@@ -547,7 +547,7 @@ describe('Select Component', () => {
 			expect(separatorElement).toHaveTextContent(separator);
 		});
 
-		it('it fires onSelect event on option selection', () => {
+		it('it fires onSelect event on option selection', async () => {
 			const selectFn = jest.fn();
 
 			const rendered = render(<Select native options={options} onSelect={selectFn} />);
@@ -557,7 +557,7 @@ describe('Select Component', () => {
 
 			expect(optionsElements[0].selected).toBe(true);
 
-			userEvent.selectOptions(selectElement, options[1].value);
+			await userEvent.selectOptions(selectElement, options[1].value);
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(optionsElements[0].selected).toBe(false);
