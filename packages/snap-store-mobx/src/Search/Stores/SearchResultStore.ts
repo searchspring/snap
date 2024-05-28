@@ -126,6 +126,7 @@ export type VariantDataOptions = Record<
 	string,
 	{
 		value: string;
+		background?: string;
 		backgroundImageUrl?: string;
 		attributeId?: string;
 		optionId?: string;
@@ -510,6 +511,10 @@ export class VariantSelection {
 						mappedValue.backgroundImageUrl = thumbnailImageUrl;
 					} else if (variant.options[this.field].backgroundImageUrl) {
 						mappedValue.backgroundImageUrl = variant.options[this.field].backgroundImageUrl;
+					}
+
+					if (variant.options[this.field].background) {
+						mappedValue.background = variant.options[this.field].background;
 					}
 
 					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toString().toLowerCase()]) {
