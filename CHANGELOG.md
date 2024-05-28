@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4](https://github.com/searchspring/snap/compare/v0.56.3...v0.56.4) (2024-05-28)
+
+### Bug Fixes
+
+- change observer import to mobx-react ([38beec4](https://github.com/searchspring/snap/commit/38beec425bed16d198adfc7ef58ab07c4baf319e))
+- **store-mobx/searchresultstore:** adding background property to variant options data ([0d3779c](https://github.com/searchspring/snap/commit/0d3779cafe8829739b04c79348f22725d9b30878))
+- **store-mobx/searchresultstore:** adding variant option for backgroundImageUrl ([c6f96e3](https://github.com/searchspring/snap/commit/c6f96e37dfb1c1d7671fc30afa78d30c494810b1))
+
 ## [0.56.3](https://github.com/searchspring/snap/compare/v0.56.2...v0.56.3) (2024-05-23)
 
 ### Bug Fixes
