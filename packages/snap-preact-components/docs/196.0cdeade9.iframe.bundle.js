@@ -1,6 +1,6 @@
-/*! For license information please see 685.1cb1db30.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 196.0cdeade9.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[685],
+	[196],
 	{
 		'../../node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -33091,9 +33091,9 @@
 				[3]
 			)(3);
 		},
-		'../../node_modules/mobx-react-lite/es/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/mobx-react/dist/mobxreact.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Pe: () => isUsingStaticRendering, PA: () => observer });
+			__webpack_require__.d(__webpack_exports__, { PA: () => mobxreact_esm_observer });
 			var mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js'),
 				compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			if (!compat_module.useState) throw new Error('mobx-react-lite requires React with Hooks support');
@@ -33295,14 +33295,7 @@
 				reactionScheduler || (reactionScheduler = defaultNoopBatch), (0, mobx_esm.jK)({ reactionScheduler });
 			})(compat_module.unstable_batchedUpdates);
 			_a = observerFinalizationRegistry.finalizeAllImmediately;
-		},
-		'../../node_modules/mobx-react/dist/mobxreact.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { PA: () => observer });
-			var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js'),
-				react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				symbolId = 0;
+			var symbolId = 0;
 			var createdSymbols = {};
 			function newSymbol(name) {
 				return (
@@ -33389,7 +33382,7 @@
 					_ref
 				);
 			}
-			var mobxAdminProperty = mobx__WEBPACK_IMPORTED_MODULE_2__.BQ || '$mobx',
+			var mobxAdminProperty = mobx_esm.BQ || '$mobx',
 				mobxObserverProperty = newSymbol('isMobXReactObserver'),
 				mobxIsUnmounted = newSymbol('isUnmounted'),
 				skipRenderKey = newSymbol('skipRender'),
@@ -33401,7 +33394,7 @@
 					console.warn('The provided component class (' + displayName + ')\n                has already been declared as an observer component.');
 				} else componentClass[mobxObserverProperty] = !0;
 				if (target.componentWillReact) throw new Error('The componentWillReact life-cycle event is no longer supported');
-				if (componentClass.__proto__ !== react__WEBPACK_IMPORTED_MODULE_0__.PureComponent)
+				if (componentClass.__proto__ !== compat_module.PureComponent)
 					if (target.shouldComponentUpdate) {
 						if (target.shouldComponentUpdate !== observerSCU)
 							throw new Error('It is not allowed to use shouldComponentUpdate in observer based components.');
@@ -33418,19 +33411,13 @@
 				}
 				return (
 					(target.render = function () {
-						return (
-							(this.render = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__.Pe)()
-								? originalRender
-								: createReactiveRender.call(this, originalRender)),
-							this.render()
-						);
+						return (this.render = isUsingStaticRendering() ? originalRender : createReactiveRender.call(this, originalRender)), this.render();
 					}),
 					patch(target, 'componentDidMount', function () {
-						(this[mobxIsUnmounted] = !1),
-							this.render[mobxAdminProperty] || react__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.forceUpdate.call(this);
+						(this[mobxIsUnmounted] = !1), this.render[mobxAdminProperty] || compat_module.Component.prototype.forceUpdate.call(this);
 					}),
 					patch(target, 'componentWillUnmount', function () {
-						if (!(0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__.Pe)()) {
+						if (!isUsingStaticRendering()) {
 							var reaction = this.render[mobxAdminProperty];
 							if (reaction) reaction.dispose(), (this.render[mobxAdminProperty] = null);
 							else {
@@ -33463,12 +33450,12 @@
 							null != (_reactiveRender$mobxA = reactiveRender[mobxAdminProperty])
 								? _reactiveRender$mobxA
 								: (reactiveRender[mobxAdminProperty] = (function createReaction() {
-										var reaction = new mobx__WEBPACK_IMPORTED_MODULE_2__.qT(initialName + '.render()', function () {
+										var reaction = new mobx_esm.qT(initialName + '.render()', function () {
 											if (!isRenderingPending && ((isRenderingPending = !0), !0 !== _this[mobxIsUnmounted])) {
 												var hasError = !0;
 												try {
 													setHiddenProp(_this, isForcingUpdateKey, !0),
-														_this[skipRenderKey] || react__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.forceUpdate.call(_this),
+														_this[skipRenderKey] || compat_module.Component.prototype.forceUpdate.call(_this),
 														(hasError = !1);
 												} finally {
 													setHiddenProp(_this, isForcingUpdateKey, !1), hasError && (reaction.dispose(), (_this.render[mobxAdminProperty] = null));
@@ -33482,7 +33469,7 @@
 					if (
 						(reaction.track(function () {
 							try {
-								rendering = (0, mobx__WEBPACK_IMPORTED_MODULE_2__.vx)(!1, boundOriginalRender);
+								rendering = (0, mobx_esm.vx)(!1, boundOriginalRender);
 							} catch (e) {
 								exception = e;
 							}
@@ -33495,7 +33482,7 @@
 			}
 			function observerSCU(nextProps, nextState) {
 				return (
-					(0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__.Pe)() &&
+					isUsingStaticRendering() &&
 						console.warn(
 							'[mobx-react] It seems that a re-rendering of a React component is triggered while in static (server-side) mode. Please make sure components are rendered only once server-side.'
 						),
@@ -33506,10 +33493,7 @@
 				var valueHolderKey = newSymbol('reactProp_' + propName + '_valueHolder'),
 					atomHolderKey = newSymbol('reactProp_' + propName + '_atomHolder');
 				function getAtom() {
-					return (
-						this[atomHolderKey] || setHiddenProp(this, atomHolderKey, (0, mobx__WEBPACK_IMPORTED_MODULE_2__.MN)('reactive ' + propName)),
-						this[atomHolderKey]
-					);
+					return this[atomHolderKey] || setHiddenProp(this, atomHolderKey, (0, mobx_esm.MN)('reactive ' + propName)), this[atomHolderKey];
 				}
 				Object.defineProperty(target, propName, {
 					configurable: !0,
@@ -33517,13 +33501,9 @@
 					get: function get() {
 						var prevReadState = !1;
 						return (
-							mobx__WEBPACK_IMPORTED_MODULE_2__.f2 &&
-								mobx__WEBPACK_IMPORTED_MODULE_2__.w6 &&
-								(prevReadState = (0, mobx__WEBPACK_IMPORTED_MODULE_2__.f2)(!0)),
+							mobx_esm.f2 && mobx_esm.w6 && (prevReadState = (0, mobx_esm.f2)(!0)),
 							getAtom.call(this).reportObserved(),
-							mobx__WEBPACK_IMPORTED_MODULE_2__.f2 &&
-								mobx__WEBPACK_IMPORTED_MODULE_2__.w6 &&
-								(0, mobx__WEBPACK_IMPORTED_MODULE_2__.w6)(prevReadState),
+							mobx_esm.f2 && mobx_esm.w6 && (0, mobx_esm.w6)(prevReadState),
 							this[valueHolderKey]
 						);
 					},
@@ -33537,20 +33517,20 @@
 					},
 				});
 			}
-			function observer(component) {
+			function mobxreact_esm_observer(component) {
 				return (
 					!0 === component.isMobxInjector &&
 						console.warn(
 							'Mobx observer: You are trying to use `observer` on a component that already has `inject`. Please apply `observer` before applying `inject`'
 						),
-					Object.prototype.isPrototypeOf.call(react__WEBPACK_IMPORTED_MODULE_0__.Component, component) ||
-					Object.prototype.isPrototypeOf.call(react__WEBPACK_IMPORTED_MODULE_0__.PureComponent, component)
+					Object.prototype.isPrototypeOf.call(compat_module.Component, component) ||
+					Object.prototype.isPrototypeOf.call(compat_module.PureComponent, component)
 						? makeClassComponentObserver(component)
-						: (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__.PA)(component)
+						: observer(component)
 				);
 			}
-			if (!react__WEBPACK_IMPORTED_MODULE_0__.Component) throw new Error('mobx-react requires React to be available');
-			if (!mobx__WEBPACK_IMPORTED_MODULE_2__.sH) throw new Error('mobx-react requires mobx to be available');
+			if (!compat_module.Component) throw new Error('mobx-react requires React to be available');
+			if (!mobx_esm.sH) throw new Error('mobx-react requires mobx to be available');
 		},
 		'../../node_modules/mobx/dist/mobx.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -61442,4 +61422,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=685.1cb1db30.iframe.bundle.js.map
+//# sourceMappingURL=196.0cdeade9.iframe.bundle.js.map

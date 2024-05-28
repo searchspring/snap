@@ -1,4 +1,4 @@
-/*! For license information please see main.ba91dc99.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.5a850b51.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -180,18 +180,18 @@
 			__webpack_require__.d(__webpack_exports__, { z: () => BadgeImage });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_BadgeImage = function BadgeImage() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({ maxHeight: '100%', maxWidth: '100%' });
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({ maxHeight: '100%', maxWidth: '100%' });
 				},
-				BadgeImage = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+				BadgeImage = (0, mobx_react__WEBPACK_IMPORTED_MODULE_4__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -219,10 +219,10 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeImage(), style]),
 						url
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 									_providers__WEBPACK_IMPORTED_MODULE_6__._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 										'img',
 										Object.assign({}, styling, {
 											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-image', 'ss__badge-image--' + tag, className),
@@ -231,7 +231,7 @@
 										})
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
 					);
 				});
 		},
@@ -376,16 +376,16 @@
 			__webpack_require__.d(__webpack_exports__, { L: () => BadgePill });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_BadgePill = function BadgePill(props) {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({
 						display: 'inline-block',
 						boxSizing: 'border-box',
 						padding: '0.3em 0.9em',
@@ -398,7 +398,7 @@
 						borderRadius: '1em',
 					});
 				},
-				BadgePill = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+				BadgePill = (0, mobx_react__WEBPACK_IMPORTED_MODULE_4__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -425,18 +425,18 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgePill(props), style]),
 						value
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 									_providers__WEBPACK_IMPORTED_MODULE_6__._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 										'div',
 										Object.assign({}, styling, {
 											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-pill', 'ss__badge-pill--' + tag, className),
 										}),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-pill__value' }, value)
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)('span', { className: 'ss__badge-pill__value' }, value)
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
 					);
 				});
 		},
@@ -581,16 +581,16 @@
 			__webpack_require__.d(__webpack_exports__, { Z: () => BadgeRectangle });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_BadgeRectangle = function BadgeRectangle(props) {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({
 						display: 'inline-block',
 						boxSizing: 'border-box',
 						padding: '0.3em 0.9em',
@@ -602,7 +602,7 @@
 						maxWidth: '100%',
 					});
 				},
-				BadgeRectangle = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+				BadgeRectangle = (0, mobx_react__WEBPACK_IMPORTED_MODULE_4__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -629,18 +629,18 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeRectangle(props), style]),
 						value
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 									_providers__WEBPACK_IMPORTED_MODULE_6__._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 										'div',
 										Object.assign({}, styling, {
 											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-rectangle', 'ss__badge-rectangle--' + tag, className),
 										}),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-rectangle__value' }, value)
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)('span', { className: 'ss__badge-rectangle__value' }, value)
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
 					);
 				});
 		},
@@ -769,16 +769,16 @@
 			__webpack_require__.d(__webpack_exports__, { p: () => BadgeText });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_BadgeText = function BadgeText(props) {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({
 						display: 'inline-block',
 						boxSizing: 'border-box',
 						padding: '0.3em 0.9em',
@@ -789,7 +789,7 @@
 						maxWidth: '100%',
 					});
 				},
-				BadgeText = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
+				BadgeText = (0, mobx_react__WEBPACK_IMPORTED_MODULE_4__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -816,18 +816,18 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_BadgeText(props), style]),
 						value
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 									_providers__WEBPACK_IMPORTED_MODULE_6__._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
 										'div',
 										Object.assign({}, styling, {
 											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__badge-text', 'ss__badge-text--' + tag, className),
 										}),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)('span', { className: 'ss__badge-text__value' }, value)
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)('span', { className: 'ss__badge-text__value' }, value)
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_1__.FK, null)
 					);
 				});
 		},
@@ -6016,10 +6016,10 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
 			var preact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
@@ -6031,10 +6031,10 @@
 						(function _objectDestructuringEmpty(obj) {
 							if (null == obj) throw new TypeError('Cannot destructure ' + obj);
 						})(_ref),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.AH)({ display: 'flex', justifyContent: 'center', alignItems: 'center' })
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.AH)({ display: 'flex', justifyContent: 'center', alignItems: 'center' })
 					);
 				},
-				CalloutBadge = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.PA)(function (properties) {
+				CalloutBadge = (0, mobx_react__WEBPACK_IMPORTED_MODULE_8__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -6067,10 +6067,10 @@
 							? void 0
 							: _result$badges.atLocation(tag).slice(0, 1);
 					return renderEmpty || (null != badges && badges.length)
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(
 								_providers__WEBPACK_IMPORTED_MODULE_11__._,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(
 									'div',
 									Object.assign({}, styling, {
 										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
@@ -6082,12 +6082,12 @@
 									badges.map(function (badge) {
 										var BadgeComponent = (0, _hooks__WEBPACK_IMPORTED_MODULE_12__.x)(badgeComponentMap, badge.component);
 										return BadgeComponent
-											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
-											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
+											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
+											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
 									})
 								)
 						  )
-						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(preact__WEBPACK_IMPORTED_MODULE_5__.FK, null);
 				});
 		},
 		'./src/components/Molecules/Carousel/Carousel.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -15356,10 +15356,10 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js');
 			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
@@ -15382,7 +15382,7 @@
 							gridTemplateAreas,
 						};
 					}
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.AH)({
 						position: 'relative',
 						'& .ss__overlay-badge__grid-wrapper': Object.assign(
 							{ display: 'grid', position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
@@ -15396,7 +15396,7 @@
 						bottom = _ref2.bottom,
 						section = _ref2.section,
 						tag = _ref2.tag;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.AH)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.AH)({
 						position: 'relative',
 						display: 'flex',
 						flexDirection: 'column',
@@ -15410,7 +15410,7 @@
 						height: '100%',
 					});
 				},
-				OverlayBadge = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.PA)(function (properties) {
+				OverlayBadge = (0, mobx_react__WEBPACK_IMPORTED_MODULE_9__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -15450,7 +15450,7 @@
 								null === (_controller$log = controller.log) ||
 								void 0 === _controller$log ||
 								_controller$log.warn('OverlayBadge component must have children'),
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null)
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null)
 						);
 					var meta =
 							null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.meta,
@@ -15519,13 +15519,13 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_OverlayBadge(Object.assign({}, props, { grid })), style]),
 						renderEmpty || (null != locations && locations.length)
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 									_providers__WEBPACK_IMPORTED_MODULE_12__._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 										'div',
 										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__overlay-badge', className) }),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 											'div',
 											{ className: 'ss__overlay-badge__grid-wrapper' },
 											locations.map(function (location, index) {
@@ -15533,7 +15533,7 @@
 												return null === (_location$slots2 = location.slots) || void 0 === _location$slots2
 													? void 0
 													: _location$slots2.map(function (slot) {
-															return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(
+															return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(
 																'div',
 																{
 																	className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -15547,8 +15547,8 @@
 																slot.badges.map(function (badge) {
 																	var BadgeComponent = (0, _hooks__WEBPACK_IMPORTED_MODULE_13__.x)(badgeComponentMap, badge.component);
 																	return BadgeComponent
-																		? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
-																		: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null);
+																		? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(BadgeComponent, Object.assign({}, badge, badge.parameters))
+																		: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null);
 																})
 															);
 													  });
@@ -15557,7 +15557,7 @@
 										children
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null, children)
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)(preact__WEBPACK_IMPORTED_MODULE_6__.FK, null, children)
 					);
 				});
 		},
@@ -43950,7 +43950,11 @@
 														),
 													};
 												if (
-													(_this5.config.thumbnailBackgroundImages && (mappedValue.backgroundImageUrl = thumbnailImageUrl),
+													(_this5.config.thumbnailBackgroundImages
+														? (mappedValue.backgroundImageUrl = thumbnailImageUrl)
+														: variant.options[_this5.field].backgroundImageUrl &&
+														  (mappedValue.backgroundImageUrl = variant.options[_this5.field].backgroundImageUrl),
+													variant.options[_this5.field].background && (mappedValue.background = variant.options[_this5.field].background),
 													_this5.config.mappings && _this5.config.mappings && _this5.config.mappings[value.toString().toLowerCase()])
 												) {
 													var mapping = _this5.config.mappings[value.toString().toLowerCase()];
@@ -48797,7 +48801,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.3', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.4', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49312,7 +49316,7 @@
 									website: { trackingCode: this.globals.siteId },
 								}),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.3')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.4')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -51198,7 +51202,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[685],
+			[196],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
