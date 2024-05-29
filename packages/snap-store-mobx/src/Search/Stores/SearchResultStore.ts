@@ -124,15 +124,19 @@ type resultImages = {
 export type VariantData = {
 	mappings: SearchResponseModelResultMappings;
 	attributes: Record<string, unknown>;
-	options: Record<
-		string,
-		{
-			value: string;
-			attributeId?: string;
-			optionId?: string;
-		}
-	>;
+	options: VariantDataOptions;
 };
+
+export type VariantDataOptions = Record<
+	string,
+	{
+		value: string;
+		background?: string;
+		backgroundImageUrl?: string;
+		attributeId?: string;
+		optionId?: string;
+	}
+>;
 
 type ProductMinimal = {
 	id: string;
@@ -518,6 +522,12 @@ export class VariantSelection {
 
 					if (this.config.thumbnailBackgroundImages) {
 						mappedValue.backgroundImageUrl = thumbnailImageUrl;
+					} else if (variant.options[this.field].backgroundImageUrl) {
+						mappedValue.backgroundImageUrl = variant.options[this.field].backgroundImageUrl;
+					}
+
+					if (variant.options[this.field].background) {
+						mappedValue.background = variant.options[this.field].background;
 					}
 
 					if (this.config.mappings && this.config.mappings && this.config.mappings[value.toString().toLowerCase()]) {
@@ -593,14 +603,7 @@ export class Variant {
 	public type = 'variant';
 	public available: boolean;
 	public attributes: Record<string, unknown> = {};
-	public options: Record<
-		string,
-		{
-			value: string;
-			attributeId?: string;
-			optionId?: string;
-		}
-	>;
+	public options: VariantDataOptions;
 
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},

@@ -3,7 +3,7 @@ import { ComponentChildren, Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
@@ -19,7 +19,8 @@ const CSS = {
 			const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
 			const columns = grid[0].length;
 			gridProperties = {
-				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+				gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+				gridTemplateRows: `repeat(${grid.length}, minmax(0, 1fr))`,
 				gridTemplateAreas,
 			};
 		}
@@ -38,13 +39,13 @@ const CSS = {
 			},
 		});
 	},
-	BadgePositioning: ({ index, section, tag }: { index: number; section: string; tag: string }) => {
+	BadgePositioning: ({ index, top, bottom, section, tag }: { index: number; top: boolean; bottom: boolean; section: string; tag: string }) => {
 		return css({
-			position: 'absolute',
+			position: 'relative',
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: section == 'right' ? 'flex-end' : 'flex-start',
-			right: section == 'right' ? 0 : undefined,
+			justifyContent: !top && !bottom ? 'center' : bottom && !top ? 'flex-end' : 'flex-start',
 			gap: '0.5em',
 			gridArea: tag,
 			boxSizing: 'border-box',
@@ -88,9 +89,11 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		?.map((section) => {
 			const sectionSlots = meta?.data?.badges?.locations[section as keyof typeof meta.data.badges.locations];
 			const slots = sectionSlots
-				?.map((slot) => ({
+				?.map((slot, index) => ({
 					tag: slot.tag,
 					name: slot.name,
+					top: index == 0,
+					bottom: index == sectionSlots.length - 1,
 					badges: result?.badges?.atLocation(`${section}/${slot.tag}`).slice(0, limit),
 				}))
 				.filter((slot) => slot.badges.length);
@@ -118,7 +121,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 								return (
 									<div
 										className={classnames('ss__overlay-badge__grid-wrapper__slot', `ss__overlay-badge__grid-wrapper__slot--${slot.tag}`)}
-										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index })]}
+										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index, top: slot.top, bottom: slot.bottom })]}
 									>
 										{slot.badges.map((badge) => {
 											const BadgeComponent = useComponentMap(badgeComponentMap, badge.component);
