@@ -478,10 +478,14 @@ export class VariantSelection {
 		let availableVariants = variants.data;
 
 		// loop through selectedSelections and remove products that do not match
-		for (const selectedSelection of selectedSelections) {
-			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
-			);
+		if (selectedSelections.length) {
+			for (const selectedSelection of selectedSelections) {
+				availableVariants = availableVariants.filter(
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+				);
+			}
+		} else {
+			availableVariants = availableVariants.filter((variant) => variant.available);
 		}
 
 		const newValues: VariantSelectionValue[] = variants.data
@@ -507,6 +511,13 @@ export class VariantSelection {
 						),
 					};
 
+					console.log(
+						Boolean(availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)),
+						Boolean(
+							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value) &&
+								variant.available
+						)
+					);
 					if (this.config.thumbnailBackgroundImages) {
 						mappedValue.backgroundImageUrl = thumbnailImageUrl;
 					} else if (variant.options[this.field].backgroundImageUrl) {
