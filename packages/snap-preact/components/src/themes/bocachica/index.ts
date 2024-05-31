@@ -39,6 +39,7 @@ export const bocachica: Theme = {
 		},
 		{
 			value: 2,
+			default: true,
 			icon: 'layout-large',
 			overrides: {
 				components: {

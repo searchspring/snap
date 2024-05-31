@@ -11,6 +11,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
 import type { RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
+import type { ResultComponent } from '../../../';
 import type { FunctionalComponent } from 'preact';
 import type { SnapTemplates } from '../../../../../src';
 
@@ -81,31 +82,42 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const suggestionsExist = suggestionsList && Array.isArray(suggestionsList) && suggestionsList.length !== 0;
 	const contactsExist = contactsList && Array.isArray(contactsList) && contactsList.length !== 0;
 
-	let recommendationTemplateComponent: (() => FunctionalComponent<{ controller: RecommendationController; name: string }>) | undefined;
+	let recommendationTemplateComponent: FunctionalComponent<{ controller: RecommendationController; name: string }> | undefined;
+	let recommendationTemplateResultComponent: ResultComponent | undefined;
 	let recsController: RecommendationController | undefined;
 
-	if (templates?.recommendation?.template) {
+	if (templates?.recommendation?.enabled) {
+		const componentName = templates?.recommendation?.component || 'Recommendation';
+		const resultComponentName = templates?.recommendation?.resultComponent;
 		const snap = useSnap() as SnapTemplates;
 		const mergedConfig = Object.assign(
 			{
-				id: 'no-results',
+				id: '',
 				tag: 'no-results',
 				branch: 'production',
 			},
 			templates.recommendation!.config
 		);
+		mergedConfig.id = mergedConfig.id || `search-${mergedConfig.tag}`;
 		if (snap) {
 			recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
-			if (!recsController?.store?.loaded && recsController?.store.error?.type !== 'error') {
+			if (!recsController?.store?.loaded && !recsController?.store?.loading && recsController?.store.error?.type !== 'error') {
 				recsController?.search();
 			}
-			recommendationTemplateComponent = useComponent(snap, templates.recommendation!.template);
+
+			if (resultComponentName) {
+				recommendationTemplateResultComponent = useComponent(snap?.templates?.library.import.component.result, resultComponentName);
+			}
+
+			recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation, componentName);
 		}
 	}
 
 	const RecommendationTemplateComponent = recommendationTemplateComponent as
-		| FunctionalComponent<{ controller: RecommendationController; name: string }>
+		| FunctionalComponent<{ controller: RecommendationController; resultComponent?: ResultComponent; name: string }>
 		| undefined;
+
+	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
 
 	return (
 		<div className={classnames('ss__no-results', className)} {...styling}>
@@ -149,7 +161,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{RecommendationTemplateComponent && recsController?.store?.loaded ? (
 				<div className="ss__no-results__recommendations">
-					<RecommendationTemplateComponent controller={recsController} name={'noResultsRecommendations'} />
+					<RecommendationTemplateComponent
+						controller={recsController}
+						resultComponent={RecommendationTemplateResultComponent}
+						name={'noResultsRecommendations'}
+					/>
 				</div>
 			) : null}
 		</div>
@@ -172,7 +188,9 @@ export interface NoResultsProps extends ComponentProps {
 
 	templates?: {
 		recommendation?: {
-			template: 'Recommendation';
+			enabled: boolean;
+			component?: 'Recommendation'; // Need a type for allowed recommendation component names (that would exist in the library)
+			resultComponent?: string;
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};

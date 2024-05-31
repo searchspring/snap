@@ -5,9 +5,9 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { IconProps } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
-import type { Snap } from '../../src';
+import type { Snap, SnapTemplates } from '../../src';
 import type { DeepPartial } from '../../src/types';
-import { FunctionalComponent, RenderableProps } from 'preact';
+import type { FunctionalComponent, RenderableProps } from 'preact';
 
 export interface ComponentProps {
 	name?: string;
@@ -17,7 +17,7 @@ export interface ComponentProps {
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
-	snap?: Snap;
+	snap?: Snap | SnapTemplates;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
 }
 
@@ -81,5 +81,5 @@ export type SwatchOption = ListOption & {
 };
 
 export type ComponentMap = {
-	[key: string]: (args?: any) => FunctionalComponent<RenderableProps<any>> | Promise<(args?: any) => React.ReactElement>;
+	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>> | FunctionalComponent<RenderableProps<any>>;
 };

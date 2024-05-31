@@ -5,11 +5,12 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
 import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
-import { useComponentMap } from '../../../hooks';
+import { useComponent } from '../../../hooks';
 import type { Product } from '@searchspring/snap-store-mobx';
+import type { SnapTemplates } from '../../../../../src/Templates';
 
 const CSS = {
 	CalloutBadge: ({}: CalloutBadgeProps) =>
@@ -22,6 +23,7 @@ const CSS = {
 
 export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const snap = useSnap();
 
 	const props: CalloutBadgeProps = {
 		// default props
@@ -36,7 +38,11 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 	const styling: { css?: StylingCSS } = {};
 
-	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
+	const badgeComponentMap = {
+		...defaultBadgeComponentMap,
+		...((snap as SnapTemplates)?.templates?.library.import.component.badge || {}),
+		...props.componentMap,
+	};
 	if (!disableStyles) {
 		styling.css = [CSS.CalloutBadge(props), style];
 	} else if (style) {
@@ -51,7 +57,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 			<CacheProvider>
 				<div {...styling} className={classnames('ss__callout-badge', `ss__callout-badge--${tag?.replace('/', '-')}`, className)}>
 					{badges.map((badge) => {
-						const BadgeComponent = useComponentMap(badgeComponentMap, badge.component);
+						const BadgeComponent = useComponent(badgeComponentMap, badge.component);
 						if (!BadgeComponent) {
 							return <Fragment />;
 						}

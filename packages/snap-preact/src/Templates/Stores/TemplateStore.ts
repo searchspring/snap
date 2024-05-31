@@ -10,11 +10,14 @@ import type { Theme, ThemeVariables } from '../../../components/src';
 
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
+export type TemplateCustomComponentTypes = 'result' | 'badge';
+export type TemplateComponentTypes = 'search' | 'autocomplete' | 'recommendation' | TemplateCustomComponentTypes;
+
 export type TemplateTarget = {
-	template: string;
 	selector?: string;
-	component?: string;
 	theme?: string;
+	component: string;
+	resultComponent?: string;
 };
 
 export type TemplatesStoreSettings = {
@@ -67,8 +70,8 @@ export class TemplatesStore {
 		};
 		this.settings = settings;
 
-		this.language = (this.settings.editMode && this.storage.get('language')) || this.config.config.language || 'en';
-		this.currency = (this.settings.editMode && this.storage.get('currency')) || this.config.config.currency || 'usd';
+		this.language = (this.settings.editMode && this.storage.get('language')) || this.config.config?.language || 'en';
+		this.currency = (this.settings.editMode && this.storage.get('currency')) || this.config.config?.currency || 'usd';
 
 		this.targets = {
 			search: {},
@@ -81,7 +84,7 @@ export class TemplatesStore {
 			library: {},
 		};
 
-		this.library = new LibraryStore();
+		this.library = new LibraryStore(config.components);
 
 		// import locale selections
 		const importCurrency = this.library.import.currency[this.currency as keyof typeof this.library.import.currency]();
@@ -98,8 +101,8 @@ export class TemplatesStore {
 		}
 
 		// setup local themes
-		Object.keys(config.config.themes).map((themeKey) => {
-			const theme = config.config.themes[themeKey];
+		Object.keys(config.themes).map((themeKey) => {
+			const theme = config.themes[themeKey];
 			const imports = [importCurrency, importLanguage, this.library.import.theme[theme.name]()];
 
 			Promise.all(imports).then(() => {

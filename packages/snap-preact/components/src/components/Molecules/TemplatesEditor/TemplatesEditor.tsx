@@ -325,7 +325,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						const selectedOption = options[selectedIndex];
 						const selectedTemplate = selectedOption.value;
 
-						templatesStore.targets[selectedTarget.type][selectedTarget.target].setTemplate(selectedTemplate);
+						templatesStore.targets[selectedTarget.type][selectedTarget.target].setComponent(selectedTemplate);
 					}}
 				>
 					{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {

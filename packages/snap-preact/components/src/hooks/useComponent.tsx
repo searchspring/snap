@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'preact/hooks';
 
 import type { FunctionalComponent } from 'preact';
-import type { RecommendationController } from '@searchspring/snap-controller';
-import type { SnapTemplates } from '../../../src';
+import { ComponentMap } from '../types';
 
-export const useComponent = (
-	snap: SnapTemplates,
-	template: string
-): undefined | (() => FunctionalComponent<{ controller: RecommendationController }>) => {
-	const [recommendationTemplateComponent, setRecommendationTemplateComponent] = useState<
-		undefined | (() => FunctionalComponent<{ controller: RecommendationController }>)
-	>(undefined);
+export const useComponent = (map: ComponentMap, name: string): undefined | FunctionalComponent<any> => {
+	const [importedComponent, setImportedComponent] = useState<undefined | FunctionalComponent>(undefined);
 
 	useEffect(() => {
-		const importFn = snap?.templates?.library.import.component[template as keyof typeof snap.templates.library.import.component];
+		const importFn = map[name];
 		if (importFn && typeof importFn === 'function') {
-			importFn().then((component: FunctionalComponent) => {
-				setRecommendationTemplateComponent(() => component);
-			});
+			const componentFn = importFn();
+			if (componentFn instanceof Promise) {
+				componentFn.then((component: FunctionalComponent) => {
+					setImportedComponent(() => component);
+				});
+			} else {
+				setImportedComponent(() => componentFn);
+			}
 		}
 	}, []);
 
-	return recommendationTemplateComponent;
+	return importedComponent;
 };

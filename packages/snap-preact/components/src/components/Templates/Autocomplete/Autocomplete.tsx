@@ -771,7 +771,9 @@ export interface AutocompleteProps extends ComponentProps {
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 	templates?: {
 		recommendation?: {
-			template: 'Recommendation' | 'Recommendation2';
+			enabled: boolean;
+			component?: 'Recommendation'; // Need a type for allowed recommendation component names (that would exist in the library)
+			resultComponent?: string;
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};

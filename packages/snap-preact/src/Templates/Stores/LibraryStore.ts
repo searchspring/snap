@@ -1,6 +1,26 @@
+import { FunctionalComponent, RenderableProps } from 'preact';
+
 import type { Theme } from '../../../components/src';
-import type { FunctionalComponent } from 'preact';
-import type { TemplateTypes } from './TemplateStore';
+import type { TemplateComponentTypes, TemplateCustomComponentTypes } from './TemplateStore';
+import type { SnapTemplateComponentConfig } from '../SnapTemplate';
+
+type LibraryImports = {
+	theme: {
+		[themeName: string]: (args?: any) => Theme | Promise<Theme>;
+	};
+	component: {
+		[key in TemplateComponentTypes]: {
+			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
+	};
+	language: {
+		[languageName: string]: () => Promise<Partial<Theme>>;
+	};
+	currency: {
+		[currencyName: string]: () => Promise<Partial<Theme>>;
+	};
+};
+const ALLOWED_CUSTOM_COMPONENT_TYPES: TemplateCustomComponentTypes[] = ['result', 'badge'];
 
 export class LibraryStore {
 	themes: {
@@ -8,13 +28,15 @@ export class LibraryStore {
 	} = {};
 
 	components: {
-		[key in TemplateTypes]: {
-			[componentName: string]: FunctionalComponent<any>;
+		[key in TemplateComponentTypes]: {
+			[componentName: string]: FunctionalComponent<RenderableProps<any>>;
 		};
 	} = {
 		search: {},
 		autocomplete: {},
 		recommendation: {},
+		badge: {},
+		result: {},
 	};
 
 	locales: {
@@ -29,7 +51,7 @@ export class LibraryStore {
 		languages: {},
 	};
 
-	import = {
+	import: LibraryImports = {
 		theme: {
 			pike: async () => {
 				return this.themes.pike || (this.themes.pike = (await import('./library/themes/pike')).pike);
@@ -39,31 +61,38 @@ export class LibraryStore {
 			},
 		},
 		component: {
-			Autocomplete: async () => {
-				return (
-					this.components.autocomplete.Autocomplete ||
-					(this.components.autocomplete.Autocomplete = (await import('./library/components/Autocomplete')).Autocomplete)
-				);
+			autocomplete: {
+				Autocomplete: async () => {
+					return (
+						this.components.autocomplete.Autocomplete ||
+						(this.components.autocomplete.Autocomplete = (await import('./library/components/Autocomplete')).Autocomplete)
+					);
+				},
 			},
-			Search: async () => {
-				return this.components.search.Search || (this.components.search.Search = (await import('./library/components/Search')).Search);
+			search: {
+				Search: async () => {
+					return this.components.search.Search || (this.components.search.Search = (await import('./library/components/Search')).Search);
+				},
+				HorizontalSearch: async () => {
+					return (
+						this.components.search.HorizontalSearch ||
+						(this.components.search.HorizontalSearch = (await import('./library/components/HorizontalSearch')).HorizontalSearch)
+					);
+				},
 			},
-			SearchTest: async () => {
-				return (
-					this.components.search.SearchTest || (this.components.search.SearchTest = (await import('./library/components/SearchTest')).SearchTest)
-				);
+			recommendation: {
+				Recommendation: async () => {
+					return (
+						this.components.recommendation.Recommendation ||
+						(this.components.recommendation.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
+					);
+				},
 			},
-			HorizontalSearch: async () => {
-				return (
-					this.components.search.HorizontalSearch ||
-					(this.components.search.HorizontalSearch = (await import('./library/components/HorizontalSearch')).HorizontalSearch)
-				);
-			},
-			Recommendation: async () => {
-				return (
-					this.components.recommendation.Recommendation ||
-					(this.components.recommendation.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
-				);
+			badge: {},
+			result: {
+				Result: async () => {
+					return this.components.result.Result || (this.components.result.Result = (await import('./library/components/Result')).Result);
+				},
 			},
 		},
 		language: {
@@ -81,18 +110,52 @@ export class LibraryStore {
 		},
 	};
 
-	constructor() {
-		// anything?
+	constructor(components?: SnapTemplateComponentConfig) {
+		// allow for configuration to supply custom component imports
+		if (components) {
+			Object.keys(components).forEach((type) => {
+				const componentsOfType = components[type as keyof typeof components];
+				Object.keys(componentsOfType).forEach((component) => {
+					this.addComponentImport(type as TemplateCustomComponentTypes, component, componentsOfType[component as keyof typeof components]);
+				});
+			});
+		}
+	}
+
+	async addComponentImport(
+		type: TemplateCustomComponentTypes,
+		name: string,
+		componentFn: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>> | FunctionalComponent<RenderableProps<any>>
+	) {
+		// only allow certain types: 'results' and 'badges' - otherwise section components could be added (eg: 'search')
+		if (ALLOWED_CUSTOM_COMPONENT_TYPES.includes(type) && this.components[type]) {
+			this.import.component[type][name] = async () => {
+				return (
+					this.components[type as keyof typeof this.components][name] ||
+					(this.components[type as keyof typeof this.components][name] = await componentFn())
+				);
+			};
+		}
 	}
 
 	async preLoad() {
 		// load everything
 		const loadPromises: Promise<any>[] = [];
 		Object.keys(this.import).forEach((importGroup) => {
+			console.log('importGroup', importGroup);
 			const importList = this.import[importGroup as keyof typeof this.import];
+			console.log('importList', importList);
+
 			Object.keys(importList).forEach((importName) => {
-				const importer = importList[importName as keyof typeof importList] as () => Promise<any>;
-				loadPromises.push(importer());
+				if (importGroup === 'component') {
+					const componentGroup = importList[importName as keyof typeof importList] as { [componentName: string]: () => Promise<any> };
+					Object.keys(componentGroup).forEach((componentName) => {
+						loadPromises.push(componentGroup[componentName]());
+					});
+				} else {
+					const importer = importList[importName as keyof typeof importList] as () => Promise<any>;
+					loadPromises.push(importer());
+				}
 			});
 		});
 

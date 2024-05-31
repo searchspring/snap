@@ -5,12 +5,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
 import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
-import { useComponentMap } from '../../../hooks';
+import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
+import type { SnapTemplates } from '../../../../../src/Templates';
 
 const CSS = {
 	OverlayBadge: ({ grid }: OverlayBadgeProps & { grid: string[][] }) => {
@@ -58,6 +59,7 @@ const CSS = {
 
 export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const snap = useSnap();
 
 	const props: OverlayBadgeProps = {
 		// default props
@@ -80,7 +82,11 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 	const meta = controller?.store?.meta;
 	const group = 'overlay';
 	const grid = meta?.badges?.groups?.[group]?.grid;
-	const badgeComponentMap = { ...defaultBadgeComponentMap, ...props.componentMap };
+	const badgeComponentMap = {
+		...defaultBadgeComponentMap,
+		...((snap as SnapTemplates)?.templates?.library.import.component.badge || {}),
+		...props.componentMap,
+	};
 
 	const sections = meta?.badges?.groups?.[group]?.sections;
 
@@ -124,7 +130,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index, top: slot.top, bottom: slot.bottom })]}
 									>
 										{slot.badges.map((badge) => {
-											const BadgeComponent = useComponentMap(badgeComponentMap, badge.component);
+											const BadgeComponent = useComponent(badgeComponentMap, badge.component);
 											if (!BadgeComponent) {
 												return <Fragment />;
 											}

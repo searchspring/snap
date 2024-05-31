@@ -4,7 +4,8 @@ import { GLOBAL_THEME_NAME } from '../SnapTemplate';
 
 export class TargetStore {
 	public selector: string;
-	public template: string;
+	public component: string;
+	public resultComponent: string;
 	public theme: {
 		location: TemplateThemeTypes;
 		name: string;
@@ -13,23 +14,30 @@ export class TargetStore {
 
 	constructor(template: TemplateTarget, dependencies: TemplatesStoreDependencies, settings: TemplatesStoreSettings) {
 		this.dependencies = dependencies;
-		this.selector = template.component ? `.ss__recommendation-${template.component}` : template.selector || '';
-		this.template = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.template`)) || template.template;
+		this.selector = template.selector || '';
+		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || template.component;
+		this.resultComponent =
+			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || template.resultComponent;
 		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
 			location: 'local',
 			name: template.theme || GLOBAL_THEME_NAME,
 		};
 
 		makeObservable(this, {
-			template: observable,
+			component: observable,
 			selector: observable,
 			theme: observable,
 		});
 	}
 
-	public setTemplate(templateName: string) {
-		this.template = templateName;
-		this.dependencies.storage.set(`templates.${this.selector}.template`, this.template);
+	public setComponent(componentName: string) {
+		this.component = componentName;
+		this.dependencies.storage.set(`templates.${this.selector}.component`, this.component);
+	}
+
+	public setResultComponent(resultComponentName: string) {
+		this.resultComponent = resultComponentName;
+		this.dependencies.storage.set(`templates.${this.selector}.resultComponent`, this.resultComponent);
 	}
 
 	public setTheme(themeName: string, location: TemplateThemeTypes) {

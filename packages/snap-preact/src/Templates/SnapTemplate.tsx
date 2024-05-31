@@ -5,7 +5,8 @@ import { Snap } from '../Snap';
 import { TemplateSelect } from '../../components/src';
 
 import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
-import { TemplatesStore } from './Stores/TemplateStore';
+import { TemplateCustomComponentTypes, TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
+
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
@@ -18,26 +19,25 @@ import type { Theme, ThemeVariables } from '../../components/src';
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
 
-// // TODO: tabbing, result layout toggling, finders
+// TODO: tabbing, finder
 export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
-	template: 'Search' | 'HorizontalSearch'; // various component (template) types allowed
-	resultComponent?: ResultComponent;
+	component: 'Search' | 'HorizontalSearch'; // various component (template) types allowed
+	resultComponent?: string;
 };
 
 export type AutocompleteTargetConfig = {
 	selector: string;
 	theme?: string;
-	template: 'Autocomplete'; // various components (templates) available
-	resultComponent?: ResultComponent;
+	component: 'Autocomplete'; // various components (templates) available
+	resultComponent?: string;
 };
 
 export type RecommendationTargetConfig = {
-	component: string;
 	theme?: string;
-	template: 'Recommendation'; // various components (templates) available
-	resultComponent?: ResultComponent;
+	component: 'Recommendation'; // various components (templates) available
+	resultComponent?: string;
 };
 
 // TODO - clean up theme typing
@@ -47,14 +47,20 @@ type TemplateThemeConfig = {
 	overrides?: DeepPartial<Theme>;
 };
 
+export type SnapTemplateComponentConfig = {
+	[key in TemplateCustomComponentTypes]: {
+		[componentName: string]: (args?: any) => Promise<ResultComponent> | ResultComponent;
+	};
+};
 export type SnapTemplatesConfig = {
-	config: {
+	components?: SnapTemplateComponentConfig;
+	themes: {
+		global: TemplateThemeConfig;
+	} & { [themeName: string]: TemplateThemeConfig };
+	config?: {
 		siteId?: string;
-		themes: {
-			global: TemplateThemeConfig;
-		} & { [themeName: string]: TemplateThemeConfig };
-		currency: string;
-		language: string;
+		currency?: string;
+		language?: string;
 	};
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
@@ -72,7 +78,13 @@ export type SnapTemplatesConfig = {
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	recommendation?: {
-		targets: [RecommendationTargetConfig, ...RecommendationTargetConfig[]];
+		templates: {
+			// default?: RecommendationTargetConfig;
+			// bundle?: RecommendationTargetConfig;
+			// email?: RecommendationTargetConfig;
+			// TODO: remove custom templates?
+			[name: string]: RecommendationTargetConfig;
+		};
 		settings: RecommendationInstantiatorConfigSettings;
 		breakpointSettings?: RecommendationInstantiatorConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
@@ -172,16 +184,16 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 			selector: target.selector,
 			hideTarget: true,
 			component: async () => {
-				await templatesStore.library.import.component[target.template]();
+				const componentImportPromises = [];
+				componentImportPromises.push(templatesStore.library.import.component.search[target.component]());
+				if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
+					componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
+				}
+				await Promise.all(componentImportPromises);
 				return TemplateSelect;
 			},
 			props: { type: 'search', templatesStore, targetId },
 		};
-
-		// if they are not undefined, add them
-		if (target.resultComponent) {
-			targeter.props!.resultComponent = target.resultComponent;
-		}
 
 		return targeter;
 	});
@@ -194,17 +206,17 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 		const targeter: ExtendedTarget = {
 			selector: target.selector,
 			component: async () => {
-				await templatesStore.library.import.component[target.template]();
+				const componentImportPromises = [];
+				componentImportPromises.push(templatesStore.library.import.component.autocomplete[target.component]());
+				if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
+					componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
+				}
+				await Promise.all(componentImportPromises);
 				return TemplateSelect;
 			},
 			props: { type: 'autocomplete', templatesStore, targetId },
 			hideTarget: true,
 		};
-
-		// if they are not undefined, add them
-		if (target.resultComponent) {
-			targeter.props!.resultComponent = target.resultComponent;
-		}
 
 		return targeter;
 	});
@@ -214,28 +226,29 @@ export function createRecommendationComponentMapping(
 	templateConfig: SnapTemplatesConfig,
 	templatesStore: TemplatesStore
 ): { [name: string]: RecommendationComponentObject } {
-	const targets = templateConfig.recommendation?.targets;
-	return targets
-		? targets.reduce(
-				(mapping, target) => {
-					const targetId = templatesStore.addTarget('recommendation', target);
-					mapping[target.component] = {
-						component: async () => {
-							await templatesStore.library.import.component[target.template]();
-							return TemplateSelect;
-						},
-						props: { type: 'recommendation', templatesStore, targetId },
-					};
+	const templates = templateConfig.recommendation?.templates;
+	return templates
+		? Object.keys(templates).reduce((mapping, targetName) => {
+				const target = templates[targetName] as TemplateTarget;
 
-					// if they are not undefined, add them
-					if (target.resultComponent) {
-						mapping[target.component].props!.resultComponent = target.resultComponent;
-					}
+				target.selector = `.ss__recommendation-${targetName}`;
 
-					return mapping;
-				},
-				{} as { [name: string]: RecommendationComponentObject }
-			)
+				const targetId = templatesStore.addTarget('recommendation', target);
+				mapping[targetName] = {
+					component: async () => {
+						const componentImportPromises = [];
+						componentImportPromises.push(templatesStore.library.import.component.recommendation[target.component]());
+						if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
+							componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
+						}
+						await Promise.all(componentImportPromises);
+						return TemplateSelect;
+					},
+					props: { type: 'recommendation', templatesStore, targetId },
+				};
+
+				return mapping;
+		  }, {} as { [name: string]: RecommendationComponentObject })
 		: {};
 }
 
@@ -244,7 +257,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		features: templateConfig.features || DEFAULT_FEATURES,
 		client: {
 			globals: {
-				siteId: templateConfig.config.siteId,
+				siteId: templateConfig.config?.siteId,
 			},
 		},
 		instantiators: {},

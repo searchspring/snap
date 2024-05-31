@@ -100,6 +100,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		Results: {
 			// default props
 			resultComponent: resultComponent,
+			name: 'searchResults',
 			// inherited props
 			...defined({
 				disableStyles,

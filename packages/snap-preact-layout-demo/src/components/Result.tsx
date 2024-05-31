@@ -1,15 +1,18 @@
 import { h, Fragment } from 'preact';
-import { Price, Image } from '@searchspring/snap-preact/components';
+import { Price, Image, OverlayBadge, CalloutBadge } from '@searchspring/snap-preact/components';
 
-export const Result: ResultComponent = (props) => {
-	const { result } = props;
+export const Result = (props) => {
+	const { result, controller } = props;
 	const core = result.mappings.core;
 
 	return (
 		<article className="ss__result">
+			custom
 			<div className="ss__result__image-wrapper">
 				<a href={core.url}>
-					<Image src={core.thumbnailImageUrl} alt={core.name} />
+					<OverlayBadge controller={controller as SearchController} result={result}>
+						<Image src={core.thumbnailImageUrl} alt={core.name} />
+					</OverlayBadge>
 				</a>
 			</div>
 			<div className="ss__result__details">
@@ -32,6 +35,7 @@ export const Result: ResultComponent = (props) => {
 						<Price value={core.price} />
 					)}
 				</div>
+				<CalloutBadge result={result}></CalloutBadge>
 			</div>
 		</article>
 	);

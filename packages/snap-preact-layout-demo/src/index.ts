@@ -1,27 +1,49 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
 import { Result } from './components/Result';
 
+// templates.addComponent('results', 'Result', Result);
+// templates.addComponent('badges', 'Star', StarComponent);
+// templates.addTheme('themeName', ThemeObj);
+
 new SnapTemplates({
-	config: {
-		language: 'en',
-		currency: 'usd',
-		themes: {
-			global: {
-				name: 'bocachica',
-				overrides: {
-					components: {
-						noResults: {
-							templates: {
-								recommendation: {
-									template: 'Recommendation',
-								},
-							},
-						},
-						autocomplete: {
-							templates: {
-								recommendation: {
-									template: 'Recommendation',
-									// resultComponent: 'Product',
+	// config: {
+	// 	language: 'en',
+	// 	currency: 'usd',
+	// },
+	components: {
+		result: {
+			Result: () => Result,
+			CustomResult: async () => (await import('./components/Result')).Result,
+		},
+		badge: {
+			// CustomPill: async () => (await import('./components/Result')).Result,
+		},
+	},
+	themes: {
+		global: {
+			name: 'bocachica',
+			// variables: {
+			// 	breakpoints: [0],
+			// 	color: {}
+			// },
+			overrides: {
+				// layoutOptions: [],
+				// responsive: [{
+				// 	components: {
+				// 		results: {
+				// 			columns: 6,
+				// 		}
+				// 	}
+				// }],
+				components: {
+					noResults: {
+						templates: {
+							recommendation: {
+								enabled: true,
+								component: 'Recommendation',
+								resultComponent: 'Result',
+								config: {
+									tag: 'trending',
 								},
 							},
 						},
@@ -29,14 +51,18 @@ new SnapTemplates({
 				},
 			},
 		},
+		otherTheme: {
+			name: 'pike',
+		},
 	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				// template: 'Search',
-				template: 'HorizontalSearch',
-				resultComponent: Result,
+				component: 'Search',
+				// theme: 'Pike',
+				// component: 'HorizontalSearch',
+				resultComponent: 'Result',
 			},
 		],
 	},
@@ -44,32 +70,31 @@ new SnapTemplates({
 		settings: {
 			branch: BRANCHNAME,
 		},
-		targets: [
-			{
-				component: 'Recs',
-				template: 'Recommendation',
-				resultComponent: Result,
+		templates: {
+			Recs: {
+				component: 'Recommendation',
+				resultComponent: 'Result',
 			},
-			{
-				component: 'Carousel',
-				template: 'Recommendation',
-				resultComponent: Result,
-			},
-			{
-				component: 'HomePageComponent',
-				template: 'Recommendation',
-				resultComponent: Result,
-			},
-		],
+			// bundle: {
+			// 	component: 'BundleRecommendation',
+			// 	resultComponent: 'Result',
+			// },
+			// email: {
+			// 	component: 'EmailRecommendation',
+			// 	resultComponent: 'Result',
+			// },
+		},
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac',
 		targets: [
 			{
 				selector: 'input.searchspring-ac',
-				template: 'Autocomplete',
-				resultComponent: Result,
+				component: 'Autocomplete',
+				resultComponent: 'Result',
 			},
 		],
 	},
 });
+
+// snap.templates.library.addComponentImport('result', 'Result', async () => (await import('./components/Result')).Result);

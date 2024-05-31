@@ -8,4 +8,3 @@ export * from './useA11y';
 export * from './useDeepCompareEffect';
 export * from './useCreateController';
 export * from './useComponent';
-export * from './useComponentMap';
