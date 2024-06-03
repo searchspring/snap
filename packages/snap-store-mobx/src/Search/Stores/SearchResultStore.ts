@@ -320,15 +320,17 @@ export class Variants {
 			const options: string[] = [];
 
 			// create variants objects
-			this.data = variantData.map((variant) => {
-				Object.keys(variant.options).forEach((variantOption) => {
-					if (!options.includes(variantOption)) {
-						options.push(variantOption);
-					}
-				});
+			this.data = variantData
+				.filter((variant) => variant.attributes.available !== false)
+				.map((variant) => {
+					Object.keys(variant.options).forEach((variantOption) => {
+						if (!options.includes(variantOption)) {
+							options.push(variantOption);
+						}
+					});
 
-				return new Variant(variant);
-			});
+					return new Variant(variant);
+				});
 
 			//need to reset this.selections first
 			this.selections = [];
