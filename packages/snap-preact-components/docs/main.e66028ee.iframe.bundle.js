@@ -1,4 +1,4 @@
-/*! For license information please see main.5a850b51.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.e66028ee.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -43765,14 +43765,18 @@
 										config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : this.config;
 									try {
 										var options = [];
-										(this.data = variantData.map(function (variant) {
-											return (
-												Object.keys(variant.options).forEach(function (variantOption) {
-													options.includes(variantOption) || options.push(variantOption);
-												}),
-												new Variant(variant)
-											);
-										})),
+										(this.data = variantData
+											.filter(function (variant) {
+												return !1 !== variant.attributes.available;
+											})
+											.map(function (variant) {
+												return (
+													Object.keys(variant.options).forEach(function (variantOption) {
+														options.includes(variantOption) || options.push(variantOption);
+													}),
+													new Variant(variant)
+												);
+											})),
 											(this.selections = []),
 											options.map(function (option) {
 												var _this2$config,
@@ -43902,7 +43906,9 @@
 										selectedSelections = variants.selections.filter(function (selection) {
 											return selection.field != _this5.field && selection.selected;
 										}),
-										availableVariants = variants.data,
+										availableVariants = variants.data.filter(function (variant) {
+											return variant.available;
+										}),
 										_loop2 = function _loop2(selectedSelection) {
 											availableVariants = availableVariants.filter(function (variant) {
 												var _selectedSelection$se2;
@@ -48801,7 +48807,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.4', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.5', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49316,7 +49322,7 @@
 									website: { trackingCode: this.globals.siteId },
 								}),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.4')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.5')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
