@@ -41,7 +41,7 @@ export const until = async (thing: unknown, customOptions?: Partial<UntilOptions
 		const thingCheck = await checkForThing(thing);
 		if (thingCheck && !options.defer) {
 			resolve(thingCheck);
-		} else {
+		} else if (typeof window !== 'undefined') {
 			const waiting = () => {
 				window?.setTimeout(async () => {
 					const thingCheck = await checkForThing(thing);

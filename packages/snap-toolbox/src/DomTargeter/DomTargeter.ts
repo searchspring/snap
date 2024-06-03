@@ -17,12 +17,12 @@ let globallyTargetedElems: Array<Element> = [];
 export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
-	private document: Document;
+	private document: Document | undefined;
 	private styleBlockRefs: Record<string, Node> = {};
 	private targetedElems: Array<Element> = [];
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
-		this.document = document || window.document;
+		this.document = document || typeof window !== 'undefined' ? window.document : undefined;
 
 		this.targets = targets;
 
@@ -50,9 +50,9 @@ export class DomTargeter {
 				let clickElems: (Element | Document)[] = [];
 
 				if (typeof target.clickRetarget == 'boolean') {
-					clickElems.push(this.document);
+					if (this.document) clickElems.push(this.document);
 				} else {
-					clickElems = Array.from(this.document.querySelectorAll(target.clickRetarget));
+					if (this.document) clickElems = Array.from(this.document.querySelectorAll(target.clickRetarget));
 				}
 
 				clickElems.map((elem) => {
@@ -66,12 +66,12 @@ export class DomTargeter {
 			if (target.autoRetarget) {
 				// do initial retargeting check
 				checker();
-			} else if (/complete|interactive|loaded/.test(this.document.readyState)) {
+			} else if (this.document && /complete|interactive|loaded/.test(this.document.readyState)) {
 				// DOMContent has loaded - unhide targets
 				target.hideTarget && this.unhideTarget(target.selector);
 			} else {
 				// attempt retarget on DOMContentLoaded
-				this.document.addEventListener('DOMContentLoaded', () => {
+				this.document?.addEventListener('DOMContentLoaded', () => {
 					this.retarget();
 					target.hideTarget && this.unhideTarget(target.selector);
 				});
@@ -136,7 +136,7 @@ export class DomTargeter {
 	unhideTarget = (selector: string): void => {
 		if (this.styleBlockRefs[selector]) {
 			try {
-				this.document.head.removeChild(this.styleBlockRefs[selector]);
+				this.document?.head.removeChild(this.styleBlockRefs[selector]);
 				delete this.styleBlockRefs[selector];
 			} catch (err) {
 				// do nothing
@@ -148,15 +148,17 @@ export class DomTargeter {
 		if (this.styleBlockRefs[selector]) return;
 
 		const styles = `${selector} { visibility: hidden !important }`;
-		const styleBlock = this.document.createElement('style');
-		styleBlock.setAttribute('type', 'text/css');
-		styleBlock.appendChild(this.document.createTextNode(styles));
-		this.document.head.appendChild(styleBlock);
-		this.styleBlockRefs[selector] = styleBlock;
+		if (this.document) {
+			const styleBlock = this.document.createElement('style');
+			styleBlock.setAttribute('type', 'text/css');
+			styleBlock.appendChild(this.document.createTextNode(styles));
+			this.document.head.appendChild(styleBlock);
+			this.styleBlockRefs[selector] = styleBlock;
+		}
 	};
 
 	private domQuery(selector: string) {
-		return Array.from(this.document.querySelectorAll(selector));
+		return Array.from(this.document?.querySelectorAll(selector) || []);
 	}
 
 	private inject(elem: Element, target: Target): Element {

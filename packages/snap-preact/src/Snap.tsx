@@ -298,6 +298,7 @@ export class Snap {
 	};
 
 	constructor(config: SnapConfig, services?: SnapServices) {
+		console.log('shouldbelinked');
 		window.removeEventListener('error', this.handlers.error);
 		window.addEventListener('error', this.handlers.error);
 

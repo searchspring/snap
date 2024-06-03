@@ -89,7 +89,7 @@ export class Tracker {
 			},
 		};
 
-		if (!window.searchspring?.tracker) {
+		if (typeof window !== 'undefined' && !window.searchspring?.tracker) {
 			window.searchspring = window.searchspring || {};
 			window.searchspring.tracker = this;
 			window.searchspring.version = version;
@@ -125,81 +125,82 @@ export class Tracker {
 			);
 		});
 
-		document.addEventListener('click', (event: Event) => {
-			const updateRecsControllers = (): void => {
-				if (window.searchspring.controller) {
-					Object.keys(window.searchspring.controller).forEach((name) => {
-						const controller = window.searchspring.controller[name];
-						if (controller.type === 'recommendation' && controller.config?.realtime) {
-							controller.search();
-						}
+		typeof document !== 'undefined' &&
+			document.addEventListener('click', (event: Event) => {
+				const updateRecsControllers = (): void => {
+					if (typeof window !== 'undefined' && window.searchspring.controller) {
+						Object.keys(window.searchspring.controller).forEach((name) => {
+							const controller = window.searchspring.controller[name];
+							if (controller.type === 'recommendation' && controller.config?.realtime) {
+								controller.search();
+							}
+						});
+					}
+				};
+
+				const getClickAttributes = (event: Event): Record<string, any> => {
+					const attributeList = [
+						`ss-${this.config.id}-cart-add`,
+						`ss-${this.config.id}-cart-remove`,
+						`ss-${this.config.id}-cart-clear`,
+						`ss-${this.config.id}-cart-view`,
+						`ss-${this.config.id}-intellisuggest`,
+						`ss-${this.config.id}-intellisuggest-signature`,
+						`href`,
+					];
+					const attributes: { [key: string]: any } = {};
+					let levels = 0;
+
+					let elem: HTMLElement | null = null;
+					elem = event && (event.target as HTMLElement);
+
+					while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
+						Object.values(elem.attributes).forEach((attr: Attr) => {
+							const attrName = attr.nodeName;
+
+							if (attributeList.indexOf(attrName) != -1) {
+								attributes[attrName] = elem && elem.getAttribute(attrName);
+							}
+						});
+
+						elem = elem.parentElement;
+						levels++;
+					}
+
+					return attributes;
+				};
+
+				const attributes = getClickAttributes(event);
+
+				if (attributes[`ss-${this.config.id}-cart-add`]) {
+					// add skus to cart
+					const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
+					this.cookies.cart.add(skus);
+					updateRecsControllers();
+				} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
+					// remove skus from cart
+					const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
+					this.cookies.cart.remove(skus);
+					updateRecsControllers();
+				} else if (`ss-${this.config.id}-cart-clear` in attributes) {
+					// clear all from cart
+					this.cookies.cart.clear();
+					updateRecsControllers();
+				} else if (`ss-${this.config.id}-cart-view` in attributes) {
+					// update recs
+					updateRecsControllers();
+				} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
+					// product click
+					const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
+					const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
+					const href = attributes['href'];
+					this.track.product.click({
+						intellisuggestData,
+						intellisuggestSignature,
+						href,
 					});
 				}
-			};
-
-			const getClickAttributes = (event: Event): Record<string, any> => {
-				const attributeList = [
-					`ss-${this.config.id}-cart-add`,
-					`ss-${this.config.id}-cart-remove`,
-					`ss-${this.config.id}-cart-clear`,
-					`ss-${this.config.id}-cart-view`,
-					`ss-${this.config.id}-intellisuggest`,
-					`ss-${this.config.id}-intellisuggest-signature`,
-					`href`,
-				];
-				const attributes: { [key: string]: any } = {};
-				let levels = 0;
-
-				let elem: HTMLElement | null = null;
-				elem = event && (event.target as HTMLElement);
-
-				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
-					Object.values(elem.attributes).forEach((attr: Attr) => {
-						const attrName = attr.nodeName;
-
-						if (attributeList.indexOf(attrName) != -1) {
-							attributes[attrName] = elem && elem.getAttribute(attrName);
-						}
-					});
-
-					elem = elem.parentElement;
-					levels++;
-				}
-
-				return attributes;
-			};
-
-			const attributes = getClickAttributes(event);
-
-			if (attributes[`ss-${this.config.id}-cart-add`]) {
-				// add skus to cart
-				const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
-				this.cookies.cart.add(skus);
-				updateRecsControllers();
-			} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
-				// remove skus from cart
-				const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
-				this.cookies.cart.remove(skus);
-				updateRecsControllers();
-			} else if (`ss-${this.config.id}-cart-clear` in attributes) {
-				// clear all from cart
-				this.cookies.cart.clear();
-				updateRecsControllers();
-			} else if (`ss-${this.config.id}-cart-view` in attributes) {
-				// update recs
-				updateRecsControllers();
-			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
-				// product click
-				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
-				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
-				const href = attributes['href'];
-				this.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				});
-			}
-		});
+			});
 
 		this.sendEvents();
 	}
@@ -262,7 +263,7 @@ export class Tracker {
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					href: href || window.location.href,
+					href: href || typeof window !== 'undefined' ? window.location.href : '',
 					filename,
 					stack,
 					message,
@@ -555,13 +556,13 @@ export class Tracker {
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 				cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 			} else if (getFlags().storage()) {
-				userId = window.localStorage.getItem(USERID_COOKIE_NAME) || uuidv4();
-				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
+				userId = (typeof window !== 'undefined' && window.localStorage.getItem(USERID_COOKIE_NAME)) || uuidv4();
+				typeof window !== 'undefined' && window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			} else {
-				throw 'unsupported features';
+				// throw 'unsupported features';
 			}
 		} catch (e) {
-			console.error('Failed to persist user id to cookie or local storage:', e);
+			// console.error('Failed to persist user id to cookie or local storage:', e);
 		}
 
 		return userId;
@@ -571,8 +572,8 @@ export class Tracker {
 		let sessionId;
 		if (getFlags().storage()) {
 			try {
-				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
-				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
+				sessionId = (typeof window !== 'undefined' && window.sessionStorage.getItem(SESSIONID_STORAGE_NAME)) || uuidv4();
+				typeof window !== 'undefined' && window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
 				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
@@ -737,15 +738,19 @@ export class Tracker {
 		}
 
 		clearTimeout(this.isSending);
-		this.isSending = window.setTimeout(() => {
-			if (savedEvents.length) {
-				const xhr = new XMLHttpRequest();
-				const origin = this.config.requesters?.beacon?.origin || 'https://beacon.searchspring.io';
-				xhr.open('POST', `${origin}/beacon`);
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.send(JSON.stringify(savedEvents.length == 1 ? savedEvents[0] : savedEvents));
-			}
-			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
-		}, BATCH_TIMEOUT);
+
+		this.isSending =
+			typeof window !== 'undefined'
+				? window.setTimeout(() => {
+						if (savedEvents.length) {
+							const xhr = new XMLHttpRequest();
+							const origin = this.config.requesters?.beacon?.origin || 'https://beacon.searchspring.io';
+							xhr.open('POST', `${origin}/beacon`);
+							xhr.setRequestHeader('Content-Type', 'application/json');
+							xhr.send(JSON.stringify(savedEvents.length == 1 ? savedEvents[0] : savedEvents));
+						}
+						this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
+				  }, BATCH_TIMEOUT)
+				: undefined;
 	};
 }

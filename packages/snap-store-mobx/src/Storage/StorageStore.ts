@@ -27,16 +27,16 @@ export class StorageStore {
 				case StorageType.session: {
 					this.type = featureFlags.storage ? (config.type as StorageType) : null;
 					if (this.type) {
-						this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
-						window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+						this.state = JSON.parse((typeof window !== 'undefined' && window.sessionStorage.getItem(this.key)) || '{}');
+						typeof window !== 'undefined' && window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				}
 				case StorageType.local: {
 					this.type = featureFlags.storage ? (config.type as StorageType) : null;
 					if (this.type) {
-						this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
-						window.localStorage.setItem(this.key, JSON.stringify(this.state));
+						this.state = JSON.parse((typeof window !== 'undefined' && window.localStorage.getItem(this.key)) || '{}');
+						typeof window !== 'undefined' && window.localStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				}
@@ -71,10 +71,10 @@ export class StorageStore {
 		});
 		switch (this.type) {
 			case StorageType.session:
-				window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+				typeof window !== 'undefined' && window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 				break;
 			case StorageType.local:
-				window.localStorage.setItem(this.key, JSON.stringify(this.state));
+				typeof window !== 'undefined' && window.localStorage.setItem(this.key, JSON.stringify(this.state));
 				break;
 			case StorageType.cookie:
 				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
@@ -85,11 +85,11 @@ export class StorageStore {
 	public get(path: string): any | undefined {
 		switch (this.type) {
 			case StorageType.session:
-				const sessionData = window.sessionStorage.getItem(this.key);
+				const sessionData = typeof window !== 'undefined' ? window.sessionStorage.getItem(this.key) : null;
 				this.state = sessionData ? JSON.parse(sessionData) : {};
 				break;
 			case StorageType.local:
-				const localData = window.localStorage.getItem(this.key);
+				const localData = typeof window !== 'undefined' ? window.localStorage.getItem(this.key) : null;
 				this.state = localData ? JSON.parse(localData) : {};
 				break;
 			case StorageType.cookie:
@@ -118,10 +118,10 @@ export class StorageStore {
 	public clear(): void {
 		switch (this.type) {
 			case StorageType.session:
-				window.sessionStorage.removeItem(this.key);
+				typeof window !== 'undefined' && window.sessionStorage.removeItem(this.key);
 				break;
 			case StorageType.local:
-				window.localStorage.removeItem(this.key);
+				typeof window !== 'undefined' && window.localStorage.removeItem(this.key);
 				break;
 			case StorageType.cookie:
 				utils.cookies.unset(this.key);

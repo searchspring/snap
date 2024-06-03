@@ -18,7 +18,7 @@ export class PixelEvent {
 			`&pt=${encodeURIComponent(document.title)}` +
 			`&v=1` + // version always '1'? or set to snap package version?
 			`&x=${Math.floor(Math.random() * 2147483647)}` +
-			`${window.document.referrer ? `&r=${encodeURIComponent(window.document.referrer)}` : ''}`;
+			`${typeof window !== 'undefined' && window.document.referrer ? `&r=${encodeURIComponent(window.document.referrer)}` : ''}`;
 
 		switch (payload.category) {
 			case BeaconCategory.PAGEVIEW:

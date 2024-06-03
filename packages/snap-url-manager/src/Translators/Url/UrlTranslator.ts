@@ -117,11 +117,16 @@ export class UrlTranslator implements Translator {
 	}
 
 	bindExternalEvents(update: () => void): void {
-		window.addEventListener('popstate', update);
+		if (typeof window !== 'undefined') {
+			window.addEventListener('popstate', update);
+		}
 	}
 
 	getCurrentUrl(): string {
-		return window.location.search + window.location.hash;
+		if (typeof window !== 'undefined') {
+			return window.location.search + window.location.hash;
+		}
+		return '';
 	}
 
 	getConfig(): UrlTranslatorConfigFull {
@@ -368,7 +373,7 @@ export class UrlTranslator implements Translator {
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
 			? this.config.urlRoot.split('#')[0]
-			: this.config.urlRoot || window.location.pathname;
+			: this.config.urlRoot || (typeof window !== 'undefined' ? window.location.pathname : undefined);
 
 		const params = this.stateToParams(state);
 		const queryParams = params.filter((p) => p.type == ParamLocationType.query);

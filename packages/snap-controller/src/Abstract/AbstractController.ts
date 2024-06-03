@@ -151,7 +151,9 @@ export abstract class AbstractController {
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter | undefined {
-		return this.addTargeter(new DomTargeter([target], onTarget, document));
+		if (typeof document !== 'undefined') {
+			return this.addTargeter(new DomTargeter([target], onTarget, document));
+		}
 	}
 
 	public addTargeter(target: DomTargeter): DomTargeter | undefined {

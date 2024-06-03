@@ -4,8 +4,10 @@ export const cookies: Cookies = {
 
 		let cookie = name + '=' + encodeURIComponent(val) + ';' + 'SameSite=' + sameSite + ';path=/;';
 
-		if (window.location.protocol == 'https:') {
-			cookie += 'Secure;';
+		if (typeof window !== 'undefined') {
+			if (window.location.protocol == 'https:') {
+				cookie += 'Secure;';
+			}
 		}
 
 		if (expires) {
@@ -14,28 +16,34 @@ export const cookies: Cookies = {
 			cookie += 'expires=' + d['toUTCString']() + ';';
 		}
 
-		window.document.cookie = cookie;
+		if (typeof window !== 'undefined') {
+			window.document.cookie = cookie;
+		}
 	},
 	get: (name: string): string => {
 		name = name + '=';
-		const ca = window.document.cookie.split(';');
+		if (typeof window !== 'undefined') {
+			const ca = window.document.cookie.split(';');
 
-		for (let i = 0; i < ca.length; i++) {
-			let c = ca[i];
+			for (let i = 0; i < ca.length; i++) {
+				let c = ca[i];
 
-			while (c.charAt(0) == ' ') {
-				c = c.substring(1);
-			}
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
 
-			if (c.indexOf(name) == 0) {
-				return decodeURIComponent(c.substring(name.length, c.length));
+				if (c.indexOf(name) == 0) {
+					return decodeURIComponent(c.substring(name.length, c.length));
+				}
 			}
 		}
 
 		return '';
 	},
 	unset: (name: string): void => {
-		window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+		if (typeof window !== 'undefined') {
+			window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+		}
 	},
 };
 

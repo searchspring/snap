@@ -35,7 +35,9 @@ export class QueryStringTranslator implements Translator {
 	}
 
 	bindExternalEvents(update: () => void): void {
-		window.addEventListener('popstate', update);
+		if (typeof window !== 'undefined') {
+			window.addEventListener('popstate', update);
+		}
 	}
 
 	getCurrentUrl(): string {
@@ -63,7 +65,7 @@ export class QueryStringTranslator implements Translator {
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
 			? this.config.urlRoot.split('#')[0]
-			: this.config.urlRoot || window.location.pathname;
+			: this.config.urlRoot || (typeof window !== 'undefined' ? window.location.pathname : undefined);
 
 		const queryParamString = params.length
 			? '?' +
