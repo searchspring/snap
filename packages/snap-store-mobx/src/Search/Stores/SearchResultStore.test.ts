@@ -227,7 +227,7 @@ describe('SearchResultStore', () => {
 
 				const variants = (result as Product).variants;
 
-				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect(variants?.data.length).toStrictEqual(parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length);
 				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 			});
 		});
@@ -268,14 +268,18 @@ describe('SearchResultStore', () => {
 
 				expect(variants).toBeDefined();
 
-				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect((result as Product).variants?.data.length).toStrictEqual(
+					parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length
+				);
 				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 
 				(result as Product).variants?.update(parsedVariantDataToUse);
 
 				expect((result as Product).variants).toBeDefined();
 
-				expect((result as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+				expect((result as Product).variants?.data.length).toStrictEqual(
+					parsedVariantDataToUse.filter((variant: any) => variant.attributes.available !== false).length
+				);
 				expect((result as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
 			});
 		});
@@ -373,14 +377,18 @@ describe('SearchResultStore', () => {
 
 			expect(variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 
 			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
 
 			expect((resultForTest as Product).variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
 
 			expect(resultForTest).toBeDefined();
@@ -445,14 +453,18 @@ describe('SearchResultStore', () => {
 
 			expect(variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 
 			(resultForTest as Product).variants?.update(parsedVariantDataToUse);
 
 			expect((resultForTest as Product).variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantDataToUse.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
 
 			expect(resultForTest).toBeDefined();
@@ -488,14 +500,18 @@ describe('SearchResultStore', () => {
 
 			expect(variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantData.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 
 			(resultForTest as Product).variants?.update(parsedVariantDataToUse, newVariantsConfig);
 
 			expect((resultForTest as Product).variants).toBeDefined();
 
-			expect((resultForTest as Product).variants?.data.length).toStrictEqual(parsedVariantDataToUse.length);
+			expect((resultForTest as Product).variants?.data.length).toStrictEqual(
+				parsedVariantDataToUse.filter((variant: any) => variant.attributes.available !== false).length
+			);
 			expect((resultForTest as Product).variants?.selections.length).toBe(Object.keys(parsedVariantDataToUse[0].options).length);
 
 			expect(resultForTest).toBeDefined();
@@ -650,12 +666,12 @@ describe('SearchResultStore', () => {
 
 				// only uses "available" variants
 				expect(variants?.active).toBe(variants?.data.find((variant) => variant.available));
-				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect(variants?.data.length).toStrictEqual(parsedVariantData.filter((variant: any) => variant.attributes.available !== false).length);
 				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
 
-				// creates a variant for each data entry
+				// creates a variant for each available data entry
 				variants.data.forEach((variant, index) => {
-					expect(variant).toStrictEqual(new Variant(parsedVariantData[index]));
+					expect(variant).toStrictEqual(new Variant(parsedVariantData.filter((variant: any) => variant.attributes.available !== false)[index]));
 				});
 			});
 

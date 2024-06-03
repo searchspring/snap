@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.5](https://github.com/searchspring/snap/compare/v0.56.4...v0.56.5) (2024-06-03)
+
+### Bug Fixes
+
+- **searchresultstore:** filter out unavailable variants at contruction ([e03b8b1](https://github.com/searchspring/snap/commit/e03b8b19cfe69a5ec3c7939a9591ec2e2c11631d))
+- **searchresultstore:** needed to filter out unavailable options even if there are no selections ([207fa48](https://github.com/searchspring/snap/commit/207fa48fdfe38340bcdb6e7901106e4daefdeaff))
+
 ## [0.56.4](https://github.com/searchspring/snap/compare/v0.56.3...v0.56.4) (2024-05-28)
 
 ### Bug Fixes
