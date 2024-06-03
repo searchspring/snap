@@ -480,12 +480,10 @@ export class VariantSelection {
 		let availableVariants = variants.data.filter((variant) => variant.available);
 
 		// loop through selectedSelections and remove products that do not match
-		if (selectedSelections.length) {
-			for (const selectedSelection of selectedSelections) {
-				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value
-				);
-			}
+		for (const selectedSelection of selectedSelections) {
+			availableVariants = availableVariants.filter(
+				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+			);
 		}
 
 		const newValues: VariantSelectionValue[] = variants.data
