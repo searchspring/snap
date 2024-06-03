@@ -320,15 +320,17 @@ export class Variants {
 			const options: string[] = [];
 
 			// create variants objects
-			this.data = variantData.map((variant) => {
-				Object.keys(variant.options).forEach((variantOption) => {
-					if (!options.includes(variantOption)) {
-						options.push(variantOption);
-					}
-				});
+			this.data = variantData
+				.filter((variant) => variant.attributes.available !== false)
+				.map((variant) => {
+					Object.keys(variant.options).forEach((variantOption) => {
+						if (!options.includes(variantOption)) {
+							options.push(variantOption);
+						}
+					});
 
-				return new Variant(variant);
-			});
+					return new Variant(variant);
+				});
 
 			//need to reset this.selections first
 			this.selections = [];
@@ -475,7 +477,7 @@ export class VariantSelection {
 		// current selection should only consider OTHER selections for availability
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
 
-		let availableVariants = variants.data;
+		let availableVariants = variants.data.filter((variant) => variant.available);
 
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
