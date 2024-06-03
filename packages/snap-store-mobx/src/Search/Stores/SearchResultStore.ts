@@ -477,17 +477,15 @@ export class VariantSelection {
 		// current selection should only consider OTHER selections for availability
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
 
-		let availableVariants = variants.data;
+		let availableVariants = variants.data.filter((variant) => variant.available);
 
 		// loop through selectedSelections and remove products that do not match
 		if (selectedSelections.length) {
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value
 				);
 			}
-		} else {
-			availableVariants = availableVariants.filter((variant) => variant.available);
 		}
 
 		const newValues: VariantSelectionValue[] = variants.data
