@@ -70,6 +70,13 @@ var documents = [
 						url: './docs/PREACT_RECOMMENDATIONS.md',
 						searchable: true,
 					},
+					{
+						label: 'Badges',
+						route: '/start-preact-badges',
+						type: 'markdown',
+						url: './docs/PREACT_BADGES.md',
+						searchable: true,
+					},
 				],
 			},
 			{
