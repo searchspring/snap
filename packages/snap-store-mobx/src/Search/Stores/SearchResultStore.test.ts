@@ -529,6 +529,295 @@ describe('SearchResultStore', () => {
 			expect(newinseamSettings).toContain(newinseamSelection?.selected?.value?.toLocaleLowerCase());
 		});
 
+		it('grabs selections from dom on load when using realtime', () => {
+			const field = 'color';
+			const value = 'Mirage';
+
+			//add pdp variant option elems to the dom
+			let colorOptionElem = document.createElement('div');
+			colorOptionElem.setAttribute('ss-variant-option', `${field}:${value}`);
+			colorOptionElem.setAttribute('ss-variant-option-selected', 'true');
+			document.body.appendChild(colorOptionElem);
+
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						realtime: {
+							enabled: true,
+						},
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+			selection?.values.forEach((val) => {
+				console.log(val.value);
+			});
+			expect(selection).toBeDefined();
+			expect(selection?.selected?.value).toBe(value);
+
+			document.body.removeChild(colorOptionElem);
+		});
+
+		it('updates selections from dom elem onclicks realtime', () => {
+			const field = 'color';
+			const value = 'Mirage';
+
+			//add pdp variant option elems to the dom
+			let colorOptionElem = document.createElement('div');
+			colorOptionElem.setAttribute('ss-variant-option', `${field}:${value}`);
+			document.body.appendChild(colorOptionElem);
+
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						realtime: {
+							enabled: true,
+						},
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			let selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+
+			expect(selection).toBeDefined();
+			expect(selection?.selected?.value).not.toBe(value);
+
+			colorOptionElem.click();
+
+			selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+
+			expect(selection).toBeDefined();
+			expect(selection?.selected?.value).toBe(value);
+
+			document.body.removeChild(colorOptionElem);
+		});
+
+		it('can use filter first when grabbing selections from dom on load', () => {
+			const field = 'color';
+			const value = 'Mirage';
+
+			//add pdp variant option elems to the dom
+			let colorOptionElem = document.createElement('div');
+			colorOptionElem.setAttribute('ss-variant-option', `${field}:${value}`);
+			colorOptionElem.setAttribute('ss-variant-option-selected', 'true');
+			document.body.appendChild(colorOptionElem);
+
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						realtime: {
+							enabled: true,
+							filters: ['first'],
+						},
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			let selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+
+			expect(selection?.selected?.value).toBe(value);
+
+			const secondResultForTest = results[1] as Product;
+			expect(secondResultForTest).toBeDefined();
+
+			selection = secondResultForTest.variants?.selections.find((selection) => selection.field == field);
+			expect(selection?.values.some((val) => val.value == value)).toBeTruthy();
+
+			expect(selection?.selected?.value).not.toBe(value);
+
+			document.body.removeChild(colorOptionElem);
+		});
+
+		it('can use filter first while updating selections from dom elem onclicks realtime', () => {
+			const field = 'color';
+			const value = 'Mirage';
+
+			//add pdp variant option elems to the dom
+			let colorOptionElem = document.createElement('div');
+			colorOptionElem.setAttribute('ss-variant-option', `${field}:${value}`);
+			document.body.appendChild(colorOptionElem);
+
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						realtime: {
+							enabled: true,
+							filters: ['first'],
+						},
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const secondResultForTest = results[1] as Product;
+			expect(secondResultForTest).toBeDefined();
+
+			let selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+			const selection2 = secondResultForTest.variants?.selections.find((selection) => selection.field == field);
+
+			expect(selection?.selected?.value).not.toBe(value);
+
+			colorOptionElem.click();
+
+			expect(selection?.selected?.value).toBe(value);
+
+			expect(selection2?.values.some((val) => val.value == value)).toBeTruthy();
+			expect(selection2?.selected?.value).not.toBe(value);
+
+			document.body.removeChild(colorOptionElem);
+		});
+
+		it('can use filter unaltered while updating selections from dom elem onclicks realtime', () => {
+			const field = 'color';
+			const value = 'Mirage';
+
+			//add pdp variant option elems to the dom
+			let colorOptionElem = document.createElement('div');
+			colorOptionElem.setAttribute('ss-variant-option', `${field}:${value}`);
+			document.body.appendChild(colorOptionElem);
+
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig: StoreConfigs = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						realtime: {
+							enabled: true,
+							filters: ['unaltered'],
+						},
+						options: {
+							color: {
+								thumbnailBackgroundImages: true,
+							},
+						},
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			const resultForTest = results[0] as Product;
+			expect(resultForTest).toBeDefined();
+
+			const secondResultForTest = results[1] as Product;
+			expect(secondResultForTest).toBeDefined();
+
+			let selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
+			const selection2 = secondResultForTest.variants?.selections.find((selection) => selection.field == field);
+
+			expect(selection?.selected?.value).not.toBe(value);
+			expect(selection2?.selected?.value).not.toBe(value);
+
+			selection?.select('Desert');
+
+			colorOptionElem.click();
+
+			expect(selection?.selected?.value).toBe('Desert');
+
+			expect(selection2?.values.some((val) => val.value == value)).toBeTruthy();
+			expect(selection2?.selected?.value).toBe(value);
+
+			document.body.removeChild(colorOptionElem);
+		});
+
 		it('can use the "thumbnailBackgroundImages" option to set the backgroundImageUrl for each variant to the variant thumbnailImageUrl', () => {
 			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
 
