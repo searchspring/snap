@@ -10,7 +10,7 @@ To displays badges the Result card must include the [OverlayBadge](https://searc
 The `OverlayBadge` component wraps elements (children) that should have badges overlayed - typically the product image.
 
 ```jsx
-<OverlayBadge controller={controller} controller={controller} result={controller.store.results[0]}>
+<OverlayBadge controller={controller} result={controller.store.results[0]}>
 	<img src='/images/example.png'/>
 </OverlayBadge>
 ```
@@ -27,7 +27,9 @@ The `CalloutBadge` component displays badges inline and can be placed in any pos
 
 Custom Badge Templates can be created and sync to the Searchspring Management Console using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/#/start-setup) for installing Snapfu.
 
-First we'll initialize a new custom badge
+### Initialize Custom Badges
+
+First we'll initialize a new custom badge. The code examples on this page will use a `[badgename]` of `CustomBadge`
 
 ```sh
 snapfu badges init [badgename]
@@ -48,15 +50,15 @@ export const CustomBadge = observer((props) => {
 });
 ```
 
-- `src/components/Badges/[badgename]/[badgename].json` - The json file describes the badge template and its parameters.
+- `src/components/Badges/[badgename]/[badgename].json` - The json file describes the badge template and its parameters. See `Badge Template Parameters` section below for possible parameters.
 
 ```json
 {
 	"type": "snap/badge/default",
-	"name": "test",
-	"label": "Test Badge",
-	"description": "test custom template",
-	"component": "Test",
+	"name": "custombadge",
+	"label": "CustomBadge Badge",
+	"description": "custombadge custom template",
+	"component": "CustomBadge",
 	"locations": [
 		"left",
 		"right",
@@ -68,6 +70,41 @@ export const CustomBadge = observer((props) => {
 	"parameters": []
 }
 ```
+
+### Syncing Custom Badges
+
+Next we'll sync our custom badge - registering it to the Searchspring Management Console. 
+
+```sh
+snapfu badges sync [badgename]
+```
+
+### Using Custom Badges
+
+Finally, in order to use our custom badge component, we'll need to provide a `componentMap` prop containing a mapping of our custom components to the `OverlayBadge` and `CalloutBadge` components.
+
+```jsx
+import { CustomBadge } from './components/Badges/CustomBadge';
+
+<OverlayBadge 
+	controller={controller} 
+	result={controller.store.results[0]}
+	componentMap={{
+        'CustomBadge': () => CustomBadge
+    }}
+>
+	<img src='/images/example.png'/>
+</OverlayBadge>
+
+<CalloutBadge 
+	result={controller.store.results[0]} 
+	componentMap={{
+        'CustomBadge': () => CustomBadge
+    }}
+/>
+```
+
+The `componentMap` prop can also be used to overwrite the default badge components without the need of initializing and syncing a dedicated custom component.
 
 ### Badge Template Overview
 
@@ -110,14 +147,14 @@ For example, if the locations.json file contains the following location definiti
 {
 	"left": [
 		{
-		"tag": "left",
-		"name": "Top Left"
+			"tag": "left",
+			"name": "Top Left"
 		},
 		{
-		"tag": "left-bottom",
-		"name": "Bottom Left"
+			"tag": "left-bottom",
+			"name": "Bottom Left"
 		}
-	],
+	]
 }
 ```
 
@@ -247,36 +284,36 @@ We can create custom overlay and callout locations by defining a `locations.json
 
 ```json
 {
-  "type": "snap/badge/locations",
-  "left": [
-    {
-      "tag": "left",
-      "name": "Top Left"
-    },
-    {
-      "tag": "left-bottom",
-      "name": "Bottom Left"
-    }
-  ],
-  "right": [
-    {
-      "tag": "right",
-      "name": "Top Right"
-    },
-    {
-      "tag": "right-bottom",
-      "name": "Bottom Right"
-    }
-  ],
-  "callout": [
-    {
-      "tag": "callout",
-      "name": "Callout"
-    },
-    {
-      "tag": "callout_secondary",
-      "name": "Secondary Callout"
-    }
-  ]
+	"type": "snap/badge/locations",
+	"left": [
+		{
+			"tag": "left",
+			"name": "Top Left"
+		},
+		{
+			"tag": "left-bottom",
+			"name": "Bottom Left"
+		}
+	],
+	"right": [
+		{
+			"tag": "right",
+			"name": "Top Right"
+		},
+		{
+			"tag": "right-bottom",
+			"name": "Bottom Right"
+		}
+	],
+	"callout": [
+		{
+			"tag": "callout",
+			"name": "Callout"
+		},
+		{
+			"tag": "callout_secondary",
+			"name": "Secondary Callout"
+		}
+	]
 }
 ```

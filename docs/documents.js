@@ -298,6 +298,13 @@ var documents = [
 						searchable: true,
 					},
 					{
+						label: 'Meta',
+						route: '/package-storeMobx-meta',
+						type: 'markdown',
+						url: './packages/snap-store-mobx/src/Meta/README.md',
+						searchable: true,
+					},
+					{
 						label: 'Autocomplete',
 						route: '/package-storeMobx-autocomplete',
 						type: 'markdown',
