@@ -108,7 +108,7 @@ The `componentMap` prop can also be used to overwrite the default badge componen
 
 ### Badge Template Overview
 
-The following badge template properties are **required**:
+#### The following badge template properties are **required**:
 
 `type` - should not be changed. It is utilized by the Snapfu CLI when syncing
 
@@ -122,6 +122,10 @@ The following badge template properties are **required**:
 
 `locations` - a list of template locations this badge template can be placed in. This can be used to restrict certain badges to certain locations. See `Custom Badge Locations` section below for adding locations. See `Badge Template Locations` section below for possible values.
 
+`parameters` - a list of badge template parameters. Can be an empty array to not contain template parameters. See `Badge Template Parameters` section below for possible parameters.
+
+#### The following badge template properties are **optional**:
+
 `value.enabled` - boolean that when true, required a badge `value` to be provided when using this template
 
 `value.validations.min` - ensures `value` meets a numerical minimum or `string` / `url` length
@@ -132,7 +136,6 @@ The following badge template properties are **required**:
 
 `value.validations.regexExplain` - required if using `value.validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails
 
-`parameters` - a list of badge template parameters. See `Badge Template Parameters` section below for possible parameters.
 
 ### Badge Template Locations
 Badge template locations is an array of strings. 
@@ -164,6 +167,8 @@ To restrict a badge template to a custom location, the badge template `locations
 ### Badge Template Parameters
 Badge template parameters is an array of objects. Each object is a template parameter and contains the following properties: 
 
+#### The following badge template parameters properties are **required**:
+
 `name` - unique badge location identifier
 
 `type` - parameter value type. Available types: `array`, `string`, `color`, `url`, `integer`, `decimal`, `boolean`, `checkbox`, `toggle`. See example below for example usage of each type. 
@@ -172,7 +177,12 @@ Badge template parameters is an array of objects. Each object is a template para
 
 `description` - badge location description
 
-`defaultValue` - optional default value that will be used unless specified when configuring a new badge rule. Must be a string regardless of different `type` options.
+`options` - required only if `type` is `array`. Defines a list of available values to select.
+
+
+#### The following badge template parameters properties are **optional**:
+
+`defaultValue` - default value that will be used unless specified when configuring a new badge rule. Must be a string regardless of different `type` options.
 
 `validations` - only applicable if `type` is `string`, `url`. `integer`, `decimal`
 
@@ -184,7 +194,6 @@ Badge template parameters is an array of objects. Each object is a template para
 
 `validations.regexExplain` - required if using `validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails
 
-`options` - required if `type` is `array`. Defined a list of available values to select.
 
 ```json
 {
