@@ -8,10 +8,7 @@ type BigCommerceAddToCartConfig = {
 type LineItem = {
 	product_id: string;
 	quantity: number;
-};
-
-type FormData = {
-	line_items: LineItem[];
+	attributes: { attributeId?: string; optionId?: string }[];
 };
 
 export const addToCart = async (items: Product[], config?: BigCommerceAddToCartConfig) => {
@@ -20,9 +17,7 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 		return;
 	}
 
-	const formData: FormData = {
-		line_items: [],
-	};
+	const lineItems: LineItem[] = [];
 
 	items.map((item) => {
 		let id = item?.display?.mappings?.core?.uid;
@@ -44,19 +39,32 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 		}
 
 		if (id && item.quantity) {
-			const obj = {
+			const productDetails: LineItem = {
 				product_id: id,
 				quantity: item.quantity,
+				attributes: [],
 			};
 
-			formData.line_items.push(obj);
+			const options = item.variants?.active?.options;
+			if (options) {
+				Object.keys(options).forEach((option) => {
+					const attributeId = options[option].attributeId;
+					const optionId = options[option].optionId;
+
+					if (attributeId && optionId) {
+						productDetails.attributes.push({ attributeId, optionId });
+					}
+				});
+			}
+
+			lineItems.push(productDetails);
 		}
 	});
 
 	// first check how many products we are adding
-	if (formData.line_items.length) {
-		for (let i = 0; i < formData.line_items.length; i++) {
-			await addSingleProductv1(formData.line_items[i]);
+	if (lineItems.length) {
+		for (let i = 0; i < lineItems.length; i++) {
+			await addSingleProductv1(lineItems[i]);
 		}
 	}
 
@@ -72,35 +80,26 @@ const addSingleProductv1 = async (item: LineItem) => {
 		return;
 	}
 
-	const endpoint = {
-		route: `/remote/v1/cart/add`,
-		method: 'POST',
-		accept: 'application/json',
-		content: 'application/json',
-		success: 200,
-	};
-
 	try {
-		const payload = JSON.stringify({
-			...item,
-			action: 'add',
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', `${item.product_id}`);
+		formData.append('qty[]', `${item.quantity}`);
+		item.attributes.forEach((attribute) => {
+			formData.append(`attribute[${attribute.attributeId}]`, `${attribute.optionId}`);
 		});
 
-		const init: RequestInit = {
-			method: endpoint.method,
-			credentials: 'same-origin',
-			headers: {
-				// note: no authorization
-				Accept: endpoint.accept,
-				'Content-Type': endpoint.content,
-			},
-			body: payload,
-		};
+		const response = await fetch('/remote/v1/cart/add', {
+			method: 'POST',
+			body: formData,
+		});
 
-		const response = await fetch(endpoint.route, init);
+		const data = await response.json();
 
-		if (response.status !== endpoint.success) {
-			throw new Error(`Error: addToCart responded with ${response.status}, ${response}`);
+		if (response.status !== 200 || data?.data?.error) {
+			throw new Error(`Error: addToCart responded with: ${response.status}, ${data?.data?.error || response}`);
+		} else {
+			return data;
 		}
 	} catch (err) {
 		console.error(err);

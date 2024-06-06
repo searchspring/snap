@@ -88,15 +88,13 @@ describe('addToCart', () => {
 		const item = results[0] as Product;
 		addToCart([item]);
 
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', item.id);
+		formData.append('qty[]', `${item.quantity}`);
+
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -112,16 +110,13 @@ describe('addToCart', () => {
 
 		addToCart([item]);
 
-		const obj = {
-			product_id: item.id,
-			quantity: 4,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', item.id);
+		formData.append('qty[]', `${item.quantity}`);
 
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -134,23 +129,20 @@ describe('addToCart', () => {
 
 	it('can use alternate id column', () => {
 		const config = {
-			idFieldName: 'mappings.core.url',
+			idFieldName: 'mappings.core.sku',
 		};
 
 		const item = results[0] as Product;
 
 		addToCart([item], config);
 
-		const obj = {
-			product_id: item.mappings.core?.url,
-			quantity: item.quantity,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', `${item.mappings.core?.sku}`);
+		formData.append('qty[]', `${item.quantity}`);
 
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -164,15 +156,13 @@ describe('addToCart', () => {
 
 		addToCart([item]);
 
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', item.id);
+		formData.append('qty[]', `${item.quantity}`);
+
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -193,15 +183,13 @@ describe('addToCart', () => {
 
 		addToCart([item], config);
 
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', item.id);
+		formData.append('qty[]', `${item.quantity}`);
+
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -223,15 +211,13 @@ describe('addToCart', () => {
 
 		addToCart([item], config);
 
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
+		const formData = new FormData();
+		formData.append('action', 'add');
+		formData.append('product_id', item.id);
+		formData.append('qty[]', `${item.quantity}`);
+
 		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: formData,
 			method: 'POST',
 		};
 
@@ -249,15 +235,14 @@ describe('addToCart', () => {
 		addToCart(items);
 
 		for (let i = 0; i < items.length; i++) {
-			const obj = {
-				product_id: items[i].id,
-				quantity: items[i].quantity,
-				action: 'add',
-			};
+			const item = items[i];
+			const formData = new FormData();
+			formData.append('action', 'add');
+			formData.append('product_id', item.id);
+			formData.append('qty[]', `${item.quantity}`);
+
 			const params = {
-				body: JSON.stringify(obj),
-				credentials: 'same-origin',
-				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: formData,
 				method: 'POST',
 			};
 
