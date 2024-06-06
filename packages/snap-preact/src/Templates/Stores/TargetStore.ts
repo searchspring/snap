@@ -25,6 +25,7 @@ export class TargetStore {
 
 		makeObservable(this, {
 			component: observable,
+			resultComponent: observable,
 			selector: observable,
 			theme: observable,
 		});

@@ -335,6 +335,23 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 			</div>
 
 			<div className="section">
+				<label htmlFor="result-select">Result Component: </label>
+				<select
+					id="result-select"
+					onChange={(e) => {
+						const { selectedIndex, options } = e.currentTarget;
+						const selectedOption = options[selectedIndex];
+						const selectedTemplate = selectedOption.value;
+						templatesStore.targets[selectedTarget.type][selectedTarget.target].setResultComponent(selectedTemplate);
+					}}
+				>
+					{Object.keys(library.components.result || {}).map((componentName: string) => {
+						return <option selected={componentName === selectedTarget.template.resultComponent}>{componentName}</option>;
+					})}
+				</select>
+			</div>
+
+			<div className="section">
 				<label htmlFor="theme-select">Theme: </label>
 				<select
 					id="theme-select"

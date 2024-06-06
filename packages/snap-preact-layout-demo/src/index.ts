@@ -1,5 +1,5 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
-import { Result } from './components/Result';
+import { Result, Result2 } from './components/Result';
 
 // templates.addComponent('results', 'Result', Result);
 // templates.addComponent('badges', 'Star', StarComponent);
@@ -13,7 +13,8 @@ new SnapTemplates({
 	components: {
 		result: {
 			Result: () => Result,
-			CustomResult: async () => (await import('./components/Result')).Result,
+			Result2: () => Result2,
+			CustomResult: async () => (await import('./components/Result')).Result2,
 		},
 		badge: {
 			// CustomPill: async () => (await import('./components/Result')).Result,
