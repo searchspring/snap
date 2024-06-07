@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.6](https://github.com/searchspring/snap/compare/v0.56.5...v0.56.6) (2024-06-07)
+
+### Bug Fixes
+
+- **platforms/bigcommerce/addtocart:** updating function to work with attributes in new groovy script ([f116681](https://github.com/searchspring/snap/commit/f1166815a6fc94b7d3f4c4cb6637469987012583))
+- **store-mobx/searchresultstore:** normalizing variant price data to ensure they are numbers ([09fd97e](https://github.com/searchspring/snap/commit/09fd97ea43d235ed75eef439b676abf1e4f65e17))
+
 ## [0.56.5](https://github.com/searchspring/snap/compare/v0.56.4...v0.56.5) (2024-06-03)
 
 ### Bug Fixes

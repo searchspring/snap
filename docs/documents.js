@@ -70,6 +70,13 @@ var documents = [
 						url: './docs/PREACT_RECOMMENDATIONS.md',
 						searchable: true,
 					},
+					{
+						label: 'Badges',
+						route: '/start-preact-badges',
+						type: 'markdown',
+						url: './docs/PREACT_BADGES.md',
+						searchable: true,
+					},
 				],
 			},
 			{
@@ -316,6 +323,13 @@ var documents = [
 						route: '/package-storeMobx-search',
 						type: 'markdown',
 						url: './packages/snap-store-mobx/src/Search/README.md',
+						searchable: true,
+					},
+					{
+						label: 'Meta',
+						route: '/package-storeMobx-meta',
+						type: 'markdown',
+						url: './packages/snap-store-mobx/src/Meta/README.md',
 						searchable: true,
 					},
 					{
