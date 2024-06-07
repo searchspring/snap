@@ -8,7 +8,7 @@ type BigCommerceAddToCartConfig = {
 type LineItem = {
 	product_id: string;
 	quantity: number;
-	attributes: { attributeId?: string; optionId?: string }[];
+	optionSelections?: { optionId?: string; optionValue?: string }[];
 };
 
 export const addToCart = async (items: Product[], config?: BigCommerceAddToCartConfig) => {
@@ -26,13 +26,16 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 		if (config?.idFieldName) {
 			let level: any = item;
 			config.idFieldName.split('.').map((field) => {
-				if (level[field]) {
+				if (level && level[field]) {
 					level = level[field];
 				} else {
-					console.error('Error: couldnt find column in item data. please check your idFieldName is correct in the config.');
+					console.error(`Error: couldnt find column in item data. please verify 'idFieldName' in the config.`);
+					level = undefined;
+					id = undefined;
 					return;
 				}
 			});
+
 			if (level && level !== item) {
 				id = level;
 			}
@@ -42,17 +45,17 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 			const productDetails: LineItem = {
 				product_id: id,
 				quantity: item.quantity,
-				attributes: [],
 			};
 
 			const options = item.variants?.active?.options;
 			if (options) {
+				productDetails.optionSelections = [];
 				Object.keys(options).forEach((option) => {
-					const attributeId = options[option].attributeId;
 					const optionId = options[option].optionId;
+					const optionValue = options[option].optionValue;
 
-					if (attributeId && optionId) {
-						productDetails.attributes.push({ attributeId, optionId });
+					if (optionId && optionValue) {
+						productDetails.optionSelections?.push({ optionId, optionValue });
 					}
 				});
 			}
@@ -61,47 +64,70 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 		}
 	});
 
-	// first check how many products we are adding
 	if (lineItems.length) {
-		for (let i = 0; i < lineItems.length; i++) {
-			await addSingleProductv1(lineItems[i]);
-		}
-	}
+		const addToCartResponse = await addLineItemsToCart(lineItems);
 
-	// do redirect (or not)
-	if (config?.redirect !== false) {
-		setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/cart.php'));
+		// do redirect (or not)
+		if (config?.redirect !== false) {
+			setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/cart.php'));
+		}
+
+		return addToCartResponse;
 	}
 };
 
-const addSingleProductv1 = async (item: LineItem) => {
-	if (!item) {
-		console.error('Error: no product to add');
-		return;
-	}
-
+async function addLineItemsToCart(lineItems: LineItem[]): Promise<any> {
 	try {
-		const formData = new FormData();
-		formData.append('action', 'add');
-		formData.append('product_id', `${item.product_id}`);
-		formData.append('qty[]', `${item.quantity}`);
-		item.attributes.forEach((attribute) => {
-			formData.append(`attribute[${attribute.attributeId}]`, `${attribute.optionId}`);
-		});
+		const cartId = await getExistingCartId();
 
-		const response = await fetch('/remote/v1/cart/add', {
+		// if existing cartId use it, otherwise create new cart with items
+		let addToCartUrl = '/api/storefront/carts';
+		if (cartId) {
+			addToCartUrl = `/api/storefront/carts/${cartId}/items`;
+		}
+
+		const body = JSON.stringify({ lineItems });
+
+		const response = await fetch(addToCartUrl, {
 			method: 'POST',
-			body: formData,
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body,
 		});
 
-		const data = await response.json();
+		if (response.status !== 200) {
+			throw new Error(`API rejected addToCart: ${response.status}`);
+		}
 
-		if (response.status !== 200 || data?.data?.error) {
-			throw new Error(`Error: addToCart responded with: ${response.status}, ${data?.data?.error || response}`);
-		} else {
-			return data;
+		const responseData = await response.json();
+
+		if (responseData?.id) {
+			// cart Id should exist now.
+			return responseData;
 		}
 	} catch (err) {
-		console.error(err);
+		console.error(`Error: could not add to cart.`, err);
 	}
-};
+}
+
+async function getExistingCartId(): Promise<string | undefined> {
+	try {
+		const response = await fetch('/api/storefront/carts', {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+
+		const responseData = await response.json();
+
+		if (Array.isArray(responseData) && responseData.length) {
+			return responseData[0].id;
+		}
+	} catch (err) {
+		// error...
+	}
+}

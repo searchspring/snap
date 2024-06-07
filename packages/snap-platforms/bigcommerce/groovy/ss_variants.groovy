@@ -106,8 +106,8 @@ if (doc?.child_sku_options && Objects.nonNull(doc?.child_sku_options)) {
       if (option.option && option.value && option.option_id && option.option_value_id) {
         variant_object.options[option.option] = [
           value: option.value,
-          optionId: option.option_value_id,
-          attributeId: option.option_id,
+          optionValue: option.option_value_id,
+          optionId: option.option_id,
         ]
       }
     }

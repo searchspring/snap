@@ -130,6 +130,7 @@ export type VariantDataOptions = Record<
 		backgroundImageUrl?: string;
 		attributeId?: string;
 		optionId?: string;
+		optionValue?: string;
 	}
 >;
 
