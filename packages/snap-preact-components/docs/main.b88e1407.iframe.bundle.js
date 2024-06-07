@@ -1,4 +1,4 @@
-/*! For license information please see main.e66028ee.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.b88e1407.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -43770,6 +43770,26 @@
 												return !1 !== variant.attributes.available;
 											})
 											.map(function (variant) {
+												var _variant$mappings$cor, _variant$mappings$cor3, _variant$mappings$cor2, _variant$mappings$cor4;
+												null !== (_variant$mappings$cor = variant.mappings.core) &&
+													void 0 !== _variant$mappings$cor &&
+													_variant$mappings$cor.price &&
+													(variant.mappings.core.price = Number(
+														null === (_variant$mappings$cor2 = variant.mappings.core) || void 0 === _variant$mappings$cor2
+															? void 0
+															: _variant$mappings$cor2.price
+													));
+												null !== (_variant$mappings$cor3 = variant.mappings.core) &&
+													void 0 !== _variant$mappings$cor3 &&
+													_variant$mappings$cor3.msrp &&
+													(variant.mappings.core.msrp = Number(
+														null === (_variant$mappings$cor4 = variant.mappings.core) || void 0 === _variant$mappings$cor4
+															? void 0
+															: _variant$mappings$cor4.msrp
+													));
+												return variant;
+											})
+											.map(function (variant) {
 												return (
 													Object.keys(variant.options).forEach(function (variantOption) {
 														options.includes(variantOption) || options.push(variantOption);
@@ -43939,12 +43959,12 @@
 													return variant.options[_this5.field].value == val.value;
 												})
 											) {
-												var _variant$mappings$cor,
+												var _variant$mappings$cor5,
 													value = variant.options[_this5.field].value,
 													thumbnailImageUrl =
-														null === (_variant$mappings$cor = variant.mappings.core) || void 0 === _variant$mappings$cor
+														null === (_variant$mappings$cor5 = variant.mappings.core) || void 0 === _variant$mappings$cor5
 															? void 0
-															: _variant$mappings$cor.thumbnailImageUrl,
+															: _variant$mappings$cor5.thumbnailImageUrl,
 													mappedValue = {
 														value,
 														label: value,
@@ -48807,7 +48827,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.5', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.6', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49322,7 +49342,7 @@
 									website: { trackingCode: this.globals.siteId },
 								}),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.5')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.6')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
