@@ -87,6 +87,12 @@ export class LibraryStore {
 						(this.components.recommendation.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
 					);
 				},
+				RecommendationBundle: async () => {
+					return (
+						this.components.recommendation.RecommendationBundle ||
+						(this.components.recommendation.RecommendationBundle = (await import('./library/components/RecommendationBundle')).RecommendationBundle)
+					);
+				},
 			},
 			badge: {},
 			result: {
@@ -106,6 +112,9 @@ export class LibraryStore {
 			},
 			eur: async () => {
 				return this.locales.currencies.eur || (this.locales.currencies.eur = (await import('./library/currencies/eur')).eur);
+			},
+			aud: async () => {
+				return this.locales.currencies.aud || (this.locales.currencies.aud = (await import('./library/currencies/aud')).aud);
 			},
 		},
 	};

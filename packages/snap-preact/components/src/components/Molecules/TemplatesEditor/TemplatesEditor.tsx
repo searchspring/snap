@@ -170,15 +170,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		if (b === 'global') return 1;
 		return 0;
 	});
-	console.log('selectedTarget', selectedTarget);
-	// const selectedTargetConfig = templatesStore.config[selectedTarget.type].targets.find((template: any) => {
-	// 	if (selectedTarget.type === 'recommendation') {
-	// 		return template.component === selectedTarget.target;
-	// 	}
-	// 	return template.selector === selectedTarget.target;
-	// });
 	const selectedTargetConfig = templatesStore.getTarget(selectedTarget.type, selectedTarget.target);
-	console.log('selectedTargetConfig', selectedTargetConfig);
 
 	const themeRef = templatesStore.themes[selectedTarget.template.theme.location][selectedTarget.template.theme.name];
 	const theme = themeRef.theme;

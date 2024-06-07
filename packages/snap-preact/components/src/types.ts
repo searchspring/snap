@@ -8,12 +8,13 @@ import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { DeepPartial } from '../../src/types';
 import type { FunctionalComponent, RenderableProps } from 'preact';
+import type { CSSInterpolation } from '@emotion/serialize/types';
 
 export interface ComponentProps {
 	name?: string;
 	className?: string;
 	disableStyles?: boolean;
-	style?: string | Record<string, any>;
+	style?: CSSInterpolation;
 	styleScript?: (props: any) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
@@ -32,11 +33,13 @@ export type ListOption = {
 	available?: boolean;
 };
 
-export type ResultComponent = React.FunctionComponent<{
-	controller: AbstractController;
-	result: Product;
-	theme?: Theme;
-}>;
+export type ResultComponent<Props extends Record<string, any> = object> = React.FunctionComponent<
+	{
+		controller: AbstractController;
+		result: Product;
+		theme?: Theme;
+	} & Props
+>;
 
 export enum ResultsLayout {
 	GRID = 'grid',
@@ -73,7 +76,7 @@ export type BreakpointsEntry = {
 	[property: string]: any;
 };
 
-export type StylingCSS = Array<SerializedStyles | string | Record<string, string> | undefined>;
+export type StylingCSS = Array<CSSInterpolation | SerializedStyles>;
 
 export type SwatchOption = ListOption & {
 	backgroundImageUrl?: string;

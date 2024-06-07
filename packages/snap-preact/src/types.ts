@@ -13,6 +13,8 @@ import type { EventManager } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
+import type { CSSInterpolation } from '@emotion/serialize/types';
+import type { ThemeVariables } from '../components/src';
 import { AppMode } from '@searchspring/snap-toolbox';
 
 export type SnapControllerServices = {
@@ -98,6 +100,8 @@ export type SnapRecommendationControllerConfig = {
 	controller: RecommendationControllerConfig;
 	context?: ContextVariables;
 };
+
+export type GlobalThemeStyleScript = (props: { name?: string; variables?: ThemeVariables }) => CSSInterpolation;
 
 export type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
