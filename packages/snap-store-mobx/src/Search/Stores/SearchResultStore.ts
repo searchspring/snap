@@ -324,6 +324,16 @@ export class Variants {
 			this.data = variantData
 				.filter((variant) => variant.attributes.available !== false)
 				.map((variant) => {
+					// normalize price fields ensuring they are numbers
+					if (variant.mappings.core?.price) {
+						variant.mappings.core.price = Number(variant.mappings.core?.price);
+					}
+					if (variant.mappings.core?.msrp) {
+						variant.mappings.core.msrp = Number(variant.mappings.core?.msrp);
+					}
+					return variant;
+				})
+				.map((variant) => {
 					Object.keys(variant.options).forEach((variantOption) => {
 						if (!options.includes(variantOption)) {
 							options.push(variantOption);
