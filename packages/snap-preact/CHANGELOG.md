@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.6](https://github.com/searchspring/snap/compare/v0.56.5...v0.56.6) (2024-06-07)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
 ## [0.56.5](https://github.com/searchspring/snap/compare/v0.56.4...v0.56.5) (2024-06-03)
 
 **Note:** Version bump only for package @searchspring/snap-preact
