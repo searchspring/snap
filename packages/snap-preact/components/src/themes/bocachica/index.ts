@@ -140,6 +140,9 @@ export const bocachica: Theme = {
 		facetSlider: {
 			...style.components.facetSlider,
 		},
+		facetToggle: {
+			...style.components.facetToggle,
+		},
 		filter: {
 			...style.components.filter,
 		},
@@ -219,6 +222,9 @@ export const bocachica: Theme = {
 		},
 		search: {
 			...style.components.search,
+		},
+		horizontalSearch: {
+			...style.components.horizontalSearch,
 		},
 	},
 	responsive: [

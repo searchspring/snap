@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-layout-demo",
 	"private": true,
-	"version": "0.53.2",
+	"version": "0.56.4",
 	"description": "development and testing of Snap layouts",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -19,7 +19,7 @@
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.56.1",
+		"@searchspring/snap-preact": "^0.56.4",
 		"preact": "10.9.0"
 	},
 	"devDependencies": {

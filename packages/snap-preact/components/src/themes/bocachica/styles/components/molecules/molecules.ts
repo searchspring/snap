@@ -7,6 +7,7 @@ export { facetHierarchyOptions } from './facethierarchyoptions';
 export { facetListOptions } from './facetlistoptions';
 export { facetPaletteOptions } from './facetpaletteoptions';
 export { facetSlider } from './facetslider';
+export { facetToggle } from './facettoggle';
 export { filter } from './filter';
 export { layoutSelector } from './layoutselector';
 export { list } from './list';

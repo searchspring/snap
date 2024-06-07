@@ -12,7 +12,7 @@ import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from 
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
 import type { ResultComponent } from '../../components/src';
-import type { SnapFeatures, DeepPartial } from '../types';
+import type { SnapFeatures, DeepPartial, GlobalThemeStyleScript } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { Theme, ThemeVariables } from '../../components/src';
 
@@ -36,13 +36,14 @@ export type AutocompleteTargetConfig = {
 
 export type RecommendationTargetConfig = {
 	theme?: string;
-	component: 'Recommendation'; // various components (templates) available
+	component: 'Recommendation' | 'RecommendationBundle'; // various components (templates) available
 	resultComponent?: string;
 };
 
 // TODO - clean up theme typing
 type TemplateThemeConfig = {
 	name: 'pike' | 'bocachica'; // various themes available
+	style?: GlobalThemeStyleScript;
 	variables?: DeepPartial<ThemeVariables>;
 	overrides?: DeepPartial<Theme>;
 };

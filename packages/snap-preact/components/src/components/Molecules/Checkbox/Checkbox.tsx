@@ -12,23 +12,25 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
-	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) =>
-		css({
+	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
+		const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: size,
-			width: size,
+			height: pixelSize,
+			width: pixelSize,
 			border: `1px solid ${color || theme?.variables?.color?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
 			'& .ss__checkbox__empty': {
 				display: 'inline-block',
-				width: `calc(${size} - 30%)`,
-				height: `calc(${size} - 30%)`,
+				width: `calc(${pixelSize} - 30%)`,
+				height: `calc(${pixelSize} - 30%)`,
 			},
-		}),
+		});
+	},
 	native: ({}) => css({}),
 };
 
@@ -60,6 +62,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		theme,
 	} = props;
 
+	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+
 	const subProps: CheckboxSubProps = {
 		icon: {
 			// default props
@@ -72,7 +76,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 				color: iconColor || color || theme?.variables?.color?.primary,
 				disableStyles,
 				icon,
-				size: size && `calc(${size} - 30%)`,
+				size: size && `calc(${pixelSize} - 30%)`,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -155,7 +159,7 @@ export interface CheckboxProps extends ComponentProps {
 	icon?: string;
 	iconColor?: string;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
-	size?: string;
+	size?: string | number;
 	startChecked?: boolean;
 	native?: boolean;
 	disableA11y?: boolean;

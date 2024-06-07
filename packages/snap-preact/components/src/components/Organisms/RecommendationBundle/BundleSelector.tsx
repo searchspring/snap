@@ -1,24 +1,27 @@
 /** @jsx jsx */
 import { h, ComponentChildren } from 'preact';
-import { jsx } from '@emotion/react';
+import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import type { ComponentProps } from '../../../types';
+import { mergeProps } from '../../../utilities';
+import type { ComponentProps, StylingCSS } from '../../../types';
+
+const CSS = {
+	bundleSelector: ({}: Partial<BundleSelectorProps>) => css({}),
+};
 
 export const BundleSelector = observer((properties: BundleSelectorProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
-	const props: BundleSelectorProps = {
-		// default props
+	const defaultProps: Partial<BundleSelectorProps> = {
 		hideCheckboxes: false,
-		// global theme
-		...properties,
 	};
 
-	const { className, children, checked, icon, seedText, seed, hideCheckboxes, onCheck } = props;
+	const props = mergeProps('bundleSelector', globalTheme, defaultProps, properties);
+
+	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, disableStyles, className, style, styleScript } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -33,7 +36,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		checkbox: {
 			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
 			checked: checked,
-			size: '18px',
+			size: 18,
 			onClick: onCheck,
 			// global theme
 			...globalTheme?.components?.checkbox,
@@ -42,8 +45,20 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		},
 	};
 
+	const styling: { css?: StylingCSS } = {};
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.bundleSelector(stylingProps), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		<div
+			{...styling}
 			className={classnames(
 				'ss__recommendation-bundle__wrapper__selector',
 				checked ? 'ss__recommendation-bundle__wrapper__selector--selected' : '',

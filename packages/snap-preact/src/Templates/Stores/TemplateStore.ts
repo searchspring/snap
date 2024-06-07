@@ -5,9 +5,9 @@ import { ThemeStore } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
-import type { DeepPartial } from '../../types';
-import type { Theme, ThemeVariables } from '../../../components/src';
 
+import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
+import type { Theme, ThemeVariables } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
 export type TemplateCustomComponentTypes = 'result' | 'badge';
@@ -70,9 +70,6 @@ export class TemplatesStore {
 		};
 		this.settings = settings;
 
-		this.language = (this.settings.editMode && this.storage.get('language')) || this.config.config?.language || 'en';
-		this.currency = (this.settings.editMode && this.storage.get('currency')) || this.config.config?.currency || 'usd';
-
 		this.targets = {
 			search: {},
 			autocomplete: {},
@@ -85,6 +82,15 @@ export class TemplatesStore {
 		};
 
 		this.library = new LibraryStore(config.components);
+
+		this.language =
+			(this.settings.editMode && this.storage.get('language')) ||
+			(this.config.config?.language && this.config.config.language in this.library.import.language) ||
+			'en';
+		this.currency =
+			(this.settings.editMode && this.storage.get('currency')) ||
+			(this.config.config?.currency && this.config.config.currency in this.library.import.currency) ||
+			'usd';
 
 		// import locale selections
 		const importCurrency = this.library.import.currency[this.currency as keyof typeof this.library.import.currency]();
@@ -112,7 +118,17 @@ export class TemplatesStore {
 				const currency = this.library.locales.currencies[this.currency];
 				const language = this.library.locales.languages[this.language];
 
-				this.addTheme({ name: themeKey, type: 'local', base, overrides, variables, currency, language, innerWidth: this.window.innerWidth });
+				this.addTheme({
+					name: themeKey,
+					style: theme.style,
+					type: 'local',
+					base,
+					overrides,
+					variables,
+					currency,
+					language,
+					innerWidth: this.window.innerWidth,
+				});
 			});
 		});
 
@@ -145,6 +161,7 @@ export class TemplatesStore {
 		currency: Partial<Theme>;
 		language: Partial<Theme>;
 		innerWidth?: number;
+		style?: GlobalThemeStyleScript;
 	}) {
 		const theme = new ThemeStore(config, this.dependencies, this.settings);
 		const themeLocation = this.themes[config.type as keyof typeof this.themes] || {};

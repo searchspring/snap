@@ -1,11 +1,15 @@
+import { h, render } from 'preact';
 import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import type { Theme, ThemeVariables } from '../../../components/src';
 import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
-import type { DeepPartial } from '../../types';
+import { Global, css } from '@emotion/react';
+
+import type { Theme, ThemeVariables } from '../../../components/src';
+import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
+import { observer } from 'mobx-react';
 
 class SelectedLayout {
 	public selected?: ListOption;
@@ -54,13 +58,14 @@ export class ThemeStore {
 			currency: Partial<Theme>;
 			language: Partial<Theme>;
 			innerWidth?: number;
+			style?: GlobalThemeStyleScript;
 		},
 		dependencies: TemplatesStoreDependencies,
 		settings: TemplatesStoreSettings
 	) {
 		this.dependencies = dependencies;
 
-		const { name, type, base, overrides, variables, currency, language, innerWidth } = config;
+		const { name, style, type, base, overrides, variables, currency, language, innerWidth } = config;
 		this.name = name;
 		this.type = type;
 		this.base = base;
@@ -80,6 +85,18 @@ export class ThemeStore {
 			stored: observable,
 			innerWidth: observable,
 		});
+		if (style) {
+			// const theme = this.theme;
+			const GlobalStyle = observer((props: any) => {
+				const { self } = props;
+				const theme = self.theme;
+				const styles = css(style({ name: theme.name, variables: theme.variables }));
+
+				return <Global styles={styles} />;
+			});
+			// TODO: when using the template editor and switching themes, the global styles still remain
+			render(<GlobalStyle self={this} />, document.body);
+		}
 	}
 
 	public get theme(): Theme {

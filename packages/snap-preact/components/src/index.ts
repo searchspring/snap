@@ -30,6 +30,7 @@ export * from './components/Molecules/FacetHierarchyOptions';
 export * from './components/Molecules/FacetListOptions';
 export * from './components/Molecules/FacetPaletteOptions';
 export * from './components/Molecules/FacetSlider';
+export * from './components/Molecules/FacetToggle';
 export * from './components/Molecules/Filter';
 export * from './components/Molecules/LayoutSelector';
 export * from './components/Molecules/List';
