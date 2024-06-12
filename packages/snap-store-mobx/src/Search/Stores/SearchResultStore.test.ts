@@ -549,11 +549,6 @@ describe('SearchResultStore', () => {
 						realtime: {
 							enabled: true,
 						},
-						options: {
-							color: {
-								thumbnailBackgroundImages: true,
-							},
-						},
 					},
 				},
 			};
@@ -599,11 +594,6 @@ describe('SearchResultStore', () => {
 						field: 'ss_variants',
 						realtime: {
 							enabled: true,
-						},
-						options: {
-							color: {
-								thumbnailBackgroundImages: true,
-							},
 						},
 					},
 				},
@@ -658,11 +648,6 @@ describe('SearchResultStore', () => {
 							enabled: true,
 							filters: ['first'],
 						},
-						options: {
-							color: {
-								thumbnailBackgroundImages: true,
-							},
-						},
 					},
 				},
 			};
@@ -714,11 +699,6 @@ describe('SearchResultStore', () => {
 						realtime: {
 							enabled: true,
 							filters: ['first'],
-						},
-						options: {
-							color: {
-								thumbnailBackgroundImages: true,
-							},
 						},
 					},
 				},
@@ -774,11 +754,6 @@ describe('SearchResultStore', () => {
 						realtime: {
 							enabled: true,
 							filters: ['unaltered'],
-						},
-						options: {
-							color: {
-								thumbnailBackgroundImages: true,
-							},
 						},
 					},
 				},
