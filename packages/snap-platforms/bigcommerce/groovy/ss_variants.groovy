@@ -29,7 +29,7 @@ def variant_array = []
 // variant data to put into core fields
 def core_fields_mapping = [
   uid: "product_id",
-  price: "price",
+  price: "calculated_price",
   msrp: "retail_price",
   sku: "child_sku",
   imageUrl: 'image_url',
