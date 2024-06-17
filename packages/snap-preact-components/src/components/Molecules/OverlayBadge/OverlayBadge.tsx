@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { ComponentChildren, Fragment, h } from 'preact';
 

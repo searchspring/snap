@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';

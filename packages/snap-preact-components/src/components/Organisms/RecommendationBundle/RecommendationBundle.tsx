@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';

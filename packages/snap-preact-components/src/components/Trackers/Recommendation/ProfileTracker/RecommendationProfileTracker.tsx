@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Fragment, h, toChildArray } from 'preact';
 import { jsx, css } from '@emotion/react';

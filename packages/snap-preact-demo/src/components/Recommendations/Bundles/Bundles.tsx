@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { RecommendationBundle } from '@searchspring/snap-preact-components';
+// import { RecommendationBundle } from '@searchspring/snap-preact-components';
 import { useEffect } from 'preact/hooks';
 
 import './Bundles.scss';
@@ -16,15 +16,15 @@ export const Bundles = observer((props) => {
 		}
 	}, []);
 
-	const bundleRecsProps = {
-		controller: controller,
-		onAddToCart: (data) => controller.log.debug('ADDING TO CART', data),
-	};
+	// const bundleRecsProps = {
+	// 	controller: controller,
+	// 	onAddToCart: (data) => controller.log.debug('ADDING TO CART', data),
+	// };
 
 	return (
 		<div>
 			<hr style={{ margin: '20px 0' }} />
-			<RecommendationBundle {...bundleRecsProps} />
+			{/* <RecommendationBundle {...bundleRecsProps} /> */}
 		</div>
 	);
 });

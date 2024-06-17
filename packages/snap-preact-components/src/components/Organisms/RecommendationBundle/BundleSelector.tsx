@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { h, ComponentChildren } from 'preact';
 import { jsx } from '@emotion/react';

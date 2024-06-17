@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx h */
 import { h, render } from 'preact';
 import deepmerge from 'deepmerge';

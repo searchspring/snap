@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { ComponentChildren, h } from 'preact';
 import { useState, StateUpdater, MutableRef } from 'preact/hooks';

@@ -19,7 +19,7 @@ export * from './components/Trackers/Recommendation/ProfileTracker';
 
 // MOLECULES
 export * from './components/Molecules/CalloutBadge';
-export * from './components/Molecules/Carousel';
+// export * from './components/Molecules/Carousel';
 export * from './components/Molecules/Checkbox';
 export * from './components/Molecules/ErrorHandler';
 export * from './components/Molecules/FacetGridOptions';
@@ -35,8 +35,8 @@ export * from './components/Molecules/Pagination';
 export * from './components/Molecules/Result';
 export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
-export * from './components/Molecules/Swatches';
-export * from './components/Molecules/VariantSelection';
+// export * from './components/Molecules/Swatches';
+// export * from './components/Molecules/VariantSelection';
 
 // ORGANISMS
 export * from './components/Organisms/Autocomplete';
@@ -44,8 +44,8 @@ export * from './components/Organisms/BranchOverride';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
-export * from './components/Organisms/Recommendation';
-export * from './components/Organisms/RecommendationBundle';
+// export * from './components/Organisms/Recommendation';
+// export * from './components/Organisms/RecommendationBundle';
 export * from './components/Organisms/Results';
 
 // HOOKS
