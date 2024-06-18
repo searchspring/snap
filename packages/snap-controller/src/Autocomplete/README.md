@@ -21,9 +21,9 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | false |   |
-| settings.variants.field | setting to set the field in which to grab the variant data from | ➖ |   | 
-| settings.variants.realtime.enabled | setting to enable real time variant updates | ➖ |   | 
-| settings.variants.realtime.filters | setting to allow filtering which results get the realtime updates | ➖ |   | 
+| settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
+| settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
+| settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 
 <br>
@@ -129,19 +129,43 @@ autocompleteController.search();
 ## Variants
 
 ### Variant Options Configuration
-The `settings.variants.options` is an object keyed by individual option field values for configuration of any option settings.
+The `settings.variants.options` is an object keyed by individual option field name for configuration of any option settings.
 
 | option | description | default value | required | 
 |---|---|:---:|:---:|
-| label | setting to change the label for the option - (color -> colour) | ➖ |   | 
+| label | allows for changing the label of the option - (color -> colour) | ➖ |   | 
 | preSelected | array of option values to preselect - ['red','blue'] | ➖ |   | 
-| thumbnailBackgroundImages | boolean setting to set the option background image as the variant thumbnail image  | ➖ |   | 
+| thumbnailBackgroundImages | boolean used for setting the option background image as the variant thumbnail image  | ➖ |   | 
 | mappings | object keyed by individual optionValues for mapping value attribute overrides  | ➖ |   | 
 | mappings[optionValue].label | setting to override the value label  | ➖ |   | 
 | mappings[optionValue].background | setting to override the value background  | ➖ |   | 
 | mappings[optionValue].backgroundImageUrl | setting to override the value backgroundImageUrl  | ➖ |   | 
 
-
+```jsx
+const config = {
+	settings:  {
+		variants: {
+			field: "ss__variants",
+			options: {
+				color: {
+					label: "Colour",
+					preSelected: ['transparent'],
+					mappings: {
+						red: {
+							label: 'Cherry',
+							backroundImageUrl: '/images/cherry.png'
+						},
+						blue: {
+							label: "Sky",
+							background: "teal",
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+```
 ### Realtime Variants
 
 #### Variant Option Attributes:

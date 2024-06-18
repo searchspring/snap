@@ -12,9 +12,9 @@ The `RecommendationController` is used when making queries to the API `recommend
 | batched | batch multiple recommendations into a single network request | true |   |
 | limit | maximum number of results to display, can also be set globally via globals | 20 |  |
 | globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
-| settings.variants.field | setting to set the field in which to grab the variant data from | ➖ |   | 
-| settings.variants.realtime.enabled | setting to enable real time variant updates | ➖ |   | 
-| settings.variants.realtime.filters | setting to allow filtering which results get the realtime updates | ➖ |   | 
+| settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
+| settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
+| settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
 <br>
 
@@ -111,18 +111,43 @@ recommendationController.init();
 ## Variants
 
 ### Variant Options Configuration
-The `settings.variants.options` is an object keyed by individual option field values for configuration of any option settings.
+The `settings.variants.options` is an object keyed by individual option field name for configuration of any option settings.
 
 | option | description | default value | required | 
 |---|---|:---:|:---:|
-| label | setting to change the label for the option - (color -> colour) | ➖ |   | 
+| label | allows for changing the label of the option - (color -> colour) | ➖ |   | 
 | preSelected | array of option values to preselect - ['red','blue'] | ➖ |   | 
-| thumbnailBackgroundImages | boolean setting to set the option background image as the variant thumbnail image  | ➖ |   | 
+| thumbnailBackgroundImages | boolean used for setting the option background image as the variant thumbnail image  | ➖ |   | 
 | mappings | object keyed by individual optionValues for mapping value attribute overrides  | ➖ |   | 
 | mappings[optionValue].label | setting to override the value label  | ➖ |   | 
 | mappings[optionValue].background | setting to override the value background  | ➖ |   | 
 | mappings[optionValue].backgroundImageUrl | setting to override the value backgroundImageUrl  | ➖ |   | 
 
+```jsx
+const config = {
+	settings:  {
+		variants: {
+			field: "ss__variants",
+			options: {
+				color: {
+					label: "Colour",
+					preSelected: ['transparent'],
+					mappings: {
+						red: {
+							label: 'Cherry',
+							backroundImageUrl: '/images/cherry.png'
+						},
+						blue: {
+							label: "Sky",
+							background: "teal",
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+```
 
 ### Realtime Variants
 
