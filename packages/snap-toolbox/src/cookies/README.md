@@ -13,8 +13,9 @@ const name = 'myCookie';
 const value = 'Hello World!!';
 const sameSite = 'Lax';
 const expires = 31536000000; // 1 year
+const cookieDomain = '.' + window.location.hostname.replace(/^www\./, '');
 
-cookies.set(name, value, sameSite, expires)
+cookies.set(name, value, sameSite, expires, cookieDomain)
 ```
 
 ## `get` function
