@@ -13,6 +13,7 @@ export class PixelEvent {
 		this.src =
 			this.endpoint +
 			`?s=${encodeURIComponent(payload?.context?.website?.trackingCode || '')}` +
+			`&currencyCode=${encodeURIComponent(payload?.context?.currency?.code || '')}` +
 			`&u=${encodeURIComponent(payload?.context?.userId || '')}` +
 			`&ce=${featureFlags.cookies ? '1' : '0'}` +
 			`&pt=${encodeURIComponent(document.title)}` +
@@ -38,10 +39,11 @@ export class PixelEvent {
 				});
 				break;
 			case BeaconCategory.ORDERVIEW:
-				const { orderId, total, city, state, country, items } = (this.event = payload.event as OrderTransactionEvent);
+				const { orderId, total, transactionTotal, city, state, country, items } = (this.event = payload.event as OrderTransactionEvent);
 				this.src += `&a=sale`;
 				if (orderId) this.src += `&orderId=${encodeURIComponent(orderId)}`;
 				if (total) this.src += `&total=${encodeURIComponent(total)}`;
+				if (transactionTotal) this.src += `&transactionTotal=${encodeURIComponent(transactionTotal)}`;
 				if (city) this.src += `&city=${encodeURIComponent(city)}`;
 				if (state) this.src += `&state=${encodeURIComponent(state)}`;
 				if (country) this.src += `&country=${encodeURIComponent(country)}`;

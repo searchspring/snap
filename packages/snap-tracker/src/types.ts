@@ -3,6 +3,7 @@ import { BeaconEvent } from './BeaconEvent';
 
 export type TrackerGlobals = {
 	siteId: string;
+	currency?: string;
 };
 
 export type DoNotTrackEntry = {
@@ -97,6 +98,9 @@ export interface BeaconContext {
 		type?: string;
 		id?: string;
 	};
+	currency?: {
+		code: string;
+	};
 }
 
 export interface BeaconMeta {
@@ -142,6 +146,7 @@ export interface Product extends ProductViewEvent {
 export interface OrderTransactionEvent {
 	orderId?: string | number;
 	total?: string | number;
+	transactionTotal?: string | number;
 	city?: string;
 	state?: string;
 	country?: string;
@@ -152,6 +157,7 @@ export interface OrderTransactionData {
 	order?: {
 		id?: string | number;
 		total?: string | number;
+		transactionTotal?: string | number;
 		city?: string;
 		state?: string;
 		country?: string;
@@ -214,10 +220,10 @@ export interface TrackMethods {
 		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (data: CartViewEvent, siteId?: string) => BeaconEvent | undefined;
+		view: (data: CartViewEvent, siteId?: string, currency?: string) => BeaconEvent | undefined;
 	};
 	order: {
-		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent | undefined;
+		transaction: (data: OrderTransactionData, siteId?: string, currency?: string) => BeaconEvent | undefined;
 	};
 }
 

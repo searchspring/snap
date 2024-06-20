@@ -89,6 +89,12 @@ export class Tracker {
 			},
 		};
 
+		if (this.globals.currency) {
+			this.context.currency = {
+				code: this.globals.currency,
+			};
+		}
+
 		if (!window.searchspring?.tracker) {
 			window.searchspring = window.searchspring || {};
 			window.searchspring.tracker = this;
@@ -99,8 +105,8 @@ export class Tracker {
 		setTimeout(() => {
 			this.targeters.push(
 				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
-					const { item, items, siteId, shopper, order, type } = getContext(
-						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+					const { item, items, siteId, currency, shopper, order, type } = getContext(
+						['item', 'items', 'siteId', 'currency', 'shopper', 'order', 'type'],
 						elem as HTMLScriptElement
 					);
 
@@ -112,10 +118,10 @@ export class Tracker {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view({ items }, siteId);
+							this.track.cart.view({ items }, siteId, currency);
 							break;
 						case 'searchspring/track/order/transaction':
-							this.track.order.transaction({ order, items }, siteId);
+							this.track.order.transaction({ order, items }, siteId, currency);
 							break;
 						default:
 							console.error(`event '${type}' is not supported`);
@@ -418,7 +424,7 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string): BeaconEvent | undefined => {
+			view: (data: CartViewEvent, siteId?: string, currency?: string): BeaconEvent | undefined => {
 				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
 						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -431,6 +437,15 @@ export class Tracker {
 						context: {
 							website: {
 								trackingCode: siteId,
+							},
+						},
+					});
+				}
+				if (currency) {
+					context = deepmerge(context, {
+						context: {
+							currency: {
+								code: currency,
 							},
 						},
 					});
@@ -475,10 +490,10 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
+			transaction: (data: OrderTransactionData, siteId?: string, currency?: string): BeaconEvent | undefined => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
@@ -488,6 +503,15 @@ export class Tracker {
 						context: {
 							website: {
 								trackingCode: siteId,
+							},
+						},
+					});
+				}
+				if (currency) {
+					context = deepmerge(context, {
+						context: {
+							currency: {
+								code: currency,
 							},
 						},
 					});
@@ -514,6 +538,7 @@ export class Tracker {
 				const eventPayload = {
 					orderId: data?.order?.id ? `${data.order.id}` : undefined,
 					total: data?.order?.total ? `${data.order.total}` : undefined,
+					transactionTotal: data?.order?.transactionTotal ? `${data.order.transactionTotal}` : undefined,
 					city: data?.order?.city ? `${data.order.city}` : undefined,
 					state: data?.order?.state ? `${data.order.state}` : undefined,
 					country: data?.order?.country ? `${data.order.country}` : undefined,
@@ -544,6 +569,15 @@ export class Tracker {
 		if (value) {
 			this.context[key] = value;
 		}
+	};
+
+	setCurrency = (currency: string): void => {
+		if (!currency) {
+			return;
+		}
+		this.context.currency = {
+			code: currency,
+		};
 	};
 
 	getUserId = (): string | undefined | null => {

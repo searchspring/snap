@@ -73,6 +73,9 @@ describe('BeaconEvent', () => {
 				website: {
 					trackingCode: '8uyt2m',
 				},
+				currency: {
+					code: 'USD',
+				},
 			},
 			event: [
 				{
@@ -109,10 +112,14 @@ describe('BeaconEvent', () => {
 				website: {
 					trackingCode: '8uyt2m',
 				},
+				currency: {
+					code: 'USD',
+				},
 			},
 			event: {
 				orderId: '123456',
-				total: '42.96',
+				total: '34.29',
+				transactionTotal: '31.97',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',

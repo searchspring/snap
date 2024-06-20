@@ -80,7 +80,7 @@ describe('Script Block Tracking', () => {
 		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
 
 		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined);
+		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -88,7 +88,8 @@ describe('Script Block Tracking', () => {
 	it('can target track/order/transaction', async () => {
 		const order = {
 			id: '123456',
-			total: '9.99',
+			total: '10.71',
+			transactionTotal: '9.99',
 			city: 'Los Angeles',
 			state: 'CA',
 			country: 'US',
@@ -112,7 +113,7 @@ describe('Script Block Tracking', () => {
 		const trackEvent = jest.spyOn(tracker.track.order, 'transaction');
 
 		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ order, items }, undefined);
+		expect(trackEvent).toHaveBeenCalledWith({ order, items }, undefined, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -479,6 +480,7 @@ describe('Tracker', () => {
 
 		const customGlobals = {
 			siteId: 'custom',
+			currency: 'EUR',
 		};
 
 		const tracker = new Tracker(globals);
@@ -495,6 +497,9 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.config.framework).toStrictEqual('snap');
 
+		// @ts-ignore - private property
+		expect(tracker.context.currency).toBeUndefined();
+
 		const tracker2 = new Tracker(customGlobals, customConfig);
 
 		// @ts-ignore - private property
@@ -508,6 +513,12 @@ describe('Tracker', () => {
 
 		// @ts-ignore - private property
 		expect(tracker2.config.framework).toBe(customConfig.framework);
+
+		// @ts-ignore - private property
+		expect(tracker2.context.currency).toBeDefined();
+
+		// @ts-ignore - private property
+		expect(tracker2.context.currency.code).toStrictEqual(customGlobals.currency);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -1073,12 +1084,13 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
-	it('can invoke track.cart.view with siteId override', async () => {
+	it('can invoke track.cart.view with siteId and currency override', async () => {
 		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const cartView = jest.spyOn(tracker.track.cart, 'view');
 
 		const siteId = 'xxxxxx';
+		const currency = 'EUR';
 		const payload = {
 			items: [
 				{
@@ -1093,7 +1105,7 @@ describe('Tracker', () => {
 				},
 			],
 		};
-		await tracker.track.cart.view(payload, siteId);
+		await tracker.track.cart.view(payload, siteId, currency);
 
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.CART,
@@ -1104,11 +1116,14 @@ describe('Tracker', () => {
 					website: {
 						trackingCode: siteId,
 					},
+					currency: {
+						code: currency,
+					},
 				},
 			}),
 			event: { ...payload },
 		});
-		expect(cartView).toHaveBeenCalledWith(payload, siteId);
+		expect(cartView).toHaveBeenCalledWith(payload, siteId, currency);
 
 		cartView.mockRestore();
 		trackEvent.mockRestore();
@@ -1122,7 +1137,8 @@ describe('Tracker', () => {
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1143,6 +1159,7 @@ describe('Tracker', () => {
 		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
+			transactionTotal: payload.order.transactionTotal,
 			city: payload.order.city,
 			state: payload.order.state,
 			country: payload.order.country,
@@ -1163,7 +1180,8 @@ describe('Tracker', () => {
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1184,6 +1202,7 @@ describe('Tracker', () => {
 		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
+			transactionTotal: payload.order.transactionTotal,
 			city: payload.order.city,
 			state: payload.order.state,
 			country: payload.order.country,
@@ -1205,7 +1224,8 @@ describe('Tracker', () => {
 		let payload: OrderTransactionData = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1223,7 +1243,8 @@ describe('Tracker', () => {
 		payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1262,16 +1283,18 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
-	it('can invoke track.order.transaction with siteId override', async () => {
+	it('can invoke track.order.transaction with siteId and currency override', async () => {
 		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const orderTransaction = jest.spyOn(tracker.track.order, 'transaction');
 
 		const siteId = 'xxxxxx';
+		const currency = 'EUR';
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1285,7 +1308,7 @@ describe('Tracker', () => {
 				},
 			],
 		};
-		await tracker.track.order.transaction(payload, siteId);
+		await tracker.track.order.transaction(payload, siteId, currency);
 
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.ORDER,
@@ -1296,18 +1319,22 @@ describe('Tracker', () => {
 					website: {
 						trackingCode: siteId,
 					},
+					currency: {
+						code: currency,
+					},
 				},
 			}),
 			event: {
 				orderId: payload.order.id,
 				total: payload.order.total,
+				transactionTotal: payload.order.transactionTotal,
 				city: payload.order.city,
 				state: payload.order.state,
 				country: payload.order.country,
 				items: payload.items,
 			},
 		});
-		expect(orderTransaction).toHaveBeenCalledWith(payload, siteId);
+		expect(orderTransaction).toHaveBeenCalledWith(payload, siteId, currency);
 
 		orderTransaction.mockRestore();
 		trackEvent.mockRestore();
