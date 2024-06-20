@@ -95,6 +95,34 @@ describe('Pagination Store', () => {
 		}
 	});
 
+	it('doesnt allow pageSizeOptions over the api limit of 100', () => {
+		let customPageSizeOptions = [
+			{
+				label: `show 30`,
+				value: 30,
+			},
+			{
+				label: `show 40`,
+				value: 40,
+			},
+			{
+				label: `show 50`,
+				value: 50,
+			},
+			{
+				label: `show 106`,
+				value: 106,
+			},
+		];
+
+		let tempConfig = { ...searchConfig, settings: { pagination: { pageSizeOptions: customPageSizeOptions } } };
+		const paginationData = searchData.pagination;
+		const pagination = new SearchPaginationStore(tempConfig as SearchStoreConfig, services, paginationData, searchData.meta);
+
+		expect(pagination.pageSizeOptions.length).toEqual(customPageSizeOptions.length - 1);
+		expect(pagination.pageSizeOptions.filter((opt) => opt.value == 106)).toHaveLength(0);
+	});
+
 	it('knows the begin number', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new SearchPaginationStore(searchConfig, services, paginationData, searchData.meta);
