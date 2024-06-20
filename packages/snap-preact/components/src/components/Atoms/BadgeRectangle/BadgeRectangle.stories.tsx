@@ -1,19 +1,27 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { BadgeRectangleProps, BadgeRectangle } from './BadgeRectangle';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../BadgeRectangle/readme.md';
 
 export default {
-	title: `Atoms/BadgeRectangle`,
+	title: 'Atoms/BadgeRectangle',
 	component: BadgeRectangle,
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

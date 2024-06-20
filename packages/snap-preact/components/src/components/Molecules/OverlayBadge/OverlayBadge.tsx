@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { ComponentChildren, Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';

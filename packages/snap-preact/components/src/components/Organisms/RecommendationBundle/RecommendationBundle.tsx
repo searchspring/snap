@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';

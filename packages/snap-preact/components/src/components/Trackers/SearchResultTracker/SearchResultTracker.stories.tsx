@@ -6,8 +6,9 @@ import { SearchResultTracker, SearchResultTrackerProps } from './SearchResultTra
 import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 import { Snapify } from '../../../utilities/snapify';
-import type { SearchController } from '@searchspring/snap-controller';
 import { Result } from '../../Molecules/Result';
+import type { SearchController } from '@searchspring/snap-controller';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: 'Trackers/Search/Result',
@@ -67,9 +68,10 @@ export default {
 const snapInstance = Snapify.search({ id: 'SearchResultTracker', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
 
 export const Default = (props: SearchResultTrackerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	const result = controller?.store?.results[0] as Product;
 	return (
-		<SearchResultTracker {...props} controller={controller} result={controller?.store?.results[0]}>
-			<Result result={controller?.store?.results[0]} />
+		<SearchResultTracker {...props} controller={controller} result={result}>
+			<Result result={result} />
 		</SearchResultTracker>
 	);
 };

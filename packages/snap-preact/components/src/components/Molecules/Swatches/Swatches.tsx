@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
@@ -245,8 +244,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & //  & (
-// 	| {
+} & // 	| { //  & (
 // 			type?: 'carousel';
 // 			carousel?: Partial<CarouselProps>;
 // 	  }

@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { List, ListProps } from './List';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
@@ -14,7 +14,15 @@ export default {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

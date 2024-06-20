@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';

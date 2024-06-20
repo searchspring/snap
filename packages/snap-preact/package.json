@@ -47,10 +47,30 @@
 		"swiper": "11.0.7"
 	},
 	"devDependencies": {
+		"@storybook/addon-actions": "7.6.7",
+		"@storybook/addon-controls": "7.6.7",
+		"@storybook/addon-docs": "7.6.7",
+		"@storybook/addon-essentials": "7.6.7",
+		"@storybook/addon-links": "7.6.7",
+		"@storybook/addon-themes": "7.6.7",
+		"@storybook/preact": "7.6.7",
+		"@storybook/preact-webpack5": "7.6.7",
+		"@storybook/theming": "7.6.7",
+		"@testing-library/preact": "3.2.3",
+		"@testing-library/user-event": "13.5.0",
 		"@types/react": "16.14.28",
 		"@types/scheduler": "0.16.8",
 		"@types/react-ranger": "2.0.4",
-		"@types/react-color": "3.0.12"
+		"@types/react-color": "3.0.12",
+		"css-loader": "^6.9.0",
+		"mobx-react": "7.6.0",
+		"preact": "10.9.0",
+		"react": "16.14.0",
+		"react-dom": "16.14.0",
+		"sass-loader": "^13.3.3",
+		"storybook": "7.6.7",
+		"style-loader": "^3.3.4",
+		"ts-loader": "9.5.1"
 	},
 	"sideEffects": false,
 	"files": [

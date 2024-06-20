@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
@@ -14,13 +14,21 @@ import { iconPaths } from '../../Atoms/Icon';
 import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
 
 export default {
-	title: `Organisms/RecommendationBundle`,
+	title: 'Organisms/RecommendationBundle',
 	component: RecommendationBundle,
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

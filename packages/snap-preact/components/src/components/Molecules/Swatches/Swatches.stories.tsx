@@ -1,18 +1,26 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { Swatches, SwatchesProps } from './Swatches';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../Swatches/readme.md';
 
 export default {
-	title: `Molecules/Swatches`,
+	title: 'Molecules/Swatches',
 	component: Swatches,
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),

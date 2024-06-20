@@ -1,10 +1,10 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import type { SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
 
 import { VariantSelection, VariantSelectionProps } from './VariantSelection';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../VariantSelection/readme.md';
 import { Snapify } from '../../../utilities/snapify';
 import { Product } from '@searchspring/snap-store-mobx';
@@ -12,13 +12,21 @@ import { Next } from '@searchspring/snap-event-manager';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
 export default {
-	title: `Molecules/VariantSelection`,
+	title: 'Molecules/VariantSelection',
 	component: VariantSelection,
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
