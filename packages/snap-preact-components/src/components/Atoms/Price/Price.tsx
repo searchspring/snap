@@ -56,12 +56,11 @@ export function Price(properties: PriceProps): JSX.Element {
 	} = props;
 
 	const formattedPrice = filters.currency(+value, {
-		symbol,
+		symbol: '',
 		decimalPlaces,
 		padDecimalPlaces,
 		thousandsSeparator,
 		decimalSeparator,
-		symbolAfter,
 	});
 
 	const styling: { css?: StylingCSS } = {};
@@ -76,7 +75,9 @@ export function Price(properties: PriceProps): JSX.Element {
 	) : (
 		<CacheProvider>
 			<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
+				{symbol && !symbolAfter ? <label className={'ss__price__symbol'}>{symbol}</label> : <></>}
 				{formattedPrice}
+				{symbol && symbolAfter ? <label className={'ss__price__symbol'}>{symbol}</label> : <></>}
 			</span>
 		</CacheProvider>
 	);
