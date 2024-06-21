@@ -353,7 +353,8 @@ export class Snap {
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
-
+			const cookieDomain =
+				(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 			/* app mode priority:
 				1. node env
 				2. config
@@ -376,7 +377,7 @@ export class Snap {
 					cookies.unset(DEV_COOKIE);
 					this.mode = AppMode.production;
 				} else {
-					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
+					cookies.set(DEV_COOKIE, '1', 'Lax', 0, cookieDomain);
 					this.mode = AppMode.development;
 				}
 			}
@@ -428,7 +429,7 @@ export class Snap {
 
 				// set a cookie with branch
 				if (featureFlags.cookies) {
-					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000); // 1 hour
+					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000, cookieDomain); // 1 hour
 				} else {
 					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
 				}
