@@ -353,7 +353,8 @@ export class Snap {
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
-			const cookieDomain = (typeof window !== 'undefined' && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
+			const cookieDomain =
+				(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 			/* app mode priority:
 				1. node env
 				2. config

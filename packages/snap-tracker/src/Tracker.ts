@@ -34,7 +34,8 @@ const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
 const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
-const COOKIE_DOMAIN = (typeof window !== 'undefined' && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
+const COOKIE_DOMAIN =
+	(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';

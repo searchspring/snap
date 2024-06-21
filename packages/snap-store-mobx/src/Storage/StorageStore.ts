@@ -9,7 +9,8 @@ export class StorageStore {
 	private expiration = 31536000000; // one year (ms)
 	private sameSite = 'Lax';
 	private key = 'ss-storage';
-	private cookieDomain = (typeof window !== 'undefined' && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
+	private cookieDomain =
+		(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 	public state: Record<string, any> = {};
 
 	constructor(config?: StorageConfig) {
