@@ -28,7 +28,9 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	return !loading && theme && Component ? (
 		<SnapProvider snap={snap}>
 			<ThemeProvider theme={theme}>
-				<Component controller={controller} resultComponent={ResultComponent} {...otherProps} />
+				<div className={`ss__template-select ss__theme__${theme.name}`}>
+					<Component controller={controller} resultComponent={ResultComponent} {...otherProps} />
+				</div>
 			</ThemeProvider>
 		</SnapProvider>
 	) : (

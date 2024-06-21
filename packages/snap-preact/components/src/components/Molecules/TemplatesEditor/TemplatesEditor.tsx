@@ -9,6 +9,7 @@ import { Icon } from '../../Atoms/Icon/Icon';
 import { Button } from '../../Atoms/Button';
 import { observer } from 'mobx-react-lite';
 import { debounce } from '@searchspring/snap-toolbox';
+import { CacheProvider } from '../../../providers';
 
 const CSS = {
 	ColorDisplay: ({ color, isColorPickerVisible }: any) =>
@@ -180,203 +181,204 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	}, 10);
 
 	return (
-		<div
-			className={classnames('ss__template-editor', { collapsed: collapsed })}
-			{...styling}
-			onClick={(e) => {
-				e.preventDefault();
-				e.stopPropagation();
-				setCollapsed(false);
-			}}
-		>
-			<div className={'logo'}>
-				<img src="https://snapui.searchspring.io/searchspring.svg" />
-			</div>
-
+		<CacheProvider>
 			<div
-				className={'header-actions'}
+				className={classnames('ss__template-editor', { collapsed: collapsed })}
+				{...styling}
 				onClick={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
-					setCollapsed(true);
+					setCollapsed(false);
 				}}
 			>
-				<Button
-					onClick={() => {
-						onRemoveClick();
-					}}
-				>
-					Stop Editing
-				</Button>
-				<span
-					onClick={() => {
+				<div className={'logo'}>
+					<img src="https://snapui.searchspring.io/searchspring.svg" />
+				</div>
+
+				<div
+					className={'header-actions'}
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
 						setCollapsed(true);
 					}}
 				>
-					<Icon icon="close-thin" />
-				</span>
-			</div>
+					<Button
+						onClick={() => {
+							onRemoveClick();
+						}}
+					>
+						Stop Editing
+					</Button>
+					<span
+						onClick={() => {
+							setCollapsed(true);
+						}}
+					>
+						<Icon icon="close-thin" />
+					</span>
+				</div>
 
-			{!collapsed ? (
-				<Global
-					styles={css`
-						${selectedTarget.selector} {
-							border: 1px dashed black !important;
-						}
-					`}
-				/>
-			) : (
-				''
-			)}
+				{!collapsed ? (
+					<Global
+						styles={css`
+							${selectedTarget.selector} {
+								border: 1px dashed black !important;
+							}
+						`}
+					/>
+				) : (
+					''
+				)}
 
-			<h2>Global</h2>
-			<div className="section">
-				<label htmlFor="language-select">Language: </label>
-				<select
-					id="language-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const language = selectedOption.value;
+				<h2>Global</h2>
+				<div className="section">
+					<label htmlFor="language-select">Language: </label>
+					<select
+						id="language-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const language = selectedOption.value;
 
-						changeLanguage(language);
-						templatesStore.setLanguage(language);
-					}}
-				>
-					{languageKeys.map((language: string) => {
-						return <option selected={language === selectedLanguage}>{language}</option>;
-					})}
-				</select>
-			</div>
+							changeLanguage(language);
+							templatesStore.setLanguage(language);
+						}}
+					>
+						{languageKeys.map((language: string) => {
+							return <option selected={language === selectedLanguage}>{language}</option>;
+						})}
+					</select>
+				</div>
 
-			<div className="section">
-				<label htmlFor="currency-select">Currency: </label>
-				<select
-					id="currency-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const currency = selectedOption.value;
+				<div className="section">
+					<label htmlFor="currency-select">Currency: </label>
+					<select
+						id="currency-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const currency = selectedOption.value;
 
-						changeCurrency(currency);
-						templatesStore.setCurrency(currency);
-					}}
-				>
-					{currencyKeys.map((currency: string) => {
-						return <option selected={currency === selectedCurrency}>{currency}</option>;
-					})}
-				</select>
-			</div>
+							changeCurrency(currency);
+							templatesStore.setCurrency(currency);
+						}}
+					>
+						{currencyKeys.map((currency: string) => {
+							return <option selected={currency === selectedCurrency}>{currency}</option>;
+						})}
+					</select>
+				</div>
 
-			<h2>Template</h2>
-			<div className="section">
-				<label htmlFor="target-select">Template Target: </label>
-				<select
-					id="target-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const targetId = selectedOption.value;
-						const controller = selectedOption.closest('optgroup')?.label;
-						const newTarget = targets.find((target) => target.target === targetId && target.type === controller);
-						if (newTarget) {
-							changeTargetSelection(newTarget);
-						}
-					}}
-				>
-					{searchTargets && (
-						<optgroup label="search">
-							{searchTargets.map((target) => (
-								<option>{target.target}</option>
+				<h2>Template</h2>
+				<div className="section">
+					<label htmlFor="target-select">Template Target: </label>
+					<select
+						id="target-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const targetId = selectedOption.value;
+							const controller = selectedOption.closest('optgroup')?.label;
+							const newTarget = targets.find((target) => target.target === targetId && target.type === controller);
+							if (newTarget) {
+								changeTargetSelection(newTarget);
+							}
+						}}
+					>
+						{searchTargets && (
+							<optgroup label="search">
+								{searchTargets.map((target) => (
+									<option>{target.target}</option>
+								))}
+							</optgroup>
+						)}
+						{autocompleteTargets && (
+							<optgroup label="autocomplete">
+								{autocompleteTargets.map((target) => (
+									<option>{target.target}</option>
+								))}
+							</optgroup>
+						)}
+						{recommendationTargets && (
+							<optgroup label="recommendation">
+								{recommendationTargets.map((target) => (
+									<option>{target.target}</option>
+								))}
+							</optgroup>
+						)}
+					</select>
+				</div>
+
+				<div className="section">
+					<label htmlFor="template-select">Template Component: </label>
+					<select
+						id="template-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const selectedTemplate = selectedOption.value;
+
+							templatesStore.targets[selectedTarget.type][selectedTarget.target].setComponent(selectedTemplate);
+						}}
+					>
+						{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
+							return <option selected={componentName === selectedTarget.template.template}>{componentName}</option>;
+						})}
+					</select>
+				</div>
+
+				<div className="section">
+					<label htmlFor="result-select">Result Component: </label>
+					<select
+						id="result-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const selectedTemplate = selectedOption.value;
+							templatesStore.targets[selectedTarget.type][selectedTarget.target].setResultComponent(selectedTemplate);
+						}}
+					>
+						{Object.keys(library.components.result || {}).map((componentName: string) => {
+							return <option selected={componentName === selectedTarget.template.resultComponent}>{componentName}</option>;
+						})}
+					</select>
+				</div>
+
+				<div className="section">
+					<label htmlFor="theme-select">Theme: </label>
+					<select
+						id="theme-select"
+						onChange={(e) => {
+							const { selectedIndex, options } = e.currentTarget;
+							const selectedOption = options[selectedIndex];
+							const selectedTheme = selectedOption.value;
+							const type = selectedOption.closest('optgroup')?.label;
+
+							templatesStore.targets[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
+						}}
+					>
+						<optgroup label="library">
+							{libraryThemes.map((libraryTheme) => (
+								<option selected={selectedTargetConfig.theme.location === 'library' && selectedTargetConfig.theme.name === libraryTheme}>
+									{libraryTheme}
+								</option>
 							))}
 						</optgroup>
-					)}
-					{autocompleteTargets && (
-						<optgroup label="autocomplete">
-							{autocompleteTargets.map((target) => (
-								<option>{target.target}</option>
+						<optgroup label="local">
+							{lcoalThemes.map((localTheme) => (
+								<option selected={selectedTargetConfig.theme.location === 'local' && selectedTargetConfig.theme.name === localTheme}>
+									{localTheme}
+								</option>
 							))}
 						</optgroup>
-					)}
-					{recommendationTargets && (
-						<optgroup label="recommendation">
-							{recommendationTargets.map((target) => (
-								<option>{target.target}</option>
-							))}
-						</optgroup>
-					)}
-				</select>
-			</div>
+					</select>
+				</div>
 
-			<div className="section">
-				<label htmlFor="template-select">Template Component: </label>
-				<select
-					id="template-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const selectedTemplate = selectedOption.value;
-
-						templatesStore.targets[selectedTarget.type][selectedTarget.target].setComponent(selectedTemplate);
-					}}
-				>
-					{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
-						return <option selected={componentName === selectedTarget.template.template}>{componentName}</option>;
-					})}
-				</select>
-			</div>
-
-			<div className="section">
-				<label htmlFor="result-select">Result Component: </label>
-				<select
-					id="result-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const selectedTemplate = selectedOption.value;
-						templatesStore.targets[selectedTarget.type][selectedTarget.target].setResultComponent(selectedTemplate);
-					}}
-				>
-					{Object.keys(library.components.result || {}).map((componentName: string) => {
-						return <option selected={componentName === selectedTarget.template.resultComponent}>{componentName}</option>;
-					})}
-				</select>
-			</div>
-
-			<div className="section">
-				<label htmlFor="theme-select">Theme: </label>
-				<select
-					id="theme-select"
-					onChange={(e) => {
-						const { selectedIndex, options } = e.currentTarget;
-						const selectedOption = options[selectedIndex];
-						const selectedTheme = selectedOption.value;
-						const type = selectedOption.closest('optgroup')?.label;
-
-						templatesStore.targets[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
-					}}
-				>
-					<optgroup label="library">
-						{libraryThemes.map((libraryTheme) => (
-							<option selected={selectedTargetConfig.theme.location === 'library' && selectedTargetConfig.theme.name === libraryTheme}>
-								{libraryTheme}
-							</option>
-						))}
-					</optgroup>
-					<optgroup label="local">
-						{lcoalThemes.map((localTheme) => (
-							<option selected={selectedTargetConfig.theme.location === 'local' && selectedTargetConfig.theme.name === localTheme}>
-								{localTheme}
-							</option>
-						))}
-					</optgroup>
-				</select>
-			</div>
-
-			<h3>{selectedTargetConfig.theme.name} variables</h3>
-			<div className="section">
-				<div className="indent">
-					{/* {themes[selectedTargetConfig.theme]?.isFromStorage ? (
+				<h3>{selectedTargetConfig.theme.name} variables</h3>
+				<div className="section">
+					<div className="indent">
+						{/* {themes[selectedTargetConfig.theme]?.isFromStorage ? (
 						<Fragment>
 							<label htmlFor="theme-select">
 								<i>Loaded from storage</i>
@@ -393,19 +395,20 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					) : (
 						''
 					)} */}
-					{theme?.variables ? (
-						<ThemeEditor
-							property={theme?.variables}
-							rootEditingKey={'variables'}
-							themeName={selectedTarget.template.theme.name}
-							setOverride={setOverride}
-						/>
-					) : (
-						''
-					)}
+						{theme?.variables ? (
+							<ThemeEditor
+								property={theme?.variables}
+								rootEditingKey={'variables'}
+								themeName={selectedTarget.template.theme.name}
+								setOverride={setOverride}
+							/>
+						) : (
+							''
+						)}
+					</div>
 				</div>
 			</div>
-		</div>
+		</CacheProvider>
 	);
 });
 

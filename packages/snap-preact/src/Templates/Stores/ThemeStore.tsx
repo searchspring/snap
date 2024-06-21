@@ -6,7 +6,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
-import type { Theme, ThemeVariables } from '../../../components/src';
+import { CacheProvider, type Theme, type ThemeVariables } from '../../../components/src';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
 import { observer } from 'mobx-react';
@@ -85,17 +85,24 @@ export class ThemeStore {
 			stored: observable,
 			innerWidth: observable,
 		});
+
 		if (style) {
-			// const theme = this.theme;
 			const GlobalStyle = observer((props: any) => {
 				const { self } = props;
 				const theme = self.theme;
-				const styles = css(style({ name: theme.name, variables: theme.variables }));
-
-				return <Global styles={styles} />;
+				const styles = css({
+					[`.ss__theme__${theme.name}`]: style({ name: theme.name, variables: theme.variables }),
+				});
+				return (
+					<CacheProvider>
+						<Global styles={styles} />
+					</CacheProvider>
+				);
 			});
-			// TODO: when using the template editor and switching themes, the global styles still remain
-			render(<GlobalStyle self={this} />, document.body);
+			const styleElem = document.createElement('style');
+			styleElem.innerHTML = `<!-- searchspring style injection point for "${this.name}" theme -->`;
+			document.head.appendChild(styleElem);
+			render(<GlobalStyle theme={this.theme} self={this} themeName={this.name} />, styleElem);
 		}
 	}
 
