@@ -75,9 +75,9 @@ export function Price(properties: PriceProps): JSX.Element {
 	) : (
 		<CacheProvider>
 			<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
-				{symbol && !symbolAfter ? <label className={'ss__price__symbol'}>{symbol}</label> : <></>}
-				{formattedPrice}
-				{symbol && symbolAfter ? <label className={'ss__price__symbol'}>{symbol}</label> : <></>}
+				{symbol && !symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}
+				<span className={'ss__price__value'}>{formattedPrice}</span>
+				{symbol && symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}
 			</span>
 		</CacheProvider>
 	);
