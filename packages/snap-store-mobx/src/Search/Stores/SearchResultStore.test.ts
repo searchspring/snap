@@ -567,9 +567,6 @@ describe('SearchResultStore', () => {
 			expect(resultForTest).toBeDefined();
 
 			const selection = resultForTest.variants?.selections.find((selection) => selection.field == field);
-			selection?.values.forEach((val) => {
-				console.log(val.value);
-			});
 			expect(selection).toBeDefined();
 			expect(selection?.selected?.value).toBe(value);
 
