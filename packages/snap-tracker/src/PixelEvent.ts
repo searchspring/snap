@@ -13,13 +13,16 @@ export class PixelEvent {
 		this.src =
 			this.endpoint +
 			`?s=${encodeURIComponent(payload?.context?.website?.trackingCode || '')}` +
-			`&currencyCode=${encodeURIComponent(payload?.context?.currency?.code || '')}` +
 			`&u=${encodeURIComponent(payload?.context?.userId || '')}` +
 			`&ce=${featureFlags.cookies ? '1' : '0'}` +
 			`&pt=${encodeURIComponent(document.title)}` +
 			`&v=1` + // version always '1'? or set to snap package version?
 			`&x=${Math.floor(Math.random() * 2147483647)}` +
 			`${window.document.referrer ? `&r=${encodeURIComponent(window.document.referrer)}` : ''}`;
+
+		if (payload?.context?.currency?.code) {
+			this.src += `&currencyCode=${encodeURIComponent(payload?.context?.currency?.code)}`;
+		}
 
 		switch (payload.category) {
 			case BeaconCategory.PAGEVIEW:

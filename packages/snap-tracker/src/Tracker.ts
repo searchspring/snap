@@ -25,6 +25,7 @@ import {
 	TrackerConfig,
 	DoNotTrackEntry,
 	PreflightRequestModel,
+	CurrencyContext,
 } from './types';
 
 export const BATCH_TIMEOUT = 200;
@@ -89,9 +90,12 @@ export class Tracker {
 			},
 		};
 
-		if (this.globals.currency) {
-			this.context.currency = {
-				code: this.globals.currency,
+		if (this.globals.currency?.code) {
+			this.context = {
+				...this.context,
+				currency: {
+					code: this.globals.currency.code,
+				},
 			};
 		}
 
@@ -105,8 +109,8 @@ export class Tracker {
 		setTimeout(() => {
 			this.targeters.push(
 				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
-					const { item, items, siteId, currency, shopper, order, type } = getContext(
-						['item', 'items', 'siteId', 'currency', 'shopper', 'order', 'type'],
+					const { item, items, siteId, shopper, order, type } = getContext(
+						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
 						elem as HTMLScriptElement
 					);
 
@@ -118,10 +122,10 @@ export class Tracker {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view({ items }, siteId, currency);
+							this.track.cart.view({ items }, siteId);
 							break;
 						case 'searchspring/track/order/transaction':
-							this.track.order.transaction({ order, items }, siteId, currency);
+							this.track.order.transaction({ order, items }, siteId);
 							break;
 						default:
 							console.error(`event '${type}' is not supported`);
@@ -424,7 +428,7 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string, currency?: string): BeaconEvent | undefined => {
+			view: (data: CartViewEvent, siteId?: string): BeaconEvent | undefined => {
 				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
 						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -437,15 +441,6 @@ export class Tracker {
 						context: {
 							website: {
 								trackingCode: siteId,
-							},
-						},
-					});
-				}
-				if (currency) {
-					context = deepmerge(context, {
-						context: {
-							currency: {
-								code: currency,
 							},
 						},
 					});
@@ -490,7 +485,7 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: (data: OrderTransactionData, siteId?: string, currency?: string): BeaconEvent | undefined => {
+			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
 						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -503,15 +498,6 @@ export class Tracker {
 						context: {
 							website: {
 								trackingCode: siteId,
-							},
-						},
-					});
-				}
-				if (currency) {
-					context = deepmerge(context, {
-						context: {
-							currency: {
-								code: currency,
 							},
 						},
 					});
@@ -571,13 +557,11 @@ export class Tracker {
 		}
 	};
 
-	setCurrency = (currency: string): void => {
-		if (!currency) {
+	setCurrency = (currency: CurrencyContext): void => {
+		if (!currency?.code) {
 			return;
 		}
-		this.context.currency = {
-			code: currency,
-		};
+		this.context.currency = currency;
 	};
 
 	getUserId = (): string | undefined | null => {

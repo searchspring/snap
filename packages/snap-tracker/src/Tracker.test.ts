@@ -80,7 +80,7 @@ describe('Script Block Tracking', () => {
 		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
 
 		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined, undefined);
+		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -113,7 +113,7 @@ describe('Script Block Tracking', () => {
 		const trackEvent = jest.spyOn(tracker.track.order, 'transaction');
 
 		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ order, items }, undefined, undefined);
+		expect(trackEvent).toHaveBeenCalledWith({ order, items }, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -480,7 +480,7 @@ describe('Tracker', () => {
 
 		const customGlobals = {
 			siteId: 'custom',
-			currency: 'EUR',
+			currency: { code: 'EUR' },
 		};
 
 		const tracker = new Tracker(globals);
@@ -518,7 +518,7 @@ describe('Tracker', () => {
 		expect(tracker2.context.currency).toBeDefined();
 
 		// @ts-ignore - private property
-		expect(tracker2.context.currency.code).toStrictEqual(customGlobals.currency);
+		expect(tracker2.context.currency).toStrictEqual(customGlobals.currency);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -1084,13 +1084,12 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
-	it('can invoke track.cart.view with siteId and currency override', async () => {
+	it('can invoke track.cart.view with siteId override', async () => {
 		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const cartView = jest.spyOn(tracker.track.cart, 'view');
 
 		const siteId = 'xxxxxx';
-		const currency = 'EUR';
 		const payload = {
 			items: [
 				{
@@ -1105,7 +1104,7 @@ describe('Tracker', () => {
 				},
 			],
 		};
-		await tracker.track.cart.view(payload, siteId, currency);
+		await tracker.track.cart.view(payload, siteId);
 
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.CART,
@@ -1116,14 +1115,11 @@ describe('Tracker', () => {
 					website: {
 						trackingCode: siteId,
 					},
-					currency: {
-						code: currency,
-					},
 				},
 			}),
 			event: { ...payload },
 		});
-		expect(cartView).toHaveBeenCalledWith(payload, siteId, currency);
+		expect(cartView).toHaveBeenCalledWith(payload, siteId);
 
 		cartView.mockRestore();
 		trackEvent.mockRestore();
@@ -1283,7 +1279,7 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
-	it('can invoke track.order.transaction with siteId and currency override', async () => {
+	it('can invoke track.order.transaction with siteId override', async () => {
 		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track, 'event');
 		const orderTransaction = jest.spyOn(tracker.track.order, 'transaction');
@@ -1308,7 +1304,7 @@ describe('Tracker', () => {
 				},
 			],
 		};
-		await tracker.track.order.transaction(payload, siteId, currency);
+		await tracker.track.order.transaction(payload, siteId);
 
 		expect(trackEvent).toHaveBeenCalledWith({
 			type: BeaconType.ORDER,
@@ -1318,9 +1314,6 @@ describe('Tracker', () => {
 				context: {
 					website: {
 						trackingCode: siteId,
-					},
-					currency: {
-						code: currency,
 					},
 				},
 			}),
@@ -1334,7 +1327,7 @@ describe('Tracker', () => {
 				items: payload.items,
 			},
 		});
-		expect(orderTransaction).toHaveBeenCalledWith(payload, siteId, currency);
+		expect(orderTransaction).toHaveBeenCalledWith(payload, siteId);
 
 		orderTransaction.mockRestore();
 		trackEvent.mockRestore();

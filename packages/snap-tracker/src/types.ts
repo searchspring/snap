@@ -1,9 +1,13 @@
 import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
 
+export type CurrencyContext = {
+	code: string;
+};
+
 export type TrackerGlobals = {
 	siteId: string;
-	currency?: string;
+	currency?: CurrencyContext;
 };
 
 export type DoNotTrackEntry = {
@@ -98,9 +102,7 @@ export interface BeaconContext {
 		type?: string;
 		id?: string;
 	};
-	currency?: {
-		code: string;
-	};
+	currency?: CurrencyContext;
 }
 
 export interface BeaconMeta {
@@ -220,10 +222,10 @@ export interface TrackMethods {
 		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (data: CartViewEvent, siteId?: string, currency?: string) => BeaconEvent | undefined;
+		view: (data: CartViewEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	order: {
-		transaction: (data: OrderTransactionData, siteId?: string, currency?: string) => BeaconEvent | undefined;
+		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent | undefined;
 	};
 }
 

@@ -334,7 +334,7 @@ tracker.track.order.transaction({
     order: {
         id: '123456',
         total: '34.29',
-		transactionTotal: '31.97',
+        transactionTotal: '31.97',
         city: 'Los Angeles',
         state: 'CA',
         country: 'US',
@@ -359,10 +359,10 @@ tracker.track.order.transaction({
 ## Tracker properties
 
 ### `globals` property
-When constructing an instance of `Tracker`, a globals object is required to be constructed. This object contains a `siteId` key and value. An optional `currency` key and value can be provided. 
+When constructing an instance of `Tracker`, a globals object is required to be constructed. This object contains a `siteId` key and value. An optional `currency` object with a `code` property containing a string can be provided. 
 
 ```typescript
-const globals = { siteId: 'abc123' };
+const globals = { siteId: 'abc123', currency: { code: 'EUR' } };
 const tracker = new Tracker(globals);
 console.log(tracker.globals === globals) // true
 ```
@@ -422,7 +422,7 @@ Sets the currency code on the tracker context.
 ```typescript
 const tracker = new Tracker();
 
-tracker.setCurrency('EUR')
+tracker.setCurrency({ code: 'EUR' })
 ```
  
 
