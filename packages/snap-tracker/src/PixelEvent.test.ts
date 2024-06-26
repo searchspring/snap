@@ -42,6 +42,9 @@ describe('PixelEvent', () => {
 				website: {
 					trackingCode: '8uyt2m',
 				},
+				currency: {
+					code: 'USD',
+				},
 			},
 			event: {
 				items: [
@@ -64,6 +67,7 @@ describe('PixelEvent', () => {
 
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.src).toContain('&a=basket');
+		expect(event.src).toContain(`&currencyCode=${encodeURIComponent(data.context.currency.code)}`);
 		expect(event.src).toContain(event.endpoint);
 
 		data.event.items.forEach((cartItem) => {
@@ -87,10 +91,14 @@ describe('PixelEvent', () => {
 				website: {
 					trackingCode: '8uyt2m',
 				},
+				currency: {
+					code: 'USD',
+				},
 			},
 			event: {
 				orderId: '123456',
-				total: '42.96',
+				total: '34.29',
+				transactionTotal: '31.97',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -114,6 +122,7 @@ describe('PixelEvent', () => {
 
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.src).toContain('&a=sale');
+		expect(event.src).toContain(`&currencyCode=${encodeURIComponent(data.context.currency.code)}`);
 		expect(event.src).toContain(event.endpoint);
 		expect(event.src.split('&item=')).toHaveLength(data.event.items.length + 1);
 
@@ -125,6 +134,7 @@ describe('PixelEvent', () => {
 
 		expect(event.src).toContain(`&orderId=${encodeURIComponent(data.event.orderId)}`);
 		expect(event.src).toContain(`&total=${encodeURIComponent(data.event.total)}`);
+		expect(event.src).toContain(`&transactionTotal=${encodeURIComponent(data.event.transactionTotal)}`);
 		expect(event.src).toContain(`&city=${encodeURIComponent(data.event.city)}`);
 		expect(event.src).toContain(`&state=${encodeURIComponent(data.event.state)}`);
 		expect(event.src).toContain(`&country=${encodeURIComponent(data.event.country)}`);

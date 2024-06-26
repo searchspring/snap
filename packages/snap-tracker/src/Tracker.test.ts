@@ -88,7 +88,8 @@ describe('Script Block Tracking', () => {
 	it('can target track/order/transaction', async () => {
 		const order = {
 			id: '123456',
-			total: '9.99',
+			total: '10.71',
+			transactionTotal: '9.99',
 			city: 'Los Angeles',
 			state: 'CA',
 			country: 'US',
@@ -479,6 +480,7 @@ describe('Tracker', () => {
 
 		const customGlobals = {
 			siteId: 'custom',
+			currency: { code: 'EUR' },
 		};
 
 		const tracker = new Tracker(globals);
@@ -495,6 +497,9 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.config.framework).toStrictEqual('snap');
 
+		// @ts-ignore - private property
+		expect(tracker.context.currency).toBeUndefined();
+
 		const tracker2 = new Tracker(customGlobals, customConfig);
 
 		// @ts-ignore - private property
@@ -508,6 +513,12 @@ describe('Tracker', () => {
 
 		// @ts-ignore - private property
 		expect(tracker2.config.framework).toBe(customConfig.framework);
+
+		// @ts-ignore - private property
+		expect(tracker2.context.currency).toBeDefined();
+
+		// @ts-ignore - private property
+		expect(tracker2.context.currency).toStrictEqual(customGlobals.currency);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -1122,7 +1133,8 @@ describe('Tracker', () => {
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1143,6 +1155,7 @@ describe('Tracker', () => {
 		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
+			transactionTotal: payload.order.transactionTotal,
 			city: payload.order.city,
 			state: payload.order.state,
 			country: payload.order.country,
@@ -1163,7 +1176,8 @@ describe('Tracker', () => {
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1184,6 +1198,7 @@ describe('Tracker', () => {
 		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
+			transactionTotal: payload.order.transactionTotal,
 			city: payload.order.city,
 			state: payload.order.state,
 			country: payload.order.country,
@@ -1205,7 +1220,8 @@ describe('Tracker', () => {
 		let payload: OrderTransactionData = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1223,7 +1239,8 @@ describe('Tracker', () => {
 		payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1268,10 +1285,12 @@ describe('Tracker', () => {
 		const orderTransaction = jest.spyOn(tracker.track.order, 'transaction');
 
 		const siteId = 'xxxxxx';
+		const currency = 'EUR';
 		const payload = {
 			order: {
 				id: '123456',
-				total: '9.99',
+				total: '10.71',
+				transactionTotal: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
@@ -1301,6 +1320,7 @@ describe('Tracker', () => {
 			event: {
 				orderId: payload.order.id,
 				total: payload.order.total,
+				transactionTotal: payload.order.transactionTotal,
 				city: payload.order.city,
 				state: payload.order.state,
 				country: payload.order.country,
