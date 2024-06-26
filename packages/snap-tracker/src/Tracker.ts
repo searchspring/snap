@@ -91,12 +91,7 @@ export class Tracker {
 		};
 
 		if (this.globals.currency?.code) {
-			this.context = {
-				...this.context,
-				currency: {
-					code: this.globals.currency.code,
-				},
-			};
+			this.context.currency = this.globals.currency;
 		}
 
 		if (!window.searchspring?.tracker) {
@@ -109,11 +104,12 @@ export class Tracker {
 		setTimeout(() => {
 			this.targeters.push(
 				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
-					const { item, items, siteId, shopper, order, type } = getContext(
-						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+					const { item, items, siteId, shopper, order, type, currency } = getContext(
+						['item', 'items', 'siteId', 'shopper', 'order', 'type', 'currency'],
 						elem as HTMLScriptElement
 					);
 
+					this.setCurrency(currency);
 					switch (type) {
 						case 'searchspring/track/shopper/login':
 							this.track.shopper.login(shopper, siteId);

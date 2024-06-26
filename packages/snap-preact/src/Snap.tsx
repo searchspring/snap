@@ -398,9 +398,7 @@ export class Snap {
 
 			if (this.context.currency?.code) {
 				trackerGlobals = deepmerge(trackerGlobals || {}, {
-					currency: {
-						code: this.context.currency.code,
-					},
+					currency: this.context.currency,
 				});
 			}
 
