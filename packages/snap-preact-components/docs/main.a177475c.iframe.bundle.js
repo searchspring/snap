@@ -1,4 +1,4 @@
-/*! For license information please see main.b88e1407.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.a177475c.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5112,7 +5112,7 @@
 					formattedPrice = (function currency(input, opts) {
 						var defaultOptions = Object.assign({ symbol: '$', thousandsSeparator: ',', decimalPlaces: 2 }, opts);
 						return (0, formatNumber.Z)(input, defaultOptions);
-					})(+value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
+					})(+value, { symbol: '', decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator }),
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.price({ theme }), style]),
@@ -5124,7 +5124,13 @@
 								(0, emotion_react_browser_esm.Y)(
 									'span',
 									Object.assign({}, styling, { className: classnames_default()('ss__price', { 'ss__price--strike': lineThrough }, className) }),
-									formattedPrice
+									symbol && !symbolAfter
+										? (0, emotion_react_browser_esm.Y)('span', { className: 'ss__price__symbol' }, symbol)
+										: (0, emotion_react_browser_esm.Y)(preact_module.FK, null),
+									(0, emotion_react_browser_esm.Y)('span', { className: 'ss__price__value' }, formattedPrice),
+									symbol && symbolAfter
+										? (0, emotion_react_browser_esm.Y)('span', { className: 'ss__price__symbol' }, symbol)
+										: (0, emotion_react_browser_esm.Y)(preact_module.FK, null)
 								)
 						  )
 				);
@@ -6902,8 +6908,8 @@
 											{
 												navigation,
 												pagination,
-												onResize: function onResize() {
-													additionalProps.onResize && additionalProps.onResize(), attachClasstoLastVisibleSlide();
+												onResize: function onResize(swiper) {
+													additionalProps.onResize && additionalProps.onResize(), swiper.updateSlidesClasses(), attachClasstoLastVisibleSlide();
 												},
 												onTransitionEnd: function onTransitionEnd() {
 													additionalProps.onTransitionEnd && additionalProps.onTransitionEnd(), attachClasstoLastVisibleSlide();
@@ -29313,6 +29319,30 @@
 					});
 				};
 			}
+			function _toConsumableArray(arr) {
+				return (
+					(function _arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return RecommendationBundle_stories_arrayLikeToArray(arr);
+					})(arr) ||
+					(function _iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function RecommendationBundle_stories_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+							return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
 			function RecommendationBundle_stories_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
@@ -29397,38 +29427,17 @@
 							defaultValue: 'plus',
 							description: 'Icon to render between results',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'plus' } },
-							control: {
-								type: 'select',
-								options: (function _toConsumableArray(arr) {
-									return (
-										(function _arrayWithoutHoles(arr) {
-											if (Array.isArray(arr)) return RecommendationBundle_stories_arrayLikeToArray(arr);
-										})(arr) ||
-										(function _iterableToArray(iter) {
-											if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-										})(arr) ||
-										(function RecommendationBundle_stories_unsupportedIterableToArray(o, minLen) {
-											if (!o) return;
-											if ('string' == typeof o) return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
-											var n = Object.prototype.toString.call(o).slice(8, -1);
-											'Object' === n && o.constructor && (n = o.constructor.name);
-											if ('Map' === n || 'Set' === n) return Array.from(o);
-											if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-												return RecommendationBundle_stories_arrayLikeToArray(o, minLen);
-										})(arr) ||
-										(function _nonIterableSpread() {
-											throw new TypeError(
-												'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-											);
-										})()
-									);
-								})(Object.keys(paths.c)),
-							},
+							control: { type: 'select', options: _toConsumableArray(Object.keys(paths.c)) },
 						},
 						ctaButtonText: {
 							description: 'text to render in add to cart button',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'Add All To Cart' } },
 							control: { type: 'text' },
+						},
+						ctaIcon: {
+							desciption: 'The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'bag' } },
+							control: { type: 'select', options: _toConsumableArray(Object.keys(paths.c)) },
 						},
 						ctaButtonSuccessText: {
 							description: 'text to temporarily render in the add to cart button after it is clicked',
@@ -33092,14 +33101,14 @@
 				})(),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
 				cookies = {
-					set: function set(name, val, sameSite, expires) {
+					set: function set(name, val, sameSite, expires, domain) {
 						sameSite = sameSite || 'Lax';
 						var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
 						if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
 							var d = new Date();
 							d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
 						}
-						window.document.cookie = cookie;
+						domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
 					},
 					get: function get(name) {
 						name += '=';
@@ -33109,8 +33118,9 @@
 						}
 						return '';
 					},
-					unset: function unset(name) {
-						window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+					unset: function unset(name, domain) {
+						var cookie = name + '=; path=/; Max-Age=-99999999;';
+						domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
 					},
 				};
 			function getFlags() {
@@ -33266,6 +33276,8 @@
 								(this.expiration = 31536e6),
 								(this.sameSite = 'Lax'),
 								(this.key = 'ss-storage'),
+								(this.cookieDomain =
+									('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0),
 								(this.state = {}),
 								config)
 							)
@@ -33326,7 +33338,7 @@
 											window.localStorage.setItem(this.key, JSON.stringify(this.state));
 											break;
 										case StorageType.cookie:
-											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
 									}
 								},
 							},
@@ -44161,9 +44173,13 @@
 								{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
 								{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
 							];
-							(this.pageSizeOptions = pageSizeOptions.map(function (pageOption) {
-								return new PageSizeOption(_this.services, _this.pageSize, { label: pageOption.label, value: pageOption.value });
-							})),
+							(this.pageSizeOptions = pageSizeOptions
+								.filter(function (option) {
+									return option.value <= 100;
+								})
+								.map(function (pageOption) {
+									return new PageSizeOption(_this.services, _this.pageSize, { label: pageOption.label, value: pageOption.value });
+								})),
 								(0, mobx_esm.Gn)(this, {
 									page: mobx_esm.sH,
 									pageSize: mobx_esm.sH,
@@ -48705,39 +48721,57 @@
 				var _payload$context,
 					_payload$context$webs,
 					_payload$context2,
+					_payload$context3,
+					_payload$context3$cur,
+					_payload$context4,
+					_payload$context4$cur,
 					_this = this;
-				switch (
-					((function PixelEvent_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, PixelEvent),
-					(this.endpoint = 'https://d3cgm8py10hi0z.cloudfront.net/is.gif'),
-					(this.src =
-						this.endpoint +
-						'?s=' +
+				((function PixelEvent_classCallCheck(instance, Constructor) {
+					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+				})(this, PixelEvent),
+				(this.endpoint = 'https://d3cgm8py10hi0z.cloudfront.net/is.gif'),
+				(this.src =
+					this.endpoint +
+					'?s=' +
+					encodeURIComponent(
+						(null == payload ||
+						null === (_payload$context = payload.context) ||
+						void 0 === _payload$context ||
+						null === (_payload$context$webs = _payload$context.website) ||
+						void 0 === _payload$context$webs
+							? void 0
+							: _payload$context$webs.trackingCode) || ''
+					) +
+					'&u=' +
+					encodeURIComponent(
+						(null == payload || null === (_payload$context2 = payload.context) || void 0 === _payload$context2 ? void 0 : _payload$context2.userId) ||
+							''
+					) +
+					'&ce=' +
+					(featureFlags_cookies ? '1' : '0') +
+					'&pt=' +
+					encodeURIComponent(document.title) +
+					'&v=1&x=' +
+					Math.floor(2147483647 * Math.random()) +
+					(window.document.referrer ? '&r=' + encodeURIComponent(window.document.referrer) : '')),
+				null != payload &&
+					null !== (_payload$context3 = payload.context) &&
+					void 0 !== _payload$context3 &&
+					null !== (_payload$context3$cur = _payload$context3.currency) &&
+					void 0 !== _payload$context3$cur &&
+					_payload$context3$cur.code) &&
+					(this.src +=
+						'&currencyCode=' +
 						encodeURIComponent(
-							(null == payload ||
-							null === (_payload$context = payload.context) ||
-							void 0 === _payload$context ||
-							null === (_payload$context$webs = _payload$context.website) ||
-							void 0 === _payload$context$webs
+							null == payload ||
+								null === (_payload$context4 = payload.context) ||
+								void 0 === _payload$context4 ||
+								null === (_payload$context4$cur = _payload$context4.currency) ||
+								void 0 === _payload$context4$cur
 								? void 0
-								: _payload$context$webs.trackingCode) || ''
-						) +
-						'&u=' +
-						encodeURIComponent(
-							(null == payload || null === (_payload$context2 = payload.context) || void 0 === _payload$context2
-								? void 0
-								: _payload$context2.userId) || ''
-						) +
-						'&ce=' +
-						(featureFlags_cookies ? '1' : '0') +
-						'&pt=' +
-						encodeURIComponent(document.title) +
-						'&v=1&x=' +
-						Math.floor(2147483647 * Math.random()) +
-						(window.document.referrer ? '&r=' + encodeURIComponent(window.document.referrer) : '')),
-					payload.category)
-				) {
+								: _payload$context4$cur.code
+						));
+				switch (payload.category) {
 					case BeaconCategory.PAGEVIEW:
 						(this.event = payload.event), (this.src += '&a=viewItem'), this.event.sku && (this.src += '&sku=' + encodeURIComponent(this.event.sku));
 						break;
@@ -48761,6 +48795,7 @@
 						var _this$event = (this.event = payload.event),
 							orderId = _this$event.orderId,
 							total = _this$event.total,
+							transactionTotal = _this$event.transactionTotal,
 							city = _this$event.city,
 							state = _this$event.state,
 							country = _this$event.country,
@@ -48768,6 +48803,7 @@
 						(this.src += '&a=sale'),
 							orderId && (this.src += '&orderId=' + encodeURIComponent(orderId)),
 							total && (this.src += '&total=' + encodeURIComponent(total)),
+							transactionTotal && (this.src += '&transactionTotal=' + encodeURIComponent(transactionTotal)),
 							city && (this.src += '&city=' + encodeURIComponent(city)),
 							state && (this.src += '&state=' + encodeURIComponent(state)),
 							country && (this.src += '&country=' + encodeURIComponent(country)),
@@ -48827,7 +48863,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.56.6', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.57.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -48880,7 +48916,9 @@
 				})(t, 'string');
 				return 'symbol' == typeof i ? i : i + '';
 			}
-			var Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
+			var COOKIE_DOMAIN =
+					('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0,
+				Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
 				Tracker = (function () {
 					return (function Tracker_createClass(Constructor, protoProps, staticProps) {
 						return (
@@ -48891,7 +48929,8 @@
 						);
 					})(
 						function Tracker(globals, config) {
-							var _window$searchspring,
+							var _this$globals$currenc,
+								_window$searchspring,
 								_this = this;
 							if (
 								((function Tracker_classCallCheck(instance, Constructor) {
@@ -48969,7 +49008,9 @@
 														(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
 														_this.getShopperId() != data.id)
 													) {
-														cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
+														cookies.set('ssShopperId', data.id, 'Lax', 31536e6, COOKIE_DOMAIN),
+															(_this.context.shopperId = data.id),
+															_this.sendPreflight();
 														var payload = {
 															type: BeaconType.LOGIN,
 															category: BeaconCategory.PERSONALIZATION,
@@ -49008,7 +49049,7 @@
 															) {
 																return item.trim();
 															});
-														cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
+														cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6, COOKIE_DOMAIN),
 															lastViewedProducts.includes(sku) || _this.sendPreflight();
 													}
 													return null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })), event;
@@ -49090,7 +49131,7 @@
 									},
 									order: {
 										transaction: function transaction(data, siteId) {
-											var _data$order, _data$order2, _data$order3, _data$order4, _data$order5;
+											var _data$order, _data$order2, _data$order3, _data$order4, _data$order5, _data$order6;
 											if (null != data && data.items && Array.isArray(data.items) && data.items.length) {
 												var context = _this.context;
 												siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
@@ -49126,16 +49167,20 @@
 															null != data && null !== (_data$order2 = data.order) && void 0 !== _data$order2 && _data$order2.total
 																? '' + data.order.total
 																: void 0,
+														transactionTotal:
+															null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.transactionTotal
+																? '' + data.order.transactionTotal
+																: void 0,
 														city:
-															null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.city
+															null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.city
 																? '' + data.order.city
 																: void 0,
 														state:
-															null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.state
+															null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.state
 																? '' + data.order.state
 																: void 0,
 														country:
-															null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.country
+															null != data && null !== (_data$order6 = data.order) && void 0 !== _data$order6 && _data$order6.country
 																? '' + data.order.country
 																: void 0,
 														items,
@@ -49145,7 +49190,7 @@
 												return event ? (_this.cookies.cart.clear(), new PixelEvent(payload), event) : void 0;
 											}
 											console.error(
-												'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+												'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 											);
 										},
 									},
@@ -49153,13 +49198,16 @@
 								(this.updateContext = function (key, value) {
 									value && (_this.context[key] = value);
 								}),
+								(this.setCurrency = function (currency) {
+									null != currency && currency.code && (_this.context.currency = currency);
+								}),
 								(this.getUserId = function () {
 									var userId;
 									try {
 										if (getFlags().cookies())
 											(userId = cookies.get('_isuid') || cookies.get('ssUserId') || (0, v4.A)()),
-												cookies.set('ssUserId', userId, 'Lax', 31536e6),
-												cookies.set('_isuid', userId, 'Lax', 31536e6);
+												cookies.set('ssUserId', userId, 'Lax', 31536e6, COOKIE_DOMAIN),
+												cookies.set('_isuid', userId, 'Lax', 31536e6, COOKIE_DOMAIN);
 										else {
 											if (!getFlags().storage()) throw 'unsupported features';
 											(userId = window.localStorage.getItem('ssUserId') || (0, v4.A)()), window.localStorage.setItem('ssUserId', userId);
@@ -49175,14 +49223,14 @@
 										try {
 											(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.A)()),
 												window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
-												getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
+												getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0, COOKIE_DOMAIN);
 										} catch (e) {
 											console.error('Failed to persist session id to session storage:', e);
 										}
 									else
 										getFlags().cookies() &&
 											((sessionId = cookies.get('ssSessionIdNamespace')) ||
-												((sessionId = (0, v4.A)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
+												((sessionId = (0, v4.A)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0, COOKIE_DOMAIN)));
 									return sessionId;
 								}),
 								(this.getShopperId = function () {
@@ -49242,7 +49290,7 @@
 														return item.trim();
 													}),
 													uniqueCartItems = Array.from(new Set(cartItems));
-												cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0, COOKIE_DOMAIN),
 													cartItems.filter(function (item) {
 														return items.includes(item);
 													}).length !== items.length && _this.sendPreflight();
@@ -49257,7 +49305,7 @@
 													uniqueCartItems = Array.from(
 														new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
 													);
-												cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0, COOKIE_DOMAIN),
 													currentCartItems.filter(function (item) {
 														return itemsToAdd.includes(item);
 													}).length !== itemsToAdd.length && _this.sendPreflight();
@@ -49272,7 +49320,7 @@
 													updatedItems = currentCartItems.filter(function (item) {
 														return !itemsToRemove.includes(item);
 													});
-												cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
+												cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0, COOKIE_DOMAIN),
 													currentCartItems.length !== updatedItems.length && _this.sendPreflight();
 											}
 										},
@@ -49341,8 +49389,12 @@
 									pageLoadId: (0, v4.A)(),
 									website: { trackingCode: this.globals.siteId },
 								}),
+								null !== (_this$globals$currenc = this.globals.currency) &&
+									void 0 !== _this$globals$currenc &&
+									_this$globals$currenc.code &&
+									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.56.6')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.57.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -49410,14 +49462,15 @@
 														siteId && siteId.length > 1 && (variables.siteId = siteId[1]);
 													}
 													return variables;
-												})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
+												})(['item', 'items', 'siteId', 'shopper', 'order', 'type', 'currency'], elem),
 												item = _getContext.item,
 												items = _getContext.items,
 												siteId = _getContext.siteId,
 												shopper = _getContext.shopper,
 												order = _getContext.order,
-												type = _getContext.type;
-											switch (type) {
+												type = _getContext.type,
+												currency = _getContext.currency;
+											switch ((_this.setCurrency(currency), type)) {
 												case 'searchspring/track/shopper/login':
 													_this.track.shopper.login(shopper, siteId);
 													break;
