@@ -397,10 +397,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...displaySettings}
 					navigation={navigation}
 					pagination={pagination}
-					onResize={() => {
+					onResize={(swiper) => {
 						if (additionalProps.onResize) {
 							additionalProps.onResize();
 						}
+						swiper.updateSlidesClasses();
 						attachClasstoLastVisibleSlide();
 					}}
 					onTransitionEnd={() => {

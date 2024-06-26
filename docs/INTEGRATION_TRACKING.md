@@ -93,7 +93,9 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 
 `order.id` - (optional) order id
 
-`order.otal` - (optional) sub total of all items
+`order.total` - (optional) transaction total of all items after tax and shipping
+
+`order.transactionTotal` - (optional) transaction total of all items before tax and shipping
 
 `order.city` - (optional) city name
 
@@ -107,7 +109,8 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 <script type="searchspring/track/order/transaction">
 	order = {
 		id: '123456',
-		total: '31.97',
+		total: '34.29',
+		transactionTotal: '31.97',
 		city: 'Los Angeles',
 		state: 'CA',
 		country: 'US',
@@ -135,7 +138,8 @@ Alternatively, this can also be integrated using the `searchspring.tracker.track
 searchspring.tracker.track.order.transaction({
 	order: {
 		id: '123456',
-		total: '31.97',
+		total: '34.29',
+		transactionTotal: '31.97',
 		city: 'Los Angeles',
 		state: 'CA',
 		country: 'US',

@@ -25,6 +25,7 @@ import {
 	TrackerConfig,
 	DoNotTrackEntry,
 	PreflightRequestModel,
+	CurrencyContext,
 } from './types';
 
 export const BATCH_TIMEOUT = 200;
@@ -34,6 +35,8 @@ const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
 const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
+const COOKIE_DOMAIN =
+	(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
@@ -89,6 +92,10 @@ export class Tracker {
 			},
 		};
 
+		if (this.globals.currency?.code) {
+			this.context.currency = this.globals.currency;
+		}
+
 		if (!window.searchspring?.tracker) {
 			window.searchspring = window.searchspring || {};
 			window.searchspring.tracker = this;
@@ -99,11 +106,12 @@ export class Tracker {
 		setTimeout(() => {
 			this.targeters.push(
 				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
-					const { item, items, siteId, shopper, order, type } = getContext(
-						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+					const { item, items, siteId, shopper, order, type, currency } = getContext(
+						['item', 'items', 'siteId', 'shopper', 'order', 'type', 'currency'],
 						elem as HTMLScriptElement
 					);
 
+					this.setCurrency(currency);
 					switch (type) {
 						case 'searchspring/track/shopper/login':
 							this.track.shopper.login(shopper, siteId);
@@ -313,7 +321,7 @@ export class Tracker {
 				const storedShopperId = this.getShopperId();
 				if (storedShopperId != data.id) {
 					// user's logged in id has changed, update shopperId cookie send login event
-					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION, COOKIE_DOMAIN);
 					this.context.shopperId = data.id;
 					this.sendPreflight();
 					const payload = {
@@ -364,7 +372,13 @@ export class Tracker {
 					if (sku) {
 						const lastViewedProducts = this.cookies.viewed.get();
 						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
-						cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+						cookies.set(
+							VIEWED_PRODUCTS,
+							uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','),
+							COOKIE_SAMESITE,
+							VIEWED_COOKIE_EXPIRATION,
+							COOKIE_DOMAIN
+						);
 						if (!lastViewedProducts.includes(sku)) {
 							this.sendPreflight();
 						}
@@ -478,7 +492,7 @@ export class Tracker {
 			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
@@ -514,6 +528,7 @@ export class Tracker {
 				const eventPayload = {
 					orderId: data?.order?.id ? `${data.order.id}` : undefined,
 					total: data?.order?.total ? `${data.order.total}` : undefined,
+					transactionTotal: data?.order?.transactionTotal ? `${data.order.transactionTotal}` : undefined,
 					city: data?.order?.city ? `${data.order.city}` : undefined,
 					state: data?.order?.state ? `${data.order.state}` : undefined,
 					country: data?.order?.country ? `${data.order.country}` : undefined,
@@ -546,14 +561,21 @@ export class Tracker {
 		}
 	};
 
+	setCurrency = (currency: CurrencyContext): void => {
+		if (!currency?.code) {
+			return;
+		}
+		this.context.currency = currency;
+	};
+
 	getUserId = (): string | undefined | null => {
 		let userId;
 		try {
 			// use cookies if available, fallback to localstorage
 			if (getFlags().cookies()) {
 				userId = cookies.get(LEGACY_USERID_COOKIE_NAME) || cookies.get(USERID_COOKIE_NAME) || uuidv4();
-				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-				cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION, COOKIE_DOMAIN);
+				cookies.set(LEGACY_USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION, COOKIE_DOMAIN);
 			} else if (getFlags().storage()) {
 				userId = window.localStorage.getItem(USERID_COOKIE_NAME) || uuidv4();
 				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
@@ -573,7 +595,7 @@ export class Tracker {
 			try {
 				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
 				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
-				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
+				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0, COOKIE_DOMAIN); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
 			}
@@ -582,7 +604,7 @@ export class Tracker {
 			sessionId = cookies.get(SESSIONID_STORAGE_NAME);
 			if (!sessionId) {
 				sessionId = uuidv4();
-				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
+				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 			}
 		}
 
@@ -653,7 +675,7 @@ export class Tracker {
 				if (items.length) {
 					const cartItems = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set(cartItems));
-					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
 					const itemsHaveChanged = cartItems.filter((item) => items.includes(item)).length !== items.length;
 					if (itemsHaveChanged) {
@@ -666,7 +688,7 @@ export class Tracker {
 					const currentCartItems = this.cookies.cart.get();
 					const itemsToAdd = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
-					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
 					const itemsHaveChanged = currentCartItems.filter((item) => itemsToAdd.includes(item)).length !== itemsToAdd.length;
 					if (itemsHaveChanged) {
@@ -679,7 +701,7 @@ export class Tracker {
 					const currentCartItems = this.cookies.cart.get();
 					const itemsToRemove = items.map((item) => item.trim());
 					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
-					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
 					const itemsHaveChanged = currentCartItems.length !== updatedItems.length;
 					if (itemsHaveChanged) {
