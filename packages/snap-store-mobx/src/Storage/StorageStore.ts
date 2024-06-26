@@ -9,6 +9,8 @@ export class StorageStore {
 	private expiration = 31536000000; // one year (ms)
 	private sameSite = 'Lax';
 	private key = 'ss-storage';
+	private cookieDomain =
+		(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 	public state: Record<string, any> = {};
 
 	constructor(config?: StorageConfig) {
@@ -77,7 +79,7 @@ export class StorageStore {
 				window.localStorage.setItem(this.key, JSON.stringify(this.state));
 				break;
 			case StorageType.cookie:
-				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
 				break;
 		}
 	}

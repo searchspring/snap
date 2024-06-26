@@ -43,8 +43,13 @@ describe('Price Component', () => {
 		};
 		const rendered = render(<Price {...args} />);
 		const priceElement = rendered.container.querySelector('.ss__price');
+		const symbolElement = rendered.container.querySelector('.ss__price__symbol');
+
 		const priceText = priceElement?.textContent;
 		expect(priceText).toBe('1.099.99 £');
+
+		expect(symbolElement).toBeDefined();
+		expect(symbolElement?.textContent).toBe(args.symbol);
 	});
 
 	it('renders with additional style using prop', () => {

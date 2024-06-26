@@ -185,6 +185,19 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		ctaIcon: {
+			desciption: 'The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'bag' },
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
 		ctaButtonSuccessText: {
 			description: 'text to temporarily render in the add to cart button after it is clicked',
 			table: {

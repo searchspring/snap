@@ -21,7 +21,7 @@ export const AddToCart = (props) => {
 ```
 
 ## AddToCart
-The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/checkout/cart/`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take several optional properties, `redirect`, `idFieldName`, `formKey`, and `uenc`.
+The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/checkout/cart/`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take several optional properties, `redirect`, `idFieldName`, `formKey`, and `uenc`. Snap variants must be enabled for full functionality.
 
 The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/checkout/cart/`). 
 

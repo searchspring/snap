@@ -20,6 +20,10 @@ export class PixelEvent {
 			`&x=${Math.floor(Math.random() * 2147483647)}` +
 			`${window.document.referrer ? `&r=${encodeURIComponent(window.document.referrer)}` : ''}`;
 
+		if (payload?.context?.currency?.code) {
+			this.src += `&currencyCode=${encodeURIComponent(payload?.context?.currency?.code)}`;
+		}
+
 		switch (payload.category) {
 			case BeaconCategory.PAGEVIEW:
 				this.event = payload.event as ProductViewEvent;
@@ -38,10 +42,11 @@ export class PixelEvent {
 				});
 				break;
 			case BeaconCategory.ORDERVIEW:
-				const { orderId, total, city, state, country, items } = (this.event = payload.event as OrderTransactionEvent);
+				const { orderId, total, transactionTotal, city, state, country, items } = (this.event = payload.event as OrderTransactionEvent);
 				this.src += `&a=sale`;
 				if (orderId) this.src += `&orderId=${encodeURIComponent(orderId)}`;
 				if (total) this.src += `&total=${encodeURIComponent(total)}`;
+				if (transactionTotal) this.src += `&transactionTotal=${encodeURIComponent(transactionTotal)}`;
 				if (city) this.src += `&city=${encodeURIComponent(city)}`;
 				if (state) this.src += `&state=${encodeURIComponent(state)}`;
 				if (country) this.src += `&country=${encodeURIComponent(country)}`;
