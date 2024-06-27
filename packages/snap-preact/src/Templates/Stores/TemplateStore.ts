@@ -61,14 +61,14 @@ export class TemplatesStore {
 
 	window: WindowProperties = { innerWidth: 0 };
 
-	constructor(config: SnapTemplatesConfig, settings: TemplatesStoreSettings) {
+	constructor(config: SnapTemplatesConfig, settings?: TemplatesStoreSettings) {
 		this.config = config;
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
 		this.dependencies = {
 			storage: this.storage,
 		};
-		this.settings = settings;
+		this.settings = settings || { editMode: false };
 
 		this.targets = {
 			search: {},

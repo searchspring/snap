@@ -105,8 +105,6 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 };
 
 export class SnapTemplates extends Snap {
-	public templates: TemplatesStore;
-
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
@@ -115,10 +113,7 @@ export class SnapTemplates extends Snap {
 
 		const snapConfig = createSnapConfig(config, templatesStore);
 
-		super(snapConfig);
-		this.templates = templatesStore;
-
-		window.searchspring.templates = templatesStore;
+		super(snapConfig, { templatesStore });
 
 		if (editMode) {
 			setTimeout(async () => {
