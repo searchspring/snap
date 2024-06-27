@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 
-import { Snap, TemplatesStore } from '@searchspring/snap-preact';
+// import { Snap, TemplatesStore } from '@searchspring/snap-preact';
+import { Snap } from '@searchspring/snap-preact';
 
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import { url } from '@searchspring/snap-preact/toolbox';
@@ -277,20 +278,22 @@ if (window.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-const templatesStore = new TemplatesStore({
-	themes: {
-		global: {
-			name: 'bocachica',
-			// overrides: {
-			// 	components: {
-			// 		result: {
-			// 			style: {
-			// 				background: 'red',
-			// 			},
-			// 		}
-			// 	}
-			// }
-		},
-	},
-});
-new Snap(config, { templatesStore });
+new Snap(config);
+
+// const templatesStore = new TemplatesStore({
+// 	themes: {
+// 		global: {
+// 			name: 'bocachica',
+// 			overrides: {
+// 				components: {
+// 					result: {
+// 						style: {
+// 							background: 'red',
+// 						},
+// 					}
+// 				}
+// 			}
+// 		},
+// 	},
+// });
+// new Snap(config, { templatesStore });

@@ -6,6 +6,7 @@ import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
+import type { ResultComponent } from '../../../components/src';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { Theme, ThemeVariables } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
@@ -30,6 +31,31 @@ export type TemplatesStoreDependencies = {
 
 type WindowProperties = {
 	innerWidth: number;
+};
+
+type TemplateStoreThemeConfig = {
+	name: 'pike' | 'bocachica'; // various themes available
+	style?: GlobalThemeStyleScript;
+	variables?: DeepPartial<ThemeVariables>;
+	overrides?: Theme;
+};
+
+export type TemplateStoreComponentConfig = {
+	[key in TemplateCustomComponentTypes]: {
+		[componentName: string]: (args?: any) => Promise<ResultComponent> | ResultComponent;
+	};
+};
+
+export type TemplateStoreConfig = {
+	components?: TemplateStoreComponentConfig;
+	config?: {
+		siteId?: string;
+		currency?: string;
+		language?: string;
+	};
+	themes: {
+		global: TemplateStoreThemeConfig;
+	} & { [themeName: string]: TemplateStoreThemeConfig };
 };
 
 const RESIZE_DEBOUNCE = 100;
@@ -61,7 +87,7 @@ export class TemplatesStore {
 
 	window: WindowProperties = { innerWidth: 0 };
 
-	constructor(config: SnapTemplatesConfig, settings?: TemplatesStoreSettings) {
+	constructor(config: TemplateStoreConfig, settings?: TemplatesStoreSettings) {
 		this.config = config;
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
@@ -85,11 +111,11 @@ export class TemplatesStore {
 
 		this.language =
 			(this.settings.editMode && this.storage.get('language')) ||
-			(this.config.config?.language && this.config.config.language in this.library.import.language) ||
+			(this.config.config?.language && this.config.config.language in this.library.import.language && this.config.config.language) ||
 			'en';
 		this.currency =
 			(this.settings.editMode && this.storage.get('currency')) ||
-			(this.config.config?.currency && this.config.config.currency in this.library.import.currency) ||
+			(this.config.config?.currency && this.config.config.currency in this.library.import.currency && this.config.config.currency) ||
 			'usd';
 
 		// import locale selections
@@ -156,7 +182,7 @@ export class TemplatesStore {
 		name: string;
 		type: TemplateThemeTypes;
 		base: Theme;
-		overrides?: DeepPartial<Theme>;
+		overrides?: Theme;
 		variables?: DeepPartial<ThemeVariables>;
 		currency: Partial<Theme>;
 		language: Partial<Theme>;

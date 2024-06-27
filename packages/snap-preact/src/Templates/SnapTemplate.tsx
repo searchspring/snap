@@ -5,16 +5,15 @@ import { Snap } from '../Snap';
 import { TemplateSelect } from '../../components/src';
 
 import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
-import { TemplateCustomComponentTypes, TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
+import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
-import type { ResultComponent } from '../../components/src';
-import type { SnapFeatures, DeepPartial, GlobalThemeStyleScript } from '../types';
+import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { Theme, ThemeVariables } from '../../components/src';
+import type { TemplateStoreConfig } from './Stores/TemplateStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
@@ -40,29 +39,7 @@ export type RecommendationTargetConfig = {
 	resultComponent?: string;
 };
 
-// TODO - clean up theme typing
-type TemplateThemeConfig = {
-	name: 'pike' | 'bocachica'; // various themes available
-	style?: GlobalThemeStyleScript;
-	variables?: DeepPartial<ThemeVariables>;
-	overrides?: DeepPartial<Theme>;
-};
-
-export type SnapTemplateComponentConfig = {
-	[key in TemplateCustomComponentTypes]: {
-		[componentName: string]: (args?: any) => Promise<ResultComponent> | ResultComponent;
-	};
-};
-export type SnapTemplatesConfig = {
-	components?: SnapTemplateComponentConfig;
-	themes: {
-		global: TemplateThemeConfig;
-	} & { [themeName: string]: TemplateThemeConfig };
-	config?: {
-		siteId?: string;
-		currency?: string;
-		language?: string;
-	};
+export type SnapTemplatesConfig = TemplateStoreConfig & {
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
 	search?: {
