@@ -41,7 +41,7 @@ export class ThemeStore {
 
 	private dependencies: TemplatesStoreDependencies;
 	private base: Theme;
-	private overrides: DeepPartial<Theme>;
+	private overrides: Theme;
 	variables: DeepPartial<ThemeVariables>;
 	currency: Partial<Theme>;
 	language: Partial<Theme>;
@@ -53,7 +53,7 @@ export class ThemeStore {
 			name: string;
 			type: TemplateThemeTypes;
 			base: Theme;
-			overrides?: DeepPartial<Theme>;
+			overrides?: Theme;
 			variables?: DeepPartial<ThemeVariables>;
 			currency: Partial<Theme>;
 			language: Partial<Theme>;

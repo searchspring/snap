@@ -2,7 +2,7 @@ import { FunctionalComponent, RenderableProps } from 'preact';
 
 import type { Theme } from '../../../components/src';
 import type { TemplateComponentTypes, TemplateCustomComponentTypes } from './TemplateStore';
-import type { SnapTemplateComponentConfig } from '../SnapTemplate';
+import type { TemplateStoreComponentConfig } from './TemplateStore';
 
 type LibraryImports = {
 	theme: {
@@ -119,7 +119,7 @@ export class LibraryStore {
 		},
 	};
 
-	constructor(components?: SnapTemplateComponentConfig) {
+	constructor(components?: TemplateStoreComponentConfig) {
 		// allow for configuration to supply custom component imports
 		if (components) {
 			Object.keys(components).forEach((type) => {

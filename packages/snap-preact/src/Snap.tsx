@@ -34,6 +34,7 @@ import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './
 import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures } from './types';
 import { configureSnapFeatures } from './utils';
 import { setupEvents } from './setupEvents';
+import type { TemplatesStore } from './Templates/Stores/TemplateStore';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -108,6 +109,7 @@ type SnapServices = {
 	client?: Client;
 	tracker?: Tracker;
 	logger?: Logger;
+	templatesStore?: TemplatesStore;
 };
 
 const SESSION_ATTRIBUTION = 'ssAttribution';
@@ -165,6 +167,7 @@ export class Snap {
 	} = {};
 
 	public eventManager: EventManager;
+	public templates?: TemplatesStore;
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
@@ -344,6 +347,9 @@ export class Snap {
 			}
 		}
 
+		if (services?.templatesStore) {
+			this.templates = services.templatesStore;
+		}
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
@@ -521,6 +527,7 @@ export class Snap {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
+		if (services?.templatesStore) window.searchspring.templates = this.templates;
 
 		if (this.eventManager) {
 			window.searchspring.on = (event: string, ...func: any) => {

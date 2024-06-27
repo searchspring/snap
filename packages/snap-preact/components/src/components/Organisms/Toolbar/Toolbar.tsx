@@ -23,7 +23,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const snap = useSnap() as SnapTemplates;
-	const themeStore = snap?.templates.getThemeStore(globalTheme.name);
+	const themeStore = snap?.templates?.getThemeStore(globalTheme.name);
 
 	const defaultProps: Partial<ToolbarProps> = {
 		hideFilterSummary: false,

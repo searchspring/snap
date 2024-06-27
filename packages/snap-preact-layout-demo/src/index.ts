@@ -7,10 +7,11 @@ import { globalStyles } from './styles';
 // templates.addTheme('themeName', ThemeObj);
 
 new SnapTemplates({
-	// config: {
-	// 	language: 'en',
-	// 	currency: 'usd',
-	// },
+	config: {
+		siteId: '8uyt2m',
+		language: 'en',
+		currency: 'aud',
+	},
 	components: {
 		result: {
 			Result: () => Result,
@@ -176,6 +177,8 @@ new SnapTemplates({
 			},
 		],
 	},
+	// TODO: make extendible for future global template additions / modifications (need to verify component names for current global recs templates)
+	// TODO: remove need for recommendation config except for when extending or overwriting defaults
 	recommendation: {
 		settings: {
 			branch: BRANCHNAME,
