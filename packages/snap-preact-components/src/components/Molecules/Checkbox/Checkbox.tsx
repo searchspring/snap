@@ -13,23 +13,25 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
-	checkbox: ({ size, color, theme }: CheckboxProps) =>
-		css({
+	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
+		const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: size,
-			width: size,
+			height: pixelSize,
+			width: pixelSize,
 			border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
 			'& .ss__checkbox__empty': {
 				display: 'inline-block',
-				width: `calc(${size} - 30%)`,
-				height: `calc(${size} - 30%)`,
+				width: `calc(${pixelSize} - 30%)`,
+				height: `calc(${pixelSize} - 30%)`,
 			},
-		}),
+		});
+	},
 	native: () => css({}),
 };
 
@@ -140,7 +142,7 @@ export interface CheckboxProps extends ComponentProps {
 	icon?: string;
 	iconColor?: string;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
-	size?: string;
+	size?: string | number;
 	startChecked?: boolean;
 	native?: boolean;
 	disableA11y?: boolean;

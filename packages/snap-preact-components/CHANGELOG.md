@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0](https://github.com/searchspring/snap/compare/v0.57.0...v0.58.0) (2024-07-02)
+
+### Bug Fixes
+
+- **checkbox:** checkbox size prop now accepts both string and number ([911cffb](https://github.com/searchspring/snap/commit/911cffbd6dbc1aeb15ec6f2707ecb0ec0226588a))
+- **preact-components-carousel:** dont pass breakpoints to swiper ([344e3b8](https://github.com/searchspring/snap/commit/344e3b83c2cdeef84ab973cb1d7b4dce4c62f1d7))
+
+### Features
+
+- **preact-components:** adding ability to have "stacked" badges to overlay and callout badges ([1fd1767](https://github.com/searchspring/snap/commit/1fd1767109cb536c4ceb48273cba1042954dae49))
+
 # [0.57.0](https://github.com/searchspring/snap/compare/v0.56.6...v0.57.0) (2024-06-26)
 
 ### Bug Fixes
