@@ -1,4 +1,4 @@
-/*! For license information please see main.a177475c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.af6118bd.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -5460,15 +5460,7 @@
 						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'results'),
 						' store array.'
 					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<CalloutBadge tag={'callout'} result={controller.store.results[0]} />\n"
-						)
-					),
+					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<CalloutBadge result={result} />\n')),
 					(0, esm.yg)('h3', { id: 'componentmap' }, 'componentMap'),
 					(0, esm.yg)(
 						'p',
@@ -5483,7 +5475,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<CalloutBadge \n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
+							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<CalloutBadge \n    result={result} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
 						)
 					),
 					(0, esm.yg)(
@@ -5499,7 +5491,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<CalloutBadge \n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n/>\n"
+							"<CalloutBadge \n    result={result} \n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n/>\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'renderempty' }, 'renderEmpty'),
@@ -5516,8 +5508,19 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<CalloutBadge\n    renderEmpty\n    tag={'callout'} \n    result={controller.store.results[0]} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
+							"<CalloutBadge\n    renderEmpty\n    result={result} \n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n/>\n"
 						)
+					),
+					(0, esm.yg)('h3', { id: 'limit' }, 'limit'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The callout badge slot will by default only render a single badge, but the limit can be increased to allow rendering multiple badges in the same location. This allows for "stacking" of the badges in the callout slot. The order of the stack is determined by the SMC badge configuration.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<CalloutBadge\n    limit={3}\n    result={result} \n/>\n')
 					),
 					(0, esm.yg)('h3', { id: 'tag' }, 'tag'),
 					(0, esm.yg)(
@@ -5525,16 +5528,14 @@
 						null,
 						'The ',
 						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'tag'),
-						' prop specifies the location name of this callout location. '
+						' prop specifies the location name of this callout location, the default value is ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'callout'),
+						'. '
 					),
 					(0, esm.yg)(
 						'pre',
 						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<CalloutBadge tag={'callout'} result={controller.store.results[0]} />\n"
-						)
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<CalloutBadge tag={'callout'} result={result} />\n")
 					)
 				);
 			}
@@ -5943,6 +5944,11 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						limit: {
+							description: 'Number of badges per slot',
+							table: { type: { summary: 'number' }, defaultValue: { summary: '1' } },
+							control: { type: 'number' },
+						},
 						tag: {
 							description: 'Callout location tag',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'callout' } },
@@ -5952,13 +5958,13 @@
 					componentArgs.F
 				),
 			};
-			var snapInstance = snapify.p.search({ id: 'Result', globals: { siteId: '8uyt2m' } }),
+			var snapInstance = snapify.p.search({ id: 'CalloutBadge', globals: { siteId: '8uyt2m' } }),
 				ObservableCalloutBadge = (0, mobxreact_esm.PA)(function (_ref) {
 					var _controller$store,
 						args = _ref.args,
 						controller = _ref.controller;
 					return (0,
-					preact_module.h)(CalloutBadge.W, Object.assign({}, args, { result: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results[1] }));
+					preact_module.h)(CalloutBadge.W, Object.assign({}, args, { result: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results[0] }));
 				}),
 				Default = function Default(args, _ref2) {
 					var controller = _ref2.loaded.controller;
@@ -5974,25 +5980,55 @@
 										return (
 											snapInstance.on('afterSearch', function (_ref4) {
 												var response = _ref4.response;
-												(response.results[0].badges = [{ tag: 'free-shipping-overlay', value: 'Free Shipping' }]),
-													(response.results[1].badges = [{ tag: 'free-shipping-callout', value: 'Free Shipping' }]),
+												(response.results[0].badges = [
+													{ tag: 'free-shipping', value: 'Free Shipping' },
+													{ tag: 'last-one', value: 'Last One!' },
+													{ tag: 'on-sale', value: 'On Sale' },
+													{ tag: 'save-percent', value: 'Save 30%' },
+													{ tag: 'inventory-remaining', value: '1 in stock' },
+												]),
 													(response.meta = Object.assign({}, response.meta, {
 														badges: {
-															locations: { left: [{ tag: 'left', name: 'Left' }], right: [], callout: [{ tag: 'callout', name: 'Callout' }] },
+															locations: {
+																left: [{ tag: 'left', name: 'Left' }],
+																right: [{ tag: 'right', name: 'Right' }],
+																callout: [{ tag: 'callout', name: 'Callout' }],
+															},
 															tags: {
-																'free-shipping-overlay': {
-																	location: 'left/left',
-																	component: 'BadgeRectangle',
-																	priority: 1,
-																	enabled: !0,
-																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
-																},
-																'free-shipping-callout': {
+																'free-shipping': {
 																	location: 'callout/callout',
 																	component: 'BadgeRectangle',
 																	priority: 1,
 																	enabled: !0,
-																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																	parameters: { color: '#3A23AD', colorText: '#FFFFFF' },
+																},
+																'last-one': {
+																	location: 'callout/callout',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#515151', colorText: '#FFFFFF' },
+																},
+																'inventory-remaining': {
+																	location: 'callout/callout',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#382F5A', colorText: '#FFFFFF' },
+																},
+																'on-sale': {
+																	location: 'left/left',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#00CEE1', colorText: '#FFFFFF' },
+																},
+																'save-percent': {
+																	location: 'left/left',
+																	component: 'BadgeRectangle',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#8F6CF6', colorText: '#FFFFFF' },
 																},
 															},
 														},
@@ -6037,7 +6073,7 @@
 						(function _objectDestructuringEmpty(obj) {
 							if (null == obj) throw new TypeError('Cannot destructure ' + obj);
 						})(_ref),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.AH)({ display: 'flex', justifyContent: 'center', alignItems: 'center' })
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.AH)({ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '5px' })
 					);
 				},
 				CalloutBadge = (0, mobx_react__WEBPACK_IMPORTED_MODULE_8__.PA)(function (properties) {
@@ -6047,7 +6083,7 @@
 						_result$badges,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
 						props = Object.assign(
-							{ tag: 'callout' },
+							{ tag: 'callout', limit: 1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.calloutBadge,
@@ -6062,6 +6098,7 @@
 						result = props.result,
 						tag = props.tag,
 						renderEmpty = props.renderEmpty,
+						limit = props.limit,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -6071,7 +6108,7 @@
 					var badges =
 						null == result || null === (_result$badges = result.badges) || void 0 === _result$badges
 							? void 0
-							: _result$badges.atLocation(tag).slice(0, 1);
+							: _result$badges.atLocation(tag).slice(0, limit);
 					return renderEmpty || (null != badges && badges.length)
 						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.Y)(
 								_providers__WEBPACK_IMPORTED_MODULE_11__._,
@@ -6835,119 +6872,127 @@
 							});
 						}
 					};
-					return null != children && children.length
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-								_providers__WEBPACK_IMPORTED_MODULE_22__._,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-									'div',
-									Object.assign({ ref: rootComponentRef }, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
-									}),
+					return (
+						delete additionalProps.breakpoints,
+						null != children && children.length
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+									_providers__WEBPACK_IMPORTED_MODULE_22__._,
+									null,
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 										'div',
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__prev-wrapper', {
-												'ss__carousel__prev-wrapper--hidden': hideButtons,
-											}),
-										},
+										Object.assign({ ref: rootComponentRef }, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()(
+												'ss__carousel',
+												vertical ? 'ss__carousel-vertical' : '',
+												className
+											),
+										}),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 											'div',
 											{
-												className: 'ss__carousel__prev',
-												ref: navigationPrevRef,
-												onClick:
-													onPrevButtonClick &&
-													function (e) {
-														return onPrevButtonClick(e);
-													},
+												className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__prev-wrapper', {
+													'ss__carousel__prev-wrapper--hidden': hideButtons,
+												}),
 											},
-											prevButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
-													Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
-												)
-										)
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-										swiper_react__WEBPACK_IMPORTED_MODULE_15__.RC,
-										Object.assign(
-											{
-												centerInsufficientSlides: !0,
-												onBeforeInit: function onBeforeInit(swiper) {
-													(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
-														(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
-														_onBeforeInit && _onBeforeInit(swiper);
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+												'div',
+												{
+													className: 'ss__carousel__prev',
+													ref: navigationPrevRef,
+													onClick:
+														onPrevButtonClick &&
+														function (e) {
+															return onPrevButtonClick(e);
+														},
 												},
-												onInit: function onInit(swiper) {
-													_onInit && _onInit(swiper);
-												},
-												onAfterInit: function onAfterInit(swiper) {
-													(swiper.navigation.onPrevClick = function (e) {
-														e.preventDefault(),
-															(!swiper.isBeginning || swiper.params.loop || swiper.params.rewind) &&
-																(swiper.slidePrev(), swiper.emit('navigationPrev'));
-													}),
-														(swiper.navigation.onNextClick = function (e) {
-															e.preventDefault(),
-																(!swiper.isEnd || swiper.params.loop || swiper.params.rewind) && (swiper.slideNext(), swiper.emit('navigationNext'));
-														}),
-														_onAfterInit && _onAfterInit(swiper);
-												},
-												onClick: function onClick(swiper, e) {
-													_onClick && _onClick(swiper, e);
-												},
-												direction: vertical ? 'vertical' : 'horizontal',
-												loop,
-												threshold: 7,
-												loopAddBlankSlides: !1,
-												modules: swiperModules,
-											},
-											additionalProps,
-											displaySettings,
-											{
-												navigation,
-												pagination,
-												onResize: function onResize(swiper) {
-													additionalProps.onResize && additionalProps.onResize(), swiper.updateSlidesClasses(), attachClasstoLastVisibleSlide();
-												},
-												onTransitionEnd: function onTransitionEnd() {
-													additionalProps.onTransitionEnd && additionalProps.onTransitionEnd(), attachClasstoLastVisibleSlide();
-												},
-											}
+												prevButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
+														Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
+													)
+											)
 										),
-										children.map(function (child) {
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_15__.qr, null, child);
-										})
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-										'div',
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__next-wrapper', {
-												'ss__carousel__next-wrapper--hidden': hideButtons,
-											}),
-										},
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+											swiper_react__WEBPACK_IMPORTED_MODULE_15__.RC,
+											Object.assign(
+												{
+													centerInsufficientSlides: !0,
+													onBeforeInit: function onBeforeInit(swiper) {
+														(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
+															(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
+															_onBeforeInit && _onBeforeInit(swiper);
+													},
+													onInit: function onInit(swiper) {
+														_onInit && _onInit(swiper);
+													},
+													onAfterInit: function onAfterInit(swiper) {
+														(swiper.navigation.onPrevClick = function (e) {
+															e.preventDefault(),
+																(!swiper.isBeginning || swiper.params.loop || swiper.params.rewind) &&
+																	(swiper.slidePrev(), swiper.emit('navigationPrev'));
+														}),
+															(swiper.navigation.onNextClick = function (e) {
+																e.preventDefault(),
+																	(!swiper.isEnd || swiper.params.loop || swiper.params.rewind) &&
+																		(swiper.slideNext(), swiper.emit('navigationNext'));
+															}),
+															_onAfterInit && _onAfterInit(swiper);
+													},
+													onClick: function onClick(swiper, e) {
+														_onClick && _onClick(swiper, e);
+													},
+													direction: vertical ? 'vertical' : 'horizontal',
+													loop,
+													threshold: 7,
+													loopAddBlankSlides: !1,
+													modules: swiperModules,
+												},
+												additionalProps,
+												displaySettings,
+												{
+													navigation,
+													pagination,
+													onResize: function onResize(swiper) {
+														additionalProps.onResize && additionalProps.onResize(), swiper.updateSlidesClasses(), attachClasstoLastVisibleSlide();
+													},
+													onTransitionEnd: function onTransitionEnd() {
+														additionalProps.onTransitionEnd && additionalProps.onTransitionEnd(), attachClasstoLastVisibleSlide();
+													},
+												}
+											),
+											children.map(function (child) {
+												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_15__.qr, null, child);
+											})
+										),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
 											'div',
 											{
-												className: 'ss__carousel__next',
-												ref: navigationNextRef,
-												onClick:
-													onNextButtonClick &&
-													function (e) {
-														return onNextButtonClick(e);
-													},
+												className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('ss__carousel__next-wrapper', {
+													'ss__carousel__next-wrapper--hidden': hideButtons,
+												}),
 											},
-											nextButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
-													Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
-												)
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+												'div',
+												{
+													className: 'ss__carousel__next',
+													ref: navigationNextRef,
+													onClick:
+														onNextButtonClick &&
+														function (e) {
+															return onNextButtonClick(e);
+														},
+												},
+												nextButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_23__.I,
+														Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
+													)
+											)
 										)
 									)
-								)
-						  )
-						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(preact__WEBPACK_IMPORTED_MODULE_11__.FK, null);
+							  )
+							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(preact__WEBPACK_IMPORTED_MODULE_11__.FK, null)
+					);
 				});
 		},
 		'./src/components/Molecules/Checkbox/Checkbox.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -7218,7 +7263,8 @@
 		'./src/components/Molecules/Checkbox/Checkbox.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { S: () => Checkbox });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -7230,18 +7276,18 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			var preact_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_13___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_13__),
-				mobx_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_14___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_14__),
+				mobx_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/providers/cache.tsx'),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				_hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/hooks/useA11y.tsx');
+				_providers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/providers/cache.tsx'),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_hooks_useA11y__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/hooks/useA11y.tsx');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -7298,26 +7344,27 @@
 					var _theme$colors,
 						size = _ref.size,
 						color = _ref.color,
-						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.AH)({
+						theme = _ref.theme,
+						pixelSize = isNaN(Number(size)) ? size : size + 'px';
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.AH)({
 						display: 'inline-flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						height: size,
-						width: size,
+						height: pixelSize,
+						width: pixelSize,
 						border:
 							'1px solid ' +
 							(color ||
 								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
 								'#333'),
 						'&.ss__checkbox--disabled': { opacity: 0.7 },
-						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + size + ' - 30%)', height: 'calc(' + size + ' - 30%)' },
+						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + pixelSize + ' - 30%)', height: 'calc(' + pixelSize + ' - 30%)' },
 					});
 				},
 				CSS_native = function native() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.AH)({});
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.AH)({});
 				},
-				Checkbox = (0, mobx_react__WEBPACK_IMPORTED_MODULE_15__.PA)(function (properties) {
+				Checkbox = (0, mobx_react__WEBPACK_IMPORTED_MODULE_16__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -7325,7 +7372,7 @@
 						_theme$colors2,
 						checkedState,
 						setCheckedState,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_16__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_17__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ size: '12px', startChecked: !1, disableA11y: !1 },
@@ -7359,7 +7406,7 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_17__.s)({
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_18__.s)({
 									color:
 										iconColor ||
 										color ||
@@ -7373,7 +7420,7 @@
 						},
 						stateful = void 0 === checked;
 					if (stateful) {
-						var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_12__.J0)(startChecked), 2);
+						var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_13__.J0)(startChecked), 2);
 						(checkedState = _useState2[0]), (setCheckedState = _useState2[1]);
 					} else checkedState = checked;
 					var clickFunc = function clickFunc(e) {
@@ -7390,14 +7437,14 @@
 						disableStyles
 							? style && (styling.css = [style])
 							: (styling.css = _native ? [CSS_native(), style] : [CSS_checkbox({ size, color, theme }), style]),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.Y)(
-							_providers__WEBPACK_IMPORTED_MODULE_18__._,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
+							_providers__WEBPACK_IMPORTED_MODULE_19__._,
 							null,
 							_native
-								? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.Y)(
+								? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
 										'input',
 										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()(
+											className: classnames__WEBPACK_IMPORTED_MODULE_14___default()(
 												'ss__checkbox',
 												{ 'ss__checkbox--disabled': disabled },
 												className
@@ -7410,10 +7457,10 @@
 											checked: checkedState,
 										})
 								  )
-								: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.Y)(
+								: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
 										'span',
 										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_13___default()(
+											className: classnames__WEBPACK_IMPORTED_MODULE_14___default()(
 												'ss__checkbox',
 												{ 'ss__checkbox--disabled': disabled },
 												className
@@ -7422,17 +7469,17 @@
 												return clickFunc(e);
 											},
 											ref: function ref(e) {
-												return disableA11y ? null : (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_19__.i)(e);
+												return disableA11y ? null : (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_20__.i)(e);
 											},
 											'aria-label': (disabled ? 'disabled' : '') + ' ' + (checkedState ? 'checked' : 'unchecked') + ' checkbox',
 											role: 'checkbox',
 										}),
 										checkedState
-											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.Y)(
-													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_20__.I,
+											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
+													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_21__.I,
 													Object.assign({}, subProps.icon)
 											  )
-											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.Y)('span', { className: 'ss__checkbox__empty' })
+											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)('span', { className: 'ss__checkbox__empty' })
 								  )
 						)
 					);
@@ -14786,7 +14833,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							'<OverlayBadge controller={controller} result={result}>\n    <div>\n        <img src="/images/example.png"/>\n    </div>\n</OverlayBadge>\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
@@ -14803,7 +14850,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							'<OverlayBadge controller={controller} result={result}>\n    <div>\n        <img src="/images/example.png"/>\n    </div>\n</OverlayBadge>\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'result' }, 'result'),
@@ -14822,7 +14869,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<OverlayBadge controller={controller} result={controller.store.results[0]}>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							'<OverlayBadge controller={controller} result={result}>\n    <div>\n        <img src="/images/example.png"/>\n    </div>\n</OverlayBadge>\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'componentmap' }, 'componentMap'),
@@ -14839,7 +14886,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<OverlayBadge \n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							"import { CustomOnSale } from './components/Badges/CustomOnSale';\n...\n<OverlayBadge \n    controller={controller} \n    result={result}\n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src=\"/images/example.png\"/>\n    </div>\n</OverlayBadge>\n"
 						)
 					),
 					(0, esm.yg)(
@@ -14855,7 +14902,7 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<OverlayBadge \n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							"<OverlayBadge \n    controller={controller} \n    result={result}\n    componentMap={{\n        'customOnSaleBadge': () => {\n            return (await import('./components/Badges/CustomOnSale')).CustomOnSale;\n        }\n    }}\n>\n    <div>\n        <img src=\"/images/example.png\"/>\n    </div>\n</OverlayBadge>\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'renderempty' }, 'renderEmpty'),
@@ -14872,7 +14919,22 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<OverlayBadge\n    renderEmpty\n    controller={controller} \n    result={controller.store.results[0]}\n    componentMap={{\n        'customOnSaleBadge': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src='/images/example.png'/>\n    </div>\n</OverlayBadge>\n"
+							'<OverlayBadge\n    renderEmpty\n    controller={controller}\n    result={result}\n    componentMap={{\n        \'customOnSaleBadge\': () => CustomOnSale\n    }}\n>\n    <div>\n        <img src="/images/example.png"/>\n    </div>\n</OverlayBadge>\n'
+						)
+					),
+					(0, esm.yg)('h3', { id: 'limit' }, 'limit'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The overlay badge will by default only render a single badge per overlay slot (left and right by default), but the limit can be increased to allow rendering multiple badges in the same location. This allows for "stacking" of the badges in the overlay slots. The order of the stack is determined by the SMC badge configuration.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<OverlayBadge\n    limit={3}\n    controller={controller}\n    result={result}\n/>\n'
 						)
 					)
 				);
@@ -15288,11 +15350,16 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						limit: {
+							description: 'Number of badges per slot',
+							table: { type: { summary: 'number' }, defaultValue: { summary: '1' } },
+							control: { type: 'number' },
+						},
 					},
 					componentArgs.F
 				),
 			};
-			var snapInstance = snapify.p.search({ id: 'Result', globals: { siteId: '8uyt2m' } }),
+			var snapInstance = snapify.p.search({ id: 'OverlayBadge', globals: { siteId: '8uyt2m' } }),
 				ObservableOverlayBadge = (0, mobxreact_esm.PA)(function (_ref) {
 					var _controller$store,
 						args = _ref.args,
@@ -15314,25 +15381,55 @@
 										return (
 											snapInstance.on('afterSearch', function (_ref4) {
 												var response = _ref4.response;
-												(response.results[0].badges = [{ tag: 'free-shipping-overlay', value: 'Free Shipping' }]),
-													(response.results[1].badges = [{ tag: 'free-shipping-callout', value: 'Free Shipping' }]),
+												(response.results[0].badges = [
+													{ tag: 'free-shipping', value: 'Free Shipping' },
+													{ tag: 'last-one', value: 'Last One!' },
+													{ tag: 'on-sale', value: 'On Sale' },
+													{ tag: 'save-percent', value: 'Save 30%' },
+													{ tag: 'inventory-remaining', value: '1 in stock' },
+												]),
 													(response.meta = Object.assign({}, response.meta, {
 														badges: {
-															locations: { left: [{ tag: 'left', name: 'Left' }], right: [], callout: [{ tag: 'callout', name: 'Callout' }] },
+															locations: {
+																left: [{ tag: 'left', name: 'Left' }],
+																right: [{ tag: 'right', name: 'Right' }],
+																callout: [{ tag: 'callout', name: 'Callout' }],
+															},
 															tags: {
-																'free-shipping-overlay': {
+																'free-shipping': {
 																	location: 'left/left',
 																	component: 'BadgeRectangle',
 																	priority: 1,
 																	enabled: !0,
-																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																	parameters: { color: '#3A23AD', colorText: '#FFFFFF' },
 																},
-																'free-shipping-callout': {
-																	location: 'callout/callout',
+																'last-one': {
+																	location: 'left/left',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#515151', colorText: '#FFFFFF' },
+																},
+																'inventory-remaining': {
+																	location: 'left/left',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#382F5A', colorText: '#FFFFFF' },
+																},
+																'on-sale': {
+																	location: 'right/right',
+																	component: 'BadgePill',
+																	priority: 1,
+																	enabled: !0,
+																	parameters: { color: '#00CEE1', colorText: '#FFFFFF' },
+																},
+																'save-percent': {
+																	location: 'right/right',
 																	component: 'BadgeRectangle',
 																	priority: 1,
 																	enabled: !0,
-																	parameters: { color: '#FF0000', colorText: '#FFFFFF' },
+																	parameters: { color: '#8F6CF6', colorText: '#FFFFFF' },
 																},
 															},
 														},
@@ -15430,7 +15527,7 @@
 						_controller$log,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 						props = Object.assign(
-							{},
+							{ limit: 1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.overlayBadge,
@@ -15446,6 +15543,7 @@
 						children = props.children,
 						controller = props.controller,
 						renderEmpty = props.renderEmpty,
+						limit = props.limit,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -15510,7 +15608,7 @@
 																		badges:
 																			null == result || null === (_result$badges = result.badges) || void 0 === _result$badges
 																				? void 0
-																				: _result$badges.atLocation(section + '/' + slot.tag).slice(0, 1),
+																				: _result$badges.atLocation(section + '/' + slot.tag).slice(0, limit),
 																	};
 																})
 																.filter(function (slot) {
@@ -48863,7 +48961,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.57.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.58.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49394,7 +49492,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.57.0')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.58.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
