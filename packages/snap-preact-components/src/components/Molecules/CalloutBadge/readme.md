@@ -9,7 +9,7 @@ Renders callout badges configured in the Searchspring Management Console and ret
 The required `result` prop specifies a reference to a product object from the `results` store array.
 
 ```jsx
-<CalloutBadge tag={'callout'} result={controller.store.results[0]} />
+<CalloutBadge result={result} />
 ```
 
 ### componentMap
@@ -19,8 +19,7 @@ The `componentMap` prop allows for custom badge components. This functionallity 
 import { CustomOnSale } from './components/Badges/CustomOnSale';
 ...
 <CalloutBadge 
-    tag={'callout'} 
-    result={controller.store.results[0]} 
+    result={result} 
     componentMap={{
         'customOnSaleBadge': () => CustomOnSale
     }}
@@ -31,8 +30,7 @@ The `componentMap` also supports async functions for dynamic importing of badges
 
 ```jsx
 <CalloutBadge 
-    tag={'callout'} 
-    result={controller.store.results[0]} 
+    result={result} 
     componentMap={{
         'customOnSaleBadge': () => {
             return (await import('./components/Badges/CustomOnSale')).CustomOnSale;
@@ -47,17 +45,26 @@ By default if there are no badges, the wrapper element will not render. If you n
 ```jsx
 <CalloutBadge
     renderEmpty
-    tag={'callout'} 
-    result={controller.store.results[0]} 
+    result={result} 
     componentMap={{
         'customOnSaleBadge': () => CustomOnSale
     }}
 />
 ```
 
-### tag
-The `tag` prop specifies the location name of this callout location. 
+### limit
+The callout badge slot will by default only render a single badge, but the limit can be increased to allow rendering multiple badges in the same location. This allows for "stacking" of the badges in the callout slot. The order of the stack is determined by the SMC badge configuration.
 
 ```jsx
-<CalloutBadge tag={'callout'} result={controller.store.results[0]} />
+<CalloutBadge
+    limit={3}
+    result={result} 
+/>
+```
+
+### tag
+The `tag` prop specifies the location name of this callout location, the default value is `callout`. 
+
+```jsx
+<CalloutBadge tag={'callout'} result={result} />
 ```

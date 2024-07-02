@@ -330,6 +330,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		}
 	};
 
+	delete additionalProps.breakpoints;
+
 	return children?.length ? (
 		<CacheProvider>
 			<div

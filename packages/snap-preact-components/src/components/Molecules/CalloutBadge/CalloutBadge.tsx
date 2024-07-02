@@ -17,6 +17,7 @@ const CSS = {
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
+			gap: '5px',
 		}),
 };
 
@@ -26,13 +27,14 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 	const props: CalloutBadgeProps = {
 		// default props
 		tag: 'callout',
+		limit: 1,
 		// global theme
 		...globalTheme?.components?.calloutBadge,
 		// props
 		...properties,
 		...properties.theme?.components?.calloutBadge,
 	};
-	const { result, tag, renderEmpty, disableStyles, className, style } = props;
+	const { result, tag, renderEmpty, limit, disableStyles, className, style } = props;
 
 	const styling: { css?: StylingCSS } = {};
 
@@ -43,7 +45,6 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const limit = 1;
 	const badges = result?.badges?.atLocation(tag).slice(0, limit);
 
 	if (renderEmpty || badges?.length) {
@@ -69,4 +70,5 @@ export interface CalloutBadgeProps extends ComponentProps {
 	tag?: string;
 	renderEmpty?: boolean;
 	componentMap?: ComponentMap;
+	limit?: number;
 }

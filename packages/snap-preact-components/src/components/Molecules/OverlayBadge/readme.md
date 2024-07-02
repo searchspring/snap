@@ -8,9 +8,9 @@ Renders overlay badges configured in the Searchspring Management Console and ret
 The required children provided to the component will be wrapped and rendered in a relative div to allow badges to be positioned absolutely. 
 
 ```jsx
-<OverlayBadge controller={controller} result={controller.store.results[0]}>
+<OverlayBadge controller={controller} result={result}>
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
 ```
@@ -19,9 +19,9 @@ The required children provided to the component will be wrapped and rendered in 
 The required `controller` prop specifies a reference to the controller.
 
 ```jsx
-<OverlayBadge controller={controller} result={controller.store.results[0]}>
+<OverlayBadge controller={controller} result={result}>
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
 ```
@@ -30,9 +30,9 @@ The required `controller` prop specifies a reference to the controller.
 The required `result` prop specifies a reference to a product object from the `results` store array.
 
 ```jsx
-<OverlayBadge controller={controller} result={controller.store.results[0]}>
+<OverlayBadge controller={controller} result={result}>
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
 ```
@@ -45,13 +45,13 @@ import { CustomOnSale } from './components/Badges/CustomOnSale';
 ...
 <OverlayBadge 
     controller={controller} 
-    result={controller.store.results[0]}
+    result={result}
     componentMap={{
         'customOnSaleBadge': () => CustomOnSale
     }}
 >
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
 ```
@@ -61,7 +61,7 @@ The `componentMap` also supports async functions for dynamic importing of badges
 ```jsx
 <OverlayBadge 
     controller={controller} 
-    result={controller.store.results[0]}
+    result={result}
     componentMap={{
         'customOnSaleBadge': () => {
             return (await import('./components/Badges/CustomOnSale')).CustomOnSale;
@@ -69,7 +69,7 @@ The `componentMap` also supports async functions for dynamic importing of badges
     }}
 >
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
 ```
@@ -80,14 +80,25 @@ By default if there are no badges, the wrapper element will not render. If you n
 ```jsx
 <OverlayBadge
     renderEmpty
-    controller={controller} 
-    result={controller.store.results[0]}
+    controller={controller}
+    result={result}
     componentMap={{
         'customOnSaleBadge': () => CustomOnSale
     }}
 >
     <div>
-        <img src='/images/example.png'/>
+        <img src="/images/example.png"/>
     </div>
 </OverlayBadge>
+```
+
+### limit
+The overlay badge will by default only render a single badge per overlay slot (left and right by default), but the limit can be increased to allow rendering multiple badges in the same location. This allows for "stacking" of the badges in the overlay slots. The order of the stack is determined by the SMC badge configuration.
+
+```jsx
+<OverlayBadge
+    limit={3}
+    controller={controller}
+    result={result}
+/>
 ```
