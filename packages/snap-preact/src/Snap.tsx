@@ -374,7 +374,7 @@ export class Snap {
 			// query param / cookiev override
 			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
 				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
-					cookies.unset(DEV_COOKIE);
+					cookies.unset(DEV_COOKIE, cookieDomain);
 					this.mode = AppMode.production;
 				} else {
 					cookies.set(DEV_COOKIE, '1', 'Lax', 0, cookieDomain);
@@ -491,7 +491,7 @@ export class Snap {
 								{...props}
 								name={branchOverride}
 								onRemoveClick={() => {
-									cookies.unset(BRANCH_COOKIE);
+									cookies.unset(BRANCH_COOKIE, cookieDomain);
 									const urlState = url(window.location.href);
 									delete urlState?.params.query['branch'];
 
