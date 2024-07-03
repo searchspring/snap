@@ -711,7 +711,7 @@ export class Tracker {
 			},
 			clear: () => {
 				if (this.cookies.cart.get().length) {
-					cookies.unset(CART_PRODUCTS);
+					cookies.unset(CART_PRODUCTS, COOKIE_DOMAIN);
 					this.sendPreflight();
 				}
 			},

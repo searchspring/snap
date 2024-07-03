@@ -126,7 +126,7 @@ export class StorageStore {
 				window.localStorage.removeItem(this.key);
 				break;
 			case StorageType.cookie:
-				utils.cookies.unset(this.key);
+				utils.cookies.unset(this.key, this.cookieDomain);
 				break;
 		}
 		this.state = {};

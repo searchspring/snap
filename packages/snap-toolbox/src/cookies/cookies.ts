@@ -50,7 +50,7 @@ export const cookies: Cookies = {
 };
 
 interface Cookies {
-	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string | undefined) => void;
+	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string) => void;
 	get: (name: string) => string;
-	unset: (name: string) => void;
+	unset: (name: string, domain?: string) => void;
 }
