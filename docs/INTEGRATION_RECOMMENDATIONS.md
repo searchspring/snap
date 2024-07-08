@@ -29,7 +29,44 @@ Context variables may be applied to individual recommendation profiles similar t
 | options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
 | shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |
 
-## Examples
+## Batching and Ordering
+By default, recommendation profile results are fetched in the same API request (batch), this is done in an effort to prevent the display of duplicate products across multiple profiles. The order of the profiles in the DOM determines the priority of results for de-duplication (best recommendations). If you wish to change the order, an `order` value can be provided (lowest value has highest priority). For some profiles (like product bundles) it is important that they receive the best suggested products prior to de-duplication, for these, the `order` would be set manually so that de-duplication does not occur.
+
+In most cases batching is the best practice, however for profiles like a mini cart (side cart) de-duplication may not be desired. Batching can be turned off per profile with a `batched: false` value.
+
+The example below shows how to manually specify the order and batching of specific profiles.
+
+```html
+<script type="searchspring/recommend" profile="customers-also-bought">
+	products = ['product123'];
+	options = {
+		order: 2
+	};
+</script>
+
+<script type="searchspring/recommend" profile="customers-also-viewed">
+	products = ['product123'];
+	options = {
+		order: 3
+	};
+</script>
+
+<script type="searchspring/recommend" profile="bundle">
+	products = ['product123'];
+	options = {
+		order: 1
+	};
+</script>
+
+<script type="searchspring/recommend" profile="quick-cart">
+	products = ['product123'];
+	options = {
+		batched: false
+	};
+</script>
+```
+
+## Additional Examples
 
 The examples below assume that the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
 
