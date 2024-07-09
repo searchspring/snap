@@ -9,6 +9,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
+import { LoadMore, LoadMoreProps } from '../../Molecules/LoadMore';
 import { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
@@ -89,6 +90,19 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// component theme overrides
 			theme: props?.theme,
 		},
+		LoadMore: {
+			// default props
+			controller,
+			className: 'ss__toolbar__load-more',
+			// global theme
+			...globalTheme?.components?.loadMore,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+		},
 		SortBy: {
 			// default props
 			controller,
@@ -139,7 +153,14 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 				{!hidePerPage && <PerPage {...subProps.PerPage} />}
 
-				{!hidePagination && <Pagination {...subProps.Pagination} />}
+				{!hidePagination &&
+					(() => {
+						if (controller.config.settings?.infinite) {
+							return <LoadMore {...subProps.LoadMore} />;
+						} else {
+							return <Pagination {...subProps.Pagination} />;
+						}
+					})()}
 			</div>
 		</CacheProvider>
 	);
@@ -157,6 +178,7 @@ export interface ToolbarProps extends ComponentProps {
 interface ToolbarSubProps {
 	FilterSummary: Partial<FilterSummaryProps>;
 	Pagination: Partial<PaginationProps>;
+	LoadMore: Partial<LoadMoreProps>;
 	SortBy: Partial<SortByProps>;
 	PerPage: Partial<PerPageProps>;
 	LayoutSelector: Partial<LayoutSelectorProps>;
