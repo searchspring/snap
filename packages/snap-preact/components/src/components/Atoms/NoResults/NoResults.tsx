@@ -105,11 +105,13 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 				recsController?.search();
 			}
 
-			if (resultComponentName) {
+			if (resultComponentName && snap?.templates?.library.import.component.result) {
 				recommendationTemplateResultComponent = useComponent(snap?.templates?.library.import.component.result, resultComponentName);
 			}
 
-			recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation, componentName);
+			if (componentName && snap?.templates?.library.import.component.recommendation) {
+				recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation, componentName);
+			}
 		}
 	}
 

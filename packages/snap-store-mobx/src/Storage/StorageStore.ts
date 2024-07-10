@@ -82,6 +82,7 @@ export class StorageStore {
 		}
 	}
 
+	// TODO: change any to unknown and refactor
 	public get(path: string): any | undefined {
 		switch (this.type) {
 			case StorageType.session:
