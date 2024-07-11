@@ -63,8 +63,10 @@ jobs:
       - name: Copy Files to S3
         shell: bash
         run: |
-          aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.head_ref }}
-          aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.head_ref }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/snap/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.head_ref }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/public/snap s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ github.head_ref }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/templates/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/templates/${{ github.head_ref }}
+          aws s3 sync --acl public-read packages/snap-preact-demo/public/templates s3://${{ secrets.SNAPFU_AWS_BUCKET }}/templates/${{ github.head_ref }}
 
       - name: Invalidate CDN Files
         shell: bash
@@ -72,3 +74,4 @@ jobs:
           AWS_MAX_ATTEMPTS: 9
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.SNAPFU_AWS_DISTRIBUTION_ID }} --paths "/snap/${{ github.head_ref }}/*"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.SNAPFU_AWS_DISTRIBUTION_ID }} --paths "/templates/${{ github.head_ref }}/*"

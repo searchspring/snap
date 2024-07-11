@@ -2,7 +2,7 @@ const query = 'dress';
 
 describe('Query', () => {
 	it('runs the query', () => {
-		cy.visit(`https://localhost:2222/?q=${query}`);
+		cy.visit(`https://localhost:2222/snap/?q=${query}`);
 
 		cy.snapController().then(({ store }) => {
 			expect(store.search.query.string).to.equal(query);
@@ -39,7 +39,7 @@ describe('Query', () => {
 			};
 		});
 
-		cy.visit(`https://localhost:2222/?q=${query}`);
+		cy.visit(`https://localhost:2222/snap/?q=${query}`);
 
 		cy.snapController('autocomplete').then((acController) => {
 			if (acController.config.settings.initializeFromUrl) {
