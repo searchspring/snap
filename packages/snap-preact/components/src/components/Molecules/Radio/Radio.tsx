@@ -162,9 +162,17 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					aria-checked={checkedState}
 				>
 					{checkedState ? (
-						<Icon {...subProps.activeIcon} name="ss__radio__icon--active" />
+						<Icon
+							{...subProps.activeIcon}
+							name="ss__radio__icon--active"
+							{...(typeof checkedIcon == 'string' ? { icon: checkedIcon as string } : (checkedIcon as Partial<IconProps>))}
+						/>
 					) : (
-						<Icon {...subProps.inactiveIcon} name="ss__radio__icon--inactive" />
+						<Icon
+							{...subProps.inactiveIcon}
+							name="ss__radio__icon--inactive"
+							{...(typeof unCheckedIcon == 'string' ? { icon: unCheckedIcon as string } : (unCheckedIcon as Partial<IconProps>))}
+						/>
 					)}
 				</span>
 			)}
@@ -180,8 +188,8 @@ export interface RadioProps extends ComponentProps {
 	checked?: boolean;
 	color?: string;
 	disabled?: boolean;
-	checkedIcon?: string;
-	unCheckedIcon?: string;
+	checkedIcon?: string | Partial<IconProps>;
+	unCheckedIcon?: string | Partial<IconProps>;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string;
 	startChecked?: boolean;
