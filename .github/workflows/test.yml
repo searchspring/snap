@@ -3,6 +3,7 @@ on:
     branches:
       - main
       - develop
+      - templates
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
