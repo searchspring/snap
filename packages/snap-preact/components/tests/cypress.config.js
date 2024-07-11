@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { defineConfig } = require('cypress');
 const webpackConfig = require('../webpack.config');
 
