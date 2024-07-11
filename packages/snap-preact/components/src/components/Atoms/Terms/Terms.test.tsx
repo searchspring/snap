@@ -6,7 +6,7 @@ import { ThemeProvider } from '../../../providers';
 
 import { Terms } from './Terms';
 import { AutocompleteController, AutocompleteControllerConfig } from '@searchspring/snap-controller';
-import { createAutocompleteController } from '@searchspring/snap-preact';
+import { createAutocompleteController } from '../../../../../src/create';
 import { MockClient } from '@searchspring/snap-shared';
 import userEvent from '@testing-library/user-event';
 
