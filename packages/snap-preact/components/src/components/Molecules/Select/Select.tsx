@@ -283,7 +283,14 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										{!hideOptionLabels && <span className="ss__select__selection">{selection?.label}</span>}
 									</>
 								)}
-								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
+								{!hideIcon && (
+									<Icon
+										{...subProps.icon}
+										{...(open
+											? { ...(typeof iconClose == 'string' ? { icon: iconClose as string } : (iconClose as Partial<IconProps>)) }
+											: { ...(typeof iconOpen == 'string' ? { icon: iconOpen as string } : (iconOpen as Partial<IconProps>)) })}
+									/>
+								)}
 							</Button>
 						}
 					>
@@ -336,8 +343,8 @@ export interface SelectProps extends ComponentProps {
 	disabled?: boolean;
 	hideLabelOnSelection?: boolean;
 	iconColor?: string;
-	iconClose?: IconType | string;
-	iconOpen?: IconType | string;
+	iconClose?: IconType | string | Partial<IconProps>;
+	iconOpen?: IconType | string | Partial<IconProps>;
 	label?: string | JSX.Element;
 	native?: boolean;
 	onSelect?: (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => void;

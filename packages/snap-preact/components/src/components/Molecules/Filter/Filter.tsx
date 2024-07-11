@@ -97,7 +97,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				href={link?.href}
 			>
 				<Button {...subProps.button} disableA11y={true}>
-					<Icon {...subProps.icon} />
+					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
 					{!hideFacetLabel && (
 						<span className="ss__filter__label">
 							{label}
@@ -120,7 +120,7 @@ export interface FilterProps extends ComponentProps {
 	url?: UrlManager;
 	hideFacetLabel?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-	icon?: string;
+	icon?: string | Partial<IconProps>;
 	separator?: string;
 }
 

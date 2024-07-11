@@ -252,7 +252,12 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 									}`}
 								>
 									{facet?.label}
-									<Icon {...subProps.icon} icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse} />
+									<Icon
+										{...subProps.icon}
+										{...(selectedFacet?.field === facet.field
+											? { ...(typeof iconExpand == 'string' ? { icon: iconExpand as string } : (iconExpand as Partial<IconProps>)) }
+											: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse as string } : (iconCollapse as Partial<IconProps>)) })}
+									/>
 								</div>
 							}
 							disableOverlay={!overlay}
@@ -293,8 +298,8 @@ export interface HorizontalFacetsProps extends ComponentProps {
 	limit?: number;
 	overlay?: boolean;
 	alwaysShowFiltersButton?: boolean;
-	iconCollapse?: IconType | string;
-	iconExpand?: IconType | string;
+	iconCollapse?: IconType | string | Partial<IconProps>;
+	iconExpand?: IconType | string | Partial<IconProps>;
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }

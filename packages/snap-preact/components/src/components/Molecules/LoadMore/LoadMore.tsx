@@ -252,10 +252,22 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 							{...subProps.button}
 						>
 							{loadMoreText}
-							{loadingIcon && isLoading && loadingLocation === 'button' ? <Icon icon={loadingIcon} {...subProps.icon}></Icon> : <Fragment></Fragment>}
+							{loadingIcon && isLoading && loadingLocation === 'button' ? (
+								<Icon
+									{...subProps.icon}
+									{...(typeof loadingIcon == 'string' ? { icon: loadingIcon as string } : (loadingIcon as Partial<IconProps>))}
+								/>
+							) : (
+								<Fragment></Fragment>
+							)}
 						</Button>
 
-						{loadingLocation === 'outside' && isLoading && <Icon icon={loadingIcon} {...subProps.icon}></Icon>}
+						{loadingLocation === 'outside' && isLoading && (
+							<Icon
+								{...subProps.icon}
+								{...(typeof loadingIcon == 'string' ? { icon: loadingIcon as string } : (loadingIcon as Partial<IconProps>))}
+							/>
+						)}
 					</Fragment>
 				)}
 
@@ -325,7 +337,7 @@ export interface LoadMoreProps extends ComponentProps {
 	progressIndicatorSize?: string;
 	hideProgressIndicator?: boolean;
 	hideProgressText?: boolean;
-	loadingIcon?: string;
+	loadingIcon?: string | Partial<IconProps>;
 	loadingLocation?: 'button' | 'outside';
 	onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

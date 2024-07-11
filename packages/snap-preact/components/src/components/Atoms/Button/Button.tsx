@@ -93,13 +93,13 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				<button {...elementProps}>
 					{content}
 					{children}
-					{icon && <Icon icon={icon} {...subProps.icon} />}
+					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					{content}
 					{children}
-					{icon && <Icon icon={icon} {...subProps.icon} />}
+					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}
 		</CacheProvider>
@@ -116,7 +116,7 @@ export interface ButtonProps extends ComponentProps {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
-	icon?: string;
+	icon?: string | Partial<IconProps>;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;

@@ -142,7 +142,11 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					role="checkbox"
 					aria-checked={checkedState}
 				>
-					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
+					{checkedState ? (
+						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
+					) : (
+						<span className="ss__checkbox__empty" />
+					)}
 				</span>
 			)}
 		</CacheProvider>
@@ -156,7 +160,7 @@ export interface CheckboxProps extends ComponentProps {
 	checked?: boolean;
 	color?: string;
 	disabled?: boolean;
-	icon?: string;
+	icon?: string | Partial<IconProps>;
 	iconColor?: string;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string | number;
