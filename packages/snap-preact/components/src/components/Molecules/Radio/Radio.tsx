@@ -47,6 +47,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		size: '20px',
 		startChecked: false,
 		disableA11y: false,
+		checkedIcon: 'bullet',
+		unCheckedIcon: 'bullet-o',
 	};
 
 	const props = mergeProps('radio', globalTheme, defaultProps, properties);
@@ -72,7 +74,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		activeIcon: {
 			// default props
 			className: 'ss__radio__icon--active',
-			icon: checkedIcon || 'bullet',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -87,7 +88,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			// default props
 			className: 'ss__radio__icon--inactive',
-			icon: unCheckedIcon || 'bullet-o',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
