@@ -14,15 +14,15 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		recommendation: {
-			main: '.ss__bundled-recommendations',
+			main: '.ss__recommendation-bundle',
 			// selector of the wrapping element. Expects child element to contain <a>
-			carousel: `.ss__bundled-recommendations .ss__carousel`,
+			carousel: `.ss__recommendation-bundle .ss__carousel`,
 			result: '.ss__result',
-			seed: '.ss__bundled-recommendations__wrapper__selector--seed',
-			nextArrow: '.ss__bundled-recommendations .ss__carousel__next',
-			prevArrow: '.ss__bundled-recommendations .ss__carousel__prev',
-			activeSlide: '.ss__bundled-recommendations .swiper-slide-active',
-			cta: '.ss__bundled-recommendations__wrapper__cta',
+			seed: '.ss__recommendation-bundle__wrapper__selector--seed',
+			nextArrow: '.ss__recommendation-bundle .ss__carousel__next',
+			prevArrow: '.ss__recommendation-bundle .ss__carousel__prev',
+			activeSlide: '.ss__recommendation-bundle .swiper-slide-active',
+			cta: '.ss__recommendation-bundle__wrapper__cta',
 			controller: 'recommend_bundle_0',
 		},
 	},
@@ -63,7 +63,7 @@ describe('BundledRecommendations', () => {
 		it('renders a seed product', function () {
 			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 				cy.get(config?.selectors?.recommendation.seed).should('exist');
-				cy.get(`${config?.selectors?.recommendation.seed} .ss__bundled-recommendations__wrapper__selector__result-wrapper__seed-badge`)
+				cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge`)
 					.should('exist')
 					.should('have.text', 'This Product');
 			});
@@ -74,37 +74,49 @@ describe('BundledRecommendations', () => {
 				cy.get(config?.selectors?.recommendation.cta).should('exist');
 
 				//title
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__title`).should('exist').should('have.text', '3 items added');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
+					.should('exist')
+					.should('have.text', 'Subtotal for 4 items');
 				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .strike`).should('exist').should('have.text', '$200.00');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$150.00');
 				//strike
-				cy.get(`${config?.selectors?.recommendation.cta} .sale.price`).should('exist').should('have.text', '$165.00');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
+					.should('exist')
+					.should('have.text', '$123.00');
 				//button
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__button`).should('exist').should('have.text', 'Add All 3 To Cart');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
+					.should('exist')
+					.should('have.text', 'Add All To Cart');
 
-				expect(store.cart.count).to.equal(3);
-				expect(store.cart.price).to.equal(165);
-				expect(store.cart.msrp).to.equal(200);
+				expect(store.cart.count).to.equal(4);
+				expect(store.cart.price).to.equal(123);
+				expect(store.cart.msrp).to.equal(150);
 			});
 
 			//check it is responsive to cartstore changes.
-			cy.get(`${config?.selectors?.recommendation.seed} .ss__bundled-recommendations__wrapper__selector__result-wrapper__checkbox`)
+			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
 				.click()
 				.then(() => {
 					//title
-					cy.get(`${config?.selectors?.recommendation.cta} .cta__title`).should('exist').should('have.text', '2 items added');
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
+						.should('exist')
+						.should('have.text', 'Subtotal for 3 items');
 					//price
-					cy.get(`${config?.selectors?.recommendation.cta} .strike`).should('exist').should('have.text', '$150.00');
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$100.00');
 					//strike
-					cy.get(`${config?.selectors?.recommendation.cta} .sale.price`).should('exist').should('have.text', '$117.00');
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
+						.should('exist')
+						.should('have.text', '$75.00');
 					//button
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__button`).should('exist').should('have.text', 'Add All 2 To Cart');
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
+						.should('exist')
+						.should('have.text', 'Add All To Cart');
 
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
-						expect(store.cart.count).to.equal(2);
-						expect(store.cart.price).to.equal(117);
-						expect(store.cart.msrp).to.equal(150);
+						expect(store.cart.count).to.equal(3);
+						expect(store.cart.price).to.equal(75);
+						expect(store.cart.msrp).to.equal(100);
 					});
 				});
 		});
