@@ -133,14 +133,15 @@ export interface TrackErrorEvent {
 	details?: { [any: string]: unknown };
 }
 export interface ProductViewEvent {
+	id?: string;
 	sku?: string;
 	childSku?: string;
 }
 export interface CartViewEvent {
-	items: Product[];
+	items: ProductData[];
 }
 
-export interface Product extends ProductViewEvent {
+export interface ProductData extends ProductViewEvent {
 	qty: string | number;
 	price: string | number;
 }
@@ -152,7 +153,7 @@ export interface OrderTransactionEvent {
 	city?: string;
 	state?: string;
 	country?: string;
-	items: Product[];
+	items: ProductData[];
 }
 
 export interface OrderTransactionData {
@@ -164,7 +165,7 @@ export interface OrderTransactionData {
 		state?: string;
 		country?: string;
 	};
-	items: Product[];
+	items: ProductData[];
 }
 
 export interface RecommendationsEvent {

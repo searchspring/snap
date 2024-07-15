@@ -791,6 +791,7 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 
 		const payload = {
+			id: undefined,
 			sku: 'abc123',
 			childSku: 'abc123_a',
 		};
@@ -798,7 +799,7 @@ describe('Tracker', () => {
 
 		expect(beaconEvent?.type).toStrictEqual(BeaconType.PRODUCT);
 		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
+		expect(beaconEvent?.event).toEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -837,7 +838,7 @@ describe('Tracker', () => {
 		productView.mockRestore();
 	});
 
-	it('logs console error if no sku or childSku is provided to track.product.view', async () => {
+	it('logs console error if no id or sku or childSku is provided to track.product.view', async () => {
 		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 		const consoleError = jest.spyOn(console, 'error');
@@ -1037,6 +1038,37 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
+	it('can invoke track.cart.view event method with id', async () => {
+		const tracker = new Tracker(globals, config);
+
+		const eventFn = jest.spyOn(tracker.track.cart, 'view');
+
+		const payload = {
+			items: [
+				{
+					id: 'id_1',
+					qty: '1',
+					price: '9.99',
+				},
+				{
+					id: 'id_2',
+					qty: '2',
+					price: '10.99',
+				},
+			],
+		};
+		const beaconEvent = await tracker.track.cart.view(payload);
+
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent?.event).toStrictEqual(payload);
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
+
+		eventFn.mockRestore();
+	});
+
 	it('logs console error if no items is provided to track.cart.view', async () => {
 		const tracker = new Tracker(globals, config);
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
@@ -1141,6 +1173,7 @@ describe('Tracker', () => {
 			},
 			items: [
 				{
+					id: 'abc123_id',
 					sku: 'abc123',
 					childSku: 'abc123_a',
 					qty: '1',
@@ -1168,7 +1201,7 @@ describe('Tracker', () => {
 		eventFn.mockRestore();
 	});
 
-	it('can invoke track.order.transaction event method without item skus', async () => {
+	it('can invoke track.order.transaction event method with item skus', async () => {
 		const tracker = new Tracker(globals, config);
 
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
@@ -1186,6 +1219,48 @@ describe('Tracker', () => {
 				{
 					sku: 'abc123',
 					childSku: 'abc123_a',
+					qty: '1',
+					price: '9.99',
+				},
+			],
+		};
+		const beaconEvent = await tracker.track.order.transaction(payload);
+
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent?.event).toStrictEqual({
+			orderId: payload.order.id,
+			total: payload.order.total,
+			transactionTotal: payload.order.transactionTotal,
+			city: payload.order.city,
+			state: payload.order.state,
+			country: payload.order.country,
+			items: payload.items,
+		});
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
+
+		eventFn.mockRestore();
+	});
+
+	it('can invoke track.order.transaction event method with ONLY item id', async () => {
+		const tracker = new Tracker(globals, config);
+
+		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
+
+		const payload = {
+			order: {
+				id: '123456',
+				total: '10.71',
+				transactionTotal: '9.99',
+				city: 'Los Angeles',
+				state: 'CA',
+				country: 'US',
+			},
+			items: [
+				{
+					id: 'abc123_id',
 					qty: '1',
 					price: '9.99',
 				},

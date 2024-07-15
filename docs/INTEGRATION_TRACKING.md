@@ -19,11 +19,12 @@ searchspring.tracker.track.shopper.login({
 ```
 
 ### Product View
-Tracks product page views. Should only be installed on product detail pages. A `sku` and/or `childSku` are required.
+Tracks product page views. Should only be installed on product detail pages. An `id` and/or `sku` and/or `childSku` are required.
 
 ```html
 <script type="searchspring/track/product/view">
 	item = {
+		id: '123',
 		sku: 'product123',
 		childSku: 'product123_a',
 	};
@@ -34,6 +35,7 @@ Alternatively, this can also be integrated using the `searchspring.tracker.track
 
 ```typescript
 searchspring.tracker.track.product.view({
+	id: '123',
 	sku: 'product123',
 	childSku: 'product123_a',
 });
@@ -43,18 +45,20 @@ searchspring.tracker.track.product.view({
 ### Cart View 
 Tracks cart contents. Should only be installed on a cart page. If the checkout process does not contain a dedicated cart page (ie. slideout cart) then this method should be invoked when the cart comes into view. 
 
-Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
+Each item object must contain a `qty`, `price`, (`id` and/or `sku` and/or `childSku`)
 
 ```html
 <script type="searchspring/track/cart/view">
 	items = [
 		{
+			id: '123',
 			sku: 'product123',
 			childSku: 'product123_a',
 			qty: '1',
 			price: '9.99',
 		},
 		{
+			id: '456',
 			sku: 'product456',
 			childSku: 'product456_a',
 			qty: '2',
@@ -70,12 +74,14 @@ Alternatively, this can also be integrated using the `searchspring.tracker.track
 searchspring.tracker.track.cart.view({
 	items: [
 		{
+			id: '123',
 			sku: 'product123',
 			childSku: 'product123_a',
 			qty: '1',
 			price: '9.99',
 		},
 		{
+			id: '456',
 			sku: 'product456',
 			childSku: 'product456_a',
 			qty: '2',
@@ -117,12 +123,14 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 	};
 	items = [
 		{
+			id: '123',
 			sku: 'product123',
 			childSku: 'product123_a',
 			qty: '1',
 			price: '9.99'
 		},
 		{
+			id: '456',
 			sku: 'product456',
 			childSku: 'product456_a',
 			qty: '2',
@@ -146,12 +154,14 @@ searchspring.tracker.track.order.transaction({
 	},
 	items: [
 		{
+			id: '123',
 			sku: 'product123',
 			childSku: 'product123_a',
 			qty: '1',
 			price: '9.99'
 		},
 		{
+			id: '456',
 			sku: 'product456',
 			childSku: 'product456_a',
 			qty: '2',
@@ -202,7 +212,7 @@ Adding the following attributes to clickable cart elements allows for real-time 
 If you are using multiple custom Tracker instances with a different tracker `config.id`, attributes are namespaced by the trackers `id` (Default: `'track'`, Example: `ss-track-cart-add`)
 
 ### Add to cart
-Adds product `sku` (or `childSku`) to `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
+Adds product `id` or `sku` (or `childSku`) to `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
 
 ```html
 <button ss-track-cart-add='product123'>Add to cart</button>
@@ -216,7 +226,7 @@ searchspring.tracker.cookies.cart.add(['product123'])
 
 
 ### Remove from cart
-Removes product `sku` (or `childSku`) from `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
+Removes product `id` or `sku` (or `childSku`) from `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
 
 ```html
 <button ss-track-cart-remove='product123'>Remove</button>

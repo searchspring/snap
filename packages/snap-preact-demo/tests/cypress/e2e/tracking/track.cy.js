@@ -89,6 +89,7 @@ describe('Tracking', () => {
 				expect(beacon.category).to.equal(BeaconCategory.PAGEVIEW);
 
 				expect(beacon.event).to.be.an('object').to.include.all.keys(['sku']);
+				expect(beacon.event.id).to.equal('182146');
 				expect(beacon.event.sku).to.equal('C-AD-W1-1869P');
 			});
 
@@ -122,8 +123,20 @@ describe('Tracking', () => {
 				expect(beacon.event).to.have.property('items');
 				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['id', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['id', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.deep.equal({
+					id: '182146',
+					sku: 'C-AD-W1-1869P',
+					qty: '1',
+					price: '48',
+				});
+				expect(beacon.event.items[1]).to.deep.equal({
+					id: '174287',
+					sku: 'C-AD-Y5-814MD',
+					qty: '1',
+					price: '36',
+				});
 			});
 
 			cy.wait('@pixel').should((interception) => {
@@ -159,8 +172,21 @@ describe('Tracking', () => {
 				expect(beacon.event).to.have.property('items');
 				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['id', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['id', 'sku', 'qty', 'price']);
+
+				expect(beacon.event.items[0]).to.deep.equal({
+					id: '99688',
+					sku: 'C-BP-G7-B1469',
+					qty: '1',
+					price: '22',
+				});
+				expect(beacon.event.items[1]).to.deep.equal({
+					id: '181655',
+					sku: 'C-VJ-P2-32007',
+					qty: '1',
+					price: '39',
+				});
 			});
 
 			cy.wait('@pixel').should((interception) => {
