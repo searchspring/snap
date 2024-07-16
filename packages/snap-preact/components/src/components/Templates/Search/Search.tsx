@@ -112,6 +112,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		TopToolbar: {
 			// default props
+			hidePagination: Boolean(controller.config.settings?.infinite),
 			hideFilterSummary: true,
 			// inherited props
 			...defined({

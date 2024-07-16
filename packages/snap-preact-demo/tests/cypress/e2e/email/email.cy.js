@@ -10,7 +10,7 @@
  */
 
 const config = {
-	url: 'https://localhost:2222/email.html',
+	url: 'https://localhost:2222/snap/email.html',
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		email: {

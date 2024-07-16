@@ -16,11 +16,12 @@ export class Content extends Component<ContentProps> {
 	render() {
 		const store = this.props.controller.store;
 		const snap = this.props.snap;
+		const theme = snap?.templates?.themes.local.global.theme;
 
 		return (
 			<SnapProvider snap={snap}>
 				<ControllerProvider controller={this.props.controller}>
-					<ThemeProvider theme={defaultTheme}>
+					<ThemeProvider theme={theme || defaultTheme}>
 						<StoreProvider store={store}>
 							<div>
 								<LoadingBar active={store.loading} />

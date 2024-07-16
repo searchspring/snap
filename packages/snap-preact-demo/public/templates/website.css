@@ -430,10 +430,9 @@ input[type='text'] {
 ============================================== */
 .ss-lite-wrapper {
   margin: 0 auto;
-  padding: 0 40px;
-  max-width: 1480px;
-  box-sizing: border-box;
-}
+  padding: 0 20px;
+  max-width: 1200px;
+  width: auto; }
 
 .ss-lite-flex-wrap, .ss-lite-flex-wrap-center {
   display: -webkit-box;
@@ -727,6 +726,12 @@ input[type='text'] {
 .ss-toolbar.ss-toolbar-bottom {
   margin-top: 20px;
   float: right;
+}
+
+.ss-toolbar-col.pagination,
+.ss-toolbar.ss-toolbar-bottom-infinite {
+  display: flex;
+  justify-content: center;
 }
 
 .ss-slideout__button {

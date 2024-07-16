@@ -12,6 +12,8 @@
 		"jsxImportSource": "preact",
 	},
 	"include": [
-		"src"
+		"snap/src",
+		"templates/src", 
+		"types.ts"	
 	],
 }

@@ -8,7 +8,7 @@ import { ThemeProvider } from '../../../providers';
 import { Autocomplete } from '../../Templates/Autocomplete/Autocomplete';
 import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
-import { createAutocompleteController } from '@searchspring/snap-preact';
+import { createAutocompleteController } from '../../../../../src/create';
 import { waitFor } from '@testing-library/preact';
 
 describe('Autocomplete Component', () => {

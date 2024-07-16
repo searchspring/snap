@@ -180,6 +180,8 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		themeRef.setOverride(obj);
 	}, 10);
 
+	const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+
 	return (
 		<CacheProvider>
 			<div
@@ -189,6 +191,10 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					e.preventDefault();
 					e.stopPropagation();
 					setCollapsed(false);
+
+					if (isColorPickerVisible && !(e.target as HTMLDivElement).className.includes('color-preview')) {
+						setColorPickerVisible(false);
+					}
 				}}
 			>
 				<div className={'logo'}>
@@ -323,7 +329,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						}}
 					>
 						{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
-							return <option selected={componentName === selectedTarget.template.template}>{componentName}</option>;
+							return <option selected={componentName === selectedTarget.template.component}>{componentName}</option>;
 						})}
 					</select>
 				</div>
@@ -401,6 +407,8 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								rootEditingKey={'variables'}
 								themeName={selectedTarget.template.theme.name}
 								setOverride={setOverride}
+								isColorPickerVisible={isColorPickerVisible}
+								setColorPickerVisible={setColorPickerVisible}
 							/>
 						) : (
 							''
@@ -419,7 +427,8 @@ const ThemeEditor = (props: any): any => {
 	const setOverride = props.setOverride;
 	const rootEditingKey = props.rootEditingKey;
 
-	const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+	const setColorPickerVisible = props.setColorPickerVisible;
+	const isColorPickerVisible = props.isColorPickerVisible;
 	const [colorBeingEdited, setColorBeingEdited] = useState('');
 
 	// if (!props?.property) {
@@ -442,19 +451,23 @@ const ThemeEditor = (props: any): any => {
 	if (typeof props.property === 'number' || typeof props.property === 'string' || typeof props.property === 'boolean') {
 		const value = props.property.toString();
 		if (path.includes('color')) {
+			const key = path.join('.');
 			return (
 				<Fragment>
-					<label>{path.join('.')}: </label>
+					<label>{key}: </label>
 					<div
 						className={'color-preview'}
 						css={CSS.ColorDisplay({ color: value, isColorPickerVisible })}
 						onClick={() => {
-							setColorBeingEdited(value);
-							setColorPickerVisible(!isColorPickerVisible);
+							setColorPickerVisible('');
+							if (isColorPickerVisible !== key) {
+								setColorPickerVisible(key);
+								setColorBeingEdited(value);
+							}
 						}}
 					></div>
 					<div className={'color-value'}>{value}</div>
-					{isColorPickerVisible ? (
+					{isColorPickerVisible == key ? (
 						<ChromePicker
 							color={colorBeingEdited}
 							onChange={(color) => {
@@ -466,9 +479,6 @@ const ThemeEditor = (props: any): any => {
 									value: color.hex,
 								});
 							}}
-							// onChangeComplete={(color) => {
-
-							// }}
 						/>
 					) : (
 						''
@@ -491,6 +501,8 @@ const ThemeEditor = (props: any): any => {
 					setOverride={setOverride}
 					propertyName={Object.getOwnPropertyNames(props.property)[index]}
 					pathPrefix={[...pathPrefix, props.propertyName]}
+					isColorPickerVisible={isColorPickerVisible}
+					setColorPickerVisible={setColorPickerVisible}
 				/>
 			</div>
 		</Fragment>

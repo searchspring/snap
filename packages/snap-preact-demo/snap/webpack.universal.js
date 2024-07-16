@@ -1,22 +1,24 @@
 const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
+const common = require('../webpack.common.js');
 const path = require('path');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
 module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/index.ts',
+	entry: './snap/src/universal.ts',
 	output: {
-		filename: 'bundle.js',
-		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'universal.bundle.js',
+		chunkFilename: 'universal.bundle.chunk.[fullhash:8].[id].js',
 		chunkLoadingGlobal: `${branchName}BundleChunks`,
 	},
-	target: 'browserslist:modern',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
+				include: [/node_modules\/@searchspring/, path.resolve(__dirname, 'src'), path.resolve(__dirname, '../')],
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -24,7 +26,7 @@ module.exports = merge(common, {
 							[
 								'@babel/preset-env',
 								{
-									browserslistEnv: 'modern',
+									browserslistEnv: 'universal',
 								},
 							],
 						],
@@ -32,23 +34,5 @@ module.exports = merge(common, {
 				},
 			},
 		],
-	},
-	devServer: {
-		client: false,
-		server: 'https',
-		port: 1111,
-		hot: false,
-		allowedHosts: 'all',
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-		},
-		static: {
-			directory: path.join(__dirname, 'public'),
-			publicPath: ['/'],
-			watch: false,
-		},
-		devMiddleware: {
-			publicPath: '/dist/',
-		},
 	},
 });
