@@ -92,7 +92,6 @@ describe('Result Component', () => {
 
 	it('should display a fallback image', () => {
 		mockResults[1].mappings!.core!.imageUrl = '';
-		(mockResults[1] as Product).images = undefined;
 		const rendered = render(<Result result={mockResults[1] as Product} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);

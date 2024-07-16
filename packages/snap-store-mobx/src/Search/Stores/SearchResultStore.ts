@@ -116,11 +116,6 @@ export class Banner {
 	}
 }
 
-type resultImages = {
-	active: string;
-	hover?: string;
-	swatches?: unknown;
-};
 export type VariantData = {
 	mappings: SearchResponseModelResultMappings;
 	attributes: Record<string, unknown>;
@@ -159,15 +154,9 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	public images?: resultImages;
-
 	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
-		this.images = {
-			active: result.mappings?.core?.imageUrl!,
-			hover: undefined,
-		};
 
 		this.mappings = result.mappings!;
 
@@ -200,7 +189,6 @@ export class Product {
 			display: computed,
 			attributes: observable,
 			custom: observable,
-			images: observable,
 			quantity: observable,
 		});
 
