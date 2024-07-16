@@ -3,7 +3,7 @@ import type { Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Product } from '@searchspring/snap-store-mobx';
-import { IconProps } from './components/Atoms/Icon';
+import { IconProps, IconType } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { DeepPartial } from '../../src/types';
@@ -27,7 +27,7 @@ export type ListOption = {
 	label?: string;
 	disabled?: boolean;
 	default?: boolean;
-	icon?: string | Partial<IconProps>;
+	icon?: IconType | Partial<IconProps>;
 	overrides?: DeepPartial<Theme>;
 	url?: UrlManager;
 	available?: boolean;

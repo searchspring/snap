@@ -12,7 +12,7 @@ import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '.
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
-import { IconProps } from '../../Atoms/Icon';
+import { IconProps, IconType } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
@@ -147,7 +147,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		separatorIcon: 'plus-thin',
 		seedText: 'This Product',
 		separatorIconSeedOnly: true,
-		ctaIcon: true,
+		ctaIcon: 'bag',
 		ctaButtonText: 'Add All To Cart',
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
@@ -667,9 +667,9 @@ export interface RecommendationBundleProps extends ComponentProps {
 	hideCheckboxes?: boolean;
 	seedText?: string;
 	separatorIconSeedOnly?: boolean;
-	separatorIcon?: string | Partial<IconProps> | boolean;
+	separatorIcon?: IconType | Partial<IconProps> | false;
 	ctaInline?: boolean;
-	ctaIcon?: string | Partial<IconProps> | boolean;
+	ctaIcon?: IconType | Partial<IconProps> | false;
 	ctaButtonText?: string;
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;

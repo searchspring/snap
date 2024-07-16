@@ -7,7 +7,7 @@ import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
 import { Price } from '../../Atoms/Price';
 import { Theme, useTheme } from '../../../providers';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
 
@@ -38,7 +38,6 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		icon: {
 			// default props
 			className: 'ss__recommendation-bundle__wrapper__cta__icon',
-			icon: 'bag',
 			size: 50,
 			// global theme
 			...globalTheme?.components?.icon,
@@ -55,7 +54,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 					<div className="ss__recommendation-bundle__wrapper__cta__subtotal">
 						{ctaIcon ? (
 							<div className="icon">
-								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon as string } : (ctaIcon as Partial<IconProps>))} />
+								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon } : (ctaIcon as Partial<IconProps>))} />
 							</div>
 						) : (
 							<Fragment></Fragment>
@@ -98,7 +97,7 @@ interface BundledCTAProps extends ComponentProps {
 	ctaSlot?: JSX.Element;
 	cartStore: CartStore;
 	onAddToCart: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	ctaIcon?: string | Partial<IconProps> | boolean;
+	ctaIcon?: IconType | Partial<IconProps> | false;
 	ctaButtonText?: string;
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;

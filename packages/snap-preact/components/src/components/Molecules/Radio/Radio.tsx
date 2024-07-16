@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
@@ -47,6 +47,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		size: '20px',
 		startChecked: false,
 		disableA11y: false,
+		checkedIcon: 'bullet',
+		unCheckedIcon: 'bullet-o',
 	};
 
 	const props = mergeProps('radio', globalTheme, defaultProps, properties);
@@ -72,7 +74,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		activeIcon: {
 			// default props
 			className: 'ss__radio__icon--active',
-			icon: checkedIcon || 'bullet',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -87,7 +88,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			// default props
 			className: 'ss__radio__icon--inactive',
-			icon: unCheckedIcon || 'bullet-o',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -162,9 +162,17 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					aria-checked={checkedState}
 				>
 					{checkedState ? (
-						<Icon {...subProps.activeIcon} name="ss__radio__icon--active" />
+						<Icon
+							{...subProps.activeIcon}
+							name="ss__radio__icon--active"
+							{...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))}
+						/>
 					) : (
-						<Icon {...subProps.inactiveIcon} name="ss__radio__icon--inactive" />
+						<Icon
+							{...subProps.inactiveIcon}
+							name="ss__radio__icon--inactive"
+							{...(typeof unCheckedIcon == 'string' ? { icon: unCheckedIcon } : (unCheckedIcon as Partial<IconProps>))}
+						/>
 					)}
 				</span>
 			)}
@@ -180,8 +188,8 @@ export interface RadioProps extends ComponentProps {
 	checked?: boolean;
 	color?: string;
 	disabled?: boolean;
-	checkedIcon?: string;
-	unCheckedIcon?: string;
+	checkedIcon?: IconType | Partial<IconProps>;
+	unCheckedIcon?: IconType | Partial<IconProps>;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string;
 	startChecked?: boolean;

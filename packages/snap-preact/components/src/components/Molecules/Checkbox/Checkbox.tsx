@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
@@ -142,7 +142,11 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					role="checkbox"
 					aria-checked={checkedState}
 				>
-					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
+					{checkedState ? (
+						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
+					) : (
+						<span className="ss__checkbox__empty" />
+					)}
 				</span>
 			)}
 		</CacheProvider>
@@ -156,7 +160,7 @@ export interface CheckboxProps extends ComponentProps {
 	checked?: boolean;
 	color?: string;
 	disabled?: boolean;
-	icon?: string;
+	icon?: IconType | Partial<IconProps>;
 	iconColor?: string;
 	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string | number;

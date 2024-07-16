@@ -140,10 +140,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 								{!hideOptionRadios && <Radio {...subProps.Radio} checked={selected} disableA11y={true} />}
 
 								{option.icon && !hideOptionIcons && (
-									<Icon
-										{...subProps.Icon}
-										{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
-									/>
+									<Icon {...subProps.Icon} {...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))} />
 								)}
 
 								{!hideOptionLabels && (option.label || !option.icon) && (

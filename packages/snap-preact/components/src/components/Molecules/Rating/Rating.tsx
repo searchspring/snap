@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	rating: ({}: Partial<RatingProps>) =>
@@ -55,7 +55,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 	const subProps: RatingSubProps = {
 		fullIcon: {
 			// default props
-			icon: fullIcon,
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -67,7 +66,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		},
 		emptyIcon: {
 			// default props
-			icon: emptyIcon,
 			color: '#ccc',
 			// global theme
 			...globalTheme?.components?.icon,
@@ -113,7 +111,11 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 					<div className="ss__rating__stars ss__rating__stars--empty">
 						{[...Array(5)].map(() => (
 							<span className="ss__rating__stars__star ss__rating__stars__star--empty">
-								<Icon name={'ss__rating__stars__star--empty'} {...subProps.emptyIcon} />
+								<Icon
+									name={'ss__rating__stars__star--empty'}
+									{...subProps.emptyIcon}
+									{...(typeof emptyIcon == 'string' ? { icon: emptyIcon } : (emptyIcon as Partial<IconProps>))}
+								/>
 							</span>
 						))}
 					</div>
@@ -127,7 +129,11 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 							return (
 								<span className="ss__rating__stars__star ss__rating__stars__star--full" style={{ width: `${width}%` }}>
-									<Icon name={'ss__rating__stars__star--full'} {...subProps.fullIcon} />
+									<Icon
+										name={'ss__rating__stars__star--full'}
+										{...subProps.fullIcon}
+										{...(typeof fullIcon == 'string' ? { icon: fullIcon } : (fullIcon as Partial<IconProps>))}
+									/>
 								</span>
 							);
 						})}
@@ -154,6 +160,6 @@ export interface RatingProps extends ComponentProps {
 	text?: string;
 	alwaysRender?: boolean;
 	disablePartialFill?: boolean;
-	fullIcon?: string;
-	emptyIcon?: string;
+	fullIcon?: IconType | Partial<IconProps>;
+	emptyIcon?: IconType | Partial<IconProps>;
 }

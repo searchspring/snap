@@ -277,13 +277,20 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 											<Icon
 												{...subProps.icon}
 												className="ss__select__selection__icon"
-												{...(typeof selection.icon == 'string' ? { icon: selection.icon as string } : (selection.icon as Partial<IconProps>))}
+												{...(typeof selection.icon == 'string' ? { icon: selection.icon } : (selection.icon as Partial<IconProps>))}
 											/>
 										)}
 										{!hideOptionLabels && <span className="ss__select__selection">{selection?.label}</span>}
 									</>
 								)}
-								{!hideIcon && <Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />}
+								{!hideIcon && (
+									<Icon
+										{...subProps.icon}
+										{...(open
+											? { ...(typeof iconClose == 'string' ? { icon: iconClose } : (iconClose as Partial<IconProps>)) }
+											: { ...(typeof iconOpen == 'string' ? { icon: iconOpen } : (iconOpen as Partial<IconProps>)) })}
+									/>
+								)}
 							</Button>
 						}
 					>
@@ -304,7 +311,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 										<Icon
 											{...subProps.icon}
 											className="ss__select__select__option__icon"
-											{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
+											{...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))}
 										/>
 									)}
 									{!hideOptionLabels && <span>{option.label}</span>}
@@ -336,8 +343,8 @@ export interface SelectProps extends ComponentProps {
 	disabled?: boolean;
 	hideLabelOnSelection?: boolean;
 	iconColor?: string;
-	iconClose?: IconType | string;
-	iconOpen?: IconType | string;
+	iconClose?: IconType | Partial<IconProps>;
+	iconOpen?: IconType | Partial<IconProps>;
 	label?: string | JSX.Element;
 	native?: boolean;
 	onSelect?: (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => void;

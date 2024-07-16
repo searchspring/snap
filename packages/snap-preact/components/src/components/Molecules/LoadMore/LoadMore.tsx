@@ -11,7 +11,7 @@ import { useIntersection } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useFuncDebounce } from '../../../hooks';
 
 const CSS = {
@@ -252,10 +252,16 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 							{...subProps.button}
 						>
 							{loadMoreText}
-							{loadingIcon && isLoading && loadingLocation === 'button' ? <Icon icon={loadingIcon} {...subProps.icon}></Icon> : <Fragment></Fragment>}
+							{loadingIcon && isLoading && loadingLocation === 'button' ? (
+								<Icon {...subProps.icon} {...(typeof loadingIcon == 'string' ? { icon: loadingIcon } : (loadingIcon as Partial<IconProps>))} />
+							) : (
+								<Fragment></Fragment>
+							)}
 						</Button>
 
-						{loadingLocation === 'outside' && isLoading && <Icon icon={loadingIcon} {...subProps.icon}></Icon>}
+						{loadingIcon && isLoading && loadingLocation === 'outside' && (
+							<Icon {...subProps.icon} {...(typeof loadingIcon == 'string' ? { icon: loadingIcon } : (loadingIcon as Partial<IconProps>))} />
+						)}
 					</Fragment>
 				)}
 
@@ -325,7 +331,7 @@ export interface LoadMoreProps extends ComponentProps {
 	progressIndicatorSize?: string;
 	hideProgressIndicator?: boolean;
 	hideProgressText?: boolean;
-	loadingIcon?: string;
+	loadingIcon?: IconType | Partial<IconProps>;
 	loadingLocation?: 'button' | 'outside';
 	onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

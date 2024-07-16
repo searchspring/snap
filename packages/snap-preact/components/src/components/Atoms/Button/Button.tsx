@@ -8,7 +8,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps } from '../../../utilities';
-import { Icon, IconProps } from '../Icon';
+import { Icon, IconProps, IconType } from '../Icon';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
@@ -93,13 +93,13 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				<button {...elementProps}>
 					{content}
 					{children}
-					{icon && <Icon icon={icon} {...subProps.icon} />}
+					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					{content}
 					{children}
-					{icon && <Icon icon={icon} {...subProps.icon} />}
+					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}
 		</CacheProvider>
@@ -116,7 +116,7 @@ export interface ButtonProps extends ComponentProps {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
-	icon?: string;
+	icon?: IconType | Partial<IconProps>;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;

@@ -30,7 +30,7 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, ...otherProps } = props;
 
-	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
+	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -79,7 +79,7 @@ export type SVGPathElement = {
 
 export interface IconProps extends ComponentProps {
 	color?: string;
-	icon?: IconType | string;
+	icon?: IconType;
 	path?: string | SVGPathElement[];
 	children?: ComponentChildren;
 	size?: string | number;
