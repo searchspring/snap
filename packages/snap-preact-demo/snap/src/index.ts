@@ -223,7 +223,7 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'finder',
-					url: '/',
+					url: '/snap/',
 					fields: [
 						{
 							field: 'size_footwear',
@@ -252,7 +252,7 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'finder_hierarchy',
-					url: '/',
+					url: '/snap/',
 					fields: [
 						{
 							field: 'ss_category_hierarchy',

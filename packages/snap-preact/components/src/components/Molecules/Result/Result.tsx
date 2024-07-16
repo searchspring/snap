@@ -99,7 +99,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		controller,
 	} = props;
 
-	const images = result?.images;
 	const core = result?.display?.mappings.core || result?.mappings?.core;
 
 	const subProps: ResultSubProps = {
@@ -145,8 +144,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__image',
 			alt: core?.name || '',
-			src: images?.active || core?.imageUrl || '',
-			hoverSrc: images?.hover,
+			src: core?.imageUrl || '',
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props

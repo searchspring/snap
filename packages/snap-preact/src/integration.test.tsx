@@ -6,7 +6,7 @@ import { cleanup, waitFor } from '@testing-library/preact';
 import { cookies } from '@searchspring/snap-toolbox';
 
 import { Snap, SnapConfig, DEV_COOKIE, BRANCH_COOKIE } from './Snap';
-import { SHOPIFY_WEBPIXEL_STORAGE_KEY } from './configureSnapFeatures';
+import { SHOPIFY_WEBPIXEL_STORAGE_KEY } from './utils/configureSnapFeatures/configureSnapFeatures';
 
 const baseConfig: SnapConfig = {
 	client: {

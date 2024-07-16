@@ -19,7 +19,7 @@ describe('Middleware Test', () => {
 				},
 			};
 		});
-		cy.visit('https://localhost:2222/');
+		cy.visit('https://localhost:2222/snap/');
 
 		cy.snapController().then(({ store }) => {
 			store.results.forEach((result) => {

@@ -170,9 +170,9 @@ new SnapTemplates({
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				// component: 'Search',
+				component: 'Search',
 				// theme: 'Pike',
-				component: 'HorizontalSearch',
+				// component: 'HorizontalSearch',
 				resultComponent: 'Result',
 			},
 		],

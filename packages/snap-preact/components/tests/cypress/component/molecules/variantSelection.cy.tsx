@@ -45,13 +45,13 @@ const controller = new RecommendationController(recommendConfig, {
 	tracker: new Tracker(globals, { mode: 'development' }),
 });
 
-const theme = {
-	components: {
-		variantSelection: {
-			className: 'classy',
-		},
-	},
-};
+// const theme = {
+// 	components: {
+// 		variantSelection: {
+// 			className: 'classy',
+// 		},
+// 	},
+// };
 
 let selection;
 

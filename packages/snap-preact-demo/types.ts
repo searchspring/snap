@@ -48,3 +48,7 @@ declare global {
 		// }
 	};
 }
+
+declare module 'mobx-react' {
+	function observer(component: any): any;
+}
