@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	rating: ({}: Partial<RatingProps>) =>
@@ -114,7 +114,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 								<Icon
 									name={'ss__rating__stars__star--empty'}
 									{...subProps.emptyIcon}
-									{...(typeof emptyIcon == 'string' ? { icon: emptyIcon as string } : (emptyIcon as Partial<IconProps>))}
+									{...(typeof emptyIcon == 'string' ? { icon: emptyIcon } : (emptyIcon as Partial<IconProps>))}
 								/>
 							</span>
 						))}
@@ -132,7 +132,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 									<Icon
 										name={'ss__rating__stars__star--full'}
 										{...subProps.fullIcon}
-										{...(typeof fullIcon == 'string' ? { icon: fullIcon as string } : (fullIcon as Partial<IconProps>))}
+										{...(typeof fullIcon == 'string' ? { icon: fullIcon } : (fullIcon as Partial<IconProps>))}
 									/>
 								</span>
 							);
@@ -160,6 +160,6 @@ export interface RatingProps extends ComponentProps {
 	text?: string;
 	alwaysRender?: boolean;
 	disablePartialFill?: boolean;
-	fullIcon?: string | Partial<IconProps>;
-	emptyIcon?: string | Partial<IconProps>;
+	fullIcon?: IconType | Partial<IconProps>;
+	emptyIcon?: IconType | Partial<IconProps>;
 }

@@ -8,7 +8,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
@@ -97,7 +97,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				href={link?.href}
 			>
 				<Button {...subProps.button} disableA11y={true}>
-					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
+					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
 					{!hideFacetLabel && (
 						<span className="ss__filter__label">
 							{label}
@@ -120,7 +120,7 @@ export interface FilterProps extends ComponentProps {
 	url?: UrlManager;
 	hideFacetLabel?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-	icon?: string | Partial<IconProps>;
+	icon?: IconType | Partial<IconProps>;
 	separator?: string;
 }
 

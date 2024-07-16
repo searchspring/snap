@@ -585,7 +585,7 @@ export class VariantSelection {
 		this.values.forEach((val) => (val.available = false));
 	}
 
-	public select(value: string, internalSelection = false) {
+	public select(value: string | number, internalSelection = false) {
 		const valueExist = this.values.find((val) => val.value == value);
 		if (valueExist) {
 			if (!internalSelection) {

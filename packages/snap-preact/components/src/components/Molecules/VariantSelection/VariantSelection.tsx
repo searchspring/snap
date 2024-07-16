@@ -108,7 +108,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
-			onSelect: (e, option) => selection.select(option.value as string),
+			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
 
 			// global theme
@@ -123,7 +123,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		swatches: {
 			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
-			onSelect: (e, option) => selection.select(option.value as string),
+			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
 			// global theme
 			...globalTheme?.components?.swatches,

@@ -190,10 +190,7 @@ export function List(properties: ListProps): JSX.Element {
 								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
 
 								{option.icon && !hideOptionIcons && (
-									<Icon
-										{...subProps.icon}
-										{...(typeof option.icon == 'string' ? { icon: option.icon as string } : (option.icon as Partial<IconProps>))}
-									/>
+									<Icon {...subProps.icon} {...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))} />
 								)}
 
 								{!hideOptionLabels && (option.label || !option.icon) && (

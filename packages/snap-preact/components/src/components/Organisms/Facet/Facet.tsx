@@ -316,8 +316,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 								<Icon
 									{...subProps.icon}
 									{...(facet?.collapsed
-										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand as string } : (iconExpand as Partial<IconProps>)) }
-										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse as string } : (iconCollapse as Partial<IconProps>)) })}
+										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
 								/>
 							)}
 						</div>
@@ -397,8 +397,8 @@ const FacetContent = (props: any) => {
 								<Icon
 									{...subProps.showMoreLessIcon}
 									{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
-										? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore as string } : (iconOverflowMore as Partial<IconProps>)) }
-										: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess as string } : (iconOverflowLess as Partial<IconProps>)) })}
+										? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
+										: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
 								/>
 							}
 							<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
@@ -430,9 +430,9 @@ export interface FacetProps extends OptionalFacetProps {
 interface OptionalFacetProps extends ComponentProps {
 	disableCollapse?: boolean;
 	color?: string;
-	iconCollapse?: IconType | string | Partial<IconProps>;
+	iconCollapse?: IconType | Partial<IconProps>;
 	iconColor?: string;
-	iconExpand?: IconType | string | Partial<IconProps>;
+	iconExpand?: IconType | Partial<IconProps>;
 	limit?: number;
 	overflowSlot?: JSX.Element | JSX.Element[];
 	optionsSlot?: JSX.Element | JSX.Element[];
@@ -441,8 +441,8 @@ interface OptionalFacetProps extends ComponentProps {
 	valueProps?: any;
 	showMoreText?: string;
 	showLessText?: string;
-	iconOverflowMore?: IconType | string | Partial<IconProps>;
-	iconOverflowLess?: IconType | string | Partial<IconProps>;
+	iconOverflowMore?: IconType | Partial<IconProps>;
+	iconOverflowLess?: IconType | Partial<IconProps>;
 	fields?: FieldProps;
 	display?: FieldProps;
 	searchable?: boolean;

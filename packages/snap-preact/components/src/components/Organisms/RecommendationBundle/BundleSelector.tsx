@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
-import { Icon, IconProps } from '../../Atoms/Icon';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { mergeProps } from '../../../utilities';
 import type { ComponentProps, StylingCSS } from '../../../types';
 
@@ -70,7 +70,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
 			</div>
-			<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon as string } : (icon as Partial<IconProps>))} />
+			{icon ? <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} /> : undefined}
 		</div>
 	);
 });
@@ -87,5 +87,5 @@ export interface BundleSelectorProps extends ComponentProps {
 	seed?: boolean;
 	hideCheckboxes?: boolean;
 	onCheck?: () => void;
-	icon?: string | Partial<IconProps> | boolean;
+	icon?: IconType | Partial<IconProps> | false;
 }
