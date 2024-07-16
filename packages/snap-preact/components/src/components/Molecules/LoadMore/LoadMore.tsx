@@ -259,7 +259,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 							)}
 						</Button>
 
-						{loadingLocation === 'outside' && isLoading && (
+						{loadingIcon && isLoading && loadingLocation === 'outside' && (
 							<Icon {...subProps.icon} {...(typeof loadingIcon == 'string' ? { icon: loadingIcon } : (loadingIcon as Partial<IconProps>))} />
 						)}
 					</Fragment>
