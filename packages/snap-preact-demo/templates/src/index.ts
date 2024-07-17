@@ -1,79 +1,48 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
-import { Result, Result2 } from './components/Result';
-import { icon2path, icon3path, icon4path } from './icons/icons';
+import { CustomResult } from './components/Result';
 import { globalStyles } from './styles';
-// templates.addComponent('results', 'Result', Result);
-// templates.addComponent('badges', 'Star', StarComponent);
-// templates.addTheme('themeName', ThemeObj);
 
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
-		currency: 'aud',
+		currency: 'usd',
 	},
 	components: {
 		result: {
-			Result: () => Result,
-			Result2: () => Result2,
-			CustomResult: async () => (await import('./components/Result')).Result2,
+			CustomResult: () => CustomResult,
+			CustomResultSecondary: async () => (await import('./components/Result')).CustomResultSecondary,
 		},
 		badge: {
 			// CustomPill: async () => (await import('./components/Result')).Result,
 		},
 	},
 	themes: {
+		myTheme: {
+			extends: 'pike',
+		},
 		global: {
-			name: 'bocachica',
-			// variables: {
-			// 	breakpoints: [0],
-			// 	color: {}
-			// },
+			extends: 'bocachica',
+			variables: {
+				color: {
+					primary: 'red',
+					secondary: 'blue',
+				},
+				breakpoints: [0, 768, 1024, 1280],
+			},
 			style: globalStyles,
 			overrides: {
 				components: {
-					horizontalFacets: {
-						overlay: true,
-						alwaysShowFiltersButton: true,
-					},
 					toolbar: {
 						named: {
 							topToolBar: {
-								hideFilterSummary: true,
-								hideLayoutSelector: false,
-								hidePerPage: true,
-								hideSortBy: false,
 								hidePagination: true,
-								style: {
-									background: 'red',
-									order: 1,
-									'& .ss__toolbar__layout-selector': { order: 2 },
-									'& .ss__toolbar__sort-by': { order: 1 },
-								},
 							},
-						},
-					},
-					searchHeader: {
-						titleText: (data) => `${data.pagination.totalResults} products`,
-						className: 'product-count__text',
-						style: {
-							order: 2,
-							textAlign: 'left',
-						},
-					},
-					noResults: {
-						templates: {
-							recommendation: {
-								enabled: true,
-								component: 'Recommendation',
-								resultComponent: 'Result',
-								config: {
-									tag: 'trending',
-								},
-								// '& a': {
-								// 	color: 'unset',
-								// 	textDecoration: 'none',
-								// }
+							bottomToolBar: {
+								hideFilterSummary: false,
+								hidePerPage: false,
+								hideSortBy: false,
+								hideLayoutSelector: false,
 							},
 						},
 					},
@@ -81,19 +50,12 @@ new SnapTemplates({
 				layoutOptions: [
 					{
 						value: 2,
-						label: '2',
-						icon: {
-							path: icon2path,
-							viewBox: '0 0 25 20',
-							className: 'icon icon-grid-2',
-							size: '25px',
-							// style: {
-							// 	'fill': 'none',
-							// 	'stroke': 'currentColor',
-							// },
-						},
+						label: 'two',
 						overrides: {
 							components: {
+								toolbar: {
+									hideSortBy: true,
+								},
 								results: {
 									named: {
 										searchResults: { columns: 2 },
@@ -103,42 +65,9 @@ new SnapTemplates({
 						},
 					},
 					{
-						value: 3,
-						label: '3',
-						icon: {
-							path: icon3path,
-							viewBox: '0 0 32 20',
-							className: 'icon icon-grid-3',
-							size: '25px',
-							// style: {
-							// 	'fill': 'none',
-							// 	'stroke': 'currentColor',
-							// },
-						},
-						overrides: {
-							components: {
-								results: {
-									named: {
-										searchResults: { columns: 3 },
-									},
-								},
-							},
-						},
-					},
-					{
 						value: 4,
-						label: '4',
+						label: 'four',
 						default: true,
-						icon: {
-							path: icon4path,
-							viewBox: '0 0 39 20',
-							className: 'icon icon-grid-4',
-							size: '25px',
-							// style: {
-							// 	'fill': 'none',
-							// 	'stroke': 'currentColor',
-							// },
-						},
 						overrides: {
 							components: {
 								results: {
@@ -152,10 +81,15 @@ new SnapTemplates({
 				],
 				responsive: [
 					{
-						layoutOptions: [],
+						components: {
+							pagination: {
+								hideLast: true,
+							},
+						},
+						// layoutOptions: [],
 					},
 					{
-						layoutOptions: [],
+						// layoutOptions: [],
 					},
 					{},
 					{},
@@ -163,7 +97,7 @@ new SnapTemplates({
 			},
 		},
 		otherTheme: {
-			name: 'pike',
+			extends: 'pike',
 		},
 	},
 	search: {
@@ -171,14 +105,10 @@ new SnapTemplates({
 			{
 				selector: '#searchspring-layout',
 				component: 'Search',
-				// theme: 'Pike',
-				// component: 'HorizontalSearch',
-				resultComponent: 'Result',
+				resultComponent: 'CustomResultSecondary',
 			},
 		],
 	},
-	// TODO: make extendible for future global template additions / modifications (need to verify component names for current global recs templates)
-	// TODO: remove need for recommendation config except for when extending or overwriting defaults
 	recommendation: {
 		settings: {
 			branch: BRANCHNAME,
@@ -186,25 +116,19 @@ new SnapTemplates({
 		templates: {
 			Recs: {
 				component: 'Recommendation',
-				resultComponent: 'Result',
+				// resultComponent: 'CustomResultSecondary',
 			},
-			// bundle: {
-			// 	component: 'BundleRecommendation',
-			// 	resultComponent: 'Result',
-			// },
-			// email: {
-			// 	component: 'EmailRecommendation',
-			// 	resultComponent: 'Result',
-			// },
 		},
 	},
 	autocomplete: {
-		inputSelector: 'input.searchspring-ac',
+		inputSelector: 'input.searchspring-ac, .thing2',
 		targets: [
 			{
+				// does this force usage to after the input only?
 				selector: 'input.searchspring-ac',
+				theme: 'myTheme',
 				component: 'Autocomplete',
-				resultComponent: 'Result',
+				// resultComponent: 'CustomResult',
 			},
 		],
 	},

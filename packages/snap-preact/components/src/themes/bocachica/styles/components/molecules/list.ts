@@ -6,28 +6,32 @@ const listStyleScript = ({ horizontal, theme }: ListProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		'& .ss__list__options-wrapper': {
+		display: 'flex',
+		flexDirection: horizontal ? 'row' : 'column',
+		alignItems: horizontal ? 'center' : undefined,
+		justifyItems: 'flex-start',
+		gap: '5px',
+
+		'& .ss__list__options': {
 			border: 'none',
 			listStyle: 'none',
 			padding: '0px',
 			margin: '0px',
-			display: `${horizontal ? 'flex' : 'initial'}`,
-		},
-
-		'.ss__list__title': {
-			margin: '0px',
-			padding: '5px',
+			display: 'flex',
+			flexDirection: horizontal ? 'row' : 'column',
+			alignItems: horizontal ? 'center' : undefined,
+			justifyItems: 'flex-start',
+			gap: '5px',
 		},
 
 		'.ss__list__option': {
 			cursor: 'pointer',
 			display: 'flex',
 			alignItems: 'center',
-			padding: '5px',
+			gap: '5px',
 
 			'& .ss__list__option__label , .ss__list__option__icon': {
 				cursor: 'pointer',
-				padding: '0px 0px 0px 5px',
 			},
 		},
 
@@ -36,6 +40,12 @@ const listStyleScript = ({ horizontal, theme }: ListProps) => {
 			pointerEvents: 'none',
 			opacity: 0.5,
 		},
+
+		'&.ss__list--disabled, .ss__list__option--unavailable': {
+			cursor: 'pointer',
+			opacity: 0.5,
+		},
+
 		'.ss__list__option--selected': {
 			fontWeight: 'bold',
 		},

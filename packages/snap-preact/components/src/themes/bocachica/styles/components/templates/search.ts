@@ -25,6 +25,7 @@ const searchStyleScript = ({ mobileSidebarDisplayAt, theme }: SearchProps) => {
 			flex: '1 1 0%',
 			padding: '0px 10px',
 			width: '100%',
+			boxSizing: 'border-box',
 		},
 
 		[`@media only screen and (max-width: ${mobileSidebarDisplayAt})`]: {

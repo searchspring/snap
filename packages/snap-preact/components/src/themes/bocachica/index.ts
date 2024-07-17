@@ -339,7 +339,7 @@ export const bocachica: Theme = {
 						components: {
 							results: {
 								rows: 2,
-								columns: 3,
+								columns: 2,
 							},
 						},
 					},

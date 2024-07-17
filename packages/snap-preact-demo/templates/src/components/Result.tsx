@@ -1,22 +1,21 @@
 import { h, Fragment } from 'preact';
 import { Price, Image, OverlayBadge, CalloutBadge } from '@searchspring/snap-preact/components';
 
-export const Result = (props) => {
+export const CustomResult = (props) => {
 	const { result, controller } = props;
 	const core = result.mappings.core;
 
 	return (
-		<article className="ss__result">
-			Result
-			<div className="ss__result__image-wrapper">
+		<article className="ss__custom-result">
+			<div className="ss__custom-result__image-wrapper">
 				<a href={core.url}>
 					<OverlayBadge controller={controller as SearchController} result={result}>
 						<Image src={core.thumbnailImageUrl} alt={core.name} />
 					</OverlayBadge>
 				</a>
 			</div>
-			<div className="ss__result__details">
-				<div className="ss__result__details__title">
+			<div className="ss__custom-result__details">
+				<div className="ss__custom-result__details__title">
 					<a
 						href={core.url}
 						dangerouslySetInnerHTML={{
@@ -25,7 +24,7 @@ export const Result = (props) => {
 					/>
 				</div>
 
-				<div className="ss__result__details__pricing">
+				<div className="ss__custom-result__details__pricing">
 					{core.price < core.msrp ? (
 						<Fragment>
 							<Price value={core.msrp} lineThrough={true} />
@@ -35,28 +34,21 @@ export const Result = (props) => {
 						<Price value={core.price} />
 					)}
 				</div>
+
 				<CalloutBadge result={result}></CalloutBadge>
 			</div>
 		</article>
 	);
 };
 
-export const Result2 = (props) => {
+export const CustomResultSecondary = (props) => {
 	const { result, controller } = props;
 	const core = result.mappings.core;
 
 	return (
-		<article className="ss__result">
-			Result2
-			<div className="ss__result__image-wrapper">
-				<a href={core.url}>
-					<OverlayBadge controller={controller as SearchController} result={result}>
-						<Image src={core.thumbnailImageUrl} alt={core.name} />
-					</OverlayBadge>
-				</a>
-			</div>
-			<div className="ss__result__details">
-				<div className="ss__result__details__title">
+		<article className="ss__custom-result-secondary">
+			<div className="ss__custom-result-secondary__details">
+				<div className="ss__custom-result-secondary__details__title">
 					<a
 						href={core.url}
 						dangerouslySetInnerHTML={{
@@ -65,7 +57,7 @@ export const Result2 = (props) => {
 					/>
 				</div>
 
-				<div className="ss__result__details__pricing">
+				<div className="ss__custom-result-secondary__details__pricing">
 					{core.price < core.msrp ? (
 						<Fragment>
 							<Price value={core.msrp} lineThrough={true} />
@@ -76,6 +68,13 @@ export const Result2 = (props) => {
 					)}
 				</div>
 				<CalloutBadge result={result}></CalloutBadge>
+			</div>
+			<div className="ss__custom-result-secondary__image-wrapper">
+				<a href={core.url}>
+					<OverlayBadge controller={controller as SearchController} result={result}>
+						<Image src={core.thumbnailImageUrl} alt={core.name} />
+					</OverlayBadge>
+				</a>
 			</div>
 		</article>
 	);

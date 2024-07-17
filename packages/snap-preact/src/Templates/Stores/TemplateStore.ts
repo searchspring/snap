@@ -34,7 +34,7 @@ type WindowProperties = {
 };
 
 type TemplateStoreThemeConfig = {
-	name: 'pike' | 'bocachica'; // various themes available
+	extends: 'pike' | 'bocachica'; // various themes available
 	style?: GlobalThemeStyleScript;
 	variables?: DeepPartial<ThemeVariables>;
 	overrides?: Theme;
@@ -134,19 +134,19 @@ export class TemplatesStore {
 
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
-			const theme = config.themes[themeKey];
-			const imports = [importCurrency, importLanguage, this.library.import.theme[theme.name]()];
+			const themeConfig = config.themes[themeKey];
+			const imports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
 
 			Promise.all(imports).then(() => {
-				const base = this.library.themes[theme.name];
-				const overrides = theme.overrides || {};
-				const variables = theme.variables || {};
+				const base = this.library.themes[themeConfig.extends];
+				const overrides = themeConfig.overrides || {};
+				const variables = themeConfig.variables || {};
 				const currency = this.library.locales.currencies[this.currency];
 				const language = this.library.locales.languages[this.language];
 
 				this.addTheme({
 					name: themeKey,
-					style: theme.style,
+					style: themeConfig.style,
 					type: 'local',
 					base,
 					overrides,

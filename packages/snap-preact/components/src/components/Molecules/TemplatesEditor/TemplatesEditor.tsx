@@ -25,7 +25,7 @@ const CSS = {
 			overflow: 'hidden',
 			fontSize: '14px',
 			position: 'fixed',
-			zIndex: '9999',
+			zIndex: '10003',
 			cursor: 'auto',
 			top: '10px',
 			right: 0,

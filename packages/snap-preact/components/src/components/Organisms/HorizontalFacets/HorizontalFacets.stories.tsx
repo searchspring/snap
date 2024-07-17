@@ -50,6 +50,7 @@ export default {
 				type: {
 					summary: 'number',
 				},
+				defaultValue: { summary: 6 },
 			},
 			control: { type: 'number' },
 		},
