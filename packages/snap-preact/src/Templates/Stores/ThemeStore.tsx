@@ -126,16 +126,9 @@ export class ThemeStore {
 			}
 		}
 
-		let theme = mergeLayers(
-			this.base,
-			baseBreakpoint,
-			this.currency,
-			this.language,
-			this.overrides as Partial<Theme>,
-			overrideBreakpoint,
-			{ variables: this.variables } as Partial<Theme>,
-			this.stored
-		);
+		let theme = mergeLayers(this.base, baseBreakpoint, this.currency, this.language, this.overrides as Partial<Theme>, overrideBreakpoint, {
+			variables: this.variables,
+		} as Partial<Theme>);
 
 		const layoutOptions = theme.layoutOptions;
 		const selectedOption: ListOption | undefined =
@@ -153,6 +146,11 @@ export class ThemeStore {
 			) {
 				this.layout.select(selectedOption);
 			}
+		}
+
+		// Template Editor overrides
+		if (this.stored) {
+			theme = mergeLayers(theme, this.stored);
 		}
 
 		// change the theme name to match the ThemeStore theme name
