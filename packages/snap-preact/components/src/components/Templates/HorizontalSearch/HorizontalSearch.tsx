@@ -48,6 +48,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			// component theme overrides
+			theme: props.theme,
 		},
 		Banner: {
 			// default props
@@ -55,6 +56,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		TopToolbar: {
 			// default props
@@ -67,6 +69,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		MiddleToolbar: {
 			// default props
@@ -78,6 +81,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		BottomToolbar: {
 			// default props
@@ -88,6 +92,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		SearchHeader: {
 			// default props
@@ -95,6 +100,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		Results: {
 			// default props
@@ -104,6 +110,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		NoResults: {
 			// default props
@@ -111,6 +118,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 	};
 

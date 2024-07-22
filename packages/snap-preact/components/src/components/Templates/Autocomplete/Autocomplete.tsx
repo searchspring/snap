@@ -235,7 +235,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	if (!properties.theme?.name) {
+	if (!globalTheme?.name) {
 		// breakpoint settings are calculated in ThemeStore for snap templates
 		props.breakpoints = props.breakpoints || {
 			0: {

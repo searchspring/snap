@@ -59,8 +59,9 @@ import type { SearchProps } from '../components/Templates/Search';
 import type { HorizontalSearchProps } from '../components/Templates/HorizontalSearch';
 import type { NoResultsProps } from '../components/Atoms/NoResults';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import type { ComponentProps } from '../types';
 
-type GenericComponentProps<ComponentProps> = Partial<ComponentProps> & { named?: { [named: string]: Partial<ComponentProps> } };
+type GenericComponentProps<Props> = Partial<Props> & ComponentProps & { named?: { [named: string]: Partial<Props> } };
 
 export type ThemeComponents = {
 	/* ATOMS */

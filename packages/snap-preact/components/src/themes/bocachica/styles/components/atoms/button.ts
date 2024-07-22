@@ -10,7 +10,7 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 		position: 'relative',
 		color: color || variables?.color?.secondary,
 		outline: 0,
-		backgroundColor: backgroundColor || '#fff',
+		backgroundColor: backgroundColor,
 		border: `1px solid ${borderColor || variables?.color?.accent || '#333'}`,
 		borderRadius: '3px',
 		'&:hover': {

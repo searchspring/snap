@@ -96,6 +96,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		Button: {
 			// default props
@@ -103,13 +104,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
-		},
-		Toolbar: {
-			// default props
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
+			theme: props.theme,
 		},
 		TopToolbar: {
 			// default props
@@ -119,6 +114,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		BottomToolbar: {
 			// default props
@@ -130,6 +126,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		Sidebar: {
 			// default props
@@ -139,6 +136,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		SearchHeader: {
 			// default props
@@ -146,6 +144,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		Results: {
 			// default props
@@ -155,6 +154,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		NoResults: {
 			// default props
@@ -162,6 +162,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 		Banner: {
 			// default props
@@ -169,6 +170,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			...defined({
 				disableStyles,
 			}),
+			theme: props.theme,
 		},
 	};
 
@@ -264,7 +266,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					<div className="clear"></div>
 
 					{store.pagination.totalResults ? (
-						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+						<Results {...subProps.Results} controller={controller} />
 					) : (
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
@@ -312,7 +314,6 @@ interface SearchSubProps {
 	Sidebar: Partial<SidebarProps>;
 	TopToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
-	Toolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
 	MobileSidebar: Partial<MobileSidebarProps>;
 	Button: Partial<ButtonProps>;
