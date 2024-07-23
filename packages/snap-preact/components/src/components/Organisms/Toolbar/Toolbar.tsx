@@ -133,7 +133,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__toolbar', className)}>
+			<div {...styling} ss-named={props.name && `toolbar__${props.name}`} className={classnames('ss__toolbar', className)}>
 				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
 				{!hideLayoutSelector && (

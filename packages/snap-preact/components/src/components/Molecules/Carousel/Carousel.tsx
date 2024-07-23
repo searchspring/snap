@@ -346,7 +346,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 					>
-						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'previousButton'} />}
+						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'icon__carousel__previous'} />}
 					</div>
 				</div>
 
@@ -459,5 +459,5 @@ export type CarouselProps = {
 	ComponentProps;
 
 interface CarouselSubProps {
-	icon: IconProps;
+	icon: Partial<IconProps>;
 }

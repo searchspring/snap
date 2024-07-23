@@ -1,12 +1,6 @@
 import type { ComponentProps } from '../types';
 import type { Theme } from '../providers';
 
-type NamedComponentProps = ComponentProps & {
-	named: {
-		[name: string]: ComponentProps;
-	};
-};
-
 export function mergeProps<GenericComponentProps = ComponentProps>(
 	componentType: string,
 	globalTheme: Theme,
@@ -34,6 +28,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 	const theme = (props as ComponentProps).theme;
 	const componentName = (props as ComponentProps).name;
+	const componentTypeWithName = componentName && `${componentType}__${componentName}`;
 
 	// start with defaultProps
 	let mergedProps = {
@@ -45,7 +40,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		const globalComponent = globalTheme?.components && globalTheme.components[componentType as keyof typeof globalTheme.components];
 
 		if (globalComponent) {
-			mergedProps = mergeThemeProps(componentName, globalComponent, mergedProps) as Partial<GenericComponentProps>;
+			mergedProps = mergeThemeProps(globalComponent, mergedProps) as Partial<GenericComponentProps>;
 		}
 
 		// normal props
@@ -57,7 +52,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		// add theme props if they exist
 		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components];
 		if (themeComponent) {
-			mergedProps = mergeThemeProps(componentName, themeComponent, mergedProps) as Partial<GenericComponentProps>;
+			mergedProps = mergeThemeProps(themeComponent, mergedProps) as Partial<GenericComponentProps>;
 		}
 	} else {
 		// normal props
@@ -69,13 +64,25 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		// add globalTheme props if they exist
 		const globalComponent = globalTheme?.components && globalTheme.components[componentType as keyof typeof globalTheme.components];
 		if (globalComponent) {
-			mergedProps = mergeThemeProps(componentName, globalComponent, mergedProps) as Partial<GenericComponentProps>;
+			mergedProps = mergeThemeProps(globalComponent, mergedProps) as Partial<GenericComponentProps>;
+		}
+
+		// global theme componentTypeWithName
+		const globalNamedThemeComponent = globalTheme?.components && globalTheme.components[componentTypeWithName as keyof typeof globalTheme.components]; // theme.components.toolbar
+		if (globalNamedThemeComponent) {
+			mergedProps = mergeThemeProps(globalNamedThemeComponent, mergedProps) as Partial<GenericComponentProps>;
 		}
 
 		// add theme props if they exist
-		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components];
+		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components]; // theme.components.toolbar
 		if (themeComponent) {
-			mergedProps = mergeThemeProps(componentName, themeComponent, mergedProps) as Partial<GenericComponentProps>;
+			mergedProps = mergeThemeProps(themeComponent, mergedProps) as Partial<GenericComponentProps>;
+		}
+
+		// theme prop componentTypeWithName
+		const themeNamedThemeComponent = theme?.components && theme.components[componentTypeWithName as keyof typeof theme.components]; // theme.components.toolbar
+		if (themeNamedThemeComponent) {
+			mergedProps = mergeThemeProps(themeNamedThemeComponent, mergedProps) as Partial<GenericComponentProps>;
 		}
 
 		// tacking on name, variables and layoutOptions to `theme`
@@ -93,11 +100,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 	return mergedProps as GenericComponentProps;
 }
 
-function mergeThemeProps(
-	componentName = '',
-	componentThemeProps: Partial<NamedComponentProps>,
-	mergedProps: Partial<NamedComponentProps>
-): Partial<NamedComponentProps> {
+function mergeThemeProps(componentThemeProps: Partial<ComponentProps>, mergedProps: Partial<ComponentProps>): Partial<ComponentProps> {
 	// add theme props if they exist
 	if (componentThemeProps) {
 		mergedProps = {
@@ -105,18 +108,18 @@ function mergeThemeProps(
 			...componentThemeProps,
 		};
 
-		// get named component props if they exist
-		const namedThemeComponentProps =
-			componentName && componentThemeProps.named && componentThemeProps.named[componentName as keyof typeof componentThemeProps.named];
-		if (namedThemeComponentProps) {
-			mergedProps = {
-				...mergedProps,
-				...mergeThemeProps(componentName, namedThemeComponentProps, mergedProps),
-			};
+		// // get named component props if they exist
+		// const namedThemeComponentProps =
+		// 	componentName && componentThemeProps.named && componentThemeProps.named[componentName as keyof typeof componentThemeProps.named];
+		// if (namedThemeComponentProps) {
+		// 	mergedProps = {
+		// 		...mergedProps,
+		// 		...mergeThemeProps(namedThemeComponentProps, mergedProps),
+		// 	};
 
-			// remove the named props after having pulled them out
-			delete mergedProps.named;
-		}
+		// 	// remove the named props after having pulled them out
+		// 	delete mergedProps.named;
+		// }
 	}
 
 	return mergedProps;

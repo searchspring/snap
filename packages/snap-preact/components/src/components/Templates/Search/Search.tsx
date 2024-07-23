@@ -148,7 +148,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Results: {
 			// default props
-			name: 'searchResults',
+			name: 'search',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -258,7 +258,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					)}
 
 					{!hideTopToolbar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
+						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'top'} controller={controller} />
 					)}
 
 					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
@@ -276,12 +276,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-						<Toolbar
-							{...subProps.BottomToolbar}
-							name={'bottomToolBar'}
-							className="ss__search__content__toolbar--bottom-toolbar"
-							controller={controller}
-						/>
+						<Toolbar {...subProps.BottomToolbar} name={'bottom'} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />
 					)}
 				</div>
 			</div>

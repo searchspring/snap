@@ -104,7 +104,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		},
 		Results: {
 			// default props
-			name: 'searchResults',
+			name: 'search',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -166,12 +166,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
 				{!hideTopToolbar && store.pagination.totalResults > 0 && (
-					<Toolbar
-						{...subProps.TopToolbar}
-						className="ss__horizontal-search__content__toolbar--top-toolbar"
-						name={'topToolBar'}
-						controller={controller}
-					/>
+					<Toolbar {...subProps.TopToolbar} className="ss__horizontal-search__content__toolbar--top-toolbar" name={'top'} controller={controller} />
 				)}
 				<HorizontalFacets {...subProps.HorizontalFacets} facets={store.facets} controller={controller} />
 
@@ -183,7 +178,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 						<Toolbar
 							{...subProps.MiddleToolbar}
 							className="ss__horizontal-search__content__toolbar--middle-toolbar"
-							name={'middleToolBar'}
+							name={'middle'}
 							controller={controller}
 						/>
 					)}
@@ -203,7 +198,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar
 							{...subProps.BottomToolbar}
-							name={'bottomToolBar'}
+							name={'bottom'}
 							className="ss__horizontal-search__content__toolbar--bottom-toolbar"
 							controller={controller}
 						/>

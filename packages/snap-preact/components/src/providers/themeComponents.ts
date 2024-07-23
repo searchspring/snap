@@ -61,7 +61,7 @@ import type { NoResultsProps } from '../components/Atoms/NoResults';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import type { ComponentProps } from '../types';
 
-type GenericComponentProps<Props> = Partial<Props> & ComponentProps & { named?: { [named: string]: Partial<Props> } };
+type GenericComponentProps<Props> = Partial<Props> & ComponentProps;
 
 export type ThemeComponents = {
 	/* ATOMS */
@@ -74,6 +74,7 @@ export type ThemeComponents = {
 	dropdown?: GenericComponentProps<DropdownProps>;
 	formattedNumber?: GenericComponentProps<FormattedNumberProps>;
 	icon?: GenericComponentProps<IconProps>;
+	icon__previous?: GenericComponentProps<IconProps>;
 	image?: GenericComponentProps<ImageProps>;
 	loadingBar?: GenericComponentProps<LoadingBarProps>;
 	banner?: GenericComponentProps<BannerProps>;
@@ -123,10 +124,14 @@ export type ThemeComponents = {
 	noResults?: GenericComponentProps<NoResultsProps>;
 	recommendationBundle?: GenericComponentProps<RecommendationBundleProps>;
 	results?: GenericComponentProps<ResultsProps>;
+	results__search?: GenericComponentProps<ResultsProps>;
 	searchHeader?: GenericComponentProps<SearchHeaderProps>;
 	sidebar?: GenericComponentProps<SidebarProps>;
 	mobileSidebar?: GenericComponentProps<MobileSidebarProps>;
 	toolbar?: GenericComponentProps<ToolbarProps>;
+	toolbar__top?: GenericComponentProps<ToolbarProps>;
+	toolbar__middle?: GenericComponentProps<ToolbarProps>;
+	toolbar__bottom?: GenericComponentProps<ToolbarProps>;
 	/* TEMPLATES */
 	autocomplete?: GenericComponentProps<AutocompleteProps>;
 	recommendation?: GenericComponentProps<RecommendationProps>;
