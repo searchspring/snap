@@ -339,9 +339,9 @@ export class Tracker {
 		},
 		product: {
 			view: (data: ProductViewEvent, siteId?: string): BeaconEvent | undefined => {
-				if (!data?.id && !data?.sku && !data?.childSku) {
+				if (!data?.uid && !data?.sku && !data?.childUid && !data?.childSku) {
 					console.error(
-						'track.product.view event: requires a valid id, sku and/or childSku. \nExample: track.product.view({ id: "123", sku: "product123", childSku: "product123_a" })'
+						'track.product.view event: requires a valid uid, sku and/or childUid, childSku. \nExample: track.product.view({ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a" })'
 					);
 					return;
 				}
@@ -360,8 +360,9 @@ export class Tracker {
 					category: BeaconCategory.PAGEVIEW,
 					context,
 					event: {
-						id: data?.id ? `${data.id}` : undefined,
+						uid: data?.uid ? `${data.uid}` : undefined,
 						sku: data?.sku ? `${data.sku}` : undefined,
+						childUid: data?.childUid ? `${data.childUid}` : undefined,
 						childSku: data?.childSku ? `${data.childSku}` : undefined,
 					},
 				};
@@ -369,7 +370,7 @@ export class Tracker {
 				const event = this.track.event(payload);
 				if (event) {
 					// save recently viewed products to cookie
-					const sku = data?.sku || data?.childSku || data?.id;
+					const sku = data?.childSku || data?.childUid || data?.sku || data?.uid;
 					if (sku) {
 						const lastViewedProducts = this.cookies.viewed.get();
 						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
@@ -392,7 +393,7 @@ export class Tracker {
 							...payload,
 							event: {
 								sku: data.sku,
-								id: data.id,
+								id: data.uid,
 							},
 						});
 					}
@@ -452,9 +453,9 @@ export class Tracker {
 					});
 				}
 				const items = data.items.map((item, index) => {
-					if (!item?.qty || !item?.price || (!item?.id && !item?.sku && !item?.childSku)) {
+					if (!item?.qty || !item?.price || (!item?.uid && !item?.sku && !item?.childUid && !item?.childSku)) {
 						console.error(
-							`track.view.cart event: item at index ${index} requires a valid qty, price, and (id or sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
+							`track.view.cart event: item at index ${index} requires a valid qty, price, and (uid and/or sku and/or childUid and/or childSku.) \nExample: track.view.cart({ items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
@@ -462,11 +463,14 @@ export class Tracker {
 						qty: `${item.qty}`,
 						price: `${item.price}`,
 					};
-					if (item?.id) {
-						product.id = `${item.id}`;
+					if (item?.uid) {
+						product.uid = `${item.uid}`;
 					}
 					if (item?.sku) {
 						product.sku = `${item.sku}`;
+					}
+					if (item?.childUid) {
+						product.childUid = `${item.childUid}`;
 					}
 					if (item?.childSku) {
 						product.childSku = `${item.childSku}`;
@@ -484,7 +488,7 @@ export class Tracker {
 				if (event) {
 					// save cart items to cookie
 					if (items.length) {
-						const products = items.map((item) => item?.sku || item?.childSku || item?.id || '').filter((sku) => sku);
+						const products = items.map((item) => item?.childSku || item?.childUid || item?.sku || item?.uid || '').filter((sku) => sku);
 						this.cookies.cart.add(products);
 					}
 					// legacy tracking
@@ -497,7 +501,7 @@ export class Tracker {
 			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
@@ -512,9 +516,9 @@ export class Tracker {
 					});
 				}
 				const items = data.items.map((item, index) => {
-					if (!item?.qty || !item?.price || (!item?.id && !item?.sku && !item?.childSku)) {
+					if (!item?.qty || !item?.price || (!item?.uid && !item?.sku && !item?.childUid && !item?.childSku)) {
 						console.error(
-							`track.order.transaction event: object parameter \`items\`: item at index ${index} requires a valid qty, price, and (id or sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
+							`track.order.transaction event: object parameter \`items\`: item at index ${index} requires a valid qty, price, and (id or sku and/or childSku.) \nExample: order.view({ items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
@@ -522,11 +526,14 @@ export class Tracker {
 						qty: `${item.qty}`,
 						price: `${item.price}`,
 					};
-					if (item?.id) {
-						product.id = `${item.id}`;
+					if (item?.uid) {
+						product.uid = `${item.uid}`;
 					}
 					if (item?.sku) {
 						product.sku = `${item.sku}`;
+					}
+					if (item?.childUid) {
+						product.childUid = `${item.childUid}`;
 					}
 					if (item?.childSku) {
 						product.childSku = `${item.childSku}`;

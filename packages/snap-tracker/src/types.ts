@@ -133,8 +133,9 @@ export interface TrackErrorEvent {
 	details?: { [any: string]: unknown };
 }
 export interface ProductViewEvent {
-	id?: string;
+	uid?: string;
 	sku?: string;
+	childUid?: string;
 	childSku?: string;
 }
 export interface CartViewEvent {
