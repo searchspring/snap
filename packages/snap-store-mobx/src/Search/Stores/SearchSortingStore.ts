@@ -1,13 +1,8 @@
 import { observable, computed, makeObservable } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { StoreServices } from '../../types';
-import type {
-	MetaResponseModel,
-	MetaResponseModelSortOption,
-	SearchResponseModelSearch,
-	SearchResponseModelSorting,
-} from '@searchspring/snapi-types';
+import type { SearchData, StoreParameters, StoreServices } from '../../types';
+import type { MetaResponseModelSortOption } from '@searchspring/snapi-types';
 
 type MetaResponseModelSortOptionMutated = MetaResponseModelSortOption & {
 	active?: boolean;
@@ -17,7 +12,10 @@ type MetaResponseModelSortOptionMutated = MetaResponseModelSortOption & {
 export class SearchSortingStore {
 	public options: Option[] = [];
 
-	constructor(services: StoreServices, sorting: SearchResponseModelSorting[], search: SearchResponseModelSearch, meta: MetaResponseModel) {
+	constructor(params: StoreParameters<SearchData>) {
+		const { services, data } = params;
+		const { sorting, search, meta } = data;
+
 		if (services && meta.sortOptions) {
 			const activeSort = sorting?.length && sorting[0];
 

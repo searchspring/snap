@@ -3,22 +3,20 @@ import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import type {
 	SearchStoreConfig,
-	StoreServices,
-	StoreConfigs,
 	ResultBadge,
 	VariantOptionConfig,
 	VariantConfig,
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
+	StoreParameters,
+	AutocompleteData,
+	SearchData,
 } from '../../types';
 import type {
 	SearchResponseModelResult,
-	SearchResponseModelPagination,
-	SearchResponseModelMerchandising,
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
-	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
@@ -29,17 +27,13 @@ export class SearchResultStore extends Array<Product | Banner> {
 		return Array;
 	}
 
-	constructor(
-		config: StoreConfigs,
-		services: StoreServices,
-		metaData: MetaResponseModel,
-		resultData?: SearchResponseModelResult[],
-		paginationData?: SearchResponseModelPagination,
-		merchData?: SearchResponseModelMerchandising,
-		loaded?: boolean
-	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, metaData, config);
+	constructor(params: StoreParameters<SearchData | AutocompleteData>) {
+		const { config, data, state } = params;
+		const { results, merchandising, pagination } = data;
+		const loaded = state?.loaded;
+
+		let resultsArr: (Product | Banner)[] = (results || []).map((result) => {
+			return new Product(params, result);
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -47,16 +41,16 @@ export class SearchResultStore extends Array<Product | Banner> {
 		// preselected variant options
 		if (variantConfig?.realtime?.enabled) {
 			// attach click events - ONLY happens once (known limitation)
-			if (!loaded && results.length) {
+			if (!loaded && resultsArr.length) {
 				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
 					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
-						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, results));
+						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, resultsArr));
 					}
 				});
 			}
 
 			// check for attributes for preselection
-			if (results.length) {
+			if (resultsArr.length) {
 				if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
 					const options: Record<string, string[]> = {};
 					// grab values from elements on the page to form preselected elements
@@ -70,25 +64,25 @@ export class SearchResultStore extends Array<Product | Banner> {
 						}
 					});
 
-					makeVariantSelections(variantConfig, options, results);
+					makeVariantSelections(variantConfig, options, resultsArr);
 				}
 			}
 		}
 
-		if (merchData?.content?.inline) {
-			const banners = merchData.content.inline
+		if (merchandising?.content?.inline) {
+			const banners = merchandising.content.inline
 				.sort(function (a, b) {
 					return a.config!.position!.index! - b.config!.position!.index!;
 				})
 				.map((banner) => {
-					return new Banner(services, banner);
+					return new Banner(banner);
 				});
 
-			if (banners && paginationData?.totalResults) {
-				results = addBannersToResults(config, results, banners, paginationData);
+			if (banners && pagination?.totalResults) {
+				resultsArr = addBannersToResults(params, resultsArr, banners);
 			}
 		}
-		super(...results);
+		super(...resultsArr);
 	}
 }
 
@@ -103,7 +97,7 @@ export class Banner {
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
 
-	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
+	constructor(banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
 		this.config = banner.config!;
 		this.value = banner.value!;
@@ -154,13 +148,14 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
+	constructor(params: StoreParameters<AutocompleteData | SearchData>, result: SearchResponseModelResult) {
+		const { config } = params;
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 
 		this.mappings = result.mappings!;
 
-		this.badges = new Badges(result, metaData);
+		this.badges = new Badges(params, result);
 
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -175,9 +170,9 @@ export class Product {
 			}
 		}
 
-		if (result?.children?.length) {
+		if (result.children?.length) {
 			this.children = result.children.map((variant, index) => {
-				return new Child(services, {
+				return new Child({
 					id: `${result.id}-${index}`,
 					...variant,
 				});
@@ -211,15 +206,17 @@ export class Product {
 export class Badges {
 	public all: ResultBadge[] = [];
 
-	constructor(result: SearchResponseModelResult, metaData: MetaResponseModel) {
+	constructor(params: StoreParameters<AutocompleteData | SearchData>, result: SearchResponseModelResult) {
+		const { data } = params;
+		const { meta } = data;
 		this.all = (result.badges || [])
 			.filter((badge) => {
 				// remove badges that are not in the meta or are disabled
-				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
+				return !!(badge?.tag && meta.badges?.tags && meta.badges?.tags[badge.tag] && meta.badges?.tags[badge.tag].enabled);
 			})
 			.map((badge) => {
 				// merge badge with badge meta data
-				const metaBadgeData = metaData?.badges?.tags?.[badge.tag]!;
+				const metaBadgeData = meta.badges?.tags?.[badge.tag]!;
 
 				return {
 					...badge,
@@ -619,7 +616,7 @@ class Child {
 	public attributes: Record<string, unknown> = {};
 	public custom = {};
 
-	constructor(services: StoreServices, result: SearchResponseModelResult) {
+	constructor(result: SearchResponseModelResult) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 
@@ -631,10 +628,13 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationData: SearchResponseModelPagination) {
+function addBannersToResults(params: StoreParameters<AutocompleteData | SearchData>, results: (Product | Banner)[], banners: Banner[]) {
+	const { config, data } = params;
+	const { pagination } = data;
+
 	const productCount = results.length;
-	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
-	const maxIndex = minIndex + paginationData.pageSize!;
+	let minIndex = pagination?.pageSize! * (pagination?.page! - 1);
+	const maxIndex = minIndex + pagination?.pageSize!;
 
 	if ((config as SearchStoreConfig)?.settings?.infinite) {
 		minIndex = 0;
@@ -644,7 +644,7 @@ function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[]
 		.reduce((adding, banner) => {
 			const resultCount = productCount + adding.length;
 
-			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < paginationData.pageSize!)) {
+			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < pagination?.pageSize!)) {
 				adding.push(banner);
 			}
 

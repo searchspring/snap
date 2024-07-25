@@ -5,7 +5,14 @@ import type {
 	SearchRequestModel,
 	MetaResponseModelBadgeTag,
 	SearchResponseModelResultBadges,
+	MetaResponseModel,
+	SearchResponseModel,
+	AutocompleteResponseModel,
 } from '@searchspring/snapi-types';
+import type { StorageStore } from './Storage/StorageStore';
+import { AutocompleteStateStore } from './Autocomplete/Stores';
+import { TrendingResponseModel } from '@searchspring/snap-client';
+
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -169,3 +176,54 @@ export type FinderStoreState = {
 };
 
 export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;
+
+/** Store Interface Types */
+export type StoreParameters<T = undefined> = {
+	config: StoreConfigs;
+	services: StoreServices;
+	stores?: {
+		storage?: StorageStore;
+	};
+} & T;
+
+/** Autocomplete Store Interface Types */
+export type AutocompleteData = {
+	data: AutocompleteResponseModel & { meta: MetaResponseModel };
+	state?: {
+		loaded: boolean;
+		autocomplete: AutocompleteStateStore;
+	};
+	functions?: {
+		resetTerms: () => void;
+	};
+};
+
+export type AutocompleteTrendingData = Omit<AutocompleteData, 'data'> & {
+	data: TrendingResponseModel;
+};
+
+export type AutocompleteHistoryData = Omit<AutocompleteData, 'data'> & {
+	data: {
+		queries: string[];
+	};
+};
+
+/** Search Store Interface Types (also used by Recommendations) */
+export type SearchData = {
+	data: SearchResponseModel & { meta: MetaResponseModel };
+	state?: {
+		loaded: boolean;
+	};
+};
+
+/** Finder Store Interface Types */
+export type FinderData = {
+	data: SearchResponseModel & { meta: MetaResponseModel } & { selections: SelectedSelection[] };
+	stores: {
+		storage: StorageStore;
+	};
+	state: {
+		loading: boolean;
+		finder: FinderStoreState;
+	};
+};

@@ -1,42 +1,37 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { AutocompleteStateStore } from './AutocompleteStateStore';
-import type { AutocompleteStoreConfig, StoreServices } from '../../types';
-import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination, SearchResponseModelSearch } from '@searchspring/snapi-types';
+import type { AutocompleteData, AutocompleteHistoryData, AutocompleteStoreConfig, AutocompleteTrendingData, StoreParameters } from '../../types';
 
 export class AutocompleteTermStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(
-		services: StoreServices,
-		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
-		paginationData: SearchResponseModelPagination,
-		search: SearchResponseModelSearch,
-		resetTerms: () => void,
-		rootState: AutocompleteStateStore,
-		config: AutocompleteStoreConfig
-	) {
-		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
+	constructor(params: StoreParameters<AutocompleteData>) {
+		const { config, data } = params;
+		const suggestions = [...(data.autocomplete?.alternatives ? data.autocomplete.alternatives : []).map((term) => term.text!)];
 
-		if (config.settings?.integratedSpellCorrection) {
-			if (autocomplete?.correctedQuery && search?.query && autocomplete.correctedQuery.toLowerCase() != search.query.toLowerCase()) {
+		if ((config as AutocompleteStoreConfig).settings?.integratedSpellCorrection) {
+			if (
+				data.autocomplete?.correctedQuery &&
+				data.search?.query &&
+				data.autocomplete.correctedQuery.toLowerCase() != data.search.query.toLowerCase()
+			) {
 				// the query was corrected
-				suggestions.unshift(autocomplete.correctedQuery);
+				suggestions.unshift(data.autocomplete.correctedQuery);
 			}
 
-			search?.query && suggestions.unshift(search.query);
+			data.search?.query && suggestions.unshift(data.search.query);
 		} else {
-			if (autocomplete?.suggested?.text) {
+			if (data.autocomplete?.suggested?.text) {
 				// a suggestion for query
-				suggestions.unshift(autocomplete.suggested.text);
-			} else if (autocomplete?.correctedQuery && paginationData.totalResults) {
+				suggestions.unshift(data.autocomplete.suggested.text);
+			} else if (data.autocomplete?.correctedQuery && data.pagination?.totalResults) {
 				// the query was corrected
-				suggestions.unshift(autocomplete.correctedQuery);
-			} else if (autocomplete?.query && paginationData.totalResults) {
+				suggestions.unshift(data.autocomplete.correctedQuery);
+			} else if (data.autocomplete?.query && data.pagination?.totalResults) {
 				// there were no suggestions or corrections,
-				suggestions.unshift(autocomplete?.query);
+				suggestions.unshift(data.autocomplete?.query);
 			}
 		}
 
@@ -45,14 +40,12 @@ export class AutocompleteTermStore extends Array<Term> {
 		suggestions.map((term, index) =>
 			terms.push(
 				new Term(
-					services,
+					params,
 					{
 						active: index === 0,
 						value: term,
 					},
-					terms,
-					resetTerms,
-					rootState
+					terms
 				)
 			)
 		);
@@ -68,26 +61,26 @@ export class Term {
 	public url: UrlManager;
 
 	constructor(
-		services: StoreServices,
+		params: StoreParameters<AutocompleteData | AutocompleteTrendingData | AutocompleteHistoryData>,
 		term: { active: boolean; value: string },
-		terms: Term[],
-		resetTerms: () => void,
-		rootState: AutocompleteStateStore
+		terms: Term[]
 	) {
+		const { services, functions, state } = params;
+
 		this.active = term.active;
 		this.value = term.value;
 
 		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
-			resetTerms();
+			functions?.resetTerms();
 			terms.map((term) => {
 				term.active = false;
 			});
 
 			this.active = true;
-			rootState.locks.terms.lock();
-			rootState.locks.facets.unlock();
+			state?.autocomplete.locks.terms.lock();
+			state?.autocomplete.locks.facets.unlock();
 
 			this.url?.set({ query: this.value }).go();
 		};

@@ -1,5 +1,4 @@
-import type { StoreServices } from '../../types';
-import type { AutocompleteStateStore } from './AutocompleteStateStore';
+import type { AutocompleteHistoryData, StoreParameters } from '../../types';
 import { Term } from './AutocompleteTermStore';
 
 export class AutocompleteHistoryStore extends Array<Term> {
@@ -7,20 +6,20 @@ export class AutocompleteHistoryStore extends Array<Term> {
 		return Array;
 	}
 
-	constructor(services: StoreServices, queries: string[], resetTerms: () => void, rootState: AutocompleteStateStore) {
+	constructor(params: StoreParameters<AutocompleteHistoryData>) {
+		const { data } = params;
+		const { queries } = data;
 		const terms: Array<Term> = [];
 
 		queries?.map((query) => {
 			terms.push(
 				new Term(
-					services,
+					params,
 					{
 						active: false,
 						value: query,
 					},
-					terms,
-					resetTerms,
-					rootState
+					terms
 				)
 			);
 		});

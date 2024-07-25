@@ -65,20 +65,6 @@ export class SearchStore extends AbstractStore {
 		});
 	}
 
-	/*
-	TODO: refactor sub-store interfaces
-	
-	interface StoreParameters {
-		config?: StoreConfigs;
-		services?: StoreServices;
-		stores?: {
-			storage?: StorageStore;
-			state?: StateStore;
-		};
-		data?: SearchResponseModel & { meta: MetaResponseModel };
-	}
-	*/
-
 	public reset(): void {
 		this.update();
 	}
@@ -86,29 +72,77 @@ export class SearchStore extends AbstractStore {
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
 		this.meta = new MetaStore(data.meta);
-		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
-		this.search = new SearchQueryStore(this.services, data?.search || {});
-		this.facets = new SearchFacetStore(
-			this.config,
-			this.services,
-			this.storage,
-			data.facets,
-			data?.pagination || {},
-			this.meta.data,
-			data?.merchandising || {}
-		);
-		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
-		this.results = new SearchResultStore(
-			this.config,
-			this.services,
-			this.meta.data,
-			data?.results || [],
-			data.pagination,
-			data.merchandising,
-			this.loaded
-		);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
-		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
+		this.merchandising = new SearchMerchandisingStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.search = new SearchQueryStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.facets = new SearchFacetStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.filters = new SearchFilterStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.results = new SearchResultStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			state: {
+				loaded: this.loaded,
+			},
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.pagination = new SearchPaginationStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.sorting = new SearchSortingStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
 
 		this.loaded = !!data.pagination;
 	}

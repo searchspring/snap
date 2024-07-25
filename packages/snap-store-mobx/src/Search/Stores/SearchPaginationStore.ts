@@ -1,7 +1,6 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
-import type { StoreConfigs, StoreServices, SearchStoreConfig } from '../../types';
-import type { SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
+import type { StoreConfigs, StoreServices, SearchStoreConfig, StoreParameters, SearchData } from '../../types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
 export class SearchPaginationStore {
@@ -15,27 +14,20 @@ export class SearchPaginationStore {
 	public totalPages: number;
 	public controllerConfig: StoreConfigs;
 
-	constructor(
-		config: StoreConfigs,
-		services: StoreServices,
-		paginationData: SearchResponseModelPagination = {
-			page: undefined,
-			pageSize: undefined,
-			totalResults: undefined,
-			totalPages: undefined,
-		},
-		meta: MetaResponseModel
-	) {
+	constructor(params: StoreParameters<SearchData>) {
+		const { services, data, config } = params;
+		const { meta, pagination } = data;
+
 		const paginationSettings = (config as SearchStoreConfig)?.settings?.pagination;
 
 		this.services = services;
 		this.controllerConfig = config;
 
-		this.page = paginationData.page!;
-		this.pageSize = paginationData.pageSize!;
-		this.totalResults = paginationData.totalResults!;
+		this.page = pagination?.page!;
+		this.pageSize = pagination?.pageSize!;
+		this.totalResults = pagination?.totalResults!;
 		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
-		this.totalPages = paginationData.totalPages!;
+		this.totalPages = pagination?.totalPages!;
 
 		const pageSizeOptions = paginationSettings?.pageSizeOptions || [
 			{

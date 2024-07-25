@@ -3,8 +3,8 @@ import { observable, makeObservable } from 'mobx';
 import { escapeHTML } from '@searchspring/snap-toolbox';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { StoreServices } from '../../types';
-import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
+import type { SearchData, StoreParameters, StoreServices } from '../../types';
+import type { SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
 
 export class SearchQueryStore {
 	public query?: Query;
@@ -12,7 +12,9 @@ export class SearchQueryStore {
 	public originalQuery?: Query;
 	public matchType?: SearchResponseModelSearchMatchTypeEnum;
 
-	constructor(services: StoreServices, search: SearchResponseModelSearch) {
+	constructor(params: StoreParameters<SearchData>) {
+		const { services, data } = params;
+		const { search } = data;
 		const observables: Observables = {};
 
 		if (search?.query) {

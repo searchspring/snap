@@ -1,32 +1,27 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchResponseModelSearch, AutocompleteResponseModelAllOfAutocomplete } from '@searchspring/snapi-types';
-import type { AutocompleteStoreConfig, StoreServices } from '../../types';
+import type { AutocompleteData, AutocompleteStoreConfig, StoreParameters } from '../../types';
 
 export class AutocompleteQueryStore {
 	public query?: Query;
 	public originalQuery?: Query;
 	public correctedQuery?: Query;
 
-	constructor(
-		services: StoreServices,
-		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
-		search: SearchResponseModelSearch,
-		config: AutocompleteStoreConfig
-	) {
+	constructor(params: StoreParameters<AutocompleteData>) {
+		const { services, data, config } = params;
 		const observables: Observables = {};
 
-		if (search?.query) {
-			this.query = new Query(services.urlManager, search.query);
+		if (data.search?.query) {
+			this.query = new Query(services.urlManager, data.search.query);
 			observables.query = observable;
 		}
 
-		if (autocomplete?.correctedQuery) {
-			if (config.settings?.integratedSpellCorrection) {
-				this.correctedQuery = new Query(services.urlManager, autocomplete.correctedQuery);
+		if (data.autocomplete?.correctedQuery) {
+			if ((config as AutocompleteStoreConfig).settings?.integratedSpellCorrection) {
+				this.correctedQuery = new Query(services.urlManager, data?.autocomplete.correctedQuery);
 				observables.correctedQuery = observable;
-			} else if (autocomplete.query) {
-				this.originalQuery = new Query(services.urlManager, autocomplete.query);
+			} else if (data?.autocomplete.query) {
+				this.originalQuery = new Query(services.urlManager, data?.autocomplete.query);
 				observables.originalQuery = observable;
 			}
 		}

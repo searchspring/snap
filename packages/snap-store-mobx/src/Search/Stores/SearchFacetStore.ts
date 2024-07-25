@@ -3,88 +3,84 @@ import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig, StoreParameters, SearchData } from '../../types';
 import type {
-	MetaResponseModel,
 	MetaResponseModelFacet,
 	MetaResponseModelFacetDefaults,
 	MetaResponseModelFacetSlider,
 	MetaResponseModelFacetValueMultipleEnum,
 	MetaResponseModelFacetHierarchyAllOf,
-	SearchResponseModelPagination,
 	SearchResponseModelFacet,
 	SearchResponseModelFacetRange,
 	SearchResponseModelFacetValue,
 	SearchResponseModelFacetValueAllOf,
 	SearchResponseModelFacetValueAllOfValues,
 	SearchRequestModelFilterRangeAllOfValue,
-	SearchResponseModelMerchandising,
 } from '@searchspring/snapi-types';
 
 export class SearchFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
-	constructor(
-		config: SearchStoreConfig | AutocompleteStoreConfig,
-		services: StoreServices,
-		storage: StorageStore,
-		facetsData: SearchResponseModelFacet[] = [],
-		pagination: SearchResponseModelPagination = {},
-		meta: MetaResponseModel,
-		merchandising: SearchResponseModelMerchandising
-	) {
-		const facets = facetsData
-			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
-				const facetMeta = facet.field && meta.facets && (meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
-				// exclude facets that have no meta data
-				if (!facetMeta) return false;
+	constructor(params: StoreParameters<SearchData>) {
+		const config = params.config as SearchStoreConfig | AutocompleteStoreConfig;
+		const { services, stores, data } = params;
+		const storage = stores?.storage!;
 
-				// exclude facets that have mismatched meta data
-				if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
-					return false;
-				}
+		const facets =
+			data.facets
+				?.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
+					const facetMeta =
+						facet.field && data.meta.facets && (data.meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
-				// trim facets - remove facets that have no use
-				const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
-				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig?.trim : config.settings?.facets?.trim;
-				if (shouldTrim) {
-					if (
-						facet.type === 'range' &&
-						(facet as SearchResponseModelFacetRange)?.range?.low == (facet as SearchResponseModelFacetRange)?.range?.high
-					) {
+					// exclude facets that have no meta data
+					if (!facetMeta) return false;
+
+					// exclude facets that have mismatched meta data
+					if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
 						return false;
-					} else if (facet.values?.length == 0) {
-						return false;
-					} else if (!facet.filtered && facet.values?.length == 1) {
-						if (merchandising?.content?.inline) {
-							return facet.values[0].count! + merchandising.content?.inline.length != pagination.totalResults;
-						} else {
-							return facet.values[0].count != pagination.totalResults;
+					}
+
+					// trim facets - remove facets that have no use
+					const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
+					const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig?.trim : config.settings?.facets?.trim;
+					if (shouldTrim) {
+						if (
+							facet.type === 'range' &&
+							(facet as SearchResponseModelFacetRange)?.range?.low == (facet as SearchResponseModelFacetRange)?.range?.high
+						) {
+							return false;
+						} else if (facet.values?.length == 0) {
+							return false;
+						} else if (!facet.filtered && facet.values?.length == 1) {
+							if (data.merchandising?.content?.inline) {
+								return facet.values[0].count! + data.merchandising.content?.inline.length != data.pagination!.totalResults;
+							} else {
+								return facet.values[0].count != data.pagination!.totalResults;
+							}
 						}
 					}
-				}
 
-				return true;
-			})
-			.map((facet) => {
-				const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
-				const facetConfig = deepmerge(
-					{ ...config.settings?.facets, fields: undefined },
-					(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
-				);
-				delete facetConfig.fields;
+					return true;
+				})
+				.map((facet) => {
+					const facetMeta = facet.field && data.meta.facets && data.meta.facets[facet.field];
+					const facetConfig = deepmerge(
+						{ ...config.settings?.facets, fields: undefined },
+						(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
+					);
+					delete facetConfig.fields;
 
-				switch (facet.type) {
-					case 'range':
-						return new RangeFacet(services, storage, facet, facetMeta || {}, facetConfig);
-					case 'value':
-					case 'range-buckets':
-					default:
-						return new ValueFacet(services, storage, facet, facetMeta || {}, facetConfig);
-				}
-			});
+					switch (facet.type) {
+						case 'range':
+							return new RangeFacet(services, storage, facet, facetMeta || {}, facetConfig);
+						case 'value':
+						case 'range-buckets':
+						default:
+							return new ValueFacet(services, storage, facet, facetMeta || {}, facetConfig);
+					}
+				}) || [];
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore

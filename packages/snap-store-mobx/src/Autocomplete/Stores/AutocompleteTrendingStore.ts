@@ -1,6 +1,4 @@
-import type { TrendingResponseModel } from '@searchspring/snap-client';
-import type { StoreServices } from '../../types';
-import type { AutocompleteStateStore } from './AutocompleteStateStore';
+import type { AutocompleteTrendingData, StoreParameters } from '../../types';
 import { Term } from './AutocompleteTermStore';
 
 export class AutocompleteTrendingStore extends Array<Term> {
@@ -8,20 +6,18 @@ export class AutocompleteTrendingStore extends Array<Term> {
 		return Array;
 	}
 
-	constructor(services: StoreServices, trendingData: TrendingResponseModel, resetTerms: () => void, rootState: AutocompleteStateStore) {
+	constructor(params: StoreParameters<AutocompleteTrendingData>) {
 		const terms: Array<Term> = [];
-
-		trendingData?.trending?.queries?.map((term) => {
+		const { data } = params;
+		data.trending?.queries?.map((term) => {
 			terms.push(
 				new Term(
-					services,
+					params,
 					{
 						active: false,
 						value: term.searchQuery,
 					},
-					terms,
-					resetTerms,
-					rootState
+					terms
 				)
 			);
 		});

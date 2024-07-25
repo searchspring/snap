@@ -1,4 +1,12 @@
-import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection, FinderStoreState } from '../../types';
+import type {
+	FinderStoreConfig,
+	FinderFieldConfig,
+	StoreServices,
+	SelectedSelection,
+	FinderStoreState,
+	StoreParameters,
+	FinderData,
+} from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type {
 	MetaResponseModel,
@@ -37,7 +45,13 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 		return Array;
 	}
 
-	constructor(config: FinderStoreConfig, services: StoreServices, { state, facets, meta, loading, storage, selections }: FinderSelectionStoreData) {
+	constructor(params: StoreParameters<FinderData>) {
+		const config = params.config as FinderStoreConfig;
+		const { services, data, stores, state } = params;
+		const { storage } = stores;
+		const { finder, loading } = state;
+		const { facets, meta, selections } = data;
+
 		const selectedSelections: Array<Selection | SelectionHierarchy> = [];
 
 		if (selections?.length) {
@@ -56,7 +70,7 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 							storage.set(`${storageKey}.${levelConfig.key}.values`, selection.data);
 							storage.set(`${storageKey}.${levelConfig.key}.selected`, selection.selected);
 
-							const selectionHierarchy = new SelectionHierarchy(services, config.id, state, facet, levelConfig, loading, storage);
+							const selectionHierarchy = new SelectionHierarchy(services, config.id, finder, facet, levelConfig, loading, storage);
 
 							if (config.persist?.lockSelections) {
 								selectionHierarchy.disabled = true;
@@ -69,7 +83,7 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 							selectedSelections.push(selectionHierarchy);
 						});
 					} else {
-						const selection = new Selection(services, config.id, state, facet, fieldObj, loading, storage);
+						const selection = new Selection(services, config.id, finder, facet, fieldObj, loading, storage);
 
 						selection.selected = selected;
 						selection.storage.set('selected', selected);
@@ -120,10 +134,10 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 
 					levels?.map((level, index) => {
 						const levelConfig: LevelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
-						selectedSelections.push(new SelectionHierarchy(services, config.id, state, facet, levelConfig, loading, storage));
+						selectedSelections.push(new SelectionHierarchy(services, config.id, finder, facet, levelConfig, loading, storage));
 					});
 				} else {
-					selectedSelections.push(new Selection(services, config.id, state, facet, fieldObj, loading, storage));
+					selectedSelections.push(new Selection(services, config.id, finder, facet, fieldObj, loading, storage));
 				}
 			});
 		}

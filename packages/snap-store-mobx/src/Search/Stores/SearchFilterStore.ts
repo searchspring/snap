@@ -1,10 +1,8 @@
 import { makeObservable, observable } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { StoreServices } from '../../types';
+import type { SearchData, StoreParameters, StoreServices } from '../../types';
 import type {
-	SearchResponseModelFilter,
-	MetaResponseModel,
 	SearchResponseModelFilterRange,
 	SearchResponseModelFilterValue,
 	MetaResponseModelFacetDefaults,
@@ -16,22 +14,24 @@ export class SearchFilterStore extends Array<RangeFilter | Filter> {
 		return Array;
 	}
 
-	constructor(services: StoreServices, filtersData: SearchResponseModelFilter[] = [], meta: MetaResponseModel) {
-		const filters = filtersData.map((filter) => {
-			const field = filter.field!;
-			const facetMeta = meta.facets && (meta.facets[field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
+	constructor(params: StoreParameters<SearchData>) {
+		const { services, data } = params;
+		const filters =
+			data.filters?.map((filter) => {
+				const field = filter.field!;
+				const facetMeta = data.meta.facets && (data.meta.facets[field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
-			switch (filter.type) {
-				case 'range':
-					const rangeFilter = filter as SearchResponseModelFilterRange;
-					return new RangeFilter(services, rangeFilter, facetMeta!);
+				switch (filter.type) {
+					case 'range':
+						const rangeFilter = filter as SearchResponseModelFilterRange;
+						return new RangeFilter(services, rangeFilter, facetMeta!);
 
-				case 'value':
-				default:
-					const valueFilter = filter as SearchResponseModelFilterValue;
-					return new Filter(services, valueFilter, facetMeta!);
-			}
-		});
+					case 'value':
+					default:
+						const valueFilter = filter as SearchResponseModelFilterValue;
+						return new Filter(services, valueFilter, facetMeta!);
+				}
+			}) || [];
 
 		super(...filters);
 	}

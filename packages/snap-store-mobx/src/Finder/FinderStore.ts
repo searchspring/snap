@@ -99,14 +99,30 @@ export class FinderStore extends AbstractStore {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = new MetaStore(data.meta);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
-		this.selections = new FinderSelectionStore(this.config, this.services, {
-			state: this.state,
-			facets: data.facets || [],
-			meta: this.meta.data,
-			loading: this.loading,
-			storage: this.storage,
-			selections: selectedSelections || [],
+		this.pagination = new SearchPaginationStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				...data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.selections = new FinderSelectionStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			state: {
+				finder: this.state,
+				loading: this.loading,
+			},
+			data: {
+				...data,
+				meta: this.meta.data,
+				selections: selectedSelections || [],
+			},
 		});
 
 		// providing access to response data without exposing it
