@@ -8,7 +8,7 @@ import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { DeepPartial } from '../../src/types';
 import type { FunctionalComponent, RenderableProps } from 'preact';
-import type { CSSInterpolation } from '@emotion/serialize/types';
+import type { CSSInterpolation } from '@emotion/serialize';
 
 export interface ComponentProps {
 	name?: string;
