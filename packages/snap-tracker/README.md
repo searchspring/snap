@@ -83,7 +83,9 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 ```html
 <script type="searchspring/track/product/view">
     item = {
+        uid: '123',
         sku: 'product123',
+        childUid: '123_a',
         childSku: 'product123_a',
     };
 </script>
@@ -95,13 +97,17 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 <script type="searchspring/track/cart/view">
     items = [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99',
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99',
@@ -124,13 +130,17 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
     };
     items = [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99'
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99'
@@ -150,7 +160,9 @@ Each tracking method expects a data object which contains different attributes d
 
 ```typescript
 tracker.track.product.view({
+    uid: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 });
 ```
@@ -159,7 +171,9 @@ If a bundle is using multiple Snap Controllers with different `siteId`, an optio
 
 ```typescript
 tracker.track.product.view({
+    uid: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 }, 'abc123');
 ```
@@ -269,11 +283,13 @@ tracker.track.product.click({
 ```
 
 ### Product View `track.product.view`
-Tracks product page views. Should be invoked from a product detail page. A `sku` and/or `childSku` are required.
+Tracks product page views. Should be invoked from a product detail page. A `uid` and/or `sku` and/or `childUid` and/or `childSku` are required.
 
 ```typescript
 tracker.track.product.view({
+    ud: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 });
 ```
@@ -289,19 +305,23 @@ tracker.track.shopper.login({
 ```
 
 ### Cart View `track.cart.view`
-Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
+Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`uid` and/or `sku` and/or `childUid` and/or `childSku`)
 
 ```typescript
 tracker.track.cart.view({
     items: [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99',
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99',
@@ -341,13 +361,17 @@ tracker.track.order.transaction({
     },
     items: [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99'
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99'
@@ -460,7 +484,7 @@ console.log(tracker.getShopperId())
 The `cookies` property provides access to the `cart` and `viewed` tracking cookies.
 
 #### `cookies.cart.get` method
-Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
+Returns an array of strings containing the `uids` and/or `skus` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
 
 ```typescript
 const tracker = new Tracker();
@@ -515,7 +539,7 @@ tracker.cookies.cart.clear();
 ```
 
 #### `cookies.viewed.get` method
-Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+Returns an array of strings containing the `uids` and/or `skus` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
 
 ```typescript
 const tracker = new Tracker();
