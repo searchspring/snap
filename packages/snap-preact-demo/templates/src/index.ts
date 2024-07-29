@@ -33,19 +33,138 @@ new SnapTemplates({
 			style: globalStyles,
 			overrides: {
 				components: {
-					toolbar: {
-						named: {
-							topToolBar: {
-								hidePagination: true,
-							},
-							bottomToolBar: {
-								hideFilterSummary: false,
-								hidePerPage: false,
-								hideSortBy: false,
-								hideLayoutSelector: false,
-							},
-						},
+					/*
+					named components at the root / theme level
+
+					toolbar__search--top;
+					toolbar__search--bottom;
+					icon__carousel--previous;
+					icon__carousel--next;
+					icon__bundleRecommendation--cta;
+					icon__bundleRecommendation--selected;
+					bundleRecommendation: {
+						theme: {
+							components: {
+								icon__carousel--previous: {}
+							}
+						}
+					}
+					toolbar__horizontalSearch--bottom;
+					toolbar__horizontalSearch--bottom;
+
+					*/
+
+					// 'search results price.one other stuff': {
+					// 	lineThrough: true,
+
+					// 	named: {
+					// 		'one': {
+
+					// 		}
+					// 	}
+					// },
+					price: {
+						// fakeProp: 'yes',
+						lineThrough: !!1,
 					},
+
+					search: {
+						// nope: true,
+						// hideBottomToolBar: 'yes',
+						// toggleSidebarButtonText: 4
+					},
+
+					'toolbar.top price.one': {
+						lineThrough: true,
+					},
+
+					'search toolbar price.one': {
+						lineThrough: true,
+					},
+
+					// 'search toolbar.top price.one': {
+					// 	lineThrough: true,
+					// },
+
+					'price.one': {
+						lineThrough: true,
+					},
+					// 'price': {
+					// 	lineThrough: false
+					// },
+
+					'something price.two': {},
+
+					// search: {
+					// 	theme: {
+					// 		components: {
+					// 			// can we type this for the search component? (individual components)
+					// 			toolbar: {
+					// 				hidePerPage: true,
+					// 				style: {
+					// 					background: 'red',
+					// 				},
+					// 			},
+					// 			// toolbar: {},
+					// 		},
+					// 	},
+					// },
+					// toolbar: {
+					// 	hidePerPage: true,
+					// },
+
+					// // type__${uniqueName}
+
+					// toolbar__searchTop: {},
+					// toolbar__searchBottom: {},
+					// toolbar__horizontalSearchTop: {},
+					// toolbar__horizontalSearchMiddle: {},
+					// toolbar__horizontalSearchBottom: {},
+
+					// icon__carouselPreviousButton: {},
+					// icon__carouselNextButton: {},
+					// icon__ratingEmptyStar: {},
+
+					// toolbar__top: {},
+					// toolbar__middle: {},
+					// toolbar__bottom: {},
+
+					// icon__
+					// 'icon__carousel--previous': {},
+					// 'icon__ss__carousel__button--previous__icon--previous': {},
+					// icon__previous: {},
+
+					// 'results__search': {},
+					// 'results__horizontalSearch': {},
+					// 'results__autocomplete': {},
+					// 'toolbar__horizontalSearchTop': {},
+					// 'toolbar__horizontalSearchTop': {},
+					// 'toolbar__searchTop': {
+					// hidePerPage: false,
+					// style: {
+					// 	background: 'blue',
+					// 	zoom: 2
+					// }
+					// },
+					// thingDoesntExist: {},
+					// toolbar__topThing: {
+					// 	hidePerPage: false,
+					// 	style: {
+					// 		background: 'blue',
+					// 		zoom: 2
+					// 	}
+					// },
+					// toolbar__top: {},
+					// toolbar__bottom: {},
+
+					// toolbar: {
+					// 	named: {
+					// 		top: {
+
+					// 		},
+					//		buttum: {}
+					// 	}
+					// },
 				},
 				layoutOptions: [
 					{
@@ -56,11 +175,11 @@ new SnapTemplates({
 								toolbar: {
 									hideSortBy: true,
 								},
-								results: {
-									named: {
-										searchResults: { columns: 2 },
-									},
-								},
+								// results: {
+								// 	named: {
+								// 		searchResults: { columns: 2 },
+								// 	},
+								// },
 							},
 						},
 					},
@@ -70,11 +189,11 @@ new SnapTemplates({
 						default: true,
 						overrides: {
 							components: {
-								results: {
-									named: {
-										searchResults: { columns: 4 },
-									},
-								},
+								// results: {
+								// 	named: {
+								// 		searchResults: { columns: 4 },
+								// 	},
+								// },
 							},
 						},
 					},

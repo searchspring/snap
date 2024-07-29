@@ -300,7 +300,7 @@ export interface SearchProps extends ComponentProps {
 	hideTopToolbar?: boolean;
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
-	toggleSidebarButtonText?: string;
+	p?: string;
 }
 
 export type layoutConfig = {

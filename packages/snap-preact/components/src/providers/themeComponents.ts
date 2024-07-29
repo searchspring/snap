@@ -63,7 +63,7 @@ import type { ComponentProps } from '../types';
 
 type GenericComponentProps<Props> = Partial<Props> & ComponentProps & { named?: { [named: string]: Partial<Props> } };
 
-export type ThemeComponents = {
+export type _ThemeComponents = {
 	/* ATOMS */
 	badgeImage?: GenericComponentProps<BadgeImageProps>;
 	badgePill?: GenericComponentProps<BadgePillProps>;
@@ -132,4 +132,15 @@ export type ThemeComponents = {
 	recommendation?: GenericComponentProps<RecommendationProps>;
 	search?: GenericComponentProps<SearchProps>;
 	horizontalSearch?: GenericComponentProps<HorizontalSearchProps>;
+};
+
+type allPriceNames = 'one' | 'two'; // export from component
+
+type NamedThemeComponent<ComponentType extends string, ComponentNames extends string> =
+	| ComponentType
+	| `${string} ${ComponentType}`
+	| `${string} ${ComponentType}.${ComponentNames}`
+	| `${ComponentType}.${ComponentNames}`;
+export type ThemeComponents = _ThemeComponents & {
+	[K in NamedThemeComponent<'price', allPriceNames>]?: GenericComponentProps<PriceProps>;
 };
