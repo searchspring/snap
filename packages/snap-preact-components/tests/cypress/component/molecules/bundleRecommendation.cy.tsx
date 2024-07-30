@@ -337,6 +337,48 @@ describe('RecommendationBundle Component', async () => {
 			});
 	});
 
+	it('can hide the seed with hideSeed when seed is both in/out of the carousel', () => {
+		const carouselProps = {
+			seedInCarousel: true,
+		};
+		mount(<RecommendationBundle controller={controller} hideSeed={true} carousel={carouselProps} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed').should('not.exist');
+
+		const carouselProps2 = {
+			seedInCarousel: false,
+		};
+		mount(<RecommendationBundle controller={controller} hideSeed={true} carousel={carouselProps2} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed').should('not.exist');
+	});
+
+	it('can render with carousel disabled', () => {
+		const carouselProps = {
+			enabled: false,
+		};
+		mount(<RecommendationBundle controller={controller} carousel={carouselProps} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle__wrapper').should('exist');
+		cy.get('.ss__recommendation-bundle__wrapper__selector').should('have.length', 5);
+	});
+
+	it('can hide the seed with hideSeed when carousel is disabled', () => {
+		const carouselProps = {
+			enabled: false,
+		};
+		mount(<RecommendationBundle controller={controller} hideSeed={true} carousel={carouselProps} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed').should('not.exist');
+
+		cy.get('.ss__recommendation-bundle__wrapper').should('exist');
+		cy.get('.ss__recommendation-bundle__wrapper__selector').should('have.length', controller.store.results.length - 1);
+	});
+
 	it('can put the seed in the carousel', () => {
 		const carouselProps = {
 			seedInCarousel: true,

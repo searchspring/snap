@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, SwatchOption, BreakpointsProps } from '../../../types';
-import { useState } from 'react';
+import { useState } from 'preact/hooks';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
 import { defined } from '../../../utilities';
