@@ -238,6 +238,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		styleScript,
 		modules,
 		className,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -256,6 +257,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -346,7 +348,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 					>
-						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'previousButton'} />}
+						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'prev'} />}
 					</div>
 				</div>
 
@@ -425,7 +427,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationNextRef as React.RefObject<HTMLDivElement>}
 						onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
 					>
-						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} name={'nextButton'} />}
+						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} name={'next'} />}
 					</div>
 				</div>
 			</div>

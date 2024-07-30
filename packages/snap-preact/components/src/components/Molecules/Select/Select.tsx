@@ -106,6 +106,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 	let { options } = props;
 
@@ -121,6 +122,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -137,6 +139,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props

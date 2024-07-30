@@ -71,11 +71,10 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		...properties.theme?.components?.variantSelection,
 	};
 
-	const { type, selection, disableStyles, className, style } = props;
+	const { type, selection, disableStyles, className, style, treePath } = props;
 
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
-			name: `ss__variant-selection__dropdown--${selection.field}`,
 			className: 'ss__variant-selection__dropdown',
 			// TODO: label doesnt exist on dropdown?
 			// label: selection.label || selection.field,
@@ -87,10 +86,10 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
-			name: `ss__variant-selection__icon--${selection.field}`,
 			className: 'ss__variant-selection__icon',
 			size: '12px',
 			// global theme
@@ -101,9 +100,9 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		list: {
-			name: `ss__variant-selection__list--${selection.field}`,
 			titleText: selection.field,
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
@@ -119,9 +118,9 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		swatches: {
-			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
@@ -133,6 +132,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

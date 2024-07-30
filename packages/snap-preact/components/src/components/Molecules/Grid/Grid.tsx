@@ -143,6 +143,7 @@ export function Grid(properties: GridProps): JSX.Element {
 		onOverflowButtonClick,
 		className,
 		style,
+		treePath,
 	} = props;
 
 	const subProps: GridSubProps = {
@@ -157,6 +158,7 @@ export function Grid(properties: GridProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

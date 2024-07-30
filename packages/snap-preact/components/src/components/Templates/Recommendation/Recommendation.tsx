@@ -72,6 +72,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		className,
 		styleScript,
 		vertical,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -99,6 +100,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		result: {
 			// default props
@@ -109,6 +111,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

@@ -250,7 +250,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
-	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick } = props;
+	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick, treePath } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
@@ -265,6 +265,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

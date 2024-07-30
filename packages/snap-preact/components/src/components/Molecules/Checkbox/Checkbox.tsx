@@ -60,6 +60,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		style,
 		styleScript,
 		theme,
+		treePath,
 	} = props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
@@ -80,6 +81,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 

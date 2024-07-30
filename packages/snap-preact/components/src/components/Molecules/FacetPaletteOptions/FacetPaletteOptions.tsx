@@ -194,6 +194,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	if (horizontal) {
@@ -215,6 +216,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		checkbox: {
 			// default props
@@ -227,6 +229,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -257,8 +260,8 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							value.filtered
 								? `remove selected filter ${facet?.label || ''} - ${value.label}`
 								: facet?.label
-									? `filter by ${facet?.label} - ${value.label}`
-									: `filter by ${value.label}`
+								? `filter by ${facet?.label} - ${value.label}`
+								: `filter by ${value.label}`
 						}
 						href={value.url?.link?.href}
 						{...valueProps}

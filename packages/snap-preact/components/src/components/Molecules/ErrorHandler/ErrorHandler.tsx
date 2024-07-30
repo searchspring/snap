@@ -82,7 +82,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
-	const { controller, error, disableStyles, style, styleScript, onRetryClick, className } = props;
+	const { controller, error, disableStyles, style, styleScript, onRetryClick, className, treePath } = props;
 
 	const subProps: ErrorHandlerSubProps = {
 		icon: {
@@ -96,6 +96,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -108,6 +109,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 

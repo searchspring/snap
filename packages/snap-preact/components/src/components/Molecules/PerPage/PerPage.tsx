@@ -26,7 +26,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
-	const { pagination, type, controller, label, disableStyles, className, style, styleScript } = props;
+	const { pagination, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -40,6 +40,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		RadioList: {
 			// global theme
@@ -50,6 +51,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		List: {
 			multiSelect: false,
@@ -63,6 +65,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

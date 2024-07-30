@@ -11,7 +11,6 @@ import type { FunctionalComponent, RenderableProps } from 'preact';
 import type { CSSInterpolation } from '@emotion/serialize';
 
 export interface ComponentProps {
-	name?: string;
 	className?: string;
 	disableStyles?: boolean;
 	style?: CSSInterpolation;
@@ -20,6 +19,7 @@ export interface ComponentProps {
 	controller?: AbstractController;
 	snap?: Snap | SnapTemplates;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
+	treePath?: string;
 }
 
 export type ListOption = {

@@ -37,6 +37,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		hideMiddleToolbar,
 		resultComponent,
 		hideBottomToolBar,
+		treePath,
 	} = props;
 	const store = controller.store;
 
@@ -49,6 +50,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		Banner: {
 			// default props
@@ -57,8 +59,10 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		TopToolbar: {
+			name: 'top',
 			// default props
 			hideFilterSummary: false,
 			hideLayoutSelector: true,
@@ -70,8 +74,10 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		MiddleToolbar: {
+			name: 'middle',
 			// default props
 			hideFilterSummary: true,
 			hidePagination: true,
@@ -82,8 +88,10 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		BottomToolbar: {
+			name: 'bottom',
 			// default props
 			hideFilterSummary: true,
 			hidePerPage: true,
@@ -93,6 +101,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		SearchHeader: {
 			// default props
@@ -101,16 +110,17 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		Results: {
 			// default props
-			name: 'searchResults',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		NoResults: {
 			// default props
@@ -119,6 +129,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -166,12 +177,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
 				{!hideTopToolbar && store.pagination.totalResults > 0 && (
-					<Toolbar
-						{...subProps.TopToolbar}
-						className="ss__horizontal-search__content__toolbar--top-toolbar"
-						name={'topToolBar'}
-						controller={controller}
-					/>
+					<Toolbar {...subProps.TopToolbar} className="ss__horizontal-search__content__toolbar--top-toolbar" controller={controller} />
 				)}
 				<HorizontalFacets {...subProps.HorizontalFacets} facets={store.facets} controller={controller} />
 
@@ -180,12 +186,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} />}
 
 					{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
-						<Toolbar
-							{...subProps.MiddleToolbar}
-							className="ss__horizontal-search__content__toolbar--middle-toolbar"
-							name={'middleToolBar'}
-							controller={controller}
-						/>
+						<Toolbar {...subProps.MiddleToolbar} className="ss__horizontal-search__content__toolbar--middle-toolbar" controller={controller} />
 					)}
 
 					<div className="clear"></div>
@@ -201,12 +202,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-						<Toolbar
-							{...subProps.BottomToolbar}
-							name={'bottomToolBar'}
-							className="ss__horizontal-search__content__toolbar--bottom-toolbar"
-							controller={controller}
-						/>
+						<Toolbar {...subProps.BottomToolbar} className="ss__horizontal-search__content__toolbar--bottom-toolbar" controller={controller} />
 					)}
 				</div>
 			</div>

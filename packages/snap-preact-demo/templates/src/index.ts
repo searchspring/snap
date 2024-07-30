@@ -33,137 +33,54 @@ new SnapTemplates({
 			style: globalStyles,
 			overrides: {
 				components: {
-					/*
-					named components at the root / theme level
-
-					toolbar__search--top;
-					toolbar__search--bottom;
-					icon__carousel--previous;
-					icon__carousel--next;
-					icon__bundleRecommendation--cta;
-					icon__bundleRecommendation--selected;
-					bundleRecommendation: {
-						theme: {
-							components: {
-								icon__carousel--previous: {}
-							}
-						}
-					}
-					toolbar__horizontalSearch--bottom;
-					toolbar__horizontalSearch--bottom;
-
-					*/
-
-					// 'search results price.one other stuff': {
-					// 	lineThrough: true,
-
-					// 	named: {
-					// 		'one': {
-
-					// 		}
-					// 	}
-					// },
 					price: {
-						// fakeProp: 'yes',
-						lineThrough: !!1,
+						style: {
+							background: 'red',
+						},
+					},
+					toolbar: {
+						hidePerPage: true,
+						// hidePagination: true,
+						style: {
+							background: 'red',
+						},
 					},
 
-					search: {
-						// nope: true,
-						// hideBottomToolBar: 'yes',
-						// toggleSidebarButtonText: 4
+					'toolbar.top': {
+						hidePerPage: true,
+						hidePagination: true,
 					},
 
-					'toolbar.top price.one': {
-						lineThrough: true,
+					'search toolbar.top': {
+						hidePerPage: false,
+						hidePagination: false,
 					},
 
-					'search toolbar price.one': {
-						lineThrough: true,
+					'search toolbar': {
+						hidePerPage: false,
+						// style: {
+						// 	background: 'blue'
+						// }
 					},
 
-					// 'search toolbar.top price.one': {
-					// 	lineThrough: true,
-					// },
-
-					'price.one': {
-						lineThrough: true,
+					'search toolbar.bottom': {
+						hidePerPage: false,
+						hidePagination: false,
+						style: {
+							background: 'pink',
+						},
 					},
-					// 'price': {
-					// 	lineThrough: false
+
+					// 'icon.next': {
+					// 	icon: 'cog',
 					// },
 
-					'something price.two': {},
-
-					// search: {
-					// 	theme: {
-					// 		components: {
-					// 			// can we type this for the search component? (individual components)
-					// 			toolbar: {
-					// 				hidePerPage: true,
-					// 				style: {
-					// 					background: 'red',
-					// 				},
-					// 			},
-					// 			// toolbar: {},
-					// 		},
-					// 	},
-					// },
-					// toolbar: {
-					// 	hidePerPage: true,
+					// 'carousel icon.next': {
+					// 	icon: 'cog',
 					// },
 
-					// // type__${uniqueName}
-
-					// toolbar__searchTop: {},
-					// toolbar__searchBottom: {},
-					// toolbar__horizontalSearchTop: {},
-					// toolbar__horizontalSearchMiddle: {},
-					// toolbar__horizontalSearchBottom: {},
-
-					// icon__carouselPreviousButton: {},
-					// icon__carouselNextButton: {},
-					// icon__ratingEmptyStar: {},
-
-					// toolbar__top: {},
-					// toolbar__middle: {},
-					// toolbar__bottom: {},
-
-					// icon__
-					// 'icon__carousel--previous': {},
-					// 'icon__ss__carousel__button--previous__icon--previous': {},
-					// icon__previous: {},
-
-					// 'results__search': {},
-					// 'results__horizontalSearch': {},
-					// 'results__autocomplete': {},
-					// 'toolbar__horizontalSearchTop': {},
-					// 'toolbar__horizontalSearchTop': {},
-					// 'toolbar__searchTop': {
-					// hidePerPage: false,
-					// style: {
-					// 	background: 'blue',
-					// 	zoom: 2
-					// }
-					// },
-					// thingDoesntExist: {},
-					// toolbar__topThing: {
-					// 	hidePerPage: false,
-					// 	style: {
-					// 		background: 'blue',
-					// 		zoom: 2
-					// 	}
-					// },
-					// toolbar__top: {},
-					// toolbar__bottom: {},
-
-					// toolbar: {
-					// 	named: {
-					// 		top: {
-
-					// 		},
-					//		buttum: {}
-					// 	}
+					// 'pagination icon.next': {
+					// 	icon: 'cog',
 					// },
 				},
 				layoutOptions: [
@@ -245,7 +162,7 @@ new SnapTemplates({
 			{
 				// does this force usage to after the input only?
 				selector: 'input.searchspring-ac',
-				theme: 'myTheme',
+				// theme: 'myTheme',
 				component: 'Autocomplete',
 				// resultComponent: 'CustomResult',
 			},

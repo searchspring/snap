@@ -57,6 +57,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: PaginationSubProps = {
@@ -72,6 +73,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

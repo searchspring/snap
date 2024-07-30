@@ -198,6 +198,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		style,
 		className,
 		styleScript,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -246,6 +247,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		result: {
 			// default props
@@ -258,6 +260,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

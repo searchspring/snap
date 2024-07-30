@@ -26,7 +26,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, label, disableStyles, className, style, styleScript } = props;
+	const { sorting, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -40,6 +40,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		RadioList: {
 			// global theme
@@ -50,6 +51,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		List: {
 			multiSelect: false,
@@ -63,6 +65,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

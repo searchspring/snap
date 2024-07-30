@@ -27,7 +27,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, label, showSingleOption, disableStyles, className, style, styleScript } = props;
+	const { options, selected, type, onSelect, label, showSingleOption, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: SelectSubProps = {
 		Select: {
@@ -39,6 +39,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		RadioList: {
 			// global theme
@@ -49,6 +50,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		List: {
 			multiSelect: false,
@@ -62,6 +64,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

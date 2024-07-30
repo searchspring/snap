@@ -29,7 +29,7 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 
 	const props = mergeProps('facetToggle', globalTheme, defaultProps, properties);
 
-	const { label, onClick, disableStyles, className, style, styleScript } = props;
+	const { label, onClick, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: FacetToggleSubProps = {
 		Toggle: {
@@ -42,6 +42,7 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

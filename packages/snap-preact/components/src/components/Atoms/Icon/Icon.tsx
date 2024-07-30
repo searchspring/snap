@@ -60,7 +60,7 @@ export function Icon(properties: IconProps): JSX.Element {
 					} else if (pathType === 'string') {
 						return <path fill={disableStyles ? color : undefined} d={iconPath as string} />;
 					} else if (iconPath && pathType === 'object' && Array.isArray(iconPath)) {
-						return iconPath.map((p: SVGPathElement, i) => <p.type key={i} {...p.attributes} />);
+						return (iconPath as SVGPathElement[]).map((p, i) => <p.type key={i} {...p.attributes} />);
 					}
 				})()}
 			</svg>
@@ -86,4 +86,6 @@ export interface IconProps extends ComponentProps {
 	width?: string | number;
 	height?: string | number;
 	viewBox?: string;
+	name?: IconNames;
 }
+export type IconNames = 'next' | 'prev' | 'active' | 'inactive' | 'star--empty' | 'star--full';

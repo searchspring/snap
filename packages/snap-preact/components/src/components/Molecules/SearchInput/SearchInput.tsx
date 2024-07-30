@@ -39,7 +39,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className } = props;
+	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className, treePath } = props;
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -53,6 +53,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

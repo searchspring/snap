@@ -155,6 +155,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const store = pagination || controller?.store?.pagination;
@@ -178,6 +179,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -190,6 +192,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

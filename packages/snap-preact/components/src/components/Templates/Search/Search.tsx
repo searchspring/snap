@@ -83,6 +83,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		resultComponent,
 		hideBottomToolBar,
 		mobileSidebarDisplayAt,
+		treePath,
 	} = props;
 	const store = controller.store;
 
@@ -97,6 +98,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		Button: {
 			// default props
@@ -105,8 +107,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		TopToolbar: {
+			name: 'top',
 			// default props
 			hidePagination: Boolean(controller.config.settings?.infinite),
 			hideFilterSummary: true,
@@ -115,8 +119,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		BottomToolbar: {
+			name: 'bottom',
 			// default props
 			hideFilterSummary: true,
 			hidePerPage: true,
@@ -127,6 +133,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		Sidebar: {
 			// default props
@@ -137,6 +144,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		SearchHeader: {
 			// default props
@@ -145,16 +153,17 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		Results: {
 			// default props
-			name: 'searchResults',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		NoResults: {
 			// default props
@@ -163,6 +172,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		Banner: {
 			// default props
@@ -171,6 +181,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -247,18 +258,13 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
 
 					{toggleSidebarButtonText && (
-						<Button
-							onClick={() => setSidebarOpenState(!sidebarOpenState)}
-							className="ss__search__sidebar-wrapper-toggle"
-							name={'search__sidebar-wrapper-toggle-button'}
-							{...subProps.Button}
-						>
+						<Button onClick={() => setSidebarOpenState(!sidebarOpenState)} className="ss__search__sidebar-wrapper-toggle" {...subProps.Button}>
 							{toggleSidebarButtonText}
 						</Button>
 					)}
 
 					{!hideTopToolbar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" name={'topToolBar'} controller={controller} />
+						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" controller={controller} />
 					)}
 
 					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
@@ -276,12 +282,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-						<Toolbar
-							{...subProps.BottomToolbar}
-							name={'bottomToolBar'}
-							className="ss__search__content__toolbar--bottom-toolbar"
-							controller={controller}
-						/>
+						<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />
 					)}
 				</div>
 			</div>
@@ -300,7 +301,7 @@ export interface SearchProps extends ComponentProps {
 	hideTopToolbar?: boolean;
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
-	p?: string;
+	toggleSidebarButtonText?: string;
 }
 
 export type layoutConfig = {

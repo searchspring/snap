@@ -89,6 +89,7 @@ export function List(properties: ListProps): JSX.Element {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	let selected = props.selected;
@@ -103,6 +104,7 @@ export function List(properties: ListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -113,6 +115,7 @@ export function List(properties: ListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

@@ -112,7 +112,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		};
 	}
 
-	const { onSelect, disabled, options, hideLabels, disableStyles, className, style, type, carousel, grid } = props;
+	const { onSelect, disabled, options, hideLabels, disableStyles, className, style, type, carousel, grid, treePath } = props;
 
 	const subProps: SwatchesSubProps = {
 		carousel: {
@@ -129,6 +129,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		grid: {
 			// default props
@@ -147,6 +148,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		image: {
 			// default props
@@ -159,6 +161,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -244,8 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 	| { //  & (
-// 			type?: 'carousel';
+} & // 			type?: 'carousel'; // 	| { //  & (
 // 			carousel?: Partial<CarouselProps>;
 // 	  }
 // 	| {

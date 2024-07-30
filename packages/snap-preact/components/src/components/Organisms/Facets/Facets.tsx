@@ -25,7 +25,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
-	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller } = props;
+	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller, treePath } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -76,6 +76,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 

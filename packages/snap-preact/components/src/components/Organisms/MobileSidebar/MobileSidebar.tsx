@@ -13,6 +13,7 @@ import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { useA11y } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
+import { IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	toolbar: () =>
@@ -86,6 +87,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		disableStyles,
 		className,
 		style,
+		treePath,
 	} = props;
 
 	const styling: { css?: StylingCSS } = {};
@@ -109,6 +111,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -120,6 +123,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sidebar: {
 			// default props
@@ -136,6 +140,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -164,7 +169,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 						{!hideCloseButton && (
 							<Button
 								className="ss__mobile-sidebar__header__close-button"
-								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
 								aria-label={closeButtonText || `close ${openButtonText} button`}
 								onClick={() => toggleActive()}
@@ -182,14 +186,13 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					</div>
 				)}
 
-				<Sidebar className="ss__mobile-sidebar__body" name={'mobile-sidebar__body'} controller={controller} {...subProps.sidebar} />
+				<Sidebar className="ss__mobile-sidebar__body" controller={controller} {...subProps.sidebar} />
 
 				{!hideFooter && (
 					<div className="ss__mobile-sidebar__footer">
 						{!hideApplyButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__apply-button"
-								name={'mobile-sidebar__footer__apply-button'}
 								content={applyButtonText}
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
@@ -199,7 +202,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 						{!hideClearButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__clear-button"
-								name={'mobile-sidebar__footer__clear-button'}
 								icon={clearButtonIcon}
 								content={clearButtonText}
 								onClick={() => {
@@ -223,7 +225,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					buttonContent={
 						<Button
 							className="ss__mobile-sidebar__slideout__button"
-							name={'mobile-sidebar__slideout__button'}
 							icon={openButtonIcon}
 							ref={openButtonRef}
 							{...subProps.button}
@@ -250,11 +251,11 @@ export interface MobileSidebarProps extends ComponentProps {
 	titleText?: string;
 	openButtonText?: string;
 	clearButtonText?: string;
-	applyButtonIcon?: string;
-	clearButtonIcon?: string;
+	applyButtonIcon?: IconType;
+	clearButtonIcon?: IconType;
 	applyButtonText?: string;
-	closeButtonIcon?: string;
-	openButtonIcon?: string;
+	closeButtonIcon?: IconType;
+	openButtonIcon?: IconType;
 	hideHeader?: boolean;
 	hideFooter?: boolean;
 	hideFacets?: boolean;

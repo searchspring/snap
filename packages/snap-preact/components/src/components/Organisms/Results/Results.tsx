@@ -90,7 +90,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		};
 	}
 
-	const { disableStyles, resultComponent, className, layout, style, theme, styleScript, controller } = props;
+	const { disableStyles, resultComponent, className, layout, style, theme, styleScript, controller, treePath } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -104,6 +104,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		inlineBanner: {
 			// default props
@@ -116,6 +117,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

@@ -50,7 +50,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript, treePath } =
+		props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -64,6 +65,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

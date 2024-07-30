@@ -97,6 +97,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		style,
 		styleScript,
 		controller,
+		treePath,
 	} = props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
@@ -112,6 +113,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		calloutBadge: {
 			// default props
@@ -125,6 +127,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		overlayBadge: {
 			// default props
@@ -139,6 +142,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		image: {
 			// default props
@@ -153,7 +157,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			theme: props?.theme,
+			theme: props.theme,
+			treePath,
 		},
 	};
 

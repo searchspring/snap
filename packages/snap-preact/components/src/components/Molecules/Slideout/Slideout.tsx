@@ -47,8 +47,20 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, style, styleScript } =
-		props;
+	const {
+		children,
+		active,
+		buttonContent,
+		noButtonWrapper,
+		displayAt,
+		transitionSpeed,
+		overlayColor,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		treePath,
+	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -64,6 +76,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

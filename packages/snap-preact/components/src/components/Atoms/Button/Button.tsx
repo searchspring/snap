@@ -44,7 +44,21 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript, ...additionalProps } = props;
+	const {
+		content,
+		children,
+		disabled,
+		native,
+		onClick,
+		disableA11y,
+		disableStyles,
+		className,
+		icon,
+		style,
+		styleScript,
+		treePath,
+		...additionalProps
+	} = props;
 
 	const subProps: ButtonSubProps = {
 		icon: {
@@ -57,6 +71,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

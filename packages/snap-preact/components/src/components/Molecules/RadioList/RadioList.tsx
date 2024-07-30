@@ -70,6 +70,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: RadioListSubProps = {
@@ -84,6 +85,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		Icon: {
 			className: 'ss__radio-list__option__icon',
@@ -93,6 +95,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

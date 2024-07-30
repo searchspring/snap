@@ -68,10 +68,12 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: RadioSubProps = {
 		activeIcon: {
+			name: 'active',
 			// default props
 			className: 'ss__radio__icon--active',
 			// global theme
@@ -84,8 +86,10 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		inactiveIcon: {
+			name: 'inactive',
 			// default props
 			className: 'ss__radio__icon--inactive',
 			// global theme
@@ -98,6 +102,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -162,15 +167,10 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					aria-checked={checkedState}
 				>
 					{checkedState ? (
-						<Icon
-							{...subProps.activeIcon}
-							name="ss__radio__icon--active"
-							{...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))}
-						/>
+						<Icon {...subProps.activeIcon} {...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))} />
 					) : (
 						<Icon
 							{...subProps.inactiveIcon}
-							name="ss__radio__icon--inactive"
 							{...(typeof unCheckedIcon == 'string' ? { icon: unCheckedIcon } : (unCheckedIcon as Partial<IconProps>))}
 						/>
 					)}

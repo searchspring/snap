@@ -25,8 +25,20 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, styleScript, className } =
-		props;
+	const {
+		controller,
+		hideTitle,
+		titleText,
+		hideFacets,
+		hidePerPage,
+		hideSortBy,
+		hideFilterSummary,
+		disableStyles,
+		style,
+		styleScript,
+		className,
+		treePath,
+	} = props;
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -51,6 +63,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facets: {
 			// default props
@@ -63,6 +76,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sortBy: {
 			// default props
@@ -75,6 +89,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		perPage: {
 			// default props
@@ -87,6 +102,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

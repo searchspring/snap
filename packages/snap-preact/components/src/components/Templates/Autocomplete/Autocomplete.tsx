@@ -343,6 +343,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		style,
 		controller,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: AutocompleteSubProps = {
@@ -354,6 +355,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		banner: {
 			// default props
@@ -364,6 +366,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		results: {
 			// default props
@@ -376,6 +379,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -388,6 +392,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -688,7 +693,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
 												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
 												{search.query.string}"
-												<Icon name="seeMoreIcon" {...subProps.icon} />
+												<Icon {...subProps.icon} />
 											</a>
 										</div>
 									) : null

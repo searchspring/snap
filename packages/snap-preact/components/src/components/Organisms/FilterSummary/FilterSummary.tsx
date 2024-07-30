@@ -10,6 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
+import { IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	filterSummary: ({}: Partial<FilterSummaryProps>) =>
@@ -53,6 +54,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: FilterSummarySubProps = {
@@ -70,6 +72,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -114,7 +117,7 @@ export interface FilterSummaryProps extends ComponentProps {
 	filters?: FilterType[];
 	title?: string;
 	filterIcon?: string;
-	clearAllIcon?: string;
+	clearAllIcon?: IconType;
 	separator?: string;
 	hideFacetLabel?: boolean;
 	clearAllLabel?: string;

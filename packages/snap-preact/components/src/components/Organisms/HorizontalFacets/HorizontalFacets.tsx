@@ -103,6 +103,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		style,
 		styleScript,
 		controller,
+		treePath,
 	} = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -157,6 +158,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -169,6 +171,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facet: {
 			// default props
@@ -184,6 +187,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		MobileSidebar: {
 			// default props
@@ -198,6 +202,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
