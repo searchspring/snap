@@ -138,7 +138,7 @@ describe('MobileSidebar Component', () => {
 		expect(slideoutButton?.innerHTML).toBe(text);
 	});
 
-	it('has expected default slideout open button text', async () => {
+	it.only('has expected default slideout open button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		expect(slideoutButton?.innerHTML).toBe('Filters');

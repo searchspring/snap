@@ -331,7 +331,7 @@ describe('Select Component', () => {
 
 			expect(icon).toBeInTheDocument();
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg>'
+				'<span class="ss__select__label" aria-expanded="false" role="button" ss-lang="dropdownButton" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg>'
 			);
 			expect(selection).not.toBeInTheDocument();
 		});
@@ -348,7 +348,7 @@ describe('Select Component', () => {
 			expect(icon).not.toBeInTheDocument();
 
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span>'
+				'<span class="ss__select__label" aria-expanded="false" role="button" ss-lang="dropdownButton" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span>'
 			);
 			expect(selection).toBeInTheDocument();
 		});

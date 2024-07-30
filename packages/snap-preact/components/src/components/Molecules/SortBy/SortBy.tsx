@@ -5,12 +5,14 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { RadioList, RadioListProps } from '../RadioList';
 import { List, ListProps } from '../List';
+import { lang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	sortBy: ({}: Partial<SortByProps>) => css({}),
@@ -77,6 +79,16 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		label: {
+			value: label,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	// options can be an Array or ObservableArray - but should have length
 	return store?.current && typeof store?.options == 'object' && store.options?.length ? (
 		<CacheProvider>
@@ -90,6 +102,9 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					selected={store.current}
 					onSelect={(e, selection) => {
 						selection?.url?.go();
+					}}
+					lang={{
+						label: lang.label,
 					}}
 				/>
 			)}
@@ -138,4 +153,12 @@ export interface SortByProps extends ComponentProps {
 	controller?: SearchController;
 	label?: string;
 	type?: 'dropdown' | 'list' | 'radio';
+	lang?: Partial<SortByLang>;
+}
+
+export interface SortByLang {
+	label: lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }

@@ -11,12 +11,13 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
-import { useMediaQuery } from '../../../hooks';
+import { lang, useMediaQuery } from '../../../hooks';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Search: ({ mobileSidebarDisplayAt }: Partial<SearchProps>) =>
@@ -221,6 +222,16 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const [sidebarOpenState, setSidebarOpenState] = useState(true);
 
+	//initialize lang
+	const defaultLang: Partial<SearchLang> = {
+		toggleSidebarButtonText: {
+			value: toggleSidebarButtonText,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search', className)}>
@@ -252,9 +263,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							className="ss__search__sidebar-wrapper-toggle"
 							name={'search__sidebar-wrapper-toggle-button'}
 							{...subProps.Button}
-						>
-							{toggleSidebarButtonText}
-						</Button>
+							lang={{
+								button: lang.toggleSidebarButtonText,
+							}}
+						></Button>
 					)}
 
 					{!hideTopToolbar && store.pagination.totalResults > 0 && (
@@ -301,6 +313,11 @@ export interface SearchProps extends ComponentProps {
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
 	toggleSidebarButtonText?: string;
+	lang?: Partial<SearchLang>;
+}
+
+export interface SearchLang {
+	toggleSidebarButtonText?: lang<Record<string, never>>;
 }
 
 export type layoutConfig = {

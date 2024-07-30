@@ -14,6 +14,10 @@ import type { RecommendationController, RecommendationControllerConfig } from '@
 import type { ResultComponent } from '../../../';
 import type { FunctionalComponent } from 'preact';
 import type { SnapTemplates } from '../../../../../src';
+import type { AbstractController } from '@searchspring/snap-controller';
+import deepmerge from 'deepmerge';
+import { useLang } from '../../../hooks';
+import type { lang } from '../../../hooks';
 
 const CSS = {
 	noResults: () => css({}),
@@ -121,6 +125,43 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
 
+	//deep merge with props.lang
+	const defaultLang: Partial<NoResultsLang> = {
+		suggestionsTitleText: {
+			value: suggestionsTitleText,
+		},
+		suggestionsList: {
+			value: `${
+				suggestionsList
+					? suggestionsList.map((suggestion: any) => `<li class="ss__no-results__suggestions__list__option">${suggestion}</li>`)
+					: undefined
+			}
+			`,
+		},
+		contactsTitleText: {
+			value: contactsTitleText,
+		},
+		contactsList: {
+			value: `${
+				contactsList
+					? contactsList.map(
+							(contact: NoResultsContact) =>
+								`<div class='ss__no-results__contact__detail ss__no-results__contact__detail--${filters.handleize(
+									contact.title
+								)}'><h4 class="ss__no-results__contact__detail__title">${contact.title}</h4><p class="ss__no-results__contact__detail__content">${
+									contact.content
+								}</p></div>`
+					  )
+					: undefined
+			}`,
+		},
+	};
+
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller: controller,
+	});
+
 	return (
 		<div className={classnames('ss__no-results', className)} {...styling}>
 			{contentSlot &&
@@ -132,32 +173,17 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{!hideSuggestions && (suggestionsTitleText || suggestionsExist) && (
 				<div className="ss__no-results__suggestions">
-					{suggestionsTitleText && (
-						<h4 className="ss__no-results__suggestions__title" dangerouslySetInnerHTML={{ __html: suggestionsTitleText }}></h4>
-					)}
+					{suggestionsTitleText && <h4 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText}></h4>}
 
-					{suggestionsExist && (
-						<ul className="ss__no-results__suggestions__list">
-							{suggestionsList.map((suggestion: any) => (
-								<li className="ss__no-results__suggestions__list__option" dangerouslySetInnerHTML={{ __html: suggestion }}></li>
-							))}
-						</ul>
-					)}
+					{suggestionsExist && <ul className="ss__no-results__suggestions__list" {...mergedLang.suggestionsList}></ul>}
 				</div>
 			)}
 
 			{!hideContact && (contactsTitleText || contactsExist) && (
 				<div className="ss__no-results__contact">
-					{contactsTitleText && <h4 className="ss__no-results__contact__title" dangerouslySetInnerHTML={{ __html: contactsTitleText }}></h4>}
+					{contactsTitleText && <h4 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText}></h4>}
 
-					{contactsExist &&
-						contactsList.map((contact: NoResultsContact) => (
-							<div className={`ss__no-results__contact__detail ss__no-results__contact__detail--${filters.handleize(contact.title)}`}>
-								<h4 className="ss__no-results__contact__detail__title" dangerouslySetInnerHTML={{ __html: contact.title }}></h4>
-
-								<p className="ss__no-results__contact__detail__content" dangerouslySetInnerHTML={{ __html: contact.content }}></p>
-							</div>
-						))}
+					{contactsExist && <div {...mergedLang.contactsList}></div>}
 				</div>
 			)}
 
@@ -187,7 +213,7 @@ export interface NoResultsProps extends ComponentProps {
 	hideSuggestions?: boolean;
 	contactsTitleText?: string;
 	contactsList?: NoResultsContact[];
-
+	lang?: NoResultsLang;
 	templates?: {
 		recommendation?: {
 			enabled: boolean;
@@ -196,4 +222,11 @@ export interface NoResultsProps extends ComponentProps {
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};
+}
+
+export interface NoResultsLang {
+	suggestionsTitleText: lang<{ controller: AbstractController }>;
+	contactsTitleText: lang<{ controller: AbstractController }>;
+	contactsList: lang<{ controller: AbstractController }>;
+	suggestionsList: lang<{ controller: AbstractController }>;
 }

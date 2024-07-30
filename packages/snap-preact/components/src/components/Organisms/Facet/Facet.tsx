@@ -19,6 +19,8 @@ import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	facet: ({ color, theme }: Partial<FacetProps>) =>
@@ -289,6 +291,31 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		className,
 		...props,
 	};
+
+	//initialize lang
+	const defaultLang = {
+		showMoreText: {
+			value: facetContentProps.showMoreText,
+		},
+		showLessText: {
+			value: facetContentProps.showLessText,
+		},
+		dropdownButton: {
+			attributes: {
+				'aria-label': `currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
+					(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
+				}`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		facet,
+	});
+	facetContentProps.lang = mergedLang;
+
 	if (justContent) {
 		return <FacetContent {...facetContentProps}></FacetContent>;
 	}
@@ -307,9 +334,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
 							role="heading"
 							aria-level={3}
-							aria-label={`currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
-								(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
-							}`}
+							{...mergedLang.dropdownButton}
 						>
 							{facet?.label}
 							{!disableCollapse && (
@@ -343,13 +368,12 @@ const FacetContent = (props: any) => {
 		overflowSlot,
 		optionsSlot,
 		searchable,
-		showMoreText,
-		showLessText,
 		iconOverflowMore,
 		iconOverflowLess,
 		disableOverflow,
 		previewOnFocus,
 		valueProps,
+		lang,
 	} = props;
 
 	return (
@@ -393,15 +417,11 @@ const FacetContent = (props: any) => {
 						cloneWithProps(overflowSlot, { facet })
 					) : (
 						<Fragment>
-							{
-								<Icon
-									{...subProps.showMoreLessIcon}
-									{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
-										? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
-										: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
-								/>
-							}
-							<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
+							<Icon
+								{...subProps.showMoreLessIcon}
+								icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
+							/>
+							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? { ...lang.showMoreText } : { ...lang.showLessText })}></span>
 						</Fragment>
 					)}
 				</div>
@@ -448,6 +468,19 @@ interface OptionalFacetProps extends ComponentProps {
 	searchable?: boolean;
 	justContent?: boolean;
 	horizontal?: boolean;
+	lang?: Partial<FacetLang>;
+}
+
+export interface FacetLang {
+	showMoreText: lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
+	showLessText: lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
+	dropdownButton: lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
 }
 
 type FieldProps = {

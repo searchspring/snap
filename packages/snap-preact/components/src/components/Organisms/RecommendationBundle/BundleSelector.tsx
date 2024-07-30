@@ -7,6 +7,8 @@ import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { mergeProps } from '../../../utilities';
 import type { ComponentProps, StylingCSS } from '../../../types';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	bundleSelector: ({}: Partial<BundleSelectorProps>) => css({}),
@@ -55,6 +57,10 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		styling.css = [style];
 	}
 
+	//deep merge with props.lang
+	const lang = deepmerge({}, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return (
 		<div
 			{...styling}
@@ -67,7 +73,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		>
 			<div className="ss__recommendation-bundle__wrapper__selector__result-wrapper">
 				{!hideCheckboxes && <Checkbox {...subProps.checkbox} />}
-				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
+				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'} {...mergedLang.seedText}></div>}
 				{children}
 			</div>
 			{icon ? <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} /> : undefined}
@@ -87,5 +93,10 @@ export interface BundleSelectorProps extends ComponentProps {
 	seed?: boolean;
 	hideCheckboxes?: boolean;
 	onCheck?: () => void;
-	icon?: IconType | Partial<IconProps> | false;
+	icon?: IconType | Partial<IconProps> | boolean;
+	lang?: Partial<BundleSelectorLang>;
+}
+
+export interface BundleSelectorLang {
+	seedText: lang<Record<string, never>>;
 }

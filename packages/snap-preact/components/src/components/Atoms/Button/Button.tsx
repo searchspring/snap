@@ -9,6 +9,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
@@ -44,7 +46,8 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript, ...additionalProps } = props;
+	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript, lang, ...additionalProps } =
+		props;
 
 	const subProps: ButtonSubProps = {
 		icon: {
@@ -87,16 +90,23 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		ref: (e: any) => useA11y(e),
 	};
 
-	return content || children || icon ? (
+	//initialize lang
+	const defaultLang = {};
+
+	//deep merge with props.lang
+	const langs = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(langs as any, {});
+
+	return content || children || icon || mergedLang?.button?.dangerouslySetInnerHTML ? (
 		<CacheProvider>
 			{native ? (
-				<button {...elementProps}>
+				<button {...elementProps} {...mergedLang.button}>
 					{content}
 					{children}
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled} {...mergedLang.button}>
 					{content}
 					{children}
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
@@ -123,4 +133,9 @@ export interface ButtonProps extends ComponentProps {
 	native?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	disableA11y?: boolean;
+	lang?: Partial<ButtonLang>;
+}
+
+export interface ButtonLang {
+	button?: lang<Record<string, never>>;
 }

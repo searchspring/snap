@@ -9,6 +9,10 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
+import { useLang } from '../../../hooks';
+import type { lang } from '../../../hooks';
+import deepmerge from 'deepmerge';
+
 const CSS = {
 	searchheader: ({}: Partial<SearchHeaderProps>) => css({}),
 };
@@ -43,7 +47,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
 	const { disableStyles, style, styleScript, className } = props;
 
-	let { titleText, subtitleText: subTitleText, correctedQueryText, noResultsText, didYouMeanText } = props;
+	const { titleText, subtitleText, correctedQueryText, noResultsText, didYouMeanText } = props;
 
 	const styling: { css?: StylingCSS } = {};
 	const stylingProps = props;
@@ -56,26 +60,40 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	const data: data = {
-		pagination: pagination,
-		search: search,
+	//initialize lang
+	const defaultLang = {
+		titleText: {
+			value: titleText,
+			attributes: {
+				'aria-label': `Now showing ${pagination?.totalResults} items in the product grid`,
+			},
+		},
+		subtitleText: {
+			value: subtitleText,
+		},
+		correctedQueryText: {
+			value: correctedQueryText,
+			attributes: {
+				'aria-label': `No results found for ${search?.originalQuery?.string}, showing results for ${search?.query?.string} instead`,
+			},
+		},
+		noResultsText: {
+			value: noResultsText,
+			attributes: {
+				'aria-label': `No results found for ${search?.query?.string}`,
+			},
+		},
+		didYouMeanText: {
+			value: didYouMeanText,
+		},
 	};
 
-	if (typeof titleText == 'function') {
-		titleText = titleText(data);
-	}
-	if (typeof subTitleText == 'function') {
-		subTitleText = subTitleText(data);
-	}
-	if (typeof correctedQueryText == 'function') {
-		correctedQueryText = correctedQueryText(data);
-	}
-	if (typeof noResultsText == 'function') {
-		noResultsText = noResultsText(data);
-	}
-	if (typeof didYouMeanText == 'function') {
-		didYouMeanText = didYouMeanText(data);
-	}
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		pagination: pagination,
+		search: search,
+	});
 
 	return (
 		<CacheProvider>
@@ -90,8 +108,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 									className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
 									aria-atomic="true"
 									aria-live="polite"
-									aria-label={`Now showing ${pagination.totalResults} items in the product grid`}
-									dangerouslySetInnerHTML={{ __html: titleText as string }}
+									{...mergedLang.titleText}
 								></h3>
 
 								{search?.originalQuery && (
@@ -99,8 +116,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 										className={classnames('ss__search-header__title', 'ss__search-header__title--corrected')}
 										aria-atomic="true"
 										aria-live="polite"
-										aria-label={`No results found for ${search.originalQuery?.string}, showing results for ${search.query?.string} instead`}
-										dangerouslySetInnerHTML={{ __html: correctedQueryText as string }}
+										{...mergedLang.correctedQueryText}
 									></h5>
 								)}
 							</>
@@ -111,8 +127,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 										className={classnames('ss__search-header__title', 'ss__search-header__title--no-results')}
 										aria-atomic="true"
 										aria-live="polite"
-										aria-label={`No results found for ${search?.query?.string}`}
-										dangerouslySetInnerHTML={{ __html: noResultsText as string }}
+										{...mergedLang.noResultsText}
 									></h3>
 
 									{search?.didYouMean && (
@@ -120,19 +135,19 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 											className={classnames('ss__search-header__title', 'ss__search-header__title--dym')}
 											aria-atomic="true"
 											aria-live="polite"
-											dangerouslySetInnerHTML={{ __html: didYouMeanText as string }}
+											{...mergedLang.didYouMeanText}
 										></h4>
 									)}
 								</div>
 							)
 						)}
 
-						{subTitleText && (
+						{subtitleText && (
 							<h4
 								className={classnames('ss__search-header__title', 'ss__search-header__title--subtitle')}
 								aria-atomic="true"
 								aria-live="polite"
-								dangerouslySetInnerHTML={{ __html: subTitleText as string }}
+								{...mergedLang.subtitleText}
 							></h4>
 						)}
 					</Fragment>
@@ -153,6 +168,30 @@ export interface SearchHeaderProps extends ComponentProps {
 	correctedQueryText?: string | ((data: data) => string);
 	noResultsText?: string | ((data: data) => string);
 	didYouMeanText?: string | ((data: data) => string);
+	lang?: Partial<SearchHeaderLang>;
+}
+
+export interface SearchHeaderLang {
+	titleText: lang<{
+		pagination: SearchPaginationStore;
+		search: SearchQueryStore;
+	}>;
+	correctedQueryText: lang<{
+		pagination: SearchPaginationStore;
+		search: SearchQueryStore;
+	}>;
+	noResultsText: lang<{
+		pagination: SearchPaginationStore;
+		search: SearchQueryStore;
+	}>;
+	didYouMeanText: lang<{
+		pagination: SearchPaginationStore;
+		search: SearchQueryStore;
+	}>;
+	subtitleText?: lang<{
+		pagination: SearchPaginationStore;
+		search: SearchQueryStore;
+	}>;
 }
 
 interface data {

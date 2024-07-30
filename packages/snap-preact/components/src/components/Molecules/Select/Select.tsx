@@ -12,6 +12,8 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
@@ -207,6 +209,30 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 	const selectedOptions = options.filter((option) => selection?.value === option.value);
 
+	//initialize lang
+	const defaultLang = {
+		dropdownButton: {
+			attributes: {
+				'aria-label': `${label} dropdown, ${options.length} options ${
+					selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+				}`,
+			},
+		},
+		label: {
+			value: label,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		options,
+		selectedOptions,
+		label,
+		open,
+		selection,
+	});
+
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
@@ -215,7 +241,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 					<>
 						{label && !hideLabelOnSelection && (
 							<span className="ss__select__label">
-								{label}
+								<label {...mergedLang.label}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
 							</span>
 						)}
@@ -257,15 +283,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						button={
 							<Button {...subProps.button} disableA11y={true}>
 								{label && !hideLabelOnSelection && (
-									<span
-										className="ss__select__label"
-										ref={(e) => useA11y(e)}
-										aria-label={`${label} dropdown, ${options.length} options ${
-											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
-										}`}
-										aria-expanded={open}
-										role="button"
-									>
+									<span className="ss__select__label" ref={(e) => useA11y(e)} aria-expanded={open} role="button" {...mergedLang.dropdownButton}>
 										{label}
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
@@ -356,4 +374,19 @@ export interface SelectProps extends ComponentProps {
 	hideIcon?: boolean;
 	hideOptionIcons?: boolean;
 	hideOptionLabels?: boolean;
+	lang?: Partial<SelectLang>;
+}
+
+export interface SelectLang {
+	dropdownButton: lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+		label: string;
+		open: boolean;
+		selection?: ListOption;
+	}>;
+	label?: lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }

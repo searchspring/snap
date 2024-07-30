@@ -16,6 +16,8 @@ import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '.
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -123,11 +125,22 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang: Partial<RecommendationLang> = {
+		titleText: {
+			value: `${title}`,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)}>
 				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					{title && <h3 className="ss__recommendation__title" {...mergedLang.titleText}></h3>}
 					<Carousel
 						prevButton={prevButton}
 						nextButton={nextButton}
@@ -167,6 +180,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 });
 
 export type RecommendationProps = {
+	controller: RecommendationController;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
@@ -175,12 +189,18 @@ export type RecommendationProps = {
 	loop?: boolean;
 	results?: Product[];
 	pagination?: boolean;
-	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
 	resultComponent?: ResultComponent;
+	lang?: Partial<RecommendationLang>;
 } & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;
+
+export interface RecommendationLang {
+	titleText?: lang<{
+		controller: RecommendationController;
+	}>;
+}
 
 interface RecommendationSubProps {
 	result: Partial<ResultProps>;

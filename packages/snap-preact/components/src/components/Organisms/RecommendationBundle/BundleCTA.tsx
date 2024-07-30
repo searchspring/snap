@@ -10,6 +10,8 @@ import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
+import { lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -45,6 +47,11 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			theme: props?.theme,
 		},
 	};
+
+	//deep merge with props.lang
+	const lang = deepmerge({}, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return (
 		<div className={`ss__recommendation-bundle__wrapper__cta`}>
 			{ctaSlot ? (
@@ -80,6 +87,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						})}
 						onClick={(e) => onAddToCart(e)}
 						disabled={addedToCart}
+						{...(addedToCart ? mergedLang.ctaButtonSuccessText : mergedLang.ctaButtonText)}
 					>
 						{addedToCart ? ctaButtonSuccessText : ctaButtonText}
 					</Button>
@@ -102,4 +110,10 @@ interface BundledCTAProps extends ComponentProps {
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;
 	addedToCart?: boolean;
+	lang?: Partial<BundledCTALang>;
+}
+
+export interface BundledCTALang {
+	ctaButtonSuccessText: lang<Record<string, never>>;
+	ctaButtonText: lang<Record<string, never>>;
 }
