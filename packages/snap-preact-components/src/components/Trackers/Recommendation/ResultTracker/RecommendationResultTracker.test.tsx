@@ -396,7 +396,11 @@ describe('RecommendationResultTracker Component', () => {
 
 		const resultElem = rendered.container.querySelector('.findMe');
 
+		expect(trackfn).toHaveBeenCalledTimes(0);
+
 		await userEvent.click(resultElem!);
+
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			category: BeaconCategory.RECOMMENDATIONS,
