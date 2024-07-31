@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined } from '../../../utilities';
-import { useState } from 'react';
+import { useState } from 'preact/hooks';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { useA11y } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';

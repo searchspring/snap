@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.58.3](https://github.com/searchspring/snap/compare/v0.58.2...v0.58.3) (2024-07-31)
+
+### Bug Fixes
+
+- **cartstore:** bugfix for cartstore handling floating 0s for pricing ([9c31166](https://github.com/searchspring/snap/commit/9c311669f0875af758c3a0aba25ce654886e4b96))
+- **cartstore:** handle floating 0s in cartstore pricing ([b34e004](https://github.com/searchspring/snap/commit/b34e004a83ff24d0b00e715e4b2177830825d611))
+- **preact-components-recommendationbundle:** adding hideSeed prop ([44ab1d6](https://github.com/searchspring/snap/commit/44ab1d622fddb153f97c6f2358bd20b8fe048eff))
+
+### Reverts
+
+- **cartstore:** reverting previous commit that was directly to develop ([5eef09a](https://github.com/searchspring/snap/commit/5eef09a306fd650cc08844ce580d7c02c283451a))
+
 ## [0.58.2](https://github.com/searchspring/snap/compare/v0.58.1...v0.58.2) (2024-07-08)
 
 **Note:** Version bump only for package @searchspring/snap
