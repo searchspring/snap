@@ -57,6 +57,13 @@ The `enabled` prop is a sub prop under the `carousel` prop. It specifies weather
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />
 ```
 
+### hideSeed
+The `hideSeed` prop specifies if the seed result should be rendered or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
+```
+
 ### seedInCarousel
 The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
 

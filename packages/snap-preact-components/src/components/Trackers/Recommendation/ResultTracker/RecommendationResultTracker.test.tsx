@@ -35,7 +35,7 @@ const theme = {
 };
 
 describe('RecommendationResultTracker Component', () => {
-	beforeAll(() => {
+	beforeEach(() => {
 		const mock = jest.fn(() => ({
 			observe: jest.fn(),
 			unobserve: jest.fn(),
@@ -44,6 +44,12 @@ describe('RecommendationResultTracker Component', () => {
 
 		//@ts-ignore
 		window.IntersectionObserver = mock;
+	});
+
+	afterEach(() => {
+		//@ts-ignore
+		window.IntersectionObserver.mockReset();
+		jest.clearAllMocks();
 	});
 
 	afterAll(() => {
@@ -178,6 +184,244 @@ describe('RecommendationResultTracker Component', () => {
 				},
 			})
 		);
+
+		trackfn.mockClear();
+	});
+
+	it('can use track prop to disable tracking for impressions', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
+
+		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+
+		await controller.search();
+
+		const rendered = render(
+			<RecommendationProfileTracker controller={controller}>
+				{controller.store.results.map((result, idx) => (
+					<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+						<div className={'findMe'} key={idx}>
+							<div className="result">{result.mappings.core?.name}</div>
+						</div>
+					</RecommendationResultTracker>
+				))}
+			</RecommendationProfileTracker>
+		);
+
+		await waitFor(() => {
+			expect(trackfn).toHaveBeenCalledTimes(21);
+		});
+
+		// other 20 calls are for product render
+		controller.store.results.map((result) => {
+			expect(trackfn).toHaveBeenCalledWith({
+				type: BeaconType.PROFILE_PRODUCT_RENDER,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				pid: controller.events.render!.id,
+				event: {
+					context: {
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: result.id,
+						seed: undefined,
+						mappings: {
+							core: result.mappings.core,
+						},
+					},
+				},
+			});
+		});
+
+		trackfn.mockClear();
+
+		for (let i = 0; i < 21; i++) {
+			// @ts-ignore
+			const [callback] = window.IntersectionObserver.mock.calls[i];
+
+			callback([
+				{
+					isIntersecting: true,
+					intersectionRatio: 10,
+				},
+			]);
+		}
+
+		await waitFor(() => {
+			expect(trackfn).not.toHaveBeenCalled();
+		});
+
+		const resultElem = rendered.container.querySelector('.findMe');
+
+		await userEvent.click(resultElem!);
+
+		expect(trackfn).toHaveBeenNthCalledWith(
+			3,
+			expect.objectContaining({
+				type: BeaconType.PROFILE_PRODUCT_CLICK,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				// pid: controller.events.click?.id,
+				event: {
+					context: {
+						action: 'navigate',
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: controller.store.results[0].id,
+						seed: undefined,
+						mappings: {
+							core: controller.store.results[0].mappings.core,
+						},
+					},
+				},
+			})
+		);
+
+		trackfn.mockClear();
+	});
+
+	it('can use track prop to disable tracking for clicks', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
+
+		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+
+		await controller.search();
+
+		const rendered = render(
+			<RecommendationProfileTracker controller={controller}>
+				<div>
+					{controller.store.results.map((result, idx) => (
+						<RecommendationResultTracker controller={controller} result={result} track={{ click: false }}>
+							<div className={'findMe'} key={idx}>
+								<div className="result">{result.mappings.core?.name}</div>
+							</div>
+						</RecommendationResultTracker>
+					))}
+				</div>
+			</RecommendationProfileTracker>
+		);
+
+		await waitFor(() => {
+			expect(trackfn).toHaveBeenCalledTimes(21);
+		});
+
+		// other 20 calls are for product render
+		controller.store.results.map((result) => {
+			expect(trackfn).toHaveBeenCalledWith({
+				type: BeaconType.PROFILE_PRODUCT_RENDER,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				pid: controller.events.render!.id,
+				event: {
+					context: {
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: result.id,
+						seed: undefined,
+						mappings: {
+							core: result.mappings.core,
+						},
+					},
+				},
+			});
+		});
+
+		trackfn.mockClear();
+
+		for (let i = 0; i < 21; i++) {
+			// @ts-ignore
+			const [callback] = window.IntersectionObserver.mock.calls[i];
+
+			callback([
+				{
+					isIntersecting: true,
+					intersectionRatio: 10,
+				},
+			]);
+		}
+
+		await waitFor(() => {
+			expect(trackfn).toHaveBeenCalledTimes(21);
+		});
+
+		//results should have done impression tracking
+		controller.store.results.map((result) => {
+			expect(trackfn).toHaveBeenCalledWith({
+				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				pid: controller.events.impression?.id,
+				event: {
+					context: {
+						placement: controller.store.profile.placement,
+						tag: controller.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					product: {
+						id: result.id,
+						seed: undefined,
+						mappings: {
+							core: result.mappings.core,
+						},
+					},
+				},
+			});
+		});
+
+		trackfn.mockClear();
+
+		const resultElem = rendered.container.querySelector('.findMe');
+
+		expect(trackfn).toHaveBeenCalledTimes(0);
+
+		await userEvent.click(resultElem!);
+
+		expect(trackfn).toHaveBeenCalledTimes(1);
+
+		expect(trackfn).toHaveBeenCalledWith({
+			category: BeaconCategory.RECOMMENDATIONS,
+			context: undefined,
+			event: {
+				context: {
+					action: 'navigate',
+					placement: controller.store.profile.placement,
+					tag: controller.store.profile.tag,
+					type: 'product-recommendation',
+				},
+				profile: {
+					placement: controller.store.profile.placement,
+					seed: undefined,
+					tag: controller.store.profile.tag,
+					templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
+					threshold: 4,
+				},
+			},
+			type: BeaconType.PROFILE_CLICK,
+		});
 
 		trackfn.mockClear();
 	});

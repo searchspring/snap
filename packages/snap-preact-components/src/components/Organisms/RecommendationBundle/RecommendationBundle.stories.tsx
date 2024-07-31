@@ -140,6 +140,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideSeed: {
+			description: 'Hide/show seed result',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		vertical: {
 			description: 'set the recommendation to render vertically',
 			defaultValue: false,
