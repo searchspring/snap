@@ -1,4 +1,4 @@
-/*! For license information please see main.8e9ae573.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.a4793309.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -13394,7 +13394,7 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/providers/cache.tsx'),
-				react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				_hooks__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/hooks/useA11y.tsx'),
 				_Atoms_Image__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./src/utilities/defined.ts'),
@@ -13603,12 +13603,12 @@
 					styling = {};
 				disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.Grid({ theme, columns, gapSize, disableOverflowAction }), style]),
 					selected && !Array.isArray(selected) && (selected = [selected]);
-				var _useState2 = _slicedToArray((0, react__WEBPACK_IMPORTED_MODULE_22__.useState)(selected || []), 2),
+				var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_22__.J0)(selected || []), 2),
 					selection = _useState2[0],
 					setSelection = _useState2[1],
 					limit = rows && columns ? columns * rows : options.length,
 					remainder = Math.max(0, options.length - (limit - (overflowButtonInGrid ? 1 : 0))),
-					_useState4 = _slicedToArray((0, react__WEBPACK_IMPORTED_MODULE_22__.useState)(remainder), 2),
+					_useState4 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_22__.J0)(remainder), 2),
 					limited = _useState4[0],
 					setLimited = _useState4[1],
 					OverflowButtonElem = function OverflowButtonElem() {
@@ -14505,7 +14505,7 @@
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__('./src/providers/cache.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./src/utilities/defined.ts'),
-				react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				_Checkbox__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__('./src/components/Molecules/Checkbox/Checkbox.tsx'),
 				_hooks__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__('./src/hooks/useA11y.tsx'),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
@@ -14662,7 +14662,7 @@
 					styling = {};
 				disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.List({ horizontal }), style]),
 					selected && !Array.isArray(selected) && (selected = [selected]);
-				var _useState2 = _slicedToArray((0, react__WEBPACK_IMPORTED_MODULE_22__.useState)(selected || []), 2),
+				var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_22__.J0)(selected || []), 2),
 					selection = _useState2[0],
 					setSelection = _useState2[1];
 				return 'object' == typeof options && null != options && options.length
@@ -20041,7 +20041,7 @@
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__('./src/providers/cache.tsx'),
-				react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				_hooks__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_hooks__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__('./src/hooks/useA11y.tsx'),
 				_Carousel__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
@@ -20236,7 +20236,7 @@
 					selected = props.selected,
 					styling = {};
 				disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS.Swatches({ theme }), style]);
-				var _useState2 = _slicedToArray((0, react__WEBPACK_IMPORTED_MODULE_18__.useState)(selected || void 0), 2),
+				var _useState2 = _slicedToArray((0, preact_hooks__WEBPACK_IMPORTED_MODULE_18__.J0)(selected || void 0), 2),
 					selection = _useState2[0],
 					setSelection = _useState2[1],
 					makeSelection = function makeSelection(e, option) {
@@ -27895,7 +27895,6 @@
 							  )
 					);
 				}),
-				compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 				_excluded = [
 					'title',
 					'controller',
@@ -27912,6 +27911,7 @@
 					'separatorIconSeedOnly',
 					'resultComponent',
 					'ctaSlot',
+					'hideSeed',
 					'ctaButtonText',
 					'ctaButtonSuccessText',
 					'ctaButtonSuccessTimeout',
@@ -28082,6 +28082,7 @@
 						separatorIconSeedOnly = _props2.separatorIconSeedOnly,
 						resultComponent = _props2.resultComponent,
 						ctaSlot = _props2.ctaSlot,
+						hideSeed = _props2.hideSeed,
 						ctaButtonText = _props2.ctaButtonText,
 						ctaButtonSuccessText = _props2.ctaButtonSuccessText,
 						ctaButtonSuccessTimeout = _props2.ctaButtonSuccessTimeout,
@@ -28104,7 +28105,7 @@
 						throw new Error("<BundleRecommendation> Component requires 'controller' prop with an instance of RecommendationController");
 					var resultsToRender =
 						results || (null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results);
-					limit && (resultsToRender = resultsToRender.slice(0, limit));
+					limit && (resultsToRender = resultsToRender.slice(0, hideSeed ? limit + 1 : limit));
 					var cartStore = controller.store.cart;
 					if (!cartStore) throw new Error("<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store");
 					if (
@@ -28150,7 +28151,7 @@
 						? style && (styling.css = [style])
 						: (styling.css = [CSS_recommendationBundle({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }), style]);
 					var _preSelectedCount = 'number' == typeof preselectedCount ? preselectedCount : carouselEnabled ? slidesPerView : resultsToRender.length;
-					(0, compat_module.useEffect)(
+					(0, hooks_module.vJ)(
 						function () {
 							var _resultsToRender;
 							(cartStore.reset(), _preSelectedCount) &&
@@ -28234,12 +28235,13 @@
 														preact_module.FK,
 														null,
 														!seedInCarousel &&
+															!hideSeed &&
 															(0, emotion_react_browser_esm.Y)(
 																'div',
 																{ className: 'ss__recommendation-bundle__wrapper__seed-container' },
 																(0, emotion_react_browser_esm.Y)(
 																	RecommendationResultTracker.x,
-																	{ controller, result: seed },
+																	{ controller, result: seed, track: { impression: !1 } },
 																	(0, emotion_react_browser_esm.Y)(
 																		BundleSelector,
 																		{
@@ -28317,61 +28319,65 @@
 																	{ ref: carouselRef }
 																),
 																seedInCarousel
-																	? resultsToRender.map(function (result, idx) {
-																			var selected =
-																				selectedItems.findIndex(function (item) {
-																					return item.id == result.id;
-																				}) > -1;
-																			return 0 == idx
-																				? (0, emotion_react_browser_esm.Y)(
-																						RecommendationResultTracker.x,
-																						{ controller, result },
-																						(0, emotion_react_browser_esm.Y)(
-																							BundleSelector,
-																							{
-																								seedText,
-																								seed: !0,
-																								icon: separatorIcon,
-																								onCheck: function onCheck() {
-																									return onProductSelect(result);
+																	? resultsToRender
+																			.filter(function (result, idx) {
+																				return !hideSeed || 0 != idx;
+																			})
+																			.map(function (result, idx) {
+																				var selected =
+																					selectedItems.findIndex(function (item) {
+																						return item.id == result.id;
+																					}) > -1;
+																				return 0 != idx || hideSeed
+																					? (0, emotion_react_browser_esm.Y)(
+																							RecommendationResultTracker.x,
+																							{ controller, result },
+																							(0, emotion_react_browser_esm.Y)(
+																								BundleSelector,
+																								{
+																									icon: !separatorIconSeedOnly && separatorIcon,
+																									onCheck: function onCheck() {
+																										return onProductSelect(result);
+																									},
+																									checked: selected,
+																									hideCheckboxes,
+																									theme: props.theme,
+																									className:
+																										idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
 																								},
-																								checked: selected,
-																								hideCheckboxes,
-																								theme: props.theme,
-																							},
-																							resultComponent
-																								? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
-																								: (0, emotion_react_browser_esm.Y)(
-																										Result.Q,
-																										Object.assign({}, subProps.result, { controller, result })
-																								  )
-																						)
-																				  )
-																				: (0, emotion_react_browser_esm.Y)(
-																						RecommendationResultTracker.x,
-																						{ controller, result },
-																						(0, emotion_react_browser_esm.Y)(
-																							BundleSelector,
-																							{
-																								icon: !separatorIconSeedOnly && separatorIcon,
-																								onCheck: function onCheck() {
-																									return onProductSelect(result);
+																								resultComponent
+																									? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
+																									: (0, emotion_react_browser_esm.Y)(
+																											Result.Q,
+																											Object.assign({}, subProps.result, { controller, result })
+																									  )
+																							)
+																					  )
+																					: (0, emotion_react_browser_esm.Y)(
+																							RecommendationResultTracker.x,
+																							{ controller, result, track: { impression: !1 } },
+																							(0, emotion_react_browser_esm.Y)(
+																								BundleSelector,
+																								{
+																									seedText,
+																									seed: !0,
+																									icon: separatorIcon,
+																									onCheck: function onCheck() {
+																										return onProductSelect(result);
+																									},
+																									checked: selected,
+																									hideCheckboxes,
+																									theme: props.theme,
 																								},
-																								checked: selected,
-																								hideCheckboxes,
-																								theme: props.theme,
-																								className:
-																									idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
-																							},
-																							resultComponent
-																								? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
-																								: (0, emotion_react_browser_esm.Y)(
-																										Result.Q,
-																										Object.assign({}, subProps.result, { controller, result })
-																								  )
-																						)
-																				  );
-																	  })
+																								resultComponent
+																									? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
+																									: (0, emotion_react_browser_esm.Y)(
+																											Result.Q,
+																											Object.assign({}, subProps.result, { controller, result })
+																									  )
+																							)
+																					  );
+																			})
 																	: resultsToRender
 																			.filter(function (result, idx) {
 																				return 0 !== idx;
@@ -28405,54 +28411,58 @@
 															)
 														)
 												  )
-												: resultsToRender.map(function (result, idx) {
-														var selected =
-															selectedItems.findIndex(function (item) {
-																return item.id == result.id;
-															}) > -1;
-														return 0 == idx
-															? (0, emotion_react_browser_esm.Y)(
-																	RecommendationResultTracker.x,
-																	{ controller, result },
-																	(0, emotion_react_browser_esm.Y)(
-																		BundleSelector,
-																		{
-																			seedText,
-																			seed: !0,
-																			icon: separatorIcon,
-																			onCheck: function onCheck() {
-																				return onProductSelect(result);
+												: resultsToRender
+														.filter(function (result, idx) {
+															return !hideSeed || 0 != idx;
+														})
+														.map(function (result, idx) {
+															var selected =
+																selectedItems.findIndex(function (item) {
+																	return item.id == result.id;
+																}) > -1;
+															return 0 != idx || hideSeed
+																? (0, emotion_react_browser_esm.Y)(
+																		RecommendationResultTracker.x,
+																		{ controller, result },
+																		(0, emotion_react_browser_esm.Y)(
+																			BundleSelector,
+																			{
+																				icon: !separatorIconSeedOnly && separatorIcon,
+																				onCheck: function onCheck() {
+																					return onProductSelect(result);
+																				},
+																				checked: selected,
+																				hideCheckboxes,
+																				theme: props.theme,
+																				className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
 																			},
-																			checked: selected,
-																			hideCheckboxes,
-																			theme: props.theme,
-																		},
-																		resultComponent
-																			? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
-																			: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
-																	)
-															  )
-															: (0, emotion_react_browser_esm.Y)(
-																	RecommendationResultTracker.x,
-																	{ controller, result },
-																	(0, emotion_react_browser_esm.Y)(
-																		BundleSelector,
-																		{
-																			icon: !separatorIconSeedOnly && separatorIcon,
-																			onCheck: function onCheck() {
-																				return onProductSelect(result);
+																			resultComponent
+																				? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
+																				: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
+																		)
+																  )
+																: (0, emotion_react_browser_esm.Y)(
+																		RecommendationResultTracker.x,
+																		{ controller, result, track: { impression: !1 } },
+																		(0, emotion_react_browser_esm.Y)(
+																			BundleSelector,
+																			{
+																				seedText,
+																				seed: !0,
+																				icon: separatorIcon,
+																				onCheck: function onCheck() {
+																					return onProductSelect(result);
+																				},
+																				checked: selected,
+																				hideCheckboxes,
+																				theme: props.theme,
 																			},
-																			checked: selected,
-																			hideCheckboxes,
-																			theme: props.theme,
-																			className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
-																		},
-																		resultComponent
-																			? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
-																			: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
-																	)
-															  );
-												  }),
+																			resultComponent
+																				? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
+																				: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
+																		)
+																  );
+														}),
 											ctaInline &&
 												(0, emotion_react_browser_esm.Y)(BundledCTA, {
 													ctaSlot,
@@ -28485,7 +28495,9 @@
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
-				esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
 					(_extends = Object.assign
@@ -28624,6 +28636,23 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />\n'
+						)
+					),
+					(0, esm.yg)('h3', { id: 'hideseed' }, 'hideSeed'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'hideSeed'),
+						' prop specifies if the seed result should be rendered or not.  '
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />\n'
 						)
 					),
 					(0, esm.yg)('h3', { id: 'seedincarousel' }, 'seedInCarousel'),
@@ -29509,6 +29538,12 @@
 							description: 'Text to render in seed product badge',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'Seed Product' } },
 							control: { type: 'text' },
+						},
+						hideSeed: {
+							description: 'Hide/show seed result',
+							defaultValue: !1,
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
 						},
 						vertical: {
 							description: 'set the recommendation to render vertically',
@@ -31681,15 +31716,19 @@
 						),
 						children = props.children,
 						result = props.result,
+						track = props.track,
 						controller = props.controller,
 						className = props.className,
 						disableStyles = props.disableStyles,
 						style = props.style,
+						mergedTrack = Object.assign({}, { impression: !0, click: !0 }, track),
 						resultRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.li)(null),
 						resultInViewport = (0, _hooks__WEBPACK_IMPORTED_MODULE_6__.v)(resultRef, '0px');
 					controller.events.render || controller.log.warn('<RecommendationResultTracker> used without <RecommendationProfileTracker>'),
 						controller.track.product.render(result),
-						resultInViewport && (controller.events.impression || controller.track.impression(), controller.track.product.impression(result));
+						resultInViewport &&
+							mergedTrack.impression &&
+							(controller.events.impression || controller.track.impression(), controller.track.product.impression(result));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_RecommendationResultTracker(), style]),
@@ -31699,7 +31738,7 @@
 								{
 									className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__recommendation-result-tracker', className),
 									onClick: function onClick(e) {
-										return controller.track.product.click(e, result);
+										return mergedTrack.click && controller.track.product.click(e, result);
 									},
 									ref: resultRef,
 								},
@@ -45893,42 +45932,47 @@
 						{
 							key: 'price',
 							get: function get() {
-								var price = 0;
+								var newPrice = 0;
 								return (
 									this.items.forEach(function (item) {
 										var _item$display$mapping;
-										price +=
-											+(
-												(null === (_item$display$mapping = item.display.mappings.core) || void 0 === _item$display$mapping
-													? void 0
-													: _item$display$mapping.price) || 0
-											) * item.quantity;
+										newPrice =
+											(100 * newPrice +
+												100 *
+													((null === (_item$display$mapping = item.display.mappings.core) || void 0 === _item$display$mapping
+														? void 0
+														: _item$display$mapping.price) || 0) *
+													item.quantity) /
+												100 || 0;
 									}),
-									price
+									newPrice
 								);
 							},
 						},
 						{
 							key: 'msrp',
 							get: function get() {
-								var price = 0;
+								var newPrice = 0;
 								return (
 									this.items.forEach(function (item) {
 										var _item$display$mapping2, _item$display$mapping3;
-										price +=
-											(+(
-												(null === (_item$display$mapping2 = item.display.mappings.core) || void 0 === _item$display$mapping2
-													? void 0
-													: _item$display$mapping2.msrp) || 0
-											) ||
+										newPrice =
+											(100 * newPrice +
 												+(
-													(null === (_item$display$mapping3 = item.display.mappings.core) || void 0 === _item$display$mapping3
-														? void 0
-														: _item$display$mapping3.price) || 0
-												) ||
-												0) * item.quantity;
+													100 *
+														((null === (_item$display$mapping2 = item.display.mappings.core) || void 0 === _item$display$mapping2
+															? void 0
+															: _item$display$mapping2.msrp) || 0) ||
+													100 *
+														((null === (_item$display$mapping3 = item.display.mappings.core) || void 0 === _item$display$mapping3
+															? void 0
+															: _item$display$mapping3.price) || 0) ||
+													0
+												) *
+													item.quantity) /
+												100 || 0;
 									}),
-									price
+									newPrice
 								);
 							},
 						},
@@ -48961,7 +49005,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.58.2', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.58.3', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49125,7 +49169,12 @@
 									},
 									product: {
 										view: function view(data, siteId) {
-											if ((null != data && data.sku) || (null != data && data.childSku)) {
+											if (
+												(null != data && data.uid) ||
+												(null != data && data.sku) ||
+												(null != data && data.childUid) ||
+												(null != data && data.childSku)
+											) {
 												var context = _this.context;
 												siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
 												var payload = {
@@ -49133,13 +49182,19 @@
 														category: BeaconCategory.PAGEVIEW,
 														context,
 														event: {
+															uid: null != data && data.uid ? '' + data.uid : void 0,
 															sku: null != data && data.sku ? '' + data.sku : void 0,
+															childUid: null != data && data.childUid ? '' + data.childUid : void 0,
 															childSku: null != data && data.childSku ? '' + data.childSku : void 0,
 														},
 													},
 													event = _this.track.event(payload);
 												if (event) {
-													var sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
+													var sku =
+														(null == data ? void 0 : data.childSku) ||
+														(null == data ? void 0 : data.childUid) ||
+														(null == data ? void 0 : data.sku) ||
+														(null == data ? void 0 : data.uid);
 													if (sku) {
 														var lastViewedProducts = _this.cookies.viewed.get(),
 															uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (
@@ -49150,11 +49205,13 @@
 														cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6, COOKIE_DOMAIN),
 															lastViewedProducts.includes(sku) || _this.sendPreflight();
 													}
-													return null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })), event;
+													return (
+														null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku, id: data.uid } })), event
+													);
 												}
 											} else
 												console.error(
-													'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
+													'track.product.view event: requires a valid uid, sku and/or childUid, childSku. \nExample: track.product.view({ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a" })'
 												);
 										},
 										click: function click(data, siteId) {
@@ -49189,21 +49246,24 @@
 															item.qty &&
 															null != item &&
 															item.price &&
-															((null != item && item.sku) || (null != item && item.childSku))
+															((null != item && item.uid) ||
+																(null != item && item.sku) ||
+																(null != item && item.childUid) ||
+																(null != item && item.childSku))
 														) {
 															var product = { qty: '' + item.qty, price: '' + item.price };
 															return (
+																null != item && item.uid && (product.uid = '' + item.uid),
 																null != item && item.sku && (product.sku = '' + item.sku),
+																null != item && item.childUid && (product.childUid = '' + item.childUid),
 																null != item && item.childSku && (product.childSku = '' + item.childSku),
 																product
 															);
 														}
 														console.error(
-															'track.view.cart event: item ' +
-																item +
-																' at index ' +
+															'track.view.cart event: item at index ' +
 																index +
-																' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+																' requires a valid qty, price, and (uid and/or sku and/or childUid and/or childSku.) \nExample: track.view.cart({ items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 														);
 													}),
 													payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } },
@@ -49212,7 +49272,13 @@
 													if (items.length) {
 														var products = items
 															.map(function (item) {
-																return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
+																return (
+																	(null == item ? void 0 : item.childSku) ||
+																	(null == item ? void 0 : item.childUid) ||
+																	(null == item ? void 0 : item.sku) ||
+																	(null == item ? void 0 : item.uid) ||
+																	''
+																);
 															})
 															.filter(function (sku) {
 																return sku;
@@ -49223,7 +49289,7 @@
 												}
 											} else
 												console.error(
-													'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+													'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ id: "123", sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 												);
 										},
 									},
@@ -49239,21 +49305,24 @@
 															item.qty &&
 															null != item &&
 															item.price &&
-															((null != item && item.sku) || (null != item && item.childSku))
+															((null != item && item.uid) ||
+																(null != item && item.sku) ||
+																(null != item && item.childUid) ||
+																(null != item && item.childSku))
 														) {
 															var product = { qty: '' + item.qty, price: '' + item.price };
 															return (
+																null != item && item.uid && (product.uid = '' + item.uid),
 																null != item && item.sku && (product.sku = '' + item.sku),
+																null != item && item.childUid && (product.childUid = '' + item.childUid),
 																null != item && item.childSku && (product.childSku = '' + item.childSku),
 																product
 															);
 														}
 														console.error(
-															'track.order.transaction event: object parameter `items`: item ' +
-																item +
-																' at index ' +
+															'track.order.transaction event: object parameter `items`: item at index ' +
 																index +
-																' requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+																' requires a valid qty, price, and (id or sku and/or childSku.) \nExample: order.view({ items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 														);
 													}),
 													eventPayload = {
@@ -49288,7 +49357,7 @@
 												return event ? (_this.cookies.cart.clear(), new PixelEvent(payload), event) : void 0;
 											}
 											console.error(
-												'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+												'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "10.71", transactionTotal: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ uid: "123", sku: "product123", childUid: "123_a", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 											);
 										},
 									},
@@ -49492,7 +49561,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.58.2')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.58.3')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
