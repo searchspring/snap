@@ -377,6 +377,7 @@ describe('RecommendationBundle Component', async () => {
 
 		cy.get('.ss__recommendation-bundle__wrapper').should('exist');
 		cy.get('.ss__recommendation-bundle__wrapper__selector').should('have.length', controller.store.results.length - 1);
+		cy.get('.ss__recommendation-bundle__wrapper__selector').should('have.length', 4);
 	});
 
 	it('can put the seed in the carousel', () => {
