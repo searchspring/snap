@@ -1,12 +1,18 @@
 import { SearchFacetStore, FacetValue } from '../../Search/Stores';
-import type { AutocompleteData, StoreParameters } from '../../types';
+import { SearchFacetStoreConfig } from '../../Search/Stores/SearchFacetStore';
+import { AutocompleteStateStore } from './AutocompleteStateStore';
 
+type AutocompleteFacetStoreConfig = SearchFacetStoreConfig & {
+	state: {
+		autocomplete: AutocompleteStateStore;
+	};
+};
 export class AutocompleteFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<AutocompleteData>) {
+	constructor(params: AutocompleteFacetStoreConfig) {
 		const { services, state } = params;
 
 		// allow for only a singular facet option selection at a time

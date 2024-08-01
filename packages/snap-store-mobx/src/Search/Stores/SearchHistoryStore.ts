@@ -7,12 +7,19 @@ export type HistoryStoreConfig = {
 	max?: number;
 	url?: string;
 };
+
+type SearchHistoryStoreConfig = {
+	services: StoreServices;
+	config: HistoryStoreConfig;
+};
+
 export class SearchHistoryStore {
 	private config: HistoryStoreConfig;
 	private storage: StorageStore;
 	private services: StoreServices;
 
-	constructor(config: HistoryStoreConfig, services: StoreServices) {
+	constructor(params: SearchHistoryStoreConfig) {
+		const { services, config } = params;
 		this.config = config;
 		this.services = services;
 

@@ -1,25 +1,38 @@
 import { makeObservable, observable } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchData, StoreParameters, StoreServices } from '../../types';
+import type { StoreServices } from '../../types';
 import type {
 	SearchResponseModelFilterRange,
 	SearchResponseModelFilterValue,
 	MetaResponseModelFacetDefaults,
 	MetaResponseModelFacet,
+	SearchResponseModel,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+type SearchFilterStoreConfig = {
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchFilterStore extends Array<RangeFilter | Filter> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<SearchData>) {
+	constructor(params: SearchFilterStoreConfig) {
 		const { services, data } = params;
-		const filters =
-			data.filters?.map((filter) => {
+		const { search, meta } = data;
+		const { filters } = search;
+
+		const filtersArr =
+			filters?.map((filter) => {
 				const field = filter.field!;
-				const facetMeta = data.meta.facets && (data.meta.facets[field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
+				const facetMeta = meta.facets && meta.facets[field];
 
 				switch (filter.type) {
 					case 'range':
@@ -33,7 +46,7 @@ export class SearchFilterStore extends Array<RangeFilter | Filter> {
 				}
 			}) || [];
 
-		super(...filters);
+		super(...filtersArr);
 	}
 }
 

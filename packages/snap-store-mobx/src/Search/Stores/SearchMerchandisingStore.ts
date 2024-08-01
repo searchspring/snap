@@ -1,5 +1,8 @@
-import type { SearchData, StoreParameters } from '../../types';
-import type { SearchResponseModelMerchandisingContentInline, SearchResponseModelMerchandisingCampaigns } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModelMerchandisingContentInline,
+	SearchResponseModelMerchandisingCampaigns,
+	SearchResponseModel,
+} from '@searchspring/snapi-types';
 
 export enum ContentType {
 	HEADER = 'header',
@@ -11,6 +14,12 @@ export enum ContentType {
 
 export type BannerContent = Partial<Record<ContentType, Content>>;
 
+type SearchMerchandisingStoreConfig = {
+	data: {
+		search: SearchResponseModel;
+	};
+};
+
 export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
@@ -18,8 +27,8 @@ export class SearchMerchandisingStore {
 	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 	public personalized?: boolean;
 
-	constructor(params: StoreParameters<SearchData>) {
-		const { merchandising } = params.data;
+	constructor(params: SearchMerchandisingStoreConfig) {
+		const { merchandising } = params.data.search;
 		if (merchandising) {
 			this.redirect = merchandising.redirect || '';
 

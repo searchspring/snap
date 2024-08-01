@@ -40,17 +40,21 @@ export class AutocompleteStore extends AbstractStore {
 	public storage: StorageStore;
 	public trending: AutocompleteTrendingStore;
 	public history: AutocompleteHistoryStore;
+	public config: AutocompleteStoreConfig;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
-		super(config);
+		super();
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
+		this.config = config;
 		this.services = services;
 
-		this.state = new AutocompleteStateStore(services);
+		this.state = new AutocompleteStateStore({
+			services: this.services,
+		});
 
 		this.storage = new StorageStore();
 
@@ -74,6 +78,10 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
+	setConfig(newConfig: AutocompleteStoreConfig): void {
+		this.config = newConfig;
+	}
+
 	get hasQuery() {
 		return Boolean((this.state.input && this.loaded) || this.search.query?.string);
 	}
@@ -85,12 +93,16 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	public initHistory(): void {
-		const limit = (this.config as AutocompleteStoreConfig).settings?.history?.limit;
+		const limit = this.config.settings?.history?.limit;
 		if (limit) {
-			const historyStore = new SearchHistoryStore({ siteId: this.config.globals?.siteId! }, this.services);
+			const historyStore = new SearchHistoryStore({
+				services: this.services,
+				config: {
+					siteId: this.config.globals?.siteId!,
+				},
+			});
 
 			this.history = new AutocompleteHistoryStore({
-				config: this.config,
 				services: this.services,
 				functions: {
 					resetTerms: () => {
@@ -99,7 +111,6 @@ export class AutocompleteStore extends AbstractStore {
 				},
 				state: {
 					autocomplete: this.state,
-					loaded: this.loaded,
 				},
 				data: {
 					queries: historyStore.getStoredData(limit),
@@ -138,7 +149,6 @@ export class AutocompleteStore extends AbstractStore {
 
 	public updateTrendingTerms(data: TrendingResponseModel): void {
 		this.trending = new AutocompleteTrendingStore({
-			config: this.config,
 			services: this.services,
 			functions: {
 				resetTerms: () => {
@@ -147,16 +157,21 @@ export class AutocompleteStore extends AbstractStore {
 			},
 			state: {
 				autocomplete: this.state,
-				loaded: this.loaded,
 			},
-			data,
+			data: {
+				trending: data,
+			},
 		});
 	}
 
 	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
 		if (!data) return;
 		this.error = undefined;
-		this.meta = new MetaStore(data.meta);
+		this.meta = new MetaStore({
+			data: {
+				meta: data.meta!,
+			},
+		});
 
 		// set the query to match the actual queried term and not the input query
 		if (data.search) {
@@ -175,11 +190,9 @@ export class AutocompleteStore extends AbstractStore {
 				},
 				state: {
 					autocomplete: this.state,
-					loaded: this.loaded,
 				},
 				data: {
-					...data,
-					meta: this.meta.data,
+					autocomplete: data,
 				},
 			});
 
@@ -188,11 +201,8 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.merchandising = new SearchMerchandisingStore({
-			config: this.config,
-			services: this.services,
 			data: {
-				...data,
-				meta: this.meta.data,
+				search: data,
 			},
 		});
 
@@ -200,8 +210,7 @@ export class AutocompleteStore extends AbstractStore {
 			config: this.config,
 			services: this.services,
 			data: {
-				...data,
-				meta: this.meta.data,
+				autocomplete: data,
 			},
 		});
 
@@ -215,37 +224,30 @@ export class AutocompleteStore extends AbstractStore {
 				},
 				state: {
 					autocomplete: this.state,
-					loaded: this.loaded,
 				},
 				data: {
-					...data,
+					search: data,
 					meta: this.meta.data,
 				},
 			});
 		}
 
 		this.filters = new SearchFilterStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
 
 		this.results = new SearchResultStore({
 			config: this.config,
-			services: this.services,
-			stores: {
-				storage: this.storage,
+			state: {
+				loaded: this.loaded,
 			},
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
-			},
-			state: {
-				autocomplete: this.state,
-				loaded: this.loaded,
 			},
 		});
 
@@ -256,19 +258,17 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.pagination = new SearchPaginationStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
 
 		this.sorting = new SearchSortingStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});

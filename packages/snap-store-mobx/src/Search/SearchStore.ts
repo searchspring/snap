@@ -29,28 +29,33 @@ export class SearchStore extends AbstractStore {
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
 	public history: SearchHistoryStore;
+	public config: SearchStoreConfig;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
-		super(config);
+		super();
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to SearchStore. Missing "subscribe" function.`);
 		}
 
+		this.config = config;
 		this.services = services;
 
 		this.storage = new StorageStore();
 
 		const historyConfig: HistoryStoreConfig = {
-			url: (this.config as SearchStoreConfig).settings?.history?.url,
-			max: (this.config as SearchStoreConfig).settings?.history?.max,
+			url: this.config.settings?.history?.url,
+			max: this.config.settings?.history?.max,
 		};
 
 		if (this.config.globals?.siteId) {
 			historyConfig.siteId = this.config.globals?.siteId;
 		}
 
-		this.history = new SearchHistoryStore(historyConfig, this.services);
+		this.history = new SearchHistoryStore({
+			services: this.services,
+			config: historyConfig,
+		});
 
 		this.update();
 
@@ -65,28 +70,31 @@ export class SearchStore extends AbstractStore {
 		});
 	}
 
+	setConfig(newConfig: SearchStoreConfig): void {
+		this.config = newConfig;
+	}
+
 	public reset(): void {
 		this.update();
 	}
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		this.meta = new MetaStore(data.meta);
-		this.merchandising = new SearchMerchandisingStore({
-			config: this.config,
-			services: this.services,
+		this.meta = new MetaStore({
 			data: {
-				...data,
-				meta: this.meta.data,
+				meta: data.meta!,
+			},
+		});
+		this.merchandising = new SearchMerchandisingStore({
+			data: {
+				search: data,
 			},
 		});
 
 		this.search = new SearchQueryStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
-				meta: this.meta.data,
+				search: data,
 			},
 		});
 
@@ -97,31 +105,26 @@ export class SearchStore extends AbstractStore {
 				storage: this.storage,
 			},
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
 
 		this.filters = new SearchFilterStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
 
 		this.results = new SearchResultStore({
 			config: this.config,
-			services: this.services,
-			stores: {
-				storage: this.storage,
-			},
 			state: {
 				loaded: this.loaded,
 			},
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
@@ -130,16 +133,15 @@ export class SearchStore extends AbstractStore {
 			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
 
 		this.sorting = new SearchSortingStore({
-			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});

@@ -1,5 +1,5 @@
 import { makeObservable, observable, toJS } from 'mobx';
-import type { StoreConfigs, ErrorType } from '../types';
+import type { ErrorType } from '../types';
 export abstract class AbstractStore {
 	public custom = {};
 	public loading = false;
@@ -11,20 +11,13 @@ export abstract class AbstractStore {
 				message?: string;
 		  }
 		| undefined;
-	public config: StoreConfigs;
 
-	constructor(config: StoreConfigs) {
-		this.config = config;
-
+	constructor() {
 		makeObservable(this, {
 			custom: observable,
 			loading: observable,
 			loaded: observable,
 		});
-	}
-
-	setConfig(newConfig: StoreConfigs): void {
-		this.config = newConfig;
 	}
 
 	abstract update(data: any): void;

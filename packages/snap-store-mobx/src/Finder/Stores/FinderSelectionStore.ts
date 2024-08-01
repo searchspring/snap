@@ -1,12 +1,4 @@
-import type {
-	FinderStoreConfig,
-	FinderFieldConfig,
-	StoreServices,
-	SelectedSelection,
-	FinderStoreState,
-	StoreParameters,
-	FinderData,
-} from '../../types';
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection, FinderStoreState } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type {
 	MetaResponseModel,
@@ -15,6 +7,7 @@ import type {
 	MetaResponseModelFacetList,
 	MetaResponseModelFacetPalette,
 	MetaResponseModelFacetSlider,
+	SearchResponseModel,
 	SearchResponseModelFacet,
 	SearchResponseModelFacetRange,
 	SearchResponseModelFacetRangeBuckets,
@@ -40,17 +33,35 @@ type FacetWithMeta = MetaResponseModelFacetGrid &
 	SearchResponseModelFacetRange &
 	SearchResponseModelFacetRangeBuckets;
 
+type FinderSelectionStoreConfig = {
+	config: FinderStoreConfig;
+	services: StoreServices;
+	stores: {
+		storage: StorageStore;
+	};
+	state: {
+		finder: FinderStoreState;
+		loading: boolean;
+	};
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+		selections: SelectedSelection[];
+	};
+};
+
 export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<FinderData>) {
-		const config = params.config as FinderStoreConfig;
+	constructor(params: FinderSelectionStoreConfig) {
+		const config = params.config;
 		const { services, data, stores, state } = params;
 		const { storage } = stores;
 		const { finder, loading } = state;
-		const { facets, meta, selections } = data;
+		const { search, meta, selections } = data;
+		const { facets } = search;
 
 		const selectedSelections: Array<Selection | SelectionHierarchy> = [];
 

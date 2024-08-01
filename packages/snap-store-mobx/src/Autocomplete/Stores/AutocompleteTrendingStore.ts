@@ -1,15 +1,22 @@
-import type { AutocompleteTrendingData, StoreParameters } from '../../types';
-import { Term } from './AutocompleteTermStore';
+import { TrendingResponseModel } from '@searchspring/snap-client';
+import { Term, TermConfig } from './AutocompleteTermStore';
+
+type AutocompleteTrendingStoreConfig = TermConfig & {
+	data: {
+		trending: TrendingResponseModel;
+	};
+};
 
 export class AutocompleteTrendingStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<AutocompleteTrendingData>) {
+	constructor(params: AutocompleteTrendingStoreConfig) {
 		const terms: Array<Term> = [];
 		const { data } = params;
-		data.trending?.queries?.map((term) => {
+		const { trending } = data.trending;
+		trending?.queries?.map((term) => {
 			terms.push(
 				new Term(
 					params,

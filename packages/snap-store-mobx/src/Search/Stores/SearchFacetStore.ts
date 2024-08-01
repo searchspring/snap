@@ -3,7 +3,7 @@ import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig, StoreParameters, SearchData } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
 import type {
 	MetaResponseModelFacet,
 	MetaResponseModelFacetDefaults,
@@ -16,23 +16,38 @@ import type {
 	SearchResponseModelFacetValueAllOf,
 	SearchResponseModelFacetValueAllOfValues,
 	SearchRequestModelFilterRangeAllOfValue,
+	SearchResponseModel,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+export type SearchFacetStoreConfig = {
+	config: SearchStoreConfig | AutocompleteStoreConfig;
+	stores: {
+		storage: StorageStore;
+	};
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<SearchData>) {
-		const config = params.config as SearchStoreConfig | AutocompleteStoreConfig;
+	constructor(params: SearchFacetStoreConfig) {
+		const config = params.config;
 		const { services, stores, data } = params;
-		const storage = stores?.storage!;
+		const { search, meta } = data;
+		const { facets, merchandising, pagination } = search;
+		const storage = stores.storage;
 
-		const facets =
-			data.facets
+		const facetsArr =
+			facets
 				?.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
-					const facetMeta =
-						facet.field && data.meta.facets && (data.meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
+					const facetMeta = facet.field && meta.facets && (meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
 					// exclude facets that have no meta data
 					if (!facetMeta) return false;
@@ -54,10 +69,10 @@ export class SearchFacetStore extends Array {
 						} else if (facet.values?.length == 0) {
 							return false;
 						} else if (!facet.filtered && facet.values?.length == 1) {
-							if (data.merchandising?.content?.inline) {
-								return facet.values[0].count! + data.merchandising.content?.inline.length != data.pagination!.totalResults;
+							if (merchandising?.content?.inline) {
+								return facet.values[0].count! + merchandising.content?.inline.length != pagination!.totalResults;
 							} else {
-								return facet.values[0].count != data.pagination!.totalResults;
+								return facet.values[0].count != pagination!.totalResults;
 							}
 						}
 					}
@@ -65,7 +80,7 @@ export class SearchFacetStore extends Array {
 					return true;
 				})
 				.map((facet) => {
-					const facetMeta = facet.field && data.meta.facets && data.meta.facets[facet.field];
+					const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
 					const facetConfig = deepmerge(
 						{ ...config.settings?.facets, fields: undefined },
 						(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
@@ -84,7 +99,7 @@ export class SearchFacetStore extends Array {
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		super(...facets);
+		super(...facetsArr);
 	}
 }
 

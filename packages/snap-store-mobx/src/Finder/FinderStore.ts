@@ -11,7 +11,7 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class FinderStore extends AbstractStore {
 	public services: StoreServices;
-	public config!: FinderStoreConfig;
+	public config: FinderStoreConfig;
 	public meta!: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
@@ -22,18 +22,19 @@ export class FinderStore extends AbstractStore {
 	};
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
-		super(config);
+		super();
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
+		this.config = config;
 		this.services = services;
 
-		if (config.persist?.enabled) {
+		if (this.config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
 				type: 'local',
-				key: `ss-${config.id}-persisted`,
+				key: `ss-${this.config.id}-persisted`,
 			});
 		}
 
@@ -45,6 +46,10 @@ export class FinderStore extends AbstractStore {
 			selections: observable,
 			pagination: observable,
 		});
+	}
+
+	setConfig(newConfig: FinderStoreConfig): void {
+		this.config = newConfig;
 	}
 
 	public setService(name: keyof StoreServices, service: UrlManager): void {
@@ -98,12 +103,16 @@ export class FinderStore extends AbstractStore {
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = new MetaStore(data.meta);
+		this.meta = new MetaStore({
+			data: {
+				meta: data.meta!,
+			},
+		});
 		this.pagination = new SearchPaginationStore({
 			config: this.config,
 			services: this.services,
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 			},
 		});
@@ -119,7 +128,7 @@ export class FinderStore extends AbstractStore {
 				loading: this.loading,
 			},
 			data: {
-				...data,
+				search: data,
 				meta: this.meta.data,
 				selections: selectedSelections || [],
 			},

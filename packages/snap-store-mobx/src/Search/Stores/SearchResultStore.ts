@@ -8,35 +8,46 @@ import type {
 	VariantConfig,
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
-	StoreParameters,
-	AutocompleteData,
-	SearchData,
 } from '../../types';
 import type {
 	SearchResponseModelResult,
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
+	SearchResponseModel,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
 const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
+
+type SearchResultStoreConfig = {
+	config: SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig;
+	state: {
+		loaded: boolean;
+	};
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(params: StoreParameters<SearchData | AutocompleteData>) {
+	constructor(params: SearchResultStoreConfig) {
 		const { config, data, state } = params;
-		const { results, merchandising, pagination } = data;
-		const loaded = state?.loaded;
+		const { search } = data;
+		const { results, merchandising, pagination } = search;
+		const { loaded } = state;
 
 		let resultsArr: (Product | Banner)[] = (results || []).map((result) => {
 			return new Product(params, result);
 		});
 
-		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
+		const variantConfig = config.settings?.variants;
 
 		// preselected variant options
 		if (variantConfig?.realtime?.enabled) {
@@ -148,7 +159,7 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(params: StoreParameters<AutocompleteData | SearchData>, result: SearchResponseModelResult) {
+	constructor(params: SearchResultStoreConfig, result: SearchResponseModelResult) {
 		const { config } = params;
 		this.id = result.id!;
 		this.attributes = result.attributes!;
@@ -157,13 +168,13 @@ export class Product {
 
 		this.badges = new Badges(params, result);
 
-		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
+		const variantsField = config?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig)?.settings?.variants);
+				this.variants = new Variants(parsedVariants, this.mask, config?.settings?.variants);
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
@@ -206,7 +217,7 @@ export class Product {
 export class Badges {
 	public all: ResultBadge[] = [];
 
-	constructor(params: StoreParameters<AutocompleteData | SearchData>, result: SearchResponseModelResult) {
+	constructor(params: SearchResultStoreConfig, result: SearchResponseModelResult) {
 		const { data } = params;
 		const { meta } = data;
 		this.all = (result.badges || [])
@@ -628,9 +639,10 @@ class Child {
 	}
 }
 
-function addBannersToResults(params: StoreParameters<AutocompleteData | SearchData>, results: (Product | Banner)[], banners: Banner[]) {
+function addBannersToResults(params: SearchResultStoreConfig, results: (Product | Banner)[], banners: Banner[]) {
 	const { config, data } = params;
-	const { pagination } = data;
+	const { search } = data;
+	const { pagination } = search;
 
 	const productCount = results.length;
 	let minIndex = pagination?.pageSize! * (pagination?.page! - 1);
