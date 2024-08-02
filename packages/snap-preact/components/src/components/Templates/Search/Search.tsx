@@ -237,7 +237,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__search', className)}>
 				{!hideSidebar && !isMobile && (
 					<div className="ss__search__sidebar-wrapper">
-						{toggleSidebarButtonText ? (
+						{toggleSidebarButtonText || lang.toggleSidebarButtonText?.value ? (
 							sidebarOpenState && (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
@@ -257,7 +257,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
 					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
 
-					{toggleSidebarButtonText && (
+					{(toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
 						<Button
 							onClick={() => setSidebarOpenState(!sidebarOpenState)}
 							className="ss__search__sidebar-wrapper-toggle"

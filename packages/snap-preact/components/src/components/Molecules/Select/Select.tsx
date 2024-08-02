@@ -211,15 +211,13 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 	//initialize lang
 	const defaultLang = {
-		dropdownButton: {
+		buttonLabel: {
+			value: label,
 			attributes: {
 				'aria-label': `${label} dropdown, ${options.length} options ${
 					selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
 				}`,
 			},
-		},
-		label: {
-			value: label,
 		},
 	};
 
@@ -230,7 +228,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		selectedOptions,
 		label,
 		open,
-		selection,
 	});
 
 	// options can be an Array or ObservableArray - but should have length
@@ -239,9 +236,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
-						{label && !hideLabelOnSelection && (
+						{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
 							<span className="ss__select__label">
-								<label {...mergedLang.label}></label>
+								<label {...mergedLang.buttonLabel}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
 							</span>
 						)}
@@ -282,9 +279,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>
-								{label && !hideLabelOnSelection && (
-									<span className="ss__select__label" ref={(e) => useA11y(e)} aria-expanded={open} role="button" {...mergedLang.dropdownButton}>
-										{label}
+								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
+									<span className="ss__select__label" ref={(e) => useA11y(e)} aria-expanded={open} role="button">
+										<label {...mergedLang.buttonLabel}></label>
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
@@ -378,15 +375,10 @@ export interface SelectProps extends ComponentProps {
 }
 
 export interface SelectLang {
-	dropdownButton: lang<{
+	buttonLabel: lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];
 		label: string;
 		open: boolean;
-		selection?: ListOption;
-	}>;
-	label?: lang<{
-		options: ListOption[];
-		selectedOptions: ListOption[];
 	}>;
 }

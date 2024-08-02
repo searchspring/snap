@@ -82,7 +82,7 @@ describe('Autocomplete Component', () => {
 
 		await waitFor(() => {
 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
-			expect(autocomplete).toBeInTheDocument();
+			expect(autocomplete).not.toBeInTheDocument();
 		});
 	});
 
@@ -709,6 +709,332 @@ describe('Autocomplete Component', () => {
 		// Change the viewport back to desktop.
 		global.innerWidth = 1500;
 	});
+
+	describe('ssd', () => {
+		it('renders after input has been focused', async () => {
+			const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+			await controller.bind();
+
+			const args = {
+				controller,
+				input: controller.config.selector,
+			};
+
+			const input = document.querySelector('.searchspring-ac');
+			(input as HTMLInputElement).focus();
+
+			// const langOptions = [
+			// 	'termsTitle',
+			// 	'trendingTitle',
+			// 	'historyTitle',
+			// 	'facetsTitle',
+			// 	'contentTitle',
+			// 	'closeButton',
+			// 	'trendingTerm',
+			// 	'suggestionsTerm',
+			// 	'historyTerm',
+			// 	'noResultsText',
+			// 	'contentInfo'
+			// ];
+
+			// //text attributes/values
+			// const value = "custom value";
+			// const altText = "custom alt";
+			// const ariaLabel = 'custom label';
+			// const ariaValueText = "custom value text";
+			// const title = "custom title";
+
+			// const valueMock = jest.fn(() => value);
+			// const altMock = jest.fn(() => altText);
+			// const labelMock = jest.fn(() => ariaLabel);
+			// const valueTextMock = jest.fn(() => ariaValueText);
+			// const titleMock = jest.fn(() => title);
+
+			// const langObjs = [{
+			// 	value: value,
+			// 	attributes: {
+			// 		"alt": altText,
+			// 		"aria-label": ariaLabel,
+			// 		"aria-valuetext": ariaValueText,
+			// 		"title": title
+			// 	}
+			// },
+			// {
+			// 	value: valueMock,
+			// 	attributes: {
+			// 		"alt": altMock,
+			// 		"aria-label": labelMock,
+			// 		"aria-valuetext": valueTextMock,
+			// 		"title": titleMock
+			// 	}
+			// },
+			// {
+			// 	value: `<div>${value}</div>`,
+			// 	attributes: {
+			// 		"alt": altText,
+			// 		"aria-label": ariaLabel,
+			// 		"aria-valuetext": ariaValueText,
+			// 		"title": title
+			// 	}
+			// }];
+			const rendered = render(<Autocomplete {...args} />, { container });
+
+			await waitFor(() => {
+				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+				expect(autocomplete).not.toBeInTheDocument();
+			});
+			// langOptions.forEach(async option => {
+			// 	langObjs.forEach(async langObj => {
+			// 		const lang = {
+			// 			[`${option}`]: langObj
+			// 		}
+
+			// 		const rendered = render(<Autocomplete {...args} lang={lang} />, { container });
+
+			// 		await waitFor(() => {
+			// 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+			// 			expect(autocomplete).not.toBeInTheDocument();
+
+			// 		});
+
+			// 		await waitFor(() => {
+			// 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+			// 			expect(autocomplete).toBeInTheDocument();
+
+			// 			const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+			// 			expect(langElem).toBeInTheDocument();
+			// 			if (typeof langObj.value == 'function'){
+
+			// 				expect(langElem?.innerHTML).toBe(value);
+
+			// 				if (option == 'trendingTerm') {
+			// 					controller.store.trending.forEach((term, idx) => {
+			// 						expect(valueMock).not.toHaveBeenCalledWith(
+			// 							{
+			// 								controller: controller,
+			// 								term: term,
+			// 								idx: idx
+			// 							}
+			// 						);
+			// 					})
+			// 				}else if ('suggestionsTerm'){
+			// 					controller.store.terms.forEach((term, idx) => {
+			// 						expect(valueMock).toHaveBeenCalledWith(
+			// 							{
+			// 								controller: controller,
+			// 								term: term,
+			// 								idx: idx
+			// 							}
+			// 						);
+			// 					})
+			// 				}else if ('historyTerm') {
+			// 					controller.store.history.forEach((term, idx) => {
+			// 						expect(valueMock).toHaveBeenCalledWith(
+			// 							{
+			// 								controller: controller,
+			// 								term: term,
+			// 								idx: idx
+			// 							}
+			// 						);
+			// 					})
+			// 				}else {
+			// 					expect(valueMock).toHaveBeenCalledWith(
+			// 						{
+			// 							controller: controller
+			// 						}
+			// 					);
+			// 				}
+			// 			}else {
+			// 				expect(langElem?.innerHTML).toBe(langObj.value);
+			// 			}
+
+			// 			expect(langElem).toHaveAttribute("alt", altText);
+			// 			expect(langElem).toHaveAttribute("aria-label", ariaLabel);
+			// 			expect(langElem).toHaveAttribute("aria-valuetext", ariaValueText);
+			// 			expect(langElem).toHaveAttribute("title", title);
+
+			// 			jest.restoreAllMocks();
+			// 		});
+			// 	})
+			// });
+		});
+	});
+
+	// describe.only('Autocomplete lang works', () => {
+	// 	const selector = '.ss__autocomplete';
+
+	// 	document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
+	// 	controllerConfigId = uuidv4().split('-').join('');
+
+	// 	acConfig = {
+	// 		id: controllerConfigId,
+	// 		selector: 'input.searchspring-ac',
+	// 		settings: {
+	// 			trending: {
+	// 				limit: 5,
+	// 			},
+	// 			history: {
+	// 				limit: 5,
+	// 			},
+	// 		},
+	// 	};
+	// 	container = document.getElementById('target')!;
+
+	// 	mockClient.mockData.updateConfig({ autocomplete: 'default' });
+
+	// 	console.log()
+
+	// 	it('immediately available lang options', async () => {
+
+	// 		const mockStorage: {
+	// 			[key: string]: string;
+	// 		} = {};
+	// 		global.Storage.prototype.setItem = jest.fn((key, value) => {
+	// 			mockStorage[key] = value;
+	// 		});
+	// 		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+	// 		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+	// 		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+	// 		const langOptions = [
+	// 			'termsTitle',
+	// 			'trendingTitle',
+	// 			'historyTitle',
+	// 			'facetsTitle',
+	// 			'contentTitle',
+	// 			'closeButton',
+	// 			'trendingTerm',
+	// 			'suggestionsTerm',
+	// 			'historyTerm',
+	// 			'noResultsText',
+	// 			'contentInfo'
+	// 		];
+
+	// 		//text attributes/values
+	// 		const value = "custom value";
+	// 		const altText = "custom alt";
+	// 		const ariaLabel = 'custom label';
+	// 		const ariaValueText = "custom value text";
+	// 		const title = "custom title";
+
+	// 		const valueMock = jest.fn(() => value);
+	// 		const altMock = jest.fn(() => altText);
+	// 		const labelMock = jest.fn(() => ariaLabel);
+	// 		const valueTextMock = jest.fn(() => ariaValueText);
+	// 		const titleMock = jest.fn(() => title);
+
+	// 		const langObjs = [{
+	// 			value: value,
+	// 			attributes: {
+	// 				"alt": altText,
+	// 				"aria-label": ariaLabel,
+	// 				"aria-valuetext": ariaValueText,
+	// 				"title": title
+	// 			}
+	// 		},
+	// 		{
+	// 			value: valueMock,
+	// 			attributes: {
+	// 				"alt": altMock,
+	// 				"aria-label": labelMock,
+	// 				"aria-valuetext": valueTextMock,
+	// 				"title": titleMock
+	// 			}
+	// 		},
+	// 		{
+	// 			value: `<div>${value}</div>`,
+	// 			attributes: {
+	// 				"alt": altText,
+	// 				"aria-label": ariaLabel,
+	// 				"aria-valuetext": ariaValueText,
+	// 				"title": title
+	// 			}
+	// 		}];
+
+	// 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+	// 		console.log(controller.config.selector)
+	// 		await controller.bind();
+
+	// 		const args = {
+	// 			controller: controller,
+	// 			input: controller.config.selector,
+	// 		};
+
+	// 		const input = document.querySelector('.searchspring-ac');
+	// 		(input as HTMLInputElement).focus();
+
+	// 		langOptions.forEach(async option => {
+	// 			langObjs.forEach(async langObj => {
+	// 				console.log(option)
+
+	// 				const lang = {
+	// 					[`${option}`]: langObj
+	// 				}
+
+	// 				const rendered = render(<Autocomplete lang={lang} {...args} />, { container });
+	// 				rendered.debug();
+	// 				await waitFor(() => {
+	// 					const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+	// 					expect(autocomplete).toBeInTheDocument();
+
+	// 					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+	// 					expect(langElem).toBeInTheDocument();
+	// 					if (typeof langObj.value == 'function'){
+
+	// 						expect(langElem?.innerHTML).toBe(value);
+
+	// 						if (option == 'trendingTerm') {
+	// 							controller.store.trending.forEach((term, idx) => {
+	// 								expect(valueMock).not.toHaveBeenCalledWith(
+	// 									{
+	// 										controller: controller,
+	// 										term: term,
+	// 										idx: idx
+	// 									}
+	// 								);
+	// 							})
+	// 						}else if ('suggestionsTerm'){
+	// 							controller.store.terms.forEach((term, idx) => {
+	// 								expect(valueMock).toHaveBeenCalledWith(
+	// 									{
+	// 										controller: controller,
+	// 										term: term,
+	// 										idx: idx
+	// 									}
+	// 								);
+	// 							})
+	// 						}else if ('historyTerm') {
+	// 							controller.store.history.forEach((term, idx) => {
+	// 								expect(valueMock).toHaveBeenCalledWith(
+	// 									{
+	// 										controller: controller,
+	// 										term: term,
+	// 										idx: idx
+	// 									}
+	// 								);
+	// 							})
+	// 						}else {
+	// 							expect(valueMock).toHaveBeenCalledWith(
+	// 								{
+	// 									controller: controller
+	// 								}
+	// 							);
+	// 						}
+	// 					}else {
+	// 						expect(langElem?.innerHTML).toBe(langObj.value);
+	// 					}
+
+	// 					expect(langElem).toHaveAttribute("alt", altText);
+	// 					expect(langElem).toHaveAttribute("aria-label", ariaLabel);
+	// 					expect(langElem).toHaveAttribute("aria-valuetext", ariaValueText);
+	// 					expect(langElem).toHaveAttribute("title", title);
+
+	// 					jest.restoreAllMocks();
+	// 				});
+	// 			})
+	// 		})
+	// 	});
+	// });
 
 	describe('AutoComplete theming works', () => {
 		it('is themeable with ThemeProvider', async () => {

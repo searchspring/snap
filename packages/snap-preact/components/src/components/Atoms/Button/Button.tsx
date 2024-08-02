@@ -96,19 +96,22 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	//deep merge with props.lang
 	const langs = deepmerge(defaultLang, lang || {});
 	const mergedLang = useLang(langs as any, {});
-
-	return content || children || icon || mergedLang?.button?.dangerouslySetInnerHTML ? (
+	return content || children || icon || lang?.button?.value ? (
 		<CacheProvider>
 			{native ? (
-				<button {...elementProps} {...mergedLang.button}>
-					{content}
-					{children}
+				<button {...elementProps}>
+					<div {...mergedLang.button}>
+						{content}
+						{children}
+					</div>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled} {...mergedLang.button}>
-					{content}
-					{children}
+				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
+					<div {...mergedLang.button}>
+						{content}
+						{children}
+					</div>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}

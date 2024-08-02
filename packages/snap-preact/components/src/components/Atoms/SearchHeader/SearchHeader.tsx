@@ -142,7 +142,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 							)
 						)}
 
-						{subtitleText && (
+						{(subtitleText || lang.subtitleText.value) && (
 							<h4
 								className={classnames('ss__search-header__title', 'ss__search-header__title--subtitle')}
 								aria-atomic="true"

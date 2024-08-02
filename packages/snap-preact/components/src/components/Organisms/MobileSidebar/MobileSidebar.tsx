@@ -158,6 +158,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			value: titleText,
 		},
 		closeButtonText: {
+			value: closeButtonText,
 			attributes: {
 				'aria-label': closeButtonText || `close ${openButtonText} button`,
 			},
@@ -239,7 +240,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		);
 	};
 	const contentRef: MutableRef<any> = useRef();
-	console.log('here??');
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
@@ -257,9 +257,8 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								});
 							}}
 							{...subProps.button}
-						>
-							{lang.openButtonText.value}
-						</Button>
+							lang={{ button: lang.openButtonText }}
+						></Button>
 					}
 					{...subProps.slideout}
 				>

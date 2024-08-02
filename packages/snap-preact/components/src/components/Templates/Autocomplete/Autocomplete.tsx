@@ -519,7 +519,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const mergedLang = useLang(lang as any, {
 		controller,
 	});
-
+	console.log(visible);
 	return visible ? (
 		<CacheProvider>
 			<div
@@ -557,7 +557,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							<>
 								{terms.length > 0 ? (
 									<div className="ss__autocomplete__terms__suggestions">
-										{termsTitle ? (
+										{termsTitle || lang.termsTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
 												<h5 {...mergedLang.termsTitle}></h5>
 											</div>

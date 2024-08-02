@@ -132,7 +132,7 @@ export const en_translation: LangComponents = {
 		},
 	},
 	select: {
-		dropdownButton: {
+		buttonLabel: {
 			attributes: {
 				'aria-label': (data) =>
 					`${data?.label} dropdown, ${data?.options.length} options ${

@@ -161,7 +161,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 							const pagelang = deepmerge(defaultPageLang, props.lang || {});
 							const mergedPageLang = useLang(pagelang as any, {
 								paginationStore: store,
-								page,
+								page: page,
 							});
 
 							return page.active ? (
@@ -188,7 +188,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 					{/* next */}
 					{store.next && !hideNext && (
-						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} {...mergedLang.last}>
+						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} {...mergedLang.next}>
 							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
 						</a>
 					)}
