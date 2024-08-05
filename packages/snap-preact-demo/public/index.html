@@ -137,16 +137,76 @@
 				</ul>
 			</div>
 			<div class="ss-lite-flex-nowrap ss-lite-main-layout">
+				<style>
+					.ss__skeleton {
+						width: 100px;
+						height: 20px;
+			
+						background-color: #ebebeb;
+						display: inline-flex;
+						line-height: 1;
+			
+						position: relative;
+						overflow: hidden;
+						z-index: 1;
+					}
+
+					.ss-sidebar-container {
+						.ss-facet {
+							.ss__skeleton {
+								height: 35px;
+								width: 250px;
+							}
+							.ss__facet-list-options__option .ss__skeleton {
+								margin: 5px 0 10px 0;
+							}
+						}
+					}
+
+					#searchspring-content {
+						.ss-header-container {
+							.ss__skeleton {
+								height: 48px;
+								width: 300px;
+							}
+						}
+
+						.toolbar {
+							.ss__skeleton {
+								height: 48px;
+								width: 180px;
+							}
+						}
+
+						.ss-result {
+							.ss-result__image {
+								.ss__skeleton {
+									height: 350px;
+									width: 212px;
+								}
+							}
+
+							.ss-result__details {
+								.ss__skeleton {
+									height: 72px;
+									width: 212px;
+								}
+							}
+						}
+					}
+				</style>
 
 
 				<aside class="ss-lite-sidebar">
 					<div id="searchspring-sidebar">
-						<h2>Sidebar to be hidden!</h2>
+						<div class="ss-sidebar-container" style="flex: 0 1 auto; width: 250px; margin: 0px 40px 0px 0px; overflow: hidden;"><div class="ss__facets"><div class="ss-facet"><div class="ss__facet__header" style="margin: 10px 0px;"><div class="ss__skeleton ss-qvn7cu"></div></div><div class="ss__facet__options"><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div></div></div><div class="ss-facet"><div class="ss__facet__header" style="margin: 10px 0px;"><div class="ss__skeleton ss-qvn7cu"></div></div><div class="ss__facet__options"><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div></div></div><div class="ss-facet"><div class="ss__facet__header" style="margin: 10px 0px;"><div class="ss__skeleton ss-qvn7cu"></div></div><div class="ss__facet__options"><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div></div></div><div class="ss-facet"><div class="ss__facet__header" style="margin: 10px 0px;"><div class="ss__skeleton ss-qvn7cu"></div></div><div class="ss__facet__options"><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div></div></div><div class="ss-facet"><div class="ss__facet__header" style="margin: 10px 0px;"><div class="ss__skeleton ss-qvn7cu"></div></div><div class="ss__facet__options"><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div><div class="ss__facet-list-options__option" style="display: flex;"><div class="ss__skeleton ss-13yi8ma"></div></div></div></div></div></div>
 					</div>
 				</aside>
 				<section class="ss-lite-content">
 					<div id="searchspring-content">
-						<h2>Content to be hidden!</h2>
+						<div>
+							<div class="ss-header-container"><div class="ss__skeleton ss-38rvjz"></div></div><div class="ss-results"><div class="toolbar"><div style="display: inline-block; margin: 10px 20px 10px 0px;"><div class="ss__skeleton ss-1iv2dwy"></div></div><div style="display: inline-block; margin: 10px 20px 10px 0px;"><div class="ss__skeleton ss-1iv2dwy"></div></div></div><div class="ss__results" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; gap: 20px;"><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div><div class="ss-result"><div class="ss-result__image"><div class="ss__skeleton ss-ypavve"></div></div><div class="ss-result__details"><div class="ss__skeleton ss-hawwgg"></div></div></div></div></div>
+						</div>
 					</div>
 				</section>
 

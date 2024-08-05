@@ -22,12 +22,9 @@ const FacetSkel = () => {
 				<Skeleton height="35px" width="250px" />
 			</div>
 			<div className="ss__facet__options">
-				{Array.from({ length: 5 }).map((_, index) => (
+				{Array.from({ length: 6 }).map((_, index) => (
 					<div class="ss__facet-list-options__option" style={{ display: 'flex' }}>
-						<Skeleton height="33px" width="33px" key={index} />
-						<div style={{ marginLeft: '8px' }}>
-							<Skeleton height="33px" width="250px" key={index} />
-						</div>
+						<Skeleton height="33px" width="250px" key={index} />
 					</div>
 				))}
 			</div>

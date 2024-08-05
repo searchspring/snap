@@ -595,28 +595,34 @@ export class Snap {
 							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
 							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
-							let searched = false;
-							const runSearch = () => {
-								if (!searched) {
+							let searchPromise: Promise<void> | null = null;
+
+							const runSearch = async () => {
+								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
 										getInitialUrlState(controller.url.initial, cntrlr.urlManager).go({ history: 'replace' });
 									}
 
-									searched = true;
-									this.controllers[controller.config.id].search();
+									searchPromise = this.controllers[controller.config.id].search();
 								}
+
+								return searchPromise;
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
-								runSearch();
+								console.log('about to search');
+								await runSearch();
+								console.log('did the search');
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
 									const Component = await target.component!();
 									setTimeout(() => {
+										console.log('about to render');
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+										console.log('did the render');
 									});
 								} catch (err) {
 									this.logger.error(err);
