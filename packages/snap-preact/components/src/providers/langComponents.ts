@@ -28,18 +28,18 @@ import type { FacetSliderLang } from '../components/Molecules/FacetSlider';
 import type { FilterLang } from '../components/Molecules/Filter';
 import type { GridLang } from '../components/Molecules/Grid';
 // import type { LayoutSelectorLang } from '../components/Molecules/LayoutSelector';
-// import type { ListLang } from '../components/Molecules/List';
+import type { ListLang } from '../components/Molecules/List';
 import type { LoadMoreLang } from '../components/Molecules/LoadMore';
 // import type { OverlayBadgeLang } from '../components/Molecules/OverlayBadge';
 import type { PaginationLang } from '../components/Molecules/Pagination';
 // import type { PerPageLang } from '../components/Molecules/PerPage';
 import type { RadioLang } from '../components/Molecules/Radio';
-// import type { RadioListLang } from '../components/Molecules/RadioList';
+import type { RadioListLang } from '../components/Molecules/RadioList';
 // import type { RatingLang } from '../components/Molecules/Rating';
 // import type { ResultLang } from '../components/Molecules/Result';
 // import type { SearchInputLang } from '../components/Molecules/SearchInput';
 import type { SelectLang } from '../components/Molecules/Select';
-import type { SlideoutLang } from '../components/Molecules/Slideout';
+// import type { SlideoutLang } from '../components/Molecules/Slideout';
 import type { SortByLang } from '../components/Molecules/SortBy';
 // import type { SwatchesLang } from '../components/Molecules/Swatches';
 // import type { VariantSelectionLang } from '../components/Molecules/VariantSelection';
@@ -88,7 +88,7 @@ export type LangComponentOverrides = {
 	checkbox?: Partial<CheckboxLang>;
 	grid?: Partial<GridLang>;
 	// layoutSelector?: Partial<LayoutSelectorLang>
-	// list?: Partial<ListLang>
+	list?: Partial<ListLang>;
 	radio?: Partial<RadioLang>;
 	errorHandler?: Partial<ErrorHandlerLang>;
 	facetGridOptions?: Partial<FacetGridOptionsLang>;
@@ -102,12 +102,12 @@ export type LangComponentOverrides = {
 	// overlayBadge?: Partial<OverlayBadgeLang>
 	pagination?: Partial<PaginationLang>;
 	// perPage?: Partial<PerPageLang>
-	// radioList?: Partial<RadioListLang>
+	radioList?: Partial<RadioListLang>;
 	// rating?: Partial<RatingLang>
 	// result?: Partial<ResultLang>
 	// searchInput?: Partial<SearchInputLang>
 	select?: Partial<SelectLang>;
-	slideout?: Partial<SlideoutLang>;
+	// slideout?: Partial<SlideoutLang>;
 	sortBy?: Partial<SortByLang>;
 	// swatches?: Partial<SwatchesLang>
 	// variantSelection?: Partial<VariantSelectionLang>
@@ -158,7 +158,7 @@ export type LangComponents = {
 	checkbox: CheckboxLang;
 	grid: GridLang;
 	// layoutSelector: LayoutSelectorLang
-	// list: ListLang
+	list: ListLang;
 	radio: RadioLang;
 	errorHandler: ErrorHandlerLang;
 	facetGridOptions: FacetGridOptionsLang;
@@ -172,12 +172,12 @@ export type LangComponents = {
 	// overlayBadge: OverlayBadgeLang
 	pagination: PaginationLang;
 	// perPage: PerPageLang
-	// radioList: RadioListLang
+	radioList: RadioListLang;
 	// rating: RatingLang
 	// result: ResultLang
 	// searchInput: SearchInputLang
 	select: SelectLang;
-	slideout: SlideoutLang;
+	// slideout: SlideoutLang;
 	sortBy: SortByLang;
 	// swatches: SwatchesLang
 	// variantSelection: VariantSelectionLang

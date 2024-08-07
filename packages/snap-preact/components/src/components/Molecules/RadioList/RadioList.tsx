@@ -182,10 +182,10 @@ export interface RadioListProps extends ComponentProps {
 	titleText?: string;
 	disabled?: boolean;
 	selected?: ListOption;
-	lang?: Partial<ListLang>;
+	lang?: Partial<RadioListLang>;
 }
 
-export interface ListLang {
+export interface RadioListLang {
 	title: lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];

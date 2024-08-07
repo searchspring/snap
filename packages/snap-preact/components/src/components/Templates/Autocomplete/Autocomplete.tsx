@@ -519,7 +519,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const mergedLang = useLang(lang as any, {
 		controller,
 	});
-	console.log(visible);
 	return visible ? (
 		<CacheProvider>
 			<div
@@ -605,7 +604,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{showTrending && !hideTrending ? (
 									<div className="ss__autocomplete__terms__trending">
-										{trendingTitle ? (
+										{trendingTitle || lang.trendingTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
 												<h5 {...mergedLang.trendingTitle}></h5>
 											</div>
@@ -653,7 +652,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{showHistory && !hideHistory ? (
 									<div className="ss__autocomplete__terms__history">
-										{historyTitle ? (
+										{historyTitle || lang.historyTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--history">
 												<h5 {...mergedLang.historyTitle}></h5>
 											</div>
@@ -711,13 +710,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					) : (
 						facetsToShow.length > 0 && (
 							<>
-								{facetsTitle && vertical ? (
+								{(facetsTitle || lang.facetsTitle.value) && vertical ? (
 									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 										<h5 {...mergedLang.facetsTitle}></h5>
 									</div>
 								) : null}
 								<div className="ss__autocomplete__facets">
-									{facetsTitle && !vertical ? (
+									{(facetsTitle || lang.facetsTitle.value) && !vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 											<h5 {...mergedLang.facetsTitle}></h5>
 										</div>
@@ -745,7 +744,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											cloneWithProps(resultsSlot, { results, contentTitle, controller })
 										) : (
 											<>
-												{contentTitle && results.length > 0 ? (
+												{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
 													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
 														<h5 {...mergedLang.contentTitle}></h5>
 													</div>
