@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { iconPaths, IconType } from './paths';
 import { mergeProps } from '../../../utilities';
 
@@ -32,7 +32,7 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -88,4 +88,16 @@ export interface IconProps extends ComponentProps {
 	viewBox?: string;
 	name?: IconNames;
 }
-export type IconNames = 'next' | 'prev' | 'active' | 'inactive' | 'star--empty' | 'star--full';
+export type IconNames =
+	| 'next'
+	| 'prev'
+	| 'active'
+	| 'inactive'
+	| 'star--empty'
+	| 'star--full'
+	| 'selection'
+	| 'open'
+	| 'close'
+	| 'option'
+	| 'expand'
+	| 'collapse';

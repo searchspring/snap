@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { filters } from '@searchspring/snap-toolbox';
 
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
@@ -233,7 +233,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

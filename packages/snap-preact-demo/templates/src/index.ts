@@ -92,11 +92,9 @@ new SnapTemplates({
 								toolbar: {
 									hideSortBy: true,
 								},
-								// results: {
-								// 	named: {
-								// 		searchResults: { columns: 2 },
-								// 	},
-								// },
+								results: {
+									columns: 2,
+								},
 							},
 						},
 					},
@@ -106,11 +104,9 @@ new SnapTemplates({
 						default: true,
 						overrides: {
 							components: {
-								// results: {
-								// 	named: {
-								// 		searchResults: { columns: 4 },
-								// 	},
-								// },
+								results: {
+									columns: 4,
+								},
 							},
 						},
 					},
@@ -122,7 +118,34 @@ new SnapTemplates({
 								hideLast: true,
 							},
 						},
-						// layoutOptions: [],
+						layoutOptions: [
+							{
+								value: 1,
+								label: 'one',
+								overrides: {
+									components: {
+										toolbar: {
+											hideSortBy: true,
+										},
+										results: {
+											columns: 1,
+										},
+									},
+								},
+							},
+							{
+								value: 3,
+								label: 'three',
+								default: true,
+								overrides: {
+									components: {
+										results: {
+											columns: 3,
+										},
+									},
+								},
+							},
+						],
 					},
 					{
 						// layoutOptions: [],

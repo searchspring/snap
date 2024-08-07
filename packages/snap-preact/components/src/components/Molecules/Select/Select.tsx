@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -193,7 +193,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		!stayOpenOnSelection && setOpen(false);
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -280,6 +280,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 											<Icon
 												{...subProps.icon}
 												className="ss__select__selection__icon"
+												name={'selection'}
 												{...(typeof selection.icon == 'string' ? { icon: selection.icon } : (selection.icon as Partial<IconProps>))}
 											/>
 										)}
@@ -289,6 +290,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								{!hideIcon && (
 									<Icon
 										{...subProps.icon}
+										name={open ? 'open' : 'close'}
 										{...(open
 											? { ...(typeof iconClose == 'string' ? { icon: iconClose } : (iconClose as Partial<IconProps>)) }
 											: { ...(typeof iconOpen == 'string' ? { icon: iconOpen } : (iconOpen as Partial<IconProps>)) })}
@@ -313,6 +315,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									{option.icon && !hideOptionIcons && (
 										<Icon
 											{...subProps.icon}
+											name={'option'}
 											className="ss__select__select__option__icon"
 											{...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))}
 										/>

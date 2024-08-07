@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
@@ -50,7 +50,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

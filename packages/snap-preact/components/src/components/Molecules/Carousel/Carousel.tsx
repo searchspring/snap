@@ -15,7 +15,7 @@ import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, BreakpointsProps, RootNodeProperties } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -269,7 +269,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

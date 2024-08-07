@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ResultComponent, StylingCSS } from '../../../types';
+import { ComponentProps, ResultComponent, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
@@ -133,7 +133,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -182,8 +182,8 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 				<HorizontalFacets {...subProps.HorizontalFacets} facets={store.facets} controller={controller} />
 
 				<div className={classnames('ss__horizontal-search__content')}>
-					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} />}
-					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} />}
+					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
 					{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.MiddleToolbar} className="ss__horizontal-search__content__toolbar--middle-toolbar" controller={controller} />
@@ -197,7 +197,7 @@ export const HorizontalSearch = observer((properties: HorizontalSearchProps): JS
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
 
-					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} />}
+					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
 
 					<div className="clear"></div>
 

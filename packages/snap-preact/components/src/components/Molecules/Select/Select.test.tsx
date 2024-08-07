@@ -3,11 +3,12 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
-import { Select } from './Select';
+import { Select, SelectProps } from './Select';
 import { ThemeProvider } from '../../../providers';
+import { ListOption } from '../../../types';
 
 describe('Select Component', () => {
-	const options = [
+	const options: ListOption[] = [
 		{
 			label: 'Red',
 			value: 'red',
@@ -132,7 +133,7 @@ describe('Select Component', () => {
 		});
 
 		it('has props to customize the icon', async () => {
-			const props = {
+			const props: Partial<SelectProps> = {
 				iconOpen: 'angle-left',
 				iconClose: 'angle-right',
 				iconColor: 'purple,',
@@ -331,7 +332,7 @@ describe('Select Component', () => {
 
 			expect(icon).toBeInTheDocument();
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg>'
+				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ss-a11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg>'
 			);
 			expect(selection).not.toBeInTheDocument();
 		});
@@ -348,18 +349,17 @@ describe('Select Component', () => {
 			expect(icon).not.toBeInTheDocument();
 
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ssa11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span>'
+				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ss-a11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span>'
 			);
 			expect(selection).toBeInTheDocument();
 		});
 
 		it('can hideOptionLabels', async () => {
-			const iconOptions = [
+			const iconOptions: ListOption[] = [
 				{
 					label: '1 wide',
 					value: '1 wide',
 					icon: 'square',
-					columns: 1,
 				},
 				{
 					label: '2 wide',
@@ -367,7 +367,6 @@ describe('Select Component', () => {
 					icon: {
 						icon: 'layout-large',
 					},
-					columns: 2,
 				},
 				{
 					label: '3 wide',
@@ -375,7 +374,6 @@ describe('Select Component', () => {
 					icon: {
 						icon: 'layout-grid',
 					},
-					columns: 3,
 				},
 			];
 
@@ -403,12 +401,11 @@ describe('Select Component', () => {
 		});
 
 		it('can hideOptionIcons', async () => {
-			const iconOptions = [
+			const iconOptions: ListOption[] = [
 				{
 					label: '1 wide',
 					value: '1 wide',
 					icon: 'square',
-					columns: 1,
 				},
 				{
 					label: '2 wide',
@@ -416,7 +413,6 @@ describe('Select Component', () => {
 					icon: {
 						icon: 'layout-large',
 					},
-					columns: 2,
 				},
 				{
 					label: '3 wide',
@@ -424,7 +420,6 @@ describe('Select Component', () => {
 					icon: {
 						icon: 'layout-grid',
 					},
-					columns: 3,
 				},
 			];
 
@@ -448,7 +443,7 @@ describe('Select Component', () => {
 			expect(options).toHaveLength(iconOptions.length);
 			expect(optionIcon).not.toBeInTheDocument();
 			expect(optionLabel).toBeInTheDocument();
-			expect(optionLabel).toHaveTextContent(iconOptions[0].label);
+			expect(optionLabel).toHaveTextContent(iconOptions[0].label as string);
 		});
 
 		it('can disableStyles', () => {
@@ -557,7 +552,7 @@ describe('Select Component', () => {
 
 			expect(optionsElements[0].selected).toBe(true);
 
-			await userEvent.selectOptions(selectElement, options[1].value);
+			await userEvent.selectOptions(selectElement, options[1].value as string);
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(optionsElements[0].selected).toBe(false);
@@ -577,7 +572,7 @@ describe('Select Component', () => {
 			expect(firstOptionElement?.selected).toBe(true);
 			expect(selectElement).toHaveAttribute('disabled');
 
-			userEvent.selectOptions(selectElement, options[1].value);
+			userEvent.selectOptions(selectElement, options[1].value as string);
 
 			expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(firstOptionElement?.selected).toBe(true);

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
@@ -90,7 +90,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!disableStyles) {
 		styling.css = [CSS.toolbar(), style];
@@ -179,6 +179,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								}}
 								icon={closeButtonIcon}
 								{...subProps.button}
+								name={'close'}
 							>
 								{closeButtonText}
 							</Button>
@@ -197,6 +198,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
 								{...subProps.button}
+								name={'apply'}
 							/>
 						)}
 						{!hideClearButton && (
@@ -209,6 +211,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 									toggleActive();
 								}}
 								{...subProps.button}
+								name={'clear'}
 							/>
 						)}
 					</div>
@@ -233,6 +236,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 									contentRef.current?.base?.focus();
 								});
 							}}
+							name={'slideout'}
 						>
 							{openButtonText}
 						</Button>

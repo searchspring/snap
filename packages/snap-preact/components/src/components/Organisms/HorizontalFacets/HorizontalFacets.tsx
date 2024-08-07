@@ -8,7 +8,7 @@ import deepmerge from 'deepmerge';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
@@ -206,7 +206,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -262,6 +262,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 										{...(selectedFacet?.field === facet.field
 											? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 											: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+										name={selectedFacet?.field === facet.field ? 'expand' : 'collapse'}
 									/>
 								</div>
 							}

@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption, SwatchOption } from '../../../types';
 import { useState } from 'react';
 import { useA11y } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
@@ -164,7 +164,7 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	let selected = props.selected;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	if (!disableStyles) {
 		styling.css = [CSS.Grid({ theme, columns, gapSize, disableOverflowAction }), style];
 	} else if (style) {
@@ -221,7 +221,7 @@ export function Grid(properties: GridProps): JSX.Element {
 				}}
 			>
 				{overflowButton ? (
-					cloneWithProps(overflowButton, { limited, remainder })
+					cloneWithProps(overflowButton, { limited, remainder, treePath })
 				) : limited ? (
 					<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
 				) : remainder ? (

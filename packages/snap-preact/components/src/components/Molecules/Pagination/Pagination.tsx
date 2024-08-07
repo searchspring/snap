@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -83,7 +83,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const _pages = store?.getPages(...getPagesParams);
 	const pageNumbers = _pages?.map((page) => page.number);
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -105,7 +105,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 							className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
 							aria-label={'go to previous page'}
 						>
-							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
+							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} name={'prev'} />}
 						</a>
 					)}
 
@@ -159,7 +159,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					{/* next */}
 					{store.next && !hideNext && (
 						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'go to next page'}>
-							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
+							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} name={'next'} />}
 						</a>
 					)}
 				</nav>

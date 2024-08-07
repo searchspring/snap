@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -89,7 +89,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		props.columns = 0;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

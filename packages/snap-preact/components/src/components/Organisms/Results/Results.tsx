@@ -10,7 +10,7 @@ import type { SearchResultStore, Product, Banner } from '@searchspring/snap-stor
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
+import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -126,7 +126,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize, theme };
 
 	if (styleScript && !disableStyles) {

@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, SwatchOption, BreakpointsProps } from '../../../types';
+import { ComponentProps, RootNodeProperties, SwatchOption, BreakpointsProps } from '../../../types';
 import { useState } from 'react';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
@@ -167,7 +167,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 	const selected = props.selected;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	if (!disableStyles) {
 		styling.css = [CSS.Swatches({ theme }), style];
 	} else if (style) {
@@ -247,8 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 			type?: 'carousel'; // 	| { //  & (
-// 			carousel?: Partial<CarouselProps>;
+} & // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // 	  }
 // 	| {
 // 			type?: 'grid';

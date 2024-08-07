@@ -6,7 +6,7 @@ import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { mergeProps } from '../../../utilities';
-import type { ComponentProps, StylingCSS } from '../../../types';
+import type { ComponentProps, RootNodeProperties } from '../../../types';
 
 const CSS = {
 	bundleSelector: ({}: Partial<BundleSelectorProps>) => css({}),
@@ -46,7 +46,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

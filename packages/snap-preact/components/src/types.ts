@@ -19,6 +19,7 @@ export interface ComponentProps {
 	controller?: AbstractController;
 	snap?: Snap | SnapTemplates;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
+	name?: string;
 	treePath?: string;
 }
 
@@ -77,6 +78,11 @@ export type BreakpointsEntry = {
 };
 
 export type StylingCSS = Array<CSSInterpolation | SerializedStyles>;
+
+export type RootNodeProperties = {
+	css?: StylingCSS;
+	'ss-name'?: string;
+};
 
 export type SwatchOption = ListOption & {
 	backgroundImageUrl?: string;

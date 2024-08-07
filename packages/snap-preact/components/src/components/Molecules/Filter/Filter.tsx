@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
@@ -76,7 +76,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -131,3 +131,5 @@ interface FilterSubProps {
 	button: ButtonProps;
 	icon: IconProps;
 }
+
+export type FilterNames = 'clear-all';

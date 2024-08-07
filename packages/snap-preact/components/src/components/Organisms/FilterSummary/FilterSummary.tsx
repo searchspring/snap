@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import { IconType } from '../../Atoms/Icon';
@@ -76,7 +76,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -99,6 +99,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				{!hideClearAll && (
 					<Filter
 						{...subProps.filter}
+						name={'clear-all'}
 						icon={clearAllIcon}
 						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel

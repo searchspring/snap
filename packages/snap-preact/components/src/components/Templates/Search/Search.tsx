@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, ResultComponent, StylingCSS } from '../../../types';
+import { ComponentProps, ListOption, ResultComponent, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
@@ -185,7 +185,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -241,21 +241,21 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							sidebarOpenState && (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
-									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
 								</Fragment>
 							)
 						) : (
 							<Fragment>
 								<Sidebar {...subProps.Sidebar} controller={controller} />
-								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} />}
+								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
 							</Fragment>
 						)}
 					</div>
 				)}
 				<div className={classnames('ss__search__content')}>
 					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} />}
-					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} />}
+					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
 					{toggleSidebarButtonText && (
 						<Button onClick={() => setSidebarOpenState(!sidebarOpenState)} className="ss__search__sidebar-wrapper-toggle" {...subProps.Button}>
@@ -277,7 +277,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
 
-					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} />}
+					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
 
 					<div className="clear"></div>
 
