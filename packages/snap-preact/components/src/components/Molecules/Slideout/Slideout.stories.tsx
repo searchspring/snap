@@ -75,6 +75,7 @@ export default {
 		buttonContent: {
 			defaultValue: 'click me',
 			description: 'Slideout button content (children), appended to buttonText',
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'string, jsx',

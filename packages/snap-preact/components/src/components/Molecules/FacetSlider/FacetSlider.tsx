@@ -11,7 +11,8 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
-import { useA11y } from '../../../hooks';
+import { lang, useA11y, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	facetSlider: ({
@@ -222,40 +223,58 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 						<div className={`${idx === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} />
 					))}
 					<div className={'ss__facet-slider__handles'}>
-						{handles.map(({ value, active, getHandleProps }, idx: number) => (
-							<button
-								type="button"
-								{...getHandleProps({
-									style: {
-										appearance: 'none',
-										border: 'none',
-										background: 'transparent',
-										outline: 'none',
+						{handles.map(({ value, active, getHandleProps }, idx: number) => {
+							//initialize lang
+							const defaultLang = {
+								sliderHandle: {
+									attributes: {
+										'aria-label': `${facet.label} slider button`,
+										'aria-valuetext': `${facet.label} slider button, current value ${value}, ${
+											facet.range?.low ? `min value ${facet.range?.low},` : ``
+										} ${facet.range?.high ? `max value ${facet.range?.high}` : ``}`,
 									},
-								})}
-								aria-label={`${facet.label} slider button`}
-								aria-valuetext={`${facet.label} slider button, current value ${value}, ${facet.range?.low ? `min value ${facet.range?.low},` : ``} ${
-									facet.range?.high ? `max value ${facet.range?.high}` : ``
-								}`}
-								ref={(e) => useA11y(e)}
-							>
-								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
-									{stickyHandleLabel && (
-										<label
-											className={classnames(
-												'ss__facet-slider__handle__label',
-												'ss__facet-slider__handle__label--sticky',
-												`ss__facet-slider__handle__label--${idx}`,
-												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet?.range?.low },
-												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high }
-											)}
-										>
-											{sprintf(facet.formatValue, value)}
-										</label>
-									)}
-								</div>
-							</button>
-						))}
+								},
+							};
+
+							//deep merge with props.lang
+							const lang = deepmerge(defaultLang, props.lang || {});
+							const mergedLang = useLang(lang as any, {
+								facet,
+								value,
+							});
+
+							return (
+								<button
+									type="button"
+									{...getHandleProps({
+										style: {
+											appearance: 'none',
+											border: 'none',
+											background: 'transparent',
+											outline: 'none',
+										},
+									})}
+									{...mergedLang.sliderHandle}
+									ref={(e) => useA11y(e)}
+								>
+									<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
+										{stickyHandleLabel && (
+											<label
+												className={classnames(
+													'ss__facet-slider__handle__label',
+													'ss__facet-slider__handle__label--sticky',
+													`ss__facet-slider__handle__label--${idx}`,
+													{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet?.range?.low },
+													{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high }
+												)}
+											>
+												{sprintf(facet.formatValue, value)}
+											</label>
+										)}
+									</div>
+								</button>
+							);
+						})}
 					</div>
 				</div>
 				{!stickyHandleLabel && (
@@ -285,4 +304,12 @@ export interface FacetSliderProps extends ComponentProps {
 	facet: RangeFacet;
 	onChange?: (values: number[]) => void;
 	onDrag?: (values: number[]) => void;
+	lang?: Partial<FacetSliderLang>;
+}
+
+export interface FacetSliderLang {
+	sliderHandle: lang<{
+		facet: RangeFacet;
+		value: number;
+	}>;
 }

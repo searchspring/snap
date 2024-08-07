@@ -135,13 +135,13 @@ describe('MobileSidebar Component', () => {
 		const text = 'click me';
 		const rendered = render(<MobileSidebar controller={controller} openButtonText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		expect(slideoutButton?.innerHTML).toBe(text);
+		expect(slideoutButton?.textContent).toBe(text);
 	});
 
 	it('has expected default slideout open button text', async () => {
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
-		expect(slideoutButton?.innerHTML).toBe('Filters');
+		expect(slideoutButton?.textContent).toBe('Filters');
 	});
 
 	it('has expected default clear button text', async () => {
@@ -452,6 +452,118 @@ describe('MobileSidebar Component', () => {
 		const rendered = render(<MobileSidebar controller={controller} disableStyles />);
 		const element = rendered.container.querySelector('.ss__mobile-sidebar');
 		expect(element?.classList).toHaveLength(1);
+	});
+
+	describe('Sidebar lang works', () => {
+		const selector = '.ss__mobile-sidebar';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['titleText', 'clearButtonText', 'applyButtonText', 'closeButtonText', 'openButtonText'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach(async (option) => {
+				langObjs.forEach(async (langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					// @ts-ignore
+					const rendered = render(<MobileSidebar controller={controller} lang={lang} />);
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					//have to open side bar to render anything
+					const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
+					userEvent.click(slideoutButton!);
+
+					await waitFor(() => {
+						const title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
+						expect(title).toBeInTheDocument();
+						let langElem;
+						if (option == 'titleText') {
+							langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+						} else {
+							if (option == 'openButtonText') {
+								langElem = rendered.container.querySelector(`.ss__mobile-sidebar__slideout__button [ss-lang=button]`);
+							}
+							if (option == 'clearButtonText') {
+								langElem = rendered.container.querySelector(`.ss__mobile-sidebar__footer__clear-button [ss-lang=button]`);
+							}
+							if (option == 'applyButtonText') {
+								langElem = rendered.container.querySelector(`.ss__mobile-sidebar__footer__apply-button [ss-lang=button]`);
+							}
+							if (option == 'closeButtonText') {
+								langElem = rendered.container.querySelector(`.ss__mobile-sidebar__header__close-button [ss-lang=button]`);
+							}
+						}
+
+						expect(langElem).toBeInTheDocument();
+						if (typeof langObj.value == 'function') {
+							expect(langElem?.innerHTML).toBe(value);
+
+							if (option == 'titleText') {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+								});
+							} else {
+								expect(valueMock).toHaveBeenCalledWith({});
+							}
+						} else {
+							expect(langElem?.innerHTML).toBe(langObj.value);
+						}
+
+						expect(langElem).toHaveAttribute('alt', altText);
+						expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+						expect(langElem).toHaveAttribute('title', title);
+
+						jest.restoreAllMocks();
+					});
+				});
+			});
+		});
 	});
 
 	describe('Sidebar theming works', () => {

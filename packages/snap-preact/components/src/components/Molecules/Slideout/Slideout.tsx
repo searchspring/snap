@@ -40,7 +40,6 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
-		buttonContent: 'click me',
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 	};
@@ -123,9 +122,9 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 });
 
 export interface SlideoutProps extends ComponentProps {
+	buttonContent: string | JSX.Element;
 	children?: ComponentChildren;
 	active?: boolean;
-	buttonContent?: string | JSX.Element;
 	noButtonWrapper?: boolean;
 	width?: string;
 	displayAt?: string;

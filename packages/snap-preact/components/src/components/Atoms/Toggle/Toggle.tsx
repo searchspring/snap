@@ -7,7 +7,8 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useState } from 'react';
-import { useA11y } from '../../../hooks';
+import { lang, useA11y, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	toggle: ({ activeColor, inactiveColor: deActiveColor, buttonColor, size }: Partial<ToggleProps>) =>
@@ -112,6 +113,24 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 		setToggleState(!toggledState);
 	};
 
+	//initialize lang
+	const defaultLang = {
+		toggleSwitch: {
+			attributes: {
+				'aria-label': `currently ${toggledState ? 'selected' : 'not selected'} toggle switch ${label ? `for ${label}` : ''} `,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		toggledState,
+		label,
+		round,
+		disabled,
+	});
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toggle', disabled ? 'ss__toggle--disabled' : '', className)}>
@@ -123,8 +142,8 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 						clickFunc(e);
 					}}
 					ref={(e) => useA11y(e)}
-					aria-label={`currently ${toggledState ? 'selected' : 'not selected'} toggle switch ${label ? `for ${label}` : ''} `}
 					aria-checked={toggledState}
+					{...mergedLang.toggleSwitch}
 				>
 					<div className={`ss__toggle__slider-box ${round ? 'ss__toggle__slider-box--round' : ''}`}>
 						<div className={`ss__toggle__slider ${round ? 'ss__toggle__slider--round' : ''}`}></div>
@@ -145,4 +164,14 @@ export interface ToggleProps extends ComponentProps {
 	buttonColor?: string;
 	size?: string;
 	disabled?: boolean;
+	lang?: Partial<ToggleLang>;
+}
+
+export interface ToggleLang {
+	toggleSwitch: lang<{
+		toggledState: boolean;
+		label: string;
+		round: boolean;
+		disabled: boolean;
+	}>;
 }

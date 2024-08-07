@@ -6,10 +6,11 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../types';
 import { useState } from 'react';
-import { useA11y } from '../../../hooks';
+import { lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
@@ -210,6 +211,23 @@ export function Grid(properties: GridProps): JSX.Element {
 	const OverflowButtonElem = () => {
 		const showButton = hideShowLess ? (!limited ? false : true) : true;
 
+		//initialize lang
+		const defaultLang = {
+			showMoreText: {
+				value: `+ ${remainder}`,
+			},
+			showLessText: {
+				value: 'Less',
+			},
+		};
+
+		//deep merge with props.lang
+		const lang = deepmerge(defaultLang, props.lang || {});
+		const mergedLang = useLang(lang as any, {
+			limited,
+			remainder,
+		});
+
 		return showButton && remainder > 0 && options.length !== limit ? (
 			<div
 				className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
@@ -221,9 +239,9 @@ export function Grid(properties: GridProps): JSX.Element {
 				{overflowButton ? (
 					cloneWithProps(overflowButton, { limited, remainder })
 				) : limited ? (
-					<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
+					<span className={'ss__grid__show-more'} {...mergedLang.showMoreText}></span>
 				) : remainder ? (
-					<span className={'ss__grid__show-less'}>Less</span>
+					<span className={'ss__grid__show-less'} {...mergedLang.showLessText}></span>
 				) : (
 					<Fragment />
 				)}
@@ -294,6 +312,18 @@ export interface GridProps extends ComponentProps {
 	overflowButton?: JSX.Element;
 	overflowButtonInGrid?: boolean;
 	onOverflowButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, status: boolean, remainder: number) => void;
+	lang?: Partial<GridLang>;
+}
+
+export interface GridLang {
+	showMoreText: lang<{
+		limited: number | boolean;
+		remainder: number;
+	}>;
+	showLessText: lang<{
+		limited: number | boolean;
+		remainder: number;
+	}>;
 }
 
 interface GridSubProps {

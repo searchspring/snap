@@ -278,6 +278,90 @@ describe('LoadMore Component', () => {
 		expect(styles.padding).toBe(style.padding);
 	});
 
+	describe('loadMore lang works', () => {
+		const selector = '.ss__load-more';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['loadMoreButton', 'progressText'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					// @ts-ignore
+					const rendered = render(<LoadMore pagination={paginationStore} lang={lang} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+
+					expect(langElem).toBeInTheDocument();
+					if (typeof langObj.value == 'function') {
+						expect(langElem?.innerHTML).toBe(value);
+
+						expect(valueMock).toHaveBeenCalledWith({
+							paginationStore: paginationStore,
+						});
+					} else {
+						expect(langElem?.innerHTML).toBe(langObj.value);
+					}
+
+					expect(langElem).toHaveAttribute('alt', altText);
+					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+					expect(langElem).toHaveAttribute('title', title);
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {
