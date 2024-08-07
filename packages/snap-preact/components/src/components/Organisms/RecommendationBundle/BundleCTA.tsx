@@ -28,7 +28,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		setTimeout(() => setAddedToCart(false), properties.ctaButtonSuccessTimeout);
 	};
 
-	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText } = props;
+	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText, treePath } = props;
 
 	const [addedToCart, setAddedToCart] = useState(false);
 
@@ -43,6 +43,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 	return (

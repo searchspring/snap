@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
@@ -36,7 +36,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const { active, onClick, disableStyles, className, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

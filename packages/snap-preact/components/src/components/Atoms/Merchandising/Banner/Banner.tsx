@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { ComponentProps, StylingCSS } from '../../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
 import { mergeProps } from '../../../../utilities';
 
@@ -34,7 +34,7 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 		console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
 		return <Fragment></Fragment>;
 	}
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -70,3 +70,5 @@ export interface BannerProps extends ComponentProps {
 	content?: BannerContent;
 	type: ContentType;
 }
+
+export type BannerNames = 'left' | 'header' | 'banner' | 'footer';

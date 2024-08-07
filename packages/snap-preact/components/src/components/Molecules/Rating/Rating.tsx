@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
@@ -50,10 +50,11 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, style, styleScript } = props;
+	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: RatingSubProps = {
 		fullIcon: {
+			name: 'star--full',
 			// default props
 			// global theme
 			...globalTheme?.components?.icon,
@@ -63,8 +64,10 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		emptyIcon: {
+			name: 'star--empty',
 			// default props
 			color: '#ccc',
 			// global theme
@@ -75,6 +78,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -90,7 +94,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		value = 5;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, value };
 
 	if (styleScript && !disableStyles) {
@@ -111,11 +115,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 					<div className="ss__rating__stars ss__rating__stars--empty">
 						{[...Array(5)].map(() => (
 							<span className="ss__rating__stars__star ss__rating__stars__star--empty">
-								<Icon
-									name={'ss__rating__stars__star--empty'}
-									{...subProps.emptyIcon}
-									{...(typeof emptyIcon == 'string' ? { icon: emptyIcon } : (emptyIcon as Partial<IconProps>))}
-								/>
+								<Icon {...subProps.emptyIcon} {...(typeof emptyIcon == 'string' ? { icon: emptyIcon } : (emptyIcon as Partial<IconProps>))} />
 							</span>
 						))}
 					</div>
@@ -129,11 +129,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 							return (
 								<span className="ss__rating__stars__star ss__rating__stars__star--full" style={{ width: `${width}%` }}>
-									<Icon
-										name={'ss__rating__stars__star--full'}
-										{...subProps.fullIcon}
-										{...(typeof fullIcon == 'string' ? { icon: fullIcon } : (fullIcon as Partial<IconProps>))}
-									/>
+									<Icon {...subProps.fullIcon} {...(typeof fullIcon == 'string' ? { icon: fullIcon } : (fullIcon as Partial<IconProps>))} />
 								</span>
 							);
 						})}

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
-import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
+import { ComponentProps, RootNodeProperties, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
@@ -70,7 +70,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 	};
 	const { result, children, controller, renderEmpty, disableStyles, className, style } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!children) {
 		controller?.log?.warn('OverlayBadge component must have children');

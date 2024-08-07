@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 
 const CSS = {
 	BadgeRectangle: (props: BadgeRectangleProps) => {
@@ -37,7 +37,7 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 	};
 	const { value, disableStyles, tag, className, style } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!disableStyles) {
 		styling.css = [CSS.BadgeRectangle(props), style];

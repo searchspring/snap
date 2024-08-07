@@ -9,6 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import { iconPaths } from '../../Atoms/Icon';
 import Readme from '../Select/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
+import { ListOption } from '../../../types';
 
 export default {
 	title: 'Molecules/Select',
@@ -314,12 +315,11 @@ Native.args = {
 };
 
 export const IconOptions = (args: SelectProps) => {
-	const iconOptions = [
+	const iconOptions: ListOption[] = [
 		{
 			label: '1 wide',
 			value: '1 wide',
 			icon: 'square',
-			columns: 1,
 		},
 		{
 			label: '2 wide',
@@ -327,7 +327,6 @@ export const IconOptions = (args: SelectProps) => {
 			icon: {
 				icon: 'layout-large',
 			},
-			columns: 2,
 		},
 		{
 			label: '3 wide',
@@ -335,7 +334,6 @@ export const IconOptions = (args: SelectProps) => {
 			icon: {
 				icon: 'layout-grid',
 			},
-			columns: 3,
 		},
 	];
 

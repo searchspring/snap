@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
@@ -36,10 +36,21 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
-	const { controller, hideFilterSummary, hidePerPage, hideSortBy, hideLayoutSelector, hidePagination, disableStyles, className, style, styleScript } =
-		props;
+	const {
+		controller,
+		hideFilterSummary,
+		hidePerPage,
+		hideSortBy,
+		hideLayoutSelector,
+		hidePagination,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		treePath,
+	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -63,6 +74,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		LayoutSelector: {
 			// default props
@@ -76,6 +88,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		Pagination: {
 			// default props
@@ -89,6 +102,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		LoadMore: {
 			// default props
@@ -102,6 +116,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		SortBy: {
 			// default props
@@ -115,6 +130,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		PerPage: {
 			// default props
@@ -128,6 +144,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -173,7 +190,10 @@ export interface ToolbarProps extends ComponentProps {
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hidePagination?: boolean;
+	name?: ToolbarNames;
 }
+
+export type ToolbarNames = 'top' | 'middle' | 'bottom';
 
 interface ToolbarSubProps {
 	FilterSummary: Partial<FilterSummaryProps>;

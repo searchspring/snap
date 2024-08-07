@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps } from '../../../utilities';
@@ -44,7 +44,21 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
 
-	const { content, children, disabled, native, onClick, disableA11y, disableStyles, className, icon, style, styleScript, ...additionalProps } = props;
+	const {
+		content,
+		children,
+		disabled,
+		native,
+		onClick,
+		disableA11y,
+		disableStyles,
+		className,
+		icon,
+		style,
+		styleScript,
+		treePath,
+		...additionalProps
+	} = props;
 
 	const subProps: ButtonSubProps = {
 		icon: {
@@ -57,10 +71,11 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -124,3 +139,5 @@ export interface ButtonProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	disableA11y?: boolean;
 }
+
+export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout';

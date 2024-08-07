@@ -15,7 +15,7 @@ import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, BreakpointsProps, RootNodeProperties } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -238,6 +238,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		styleScript,
 		modules,
 		className,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -256,6 +257,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -267,7 +269,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -346,7 +348,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 						onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 					>
-						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'previousButton'} />}
+						{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} name={'prev'} />}
 					</div>
 				</div>
 
@@ -425,7 +427,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						ref={navigationNextRef as React.RefObject<HTMLDivElement>}
 						onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
 					>
-						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} name={'nextButton'} />}
+						{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} name={'next'} />}
 					</div>
 				</div>
 			</div>

@@ -7,9 +7,10 @@ import { observer } from 'mobx-react';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
+import { IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	filterSummary: ({}: Partial<FilterSummaryProps>) =>
@@ -53,6 +54,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: FilterSummarySubProps = {
@@ -70,10 +72,11 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -96,6 +99,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				{!hideClearAll && (
 					<Filter
 						{...subProps.filter}
+						name={'clear-all'}
 						icon={clearAllIcon}
 						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel
@@ -114,7 +118,7 @@ export interface FilterSummaryProps extends ComponentProps {
 	filters?: FilterType[];
 	title?: string;
 	filterIcon?: string;
-	clearAllIcon?: string;
+	clearAllIcon?: IconType;
 	separator?: string;
 	hideFacetLabel?: boolean;
 	clearAllLabel?: string;

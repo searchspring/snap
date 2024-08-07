@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
@@ -50,7 +50,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		setVisibility('hidden');
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, visibility };
 
 	if (styleScript && !disableStyles) {

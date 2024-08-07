@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
 import { ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 describe('Dropdown Component', () => {
 	it('renders', () => {
@@ -68,7 +69,7 @@ describe('Dropdown Component', () => {
 
 		expect(buttonElement).toBeInTheDocument();
 
-		expect(buttonElement).toHaveAttribute('ssA11y');
+		expect(buttonElement).toHaveAttribute(A11Y_ATTRIBUTE);
 
 		const rendered2 = render(
 			<Dropdown button={'open me'} disableA11y>
@@ -77,7 +78,7 @@ describe('Dropdown Component', () => {
 		);
 
 		const buttonElement2 = rendered2.container.querySelector('.ss__dropdown__button');
-		expect(buttonElement2).not.toHaveAttribute('ssA11y');
+		expect(buttonElement2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 	});
 
 	it('renders content and children props', () => {

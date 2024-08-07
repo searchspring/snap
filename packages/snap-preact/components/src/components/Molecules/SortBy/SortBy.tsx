@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -26,7 +26,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, label, disableStyles, className, style, styleScript } = props;
+	const { sorting, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -40,6 +40,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		RadioList: {
 			// global theme
@@ -50,6 +51,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		List: {
 			multiSelect: false,
@@ -63,10 +65,11 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

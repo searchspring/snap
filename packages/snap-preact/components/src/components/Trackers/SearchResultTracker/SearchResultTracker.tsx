@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 // import { useIntersection } from '../../../hooks';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 import { SearchController } from '@searchspring/snap-controller';
@@ -28,7 +28,7 @@ export const SearchResultTracker = observer((properties: SearchResultTrackerProp
 	// }
 	// }
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': properties.name };
 	const stylingProps = properties;
 
 	if (styleScript && !disableStyles) {

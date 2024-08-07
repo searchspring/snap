@@ -4,7 +4,7 @@ import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps, StylingCSS } from '../../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 
@@ -33,7 +33,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 		controller.track.product.impression(result);
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': properties.name };
 	const stylingProps = properties;
 
 	if (styleScript && !disableStyles) {

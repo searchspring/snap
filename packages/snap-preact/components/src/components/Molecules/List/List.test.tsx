@@ -344,7 +344,7 @@ describe('List Component', () => {
 	it('it can render Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',
@@ -386,7 +386,7 @@ describe('List Component', () => {
 	it('it can hide Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',

@@ -4,7 +4,7 @@ import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps, StylingCSS } from '../../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../../types';
 import classnames from 'classnames';
 
 const CSS = {
@@ -28,7 +28,7 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 	// takes care of rendering profile
 	childs.length && controller.track.render();
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': properties.name };
 	const stylingProps = properties;
 
 	if (styleScript && !disableStyles) {

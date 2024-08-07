@@ -9,7 +9,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, ResultsLayoutType, ResultsLayout, StylingCSS } from '../../../types';
+import { ComponentProps, ResultsLayoutType, ResultsLayout, RootNodeProperties } from '../../../types';
 import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -97,6 +97,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		style,
 		styleScript,
 		controller,
+		treePath,
 	} = props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
@@ -112,6 +113,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		calloutBadge: {
 			// default props
@@ -125,6 +127,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		overlayBadge: {
 			// default props
@@ -139,6 +142,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		image: {
 			// default props
@@ -153,7 +157,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			theme: props?.theme,
+			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -162,7 +167,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -223,7 +228,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						<div className="ss__result__details__pricing">
 							{core.msrp && core.price && core.price < core.msrp ? (
 								<>
-									<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+									<Price {...subProps.price} value={core.msrp} lineThrough={true} name={'price--msrp'} />
 									&nbsp;
 									<Price {...subProps.price} value={core.price} />
 								</>
@@ -232,7 +237,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							)}
 						</div>
 					)}
-					{cloneWithProps(detailSlot, { result })}
+					{cloneWithProps(detailSlot, { result, treePath })}
 				</div>
 			</article>
 		</CacheProvider>
@@ -265,3 +270,4 @@ export interface ResultProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }
+export type ResultNames = 'seed';

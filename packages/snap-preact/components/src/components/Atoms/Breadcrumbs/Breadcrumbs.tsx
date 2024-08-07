@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
 
@@ -31,7 +31,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const { data, separator, disableStyles, className, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

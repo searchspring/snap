@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { Checkbox } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
 import { ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 const globalTheme = {
 	components: {
@@ -91,12 +92,12 @@ describe('Checkbox Component', () => {
 
 			expect(checkbox).toBeInTheDocument();
 
-			expect(checkbox).toHaveAttribute('ssA11y');
+			expect(checkbox).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Checkbox checked disableA11y />);
 
 			const checkbox2 = rendered2.container.querySelector('.ss__checkbox');
-			expect(checkbox2).not.toHaveAttribute('ssA11y');
+			expect(checkbox2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('respects the disabled prop', () => {

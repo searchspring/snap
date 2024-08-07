@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -60,6 +60,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		style,
 		styleScript,
 		theme,
+		treePath,
 	} = props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
@@ -80,6 +81,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -105,7 +107,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

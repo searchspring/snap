@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
@@ -58,7 +58,7 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const { disableStyles, className, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
