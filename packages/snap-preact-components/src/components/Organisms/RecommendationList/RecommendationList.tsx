@@ -86,7 +86,7 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 					<div className="ss__recommendation-list__result-wrapper">
 						{Array.isArray(children) && children.length
 							? children.map((child: any, idx: number) => {
-									if (!limit || idx + 1 < limit) {
+									if (!limit || idx < limit) {
 										return (
 											<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
 												{child}
@@ -95,7 +95,7 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 									}
 							  })
 							: resultsToRender.map((result, idx) => {
-									if (!limit || idx + 1 < limit) {
+									if (!limit || idx < limit) {
 										return (
 											<RecommendationResultTracker controller={controller} result={result}>
 												{(() => {

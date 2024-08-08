@@ -82,6 +82,72 @@ describe('RecommendationList Component', () => {
 		window.IntersectionObserver.mockClear();
 	});
 
+	it('renders with limited results', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
+
+		await controller.search();
+		const limit = 5;
+		const rendered = render(
+			<RecommendationList limit={limit} controller={controller}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</RecommendationList>
+		);
+
+		const recommendationWrapper = rendered.container.querySelector('.ss__recommendation-list');
+		const results = rendered.container.querySelectorAll('.result');
+
+		expect(recommendationWrapper).toBeInTheDocument();
+		expect(results).toHaveLength(limit);
+
+		// @ts-ignore
+		window.IntersectionObserver.mockClear();
+	});
+
+	it('renders vertical', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
+
+		await controller.search();
+
+		const rendered = render(
+			<RecommendationList vertical={true} controller={controller}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</RecommendationList>
+		);
+
+		const recommendationWrapper = rendered.container.querySelector('.ss__recommendation-list__result-wrapper');
+
+		expect(recommendationWrapper).toBeInTheDocument();
+		const styles = getComputedStyle(recommendationWrapper!);
+		expect(styles.flexDirection).toBe('column');
+
+		// @ts-ignore
+		window.IntersectionObserver.mockClear();
+	});
+
 	it('tracks as expected', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
