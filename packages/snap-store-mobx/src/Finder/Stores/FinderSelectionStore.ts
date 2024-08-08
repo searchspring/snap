@@ -49,7 +49,6 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 		const config = params.config;
 		const { services, data, stores, state } = params || {};
 		const { storage } = stores || {};
-		const { finder, loading } = state || {};
 		const { search, meta, selections } = data || {};
 		const { facets } = search || {};
 
@@ -71,7 +70,16 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 							storage.set(`${storageKey}.${levelConfig.key}.values`, selection.data);
 							storage.set(`${storageKey}.${levelConfig.key}.selected`, selection.selected);
 
-							const selectionHierarchy = new SelectionHierarchy(services, config.id, finder, facet, levelConfig, loading, storage);
+							const selectionHierarchy = new SelectionHierarchy({
+								config: levelConfig,
+								services,
+								stores,
+								state,
+								data: {
+									id: config.id,
+									facet,
+								},
+							});
 
 							if (config.persist?.lockSelections) {
 								selectionHierarchy.disabled = true;
@@ -84,7 +92,16 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 							selectedSelections.push(selectionHierarchy);
 						});
 					} else {
-						const selection = new Selection(services, config.id, finder, facet, fieldObj, loading, storage);
+						const selection = new Selection({
+							config: fieldObj,
+							services,
+							stores,
+							state,
+							data: {
+								id: config.id,
+								facet,
+							},
+						});
 
 						selection.selected = selected;
 						selection.storage.set('selected', selected);
@@ -135,10 +152,32 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 
 					levels?.map((level, index) => {
 						const levelConfig: LevelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
-						selectedSelections.push(new SelectionHierarchy(services, config.id, finder, facet, levelConfig, loading, storage));
+						selectedSelections.push(
+							new SelectionHierarchy({
+								config: levelConfig,
+								services,
+								stores,
+								state,
+								data: {
+									id: config.id,
+									facet,
+								},
+							})
+						);
 					});
 				} else {
-					selectedSelections.push(new Selection(services, config.id, finder, facet, fieldObj, loading, storage));
+					selectedSelections.push(
+						new Selection({
+							config: fieldObj,
+							services,
+							stores,
+							state,
+							data: {
+								id: config.id,
+								facet,
+							},
+						})
+					);
 				}
 			});
 		}
@@ -168,20 +207,17 @@ class SelectionBase {
 	public data?: SearchResponseModelFacetValueAllOfValues[];
 	public storage;
 
-	constructor(
-		services: StoreServices,
-		id: string,
-		state: FinderStoreState,
-		facet: FacetWithMeta,
-		selectionConfig: FinderFieldConfig | LevelConfig,
-		loading: boolean,
-		storageStore: StorageStore
-	) {
+	constructor(selectionData: SelectionData) {
+		const { config, services, stores, state, data } = selectionData || {};
+		const { storage } = stores || {};
+		const { id, facet } = data || {};
+
+		const { finder, loading } = state;
 		this.services = services;
 		this.loading = loading;
-		this.state = state;
+		this.state = finder;
 		this.id = id;
-		this.config = selectionConfig;
+		this.config = config;
 
 		// inherit all standard facet properties
 		this.facet = facet;
@@ -198,11 +234,11 @@ class SelectionBase {
 			key: generateStorageKey(this.id, this.field),
 			get: function (key?: string) {
 				const path = this.key + (key ? `.${key}` : '');
-				return storageStore.get(path);
+				return storage.get(path);
 			},
 			set: function (key: string, value: unknown) {
 				const path = this.key + (key ? `.${key}` : '');
-				return storageStore.set(path, value);
+				return storage.set(path, value);
 			},
 		};
 	}
@@ -220,19 +256,22 @@ class SelectionBase {
 	}
 }
 
+type SelectionData = Omit<FinderSelectionStoreConfig, 'config' | 'data'> & {
+	config: FinderFieldConfig | LevelConfig;
+	data: {
+		id: string;
+		facet: FacetWithMeta;
+	};
+};
+
 class Selection extends SelectionBase {
 	public config!: FinderFieldConfig;
 
-	constructor(
-		services: StoreServices,
-		id: string,
-		state: FinderStoreState,
-		facet: FacetWithMeta,
-		config: FinderFieldConfig,
-		loading: boolean,
-		storageStore: StorageStore
-	) {
-		super(services, id, state, facet, config, loading, storageStore);
+	constructor(selectionData: SelectionData) {
+		super(selectionData);
+		const { state, data } = selectionData || {};
+		const { loading } = state || {};
+		const { facet } = data || {};
 
 		this.loading = loading;
 		this.storage.set('values', facet.values);
@@ -264,16 +303,10 @@ class SelectionHierarchy extends SelectionBase {
 	public hierarchyDelimiter: string;
 	public config!: LevelConfig;
 
-	constructor(
-		services: StoreServices,
-		id: string,
-		state: FinderStoreState,
-		facet: FacetWithMeta,
-		config: LevelConfig,
-		loading: boolean,
-		storageStore: StorageStore
-	) {
-		super(services, id, state, facet, config, loading, storageStore);
+	constructor(selectionData: SelectionData) {
+		super(selectionData);
+		const { data } = selectionData || {};
+		const { facet } = data || {};
 
 		// inherit additional facet properties
 		this.hierarchyDelimiter = facet.hierarchyDelimiter!;
