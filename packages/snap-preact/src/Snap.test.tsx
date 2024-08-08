@@ -38,7 +38,7 @@ describe('Snap Preact', () => {
 	beforeEach(() => {
 		delete window.searchspring;
 
-		document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-content"></div>`;
+		document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-content" style="min-height: 100vh"></div>`;
 	});
 
 	afterEach(cleanup);
@@ -522,6 +522,150 @@ describe('Snap Preact', () => {
 			await wait();
 
 			expect(onTarget).toHaveBeenCalledTimes(1);
+		});
+
+		it(`removes 'min-height' from target by default`, async () => {
+			const baseConfig = generateBaseConfig();
+			const searchConfig = {
+				...baseConfig,
+				controllers: {
+					search: [
+						{
+							config: {
+								id: 'search',
+							},
+							targeters: [
+								{
+									selector: '#searchspring-content',
+									hideTarget: true,
+									component: () => {
+										return Component;
+									},
+								},
+							],
+						},
+					],
+				},
+			};
+
+			let contentElem = document.querySelector('#searchspring-content');
+			expect(contentElem).not.toBeNull();
+
+			// initially element has a minHeight
+			expect((contentElem as HTMLElement).style.minHeight).toBe('100vh');
+
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals);
+			const snap = new Snap(searchConfig, { client });
+
+			// wait is needed due to promise usage (async)
+			await wait(200);
+
+			// after onTarget resolves element minHeight is removed
+			expect((contentElem as HTMLElement).style.minHeight).toBe('');
+		});
+
+		it(`will render the component before the search resolves`, async () => {
+			const baseConfig = generateBaseConfig();
+			const searchConfig = {
+				...baseConfig,
+				controllers: {
+					search: [
+						{
+							config: {
+								id: 'search',
+							},
+							targeters: [
+								{
+									selector: '#searchspring-content',
+									hideTarget: true,
+									component: () => {
+										return Component;
+									},
+								},
+							],
+						},
+					],
+				},
+			};
+
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals, undefined, { delay: 50 });
+			const snap = new Snap(searchConfig, { client });
+
+			const search = await snap.getController('search');
+
+			expect(search).not.toBeNull();
+			expect(search.store.loaded).toBe(false);
+
+			let injectedComponent = document.querySelector('.injectedComponent');
+			expect(injectedComponent).toBeNull();
+
+			await wait(50);
+
+			expect(search.store.loaded).toBe(false);
+			expect(search.store.loading).toBe(true);
+
+			injectedComponent = document.querySelector('.injectedComponent');
+			expect(injectedComponent).not.toBeNull();
+
+			await wait(150);
+
+			expect(search.store.loaded).toBe(true);
+			expect(search.store.loading).toBe(false);
+		});
+
+		it(`can be configured to render the component after the search resolves using 'renderAfterSearch'`, async () => {
+			const baseConfig = generateBaseConfig();
+			const searchConfig = {
+				...baseConfig,
+				controllers: {
+					search: [
+						{
+							config: {
+								id: 'search',
+							},
+							targeters: [
+								{
+									selector: '#searchspring-content',
+									renderAfterSearch: true,
+									hideTarget: true,
+									component: () => {
+										return Component;
+									},
+								},
+							],
+						},
+					],
+				},
+			};
+
+			const client = new MockClient(searchConfig.client!.globals as ClientGlobals, undefined, { delay: 50 });
+			const snap = new Snap(searchConfig, { client });
+
+			const search = await snap.getController('search');
+
+			expect(search).not.toBeNull();
+			expect(search.store.loaded).toBe(false);
+
+			let injectedComponent = document.querySelector('.injectedComponent');
+			expect(injectedComponent).toBeNull();
+
+			await wait(50);
+
+			expect(search.store.loaded).toBe(false);
+			expect(search.store.loading).toBe(true);
+
+			injectedComponent = document.querySelector('.injectedComponent');
+			expect(injectedComponent).toBeNull();
+
+			await wait(150);
+
+			expect(search.store.loaded).toBe(true);
+			expect(search.store.loading).toBe(false);
+
+			await wait(50);
+
+			injectedComponent = document.querySelector('.injectedComponent');
+			expect(injectedComponent).not.toBeNull();
 		});
 
 		it(`runs the controller 'search' method when prefetch is set when selector not found`, async () => {

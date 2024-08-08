@@ -586,7 +586,6 @@ input[type='text'] {
 
 .ss-lite-main {
   flex: 1;
-  min-height: 500px;
   padding: 40px 0; }
 
 .ss-lite-breadcrumbs .ss-lite-list {
@@ -598,8 +597,6 @@ input[type='text'] {
     *display: inline;
     vertical-align: middle; }
 
-.ss-lite-main-layout {
-  min-height: 600px; }
   .ss-lite-main-layout .ss-lite-sidebar {
     -webkit-box-flex: 0;
     -webkit-flex: 0 1 auto;
