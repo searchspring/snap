@@ -14,7 +14,13 @@ describe('FilterSummary Component', () => {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
 	const mockData = new MockData().searchMeta('filtered');
-	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+	const filters = new SearchFilterStore({
+		services,
+		data: {
+			search: mockData,
+			meta: mockData.meta,
+		},
+	});
 
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
@@ -161,7 +167,13 @@ describe('FilterSummary theming works', () => {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
 	const mockData = new MockData().searchMeta('filtered');
-	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+	const filters = new SearchFilterStore({
+		services,
+		data: {
+			search: mockData,
+			meta: mockData.meta,
+		},
+	});
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {

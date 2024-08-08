@@ -21,9 +21,9 @@ export class SearchSortingStore {
 	public options: Option[] = [];
 
 	constructor(params: SearchSortingStoreConfig) {
-		const { services, data } = params;
-		const { meta } = data;
-		const { sorting, search } = data.search;
+		const { services, data } = params || {};
+		const { meta } = data || {};
+		const { sorting, search } = data?.search || {};
 
 		if (services && meta.sortOptions) {
 			const activeSort = sorting?.length && sorting[0];

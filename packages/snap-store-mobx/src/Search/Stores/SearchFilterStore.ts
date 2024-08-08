@@ -25,9 +25,9 @@ export class SearchFilterStore extends Array<RangeFilter | Filter> {
 	}
 
 	constructor(params: SearchFilterStoreConfig) {
-		const { services, data } = params;
-		const { search, meta } = data;
-		const { filters } = search;
+		const { services, data } = params || {};
+		const { search, meta } = data || {};
+		const { filters } = search || {};
 
 		const filtersArr =
 			filters?.map((filter) => {

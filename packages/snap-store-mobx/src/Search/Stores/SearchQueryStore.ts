@@ -20,8 +20,8 @@ export class SearchQueryStore {
 	public matchType?: SearchResponseModelSearchMatchTypeEnum;
 
 	constructor(params: SearchQueryStoreConfig) {
-		const { services, data } = params;
-		const { search } = data.search;
+		const { services, data } = params || {};
+		const { search } = data.search || {};
 		const observables: Observables = {};
 
 		if (search?.query) {

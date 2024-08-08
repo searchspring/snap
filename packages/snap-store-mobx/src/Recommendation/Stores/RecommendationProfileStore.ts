@@ -14,8 +14,8 @@ export class RecommendationProfileStore {
 	public type? = 'default';
 
 	constructor(params: RecommendationProfileStoreConfig) {
-		const { data } = params;
-		const { recommend } = data;
+		const { data } = params || {};
+		const { recommend } = data || {};
 
 		if (!recommend?.profile?.tag) {
 			return;

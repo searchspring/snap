@@ -21,7 +21,13 @@ describe('AutocompleteQueryStore store', () => {
 	it('contains search', () => {
 		const searchData = mockData.autocompleteMeta();
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
 		expect(queryStore.query?.string).toEqual(searchData.autocomplete?.query);
@@ -31,7 +37,13 @@ describe('AutocompleteQueryStore store', () => {
 	it('contains correctedQuery in search when corrected', () => {
 		const searchData = mockData.autocompleteMeta('corrected');
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
 		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
@@ -44,7 +56,13 @@ describe('AutocompleteQueryStore store', () => {
 
 		config.settings.integratedSpellCorrection = false;
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
 		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);

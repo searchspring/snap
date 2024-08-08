@@ -25,9 +25,9 @@ export class SearchPaginationStore {
 	public controllerConfig?: SearchStoreConfig;
 
 	constructor(params: SearchPaginationStoreConfig) {
-		const { services, data, config } = params;
-		const { search, meta } = data;
-		const { pagination } = search;
+		const { services, data, config } = params || {};
+		const { search, meta } = data || {};
+		const { pagination } = search || {};
 
 		const paginationSettings = config?.settings?.pagination;
 

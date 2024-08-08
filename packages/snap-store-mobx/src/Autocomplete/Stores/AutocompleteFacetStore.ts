@@ -13,7 +13,7 @@ export class AutocompleteFacetStore extends Array {
 	}
 
 	constructor(params: AutocompleteFacetStoreConfig) {
-		const { services, state } = params;
+		const { services, state } = params || {};
 
 		// allow for only a singular facet option selection at a time
 

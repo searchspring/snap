@@ -25,7 +25,7 @@ import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { AutocompleteStoreConfig, StoreServices } from '../types';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class AutocompleteStore extends AbstractStore {
+export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -40,16 +40,14 @@ export class AutocompleteStore extends AbstractStore {
 	public storage: StorageStore;
 	public trending: AutocompleteTrendingStore;
 	public history: AutocompleteHistoryStore;
-	public config: AutocompleteStoreConfig;
 
 	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.state = new AutocompleteStateStore({
@@ -78,10 +76,6 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
-	setConfig(newConfig: AutocompleteStoreConfig): void {
-		this.config = newConfig;
-	}
-
 	get hasQuery() {
 		return Boolean((this.state.input && this.loaded) || this.search.query?.string);
 	}
@@ -98,7 +92,8 @@ export class AutocompleteStore extends AbstractStore {
 			const historyStore = new SearchHistoryStore({
 				services: this.services,
 				config: {
-					siteId: this.config.globals?.siteId!,
+					id: this.config.id,
+					siteId: this.config.globals?.siteId,
 				},
 			});
 

@@ -1,6 +1,6 @@
-import { Term, TermConfig } from './AutocompleteTermStore';
+import { Term, TermData } from './AutocompleteTermStore';
 
-type AutocompleteHistoryStoreConfig = TermConfig & {
+type AutocompleteHistoryStoreConfig = Omit<TermData, 'data'> & {
 	data: {
 		queries: string[];
 	};
@@ -12,20 +12,22 @@ export class AutocompleteHistoryStore extends Array<Term> {
 	}
 
 	constructor(params: AutocompleteHistoryStoreConfig) {
-		const { data } = params;
-		const { queries } = data;
+		const { data } = params || {};
+		const { queries } = data || {};
 		const terms: Array<Term> = [];
 
 		queries?.map((query) => {
 			terms.push(
-				new Term(
-					params,
-					{
-						active: false,
-						value: query,
+				new Term({
+					...params,
+					data: {
+						term: {
+							active: false,
+							value: query,
+						},
+						terms,
 					},
-					terms
-				)
+				})
 			);
 		});
 

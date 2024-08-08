@@ -10,7 +10,7 @@ export class MetaStore {
 	public badges: MetaBadges;
 
 	constructor(params: MetaStoreConfig) {
-		const { meta } = params.data;
+		const { meta } = params?.data || {};
 		this.data = meta ?? {};
 		this.badges = new MetaBadges(this.data);
 	}

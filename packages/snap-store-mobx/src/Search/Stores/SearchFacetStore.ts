@@ -38,11 +38,11 @@ export class SearchFacetStore extends Array {
 	}
 
 	constructor(params: SearchFacetStoreConfig) {
-		const config = params.config;
-		const { services, stores, data } = params;
-		const { search, meta } = data;
-		const { facets, merchandising, pagination } = search;
-		const storage = stores.storage;
+		const config = params?.config || {};
+		const { services, stores, data } = params || {};
+		const { search, meta } = data || {};
+		const { facets, merchandising, pagination } = search || {};
+		const { storage } = stores || {};
 
 		const facetsArr =
 			facets

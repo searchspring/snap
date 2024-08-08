@@ -4,7 +4,7 @@ import type { AutocompleteStoreConfig, StoreServices } from '../../types';
 import { AutocompleteStateStore } from './AutocompleteStateStore';
 import { AutocompleteResponseModel } from '@searchspring/snapi-types';
 
-type AutocompleteTermStoreConfig = TermConfig & {
+type AutocompleteTermStoreConfig = Omit<TermData, 'data'> & {
 	config: AutocompleteStoreConfig;
 	data: {
 		autocomplete: AutocompleteResponseModel;
@@ -16,11 +16,11 @@ export class AutocompleteTermStore extends Array<Term> {
 	}
 
 	constructor(params: AutocompleteTermStoreConfig) {
-		const { config, data } = params;
-		const { autocomplete, search, pagination } = data.autocomplete;
-		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
+		const { config, data } = params || {};
+		const { autocomplete, search, pagination } = data?.autocomplete || {};
+		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)] as string[];
 
-		if (config.settings?.integratedSpellCorrection) {
+		if (config?.settings?.integratedSpellCorrection) {
 			if (autocomplete?.correctedQuery && search?.query && autocomplete.correctedQuery.toLowerCase() != search.query.toLowerCase()) {
 				// the query was corrected
 				suggestions.unshift(autocomplete.correctedQuery);
@@ -44,14 +44,16 @@ export class AutocompleteTermStore extends Array<Term> {
 
 		suggestions.map((term, index) =>
 			terms.push(
-				new Term(
-					params,
-					{
-						active: index === 0,
-						value: term,
+				new Term({
+					...params,
+					data: {
+						term: {
+							active: index === 0,
+							value: term,
+						},
+						terms,
 					},
-					terms
-				)
+				})
 			)
 		);
 
@@ -59,13 +61,20 @@ export class AutocompleteTermStore extends Array<Term> {
 	}
 }
 
-export type TermConfig = {
+export type TermData = {
 	services: StoreServices;
 	functions: {
 		resetTerms: () => void;
 	};
 	state: {
 		autocomplete: AutocompleteStateStore;
+	};
+	data: {
+		term: {
+			active: boolean;
+			value: string;
+		};
+		terms: Term[];
 	};
 };
 
@@ -75,8 +84,9 @@ export class Term {
 	public preview: () => void;
 	public url: UrlManager;
 
-	constructor(params: TermConfig, term: { active: boolean; value: string }, terms: Term[]) {
-		const { services, functions, state } = params;
+	constructor(params: TermData) {
+		const { services, functions, state, data } = params || {};
+		const { term, terms } = data || {};
 
 		this.active = term.active;
 		this.value = term.value;
@@ -84,14 +94,14 @@ export class Term {
 		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
-			functions?.resetTerms();
+			functions.resetTerms();
 			terms.map((term) => {
 				term.active = false;
 			});
 
 			this.active = true;
-			state?.autocomplete.locks.terms.lock();
-			state?.autocomplete.locks.facets.unlock();
+			state.autocomplete.locks.terms.lock();
+			state.autocomplete.locks.facets.unlock();
 
 			this.url?.set({ query: this.value }).go();
 		};

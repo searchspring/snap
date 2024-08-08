@@ -12,12 +12,11 @@ import {
 	SearchQueryStore,
 	SearchHistoryStore,
 } from './Stores';
-import type { HistoryStoreConfig } from './Stores/SearchHistoryStore';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class SearchStore extends AbstractStore {
+export class SearchStore extends AbstractStore<SearchStoreConfig> {
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -29,32 +28,21 @@ export class SearchStore extends AbstractStore {
 	public sorting!: SearchSortingStore;
 	public storage: StorageStore;
 	public history: SearchHistoryStore;
-	public config: SearchStoreConfig;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to SearchStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.storage = new StorageStore();
 
-		const historyConfig: HistoryStoreConfig = {
-			url: this.config.settings?.history?.url,
-			max: this.config.settings?.history?.max,
-		};
-
-		if (this.config.globals?.siteId) {
-			historyConfig.siteId = this.config.globals?.siteId;
-		}
-
 		this.history = new SearchHistoryStore({
 			services: this.services,
-			config: historyConfig,
+			config: this.config,
 		});
 
 		this.update();
@@ -68,10 +56,6 @@ export class SearchStore extends AbstractStore {
 			pagination: observable,
 			sorting: observable,
 		});
-	}
-
-	setConfig(newConfig: SearchStoreConfig): void {
-		this.config = newConfig;
 	}
 
 	public reset(): void {

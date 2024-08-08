@@ -8,21 +8,11 @@ import type {
 	MetaResponseModelFacetPalette,
 	MetaResponseModelFacetSlider,
 	SearchResponseModel,
-	SearchResponseModelFacet,
 	SearchResponseModelFacetRange,
 	SearchResponseModelFacetRangeBuckets,
 	SearchResponseModelFacetValue,
 	SearchResponseModelFacetValueAllOfValues,
 } from '@searchspring/snapi-types';
-
-export type FinderSelectionStoreData = {
-	state: FinderStoreState;
-	facets: SearchResponseModelFacet[];
-	meta: MetaResponseModel;
-	loading: boolean;
-	storage: StorageStore;
-	selections: SelectedSelection[];
-};
 
 type FacetWithMeta = MetaResponseModelFacetGrid &
 	MetaResponseModelFacetHierarchy &
@@ -57,11 +47,11 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 
 	constructor(params: FinderSelectionStoreConfig) {
 		const config = params.config;
-		const { services, data, stores, state } = params;
-		const { storage } = stores;
-		const { finder, loading } = state;
-		const { search, meta, selections } = data;
-		const { facets } = search;
+		const { services, data, stores, state } = params || {};
+		const { storage } = stores || {};
+		const { finder, loading } = state || {};
+		const { search, meta, selections } = data || {};
+		const { facets } = search || {};
 
 		const selectedSelections: Array<Selection | SelectionHierarchy> = [];
 
@@ -70,7 +60,7 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 				const storedData: SelectedSelection | undefined = selections.find((selection) => selection.facet.field === fieldObj.field);
 
 				if (storedData) {
-					const { facet, selected } = storedData;
+					const { facet, selected } = storedData || {};
 					if (facet?.hierarchyDelimiter) {
 						// hierarchy
 						selections.forEach((selection, index) => {

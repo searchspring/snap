@@ -8,23 +8,21 @@ import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
 import { MetaResponseModel } from '@searchspring/snapi-types';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class RecommendationStore extends AbstractStore {
+export class RecommendationStore extends AbstractStore<RecommendationStoreConfig> {
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public loaded = false;
 	public profile!: RecommendationProfileStore;
 	public results!: Product[];
 	public cart!: CartStore;
-	public config: RecommendationStoreConfig;
 
 	constructor(config: RecommendationStoreConfig, services: StoreServices) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.reset();
@@ -33,10 +31,6 @@ export class RecommendationStore extends AbstractStore {
 			profile: observable,
 			results: observable,
 		});
-	}
-
-	setConfig(newConfig: RecommendationStoreConfig): void {
-		this.config = newConfig;
 	}
 
 	public reset(): void {

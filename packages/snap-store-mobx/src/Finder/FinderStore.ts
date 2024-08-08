@@ -9,9 +9,8 @@ import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreSt
 import { UrlManager } from '@searchspring/snap-url-manager';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class FinderStore extends AbstractStore {
+export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public services: StoreServices;
-	public config: FinderStoreConfig;
 	public meta!: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
@@ -22,13 +21,12 @@ export class FinderStore extends AbstractStore {
 	};
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		if (this.config.persist?.enabled) {
@@ -46,10 +44,6 @@ export class FinderStore extends AbstractStore {
 			selections: observable,
 			pagination: observable,
 		});
-	}
-
-	setConfig(newConfig: FinderStoreConfig): void {
-		this.config = newConfig;
 	}
 
 	public setService(name: keyof StoreServices, service: UrlManager): void {

@@ -17,7 +17,7 @@ export class AutocompleteStateStore {
 	public url: UrlManager;
 
 	constructor(params: AutocompleteStateStoreConfig) {
-		const { services } = params;
+		const { services } = params || {};
 		this.locks = {
 			terms: new Lock(false),
 			facets: new Lock(false),

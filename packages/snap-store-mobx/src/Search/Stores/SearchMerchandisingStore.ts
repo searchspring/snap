@@ -28,7 +28,7 @@ export class SearchMerchandisingStore {
 	public personalized?: boolean;
 
 	constructor(params: SearchMerchandisingStoreConfig) {
-		const { merchandising } = params.data.search;
+		const { merchandising } = params?.data?.search || {};
 		if (merchandising) {
 			this.redirect = merchandising.redirect || '';
 

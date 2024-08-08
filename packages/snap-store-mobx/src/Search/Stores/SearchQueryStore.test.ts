@@ -12,7 +12,12 @@ const mockData = new MockData();
 describe('SearchQueryStore store', () => {
 	it('has undefined query on blank search', () => {
 		const searchData = mockData.searchMeta();
-		const queryStore = new SearchQueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: searchData,
+			},
+		});
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toEqual(undefined);
@@ -21,7 +26,12 @@ describe('SearchQueryStore store', () => {
 	it('has didYouMean when search data has didYouMean', () => {
 		const searchData = mockData.searchMeta('dym');
 
-		const queryStore = new SearchQueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: searchData,
+			},
+		});
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
@@ -34,7 +44,12 @@ describe('SearchQueryStore store', () => {
 	it('has matchType when search data has matchType', () => {
 		const searchData = mockData.searchMeta('matchType');
 
-		const queryStore = new SearchQueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: searchData,
+			},
+		});
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.matchType).toEqual(searchData.search?.matchType);

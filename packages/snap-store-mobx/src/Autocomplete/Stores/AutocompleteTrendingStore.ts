@@ -1,7 +1,7 @@
 import { TrendingResponseModel } from '@searchspring/snap-client';
-import { Term, TermConfig } from './AutocompleteTermStore';
+import { Term, TermData } from './AutocompleteTermStore';
 
-type AutocompleteTrendingStoreConfig = TermConfig & {
+type AutocompleteTrendingStoreConfig = Omit<TermData, 'data'> & {
 	data: {
 		trending: TrendingResponseModel;
 	};
@@ -14,18 +14,20 @@ export class AutocompleteTrendingStore extends Array<Term> {
 
 	constructor(params: AutocompleteTrendingStoreConfig) {
 		const terms: Array<Term> = [];
-		const { data } = params;
-		const { trending } = data.trending;
+		const { data } = params || {};
+		const { trending } = data?.trending || {};
 		trending?.queries?.map((term) => {
 			terms.push(
-				new Term(
-					params,
-					{
-						active: false,
-						value: term.searchQuery,
+				new Term({
+					...params,
+					data: {
+						term: {
+							active: false,
+							value: term.searchQuery,
+						},
+						terms,
 					},
-					terms
-				)
+				})
 			);
 		});
 

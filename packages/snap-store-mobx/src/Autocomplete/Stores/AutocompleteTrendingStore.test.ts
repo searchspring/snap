@@ -10,7 +10,7 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
-const rootState = new AutocompleteStateStore(services);
+const rootState = new AutocompleteStateStore({ services });
 const mockData = new MockData();
 
 describe('Trending Store', () => {
@@ -19,15 +19,26 @@ describe('Trending Store', () => {
 	});
 
 	it('is empty when it is passed undefined', () => {
-		// @ts-ignore
-		const termStore = new AutocompleteTrendingStore(services, undefined, mockResetTerms, rootState);
+		// @ts-ignore - empty constructor
+		const termStore = new AutocompleteTrendingStore();
 
 		expect(termStore).toEqual([]);
 	});
 
 	it('is empty when it is passed no data', () => {
-		// @ts-ignore
-		const termStore = new AutocompleteTrendingStore(services, {}, mockResetTerms, rootState);
+		const termStore = new AutocompleteTrendingStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				// @ts-ignore - no trending data
+				trending: {},
+			},
+		});
 
 		expect(termStore).toEqual([]);
 	});
@@ -36,7 +47,18 @@ describe('Trending Store', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				trending: trendingData,
+			},
+		});
 		expect(trendingStore).toHaveLength(trendingData.trending.queries.length);
 
 		trendingStore.forEach((term, index) => {
@@ -51,12 +73,23 @@ describe('Trending Store', () => {
 		});
 	});
 
-	it('has terms with undefined url properties when no controller is present', () => {
+	it('has terms with undefined url properties when no services is present', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		// @ts-ignore
-		const trendingStore = new AutocompleteTrendingStore(undefined, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore({
+			// @ts-ignore - no services
+			services: undefined,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				trending: trendingData,
+			},
+		});
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -69,8 +102,20 @@ describe('Trending Store', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		// @ts-ignore
-		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
+
+		const trendingStore = new AutocompleteTrendingStore({
+			// @ts-ignore - no urlManager
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				trending: trendingData,
+			},
+		});
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -81,7 +126,18 @@ describe('Trending Store', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				trending: trendingData,
+			},
+		});
 
 		expect(rootState.locks.terms.locked).toBe(false);
 
