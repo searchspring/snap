@@ -52,6 +52,7 @@ type ExtendedTarget = Target & {
 	};
 	onTarget?: OnTarget;
 	prefetch?: boolean;
+	renderAfterSearch?: boolean;
 };
 
 type SnapFeatures = {
@@ -595,26 +596,36 @@ export class Snap {
 							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
 							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
-							let searched = false;
-							const runSearch = () => {
-								if (!searched) {
+							let searchPromise: Promise<void> | null = null;
+
+							const runSearch = async () => {
+								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
 										getInitialUrlState(controller.url.initial, cntrlr.urlManager).go({ history: 'replace' });
 									}
 
-									searched = true;
-									this.controllers[controller.config.id].search();
+									searchPromise = this.controllers[controller.config.id].search();
 								}
+
+								return searchPromise;
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
-								runSearch();
+								const targetFunctionPromises: Promise<any>[] = [];
+								if (target.renderAfterSearch) {
+									targetFunctionPromises.push(runSearch());
+								} else {
+									targetFunctionPromises.push(Promise.resolve());
+									runSearch();
+								}
+
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const Component = await target.component!();
+									targetFunctionPromises.push(target.component!());
+									const [_, Component] = await Promise.all(targetFunctionPromises);
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
@@ -643,7 +654,7 @@ export class Snap {
 											render(<Skeleton />, elem);
 										});
 									}
-									targetFunction(target, elem, originalElem!);
+									await targetFunction(target, elem, originalElem!);
 								});
 							});
 						} catch (err) {
