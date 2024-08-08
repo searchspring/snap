@@ -6,6 +6,7 @@ import type {
 	MetaResponseModelBadgeTag,
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
+
 // Abstract
 export type StoreConfig = {
 	id: string;

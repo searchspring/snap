@@ -15,7 +15,16 @@ const searchConfig = {
 };
 
 const mockData = _mockData.recommend();
-const results = new SearchResultStore(searchConfig, services, _mockData.meta(), mockData.results);
+const results = new SearchResultStore({
+	config: searchConfig,
+	state: {
+		loaded: true,
+	},
+	data: {
+		search: mockData,
+		meta: _mockData.meta(),
+	},
+});
 
 describe('CartStore store', () => {
 	it('creates a cart store', () => {

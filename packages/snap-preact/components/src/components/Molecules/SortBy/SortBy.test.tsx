@@ -14,7 +14,13 @@ describe('SortBy Component', () => {
 	};
 	const data = new MockData().searchMeta();
 
-	const sortingStore = new SearchSortingStore(services, data.sorting!, data.search!, data.meta);
+	const sortingStore = new SearchSortingStore({
+		services,
+		data: {
+			search: data,
+			meta: data.meta,
+		},
+	});
 
 	it('it doesnt render without options', () => {
 		const rendered = render(<SortBy />);

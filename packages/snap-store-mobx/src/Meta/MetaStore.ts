@@ -1,11 +1,17 @@
 import type { MetaResponseModel } from '@searchspring/snapi-types';
 
+type MetaStoreConfig = {
+	data: {
+		meta: MetaResponseModel;
+	};
+};
 export class MetaStore {
 	public data: MetaResponseModel;
 	public badges: MetaBadges;
 
-	constructor(metaData?: MetaResponseModel) {
-		this.data = metaData ?? {};
+	constructor(params: MetaStoreConfig) {
+		const { meta } = params?.data || {};
+		this.data = meta ?? {};
 		this.badges = new MetaBadges(this.data);
 	}
 }
@@ -13,7 +19,7 @@ export class MetaStore {
 class MetaBadges {
 	public groups: Record<string, { sections: string[]; grid: string[][] }> = {};
 
-	constructor(metaData?: MetaResponseModel) {
+	constructor(metaData: MetaResponseModel) {
 		// 'overlay' group is created by default - could support additional groups via config in the future
 		const groups = { overlay: { sections: ['left', 'right'] } };
 

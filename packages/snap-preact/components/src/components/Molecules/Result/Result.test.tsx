@@ -6,7 +6,6 @@ import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { ResultsLayout } from '../../../types';
 import { SearchResultStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -14,14 +13,14 @@ import type { Product } from '@searchspring/snap-store-mobx';
 const mockData = new MockData();
 const searchResponse = mockData.searchMeta();
 
-const mockResults = new SearchResultStore(
-	{ id: 'test' },
-	{ urlManager: new UrlManager(new UrlTranslator()) },
-	searchResponse.meta,
-	searchResponse.results,
-	searchResponse.pagination,
-	searchResponse.merchandising
-);
+const mockResults = new SearchResultStore({
+	config: { id: 'test' },
+	state: { loaded: false },
+	data: {
+		search: searchResponse,
+		meta: searchResponse.meta,
+	},
+});
 
 describe('Result Component', () => {
 	it('renders', () => {

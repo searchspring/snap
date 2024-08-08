@@ -1,48 +1,48 @@
 import { StorageStore } from '../../Storage/StorageStore';
-import type { StoreServices } from '../../types';
+import type { SearchStoreConfig, StoreServices } from '../../types';
 import { Query } from './SearchQueryStore';
 
-export type HistoryStoreConfig = {
-	siteId?: string;
-	max?: number;
-	url?: string;
+type SearchHistoryStoreConfig = {
+	services: StoreServices;
+	config: SearchStoreConfig;
 };
+
 export class SearchHistoryStore {
-	private config: HistoryStoreConfig;
+	private config: SearchStoreConfig;
 	private storage: StorageStore;
 	private services: StoreServices;
+	private max: number;
 
-	constructor(config: HistoryStoreConfig, services: StoreServices) {
+	constructor(params: SearchHistoryStoreConfig) {
+		const { services, config } = params || {};
 		this.config = config;
 		this.services = services;
 
-		if (this.config.url) {
+		this.max = this.config.settings?.history?.max ?? 25;
+
+		if (this.config.settings?.history?.url) {
 			this.services.urlManager = this.services.urlManager.withConfig((translatorConfig: any) => {
 				return {
 					...translatorConfig,
-					urlRoot: this.config.url,
+					urlRoot: this.config.settings?.history?.url,
 				};
 			});
 		}
 
-		if (!Number.isInteger(this.config.max)) {
-			this.config.max = 25;
-		}
-
 		this.storage = new StorageStore({
 			type: 'local',
-			key: `ss-history${this.config.siteId ? `-${this.config.siteId}` : ``}`,
+			key: `ss-history${this.config.globals?.siteId ? `-${this.config.globals?.siteId}` : ``}`,
 		});
 
 		// reset to zero to clear any potentially existing terms
-		if (this.config.max === 0) {
+		if (this.max === 0) {
 			this.reset();
 		}
 
 		// trim history if the current queries are more than config max
-		if (this.queries.length > this.config.max!) {
+		if (this.queries.length > this.max) {
 			this.getStoredData().forEach((term, index) => {
-				if (index > this.config.max! - 1) {
+				if (index > this.max - 1) {
 					this.remove(term);
 				}
 			});
@@ -56,7 +56,7 @@ export class SearchHistoryStore {
 
 	public save(term: string) {
 		// adding term to array if max is not zero
-		if (this.config.max) {
+		if (this.max) {
 			const history = this.getStoredData();
 
 			// removing term if already present
@@ -66,7 +66,7 @@ export class SearchHistoryStore {
 			}
 
 			history.unshift(term);
-			if (history.length > this.config.max!) {
+			if (history.length > this.max) {
 				history.pop();
 			}
 

@@ -21,7 +21,14 @@ describe('LoadMore Component', () => {
 
 	const data = new MockData().searchMeta();
 
-	const paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
+	const paginationStore = new SearchPaginationStore({
+		config: searchConfig,
+		services,
+		data: {
+			search: data,
+			meta: data.meta,
+		},
+	});
 
 	let observe: jest.Mock;
 	let unobserve: jest.Mock;

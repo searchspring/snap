@@ -12,12 +12,11 @@ import {
 	SearchQueryStore,
 	SearchHistoryStore,
 } from './Stores';
-import type { HistoryStoreConfig } from './Stores/SearchHistoryStore';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class SearchStore extends AbstractStore {
+export class SearchStore extends AbstractStore<SearchStoreConfig> {
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -41,16 +40,10 @@ export class SearchStore extends AbstractStore {
 
 		this.storage = new StorageStore();
 
-		const historyConfig: HistoryStoreConfig = {
-			url: (this.config as SearchStoreConfig).settings?.history?.url,
-			max: (this.config as SearchStoreConfig).settings?.history?.max,
-		};
-
-		if (this.config.globals?.siteId) {
-			historyConfig.siteId = this.config.globals?.siteId;
-		}
-
-		this.history = new SearchHistoryStore(historyConfig, this.services);
+		this.history = new SearchHistoryStore({
+			services: this.services,
+			config: this.config,
+		});
 
 		this.update();
 
@@ -65,50 +58,77 @@ export class SearchStore extends AbstractStore {
 		});
 	}
 
-	/*
-	TODO: refactor sub-store interfaces
-	
-	interface StoreParameters {
-		config?: StoreConfigs;
-		services?: StoreServices;
-		stores?: {
-			storage?: StorageStore;
-			state?: StateStore;
-		};
-		data?: SearchResponseModel & { meta: MetaResponseModel };
-	}
-	*/
-
 	public reset(): void {
 		this.update();
 	}
 
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
-		this.meta = new MetaStore(data.meta);
-		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
-		this.search = new SearchQueryStore(this.services, data?.search || {});
-		this.facets = new SearchFacetStore(
-			this.config,
-			this.services,
-			this.storage,
-			data.facets,
-			data?.pagination || {},
-			this.meta.data,
-			data?.merchandising || {}
-		);
-		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
-		this.results = new SearchResultStore(
-			this.config,
-			this.services,
-			this.meta.data,
-			data?.results || [],
-			data.pagination,
-			data.merchandising,
-			this.loaded
-		);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
-		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
+		this.meta = new MetaStore({
+			data: {
+				meta: data.meta!,
+			},
+		});
+		this.merchandising = new SearchMerchandisingStore({
+			data: {
+				search: data,
+			},
+		});
+
+		this.search = new SearchQueryStore({
+			services: this.services,
+			data: {
+				search: data,
+			},
+		});
+
+		this.facets = new SearchFacetStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.filters = new SearchFilterStore({
+			services: this.services,
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.results = new SearchResultStore({
+			config: this.config,
+			state: {
+				loaded: this.loaded,
+			},
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.pagination = new SearchPaginationStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.sorting = new SearchSortingStore({
+			services: this.services,
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
 
 		this.loaded = !!data.pagination;
 	}

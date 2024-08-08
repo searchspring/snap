@@ -9,9 +9,8 @@ import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreSt
 import { UrlManager } from '@searchspring/snap-url-manager';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class FinderStore extends AbstractStore {
+export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public services: StoreServices;
-	public config!: FinderStoreConfig;
 	public meta!: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
@@ -30,10 +29,10 @@ export class FinderStore extends AbstractStore {
 
 		this.services = services;
 
-		if (config.persist?.enabled) {
+		if (this.config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
 				type: 'local',
-				key: `ss-${config.id}-persisted`,
+				key: `ss-${this.config.id}-persisted`,
 			});
 		}
 
@@ -98,15 +97,35 @@ export class FinderStore extends AbstractStore {
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = new MetaStore(data.meta);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
-		this.selections = new FinderSelectionStore(this.config, this.services, {
-			state: this.state,
-			facets: data.facets || [],
-			meta: this.meta.data,
-			loading: this.loading,
-			storage: this.storage,
-			selections: selectedSelections || [],
+		this.meta = new MetaStore({
+			data: {
+				meta: data.meta!,
+			},
+		});
+		this.pagination = new SearchPaginationStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.selections = new FinderSelectionStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			state: {
+				finder: this.state,
+				loading: this.loading,
+			},
+			data: {
+				search: data,
+				meta: this.meta.data,
+				selections: selectedSelections || [],
+			},
 		});
 
 		// providing access to response data without exposing it

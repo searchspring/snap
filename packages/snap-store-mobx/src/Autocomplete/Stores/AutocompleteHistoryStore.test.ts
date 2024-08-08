@@ -6,7 +6,7 @@ import { AutocompleteStateStore } from '../../Autocomplete/Stores/AutocompleteSt
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
-const rootState = new AutocompleteStateStore(services);
+const rootState = new AutocompleteStateStore({ services });
 const mockResetTerms = jest.fn();
 
 const queries = ['shirts', 'pants', 'shorts', 'shoes', 'socks'];
@@ -17,20 +17,53 @@ describe('Autocomplete History Store', () => {
 	});
 
 	it('is empty when it is passed undefined queries', () => {
-		// @ts-ignore
-		const historyStore = new AutocompleteHistoryStore(services, undefined, mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				// @ts-ignore - queries is undefined
+				queries: undefined,
+			},
+		});
 
 		expect(historyStore).toEqual([]);
 	});
 
 	it('is empty when it is passed an empty array of queries', () => {
-		const historyStore = new AutocompleteHistoryStore(services, [], mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				queries: [],
+			},
+		});
 
 		expect(historyStore).toEqual([]);
 	});
 
 	it('contains the correct terms', () => {
-		const historyStore = new AutocompleteHistoryStore(services, queries, mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				queries,
+			},
+		});
 		expect(historyStore).toHaveLength(queries.length);
 
 		historyStore.forEach((term, index) => {
@@ -46,8 +79,19 @@ describe('Autocomplete History Store', () => {
 	});
 
 	it('has terms with undefined url properties when no services are present', () => {
-		// @ts-ignore
-		const historyStore = new AutocompleteHistoryStore(undefined, queries, mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			// @ts-ignore - services is missing urlManager
+			services: undefined,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				queries,
+			},
+		});
 
 		historyStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -57,8 +101,19 @@ describe('Autocomplete History Store', () => {
 	it('has terms with undefined url properties when no urlManager is present', () => {
 		const services = {};
 
-		// @ts-ignore
-		const historyStore = new AutocompleteHistoryStore(services, queries, mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			// @ts-ignore - services is missing urlManager
+			services: services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				queries,
+			},
+		});
 
 		historyStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -66,7 +121,18 @@ describe('Autocomplete History Store', () => {
 	});
 
 	it('has a preview function on terms', () => {
-		const historyStore = new AutocompleteHistoryStore(services, queries, mockResetTerms, rootState);
+		const historyStore = new AutocompleteHistoryStore({
+			services: services,
+			functions: {
+				resetTerms: mockResetTerms,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				queries,
+			},
+		});
 
 		expect(rootState.locks.terms.locked).toBe(false);
 
