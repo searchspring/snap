@@ -89,11 +89,15 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			theme: {
 				...(mergedProps as ComponentProps).theme,
 				name: globalTheme.name,
-				variables: globalTheme.variables,
-				layoutOptions: globalTheme.layoutOptions,
 			},
 			treePath,
 		};
+		if (globalTheme.variables) {
+			(mergedProps as ComponentProps).theme!.variables = globalTheme.variables;
+		}
+		if (globalTheme.layoutOptions) {
+			(mergedProps as ComponentProps).theme!.layoutOptions = globalTheme.layoutOptions;
+		}
 	}
 
 	return mergedProps as GenericComponentProps;
