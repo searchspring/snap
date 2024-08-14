@@ -10,9 +10,10 @@ import type { ResultComponent } from '../../../components/src';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { Theme, ThemeVariables } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
-export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
+export type RecTypes = 'default' | 'email' | 'bundle';
+export type TemplateTypes = 'search' | 'autocomplete' | `recommendation.${RecTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
-export type TemplateComponentTypes = 'search' | 'autocomplete' | 'recommendation' | TemplateCustomComponentTypes;
+export type TemplateComponentTypes = TemplateTypes | TemplateCustomComponentTypes;
 
 export type TemplateTarget = {
 	selector?: string;
@@ -99,7 +100,9 @@ export class TemplatesStore {
 		this.targets = {
 			search: {},
 			autocomplete: {},
-			recommendation: {},
+			'recommendation.bundle': {},
+			'recommendation.default': {},
+			'recommendation.email': {},
 		};
 
 		this.themes = {

@@ -113,6 +113,12 @@ new SnapTemplates({
 		settings: {
 			branch: BRANCHNAME,
 		},
+		bundle: {
+			Bundle: {
+				component: 'RecommendationBundle',
+				// resultComponent: 'CustomResultSecondary',
+			},
+		},
 		default: {
 			Recs: {
 				component: 'Recommendation',

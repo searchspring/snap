@@ -323,7 +323,7 @@ export class RecommendationInstantiator {
 
 				props.className = `ss__recommendation-${component.toLowerCase()}`;
 				injectedElem?.setAttribute('id', `${controllerConfig.id}`);
-				(this.config.components[component] as RecommendationComponentObject).onTarget(target, elem, injectedElem, controller);
+				(this.config.components[component] as RecommendationComponentObject)?.onTarget?.(target, elem, injectedElem, controller);
 
 				if (this.config.components[component] && typeof this.config.components[component] == 'function') {
 					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentFunc)();

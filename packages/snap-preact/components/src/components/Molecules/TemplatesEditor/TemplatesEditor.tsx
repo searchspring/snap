@@ -140,13 +140,31 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		template: templatesStore.targets.autocomplete[target],
 		selector: templatesStore.targets.autocomplete[target].selector,
 	}));
-	const recommendationTargets = Object.keys(templatesStore.targets.recommendation || {}).map((target) => ({
-		type: 'recommendation',
+	const recommendationBundleTargets = Object.keys(templatesStore.targets['recommendation.bundle'] || {}).map((target) => ({
+		type: 'recommendation.bundle',
 		target,
-		template: templatesStore.targets.recommendation[target],
-		selector: templatesStore.targets.recommendation[target].selector,
+		template: templatesStore.targets['recommendation.bundle'][target],
+		selector: templatesStore.targets['recommendation.bundle'][target].selector,
 	}));
-	const targets = [...searchTargets, ...autocompleteTargets, ...recommendationTargets];
+	const recommendationDefaultTargets = Object.keys(templatesStore.targets['recommendation.default'] || {}).map((target) => ({
+		type: 'recommendation.default',
+		target,
+		template: templatesStore.targets['recommendation.default'][target],
+		selector: templatesStore.targets['recommendation.default'][target].selector,
+	}));
+	const recommendationEmailTargets = Object.keys(templatesStore.targets['recommendation.email'] || {}).map((target) => ({
+		type: 'recommendation.email',
+		target,
+		template: templatesStore.targets['recommendation.email'][target],
+		selector: templatesStore.targets['recommendation.email'][target].selector,
+	}));
+	const targets = [
+		...searchTargets,
+		...autocompleteTargets,
+		...recommendationBundleTargets,
+		...recommendationDefaultTargets,
+		...recommendationEmailTargets,
+	];
 
 	if (targets.length === 0) {
 		return <div>no themes found</div>;
@@ -306,9 +324,23 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								))}
 							</optgroup>
 						)}
-						{recommendationTargets && (
-							<optgroup label="recommendation">
-								{recommendationTargets.map((target) => (
+						{recommendationBundleTargets && (
+							<optgroup label="recommendation.bundle">
+								{recommendationBundleTargets.map((target) => (
+									<option>{target.target}</option>
+								))}
+							</optgroup>
+						)}
+						{recommendationDefaultTargets && (
+							<optgroup label="recommendation.default">
+								{recommendationDefaultTargets.map((target) => (
+									<option>{target.target}</option>
+								))}
+							</optgroup>
+						)}
+						{recommendationEmailTargets && (
+							<optgroup label="recommendation.email">
+								{recommendationEmailTargets.map((target) => (
 									<option>{target.target}</option>
 								))}
 							</optgroup>

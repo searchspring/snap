@@ -13,7 +13,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { TemplateStoreConfig } from './Stores/TemplateStore';
+import type { RecTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
@@ -212,41 +212,36 @@ export function createRecommendationComponentMapping(
 	templatesStore: TemplatesStore
 ): { [name: string]: RecommendationComponentObject } {
 	// TODO: throw a warning if keys match inside each recommendation type
-	const templates = {
-		...(templateConfig.recommendation?.default || {}),
-		...(templateConfig.recommendation?.email || {}),
-		...(templateConfig.recommendation?.bundle || {}),
-	};
 
-	return templates
-		? Object.keys(templates).reduce((mapping, targetName) => {
-				const target = templates[targetName] as TemplateTarget;
-
+	return Object.keys(templateConfig.recommendation || {})
+		.filter((key) => ['default', 'email', 'bundle'].includes(key))
+		.reduce((mapping, recsType) => {
+			const recsTypeKey: TemplateTypes = `recommendation.${recsType as RecTypes}`;
+			Object.keys(templateConfig.recommendation![recsType as RecTypes] || {}).forEach((targetName) => {
+				const target = templateConfig.recommendation![recsType as RecTypes]![targetName] as TemplateTarget;
 				const mappedConfig: RecommendationComponentObject = {
 					component: async () => {
 						const componentImportPromises = [];
-						componentImportPromises.push(templatesStore.library.import.component.recommendation[target.component]());
+						componentImportPromises.push(templatesStore.library.import.component[recsTypeKey][target.component]());
 						if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
 							componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
 						}
 						await Promise.all(componentImportPromises);
 						return TemplateSelect;
 					},
-					props: { type: 'recommendation', templatesStore },
+					props: { type: recsTypeKey, templatesStore },
 					onTarget: function (domTarget, elem, injectedElem, controller) {
 						target.selector = `#${controller.id}`;
-						const targetId = templatesStore.addTarget('recommendation', target);
+						const targetId = templatesStore.addTarget(recsTypeKey, target);
 
 						this.props = this.props || {};
 						this.props.targetId = targetId;
 					},
 				};
-
 				mapping[targetName] = mappedConfig;
-
-				return mapping;
-		  }, {} as { [name: string]: RecommendationComponentObject })
-		: {};
+			});
+			return mapping;
+		}, {} as { [name: string]: RecommendationComponentObject });
 }
 
 export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): SnapConfig {

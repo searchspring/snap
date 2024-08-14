@@ -34,7 +34,9 @@ export class LibraryStore {
 	} = {
 		search: {},
 		autocomplete: {},
-		recommendation: {},
+		'recommendation.bundle': {},
+		'recommendation.default': {},
+		'recommendation.email': {},
 		badge: {},
 		result: {},
 	};
@@ -80,20 +82,25 @@ export class LibraryStore {
 					);
 				},
 			},
-			recommendation: {
-				Recommendation: async () => {
-					return (
-						this.components.recommendation.Recommendation ||
-						(this.components.recommendation.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
-					);
-				},
+			'recommendation.bundle': {
 				RecommendationBundle: async () => {
 					return (
-						this.components.recommendation.RecommendationBundle ||
-						(this.components.recommendation.RecommendationBundle = (await import('./library/components/RecommendationBundle')).RecommendationBundle)
+						this.components['recommendation.bundle'].RecommendationBundle ||
+						(this.components['recommendation.bundle'].RecommendationBundle = (
+							await import('./library/components/RecommendationBundle')
+						).RecommendationBundle)
 					);
 				},
 			},
+			'recommendation.default': {
+				Recommendation: async () => {
+					return (
+						this.components['recommendation.default'].Recommendation ||
+						(this.components['recommendation.default'].Recommendation = (await import('./library/components/Recommendation')).Recommendation)
+					);
+				},
+			},
+			'recommendation.email': {},
 			badge: {},
 			result: {
 				Result: async () => {
