@@ -419,7 +419,9 @@ const FacetContent = (props: any) => {
 						<Fragment>
 							<Icon
 								{...subProps.showMoreLessIcon}
-								icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
+								{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
+									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
+									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
 							/>
 							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
 						</Fragment>
