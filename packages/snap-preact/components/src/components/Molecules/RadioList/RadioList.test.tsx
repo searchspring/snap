@@ -350,6 +350,117 @@ describe('RadioList Component', () => {
 		expect(element).toHaveClass(className);
 	});
 
+	describe('RadioList lang works', () => {
+		const selector = '.ss__radio-list';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['title'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					let valueSatified = false;
+					let altSatified = false;
+					let labelSatified = false;
+					let valueTextSatified = false;
+					let titleSatified = false;
+
+					// @ts-ignore
+					const rendered = render(<RadioList options={options} lang={lang} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								options: options,
+								selectedOptions: undefined,
+							});
+
+							if (elem?.innerHTML == value) {
+								valueSatified = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatified = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatified = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatified = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatified = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatified = true;
+						}
+					});
+
+					expect(valueSatified).toBeTruthy();
+					expect(altSatified).toBeTruthy();
+					expect(labelSatified).toBeTruthy();
+					expect(valueTextSatified).toBeTruthy();
+					expect(titleSatified).toBeTruthy();
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>

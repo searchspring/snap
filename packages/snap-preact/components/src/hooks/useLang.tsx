@@ -22,7 +22,7 @@ export type LangAttributesObjAttributes = {
 
 export type LangType<P> = string | ((data: P) => string);
 
-export interface langObjType {
+export interface LangObjType {
 	[name: string]: Lang<any>;
 }
 
@@ -53,7 +53,7 @@ export interface LangAttributes<T> {
 	};
 }
 
-export const useLang = (lang: langObjType, data?: any): LangAttributesObj => {
+export const useLang = (lang: LangObjType, data?: any): LangAttributesObj => {
 	const returnObj: LangAttributesObj = {};
 
 	Object.keys(lang).forEach((key: string) => {
