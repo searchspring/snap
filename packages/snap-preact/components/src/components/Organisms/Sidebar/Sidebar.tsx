@@ -11,7 +11,7 @@ import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { defined, mergeProps } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -95,7 +95,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	//initialize lang
 	const defaultLang: Partial<SidebarLang> = {
 		titleText: {
-			value: titleText,
+			value: titleText!,
 		},
 	};
 
@@ -106,7 +106,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
-				{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText}></h4>}
+				{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
 
 				{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
 
@@ -134,7 +134,7 @@ export interface SidebarProps extends ComponentProps {
 }
 
 export interface SidebarLang {
-	titleText: lang<{
+	titleText: Lang<{
 		controller: SearchController;
 	}>;
 }

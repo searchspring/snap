@@ -9,7 +9,7 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -152,7 +152,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 								onClick && onClick(e);
 							}}
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-							{...mergedLang.hierarchyOption}
+							{...mergedLang.hierarchyOption?.all}
 						>
 							<span className="ss__facet-hierarchy-options__option__value">
 								{value.label}
@@ -181,7 +181,7 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 }
 
 export interface FacetHierarchyOptionsLang {
-	hierarchyOption: lang<{
+	hierarchyOption: Lang<{
 		facet: ValueFacet;
 		value: FacetHierarchyValue;
 	}>;

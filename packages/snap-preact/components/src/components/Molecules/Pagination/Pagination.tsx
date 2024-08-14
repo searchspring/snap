@@ -11,7 +11,7 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore, Page } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import deepmerge from 'deepmerge';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 
 const CSS = {
 	pagination: ({ theme }: Partial<PaginationProps>) =>
@@ -130,7 +130,11 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 				<nav role="navigation" aria-label="Pagination">
 					{/* Prev */}
 					{store.previous && !hidePrev && (
-						<a {...store.previous.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--previous')} {...mergedLang.previous}>
+						<a
+							{...store.previous.url.link}
+							className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
+							{...mergedLang.previous?.all}
+						>
 							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
 						</a>
 					)}
@@ -138,7 +142,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					{/* first */}
 					{!pageNumbers.includes(store.first.number) && !hideFirst && (
 						<>
-							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} {...mergedLang.first}>
+							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} {...mergedLang.first?.all}>
 								{firstButton ? firstButton : store.first.number}
 							</a>
 							{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
@@ -165,11 +169,15 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 							});
 
 							return page.active ? (
-								<span className={classnames('ss__pagination__page', 'ss__pagination__page--active')} {...mergedPageLang.page} aria-current="true">
+								<span
+									className={classnames('ss__pagination__page', 'ss__pagination__page--active')}
+									{...mergedPageLang.page?.all}
+									aria-current="true"
+								>
 									{page.number}
 								</span>
 							) : (
-								<a {...page.url.link} className="ss__pagination__page" {...mergedPageLang.page}>
+								<a {...page.url.link} className="ss__pagination__page" {...mergedPageLang.page?.all}>
 									{page.number}
 								</a>
 							);
@@ -180,7 +188,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 						<>
 							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} {...mergedLang.last}>
+							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} {...mergedLang.last?.all}>
 								{lastButton ? lastButton : store.last.number}
 							</a>
 						</>
@@ -188,7 +196,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 					{/* next */}
 					{store.next && !hideNext && (
-						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} {...mergedLang.next}>
+						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} {...mergedLang.next?.all}>
 							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
 						</a>
 					)}
@@ -223,19 +231,19 @@ export interface PaginationProps extends ComponentProps {
 }
 
 export interface PaginationLang {
-	previous: lang<{
+	previous: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
-	next: lang<{
+	next: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
-	first: lang<{
+	first: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
-	last: lang<{
+	last: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
-	page: lang<{
+	page: Lang<{
 		paginationStore: SearchPaginationStore;
 		page: Page;
 	}>;

@@ -19,7 +19,7 @@ import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 
 // import { useSnap } from '../../../providers';
 // import { useComponent } from '../../../hooks';
@@ -533,7 +533,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					onClick={() => reset()}
 					className="ss__autocomplete__close-button"
 					style={{ position: 'absolute', top: '-10000000px', left: '-1000000px' }}
-					{...mergedLang.closeButton}
+					{...mergedLang.closeButton?.all}
 				></span>
 
 				{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
@@ -558,7 +558,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									<div className="ss__autocomplete__terms__suggestions">
 										{termsTitle || lang.termsTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
-												<h5 {...mergedLang.termsTitle}></h5>
+												<h5 {...mergedLang.termsTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
@@ -591,7 +591,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 															href={term.url.href}
 															{...createHoverProps(term.preview)}
 															role="link"
-															{...suggestionTermLangObj.suggestionsTerm}
+															{...suggestionTermLangObj.suggestionsTerm?.all}
 														>
 															{emIfy(term.value, state.input || '')}
 														</a>
@@ -606,7 +606,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									<div className="ss__autocomplete__terms__trending">
 										{trendingTitle || lang.trendingTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
-												<h5 {...mergedLang.trendingTitle}></h5>
+												<h5 {...mergedLang.trendingTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
@@ -639,7 +639,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 															href={term.url.href}
 															{...createHoverProps(term.preview)}
 															role="link"
-															{...trendingTermLangObj.trendingTerm}
+															{...trendingTermLangObj.trendingTerm?.all}
 														>
 															{emIfy(term.value, state.input || '')}
 														</a>
@@ -654,7 +654,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									<div className="ss__autocomplete__terms__history">
 										{historyTitle || lang.historyTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--history">
-												<h5 {...mergedLang.historyTitle}></h5>
+												<h5 {...mergedLang.historyTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
@@ -687,7 +687,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 															href={term.url.href}
 															{...createHoverProps(term.preview)}
 															role="link"
-															{...historyTermLangObj.historyTerm}
+															{...historyTermLangObj.historyTerm?.all}
 														>
 															{emIfy(term.value, state.input || '')}
 														</a>
@@ -712,13 +712,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							<>
 								{(facetsTitle || lang.facetsTitle.value) && vertical ? (
 									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-										<h5 {...mergedLang.facetsTitle}></h5>
+										<h5 {...mergedLang.facetsTitle?.all}></h5>
 									</div>
 								) : null}
 								<div className="ss__autocomplete__facets">
 									{(facetsTitle || lang.facetsTitle.value) && !vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-											<h5 {...mergedLang.facetsTitle}></h5>
+											<h5 {...mergedLang.facetsTitle?.all}></h5>
 										</div>
 									) : null}
 									<Facets {...subProps.facets} facets={facetsToShow} />
@@ -746,7 +746,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											<>
 												{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
 													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-														<h5 {...mergedLang.contentTitle}></h5>
+														<h5 {...mergedLang.contentTitle?.all}></h5>
 													</div>
 												) : null}
 												<Results results={results} {...subProps.results} controller={controller} />
@@ -755,7 +755,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									</div>
 								) : (
 									<div className="ss__autocomplete__content__no-results">
-										{noResultsSlot ? cloneWithProps(noResultsSlot, { search, pagination, controller }) : <div {...mergedLang.noResultsText}></div>}
+										{noResultsSlot ? (
+											cloneWithProps(noResultsSlot, { search, pagination, controller })
+										) : (
+											<div {...mergedLang.noResultsText?.all}></div>
+										)}
 									</div>
 								)}
 
@@ -772,8 +776,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
 									) : search?.query?.string && results.length > 0 ? (
 										<div className="ss__autocomplete__content__info">
-											<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
-												<span {...mergedLang.contentInfo}></span>
+											<a
+												href={state.url.href}
+												onClick={() => controller?.setFocused && controller.setFocused()}
+												{...mergedLang.contentInfo.attributes}
+											>
+												<span {...mergedLang.contentInfo.value}></span>
 												<Icon name="seeMoreIcon" {...subProps.icon} />
 											</a>
 										</div>
@@ -867,43 +875,43 @@ export interface AutocompleteProps extends ComponentProps {
 }
 
 export interface AutocompleteLang {
-	termsTitle: lang<{
+	termsTitle: Lang<{
 		controller: AutocompleteController;
 	}>;
-	trendingTitle: lang<{
+	trendingTitle: Lang<{
 		controller: AutocompleteController;
 	}>;
-	historyTitle: lang<{
+	historyTitle: Lang<{
 		controller: AutocompleteController;
 	}>;
-	facetsTitle: lang<{
+	facetsTitle: Lang<{
 		controller: AutocompleteController;
 	}>;
-	contentTitle: lang<{
+	contentTitle: Lang<{
 		controller: AutocompleteController;
 	}>;
-	closeButton: lang<{
+	closeButton: Lang<{
 		controller: AutocompleteController;
 	}>;
-	trendingTerm: lang<{
-		controller: AutocompleteController;
-		term: Term;
-		idx: number;
-	}>;
-	suggestionsTerm: lang<{
+	trendingTerm: Lang<{
 		controller: AutocompleteController;
 		term: Term;
 		idx: number;
 	}>;
-	historyTerm: lang<{
+	suggestionsTerm: Lang<{
 		controller: AutocompleteController;
 		term: Term;
 		idx: number;
 	}>;
-	noResultsText: lang<{
+	historyTerm: Lang<{
+		controller: AutocompleteController;
+		term: Term;
+		idx: number;
+	}>;
+	noResultsText: Lang<{
 		controller: AutocompleteController;
 	}>;
-	contentInfo: lang<{
+	contentInfo: Lang<{
 		controller: AutocompleteController;
 	}>;
 }

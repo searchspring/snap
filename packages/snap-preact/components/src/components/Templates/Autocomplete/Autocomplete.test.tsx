@@ -750,7 +750,6 @@ describe('Autocomplete Component', () => {
 			'suggestionsTerm',
 			'historyTerm',
 			'contentInfo',
-			// 'noResultsText',
 		];
 
 		//text attributes/values
@@ -796,6 +795,12 @@ describe('Autocomplete Component', () => {
 			},
 		];
 
+		let valueSatified = false;
+		let altSatified = false;
+		let labelSatified = false;
+		let valueTextSatified = false;
+		let titleSatified = false;
+
 		langOptions.forEach(async (option) => {
 			langObjs.forEach(async (langObj) => {
 				const lang = {
@@ -807,48 +812,69 @@ describe('Autocomplete Component', () => {
 				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 				expect(autocomplete).toBeInTheDocument();
 
-				const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-				expect(langElem).toBeInTheDocument();
-				if (typeof langObj.value == 'function') {
-					expect(langElem?.innerHTML).toBe(value);
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+				console.log(option);
 
-					if (option == 'trendingTerm') {
-						controller.store.trending.forEach((term, idx) => {
+				expect(langElems.length).toBeGreaterThan(0);
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						if (option == 'trendingTerm') {
+							controller.store.trending.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									idx: idx,
+								});
+							});
+						} else if ('suggestionsTerm') {
+							controller.store.terms.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									idx: idx,
+								});
+							});
+						} else if ('historyTerm') {
+							controller.store.history.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									idx: idx,
+								});
+							});
+						} else {
 							expect(valueMock).toHaveBeenCalledWith({
 								controller: controller,
-								term: term,
-								idx: idx,
 							});
-						});
-					} else if ('suggestionsTerm') {
-						controller.store.terms.forEach((term, idx) => {
-							expect(valueMock).toHaveBeenCalledWith({
-								controller: controller,
-								term: term,
-								idx: idx,
-							});
-						});
-					} else if ('historyTerm') {
-						controller.store.history.forEach((term, idx) => {
-							expect(valueMock).toHaveBeenCalledWith({
-								controller: controller,
-								term: term,
-								idx: idx,
-							});
-						});
+						}
+
+						if (elem?.innerHTML == value) {
+							valueSatified = true;
+						}
 					} else {
-						expect(valueMock).toHaveBeenCalledWith({
-							controller: controller,
-						});
+						if (elem?.innerHTML == langObj.value) {
+							valueSatified = true;
+						}
 					}
-				} else {
-					expect(langElem?.innerHTML).toBe(langObj.value);
-				}
+					if (elem.getAttribute('alt') == altText) {
+						altSatified = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatified = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatified = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatified = true;
+					}
+				});
 
-				expect(langElem).toHaveAttribute('alt', altText);
-				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-				expect(langElem).toHaveAttribute('title', title);
+				expect(valueSatified).toBeTruthy();
+				expect(altSatified).toBeTruthy();
+				expect(labelSatified).toBeTruthy();
+				expect(valueTextSatified).toBeTruthy();
+				expect(titleSatified).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});
@@ -867,6 +893,12 @@ describe('Autocomplete Component', () => {
 		const labelMock = jest.fn(() => ariaLabel);
 		const valueTextMock = jest.fn(() => ariaValueText);
 		const titleMock = jest.fn(() => title);
+
+		let valueSatified = false;
+		let altSatified = false;
+		let labelSatified = false;
+		let valueTextSatified = false;
+		let titleSatified = false;
 
 		const langObjs = [
 			{
@@ -926,22 +958,41 @@ describe('Autocomplete Component', () => {
 				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 				expect(autocomplete).toBeInTheDocument();
 
-				const langElem = rendered.container.querySelector(`[ss-lang=noResultsText]`);
-				expect(langElem).toBeInTheDocument();
-				if (typeof langObj.value == 'function') {
-					expect(langElem?.innerHTML).toBe(value);
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=noResultsText]`);
+				expect(langElems.length).toBeGreaterThan(0);
 
-					expect(valueMock).toHaveBeenCalledWith({
-						controller: controller,
-					});
-				} else {
-					expect(langElem?.innerHTML).toBe(langObj.value);
-				}
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalledWith({
+							controller: controller,
+						});
+						if (elem?.innerHTML == value) {
+							valueSatified = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatified = true;
+						}
+					}
+					if (elem.getAttribute('alt') == altText) {
+						altSatified = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatified = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatified = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatified = true;
+					}
+				});
 
-				expect(langElem).toHaveAttribute('alt', altText);
-				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-				expect(langElem).toHaveAttribute('title', title);
+				expect(valueSatified).toBeTruthy();
+				expect(altSatified).toBeTruthy();
+				expect(labelSatified).toBeTruthy();
+				expect(valueTextSatified).toBeTruthy();
+				expect(titleSatified).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});

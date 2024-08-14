@@ -141,31 +141,58 @@ describe('HorizontalFacets Component', () => {
 						[`${option}`]: langObj,
 					};
 
+					let valueSatified = false;
+					let altSatified = false;
+					let labelSatified = false;
+					let valueTextSatified = false;
+					let titleSatified = false;
+
 					// @ts-ignore
 					const rendered = render(<HorizontalFacets {...args} lang={lang} />);
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
-					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-					expect(langElem).toBeInTheDocument();
-					if (typeof langObj.value == 'function') {
-						expect(langElem?.innerHTML).toBe(value);
 
-						searchResponse.facets?.forEach((facet, idx) => {
-							if (idx < 6) {
-								expect(valueMock).toHaveBeenCalledWith({
-									selectedFacet: undefined,
-									facet: facet,
-								});
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							searchResponse.facets?.forEach((facet, idx) => {
+								if (idx < 6) {
+									expect(valueMock).toHaveBeenCalledWith({
+										selectedFacet: undefined,
+										facet: facet,
+									});
+								}
+							});
+
+							if (elem?.innerHTML == value) {
+								valueSatified = true;
 							}
-						});
-					} else {
-						expect(langElem?.innerHTML).toBe(langObj.value);
-					}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatified = true;
+							}
+						}
 
-					expect(langElem).toHaveAttribute('alt', altText);
-					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-					expect(langElem).toHaveAttribute('title', title);
+						if (elem.getAttribute('alt') == altText) {
+							altSatified = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatified = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatified = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatified = true;
+						}
+					});
+
+					expect(valueSatified).toBeTruthy();
+					expect(altSatified).toBeTruthy();
+					expect(labelSatified).toBeTruthy();
+					expect(valueTextSatified).toBeTruthy();
+					expect(titleSatified).toBeTruthy();
 
 					jest.restoreAllMocks();
 				});

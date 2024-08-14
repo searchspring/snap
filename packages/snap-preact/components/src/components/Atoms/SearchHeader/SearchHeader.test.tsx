@@ -234,7 +234,7 @@ describe('Search Header Component', () => {
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
 					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-					console.log(option);
+					// console.log(option);
 					expect(langElem).toBeInTheDocument();
 					if (typeof langObj.value == 'function') {
 						expect(valueMock).toHaveBeenLastCalledWith({
@@ -243,6 +243,7 @@ describe('Search Header Component', () => {
 						});
 						expect(langElem?.innerHTML).toBe(value);
 					} else {
+						// expect(valueMock).not.toHaveBeenCalled();
 						expect(langElem?.innerHTML).toBe(langObj.value);
 					}
 

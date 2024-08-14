@@ -11,7 +11,7 @@ import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { RadioList, RadioListProps } from '../RadioList';
 import { List, ListProps } from '../List';
-import { lang } from '../../../hooks';
+import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -163,7 +163,7 @@ export interface SortByProps extends ComponentProps {
 }
 
 export interface SortByLang {
-	label: lang<{
+	label: Lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];
 	}>;

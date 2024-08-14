@@ -11,7 +11,7 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
-import { lang, useMediaQuery } from '../../../hooks';
+import { Lang, useMediaQuery } from '../../../hooks';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
@@ -317,7 +317,7 @@ export interface SearchProps extends ComponentProps {
 }
 
 export interface SearchLang {
-	toggleSidebarButtonText?: lang<Record<string, never>>;
+	toggleSidebarButtonText?: Lang<never>;
 }
 
 export type layoutConfig = {

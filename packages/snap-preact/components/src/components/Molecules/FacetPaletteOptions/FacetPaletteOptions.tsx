@@ -13,7 +13,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -285,7 +285,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								onClick && onClick(e);
 							}}
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-							{...mergedLang.paletteOption}
+							{...mergedLang.paletteOption?.all}
 						>
 							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 							<div className="ss__facet-palette-options__option__wrapper">
@@ -345,7 +345,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 }
 
 export interface FacetPaletteOptionsLang {
-	paletteOption: lang<{
+	paletteOption: Lang<{
 		facet: ValueFacet;
 		value: FacetValue;
 	}>;

@@ -16,7 +16,7 @@ import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '.
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -140,7 +140,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)}>
 				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__recommendation__title" {...mergedLang.titleText}></h3>}
+					{title && <h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}></h3>}
 					<Carousel
 						prevButton={prevButton}
 						nextButton={nextButton}
@@ -197,11 +197,10 @@ export type RecommendationProps = {
 	ComponentProps;
 
 export interface RecommendationLang {
-	titleText?: lang<{
+	titleText?: Lang<{
 		controller: RecommendationController;
 	}>;
 }
-
 interface RecommendationSubProps {
 	result: Partial<ResultProps>;
 	carousel: Partial<CarouselProps>;

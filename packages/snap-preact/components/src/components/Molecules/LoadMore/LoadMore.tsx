@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { lang, useIntersection, useLang } from '../../../hooks';
+import { Lang, useIntersection, useLang } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Button, ButtonProps } from '../../Atoms/Button';
@@ -232,6 +232,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	//initialize lang
 	const defaultLang = {
 		loadMoreButton: {
+			value: loadMoreText,
 			attributes: {
 				'aria-label': loadMoreText,
 			},
@@ -268,9 +269,9 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 								onClick && onClick(e);
 							}}
 							{...subProps.button}
-							{...mergedLang.loadMoreButton}
+							{...mergedLang.loadMoreButton.attributes}
 						>
-							{loadMoreText}
+							<span {...mergedLang.loadMoreButton.value}>{loadMoreText}</span>
 							{loadingIcon && isLoading && loadingLocation === 'button' ? (
 								<Icon {...subProps.icon} {...(typeof loadingIcon == 'string' ? { icon: loadingIcon } : (loadingIcon as Partial<IconProps>))} />
 							) : (
@@ -293,7 +294,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 										<div className={`ss__load-more__progress__indicator__bar`}></div>
 									</div>
 								)}
-								{!hideProgressText && <div className={'ss__load-more__progress__text'} {...mergedLang.progressText}></div>}
+								{!hideProgressText && <div className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>}
 							</Fragment>
 						)}
 						{progressIndicator === 'radial' && (
@@ -353,10 +354,10 @@ export interface LoadMoreProps extends ComponentProps {
 }
 
 export interface LoadMoreLang {
-	loadMoreButton: lang<{
+	loadMoreButton: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
-	progressText: lang<{
+	progressText: Lang<{
 		paginationStore: SearchPaginationStore;
 	}>;
 }

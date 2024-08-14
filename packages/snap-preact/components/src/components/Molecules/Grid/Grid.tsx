@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../types';
 import { useState } from 'react';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
@@ -235,13 +235,14 @@ export function Grid(properties: GridProps): JSX.Element {
 					!disableOverflowAction && setLimited(!limited);
 					onOverflowButtonClick && onOverflowButtonClick(e, Boolean(limited), remainder);
 				}}
+				{...(limited ? mergedLang.showMoreText.attributes : mergedLang.showLessText.attributes)}
 			>
 				{overflowButton ? (
 					cloneWithProps(overflowButton, { limited, remainder })
 				) : limited ? (
-					<span className={'ss__grid__show-more'} {...mergedLang.showMoreText}></span>
+					<span className={'ss__grid__show-more'} {...mergedLang.showMoreText.value}></span>
 				) : remainder ? (
-					<span className={'ss__grid__show-less'} {...mergedLang.showLessText}></span>
+					<span className={'ss__grid__show-less'} {...mergedLang.showLessText.value}></span>
 				) : (
 					<Fragment />
 				)}
@@ -316,11 +317,11 @@ export interface GridProps extends ComponentProps {
 }
 
 export interface GridLang {
-	showMoreText: lang<{
+	showMoreText: Lang<{
 		limited: number | boolean;
 		remainder: number;
 	}>;
-	showLessText: lang<{
+	showLessText: Lang<{
 		limited: number | boolean;
 		remainder: number;
 	}>;

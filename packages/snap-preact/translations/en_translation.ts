@@ -5,6 +5,8 @@ export const en_translation: LangComponents = {
 	recommendation: {},
 	button: {},
 	search: {},
+	list: {},
+	radioList: {},
 	autocomplete: {
 		trendingTitle: {
 			value: 'Popular Searches',
@@ -124,11 +126,6 @@ export const en_translation: LangComponents = {
 						(data?.facet as ValueFacet).values?.length ? (data?.facet as ValueFacet).values?.length + ' options' : ''
 					}`,
 			},
-		},
-	},
-	slideout: {
-		buttonContent: {
-			value: 'click me',
 		},
 	},
 	select: {
@@ -300,7 +297,7 @@ export const en_translation: LangComponents = {
 		term: {
 			value: (data) => `${data?.term.value}`,
 			attributes: {
-				'aria-label': (data) => `item ${(data?.idx || 0) + 1} of ${data?.numberOfTerms}, ${data?.term.value}`,
+				'aria-label': (data) => `item ${(data?.index || 0) + 1} of ${data?.numberOfTerms}, ${data?.term.value}`,
 			},
 		},
 	},

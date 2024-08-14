@@ -262,7 +262,7 @@ describe('Terms Component', () => {
 						expect(valueMock).toHaveBeenCalled();
 						controller.store.terms.forEach((term, idx) => {
 							expect(valueMock).toHaveBeenCalledWith({
-								idx: idx,
+								index: idx,
 								numberOfTerms: controller.store.terms.length,
 								term: term,
 							});

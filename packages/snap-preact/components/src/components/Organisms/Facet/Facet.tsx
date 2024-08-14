@@ -19,7 +19,7 @@ import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -334,9 +334,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
 							role="heading"
 							aria-level={3}
-							{...mergedLang.dropdownButton}
+							{...mergedLang.dropdownButton.attributes}
 						>
-							{facet?.label}
+							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 							{!disableCollapse && (
 								<Icon
 									{...subProps.icon}
@@ -421,7 +421,7 @@ const FacetContent = (props: any) => {
 								{...subProps.showMoreLessIcon}
 								icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
 							/>
-							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? { ...lang.showMoreText } : { ...lang.showLessText })}></span>
+							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
 						</Fragment>
 					)}
 				</div>
@@ -472,13 +472,13 @@ interface OptionalFacetProps extends ComponentProps {
 }
 
 export interface FacetLang {
-	showMoreText: lang<{
+	showMoreText: Lang<{
 		facet: ValueFacet | RangeFacet;
 	}>;
-	showLessText: lang<{
+	showLessText: Lang<{
 		facet: ValueFacet | RangeFacet;
 	}>;
-	dropdownButton: lang<{
+	dropdownButton: Lang<{
 		facet: ValueFacet | RangeFacet;
 	}>;
 }

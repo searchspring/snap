@@ -119,6 +119,12 @@ describe('Error Handler Component', () => {
 				},
 			];
 
+			let valueSatified = false;
+			let altSatified = false;
+			let labelSatified = false;
+			let valueTextSatified = false;
+			let titleSatified = false;
+
 			langOptions.forEach((option) => {
 				langObjs.forEach((langObj) => {
 					const lang = {
@@ -127,25 +133,46 @@ describe('Error Handler Component', () => {
 
 					const eCode = eCodeKey[option as keyof typeof eCodeKey];
 
-					// @ts-ignore
 					const rendered = render(<ErrorHandler lang={lang} error={eCode} />);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
-					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 
-					expect(langElem).toBeInTheDocument();
-					if (typeof langObj.value == 'function') {
-						expect(valueMock).toHaveBeenCalledWith({});
-						expect(langElem?.innerHTML).toBe(value);
-					} else {
-						expect(langElem?.innerHTML).toBe(langObj.value);
-					}
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
 
-					expect(langElem).toHaveAttribute('alt', altText);
-					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-					expect(langElem).toHaveAttribute('title', title);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({});
+
+							if (elem?.innerHTML == value) {
+								valueSatified = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatified = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatified = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatified = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatified = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatified = true;
+						}
+					});
+
+					expect(valueSatified).toBeTruthy();
+					expect(altSatified).toBeTruthy();
+					expect(labelSatified).toBeTruthy();
+					expect(valueTextSatified).toBeTruthy();
+					expect(titleSatified).toBeTruthy();
 
 					jest.restoreAllMocks();
 				});

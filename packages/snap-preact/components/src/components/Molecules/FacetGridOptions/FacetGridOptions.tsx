@@ -9,7 +9,7 @@ import { mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -140,7 +140,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 								onClick && onClick(e);
 							}}
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-							{...mergedLang.gridOption}
+							{...mergedLang.gridOption?.all}
 						>
 							<span
 								className={classnames('ss__facet-grid-options__option__value', {
@@ -173,7 +173,7 @@ export interface FacetGridOptionsProps extends ComponentProps {
 }
 
 export interface FacetGridOptionsLang {
-	gridOption: lang<{
+	gridOption: Lang<{
 		facet: ValueFacet;
 		value: FacetValue;
 	}>;

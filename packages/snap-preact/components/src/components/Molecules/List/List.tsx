@@ -8,7 +8,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { filters } from '@searchspring/snap-toolbox';
 import deepmerge from 'deepmerge';
@@ -181,7 +181,7 @@ export function List(properties: ListProps): JSX.Element {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{(titleText || lang?.title?.value) && (
-					<h5 className="ss__list__title" {...mergedLang.title}>
+					<h5 className="ss__list__title" {...mergedLang.title?.all}>
 						{titleText}
 					</h5>
 				)}
@@ -239,7 +239,7 @@ export interface ListProps extends ComponentProps {
 }
 
 export interface ListLang {
-	title: lang<{
+	title?: Lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];
 	}>;

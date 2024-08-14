@@ -10,7 +10,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -158,7 +158,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					role="checkbox"
 					aria-checked={checkedState}
-					{...mergedLang.checkbox}
+					{...mergedLang.checkbox?.all}
 				>
 					{checkedState ? (
 						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
@@ -189,7 +189,7 @@ export interface CheckboxProps extends ComponentProps {
 }
 
 export interface CheckboxLang {
-	checkbox: lang<{
+	checkbox: Lang<{
 		checkedState: boolean;
 		disabled: boolean;
 	}>;

@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -100,18 +100,18 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		<CacheProvider>
 			{native ? (
 				<button {...elementProps}>
-					<div {...mergedLang.button}>
+					<span {...mergedLang.button?.all}>
 						{content}
 						{children}
-					</div>
+					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					<div {...mergedLang.button}>
+					<span {...mergedLang.button?.all}>
 						{content}
 						{children}
-					</div>
+					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}
@@ -140,5 +140,5 @@ export interface ButtonProps extends ComponentProps {
 }
 
 export interface ButtonLang {
-	button?: lang<Record<string, never>>;
+	button?: Lang<never>;
 }

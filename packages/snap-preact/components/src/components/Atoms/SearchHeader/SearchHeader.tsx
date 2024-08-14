@@ -10,7 +10,7 @@ import { mergeProps } from '../../../utilities';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 import { useLang } from '../../../hooks';
-import type { lang } from '../../../hooks';
+import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -108,7 +108,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 									className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
 									aria-atomic="true"
 									aria-live="polite"
-									{...mergedLang.titleText}
+									{...mergedLang.titleText?.all}
 								></h3>
 
 								{search?.originalQuery && (
@@ -116,7 +116,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 										className={classnames('ss__search-header__title', 'ss__search-header__title--corrected')}
 										aria-atomic="true"
 										aria-live="polite"
-										{...mergedLang.correctedQueryText}
+										{...mergedLang.correctedQueryText?.all}
 									></h5>
 								)}
 							</>
@@ -127,7 +127,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 										className={classnames('ss__search-header__title', 'ss__search-header__title--no-results')}
 										aria-atomic="true"
 										aria-live="polite"
-										{...mergedLang.noResultsText}
+										{...mergedLang.noResultsText?.all}
 									></h3>
 
 									{search?.didYouMean && (
@@ -135,7 +135,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 											className={classnames('ss__search-header__title', 'ss__search-header__title--dym')}
 											aria-atomic="true"
 											aria-live="polite"
-											{...mergedLang.didYouMeanText}
+											{...mergedLang.didYouMeanText?.all}
 										></h4>
 									)}
 								</div>
@@ -147,7 +147,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 								className={classnames('ss__search-header__title', 'ss__search-header__title--subtitle')}
 								aria-atomic="true"
 								aria-live="polite"
-								{...mergedLang.subtitleText}
+								{...mergedLang.subtitleText?.all}
 							></h4>
 						)}
 					</Fragment>
@@ -172,23 +172,23 @@ export interface SearchHeaderProps extends ComponentProps {
 }
 
 export interface SearchHeaderLang {
-	titleText: lang<{
+	titleText: Lang<{
 		pagination: SearchPaginationStore;
 		search: SearchQueryStore;
 	}>;
-	correctedQueryText: lang<{
+	correctedQueryText: Lang<{
 		pagination: SearchPaginationStore;
 		search: SearchQueryStore;
 	}>;
-	noResultsText: lang<{
+	noResultsText: Lang<{
 		pagination: SearchPaginationStore;
 		search: SearchQueryStore;
 	}>;
-	didYouMeanText: lang<{
+	didYouMeanText: Lang<{
 		pagination: SearchPaginationStore;
 		search: SearchQueryStore;
 	}>;
-	subtitleText?: lang<{
+	subtitleText?: Lang<{
 		pagination: SearchPaginationStore;
 		search: SearchQueryStore;
 	}>;

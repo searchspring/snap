@@ -18,7 +18,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
 import { BundledCTA } from './BundleCTA';
 import { useEffect } from 'react';
-import { lang } from '../../../hooks';
+import { Lang } from '../../../hooks';
 
 const CSS = {
 	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }: any) =>
@@ -709,9 +709,9 @@ export interface RecommendationBundleProps extends ComponentProps {
 }
 
 export interface RecommendationBundleLang {
-	seedText: lang<Record<string, never>>;
-	ctaButtonText: lang<Record<string, never>>;
-	ctaButtonSuccessText: lang<Record<string, never>>;
+	seedText: Lang<never>;
+	ctaButtonText: Lang<never>;
+	ctaButtonSuccessText: Lang<never>;
 }
 
 interface RecommendationBundleSubProps {

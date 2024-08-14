@@ -333,28 +333,54 @@ describe('LoadMore Component', () => {
 						[`${option}`]: langObj,
 					};
 
+					let valueSatified = false;
+					let altSatified = false;
+					let labelSatified = false;
+					let valueTextSatified = false;
+					let titleSatified = false;
+
 					// @ts-ignore
 					const rendered = render(<LoadMore pagination={paginationStore} lang={lang} />);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
-					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 
-					expect(langElem).toBeInTheDocument();
-					if (typeof langObj.value == 'function') {
-						expect(langElem?.innerHTML).toBe(value);
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								paginationStore: paginationStore,
+							});
 
-						expect(valueMock).toHaveBeenCalledWith({
-							paginationStore: paginationStore,
-						});
-					} else {
-						expect(langElem?.innerHTML).toBe(langObj.value);
-					}
+							if (elem?.innerHTML == value) {
+								valueSatified = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatified = true;
+							}
+						}
 
-					expect(langElem).toHaveAttribute('alt', altText);
-					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-					expect(langElem).toHaveAttribute('title', title);
+						if (elem.getAttribute('alt') == altText) {
+							altSatified = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatified = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatified = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatified = true;
+						}
+					});
+
+					expect(valueSatified).toBeTruthy();
+					expect(altSatified).toBeTruthy();
+					expect(labelSatified).toBeTruthy();
+					expect(valueTextSatified).toBeTruthy();
+					expect(titleSatified).toBeTruthy();
 
 					jest.restoreAllMocks();
 				});

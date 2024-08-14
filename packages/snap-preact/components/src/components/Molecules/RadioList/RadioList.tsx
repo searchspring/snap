@@ -8,7 +8,7 @@ import { ComponentProps, StylingCSS, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
@@ -133,7 +133,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
 				{(titleText || lang?.title?.value) && (
-					<h5 className="ss__radio-list__title" {...mergedLang.title}>
+					<h5 className="ss__radio-list__title" {...mergedLang.title?.all}>
 						{titleText}
 					</h5>
 				)}
@@ -186,7 +186,7 @@ export interface RadioListProps extends ComponentProps {
 }
 
 export interface RadioListLang {
-	title: lang<{
+	title?: Lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];
 	}>;

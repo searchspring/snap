@@ -13,7 +13,7 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { AbstractController } from '@searchspring/snap-controller';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -158,7 +158,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 								<>
 									<div className="ss__error-handler__message">
 										<Icon {...subProps.icon} icon={'warn'} />
-										<div {...mergedLang.warningText}></div>
+										<span {...mergedLang.warningText?.all}></span>
 										{errorObject.message}
 									</div>
 									{errorObject?.code == 429 ? (
@@ -167,9 +167,10 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 											onClick={(e) => {
 												onRetryClick ? onRetryClick(e) : controller?.search();
 											}}
+											{...mergedLang.reloadText.attributes}
 										>
 											<Icon {...subProps.icon} icon={'rotate-right'} />
-											<div {...mergedLang.reloadText}></div>
+											<span {...mergedLang.reloadText.value}></span>
 										</Button>
 									) : null}
 								</>
@@ -178,7 +179,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'error'} />
-									<div {...mergedLang.errorText}></div>
+									<span {...mergedLang.errorText?.all}></span>
 									{errorObject.message}
 								</div>
 							);
@@ -186,7 +187,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'info'} />
-									<div {...mergedLang.infoText}></div>
+									<span {...mergedLang.infoText?.all}></span>
 									{errorObject.message}
 								</div>
 							);
@@ -211,16 +212,16 @@ export interface ErrorHandlerProps extends ComponentProps {
 }
 
 export interface ErrorHandlerLang {
-	warningText: lang<{
+	warningText: Lang<{
 		controller: AbstractController;
 	}>;
-	infoText: lang<{
+	infoText: Lang<{
 		controller: AbstractController;
 	}>;
-	errorText: lang<{
+	errorText: Lang<{
 		controller: AbstractController;
 	}>;
-	reloadText: lang<{
+	reloadText: Lang<{
 		controller: AbstractController;
 	}>;
 }

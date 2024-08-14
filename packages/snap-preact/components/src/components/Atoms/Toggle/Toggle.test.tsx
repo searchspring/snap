@@ -187,7 +187,6 @@ describe('Toggle Component', () => {
 						expect(valueMock).toHaveBeenCalledWith({
 							disabled: undefined,
 							label: undefined,
-							round: true,
 							toggledState: false,
 						});
 

@@ -10,7 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -102,7 +102,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	return filters?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__filter-summary', className)}>
-				<div className="ss__filter-summary__title" {...mergedLang.title}></div>
+				<div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>
 
 				{filters.map((filter) => (
 					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
@@ -141,7 +141,7 @@ export interface FilterSummaryProps extends ComponentProps {
 }
 
 export interface FilterSummaryLang {
-	title: lang<{
+	title: Lang<{
 		filters: FilterType[];
 	}>;
 }

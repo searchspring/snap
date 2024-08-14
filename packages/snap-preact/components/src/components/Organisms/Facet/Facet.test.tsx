@@ -328,26 +328,52 @@ describe('Facet Component', () => {
 						[`${option}`]: langObj,
 					};
 
+					let valueSatified = false;
+					let altSatified = false;
+					let labelSatified = false;
+					let valueTextSatified = false;
+					let titleSatified = false;
+
 					// @ts-ignore
 					const rendered = render(<Facet facet={facet} lang={lang} />);
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
-					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-					expect(langElem).toBeInTheDocument();
-					if (typeof langObj.value == 'function') {
-						expect(langElem?.innerHTML).toBe(value);
 
-						expect(valueMock).toHaveBeenCalledWith({
-							facet: facet,
-						});
-					} else {
-						expect(langElem?.innerHTML).toBe(langObj.value);
-					}
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								facet: facet,
+							});
 
-					expect(langElem).toHaveAttribute('alt', altText);
-					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-					expect(langElem).toHaveAttribute('title', title);
+							if (elem?.innerHTML == value) {
+								valueSatified = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatified = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatified = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatified = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatified = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatified = true;
+						}
+					});
+					expect(valueSatified).toBeTruthy();
+					expect(altSatified).toBeTruthy();
+					expect(labelSatified).toBeTruthy();
+					expect(valueTextSatified).toBeTruthy();
+					expect(titleSatified).toBeTruthy();
 
 					jest.restoreAllMocks();
 				});
@@ -374,8 +400,14 @@ describe('Facet Component', () => {
 			const lessAriaValueText = 'less value text';
 			const lessTitle = 'less title';
 
-			const lang = {
-				showLessText: {
+			const valueMock = jest.fn(() => lessValue);
+			const altMock = jest.fn(() => lessAltText);
+			const labelMock = jest.fn(() => lessAriaLabel);
+			const valueTextMock = jest.fn(() => lessAriaValueText);
+			const titleMock = jest.fn(() => lessTitle);
+
+			const langObjs = [
+				{
 					value: lessValue,
 					attributes: {
 						alt: lessAltText,
@@ -384,21 +416,80 @@ describe('Facet Component', () => {
 						title: lessTitle,
 					},
 				},
-			};
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${lessValue}</div>`,
+					attributes: {
+						alt: lessAltText,
+						'aria-label': lessAriaLabel,
+						'aria-valuetext': lessAriaValueText,
+						title: lessTitle,
+					},
+				},
+			];
 
-			const rendered = render(<Facet facet={_facet} lang={lang} />);
+			let valueSatified = false;
+			let altSatified = false;
+			let labelSatified = false;
+			let valueTextSatified = false;
+			let titleSatified = false;
 
-			const element = rendered.container.querySelector(selector);
-			expect(element).toBeInTheDocument();
+			langObjs.forEach(async (langObj) => {
+				const lang = {
+					[`showLessText`]: langObj,
+				};
 
-			const lessElem = rendered.container.querySelector(`[ss-lang=showLessText]`);
+				const rendered = render(<Facet facet={_facet} lang={lang} />);
 
-			expect(lessElem).toBeInTheDocument();
-			expect(lessElem?.innerHTML).toBe(lessValue);
-			expect(lessElem).toHaveAttribute('alt', lessAltText);
-			expect(lessElem).toHaveAttribute('aria-label', lessAriaLabel);
-			expect(lessElem).toHaveAttribute('aria-valuetext', lessAriaValueText);
-			expect(lessElem).toHaveAttribute('title', lessTitle);
+				const element = rendered.container.querySelector(selector);
+				expect(element).toBeInTheDocument();
+
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=showLessText]`);
+				expect(langElems.length).toBeGreaterThan(0);
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalledWith({
+							facet: facet,
+						});
+
+						if (elem?.innerHTML == lessValue) {
+							valueSatified = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatified = true;
+						}
+					}
+
+					if (elem.getAttribute('alt') == lessAltText) {
+						altSatified = true;
+					}
+					if (elem.getAttribute('aria-label') == lessAriaLabel) {
+						labelSatified = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == lessAriaValueText) {
+						valueTextSatified = true;
+					}
+					if (elem.getAttribute('title') == lessTitle) {
+						titleSatified = true;
+					}
+				});
+				expect(valueSatified).toBeTruthy();
+				expect(altSatified).toBeTruthy();
+				expect(labelSatified).toBeTruthy();
+				expect(valueTextSatified).toBeTruthy();
+				expect(titleSatified).toBeTruthy();
+
+				jest.restoreAllMocks();
+			});
 		});
 	});
 

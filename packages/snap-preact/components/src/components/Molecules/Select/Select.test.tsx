@@ -330,7 +330,7 @@ describe('Select Component', () => {
 
 			expect(icon).toBeInTheDocument();
 			expect(button?.innerHTML).toBe(
-				'<div><span class="ss__select__label" aria-expanded="false" role="button" ssa11y="true" tabindex="0"><label ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange">selectme</label><span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg></div>'
+				'<span><span class="ss__select__label" aria-expanded="false" role="button" ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ssa11y="true" tabindex="0"><label ss-lang="buttonLabel">selectme</label><span class="ss__select__label__separator">: </span></span><svg class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg></span>'
 			);
 			expect(selection).not.toBeInTheDocument();
 		});
@@ -347,7 +347,7 @@ describe('Select Component', () => {
 			expect(icon).not.toBeInTheDocument();
 
 			expect(button?.innerHTML).toBe(
-				'<div><span class="ss__select__label" aria-expanded="false" role="button" ssa11y="true" tabindex="0"><label ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange">selectme</label><span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span></div>'
+				'<span><span class="ss__select__label" aria-expanded="false" role="button" ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ssa11y="true" tabindex="0"><label ss-lang="buttonLabel">selectme</label><span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span></span>'
 			);
 			expect(selection).toBeInTheDocument();
 		});
@@ -522,29 +522,56 @@ describe('Select Component', () => {
 							[`${option}`]: langObj,
 						};
 
+						let valueSatified = false;
+						let altSatified = false;
+						let labelSatified = false;
+						let valueTextSatified = false;
+						let titleSatified = false;
+
 						// @ts-ignore
 						const rendered = render(<Select options={options} lang={lang} separator={''} />);
 						const element = rendered.container.querySelector(selector);
 						expect(element).toBeInTheDocument();
-						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-						expect(langElem).toBeInTheDocument();
-						if (typeof langObj.value == 'function') {
-							expect(langElem?.innerHTML).toBe(value);
 
-							expect(valueMock).toHaveBeenCalledWith({
-								options: options,
-								selectedOptions: [],
-								label: undefined,
-								open: false,
-							});
-						} else {
-							expect(langElem?.innerHTML).toBe(langObj.value);
-						}
+						const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+						expect(langElems.length).toBeGreaterThan(0);
+						langElems.forEach((elem) => {
+							if (typeof langObj.value == 'function') {
+								expect(valueMock).toHaveBeenCalledWith({
+									options: options,
+									selectedOptions: [],
+									label: undefined,
+									open: false,
+								});
 
-						expect(langElem).toHaveAttribute('alt', altText);
-						expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-						expect(langElem).toHaveAttribute('title', title);
+								if (elem?.innerHTML == value) {
+									valueSatified = true;
+								}
+							} else {
+								if (elem?.innerHTML == langObj.value) {
+									valueSatified = true;
+								}
+							}
+
+							if (elem.getAttribute('alt') == altText) {
+								altSatified = true;
+							}
+							if (elem.getAttribute('aria-label') == ariaLabel) {
+								labelSatified = true;
+							}
+							if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+								valueTextSatified = true;
+							}
+							if (elem.getAttribute('title') == title) {
+								titleSatified = true;
+							}
+						});
+
+						expect(valueSatified).toBeTruthy();
+						expect(altSatified).toBeTruthy();
+						expect(labelSatified).toBeTruthy();
+						expect(valueTextSatified).toBeTruthy();
+						expect(titleSatified).toBeTruthy();
 
 						jest.restoreAllMocks();
 					});

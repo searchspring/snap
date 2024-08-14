@@ -10,7 +10,7 @@ import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
@@ -87,7 +87,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						})}
 						onClick={(e) => onAddToCart(e)}
 						disabled={addedToCart}
-						{...(addedToCart ? mergedLang.ctaButtonSuccessText : mergedLang.ctaButtonText)}
+						{...(addedToCart ? mergedLang.ctaButtonSuccessText?.all : mergedLang.ctaButtonText?.all)}
 					>
 						{addedToCart ? ctaButtonSuccessText : ctaButtonText}
 					</Button>
@@ -114,6 +114,6 @@ interface BundledCTAProps extends ComponentProps {
 }
 
 export interface BundledCTALang {
-	ctaButtonSuccessText: lang<Record<string, never>>;
-	ctaButtonText: lang<Record<string, never>>;
+	ctaButtonSuccessText: Lang<never>;
+	ctaButtonText: Lang<never>;
 }

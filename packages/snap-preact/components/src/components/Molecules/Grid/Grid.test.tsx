@@ -316,28 +316,56 @@ describe('Grid lang works', () => {
 				const lang: Partial<GridLang> = {
 					[`${option}`]: langObj,
 				};
+
+				let valueSatified = false;
+				let altSatified = false;
+				let labelSatified = false;
+				let valueTextSatified = false;
+				let titleSatified = false;
+
 				// @ts-ignore
 				const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
 
 				const element = rendered.container.querySelector(selector);
 				expect(element).toBeInTheDocument();
-				const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 
-				expect(langElem).toBeInTheDocument();
-				if (typeof langObj.value == 'function') {
-					expect(valueMock).toHaveBeenLastCalledWith({
-						limited: 4,
-						remainder: 4,
-					});
-					expect(langElem?.innerHTML).toBe(value);
-				} else {
-					expect(langElem?.innerHTML).toBe(langObj.value);
-				}
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+				expect(langElems.length).toBeGreaterThan(0);
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalledWith({
+							limited: 4,
+							remainder: 4,
+						});
 
-				expect(langElem).toHaveAttribute('alt', altText);
-				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-				expect(langElem).toHaveAttribute('title', title);
+						if (elem?.innerHTML == value) {
+							valueSatified = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatified = true;
+						}
+					}
+
+					if (elem.getAttribute('alt') == altText) {
+						altSatified = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatified = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatified = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatified = true;
+					}
+				});
+
+				expect(valueSatified).toBeTruthy();
+				expect(altSatified).toBeTruthy();
+				expect(labelSatified).toBeTruthy();
+				expect(valueTextSatified).toBeTruthy();
+				expect(titleSatified).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});
@@ -351,8 +379,14 @@ describe('Grid lang works', () => {
 		const lessAriaValueText = 'less value text';
 		const lessTitle = 'less title';
 
-		const lang: Partial<GridLang> = {
-			showLessText: {
+		const valueMock = jest.fn(() => lessValue);
+		const altMock = jest.fn(() => lessAltText);
+		const labelMock = jest.fn(() => lessAriaLabel);
+		const valueTextMock = jest.fn(() => lessAriaValueText);
+		const titleMock = jest.fn(() => lessTitle);
+
+		const langObjs = [
+			{
 				value: lessValue,
 				attributes: {
 					alt: lessAltText,
@@ -361,25 +395,88 @@ describe('Grid lang works', () => {
 					title: lessTitle,
 				},
 			},
-		};
-		// @ts-ignore
-		const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${lessValue}</div>`,
+				attributes: {
+					alt: lessAltText,
+					'aria-label': lessAriaLabel,
+					'aria-valuetext': lessAriaValueText,
+					title: lessTitle,
+				},
+			},
+		];
 
-		const element = rendered.container.querySelector(selector);
-		expect(element).toBeInTheDocument();
+		let valueSatified = false;
+		let altSatified = false;
+		let labelSatified = false;
+		let valueTextSatified = false;
+		let titleSatified = false;
 
-		let overflowButton = rendered.container.querySelector('.ss__grid__show-more-wrapper');
+		langObjs.forEach(async (langObj) => {
+			const lang = {
+				[`showLessText`]: langObj,
+			};
 
-		await userEvent.click(overflowButton!);
+			// @ts-ignore
+			const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
 
-		const lessElem = rendered.container.querySelector(`[ss-lang=showLessText]`);
+			const element = rendered.container.querySelector(selector);
+			expect(element).toBeInTheDocument();
 
-		expect(lessElem).toBeInTheDocument();
-		expect(lessElem?.innerHTML).toBe(lessValue);
-		expect(lessElem).toHaveAttribute('alt', lessAltText);
-		expect(lessElem).toHaveAttribute('aria-label', lessAriaLabel);
-		expect(lessElem).toHaveAttribute('aria-valuetext', lessAriaValueText);
-		expect(lessElem).toHaveAttribute('title', lessTitle);
+			let overflowButton = rendered.container.querySelector('.ss__grid__show-more-wrapper');
+
+			await userEvent.click(overflowButton!);
+
+			const lessElems = rendered.container.querySelectorAll(`[ss-lang=showLessText]`);
+
+			expect(lessElems.length).toBeGreaterThan(0);
+			lessElems.forEach((elem) => {
+				if (typeof langObj.value == 'function') {
+					expect(valueMock).toHaveBeenCalledWith({
+						limited: 4,
+						remainder: 4,
+					});
+
+					if (elem?.innerHTML == lessValue) {
+						valueSatified = true;
+					}
+				} else {
+					if (elem?.innerHTML == langObj.value) {
+						valueSatified = true;
+					}
+				}
+
+				if (elem.getAttribute('alt') == lessAltText) {
+					altSatified = true;
+				}
+				if (elem.getAttribute('aria-label') == lessAriaLabel) {
+					labelSatified = true;
+				}
+				if (elem.getAttribute('aria-valuetext') == lessAriaValueText) {
+					valueTextSatified = true;
+				}
+				if (elem.getAttribute('title') == lessTitle) {
+					titleSatified = true;
+				}
+			});
+
+			expect(valueSatified).toBeTruthy();
+			expect(altSatified).toBeTruthy();
+			expect(labelSatified).toBeTruthy();
+			expect(valueTextSatified).toBeTruthy();
+			expect(titleSatified).toBeTruthy();
+
+			jest.restoreAllMocks();
+		});
 	});
 });
 

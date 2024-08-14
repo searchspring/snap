@@ -12,7 +12,7 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -238,7 +238,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 					<>
 						{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
 							<span className="ss__select__label">
-								<label {...mergedLang.buttonLabel}></label>
+								<label {...mergedLang.buttonLabel?.all}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
 							</span>
 						)}
@@ -280,8 +280,14 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						button={
 							<Button {...subProps.button} disableA11y={true}>
 								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
-									<span className="ss__select__label" ref={(e) => useA11y(e)} aria-expanded={open} role="button">
-										<label {...mergedLang.buttonLabel}></label>
+									<span
+										className="ss__select__label"
+										ref={(e) => useA11y(e)}
+										aria-expanded={open}
+										role="button"
+										{...mergedLang.buttonLabel.attributes}
+									>
+										<label {...mergedLang.buttonLabel.value}></label>
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
@@ -375,7 +381,7 @@ export interface SelectProps extends ComponentProps {
 }
 
 export interface SelectLang {
-	buttonLabel: lang<{
+	buttonLabel: Lang<{
 		options: ListOption[];
 		selectedOptions: ListOption[];
 		label: string;

@@ -13,7 +13,7 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
-import { lang, useClickOutside, useLang } from '../../../hooks';
+import { Lang, useClickOutside, useLang } from '../../../hooks';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
@@ -262,8 +262,8 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 									setSelectedFacet(facet);
 								}}
 								button={
-									<div className="ss__dropdown__button__heading" role="heading" aria-level={3} {...mergedLang.dropdownButton}>
-										{facet?.label}
+									<div className="ss__dropdown__button__heading" role="heading" aria-level={3} {...mergedLang.dropdownButton.attributes}>
+										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}
 											// icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse}
@@ -323,7 +323,7 @@ export interface HorizontalFacetsProps extends ComponentProps {
 }
 
 export interface HorizontalFacetsLang {
-	dropdownButton: lang<{
+	dropdownButton: Lang<{
 		selectedFacet: IndividualFacetType;
 		facet: IndividualFacetType;
 	}>;

@@ -12,7 +12,7 @@ import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx';
 import { useLang } from '../../../hooks';
-import type { lang } from '../../../hooks';
+import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -45,22 +45,11 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 			if (search && term && match && typeof match.index == 'number') {
 				const beforeMatch = term.slice(0, match.index);
 				const afterMatch = term.slice(match.index + search.length, term.length);
-				// return (
-				// 	<>
-				// 		{beforeMatch ? <em>{beforeMatch}</em> : ''}
-				// 		{search}
-				// 		{afterMatch ? <em>{afterMatch}</em> : ''}
-				// 	</>
-				// );
+
 				return `${beforeMatch ? `<em>${beforeMatch}</em>` : ''}${search}${afterMatch ? `<em>${afterMatch}</em>` : ''}`;
 			}
 		}
 
-		// return (
-		// 	<Fragment>
-		// 		<em>{term}</em>
-		// 	</Fragment>
-		// );
 		return `<em>${term}</em>`;
 	};
 
@@ -101,7 +90,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 						const lang = deepmerge(defaultLang, props.lang || {});
 
 						const mergedLang = useLang(lang as any, {
-							idx: idx,
+							index: idx,
 							numberOfTerms: termsToShow.length,
 							term: term,
 						});
@@ -117,7 +106,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 									href={term.url.href}
 									{...(previewOnHover ? createHoverProps(term.preview) : {})}
 									role="link"
-									{...mergedLang.term}
+									{...mergedLang.term?.all}
 								></a>
 							</div>
 						);
@@ -142,8 +131,8 @@ export interface TermsProps extends ComponentProps {
 }
 
 export interface TermsLang {
-	term: lang<{
-		idx: number;
+	term: Lang<{
+		index: number;
 		numberOfTerms: number;
 		term: Term;
 	}>;

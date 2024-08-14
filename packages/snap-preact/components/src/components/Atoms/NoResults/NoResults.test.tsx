@@ -245,6 +245,7 @@ describe('NoResults  Component', () => {
 						expect(valueMock).toHaveBeenLastCalledWith({});
 						expect(langElem?.innerHTML).toBe(value);
 					} else {
+						// expect(valueMock).not.toHaveBeenCalled();
 						expect(langElem?.innerHTML).toBe(langObj.value);
 					}
 

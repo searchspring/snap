@@ -11,7 +11,7 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -254,7 +254,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 											outline: 'none',
 										},
 									})}
-									{...mergedLang.sliderHandle}
+									{...mergedLang.sliderHandle?.all}
 									ref={(e) => useA11y(e)}
 								>
 									<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
@@ -308,7 +308,7 @@ export interface FacetSliderProps extends ComponentProps {
 }
 
 export interface FacetSliderLang {
-	sliderHandle: lang<{
+	sliderHandle: Lang<{
 		facet: RangeFacet;
 		value: number;
 	}>;

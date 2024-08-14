@@ -10,7 +10,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -176,7 +176,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					{...mergedLang.radio}
+					{...mergedLang.radio?.all}
 					role="radio"
 					aria-checked={checkedState}
 				>
@@ -218,7 +218,7 @@ export interface RadioProps extends ComponentProps {
 }
 
 export interface RadioLang {
-	radio: lang<{
+	radio: Lang<{
 		disabled: boolean;
 		checkedState: boolean;
 	}>;

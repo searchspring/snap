@@ -11,7 +11,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import { lang, useLang } from '../../../hooks';
+import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -112,7 +112,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					onClick && onClick(e);
 				}}
 				href={link?.href}
-				{...mergedLang.filter}
+				{...mergedLang.filter?.all}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
@@ -144,7 +144,7 @@ export interface FilterProps extends ComponentProps {
 }
 
 export interface FilterLang {
-	filter: lang<{
+	filter: Lang<{
 		label?: string;
 		value?: string;
 	}>;

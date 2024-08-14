@@ -11,7 +11,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
@@ -186,7 +186,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText}></h4>
+						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
 
 						{!hideCloseButton && (
 							<Button
@@ -294,13 +294,13 @@ export interface MobileSidebarProps extends ComponentProps {
 }
 
 export interface MobileSidebarLang {
-	openButtonText: lang<Record<string, never>>;
-	clearButtonText: lang<Record<string, never>>;
-	applyButtonText: lang<Record<string, never>>;
-	titleText: lang<{
+	openButtonText: Lang<never>;
+	clearButtonText: Lang<never>;
+	applyButtonText: Lang<never>;
+	titleText: Lang<{
 		controller: SearchController;
 	}>;
-	closeButtonText: lang<Record<string, never>>;
+	closeButtonText: Lang<never>;
 }
 
 interface MobileSidebarSubProps {

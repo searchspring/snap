@@ -7,7 +7,7 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useState } from 'react';
-import { lang, useA11y, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -127,7 +127,6 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 	const mergedLang = useLang(lang as any, {
 		toggledState,
 		label,
-		round,
 		disabled,
 	});
 
@@ -143,7 +142,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 					}}
 					ref={(e) => useA11y(e)}
 					aria-checked={toggledState}
-					{...mergedLang.toggleSwitch}
+					{...mergedLang.toggleSwitch?.all}
 				>
 					<div className={`ss__toggle__slider-box ${round ? 'ss__toggle__slider-box--round' : ''}`}>
 						<div className={`ss__toggle__slider ${round ? 'ss__toggle__slider--round' : ''}`}></div>
@@ -168,10 +167,9 @@ export interface ToggleProps extends ComponentProps {
 }
 
 export interface ToggleLang {
-	toggleSwitch: lang<{
+	toggleSwitch: Lang<{
 		toggledState: boolean;
 		label: string;
-		round: boolean;
 		disabled: boolean;
 	}>;
 }
