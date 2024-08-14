@@ -33,9 +33,19 @@ export type AutocompleteTargetConfig = {
 	resultComponent?: string;
 };
 
-export type RecommendationTargetConfig = {
+export type RecommendationDefaultTargetConfig = {
 	theme?: string;
-	component: 'Recommendation' | 'RecommendationBundle'; // various components (templates) available
+	component: 'Recommendation'; // various components (templates) available
+	resultComponent?: string;
+};
+export type RecommendationEmailTargetConfig = {
+	theme?: string;
+	component: 'RecommendationEmail'; // various components (templates) available
+	resultComponent?: string;
+};
+export type RecommendationBundleTargetConfig = {
+	theme?: string;
+	component: 'RecommendationBundle'; // various components (templates) available
 	resultComponent?: string;
 };
 
@@ -56,12 +66,14 @@ export type SnapTemplatesConfig = TemplateStoreConfig & {
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	recommendation?: {
-		templates: {
-			// default?: RecommendationTargetConfig;
-			// bundle?: RecommendationTargetConfig;
-			// email?: RecommendationTargetConfig;
-			// TODO: remove custom templates?
-			[name: string]: RecommendationTargetConfig;
+		email?: {
+			[profileComponentName: string]: RecommendationEmailTargetConfig;
+		};
+		default?: {
+			[profileComponentName: string]: RecommendationDefaultTargetConfig;
+		};
+		bundle?: {
+			[profileComponentName: string]: RecommendationBundleTargetConfig;
 		};
 		settings: RecommendationInstantiatorConfigSettings;
 		breakpointSettings?: RecommendationInstantiatorConfigSettings[];
@@ -199,15 +211,18 @@ export function createRecommendationComponentMapping(
 	templateConfig: SnapTemplatesConfig,
 	templatesStore: TemplatesStore
 ): { [name: string]: RecommendationComponentObject } {
-	const templates = templateConfig.recommendation?.templates;
+	// TODO: throw a warning if keys match inside each recommendation type
+	const templates = {
+		...(templateConfig.recommendation?.default || {}),
+		...(templateConfig.recommendation?.email || {}),
+		...(templateConfig.recommendation?.bundle || {}),
+	};
+
 	return templates
 		? Object.keys(templates).reduce((mapping, targetName) => {
 				const target = templates[targetName] as TemplateTarget;
 
-				target.selector = `.ss__recommendation-${targetName}`;
-
-				const targetId = templatesStore.addTarget('recommendation', target);
-				mapping[targetName] = {
+				const mappedConfig: RecommendationComponentObject = {
 					component: async () => {
 						const componentImportPromises = [];
 						componentImportPromises.push(templatesStore.library.import.component.recommendation[target.component]());
@@ -217,8 +232,17 @@ export function createRecommendationComponentMapping(
 						await Promise.all(componentImportPromises);
 						return TemplateSelect;
 					},
-					props: { type: 'recommendation', templatesStore, targetId },
+					props: { type: 'recommendation', templatesStore },
+					onTarget: function (domTarget, elem, injectedElem, controller) {
+						target.selector = `#${controller.id}`;
+						const targetId = templatesStore.addTarget('recommendation', target);
+
+						this.props = this.props || {};
+						this.props.targetId = targetId;
+					},
 				};
+
+				mapping[targetName] = mappedConfig;
 
 				return mapping;
 		  }, {} as { [name: string]: RecommendationComponentObject })

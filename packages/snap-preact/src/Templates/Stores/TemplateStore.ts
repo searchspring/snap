@@ -170,6 +170,10 @@ export class TemplatesStore {
 		const targetId = target.selector || target.component;
 		if (targetId) {
 			this.targets[type][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			if (this.settings.editMode) {
+				// triggers a rerender for TemplateEditor
+				this.targets = { ...this.targets };
+			}
 			return targetId;
 		}
 	}
