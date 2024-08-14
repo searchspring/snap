@@ -8,6 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { MockData } from '@searchspring/snap-shared';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { IconType } from '../../Atoms/Icon';
 
 describe('FilterSummary Component', () => {
 	const services = {
@@ -64,8 +65,8 @@ describe('FilterSummary Component', () => {
 	it('renders with specified icons', async () => {
 		const args = {
 			filters: filters,
-			clearAllIcon: 'circle',
-			filterIcon: 'check',
+			clearAllIcon: 'circle' as IconType,
+			filterIcon: 'check' as IconType,
 		};
 
 		const rendered = render(<FilterSummary {...args} />);

@@ -13,7 +13,7 @@ import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { useA11y } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
-import { IconType } from '../../Atoms/Icon';
+import { IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	toolbar: () =>
@@ -255,11 +255,11 @@ export interface MobileSidebarProps extends ComponentProps {
 	titleText?: string;
 	openButtonText?: string;
 	clearButtonText?: string;
-	applyButtonIcon?: IconType;
-	clearButtonIcon?: IconType;
+	applyButtonIcon?: IconType | Partial<IconProps>;
+	clearButtonIcon?: IconType | Partial<IconProps>;
 	applyButtonText?: string;
-	closeButtonIcon?: IconType;
-	openButtonIcon?: IconType;
+	closeButtonIcon?: IconType | Partial<IconProps>;
+	openButtonIcon?: IconType | Partial<IconProps>;
 	hideHeader?: boolean;
 	hideFooter?: boolean;
 	hideFacets?: boolean;

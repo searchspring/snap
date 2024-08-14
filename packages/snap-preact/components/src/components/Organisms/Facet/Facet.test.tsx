@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
+import { IconType } from '../../Atoms/Icon';
 
 const mockData = new MockData();
 const searchResponseFacets = mockData.search().facets!;
@@ -156,10 +157,10 @@ describe('Facet Component', () => {
 		it('renders with specified icons', async () => {
 			const args = {
 				facet: facetOverflowMock as ValueFacet,
-				iconCollapse: 'angle-down',
-				iconExpand: 'angle-up',
-				iconOverflowMore: 'check',
-				iconOverflowLess: 'circle',
+				iconCollapse: 'angle-down' as IconType,
+				iconExpand: 'angle-up' as IconType,
+				iconOverflowMore: 'check' as IconType,
+				iconOverflowLess: 'circle' as IconType,
 			};
 			const rendered = render(<Facet {...args} />);
 
