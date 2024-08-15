@@ -213,13 +213,12 @@ describe('Button Component', () => {
 						expect(element).toBeInTheDocument();
 						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 
-						// console.log(option, langObj)
 						expect(langElem).toBeInTheDocument();
 						if (typeof langObj.value == 'function') {
 							expect(valueMock).toHaveBeenLastCalledWith({});
 							expect(langElem?.innerHTML).toBe(value);
 						} else {
-							// expect(valueMock).not.toHaveBeenCalled();
+							expect(valueMock).not.toHaveBeenCalled();
 							expect(langElem?.innerHTML).toBe(langObj.value);
 						}
 
@@ -228,7 +227,7 @@ describe('Button Component', () => {
 						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
 						expect(langElem).toHaveAttribute('title', title);
 
-						jest.restoreAllMocks();
+						jest.clearAllMocks();
 					});
 				});
 			});

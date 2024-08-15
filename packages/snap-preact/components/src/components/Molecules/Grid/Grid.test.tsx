@@ -317,11 +317,11 @@ describe('Grid lang works', () => {
 					[`${option}`]: langObj,
 				};
 
-				let valueSatified = false;
-				let altSatified = false;
-				let labelSatified = false;
-				let valueTextSatified = false;
-				let titleSatified = false;
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
 
 				// @ts-ignore
 				const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
@@ -339,33 +339,33 @@ describe('Grid lang works', () => {
 						});
 
 						if (elem?.innerHTML == value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					} else {
 						if (elem?.innerHTML == langObj.value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					}
 
 					if (elem.getAttribute('alt') == altText) {
-						altSatified = true;
+						altSatisfied = true;
 					}
 					if (elem.getAttribute('aria-label') == ariaLabel) {
-						labelSatified = true;
+						labelSatisfied = true;
 					}
 					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
-						valueTextSatified = true;
+						valueTextSatisfied = true;
 					}
 					if (elem.getAttribute('title') == title) {
-						titleSatified = true;
+						titleSatisfied = true;
 					}
 				});
 
-				expect(valueSatified).toBeTruthy();
-				expect(altSatified).toBeTruthy();
-				expect(labelSatified).toBeTruthy();
-				expect(valueTextSatified).toBeTruthy();
-				expect(titleSatified).toBeTruthy();
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});
@@ -415,16 +415,16 @@ describe('Grid lang works', () => {
 			},
 		];
 
-		let valueSatified = false;
-		let altSatified = false;
-		let labelSatified = false;
-		let valueTextSatified = false;
-		let titleSatified = false;
-
 		langObjs.forEach(async (langObj) => {
 			const lang = {
 				[`showLessText`]: langObj,
 			};
+
+			let valueSatisfied = false;
+			let altSatisfied = false;
+			let labelSatisfied = false;
+			let valueTextSatisfied = false;
+			let titleSatisfied = false;
 
 			// @ts-ignore
 			const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
@@ -447,33 +447,33 @@ describe('Grid lang works', () => {
 					});
 
 					if (elem?.innerHTML == lessValue) {
-						valueSatified = true;
+						valueSatisfied = true;
 					}
 				} else {
 					if (elem?.innerHTML == langObj.value) {
-						valueSatified = true;
+						valueSatisfied = true;
 					}
 				}
 
 				if (elem.getAttribute('alt') == lessAltText) {
-					altSatified = true;
+					altSatisfied = true;
 				}
 				if (elem.getAttribute('aria-label') == lessAriaLabel) {
-					labelSatified = true;
+					labelSatisfied = true;
 				}
 				if (elem.getAttribute('aria-valuetext') == lessAriaValueText) {
-					valueTextSatified = true;
+					valueTextSatisfied = true;
 				}
 				if (elem.getAttribute('title') == lessTitle) {
-					titleSatified = true;
+					titleSatisfied = true;
 				}
 			});
 
-			expect(valueSatified).toBeTruthy();
-			expect(altSatified).toBeTruthy();
-			expect(labelSatified).toBeTruthy();
-			expect(valueTextSatified).toBeTruthy();
-			expect(titleSatified).toBeTruthy();
+			expect(valueSatisfied).toBeTruthy();
+			expect(altSatisfied).toBeTruthy();
+			expect(labelSatisfied).toBeTruthy();
+			expect(valueTextSatisfied).toBeTruthy();
+			expect(titleSatisfied).toBeTruthy();
 
 			jest.restoreAllMocks();
 		});

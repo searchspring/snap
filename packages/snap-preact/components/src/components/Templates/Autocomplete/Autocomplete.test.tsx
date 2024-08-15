@@ -795,17 +795,17 @@ describe('Autocomplete Component', () => {
 			},
 		];
 
-		let valueSatified = false;
-		let altSatified = false;
-		let labelSatified = false;
-		let valueTextSatified = false;
-		let titleSatified = false;
-
 		langOptions.forEach(async (option) => {
 			langObjs.forEach(async (langObj) => {
 				const lang = {
 					[`${option}`]: langObj,
 				};
+
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
 
 				const rendered = render(<Autocomplete lang={lang} {...args} />, { container });
 
@@ -823,7 +823,7 @@ describe('Autocomplete Component', () => {
 								expect(valueMock).toHaveBeenCalledWith({
 									controller: controller,
 									term: term,
-									idx: idx,
+									index: idx,
 								});
 							});
 						} else if ('suggestionsTerm') {
@@ -831,7 +831,7 @@ describe('Autocomplete Component', () => {
 								expect(valueMock).toHaveBeenCalledWith({
 									controller: controller,
 									term: term,
-									idx: idx,
+									index: idx,
 								});
 							});
 						} else if ('historyTerm') {
@@ -839,7 +839,7 @@ describe('Autocomplete Component', () => {
 								expect(valueMock).toHaveBeenCalledWith({
 									controller: controller,
 									term: term,
-									idx: idx,
+									index: idx,
 								});
 							});
 						} else {
@@ -849,32 +849,32 @@ describe('Autocomplete Component', () => {
 						}
 
 						if (elem?.innerHTML == value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					} else {
 						if (elem?.innerHTML == langObj.value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					}
 					if (elem.getAttribute('alt') == altText) {
-						altSatified = true;
+						altSatisfied = true;
 					}
 					if (elem.getAttribute('aria-label') == ariaLabel) {
-						labelSatified = true;
+						labelSatisfied = true;
 					}
 					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
-						valueTextSatified = true;
+						valueTextSatisfied = true;
 					}
 					if (elem.getAttribute('title') == title) {
-						titleSatified = true;
+						titleSatisfied = true;
 					}
 				});
 
-				expect(valueSatified).toBeTruthy();
-				expect(altSatified).toBeTruthy();
-				expect(labelSatified).toBeTruthy();
-				expect(valueTextSatified).toBeTruthy();
-				expect(titleSatified).toBeTruthy();
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});
@@ -893,12 +893,6 @@ describe('Autocomplete Component', () => {
 		const labelMock = jest.fn(() => ariaLabel);
 		const valueTextMock = jest.fn(() => ariaValueText);
 		const titleMock = jest.fn(() => title);
-
-		let valueSatified = false;
-		let altSatified = false;
-		let labelSatified = false;
-		let valueTextSatified = false;
-		let titleSatified = false;
 
 		const langObjs = [
 			{
@@ -953,6 +947,12 @@ describe('Autocomplete Component', () => {
 					[`noResultsText`]: langObj,
 				};
 
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
+
 				const rendered = render(<Autocomplete lang={lang} {...args} />, { container });
 
 				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
@@ -967,32 +967,32 @@ describe('Autocomplete Component', () => {
 							controller: controller,
 						});
 						if (elem?.innerHTML == value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					} else {
 						if (elem?.innerHTML == langObj.value) {
-							valueSatified = true;
+							valueSatisfied = true;
 						}
 					}
 					if (elem.getAttribute('alt') == altText) {
-						altSatified = true;
+						altSatisfied = true;
 					}
 					if (elem.getAttribute('aria-label') == ariaLabel) {
-						labelSatified = true;
+						labelSatisfied = true;
 					}
 					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
-						valueTextSatified = true;
+						valueTextSatisfied = true;
 					}
 					if (elem.getAttribute('title') == title) {
-						titleSatified = true;
+						titleSatisfied = true;
 					}
 				});
 
-				expect(valueSatified).toBeTruthy();
-				expect(altSatified).toBeTruthy();
-				expect(labelSatified).toBeTruthy();
-				expect(valueTextSatified).toBeTruthy();
-				expect(titleSatified).toBeTruthy();
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
 
 				jest.restoreAllMocks();
 			});

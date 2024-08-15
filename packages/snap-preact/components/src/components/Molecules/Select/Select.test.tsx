@@ -522,11 +522,11 @@ describe('Select Component', () => {
 							[`${option}`]: langObj,
 						};
 
-						let valueSatified = false;
-						let altSatified = false;
-						let labelSatified = false;
-						let valueTextSatified = false;
-						let titleSatified = false;
+						let valueSatisfied = false;
+						let altSatisfied = false;
+						let labelSatisfied = false;
+						let valueTextSatisfied = false;
+						let titleSatisfied = false;
 
 						// @ts-ignore
 						const rendered = render(<Select options={options} lang={lang} separator={''} />);
@@ -545,33 +545,33 @@ describe('Select Component', () => {
 								});
 
 								if (elem?.innerHTML == value) {
-									valueSatified = true;
+									valueSatisfied = true;
 								}
 							} else {
 								if (elem?.innerHTML == langObj.value) {
-									valueSatified = true;
+									valueSatisfied = true;
 								}
 							}
 
 							if (elem.getAttribute('alt') == altText) {
-								altSatified = true;
+								altSatisfied = true;
 							}
 							if (elem.getAttribute('aria-label') == ariaLabel) {
-								labelSatified = true;
+								labelSatisfied = true;
 							}
 							if (elem.getAttribute('aria-valuetext') == ariaValueText) {
-								valueTextSatified = true;
+								valueTextSatisfied = true;
 							}
 							if (elem.getAttribute('title') == title) {
-								titleSatified = true;
+								titleSatisfied = true;
 							}
 						});
 
-						expect(valueSatified).toBeTruthy();
-						expect(altSatified).toBeTruthy();
-						expect(labelSatified).toBeTruthy();
-						expect(valueTextSatified).toBeTruthy();
-						expect(titleSatified).toBeTruthy();
+						expect(valueSatisfied).toBeTruthy();
+						expect(altSatisfied).toBeTruthy();
+						expect(labelSatisfied).toBeTruthy();
+						expect(valueTextSatisfied).toBeTruthy();
+						expect(titleSatisfied).toBeTruthy();
 
 						jest.restoreAllMocks();
 					});

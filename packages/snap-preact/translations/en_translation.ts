@@ -43,17 +43,17 @@ export const en_translation: LangComponents = {
 		},
 		historyTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.idx! + 1} of ${data?.controller.store.history.length}, ${data?.term.value}`,
+				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller.store.history.length}, ${data?.term.value}`,
 			},
 		},
 		trendingTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.idx! + 1} of ${data?.controller.store.trending.length}, ${data?.term.value}`,
+				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller.store.trending.length}, ${data?.term.value}`,
 			},
 		},
 		suggestionsTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.idx! + 1} of ${data?.controller.store.terms.length}, ${data?.term.value}`,
+				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller.store.terms.length}, ${data?.term.value}`,
 			},
 		},
 	},

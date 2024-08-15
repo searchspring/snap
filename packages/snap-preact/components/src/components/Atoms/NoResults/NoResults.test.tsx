@@ -245,7 +245,7 @@ describe('NoResults  Component', () => {
 						expect(valueMock).toHaveBeenLastCalledWith({});
 						expect(langElem?.innerHTML).toBe(value);
 					} else {
-						// expect(valueMock).not.toHaveBeenCalled();
+						expect(valueMock).not.toHaveBeenCalled();
 						expect(langElem?.innerHTML).toBe(langObj.value);
 					}
 
@@ -254,7 +254,7 @@ describe('NoResults  Component', () => {
 					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
 					expect(langElem).toHaveAttribute('title', title);
 
-					jest.restoreAllMocks();
+					jest.clearAllMocks();
 				});
 			});
 		});

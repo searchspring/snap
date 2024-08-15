@@ -19,6 +19,24 @@ const CSS = {
 	Terms: ({}: Partial<TermsProps>) => css({}),
 };
 
+const escapeRegExp = (string: string): string => {
+	return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+const emIfyTerm = (term: string, search: string): string => {
+	if (term && search) {
+		const match = term.match(escapeRegExp(search));
+		if (search && term && match && typeof match.index == 'number') {
+			const beforeMatch = term.slice(0, match.index);
+			const afterMatch = term.slice(match.index + search.length, term.length);
+
+			return `${beforeMatch ? `<em>${beforeMatch}</em>` : ''}${search}${afterMatch ? `<em>${afterMatch}</em>` : ''}`;
+		}
+	}
+
+	return `<em>${term}</em>`;
+};
+
 export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<TermsProps> = {};
@@ -39,29 +57,11 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const emIfyTerm = (term: string, search: string): string => {
-		if (term && search) {
-			const match = term.match(escapeRegExp(search));
-			if (search && term && match && typeof match.index == 'number') {
-				const beforeMatch = term.slice(0, match.index);
-				const afterMatch = term.slice(match.index + search.length, term.length);
-
-				return `${beforeMatch ? `<em>${beforeMatch}</em>` : ''}${search}${afterMatch ? `<em>${afterMatch}</em>` : ''}`;
-			}
-		}
-
-		return `<em>${term}</em>`;
-	};
-
 	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>, term: Term) => {
 		onTermClick && onTermClick(e, term);
 
 		// remove focus from input (close the autocomplete)
 		controller?.setFocused && controller?.setFocused();
-	};
-
-	const escapeRegExp = (string: string): string => {
-		return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	};
 
 	const termsToShow = limit ? terms?.slice(0, limit) : terms;

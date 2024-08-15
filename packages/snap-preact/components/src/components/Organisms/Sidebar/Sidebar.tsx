@@ -95,7 +95,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	//initialize lang
 	const defaultLang: Partial<SidebarLang> = {
 		titleText: {
-			value: titleText!,
+			value: titleText,
 		},
 	};
 

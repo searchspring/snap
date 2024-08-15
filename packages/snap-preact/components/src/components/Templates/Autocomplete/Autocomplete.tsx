@@ -577,7 +577,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												const suggestionTermLangObj = useLang(suggestionLang as any, {
 													controller,
 													term,
-													idx,
+													index: idx,
 												});
 
 												return (
@@ -625,7 +625,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												const trendingTermLangObj = useLang(trendingLang as any, {
 													controller,
 													term,
-													idx,
+													index: idx,
 												});
 
 												return (
@@ -673,7 +673,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												const historyTermLangObj = useLang(historyLang as any, {
 													controller,
 													term,
-													idx,
+													index: idx,
 												});
 
 												return (
@@ -896,17 +896,17 @@ export interface AutocompleteLang {
 	trendingTerm: Lang<{
 		controller: AutocompleteController;
 		term: Term;
-		idx: number;
+		index: number;
 	}>;
 	suggestionsTerm: Lang<{
 		controller: AutocompleteController;
 		term: Term;
-		idx: number;
+		index: number;
 	}>;
 	historyTerm: Lang<{
 		controller: AutocompleteController;
 		term: Term;
-		idx: number;
+		index: number;
 	}>;
 	noResultsText: Lang<{
 		controller: AutocompleteController;

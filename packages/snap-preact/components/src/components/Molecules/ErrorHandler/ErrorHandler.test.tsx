@@ -119,17 +119,17 @@ describe('Error Handler Component', () => {
 				},
 			];
 
-			let valueSatified = false;
-			let altSatified = false;
-			let labelSatified = false;
-			let valueTextSatified = false;
-			let titleSatified = false;
-
 			langOptions.forEach((option) => {
 				langObjs.forEach((langObj) => {
 					const lang = {
 						[`${option}`]: langObj,
 					};
+
+					let valueSatisfied = false;
+					let altSatisfied = false;
+					let labelSatisfied = false;
+					let valueTextSatisfied = false;
+					let titleSatisfied = false;
 
 					const eCode = eCodeKey[option as keyof typeof eCodeKey];
 
@@ -146,33 +146,33 @@ describe('Error Handler Component', () => {
 							expect(valueMock).toHaveBeenCalledWith({});
 
 							if (elem?.innerHTML == value) {
-								valueSatified = true;
+								valueSatisfied = true;
 							}
 						} else {
 							if (elem?.innerHTML == langObj.value) {
-								valueSatified = true;
+								valueSatisfied = true;
 							}
 						}
 
 						if (elem.getAttribute('alt') == altText) {
-							altSatified = true;
+							altSatisfied = true;
 						}
 						if (elem.getAttribute('aria-label') == ariaLabel) {
-							labelSatified = true;
+							labelSatisfied = true;
 						}
 						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
-							valueTextSatified = true;
+							valueTextSatisfied = true;
 						}
 						if (elem.getAttribute('title') == title) {
-							titleSatified = true;
+							titleSatisfied = true;
 						}
 					});
 
-					expect(valueSatified).toBeTruthy();
-					expect(altSatified).toBeTruthy();
-					expect(labelSatified).toBeTruthy();
-					expect(valueTextSatified).toBeTruthy();
-					expect(titleSatified).toBeTruthy();
+					expect(valueSatisfied).toBeTruthy();
+					expect(altSatisfied).toBeTruthy();
+					expect(labelSatisfied).toBeTruthy();
+					expect(valueTextSatisfied).toBeTruthy();
+					expect(titleSatisfied).toBeTruthy();
 
 					jest.restoreAllMocks();
 				});

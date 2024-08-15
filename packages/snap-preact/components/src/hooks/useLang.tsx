@@ -2,12 +2,12 @@ export type LangAttributesObj = {
 	[textId: string]: LangAttributesObjAttributes;
 };
 
-type valType = {
+type ValType = {
 	'ss-lang': string;
 	dangerouslySetInnerHTML: { __html: string };
 };
 
-type attType = {
+type AttType = {
 	'ss-lang': string;
 	'aria-label'?: string;
 	'aria-valuetext'?: string;
@@ -15,9 +15,9 @@ type attType = {
 	alt?: string;
 };
 export type LangAttributesObjAttributes = {
-	value?: valType;
-	attributes?: attType;
-	all?: Partial<valType> & Partial<attType> & { 'ss-lang': string };
+	value?: ValType;
+	attributes?: AttType;
+	all?: Partial<ValType> & Partial<AttType> & { 'ss-lang': string };
 };
 
 export type LangType<P> = string | ((data: P) => string);

@@ -227,14 +227,12 @@ describe('Search Header Component', () => {
 						[`${option}`]: langObj,
 					};
 
-					// console.log(lang)
 					// @ts-ignore
 					const rendered = render(<SearchHeader lang={lang} paginationStore={paginationStore} queryStore={queryStore} />);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
 					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-					// console.log(option);
 					expect(langElem).toBeInTheDocument();
 					if (typeof langObj.value == 'function') {
 						expect(valueMock).toHaveBeenLastCalledWith({
@@ -243,7 +241,7 @@ describe('Search Header Component', () => {
 						});
 						expect(langElem?.innerHTML).toBe(value);
 					} else {
-						// expect(valueMock).not.toHaveBeenCalled();
+						expect(valueMock).not.toHaveBeenCalled();
 						expect(langElem?.innerHTML).toBe(langObj.value);
 					}
 
@@ -252,7 +250,7 @@ describe('Search Header Component', () => {
 					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
 					expect(langElem).toHaveAttribute('title', title);
 
-					jest.restoreAllMocks();
+					jest.clearAllMocks();
 				});
 			});
 		});
