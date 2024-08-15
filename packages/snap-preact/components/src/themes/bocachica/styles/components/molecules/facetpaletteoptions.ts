@@ -1,4 +1,5 @@
-import { css, FacetPaletteOptionsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetPaletteOptionsProps } from '../../../../../components/Molecules/FacetPaletteOptions';
 
 // CSS in JS style script for the FacetPaletteOptions component
 const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOptionsProps) => {

@@ -1,4 +1,5 @@
-import { css, DropdownProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { DropdownProps } from '../../../../../components/Atoms/Dropdown';
 
 // CSS in JS style script for the Dropdown component
 const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {

@@ -1,4 +1,5 @@
-import { css, FacetGridOptionsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetGridOptionsProps } from '../../../../../components/Molecules/FacetGridOptions';
 
 // CSS in JS style script for the FacetGridOptions component
 const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: FacetGridOptionsProps) => {

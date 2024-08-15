@@ -1,4 +1,5 @@
-import { css, ToggleProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { ToggleProps } from '../../../../../components/Atoms/Toggle';
 
 // CSS in JS style script for the Toggle component
 const toggleStyleScript = ({ activeColor, inactiveColor: deActiveColor, buttonColor, size, theme }: ToggleProps) => {

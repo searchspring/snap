@@ -1,4 +1,5 @@
-import { css, MobileSidebarProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { MobileSidebarProps } from '../../../../../components/Organisms/MobileSidebar';
 
 // CSS in JS style script for the MobileSidebar component
 const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {

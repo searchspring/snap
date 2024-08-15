@@ -1,6 +1,7 @@
 import { observable, makeObservable } from 'mobx';
 import { TemplateTarget, type TemplatesStoreSettings, type TemplatesStoreDependencies, type TemplateThemeTypes } from './TemplateStore';
-import { GLOBAL_THEME_NAME } from '../SnapTemplate';
+
+const GLOBAL_THEME_NAME = 'global';
 
 export class TargetStore {
 	public selector: string;

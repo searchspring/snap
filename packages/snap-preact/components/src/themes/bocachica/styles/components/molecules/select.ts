@@ -1,4 +1,5 @@
-import { css, SelectProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { SelectProps } from '../../../../../components/Molecules/Select';
 
 // CSS in JS style script for the Select component
 const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: SelectProps) => {

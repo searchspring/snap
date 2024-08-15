@@ -6,7 +6,8 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
-import { CacheProvider, type Theme, type ThemeVariables } from '../../../components/src';
+import { type Theme, type ThemeVariables } from '../../../components/src';
+import { CacheProvider } from '../../../components/src/providers/cache';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
 import { observer } from 'mobx-react';

@@ -1,5 +1,5 @@
-import { keyframes } from '@emotion/react';
-import { css, LoadingBarProps } from '../../../../../index';
+import { css, keyframes } from '@emotion/react';
+import type { LoadingBarProps } from '../../../../../components/Atoms/Loading';
 
 // CSS in JS style script for the LoadingBar component
 const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: LoadingBarProps) => {

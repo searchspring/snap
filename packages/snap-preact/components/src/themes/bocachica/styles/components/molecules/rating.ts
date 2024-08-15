@@ -1,4 +1,5 @@
-import { css, RatingProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { RatingProps } from '../../../../../components/Molecules/Rating';
 
 // CSS in JS style script for the Rating component
 const ratingStyleScript = ({ emptyRatingSrc, fullRatingSrc, theme }: RatingProps & { emptyRatingSrc?: string; fullRatingSrc?: string }) => {

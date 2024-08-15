@@ -16,7 +16,6 @@ import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { TemplateStoreConfig } from './Stores/TemplateStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
-export const GLOBAL_THEME_NAME = 'global';
 
 // TODO: tabbing, finder
 export type SearchTargetConfig = {

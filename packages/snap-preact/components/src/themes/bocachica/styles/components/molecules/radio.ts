@@ -1,4 +1,5 @@
-import { css, RadioProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { RadioProps } from '../../../../../components/Molecules/Radio';
 
 // CSS in JS style script for the Radio component
 const radioStyleScript = ({ size, native, theme }: RadioProps) => {

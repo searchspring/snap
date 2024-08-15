@@ -1,4 +1,5 @@
-import { css, FacetListOptionsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetListOptionsProps } from '../../../../../components/Molecules/FacetListOptions';
 
 // CSS in JS style script for the FacetListOptions component
 const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetListOptionsProps) => {

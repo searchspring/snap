@@ -1,4 +1,5 @@
-import { css, RecommendationProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { RecommendationProps } from '../../../../../components/Templates/Recommendation';
 
 // CSS in JS style script for the Recommendation component
 const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => {

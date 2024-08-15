@@ -1,4 +1,5 @@
-import { css, FormattedNumberProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FormattedNumberProps } from '../../../../../components/Atoms/FormattedNumber';
 
 // CSS in JS style script for the FormattedNumber component
 const formattedNumberStyleScript = ({ theme }: FormattedNumberProps) => {
