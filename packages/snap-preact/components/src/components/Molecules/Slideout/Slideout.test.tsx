@@ -34,6 +34,7 @@ describe('Slideout Component', () => {
 	it('renders and is visible', () => {
 		const args = {
 			active: true,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
@@ -45,6 +46,7 @@ describe('Slideout Component', () => {
 	it('is not visible', () => {
 		const args = {
 			active: false,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
@@ -57,6 +59,7 @@ describe('Slideout Component', () => {
 		const args = {
 			active: false,
 			width: '400px',
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout')!;
@@ -69,6 +72,7 @@ describe('Slideout Component', () => {
 			active: false,
 			width: '400px',
 			displayAt: '(min-width: 600px)',
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
@@ -91,6 +95,7 @@ describe('Slideout Component', () => {
 		});
 		const args = {
 			active: false,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
@@ -100,6 +105,7 @@ describe('Slideout Component', () => {
 	it('displays overlay', () => {
 		const args = {
 			active: true,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
@@ -109,6 +115,7 @@ describe('Slideout Component', () => {
 	it('hides overlay when inactive', () => {
 		const args = {
 			active: false,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
@@ -119,6 +126,7 @@ describe('Slideout Component', () => {
 		const args = {
 			active: true,
 			overlayColor: 'rgba(0, 0, 0, 0.1)',
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active')!;
@@ -130,6 +138,7 @@ describe('Slideout Component', () => {
 		const args = {
 			active: true,
 			slideDirection: 'right' as SlideDirectionType,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active')!;
@@ -142,6 +151,7 @@ describe('Slideout Component', () => {
 		const args = {
 			active: true,
 			transitionSpeed: '0.55s',
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active')!;
@@ -222,6 +232,7 @@ describe('Slideout Component', () => {
 		const args = {
 			active: true,
 			disableStyles: true,
+			buttonContent: 'click me',
 		};
 		const rendered = render(<Slideout {...args} />);
 
@@ -232,6 +243,7 @@ describe('Slideout Component', () => {
 
 	it('can add additional styles', () => {
 		const args = {
+			buttonContent: 'click me',
 			disableStyles: true,
 			style: {
 				backgroundColor: 'green',
@@ -247,6 +259,7 @@ describe('Slideout Component', () => {
 
 	it('is themeable with ThemeProvider', () => {
 		const args = {
+			buttonContent: 'click me',
 			active: true,
 		};
 		const rendered = render(
@@ -261,6 +274,7 @@ describe('Slideout Component', () => {
 
 	it('is themeable with theme prop', () => {
 		const args = {
+			buttonContent: 'click me',
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} theme={theme} />);
@@ -271,6 +285,7 @@ describe('Slideout Component', () => {
 
 	it('is themeable with theme  prop overrides ThemeProvider', () => {
 		const args = {
+			buttonContent: 'click me',
 			active: true,
 		};
 		const themeOverride = {

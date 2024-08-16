@@ -8,6 +8,7 @@ import deepmerge from 'deepmerge';
 
 import type { AutocompleteController, RecommendationControllerConfig } from '@searchspring/snap-controller';
 import { ContentType } from '@searchspring/snap-store-mobx';
+import type { Term } from '@searchspring/snap-store-mobx';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
@@ -18,7 +19,7 @@ import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { useA11y } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 
 // import { useSnap } from '../../../providers';
 // import { useComponent } from '../../../hooks';
@@ -480,6 +481,44 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	// }
 	// const RecommendationTemplateComponent = recommendationTemplateComponent as unknown as FunctionalComponent<{ controller: RecommendationController }>;
 
+	//initialize lang
+	const defaultLang: Partial<AutocompleteLang> = {
+		trendingTitle: {
+			value: trendingTitle,
+		},
+		termsTitle: {
+			value: termsTitle,
+		},
+		contentTitle: {
+			value: contentTitle,
+		},
+		historyTitle: {
+			value: historyTitle,
+		},
+		closeButton: {
+			value: 'Close Autocomplete',
+			attributes: {
+				'aria-label': 'close autocomplete',
+			},
+		},
+		facetsTitle: {
+			value: facetsTitle,
+		},
+		noResultsText: {
+			value: `<p>No results found for "${search.originalQuery?.string || search.query?.string}".</p><p>Please try another search.</p>`,
+		},
+		contentInfo: {
+			value: `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${
+				search.query?.string
+			}"`,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller,
+	});
 	return visible ? (
 		<CacheProvider>
 			<div
@@ -490,14 +529,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			>
 				<span
 					role={'link'}
-					aria-label={'close autocomplete'}
 					ref={(e) => useA11y(e)}
 					onClick={() => reset()}
 					className="ss__autocomplete__close-button"
 					style={{ position: 'absolute', top: '-10000000px', left: '-1000000px' }}
-				>
-					Close Autocomplete
-				</span>
+					{...mergedLang.closeButton?.all}
+				></span>
 
 				{!hideTerms && (showTrending || terms.length > 0 || termsSlot || (!hideHistory && history.length > 0)) && (
 					<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
@@ -519,87 +556,144 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							<>
 								{terms.length > 0 ? (
 									<div className="ss__autocomplete__terms__suggestions">
-										{termsTitle ? (
+										{termsTitle || lang.termsTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--terms ss__autocomplete__title--suggestions">
-												<h5>{termsTitle}</h5>
+												<h5 {...mergedLang.termsTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={termsTitle}>
-											{terms.map((term, idx) => (
-												<div
-													className={classnames('ss__autocomplete__terms__option', {
-														'ss__autocomplete__terms__option--active': term.active,
-													})}
-												>
-													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-														href={term.url.href}
-														{...createHoverProps(term.preview)}
-														role="link"
-														aria-label={`item ${idx + 1} of ${terms.length}, ${term.value}`}
+											{terms.map((term, idx) => {
+												//initialize lang
+												const defaultLang: Partial<AutocompleteLang> = {
+													suggestionsTerm: {
+														attributes: {
+															'aria-label': `item ${idx + 1} of ${terms.length}, ${term.value}`,
+														},
+													},
+												};
+
+												//deep merge with props.lang
+												const suggestionLang = deepmerge(defaultLang, props.lang || {});
+												const suggestionTermLangObj = useLang(suggestionLang as any, {
+													controller,
+													term,
+													index: idx,
+												});
+
+												return (
+													<div
+														className={classnames('ss__autocomplete__terms__option', {
+															'ss__autocomplete__terms__option--active': term.active,
+														})}
 													>
-														{emIfy(term.value, state.input || '')}
-													</a>
-												</div>
-											))}
+														<a
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+															href={term.url.href}
+															{...createHoverProps(term.preview)}
+															role="link"
+															{...suggestionTermLangObj.suggestionsTerm?.all}
+														>
+															{emIfy(term.value, state.input || '')}
+														</a>
+													</div>
+												);
+											})}
 										</div>
 									</div>
 								) : null}
 
 								{showTrending && !hideTrending ? (
 									<div className="ss__autocomplete__terms__trending">
-										{trendingTitle ? (
+										{trendingTitle || lang.trendingTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
-												<h5>{trendingTitle}</h5>
+												<h5 {...mergedLang.trendingTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={trendingTitle}>
-											{trending.map((term, idx) => (
-												<div
-													className={classnames('ss__autocomplete__terms__option', {
-														'ss__autocomplete__terms__option--active': term.active,
-													})}
-												>
-													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-														href={term.url.href}
-														{...createHoverProps(term.preview)}
-														role="link"
-														aria-label={`item ${idx + 1} of ${trending.length}, ${term.value}`}
+											{trending.map((term, idx) => {
+												//initialize lang
+												const defaultLang: Partial<AutocompleteLang> = {
+													trendingTerm: {
+														attributes: {
+															'aria-label': `item ${idx + 1} of ${trending.length}, ${term.value}`,
+														},
+													},
+												};
+
+												//deep merge with props.lang
+												const trendingLang = deepmerge(defaultLang, props.lang || {});
+												const trendingTermLangObj = useLang(trendingLang as any, {
+													controller,
+													term,
+													index: idx,
+												});
+
+												return (
+													<div
+														className={classnames('ss__autocomplete__terms__option', {
+															'ss__autocomplete__terms__option--active': term.active,
+														})}
 													>
-														{emIfy(term.value, state.input || '')}
-													</a>
-												</div>
-											))}
+														<a
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+															href={term.url.href}
+															{...createHoverProps(term.preview)}
+															role="link"
+															{...trendingTermLangObj.trendingTerm?.all}
+														>
+															{emIfy(term.value, state.input || '')}
+														</a>
+													</div>
+												);
+											})}
 										</div>
 									</div>
 								) : null}
 
 								{showHistory && !hideHistory ? (
 									<div className="ss__autocomplete__terms__history">
-										{historyTitle ? (
+										{historyTitle || lang.historyTitle.value ? (
 											<div className="ss__autocomplete__title ss__autocomplete__title--history">
-												<h5>{historyTitle}</h5>
+												<h5 {...mergedLang.historyTitle?.all}></h5>
 											</div>
 										) : null}
 										<div className="ss__autocomplete__terms__options" role={'list'} aria-label={historyTitle}>
-											{history.map((term, idx) => (
-												<div
-													className={classnames('ss__autocomplete__terms__option', {
-														'ss__autocomplete__terms__option--active': term.active,
-													})}
-												>
-													<a
-														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
-														href={term.url.href}
-														{...createHoverProps(term.preview)}
-														role="link"
-														aria-label={`item ${idx + 1} of ${history.length}, ${term.value}`}
+											{history.map((term, idx) => {
+												//initialize lang
+												const defaultLang: Partial<AutocompleteLang> = {
+													historyTerm: {
+														attributes: {
+															'aria-label': `item ${idx + 1} of ${history.length}, ${term.value}`,
+														},
+													},
+												};
+
+												//deep merge with props.lang
+												const historyLang = deepmerge(defaultLang, props.lang || {});
+												const historyTermLangObj = useLang(historyLang as any, {
+													controller,
+													term,
+													index: idx,
+												});
+
+												return (
+													<div
+														className={classnames('ss__autocomplete__terms__option', {
+															'ss__autocomplete__terms__option--active': term.active,
+														})}
 													>
-														{emIfy(term.value, state.input || '')}
-													</a>
-												</div>
-											))}
+														<a
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e)}
+															href={term.url.href}
+															{...createHoverProps(term.preview)}
+															role="link"
+															{...historyTermLangObj.historyTerm?.all}
+														>
+															{emIfy(term.value, state.input || '')}
+														</a>
+													</div>
+												);
+											})}
 										</div>
 									</div>
 								) : null}
@@ -616,15 +710,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					) : (
 						facetsToShow.length > 0 && (
 							<>
-								{facetsTitle && vertical ? (
+								{(facetsTitle || lang.facetsTitle.value) && vertical ? (
 									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-										<h5>{facetsTitle}</h5>
+										<h5 {...mergedLang.facetsTitle?.all}></h5>
 									</div>
 								) : null}
 								<div className="ss__autocomplete__facets">
-									{facetsTitle && !vertical ? (
+									{(facetsTitle || lang.facetsTitle.value) && !vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-											<h5>{facetsTitle}</h5>
+											<h5 {...mergedLang.facetsTitle?.all}></h5>
 										</div>
 									) : null}
 									<Facets {...subProps.facets} facets={facetsToShow} />
@@ -650,9 +744,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											cloneWithProps(resultsSlot, { results, contentTitle, controller })
 										) : (
 											<>
-												{contentTitle && results.length > 0 ? (
+												{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
 													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-														<h5>{contentTitle}</h5>
+														<h5 {...mergedLang.contentTitle?.all}></h5>
 													</div>
 												) : null}
 												<Results results={results} {...subProps.results} controller={controller} />
@@ -664,10 +758,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										{noResultsSlot ? (
 											cloneWithProps(noResultsSlot, { search, pagination, controller })
 										) : (
-											<>
-												<p>No results found for "{search.originalQuery?.string || search.query?.string}".</p>
-												<p>Please try another search.</p>
-											</>
+											<div {...mergedLang.noResultsText?.all}></div>
 										)}
 									</div>
 								)}
@@ -685,9 +776,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
 									) : search?.query?.string && results.length > 0 ? (
 										<div className="ss__autocomplete__content__info">
-											<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()}>
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-												{search.query.string}"
+											<a
+												href={state.url.href}
+												onClick={() => controller?.setFocused && controller.setFocused()}
+												{...mergedLang.contentInfo.attributes}
+											>
+												<span {...mergedLang.contentInfo.value}></span>
 												<Icon name="seeMoreIcon" {...subProps.icon} />
 											</a>
 										</div>
@@ -777,4 +871,47 @@ export interface AutocompleteProps extends ComponentProps {
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};
+	lang?: Partial<AutocompleteLang>;
+}
+
+export interface AutocompleteLang {
+	termsTitle: Lang<{
+		controller: AutocompleteController;
+	}>;
+	trendingTitle: Lang<{
+		controller: AutocompleteController;
+	}>;
+	historyTitle: Lang<{
+		controller: AutocompleteController;
+	}>;
+	facetsTitle: Lang<{
+		controller: AutocompleteController;
+	}>;
+	contentTitle: Lang<{
+		controller: AutocompleteController;
+	}>;
+	closeButton: Lang<{
+		controller: AutocompleteController;
+	}>;
+	trendingTerm: Lang<{
+		controller: AutocompleteController;
+		term: Term;
+		index: number;
+	}>;
+	suggestionsTerm: Lang<{
+		controller: AutocompleteController;
+		term: Term;
+		index: number;
+	}>;
+	historyTerm: Lang<{
+		controller: AutocompleteController;
+		term: Term;
+		index: number;
+	}>;
+	noResultsText: Lang<{
+		controller: AutocompleteController;
+	}>;
+	contentInfo: Lang<{
+		controller: AutocompleteController;
+	}>;
 }

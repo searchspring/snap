@@ -2,11 +2,17 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 import { CustomResult } from './components/Result';
 import { globalStyles } from './styles';
 
+// import { en_translation, fr_translation } from '@searchspring/snap-preact/translations';
+
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
+		// translations: {
+		// 	en: en_translation,
+		// 	fr: fr_translation,
+		// }
 	},
 	components: {
 		result: {

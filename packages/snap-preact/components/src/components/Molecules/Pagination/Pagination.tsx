@@ -8,8 +8,10 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
+import type { SearchPaginationStore, Page } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
+import deepmerge from 'deepmerge';
+import { Lang, useLang } from '../../../hooks';
 
 const CSS = {
 	pagination: ({ theme }: Partial<PaginationProps>) =>
@@ -92,6 +94,36 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		previous: {
+			attributes: {
+				'aria-label': 'go to previous page',
+			},
+		},
+		next: {
+			attributes: {
+				'aria-label': 'go to next page',
+			},
+		},
+		first: {
+			attributes: {
+				'aria-label': 'go to first page',
+			},
+		},
+		last: {
+			attributes: {
+				'aria-label': `go to last page ${store?.last.number}`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		paginationStore: store,
+	});
+
 	return pageNumbers && store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
@@ -101,7 +133,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 						<a
 							{...store.previous.url.link}
 							className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
-							aria-label={'go to previous page'}
+							{...mergedLang.previous?.all}
 						>
 							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
 						</a>
@@ -110,11 +142,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					{/* first */}
 					{!pageNumbers.includes(store.first.number) && !hideFirst && (
 						<>
-							<a
-								{...store.first.url.link}
-								className={classnames('ss__pagination__page', 'ss__pagination__page--first')}
-								aria-label={'go to first page'}
-							>
+							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} {...mergedLang.first?.all}>
 								{firstButton ? firstButton : store.first.number}
 							</a>
 							{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
@@ -123,32 +151,44 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 					{/* pages */}
 					{_pages &&
-						_pages.map((page) =>
-							page.active ? (
+						_pages.map((page) => {
+							//initialize lang
+							const defaultPageLang = {
+								page: {
+									attributes: {
+										'aria-label': `go to page ${page.number}`,
+									},
+								},
+							};
+
+							//deep merge with props.lang
+							const pagelang = deepmerge(defaultPageLang, props.lang || {});
+							const mergedPageLang = useLang(pagelang as any, {
+								paginationStore: store,
+								page: page,
+							});
+
+							return page.active ? (
 								<span
 									className={classnames('ss__pagination__page', 'ss__pagination__page--active')}
-									aria-label={`go to page ${page.number}`}
+									{...mergedPageLang.page?.all}
 									aria-current="true"
 								>
 									{page.number}
 								</span>
 							) : (
-								<a {...page.url.link} className="ss__pagination__page" aria-label={`go to page ${page.number}`}>
+								<a {...page.url.link} className="ss__pagination__page" {...mergedPageLang.page?.all}>
 									{page.number}
 								</a>
-							)
-						)}
+							);
+						})}
 
 					{/* last page */}
 					{!pageNumbers.includes(store.last.number) && !hideLast && (
 						<>
 							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-							<a
-								{...store.last.url.link}
-								className={classnames('ss__pagination__page', 'ss__pagination__page--last')}
-								aria-label={`go to last page ${store.last.number}`}
-							>
+							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} {...mergedLang.last?.all}>
 								{lastButton ? lastButton : store.last.number}
 							</a>
 						</>
@@ -156,7 +196,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 					{/* next */}
 					{store.next && !hideNext && (
-						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'go to next page'}>
+						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} {...mergedLang.next?.all}>
 							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
 						</a>
 					)}
@@ -187,4 +227,24 @@ export interface PaginationProps extends ComponentProps {
 	prevButton?: string | JSX.Element;
 	firstButton?: string | JSX.Element;
 	lastButton?: string | JSX.Element;
+	lang?: Partial<PaginationLang>;
+}
+
+export interface PaginationLang {
+	previous: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
+	next: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
+	first: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
+	last: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
+	page: Lang<{
+		paginationStore: SearchPaginationStore;
+		page: Page;
+	}>;
 }

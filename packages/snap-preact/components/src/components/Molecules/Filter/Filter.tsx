@@ -11,6 +11,8 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	filter: ({}: Partial<FilterProps>) =>
@@ -84,17 +86,33 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		filter: {
+			attributes: {
+				'aria-label': !label ? value : `remove selected ${label} filter ${value}`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		label,
+		value,
+	});
+
 	return value ? (
 		<CacheProvider>
 			<a
 				{...styling}
 				className={classnames('ss__filter', className)}
-				aria-label={!label ? value : `remove selected ${label} filter ${value}`}
 				onClick={(e) => {
 					link?.onClick && link.onClick(e);
 					onClick && onClick(e);
 				}}
 				href={link?.href}
+				{...mergedLang.filter?.all}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
@@ -122,6 +140,14 @@ export interface FilterProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	icon?: IconType | Partial<IconProps>;
 	separator?: string;
+	lang?: Partial<FilterLang>;
+}
+
+export interface FilterLang {
+	filter: Lang<{
+		label?: string;
+		value?: string;
+	}>;
 }
 
 interface FilterSubProps {
