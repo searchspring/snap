@@ -13,6 +13,8 @@ import { ComponentProps, RootNodeProperties } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { AbstractController } from '@searchspring/snap-controller';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	errorHandler: ({ theme }: Partial<ErrorHandlerProps>) =>
@@ -125,6 +127,29 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	//initialize lang
+	const defaultLang = {
+		warningText: {
+			value: `<b>Warning:&nbsp;</b>`,
+		},
+		infoText: {
+			value: `<b>Info:&nbsp;</b>`,
+		},
+		errorText: {
+			value: `<b>Error:&nbsp;</b>`,
+		},
+		reloadText: {
+			value: `Reload`,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller,
+	});
+
 	return Object.values(ErrorType).includes(errorObject?.type!) && errorObject?.message ? (
 		<CacheProvider>
 			<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className)} {...styling}>
@@ -135,7 +160,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 								<>
 									<div className="ss__error-handler__message">
 										<Icon {...subProps.icon} icon={'warn'} />
-										<b>Warning:&nbsp;</b>
+										<span {...mergedLang.warningText?.all}></span>
 										{errorObject.message}
 									</div>
 									{errorObject?.code == 429 ? (
@@ -144,9 +169,10 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 											onClick={(e) => {
 												onRetryClick ? onRetryClick(e) : controller?.search();
 											}}
+											{...mergedLang.reloadText.attributes}
 										>
 											<Icon {...subProps.icon} icon={'rotate-right'} />
-											Reload
+											<span {...mergedLang.reloadText.value}></span>
 										</Button>
 									) : null}
 								</>
@@ -155,7 +181,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'error'} />
-									<b>Error:&nbsp;</b>
+									<span {...mergedLang.errorText?.all}></span>
 									{errorObject.message}
 								</div>
 							);
@@ -163,7 +189,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'info'} />
-									<b>Info:&nbsp;</b>
+									<span {...mergedLang.infoText?.all}></span>
 									{errorObject.message}
 								</div>
 							);
@@ -184,6 +210,22 @@ export interface ErrorHandlerProps extends ComponentProps {
 		message: string;
 	};
 	onRetryClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	lang?: Partial<ErrorHandlerLang>;
+}
+
+export interface ErrorHandlerLang {
+	warningText: Lang<{
+		controller: AbstractController;
+	}>;
+	infoText: Lang<{
+		controller: AbstractController;
+	}>;
+	errorText: Lang<{
+		controller: AbstractController;
+	}>;
+	reloadText: Lang<{
+		controller: AbstractController;
+	}>;
 }
 
 interface ErrorHandlerSubProps {

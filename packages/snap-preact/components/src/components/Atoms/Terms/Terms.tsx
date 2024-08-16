@@ -11,9 +11,30 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx';
+import { useLang } from '../../../hooks';
+import type { Lang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Terms: ({}: Partial<TermsProps>) => css({}),
+};
+
+const escapeRegExp = (string: string): string => {
+	return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+const emIfyTerm = (term: string, search: string): string => {
+	if (term && search) {
+		const match = term.match(escapeRegExp(search));
+		if (search && term && match && typeof match.index == 'number') {
+			const beforeMatch = term.slice(0, match.index);
+			const afterMatch = term.slice(match.index + search.length, term.length);
+
+			return `${beforeMatch ? `<em>${beforeMatch}</em>` : ''}${search}${afterMatch ? `<em>${afterMatch}</em>` : ''}`;
+		}
+	}
+
+	return `<em>${term}</em>`;
 };
 
 export const Terms = observer((properties: TermsProps): JSX.Element => {
@@ -36,38 +57,11 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	const emIfyTerm = (term: string, search: string) => {
-		if (term && search) {
-			const match = term.match(escapeRegExp(search));
-			if (search && term && match && typeof match.index == 'number') {
-				const beforeMatch = term.slice(0, match.index);
-				const afterMatch = term.slice(match.index + search.length, term.length);
-				return (
-					<>
-						{beforeMatch ? <em>{beforeMatch}</em> : ''}
-						{search}
-						{afterMatch ? <em>{afterMatch}</em> : ''}
-					</>
-				);
-			}
-		}
-
-		return (
-			<Fragment>
-				<em>{term}</em>
-			</Fragment>
-		);
-	};
-
 	const termClickEvent = (e: React.MouseEvent<Element, MouseEvent>, term: Term) => {
 		onTermClick && onTermClick(e, term);
 
 		// remove focus from input (close the autocomplete)
 		controller?.setFocused && controller?.setFocused();
-	};
-
-	const escapeRegExp = (string: string): string => {
-		return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	};
 
 	const termsToShow = limit ? terms?.slice(0, limit) : terms;
@@ -81,23 +75,42 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 					</div>
 				) : null}
 				<div className="ss__terms__options" role={'list'} aria-label={title}>
-					{termsToShow?.map((term, idx) => (
-						<div
-							className={classnames('ss__terms__option', {
-								'ss__terms__option--active': term.active,
-							})}
-						>
-							<a
-								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
-								href={term.url.href}
-								{...(previewOnHover ? createHoverProps(term.preview) : {})}
-								role="link"
-								aria-label={`item ${idx + 1} of ${termsToShow.length}, ${term.value}`}
+					{termsToShow?.map((term, idx) => {
+						//initialize lang
+						const defaultLang = {
+							term: {
+								value: `${emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}`,
+								attributes: {
+									'aria-label': `item ${idx + 1} of ${termsToShow.length}, ${term.value}`,
+								},
+							},
+						};
+
+						//deep merge with props.lang
+						const lang = deepmerge(defaultLang, props.lang || {});
+
+						const mergedLang = useLang(lang as any, {
+							index: idx,
+							numberOfTerms: termsToShow.length,
+							term: term,
+						});
+
+						return (
+							<div
+								className={classnames('ss__terms__option', {
+									'ss__terms__option--active': term.active,
+								})}
 							>
-								{emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}
-							</a>
-						</div>
-					))}
+								<a
+									onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
+									href={term.url.href}
+									{...(previewOnHover ? createHoverProps(term.preview) : {})}
+									role="link"
+									{...mergedLang.term?.all}
+								></a>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</CacheProvider>
@@ -114,4 +127,13 @@ export interface TermsProps extends ComponentProps {
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>, term: Term) => void;
 	previewOnHover?: boolean;
 	emIfy?: boolean;
+	lang?: Partial<TermsLang>;
+}
+
+export interface TermsLang {
+	term: Lang<{
+		index: number;
+		numberOfTerms: number;
+		term: Term;
+	}>;
 }

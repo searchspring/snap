@@ -10,13 +10,13 @@ import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { IconType } from '../../Atoms/Icon';
 
-describe('FilterSummary Component', () => {
-	const services = {
-		urlManager: new UrlManager(new UrlTranslator()),
-	};
-	const mockData = new MockData().searchMeta('filtered');
-	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()),
+};
+const mockData = new MockData().searchMeta('filtered');
+const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
 
+describe('FilterSummary Component', () => {
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
 		const FilterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
@@ -154,6 +154,88 @@ describe('FilterSummary Component', () => {
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
 		expect(facetsElement?.classList).toHaveLength(1);
+	});
+});
+
+describe('FilterSummary lang works', () => {
+	const selector = '.ss__filter-summary';
+
+	it('immediately available lang options', async () => {
+		const langOptions = ['title'];
+
+		//text attributes/values
+		const value = 'custom value';
+		const altText = 'custom alt';
+		const ariaLabel = 'custom label';
+		const ariaValueText = 'custom value text';
+		const title = 'custom title';
+
+		const valueMock = jest.fn(() => value);
+		const altMock = jest.fn(() => altText);
+		const labelMock = jest.fn(() => ariaLabel);
+		const valueTextMock = jest.fn(() => ariaValueText);
+		const titleMock = jest.fn(() => title);
+
+		const langObjs = [
+			{
+				value: value,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${value}</div>`,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+		];
+
+		langOptions.forEach((option) => {
+			langObjs.forEach((langObj) => {
+				const lang = {
+					[`${option}`]: langObj,
+				};
+
+				// @ts-ignore
+				const rendered = render(<FilterSummary filters={filters} lang={lang} />);
+				const element = rendered.container.querySelector(selector);
+				expect(element).toBeInTheDocument();
+				const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+				expect(langElem).toBeInTheDocument();
+				if (typeof langObj.value == 'function') {
+					expect(langElem?.innerHTML).toBe(value);
+
+					expect(valueMock).toHaveBeenCalledWith({
+						filters: filters,
+					});
+				} else {
+					expect(langElem?.innerHTML).toBe(langObj.value);
+				}
+
+				expect(langElem).toHaveAttribute('alt', altText);
+				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+				expect(langElem).toHaveAttribute('title', title);
+
+				jest.restoreAllMocks();
+			});
+		});
 	});
 });
 

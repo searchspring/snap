@@ -47,6 +47,139 @@ describe('Error Handler Component', () => {
 		expect(ErrorElement).toHaveClass(className);
 	});
 
+	describe('ErrorHandler lang works', () => {
+		const selector = '.ss__error-handler';
+
+		const eCodeKey = {
+			warningText: {
+				code: 500,
+				type: ErrorType.WARNING,
+				message: 'hello',
+			},
+			infoText: {
+				code: 500,
+				type: ErrorType.INFO,
+				message: 'hello',
+			},
+			errorText: {
+				code: 500,
+				type: ErrorType.ERROR,
+				message: 'hello',
+			},
+			reloadText: {
+				code: 429,
+				type: ErrorType.WARNING,
+				message: 'hello',
+			},
+		};
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['warningText', 'infoText', 'errorText', 'reloadText'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					let valueSatisfied = false;
+					let altSatisfied = false;
+					let labelSatisfied = false;
+					let valueTextSatisfied = false;
+					let titleSatisfied = false;
+
+					const eCode = eCodeKey[option as keyof typeof eCodeKey];
+
+					const rendered = render(<ErrorHandler lang={lang} error={eCode} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({});
+
+							if (elem?.innerHTML == value) {
+								valueSatisfied = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatisfied = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatisfied = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatisfied = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatisfied = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatisfied = true;
+						}
+					});
+
+					expect(valueSatisfied).toBeTruthy();
+					expect(altSatisfied).toBeTruthy();
+					expect(labelSatisfied).toBeTruthy();
+					expect(valueTextSatisfied).toBeTruthy();
+					expect(titleSatisfied).toBeTruthy();
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
+	});
+
 	const gTheme = {
 		components: {
 			errorHandler: {

@@ -10,6 +10,8 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	radio: ({ size }: Partial<RadioProps>) =>
@@ -143,6 +145,23 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		radio: {
+			attributes: {
+				'aria-label': `${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} radio button`,
+				role: 'radio',
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		disabled,
+		checkedState,
+	});
+
 	return (
 		<CacheProvider>
 			{native ? (
@@ -162,7 +181,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} radio button`}
+					{...mergedLang.radio?.all}
 					role="radio"
 					aria-checked={checkedState}
 				>
@@ -195,4 +214,12 @@ export interface RadioProps extends ComponentProps {
 	startChecked?: boolean;
 	native?: boolean;
 	disableA11y?: boolean;
+	lang?: Partial<RadioLang>;
+}
+
+export interface RadioLang {
+	radio: Lang<{
+		disabled: boolean;
+		checkedState: boolean;
+	}>;
 }

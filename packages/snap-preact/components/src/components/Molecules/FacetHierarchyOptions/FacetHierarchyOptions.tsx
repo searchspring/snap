@@ -9,6 +9,8 @@ import { mergeProps } from '../../../utilities';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	hierarchy: ({ theme }: Partial<FacetHierarchyOptionsProps>) =>
@@ -113,36 +115,54 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
-				{(facetValues as FacetHierarchyValue[]).map((value) => (
-					<a
-						className={classnames(
-							'ss__facet-hierarchy-options__option',
-							{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-							{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
-						)}
-						aria-label={
-							value.filtered
-								? `remove selected filter ${facet?.label || ''} - ${value.label}`
-								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
-						}
-						href={value.url?.link?.href}
-						{...valueProps}
-						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-							value.url?.link?.onClick(e);
-							onClick && onClick(e);
-						}}
-						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-					>
-						<span className="ss__facet-hierarchy-options__option__value">
-							{value.label}
-							{!hideCount && value?.count > 0 && !value.filtered && (
-								<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
+				{(facetValues as FacetHierarchyValue[]).map((value) => {
+					//initialize lang
+					const defaultLang = {
+						hierarchyOption: {
+							attributes: {
+								'aria-label': `${
+									value.filtered
+										? `remove selected filter ${facet?.label || ''} - ${value.label}`
+										: facet?.label
+										? `filter by ${facet?.label} - ${value.label}`
+										: `filter by ${value.label}`
+								}`,
+							},
+						},
+					};
+
+					//deep merge with props.lang
+					const lang = deepmerge(defaultLang, props.lang || {});
+					const mergedLang = useLang(lang as any, {
+						facet,
+						value,
+					});
+
+					return (
+						<a
+							className={classnames(
+								'ss__facet-hierarchy-options__option',
+								{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+								{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
 							)}
-						</span>
-					</a>
-				))}
+							href={value.url?.link?.href}
+							{...valueProps}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
+							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
+							{...mergedLang.hierarchyOption?.all}
+						>
+							<span className="ss__facet-hierarchy-options__option__value">
+								{value.label}
+								{!hideCount && value?.count > 0 && !value.filtered && (
+									<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
+								)}
+							</span>
+						</a>
+					);
+				})}
 			</div>
 		</CacheProvider>
 	) : (
@@ -157,4 +177,12 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	lang?: Partial<FacetHierarchyOptionsLang>;
+}
+
+export interface FacetHierarchyOptionsLang {
+	hierarchyOption: Lang<{
+		facet: ValueFacet;
+		value: FacetHierarchyValue;
+	}>;
 }

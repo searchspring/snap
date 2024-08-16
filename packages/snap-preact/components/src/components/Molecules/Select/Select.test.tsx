@@ -268,7 +268,6 @@ describe('Select Component', () => {
 			const separator = ':::';
 			const label = 'color';
 			const rendered = render(<Select label={label} separator={separator} options={options} />);
-
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement?.querySelectorAll('.ss__select__select__option')!;
 
@@ -332,7 +331,7 @@ describe('Select Component', () => {
 
 			expect(icon).toBeInTheDocument();
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ss-a11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><svg ss-name="close" class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg>'
+				'<span><span class="ss__select__label" aria-expanded="false" role="button" ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ss-a11y="true" tabindex="0"><label ss-lang="buttonLabel">selectme</label><span class="ss__select__label__separator">: </span></span><svg ss-name="close" class="ss__icon ss__icon--angle-down ss__select__dropdown__button__icon ss-8utw2e" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M56 16.329c0 0.449-0.224 0.954-0.561 1.291l-26.148 26.148c-0.337 0.337-0.842 0.561-1.291 0.561s-0.954-0.224-1.291-0.561l-26.148-26.148c-0.337-0.337-0.561-0.842-0.561-1.291s0.224-0.954 0.561-1.291l2.806-2.806c0.337-0.337 0.786-0.561 1.291-0.561 0.449 0 0.954 0.224 1.291 0.561l22.052 22.052 22.052-22.052c0.337-0.337 0.842-0.561 1.291-0.561s0.954 0.224 1.291 0.561l2.806 2.806c0.337 0.337 0.561 0.842 0.561 1.291z"></path></svg></span>'
 			);
 			expect(selection).not.toBeInTheDocument();
 		});
@@ -349,7 +348,7 @@ describe('Select Component', () => {
 			expect(icon).not.toBeInTheDocument();
 
 			expect(button?.innerHTML).toBe(
-				'<span class="ss__select__label" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" aria-expanded="false" role="button" ss-a11y="true" tabindex="0">selectme<span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span>'
+				'<span><span class="ss__select__label" aria-expanded="false" role="button" ss-lang="buttonLabel" aria-label="selectme dropdown, 7 options , Currently selected option is Orange" ss-a11y="true" tabindex="0"><label ss-lang="buttonLabel">selectme</label><span class="ss__select__label__separator">: </span></span><span class="ss__select__selection">Orange</span></span>'
 			);
 			expect(selection).toBeInTheDocument();
 		});
@@ -461,6 +460,118 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			expect(selectElement).toBeInTheDocument();
 			expect(selectElement).toHaveClass(className);
+		});
+
+		describe('Select lang works', () => {
+			const selector = '.ss__select';
+
+			it('immediately available lang options', async () => {
+				const langOptions = ['buttonLabel'];
+
+				//text attributes/values
+				const value = 'custom value';
+				const altText = 'custom alt';
+				const ariaLabel = 'custom label';
+				const ariaValueText = 'custom value text';
+				const title = 'custom title';
+
+				const valueMock = jest.fn(() => value);
+				const altMock = jest.fn(() => altText);
+				const labelMock = jest.fn(() => ariaLabel);
+				const valueTextMock = jest.fn(() => ariaValueText);
+				const titleMock = jest.fn(() => title);
+
+				const langObjs = [
+					{
+						value: value,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+					{
+						value: valueMock,
+						attributes: {
+							alt: altMock,
+							'aria-label': labelMock,
+							'aria-valuetext': valueTextMock,
+							title: titleMock,
+						},
+					},
+					{
+						value: `<div>${value}</div>`,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+				];
+
+				langOptions.forEach((option) => {
+					langObjs.forEach((langObj) => {
+						const lang = {
+							[`${option}`]: langObj,
+						};
+
+						let valueSatisfied = false;
+						let altSatisfied = false;
+						let labelSatisfied = false;
+						let valueTextSatisfied = false;
+						let titleSatisfied = false;
+
+						// @ts-ignore
+						const rendered = render(<Select options={options} lang={lang} separator={''} />);
+						const element = rendered.container.querySelector(selector);
+						expect(element).toBeInTheDocument();
+
+						const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+						expect(langElems.length).toBeGreaterThan(0);
+						langElems.forEach((elem) => {
+							if (typeof langObj.value == 'function') {
+								expect(valueMock).toHaveBeenCalledWith({
+									options: options,
+									selectedOptions: [],
+									label: undefined,
+									open: false,
+								});
+
+								if (elem?.innerHTML == value) {
+									valueSatisfied = true;
+								}
+							} else {
+								if (elem?.innerHTML == langObj.value) {
+									valueSatisfied = true;
+								}
+							}
+
+							if (elem.getAttribute('alt') == altText) {
+								altSatisfied = true;
+							}
+							if (elem.getAttribute('aria-label') == ariaLabel) {
+								labelSatisfied = true;
+							}
+							if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+								valueTextSatisfied = true;
+							}
+							if (elem.getAttribute('title') == title) {
+								titleSatisfied = true;
+							}
+						});
+
+						expect(valueSatisfied).toBeTruthy();
+						expect(altSatisfied).toBeTruthy();
+						expect(labelSatisfied).toBeTruthy();
+						expect(valueTextSatisfied).toBeTruthy();
+						expect(titleSatisfied).toBeTruthy();
+
+						jest.restoreAllMocks();
+					});
+				});
+			});
 		});
 
 		it('is themeable with ThemeProvider', () => {

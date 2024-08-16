@@ -13,7 +13,7 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
-import { useClickOutside } from '../../../hooks';
+import { Lang, useClickOutside, useLang } from '../../../hooks';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
@@ -231,46 +231,62 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 				{...styling}
 			>
 				<div className="ss__horizontal-facets__header">
-					{facetsToShow.map((facet: IndividualFacetType) => (
-						<Dropdown
-							{...subProps.dropdown}
-							className={classnames(
-								subProps.dropdown.className,
-								`ss__horizontal-facets__header__dropdown--${facet.display}`,
-								`ss__horizontal-facets__header__dropdown--${facet.field}`
-							)}
-							open={selectedFacet?.field === facet.field}
-							onClick={() => {
-								if (selectedFacet === facet) {
-									setSelectedFacet(undefined);
-									return;
-								}
-								setSelectedFacet(facet);
-							}}
-							button={
-								<div
-									className="ss__dropdown__button__heading"
-									role="heading"
-									aria-level={3}
-									aria-label={`currently ${selectedFacet?.field === facet.field ? 'collapsed' : 'open'} ${facet.field} facet dropdown ${
+					{facetsToShow.map((facet: IndividualFacetType) => {
+						//initialize lang
+						const defaultLang = {
+							dropdownButton: {
+								attributes: {
+									'aria-label': `currently ${selectedFacet?.field === facet.field ? 'collapsed' : 'open'} ${facet.field} facet dropdown ${
 										(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
-									}`}
-								>
-									{facet?.label}
-									<Icon
-										{...subProps.icon}
-										{...(selectedFacet?.field === facet.field
-											? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
-											: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
-										name={selectedFacet?.field === facet.field ? 'expand' : 'collapse'}
-									/>
-								</div>
-							}
-							disableOverlay={!overlay}
-						>
-							{overlay ? <Facet {...subProps.facet} facet={facet} /> : undefined}
-						</Dropdown>
-					))}
+									}`,
+								},
+							},
+						};
+
+						//deep merge with props.lang
+						const lang = deepmerge(defaultLang, props.lang || {});
+						const mergedLang = useLang(lang as any, {
+							selectedFacet,
+							facet,
+						});
+
+						return (
+							<Dropdown
+								{...subProps.dropdown}
+								className={classnames(
+									subProps.dropdown.className,
+									`ss__horizontal-facets__header__dropdown--${facet.display}`,
+									`ss__horizontal-facets__header__dropdown--${facet.field}`
+								)}
+								open={selectedFacet?.field === facet.field}
+								onClick={() => {
+									if (selectedFacet === facet) {
+										setSelectedFacet(undefined);
+										return;
+									}
+									setSelectedFacet(facet);
+								}}
+								button={
+									<div className="ss__dropdown__button__heading" role="heading" aria-level={3} {...mergedLang.dropdownButton.attributes}>
+										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+										<Icon
+											{...subProps.icon}
+											// icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse}
+
+											// {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))}
+
+											{...(selectedFacet?.field === facet.field
+												? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+												: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+										/>
+									</div>
+								}
+								disableOverlay={!overlay}
+							>
+								{overlay ? <Facet {...subProps.facet} facet={facet} /> : undefined}
+							</Dropdown>
+						);
+					})}
 					{(isOverflowing || alwaysShowFiltersButton) && <MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>}
 				</div>
 
@@ -308,4 +324,12 @@ export interface HorizontalFacetsProps extends ComponentProps {
 	iconExpand?: IconType | Partial<IconProps>;
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+	lang?: Partial<HorizontalFacetsLang>;
+}
+
+export interface HorizontalFacetsLang {
+	dropdownButton: Lang<{
+		selectedFacet: IndividualFacetType;
+		facet: IndividualFacetType;
+	}>;
 }

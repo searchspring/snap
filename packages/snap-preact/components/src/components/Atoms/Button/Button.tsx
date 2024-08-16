@@ -9,6 +9,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
@@ -56,6 +58,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		icon,
 		style,
 		styleScript,
+		lang,
 		treePath,
 		...additionalProps
 	} = props;
@@ -102,18 +105,28 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		ref: (e: any) => useA11y(e),
 	};
 
-	return content || children || icon ? (
+	//initialize lang
+	const defaultLang = {};
+
+	//deep merge with props.lang
+	const langs = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(langs as any, {});
+	return content || children || icon || lang?.button?.value ? (
 		<CacheProvider>
 			{native ? (
 				<button {...elementProps}>
-					{content}
-					{children}
+					<span {...mergedLang.button?.all}>
+						{content}
+						{children}
+					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					{content}
-					{children}
+					<span {...mergedLang.button?.all}>
+						{content}
+						{children}
+					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}
@@ -138,6 +151,11 @@ export interface ButtonProps extends ComponentProps {
 	native?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	disableA11y?: boolean;
+	lang?: Partial<ButtonLang>;
+}
+
+export interface ButtonLang {
+	button?: Lang<never>;
 }
 
 export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout';

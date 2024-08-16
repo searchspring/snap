@@ -58,7 +58,6 @@ describe('Search Header Component', () => {
 		);
 
 		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
-
 		expect(subtitle?.innerHTML).toBe(theme.components.searchHeader.subtitleText);
 	});
 
@@ -170,6 +169,203 @@ describe('Search Header Component', () => {
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--results .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('look mom 1298 results found for dress!');
+		});
+	});
+
+	describe('SearchHeader lang works', () => {
+		const selector = '.ss__search-header';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['titleText', 'subtitleText'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					// @ts-ignore
+					const rendered = render(<SearchHeader lang={lang} paginationStore={paginationStore} queryStore={queryStore} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+					expect(langElem).toBeInTheDocument();
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenLastCalledWith({
+							pagination: paginationStore,
+							search: queryStore,
+						});
+						expect(langElem?.innerHTML).toBe(value);
+					} else {
+						expect(valueMock).not.toHaveBeenCalled();
+						expect(langElem?.innerHTML).toBe(langObj.value);
+					}
+
+					expect(langElem).toHaveAttribute('alt', altText);
+					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+					expect(langElem).toHaveAttribute('title', title);
+
+					jest.clearAllMocks();
+				});
+			});
+		});
+
+		it('custom lang options', async () => {
+			//oq
+			const oqData = new MockData().searchMeta('oq');
+			const oqPaginationStore = new SearchPaginationStore(searchConfig, services, oqData.pagination, oqData.meta);
+			const oqQueryStore = new SearchQueryStore(services, oqData.search!);
+
+			const oqValue = 'oq value';
+			const oqAltText = 'oq alt';
+			const oqAriaLabel = 'oq label';
+			const oqAriaValueText = 'oq value text';
+			const oqTitle = 'oq title';
+
+			const oqlang = {
+				correctedQueryText: {
+					value: oqValue,
+					attributes: {
+						alt: oqAltText,
+						'aria-label': oqAriaLabel,
+						'aria-valuetext': oqAriaValueText,
+						title: oqTitle,
+					},
+				},
+			};
+
+			const rendered = render(<SearchHeader lang={oqlang} paginationStore={oqPaginationStore} queryStore={oqQueryStore} />);
+
+			const element = rendered.container.querySelector(selector);
+			expect(element).toBeInTheDocument();
+
+			const oqElem = rendered.container.querySelector(`[ss-lang=correctedQueryText]`);
+
+			expect(oqElem).toBeInTheDocument();
+			expect(oqElem?.innerHTML).toBe(oqValue);
+			expect(oqElem).toHaveAttribute('alt', oqAltText);
+			expect(oqElem).toHaveAttribute('aria-label', oqAriaLabel);
+			expect(oqElem).toHaveAttribute('aria-valuetext', oqAriaValueText);
+			expect(oqElem).toHaveAttribute('title', oqTitle);
+
+			//no results
+			const noResultsdata = new MockData().searchMeta('noResults');
+			const emptyPaginationStore = new SearchPaginationStore(searchConfig, services, noResultsdata.pagination, noResultsdata.meta);
+			const emptyQueryStore = new SearchQueryStore(services, noResultsdata.search!);
+
+			const emptyValue = 'empty value';
+			const emptyAltText = 'empty alt';
+			const emptyAriaLabel = 'empty label';
+			const emptyAriaValueText = 'empty value text';
+			const emptyTitle = 'empty title';
+
+			const emptylang = {
+				noResultsText: {
+					value: emptyValue,
+					attributes: {
+						alt: emptyAltText,
+						'aria-label': emptyAriaLabel,
+						'aria-valuetext': emptyAriaValueText,
+						title: emptyTitle,
+					},
+				},
+			};
+
+			const emptyRendered = render(<SearchHeader lang={emptylang} paginationStore={emptyPaginationStore} queryStore={emptyQueryStore} />);
+
+			const emptyElement = emptyRendered.container.querySelector(selector);
+			expect(emptyElement).toBeInTheDocument();
+
+			const emptyElem = emptyRendered.container.querySelector(`[ss-lang=noResultsText]`);
+
+			expect(emptyElem).toBeInTheDocument();
+			expect(emptyElem?.innerHTML).toBe(emptyValue);
+			expect(emptyElem).toHaveAttribute('alt', emptyAltText);
+			expect(emptyElem).toHaveAttribute('aria-label', emptyAriaLabel);
+			expect(emptyElem).toHaveAttribute('aria-valuetext', emptyAriaValueText);
+			expect(emptyElem).toHaveAttribute('title', emptyTitle);
+
+			//did you mean
+			const dymData = new MockData().searchMeta('dym');
+			const dymPaginationStore = new SearchPaginationStore(searchConfig, services, dymData.pagination, dymData.meta);
+			const dymQueryStore = new SearchQueryStore(services, dymData.search!);
+
+			const dymValue = 'dym value';
+			const dymAltText = 'dym alt';
+			const dymAriaLabel = 'dym label';
+			const dymAriaValueText = 'dym value text';
+			const dymTitle = 'dym title';
+
+			const dymlang = {
+				didYouMeanText: {
+					value: dymValue,
+					attributes: {
+						alt: dymAltText,
+						'aria-label': dymAriaLabel,
+						'aria-valuetext': dymAriaValueText,
+						title: dymTitle,
+					},
+				},
+			};
+
+			const dymRendered = render(<SearchHeader lang={dymlang} paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
+
+			const dymElement = dymRendered.container.querySelector(selector);
+			expect(dymElement).toBeInTheDocument();
+
+			const dymElem = dymRendered.container.querySelector(`[ss-lang=didYouMeanText]`);
+
+			expect(dymElem).toBeInTheDocument();
+			expect(dymElem?.innerHTML).toBe(dymValue);
+			expect(dymElem).toHaveAttribute('alt', dymAltText);
+			expect(dymElem).toHaveAttribute('aria-label', dymAriaLabel);
+			expect(dymElem).toHaveAttribute('aria-valuetext', dymAriaValueText);
+			expect(dymElem).toHaveAttribute('title', dymTitle);
 		});
 	});
 
@@ -322,7 +518,6 @@ describe('Search Header Component', () => {
 		const landingQueryStore = new SearchQueryStore(services, landingData.search!);
 		const merchandisingStore = new SearchMerchandisingStore(services, landingData.merchandising!);
 
-		console.log(merchandisingStore);
 		it('renders the default correctedQueryText', async () => {
 			const rendered = render(
 				<SearchHeader merchandisingStore={merchandisingStore} paginationStore={landingPaginationStore} queryStore={landingQueryStore} />
