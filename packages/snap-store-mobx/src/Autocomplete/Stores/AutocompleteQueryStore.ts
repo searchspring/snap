@@ -18,7 +18,7 @@ export class AutocompleteQueryStore {
 
 	constructor(params: AutocompleteQueryStoreConfig) {
 		const { services, data, config } = params || {};
-		const { search, autocomplete } = data.autocomplete || {};
+		const { search, autocomplete } = data?.autocomplete || {};
 		const observables: Observables = {};
 
 		if (search?.query) {

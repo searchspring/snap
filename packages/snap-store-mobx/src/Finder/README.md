@@ -44,11 +44,8 @@ A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main
 ## `persistedStorage` property
 A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) used for persisting finder selections (requires `config.persist.enabled` to be `true`)
 
-## `state` property
-An object used for finder state.
-
-### `persisted` property
-The `state.persisted` property is used to determine if finder selections have been persisted. (requires `config.persist.enabled` to be `true`)
+## `persisted` property
+The `persisted` property is used to determine if finder selections have been persisted. (requires `config.persist.enabled` to be `true`)
 
 Will be set to `true` when the `loadPersisted` method is invoked and `selections` have been persisted from local storage. 
 

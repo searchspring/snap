@@ -5,7 +5,7 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { SearchPaginationStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 import { FinderSelectionStore } from './Stores';
-import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
+import type { FinderStoreConfig, StoreServices, SelectedSelection } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
 import { MetaStore } from '../Meta/MetaStore';
 
@@ -16,9 +16,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
 	public selections!: FinderSelectionStore;
-	public state: FinderStoreState = {
-		persisted: false,
-	};
+	public persisted: boolean = false;
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
@@ -59,7 +57,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public reset = (): void => {
 		if (this.config.persist?.enabled) {
 			this.persistedStorage?.clear();
-			this.state.persisted = false;
+			this.persisted = false;
 		}
 
 		if (this.services.urlManager.state.filter) {
@@ -85,7 +83,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 				// if the config has not changed and the data is not expired then persist
 				if (stringifiedPersistedConfig === stringifiedConfig && !isExpired) {
 					this.update(data, selections);
-					this.state.persisted = true;
+					this.persisted = true;
 					this.services.urlManager.go();
 				} else {
 					this.reset();
@@ -118,7 +116,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 				storage: this.storage,
 			},
 			state: {
-				finder: this.state,
+				persisted: this.persisted,
 				loading: this.loading,
 			},
 			data: {

@@ -93,7 +93,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 				services: this.services,
 				config: {
 					id: this.config.id,
-					siteId: this.config.globals?.siteId,
+					globals: this.config.globals,
 				},
 			});
 

@@ -1,4 +1,4 @@
-import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection, FinderStoreState } from '../../types';
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type {
 	MetaResponseModel,
@@ -30,7 +30,7 @@ type FinderSelectionStoreConfig = {
 		storage: StorageStore;
 	};
 	state: {
-		finder: FinderStoreState;
+		persisted: boolean;
 		loading: boolean;
 	};
 	data: {
@@ -187,7 +187,7 @@ export class FinderSelectionStore extends Array<Selection | SelectionHierarchy> 
 }
 
 class SelectionBase {
-	public state: FinderStoreState;
+	public persisted: boolean;
 	public type: string;
 	public field: string;
 	public filtered = false;
@@ -212,10 +212,10 @@ class SelectionBase {
 		const { storage } = stores || {};
 		const { id, facet } = data || {};
 
-		const { finder, loading } = state;
+		const { persisted, loading } = state;
 		this.services = services;
 		this.loading = loading;
-		this.state = finder;
+		this.persisted = persisted;
 		this.id = id;
 		this.config = config;
 
@@ -289,7 +289,7 @@ class Selection extends SelectionBase {
 
 		this.selected = value;
 		this.storage.set('selected', value);
-		this.state.persisted = false;
+		this.persisted = false;
 
 		if (!value) {
 			this.services.urlManager.remove(`filter.${this.field}`).go();
@@ -346,7 +346,7 @@ class SelectionHierarchy extends SelectionBase {
 		if (this.loading) return;
 
 		this.selected = value;
-		this.state.persisted = false;
+		this.persisted = false;
 
 		const selectedLevel = this.config.index;
 

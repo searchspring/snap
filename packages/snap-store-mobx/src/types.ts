@@ -165,8 +165,4 @@ export type SelectedSelection = {
 	facet: any;
 };
 
-export type FinderStoreState = {
-	persisted: boolean;
-};
-
 export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;

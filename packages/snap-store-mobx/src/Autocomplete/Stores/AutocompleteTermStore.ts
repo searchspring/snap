@@ -88,8 +88,8 @@ export class Term {
 		const { services, functions, state, data } = params || {};
 		const { term, terms } = data || {};
 
-		this.active = term.active;
-		this.value = term.value;
+		this.active = term?.active;
+		this.value = term?.value;
 
 		this.url = services?.urlManager?.set({ query: this.value });
 
