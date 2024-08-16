@@ -28,11 +28,11 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, ...otherProps } = props;
+	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, name, ...otherProps } = props;
 
 	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;
-	const styling: RootNodeProperties = { 'ss-name': props.name };
+	const styling: RootNodeProperties = { 'ss-name': name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

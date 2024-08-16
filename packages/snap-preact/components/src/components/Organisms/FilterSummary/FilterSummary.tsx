@@ -59,6 +59,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 
 	const subProps: FilterSummarySubProps = {
 		filter: {
+			name: 'filter',
 			// default props
 			className: 'ss__filter-summary__filter',
 			// global theme

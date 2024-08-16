@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
-import { Facet } from './Facet';
+import { Facet, FacetProps } from './Facet';
 import { ThemeProvider } from '../../../providers';
 
 import userEvent from '@testing-library/user-event';
@@ -155,12 +155,12 @@ describe('Facet Component', () => {
 		});
 
 		it('renders with specified icons', async () => {
-			const args = {
+			const args: FacetProps = {
 				facet: facetOverflowMock as ValueFacet,
-				iconCollapse: 'angle-down' as IconType,
-				iconExpand: 'angle-up' as IconType,
-				iconOverflowMore: 'check' as IconType,
-				iconOverflowLess: 'circle' as IconType,
+				iconCollapse: 'angle-down',
+				iconExpand: 'angle-up',
+				iconOverflowMore: 'check',
+				iconOverflowLess: 'circle',
 			};
 			const rendered = render(<Facet {...args} />);
 
